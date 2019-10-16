@@ -26,6 +26,9 @@ namespace Exakat\Data;
 class Methods {
     private $sqlite = null;
     private $phar_tmp = null;
+    
+    const STRICT = true;
+    const LOOSE  = false;
 
     public function __construct($config) {
         if ($config->is_phar) {
@@ -89,13 +92,14 @@ SQL;
     }
 
     public function getFunctionsReferenceArgs() {
-        $query = "SELECT name AS function, 0 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg0 = 'reference' UNION
-                  SELECT name AS function, 1 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg1 = 'reference' UNION
-                  SELECT name AS function, 2 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg2 = 'reference' UNION
-                  SELECT name AS function, 3 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg3 = 'reference' UNION
-                  SELECT name AS function, 4 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg4 = 'reference' UNION
-                  SELECT name AS function, 5 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg5 = 'reference'
-                  ";
+        $query = <<<SQL
+SELECT name AS function, 0 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg0 = 'reference' UNION
+SELECT name AS function, 1 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg1 = 'reference' UNION
+SELECT name AS function, 2 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg2 = 'reference' UNION
+SELECT name AS function, 3 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg3 = 'reference' UNION
+SELECT name AS function, 4 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg4 = 'reference' UNION
+SELECT name AS function, 5 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg5 = 'reference'
+SQL;
         $res = $this->sqlite->query($query);
         $return = array();
 
@@ -107,13 +111,14 @@ SQL;
     }
 
     public function getFunctionsValueArgs() {
-        $query = "SELECT name AS function, 0 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg0 = 'value' UNION
-                  SELECT name AS function, 1 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg1 = 'value' UNION
-                  SELECT name AS function, 2 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg2 = 'value' UNION
-                  SELECT name AS function, 3 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg3 = 'value' UNION
-                  SELECT name AS function, 4 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg4 = 'value' UNION
-                  SELECT name AS function, 5 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg5 = 'value'
-                  ";
+        $query = <<<'SQL'
+SELECT name AS function, 0 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg0 = 'value' UNION
+SELECT name AS function, 1 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg1 = 'value' UNION
+SELECT name AS function, 2 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg2 = 'value' UNION
+SELECT name AS function, 3 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg3 = 'value' UNION
+SELECT name AS function, 4 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg4 = 'value' UNION
+SELECT name AS function, 5 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg5 = 'value'
+SQL;
         $res = $this->sqlite->query($query);
         $return = array();
 
@@ -164,6 +169,35 @@ SQL;
             }
 
             $return[$id] = $position;
+        }
+
+        return $return;
+    }
+
+    public function getFunctionsByArgType($typehint = 'int', $strict = self::STRICT) {
+        $return = array_fill(0, 5, array());
+        
+        if ($strict === self::LOOSE) {
+            $search = " LIKE '%$typehint%'";
+        } elseif ($strict === self::STRICT) {
+            $search = " = '$typehint'";
+        } else {
+            // Default is strict
+            $search = " = '$typehint'";
+        }
+
+        $query = <<<SQL
+SELECT name AS function, 0 AS position FROM args_type WHERE Class = 'PHP' AND arg0  UNION
+SELECT name AS function, 1 AS position FROM args_type WHERE Class = 'PHP' AND arg1 $search UNION
+SELECT name AS function, 2 AS position FROM args_type WHERE Class = 'PHP' AND arg2 $search UNION
+SELECT name AS function, 3 AS position FROM args_type WHERE Class = 'PHP' AND arg3 $search UNION
+SELECT name AS function, 4 AS position FROM args_type WHERE Class = 'PHP' AND arg4 $search UNION
+SELECT name AS function, 5 AS position FROM args_type WHERE Class = 'PHP' AND arg5 $search 
+SQL;
+        $res = $this->sqlite->query($query);
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            array_collect_by($return, (int) $row['position'], '\\'.mb_strtolower($row['function']));
         }
 
         return $return;
