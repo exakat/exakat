@@ -25,18 +25,6 @@ namespace Exakat\Analyzer\Dump;
 use Exakat\Analyzer\Analyzer;
 
 class TypehintingStats extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
-    /* List dependencies 
-    public function dependsOn() {
-        return array('Category/Analyzer',
-                     '',
-                    );
-    }
-    */
-    
     public function analyze() {
         //total parameters
         $this->atomIs('Parameter')
