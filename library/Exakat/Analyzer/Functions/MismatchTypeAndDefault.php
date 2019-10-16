@@ -112,7 +112,7 @@ return;
              ->outIs('DEFAULT')
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
-             ->followParAs(array()) // basic handling of ternary
+             ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
              ->atomIs($values, self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'type')
              ->back('arg')
