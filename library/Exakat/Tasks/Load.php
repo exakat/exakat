@@ -907,7 +907,7 @@ class Load extends Tasks {
         return $log['token_initial'];
     }
 
-    private function processNext() : Atom {
+    private function processNext() {
         ++$this->id;
 
         if ($this->tokens[$this->id][0] === $this->phptokens::T_END ||
@@ -1863,7 +1863,7 @@ class Load extends Tasks {
         return $atom;
     }
 
-    private function processClosingTag() : Atom {
+    private function processClosingTag() {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_INLINE_HTML &&
             in_array($this->tokens[$this->id + 2][0], array($this->phptokens::T_OPEN_TAG,
                                                             $this->phptokens::T_OPEN_TAG_WITH_ECHO,
@@ -1906,9 +1906,8 @@ class Load extends Tasks {
                 ++$this->id; // set to opening tag
             }
         } else {
-            $return = $this->addAtomVoid();
-            $this->addToSequence($return);
             ++$this->id;
+            $return = null;
         }
         
         return $return;
@@ -3736,7 +3735,6 @@ class Load extends Tasks {
         $this->endSequence();
         
         $cases = $this->cases->getAll();
-        print_r($cases);
         foreach($cases as $aCase) {
             $this->addLink($aCase[0], $code, 'CODE');
 
@@ -4906,7 +4904,7 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single operators
     //////////////////////////////////////////////////////
-    private function processSingleOperator(string $atom, array $finals = array(), string $link = '', string $separator = '') {
+    private function processSingleOperator(string $atom, array $finals = array(), string $link = '', string $separator = '') : Atom {
         assert($link !== '', 'Link cannot be empty');
 
         $current = $this->id;
@@ -5901,7 +5899,7 @@ class Load extends Tasks {
         return $a;
     }
 
-    private function addAtomVoid() {
+    private function addAtomVoid() : Atom {
         $void = $this->addAtom('Void');
         $void->code        = 'Void';
         $void->fullcode    = self::FULLCODE_VOID;
@@ -6356,7 +6354,7 @@ class Load extends Tasks {
         }
     }
 
-    private function checkExpression() {
+    private function checkExpression() : void {
         if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }

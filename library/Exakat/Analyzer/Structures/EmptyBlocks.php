@@ -29,6 +29,12 @@ class EmptyBlocks extends Analyzer {
         // Block with only one empty expression
         // Block with only empty expressions
         $this->atomIs(array('For', 'While', 'Foreach', 'Dowhile', 'Declare', 'Namespace', 'Declare', 'Switch'))
+             ->not(
+                $this->side()
+                     ->outIs('DECLARE')
+                     ->outIs('NAME')
+                     ->codeIs('strict_types')
+             )
              ->outIs(array('CASES', 'BLOCK'))
              ->not(
                 $this->side()
