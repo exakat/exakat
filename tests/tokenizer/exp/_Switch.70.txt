@@ -1,0 +1,95 @@
+test
+Label : GLOBAL
+  6
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+Label : PROJECT
+  1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CASES
+            8
+            Label : EXPRESSION
+              9
+              Label : CASE
+                10
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : BREAK
+                    10
+            Label : EXPRESSION
+              14
+              Label : CASE
+                15
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : BREAK
+                    12
+            Label : EXPRESSION
+              16
+              Label : CASE
+                17
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  5
+                  Label : CASES
+                    8
+                    Label : EXPRESSION
+                      18
+                      Label : CASE
+                        19
+                      Label : CODE
+                        3
+                        Label : EXPRESSION
+                          11
+                          Label : BREAK
+                            10
+                    Label : EXPRESSION
+                      20
+                      Label : CASE
+                        21
+                      Label : CODE
+                        3
+                        Label : EXPRESSION
+                          11
+                          Label : BREAK
+                            12
+                    Label : EXPRESSION
+                      22
+                      Label : CASE
+                        23
+                      Label : CODE
+                        3
+                        Label : EXPRESSION
+                          11
+                          Label : BREAK
+                            12
+                  Label : CONDITION
+                    6
+                Label : EXPRESSION
+                  11
+                  Label : BREAK
+                    12
+          Label : CONDITION
+            6

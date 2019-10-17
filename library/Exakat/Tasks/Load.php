@@ -51,6 +51,7 @@ use Exakat\Tasks\Helpers\IsRead;
 use Exakat\Tasks\Helpers\IsModified;
 use Exakat\Tasks\Helpers\Php;
 use Exakat\Tasks\Helpers\Sequences;
+use Exakat\Tasks\Helpers\NestedCollector;
 use ProgressBar\Manager as ProgressBar;
 use Exakat\Loader\Collector;
 
@@ -130,7 +131,7 @@ class Load extends Tasks {
     private $currentParentClassTrait = array();
     private $currentProperties       = array();
     private $currentPropertiesCalls  = array();
-    private $cases                   = array();
+    private $cases                   = null; // NestedCollector
 
     private $tokens = array();
     private $id     = 0;
@@ -437,6 +438,8 @@ class Load extends Tasks {
         $this->sqliteLocation = ':memory:';
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+        
+        $this->cases = new NestedCollector();
      }
     
     public function __destruct() {
@@ -3650,7 +3653,7 @@ class Load extends Tasks {
                                                             $this->phptokens::T_CASE,
                                                             $this->phptokens::T_DEFAULT,
                                                             $this->phptokens::T_ENDSWITCH))) {
-            $this->cases[] = array($default, null);
+            $this->cases->add(array($default, null));
 
             return $default ;
         }
@@ -3666,7 +3669,7 @@ class Load extends Tasks {
         $code = $this->sequence;
         $this->endSequence();
 
-        foreach($this->cases as $aCase) {
+        foreach($this->cases->getAll() as $aCase) {
             $this->addLink($aCase[0], $code, 'CODE');
 
             if ($aCase[0]->atom === 'Default') {
@@ -3676,11 +3679,9 @@ class Load extends Tasks {
                                                    'CODE' => $code));
             }
         }
-        $this->cases = array();
 
         $this->addLink($default, $code, 'CODE');
         $this->runPlugins($default, array('CODE' => $code));
-        $this->addToSequence($default);
 
         return $default;
     }
@@ -3717,7 +3718,7 @@ class Load extends Tasks {
                                                             $this->phptokens::T_CASE,
                                                             $this->phptokens::T_DEFAULT,
                                                             $this->phptokens::T_ENDSWITCH))) {
-            $this->cases[] = array($case, $item);
+            $this->cases->add(array($case, $item));
 
             return $case;
         }
@@ -3734,7 +3735,9 @@ class Load extends Tasks {
         $code = $this->sequence;
         $this->endSequence();
         
-        foreach($this->cases as $aCase) {
+        $cases = $this->cases->getAll();
+        print_r($cases);
+        foreach($cases as $aCase) {
             $this->addLink($aCase[0], $code, 'CODE');
 
             if ($aCase[0]->atom === 'Default') {
@@ -3744,13 +3747,11 @@ class Load extends Tasks {
                                                    'CODE' => $code));
             }
         }
-        $this->cases = array();
 
         $this->addLink($case, $code, 'CODE');
 
         $this->runPlugins($case, array( 'CASE' => $item,
                                         'CODE' => $code));
-        $this->addToSequence($case);
 
         return $case;
     }
@@ -3759,6 +3760,7 @@ class Load extends Tasks {
         $switch = $this->addAtom('Switch');
         $current = $this->id;
         ++$this->id; // Skip (
+        $this->cases->push();
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
             $name = $this->processNext();
@@ -3824,6 +3826,8 @@ class Load extends Tasks {
 
         $this->pushExpression($switch);
         $this->finishWithAlternative($isColon);
+
+        $this->cases->pop();
 
         return $switch;
     }
