@@ -187,7 +187,7 @@ SQL;
         }
 
         $query = <<<SQL
-SELECT name AS function, 0 AS position FROM args_type WHERE Class = 'PHP' AND arg0  UNION
+SELECT name AS function, 0 AS position FROM args_type WHERE Class = 'PHP' AND arg0 $search UNION
 SELECT name AS function, 1 AS position FROM args_type WHERE Class = 'PHP' AND arg1 $search UNION
 SELECT name AS function, 2 AS position FROM args_type WHERE Class = 'PHP' AND arg2 $search UNION
 SELECT name AS function, 3 AS position FROM args_type WHERE Class = 'PHP' AND arg3 $search UNION
