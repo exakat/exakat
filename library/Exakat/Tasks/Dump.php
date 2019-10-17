@@ -1827,7 +1827,6 @@ GREMLIN;
               ->savePropertyAs('fullcode', 'calling')
               ->back('first')
 
-              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
               ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()', array(), array())
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
@@ -2141,7 +2140,6 @@ SQL
               ->back('first')
               ->savePropertyAs('fullnspath', 'calling')
 
-              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
               ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()', array(), array())
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
@@ -2306,7 +2304,7 @@ GREMLIN
               ->savePropertyAs('fullcode', 'called_name')
 
               ->back('first')
-              ->goToInstruction(Analyzer::$CIT)
+              ->goToInstruction('Class') // no trait?
 
               ->savePropertyAs('fullnspath', 'calling')
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
@@ -2359,7 +2357,7 @@ GREMLIN
 , array(), array());
         $query->prepareRawQuery();
         $count = $this->storeToTable('classesDependencies', $query);
-        display($count . ' clone ');
+        display($count . ' clone');
 
         // static calls (property, constant, method)
         $query = $this->newQuery('Static calls');
