@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CallbackNeedsReturn extends Analyzer {
     public function dependsOn() {
         return array('Complete/SetArrayClassDefinition',
+                     'Complete/PropagateConstants',
                     );
     }
 
@@ -42,6 +43,11 @@ class CallbackNeedsReturn extends Analyzer {
                                               )
                                       );
 
+        $returningFunctions = self::$methods->getFunctionsByReturn();
+        $voidReturningFunctions = array_merge($returningFunctions['void'],
+                                              array_map(function($x) { return trim($x, '\\');}, $returningFunctions['void']),
+                                             );
+
         foreach($ini as $position => $functions) {
             $rank = substr($position, 9);
             if ($rank[0] === '_') {
@@ -51,7 +57,25 @@ class CallbackNeedsReturn extends Analyzer {
             //String callback
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
-                 ->inIs('DEFINITION')
+                 ->atomIs(array('Closure', 'String', 'Arrayliteral', 'Arrowfunction', 'Concatenation'), self::WITH_CONSTANTS)
+                 ->optional(
+                    $this->side()
+                         ->inIs('DEFINITION')
+                         ->prepareSide()
+                 )
+                 ->not(
+                    $this->side()
+                         ->outIs('TYPEHINT')
+                         ->fullnspath('\\void')
+                 )
+                ->not(
+                    $this->side()
+                         ->filter(
+                            $this->side()
+                                 ->outIs(array('ARGUMENT', 'USE'))
+                                 ->is('reference', true)
+                         )
+                 )
                  ->not(
                     $this->side()
                          ->filter(
@@ -66,21 +90,22 @@ class CallbackNeedsReturn extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
 
-            //Closure callback
+            //the callback declares void as return types
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
-                 ->atomIs('Closure')
-                 ->not(
-                    $this->side()
-                         ->filter(
-                            $this->side()
-                                 ->outIs(array('ARGUMENT', 'USE'))
-                                 ->is('reference', true)
-                         )
-                 )
-                 ->outIs('BLOCK')
-                 ->noAtomInside(array('Return', 'Void'))
+                 // Could be : string, array, closure, arrow-function, 
+                 ->inIs('DEFINITION')
+                 ->outIs('TYPEHINT')
+                 ->fullnspath('\\void')
                  ->back('first');
+            $this->prepareQuery();
+
+            
+            //the callback declares void as return types
+            $this->atomFunctionIs($functions)
+                 ->outWithRank('ARGUMENT', $rank)
+                 ->atomIs('String', self::WITH_CONSTANTS)
+                 ->noDelimiterIs($voidReturningFunctions, self::CASE_INSENSITIVE);
             $this->prepareQuery();
 
             //Normal class callback
