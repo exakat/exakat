@@ -29,7 +29,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extxmlreader extends Extension {
 
     public function analyze() {
-        $this->source = 'xmlreader.ini';
+        $this->source = 'xmlreader.json';
 
         parent::analyze();
     }

@@ -40,27 +40,30 @@ class Extension extends Analyzer {
     
     
     public function analyze() {
-        if (substr($this->source, -4) !== '.ini') {
+        if (substr($this->source, -4) === '.ini') {
+            $ini = (object) $this->loadIni($this->source);
+        } elseif (substr($this->source, -5) === '.json') {
+            $ini = $this->loadJson($this->source);
+        } else {
             return true;
         }
 
-        $ini = $this->loadIni($this->source);
         
-        if (!empty($ini['functions'])) {
-            $functions = makeFullNsPath($ini['functions']);
+        if (!empty($ini->functions)) {
+            $functions = makeFullNsPath($ini->functions);
             $this->atomFunctionIs($functions);
             $this->prepareQuery();
         }
         
-        if (!empty($ini['constants'])) {
+        if (!empty($ini->constants)) {
             $this->atomIs(array('Identifier', 'Nsname'))
                  ->analyzerIs('Constants/ConstantUsage')
-                 ->fullnspathIs(makeFullNsPath($ini['constants']));
+                 ->fullnspathIs(makeFullNsPath($ini->constants));
             $this->prepareQuery();
         }
 
-        if (!empty($ini['classes'])) {
-            $classes = makeFullNsPath($ini['classes']);
+        if (!empty($ini->classes)) {
+            $classes = makeFullNsPath($ini->classes);
             
             $usedClasses = array_intersect(self::getCalledClasses(), $classes);
             if (!empty($usedClasses)) {
@@ -103,8 +106,8 @@ class Extension extends Analyzer {
             }
         }
 
-        if (!empty($ini['interfaces'])) {
-            $interfaces = makeFullNsPath($ini['interfaces']);
+        if (!empty($ini->interfaces)) {
+            $interfaces = makeFullNsPath($ini->interfaces);
             
             $usedInterfaces = array_intersect(self::getCalledinterfaces(), $interfaces);
 
@@ -116,8 +119,8 @@ class Extension extends Analyzer {
             }
         }
 
-        if (!empty($ini['traits'])) {
-            $traits = makeFullNsPath($ini['traits']);
+        if (!empty($ini->traits)) {
+            $traits = makeFullNsPath($ini->traits);
             
             $usedTraits = array_intersect(self::getCalledtraits(), $traits);
 
@@ -129,8 +132,8 @@ class Extension extends Analyzer {
             }
         }
 
-        if (!empty($ini['namespaces'])) {
-            $namespaces = makeFullNsPath($ini['namespaces']);
+        if (!empty($ini->namespaces)) {
+            $namespaces = makeFullNsPath($ini->namespaces);
             
             $usedNamespaces = array_intersect(self::getCalledNamespaces(), $namespaces);
 
@@ -142,8 +145,8 @@ class Extension extends Analyzer {
             }
         }
 
-        if (!empty($ini['directives'])) {
-            $usedDirectives = array_intersect(self::getCalledDirectives(), $ini['directives']);
+        if (!empty($ini->directives)) {
+            $usedDirectives = array_intersect(self::getCalledDirectives(), $ini->directives);
 
             if (!empty($usedDirectives)) {
                 $usedDirectives = array_values($usedDirectives);
