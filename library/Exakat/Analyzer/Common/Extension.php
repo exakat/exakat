@@ -35,6 +35,7 @@ class Extension extends Analyzer {
                      'Constants/ConstantUsage',
                      'Namespaces/NamespaceUsage',
                      'Php/DirectivesUsage',
+                     'Complete/PropagateCalls',
                      );
     }
     
@@ -155,6 +156,69 @@ class Extension extends Analyzer {
                      ->noDelimiterIs($usedDirectives, self::CASE_SENSITIVE);
                 $this->prepareQuery();
             }
+        }
+
+        // json only
+        if (!empty($ini->classconstants)) {
+            $classesconstants = (array) $ini->classconstants;
+            $this->atomIs('Staticconstant')
+                 ->outIs('CLASS')
+                 ->fullnspathIs(array_keys($classesconstants))
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->back('first')
+                 
+                 ->outIs('CONSTANT')
+                 ->isHash('fullcode', $classesconstants, 'fqn', self::CASE_SENSITIVE)
+                 ->back('first');
+            $this->prepareQuery();
+        }
+
+        if (!empty($ini->methods)) {
+            $methods = (array) $ini->methods;
+
+            $this->atomIs('Staticmethodcall')
+                 ->outIs('CLASS')
+                 ->fullnspathIs(array_keys($methods))
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->back('first')
+                 
+                 ->outIs('METHOD')
+                 ->outIs('NAME')
+                 ->tokenIs('T_STRING')
+                 ->isHash('fullcode', $methods, 'fqn', self::CASE_INSENSITIVE)
+                 ->back('first');
+            $this->prepareQuery();
+
+            $this->atomIs('Methodcall')
+                 ->outIs('OBJECT')
+                 ->fullnspathIs(array_keys($methods))
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->back('first')
+                 
+                 ->outIs('METHOD')
+                 ->outIs('NAME')
+                 ->tokenIs('T_STRING')
+                 ->isHash('fullcode', $methods, 'fqn', self::CASE_INSENSITIVE)
+                 ->back('first');
+            $this->prepareQuery();
+        }
+
+        if (!empty($ini->properties)) {
+            $properties = (array) $ini->properties;
+            foreach($properties as &$list) {
+                $list = array_map(function($x) { return "\$$x";}, $list);
+            }
+
+            $this->atomIs('Staticproperty')
+                 ->outIs('CLASS')
+                 ->fullnspathIs(array_keys($properties))
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->back('first')
+                 
+                 ->outIs('MEMBER')
+                 ->isHash('fullcode', $properties, 'fqn', self::CASE_SENSITIVE)
+                 ->back('first');
+            $this->prepareQuery();
         }
     }
 }
