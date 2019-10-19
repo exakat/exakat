@@ -33,7 +33,7 @@ class Migration74 extends Ambassador {
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Migration74';
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('CompatibilityPHP74',
                      );
     }

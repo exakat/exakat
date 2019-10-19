@@ -43,7 +43,7 @@ class Phpcsfixer extends Reports {
                                 'Php/ImplodeOneArg'             => 'implode_call',
                             );
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('php-cs-fixable',
                      );
     }

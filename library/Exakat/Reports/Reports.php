@@ -135,7 +135,7 @@ abstract class Reports {
         return $this->count;
     }
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         if (empty($this->config->rulesets)) {
             return array();
         } else {

@@ -36,7 +36,7 @@ class Migration73 extends Ambassador {
     private $analyzerList = array();
     private $theme = 'CompatibilityPHP73';
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('CompatibilityPHP73',
                      );
     }

@@ -714,7 +714,7 @@ HTML;
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('Security',
                      );
     }

@@ -48,7 +48,7 @@ class All extends Reports {
         }
     }
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         $themesToRun = array(array());
         foreach(Reports::$FORMATS as $format) {
             $reportClass = "\Exakat\Reports\\$format";

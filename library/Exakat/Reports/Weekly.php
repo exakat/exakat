@@ -76,8 +76,9 @@ class Weekly extends Ambassador {
     private $weeks        = array();
     private $current      = '';
 
-    public function dependsOnAnalysis() {
-        return array('Analyze',);
+    public function dependsOnAnalysis() : array {
+        return array('Analyze',
+                    );
     }
 
     private function loadWeekly() {

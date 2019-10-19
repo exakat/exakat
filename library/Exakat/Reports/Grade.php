@@ -82,7 +82,7 @@ class Grade extends Ambassador {
         );
     }
     
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('Security',
                      );
     }

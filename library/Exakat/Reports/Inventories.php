@@ -51,17 +51,24 @@ class Inventories extends Reports {
         $this->saveInventory('Namespaces/Namespacesnames',   "$folder/$name/namespaces.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/exceptions.csv");
 
-        $this->saveTable(    'variables',                 "$folder/$name/variables.csv");
-        $this->saveInventory('Php/IncomingVariables',     "$folder/$name/incomingGPC.csv");
-        $this->saveInventory('Php/SessionVariables',      "$folder/$name/sessions.csv");
-        $this->saveInventory('Variables/GlobalVariables', "$folder/$name/globals.csv");
+        $this->saveTable(    'variables',                     "$folder/$name/variables.csv");
+        $this->saveInventory('Php/IncomingVariables',         "$folder/$name/incomingGPC.csv");
+        $this->saveInventory('Php/SessionVariables',          "$folder/$name/sessions.csv");
+        $this->saveInventory('Variables/GlobalVariables',     "$folder/$name/globals.csv");
 
-        $this->saveInventory('Php/DateFormats',   "$folder/$name/dateformats.csv");
-        $this->saveInventory('Type/Regex',        "$folder/$name/regex.csv");
-        $this->saveInventory('Type/Sql',          "$folder/$name/sql.csv");
-        $this->saveInventory('Type/Url',          "$folder/$name/sql.csv");
-        $this->saveInventory('Type/Email',        "$folder/$name/email.csv");
-        $this->saveInventory('Type/UnicodeBlock', "$folder/$name/unicode-block.csv");
+        $this->saveInventory('Php/DateFormats',               "$folder/$name/dateformats.csv");
+        $this->saveInventory('Type/Url',                      "$folder/$name/sql.csv");
+        $this->saveInventory('Type/Regex',                    "$folder/$name/regex.csv");
+        $this->saveInventory('Type/Sql',                      "$folder/$name/sql.csv");
+        $this->saveInventory('Type/Email',                    "$folder/$name/email.csv");
+        $this->saveInventory('Type/UnicodeBlock',             "$folder/$name/unicode-block.csv");
+        $this->saveInventory('Type/GPCIndex',                 "$folder/$name/email.csv");
+        $this->saveInventory('Type/Md5string',                "$folder/$name/md5string.csv");
+        $this->saveInventory('Type/Mime',                     "$folder/$name/mime.csv");
+        $this->saveInventory('Type/Pack',                     "$folder/$name/pack.csv");
+        $this->saveInventory('Type/Printf',                   "$folder/$name/printf.csv");
+        $this->saveInventory('Type/Path',                     "$folder/$name/path.csv");
+        $this->saveInventory('Type/Shellcommands',            "$folder/$name/shellcmd.csv");
 
         $this->saveAtom('Integer',      "$path/integers.csv");
         $this->saveAtom('ArrayLiteral', "$path/arrays.csv");
@@ -133,7 +140,7 @@ class Inventories extends Reports {
         fclose($fp);
     }
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('Inventories',
                      );
     }

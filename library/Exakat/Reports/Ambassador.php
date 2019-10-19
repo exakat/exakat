@@ -99,7 +99,7 @@ class Ambassador extends Reports {
         }
     }
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
                      'Analyze', 'Preferences', 'Inventory', 'Performances',

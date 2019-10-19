@@ -66,7 +66,7 @@ class Top10 extends Ambassador {
         $this->themesToShow = array('Top10');
     }
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('Top10',
                      );
     }

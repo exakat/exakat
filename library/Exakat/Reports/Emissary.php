@@ -94,10 +94,6 @@ class Emissary extends Reports {
         }
     }
 
-    public function dependsOnAnalysis() {
-        return array();
-    }
-    
     protected function makeMenu() {
         $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/emissary.yaml');
         

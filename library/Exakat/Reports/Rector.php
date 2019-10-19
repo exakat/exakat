@@ -36,7 +36,7 @@ class Rector extends Reports {
                              'Structures/CouldUseShortAssignation' => 'Rector\CodeQuality\Rector\Assign\CombinedAssignRector',
                             );
 
-    public function dependsOnAnalysis() {
+    public function dependsOnAnalysis() : array {
         return array('Rector',
                      );
     }

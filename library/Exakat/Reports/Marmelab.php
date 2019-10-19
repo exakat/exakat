@@ -28,8 +28,9 @@ class Marmelab extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat';
 
-    public function dependsOnAnalysis() {
-        return array('Analyze');
+    public function dependsOnAnalysis() : array {
+        return array('Analyze',
+                    );
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
