@@ -30,25 +30,19 @@ class NestedCollector {
     private $current = array(self::THE_END);
     
     public function push() : void {
-        print __METHOD__.PHP_EOL;
         $this->previous[] = $this->current;
         $this->current = array();
     }
     
     public function pop() : void {
-        print __METHOD__.PHP_EOL;
         $this->current = array_pop($this->previous);
     }
     
     public function add($arg) : void {
-        print __METHOD__.PHP_EOL;
-        assert($this->current[0] !== self::THE_END, "Collector is empty : can't add to it".var_dump($this->current));
-
         $this->current[] = $arg;
     }
     
     public function getAll() : array {
-        print __METHOD__.PHP_EOL;
         $return = $this->current;
         $this->current = array();
         
