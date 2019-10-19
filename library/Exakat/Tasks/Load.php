@@ -3734,8 +3734,7 @@ class Load extends Tasks {
         $code = $this->sequence;
         $this->endSequence();
         
-        $cases = $this->cases->getAll();
-        foreach($cases as $aCase) {
+        foreach($this->cases->getAll() as $aCase) {
             $this->addLink($aCase[0], $code, 'CODE');
 
             if ($aCase[0]->atom === 'Default') {
