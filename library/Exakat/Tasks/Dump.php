@@ -333,8 +333,6 @@ class Dump extends Tasks {
             $analyzers = array_diff($analyzers, $diff);
         }
 
-        $linksDown = $this->linksDown;
-
         $saved = 0;
         $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         $severities = array();
@@ -344,35 +342,28 @@ class Dump extends Tasks {
         // Gremlin only accepts chunks of 255 maximum
 
         foreach($chunks as $chunk) {
-            $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", within(args))
-.sideEffect{ analyzer = it.get().value("analyzer"); }
-.out("ANALYZED")
-.sideEffect{ line = it.get().value("line");
-             fullcode = it.get().value("fullcode");
-             file="None"; 
-             theFunction = ""; 
-             theClass=""; 
-             theNamespace=""; 
-             }
-.where( __.until( hasLabel("Project") ).repeat( 
+            $query = $this->newQuery('processMultipleResults');
+            $query->atomIs('Analysis', Analyzer::WITHOUT_CONSTANTS)
+                  ->is('analyzer', $chunk)
+                  ->savePropertyAs('analyzer', 'analyzer')
+                  ->outIs('ANALYZED')
+                  ->initVariable(array('line',                   'fullcode',                   'file', 'theFunction', 'theClass', 'theNamespace'),
+                                 array('it.get().value("line")', 'it.get().value("fullcode")', '"None"', '""', '""', '""'),
+                                )
+            ->raw(<<<GREMLIN
+where( __.until( hasLabel("Project") ).repeat( 
     __.in($this->linksDown)
       .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrayfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]) { theClass = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
        ).fold()
+)s
+GREMLIN
 )
-.map{ ["fullcode":fullcode, 
-       "file":file, 
-       "line":line, 
-       "namespace":theNamespace, 
-       "class":theClass, 
-       "function":theFunction,
-       "analyzer":analyzer];}
-
-GREMLIN;
-            $res = $this->gremlin->query($query, array('args' => $chunk))
-                                 ->toArray();
+            ->getVariable(array("fullcode","file","line","namespace",   "class",   "function",   "analyzer"),
+                          array("fullcode","file","line","theNamespace","theClass","theFunction","analyzer"));
+            $query->prepareRawQuery();
+            $res = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
 
             $query = array();
             foreach($res as $result) {
@@ -627,12 +618,14 @@ SQL;
                                                         type STRING
                                                  )');
 
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Variable", "Variablearray", "Variableobject").has("token", "T_VARIABLE")
-                                                             .map{ ['name' : it.get().value("fullcode"), 
-                                                                    'type' : it.get().label()        ] };
-GREMLIN;
-        $variables = $this->gremlin->query($query);
+        $query = $this->newQuery('collectVariables');
+        $query->atomIs(array("Variable", "Variablearray", "Variableobject"), Analyzer::WITHOUT_CONSTANTS)
+              ->tokenIs('T_VARIABLE')
+              ->initVariable(array('name',                       'type'),
+                             array('it.get().value("fullcode")', 'it.get().label()'))
+              ->getVariable(array('name', 'type'));
+        $query->prepareRawQuery();
+        $variables = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
 
         $total = 0;
         $query = array();
@@ -661,47 +654,8 @@ GREMLIN;
         display( "Variables : $total\n");
     }
     
-    private function collectStructures() {
-        // Name spaces
-        $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
-        $this->sqlite->query(<<<'SQL'
-CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                           namespace STRING
-                        )
-SQL
-);
-
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Namespace").out("NAME").map{ ['name' : '\\' + it.get().value("fullcode")] }.unique();
-GREMLIN;
-        $res = $this->gremlin->query($query);
-
-        $total = 0;
-        $query = array("(1, '\\')");
-        $unique = array();
-        foreach($res as $row) {
-            if (isset($unique[mb_strtolower($row['name'])])) {
-                continue;
-            }
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "')";
-            ++$total;
-            $unique[mb_strtolower($row['name'])] = 1;
-        }
-        unset($unique);
-        
-        if (!empty($query)) {
-            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
-            $this->sqlite->query($query);
-        }
-
-        $query = 'SELECT id, lower(namespace) AS namespace FROM namespaces';
-        $res = $this->sqlite->query($query);
-
-        $namespacesId = array();
-        while($namespace = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $namespacesId[mb_strtolower($namespace['namespace'])] = $namespace['id'];
-        }
-        display("$total namespaces\n");
+    private function collectStructures() : void {
+        $namespacesId = $this->collectStructures_namespaces();
 
         // Classes
         $this->sqlite->query('DROP TABLE IF EXISTS cit');
@@ -1600,6 +1554,55 @@ GREMLIN
 
         display("$total arguments\n");
 
+    }
+
+    private function collectStructures_namespaces() : array {
+        // Name spaces
+        $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
+        $this->sqlite->query(<<<'SQL'
+CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           namespace STRING
+                        )
+SQL
+);
+
+        $query = $this->newQuery('collectStructures_namespaces');
+        $query->atomIs('Namespace', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->initVariable('name', '"\\\\" + it.get().value("fullcode")')
+              ->getVariable('name')
+              ->unique();
+        $query->prepareRawQuery();
+        $res = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
+
+        $total = 0;
+        $query = array("(1, '\\')");
+        $unique = array();
+        foreach($res as $row) {
+            if (isset($unique[mb_strtolower($row['name'])])) {
+                continue;
+            }
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "')";
+            ++$total;
+            $unique[mb_strtolower($row['name'])] = 1;
+        }
+        unset($unique);
+        
+        if (!empty($query)) {
+            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        $query = 'SELECT id, lower(namespace) AS namespace FROM namespaces';
+        $res = $this->sqlite->query($query);
+
+        $namespacesId = array();
+        while($namespace = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $namespacesId[mb_strtolower($namespace['namespace'])] = $namespace['id'];
+        }
+
+        display("$total namespaces\n");
+        return $namespacesId;
     }
 
     private function collectFiles() {

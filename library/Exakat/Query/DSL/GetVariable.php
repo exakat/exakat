@@ -25,24 +25,30 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class InitVariable extends DSL {
+class GetVariable extends DSL {
     public function run() {
-        list($name, $value) = func_get_args();
+        // getVariable($variable => $name of the variable)
+        if (func_num_args()) {
+            list($variable) = func_get_args();
+            $name = $variable;
+        } else {
+            list($variable, $name) = func_get_args();
+        }
 
-        if (is_string($name)) {
+        if (is_string($variable) && is_string($name)) {
             // Value should not be a direct groovy code!!!
-            $this->assertVariable($name, self::VARIABLE_WRITE);
-            return new Command('sideEffect{ ' . $name . ' = ' . $value . ' }');
-        } elseif (is_array($name) && is_array($value)) {
-            $value = array_values($value);
+            $this->assertVariable($variable, self::VARIABLE_READ);
+            return new Command('map{ [' . $name . ':' . $variable . ']; }');
+        } elseif (is_array($variable) && is_array($name)) {
+            $names = array_values($name);
             $gremlin = array();
 
-            foreach(array_values($name) as $id => $n) {
+            foreach(array_values($variable) as $id => $v) {
                 // Value should not be a direct groovy code!!!
-                $this->assertVariable($n, self::VARIABLE_WRITE);
-                $gremlin[] = "$n  =  {$value[$id]};";
+                $this->assertVariable($v, self::VARIABLE_READ);
+                $gremlin[] = "\"{$name[$id]}\" :  $v";
             }
-            return new Command('sideEffect{ ' . implode(PHP_EOL, $gremlin) . ' }');
+            return new Command('map{ [' . implode(','.PHP_EOL, $gremlin) . '] }');
         } else {
             assert(false, 'Wrong format for '.__METHOD__. '. Either string/value or array()/array()');
         }
