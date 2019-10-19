@@ -347,7 +347,7 @@ class Dump extends Tasks {
                   ->is('analyzer', $chunk)
                   ->savePropertyAs('analyzer', 'analyzer')
                   ->outIs('ANALYZED')
-                  ->initVariable(array('line',                   'fullcode',                   'file', 'theFunction', 'theClass', 'theNamespace'),
+                  ->initVariable(array('ligne',                  'fullcode_',                  'file', 'theFunction', 'theClass', 'theNamespace'),
                                  array('it.get().value("line")', 'it.get().value("fullcode")', '"None"', '""', '""', '""'),
                                 )
             ->raw(<<<GREMLIN
@@ -357,11 +357,11 @@ where( __.until( hasLabel("Project") ).repeat(
       .sideEffect{ if (it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]) { theClass = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
        ).fold()
-)s
-GREMLIN
 )
-            ->getVariable(array("fullcode","file","line","namespace",   "class",   "function",   "analyzer"),
-                          array("fullcode","file","line","theNamespace","theClass","theFunction","analyzer"));
+GREMLIN
+,array(), array())
+            ->getVariable(array("fullcode_", "file", "ligne", "theNamespace", "theClass", "theFunction", "analyzer"),
+                          array("fullcode",  "file", "line" , "namespace",    "class",    "function",    "analyzer"));
             $query->prepareRawQuery();
             $res = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
 

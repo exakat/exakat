@@ -28,7 +28,7 @@ use Exakat\Query\Query;
 class GetVariable extends DSL {
     public function run() {
         // getVariable($variable => $name of the variable)
-        if (func_num_args()) {
+        if (func_num_args() === 1) {
             list($variable) = func_get_args();
             $name = $variable;
         } else {
@@ -40,7 +40,7 @@ class GetVariable extends DSL {
             $this->assertVariable($variable, self::VARIABLE_READ);
             return new Command('map{ [' . $name . ':' . $variable . ']; }');
         } elseif (is_array($variable) && is_array($name)) {
-            $names = array_values($name);
+            $name = array_values($name);
             $gremlin = array();
 
             foreach(array_values($variable) as $id => $v) {
