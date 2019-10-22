@@ -78,7 +78,7 @@ class Initproject extends Tasks {
             return;
         }
 
-        $tmpPath = "{$this->config->projects_root}/projects/.$project";
+        $tmpPath = "{$this->config->projects_root}/projects/$project";
         if (file_exists($tmpPath)) {
             display("Removing tmpPath : $tmpPath\n");
             rmdirRecursive($tmpPath);
