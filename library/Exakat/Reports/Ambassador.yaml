@@ -39,7 +39,7 @@ performances:
     menu: Performances
     icon: flag
     file: performances_issues
-    method: generateNewIssues
+    method: generateIssuesEngine
     ruleset: Performances
 dead_code:
     title: Dead Code Issues
