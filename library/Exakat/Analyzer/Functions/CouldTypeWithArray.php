@@ -59,6 +59,36 @@ class CouldTypeWithArray extends Analyzer {
         // function foo($a) { chr($a); } 
         $natives = self::$methods->getFunctionsByArgType('array', Methods::STRICT);
 
+        // function foo($a) { }; only foo(array())
+        // function foo($a) { }; only foo((array))
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->back('first')
+
+             ->savePropertyAs('rank', 'ranked')
+             // called as bool
+             ->filter(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$CALLS)
+                     ->outWithRank('ARGUMENT', 'ranked')
+                     ->atomIs(array('Arrayliteral'))
+             )
+             // not called as non-bool
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$CALLS)
+                     ->outWithRank('ARGUMENT', 'ranked')
+                     ->atomIsNot(array('Arrayliteral'))
+                     ->tokenIsNot('T_ARRAY_CAST')
+             )
+             ->back('first');
+        $this->prepareQuery();
+
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')
              ->atomIs('Void')

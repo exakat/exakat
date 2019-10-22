@@ -46,6 +46,36 @@ class CouldTypeWithInt extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // function foo($a) { }; only foo(1)
+        // function foo($a) { }; only foo((int))
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->back('first')
+
+             ->savePropertyAs('rank', 'ranked')
+             // called as integer
+             ->filter(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$CALLS)
+                     ->outWithRank('ARGUMENT', 'ranked')
+                     ->atomIs(array('Multiplication', 'Addition', 'Postplusplus', 'Preplusplus', 'Integer'))
+             )
+             // always called with integers too
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$CALLS)
+                     ->outWithRank('ARGUMENT', 'ranked')
+                     ->atomIsNot(array('Integer', 'Multiplication', 'Postplusplus', 'Preplusplus'))
+                     ->tokenIsNot('T_INT_CAST')
+             )
+             ->back('first');
+        $this->prepareQuery();
+
         // function foo($a) { bar($a); } function bar(int $b) {}
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')

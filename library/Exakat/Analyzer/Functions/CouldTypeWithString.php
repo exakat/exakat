@@ -58,6 +58,36 @@ class CouldTypeWithString extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // function foo($a) { }; only foo("f")
+        // function foo($a) { }; only foo((string))
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->back('first')
+
+             ->savePropertyAs('rank', 'ranked')
+             // called as bool
+             ->filter(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$CALLS)
+                     ->outWithRank('ARGUMENT', 'ranked')
+                     ->atomIs(array('String', 'Concatenation', 'Heredoc'))
+             )
+             // not called as non-bool
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->outIs('DEFINITION')
+                     ->atomIs(self::$CALLS)
+                     ->outWithRank('ARGUMENT', 'ranked')
+                     ->atomIsNot(array('String', 'Concatenation', 'Heredoc'))
+                     ->tokenIsNot('T_BOOL_STRING')
+             )
+             ->back('first');
+        $this->prepareQuery();
+
         // function foo($a) { chr($a); } 
         $natives = self::$methods->getFunctionsByArgType('string', Methods::STRICT);
 

@@ -35,13 +35,11 @@ class CouldBeCallable extends Analyzer {
             }
 
             // foo($arg) { array_map($arg, '') ; }
-            $this->atomIs(self::$FUNCTIONS_ALL)
-                 ->outIs('ARGUMENT')
-                 ->atomIsNot('Void')
-                 ->not(
+            $this->atomIs('Parameter')
+                 ->filter(
                     $this->side()
                          ->outIs('TYPEHINT')
-                         ->tokenIs('T_CALLABLE')
+                         ->atomIs('Void')
                  )
                  ->outIs('NAME')
                  ->outIs('DEFINITION')
@@ -53,13 +51,11 @@ class CouldBeCallable extends Analyzer {
         }
 
         // $arg(...)
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->atomIsNot('Void')
-             ->not(
+        $this->atomIs('Parameter')
+             ->filter(
                 $this->side()
                      ->outIs('TYPEHINT')
-                     ->tokenIs('T_CALLABLE')
+                     ->atomIs('Void')
              )
              ->outIs('NAME')
              ->outIs('DEFINITION')
