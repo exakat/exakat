@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('\'curl_reset\'', 
+$expected     = array('\'curl_reset\'',
                       '\'curl_CLOSE\'',
                      );
 
-$expected_not = array('\'STRTOUPPER\'', 
+$expected_not = array('\'STRTOUPPER\'',
                       '\'strtolower\'',
                      );
 

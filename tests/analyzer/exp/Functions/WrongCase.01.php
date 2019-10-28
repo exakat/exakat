@@ -4,7 +4,7 @@ $expected     = array('x::StaticMETHOD( )',
                       '$b->METHOD( )',
                       'foO( )',
                       'FOO( )',
-                      '\FOo( )',
+                      '\\FOo( )',
                       '$b::StaticMETHOD( )',
                      );
 

@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('(array) (new x)->bar( )', 
-                      '(string) foo( )', 
+$expected     = array('(array) (new x)->bar( )',
+                      '(string) foo( )',
                       '(string) (new x)->bar( )',
                      );
 

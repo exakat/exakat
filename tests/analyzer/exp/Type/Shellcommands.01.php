@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('\'ls -2\'', 
-                      '\'ls -1\'', 
+$expected     = array('\'ls -2\'',
+                      '\'ls -1\'',
                       '`ls -1 $x`',
                      );
 

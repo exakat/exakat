@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( '\'<script content="text/javascript; charset=utf8">js_function("\'',
+$expected     = array('\'<script content="text/javascript; charset=utf8">js_function("\'',
                       '"text/javascript"',
                      );
 
