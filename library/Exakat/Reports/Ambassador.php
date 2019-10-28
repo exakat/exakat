@@ -982,8 +982,7 @@ SQL
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
-        sort($html);
-        $html = implode('', $html);
+        $html = implode(PHP_EOL, $html);
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
