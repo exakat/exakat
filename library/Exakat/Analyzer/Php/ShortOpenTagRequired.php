@@ -43,7 +43,7 @@ class ShortOpenTagRequired extends Analyzer {
         return $report;
     }
     
-    public function hasResults() {
+    public function hasResults() : bool {
        $r = $this->datastore->getRow('shortopentag');
        
        return !empty($r);

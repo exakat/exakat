@@ -41,7 +41,7 @@ class Autoload extends Analyzer {
         return $report;
     }
 
-    public function hasResults() {
+    public function hasResults() : bool {
         $res = $this->datastore->getHash('autoload');
 
         $report = $res === 'psr-0' || $res === 'psr-4' ;

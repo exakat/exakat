@@ -41,7 +41,7 @@ class UseComposerLock extends Analyzer {
         return $report;
     }
 
-    public function hasResults() {
+    public function hasResults() : bool {
         $report = $this->datastore->getHash('composer.lock') === 1;
 
         return $report;

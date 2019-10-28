@@ -40,7 +40,7 @@ class PackagesNames extends Analyzer {
         return $this->report;
     }
 
-    public function hasResults() {
+    public function hasResults() : bool {
         $data = $this->datastore->getRow('composer');
         $this->report = array();
         foreach($data as $d) {

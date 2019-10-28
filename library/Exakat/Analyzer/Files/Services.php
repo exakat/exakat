@@ -41,7 +41,7 @@ class Services extends Analyzer {
         return $this->report;
     }
 
-    public function hasResults() {
+    public function hasResults() : bool {
         if ($this->report === null) {
             $this->report = $this->datastore->getRow('configFiles');
         }

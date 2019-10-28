@@ -79,7 +79,7 @@ class Incompilable extends Analyzer {
         return $report;
     }
 
-    public function hasResults() {
+    public function hasResults() : bool {
         foreach($this->config->other_php_versions as $version) {
             $r = $this->datastore->getRow('compilation' . $version);
             

@@ -41,7 +41,7 @@ class UseComposer extends Analyzer {
         return $report;
     }
 
-    public function hasResults() {
+    public function hasResults() : bool {
         $report = $this->datastore->getHash('composer.json') === 1;
 
         return $report;
