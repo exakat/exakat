@@ -1577,7 +1577,8 @@ JAVASCRIPT;
         $rulesets = array('Code Smells'  => 'Analyze',
                           'Dead Code'    => 'Dead code',
                           'Security'     => 'Security',
-                          'Performances' => 'Performances');
+                          'Performances' => 'Performances',
+                          );
 
         $data = array();
         foreach ($rulesets AS $key => $categorie) {
@@ -1879,11 +1880,11 @@ SQL;
         return $data;
     }
 
-    protected function getTopFile($theme, $file = 'issues') {
-        if (is_string($theme)) {
-            $list = $this->rulesets->getRulesetsAnalyzers($theme);
-        } elseif (is_array($theme)) {
-            $list = $theme;
+    protected function getTopFile($ruleset, $file = 'issues') {
+        if (is_string($ruleset)) {
+            $list = $this->rulesets->getRulesetsAnalyzers($ruleset);
+        } elseif (is_array($ruleset)) {
+            $list = $ruleset;
         } else {
             die('Needs a string or an array');
         }
@@ -1960,11 +1961,11 @@ SQL;
         return $data;
     }
 
-    protected function getTopAnalyzers($theme, $file = 'issues') {
-        if (is_string($theme)) {
-            $list = $this->rulesets->getRulesetsAnalyzers($theme);
-        } elseif (is_array($theme)) {
-            $list = $theme;
+    protected function getTopAnalyzers($ruleset, $file = 'issues') {
+        if (is_string($ruleset)) {
+            $list = $this->rulesets->getRulesetsAnalyzers($ruleset);
+        } elseif (is_array($ruleset)) {
+            $list = $ruleset;
         } else {
             die('Needs a string or an array');
         }
@@ -2158,11 +2159,11 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function getIssuesFaceted($theme) {
-        return $this->getIssuesFacetedDb($theme, $this->sqlite);
+    protected function getIssuesFaceted($ruleset) {
+        return $this->getIssuesFacetedDb($ruleset, $this->sqlite);
     }
 
-    public function getNewIssuesFaceted($theme, $path) {
+    public function getNewIssuesFaceted($ruleset, $path) {
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
         
@@ -2176,7 +2177,7 @@ JAVASCRIPTCODE;
             $linediff[$row['file']][$row['line']] = $row['diff'];
         }
 
-        $oldIssues = $this->getIssuesFacetedDb($theme, $sqlite);
+        $oldIssues = $this->getIssuesFacetedDb($ruleset, $sqlite);
         foreach($oldIssues as &$issue) {
             $i = json_decode($issue);
             // Skip wrong lines, but why ?
@@ -2197,18 +2198,20 @@ JAVASCRIPTCODE;
         return $oldIssues;
     }
 
-    public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
-        if (is_string($theme)) {
-            $list = $this->rulesets->getRulesetsAnalyzers(array($theme));
+    public function getIssuesFacetedDb($ruleset, \Sqlite3 $sqlite) {
+        if (is_string($ruleset)) {
+            $list = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
         } else {
-            $list = $theme;
+            $list = $ruleset;
         }
         $list = makeList($list, "'");
 
         $sqlQuery = <<<SQL
 SELECT fullcode, file, line, analyzer
     FROM results
-    WHERE analyzer IN ($list)
+    WHERE analyzer IN ($list) AND
+         fullcode != "Not Compatible With PHP Version" AND
+         fullcode != "Not Compatible With PHP Configuration"
     ORDER BY file, line
 
 SQL;
