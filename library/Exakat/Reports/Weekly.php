@@ -95,7 +95,7 @@ class Weekly extends Ambassador {
             }
 
             $analyzerListSql = makeList($this->weeks[$date]->analysis);
-            $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer in ($analyzerListSql)";
+            $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($analyzerListSql)";
             $res = $this->sqlite->query($query);
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $this->resultsCounts[$row['analyzer']] = $row['count'];
@@ -531,14 +531,16 @@ JAVASCRIPT;
         foreach (array_keys($this->weeks) as $id => $week) {
             $total = 0;
             foreach($this->weeks[$week]->analysis as $analyzer) {
-                $total += $this->resultsCounts[$analyzer];
+                $total += $this->resultsCounts[$analyzer] ?? 0;
             }
-            $html .= '<div class="clearfix">
-                    <a href="weekly-' . $week . '.html">
-                      <div class="block-cell-name">' . $this->titles[$id] . '</div>
-                    </a>
-                    <div class="block-cell-issue text-center">' . $total . '</div>
-                  </div>';
+            $html .= <<<HTML
+    <div class="clearfix">
+      <a href="weekly-$week.html">
+        <div class="block-cell-name">{$this->titles[$id]}</div>
+      </a>
+      <div class="block-cell-issue text-center">$total</div>
+    </div>
+HTML;
         }
 
         $html .= str_repeat('<div class="clearfix">

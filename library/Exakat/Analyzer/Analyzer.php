@@ -1977,6 +1977,12 @@ GREMLIN;
 
     private function storeToTableResults() {
         ++$this->queryId;
+        
+        // table always created, may be empty
+        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
+        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        $sqlite->query("DROP TABLE IF EXISTS {$this->analyzerTable}");
+        $sqlite->query($this->analyzerSQLTable);
 
 /*
     // Can't add that, as it requires a real step
@@ -2003,14 +2009,10 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($c as $row) {
-            unset($row['id']);
+            $row = array_map(array($sqlite, 'escapeString'), $row);
             $valuesSQL[] = "(NULL, '".implode("', '", $row)."') \n";
         }
 
-        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
-        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        $sqlite->query("DROP TABLE IF EXISTS {$this->analyzerTable}");
-        $sqlite->query($this->analyzerSQLTable);
 
         $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $valuesSQL);
         $sqlite->query($query);

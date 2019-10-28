@@ -71,7 +71,7 @@ SQL
         }
 
         // collect functions
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT functions.*, 
 GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
               CASE arguments.reference WHEN 0 THEN '' ELSE '&' END || 
@@ -82,8 +82,8 @@ GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint |
 FROM functions
 
 LEFT JOIN arguments
-    ON functions.id = arguments.methodId
-WHERE type = 'function'
+    ON functions.id = arguments.methodId AND
+       arguments.citId = 0
 GROUP BY functions.id
 
 SQL
@@ -137,7 +137,7 @@ SQL
         }
 
         // collect properties
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT * FROM properties
 SQL
         );
@@ -147,7 +147,7 @@ SQL
         }
 
         // collect class constants
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT * FROM classconstants
 SQL
         );
@@ -157,7 +157,7 @@ SQL
         }
 
         // collect methods
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT methods.*, 
 GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
               CASE arguments.reference WHEN 0 THEN '' ELSE '&' END || 
@@ -203,7 +203,6 @@ SQL
         if (!property_exists($this, $what)) {
             return;
         }
-        print_r($what);
 
         return $this->$what[0]['reduced'];
     }

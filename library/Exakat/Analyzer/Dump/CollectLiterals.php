@@ -52,12 +52,52 @@ GREMLIN
                  ->savePropertyAs('fullcode', 'file')
                  ->raw(<<<GREMLIN
 map{ 
-  x = ['id': null,
-       'name': name,
+  x = ['name': name,
        'file': file,
        'line': line
        ];
 }
+GREMLIN
+);
+            $res = $this->prepareQuery(self::QUERY_TABLE);
+        }
+/*
+       $otherTypes = array('Null', 'Boolean', 'Closure');
+       foreach($otherTypes as $type) {
+            $query = <<<GREMLIN
+g.V().hasLabel("$type").count();
+GREMLIN;
+            $total = $this->gremlin->query($query)->toInt();
+
+            $query = "INSERT INTO resultsCounts (analyzer, count) VALUES (\"$type\", $total)";
+            $this->sqlite->query($query);
+            display( "Other $type : $total\n");
+       }
+*/
+
+            $this->analyzerTable = "stringEncodings";
+            $this->analyzerSQLTable = <<<SQL
+CREATE TABLE stringEncodings (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                encoding STRING,
+                                block STRING,
+                                CONSTRAINT "encoding" UNIQUE (encoding, block)
+                              )
+SQL;
+
+//, 'Concatenation', 'Heredoc' too
+        $this->atomIs('String')
+             ->raw(<<<'GREMLIN'
+map{ 
+    x = ['encoding':it.get().values('encoding')[0]];
+    if (it.get().values('block').size() != 0) {
+        x['block'] = it.get().values('block')[0];
+    } else {
+        x['block'] = '';
+    }
+    x;
+}
+.unique()
+
 GREMLIN
 );
         $res = $this->prepareQuery(self::QUERY_TABLE);

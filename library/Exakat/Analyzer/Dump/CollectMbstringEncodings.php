@@ -29,7 +29,7 @@ class CollectMbstringEncodings extends Analyzer {
         // mb_stotolower('PHP', 'utf-8');
         $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');
 
-        $this->atomIs(array('String', 'Concatenation'))
+        $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
              ->noDelimiterIs($encodings, self::CASE_INSENSITIVE)
              ->values('noDelimiter');
         $encodings = $this->rawQuery()->toArray();

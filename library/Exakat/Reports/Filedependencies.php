@@ -27,7 +27,10 @@ class FileDependencies extends Reports {
     const FILE_FILENAME  = 'filedependencies';
 
     public function generate($folder, $name= 'dependencies') {
-        $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE including != included');
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT * FROM filesDependencies WHERE including != included
+SQL
+);
 
         $colors = array('include'          => 'green',
                         'staticmethodcall' => 'purple',

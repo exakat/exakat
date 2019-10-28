@@ -39,7 +39,6 @@ class IsExtTrait extends Analyzer {
         $t = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
-            print "$inifile\n";
             $ini = $this->load($inifile, 'traits');
             
             if (!empty($ini[0])) {

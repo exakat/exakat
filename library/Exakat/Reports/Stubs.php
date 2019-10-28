@@ -40,9 +40,8 @@ class Stubs extends Reports {
 
         $code->map('functions', function ($function) {
             $phpdoc = ($function['phpdoc'] == ' ') ? '' : self::INDENTATION . $function['phpdoc'] . PHP_EOL;
-            var_dump($function['phpdoc']);
 
-            $returntype = ($function['returntype'] == ' ') ? '' : ' : ' . $function['returntype'];
+            $returntype = ($function['returntype'] === null) ? '' : ' : ' . $function['returntype'];
             return "$phpdoc    function $function[function]($function[signature])$returntype { }";
         });
         $code->reduce('functions', function ($carry, $item) {
@@ -103,13 +102,13 @@ class Stubs extends Reports {
             $extends = empty($cit['extends']) ? '' : ' extends ' . $cit['extends'] . ' ';
             $implements = empty($cit['implements']) ? '' : ' implements ' . $cit['implements'] . ' ';
             $phpdoc = ($cit['phpdoc'] == ' ') ? '' : self::INDENTATION . $cit['phpdoc'] . PHP_EOL;
-            $use = ($cit['use'] == ' ') ? '' : self::INDENTATION . self::INDENTATION . 'use ' . $cit['use'] . ';' . PHP_EOL;
+            $use = ($cit['use'] === null) ? '' : self::INDENTATION . self::INDENTATION . 'use ' . $cit['use'] . ';' . PHP_EOL;
 
             return $phpdoc . self::INDENTATION . "{$final}{$abstract}$cit[type] $cit[name]{$extends}{$implements} {\n$use"
                                                . ($cit['classconstants'][$cit['id']]['reduced']     ?? self::INDENTATION . self::INDENTATION . '/* No class constants */ ') . PHP_EOL
                                                . ($cit['properties'][$cit['id']]['reduced']         ?? self::INDENTATION . self::INDENTATION . '/* No properties      */ ') . PHP_EOL
                                                . ($cit['methods'][$cit['id']]['reduced']            ?? self::INDENTATION . self::INDENTATION . '/* No methods         */ ') . PHP_EOL
-                                               . self::INDENTATION . "\n";
+                                               . self::INDENTATION . "}\n";
         });
         $code->reduce('cits', function ($carry, $item) {
             return $carry . "\n" . $item;

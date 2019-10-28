@@ -186,10 +186,15 @@ class Manual extends Reports {
         $constants = '';
         $md = '';
         
-        $res = $this->sqlite->query('SELECT cit.name AS class, constants.constant AS constant, value FROM constants 
-        join cit on cit.id = constants.citId
-        
-        ORDER BY cit.name, constants.constant, value');
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT cit.name AS class, classconstants.constant AS constant, value 
+FROM classconstants 
+JOIN cit 
+    ON cit.id = classconstants.citId
+
+    ORDER BY cit.name, classconstants.constant, value
+SQL
+);
         
         $previousClass = '';
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

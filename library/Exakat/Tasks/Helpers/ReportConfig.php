@@ -43,12 +43,20 @@ class ReportConfig {
 
             $this->name       .= " ($config[format])";
             $this->format      = $config['format'];
+            if (!class_exists($this->getFormatClass())) {
+                throw new NoSuchReport($this->format);
+            }
+
             // Check for array of string
             $this->rulesets    = $config['rulesets'] ?? array();
             $this->rulesets    = makeArray($this->rulesets);
             $this->destination = $config['file']     ?? constant("\Exakat\Reports\\$config[format]::FILE_FILENAME");
         } elseif (is_string($config)) {
             $this->format      = $config;
+            if (!class_exists($this->getFormatClass())) {
+                throw new NoSuchReport($this->format);
+            }
+
             $this->name        = $config;
             $this->rulesets    = $exakat_config->project_rulesets ?? array();
             $this->destination = $exakat_config->file ?: constant("\Exakat\Reports\\$config::FILE_FILENAME");
@@ -56,9 +64,6 @@ class ReportConfig {
             throw new NoSuchReport($config);
         }
 
-        if (!class_exists($this->getFormatClass())) {
-            throw new NoSuchReport($this->format);
-        }
 
         $this->config = $exakat_config;
     }

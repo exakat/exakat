@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy - Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -138,10 +138,6 @@ class Dump extends Tasks {
             $this->collectVariables();
             $end = microtime(TIME_AS_NUMBER);
             $this->log->log( 'Collected Variables: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-            $begin = $end;
-            $this->collectLiterals();
-            $end = microtime(TIME_AS_NUMBER);
-            $this->log->log( 'Collected Literals: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectReadability();
             $end = microtime(TIME_AS_NUMBER);
@@ -1830,7 +1826,7 @@ GREMLIN;
               ->savePropertyAs('fullcode', 'calling')
               ->back('first')
 
-              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()', array(), array())
+              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label().toLowerCase(); }.inV()', array(), array())
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
 
@@ -2143,7 +2139,7 @@ SQL
               ->back('first')
               ->savePropertyAs('fullnspath', 'calling')
 
-              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()', array(), array())
+              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label().toLowerCase(); }.inV()', array(), array())
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
