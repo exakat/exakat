@@ -2215,15 +2215,16 @@ GREMLIN
         return $this->rowCount;
     }
 
-    protected function loadIni($file, $index = null) {
+    protected function loadIni(string $file, string $index = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
         
         if (file_exists($fullpath)) {
-            $ini = parse_ini_file($fullpath, INI_PROCESS_SECTIONS);
+            $ini = (object) parse_ini_file($fullpath, \INI_PROCESS_SECTIONS);
         } elseif (($this->config->ext !== null) && ($iniString = $this->config->ext->loadData("data/$file")) != '') {
-            $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
-        } elseif (($this->config->extension_dev !== null) && file_exists("{$this->config->extension_dev}/data/$file")) {
-            $ini = parse_ini_file("{$this->config->extension_dev}/data/$file", INI_PROCESS_SECTIONS);
+            $ini = (object) parse_ini_string($iniString, \INI_PROCESS_SECTIONS);
+        } elseif (($this->config->extension_dev !== null) && 
+                  file_exists("{$this->config->extension_dev}/data/$file")) {
+            $ini = (object) parse_ini_file("{$this->config->extension_dev}/data/$file", \INI_PROCESS_SECTIONS);
         } else {
             assert(false, "No INI for '$file'.");
         }
@@ -2239,44 +2240,48 @@ GREMLIN
             unset($values);
             $cache[$fullpath] = $ini;
         }
-        
-        if ($index !== null && isset($cache[$fullpath][$index])) {
+
+        if ($index !== null && isset($cache->$fullpath[$index])) {
             return $cache[$fullpath][$index];
         }
-        
+
         return $cache[$fullpath];
     }
 
-    protected function loadJson($file, $property = null) {
+    protected function loadJson($file, $property = null) : object {
         $fullpath = "{$this->config->dir_root}/data/$file";
 
         static $cache = array();
+
         if (!isset($cache[$fullpath])) {
             if (file_exists($fullpath)) {
-                $json = json_decode(file_get_contents($fullpath));
+                $json = json_decode(file_get_contents($fullpath), \JSON_OBJECT);
             } elseif ((!$this->config->ext !== null) && !empty($jsonString = $this->config->ext->loadData("data/$file"))) {
-                $json = json_decode($jsonString);
+                $json = json_decode($jsonString, \JSON_OBJECT);
             } elseif (($this->config->extension_dev !== null) && !empty($jsonString = $this->config->dev->loadData("data/$file"))) {
-                $json = json_decode($jsonString);
+                $json = json_decode($jsonString, \JSON_OBJECT);
             } else {
                 assert(false, "No JSON for '$file'.");
             }
 
             $cache[$fullpath] = $json;
         }
-        
+
         if ($property !== null && isset($cache[$fullpath]->$property)) {
             return $cache[$fullpath]->$property;
         }
-        
+
+        if (is_null($cache[$fullpath])) {
+            print $fullpath;
+        }
         return $cache[$fullpath];
     }
     
-    public function hasResults() {
+    public function hasResults() : bool {
         return $this->rowCount > 0;
     }
 
-    public static function makeBaseName($className) {
+    public static function makeBaseName($className) : string {
         // No Exakat, no Analyzer, using / instead of \
         return $className;
     }

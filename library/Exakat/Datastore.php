@@ -188,7 +188,7 @@ class Datastore {
         return true;
     }
 
-    public function getRow($table) {
+    public function getRow($table) : array {
         try {
             $query = "SELECT * FROM $table";
             $res = $this->sqliteRead->query($query);
@@ -205,7 +205,7 @@ class Datastore {
         return $return;
     }
 
-    public function getCol($table, $col) {
+    public function getCol(string $table, string $col) : array {
         $query = "SELECT $col FROM $table";
         try {
             $res = $this->sqliteRead->query($query);
@@ -216,14 +216,14 @@ class Datastore {
 
         if (isset($res)) {
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $return[] = $row;
+                $return[] = $row[$col];
             }
         }
 
         return $return;
     }
 
-    public function getHash($key) {
+    public function getHash(string $key) {
         $query = 'SELECT value FROM hash WHERE key=:key';
         $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
@@ -241,7 +241,7 @@ class Datastore {
         }
     }
 
-    public function getAllHash($table) : array {
+    public function getAllHash(string $table) : array {
         $query = "SELECT key, value FROM $table";
         $stmt = $this->sqliteRead->prepare($query);
         $res = $stmt->execute();
@@ -257,7 +257,7 @@ class Datastore {
         return $return;
     }
 
-    public function getHashAnalyzer($analyzer) : array {
+    public function getHashAnalyzer(string $analyzer) : array {
         $query = 'SELECT key, value FROM hashAnalyzer WHERE analyzer=:analyzer';
         $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
@@ -275,7 +275,7 @@ class Datastore {
         return $return;
     }
 
-    public function addRowAnalyzer($analyzer, $key, $value = '') {
+    public function addRowAnalyzer(string $analyzer, $key, $value = '') {
         if (is_array($key)) {
             foreach($key as &$v) {
                 $v['analyzer'] = $analyzer;
@@ -288,14 +288,14 @@ class Datastore {
         }
     }
 
-    public function hasResult($table) {
+    public function hasResult(string $table) : bool {
         $query = "SELECT * FROM $table LIMIT 1";
         $r = $this->sqliteRead->querySingle($query);
 
         return !empty($r);
     }
 
-    public function cleanTable($table) {
+    public function cleanTable(string $table) : bool {
         // Total destroy table
         $query = "DROP TABLE IF EXISTS $table";
         $this->sqliteWrite->querySingle($query);
@@ -304,7 +304,7 @@ class Datastore {
         return true;
     }
 
-    private function checkTable($table) {
+    private function checkTable(string $table) : bool {
         $res = $this->sqliteWrite->querySingle("SELECT count(*) FROM sqlite_master WHERE name=\"$table\"");
 
         if ($res === 1) {
@@ -507,7 +507,7 @@ SQLITE;
         return true;
     }
 
-    public function reload() {
+    public function reload() : void {
         $this->sqliteRead->close();
         $this->sqliteWrite->close();
 
@@ -518,7 +518,7 @@ SQLITE;
         $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
     
-    public function ignoreFile($file, $reason = 'unknown') {
+    public function ignoreFile(string $file, string $reason = 'unknown') {
         $this->sqliteWrite->query('DELETE FROM files WHERE file = \'' . $this->sqliteWrite->escapeString($file) . '\'');
         $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, \'' . $this->sqliteWrite->escapeString($file) . '\', "' . $reason . '")');
     }

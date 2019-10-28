@@ -49,7 +49,6 @@ class Extension extends Analyzer {
             return true;
         }
 
-        
         if (!empty($ini->functions)) {
             $functions = makeFullNsPath($ini->functions);
             $this->atomFunctionIs($functions);

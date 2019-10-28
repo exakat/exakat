@@ -54,8 +54,21 @@ class DSLFactory {
         if (empty($this->availableAtoms)) {
             $data = $datastore->getCol('TokenCounts', 'token');
             
-            $this->availableAtoms = array('Project', 'File', 'Virtualproperty', 'Analysis', 'Void');
-            $this->availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE', 'PPP', 'DEFAULT', 'RETURNED');
+            $this->availableAtoms = array('Project', 
+                                          'File', 
+                                          'Virtualproperty', 
+                                          'Analysis', 
+                                          'Void',
+                                          );
+            $this->availableLinks = array('DEFINITION', 
+                                          'ANALYZED', 
+                                          'PROJECT', 
+                                          'FILE', 
+                                          'OVERWRITE', 
+                                          'PPP', 
+                                          'DEFAULT', 
+                                          'RETURNED',
+                                          );
 
             foreach($data as $token){
                 if ($token === strtoupper($token)) {
@@ -66,8 +79,8 @@ class DSLFactory {
             }
 
             $this->availableFunctioncalls = $datastore->getCol('functioncalls', 'functioncall');
-            
-            $this->ignoredcit       = $datastore->getCol('ignoredcit', 'fullnspath');
+
+            $this->ignoredcit       = $datastore->getCol('ignoredcit',       'fullnspath');
             $this->ignoredfunctions = $datastore->getCol('ignoredfunctions', 'fullnspath');
             $this->ignoredconstants = $datastore->getCol('ignoredconstants', 'fullnspath');
         }

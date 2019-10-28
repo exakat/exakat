@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\UsedDirective;
 
 class DirectivesUsage extends UsedDirective {
     public function analyze() {
-        $this->directives = $this->loadIni('php_directives.ini', 'directives');
+        $this->directives = (array) $this->loadIni('php_directives.ini', 'directives');
 
         parent::analyze();
     }

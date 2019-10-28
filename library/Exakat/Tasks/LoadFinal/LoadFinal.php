@@ -405,8 +405,19 @@ GREMLIN;
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
             $fullpath = "{$this->config->dir_root}/data/$inifile";
-
-            $iniFile = parse_ini_file($fullpath);
+            
+            if (file_exists($fullpath)) {
+                $iniFile = parse_ini_file($fullpath);
+            } else {
+                $inifile = str_replace('Extensions\Ext', '', $ext) . '.json';
+                $fullpath = "{$this->config->dir_root}/data/$inifile";
+                if (file_exists($fullpath)) {
+                    $jsonFile = file_get_contents($fullpath);
+                    $iniFile = json_decode($jsonFile, \JSON_ASSOCIATIVE);
+                } else {
+                    continue;
+                }
+            }
 
             if (!empty($iniFile['constants'][0])) {
                 $this->PHPconstants[] = $iniFile['constants'];
