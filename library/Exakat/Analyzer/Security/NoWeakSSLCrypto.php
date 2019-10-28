@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class NoWeakSSLCrypto extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                     );
     }

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBePrivateMethod extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/MethodUsedBelow',
                      'Classes/IsNotFamily',
                     );

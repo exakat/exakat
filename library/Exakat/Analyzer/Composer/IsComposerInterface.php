@@ -28,7 +28,7 @@ use Exakat\Data\Composer;
 
 class IsComposerInterface extends Analyzer {
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Interfaces/InterfaceUsage',
                     );
     }

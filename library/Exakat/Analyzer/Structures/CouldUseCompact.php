@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseCompact extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/CreateCompactVariables',
                      'Complete/PropagateConstants',
                     );

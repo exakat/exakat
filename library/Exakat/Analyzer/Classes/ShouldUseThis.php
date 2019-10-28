@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUseThis extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenMethods',
                      'Classes/UseThis',
                      'Classes/MethodIsOverwritten',

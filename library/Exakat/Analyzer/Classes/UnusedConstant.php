@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedConstant extends Analyzer {
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Modules/CalledByModule',
                     );
     }

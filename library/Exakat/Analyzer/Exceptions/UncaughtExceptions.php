@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class UncaughtExceptions extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Exceptions/CaughtExceptions',
                      'Exceptions/DefinedExceptions',
                     );

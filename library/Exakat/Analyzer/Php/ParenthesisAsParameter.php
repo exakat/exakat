@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ParenthesisAsParameter extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/MakeFunctioncallWithReference',
                     );
     }

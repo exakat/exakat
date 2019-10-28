@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Project;
 use Exakat\Analyzer\Analyzer;
 
 class IsLibrary extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Files/DefinitionsOnly',
                     );
     }

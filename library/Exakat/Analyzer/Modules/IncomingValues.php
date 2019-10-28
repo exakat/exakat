@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Modules;
 use Exakat\Analyzer\Analyzer;
 
 class IncomingValues extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         $incomingValues = $this->rulesets->getAnalyzerInExtension('IncomingValues');
 
         return $incomingValues;

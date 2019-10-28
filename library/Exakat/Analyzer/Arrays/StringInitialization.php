@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class StringInitialization extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/CreateDefaultValues',
                     );
     }

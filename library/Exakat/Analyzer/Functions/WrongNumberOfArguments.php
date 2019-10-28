@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WrongNumberOfArguments extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateCalls',
                      'Complete/MakeClassMethodDefinition',
                      'Functions/VariableArguments',

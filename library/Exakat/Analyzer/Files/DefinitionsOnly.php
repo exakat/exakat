@@ -48,7 +48,7 @@ class DefinitionsOnly extends Analyzer {
                                                 '\\\\spl_autoload_register',
                                                 );
     
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Structures/NoDirectAccess');
     }
     

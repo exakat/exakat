@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class ConstRecommended extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Constants/ConstantUsage',
                     );
     }

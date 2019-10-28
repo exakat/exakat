@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseContravariance extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenMethods',
                     );
     }

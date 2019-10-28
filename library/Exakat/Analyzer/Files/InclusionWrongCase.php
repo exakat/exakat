@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class InclusionWrongCase extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                     );
     }

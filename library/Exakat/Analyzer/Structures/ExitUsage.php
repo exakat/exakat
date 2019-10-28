@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ExitUsage extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Structures/NoDirectAccess',
                      'Files/IsCliScript',
                     );

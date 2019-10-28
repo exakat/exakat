@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CheckOnCallUsage extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/IsNotFamily',
                     );
     }

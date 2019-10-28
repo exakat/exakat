@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UseDateTimeImmutable extends Analyzer {
     /* Remove this if useless
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('MethodDefinition');
     }
     */

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ImmutableSignature extends Analyzer {
     protected $maxOverwrite = 8;
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenMethods',
                     );
     }

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WrongTypeWithCall extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                      'Complete/FollowClosureDefinition',
                      'Complete/SetClassMethodRemoteDefinition',

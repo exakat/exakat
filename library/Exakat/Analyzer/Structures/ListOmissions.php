@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ListOmissions extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Variables/VariableUsedOnceByContext',
                     );
     }

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Analyzer\Analyzer;
 
 class CreateMagicProperty extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenProperties',
                      'Complete/SetClassRemoteDefinitionWithTypehint',
                     );

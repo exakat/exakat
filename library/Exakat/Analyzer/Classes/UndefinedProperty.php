@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedProperty extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/DefinedProperty',
                      'Classes/HasMagicProperty',
                      'Modules/DefinedProperty',

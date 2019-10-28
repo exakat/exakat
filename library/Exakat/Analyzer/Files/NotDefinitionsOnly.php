@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class NotDefinitionsOnly extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Files/DefinitionsOnly',
 //                     'Files/GlobalCodeOnly'
                      );

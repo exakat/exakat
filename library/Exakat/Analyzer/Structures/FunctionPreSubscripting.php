@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class FunctionPreSubscripting extends Analyzer {
     protected $phpVersion = '5.4+';
     
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Variables/SelfTransform',
                     );
     }

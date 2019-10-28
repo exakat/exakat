@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Extension extends Analyzer {
     protected $source = '';
     
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/ClassUsage',
                      'Interfaces/InterfaceUsage',
                      'Traits/TraitUsage',

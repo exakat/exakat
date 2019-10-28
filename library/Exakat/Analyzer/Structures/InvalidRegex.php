@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Structures\UnknownPregOption;
 
 class InvalidRegex extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                     );
     }

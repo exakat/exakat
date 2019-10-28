@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class GPRAliases extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Modules/IncomingData',
                     );
     }

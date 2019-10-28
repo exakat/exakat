@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NoMagicWithArray extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/CreateMagicProperty',
                     );
     }

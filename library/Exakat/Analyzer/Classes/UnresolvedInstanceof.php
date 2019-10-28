@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnresolvedInstanceof extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/SetClassAliasDefinition',
                      'Classes/IsExtClass',
                      'Interfaces/IsExtInterface',

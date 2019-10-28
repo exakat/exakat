@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedConstants extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Modules/CalledByModule',
                     );
     }

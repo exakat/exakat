@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class RegisterGlobals extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/MakeClassMethodDefinition',
                      'Complete/PropagateCalls',
                     );

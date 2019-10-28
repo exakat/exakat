@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class CurlOptions extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Constants/ConstantUsage');
     }
     public function analyze() {

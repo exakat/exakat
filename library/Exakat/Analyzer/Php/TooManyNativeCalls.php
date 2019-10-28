@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TooManyNativeCalls extends Analyzer {
     protected $nativeCallCounts = 3;
     
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Functions/IsExtFunction',
                     );
     }

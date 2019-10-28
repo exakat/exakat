@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedInsteadof extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/SetClassMethodRemoteDefinition',
                     );
     }

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class MemoizeMagicCall extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/CreateMagicProperty',
                     );
     }

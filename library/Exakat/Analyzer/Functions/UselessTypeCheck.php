@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessTypeCheck extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/CreateDefaultValues',
                     );
     }

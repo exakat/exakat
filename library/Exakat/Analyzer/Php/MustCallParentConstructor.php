@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class MustCallParentConstructor extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/Constructor',
                     );
     }

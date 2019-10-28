@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedInterfaces extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/IsExtClass',
                      'Interfaces/IsExtInterface',
                      'Composer/IsComposerClass',

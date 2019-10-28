@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class LocalGlobals extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Variables/Globals',
                     );
     }

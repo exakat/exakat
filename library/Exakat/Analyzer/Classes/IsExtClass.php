@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IsExtClass extends Analyzer {
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/ClassUsage',
                     );
     }

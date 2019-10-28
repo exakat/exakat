@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldTypeWithBool extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateCalls',
                     );
     }

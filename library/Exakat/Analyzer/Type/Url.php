@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Url extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                     );
     }

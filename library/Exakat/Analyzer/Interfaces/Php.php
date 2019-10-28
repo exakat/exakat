@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Php extends Analyzer {
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Interfaces/InterfaceUsage',
                     );
     }

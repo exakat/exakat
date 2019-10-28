@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnresolvedClasses extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/IsExtClass',
                      'Composer/IsComposerNsname',
                      'Composer/IsComposerClass',

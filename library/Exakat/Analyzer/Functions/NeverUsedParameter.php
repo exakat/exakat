@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NeverUsedParameter extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/FollowClosureDefinition',
                      'Complete/SetClassMethodRemoteDefinition',
                      'Complete/SetClassRemoteDefinitionWithParenthesis',

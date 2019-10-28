@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class GlobalImport extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/IsExtClass',
                     );
     }

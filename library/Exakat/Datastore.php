@@ -196,8 +196,10 @@ class Datastore {
         }
         $return = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = $row;
+        if (isset($res)) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $return[] = $row;
+            }
         }
 
         return $return;
@@ -212,8 +214,10 @@ class Datastore {
 
         $return = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = $row[$col];
+        if (isset($res)) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $return[] = $row;
+            }
         }
 
         return $return;
@@ -237,7 +241,7 @@ class Datastore {
         }
     }
 
-    public function getAllHash($table) {
+    public function getAllHash($table) : array {
         $query = "SELECT key, value FROM $table";
         $stmt = $this->sqliteRead->prepare($query);
         $res = $stmt->execute();
@@ -253,7 +257,7 @@ class Datastore {
         return $return;
     }
 
-    public function getHashAnalyzer($analyzer) {
+    public function getHashAnalyzer($analyzer) : array {
         $query = 'SELECT key, value FROM hashAnalyzer WHERE analyzer=:analyzer';
         $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);

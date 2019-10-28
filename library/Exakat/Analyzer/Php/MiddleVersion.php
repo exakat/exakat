@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class MiddleVersion extends Analyzer {
     private $bugfixes = array();
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         $this->bugfixes = self::$methods->getBugFixes();
         
         $depends = array();

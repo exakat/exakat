@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NonStaticMethodsCalledStatic extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/SetArrayClassDefinition',
                     );

@@ -30,7 +30,7 @@ class CollectLiterals extends Analyzer {
     */
 
     /* List dependencies 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Category/Analyzer',
                      '',
                     );

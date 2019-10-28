@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedMethods extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenMethods',
                      'Classes/UsedMethods',
                      'Modules/CalledByModule',

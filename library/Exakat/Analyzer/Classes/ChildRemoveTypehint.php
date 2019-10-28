@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ChildRemoveTypehint extends Analyzer {
     protected $phpVersion = '7.2+';
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenMethods',
                     );
     }

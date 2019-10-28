@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\FollowParAs;
 
 class MismatchTypeAndDefault extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                      'Complete/PropagateCalls',
                      'Complete/MakeClassConstantDefinition',

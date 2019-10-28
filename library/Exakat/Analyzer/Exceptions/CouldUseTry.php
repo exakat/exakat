@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseTry extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                     );
     }

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class InsufficientTypehint extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/SetClassMethodRemoteDefinition',
                      'Complete/MakeClassConstantDefinition',

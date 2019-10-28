@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnitializedProperties extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenProperties',
                      'Complete/CreateDefaultValues',
                      'Classes/Constructor',

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NoReturnForGenerator extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Functions/IsGenerator',
                     );
     }

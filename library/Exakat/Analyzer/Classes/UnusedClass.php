@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedClass extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Classes/TestClass',
                      'Modules/CalledByModule',
                      'Classes/UsedClass',

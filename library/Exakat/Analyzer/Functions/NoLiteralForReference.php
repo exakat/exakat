@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NoLiteralForReference extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/PropagateConstants',
                     );

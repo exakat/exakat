@@ -26,18 +26,19 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UpperCaseFunction extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Functions/IsExtFunction',
                     );
     }
     
     public function analyze() {
+        // STRTOLOWER()
         $this->atomIs('Functioncall')
              ->analyzerIs('Functions/IsExtFunction')
              ->isNotLowerCase('code');
         $this->prepareQuery();
 
-        $this->atomIs(array('List', 'Unset', 'Echo', 'Print', 'Exit'))
+        $this->atomIs(array('List', 'Unset', 'Echo', 'Print', 'Exit', 'Isset'))
              ->isNotLowerCase('code');
         $this->prepareQuery();
         

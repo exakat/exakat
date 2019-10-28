@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TooManyInjections extends Analyzer {
     protected $injectionsCount = 5;
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Patterns/DependencyInjection',
                     );
     }

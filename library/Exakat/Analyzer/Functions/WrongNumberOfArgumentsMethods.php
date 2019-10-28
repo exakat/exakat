@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WrongNumberOfArgumentsMethods extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/OverwrittenMethods',
                      'Complete/SetClassMethodRemoteDefinition',
                      'Complete/PropagateCalls',

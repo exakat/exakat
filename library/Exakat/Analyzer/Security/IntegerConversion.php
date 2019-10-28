@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IntegerConversion extends Analyzer {
     private $dependsOn = null;
-    public function dependsOn() {
+    public function dependsOn() : array {
         if ($this->dependsOn === null) {
             $module = $this->rulesets->getInstance('Modules/IncomingValues', $this->gremlin, $this->config);
             $modules = $module->dependsOn();

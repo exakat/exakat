@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Patterns;
 use Exakat\Analyzer\Analyzer;
 
 class CourrierAntiPattern extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Patterns/DependencyInjection',
                     );
     }

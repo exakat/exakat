@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Analyzer\Analyzer;
 
 class MakeClassConstantDefinition extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/SetParentDefinition',
                     );
     }

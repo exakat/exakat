@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ForgottenThrown extends Analyzer {
 
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Exceptions/DefinedExceptions',
                     );
     }

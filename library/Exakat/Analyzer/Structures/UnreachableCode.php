@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnreachableCode extends Analyzer {
-    public function dependsOn() {
+    public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                      'Functions/KillsApp',
                      'Structures/AlwaysFalse',
