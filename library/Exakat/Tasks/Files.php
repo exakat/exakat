@@ -232,7 +232,7 @@ class Files extends Tasks {
 
         // check for special files
         display('Check config files');
-        $files = glob("{$this->config->code_dir}{,.}*", GLOB_BRACE);
+        $files = glob("{$this->config->code_dir}/{,.}*", GLOB_BRACE);
         $files = array_map('basename', $files);
 
         $services = json_decode(file_get_contents("{$this->config->dir_root}/data/serviceConfig.json"));
@@ -247,7 +247,7 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('configFiles', $configFiles);
-        // Composer is check previously
+        // Composer is checked previously
 
         display('Done');
 
