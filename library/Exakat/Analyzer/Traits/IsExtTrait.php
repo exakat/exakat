@@ -34,25 +34,24 @@ class IsExtTrait extends Analyzer {
     
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        $exts[] = 'php_traits';
-        
+
+        //$this->loadIni('php_traits.ini', 'traits')
         $t = array();
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
-            $ini = $this->loadIni($inifile);
+            $inifile = str_replace('Extensions\Ext', '', $ext);
+            print "$inifile\n";
+            $ini = $this->load($inifile, 'traits');
             
-            if (!empty($ini['traits'][0])) {
-                $t[] = $ini['traits'];
+            if (!empty($ini[0])) {
+                $t[] = $ini;
             }
         }
 
         if (empty($t)) {
             return ;
         }
-        $traits = array_merge(...$t);
 
-        // no need to process anything!
-        if (empty($traits)) { return true; }
+        $traits = array_merge(...$t);
         $traits = makeFullNsPath($traits);
         
         $this->analyzerIs('Traits/TraitUsage')

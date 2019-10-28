@@ -34,25 +34,24 @@ class IsExtClass extends Analyzer {
     
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        $exts[] = 'php_classes';
-        
-        $c = array();
+
+        $c = array($this->loadIni('php_classes.ini', 'classes'));
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
-            $ini = $this->loadIni($inifile);
+            $inifile = str_replace('Extensions\Ext', '', $ext);
+            $ini = $this->load($inifile, 'classes');
             
-            if (!empty($ini['classes'][0])) {
-                $c[] = $ini['classes'];
+            if (!empty($ini[0])) {
+                $c[] = $ini;
             }
         }
 
         if (empty($c)) {
-            $classes = array();
-        } else {
-            $classes = array_merge(...$c);
-            $classes = makeFullNsPath($classes);
-            $classes = array_keys(array_count_values($classes));
+            return;
         }
+        
+        $classes = array_merge(...$c);
+        $classes = makeFullNsPath($classes);
+        $classes = array_keys(array_count_values($classes));
 
         $this->analyzerIs('Classes/ClassUsage')
              ->fullnspathIs($classes);

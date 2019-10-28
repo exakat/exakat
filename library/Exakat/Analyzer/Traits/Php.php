@@ -26,13 +26,16 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class Php extends Analyzer {
-
+    public function dependsOn() : array {
+        return array('Traits/TraitUsage',
+                    );
+    }
     public function analyze() {
-        $ini = $this->loadIni('php_trait.ini');
-        
-        if (isset($ini['trait'])) {
-            $this->analyzerIs('Interfaces/TraitUsage')
-                 ->codeIs($ini['trait']);
+        $ini = $this->loadIni('php_traits.ini', 'traits');
+
+        if (!empty($ini)) {
+            $this->analyzerIs('Traits/TraitUsage')
+                 ->codeIs($ini);
             $this->prepareQuery();
         }
     }

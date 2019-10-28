@@ -29,10 +29,10 @@ class Phalcon extends UsesFramework {
     public function analyze() {
         $detections = $this->loadIni('vendors/phalcon.ini');
         
-        $this->classes    = $detections['classes'];
-        $this->interfaces = $detections['interfaces'];
-        $this->traits     = $detections['traits'];
-        $this->namespaces = $detections['namespaces'];
+        $this->classes    = $detections->classes;
+        $this->interfaces = $detections->interfaces;
+        $this->traits     = $detections->traits;
+        $this->namespaces = $detections->namespaces;
 
         parent::analyze();
     }

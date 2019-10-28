@@ -29,10 +29,10 @@ class Concrete5 extends UsesFramework {
     public function analyze() {
         $detections = $this->loadIni('vendors/concrete5.ini');
         
-        $this->classes    = $detections['classes'];
-        $this->interfaces = $detections['interfaces'];
-        $this->traits     = $detections['traits'];
-        $this->namespaces = $detections['namespaces'];
+        $this->classes    = $detections->classes;
+        $this->interfaces = $detections->interfaces;
+        $this->traits     = $detections->traits;
+        $this->namespaces = $detections->namespaces;
 
         parent::analyze();
     }

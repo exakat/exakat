@@ -2003,7 +2003,8 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($c as $row) {
-            $valuesSQL[] = "('".implode("', '", $row)."') \n";
+            unset($row['id']);
+            $valuesSQL[] = "(NULL, '".implode("', '", $row)."') \n";
         }
 
         $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
@@ -2241,14 +2242,14 @@ GREMLIN
             $cache[$fullpath] = $ini;
         }
 
-        if ($index !== null && isset($cache->$fullpath[$index])) {
-            return $cache[$fullpath][$index];
+        if ($index !== null && isset($cache[$fullpath]->$index)) {
+            return $cache[$fullpath]->$index;
         }
 
         return $cache[$fullpath];
     }
 
-    protected function loadJson($file, $property = null) : object {
+    protected function loadJson($file, $property = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
 
         static $cache = array();
@@ -2271,10 +2272,23 @@ GREMLIN
             return $cache[$fullpath]->$property;
         }
 
-        if (is_null($cache[$fullpath])) {
-            print $fullpath;
-        }
         return $cache[$fullpath];
+    }
+    
+    protected function load($file, $property = null) {
+        $inifile = "{$this->config->dir_root}/data/$file.ini";
+        if (file_exists($inifile)) {
+            $ini = $this->loadIni("$file.ini", 'functions');
+        } else {
+            $inifile = "{$this->config->dir_root}/data/$file.json";
+            if (file_exists($inifile)) {
+                $ini = $this->loadJson("$file.json", 'functions');
+            } else {
+                $ini = array();
+            }
+        }
+        
+        return $ini;
     }
     
     public function hasResults() : bool {

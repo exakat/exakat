@@ -33,7 +33,7 @@ class DirectInjection extends Analyzer {
     }
     
     public function analyze() {
-        $vars = $this->loadIni('php_incoming.ini')['incoming'];
+        $vars = $this->loadIni('php_incoming.ini')->incoming;
         
         $server = $this->dictCode->translate('$_SERVER');
         if (empty($server)) {

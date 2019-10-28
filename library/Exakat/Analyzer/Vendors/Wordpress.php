@@ -29,10 +29,10 @@ class Wordpress extends UsesFramework {
     public function analyze() {
         $detections = $this->loadIni('vendors/wordpress.ini');
         
-        $this->classes    = $detections['classes'];
-        $this->interfaces = $detections['interfaces'];
-        $this->traits     = $detections['traits'];
-        $this->namespaces = $detections['namespaces'];
+        $this->classes    = $detections->classes;
+        $this->interfaces = $detections->interfaces;
+        $this->traits     = $detections->traits;
+        $this->namespaces = $detections->namespaces;
 
         parent::analyze();
     }

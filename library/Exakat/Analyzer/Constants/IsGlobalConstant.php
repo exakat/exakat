@@ -33,16 +33,19 @@ class IsGlobalConstant extends Analyzer {
     
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        $exts[] = 'php_constants';
         
-        $c = array();
+        $c = array($this->loadIni('php_constants.ini', 'constants'));
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
-            $ini = $this->loadIni($inifile);
+            $inifile = str_replace('Extensions\Ext', '', $ext);
+            $ini = $this->load($inifile, 'constants');
             
-            if (!empty($ini['constants'][0])) {
-                $c[] = $ini['constants'];
+            if (!empty($ini[0])) {
+                $c[] = $ini;
             }
+        }
+        
+        if (empty($c)) {
+            return ;
         }
         $constants = array_merge(...$c);
         $constantsFullNs = makeFullNsPath($constants, true);

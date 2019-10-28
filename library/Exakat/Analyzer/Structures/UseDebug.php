@@ -30,19 +30,19 @@ class UseDebug extends Analyzer {
         
         // Using functioncalls
         $this->atomIs('Functioncall')
-             ->fullnspathIs($debug['functions']);
+             ->fullnspathIs($debug->functions);
         $this->prepareQuery();
 
         // Using classes
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->fullnspathIs($debug['classes']);
+             ->fullnspathIs($debug->classes);
         $this->prepareQuery();
 
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Newcall')
-             ->fullnspathIs($debug['classes']);
+             ->fullnspathIs($debug->classes);
         $this->prepareQuery();
 
         // Using constants
@@ -50,7 +50,7 @@ class UseDebug extends Analyzer {
              ->outIs('NAME')
              ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
-             ->noDelimiterIs($debug['constants']);
+             ->noDelimiterIs($debug->constants);
         $this->prepareQuery();
     }
 }

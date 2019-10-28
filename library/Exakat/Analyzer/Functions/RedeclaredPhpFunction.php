@@ -32,7 +32,7 @@ class RedeclaredPhpFunction extends Analyzer {
 
         $e = array();
         foreach($extensions as $ext) {
-            if ($iniFile = $this->loadIni($ext . '.ini', 'functions')) {
+            if ($iniFile = $this->load($ext , 'functions')) {
                 $e[] = $iniFile;
             }
         }

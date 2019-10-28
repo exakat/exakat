@@ -28,15 +28,14 @@ use Exakat\Analyzer\Analyzer;
 class IsExtInterface extends Analyzer {
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        $exts[] = 'php_interfaces';
         
-        $interfaces = array();
+        $interfaces = array($this->loadIni('php_interfaces.ini', 'interfaces'));
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
-            $ini = $this->loadIni($inifile);
-            
-            if (!empty($ini['interfaces'][0])) {
-                $interfaces[] = $ini['interfaces'];
+            $inifile = str_replace('Extensions\Ext', '', $ext);
+            $ini = $this->load($inifile, 'interfaces');
+
+            if (!empty($ini[0])) {
+                $interfaces[] = $ini;
             }
         }
 

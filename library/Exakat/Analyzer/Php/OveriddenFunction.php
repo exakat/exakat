@@ -31,8 +31,8 @@ class OveriddenFunction extends Analyzer {
         
         $functions = array();
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\\Ext', '', $ext) . '.ini';
-            $ini = $this->loadIni($inifile, 'functions');
+            $inifile = str_replace('Extensions\\Ext', '', $ext);
+            $ini = $this->load($inifile, 'functions');
             
             if (!empty($ini[0])) {
                 $functions[] = $ini;

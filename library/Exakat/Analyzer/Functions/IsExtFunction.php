@@ -29,13 +29,11 @@ class IsExtFunction extends Analyzer {
 
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        $exts[] = 'php_functions';
         
-        $f = array();
+        $f = array($this->loadIni('php_functions.ini', 'functions'));
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\\Ext', '', $ext) . '.ini';
-            $ini = $this->loadIni($inifile, 'functions');
-            
+            $ini = $this->load( str_replace('Extensions\\Ext', '', $ext), 'functions');
+
             if (!empty($ini[0])) {
                 $f[] = $ini;
             }
@@ -48,7 +46,7 @@ class IsExtFunction extends Analyzer {
         $this->atomFunctionIs($functions);
         $this->prepareQuery();
 
-        $this->atomIs(array('Isset', 'Empty', 'Unset', 'Exit', 'Empty', 'Echo', 'Print'));
+        $this->atomIs(array('Isset', 'Isset', 'Empty', 'Unset', 'Exit', 'Empty', 'Echo', 'Print'));
         $this->prepareQuery();
     }
 }
