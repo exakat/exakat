@@ -39,6 +39,7 @@ class Stubs extends Reports {
         $code->load();
 
         $code->map('functions', function ($function) {
+            if ($function['function'] === 'Closure') { return '';}
             $phpdoc = ($function['phpdoc'] == ' ') ? '' : self::INDENTATION . $function['phpdoc'] . PHP_EOL;
 
             $returntype = ($function['returntype'] === null) ? '' : ' : ' . $function['returntype'];
@@ -63,7 +64,7 @@ class Stubs extends Reports {
 
         $code->map('classconstants', function ($classconstants) {
             $phpdoc = ($classconstants['phpdoc'] == ' ') ? '' : self::INDENTATION . $classconstants['phpdoc'];
-            return $phpdoc . self::INDENTATION . self::INDENTATION . ($classconstants['visibility'] ?? '') . "const $classconstants[constant] = $classconstants[value];";
+            return $phpdoc . self::INDENTATION . self::INDENTATION . ($classconstants['visibility'] ? $classconstants['visibility'].' ' : '') . "const $classconstants[constant] = $classconstants[value];";
         });
         $code->reduce('classconstants', function ($carry, $item) {
             return $carry . "\n" . $item;
@@ -73,6 +74,7 @@ class Stubs extends Reports {
             $phpdoc = ($properties['phpdoc'] == ' ') ? '' : self::INDENTATION . $properties['phpdoc'];
 
             $default = ($properties['value'] == '' ? '' : ' = ' . $properties['value']);
+            $properties['visibility'] = ($properties['visibility'] == '' ? 'var' : $properties['visibility'] );
             return "$phpdoc        $properties[visibility] $properties[property]$default;";
         });
         $code->reduce('properties', function ($carry, $item) {
