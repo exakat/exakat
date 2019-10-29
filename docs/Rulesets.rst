@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 14 Oct 2019 09:17:09 +0000
-.. comment: Generation hash : e664edadd7b7d0c9a83863a8eed1640cfc85b9be
+.. comment: Generation date : Tue, 29 Oct 2019 11:02:14 +0000
+.. comment: Generation hash : d0450e28d299ada3539197c4aabfea9540a6e985
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 390 analysis
+Total : 386 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -111,7 +111,6 @@ Total : 390 analysis
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Ambiguous Static <ambiguous-static>`
 * :ref:`Ambiguous Visibilities <ambiguous-visibilities>`
-* :ref:`Arrays/WeirdIndex <arrays/weirdindex>`
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Assign And Compare <assign-and-compare>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
@@ -200,7 +199,6 @@ Total : 390 analysis
 * :ref:`Forgotten Visibility <forgotten-visibility>`
 * :ref:`Forgotten Whitespace <forgotten-whitespace>`
 * :ref:`Fully Qualified Constants <fully-qualified-constants>`
-* :ref:`Functions/BadTypehintRelay <functions/badtypehintrelay>`
 * :ref:`Global Usage <global-usage>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Hash Algorithms <hash-algorithms>`
@@ -278,13 +276,13 @@ Total : 390 analysis
 * :ref:`No Append On Source <no-append-on-source>`
 * :ref:`No Boolean As Default <no-boolean-as-default>`
 * :ref:`No Choice <no-choice>`
-* :ref:`No Class As Typehint <no-class-as-typehint>`
 * :ref:`No Class In Global <no-class-in-global>`
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Empty Regex <no-empty-regex>`
 * :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
+* :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Literal For Reference <no-literal-for-reference>`
@@ -306,7 +304,6 @@ Total : 390 analysis
 * :ref:`Non Nullable Getters <non-nullable-getters>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
-* :ref:`Not A Scalar Type <not-a-scalar-type>`
 * :ref:`Not Not <not-not>`
 * :ref:`Null Or Boolean Arrays <null-or-boolean-arrays>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
@@ -470,7 +467,6 @@ Total : 390 analysis
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
-* :ref:``
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 * :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
@@ -1243,6 +1239,7 @@ Total : 42 analysis
 * :ref:`Mkdir Default <mkdir-default>`
 * :ref:`No ENT_IGNORE <no-ent\_ignore>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
+* :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Net For Xml Load <no-net-for-xml-load>`
 * :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
@@ -1261,7 +1258,6 @@ Total : 42 analysis
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Upload Filename Injection <upload-filename-injection>`
 * :ref:`Use random_int() <use-random\_int()>`
-* :ref:``
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`filter_input() As A Source <filter\_input()-as-a-source>`
 * :ref:`move_uploaded_file Instead Of copy <move\_uploaded\_file-instead-of-copy>`
@@ -1276,7 +1272,7 @@ Semantics
 
 This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
 
-Total : 7 analysis
+Total : 8 analysis
 
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Duplicate Literal <duplicate-literal>`
@@ -1285,6 +1281,7 @@ Total : 7 analysis
 * :ref:`Property Variable Confusion <property-variable-confusion>`
 * :ref:`Similar Integers <similar-integers>`
 * :ref:`Variables With One Letter Names <variables-with-one-letter-names>`
+* :ref:`Weird Array Index <weird-array-index>`
 
 .. _suggestions:
 
@@ -1293,12 +1290,11 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 88 analysis
+Total : 86 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
 * :ref:`Already Parents Interface <already-parents-interface>`
-* :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Avoid Real <avoid-real>`
 * :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
@@ -1308,7 +1304,6 @@ Total : 88 analysis
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Return Void <could-return-void>`
-* :ref:`Could Typehint <could-typehint>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Compact <could-use-compact>`
 * :ref:`Could Use Try <could-use-try>`
@@ -1429,12 +1424,24 @@ Typechecks
 
 This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint, are reported. 
 
-Total : 6 analysis
+Total : 18 analysis
 
+* :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
+* :ref:`Could Type With Array <could-type-with-array>`
+* :ref:`Could Type With Boolean <could-type-with-boolean>`
+* :ref:`Could Type With Int <could-type-with-int>`
+* :ref:`Could Type With String <could-type-with-string>`
+* :ref:`Could Typehint <could-typehint>`
+* :ref:`Functions/BadTypehintRelay <functions/badtypehintrelay>`
+* :ref:`Functions/CouldTypeWithIterable <functions/couldtypewithiterable>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Typehint <mismatched-typehint>`
+* :ref:`No Class As Typehint <no-class-as-typehint>`
+* :ref:`Not A Scalar Type <not-a-scalar-type>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Wrong Type With Call <wrong-type-with-call>`
 

@@ -837,7 +837,7 @@ The $regex parameter should really be first, as it is compulsory. Though, if thi
 Vanilla
 ^^^^^^^
 
-:ref:`wrong-optional-parameter`, in fuel/modules/fuel/helpers/validator_helper.php:78. 
+:ref:`wrong-optional-parameter`, in applications/dashboard/modules/class.navmodule.php:99. 
 
 Note the second parameter, $dropdown, which has no default value. It is relayed to the addDropdown method, which as no default value too. Since both methods are documented, we can see that they should be an addDropdown : null is probably a good idea, coupled with an explicit check on the actual value.
 
@@ -1297,7 +1297,7 @@ Interesting usage of both if/then, for the flow control, and ternary, for data p
 Zencart
 ^^^^^^^
 
-:ref:`nested-ternary`, in ecrire/inc/utils.php:2648. 
+:ref:`nested-ternary`, in app/library/zencart/ListingQueryAndOutput/src/formatters/TabularProduct.php:143. 
 
 No more than one level of nesting for this ternary call, yet it feels a lot more, thanks to the usage of arrayed properties, constants, and functioncalls. 
 
@@ -1442,7 +1442,7 @@ This is an aptly commented empty try/catch : the emited exception is extra check
 Mautic
 ^^^^^^
 
-:ref:`empty-try-catch`, in livezilla/_lib/trdp/Zend/Mail/Protocol/Pop3.php:237. 
+:ref:`empty-try-catch`, in app/bundles/ReportBundle/Model/ExportHandler.php:66. 
 
 Removing a file : if the file is not 'deleted' by the method call, but raises an error, it is hidden. When file destruction is impossible because the file is already destroyed (or missing), this is well. If the file couldn't be destroyed because of missing writing privileges, hiding this error will have serious consequences. 
 
@@ -1522,40 +1522,40 @@ foreach() reads $lines into $r, and augment those lines. By the end, the $r vari
 .. code-block:: php
 
     if (is_array($this->dat['header']['pagetree'])) {
-                reset($this->dat['header']['pagetree']);
-                $lines = [];
-                $this->traversePageTree($this->dat['header']['pagetree'], $lines);
+        reset($this->dat['header']['pagetree']);
+        $lines = [];
+        $this->traversePageTree($this->dat['header']['pagetree'], $lines);
     
-                $viewData['dat'] = $this->dat;
-                $viewData['update'] = $this->update;
-                $viewData['showDiff'] = $this->showDiff;
-                if (!empty($lines)) {
-                    foreach ($lines as &$r) {
-                        $r['controls'] = $this->renderControls($r);
-                        $r['fileSize'] = GeneralUtility::formatSize($r['size']);
-                        $r['message'] = ($r['msg'] && !$this->doesImport ? '<span class=text-danger>' . htmlspecialchars($r['msg']) . '</span>' : '');
-                    }
-                    $viewData['pagetreeLines'] = $lines;
-                } else {
-                    $viewData['pagetreeLines'] = [];
-                }
+        $viewData['dat'] = $this->dat;
+        $viewData['update'] = $this->update;
+        $viewData['showDiff'] = $this->showDiff;
+        if (!empty($lines)) {
+            foreach ($lines as &$r) {
+                $r['controls'] = $this->renderControls($r);
+                $r['fileSize'] = GeneralUtility::formatSize($r['size']);
+                $r['message'] = ($r['msg'] && !$this->doesImport ? '<span class=text-danger>' . htmlspecialchars($r['msg']) . '</span>' : '');
             }
-            // Print remaining records that were not contained inside the page tree:
-            if (is_array($this->remainHeader['records'])) {
-                $lines = [];
-                if (is_array($this->remainHeader['records']['pages'])) {
-                    $this->traversePageRecords($this->remainHeader['records']['pages'], $lines);
-                }
-                $this->traverseAllRecords($this->remainHeader['records'], $lines);
-                if (!empty($lines)) {
-                    foreach ($lines as &$r) {
-                        $r['controls'] = $this->renderControls($r);
-                        $r['fileSize'] = GeneralUtility::formatSize($r['size']);
-                        $r['message'] = ($r['msg'] && !$this->doesImport ? '<span class=text-danger>' . htmlspecialchars($r['msg']) . '</span>' : '');
-                    }
-                    $viewData['remainingRecords'] = $lines;
-                }
+            $viewData['pagetreeLines'] = $lines;
+        } else {
+            $viewData['pagetreeLines'] = [];
+        }
+    }
+    // Print remaining records that were not contained inside the page tree:
+    if (is_array($this->remainHeader['records'])) {
+        $lines = [];
+        if (is_array($this->remainHeader['records']['pages'])) {
+            $this->traversePageRecords($this->remainHeader['records']['pages'], $lines);
+        }
+        $this->traverseAllRecords($this->remainHeader['records'], $lines);
+        if (!empty($lines)) {
+            foreach ($lines as &$r) {
+                $r['controls'] = $this->renderControls($r);
+                $r['fileSize'] = GeneralUtility::formatSize($r['size']);
+                $r['message'] = ($r['msg'] && !$this->doesImport ? '<span class=text-danger>' . htmlspecialchars($r['msg']) . '</span>' : '');
             }
+            $viewData['remainingRecords'] = $lines;
+        }
+    }
 
 
 --------
@@ -1566,30 +1566,30 @@ foreach() reads $lines into $r, and augment those lines. By the end, the $r vari
 SugarCrm
 ^^^^^^^^
 
-:ref:`dangling-array-references`, in typo3/sysext/impexp/Classes/ImportExport.php:322. 
+:ref:`dangling-array-references`, in SugarCE-Full-6.5.26/modules/Import/CsvAutoDetect.php:165. 
 
 There are two nested foreach here : they both have referenced blind variables. The second one uses $data, but never changes it. Yet, it is reused the next round in the first loop, leading to pollution from the first rows of $this->_parser->data into the lasts. This may happen even if $data is not modified explicitely : in fact, it will be modified the next call to foreach($row as ...), for each element in $row. 
 
 .. code-block:: php
 
     foreach ($this->_parser->data as &$row) {
-                    foreach ($row as &$data) {
-                        $len = strlen($data);
-                        // check if it begins and ends with single quotes
-                        // if it does, then it double quotes may not be the enclosure
-                        if ($len>=2 && $data[0] == " && $data[$len-1] == ") {
-                            $beginEndWithSingle = true;
-                            break;
-                        }
-                    }
-                    if ($beginEndWithSingle) {
-                        break;
-                    }
-                    $depth++;
-                    if ($depth > $this->_max_depth) {
-                        break;
-                    }
-                }
+        foreach ($row as &$data) {
+            $len = strlen($data);
+            // check if it begins and ends with single quotes
+            // if it does, then it double quotes may not be the enclosure
+            if ($len>=2 && $data[0] == " && $data[$len-1] == ") {
+                $beginEndWithSingle = true;
+                break;
+            }
+        }
+        if ($beginEndWithSingle) {
+            break;
+        }
+        $depth++;
+        if ($depth > $this->_max_depth) {
+            break;
+        }
+    }
 
 Queries In Loops
 ================
@@ -1606,27 +1606,26 @@ The value is SELECTed first in the database, and it is INSERTed if not. This may
 .. code-block:: php
 
     foreach ($aMiscVal as $elem) {
-                                //Check if exists before inserting
-                                $tmp = mysqli_num_rows(
-                                    mysqli_query(
-                                        $dbTmp,
-                                        SELECT * FROM `.$var['tbl_prefix'].misc`
-                                        WHERE type='.$elem[0].' AND intitule='.$elem[1].'
-                                    )
-                                );
-                                if (intval($tmp) === 0) {
-                                    $queryRes = mysqli_query(
-                                        $dbTmp,
-                                        INSERT INTO `.$var['tbl_prefix'].misc`
-                                        (`type`, `intitule`, `valeur`) VALUES
-                                        ('.$elem[0].', '.$elem[1].', '.
-                                        str_replace(', , $elem[2]).');
-                                    ); // or die(mysqli_error($dbTmp))
-                                }
+        //Check if exists before inserting
+        $tmp = mysqli_num_rows(
+            mysqli_query(
+                $dbTmp,
+                SELECT * FROM `.$var['tbl_prefix'].misc`
+                WHERE type='.$elem[0].' AND intitule='.$elem[1].'
+            )
+        );
+        if (intval($tmp) === 0) {
+            $queryRes = mysqli_query(
+                $dbTmp,
+                INSERT INTO `.$var['tbl_prefix'].misc`
+                (`type`, `intitule`, `valeur`) VALUES
+                ('.$elem[0].', '.$elem[1].', '.
+                str_replace(', , $elem[2]).');
+            ); // or die(mysqli_error($dbTmp))
+        }
     
-                                // append new setting in config file
-                                $config_text .= 
-        '.$elem[1].' => '.str_replace(', , $elem[2]).',;
+        // append new setting in config file
+        $config_text .= '.$elem[1].' => '.str_replace(', , $elem[2]).',;
                             }
 
 
@@ -1638,25 +1637,25 @@ The value is SELECTed first in the database, and it is INSERTed if not. This may
 OpenEMR
 ^^^^^^^
 
-:ref:`queries-in-loops`, in install/install.queries.php:551. 
+:ref:`queries-in-loops`, in contrib/util/deidentification/deidentification.php:287. 
 
 The value is SELECTed first in the database, and it is INSERTed if not. This may be done in one call in most databases.
 
 .. code-block:: php
 
     $query = select * from facility;
-        $result = mysqli_query($con, $query);
-        while ($row = mysqli_fetch_array($result)) {
-            $string = update facility set 
-              
-                  `name`    = 'Facility_{$row['id']}',
-                  `phone`   = '(000) 000-0000'
-        
-                where `id` = {$row['id']};
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_array($result)) {
+        $string = update facility set 
+          
+              `name`    = 'Facility_{$row['id']}',
+              `phone`   = '(000) 000-0000'
     
-            mysqli_query($con, $string) or print Error altering facility table \n;
-            $string = '';
-        }
+            where `id` = {$row['id']};
+    
+        mysqli_query($con, $string) or print Error altering facility table \n;
+        $string = '';
+    }
 
 Aliases Usage
 =============
@@ -1762,21 +1761,21 @@ This is probably a typo, since the property called 	public static $EX_NO_USERS_W
 SugarCrm
 ^^^^^^^^
 
-:ref:`undefined-static\:\:-or-self\:\:`, in actions/forgot_password.php:194. 
+:ref:`undefined-static\:\:-or-self\:\:`, in code/SugarCE-Full-6.5.26/include/SugarDateTime.php:574. 
 
 self::$sugar_strptime_long_mon refers to the current class, which extends DateTime. No static property was defined at either of them, with the name '$sugar_strptime_long_mon'. This has been a Fatal error at execution time since PHP 5.3, at least. 
 
 .. code-block:: php
 
     if ( isset($regexp['positions']['F']) && !empty($dateparts[$regexp['positions']['F']])) {
-                           // FIXME: locale?
-                $mon = $dateparts[$regexp['positions']['F']];
-                if(isset(self::$sugar_strptime_long_mon[$mon])) {
-                    $data["tm_mon"] = self::$sugar_strptime_long_mon[$mon];
-                } else {
-                    return false;
-                }
-            }
+                   // FIXME: locale?
+        $mon = $dateparts[$regexp['positions']['F']];
+        if(isset(self::$sugar_strptime_long_mon[$mon])) {
+            $data["tm_mon"] = self::$sugar_strptime_long_mon[$mon];
+        } else {
+            return false;
+        }
+    }
 
 list() May Omit Variables
 =========================
@@ -2069,7 +2068,7 @@ Properties are not defined, but they are thoroughly initialized when the XML doc
 MediaWiki
 ^^^^^^^^^
 
-:ref:`undefined-properties`, in wp-admin/includes/misc.php:74. 
+:ref:`undefined-properties`, in includes/logging/LogFormatter.php:561. 
 
 parsedParametersDeleteLog is an undefined property. Defining the property with a null default value is important here, to keep the code running. 
 
@@ -2266,7 +2265,7 @@ Securimage could be called self.
 LiveZilla
 ^^^^^^^^^
 
-:ref:`could-use-self`, in wp-admin/includes/misc.php:74. 
+:ref:`could-use-self`, in livezilla/_lib/objects.global.users.inc.php:1599. 
 
 Using self makes it obvious that Operator::GetSystemId() is a local call, while Communication::GetParameter() is external.
 
@@ -2274,6 +2273,12 @@ Using self makes it obvious that Operator::GetSystemId() is a local call, while 
 
     class Operator extends BaseUser 
     {
+        static function ReadParams()
+        {
+            if(!empty($_POST[POST_EXTERN_REQUESTED_INTERNID]))
+                return Communication::GetParameter(POST_EXTERN_REQUESTED_INTERNID,,$c,FILTER_SANITIZE_SPECIAL_CHARS,null,32);
+            else if(!empty($_GET[operator]))
+            {
                 $userid = Communication::GetParameter(operator,,$c,FILTER_SANITIZE_SPECIAL_CHARS,null,32,false,false);
                 $sysid = Operator::GetSystemId($userid);
     }
@@ -2697,7 +2702,7 @@ $_GET is always a global variable. There is no need to declare it global in any 
 .. code-block:: php
 
     function choose_audience() {
-          global $_GET;
+            global $_GET;
 
 
 --------
@@ -2708,14 +2713,14 @@ $_GET is always a global variable. There is no need to declare it global in any 
 HuMo-Gen
 ^^^^^^^^
 
-:ref:`useless-global`, in admin/includes/modules/newsletters/newsletter.php:25. 
+:ref:`useless-global`, in relations.php:332. 
 
 It is hard to spot that $generY is useless, but this is the only occurrence where $generY is refered to as a global. It is not accessed anywhere else as a global (there are occurrences of $generY being an argument), and it is not even assigned within that function. 
 
 .. code-block:: php
 
     function calculate_ancestor($pers) {
-    global $db_functions, $reltext, $sexe, $sexe2, $spouse, $special_spouseY, $language, $ancestortext, $dutchtext, $selected_language, $spantext, $generY, $foundY_nr, $rel_arrayY;
+        global $db_functions, $reltext, $sexe, $sexe2, $spouse, $special_spouseY, $language, $ancestortext, $dutchtext, $selected_language, $spantext, $generY, $foundY_nr, $rel_arrayY;
 
 Preprocessable
 ==============
@@ -2891,18 +2896,18 @@ Parenthesis are useless around $progress[1], and around the division too.
 Woocommerce
 ^^^^^^^^^^^
 
-:ref:`useless-parenthesis`, in code/app/bundles/EmailBundle/Controller/AjaxController.php:85. 
+:ref:`useless-parenthesis`, in includes/class-wc-coupon.php:437. 
 
 Parenthesis are useless for calculating $discount_percent, as it is a divisition. Moreover, it is not needed with $discount, (float) applies to the next element, but it does make the expression more readable. 
 
 .. code-block:: php
 
     if ( wc_prices_include_tax() ) {
-    				$discount_percent = ( wc_get_price_including_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal;
-    			} else {
-    				$discount_percent = ( wc_get_price_excluding_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal_ex_tax;
-    			}
-    			$discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
+    	$discount_percent = ( wc_get_price_including_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal;
+    } else {
+    	$discount_percent = ( wc_get_price_excluding_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal_ex_tax;
+    }
+    $discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
 
 Unresolved Instanceof
 =====================
@@ -3360,6 +3365,25 @@ Here, the new exception gets an hardcoded message. More details about the reason
                 throw new Tinebase_Exception_AccessDenied('Could not open Tine 2.0 root directory.');
             }
 
+Undefined Interfaces
+====================
+
+.. _xataface-interfaces-undefinedinterfaces:
+
+xataface
+^^^^^^^^
+
+:ref:`undefined-interfaces`, in Dataface/Error.php:112. 
+
+Exception_ seems to be a typo, and leads to an always-true expression.
+
+.. code-block:: php
+
+    public static function isError($obj){
+    		if ( !PEAR::isError($obj) and !($obj instanceof Exception_) ) return false;
+    		return ($obj->getCode() >= DATAFACE_E_ERROR);
+    	}
+
 Useless Interfaces
 ==================
 
@@ -3398,15 +3422,15 @@ This code is well escaped, as the integer type cast will prevent any special cha
 
     $db->query("DELETE FROM " . MAIN_DB_PREFIX . "product_pricerules WHERE level = " . (int) $i)
 
-
-
+No Hardcoded Ip
+===============
 
 .. _openemr-structures-nohardcodedip:
 
 OpenEMR
 ^^^^^^^
 
-:ref:``, in wp-admin/includes/misc.php:74. 
+:ref:`no-hardcoded-ip`, in wp-admin/includes/misc.php:74. 
 
 Although they are commented just above, the values provided here are suspicious.
 
@@ -3429,7 +3453,7 @@ Although they are commented just above, the values provided here are suspicious.
 NextCloud
 ^^^^^^^^^
 
-:ref:``, in config/config.sample.php:1561. 
+:ref:`no-hardcoded-ip`, in config/config.sample.php:1561. 
 
 Although they are documented as empty array, 3 values are provided as examples. They do not responds, at the time of writing, but they may.
 
@@ -5982,7 +6006,7 @@ After checking that $currentCustomer is null, the method returns. The block with
 ThinkPHP
 ^^^^^^^^
 
-:ref:`no-need-for-else`, in core/lib/Thelia/Core/Template/Loop/Address.php:92. 
+:ref:`no-need-for-else`, in projects/thinkphp/code//ThinkPHP/Library/Org/Util/Rbac.class.php:187. 
 
 This code has both good and bad example. Good : no use of else, after $_SESSION[$accessGuid] check. Issue : else usage after usage of !isset($accessList[strtoupper($appName)][strtoupper(CONTROLLER_NAME)][strtoupper(ACTION_NAME)])
 
@@ -6091,19 +6115,19 @@ $value must be an array or a string here.
 Vanilla
 ^^^^^^^
 
-:ref:`check-all-types`, in src/Writer/Ini.php:122. 
+:ref:`check-all-types`, in library/core/class.form.php:2488. 
 
 When $this->_FormValues is not null, then it is an array or an object, as it may be used immediately with foreach(). A check with is_array() would be a stronger option here.
 
 .. code-block:: php
 
-    if (is_null($this->_FormValues)) {
+    public function formDataSet() {
+            if (is_null($this->_FormValues)) {
                 $this->formValues();
             }
     
             $result = [[]];
             foreach ($this->_FormValues as $key => $value) {
-                if (is_array($value)) {
 
 Missing Cases In Switch
 =======================
@@ -6359,46 +6383,6 @@ This is sneaky bug : the assignation $status = 0 returns a value, and not a vari
 
     pcntl_waitpid($this->pid, $status = 0)
 
-No Class As Typehint
-====================
-
-.. _vanilla-functions-noclassastypehint:
-
-Vanilla
-^^^^^^^
-
-:ref:`no-class-as-typehint`, in library/Vanilla/Formatting/Formats/RichFormat.php:51. 
-
-All three typehints are based on classes. When Parser or Renderer are changed, for testing, versioning or moduling reasons, they must subclass the original class. 
-
-.. code-block:: php
-
-    public function __construct(Quill\Parser $parser, Quill\Renderer $renderer, Quill\Filterer $filterer) {
-            $this->parser = $parser;
-            $this->renderer = $renderer;
-            $this->filterer = $filterer;
-        }
-
-
---------
-
-
-.. _phpmyadmin-functions-noclassastypehint:
-
-phpMyAdmin
-^^^^^^^^^^
-
-:ref:`no-class-as-typehint`, in libraries/classes/CreateAddField.php:29. 
-
-Although the class is named 'DatabaseInterface', it is a class.
-
-.. code-block:: php
-
-    public function __construct(DatabaseInterface $dbi)
-        {
-            $this->dbi = $dbi;
-        }
-
 No Return Used
 ==============
 
@@ -6552,7 +6536,7 @@ Well documented Manager class. Quite a lot of injections though, it must take a 
 Thelia
 ^^^^^^
 
-:ref:`too-many-injections`, in lib/private/Share20/Manager.php:130. 
+:ref:`too-many-injections`, in core/lib/Thelia/Core/Event/Delivery/DeliveryPostageEvent.php:58. 
 
 Classic address class, with every details. May be even shorter than expected.
 
@@ -6795,7 +6779,7 @@ $fullElement is an array most of the time, but finally ends up being a string. S
 Vanilla
 ^^^^^^^
 
-:ref:`multiple-type-variable`, in typo3/sysext/backend/Classes/Form/Element/InputDateTimeElement.php:270. 
+:ref:`multiple-type-variable`, in library/core/functions.general.php:1427. 
 
 Here, $value may be of different type. The if() structures merges all the incoming format into one standard type (int). This is actually the contrary of this analysis, and is a false positive.
 
@@ -6806,9 +6790,6 @@ Here, $value may be of different type. The if() structures merges all the incomi
                         } elseif (stringEndsWith($field, 'UserID', true)) {
                             $value = 1;
                         }
-    
-    
-    vanilla	$value = count($value)	/library/core/functions.general.php:1427
 
 Is Actually Zero
 ================
@@ -9317,67 +9298,6 @@ The function that holds that code is only used to call openconf.com, over http, 
     			curl_close($ch);
     			return($s);
 
-
-
-
-.. _openemr-structures-nohardcodedip:
-
-OpenEMR
-^^^^^^^
-
-:ref:``, in wp-admin/includes/misc.php:74. 
-
-Although they are commented just above, the values provided here are suspicious.
-
-.. code-block:: php
-
-    // FTP parameters that you must customize.  If you are not sending
-     // then set $FTP_SERVER to an empty string.
-     //
-     $FTP_SERVER = 192.168.0.30;
-     $FTP_USER   = openemr;
-     $FTP_PASS   = secret;
-     $FTP_DIR    = ;
-
-
---------
-
-
-.. _nextcloud-structures-nohardcodedip:
-
-NextCloud
-^^^^^^^^^
-
-:ref:``, in config/config.sample.php:1561. 
-
-Although they are documented as empty array, 3 values are provided as examples. They do not responds, at the time of writing, but they may.
-
-.. code-block:: php
-
-    /**
-     * List of trusted proxy servers
-     *
-     * You may set this to an array containing a combination of
-     * - IPv4 addresses, e.g. `192.168.2.123`
-     * - IPv4 ranges in CIDR notation, e.g. `192.168.2.0/24`
-     * - IPv6 addresses, e.g. `fd9e:21a7:a92c:2323::1`
-     *
-     * _(CIDR notation for IPv6 is currently work in progress and thus not
-     * available as of yet)_
-     *
-     * When an incoming request's `REMOTE_ADDR` matches any of the IP addresses
-     * specified here, it is assumed to be a proxy instead of a client. Thus, the
-     * client IP will be read from the HTTP header specified in
-     * `forwarded_for_headers` instead of from `REMOTE_ADDR`.
-     *
-     * So if you configure `trusted_proxies`, also consider setting
-     * `forwarded_for_headers` which otherwise defaults to `HTTP_X_FORWARDED_FOR`
-     * (the `X-Forwarded-For` header).
-     *
-     * Defaults to an empty array.
-     */
-    'trusted_proxies' => array('203.0.113.45', '198.51.100.128', '192.168.2.0/24'),
-
 Unserialize Second Arg
 ======================
 
@@ -9684,54 +9604,6 @@ This code actually loads the file, join it, then split it again. file() would be
 .. code-block:: php
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
-
-Argument Should Be Typehinted
-=============================
-
-.. _dolphin-functions-shouldbetypehinted:
-
-Dolphin
-^^^^^^^
-
-:ref:`argument-should-be-typehinted`, in Dolphin-v.7.3.5/plugins/intervention-image/Intervention/Image/Gd/Commands/WidenCommand.php:20. 
-
-This closures make immediate use of the $constraint argument, and calls its method aspectRatio. No check is made on this argument, and it may easily be mistaken with another class, or a null. Adding a typehint here will ensure a more verbose development error and help detect misuse of the closure. 
-
-.. code-block:: php
-
-    $this->arguments[2] = function ($constraint) use ($additionalConstraints) {
-                $constraint->aspectRatio();
-                if(is_callable($additionalConstraints)) 
-                    $additionalConstraints($constraint);
-            };
-
-
---------
-
-
-.. _mautic-functions-shouldbetypehinted:
-
-Mautic
-^^^^^^
-
-:ref:`argument-should-be-typehinted`, in app/bundles/PluginBundle/Helper/IntegrationHelper.php:374. 
-
-This piece of code inside a 275 lines method. Besides, there are 11 classes that offer a 'getPriority' method, although $returnServices could help to semantically reduce the number of possible classes. Here, typehints on $a and $b help using the wrong kind of object. 
-
-.. code-block:: php
-
-    if (empty($alphabetical)) {
-                // Sort by priority
-                uasort($returnServices, function ($a, $b) {
-                    $aP = (int) $a->getPriority();
-                    $bP = (int) $b->getPriority();
-    
-                    if ($aP === $bP) {
-                        return 0;
-                    }
-    
-                    return ($aP < $bP) ? -1 : 1;
-                });
 
 Could Return Void
 =================
@@ -10743,10 +10615,10 @@ Yield from is a straight replacement here.
 .. code-block:: php
 
     if (($newDepth === self::DEPTH_INFINITY || $newDepth >= 1) && $childNode instanceof ICollection) {
-                    foreach ($this->generatePathNodes($subPropFind) as $subItem) {
-                        yield $subItem;
-                    }
-                }
+        foreach ($this->generatePathNodes($subPropFind) as $subItem) {
+            yield $subItem;
+        }
+    }
 
 
 --------
@@ -10757,7 +10629,7 @@ Yield from is a straight replacement here.
 Tikiwiki
 ^^^^^^^^
 
-:ref:`don't-loop-on-yield`, in htdocs/includes/sabre/sabre/dav/lib/DAV/Server.php:912. 
+:ref:`don't-loop-on-yield`, in lib/goal/goallib.php:944. 
 
 The replacement with ``yield from``is not straigthforward here. Yield is only called when $user hasn't been ``$done`` : this is a unicity check. So, the double loop may produce a fully merged array, that may be reduced further by array_unique(). The final array, then, can be used with yield from. 
 
@@ -10765,14 +10637,14 @@ The replacement with ``yield from``is not straigthforward here. Yield is only ca
 
     $done = [];
     
-    			foreach ($goal['eligible'] as $groupName) {
-    				foreach ($userlib->get_group_users($groupName) as $user) {
-    					if (! isset($done[$user])) {
-    						yield ['user' => $user, 'group' => null];
-    						$done[$user] = true;
-    					}
-    				}
-    			}
+    foreach ($goal['eligible'] as $groupName) {
+    	foreach ($userlib->get_group_users($groupName) as $user) {
+    		if (! isset($done[$user])) {
+    			yield ['user' => $user, 'group' => null];
+    			$done[$user] = true;
+    		}
+    	}
+    }
 
 Multiple Usage Of Same Trait
 ============================
@@ -10816,5 +10688,93 @@ Here, $advocateid may be directly read from ocsql_fetch_assoc(), although, check
     			$advocateid = $al['advocateid'];
     		}
     	}
+
+No Class As Typehint
+====================
+
+.. _vanilla-functions-noclassastypehint:
+
+Vanilla
+^^^^^^^
+
+:ref:`no-class-as-typehint`, in library/Vanilla/Formatting/Formats/RichFormat.php:51. 
+
+All three typehints are based on classes. When Parser or Renderer are changed, for testing, versioning or moduling reasons, they must subclass the original class. 
+
+.. code-block:: php
+
+    public function __construct(Quill\Parser $parser, Quill\Renderer $renderer, Quill\Filterer $filterer) {
+            $this->parser = $parser;
+            $this->renderer = $renderer;
+            $this->filterer = $filterer;
+        }
+
+
+--------
+
+
+.. _phpmyadmin-functions-noclassastypehint:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`no-class-as-typehint`, in libraries/classes/CreateAddField.php:29. 
+
+Although the class is named 'DatabaseInterface', it is a class.
+
+.. code-block:: php
+
+    public function __construct(DatabaseInterface $dbi)
+        {
+            $this->dbi = $dbi;
+        }
+
+Argument Should Be Typehinted
+=============================
+
+.. _dolphin-functions-shouldbetypehinted:
+
+Dolphin
+^^^^^^^
+
+:ref:`argument-should-be-typehinted`, in Dolphin-v.7.3.5/plugins/intervention-image/Intervention/Image/Gd/Commands/WidenCommand.php:20. 
+
+This closures make immediate use of the $constraint argument, and calls its method aspectRatio. No check is made on this argument, and it may easily be mistaken with another class, or a null. Adding a typehint here will ensure a more verbose development error and help detect misuse of the closure. 
+
+.. code-block:: php
+
+    $this->arguments[2] = function ($constraint) use ($additionalConstraints) {
+                $constraint->aspectRatio();
+                if(is_callable($additionalConstraints)) 
+                    $additionalConstraints($constraint);
+            };
+
+
+--------
+
+
+.. _mautic-functions-shouldbetypehinted:
+
+Mautic
+^^^^^^
+
+:ref:`argument-should-be-typehinted`, in app/bundles/PluginBundle/Helper/IntegrationHelper.php:374. 
+
+This piece of code inside a 275 lines method. Besides, there are 11 classes that offer a 'getPriority' method, although $returnServices could help to semantically reduce the number of possible classes. Here, typehints on $a and $b help using the wrong kind of object. 
+
+.. code-block:: php
+
+    if (empty($alphabetical)) {
+                // Sort by priority
+                uasort($returnServices, function ($a, $b) {
+                    $aP = (int) $a->getPriority();
+                    $bP = (int) $b->getPriority();
+    
+                    if ($aP === $bP) {
+                        return 0;
+                    }
+    
+                    return ($aP < $bP) ? -1 : 1;
+                });
 
 

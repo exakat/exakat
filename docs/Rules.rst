@@ -8,62 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 14 Oct 2019 09:17:09 +0000
-.. comment: Generation hash : e664edadd7b7d0c9a83863a8eed1640cfc85b9be
-
-
-.. _:
-
-
-
-
-
-Do not leave hard coded IP in your code.
-
-It is recommended to move such configuration in external files or databases, for each update. 
-This may also come handy when testing. 
-
-.. code-block:: php
-
-   <?php
-   
-   // This IPv4 is hardcoded. 
-   $ip = '183.207.224.50';
-   // This IPv6 is hardcoded. 
-   $ip = '2001:0db8:85a3:0000:0000:8a2e:0370:7334';
-   
-   // This looks like an IP
-   $thisIsNotAnIP = '213.187.99.50';
-   $thisIsNotAnIP = '2133:1387:9393:5330';
-   
-   ?>
-
-
-``127.0.0.1``, ``\:\:1`` and ``\:\:0`` are omitted, and not considered as a violation.
-
-See also `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_ and `Never hard code sensitive information <https://wiki.sei.cmu.edu/confluence/display/java/MSC03-J.+Never+hard+code+sensitive+information>`_.
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Move the hardcoded IP to an external source : environment variable, configuration file, database.
-* Remove the hardcoded IP and ask for it at execution.
-* Use a literal value for default messages in form.
-
-+-------------+------------------------------------------------------------------------------------+
-| Short name  | Structures/NoHardcodedIp                                                           |
-+-------------+------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                    |
-+-------------+------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                              |
-+-------------+------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                      |
-+-------------+------------------------------------------------------------------------------------+
-| Examples    | :ref:`openemr-structures-nohardcodedip`, :ref:`nextcloud-structures-nohardcodedip` |
-+-------------+------------------------------------------------------------------------------------+
-
+.. comment: Generation date : Tue, 29 Oct 2019 11:02:14 +0000
+.. comment: Generation hash : d0450e28d299ada3539197c4aabfea9540a6e985
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -1400,7 +1346,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Functions/ShouldBeTypehinted                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                            |
+| Rulesets    | :ref:`Typechecks`                                                                             |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -1410,29 +1356,6 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Examples    | :ref:`dolphin-functions-shouldbetypehinted`, :ref:`mautic-functions-shouldbetypehinted`       |
 +-------------+-----------------------------------------------------------------------------------------------+
-
-
-
-.. _arrays/weirdindex:
-
-Arrays/WeirdIndex
-#################
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+-------------------+
-| Short name  | Arrays/WeirdIndex |
-+-------------+-------------------+
-| Rulesets    | :ref:`Analyze`    |
-+-------------+-------------------+
-| Severity    | Minor             |
-+-------------+-------------------+
-| Time To Fix | Quick (30 mins)   |
-+-------------+-------------------+
 
 
 
@@ -3769,17 +3692,17 @@ PHP 7.2 introduced the ability to remove a typehint when overloading a method. T
    
    ?>
 
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Classes/ChildRemoveTypehint                                                                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Php Version | With PHP 7.2 and more recent                                                                                                                                     |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                                                                            |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                  |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Classes/ChildRemoveTypehint                                                                                                                                                         |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Typechecks` |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Php Version | With PHP 7.2 and more recent                                                                                                                                                        |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                                                                                               |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                     |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5646,7 +5569,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Functions/CouldBeCallable                                                             |
 +-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                    |
+| Rulesets    | :ref:`Suggestions`, :ref:`Typechecks`                                                 |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -5769,6 +5692,166 @@ Suggestions
 
 
 
+.. _could-type-with-array:
+
+Could Type With Array
+#####################
+
+
+That argument may be typed with ``array``. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $a is used with a function which requires an int. 
+   function foo($a) {
+       return array_keys($a);
+   }
+   
+   ?>
+
+
+See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the ``array`` typehint to the function.
+
++-------------+------------------------------+
+| Short name  | Functions/CouldTypeWithArray |
++-------------+------------------------------+
+| Rulesets    | :ref:`Typechecks`            |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+
+
+
+.. _could-type-with-boolean:
+
+Could Type With Boolean
+#######################
+
+
+That argument may be typed with ``bool``. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $a is used with a function which requires a boolean. 
+   function foo($code, $a) {
+       return var_dump($code, $a);
+   }
+   
+   ?>
+
+
+See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the ``bool`` typehint to the function.
+
++-------------+-----------------------------+
+| Short name  | Functions/CouldTypeWithBool |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Typechecks`           |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+
+
+
+.. _could-type-with-int:
+
+Could Type With Int
+###################
+
+
+That argument may be typed with ``int``. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $a is used with a function which requires an int. 
+   function foo($a) {
+       return chr($a);
+   }
+   
+   ?>
+
+
+See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the ``int`` typehint to the function.
+
++-------------+----------------------------+
+| Short name  | Functions/CouldTypeWithInt |
++-------------+----------------------------+
+| Rulesets    | :ref:`Typechecks`          |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+
+
+
+.. _could-type-with-string:
+
+Could Type With String
+######################
+
+
+That argument may be typed with ``string``. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $a is used with a function which requires a string. 
+   function foo($a) {
+       return strtolower($a);
+   }
+   
+   ?>
+
+
+See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the ``string`` typehint to the function.
+
++-------------+-------------------------------+
+| Short name  | Functions/CouldTypeWithString |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Typechecks`             |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+
+
+
 .. _could-typehint:
 
 Could Typehint
@@ -5801,7 +5884,7 @@ Arguments that are tested with `instanceof <http://php.net/manual/en/language.op
 +-------------+-------------------------+
 | Short name  | Functions/CouldTypehint |
 +-------------+-------------------------+
-| Rulesets    | :ref:`Suggestions`      |
+| Rulesets    | :ref:`Typechecks`       |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
@@ -9684,12 +9767,35 @@ Suggestions
 +-------------+----------------------------+
 | Short name  | Functions/BadTypehintRelay |
 +-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
+| Rulesets    | :ref:`Typechecks`          |
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
 | Time To Fix | Quick (30 mins)            |
 +-------------+----------------------------+
+
+
+
+.. _functions/couldtypewithiterable:
+
+Functions/CouldTypeWithIterable
+###############################
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------------+
+| Short name  | Functions/CouldTypeWithIterable |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Typechecks`               |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
 
 
 
@@ -16262,7 +16368,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Functions/NoClassAsTypehint                                                               |
 +-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Typechecks`                                                                         |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -16690,6 +16796,60 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------+
 | Examples    | :ref:`shopware-structures-nohardcodedhash`, :ref:`sugarcrm-structures-nohardcodedhash` |
 +-------------+----------------------------------------------------------------------------------------+
+
+
+
+.. _no-hardcoded-ip:
+
+No Hardcoded Ip
+###############
+
+
+Do not leave hard coded IP in your code.
+
+It is recommended to move such configuration in external files or databases, for each update. 
+This may also come handy when testing. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This IPv4 is hardcoded. 
+   $ip = '183.207.224.50';
+   // This IPv6 is hardcoded. 
+   $ip = '2001:0db8:85a3:0000:0000:8a2e:0370:7334';
+   
+   // This looks like an IP
+   $thisIsNotAnIP = '213.187.99.50';
+   $thisIsNotAnIP = '2133:1387:9393:5330';
+   
+   ?>
+
+
+``127.0.0.1``, ``\:\:1`` and ``\:\:0`` are omitted, and not considered as a violation.
+
+See also `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_ and `Never hard code sensitive information <https://wiki.sei.cmu.edu/confluence/display/java/MSC03-J.+Never+hard+code+sensitive+information>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the hardcoded IP to an external source : environment variable, configuration file, database.
+* Remove the hardcoded IP and ask for it at execution.
+* Use a literal value for default messages in form.
+
++-------------+------------------------------------------------------------------------------------+
+| Short name  | Structures/NoHardcodedIp                                                           |
++-------------+------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                    |
++-------------+------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                              |
++-------------+------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                      |
++-------------+------------------------------------------------------------------------------------+
+| Examples    | :ref:`openemr-structures-nohardcodedip`, :ref:`nextcloud-structures-nohardcodedip` |
++-------------+------------------------------------------------------------------------------------+
 
 
 
@@ -18385,7 +18545,7 @@ Suggestions
 +-------------+-------------------+
 | Short name  | Php/NotScalarType |
 +-------------+-------------------+
-| Rulesets    | :ref:`Analyze`    |
+| Rulesets    | :ref:`Typechecks` |
 +-------------+-------------------+
 | Severity    | Major             |
 +-------------+-------------------+
@@ -27466,15 +27626,17 @@ Suggestions
 * Implement the missing interfaces
 * Remove the code governed by the missing interface : the whole method if it is an typehint, the whole if/then if it is a condition.
 
-+-------------+--------------------------------+
-| Short name  | Interfaces/UndefinedInterfaces |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Major                          |
-+-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
-+-------------+--------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Interfaces/UndefinedInterfaces                 |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                 |
++-------------+------------------------------------------------+
+| Severity    | Major                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                |
++-------------+------------------------------------------------+
+| Examples    | :ref:`xataface-interfaces-undefinedinterfaces` |
++-------------+------------------------------------------------+
 
 
 
@@ -32472,6 +32634,58 @@ Suggestions
 
 
 
+.. _weird-array-index:
+
+Weird Array Index
+#################
+
+
+Array index that looks weird. Arrays index may be string or integer, but some strings looks weird.
+
+In particular, strings that include terminal white spaces, often leads to missed values.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = ['a ' => 1, 'b' => 2, 'c' => 3];
+   
+   // Later in the code
+   
+   //Notice: Undefined index: a in /Users/famille/Desktop/analyzeG3/test.php on line 8
+   echo $array['a'];
+   
+   //Notice: Undefined index: b  in /Users/famille/Desktop/analyzeG3/test.php on line 10
+   // Note that the space is visible, but easy to miss
+   echo $array['b '];
+   
+   // all fine here
+   echo $array['c'];
+   
+   ?>
+
+
+Although this is rare error, and often easy to spot, it is also very hard to find when it strikes.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove white spaces when using strings as array index.
+
++-------------+-------------------+
+| Short name  | Arrays/WeirdIndex |
++-------------+-------------------+
+| Rulesets    | :ref:`Semantics`  |
++-------------+-------------------+
+| Severity    | Minor             |
++-------------+-------------------+
+| Time To Fix | Quick (30 mins)   |
++-------------+-------------------+
+
+
+
 .. _while(list()-=-each()):
 
 While(List() = Each())
@@ -33036,7 +33250,7 @@ Currently, this analysis doesn't take into account ``strict_types = 1``.
    foo(1);
    
    // wrong type used
-   foo(1);
+   foo("1");
    
    ?>
 

@@ -116,7 +116,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Dependencywheel
   * Phpcity
   * Sarb
-  * ExakatVendors
+  * Exakatvendors
 
 
 Supported PHP Extensions
@@ -306,9 +306,10 @@ Supported Frameworks
 
 Frameworks, components and libraries are supported via Exakat extensions.
 
-List of extensions : there are 14 extensions
+List of extensions : there are 15 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
+* :ref:`CodeIgniter <extension-codeigniter>`
 * :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
@@ -439,20 +440,30 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.0.1
+
+  * Classes/InsufficientPropertyTypehint (Classes/InsufficientPropertyTypehint)
+
 * 1.9.9
 
-  * Arrays/WeirdIndex (Arrays/WeirdIndex)
-  * Complete/CreateForeachDefault (Complete/CreateForeachDefault ; Unassigned)
+  * Complete/CreateForeachDefault (Complete/CreateForeachDefault ; Complete)
   * Concrete usage (Vendors/Concrete5 ; Appinfo)
+  * Could Type With Array (Functions/CouldTypeWithArray ; Typechecks)
+  * Could Type With Boolean (Functions/CouldTypeWithBool ; Typechecks)
+  * Could Type With Int (Functions/CouldTypeWithInt ; Typechecks)
+  * Could Type With String (Functions/CouldTypeWithString ; Typechecks)
   * Dump/CollectMbstringEncodings (Dump/CollectMbstringEncodings ; Dump)
   * Filter To add_slashes() (Php/FilterToAddSlashes ; CompatibilityPHP74)
+  * Functions/CouldTypeWithIterable (Functions/CouldTypeWithIterable ; Typechecks)
   * Immutable Signature (Classes/ImmutableSignature ; Appinfo)
   * Is_A() With String (Php/IsAWithString ; Analyze, Simple, Rector)
   * Mbstring Third Arg (Structures/MbstringThirdArg ; Analyze)
   * Mbstring Unknown Encoding (Structures/MbstringUnknownEncoding ; Analyze)
   * Merge If Then (Structures/MergeIfThen ; Analyze)
+  * Shell commands (Type/Shellcommands ; Appinfo)
   * Typehinting Stats (Dump/TypehintingStats ; Dump)
   * Typo 3 usage (Vendors/Typo3 ; Appinfo)
+  * Weird Array Index (Arrays/WeirdIndex)
   * Wrong Case Namespaces (Namespaces/WrongCase ; Coding Conventions)
   * Wrong Type With Call (Functions/WrongTypeWithCall ; Analyze, Typechecks)
 
@@ -464,8 +475,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.9.7
 
-  * Dump/CollectForeachFavorite (Dump/CollectForeachFavorite ; Unassigned)
-  * Make Functioncall With Reference (Complete/MakeFunctioncallWithReference ; Unassigned)
+  * Dump/CollectForeachFavorite (Dump/CollectForeachFavorite ; Dump)
+  * Make Functioncall With Reference (Complete/MakeFunctioncallWithReference ; Complete)
   * Too Many Dereferencing (Classes/TooManyDereferencing)
   * Use Url Query Functions (Structures/UseUrlQueryFunctions ; Suggestions)
 
@@ -485,7 +496,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.9.5
 
-  * Dump/CollectLiterals (Dump/CollectLiterals ; Unassigned)
+  * Dump/CollectLiterals (Dump/CollectLiterals ; Unassigned, Dump)
   * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, ClassReview)
   * Magic Properties (Classes/MagicProperties)
   * No Garantee For Property Constant (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
@@ -1211,7 +1222,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.11.5
 
-  * Could Typehint (Functions/CouldTypehint ; Suggestions)
+  * Could Typehint (Functions/CouldTypehint ; Typechecks)
   * Implemented Methods Are Public (Classes/ImplementedMethodsArePublic)
   * Mixed Concat And Interpolation (Structures/MixedConcatInterpolation ; Analyze, Coding Conventions)
   * No Reference On Left Side (Structures/NoReferenceOnLeft ; Analyze)
@@ -1277,7 +1288,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.10.5
 
-  * Could Be Typehinted Callable (Functions/CouldBeCallable ; Suggestions)
+  * Could Be Typehinted Callable (Functions/CouldBeCallable ; Suggestions, Typechecks)
   * Encoded Simple Letters (Security/EncodedLetters ; Security)
   * Regex Delimiter (Structures/RegexDelimiter ; Preferences)
   * Strange Name For Constants (Constants/StrangeName ; Analyze)
@@ -1413,7 +1424,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.8.4
 
-  *  (Structures/NoHardcodedIp ; Analyze, Security, ClearPHP, Simple)
   * $HTTP_RAW_POST_DATA Usage (Php/RawPostDataUsage ; Appinfo, CompatibilityPHP56)
   * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses ; Analyze, Simple)
   * $this Is Not An Array (Classes/ThisIsNotAnArray ; Analyze)
@@ -1437,7 +1447,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Always Positive Comparison (Structures/NeverNegative ; Analyze, Simple)
   * Ambiguous Array Index (Arrays/AmbiguousKeys)
   * Anonymous Classes (Classes/Anonymous ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * Argument Should Be Typehinted (Functions/ShouldBeTypehinted ; ClearPHP, Suggestions)
+  * Argument Should Be Typehinted (Functions/ShouldBeTypehinted ; Typechecks)
   * Array Index (Arrays/Arrayindex ; Appinfo)
   * Arrays Is Modified (Arrays/IsModified ; Internal)
   * Arrays Is Read (Arrays/IsRead ; Internal)
@@ -1700,6 +1710,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Direct Call To Magic Method (Classes/DirectCallToMagicMethod ; Analyze, Level 2)
   * No Direct Usage (Structures/NoDirectUsage ; Analyze, Simple)
   * No Hardcoded Hash (Structures/NoHardcodedHash ; Analyze, Security, Simple)
+  * No Hardcoded Ip (Structures/NoHardcodedIp ; Analyze, Security, ClearPHP, Simple)
   * No Hardcoded Path (Structures/NoHardcodedPath ; Analyze, ClearPHP, Simple)
   * No Hardcoded Port (Structures/NoHardcodedPort ; Analyze, Security, ClearPHP, Simple)
   * No List With String (Php/NoListWithString ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
@@ -2202,7 +2213,7 @@ External services
 
 List of external services whose configuration files has been commited in the code.
 
-* `Apache <http://www.apache.org/>`_ - .htaccess
+* `Apache <http://www.apache.org/>`_ - .htaccess, htaccess.txt
 * `Apple <http://www.apple.com/>`_ - .DS_Store
 * `appveyor <http://www.appveyor.com/>`_ - appveyor.yml, .appveyor.yml
 * `ant <https://ant.apache.org/>`_ - build.xml
@@ -2213,8 +2224,8 @@ List of external services whose configuration files has been commited in the cod
 * `arcanist <https://secure.phabricator.com/book/phabricator/article/arcanist_lint/>`_ - .arclint, .arcconfig
 * `bazaar <http://bazaar.canonical.com/en/>`_ - .bzr
 * `babeljs <https://babeljs.io/>`_ - .babel.rc, .babel.js, .babelrc
-* `behat <http://docs.behat.org/en/v2.5/>`_ - behat.yml.dist
-* `box2 <https://github.com/box-project/box2>`_ - box.json
+* `behat <http://docs.behat.org/en/v2.5/>`_ - behat.yml.dist, behat.yml
+* `box2 <https://github.com/box-project/box2>`_ - box.json, box.json.dist
 * `bower <http://bower.io/>`_ - bower.json, .bowerrc
 * `circleCI <https://circleci.com/>`_ - circle.yml, .circleci
 * `codacy <http://www.codacy.com/>`_ - .codacy.json
@@ -2223,44 +2234,50 @@ List of external services whose configuration files has been commited in the cod
 * `codeclimate <http://www.codeclimate.com/>`_ - .codeclimate.yml
 * `composer <https://getcomposer.org/>`_ - composer.json, composer.lock, vendor
 * `couscous <http://couscous.io/>`_ - couscous.yml
-* `Code Sniffer <https://github.com/squizlabs/PHP_CodeSniffer>`_ - .php_cs, .php_cs.dist, .phpcs.xml, php_cs.dist
+* `Code Sniffer <https://github.com/squizlabs/PHP_CodeSniffer>`_ - .php_cs, .php_cs.dist, .phpcs.xml, php_cs.dist, phpcs.xml, phpcs.xml.dist
 * `coveralls <https://coveralls.zendesk.com/>`_ - .coveralls.yml
+* `crowdin <https://crowdin.com/>`_ - crowdin.yml
 * `cvs <http://savannah.nongnu.org/projects/cvs>`_ - CVS
 * `docker <http://www.docker.com/>`_ - .dockerignore, .docker, docker-compose.yml, Dockerfile
+* `dotenv <https://symfony.com/doc/current/components/dotenv.htmls>`_ - .env.dist, .env, .env.example
 * `drone <http://docs.drone.io/>`_ - .dockerignore, .docker
-* `editorconfig <https://editorconfig.org/>`_ - .drone.yml
+* `drupalci <https://www.drupal.org/project/drupalci>`_ - drupalci.yml
+* `drush <https://www.drupal.org/project/drupalci>`_ - drush.services.yml
+* `editorconfig <https://editorconfig.org/>`_ - .editorconfig
 * `eslint <http://eslint.org/>`_ - .eslintrc, .eslintignore, eslintrc.js, .eslintrc.js, .eslintrc.json
+* `exakat <https://www.exakat.io/>`_ - .exakat.yaml, .exakat.yml, .exakat.ini
 * `flintci <https://flintci.io/>`_ - .flintci.yml
 * `git <https://git-scm.com/>`_ - .git, .gitignore, .gitattributes, .gitmodules, .mailmap, .githooks
 * `github <https://www.github.com/>`_ - .github
 * `gitlab <https://www.gitlab.com/>`_ - .gitlab-ci.yml
-* `gulpfile <http://gulpjs.com/>`_ - .js
+* `gulpfile <http://gulpjs.com/>`_ - gulpfile.js
 * `grumphp <https://github.com/phpro/grumphp>`_ - grumphp.yml.dist, grumphp.yml
 * `gush <https://github.com/gushphp/gush>`_ - .gush.yml
+* `gruntjs <https://gruntjs.com/>`_ - Gruntfile.js
 * `humbug <https://github.com/humbug/box.git>`_ - humbug.json.dist, humbug.json
-* `infection <https://infection.github.io/>`_ - infection.yml, .infection.yml
+* `infection <https://infection.github.io/>`_ - infection.yml, .infection.yml, infection.json.dist
 * `insight <https://insight.sensiolabs.com/>`_ - .sensiolabs.yml
 * `jetbrains <https://www.jetbrains.com/phpstorm/>`_ - .idea
 * `jshint <http://jshint.com/>`_ - .jshintrc, .jshintignore
 * `mercurial <https://www.mercurial-scm.org/>`_ - .hg, .hgtags, .hgignore, .hgeol
 * `mkdocs <http://www.mkdocs.org>`_ - mkdocs.yml
-* `npm <https://www.npmjs.com/>`_ - package.json, .npmignore, .npmrc
+* `npm <https://www.npmjs.com/>`_ - package.json, .npmignore, .npmrc, package-lock.json
 * `openshift <https://www.openshift.com/>`_ - .openshift
 * `phan <https://github.com/etsy/phan>`_ - .phan
 * `pharcc <https://github.com/cbednarski/pharcc>`_ - .pharcc.yml
 * `phalcon <https://phalconphp.com/>`_ - .phalcon
 * `phpbench <https://github.com/phpbench/phpbench>`_ - phpbench.json
 * `phpci <https://www.phptesting.org/>`_ - phpci.yml
-* `Phpdocumentor <https://www.phpdoc.org/>`_ - .phpdoc.xml
+* `Phpdocumentor <https://www.phpdoc.org/>`_ - .phpdoc.xml, phpdoc.dist.xml
 * `phpdox <https://github.com/theseer/phpdox>`_ - phpdox.xml.dist, phpdox.xml
 * `phinx <https://phinx.org/>`_ - phinx.yml
 * `phpformatter <https://github.com/mmoreram/php-formatter>`_ - .formatter.yml
 * `phpmetrics <http://www.phpmetrics.org/>`_ - .phpmetrics.yml.dist
 * `phpsa <https://github.com/ovr/phpsa>`_ - .phpsa.yml
 * `phpspec <http://www.phpspec.net/en/latest/>`_ - phpspec.yml, .phpspec, phpspec.yml.dist
-* `phpstan <https://github.com/phpstan>`_ - phpstan.neon, .phpstan.neon
+* `phpstan <https://github.com/phpstan>`_ - phpstan.neon, .phpstan.neon, phpstan.neon.dist
 * `phpswitch <https://github.com/jubianchi/phpswitch>`_ - .phpswitch.yml
-* `PHPUnit <https://www.phpunit.de/>`_ - phpunit.xml.dist
+* `PHPUnit <https://www.phpunit.de/>`_ - phpunit.xml.dist, phpunit.xml
 * `prettier <https://prettier.io/>`_ - .prettierrc, .prettierignore
 * `psalm <https://getpsalm.org/>`_ - psalm.xml
 * `puppet <https://puppet.com/>`_ - .puppet
@@ -2281,6 +2298,8 @@ List of external services whose configuration files has been commited in the cod
 * `varci <https://var.ci/>`_ - .varci, .varci.yml
 * `Vagrant <https://www.vagrantup.com/>`_ - Vagrantfile
 * `visualstudio <https://code.visualstudio.com/>`_ - .vscode
+* `webpack <https://webpack.js.org/>`_ - webpack.mix.js, webpack.config.js
+* `yarn <https://yarnpkg.com/lang/en/>`_ - yarn.lock
 * `Zend_Tool <https://framework.zend.com/>`_ - zfproject.xml
 
 External links
@@ -2634,8 +2653,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2659,8 +2678,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2820,11 +2839,12 @@ List of external links mentionned in this documentation.
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2934,7 +2954,6 @@ _______
 |   analyzer[] = "Arrays/NullBoolean";
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
 |   analyzer[] = "Arrays/TooManyDimensions";
-|   analyzer[] = "Arrays/WeirdIndex";
 |   analyzer[] = "Classes/AbstractOrImplements";
 |   analyzer[] = "Classes/AbstractStatic";
 |   analyzer[] = "Classes/AccessPrivate";
@@ -3038,7 +3057,6 @@ _______
 |   analyzer[] = "Files/MissingInclude";
 |   analyzer[] = "Functions/AliasesUsage";
 |   analyzer[] = "Functions/AvoidBooleanArgument";
-|   analyzer[] = "Functions/BadTypehintRelay";
 |   analyzer[] = "Functions/CallbackNeedsReturn";
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/DeepDefinitions";
@@ -3051,7 +3069,6 @@ _______
 |   analyzer[] = "Functions/MustReturn";
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoBooleanAsDefault";
-|   analyzer[] = "Functions/NoClassAsTypehint";
 |   analyzer[] = "Functions/NoLiteralForReference";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/OnlyVariableForReference";
@@ -3122,7 +3139,6 @@ _______
 |   analyzer[] = "Php/MustCallParentConstructor";
 |   analyzer[] = "Php/NoClassInGlobal";
 |   analyzer[] = "Php/NoReferenceForTernary";
-|   analyzer[] = "Php/NotScalarType";
 |   analyzer[] = "Php/PathinfoReturns";
 |   analyzer[] = "Php/ReservedNames";
 |   analyzer[] = "Php/ScalarAreNotArrays";
@@ -4166,6 +4182,7 @@ This ruleset focuses on human interpretation of the code. It reviews special val
 _________
 
 | [Semantics]
+|   analyzer[] = "Arrays/WeirdIndex";
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Functions/ParameterHiding";
 |   analyzer[] = "Php/ClassFunctionConfusion";
@@ -4204,11 +4221,9 @@ ___________
 |   analyzer[] = "Functions/CouldBeStaticClosure";
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/CouldReturnVoid";
-|   analyzer[] = "Functions/CouldTypehint";
 |   analyzer[] = "Functions/MultipleIdenticalClosure";
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoReturnUsed";
-|   analyzer[] = "Functions/ShouldBeTypehinted";
 |   analyzer[] = "Functions/TooManyParameters";
 |   analyzer[] = "Functions/UselessArgument";
 |   analyzer[] = "Functions/UselessDefault";
@@ -4328,12 +4343,24 @@ This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint,
 __________
 
 | [Typechecks]
+|   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Functions/BadTypehintRelay";
+|   analyzer[] = "Functions/CouldBeCallable";
+|   analyzer[] = "Functions/CouldTypeWithArray";
+|   analyzer[] = "Functions/CouldTypeWithBool";
+|   analyzer[] = "Functions/CouldTypeWithInt";
+|   analyzer[] = "Functions/CouldTypeWithIterable";
+|   analyzer[] = "Functions/CouldTypeWithString";
+|   analyzer[] = "Functions/CouldTypehint";
 |   analyzer[] = "Functions/InsufficientTypehint";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MismatchedDefaultArguments";
 |   analyzer[] = "Functions/MismatchedTypehint";
+|   analyzer[] = "Functions/NoClassAsTypehint";
+|   analyzer[] = "Functions/ShouldBeTypehinted";
 |   analyzer[] = "Functions/WrongTypeWithCall";
-|   analyzer[] = "Interfaces/UselessInterfaces";| 
+|   analyzer[] = "Interfaces/UselessInterfaces";
+|   analyzer[] = "Php/NotScalarType";| 
 
 
 
