@@ -1,4 +1,4 @@
-Version 2.0.0 (Civil Star of Mystery and Darkness, coming up)
+Version 2.0.1 (Danyuan Star of Honesty and Chasity, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,33 @@ Version 2.0.0 (Civil Star of Mystery and Darkness, coming up)
     + 
 + Tokenizer
     + 
+
+Version 2.0.1 (Military Star of the North Pole, 2019-10-28)
++ Architecture
+    + Added more return type
+    + Centralized reading for ini or json
++ Report
+    + Ambassador: fixed Foreach favorites
+    + Ambassador: added sort to number of parameter list
+    + Checked unit tests : 3345 / 3377 test pass (99% pass)
++ Analysis
+    + Upgraded xmlwriter to json
+
+Version 2.0.0 (Civil Star of Mystery and Darkness, 2019-10-21)
++ Architecture
+    + Manual file/line fixes
+    + More simplifcations in load step
++ Report
+    + Ambassador : fixed performance display
+    + Ambassador : report list of shell commands
+    + Typehint4all : first report
+    + Perfile : fixed sorting
++ Analysis
+    + New analysis : Report possible typehint for bool, int, string, array. WIP
+    + Upgraded analysis : common alternatives are extended to switch and elsif
+    + Upgraded analysis : xmlreader description includes class constants, properties and methods.
+    + Upgraded analysis : callback needs return, is extended to php native functions
+    + Checked unit tests : 3345 / 3377 test pass (99% pass)
 
 Version 1.9.9 (Lasting Prosperity Star of True Man, 2019-10-14)
 + Architecture
