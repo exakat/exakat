@@ -665,7 +665,8 @@ SQL;
                                                    begin INTEGER,
                                                    end INTEGER,
                                                    file INTEGER,
-                                                   namespaceId INTEGER DEFAULT 1
+                                                   namespaceId INTEGER DEFAULT 1,
+                                                   line INTEGER
                                                  )');
 
         $this->sqlite->query('DROP TABLE IF EXISTS cit_implements');
@@ -696,7 +697,8 @@ g.V().hasLabel("Class")
          'begin':lines.min(),
          'end':lines.max(),
          'file':file,
-         'phpdoc':phpdoc
+         'phpdoc':phpdoc,
+         'line':it.get().value("line")
          ];
 }
 
@@ -720,7 +722,7 @@ GREMLIN;
             }
             
             $cit[] = $row;
-            $citId[$row['fullnspath']] = ++$citCount;
+            $citId[$row['line'].$row['fullnspath']] = ++$citCount;
             
             ++$total;
         }
@@ -744,7 +746,8 @@ g.V().hasLabel("Interface")
          'begin':lines.min(),
          'end':lines.max(),
          'file':file,
-         'phpdoc':phpdoc
+         'phpdoc':phpdoc,
+         'line':it.get().value("line")
          ];
 }
 GREMLIN;
@@ -761,7 +764,7 @@ GREMLIN;
             }
             
             $cit[] = $row;
-            $citId[$row['fullnspath']] = ++$citCount;
+            $citId[$row['line'].$row['fullnspath']] = ++$citCount;
 
             ++$total;
         }
@@ -785,7 +788,8 @@ g.V().hasLabel("Trait")
          'begin':lines.min(),
          'end':lines.max(),
          'file':file,
-         'phpdoc':phpdoc
+         'phpdoc':phpdoc,
+         'line':it.get().value("line")
          ];
 }
 
@@ -804,7 +808,7 @@ GREMLIN;
             
             $row['implements'] = array(); // always empty
             $cit[] = $row;
-            $citId[$row['fullnspath']] = ++$citCount;
+            $citId[$row['line'].$row['fullnspath']] = ++$citCount;
 
             ++$total;
         }
@@ -815,14 +819,6 @@ GREMLIN;
             $query = array();
             
             foreach($cit as $row) {
-                if (empty($row['extends'])) {
-                    $extends = "''";
-                } elseif (isset($citId[$row['extends']])) {
-                    $extends = $citId[$row['extends']];
-                } else {
-                    $extends = "'{$this->sqlite->escapeString($row['extends'])}'";
-                }
-
                 $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row['fullnspath']);
                 if (isset($namespacesId[$namespace])) {
                     $namespaceId = $namespacesId[$namespace];
@@ -830,22 +826,23 @@ GREMLIN;
                     $namespaceId = 1;
                 }
 
-                $query[] = '(' . $citId[$row['fullnspath']] .
+                $query[] = '(' . $citId[$row['line'].$row['fullnspath']] .
                            ", '" . $this->sqlite->escapeString($row['name']) . "'" .
                            ', ' . $namespaceId .
                            ', ' . (int) $row['abstract'] .
                            ',' . (int) $row['final'] .
                            ", '" . $row['type'] . "'" .
-                           ', ' . $extends .
+                           ', \'\' '.
                            ', ' . (int) $row['begin'] .
                            ', ' . (int) $row['end'] .
                            ", '" . $this->files[$row['file']] . "'" .
                            ", '" . $this->sqlite->escapeString($row['phpdoc']) . "'" .
+                           ", '" . $row['line'] . "'" .
                            ' )';
             }
             
             if (!empty($query)) {
-                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file", "phpdoc") VALUES ' . implode(", \n", $query);
+                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file", "phpdoc", "line") VALUES ' . implode(", \n", $query);
                 $this->sqlite->query($query);
             }
 
@@ -856,10 +853,14 @@ GREMLIN;
                 }
 
                 foreach($row['implements'] as $implements) {
-                    if (isset($citId[$implements])) {
-                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", $citId[$implements], 'implements')";
+                    $citIds = preg_grep('/^\d+\\\\'.addslashes(mb_strtolower($implements)).'$/', array_keys($citId));
+
+                    if (empty($citIds)) {
+                        $query[] = '(null, ' . $citId[$row['line'].$row['fullnspath']] . ", '" . $this->sqlite->escapeString($implements) . "', 'implements')";
                     } else {
-                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", '" . $this->sqlite->escapeString($implements) . "', 'implements')";
+                        foreach($citIds as $c) {
+                            $query[] = '(null, ' . $citId[$row['line'].$row['fullnspath']] . ", ".$citId[$c].", 'implements')";
+                        }
                     }
                 }
             }
@@ -876,10 +877,16 @@ GREMLIN;
                 }
                 
                 foreach($row['uses'] as $uses) {
-                    if (isset($citId[$uses])) {
-                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", $citId[$uses], 'use')";
+                    $citIds = preg_grep('/^\d+'.addslashes(mb_strtolower($uses)).'$/', array_keys($citId));
+
+                    if (empty($citIds)) {
+                        $query[] = '(null, \'' . $citId[$row['line'].$row['fullnspath']] . "', '" . $this->sqlite->escapeString($uses) . "', 'use')";
+                        ++$total;
                     } else {
-                        $query[] = '(null, ' . $citId[$row['fullnspath']] . ", '" . $this->sqlite->escapeString($uses) . "', 'use')";
+                        foreach($citIds as $c) {
+                            $query[] = '(null, \'' . $citId[$row['line'].$row['fullnspath']] . "', ".$citId[$c].", 'use')";
+                            ++$total;
+                        }
                     }
                 }
             }
@@ -888,28 +895,6 @@ GREMLIN;
                 $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES ' . implode(', ', $query);
                 $this->sqlite->query($query);
             }
-        }
-
-        // Manage use (traits)
-        // Same SQL than for implements
-
-        $total = 0;
-        $query = array();
-        foreach($usesId as $id => $usesFNP) {
-            foreach($usesFNP as $fnp) {
-                if (substr($fnp, 0, 2) === '\\\\') {
-                    $fnp = substr($fnp, 2);
-                }
-                if (isset($citId[$fnp])) {
-                    $query[] = "(null, $id, $citId[$fnp], 'use')";
-
-                    ++$total;
-                } // Else ignore. Not in the project
-            }
-        }
-        if (!empty($query)) {
-            $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES ' . implode(', ', $query);
-            $this->sqlite->query($query);
         }
         display("$total uses \n");
 
@@ -951,7 +936,7 @@ g.V().hasLabel("Method", "Magicmethod")
             __.sideEffect{ alias = false; }
           )
          .as("method")
-         .in("METHOD", "MAGICMETHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value("fullnspath"); }
+         .in("METHOD", "MAGICMETHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value("fullnspath"); classline =  it.get().value("line"); }
          .select("method")
          .where( __.sideEffect{ lines = [];}
                    .out("BLOCK").out("EXPRESSION")
@@ -983,7 +968,8 @@ g.V().hasLabel("Method", "Magicmethod")
          "class":     classe,
          "phpdoc":    phpdoc,
          "begin":     lines.min(),
-         "end":       lines.max()
+         "end":       lines.max(),
+         "classline": classline
          ];
             }
       ) 
@@ -1006,7 +992,7 @@ GREMLIN;
                 $visibility = '';
             }
 
-            if (!isset($citId[$row['class']])) {
+            if (!isset($citId[$row['classline'].$row['class']])) {
                 continue;
             }
             $methodId = $row['class'] . '::' . mb_strtolower($row['name']);
@@ -1015,7 +1001,7 @@ GREMLIN;
             }
             $methodIds[$methodId] = ++$methodCount;
 
-            $query[] = '(' . $methodCount . ", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
+            $query[] = '(' . $methodCount . ", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['classline'].$row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
                         ', \'' . $this->sqlite->escapeString($row['returntype']) . '\', ' . (int) $row['begin'] . ', ' . (int) $row['end'] .
                         ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
@@ -1041,7 +1027,9 @@ CREATE TABLE arguments (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         reference INTEGER,
                         variadic INTEGER,
                         init STRING,
-                        typehint STRING
+                        line INTEGER,
+                        typehint STRING,
+                        CONSTRAINT "ranking" UNIQUE (citId, methodId, rank, line)
                      )
 SQL
 );
@@ -1057,8 +1045,9 @@ GREMLIN
              ->inIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
              ->savePropertyAs('fullnspath', 'classe')
+             ->savePropertyAs('line', 'classline')
              ->back('first')
-              ->raw(<<<'GREMLIN'
+             ->raw(<<<'GREMLIN'
 sideEffect{
     init = 'None';
     typehint = 'None';
@@ -1074,6 +1063,8 @@ sideEffect{
 
          "classe":classe,
          "methode":methode,
+         "line": it.get().value("line"),
+         "classline": classline,
 
          "init": init,
          "typehint":typehint,
@@ -1088,15 +1079,15 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($result->toArray() as $row) {
-            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classe']] . ', ' . $methodIds[$row['classe'] . '::' . $row['methode']] .
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classline'].$row['classe']] . ', ' . $methodIds[$row['classe'] . '::' . $row['methode']] .
                         ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
-                        ', \'' . $row['typehint'] . '\')';
+                        ', \'' . $row['typehint'] .'\', ' . (int) $row['line'] . ')';
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO arguments ("name", "rank", "citId", "methodId", "init", "reference", "variadic", "typehint") VALUES ' . implode(', ', $query);
+            $query = 'INSERT INTO arguments ("name", "rank", "citId", "methodId", "init", "reference", "variadic", "typehint", "line") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -1132,6 +1123,7 @@ g.V().hasLabel("Propertydefinition").as("property")
      .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .in("PPP").hasLabel("Class", "Interface", "Trait")
      .sideEffect{classe = it.get().value("fullnspath"); }
+     .sideEffect{classline = it.get().value("line"); }
      .select("property")
 .map{ 
     b = it.get().value("fullcode").tokenize(' = ');
@@ -1145,7 +1137,9 @@ g.V().hasLabel("Propertydefinition").as("property")
          "var":x_var,
          "name": name,
          "value": v,
-         "phpdoc":phpdoc];
+         "phpdoc":phpdoc,
+         "classline":classline
+         ];
 }
 
 GREMLIN;
@@ -1170,7 +1164,7 @@ GREMLIN;
             }
 
             // If we haven't found any definition for this class, just ignore it.
-            if (!isset($citId[$row['class']])) {
+            if (!isset($citId[$row['classline'].$row['class']])) {
                 continue;
             }
             $propertyId = $row['class'] . '::' . $row['name'];
@@ -1179,12 +1173,13 @@ GREMLIN;
             }
             $propertyIds[$propertyId] = ++$propertyCount;
 
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['class']] .
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['classline'].$row['class']] .
                         ", '" . $visibility . "', '" . $this->sqlite->escapeString($row['value']) . "', " . (int) $row['static'] .
                         ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
 
             ++$total;
         }
+
         if (!empty($query)) {
             $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
@@ -1207,23 +1202,29 @@ SQL
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait")
+.sideEffect{ 
+    line = it.get().value("line");
+    classe = it.get().value("fullnspath");
+}
      .out('CONST')
 .sideEffect{ 
-    x_public = it.get().values("visibility") == 'public';
-    x_protected = it.get().values("visibility") == 'protected';
-    x_private = it.get().values("visibility") == 'private';
+    x_public    = it.get().value("visibility") == 'public';
+    x_protected = it.get().value("visibility") == 'protected';
+    x_private   = it.get().value("visibility") == 'private';
     phpdoc = '';
 }
      .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
-     .out('CONST')
+     .where( __.out('CONST').out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
+     .where( __.out('CONST').out('VALUE').sideEffect{ valeur = it.get().value("fullcode")}.fold())
      .map{ 
-    x = ['name': it.get().vertices(OUT, 'NAME').next().value("fullcode"),
-         'value': it.get().vertices(OUT, 'VALUE').next().value("fullcode"),
+    x = ['name': name,
+         'value': valeur,
          "public":x_public,
          "protected":x_protected,
          "private":x_private,
-         'class': it.get().vertices(IN, 'CONST').next().vertices(IN, 'CONST').next().value("fullnspath"),
-         'phpdoc': phpdoc
+         'class': classe,
+         'phpdoc': phpdoc,
+         'line': line
          ];
 }
 
@@ -1250,7 +1251,7 @@ GREMLIN;
             }
 
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "'" .
-                       ', ' . $citId[$row['class']] .
+                       ', ' . $citId[$row['line'].$row['class']] .
                        ", '" . $visibility . "'" .
                        ", '" . $this->sqlite->escapeString($row['value']) . "'" .
                        ", '" . $this->sqlite->escapeString($row['phpdoc']) . "'" .
@@ -1263,7 +1264,7 @@ GREMLIN;
             $query = 'INSERT INTO classconstants ("id", "constant", "citId", "visibility", "value", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display("$total constants\n");
+        display("$total class constants\n");
 
         // Global Constants
         $this->sqlite->query('DROP TABLE IF EXISTS constants');
@@ -1320,7 +1321,7 @@ map{ ["name":name,
       "namespace": namespace, 
       "file": file, 
       "type":"define",
-       "phpdoc":phpdoc
+      "phpdoc":phpdoc
     ]; 
 }
 GREMLIN
@@ -1411,7 +1412,10 @@ CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           file STRING,
                           phpdoc STRING,
                           begin INTEGER,
-                          end INTEGER
+                          end INTEGER,
+                          line INTEGER,
+                          CONSTRAINT "unique" UNIQUE (function, line)
+
 )
 SQL
 );
@@ -1454,6 +1458,7 @@ GREMLIN
               ->raw(<<<GREMLIN
 map{ ["name":name, 
       "type":it.get().label().toString().toLowerCase(),
+      "line":it.get().value("line"),
       "file":file, 
       "namespace":namespace, 
       "fullnspath":fullnspath, 
@@ -1472,20 +1477,17 @@ GREMLIN
         $query = array();
         $total = 0;
         foreach($result->toArray() as $row) {
-            if (isset($methodIds[$row['fullnspath']])) {
-                continue; // skip double
-            }
             $methodIds[$row['fullnspath']] = ++$methodCount;
 
             $query[] = "($methodCount, '" . $this->sqlite->escapeString($row['name']) . "', '" . $this->sqlite->escapeString($row['type']) . "', 
                         '" . $this->files[$row['file']] . "', '" . $namespacesId[$row['namespace']] . "', 
-                        " . (int) $row['begin'] . ', ' . (int) $row['end'] . ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
+                        " . (int) $row['begin'] . ', ' . (int) $row['end'] . ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\', ' . (int) $row['line'] . ')';
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO functions ("id", "function", "type", "file", "namespaceId", "begin", "end", "phpdoc") VALUES ' . implode(', ', $query);
+            $query = 'REPLACE INTO functions ("id", "function", "type", "file", "namespaceId", "begin", "end", "phpdoc", "line") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total functions\n");
