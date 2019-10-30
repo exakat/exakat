@@ -122,6 +122,10 @@ class ExakatConfig extends Config {
             }
         }
         
+        if (isset($this->config['parallel_processing'])) {
+            $this->config['parallel_processing'] &= function_exists('pcntl_fork');
+        }
+        
         return str_replace(getcwd(), '.', $configFile);
     }
 }

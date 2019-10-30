@@ -543,10 +543,11 @@ class Load extends Tasks {
 
         $omittedFiles = $this->datastore->getCol('ignoredFiles', 'file');
 
-        if (function_exists('pcntl_fork')) {
+        if ($this->config->parallel_processing === true) {
             $pid = pcntl_fork();
             if ($pid === 0 ) {
                 $this->runCollector($omittedFiles);
+                display("Finished child\n");
                 exit(0);
             } else {
                 unset($this->gremlin);
@@ -562,6 +563,9 @@ class Load extends Tasks {
                     throw new NoSuchLoader($clientClass, $this->loaderList);
                 }
                 $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
+                display("Started waiting\n");
+                pcntl_wait($pid);
+                display("Finished waiting\n");
             }
         } else {
             $this->runCollector($omittedFiles);
