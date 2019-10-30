@@ -653,6 +653,15 @@ $exampleTxt
 
     private function build_analyzer_doc($analyzer, $a2themes) {
         $name = $analyzer;
+        $ini = file_get_contents("./human/en/$analyzer.ini");
+        if (preg_match_all('/\[example\d\]/', $ini, $r)) {
+            $distinct = array_count_values($r[0]);
+            $distinct = array_filter($distinct, function ($x) { return $x > 1;});
+            if (!empty($distinct)) {
+                print "$analyzer : double numbered examples\n";
+                print_r($distinct);
+            }
+        }
         $ini = parse_ini_file("./human/en/$analyzer.ini", true);
         $commandLine = $analyzer;
         
@@ -690,11 +699,12 @@ $exampleTxt
         } else {
             $rulesets = 'none';
         }
-        
+
         $examples = array();
         $issues_examples_section_list = array();
+        $previous = '';
         for($i = 0; $i < 10; $i++) {
-            if (isset($ini['example'.$i])) {
+            if (isset($ini["example$i"])) {
                 $issues_examples_section = '';
                 if (!isset($ini['example'.$i]['project'])) {
                     print 'Missing "project" in '.$analyzer.".ini\n";
@@ -707,6 +717,10 @@ $exampleTxt
                 $explain = $ini['example'.$i]['explain'];
                 $file = $ini['example'.$i]['file'];
                 $line = $ini['example'.$i]['line'];
+                if ($previous === "$file::$line") {
+                    print "Suspicious identical examples file/line in '$analyzer'\n";
+                }
+                $previous = "$file::$line";
                 $analyzer_anchor = $this->rst_anchor($ini['name']);
             
                 if (empty($issues_examples_section_list)){
@@ -733,7 +747,7 @@ SPHINX;
                 $issues_examples_section_list[] = $issues_examples_section;
             }
         }
-        
+
         $issues_examples_section = implode(PHP_EOL.'--------'.PHP_EOL.PHP_EOL, $issues_examples_section_list);
         
         $parameters = array();
@@ -842,7 +856,12 @@ SQL;
         }
         $inis = array();
         foreach($functions as $function) { 
-            $ini = parse_ini_file($function);
+            if (file_exists($function)) {
+                $ini = parse_ini_file($function);
+            } else {
+                $function = str_replace('.ini', '.json', $function);
+                $ini = json_decode(file_get_contents($function), true);
+            }
             if (!isset($ini['functions'])) { continue; }
             if (empty($ini['functions'])) { continue; }
             
