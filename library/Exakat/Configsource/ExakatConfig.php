@@ -121,9 +121,9 @@ class ExakatConfig extends Config {
                 $this->config['other_php_versions'][] = $version;
             }
         }
-        
+
         if (isset($this->config['parallel_processing'])) {
-            $this->config['parallel_processing'] &= function_exists('pcntl_fork');
+            $this->config['parallel_processing'] = ((bool) $this->config['parallel_processing']) && function_exists('pcntl_fork');
         }
         
         return str_replace(getcwd(), '.', $configFile);

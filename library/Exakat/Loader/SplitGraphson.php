@@ -101,10 +101,10 @@ class SplitGraphson extends Loader {
         $project_id = $res->toInt();
 
         $query = 'g.V().hasLabel("File").not(where( __.in("PROJECT"))).addE("PROJECT").from(__.V(' . $project_id . '));';
-        $res = $this->graphdb->query($query);
+        $this->graphdb->query($query);
 
         $query = 'g.V().hasLabel("Virtualglobal").not(where( __.in("GLOBAL"))).addE("GLOBAL").from(__.V(' . $project_id . '));';
-        $res = $this->graphdb->query($query);
+        $this->graphdb->query($query);
 
         $f = fopen('php://memory', 'r+');
         $total = 0;
@@ -168,6 +168,7 @@ SQL;
         if (empty($total)) {
             display('no definitions');
         } else {
+            display("loading $total definitions");
             $this->saveLinks($f);
             $chunk = 0;
             display("loaded $total definitions");
@@ -238,7 +239,7 @@ GREMLIN;
         $datastore->addRow('tokenCounts', $this->tokenCounts);
     }
 
-    public function saveFiles($exakatDir, $atoms, $links/*, $id0*/) {
+    public function saveFiles($exakatDir, $atoms, $links) {
         $fileName = 'unknown';
 
         $json = array();

@@ -31,14 +31,14 @@ class Collector extends Loader {
     private $functions  = array();
     private $constants  = array();
 
-    private $datastore = null;
+    private $datastore  = null;
 
     public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) {
         $this->datastore = Datastore::getDatastore($config);
     }
     
     public function finalize(array $relicat) {
-        $this->datastore->addRow('ignoredCit', $this->cit);
+        $this->datastore->addRow('ignoredCit',       $this->cit);
         $this->datastore->addRow('ignoredFunctions', $this->functions);
         $this->datastore->addRow('ignoredConstants', $this->constants);
     }
@@ -94,11 +94,8 @@ class Collector extends Loader {
             if (in_array($atom->atom, array('Defineconstant'))) {
                 $isDefine = true;
             }
-
-
         }
     }
-
 }
 
 ?>

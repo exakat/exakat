@@ -98,8 +98,8 @@ class Load extends Tasks {
     private $precedence   = null;
     private $phptokens    = null;
 
-    private $atomGroup = null;
-    private $calls = null;
+    private $atomGroup  = null;
+    private $calls      = null;
     private $theGlobals = array();
 
     private $namespace = '\\';
@@ -221,6 +221,9 @@ class Load extends Tasks {
                            'totalLoc'  => 0,
                            'files'     => 0,
                            'tokens'    => 0);
+
+    private $sqliteLocation = ':memory:';
+//    private $sqliteLocation = '/tmp/load.sqlite';
 
     public function __construct(Graph $gremlin, Config $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
@@ -434,8 +437,6 @@ class Load extends Tasks {
             $this->phptokens::T_GLOBAL                   => 'processGlobalVariable',
         );
 
-//        $this->sqliteLocation = '/tmp/load.sqlite';
-        $this->sqliteLocation = ':memory:';
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
         
@@ -550,40 +551,42 @@ class Load extends Tasks {
                 display("Finished child\n");
                 exit(0);
             } else {
-                unset($this->gremlin);
-                $this->gremlin = Graph::getConnexion($this->config);
+                $this->runProjectCore($files);
 
-                $this->callsDatabase = new \Sqlite3(':memory:');
-                $this->loader = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
-                $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
-
-                $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
-                display("Loading with $clientClass\n");
-                if (!class_exists($clientClass)) {
-                    throw new NoSuchLoader($clientClass, $this->loaderList);
-                }
-                $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
                 display("Started waiting\n");
                 pcntl_wait($pid);
                 display("Finished waiting\n");
             }
         } else {
+            display("Sequential processing\n");
+            
+            $this->runProjectCore($files);
             $this->runCollector($omittedFiles);
-
-            unset($this->gremlin);
-            $this->gremlin = Graph::getConnexion($this->config);
-
-            $this->callsDatabase = new \Sqlite3(':memory:');
-            $this->loader = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
-            $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
-
-            $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
-            display("Loading with $clientClass\n");
-            if (!class_exists($clientClass)) {
-                throw new NoSuchLoader($clientClass, $this->loaderList);
-            }
-            $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
         }
+
+        if (isset($progressBar)) {
+            echo $progressBar->advance();
+        }
+
+        return array('files'  => count($files),
+                     'tokens' => $nbTokens);
+    }
+    
+    private function runProjectCore($files) : void {
+        unset($this->gremlin);
+        $this->gremlin = Graph::getConnexion($this->config);
+
+        $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
+        $this->loader        = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
+        $this->calls         = new Calls($this->config->projects_root, $this->callsDatabase);
+        $this->theGlobals    = array();
+
+        $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
+        display("Loading with $clientClass\n");
+        if (!class_exists($clientClass)) {
+            throw new NoSuchLoader($clientClass, $this->loaderList);
+        }
+        $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
 
         $nbTokens = 0;
         if ($this->config->verbose && !$this->config->quiet) {
@@ -612,21 +615,12 @@ class Load extends Tasks {
             }
         }
         $this->loader->finalize($this->relicat);
-
-        if (isset($progressBar)) {
-            echo $progressBar->advance();
-        }
-
-        return array('files'  => count($files),
-                     'tokens' => $nbTokens);
     }
 
     private function runCollector($omittedFiles) {
-        $b = hrtime(\TIME_AS_NUMBER);
-
-        $this->callsDatabase = new \Sqlite3(':memory:');
-        $this->loader = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
-        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+        $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
+        $this->loader        = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
+        $this->calls         = new Calls($this->config->projects_root, $this->callsDatabase);
 
         $file_extensions = $this->config->file_extensions;
         $atomGroup = clone $this->atomGroup;
@@ -638,7 +632,7 @@ class Load extends Tasks {
                 if (!in_array($ext, $file_extensions, STRICT_COMPARISON)) {
                     continue;
                 }
-        
+
                 $this->processFile($file, $this->config->code_dir);
             } catch (CantCompileFile $e1) {
                 // Ignore
@@ -647,10 +641,9 @@ class Load extends Tasks {
             }
         }
         $this->loader->finalize($this->relicat);
-        $this->atomGroup = $atomGroup;
+        $this->atomGroup =  $atomGroup;
 
         $this->stats = $stats;
-        $e = hrtime(\TIME_AS_NUMBER);
     }
 
     private function processDir($dir) {
@@ -5023,6 +5016,7 @@ class Load extends Tasks {
         $phpDoc->code     = $this->phpDocs[$id + 1][1];
         $phpDoc->fullcode = $this->phpDocs[$id + 1][1];
         $phpDoc->token    = $this->getToken($this->phpDocs[$id + 1][0]);
+        unset($this->phpDocs[$id + 1]);
 
         $this->addLink($node, $phpDoc, 'PHPDOC');
     }
@@ -5957,6 +5951,10 @@ class Load extends Tasks {
             throw new LoadError( "Warning : options is not empty in $filename : " . count($this->options));
         }
 
+        if (!empty($this->phpDocs)) {
+            throw new LoadError( "Warning : phpDocs is not empty in $filename : " . count($this->phpDocs));
+        }
+
         if (($count = $this->contexts->getCount(Context::CONTEXT_NOSEQUENCE)) !== false) {
             throw new LoadError( "Warning : context for sequence is not back to 0 in $filename : it is " . $count . PHP_EOL);
         }
@@ -5972,6 +5970,7 @@ class Load extends Tasks {
         if (($count = $this->contexts->getCount(Context::CONTEXT_CLASS)) !== false) {
             throw new LoadError( "Warning : context for class is not back to 0 in $filename : it is " . $count . PHP_EOL);
         }
+
 
 /*
         // All node has one incoming or one outgoing link (outgoing or incoming).
