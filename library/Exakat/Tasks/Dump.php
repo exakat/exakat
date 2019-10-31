@@ -185,11 +185,6 @@ class Dump extends Tasks {
             $end = microtime(TIME_AS_NUMBER);
             $this->log->log( 'Collected Global Variables : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
-            $begin = microtime(TIME_AS_NUMBER);
-            $this->collectInclusions();
-            $end = microtime(TIME_AS_NUMBER);
-            $this->log->log( 'Collected Inclusion relationship : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-
             // Dev only
             if ($this->config->is_phar === Config::IS_NOT_PHAR) {
                 $begin = microtime(TIME_AS_NUMBER);
@@ -1028,12 +1023,12 @@ CREATE TABLE arguments (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         variadic INTEGER,
                         init STRING,
                         line INTEGER,
-                        typehint STRING,
-                        CONSTRAINT "ranking" UNIQUE (citId, methodId, rank, line)
+                        typehint STRING
                      )
 SQL
 );
-
+//                        ,CONSTRAINT "ranking" UNIQUE (citId, methodId, rank, line)
+// This fails with timeline-bundle
         $query = $this->newQuery('Method parameters');
         $query->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->inIs('ARGUMENT')
@@ -2843,41 +2838,6 @@ GREMLIN
         }
         
         return count($values);
-    }
-
-    private function collectInclusions() {
-        $this->sqlite->query('DROP TABLE IF EXISTS inclusions');
-        $this->sqlite->query(<<<'GREMLIN'
-CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                           including STRING,
-                           included STRING
-                        )
-GREMLIN
-);
-
-        $query = $this->newQuery('Including');
-        $query->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('included')
-              ->goToInstruction('File')
-              ->_as('including')
-              ->select(array('included'  => 'fullcode',
-                             'including' => 'fullcode'));
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        
-        if (empty($result->toArray())) {
-            return 0;
-        }
-
-        $valuesSQL = array();
-        foreach($result->toArray() as $row) {
-            $valuesSQL[] = "('" . $this->sqlite->escapeString($row['including']) . "', '" . $this->sqlite->escapeString($row['included']) . "') \n";
-        }
-
-        $query = 'INSERT INTO inclusions ("including", "included") VALUES ' . implode(', ', $valuesSQL);
-        $this->sqlite->query($query);
-
-        return count($valuesSQL);
     }
 
     private function collectGlobalVariables() {

@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Analyzer;
 
-class TypehintOrder extends Analyzer {
+class Typehintorder extends Analyzer {
     public function analyze() {
         // Store inclusionss of files within each other
         $this->analyzerTable = "typehintOrder";
@@ -35,18 +35,48 @@ CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
 
+        $excepted = array('\exception'                  ,
+                          '\datetime'                   ,
+                          '\datetimezone'               ,
+                          '\reflectionclass'            ,
+                          '\reflectionmethod'           ,
+                          '\arrayiterator'              ,
+                          '\stdclass'                   ,
+                          '\splfileinfo'                ,
+                          '\arrayobject'                ,
+                          '\recursiveiteratoriterator'  ,
+                          '\recursivedirectoryiterator' ,
+                          '\emptyiterator'              ,
+                          '\reflectionextension'        ,
+                          '\splfileobject'              ,
+                          '\directoryiterator'          ,
+                          '\pdo'                        ,
+                          '\reflectionobject'           ,
+                          '\reflectionproperty'         ,
+                          '\reflectionfunction'         ,
+                          '\reflectionextractor'        ,
+                          '\reflectionclassresource'    ,
+                          '\reflectionclassresourcetest',
+                          '\reflectionexception'        ,
+                          '\reflectionparameter'        ,
+                          '\reflectioncaster'           ,
+                         );
+        
+
         $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->_as('returned')
+              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
+              ->fullnspathIsNot($excepted)
               ->back('first')
               ->outIs('ARGUMENT')
               ->outIs('TYPEHINT')
-              ->atomIsNot(array('Void', 'Scalartypehint'))
+              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
+              ->fullnspathIsNot($excepted)
               ->_as('argument')
               ->select(array('argument' => 'fullnspath',
                              'returned' => 'fullnspath'));
-
-        $res = $this->prepareQuery(self::QUERY_TABLE);
+        $this->prepareQuery(self::QUERY_TABLE);
     }
 }
 

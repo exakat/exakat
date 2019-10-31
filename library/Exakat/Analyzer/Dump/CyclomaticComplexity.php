@@ -51,8 +51,6 @@ GREMLIN
         $this->analyzerName = 'CyclomaticComplexity';
 
         $this->prepareQuery(self::QUERY_ARRAYS);
-
-
     }
 }
 
