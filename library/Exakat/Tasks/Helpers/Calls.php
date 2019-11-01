@@ -31,8 +31,9 @@ class Calls {
     
     private $definitions = array();
     private $calls       = array();
+    private $globals     = array();
     
-    public function __construct($projects_root, \Sqlite3 $sqlite) {
+    public function __construct(string $projects_root, \Sqlite3 $sqlite) {
         $this->projects_root = $projects_root;
 
         $this->callsSqlite = $sqlite;
@@ -68,13 +69,13 @@ SQL;
         $this->callsSqlite->query($definitions);
     }
 
-    public function reset() {
+    public function reset() : void {
         $this->calls       = array();
         $this->definitions = array();
         $this->globals     = array();
     }
 
-    public function save() {
+    public function save() : void {
         if (!empty($this->calls)) {
             $query = 'INSERT INTO calls VALUES ' . implode(', ', $this->calls);
             $this->callsSqlite->query($query);
@@ -94,11 +95,11 @@ SQL;
         }
     }
 
-    public function addGlobal($origin, $destination) {
+    public function addGlobal(int $origin, int $destination) : void {
         $this->globals[] = "('{$origin}','{$destination}')";
     }
 
-    public function addCall($type, $fullnspath, $call) {
+    public function addCall(string $type, string $fullnspath, Atom $call) : void {
         if (empty($fullnspath)) {
             return;
         }
@@ -112,10 +113,6 @@ SQL;
                                         'Exit',
                                         ))) {
             return;
-        }
-        
-        if (!is_string($fullnspath)) {
-            throw new LoadError( 'Warning : fullnspath is not a string : it is ' . gettype($fullnspath) . PHP_EOL);
         }
 
         if ($type === 'class') {
@@ -131,7 +128,7 @@ SQL;
                            '{$call->id}')";
     }
 
-    public function addNoDelimiterCall($call) {
+    public function addNoDelimiterCall(Atom $call) : void {
         if (empty($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
@@ -181,7 +178,7 @@ SQL;
         }
     }
 
-    public function addDefinition($type, $fullnspath, $definition) {
+    public function addDefinition(string $type, string $fullnspath, Atom $definition) : void {
         if (empty($fullnspath)) {
             return;
         }
@@ -195,7 +192,7 @@ SQL;
                                  '{$definition->id}')";
     }
     
-    private function makeGlobalPath($fullnspath) {
+    private function makeGlobalPath(string $fullnspath) : string {
         if ($fullnspath === 'undefined') {
             $globalpath = '';
         } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
