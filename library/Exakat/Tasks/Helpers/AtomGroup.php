@@ -28,11 +28,11 @@ use Exakat\Tasks\Helpers\Property;
 class AtomGroup {
     private $atomCount = 0;
     
-    public function __construct($init = 0) {
+    public function __construct(int $init = 0) {
         $this->atomCount = $init;
     }
 
-    public function factory($atom, $line) {
+    public function factory(string $atom, int $line) : Atom {
         return new Atom(++$this->atomCount, $atom, $line);
     }
 }
