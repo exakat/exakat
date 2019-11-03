@@ -488,6 +488,10 @@ class Load extends Tasks {
             }
             
             try {
+                $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
+                $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
+                $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+
                 $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
                 display("Loading with $clientClass\n");
                 if (!class_exists($clientClass)) {
