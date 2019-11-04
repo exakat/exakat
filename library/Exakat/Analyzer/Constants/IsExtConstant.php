@@ -40,7 +40,7 @@ class IsExtConstant extends Analyzer {
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
             $ini = $this->load($inifile, 'constants');
-            
+
             if (!empty($ini[0])) {
                 $constants[] = $ini;
             }
@@ -52,7 +52,7 @@ class IsExtConstant extends Analyzer {
         }
         $constants = array_merge(...$constants);
         $constantsFullNs = makeFullNsPath($constants, true);
-        
+
         // based on fullnspath
         $this->analyzerIs('Constants/ConstantUsage')
              ->atomIsNot(array('Boolean', 'Null', 'String'))

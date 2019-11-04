@@ -2280,11 +2280,11 @@ GREMLIN
     protected function load($file, $property = null) {
         $inifile = "{$this->config->dir_root}/data/$file.ini";
         if (file_exists($inifile)) {
-            $ini = $this->loadIni("$file.ini", 'functions');
+            $ini = $this->loadIni("$file.ini", $property);
         } else {
             $inifile = "{$this->config->dir_root}/data/$file.json";
             if (file_exists($inifile)) {
-                $ini = $this->loadJson("$file.json", 'functions');
+                $ini = $this->loadJson("$file.json", $property);
             } else {
                 $ini = array();
             }

@@ -674,6 +674,8 @@ class Load extends Tasks {
         if (!class_exists($clientClass)) {
             throw new NoSuchLoader($clientClass, $this->loaderList);
         }
+        $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
+        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
         $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
 
         $nbTokens = 0;
