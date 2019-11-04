@@ -562,7 +562,7 @@ class Load extends Tasks {
                 display('Waiting for child');
                 pcntl_wait($pid);
                 $e = microtime(true);
-                display('Finished waiting for child : '.(($e - $b) * 1000).' ms');
+                display('Finished waiting for child : ' . (($e - $b) * 1000) . ' ms');
             }
         } else {
             display('Sequential processing');
@@ -627,7 +627,7 @@ class Load extends Tasks {
     private function runCollector($omittedFiles) {
         $b = hrtime(\TIME_AS_NUMBER);
 
-        $this->callsDatabase = new \Sqlite3($this->sqliteLocation.'2');
+        $this->callsDatabase = new \Sqlite3($this->sqliteLocation . '2');
         $this->loader = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
 
@@ -2844,7 +2844,7 @@ class Load extends Tasks {
         return $functioncall;
     }
 
-    private function processString() : Atom{
+    private function processString() : Atom {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
             return $this->processNsname();
         } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,

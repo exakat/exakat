@@ -44,7 +44,7 @@ class InitVariable extends DSL {
             }
             return new Command('sideEffect{ ' . implode(PHP_EOL, $gremlin) . ' }');
         } else {
-            assert(false, 'Wrong format for '.__METHOD__. '. Either string/value or array()/array()');
+            assert(false, 'Wrong format for ' . __METHOD__ . '. Either string/value or array()/array()');
         }
     }
 }

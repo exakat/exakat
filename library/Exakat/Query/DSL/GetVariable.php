@@ -48,9 +48,9 @@ class GetVariable extends DSL {
                 $this->assertVariable($v, self::VARIABLE_READ);
                 $gremlin[] = "\"{$name[$id]}\" :  $v";
             }
-            return new Command('map{ [' . implode(','.PHP_EOL, $gremlin) . '] }');
+            return new Command('map{ [' . implode(',' . PHP_EOL, $gremlin) . '] }');
         } else {
-            assert(false, 'Wrong format for '.__METHOD__. '. Either string/value or array()/array()');
+            assert(false, 'Wrong format for ' . __METHOD__ . '. Either string/value or array()/array()');
         }
     }
 }

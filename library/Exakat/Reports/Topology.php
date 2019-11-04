@@ -38,7 +38,7 @@ class Topology extends Reports {
             case 'Dump/NewOrder' :
                 $query = 'SELECT calling AS origin, called AS destination FROM newOrder';
                 break;
-            
+
             default : 
                 display("Call this report with -P Dump/Typehintorder or -P Dump/NewOrder");
                 return '';
@@ -58,7 +58,7 @@ class Topology extends Reports {
                 unset($nodes[$id]);
                 continue;
             }
-        
+
             if (!isset($names[$origin] )) {
                 $names[] = $origin;
             }
@@ -67,11 +67,11 @@ class Topology extends Reports {
                 $names[] = $destination;
             }
         }
-        
+
         $names = array_flip($names);
-        
+
         $dot = new Dot();
-        
+
         $dot->setOptions('nodes', 'shape', 'square');
         $dot->setOptions('nodes', 'style', 'filled');
         $dot->setOptions('node', 'colorscheme', 'paired12');
@@ -88,16 +88,15 @@ class Topology extends Reports {
                             );
         $atoms = implode('', $atoms);
         $names = $names2;
-        
+
         $links = array();
         foreach($nodes as ['origin' => $origin, 'destination' => $destination]) {
             $dot->addLink($names[$destination], $names[$origin]);
         }
-        
+
         $links = array_unique($links);
-        
         $links = implode('', $links);
-        
+
         return (string) $dot;
     }
 }

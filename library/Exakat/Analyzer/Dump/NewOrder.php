@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NewOrder extends Analyzer {
     public function analyze() {
         // Store inclusionss of files within each other
-        $this->analyzerTable = "newOrder";
+        $this->analyzerTable = 'newOrder';
         $this->analyzerSQLTable = <<<'SQL'
 CREATE TABLE newOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                          calling STRING,

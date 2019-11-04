@@ -39,7 +39,7 @@ class Shellcommands extends Analyzer {
         $this->atomIs('Shell');
         $this->prepareQuery();
 
-        // shell_exec('ls -1') 
+        // shell_exec('ls -1')
         $this->atomFunctionIs(array('\\exec', '\\shell_exec', '\\system', '\\proc_open'))
              ->outWithRank('ARGUMENT')
              ->atomIs(array('Concatenation', 'Heredoc', 'String'), self::WITH_CONSTANTS);

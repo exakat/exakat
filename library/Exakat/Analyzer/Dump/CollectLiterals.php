@@ -75,7 +75,7 @@ GREMLIN;
        }
 */
 
-            $this->analyzerTable = "stringEncodings";
+            $this->analyzerTable = 'stringEncodings';
             $this->analyzerSQLTable = <<<SQL
 CREATE TABLE stringEncodings (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 encoding STRING,

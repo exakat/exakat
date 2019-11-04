@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Typehintorder extends Analyzer {
     public function analyze() {
         // Store inclusionss of files within each other
-        $this->analyzerTable = "typehintOrder";
+        $this->analyzerTable = 'typehintOrder';
         $this->analyzerSQLTable = <<<'SQL'
 CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                               argument STRING,

@@ -27,7 +27,7 @@ use Exakat\Data\Methods;
 
 class CouldTypeWithArray extends Analyzer {
     public function analyze() {
-        // function foo($a) { $a[1] = 2; $a[] = 2} 
+        // function foo($a) { $a[1] = 2; $a[] = 2}
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
@@ -56,7 +56,7 @@ class CouldTypeWithArray extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // function foo($a) { chr($a); } 
+        // function foo($a) { chr($a); }
         $natives = self::$methods->getFunctionsByArgType('array', Methods::STRICT);
 
         // function foo($a) { }; only foo(array())

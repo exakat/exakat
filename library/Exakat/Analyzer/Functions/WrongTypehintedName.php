@@ -29,7 +29,7 @@ class WrongTypehintedName extends Analyzer {
         $scalars   = array('array',  'int',              'string'  , 'bool',            );
         $variables = array('$array', '$int', '$integer', '$string' , '$bool', '$boolean', '$void', '$null');
         
-        // function(string $int, array $boolean) 
+        // function(string $int, array $boolean)
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')
              ->atomIs('Scalartypehint')

@@ -45,7 +45,7 @@ class CallbackNeedsReturn extends Analyzer {
 
         $returningFunctions = self::$methods->getFunctionsByReturn();
         $voidReturningFunctions = array_merge($returningFunctions['void'],
-                                              array_map(function($x) { return trim($x, '\\');}, $returningFunctions['void']),
+                                              array_map(function ($x) { return trim($x, '\\');}, $returningFunctions['void']),
                                              );
 
         foreach($ini as $position => $functions) {
@@ -93,7 +93,7 @@ class CallbackNeedsReturn extends Analyzer {
             //the callback declares void as return types
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
-                 // Could be : string, array, closure, arrow-function, 
+                 // Could be : string, array, closure, arrow-function,
                  ->inIs('DEFINITION')
                  ->outIs('TYPEHINT')
                  ->fullnspath('\\void')

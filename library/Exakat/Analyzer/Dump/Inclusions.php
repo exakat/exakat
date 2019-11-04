@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Inclusions extends Analyzer {
     public function analyze() {
         // Store inclusionss of files within each other
-        $this->analyzerTable = "inclusions";
+        $this->analyzerTable = 'inclusions';
         $this->analyzerSQLTable = <<<'SQL'
 CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            including STRING,

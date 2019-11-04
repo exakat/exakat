@@ -37,8 +37,8 @@ class NextCalls extends DSL {
         
         print $times;
         
-        // Starting from Parameter, going to next parameter 
-        // Need a number of executions? 
+        // Starting from Parameter, going to next parameter
+        // Need a number of executions?
         
         if ($times === 0) {
             return new Command(Query::NO_QUERY);

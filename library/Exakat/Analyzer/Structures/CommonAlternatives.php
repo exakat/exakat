@@ -28,13 +28,13 @@ class CommonAlternatives extends Analyzer {
         // some expressions are common between two then / else block
         public function analyze() {
         
-        $omit = array('For', 
-                      'Foreach', 
-                      'Ifthen', 
-                      'Dowhile', 
-                      'While', 
-                      'Switch', 
-                      'Closure', 
+        $omit = array('For',
+                      'Foreach',
+                      'Ifthen',
+                      'Dowhile',
+                      'While',
+                      'Switch',
+                      'Closure',
                       'Arrowfunction',
                       'Continue',
                       'Break',

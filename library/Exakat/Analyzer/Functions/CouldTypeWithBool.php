@@ -69,7 +69,7 @@ class CouldTypeWithBool extends Analyzer {
 
              ->outIs('NAME')
              ->outIs('DEFINITION')
-             ->hasIn(array('NOT', 'CONDITION')) 
+             ->hasIn(array('NOT', 'CONDITION'))
              ->back('first');
         $this->prepareQuery();
 
@@ -120,7 +120,7 @@ class CouldTypeWithBool extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // function foo($a) { chr($a); } 
+        // function foo($a) { chr($a); }
         $natives = self::$methods->getFunctionsByArgType('bool', Methods::STRICT);
 
         $this->atomIs('Parameter')

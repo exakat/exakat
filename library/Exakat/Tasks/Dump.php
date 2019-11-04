@@ -351,8 +351,8 @@ where( __.until( hasLabel("Project") ).repeat(
 )
 GREMLIN
 ,array(), array())
-            ->getVariable(array("fullcode_", "file", "ligne", "theNamespace", "theClass", "theFunction", "analyzer"),
-                          array("fullcode",  "file", "line" , "namespace",    "class",    "function",    "analyzer"));
+            ->getVariable(array('fullcode_', 'file', 'ligne', 'theNamespace', 'theClass', 'theFunction', 'analyzer'),
+                          array('fullcode',  'file', 'line' , 'namespace',    'class',    'function',    'analyzer'));
             $query->prepareRawQuery();
             $res = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
 
@@ -610,7 +610,7 @@ SQL;
                                                  )');
 
         $query = $this->newQuery('collectVariables');
-        $query->atomIs(array("Variable", "Variablearray", "Variableobject"), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Variable', 'Variablearray', 'Variableobject'), Analyzer::WITHOUT_CONSTANTS)
               ->tokenIs('T_VARIABLE')
               ->initVariable(array('name',                       'type'),
                              array('it.get().value("fullcode")', 'it.get().label()'))
@@ -717,7 +717,7 @@ GREMLIN;
             }
             
             $cit[] = $row;
-            $citId[$row['line'].$row['fullnspath']] = ++$citCount;
+            $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
             
             ++$total;
         }
@@ -759,7 +759,7 @@ GREMLIN;
             }
             
             $cit[] = $row;
-            $citId[$row['line'].$row['fullnspath']] = ++$citCount;
+            $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
 
             ++$total;
         }
@@ -803,7 +803,7 @@ GREMLIN;
             
             $row['implements'] = array(); // always empty
             $cit[] = $row;
-            $citId[$row['line'].$row['fullnspath']] = ++$citCount;
+            $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
 
             ++$total;
         }
@@ -821,13 +821,13 @@ GREMLIN;
                     $namespaceId = 1;
                 }
 
-                $query[] = '(' . $citId[$row['line'].$row['fullnspath']] .
+                $query[] = '(' . $citId[$row['line'] . $row['fullnspath']] .
                            ", '" . $this->sqlite->escapeString($row['name']) . "'" .
                            ', ' . $namespaceId .
                            ', ' . (int) $row['abstract'] .
                            ',' . (int) $row['final'] .
                            ", '" . $row['type'] . "'" .
-                           ', \'\' '.
+                           ', \'\' ' .
                            ', ' . (int) $row['begin'] .
                            ', ' . (int) $row['end'] .
                            ", '" . $this->files[$row['file']] . "'" .
@@ -848,13 +848,13 @@ GREMLIN;
                 }
 
                 foreach($row['implements'] as $implements) {
-                    $citIds = preg_grep('/^\d+\\\\'.addslashes(mb_strtolower($implements)).'$/', array_keys($citId));
+                    $citIds = preg_grep('/^\d+\\\\' . addslashes(mb_strtolower($implements)) . '$/', array_keys($citId));
 
                     if (empty($citIds)) {
-                        $query[] = '(null, ' . $citId[$row['line'].$row['fullnspath']] . ", '" . $this->sqlite->escapeString($implements) . "', 'implements')";
+                        $query[] = '(null, ' . $citId[$row['line'] . $row['fullnspath']] . ", '" . $this->sqlite->escapeString($implements) . "', 'implements')";
                     } else {
                         foreach($citIds as $c) {
-                            $query[] = '(null, ' . $citId[$row['line'].$row['fullnspath']] . ", ".$citId[$c].", 'implements')";
+                            $query[] = '(null, ' . $citId[$row['line'] . $row['fullnspath']] . ', ' . $citId[$c] . ", 'implements')";
                         }
                     }
                 }
@@ -872,14 +872,14 @@ GREMLIN;
                 }
                 
                 foreach($row['uses'] as $uses) {
-                    $citIds = preg_grep('/^\d+'.addslashes(mb_strtolower($uses)).'$/', array_keys($citId));
+                    $citIds = preg_grep('/^\d+' . addslashes(mb_strtolower($uses)) . '$/', array_keys($citId));
 
                     if (empty($citIds)) {
-                        $query[] = '(null, \'' . $citId[$row['line'].$row['fullnspath']] . "', '" . $this->sqlite->escapeString($uses) . "', 'use')";
+                        $query[] = '(null, \'' . $citId[$row['line'] . $row['fullnspath']] . "', '" . $this->sqlite->escapeString($uses) . "', 'use')";
                         ++$total;
                     } else {
                         foreach($citIds as $c) {
-                            $query[] = '(null, \'' . $citId[$row['line'].$row['fullnspath']] . "', ".$citId[$c].", 'use')";
+                            $query[] = '(null, \'' . $citId[$row['line'] . $row['fullnspath']] . "', " . $citId[$c] . ", 'use')";
                             ++$total;
                         }
                     }
@@ -987,7 +987,7 @@ GREMLIN;
                 $visibility = '';
             }
 
-            if (!isset($citId[$row['classline'].$row['class']])) {
+            if (!isset($citId[$row['classline'] . $row['class']])) {
                 continue;
             }
             $methodId = $row['class'] . '::' . mb_strtolower($row['name']);
@@ -996,7 +996,7 @@ GREMLIN;
             }
             $methodIds[$methodId] = ++$methodCount;
 
-            $query[] = '(' . $methodCount . ", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['classline'].$row['class']] .
+            $query[] = '(' . $methodCount . ", '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['classline'] . $row['class']] .
                         ', ' . (int) $row['static'] . ', ' . (int) $row['final'] . ', ' . (int) $row['abstract'] . ", '" . $visibility . "'" .
                         ', \'' . $this->sqlite->escapeString($row['returntype']) . '\', ' . (int) $row['begin'] . ', ' . (int) $row['end'] .
                         ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
@@ -1074,9 +1074,9 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($result->toArray() as $row) {
-            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classline'].$row['classe']] . ', ' . $methodIds[$row['classe'] . '::' . $row['methode']] .
+            $query[] = "('" . $row['name'] . "', " . (int) $row['rank'] . ', ' . (int) $citId[$row['classline'] . $row['classe']] . ', ' . $methodIds[$row['classe'] . '::' . $row['methode']] .
                         ', \'' . $this->sqlite->escapeString($row['init']) . '\', ' . (int) $row['reference'] . ', ' . (int) $row['variadic'] .
-                        ', \'' . $row['typehint'] .'\', ' . (int) $row['line'] . ')';
+                        ', \'' . $row['typehint'] . '\', ' . (int) $row['line'] . ')';
 
             ++$total;
         }
@@ -1159,7 +1159,7 @@ GREMLIN;
             }
 
             // If we haven't found any definition for this class, just ignore it.
-            if (!isset($citId[$row['classline'].$row['class']])) {
+            if (!isset($citId[$row['classline'] . $row['class']])) {
                 continue;
             }
             $propertyId = $row['class'] . '::' . $row['name'];
@@ -1168,7 +1168,7 @@ GREMLIN;
             }
             $propertyIds[$propertyId] = ++$propertyCount;
 
-            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['classline'].$row['class']] .
+            $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "', " . $citId[$row['classline'] . $row['class']] .
                         ", '" . $visibility . "', '" . $this->sqlite->escapeString($row['value']) . "', " . (int) $row['static'] .
                         ', \'' . $this->sqlite->escapeString($row['phpdoc']) . '\')';
 
@@ -1246,7 +1246,7 @@ GREMLIN;
             }
 
             $query[] = "(null, '" . $this->sqlite->escapeString($row['name']) . "'" .
-                       ', ' . $citId[$row['line'].$row['class']] .
+                       ', ' . $citId[$row['line'] . $row['class']] .
                        ", '" . $visibility . "'" .
                        ", '" . $this->sqlite->escapeString($row['value']) . "'" .
                        ", '" . $this->sqlite->escapeString($row['phpdoc']) . "'" .

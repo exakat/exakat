@@ -205,7 +205,7 @@ class Extension extends Analyzer {
         if (!empty($ini->properties)) {
             $properties = (array) $ini->properties;
             foreach($properties as &$list) {
-                $list = array_map(function($x) { return "\$$x";}, $list);
+                $list = array_map(function ($x) { return "\$$x";}, $list);
             }
 
             $this->atomIs('Staticproperty')

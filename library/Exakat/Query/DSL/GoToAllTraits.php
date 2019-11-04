@@ -34,7 +34,7 @@ class GoToAllTraits extends DSL {
         } elseif ($self === Analyzer::INCLUDE_SELF) {
             $command = new Command('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").hasLabel("Trait").filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} ).emit( ).times(' . self::$MAX_LOOPING . ').hasLabel("Trait")');
         } else {
-            assert(false, "No such configuration for ".__CLASS__." : use EXCLUDE_SELF or INCLUDE_SELF");
+            assert(false, 'No such configuration for ' . __CLASS__ . ' : use EXCLUDE_SELF or INCLUDE_SELF');
         }
 
         $command->setSack(Command::SACK_ARRAY);

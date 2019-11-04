@@ -64,7 +64,7 @@ class Stubs extends Reports {
 
         $code->map('classconstants', function ($classconstants) {
             $phpdoc = ($classconstants['phpdoc'] == ' ') ? '' : self::INDENTATION . $classconstants['phpdoc'];
-            return $phpdoc . self::INDENTATION . self::INDENTATION . ($classconstants['visibility'] ? $classconstants['visibility'].' ' : '') . "const $classconstants[constant] = $classconstants[value];";
+            return $phpdoc . self::INDENTATION . self::INDENTATION . ($classconstants['visibility'] ? $classconstants['visibility'] . ' ' : '') . "const $classconstants[constant] = $classconstants[value];";
         });
         $code->reduce('classconstants', function ($carry, $item) {
             return $carry . "\n" . $item;

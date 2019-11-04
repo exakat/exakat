@@ -197,7 +197,7 @@ SQL;
         $res = $this->sqlite->query($query);
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            array_collect_by($return, (int) $row['position'], '\\'.mb_strtolower($row['function']));
+            array_collect_by($return, (int) $row['position'], '\\' . mb_strtolower($row['function']));
         }
 
         return $return;

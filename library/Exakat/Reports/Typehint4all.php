@@ -61,7 +61,7 @@ class Typehint4all extends Reports {
             $row['fullcode'] = trim($row['fullcode'], '&');
             if (preg_match('/^(\$.*?) = /', $row['fullcode'], $r)) {
                 $row['fullcode'] = $r[1];
-            } 
+            }
             $maxLine = max($maxLine, $row['line'], strlen($row['fullcode']));
             $maxTitle = max($maxTitle, strlen($titleCache[$row['analyzer']]), strlen($row['file']), strlen($row['fullcode']));
             
@@ -74,7 +74,7 @@ class Typehint4all extends Reports {
         }
 
         foreach($perfile as $file => &$issues) {
-            usort($issues, function($a, $b) { return $a['line'] <=> $b['line'] ?: $a['fullcode'] <=> $b['fullcode'] ?: $a['analyzer'] <=> $b['analyzer'] ;});
+            usort($issues, function ($a, $b) { return $a['line'] <=> $b['line'] ?: $a['fullcode'] <=> $b['fullcode'] ?: $a['analyzer'] <=> $b['analyzer'] ;});
             
             $previous = '';
 
