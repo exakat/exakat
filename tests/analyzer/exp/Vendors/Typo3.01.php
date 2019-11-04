@@ -1,11 +1,9 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('GeneralUtility( )',
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('Utility( )',
                      );
 
 ?>
