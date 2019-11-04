@@ -31,7 +31,7 @@ class Topology extends Reports {
 
     public function _generate($analyzerList) {
         switch($this->config->program) {
-            case 'Dump/Typehintorder' : 
+            case 'Dump/Typehintorder' :
                 $query = 'SELECT argument AS origin, returned AS destination FROM typehintOrder';
                 break;
 
@@ -39,8 +39,8 @@ class Topology extends Reports {
                 $query = 'SELECT calling AS origin, called AS destination FROM newOrder';
                 break;
 
-            default : 
-                display("Call this report with -P Dump/Typehintorder or -P Dump/NewOrder");
+            default :
+                display('Call this report with -P Dump/Typehintorder or -P Dump/NewOrder');
                 return '';
         }
     
@@ -50,8 +50,9 @@ class Topology extends Reports {
             $nodes[] = $row;
         }
 
+
         $names = array();
-        foreach($nodes as $id => ['origin' => $origin, 'destination' => $destination]) {
+        foreach($nodes as $id => list('origin' => $origin, 'destination' => $destination)) {
             if (strpos($origin, '@') !== false ||
                 strpos($destination, '@') !== false
                 ) {
@@ -77,10 +78,10 @@ class Topology extends Reports {
         $dot->setOptions('node', 'colorscheme', 'paired12');
 
         $names2 = array();
-        $atoms = array_map(function($id, $name) use ($dot, &$names2) { 
+        $atoms = array_map(function ($id, $name) use ($dot, &$names2) {
             $d = explode('\\', $name);
-            $name2 = array_pop($d); 
-            $color = 1 + $id % 11; 
+            $name2 = array_pop($d);
+            $color = 1 + $id % 11;
             $names2[$name] = $dot->addNode($name2, array('fillcolor' => $color));
         },
                             array_values($names),
@@ -90,7 +91,7 @@ class Topology extends Reports {
         $names = $names2;
 
         $links = array();
-        foreach($nodes as ['origin' => $origin, 'destination' => $destination]) {
+        foreach($nodes as list('origin' => $origin, 'destination' => $destination)) {
             $dot->addLink($names[$destination], $names[$origin]);
         }
 
