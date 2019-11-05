@@ -103,7 +103,6 @@ GREMLIN
              ->back('first');
 
         $this->prepareQuery();
-return;
 
         // function foo(?string $s = 3)
         $this->atomIs(self::$FUNCTIONS_ALL)

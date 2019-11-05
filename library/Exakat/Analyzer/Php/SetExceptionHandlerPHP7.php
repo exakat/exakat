@@ -24,6 +24,12 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class SetExceptionHandlerPHP7 extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/SetStringMethodDefinition',
+                     'Complete/SetArrayClassDefinition',
+                    );
+    }
+
     public function analyze() {
         // With function name in a string
         $this->atomFunctionIs('\set_exception_handler')
@@ -68,6 +74,7 @@ class SetExceptionHandlerPHP7 extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIsNot('\\throwable')
+             ->atomIsNot('Void')
              ->back('first');
         $this->prepareQuery();
 
