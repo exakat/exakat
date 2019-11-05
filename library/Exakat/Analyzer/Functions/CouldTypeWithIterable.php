@@ -64,6 +64,23 @@ class CouldTypeWithIterable extends Analyzer {
              ->is('variadic', true)
              ->back('first');
         $this->prepareQuery();
+
+        // function foo($a) { bar($a); } function bar(iterable $b) {}
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->back('first')
+
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->savePropertyAs('rank', 'ranked')
+             ->inIs('ARGUMENT')
+             ->inIs('DEFINITION')
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->outIs('TYPEHINT')
+             ->fullnspathIs('\\iterable')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

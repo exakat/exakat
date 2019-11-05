@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('function foo1($callable) { /**/ } ',
+$expected     = array('$callable',
                      );
 
-$expected_not = array('function foo2(callable $AlreadyCallable) { /**/ } ',
-                      'function foo3(callable $AlreadyCallable2) { /**/ } ',
-                      'function foo4($dunno) { /**/ } ',
+$expected_not = array('callable $AlreadyCallable',
+                      'callable $AlreadyCallable2',
+                      '$dunno',
                      );
 
 ?>

@@ -1,12 +1,10 @@
 <?php
 
-$expected     = array('function OneAndOk($b) { /**/ } ',
-                      'function cc($id, $servers) { /**/ } ',
+$expected     = array('$b',
+                      '$servers',
                      );
 
-$expected_not = array('public function cc($id, $servers) { /**/ } ',
-                      'function OneButNotArg( ) { /**/ } ',
-                      'function None( ) { /**/ } ',
+$expected_not = array('$id',
                      );
 
 ?>
