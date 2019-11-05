@@ -25,7 +25,6 @@ namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Tasks\Helpers\Lock;
-use Exakat\Config;
 use Exakat\Exceptions\NeedsAnalyzerThema;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;

@@ -22,8 +22,6 @@
 
 namespace Exakat\Tasks\Helpers;
 
-use Exakat\Tasks\Load;
-use Exakat\Tasks\Helpers\Property;
 
 class AtomGroup {
     private $atomCount = 0;

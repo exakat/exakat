@@ -23,7 +23,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NeedsAnalyzerThema;
 use Exakat\GraphElements;

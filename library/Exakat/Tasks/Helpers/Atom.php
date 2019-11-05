@@ -23,7 +23,6 @@
 namespace Exakat\Tasks\Helpers;
 
 use Exakat\Tasks\Load;
-use Exakat\Tasks\Helpers\Property;
 
 class Atom {
     const STRING_MAX_SIZE = 500;

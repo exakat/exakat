@@ -23,13 +23,10 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\NoSuchDir;
 use Exakat\Exceptions\NoSuchAnalyzer;
-use Exakat\Tasks\CleanDb;
-use Exakat\Tasks\Clean;
 
 class Test extends Tasks {
     const CONCURENCE = self::NONE;

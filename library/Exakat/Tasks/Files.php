@@ -26,7 +26,6 @@ use Exakat\Phpexec;
 use Exakat\Config;
 use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoCodeInProject;
-use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Vcs\Vcs;

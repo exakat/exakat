@@ -23,9 +23,7 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 use Exakat\Reports\Reports;
-use Exakat\Analyzer\Rulesets;
 
 class Catalog extends Tasks {
     const CONCURENCE = self::ANYTIME;

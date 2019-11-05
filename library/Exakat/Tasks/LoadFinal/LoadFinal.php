@@ -24,14 +24,11 @@
 namespace Exakat\Tasks\LoadFinal;
 
 use Exakat\Analyzer\Rulesets;
-use Exakat\Analyzer\Analyzer;
 use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Data\Methods;
 use Exakat\Query\Query;
-use Exakat\Query\DSL\DSL;
 use Exakat\Data\Dictionary;
-use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Datastore;
 use Exakat\Log;

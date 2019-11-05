@@ -23,9 +23,7 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 use Exakat\Exceptions\NoSuchProject;
-use Exakat\Exceptions\NoSuchFormat;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNotInited;

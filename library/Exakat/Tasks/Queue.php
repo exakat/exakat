@@ -23,11 +23,7 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
-use Exakat\Tasks\Clean;
-use Exakat\Tasks\Jobqueue;
 use Exakat\Exceptions\NoJobqueueStarted;
-use Exakat\Exceptions\NoSuchFile;
 
 class Queue extends Tasks {
     const CONCURENCE = self::ANYTIME;

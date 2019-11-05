@@ -23,7 +23,6 @@
 
 namespace Exakat\Tasks\Helpers;
 
-use Exakat\Exceptions\LoadError;
 
 class Calls {
     private $callsSqlite   = null;

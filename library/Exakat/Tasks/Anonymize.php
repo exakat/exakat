@@ -23,7 +23,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 use Exakat\Exceptions\NoSuchDir;
 use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\NoSuchProject;

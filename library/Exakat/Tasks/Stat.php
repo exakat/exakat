@@ -23,7 +23,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 use Exakat\Stats;
 
 class Stat extends Tasks {

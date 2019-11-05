@@ -23,7 +23,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoDump;
 use Exakat\Exceptions\ProjectNeeded;

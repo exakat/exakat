@@ -23,7 +23,6 @@
 namespace Exakat\Tasks\Helpers;
 
 use Exakat\Exceptions\NoPrecedence;
-use Exakat\Phpexec;
 
 class Precedence {
     public const WITH_SELF = true;

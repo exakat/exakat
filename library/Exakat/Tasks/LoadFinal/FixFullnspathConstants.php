@@ -24,7 +24,6 @@
 namespace Exakat\Tasks\LoadFinal;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Query\Query;
 
 class FixFullnspathConstants extends LoadFinal {
     public function run() {

@@ -24,7 +24,6 @@
 namespace Exakat\Tasks\LoadFinal;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Query\Query;
 
 class SpotPHPNativeFunctions extends LoadFinal {
     private $PHPfunctions = array();

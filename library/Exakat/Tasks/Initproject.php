@@ -28,7 +28,6 @@ use Exakat\Configsource\ProjectConfig;
 use Exakat\Datastore;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNeeded;
-use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\VcsError;
 use Exakat\Project;
 use Exakat\Vcs\Vcs;

@@ -23,7 +23,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 
 class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;

@@ -26,9 +26,6 @@ namespace Exakat\Tasks;
 use Exakat\Configsource\ProjectConfig;
 use Exakat\Configsource\DotExakatYamlConfig;
 use Exakat\Exceptions\NoSuchProject;
-use Exakat\Exceptions\ProjectNeeded;
-use Exakat\Exceptions\HelperException;
-use Exakat\Project;
 use Exakat\Config as Configuration;
 
 class Config extends Tasks {

@@ -23,10 +23,8 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 use Exakat\Project as ProjectName;
 use Exakat\Exceptions\InvalidProjectName;
-use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 
 class Show extends Tasks {
