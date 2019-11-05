@@ -1,4 +1,4 @@
-Version 2.0.1 (Danyuan Star of Honesty and Chasity, coming up)
+Version 2.0.2 (Military Star of the North Pole, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,24 @@ Version 2.0.1 (Danyuan Star of Honesty and Chasity, coming up)
     + 
 + Tokenizer
     + 
+
+Version 2.0.1 (Danyuan Star of Honesty and Chasity, 2019-11-04)
++ Architecture
+    + Adding more typehint
+    + Created new class to build Dot files
+    + Cleaned double examples
+    + Dump handles multiple definitions for constants, class, trait, functions.
++ Report
+    + Added new Topology report
+    + Added new Type hint topology sort
+    + Stubs : added class constant visibility
++ Analysis
+    + New analysis : Report argument whose name clashes with typehint
+    + New analysis : Report properties that are insufficiently typed
+    + Moved 'Inclusions' to Dump/
+    + Added steps to find original and relayed arguments
++ Tokenizer
+    + Fixed paralellisation bug in Load
 
 Version 2.0.1 (Military Star of the North Pole, 2019-10-28)
 + Architecture
