@@ -22,7 +22,6 @@
 
 namespace Exakat\Vcs;
 
-use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\NoSuchDir;
 
 class Copy extends Vcs {
