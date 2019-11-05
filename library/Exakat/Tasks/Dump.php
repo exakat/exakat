@@ -2940,8 +2940,10 @@ SQL;
             $values[] = "('$row[name]', '$row[type]', $row[total], $row[expression], '{$this->sqlite->escapeString($row['file'])}') ";
         }
 
-        $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES ' . implode(', ', $values);
-        $this->sqlite->query($query);
+        if (!empty($values)) {
+            $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES ' . implode(', ', $values);
+            $this->sqlite->query($query);
+        }
 
         display( count($values) . ' readability index');
     }
