@@ -36,11 +36,9 @@ Extensions are bundled as PHP archives (`.phar` file), installed in the `ext` fo
 
 
 
-List of extensions : there are 15 extensions
+List of extensions : there are 13 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
-* :ref:`CodeIgniter <extension-codeigniter>`
-* :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
@@ -299,83 +297,6 @@ This extension includes one ruleset : Cakephp.
 
 
 Cakephp reports
-__________________________________________________
-
-This extension includes no specific report. Use generic reports, like Text to access the results.
-
-
-
-.. _extension-codeigniter:
-
-CodeIgniter
-###########
-
-This is the Code igniter extension for Exakat. 
-
-Code igniter CodeIgniter is a powerful PHP framework with a very small footprint, built for developers who need a simple and elegant toolkit to create full-featured web applications.
-
-
-
-* **Home page** : `https://codeigniter.com/ <https://codeigniter.com/>`_
-* **Extension page** : `https://github.com/exakat/Exakat4Codeigniter <https://github.com/exakat/Exakat4Codeigniter>`_
-
-CodeIgniter analysis
-__________________________________________________
-
-This extension includes 0 analyzers.
-
-* 
-
-
-CodeIgniter rulesets
-__________________________________________________
-
-This extension includes one ruleset : Codeigniter.
-
-
-CodeIgniter reports
-__________________________________________________
-
-This extension includes no specific report. Use generic reports, like Text to access the results.
-
-
-
-.. _extension-codeigniter:
-
-Codeigniter
-###########
-
-This is the Code igniter extension for Exakat. 
-
-Code igniter CodeIgniter is a powerful PHP framework with a very small footprint, built for developers who need a simple and elegant toolkit to create full-featured web applications.
-
-
-
-* **Home page** : `https://codeigniter.com/ <https://codeigniter.com/>`_
-* **Extension page** : `https://github.com/exakat/Exakat4Codeigniter <https://github.com/exakat/Exakat4Codeigniter>`_
-
-Codeigniter analysis
-__________________________________________________
-
-This extension includes 8 analyzers.
-
-* Codeigniter 2.0 Compatibility (Codeigniter/Codeigniter_2_0)
-* Codeigniter 2.1 Compatibility (Codeigniter/Codeigniter_2_1)
-* Codeigniter 2.2 Compatibility (Codeigniter/Codeigniter_2_2)
-* Codeigniter 3.0 Compatibility (Codeigniter/Codeigniter_3_0)
-* Codeigniter 3.1 Compatibility (Codeigniter/Codeigniter_3_1)
-* Codeigniter Constant Usage (Codeigniter/CodeigniterConstantUsage)
-* Codeigniter Function Usage (Codeigniter/CodeigniterFunctionsUsage)
-* Codeigniter Usage (Codeigniter/CodeigniterUsage)
-
-
-Codeigniter rulesets
-__________________________________________________
-
-This extension includes one ruleset : Codeigniter.
-
-
-Codeigniter reports
 __________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.

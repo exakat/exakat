@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 29 Oct 2019 11:02:14 +0000
-.. comment: Generation hash : d0450e28d299ada3539197c4aabfea9540a6e985
+.. comment: Generation date : Tue, 05 Nov 2019 06:26:18 +0000
+.. comment: Generation hash : 3e9ed99deb45ace5cce378e62ead05d4a634a4d7
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -3603,15 +3603,25 @@ In particular, ``NULL`` is a valid decoded JSON response. If you want to avoid m
 
 See also `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_, `json_last_error <http://php.net/json_last_error>`_.
 
-+-------------+----------------------+
-| Short name  | Structures/CheckJson |
-+-------------+----------------------+
-| Rulesets    | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Major                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always check after JSON operation : encoding or decoding.
+* Add a call to json_last_error()
+* Configure operations to throw an exception upon error (``JSON_THROW_ON_ERROR``), and catch it.
+
++-------------+-----------------------------------------+
+| Short name  | Structures/CheckJson                    |
++-------------+-----------------------------------------+
+| Rulesets    | :ref:`Analyze`                          |
++-------------+-----------------------------------------+
+| Severity    | Major                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Quick (30 mins)                         |
++-------------+-----------------------------------------+
+| Examples    | :ref:`woocommerce-structures-checkjson` |
++-------------+-----------------------------------------+
 
 
 
@@ -5712,7 +5722,7 @@ That argument may be typed with ``array``.
    ?>
 
 
-See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 
 Suggestions
@@ -5752,7 +5762,7 @@ That argument may be typed with ``bool``.
    ?>
 
 
-See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 
 Suggestions
@@ -5792,7 +5802,7 @@ That argument may be typed with ``int``.
    ?>
 
 
-See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 
 Suggestions
@@ -5832,7 +5842,7 @@ That argument may be typed with ``string``.
    ?>
 
 
-See also `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 
 Suggestions
@@ -9260,17 +9270,17 @@ Suggestions
 * Remove the reference from the foreach
 * Actually modify the content of the reference
 
-+-------------+----------------------------------------------------------+
-| Short name  | Structures/ForeachReferenceIsNotModified                 |
-+-------------+----------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                           |
-+-------------+----------------------------------------------------------+
-| Severity    | Minor                                                    |
-+-------------+----------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                          |
-+-------------+----------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-foreachreferenceisnotmodified` |
-+-------------+----------------------------------------------------------+
++-------------+-------------------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/ForeachReferenceIsNotModified                                                                          |
++-------------+-------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                                                    |
++-------------+-------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                             |
++-------------+-------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                   |
++-------------+-------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolibarr-structures-foreachreferenceisnotmodified`, :ref:`vanilla-structures-foreachreferenceisnotmodified` |
++-------------+-------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11663,6 +11673,76 @@ See also `Class Abstraction <http://php.net/abstract>`_.
 +-------------+------------------------------------+
 | Time To Fix | Quick (30 mins)                    |
 +-------------+------------------------------------+
+
+
+
+.. _insufficient-property-typehint:
+
+Insufficient Property Typehint
+##############################
+
+
+The typehint used for a class property doesn't cover all it usage.
+
+The typehint is insufficient when a undefined method is called, or if members are access while the typehint is an interface.
+
+.. code-block:: php
+
+   <?php
+   
+   class A {
+       function a1() {}
+   }
+   
+   // PHP 7.4 and more recent
+   class B {
+       private A $a = null;
+       
+       function b2() {
+           // this method is available in A
+           $this->a->a1();
+           // this method is NOT available in A
+           $this->a->a2();
+       }
+   }
+   
+   // Supported by all PHP versions
+   class C {
+       private $a = null;
+   
+       function __construct(A $a) {
+           $this->a = $a;
+       }
+       
+       function b2() {
+           // this method is available in A
+           $this->a->a1();
+           // this method is NOT available in A
+           $this->a->a2();
+       }
+   }
+   
+   ?>
+
+
+This analysis relies on typehinted properties, as introduced in PHP 7.4. It also relies on typehinted assignations at construct time : the typehint of the assigned argument will be used as the property typehint. Getters and setters are not considered here. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Change the typehint to match the actual usage of the object in the class.
+
++-------------+--------------------------------------+
+| Short name  | Classes/InsufficientPropertyTypehint |
++-------------+--------------------------------------+
+| Rulesets    | :ref:`ClassReview`                   |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
 
 
 
@@ -22698,41 +22778,6 @@ Suggestions
 
 
 
-.. _reuse-variable:
-
-Reuse Variable
-##############
-
-
-A variable is already holding the content that is re-calculated later. Use the cached value.
-
-.. code-block:: php
-
-   <?php
-   
-   function foo($a) {
-       $b = strtolower($a);
-       
-       // strtolower($a) is already calculated in $b. Just reuse the value.
-       if (strtolower($a) === 'c') {
-           doSomething();
-       }
-   }
-   
-   ?>
-
-+-------------+--------------------------+
-| Short name  | Structures/ReuseVariable |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Suggestions`       |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
-
-
-
 .. _safe-curl-options:
 
 Safe Curl Options
@@ -27259,15 +27304,25 @@ Here, `break <http://www.php.net/manual/en/control-structures.break.php>`_ may a
    
    ?>
 
-+-------------+---------------------------------+
-| Short name  | Structures/UnconditionLoopBreak |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the loop and call the content of the loop once.
+
++-------------+----------------------------------------------------------------------------------------------------+
+| Short name  | Structures/UnconditionLoopBreak                                                                    |
++-------------+----------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                                     |
++-------------+----------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                              |
++-------------+----------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                    |
++-------------+----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`livezilla-structures-unconditionloopbreak`, :ref:`mediawiki-structures-unconditionloopbreak` |
++-------------+----------------------------------------------------------------------------------------------------+
 
 
 
@@ -33271,6 +33326,53 @@ Suggestions
 +-------------+-----------------------------------+
 | Time To Fix | Quick (30 mins)                   |
 +-------------+-----------------------------------+
+
+
+
+.. _wrong-typehinted-name:
+
+Wrong Typehinted Name
+#####################
+
+
+The parameter name doesn't reflect the typehint used.
+
+There are no restriction on parameter names, except its unicity in the signature. Yet, using a scalar typehint as the name for another typehinted value is just misleading. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(string $array,
+                int $int) {
+       // doSomething()
+   }
+   
+   function bar(array $strings) {
+       // doSomething()
+   }
+   
+   ?>
+
+
+The comparison relies on exact names : calling an array a list of ``strings`` is OK with this analysis.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Rename
+
++-------------+------------------------------------------------------------------+
+| Short name  | Functions/WrongTypehintedName                                    |
++-------------+------------------------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Semantics` |
++-------------+------------------------------------------------------------------+
+| Severity    | Minor                                                            |
++-------------+------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                  |
++-------------+------------------------------------------------------------------+
 
 
 

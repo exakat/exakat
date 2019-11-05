@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 29 Oct 2019 11:02:14 +0000
-.. comment: Generation hash : d0450e28d299ada3539197c4aabfea9540a6e985
+.. comment: Generation date : Tue, 05 Nov 2019 06:26:18 +0000
+.. comment: Generation hash : 3e9ed99deb45ace5cce378e62ead05d4a634a4d7
 
 
 .. _analyze:
@@ -487,7 +487,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methodes, properties, constants.
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -507,6 +507,7 @@ Total : 35 analysis
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Identical Methods <identical-methods>`
+* :ref:`Insufficient Property Typehint <insufficient-property-typehint>`
 * :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
@@ -532,7 +533,7 @@ Coding Conventions
 
 This ruleset centralizes all analysis related to coding conventions. Sometimes, those are easy to extract with static analysis, and so here they are. No all o them are available.
 
-Total : 26 analysis
+Total : 27 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -559,6 +560,7 @@ Total : 26 analysis
 * :ref:`Wrong Case Namespaces <wrong-case-namespaces>`
 * :ref:`Wrong Class Name Case <wrong-class-name-case>`
 * :ref:`Wrong Function Name Case <wrong-function-name-case>`
+* :ref:`Wrong Typehinted Name <wrong-typehinted-name>`
 * :ref:`Yoda Comparison <yoda-comparison>`
 
 .. _compatibilityphp53:
@@ -1272,7 +1274,7 @@ Semantics
 
 This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
 
-Total : 8 analysis
+Total : 9 analysis
 
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Duplicate Literal <duplicate-literal>`
@@ -1282,6 +1284,7 @@ Total : 8 analysis
 * :ref:`Similar Integers <similar-integers>`
 * :ref:`Variables With One Letter Names <variables-with-one-letter-names>`
 * :ref:`Weird Array Index <weird-array-index>`
+* :ref:`Wrong Typehinted Name <wrong-typehinted-name>`
 
 .. _suggestions:
 
@@ -1290,7 +1293,7 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 86 analysis
+Total : 85 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1342,7 +1345,6 @@ Total : 86 analysis
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
-* :ref:`Reuse Variable <reuse-variable>`
 * :ref:`Set Aside Code <set-aside-code>`
 * :ref:`Should Deep Clone <should-deep-clone>`
 * :ref:`Should Have Destructor <should-have-destructor>`
@@ -1450,7 +1452,7 @@ Total : 18 analysis
 php-cs-fixable
 ++++++++++++++
 
-
+[PHP-CS-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) is a tool to automatically fix PHP Coding Standards issues. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with php-cs-fixer. 
 
 Total : 11 analysis
 

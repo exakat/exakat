@@ -36,6 +36,7 @@ There are several reports that may be extracted from Exakat :
 * `Stubs`_
 * `Text`_
 * `Top10`_
+* `Topology Order`_
 * `Uml`_
 * `Xml`_
 * `Yaml`_
@@ -1611,6 +1612,27 @@ The Top 10 report is based on the 'Top 10 classic PHP traps' presentation. You c
 Top10 is a HTML report format.
 
 Top10 depends on the following theme : Top10.
+
+Topology Order
+______________
+
+This represents a topological order in the code.
+
+Topology displays all dependencies between code structures. Such dependencies lead to a code hierachy, which is presented here.
+
+There are currently two topology available:
+
++ Typehint Order : it represents the order in which classes are organized, based on argument and return type.
++ New Order : it represents the order in which classes are instantiated, with new.
+
+
+
+.. image:: images/report.topology.png
+    :alt: Example of a Topology Order report (0)
+
+Topology Order is a DOT report format.
+
+Topology Order doesn't depend on themes.
 
 Uml
 ___

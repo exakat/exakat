@@ -1933,28 +1933,46 @@ Dolibarr
 
 :ref:`foreach-reference-is-not-modified`, in htdocs/product/reassort.php:364. 
 
-$data is read for its 
+$wh is an array, and is read for its index 'id', but it is not modified. The reference sign is too much.
 
 .. code-block:: php
 
-    foreach ($this->_parser->data as &$row) {
-                    foreach ($row as &$data) {
-                        $len = strlen($data);
-                        // check if it begins and ends with single quotes
-                        // if it does, then it double quotes may not be the enclosure
-                        if ($len>=2 && $data[0] == "'" && $data[$len-1] == "'") {
-                            $beginEndWithSingle = true;
-                            break;
-                        }
-                    }
-                    if ($beginEndWithSingle) {
-                        break;
-                    }
-                    $depth++;
-                    if ($depth > $this->_max_depth) {
-                        break;
-                    }
-                }
+    if($nb_warehouse>1) {
+        foreach($warehouses_list as &$wh) {
+    
+            print '<td class=right>';
+            print empty($product->stock_warehouse[$wh['id']]->real) ? '0' : $product->stock_warehouse[$wh['id']]->real;
+            print '</td>';
+        }
+    }
+
+
+--------
+
+
+.. _vanilla-structures-foreachreferenceisnotmodified:
+
+Vanilla
+^^^^^^^
+
+:ref:`foreach-reference-is-not-modified`, in applications/vanilla/models/class.discussionmodel.php:944. 
+
+$discussion is also an object : it doesn't need any reference to be modified. And, it is not modified, but only read.
+
+.. code-block:: php
+
+    foreach ($result as $key => &$discussion) {
+        if (isset($this->_AnnouncementIDs)) {
+            if (in_array($discussion->DiscussionID, $this->_AnnouncementIDs)) {
+                unset($result[$key]);
+                $unset = true;
+            }
+        } elseif ($discussion->Announce && $discussion->Dismissed == 0) {
+            // Unset discussions that are announced and not dismissed
+            unset($result[$key]);
+            $unset = true;
+        }
+    }
 
 Useless Return
 ==============
@@ -6826,6 +6844,58 @@ $Xa may only amount to $iX2, though the expression looks weird.
 
     if ( $X > $iX2 ) { $Xa = $X-($X-$iX2); $Ya = $iY1+($X-$iX2); } else { $Xa = $X; $Ya = $iY1; }
 
+Unconditional Break In Loop
+===========================
+
+.. _livezilla-structures-unconditionloopbreak:
+
+Livezilla
+^^^^^^^^^
+
+:ref:`unconditional-break-in-loop`, in wp-admin/includes/misc.php:74. 
+
+Only one row is read from the DBManager, and the rest is ignored. The result has no more than one result, basedd on the `LIMIT 1` clause in the SQL. The while loop may be removed.
+
+.. code-block:: php
+
+    $result = DBManager::Execute(true, "SELECT * FROM `" . DB_PREFIX . DATABASE_STATS_AGGS . "` WHERE `month`>0 AND ((`year`='" . DBManager::RealEscape(date("Y")) . "' AND `month`<'" . DBManager::RealEscape(date("n")) . "') OR (`year`<'" . DBManager::RealEscape(date("Y")) . "')) AND (`aggregated`=0 OR `aggregated`>" . (time() - 300) . ") AND `day`=0 ORDER BY `year` ASC,`month` ASC LIMIT 1;");
+            if ($result)
+                while ($row = DBManager::FetchArray($result)) {
+                    if (empty($row["aggregated"])) {
+                        DBManager::Execute(true, "UPDATE `" . DB_PREFIX . DATABASE_STATS_AGGS . "` SET `aggregated`=" . time() . " WHERE `year`=" . $row["year"] . " AND `month`=" . $row["month"] . " AND `day`=0 LIMIT 1;");
+                        $this->AggregateMonth($row["year"], $row["month"]);
+                    }
+                    return false;
+                }
+
+
+--------
+
+
+.. _mediawiki-structures-unconditionloopbreak:
+
+Mediawiki
+^^^^^^^^^
+
+:ref:`unconditional-break-in-loop`, in includes/htmlform/HTMLFormField.php:138. 
+
+The final break is useless : the execution has already reached the end of the loop.
+
+.. code-block:: php
+
+    for ( $i = count( $thisKeys ) - 1; $i >= 0; $i-- ) {
+    			$keys = array_merge( array_slice( $thisKeys, 0, $i ), $nameKeys );
+    			$data = $alldata;
+    			foreach ( $keys as $key ) {
+    				if ( !is_array( $data ) || !array_key_exists( $key, $data ) ) {
+    					continue 2;
+    				}
+    				$data = $data[$key];
+    			}
+    			$testValue = (string)$data;
+    			break;
+    		}
+
 Could Be Else
 =============
 
@@ -7030,29 +7100,24 @@ Here, the parent is called last. Givent that $title is defined in the same class
 PrestaShop
 ^^^^^^^^^^
 
-:ref:`parent-first`, in wp-admin/includes/misc.php:74. 
+:ref:`parent-first`, in controllers/admin/AdminPatternsController.php:30. 
 
 A good number of properties are set in the current object even before the parent AdminController(Core) is called. 'table' and 'lang' acts as default values for the parent class, as it (the parent class) would set them to another default value. Many properties are used, but not defined in the current class, nor its parent. This approach prevents the constructor from requesting too many arguments. Yet, as such, it is difficult to follow which of the initial values are transmitted via protected/public properties rather than using the __construct() call.
 
 .. code-block:: php
 
-    class AdminWebserviceControllerCore extends AdminController
+    class AdminPatternsControllerCore extends AdminController
     {
-        /** this will be filled later */
-        public $fields_form = array('webservice form');
-        protected $toolbar_scroll = false;
+        public $name = 'patterns';
     
         public function __construct()
         {
             $this->bootstrap = true;
-            $this->table = 'webservice_account';
-            $this->className = 'WebserviceKey';
-            $this->lang = false;
-            $this->edit = true;
-            $this->delete = true;
-            $this->id_lang_default = Configuration::get('PS_LANG_DEFAULT');
+            $this->show_toolbar = false;
+            $this->context = Context::getContext();
     
             parent::__construct();
+        }
 
 Invalid Regex
 =============
@@ -7165,7 +7230,7 @@ This code looks like ``($options & DatabaseInterface::QUERY_STORE) == DatabaseIn
 HuMo-Gen
 ^^^^^^^^
 
-:ref:`identical-on-both-sides`, in libraries/classes/DatabaseInterface.php:323. 
+:ref:`identical-on-both-sides`, in include/person_cls.php:73. 
 
 In that long logical expression, $personDb->pers_cal_date is tested twice
 
@@ -7692,7 +7757,7 @@ The empty closure returns `null`. The array_flip() array has now all its values 
 Phpdocumentor
 ^^^^^^^^^^^^^
 
-:ref:`callback-needs-return`, in core-bundle/src/Resources/contao/modules/ModuleQuicklink.php:91. 
+:ref:`callback-needs-return`, in src/phpDocumentor/Plugin/ServiceProvider.php:24. 
 
 The array_walk() function is called on the plugin's list. Each element is registered with the application, but is not used directly : this is for later. The error mechanism is to throw an exception : this is the only expected feedback. As such, no return is expected. May be a 'foreach' loop would be more appropriate here, but this is syntactic sugar.
 
@@ -7846,6 +7911,27 @@ This code actually loads the file, join it, then split it again. file() would be
 .. code-block:: php
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
+Check JSON
+==========
+
+.. _woocommerce-structures-checkjson:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`check-json`, in includes/admin/helper/class-wc-helper-plugin-info.php:66. 
+
+In case the body is an empty string, this will be correctly decoded, but will yield an object with an empty-named property.
+
+.. code-block:: php
+
+    $results = json_decode( wp_remote_retrieve_body( $request ), true );
+    		if ( ! empty( $results ) ) {
+    			$response = (object) $results;
+    		}
+    
+    		return $response;
 
 Bad Constants Names
 ===================
@@ -8063,7 +8149,7 @@ lame_binary_path is a static property, but it is accessed as a normal property i
 HuMo-Gen
 ^^^^^^^^
 
-:ref:`wrong-access-style-to-property`, in wp-admin/includes/misc.php:74. 
+:ref:`wrong-access-style-to-property`, in include/securimage/securimage.php:3065. 
 
 lame_binary_path is a static property, but it is accessed as a normal property in the exception call, while it is checked with a valid syntax.
 
@@ -8963,32 +9049,27 @@ $line is build in several steps, then then final version is added to $content. I
 ThinkPHP
 ^^^^^^^^
 
-:ref:`avoid-concat-in-loop`, in include/export_utils.php:433. 
+:ref:`avoid-concat-in-loop`, in ThinkPHP/Common/functions.php:720. 
 
-The  foreach loop prepares the 'getControllerRoute' call, then, accumulates all the resulting strings in $content. It would be much faster to make $content an array, and implode it once after the loop. 
+The foreach loop appends the $name and builds a fully qualified name. 
 
 .. code-block:: php
 
-    foreach ($controllers as $controller) {
-                $controller = basename($controller, '.php');
-    
-                $class = new \ReflectionClass($namespace . '\' . $module . '\' . $layer . '\' . $controller);
-    
-                if (strpos($layer, '\')) {
-                    // 多级控制器
-                    $level      = str_replace(DIRECTORY_SEPARATOR, '.', substr($layer, 11));
-                    $controller = $level . '.' . $controller;
-                    $length     = strlen(strstr($layer, '\', true));
-                } else {
-                    $length = strlen($layer);
-                }
-    
-                if ($suffix) {
-                    $controller = substr($controller, 0, -$length);
-                }
-    
-                $content .= $this->getControllerRoute($class, $module, $controller);
+    if (!C('APP_USE_NAMESPACE')) {
+            $class = parse_name($name, 1);
+            import($module . '/' . $layer . '/' . $class . $layer);
+        } else {
+            $class = $module . '\' . $layer;
+            foreach ($array as $name) {
+                $class .= '\' . parse_name($name, 1);
             }
+            // 导入资源类库
+            if ($extend) {
+                // 扩展资源
+                $class = $extend . '\' . $class;
+            }
+        }
+        return $class . $layer;
 
 Use pathinfo() Arguments
 ========================
@@ -9541,7 +9622,7 @@ Property Variable Confusion
 
 .. _phpipam-structures-propertyvariableconfusion:
 
-phpipam
+PhpIPAM
 ^^^^^^^
 
 :ref:`property-variable-confusion`, in functions/classes/class.Admin.php:16. 
@@ -10433,7 +10514,7 @@ $objMethod argument is used to call a function, a method or a localmethod. The t
 PrestaShop
 ^^^^^^^^^^
 
-:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
+:ref:`could-be-typehinted-callable`, in controllers/admin/AdminImportController.php:1147. 
 
 $funcname is tested with is_callable() before being used as a method. Typehint callable would reduce the size of the code. 
 
@@ -10479,7 +10560,7 @@ Default values may be a literal (1, 'abc', ...), or a constant : global or class
 Typo3
 ^^^^^
 
-:ref:`add-default-value`, in wp-admin/includes/misc.php:74. 
+:ref:`add-default-value`, in typo3/sysext/indexed_search/Classes/FileContentParser.php:821. 
 
 $extension could get a default value to handle default situations : for example, a file is htm format by default, unless better known. Also, the if/then structure could get a 'else' clause, to handle unknown situations : those are situations where the extension is provided but not known, in particular when the icon is missing in the storage folder.
 

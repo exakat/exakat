@@ -117,6 +117,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Phpcity
   * Sarb
   * Exakatvendors
+  * Topology
 
 
 Supported PHP Extensions
@@ -306,11 +307,9 @@ Supported Frameworks
 
 Frameworks, components and libraries are supported via Exakat extensions.
 
-List of extensions : there are 15 extensions
+List of extensions : there are 13 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
-* :ref:`CodeIgniter <extension-codeigniter>`
-* :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Melis <extension-melis>`
@@ -343,9 +342,11 @@ A number of applications were scanned in order to find real life examples of pat
 * `FuelCMS <https://www.getfuelcms.com/>`_
 * `HuMo-Gen <http://humogen.com/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
+* Livezilla
 * `Magento <https://magento.com/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
+* Mediawiki
 * `NextCloud <https://nextcloud.com/>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
@@ -374,7 +375,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `opencfp <https://github.com/opencfp/opencfp>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
-* phpipam
 * `shopware <https://www.shopware.com/>`_
 * `xataface <http://xataface.com/>`_
 
@@ -440,9 +440,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
-* 2.0.1
+* 2.0.2
 
-  * Classes/InsufficientPropertyTypehint (Classes/InsufficientPropertyTypehint)
+  * Dump/Inclusions (Dump/Inclusions ; Dump)
+  * Dump/NewOrder (Dump/NewOrder ; Unassigned)
+  * Dump/ParameterArgumentsLinks (Dump/ParameterArgumentsLinks ; Unassigned)
+  * Insufficient Property Typehint (Classes/InsufficientPropertyTypehint)
+  * Typehint Order (Dump/TypehintOrder ; Unassigned)
+  * Wrong Typehinted Name (Functions/WrongTypehintedName ; Coding Conventions, Semantics)
 
 * 1.9.9
 
@@ -573,7 +578,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Scalar Are Not Arrays (Php/ScalarAreNotArrays ; Analyze, CompatibilityPHP74)
   * Serialize Magic Method (Php/SerializeMagic ; Internal)
   * Similar Integers (Type/SimilarIntegers ; Coding Conventions, Semantics)
-  * Structures/MoveInsideFunction (Structures/MoveInsideFunction ; Unassigned)
   * Unbinding Closures (Functions/UnbindingClosures ; CompatibilityPHP74)
   * array_key_exists() Works On Arrays (Php/ArrayKeyExistsWithObjects ; Analyze, CompatibilityPHP74)
 
@@ -600,7 +604,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.8.6
 
-  * Classes/UndefinedClassConstants (Classes/UndefinedClassConstants ; Internal)
   * Dependant Abstract Classes (Classes/DependantAbstractClass ; Analyze, ClassReview)
   * Infinite Recursion (Structures/InfiniteRecursion ; Analyze)
   * Modules/IncomingData (Modules/IncomingData ; Internal)
@@ -995,7 +998,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Double array_flip() (Performances/DoubleArrayFlip ; Performances)
   * Fallback Function (Functions/FallbackFunction ; Appinfo)
   * Find Key Directly (Structures/GoToKeyDirectly ; Under Work)
-  * Reuse Variable (Structures/ReuseVariable ; Suggestions)
+  * Reuse Variable (Structures/ReuseVariable ; Under Work)
   * Useless Catch (Exceptions/UselessCatch)
 
 * 1.1.3
@@ -2331,8 +2334,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2606,9 +2609,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <https://www.php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2653,8 +2655,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2841,7 +2843,6 @@ List of external links mentionned in this documentation.
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -3362,6 +3363,7 @@ ___________
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IdenticalMethods";
+|   analyzer[] = "Classes/InsufficientPropertyTypehint";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoParent";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
@@ -3402,6 +3404,7 @@ __________________
 |   analyzer[] = "Constants/ConstRecommended";
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Functions/WrongCase";
+|   analyzer[] = "Functions/WrongTypehintedName";
 |   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
 |   analyzer[] = "Namespaces/WrongCase";
 |   analyzer[] = "Php/CloseTags";
@@ -4185,6 +4188,7 @@ _________
 |   analyzer[] = "Arrays/WeirdIndex";
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Functions/ParameterHiding";
+|   analyzer[] = "Functions/WrongTypehintedName";
 |   analyzer[] = "Php/ClassFunctionConfusion";
 |   analyzer[] = "Structures/PropertyVariableConfusion";
 |   analyzer[] = "Type/DuplicateLiteral";
@@ -4273,7 +4277,6 @@ ___________
 |   analyzer[] = "Structures/PHP7Dirname";
 |   analyzer[] = "Structures/PossibleIncrement";
 |   analyzer[] = "Structures/RepeatedPrint";
-|   analyzer[] = "Structures/ReuseVariable";
 |   analyzer[] = "Structures/SetAside";
 |   analyzer[] = "Structures/ShouldUseForeach";
 |   analyzer[] = "Structures/ShouldUseMath";
@@ -4370,7 +4373,7 @@ __________
 .. _ruleset_ini_php-cs-fixable:
 
 php-cs-fixable
-
+[PHP-CS-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) is a tool to automatically fix PHP Coding Standards issues. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with php-cs-fixer. 
 ______________
 
 | [php-cs-fixable]
