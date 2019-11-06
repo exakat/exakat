@@ -36,20 +36,17 @@ class Config extends Tasks {
 
         // May be in-code!!
         if ($this->config->inside_code === Configuration::INSIDE_CODE) {
-                $projectConfig = new DotExakatYamlConfig();
-                $projectConfig->loadConfig($project);
+            $projectConfig = new DotExakatYamlConfig();
+            $projectConfig->loadConfig($project);
+        } elseif ($this->config->project === null) {
+            $projectConfig = new ProjectConfig($this->config->projects_root);
         } else {
-            if ($this->config->project === null) {
-                $projectConfig = new ProjectConfig($this->config->projects_root);
-            } else {
-                if (!file_exists("{$this->config->projects_root}/projects/$project")) {
-                    throw new NoSuchProject($this->config->project);
-                }
-
-                $projectConfig = new ProjectConfig($this->config->projects_root);
-                $projectConfig->loadConfig($project);
+            if (!file_exists("{$this->config->projects_root}/projects/$project")) {
+                throw new NoSuchProject($this->config->project);
             }
-        
+
+            $projectConfig = new ProjectConfig($this->config->projects_root);
+            $projectConfig->loadConfig($project);
         }
         
         print $projectConfig->getConfig($this->config->dir_root);

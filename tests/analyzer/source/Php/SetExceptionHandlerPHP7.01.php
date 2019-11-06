@@ -30,7 +30,7 @@ function cfoo2($e) {}
 function cfoo3(Stdclass $e) {}
 
 class foo { function bar(\Exception $e) {} }
-class foo2 { function bar($e) {} }
+class foo2 { static function bar($e) {} }
 class foo3 { function bar(Stdclass $e) {} }
 
 ?>
