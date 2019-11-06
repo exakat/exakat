@@ -40,6 +40,7 @@ class CallbackNeedsReturn extends Analyzer {
                                             '\forward_static_call',
                                             '\register_shutdown_function',
                                             '\register_tick_function',
+                                            '\spl_autoload_register',
                                             )
                                       );
 
