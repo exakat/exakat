@@ -40,13 +40,14 @@ class WrittenOnlyVariable extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('DEFINITION')
-                     ->optional(
-                        $this->side()
-                             ->inIs(array('VARIABLE', 'OBJECT'))
-                             ->prepareSide()
-                     )
-                     ->is('isRead', true)
+                     ->raw(<<<'GREMLIN'
+coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
+          __.filter{ true; }
+        )
+GREMLIN
+)                     ->is('isRead', true)
               )
+              
               // variable is read in a compact()
              ->not(
                 $this->side()
@@ -58,12 +59,12 @@ class WrittenOnlyVariable extends Analyzer {
                 $this->side()
                      ->outIs('DEFINITION')
                      ->atomIs(self::$VARIABLES_USER)
-                     ->optional(
-                        $this->side()
-                             ->inIs(array('VARIABLE', 'OBJECT'))
-                             ->prepareSide()
-                     )
-                     ->is('isModified', true)
+                     ->raw(<<<'GREMLIN'
+coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
+          __.filter{ true; }
+        )
+GREMLIN
+)                     ->is('isModified', true)
               )
               ->outIs('DEFINITION')
               ->atomIs(self::$VARIABLES_USER);
