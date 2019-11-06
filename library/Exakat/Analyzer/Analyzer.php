@@ -2236,7 +2236,7 @@ GREMLIN
 
         if (!isset($cache[$fullpath])) {
             foreach($ini as &$values) {
-                if (isset($values[0]) && empty($values[0])) {
+                if (empty($values[0])) {
                     $values = '';
                 }
             }

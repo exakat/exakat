@@ -4787,15 +4787,15 @@ HTML;
 HTML;
         }
 
-        $list = implode("\n", $list);
-        $list = <<<HTML
+        $listHtml = implode("\n", $list);
+        $listHtml = <<<HTML
         <div class="sidebar">
-$list
+$listHtml
         </div>
 HTML;
 
         $html = $this->getBasedPage($section->source);
-        $html = $this->injectBloc($html, 'APPINFO', $list);
+        $html = $this->injectBloc($html, 'APPINFO', $listHtml);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $this->putBasedPage($section->file, $html);
     }

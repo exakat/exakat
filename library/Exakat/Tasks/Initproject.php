@@ -93,65 +93,93 @@ class Initproject extends Tasks {
         $dotProject          = ".$project";
         if (empty($repositoryURL)) {
             $vcs = new None($dotProject, "$tmpPath/code");
+            $projectName = $project;
         } else {
             $vcsClass = Vcs::getVcs($this->config);
             $vcs = new $vcsClass($dotProject, "$tmpPath/code");
-        }
- 
-        if (empty($repositoryURL)) {
-            $projectName = $project;
-        } elseif ($this->config->symlink === true) {
-            $projectName = basename($repositoryURL);
-        } elseif ($this->config->svn === true) {
-            $projectName = basename($repositoryURL);
-            if (in_array($projectName, array('trunk', 'code'))) {
-                $projectName = basename(dirname($repositoryURL));
-                if (in_array($projectName, array('trunk', 'code'))) {
-                    $projectName = basename(dirname($repositoryURL, 2));
-                }
-            }
-        } elseif ($this->config->git === true) {
-            $projectName = basename($repositoryURL);
-            $projectName = str_replace('.git', '', $projectName);
             
-            if (!empty($this->config->branch) &&
-                $this->config->branch !== 'master') {
-                $repositoryBranch =  $this->config->branch;
-                $repositoryTag =  '';
-            } elseif (!empty($this->config->tag)) {
-                $repositoryBranch =  '';
-                $repositoryTag =  $this->config->tag;
-            } else {
-                $repositoryBranch =  '';
-                $repositoryTag =  '';
-            }
-        } elseif ($this->config->cvs === true) {
-            $projectName = basename($repositoryURL);
-        } elseif ($this->config->copy === true) {
-            $projectName = basename($repositoryURL);
-        } elseif ($this->config->bzr === true) {
-            list(, $projectName) = explode(':', $repositoryURL);
-        } elseif ($this->config->hg === true) {
-            $projectName = basename($repositoryURL);
-        } elseif ($this->config->zip === true) {
-            $projectName = basename($repositoryURL);
-            $projectName = str_replace('.zip', '', $projectName);
-        } elseif ($this->config->rar === true) {
-            $projectName = basename($repositoryURL);
-            $projectName = str_replace('.rar', '', $projectName);
-        } elseif ($this->config->tgz === true) {
-            $projectName = basename($repositoryURL);
-            $projectName = str_replace(array('.tgz', '.tar.gz'), '', $projectName);
-        } elseif ($this->config->composer === true) {
-            $projectName = str_replace('/', '_', $repositoryURL);
- 
-            // Updating config.ini to include the vendor directory
-            $include_dirs[] = "/vendor/$repositoryURL";
-        } else {
-            $projectName = basename($repositoryURL);
-            $projectName = str_replace('/\.git/', '', $projectName);
-        }
+            switch($vcs->getName()) {
+                case 'symlink' :
+                    $projectName = basename($repositoryURL);
+                    break;
 
+                case 'svn' :
+                    $projectName = basename($repositoryURL);
+                    if (in_array($projectName, array('trunk', 'code'))) {
+                        $projectName = basename(dirname($repositoryURL));
+                        if (in_array($projectName, array('trunk', 'code'))) {
+                            $projectName = basename(dirname($repositoryURL, 2));
+                        }
+                    }
+                    break;
+
+                case 'git' :
+                    $projectName = basename($repositoryURL);
+                    $projectName = str_replace('.git', '', $projectName);
+                    
+                    if (!empty($this->config->branch) &&
+                        $this->config->branch !== 'master') {
+                        $repositoryBranch =  $this->config->branch;
+                        $repositoryTag =  '';
+                    } elseif (!empty($this->config->tag)) {
+                        $repositoryBranch =  '';
+                        $repositoryTag =  $this->config->tag;
+                    } else {
+                        $repositoryBranch =  '';
+                        $repositoryTag =  '';
+                    }
+                    break;
+
+                case 'cvs' :
+                    $projectName = basename($repositoryURL);
+                    break;
+
+                case 'copy' :
+                    $projectName = basename($repositoryURL);
+                    break;
+
+                case 'mercurial' :
+                    $projectName = basename($repositoryURL);
+                    break;
+
+                case 'bazaar' :
+                    list(, $projectName) = explode(':', $repositoryURL);
+                    break;
+
+                case 'zip' :
+                    $projectName = basename($repositoryURL);
+                    $projectName = str_replace('.zip', '', $projectName);
+                    break;
+
+                case 'rar' :
+                    $projectName = basename($repositoryURL);
+                    $projectName = str_replace('.rar', '', $projectName);
+                    break;
+
+                case 'targz' :
+                    $projectName = basename($repositoryURL);
+                    $projectName = str_replace(array('.tgz', '.tar.gz'), '', $projectName);
+                    break;
+
+                case 'tarbz' :
+                    $projectName = basename($repositoryURL);
+                    $projectName = str_replace(array('.tbz', '.tar.bz'), '', $projectName);
+                    break;
+
+                case 'composer' :
+                    $projectName = str_replace('/', '_', $repositoryURL);
+
+                    // Updating config.ini to include the vendor directory
+                    $include_dirs[] = "/vendor/$repositoryURL";
+                    break;
+
+                default : 
+                    $projectName = basename($repositoryURL);
+                    $projectName = str_replace('/\.git/', '', $projectName);
+                    break;
+            }
+        }
+        
         // default initial config. Found in test project.
         $phpversion = $this->config->phpversion;
         if ($this->config->composer === true) {

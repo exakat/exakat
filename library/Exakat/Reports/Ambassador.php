@@ -3416,7 +3416,7 @@ SQL
         if ($level === 0) {
             $done = array();
         }
-        
+
         $return = array();
         foreach($paths[$root] as $sub) {
             if (isset($paths[$sub])){
@@ -3432,10 +3432,9 @@ SQL
                 $done[$sub] = 1;
             }
         }
-        $return = "<li>$root<ul>" . implode('', $return) . "</ul></li>\n";
-        return $return;
+        return "<li>$root<ul>" . implode('', $return) . "</ul></li>\n";
     }
-    
+
     private function generateExceptionTree(Section $section) {
         $exceptions = array (
   'Throwable' =>

@@ -5389,13 +5389,11 @@ class Load extends Tasks {
                 $right = $this->tokens[$this->id + 1][1];
                 ++$this->id; // Skip ::
             }
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
+            ++$this->id;
+            $right = $this->processSingle('Staticpropertyname');
         } else {
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-                ++$this->id;
-                $right = $this->processSingle('Staticpropertyname');
-            } else {
-                $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-            }
+            $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         }
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {

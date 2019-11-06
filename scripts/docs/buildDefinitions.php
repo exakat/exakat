@@ -1075,10 +1075,10 @@ GLOSSARY;
                                      "List of available properties : \n\n* ".implode("\n* ", $properties).PHP_EOL.PHP_EOL.
                                      "List of possible tokens : \n\n* ".implode("\n* ", $atom['token']).PHP_EOL.PHP_EOL.
                                      "List of outgoing links : \n\n* ".implode("\n* ", array_keys($atom['out'])).PHP_EOL.PHP_EOL.
-                                     "List of incoming links : \n\n* ".implode("\n* ", array_keys($atom['in'])).PHP_EOL.PHP_EOL.
-                                     '';
+                                     "List of incoming links : \n\n* ".implode("\n* ", array_keys($atom['in'])).PHP_EOL.PHP_EOL;
+
             if (file_exists("docs/src/Atoms/$atom[name].png")) {
-                copy("docs/src/Atoms/$atom[name].png","docs/images/$atom[name].png" );
+                copy("docs/src/Atoms/$atom[name].png", "docs/images/$atom[name].png" );
             }
         }
 
