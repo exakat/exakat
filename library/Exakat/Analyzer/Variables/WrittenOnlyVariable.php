@@ -26,7 +26,13 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class WrittenOnlyVariable extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/CreateCompactVariables',
+                    );
+    }
+
     public function analyze() {
+        // function foo($a) { $a = 1; $a += 2;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs(array('ARGUMENT', 'DEFINITION'))
              ->atomIs(array('Parameter', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition')) // static and global ?
@@ -34,24 +40,29 @@ class WrittenOnlyVariable extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('DEFINITION')
-                     ->raw(<<<'GREMLIN'
-coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
-          __.filter{ true; }
-        )
-GREMLIN
-)
+                     ->optional(
+                        $this->side()
+                             ->inIs(array('VARIABLE', 'OBJECT'))
+                             ->prepareSide()
+                     )
                      ->is('isRead', true)
               )
+              // variable is read in a compact()
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIs('String')
+              )
+
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
                      ->atomIs(self::$VARIABLES_USER)
-                     ->raw(<<<'GREMLIN'
-coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
-          __.filter{ true; }
-        )
-GREMLIN
-)
+                     ->optional(
+                        $this->side()
+                             ->inIs(array('VARIABLE', 'OBJECT'))
+                             ->prepareSide()
+                     )
                      ->is('isModified', true)
               )
               ->outIs('DEFINITION')
