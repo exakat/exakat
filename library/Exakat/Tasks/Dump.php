@@ -48,7 +48,7 @@ class Dump extends Tasks {
     private $files = array();
     
     protected $logname = self::LOG_NONE;
-    
+
     private $linksDown = '';
 
     const WAITING_LOOP = 1000;
@@ -104,92 +104,92 @@ class Dump extends Tasks {
         if ($this->config->collect === true) {
             display('Collecting data');
 
-            $begin = microtime(TIME_AS_NUMBER);
+            $begin = microtime(\\TIME_AS_NUMBER);
             $this->collectClassChanges();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Class Changes: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectFiles();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Files: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
 
             $this->collectFilesDependencies();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Files Dependencies: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectClassesDependencies();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Classes Dependencies: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->getAtomCounts();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Atom Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
 
             $this->collectPhpStructures();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Php Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectStructures();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectVariables();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Variables: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectReadability();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Readability: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
 
             $this->collectMethodsCounts();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Method Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectPropertyCounts();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Property Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectConstantCounts();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Constant Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             $begin = $end;
             $this->collectNativeCallsPerExpressions();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
+            $begin = $end;
             $this->collectClassTraitsCounts();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Trait counts per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-            $this->collectClassInterfaceCounts();
-            $end = microtime(TIME_AS_NUMBER);
-            $this->log->log( 'Collected Interface count per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
+
+            $begin = $end;
             $this->collectClassChildrenCounts();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Children count per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
             $begin = $end;
             $this->collectDefinitionsStats();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Definitions stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
             $begin = $end;
             $this->collectClassDepth();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Classes stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
-            $begin = microtime(TIME_AS_NUMBER);
+            $begin = microtime(\TIME_AS_NUMBER);
             $this->collectGlobalVariables();
-            $end = microtime(TIME_AS_NUMBER);
+            $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Global Variables : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
             // Dev only
             if ($this->config->is_phar === Config::IS_NOT_PHAR) {
-                $begin = microtime(TIME_AS_NUMBER);
+                $begin = microtime(\TIME_AS_NUMBER);
                 $this->collectMissingDefinitions();
-                $end = microtime(TIME_AS_NUMBER);
+                $end = microtime(\TIME_AS_NUMBER);
                 $this->log->log( 'Collected Missing definitions : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
             }
         }
@@ -1663,7 +1663,7 @@ GREMLIN;
 
             $filter = 'hasLabel("' . $type . '")';
 
-            $b = microtime(TIME_AS_NUMBER);
+            $b = microtime(\TIME_AS_NUMBER);
             $query = <<<GREMLIN
 
 g.V().$filter
@@ -2559,13 +2559,6 @@ GREMLIN;
 g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassTraits');
-    }
-
-    private function collectClassInterfaceCounts() {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class").groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m"); 
-GREMLIN;
-        $this->collectHashCounts($query, 'ClassInterfaces');
     }
 
     private function collectClassChildrenCounts() {
