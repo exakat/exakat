@@ -376,8 +376,9 @@ Exakat provides compatibility reports with classes, interfaces and traits from L
 Laravel analysis
 __________________________________________________
 
-This extension includes 22 analyzers.
+This extension includes 25 analyzers.
 
+*  (Laravel/LaravelNative)
 * Compatibility Laravel v5_0_0 (Laravel/Laravel_v5_0_0)
 * Compatibility Laravel v5_1_0 (Laravel/Laravel_v5_1_0)
 * Compatibility Laravel v5_2_0 (Laravel/Laravel_v5_2_0)
@@ -400,6 +401,7 @@ This extension includes 22 analyzers.
 * Laravel Function Usage (Laravel/LaravelFunctionsUsage)
 * Laravel Usage (Laravel/LaravelUsage)
 * Larvel debug usage (Laravel/LaravelDebug)
+* View Composer With Star (Laravel/ViewComposerStar)
 
 
 Laravel rulesets

@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 05 Nov 2019 06:26:18 +0000
-.. comment: Generation hash : 3e9ed99deb45ace5cce378e62ead05d4a634a4d7
+.. comment: Generation date : Thu, 07 Nov 2019 18:28:35 +0000
+.. comment: Generation hash : 447f8daf493da7c163e80d4749874730bc1c740c
 
 
 .. _analyze:
@@ -487,7 +487,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methodes, properties, constants.
 
-Total : 36 analysis
+Total : 37 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -504,6 +504,7 @@ Total : 36 analysis
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
 * :ref:`Disconnected Classes <disconnected-classes>`
+* :ref:`Exceeding Typehint <exceeding-typehint>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Identical Methods <identical-methods>`
@@ -1293,7 +1294,7 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 85 analysis
+Total : 86 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1345,6 +1346,7 @@ Total : 85 analysis
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
+* :ref:`Reuse Variable <reuse-variable>`
 * :ref:`Set Aside Code <set-aside-code>`
 * :ref:`Should Deep Clone <should-deep-clone>`
 * :ref:`Should Have Destructor <should-have-destructor>`

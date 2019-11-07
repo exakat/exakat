@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 05 Nov 2019 06:26:18 +0000
-.. comment: Generation hash : 3e9ed99deb45ace5cce378e62ead05d4a634a4d7
+.. comment: Generation date : Thu, 07 Nov 2019 18:28:35 +0000
+.. comment: Generation hash : 447f8daf493da7c163e80d4749874730bc1c740c
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -8700,6 +8700,64 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Examples    | :ref:`xoops-structures-evalusage`, :ref:`mautic-structures-evalusage`         |
 +-------------+-------------------------------------------------------------------------------+
+
+
+
+.. _exceeding-typehint:
+
+Exceeding Typehint
+##################
+
+
+The typehint is not fully used in the method. Some of the defined methods in the typehint are unused. A tighter typehint could be used, to avoid method pollution.
+
+.. code-block:: php
+
+   <?php
+   
+   interface i {
+       function i1();
+       function i2();
+   }
+   
+   interface j {
+       function j1();
+       function j2();
+   }
+   
+   function foo(i $a, j $b) {
+       // the i typehint is totally used
+       $a->i1();
+       $a->i2();
+       
+       // the i typehint is not totally used : j2() is not used.
+       $b->j1();
+   }
+   
+   ?>
+
+
+Tight typehint prevents the argument from doing too much. They also require more maintenance : creation of dedicated interfaces, method management to keep all typehint tight.
+
+See also :ref:`insufficient-typehint`. 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Keep the typehint tight, do not inject more than needed.
+
++-------------+-----------------------------+
+| Short name  | Functions/ExceedingTypehint |
++-------------+-----------------------------+
+| Rulesets    | :ref:`ClassReview`          |
++-------------+-----------------------------+
+| Php Version | 7.4-                        |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
 
 
 
@@ -22775,6 +22833,41 @@ Suggestions
 +-------------+--------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                   |
 +-------------+--------------------------------------------------------------------+
+
+
+
+.. _reuse-variable:
+
+Reuse Variable
+##############
+
+
+A variable is already holding the content that is re-calculated later. Use the cached value.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a) {
+       $b = strtolower($a);
+       
+       // strtolower($a) is already calculated in $b. Just reuse the value.
+       if (strtolower($a) === 'c') {
+           doSomething();
+       }
+   }
+   
+   ?>
+
++-------------+--------------------------+
+| Short name  | Structures/ReuseVariable |
++-------------+--------------------------+
+| Rulesets    | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Slow (1 hour)            |
++-------------+--------------------------+
 
 
 
