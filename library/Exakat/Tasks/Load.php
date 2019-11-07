@@ -627,7 +627,7 @@ class Load extends Tasks {
     private function runCollector($omittedFiles) {
         $b = hrtime(\TIME_AS_NUMBER);
 
-        $this->callsDatabase = new \Sqlite3($this->sqliteLocation . '2');
+        $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->loader = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
 
