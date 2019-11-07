@@ -69,7 +69,7 @@ class DisconnectedClasses extends Analyzer {
                      ->atomIs(array('Methodcall', 'Staticmethodcall'))
                      ->outIs('METHOD')
                      ->outIs('NAME')
-                     ->raw('filter{ it.get().value("code") in methods}')
+                     ->raw('filter{ it.get().value("lccode") in methods}')
              )
 
              ->back('first');
