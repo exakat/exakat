@@ -67,7 +67,7 @@ class CallbackNeedsReturn extends Analyzer {
                  ->not(
                     $this->side()
                          ->outIs('TYPEHINT')
-                         ->fullnspath('\\void')
+                         ->fullnspathIs('\\void')
                  )
                 ->not(
                     $this->side()
@@ -97,7 +97,7 @@ class CallbackNeedsReturn extends Analyzer {
                  // Could be : string, array, closure, arrow-function,
                  ->inIs('DEFINITION')
                  ->outIs('TYPEHINT')
-                 ->fullnspath('\\void')
+                 ->fullnspathIs('\\void')
                  ->back('first');
             $this->prepareQuery();
 
