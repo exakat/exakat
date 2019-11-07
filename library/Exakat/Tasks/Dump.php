@@ -104,7 +104,7 @@ class Dump extends Tasks {
         if ($this->config->collect === true) {
             display('Collecting data');
 
-            $begin = microtime(\\TIME_AS_NUMBER);
+            $begin = microtime(\TIME_AS_NUMBER);
             $this->collectClassChanges();
             $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Class Changes: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
