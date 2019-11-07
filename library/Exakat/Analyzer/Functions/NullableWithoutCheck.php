@@ -25,18 +25,6 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NullableWithoutCheck extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
-    /* List dependencies 
-    public function dependsOn() {
-        return array('Category/Analyzer',
-                     '',
-                    );
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Parameter')
              ->is('nullable', true)
