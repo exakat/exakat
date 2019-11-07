@@ -36,7 +36,7 @@ class CollectMethods extends DSL {
 __.sideEffect{ ' . $variable . ' = []; }
   .out("METHOD", "MAGICMETHOD")
   .out("NAME")
-  .sideEffect{ ' . $variable . '.add(it.get().value("code")) ; }
+  .sideEffect{ ' . $variable . '.add(it.get().value("lccode")) ; }
   .fold() 
 )
 ');
