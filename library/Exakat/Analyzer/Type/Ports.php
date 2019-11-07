@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class Ports extends Analyzer {
     public function analyze() {
-        $ports = $this->loadIni('ports.ini', 'port');
+        // 443
+        $ports = $this->load('ports', 'port');
         
         $this->atomIs('Integer')
              ->codeIs(array_keys($ports));

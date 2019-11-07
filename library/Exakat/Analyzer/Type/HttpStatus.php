@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class HttpStatus extends Analyzer {
     public function analyze() {
-        $ini = $this->loadIni('HttpStatus.ini', 'code');
+        $ini = $this->load('HttpStatus', 'code');
         
         // $http = "418";
         $this->atomIs('Integer')

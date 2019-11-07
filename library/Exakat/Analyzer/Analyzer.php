@@ -2209,6 +2209,14 @@ GREMLIN
     protected function loadIni(string $file, string $index = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
         
+        if (isset($cache[$fullpath]->$index)) {
+            if ($index === null) {
+                return $cache[$fullpath];
+            } else {
+                return $cache[$fullpath]->$index;
+            }
+        }
+
         if (file_exists($fullpath)) {
             $ini = (object) parse_ini_file($fullpath, \INI_PROCESS_SECTIONS);
         } elseif (($this->config->ext !== null) && ($iniString = $this->config->ext->loadData("data/$file")) != '') {
@@ -2223,12 +2231,6 @@ GREMLIN
         static $cache;
 
         if (!isset($cache[$fullpath])) {
-            foreach($ini as &$values) {
-                if (empty($values[0])) {
-                    $values = '';
-                }
-            }
-            unset($values);
             $cache[$fullpath] = $ini;
         }
 

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SpecialIntegers extends Analyzer {
     public function analyze() {
-        $codes = $this->loadIni('SpecialIntegers.ini', 'code');
+        $codes = $this->load('SpecialIntegers', 'code');
         $codes = array_keys($codes);
         $codes = array_map(function ($x) { return (string) $x; }, $codes);
         

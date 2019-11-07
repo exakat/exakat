@@ -26,9 +26,11 @@ use Exakat\Analyzer\Analyzer;
 
 class StringWithStrangeSpace extends Analyzer {
     public function analyze() {
-        $weirdSpaces = $this->loadIni('weirdSpaces.ini', 'space');
+        // $a = ' bac'; // space is actually a vertical tab
+        $weirdSpaces = $this->load('weirdSpaces', 'space');
+
         $regex = '(' . implode('|', array_keys($weirdSpaces)) . '})';
-        
+
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', $regex);

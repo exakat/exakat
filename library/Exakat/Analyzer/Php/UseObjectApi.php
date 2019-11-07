@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UseObjectApi extends Analyzer {
     public function analyze() {
-        $functions = $this->loadIni('function_to_oop.ini', 'function');
+        // mysqli_connect();
+        $functions = $this->load('function_to_oop', 'function');
         $functions = makeFullNsPath(array_keys($functions));
         
         $this->atomFunctionIs($functions);
