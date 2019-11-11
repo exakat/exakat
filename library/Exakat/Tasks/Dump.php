@@ -20,7 +20,6 @@
  *
 */
 
-
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
@@ -261,7 +260,6 @@ class Dump extends Tasks {
                     display("$analyzer is not run yet.");
                 }
             }
-
 
         } else {
             $rulesets = array();
@@ -912,7 +910,6 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                      )
 SQL
 );
-
 
         $query = <<<GREMLIN
 g.V().hasLabel("Method", "Magicmethod")

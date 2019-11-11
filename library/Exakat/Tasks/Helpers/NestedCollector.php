@@ -20,7 +20,6 @@
  *
 */
 
-
 namespace Exakat\Tasks\Helpers;
 
 class NestedCollector {

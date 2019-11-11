@@ -20,9 +20,7 @@
  *
 */
 
-
 namespace Exakat\Tasks;
-
 
 class Extension extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -36,7 +34,6 @@ class Extension extends Tasks {
                                  'local',
                                  'update',
                                  );
-
 
     //install, list, local, uninstall, upgrade
     public function run() {

@@ -20,7 +20,6 @@
  *
 */
 
-
 namespace Exakat\Tasks;
 
 class CleanDb extends Tasks {

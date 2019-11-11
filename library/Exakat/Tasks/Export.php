@@ -20,9 +20,7 @@
  *
 */
 
-
 namespace Exakat\Tasks;
-
 
 class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;

@@ -20,7 +20,6 @@
  *
 */
 
-
 namespace Exakat\Tasks\LoadFinal;
 
 use Exakat\Analyzer\Analyzer;

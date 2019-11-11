@@ -64,7 +64,6 @@ class ReportConfig {
             throw new NoSuchReport($config);
         }
 
-
         $this->config = $exakat_config;
     }
 

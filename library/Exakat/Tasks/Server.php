@@ -20,9 +20,7 @@
  *
 */
 
-
 namespace Exakat\Tasks;
-
 
 class Server extends Tasks {
     const CONCURENCE = self::ANYTIME;

@@ -20,9 +20,7 @@
  *
 */
 
-
 namespace Exakat\Tasks;
-
 
 class Help extends Tasks {
     const CONCURENCE = self::ANYTIME;

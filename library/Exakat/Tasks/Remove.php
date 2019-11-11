@@ -20,7 +20,6 @@
  *
 */
 
-
 namespace Exakat\Tasks;
 
 use Exakat\Project as ProjectName;

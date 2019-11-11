@@ -767,7 +767,6 @@ class Load extends Tasks {
         $this->reset();
     }
 
-
     public function processDiffFile($filename, $path) {
         try {
             $this->processFile($filename, $path);
@@ -2034,7 +2033,6 @@ class Load extends Tasks {
             }
         }
 
-
         // Back up a bit
         --$this->id;
 
@@ -2645,7 +2643,6 @@ class Load extends Tasks {
                 $name->noDelimiter = substr($name->code, 1, -1);
             }
             $this->getFullnspath($name, 'const', $name);
-
 
             if (function_exists('mb_detect_encoding')) {
                 $name->encoding = mb_detect_encoding($name->noDelimiter);

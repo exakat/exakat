@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks\Helpers;
 
-
 class Php71 extends Php {
 
     // PHP tokens

@@ -20,9 +20,7 @@
  *
 */
 
-
 namespace Exakat\Tasks\Helpers;
-
 
 class Calls {
     private $callsSqlite   = null;

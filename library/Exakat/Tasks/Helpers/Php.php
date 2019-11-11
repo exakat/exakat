@@ -61,7 +61,6 @@ abstract class Php {
     const T_SHELL_QUOTE                  = '`';
     const T_SHELL_QUOTE_CLOSE            = '`_CLOSE';
     
-        
     const T_END                          = 'The End';
     const T_REFERENCE                    = 'r';
     const T_VOID                         = 'v';

@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks\Helpers;
 
-
 class Php56 extends Php {
 
     // PHP tokens
@@ -159,7 +158,6 @@ class Php56 extends Php {
     const T_NS_SEPARATOR                  = 388;
     const T_ELLIPSIS                      = 389;
     const T_DOUBLE_COLON                  = 384;
-
 
     const T_SPACESHIP                     = 1000;
     const T_YIELD_FROM                    = 1000;

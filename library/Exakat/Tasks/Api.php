@@ -20,9 +20,7 @@
  *
 */
 
-
 namespace Exakat\Tasks;
-
 
 class Api extends Tasks {
     const CONCURENCE = self::ANYTIME;

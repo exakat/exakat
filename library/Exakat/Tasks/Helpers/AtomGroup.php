@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks\Helpers;
 
-
 class AtomGroup {
     private $atomCount = 0;
     

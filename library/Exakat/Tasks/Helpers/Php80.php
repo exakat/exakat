@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks\Helpers;
 
-
 class Php80 extends Php {
 
 // Exakat home-made tokens
