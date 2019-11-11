@@ -40,6 +40,8 @@ class NoMagicWithArray extends Analyzer {
                 $this->side()
                      ->inIs('DEFINITION')
                      ->atomIs('Magicmethod')
+                     ->outIs('NAME')
+                     ->codeIs('__set', self::TRANSLATE, self::CASE_INSENSITIVE)
              )
              ->back('first');
         $this->prepareQuery();
