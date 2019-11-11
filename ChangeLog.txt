@@ -1,4 +1,4 @@
-Version 2.0.2 (Military Star of the North Pole, coming up)
+Version 2.0.4 (Army Defeating Star of Heaven's Gate, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,23 @@ Version 2.0.2 (Military Star of the North Pole, coming up)
 + Tokenizer
     + 
 
-Version 2.0.1 (Danyuan Star of Honesty and Chasity, 2019-11-04)
+Version 2.0.3 (Military Star of the North Pole, 2018-11-11)
++ Architecture
+    + Added check on xdebug presence (nesting limit)
+    + Moving more collections to Dump/
++ Analysis
+    + New analysis : Nullable typehint requires a test on NULL
+    + New analysis : Typehint that requires too much
+    + Upgraded analysis : Printf check on arguments works with '.'
+    + Upgraded analysis : No magic for arrays skips __get()
+    + Upgraded analysis : Const recommended, but not when methods are used
+    + Upgraded analysis : Written only variables handles compact()
+    + Upgraded analysis : Callbacks need returns, but not for spl_autoload_register()
+    + Upgraded analysis : Extended analysis to Concatenation an Heredoc for Email
+    + Upgraded analysis : Disconnected classes handles case sensitivity
+    + Checked unit tests : 3371 / 3397 test pass (99% pass)
+
+Version 2.0.2 (Danyuan Star of Honesty and Chasity, 2019-11-04)
 + Architecture
     + Adding more typehint
     + Created new class to build Dot files
