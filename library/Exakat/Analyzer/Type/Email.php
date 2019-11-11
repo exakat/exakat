@@ -26,11 +26,18 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Email extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
+
     public function analyze() {
         // $x = 'a@b.com';
-        $this->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->regexIs('fullcode', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})');
+        $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
+             ->hasNoIn('CONCAT')
+             ->has('noDelimiter')
+             ->regexIs('noDelimiter', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})');
         $this->prepareQuery();
     }
 }
