@@ -173,7 +173,7 @@ class Initproject extends Tasks {
                     $include_dirs[] = "/vendor/$repositoryURL";
                     break;
 
-                default : 
+                default :
                     $projectName = basename($repositoryURL);
                     $projectName = str_replace('/\.git/', '', $projectName);
                     break;
