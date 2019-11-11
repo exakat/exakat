@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('define(\'d3\', \d)', 
+$expected     = array('define(\'d3\', \\d)',
                       'define(\'d2\', d)',
                      );
 
