@@ -31,6 +31,7 @@ return PhpCsFixer\Config::create()
          'declare_equal_normalize' => array('space' => 'single'),
          'concat_space' => array('spacing' => 'one'),
          'no_leading_import_slash' => true,
+//         'class_definition' => true,
 
 // Interesting, but too many fixes at once
 //        'no_extra_consecutive_blank_lines' => true,
