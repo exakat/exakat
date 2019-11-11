@@ -35,7 +35,7 @@ class PrintfArguments extends Analyzer {
         //The %02s contains %-'.3d monkeys
     
         $countParameters = <<<REGEX
-    d2 = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0-9\']+\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+    d2 = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0-9\']*\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
     d = [:];
     d2.each{
         x = it =~ "^%(\\\\d+)\\\\\\$"; 
