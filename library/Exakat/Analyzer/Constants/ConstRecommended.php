@@ -34,27 +34,10 @@ class ConstRecommended extends Analyzer {
     public function analyze() {
         // define('const', literal);
         // define('const', other constant);
-        $this->atomIs('Defineconstant')
-             ->_as('args')
-             ->outIs('NAME')
-             ->atomIs('Identifier')
-             ->back('args')
-             ->outIs('VALUE')
-             ->atomIs(array('String', 'Float', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Concatenation'), self::WITH_CONSTANTS)
-             ->is('constant', true)
-             ->back('first');
-        $this->prepareQuery();
-
         // define('const', expression);
         $this->atomIs('Defineconstant')
-             ->_as('args')
-             ->outIs('NAME')
-             ->atomIs('Identifier')
-             ->back('args')
-             ->outIs('VALUE')
-             ->atomIsNot(array('Identifier', 'Nsname','String', 'Float', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Variable'))
-             ->noAtomInside(array('Variable', 'Functioncall'))
-             ->back('first');
+//             ->atomIsNot(array('Identifier', 'Nsname','String', 'Float', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Variable'))
+             ->noAtomInside(array('Variable', 'Member', 'Staticproperty', 'Functioncall', 'Staticmethodcall', 'Methodcall'));
         $this->prepareQuery();
     }
 }

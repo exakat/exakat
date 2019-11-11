@@ -13,8 +13,8 @@ define('h', a::C); // OK
 define('i', true);
 define('j', \ab);    // OK
 define('k', \a\ab);    // OK
+define('A', "a"."b"); 
 
-define('A', "a"."b"); // KO, it's a concatenation
 define('B', "a $b c");
 define('C', $a);
 

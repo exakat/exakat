@@ -12,7 +12,6 @@ $expected     = array('define(\'g\', ab)',
                       'define(\'f\', \'true\')',
                       'define(\'i\', true)',
                       'define(\'A\', "a" . "b")',
-                      'define(\'A\', "a" . "b")',
                      );
 
 $expected_not = array('define(\'B\', "a $b c")',
