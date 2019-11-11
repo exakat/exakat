@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 07 Nov 2019 18:28:35 +0000
-.. comment: Generation hash : 447f8daf493da7c163e80d4749874730bc1c740c
+.. comment: Generation date : Mon, 11 Nov 2019 19:50:55 +0000
+.. comment: Generation hash : b86655f02abfb5880295ddcf851fa5d45ca0812f
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -6684,7 +6684,7 @@ Suggestions
 
 * Make the class only use its own resources
 * Split the class in autonomous classes
-* Add local property definitions to make the class independant
+* Add local property definitions to make the class independent
 
 +-------------+------------------------------------+
 | Short name  | Classes/DependantAbstractClass     |
@@ -7037,17 +7037,42 @@ Disconnected Classes
 ####################
 
 
-One class is extending the other, but they do not use any features from one another. Basically, those two classes are using extends, but they are completely independant and may be separated. 
+One class is extending the other, but they do not use any features from one another. Basically, those two classes are using extends, but they are completely independent and may be separated. 
 
 When using the 'extends' keyword, the newly created classes are now acting together and making one. This should be visibile in calls from one class to the other, or simply by property usage : they can't live without each other.
 
-On the other hand, two completely independant classes that are merged should be kept separated.
+On the other hand, two completely independent classes that are merged, although they should be kept separated.
 
 .. code-block:: php
 
    <?php
    
+   class A {
+       private $pa = 1;
+       
+       function fooA() {
+           $this->pa = 2;
+       }
+   }
    
+   // class B and Class A are totally independent
+   class B extends A {
+       private $pb = 1;
+       
+       function fooB() {
+           $this->pb = 2;
+       }
+   }
+   
+   
+   // class C makes use of class A : it is dependent on the parent class
+   class C extends A {
+       private $pc = 1;
+       
+       function fooB() {
+           $this->pc = 2 + $this->fooA();
+       }
+   }
    ?>
 
 
@@ -7059,15 +7084,17 @@ Suggestions
 * Remove the extension
 * Make actual usage of the classes, at least from one of them
 
-+-------------+-----------------------------+
-| Short name  | Classes/DisconnectedClasses |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`ClassReview`          |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Slow (1 hour)               |
-+-------------+-----------------------------+
++-------------+----------------------------------------------+
+| Short name  | Classes/DisconnectedClasses                  |
++-------------+----------------------------------------------+
+| Rulesets    | :ref:`ClassReview`                           |
++-------------+----------------------------------------------+
+| Severity    | Minor                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Slow (1 hour)                                |
++-------------+----------------------------------------------+
+| Examples    | :ref:`wordpress-classes-disconnectedclasses` |
++-------------+----------------------------------------------+
 
 
 
@@ -16839,7 +16866,7 @@ No Garantee For Property Constant
 #################################
 
 
-When using an interface as a typehint, properties are not necesseraly available.
+When using an interface as a typehint, properties are not necessarily available.
 
 An interface is a template for a class, which specify the minimum amount of methods and constants. Properties are never defined in an interface, an should not be relied upon.
 
@@ -17163,7 +17190,7 @@ No Magic With Array
 ###################
 
 
-Magic method ``__get()`` doesn't work for array syntax. 
+Magic method ``__set()`` doesn't work for array syntax. 
 
 When overloading properties, they can only be used for scalar values, excluding arrays. Under the hood, PHP uses ``__get()`` to reach for the name of the property, and doesn't recognize the following index as an array. It yields an error : Indirect modification of overloaded property.
 
@@ -17198,6 +17225,8 @@ When overloading properties, they can only be used for scalar values, excluding 
    ?>
 
 
+It is possible to use the array syntax with a magic property : by making the ``__get`` returns an array, the syntax will actually extract the expected item in the array.
+
 This is not reported by linting.
 
 In this analysis, only properties that are found to be magic are reported. For example, using the b property outside the class scope is not reported, as it would yield too many false-positives.
@@ -17209,6 +17238,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Use a distinct method to append a new value to that property
+* Assign the whole array, and not just one of its elements
 
 +-------------+----------------------------------------+
 | Short name  | Classes/NoMagicWithArray               |
@@ -18821,6 +18851,54 @@ Suggestions
 +-------------+--------------------+
 | Time To Fix | Quick (30 mins)    |
 +-------------+--------------------+
+
+
+
+.. _nullable-without-check:
+
+Nullable Without Check
+######################
+
+
+Nullable typehinted argument should be checked before usage.
+
+.. code-block:: php
+
+   <?php
+   
+   // This will emit a fatal error when $a = null
+   function foo(?A $a) {
+       return $a->m();
+   }
+   
+   // This is stable
+   function foo(?A $a) {
+       if ($a === null) {
+           return 42;
+       } else {
+           return $a->m();
+       }
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+--------------------------------+
+| Short name  | Functions/NullableWithoutCheck |
++-------------+--------------------------------+
+| Rulesets    | :ref:`ClassReview`             |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
 
 
 
@@ -21519,6 +21597,8 @@ The number of arguments provided to `printf() <http://www.php.net/printf>`_ or `
 
 Extra arguments are ignored, and are dead code as such. Missing arguments are reported with a warning, and nothing is displayed.
 
+Omitted arguments produce an error.
+
 .. code-block:: php
 
    <?php
@@ -21542,15 +21622,17 @@ Extra arguments are ignored, and are dead code as such. Missing arguments are re
 
 See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>`_.
 
-+-------------+----------------------------+
-| Short name  | Structures/PrintfArguments |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
++-------------+-------------------------------------------+
+| Short name  | Structures/PrintfArguments                |
++-------------+-------------------------------------------+
+| Rulesets    | :ref:`Analyze`                            |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Instant (5 mins)                          |
++-------------+-------------------------------------------+
+| Examples    | :ref:`phpipam-structures-printfarguments` |
++-------------+-------------------------------------------+
 
 
 
@@ -22456,7 +22538,7 @@ Repeated Interface
 ##################
 
 
-A class should implements only once an interface. An interface can only extends once another interface. In both cases, parent classes or interfaces must be checked.s
+A class should implements only once an interface. An interface can only extends once another interface. In both cases, parent classes or interfaces must be checked.
 
 PHP accepts multiple times the same interface in the ``implements`` clause. In fact, it doesn't do anything beyond the first implement. 
 
@@ -25339,8 +25421,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Fix any typo in the spelling of the constants
-* Fix any typo in the spelling of the constants
-* Tell us about common mispelling so we can upgrade this analysis
+* Tell us about common misspelling so we can upgrade this analysis
 
 +-------------+--------------------------------+
 | Short name  | Constants/StrangeName          |
@@ -30007,7 +30088,7 @@ Here is the list of function that use a unique PHP constant as argument :
 + `str_pad() <http://www.php.net/str_pad>`_
 + `trigger_error() <http://www.php.net/trigger_error>`_
 
-Here is the list of functions that use a combinaison of PHP native functions as argument.
+Here is the list of functions that use a combination of PHP native functions as argument.
 
 + `arsort() <http://www.php.net/arsort>`_
 + `asort() <http://www.php.net/asort>`_
@@ -30917,7 +30998,6 @@ This way, constant will be defined at compile time, and not at execution time.
 
 
 See also `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_.
-
 
 
 Suggestions
@@ -32305,7 +32385,7 @@ Useless Type Check
 
 With typehint, some checks on the arguments are now handled by the type system.
 
-In particular, a type hinted argument can't be null, unless it is explicitely nullable, or has a ``null`` value as default.
+In particular, a type hinted argument can't be null, unless it is explicitly nullable, or has a ``null`` value as default.
 
 .. code-block:: php
 
@@ -33430,7 +33510,7 @@ Wrong Typehinted Name
 
 The parameter name doesn't reflect the typehint used.
 
-There are no restriction on parameter names, except its unicity in the signature. Yet, using a scalar typehint as the name for another typehinted value is just misleading. 
+There are no restriction on parameter names, except its uniqueness in the signature. Yet, using a scalar typehint as the name for another typehinted value is just misleading. 
 
 .. code-block:: php
 

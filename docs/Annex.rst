@@ -440,12 +440,18 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.0.3
+
+  * Collect Class Interface Counts (Dump/CollectClassInterfaceCounts)
+  * Exceeding Typehint (Functions/ExceedingTypehint ; ClassReview)
+
 * 2.0.2
 
   * Dump/Inclusions (Dump/Inclusions ; Dump)
   * Dump/NewOrder (Dump/NewOrder ; Unassigned)
   * Dump/ParameterArgumentsLinks (Dump/ParameterArgumentsLinks ; Unassigned)
   * Insufficient Property Typehint (Classes/InsufficientPropertyTypehint)
+  * Nullable Without Check (Functions/NullableWithoutCheck ; ClassReview)
   * Typehint Order (Dump/TypehintOrder ; Unassigned)
   * Wrong Typehinted Name (Functions/WrongTypehintedName ; Coding Conventions, Semantics)
 
@@ -501,7 +507,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.9.5
 
-  * Dump/CollectLiterals (Dump/CollectLiterals ; Unassigned, Dump)
+  * Dump/CollectLiterals (Dump/CollectLiterals ; Dump)
   * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, ClassReview)
   * Magic Properties (Classes/MagicProperties)
   * No Garantee For Property Constant (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
@@ -998,7 +1004,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Double array_flip() (Performances/DoubleArrayFlip ; Performances)
   * Fallback Function (Functions/FallbackFunction ; Appinfo)
   * Find Key Directly (Structures/GoToKeyDirectly ; Under Work)
-  * Reuse Variable (Structures/ReuseVariable ; Under Work)
+  * Reuse Variable (Structures/ReuseVariable ; Suggestions)
   * Useless Catch (Exceptions/UselessCatch)
 
 * 1.1.3
@@ -2123,7 +2129,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-82 PHP error message detailled : 
+83 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
@@ -2175,6 +2181,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Delimiter must not be alphanumeric or backslash  <no-empty-regex>`
 * :ref:`Generators cannot return values using "return"  <generator-cannot-return>`
 * :ref:`Generators cannot return values using "return" <no-return-for-generator>`
+* :ref:`Indirect modification of overloaded property c\:\:$b has no effect <no-magic-with-array>`
 * :ref:`Invalid numeric literal <malformed-octal>`
 * :ref:`Methods with the same name as their class will not be constructors in a future version of PHP; %s has a deprecated constructor <old-style-constructor>`
 * :ref:`Non-static method A\:\:B() should not be called statically <non-static-methods-called-in-a-static>`
@@ -2549,7 +2556,7 @@ List of external links mentionned in this documentation.
 * `htmlentities <http://www.php.net/htmlentities>`_
 * `htmlspecialchars <https://www.php.net/htmlspecialchars>`_
 * `https://www.exakat.io/ <https://www.exakat.io/>`_
-* `https://www.exakat.io/index.php?file=latest <https://www.exakat.io/index.php?file=latest>`_
+* `https://www.exakat.io/versionss/index.php?file=latest <https://www.exakat.io/versions/index.php?file=latest>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
@@ -3375,6 +3382,8 @@ ___________
 |   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Classes/UnreachableConstant";
 |   analyzer[] = "Classes/UnusedConstant";
+|   analyzer[] = "Functions/ExceedingTypehint";
+|   analyzer[] = "Functions/NullableWithoutCheck";
 |   analyzer[] = "Functions/WrongReturnedType";
 |   analyzer[] = "Interfaces/AvoidSelfInInterface";
 |   analyzer[] = "Interfaces/IsNotImplemented";
@@ -4277,6 +4286,7 @@ ___________
 |   analyzer[] = "Structures/PHP7Dirname";
 |   analyzer[] = "Structures/PossibleIncrement";
 |   analyzer[] = "Structures/RepeatedPrint";
+|   analyzer[] = "Structures/ReuseVariable";
 |   analyzer[] = "Structures/SetAside";
 |   analyzer[] = "Structures/ShouldUseForeach";
 |   analyzer[] = "Structures/ShouldUseMath";

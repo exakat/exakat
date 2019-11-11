@@ -43,34 +43,34 @@ Download Exakat
 
 You can download exakat directly from `https://www.exakat.io/ <https://www.exakat.io/>`_. 
 
-This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `https://www.exakat.io/index.php?file=latest <https://www.exakat.io/index.php?file=latest>`_. 
+This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `https://www.exakat.io/versionss/index.php?file=latest <https://www.exakat.io/versions/index.php?file=latest>`_. 
 
 For each version, MD5 and SHA256 signatures are available. The downloaded MD5 must match the one in the related .md5 file. The .md5 also has the version number, for extra check.
 
 ::
 
-    curl -o exakat.phar https://www.exakat.io/index.php?file=latest
+    curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
     
-    curl -o exakat.phar.md5 https://www.exakat.io/index.php?file=latest.md5
-    //22110fe2fa1b412f5d2f4b716947760d  exakat-1.2.0.phar
+    curl -o exakat.phar.md5 https://www.exakat.io/versions/index.php?file=latest.md5
+    //19485adb7d43b43f7c01b7153ae82881  exakat-2.0.0.phar
     md5sum exakat.phar.md5
     // Example : 
-    //22110fe2fa1b412f5d2f4b716947760d  exakat.phar
+    //19485adb7d43b43f7c01b7153ae82881  exakat.phar
     
-    curl -o exakat.phar.sha256 https://www.exakat.io/index.php?file=latest.sha256
-    //a2a2b9c41ae94c6446d43e370c6ba4cdd970d232d817bf30207e58a61c5adfd9  exakat-1.2.0.phar
+    curl -o exakat.phar.sha256 https://www.exakat.io/versions/index.php?file=latest.sha256
+    //d838c9ec9291e15873137693da2a0038a67c2f15c2282b89f09f27f23d24d27f  exakat-2.0.0.phar
     sha256sum exakat.phar.md5
     // Example : 
-    //a2a2b9c41ae94c6446d43e370c6ba4cdd970d232d817bf30207e58a61c5adfd9  exakat.phar
+    //d838c9ec9291e15873137693da2a0038a67c2f15c2282b89f09f27f23d24d27f  exakat.phar
 
     // Check with GPG signature
-    curl -o exakat.sig https://www.exakat.io/index.php?file=latest.sig
+    curl -o exakat.sig https://www.exakat.io/versions/index.php?file=latest.sig
     // Optional step : Download the Key
     gpg --recv-keys 5EDF7EA4
     // Check with GPG signature
     gpg --verify exakat.sig exakat.phar
     // Good result : 
-    //gpg: Signature made Tue Apr  3 08:28:52 2018 CEST using RSA key ID 5EDF7EA4
+    //gpg: Signature made Tue Nov  5 07:48:34 2019 CET using RSA key ID 5EDF7EA4
     //gpg: Good signature from "Seguy Damien <damien.seguy@gmail.com>" [ultimate]
 
 
@@ -89,8 +89,8 @@ This is the installation script for Exakat and tinkergraph 3.4.3.
 
     mkdir exakat
     cd exakat
-    curl -o exakat.phar https://www.exakat.io/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
+    curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
+    curl -o apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
     unzip apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.4.3 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
@@ -154,14 +154,14 @@ Debian/Ubuntu installation with Tinkergraph 3.4.3
 *************************************************
 
 Paste the following commands in a terminal prompt. It installs Exakat most recent version with Tinkergraph 3.4.3. 
-PHP 7.2 (7.0 or more recent), wget and unzip are expected.
+PHP 7.3 (7.0 or more recent), wget and unzip are expected.
 
 ::
 
     mkdir exakat
     cd exakat
-    wget -O exakat.phar https://www.exakat.io/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
+    wget -O exakat.phar https://www.exakat.io/versions/index.php?file=latest
+    wget -O apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
     unzip apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.4.3 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.4.3-bin.zip 

@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 07 Nov 2019 18:28:35 +0000
-.. comment: Generation hash : 447f8daf493da7c163e80d4749874730bc1c740c
+.. comment: Generation date : Mon, 11 Nov 2019 19:50:55 +0000
+.. comment: Generation hash : b86655f02abfb5880295ddcf851fa5d45ca0812f
 
 
 .. _analyze:
@@ -487,7 +487,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methodes, properties, constants.
 
-Total : 37 analysis
+Total : 38 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -516,6 +516,7 @@ Total : 37 analysis
 * :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Non Nullable Getters <non-nullable-getters>`
+* :ref:`Nullable Without Check <nullable-without-check>`
 * :ref:`Property Could Be Local <property-could-be-local>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Raised Access Level <raised-access-level>`

@@ -6998,6 +6998,22 @@ The last month is wrong 8 times a year : on 31rst, and by the end of March.
                 'lastMonthEnd' => date('Y-m-d', strtotime(date('Y-m', time())) - 24 * 3600),
                 'lastThreeMonthsStart' => date('Y-m-d', strtotime(date('Y-m', strtotime('-2 month')))),
 
+Printf Number Of Arguments
+==========================
+
+.. _phpipam-structures-printfarguments:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`printf-number-of-arguments`, in functions/classes/class.Common.php:1174. 
+
+16 will not be displayed.
+
+.. code-block:: php
+
+    sprintf('%032s', gmp_strval(gmp_init($ipv6long, 10), 16);
+
 Don't Send $this In Constructor
 ===============================
 
@@ -8362,6 +8378,22 @@ The code includes a fair number of class constants. The one listed here are only
         const TEXT_REGULAR = 65535;
         const TEXT_MEDIUM  = 16777215;
         const TEXT_LONG    = 4294967295;
+
+Disconnected Classes
+====================
+
+.. _wordpress-classes-disconnectedclasses:
+
+WordPress
+^^^^^^^^^
+
+:ref:`disconnected-classes`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 Wrong Class Name Case
 =====================
