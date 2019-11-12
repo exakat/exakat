@@ -1948,19 +1948,19 @@ GREMLIN;
         }
     }
 
-    public function storeError(string $error = 'An error happened') {
-            $query = <<<GREMLIN
+    public function storeError(string $error = 'An error happened', int $error_type = self::UNKNOWN_COMPATIBILITY) {
+        $query = <<<GREMLIN
 g.addV('Noresult').property('code',                              0)
                   .property('fullcode',                          '$error')
                   .property('virtual',                            true)
-                  .property('line',                               -1)
+                  .property('line',                               $error_type)
                   .addE('ANALYZED')
                   .from(g.V($this->analyzerId));
 GREMLIN;
 
-            $this->gremlin->query($query);
+        $this->gremlin->query($query);
 
-            $this->datastore->addRow('analyzed', array($this->shortAnalyzer => -1 ) );
+        $this->datastore->addRow('analyzed', array($this->shortAnalyzer => -1 ) );
     }
 
     private function storeToTableResults() {

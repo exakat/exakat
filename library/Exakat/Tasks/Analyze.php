@@ -196,13 +196,13 @@ class Analyze extends Tasks {
         if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
             $analyzerQuoted = $analyzer->getInBaseName();
             
-            $analyzer->storeError('Not Compatible With PHP Version');
+            $analyzer->storeError('Not Compatible With PHP Version', Analyzer::VERSION_INCOMPATIBLE);
 
             display("$analyzerQuoted is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
         } elseif (!$analyzer->checkPhpConfiguration($this->Php)) {
             $analyzerQuoted = $analyzer->getInBaseName();
-            
-            $analyzer->storeError('Not Compatible With PHP Configuration');
+
+            $analyzer->storeError('Not Compatible With PHP Configuration', Analyzer::CONFIGURATION_INCOMPATIBLE);
 
             display( "$analyzerQuoted is not compatible with PHP configuration of this version. Ignoring\n");
         } else {

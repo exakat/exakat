@@ -2597,7 +2597,7 @@ SQL;
                 }
             }
         }
-        
+
         $incompilable = array();
         foreach($versions as $version) {
             $shortVersion = $version[0] . $version[2];
