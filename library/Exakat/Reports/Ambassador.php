@@ -1218,21 +1218,22 @@ SQL
     protected function generateForeachFavorites(Section $section) {
         // List of indentation used
         $res = $this->sqlite->query(<<<'SQL'
-SELECT key, value AS count FROM hashResults 
+SELECT REPLACE(key, '&', '') AS key, sum(value) AS count FROM hashResults 
 WHERE name = "Foreach Names"
-ORDER BY key + 0 ASC
+GROUP BY REPLACE(key, '&', '')
+ORDER BY count DESC
 SQL
         );
         $html = '';
         $xAxis = array();
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $xAxis[] = "'{$value['key']} level'";
+            $xAxis[] = $value['key'];
 
             $data[$value['key']] = (int) $value['count'];
 
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">' . $value['key'] . ' levels</div>
+                      <div class="block-cell-name">' . $value['key'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
