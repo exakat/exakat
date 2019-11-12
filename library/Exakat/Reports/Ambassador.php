@@ -1182,7 +1182,6 @@ SQL
                   </div>';
         }
         
-        
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
@@ -1228,7 +1227,7 @@ SQL
         $xAxis = array();
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $xAxis[] = $value['key'];
+            $xAxis[] = "'".addslashes($value['key'])."'";
 
             $data[$value['key']] = (int) $value['count'];
 
