@@ -3990,7 +3990,7 @@ SQL
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
-            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax(substr($row['method'], 0, -10)) . '</td><td class="exakat_short_text">' .
+            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
                                  . '</td></tr>' . PHP_EOL;
         }
