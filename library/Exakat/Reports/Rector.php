@@ -34,6 +34,14 @@ class Rector extends Reports {
                              'Structures/ShouldPreprocess'         => 'Rector\CodeQuality\Rector\Concat\JoinStringConcatRector',
                              'Structures/ElseIfElseif'             => 'Rector\CodeQuality\Rector\If_\ShortenElseIfR',
                              'Structures/CouldUseShortAssignation' => 'Rector\CodeQuality\Rector\Assign\CombinedAssignRector',
+                             'Structures/AddZero'                  => 'Rector\DeadCode\Rector\Plus\RemoveDeadZeroAndOneOperationRector',
+                             'Structures/MultiplyByOne'            => 'Rector\DeadCode\Rector\Plus\RemoveDeadZeroAndOneOperationRector',
+                             'Arrays/MultipleIdenticalKeys'        => 'Rector\DeadCode\Rector\Array_\RemoveDuplicatedArrayKeyRector',
+                             'Structures/MultipleDefinedCase'      => 'Rector\DeadCode\Rector\Switch_\RemoveDuplicatedCaseInSwitchRector',
+                             'Functions/NeverUsedParameter'        => 'Rector\DeadCode\Rector\ClassMethod\RemoveUnusedParameterRector',
+                             'Structures/NoChoice'                 => 'Rector\DeadCode\Rector\If_\SimplifyIfElseWithSameContentRector',
+                             'Functions/Closure2String'            => 'Rector\CodingStyle\Rector\FuncCall\SimpleArrayCallableToStringRector',
+                             
                             );
 
     public function dependsOnAnalysis() : array {
