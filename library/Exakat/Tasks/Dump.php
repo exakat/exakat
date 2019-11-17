@@ -165,11 +165,6 @@ class Dump extends Tasks {
             $this->log->log( 'Collected Trait counts per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
             $begin = $end;
-            $this->collectClassChildrenCounts();
-            $end = microtime(\TIME_AS_NUMBER);
-            $this->log->log( 'Collected Children count per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-
-            $begin = $end;
             $this->collectDefinitionsStats();
             $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Definitions stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
