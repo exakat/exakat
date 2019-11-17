@@ -29,7 +29,7 @@ class DontMixPlusPlus extends Analyzer {
         // $a[$i++] = --$o + $b--;
         $this->atomIs(array('Postplusplus', 'Preplusplus'))
              ->inIs()
-             ->atomIs(array('Addition', 'Multiplication', 'Power', 'Array'));
+             ->atomIsNot(array('Array', 'Sequence'));
         $this->prepareQuery();
     }
 }
