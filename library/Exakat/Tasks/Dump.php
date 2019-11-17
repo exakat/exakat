@@ -174,11 +174,6 @@ class Dump extends Tasks {
             $end = microtime(\TIME_AS_NUMBER);
             $this->log->log( 'Collected Definitions stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
-            $begin = $end;
-            $this->collectClassDepth();
-            $end = microtime(\TIME_AS_NUMBER);
-            $this->log->log( 'Collected Classes stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-
             $begin = microtime(\TIME_AS_NUMBER);
             $this->collectGlobalVariables();
             $end = microtime(\TIME_AS_NUMBER);
@@ -2530,13 +2525,6 @@ GREMLIN
         $this->sqlite->query($query);
     }
 
-    private function collectClassDepth() {
-        $query = <<<'GREMLIN'
-g.V().hasLabel('Class').groupCount('m').by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap('m')
-GREMLIN;
-        $this->collectHashCounts($query, 'Class Depth');
-    }
-
     private function collectMethodsCounts() {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
@@ -2556,13 +2544,6 @@ GREMLIN;
 g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassTraits');
-    }
-
-    private function collectClassChildrenCounts() {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class").groupCount("m").by( __.out('EXTENDS').in("DEFINITION").hasLabel("Class").count() ).cap("m"); 
-GREMLIN;
-        $this->collectHashCounts($query, 'ClassChildren');
     }
 
     private function collectConstantCounts() {
