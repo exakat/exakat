@@ -33,6 +33,12 @@ class TypehintingStats extends Analyzer {
 
         //total parameters
         $this->atomIs(self::$FUNCTIONS_ALL)
+             ->not(
+                $this->side()
+                     ->atomIs('Magicmethod')
+                     ->outIs('NAME')
+                     ->codeIs(array('__destruct', '__construct', '__unset', '__wakeup'), self::TRANSLATE, self::CASE_INSENSITIVE)
+             )
              ->count();
         $totalFunctions = $this->rawQuery()->toInt();
 
