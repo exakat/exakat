@@ -28,14 +28,14 @@ class OverwrittenMethods extends Analyzer {
     public function analyze() {
         // class x { protected function foo()  {}}
         // class xx extends x { protected function foo()  {}}
-        $this->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('lccode', 'name')
               ->goToClass()
-              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->goToAllParents(self::EXCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
-              ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first')
               ->back('first');
@@ -43,14 +43,14 @@ class OverwrittenMethods extends Analyzer {
 
         // interface x { protected function foo()  {}}
         // interface xx extends x { protected function foo()  {}}
-        $this->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('lccode', 'name')
               ->goToInterface()
-              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->goToAllImplements(self::EXCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
-              ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first')
               ->back('first');

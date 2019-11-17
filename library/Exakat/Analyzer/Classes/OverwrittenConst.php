@@ -33,7 +33,7 @@ class OverwrittenConst extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('code', 'constante')
              ->goToClass()
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('CONST')
              ->atomIs('Const')
              ->outIs('CONST')

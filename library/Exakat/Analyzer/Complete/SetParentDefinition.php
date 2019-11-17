@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SetParentDefinition extends Analyzer {
     public function analyze() {
-        $this->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
@@ -34,8 +34,8 @@ class SetParentDefinition extends Analyzer {
               ->count();
         $this->rawQuery();
 
-        $this->atomIs('Newcall', Analyzer::WITHOUT_CONSTANTS)
-              ->fullnspathIs('\\parent', Analyzer::CASE_SENSITIVE)
+        $this->atomIs('Newcall', self::WITHOUT_CONSTANTS)
+              ->fullnspathIs('\\parent', self::CASE_SENSITIVE)
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
@@ -43,44 +43,44 @@ class SetParentDefinition extends Analyzer {
               ->count();
         $this->rawQuery();
 
-        $this->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->_as('parent')
               ->inIs('CLASS')
-              ->atomIs('Staticproperty', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
               ->_as('property')
               ->outIs('MEMBER')
               ->tokenIs('T_VARIABLE')
               ->savePropertyAs('code', 'name')
               ->back('first')
               ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'property')
               ->count();
         $this->rawQuery();
 
-        $this->atomIs('Parent', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->_as('parent')
               ->inIs('CLASS')
-              ->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->_as('constant')
               ->outIs('CONSTANT')
               ->tokenIs('T_STRING')
               ->savePropertyAs('code', 'name')
               ->back('first')
               ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs('CONST')
               ->outIs('CONST')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'constant')
               ->count();
         $this->rawQuery();
 
-        $this->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
-              ->fullnspathIs('\\\\parent', Analyzer::CASE_SENSITIVE)
+        $this->atomIs('String', self::WITHOUT_CONSTANTS)
+              ->fullnspathIs('\\\\parent', self::CASE_SENSITIVE)
               ->_as('parent')
               ->goToClass()
               ->outIs('EXTENDS')

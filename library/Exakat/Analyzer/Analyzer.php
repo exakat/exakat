@@ -1595,30 +1595,6 @@ GREMLIN;
     public function hasNoClassInterfaceTrait() {
         return $this->hasNoInstruction(self::$CIT);
     }
-    
-    public function goToExtends() {
-        $this->query->goToExtends();
-        
-        return $this;
-    }
-
-    public function goToImplements() {
-        $this->query->goToExtends();
-
-        return $this;
-    }
-
-    public function goToParent() {
-        $this->query->goToParent();
-        
-        return $this;
-    }
-
-    public function goToAllParents($self = self::EXCLUDE_SELF) {
-        $this->query->goToAllParents($self);
-
-        return $this;
-    }
 
     public function goToAllParentsTraits($self = self::EXCLUDE_SELF) {
         $this->query->goToAllParentsTraits($self);

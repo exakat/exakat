@@ -37,54 +37,54 @@ class CreateMagicMethod extends Analyzer {
         // Missing : typehinted properties, return typehint, clone
 
         // link to __call
-        $this->atomIs('Methodcall', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
              ->hasNoIn('DEFINITION')
               ->outIs('OBJECT')
               // Others are possible too : $a[1], $b->c, D::$a
-             ->atomIs(array('Variableobject', 'This'), Analyzer::WITHOUT_CONSTANTS)
+             ->atomIs(array('Variableobject', 'This'), self::WITHOUT_CONSTANTS)
              
              // For variables
              ->optional(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->atomIs('Parametername', Analyzer::WITHOUT_CONSTANTS)
+                     ->atomIs('Parametername', self::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
                      ->prepareSide()
              )
 
               ->inIs('DEFINITION')
-              ->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->atomIs('Class', self::WITHOUT_CONSTANTS)
+              ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
-              ->codeIs('__call', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->codeIs('__call', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
               ->back('first');
         $this->prepareQuery();
 
         // link to __callStatic
-        $this->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
              ->hasNoIn('DEFINITION')
              ->outIs('CLASS')
-             ->atomIs(array('Variable', 'This', 'Nsname', 'Identifier', 'Self', 'Parent', 'Static'), Analyzer::WITHOUT_CONSTANTS)
+             ->atomIs(array('Variable', 'This', 'Nsname', 'Identifier', 'Self', 'Parent', 'Static'), self::WITHOUT_CONSTANTS)
 
              // For variables
              ->optional(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->atomIs('Parametername', Analyzer::WITHOUT_CONSTANTS)
+                     ->atomIs('Parametername', self::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
                      ->prepareSide()
              )
 
               ->inIs('DEFINITION')
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
-              ->codeIs('__callstatic', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->codeIs('__callstatic', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first')
               ->back('first');

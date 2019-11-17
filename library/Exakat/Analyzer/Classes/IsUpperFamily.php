@@ -34,26 +34,26 @@ class IsUpperFamily extends Analyzer {
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->tokenIs('T_STRING') // Avoid dynamical names
-             ->savePropertyAs('code', 'methode')
+             ->savePropertyAs('lccode', 'methode')
              
              ->goToClass()
-             ->raw(<<<'GREMLIN'
-not( 
-    where( 
-        __.out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == methode}
-    )
-)
-GREMLIN
+             ->not(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->atomIs('Method')
+                     ->outIs('NAME')
+                     ->samePropertyAs('lccode', 'methode', self::CASE_INSENSITIVE)
+             )
+             ->goToAllParents(self::EXCLUDE_SELF)
+             ->atomIs('Class')
+             ->filter(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->atomIs('Method')
+                     ->outIs('NAME')
+                     ->samePropertyAs('code', 'methode', self::CASE_INSENSITIVE)
              )
 
-             ->goToAllParents()
-             ->atomIs('Class')
-             ->raw(<<<'GREMLIN'
-where( 
-    __.out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == methode}
-)
-GREMLIN
-)
              ->back('first');
         $this->prepareQuery();
 
@@ -70,7 +70,7 @@ GREMLIN
              ->goToClass()
              ->raw('not( where( __.out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("NAME"), __.filter{true; }).filter{it.get().value("code") == property } ) )')
 
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->atomIsNot('Interface')
              ->raw('where( __.out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("NAME"), __.filter{true; }).filter{it.get().value("code") == property }.count().is(neq(0)) )')
 
@@ -90,7 +90,7 @@ GREMLIN
              ->goToClass()
              ->raw('not( where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constante } ) )')
 
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->atomIsNot('Interface')
              ->raw('where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constante }.count().is(neq(0)) )')
 

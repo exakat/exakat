@@ -35,7 +35,7 @@ class RedefinedConstants extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('code', 'constante')
              ->back('first')
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('CONST')
              ->atomIs('Const')
              ->outIs('CONST')

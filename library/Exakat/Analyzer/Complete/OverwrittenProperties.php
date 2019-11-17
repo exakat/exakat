@@ -28,14 +28,14 @@ class OverwrittenProperties extends Analyzer {
     public function analyze() {
         // class x { protected $p = 1;}
         // class xx extends x { protected $p = 1;}
-        $this->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
               ->savePropertyAs('propertyname', 'name')
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
-              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
-              ->atomIs(array('Propertydefinition', 'Virtualproperty'), Analyzer::WITHOUT_CONSTANTS)
-              ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
+              ->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
+              ->samePropertyAs('propertyname', 'name',  self::CASE_SENSITIVE)
               ->raw('where(neq("first"))')
               ->addEFrom('OVERWRITE', 'first')
               ->back('first');

@@ -97,7 +97,7 @@ class AccessPrivate extends Analyzer {
              ->goToClass()
              // no local method
              ->raw($notHasPrivateMethodDefinition)
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->raw($hasPrivateMethodDefinition)
              ->back('first');
         $this->prepareQuery();

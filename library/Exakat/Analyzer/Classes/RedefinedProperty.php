@@ -34,7 +34,7 @@ class RedefinedProperty extends Analyzer {
              ->_as('ppp')
              ->savePropertyAs('code', 'property')
              ->goToClass()
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
