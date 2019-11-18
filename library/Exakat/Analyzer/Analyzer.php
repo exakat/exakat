@@ -80,8 +80,9 @@ abstract class Analyzer {
     protected $analyzerId       = 0;
     protected $queryId          = 0;
     
-    protected $analyzerName     = 'no analyzer name';
-    protected $analyzerTable    = 'no analyzer table name';
+    protected $analyzerName      = 'no analyzer name';
+    protected $analyzerTable     = 'no analyzer table name';
+    private   $lastAnalyzerTable = 'none';
     protected $analyzerSQLTable = 'no analyzer sql creation';
     protected $missingQueries   = array();
     protected $analyzedValues   = array();
@@ -1076,18 +1077,6 @@ GREMLIN;
         return $this;
     }
 
-    public function unique() {
-        $this->query->unique();
-        
-        return $this;
-    }
-
-    public function select(array $steps) {
-        $this->query->select($steps);
-        
-        return $this;
-    }
-
     public function saveOutAs($name, $out = 'ARGUMENT', $sort = 'rank') {
         $this->query->saveOutAs($name, $out, $sort);
 
@@ -1945,8 +1934,13 @@ GREMLIN;
         // table always created, may be empty
         $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
         $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        $sqlite->query("DROP TABLE IF EXISTS {$this->analyzerTable}");
-        $sqlite->query($this->analyzerSQLTable);
+        if ($this->lastAnalyzerTable !== $this->analyzerTable) {
+            $sqlite->query("DROP TABLE IF EXISTS {$this->analyzerTable}");
+            $sqlite->query($this->analyzerSQLTable);
+            
+            $this->lastAnalyzerTable = $this->analyzerTable;
+        }
+        // else : fills the table with more data
 
 /*
     // Can't add that, as it requires a real step
