@@ -34,9 +34,7 @@ class NextCalls extends DSL {
         } else {
             $times = 1;
         }
-        
-        print $times;
-        
+
         // Starting from Parameter, going to next parameter
         // Need a number of executions?
         

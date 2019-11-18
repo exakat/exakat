@@ -234,9 +234,8 @@ class Emissary extends Reports {
         
         foreach($this->generations as $generation) {
             $method = $generation->method;
-            print "$method\n";
             if (!method_exists($this, $method)) {
-                print "Warnign : no such method as $method; Skipping\n";
+                print "Warning : no such method as $method; Skipping\n";
                 continue;
             }
             $this->$method($generation);

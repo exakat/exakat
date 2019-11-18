@@ -30,51 +30,36 @@ class Typehintorder extends Analyzer {
         $this->analyzerTable = 'typehintOrder';
         $this->analyzerSQLTable = <<<'SQL'
 CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                              host STRING,
                               argument STRING,
                               returned STRING
                         )
 SQL;
 
-        $excepted = array('\exception'                  ,
-                          '\datetime'                   ,
-                          '\datetimezone'               ,
-                          '\reflectionclass'            ,
-                          '\reflectionmethod'           ,
-                          '\arrayiterator'              ,
-                          '\stdclass'                   ,
-                          '\splfileinfo'                ,
-                          '\arrayobject'                ,
-                          '\recursiveiteratoriterator'  ,
-                          '\recursivedirectoryiterator' ,
-                          '\emptyiterator'              ,
-                          '\reflectionextension'        ,
-                          '\splfileobject'              ,
-                          '\directoryiterator'          ,
-                          '\pdo'                        ,
-                          '\reflectionobject'           ,
-                          '\reflectionproperty'         ,
-                          '\reflectionfunction'         ,
-                          '\reflectionextractor'        ,
-                          '\reflectionclassresource'    ,
-                          '\reflectionclassresourcetest',
-                          '\reflectionexception'        ,
-                          '\reflectionparameter'        ,
-                          '\reflectioncaster'           ,
-                         );
-        
+        $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('RETURNTYPE')
+              ->_as('returned')
+              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
+              ->back('first')
+              ->outIs('ARGUMENT')
+              ->outIs('TYPEHINT')
+              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
+              ->_as('argument')
+              ->select(array('first'    => 'fullnspath',
+                             'argument' => 'fullnspath',
+                             'returned' => 'fullnspath'));
+        $this->prepareQuery(self::QUERY_TABLE);
 
         $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->_as('returned')
               ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
-              ->fullnspathIsNot($excepted)
               ->back('first')
               ->outIs('ARGUMENT')
-              ->outIs('TYPEHINT')
-              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
-              ->fullnspathIsNot($excepted)
+              ->atomIs('Void')
               ->_as('argument')
-              ->select(array('argument' => 'fullnspath',
+              ->select(array('first'    => 'fullnspath',
+                             'argument' => '\\\\void',
                              'returned' => 'fullnspath'));
         $this->prepareQuery(self::QUERY_TABLE);
     }

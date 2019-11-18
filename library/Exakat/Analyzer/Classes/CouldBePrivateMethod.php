@@ -72,7 +72,6 @@ class CouldBePrivateMethod extends Analyzer {
              ->atomIs('Methodcallname')
              ->savePropertyAs('code', 'name')
              ->_as('method')
-//             ->goToClass()
              ->select(array('classe' => 'fullnspath',
                             'method' => 'lccode',
                             ))

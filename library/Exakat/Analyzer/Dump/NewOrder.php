@@ -33,7 +33,6 @@ CREATE TABLE newOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                          calling STRING,
                          called STRING,
                          CONSTRAINT "unique" UNIQUE (calling, called)  ON CONFLICT IGNORE
-                         
                         )
 SQL;
 

@@ -50,7 +50,6 @@ class Topology extends Reports {
             $nodes[] = $row;
         }
 
-
         $names = array();
         foreach($nodes as $id => list('origin' => $origin, 'destination' => $destination)) {
             if (strpos($origin, '@') !== false ||

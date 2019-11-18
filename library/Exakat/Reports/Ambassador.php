@@ -2244,7 +2244,7 @@ SQL;
             $item['line' ]          = $row['line'];
             $item['severity']       = '<i class="fa fa-warning" style="color: ' . $severityColors[$this->severities[$row['analyzer']]] . '"></i>';
             $item['complexity']     = '<i class="fa fa-cog" style="color: ' . $TTFColors[$this->timesToFix[$row['analyzer']]] . '"></i>';
-            $item['recipe' ]        =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $item['recipe' ]        = implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $lines                  = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
 
