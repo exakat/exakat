@@ -36,19 +36,16 @@ Extensions are bundled as PHP archives (`.phar` file), installed in the `ext` fo
 
 
 
-List of extensions : there are 13 extensions
+List of extensions : there are 10 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
-* :ref:`Melis <extension-melis>`
-* :ref:`Monolog <extension-monolog>`
 * :ref:`Pmb <extension-pmb>`
 * :ref:`Prestashop <extension-prestashop>`
 * :ref:`Shopware <extension-shopware>`
 * :ref:`Slim <extension-slim>`
 * :ref:`Symfony <extension-symfony>`
-* :ref:`Twig <extension-twig>`
 * :ref:`Wordpress <extension-wordpress>`
 * :ref:`ZendF <extension-zendf>`
 
@@ -417,140 +414,6 @@ This extension includes no specific report. Use generic reports, like Text to ac
 
 
 
-.. _extension-melis:
-
-Melis
-#####
-
-This is the Melis extension for Exakat. 
-
-Melis is a new generation of Content Management System and eCommerce platform to achieve and manage websites from a single web interface easy to use while offering the best of open source technology.
-
-
-
-* **Home page** : `https://www.melistechnology.com/ <https://www.melistechnology.com/>`_
-* **Extension page** : `https://github.com/exakat/Exakat4Melis <https://github.com/exakat/Exakat4Melis>`_
-
-Melis analysis
-__________________________________________________
-
-This extension includes 15 analyzers.
-
-* Check Regex (Melis/CheckRegex)
-* Make Type A String (Melis/MakeTypeAString)
-* Melis 2.1 Compatibility (Melis/Melis_2_1)
-* Melis 2.2 Compatibility (Melis/Melis_2_2)
-* Melis 2.3 Compatibility (Melis/Melis_2_3)
-* Melis 2.4 Compatibility (Melis/Melis_2_4)
-* Melis 2.5 Compatibility (Melis/Melis_2_5)
-* Melis 3.0 Compatibility (Melis/Melis_3_0)
-* Melis Translation String (Melis/TranslationString)
-* Melis Usage (Melis/MelisUsage)
-* Melis/RouteConstraints (Melis/RouteConstraints)
-* Missing Language (Melis/MissingLanguage)
-* Missing Translation String (Melis/MissingTranslation)
-* Undefined Configuration Type (Melis/UndefinedConfType)
-* Undefined Configured Class (Melis/UndefinedConfiguredClass)
-
-
-Melis rulesets
-__________________________________________________
-
-This extension includes one ruleset : Melis.
-
-
-Melis reports
-__________________________________________________
-
-This extension includes one report : Melis.
-
-
-
-.. _extension-monolog:
-
-Monolog
-#######
-
-This is the Monolog extension for Exakat. 
-
-Monolog is a popular logging component for PHP, written by ` <https://twitter.com/seldaek>`_. 
-
-
-* **Home page** : `https://github.com/Seldaek/monolog <https://github.com/Seldaek/monolog>`_
-* **Extension page** : `https://github.com/exakat/Exakat4Monolog <https://github.com/exakat/Exakat4Monolog>`_
-
-Monolog analysis
-__________________________________________________
-
-This extension includes 52 analyzers.
-
-* Monolog 1.0 Compatibility (Monolog/Monolog_1_0)
-* Monolog 1.0.0 Compatibility (Monolog/Monolog_1_0_0)
-* Monolog 1.1 Compatibility (Monolog/Monolog_1_1)
-* Monolog 1.1.0 Compatibility (Monolog/Monolog_1_1_0)
-* Monolog 1.10 Compatibility (Monolog/Monolog_1_10)
-* Monolog 1.10.0 Compatibility (Monolog/Monolog_1_10_0)
-* Monolog 1.11 Compatibility (Monolog/Monolog_1_11)
-* Monolog 1.11.0 Compatibility (Monolog/Monolog_1_11_0)
-* Monolog 1.12 Compatibility (Monolog/Monolog_1_12)
-* Monolog 1.12.0 Compatibility (Monolog/Monolog_1_12_0)
-* Monolog 1.13 Compatibility (Monolog/Monolog_1_13)
-* Monolog 1.13.0 Compatibility (Monolog/Monolog_1_13_0)
-* Monolog 1.14 Compatibility (Monolog/Monolog_1_14)
-* Monolog 1.14.0 Compatibility (Monolog/Monolog_1_14_0)
-* Monolog 1.15 Compatibility (Monolog/Monolog_1_15)
-* Monolog 1.15.0 Compatibility (Monolog/Monolog_1_15_0)
-* Monolog 1.16 Compatibility (Monolog/Monolog_1_16)
-* Monolog 1.16.0 Compatibility (Monolog/Monolog_1_16_0)
-* Monolog 1.17 Compatibility (Monolog/Monolog_1_17)
-* Monolog 1.17.0 Compatibility (Monolog/Monolog_1_17_0)
-* Monolog 1.18 Compatibility (Monolog/Monolog_1_18)
-* Monolog 1.18.0 Compatibility (Monolog/Monolog_1_18_0)
-* Monolog 1.19 Compatibility (Monolog/Monolog_1_19)
-* Monolog 1.19.0 Compatibility (Monolog/Monolog_1_19_0)
-* Monolog 1.2 Compatibility (Monolog/Monolog_1_2)
-* Monolog 1.2.0 Compatibility (Monolog/Monolog_1_2_0)
-* Monolog 1.20 Compatibility (Monolog/Monolog_1_20)
-* Monolog 1.20.0 Compatibility (Monolog/Monolog_1_20_0)
-* Monolog 1.21 Compatibility (Monolog/Monolog_1_21)
-* Monolog 1.21.0 Compatibility (Monolog/Monolog_1_21_0)
-* Monolog 1.22 Compatibility (Monolog/Monolog_1_22)
-* Monolog 1.22.0 Compatibility (Monolog/Monolog_1_22_0)
-* Monolog 1.23 Compatibility (Monolog/Monolog_1_23)
-* Monolog 1.23.0 Compatibility (Monolog/Monolog_1_23_0)
-* Monolog 1.24 Compatibility (Monolog/Monolog_1_24)
-* Monolog 1.24.0 Compatibility (Monolog/Monolog_1_24_0)
-* Monolog 1.3 Compatibility (Monolog/Monolog_1_3)
-* Monolog 1.3.0 Compatibility (Monolog/Monolog_1_3_0)
-* Monolog 1.4 Compatibility (Monolog/Monolog_1_4)
-* Monolog 1.4.0 Compatibility (Monolog/Monolog_1_4_0)
-* Monolog 1.5 Compatibility (Monolog/Monolog_1_5)
-* Monolog 1.5.0 Compatibility (Monolog/Monolog_1_5_0)
-* Monolog 1.6 Compatibility (Monolog/Monolog_1_6)
-* Monolog 1.6.0 Compatibility (Monolog/Monolog_1_6_0)
-* Monolog 1.7 Compatibility (Monolog/Monolog_1_7)
-* Monolog 1.7.0 Compatibility (Monolog/Monolog_1_7_0)
-* Monolog 1.8 Compatibility (Monolog/Monolog_1_8)
-* Monolog 1.8.0 Compatibility (Monolog/Monolog_1_8_0)
-* Monolog 1.9 Compatibility (Monolog/Monolog_1_9)
-* Monolog 1.9.0 Compatibility (Monolog/Monolog_1_9_0)
-* Monolog 2.0 Compatibility (Monolog/Monolog_2_0)
-* Monolog Usage (Monolog/MonologUsage)
-
-
-Monolog rulesets
-__________________________________________________
-
-This extension includes one ruleset : Monolog.
-
-
-Monolog reports
-__________________________________________________
-
-This extension includes no specific report. Use generic reports, like Text to access the results.
-
-
-
 .. _extension-pmb:
 
 Pmb
@@ -794,47 +657,6 @@ This extension includes one ruleset : Symfony.
 
 
 Symfony reports
-__________________________________________________
-
-This extension includes no specific report. Use generic reports, like Text to access the results.
-
-
-
-.. _extension-twig:
-
-Twig
-####
-
-This is the Twig extension for Exakat. 
-
-The flexible, fast, and secure template engine for PHP
-
-
-* **Home page** : `https://twig.symfony.com/index.html <https://twig.symfony.com/index.html>`_
-
-Twig analysis
-__________________________________________________
-
-This extension includes 9 analyzers.
-
-* Twig 2.0 Compatibility (Twig/Twig_2_0)
-* Twig 2.1 Compatibility (Twig/Twig_2_1)
-* Twig 2.2 Compatibility (Twig/Twig_2_2)
-* Twig 2.3 Compatibility (Twig/Twig_2_3)
-* Twig 2.4 Compatibility (Twig/Twig_2_4)
-* Twig 2.5 Compatibility (Twig/Twig_2_5)
-* Twig 2.6 Compatibility (Twig/Twig_2_6)
-* Twig 2.7 Compatibility (Twig/Twig_2_7)
-* Twig Usage (Twig/TwigUsage)
-
-
-Twig rulesets
-__________________________________________________
-
-This extension includes one ruleset : Twig.
-
-
-Twig reports
 __________________________________________________
 
 This extension includes no specific report. Use generic reports, like Text to access the results.

@@ -8,8 +8,24 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 11 Nov 2019 19:50:55 +0000
-.. comment: Generation hash : b86655f02abfb5880295ddcf851fa5d45ca0812f
+.. comment: Generation date : Sun, 17 Nov 2019 11:49:07 +0000
+.. comment: Generation hash : 3563d2c62cb723aa0e90a3177b0d84024fd73abd
+
+
+.. _:
+
+
+
+
+
+
+
++------------+---------------------------------+
+| Short name | Classes/AvoidOptionalProperties |
++------------+---------------------------------+
+| Rulesets   | :ref:`Analyze`                  |
++------------+---------------------------------+
+
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -1804,56 +1820,6 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
 
 
 
-.. _avoid-optional-properties:
-
-Avoid Optional Properties
-#########################
-
-
-Avoid optional properties, to prevent littering the code with existence checks. 
-
-When a property has to be checked once for existence, it is safer to check it each time. This leads to a decrease in readability.
-
-Either make sure the property is set with an actual object rather than with null, or use a void object. A void object offers the same interface than the expected object, but does nothing. It allows calling its methods, without running into a Fatal error, nor testing it. 
-
-.. code-block:: php
-
-   <?php
-   
-   // Example is courtesy 'The Coding Machine' : it has been adapted from its original form. See link below.
-   
-   class MyMailer {
-       private $logger;
-   
-       public function __construct(LoggerInterface $logger = null) {
-           $this->logger = $logger;
-       }
-   
-       private function sendMail(Mail $mail) {
-           // Since $this->logger may be null, it must be tested anytime it is used.
-           if ($this->logger) {
-               $this->logger->info('Mail successfully sent.');
-           }
-       }
-   }
-   
-   ?>
-
-
-See also `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_, `The Null Object Pattern – Polymorphism in Domain Models <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_, and `Practical PHP Refactoring: Introduce Null Object <https://dzone.com/articles/practical-php-refactoring-26>`_.
-
-+-------------+---------------------------------+
-| Short name  | Classes/AvoidOptionalProperties |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Slow (1 hour)                   |
-+-------------+---------------------------------+
-
-
-
 .. _avoid-parenthesis:
 
 Avoid Parenthesis
@@ -3127,6 +3093,13 @@ Although this code lints, PHP throws a Fatal error when executing or including i
 
 
 See also `Throwable <http://php.net/manual/en/class.throwable.php>`_, `Exception <http://php.net/manual/en/class.exception.php>`_ and `Error <http://php.net/manual/en/class.error.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Extends the \Exception class
+* Extends the \Error class
 
 +-------------+----------------------------------------+
 | Short name  | Exceptions/CantThrow                   |
@@ -7600,15 +7573,23 @@ When mixed with a larger expression, it is difficult to read, and may lead to un
 
 See also `EXP30-C. Do not depend on the order of evaluation for side effects <https://wiki.sei.cmu.edu/confluence/display/c/EXP30-C.+Do+not+depend+on+the+order+of+evaluation+for+side+effects>`_.
 
-+-------------+----------------------------+
-| Short name  | Structures/DontMixPlusPlus |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Extract the increment from the expression, and put it on a separate line.
+
++-------------+-----------------------------------------------------------------------------------+
+| Short name  | Structures/DontMixPlusPlus                                                        |
++-------------+-----------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                    |
++-------------+-----------------------------------------------------------------------------------+
+| Severity    | Minor                                                                             |
++-------------+-----------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                  |
++-------------+-----------------------------------------------------------------------------------+
+| Examples    | :ref:`contao-structures-dontmixplusplus`, :ref:`typo3-structures-dontmixplusplus` |
++-------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -18373,6 +18354,59 @@ Suggestions
 
 
 
+.. _no-mb\_substr-in-loop:
+
+No mb_substr In Loop
+####################
+
+
+Do not use loops on `mb_substr() <http://www.php.net/mb_substr>`_. 
+
+`mb_substr() <http://www.php.net/mb_substr>`_ always starts at the beginning of the string ot search for the nth char, and recalculate everything. This means that the first iterations are as fast as `substr() <http://www.php.net/substr>`_ (for comparison), while the longer the string, the slower `mb_substr() <http://www.php.net/mb_substr>`_.
+
+The recommendation is to use `preg_split() <http://www.php.net/preg_split>`_ with the `u` option, to split the string into an array. This save multiple recalculations.
+
+.. code-block:: php
+
+   <?php
+   
+   // Split the string by characters
+   $array = preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
+   foreach($array as $c) {
+       doSomething($c);
+   }
+   
+   // Slow version
+   $nb = mb_strlen($mb);
+   for($i = 0; $i < $nb; ++$i) {
+       // Fetch a character
+       $c = mb_substr($string, $i, 1);
+       doSomething($c);
+   }
+   
+   ?>
+
+
+See also `Optimization: How I made my PHP code run 100 times faster <https://mike42.me/blog/2018-06-how-i-made-my-php-code-run-100-times-faster>`_ and `How to iterate UTF-8 string in PHP? <https://stackoverflow.com/questions/3666306/how-to-iterate-utf-8-string-in-php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use preg_split() and loop on its results.
+
++-------------+-----------------------------+
+| Short name  | Performances/MbStringInLoop |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Performances`         |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+
+
+
 .. _non-ascii-variables:
 
 Non Ascii Variables
@@ -20860,59 +20894,6 @@ Suggestions
 
 
 
-.. _performances/mbstringinloop:
-
-Performances/MbStringInLoop
-###########################
-
-
-Do not use loops on `mb_substr() <http://www.php.net/mb_substr>`_. 
-
-`mb_substr() <http://www.php.net/mb_substr>`_ always starts at the beginning of the string ot search for the nth char, and recalculate everything. This means that the first iterations are as fast as `substr() <http://www.php.net/substr>`_ (for comparison), while the longer the string, the slower `mb_substr() <http://www.php.net/mb_substr>`_.
-
-The recommendation is to use `preg_split() <http://www.php.net/preg_split>`_ with the `u` option, to split the string into an array. This save multiple recalculations.
-
-.. code-block:: php
-
-   <?php
-   
-   // Split the string by characters
-   $array = preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
-   foreach($array as $c) {
-       doSomething($c);
-   }
-   
-   // Slow version
-   $nb = mb_strlen($mb);
-   for($i = 0; $i < $nb; ++$i) {
-       // Fetch a character
-       $c = mb_substr($string, $i, 1);
-       doSomething($c);
-   }
-   
-   ?>
-
-
-See also `Optimization: How I made my PHP code run 100 times faster <https://mike42.me/blog/2018-06-how-i-made-my-php-code-run-100-times-faster>`_ and `How to iterate UTF-8 string in PHP? <https://stackoverflow.com/questions/3666306/how-to-iterate-utf-8-string-in-php>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+-----------------------------+
-| Short name  | Performances/MbStringInLoop |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Performances`         |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
-+-------------+-----------------------------+
-
-
-
 .. _php-7-indirect-expression:
 
 Php 7 Indirect Expression
@@ -23250,15 +23231,22 @@ Property shouldn't use both object and scalar syntaxes. When a property may be a
 
 See also `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_. and `The Null Object Pattern <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_.
 
-+-------------+--------------------------------+
-| Short name  | Classes/ScalarOrObjectProperty |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Slow (1 hour)                  |
-+-------------+--------------------------------+
+Suggestions
+^^^^^^^^^^^
+
+* Only use one type of syntax with your properties.
+
++-------------+------------------------------------------------+
+| Short name  | Classes/ScalarOrObjectProperty                 |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                 |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                  |
++-------------+------------------------------------------------+
+| Examples    | :ref:`sugarcrm-classes-scalarorobjectproperty` |
++-------------+------------------------------------------------+
 
 
 

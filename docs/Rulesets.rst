@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 11 Nov 2019 19:50:55 +0000
-.. comment: Generation hash : b86655f02abfb5880295ddcf851fa5d45ca0812f
+.. comment: Generation date : Sun, 17 Nov 2019 11:49:07 +0000
+.. comment: Generation hash : 3563d2c62cb723aa0e90a3177b0d84024fd73abd
 
 
 .. _analyze:
@@ -116,7 +116,6 @@ Total : 386 analysis
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
-* :ref:`Avoid Optional Properties <avoid-optional-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid Using stdClass <avoid-using-stdclass>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
@@ -467,6 +466,7 @@ Total : 386 analysis
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
+* :ref:``
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 * :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
@@ -1184,7 +1184,7 @@ Total : 45 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-* :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
+* :ref:`No mb_substr In Loop <no-mb\_substr-in-loop>`
 * :ref:`Pre-increment <pre-increment>`
 * :ref:`Processing Collector <processing-collector>`
 * :ref:`Regex On Arrays <regex-on-arrays>`

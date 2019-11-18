@@ -6691,6 +6691,33 @@ This code actually loads the file, join it, then split it again. file() would be
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
+Scalar Or Object Property
+=========================
+
+.. _sugarcrm-classes-scalarorobjectproperty:
+
+SugarCRM
+^^^^^^^^
+
+:ref:`scalar-or-object-property`, in SugarCE-Full-6.5.26/data/Link.php:54. 
+
+The _relationship property starts its life as a string, and becomes an object later. 
+
+.. code-block:: php
+
+    class Link {
+    
+    	/* Private variables.*/
+    	var $_log;
+    	var $_relationship_name; //relationship this attribute is tied to.
+    	var $_bean; //stores a copy of the bean.
+    	var $_relationship= '';
+    
+    /// More code..... 
+    
+    // line 92
+    		$this->_relationship=new Relationship();
+
 Assign With And
 ===============
 
@@ -7985,6 +8012,42 @@ A case where PHP needs help : if the PHP version is older than 5.3, then it is v
 .. code-block:: php
 
     if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+
+Dont Mix ++
+===========
+
+.. _contao-structures-dontmixplusplus:
+
+Contao
+^^^^^^
+
+:ref:`dont-mix-++`, in core-bundle/src/Resources/contao/drivers/DC_Table.php:1272. 
+
+Incrementing and multiplying at the same time.
+
+.. code-block:: php
+
+    $this->Database->prepare("UPDATE " . $this->strTable . " SET sorting=? WHERE id=?")
+    		   ->execute(($count++ * 128), $objNewSorting->id);
+
+
+--------
+
+
+.. _typo3-structures-dontmixplusplus:
+
+Typo3
+^^^^^
+
+:ref:`dont-mix-++`, in typo3/sysext/backend/Classes/Controller/SiteConfigurationController.php:74. 
+
+The post-increment is not readable at first glance.
+
+.. code-block:: php
+
+    foreach ($row['rootline'] as &$record) {
+                    $record['margin'] = $i++ * 20;
+                }
 
 Abstract Or Implements
 ======================

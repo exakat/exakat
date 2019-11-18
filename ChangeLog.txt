@@ -1,4 +1,4 @@
-Version 2.0.4 (Army Defeating Star of Heaven's Gate, coming up)
+Version 2.0.5 (Ao Guang, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,21 @@ Version 2.0.4 (Army Defeating Star of Heaven's Gate, coming up)
 + Tokenizer
     + 
 
-Version 2.0.3 (Military Star of the North Pole, 2018-11-11)
+Version 2.0.4 (Army Defeating Star of Heaven's Gate, 2019-11-18)
++ Architecture
+    + Reducing Analyzer's class method count
+    + Moving more collections to Dump/ and Complete/
++ Report
+    + Rector : added more coverage
+    + Ambassador : Skiped analysis are now reported, not with -1
+    + Ambassador : Foreach favorites's graph is displayed
+    + Ambassador : Visibility suggestion has full method names
++ Analysis
+    + Upgraded analysis : Don't Mix ++ now skips $a[$b++]
+    + Upgraded analysis : Type hint stats skips some return values
+    + Checked unit tests : 3365 / 3401 test pass (99% pass)
+
+Version 2.0.3 (Military Star of the North Pole, 2019-11-11)
 + Architecture
     + Added check on xdebug presence (nesting limit)
     + Moving more collections to Dump/

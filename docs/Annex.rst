@@ -307,19 +307,16 @@ Supported Frameworks
 
 Frameworks, components and libraries are supported via Exakat extensions.
 
-List of extensions : there are 13 extensions
+List of extensions : there are 10 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
-* :ref:`Melis <extension-melis>`
-* :ref:`Monolog <extension-monolog>`
 * :ref:`Pmb <extension-pmb>`
 * :ref:`Prestashop <extension-prestashop>`
 * :ref:`Shopware <extension-shopware>`
 * :ref:`Slim <extension-slim>`
 * :ref:`Symfony <extension-symfony>`
-* :ref:`Twig <extension-twig>`
 * :ref:`Wordpress <extension-wordpress>`
 * :ref:`ZendF <extension-zendf>`
 
@@ -356,6 +353,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Piwigo <https://www.piwigo.org/>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
+* SugarCRM
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
@@ -442,8 +440,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 2.0.3
 
-  * Collect Class Interface Counts (Dump/CollectClassInterfaceCounts)
+  * Collect Class Children Count (Dump/CollectClassChildren)
+  * Collect Class Depth (Dump/CollectClassDepth ; Dump)
+  * Collect Class Interface Counts (Dump/CollectClassInterfaceCounts ; Dump)
   * Exceeding Typehint (Functions/ExceedingTypehint ; ClassReview)
+  * Interfaces/PossibleInterfaces (Interfaces/PossibleInterfaces ; )
 
 * 2.0.2
 
@@ -501,8 +502,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Duplicate Literal (Type/DuplicateLiteral ; Semantics)
   * Internet Domains (Type/UdpDomains ; Inventory)
   * No Weak SSL Crypto (Security/NoWeakSSLCrypto ; Security)
+  * No mb_substr In Loop (Performances/MbStringInLoop ; Performances)
   * Non Nullable Getters (Classes/NonNullableSetters)
-  * Performances/MbStringInLoop (Performances/MbStringInLoop ; Performances)
   * Use Case Value (Structures/UseCaseValue ; Suggestions)
 
 * 1.9.5
@@ -1190,11 +1191,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.12.0
 
-  * Avoid Optional Properties (Classes/AvoidOptionalProperties)
   * Heredoc Delimiter (Structures/HeredocDelimiterFavorite ; Coding Conventions)
   * Multiple Functions Declarations (Functions/MultipleDeclarations ; Appinfo)
   * Non Breakable Space In Names (Structures/NonBreakableSpaceInNames ; Appinfo, Appcontent)
-  * ext/swoole (Extensions/Extswoole ; Appinfo)
+  * ext/swoole (Extensions/Extswoole)
 
 * 0.11.8
 
@@ -2341,8 +2341,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2360,7 +2360,6 @@ List of external links mentionned in this documentation.
 * `Avoid Else, Return Early <http://blog.timoxley.com/post/47041269194/avoid-else-return-early>`_
 * `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_
 * `Avoid option arrays in constructors <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-option-arrays-in-constructors>`_
-* `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `basename <http://www.php.net/basename>`_
@@ -2662,8 +2661,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2687,8 +2686,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_

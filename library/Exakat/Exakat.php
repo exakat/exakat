@@ -27,8 +27,8 @@ use Exakat\Config;
 use Exakat\Configsource\Commandline;
 
 class Exakat {
-    const VERSION = '2.0.3';
-    const BUILD = 1013;
+    const VERSION = '2.0.4';
+    const BUILD = 1016;
 
     private $gremlin = null;
     private $config = null;

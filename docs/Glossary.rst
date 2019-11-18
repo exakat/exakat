@@ -1070,7 +1070,7 @@ Glossary
 
       + :ref:`Mbstring Third Arg <mbstring-third-arg>`
       + :ref:`No Substr() One <no-substr()-one>`
-      + :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
+      + :ref:`No mb_substr In Loop <no-mb\_substr-in-loop>`
       + :ref:`Substr To Trim <substr-to-trim>`
 
     + `mcrypt_cbc()`
@@ -1137,7 +1137,6 @@ Glossary
 
     + `Null`
 
-      + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Duplicate Literal <duplicate-literal>`
       + :ref:`Indices Are Int Or String <indices-are-int-or-string>`
       + :ref:`Null Or Boolean Arrays <null-or-boolean-arrays>`
@@ -1156,7 +1155,6 @@ Glossary
     + `null`
 
       + :ref:`Always Positive Comparison <always-positive-comparison>`
-      + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
       + :ref:`Casting Ternary <casting-ternary>`
       + :ref:`Check All Types <check-all-types>`
@@ -1341,7 +1339,7 @@ Glossary
 
     + `preg_split()`
 
-      + :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
+      + :ref:`No mb_substr In Loop <no-mb\_substr-in-loop>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `prev()`
@@ -1614,7 +1612,7 @@ Glossary
 
       + :ref:`No List With String <no-list-with-string>`
       + :ref:`No Substr() One <no-substr()-one>`
-      + :ref:`Performances/MbStringInLoop <performances/mbstringinloop>`
+      + :ref:`No mb_substr In Loop <no-mb\_substr-in-loop>`
       + :ref:`Substr To Trim <substr-to-trim>`
       + :ref:`Substring First <substring-first>`
       + :ref:`Use Basename Suffix <use-basename-suffix>`
