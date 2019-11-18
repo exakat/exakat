@@ -26,18 +26,25 @@ namespace Exakat\Query\DSL;
 class Select extends DSL {
     public function run() : Command {
         list($values) = func_get_args();
-        
+
         $by     = array();
         $select = array();
         foreach($values as $k => $v) {
+            assert(in_array($k, $this->availableLabels, \STRICT_COMPARISON), "No such step as '$k'");
+
             if (is_int($k)) {
                 $select[] = $v;
             } elseif ($v === 'id') {
                 $select[] = $k;
                 $by[]     = 'by(id())';
-            } else {
+            } elseif (in_array($v, self::PROPERTIES, \STRICT_COMPARISON)) {
+                // Use a local property
                 $select[] = $k;
                 $by[]     = "by(\"$v\")";
+            } else {
+                // Turn value into a constant
+                $select[] = $k;
+                $by[]     = "by(constant(\"$v\"))";
             }
         }
         
