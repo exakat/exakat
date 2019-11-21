@@ -62,7 +62,7 @@ class Config {
     private $remotes     = array();
     private $rulesets    = array();
     
-    public function __construct($argv) {
+    public function __construct(array $argv) {
         $this->argv = $argv;
 
         $this->is_phar  = class_exists('\\Phar') && !empty(phar::running()) ? self::IS_PHAR : self::IS_NOT_PHAR;
@@ -192,7 +192,7 @@ class Config {
         $this->finishConfigs();
     }
     
-    private function finishConfigs() {
+    private function finishConfigs() : void {
         $this->options['pid'] = getmypid();
 
         if ($this->options['inside_code'] === self::INSIDE_CODE) {
@@ -215,7 +215,7 @@ class Config {
         }
     }
 
-    public function __isset($name) {
+    public function __isset($name) : bool {
         return isset($this->options[$name]);
     }
 
@@ -243,7 +243,7 @@ class Config {
         display("It is not possible to modify configuration $name with value '".var_export($value, true)."'\n");
     }
 
-    private function checkSelf() {
+    private function checkSelf() : void {
         if (version_compare(PHP_VERSION, '7.0.0') < 0) {
             throw new InaptPHPBinary('PHP needs to be version 7.0.0 or more to run exakat.(' . PHP_VERSION . ' provided)');
         }
@@ -261,7 +261,7 @@ class Config {
         }
     }
 
-    public function commandLineJson() {
+    public function commandLineJson() : string {
         $return = $this->argv;
         
         $id = array_search('-remote', $return);
@@ -271,7 +271,7 @@ class Config {
         return json_encode(array_values($return));
     }
 
-    public function toIni() {
+    public function toIni() : string {
         $ini = array();
 
         $ini[] = ';Main PHP version for this code.';
@@ -323,7 +323,7 @@ class Config {
         return implode(PHP_EOL, $ini);
     }
 
-    public function toYaml() {
+    public function toYaml() : string {
         $yaml = array('phpversion'          => $this->options['phpversion'],
                       'ignore_dirs'         => $this->options['ignore_dirs'],
                       'include_dirs'        => $this->options['include_dirs'],
@@ -355,7 +355,7 @@ class Config {
         return Symfony_Yaml::dump($yaml);
     }
 
-    public function duplicate($options) {
+    public function duplicate($options) : self {
         $return = clone $this;
         
         // Only update existing values : ignoring the rest
