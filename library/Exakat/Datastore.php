@@ -38,7 +38,7 @@ class Datastore {
     const TIMEOUT_WRITE = 5000;
     const TIMEOUT_READ = 6000;
 
-    private function __construct(Config $config, $create = self::REUSE) {
+    private function __construct(Config $config, int $create = self::REUSE) {
         $this->sqlitePath = $config->datastore;
 
         // if project dir isn't created, we are about to create it.
@@ -93,7 +93,7 @@ class Datastore {
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
     }
     
-    public static function getDatastore(Config $config, $create = self::REUSE) {
+    public static function getDatastore(Config $config, bool $create = self::REUSE) : self {
         if (!isset(self::$singleton) || $create === self::CREATE) {
             self::$singleton = new self($config, $create);
         }
@@ -101,7 +101,7 @@ class Datastore {
         return self::$singleton;
     }
 
-    public function addRow($table, $data) {
+    public function addRow(string $table, $data) : bool {
         if (empty($data)) {
             return true;
         }
@@ -122,7 +122,6 @@ class Datastore {
                 }
                 $cols[] = $row['name'];
             }
-            
 
             if (count($cols) !== 2) {
                 throw new WrongNumberOfColsForAHash($table, count($cols));
@@ -162,7 +161,7 @@ class Datastore {
         return true;
     }
 
-    public function deleteRow($table, $data) {
+    public function deleteRow(string $table, iterable $data) : bool {
         if (empty($data)) {
             return true;
         }
@@ -188,7 +187,7 @@ class Datastore {
         return true;
     }
 
-    public function getRow($table) : array {
+    public function getRow(string $table) : array {
         try {
             $query = "SELECT * FROM $table";
             $res = $this->sqliteRead->query($query);
@@ -223,7 +222,7 @@ class Datastore {
         return $return;
     }
 
-    public function getHash(string $key) {
+    public function getHash(string $key) : ?string {
         $query = 'SELECT value FROM hash WHERE key=:key';
         $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
@@ -275,7 +274,7 @@ class Datastore {
         return $return;
     }
 
-    public function addRowAnalyzer(string $analyzer, $key, $value = '') {
+    public function addRowAnalyzer(string $analyzer, $key, string $value = '') : bool {
         if (is_array($key)) {
             foreach($key as &$v) {
                 $v['analyzer'] = $analyzer;
@@ -518,7 +517,7 @@ SQLITE;
         $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
     
-    public function ignoreFile(string $file, string $reason = 'unknown') {
+    public function ignoreFile(string $file, string $reason = 'unknown') : void {
         $this->sqliteWrite->query('DELETE FROM files WHERE file = \'' . $this->sqliteWrite->escapeString($file) . '\'');
         $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, \'' . $this->sqliteWrite->escapeString($file) . '\', "' . $reason . '")');
     }

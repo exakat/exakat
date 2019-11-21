@@ -590,11 +590,11 @@ $exampleTxt
     
     private function rst_link($title, $link = '') {
         if (empty($link)) {
-           if (strpos($title,' ') !== false) {
+           if (strpos($title,' ') === false) {
+                return ':ref:`'.$this->rst_escape($title).'`';
+            } else {
                 $escapeTitle = $this->rst_anchor($title);
                 return ':ref:`'.$this->rst_escape($title).' <'.$escapeTitle.'>`';
-            } else {
-                return ':ref:`'.$this->rst_escape($title).'`';
             }
         } else {
             return ':ref:`'.$this->rst_escape($title).' <'.$link.'>`';
@@ -687,10 +687,10 @@ $exampleTxt
             return $res;
         }, $desc);
         
-        if (!empty($ini['clearphp'])) {
-            $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
-        } else {
+        if (empty($ini['clearphp'])) {
             $clearPHP = '';
+        } else {
+            $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
         }
 
         if (isset($a2themes[$name])) {
@@ -753,10 +753,10 @@ SPHINX;
         $parameters = array();
         for($i = 0; $i < 10; $i++) {
             if (isset($ini['parameter'.$i])) {
-                if (!isset($this->parameter_list[$ini['name']])) {
-                    $this->parameter_list[$ini['name']] = array($ini['parameter'.$i]['name'] => $ini['parameter'.$i]['default']);
-                } else {
+                if (isset($this->parameter_list[$ini['name']])) {
                     $this->parameter_list[$ini['name']][$ini['parameter'.$i]['name']] = $ini['parameter'.$i]['default'];
+                } else {
+                    $this->parameter_list[$ini['name']] = array($ini['parameter'.$i]['name'] => $ini['parameter'.$i]['default']);
                 }
 
                 $parameters[] = [$ini['parameter'.$i]['name'],
@@ -1042,23 +1042,23 @@ GLOSSARY;
         foreach($atoms as $name => $atom) {
             $properties = array_diff( array_keys($atom), ['in', 'out', 'name', 'url', 'description', 'token']);
             sort($properties);
-            if (!empty($atom['token'])) {
+            if (empty($atom['token'])) {
+                $atom['token'] = array();
+            } else {
                 $atom['token'] = (array) $atom['token'];
                 sort($atom['token']);
-            } else {
-                $atom['token'] = array();
             }
-            if (!empty($atom['in'])) {
+            if (empty($atom['in'])) {
+                $atom['in'] = array();
+            } else {
                 $atom['in'] = (array) $atom['in'];
                 ksort($atom['in']);
-            } else {
-                $atom['in'] = array();
             }
-            if (!empty($atom['out'])) {
+            if (empty($atom['out'])) {
+                $atom['out'] = array();
+            } else {
                 $atom['out'] = (array) $atom['out'];
                 ksort($atom['out']);
-            } else {
-                $atom['out'] = array();
             }
             
             if (!isset($atom['name'])) {

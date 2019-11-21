@@ -114,11 +114,11 @@ abstract class Reports {
         $final = $this->_generate($list);
 
         if ($name === self::STDOUT) {
-            if (!empty($final)) {
+            if (empty($final)) {
+                exit(0);
+            } else {
                 echo $final;
                 exit(1);
-            } else {
-                exit(0);
             }
         } elseif ($name === self::INLINE) {
             return $final ;
@@ -143,13 +143,13 @@ abstract class Reports {
         }
     }
     
-    public function checkMissingRulesets() {
+    public function checkMissingRulesets() : array {
         $required = $this->dependsOnAnalysis();
-        
+
         if (empty($required)) {
             return $required;
         }
-        
+
         $available = array();
         $res = $this->sqlite->query('SELECT * FROM themas');
         if ($res === false) {
@@ -160,10 +160,10 @@ abstract class Reports {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $available[] = $row['thema'];
         }
-        
+
         return array_diff($required, $available);
     }
-    
+
     public function getDocs($analyzer, $property = null) {
         assert(self::$docs !== null, 'Docs needs to be initialized with an object.');
 

@@ -2235,22 +2235,22 @@ class Load extends Tasks {
 
                 $index->rank = ++$rank;
 
-                if ($typehint !== 0) {
+                if ($typehint === 0) {
+                    $void = $this->addAtomVoid();
+                    $this->addLink($index, $void, 'TYPEHINT');
+                } else {
                     $this->addLink($index, $typehint, 'TYPEHINT');
                     $index->fullcode = "$typehint->fullcode $index->fullcode";
                     $index->nullable = $typehint->nullable;
-                } else {
-                    $void = $this->addAtomVoid();
-                    $this->addLink($index, $void, 'TYPEHINT');
                 }
 
-                if ($default !== 0) {
+                if ($default === 0) {
+                    $void = $this->addAtomVoid();
+                    $this->addLink($index, $void, 'DEFAULT');
+                } else {
                     $this->addLink($index, $default, 'DEFAULT');
                     $index->fullcode .= ' = ' . $default->fullcode;
                     $default = 0;
-                } else {
-                    $void = $this->addAtomVoid();
-                    $this->addLink($index, $void, 'DEFAULT');
                 }
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
