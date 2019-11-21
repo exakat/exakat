@@ -88,7 +88,7 @@ class Rulesets implements RulesetsInterface {
         $extra = $this->extra->getTimesToFix();
         $ext   = $this->ext  ->getTimesToFix();
         $dev   = $this->dev  ->getTimesToFix();
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 

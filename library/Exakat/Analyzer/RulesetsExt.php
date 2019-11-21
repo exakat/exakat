@@ -40,13 +40,11 @@ class RulesetsExt implements RulesetsInterface {
                 continue; // ignore
             }
             $this->all[$name] = $list['All'];
-            unset($list['All']);
-            if (!empty($list)) {
-                $this->rulesets[$name] = new RulesetsExtra($list, $this->ext);
-            }
+
+            $this->rulesets[$name] = new RulesetsExtra($list);
         }
     }
-    
+
     public function getRulesetsAnalyzers(array $ruleset = null) {
         if (empty($this->rulesets)) {
             return array();
@@ -84,19 +82,42 @@ class RulesetsExt implements RulesetsInterface {
 
     public function getSeverities() {
         $return = array(array());
-        foreach($this->rulesets as $extension) {
-            $return[] = $extension->getSeverities();
+
+        foreach($this->all as $name => $list) {
+            $severities = array();
+            
+            foreach($list as $analyse) {
+                $ini = $this->ext->loadData("human/en/$analyse.ini");
+                $ini = parse_ini_string($ini);
+
+                $severities[$analyse] = constant(Analyzer::class . '::' . $ini['severity']) ?? Analyzer::S_NONE;
+            }
+            $return[] = $severities;
         }
-        
+
         return array_merge(...$return);
     }
 
     public function getTimesToFix() {
         $return = array(array());
-        foreach($this->rulesets as $extension) {
-            $return[] = $extension->getTimesToFix();
+
+        foreach($this->all as $name => $list) {
+            $timesToFix = array();
+            
+            foreach($list as $analyse) {
+                $ini = $this->ext->loadData("human/en/$analyse.ini");
+                $ini = parse_ini_string($ini);
+                
+                if (!isset($ini['timetofix'])) {
+                    print_r($this);
+                    die($analyse);
+                }
+
+                $timesToFix[$analyse] = constant(Analyzer::class . '::' . $ini['timetofix']) ?? Analyzer::T_NONE;
+            }
+            $return[] = $timesToFix;
         }
-        
+
         return array_merge(...$return);
     }
 

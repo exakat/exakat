@@ -3119,7 +3119,7 @@ HTML;
         $this->generateInventories($section, 'Type/Path', 'List of all paths strings mentioned in the code.');
     }
 
-    private function generateInventories(Section $section, $analyzer, $description) {
+    protected function generateInventories(Section $section, $analyzer, $description) {
         $results = new Results($this->sqlite, $analyzer);
         $results->load();
         
