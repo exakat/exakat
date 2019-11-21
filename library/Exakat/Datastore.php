@@ -93,7 +93,7 @@ class Datastore {
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
     }
     
-    public static function getDatastore(Config $config, bool $create = self::REUSE) : self {
+    public static function getDatastore(Config $config, int $create = self::REUSE) {
         if (!isset(self::$singleton) || $create === self::CREATE) {
             self::$singleton = new self($config, $create);
         }
