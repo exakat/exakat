@@ -27,12 +27,13 @@ use Exakat\Analyzer\Analyzer;
 class UseArraySlice extends Analyzer {
     public function analyze() {
         // while($cdg) { array_pop($c); }
-        $this->atomIs(array('Foreach', 'For', 'Dowhile', 'While'))
+        $this->atomIs(self::$LOOPS_ALL)
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->functioncallIs(array('\\array_shift',
-                                    '\\array_pop'))
+                                    '\\array_pop',
+                                   ))
              ->back('first');
         $this->prepareQuery();
     }

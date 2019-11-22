@@ -62,11 +62,7 @@ GREMLIN;
 
         $calls = array();
         foreach($publicConstants as $value) {
-            if (isset($calls[$value['constante']])) {
-                $calls[$value['constante']][] = $value['classe'];
-            } else {
-                $calls[$value['constante']] = array($value['classe']);
-            }
+            array_collect_by($calls, $value['constante'], $value['classe']);
         }
         
         // global static constants : the one with no definition class : they are all ignored.

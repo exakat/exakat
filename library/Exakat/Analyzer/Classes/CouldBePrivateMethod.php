@@ -82,11 +82,7 @@ class CouldBePrivateMethod extends Analyzer {
         if (!empty($publicStaticMethods)) {
             $calls = array();
             foreach($publicStaticMethods as $value) {
-                if (isset($calls[$value['method']])) {
-                    $calls[$value['method']][] = $value['classe'];
-                } else {
-                    $calls[$value['method']] = array($value['classe']);
-                }
+                array_collect_by($calls, $value['method'], $value['classe']);
             }
 
             // Property that is not used outside this class or its children

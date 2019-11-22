@@ -80,13 +80,15 @@ class CouldUseTry extends Analyzer {
         foreach($throws as $throw) {
             if (isset($throw->function)) {
                 $functions[] = makeFullnspath($throw->function);
-            } elseif (isset($throw->class)) {
-                if ($throw->method === '__construct') {
-                    $news[] = makeFullnspath($throw->class);
-                } else {
-                    array_collect_by($methods, makeFullnspath($throw->class),  $throw->method);
-                }
+                continue;
+            } 
+            
+            if (isset($throw->class) && $throw->method === '__construct') {
+                $news[] = makeFullnspath($throw->class);
+                continue;
             }
+
+            array_collect_by($methods, makeFullnspath($throw->class),  $throw->method);
         }
 
         $this->atomIs('New')

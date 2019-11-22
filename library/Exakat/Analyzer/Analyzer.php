@@ -1562,7 +1562,7 @@ GREMLIN;
 
     public function hasNoClassTrait() {
         // Method are a valid sub-part of class or traits.
-        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait', 'Method'));
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait', 'Method', 'Magicmethod'));
     }
 
     public function goToClassInterface() {
