@@ -1766,7 +1766,7 @@ SQL;
 
         $query = <<<SQL
 SELECT analyzer AS analyzer FROM resultsCounts
-WHERE analyzer NOT IN ($sqlList) AND 
+WHERE analyzer IN ($sqlList) AND 
       count = 0 AND
       analyzer LIKE "%/%" AND
       analyzer NOT LIKE "Common/%"
@@ -1775,17 +1775,18 @@ SQL;
 
         $baseHTML = $this->getBasedPage($section->source);
 
-        $filesHTML = '';
+        $filesHTML = array();
 
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
-            
+
             if ($analyzer === null) {
                 continue;
             }
 
-            $filesHTML.= '<tr><td>' . $this->makeDocLink($row['analyzer']) . '</td></tr>' . PHP_EOL;
+            $filesHTML []= '<tr><td>' . $this->makeDocLink($row['analyzer']) . '</td></tr>';
         }
+        $filesHTML = implode(PHP_EOL, $filesHTML);
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
@@ -1804,7 +1805,7 @@ SQL;
             $filesHTML.= '<tr>';
                                
 
-            $filesHTML.='<td> <a href="issues.html#file=' . $this->toId($file['file']) . '" title="' . $file['file'] . '">' . $file['file'] . '</a></td>
+            $filesHTML.='<td><a href="issues.html#file=' . $this->toId($file['file']) . '" title="' . $file['file'] . '">' . $file['file'] . '</a></td>
                         <td>' . $file['loc'] . '</td>
                         <td>' . $file['issues'] . '</td>
                         <td>' . $file['analyzers'] . '</td>';
@@ -2636,7 +2637,7 @@ SQL;
                 continue;
             }
 
-            $link = '<a href="analyses_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
+            $link = $this->makeDocLink($name);
 
             $color = $colors[array_search(substr($analyzers[$name], 0, -1), $versions)];
             $table []= "<tr><td style=\"background-color: #{$color};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
@@ -2967,7 +2968,7 @@ SQL
                 $resultState = -2; // -2 === not run
             }
             $result = $this->Compatibility($resultState, $analyzer);
-            $link = '<a href="analyses_doc.html#' . $this->toId($analyzer) . '" alt="Documentation for ' . $ini['name'] . '"><i class="fa fa-book"></i></a>';
+            $link = $this->makeDocLink($analyzer);
             if ($resultState === Analyzer::VERSION_INCOMPATIBLE) {
                 $skipped []= "<tr><td>$link {$ini['name']}</td><td>$result</td></tr>\n";
             } else {
@@ -4999,7 +5000,7 @@ SQL;
             foreach(explode(',', $list) as $l) {
                 $listHtml[] = '<li>' . $this->makeDocLink($l) . '</li>';
             }
-            $listHtml = '<ul>' . implode('', $listHtml) . '</u>';
+            $listHtml = '<ul>' . implode(PHP_EOL, $listHtml) . '</ul>';
             $table[] = "<tr><td>$file:$line</td><td>$count</td><td>$listHtml</td></tr>\n";
         }
 
@@ -5244,7 +5245,7 @@ HTML;
     }
     
     private function makeDocLink($analyzer) {
-        return "<a href=\"analyses_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->getDocs($analyzer, 'name')}";
+        return "<a href=\"analyses_doc.html#{$this->toId($analyzer)}\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->getDocs($analyzer, 'name')}";
     }
 
     private function toHtmlList(array $array) {
