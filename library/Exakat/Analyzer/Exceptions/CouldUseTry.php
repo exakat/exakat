@@ -81,7 +81,7 @@ class CouldUseTry extends Analyzer {
             if (isset($throw->function)) {
                 $functions[] = makeFullnspath($throw->function);
                 continue;
-            } 
+            }
             
             if (isset($throw->class) && $throw->method === '__construct') {
                 $news[] = makeFullnspath($throw->class);

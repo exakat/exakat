@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CollectClassChildren extends Analyzer {
     public function analyze() {
-        // class a {} class b extends a; 
+        // class a {} class b extends a;
         $this->atomIs('Class')
              ->raw('groupCount("m").by( __.out("DEFINITION").in("EXTENDS").hasLabel("Class").count() ).cap("m")');
 

@@ -20,18 +20,29 @@
  *
 */
 
-namespace Exakat\Analyzer\Dump;
+namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Results;
 
-class CollectClassDepth extends Analyzer {
-    public function analyze() {
-        // class a {} class b extends a;
-        $this->atomIs('Class')
-             ->raw('groupCount("m").by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap("m")');
+class BeautyCanon extends Reports {
+    const FILE_EXTENSION = 'txt';
+    const FILE_FILENAME  = self::STDOUT;
 
-        $this->analyzerName = 'Class Depth';
-        $this->prepareQuery(self::QUERY_HASH);
+    public function _generate($analyzerList) {
+        $list = makeList($analyzerList);
+        $res = $this->sqlite->query("SELECT * FROM resultsCounts WHERE analyzer IN ($list) AND count = 0");
+
+        $results = array();
+        while( $row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $results []= sprintf('%- 70s %- 40s', $this->getDocs($row['analyzer'], 'name'), $row['analyzer']);
+        }
+
+        sort($results);
+
+        $results [] = "\nTotal : " . count($results) . ' / ' . count($analyzerList);
+
+        return implode(PHP_EOL, $results) . PHP_EOL;
     }
 }
 

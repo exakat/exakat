@@ -140,7 +140,7 @@ class MissingInclude extends Analyzer {
 
         if (substr($file, 0, 9) === '../../../' && in_array(substr($file, 8), $files, \STRICT_COMPARISON)) { return true;}
 
-        if (isset($file[0]) && $file[0] !== '/' && 
+        if (isset($file[0]) && $file[0] !== '/' &&
             in_array(dirname($including) . '/' . $file, $files, \STRICT_COMPARISON)) {
              return true;
         }

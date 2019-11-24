@@ -1227,7 +1227,7 @@ SQL
         $xAxis = array();
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $xAxis[] = "'".addslashes($value['key'])."'";
+            $xAxis[] = "'" . addslashes($value['key']) . "'";
 
             $data[$value['key']] = (int) $value['count'];
 
