@@ -1,0 +1,12 @@
+Compare Hash                                                           Security/CompareHash                    
+Configure Extract                                                      Security/ConfigureExtract               
+Dynamic Library Loading                                                Security/DynamicDl                      
+Encoded Simple Letters                                                 Security/EncodedLetters                 
+Indirect Injection                                                     Security/IndirectInjection              
+Integer Conversion                                                     Security/IntegerConversion              
+Minus One On Error                                                     Security/MinusOneOnError                
+Mkdir Default                                                          Security/MkdirDefault                   
+No ENT_IGNORE                                                          Security/NoEntIgnore                    
+No Hardcoded Hash                                                      Structures/NoHardcodedHash              
+No Hardcoded Ip                                                        Structures/NoHardcodedIp                
+No Hardcoded Port                                                      Structures/NoHardcodedPort              
