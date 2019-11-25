@@ -266,3 +266,4 @@ filesystems
 contravariant
 returntype
 calltime
+injectable
