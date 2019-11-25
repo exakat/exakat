@@ -8,24 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Sun, 17 Nov 2019 11:49:07 +0000
-.. comment: Generation hash : 3563d2c62cb723aa0e90a3177b0d84024fd73abd
-
-
-.. _:
-
-
-
-
-
-
-
-+------------+---------------------------------+
-| Short name | Classes/AvoidOptionalProperties |
-+------------+---------------------------------+
-| Rulesets   | :ref:`Analyze`                  |
-+------------+---------------------------------+
-
+.. comment: Generation date : Mon, 25 Nov 2019 06:13:41 +0000
+.. comment: Generation hash : ed0328f4d65d6c0f8c899ec4c66e3391c5b10196
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -267,7 +251,7 @@ Suggestions
 
 The operator ``**`` calculates exponents, also known as power. 
 
-Use it instead of the slower function `pow() <http://www.php.net/pow>`_. This operator was introduced in PHP 5.6.
+Use it instead of the slower function `pow() <https://www.php.net/pow>`_. This operator was introduced in PHP 5.6.
 
 .. code-block:: php
 
@@ -292,7 +276,7 @@ Be aware the the '-' operator has lower priority than the `** <http://www.php.ne
 
 This is due to the parser that processes separately ``-`` and the following number. Since ``**`` has priority, the power operation happens first.
 
-Being an operator, ``**`` is faster than `pow() <http://www.php.net/pow>`_. This is a microoptimisation. 
+Being an operator, ``**`` is faster than `pow() <https://www.php.net/pow>`_. This is a microoptimisation. 
 
 See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
 
@@ -401,7 +385,7 @@ You may also set display_error to 0 in the ``php.ini`` : this will avoid user's 
 
 The only situation where ``@`` is useful is when a native PHP function displays errors messages when error happens and there is no way to check it from the code. 
 
-This is the case with `fopen() <http://www.php.net/fopen>`_, `stream_socket_server() <http://www.php.net/stream_socket_server>`_, `token_get_all() <http://www.php.net/token_get_all>`_. 
+This is the case with `fopen() <https://www.php.net/fopen>`_, `stream_socket_server() <https://www.php.net/stream_socket_server>`_, `token_get_all() <https://www.php.net/token_get_all>`_. 
 
 See also `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_ and `Five reasons why the shut-op operator should be avoided <https://derickrethans.nl/five-reasons-why-the-shutop-operator-should-be-avoided.html>`_. 
 
@@ -928,7 +912,7 @@ Using references is then must faster, and easier to read.
    ?>
 
 
-You may also use `array_walk() <http://www.php.net/array_walk>`_ or `array_map() <http://www.php.net/array_map>`_ (when $key is not used) to avoid the use of foreach.
+You may also use `array_walk() <https://www.php.net/array_walk>`_ or `array_map() <https://www.php.net/array_map>`_ (when $key is not used) to avoid the use of foreach.
 
 See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
@@ -1056,7 +1040,7 @@ Always Positive Comparison
 ##########################
 
 
-Some PHP native functions, such as `count() <http://www.php.net/count>`_, `strlen() <http://www.php.net/strlen>`_, or `abs() <http://www.php.net/abs>`_ only returns positive or null values. 
+Some PHP native functions, such as `count() <https://www.php.net/count>`_, `strlen() <https://www.php.net/strlen>`_, or `abs() <https://www.php.net/abs>`_ only returns positive or null values. 
 
 When comparing them to 0, the following expressions are always true and should be avoided. 
 
@@ -1099,9 +1083,9 @@ Always Use Function With array_key_exists()
 ###########################################
 
 
-`array_key_exists() <http://www.php.net/array_key_exists>`_ has been granted a special VM opcode, and is much faster. This applies to PHP 7.4 and more recent. 
+`array_key_exists() <https://www.php.net/array_key_exists>`_ has been granted a special VM opcode, and is much faster. This applies to PHP 7.4 and more recent. 
 
-It requires that `array_key_exists() <http://www.php.net/array_key_exists>`_ is statically resolved, either with an initial ``\``, or a ``use function`` expression. This doesn't affect the global namespace.
+It requires that `array_key_exists() <https://www.php.net/array_key_exists>`_ is statically resolved, either with an initial ``\``, or a ``use function`` expression. This doesn't affect the global namespace.
 
 .. code-block:: php
 
@@ -1121,7 +1105,7 @@ It requires that `array_key_exists() <http://www.php.net/array_key_exists>`_ is 
    ?>
 
 
-This analysis is related to Php/ShouldUseFunction, and is a special case, that only concerns `array_key_exists() <http://www.php.net/array_key_exists>`_.
+This analysis is related to Php/ShouldUseFunction, and is a special case, that only concerns `array_key_exists() <https://www.php.net/array_key_exists>`_.
 
 See also `Add array_key_exists to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_.
 
@@ -1385,7 +1369,7 @@ Avoid defining an ``assert`` function in namespaces.
 
 While they work fine when the assertions are active (``zend.assertions=1``), calls to unqualified ``assert`` are optimized away when assertions are not active. 
 
-Since PHP 7.3, a fatal error is emitted : ``Defining a custom `assert() <http://www.php.net/assert>`_ function is deprecated, as the function has special semantics``.
+Since PHP 7.3, a fatal error is emitted : ``Defining a custom `assert() <https://www.php.net/assert>`_ function is deprecated, as the function has special semantics``.
 
 .. code-block:: php
 
@@ -1692,7 +1676,7 @@ Avoid Concat In Loop
 
 Concatenations inside a loop generate a lot of temporary variables. They are accumulated and tend to raise the memory usage, leading to slower performances.
 
-It is recommended to store the values in an array, and then use `implode() <http://www.php.net/implode>`_ on that array to make the concatenation at once. The effect is positive when the source array has at least 50 elements. 
+It is recommended to store the values in an array, and then use `implode() <https://www.php.net/implode>`_ on that array to make the concatenation at once. The effect is positive when the source array has at least 50 elements. 
 
 .. code-block:: php
 
@@ -1713,7 +1697,7 @@ It is recommended to store the values in an array, and then use `implode() <http
    ?>
 
 
-The same doesn't apply to addition and multiplication, with `array_sum() <http://www.php.net/array_sum>`_ and array_multiply(), as those operations work on the current memory allocation, and don't need to allocate new memory at each step. 
+The same doesn't apply to addition and multiplication, with `array_sum() <https://www.php.net/array_sum>`_ and array_multiply(), as those operations work on the current memory allocation, and don't need to allocate new memory at each step. 
 
 See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_.
 
@@ -1820,6 +1804,64 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
 
 
 
+.. _avoid-optional-properties:
+
+Avoid Optional Properties
+#########################
+
+
+Avoid optional properties, to prevent littering the code with existence checks. 
+
+When a property has to be checked once for existence, it is safer to check it each time. This leads to a decrease in readability and a lot of checks added to the code.
+
+Either make sure the property is set with an actual object rather than with null, or use a null object. A null object offers the same interface than the expected object, but does nothing. It allows calling its methods, without running into a Fatal error, nor testing it. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Example is courtesy 'The Coding Machine' : it has been adapted from its original form. See link below.
+   
+   class MyMailer {
+       private $logger;
+   
+       public function __construct(LoggerInterface $logger = null) {
+           $this->logger = $logger;
+       }
+   
+       private function sendMail(Mail $mail) {
+           // Since $this->logger may be null, it must be tested anytime it is used.
+           if ($this->logger) {
+               $this->logger->info('Mail successfully sent.');
+           }
+       }
+   }
+   
+   ?>
+
+
+See also `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_, `The Null Object Pattern – Polymorphism in Domain Models <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_, and `Practical PHP Refactoring: Introduce Null Object <https://dzone.com/articles/practical-php-refactoring-26>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a null object to fill any missing value
+* Make sure the property is set at constructor time
+
++-------------+---------------------------------------------------------------------------------------------------+
+| Short name  | Classes/AvoidOptionalProperties                                                                   |
++-------------+---------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                                    |
++-------------+---------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                             |
++-------------+---------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                     |
++-------------+---------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`churchcrm-classes-avoidoptionalproperties`, :ref:`dolibarr-classes-avoidoptionalproperties` |
++-------------+---------------------------------------------------------------------------------------------------+
+
+
+
 .. _avoid-parenthesis:
 
 Avoid Parenthesis
@@ -1867,7 +1909,7 @@ Avoid Real
 
 PHP has two float data type : real and double. ``real`` is rarely used, and might be deprecated in PHP 7.4.
 
-To prepare code, avoid using `is_real() <http://www.php.net/is_real>`_ and the ``(real)`` typecast.
+To prepare code, avoid using `is_real() <https://www.php.net/is_real>`_ and the ``(real)`` typecast.
 
 .. code-block:: php
 
@@ -1958,6 +2000,61 @@ Suggestions
 +-------------+---------------------------------+
 | Time To Fix | Slow (1 hour)                   |
 +-------------+---------------------------------+
+
+
+
+.. _avoid-substr()-one:
+
+Avoid Substr() One
+##################
+
+
+Use array notation ``$string[$position]`` to reach a single byte in a string.
+
+There are two ways to access a byte in a string : `substr() <https://www.php.net/substr>`_ and ``$v[$pos]``.
+
+The second style is more readable. It may be up to four times faster, though it is a micro-optimization. It is recommended to use it. 
+
+PHP 7.1 also introduces the support of negative offsets as string index : negative offset are also reported.
+
+.. code-block:: php
+
+   <?php
+   
+   $string = 'ab人cde';
+   
+   echo substr($string, $pos, 1);
+   echo $string[$pos];
+   
+   echo mb_substr($string, $pos, 1);
+   
+   // when $pos = 1
+   // displays bbb
+   // when $pos = 2
+   // displays ??人
+   
+   ?>
+
+
+Beware that `substr() <https://www.php.net/substr>`_ and ``$v[$pos]`` are similar, while `mb_substr() <https://www.php.net/mb_substr>`_ is not. The first function works on bytes, while the latter works on characters.
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace substr() with the array notations for strings.
+* Replace substr() with a call to mb_substr().
+
++-------------+--------------------------------------------------------------------------------------------------+
+| Short name  | Structures/NoSubstrOne                                                                           |
++-------------+--------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions`, :ref:`Top10` |
++-------------+--------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                            |
++-------------+--------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                 |
++-------------+--------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`churchcrm-structures-nosubstrone`, :ref:`livezilla-structures-nosubstrone`                 |
++-------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -2060,10 +2157,10 @@ Avoid array_push()
 ##################
 
 
-`array_push() <http://www.php.net/array_push>`_ is slower than the [] operator.
+`array_push() <https://www.php.net/array_push>`_ is slower than the [] operator.
 
-This is also true if the [] operator is called several times, while `array_push() <http://www.php.net/array_push>`_ may be called only once. 
-And using count after the push is also faster than collecting `array_push() <http://www.php.net/array_push>`_ return value. 
+This is also true if the [] operator is called several times, while `array_push() <https://www.php.net/array_push>`_ may be called only once. 
+And using count after the push is also faster than collecting `array_push() <https://www.php.net/array_push>`_ return value. 
 
 .. code-block:: php
 
@@ -2112,7 +2209,7 @@ Avoid array_unique()
 ####################
 
 
-The native function `array_unique() <http://www.php.net/array_unique>`_ is much slower than using other alternatives, such as `array_count_values() <http://www.php.net/array_count_values>`_, `array_flip() <http://www.php.net/array_flip>`_/`array_keys() <http://www.php.net/array_keys>`_, or even a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops. 
+The native function `array_unique() <https://www.php.net/array_unique>`_ is much slower than using other alternatives, such as `array_count_values() <https://www.php.net/array_count_values>`_, `array_flip() <https://www.php.net/array_flip>`_/`array_keys() <https://www.php.net/array_keys>`_, or even a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops. 
 
 .. code-block:: php
 
@@ -2212,9 +2309,9 @@ Avoid glob() Usage
 ##################
 
 
-`glob() <http://www.php.net/glob>`_ and `scandir() <http://www.php.net/scandir>`_ sorts results by default. When that kind of sorting is not needed, save some time by requesting ``NOSORT`` with those functions.
+`glob() <https://www.php.net/glob>`_ and `scandir() <https://www.php.net/scandir>`_ sorts results by default. When that kind of sorting is not needed, save some time by requesting ``NOSORT`` with those functions.
 
-Besides, whenever possible, use `scandir() <http://www.php.net/scandir>`_ instead of `glob() <http://www.php.net/glob>`_. 
+Besides, whenever possible, use `scandir() <https://www.php.net/scandir>`_ instead of `glob() <https://www.php.net/glob>`_. 
 
 .. code-block:: php
 
@@ -2235,11 +2332,11 @@ Besides, whenever possible, use `scandir() <http://www.php.net/scandir>`_ instea
    ?>
 
 
-Using `opendir() <http://www.php.net/opendir>`_ and a while loop may be even faster. 
+Using `opendir() <https://www.php.net/opendir>`_ and a while loop may be even faster. 
 
-This analysis skips `scandir() <http://www.php.net/scandir>`_ and `glob() <http://www.php.net/glob>`_ if they are expliciely configured with flags (aka, sorting is explicitly needed).
+This analysis skips `scandir() <https://www.php.net/scandir>`_ and `glob() <https://www.php.net/glob>`_ if they are expliciely configured with flags (aka, sorting is explicitly needed).
 
-`glob() <http://www.php.net/glob>`_ accepts wildchar, such as ``*``, that may not easily replaced with `scandir() <http://www.php.net/scandir>`_ or `opendir() <http://www.php.net/opendir>`_.
+`glob() <https://www.php.net/glob>`_ accepts wildchar, such as ``*``, that may not easily replaced with `scandir() <https://www.php.net/scandir>`_ or `opendir() <https://www.php.net/opendir>`_.
 
 See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
 
@@ -2366,7 +2463,7 @@ Avoid set_error_handler $context Argument
 #########################################
 
 
-Avoid configuring `set_error_handler() <http://www.php.net/set_error_handler>`_ with a method that accepts 5 arguments. The last argument, ``$errcontext``, is deprecated since PHP 7.2, and will be removed later.
+Avoid configuring `set_error_handler() <https://www.php.net/set_error_handler>`_ with a method that accepts 5 arguments. The last argument, ``$errcontext``, is deprecated since PHP 7.2, and will be removed later.
 
 .. code-block:: php
 
@@ -2381,7 +2478,7 @@ Avoid configuring `set_error_handler() <http://www.php.net/set_error_handler>`_ 
    ?>
 
 
-See also `set_error_handler() <http://www.php.net/set_error_handler>`_;
+See also `set_error_handler() <https://www.php.net/set_error_handler>`_;
 
 
 Suggestions
@@ -2409,7 +2506,7 @@ Avoid sleep()/usleep()
 ######################
 
 
-`sleep() <http://www.php.net/sleep>`_ and `usleep() <http://www.php.net/usleep>`_ help saturate the web server. 
+`sleep() <https://www.php.net/sleep>`_ and `usleep() <https://www.php.net/usleep>`_ help saturate the web server. 
 
 Pausing the script for a specific amount of time means that the Web server is also making all related resources sleep, such as database, sockets, session, etc. This may used to set up a DOS on the server.  
 
@@ -2432,7 +2529,7 @@ Pausing the script for a specific amount of time means that the Web server is al
 
 As much as possible, avoid delaying the end of the script. 
 
-`sleep() <http://www.php.net/sleep>`_ and `usleep() <http://www.php.net/usleep>`_ have less impact in commandline (``CLI``).
+`sleep() <https://www.php.net/sleep>`_ and `usleep() <https://www.php.net/usleep>`_ have less impact in commandline (``CLI``).
 
 +-------------+------------------+
 | Short name  | Security/NoSleep |
@@ -2841,7 +2938,7 @@ Avoid recalculating constant values inside the loop.
 
 Do the calculation once, outside the loops, and then reuse the value each time. 
 
-One of the classic example if doing ``count($array)`` in a ``for`` loop : since the source is constant during the loop, the result of `count() <http://www.php.net/count>`_ is always the same. 
+One of the classic example if doing ``count($array)`` in a ``for`` loop : since the source is constant during the loop, the result of `count() <https://www.php.net/count>`_ is always the same. 
 
 .. code-block:: php
 
@@ -2880,7 +2977,7 @@ Callback Needs Return
 #####################
 
 
-When used with `array_map() <http://www.php.net/array_map>`_ functions, the callback must return something. This return may be in the form of a ``return`` statement, a global variable or a parameter with a reference. All those solutions extract information from the callback. 
+When used with `array_map() <https://www.php.net/array_map>`_ functions, the callback must return something. This return may be in the form of a ``return`` statement, a global variable or a parameter with a reference. All those solutions extract information from the callback. 
 
 .. code-block:: php
 
@@ -2908,10 +3005,10 @@ When used with `array_map() <http://www.php.net/array_map>`_ functions, the call
 
 The following functions are omitted, as they don't require the return : 
 
-+ `forward_static_call_array() <http://www.php.net/forward_static_call_array>`_
-+ `forward_static_call() <http://www.php.net/forward_static_call>`_
-+ `register_shutdown_function() <http://www.php.net/register_shutdown_function>`_
-+ `register_tick_function() <http://www.php.net/register_tick_function>`_
++ `forward_static_call_array() <https://www.php.net/forward_static_call_array>`_
++ `forward_static_call() <https://www.php.net/forward_static_call>`_
++ `register_shutdown_function() <https://www.php.net/register_shutdown_function>`_
++ `register_tick_function() <https://www.php.net/register_tick_function>`_
 
 See also `array_map <http://php.net/array_map>`_.
 
@@ -2980,7 +3077,7 @@ Can't Count Non-Countable
 #########################
 
 
-`Count() <http://www.php.net/count>`_ emits an error when it tries to count scalars or objects what don't implement Countable interface.
+`Count() <https://www.php.net/count>`_ emits an error when it tries to count scalars or objects what don't implement Countable interface.
 
 .. code-block:: php
 
@@ -3249,7 +3346,7 @@ Cant Use Return Value In Write Context
 ######################################
 
 
-`empty() <http://www.php.net/empty>`_ used to work only on data containers, such as variables. Until PHP 5.5, it was not possible to use directly expressions, such as functioncalls, inside an `empty() <http://www.php.net/empty>`_ function call : they were met with a 'Can't use function return value in write context' fatal error. 
+`empty() <https://www.php.net/empty>`_ used to work only on data containers, such as variables. Until PHP 5.5, it was not possible to use directly expressions, such as functioncalls, inside an `empty() <https://www.php.net/empty>`_ function call : they were met with a 'Can't use function return value in write context' fatal error. 
 
 .. code-block:: php
 
@@ -3289,7 +3386,7 @@ Case Insensitive Constants
 ##########################
 
 
-PHP constants may be case insensitive, when defined with `define() <http://www.php.net/define>`_ and the third argument.
+PHP constants may be case insensitive, when defined with `define() <https://www.php.net/define>`_ and the third argument.
 
 This feature is deprecated since PHP 7.3 and will be removed in PHP 8.0.
 
@@ -3489,7 +3586,7 @@ When checking for time, avoid using else. Mention explicitly all tested type, an
 
 PHP has a short list of scalar types : null, boolean, integer, real, strings, object, resource and array. When a variable is not holding one the the type, then it may be of any other type. 
 
-Most of the time, when using a simple `is_string() <http://www.php.net/is_string>`_ / else test, this is relying on the conception of the code. By construction, the arguments may be one of two types : array or string. 
+Most of the time, when using a simple `is_string() <https://www.php.net/is_string>`_ / else test, this is relying on the conception of the code. By construction, the arguments may be one of two types : array or string. 
 
 What happens often is that in case of failure in the code (database not working, another class not checking its results), a third type is pushed to the structure, and it ends up breaking the execution. 
 
@@ -3519,7 +3616,7 @@ The safe way is to check the various types all the time, and use the default cas
    ?>
 
 
-Using `is_callable() <http://www.php.net/is_callable>`_, `is_iterable() <http://www.php.net/is_iterable>`_ with this structure is fine : when variable is callable or not, while a variable is an integer or else. 
+Using `is_callable() <https://www.php.net/is_callable>`_, `is_iterable() <https://www.php.net/is_iterable>`_ with this structure is fine : when variable is callable or not, while a variable is an integer or else. 
 
 Using a type test without else is also accepted here. This is a special treatment for this test, and all others are ignored. This aspect may vary depending on situations and projects.
 
@@ -4152,7 +4249,7 @@ Coalesce And Concat
 ###################
 
 
-The concat operator dot has precedence over the coalesce operator ??. 
+The concatenation operator dot has precedence over the coalesce operator ??. 
 
 .. code-block:: php
 
@@ -4255,9 +4352,9 @@ Compact Inexistant Variable
 ###########################
 
 
-`Compact() <http://www.php.net/compact>`_ doesn't warn when it tries to work on an inexistant variable. It just ignores the variable.
+`Compact() <https://www.php.net/compact>`_ doesn't warn when it tries to work on an inexistant variable. It just ignores the variable.
 
-This behavior changed in PHP 7.3, and `compact() <http://www.php.net/compact>`_ now emits a warning when the compacted variable doesn't exist.
+This behavior changed in PHP 7.3, and `compact() <https://www.php.net/compact>`_ now emits a warning when the compacted variable doesn't exist.
 
 .. code-block:: php
 
@@ -4293,7 +4390,7 @@ Compare Hash
 ############
 
 
-When comparing hash values, it is important to use the strict comparison : `hash_equals() <http://www.php.net/hash_equals>`_, ``===`` or ``!==``. 
+When comparing hash values, it is important to use the strict comparison : `hash_equals() <https://www.php.net/hash_equals>`_, ``===`` or ``!==``. 
 
 In a number of situations, the hash value will start with ``0e``, and PHP will understand that the comparison involves integers : it will then convert the strings into numbers, and it may end up converting them to 0.
 
@@ -4325,7 +4422,7 @@ Here is an example
    ?>
 
 
-You may also use `password_hash() <http://www.php.net/password_hash>`_ and `password_verify() <http://www.php.net/password_verify>`_ : they work together without integer conversion problems, and they can't be confused with a number.
+You may also use `password_hash() <https://www.php.net/password_hash>`_ and `password_verify() <https://www.php.net/password_verify>`_ : they work together without integer conversion problems, and they can't be confused with a number.
 
 See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ `What is the best way to compare hashed strings? (PHP) <https://stackoverflow.com/questions/5211132/what-is-the-best-way-to-compare-hashed-strings-php/23959696#23959696>`_ and `md5('240610708') == md5('QNKCDZO') <https://news.ycombinator.com/item?id=9484757>`_.
 
@@ -4494,7 +4591,7 @@ Concat Empty String
 
 Using a concatenation to make a value a string should be replaced with a type cast.
 
-Type cast to a string is done with ``(string)`` operator. There is also the function `strval() <http://www.php.net/strval>`_, although it is less recommended.
+Type cast to a string is done with ``(string)`` operator. There is also the function `strval() <https://www.php.net/strval>`_, although it is less recommended.
 
 .. code-block:: php
 
@@ -4522,7 +4619,7 @@ See also `Type Casting <https://php.net/manual/en/language.types.type-juggling.p
 Suggestions
 ^^^^^^^^^^^
 
-* Avoir concatenating with empty strings
+* Avoid concatenating with empty strings
 * Use (string) operator to cast to string
 * Remove any concatenated empty string
 
@@ -4595,13 +4692,13 @@ Configure Extract
 #################
 
 
-The `extract() <http://www.php.net/extract>`_ function overwrites local variables when left unconfigured.
+The `extract() <https://www.php.net/extract>`_ function overwrites local variables when left unconfigured.
 
 Extract imports variables from an array into the local scope. In case of a conflict, that is when a local variable already exists, it overwrites the previous variable.
 
-In fact, `extract() <http://www.php.net/extract>`_ may be configured to handle the situation differently : it may skip the conflicting variable, prefix it, prefix it only if it exists, only import overwriting variables... It may also import them as references to the original values.
+In fact, `extract() <https://www.php.net/extract>`_ may be configured to handle the situation differently : it may skip the conflicting variable, prefix it, prefix it only if it exists, only import overwriting variables... It may also import them as references to the original values.
 
-This analysis reports `extract() <http://www.php.net/extract>`_ when it is not configured explicitly. If overwriting is the intended objective, it is not reported.
+This analysis reports `extract() <https://www.php.net/extract>`_ when it is not configured explicitly. If overwriting is the intended objective, it is not reported.
 
 .. code-block:: php
 
@@ -4622,7 +4719,7 @@ This analysis reports `extract() <http://www.php.net/extract>`_ when it is not c
    ?>
 
 
-Always avoid using `extract() <http://www.php.net/extract>`_ on untrusted sources, such as ``$_GET``, ``$_POST``, ``$_FILES``, or even databases records.
+Always avoid using `extract() <https://www.php.net/extract>`_ on untrusted sources, such as ``$_GET``, ``$_POST``, ``$_FILES``, or even databases records.
 
 See also `extract <http://php.net/extract>`_.
  
@@ -4834,7 +4931,7 @@ Constant Scalar Expressions
 
 Define constant with the result of static expressions. This means that constants may be defined with the const keyword, with the help of various operators but without any functioncalls. 
 
-This feature was introduced in PHP 5.6. It also supports `array() <http://www.php.net/array>`_, and expressions in arrays.
+This feature was introduced in PHP 5.6. It also supports `array() <https://www.php.net/array>`_, and expressions in arrays.
 
 Those expressions (using simple operators) may only manipulate other constants, and all values must be known at compile time. 
 
@@ -4878,7 +4975,7 @@ Constants Created Outside Its Namespace
 
 Constants Created Outside Its Namespace.
 
-Using the `define() <http://www.php.net/define>`_ function, it is possible to create constant outside their namespace, but using the fully qualified namespace.
+Using the `define() <https://www.php.net/define>`_ function, it is possible to create constant outside their namespace, but using the fully qualified namespace.
 
 .. code-block:: php
 
@@ -5084,7 +5181,7 @@ When a property is defined and read, but never modified, it may be a constant.
    ?>
 
 
-Starting with PHP 5.6, even `array() <http://www.php.net/array>`_ may be defined as constants.
+Starting with PHP 5.6, even `array() <https://www.php.net/array>`_ may be defined as constants.
 
 +-------------+------------------------------+
 | Short name  | Classes/CouldBeClassConstant |
@@ -5516,7 +5613,7 @@ Could Be Typehinted Callable
 
 Those arguments may use the callable Typehint. 
 
-'callable' is a PHP keyword that represents callback functions. Those may be used in dynamic function call, like $function(); or as callback functions, like with `array_map() <http://www.php.net/array_map>`_;
+'callable' is a PHP keyword that represents callback functions. Those may be used in dynamic function call, like $function(); or as callback functions, like with `array_map() <https://www.php.net/array_map>`_;
 
 callable may be a string representing a function name or a static call (including \:\:), an array with two elements, (a class or object, and a method), or a closure.
 
@@ -5945,7 +6042,7 @@ Could Use Compact
 #################
 
 
-`Compact() <http://www.php.net/compact>`_ turns a group of variables into an array. It may be used to simplify expressions. 
+`Compact() <https://www.php.net/compact>`_ turns a group of variables into an array. It may be used to simplify expressions. 
 
 .. code-block:: php
 
@@ -6141,7 +6238,7 @@ Some commands may raise exceptions. It is recommended to use the try/catch block
 
 * / : ``DivisionByZeroError``
 * % : ``DivisionByZeroError``
-* `intdiv() <http://www.php.net/intdiv>`_ : ``DivisionByZeroError``
+* `intdiv() <https://www.php.net/intdiv>`_ : ``DivisionByZeroError``
 * << : ``ArithmeticError``
 * >> : ``ArithmeticError``
 * Phar\:\:mungserver : ``PharException``
@@ -6178,7 +6275,7 @@ Could Use __DIR__
 
 Use `__DIR__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ constant to access the current file's parent directory. 
 
-Avoid using `dirname() <http://www.php.net/dirname>`_ on `__FILE__ <http://www.php.net/manual/en/language.constants.predefined.php>`_.
+Avoid using `dirname() <https://www.php.net/dirname>`_ on `__FILE__ <http://www.php.net/manual/en/language.constants.predefined.php>`_.
 
 .. code-block:: php
 
@@ -6227,7 +6324,7 @@ Could Use array_fill_keys
 #########################
 
 
-`array_fill_keys() <http://www.php.net/array_fill_keys>`_ is a native PHP function that creates an array from keys. It gets the list of keys, and a constant value to assign to each keys.
+`array_fill_keys() <https://www.php.net/array_fill_keys>`_ is a native PHP function that creates an array from keys. It gets the list of keys, and a constant value to assign to each keys.
 
 This is twice faster than doing the same with a loop.
 
@@ -6285,7 +6382,7 @@ Could Use array_unique
 ######################
 
 
-Use `array_unique() <http://www.php.net/array_unique>`_ to collect unique elements from an array.
+Use `array_unique() <https://www.php.net/array_unique>`_ to collect unique elements from an array.
 
 Always try to use native PHP functions, instead of rebuilding them with custom PHP code.
 
@@ -6380,9 +6477,9 @@ Could Use str_repeat()
 ######################
 
 
-Use `str_repeat() <http://www.php.net/str_repeat>`_ or `str_pad() <http://www.php.net/str_pad>`_ instead of making a loop.
+Use `str_repeat() <https://www.php.net/str_repeat>`_ or `str_pad() <https://www.php.net/str_pad>`_ instead of making a loop.
 
-Making a loop to repeat the same concatenation is actually much longer than using `str_repeat() <http://www.php.net/str_repeat>`_. As soon as the loop repeats more than twice, `str_repeat() <http://www.php.net/str_repeat>`_ is much faster. With arrays of 30, the difference is significant, though the whole operation is short by itself. 
+Making a loop to repeat the same concatenation is actually much longer than using `str_repeat() <https://www.php.net/str_repeat>`_. As soon as the loop repeats more than twice, `str_repeat() <https://www.php.net/str_repeat>`_ is much faster. With arrays of 30, the difference is significant, though the whole operation is short by itself. 
 
 .. code-block:: php
 
@@ -6409,7 +6506,7 @@ Making a loop to repeat the same concatenation is actually much longer than usin
 Suggestions
 ^^^^^^^^^^^
 
-* Use strrepeat whenever possible
+* Use strrepeat() whenever possible
 
 +-------------+---------------------------------------------+
 | Short name  | Structures/CouldUseStrrepeat                |
@@ -6431,9 +6528,9 @@ Crc32() Might Be Negative
 #########################
 
 
-`crc32() <http://www.php.net/crc32>`_ may return a negative number, on 32 bits platforms.
+`crc32() <https://www.php.net/crc32>`_ may return a negative number, on 32 bits platforms.
 
-According to the manual : Because PHP\'s integer type is signed many ``CRC32`` checksums will result in negative integers on 32 bits platforms. On 64 bits installations, all `crc32() <http://www.php.net/crc32>`_ results will be positive integers though.
+According to the manual : Because PHP\'s integer type is signed many ``CRC32`` checksums will result in negative integers on 32 bits platforms. On 64 bits installations, all `crc32() <https://www.php.net/crc32>`_ results will be positive integers though.
 
 .. code-block:: php
 
@@ -6451,7 +6548,7 @@ According to the manual : Because PHP\'s integer type is signed many ``CRC32`` c
    ?>
 
 
-See also `crc32() <http://www.php.net/crc32>`_.
+See also `crc32() <https://www.php.net/crc32>`_.
 
 +-------------+--------------------------+
 | Short name  | Php/Crc32MightBeNegative |
@@ -6539,7 +6636,7 @@ Deep Definitions
 
 Structures, such as functions, classes, interfaces, traits, etc. may be defined anywhere in the code, including inside functions. This is legit code for PHP. 
 
-Since the availability of ``__autoload``, there is no need for that kind of code. Structures should be defined, and accessible to the autoloading. Inclusion and deep definitions should be avoided, as they compel code to load some definitions, while autoloading will only load them if needed. 
+Since the availability of autoload, with spl_register_autoload(), there is no need for that kind of code. Structures should be defined, and accessible to the autoloading. Inclusions and deep definitions should be avoided, as they compel code to load some definitions, while autoloading will only load them if needed. 
 
 .. code-block:: php
 
@@ -6563,19 +6660,27 @@ Functions are excluded from autoload, but shall be gathered in libraries, and no
 
 Constants definitions are tolerated inside functions : they may be used for avoiding repeat, or noting the usage of such function. 
 
-See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_.
+Definitions inside a if/then statement, that include PHP version check are accepted here.
 
-+-------------+------------------------------------------+
-| Short name  | Functions/DeepDefinitions                |
-+-------------+------------------------------------------+
-| Rulesets    | :ref:`Analyze`                           |
-+-------------+------------------------------------------+
-| Severity    | Major                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Slow (1 hour)                            |
-+-------------+------------------------------------------+
-| Examples    | :ref:`dolphin-functions-deepdefinitions` |
-+-------------+------------------------------------------+
+See also `Autoloading Classes <http://php.net/manual/en/language.oop5.autoload.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move function definitions to th global space : outside structures, and method.
+
++-------------+------------------------------------------------------------------------------------+
+| Short name  | Functions/DeepDefinitions                                                          |
++-------------+------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                     |
++-------------+------------------------------------------------------------------------------------+
+| Severity    | Major                                                                              |
++-------------+------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                      |
++-------------+------------------------------------------------------------------------------------+
+| Examples    | :ref:`dolphin-functions-deepdefinitions`, :ref:`dolphin-functions-deepdefinitions` |
++-------------+------------------------------------------------------------------------------------+
 
 
 
@@ -6585,7 +6690,7 @@ Define With Array
 #################
 
 
-PHP 7.0 has the ability to define an array as a constant, using the `define() <http://www.php.net/define>`_ native call. This was not possible until that version, only with the const keyword.
+PHP 7.0 has the ability to define an array as a constant, using the `define() <https://www.php.net/define>`_ native call. This was not possible until that version, only with the const keyword.
 
 .. code-block:: php
 
@@ -6826,9 +6931,9 @@ Detect Current Class
 Detecting the current class should be done with \:\:class operator.
 
 `__CLASS__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ may be replaced by ``self\:\:class``. 
-`get_called_class() <http://www.php.net/get_called_class>`_ may be replaced by ``static\:\:class``. 
+`get_called_class() <https://www.php.net/get_called_class>`_ may be replaced by ``static\:\:class``. 
 
-`__CLASS__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ and `get_called_class() <http://www.php.net/get_called_class>`_ are set to be deprecated in PHP 7.4. 
+`__CLASS__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ and `get_called_class() <https://www.php.net/get_called_class>`_ are set to be deprecated in PHP 7.4. 
 
 .. code-block:: php
 
@@ -6957,18 +7062,18 @@ Directly Use File
 
 Some PHP functions have a close cousin that work directly on files : use them. This is faster and less code to write.
 
-* `md5() <http://www.php.net/md5>`_ => `md5_file() <http://www.php.net/md5_file>`_
-* `highlight_string() <http://www.php.net/highlight_string>`_ => `highlight_file() <http://www.php.net/highlight_file>`_, `show_source() <http://www.php.net/show_source>`_
-* `parsekit_compile_string() <http://www.php.net/parsekit_compile_string>`_ => `parsekit_compile_file() <http://www.php.net/parsekit_compile_file>`_
-* `parse_ini_string() <http://www.php.net/parse_ini_string>`_ => `parse_ini_file() <http://www.php.net/parse_ini_file>`_
-* `sha1() <http://www.php.net/sha1>`_ => `sha1_file() <http://www.php.net/sha1_file>`_
-* `simplexml_load_string() <http://www.php.net/simplexml_load_string>`_ => `simplexml_load_file() <http://www.php.net/simplexml_load_file>`_
-* `yaml_parse() <http://www.php.net/yaml_parse>`_ => `yaml_parse_file() <http://www.php.net/yaml_parse_file>`_
-* `hash() <http://www.php.net/hash>`_ => `hash_file() <http://www.php.net/hash_file>`_
-* `hash_hmac() <http://www.php.net/hash_hmac>`_ => hash_mac_file()
-* `hash_update() <http://www.php.net/hash_update>`_ => `hash_update_file() <http://www.php.net/hash_update_file>`_
-* `recode() <http://www.php.net/recode>`_ => `recode_file() <http://www.php.net/recode_file>`_
-* `recode_string() <http://www.php.net/recode_string>`_ => `recode_file() <http://www.php.net/recode_file>`_
+* `md5() <https://www.php.net/md5>`_ => `md5_file() <https://www.php.net/md5_file>`_
+* `highlight_string() <https://www.php.net/highlight_string>`_ => `highlight_file() <https://www.php.net/highlight_file>`_, `show_source() <https://www.php.net/show_source>`_
+* `parsekit_compile_string() <https://www.php.net/parsekit_compile_string>`_ => `parsekit_compile_file() <https://www.php.net/parsekit_compile_file>`_
+* `parse_ini_string() <https://www.php.net/parse_ini_string>`_ => `parse_ini_file() <https://www.php.net/parse_ini_file>`_
+* `sha1() <https://www.php.net/sha1>`_ => `sha1_file() <https://www.php.net/sha1_file>`_
+* `simplexml_load_string() <https://www.php.net/simplexml_load_string>`_ => `simplexml_load_file() <https://www.php.net/simplexml_load_file>`_
+* `yaml_parse() <https://www.php.net/yaml_parse>`_ => `yaml_parse_file() <https://www.php.net/yaml_parse_file>`_
+* `hash() <https://www.php.net/hash>`_ => `hash_file() <https://www.php.net/hash_file>`_
+* `hash_hmac() <https://www.php.net/hash_hmac>`_ => hash_mac_file()
+* `hash_update() <https://www.php.net/hash_update>`_ => `hash_update_file() <https://www.php.net/hash_update_file>`_
+* `recode() <https://www.php.net/recode>`_ => `recode_file() <https://www.php.net/recode_file>`_
+* `recode_string() <https://www.php.net/recode_string>`_ => `recode_file() <https://www.php.net/recode_file>`_
 
 
 .. code-block:: php
@@ -7658,7 +7763,7 @@ Double array_flip()
 ###################
 
 
-Avoid double `array_flip() <http://www.php.net/array_flip>`_ to gain speed. While `array_flip() <http://www.php.net/array_flip>`_ alone is usually useful, a double `array_flip() <http://www.php.net/array_flip>`_ usually is made to handle values and keys. 
+Avoid double `array_flip() <https://www.php.net/array_flip>`_ to gain speed. While `array_flip() <https://www.php.net/array_flip>`_ alone is usually useful, a double `array_flip() <https://www.php.net/array_flip>`_ usually is made to handle values and keys. 
 
 .. code-block:: php
 
@@ -7757,7 +7862,7 @@ Drop Substr Last Arg
 ####################
 
 
-`Substr() <http://www.php.net/substr>`_ works till the end of the string when the last argument is omitted. There is no need to calculate string size to make this work.
+`Substr() <https://www.php.net/substr>`_ works till the end of the string when the last argument is omitted. There is no need to calculate string size to make this work.
 
 .. code-block:: php
 
@@ -7898,7 +8003,7 @@ Echo Or Print
 #############
 
 
-Echo and print have the same functional use. <?= and `printf() <http://www.php.net/printf>`_ are also considered in this analysis. 
+Echo and print have the same functional use. <?= and `printf() <https://www.php.net/printf>`_ are also considered in this analysis. 
 
 There seems to be a choice that is not enforced : one form is dominant, (> 90%) while the others are rare. 
 
@@ -8343,7 +8448,7 @@ Empty List
 ##########
 
 
-Empty `list() <http://www.php.net/list>`_ are not allowed anymore in PHP 7. There must be at least one variable in the list call.
+Empty `list() <https://www.php.net/list>`_ are not allowed anymore in PHP 7. There must be at least one variable in the list call.
 
 .. code-block:: php
 
@@ -8555,7 +8660,7 @@ Empty With Expression
 #####################
 
 
-`empty() <http://www.php.net/empty>`_ doesn't accept expressions until PHP 5.5. Until then, it is necessary to store the result of the expression in a variable and then, test it with `empty() <http://www.php.net/empty>`_.
+`empty() <https://www.php.net/empty>`_ doesn't accept expressions until PHP 5.5. Until then, it is necessary to store the result of the expression in a variable and then, test it with `empty() <https://www.php.net/empty>`_.
 
 .. code-block:: php
 
@@ -8657,9 +8762,9 @@ Eval() Usage
 ############
 
 
-Using `eval() <http://www.php.net/eval>`_ is evil. 
+Using `eval() <https://www.php.net/eval>`_ is evil. 
 
-Using `eval() <http://www.php.net/eval>`_ is bad for performances (compilation time), for caches (it won't be compiled), and for security (if it includes external data).
+Using `eval() <https://www.php.net/eval>`_ is bad for performances (compilation time), for caches (it won't be compiled), and for security (if it includes external data).
 
 .. code-block:: php
 
@@ -8681,11 +8786,11 @@ Using `eval() <http://www.php.net/eval>`_ is bad for performances (compilation t
 Most of the time, it is possible to replace the code by some standard PHP, like variable variable for accessing a variable for which you have the name.
 At worse, including a pregenerated file is faster and cacheable. 
 
-There are several situations where `eval() <http://www.php.net/eval>`_ is actually the only solution : 
+There are several situations where `eval() <https://www.php.net/eval>`_ is actually the only solution : 
 
-For PHP 7.0 and later, it is important to put `eval() <http://www.php.net/eval>`_ in a try..catch expression.
+For PHP 7.0 and later, it is important to put `eval() <https://www.php.net/eval>`_ in a try..catch expression.
 
-See also `eval <http://www.php.net/eval>`_ and `The Land Where PHP Uses `eval() <http://www.php.net/eval>`_ <https://www.exakat.io/land-where-php-uses-eval/>`_.
+See also `eval <http://www.php.net/eval>`_ and `The Land Where PHP Uses `eval() <https://www.php.net/eval>`_ <https://www.exakat.io/land-where-php-uses-eval/>`_.
 
 
 Suggestions
@@ -8810,7 +8915,7 @@ Exit() Usage
 ############
 
 
-Using `exit <http://www.www.php.net/exit>`_ or `die() <http://www.php.net/`die <http://www.php.net/die>`_>`_ in the code makes the code untestable (it will `break <http://www.php.net/manual/en/control-structures.break.php>`_ unit tests). Moreover, if there is no reason or string to display, it may take a long time to spot where the application is stuck. 
+Using `exit <http://www.www.php.net/exit>`_ or `die() <https://www.php.net/`die <http://www.php.net/die>`_>`_ in the code makes the code untestable (it will `break <http://www.php.net/manual/en/control-structures.break.php>`_ unit tests). Moreover, if there is no reason or string to display, it may take a long time to spot where the application is stuck. 
 
 .. code-block:: php
 
@@ -8990,9 +9095,9 @@ Filter To add_slashes()
 #######################
 
 
-``FILTER_SANITIZE_MAGIC_QUOTES`` is deprecated. In PHP 7.4, it should be replaced with `addslashes() <http://www.php.net/addslashes>`_
+``FILTER_SANITIZE_MAGIC_QUOTES`` is deprecated. In PHP 7.4, it should be replaced with `addslashes() <https://www.php.net/addslashes>`_
 
-According to the migration RDFC : 'Magic quotes were deprecated all the way back in PHP 5.3 and later removed in PHP 5.4. The filter extension implements a sanitization filter that mimics this behavior of magic_quotes by calling `addslashes() <http://www.php.net/addslashes>`_ on the input in question.'
+According to the migration RDFC : 'Magic quotes were deprecated all the way back in PHP 5.3 and later removed in PHP 5.4. The filter extension implements a sanitization filter that mimics this behavior of magic_quotes by calling `addslashes() <https://www.php.net/addslashes>`_ on the input in question.'
 
 .. code-block:: php
 
@@ -9007,7 +9112,7 @@ According to the migration RDFC : 'Magic quotes were deprecated all the way back
    ?>
 
 
-`addslashes() <http://www.php.net/addslashes>`_ used to filter data while building SQL queries, to prevent injections. Nowadays, prepared queries are a better option.
+`addslashes() <https://www.php.net/addslashes>`_ used to filter data while building SQL queries, to prevent injections. Nowadays, prepared queries are a better option.
 
 See also `Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_.
 
@@ -9227,7 +9332,7 @@ Foreach Don't Change Pointer
 
 `foreach <http://php.net/manual/en/control-structures.foreach.php>`_ loops use their own internal cursor.
 
-A foreach loop won't change the internal pointer of the array, as it works on a copy of the source. Hence, applying array pointer's functions such as `current() <http://www.php.net/current>`_ or `next() <http://www.php.net/next>`_ to the source array won't have the same behavior in PHP 5 than PHP 7.
+A foreach loop won't change the internal pointer of the array, as it works on a copy of the source. Hence, applying array pointer's functions such as `current() <https://www.php.net/current>`_ or `next() <https://www.php.net/next>`_ to the source array won't have the same behavior in PHP 5 than PHP 7.
 
 This only applies when a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ by reference is used.
 
@@ -9358,7 +9463,7 @@ Foreach With list()
 
 Foreach loops have the ability to use list as blind variables. This syntax assign directly array elements to various variables. 
 
-PHP 5.5 introduced the usage of list in `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops. Until PHP 7.1, it was not possible to use non-numerical arrays as `list() <http://www.php.net/list>`_ wouldn't support string-indexed arrays.
+PHP 5.5 introduced the usage of list in `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops. Until PHP 7.1, it was not possible to use non-numerical arrays as `list() <https://www.php.net/list>`_ wouldn't support string-indexed arrays.
 
 .. code-block:: php
 
@@ -9376,7 +9481,7 @@ PHP 5.5 introduced the usage of list in `foreach() <http://www.php.net/manual/en
    ?>
 
 
-Previously, it was compulsory to `extract() <http://www.php.net/extract>`_ the data from the blind array : 
+Previously, it was compulsory to `extract() <https://www.php.net/extract>`_ the data from the blind array : 
 
 .. code-block:: php
 
@@ -9614,7 +9719,7 @@ Fully Qualified Constants
 
 Constants defined with their namespace.
 
-When defining constants with `define() <http://www.php.net/define>`_ function, it is possible to include the actual namespace : 
+When defining constants with `define() <https://www.php.net/define>`_ function, it is possible to include the actual namespace : 
 
 .. code-block:: php
 
@@ -9625,7 +9730,7 @@ When defining constants with `define() <http://www.php.net/define>`_ function, i
    ?>
 
 
-However, the name should be fully qualified without the initial \. Here, \a\b\c constant will never be accessible as a namespace constant, though it will be accessible via the `constant() <http://www.php.net/constant>`_ function.
+However, the name should be fully qualified without the initial \. Here, \a\b\c constant will never be accessible as a namespace constant, though it will be accessible via the `constant() <https://www.php.net/constant>`_ function.
 
 Also, the namespace will be absolute, and not a relative namespace of the current one. 
 
@@ -9794,14 +9899,14 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
-+ `php_logo_guid() <http://www.php.net/php_logo_guid>`_
-+ `php_egg_logo_guid() <http://www.php.net/php_egg_logo_guid>`_
-+ `php_real_logo_guid() <http://www.php.net/php_real_logo_guid>`_
-+ `zend_logo_guid() <http://www.php.net/zend_logo_guid>`_
-+ `mcrypt_cbc() <http://www.php.net/mcrypt_cbc>`_
-+ `mcrypt_cfb() <http://www.php.net/mcrypt_cfb>`_
-+ `mcrypt_ecb() <http://www.php.net/mcrypt_ecb>`_
-+ `mcrypt_ofb() <http://www.php.net/mcrypt_ofb>`_
++ `php_logo_guid() <https://www.php.net/php_logo_guid>`_
++ `php_egg_logo_guid() <https://www.php.net/php_egg_logo_guid>`_
++ `php_real_logo_guid() <https://www.php.net/php_real_logo_guid>`_
++ `zend_logo_guid() <https://www.php.net/zend_logo_guid>`_
++ `mcrypt_cbc() <https://www.php.net/mcrypt_cbc>`_
++ `mcrypt_cfb() <https://www.php.net/mcrypt_cfb>`_
++ `mcrypt_ecb() <https://www.php.net/mcrypt_ecb>`_
++ `mcrypt_ofb() <https://www.php.net/mcrypt_ofb>`_
 
 .. code-block:: php
 
@@ -10095,7 +10200,7 @@ Group Use Trailing Comma
 ########################
 
 
-The usage of a final empty slot in `array() <http://www.php.net/array>`_ was allowed with use statements. This works in PHP 7.2 and more recent.
+The usage of a final empty slot in `array() <https://www.php.net/array>`_ was allowed with use statements. This works in PHP 7.2 and more recent.
 
 Although this empty instruction is ignored at execution, this allows for clean presentation of code, and short diff when committing in a VCS.
 
@@ -10589,7 +10694,7 @@ Htmlentities Calls
 ##################
 
 
-`htmlentities() <http://www.php.net/htmlentities>`_ and `htmlspecialchars() <http://www.php.net/htmlspecialchars>`_ are used to prevent injecting special characters in HTML code. As a bare minimum, they take a string and encode it for HTML.
+`htmlentities() <https://www.php.net/htmlentities>`_ and `htmlspecialchars() <https://www.php.net/htmlspecialchars>`_ are used to prevent injecting special characters in HTML code. As a bare minimum, they take a string and encode it for HTML.
 
 The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML 4 or 5, etc. It is highly recommended to set it explicitly.
 
@@ -11187,9 +11292,9 @@ Implode One Arg
 ###############
 
 
-`implode() <http://www.php.net/implode>`_ may be called with one arg. It is recommended to avoid it. 
+`implode() <https://www.php.net/implode>`_ may be called with one arg. It is recommended to avoid it. 
 
-Using two arguments makes it less surprising to new comers, and consistent with `explode() <http://www.php.net/explode>`_ syntax. 
+Using two arguments makes it less surprising to new comers, and consistent with `explode() <https://www.php.net/explode>`_ syntax. 
 
 .. code-block:: php
 
@@ -11681,8 +11786,8 @@ This applies to recursive functions without any condition. This also applies to 
 Suggestions
 ^^^^^^^^^^^
 
-* Modify arguments before reinjecting them in the same method
-* Use different values when callling the same method
+* Modify arguments before injecting them again in the same method
+* Use different values when calling the same method
 
 +-------------+------------------------------+
 | Short name  | Structures/InfiniteRecursion |
@@ -12054,7 +12159,7 @@ According to PHP's manual, constant names, ' A valid constant name starts with a
 
 Constant, must follow this regex : ``/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/``.
 
-In particular when defined using `define() <http://www.php.net/define>`_ function, no error is produced. When using ``const``, on the other hand, the 
+In particular when defined using `define() <https://www.php.net/define>`_ function, no error is produced. When using ``const``, on the other hand, the 
 
 .. code-block:: php
 
@@ -12134,11 +12239,11 @@ Invalid Pack Format
 ###################
 
 
-Some characters are invalid in a `pack() <http://www.php.net/pack>`_ format string.
+Some characters are invalid in a `pack() <https://www.php.net/pack>`_ format string.
 
-`pack() <http://www.php.net/pack>`_ and `unpack() <http://www.php.net/unpack>`_ accept the following format specifiers : ``aAhHcCsSnviIlLNVqQJPfgGdeExXZ``. 
+`pack() <https://www.php.net/pack>`_ and `unpack() <https://www.php.net/unpack>`_ accept the following format specifiers : ``aAhHcCsSnviIlLNVqQJPfgGdeExXZ``. 
 
-`unpack() <http://www.php.net/unpack>`_ also accepts a name after the format specifier and an optional quantifier. 
+`unpack() <https://www.php.net/unpack>`_ also accepts a name after the format specifier and an optional quantifier. 
 
 All other situations is not a valid, and produces a warning : ``pack(): Type t: unknown format code``
 
@@ -12152,7 +12257,7 @@ All other situations is not a valid, and produces a warning : ``pack(): Type t: 
    ?>
 
 
-Check `pack() <http://www.php.net/pack>`_ documentation for format specifiers that were introduced in various PHP version, namely 7.0, 7.1 and 7.2.
+Check `pack() <https://www.php.net/pack>`_ documentation for format specifiers that were introduced in various PHP version, namely 7.0, 7.1 and 7.2.
 
 See also `pack <http://php.net/pack>`_ and `unpack <http://php.net/pack>`_.
 
@@ -12280,7 +12385,7 @@ Is_A() With String
 ##################
 
 
-When using `is_a() <http://www.php.net/is_a>`_ with a string as first argument, the third argument is compulsory.
+When using `is_a() <https://www.php.net/is_a>`_ with a string as first argument, the third argument is compulsory.
 
 .. code-block:: php
 
@@ -12294,7 +12399,7 @@ When using `is_a() <http://www.php.net/is_a>`_ with a string as first argument, 
    ?>
 
 
-See also `is_a() <http://www.php.net/is_a>`_.
+See also `is_a() <https://www.php.net/is_a>`_.
 
 
 Suggestions
@@ -12420,11 +12525,11 @@ Joining file()
 ##############
 
 
-Use `file() <http://www.php.net/file>`_ to read lines separately. 
+Use `file() <https://www.php.net/file>`_ to read lines separately. 
 
-Applying join('', ) or implode('', ) to the result of `file() <http://www.php.net/file>`_ provides the same results than using `file_get_contents() <http://www.php.net/file_get_contents>`_, but at a higher cost of memory and processing.
+Applying join('', ) or implode('', ) to the result of `file() <https://www.php.net/file>`_ provides the same results than using `file_get_contents() <https://www.php.net/file_get_contents>`_, but at a higher cost of memory and processing.
 
-If the delimiter is not '', then `implode() <http://www.php.net/implode>`_ and `file() <http://www.php.net/file>`_ are a better solution than `file_get_contents() <http://www.php.net/file_get_contents>`_ and `str_replace() <http://www.php.net/str_replace>`_ or `nl2br() <http://www.php.net/nl2br>`_.
+If the delimiter is not '', then `implode() <https://www.php.net/implode>`_ and `file() <https://www.php.net/file>`_ are a better solution than `file_get_contents() <https://www.php.net/file_get_contents>`_ and `str_replace() <https://www.php.net/str_replace>`_ or `nl2br() <https://www.php.net/nl2br>`_.
 
 .. code-block:: php
 
@@ -12447,7 +12552,7 @@ If the delimiter is not '', then `implode() <http://www.php.net/implode>`_ and `
    ?>
 
 
-Always use `file_get_contents() <http://www.php.net/file_get_contents>`_ to get the content of a file as a string. Consider using `readfile() <http://www.php.net/readfile>`_ to echo the content directly to the output.
+Always use `file_get_contents() <https://www.php.net/file_get_contents>`_ to get the content of a file as a string. Consider using `readfile() <https://www.php.net/readfile>`_ to echo the content directly to the output.
 
 See also `file_get_contents <http://php.net/file_get_contents>`_ and `file <http://php.net/file>`_.
 
@@ -12479,7 +12584,7 @@ List Short Syntax
 #################
 
 
-Usage of short syntax version of `list() <http://www.php.net/list>`_.
+Usage of short syntax version of `list() <https://www.php.net/list>`_.
 
 .. code-block:: php
 
@@ -12514,7 +12619,7 @@ List With Appends
 #################
 
 
-`List() <http://www.php.net/list>`_ behavior has changed in PHP 7.0 and it has impact on the indexing when list is used with the [] operator. 
+`List() <https://www.php.net/list>`_ behavior has changed in PHP 7.0 and it has impact on the indexing when list is used with the [] operator. 
 
 .. code-block:: php
 
@@ -12568,7 +12673,7 @@ List With Keys
 ##############
 
 
-Setting keys when using `list() <http://www.php.net/list>`_ is a PHP 7.1 feature.
+Setting keys when using `list() <https://www.php.net/list>`_ is a PHP 7.1 feature.
 
 .. code-block:: php
 
@@ -12827,11 +12932,11 @@ Logical To in_array
 ###################
 
 
-Multiples exclusive comparisons may be replaced by `in_array() <http://www.php.net/in_array>`_.
+Multiples exclusive comparisons may be replaced by `in_array() <https://www.php.net/in_array>`_.
 
-`in_array() <http://www.php.net/in_array>`_ makes the alternatives more readable, especially when the number of alternatives is large. In fact, the list of alternative may even be set in a variable, and centralized for easier management.
+`in_array() <https://www.php.net/in_array>`_ makes the alternatives more readable, especially when the number of alternatives is large. In fact, the list of alternative may even be set in a variable, and centralized for easier management.
 
-Even two 'or' comparisons are slower than using a `in_array() <http://www.php.net/in_array>`_ call. More calls are even slower than just two. This is a micro-optimisation : speed gain is low, and marginal. Code centralisation is a more significant advantage.
+Even two 'or' comparisons are slower than using a `in_array() <https://www.php.net/in_array>`_ call. More calls are even slower than just two. This is a micro-optimisation : speed gain is low, and marginal. Code centralisation is a more significant advantage.
 
 .. code-block:: php
 
@@ -13246,15 +13351,15 @@ Calling the same function to chain modifications tends to be slower than calling
 
 Potential replacements : 
 
-+-------------------------------------------------------------------------+------------------------------------------------------------------------------------+
-| Function                                                                | Replacement                                                                        |
-+-------------------------------------------------------------------------+------------------------------------------------------------------------------------+
-| `str_replace() <http://www.php.net/str_replace>`_                       | `str_replace() <http://www.php.net/str_replace>`_                                  |
-| `str_ireplace() <http://www.php.net/str_ireplace>`_                     | `str_replace() <http://www.php.net/str_replace>`_                                  |
-| `substr_replace() <http://www.php.net/substr_replace>`_                 | `substr_replace() <http://www.php.net/substr_replace>`_                            |
-| `preg_replace() <http://www.php.net/preg_replace>`_                     | `preg_replace() <http://www.php.net/preg_replace>`_                                |
-| `preg_replace_callback() <http://www.php.net/preg_replace_callback>`_   | `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_  |
-+-------------------------------------------------------------------------+------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+| Function                                                                 | Replacement                                                                         |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+| `str_replace() <https://www.php.net/str_replace>`_                       | `str_replace() <https://www.php.net/str_replace>`_                                  |
+| `str_ireplace() <https://www.php.net/str_ireplace>`_                     | `str_replace() <https://www.php.net/str_replace>`_                                  |
+| `substr_replace() <https://www.php.net/substr_replace>`_                 | `substr_replace() <https://www.php.net/substr_replace>`_                            |
+| `preg_replace() <https://www.php.net/preg_replace>`_                     | `preg_replace() <https://www.php.net/preg_replace>`_                                |
+| `preg_replace_callback() <https://www.php.net/preg_replace_callback>`_   | `preg_replace_callback_array() <https://www.php.net/preg_replace_callback_array>`_  |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
 
 .. code-block:: php
 
@@ -13469,16 +13574,16 @@ Some mbstring functions use the third argument for offset, not for encoding.
 
 Those are the following functions : 
 
-* `mb_strrichr() <http://www.php.net/mb_strrichr>`_
-* `mb_stripos() <http://www.php.net/mb_stripos>`_
-* `mb_strrpos() <http://www.php.net/mb_strrpos>`_
-* `mb_strstr() <http://www.php.net/mb_strstr>`_
-* `mb_stristr() <http://www.php.net/mb_stristr>`_
-* `mb_strpos() <http://www.php.net/mb_strpos>`_
-* `mb_strripos() <http://www.php.net/mb_strripos>`_
-* `mb_strrchr() <http://www.php.net/mb_strrchr>`_
-* `mb_strrichr() <http://www.php.net/mb_strrichr>`_
-* `mb_substr() <http://www.php.net/mb_substr>`_
+* `mb_strrichr() <https://www.php.net/mb_strrichr>`_
+* `mb_stripos() <https://www.php.net/mb_stripos>`_
+* `mb_strrpos() <https://www.php.net/mb_strrpos>`_
+* `mb_strstr() <https://www.php.net/mb_strstr>`_
+* `mb_stristr() <https://www.php.net/mb_stristr>`_
+* `mb_strpos() <https://www.php.net/mb_strpos>`_
+* `mb_strripos() <https://www.php.net/mb_strripos>`_
+* `mb_strrchr() <https://www.php.net/mb_strrchr>`_
+* `mb_strrichr() <https://www.php.net/mb_strrichr>`_
+* `mb_substr() <https://www.php.net/mb_substr>`_
 
 .. code-block:: php
 
@@ -13494,7 +13599,7 @@ Those are the following functions :
    ?>
 
 
-See also `mb_substr() <http://www.php.net/mb_substr>`_ manual pages.
+See also `mb_substr() <https://www.php.net/mb_substr>`_ manual pages.
 
 
 
@@ -13524,7 +13629,7 @@ Mbstring Unknown Encoding
 
 The encoding used is not known to the ext/mbstring extension.
 
-This analysis takes in charge all ``mbstring`` encoding and aliases. The full list of supported mbstrin encoding is available with `mb_list_encodings() <http://www.php.net/mb_list_encodings>`_. Each encoding alias is available with `mb_encoding_aliases() <http://www.php.net/mb_encoding_aliases>`_.
+This analysis takes in charge all ``mbstring`` encoding and aliases. The full list of supported mbstring encoding is available with `mb_list_encodings() <https://www.php.net/mb_list_encodings>`_. Each encoding alias is available with `mb_encoding_aliases() <https://www.php.net/mb_encoding_aliases>`_.
 
 .. code-block:: php
 
@@ -14083,6 +14188,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Match the typehint with the default value
+* Do not rely on PHP type juggling to change the type on the fly
 
 +-------------+-----------------------------------------------------------+
 | Short name  | Functions/MismatchTypeAndDefault                          |
@@ -14092,8 +14198,6 @@ Suggestions
 | Severity    | Critical                                                  |
 +-------------+-----------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                             |
-+-------------+-----------------------------------------------------------+
-| Examples    | :ref:`wordpress-functions-mismatchtypeanddefault`         |
 +-------------+-----------------------------------------------------------+
 
 
@@ -14593,7 +14697,7 @@ Mkdir Default
 #############
 
 
-`mkdir() <http://www.php.net/mkdir>`_ gives universal access to created folders, by default. It is recommended to gives limited set of rights (0755, 0700), or to explicitly set the rights to 0777. 
+`mkdir() <https://www.php.net/mkdir>`_ gives universal access to created folders, by default. It is recommended to gives limited set of rights (0755, 0700), or to explicitly set the rights to 0777. 
 
 .. code-block:: php
 
@@ -14640,7 +14744,7 @@ Modernize Empty With Expression
 ###############################
 
 
-`empty() <http://www.php.net/empty>`_ accepts expressions as agument. This feature was added in PHP 5.5. 
+`empty() <https://www.php.net/empty>`_ accepts expressions as argument. This feature was added in PHP 5.5. 
 
 There is no need to store the expression in a variable before testing, unless it is reused later.
 
@@ -14670,14 +14774,13 @@ There is no need to store the expression in a variable before testing, unless it
    ?>
 
 
-See also `empty() <http://www.php.net/empty>`_ and 
-         `empty() supports arbitrary expressions <https://www.php.net/manual/en/migration55.new-features.php#migration55.new-features.empty>`.
+See also `empty() <http://www.php.net/empty>`_ and `empty() supports arbitrary expressions <https://www.php.net/manual/en/migration55.new-features.php#migration55.new-features.empty>`_.
 
 
 Suggestions
 ^^^^^^^^^^^
 
-* Aviod the temporary variable, and use directly empty()
+* Avoid the temporary variable, and use directly empty()
 
 +-------------+------------------------------+
 | Short name  | Structures/ModernEmpty       |
@@ -15208,7 +15311,7 @@ Multiple Unset()
 ################
 
 
-`Unset() <http://www.php.net/unset>`_ accepts multiple arguments, unsetting them one after each other. It is more efficient to call `unset() <http://www.php.net/unset>`_ once, than multiple times.
+`Unset() <https://www.php.net/unset>`_ accepts multiple arguments, unsetting them one after each other. It is more efficient to call `unset() <https://www.php.net/unset>`_ once, than multiple times.
 
 .. code-block:: php
 
@@ -15330,7 +15433,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Remove the double case
-* Change the case to another and rightfull value
+* Change the case to another and rightful value
 
 +-------------+--------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/MultipleDefinedCase                                                                         |
@@ -15564,7 +15667,7 @@ The power operator `** <http://www.php.net/manual/en/language.operators.arithmet
 
 This means that -2 `** <http://www.php.net/manual/en/language.operators.arithmetic.php>`_ 2 == -4. It is in fact, -(2 `** <http://www.php.net/manual/en/language.operators.arithmetic.php>`_ 2). 
 
-When using negative power, it is clearer to add parenthesis or to use the `pow() <http://www.php.net/pow>`_ function, which has no such ambiguity : 
+When using negative power, it is clearer to add parenthesis or to use the `pow() <https://www.php.net/pow>`_ function, which has no such ambiguity : 
 
 .. code-block:: php
 
@@ -15577,6 +15680,13 @@ When using negative power, it is clearer to add parenthesis or to use the `pow()
    -2 ** 2 == -(2 ** 2) == 4;
    
    ?>
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid negative number, as operands of **
+* Use parenthesis with negative numbers and **
 
 +-------------+------------------------+
 | Short name  | Structures/NegativePow |
@@ -16096,13 +16206,13 @@ New Functions In PHP 7.0
 The following functions are now native functions in PHP 7.0. It is advised to change them before moving to this new version.
 
 * get_resources()
-* `gc_mem_caches() <http://www.php.net/gc_mem_caches>`_
-* `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_
+* `gc_mem_caches() <https://www.php.net/gc_mem_caches>`_
+* `preg_replace_callback_array() <https://www.php.net/preg_replace_callback_array>`_
 * posix_setrlimit()
-* `random_bytes() <http://www.php.net/random_bytes>`_
-* `random_int() <http://www.php.net/random_int>`_
-* `intdiv() <http://www.php.net/intdiv>`_
-* `error_clear_last() <http://www.php.net/error_clear_last>`_
+* `random_bytes() <https://www.php.net/random_bytes>`_
+* `random_int() <https://www.php.net/random_int>`_
+* `intdiv() <https://www.php.net/intdiv>`_
+* `error_clear_last() <https://www.php.net/error_clear_last>`_
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/Php70NewFunctions                                                                                      |
@@ -16129,10 +16239,10 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 * curl_share_strerror()
 * curl_multi_errno()
 * curl_share_errno()
-* `mb_ord() <http://www.php.net/mb_ord>`_
-* `mb_chr() <http://www.php.net/mb_chr>`_
-* `mb_scrub() <http://www.php.net/mb_scrub>`_
-* `is_iterable() <http://www.php.net/is_iterable>`_
+* `mb_ord() <https://www.php.net/mb_ord>`_
+* `mb_chr() <https://www.php.net/mb_chr>`_
+* `mb_scrub() <https://www.php.net/mb_scrub>`_
+* `is_iterable() <https://www.php.net/is_iterable>`_
 
 +-------------+---------------------------+
 | Short name  | Php/Php71NewFunctions     |
@@ -16156,11 +16266,11 @@ New Functions In PHP 7.2
 
 The following functions are now native functions in PHP 7.2. It is advised to change them before moving to this new version.
 
-* `mb_ord() <http://www.php.net/mb_ord>`_
-* `mb_chr() <http://www.php.net/mb_chr>`_
-* `mb_scrub() <http://www.php.net/mb_scrub>`_
-* `stream_isatty() <http://www.php.net/stream_isatty>`_
-* `proc_nice() <http://www.php.net/proc_nice>`_ (Windows only)
+* `mb_ord() <https://www.php.net/mb_ord>`_
+* `mb_chr() <https://www.php.net/mb_chr>`_
+* `mb_scrub() <https://www.php.net/mb_scrub>`_
+* `stream_isatty() <https://www.php.net/stream_isatty>`_
+* `proc_nice() <https://www.php.net/proc_nice>`_ (Windows only)
 
 +-------------+---------------------------+
 | Short name  | Php/Php72NewFunctions     |
@@ -16246,9 +16356,9 @@ Next Month Trap
 ###############
 
 
-Avoid using +1 month with `strtotime() <http://www.php.net/strtotime>`_. 
+Avoid using +1 month with `strtotime() <https://www.php.net/strtotime>`_. 
 
-`strtotime() <http://www.php.net/strtotime>`_ calculates the next month by incrementing the month number. For day number that do not exist from one month to the next, `strtotime() <http://www.php.net/strtotime>`_ fixes them by setting them in the next-next month. 
+`strtotime() <https://www.php.net/strtotime>`_ calculates the next month by incrementing the month number. For day number that do not exist from one month to the next, `strtotime() <https://www.php.net/strtotime>`_ fixes them by setting them in the next-next month. 
 
 This happens to January, March, May, July, August and October. January is also vulnerable for 29 (not every year), 30 and 31. 
 
@@ -16577,9 +16687,9 @@ No Count With 0
 ###############
 
 
-Comparing `count() <http://www.php.net/count>`_, `strlen() <http://www.php.net/strlen>`_ or `mb_strlen() <http://www.php.net/mb_strlen>`_ to 0 is a waste of resources. There are three distinct situations.
+Comparing `count() <https://www.php.net/count>`_, `strlen() <https://www.php.net/strlen>`_ or `mb_strlen() <https://www.php.net/mb_strlen>`_ to 0 is a waste of resources. There are three distinct situations.
 
-When comparing `count() <http://www.php.net/count>`_ with 0, with ===, ==, !==, !=, it is more efficient to use `empty() <http://www.php.net/empty>`_. `empty() <http://www.php.net/empty>`_ is a language construct that checks if a value is present, while `count() <http://www.php.net/count>`_ actually load the number of element.
+When comparing `count() <https://www.php.net/count>`_ with 0, with ===, ==, !==, !=, it is more efficient to use `empty() <https://www.php.net/empty>`_. `empty() <https://www.php.net/empty>`_ is a language construct that checks if a value is present, while `count() <https://www.php.net/count>`_ actually load the number of element.
 
 .. code-block:: php
 
@@ -16597,7 +16707,7 @@ When comparing `count() <http://www.php.net/count>`_ with 0, with ===, ==, !==, 
    ?>
 
 
-When comparing `count() <http://www.php.net/count>`_ strictly with 0 and ``>``, it is more efficient to use ``!(empty(  ))``
+When comparing `count() <https://www.php.net/count>`_ strictly with 0 and ``>``, it is more efficient to use ``!(empty(  ))``
 
 .. code-block:: php
 
@@ -16625,7 +16735,7 @@ When comparing `count() <http://www.php.net/count>`_ strictly with 0 and ``>``, 
    ?>
 
 
-Comparing `count() <http://www.php.net/count>`_, `strlen() <http://www.php.net/strlen>`_ or `mb_strlen() <http://www.php.net/mb_strlen>`_ with other values than 0 cannot be replaced with a comparison with `empty() <http://www.php.net/empty>`_.
+Comparing `count() <https://www.php.net/count>`_, `strlen() <https://www.php.net/strlen>`_ or `mb_strlen() <https://www.php.net/mb_strlen>`_ with other values than 0 cannot be replaced with a comparison with `empty() <https://www.php.net/empty>`_.
 
 Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops. 
 
@@ -16710,7 +16820,7 @@ No Direct Usage
 
 The results of the following functions shouldn't be used directly, but checked first. 
 
-For example, `glob() <http://www.php.net/glob>`_ returns an array, unless some error happens, in which case it returns a boolean (false). In such case, however rare it is, plugging `glob() <http://www.php.net/glob>`_ directly in a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops will yield errors.
+For example, `glob() <https://www.php.net/glob>`_ returns an array, unless some error happens, in which case it returns a boolean (false). In such case, however rare it is, plugging `glob() <https://www.php.net/glob>`_ directly in a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loops will yield errors.
 
 .. code-block:: php
 
@@ -16754,7 +16864,7 @@ No ENT_IGNORE
 
 Certain characters have special significance in HTML, and should be represented by HTML entities if they are to preserve their meanings.
 
-ENT_IGNORE is a configuration option for `htmlspecialchars() <http://www.php.net/htmlspecialchars>`_, that ignore any needed character replacement. This mean the raw input will now be processed by PHP, or a target browser.
+ENT_IGNORE is a configuration option for `htmlspecialchars() <https://www.php.net/htmlspecialchars>`_, that ignore any needed character replacement. This mean the raw input will now be processed by PHP, or a target browser.
 
 It is recommended to use the other configuration options : ENT_COMPAT, ENT_QUOTES, ENT_NOQUOTES, ENT_SUBSTITUTE, ENT_DISALLOWED, ENT_HTML401, ENT_XML1, ENT_XHTML or ENT_HTML5.
 
@@ -17007,9 +17117,9 @@ No Hardcoded Path
 
 It is not recommended to use hardcoded literals when designating files. Full paths are usually tied to one file system organization. As soon as the organisation changes or must be adapted to any external constraint, the path is not valid anymore.
 
-Either use `__FILE__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ and `__DIR__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ to make the path relative to the current file; use a ``DOC_ROOT`` as a configuration constant that will allow the moving of the script to another folder; finally functions like `sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_ produce a viable temporary folder.
+Either use `__FILE__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ and `__DIR__ <http://www.php.net/manual/en/language.constants.predefined.php>`_ to make the path relative to the current file; use a ``DOC_ROOT`` as a configuration constant that will allow the moving of the script to another folder; finally functions like `sys_get_temp_dir() <https://www.php.net/sys_get_temp_dir>`_ produce a viable temporary folder.
 
-Relative paths are relative to the current execution directory, and not the current file. This means they may differ depending on the location of the start of the application, and are sensitive to `chdir() <http://www.php.net/chdir>`_ and `chroot() <http://www.php.net/chroot>`_ usage.
+Relative paths are relative to the current execution directory, and not the current file. This means they may differ depending on the location of the start of the application, and are sensitive to `chdir() <https://www.php.net/chdir>`_ and `chroot() <https://www.php.net/chroot>`_ usage.
 
 .. code-block:: php
 
@@ -17108,7 +17218,7 @@ No List With String
 ###################
 
 
-`list() <http://www.php.net/list>`_ can't be used anymore to access particular offset in a string. This should be done with `substr() <http://www.php.net/substr>`_ or $string[$offset] syntax.
+`list() <https://www.php.net/list>`_ can't be used anymore to access particular offset in a string. This should be done with `substr() <https://www.php.net/substr>`_ or $string[$offset] syntax.
 
 .. code-block:: php
 
@@ -17126,7 +17236,7 @@ No List With String
    ?>
 
 
-See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_ : `list() <http://www.php.net/list>`_ can no longer unpack string variables.
+See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_ : `list() <https://www.php.net/list>`_ can no longer unpack string variables.
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoListWithString                                                                                       |
@@ -17354,7 +17464,7 @@ No Need For get_class()
 #######################
 
 
-There is no need to call `get_class() <http://www.php.net/get_class>`_ to build a static call. The argument of `get_class() <http://www.php.net/get_class>`_ may be used directly. 
+There is no need to call `get_class() <https://www.php.net/get_class>`_ to build a static call. The argument of `get_class() <https://www.php.net/get_class>`_ may be used directly. 
 
 .. code-block:: php
 
@@ -17617,7 +17727,7 @@ PHP uses an internal representation in base 2 : any number difficult to represen
    ?>
 
 
-Use precision formulas with `abs() <http://www.php.net/abs>`_ to approximate values with a given precision, or avoid reals altogether. 
+Use precision formulas with `abs() <https://www.php.net/abs>`_ to approximate values with a given precision, or avoid reals altogether. 
 
 See also `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_.
 
@@ -18113,53 +18223,6 @@ Seel also `Generalize support of negative string offsets <https://wiki.php.net/r
 
 
 
-.. _no-substr()-one:
-
-No Substr() One
-###############
-
-
-Use array notation ``$string[$position]`` to reach a single byte in a string.
-
-There are two ways to access a byte in a string : `substr() <http://www.php.net/substr>`_ and ``$v[$pos]``.
-
-The second style is more readable. It may be up to four times faster, though it is a micro-optimization. It is recommended to use it. 
-
-PHP 7.1 also introduces the support of negative offsets as string index : negative offset are also reported.
-
-.. code-block:: php
-
-   <?php
-   
-   $string = 'ab人cde';
-   
-   echo substr($string, $pos, 1);
-   echo $string[$pos];
-   
-   echo mb_substr($string, $pos, 1);
-   
-   // when $pos = 1
-   // displays bbb
-   // when $pos = 2
-   // displays ??人
-   
-   ?>
-
-
-Beware that `substr() <http://www.php.net/substr>`_ and ``$v[$pos]`` are similar, while `mb_substr() <http://www.php.net/mb_substr>`_ is not. The first function works on bytes, while the latter works on characters.
-
-+-------------+--------------------------------------------------------------------------------------------------+
-| Short name  | Structures/NoSubstrOne                                                                           |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions`, :ref:`Top10` |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                            |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                 |
-+-------------+--------------------------------------------------------------------------------------------------+
-
-
-
 .. _no-weak-ssl-crypto:
 
 No Weak SSL Crypto
@@ -18170,7 +18233,7 @@ When enabling PHP's stream SSL, it is important to use safe protocol.
 
 All the SSL protocol, and TLS (its successor) v 1.0 are not unsafe. The best is to use the most recent TLS, the 1.2. 
 
-stream_socket_enable_crypto() and `curl_setopt() <http://www.php.net/curl_setopt>`_ are checked.
+stream_socket_enable_crypto() and `curl_setopt() <https://www.php.net/curl_setopt>`_ are checked.
 
 See also `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>s`_ an `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_.
 
@@ -18198,9 +18261,9 @@ No array_merge() In Loops
 #########################
 
 
-`array_merge() <http://www.php.net/array_merge>`_ is memory intensive : every call will duplicate the arguments in memory, before merging them. 
+`array_merge() <https://www.php.net/array_merge>`_ is memory intensive : every call will duplicate the arguments in memory, before merging them. 
 
-To handle arrays that may be quite big, it is recommended to avoid using `array_merge() <http://www.php.net/array_merge>`_ in a loop. Instead, one should use `array_merge() <http://www.php.net/array_merge>`_ with as many arguments as possible, making the merge a on time call.
+To handle arrays that may be quite big, it is recommended to avoid using `array_merge() <https://www.php.net/array_merge>`_ in a loop. Instead, one should use `array_merge() <https://www.php.net/array_merge>`_ with as many arguments as possible, making the merge a on time call.
 
 .. code-block:: php
 
@@ -18238,7 +18301,7 @@ To handle arrays that may be quite big, it is recommended to avoid using `array_
    ?>
 
 
-Note that `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ and `file_put_contents() <http://www.php.net/file_put_contents>`_ are affected and reported the same way.
+Note that `array_merge_recursive() <https://www.php.net/array_merge_recursive>`_ and `file_put_contents() <https://www.php.net/file_put_contents>`_ are affected and reported the same way.
 
 
 
@@ -18269,7 +18332,7 @@ No get_class() With Null
 ########################
 
 
-It is not possible to pass explicitly null to `get_class() <http://www.php.net/get_class>`_ to get the current's class name. Since PHP 7.2, one must call `get_class() <http://www.php.net/get_class>`_ without arguments to achieve that result.
+It is not possible to pass explicitly null to `get_class() <https://www.php.net/get_class>`_ to get the current's class name. Since PHP 7.2, one must call `get_class() <https://www.php.net/get_class>`_ without arguments to achieve that result.
 
 .. code-block:: php
 
@@ -18308,9 +18371,9 @@ No isset() With empty()
 #######################
 
 
-`empty() <http://www.php.net/empty>`_ actually does the job of `isset() <http://www.www.php.net/isset>`_ too. 
+`empty() <https://www.php.net/empty>`_ actually does the job of `isset() <http://www.www.php.net/isset>`_ too. 
 
-From the manual : ``No warning is generated if the variable does not exist. That means `empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !`isset( <http://www.www.php.net/isset>`_$var) || $var == false.`` The main difference is that `isset() <http://www.www.php.net/isset>`_ only works with variables, while `empty() <http://www.php.net/empty>`_ works with other structures, such as constants.
+From the manual : ``No warning is generated if the variable does not exist. That means `empty() <https://www.php.net/empty>`_ is essentially the concise equivalent to !`isset( <http://www.www.php.net/isset>`_$var) || $var == false.`` The main difference is that `isset() <http://www.www.php.net/isset>`_ only works with variables, while `empty() <https://www.php.net/empty>`_ works with other structures, such as constants.
 
 .. code-block:: php
 
@@ -18360,11 +18423,11 @@ No mb_substr In Loop
 ####################
 
 
-Do not use loops on `mb_substr() <http://www.php.net/mb_substr>`_. 
+Do not use loops on `mb_substr() <https://www.php.net/mb_substr>`_. 
 
-`mb_substr() <http://www.php.net/mb_substr>`_ always starts at the beginning of the string ot search for the nth char, and recalculate everything. This means that the first iterations are as fast as `substr() <http://www.php.net/substr>`_ (for comparison), while the longer the string, the slower `mb_substr() <http://www.php.net/mb_substr>`_.
+`mb_substr() <https://www.php.net/mb_substr>`_ always starts at the beginning of the string ot search for the nth char, and recalculate everything. This means that the first iterations are as fast as `substr() <https://www.php.net/substr>`_ (for comparison), while the longer the string, the slower `mb_substr() <https://www.php.net/mb_substr>`_.
 
-The recommendation is to use `preg_split() <http://www.php.net/preg_split>`_ with the `u` option, to split the string into an array. This save multiple recalculations.
+The recommendation is to use `preg_split() <https://www.php.net/preg_split>`_ with the `u` option, to split the string into an array. This save multiple recalculations.
 
 .. code-block:: php
 
@@ -18610,7 +18673,7 @@ Undefined constants revert as strings in Arrays. They are also called ``bareword
 
 In ``$array[index]``, PHP cannot find index as a constant, but, as a default behavior, turns it into the string ``index``. 
 
-This default behavior raise concerns when a corresponding constant is defined, either using `define() <http://www.php.net/define>`_ or the const keyword (outside a class). The definition of the index constant will modify the behavior of the index, as it will now use the constant definition, and not the 'index' string. 
+This default behavior raise concerns when a corresponding constant is defined, either using `define() <https://www.php.net/define>`_ or the const keyword (outside a class). The definition of the index constant will modify the behavior of the index, as it will now use the constant definition, and not the 'index' string. 
 
 .. code-block:: php
 
@@ -19119,7 +19182,7 @@ Old Style __autoload()
 
 Avoid __autoload(), only use spl_register_autoload().
 
-__autoload() will be deprecated in PHP 7.2 and possibly removed in later versions.
+__autoload() is deprecated since PHP 7.2 and possibly removed in later versions. spl_register_autoload() was introduced in PHP 5.1.0.
 
 __autoload() may only be declared once, and cannot be modified later. This creates potential conflicts between libraries that try to set up their own autoloading schema. 
 
@@ -19143,6 +19206,14 @@ Do not use the old __autoload() function, but rather the new spl_register_autolo
 
 See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Move to spl_register_autoload()
+* Remove usage of the old __autoload() function
+* Modernize usage of old libraries
+
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Php/oldAutoloadUsage                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -19153,6 +19224,8 @@ See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.ph
 | Time To Fix | Instant (5 mins)                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-smart-autoload <https://github.com/dseguy/clearPHP/tree/master/rules/use-smart-autoload.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`piwigo-php-oldautoloadusage`                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -19632,7 +19705,7 @@ Overwritten Source And Value
 
 In a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_, it is best to keep source and values distinct. Otherwise, they overwrite each other.
 
-Since PHP 7.0, PHP makes a copy of the orginal source, then works on it. This makes possible to use the same name for the source and the values.
+Since PHP 7.0, PHP makes a copy of the original source, then works on it. This makes possible to use the same name for the source and the values.
 
 .. code-block:: php
 
@@ -19665,7 +19738,7 @@ Since PHP 7.0, PHP makes a copy of the orginal source, then works on it. This ma
 
 When the source is used as the value, the elements in the array are successively assigned to itself. After the loop, the original array has been replaced by its last element.
 
-The same applies to the index, or to any variable in a `list() <http://www.php.net/list>`_ structure, used in a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_.
+The same applies to the index, or to any variable in a `list() <https://www.php.net/list>`_ structure, used in a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_.
 
 
 
@@ -19797,30 +19870,30 @@ PHP 7.0 Removed Functions
 
 The following PHP native functions were removed in PHP 7.0.
 
-* `ereg() <http://www.php.net/ereg>`_
-* `ereg_replace() <http://www.php.net/ereg_replace>`_
-* `eregi() <http://www.php.net/eregi>`_
-* `eregi_replace() <http://www.php.net/eregi_replace>`_
-* `split() <http://www.php.net/split>`_
-* `spliti() <http://www.php.net/spliti>`_
-* `sql_regcase() <http://www.php.net/sql_regcase>`_
-* `magic_quotes_runtime() <http://www.php.net/magic_quotes_runtime>`_
-* `set_magic_quotes_runtime() <http://www.php.net/set_magic_quotes_runtime>`_
-* `call_user_method() <http://www.php.net/call_user_method>`_
-* `call_user_method_array() <http://www.php.net/call_user_method_array>`_
-* `set_socket_blocking() <http://www.php.net/set_socket_blocking>`_
-* `mcrypt_ecb() <http://www.php.net/mcrypt_ecb>`_
-* `mcrypt_cbc() <http://www.php.net/mcrypt_cbc>`_
-* `mcrypt_cfb() <http://www.php.net/mcrypt_cfb>`_
-* `mcrypt_ofb() <http://www.php.net/mcrypt_ofb>`_
+* `ereg() <https://www.php.net/ereg>`_
+* `ereg_replace() <https://www.php.net/ereg_replace>`_
+* `eregi() <https://www.php.net/eregi>`_
+* `eregi_replace() <https://www.php.net/eregi_replace>`_
+* `split() <https://www.php.net/split>`_
+* `spliti() <https://www.php.net/spliti>`_
+* `sql_regcase() <https://www.php.net/sql_regcase>`_
+* `magic_quotes_runtime() <https://www.php.net/magic_quotes_runtime>`_
+* `set_magic_quotes_runtime() <https://www.php.net/set_magic_quotes_runtime>`_
+* `call_user_method() <https://www.php.net/call_user_method>`_
+* `call_user_method_array() <https://www.php.net/call_user_method_array>`_
+* `set_socket_blocking() <https://www.php.net/set_socket_blocking>`_
+* `mcrypt_ecb() <https://www.php.net/mcrypt_ecb>`_
+* `mcrypt_cbc() <https://www.php.net/mcrypt_cbc>`_
+* `mcrypt_cfb() <https://www.php.net/mcrypt_cfb>`_
+* `mcrypt_ofb() <https://www.php.net/mcrypt_ofb>`_
 * datefmt_set_timezone_id()
-* `imagepsbbox() <http://www.php.net/imagepsbbox>`_
-* `imagepsencodefont() <http://www.php.net/imagepsencodefont>`_
-* `imagepsextendfont() <http://www.php.net/imagepsextendfont>`_
-* `imagepsfreefont() <http://www.php.net/imagepsfreefont>`_
-* `imagepsloadfont() <http://www.php.net/imagepsloadfont>`_
-* `imagepsslantfont() <http://www.php.net/imagepsslantfont>`_
-* `imagepstext() <http://www.php.net/imagepstext>`_
+* `imagepsbbox() <https://www.php.net/imagepsbbox>`_
+* `imagepsencodefont() <https://www.php.net/imagepsencodefont>`_
+* `imagepsextendfont() <https://www.php.net/imagepsextendfont>`_
+* `imagepsfreefont() <https://www.php.net/imagepsfreefont>`_
+* `imagepsloadfont() <https://www.php.net/imagepsloadfont>`_
+* `imagepsslantfont() <https://www.php.net/imagepsslantfont>`_
+* `imagepstext() <https://www.php.net/imagepstext>`_
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 
@@ -19898,7 +19971,7 @@ PHP 7.1 Microseconds
 ####################
 
 
-PHP supports microseconds in ``DateTime`` class and `date_create() <http://www.php.net/date_create>`_ function. This was introduced in PHP 7.1.
+PHP supports microseconds in ``DateTime`` class and `date_create() <https://www.php.net/date_create>`_ function. This was introduced in PHP 7.1.
 
 In previous PHP versions, those dates only used seconds, leading to lazy comparisons : 
 
@@ -20022,9 +20095,9 @@ PHP 7.2 Deprecations
 
 Several functions are deprecated in PHP 7.2. 
 
-* `parse_str() <http://www.php.net/parse_str>`_ with no second argument
-* `assert() <http://www.php.net/assert>`_ on strings
-* Usage of `gmp_random() <http://www.php.net/gmp_random>`_, `create_function() <http://www.php.net/create_function>`_, `each() <http://www.php.net/each>`_
+* `parse_str() <https://www.php.net/parse_str>`_ with no second argument
+* `assert() <https://www.php.net/assert>`_ on strings
+* Usage of `gmp_random() <https://www.php.net/gmp_random>`_, `create_function() <https://www.php.net/create_function>`_, `each() <https://www.php.net/each>`_
 * Usage of (unset)
 * Usage of ``$php_errormsg``
 * directive ``mbstring.func_overload`` (not supported yet)
@@ -20101,11 +20174,11 @@ PHP 7.2 Removed Functions
 
 The following PHP native functions were removed in PHP 7.2.
 
-* `png2wbmp() <http://www.php.net/png2wbmp>`_
-* `jpeg2wbmp() <http://www.php.net/jpeg2wbmp>`_
-* `create_function() <http://www.php.net/create_function>`_
-* `gmp_random() <http://www.php.net/gmp_random>`_
-* `each() <http://www.php.net/each>`_
+* `png2wbmp() <https://www.php.net/png2wbmp>`_
+* `jpeg2wbmp() <https://www.php.net/jpeg2wbmp>`_
+* `create_function() <https://www.php.net/create_function>`_
+* `gmp_random() <https://www.php.net/gmp_random>`_
+* `each() <https://www.php.net/each>`_
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 
@@ -20220,7 +20293,7 @@ PHP 7.3 Removed Functions
 
 The following PHP native functions were removed in PHP 7.3.
 
-* `image2wbmp() <http://www.php.net/image2wbmp>`_
+* `image2wbmp() <https://www.php.net/image2wbmp>`_
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 
@@ -20313,13 +20386,13 @@ PHP 7.4 Removed Functions
 
 The following PHP native functions were deprecated in PHP 7.4.
 
-* `hebrevc() <http://www.php.net/hebrevc>`_
-* `convert_cyr_string() <http://www.php.net/convert_cyr_string>`_
-* `ezmlm_hash() <http://www.php.net/ezmlm_hash>`_
-* `money_format() <http://www.php.net/money_format>`_
-* `restore_include_path() <http://www.php.net/restore_include_path>`_
-* `get_magic_quotes_gpc() <http://www.php.net/get_magic_quotes_gpc>`_
-* `get_magic_quotes_runtime() <http://www.php.net/get_magic_quotes_runtime>`_
+* `hebrevc() <https://www.php.net/hebrevc>`_
+* `convert_cyr_string() <https://www.php.net/convert_cyr_string>`_
+* `ezmlm_hash() <https://www.php.net/ezmlm_hash>`_
+* `money_format() <https://www.php.net/money_format>`_
+* `restore_include_path() <https://www.php.net/restore_include_path>`_
+* `get_magic_quotes_gpc() <https://www.php.net/get_magic_quotes_gpc>`_
+* `get_magic_quotes_runtime() <https://www.php.net/get_magic_quotes_runtime>`_
 
 This analysis skips redefined PHP functions : when a replacement for a removed PHP function was created, with condition on the PHP version, then its usage is considered valid.
 
@@ -20371,7 +20444,7 @@ As a key word, ``fn`` is not allowed as constant name, function name, class name
    ?>
 
 
-``fn`` is fine for method names. It may also be used for constants with `define() <http://www.php.net/define>`_, and `constant() <http://www.php.net/constant>`_ but it is not recommended.
+``fn`` is fine for method names. It may also be used for constants with `define() <https://www.php.net/define>`_, and `constant() <https://www.php.net/constant>`_ but it is not recommended.
 
 See also `PHP RFC: Arrow Functions <https://wiki.php.net/rfc/arrow_functions>`_.
 
@@ -20468,10 +20541,10 @@ PHP 8.0 Removed Functions
 
 The following PHP native functions were removed in PHP 8.0.
 
-* `image2wbmp() <http://www.php.net/image2wbmp>`_
-* `png2wbmp() <http://www.php.net/png2wbmp>`_ 
-* `jpeg2wbmp() <http://www.php.net/jpeg2wbmp>`_
-* `ldap_sort() <http://www.php.net/ldap_sort>`_
+* `image2wbmp() <https://www.php.net/image2wbmp>`_
+* `png2wbmp() <https://www.php.net/png2wbmp>`_ 
+* `jpeg2wbmp() <https://www.php.net/jpeg2wbmp>`_
+* `ldap_sort() <https://www.php.net/ldap_sort>`_
 
 +-------------+---------------------------+
 | Short name  | Php/Php80RemovedFunctions |
@@ -20616,7 +20689,7 @@ PHP7 Dirname
 ############
 
 
-With PHP 7, `dirname() <http://www.php.net/dirname>`_ has a second argument that represents the number of parent folder to follow. This prevent us from using nested `dirname() <http://www.php.net/dirname>`_ calls to reach an grand-parent direct.
+With PHP 7, `dirname() <https://www.php.net/dirname>`_ has a second argument that represents the number of parent folder to follow. This prevent us from using nested `dirname() <https://www.php.net/dirname>`_ calls to reach an grand-parent direct.
 
 .. code-block:: php
 
@@ -20844,7 +20917,7 @@ Pathinfo() Returns May Vary
 ###########################
 
 
-`pathinfo() <http://www.php.net/pathinfo>`_ function returns an array whose content may vary. It is recommended to collect the values after check, rather than directly.
+`pathinfo() <https://www.php.net/pathinfo>`_ function returns an array whose content may vary. It is recommended to collect the values after check, rather than directly.
 
 .. code-block:: php
 
@@ -20871,7 +20944,7 @@ Pathinfo() Returns May Vary
    ?>
 
 
-The same applies to `parse_url() <http://www.php.net/parse_url>`_, which returns an array with various index. 
+The same applies to `parse_url() <https://www.php.net/parse_url>`_, which returns an array with various index. 
 
 
 
@@ -21156,7 +21229,7 @@ Phpinfo
 #######
 
 
-`phpinfo() <http://www.php.net/phpinfo>`_ is a great function to learn about the current configuration of the server.
+`phpinfo() <https://www.php.net/phpinfo>`_ is a great function to learn about the current configuration of the server.
 
 .. code-block:: php
 
@@ -21173,7 +21246,7 @@ If left in the production code, it may lead to a critical leak, as any attacker 
 
 It is advised to never leave that kind of instruction in a production code. 
 
-`phpinfo() <http://www.php.net/phpinfo>`_ may be necessary to access some specific configuration of the server : for example, apache module list are only available via `phpinfo() <http://www.php.net/phpinfo>`_, and apache_get(), when they are loaded.
+`phpinfo() <https://www.php.net/phpinfo>`_ may be necessary to access some specific configuration of the server : for example, ``Apache`` module list are only available via `phpinfo() <https://www.php.net/phpinfo>`_, and apache_get(), when they are loaded.
 
 
 
@@ -21252,7 +21325,7 @@ Possible Infinite Loop
 
 Loops on files that can't be open results in infinite loop.
 
-`fgets() <http://www.php.net/fgets>`_, and functions like `fgetss() <http://www.php.net/fgetss>`_, `fgetcsv() <http://www.php.net/fgetcsv>`_, `fread() <http://www.php.net/fread>`_, return false when they finish reading, or can't access the file. 
+`fgets() <https://www.php.net/fgets>`_, and functions like `fgetss() <https://www.php.net/fgetss>`_, `fgetcsv() <https://www.php.net/fgetcsv>`_, `fread() <https://www.php.net/fread>`_, return false when they finish reading, or can't access the file. 
 
 In case the file is not accessible, comparing the result of the reading to something that is falsy, leads to a permanent valid condition. The execution will only finish when the ``max_execution_time`` is reached. 
 
@@ -21270,7 +21343,7 @@ In case the file is not accessible, comparing the result of the reading to somet
    ?>
 
 
-It is recommended to check the file resources when they are opened, and always use === or !== to compare readings. `feof() <http://www.php.net/feof>`_ is also a reliable function here.
+It is recommended to check the file resources when they are opened, and always use === or !== to compare readings. `feof() <https://www.php.net/feof>`_ is also a reliable function here.
 
 +-------------+---------------------------------+
 | Short name  | Structures/PossibleInfiniteLoop |
@@ -21328,7 +21401,7 @@ When capturing subpatterns are the last ones in a regex, PHP doesn't fill their 
 
 ?>
 
-The same applies to `preg_replace() <http://www.php.net/preg_replace>`_ : the pattern may match the string, but no value is available is the corresponding sub-pattern.
+The same applies to `preg_replace() <https://www.php.net/preg_replace>`_ : the pattern may match the string, but no value is available is the corresponding sub-pattern.
 
 In PHP 7.4, a new option was added : PREG_UNMATCHED_AS_NULL, which always provides a value for the subpatterns.
 
@@ -21534,9 +21607,9 @@ Print And Die
 #############
 
 
-`Die() <http://www.php.net/`die <http://www.php.net/die>`_>`_ also prints. 
+`Die() <https://www.php.net/`die <http://www.php.net/die>`_>`_ also prints. 
 
-When stopping a script with `die() <http://www.php.net/`die <http://www.php.net/die>`_>`_, it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
+When stopping a script with `die() <https://www.php.net/`die <http://www.php.net/die>`_>`_, it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
 
 .. code-block:: php
 
@@ -21574,7 +21647,7 @@ Printf Number Of Arguments
 ##########################
 
 
-The number of arguments provided to `printf() <http://www.php.net/printf>`_ or `vprintf() <http://www.php.net/vprintf>`_ doesn't match the format string.
+The number of arguments provided to `printf() <https://www.php.net/printf>`_ or `vprintf() <https://www.php.net/vprintf>`_ doesn't match the format string.
 
 Extra arguments are ignored, and are dead code as such. Missing arguments are reported with a warning, and nothing is displayed.
 
@@ -21625,9 +21698,9 @@ Processing Collector
 
 When accumulating data in a variable, within a loop, it is slow to apply repeatedly a function to the variable.
 
-The example below illustrate the problem : ``$collector`` is build with element from ``$array``. ``$collector`` actually gets larger and larger, slowing the `in_array() <http://www.php.net/in_array>`_ call each time. 
+The example below illustrate the problem : ``$collector`` is build with element from ``$array``. ``$collector`` actually gets larger and larger, slowing the `in_array() <https://www.php.net/in_array>`_ call each time. 
 
-It is better to apply the `preg_replace() <http://www.php.net/preg_replace>`_ to ``$a``, a short variable, and then, add ``$a`` to the collector.
+It is better to apply the `preg_replace() <https://www.php.net/preg_replace>`_ to ``$a``, a short variable, and then, add ``$a`` to the collector.
 
 .. code-block:: php
 
@@ -22019,9 +22092,9 @@ Random Without Try
 ##################
 
 
-`random_int() <http://www.php.net/random_int>`_ and `random_bytes() <http://www.php.net/random_bytes>`_ require a try/catch structure around them.
+`random_int() <https://www.php.net/random_int>`_ and `random_bytes() <https://www.php.net/random_bytes>`_ require a try/catch structure around them.
 
-`random_int() <http://www.php.net/random_int>`_ and `random_bytes() <http://www.php.net/random_bytes>`_ emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an empty value, which leads to lower security. 
+`random_int() <https://www.php.net/random_int>`_ and `random_bytes() <https://www.php.net/random_bytes>`_ emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an empty value, which leads to lower security. 
 
 .. code-block:: php
 
@@ -22040,7 +22113,7 @@ Random Without Try
    ?>
 
 
-Since PHP 7.4, `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ has adopted the same behavior. It is included in this analysis : check your PHP version for actual application.
+Since PHP 7.4, `openssl_random_pseudo_bytes() <https://www.php.net/openssl_random_pseudo_bytes>`_ has adopted the same behavior. It is included in this analysis : check your PHP version for actual application.
 
 +-------------+------------------------------+
 | Short name  | Structures/RandomWithoutTry  |
@@ -22371,11 +22444,11 @@ Regex On Arrays
 
 Avoid using a loop with arrays of regex or values. There are several PHP function which work directly on arrays, and much faster.
 
-`preg_grep() <http://www.php.net/preg_grep>`_ is able to extract all matching strings from an array, or non-matching strings. This usually saves a loop over the strings.
+`preg_grep() <https://www.php.net/preg_grep>`_ is able to extract all matching strings from an array, or non-matching strings. This usually saves a loop over the strings.
 
-`preg_filter() <http://www.php.net/preg_filter>`_ is able to extract all strings from an array, matching at least one regex in an array. This usually saves a double loop over the strings and the regex. The trick here is to provide '$0' as replacement, leading `preg_filter() <http://www.php.net/preg_filter>`_ to replace the found string by itself.
+`preg_filter() <https://www.php.net/preg_filter>`_ is able to extract all strings from an array, matching at least one regex in an array. This usually saves a double loop over the strings and the regex. The trick here is to provide '$0' as replacement, leading `preg_filter() <https://www.php.net/preg_filter>`_ to replace the found string by itself.
 
-Finally, `preg_replace_callback() <http://www.php.net/preg_replace_callback>`_ an `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_ are also able to apply an array of regex to an array of strings, and then, apply callbacks to the found values. 
+Finally, `preg_replace_callback() <https://www.php.net/preg_replace_callback>`_ an `preg_replace_callback_array() <https://www.php.net/preg_replace_callback_array>`_ are also able to apply an array of regex to an array of strings, and then, apply callbacks to the found values. 
 
 .. code-block:: php
 
@@ -22438,7 +22511,7 @@ This lead to security failures, as the variables were often used but not filtere
 Though it is less often found in more recent code, ``register_globals`` is sometimes needed in legacy code, that haven't made the move to eradicate this style of coding.
 Backward compatible pieces of code that mimic the ``register_globals`` features usually create even greater security risks by being run after scripts startup. At that point, some important variables are already set, and may be overwritten by the incoming call, creating confusion in the script.
 
-Mimicking ``register_globals`` is achieved with variables variables, `extract() <http://www.php.net/extract>`_, `parse_str() <http://www.php.net/parse_str>`_ and `import_request_variables() <http://www.php.net/import_request_variables>`_ (Up to PHP 5.4). 
+Mimicking ``register_globals`` is achieved with variables variables, `extract() <https://www.php.net/extract>`_, `parse_str() <https://www.php.net/parse_str>`_ and `import_request_variables() <https://www.php.net/import_request_variables>`_ (Up to PHP 5.4). 
 
 .. code-block:: php
 
@@ -22598,7 +22671,7 @@ Regex that are repeated at least once (aka, used twice or more) are reported. Re
 Suggestions
 ^^^^^^^^^^^
 
-* Create a central library of regexes
+* Create a central library of regex
 * Use the regex inventory to spot other regex that are close, and should be identical.
 
 +-------------+-----------------------------------------------------------------------------------+
@@ -22706,7 +22779,7 @@ Results May Be Missing
 ######################
 
 
-`preg_match() <http://www.php.net/preg_match>`_ may return empty values, if the search fails. It is important to check for the existence of results before assigning them to another variable, or using it.
+`preg_match() <https://www.php.net/preg_match>`_ may return empty values, if the search fails. It is important to check for the existence of results before assigning them to another variable, or using it.
 
 .. code-block:: php
 
@@ -23424,7 +23497,7 @@ Set Cookie Safe Arguments
 #########################
 
 
-The last five arguments of `setcookie() <http://www.php.net/setcookie>`_ and `setrawcookie() <http://www.php.net/setrawcookie>`_ are for security. Use them anytime you can.
+The last five arguments of `setcookie() <https://www.php.net/setcookie>`_ and `setrawcookie() <https://www.php.net/setrawcookie>`_ are for security. Use them anytime you can.
 
 ``setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path =  [, string $domain =  [, bool $secure = false [, bool $httponly = false ]]]]]] )``
 
@@ -23478,7 +23551,7 @@ Setlocale() Uses Constants
 
 setlocal() don't use strings but constants. 
 
-The first argument of `setlocale() <http://www.php.net/setlocale>`_ must be one of the valid constants, ``LC_ALL``, ``LC_COLLATE``, ``LC_CTYPE``, ``LC_MONETARY``, ``LC_NUMERIC``, ``LC_TIME, LC_MESSAGES``.
+The first argument of `setlocale() <https://www.php.net/setlocale>`_ must be one of the valid constants, ``LC_ALL``, ``LC_COLLATE``, ``LC_CTYPE``, ``LC_MONETARY``, ``LC_NUMERIC``, ``LC_TIME, LC_MESSAGES``.
 
 .. code-block:: php
 
@@ -23587,7 +23660,7 @@ Short Syntax For Arrays
 
 Arrays written with the new short syntax. 
 
-PHP 5.4 introduced the new short syntax, with square brackets. The previous syntax, based on the `array() <http://www.php.net/array>`_ keyword is still available.
+PHP 5.4 introduced the new short syntax, with square brackets. The previous syntax, based on the `array() <https://www.php.net/array>`_ keyword is still available.
 
 .. code-block:: php
 
@@ -23944,9 +24017,9 @@ Should Preprocess Chr
 #####################
 
 
-Replace literal `chr() <http://www.php.net/chr>`_ calls with their escape sequence.
+Replace literal `chr() <https://www.php.net/chr>`_ calls with their escape sequence.
 
-`chr() <http://www.php.net/chr>`_ is a functioncall, that cannot be cached. It is only resolved at execution time. 
+`chr() <https://www.php.net/chr>`_ is a functioncall, that cannot be cached. It is only resolved at execution time. 
 On the other hand, literal values are presprocessed by PHP and may be cached.
 
 .. code-block:: php
@@ -23994,7 +24067,7 @@ Should Typecast
 
 When typecasting, it is better to use the casting operator, such as ``(int)`` or ``(bool)``.
 
-Functions such as `intval() <http://www.php.net/intval>`_ or `settype() <http://www.php.net/settype>`_ are always slower.
+Functions such as `intval() <https://www.php.net/intval>`_ or `settype() <https://www.php.net/settype>`_ are always slower.
 
 .. code-block:: php
 
@@ -24015,7 +24088,7 @@ Functions such as `intval() <http://www.php.net/intval>`_ or `settype() <http://
 
 This is a micro-optimisation, although such conversion may be use multiple time, leading to a larger performance increase.  
 
-Note that `intval() <http://www.php.net/intval>`_ may also be used to convert an integer to another base.
+Note that `intval() <https://www.php.net/intval>`_ may also be used to convert an integer to another base.
 
 
 Suggestions
@@ -24135,7 +24208,7 @@ Should Use Explode Args
 #######################
 
 
-`explode() <http://www.php.net/explode>`_ has a third argument, which limits the amount of exploded elements. With it, it is possible to collect only the first elements, or drop the last ones.
+`explode() <https://www.php.net/explode>`_ has a third argument, which limits the amount of exploded elements. With it, it is possible to collect only the first elements, or drop the last ones.
 
 .. code-block:: php
 
@@ -24223,7 +24296,7 @@ See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_ an
 Suggestions
 ^^^^^^^^^^^
 
-* Move for() loops to foreach(), whenever they apply to a finite list of elemeents
+* Move for() loops to foreach(), whenever they apply to a finite list of elements
 
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ShouldUseForeach                                                                         |
@@ -24428,14 +24501,14 @@ Some functions duplicate the feature of an operator. When in doubt, it is better
 
 Beware, some edge cases may apply. In particular, backward compatibility may prevent usage of newer features.
 
-* `array_push() <http://www.php.net/array_push>`_ is equivalent to [] 
-* `is_object() <http://www.php.net/is_object>`_ is equivalent to `instanceof <http://php.net/manual/en/language.operators.type.php>`_
+* `array_push() <https://www.php.net/array_push>`_ is equivalent to [] 
+* `is_object() <https://www.php.net/is_object>`_ is equivalent to `instanceof <http://php.net/manual/en/language.operators.type.php>`_
 * function_get_arg() and function_get_args() is equivalent to ellipsis : `... <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
-* `chr() <http://www.php.net/chr>`_ is equivalent to string escape sequences, such as ``\n``, ``\x69``, ``u{04699}``
-* `call_user_func() <http://www.php.net/call_user_func>`_ is equivalent to ``$functionName(arguments)``, ``$object->$method(`... <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_$arguments)``
-* `is_null() <http://www.php.net/is_null>`_ is equivalent to ``=== null``
+* `chr() <https://www.php.net/chr>`_ is equivalent to string escape sequences, such as ``\n``, ``\x69``, ``u{04699}``
+* `call_user_func() <https://www.php.net/call_user_func>`_ is equivalent to ``$functionName(arguments)``, ``$object->$method(`... <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_$arguments)``
+* `is_null() <https://www.php.net/is_null>`_ is equivalent to ``=== null``
 * php_version() is equivalent to ``PHP_VERSION`` (the constant)
-* `is_array() <http://www.php.net/is_array>`_, `is_int() <http://www.php.net/is_int>`_, `is_object() <http://www.php.net/is_object>`_, etc. is equivalent to a scalar typehint
+* `is_array() <https://www.php.net/is_array>`_, `is_int() <https://www.php.net/is_int>`_, `is_object() <https://www.php.net/is_object>`_, etc. is equivalent to a scalar typehint
 
 
 
@@ -24533,9 +24606,9 @@ Should Use SetCookie()
 ######################
 
 
-Use `setcookie() <http://www.php.net/setcookie>`_ or `setrawcookie() <http://www.php.net/setrawcookie>`_. Avoid using `header() <http://www.php.net/header>`_ to do so, as the PHP native functions are more convenient and easier to spot during a refactoring.
+Use `setcookie() <https://www.php.net/setcookie>`_ or `setrawcookie() <https://www.php.net/setrawcookie>`_. Avoid using `header() <https://www.php.net/header>`_ to do so, as the PHP native functions are more convenient and easier to spot during a refactoring.
 
-`setcookie() <http://www.php.net/setcookie>`_ applies some encoding internally, for the value of the cookie and the date of expiration. Rarely, this encoding has to be skipped : then, use setrawencoding().
+`setcookie() <https://www.php.net/setcookie>`_ applies some encoding internally, for the value of the cookie and the date of expiration. Rarely, this encoding has to be skipped : then, use setrawencoding().
 
 Both functions help by giving a checklist of important attributes to be used with the cookie. 
 
@@ -24579,9 +24652,9 @@ Should Use array_column()
 #########################
 
 
-Avoid writing a whole slow loop, and use the native `array_column() <http://www.php.net/array_column>`_.
+Avoid writing a whole slow loop, and use the native `array_column() <https://www.php.net/array_column>`_.
 
-`array_column() <http://www.php.net/array_column>`_ is a native PHP function, that extract a property or a index from a array of object, or a multidimensional array. This prevents the usage of foreach to collect those values.
+`array_column() <https://www.php.net/array_column>`_ is a native PHP function, that extract a property or a index from a array of object, or a multidimensional array. This prevents the usage of foreach to collect those values.
 
 .. code-block:: php
 
@@ -24604,9 +24677,9 @@ Avoid writing a whole slow loop, and use the native `array_column() <http://www.
    ?>
 
 
-`array_column() <http://www.php.net/array_column>`_ is faster than `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
+`array_column() <https://www.php.net/array_column>`_ is faster than `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
 
-See also `[blog] `array_column() <http://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
+See also `[blog] `array_column() <https://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
 
 +-------------+-----------------------------------------+
 | Short name  | Php/ShouldUseArrayColumn                |
@@ -24626,9 +24699,9 @@ Should Use array_filter()
 #########################
 
 
-Should use `array_filter() <http://www.php.net/array_filter>`_.
+Should use `array_filter() <https://www.php.net/array_filter>`_.
 
-`array_filter() <http://www.php.net/array_filter>`_ is a native PHP function, that extract elements from an array, based on a closure or a function. Using `array_filter() <http://www.php.net/array_filter>`_ shortens your code, and allows for reusing the filtering logic across the application, instead of hard coding it every time.
+`array_filter() <https://www.php.net/array_filter>`_ is a native PHP function, that extract elements from an array, based on a closure or a function. Using `array_filter() <https://www.php.net/array_filter>`_ shortens your code, and allows for reusing the filtering logic across the application, instead of hard coding it every time.
 
 .. code-block:: php
 
@@ -24655,7 +24728,7 @@ Should use `array_filter() <http://www.php.net/array_filter>`_.
    ?>
 
 
-`array_filter() <http://www.php.net/array_filter>`_ is faster than `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
+`array_filter() <https://www.php.net/array_filter>`_ is faster than `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
 
 See also `array_filter <https://php.net/array_filter>`_.
 
@@ -24738,13 +24811,13 @@ Should Yield With Key
 #####################
 
 
-`iterator_to_array() <http://www.php.net/iterator_to_array>`_ will overwrite generated values with the same key. 
+`iterator_to_array() <https://www.php.net/iterator_to_array>`_ will overwrite generated values with the same key. 
 
 PHP generators are based on the ``yield`` keyword. They also delegate some generating to other methods, with ``yield from``. 
 
 When delegating, ``yield from`` uses the keys that are generated with ``yield``, and otherwise, it uses auto-generated index, starting with 0. 
 
-The trap is that each ``yield from`` reset the index generation and start again with 0. Coupled with `iterator_to_array() <http://www.php.net/iterator_to_array>`_, this means that the final generated array may lack some values, while a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loop would yield all of them.
+The trap is that each ``yield from`` reset the index generation and start again with 0. Coupled with `iterator_to_array() <https://www.php.net/iterator_to_array>`_, this means that the final generated array may lack some values, while a `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loop would yield all of them.
 
 .. code-block:: php
 
@@ -25040,7 +25113,7 @@ Simplify Regex
 
 Avoid using regex when the searched string or the replacement are simple enough.
 
-PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using `strpos() <http://www.php.net/strpos>`_ or `stripos() <http://www.php.net/stripos>`_ instead.
+PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using `strpos() <https://www.php.net/strpos>`_ or `stripos() <https://www.php.net/stripos>`_ instead.
 
 .. code-block:: php
 
@@ -25143,30 +25216,30 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
    ?>
 
 
-+--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Slow Function                                                |  Faster                                                                                                                  | 
-+--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| `array_diff() <http://www.php.net/array_diff>`_              |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                              | 
-| `array_intersect() <http://www.php.net/array_intersect>`_    |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                              | 
-| `array_key_exists() <http://www.php.net/array_key_exists>`_  |  `isset() <http://www.www.php.net/isset>`_ and `array_key_exists() <http://www.php.net/array_key_exists>`_               | 
-| `array_map() <http://www.php.net/array_map>`_                |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                              | 
-| `array_search() <http://www.php.net/array_search>`_          |  `array_flip() <http://www.php.net/array_flip>`_ and `isset() <http://www.www.php.net/isset>`_                           | 
-| `array_udiff() <http://www.php.net/array_udiff>`_            |  Use another way                                                                                                         | 
-| `array_uintersect() <http://www.php.net/array_uintersect>`_  |  Use another way                                                                                                         | 
-| `array_unshift() <http://www.php.net/array_unshift>`_        |  Use another way                                                                                                         | 
-| `array_walk() <http://www.php.net/array_walk>`_              |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                              | 
-| `in_array() <http://www.php.net/in_array>`_                  |  `isset() <http://www.www.php.net/isset>`_                                                                               | 
-| `preg_replace() <http://www.php.net/preg_replace>`_          |  `strpos() <http://www.php.net/strpos>`_                                                                                 | 
-| `strstr() <http://www.php.net/strstr>`_                      |  `strpos() <http://www.php.net/strpos>`_                                                                                 | 
-| `uasort() <http://www.php.net/uasort>`_                      |  Use another way                                                                                                         | 
-| `uksort() <http://www.php.net/uksort>`_                      |  Use another way                                                                                                         | 
-| `usort() <http://www.php.net/usort>`_                        |  Use another way                                                                                                         | 
-| `array_unique() <http://www.php.net/array_unique>`_          |  `array_keys() <http://www.php.net/array_keys>`_ and `array_count_values() <http://www.php.net/array_count_values>`_     | 
-+--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| Slow Function                                                 |  Faster                                                                                                                    | 
++---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| `array_diff() <https://www.php.net/array_diff>`_              |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                                | 
+| `array_intersect() <https://www.php.net/array_intersect>`_    |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                                | 
+| `array_key_exists() <https://www.php.net/array_key_exists>`_  |  `isset() <http://www.www.php.net/isset>`_ and `array_key_exists() <https://www.php.net/array_key_exists>`_                | 
+| `array_map() <https://www.php.net/array_map>`_                |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                                | 
+| `array_search() <https://www.php.net/array_search>`_          |  `array_flip() <https://www.php.net/array_flip>`_ and `isset() <http://www.www.php.net/isset>`_                            | 
+| `array_udiff() <https://www.php.net/array_udiff>`_            |  Use another way                                                                                                           | 
+| `array_uintersect() <https://www.php.net/array_uintersect>`_  |  Use another way                                                                                                           | 
+| `array_unshift() <https://www.php.net/array_unshift>`_        |  Use another way                                                                                                           | 
+| `array_walk() <https://www.php.net/array_walk>`_              |  `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_                                                | 
+| `in_array() <https://www.php.net/in_array>`_                  |  `isset() <http://www.www.php.net/isset>`_                                                                                 | 
+| `preg_replace() <https://www.php.net/preg_replace>`_          |  `strpos() <https://www.php.net/strpos>`_                                                                                  | 
+| `strstr() <https://www.php.net/strstr>`_                      |  `strpos() <https://www.php.net/strpos>`_                                                                                  | 
+| `uasort() <https://www.php.net/uasort>`_                      |  Use another way                                                                                                           | 
+| `uksort() <https://www.php.net/uksort>`_                      |  Use another way                                                                                                           | 
+| `usort() <https://www.php.net/usort>`_                        |  Use another way                                                                                                           | 
+| `array_unique() <https://www.php.net/array_unique>`_          |  `array_keys() <https://www.php.net/array_keys>`_ and `array_count_values() <https://www.php.net/array_count_values>`_     | 
++---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------+
 
-`array_unique() <http://www.php.net/array_unique>`_ has been accelerated in PHP 7.2 and may be used directly from this version on : `Optimize `array_unique() <http://www.php.net/array_unique>`_ <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_.
+`array_unique() <https://www.php.net/array_unique>`_ has been accelerated in PHP 7.2 and may be used directly from this version on : `Optimize `array_unique() <https://www.php.net/array_unique>`_ <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_.
 
-`array_key_exists() <http://www.php.net/array_key_exists>`_ has been accelerated in PHP 7.4 and may be used directly from this version on : `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up `array_key_exists() <http://www.php.net/array_key_exists>`_ <https://github.com/php/php-src/pull/3360>`_.
+`array_key_exists() <https://www.php.net/array_key_exists>`_ has been accelerated in PHP 7.4 and may be used directly from this version on : `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up `array_key_exists() <https://www.php.net/array_key_exists>`_ <https://github.com/php/php-src/pull/3360>`_.
 
 
 
@@ -25263,9 +25336,9 @@ It looks like the following loops are static : the same code is executed each ti
    ?>
 
 
-It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `next() <http://www.php.net/next>`_ or ``SimpleXMLIterator\:\:`next() <http://www.php.net/next>`_``. 
+It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `next() <https://www.php.net/next>`_ or ``SimpleXMLIterator\:\:`next() <https://www.php.net/next>`_``. 
 
-It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the ``function $n * ($n + 1) / 2``, or using `array_sum() <http://www.php.net/array_sum>`_.
+It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the ``function $n * ($n + 1) / 2``, or using `array_sum() <https://www.php.net/array_sum>`_.
 
 This analysis doesn't detect usage of variables with ``compact``.
 
@@ -25525,7 +25598,7 @@ It is encouraged to use strict comparison === or !== when booleans are involved 
 
 `switch() <http://www.php.net/manual/en/control-structures.switch.php>`_ structures always uses == comparisons. 
 
-Native function `in_array() <http://www.php.net/in_array>`_ has a third parameter to make it use strict comparisons.
+Native function `in_array() <https://www.php.net/in_array>`_ has a third parameter to make it use strict comparisons.
 
 
 
@@ -25706,7 +25779,7 @@ Strpos()-like Comparison
 
 The result of that function may be mistaken with an error.
 
-`strpos() <http://www.php.net/strpos>`_, along with several PHP native functions, returns a string position, starting at 0, or false, in case of failure. 
+`strpos() <https://www.php.net/strpos>`_, along with several PHP native functions, returns a string position, starting at 0, or false, in case of failure. 
 
 .. code-block:: php
 
@@ -25733,37 +25806,37 @@ The result of that function may be mistaken with an error.
    ?>
 
 
-It is recommended to check the result of `strpos() <http://www.php.net/strpos>`_ with === or !==, so as to avoid confusing 0 and false. 
+It is recommended to check the result of `strpos() <https://www.php.net/strpos>`_ with === or !==, so as to avoid confusing 0 and false. 
 
-This analyzer list all the `strpos() <http://www.php.net/strpos>`_-like functions that are directly compared with == or !=. `preg_match() <http://www.php.net/preg_match>`_, when its first argument is a literal, is omitted : this function only returns `NULL <http://www.php.net/manual/en/language.types.null.php>`_ in case of regex error. 
+This analyzer list all the `strpos() <https://www.php.net/strpos>`_-like functions that are directly compared with == or !=. `preg_match() <https://www.php.net/preg_match>`_, when its first argument is a literal, is omitted : this function only returns `NULL <http://www.php.net/manual/en/language.types.null.php>`_ in case of regex error. 
 
 The full list is the following : 
 
 
-* `array_search() <http://www.php.net/array_search>`_
-* `collator_compare() <http://www.php.net/collator_compare>`_
-* `collator_get_sort_key() <http://www.php.net/collator_get_sort_key>`_
-* `current() <http://www.php.net/current>`_
-* `fgetc() <http://www.php.net/fgetc>`_
-* `file_get_contents() <http://www.php.net/file_get_contents>`_
-* `file_put_contents() <http://www.php.net/file_put_contents>`_
-* `fread() <http://www.php.net/fread>`_
-* `iconv_strpos() <http://www.php.net/iconv_strpos>`_
-* `iconv_strrpos() <http://www.php.net/iconv_strrpos>`_
-* `imagecolorallocate() <http://www.php.net/imagecolorallocate>`_
-* `imagecolorallocatealpha() <http://www.php.net/imagecolorallocatealpha>`_
-* `mb_strlen() <http://www.php.net/mb_strlen>`_
-* `next() <http://www.php.net/next>`_
-* `pcntl_getpriority() <http://www.php.net/pcntl_getpriority>`_
-* `preg_match() <http://www.php.net/preg_match>`_
-* `prev() <http://www.php.net/prev>`_
-* `readdir() <http://www.php.net/readdir>`_
-* `stripos() <http://www.php.net/stripos>`_
-* `strpos() <http://www.php.net/strpos>`_
-* `strripos() <http://www.php.net/strripos>`_
-* `strrpos() <http://www.php.net/strrpos>`_
-* `strtok() <http://www.php.net/strtok>`_
-* `curl_exec() <http://www.php.net/curl_exec>`_
+* `array_search() <https://www.php.net/array_search>`_
+* `collator_compare() <https://www.php.net/collator_compare>`_
+* `collator_get_sort_key() <https://www.php.net/collator_get_sort_key>`_
+* `current() <https://www.php.net/current>`_
+* `fgetc() <https://www.php.net/fgetc>`_
+* `file_get_contents() <https://www.php.net/file_get_contents>`_
+* `file_put_contents() <https://www.php.net/file_put_contents>`_
+* `fread() <https://www.php.net/fread>`_
+* `iconv_strpos() <https://www.php.net/iconv_strpos>`_
+* `iconv_strrpos() <https://www.php.net/iconv_strrpos>`_
+* `imagecolorallocate() <https://www.php.net/imagecolorallocate>`_
+* `imagecolorallocatealpha() <https://www.php.net/imagecolorallocatealpha>`_
+* `mb_strlen() <https://www.php.net/mb_strlen>`_
+* `next() <https://www.php.net/next>`_
+* `pcntl_getpriority() <https://www.php.net/pcntl_getpriority>`_
+* `preg_match() <https://www.php.net/preg_match>`_
+* `prev() <https://www.php.net/prev>`_
+* `readdir() <https://www.php.net/readdir>`_
+* `stripos() <https://www.php.net/stripos>`_
+* `strpos() <https://www.php.net/strpos>`_
+* `strripos() <https://www.php.net/strripos>`_
+* `strrpos() <https://www.php.net/strrpos>`_
+* `strtok() <https://www.php.net/strtok>`_
+* `curl_exec() <https://www.php.net/curl_exec>`_
 
 
 See also `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_.
@@ -25790,9 +25863,9 @@ Strtr Arguments
 ###############
 
 
-`Strtr() <http://www.php.net/strtr>`_ replaces characters by others in a string. When using strings, `strtr() <http://www.php.net/strtr>`_ replaces characters as long as they have a replacement. All others are ignored.
+`Strtr() <https://www.php.net/strtr>`_ replaces characters by others in a string. When using strings, `strtr() <https://www.php.net/strtr>`_ replaces characters as long as they have a replacement. All others are ignored.
 
-In particular, `strtr() <http://www.php.net/strtr>`_ works on strings of the same size, and cannot be used to remove chars.
+In particular, `strtr() <https://www.php.net/strtr>`_ works on strings of the same size, and cannot be used to remove chars.
 
 .. code-block:: php
 
@@ -25865,9 +25938,9 @@ Substr To Trim
 ##############
 
 
-When removing the first or the last character of a string, `trim() <http://www.php.net/trim>`_ does a more readable job. 
+When removing the first or the last character of a string, `trim() <https://www.php.net/trim>`_ does a more readable job. 
 
-`trim() <http://www.php.net/trim>`_, `ltrim() <http://www.php.net/ltrim>`_ and `rtrim() <http://www.php.net/rtrim>`_ accept a string as second argument. Those will all be removed from the endings of the string.
+`trim() <https://www.php.net/trim>`_, `ltrim() <https://www.php.net/ltrim>`_ and `rtrim() <https://www.php.net/rtrim>`_ accept a string as second argument. Those will all be removed from the endings of the string.
 
 .. code-block:: php
 
@@ -25887,9 +25960,9 @@ When removing the first or the last character of a string, `trim() <http://www.p
    ?>
 
 
-`trim() <http://www.php.net/trim>`_ will remove all occurrences of the requested char(). This may remove a loop with `substr() <http://www.php.net/substr>`_, or remove more than is needed. 
+`trim() <https://www.php.net/trim>`_ will remove all occurrences of the requested char(). This may remove a loop with `substr() <https://www.php.net/substr>`_, or remove more than is needed. 
 
-`trim() <http://www.php.net/trim>`_ doesn't work with multi-bytes strings, but so does `substr() <http://www.php.net/substr>`_. For that, use `mb_substr() <http://www.php.net/mb_substr>`_, as there isn't any mb_trim function (yet).
+`trim() <https://www.php.net/trim>`_ doesn't work with multi-bytes strings, but so does `substr() <https://www.php.net/substr>`_. For that, use `mb_substr() <https://www.php.net/mb_substr>`_, as there isn't any mb_trim function (yet).
 
 See also `trim <https://www.php.net/manual/en/function.trim.php>`_, `ltrim <https://www.php.net/manual/en/function.ltrim.php>`_, `rtrim <https://www.php.net/manual/en/function.rtrim.php>`_.
 
@@ -25934,7 +26007,7 @@ Always start by reducing a string before applying some transformation on it. The
 
 The gain produced here is greater with longer strings, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short strings and single string reductions.
 
-This works with any reduction function instead of `substr() <http://www.php.net/substr>`_, like `trim() <http://www.php.net/trim>`_, `iconv() <http://www.php.net/iconv>`_, etc. 
+This works with any reduction function instead of `substr() <https://www.php.net/substr>`_, like `trim() <https://www.php.net/trim>`_, `iconv() <https://www.php.net/iconv>`_, etc. 
 
 
 
@@ -27496,7 +27569,7 @@ Undefined \:\:class
 
 ``\:\:class`` doesn't check if a corresponding class exists. 
 
-``\:\:class`` must be checked with a call to `class_exists() <http://www.php.net/class_exists>`_. Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
+``\:\:class`` must be checked with a call to `class_exists() <https://www.php.net/class_exists>`_. Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
 
 .. code-block:: php
 
@@ -28016,6 +28089,15 @@ When the using class or trait is instantiated, PHP emits a a fatal error.
    }
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Define the missing trait
+* Remove usage of the missing trait
+
 +-------------+----------------------------------------+
 | Short name  | Traits/UndefinedTrait                  |
 +-------------+----------------------------------------+
@@ -28343,7 +28425,7 @@ Unpacking Inside Arrays
 
 The variadic operartor is now available inside arrays. Until PHP 7.4, it is not possible to use the variadic operator, or ``...`` inside arrays. 
 
-The workaround is to use `array_merge() <http://www.php.net/array_merge>`_, after checking that arrays are not empty.
+The workaround is to use `array_merge() <https://www.php.net/array_merge>`_, after checking that arrays are not empty.
 
 .. code-block:: php
 
@@ -28503,7 +28585,7 @@ Unreachable Code
 
 
 Code may be unreachable, because other instructions prevent its reaching. 
-For example, it be located after throw, return, `exit() <http://www.php.net/`exit <http://www.www.php.net/exit>`_>`_, `die() <http://www.php.net/`die <http://www.php.net/die>`_>`_, goto, `break <http://www.php.net/manual/en/control-structures.break.php>`_ or `continue <http://www.php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
+For example, it be located after throw, return, `exit() <https://www.php.net/`exit <http://www.www.php.net/exit>`_>`_, `die() <https://www.php.net/`die <http://www.php.net/die>`_>`_, goto, `break <http://www.php.net/manual/en/control-structures.break.php>`_ or `continue <http://www.php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
 
 .. code-block:: php
 
@@ -28764,7 +28846,7 @@ Unserialize Second Arg
 ######################
 
 
-Since PHP 7, `unserialize() <http://www.php.net/unserialize>`_ function has a second argument that limits the classes that may be unserialized. In case of a breach, this is limiting the classes accessible from `unserialize() <http://www.php.net/unserialize>`_. 
+Since PHP 7, `unserialize() <https://www.php.net/unserialize>`_ function has a second argument that limits the classes that may be unserialized. In case of a breach, this is limiting the classes accessible from `unserialize() <https://www.php.net/unserialize>`_. 
 
 One way to exploit unserialize, is to make PHP unserialized the data to an available class, may be one that may be auto-loaded.
 
@@ -28792,7 +28874,7 @@ One way to exploit unserialize, is to make PHP unserialized the data to an avail
    ?>
 
 
-See also `unserialize() <http://www.php.net/unserialize>`_, `Securely Implementing (De)Serialization in PHP <https://paragonie.com/blog/2016/04/securely-implementing-de-serialization-in-php>`_, and `Remote code execution via PHP [Unserialize] <https://www.notsosecure.com/remote-code-execution-via-php-unserialize/>`_.
+See also `unserialize() <https://www.php.net/unserialize>`_, `Securely Implementing (De)Serialization in PHP <https://paragonie.com/blog/2016/04/securely-implementing-de-serialization-in-php>`_, and `Remote code execution via PHP [Unserialize] <https://www.notsosecure.com/remote-code-execution-via-php-unserialize/>`_.
 
 
 Suggestions
@@ -29689,7 +29771,7 @@ Use === null
 ############
 
 
-It is faster to use === null instead of `is_null() <http://www.php.net/is_null>`_.
+It is faster to use === null instead of `is_null() <https://www.php.net/is_null>`_.
 
 .. code-block:: php
 
@@ -29730,14 +29812,14 @@ Use Array Functions
 
 There are a lot of native PHP functions for arrays. It is often faster to take advantage of them than write a loop.
 
-* `array_push() <http://www.php.net/array_push>`_ : use `array_merge() <http://www.php.net/array_merge>`_
-* `array_slice() <http://www.php.net/array_slice>`_ : use `array_chunk() <http://www.php.net/array_chunk>`_
-* index access : use `array_column() <http://www.php.net/array_column>`_
-* append `[]`: use `array_merge() <http://www.php.net/array_merge>`_
-* addition : use `array_sum() <http://www.php.net/array_sum>`_
-* multiplication : use `array_product() <http://www.php.net/array_product>`_
-* concatenation : use `implode() <http://www.php.net/implode>`_
-* ifthen : use `array_filter() <http://www.php.net/array_filter>`_
+* `array_push() <https://www.php.net/array_push>`_ : use `array_merge() <https://www.php.net/array_merge>`_
+* `array_slice() <https://www.php.net/array_slice>`_ : use `array_chunk() <https://www.php.net/array_chunk>`_
+* index access : use `array_column() <https://www.php.net/array_column>`_
+* append `[]`: use `array_merge() <https://www.php.net/array_merge>`_
+* addition : use `array_sum() <https://www.php.net/array_sum>`_
+* multiplication : use `array_product() <https://www.php.net/array_product>`_
+* concatenation : use `implode() <https://www.php.net/implode>`_
+* ifthen : use `array_filter() <https://www.php.net/array_filter>`_
 
 .. code-block:: php
 
@@ -29782,7 +29864,7 @@ Use Basename Suffix
 ###################
 
 
-`basename() <http://www.php.net/basename>`_ will remove extension when it is provided. The second argument will be removed from the name of the file.
+`basename() <https://www.php.net/basename>`_ will remove extension when it is provided as argument. The second argument will be removed from the name of the file.
 
 .. code-block:: php
 
@@ -29799,7 +29881,7 @@ Use Basename Suffix
    ?>
 
 
-Using `basename() <http://www.php.net/basename>`_ instead of `substr() <http://www.php.net/substr>`_ or else, makes the intention clear.
+Using `basename() <https://www.php.net/basename>`_ instead of `substr() <https://www.php.net/substr>`_ or else, makes the intention clear.
 
 See also `basename <http://www.php.net/basename>`_.
 
@@ -29807,7 +29889,7 @@ See also `basename <http://www.php.net/basename>`_.
 Suggestions
 ^^^^^^^^^^^
 
-* Use basename, remove more complex code based on substr or str_replace
+* Use basename(), remove more complex code based on substr() or str_replace()
 
 +------------+---------------------------------------------------------------------------------------+
 | Short name | Structures/BasenameSuffix                                                             |
@@ -29975,9 +30057,9 @@ The following functioncall have a constant equivalent, that is faster to use tha
 
 This applies to the following functions : 
 
-* `pi() <http://www.php.net/pi>`_ : replace with `M_PI`
-* `phpversion() <http://www.php.net/phpversion>`_ : replace with `PHP_VERSION`
-* `php_sapi_name() <http://www.php.net/php_sapi_name>`_ : replace with `PHP_SAPI_NAME`
+* `pi() <https://www.php.net/pi>`_ : replace with `M_PI`
+* `phpversion() <https://www.php.net/phpversion>`_ : replace with `PHP_VERSION`
+* `php_sapi_name() <https://www.php.net/php_sapi_name>`_ : replace with `PHP_SAPI_NAME`
 
 .. code-block:: php
 
@@ -29992,7 +30074,7 @@ This applies to the following functions :
    ?>
 
 
-See also `PHP why `pi() <http://www.php.net/pi>`_ and M_PI <https://stackoverflow.com/questions/42021176/php-why-pi-and-m-pi>`_.
+See also `PHP why `pi() <https://www.php.net/pi>`_ and M_PI <https://stackoverflow.com/questions/42021176/php-why-pi-and-m-pi>`_.
 
 
 Suggestions
@@ -30043,64 +30125,64 @@ Some methods and functions are defined to be used with constants as arguments. T
 
 Here is the list of function that use a unique PHP constant as argument : 
 
-+ `array_change_key_case() <http://www.php.net/array_change_key_case>`_
-+ `array_multisort() <http://www.php.net/array_multisort>`_
-+ `array_unique() <http://www.php.net/array_unique>`_
-+ `count() <http://www.php.net/count>`_
++ `array_change_key_case() <https://www.php.net/array_change_key_case>`_
++ `array_multisort() <https://www.php.net/array_multisort>`_
++ `array_unique() <https://www.php.net/array_unique>`_
++ `count() <https://www.php.net/count>`_
 + dns_get_record()
-+ `easter_days() <http://www.php.net/easter_days>`_
-+ `extract() <http://www.php.net/extract>`_
-+ `filter_input() <http://www.php.net/filter_input>`_
-+ `filter_var() <http://www.php.net/filter_var>`_
-+ `fseek() <http://www.php.net/fseek>`_
-+ `get_html_translation_table() <http://www.php.net/get_html_translation_table>`_
-+ `gmp_div_q() <http://www.php.net/gmp_div_q>`_
-+ `gmp_div_qr() <http://www.php.net/gmp_div_qr>`_
-+ `gmp_div_r() <http://www.php.net/gmp_div_r>`_
-+ `html_entity_decode() <http://www.php.net/html_entity_decode>`_
-+ `htmlspecialchars_decode() <http://www.php.net/htmlspecialchars_decode>`_
-+ `http_build_query() <http://www.php.net/http_build_query>`_
-+ `http_parse_cookie() <http://www.php.net/http_parse_cookie>`_
-+ `http_parse_params() <http://www.php.net/http_parse_params>`_
-+ `http_redirect() <http://www.php.net/http_redirect>`_
-+ `http_support() <http://www.php.net/http_support>`_
-+ `parse_ini_file() <http://www.php.net/parse_ini_file>`_
-+ `parse_ini_string() <http://www.php.net/parse_ini_string>`_
-+ `parse_url() <http://www.php.net/parse_url>`_
-+ `pathinfo() <http://www.php.net/pathinfo>`_
-+ `pg_select() <http://www.php.net/pg_select>`_
-+ `posix_access() <http://www.php.net/posix_access>`_
-+ `round() <http://www.php.net/round>`_
-+ `scandir() <http://www.php.net/scandir>`_
-+ `socket_read() <http://www.php.net/socket_read>`_
-+ `str_pad() <http://www.php.net/str_pad>`_
-+ `trigger_error() <http://www.php.net/trigger_error>`_
++ `easter_days() <https://www.php.net/easter_days>`_
++ `extract() <https://www.php.net/extract>`_
++ `filter_input() <https://www.php.net/filter_input>`_
++ `filter_var() <https://www.php.net/filter_var>`_
++ `fseek() <https://www.php.net/fseek>`_
++ `get_html_translation_table() <https://www.php.net/get_html_translation_table>`_
++ `gmp_div_q() <https://www.php.net/gmp_div_q>`_
++ `gmp_div_qr() <https://www.php.net/gmp_div_qr>`_
++ `gmp_div_r() <https://www.php.net/gmp_div_r>`_
++ `html_entity_decode() <https://www.php.net/html_entity_decode>`_
++ `htmlspecialchars_decode() <https://www.php.net/htmlspecialchars_decode>`_
++ `http_build_query() <https://www.php.net/http_build_query>`_
++ `http_parse_cookie() <https://www.php.net/http_parse_cookie>`_
++ `http_parse_params() <https://www.php.net/http_parse_params>`_
++ `http_redirect() <https://www.php.net/http_redirect>`_
++ `http_support() <https://www.php.net/http_support>`_
++ `parse_ini_file() <https://www.php.net/parse_ini_file>`_
++ `parse_ini_string() <https://www.php.net/parse_ini_string>`_
++ `parse_url() <https://www.php.net/parse_url>`_
++ `pathinfo() <https://www.php.net/pathinfo>`_
++ `pg_select() <https://www.php.net/pg_select>`_
++ `posix_access() <https://www.php.net/posix_access>`_
++ `round() <https://www.php.net/round>`_
++ `scandir() <https://www.php.net/scandir>`_
++ `socket_read() <https://www.php.net/socket_read>`_
++ `str_pad() <https://www.php.net/str_pad>`_
++ `trigger_error() <https://www.php.net/trigger_error>`_
 
 Here is the list of functions that use a combination of PHP native functions as argument.
 
-+ `arsort() <http://www.php.net/arsort>`_
-+ `asort() <http://www.php.net/asort>`_
-+ `error_reporting() <http://www.php.net/error_reporting>`_
-+ `filter_input() <http://www.php.net/filter_input>`_
-+ `filter_var() <http://www.php.net/filter_var>`_
-+ `get_html_translation_table() <http://www.php.net/get_html_translation_table>`_
-+ `htmlentities() <http://www.php.net/htmlentities>`_
-+ `htmlspecialchars() <http://www.php.net/htmlspecialchars>`_
-+ `http_build_url() <http://www.php.net/http_build_url>`_
-+ `jdtojewish() <http://www.php.net/jdtojewish>`_
-+ `krsort() <http://www.php.net/krsort>`_
-+ `ksort() <http://www.php.net/ksort>`_
-+ `pg_result_status() <http://www.php.net/pg_result_status>`_
-+ `phpcredits() <http://www.php.net/phpcredits>`_
-+ `phpinfo() <http://www.php.net/phpinfo>`_
-+ `preg_grep() <http://www.php.net/preg_grep>`_
-+ `preg_match() <http://www.php.net/preg_match>`_
-+ `preg_split() <http://www.php.net/preg_split>`_
-+ `rsort() <http://www.php.net/rsort>`_
-+ `runkit_import() <http://www.php.net/runkit_import>`_
-+ `sort() <http://www.php.net/sort>`_
-+ `stream_socket_client() <http://www.php.net/stream_socket_client>`_
-+ `stream_socket_server() <http://www.php.net/stream_socket_server>`_
++ `arsort() <https://www.php.net/arsort>`_
++ `asort() <https://www.php.net/asort>`_
++ `error_reporting() <https://www.php.net/error_reporting>`_
++ `filter_input() <https://www.php.net/filter_input>`_
++ `filter_var() <https://www.php.net/filter_var>`_
++ `get_html_translation_table() <https://www.php.net/get_html_translation_table>`_
++ `htmlentities() <https://www.php.net/htmlentities>`_
++ `htmlspecialchars() <https://www.php.net/htmlspecialchars>`_
++ `http_build_url() <https://www.php.net/http_build_url>`_
++ `jdtojewish() <https://www.php.net/jdtojewish>`_
++ `krsort() <https://www.php.net/krsort>`_
++ `ksort() <https://www.php.net/ksort>`_
++ `pg_result_status() <https://www.php.net/pg_result_status>`_
++ `phpcredits() <https://www.php.net/phpcredits>`_
++ `phpinfo() <https://www.php.net/phpinfo>`_
++ `preg_grep() <https://www.php.net/preg_grep>`_
++ `preg_match() <https://www.php.net/preg_match>`_
++ `preg_split() <https://www.php.net/preg_split>`_
++ `rsort() <https://www.php.net/rsort>`_
++ `runkit_import() <https://www.php.net/runkit_import>`_
++ `sort() <https://www.php.net/sort>`_
++ `stream_socket_client() <https://www.php.net/stream_socket_client>`_
++ `stream_socket_server() <https://www.php.net/stream_socket_server>`_
 
 
 
@@ -30262,7 +30344,7 @@ Last, ``instanceof`` may be upgraded to Typehint, by moving it to the method sig
    ?>
 
 
-``instanceof`` and ``is_object()`` may not be always interchangeable. Consider using `isset() <http://www.www.php.net/isset>`_ on a known property for a simple check on objects. You may also consider `is_string() <http://www.php.net/is_string>`_, `is_integer() <http://www.php.net/is_integer>`_ or `is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of ``!`is_object() <http://www.php.net/is_object>`_``.
+``instanceof`` and ``is_object()`` may not be always interchangeable. Consider using `isset() <http://www.www.php.net/isset>`_ on a known property for a simple check on objects. You may also consider `is_string() <https://www.php.net/is_string>`_, `is_integer() <https://www.php.net/is_integer>`_ or `is_scalar() <https://www.php.net/is_scalar>`_, in particular instead of ``!`is_object() <https://www.php.net/is_object>`_``.
 
 The ``instanceof`` operator is also faster than the ``is_object()`` functioncall. 
 
@@ -30297,7 +30379,7 @@ Use List With Foreach
 #####################
 
 
-`Foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ structures accepts `list() <http://www.php.net/list>`_ as blind key. If the loop-value is an array with a fixed structure, it is possible to extract the values directly into variables with explicit names.
+`Foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ structures accepts `list() <https://www.php.net/list>`_ as blind key. If the loop-value is an array with a fixed structure, it is possible to extract the values directly into variables with explicit names.
 
 .. code-block:: php
 
@@ -30612,9 +30694,9 @@ Use Pathinfo
 ############
 
 
-Use `pathinfo() <http://www.php.net/pathinfo>`_ function instead of string manipulations.
+Use `pathinfo() <https://www.php.net/pathinfo>`_ function instead of string manipulations.
 
-`pathinfo() <http://www.php.net/pathinfo>`_ is more efficient and readable and string functions.
+`pathinfo() <https://www.php.net/pathinfo>`_ is more efficient and readable and string functions.
 
 .. code-block:: php
 
@@ -30632,7 +30714,7 @@ Use `pathinfo() <http://www.php.net/pathinfo>`_ function instead of string manip
    ?>
 
 
-When the path contains UTF-8 characters, `pathinfo() <http://www.php.net/pathinfo>`_ may strip them. There, string functions are necessary.
+When the path contains UTF-8 characters, `pathinfo() <https://www.php.net/pathinfo>`_ may strip them. There, string functions are necessary.
 
 
 Suggestions
@@ -30724,7 +30806,7 @@ Use System Tmp
 ##############
 
 
-It is recommended to avoid hardcoding the temporary file. It is better to rely on the system's temporary folder, which is accessible with `sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_.
+It is recommended to avoid hardcoding the temporary file. It is better to rely on the system's temporary folder, which is accessible with `sys_get_temp_dir() <https://www.php.net/sys_get_temp_dir>`_.
 
 .. code-block:: php
 
@@ -30814,11 +30896,11 @@ Use Url Query Functions
 
 PHP features several functions dedicated to processing URL's query string. 
 
-+ `parse_str() <http://www.php.net/parse_str>`_
-+ `parse_url() <http://www.php.net/parse_url>`_
-+ `http_build_query() <http://www.php.net/http_build_query>`_
++ `parse_str() <https://www.php.net/parse_str>`_
++ `parse_url() <https://www.php.net/parse_url>`_
++ `http_build_query() <https://www.php.net/http_build_query>`_
 
-Those functions include extra checks : for example, `http_build_query() <http://www.php.net/http_build_query>`_ adds `urlencode() <http://www.php.net/urlencode>`_ call on the values, and allow for choosing the separator and the Query string format.
+Those functions include extra checks : for example, `http_build_query() <https://www.php.net/http_build_query>`_ adds `urlencode() <https://www.php.net/urlencode>`_ call on the values, and allow for choosing the separator and the Query string format.
 
 .. code-block:: php
 
@@ -30901,9 +30983,9 @@ Use array_slice()
 #################
 
 
-Array_slice is de equivalent of `substr() <http://www.php.net/substr>`_ for arrays.
+Array_slice is de equivalent of `substr() <https://www.php.net/substr>`_ for arrays.
 
-`array_splice() <http://www.php.net/array_splice>`_ is also possible, to remove a portion of array inside the array, not at the ends. This has no equivalent for strings.
+`array_splice() <https://www.php.net/array_splice>`_ is also possible, to remove a portion of array inside the array, not at the ends. This has no equivalent for strings.
 
 .. code-block:: php
 
@@ -30955,7 +31037,7 @@ Use const
 #########
 
 
-The const keyword may be used to define constant, just like the `define() <http://www.php.net/define>`_ function. 
+The const keyword may be used to define constant, just like the `define() <https://www.php.net/define>`_ function. 
 
 When defining a constant, it is recommended to use 'const' when the features of the constant are not dynamical (name or value are known at compile time). 
 This way, constant will be defined at compile time, and not at execution time. 
@@ -30971,7 +31053,7 @@ This way, constant will be defined at compile time, and not at execution time.
    ?>
 
 
-`define() <http://www.php.net/define>`_ function is useful when the constant is not known at compile time, or when case sensitivity is necessary.
+`define() <https://www.php.net/define>`_ function is useful when the constant is not known at compile time, or when case sensitivity is necessary.
 
 .. code-block:: php
 
@@ -31013,7 +31095,7 @@ Use is_countable
 ################
 
 
-is_countable() checks if a variables holds a value that can be counted. It is recommended to use it before calling `count() <http://www.php.net/count>`_.
+is_countable() checks if a variables holds a value that can be counted. It is recommended to use it before calling `count() <https://www.php.net/count>`_.
 
 is_countable() accepts arrays and object whose class implements \countable.
 
@@ -31066,9 +31148,9 @@ Use json_decode() Options
 #########################
 
 
-`json_decode() <http://www.php.net/json_decode>`_ returns objects by default, unless the second argument is set to ``TRUE`` or ``JSON_OBJECT_AS_ARRAY``. Then, it returns arrays.
+`json_decode() <https://www.php.net/json_decode>`_ returns objects by default, unless the second argument is set to ``TRUE`` or ``JSON_OBJECT_AS_ARRAY``. Then, it returns arrays.
 
-Avoid casting the returned value from `json_decode() <http://www.php.net/json_decode>`_, and use the second argument to directly set the correct type.
+Avoid casting the returned value from `json_decode() <https://www.php.net/json_decode>`_, and use the second argument to directly set the correct type.
 
 .. code-block:: php
 
@@ -31109,7 +31191,7 @@ Use password_hash()
 ###################
 
 
-`password_hash() <http://www.php.net/password_hash>`_ and password_check() are a better choice to replace the use of `crypt() <http://www.php.net/crypt>`_ to check password.
+`password_hash() <https://www.php.net/password_hash>`_ and password_check() are a better choice to replace the use of `crypt() <https://www.php.net/crypt>`_ to check password.
 
 PHP 5.5 introduced these functions.
 
@@ -31159,11 +31241,11 @@ Use pathinfo() Arguments
 ########################
 
 
-`pathinfo() <http://www.php.net/pathinfo>`_ has a second argument to select only useful data. 
+`pathinfo() <https://www.php.net/pathinfo>`_ has a second argument to select only useful data. 
 
-It is twice faster to get only one element from `pathinfo() <http://www.php.net/pathinfo>`_ than get the four of them, and use only one.
+It is twice faster to get only one element from `pathinfo() <https://www.php.net/pathinfo>`_ than get the four of them, and use only one.
 
-This analysis reports `pathinfo() <http://www.php.net/pathinfo>`_ usage, without second argument, where only one or two indices are used, after the call.
+This analysis reports `pathinfo() <https://www.php.net/pathinfo>`_ usage, without second argument, where only one or two indices are used, after the call.
 
 .. code-block:: php
 
@@ -31190,7 +31272,7 @@ This analysis reports `pathinfo() <http://www.php.net/pathinfo>`_ usage, without
    ?>
 
 
-Depending on the situation, the functions `dirname() <http://www.php.net/dirname>`_ and `basename() <http://www.php.net/basename>`_ may also be used. They are even faster, when only fetching those data.
+Depending on the situation, the functions `dirname() <https://www.php.net/dirname>`_ and `basename() <https://www.php.net/basename>`_ may also be used. They are even faster, when only fetching those data.
 
 See also `list <http://php.net/manual/en/function.list.php>`_.
 
@@ -31214,13 +31296,13 @@ Use random_int()
 ################
 
 
-`rand() <http://www.php.net/rand>`_ and `mt_rand() <http://www.php.net/mt_rand>`_ should be replaced with `random_int() <http://www.php.net/random_int>`_.
+`rand() <https://www.php.net/rand>`_ and `mt_rand() <https://www.php.net/mt_rand>`_ should be replaced with `random_int() <https://www.php.net/random_int>`_.
 
-At worse, `rand() <http://www.php.net/rand>`_ should be replaced with `mt_rand() <http://www.php.net/mt_rand>`_, which is a drop-in replacement and `srand() <http://www.php.net/srand>`_ by `mt_srand() <http://www.php.net/mt_srand>`_. 
+At worse, `rand() <https://www.php.net/rand>`_ should be replaced with `mt_rand() <https://www.php.net/mt_rand>`_, which is a drop-in replacement and `srand() <https://www.php.net/srand>`_ by `mt_srand() <https://www.php.net/mt_srand>`_. 
 
-`random_int() <http://www.php.net/random_int>`_ replaces `rand() <http://www.php.net/rand>`_, and has no seeding function like `srand() <http://www.php.net/srand>`_.
+`random_int() <https://www.php.net/random_int>`_ replaces `rand() <https://www.php.net/rand>`_, and has no seeding function like `srand() <https://www.php.net/srand>`_.
 
-Other sources of entropy that should be replaced by `random_int() <http://www.php.net/random_int>`_ : `microtime() <http://www.php.net/microtime>`_, `uniqid() <http://www.php.net/uniqid>`_, `time() <http://www.php.net/time>`_. Those a often combined with hashing functions and mixed with other sources of entropy, such as a salt.
+Other sources of entropy that should be replaced by `random_int() <https://www.php.net/random_int>`_ : `microtime() <https://www.php.net/microtime>`_, `uniqid() <https://www.php.net/uniqid>`_, `time() <https://www.php.net/time>`_. Those a often combined with hashing functions and mixed with other sources of entropy, such as a salt.
 
 .. code-block:: php
 
@@ -31247,8 +31329,8 @@ Other sources of entropy that should be replaced by `random_int() <http://www.ph
    ?>
 
 
-Since PHP 7, `random_int() <http://www.php.net/random_int>`_ along with `random_bytes() <http://www.php.net/random_bytes>`_, provides cryptographically secure pseudo-random bytes, which are good to be used
-when security is involved. `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ may be used when the ``OpenSSL`` extension is available.
+Since PHP 7, `random_int() <https://www.php.net/random_int>`_ along with `random_bytes() <https://www.php.net/random_bytes>`_, provides cryptographically secure pseudo-random bytes, which are good to be used
+when security is involved. `openssl_random_pseudo_bytes() <https://www.php.net/openssl_random_pseudo_bytes>`_ may be used when the ``OpenSSL`` extension is available.
 
 See also `CSPRNG <http://php.net/manual/en/book.csprng.php>`_ and `OpenSSL <http://php.net/manual/en/book.openssl.php>`_.
 
@@ -31278,7 +31360,7 @@ Use session_start() Options
 ###########################
 
 
-It is possible to set the session's option at `session_start() <http://www.php.net/session_start>`_ call, skipping the usage of session_option().
+It is possible to set the session's option at `session_start() <https://www.php.net/session_start>`_ call, skipping the usage of session_option().
 
 This way, session's options are set in one call, saving several hits.
 
@@ -32494,7 +32576,7 @@ Uses Default Values
 ###################
 
 
-Default values are provided to methods so as to make it convenient to use. However, with new versions, those values may change. For example, in PHP 5.4, `htmlentities() <http://www.php.net/htmlentities>`_ switched from ``Latin1`` to ``UTF-8`` default encoding.
+Default values are provided to methods so as to make it convenient to use. However, with new versions, those values may change. For example, in PHP 5.4, `htmlentities() <https://www.php.net/htmlentities>`_ switched from ``Latin1`` to ``UTF-8`` default encoding.
 
 .. code-block:: php
 
@@ -32515,7 +32597,7 @@ Default values are provided to methods so as to make it convenient to use. Howev
 
 As much as possible, it is recommended to use explicit values in those methods, so as to prevent from being surprise at a future PHP evolution. 
 
-This analyzer tend to report a lot of false positives, including usage of `count() <http://www.php.net/count>`_. `Count() <http://www.php.net/count>`_ indeed has a second argument for recursive counts, and a default value. This may be ignored safely.
+This analyzer tend to report a lot of false positives, including usage of `count() <https://www.php.net/count>`_. `Count() <https://www.php.net/count>`_ indeed has a second argument for recursive counts, and a default value. This may be ignored safely.
 
 Suggestions
 ^^^^^^^^^^^
@@ -32586,7 +32668,7 @@ Usort Sorting In PHP 7.0
 ########################
 
 
-`Usort() <http://www.php.net/usort>`_, `uksort() <http://www.php.net/uksort>`_ and `uasort() <http://www.php.net/uasort>`_ behavior has changed in PHP 7. Values that are equals (based on the user-provided method) may be sorted differently than in PHP 5. 
+`Usort() <https://www.php.net/usort>`_, `uksort() <https://www.php.net/uksort>`_ and `uasort() <https://www.php.net/uasort>`_ behavior has changed in PHP 7. Values that are equals (based on the user-provided method) may be sorted differently than in PHP 5. 
 
 If this sorting is important, it is advised to add extra comparison in the user-function and avoid returning 0 (thus, depending on default implementation). 
 
@@ -32730,7 +32812,7 @@ Variable Is Not A Condition
 ###########################
 
 
-Avoid using a lone variable as a condition. It is recommended to use a comparative value, or one of the filtering function, such as `isset() <http://www.www.php.net/isset>`_, `empty() <http://www.php.net/empty>`_. 
+Avoid using a lone variable as a condition. It is recommended to use a comparative value, or one of the filtering function, such as `isset() <http://www.www.php.net/isset>`_, `empty() <https://www.php.net/empty>`_. 
 
 Using the raw variable as a condition blurs the difference between an undefined variable and an empty value. By using an explicit comparison or validation function, it is easier to understand what the variable stands for.
 
@@ -32926,7 +33008,7 @@ This structure is deprecated since PHP 7.2. It may disappear in the future.
    ?>
  
 
-See also `PHP RFC: Deprecations for PHP 7.2 : `Each() <http://www.php.net/each>`_ <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
+See also `PHP RFC: Deprecations for PHP 7.2 : `Each() <https://www.php.net/each>`_ <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
 
 
 Suggestions
@@ -33202,7 +33284,7 @@ Those functioncalls are made with too many or too few arguments.
 
 When the number arguments is wrong for native functions, PHP emits a warning. 
 When the number arguments is too small for custom functions, PHP raises an exception. 
-When the number arguments is too high for custom functions, PHP ignores the arguments. Such arguments should be handled with the variadic operator, or with `func_get_args() <http://www.php.net/func_get_args>`_ family of functions.
+When the number arguments is too high for custom functions, PHP ignores the arguments. Such arguments should be handled with the variadic operator, or with `func_get_args() <https://www.php.net/func_get_args>`_ family of functions.
 
 .. code-block:: php
 
@@ -33543,10 +33625,10 @@ Wrong fopen() Mode
 ##################
 
 
-Wrong file opening for `fopen() <http://www.php.net/fopen>`_.
+Wrong file opening for `fopen() <https://www.php.net/fopen>`_.
 
-`fopen() <http://www.php.net/fopen>`_ has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
-An optional 'b' may be used to make the `fopen() <http://www.php.net/fopen>`_ call more portable and binary safe. Another optional 't' may be used to make the `fopen() <http://www.php.net/fopen>`_ call process automatically text input : this one should be avoided. 
+`fopen() <https://www.php.net/fopen>`_ has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
+An optional 'b' may be used to make the `fopen() <https://www.php.net/fopen>`_ call more portable and binary safe. Another optional 't' may be used to make the `fopen() <https://www.php.net/fopen>`_ call process automatically text input : this one should be avoided. 
 
 .. code-block:: php
 
@@ -33805,11 +33887,11 @@ array_key_exists() Speedup
 ##########################
 
 
-`isset() <http://www.www.php.net/isset>`_ used to be the fastest, but `array_key_exists() <http://www.php.net/array_key_exists>`_ is. Since PHP 7.4, `array_key_exists() <http://www.php.net/array_key_exists>`_ has its own opcode, leading to better features and speed.
+`isset() <http://www.www.php.net/isset>`_ used to be the fastest, but `array_key_exists() <https://www.php.net/array_key_exists>`_ is. Since PHP 7.4, `array_key_exists() <https://www.php.net/array_key_exists>`_ has its own opcode, leading to better features and speed.
 
-`isset() <http://www.www.php.net/isset>`_ is faster for all non-empty values, but is limited when the value is `NULL <http://www.php.net/manual/en/language.types.null.php>`_ or empty : then, `array_key_exists() <http://www.php.net/array_key_exists>`_ has the good features.
+`isset() <http://www.www.php.net/isset>`_ is faster for all non-empty values, but is limited when the value is `NULL <http://www.php.net/manual/en/language.types.null.php>`_ or empty : then, `array_key_exists() <https://www.php.net/array_key_exists>`_ has the good features.
 
-``This change makes `array_key_exists() <http://www.php.net/array_key_exists>`_ actually faster than `isset() <http://www.www.php.net/isset>`_ by ~25% (tested with GCC 8, -O3, march=native, mtune=native).``.
+``This change makes `array_key_exists() <https://www.php.net/array_key_exists>`_ actually faster than `isset() <http://www.www.php.net/isset>`_ by ~25% (tested with GCC 8, -O3, march=native, mtune=native).``.
 
 .. code-block:: php
 
@@ -33830,7 +33912,7 @@ array_key_exists() Speedup
    ?>
 
 
-See also `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up `array_key_exists() <http://www.php.net/array_key_exists>`_ <https://github.com/php/php-src/pull/3360>`_.
+See also `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up `array_key_exists() <https://www.php.net/array_key_exists>`_ <https://github.com/php/php-src/pull/3360>`_.
 
 
 Suggestions
@@ -33858,7 +33940,7 @@ array_key_exists() Works On Arrays
 ##################################
 
 
-`array_key_exists() <http://www.php.net/array_key_exists>`_ requires arrays as second argument. Until PHP 7.4, objects were also allowed, yet it is now deprecated.
+`array_key_exists() <https://www.php.net/array_key_exists>`_ requires arrays as second argument. Until PHP 7.4, objects were also allowed, yet it is now deprecated.
 
 .. code-block:: php
 
@@ -33904,9 +33986,9 @@ array_merge() And Variadic
 ##########################
 
 
-Always check value in variadic before using it with `array_merge() <http://www.php.net/array_merge>`_ and `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_.
+Always check value in variadic before using it with `array_merge() <https://www.php.net/array_merge>`_ and `array_merge_recursive() <https://www.php.net/array_merge_recursive>`_.
 
-Before PHP 7.4, `array_merge() <http://www.php.net/array_merge>`_ and `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ would complain when no argument was provided. As such, using the spread operator `...` on an empty `array() <http://www.php.net/array>`_ would yield no argument, and an error.
+Before PHP 7.4, `array_merge() <https://www.php.net/array_merge>`_ and `array_merge_recursive() <https://www.php.net/array_merge_recursive>`_ would complain when no argument was provided. As such, using the spread operator `...` on an empty `array() <https://www.php.net/array>`_ would yield no argument, and an error.
 
 .. code-block:: php
 
@@ -33948,9 +34030,9 @@ crypt() Without Salt
 ####################
 
 
-PHP requires a salt when calling `crypt() <http://www.php.net/crypt>`_. 5.5 and previous versions didn't require it. Salt is a simple string, that is usually only known by the application.
+PHP requires a salt when calling `crypt() <https://www.php.net/crypt>`_. 5.5 and previous versions didn't require it. Salt is a simple string, that is usually only known by the application.
 
-According to the manual : The salt parameter is optional. However, `crypt() <http://www.php.net/crypt>`_ creates a weak hash without the salt. PHP 5.6 or later raise an E_NOTICE error without it. Make sure to specify a strong enough salt for better security.
+According to the manual : The salt parameter is optional. However, `crypt() <https://www.php.net/crypt>`_ creates a weak hash without the salt. PHP 5.6 or later raise an E_NOTICE error without it. Make sure to specify a strong enough salt for better security.
 
 .. code-block:: php
 
@@ -33990,7 +34072,7 @@ curl_version() Has No Argument
 ##############################
 
 
-`curl_version() <http://www.php.net/curl_version>`_ used to accept CURLVERSION_NOW as argument. Since PHP 7.4, it is an argumentless function.
+`curl_version() <https://www.php.net/curl_version>`_ used to accept CURLVERSION_NOW as argument. Since PHP 7.4, it is a function without arguments.
 
 .. code-block:: php
 
@@ -34497,9 +34579,9 @@ filter_input() As A Source
 ##########################
 
 
-The `filter_input() <http://www.php.net/filter_input>`_ and `filter_input_array() <http://www.php.net/filter_input_array>`_ functions access directly to ``$_GET``. They represent a source for external data just like ``$_GET``, ``$_POST``, etc.
+The `filter_input() <https://www.php.net/filter_input>`_ and `filter_input_array() <https://www.php.net/filter_input_array>`_ functions access directly to ``$_GET``. They represent a source for external data just like ``$_GET``, ``$_POST``, etc.
 
-The main feature of `filter_input() <http://www.php.net/filter_input>`_ is that it is already filtered. The main drawback is that ``FILTER_FLAG_NONE`` is the ``none`` filter, and that default configuration is `FILTER_UNSAFE_RAW`.
+The main feature of `filter_input() <https://www.php.net/filter_input>`_ is that it is already filtered. The main drawback is that ``FILTER_FLAG_NONE`` is the ``none`` filter, and that default configuration is `FILTER_UNSAFE_RAW`.
 
 The filter extension keeps access to the incoming data, even after the super globals, such as ``$_GET``, are unset.
 
@@ -34541,9 +34623,9 @@ fputcsv() In Loops
 ##################
 
 
-`fputcsv() <http://www.php.net/fputcsv>`_ is slow when called on each row. It actually flushes the data to the disk each time, and that results in a inefficient dump to the disk, each call.
+`fputcsv() <https://www.php.net/fputcsv>`_ is slow when called on each row. It actually flushes the data to the disk each time, and that results in a inefficient dump to the disk, each call.
 
-To speed up this process, it is recommended to dump the csv to memory first, then dump the memory to the disk, in larger chunks. Since `fputcsv() <http://www.php.net/fputcsv>`_ works only on stream, it is necessary to use a memory stream.
+To speed up this process, it is recommended to dump the csv to memory first, then dump the memory to the disk, in larger chunks. Since `fputcsv() <https://www.php.net/fputcsv>`_ works only on stream, it is necessary to use a memory stream.
 
 .. code-block:: php
 
@@ -34598,7 +34680,7 @@ func_get_arg() Modified
 #######################
 
 
-`func_get_arg() <http://www.php.net/func_get_arg>`_ and `func_get_args() <http://www.php.net/func_get_args>`_ used to report the calling value of the argument until PHP 7. Since PHP 7, it is reporting the value of the argument at calling time, which may have been modified by a previous instruction. 
+`func_get_arg() <https://www.php.net/func_get_arg>`_ and `func_get_args() <https://www.php.net/func_get_args>`_ used to report the calling value of the argument until PHP 7. Since PHP 7, it is reporting the value of the argument at calling time, which may have been modified by a previous instruction. 
 
 .. code-block:: php
 
@@ -34633,7 +34715,7 @@ idn_to_ascii() New Default
 ##########################
 
 
-The default parameter value of `idn_to_ascii() <http://www.php.net/idn_to_ascii>`_ and `idn_to_utf8() <http://www.php.net/idn_to_utf8>`_ is now INTL_IDNA_VARIANT_UTS46 instead of the deprecated INTL_IDNA_VARIANT_2003.
+The default parameter value of `idn_to_ascii() <https://www.php.net/idn_to_ascii>`_ and `idn_to_utf8() <https://www.php.net/idn_to_utf8>`_ is now INTL_IDNA_VARIANT_UTS46 instead of the deprecated INTL_IDNA_VARIANT_2003.
 
 .. code-block:: php
 
@@ -34737,9 +34819,9 @@ list() May Omit Variables
 #########################
 
 
-Simply omit any unused variable in a `list() <http://www.php.net/list>`_ call. 
+Simply omit any unused variable in a `list() <https://www.php.net/list>`_ call. 
 
-`list() <http://www.php.net/list>`_ is the only PHP function that accepts to have omitted arguments. If the following code makes no usage of a listed variable, just omit it. 
+`list() <https://www.php.net/list>`_ is the only PHP function that accepts to have omitted arguments. If the following code makes no usage of a listed variable, just omit it. 
 
 .. code-block:: php
 
@@ -34825,9 +34907,9 @@ move_uploaded_file Instead Of copy
 ##################################
 
 
-Always use `move_uploaded_file() <http://www.php.net/move_uploaded_file>`_ with uploaded files. Avoid using copy or rename with uploaded file. 
+Always use `move_uploaded_file() <https://www.php.net/move_uploaded_file>`_ with uploaded files. Avoid using copy or rename with uploaded file. 
 
-`move_uploaded_file() <http://www.php.net/move_uploaded_file>`_ checks to ensure that the file designated by filename is a valid upload file (meaning that it was uploaded via PHP's HTTP POST upload mechanism).
+`move_uploaded_file() <https://www.php.net/move_uploaded_file>`_ checks to ensure that the file designated by filename is a valid upload file (meaning that it was uploaded via PHP's HTTP POST upload mechanism).
 
 .. code-block:: php
 
@@ -34884,7 +34966,7 @@ On the other hand, it is important to catch the exception that openssl_random_ps
    ?>
 
 
-See also `openssl_random_pseudo_byte <https://www.php.net/openssl_random_pseudo_bytes>`_ and `PHP RFC: Improve `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ <https://wiki.php.net/rfc/improve-openssl-random-pseudo-bytes>`_.
+See also `openssl_random_pseudo_byte <https://www.php.net/openssl_random_pseudo_bytes>`_ and `PHP RFC: Improve `openssl_random_pseudo_bytes() <https://www.php.net/openssl_random_pseudo_bytes>`_ <https://wiki.php.net/rfc/improve-openssl-random-pseudo-bytes>`_.
 
 
 Suggestions
@@ -34910,7 +34992,7 @@ parse_str() Warning
 ###################
 
 
-The `parse_str() <http://www.php.net/parse_str>`_ function parses a query string and assigns the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the existing one.
+The `parse_str() <https://www.php.net/parse_str>`_ function parses a query string and assigns the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the existing one.
 
 .. code-block:: php
 
@@ -34927,7 +35009,7 @@ The `parse_str() <http://www.php.net/parse_str>`_ function parses a query string
    ?>
 
 
-Always use an empty variable a second parameter to `parse_str() <http://www.php.net/parse_str>`_, so as to collect the incoming values, and then, filter them in that array.
+Always use an empty variable a second parameter to `parse_str() <https://www.php.net/parse_str>`_, so as to collect the incoming values, and then, filter them in that array.
 
 +-------------+-------------------------------------------------------------------------------------------------------+
 | Short name  | Security/parseUrlWithoutParameters                                                                    |
@@ -34949,7 +35031,7 @@ preg_match_all() Flag
 #####################
 
 
-`preg_match_all() <http://www.php.net/preg_match_all>`_ has an option to configure the structure of the results : it is either by capturing parenthesis (by default), or by result sets. 
+`preg_match_all() <https://www.php.net/preg_match_all>`_ has an option to configure the structure of the results : it is either by capturing parenthesis (by default), or by result sets. 
 
 The second option is the most interesting when the following `foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ loop has to manipulate several captured strings at the same time. No need to use an index in the first array and use it in the other arrays.
 
@@ -34975,17 +35057,25 @@ The second option is the most interesting when the following `foreach() <http://
    ?>
 
 
-The second syntax is easier to read and may be marginally faster to execute (`preg_match_all() <http://www.php.net/preg_match_all>`_ and `foreach()) <http://www.php.net/manual/en/control-structures.foreach.php>`_.
+The second syntax is easier to read and may be marginally faster to execute (`preg_match_all() <https://www.php.net/preg_match_all>`_ and `foreach()) <http://www.php.net/manual/en/control-structures.foreach.php>`_.
 
-+-------------+----------------------+
-| Short name  | Php/PregMatchAllFlag |
-+-------------+----------------------+
-| Rulesets    | :ref:`Suggestions`   |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use flags to adapt the results of preg_match_all() to your code, not the contrary.
+
++-------------+-------------------------------------+
+| Short name  | Php/PregMatchAllFlag                |
++-------------+-------------------------------------+
+| Rulesets    | :ref:`Suggestions`                  |
++-------------+-------------------------------------+
+| Severity    | Minor                               |
++-------------+-------------------------------------+
+| Time To Fix | Quick (30 mins)                     |
++-------------+-------------------------------------+
+| Examples    | :ref:`fuelcms-php-pregmatchallflag` |
++-------------+-------------------------------------+
 
 
 
@@ -34995,9 +35085,9 @@ preg_replace With Option e
 ##########################
 
 
-`preg_replace() <http://www.php.net/preg_replace>`_ supported the /e option until PHP 7.0. It allowed the use of `eval() <http://www.php.net/eval>`_'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
+`preg_replace() <https://www.php.net/preg_replace>`_ supported the /e option until PHP 7.0. It allowed the use of `eval() <https://www.php.net/eval>`_'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
 
-`preg_replace() <http://www.php.net/preg_replace>`_ with /e option may be replaced with `preg_replace_callback() <http://www.php.net/preg_replace_callback>`_ and a closure, or `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_ and an array of closures.
+`preg_replace() <https://www.php.net/preg_replace>`_ with /e option may be replaced with `preg_replace_callback() <https://www.php.net/preg_replace_callback>`_ and a closure, or `preg_replace_callback_array() <https://www.php.net/preg_replace_callback_array>`_ and an array of closures.
 
 .. code-block:: php
 
@@ -35101,7 +35191,7 @@ set_exception_handler() Warning
 ###############################
 
 
-The `set_exception_handler() <http://www.php.net/set_exception_handler>`_ callable function has to be adapted to PHP 7 : ``Exception`` is not the right typehint, it is now ``Throwable``. 
+The `set_exception_handler() <https://www.php.net/set_exception_handler>`_ callable function has to be adapted to PHP 7 : ``Exception`` is not the right typehint, it is now ``Throwable``. 
 
 When in doubt about backward compatibility, just drop the typehint. Otherwise, use ``Throwable``.
 
@@ -35140,7 +35230,7 @@ strip_tags Skips Closed Tag
 ###########################
 
 
-`strip_tags() <http://www.php.net/strip_tags>`_ skips non-self closing tags. This means that tags such as ``<br />`` will be ignored from the 2nd argument of the function.
+`strip_tags() <https://www.php.net/strip_tags>`_ skips non-self closing tags. This means that tags such as ``<br />`` will be ignored from the 2nd argument of the function.
 
 .. code-block:: php
 
@@ -35182,7 +35272,7 @@ strpos() Too Much
 #################
 
 
-`strpos() <http://www.php.net/strpos>`_ covers the whole string before reporting 0. If the expected string is expected be at the beginning, or a fixed place, it is more stable to use `substr() <http://www.php.net/substr>`_ for comparison.
+`strpos() <https://www.php.net/strpos>`_ covers the whole string before reporting 0. If the expected string is expected be at the beginning, or a fixed place, it is more stable to use `substr() <https://www.php.net/substr>`_ for comparison.
 
 The longer the haystack (the searched string), the more efficient is that trick. The string has to be 10k or more to have impact, unless it is in a loop. 
 
@@ -35215,7 +35305,7 @@ The longer the haystack (the searched string), the more efficient is that trick.
    ?>
 
 
-This applies to `stripos() <http://www.php.net/stripos>`_ too.
+This applies to `stripos() <https://www.php.net/stripos>`_ too.
 
 
 
@@ -35246,7 +35336,7 @@ time() Vs strtotime()
 #####################
 
 
-`time() <http://www.php.net/time>`_ is actually faster than `strtotime() <http://www.php.net/strtotime>`_ with 'now' key string.
+`time() <https://www.php.net/time>`_ is actually faster than `strtotime() <https://www.php.net/strtotime>`_ with 'now' key string.
 
 .. code-block:: php
 
@@ -35290,7 +35380,7 @@ var_dump()... Usage
 ###################
 
 
-`var_dump() <http://www.php.net/var_dump>`_, print_r() or `var_export() <http://www.php.net/var_export>`_ should not be left in any production code. They are debugging functions.
+`var_dump() <https://www.php.net/var_dump>`_, print_r() or `var_export() <https://www.php.net/var_export>`_ should not be left in any production code. They are debugging functions.
 
 .. code-block:: php
 

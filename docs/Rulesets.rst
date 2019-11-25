@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Sun, 17 Nov 2019 11:49:07 +0000
-.. comment: Generation hash : 3563d2c62cb723aa0e90a3177b0d84024fd73abd
+.. comment: Generation date : Mon, 25 Nov 2019 06:13:41 +0000
+.. comment: Generation hash : ed0328f4d65d6c0f8c899ec4c66e3391c5b10196
 
 
 .. _analyze:
@@ -116,7 +116,9 @@ Total : 386 analysis
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
+* :ref:`Avoid Optional Properties <avoid-optional-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
+* :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Avoid Using stdClass <avoid-using-stdclass>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
 * :ref:`Avoid mb_dectect_encoding() <avoid-mb\_dectect\_encoding()>`
@@ -295,7 +297,6 @@ Total : 386 analysis
 * :ref:`No Return Used <no-return-used>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`No Spread For Hash <no-spread-for-hash>`
-* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`No isset() With empty() <no-isset()-with-empty()>`
@@ -466,7 +467,6 @@ Total : 386 analysis
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
-* :ref:``
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`array_merge() And Variadic <array\_merge()-and-variadic>`
 * :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
@@ -943,6 +943,7 @@ This ruleset centralizes all analysis for the migration from PHP 7.0 to 7.1.
 
 Total : 32 analysis
 
+* :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Concat And Addition <concat-and-addition>`
@@ -958,7 +959,6 @@ Total : 32 analysis
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No Reference For Static Property <no-reference-for-static-property>`
-* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 7.0 Removed Functions <php-7.0-removed-functions>`
@@ -1163,6 +1163,7 @@ Total : 45 analysis
 * :ref:`Autoappend <autoappend>`
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
+* :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid glob() Usage <avoid-glob()-usage>`
@@ -1182,7 +1183,6 @@ Total : 45 analysis
 * :ref:`Make Magic Concrete <make-magic-concrete>`
 * :ref:`Make One Call With Array <make-one-call-with-array>`
 * :ref:`No Count With 0 <no-count-with-0>`
-* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`No mb_substr In Loop <no-mb\_substr-in-loop>`
 * :ref:`Pre-increment <pre-increment>`
@@ -1301,6 +1301,7 @@ Total : 86 analysis
 * :ref:`Add Default Value <add-default-value>`
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Avoid Real <avoid-real>`
+* :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Complex Dynamic Names <complex-dynamic-names>`
@@ -1337,7 +1338,6 @@ Total : 86 analysis
 * :ref:`No Need For get_class() <no-need-for-get\_class()>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Return Used <no-return-used>`
-* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`One If Is Sufficient <one-if-is-sufficient>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`PHP7 Dirname <php7-dirname>`
@@ -1395,6 +1395,7 @@ Total : 28 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Real <avoid-real>`
+* :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
 * :ref:`Dangling Array References <dangling-array-references>`
@@ -1406,7 +1407,6 @@ Total : 28 analysis
 * :ref:`Next Month Trap <next-month-trap>`
 * :ref:`No Choice <no-choice>`
 * :ref:`No Real Comparison <no-real-comparison>`
-* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Possible Missing Subpattern <possible-missing-subpattern>`

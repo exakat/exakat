@@ -362,7 +362,7 @@ This is the Laravel extension for Exakat.
 
 Laravel is the 'The PHP framework for web artisans.'
 
-Exakat provides compatibility reports with classes, interfaces and traits from Laravel 5.0 to 5.7.
+Exakat provides compatibility reports with classes, interfaces and traits from Laravel 5.0 to 5.8.
 
 
 
@@ -373,9 +373,8 @@ Exakat provides compatibility reports with classes, interfaces and traits from L
 Laravel analysis
 __________________________________________________
 
-This extension includes 25 analyzers.
+This extension includes 27 analyzers.
 
-*  (Laravel/LaravelNative)
 * Compatibility Laravel v5_0_0 (Laravel/Laravel_v5_0_0)
 * Compatibility Laravel v5_1_0 (Laravel/Laravel_v5_1_0)
 * Compatibility Laravel v5_2_0 (Laravel/Laravel_v5_2_0)
@@ -384,6 +383,7 @@ This extension includes 25 analyzers.
 * Compatibility Laravel v5_5_0 (Laravel/Laravel_v5_5_0)
 * Compatibility Laravel v5_6_0 (Laravel/Laravel_v5_6_0)
 * Compatibility Laravel v5_7_0 (Laravel/Laravel_v5_7_0)
+* Could Autowire (Laravel/CouldAutoWire)
 * Laravel 5.0 Compatibility (Laravel/Laravel_5_0)
 * Laravel 5.1 Compatibility (Laravel/Laravel_5_1)
 * Laravel 5.2 Compatibility (Laravel/Laravel_5_2)
@@ -396,8 +396,11 @@ This extension includes 25 analyzers.
 * Laravel Constant Usage (Laravel/LaravelConstantUsage)
 * Laravel Environnement Calls (Laravel/LaravelEnv)
 * Laravel Function Usage (Laravel/LaravelFunctionsUsage)
+* Laravel Incoming Request Values (Laravel/LaravelIncoming)
 * Laravel Usage (Laravel/LaravelUsage)
 * Larvel debug usage (Laravel/LaravelDebug)
+* Larvel Native (Laravel/LaravelNative)
+* Missing Validation (Laravel/MissingValidate)
 * View Composer With Star (Laravel/ViewComposerStar)
 
 
@@ -410,7 +413,7 @@ This extension includes one ruleset : Laravel.
 Laravel reports
 __________________________________________________
 
-This extension includes no specific report. Use generic reports, like Text to access the results.
+This extension includes one report : Laravel.
 
 
 
@@ -444,10 +447,8 @@ This extension includes 6 analyzers.
 Pmb rulesets
 __________________________________________________
 
-This extension includes 2 rulesets.
+This extension includes one ruleset : Pmb.
 
-* Pmb
-* Review
 
 Pmb reports
 __________________________________________________

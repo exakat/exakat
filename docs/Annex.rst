@@ -89,6 +89,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Simplehtml
   * Owasp
   * Perfile
+  * BeautyCanon
   * Phpconfiguration
   * Phpcompilation
   * Favorites
@@ -1191,10 +1192,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.12.0
 
+  * Avoid Optional Properties (Classes/AvoidOptionalProperties)
   * Heredoc Delimiter (Structures/HeredocDelimiterFavorite ; Coding Conventions)
   * Multiple Functions Declarations (Functions/MultipleDeclarations ; Appinfo)
   * Non Breakable Space In Names (Structures/NonBreakableSpaceInNames ; Appinfo, Appcontent)
-  * ext/swoole (Extensions/Extswoole)
+  * ext/swoole (Extensions/Extswoole ; Appinfo)
 
 * 0.11.8
 
@@ -1464,6 +1466,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Assign Default To Properties (Classes/MakeDefault ; Analyze, ClearPHP, Simple, Level 2)
   * Autoloading (Php/AutoloadUsage ; Appinfo)
   * Avoid Parenthesis (Structures/PrintWithoutParenthesis ; Analyze, Simple)
+  * Avoid Substr() One (Structures/NoSubstrOne ; Analyze, Performances, CompatibilityPHP71, Simple, Suggestions, Level 2, Top10)
   * Avoid Those Hash Functions (Security/AvoidThoseCrypto ; Security)
   * Avoid array_unique() (Structures/NoArrayUnique ; Performances)
   * Avoid get_class() (Structures/UseInstanceof ; Analyze, Simple)
@@ -1729,7 +1732,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Real Comparison (Type/NoRealComparison ; Analyze, Simple, Level 2, Top10)
   * No Self Referencing Constant (Classes/NoSelfReferencingConstant ; Analyze, Simple, LintButWontExec, ClassReview)
   * No String With Append (Php/NoStringWithAppend ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * No Substr() One (Structures/NoSubstrOne ; Analyze, Performances, CompatibilityPHP71, Simple, Suggestions, Level 2, Top10)
   * No array_merge() In Loops (Performances/ArrayMergeInLoops ; Analyze, Performances, ClearPHP, Simple, Level 2, Top10)
   * Non Ascii Variables (Variables/VariableNonascii ; Analyze)
   * Non Static Methods Called In A Static (Classes/NonStaticMethodsCalledStatic ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, Simple)
@@ -2357,9 +2359,11 @@ List of external links mentionned in this documentation.
 * `assert <http://php.net/assert>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
+* `Autoloading Classes <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid Else, Return Early <http://blog.timoxley.com/post/47041269194/avoid-else-return-early>`_
 * `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_
 * `Avoid option arrays in constructors <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-option-arrays-in-constructors>`_
+* `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `basename <http://www.php.net/basename>`_
@@ -2404,7 +2408,7 @@ List of external links mentionned in this documentation.
 * `count <http://php.net/count>`_
 * `Courier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `Covariant Returns and Contravariant Parameters <https://wiki.php.net/rfc/covariant-returns-and-contravariant-parameters>`_
-* `crc32() <http://www.php.net/crc32>`_
+* `crc32() <https://www.php.net/crc32>`_
 * `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 * `crypt <http://www.php.net/crypt>`_
 * `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
@@ -2860,7 +2864,7 @@ List of external links mentionned in this documentation.
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
-* `unserialize() <http://www.php.net/unserialize>`_
+* `unserialize() <https://www.php.net/unserialize>`_
 * `unset <http://php.net/unset>`_
 * `UPGRADING 7.3 <https://github.com/php/php-src/blob/PHP-7.3/UPGRADING#L83-L95>`_
 * `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_

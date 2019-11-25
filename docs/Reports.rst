@@ -6,6 +6,7 @@ Reports
 There are several reports that may be extracted from Exakat : 
 
 * `Ambassador`_
+* `BeautyCanon`_
 * `Classes dependendies HTML`_
 * `Clustergrammer`_
 * `Code Flower`_
@@ -107,6 +108,56 @@ Ambassador includes the report from 3 other reports : PhpCompilation, PhpConfigu
 Ambassador is a HTML report format.
 
 Ambassador depends on the following 20 themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74, CompatibilityPHP80, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
+
+BeautyCanon
+___________
+
+The Beauty Canon report lists all rules that report no issues.
+
+The Beauty Canon report displays one result per line. This report lists all issues in the provided ruleset that are reporting no error.
+
+The title of the analysis is listed on the left, and the analysis short name is listed on the right, for further documentation.
+
+This analysis uses Analysis as default rule. It may otherwise parametered with the -T option.
+
+::
+    
+Compare Hash                                                           :ref:`compare-hash`                     
+Configure Extract                                                      :ref:`configure-extract`                
+Dynamic Library Loading                                                :ref:`dynamic-library-loading`                       
+Encoded Simple Letters                                                 :ref:`encoded-simple-letters`                  
+Indirect Injection                                                     :ref:`indirect-injection`               
+Integer Conversion                                                     :ref:`integer-conversion`               
+Minus One On Error                                                     :ref:`minus-one-on-error`                 
+Mkdir Default                                                          :ref:`mkdir-default`                    
+No ENT_IGNORE                                                          :ref:`no-ent\_ignore`                     
+No Hardcoded Hash                                                      :ref:`no-hardcoded-hash`               
+No Hardcoded Ip                                                        :ref:`no-hardcoded-ip`                 
+No Hardcoded Port                                                      :ref:`no-hardcoded-port`               
+   
+   
+
+
+
+::
+
+    Compare Hash                                                           Security/CompareHash                    
+    Configure Extract                                                      Security/ConfigureExtract               
+    Dynamic Library Loading                                                Security/DynamicDl                      
+    Encoded Simple Letters                                                 Security/EncodedLetters                 
+    Indirect Injection                                                     Security/IndirectInjection              
+    Integer Conversion                                                     Security/IntegerConversion              
+    Minus One On Error                                                     Security/MinusOneOnError                
+    Mkdir Default                                                          Security/MkdirDefault                   
+    No ENT_IGNORE                                                          Security/NoEntIgnore                    
+    No Hardcoded Hash                                                      Structures/NoHardcodedHash              
+    No Hardcoded Ip                                                        Structures/NoHardcodedIp                
+    No Hardcoded Port                                                      Structures/NoHardcodedPort              
+    
+
+BeautyCanon is a Text report format.
+
+BeautyCanon accepts any arbitrary list of results.
 
 Classes dependendies HTML
 _________________________

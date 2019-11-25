@@ -2487,6 +2487,39 @@ The ConstructHiddenValues function builds the ConstructHiddenSubValues function.
         return $Result;
     }
 
+
+--------
+
+
+.. _dolphin-functions-deepdefinitions:
+
+Dolphin
+^^^^^^^
+
+:ref:`deep-definitions`, in source.php:247. 
+
+person_data() is a short-cut, only used with a PDF display environnement. 
+
+.. code-block:: php
+
+    function source_display($sourcenum) {
+    	global $dbh, $db_functions, $tree_id, $dataDb, $user, $pdf, $screen_mode, $language;
+    
+    /// More code 
+    
+    		$person_cls = New person_cls;
+    
+    		// *** Find person data if source is connected to a family item ***
+    		// *** This seperate function speeds up the sources page ***
+    		function person_data($familyDb){
+    			global $dbh, $db_functions;
+    			if ($familyDb->fam_man)
+    				$personDb=$db_functions->get_person ($familyDb->fam_man);
+    			else
+    				$personDb=$db_functions->get_person ($familyDb->fam_woman);
+    			return $personDb;
+    		}
+
 Repeated print()
 ================
 
@@ -3046,6 +3079,38 @@ $ids[$index] is &$rrid.
                             break;
                         }
                     }
+
+Old Style __autoload()
+======================
+
+.. _piwigo-php-oldautoloadusage:
+
+Piwigo
+^^^^^^
+
+:ref:`old-style-\_\_autoload()`, in include/phpmailer/PHPMailerAutoload.php:45. 
+
+This code handles situations for PHP after 5.1.0 and older. Rare are the applications that are still using those versions in 2019.
+
+.. code-block:: php
+
+    if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
+        //SPL autoloading was introduced in PHP 5.1.2
+        if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
+            spl_autoload_register('PHPMailerAutoload', true, true);
+        } else {
+            spl_autoload_register('PHPMailerAutoload');
+        }
+    } else {
+        /**
+         * Fall back to traditional autoload for old PHP versions
+         * @param string $classname The name of the class to load
+         */
+        function __autoload($classname)
+        {
+            PHPMailerAutoload($classname);
+        }
+    }
 
 Empty Instructions
 ==================
@@ -3880,6 +3945,52 @@ Although the file is readable, file() may return false in case of failure. On th
                 if ( is_readable( $file ) ) {
                     $ret .= implode( '<br>', file( $file ) ) . \n;
                 }
+
+Avoid Substr() One
+==================
+
+.. _churchcrm-structures-nosubstrone:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`avoid-substr()-one`, in src/Login.php:141. 
+
+No need to call substr() to get only one char. 
+
+.. code-block:: php
+
+    if (substr($LocationFromGet, 0, 1) == "/") {
+        $LocationFromGet = substr($LocationFromGet, 1);
+    }
+
+
+--------
+
+
+.. _livezilla-structures-nosubstrone:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`avoid-substr()-one`, in livezilla/_lib/objects.global.inc.php:2243. 
+
+No need to call substr() to get only one char. 
+
+.. code-block:: php
+
+    $_hex = str_replace("#", "", $_hex);
+                if(strlen($_hex) == 3) {
+                $r = hexdec(substr($_hex,0,1).substr($_hex,0,1));
+                $g = hexdec(substr($_hex,1,1).substr($_hex,1,1));
+                $b = hexdec(substr($_hex,2,1).substr($_hex,2,1));
+            } else {
+                $r = hexdec(substr($_hex,0,2));
+                $g = hexdec(substr($_hex,2,2));
+                $b = hexdec(substr($_hex,4,2));
+            }
+            $rgb = array($r, $g, $b);
+            return $rgb;
 
 Useless Brackets
 ================
@@ -6612,6 +6723,86 @@ Variable and index existence should always be tested with isset() : it is faster
 
     $_SESSION['ipamusername']
 
+Avoid Optional Properties
+=========================
+
+.. _churchcrm-classes-avoidoptionalproperties:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`avoid-optional-properties`, in src/ChurchCRM/BackupManager.php:401. 
+
+Backuptype is initialized with null, and yet, it isn't checked for any invalid valid values, in particular in switch() structures.
+
+.. code-block:: php
+
+    // BackupType is initialized with null
+      class JobBase
+      {
+          /**
+            *
+            * @var BackupType
+            */
+          protected $BackupType;
+    
+    // In the child class BackupJob, BackupType may be of any type      
+      class BackupJob extends JobBase
+      {
+          /**
+           *
+           * @param String $BaseName
+           * @param BackupType $BackupType
+           * @param Boolean $IncludeExtraneousFiles
+           */
+          public function __construct($BaseName, $BackupType, $IncludeExtraneousFiles, $EncryptBackup, $BackupPassword)
+          {
+              $this->BackupType = $BackupType;
+    
+    
+    // Later, Backtype is not checked with all values : 
+              try {
+                  $this->DecryptBackup();
+                  switch ($this->BackupType) {
+                  case BackupType::SQL:
+                    $this->RestoreSQLBackup($this->RestoreFile);
+                    break;
+                  case BackupType::GZSQL:
+                    $this->RestoreGZSQL();
+                    break;
+                  case BackupType::FullBackup:
+                    $this->RestoreFullBackup();
+                    break;
+    // Note  : no default case here
+                }
+
+
+--------
+
+
+.. _dolibarr-classes-avoidoptionalproperties:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`avoid-optional-properties`, in htdocs/product/stock/class/productlot.class.php:149. 
+
+$this->fk_product is tested for value 11 times while being used in this class. All detected situations were checking the presence of the property before usage.
+
+.. code-block:: php
+
+    class Productlot extends CommonObject
+    {
+    // more code
+    	/**
+         * @var int ID
+         */
+    	public $fk_product;
+    
+    // Checked usage of fk_product
+    // line 341
+    		$sql .= ' fk_product = '.(isset($this->fk_product) ? $this->fk_product : "null").',';
+
 Mismatched Ternary Alternatives
 ===============================
 
@@ -7938,22 +8129,6 @@ The is_null() test detects a special situation, that requires usage of default v
                 $parent_id = $node->$idField;
                 $personal_folder = $node->personal_folder;
             }
-
-Mismatch Type And Default
-=========================
-
-.. _wordpress-functions-mismatchtypeanddefault:
-
-WordPress
-^^^^^^^^^
-
-:ref:`mismatch-type-and-default`, in wp-admin/includes/misc.php:74. 
-
-This code actually loads the file, join it, then split it again. file() would be sufficient. 
-
-.. code-block:: php
-
-    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
 Check JSON
 ==========
@@ -10123,6 +10298,34 @@ Even when the initialization is mixed with other operations, it is a good idea t
     						}
     					}
     				}
+
+preg_match_all() Flag
+=====================
+
+.. _fuelcms-php-pregmatchallflag:
+
+FuelCMS
+^^^^^^^
+
+:ref:`preg\_match\_all()-flag`, in fuel/modules/fuel/helpers/MY_array_helper.php:205. 
+
+Using PREG_SET_ORDER will remove the usage of the ``$key``variable.
+
+.. code-block:: php
+
+    function parse_string_to_array($str)
+    	{
+    		preg_match_all('#(\w+)=([\'"])(.*)\2#U', $str, $matches);
+    		$params = array();
+    		foreach($matches[1] as $key => $val)
+    		{
+    			if (!empty($matches[3]))
+    			{
+    				$params[$val] = $matches[3][$key];
+    			}
+    		}
+    		return $params;
+    	}
 
 Use Count Recursive
 ===================
