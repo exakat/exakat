@@ -32,7 +32,7 @@ class FollowParAs extends DSL {
 
     public function run() : Command {
 
-        assert(func_num_args() === 1, 'Wrong number of arguments for ' . __CLASS__);
+        assert(func_num_args() === 1, 'Wrong number of arguments for ' . self::class);
         list($out) = func_get_args();
 
         if ($out === self::FOLLOW_ALL) {

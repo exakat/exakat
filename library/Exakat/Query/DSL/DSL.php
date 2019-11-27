@@ -106,7 +106,16 @@ abstract class DSL {
                                              'trailing',
                                              'variadic',
                                              );
-    
+
+    protected const INTEGER_PROPERTY = array('line', 
+                                             'rank', 
+                                             'propertyname', 
+                                             'boolean', 
+                                             'count',
+                                             'code',
+                                             'lccode',
+                                             );
+
     protected $dslfactory             = null;
     protected $availableAtoms         = array();
     protected $availableLinks         = array();

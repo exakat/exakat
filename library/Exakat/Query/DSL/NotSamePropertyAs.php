@@ -33,12 +33,6 @@ class NotSamePropertyAs extends DSL {
         assert($this->assertProperty($property));
         assert($this->assertVariable($name));
 
-        if ($caseSensitive === Analyzer::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
-
         switch ($property) {
             case 'label':
                 return new Command("filter{ it.get().label() != $name }");
@@ -52,7 +46,15 @@ class NotSamePropertyAs extends DSL {
             default :
                 if (in_array($property, self::BOOLEAN_PROPERTY, \STRICT_COMPARISON)) {
                     return new Command('filter{ if ( it.get().properties("' . $property . '").any()) { ' . $name . ' != it.get().value("' . $property . '")} else {' . $name . ' != false; }; }');
+                } elseif (in_array($property, self::INTEGER_PROPERTY, \STRICT_COMPARISON)) {
+                    return new Command("has(\"$property\").filter{ it.get().value(\"$property\") != $name}");
                 } else {
+                    if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
+                        $caseSensitive = '';
+                    } else {
+                        $caseSensitive = '.toLowerCase()';
+                    }
+
                     return new Command("has(\"$property\").filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
                 }
         }

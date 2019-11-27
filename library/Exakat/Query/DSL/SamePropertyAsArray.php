@@ -45,7 +45,7 @@ class SamePropertyAsArray extends DSL {
             } else {
                 return new Command('filter{ it.get().value("lccode") in ' . $name . '}');
             }
-        } elseif (in_array($property, array('line', 'rank', 'propertyname', 'boolean', 'count'))) {
+        } elseif (in_array($property, self::INTEGER_PROPERTY, \STRICT_COMPARISON)) {
             return new Command('filter{ it.get().value("' . $property . '") in ' . $name . '}');
         } else {
             $caseSensitive = $caseSensitive === Analyzer::CASE_SENSITIVE ? '' : '.toLowerCase()';
