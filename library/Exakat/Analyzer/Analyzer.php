@@ -889,32 +889,8 @@ GREMLIN;
         return $this;
     }
 
-    public function isNotInheritedMethod() {
-        $this->query->IsNotInheritedMethod();
-        
-        return $this;
-    }
-
-    public function isNotEmptyBody() {
-        $this->query->IsNotEmptyBody();
-        
-        return $this;
-    }
-    
     public function isNotExtendingComposer() {
         $this->query->IsNotExtendingComposer();
-        
-        return $this;
-    }
-
-    public function isArgument() {
-        $this->query->isArgument();
-        
-        return $this;
-    }
-
-    public function isNotArgument() {
-        $this->query->isNotArgument();
         
         return $this;
     }
@@ -949,12 +925,6 @@ GREMLIN;
         return $this;
     }
 
-    public function isThis() {
-        $this->query->isThis();
-
-        return $this;
-    }
-
     public function count() {
         $this->query->count();
 
@@ -963,12 +933,6 @@ GREMLIN;
 
     public function outWithRank($link = 'ARGUMENT', $rank = 0) {
         $this->query->outWithRank($link, $rank);
-
-        return $this;
-    }
-
-    public function outWithoutLastRank() {
-        $this->query->outWithoutLastRank();
 
         return $this;
     }
@@ -1022,12 +986,6 @@ GREMLIN;
 
         return $this;
     }
-    
-    public function codeIsPositiveInteger() {
-        $this->query->codeIsPositiveInteger();
-
-        return $this;
-    }
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->samePropertyAs($property, $name, $caseSensitive);
@@ -1044,18 +1002,6 @@ GREMLIN;
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->notSamePropertyAs($property, $name, $caseSensitive);
 
-        return $this;
-    }
-
-    public function followExpression() {
-        $this->query->followExpression();
-        
-        return $this;
-    }
-
-    public function followCalls() {
-        $this->query->FollowCalls();
-        
         return $this;
     }
 
@@ -1176,8 +1122,7 @@ GREMLIN;
         return $this;
     }
 
-    public function filter($filter, $args = array()) {
-        // use func_get_args here
+    public function filter($filter, array $args = array()) {
         if (is_string($filter)) {
             $filterClean = $this->cleanAnalyzerName($filter);
         } elseif ($filter instanceof self) {
