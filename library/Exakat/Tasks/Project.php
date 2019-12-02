@@ -51,11 +51,11 @@ class Project extends Tasks {
     protected $reports       = array();
     protected $reportConfigs = array();
 
-    public function __construct(Graph $gremlin, Config $config, bool $subTask = self::IS_NOT_SUBTASK) {
-        parent::__construct($gremlin, $config, $subTask);
+    public function __construct(bool $subTask = self::IS_NOT_SUBTASK) {
+        parent::__construct($subTask);
 
         if (empty($this->reports)) {
-            $this->reports = makeArray($config->project_reports);
+            $this->reports = makeArray($this->config->project_reports);
         }
     }
     
@@ -87,7 +87,7 @@ class Project extends Tasks {
         $baselinestash->copyPrevious($this->config->dump);
 
         display("Cleaning project\n");
-        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean = new Clean(Tasks::IS_SUBTASK);
         $clean->run();
         $this->datastore = Datastore::getDatastore($this->config);
         // Reset datastore for the others
@@ -188,7 +188,7 @@ class Project extends Tasks {
         display('Producing the following reports : ' . implode(', ', $namesToRun));
 
         display('Running files' . PHP_EOL);
-        $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze = new Files(Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
         $this->logTime('Files');
@@ -201,7 +201,7 @@ class Project extends Tasks {
         }
 
         display('Cleaning DB' . PHP_EOL);
-        $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze = new CleanDb(Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
         $this->logTime('CleanDb');
@@ -211,7 +211,7 @@ class Project extends Tasks {
 
         $this->checkTokenLimit();
 
-        $load = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $load = new Load(Tasks::IS_SUBTASK);
         try {
             $load->run();
         } catch (NoFileToProcess $e) {
@@ -231,7 +231,8 @@ class Project extends Tasks {
         display('Initial dump');
         $dumpConfig = $this->config->duplicate(array('collect'            => true,
                                                      'project_rulesets'   => array('First')));
-        $firstDump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
+        $firstDump = new Dump(Tasks::IS_SUBTASK);
+        $firstDump->setConfig($dumpConfig);
         $firstDump->run();
         unset($firstDump);
         $this->logTime('Initial dump');
@@ -252,14 +253,14 @@ class Project extends Tasks {
 
         $this->logTime('Analyze');
 
-        $dump = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $dump = new Dump(Tasks::IS_SUBTASK);
         foreach($this->config->rulesets as $name => $analyzers) {
             $dump->checkRulesets($name, $analyzers);
         }
 
         $this->logTime('Reports');
         try {
-            $report = new Report($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+            $report = new Report(Tasks::IS_SUBTASK);
 
             $report->run();
         } catch (\Throwable $e) {
@@ -371,7 +372,8 @@ class Project extends Tasks {
                                                                 'quiet'            => !$verbose,
                                                                 ));
 
-                $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
+                $analyze = new Analyze(Tasks::IS_SUBTASK);
+                $analyze->setConfig($analyzeConfig);
                 $analyze->run();
                 unset($analyze);
                 unset($analyzeConfig);
@@ -407,7 +409,8 @@ class Project extends Tasks {
                 // Skip Dump, as it is auto-saving itself.
                 if ($ruleset === 'Dump') { continue; }
 
-                $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
+                $dump = new Dump(Tasks::IS_SUBTASK);
+                $dump->setConfig($dumpConfig);
                 $dump->run();
                 $dump->finalMark($finalMark);
                 unset($dump);
@@ -416,6 +419,7 @@ class Project extends Tasks {
                 $this->logTime("Dumped : $ruleset");
                 
             } catch (\Exception $e) {
+                print $e->getMessage();
                 echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";
                 file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage());
             }

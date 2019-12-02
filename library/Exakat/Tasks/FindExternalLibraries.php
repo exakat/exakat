@@ -45,8 +45,8 @@ class FindExternalLibraries extends Tasks {
     private $classicTests      = array();
     private $classic           = array();
 
-    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
-        parent::__construct($gremlin, $config, $subTask);
+    public function __construct($subTask = self::IS_NOT_SUBTASK) {
+        parent::__construct($subTask);
 
         $json = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
         foreach((array) $json as $name => $o) {

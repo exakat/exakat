@@ -226,8 +226,8 @@ class Load extends Tasks {
                            'files'     => 0,
                            'tokens'    => 0);
 
-    public function __construct(Graph $gremlin, Config $config, $subtask = Tasks::IS_NOT_SUBTASK) {
-        parent::__construct($gremlin, $config, $subtask);
+    public function __construct($subtask = Tasks::IS_NOT_SUBTASK) {
+        parent::__construct($subtask);
 
         $this->atomGroup = new AtomGroup();
 
@@ -530,7 +530,7 @@ class Load extends Tasks {
 
         $this->datastore->addRow('hash', array('status' => 'Load'));
 
-        $loadFinal = new LoadFinal($this->gremlin, $this->config, $this->datastore);
+        $loadFinal = new LoadFinal($this->datastore);
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');
@@ -759,7 +759,7 @@ class Load extends Tasks {
     public function finishDiff() {
         $this->loader->finalize(array());
 
-        $loadFinal = new LoadFinal($this->gremlin, $this->config, $this->datastore);
+        $loadFinal = new LoadFinal($this->datastore);
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');

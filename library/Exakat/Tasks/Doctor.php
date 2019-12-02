@@ -39,9 +39,9 @@ class Doctor extends Tasks {
     
     private $reportList = array();
 
-    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
-        $this->config  = $config;
-        $this->gremlin = $gremlin;
+    public function __construct($subTask = self::IS_NOT_SUBTASK) {
+        $this->config  = exakat('config');
+        $this->gremlin = exakat('graphdb');
         // Ignoring everything else
     }
 

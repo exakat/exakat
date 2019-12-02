@@ -26,34 +26,33 @@ namespace Exakat\Data;
 use Exakat\Config;
 
 abstract class Data {
-    public static $config = null;
+    private $config = null;
     
     protected $name = '';
 
     private $sqlite = null;
     private $phar_tmp = null;
 
-    public function __construct($name) {
-        assert(self::$config !== null, "No config for data\n");
-
+    public function __construct(string $name) {
         $this->name = $name;
+        $this->$config = exakat('config');
 
-        $fullpath = self::$config->dir_root . "/data/$name.sqlite";
-        if (self::$config->is_phar) {
+        $fullpath = $this->config->dir_root . "/data/$name.sqlite";
+        if ($this->config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
             if (file_exists($fullpath)) {
                 copy($fullpath, $this->phar_tmp);
-            } elseif ((self::$config->ext !== null) && self::$config->ext->fileExists("data/$name.sqlite") ) {
-                self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
+            } elseif (($this->config->ext !== null) && $this->config->ext->fileExists("data/$name.sqlite") ) {
+                $this->config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
             } else {
                 assert(false, "No database for '$name.sqlite'.");
             }
             $docPath = $this->phar_tmp;
         } elseif (file_exists($fullpath)) {
             $docPath = $fullpath;
-        } elseif ((self::$config->ext !== null) && self::$config->ext->fileExists("data/$name.sqlite") ) {
+        } elseif (($this->config->ext !== null) && $this->config->ext->fileExists("data/$name.sqlite") ) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), $name) . '.sqlite';
-            self::$config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
+            $this->config->ext->copyFile("data/$name.sqlite", $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
             assert(false, "No database for '$name.sqlite'.");

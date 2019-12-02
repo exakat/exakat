@@ -106,7 +106,7 @@ class Update extends Tasks {
         display($vcs->getName() . " updated to $new");
 
         display('Running files');
-        $updateCache = new Files($this->gremlin, $updateConfig);
+        $updateCache = new Files();
         try {
             $updateCache->run();
         } catch (NoFileToProcess $e) {

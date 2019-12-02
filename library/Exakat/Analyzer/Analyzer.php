@@ -176,23 +176,22 @@ abstract class Analyzer {
     
     protected $linksDown = '';
 
-    public function __construct($gremlin = null, $config = null) {
-        $this->gremlin = $gremlin;
+    public function __construct() {
+        $this->gremlin = exakat('graphdb');
+        $this->config  = exakat('config');
         
         $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
-        assert($config !== null, 'Can\'t call Analyzer without a config');
-        $this->rulesets = new Rulesets("{$config->dir_root}/data/analyzers.sqlite",
-                                       $config->ext,
-                                       $config->dev,
-                                       $config->rulesets);
-        
-        $this->config = $config;
+        assert($this->config !== null, 'Can\'t call Analyzer without a config');
+        $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+                                       $this->config->ext,
+                                       $this->config->dev,
+                                       $this->config->rulesets);
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $description = new Docs($config->dir_root, $config->ext, $config->dev);
+            $description = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
             $parameters = $description->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");

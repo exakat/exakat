@@ -52,13 +52,17 @@ class Dump extends Tasks {
 
     const WAITING_LOOP = 1000;
 
-    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
-        parent::__construct($gremlin, $config, $subTask);
+    public function __construct($subTask = self::IS_NOT_SUBTASK) {
+        parent::__construct($subTask);
         
         $this->log = new Log('dump',
                              $this->config->project_dir);
 
         $this->linksDown = GraphElements::linksAsList();
+    }
+    
+    public function setConfig($config) {
+        $this->config = $config;
     }
 
     public function run() {

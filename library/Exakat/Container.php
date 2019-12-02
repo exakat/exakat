@@ -20,15 +20,35 @@
  *
 */
 
+namespace Exakat;
 
-namespace Exakat\Analyzer\Type;
+use Exakat\Config;
+use Exakat\Datastore;
+use Exakat\Data\Dictionary;
+use Exakat\Graph\Graph;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\Type;
+class Container {
+    private $verbose   = 0;
+    private $phar      = 0;
+    private $config    = null;
+    private $graphdb   = null;
+    private $datastore = null;
+    
+    public function init() {
+        $this->config = new Config($GLOBALS['argv']);
 
-class Integer extends Type {
-    public function __construct() {
-        $this->type = 'Integer';
+        $this->verbose = $this->config->verbose;
+        $this->phar    = $this->config->isPhar;
+
+        $this->graphdb    = Graph::getConnexion($this->config);
+        $this->datastore  = Datastore::getDatastore($this->config);
+        $this->dictionary = new Dictionary($this->datastore);
+    }
+    
+    public function __get(string $what) {
+        assert(property_exists($this, $what), "No such element in the container : '$what'\n");
+
+        return $this->$what;
     }
 }
 

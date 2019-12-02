@@ -34,7 +34,7 @@ class Dictionary {
     
     private static $singleton = null;
     
-    public function __construct($datastore) {
+    public function __construct(Datastore $datastore) {
         $this->dictionary = $datastore->getAllHash('dictionary');
         foreach(array_keys($this->dictionary) as $key) {
             $this->lcindex[mb_strtolower($key)] = 1;

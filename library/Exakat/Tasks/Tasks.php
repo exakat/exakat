@@ -58,9 +58,10 @@ abstract class Tasks {
     const LOG_NONE = null;
     const LOG_AUTONAMING = '';
 
-    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
-        $this->gremlin = $gremlin;
-        $this->config  = $config;
+    public function __construct(bool $subTask = self::IS_NOT_SUBTASK) {
+        $this->gremlin = exakat('graphdb');
+        assert($this->gremlin !== null);
+        $this->config  = exakat('config');
         $this->is_subtask = $subTask;
 
         assert(defined('static::CONCURENCE'), get_class($this) . " is missing CONCURENCE\n");
@@ -113,8 +114,6 @@ abstract class Tasks {
                                        $this->config->ext,
                                        $this->config->dev,
                                        $this->config->rulesets);
-
-        Data::$config = $config;
     }
 
     public function __destruct() {

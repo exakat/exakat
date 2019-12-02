@@ -46,8 +46,8 @@ class Analyze extends Tasks {
     private $Php = null;
     private $analyzed = array();
 
-    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
-        parent::__construct($gremlin, $config, $subtask);
+    public function setConfig($config) {
+        $this->config = $config;
     }
 
     public function run() {

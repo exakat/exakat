@@ -33,21 +33,24 @@ use Exakat\Datastore;
 use Exakat\Log;
 
 class LoadFinal {
-    private $PHPconstants = array();
-    private $PHPfunctions = array();
     private $dictCode     = null;
-    
     protected $gremlin   = null;
     protected $config    = null;
     protected $datastore = null;
+
+    private $PHPconstants = array();
+    private $PHPfunctions = array();
+    
     protected $log       = null;
 
-    public function __construct(Graph $gremlin, Config $config, Datastore $datastore) {
-        $this->gremlin   = $gremlin;
-        $this->config    = $config;
+    public function __construct(Datastore $datastore) {
+        $this->gremlin   = exakat('graphdb');
+        $this->config    = exakat('config');
         $this->datastore = $datastore;
+//        $this->datastore = exakat('datastore');
+//        $this->dictCode  = exakat('dictionary');
 
-        $a = get_class($this);
+        $a = self::class;
         $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
         $this->log = new Log($this->logname,
                              "{$this->config->projects_root}/projects/{$this->config->project}");
@@ -75,12 +78,12 @@ class LoadFinal {
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
 
-        $task = new SpotPHPNativeFunctions($this->gremlin, $this->config, $this->datastore);
+        $task = new SpotPHPNativeFunctions($this->datastore);
         $task->setPHPfunctions($this->PHPfunctions);
         $task->run();
         $this->log('SpotPHPNativeFunctions');
 
-        $task = new SpotExtensionNativeFunctions($this->gremlin, $this->config, $this->datastore);
+        $task = new SpotExtensionNativeFunctions($this->datastore);
         $task->run();
         $this->log('Spot Extensions Native Functions');
 
@@ -100,21 +103,21 @@ GREMLIN;
         // This is needed AFTER functionnames are found
         $this->spotFallbackConstants();
         $this->log('spotFallbackConstants');
-        $task = new FixFullnspathConstants($this->gremlin, $this->config, $this->datastore);
+        $task = new FixFullnspathConstants($this->datastore);
         $task->run();
         $this->log('FixFullnspathConstants');
 
-        $task = new SpotPHPNativeConstants($this->gremlin, $this->config, $this->datastore);
+        $task = new SpotPHPNativeConstants($this->datastore);
         $task->setPHPconstants($this->PHPconstants);
         $task->run();
         $this->log('spotPHPNativeConstants');
 
-        $task = new FinishIsModified($this->gremlin, $this->config, $this->datastore);
+        $task = new FinishIsModified($this->datastore);
         $task->setMethods(new Methods($this->config));
         $task->run();
         $this->log('FinishIsModified');
 
-        $task = new IsInIgnoredDir($this->gremlin, $this->config, $this->datastore);
+        $task = new IsInIgnoredDir($this->datastore);
         $task->run();
         $this->log('IsInIgnoredDir');
 

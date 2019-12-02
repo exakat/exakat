@@ -23,6 +23,7 @@
 declare(strict_types=1);
 
 use Exakat\Exceptions\NoSuchDir;
+use Exakat\Container;
 
 const INI_PROCESS_SECTIONS      = true;
 const INI_DONT_PROCESS_SECTIONS = false;
@@ -689,6 +690,18 @@ function listToArray(string $string, $separator = ',') {
     $list = array_unique($list);
     
     return $list;
+}
+
+function exakat(string $what) {
+    static $container;
+    
+    if ($container === null) {
+        $container = new Container();
+        
+        $container->init();
+    }
+
+    return $container->$what;
 }
 
 ?>

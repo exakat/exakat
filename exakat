@@ -19,7 +19,7 @@ try {
             } 
         }
     });
-    
+
     $isPhar = class_exists('\\Phar') && phar::running();
 
     if(empty($isPhar)){
@@ -29,25 +29,21 @@ try {
         require phar::running().'/library/helpers.php';
         require phar::running().'/library/Exakat/Autoload/Autoload.php';
     }
-    
-    register_shutdown_function('shutdown');
-    
+
     $autoload = new \Exakat\Autoload\Autoload();
     $autoload->registerAutoload();
-    
+
     if (file_exists(__DIR__.'/vendor/autoload.php')) {
         require __DIR__.'/vendor/autoload.php';
-    } 
+    }
 
-    $config = new \Exakat\Config($GLOBALS['argv']);
+    $config = exakat('config');
     
     global $VERBOSE;
     $VERBOSE = $config->verbose;
 
-    $graphDB = \Exakat\Graph\Graph::getConnexion($config);
-
-    $exakat = new \Exakat\Exakat($graphDB, $config);
-    $exakat->execute($config);
+    $exakat = new \Exakat\Exakat();
+    $exakat->execute();
 } catch (\Exception $e) {
     if($isPhar === false){
         print $e->getMessage();

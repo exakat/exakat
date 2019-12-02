@@ -29,8 +29,8 @@ class Stats {
     private $file_filter = '';
     private $gremlin     = null;
 
-    public function __construct(Graph $gremlin) {
-        $this->gremlin = $gremlin;
+    public function __construct() {
+        $this->gremlin = exakat('graphdb');
     }
 
     public function toArray() {
