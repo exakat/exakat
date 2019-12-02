@@ -877,7 +877,6 @@ SQL;
         
         $this->entries = array_flip($ini);
         foreach($this->entries as $f => &$link) {
-            print_r($link);
             $link = 'https://www.php.net/'.substr($f, 0, -2);
         }
         unset($link);

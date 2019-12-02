@@ -177,7 +177,7 @@ class AutoloadExt implements Autoloader {
                 continue;
             }
             
-            $ini = parse_ini_file($fullPath, INI_PROCESS_SECTIONS);
+            $ini = parse_ini_file($fullPath, \INI_PROCESS_SECTIONS);
             if (empty($ini)) {
                 continue;
             }

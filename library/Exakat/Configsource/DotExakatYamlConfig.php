@@ -212,7 +212,7 @@ class DotExakatYamlConfig extends Config {
         
         $iniFiles = glob("$dir_root/human/en/*/*.ini");
         foreach($iniFiles as $file) {
-            $ini = parse_ini_file($file, INI_PROCESS_SECTIONS);
+            $ini = parse_ini_file($file, \INI_PROCESS_SECTIONS);
             if (isset($ini['parameter1'])) {
                 $default[basename(dirname($file)).'/'.basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
             }

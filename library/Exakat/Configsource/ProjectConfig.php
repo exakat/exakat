@@ -88,7 +88,7 @@ class ProjectConfig extends Config {
             return self::NOT_LOADED;
         }
 
-        $ini = parse_ini_file($pathToIni, INI_PROCESS_SECTIONS);
+        $ini = parse_ini_file($pathToIni, \INI_PROCESS_SECTIONS);
         if (!is_array($ini)) {
             $error = error_get_last();
             print "Couldn't parse $pathToIni : $error[message]\nIgnoring file\n";
@@ -198,7 +198,7 @@ class ProjectConfig extends Config {
         $iniFiles = glob("$dir_root/human/en/*/*.ini");
         $default = array();
         foreach($iniFiles as $file) {
-            $ini = parse_ini_file($file, INI_PROCESS_SECTIONS);
+            $ini = parse_ini_file($file, \INI_PROCESS_SECTIONS);
             if (isset($ini['parameter1'])) {
                 $default[basename(dirname($file)).'/'.basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
             }

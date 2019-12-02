@@ -43,7 +43,7 @@ class RulesetConfig extends Config {
             return self::NOT_LOADED;
         }
 
-        $ini = parse_ini_file($this->remoteIniFile, true);
+        $ini = parse_ini_file($this->remoteIniFile, \INI_PROCESS_SECTIONS);
         if (empty($ini)) {
             return self::NOT_LOADED;
         }

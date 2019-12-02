@@ -45,11 +45,11 @@ class Docs {
         }
         
         if (file_exists("{$this->pathToIni}/human/en/$analyzer.ini")) {
-            $ini = parse_ini_file("{$this->pathToIni}/human/en/$analyzer.ini", INI_PROCESS_SECTIONS);
+            $ini = parse_ini_file("{$this->pathToIni}/human/en/$analyzer.ini", \INI_PROCESS_SECTIONS);
         } elseif (($this->dev !== null) && ($iniString = $this->dev->loadData("human/en/$analyzer.ini")) !== null) {
-            $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
+            $ini = parse_ini_string($iniString, \INI_PROCESS_SECTIONS);
         } elseif (($this->ext !== null) && ($iniString = $this->ext->loadData("human/en/$analyzer.ini")) !== null) {
-            $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
+            $ini = parse_ini_string($iniString, \INI_PROCESS_SECTIONS);
         } else {
             assert(file_exists("{$this->pathToIni}/human/en/$analyzer.ini"), "No documentation for '$analyzer'.");
         }

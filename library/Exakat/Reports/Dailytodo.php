@@ -144,7 +144,7 @@ HTML;
     }
     
     private function getThanks() {
-        $thanks = parse_ini_file("{$this->config->dir_root}/data/thankyou.ini", INI_PROCESS_SECTIONS);
+        $thanks = parse_ini_file("{$this->config->dir_root}/data/thankyou.ini", \INI_PROCESS_SECTIONS);
         $thanks = $thanks['thanks'];
         shuffle($thanks);
         

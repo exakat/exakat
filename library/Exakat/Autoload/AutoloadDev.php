@@ -78,7 +78,7 @@ class AutoloadDev implements Autoloader {
             return array();
         }
         
-        $ini = parse_ini_file($fullPath, INI_PROCESS_SECTIONS);
+        $ini = parse_ini_file($fullPath, \INI_PROCESS_SECTIONS);
         if (empty($ini)) {
             return array();
         }
