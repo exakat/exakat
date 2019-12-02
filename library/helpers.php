@@ -548,18 +548,6 @@ function rstlist2html(string $raw) : string {
     return implode(PHP_EOL, $html);
 }
 
-function shutdown() : void {
-    $error = error_get_last();
-
-    if (empty($error)) {
-        return;
-    }
-
-    if (strpos($error['message'], 'Allowed memory') > 1 ) {
-        print "Not enough memory for running exakat. Set memory_limit to a higher value, or -1. \n";
-    }
-}
-
 function str2array(string $string, string $delimiter = ',') : array {
     $array = explode($delimiter, $string);
     

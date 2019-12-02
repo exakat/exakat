@@ -618,13 +618,13 @@ SQL;
             if (isset($unique[$row['name'] . $row['type']])) {
                 continue;
             }
-            $name = str_replace(array('&', '...'), '', $row['name']);
+            $name = str_replace(array('&', '...', '@'), '', $row['name']);
             $unique[$name . $row['type']] = 1;
             $type = $types[$row['type']];
             $query[] = "(null, '" . mb_strtolower($this->sqlite->escapeString($name)) . "', '" . $type . "')";
             ++$total;
         }
-        
+
         if (!empty($query)) {
             $query = 'INSERT INTO variables ("id", "variable", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);

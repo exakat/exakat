@@ -24,7 +24,9 @@ namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Rulesets;
+use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Graph\Graph;
 use Exakat\Exakat;
 use Exakat\Exceptions\MissingGremlin;
 use Exakat\Exceptions\InvalidProjectName;
@@ -49,7 +51,7 @@ class Project extends Tasks {
     protected $reports       = array();
     protected $reportConfigs = array();
 
-    public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
+    public function __construct(Graph $gremlin, Config $config, bool $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
 
         if (empty($this->reports)) {
@@ -57,7 +59,7 @@ class Project extends Tasks {
         }
     }
     
-    public function run() {
+    public function run() : void {
         if ($this->config->project === null) {
             throw new ProjectNeeded();
         }
@@ -90,6 +92,7 @@ class Project extends Tasks {
         $this->datastore = Datastore::getDatastore($this->config);
         // Reset datastore for the others
 
+/*
         display('Search for external libraries' . PHP_EOL);
         $pathCache = "{$this->config->project_dir}/config.cache";
         if (file_exists($pathCache)) {
@@ -105,6 +108,7 @@ class Project extends Tasks {
         $this->addSnitch(array('step'    => 'External lib',
                                'project' => $this->config->project));
         unset($analyze);
+*/
 
         $this->logTime('Start');
         $this->addSnitch(array('step'    => 'Start',
@@ -270,7 +274,7 @@ class Project extends Tasks {
         display('End' . PHP_EOL);
     }
 
-    private function logTime($step) {
+    private function logTime(string $step) : void {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
@@ -303,7 +307,7 @@ class Project extends Tasks {
             $analyze->run();
             unset($analyze);
             unset($analyzeConfig);
-            $this->logTime('Analyze : ' . (is_array($analyzers) ? implode(', ', $analyzers) : $analyzers));
+            $this->logTime('Analyze : ' . makeList($analyzers, ''));
 
             $dumpConfig = $this->config->duplicate(array('update'    => true,
                                                          'program'   => $analyzers,
@@ -419,7 +423,7 @@ class Project extends Tasks {
         $VERBOSE = $oldVerbose;
     }
     
-    private function generateName() {
+    private function generateName() : string {
         $ini = parse_ini_file("{$this->config->dir_root}/data/audit_names.ini");
         
         $names = $ini['names'];

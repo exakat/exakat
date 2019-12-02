@@ -23,6 +23,8 @@
 
 namespace Exakat\Reports\Helpers;
 
+use \Sqlite3;
+
 class PhpCodeTree {
     private $sqlite = null;
     
@@ -40,7 +42,7 @@ class PhpCodeTree {
                              'reduced' => '',
                             );
     
-    public function __construct($sqlite) {
+    public function __construct(Sqlite3 $sqlite) {
         $this->sqlite = $sqlite;
     }
     
@@ -179,7 +181,7 @@ SQL
         }
     }
 
-    public function map($what, $closure) {
+    public function map(string $what, Callable $closure) {
         if (!property_exists($this, $what)) {
             return;
         }
@@ -189,7 +191,7 @@ SQL
         }
     }
 
-    public function reduce($what, $closure) {
+    public function reduce(string $what, Callable $closure) {
         if (!property_exists($this, $what)) {
             return;
         }
@@ -199,7 +201,7 @@ SQL
         }
     }
 
-    public function get($what) {
+    public function get(string $what) {
         if (!property_exists($this, $what)) {
             return;
         }
