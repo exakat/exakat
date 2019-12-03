@@ -63,7 +63,7 @@ SQL
                             );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = $this->getDocs($row['name']);
+                $ini = $this->docs->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average

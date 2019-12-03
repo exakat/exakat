@@ -147,9 +147,9 @@ class Manual extends Reports {
         }
         $info = array_merge($info, $this->getVCSInfo());
 
-        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
-        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
+        $info[] = array('Number of PHP files', $this->dump->getHash('files'));
+        $info[] = array('Number of lines of code', $this->dump->getHash('loc'));
+        $info[] = array('Number of lines of code with comments', $this->dump->getHash('locTotal'));
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
@@ -494,53 +494,53 @@ SQL
         $vcsClass = Vcs::getVCS($this->config);
         switch($vcsClass) {
             case 'Git':
-                $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Git URL', $this->dump->gethash('vcs_url'));
 
-                $res = $this->datastore->gethash('vcs_branch');
+                $res = $this->dump->gethash('vcs_branch');
                 if (!empty($res)) {
                     $info[] = array('Git branch', trim($res));
                 }
 
-                $res = $this->datastore->gethash('vcs_revision');
+                $res = $this->dump->gethash('vcs_revision');
                 if (!empty($res)) {
                     $info[] = array('Git commit', trim($res));
                 }
                 break 1;
 
             case 'Svn':
-                $info[] = array('SVN URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('SVN URL', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Bazaar':
-                $info[] = array('Bazaar URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Bazaar URL', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Composer':
-                $info[] = array('Package', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Package', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Mercurial':
-                $info[] = array('Hg URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Hg URL', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Copy':
-                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Original path', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Symlink':
-                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Original path', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Tarbz':
-                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Source URL', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Cvs':
-                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Source URL', $this->dump->gethash('vcs_url'));
                 break 1;
 
             case 'Targz':
-                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Source URL', $this->dump->gethash('vcs_url'));
                 break 1;
             
             default :

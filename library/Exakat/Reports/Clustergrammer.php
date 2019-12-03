@@ -43,7 +43,7 @@ class Clustergrammer extends Reports {
         $titles = array();
         foreach(array_keys($skeleton) as $analyzer) {
             if ($analyzer == 'total') { continue; }
-            $ini = $this->getDocs($analyzer);
+            $ini = $this->docs->getDocs($analyzer);
             $titles[$analyzer] = '"' . $ini['name'] . '"';
         }
 

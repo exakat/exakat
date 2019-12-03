@@ -70,7 +70,7 @@ class Scrutinizer extends Reports {
         $titleCache = array();
         foreach($resultsAnalyzers->toArray() as $row) {
             if (!isset($titleCache[$row['analyzer']])) {
-                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
+                $titleCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'name');
             }
 
             if (!isset($results[$row['file']])) {

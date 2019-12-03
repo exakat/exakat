@@ -32,7 +32,6 @@ use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\UnknownDsl;
 use Exakat\Graph\Helpers\GraphResults;
-use Exakat\Reports\Helpers\Docs;
 use Exakat\Query\Query;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Query\DSL\DSL;
@@ -177,8 +176,10 @@ abstract class Analyzer {
     protected $linksDown = '';
 
     public function __construct() {
-        $this->gremlin = exakat('graphdb');
-        $this->config  = exakat('config');
+        $this->gremlin  = exakat('graphdb');
+        $this->config   = exakat('config');
+        $this->dictCode = exakat('dictionary');
+        $this->docs     = exakat('docs');
         
         $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
@@ -191,8 +192,7 @@ abstract class Analyzer {
                                        $this->config->rulesets);
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $description = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
-            $parameters = $description->getDocs($this->shortAnalyzer)['parameter'];
+            $parameters = $this->docs->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
  
@@ -211,8 +211,6 @@ abstract class Analyzer {
         $this->datastore = Datastore::getDatastore($this->config);
         assert($this->datastore !== null, "Datastore is empty!!\n");
 
-        $this->dictCode = Dictionary::factory($this->datastore);
-        
         $this->linksDown = GraphElements::linksAsList();
 
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {

@@ -137,7 +137,7 @@ class Weekly extends Ambassador {
 
         $all = array_merge(...array_column($this->weeks, 'analysis'));
         foreach($all as $analyzer) {
-            $severity = $this->getDocs($analyzer, 'severity');
+            $severity = $this->docs->getDocs($analyzer, 'severity');
             $this->grading[$analyzer] = $levels[$severity];
         }
 

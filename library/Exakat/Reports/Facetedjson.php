@@ -44,12 +44,12 @@ SQL;
 
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $ini = $this->getDocs($row['analyzer']);
+            $ini = $this->docs->getDocs($row['analyzer']);
             $row['error'] = $ini['name'];
 
             $ruleset = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
-            $row['severity'] = $this->getDocs($row['analyzer'], 'severity');
-            $row['impact']   = $this->getDocs($row['analyzer'], 'timetofix');
+            $row['severity'] = $this->docs->getDocs($row['analyzer'], 'severity');
+            $row['impact']   = $this->docs->getDocs($row['analyzer'], 'timetofix');
             $row['recipes']  = $ruleset->getRulesets();
 
             $items[] = $row;

@@ -128,7 +128,7 @@ SQL;
         foreach($counts as $name => $count) {
             ++$i;
             $color = $colors[round(log($count) / log(5), 0)];
-            $table[] = "<tr><td>$name</td><td><a href=\"issues.html#analyzer=" . $this->toId($row['analyzer']) . '" title="' . $row['label'] . '">' . $row['label'] . "</a></td><td bgcolor=\"$color\">$count</td></tr>\n";
+            $table[] = "<tr><td>$name</td><td><a href=\"issues.html#analyzer=" . $this->toId($name) . '" title="' . $row['label'] . '">' . $row['label'] . "</a></td><td bgcolor=\"$color\">$count</td></tr>\n";
         }
 
         $top10 = '<table class="table">' . implode(PHP_EOL, $table) . '</table>';

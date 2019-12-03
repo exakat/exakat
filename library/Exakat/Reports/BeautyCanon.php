@@ -35,7 +35,7 @@ class BeautyCanon extends Reports {
 
         $results = array();
         while( $row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $results []= sprintf('%- 70s %- 40s', $this->getDocs($row['analyzer'], 'name'), $row['analyzer']);
+            $results []= sprintf('%- 70s %- 40s', $this->docs->getDocs($row['analyzer'], 'name'), $row['analyzer']);
         }
 
         sort($results);

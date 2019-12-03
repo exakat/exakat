@@ -50,7 +50,7 @@ class Marmelab extends Reports {
             if (!isset($analyzers[$row['analyzer']])) {
                 $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
 
-                $description = $this->getDocs($row['analyzer']);
+                $description = $this->docs->getDocs($row['analyzer']);
                 $a = array('id'          => $row['analyzer'],
                            'title'       => $description['name'],
                            'description' => $description['description'],

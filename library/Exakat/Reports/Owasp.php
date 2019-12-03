@@ -196,7 +196,7 @@ SQL
 );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = $this->getDocs($row['name']);
+                $ini = $this->docs->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -256,7 +256,7 @@ SQL
 );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = $this->getDocs($row['name']);
+                $ini = $this->docs->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -300,14 +300,14 @@ SQL
         $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         $info = array(
-            'Number of PHP files'                   => $this->datastore->getHash('files'),
-            'Number of lines of code'               => $this->datastore->getHash('loc'),
-            'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
+            'Number of PHP files'                   => $this->dump->getHash('files'),
+            'Number of lines of code'               => $this->dump->getHash('loc'),
+            'Number of lines of code with comments' => $this->dump->getHash('locTotal'),
             'PHP used' => $php->getConfiguration('phpversion') //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier
-        $totalFile = $this->datastore->getHash('files');
+        $totalFile = $this->dump->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFileAnalysed - $totalFile;
         if ($totalFile === 0) {
@@ -485,7 +485,7 @@ SQL;
         $this->putBasedPage('analyzers', $finalHTML);
     }
 
-    protected function getAnalyzersResultsCounts() {
+    protected function getAnalyzersResultsCounts() : array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
@@ -499,7 +499,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $row['label'] = $this->getDocs($row['analyzer'], 'name');
+            $row['label'] = $this->docs->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
@@ -670,7 +670,7 @@ SQL;
         }
 
         foreach($list as $l) {
-            $ini = $this->getDocs($l);
+            $ini = $this->docs->getDocs($l);
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {
@@ -693,7 +693,7 @@ HTML;
         $this->putBasedPage('compatibility_php' . $version, $html);
     }
 
-    protected function Compatibility($count, $analyzer = '') {
+    protected function compatibility($count, $analyzer = '') {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
@@ -705,9 +705,9 @@ HTML;
         }
     }
     
-    protected function makeAuditDate(&$finalHTML) {
+    protected function makeAuditDate(string &$finalHTML) : void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
-        $audit_name = $this->datastore->getHash('audit_name');
+        $audit_name = $this->dump->getHash('audit_name');
         if (!empty($audit_name)) {
             $audit_date .= ' - &quot;' . $audit_name . '&quot;';
         }

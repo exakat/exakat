@@ -66,12 +66,12 @@ class Simplehtml extends Reports {
         $date = date('r');
         $text = "<tr><th>Date:</th><td>$date</td></tr>\n";
 
-        $audit_name = $this->datastore->getHash('audit_name');
+        $audit_name = $this->dump->getHash('audit_name');
         if (!empty($audit_name)) {
             $text .= "<tr><th>Audit name :</th><td>$audit_name</td></tr>\n";
         }
 
-        $audit_name = $this->datastore->getHash('audit_name');
+        $audit_name = $this->dump->getHash('audit_name');
         if (!empty($audit_name)) {
             $text .= '<tr><th>Exakat version :</th><td>' . \Exakat\Exakat::VERSION . ' (' . \Exakat\Exakat::BUILD . ") </td></tr>\n";
         }
@@ -97,7 +97,7 @@ class Simplehtml extends Reports {
         $titleCache = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($titleCache[$row['analyzer']])) {
-                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
+                $titleCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'name');
             }
 
             $text .= <<<HTML
@@ -142,10 +142,10 @@ HTML;
 
             if (!isset($titleCache[$row['analyzer']])) {
                 $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
-                $titleCache[$row['analyzer']]     = $this->getDocs($row['analyzer'], 'name');
+                $titleCache[$row['analyzer']]     = $this->docs->getDocs($row['analyzer'], 'name');
 
-                $severityCache[$row['analyzer']]  = $this->getDocs($row['analyzer'], 'severity');
-                $timeToFixCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'timetofix');
+                $severityCache[$row['analyzer']]  = $this->docs->getDocs($row['analyzer'], 'severity');
+                $timeToFixCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'timetofix');
             }
 
             $message = array('source'      => $row['analyzer'],

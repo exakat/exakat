@@ -55,7 +55,7 @@ class Typehint4all extends Reports {
 
         foreach($analysisResults->toArray() as $row) {
             if (!isset($titleCache[$row['analyzer']])) {
-                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
+                $titleCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'name');
             }
 
             $row['fullcode'] = trim($row['fullcode'], '&');

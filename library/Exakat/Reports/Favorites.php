@@ -32,10 +32,12 @@ class Favorites extends Reports {
         
         $return = array();
         foreach($analyzers as $analyzer) {
-            $r = $this->datastore->getHashAnalyzer($analyzer);
+            $r = $this->dump->getHashAnalyzer($analyzer);
+
             if (empty($r)) {
                 continue;
             }
+
             $return[$analyzer] = $r;
             $this->count();
         }

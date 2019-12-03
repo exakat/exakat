@@ -69,7 +69,7 @@ class Simpletable extends Reports {
 HTML;
             }
             
-            $ini = $this->getDocs($section);
+            $ini = $this->docs->getDocs($section);
             $title = makeHtml($ini['name']);
 
             $rows = implode('', $rows);

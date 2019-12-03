@@ -25,15 +25,12 @@ namespace Exakat\Reports;
 use Exakat\Config;
 use Exakat\Analyzer\Rulesets;
 use Exakat\Analyzer\Analyzer;
-use Exakat\Datastore;
 use Exakat\Dump;
 use Exakat\Reports\Helpers\Docs;
 
 abstract class Reports {
     const STDOUT = 'stdout';
     const INLINE = 'inline';
-    
-    private static $docs = null;
 
     public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor', 'Top10',
                                           'Text', 'Xml', 'Uml', 'Yaml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile', 'BeautyCanon', 
@@ -56,18 +53,20 @@ abstract class Reports {
 
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
+    protected $docs       = null;
 
     protected $sqlite    = null;
-    protected $datastore = null;
+    protected $dump      = null;
     protected $rulesets  = null;
 
-    public function __construct(Config $config) {
-        $this->config = $config;
+    public function __construct() {
+        $this->config = exakat('config');
+        $this->docs   = exakat('docs');
 
         if (file_exists($this->config->dump)) {
             $this->sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
 
-            $this->datastore = new Dump($this->config);
+            $this->dump      = new Dump($this->config);
             $this->rulesets  = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                               $this->config->ext,
                                               $this->config->dev,
@@ -75,12 +74,8 @@ abstract class Reports {
 
             // Default analyzers
             $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->project_results),
-                                     array_keys($config->rulesets));
+                                     array_keys($this->config->rulesets));
             $this->themesList = makeList($analyzers);
-        }
-        
-        if (self::$docs === null) {
-            self::$docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
         }
     }
 
@@ -162,16 +157,6 @@ abstract class Reports {
         }
 
         return array_diff($required, $available);
-    }
-
-    public function getDocs($analyzer, $property = null) {
-        assert(self::$docs !== null, 'Docs needs to be initialized with an object.');
-
-        if ($property === null) {
-            return self::$docs->getDocs($analyzer);
-        } else {
-            return self::$docs->getDocs($analyzer)[$property];
-        }
     }
 }
 

@@ -39,9 +39,13 @@ class Docs {
         $this->dev = $dev;
     }
 
-    public function getDocs(string $analyzer) {
+    public function getDocs(string $analyzer, string $property = null) {
         if (isset(self::$docs[$analyzer])) {
-            return self::$docs[$analyzer];
+            if (isset(self::$docs[$analyzer][$property])) {
+                return self::$docs[$analyzer][$property];
+            } else {
+                return self::$docs[$analyzer];
+            }
         }
         
         if (file_exists("{$this->pathToIni}/human/en/$analyzer.ini")) {
@@ -79,7 +83,12 @@ class Docs {
         }
         
         self::$docs[$analyzer] = $ini;
-        return $ini;
+
+        if (isset(self::$docs[$analyzer][$property])) {
+            return self::$docs[$analyzer][$property];
+        } else {
+            return self::$docs[$analyzer];
+        }
     }
 }
 

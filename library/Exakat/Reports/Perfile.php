@@ -40,7 +40,7 @@ class Perfile extends Reports {
         foreach($analysisResults->toArray() as $row) {
             if ($row['line'] === -1) { continue; }
             if (!isset($titleCache[$row['analyzer']])) {
-                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
+                $titleCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'name');
             }
 
             $maxLine = max($maxLine, $row['line']);

@@ -33,7 +33,6 @@ use Exakat\Graph\Graph;
 use Exakat\GraphElements;
 use Exakat\Log;
 use Exakat\Query\Query;
-use Exakat\Reports\Helpers\Docs;
 
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
@@ -317,7 +316,7 @@ class Dump extends Tasks {
         }
 
         $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
+        $docs = exakat('docs');
         $severities = array();
         $readCounts = array_fill_keys($analyzers, 0);
 
@@ -434,7 +433,7 @@ SQL;
         $res = $analyzer->getDump();
 
         $saved = 0;
-        $docs = new Docs($this->config->dir_root, $this->config->ext, $this->config->dev);
+        $docs = exakat('docs');
         $severity = $docs->getDocs($class)['severity'];
 
         $query = array();

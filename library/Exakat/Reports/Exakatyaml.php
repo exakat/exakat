@@ -65,7 +65,7 @@ class Exakatyaml extends Reports {
         $list = explode(', ', $r[2]);
     
         foreach($list as &$l) {
-            $title = $this->getDocs($l, 'name');
+            $title = $this->docs->getDocs($l, 'name');
             $pad = str_repeat(' ', 50 - strlen($title));
             $l     = " {$ident}\"$title\":$pad$l";
         }

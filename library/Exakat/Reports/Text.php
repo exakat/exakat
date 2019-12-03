@@ -47,8 +47,8 @@ class Text extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
-                $severityCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'severity');
+                $titleCache[$row['analyzer']]    = $this->docs->getDocs($row['analyzer'], 'name');
+                $severityCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'severity');
             }
 
             $message = array('type'     => 'warning',

@@ -46,9 +46,9 @@ class Onepagejson extends Reports {
             } else {
                 $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
 
-                $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
-                $severityCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'severity');
-                $clearphp = $this->getDocs($row['analyzer'], 'clearphp');
+                $titleCache[$row['analyzer']]    = $this->docs->getDocs($row['analyzer'], 'name');
+                $severityCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'severity');
+                $clearphp = $this->docs->getDocs($row['analyzer'], 'clearphp');
             }
 
             $message = array('code'     => $row['fullcode'],
