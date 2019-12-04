@@ -231,7 +231,7 @@ class Load extends Tasks {
 
         $this->atomGroup = new AtomGroup();
 
-        $this->contexts    = new Context();
+        $this->contexts  = new Context();
 
         $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
         $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
@@ -496,7 +496,7 @@ class Load extends Tasks {
                 if (!class_exists($clientClass)) {
                     throw new NoSuchLoader($clientClass, $this->loaderList);
                 }
-                $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
+                $this->loader = new $clientClass($this->callsDatabase, $this->id0);
 
                 ++$this->stats['files'];
                 if ($this->processFile($filename, '')) {
@@ -530,7 +530,7 @@ class Load extends Tasks {
 
         $this->datastore->addRow('hash', array('status' => 'Load'));
 
-        $loadFinal = new LoadFinal($this->datastore);
+        $loadFinal = new LoadFinal();
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');
@@ -590,7 +590,7 @@ class Load extends Tasks {
         }
 
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
-        $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
+        $this->loader = new $clientClass($this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
 
         $nbTokens = 0;
@@ -628,7 +628,7 @@ class Load extends Tasks {
         $b = hrtime(\TIME_AS_NUMBER);
 
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
-        $this->loader = new Collector(null, $this->config, $this->callsDatabase, $this->id0);
+        $this->loader = new Collector($this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
 
         $file_extensions = $this->config->file_extensions;
@@ -676,7 +676,7 @@ class Load extends Tasks {
         }
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
-        $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
+        $this->loader = new $clientClass($this->callsDatabase, $this->id0);
 
         $nbTokens = 0;
         foreach($files as $file) {
@@ -690,7 +690,7 @@ class Load extends Tasks {
         }
         $this->loader->finalize($this->relicat);
 
-        $this->loader = new Collector($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
+        $this->loader = new Collector($this->callsDatabase, $this->id0);
         $stats = $this->stats;
         foreach(array_keys($ignoredFiles) as $file) {
             try {
@@ -753,13 +753,13 @@ class Load extends Tasks {
         $this->atoms          = array();
         $this->min_id         = \PHP_INT_MAX;
 
-        $this->loader = new $clientClass($this->gremlin, $this->config, $this->callsDatabase, $this->id0);
+        $this->loader = new $clientClass($this->callsDatabase, $this->id0);
     }
     
     public function finishDiff() {
         $this->loader->finalize(array());
 
-        $loadFinal = new LoadFinal($this->datastore);
+        $loadFinal = new LoadFinal();
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');

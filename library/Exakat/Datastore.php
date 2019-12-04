@@ -38,50 +38,51 @@ class Datastore {
     const TIMEOUT_WRITE = 5000;
     const TIMEOUT_READ = 6000;
 
-    private function __construct(Config $config, int $create = self::REUSE) {
+    public function __construct() {
+        $config = exakat('config');
+
         $this->sqlitePath = $config->datastore;
+    }
 
-        // if project dir isn't created, we are about to create it.
-        if (!file_exists(dirname($this->sqlitePath))) {
-            return;
+    function create() : void {
+        if (file_exists($this->sqlitePath)) {
+            unlink($this->sqlitePath);
         }
+        // force creation
+        $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+    
+        $this->cleanTable('hash');
+        $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
+                                    'exakat_build'         => Exakat::BUILD,
+                                    'datastore_creation'   => date('r', time()),
+                                    'project'              => $this->config->project,
+                                    'write_acces'          => 0,
+                                    ));
+    
+        $this->cleanTable('hashAnalyzer');
+        $this->cleanTable('analyzed');
+        $this->cleanTable('tokenCounts');
+        $this->cleanTable('functioncalls');
+        $this->cleanTable('externallibraries');
+        $this->cleanTable('ignoredFiles');
+        $this->cleanTable('files');
+        $this->cleanTable('shortopentag');
+        $this->cleanTable('composer');
+        $this->cleanTable('configFiles');
+        $this->cleanTable('dictionary');
+        $this->cleanTable('linediff');
+    
+        $this->cleanTable('ignoredCit');
+        $this->cleanTable('ignoredFunctions');
+        $this->cleanTable('ignoredConstants');
+    
+        $this->sqliteWrite->close();
+        $this->sqliteWrite = null;
 
-        if ($create === self::CREATE) {
-            if (file_exists($this->sqlitePath)) {
-                unlink($this->sqlitePath);
-            }
-            // force creation
-            $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+        $this->reuse();
+    }
 
-            $this->cleanTable('hash');
-            $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
-                                        'exakat_build'         => Exakat::BUILD,
-                                        'datastore_creation'   => date('r', time()),
-                                        'project'              => $config->project,
-                                        'write_acces'          => 0,
-                                        ));
-
-            $this->cleanTable('hashAnalyzer');
-            $this->cleanTable('analyzed');
-            $this->cleanTable('tokenCounts');
-            $this->cleanTable('functioncalls');
-            $this->cleanTable('externallibraries');
-            $this->cleanTable('ignoredFiles');
-            $this->cleanTable('files');
-            $this->cleanTable('shortopentag');
-            $this->cleanTable('composer');
-            $this->cleanTable('configFiles');
-            $this->cleanTable('dictionary');
-            $this->cleanTable('linediff');
-
-            $this->cleanTable('ignoredCit');
-            $this->cleanTable('ignoredFunctions');
-            $this->cleanTable('ignoredConstants');
-
-            $this->sqliteWrite->close();
-            $this->sqliteWrite = null;
-        }
-
+    function reuse() : void {
        $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
        $this->sqliteWrite->enableExceptions(true);
        $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
@@ -91,14 +92,6 @@ class Datastore {
        $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
        $this->sqliteRead->enableExceptions(true);
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
-    }
-    
-    public static function getDatastore(Config $config, int $create = self::REUSE) {
-        if (!isset(self::$singleton) || $create === self::CREATE) {
-            self::$singleton = new self($config, $create);
-        }
-
-        return self::$singleton;
     }
 
     public function addRow(string $table, $data) : bool {

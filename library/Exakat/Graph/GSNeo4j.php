@@ -41,8 +41,8 @@ class GSNeo4j extends Graph {
 
     private $gremlinVersion = '3.3';
     
-    public function __construct(Config $config) {
-        parent::__construct($config);
+    public function __construct() {
+        parent::__construct();
 
         if (!file_exists("{$this->config->gsneo4j_folder}/lib/")) {
             // No local production, just skip init.

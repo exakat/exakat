@@ -131,7 +131,6 @@ abstract class DSL {
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
 
     public function __construct($dslfactory,
-                                $dictCode,
                                 $availableAtoms,
                                 $availableLinks,
                                 $availableFunctioncalls,
@@ -141,7 +140,7 @@ abstract class DSL {
                                 $ignoredfunctions,
                                 $ignoredconstants) {
         $this->dslfactory             = $dslfactory;
-        $this->dictCode               = $dictCode;
+        $this->dictCode               = exakat('dictionary');
         $this->availableAtoms         = $availableAtoms;
         $this->availableLinks         = $availableLinks;
         $this->availableFunctioncalls = $availableFunctioncalls;

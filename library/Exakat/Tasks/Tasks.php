@@ -60,8 +60,9 @@ abstract class Tasks {
 
     public function __construct(bool $subTask = self::IS_NOT_SUBTASK) {
         $this->gremlin = exakat('graphdb');
-        assert($this->gremlin !== null);
         $this->config  = exakat('config');
+        $this->datastore  = exakat('datastore');
+        $this->datastore->reuse();
         $this->is_subtask = $subTask;
 
         assert(defined('static::CONCURENCE'), get_class($this) . " is missing CONCURENCE\n");
@@ -107,7 +108,7 @@ abstract class Tasks {
         }
 
         if ($this->config->project !== 'default') {
-            $this->datastore = Datastore::getDatastore($this->config, file_exists($this->config->datastore) ? Datastore::REUSE : Datastore::CREATE);
+            $this->datastore = exakat('datastore');
         }
 
         $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",

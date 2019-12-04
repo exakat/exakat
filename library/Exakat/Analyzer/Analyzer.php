@@ -180,6 +180,8 @@ abstract class Analyzer {
         $this->config   = exakat('config');
         $this->dictCode = exakat('dictionary');
         $this->docs     = exakat('docs');
+        $this->datastore = exakat('datastore');
+        $this->datastore->reuse();
         
         $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
@@ -207,9 +209,6 @@ abstract class Analyzer {
                 }
             }
         }
-
-        $this->datastore = Datastore::getDatastore($this->config);
-        assert($this->datastore !== null, "Datastore is empty!!\n");
 
         $this->linksDown = GraphElements::linksAsList();
 

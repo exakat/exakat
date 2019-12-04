@@ -43,16 +43,18 @@ class DSLFactory {
     protected $ignoredfunctions       = array();
     protected $ignoredconstants       = array();
     protected $dictCode               = null;
+    protected $datastore              = null;
     protected $linksDown              = '';
     protected $MAX_LOOPING            = Analyzer::MAX_LOOPING;
 
-    public function __construct(Datastore $datastore) {
-        $this->dictCode = Dictionary::factory($datastore);
+    public function __construct() {
+        $this->dictCode  = exakat('dictionary');
+        $this->datastore = exakat('datastore');
 
         $this->linksDown = GraphElements::linksAsList();
 
         if (empty($this->availableAtoms)) {
-            $data = $datastore->getCol('TokenCounts', 'token');
+            $data = $this->datastore->getCol('TokenCounts', 'token');
             
             $this->availableAtoms = array('Project',
                                           'File',
@@ -78,11 +80,11 @@ class DSLFactory {
                 }
             }
 
-            $this->availableFunctioncalls = $datastore->getCol('functioncalls', 'functioncall');
+            $this->availableFunctioncalls = $this->datastore->getCol('functioncalls', 'functioncall');
 
-            $this->ignoredcit       = $datastore->getCol('ignoredcit',       'fullnspath');
-            $this->ignoredfunctions = $datastore->getCol('ignoredfunctions', 'fullnspath');
-            $this->ignoredconstants = $datastore->getCol('ignoredconstants', 'fullnspath');
+            $this->ignoredcit       = $this->datastore->getCol('ignoredcit',       'fullnspath');
+            $this->ignoredfunctions = $this->datastore->getCol('ignoredfunctions', 'fullnspath');
+            $this->ignoredconstants = $this->datastore->getCol('ignoredconstants', 'fullnspath');
         }
     }
 
@@ -98,7 +100,6 @@ class DSLFactory {
         }
 
         return new $className($this,
-                              $this->dictCode,
                               $this->availableAtoms,
                               $this->availableLinks,
                               $this->availableFunctioncalls,

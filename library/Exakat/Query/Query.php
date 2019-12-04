@@ -51,13 +51,13 @@ class Query {
     private $sides            = array();
     private $stopped          = self::QUERY_RUNNING;
 
-    public function __construct($id, $project, $analyzer, $php, $datastore) {
+    public function __construct($id, $project, $analyzer, $php) {
         $this->id       = $id;
         $this->project  = $project;
         $this->analyzer = $analyzer;
         $this->php      = $php;
         
-        $this->queryFactory = new DSLFactory($datastore);
+        $this->queryFactory = new DSLFactory(exakat('datastore'));
     }
 
     public function __call($name, $args) {

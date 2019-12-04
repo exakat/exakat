@@ -33,8 +33,8 @@ class Collector extends Loader {
 
     private $datastore  = null;
 
-    public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) {
-        $this->datastore = Datastore::getDatastore($config);
+    public function __construct(\Sqlite3 $sqlite3, Atom $id0) {
+        $this->datastore = exakat('datastore');
     }
     
     public function finalize(array $relicat) {

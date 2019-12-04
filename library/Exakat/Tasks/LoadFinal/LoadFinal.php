@@ -34,21 +34,20 @@ use Exakat\Log;
 
 class LoadFinal {
     private $dictCode     = null;
-    protected $gremlin   = null;
-    protected $config    = null;
-    protected $datastore = null;
+    protected $gremlin    = null;
+    protected $config     = null;
+    protected $datastore  = null;
 
     private $PHPconstants = array();
     private $PHPfunctions = array();
     
     protected $log       = null;
 
-    public function __construct(Datastore $datastore) {
-        $this->gremlin   = exakat('graphdb');
-        $this->config    = exakat('config');
-        $this->datastore = $datastore;
-//        $this->datastore = exakat('datastore');
-//        $this->dictCode  = exakat('dictionary');
+    public function __construct() {
+        $this->gremlin    = exakat('graphdb');
+        $this->config     = exakat('config');
+        $this->datastore  = exakat('datastore');
+        $this->datastore->reuse();
 
         $a = self::class;
         $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
@@ -61,8 +60,7 @@ class LoadFinal {
     }
 
     public function run() {
-
-        $this->dictCode = Dictionary::factory($this->datastore);
+        $this->dictCode  = exakat('dictionary');
 
         $this->log('Start');
         display('Start load final');

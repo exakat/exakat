@@ -26,11 +26,14 @@ use Exakat\Config;
 
 abstract class Graph {
     protected $config = null;
-    
-    public const GRAPHDB = array('nogremlin', 'gsneo4j', 'tinkergraph');
-    
-    public function __construct(Config $config) {
-        $this->config = $config;
+
+    public const GRAPHDB = array('nogremlin', 
+                                 'gsneo4j', 
+                                 'tinkergraph',
+                                 );
+
+    public function __construct() {
+        $this->config = exakat('config');
     }
 
     abstract public function query($query, $params = array(), $load = array());
@@ -53,9 +56,10 @@ abstract class Graph {
     public function getId() { return 'null'; }
     public function fixId($id) { return $id; }
 
-    public static function getConnexion(Config $config) {
+    public static function getConnexion() {
+        $config = exakat('config');
         $graphDBClass = "\\Exakat\\Graph\\{$config->gremlin}";
-        return new $graphDBClass($config);
+        return new $graphDBClass();
     }
 }
 

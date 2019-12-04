@@ -89,7 +89,8 @@ class Project extends Tasks {
         display("Cleaning project\n");
         $clean = new Clean(Tasks::IS_SUBTASK);
         $clean->run();
-        $this->datastore = Datastore::getDatastore($this->config);
+        $this->datastore = exakat('datastore');
+//        die(ici);
         // Reset datastore for the others
 
 /*

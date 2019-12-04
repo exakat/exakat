@@ -60,19 +60,19 @@ class SplitGraphson extends Loader {
     private $datastore = null;
     private $sqlite3   = null;
    
-    public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) {
+    public function __construct(\Sqlite3 $sqlite3, Atom $id0) {
         self::$count = -1;
         
-        $this->config = $config;
-        
-        $this->graphdb        = $gremlin;
+        $this->config         = exakat('config');
+        $this->graphdb        = exakat('graphdb');
+
         $this->sqlite3        = $sqlite3;
         $this->path           = "{$this->config->tmp_dir}/graphdb.graphson";
         $this->pathLink       = "{$this->config->tmp_dir}/graphdb.link.graphson";
         $this->pathDef        = "{$this->config->tmp_dir}/graphdb.def";
         
         $this->dictCode  = new Collector();
-        $this->datastore = Datastore::getDatastore($this->config);
+        $this->datastore = exakat('datastore');
         
         $this->cleanCsv();
 
@@ -234,7 +234,7 @@ GREMLIN;
     }
 
     private function saveTokenCounts() {
-        $datastore = Datastore::getDatastore($this->config);
+        $datastore = exakat('datastore');
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
     }

@@ -103,8 +103,7 @@ class Clean extends Tasks {
         }
         display("Removed $total files\n");
 
-        unset($this->datastore);
-        $this->datastore = Datastore::getDatastore($this->config, Datastore::CREATE);
+        $this->datastore->create();
         display("Recreating database\n");
     }
 }

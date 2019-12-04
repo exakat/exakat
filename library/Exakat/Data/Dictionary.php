@@ -29,26 +29,27 @@ class Dictionary {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
     
+    private $datastore  = null;
     private $dictionary = array();
     private $lcindex    = array();
     
     private static $singleton = null;
     
     public function __construct(Datastore $datastore) {
-        $this->dictionary = $datastore->getAllHash('dictionary');
+        $this->datastore = exakat('datastore');
+    }
+
+    private function init() {
+        $this->dictionary = $this->datastore->getAllHash('dictionary');
         foreach(array_keys($this->dictionary) as $key) {
             $this->lcindex[mb_strtolower($key)] = 1;
         }
     }
-    
-    public static function factory($datastore) {
-        if (self::$singleton === null) {
-            self::$singleton = new self($datastore);
-        }
-        return self::$singleton;
-    }
 
     public function translate($code, $case = self::CASE_SENSITIVE) {
+        if (empty($this->dictionary)) {
+            $this->init();
+        }
         $return = array();
         
         $code = makeArray($code);

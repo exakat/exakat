@@ -42,8 +42,8 @@ class Container {
         $this->verbose = $this->config->verbose;
         $this->phar    = $this->config->isPhar;
 
-        $this->graphdb    = Graph::getConnexion($this->config);
-        $this->datastore  = Datastore::getDatastore($this->config);
+        $this->graphdb    = Graph::getConnexion();
+        $this->datastore  = new Datastore();
         $this->dictionary = new Dictionary($this->datastore);
 
         $this->docs = new Docs($this->config->dir_root, 

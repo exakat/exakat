@@ -32,7 +32,7 @@ class Docs {
     
     private static $docs = null;
     
-    public function __construct($pathToIni, AutoloadExt $ext = null, AutoloadDev $dev = null) {
+    public function __construct(string $pathToIni, AutoloadExt $ext = null, AutoloadDev $dev = null) {
         $this->pathToIni = $pathToIni;
         
         $this->ext = $ext;
