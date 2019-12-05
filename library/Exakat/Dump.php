@@ -24,19 +24,40 @@ namespace Exakat;
 
 use Exakat\Config;
 
-class Dump extends Datastore {
-
-    public function __construct(Config $config, $create = self::REUSE) {
-        $this->sqlitePath = $config->dump;
-
-        // if project dir isn't created, we are about to create it.
-        if (!file_exists(dirname($this->sqlitePath))) {
-            return;
-        }
-
-        $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+class Dump {
+    private $sqlite = null;
+    
+    public function __construct(\Sqlite3 $sqlite) {
+        $this->sqlite = $sqlite;
     }
 
+    public function getExtensionList() : array {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT analyzer, count(*) AS count FROM results 
+    WHERE analyzer LIKE "Extensions/Ext%"
+    GROUP BY analyzer
+    ORDER BY count(*) DESC
+SQL
+        );
+        
+        if ($res === false) {
+            print "Error";
+            return array(); 
+        }
+
+        return $this->fetchResults($res, \SQLITE3_ASSOC);
+    }
+    
+    private function fetchResults(\Sqlite3Result $res, $type = \SQLITE3_ASSOC) : array {
+        $return = array();
+        
+        while ($value = $res->fetchArray($type)) {
+            $return[] = $value;
+        }
+        
+        return $return;
+    }
+    
 }
 
 ?>

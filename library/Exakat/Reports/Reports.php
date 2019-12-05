@@ -55,18 +55,24 @@ abstract class Reports {
     protected $config     = null;
     protected $docs       = null;
 
+    // remove sqlite, move to dump 
     protected $sqlite    = null;
     protected $dump      = null;
+
+    protected $datastore = null;
     protected $rulesets  = null;
 
     public function __construct() {
-        $this->config = exakat('config');
-        $this->docs   = exakat('docs');
+        $this->config    = exakat('config');
+        $this->docs      = exakat('docs');
+        $this->datastore = exakat('datastore');
+        $this->datastore->reuse();
 
         if (file_exists($this->config->dump)) {
-            $this->sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
+            $this->sqlite    = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
 
-            $this->dump      = new Dump($this->config);
+            $this->dump      = new Dump($this->sqlite);
+
             $this->rulesets  = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                               $this->config->ext,
                                               $this->config->dev,

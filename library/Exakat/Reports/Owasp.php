@@ -300,14 +300,14 @@ SQL
         $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
 
         $info = array(
-            'Number of PHP files'                   => $this->dump->getHash('files'),
-            'Number of lines of code'               => $this->dump->getHash('loc'),
-            'Number of lines of code with comments' => $this->dump->getHash('locTotal'),
+            'Number of PHP files'                   => $this->datastore->getHash('files'),
+            'Number of lines of code'               => $this->datastore->getHash('loc'),
+            'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
             'PHP used' => $php->getConfiguration('phpversion') //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier
-        $totalFile = $this->dump->getHash('files');
+        $totalFile = $this->datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFileAnalysed - $totalFile;
         if ($totalFile === 0) {
@@ -707,7 +707,7 @@ HTML;
     
     protected function makeAuditDate(string &$finalHTML) : void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
-        $audit_name = $this->dump->getHash('audit_name');
+        $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
             $audit_date .= ' - &quot;' . $audit_name . '&quot;';
         }

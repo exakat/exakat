@@ -378,7 +378,7 @@ class Ambassador extends Reports {
         $html = array(' ');
 
         foreach($favoritesList as $analyzer => $list) {
-            $analyzerList = $this->dump->getHashAnalyzer($analyzer);
+            $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
 
             $table = '';
             $values = array();
@@ -1134,29 +1134,27 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateExtensionsBreakdown(Section $section) {
+    protected function generateExtensionsBreakdown(Section $section) : void {
         // List of extensions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT analyzer, count(*) AS count FROM results 
-WHERE analyzer LIKE "Extensions/Ext%"
-GROUP BY analyzer
-ORDER BY count(*) DESC
-SQL
-        );
-        $html = '';
+        $extensionList = $this->dump->getExtensionList();
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($extensionList as $value) {
             $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
             $xAxis[] = "'$shortName'";
             $data[$value['analyzer']] = $value['count'];
-            //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
-                      <div class="block-cell-name">' . $shortName . '</div>
-                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
-                  </div>';
+
+            $html []= <<<HTML
+<div class="clearfix">
+    <div class="block-cell-name">$shortName</div>
+    <div class="block-cell-issue text-center">{$value['count']}</div>
+</div>
+HTML;
         }
-        
+        $html = implode(PHP_EOL, $html);
+
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
@@ -1342,7 +1340,7 @@ SQL
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generateGraphList($filename, $title, $xAxis, $data, $html) {
+    protected function generateGraphList(string $filename,string $title, array $xAxis, array $data, string $html) : void {
         $finalHTML = $this->getBasedPage('extension_list');
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
@@ -1496,14 +1494,14 @@ JAVASCRIPT;
 
     public function getHashData() {
         $info = array(
-            'Number of PHP files'                   => $this->dump->getHash('files'),
-            'Number of lines of code'               => $this->dump->getHash('loc'),
-            'Number of lines of code with comments' => $this->dump->getHash('locTotal'),
-            'PHP used'                              => $this->dump->getHash('php_version'),
+            'Number of PHP files'                   => $this->datastore->getHash('files'),
+            'Number of lines of code'               => $this->datastore->getHash('loc'),
+            'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
+            'PHP used'                              => $this->datastore->getHash('php_version'),
         );
 
         // fichier
-        $totalFile = (int) $this->dump->getHash('files');
+        $totalFile = (int) $this->datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFile - $totalFileAnalysed;
         if ($totalFile === 0) {
@@ -2274,13 +2272,13 @@ SQL;
 
     protected function generateProcFiles(Section $section) {
         $files = '';
-        $fileList = $this->dump->getCol('files', 'file');
+        $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
             $files .= "<tr><td>$file</td></tr>\n";
         }
 
         $nonFiles = '';
-        $ignoredFiles = $this->dump->getRow('ignoredFiles');
+        $ignoredFiles = $this->datastore->getRow('ignoredFiles');
         foreach($ignoredFiles as $row) {
             if (empty($row['file'])) { continue; }
 
@@ -2314,7 +2312,7 @@ SQL;
         $externallibraries = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
 
         $libraries = array();
-        $externallibrariesList = $this->dump->getRow('externallibraries');
+        $externallibrariesList = $this->datastore->getRow('externallibraries');
 
         foreach($externallibrariesList as $row) {
             $name = strtolower($row['library']);
@@ -2692,12 +2690,12 @@ HTML;
         }
         $info = array_merge($info, $this->getVCSInfo());
 
-        $info[] = array('Number of PHP files', $this->dump->getHash('files'));
-        $info[] = array('Number of lines of code', $this->dump->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $this->dump->getHash('locTotal'));
+        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
+        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
+        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
 
-        $info[] = array('Analysis execution date', date('r', $this->dump->getHash('audit_end')));
-        $info[] = array('Analysis runtime', duration($this->dump->getHash('audit_end') - $this->dump->getHash('audit_start')));
+        $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
+        $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', time()));
 
         $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
@@ -2744,7 +2742,7 @@ HTML;
     private function generateExternalServices(Section $section) {
         $externalServices = array();
 
-        $res = $this->dump->getRow('configFiles');
+        $res = $this->datastore->getRow('configFiles');
         foreach($res as $row) {
             if (empty($row['homepage'])) {
                 $link = '';
@@ -4836,7 +4834,7 @@ JAVASCRIPT;
         $pathToSource = dirname($this->tmpName) . '/code';
         mkdir($path, 0755);
 
-        $filesList = $this->dump->getRow('files');
+        $filesList = $this->datastore->getRow('files');
         $files = '';
         $dirs = array('/' => 1);
         foreach($filesList as $row) {
@@ -5173,13 +5171,13 @@ HTML;
     
     protected function makeAuditDate(string &$finalHTML) : void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
-        $audit_name = $this->dump->getHash('audit_name');
+        $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
             $audit_date .= " - &quot;$audit_name&quot;";
         }
 
-        $exakat_version = $this->dump->getHash('exakat_version');
-        $exakat_build = $this->dump->getHash('exakat_build');
+        $exakat_version = $this->datastore->getHash('exakat_version');
+        $exakat_build = $this->datastore->getHash('exakat_build');
         $audit_date .= " - Exakat $exakat_version ($exakat_build)";
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
@@ -5192,49 +5190,49 @@ HTML;
         $vcsName = array_pop($vcsName);
         switch($vcsName) {
             case 'Git':
-                $info[] = array('Git URL', $this->dump->gethash('vcs_url'));
+                $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
 
-                $res = $this->dump->gethash('vcs_branch');
+                $res = $this->datastore->gethash('vcs_branch');
                 if (!empty($res)) {
                     $info[] = array('Git branch', trim($res));
                 }
 
-                $res = $this->dump->gethash('vcs_revision');
+                $res = $this->datastore->gethash('vcs_revision');
                 if (!empty($res)) {
                     $info[] = array('Git commit', trim($res));
                 }
                 break 1;
 
             case 'Svn':
-                $info[] = array('SVN URL', $this->dump->gethash('vcs_url'));
+                $info[] = array('SVN URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
             case 'Bazaar':
-                $info[] = array('Bazaar URL', $this->dump->gethash('vcs_url'));
+                $info[] = array('Bazaar URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
             case 'Composer':
-                $info[] = array('Package', $this->dump->gethash('vcs_url'));
+                $info[] = array('Package', $this->datastore->gethash('vcs_url'));
                 break 1;
 
             case 'Mercurial':
-                $info[] = array('Hg URL', $this->dump->gethash('vcs_url'));
+                $info[] = array('Hg URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
             case 'Copy':
-                $info[] = array('Original path', $this->dump->gethash('vcs_url'));
+                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
                 break 1;
 
             case 'Symlink':
-                $info[] = array('Original path', $this->dump->gethash('vcs_url'));
+                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
                 break 1;
 
             case 'Tarbz':
-                $info[] = array('Source URL', $this->dump->gethash('vcs_url'));
+                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
             case 'Targz':
-                $info[] = array('Source URL', $this->dump->gethash('vcs_url'));
+                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;
             
             default :
