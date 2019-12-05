@@ -32,32 +32,32 @@ class Install extends Tasks {
 
         $res = shell_exec('java -version 2>&1');
         if (strpos($res, 'java version') === false) {
-            $error = "Please install Java 1.8";
+            $error = 'Please install Java 1.8';
         } else {
             print "Java 1.8 : OK\n";
         }
 
         $res = shell_exec('zip -help 2>&1');
         if (strpos($res, 'Zip 3.0') === false) {
-            $error[] = "Please install Zip 3.0";
+            $error[] = 'Please install Zip 3.0';
         } else {
             print "Zip 3.0 : OK\n";
         }
         
         if (!empty($errors)) {
-            $errors[] = "Fix the above ".count($errors)." and try again\n";
-            print implode(PHP_EOL, $errors).PHP_EOL;
+            $errors[] = 'Fix the above ' . count($errors) . " and try again\n";
+            print implode(PHP_EOL, $errors) . PHP_EOL;
             die();
         }
 
         if (file_exists('./tinkergraph') && is_dir('./tinkergraph')) {
             print "Tinkergraph is already installed. Omitting\n";
         } else {
-            $tinkerpop = file_get_contents('https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-'.self::TINKERGRAPH_VERSION.'-bin.zip');
-            file_put_contents('./apache-tinkerpop-gremlin-server-'.self::TINKERGRAPH_VERSION.'-bin.zip', $tinkerpop);
+            $tinkerpop = file_get_contents('https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip');
+            file_put_contents('./apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip', $tinkerpop);
         
             // Install tinkergraph
-            shell_exec('unzip apache-tinkerpop-gremlin-server-'.self::TINKERGRAPH_VERSION.'-bin.zip; mv apache-tinkerpop-gremlin-server-'.self::TINKERGRAPH_VERSION.' tinkergraph; rm -rf apache-tinkerpop-gremlin-server-'.self::TINKERGRAPH_VERSION.'-bin.zip');
+            shell_exec('unzip apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip; mv apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . ' tinkergraph; rm -rf apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip');
             print "Tinkergraph installed\n";
         }
 
@@ -65,7 +65,7 @@ class Install extends Tasks {
             print "Neo4j for gremlin is already installed. Omitting\n";
         } else {
             // Install neo4j
-            shell_exec('cd tinkergraph; ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin '.self::TINKERGRAPH_VERSION);
+            shell_exec('cd tinkergraph; ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin ' . self::TINKERGRAPH_VERSION);
             print "Neo4j for Tinkergraph installed\n";
         }
 

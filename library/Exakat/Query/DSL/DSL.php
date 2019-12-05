@@ -107,10 +107,10 @@ abstract class DSL {
                                              'variadic',
                                              );
 
-    protected const INTEGER_PROPERTY = array('line', 
-                                             'rank', 
-                                             'propertyname', 
-                                             'boolean', 
+    protected const INTEGER_PROPERTY = array('line',
+                                             'rank',
+                                             'propertyname',
+                                             'boolean',
                                              'count',
                                              'code',
                                              'lccode',

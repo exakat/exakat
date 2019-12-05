@@ -33,7 +33,7 @@ abstract class Reports {
     const INLINE = 'inline';
 
     public static $FORMATS        = array('Ambassador', 'Ambassadornomenu', 'Drillinstructor', 'Top10',
-                                          'Text', 'Xml', 'Uml', 'Yaml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile', 'BeautyCanon', 
+                                          'Text', 'Xml', 'Uml', 'Yaml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile', 'BeautyCanon',
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual', 'Stubs',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml', 'Classdependencies', 'Stubs',
                                           'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 'Phpcsfixer',
@@ -55,7 +55,7 @@ abstract class Reports {
     protected $config     = null;
     protected $docs       = null;
 
-    // remove sqlite, move to dump 
+    // remove sqlite, move to dump
     protected $sqlite    = null;
     protected $dump      = null;
 

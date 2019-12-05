@@ -23,7 +23,7 @@
 
 namespace Exakat\Reports\Helpers;
 
-use \Sqlite3;
+use Sqlite3;
 
 class PhpCodeTree {
     private $sqlite = null;
