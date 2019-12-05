@@ -1840,17 +1840,17 @@ SQL
         return $return;
     }
 
-    private function getCountAnalyzersByFile($file) {
+    private function getCountAnalyzersByFile(string $file) : int {
         $query = <<<'SQL'
-                SELECT count(*)  AS number
-                FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
+SELECT count(*)  AS number
+    FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
 SQL;
         $stmt = $this->sqlite->prepare($query);
         $stmt->bindValue(':file', $file, \SQLITE3_TEXT);
         $result = $stmt->execute();
         $row = $result->fetchArray(\SQLITE3_ASSOC);
 
-        return $row['number'];
+        return (int) $row['number'];
     }
 
     protected function getFilesCount($themes = null, $limit = null) {

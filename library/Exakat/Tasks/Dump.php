@@ -1639,111 +1639,6 @@ GREMLIN;
         display("$total PHP {$type}s\n");
     }
 
-    private function collectLiterals() {
-        $types = array('Integer', 'Float', 'String', 'Heredoc', 'Arrayliteral');
-
-        foreach($types as $type) {
-            $this->sqlite->query('DROP TABLE IF EXISTS literal' . $type);
-            $this->sqlite->query('CREATE TABLE literal' . $type . ' (  
-                                                   id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                   name STRING,
-                                                   file STRING,
-                                                   line INTEGER
-                                                 )');
-
-            $filter = 'hasLabel("' . $type . '")';
-
-            $b = microtime(\TIME_AS_NUMBER);
-            $query = <<<GREMLIN
-
-g.V().$filter
-     .has('constant', true)
-     .sideEffect{ name = it.get().value("fullcode");
-                  line = it.get().value('line');
-                  file='None'; 
-      }
-     .until( hasLabel('File') )
-     .repeat( __.inE().hasLabel({$this->linksDown}).outV() 
-                .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
-     )
-     .map{ 
-        x = ['name': name,
-             'file': file,
-             'line': line
-             ];
-     }
-
-GREMLIN;
-            $res = $this->gremlin->query($query);
-    
-            $total = 0;
-            $query = array();
-            foreach($res as $value => $row) {
-                $query[] = "('" . $this->sqlite->escapeString($row['name']) . "','" . $this->sqlite->escapeString($row['file']) . "'," . $row['line'] . ')';
-                ++$total;
-                if ($total % 10000 === 0) {
-                    $query = "INSERT INTO literal$type (name, file, line) VALUES " . implode(', ', $query);
-                    $this->sqlite->query($query);
-                    $query = array();
-                }
-            }
-            
-            if (!empty($query)) {
-                $query = "INSERT INTO literal$type (name, file, line) VALUES " . implode(', ', $query);
-                $this->sqlite->query($query);
-            }
-            
-            $query = "INSERT INTO resultsCounts (analyzer, count) VALUES (\"$type\", $total)";
-            $this->sqlite->query($query);
-            display( "literal$type : $total\n");
-        }
-
-       $otherTypes = array('Null', 'Boolean', 'Closure');
-       foreach($otherTypes as $type) {
-            $query = <<<GREMLIN
-g.V().hasLabel("$type").count();
-GREMLIN;
-            $total = count($this->gremlin->query($query));
-
-            $query = "INSERT INTO resultsCounts (analyzer, count) VALUES (\"$type\", $total)";
-            $this->sqlite->query($query);
-            display( "Other $type : $total\n");
-       }
-
-       $this->sqlite->query('DROP TABLE IF EXISTS stringEncodings');
-       $this->sqlite->query('CREATE TABLE stringEncodings (  
-                                              id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                              encoding STRING,
-                                              block STRING,
-                                              CONSTRAINT "encoding" UNIQUE (encoding, block)
-                                            )');
-
-        $query = <<<'GREMLIN'
-g.V().hasLabel('String').map{ x = ['encoding':it.get().values('encoding')[0]];
-    if (it.get().values('block').size() != 0) {
-        x['block'] = it.get().values('block')[0];
-    }
-    x;
-}
-
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        
-        $query = array();
-        foreach($res as $row) {
-            if (isset($row['block'])){
-                $query[] = '(\'' . $row['encoding'] . '\', \'' . $row['block'] . '\')';
-            } else {
-                $query[] = '(\'' . $row['encoding'] . '\', \'\')';
-            }
-        }
-       
-       if (!empty($query)) {
-           $query = 'REPLACE INTO stringEncodings ("encoding", "block") VALUES ' . implode(', ', $query);
-           $this->sqlite->query($query);
-       }
-    }
-
     private function collectDefinitionsStats() {
         $insert = array();
         $types = array('Staticconstant'   => 'staticconstants',
@@ -2776,21 +2671,15 @@ GREMLIN
 
         display("Found $total class changes\n");
     }
-    
-    private function storeClassChanges($changeType, $query) {
-        $index = $this->gremlin->query($query);
-        
-        return $this->storeInDump($changeType, $index);
-    }
 
-    private function storeClassChangesNewQuery($changeType, $query) {
+    private function storeClassChangesNewQuery(string $changeType, Query $query) : int {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         
         return $this->storeInDump($changeType, $result);
     }
     
-    private function storeInDump($changeType, $index) {
+    private function storeInDump(string $changeType, $index) : int {
         $values = array();
         foreach($index->toArray() as $change) {
             $values[] = "('$changeType', 

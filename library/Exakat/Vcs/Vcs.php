@@ -119,19 +119,15 @@ abstract class Vcs {
         return $status;
     }
 
-    public function setBranch($branch = '') {
-        if (!empty($branch)) {
-            $this->branch = $branch;
-        }
+    public function setBranch(string $branch = '') : void {
+        $this->branch = $branch;
     }
 
-    public function setTag($tag = '') {
-        if (!empty($tag)) {
-            $this->tag = $tag;
-        }
+    public function setTag(string $tag = '') : void {
+        $this->tag = $tag;
     }
 
-    public function getFileModificationLoad() {
+    public function getFileModificationLoad() : array {
         return array();
     }
 }

@@ -116,11 +116,11 @@ class Git extends Vcs {
         return $resFinal;
     }
 
-    public function setBranch(string $branch = '') {
+    public function setBranch(string $branch = '') : void {
         $this->branch = $branch;
     }
 
-    public function setTag($tag = '') {
+    public function setTag(string $tag = '') : void {
         $this->tag = $tag;
     }
 
@@ -193,7 +193,7 @@ class Git extends Vcs {
         return $changes;
     }
     
-    public function getFileModificationLoad() {
+    public function getFileModificationLoad() : array {
         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} log --name-only --pretty=format:");
 
         $files = array();
@@ -211,8 +211,8 @@ class Git extends Vcs {
         
         return $files;
     }
-    
-    public function getDiffFile($next) {
+
+    public function getDiffFile(string $next) : string {
         // Added and removed ?
          $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=a --name-only $next -- . ");
 

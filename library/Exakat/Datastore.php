@@ -28,10 +28,9 @@ use Exakat\Exceptions\WrongNumberOfColsForAHash;
 use Exakat\Exceptions\NoStructureForTable;
 
 class Datastore {
-    static private $singleton = null;
-    protected $sqliteRead = null;
-    protected $sqliteWrite = null;
-    protected $sqlitePath = null;
+    private $sqliteRead  = null;
+    private $sqliteWrite = null;
+    private $config      = null;
 
     const CREATE = 1;
     const REUSE = 2;
@@ -39,17 +38,15 @@ class Datastore {
     const TIMEOUT_READ = 6000;
 
     public function __construct() {
-        $config = exakat('config');
-
-        $this->sqlitePath = $config->datastore;
+        $this->config = exakat('config');
     }
 
     function create() : void {
-        if (file_exists($this->sqlitePath)) {
-            unlink($this->sqlitePath);
+        if (file_exists($this->config->datastore)) {
+            unlink($this->config->datastore);
         }
         // force creation
-        $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+        $this->sqliteWrite = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
     
         $this->cleanTable('hash');
         $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
@@ -83,13 +80,13 @@ class Datastore {
     }
 
     function reuse() : void {
-       $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+       $this->sqliteWrite = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
        $this->sqliteWrite->enableExceptions(true);
        $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
        $this->sqliteWrite->query('UPDATE hash SET value = value + 1 WHERE key IN ("write_access")');
 
        // open the read connexion AFTER the write, to have the sqlite databse created
-       $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+       $this->sqliteRead = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
        $this->sqliteRead->enableExceptions(true);
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
     }
@@ -503,10 +500,10 @@ SQLITE;
         $this->sqliteRead->close();
         $this->sqliteWrite->close();
 
-        $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+        $this->sqliteWrite = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
         // open the read connexion AFTER the write, to have the sqlite databse created
-        $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+        $this->sqliteRead = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
         $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
     
