@@ -5,7 +5,7 @@ try {
         die("Exakat requires PHP 7.1 or more recent to run. \n");
     }
     
-    register_shutdown_function(function(){
+    register_shutdown_function(function () {
         $error = error_get_last();
         if(null !== $error)
         {
@@ -16,25 +16,25 @@ try {
                 }
             } elseif (substr($error['message'], 0, 22) === 'Maximum execution time') {
                 print $error['message'];
-            } 
+            }
         }
     });
 
     $isPhar = class_exists('\\Phar') && phar::running();
 
     if(empty($isPhar)){
-        require __DIR__.'/library/helpers.php';
-        require __DIR__.'/library/Exakat/Autoload/Autoload.php';
+        require __DIR__ . '/library/helpers.php';
+        require __DIR__ . '/library/Exakat/Autoload/Autoload.php';
     } else {
-        require phar::running().'/library/helpers.php';
-        require phar::running().'/library/Exakat/Autoload/Autoload.php';
+        require phar::running() . '/library/helpers.php';
+        require phar::running() . '/library/Exakat/Autoload/Autoload.php';
     }
 
     $autoload = new \Exakat\Autoload\Autoload();
     $autoload->registerAutoload();
 
-    if (file_exists(__DIR__.'/vendor/autoload.php')) {
-        require __DIR__.'/vendor/autoload.php';
+    if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+        require __DIR__ . '/vendor/autoload.php';
     }
 
     $config = exakat('config');
@@ -48,11 +48,11 @@ try {
     if($isPhar === false){
         print $e->getMessage();
     } else {
-        print "\nError : ".$e->getMessage()." 
-on file ".$e->getFile()."
-on line ".$e->getLine()."\n\n";
+        print "\nError : " . $e->getMessage() . ' 
+on file ' . $e->getFile() . '
+on line ' . $e->getLine() . "\n\n";
     
     }
-} 
+}
 
 ?>
