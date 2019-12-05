@@ -88,7 +88,7 @@ class GSNeo4j extends Graph {
         }
 
         $params['#jsr223.groovy.engine.keep.globals'] = 'phantom';
-        foreach($params as $name => $value) {
+        foreach ($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
         
@@ -102,9 +102,9 @@ class GSNeo4j extends Graph {
 
         if (empty($result)) {
             return new GraphResults();
-        } elseif($result[0] === null) {
+        } elseif ($result[0] === null) {
             return new GraphResults();
-        } elseif(is_array($result[0])) {
+        } elseif (is_array($result[0])) {
             if (isset($result[0]['processed'])) {
                 $result = array('processed' => empty($result[0]['processed']) ? 0 : array_shift($result[0]['processed']),
                                 'total'     => empty($result[0]['total'])     ? 0 : array_shift($result[0]['total']));
@@ -241,10 +241,10 @@ class GSNeo4j extends Graph {
             return $result;
         }
 
-        foreach($result as $r) {
+        foreach ($result as $r) {
             $row = array('id'    => $r['id'],
                          'label' => $r['label']);
-            foreach($r['properties'] as $property => $value) {
+            foreach ($r['properties'] as $property => $value) {
                 $row[$property] = $value[0]['value'];
             }
             

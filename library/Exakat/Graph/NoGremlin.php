@@ -30,11 +30,9 @@ class NoGremlin extends Graph {
     }
 
     public function start() {
-    
     }
 
     public function stop() {
-    
     }
 
     public function serverInfo() {

@@ -69,7 +69,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     }
 
     private function checkArray() {
-        if (empty($this->data)){
+        if (empty($this->data)) {
             return;
         }
         $data = array_values($this->data);
