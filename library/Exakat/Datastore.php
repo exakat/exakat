@@ -83,7 +83,11 @@ class Datastore {
        $this->sqliteWrite = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
        $this->sqliteWrite->enableExceptions(true);
        $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
-       $this->sqliteWrite->query('UPDATE hash SET value = value + 1 WHERE key IN ("write_access")');
+       try {
+           $this->sqliteWrite->query('UPDATE hash SET value = value + 1 WHERE key IN ("write_access")');
+       } catch(\Throwable $e) {
+            // ignore
+       }
 
        // open the read connexion AFTER the write, to have the sqlite databse created
        $this->sqliteRead = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);

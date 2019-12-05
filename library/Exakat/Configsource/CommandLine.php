@@ -130,6 +130,7 @@ class CommandLine extends Config {
                                     'extension'     => 1,
                                     'show'          => 1,
                                     'baseline'      => 1,
+                                    'install'       => 1,
                                     );
 
     public function __construct() {
