@@ -213,8 +213,6 @@ class Load extends Tasks {
     private $atoms               = array();
     private $argumentsId         = array();
     private $sequence            = array();
-    private $sequenceCurrentRank = 0;
-    private $sequenceRank        = array();
     private $callsDatabase       = null;
     
     private $processing = array();

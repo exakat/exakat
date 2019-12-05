@@ -33,7 +33,6 @@ use Exakat\Datastore;
 use Exakat\Log;
 
 class LoadFinal {
-    private $dictCode     = null;
     protected $gremlin    = null;
     protected $config     = null;
     protected $datastore  = null;
@@ -60,8 +59,6 @@ class LoadFinal {
     }
 
     public function run() {
-        $this->dictCode  = exakat('dictionary');
-
         $this->log('Start');
         display('Start load final');
 

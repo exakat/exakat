@@ -28,8 +28,6 @@ use Exakat\Tasks\Helpers\BaselineStash;
 class Baseline extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    private $extensionList = array();
-
     private const FORMAT = "+ %-4s %10s %12s\n";
 
     public const ACTIONS = array('list', 'remove', 'save');

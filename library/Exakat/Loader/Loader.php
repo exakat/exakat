@@ -26,7 +26,7 @@ namespace Exakat\Loader;
 use Exakat\Tasks\Helpers\Atom;
 
 abstract class Loader {
-    abstract public function __construct($gremlin, $config, \Sqlite3 $sqlite3, Atom $id0) ;
+    abstract public function __construct(\Sqlite3 $sqlite3, Atom $id0) ;
     
     public function finalize(array $relicat) {}
 

@@ -38,15 +38,11 @@ class SplitGraphson extends Loader {
     private const LOAD_CHUNK      = 20000;
     private const LOAD_CHUNK_LINK = 8000;
 
-    private static $count = -1; // id must start at 0 in batch-import
-
     private $tokenCounts   = array('Project' => 1);
     private $functioncalls = array();
 
     private $config = null;
     
-    private $project   = null;
-    private $id0       = null;
     private $id        = 1;
 
     private $graphdb        = null;
@@ -61,8 +57,6 @@ class SplitGraphson extends Loader {
     private $sqlite3   = null;
    
     public function __construct(\Sqlite3 $sqlite3, Atom $id0) {
-        self::$count = -1;
-        
         $this->config         = exakat('config');
         $this->graphdb        = exakat('graphdb');
 
@@ -82,7 +76,6 @@ class SplitGraphson extends Loader {
         file_put_contents($this->path, $jsonText, \FILE_APPEND);
 
         ++$this->total;
-        $this->id0 = $id0;
     }
     
     public function __destruct() {

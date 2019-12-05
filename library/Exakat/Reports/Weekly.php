@@ -69,10 +69,8 @@ class Weekly extends Ambassador {
                           );
 
     private $grading       = array();
-    private $results       = null;
     private $resultsCounts = array();
     
-    private $usedAnalyzer = array();
     private $weeks        = array();
     private $current      = '';
 

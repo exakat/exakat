@@ -62,7 +62,6 @@ class Phpexec {
     private static $tokens    = array();
     private $config           = null;
     private $isCurrentVersion = false;
-    private $version          = null;
     private $actualVersion    = null;
     private $requestedVersion = null;
     private $error            = array();

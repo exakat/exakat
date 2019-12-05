@@ -38,10 +38,6 @@ class PhpCodeTree {
     public $properties      = array();
     public $methods         = array();
     
-    private $default = array('map'     => array(),
-                             'reduced' => '',
-                            );
-    
     public function __construct(Sqlite3 $sqlite) {
         $this->sqlite = $sqlite;
     }

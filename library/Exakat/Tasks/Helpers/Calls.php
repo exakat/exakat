@@ -24,7 +24,6 @@ namespace Exakat\Tasks\Helpers;
 
 class Calls {
     private $callsSqlite   = null;
-    private $projects_root = '';
     
     private $definitions = array();
     private $calls       = array();

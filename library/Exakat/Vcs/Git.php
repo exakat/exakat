@@ -27,15 +27,10 @@ use Exakat\Exceptions\VcsError;
 
 class Git extends Vcs {
     private $installed  = false;
-    private $optional   = true;
     private $version    = 'unknown';
     private $executable = 'git';
-    
-    public function __construct($destination, $project_root) {
-        parent::__construct($destination, $project_root);
-    }
-    
-    protected function selfCheck() {
+
+    protected function selfCheck() : void {
         $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'git') === false) {
             throw new HelperException('git');
@@ -50,7 +45,7 @@ class Git extends Vcs {
         }
     }
 
-    public function clone($source) {
+    public function clone($source) : void {
         $this->check();
         $repositoryDetails = parse_url($source);
 
@@ -93,7 +88,7 @@ class Git extends Vcs {
         }
     }
 
-    public function update() {
+    public function update() : string {
         $this->check();
 
         if (!file_exists($this->destinationFull . '/.git')) {
@@ -121,7 +116,7 @@ class Git extends Vcs {
         return $resFinal;
     }
 
-    public function setBranch($branch = '') {
+    public function setBranch(string $branch = '') {
         $this->branch = $branch;
     }
 
