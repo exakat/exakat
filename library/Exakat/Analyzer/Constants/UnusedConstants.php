@@ -36,6 +36,7 @@ class UnusedConstants extends Analyzer {
         $this->atomIs('Defineconstant')
              ->hasNoOut('DEFINITION')
              ->outIs('NAME')
+             ->is('constant', true)
              ->analyzerIsNot('Modules/CalledByModule');
         $this->prepareQuery();
 
