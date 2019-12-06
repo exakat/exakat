@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedPrivateProperty extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/OverwrittenProperties',
+                    );
+    }
+
     public function analyze() {
         // property used in a staticproperty \a\b::$b
         // a property must be read to be used.
@@ -53,6 +58,25 @@ class UsedPrivateProperty extends Analyzer {
              ->is('visibility', 'private')
              ->outIs('PPP')
              ->_as('ppp')
+             ->outIs('DEFINITION')
+             ->atomIs('Member')
+             ->is('isRead', true)
+             ->outIs('OBJECT')
+             ->isThis()
+             ->inIs('OBJECT')
+             ->back('ppp');
+        $this->prepareQuery();
+
+        // property used in a normal propertycall with $this $this->b, from a trait
+        // a property must be read to be used.
+        $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
+             ->outIs('PPP')
+             ->atomIs('Ppp')
+             ->is('visibility', 'private')
+             ->outIs('PPP')
+             ->_as('ppp')
+             ->outIs('OVERWRITE')
+             ->hasTrait()
              ->outIs('DEFINITION')
              ->atomIs('Member')
              ->is('isRead', true)
