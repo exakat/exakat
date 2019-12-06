@@ -56,7 +56,7 @@ class UselessInstruction extends Analyzer {
              ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', ));
         $this->prepareQuery();
 
-        $methods = self::$methods->getFunctionsReferenceArgs();
+        $methods = $this->methods->getFunctionsReferenceArgs();
         $functions = array();
         foreach($methods as $method) {
             $functions[$method['function']] = 1;

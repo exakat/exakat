@@ -35,7 +35,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
     }
     
     public function analyze() {
-        $methods = self::$methods->getMethodsArgsInterval();
+        $methods = $this->methods->getMethodsArgsInterval();
         $argsMins = array_fill(1, 10, array());
         $argsMaxs = array_fill(1, 10, array());
         $argsMinsFNP = array_fill(0, 10, array());

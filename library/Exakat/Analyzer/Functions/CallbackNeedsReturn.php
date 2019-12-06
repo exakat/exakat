@@ -44,7 +44,7 @@ class CallbackNeedsReturn extends Analyzer {
                                             )
                                       );
 
-        $returningFunctions = self::$methods->getFunctionsByReturn();
+        $returningFunctions = $this->methods->getFunctionsByReturn();
         $voidReturningFunctions = array_merge($returningFunctions['void'],
                                               array_map(function ($x) { return trim($x, '\\');}, $returningFunctions['void']),
                                              );

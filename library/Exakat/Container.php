@@ -27,14 +27,18 @@ use Exakat\Datastore;
 use Exakat\Data\Dictionary;
 use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
+use Exakat\Data\Methods;
 
 class Container {
-    private $verbose   = 0;
-    private $phar      = 0;
-    private $config    = null;
-    private $graphdb   = null;
-    private $datastore = null;
-    private $docs      = null;
+    private $verbose    = 0;
+    private $phar       = 0;
+
+    private $config     = null;
+    private $graphdb    = null;
+    private $datastore  = null;
+    private $dictionary = null;
+    private $docs       = null;
+    private $methods    = null;
     
     public function init() {
         $this->config = new Config($GLOBALS['argv']);
@@ -45,6 +49,9 @@ class Container {
         $this->graphdb    = Graph::getConnexion();
         $this->datastore  = new Datastore();
         $this->dictionary = new Dictionary($this->datastore);
+        
+        $this->methods    = new Methods($this->config);
+
 
         $this->docs = new Docs($this->config->dir_root, 
                                $this->config->ext, 

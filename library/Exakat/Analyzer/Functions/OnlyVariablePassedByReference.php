@@ -43,7 +43,7 @@ class OnlyVariablePassedByReference extends Analyzer {
         $this->prepareQuery();
 
         // PHP Functioncalls
-        $phpNative = self::$methods->getFunctionsReferenceArgs();
+        $phpNative = $this->methods->getFunctionsReferenceArgs();
         $phpNative = array_column($phpNative, 'function');
         $phpNative = array_unique($phpNative);
         $phpNative = array_values($phpNative);

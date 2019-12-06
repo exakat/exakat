@@ -42,7 +42,7 @@ class ShouldPreprocess extends Analyzer {
                               );
         //'Functioncall' : if they also have only constants.
         
-        $functionList = self::$methods->getDeterministFunctions();
+        $functionList = $this->methods->getDeterministFunctions();
         $functionList = makeFullNsPath($functionList);
 
         // Operator only working on constants

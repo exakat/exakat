@@ -57,7 +57,7 @@ class CouldTypeWithArray extends Analyzer {
         $this->prepareQuery();
 
         // function foo($a) { chr($a); }
-        $natives = self::$methods->getFunctionsByArgType('array', Methods::STRICT);
+        $natives = $this->methods->getFunctionsByArgType('array', Methods::STRICT);
 
         // function foo($a) { }; only foo(array())
         // function foo($a) { }; only foo((array))

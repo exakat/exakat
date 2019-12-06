@@ -30,7 +30,7 @@ class InternalParameterType extends Analyzer {
     }
     
     public function analyze() {
-        $args = self::$methods->getInternalParameterType();
+        $args = $this->methods->getInternalParameterType();
 
         $typeConversion = array('string'   => array('Magicconstant', 'Heredoc', 'String'),
                                 'float'    => 'Float',

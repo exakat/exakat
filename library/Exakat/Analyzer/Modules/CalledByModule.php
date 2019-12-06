@@ -229,7 +229,6 @@ GREMLIN
         $methods = array_filter($methods);
 
         if (empty($methods)) {
-            print 'No mtehods';
             return;
         }
 

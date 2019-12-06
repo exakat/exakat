@@ -28,6 +28,12 @@ use Exakat\Data\Methods;
 class FinishIsModified extends LoadFinal {
     protected $methods = null;
     
+    function __construct() {
+        parent::__construct(exakat('datastore'));
+
+        $this->methods = exakat('methods');
+    }
+
     public function run() {
         $variables = array('Variable',
                            'Variableobject',
@@ -158,10 +164,6 @@ class FinishIsModified extends LoadFinal {
 
         $count = $countFunction + $countOperator;
         display("Created $count isModified values with => ");
-    }
-    
-    public function setMethods(Methods $methods) {
-        $this->methods = $methods;
     }
 }
 

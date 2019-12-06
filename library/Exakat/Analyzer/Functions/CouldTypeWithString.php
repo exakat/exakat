@@ -89,7 +89,7 @@ class CouldTypeWithString extends Analyzer {
         $this->prepareQuery();
 
         // function foo($a) { chr($a); }
-        $natives = self::$methods->getFunctionsByArgType('string', Methods::STRICT);
+        $natives = $this->methods->getFunctionsByArgType('string', Methods::STRICT);
 
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')

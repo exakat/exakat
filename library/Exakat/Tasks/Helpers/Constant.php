@@ -31,11 +31,10 @@ class Constant extends Plugin {
 
     private $deterministFunctions = array();
     
-    public function __construct($config) {
+    public function __construct() {
         parent::__construct();
         
-        $data = new Methods($config);
-        $deterministFunctions = $data->getDeterministFunctions();
+        $deterministFunctions = exakat('methods')->getDeterministFunctions();
         $this->deterministFunctions = array_map(function ($x) { return "\\$x";}, $deterministFunctions);
     }
     

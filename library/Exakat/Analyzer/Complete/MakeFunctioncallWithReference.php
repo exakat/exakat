@@ -37,7 +37,7 @@ class MakeFunctioncallWithReference extends Analyzer {
 
     public function analyze() {
         // Case of PHP native functions
-        $methods = self::$methods->getFunctionsReferenceArgs();
+        $methods = $this->methods->getFunctionsReferenceArgs();
         $functions = array();
         foreach($methods as $method) {
             array_collect_by($functions, $method['position'], makeFullnspath($method['function']));

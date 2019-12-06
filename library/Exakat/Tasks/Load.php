@@ -260,7 +260,7 @@ class Load extends Tasks {
         $this->plugins[] = new Intval();
         $this->plugins[] = new Strval();
         $this->plugins[] = new Nullval();
-        $this->plugins[] = new Constant($this->config);
+        $this->plugins[] = new Constant();
         $this->plugins[] = new CloneType1();
         $this->plugins[] = new IsRead();
         $this->plugins[] = new IsModified();

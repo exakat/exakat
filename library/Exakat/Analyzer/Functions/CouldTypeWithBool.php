@@ -121,7 +121,7 @@ class CouldTypeWithBool extends Analyzer {
         $this->prepareQuery();
 
         // function foo($a) { chr($a); }
-        $natives = self::$methods->getFunctionsByArgType('bool', Methods::STRICT);
+        $natives = $this->methods->getFunctionsByArgType('bool', Methods::STRICT);
 
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')

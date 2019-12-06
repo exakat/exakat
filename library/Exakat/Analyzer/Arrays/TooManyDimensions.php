@@ -77,7 +77,7 @@ GREMLIN
             ->back('results');
         $this->prepareQuery();
         
-        $returnTypes = self::$methods->getFunctionsByReturn();
+        $returnTypes = $this->methods->getFunctionsByReturn();
         // $a[1][ ][3] = array()
         $this->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))
              ->hasIn('VARIABLE')

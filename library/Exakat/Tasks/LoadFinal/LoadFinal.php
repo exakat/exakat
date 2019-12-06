@@ -107,8 +107,7 @@ GREMLIN;
         $task->run();
         $this->log('spotPHPNativeConstants');
 
-        $task = new FinishIsModified($this->datastore);
-        $task->setMethods(new Methods($this->config));
+        $task = new FinishIsModified();
         $task->run();
         $this->log('FinishIsModified');
 

@@ -94,7 +94,7 @@ class CouldTypeWithInt extends Analyzer {
         $this->prepareQuery();
 
         // function foo($a) { chr($a); }
-        $natives = self::$methods->getFunctionsByArgType('int', Methods::STRICT);
+        $natives = $this->methods->getFunctionsByArgType('int', Methods::STRICT);
 
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')

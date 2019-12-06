@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class PhpNativeReference extends Analyzer {
     public function analyze() {
         // PHP functions that are using references
-        $functions = self::$methods->getFunctionsReferenceArgs();
+        $functions = $this->methods->getFunctionsReferenceArgs();
 
         $references = array();
         foreach($functions as $function) {

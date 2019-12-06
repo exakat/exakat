@@ -51,23 +51,23 @@ class Test extends Tasks {
                         );
         $configThema = new Config($args);
 
-        $analyze = new CleanDb($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+        $analyze = new CleanDb(Tasks::IS_SUBTASK);
         $analyze->run();
 
         display("Cleaning project\n");
-        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean = new Clean(Tasks::IS_SUBTASK);
         $clean->run();
 
-        $load = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $load = new Load(Tasks::IS_SUBTASK);
         $load->run();
         unset($load);
         display("Project loaded\n");
 
-        $analyze = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze = new Analyze(Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
 
-        $results = new Results($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $results = new Results(Tasks::IS_SUBTASK);
         $results->run();
         unset($results);
 

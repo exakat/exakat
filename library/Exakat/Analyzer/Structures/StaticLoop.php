@@ -103,7 +103,7 @@ class StaticLoop extends Analyzer {
     }
     
     private function whereNonDeterminist() {
-        $nonDeterminist = self::$methods->getNonDeterministFunctions();
+        $nonDeterminist = $this->methods->getNonDeterministFunctions();
         $nonDeterminist = makeFullnspath($nonDeterminist);
 
         $this->not(

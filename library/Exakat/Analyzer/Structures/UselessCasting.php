@@ -39,7 +39,7 @@ class UselessCasting extends Analyzer {
                        'T_DOUBLE_CAST'  => 'float'
                   );
         
-        $returnTypes = self::$methods->getFunctionsByReturn();
+        $returnTypes = $this->methods->getFunctionsByReturn();
         
         foreach($casts as $token => $type) {
             if (is_array($type)) {
