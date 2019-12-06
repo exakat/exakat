@@ -25,7 +25,6 @@ namespace Exakat\Analyzer;
 
 use Exakat\Datastore;
 use Exakat\Data\Dictionary;
-use Exakat\Data\Methods;
 use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
@@ -169,29 +168,29 @@ abstract class Analyzer {
     
     protected $rulesets  = null;
 
-    protected static $methods = null;
+    protected $methods = null;
     protected $gremlin = null;
     protected $dictCode = null;
     
     protected $linksDown = '';
 
     public function __construct() {
-        $this->gremlin  = exakat('graphdb');
-        $this->config   = exakat('config');
-        $this->dictCode = exakat('dictionary');
-        $this->docs     = exakat('docs');
-        $this->datastore = exakat('datastore');
-        $this->datastore->reuse();
-        
         $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
-        assert($this->config !== null, 'Can\'t call Analyzer without a config');
+        $this->config    = exakat('config');
         $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                        $this->config->ext,
                                        $this->config->dev,
                                        $this->config->rulesets);
+
+        $this->gremlin   = exakat('graphdb');
+        $this->datastore = exakat('datastore');
+        $this->datastore->reuse();
+
+        $this->dictCode  = exakat('dictionary');
+        $this->docs      = exakat('docs');
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
             $parameters = $this->docs->getDocs($this->shortAnalyzer)['parameter'];
@@ -230,10 +229,12 @@ abstract class Analyzer {
         }
         
         $this->initNewQuery();
+        
+        $this->methods = exakat('methods');
+    }
 
-        self::$methods = new Methods($this->config);
-
-        if (self::$rulesId === null && $this->gremlin !== null) {
+    public function init(int $analyzerId = null) {
+        if (self::$rulesId === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
 GREMLIN;
@@ -257,6 +258,34 @@ GREMLIN;
                 $this->gremlin->query($query);
             }
         }
+
+        if ($analyzerId === null) {
+            if (isset(self::$rulesId[$this->shortAnalyzer])) {
+                // Removing all edges
+                $this->analyzerId = self::$rulesId[$this->shortAnalyzer];
+                $query = <<<GREMLIN
+g.V({$this->analyzerId}).outE("ANALYZED").drop()
+GREMLIN;
+                $this->gremlin->query($query);
+            } else {
+                $resId = $this->gremlin->getId();
+
+                $query = <<<GREMLIN
+g.addV().property(T.id, $resId)
+        .property(T.label, "Analysis")
+        .property("analyzer", "{$this->analyzerQuoted}")
+        .property("count", 0)
+        .id()
+GREMLIN;
+                $res = $this->gremlin->query($query);
+                $this->analyzerId = $res->toInt();
+                self::$rulesId[$this->shortAnalyzer] = $this->analyzerId;
+            }
+        } else {
+            $this->analyzerId = $analyzerId;
+        }
+
+        assert($this->analyzerId != 0, self::class . ' was inited with Id 0. Can\'t save with that!');
     }
     
     public function __destruct() {
@@ -317,38 +346,6 @@ GREMLIN;
     public function getRulesets() {
         $analyzer = $this->getName($this->analyzerQuoted);
         return $this->rulesets->getRulesetForAnalyzer($analyzer);
-    }
-
-    public function init($analyzerId = null) {
-        if ($analyzerId === null) {
-            if (isset(self::$rulesId[$this->shortAnalyzer])) {
-                // Removing all edges
-                $this->analyzerId = self::$rulesId[$this->shortAnalyzer];
-                $query = <<<GREMLIN
-g.V({$this->analyzerId}).outE("ANALYZED").drop()
-GREMLIN;
-                $this->gremlin->query($query);
-            } else {
-                $resId = $this->gremlin->getId();
-
-                $query = <<<GREMLIN
-g.addV().property(T.id, $resId)
-        .property(T.label, "Analysis")
-        .property("analyzer", "{$this->analyzerQuoted}")
-        .property("count", 0)
-        .id()
-GREMLIN;
-                $res = $this->gremlin->query($query);
-                $this->analyzerId = $res->toInt();
-                self::$rulesId[$this->shortAnalyzer] = $this->analyzerId;
-            }
-        } else {
-            $this->analyzerId = $analyzerId;
-        }
-
-        assert($this->analyzerId != 0, self::class . ' was inited with Id 0. Can\'t save with that!');
-
-        return $this->analyzerId;
     }
 
     public function getPhpVersion() {

@@ -90,26 +90,7 @@ class Project extends Tasks {
         $clean = new Clean(Tasks::IS_SUBTASK);
         $clean->run();
         $this->datastore = exakat('datastore');
-//        die(ici);
         // Reset datastore for the others
-
-/*
-        display('Search for external libraries' . PHP_EOL);
-        $pathCache = "{$this->config->project_dir}/config.cache";
-        if (file_exists($pathCache)) {
-            unlink($pathCache);
-        }
-
-        $configThema = $this->config->duplicate(array('update' => true));
-
-        $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
-        $analyze->run();
-        unset($configThema);
-
-        $this->addSnitch(array('step'    => 'External lib',
-                               'project' => $this->config->project));
-        unset($analyze);
-*/
 
         $this->logTime('Start');
         $this->addSnitch(array('step'    => 'Start',
@@ -418,7 +399,6 @@ class Project extends Tasks {
                 unset($dumpConfig);
                 gc_collect_cycles();
                 $this->logTime("Dumped : $ruleset");
-                
             } catch (\Exception $e) {
                 print $e->getMessage();
                 echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";

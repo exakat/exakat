@@ -352,7 +352,7 @@ GREMLIN
                 if (empty($result)) {
                     continue;
                 }
-                
+
                 if (isset($severities[$result['analyzer']])) {
                     $severity = $severities[$result['analyzer']];
                 } else {
@@ -411,7 +411,6 @@ SQL;
             } else {
                 assert($counts[$class] === $readCounts[$class], "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
                 $error++;
-                display("$readCounts[$class] results saved, $counts[$class] expected for $class\n");
             }
         }
 

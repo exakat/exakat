@@ -144,16 +144,18 @@ class Analyze extends Tasks {
             return;
         }
 
-        $analyzers[$analyzer_class] = $this->rulesets->getInstance($analyzer_class, $this->gremlin, $this->config);
+        $analyzers[$analyzer_class] = $this->rulesets->getInstance($analyzer_class);
         if ($analyzers[$analyzer_class] === null) {
             display("No such analyzer as $analyzer_class\n");
             return;
         }
      
         if (isset($this->analyzed[$analyzer_class]) &&
-             $this->config->noRefresh === true) {
-            display( "$analyzer_class is already processed\n");
+            $this->config->noRefresh === true) {
+            display("$analyzer_class is already processed\n");
             return $this->analyzed[$analyzer_class];
+        } else {
+            $analyzers[$analyzer_class]->init();
         }
 
         if ($this->config->noDependencies === true) {
