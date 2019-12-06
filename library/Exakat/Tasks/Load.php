@@ -28,7 +28,6 @@ use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Graph\Graph;
 use Exakat\Exceptions\InvalidPHPBinary;
-use Exakat\Exceptions\CantCompileFile;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
@@ -609,13 +608,6 @@ class Load extends Tasks {
                 if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
-            } catch (CantCompileFile $e) {
-                $this->datastore->addRow('compilation' . str_replace('.', '', $this->config->phpversion), array($e->getMessage()));
-            
-                if (isset($progressBar)) {
-                    echo $progressBar->advance();
-                }
-            }
         }
         $this->loader->finalize($this->relicat);
         
@@ -641,8 +633,6 @@ class Load extends Tasks {
                 }
         
                 $this->processFile($file, $this->config->code_dir);
-            } catch (CantCompileFile $e1) {
-                // Ignore
             } catch (NoFileToProcess $e2) {
                 // Ignore
             }
