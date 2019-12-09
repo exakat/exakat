@@ -22,11 +22,8 @@
 
 namespace Exakat\Graph;
 
-use Exakat\Config;
-use Exakat\Graph\Graph;
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
-use Exakat\Tasks\Tasks;
 use Brightzone\GremlinDriver\Connection;
 use stdClass;
 
@@ -34,13 +31,13 @@ class GSNeo4j extends Graph {
     const CHECKED     = true;
     const UNCHECKED   = false;
     const UNAVAILABLE = 2;
-    
+
     private $status     = self::UNCHECKED;
-    
+
     private $db         = null;
 
     private $gremlinVersion = '3.3';
-    
+
     public function __construct() {
         parent::__construct();
 
@@ -62,7 +59,7 @@ class GSNeo4j extends Graph {
                                           'emptySet' => true,
                                    ) );
     }
-    
+
     public function resetConnection() {
         unset($this->db);
         $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
@@ -72,7 +69,7 @@ class GSNeo4j extends Graph {
                                    ) );
         $this->status = self::UNCHECKED;
     }
-    
+
     private function checkConfiguration() {
         ini_set('default_socket_timeout', 1600);
         $this->db->open();
@@ -82,7 +79,7 @@ class GSNeo4j extends Graph {
         if ($this->status === self::UNAVAILABLE) {
             return new GraphResults();
         }
-        
+
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
@@ -91,7 +88,7 @@ class GSNeo4j extends Graph {
         foreach ($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
-        
+
 //        static $query_count = 0;
 //        ++$query_count;
 //        $b = hrtime(true);
@@ -124,7 +121,7 @@ class GSNeo4j extends Graph {
             die(__METHOD__);
         }
     }
-    
+
     public function queryOne($query, $params = array(), $load = array()) {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
@@ -134,7 +131,7 @@ class GSNeo4j extends Graph {
         if (!($res instanceof stdClass) || !isset($res->results)) {
             throw new GremlinException('Server is not responding');
         }
-        
+
         if (is_array($res->results)) {
             return $res->results[0];
         } else {
@@ -157,7 +154,7 @@ class GSNeo4j extends Graph {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
-        
+
         $res = $this->query('Gremlin.version();');
 
         return $res;
@@ -167,12 +164,12 @@ class GSNeo4j extends Graph {
         $this->stop();
         $this->start();
     }
-    
+
     public function start() {
         if (!file_exists("{$this->config->gsneo4j_folder}/conf")) {
             throw new GremlinException('No graphdb found.');
         }
-        
+
         if (!file_exists("{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml")) {
             copy( "{$this->config->dir_root}/server/gsneo4j/gsneo4j.{$this->gremlinVersion}.yaml",
                   "{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml");
@@ -192,7 +189,7 @@ class GSNeo4j extends Graph {
         display('started gremlin server');
         $this->resetConnection();
         sleep(2);
-        
+
         $b = microtime(true);
         $round = -1;
         $pid = false;
@@ -204,7 +201,7 @@ class GSNeo4j extends Graph {
             }
         } while ( empty($connexion) && $round < 20);
         $e = microtime(true);
-        
+
         display("Restarted in $round rounds\n");
 
         if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
@@ -227,7 +224,7 @@ class GSNeo4j extends Graph {
             putenv('PID_DIR=db');
             shell_exec("GREMLIN_YAML=conf/gsneo4j.3.3.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf db/gremlin.pid");
         }
-        
+
         if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
             display('stop gremlin server 3.2.x');
             shell_exec("kill -9 \$(cat {$this->config->gsneo4j_folder}/db/gsneo4j.pid) 2>> gremlin.log; rm -f {$this->config->gsneo4j_folder}/db/gsneo4j.pid");
@@ -236,7 +233,7 @@ class GSNeo4j extends Graph {
 
     private function simplifyArray($result) {
         $return = array();
-        
+
         if (!isset($result[0]['properties'])) {
             return $result;
         }
@@ -247,13 +244,13 @@ class GSNeo4j extends Graph {
             foreach ($r['properties'] as $property => $value) {
                 $row[$property] = $value[0]['value'];
             }
-            
+
             $return[] = $row;
         }
-        
+
         return $return;
     }
-    
+
     public function fixId($id) {
         return $id - 1;
     }

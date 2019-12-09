@@ -22,22 +22,20 @@
 
 namespace Exakat\Graph;
 
-use Exakat\Graph\Graph;
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
-use Exakat\Tasks\Tasks;
 use Brightzone\GremlinDriver\Connection;
 
 class Tinkergraph extends Graph {
     const CHECKED = true;
     const UNCHECKED = false;
     const UNAVAILABLE = 1;
-    
+
     private $status     = self::UNCHECKED;
     private $db         = null;
 
     private $gremlinVersion = '3.4';
-    
+
     public function __construct($config) {
         parent::__construct($config);
 
@@ -125,7 +123,7 @@ class Tinkergraph extends Graph {
         if (!($res instanceof \stdClass) || !isset($res->results)) {
             throw new GremlinException('Server is not responding');
         }
-        
+
         if (is_array($res->results)) {
             return $res->results[0];
         } else {
@@ -148,7 +146,7 @@ class Tinkergraph extends Graph {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
-        
+
         $res = $this->query('Gremlin.version();');
 
         return $res;
@@ -164,7 +162,7 @@ class Tinkergraph extends Graph {
         if (!file_exists("{$this->config->tinkergraph_folder}/conf")) {
             throw new GremlinException('No tinkgergraph configuration folder found.');
         }
-        
+
         if (!file_exists("{$this->config->tinkergraph_folder}/conf/tinkergraph.{$this->gremlinVersion}.yaml")) {
             copy("{$this->config->dir_root}/server/tinkergraph/tinkergraph.{$this->gremlinVersion}.yaml",
                  "{$this->config->tinkergraph_folder}/conf/tinkergraph.{$this->gremlinVersion}.yaml");
@@ -181,7 +179,7 @@ class Tinkergraph extends Graph {
         }
         $this->resetConnection();
         sleep(1);
-        
+
         $b = microtime(true);
         $round = -1;
         do {
@@ -190,7 +188,7 @@ class Tinkergraph extends Graph {
             usleep(100000 * $round);
         } while (empty($res) && $round < 20);
         $e = microtime(true);
-        
+
         display("Restarted in $round rounds\n");
 
         if (file_exists("{$this->config->tinkergraph_folder}/run/gremlin.pid")) {
@@ -214,7 +212,7 @@ class Tinkergraph extends Graph {
                 unlink("{$this->config->tinkergraph_folder}/db/gremlin.pid");
             }
         }
-        
+
         if (file_exists("{$this->config->tinkergraph_folder}/db/tinkergraph.pid")) {
             display('stop gremlin server 3.2');
             shell_exec("kill -9 $(cat {$this->config->tinkergraph_folder}/db/tinkergraph.pid) 2>> gremlin.log; rm -f {$this->config->tinkergraph_folder}/db/tinkergraph.pid");
@@ -223,7 +221,7 @@ class Tinkergraph extends Graph {
 
     private function simplifyArray($result) {
         $return = array();
-        
+
         if (!isset($result[0]['properties'])) {
             return $result;
         }
@@ -234,10 +232,10 @@ class Tinkergraph extends Graph {
             foreach ($r['properties'] as $property => $value) {
                 $row[$property] = $value[0]['value'];
             }
-            
+
             $return[] = $row;
         }
-        
+
         return $return;
     }
 
@@ -256,7 +254,7 @@ WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
 GROUP BY definition
 SQL;
     }
-    
+
     public function getGlobalsSql() {
         return 'SELECT origin, destination FROM globals';
     }

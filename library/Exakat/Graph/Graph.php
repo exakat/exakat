@@ -22,7 +22,6 @@
 
 namespace Exakat\Graph;
 
-use Exakat\Config;
 
 abstract class Graph {
     protected $config = null;
@@ -44,12 +43,12 @@ abstract class Graph {
         $this->stop();
         $this->start();
     }
-    
+
     abstract public function serverInfo();
     abstract public function checkConnection();
 
     abstract public function clean();
-    
+
     // Produces an id for storing a new value.
     // null means that the graph will handle it.
     // This is not the case of all graph : tinkergraph doesn't.

@@ -46,11 +46,11 @@ class NoGremlin extends Graph {
     public function clean() {
         return true;
     }
-    
+
     public function getDefinitionSQL() {
         return 'PRAGMA no_sql;';
     }
-    
+
     public function resetConnection() {
         return true;
     }

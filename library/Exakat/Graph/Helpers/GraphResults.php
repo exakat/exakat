@@ -28,10 +28,10 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     const EMPTY   = 0;
     const SCALAR  = 1;
     const ARRAY   = 2;
-    
+
     private $type = self::EMPTY;
     private $data  = null;
-    
+
     public function __construct($data = null) {
         // Case of empty result set.
 
@@ -41,11 +41,11 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
             return;
         }
-        
+
         if (is_scalar($data)) {
             $this->type = self::SCALAR;
             $this->data = $data;
-            
+
             return;
         }
 
@@ -53,7 +53,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
             $this->type = self::ARRAY;
             $this->data = $data;
             $this->checkArray();
-            
+
             return;
         }
 
@@ -61,10 +61,10 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
             $this->type = self::ARRAY;
             $this->data = (array) $data;
             $this->checkArray();
-            
+
             return;
         }
-        
+
         assert(false, var_dump($data));
     }
 
@@ -82,7 +82,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         }
         unset($data);
     }
-    
+
     public function toArray() {
         if ($this->type === self::EMPTY) {
             return array();
@@ -102,7 +102,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
         return (int) $this->data[0];
     }
-    
+
     public function isType($type) {
         return $this->type === $type;
     }
@@ -117,19 +117,19 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
     public function offsetSet($offset, $value) {
         // Nothing. No update on that result
-        return;
+
     }
 
     public function offsetUnset($offset) {
         // Nothing. No update on that result
-        return;
+
     }
 
     public function rewind() {
         if ($this->type === self::ARRAY) {
             return reset($this->data);
         }
-        
+
         return true;
     }
 
@@ -141,19 +141,19 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         if ($this->type === self::ARRAY) {
             return key($this->data);
         }
-        
+
         return null;
     }
 
     public function next() {
         return next($this->data);
     }
-    
+
     public function valid() {
         if ($this->type === self::ARRAY) {
             return key($this->data) !== null;
         }
-        
+
         return false;
     }
 
