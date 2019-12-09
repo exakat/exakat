@@ -24,7 +24,7 @@ namespace Exakat\Tasks;
 
 class Install extends Tasks {
     const CONCURENCE = self::NONE;
-    
+
     const TINKERGRAPH_VERSION = '3.4.4';
 
     public function run() : void {
@@ -43,7 +43,7 @@ class Install extends Tasks {
         } else {
             print "Zip 3.0 : OK\n";
         }
-        
+
         if (!empty($errors)) {
             $errors[] = 'Fix the above ' . count($errors) . " and try again\n";
             print implode(PHP_EOL, $errors) . PHP_EOL;
@@ -55,7 +55,7 @@ class Install extends Tasks {
         } else {
             $tinkerpop = file_get_contents('https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip');
             file_put_contents('./apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip', $tinkerpop);
-        
+
             // Install tinkergraph
             shell_exec('unzip apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip; mv apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . ' tinkergraph; rm -rf apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip');
             print "Tinkergraph installed\n";

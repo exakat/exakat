@@ -108,7 +108,7 @@ class Files extends Tasks {
                 if (trim($resFile) == '') {
                     continue; // do nothing. All is fine.
                 }
-                
+
                 if ($php->isError($resFile)) {
                     $error = $php->getError();
 
@@ -279,7 +279,7 @@ class Files extends Tasks {
 
         $this->datastore->addRow('hash', $composerInfo);
     }
-    
+
     private function countTokens($path, &$files, &$ignoredFiles) {
         $tokens = 0;
 
@@ -294,14 +294,14 @@ class Files extends Tasks {
                 $tokens += $t;
             }
         }
-        
+
         return $tokens;
     }
 
     private function checkLicence($dir) {
         $licenses = parse_ini_file($this->config->dir_root . '/data/license.ini');
         $licenses = $licenses['files'];
-        
+
         foreach($licenses as $file) {
             if (file_exists("$dir/$file")) {
                 $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
@@ -317,7 +317,7 @@ class Files extends Tasks {
 
         $ignore_files = parse_ini_file("{$config->dir_root}/data/ignore_files.ini");
         $ignore_files = array_flip($ignore_files['files']);
-        
+
         // Regex to ignore files and folders
         $ignoreDirs = array();
         foreach($ignore_dirs as $ignore) {

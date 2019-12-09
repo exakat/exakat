@@ -60,7 +60,7 @@ abstract class Php {
     const T_QUOTE_CLOSE                  = '"_CLOSE';
     const T_SHELL_QUOTE                  = '`';
     const T_SHELL_QUOTE_CLOSE            = '`_CLOSE';
-    
+
     const T_END                          = 'The End';
     const T_REFERENCE                    = 'r';
     const T_VOID                         = 'v';
@@ -96,17 +96,17 @@ abstract class Php {
                      '^'  => self::T_XOR,
                      '`'  => self::T_BACKTICK,
                    );
-                   
+
     public static function getInstance($tokens) {
         $errors = array();
 
         if (empty($tokens)) {
             throw new NoRecognizedTokens();
         }
-        
+
         //'Php80',
         $versions = array('Php74', 'Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55', );
-        
+
         foreach($versions as $version) {
             $errors = array();
             foreach($tokens as $k => $v) {
@@ -114,7 +114,7 @@ abstract class Php {
                     $errors[$k] = $v;
                 }
             }
-            
+
             if (empty($errors)) {
                 $className = __NAMESPACE__ . "\\$version";
                 return new $className();

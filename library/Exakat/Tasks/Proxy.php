@@ -37,7 +37,7 @@ class Proxy extends Tasks {
                 $display = 'No proxy found';
             }
             display('Shut proxy server (' . $display . ')');
-            
+
             if ($this->config->stop === true) {
                 return;
             }
@@ -47,7 +47,7 @@ class Proxy extends Tasks {
             display('A server is already installed. Aborting.');
             return;
         }
-        
+
         $slaves = $this->config->remotes;
         unset($slaves['proxy']); // remove self
         unset($slaves['ici']);   // remove queue, but why ?
@@ -62,7 +62,7 @@ class Proxy extends Tasks {
         if (!file_exists($this->config->projects_root . '/projects/server.log')) {
             file_put_contents($this->config->projects_root . '/projects/server.log', date('r') . "\tCreated file\n");
         }
-        
+
         display('Start server');
 //        exec($this->config->php.' -S 0.0.0.0:'.self::PORT.' -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/proxy.php > /dev/null 2 > /dev/null &');
         exec($this->config->php . ' -S 0.0.0.0:' . self::PORT . ' -t ' . $this->config->projects_root . '/projects/ ' . $this->config->projects_root . '/projects/proxy.php > /dev/null 2>&1 > /dev/null & ');

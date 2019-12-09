@@ -180,11 +180,7 @@ abstract class Analyzer {
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
         $this->config    = exakat('config');
-        $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
-                                       $this->config->ext,
-                                       $this->config->dev,
-                                       $this->config->rulesets);
-
+        $this->rulesets  = exakat('rulesets');
         $this->gremlin   = exakat('graphdb');
         $this->datastore = exakat('datastore');
         $this->datastore->reuse();

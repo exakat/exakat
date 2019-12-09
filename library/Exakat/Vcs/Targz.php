@@ -35,7 +35,7 @@ class Targz extends Vcs {
         if (strpos($res, 'gzip') === false) {
             throw new HelperException('gzip');
         }
-        
+
         if (ini_get('allow_url_fopen') != true) {
             throw new HelperException('allow_url_fopen');
         }
@@ -47,7 +47,7 @@ class Targz extends Vcs {
         $binary = file_get_contents($source);
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz') . '.tar.gz';
         file_put_contents($archiveFile, $binary);
-        
+
         $res = shell_exec("tar -tzf $archiveFile 2>&1 >/dev/null");
         if (!empty($res)) {
             list($l, ) = explode("\n", $res);
@@ -80,7 +80,7 @@ class Targz extends Vcs {
             $stats['gzip'] = 'No';
             $stats['gzip optional'] = 'Yes';
         }
-        
+
         return $stats;
     }
 

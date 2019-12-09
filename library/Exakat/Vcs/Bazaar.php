@@ -30,7 +30,7 @@ class Bazaar extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
-    
+
     protected function selfCheck() {
         $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'Bazaar') === false) {
@@ -40,7 +40,7 @@ class Bazaar extends Vcs {
 
     public function clone($source) {
         $this->check();
-        
+
         $source = escapeshellarg($source);
         shell_exec("cd {$this->destinationFull}; {$this->executable} branch $source code") ?? '';
     }
@@ -81,7 +81,7 @@ class Bazaar extends Vcs {
             $stats['installed'] = 'No';
             $stats['optional'] = 'Yes';
         }
-        
+
         return $stats;
     }
 

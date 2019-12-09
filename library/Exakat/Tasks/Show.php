@@ -39,7 +39,7 @@ class Show extends Tasks {
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
-        
+
         print "Create project '$project' with : 
     {$this->config->php} {$this->config->executable} init -p $project -R {$this->config->project_url} -{$this->config->project_vcs} -v\n";
     }

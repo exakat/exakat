@@ -30,7 +30,7 @@ class Composer extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
-    
+
     protected function selfCheck() {
         $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'Composer') === false) {
@@ -82,7 +82,7 @@ class Composer extends Vcs {
                 $return = "{$package->source->reference} (version : {$package->version})";
             }
         }
-        
+
         return $return;
     }
 
@@ -98,7 +98,7 @@ class Composer extends Vcs {
         } else {
             $stats['installed'] = 'No';
         }
-        
+
         return $stats;
     }
 
@@ -112,12 +112,12 @@ class Composer extends Vcs {
 
             return $status;
         }
-        
+
         $status = array( 'vcs'       => 'composer',
                          'updatable' => true,
                          );
         $composerLock = file_get_contents($composerLockPath);
-        
+
         $json = json_decode($composerLock);
         if (isset($json->hash)) {
             $status['hash'] = $json->hash;

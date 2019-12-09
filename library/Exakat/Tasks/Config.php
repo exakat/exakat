@@ -47,7 +47,7 @@ class Config extends Tasks {
             $projectConfig = new ProjectConfig($this->config->projects_root);
             $projectConfig->loadConfig($project);
         }
-        
+
         print $projectConfig->getConfig($this->config->dir_root);
     }
 }

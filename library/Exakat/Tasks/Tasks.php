@@ -22,14 +22,10 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Analyzer\Rulesets;
 use Exakat\Config;
-use Exakat\Datastore;
-use Exakat\Graph\Graph;
 use Exakat\Exceptions\AnotherProcessIsRunning;
 use Exakat\Exceptions\ProjectTooLarge;
 use Exakat\Log;
-use Exakat\Data\Data;
 
 abstract class Tasks {
     protected $log        = null;
@@ -38,7 +34,7 @@ abstract class Tasks {
 
     protected $gremlin    = null;
     protected $config     = null;
-    
+
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
     public static $semaphore      = null;
@@ -111,10 +107,7 @@ abstract class Tasks {
             $this->datastore = exakat('datastore');
         }
 
-        $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
-                                       $this->config->ext,
-                                       $this->config->dev,
-                                       $this->config->rulesets);
+        $this->rulesets = exakat('rulesets');
     }
 
     public function __destruct() {
@@ -147,7 +140,7 @@ abstract class Tasks {
 
     protected function addSnitch($values = array()) {
         static $snitch, $pid, $path;
-        
+
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();

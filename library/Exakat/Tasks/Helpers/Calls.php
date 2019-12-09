@@ -24,11 +24,11 @@ namespace Exakat\Tasks\Helpers;
 
 class Calls {
     private $callsSqlite   = null;
-    
+
     private $definitions = array();
     private $calls       = array();
     private $globals     = array();
-    
+
     public function __construct(string $projects_root, \Sqlite3 $sqlite) {
         $this->projects_root = $projects_root;
 
@@ -165,7 +165,7 @@ SQL;
 
         foreach($types as $type) {
             $globalpath = $this->makeGlobalPath($fullnspath);
-            
+
             $this->calls[] = "('$type',
                                '{$this->callsSqlite->escapeString($fullnspath)}',
                                '{$this->callsSqlite->escapeString($globalpath)}',
@@ -187,7 +187,7 @@ SQL;
                                  '{$definition->atom}',
                                  '{$definition->id}')";
     }
-    
+
     private function makeGlobalPath(string $fullnspath) : string {
         if ($fullnspath === 'undefined') {
             $globalpath = '';
@@ -196,7 +196,7 @@ SQL;
         } else {
             $globalpath = substr($fullnspath, strrpos($fullnspath, '\\'));
         }
-        
+
         return $globalpath;
     }
 }

@@ -69,7 +69,7 @@ class Nullval extends Plugin {
             case 'Void' :
                 $atom->isNull = true;
                 break;
-    
+
             case 'Parenthesis' :
                 $atom->isNull = $extras['CODE']->isNull;
                 break;
@@ -95,7 +95,7 @@ class Nullval extends Plugin {
                 break;
 
         default :
-            
+
         }
     }
 }

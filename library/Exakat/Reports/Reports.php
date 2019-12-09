@@ -73,10 +73,7 @@ abstract class Reports {
 
             $this->dump      = new Dump($this->sqlite);
 
-            $this->rulesets  = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
-                                              $this->config->ext,
-                                              $this->config->dev,
-                                              $this->config->rulesets);
+            $this->rulesets  = exakat('rulesets');
 
             // Default analyzers
             $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->project_results),

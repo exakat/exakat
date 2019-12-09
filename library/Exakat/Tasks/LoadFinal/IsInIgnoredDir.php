@@ -55,7 +55,7 @@ class IsInIgnoredDir extends LoadFinal {
             $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
             $countC = $result->toInt();
         }
-        
+
         $count = $countF + $countC;
         display("Set $count functions, constants and class with ignored_dir");
     }

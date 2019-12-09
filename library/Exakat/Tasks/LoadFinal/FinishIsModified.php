@@ -23,12 +23,11 @@
 namespace Exakat\Tasks\LoadFinal;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class FinishIsModified extends LoadFinal {
     protected $methods = null;
-    
-    function __construct() {
+
+    public function __construct() {
         parent::__construct(exakat('datastore'));
 
         $this->methods = exakat('methods');
@@ -78,7 +77,7 @@ class FinishIsModified extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countFunction = $result->toInt();
-        
+
         $count = $countNew + $countFunction;
         display("Created $count isModified values");
 
@@ -116,7 +115,7 @@ class FinishIsModified extends LoadFinal {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $countAppend2 = $result->toInt();
-        
+
         $count = $countAppend0 + $countAppend1 + $countAppend2;
         display("Created $count isModified values with array append");
 

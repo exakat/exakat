@@ -36,7 +36,7 @@ class OnePage extends Tasks {
     public function run() {
         $begin = microtime(true);
         $this->project_dir = $this->config->projects_root . '/projects/onepage/';
-        
+
         if (!file_exists($this->project_dir . '/code/')) {
             $this->project_dir . '/code/';
         }
@@ -55,7 +55,7 @@ class OnePage extends Tasks {
         $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
         $this->datastore = new Datastore($this->config);
-        
+
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,

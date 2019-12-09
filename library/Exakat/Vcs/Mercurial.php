@@ -36,7 +36,7 @@ class Mercurial extends Vcs {
 
     public function clone($source) {
         $this->check();
-        
+
         $sourceArg = escapeshellarg($source);
         shell_exec("cd {$this->destinationFull}; {$this->executable} clone $sourceArg code");
     }
@@ -62,7 +62,7 @@ class Mercurial extends Vcs {
             $stats['installed'] = 'No';
             $stats['optional'] = 'Yes';
         }
-        
+
         return $stats;
     }
 

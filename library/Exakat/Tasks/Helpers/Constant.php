@@ -23,21 +23,20 @@
 namespace Exakat\Tasks\Helpers;
 
 use Exakat\Tasks\Load;
-use Exakat\Data\Methods;
 
 class Constant extends Plugin {
     public $name = 'constant';
     public $type = 'boolean';
 
     private $deterministFunctions = array();
-    
+
     public function __construct() {
         parent::__construct();
-        
+
         $deterministFunctions = exakat('methods')->getDeterministFunctions();
         $this->deterministFunctions = array_map(function ($x) { return "\\$x";}, $deterministFunctions);
     }
-    
+
     public function run($atom, $extras = array()) {
         foreach($extras as $extra) {
             if ($extra->constant === null)  {
@@ -58,7 +57,7 @@ class Constant extends Plugin {
             case 'Name' :
                 $atom->constant = true;
                 break;
-    
+
             case 'Addition' :
             case 'Multiplication' :
             case 'Logical' :

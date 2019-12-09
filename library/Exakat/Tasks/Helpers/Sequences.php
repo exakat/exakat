@@ -33,10 +33,10 @@ class Sequences {
 
     private $ranksPile           = array();
     private $elementsPile        = array();
-    
+
     public function start($sequence) {
         ++$this->level;
-        
+
         $this->sequences[$this->level]    = $sequence;
         $this->ranksPile[$this->level]    = $this->rank;
         $this->elementsPile[$this->level] = $this->elements;
@@ -44,7 +44,7 @@ class Sequences {
         $this->rank                    = self::START_RANK;
         $this->elements                = array();
     }
-    
+
     public function add(Atom $element) {
         ++$this->rank;
         $element->rank                        = $this->rank;

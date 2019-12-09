@@ -24,7 +24,6 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Configsource\ProjectConfig;
-use Exakat\Datastore;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\VcsError;
@@ -41,7 +40,7 @@ class Initproject extends Tasks {
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
-        
+
         if ($this->config->project === 'test') {
             throw new InvalidProjectName('Can\t use test as project name.');
         }
@@ -60,7 +59,7 @@ class Initproject extends Tasks {
 
             rmdirRecursive("{$this->config->projects_root}/projects/$project");
         }
-        
+
         display("Initializing $project" . (!empty($repositoryURL) ? " with $repositoryURL" : '') );
         $this->init_project($project, $repositoryURL);
 
@@ -81,7 +80,7 @@ class Initproject extends Tasks {
             display("Removing tmpPath : $tmpPath\n");
             rmdirRecursive($tmpPath);
         }
-        
+
         mkdir($tmpPath, 0755);
         mkdir("{$tmpPath}/log/", 0755);
 
@@ -96,7 +95,7 @@ class Initproject extends Tasks {
         } else {
             $vcsClass = Vcs::getVcs($this->config);
             $vcs = new $vcsClass($dotProject, "$tmpPath/code");
-            
+
             switch($vcs->getName()) {
                 case 'symlink' :
                     $projectName = basename($repositoryURL);
@@ -115,7 +114,7 @@ class Initproject extends Tasks {
                 case 'git' :
                     $projectName = basename($repositoryURL);
                     $projectName = str_replace('.git', '', $projectName);
-                    
+
                     if (!empty($this->config->branch) &&
                         $this->config->branch !== 'master') {
                         $repositoryBranch =  $this->config->branch;
@@ -178,7 +177,7 @@ class Initproject extends Tasks {
                     break;
             }
         }
-        
+
         // default initial config. Found in test project.
         $phpversion = $this->config->phpversion;
         if ($this->config->composer === true) {
@@ -186,7 +185,7 @@ class Initproject extends Tasks {
         } else {
             $ignore_dirs = array_merge($this->config->ignore_dirs, array('/vendor'));
         }
- 
+
         $projectConfig = new ProjectConfig($this->config->projects_root);
         $projectConfig->setProject($project);
         $projectConfig->setConfig('phpversion',     $phpversion);
@@ -195,7 +194,7 @@ class Initproject extends Tasks {
         $projectConfig->setConfig('project_vcs',    $vcs->getName());
         $projectConfig->setConfig('project_tag',    $repositoryBranch);
         $projectConfig->setConfig('project_branch', $repositoryTag);
- 
+
         $projectConfig->setConfig('ignore_dirs',    $ignore_dirs);
         $projectConfig->setConfig('include_dirs',   $include_dirs);
 
@@ -223,7 +222,7 @@ class Initproject extends Tasks {
             display("An error prevented code initialization : '$errorMessage'\n.No code was loaded.");
 
             $projectConfig->writeConfig();
-            
+
             return;
         }
 
@@ -240,7 +239,7 @@ class Initproject extends Tasks {
         // Running script as a separate process, to take into account the actual config file..
         $shell = "{$this->config->php} {$this->config->executable} files -p {$this->config->project}";
         $res = shell_exec($shell);
-        
+
         if (!empty($res)) {
             $this->datastore->addRow('hash', array('init error' => $res ));
         }

@@ -30,7 +30,7 @@ class Rar extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
-    
+
     protected function selfCheck() {
         $res = shell_exec("{$this->executable} 2>&1");
         if (strpos($res, 'UNRAR') === false) {
@@ -66,7 +66,7 @@ class Rar extends Vcs {
         } else {
             $stats['error'] = $res;
         }
-        
+
         return $stats;
     }
 

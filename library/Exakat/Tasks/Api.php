@@ -24,7 +24,7 @@ namespace Exakat\Tasks;
 
 class Api extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     const PORT = 8447;
 
     public function run() {
@@ -36,7 +36,7 @@ class Api extends Tasks {
                 $display = 'No server found';
             }
             display('Shut down server (' . $display . ')');
-            
+
             if ($this->config->stop === true) {
                 return;
             }

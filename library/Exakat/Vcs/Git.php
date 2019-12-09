@@ -59,7 +59,7 @@ class Git extends Vcs {
         } else {
             $repositoryDetails['pass'] = '';
         }
-                
+
         unset($repositoryDetails['query']);
         unset($repositoryDetails['fragment']);
         $repositoryNormalizedURL = unparse_url($repositoryDetails);
@@ -76,7 +76,7 @@ class Git extends Vcs {
         } else {
             display('Check out simple');
         }
-        
+
         $shell .= ' code 2>&1 ';
         $shellResult = shell_exec($shell);
 
@@ -99,20 +99,20 @@ class Git extends Vcs {
 
         $res = shell_exec("cd {$this->destinationFull}/; {$this->executable} branch | grep \\* 2>&1") ?? '';
         $branch = substr(trim($res), 2);
-        
+
         if (strpos($branch, ' detached at ') === false) {
             $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
         } else {
             $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} checkout --quiet; {$this->executable} pull; {$this->executable} branch | grep '* '");
             $branch = '';
         }
-    
+
         trim(shell_exec("cd {$this->destinationFull}/;GIT_TERMINAL_PROMPT=0  {$this->executable} pull --quiet"));
         $resFinal = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
         if (strpos($resFinal, ' ') !== false) {
             list($resFinal, ) = explode(' ', $resFinal);
         }
-    
+
         return $resFinal;
     }
 
@@ -139,11 +139,11 @@ class Git extends Vcs {
         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} rev-parse HEAD 2>&1");
         return trim($res);
     }
-    
+
     public function getInstallationInfo() {
         $stats = array('installed' => $this->installed === true ? 'Yes' : 'No',
                       );
-                      
+
         if ($this->installed === true) {
             $stats['version'] = $this->version;
             if (version_compare($this->version, '2.3') < 0) {
@@ -178,7 +178,7 @@ class Git extends Vcs {
                 $file = $r[1];
                 continue;
             }
-    
+
             if (preg_match('#@@ \-(\d+)(,(\d+))? \+(\d+)(,(\d+))?( )@@#', $line, $r, PREG_UNMATCHED_AS_NULL)) {
                 $c = ($r[6] ?? 1) - ($r[3] ?? 1);
                 if ($c !== 0) {
@@ -192,7 +192,7 @@ class Git extends Vcs {
 
         return $changes;
     }
-    
+
     public function getFileModificationLoad() : array {
         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} log --name-only --pretty=format:");
 
@@ -208,7 +208,7 @@ class Git extends Vcs {
                 $files[$row] = 1 ;
             }
         }
-        
+
         return $files;
     }
 

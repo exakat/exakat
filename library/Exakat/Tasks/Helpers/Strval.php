@@ -60,7 +60,7 @@ class Strval extends Plugin {
                 } else {
                     $actual = (string) (int) $value;
                 }
-    
+
                 $atom->noDelimiter = (string) (abs($actual) > PHP_INT_MAX ? 0 : $actual);
                 break;
 
@@ -82,7 +82,7 @@ class Strval extends Plugin {
             case 'Boolean' :
                 $atom->noDelimiter = (string) (mb_strtolower($atom->code) === 'true');
                 break;
-    
+
             case 'Null' :
             case 'Void' :
                 $atom->noDelimiter = '';
@@ -91,11 +91,11 @@ class Strval extends Plugin {
             case 'Staticclass' :
                 $atom->noDelimiter = $atom->fullcode;
                 break;
-    
+
             case 'Parenthesis' :
                 $atom->noDelimiter = $extras['CODE']->noDelimiter;
                 break;
-    
+
             case 'Addition' :
                 if ($atom->code === '+') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter +

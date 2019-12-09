@@ -23,7 +23,6 @@
 
 namespace Exakat\Loader;
 
-use Exakat\Datastore;
 use Exakat\Tasks\Helpers\Atom;
 
 class Collector extends Loader {
@@ -36,7 +35,7 @@ class Collector extends Loader {
     public function __construct(\Sqlite3 $sqlite3, Atom $id0) {
         $this->datastore = exakat('datastore');
     }
-    
+
     public function finalize(array $relicat) {
         $this->datastore->addRow('ignoredCit',       $this->cit);
         $this->datastore->addRow('ignoredFunctions', $this->functions);

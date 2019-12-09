@@ -51,7 +51,7 @@ class Queue extends Tasks {
 
             return;
         }
-        
+
         $queue = $this->config->commandlineJson();
         $queuePipe = fopen($this->pipefile, 'w');
         fwrite($queuePipe, "$queue\n");

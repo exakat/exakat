@@ -27,27 +27,27 @@ class NestedCollector {
 
     private $previous = array();
     private $current = array(self::THE_END);
-    
+
     public function push() : void {
         $this->previous[] = $this->current;
         $this->current = array();
     }
-    
+
     public function pop() : void {
         $this->current = array_pop($this->previous);
     }
-    
+
     public function add($arg) : void {
         $this->current[] = $arg;
     }
-    
+
     public function getAll() : array {
         $return = $this->current;
         $this->current = array();
-        
+
         return $return;
     }
-    
+
 }
 
 ?>

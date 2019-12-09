@@ -80,7 +80,7 @@ class Report extends Tasks {
             $this->format($report, $reportConfig);
         }
     }
-    
+
     private function format(Reports $report, $reportConfig) {
         $begin = microtime(true);
 

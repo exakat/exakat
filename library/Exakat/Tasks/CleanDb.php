@@ -38,7 +38,7 @@ class CleanDb extends Tasks {
                 Tasks::$semaphore = @stream_socket_server('udp://0.0.0.0:' . Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
             }
         }
-        
+
     }
 
     private function manageServer() {

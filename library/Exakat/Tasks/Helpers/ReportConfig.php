@@ -70,7 +70,7 @@ class ReportConfig {
     public function getName() {
         return $this->name;
     }
-    
+
     public function getFormatClass() {
         return '\Exakat\Reports\\' . ucfirst(strtolower($this->format));
     }
@@ -93,7 +93,7 @@ class ReportConfig {
     public function getRulesets() {
         $class = $this->getFormatClass();
         $report = new $class($this->config);
-    
+
         $rulesets = $report->dependsOnAnalysis();
         if (empty($rulesets)) {
             $rulesets = $this->rulesets;

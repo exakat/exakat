@@ -28,7 +28,7 @@ class BaselineStash {
     private $baseline_strategy = 'none';
     private $project_dir       = '';
     private $use               = 'none';
-    
+
     const NO_BASELINE          = '';
 
     public function __construct(Config $config) {
@@ -47,7 +47,7 @@ class BaselineStash {
             $baseline_dir = dirname($previous) . '/baseline';
             if (!file_exists($baseline_dir)) {
                 mkdir($baseline_dir,0700);
-                
+
                 // Can't create the dir, no baseline dir
                 if (!file_exists($baseline_dir)) {
                     return;

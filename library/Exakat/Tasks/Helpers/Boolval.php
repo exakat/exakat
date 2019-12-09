@@ -44,7 +44,7 @@ class Boolval extends Plugin {
 
             return;
         }
-        
+
         switch ($atom->atom) {
             case 'Staticclass' :
             case 'Self'        :
@@ -91,11 +91,11 @@ class Boolval extends Plugin {
             case 'Void' :
                 $atom->boolean = 0;
                 break;
-                
+
             case 'Parenthesis' :
                 $atom->boolean = $extras['CODE']->boolean;
                 break;
-    
+
             case 'Addition' :
                 if ($atom->code === '+') {
                     $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean + (int) $extras['RIGHT']->boolean);

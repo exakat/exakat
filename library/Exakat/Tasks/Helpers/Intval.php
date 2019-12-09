@@ -60,7 +60,7 @@ class Intval extends Plugin {
                 } else {
                     $actual = (int) $value;
                 }
-    
+
                 $atom->intval = abs($actual) > PHP_INT_MAX ? 0 : $actual;
                 break;
 
@@ -73,11 +73,11 @@ class Intval extends Plugin {
                     $atom->intval   = array_sum(array_column($extras, 'intval'));
                 }
                 break;
-    
+
             case 'Boolean' :
                 $atom->intval = (int) (mb_strtolower(trim($atom->code, '\\')) === 'true');
                 break;
-    
+
             case 'Staticclass' :
             case 'Identifier'  :
 //            case 'Nsname'      : This leads to a fatal error
@@ -88,11 +88,11 @@ class Intval extends Plugin {
             case 'Magicconstant' :
                 $atom->intval = 0;
                 break;
-    
+
             case 'Parenthesis' :
                 $atom->intval = $extras['CODE']->intval;
                 break;
-    
+
             case 'Addition' :
                 if ($atom->code === '+') {
                     $atom->intval = $extras['LEFT']->intval + $extras['RIGHT']->intval;

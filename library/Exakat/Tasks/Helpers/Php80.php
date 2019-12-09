@@ -53,7 +53,7 @@ class Php80 extends Php {
     const T_PIPE                         = '|';
     const T_CARET                        = '^';
     const T_BACKTICK                     = '`';
-    
+
     const T_END                          = 'The End';
     const T_REFERENCE                    = 'r';
     const T_VOID                         = 'v';

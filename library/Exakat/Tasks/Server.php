@@ -34,7 +34,7 @@ class Server extends Tasks {
                 $display = 'No server found';
             }
             display("Shut down server ($display)");
-            
+
             if ($this->config->stop === true) {
                 return;
             }

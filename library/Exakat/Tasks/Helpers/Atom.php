@@ -26,7 +26,7 @@ use Exakat\Tasks\Load;
 
 class Atom {
     const STRING_MAX_SIZE = 500;
-    
+
     public $id           = 0;
     public $atom         = 'No Atom Set';
     public $code         = '';
@@ -100,7 +100,7 @@ class Atom {
         if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE) . '...[ total ' . strlen($this->fullcode) . ' chars]';
         }
-        
+
         $this->code          = $this->protectString($this->code       );
         $this->lccode        = $this->protectString($this->lccode     );
         $this->fullcode      = $this->protectString($this->fullcode   );
@@ -125,7 +125,7 @@ class Atom {
         $this->flexible      = $this->flexible    ? 1 : null;
         $this->close_tag     = $this->close_tag   ? 1 : null;
         $this->aliased       = $this->aliased     ? 1 : null;
-        
+
         if ($this->intval > 2147483647) {
             $this->intval = 2147483647;
         }
@@ -179,7 +179,7 @@ class Atom {
                              'reference',
                              'variadic',
                              );
-        
+
         $properties = array();
         foreach($this as $l => $value) {
             if ($l === 'id') { continue; }
@@ -203,7 +203,7 @@ class Atom {
             if ($value === false) {
                 continue;
             }
-        
+
             if (in_array($l, $booleanValues)) {
                 $value = (boolean) $value;
             } elseif (in_array($l, $integerValues)) {
@@ -211,7 +211,7 @@ class Atom {
             }
             $properties[$l] = array( new Property($id++, $value) );
         }
-        
+
         $object = array('id'         => $this->id,
                         'label'      => $this->atom,
                         'inE'        => new \stdClass(),
@@ -221,7 +221,7 @@ class Atom {
 
         return (object) $object;
     }
-    
+
     private function protectString($code) {
         return addcslashes($code , '\\"');
     }

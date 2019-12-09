@@ -24,9 +24,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Rulesets;
-use Exakat\Config;
 use Exakat\Datastore;
-use Exakat\Graph\Graph;
 use Exakat\Exakat;
 use Exakat\Exceptions\MissingGremlin;
 use Exakat\Exceptions\InvalidProjectName;
@@ -58,7 +56,7 @@ class Project extends Tasks {
             $this->reports = makeArray($this->config->project_reports);
         }
     }
-    
+
     public function run() : void {
         if ($this->config->project === null) {
             throw new ProjectNeeded();
@@ -110,7 +108,7 @@ class Project extends Tasks {
         } else {
             $info['vcs_type'] = strtolower($vcsClass);
             $info['vcs_url']  = $this->config->project_url;
-            
+
             $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
             if (method_exists($vcs, 'getBranch')) {
                 $info['vcs_branch']      = $vcs->getBranch();
@@ -295,7 +293,7 @@ class Project extends Tasks {
             $dumpConfig = $this->config->duplicate(array('update'    => true,
                                                          'program'   => $analyzers,
                                                          ));
- 
+
             $audit_end = time();
             $query = 'g.V().count()';
             $res = $this->gremlin->query($query);
@@ -387,7 +385,7 @@ class Project extends Tasks {
                                    'graphNodes'   => $nodes,
                                    'graphLinks'   => $links);
                 $this->datastore->addRow('hash', $finalMark);
-                
+
                 // Skip Dump, as it is auto-saving itself.
                 if ($ruleset === 'Dump') { continue; }
 
@@ -407,29 +405,29 @@ class Project extends Tasks {
         }
         $VERBOSE = $oldVerbose;
     }
-    
+
     private function generateName() : string {
         $ini = parse_ini_file("{$this->config->dir_root}/data/audit_names.ini");
-        
+
         $names = $ini['names'];
         $adjectives = $ini['adjectives'];
-        
+
         shuffle($names);
         shuffle($adjectives);
-        
+
         $x = random_int(0, PHP_INT_MAX);
-        
+
         $name = $names[ $x % (count($names) - 1)];
         $adjective = $adjectives[ $x % (count($adjectives) - 1)];
 
         return ucfirst($adjective) . ' ' . $name;
     }
-    
+
     private function getLineDiff($current, $vcs) {
         if (!file_exists($this->config->dump_previous)) {
             return ;
         }
-        
+
         $sqlite = new \Sqlite3($this->config->dump_previous);
         $res = $sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="hash"');
         if ($res === false || !$res->numColumns() || $res->columnType(0) == SQLITE3_NULL) {
@@ -441,7 +439,7 @@ class Project extends Tasks {
             return;
         }
         $revision = $res->fetchArray(\SQLITE3_ASSOC)['value'];
-        
+
         $diff = $vcs->getDiffLines($revision, $current);
         if (!empty($diff)) {
             $this->datastore->addRow('linediff', $diff);

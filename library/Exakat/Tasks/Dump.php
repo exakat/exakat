@@ -29,7 +29,6 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchRuleset;
 use Exakat\Exceptions\NotProjectInGraph;
-use Exakat\Graph\Graph;
 use Exakat\GraphElements;
 use Exakat\Log;
 use Exakat\Query\Query;
@@ -42,9 +41,9 @@ class Dump extends Tasks {
     private $sqliteFile         = null;
     private $sqliteFileFinal    = null;
     private $sqliteFilePrevious = null;
-    
+
     private $files = array();
-    
+
     protected $logname = self::LOG_NONE;
 
     private $linksDown = '';
@@ -53,13 +52,13 @@ class Dump extends Tasks {
 
     public function __construct($subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($subTask);
-        
+
         $this->log = new Log('dump',
                              $this->config->project_dir);
 
         $this->linksDown = GraphElements::linksAsList();
     }
-    
+
     public function setConfig($config) {
         $this->config = $config;
     }
@@ -79,11 +78,11 @@ class Dump extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
         $projectInGraph = $projectInGraph[0];
-        
+
         if ($projectInGraph !== (string) $this->config->project) {
             throw new NotProjectInGraph($this->config->project, $projectInGraph);
         }
-        
+
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
         $this->sqliteFile         = $this->config->dump_tmp;
@@ -102,7 +101,7 @@ class Dump extends Tasks {
         } else {
             $this->initDump();
         }
-        
+
         if ($this->config->collect === true) {
             display('Collecting data');
 
@@ -213,7 +212,7 @@ class Dump extends Tasks {
             $missing = $this->processResultsRuleset($ruleset, $counts);
             $this->expandRulesets();
             $this->collectHashAnalyzer();
-            
+
             if ($missing === 0) {
                 $list = '(NULL, "' . implode('"), (NULL, "', $ruleset) . '")';
                 $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES {$list}");
@@ -263,7 +262,7 @@ class Dump extends Tasks {
 
         $this->finish();
     }
-    
+
     public function finalMark($finalMark) {
         $sqlite = new \Sqlite3($this->config->dump);
         $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
@@ -278,10 +277,10 @@ class Dump extends Tasks {
 
     private function processResultsRuleset($ruleset, array $counts = array()) {
         $analyzers = $this->rulesets->getRulesetsAnalyzers($ruleset);
-        
+
         return $this->processMultipleResults($analyzers, $counts);
     }
-    
+
     private function processResultsList(array $rulesetList, array $counts = array()) {
         return $this->processMultipleResults($rulesetList, $counts);
     }
@@ -290,7 +289,7 @@ class Dump extends Tasks {
         $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
-        
+
         $query = array();
         foreach($analyzers as $analyzer) {
             if (isset($counts[$analyzer])) {
@@ -359,9 +358,9 @@ GREMLIN
                     $severity = $this->sqlite->escapeString($docs->getDocs($result['analyzer'])['severity']);
                     $severities[$result['analyzer']] = $severity;
                 }
-    
+
                 ++$readCounts[$result['analyzer']];
-    
+
                 $query[] = <<<SQL
 (null, 
  '{$this->sqlite->escapeString($result['fullcode'])}', 
@@ -375,7 +374,7 @@ GREMLIN
 )
 SQL;
                 ++$saved;
-    
+
                 // chunk split the save.
                 if ($saved % 100 === 0) {
                     $values = implode(', ', $query);
@@ -440,7 +439,7 @@ SQL;
             if (empty($result)) {
                 continue;
             }
-            
+
             $query[] = <<<SQL
 (null, 
  '{$this->sqlite->escapeString($result['fullcode'])}', 
@@ -466,7 +465,7 @@ SQL;
                 $query = array();
             }
         }
-        
+
         if (!empty($query)) {
             $values = implode(', ', $query);
             $query = <<<SQL
@@ -502,10 +501,10 @@ SQL;
                 $counts[] = "(null, '$atom', $count)";
             }
         }
-        
+
         $query = 'INSERT INTO atomsCounts ("id", "atom", "count") VALUES ' . implode(', ', $counts);
         $this->sqlite->query($query);
-        
+
         display(count($atomsCount) . " atoms\n");
     }
 
@@ -631,10 +630,10 @@ SQL;
             $query = 'INSERT INTO variables ("id", "variable", "type") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        
+
         display( "Variables : $total\n");
     }
-    
+
     private function collectStructures() : void {
         $namespacesId = $this->collectStructures_namespaces();
 
@@ -692,7 +691,7 @@ GREMLIN;
 
         $total = 0;
         $usesId = array();
-        
+
         $cit = array();
         $citId = array();
         $citCount = $this->sqlite->querySingle('SELECT count(*) FROM cit');
@@ -705,10 +704,10 @@ GREMLIN;
             } else {
                 $namespaceId = 1;
             }
-            
+
             $cit[] = $row;
             $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
-            
+
             ++$total;
         }
 
@@ -747,7 +746,7 @@ GREMLIN;
             } else {
                 $namespaceId = 1;
             }
-            
+
             $cit[] = $row;
             $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
 
@@ -790,19 +789,19 @@ GREMLIN;
             } else {
                 $namespaceId = 1;
             }
-            
+
             $row['implements'] = array(); // always empty
             $cit[] = $row;
             $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
 
             ++$total;
         }
-        
+
         display("$total traits\n");
-        
+
         if (!empty($cit)) {
             $query = array();
-            
+
             foreach($cit as $row) {
                 $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row['fullnspath']);
                 if (isset($namespacesId[$namespace])) {
@@ -825,7 +824,7 @@ GREMLIN;
                            ", '" . $row['line'] . "'" .
                            ' )';
             }
-            
+
             if (!empty($query)) {
                 $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file", "phpdoc", "line") VALUES ' . implode(", \n", $query);
                 $this->sqlite->query($query);
@@ -860,7 +859,7 @@ GREMLIN;
                 if (empty($row['uses'])) {
                     continue;
                 }
-                
+
                 foreach($row['uses'] as $uses) {
                     $citIds = preg_grep('/^\d+' . addslashes(mb_strtolower($uses)) . '$/', array_keys($citId));
 
@@ -1168,7 +1167,7 @@ GREMLIN;
             $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static", "phpdoc") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
         }
-        
+
         display("$total properties\n");
 
         // Class Constant
@@ -1382,7 +1381,7 @@ GREMLIN
         }
 
         display("$total global constants\n");
-        
+
         // Collect Functions
         // Functions
         $this->sqlite->query('DROP TABLE IF EXISTS functions');
@@ -1569,7 +1568,7 @@ SQL
             $unique[mb_strtolower($row['name'])] = 1;
         }
         unset($unique);
-        
+
         if (!empty($query)) {
             $query = 'INSERT INTO namespaces ("id", "namespace") VALUES ' . implode(', ', $query);
             $this->sqlite->query($query);
@@ -1605,14 +1604,14 @@ CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 )
 SQL
 );
-        
+
         $this->collectPhpStructures2('Functioncall', 'Functions/IsExtFunction', 'function');
         $this->collectPhpStructures2('Identifier", "Nsname', 'Constants/IsExtConstant', 'constant');
         $this->collectPhpStructures2('Identifier", "Nsname', 'Interfaces/IsExtInterface', 'interface');
         $this->collectPhpStructures2('Identifier", "Nsname', 'Traits/IsExtTrait', 'trait');
         $this->collectPhpStructures2('Newcall", "Identifier", "Nsname', 'Classes/IsExtClass', 'class');
     }
-    
+
     private function collectPhpStructures2($label, $analyzer, $type) {
         $query = <<<GREMLIN
 g.V().hasLabel("$label").where( __.in("ANALYZED").has("analyzer", "$analyzer"))
@@ -1647,7 +1646,7 @@ GREMLIN;
                        'Methodcall'       => 'methodcalls',
                        'Member'           => 'members',
                         );
-        
+
         foreach($types as $label => $name) {
             $query = <<<GREMLIN
 g.V().hasLabel("$label").count();
@@ -1989,7 +1988,7 @@ GREMLIN;
         if (empty($sqlQuery)) {
             return 0;
         }
-        
+
         $sqlQuery = 'INSERT INTO ' . $table . ' ("id", "including", "including_name", "including_type", "included", "included_name", "included_type", "type") VALUES ' . implode(', ', $sqlQuery);
         $this->sqlite->query($sqlQuery);
 
@@ -2286,7 +2285,7 @@ GREMLIN
         foreach($index->toArray()[0] as $number => $count) {
             $values[] = "('$name', $number, $count) ";
         }
-        
+
         if (!empty($values)) {
             $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
             $this->sqlite->query($query);
@@ -2294,7 +2293,7 @@ GREMLIN
 
         display( "$name : " . count($values));
     }
-    
+
     private function collectMissingDefinitions() {
         $values = array();
 
@@ -2329,7 +2328,7 @@ GREMLIN
         }
         $values[] = "('methodcall total', '$methodCount')";
         $values[] = "('methodcall missed', '$methodMissed')";
-        
+
         $memberCount  = $this->gremlin->query('g.V().hasLabel("Member").count()')[0];
         $memberMissed = $this->gremlin->query('g.V().hasLabel("Member")
              .not(where(__.in("DEFINITION")))
@@ -2361,7 +2360,7 @@ GREMLIN
         }
         $values[] = "('static methodcall total', '$staticMethodCount')";
         $values[] = "('static methodcall missed', '$staticMethodMissed')";
-        
+
         $staticConstantCount  = $this->gremlin->query('g.V().hasLabel("Staticonstant").count()')[0];
         $staticConstantMissed = $this->gremlin->query('g.V().hasLabel("Staticonstant")
              .not(where(__.in("DEFINITION")))
@@ -2471,7 +2470,7 @@ CREATE TABLE classChanges (
                     )
 SQL;
         $this->sqlite->query($query);
-        
+
         $total = 0;
 
         // TODO : Constant visibility and value
@@ -2488,11 +2487,11 @@ SQL;
               ->inIs('CONST')
               ->inIs('CONST')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
-              
+
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2') // another class
-              
+
               ->outIs('CONST')
               ->outIs('CONST')
 
@@ -2525,7 +2524,7 @@ GREMLIN
               ->savePropertyAs('visibility', 'visibility1')
               ->inIs('CONST')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
-              
+
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2') // another class
@@ -2558,7 +2557,7 @@ GREMLIN
               ->raw('sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }', array(), array())
               ->inIs('METHOD')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
-              
+
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2') // another class
@@ -2617,7 +2616,7 @@ GREMLIN
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2')
-              
+
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
@@ -2649,7 +2648,7 @@ GREMLIN
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2')
-              
+
               ->outIs('PPP')
               ->notSamePropertyAs('visibility', 'visibility1', Analyzer::CASE_SENSITIVE)
               ->savePropertyAs('visibility', 'visibility2')
@@ -2674,10 +2673,10 @@ GREMLIN
     private function storeClassChangesNewQuery(string $changeType, Query $query) : int {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        
+
         return $this->storeInDump($changeType, $result);
     }
-    
+
     private function storeInDump(string $changeType, $index) : int {
         $values = array();
         foreach($index->toArray() as $change) {
@@ -2688,12 +2687,12 @@ GREMLIN
                           '{$change['class']}', 
                           '{$this->sqlite->escapeString($change['classValue'])}') ";
         }
-        
+
         if (!empty($values)) {
             $query = 'INSERT INTO classChanges ("changeType", "name", "parentClass", "parentValue", "childClass", "childValue") VALUES ' . implode(', ', $values);
             $this->sqlite->query($query);
         }
-        
+
         return count($values);
     }
 
@@ -2807,7 +2806,7 @@ SQL;
 
     public function checkRulesets($ruleset, array $analyzers) {
         $sqliteFile = $this->config->dump;
-        
+
         $sqlite = new \Sqlite3($sqliteFile);
         $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
@@ -2817,7 +2816,7 @@ SQL;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $ran[] = $row['analyzer'];
         }
-        
+
         if (empty(array_diff($analyzers, $ran))) {
             $query = "INSERT INTO themas (\"id\", \"thema\") VALUES (null, \"$ruleset\")";
             $sqlite->query($query);
@@ -2854,7 +2853,7 @@ SQL;
             $this->sqlite->query($query);
         }
     }
-    
+
     private function initDump() {
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
@@ -2941,7 +2940,7 @@ SQL;
 
         display('Inited tables');
     }
-    
+
     private function newQuery($title) {
         return new Query(0, $this->config->project, $title, null, $this->datastore);
     }

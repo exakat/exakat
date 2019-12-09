@@ -49,7 +49,7 @@ class Fetch extends Tasks {
         if (!file_exists($this->config->dump)) {
             throw new NoDump($project);
         }
-        
+
         // transmits the dump sqlite database
         readfile($this->config->dump);
     }

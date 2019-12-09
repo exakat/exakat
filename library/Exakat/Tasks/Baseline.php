@@ -48,7 +48,7 @@ class Baseline extends Tasks {
 
         $list = glob($this->config->project_dir . '/baseline/dump-*.sqlite');
         sort($list);
-    
+
         print PHP_EOL;
         printf(self::FORMAT, '#', 'Name', 'Date');
         print str_repeat('-', 40) . PHP_EOL;
@@ -57,10 +57,10 @@ class Baseline extends Tasks {
             $date = date('Y-m-d', filemtime($l));
             printf(self::FORMAT, $id, $name, $date);
         }
-        
+
         print PHP_EOL . 'Total : ' . count($list) . ' baseline' . (count($list) > 1 ? 's' : '') . PHP_EOL;
     }
-    
+
     private function remove() {
         $baselineStash = new BaselineStash($this->config);
         $baselineStash->removeBaseline($this->config->baseline_id);

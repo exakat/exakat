@@ -22,14 +22,8 @@
 
 namespace Exakat\Tasks\LoadFinal;
 
-use Exakat\Analyzer\Rulesets;
-use Exakat\Graph\Graph;
-use Exakat\Config;
-use Exakat\Data\Methods;
 use Exakat\Query\Query;
-use Exakat\Data\Dictionary;
 use Exakat\Exceptions\GremlinException;
-use Exakat\Datastore;
 use Exakat\Log;
 
 class LoadFinal {
@@ -39,7 +33,7 @@ class LoadFinal {
 
     private $PHPconstants = array();
     private $PHPfunctions = array();
-    
+
     protected $log       = null;
 
     public function __construct() {
@@ -118,7 +112,7 @@ GREMLIN;
         display('End load final');
         $this->logTime('Final');
     }
-    
+
     private function log($step) {
         $this->logTime($step);
         $this->log->log($step);
@@ -257,7 +251,7 @@ GREMLIN;
         display($result->toInt() . ' fixed Fullnspath for Functions');
         $this->log->log(__METHOD__);
     }
-    
+
     private function runQuery($query, $title, $args = array(), $method = __METHOD__) {
         display($title);
 
@@ -277,7 +271,7 @@ GREMLIN;
     private function spotFallbackConstants() {
         $this->logTime('spotFallbackConstants');
         display("spotFallbackConstants\n");
-        
+
         // Define-style constant definitions
         $query = <<<'GREMLIN'
 g.V().hasLabel("Defineconstant")
@@ -374,7 +368,7 @@ g.V().hasLabel("Identifier", "Nsname")
 GREMLIN;
             $this->gremlin->query($query, array('arg1' => $constConstants));
         }
-            
+
         // TODO : handle case-insensitive
         $this->logTime('Constant definitions');
         display('Link constant definitions');
@@ -385,11 +379,7 @@ GREMLIN;
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions
 
-        $themes = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
-                               $this->config->ext,
-                               $this->config->dev,
-                               $this->config->rulesets
-                               );
+        $themes = exakat('rulesets');
 
         $exts = $themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
@@ -398,7 +388,7 @@ GREMLIN;
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext) . '.ini';
             $fullpath = "{$this->config->dir_root}/data/$inifile";
-            
+
             if (file_exists($fullpath)) {
                 $iniFile = parse_ini_file($fullpath);
             } else {

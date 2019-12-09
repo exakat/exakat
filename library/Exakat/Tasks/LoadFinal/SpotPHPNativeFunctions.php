@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SpotPHPNativeFunctions extends LoadFinal {
     private $PHPfunctions = array();
-    
+
     public function run() {
         $count = 0;
 
@@ -88,7 +88,7 @@ class SpotPHPNativeFunctions extends LoadFinal {
 
         display("Set $count functioncall fallingback");
     }
-    
+
     public function setPHPfunctions(array $phpfunctions) {
         $this->PHPfunctions = $phpfunctions;
     }

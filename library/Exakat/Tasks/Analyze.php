@@ -73,7 +73,7 @@ class Analyze extends Tasks {
 
         // Take this before we clean it up
         $this->checkAnalyzed();
-        
+
         if (!empty($this->config->program)) {
             if (is_array($this->config->program)) {
                 $analyzersClass = $this->config->program;
@@ -113,7 +113,7 @@ class Analyze extends Tasks {
         foreach($analyzersClass as $analyzer_class) {
             $this->fetchAnalyzers($analyzer_class, $analyzers, $dependencies);
         }
-        
+
         $analyzerList = sort_dependencies($dependencies);
         if (empty($analyzerList)) {
             display("Done\n");
@@ -138,7 +138,7 @@ class Analyze extends Tasks {
 
         display("Done\n");
     }
-    
+
     private function fetchAnalyzers($analyzer_class, array &$analyzers, array &$dependencies) {
         if (isset($analyzers[$analyzer_class])) {
             return;
@@ -149,7 +149,7 @@ class Analyze extends Tasks {
             display("No such analyzer as $analyzer_class\n");
             return;
         }
-     
+
         if (isset($this->analyzed[$analyzer_class]) &&
             $this->config->noRefresh === true) {
             display("$analyzer_class is already processed\n");
@@ -179,7 +179,7 @@ class Analyze extends Tasks {
             display(" Concurency lock activated for $analyzer_class \n");
             return false;
         }
-        
+
         if (isset($this->analyzed[$analyzer_class]) &&
              $this->config->noRefresh === true) {
             display( "$analyzer_class is already processed\n");
@@ -190,14 +190,14 @@ class Analyze extends Tasks {
         if (!(!isset($this->analyzed[$analyzer_class]) ||
               $this->config->noRefresh !== true)         ) {
             display( "$analyzer_class is already processed\n");
-            
+
             return $this->analyzed[$analyzer_class];
         }
 
         $total_results = 0;
         if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
             $analyzerQuoted = $analyzer->getInBaseName();
-            
+
             $analyzer->storeError('Not Compatible With PHP Version', Analyzer::VERSION_INCOMPATIBLE);
 
             display("$analyzerQuoted is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
@@ -254,7 +254,7 @@ class Analyze extends Tasks {
 
         return $total_results;
     }
-    
+
     private function checkAnalyzed() {
         $rows = $this->datastore->getRow('analyzed');
         foreach($rows as $row) {

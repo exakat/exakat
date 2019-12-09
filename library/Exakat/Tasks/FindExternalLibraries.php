@@ -22,8 +22,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
-use Exakat\Graph\Graph;
 use Exakat\Phpexec;
 use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoCodeInProject;

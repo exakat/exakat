@@ -38,7 +38,7 @@ class Tarbz extends Vcs {
         if (strpos($res, 'bzip2') === false) {
             throw new HelperException('bzip2');
         }
-        
+
         if (ini_get('allow_url_fopen') != true) {
             throw new HelperException('allow_url_fopen');
         }
@@ -83,7 +83,7 @@ class Tarbz extends Vcs {
             $stats['bzip2'] = 'No';
             $stats['bzip2 optional'] = 'Yes';
         }
-        
+
         return $stats;
     }
 

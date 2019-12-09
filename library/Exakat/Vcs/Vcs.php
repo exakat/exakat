@@ -32,14 +32,14 @@ abstract class Vcs {
 
     protected $destination     = '';
     protected $destinationFull = '';
-    
+
     protected $branch = '';
     protected $tag    = '';
-    
+
     protected $checked = false;
-    
+
     const NO_UPDATE = 'No update';
-    
+
     public function __construct($destination, $code_dir) {
         $this->destination     = $destination;
         $this->destinationFull = $code_dir;
@@ -60,10 +60,10 @@ abstract class Vcs {
         if ($this->checked === true) {
             return true;
         }
-        
+
         $this->selfCheck();
         $this->checked = true;
-        
+
         return true;
     }
 
@@ -77,7 +77,7 @@ abstract class Vcs {
     public function update() {
         return self::NO_UPDATE;
     }
-    
+
     public static function getVcs(Config $config) {
         if ($config->svn === true) {
             return Svn::class;

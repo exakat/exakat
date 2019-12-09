@@ -23,14 +23,7 @@
 
 namespace Exakat\Loader;
 
-use Exakat\Config;
-use Exakat\Datastore;
 use Exakat\Data\Collector;
-use Exakat\Exceptions\LoadError;
-use Exakat\Exceptions\NoSuchFile;
-use Exakat\Tasks\CleanDb;
-use Exakat\Tasks\Load;
-use Exakat\Tasks\Tasks;
 use Exakat\Tasks\Helpers\Atom;
 
 class SplitGraphson extends Loader {
@@ -42,7 +35,7 @@ class SplitGraphson extends Loader {
     private $functioncalls = array();
 
     private $config = null;
-    
+
     private $id        = 1;
 
     private $graphdb        = null;
@@ -50,12 +43,12 @@ class SplitGraphson extends Loader {
     private $pathLink       = '';
     private $pathDef        = '';
     private $total          = 0;
-    
+
     private $dictCode = null;
-    
+
     private $datastore = null;
     private $sqlite3   = null;
-   
+
     public function __construct(\Sqlite3 $sqlite3, Atom $id0) {
         $this->config         = exakat('config');
         $this->graphdb        = exakat('graphdb');
@@ -64,10 +57,10 @@ class SplitGraphson extends Loader {
         $this->path           = "{$this->config->tmp_dir}/graphdb.graphson";
         $this->pathLink       = "{$this->config->tmp_dir}/graphdb.link.graphson";
         $this->pathDef        = "{$this->config->tmp_dir}/graphdb.def";
-        
+
         $this->dictCode  = new Collector();
         $this->datastore = exakat('datastore');
-        
+
         $this->cleanCsv();
 
         $jsonText = json_encode($id0->toGraphsonLine($id0)) . PHP_EOL;
@@ -77,7 +70,7 @@ class SplitGraphson extends Loader {
 
         ++$this->total;
     }
-    
+
     public function __destruct() {
         $this->cleanCsv();
     }
@@ -151,7 +144,7 @@ SQL;
             $r = array_map(array($this->graphdb, 'fixId'), $r);
             $row[1] = implode('-', $r);
             fputcsv($f, $row);
-            
+
             if ($chunk > self::LOAD_CHUNK_LINK) {
                 $f = $this->saveLinks($f);
                 $chunk = 0;
@@ -177,7 +170,7 @@ SQL;
 
         return true;
     }
-    
+
     private function saveLinks($f) {
         rewind($f);
         $fp = fopen($this->pathDef, 'w+');
@@ -185,7 +178,7 @@ SQL;
 //        print "Writing $length octets\n";
         fclose($fp);
         fclose($f);
-        
+
         if ($length > 0) {
             $query = <<<GREMLIN
 getIt = { id ->
@@ -241,7 +234,7 @@ GREMLIN;
                 $fileName = $atom->code;
             }
             $json[$atom->id] = $atom->toGraphsonLine($this->id);
-            
+
             if ($atom->atom === 'Functioncall' &&
                 !empty($atom->fullnspath)) {
                 if (isset($this->functioncalls[$atom->fullnspath])) {
@@ -258,7 +251,7 @@ GREMLIN;
             } else {
                 $this->tokenCounts[$link[0]] = 1;
             }
-            
+
             $link[1] = $this->graphdb->fixId($link[1]);
             $link[2] = $this->graphdb->fixId($link[2]);
             $link = implode('-', $link);
@@ -269,7 +262,7 @@ GREMLIN;
         foreach($json as $j) {
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);
-            
+
             $v = mb_strtolower($V);
             $j->properties['lccode'][0]->value = $this->dictCode->get($v);
 
@@ -303,7 +296,7 @@ GREMLIN;
 
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
     }
-    
+
     private function saveNodes() {
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);

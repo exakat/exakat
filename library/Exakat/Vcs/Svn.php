@@ -27,11 +27,11 @@ use Exakat\Exceptions\HelperException;
 class Svn extends Vcs {
     private $info = array();
     private $executable = 'svn';
-    
+
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
     }
-    
+
     protected function selfCheck() {
         $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'svn') === false) {
@@ -53,17 +53,17 @@ class Svn extends Vcs {
         if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
             return $r[1];
         }
-        
+
         if (preg_match('/At revision (\d+)/', $res, $r)) {
             return $r[1];
         }
-        
+
         return 'Error : ' . $res;
     }
 
     private function getInfo() {
         $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info"));
-        
+
         if (empty($res)) {
             $this->info['svn'] = '';
 
@@ -102,7 +102,7 @@ class Svn extends Vcs {
             $stats['installed'] = 'No';
             $stats['optional'] = 'Yes';
         }
-        
+
         return $stats;
     }
 

@@ -49,13 +49,13 @@ class Cvs extends Vcs {
         if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
             return $r[1];
         }
-        
+
         return 'CSV updated to last revision';
     }
 
     private function getInfo() {
         $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info"));
-        
+
         if (empty($res)) {
             $this->info['cvs'] = '';
 
@@ -86,7 +86,7 @@ class Cvs extends Vcs {
             $stats['installed'] = 'No';
             $stats['optional'] = 'Yes';
         }
-        
+
         return $stats;
     }
 

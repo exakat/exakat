@@ -99,10 +99,10 @@ class Update extends Tasks {
         $new = $vcs->update();
         if ($new === Vcs::NO_UPDATE) {
             display('No update available. Skipping');
-            
+
             return;
         }
-        
+
         display($vcs->getName() . " updated to $new");
 
         display('Running files');

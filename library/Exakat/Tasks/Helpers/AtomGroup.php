@@ -24,7 +24,7 @@ namespace Exakat\Tasks\Helpers;
 
 class AtomGroup {
     private $atomCount = 0;
-    
+
     public function __construct(int $init = 0) {
         $this->atomCount = $init;
     }

@@ -47,7 +47,7 @@ class SpotPHPNativeConstants extends LoadFinal {
             display('No PHP Constants');
             return;
         }
-        
+
         $query = $this->newQuery('SpotPHPNativeConstants');
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS )
               ->has('fullnspath')
@@ -66,7 +66,7 @@ GREMLIN
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         display($result->toInt() . ' SpotPHPNativeConstants');
     }
-    
+
     public function setPHPconstants(array $PHPconstants = array()) {
         $this->PHPconstants = $PHPconstants;
     }

@@ -62,7 +62,7 @@ class Zip extends Vcs {
         } else {
             $stats['error'] = $res;
         }
-        
+
         return $stats;
     }
 

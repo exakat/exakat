@@ -28,6 +28,7 @@ use Exakat\Data\Dictionary;
 use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
 use Exakat\Data\Methods;
+use Exakat\Analyzer\Rulesets;
 
 class Container {
     private $verbose    = 0;
@@ -39,6 +40,7 @@ class Container {
     private $dictionary = null;
     private $docs       = null;
     private $methods    = null;
+    private $rulesets   = null;
     
     public function init() {
         $this->config = new Config($GLOBALS['argv']);
@@ -52,11 +54,15 @@ class Container {
         
         $this->methods    = new Methods($this->config);
 
-
         $this->docs = new Docs($this->config->dir_root, 
                                $this->config->ext, 
                                $this->config->dev,
                                );
+
+        $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+                                       $this->config->ext,
+                                       $this->config->dev,
+                                       $this->config->rulesets);
 
     }
     

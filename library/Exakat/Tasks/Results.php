@@ -51,7 +51,7 @@ class Results extends Tasks {
         } else {
             throw new NeedsAnalyzerThema();
         }
-        
+
         foreach($analyzersClass as $id => $analyzerClass) {
             if (substr($analyzerClass, 0, 4) === 'Ext/') {
                 $analyzer = $this->rulesets->getInstance($analyzerClass, $this->gremlin, $this->config);

@@ -574,7 +574,7 @@ array('a/b' => 1 ) to Array
 
 )
 */
-function raiseDimensions($array, $split='/') {
+function raiseDimensions($array, $split='/') : array {
     $return = array();
     
     foreach ($array as $k => $value) {
@@ -609,7 +609,7 @@ Array
 
 
 */
-function flattenDimensions($array, $split='/') {
+function flattenDimensions($array, $split='/') : array {
     $return = array();
     
     foreach ($array as $k => $value) {
@@ -626,7 +626,7 @@ function flattenDimensions($array, $split='/') {
     return $return;
 }
 
-function sort_dependencies($array, $level = 0) {
+function sort_dependencies($array, $level = 0) : array {
     $return = array();
     $next = array();
     
@@ -660,7 +660,7 @@ function filter_analyzer(string $analyzer) : int {
     return preg_match('#^\w+/\w+$#', $analyzer);
 }
 
-function array_sub_sort(array &$list) {
+function array_sub_sort(array &$list) : void {
     foreach ($list as &$l) {
         sort($l);
     }
@@ -675,7 +675,7 @@ function array_collect_by(array &$array, $key, $value) : void {
     }
 }
 
-function readIniPercentage(string $value) {
+function readIniPercentage(string $value) : float {
     $return = abs((int) $value);
     $return = max(0, $return);
     $return = min(100, $return);
@@ -684,7 +684,7 @@ function readIniPercentage(string $value) {
     return $return;
 }
 
-function listToArray(string $string, $separator = ',') {
+function listToArray(string $string, string $separator = ',') : array {
     $list = explode($separator, $string);
     $list = array_map('trim', $list);
     $list = array_unique($list);

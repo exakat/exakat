@@ -46,7 +46,7 @@ GREMLIN
               ->returnCount();
         $query->prepareRawQuery();
         $this->gremlin->query($query->getQuery(), $query->getArguments());
-        
+
         display('Fixed Fullnspath for Constants');
     }
 }

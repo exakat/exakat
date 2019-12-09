@@ -342,12 +342,12 @@ class CloneType1 extends Plugin {
                 $ctype1 = array_column($extras, 'ctype1');
                 $atom->ctype1 = 'n(){' . implode(',', $ctype1) . '}';
                 break;
-                
+
             case 'Arrayliteral' :
                 $ctype1 = array_column($extras, 'ctype1');
                 $atom->ctype1 = $atom->code . '(' . implode(',', $ctype1) . ')';
                 break;
-            
+
             case 'Goto' :
                 $atom->ctype1 = 'goto' . $extras['GOTO']->ctype1;
                 break;
@@ -360,7 +360,7 @@ class CloneType1 extends Plugin {
                 // only one argument for declare ?
                 $atom->ctype1 = 'label' . $extras[0]->ctype1;
                 break;
-                
+
             case 'Insteadof' :
                 $atom->ctype1 = 'insteadof';
                 break;
@@ -380,9 +380,9 @@ class CloneType1 extends Plugin {
 
         default :
             static $i = 0;
-            
+
             $atom->ctype1 = 'default ' . strtolower($atom->atom) . ' ' . ++$i;
-            
+
 //            print "CLONE DEFAULT : $atom->atom\n";
         }
 

@@ -55,7 +55,7 @@ class Upgrade extends Tasks {
                 print 'Unable to find the requested version. Make sure the version number is valid. ' . PHP_EOL;
                 return;
             }
-            
+
             $version = $r[1];
         } else {
             $version = $this->config->version;
@@ -72,7 +72,7 @@ class Upgrade extends Tasks {
 
         if (version_compare(Exakat::VERSION, $version) !== 0) {
             echo 'This version may be updated from the current version ' , Exakat::VERSION , ' to ' , $version  , PHP_EOL;
-            
+
             if ($this->config->update === true) {
 
                 echo '  Updating to version ' , $version , PHP_EOL;

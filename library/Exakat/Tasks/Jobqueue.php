@@ -28,7 +28,7 @@ use Exakat\Datastore;
 class Jobqueue extends Tasks {
     const CONCURENCE = self::QUEUE;
     const PATH = '/tmp/queue.exakat';
-    
+
     const COMMANDS = array('quit', 'config', 'ping', 'project', 'onepage', 'report', 'init');
 
     private $pipefile = self::PATH;
@@ -82,7 +82,7 @@ class Jobqueue extends Tasks {
             die('unable to open the named pipe');
         }
         stream_set_blocking($pipe, false);
-        
+
         //////// process the queue ////////
         while(1) {
             while($input = trim(fgets($pipe))) {
@@ -92,34 +92,34 @@ class Jobqueue extends Tasks {
 
             $job = current($queue);
             $jobkey = key($queue);
-            
+
             if(empty($job)) {
                 display( "no jobs to do - waiting...\n");
                 stream_set_blocking($pipe, true);
             } else {
                 $command = json_decode(trim($job));
-                
+
                 if ($command === null) {
                     $this->log('Unknown command : ' . $job . "\t" . time() . "\n");
                     next($queue);
                     unset($job, $queue[$jobkey]);
                     continue;
                 }
-                
+
                 $command = array_merge(array('exakat'), $command);
                 switch($command[1]) {
                     case 'init' :
                         $this->processInit($command);
                         break;
-                    
+
                     case 'project' :
                         $this->processProject($command);
                         break;
-                    
+
                     case 'report' :
                         $this->processReport($command);
                         break;
-                    
+
                     case 'remove' :
                         $this->processRemove($command);
                         break;
@@ -127,7 +127,7 @@ class Jobqueue extends Tasks {
                     case 'config' :
                         $this->processConfig($command);
                         break;
-                    
+
                     default :
                         echo 'Unknown command "', $command[1], '"', PHP_EOL;
                         $this->log("Unknown command '$command[1]'");
@@ -138,14 +138,14 @@ class Jobqueue extends Tasks {
             }
         }
     }
-    
+
     private function processQuit($job) {
         display( "Received quit command. Bye\n");
         $this->log('Quit command');
         $this->log->log('Quit jobQueue : ' . time() . "\n");
         die();
     }
-    
+
     private function processInit($job) {
         $config = new ConfigExakat($job);
         $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
@@ -165,7 +165,7 @@ class Jobqueue extends Tasks {
         $this->log('end init : ' . $job[2] . ' (' . number_format($end -$begin, 2) . ' s)');
         display( 'processing init job ' . $job[2] . ' done (' . number_format($end -$begin, 2) . ' s)' . PHP_EOL);
     }
-    
+
     private function processPing($job) {
         print 'pong' . PHP_EOL;
     }

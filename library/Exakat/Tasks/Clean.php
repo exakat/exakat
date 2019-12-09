@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Datastore;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\NoSuchProject;
 

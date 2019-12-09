@@ -23,7 +23,6 @@
 namespace Exakat\Tasks;
 
 use Exakat\Exakat;
-use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Tasks\Helpers\Php;
@@ -36,7 +35,7 @@ class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     protected $logname = self::LOG_NONE;
-    
+
     private $reportList = array();
 
     public function __construct($subTask = self::IS_NOT_SUBTASK) {
@@ -59,7 +58,7 @@ class Doctor extends Tasks {
 
         $stats = array_merge($stats,
                              $this->checkPHPs($phpBinaries));
-        
+
         if ($this->config->verbose === true) {
             $stats = array_merge($stats, $this->checkOptional());
         }
@@ -101,7 +100,7 @@ class Doctor extends Tasks {
         }
         sort($this->reportList);
         $stats['exakat']['reports']      = $this->array2list($reportList);
-        
+
         $stats['exakat']['rulesets']       = $this->array2list($this->config->project_rulesets);
         $stats['exakat']['extra rulesets'] = $this->array2list(array_keys($this->config->rulesets));
 
@@ -123,7 +122,7 @@ class Doctor extends Tasks {
         $stats['PHP']['ext/json']               = extension_loaded('json')            ? 'Yes' : 'No';
         $stats['PHP']['ext/xmlwriter']          = extension_loaded('xmlwriter')       ? 'Yes' : 'No (Optional, used by XML reports)';
         $stats['PHP']['ext/pcntl']              = extension_loaded('pcntl')           ? 'Yes' : 'No (Optional)';
-        
+
         if (extension_loaded('xdebug') === true) {
             $stats['PHP']['xdebug.max_nesting_level']            = (ini_get('xdebug.max_nesting_level') ) . ' (Must be -1 or more than 1000)';
         }
@@ -200,7 +199,7 @@ TEXT
         } else {
             $ini = file_get_contents("{$this->config->dir_root}/server/exakat.ini");
             $version = PHP_MAJOR_VERSION . PHP_MINOR_VERSION;
-            
+
             if (file_exists("{$this->config->projects_root}/tinkergraph")) {
                 $folder = 'tinkergraph';
                 // tinkergraph or gsneo4j
@@ -217,10 +216,10 @@ TEXT
             $ini = str_replace(array('{VERSION}', '{VERSION_PATH}',   '{GRAPHDB}', ";$graphdb", '{GRAPHDB}_path', ),
                                array( $version,    $this->config->php, $graphdb,    $graphdb,    $folder),
                                $ini);
-            
+
             file_put_contents("{$this->config->projects_root}/config/exakat.ini", $ini);
         }
-        
+
         $this->checkInstall($graphdb);
 
         // projects
@@ -263,7 +262,7 @@ TEXT
 
         return $stats;
     }
-    
+
     private function checkInstall($graphdb) {
         if ($graphdb === 'gsneo4j') {
             if (file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties")) {
@@ -279,7 +278,7 @@ TEXT
             // Nothing to do
         }
     }
-    
+
     private function checkGremlinServer($path) {
         if (!file_exists($path)) {
             return;
@@ -396,17 +395,17 @@ TEXT
             $gremlinVersion = basename(array_pop($gremlinJar));
             //example : gremlin-core-3.2.5.jar
             $gremlinVersion = substr($gremlinVersion, 13, -4);
-            
+
             $stats['gremlin version'] = $gremlinVersion;
 
             if (file_exists("{$this->config->tinkergraph_port}/db/tinkergraph.pid")) {
                 $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->tinkergraph_port}/db/tinkergraph.pid")) . ')';
             }
         }
-        
+
         return $stats;
     }
-    
+
     private function getTinkerGraphNeo4j() {
         $stats = array();
 
@@ -425,7 +424,7 @@ TEXT
             if (count($plugins) !== 72) {
                 $stats['grapes failed'] = 'Partially installed neo4j plugin. Please, check installation docs, and "grab" again : some of the files are missing for neo4j.';
             }
-            
+
             $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
             $gremlinVersion = basename(array_pop($gremlinJar));
             //gremlin-core-3.2.5.jar
@@ -439,7 +438,7 @@ TEXT
             //neo4j-2.3.3.jar
             $neo4jVersion = substr($neo4jVersion, 6, -4);
             $stats['neo4j version'] = $neo4jVersion;
-            
+
             if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
                 $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) . ')';
             }

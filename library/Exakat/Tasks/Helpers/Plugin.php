@@ -25,7 +25,7 @@ namespace Exakat\Tasks\Helpers;
 abstract class Plugin {
     public function __construct() {
     }
-    
+
     abstract public function run($atom, $extras);
 }
 
