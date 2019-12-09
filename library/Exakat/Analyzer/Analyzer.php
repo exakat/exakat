@@ -233,7 +233,7 @@ abstract class Analyzer {
         $this->methods = exakat('methods');
     }
 
-    public function init(int $analyzerId = null) {
+    public function init(int $analyzerId = null) : void {
         if (self::$rulesId === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);

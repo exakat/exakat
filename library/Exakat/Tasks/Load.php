@@ -608,6 +608,7 @@ class Load extends Tasks {
                 if (isset($progressBar)) {
                     echo $progressBar->advance();
                 }
+            }
         }
         $this->loader->finalize($this->relicat);
         
@@ -780,7 +781,6 @@ class Load extends Tasks {
 
         if (filesize($fullpath) === 0) {
             throw new NoFileToProcess($filename, 'empty file');
-            return 0;
         }
 
         if (!$this->php->compile($fullpath)) {
