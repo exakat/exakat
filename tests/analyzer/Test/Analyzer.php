@@ -34,6 +34,7 @@ if (file_exists(__DIR__.'/../config.php')) {
 include "$EXAKAT_PATH/library/Exakat/Autoload/Autoload.php";
 include "$EXAKAT_PATH/library/Exakat/Autoload/AutoloadExt.php";
 include "$EXAKAT_PATH/library/Exakat/Autoload/AutoloadDev.php";
+include "$EXAKAT_PATH/vendor/autoload.php";
 include "$EXAKAT_PATH/library/helpers.php";
 
 $autoload = new \Exakat\Autoload\Autoload();
@@ -51,7 +52,7 @@ abstract class Analyzer extends TestCase {
             $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
         }
         list($analyzer, $number) = explode('.', $file);
-                
+
         // Test are run with test project.
         $ini = parse_ini_file("$EXAKAT_PATH/projects/test/config.ini");
         $phpversion = empty($ini['phpversion']) ? PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION : $ini['phpversion'];
@@ -60,17 +61,35 @@ abstract class Analyzer extends TestCase {
         $test_config = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', substr(get_class($this), 5));
         $test_config = str_replace('\\', '/', $test_config);
 
-        // initialize Config (needed by phpexec)
-        $pwd = getcwd();
-        chdir($EXAKAT_PATH);
-        $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
-        chdir($pwd);
-        
+        // collect the expected values
+        require("$test_path/exp/$file.php");
+
         $themes = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
                                new AutoloadExt(''),
                                new AutoloadDev('')
                             );
 
+        $analyzerobject = $themes->getInstance($test_config);
+        if ($analyzerobject === null) {
+            $this->markTestSkipped("Couldn\'t get an analyzer for $test_config.");
+        }
+        if (!$analyzerobject->checkPhpVersion($phpversion)) {
+            $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
+        }
+
+/*
+
+        // initialize Config (needed by phpexec)
+        $pwd = getcwd();
+        chdir($EXAKAT_PATH);
+        $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
+        chdir($pwd);
+
+        $themes = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
+                               new AutoloadExt(''),
+                               new AutoloadDev('')
+                            );
+        
         $analyzerobject = $themes->getInstance($test_config, null, $config);
         if ($analyzerobject === null) {
             $this->markTestSkipped("Couldn\'t get an analyzer for $test_config.");
@@ -80,7 +99,8 @@ abstract class Analyzer extends TestCase {
         }
 
         require("$test_path/exp/$file.php");
-        
+        */
+        $config = exakat('config');
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
         if (empty($config->$versionPHP)) {
             die("Warning : No binary for $phpversion\n");
