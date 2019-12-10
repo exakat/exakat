@@ -23,8 +23,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Exakat;
 
 class Inventories extends Reports {
     const FILE_EXTENSION = '';
@@ -140,7 +138,7 @@ class Inventories extends Reports {
         fclose($fp);
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Inventories',
                      );
     }

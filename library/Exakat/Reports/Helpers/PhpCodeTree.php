@@ -27,7 +27,7 @@ use Sqlite3;
 
 class PhpCodeTree {
     private $sqlite = null;
-    
+
     public $namespaces      = array();
 
     public $constants       = array();
@@ -37,11 +37,11 @@ class PhpCodeTree {
     public $classconstants  = array();
     public $properties      = array();
     public $methods         = array();
-    
+
     public function __construct(Sqlite3 $sqlite) {
         $this->sqlite = $sqlite;
     }
-    
+
     public function load() {
         // collect namespaces
         $res = $this->sqlite->query(<<<SQL
@@ -63,7 +63,7 @@ SQL
 SELECT * FROM constants
 SQL
         );
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             array_collect_by($this->constants, $row['namespaceId'], $row);
         }
@@ -86,7 +86,7 @@ GROUP BY functions.id
 
 SQL
         );
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             array_collect_by($this->functions, $row['namespaceId'], $row);
         }
@@ -125,12 +125,12 @@ LEFT JOIN cit cit4
 GROUP BY cit.id
 SQL
         );
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $row['methods']         = &$this->methods;
             $row['properties']      = &$this->properties;
             $row['classconstants']  = &$this->classconstants;
-            
+
             array_collect_by($this->cits, $row['namespaceId'], $row);
         }
 
@@ -139,7 +139,7 @@ SQL
 SELECT * FROM properties
 SQL
         );
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             array_collect_by($this->properties, $row['citId'], $row);
         }
@@ -149,7 +149,7 @@ SQL
 SELECT * FROM classconstants
 SQL
         );
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             array_collect_by($this->classconstants, $row['citId'], $row);
         }
@@ -171,7 +171,7 @@ JOIN cit
 GROUP BY methods.id
 SQL
         );
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             array_collect_by($this->methods, $row['citId'], $row);
         }

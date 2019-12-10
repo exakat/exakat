@@ -23,9 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
 use Exakat\Reports\Helpers\Results;
 
 class Grade extends Ambassador {
@@ -68,7 +65,7 @@ class Grade extends Ambassador {
     public function __construct($config) {
         parent::__construct($config);
         $this->themesToShow      = array('Security');
-        
+
         $this->grading = array(
     'Security/AnchorRegex'                  => self::G_WARNING,
     'Security/EncodedLetters'               => self::G_WARNING,
@@ -81,8 +78,8 @@ class Grade extends Ambassador {
     'Security/Sqlite3RequiresSingleQuotes'  => self::G_ERROR,
         );
     }
-    
-    public function dependsOnAnalysis() : array {
+
+    public function dependsOnAnalysis(): array {
         return array('Security',
                      );
     }
@@ -102,7 +99,7 @@ class Grade extends Ambassador {
         }
 
         $this->globalGrade = 0;
-        
+
         $grade = 0;
         foreach($this->resultsCounts as $name => $value) {
             if ($value > 0) {
@@ -155,7 +152,7 @@ HTML;
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
-        
+
         $globalData = array(self::G_CRITICAL  => (object) array('label' => 'Critical', 'value' => 0),
                             self::G_ERROR     => (object) array('label' => 'Error',    'value' => 0),
                             self::G_WARNING   => (object) array('label' => 'Warning',  'value' => 0),
@@ -167,7 +164,7 @@ HTML;
             }
         }
         unset($globalData[self::G_NONE]);
-        
+
         $globalData = json_encode(array_values($globalData));
 
         $blocjs = <<<JAVASCRIPT

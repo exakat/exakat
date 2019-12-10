@@ -23,10 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
-use Exakat\Reports\Helpers\Results;
 
 class Weekly extends Ambassador {
     const FILE_FILENAME  = 'weekly';
@@ -70,11 +66,11 @@ class Weekly extends Ambassador {
 
     private $grading       = array();
     private $resultsCounts = array();
-    
+
     private $weeks        = array();
     private $current      = '';
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Analyze',
                     );
     }
@@ -83,10 +79,10 @@ class Weekly extends Ambassador {
         $this->current = (new \Datetime('now'))->format('Y-W');
         for ($i = 0; $i < 5; ++$i) {
             $date = (new \Datetime('now'))->sub(new \DateInterval('P' . ($i * 7) . 'D'))->format('Y-W');
-            
+
             $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
             $this->weeks[$date] = json_decode($json);
-            
+
             if (json_last_error() != '') {
                 print "Error : could not read week details for $date\n";
                 continue;
@@ -104,7 +100,7 @@ class Weekly extends Ambassador {
         $date = date('Y-W', strtotime(date('Y') . 'W' . ((int) date('W') + 1) . '1'));
         $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
         $this->weeks[$date] = json_decode($json);
-        
+
         if (json_last_error() != '') {
             print "Error : could not read week details for $date\n";
         }
@@ -140,7 +136,7 @@ class Weekly extends Ambassador {
         }
 
         $this->globalGrade = 0;
-        
+
         $grade = 0;
         foreach($this->resultsCounts as $name => $value) {
             if ($value > 0) {
@@ -222,7 +218,7 @@ HTML;
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis, "weekly-$week");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
-        
+
         $globalData = array(self::G_CRITICAL  => (object) array('label' => 'Critical', 'value' => 0),
                             self::G_ERROR     => (object) array('label' => 'Error',    'value' => 0),
                             self::G_WARNING   => (object) array('label' => 'Warning',  'value' => 0),
@@ -237,7 +233,7 @@ HTML;
         foreach($globalData as $data) {
             $data->value = intval($data->value * 100) / 100;
         }
-        
+
         $globalData = json_encode(array_values($globalData));
 
         $blocjs = <<<JAVASCRIPT

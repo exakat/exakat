@@ -23,13 +23,12 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Exakat;
 
 class Phpcsfixer extends Reports {
     const FILE_EXTENSION = 'php';
     const FILE_FILENAME  = 'phpcsfixer.exakat';
-    
+
     private $matches = array(   'Php/IsnullVsEqualNull'         => 'is_null',
                                 'Php/NewExponent'               => 'pow_to_exponentiation',
                                 'Php/LogicalInLetters'          => 'logical_operators',
@@ -43,7 +42,7 @@ class Phpcsfixer extends Reports {
                                 'Php/ImplodeOneArg'             => 'implode_call',
                             );
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('php-cs-fixable',
                      );
     }
@@ -59,10 +58,10 @@ class Phpcsfixer extends Reports {
             $this->count();
         }
         natcasesort($rules);
-        
+
         $date = date('Y-m-d h:i:j');
         $version = Exakat::VERSION . '- build ' . Exakat::BUILD;
-        
+
         $rules = implode(PHP_EOL, $rules);
 
         // preparing the list of PHP extensions to compile PHP with

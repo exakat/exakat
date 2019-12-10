@@ -29,7 +29,7 @@ use Exakat\Configsource\Commandline;
 
 class Exakat {
     const VERSION = '2.0.6';
-    const BUILD = 1017;
+    const BUILD = 1027;
     
     private $config  = null;
     private $gremlin = null;
@@ -272,6 +272,11 @@ class Exakat {
 
             case 'show' :
                 $task = new Tasks\Show();
+                $task->run();
+                break;
+
+            case 'install' :
+                $task = new Tasks\Install();
                 $task->run();
                 break;
 

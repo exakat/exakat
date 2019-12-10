@@ -23,7 +23,6 @@
 
 namespace Exakat\Data;
 
-use Exakat\Config;
 
 class Slim {
     private $sqlite = null;
@@ -57,7 +56,7 @@ class Slim {
 
         return $return;
     }
-    
+
     public function getClasses($release = null) {
         $query = 'SELECT namespaces.namespace || "\" || class AS class, release FROM classes 
                     JOIN namespaces 

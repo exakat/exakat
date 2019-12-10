@@ -27,7 +27,7 @@ use stdClass;
 class Classdependencies extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'class_dependencies';
-    
+
     private $finalName   = '';
     private $tmpName     = '';
 
@@ -55,7 +55,7 @@ class Classdependencies extends Reports {
                 $source = count($json->nodes);
                 $json->nodes[$row['including']] = $source;
                 $properties[$source] = array('caption' => $row['including_name'],
-                                             'type'    => $row['including_type'],);
+                                             'type'    => $row['including_type'], );
                 $in[$source] = 0;
                 $out[$source] = 0;
             }
@@ -67,7 +67,7 @@ class Classdependencies extends Reports {
                 $destination = count($json->nodes);
                 $json->nodes[$row['included']] = $destination;
                 $properties[$destination] = array('caption' => $row['included_name'],
-                                                  'type'    => $row['included_type'],);
+                                                  'type'    => $row['included_type'], );
                 $in[$destination]  = 0;
                 $out[$destination] = 0;
             }

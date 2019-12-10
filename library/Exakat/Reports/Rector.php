@@ -23,13 +23,12 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Exakat;
 
 class Rector extends Reports {
     const FILE_EXTENSION = 'yaml';
     const FILE_FILENAME  = 'rector.exakat';
-    
+
     private $matches = array('Php/IsAWithString'                   => 'Rector\CodeQuality\Rector\FuncCall\IsAWithStringWithThirdArgumentRector',
                              'Structures/ShouldPreprocess'         => 'Rector\CodeQuality\Rector\Concat\JoinStringConcatRector',
                              'Structures/ElseIfElseif'             => 'Rector\CodeQuality\Rector\If_\ShortenElseIfR',
@@ -41,10 +40,10 @@ class Rector extends Reports {
                              'Functions/NeverUsedParameter'        => 'Rector\DeadCode\Rector\ClassMethod\RemoveUnusedParameterRector',
                              'Structures/NoChoice'                 => 'Rector\DeadCode\Rector\If_\SimplifyIfElseWithSameContentRector',
                              'Functions/Closure2String'            => 'Rector\CodingStyle\Rector\FuncCall\SimpleArrayCallableToStringRector',
-                             
+
                             );
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Rector',
                      );
     }
@@ -58,7 +57,7 @@ class Rector extends Reports {
             $services[] = $this->matches[$row['analyzer']];
             $this->count();
         }
-        
+
         $date = date('Y-m-d h:i:j');
         $version = Exakat::VERSION . '- build ' . Exakat::BUILD;
 

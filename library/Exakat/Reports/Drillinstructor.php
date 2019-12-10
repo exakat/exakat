@@ -22,11 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
-use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
 
 class Drillinstructor extends Ambassador {
     const FILE_FILENAME  = 'drill';
@@ -40,7 +35,7 @@ class Drillinstructor extends Ambassador {
 
     protected function generateLevels(Section $section) {
         $levels = '';
-        
+
         foreach(range(1, 6) as $level) {
             $levelRows = '';
             $total = 0;
@@ -49,7 +44,7 @@ class Drillinstructor extends Ambassador {
                 continue;
             }
             $analyzersList = makeList($analyzers);
-        
+
             $res = $this->sqlite->query(<<<SQL
 SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
 SQL
@@ -78,10 +73,10 @@ SQL
                     $row['grade'] = chr(66 + $grade); // B to F
                 }
                 $row['color'] = $colors[$row['grade']];
-                
+
                 $total += $row['count'];
                 $count += (int) $row['count'] === 0;
-    
+
                 $levelRows .= '<tr><td>' . $ini['name'] . "</td><td>$row[count]</td><td style=\"background-color: $row[color]\">$row[grade]</td></tr>\n";
             }
 
@@ -92,7 +87,7 @@ SQL
                 $grade = chr(65 + $grade); // B to F
             }
             $color = $colors[$grade];
-            
+
             $levels .= '<tr><td style="background-color: #bbbbbb">Level ' . $level . '</td>
                             <td style="background-color: #bbbbbb">' . $total . '</td></td>
                             <td style="background-color: ' . $color . '">' . $grade . '</td></tr>' . PHP_EOL .

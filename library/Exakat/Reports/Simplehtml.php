@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
 class Simplehtml extends Reports {
@@ -40,12 +39,12 @@ class Simplehtml extends Reports {
 
         $this->finalName = "$folder/$name";
         $this->tmpName = "{$this->config->tmp_dir}/.$name";
-        
+
         $blocks = array();
         $contents = array();
 
         $this->initFolder();
-        
+
         $blocks[] = '{{INTRODUCTION}}';
         $contents[] = $this->makeIntro();
 
@@ -58,7 +57,7 @@ class Simplehtml extends Reports {
         $html = file_get_contents("{$this->tmpName}/index.html");
         $html = str_replace($blocks, $contents, $html);
         file_put_contents("{$this->tmpName}/index.html", $html);
-        
+
         $this->cleanFolder();
     }
 
@@ -110,10 +109,10 @@ class Simplehtml extends Reports {
 HTML;
             $this->count();
         }
-        
+
         return $text;
     }
-        
+
     private function makeList($folder) {
         if (!empty($this->config->project_rulesets)) {
             $list = $this->rulesets->getRulesetsAnalyzers(array($this->config->project_rulesets));
@@ -207,9 +206,9 @@ HTML;
             rmdirRecursive($this->tmpName . '2');
         }
     }
-    
+
     private function makeId($id) {
-        return strtolower(str_replace(array(' ', '(', ')', '/',), '_', $id));
+        return strtolower(str_replace(array(' ', '(', ')', '/', ), '_', $id));
     }
 }
 

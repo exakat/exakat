@@ -22,8 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Reports\Helpers\Results;
 
 class Phpcity extends Reports {
     const FILE_EXTENSION = 'json';
@@ -31,7 +29,7 @@ class Phpcity extends Reports {
 
     public function _generate($analyzerList) {
         $results = array();
-        
+
         $query = <<<'SQL'
 SELECT
      cit.id,
@@ -75,7 +73,7 @@ SQL;
     "anonymous": false
 }
 */
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $row['implements'] = null;
             $row['anonymous'] = null;
@@ -84,7 +82,7 @@ SQL;
             $row['trait'] = (bool) $row['trait'];
 //            $row['no_attrs'] = rand(0, 45);
 //            $row['no_methods'] = rand(0, 25);
-            
+
             $this->count();
             $results[] = $row;
         }

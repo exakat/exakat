@@ -22,12 +22,7 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Config;
-use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
 
 class Top10 extends Ambassador {
     const FILE_FILENAME  = 'top10';
@@ -66,7 +61,7 @@ class Top10 extends Ambassador {
         $this->themesToShow = array('Top10');
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Top10',
                      );
     }
@@ -78,21 +73,21 @@ class Top10 extends Ambassador {
 
     protected function generateTop10(Section $section) {
         $top10 = array('Dangling reference'      => array('Structures/DanglingArrayReference'),
-                       'For with count'          => array('Structures/ForWithFunctioncall',),
-                       'Next month trap'         => array('Structures/NextMonthTrap',),
+                       'For with count'          => array('Structures/ForWithFunctioncall', ),
+                       'Next month trap'         => array('Structures/NextMonthTrap', ),
                        'array_merge in loops'    => array('Performances/CsvInLoops',
                                                           'Performances/NoConcatInLoop',
-                                                          'Performances/ArrayMergeInLoops',),
+                                                          'Performances/ArrayMergeInLoops', ),
                        'strpos() fail'           => array('Structures/StrposCompare',
-                                                          'Security/MinusOneOnError',),
-                       'Shorten first'           => array('Performances/SubstrFirst',),
-                       'Don\'t unset properties' => array('Classes/DontUnsetProperties',),
+                                                          'Security/MinusOneOnError', ),
+                       'Shorten first'           => array('Performances/SubstrFirst', ),
+                       'Don\'t unset properties' => array('Classes/DontUnsetProperties', ),
                        'Operators precedence'    => array('Php/LogicalInLetters',
                                                           'Php/ConcatAndAddition',
                                                          ),
-                       'Missing subpattern'      => array('Php/MissingSubpattern',),
+                       'Missing subpattern'      => array('Php/MissingSubpattern', ),
                        'Avoid real'              => array('Php/AvoidReal',
-                                                          'Type/NoRealComparison',),
+                                                          'Type/NoRealComparison', ),
                      );
 
         $sqlList = makeList(array_merge(...array_values($top10)));

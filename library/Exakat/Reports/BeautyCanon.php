@@ -22,8 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Reports\Helpers\Results;
 
 class BeautyCanon extends Reports {
     const FILE_EXTENSION = 'txt';

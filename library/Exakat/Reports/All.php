@@ -22,11 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Tasks\Report;
-use Exakat\Tasks\Tasks;
-use Exakat\Reports\Reports;
-use Exakat\Config;
 
 class All extends Reports {
     const FILE_EXTENSION = '';
@@ -42,13 +37,13 @@ class All extends Reports {
         foreach($reports as $reportName) {
             display("Reporting with $reportName\n----------------------------------------\n");
             $reportClass = Reports::getReportClass($reportName);
-            
+
             $report = new $reportClass($this->config);
             $report->generate($folder, $report::FILE_FILENAME ===  self::STDOUT ? self::FILE_FILENAME : $report::FILE_FILENAME);
         }
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         $themesToRun = array(array());
         foreach(Reports::$FORMATS as $format) {
             $reportClass = "\Exakat\Reports\\$format";
@@ -56,12 +51,12 @@ class All extends Reports {
                 continue;
             }
             $report = new $reportClass($this->config);
-            
+
             $themesToRun[] = $report->dependsOnAnalysis();
             unset($report);
             gc_collect_cycles();
         }
-        
+
         return array_unique(array_merge(...$themesToRun));
     }
 }

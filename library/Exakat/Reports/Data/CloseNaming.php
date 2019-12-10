@@ -64,8 +64,8 @@ SQL
         // Only numbers as difference
         $numbers = preg_grep('/[0-9]/', $variables);
         foreach($numbers as $variable) {
-            $v = str_replace(array(0,1,2,3,4,5,6,7,8,9), '', $variable);
-            $r = array_filter( $variables, function ($x) use ($v) { return str_replace(array(0,1,2,3,4,5,6,7,8,9), '', $x) === $v; });
+            $v = str_replace(array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), '', $variable);
+            $r = array_filter( $variables, function ($x) use ($v) { return str_replace(array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), '', $x) === $v; });
             if (count($r) > 1) {
                 $results[$variable]['numbers'] = array_diff($r, array($variable));
             }
@@ -100,7 +100,7 @@ SQL
                 }
             }
         }
-        
+
         return $results;
     }
 

@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Uml extends Reports {
     const FILE_EXTENSION = 'dot';

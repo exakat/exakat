@@ -22,22 +22,19 @@
 
 namespace Exakat\Reports\Data;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Reports\Ambassador;
-use Exakat\Reports\Reports;
 
 abstract class Data {
     protected $sqlite = null;
     protected $values = null;
-    
+
     public function __construct(\Sqlite3 $sqlite) {
         $this->sqlite = $sqlite;
     }
-    
+
     public function values() {
         return $this->values;
     }
-    
+
     abstract public function prepare();
 }
 

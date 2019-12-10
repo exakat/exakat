@@ -23,7 +23,6 @@
 
 namespace Exakat\Data;
 
-use Exakat\Config;
 
 class ZendF3 {
     private $sqlite = null;
@@ -63,7 +62,7 @@ class ZendF3 {
 
         return $return;
     }
-    
+
     public function getClasses($component, $release = null) {
         $query = 'SELECT namespaces.namespace || "\" || class AS class, release FROM classes 
                     JOIN namespaces 
@@ -160,8 +159,8 @@ class ZendF3 {
         } else {
             $whereSQL = ' WHERE ' . implode(' AND ', $where);
         }
-        
-        
+
+
         $query = <<<SQL
 SELECT type, cit, name, namespaces.namespace, release FROM deprecated 
     JOIN namespaces 

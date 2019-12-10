@@ -24,8 +24,6 @@
 namespace Exakat\Reports;
 
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
-use Exakat\Analyzer\Analyzer;
-use Exakat\Exakat;
 use Exakat\Reports\Helpers\Results;
 
 class Yaml extends Reports {

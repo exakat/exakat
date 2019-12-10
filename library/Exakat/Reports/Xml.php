@@ -24,7 +24,6 @@
 namespace Exakat\Reports;
 
 use XmlWriter;
-use Exakat\Analyzer\Analyzer;
 use Exakat\Exakat;
 use Exakat\Reports\Helpers\Results;
 

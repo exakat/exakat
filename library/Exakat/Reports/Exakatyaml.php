@@ -22,8 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Reports\Helpers\Results;
 use Symfony\Component\Yaml\Yaml;
 
 class Exakatyaml extends Reports {
@@ -37,7 +35,7 @@ class Exakatyaml extends Reports {
                         'project_reports' => $this->config->project_reports,
                         'rulesets'        => range(0, 10),
         );
-        
+
         $rules = array();
         $sqlList = makeList($analyzerList);
         $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer IN (' . $sqlList . ') AND count >= 0');
@@ -58,18 +56,18 @@ class Exakatyaml extends Reports {
 
         return $yaml;
     }
-    
+
     private function format($r) {
         $ident = str_repeat(' ', 8);
-        
+
         $list = explode(', ', $r[2]);
-    
+
         foreach($list as &$l) {
             $title = $this->docs->getDocs($l, 'name');
             $pad = str_repeat(' ', 50 - strlen($title));
             $l     = " {$ident}\"$title\":$pad$l";
         }
-        
+
         sort($list);
         $list = implode("\n", $list);
         return <<<YAML

@@ -22,18 +22,13 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
-use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
 
 class Migration73 extends Ambassador {
     const FILE_FILENAME  = 'migration73';
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Migration73';
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('CompatibilityPHP73',
                      );
     }

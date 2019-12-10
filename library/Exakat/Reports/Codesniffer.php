@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
 class Codesniffer extends Reports {
@@ -76,13 +75,13 @@ class Codesniffer extends Reports {
             $l = count(array_filter(array_unique(array_keys($file['messages'])), function ($x) { return $x > 0; }));
             $text .= 'FOUND ' . $c . ' ISSUE' . ( $c > 1 ? 'S' : '') . ' AFFECTING ' . $l . ' LINE' . ( $l > 1 ? 'S' : '') . "\n";
             $text .= $separator;
-            
+
             $maxSize = strlen(max(array_keys($file['messages'])));
             $padding = str_repeat(' ', $maxSize);
 
             $maxSize = strlen(max(array_keys($file['messages'])));
             $padding = str_repeat(' ', $maxSize);
-            
+
             foreach($file['messages'] as $line => $column) {
 
                 $messages = $column[0];
@@ -95,7 +94,7 @@ class Codesniffer extends Reports {
             }
             $text .= "$separator\n\n\n";
         }
-        
+
         return $text;
     }
 }

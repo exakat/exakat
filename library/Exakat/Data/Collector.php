@@ -27,19 +27,19 @@ class Collector {
     private $dictionary = array();
     private $last       = array();
     private $count = 0;
-    
+
     public function get($v) {
         if (isset($this->dictionary[$v])) {
             return $this->dictionary[$v];
         }
-        
+
         ++$this->count;
         $this->dictionary[$v] = $this->count;
         $this->last[$v] = $this->count;
-        
+
         return $this->count;
     }
-    
+
     public function getDictionary() {
         return $this->dictionary;
     }

@@ -23,7 +23,6 @@
 
 namespace Exakat\Data;
 
-use Exakat\Config;
 
 class ZendF2 {
     private $sqlite = null;

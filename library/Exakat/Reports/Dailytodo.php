@@ -22,12 +22,11 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Dailytodo extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'todo';
-    
+
     private $tmpName     = '';
     private $finalName   = '';
 
@@ -39,7 +38,7 @@ class Dailytodo extends Reports {
         $this->generateData($folder);
         $this->cleanFolder();
     }
-    
+
     private function generateData($folder, $name = 'table') {
         $project_rulesets = $this->config->project_rulesets ?? array('Analyzer');
         $list = $this->rulesets->getRulesetsAnalyzers($project_rulesets);
@@ -57,7 +56,7 @@ class Dailytodo extends Reports {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)){
             $all[] = $row;
         }
-        
+
         if (empty($all)) {
             return;
         }
@@ -69,7 +68,7 @@ class Dailytodo extends Reports {
         $count = 0;
         foreach($res as $row) {
             $docs = $this->getDocs($row['analyzer']);
-            
+
             $fullcode = $this->syntaxColoring($row['fullcode']);
             $file = $row['file'] . ':' . $row['line'];
             $first = substr($docs['description'], 0, strpos($docs['description'], '.') + 1 );
@@ -94,7 +93,7 @@ class Dailytodo extends Reports {
 HTML;
             ++$count;
         }
-        
+
         $html = file_get_contents($this->tmpName . '/invoice.html');
         $html = str_replace('<reporting>', $reporting, $html);
         $html = str_replace('<count>', $count, $html);
@@ -142,12 +141,12 @@ HTML;
 
         return $colored;
     }
-    
+
     private function getThanks() {
         $thanks = parse_ini_file("{$this->config->dir_root}/data/thankyou.ini", \INI_PROCESS_SECTIONS);
         $thanks = $thanks['thanks'];
         shuffle($thanks);
-        
+
         return array_pop($thanks);
     }
 }

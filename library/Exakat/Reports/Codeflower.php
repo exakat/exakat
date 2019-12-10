@@ -22,12 +22,11 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Codeflower extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'codeflower';
-    
+
     private $select      = array();
     private $tmpName     = '';
     private $finalName   = '';
@@ -42,11 +41,11 @@ class Codeflower extends Reports {
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->initFolder();
-        
+
         $this->getNamespaces();
         $this->getFileDependencies();
         $this->getClassHierarchy();
-        
+
         $this->cleanFolder();
     }
 
@@ -80,19 +79,19 @@ SQL
             $c->name = $including;
             $c->size = 100;
             $c->children = array();
-            
+
             foreach($included as $i) {
                 $d = new \stdClass();
                 $d->name = $i;
                 $d->size = 100;
-                
+
                 $c->children[] = $d;
                 $this->count();
             }
-            
+
             $root->children[] = $c;
         }
-        
+
         file_put_contents($this->tmpName . '/data/inclusions.json', json_encode($root));
         $this->select['By inclusions'] = 'inclusions.json';
     }
@@ -114,10 +113,10 @@ SQL
 
             $classesId[$row['id']] = $class;
         }
-        
+
         foreach($classes as $id => $extends) {
             if (!is_int($id)) { continue; }
-            
+
             foreach($classes as &$extends2) {
                 if (isset($extends2[$classesId[$id]])) {
                     $extends2[$classesId[$id]] = $extends;
@@ -125,7 +124,7 @@ SQL
                 }
             }
         }
-        
+
         $root = new \stdClass();
         $root->name = '';
         $root->size = 200;
@@ -140,7 +139,7 @@ SQL
 
                 $root->children[] = $c;
             }
-            
+
             foreach($extends as $e => $extends2) {
                 $d = new \stdClass();
                 $d->name = $e;
@@ -150,7 +149,7 @@ SQL
                     $d3 = new \stdClass();
                     $d3->name = $e3;
                     $d3->size = 50;
-                    
+
                     $d->children[] = $d3;
                 }
 
@@ -162,7 +161,7 @@ SQL
         file_put_contents($this->tmpName . '/data/classes.json', json_encode($root));
         $this->select['By class hierarchy'] = 'classes.json';
     }
-    
+
     private function getNamespaces() {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT name, cit.id, extends, type, namespace
@@ -182,11 +181,11 @@ SQL
             $c->name = $row['namespace'] . '\\' . $row['name'];
             $c->type = $row['type'];
             $c->size = 50;
-            
+
             if (!isset($ns[$row['namespace']])) {
                 $d = explode('\\', $row['namespace']);
                 array_shift($d);
-                
+
                 $name = '';
                 $m = null;
                 foreach($d as $e) {
@@ -199,7 +198,7 @@ SQL
                     $n->size = $name;
                     $n->type = 'namespace';
                     $n->children = array();
-                    
+
                     $ns[$name] = $n;
                     $ns[$namep]->children[] = $n;
                     $m = $n;

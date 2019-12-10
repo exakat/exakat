@@ -23,11 +23,10 @@
 
 namespace Exakat\Data;
 
-use Exakat\Config;
 
 abstract class Data {
     private $config = null;
-    
+
     protected $name = '';
 
     private $sqlite = null;
@@ -101,7 +100,7 @@ abstract class Data {
 
         return $return;
     }
-    
+
     public function getClasses($component, $version = null) {
         $query = 'SELECT namespaces.name || "\" || cit.name AS className, version FROM cit 
                     JOIN namespaces 
@@ -200,7 +199,7 @@ abstract class Data {
 
         return $return;
     }
-    
+
 }
 
 ?>

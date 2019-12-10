@@ -22,16 +22,15 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
 class Typehint4all extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = self::STDOUT;
-    
+
     const FORMAT = ' % 4s |  % 18s | %s';
-    
-    public function dependsOnAnalysis() : array {
+
+    public function dependsOnAnalysis(): array {
         return array('Functions/CouldTypeWithInt',
                      'Functions/CouldTypeWithArray',
                      'Functions/CouldTypeWithString',
@@ -64,7 +63,7 @@ class Typehint4all extends Reports {
             }
             $maxLine = max($maxLine, $row['line'], strlen($row['fullcode']));
             $maxTitle = max($maxTitle, strlen($titleCache[$row['analyzer']]), strlen($row['file']), strlen($row['fullcode']));
-            
+
             $displayResults[] = $row;
         }
 
@@ -75,7 +74,7 @@ class Typehint4all extends Reports {
 
         foreach($perfile as $file => &$issues) {
             usort($issues, function ($a, $b) { return $a['line'] <=> $b['line'] ?: $a['fullcode'] <=> $b['fullcode'] ?: $a['analyzer'] <=> $b['analyzer'] ;});
-            
+
             $previous = '';
 
             foreach($issues as &$row) {
@@ -84,11 +83,11 @@ class Typehint4all extends Reports {
                 } else {
                     $previous = "$row[line]-$row[fullcode]";
                 }
-                
+
                 $row = sprintf(self::FORMAT, $row['line'], $row['fullcode'], $titleCache[$row['analyzer']]);
             }
         }
-        
+
         $text = '';
         $line = strlen($maxLine) + $maxTitle + 30;
 
@@ -98,7 +97,7 @@ class Typehint4all extends Reports {
                      str_repeat('-', $line) . "\n" .
                      implode("\n", $issues) . "\n" .
                      str_repeat('-', $line) . "\n"
-                     
+
                      . "\n"
                      . "\n";
         }

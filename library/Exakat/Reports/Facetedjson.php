@@ -22,9 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Config;
-use Exakat\Datastore;
 
 class Facetedjson extends Reports {
     const FILE_EXTENSION = 'json';

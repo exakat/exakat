@@ -28,13 +28,13 @@ use Exakat\Datastore;
 class Dictionary {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
-    
+
     private $datastore  = null;
     private $dictionary = array();
     private $lcindex    = array();
-    
+
     private static $singleton = null;
-    
+
     public function __construct(Datastore $datastore) {
         $this->datastore = exakat('datastore');
     }
@@ -51,7 +51,7 @@ class Dictionary {
             $this->init();
         }
         $return = array();
-        
+
         $code = makeArray($code);
 
         if ($case === self::CASE_SENSITIVE) {
@@ -66,24 +66,24 @@ class Dictionary {
                 $return[] = $this->dictionary[$d];
             }
         }
-        
+
         return $return;
     }
-    
+
     public function grep($regex) {
         $keys = preg_grep($regex, array_keys($this->dictionary));
-        
+
         $return = array();
         foreach($keys as $k) {
             $return[] = $this->dictionary[$k];
         }
-        
+
         return $return;
     }
 
     public function source($code) {
         $return = array();
-        
+
         $reverse = array_flip($this->dictionary);
 
         foreach($code as $c) {
@@ -91,13 +91,13 @@ class Dictionary {
                 $return[] = $reverse[$c];
             }
         }
-        
+
         return $return;
     }
 
     public function length($length) {
         $return = array();
-        
+
         if (preg_match('/ > (\d+)/', $length, $r)) {
             $closure = function ($s) use ($r) { return strlen($s) > $r[1]; };
         } elseif (preg_match('/ == (\d+)/', $length, $r)) {
@@ -107,9 +107,9 @@ class Dictionary {
         } else {
             assert(false, "codeLength didn't understand $length");
         }
-        
+
         $return = array_filter($this->dictionary, $closure, ARRAY_FILTER_USE_KEY);
-        
+
         return array_values($return);
     }
 
@@ -119,7 +119,7 @@ class Dictionary {
                                                                               strpos($x,'::') !== false &&
                                                                               mb_strtolower($x) === $x;},
                                                                               ARRAY_FILTER_USE_KEY );
-        
+
         $return = array();
         foreach($doublecolon as $key => $value) {
             // how can this regex fail ?
@@ -127,7 +127,7 @@ class Dictionary {
                 $return['\\' . $r[1]] = $value;
             }
         }
-        
+
         return $return;
     }
 }

@@ -22,11 +22,7 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
 
 class Ambassadornomenu extends Ambassador {
     protected function getBasedPage($file) {

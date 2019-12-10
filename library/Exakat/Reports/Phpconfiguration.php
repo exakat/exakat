@@ -23,7 +23,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Phpconfiguration extends Reports {
     const FILE_EXTENSION = 'ini-dist';
@@ -197,11 +196,11 @@ disable_classes = $classesList
         }
 
         $final .= "\n\n" . $directives;
-        
+
         return $final;
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Appinfo',
                      );
     }

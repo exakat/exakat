@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
 class Perfile extends Reports {
@@ -61,7 +60,7 @@ class Perfile extends Reports {
                      str_repeat('-', $line) . "\n" .
                      implode("\n", $issues) . "\n" .
                      str_repeat('-', $line) . "\n"
-                     
+
                      . "\n"
                      . "\n";
         }

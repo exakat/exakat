@@ -22,14 +22,12 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Reports\Helpers\Results;
 use Exakat\Reports\Helpers\PhpCodeTree;
 
 class Stubs extends Reports {
     const FILE_EXTENSION = 'php';
     const FILE_FILENAME  = 'stubs';
-    
+
     const INDENTATION = '    ';
 
     public function _generate($analyzerList) {
@@ -83,9 +81,9 @@ class Stubs extends Reports {
 
         $code->map('methods', function ($method) {
             $options = ($method['visibility'] == '' ? '' : $method['visibility'] . ' ') .
-                       ($method['static']     == 0  ? '' : 'static ') .
-                       ($method['abstract']   == 0  ? '' : 'abstract ') .
-                       ($method['final']      == 0  ? '' : 'final ');
+                       ($method['static']     == 0 ? '' : 'static ') .
+                       ($method['abstract']   == 0 ? '' : 'abstract ') .
+                       ($method['final']      == 0 ? '' : 'final ');
             $options = trim($options);
             $options .= !empty($options) ? ' ' : '';
             $returntype = ($method['returntype'] == ' ') ? '' : ' : ' . $method['returntype'];
@@ -123,7 +121,7 @@ class Stubs extends Reports {
                 empty($namespace['cits'][$namespace['id']]['reduced'])) {
                 return '';
             }
-            
+
             // empty namspaces are also displayed
 
             return 'namespace ' . ltrim($namespace['namespace'], '\\') . " {\n"

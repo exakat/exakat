@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Plantuml extends Reports {
     const FILE_EXTENSION = 'puml';
@@ -55,7 +54,7 @@ SQL
             $methods = preg_replace(array('/public /is', '/protected /is', '/private /is', '/(static|abstract) /is', ),
                                     array('+',           '#',              '-',            '{\1}',                   ),
                                     $methods);
-            
+
             if ($row['type'] == 'class' || $row['type'] === 'interface') {
                 $type = $row['type'];
             } else {
@@ -75,7 +74,7 @@ SQL
 "\n" . $properties .
 "\n" . $methods .
 "\n}";
-            
+
             $puml[] = $object;
             $this->count();
         }
@@ -101,7 +100,7 @@ SQL
             } else {
                 $link = '--';
             }
-            
+
             $puml .= "Class{$ids[$row['implements']]} $link Class{$ids[$row['implementing']]}\n";
         }
 

@@ -26,7 +26,7 @@ namespace Exakat\Data;
 class Methods {
     private $sqlite = null;
     private $phar_tmp = null;
-    
+
     const STRICT = true;
     const LOOSE  = false;
 
@@ -176,7 +176,7 @@ SQL;
 
     public function getFunctionsByArgType($typehint = 'int', $strict = self::STRICT) {
         $return = array_fill(0, 5, array());
-        
+
         if ($strict === self::LOOSE) {
             $search = " LIKE '%$typehint%'";
         } elseif ($strict === self::STRICT) {
@@ -232,7 +232,7 @@ SQL;
                 array_collect_by($return, $type, explode(',', $row['functions']));
             }
         }
-        
+
         foreach($return as $type => &$list) {
             $list = array_merge(...$list);
         }

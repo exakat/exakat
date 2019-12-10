@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
 class Radwellcode extends Reports {
@@ -109,7 +108,7 @@ class Radwellcode extends Reports {
         }
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('RadwellCodes',
                      );
     }

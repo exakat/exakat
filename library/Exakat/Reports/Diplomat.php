@@ -22,12 +22,7 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Config;
-use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
 
 class Diplomat extends Ambassador {
     const FILE_FILENAME  = 'diplomat';
@@ -54,7 +49,7 @@ class Diplomat extends Ambassador {
         $this->themesToShow = array('Top10');
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
                      'Top10', 'Preferences',

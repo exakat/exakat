@@ -22,11 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Exakat;
-use Exakat\Phpexec;
-use Exakat\Reports\Reports;
-use Exakat\Reports\Helpers\Results;
 
 class History extends Reports {
     const FILE_FILENAME  = 'history';
@@ -41,7 +36,7 @@ class History extends Reports {
         $sqlite = new \Sqlite3("$folder/$name." . self::FILE_EXTENSION);
         $query = "SELECT name FROM sqlite_master WHERE type='table' AND name = 'hash';";
         $res = $sqlite->querySingle($query);
-        
+
         if (empty($res)) {
             $sqlite->query(<<<'SQLITE'
 CREATE TABLE hash (
@@ -78,7 +73,7 @@ SQLITE
             print "Dataset #$serial is already in history. Ignoring\n";
             return;
         }
-        
+
         display("Add dataset #$serial to history\n");
 
         $sqlite->query('ATTACH "' . $this->config->dump . '" AS dump');

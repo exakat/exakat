@@ -22,12 +22,11 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Stats extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat.stat';
-    
+
     private $extensions = array(
                 'Summary' => array(
                         'Namespaces'     => 'Namespace',
@@ -57,7 +56,7 @@ class Stats extends Reports {
                         'Foreach'             => 'Foreach',
                         'While'               => 'While',
                         'Do..while'           => 'Dowhile',
- 
+
                         'New'                 => 'New',
                         'Clone'               => 'Clone',
                         'Class constant call' => 'Staticconstant',
@@ -65,18 +64,18 @@ class Stats extends Reports {
                         'Static method call'  => 'Staticmethodcall',
                         'Properties usage'    => 'Property',
                         'Static property'     => 'Staticproperty',
- 
+
                         'Throw'               => 'Throw',
                         'Try'                 => 'Try',
                         'Catch'               => 'Catch',
                         'Finally'             => 'Finally',
- 
+
                         'Yield'               => 'Yield',
                         'Yield From'          => 'Yieldfrom',
- 
+
                         '?  :'                => 'Ternary',
                         '?: '                 => 'Php/Coalesce',
- 
+
                         'Variables constants' => 'Constants/VariableConstant',
                         'Variables variables' => 'Variables/VariableVariables',
                         'Variables functions' => 'Functions/Dynamiccall',
@@ -101,18 +100,18 @@ class Stats extends Reports {
             $atoms[$d['analyzer']] = (int) $d['count'];
             $this->count();
         }
-        
+
         $results = $this->extensions;
         foreach($results as &$analyzers) {
             foreach($analyzers as $name => &$analyzer) {
                 $analyzer = $atoms[$analyzer] ?? 0;
             }
         }
-        
+
         return json_encode($results);
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Stats',
                      );
     }

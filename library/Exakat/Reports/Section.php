@@ -24,7 +24,7 @@ namespace Exakat\Reports;
 
 class Section {
     private const SAME_AS_FILE = true;
-    
+
     public $method  = 'NoSuchMethod';
     public $title   = 'No title';
     public $menu    = 'No menu title';
@@ -32,7 +32,7 @@ class Section {
     public $file    = 'empty';
     public $icon    = 'circle-o';
     public $ruleset = 'None';
-    
+
     public function __construct(array $section) {
         $this->title   = $section['title']   ?? $this->title;
         $this->menu    = $section['menu']    ?? $this->title;  // Yes, menu === title if not specified
@@ -42,7 +42,7 @@ class Section {
         $this->method  = $section['method']  ?? $this->method;
         $this->ruleset = $section['ruleset'] ?? $this->ruleset;
     }
-    
+
     public function __get($name) {
         display("Access to undefined property $name\n");
     }

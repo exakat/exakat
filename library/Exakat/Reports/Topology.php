@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Dot;
 
 class Topology extends Reports {
@@ -43,7 +42,7 @@ class Topology extends Reports {
                 display('Call this report with -P Dump/Typehintorder or -P Dump/NewOrder');
                 return '';
         }
-    
+
         $res = $this->sqlite->query($query);
         $nodes = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -62,7 +61,7 @@ class Topology extends Reports {
             if (!isset($names[$origin] )) {
                 $names[] = $origin;
             }
-        
+
             if (!isset($names[$destination] )) {
                 $names[] = $destination;
             }

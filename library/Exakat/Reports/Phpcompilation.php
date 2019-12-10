@@ -23,7 +23,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Phpcompilation extends Reports {
     const FILE_EXTENSION = 'txt';
@@ -83,11 +82,11 @@ TEXT
             $final .= implode("\n", $pecl) . "\n\n";
         }
         $final .= implode("\n", $return);
-        
+
         return $final;
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Appinfo',
                      );
     }

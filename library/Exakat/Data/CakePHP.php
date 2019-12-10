@@ -23,7 +23,6 @@
 
 namespace Exakat\Data;
 
-use Exakat\Config;
 
 class CakePHP {
     private $sqlite = null;
@@ -57,7 +56,7 @@ class CakePHP {
 
         return $return;
     }
-    
+
     public function getClasses($component = 'cakephp', $release = null) {
         $query = 'SELECT namespaces.namespace || "\" || class AS class, release FROM classes 
                     JOIN namespaces 
@@ -108,7 +107,7 @@ class CakePHP {
                 $return[$row['release']] = array($row['interface']);
             }
         }
-        
+
 
         return $return;
     }

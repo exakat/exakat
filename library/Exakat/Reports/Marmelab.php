@@ -22,23 +22,22 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Marmelab extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat';
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Analyze',
                     );
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         $rulesets = $this->config->project_rulesets ?? $this->dependsOnAnalysis();
-        
+
         $list = $this->rulesets->getRulesetsAnalyzers($rulesets);
         $list = makeList($list);
-        
+
         $analyzers = array();
         $files     = array();
 

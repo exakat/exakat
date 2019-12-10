@@ -22,11 +22,7 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Config;
-use Exakat\Analyzer\Rulesets;
-use Exakat\Analyzer\Analyzer;
 use Exakat\Dump;
-use Exakat\Reports\Helpers\Docs;
 
 abstract class Reports {
     const STDOUT = 'stdout';
@@ -36,7 +32,7 @@ abstract class Reports {
                                           'Text', 'Xml', 'Uml', 'Yaml', 'Plantuml', 'None', 'Simplehtml', 'Owasp', 'Perfile', 'BeautyCanon',
                                           'Phpconfiguration', 'Phpcompilation', 'Favorites', 'Manual', 'Stubs',
                                           'Inventories', 'Clustergrammer', 'Filedependencies', 'Filedependencieshtml', 'Classdependencies', 'Stubs',
-                                          'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer','Codesniffer', 'Phpcsfixer',
+                                          'Radwellcode', 'Grade', 'Weekly', 'Scrutinizer', 'Codesniffer', 'Phpcsfixer',
                                           'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable', 'Exakatyaml',
                                           'Codeflower', 'Dependencywheel', 'Phpcity', 'Sarb',
                                           'Exakatvendors', 'Topology',
@@ -88,7 +84,7 @@ abstract class Reports {
         $report = ucfirst(strtolower($report));
         return "\\Exakat\\Reports\\$report";
     }
-    
+
     public function generate($folder, $name = null) {
         if (empty($name)) {
             // FILE_FILENAME is defined in the children class
@@ -133,15 +129,15 @@ abstract class Reports {
         return $this->count;
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         if (empty($this->config->rulesets)) {
             return array();
         } else {
             return $this->config->rulesets;
         }
     }
-    
-    public function checkMissingRulesets() : array {
+
+    public function checkMissingRulesets(): array {
         $required = $this->dependsOnAnalysis();
 
         if (empty($required)) {

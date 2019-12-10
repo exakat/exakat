@@ -29,7 +29,7 @@ class Favorites extends Reports {
 
     public function _generate($analyzerList) {
         $analyzers = $this->rulesets->getRulesetsAnalyzers(array('Preferences'));
-        
+
         $return = array();
         foreach($analyzers as $analyzer) {
             $r = $this->datastore->getHashAnalyzer($analyzer);
@@ -41,7 +41,7 @@ class Favorites extends Reports {
             $return[$analyzer] = $r;
             $this->count();
         }
-        
+
         return json_encode($return, JSON_PRETTY_PRINT);
     }
 }

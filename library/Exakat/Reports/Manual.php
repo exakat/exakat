@@ -22,16 +22,14 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Exakat;
 use Exakat\Phpexec;
-use Exakat\Reports\Helpers\Results;
 use Exakat\Vcs\Vcs;
 
 class Manual extends Reports {
     const FILE_EXTENSION = 'md';
     const FILE_FILENAME  = 'manual.exakat';
-    
+
     private $summary = array('Structures'  => array(),
                              'Expressions' => array(),
                              'Values'      => array(),
@@ -42,7 +40,7 @@ class Manual extends Reports {
         $md = '';
 
         $md .= 'Introduction' . PHP_EOL . PHP_EOL;
-        
+
         $md .= '# Structures' . PHP_EOL . PHP_EOL;
         $md .= $this->generateExceptionTree();
         $md .= $this->generateConstants();
@@ -67,14 +65,14 @@ class Manual extends Reports {
         $md .= $this->generateSettings();
 
         $summary = 'Table of content' . PHP_EOL . '---' . PHP_EOL . PHP_EOL;
-        
+
         foreach($this->summary as $section => $list) {
             $summary .= '+ ' . $section . PHP_EOL;
             $summary .= '   + ' . implode(PHP_EOL . '   + ', $list) . PHP_EOL;
         }
-        
+
         $md = $summary . PHP_EOL . '---' . PHP_EOL . $md;
-        
+
         return $md;
     }
 
@@ -84,11 +82,11 @@ class Manual extends Reports {
         unset($this->summary['Empty']);
 
         $emptyMd = 'The following ' . count($empty) . ' sections didn\'t yield any material. They are noted as empty here.' . PHP_EOL . PHP_EOL . '   + ' . implode(PHP_EOL . '   + ', $empty) . PHP_EOL;
-        
+
         $this->summary['Annex'][] = '[Empty docs](#empty-docs)';
         $md = '<a name="' . $this->toId('empty-docs') . '"></a>' . PHP_EOL . '## Empty docs' . PHP_EOL . PHP_EOL;
         $md .= $emptyMd . PHP_EOL;
-    
+
        return $md;
     }
 
@@ -108,23 +106,23 @@ class Manual extends Reports {
                 $paths[$path] = 1;
             }
         }
-        
+
         ksort($paths);
         $count = count($paths);
         $paths = raiseDimensions($paths);
         $folders .= $this->generateFoldersCB($paths);
-        
+
         $this->summary['Structures'][] = '[Folders](#folders)' . PHP_EOL;
         $md = '<a name="' . $this->toId('folders') . '"></a>' . PHP_EOL . '## Folders' . PHP_EOL . PHP_EOL;
         $md .= 'There are ' . $count . ' folders.' . PHP_EOL . PHP_EOL;
         $md .= $folders . PHP_EOL;
-    
+
        return $md;
     }
 
     private function generateFoldersCB($array, $level = 0) {
         $return = '';
-        
+
         foreach($array as $key => $value) {
             if (is_array($value)) {
                 $return .= str_repeat('  ', $level) . '+ `' . $key . '`' . PHP_EOL .
@@ -133,10 +131,10 @@ class Manual extends Reports {
                 $return .= str_repeat('  ', $level) . '+ `' . (empty($key) ? '/' : $key) . '`' . PHP_EOL;
             }
         }
-        
+
         return $return;
     }
-    
+
     private function generateSettings() {
         $info = array(array('Project name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
@@ -165,11 +163,11 @@ class Manual extends Reports {
         foreach($info as $i) {
             $settings .= "+ __$i[0]__ : $i[1]\n";
         }
-        
+
         $this->summary['Annex'][] = '[Settings](#exakat-settings)';
         $md = '<a name="' . $this->toId('exakat-settings') . '"></a>' . PHP_EOL . '## Settings' . PHP_EOL . PHP_EOL;
         $md .= $settings . PHP_EOL;
-    
+
        return $md;
     }
 
@@ -180,12 +178,12 @@ class Manual extends Reports {
     private function escapeMd($string) {
         return str_replace('_', '\\_', $string);
     }
-    
+
     private function generateConstants() {
         $total = 0;
         $constants = '';
         $md = '';
-        
+
         $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.name AS class, classconstants.constant AS constant, value 
 FROM classconstants 
@@ -195,7 +193,7 @@ JOIN cit
     ORDER BY cit.name, classconstants.constant, value
 SQL
 );
-        
+
         $previousClass = '';
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($previousClass !== $row['class']) {
@@ -205,16 +203,16 @@ SQL
             $constants .= '  + `' . $row['constant'] . '` = ' . $this->escapeMd($row['value']) . PHP_EOL;
             ++$total;
         }
-        
+
         if (empty($constants)) {
             return '';
         }
-        
+
         $this->summary['Structures'][] = '[Constants](#constants)';
         $md = '<a name="' . $this->toId('constants') . '"></a>' . PHP_EOL . '## Constants' . PHP_EOL . PHP_EOL;
         $md .= $total . ' constants and class constants are defined.' . PHP_EOL . PHP_EOL;
         $md .= $constants . PHP_EOL;
-    
+
        return $md;
     }
 
@@ -222,45 +220,45 @@ SQL
         $total = 0;
         $expressions = '';
         $md = '';
-        
+
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Structures/DynamicCalls"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $expressions .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
             ++$total;
         }
-        
+
         if (empty($expressions)) {
             return '';
         }
-        
+
         $this->summary['Expressions'][] = '[Dynamic expressions](#dynamic-expressions)';
         $md = '<a name="' . $this->toId('dynamic expressions') . '"></a>' . PHP_EOL . '## Dynamic expressions' . PHP_EOL . PHP_EOL;
         $md .= $total . ' dynamic expressions' . PHP_EOL . PHP_EOL;
         $md .= $expressions . PHP_EOL;
-    
+
        return $md;
     }
-    
+
     private function generateErrorMessages() {
         $total = 0;
         $errors = '';
         $md = '';
-        
+
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Structures/ErrorMessages"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $errors .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
             ++$total;
         }
-        
+
         if (empty($errors)) {
             return '';
         }
-        
+
         $this->summary['Values'][] = '[Error messages](#error-messages)';
         $md .= '## Error messages' . PHP_EOL . PHP_EOL;
         $md .= $total . ' error messages' . PHP_EOL . PHP_EOL;
         $md .= $errors . PHP_EOL;
-    
+
        return $md;
     }
 
@@ -275,7 +273,7 @@ SQL
     private function generateEmail() {
         return $this->generateGeneric('Type/Email', 'Email');
     }
-    
+
     private function generateIncoming() {
         return $this->generateGeneric('Type/GPCIndex', 'Incoming variables');
     }
@@ -296,27 +294,27 @@ SQL
         $total = 0;
         $url = '';
         $md = '';
-        
+
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="' . $analyzer . '" ORDER BY fullcode');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $url .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
             ++$total;
         }
-        
+
         if (empty($url)) {
             $this->summary['Empty'][] = $name;
             return '';
         }
-        
+
         $id = $this->toId($name);
         $this->summary[$section][] = '[' . $name . '](#' . $id . ')';
         $md .= '<a name="' . $this->toId($name) . '"></a>' . PHP_EOL . '## ' . $name . PHP_EOL . PHP_EOL;
         $md .= $total . ' ' . $name . PHP_EOL . PHP_EOL;
         $md .= $url . PHP_EOL;
-    
+
        return $md;
     }
-    
+
     private function generateRegex() {
         return $this->generateGeneric('Type/Regex', 'Regular expressions');
     }
@@ -426,7 +424,7 @@ SQL
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
-            
+
             $list[$parent][] = $row['fullcode'];
         }
 
@@ -434,7 +432,7 @@ SQL
             $this->summary['Empty'][] = 'Exception Tree';
             return '';
         }
-        
+
         array_sub_sort($list);
         $theTable = $this->tree2ul($exceptions, $list);
 
@@ -442,27 +440,27 @@ SQL
         $md = '<a name="' . $this->toId('exception-tree') . '"></a>' . PHP_EOL . '## Exception Tree' . PHP_EOL . PHP_EOL;
         $md .= $total . ' exceptions' . PHP_EOL . PHP_EOL;
         $md .= $theTable . PHP_EOL;
-    
+
        return $md;
     }
 
     private function toId($name) {
         return str_replace(' ', '-', strtolower($name));
-    
+
     }
 
     private function tree2ul($tree, $display, $level = 0) {
         if (empty($tree)) {
             return '';
         }
-        
+
         $return = '';
-        
+
         foreach($tree as $k => $v) {
             $phpTree = '';
             $selfTree = '';
 
-            
+
             $parent = '\\' . strtolower($k);
             if (isset($display[$parent])) {
                 $return .= str_repeat('    ', $level) . '* __`' . $k . '`__';
@@ -479,10 +477,10 @@ SQL
             if (is_array($v)) {
                 $phpTree = PHP_EOL . $this->tree2ul($v, $display, $level + 1);
             }
-            
+
             $return .= $phpTree . $selfTree;
         }
-        
+
         $return = str_replace(' { /**/ } ', '', $return);
         $return = preg_replace('/ extends \\\\?\w+/', '', $return);
         return $return;
@@ -542,14 +540,14 @@ SQL
             case 'Targz':
                 $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;
-            
+
             default :
                 $info[] = array('Repository URL', 'Downloaded archive');
         }
-        
+
         return $info;
     }
-    
+
 }
 
 ?>

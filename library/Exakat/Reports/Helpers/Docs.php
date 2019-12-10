@@ -29,12 +29,12 @@ use Exakat\Autoload\AutoloadDev;
 class Docs {
     private $pathToIni = null;
     private $ext = null;
-    
+
     private static $docs = null;
-    
+
     public function __construct(string $pathToIni, AutoloadExt $ext = null, AutoloadDev $dev = null) {
         $this->pathToIni = $pathToIni;
-        
+
         $this->ext = $ext;
         $this->dev = $dev;
     }
@@ -47,7 +47,7 @@ class Docs {
                 return self::$docs[$analyzer];
             }
         }
-        
+
         if (file_exists("{$this->pathToIni}/human/en/$analyzer.ini")) {
             $ini = parse_ini_file("{$this->pathToIni}/human/en/$analyzer.ini", \INI_PROCESS_SECTIONS);
         } elseif (($this->dev !== null) && ($iniString = $this->dev->loadData("human/en/$analyzer.ini")) !== null) {
@@ -65,7 +65,7 @@ class Docs {
             $ini['parameter'][] = $ini[$rank];
             unset($ini[$rank]);
         }
-        
+
         if (empty($ini['severity'])) {
             $ini['severity'] = Analyzer::S_NONE;
         } else {
@@ -81,7 +81,7 @@ class Docs {
         if (empty($ini['phpversion'])) {
             $ini['phpversion'] = Analyzer::PHP_VERSION_ANY;
         }
-        
+
         self::$docs[$analyzer] = $ini;
 
         if (isset(self::$docs[$analyzer][$property])) {

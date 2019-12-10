@@ -24,10 +24,7 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
-use Exakat\Exakat;
 use Exakat\Phpexec;
-use Exakat\Reports\Reports;
-use Exakat\Reports\Section;
 
 class Owasp extends Ambassador {
     const FILE_FILENAME  = 'owasp';
@@ -40,7 +37,7 @@ class Owasp extends Ambassador {
                          'D' => '#DF9100',
                          'E' => '#E23E00',
                          'F' => '#E50016',
-                         
+
                          );
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
@@ -153,11 +150,11 @@ class Owasp extends Ambassador {
 
     private function generateOwaspDocumentation() {
         $baseHTML = $this->getBasedPage('analyses_doc');
-        
+
         $owasp = json_decode(file_get_contents($this->config->dir_root . '/data/owasp.top10.json'));
-        
+
         $content = '<p>Documentation is extracted from the OWASP TOP 10 2017, with extra content from Exakat.</p><ul>';
-        
+
         foreach($owasp as $doc) {
             $content.="<h2>$doc->code - $doc->name</h2>";
             $content .= "<p>$doc->description</p>\n";
@@ -189,7 +186,7 @@ class Owasp extends Ambassador {
                 continue;
             }
             $analyzersList = makeList($analyzers);
-        
+
             $res = $this->sqlite->query(<<<SQL
 SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
 SQL
@@ -211,7 +208,7 @@ SQL
                     $row['grade'] = chr(66 + $grade - 1); // B to F
                 }
                 $row['color'] = self::COLORS[$row['grade']];
-                
+
                 $total += $row['count'];
                 $count += (int) ($row['count'] === 0);
 
@@ -225,7 +222,7 @@ SQL
                 $grade = chr(65 + $grade); // B to F
             }
             $color = self::COLORS[$grade];
-            
+
             $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">' . $group . '</td>
                             <td style="background-color: lightgrey">' . $total . '</td></td>
                             <td style="background-color: ' . $color . '; font-weight: bold; font-size: 20; text-align: center; ">' . $grade . '</td></tr>' . PHP_EOL .
@@ -249,7 +246,7 @@ SQL
                 continue;
             }
             $analyzersList = makeList($analyzers);
-        
+
             $res = $this->sqlite->query(<<<SQL
 SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
 SQL
@@ -271,7 +268,7 @@ SQL
                     $row['grade'] = chr(66 + $grade - 1); // B to F
                 }
                 $row['color'] = self::COLORS[$row['grade']];
-                
+
                 $total += $row['count'];
                 $count += (int) $row['count'] === 0;
             }
@@ -283,7 +280,7 @@ SQL
                 $grade = chr(65 + $grade); // B to F
             }
             $color = self::COLORS[$grade];
-            
+
             $levels .= '<tr style="border-top: 3px solid black; border-bottom: 3px solid black;"><td style="background-color: lightgrey">' . $group . '</td>
                             <td style="background-color: lightgrey">&nbsp;</td></td>
                             <td style="background-color: ' . $color . '">' . $grade . '</td></tr>' . PHP_EOL;
@@ -485,7 +482,7 @@ SQL;
         $this->putBasedPage('analyzers', $finalHTML);
     }
 
-    protected function getAnalyzersResultsCounts() : array {
+    protected function getAnalyzersResultsCounts(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $list = '"' . implode('", "', $list) . '"';
 
@@ -586,9 +583,9 @@ SQL;
         foreach ($data as $value) {
             $xAxis[] = "'" . $value['file'] . "'";
             $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
-            $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
-            $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['None'];
+            $dataMajor[]    = empty($severities[$value['file']]['Major']) ? 0 : $severities[$value['file']]['Major'];
+            $dataMinor[]    = empty($severities[$value['file']]['Minor']) ? 0 : $severities[$value['file']]['Minor'];
+            $dataNone[]     = empty($severities[$value['file']]['None']) ? 0 : $severities[$value['file']]['None'];
         }
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
@@ -639,9 +636,9 @@ SQL;
         foreach ($data as $value) {
             $xAxis[] = "'" . $value['analyzer'] . "'";
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
-            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
-            $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']) ? 0 : $severities[$value['analyzer']]['Major'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']) ? 0 : $severities[$value['analyzer']]['Minor'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None']) ? 0 : $severities[$value['analyzer']]['None'];
         }
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
@@ -704,8 +701,8 @@ HTML;
             return '<i class="fa fa-warning red"></i>&nbsp;' . $count . ' warnings';
         }
     }
-    
-    protected function makeAuditDate(string &$finalHTML) : void {
+
+    protected function makeAuditDate(string &$finalHTML): void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
@@ -714,7 +711,7 @@ HTML;
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Security',
                      );
     }

@@ -23,12 +23,10 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
-use Exakat\Reports\Reports;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 
@@ -48,7 +46,7 @@ class Emissary extends Reports {
 
     protected $generations       = array();
     protected $generations_files = array();
-    
+
     protected $usedFiles         = array();
 
     const TOPLIMIT = 10;
@@ -96,19 +94,19 @@ class Emissary extends Reports {
 
     protected function makeMenu() {
         $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/emissary.yaml');
-        
+
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
                       );
         foreach($menuYaml as $section) {
             $menu[] = $this->makeMenuHtml($section);
         }
-        
+
         $menu[] = '</ul>';
-        
+
         return implode(PHP_EOL, $menu);
     }
-    
+
     protected function makeMenuHtml($section) {
         if (isset($section['file'])) {
             $icon = $section['icon'] ?? 'sticky-note-o';
@@ -135,7 +133,7 @@ class Emissary extends Reports {
 
             $menu[] = '</ul>';
             $menu[] = '</li>';
-            
+
             $menu = implode(PHP_EOL . '  ', $menu);
         }
 
@@ -218,7 +216,7 @@ class Emissary extends Reports {
             print "Can't produce Emissary format to stdout\n";
             return false;
         }
-        
+
         if ($missing = $this->checkMissingRulesets()) {
             print "Can't produce Emissary format. There are " . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";
             return false;
@@ -231,7 +229,7 @@ class Emissary extends Reports {
 
         $this->initFolder();
         $this->getBasedPage('');
-        
+
         foreach($this->generations as $generation) {
             $method = $generation->method;
             if (!method_exists($this, $method)) {
@@ -293,7 +291,7 @@ class Emissary extends Reports {
             $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . PHPSyntax($x[1]) . '?&gt;</pre>';
             return $return;
         }, $description);
-        
+
         return $description;
     }
 
@@ -346,7 +344,7 @@ class Emissary extends Reports {
             $analyzersDocHTML  = rst2literal($analyzersDocHTML);
             $analyzersDocHTML  = rsttable2html($analyzersDocHTML);
             $analyzersDocHTML  = rstlist2html($analyzersDocHTML);
-            
+
             $clearphp = $description['clearphp'] ?? '';
             if(!empty($clearphp)){
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/' . $clearphp . '.md">' . $clearphp . '</a>, in the clearPHP reference.</p>';
@@ -384,7 +382,7 @@ class Emissary extends Reports {
 
         $favorites = new Favorites($this->config);
         $favoritesList = json_decode($favorites->generate(null, Reports::INLINE));
-        
+
         $donut = array();
         $html = array(' ');
 
@@ -978,9 +976,9 @@ WHERE name = "ParameterCounts"
 ORDER BY key + 0
 SQL
         );
-        
+
         if (!$res) { return ; }
-        
+
         $html = array();
         $xAxis = array();
         $data = array();
@@ -1168,7 +1166,7 @@ SQL
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
-        
+
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
@@ -1193,7 +1191,7 @@ SQL
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
-        
+
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
@@ -1218,7 +1216,7 @@ SQL
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
-        
+
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
@@ -1243,7 +1241,7 @@ SQL
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
-        
+
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
@@ -1514,7 +1512,7 @@ JAVASCRIPT;
             $dataScript[] = '{label: "' . $value['label'] . '", value: ' . ( (int) $value['value']) . '}';
         }
         $dataScript = implode(', ', $dataScript);
-        
+
         $nb = 4 - count($data);
         $filler = '<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
@@ -1586,7 +1584,7 @@ HTML;
 
         foreach ($analysers as $analyser) {
             $analyserHTML .= '<tr>';
-                                
+
             $analyserHTML.= '<td><a href="issues.html#analyzer=' . $this->toId($analyser['analyzer']) . '" title="' . $analyser['label'] . '">' . $analyser['label'] . '</a></td>
                         <td>' . $analyser['recipes'] . '</td>
                         <td>' . $analyser['issues'] . '</td>
@@ -1637,7 +1635,7 @@ SQL;
 
         return $row['number'];
     }
-    
+
     private function generateNoIssues(Section $section) {
         $list = $this->rulesets->getRulesetsAnalyzers(array(
         'Analyze',
@@ -1672,7 +1670,7 @@ SQL;
 
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
-            
+
             if ($analyzer === null) {
                 continue;
             }
@@ -1695,7 +1693,7 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= '<tr>';
-                               
+
 
             $filesHTML.='<td> <a href="issues.html#file=' . $this->toId($file['file']) . '" title="' . $file['file'] . '">' . $file['file'] . '</a></td>
                         <td>' . $file['loc'] . '</td>
@@ -1814,9 +1812,9 @@ SQL;
         foreach ($data as $value) {
             $xAxis[] = "'" . addslashes($value['file']) . "'";
             $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
-            $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
-            $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['None'];
+            $dataMajor[]    = empty($severities[$value['file']]['Major']) ? 0 : $severities[$value['file']]['Major'];
+            $dataMinor[]    = empty($severities[$value['file']]['Minor']) ? 0 : $severities[$value['file']]['Minor'];
+            $dataNone[]     = empty($severities[$value['file']]['None']) ? 0 : $severities[$value['file']]['None'];
         }
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
@@ -1936,9 +1934,9 @@ SQL;
             $ini = $this->docs->getDocs($value['analyzer']);
             $xAxis[] = "'" . addslashes($ini['name']) . "'";
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
-            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
-            $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']) ? 0 : $severities[$value['analyzer']]['Major'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']) ? 0 : $severities[$value['analyzer']]['Minor'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None']) ? 0 : $severities[$value['analyzer']]['None'];
         }
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
@@ -1960,7 +1958,7 @@ SQL;
 
         if (file_exists($this->config->dump_previous)) {
             $oldissues = $this->getNewIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow), $this->config->dump_previous);
-            
+
             $diff = array_diff($issues, $oldissues);
         } else {
             $diff = $issues;
@@ -1968,13 +1966,13 @@ SQL;
 
         $this->generateIssuesEngine($section, $diff);
     }
-    
+
     private function generateIssues() {
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
         $this->generateIssuesEngine('issues',
                                     $issues );
     }
-    
+
     protected function generateIssuesEngine(Section $section, $issues = array()) {
         if (!empty($issues)) {
             // Nothing, really
@@ -2057,7 +2055,7 @@ JAVASCRIPTCODE;
     public function getNewIssuesFaceted($theme, $path) {
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
-        
+
         if ($res === false || $res->fetchArray(\SQLITE3_NUM)[0] < 10) {
             return array();
         }
@@ -2248,11 +2246,11 @@ SQL;
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
                 $table .= '<tr>
     <td>' . $bugfix['title'] . '</td>
-    <td>' . ($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-') . '</td>
-    <td>' . ($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-') . '</td>
-    <td>' . ($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-') . '</td>
-    <td>' . ($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-') . '</td>
-    <td>' . ($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn73'] ? $bugfix['solvedIn73'] : '-') . '</td>
+    <td>' . ($bugfix['solvedIn72'] ? $bugfix['solvedIn72'] : '-') . '</td>
+    <td>' . ($bugfix['solvedIn71'] ? $bugfix['solvedIn71'] : '-') . '</td>
+    <td>' . ($bugfix['solvedIn70'] ? $bugfix['solvedIn70'] : '-') . '</td>
+    <td>' . ($bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-') . '</td>
     <td><a href="https://bugs.php.net/bug.php?id=' . $bugfix['bugs'] . '">#' . $bugfix['bugs'] . '</a></td>
     <td>' . $cve . '</td>
                 </tr>';
@@ -2264,11 +2262,11 @@ SQL;
                 if ($subanalyze === 0) { continue; }
                 $table .= '<tr>
     <td>' . $bugfix['title'] . '</td>
-    <td>' . ($bugfix['solvedIn73']  ? $bugfix['solvedIn73']  : '-') . '</td>
-    <td>' . ($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-') . '</td>
-    <td>' . ($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-') . '</td>
-    <td>' . ($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-') . '</td>
-    <td>' . ($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-') . '</td>
+    <td>' . ($bugfix['solvedIn73'] ? $bugfix['solvedIn73'] : '-') . '</td>
+    <td>' . ($bugfix['solvedIn72'] ? $bugfix['solvedIn72'] : '-') . '</td>
+    <td>' . ($bugfix['solvedIn71'] ? $bugfix['solvedIn71'] : '-') . '</td>
+    <td>' . ($bugfix['solvedIn70'] ? $bugfix['solvedIn70'] : '-') . '</td>
+    <td>' . ($bugfix['solvedInDev'] ? $bugfix['solvedInDev'] : '-') . '</td>
     <td><a href="https://bugs.php.net/bug.php?id=' . $bugfix['bugs'] . '">#' . $bugfix['bugs'] . '</a></td>
     <td>' . $cve . '</td>
                 </tr>';
@@ -2288,8 +2286,8 @@ SQL;
         $report = $phpConfiguration->generate(null, Reports::INLINE);
 
         $configline = trim($report);
-        $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n",), $configline);
-        
+        $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n", ), $configline);
+
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
@@ -2299,7 +2297,7 @@ SQL;
 
     protected function generateCompatibilityEstimate(Section $section) {
         $html = $this->getBasedPage($section->source);
-        
+
         $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0');
         $scores = array_fill_keys(array_values($versions), 0);
         $versions = array_reverse($versions);
@@ -2431,7 +2429,7 @@ SQL;
                 }
             }
         }
-        
+
         $incompilable = array();
         foreach($versions as $version) {
             $shortVersion = $version[0] . $version[2];
@@ -2459,7 +2457,7 @@ SQL;
                 }
             }
         }
-        
+
         $table = array();
         $titles = '<tr><th>Version</th><th>Name</th><th>' . implode('</th><th>', array_keys(array_values($data2)[0]) ) . '</th></tr>';
         $table []= '<tr><td>&nbsp;</td><td>Compilation</td><td>' . implode('</td><td>', $incompilable) . "</td></tr>\n";
@@ -2475,7 +2473,7 @@ SQL;
             $color = $colors[array_search(substr($analyzers[$name], 0, -1), $versions)];
             $table []= "<tr><td style=\"background-color: #{$color};\">$analyzers[$name]</td><td>$link {$this->docs->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
         }
-        
+
         $table = implode('', $table);
 
         $theTable = <<<HTML
@@ -2488,7 +2486,7 @@ HTML;
 
         $max = max($scores);
         $key = array_keys($scores, $max);
-        
+
         if ($max === count($data)) {
             $suggestion = 'This code is compatible with PHP ' . implode(', ', $key);
         } else {
@@ -2563,7 +2561,7 @@ HTML;
 
         $results = new Results($this->sqlite, 'Structures/ErrorMessages');
         $results->load();
-        
+
         foreach($results->toArray() as $row) {
             $errorMessages .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
@@ -2701,7 +2699,7 @@ SQL
         $compilations = array();
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
-        
+
         foreach(array_unique(array_merge(array($this->config->phpversion[0] . $this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
             $version = "$suffix[0].$suffix[1]";
             $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
@@ -2772,7 +2770,7 @@ SQL
     protected function generateCompatibility55(Section $section) {
         $this->generateCompatibility($section, '55');
     }
-    
+
     protected function generateCompatibility54(Section $section) {
         $this->generateCompatibility($section, '54');
     }
@@ -2856,20 +2854,20 @@ HTML;
             } else {
                 $origin = 'global';
             }
-            
+
             if (isset($tree[$name])) {
                 ++$tree[$name]['count'];
                 $tree[$name]['file'][]       = $row['file'] . ':' . $row['line'];
                 $tree[$name]['type'][]       = $row['type'];
-                $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' );
+                $tree[$name]['status'][]     = ($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified'] ? 'W' : '&nbsp;' );
             } else {
                 $tree[$name]['count']      = 1;
                 $tree[$name]['file']       = array($row['file'] . ':' . $row['line']        );
                 $tree[$name]['type']       = array($row['type']);
-                $tree[$name]['status']     = array(($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified']? 'W' : '&nbsp;' ));
+                $tree[$name]['status']     = array(($row['isRead'] ? 'R' : '&nbsp;' ) . ' - ' . ($row['isModified'] ? 'W' : '&nbsp;' ));
             }
         }
-        
+
         uasort($tree, function ($a, $b) { return $a['count'] <=> $b['count'];});
 
         $theGlobals = array();
@@ -2892,7 +2890,7 @@ HTML;
     private function generateInventoriesConstants(Section $section) {
         $this->generateInventories($section, 'Constants/Constantnames', 'List of all defined constants in the code.');
     }
-    
+
     private function generateInventoriesClasses(Section $section) {
         $this->generateInventories($section, 'Constants/Classnames', 'List of all defined classes in the code.');
     }
@@ -2956,7 +2954,7 @@ HTML;
     private function generateInventories(Section $section, $analyzer, $description) {
             $results = new Results($this->sqlite, $analyzer);
             $results->load();
-            
+
             $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
             $counts = array_map(function ($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
 
@@ -3001,12 +2999,12 @@ SQL
             if (empty($row['extends'])) {
                 continue;
             }
-            
+
             $parent = $row['extends'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
-            
+
             $list[$parent][] = $row['name'];
         }
 
@@ -3017,20 +3015,20 @@ SQL
 
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
-            
+
             $theTableArray = array();
             foreach($top as $t) {
                 $theTableArray[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
             }
             $theTable = implode(PHP_EOL, $theTableArray);
         }
-        
+
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the interface : an interface is extended by another interface. Interface without extension are not represented here');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
-       
+
     }
 
     private function generateTraitMatrix(Section $section) {
@@ -3048,10 +3046,10 @@ SQL;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $traits[] = $row['name'];
         }
-        
+
         // INIT
         $table = array_fill_keys($traits, array_fill_keys($traits, array()));
-        
+
         // Get conflicts
         $query = <<<'SQL'
 SELECT
@@ -3078,7 +3076,7 @@ SQL;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $table[$row['t1']][$row['t2']][] = $row['method'];
         }
-        
+
         // Get trait usage
         $usage = array();
         $query = <<<'SQL'
@@ -3102,20 +3100,20 @@ SQL;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $usage[$row['t1']][$row['t2']][] = 1;
         }
-        
+
         $rows = array();
         foreach($table as $name => $row) {
             $cells = array();
             foreach($row as $t2 => $r) {
-                $content = empty($r) ? '&nbsp;': implode('(), ', $r) . '()';
+                $content = empty($r) ? '&nbsp;' : implode('(), ', $r) . '()';
                 $background = isset($usage[$name][$t2]) ? ' bgcolor="darkgray"' : '';
-                
+
                 $cells[] = "<td$background>$content</td>";
             }
             $cells = implode('', $cells);
             $rows[] = "<tr><td>$name</td>$cells</tr>\n";
         }
-        
+
         $cells = implode('</td><td>', $traits);
         $rows = implode('', $rows);
         $theTable = <<<HTML
@@ -3127,13 +3125,13 @@ SQL;
     $rows
 </table>
 HTML;
-        
+
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the trait matrix. Conflicting methods between any two traits are listed in the cells : when they are used in the same class, those traits will require conflict resolutions. And dark gray cells are traits that are actually included one into the other.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);    }
-    
+
     private function generateTraitTree(Section $section) {
         $list = array();
 
@@ -3158,12 +3156,12 @@ SQL
             if (empty($row['user'])) {
                 continue;
             }
-            
+
             $parent = $row['user'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
-            
+
             $list[$parent][] = $row['parent'];
         }
 
@@ -3178,7 +3176,7 @@ SQL
             }
             $theTable = implode(PHP_EOL, $theTable);
         }
-        
+
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the traits : a trait is extended when it uses another trait. Traits without any extension are not represented. The same trait may be mentionned several times, as trait may use an arbitrary number of traits.');
@@ -3206,12 +3204,12 @@ SQL
             if (empty($row['extends'])) {
                 continue;
             }
-            
+
             $parent = $row['extends'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
-            
+
             $list[$parent][] = $row['name'];
         }
 
@@ -3219,10 +3217,10 @@ SQL
             $theTable = 'No class were found in this repository.';
         } else {
             array_sub_sort($list);
-            
+
             $secondaries = array_merge(...array_values($list));
             $top = array_diff(array_keys($list), $secondaries);
-            
+
             $theTable = array();
             foreach($top as $t) {
                 $theTable[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
@@ -3236,14 +3234,14 @@ SQL
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
     }
-    
+
     private function extends2ul($root, $paths, $level = 0) {
         static $done = array();
-        
+
         if ($level === 0) {
             $done = array();
         }
-        
+
         $return = array();
         foreach($paths[$root] as $sub) {
             if (isset($paths[$sub])){
@@ -3262,7 +3260,7 @@ SQL
         $return = "<li>$root<ul>" . implode('', $return) . "</ul></li>\n";
         return $return;
     }
-    
+
     private function generateExceptionTree(Section $section) {
         $exceptions = array (
   'Throwable' =>
@@ -3366,10 +3364,10 @@ SQL
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
-            
+
             $list[$parent][] = $row['fullcode'];
         }
-        
+
         array_sub_sort($list);
         $theTable = $this->tree2ul($exceptions, $list);
 
@@ -3379,30 +3377,30 @@ SQL
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
     }
-    
+
     private function path2tree($paths) {
         $return = array();
-        
+
         $recursive = array();
         foreach($paths as $path) {
             $folders = explode('\\', $path);
-            
+
             $first = empty($folders[0]) ? '\\' : $folders[0];
-            
+
             if (!isset($return[$first])) {
                 $return[$first] = array();
             }
-            
+
             if (count($folders) > 2) {
                 $recursive[$first] = 1;
             }
             $return[$first][] = implode('\\', array_slice($folders, 1));
         }
-        
+
         foreach($recursive as $recurrent => $foo) {
             $return[$recurrent] = $this->path2tree($return[$recurrent]);
         }
-        
+
         return $return;
     }
 
@@ -3411,7 +3409,7 @@ SQL
             return '';
         }
         $return = '<ul>';
-        
+
         foreach($path as $k => $v) {
             $return .= '<li>';
 
@@ -3439,35 +3437,35 @@ SQL
             $return .= '</li>';
         }
         $return .= '</ul>';
-        
+
         return $return;
     }
-    
+
     private function generateNamespaceTree(Section $section) {
         $theTable = '';
         $res = $this->sqlite->query('SELECT namespace FROM namespaces ORDER BY namespace');
-        
+
         $paths = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $paths[] = substr($row['namespace'], 1);
         }
-        
+
         $paths = $this->path2tree($paths);
         $theTable = $this->pathtree2ul($paths);
-        
+
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the various namespaces in use in the code.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
     }
-    
+
     private function tree2ul($tree, $display) {
         if (empty($tree)) {
             return '';
         }
         $return = '<ul>';
-        
+
         foreach($tree as $k => $v) {
             $return .= '<li>';
 
@@ -3484,9 +3482,9 @@ SQL
 
             $return .= '</li>';
         }
-        
+
         $return .= '</ul>';
-        
+
         return $return;
     }
 
@@ -3494,11 +3492,11 @@ SQL
         $constants  = $this->generateVisibilityConstantSuggestions();
         $properties = $this->generateVisibilityPropertySuggestions();
         $methods    = $this->generateVisibilityMethodsSuggestions();
-        
+
         $classes = array_unique(array_merge(array_keys($constants),
                                             array_keys($properties),
                                             array_keys($methods)));
-        
+
         $visibilityTable = array(<<<'HTML'
 <table class="table table-striped">
     <tr>
@@ -3517,9 +3515,9 @@ HTML
         foreach($classes as $id) {
             list(, $class) = explode(':', $id);
             $visibilityTable []= '<tr><td colspan="9">class ' . PHPsyntax($class) . '</td></tr>' . PHP_EOL .
-                                (isset($constants[$id])  ? implode('', $constants[$id])  : '') .
+                                (isset($constants[$id]) ? implode('', $constants[$id]) : '') .
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '') .
-                                (isset($methods[$id])    ? implode('', $methods[$id])    : '');
+                                (isset($methods[$id]) ? implode('', $methods[$id]) : '');
         }
 
         $visibilityTable []= '</table>';
@@ -3535,7 +3533,7 @@ HTML
     private function generateClassOptionSuggestions(Section $section) {
         $finals  = $this->generateClassFinalSuggestions();
         $abstracts = $this->generateClassAbstractuggestions();
-        
+
         $classes = array_unique(array_merge($finals, $abstracts));
 
         $visibilityTable = array();
@@ -3596,7 +3594,7 @@ HTML
         $html = $this->injectBloc($html, 'CONTENT', $visibilityHtml);
         $this->putBasedPage($section->file, $html);
     }
-    
+
 
     private function generateClassFinalSuggestions() {
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Classes/CouldBeFinal"');
@@ -3626,10 +3624,10 @@ HTML
 
             $couldBeAbstract[$fullnspath] = $row['fullcode'];
         }
-        
+
         return $couldBeAbstract;
     }
-        
+
     private function generateVisibilityMethodsSuggestions() {
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
         $couldBePrivate = array();
@@ -3653,14 +3651,14 @@ HTML
                 continue;
             }
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
-            
+
             if (isset($couldBeProtected[$fullnspath])) {
                 $couldBeProtected[$fullnspath][] = $row['fullcode'];
             } else {
                 $couldBeProtected[$fullnspath] = array($row['fullcode']);
             }
         }
-        
+
         $res = $this->sqlite->query(<<<SQL
 SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
  visibility, method
@@ -3710,10 +3708,10 @@ SQL
 
         $return[$theClass] = $aClass;
         unset($return['']);
-        
+
         return $return;
     }
-    
+
     private function generateVisibilityConstantSuggestions() {
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateConstante"');
         $couldBePrivate = array();
@@ -3723,7 +3721,7 @@ SQL
             }
 
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
-            
+
             if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
                 continue;
             }
@@ -3742,11 +3740,11 @@ SQL
                 continue; // it is an interface or a trait
             }
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
-            
+
             if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
                 continue;
             }
-            
+
             if (isset($couldBeProtected[$fullnspath])) {
                 $couldBeProtected[$fullnspath][] = $code[1];
             } else {
@@ -3795,7 +3793,7 @@ SQL
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
-        
+
             $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['constant']) . '</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
                                  . '</td></tr>' . PHP_EOL;
@@ -3815,7 +3813,7 @@ SQL
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             assert(isset($classname[1]), 'Missing class in ' . $row['class']);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
-            
+
             preg_match('/(\$\S+)/i', $row['fullcode'], $code);
             assert(isset($code[1]), 'Missing class in ' . $row['fullcode']);
 
@@ -3831,9 +3829,9 @@ SQL
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
-            
+
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
-            
+
             if (isset($couldBeProtected[$fullnspath])) {
                 $couldBeProtected[$fullnspath][] = $code[1];
             } else {
@@ -3846,9 +3844,9 @@ SQL
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
-            
+
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
-            
+
             if (isset($couldBeConstant[$fullnspath])) {
                 $couldBeConstant[$fullnspath][] = $code[1];
             } else {
@@ -3882,7 +3880,7 @@ SQL
                 $theClass = $row['fullnspath'] . ':' . $row['theClass'];
                 $aClass = array();
             }
-            
+
             list($row['property'], ) = explode(' = ', $row['property']);
 
             $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
@@ -3904,7 +3902,7 @@ SQL
                 in_array($row['property'], $couldBeConstant[$row['fullnspath']], \STRICT_COMPARISON)) {
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
-            
+
             $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['property']) . '</td><td class="exakat_short_text">' .
                             implode('</td><td>', $visibilities)
                             . '</td></tr>' . PHP_EOL;
@@ -3914,7 +3912,7 @@ SQL
 
         return $return;
     }
-    
+
     private function generateAlteredDirectives(Section $section) {
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
@@ -3940,7 +3938,7 @@ SQL
                     $row['parentValue'] = '$' . $row['name'] . ' = ' . $row['parentValue'];
                     $row['childValue']  = '$' . $row['name'] . ' = ' . $row['childValue'];
                 }
-                
+
                 $changedClasses .= '<tr><td>' . PHPSyntax($row['parentClass']) . '</td>' . PHP_EOL .
                                        '<td>' . PHPSyntax($row['parentValue']) . '</td>' . PHP_EOL .
                                        '</tr><tr>' .
@@ -4132,7 +4130,7 @@ JAVASCRIPT;
 
         $this->putBasedPage($section->file, $finalHTML);
     }
-    
+
     private function generateClassSize(Section $section) {
         $finalHTML = $this->getBasedPage($section->source);
 
@@ -4495,12 +4493,12 @@ JAVASCRIPT;
 
         $this->putBasedPage($section->file, $finalHTML);
     }
-    
+
     private function generateStats(Section $section) {
         $results = new Stats($this->config);
         $report = $results->generate(null, Reports::INLINE);
         $report = json_decode($report);
-        
+
         $stats = '';
         foreach($report as $group => $hash) {
             $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$group</td></tr>\n";
@@ -4509,7 +4507,7 @@ JAVASCRIPT;
                 $stats .= "<tr><td>$name</td><td>$count</td></tr>\n";
             }
         }
-        
+
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'STATS', $stats);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
@@ -4519,7 +4517,7 @@ JAVASCRIPT;
     private function generateComplexExpressions(Section $section) {
         $results = new Results($this->sqlite, 'Structures/ComplexExpression');
         $results->load();
-        
+
         $expr = $results->getColumn('fullcode');
         $counts = array_count_values($expr);
 
@@ -4615,18 +4613,18 @@ JAVASCRIPT;
                 $nodes[$row['including']][$row['included']] = $row['type'];
             }
         }
-        
+
         $next = array();
         foreach($nodes as $in => $out) {
             $set = false;
-            
+
             foreach($next as $file => &$inc) {
                 if ($file === $in) {
                     $inc = $out;
                     $set = true;
                 }
             }
-            
+
             if ($set === false) {
                 $next[$in] = $out;
             }
@@ -4645,7 +4643,7 @@ JAVASCRIPT;
             $secondaries = array_merge(...array_values($next));
         }
         $top = array_diff(array_keys($next), $secondaries);
-        
+
         $theTable = array();
         foreach($top as $t) {
             $theTable[] = '<ul class="tree">' . $this->extends2ul($t, $next) . '</ul>';
@@ -4658,7 +4656,7 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
     }
-    
+
     private function generateIdenticalFiles(Section $section) {
         $res = $this->sqlite->query('SELECT GROUP_CONCAT(file) AS list, count(*) AS count FROM files GROUP BY fnv132 HAVING COUNT(*) > 1 ORDER BY COUNT(*), file');
 
@@ -4677,14 +4675,14 @@ JAVASCRIPT;
 HTML;
         }
         $theTable = implode(PHP_EOL, $theTable);
-        
+
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'IDENTICAL', $theTable);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $this->putBasedPage($section->file, $html);
     }
-    
+
     private function generateConcentratedIssues(Section $section) {
         $listAnalyzers = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
         $sqlList = makeList($listAnalyzers);
@@ -4725,7 +4723,7 @@ SQL;
                          'one'     => 'One letter',
                          'case'    => 'Case',
                          );
-        
+
         $table = array();
         foreach($results as $variable => $close) {
             $confused = array();
@@ -4746,17 +4744,17 @@ SQL;
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $this->putBasedPage($section->source, $html);
     }
-    
+
     protected function generateAppinfo(Section $section) {
         $data = new Data\Appinfo($this->sqlite);
         $data->prepare();
-        
+
         $list = array();
         $originals = $data->originals();
         foreach($data->values() as $group => $points) {
             $listPoint = array();
             foreach($points as $point => $status) {
-                
+
                 if (isset($originals[$group][$point], $this->frequences[$originals[$group][$point]])) {
                     $percentage = $this->frequences[$originals[$group][$point]];
                     $percentageDisplay = "$percentage %";
@@ -4764,7 +4762,7 @@ SQL;
                     $percentage = 0;
                     $percentageDisplay = '&nbsp;';
                 }
-                
+
                 $statusIcon = $this->makeIcon($status);
                 $htmlPoint = makeHtml($point);
                 $listPoint[] = <<<HTML
@@ -4817,7 +4815,7 @@ HTML;
         if (empty($cve)) {
             return '-';
         }
-        
+
         if (strpos($cve, ', ') === false) {
             $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=' . $cve . '">' . $cve . '</a>';
         } else {
@@ -4843,7 +4841,7 @@ HTML;
             return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer=' . $this->toId($analyzer) . '">' . $count . ' warnings</a>';
         }
     }
-    
+
     protected function toId($name) {
         return str_replace(array('/', '*', '(', ')', '.'), '_', strtolower($name));
     }
@@ -4851,7 +4849,7 @@ HTML;
     protected function toOnlineId($name) {
         return str_replace(array(' ', '(', ')', '/'), '-', strtolower($name));
     }
-    
+
     protected function makeAuditDate(&$finalHTML) {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
@@ -4864,7 +4862,7 @@ HTML;
         $audit_date .= " - Exakat $exakat_version ($exakat_build)";
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
-    
+
     protected function getVCSInfo() {
         $info = array();
 
@@ -4917,14 +4915,14 @@ HTML;
             case 'Targz':
                 $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;
-            
+
             default :
                 $info[] = array('Repository URL', 'Downloaded archive');
         }
-        
+
         return $info;
     }
-    
+
     private function makeDocLink($analyzer) {
         return "<a href=\"analyses_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->docs->getDocs($analyzer, 'name')}";
     }

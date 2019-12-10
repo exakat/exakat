@@ -22,12 +22,11 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Simpletable extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'table';
-    
+
     private $tmpName     = '';
     private $finalName   = '';
 
@@ -39,14 +38,14 @@ class Simpletable extends Reports {
         $this->generateData($folder);
         $this->cleanFolder();
     }
-    
+
     private function generateData($folder, $name = 'table') {
         $list = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
         $list = makeList($list);
 
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in (' . $list . ') ORDER BY analyzer';
         $res = $this->sqlite->query($sqlQuery);
-        
+
         $results = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)){
             $results[$row['analyzer']][] = array('code' => $this->syntaxColoring($row['fullcode']),
@@ -57,7 +56,7 @@ class Simpletable extends Reports {
         $table = '';
         foreach($results as $section => $lines) {
             $rows = array();
-            
+
             foreach($lines as $line) {
                 $rows[] = <<<HTML
 			<tr>
@@ -68,7 +67,7 @@ class Simpletable extends Reports {
 
 HTML;
             }
-            
+
             $ini = $this->docs->getDocs($section);
             $title = makeHtml($ini['name']);
 
@@ -88,7 +87,7 @@ HTML;
 		</tbody>
 HTML;
         }
-        
+
         $html = file_get_contents($this->tmpName . '/index.html');
         $html = str_replace('<sections />', $table, $html);
         file_put_contents($this->tmpName . '/index.html', $html);

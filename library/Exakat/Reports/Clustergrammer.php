@@ -22,8 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Tasks\Project;
 
 class Clustergrammer extends Reports {
     const FILE_EXTENSION = 'txt';
@@ -63,7 +61,7 @@ class Clustergrammer extends Reports {
         foreach($all as $file => $values) {
             $txt .= "$file\t" . implode("\t", array_values($values)) . "\n";
         }
-        
+
         if ($name === self::STDOUT) {
             echo $txt;
         } else {

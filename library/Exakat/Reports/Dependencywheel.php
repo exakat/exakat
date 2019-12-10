@@ -22,12 +22,11 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Dependencywheel extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'wheel';
-    
+
     private $tmpName      = '';
     private $finalName    = '';
     private $packagenames = '';
@@ -43,17 +42,17 @@ class Dependencywheel extends Reports {
         $this->tmpName   = "$folder/.$name";
 
         $this->initFolder();
-        
+
         $this->makeWheel();
-        
+
         $this->cleanFolder();
     }
 
     private function makeWheel() {
         $packagenames = array('Main');
-        
+
         $res = $this->sqlite->query('SELECT * FROM cit');
-        
+
         $ids = array();
         $extends = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -67,13 +66,13 @@ class Dependencywheel extends Reports {
                 $ids[$row['extends']] = $row['extends'];
             }
             $ids[$row['id']] = $row['name'];
-            
+
             if (isset($extends[$row['name'] ])) {
                 $extends[$row['name'] ][] = $row['extends'];
             } else {
                 $extends[$row['name'] ] = array($row['extends']);
             }
-            
+
             $this->count();
         }
 
@@ -87,7 +86,7 @@ class Dependencywheel extends Reports {
                 $ids[$row['implements']] = $row['implements'];
             }
         }
-        
+
         $results = array();
         $n = count($packagenames);
         $results = array_pad(array(), $n, array_pad( array(), $n, 0));
@@ -104,11 +103,11 @@ class Dependencywheel extends Reports {
                 } else {
                     assert(false, '$ext is not a string nor an integer.');
                 }
-                
+
                 $results[$dict[$name]][$e] = 1;
             }
         }
-        
+
         $res = $this->sqlite->query('SELECT * FROM cit_implements');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($ids[$row['implements']])) {
@@ -116,7 +115,7 @@ class Dependencywheel extends Reports {
             }
             $I = $ids[$row['implements']];
             $i = $dict[$I];
-    
+
             $E = $ids[$row['implementing']];
             $e = $dict[$E];
 
@@ -135,7 +134,7 @@ class Dependencywheel extends Reports {
         $this->matrix       = json_encode($results);
         $this->packagenames = json_encode($packagenames);
     }
-    
+
     private function initFolder() {
         if ($this->finalName === 'stdout') {
             return "Can't produce Dependencywheel format to stdout";

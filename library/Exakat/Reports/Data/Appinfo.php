@@ -24,7 +24,6 @@ namespace Exakat\Reports\Data;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Ambassador;
-use Exakat\Reports\Reports;
 
 class Appinfo extends Data {
         private $extensions = array(
@@ -32,29 +31,29 @@ class Appinfo extends Data {
                             'Short tags'                    => 'Structures/ShortTags',
                             'Echo tags <?='                 => 'Php/EchoTagUsage',
                             'Incompilable'                  => 'Php/Incompilable',
-   
+
                             '@ operator'                    => 'Structures/Noscream',
                             'Alternative syntax'            => 'Php/AlternativeSyntax',
                             'Magic constants'               => 'Constants/MagicConstantUsage',
                             'halt compiler'                 => 'Php/Haltcompiler',
-   
+
                             'Casting'                       => 'Php/CastingUsage',
                             'Resources'                     => 'Structures/ResourcesUsage',
                             'Nested Loops'                  => 'Structures/NestedLoops',
                             'arrays_ With Callback'         => 'Arrays/WithCallback',
-   
+
                             'Autoload'                      => 'Php/AutoloadUsage',
                             'include'                       => 'Structures/IncludeUsage',
                             'include_once'                  => 'Structures/OnceUsage',
                             'Output control'                => 'Extensions/Extob',
-   
+
                             'Goto'                          => 'Php/Gotonames',
                             'Labels'                        => 'Php/Labelnames',
-   
+
                             'Coalesce'                      => 'Php/Coalesce',
                             'Coalesce Equal'                => 'Php/CoalesceEqual',
                             'Trailing Comma'                => 'Php/TrailingComma',
-   
+
                             'File upload'                   => 'Structures/FileUploadUsage',
                             'Environment Variables'         => 'Php/UsesEnv',
 
@@ -137,7 +136,7 @@ class Appinfo extends Data {
                             'Closures'                    => 'Closure',
                             'Arrow functions'             => 'Arrowfunction',
 //                            'Callback'                    => 'Functions/MarkCallable',
-       
+
                             'Typehint'                    => 'Functions/Typehints',
                             'Scalar Typehint'             => 'Php/ScalarTypehintUsage',
                             'Return Typehint'             => 'Php/ReturnTypehintUsage',
@@ -226,7 +225,7 @@ class Appinfo extends Data {
                             'Error messages'      => 'Structures/ErrorMessages',
 
                             'Assertions'          => 'Php/AssertionUsage',
-                            
+
                             'Uses debug'          => 'Structures/UseDebug',
                      ),
 
@@ -455,7 +454,7 @@ class Appinfo extends Data {
                     if ($list[$ka] !== $list[$kb]) {
                         return $list[$ka] === Ambassador::YES ? -1 : 1;
                     }
-                    
+
                     return $kb <=> $ka;
                 });
             }
@@ -482,7 +481,7 @@ class Appinfo extends Data {
                 $this->values['Strings'][$row['encoding'] . ' (' . $row['block'] . ')' ] = Ambassador::YES;
             }
         }
-        
+
         return true;
     }
 }

@@ -23,7 +23,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 
 class Composer extends Reports {
     const FILE_EXTENSION = 'json';
@@ -47,7 +46,7 @@ class Composer extends Reports {
             $composer = json_decode(file_get_contents($composerPath));
         } else {
             $composer = new \stdClass();
-        
+
             $composer->name = $this->config->project_name;   //
             $composer->description = '';                     //
             $composer->type = 'library';                     // default value
@@ -65,12 +64,12 @@ class Composer extends Reports {
     //"php": "~5.4 || ^7.0"
             $composer->require->php = '^7.0';
         }
-        
+
         foreach($configureDirectives as $ext => $details) {
             if (in_array($ext, $noExtensions)) {
                 continue;
             }
-            
+
             if (isset($sources[$details->analysis]) && $sources[$details->analysis] > 1) {
                 $extName = 'ext-' . $ext;
                 if (!isset($composer->require->{$extName})) {
@@ -78,13 +77,13 @@ class Composer extends Reports {
                 }
             }
         }
-        
+
         $final = json_encode($composer, \JSON_PRETTY_PRINT);
 
         return $final;
     }
 
-    public function dependsOnAnalysis() : array {
+    public function dependsOnAnalysis(): array {
         return array('Appinfo',
                      );
     }
