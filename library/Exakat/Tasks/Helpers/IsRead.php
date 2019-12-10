@@ -28,7 +28,7 @@ class IsRead extends Plugin {
     private $variables = array('Variable', 'Variableobject', 'Variablearray',
                                'Member', 'Staticproperty',
                                'Phpvariable', 'This',
-                               'Array',);
+                               'Array', );
 
     public function run($atom, $extras) {
         switch ($atom->atom) {

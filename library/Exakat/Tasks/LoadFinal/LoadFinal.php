@@ -48,7 +48,7 @@ class LoadFinal {
                              "{$this->config->projects_root}/projects/{$this->config->project}");
     }
 
-    protected function newQuery($title) : Query {
+    protected function newQuery($title): Query {
         return new Query(0, $this->config->project, $title, null, $this->datastore);
     }
 

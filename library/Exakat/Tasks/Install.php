@@ -27,7 +27,7 @@ class Install extends Tasks {
 
     const TINKERGRAPH_VERSION = '3.4.4';
 
-    public function run() : void {
+    public function run(): void {
         $error = array();
 
         $res = shell_exec('java -version 2>&1');

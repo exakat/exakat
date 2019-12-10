@@ -165,8 +165,6 @@ function doctor($args) {
         shell_exec('__PHP__ __EXAKAT__ queue doctor');
         serverLog('doctor');
 
-        error('No project configured', '');
-
         echo json_encode(array('doctor' => 'no project', 
                                'start'  => date('r')));
     } else {

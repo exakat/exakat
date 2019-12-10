@@ -53,7 +53,7 @@ class Status extends Tasks {
 
                 $status = array('Running'  => 'Project',
                                 'project'  => $projectStatus,
-                                'step'     => $projectStep,);
+                                'step'     => $projectStep, );
             } else {
                 $status['Running'] = 'idle';
             }

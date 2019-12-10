@@ -634,7 +634,7 @@ SQL;
         display( "Variables : $total\n");
     }
 
-    private function collectStructures() : void {
+    private function collectStructures(): void {
         $namespacesId = $this->collectStructures_namespaces();
 
         // Classes
@@ -1537,7 +1537,7 @@ GREMLIN
 
     }
 
-    private function collectStructures_namespaces() : array {
+    private function collectStructures_namespaces(): array {
         // Name spaces
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
         $this->sqlite->query(<<<'SQL'
@@ -1970,7 +1970,7 @@ GREMLIN;
         // instanceof ?
     }
 
-    private function storeToTable(string $table, Query $query) : int {
+    private function storeToTable(string $table, Query $query): int {
         $res = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $sqlQuery = array();
@@ -2252,7 +2252,7 @@ GREMLIN
 
               ->outIs('CLASS')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class','Trait'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
               ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -2670,14 +2670,14 @@ GREMLIN
         display("Found $total class changes\n");
     }
 
-    private function storeClassChangesNewQuery(string $changeType, Query $query) : int {
+    private function storeClassChangesNewQuery(string $changeType, Query $query): int {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         return $this->storeInDump($changeType, $result);
     }
 
-    private function storeInDump(string $changeType, $index) : int {
+    private function storeInDump(string $changeType, $index): int {
         $values = array();
         foreach($index->toArray() as $change) {
             $values[] = "('$changeType', 

@@ -111,20 +111,20 @@ class Atom {
         $this->ctype1        = $this->protectString($this->ctype1     );
 
         $this->alternative   = $this->alternative ? 1 : null;
-        $this->reference     = $this->reference   ? 1 : null;
-        $this->heredoc       = $this->heredoc     ? 1 : null;
-        $this->variadic      = $this->variadic    ? 1 : null;
-        $this->final         = $this->final       ? 1 : null;
-        $this->abstract      = $this->abstract    ? 1 : null;
-        $this->static        = $this->static      ? 1 : null;
-        $this->absolute      = $this->absolute    ? 1 : null;
-        $this->constant      = $this->constant    ? 1 : null;
-        $this->boolean       = $this->boolean     ? 1 : null;
-        $this->enclosing     = $this->enclosing   ? 1 : null;
-        $this->bracket       = $this->bracket     ? 1 : null;
-        $this->flexible      = $this->flexible    ? 1 : null;
-        $this->close_tag     = $this->close_tag   ? 1 : null;
-        $this->aliased       = $this->aliased     ? 1 : null;
+        $this->reference     = $this->reference ? 1 : null;
+        $this->heredoc       = $this->heredoc ? 1 : null;
+        $this->variadic      = $this->variadic ? 1 : null;
+        $this->final         = $this->final ? 1 : null;
+        $this->abstract      = $this->abstract ? 1 : null;
+        $this->static        = $this->static ? 1 : null;
+        $this->absolute      = $this->absolute ? 1 : null;
+        $this->constant      = $this->constant ? 1 : null;
+        $this->boolean       = $this->boolean ? 1 : null;
+        $this->enclosing     = $this->enclosing ? 1 : null;
+        $this->bracket       = $this->bracket ? 1 : null;
+        $this->flexible      = $this->flexible ? 1 : null;
+        $this->close_tag     = $this->close_tag ? 1 : null;
+        $this->aliased       = $this->aliased ? 1 : null;
 
         if ($this->intval > 2147483647) {
             $this->intval = 2147483647;
@@ -133,7 +133,7 @@ class Atom {
             $this->intval = -2147483648;
         }
 
-        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
+        $this->globalvar     = !$this->globalvar ? null : $this->globalvar;
 
         return (array) $this;
     }

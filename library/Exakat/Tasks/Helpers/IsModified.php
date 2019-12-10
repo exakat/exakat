@@ -25,7 +25,7 @@ namespace Exakat\Tasks\Helpers;
 class IsModified extends Plugin {
     public $name = 'isModified';
     public $type = 'boolean';
-    private $variables = array('Variable', 'Array', 'Member', 'Staticproperty', 'Phpvariable',);
+    private $variables = array('Variable', 'Array', 'Member', 'Staticproperty', 'Phpvariable', );
 
     public function run($atom, $extras) {
         switch ($atom->atom) {

@@ -381,7 +381,7 @@ class Websocket {
         $pass      = isset($url_parts['pass']) ? $url_parts['pass'] : '';
         $port      = isset($url_parts['port']) ? $url_parts['port'] : ($scheme === 'wss' ? 443 : 80);
         $path      = isset($url_parts['path']) ? $url_parts['path'] : '/';
-        $query     = isset($url_parts['query'])    ? $url_parts['query'] : '';
+        $query     = isset($url_parts['query']) ? $url_parts['query'] : '';
         $fragment  = isset($url_parts['fragment']) ? $url_parts['fragment'] : '';
 
         $path_with_query = $path;

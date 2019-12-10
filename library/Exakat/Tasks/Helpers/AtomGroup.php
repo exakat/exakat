@@ -29,7 +29,7 @@ class AtomGroup {
         $this->atomCount = $init;
     }
 
-    public function factory(string $atom, int $line) : Atom {
+    public function factory(string $atom, int $line): Atom {
         return new Atom(++$this->atomCount, $atom, $line);
     }
 }

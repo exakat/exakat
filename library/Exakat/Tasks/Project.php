@@ -57,7 +57,7 @@ class Project extends Tasks {
         }
     }
 
-    public function run() : void {
+    public function run(): void {
         if ($this->config->project === null) {
             throw new ProjectNeeded();
         }
@@ -255,7 +255,7 @@ class Project extends Tasks {
         display('End' . PHP_EOL);
     }
 
-    private function logTime(string $step) : void {
+    private function logTime(string $step): void {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
@@ -406,7 +406,7 @@ class Project extends Tasks {
         $VERBOSE = $oldVerbose;
     }
 
-    private function generateName() : string {
+    private function generateName(): string {
         $ini = parse_ini_file("{$this->config->dir_root}/data/audit_names.ini");
 
         $names = $ini['names'];

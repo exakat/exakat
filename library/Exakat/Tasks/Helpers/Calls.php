@@ -65,13 +65,13 @@ SQL;
         $this->callsSqlite->query($definitions);
     }
 
-    public function reset() : void {
+    public function reset(): void {
         $this->calls       = array();
         $this->definitions = array();
         $this->globals     = array();
     }
 
-    public function save() : void {
+    public function save(): void {
         if (!empty($this->calls)) {
             $query = 'INSERT INTO calls VALUES ' . implode(', ', $this->calls);
             $this->callsSqlite->query($query);
@@ -91,11 +91,11 @@ SQL;
         }
     }
 
-    public function addGlobal(int $origin, int $destination) : void {
+    public function addGlobal(int $origin, int $destination): void {
         $this->globals[] = "('{$origin}','{$destination}')";
     }
 
-    public function addCall(string $type, string $fullnspath, Atom $call) : void {
+    public function addCall(string $type, string $fullnspath, Atom $call): void {
         if (empty($fullnspath)) {
             return;
         }
@@ -124,7 +124,7 @@ SQL;
                            '{$call->id}')";
     }
 
-    public function addNoDelimiterCall(Atom $call) : void {
+    public function addNoDelimiterCall(Atom $call): void {
         if (empty($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
@@ -174,7 +174,7 @@ SQL;
         }
     }
 
-    public function addDefinition(string $type, string $fullnspath, Atom $definition) : void {
+    public function addDefinition(string $type, string $fullnspath, Atom $definition): void {
         if (empty($fullnspath)) {
             return;
         }
@@ -188,7 +188,7 @@ SQL;
                                  '{$definition->id}')";
     }
 
-    private function makeGlobalPath(string $fullnspath) : string {
+    private function makeGlobalPath(string $fullnspath): string {
         if ($fullnspath === 'undefined') {
             $globalpath = '';
         } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {

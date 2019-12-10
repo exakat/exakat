@@ -112,22 +112,22 @@ class Doctor extends Tasks {
         // check for running PHP
         $stats['PHP']['binary']                 = phpversion();
         $stats['PHP']['memory_limit']           = ini_get('memory_limit');
-        $stats['PHP']['short_open_tags']        = (ini_get('short_open_tags')         ? 'On'  : 'Off');
-        $stats['PHP']['ext/curl']               = extension_loaded('curl')            ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
-        $stats['PHP']['ext/hash']               = extension_loaded('hash')            ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
-        $stats['PHP']['ext/phar']               = extension_loaded('phar')            ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
-        $stats['PHP']['ext/sqlite3']            = extension_loaded('sqlite3')         ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
-        $stats['PHP']['ext/tokenizer']          = extension_loaded('tokenizer')       ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
-        $stats['PHP']['ext/mbstring']           = extension_loaded('mbstring')        ? 'Yes' : 'No (Compulsory, add --enable-mbstring to configure)';
-        $stats['PHP']['ext/json']               = extension_loaded('json')            ? 'Yes' : 'No';
-        $stats['PHP']['ext/xmlwriter']          = extension_loaded('xmlwriter')       ? 'Yes' : 'No (Optional, used by XML reports)';
-        $stats['PHP']['ext/pcntl']              = extension_loaded('pcntl')           ? 'Yes' : 'No (Optional)';
+        $stats['PHP']['short_open_tags']        = (ini_get('short_open_tags') ? 'On' : 'Off');
+        $stats['PHP']['ext/curl']               = extension_loaded('curl') ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
+        $stats['PHP']['ext/hash']               = extension_loaded('hash') ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
+        $stats['PHP']['ext/phar']               = extension_loaded('phar') ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
+        $stats['PHP']['ext/sqlite3']            = extension_loaded('sqlite3') ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
+        $stats['PHP']['ext/tokenizer']          = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
+        $stats['PHP']['ext/mbstring']           = extension_loaded('mbstring') ? 'Yes' : 'No (Compulsory, add --enable-mbstring to configure)';
+        $stats['PHP']['ext/json']               = extension_loaded('json') ? 'Yes' : 'No';
+        $stats['PHP']['ext/xmlwriter']          = extension_loaded('xmlwriter') ? 'Yes' : 'No (Optional, used by XML reports)';
+        $stats['PHP']['ext/pcntl']              = extension_loaded('pcntl') ? 'Yes' : 'No (Optional)';
 
         if (extension_loaded('xdebug') === true) {
             $stats['PHP']['xdebug.max_nesting_level']            = (ini_get('xdebug.max_nesting_level') ) . ' (Must be -1 or more than 1000)';
         }
-        $stats['PHP']['parallel_processing']    = $this->config->parallel_processing  ? 'Yes' : 'No (Optional)';
-        $stats['PHP']['pcre.jit']               = (ini_get('pcre.jit')                ? 'On'  : 'Off') . ' (Must be off on PHP 7.3 and OSX)';
+        $stats['PHP']['parallel_processing']    = $this->config->parallel_processing ? 'Yes' : 'No (Optional)';
+        $stats['PHP']['pcre.jit']               = (ini_get('pcre.jit') ? 'On' : 'Off') . ' (Must be off on PHP 7.3 and OSX)';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -256,7 +256,7 @@ TEXT
             unset($initConfig);
         }
 
-        $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/")    ? 'Yes' : 'No';
+        $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/") ? 'Yes' : 'No';
         $stats['folders']['projects/default'] = file_exists("{$this->config->projects_root}/projects/default/") ? 'Yes' : 'No';
         $stats['folders']['projects/onepage'] = file_exists("{$this->config->projects_root}/projects/onepage/") ? 'Yes' : 'No';
 

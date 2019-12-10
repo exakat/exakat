@@ -29,7 +29,7 @@ class Lock {
         $this->path = $path . '/' . md5($name);
     }
 
-    public function check() : bool {
+    public function check(): bool {
         $fp = @fopen($this->path, 'x');
         if ($fp === false) {
             $this->path = null;

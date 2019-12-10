@@ -30,7 +30,7 @@ class Git extends Vcs {
     private $version    = 'unknown';
     private $executable = 'git';
 
-    protected function selfCheck() : void {
+    protected function selfCheck(): void {
         $res = shell_exec("{$this->executable} --version 2>&1");
         if (strpos($res, 'git') === false) {
             throw new HelperException('git');
@@ -45,7 +45,7 @@ class Git extends Vcs {
         }
     }
 
-    public function clone($source) : void {
+    public function clone($source): void {
         $this->check();
         $repositoryDetails = parse_url($source);
 
@@ -88,7 +88,7 @@ class Git extends Vcs {
         }
     }
 
-    public function update() : string {
+    public function update(): string {
         $this->check();
 
         if (!file_exists($this->destinationFull . '/.git')) {
@@ -116,11 +116,11 @@ class Git extends Vcs {
         return $resFinal;
     }
 
-    public function setBranch(string $branch = '') : void {
+    public function setBranch(string $branch = ''): void {
         $this->branch = $branch;
     }
 
-    public function setTag(string $tag = '') : void {
+    public function setTag(string $tag = ''): void {
         $this->tag = $tag;
     }
 
@@ -193,7 +193,7 @@ class Git extends Vcs {
         return $changes;
     }
 
-    public function getFileModificationLoad() : array {
+    public function getFileModificationLoad(): array {
         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} log --name-only --pretty=format:");
 
         $files = array();
@@ -212,7 +212,7 @@ class Git extends Vcs {
         return $files;
     }
 
-    public function getDiffFile(string $next) : string {
+    public function getDiffFile(string $next): string {
         // Added and removed ?
          $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=a --name-only $next -- . ");
 

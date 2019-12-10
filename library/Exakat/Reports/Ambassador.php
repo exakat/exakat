@@ -2336,7 +2336,7 @@ SQL;
     protected function generateBugFixes(Section $section) {
         $table = '';
 
-        $bugfixes = exakat('config')->getBugFixes();
+        $bugfixes = exakat('methods')->getBugFixes();
 
         $results = new Results($this->sqlite, 'Php/MiddleVersion');
         $results->load();
