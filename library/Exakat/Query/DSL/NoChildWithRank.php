@@ -23,12 +23,11 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class NoChildWithRank extends DSL {
     public function run() {
         list($link, $rank) = func_get_args();
-        
+
         $this->assertLink($link);
 
         if (is_int($rank)) {

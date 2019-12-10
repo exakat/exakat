@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 class HasTrait extends DSL {
     public function run() {
         $return = $this->dslfactory->factory('hasInstruction');
-        
+
         return $return->run('Trait');
     }
 }

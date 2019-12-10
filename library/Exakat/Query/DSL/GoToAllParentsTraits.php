@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class GoToAllParentsTraits extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($self) = func_get_args();
 
         $MAX_LOOPING = self::$MAX_LOOPING;

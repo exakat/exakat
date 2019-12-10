@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class IsReferencedArgument extends DSL {
     public function run() {

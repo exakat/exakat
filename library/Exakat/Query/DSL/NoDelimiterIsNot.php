@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class NoDelimiterIsNot extends DSL {
     public function run() {

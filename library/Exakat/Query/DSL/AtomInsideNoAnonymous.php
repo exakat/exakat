@@ -24,10 +24,9 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class AtomInsideNoAnonymous extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atoms) = func_get_args();
 
         assert($this->assertAtom($atoms));

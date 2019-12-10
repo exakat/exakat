@@ -23,8 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class NoTraitDefinition extends DSL {
     public function run() {

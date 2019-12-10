@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class FullcodeLength extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($length) = func_get_args();
 
         return new Command('filter{it.get().value("fullcode").length() ' . $length . '}');

@@ -23,8 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class FullnspathIs extends DSL {
     public function run() {
@@ -35,7 +33,7 @@ class FullnspathIs extends DSL {
 
         $propertyIs = $this->dslfactory->factory('propertyIs');
         $code = makeArray($code);
-        
+
         return $return->add($propertyIs->run('fullnspath', $code, $caseSensitive));
     }
 }

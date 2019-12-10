@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class VariableIsAssigned extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($times) = func_get_args();
 
         $gremlin = <<<GREMLIN

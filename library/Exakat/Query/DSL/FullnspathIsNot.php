@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class FullnspathIsNot extends DSL {
@@ -37,7 +36,7 @@ class FullnspathIsNot extends DSL {
         if (!in_array($code, $this->availableVariables, STRICT_COMPARISON)) {
             $code = makeArray($code);
         }
-        
+
         $return->add($propertyIs->run('fullnspath', $code, Analyzer::CASE_SENSITIVE));
         return $return;
     }

@@ -26,11 +26,11 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class Optional extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         assert(func_num_args() === 1, 'Wrong number of arguments with ' . __METHOD__ . '. ' . func_num_args() . ' provided, while 1 is expected.');
 
         list($filter) = func_get_args();
-        
+
         if ($filter instanceof Command) {
             if ($filter->gremlin === Query::STOP_QUERY) {
                 $filter->gremlin = Query::NO_QUERY;

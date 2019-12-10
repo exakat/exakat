@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 class GoToClass extends DSL {
     public function run() {
         $return = $this->dslfactory->factory('goToInstruction');
-        
+
         return $return->run(array('Class', 'Classanonymous'));
     }
 }

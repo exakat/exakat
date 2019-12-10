@@ -32,7 +32,7 @@ class HasNoParent extends DSL {
         $this->assertAtom($parentClass);
         $this->assertLink($ins);
         $diff = $this->normalizeAtoms($parentClass);
-        
+
         if (empty($diff)){
             return new Command(Query::NO_QUERY);
         }

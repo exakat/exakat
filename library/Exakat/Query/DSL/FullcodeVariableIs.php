@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class FullcodeVariableIs extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($variable) = func_get_args();
 
         return new Command("filter{it.get().value(\"fullcode\") == $variable; }");

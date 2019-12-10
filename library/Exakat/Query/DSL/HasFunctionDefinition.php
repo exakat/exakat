@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class HasFunctionDefinition extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") )');
     }
 }

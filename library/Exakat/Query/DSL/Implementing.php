@@ -23,11 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class Implementing extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($fullnspath) = func_get_args();
 
         $MAX_LOOPING = self::$MAX_LOOPING;

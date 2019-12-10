@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 use Exakat\Exceptions\QueryException;
 
 class IsNot extends DSL {

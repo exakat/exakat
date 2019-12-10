@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class CodeLength extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($values) = func_get_args();
 
         if (empty($values)) {

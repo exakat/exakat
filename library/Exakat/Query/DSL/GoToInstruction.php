@@ -24,7 +24,6 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class GoToInstruction extends DSL {
     public function run() {
@@ -32,7 +31,7 @@ class GoToInstruction extends DSL {
 
         $this->assertAtom($atoms);
         $diff = $this->normalizeAtoms($atoms);
-        
+
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         }
@@ -40,7 +39,7 @@ class GoToInstruction extends DSL {
         $atomAndFile = $diff;
         $atomAndFile[] = 'File';
         $atomAndFile = array_unique($atomAndFile);
-        
+
         $linksDown = self::$linksDown;
 
         $gremlin = <<<GREMLIN

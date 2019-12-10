@@ -29,7 +29,7 @@ class OutIs extends DSL {
     public function run() {
         assert(func_num_args() <= 1, 'Too many arguments for ' . __METHOD__);
         list($link) = func_get_args();
-        
+
         if (empty($link)) {
             return new Command('out( )');
         }

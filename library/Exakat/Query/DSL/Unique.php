@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class Unique extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('unique()');
     }
 }

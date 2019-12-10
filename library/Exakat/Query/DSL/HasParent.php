@@ -24,16 +24,15 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class HasParent extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($parentClass, $ins) = func_get_args();
-        
+
         $this->assertAtom($parentClass);
         $this->assertLink($ins);
         $diff = $this->normalizeAtoms($parentClass);
-        
+
         if (empty($diff)){
             return new Command(Query::STOP_QUERY);
         }

@@ -37,7 +37,7 @@ class HasNoInstruction extends DSL {
 
         $stop = array('File');
         $stop = array_unique(array_merge($stop, $diff));
-        
+
         $linksDown = self::$linksDown;
 
         $gremlin = <<<GREMLIN

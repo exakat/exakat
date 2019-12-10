@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class Count extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('count()');
     }
 }

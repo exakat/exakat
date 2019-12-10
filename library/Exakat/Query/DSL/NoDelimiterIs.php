@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class NoDelimiterIs extends DSL {
     public function run() {
@@ -33,7 +32,7 @@ class NoDelimiterIs extends DSL {
         $return = new Command('has("noDelimiter")');
         $propertyIs = $this->dslfactory->factory('propertyIs');
         $code = makeArray($code);
-        
+
         return $return->add($propertyIs->run('noDelimiter', $code, $caseSensitive));
     }
 }

@@ -23,10 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
 
 class ProcessLevels extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         $command = new Command(<<<GREMLIN

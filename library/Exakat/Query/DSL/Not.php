@@ -26,9 +26,9 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class Not extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($filter) = func_get_args();
-        
+
         if ($filter instanceof Command) {
             if ($filter->gremlin === Query::STOP_QUERY) {
                 $filter->gremlin = Query::NO_QUERY;

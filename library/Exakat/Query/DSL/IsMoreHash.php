@@ -24,7 +24,6 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class IsMoreHash extends DSL {
     public function run() {
@@ -35,7 +34,7 @@ class IsMoreHash extends DSL {
         }
 
         assert($this->assertProperty($property));
-        
+
         return new Command("has(\"$property\").filter{ it.get().value(\"$property\") > ***[$index]}", array($hash));
     }
 }

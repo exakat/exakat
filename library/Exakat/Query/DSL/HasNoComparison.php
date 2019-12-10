@@ -23,12 +23,11 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class HasNoComparison extends DSL {
     public function run() {
         $return = $this->dslfactory->factory('HasNoInstruction');
-        
+
         return $return->run('Comparison');
     }
 }

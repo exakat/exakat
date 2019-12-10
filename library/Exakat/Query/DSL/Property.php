@@ -23,8 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class Property extends DSL {
     public function run() {

@@ -26,9 +26,9 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class GoToFirstExpression extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $linksDown = self::$linksDown;
-        
+
         return new Command(<<<GREMLIN
 until( __.in($linksDown).not(hasLabel(within(***))) ).repeat( __.in($linksDown) )
 

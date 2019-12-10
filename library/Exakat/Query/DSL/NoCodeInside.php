@@ -23,11 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class NoCodeInside extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atom, $values) = func_get_args();
 
         $atomFilter = makeList(makeArray($atom));

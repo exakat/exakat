@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class GoToArray extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('emit( ).repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
     }
 }

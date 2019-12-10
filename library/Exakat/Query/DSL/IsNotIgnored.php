@@ -23,11 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class IsNotIgnored extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('not(has("ignored_dir", true))', array() );
     }
 }

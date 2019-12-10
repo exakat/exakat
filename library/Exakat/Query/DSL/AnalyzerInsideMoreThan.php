@@ -24,10 +24,9 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class AnalyzerInsideMoreThan extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($analyzer, $atoms, $times) = func_get_args();
 
         assert($this->assertAtom($atoms));

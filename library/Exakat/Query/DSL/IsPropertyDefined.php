@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class IsPropertyDefined extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         // check for DEFINTION link and the Propertydefinition atom
         return new Command('where( __.in("DEFINITION").hasLabel("Propertydefinition"))');
     }

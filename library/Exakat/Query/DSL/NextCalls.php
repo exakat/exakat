@@ -24,10 +24,9 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class NextCalls extends DSL {
-    public function run() : Command {
+    public function run(): Command {
 
         if(func_num_args() === 1) {
             $times = abs((int) func_get_arg(0));
@@ -37,7 +36,7 @@ class NextCalls extends DSL {
 
         // Starting from Parameter, going to next parameter
         // Need a number of executions?
-        
+
         if ($times === 0) {
             return new Command(Query::NO_QUERY);
         } else {

@@ -23,13 +23,11 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class CollectImplements extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($variable) = func_get_args();
-        
+
         $this->assertVariable($variable, self::VARIABLE_WRITE);
 
         $command = new Command('where( 

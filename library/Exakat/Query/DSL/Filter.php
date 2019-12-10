@@ -24,9 +24,9 @@
 namespace Exakat\Query\DSL;
 
 class Filter extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($filter) = func_get_args();
-        
+
         if ($filter instanceof Command) {
             $filter->gremlin = "where( {$filter->gremlin} )";
 

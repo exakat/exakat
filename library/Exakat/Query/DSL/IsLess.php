@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class IsLess extends DSL {
     public function run() {
@@ -34,13 +33,13 @@ class IsLess extends DSL {
 
         return new Command("filter{ {$g1} < {$g2};}");
     }
-    
+
     private function makeGremlin($value) {
         // It is an integer
         if (is_int($value)) {
             return $value;
         }
-        
+
         // It is a gremlin variable
         if ($this->isVariable($value)) {
             assert($this->assertVariable($value));

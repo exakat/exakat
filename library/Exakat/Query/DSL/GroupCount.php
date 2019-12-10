@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class GroupCount extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($column) = func_get_args();
 
         $this->assertProperty($column);

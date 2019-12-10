@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class CodeIsPositiveInteger extends DSL {
     public function run() {

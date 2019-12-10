@@ -24,16 +24,13 @@ declare(strict_types = 1);
 namespace Exakat\Query\DSL;
 
 use Exakat\Exceptions\UnknownDsl;
-use Exakat\Data\Dictionary;
-use Exakat\Tasks\Helpers\Atom;
-use Exakat\Datastore;
 use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
 
 class DSLFactory {
     const VARIABLE_WRITE = true;
     const VARIABLE_READ  = false;
-    
+
     public $availableAtoms         = array();
     public $availableLinks         = array();
     public $availableFunctioncalls = array();
@@ -55,7 +52,7 @@ class DSLFactory {
 
         if (empty($this->availableAtoms)) {
             $data = $this->datastore->getCol('TokenCounts', 'token');
-            
+
             $this->availableAtoms = array('Project',
                                           'File',
                                           'Virtualproperty',
@@ -88,7 +85,7 @@ class DSLFactory {
         }
     }
 
-    public function factory(string $name) : Dsl {
+    public function factory(string $name): Dsl {
         if (strtolower($name) === '_as') {
             $className = __NAMESPACE__ . '\\_As';
         } else {

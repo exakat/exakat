@@ -23,16 +23,14 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class CollectVariables extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($variable, $type) = func_get_args();
-        
+
         assert(in_array($type, array('fullcode', 'code')), 'collectVariable type should be code or fullcode');
         $this->assertVariable($variable, self::VARIABLE_WRITE);
-        
+
         $CONTAINERS = makeList(array('Variable', 'Variableobject', 'Variablearray', 'Phpvariable', 'Member', 'Staticproperty', 'Array', 'This', ));
         $LINKS_DOWN = self::$linksDown;
 

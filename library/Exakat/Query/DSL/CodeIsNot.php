@@ -46,7 +46,7 @@ class CodeIsNot extends DSL {
                 // Couldn't find anything in the dictionary : OK!
                 return new Command(Query::NO_QUERY);
             }
-        
+
             return new Command("filter{ !(it.get().value(\"$col\") in ***); }", array($translatedCode));
         } else {
             return new Command("filter{ !(it.get().value(\"$col\") in ***); }", array(makeArray($code)));

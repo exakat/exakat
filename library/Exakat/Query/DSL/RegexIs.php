@@ -33,14 +33,14 @@ class RegexIs extends DSL {
 
         if ($property === 'code') {
             $values = $this->dictCode->grep($regex);
-            
+
             if (empty($values)) {
                 return new Command(Query::NO_QUERY);
             }
-            
+
             return new Command('has("code", within(***) )', array($values));
         }
-        
+
         return new Command(<<<GREMLIN
 has("$property")
 .filter{ (it.get().value("$property") =~ "$regex" ).getCount() != 0 }

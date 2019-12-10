@@ -23,11 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class FullcodeInside extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($fullcode) = func_get_args();
 
         // $fullcode is a name of a variable

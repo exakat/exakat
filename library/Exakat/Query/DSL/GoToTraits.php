@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class GoToTraits extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit( ).times(' . self::$MAX_LOOPING . ') ');
     }
 }

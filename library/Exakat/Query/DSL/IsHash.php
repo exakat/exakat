@@ -38,7 +38,7 @@ class IsHash extends DSL {
                 list($property, $hash, $index, $case) = func_get_args();
                 assert(in_array($case, array(Analyzer::CASE_INSENSITIVE, Analyzer::CASE_SENSITIVE)));
                 break;
-                
+
             default:
                 assert(false, 'Wrong number of arguments for ' . __METHOD__);
         }
@@ -48,7 +48,7 @@ class IsHash extends DSL {
         }
 
         assert($this->assertProperty($property));
-        
+
         if ($case === Analyzer::CASE_INSENSITIVE) {
             return new Command("has(\"$property\").filter{ x = ***[$index].collect{ it.toLowerCase() }; it.get().value(\"$property\").toLowerCase() in x; }", array($hash));
         } else {

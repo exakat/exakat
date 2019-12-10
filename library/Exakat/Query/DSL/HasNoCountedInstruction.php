@@ -23,8 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class HasNoCountedInstruction extends DSL {
     public function run() {
@@ -33,9 +31,9 @@ class HasNoCountedInstruction extends DSL {
         assert($this->assertAtom($atom));
         assert($count >= 0);
         $atom = makeArray($atom);
-        
+
         // $count is an integer or a variable
-        
+
         $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
         $stop = array_unique(array_diff($stop, $atom));
         $linksDown = self::$linksDown;

@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class HasNoFunctionDefinition extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('not( where( __.in("DEFINITION").hasLabel("Function", "Method", "Magicmethod", "Closure", "Arrowfunction") ) )');
     }
 }

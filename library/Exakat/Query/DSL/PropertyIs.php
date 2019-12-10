@@ -35,7 +35,7 @@ class PropertyIs extends DSL {
         if (is_array($code) && empty($code) ) {
             return new Command(Query::NO_QUERY);
         }
-        
+
         if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {

@@ -35,7 +35,7 @@ class InIs extends DSL {
         if (empty($link)) {
             return new Command('in( )');
         }
-        
+
         $diff = $this->normalizeLinks($link);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);

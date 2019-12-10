@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class HasNoConstantDefinition extends DSL {
     public function run() {

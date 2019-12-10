@@ -24,15 +24,15 @@
 namespace Exakat\Query\DSL;
 
 class IsLocalClass extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $linksDown = self::$linksDown;
-        
+
         $gremlin = <<<GREMLIN
 sideEffect{ inside = it.get().value("fullnspath"); }
 .where(  __.repeat( __.in({$linksDown}) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(1)) )
 
 GREMLIN;
-        
+
         return new Command($gremlin);
     }
 }

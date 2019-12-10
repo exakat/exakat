@@ -28,19 +28,19 @@ use Exakat\Query\Query;
 class RegexIsNot extends DSL {
     public function run() {
         list($property, $regex) = func_get_args();
-        
+
         $this->assertProperty($property);
 
         if ($property === 'code') {
             $values = $this->dictCode->grep($regex);
-            
+
             if (empty($values)) {
                 return new Command(Query::NO_QUERY);
             }
-            
+
             return new Command('not( has("code", within(***) ) )', array($values));
         }
-        
+
         return new Command(<<<GREMLIN
 has("$property")
 .filter{ (it.get().value("$property") =~ "$regex" ).getCount() == 0 }

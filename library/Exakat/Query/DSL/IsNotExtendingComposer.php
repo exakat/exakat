@@ -23,12 +23,11 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class IsNotExtendingComposer extends DSL {
     public function run() {
         $MAX_LOOPING = self::$MAX_LOOPING;
-        
+
         $gremlin = <<<GREMLIN
 not( 
     where( __.out("EXTENDS")

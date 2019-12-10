@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class NotSamePropertyAs extends DSL {

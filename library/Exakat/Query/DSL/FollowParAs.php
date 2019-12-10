@@ -24,13 +24,12 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class FollowParAs extends DSL {
     const FOLLOW_ALL  = 0;
     const FOLLOW_NONE = 1;
 
-    public function run() : Command {
+    public function run(): Command {
 
         assert(func_num_args() === 1, 'Wrong number of arguments for ' . self::class);
         list($out) = func_get_args();
@@ -46,7 +45,7 @@ class FollowParAs extends DSL {
             if (empty($out)) {
                 return new Command(Query::STOP_QUERY);
             }
-            
+
             $out = 'out(' . makeList($out) . ').';
         }
 

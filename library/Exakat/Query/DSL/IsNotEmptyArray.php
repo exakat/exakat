@@ -23,8 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Exceptions\QueryException;
 
 class IsNotEmptyArray extends DSL {
     public function run() {

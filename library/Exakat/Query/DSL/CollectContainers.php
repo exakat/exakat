@@ -23,13 +23,12 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class CollectContainers extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($variable) = func_get_args();
-        
+
         $CONTAINERS = makeList(Analyzer::$CONTAINERS);
         $LINKS_DOWN = self::$linksDown;
 

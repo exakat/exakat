@@ -23,10 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
 
 class ProcessDereferencing extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $command = new Command(<<<GREMLIN
 emit().repeat( __.sack(sum).by(choose(__.hasLabel("Array", "Arrayappend"),
                                      constant(0),

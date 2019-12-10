@@ -23,13 +23,10 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Exceptions\UnknownDsl;
 use Exakat\Exceptions\DSLException;
-use Exakat\Data\Dictionary;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
-
 
 abstract class DSL {
     const VARIABLE_WRITE = true;
@@ -37,9 +34,9 @@ abstract class DSL {
 
     const LABEL_SET  = true;
     const LABEL_GO   = false;
-    
+
     const LEVELS_TO_ANALYSE = 4;
-    
+
     const PROPERTIES = array('id',
                              'atom',
                              'code',
@@ -166,7 +163,7 @@ abstract class DSL {
         $links = makeArray($links);
         return array_values(array_intersect($links, $this->availableLinks));
     }
-    
+
     protected function normalizeFunctioncalls($fullnspaths) {
         $fullnspaths = makeArray($fullnspaths);
         return array_values(array_intersect($fullnspaths, $this->availableFunctioncalls));
@@ -276,10 +273,10 @@ abstract class DSL {
         } else {
             assert(false, 'Unsupported type for analyzer : ' . gettype($analyzer));
         }
-        
+
         return true;
     }
-    
+
     protected function isProperty($property) {
         return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir', 'virtual', 'analyzer', 'propagated'));
     }
@@ -302,7 +299,7 @@ abstract class DSL {
 
     protected function cleanAnalyzerName($gremlin, $dependencies) {
         $fullNames = array_map(array($this, 'makeBaseName'), $dependencies);
-        
+
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
@@ -325,9 +322,9 @@ abstract class DSL {
         if (empty($links)) {
             return '.out( )';
         }
-        
+
         $return = array();
-        
+
         $links = makeArray($links);
         foreach($links as $l) {
             if (empty($l)) {
@@ -341,7 +338,7 @@ abstract class DSL {
                 assert(false, __METHOD__ . ' received an unprocessable object ' . gettype($l));
             }
         }
-        
+
         return implode('', $return);
     }
 }

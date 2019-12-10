@@ -24,10 +24,9 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class OutIsIE extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($links) = func_get_args();
 
         assert(func_num_args() === 1, 'Too many arguments for ' . __METHOD__);
@@ -37,7 +36,7 @@ class OutIsIE extends DSL {
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         }
-        
+
         return new Command('until( __.not(outE(' . $this->SorA($diff) . ')) ).repeat(out(' . $this->SorA($diff) . '))');
     }
 }

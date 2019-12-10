@@ -23,11 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class HasNoUsage extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command(<<<'GREMLIN'
 not(
     where(                  

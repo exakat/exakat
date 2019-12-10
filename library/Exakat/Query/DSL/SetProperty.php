@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class SetProperty extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($property, $value) = func_get_args();
 
         $this->assertProperty($property);

@@ -24,10 +24,8 @@
 namespace Exakat\Query;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Query\DSL\DSL;
 use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
-use Exakat\Exceptions\UnknownDsl;
 
 class Query {
     public const STOP_QUERY = 'filter{ false; }';
@@ -56,7 +54,7 @@ class Query {
         $this->project  = $project;
         $this->analyzer = $analyzer;
         $this->php      = $php;
-        
+
         $this->queryFactory = new DSLFactory(exakat('datastore'));
     }
 
@@ -76,7 +74,7 @@ class Query {
             $this->commands = array();
 
             $this->stopped = self::QUERY_STOPPED;
-            
+
             return $this;
         }
 
@@ -112,7 +110,7 @@ class Query {
 
         return $this;
     }
-    
+
     public function side() {
         if ($this->stopped === self::QUERY_STOPPED) {
             return $this;
@@ -120,7 +118,7 @@ class Query {
 
         $this->sides[] = $this->commands;
         $this->commands = array();
-        
+
         return $this;
     }
 
@@ -196,7 +194,7 @@ class Query {
 
         return true;
     }
-    
+
     public function prepareRawQuery() {
         if ($this->stopped === self::QUERY_STOPPED) {
             return true;
@@ -204,7 +202,7 @@ class Query {
 
         $commands = array_column($this->commands, 'gremlin');
         $arguments = array_column($this->commands, 'arguments');
-        
+
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             // any 'stop_query' is blocking
             return $this->query = "// Query with STOP_QUERY\n";
@@ -230,7 +228,7 @@ g{$sack}.V().as('first').$commands
 GREMLIN;
 
     }
-    
+
     public function printRawQuery() {
         $this->prepareRawQuery();
 
@@ -250,7 +248,7 @@ GREMLIN;
 
     public function printQuery() {
         $this->prepareQuery();
-        
+
         var_dump($this->query);
         print_r($this->arguments);
         die(__METHOD__);
@@ -271,8 +269,8 @@ GREMLIN;
 
         return Command::SACK_NONE;
     }
-    
-    public function canSkip() : bool {
+
+    public function canSkip(): bool {
         return $this->stopped !== self::QUERY_RUNNING;
     }
 }

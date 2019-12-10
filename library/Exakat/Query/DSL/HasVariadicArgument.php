@@ -23,11 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class HasVariadicArgument extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('where(__.out("ARGUMENT").has("variadic", true))');
     }
 }

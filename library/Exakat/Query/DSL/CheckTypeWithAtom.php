@@ -23,14 +23,12 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class CheckTypeWithAtom extends DSL {
     public function run() {
         assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__);
         list($var) = func_get_args();
-        
+
         assert($this->assertVariable($var, self::VARIABLE_READ));
 
         $gremlin = <<<GREMLIN

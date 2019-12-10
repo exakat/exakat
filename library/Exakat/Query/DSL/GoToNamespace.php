@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class GoToNamespace extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $return = $this->dslfactory->factory('goToInstruction');
 
         return $return->run(array('Namespace', 'Php'));

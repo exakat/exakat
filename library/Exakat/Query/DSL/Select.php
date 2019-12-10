@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 class Select extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($values) = func_get_args();
 
         $by     = array();
@@ -47,7 +47,7 @@ class Select extends DSL {
                 $by[]     = "by(constant(\"$v\"))";
             }
         }
-        
+
         if (empty($by)) {
             $command = 'select(' . makeList($select) . ')';
         } else {

@@ -24,9 +24,9 @@
 namespace Exakat\Query\DSL;
 
 class GoToFunction extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atoms) = func_get_args();
-        
+
         $this->assertAtom($atoms);
         $linksDown = self::$linksDown;
         $diff = $this->normalizeAtoms($atoms);

@@ -23,11 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class FollowExpression extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $MAX_LOOPING = self::$MAX_LOOPING;
         $linksDown = self::$linksDown;
 

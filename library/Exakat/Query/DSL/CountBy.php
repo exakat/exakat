@@ -23,17 +23,15 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class CountBy extends DSL {
     public function run() {
         list($link, $property, $variable) = func_get_args();
-        
+
         $this->assertLink($link);
         $this->assertProperty($property);
         $this->assertVariable($variable, self::VARIABLE_WRITE);
-        
+
         $gremlin = <<<GREMLIN
 where(  
     __.sideEffect{ {$variable} = [:]; }

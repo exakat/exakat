@@ -34,9 +34,9 @@ class CodeIs extends DSL {
         if (is_array($code) && empty($code)) {
             return new Command(Query::STOP_QUERY);
         }
-        
+
         $col = $caseSensitive === Analyzer::CASE_INSENSITIVE ? 'lccode' : 'code';
-        
+
         if ($translate === Analyzer::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
@@ -45,7 +45,7 @@ class CodeIs extends DSL {
             if (empty($translatedCode)) {
                 return new Command(Query::STOP_QUERY);
             }
-            
+
             return new Command("filter{ it.get().value(\"$col\") in ***; }", array($translatedCode));
         } else {
             return new Command("filter{ it.get().value(\"$col\") in ***; }", array(makeArray($code)));

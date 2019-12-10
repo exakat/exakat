@@ -23,15 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
 class CollectExtends extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($variable) = func_get_args();
-        
+
         $this->assertVariable($variable, self::VARIABLE_WRITE);
-        
+
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         return new Command(<<<GREMLIN
