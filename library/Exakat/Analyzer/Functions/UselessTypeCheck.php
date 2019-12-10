@@ -76,31 +76,6 @@ class UselessTypeCheck extends Analyzer {
              ->atomIs('Null',self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
-
-        // function foo(?A $a = null) { }
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->is('nullable', true)
-
-             ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
-             ->inIs('TYPEHINT')
-
-             ->filter(
-                $this->side()
-                     ->outIs('DEFAULT')
-                     ->atomIs('Null')
-                     ->hasNoIn('RIGHT')
-             )
-
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->inIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Comparison')
-             ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Null',self::WITH_CONSTANTS)
-             ->back('first');
-        $this->prepareQuery();
     }
 }
 
