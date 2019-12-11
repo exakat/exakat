@@ -40,7 +40,7 @@ class UsesFramework extends Analyzer {
             $classes    = makeFullNsPath($this->classes);
 
             if (!empty($classes)) {
-                $classesUsage = new ClassUsage($this->gremlin, $this->config);
+                $classesUsage = new ClassUsage();
                 $classesUsage->setAnalyzer(get_class($this));
                 $classesUsage->setClasses($classes);
                 $analyzerId = $classesUsage->init($analyzerId);
@@ -57,7 +57,7 @@ class UsesFramework extends Analyzer {
             $interfaces = makeFullNsPath($this->interfaces);
         
             if (!empty($interfaces)) {
-                $interfacesUsage = new InterfaceUsage($this->gremlin, $this->config);
+                $interfacesUsage = new InterfaceUsage();
                 $interfacesUsage->setAnalyzer(get_class($this));
                 $interfacesUsage->setInterfaces($interfaces);
                 $analyzerId = $interfacesUsage->init($analyzerId);
@@ -74,7 +74,7 @@ class UsesFramework extends Analyzer {
             $traits     = makeFullNsPath($this->traits);
 
             if (!empty($traits)) {
-                $traitsUsage = new TraitUsage($this->gremlin, $this->config);
+                $traitsUsage = new TraitUsage();
                 $traitsUsage->setAnalyzer(get_class($this));
                 $traitsUsage->setTraits($traits);
                 $analyzerId = $traitsUsage->init($analyzerId);
@@ -91,7 +91,7 @@ class UsesFramework extends Analyzer {
             $namespaces     = makeFullNsPath($this->namespaces);
 
             if (!empty($namespaces)) {
-                $namespacesUsage = new NamespaceUsage($this->gremlin, $this->config);
+                $namespacesUsage = new NamespaceUsage();
                 $namespacesUsage->setAnalyzer(get_class($this));
                 $namespacesUsage->setNamespaces($namespaces);
                 $analyzerId = $namespacesUsage->init($analyzerId);
