@@ -175,6 +175,7 @@ abstract class Analyzer {
     protected $linksDown = '';
 
     public function __construct() {
+        assert(func_num_args() === 0, "Too many arguments for ".__CLASS__);
         $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
@@ -229,7 +230,7 @@ abstract class Analyzer {
         $this->methods = exakat('methods');
     }
 
-    public function init(int $analyzerId = null) : void {
+    public function init(int $analyzerId = null) : int {
         if (self::$rulesId === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
@@ -282,6 +283,8 @@ GREMLIN;
         }
 
         assert($this->analyzerId != 0, self::class . ' was inited with Id 0. Can\'t save with that!');
+        
+        return $this->analyzerId;
     }
     
     public function __destruct() {
@@ -290,7 +293,7 @@ GREMLIN;
         }
     }
     
-    public function setAnalyzer($analyzer) {
+    public function setAnalyzer(string $analyzer) : void {
         $this->analyzer = $this->rulesets->getClass($analyzer);
         if ($this->analyzer === false) {
             throw new NoSuchAnalyzer($analyzer, $this->rulesets);
@@ -299,16 +302,16 @@ GREMLIN;
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
     }
     
-    public function getInBaseName() {
+    public function getInBaseName() : string {
         return $this->analyzerQuoted;
     }
     
-    public function getName($classname) {
+    public function getName(string $classname) : string {
         return str_replace( array('Exakat\\Analyzer\\', '\\'), array('', '/'), $classname);
     }
     
     
-    public function getDump() {
+    public function getDump() : array {
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", within(args))
 .sideEffect{ analyzer = it.get().value("analyzer"); }
@@ -1766,7 +1769,7 @@ GREMLIN;
         return $this;
     }
 
-    public function run() {
+    public function run() : int {
         $this->analyze();
 
         $this->execQuery();
@@ -1774,19 +1777,19 @@ GREMLIN;
         return $this->rowCount;
     }
     
-    public function getRowCount() {
+    public function getRowCount() : int {
         return $this->rowCount;
     }
 
-    public function getProcessedCount() {
+    public function getProcessedCount() : int {
         return $this->processedCount;
     }
 
-    public function getRawQueryCount() {
+    public function getRawQueryCount() : int {
         return $this->rawQueryCount;
     }
 
-    public function getQueryCount() {
+    public function getQueryCount() : int {
         return $this->queryCount;
     }
 
@@ -2094,7 +2097,7 @@ GREMLIN
 
             $r = $this->gremlin->query($query->getQuery(), $query->getArguments());
             ++$this->queryCount;
-            
+
             $this->processedCount += $r['processed'];
             $this->rowCount       += $r['total'];
         }
