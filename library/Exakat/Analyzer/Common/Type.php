@@ -34,7 +34,7 @@ class Type extends Analyzer {
         $this->prepareQuery();
     }
 
-    public function getDump() {
+    public function getDump() : array {
         $query = <<<GREMLIN
 g.V().hasLabel("{$this->type}")
 .sideEffect{ line = it.get().value('line');
@@ -56,7 +56,7 @@ g.V().hasLabel("{$this->type}")
 
 GREMLIN;
 
-        return $this->gremlin->query($query);
+        return $this->gremlin->query($query)->toArray();
     }
 }
 

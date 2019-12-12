@@ -47,7 +47,7 @@ class UseComposer extends Analyzer {
         return $report;
     }
     
-    public function getDump() {
+    public function getDump() : array {
         if ($this->hasResults()) {
             return array(array());
         }
