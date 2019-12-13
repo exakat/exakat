@@ -35,6 +35,7 @@ class CreateDefaultValues extends Analyzer {
                             'Propertydefinition',
                             'Parametername',
                             ), Analyzer::WITHOUT_CONSTANTS)
+             ->hasNoOut('DEFINITION')
              ->_as('results')
              ->outIs('DEFINITION')
              ->inIs('LEFT')
@@ -44,7 +45,7 @@ class CreateDefaultValues extends Analyzer {
 
              ->addEFrom('DEFAULT', 'first')
              ->back('results');
-        $this->prepareQuery();
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 
