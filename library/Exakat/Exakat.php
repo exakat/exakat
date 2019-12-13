@@ -41,9 +41,9 @@ class Exakat {
 
     public function execute() : void {
         if ($this->config->remote === 'none') {
-            $this->local($this->config);
+            $this->local();
         } else {
-            $this->remote($this->config);
+            $this->remote();
         }
     }
     
