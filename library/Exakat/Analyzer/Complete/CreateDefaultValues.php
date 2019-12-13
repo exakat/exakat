@@ -35,7 +35,7 @@ class CreateDefaultValues extends Analyzer {
                             'Propertydefinition',
                             'Parametername',
                             ), Analyzer::WITHOUT_CONSTANTS)
-             ->hasNoOut('DEFINITION')
+             ->hasNoOut('DEFAULT')
              ->_as('results')
              ->outIs('DEFINITION')
              ->inIs('LEFT')
