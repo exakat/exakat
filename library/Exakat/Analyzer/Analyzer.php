@@ -38,17 +38,18 @@ use Exakat\Query\DSL\FollowParAs;
 
 abstract class Analyzer {
     // Query types
-    const QUERY_DEFAULT    = 1;   // For compatibility purposes
-    const QUERY_ANALYZER   = 2;   // same as above, but explicit
-    const QUERY_VALUE      = 3;   // returns a single value
-    const QUERY_RAW        = 4;   // returns data, no storage
-    const QUERY_HASH       = 5;   // returns a list of values
-    const QUERY_MULTIPLE   = 6;   // returns several links at the same time (TBD)
-    const QUERY_ARRAYS     = 7;   // arrays of array
-    const QUERY_TABLE      = 8;   // to specific table
-    const QUERY_MISSING    = 9;   // store values that are not in the graph
-    const QUERY_PHP_ARRAYS = 10;  // store a PHP array of values into hashResults
-    const QUERY_PHP_HASH   = 11;  // store a PHP array of values into hashResults
+    const QUERY_DEFAULT     = 1;   // For compatibility purposes
+    const QUERY_ANALYZER    = 2;   // same as above, but explicit
+    const QUERY_VALUE       = 3;   // returns a single value
+    const QUERY_RAW         = 4;   // returns data, no storage
+    const QUERY_HASH        = 5;   // returns a list of values
+    const QUERY_MULTIPLE    = 6;   // returns several links at the same time (TBD)
+    const QUERY_ARRAYS      = 7;   // arrays of array
+    const QUERY_TABLE       = 8;   // to specific table
+    const QUERY_MISSING     = 9;   // store values that are not in the graph
+    const QUERY_PHP_ARRAYS  = 10;  // store a PHP array of values into hashResults
+    const QUERY_PHP_HASH    = 11;  // store a PHP array of values into hashResults
+    const QUERY_NO_ANALYZED = 12;  // store links, but not the ANALYZED one
 
     protected $datastore  = null;
 
@@ -1813,9 +1814,13 @@ GREMLIN;
                 $this->storePhpHashToHashResults();
                 break;
 
+            case self::QUERY_NO_ANALYZED:
+                $this->storeToGraph(false);
+                break;
+
             case self::QUERY_DEFAULT:
             default:
-                $this->storeToGraph();
+                $this->storeToGraph(true);
                 break;
         }
 
@@ -2024,12 +2029,19 @@ GREMLIN
         return count($valuesSQL);
     }
 
-    private function storeToGraph() {
+    private function storeToGraph(bool $analyzed = true) : void {
         ++$this->queryId;
         
+        var_dump($analyzed);
+        if ($analyzed === true) {
+            $analyzed = ".addE(\"ANALYZED\").from(g.V({$this->analyzerId}))";
+        } else {
+            $analyzed = '';
+        }
+
         $this->raw(<<<GREMLIN
 dedup().groupCount("total").by(count())
-        .addE("ANALYZED").from(g.V({$this->analyzerId}))
+        $analyzed
         .sideEffect( g.V({$this->analyzerId}).property('count', -1))
         .cap("processed", "total")
 

@@ -35,9 +35,8 @@ class SetCloneLink extends Analyzer {
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
               ->codeIs('__clone', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

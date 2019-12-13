@@ -30,18 +30,16 @@ class SetParentDefinition extends Analyzer {
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Newcall', self::WITHOUT_CONSTANTS)
               ->fullnspathIs('\\parent', self::CASE_SENSITIVE)
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->_as('parent')
@@ -57,9 +55,8 @@ class SetParentDefinition extends Analyzer {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'property')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'property');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->_as('parent')
@@ -75,9 +72,8 @@ class SetParentDefinition extends Analyzer {
               ->outIs('CONST')
               ->outIs('CONST')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'constant')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'constant');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('String', self::WITHOUT_CONSTANTS)
               ->fullnspathIs('\\\\parent', self::CASE_SENSITIVE)
@@ -85,9 +81,8 @@ class SetParentDefinition extends Analyzer {
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'parent')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'parent');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

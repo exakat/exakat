@@ -51,9 +51,8 @@ class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'method');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->_as('member')
@@ -74,9 +73,8 @@ class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'member');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 
