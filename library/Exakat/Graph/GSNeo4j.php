@@ -75,7 +75,7 @@ class GSNeo4j extends Graph {
         $this->db->open();
     }
 
-    public function query($query, $params = array(), $load = array()) {
+    public function query(string $query, array $params = array(),array $load = array()) : GraphResults {
         if ($this->status === self::UNAVAILABLE) {
             return new GraphResults();
         }
@@ -122,7 +122,7 @@ class GSNeo4j extends Graph {
         }
     }
 
-    public function queryOne($query, $params = array(), $load = array()) {
+    public function queryOne(string $query, array $params = array(),array $load = array()) : GraphResults {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
@@ -139,7 +139,7 @@ class GSNeo4j extends Graph {
         }
     }
 
-    public function checkConnection() {
+    public function checkConnection() : bool {
         $res = @stream_socket_client("tcp://{$this->config->gsneo4j_host}:{$this->config->gsneo4j_port}",
                                      $errno,
                                      $errorMessage,

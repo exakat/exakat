@@ -36,8 +36,8 @@ class Tinkergraph extends Graph {
 
     private $gremlinVersion = '3.4';
 
-    public function __construct($config) {
-        parent::__construct($config);
+    public function __construct() {
+        parent::__construct();
 
         if (!file_exists("{$this->config->tinkergraph_folder}/lib/")) {
             // No local production, just skip init.
@@ -59,7 +59,7 @@ class Tinkergraph extends Graph {
                                    ));
     }
 
-    public function resetConnection() {
+    public function resetConnection() : void {
         unset($this->db);
         $this->db = new Connection(array( 'host'  => $this->config->tinkergraph_host,
                                           'port'  => $this->config->tinkergraph_port,
@@ -69,12 +69,12 @@ class Tinkergraph extends Graph {
         $this->status = self::UNCHECKED;
     }
 
-    private function checkConfiguration() {
+    private function checkConfiguration() : void {
         ini_set('default_socket_timeout', 1600);
         $this->db->open();
     }
 
-    public function query($query, $params = array(), $load = array()) {
+    public function query(string $query, array $params = array(),array $load = array()) : GraphResults {
         if ($this->status === self::UNAVAILABLE) {
             return new GraphResults();
         } elseif ($this->status === self::UNCHECKED) {
@@ -114,7 +114,7 @@ class Tinkergraph extends Graph {
         }
     }
 
-    public function queryOne($query, $params = array(), $load = array()) {
+    public function queryOne(string $query, array $params = array(),array $load = array()) : GraphResults {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }

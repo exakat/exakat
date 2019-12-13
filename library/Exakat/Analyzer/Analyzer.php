@@ -1021,12 +1021,6 @@ GREMLIN;
         return $this;
     }
 
-    public function savePropertyAs($property, $name) {
-        $this->query->savePropertyAs($property, $name);
-
-        return $this;
-    }
-    
     public function InitVariable($name, $value = '[]') {
         $this->query->initVariable($name, $value);
 
@@ -1123,12 +1117,6 @@ GREMLIN;
             assert(false, 'Wrong type for filter : ' . gettype($filter));
         }
         $this->query->filter($filterClean, $args);
-
-        return $this;
-    }
-
-    public function optional($filter) {
-        $this->query->optional($filter);
 
         return $this;
     }

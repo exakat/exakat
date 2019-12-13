@@ -494,9 +494,9 @@ class PropagateCalls extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), self::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
-              )              ->atomIs('Class', self::WITHOUT_CONSTANTS)
+                       ->prepareSide()
+              )
+              ->atomIs('Class', self::WITHOUT_CONSTANTS)
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(self::INCLUDE_SELF)
               ->outIs('CONST')
@@ -526,8 +526,7 @@ class PropagateCalls extends Analyzer {
                        ->outIs('DEFINITION')
                        ->atomIs(array('Nsname', 'Identifier'), self::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide(),
-                        array()
+                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(self::INCLUDE_SELF)

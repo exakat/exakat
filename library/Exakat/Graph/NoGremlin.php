@@ -25,7 +25,11 @@ namespace Exakat\Graph;
 use Exakat\Graph\Helpers\GraphResults;
 
 class NoGremlin extends Graph {
-    public function query($query, $params = array(), $load = array()) {
+    public function query(string $query, array $params = array(),array $load = array()) : GraphResults {
+        return new GraphResults();
+    }
+
+    public function queryOne(string $query, array $params = array(),array $load = array()) : GraphResults {
         return new GraphResults();
     }
 

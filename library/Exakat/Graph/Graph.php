@@ -22,6 +22,7 @@
 
 namespace Exakat\Graph;
 
+use Exakat\Graph\Helpers\GraphResults;
 
 abstract class Graph {
     protected $config = null;
@@ -35,7 +36,8 @@ abstract class Graph {
         $this->config = exakat('config');
     }
 
-    abstract public function query($query, $params = array(), $load = array());
+    abstract public function query(string $query, array $params = array(),array $load = array()) : GraphResults;
+    abstract public function queryOne(string $query, array $params = array(),array $load = array()) : GraphResults;
 
     abstract public function start();
     abstract public function stop();

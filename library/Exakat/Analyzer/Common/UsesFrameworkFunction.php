@@ -35,7 +35,7 @@ class UsesFrameworkFunction extends Analyzer {
             $functions    = makeFullNsPath($this->functions);
 
             if (!empty($functions)) {
-                $functionsUsage = new FunctionUsage($this->gremlin, $this->config);
+                $functionsUsage = new FunctionUsage();
                 $functionsUsage->setAnalyzer(get_class($this));
                 $functionsUsage->setFunctions($functions);
                 $analyzerId = $functionsUsage->init($analyzerId);

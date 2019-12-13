@@ -2942,7 +2942,7 @@ SQL;
     }
 
     private function newQuery($title) {
-        return new Query(0, $this->config->project, $title, null, $this->datastore);
+        return new Query(0, $this->config->project, $title, $this->config->executable);
     }
 }
 

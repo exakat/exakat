@@ -26,6 +26,7 @@ namespace Exakat\Query;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
+use Exakat\Phpexec;
 
 class Query {
     public const STOP_QUERY = 'filter{ false; }';
@@ -49,7 +50,7 @@ class Query {
     private $sides            = array();
     private $stopped          = self::QUERY_RUNNING;
 
-    public function __construct($id, $project, $analyzer, $php) {
+    public function __construct(int $id, string $project, string $analyzer, string $php) {
         $this->id       = $id;
         $this->project  = $project;
         $this->analyzer = $analyzer;
@@ -111,7 +112,7 @@ class Query {
         return $this;
     }
 
-    public function side() {
+    public function side() : self {
         if ($this->stopped === self::QUERY_STOPPED) {
             return $this;
         }
@@ -122,9 +123,9 @@ class Query {
         return $this;
     }
 
-    public function prepareSide() {
+    public function prepareSide() : Command {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return $this;
+            return new Command(Query::NO_QUERY);
         }
 
         $commands = array_column($this->commands, 'gremlin');
@@ -153,7 +154,7 @@ class Query {
         return $return;
     }
 
-    public function prepareQuery() {
+    public function prepareQuery() : bool {
         if ($this->stopped === self::QUERY_STOPPED) {
             return true;
         }

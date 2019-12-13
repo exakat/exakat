@@ -72,14 +72,14 @@ class PropagateConstants extends Analyzer {
             $res = $this->rawQuery();
 
             $this->atomIs(array('Constant', 'Defineconstant'))
-             ->outIs('VALUE')
-             ->has('propagated', true)
-             ->raw('sideEffect{ x = it.get(); }')
-             ->back('first')
-             
-             ->outIs('NAME')
-             ->hasNo('propagated')
-             ->raw(<<<GREMLIN
+                 ->outIs('VALUE')
+                 ->has('propagated', true)
+                 ->savePropertyAs('x')
+                 ->back('first')
+
+                 ->outIs('NAME')
+                 ->hasNo('propagated')
+                 ->raw(<<<GREMLIN
  sideEffect{ 
         if ("noDelimiter" in x.keys()) {
             it.get().property("noDelimiter", x.value("noDelimiter")); 
@@ -100,7 +100,7 @@ class PropagateConstants extends Analyzer {
 }
 GREMLIN
 )
-            ->count();
+                 ->count();
             $res = $this->rawQuery();
         
             display( $res->toInt() . " constants inited\n");
@@ -111,7 +111,7 @@ GREMLIN
         $this->atomIs(array('Constant', 'Defineconstant'))
              ->outIs('NAME')
              ->has('propagated', true)
-             ->raw('sideEffect{ constante = it.get(); }')
+             ->savePropertyAs('constante')
              ->back('first')
 
              ->outIs('DEFINITION')
