@@ -2031,8 +2031,7 @@ GREMLIN
 
     private function storeToGraph(bool $analyzed = true) : void {
         ++$this->queryId;
-        
-        var_dump($analyzed);
+
         if ($analyzed === true) {
             $analyzed = ".addE(\"ANALYZED\").from(g.V({$this->analyzerId}))";
         } else {
@@ -2078,7 +2077,7 @@ GREMLIN
     
     private function initNewQuery() {
         $this->query = new Query((count($this->queries) + 1),
-                                  $this->config->project,
+                                  $this->config->project ?? 'test',
                                   $this->analyzerQuoted,
                                   $this->config->executable,
                                   $this->datastore);
