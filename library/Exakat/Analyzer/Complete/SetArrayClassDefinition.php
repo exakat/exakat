@@ -49,9 +49,8 @@ class SetArrayClassDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addEto('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addEto('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // array(\x, foo)
         $this->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
@@ -74,9 +73,8 @@ class SetArrayClassDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addEto('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addEto('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

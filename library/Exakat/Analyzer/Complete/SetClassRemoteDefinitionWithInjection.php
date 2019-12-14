@@ -41,9 +41,8 @@ class SetClassRemoteDefinitionWithInjection extends Analyzer {
               ->atomIs('Propertydefinition',  Analyzer::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addEFrom('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

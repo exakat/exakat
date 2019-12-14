@@ -25,10 +25,6 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Analyzer\Analyzer;
 
 class MakeFunctioncallWithReference extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
     public function dependsOn() : array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/PropagateCalls',
@@ -46,9 +42,8 @@ class MakeFunctioncallWithReference extends Analyzer {
         foreach($functions as $position => $calls) {
             $this->atomFunctionIs($calls)
                  ->outWithRank('ARGUMENT', $position)
-                 ->setProperty('isModified', true)
-                 ->back('first');
-            $this->prepareQuery();
+                 ->setProperty('isModified', true);
+            $this->prepareQuery(self::QUERY_NO_ANALYZED);
         }
 
         // Case of Custom native functions
@@ -60,9 +55,8 @@ class MakeFunctioncallWithReference extends Analyzer {
              ->outIs('DEFINITION')
              ->outIsIE('METHOD')
              ->outWithRank('ARGUMENT', 'ranked')
-             ->setProperty('isModified', true)
-             ->back('first');
-        $this->prepareQuery();
+             ->setProperty('isModified', true);
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

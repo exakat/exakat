@@ -42,9 +42,8 @@ class SolveTraitMethods extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'methode', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'results')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'results');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('BLOCK')
@@ -61,9 +60,8 @@ class SolveTraitMethods extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'methode', Analyzer::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'results')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'results');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

@@ -54,9 +54,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'method');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->_as('member')
@@ -85,9 +84,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'member');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->_as('constante')
@@ -117,9 +115,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->outIs('CONST')
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'constante')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'constante');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
@@ -149,9 +146,8 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

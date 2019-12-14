@@ -48,9 +48,8 @@ GREMLIN)
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addEto('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addEto('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

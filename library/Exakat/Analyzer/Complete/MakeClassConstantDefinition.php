@@ -47,9 +47,8 @@ class MakeClassConstantDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between Class constant and definition
         $this->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
@@ -69,9 +68,8 @@ class MakeClassConstantDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -91,9 +89,8 @@ class MakeClassConstantDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -113,9 +110,8 @@ class MakeClassConstantDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

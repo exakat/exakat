@@ -76,9 +76,8 @@ class CreateMagicProperty extends Analyzer {
              ->codeIs('__get', Analyzer::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
 
-             ->addETo('DEFINITION', 'first')
-             ->back('first');
-        $this->prepareQuery();
+             ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // link to __set
         $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
@@ -120,10 +119,8 @@ class CreateMagicProperty extends Analyzer {
              ->outIs('NAME')
              ->codeIs('__set', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
-             ->addETo('DEFINITION', 'first')
-
-             ->back('first');
-        $this->prepareQuery();
+             ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // isset($this->a)
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
@@ -157,9 +154,8 @@ class CreateMagicProperty extends Analyzer {
              ->outIs('NAME')
              ->codeIs('__isset', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
-             ->addETo('DEFINITION', 'first')
-             ->back('first');
-        $this->prepareQuery();
+             ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // unset($this->a)
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
@@ -193,9 +189,8 @@ class CreateMagicProperty extends Analyzer {
              ->outIs('NAME')
              ->codeIs('__unset', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
-             ->addETo('DEFINITION', 'first')
-             ->back('first');
-        $this->prepareQuery();
+             ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // unset() $this->a
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
@@ -230,9 +225,8 @@ class CreateMagicProperty extends Analyzer {
              ->outIs('NAME')
              ->codeIs('__unset', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
-             ->addETo('DEFINITION', 'first')
-             ->back('first');
-        $this->prepareQuery();
+             ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

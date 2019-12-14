@@ -50,9 +50,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -68,9 +67,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between Class method and definition
         // This works only for $this
@@ -88,9 +86,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between Class method and definition
         // This works only for $this
@@ -124,9 +121,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between Class method and definition
         // This works only for $this
@@ -162,9 +158,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between Class method and definition
         // This works only for $this
@@ -197,9 +192,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between Class method and definition
         // This works only for $this
@@ -235,9 +229,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
@@ -256,9 +249,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
@@ -276,9 +268,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between constructor and new call
         $this->atomIs('New', self::WITHOUT_CONSTANTS)
@@ -291,9 +282,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('New', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -309,9 +299,8 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('New', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -328,9 +317,8 @@ GREMLIN
 )
               ->outIs('MAGICMETHOD')
               ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // Create link between __clone and clone
         // parenthesis, typehint, local new,
@@ -343,9 +331,8 @@ GREMLIN
               ->atomIs(array('Class', 'Classanonymous', 'Trait'), self::WITHOUT_CONSTANTS)
               ->outIs('MAGICMETHOD')
               ->codeIs('__clone', self::TRANSLATE, self::CASE_INSENSITIVE)
-              ->addETo('DEFINITION', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

@@ -46,9 +46,8 @@ class CreateForeachDefault extends Analyzer {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
-             ->addEFrom('DEFAULT', 'v')
-             ->back('first');
-        $this->prepareQuery();
+             ->addEFrom('DEFAULT', 'v');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // $a = [1 => 2]; foreach($a as $k => $v) {}
         $this->atomIs('Foreach')
@@ -65,9 +64,8 @@ class CreateForeachDefault extends Analyzer {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIs('INDEX')
-             ->addEFrom('DEFAULT', 'v')
-             ->back('first');
-        $this->prepareQuery();
+             ->addEFrom('DEFAULT', 'v');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

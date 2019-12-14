@@ -37,9 +37,8 @@ class CreateCompactVariables extends Analyzer {
               ->atomIs(array('Variabledefinition', 'Globaldefinition', 'Staticdefinition', 'Parameter'), Analyzer::WITHOUT_CONSTANTS)
               ->outIsIE('NAME')
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'varInString')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'varInString');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

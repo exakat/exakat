@@ -43,8 +43,7 @@ class CreateDefaultValues extends Analyzer {
              ->codeIs(array('=', '??='), Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
              ->followParAs('RIGHT')
 
-             ->addEFrom('DEFAULT', 'first')
-             ->back('results');
+             ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }

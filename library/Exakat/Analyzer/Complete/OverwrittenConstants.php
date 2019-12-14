@@ -39,9 +39,8 @@ class OverwrittenConstants extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name',  Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addEFrom('OVERWRITE', 'first')
-              ->count();
-        $this->rawQuery();
+              ->addEFrom('OVERWRITE', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

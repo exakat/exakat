@@ -44,9 +44,8 @@ class SetClassPropertyDefinitionWithTypehint extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'call')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'call');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->_as('property')
@@ -65,9 +64,8 @@ class SetClassPropertyDefinitionWithTypehint extends Analyzer {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_INSENSITIVE)
-              ->addETo('DEFINITION', 'call')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'call');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->_as('property')
@@ -86,9 +84,8 @@ class SetClassPropertyDefinitionWithTypehint extends Analyzer {
               ->outIs('CONST')
               ->outIs('CONST')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'call')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'call');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

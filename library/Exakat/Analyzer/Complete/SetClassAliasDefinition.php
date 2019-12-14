@@ -39,9 +39,8 @@ class SetClassAliasDefinition extends Analyzer {
               ->atomIs(array('Identifier', 'Nsname', 'Newcall', 'Name'), Analyzer::WITHOUT_CONSTANTS)
               ->dedup('')
               ->setProperty('fullnspath', 'fnp')
-              ->addEFrom('DEFINITION', 'method')
-              ->back('first');
-        $this->prepareQuery();
+              ->addEFrom('DEFINITION', 'method');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

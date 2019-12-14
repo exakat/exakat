@@ -33,9 +33,8 @@ class FollowClosureDefinition extends Analyzer {
               ->atomIs('Parenthesis')
               ->inIs('NAME')
               ->atomIs('Functioncall')
-              ->addETo('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // local usage
         $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
@@ -45,9 +44,8 @@ class FollowClosureDefinition extends Analyzer {
               ->outIs('DEFINITION')
               ->inIs('NAME')
               ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addEFrom('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // relayed usage
         $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
@@ -61,9 +59,8 @@ class FollowClosureDefinition extends Analyzer {
               ->outIs('DEFINITION')
               ->inIs('NAME')
               ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addEFrom('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

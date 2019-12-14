@@ -60,9 +60,8 @@ class CreateMagicMethod extends Analyzer {
               ->outIs('NAME')
               ->codeIs('__call', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // link to __callStatic
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
@@ -86,9 +85,8 @@ class CreateMagicMethod extends Analyzer {
               ->outIs('NAME')
               ->codeIs('__callstatic', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

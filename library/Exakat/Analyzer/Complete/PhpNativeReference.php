@@ -40,7 +40,7 @@ class PhpNativeReference extends Analyzer {
               ->isHash('rank', $references, 'fnp')
               ->atomIs(self::$CONTAINERS)
               ->setProperty('isModified', true);
-        $this->rawQuery();
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

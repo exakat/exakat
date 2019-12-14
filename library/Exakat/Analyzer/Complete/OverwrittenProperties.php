@@ -37,9 +37,8 @@ class OverwrittenProperties extends Analyzer {
               ->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
               ->samePropertyAs('propertyname', 'name',  self::CASE_SENSITIVE)
               ->raw('where(neq("first"))')
-              ->addEFrom('OVERWRITE', 'first')
-              ->back('first');
-        $this->prepareQuery();
+              ->addEFrom('OVERWRITE', 'first');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 

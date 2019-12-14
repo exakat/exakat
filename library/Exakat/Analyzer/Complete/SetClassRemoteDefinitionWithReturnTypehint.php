@@ -51,9 +51,8 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
-              ->count();
-        $this->rawQuery();
+              ->addETo('DEFINITION', 'method');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
              ->hasOut('RETURNTYPE')
@@ -77,9 +76,8 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-             ->addETo('DEFINITION', 'member')
-             ->count();
-        $this->rawQuery();
+             ->addETo('DEFINITION', 'member');
+        $this->prepareQuery(self::QUERY_NO_ANALYZED);
     }
 }
 
