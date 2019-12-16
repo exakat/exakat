@@ -23,41 +23,39 @@
 namespace Exakat;
 
 use Exakat\Config;
+use Exakat\Reports\Helpers\Results;
+use Sqlite3;
 
 class Dump {
     private $sqlite = null;
     
-    public function __construct(\Sqlite3 $sqlite) {
+    public function __construct(Sqlite3 $sqlite) {
         $this->sqlite = $sqlite;
     }
+    
+    public function fetchAnalysers(array $analysers) : Results {
+        $query = 'SELECT fullcode, file, line, analyzer FROM results WHERE analyzer IN (' . makeList($analysers) . ')';
+        $res = $this->sqlite->query($query);
 
-    public function getExtensionList() : array {
-        $res = $this->sqlite->query(<<<'SQL'
+        return new Results($res, array('phpsyntax' => array('fullcode' => 'htmlcode')));
+    }
+
+    public function getExtensionList() : Results {
+        $query = <<<'SQL'
 SELECT analyzer, count(*) AS count FROM results 
     WHERE analyzer LIKE "Extensions/Ext%"
     GROUP BY analyzer
     ORDER BY count(*) DESC
-SQL
-        );
-        
-        if ($res === false) {
-            print "Error";
-            return array(); 
-        }
+SQL;
 
-        return $this->fetchResults($res, \SQLITE3_ASSOC);
+        return $this->query($query);
     }
     
-    private function fetchResults(\Sqlite3Result $res, $type = \SQLITE3_ASSOC) : array {
-        $return = array();
-        
-        while ($value = $res->fetchArray($type)) {
-            $return[] = $value;
-        }
-        
-        return $return;
+    private function query(string $query) : Results {
+        $res = $this->sqlite->query($query);
+
+        return new Result($res);
     }
-    
 }
 
 ?>

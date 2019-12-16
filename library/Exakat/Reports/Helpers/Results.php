@@ -22,29 +22,25 @@
 
 namespace Exakat\Reports\Helpers;
 
+use SQLite3Result;
+
 class Results {
-    protected $sqlite       = null;
-    protected $analyzer     = '';
-    protected $analyzerList = '';
-    protected $values       = array();
-    protected $count        = -1;
+    private $sqlite       = null;
+    private $count        = -1;
+    private $values       = null;
+    private $options     = array();
 
-    public function __construct(\Sqlite3 $sqlite, $analyzer) {
-        $this->sqlite = $sqlite;
-        $this->analyzer = $analyzer;
-
-        if (is_string($analyzer)) {
-            $this->analyzerList = "'$analyzer'";
-        } elseif (is_array($analyzer)) {
-            $this->analyzerList = makeList($analyzer);
-        }
+    public function __construct(SQLite3Result $res, $options = array()) {
+        $this->res = $res;
+        
+        $this->options = $options;
     }
 
-    public function load() {
-        $res = $this->sqlite->query('SELECT fullcode, file, line, analyzer FROM results WHERE analyzer IN (' . $this->analyzerList . ')');
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $row['htmlcode'] = PHPSyntax($row['fullcode']);
+    public function load() : int {
+        while($row = $this->res->fetchArray(\SQLITE3_ASSOC)) {
+            foreach ($this->options['phpsyntax'] as $source => $destination) {
+                $row[$destination] = PHPSyntax($row[$source]);
+            }
             $this->values[] = $row;
             ++$this->count;
         }
@@ -52,15 +48,19 @@ class Results {
         return $this->count;
     }
 
-    public function getCount() {
+    public function getCount() : int {
         return $this->count;
     }
 
-    public function getColumn($column) {
+    public function getColumn($column) : array {
         return array_column($this->values, $column);
     }
 
-    public function toArray() {
+    public function toArray() : array {
+        if ($this->values === null) {
+            $this->load();
+        }
+
         return $this->values;
     }
 }

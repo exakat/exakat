@@ -29,8 +29,7 @@ class Json extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function _generate($analyzerList) {
-        $analysisResults = new Results($this->sqlite, $analyzerList);
-        $analysisResults->load();
+        $analysisResults = $this->dump->fetchAnalysers($analyzerList);
 
         $results = array();
         $titleCache = array();
