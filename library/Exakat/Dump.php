@@ -51,6 +51,16 @@ SQL;
         return $this->query($query);
     }
     
+    public function fetchHashResults(string $key) : Results {
+        $query = <<<SQL
+SELECT key, value FROM hashResults
+WHERE name = "$key"
+ORDER BY key + 0
+SQL;
+
+        return $this->query($query);
+    }
+
     private function query(string $query) : Results {
         $res = $this->sqlite->query($query);
 

@@ -958,19 +958,13 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT key, value FROM hashResults
-WHERE name = "ParameterCounts"
-ORDER BY key + 0
-SQL
-        );
-
-        if (!$res) { return ; }
+        $res = $this->dump->fetchHashResults('ParameterCounts');
+        if ($res->isEmpty()) { return ; }
 
         $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'" . $value['key'] . " param.'";
             $data[$value['key']] = $value['value'];
 
@@ -1157,23 +1151,20 @@ HTML;
 
     protected function generateIndentationLevelsBreakdown(Section $section) {
         // List of indentation used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT key, value AS count FROM hashResults 
-WHERE name = "Indentation Levels"
-ORDER BY key + 0 ASC
-SQL
-        );
+        $res = $this->dump->fetchHashResults('Indentation Levels');
+        if ($res->isEmpty()) { return ; }
+
         $html = '';
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'{$value['key']} level'";
 
-            $data[$value['key']] = (int) $value['count'];
+            $data[$value['key']] = (int) $value['value'];
 
             $html .= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' levels</div>
-                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
 
@@ -1182,18 +1173,10 @@ SQL
 
     protected function generateInventoriesEncoding(Section $section) {
         // List of indentation used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT key, value AS count FROM hashResults 
-WHERE name = "Mbstring Encoding"
-ORDER BY value + 0 ASC
-SQL
-        );
+        $res = $this->dump->fetchHashResults('Mbstring Encoding');
+        if ($res->isEmpty()) { return ; }
 
-        $values = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $values[$value['key']] = $value['count'];
-        }
-
+        $values = $res->toHash('key', 'value');
         asort($values);
 
         $theTable = array();
@@ -1236,28 +1219,25 @@ SQL
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generateDereferencingLevelsBreakdown(Section $section) {
+    protected function generateDereferencingLevelsBreakdown(Section $section) : void {
         // List of indentation used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT key, value AS count FROM hashResults 
-WHERE name = "Dereferencing Levels"
-ORDER BY key + 0 ASC
-SQL
-        );
-        $html = '';
+        $res = $this->dump->fetchHashResults('Dereferencing Levels');
+        if ($res->isEmpty()) { return ; }
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'{$value['key']} level'";
 
-            $data[$value['key']] = (int) $value['count'];
+            $data[$value['key']] = (int) $value['value'];
 
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' levels</div>
-                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
-
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
@@ -4243,24 +4223,22 @@ SQL
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT * FROM hashResults
-    WHERE name="Class Depth"
-    ORDER BY key
-SQL
-        );
-        $html = '';
+        $res = $this->dump->fetchHashResults('Class Depth');
+        if ($res->isEmpty()) { return ; }
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
                 $data[$value['key']] = $value['value'];
                 $xAxis[] = "'" . $value['key'] . " extension'";
 
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 

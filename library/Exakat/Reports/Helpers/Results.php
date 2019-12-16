@@ -39,6 +39,8 @@ class Results {
 
     public function load() : int {
         $this->values = array();
+        $this->count  = 0;
+
         while($row = $this->res->fetchArray(\SQLITE3_ASSOC)) {
             foreach ($this->options['phpsyntax'] as $source => $destination) {
                 $row[$destination] = PHPSyntax($row[$source]);
@@ -48,6 +50,14 @@ class Results {
         }
 
         return $this->count;
+    }
+
+    public function isEmpty() : bool {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        return $this->count === 0;
     }
 
     public function getCount() : int {
@@ -68,6 +78,19 @@ class Results {
         }
 
         return $this->values;
+    }
+    
+    public function toHash($key, $value) : array {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        $return = array();
+        foreach ($this->values as $row) {
+            $return[$row[$key]] = $row[$value];
+        }
+        
+        return $return;
     }
 }
 
