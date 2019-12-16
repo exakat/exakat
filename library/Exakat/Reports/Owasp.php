@@ -63,6 +63,7 @@ class Owasp extends Ambassador {
     'Security/IndirectInjection',
     'Structures/EvalUsage',
     'Security/Sqlite3RequiresSingleQuotes',
+    'Security/ShouldUsePreparedStatement',
 ),
 'A2:2017-Broken Authentication' => array(
 
@@ -87,7 +88,6 @@ class Owasp extends Ambassador {
     'Structures/RandomWithoutTry',
     'Security/CurlOptions',
     'Security/SetCookieArgs',
-    'Security/ShouldUsePreparedStatement',
     'Security/ShouldUseSessionRegenerateId',
     'Security/SessionLazyWrite',
     'Php/BetterRand',
