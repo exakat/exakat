@@ -1138,7 +1138,7 @@ JAVASCRIPT;
         $html = array();
         $xAxis = array();
         $data = array();
-        foreach($extensionList as $value) {
+        foreach($extensionList->toArray() as $value) {
             $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
             $xAxis[] = "'$shortName'";
             $data[$value['analyzer']] = $value['count'];
@@ -2335,8 +2335,7 @@ SQL;
 
         $bugfixes = exakat('methods')->getBugFixes();
 
-        $results = new Results($this->sqlite, 'Php/MiddleVersion');
-        $results->load();
+        $results = $this->dump->fetchAnalysers(array('Php/MiddleVersion'));
 
         $rows = array();
         foreach($results->toArray() as $row) {
@@ -2721,7 +2720,7 @@ HTML;
     private function generateErrorMessages(Section $section) {
         $errorMessages = '';
 
-        $results = new Results($this->sqlite, 'Structures/ErrorMessages');
+        $results = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
         $results->load();
 
         foreach($results->toArray() as $row) {
@@ -2984,7 +2983,7 @@ HTML;
     private function generateDynamicCode(Section $section) {
         $dynamicCode = '';
 
-        $results = new Results($this->sqlite, 'Structures/DynamicCode');
+        $results = $this->dump->fetchAnalysers(array('Structures/DynamicCode'));
         $results->load();
 
         foreach($results->toArray() as $row) {
@@ -3050,71 +3049,71 @@ HTML;
     }
 
     private function generateInventoriesConstants(Section $section) {
-        $this->generateInventories($section, 'Constants/Constantnames', 'List of all defined constants in the code.');
+        $this->generateInventories($section, array('Constants/Constantnames'), 'List of all defined constants in the code.');
     }
 
     private function generateInventoriesClasses(Section $section) {
-        $this->generateInventories($section, 'Constants/Classnames', 'List of all defined classes in the code.');
+        $this->generateInventories($section, array('Constants/Classnames'), 'List of all defined classes in the code.');
     }
 
     private function generateInventoriesInterfaces(Section $section) {
-        $this->generateInventories($section, 'Interfaces/Interfacenames', 'List of all defined interfaces in the code.');
+        $this->generateInventories($section, array('Interfaces/Interfacenames'), 'List of all defined interfaces in the code.');
     }
 
     private function generateInventoriesTraits(Section $section) {
-        $this->generateInventories($section, 'Traits/Traitnames', 'List of all defined traits in the code.');
+        $this->generateInventories($section, array('Traits/Traitnames'), 'List of all defined traits in the code.');
     }
 
     private function generateInventoriesFunctions(Section $section) {
-        $this->generateInventories($section, 'Functions/Functionnames', 'List of all defined functions in the code.');
+        $this->generateInventories($section, array('Functions/Functionnames'), 'List of all defined functions in the code.');
     }
 
     private function generateInventoriesNamespaces(Section $section) {
-        $this->generateInventories($section, 'Namespaces/Namespacesnames', 'List of all defined namespaces in the code.');
+        $this->generateInventories($section, array('Namespaces/Namespacesnames'), 'List of all defined namespaces in the code.');
     }
 
     private function generateInventoriesUrl(Section $section) {
-        $this->generateInventories($section, 'Type/Url', 'List of all URL mentioned in the code.');
+        $this->generateInventories($section, array('Type/Url'), 'List of all URL mentioned in the code.');
     }
 
     private function generateInventoriesRegex(Section $section) {
-        $this->generateInventories($section, 'Type/Regex', 'List of all Regex mentioned in the code.');
+        $this->generateInventories($section, array('Type/Regex'), 'List of all Regex mentioned in the code.');
     }
 
     private function generateInventoriesSql(Section $section) {
-        $this->generateInventories($section, 'Type/Sql', 'List of all SQL mentioned in the code.');
+        $this->generateInventories($section, array('Type/Sql'), 'List of all SQL mentioned in the code.');
     }
 
     private function generateInventoriesGPCIndex(Section $section) {
-        $this->generateInventories($section, 'Type/GPCIndex', 'List of all Email mentioned in the code.');
+        $this->generateInventories($section, array('Type/GPCIndex'), 'List of all Email mentioned in the code.');
     }
 
     private function generateInventoriesEmail(Section $section) {
-        $this->generateInventories($section, 'Type/Email', 'List of all incoming variables mentioned in the code.');
+        $this->generateInventories($section, array('Type/Email'), 'List of all incoming variables mentioned in the code.');
     }
 
     private function generateInventoriesMd5string(Section $section) {
-        $this->generateInventories($section, 'Type/Md5string', 'List of all MD5-like strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Md5string'), 'List of all MD5-like strings mentioned in the code.');
     }
 
     private function generateInventoriesMime(Section $section) {
-        $this->generateInventories($section, 'Type/MimeType', 'List of all Mime strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/MimeType'), 'List of all Mime strings mentioned in the code.');
     }
 
     private function generateInventoriesPack(Section $section) {
-        $this->generateInventories($section, 'Type/Pack', 'List of all packing format strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Pack'), 'List of all packing format strings mentioned in the code.');
     }
 
     private function generateInventoriesPrintf(Section $section) {
-        $this->generateInventories($section, 'Type/Printf', 'List of all printf(), sprintf(), etc. formats strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Printf'), 'List of all printf(), sprintf(), etc. formats strings mentioned in the code.');
     }
 
     private function generateInventoriesPath(Section $section) {
-        $this->generateInventories($section, 'Type/Path', 'List of all paths strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Path'), 'List of all paths strings mentioned in the code.');
     }
 
-    protected function generateInventories(Section $section, $analyzer, $description) {
-        $results = new Results($this->sqlite, $analyzer);
+    protected function generateInventories(Section $section, array $analyzer, $description) {
+        $results = $this->dump->fetchAnalysers($analyzer);
         $results->load();
 
         $trim = function ($x) { return trim($x, "'\""); };
@@ -4806,8 +4805,7 @@ JAVASCRIPT;
     }
 
     private function generateComplexExpressions(Section $section) {
-        $results = new Results($this->sqlite, 'Structures/ComplexExpression');
-        $results->load();
+        $results = $this->dump->fetchAnalysers(array('Structures/ComplexExpression'));
 
         $expr = $results->getColumn('fullcode');
         $counts = array_count_values($expr);
@@ -5088,7 +5086,7 @@ HTML;
     }
 
     protected function generateUsedMagic(Section $section) {
-        $results = new Results($this->sqlite, 'Classes/MagicProperties');
+        $results = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
         $results->load();
 
         $expr = $results->getColumn('fullcode');

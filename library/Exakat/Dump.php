@@ -32,7 +32,7 @@ class Dump {
     public function __construct(Sqlite3 $sqlite) {
         $this->sqlite = $sqlite;
     }
-    
+
     public function fetchAnalysers(array $analysers) : Results {
         $query = 'SELECT fullcode, file, line, analyzer FROM results WHERE analyzer IN (' . makeList($analysers) . ')';
         $res = $this->sqlite->query($query);
@@ -54,7 +54,7 @@ SQL;
     private function query(string $query) : Results {
         $res = $this->sqlite->query($query);
 
-        return new Result($res);
+        return new Results($res);
     }
 }
 

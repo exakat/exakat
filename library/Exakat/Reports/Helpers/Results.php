@@ -34,9 +34,11 @@ class Results {
         $this->res = $res;
         
         $this->options = $options;
+        $this->options['phpsyntax'] = $this->options['phpsyntax']  ?? array();
     }
 
     public function load() : int {
+        $this->values = array();
         while($row = $this->res->fetchArray(\SQLITE3_ASSOC)) {
             foreach ($this->options['phpsyntax'] as $source => $destination) {
                 $row[$destination] = PHPSyntax($row[$source]);
@@ -53,6 +55,10 @@ class Results {
     }
 
     public function getColumn($column) : array {
+        if ($this->values === null) {
+            $this->load();
+        }
+
         return array_column($this->values, $column);
     }
 
