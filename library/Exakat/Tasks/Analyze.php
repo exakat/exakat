@@ -33,7 +33,6 @@ use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\QueryException;
 use Exakat\Exceptions\MissingGremlin;
 use Exakat\Exceptions\DSLException;
-use Exakat\Phpexec;
 use Exakat\Project as ProjectName;
 use ProgressBar\Manager as ProgressBar;
 use Exception;
@@ -43,7 +42,7 @@ class Analyze extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     private $progressBar = null;
-    private $Php = null;
+    private $php = null;
     private $analyzed = array();
 
     public function setConfig($config) {
@@ -105,8 +104,7 @@ class Analyze extends Tasks {
         $this->log->log("Analyzing project $project");
         $this->log->log("Runnable analyzers\t" . count($analyzersClass));
 
-        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
-        $this->Php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
+        $this->php = exakat('php');
 
         $analyzers = array();
         $dependencies = array();
@@ -201,7 +199,7 @@ class Analyze extends Tasks {
             $analyzer->storeError('Not Compatible With PHP Version', Analyzer::VERSION_INCOMPATIBLE);
 
             display("$analyzerQuoted is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
-        } elseif (!$analyzer->checkPhpConfiguration($this->Php)) {
+        } elseif (!$analyzer->checkPhpConfiguration($this->php)) {
             $analyzerQuoted = $analyzer->getInBaseName();
 
             $analyzer->storeError('Not Compatible With PHP Configuration', Analyzer::CONFIGURATION_INCOMPATIBLE);

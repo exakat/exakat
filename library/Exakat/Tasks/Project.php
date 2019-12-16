@@ -398,7 +398,7 @@ class Project extends Tasks {
                 gc_collect_cycles();
                 $this->logTime("Dumped : $ruleset");
             } catch (\Exception $e) {
-                print $e->getMessage();
+//                print $e->getMessage();
                 echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";
                 file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage());
             }

@@ -283,8 +283,7 @@ class Files extends Tasks {
     private function countTokens($path, &$files, &$ignoredFiles) {
         $tokens = 0;
 
-        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
-        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
+        $php = exakat('php');
 
         foreach($files as $id => $file) {
             if (($t = $php->countTokenFromFile($path . $file)) < 2) {

@@ -32,7 +32,6 @@ use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchLoader;
-use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal\LoadFinal;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\AtomGroup;
@@ -229,8 +228,7 @@ class Load extends Tasks {
 
         $this->contexts  = new Context();
 
-        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
-        $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
+        $this->php = exakat('php');
         if (!$this->php->isValid()) {
             throw new InvalidPHPBinary($this->php->getConfiguration('phpversion'));
         }
@@ -1643,6 +1641,10 @@ class Load extends Tasks {
             }
 
             $this->addLink($class, $cpm, $link);
+            if (!isset($this->tokens[$this->id + 1][0])) {
+                var_dump($this->tokens[$this->id + 1]);
+                die();
+            }
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
             }

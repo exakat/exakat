@@ -24,7 +24,6 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
-use Exakat\Phpexec;
 
 class Owasp extends Ambassador {
     const FILE_FILENAME  = 'owasp';
@@ -293,8 +292,7 @@ SQL
     }
 
     public function getHashData() {
-        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
-        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
+        $php = exakat('php');
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),

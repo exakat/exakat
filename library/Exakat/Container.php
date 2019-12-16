@@ -29,6 +29,7 @@ use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
 use Exakat\Data\Methods;
 use Exakat\Analyzer\Rulesets;
+use Exakat\Phpexec;
 
 class Container {
     private $verbose    = 0;
@@ -41,6 +42,7 @@ class Container {
     private $docs       = null;
     private $methods    = null;
     private $rulesets   = null;
+    private $php        = null;
     
     public function init() {
         $this->config = new Config($GLOBALS['argv']);
@@ -64,6 +66,8 @@ class Container {
                                        $this->config->dev,
                                        $this->config->rulesets);
 
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
     }
     
     public function __get(string $what) {

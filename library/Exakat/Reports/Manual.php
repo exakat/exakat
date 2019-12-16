@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Exakat;
-use Exakat\Phpexec;
 use Exakat\Vcs\Vcs;
 
 class Manual extends Reports {
@@ -151,8 +150,7 @@ class Manual extends Reports {
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
-        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
+        $php = exakat('php');
         $info[] = array('PHP used', $php->getConfiguration('phpversion') . ' (version ' . $this->config->phpversion . ' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 

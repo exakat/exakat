@@ -25,7 +25,6 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exakat;
-use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
 use Exakat\Tasks\Helpers\BaselineStash;
 use Exakat\Vcs\Vcs;
@@ -2695,8 +2694,7 @@ HTML;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', time()));
 
-        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
-        $php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
+        $php = exakat('php');
         $info[] = array('PHP used', $this->config->phpversion . ' (' . $php->getConfiguration('phpversion') . ')');
 
         $info[] = array('Exakat version', Exakat::VERSION . ' ( Build ' . Exakat::BUILD . ') ');
