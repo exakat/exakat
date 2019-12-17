@@ -138,6 +138,32 @@ class PropagateCalls extends Analyzer {
               ->count();
         $c1 = $this->rawQuery()->toInt();
 
+        // function foo() : X {}; foo()->b();
+        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+              ->hasOut('RETURNTYPE')
+              ->outIs('DEFINITION')
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->back('first')
+              
+              ->outIs('RETURNTYPE')
+              ->inIs('DEFINITION')
+              ->atomIs('Class', self::WITHOUT_CONSTANTS)
+              ->goToAllParents(self::INCLUDE_SELF)
+              ->outIs('METHOD')
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method')
+              ->count();
+        $c1 += $this->rawQuery()->toInt();
+
         // function foo() : X {};foo()->b();
         $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
