@@ -27,6 +27,12 @@ Label : PROJECT
                     10
                     Label : EXPRESSION
                       8
+                  Label : RETURNED
+                    Void
+                  Label : RETURNTYPE
+                    8
+                  Label : TYPEHINT
+                    8
               Label : EXPRESSION
                 12
                 Label : LEFT
@@ -35,12 +41,22 @@ Label : PROJECT
                   13
                   Label : ARGUMENT
                     11
+                    Label : DEFAULT
+                      8
                     Label : NAME
                       11
+                    Label : TYPEHINT
+                      8
                   Label : BLOCK
                     10
                     Label : EXPRESSION
                       8
+                  Label : RETURNED
+                    Void
+                  Label : RETURNTYPE
+                    8
+                  Label : TYPEHINT
+                    8
               Label : EXPRESSION
                 12
                 Label : LEFT
@@ -49,16 +65,30 @@ Label : PROJECT
                   13
                   Label : ARGUMENT
                     14
+                    Label : DEFAULT
+                      8
                     Label : NAME
                       14
+                    Label : TYPEHINT
+                      8
                   Label : ARGUMENT
                     15
+                    Label : DEFAULT
+                      8
                     Label : NAME
                       15
+                    Label : TYPEHINT
+                      8
                   Label : BLOCK
                     10
                     Label : EXPRESSION
                       8
+                  Label : RETURNED
+                    Void
+                  Label : RETURNTYPE
+                    8
+                  Label : TYPEHINT
+                    8
               Label : EXPRESSION
                 12
                 Label : LEFT
@@ -71,68 +101,28 @@ Label : PROJECT
                       16
                     Label : NAME
                       14
+                    Label : TYPEHINT
+                      8
                   Label : ARGUMENT
                     15
                     Label : DEFAULT
                       17
                     Label : NAME
                       15
+                    Label : TYPEHINT
+                      8
                   Label : BLOCK
                     10
                     Label : EXPRESSION
                       8
+                  Label : RETURNED
+                    Void
+                  Label : RETURNTYPE
+                    8
+                  Label : TYPEHINT
+                    8
             Label : DEFINITION
               11
-              Label : DEFAULT
-                13
-                Label : ARGUMENT
-                  14
-                  Label : NAME
-                    14
-                Label : ARGUMENT
-                  15
-                  Label : NAME
-                    15
-                Label : BLOCK
-                  10
-                  Label : EXPRESSION
-                    8
-              Label : DEFAULT
-                13
-                Label : ARGUMENT
-                  8
-                Label : BLOCK
-                  10
-                  Label : EXPRESSION
-                    8
-              Label : DEFAULT
-                13
-                Label : ARGUMENT
-                  11
-                  Label : NAME
-                    11
-                Label : BLOCK
-                  10
-                  Label : EXPRESSION
-                    8
-              Label : DEFAULT
-                13
-                Label : ARGUMENT
-                  14
-                  Label : DEFAULT
-                    16
-                  Label : NAME
-                    14
-                Label : ARGUMENT
-                  15
-                  Label : DEFAULT
-                    17
-                  Label : NAME
-                    15
-                Label : BLOCK
-                  10
-                  Label : EXPRESSION
-                    8
               Label : DEFINITION
                 11
               Label : DEFINITION
@@ -143,5 +133,9 @@ Label : PROJECT
                 11
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             6

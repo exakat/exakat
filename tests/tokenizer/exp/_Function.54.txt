@@ -11,36 +11,60 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : DEFAULT
+              7
             Label : NAME
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
-            8
+            10
             Label : EXPRESSION
-              9
-          Label : USE
+              7
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
             7
+          Label : USE
+            9
         Label : EXPRESSION
           5
           Label : ARGUMENT
             6
+            Label : DEFAULT
+              7
             Label : NAME
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
-            8
+            10
             Label : EXPRESSION
-              9
+              7
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7
           Label : USE
             11
         Label : EXPRESSION
           5
           Label : ARGUMENT
             6
+            Label : DEFAULT
+              7
             Label : NAME
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
-            8
+            10
             Label : EXPRESSION
-              9
+              7
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7
           Label : USE
             12
           Label : USE
@@ -49,12 +73,20 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : DEFAULT
+              7
             Label : NAME
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
-            8
+            10
             Label : EXPRESSION
-              9
+              7
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7
           Label : USE
             14
           Label : USE

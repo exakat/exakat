@@ -1,5 +1,13 @@
 test
 Label : GLOBAL
+  20
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+Label : GLOBAL
   18
   Label : DEFINITION
     18
@@ -7,28 +15,20 @@ Label : GLOBAL
       18
     Label : DEFINITION
       18
-Label : GLOBAL
-  16
-  Label : DEFINITION
-    16
-    Label : DEFINITION
-      16
-    Label : DEFINITION
-      16
 Label : PROJECT
   1
-  Label : DEFINITION
-    16
-    Label : DEFINITION
-      16
-    Label : DEFINITION
-      16
   Label : DEFINITION
     18
     Label : DEFINITION
       18
     Label : DEFINITION
       18
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -36,86 +36,110 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          11
+          13
           Label : LEFT
             5
             Label : ARGUMENT
               6
+              Label : DEFAULT
+                7
               Label : NAME
                 6
+              Label : TYPEHINT
+                7
             Label : ARGUMENT
-              7
+              9
+              Label : DEFAULT
+                7
               Label : NAME
+                9
+              Label : TYPEHINT
                 7
             Label : BLOCK
-              8
+              10
               Label : EXPRESSION
-                10
+                12
                 Label : POSTPLUSPLUS
-                  9
+                  11
             Label : DEFINITION
-              9
+              11
               Label : DEFINITION
-                9
+                11
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : RIGHT
-            22
+            24
             Label : METHOD
-              20
+              22
               Label : ARGUMENT
-                21
+                23
               Label : NAME
-                20
+                22
             Label : OBJECT
-              12
+              14
               Label : CODE
-                13
+                15
                 Label : NEW
-                  14
-                  Label : ARGUMENT
-                    16
+                  16
                   Label : ARGUMENT
                     18
+                  Label : ARGUMENT
+                    20
                   Label : NAME
-                    14
+                    16
         Label : EXPRESSION
-          23
+          25
           Label : LEFT
             5
             Label : ARGUMENT
               6
+              Label : DEFAULT
+                7
               Label : NAME
                 6
+              Label : TYPEHINT
+                7
             Label : ARGUMENT
-              7
+              9
+              Label : DEFAULT
+                7
               Label : NAME
+                9
+              Label : TYPEHINT
                 7
             Label : BLOCK
-              8
+              10
               Label : EXPRESSION
-                10
+                12
                 Label : POSTPLUSPLUS
-                  9
+                  11
             Label : DEFINITION
-              9
+              11
               Label : DEFINITION
-                9
+                11
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : RIGHT
-            22
+            24
             Label : METHOD
-              20
+              22
               Label : ARGUMENT
-                21
+                23
               Label : NAME
-                20
+                22
             Label : OBJECT
-              12
+              14
               Label : CODE
-                13
+                15
                 Label : NEW
-                  14
-                  Label : ARGUMENT
-                    16
+                  16
                   Label : ARGUMENT
                     18
+                  Label : ARGUMENT
+                    20
                   Label : NAME
-                    14
+                    16

@@ -15,15 +15,23 @@ Label : PROJECT
               7
             Label : NAME
               6
+            Label : TYPEHINT
+              8
           Label : ARGUMENT
-            8
+            10
             Label : DEFAULT
-              9
+              11
             Label : NAME
+              10
+            Label : TYPEHINT
               8
           Label : BLOCK
-            10
+            12
             Label : EXPRESSION
-              11
+              8
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            8

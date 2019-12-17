@@ -53,20 +53,16 @@ Label : PROJECT
                     13
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
           Label : NAME
             6
           Label : PPP
             22
             Label : PPP
               23
-              Label : DEFAULT
-                16
-                Label : NEW
-                  17
-                  Label : ARGUMENT
-                    9
-                  Label : NAME
-                    17
               Label : DEFINITION
                 14
                 Label : CLASS

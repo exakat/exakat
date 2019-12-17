@@ -17,6 +17,10 @@ Label : PROJECT
               7
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7
         Label : EXPRESSION
           10
           Label : ARGUMENT
@@ -33,6 +37,10 @@ Label : PROJECT
               10
           Label : NAME
             10
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7
         Label : EXPRESSION
           10
           Label : ARGUMENT
@@ -53,6 +61,10 @@ Label : PROJECT
                 7
             Label : NAME
               14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : METHOD
             16
             Label : ARGUMENT
@@ -81,6 +93,10 @@ Label : PROJECT
                 18
             Label : NAME
               16
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             13
         Label : EXPRESSION
@@ -95,6 +111,10 @@ Label : PROJECT
               7
             Label : NAME
               22
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : METHOD
             24
             Label : ARGUMENT
@@ -103,13 +123,25 @@ Label : PROJECT
               7
             Label : NAME
               24
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
         Label : EXPRESSION
           26
           Label : ARGUMENT
             27
+            Label : DEFAULT
+              7
             Label : NAME
               27
+            Label : TYPEHINT
+              7
           Label : BLOCK
             9
             Label : EXPRESSION
               7
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7

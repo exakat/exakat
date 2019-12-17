@@ -3,52 +3,12 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-        Label : NAME
-          9
-      Label : ARGUMENT
-        10
-        Label : NAME
-          10
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          13
-          Label : POSTPLUSPLUS
-            12
-      Label : DEFINITION
-        12
-        Label : DEFINITION
-          12
     Label : DEFINITION
       5
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-        Label : NAME
-          9
-      Label : ARGUMENT
-        10
-        Label : NAME
-          10
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          13
-          Label : POSTPLUSPLUS
-            12
-      Label : DEFINITION
-        12
-        Label : DEFINITION
-          12
     Label : DEFINITION
       5
   Label : FILE
@@ -65,19 +25,31 @@ Label : PROJECT
             8
             Label : ARGUMENT
               9
+              Label : DEFAULT
+                10
               Label : NAME
                 9
+              Label : TYPEHINT
+                10
             Label : ARGUMENT
-              10
+              12
+              Label : DEFAULT
+                10
               Label : NAME
+                12
+              Label : TYPEHINT
                 10
             Label : BLOCK
-              11
+              13
               Label : EXPRESSION
-                13
+                15
                 Label : POSTPLUSPLUS
-                  12
+                  14
             Label : DEFINITION
-              12
+              14
               Label : DEFINITION
-                12
+                14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10

@@ -11,17 +11,27 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : DEFAULT
+              7
             Label : NAME
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
-            7
-            Label : EXPRESSION
-              8
-              Label : STATIC
-                9
-                Label : DEFAULT
-                  10
-          Label : DEFINITION
             9
-            Label : DEFAULT
+            Label : EXPRESSION
               10
+              Label : STATIC
+                11
+                Label : DEFAULT
+                  12
+              Label : TYPEHINT
+                7
+          Label : DEFINITION
+            11
+            Label : DEFAULT
+              12
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7

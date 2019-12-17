@@ -23,8 +23,10 @@ Label : PROJECT
               11
           Label : NAME
             5
-          Label : RETURNED
+          Label : RETURNED, RETURNED
             11
+          Label : RETURNTYPE
+            7
         Label : EXPRESSION
           12
           Label : METHOD
@@ -43,7 +45,9 @@ Label : PROJECT
                 11
             Label : NAME
               14
-            Label : RETURNED
+            Label : RETURNED, RETURNED
               11
+            Label : RETURNTYPE
+              7
           Label : NAME
             13

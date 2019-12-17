@@ -11,156 +11,154 @@ Label : PROJECT
           5
           Label : ARGUMENT
             7
+            Label : DEFAULT
+              8
             Label : NAME
               7
+            Label : TYPEHINT
+              8
           Label : DEFINITION
-            38
+            35
             Label : DEFINITION
-              38
+              35
+          Label : RETURNED
+            Void
+          Label : NAME
+            5
           Label : DEFINITION
-            32
+            12
             Label : DEFINITION
-              32
+              12
           Label : DEFINITION
-            57
+            16
             Label : DEFINITION
-              57
+              16
           Label : DEFINITION
-            54
+            17
             Label : DEFINITION
-              54
+              17
           Label : DEFINITION
-            53
+            27
             Label : DEFINITION
-              53
+              27
           Label : DEFINITION
-            50
+            28
             Label : DEFINITION
-              50
+              28
           Label : DEFINITION
-            49
+            29
             Label : DEFINITION
-              49
+              29
+          Label : DEFINITION
+            34
+            Label : DEFINITION
+              34
+          Label : ARGUMENT
+            10
+            Label : DEFAULT
+              8
+            Label : NAME
+              10
+            Label : TYPEHINT
+              8
+          Label : DEFINITION
+            40
+            Label : DEFINITION
+              40
           Label : DEFINITION
             45
             Label : DEFINITION
               45
           Label : DEFINITION
-            33
+            49
             Label : DEFINITION
-              33
-          Label : ARGUMENT
-            8
-            Label : NAME
-              8
+              49
           Label : DEFINITION
-            27
-            Label : DEFAULT
-              28
+            50
             Label : DEFINITION
-              27
+              50
           Label : DEFINITION
-            26
+            53
             Label : DEFINITION
-              26
+              53
           Label : DEFINITION
-            25
+            54
             Label : DEFINITION
-              25
+              54
           Label : DEFINITION
-            15
-            Label : DEFAULT
-              16
-              Label : ARGUMENT
-                17
-              Label : ARGUMENT
-                19
+            57
             Label : DEFINITION
-              15
-          Label : DEFINITION
-            14
-            Label : DEFINITION
-              14
-          Label : DEFINITION
-            10
-            Label : DEFAULT
-              12
-              Label : ARGUMENT
-                14
-              Label : NAME
-                12
-            Label : DEFINITION
-              10
+              57
           Label : BLOCK
-            9
+            11
             Label : EXPRESSION
-              11
+              13
               Label : LEFT
-                10
-              Label : RIGHT
                 12
-                Label : ARGUMENT
-                  14
-                Label : NAME
-                  12
-            Label : EXPRESSION
-              11
-              Label : LEFT
-                15
               Label : RIGHT
-                16
+                14
                 Label : ARGUMENT
-                  17
+                  16
+                Label : NAME
+                  14
+            Label : EXPRESSION
+              13
+              Label : LEFT
+                17
+              Label : RIGHT
+                18
                 Label : ARGUMENT
                   19
+                Label : ARGUMENT
+                  21
             Label : EXPRESSION
-              21
+              23
               Label : CONDITION
-                22
+                24
                 Label : NOT
-                  23
+                  25
                   Label : ARGUMENT
-                    25
-                  Label : ARGUMENT
-                    26
-                  Label : NAME
-                    23
-              Label : THEN
-                9
-                Label : EXPRESSION
-                  11
-                  Label : LEFT
                     27
-                  Label : RIGHT
+                  Label : ARGUMENT
                     28
-                Label : EXPRESSION
-                  30
-                  Label : ARGUMENT
-                    32
-                  Label : ARGUMENT
-                    33
-                  Label : ARGUMENT
-                    34
-                    Label : ARGUMENT
-                      36
-                    Label : ARGUMENT
-                      38
-                    Label : NAME
-                      34
                   Label : NAME
+                    25
+              Label : THEN
+                11
+                Label : EXPRESSION
+                  13
+                  Label : LEFT
+                    29
+                  Label : RIGHT
                     30
                 Label : EXPRESSION
-                  39
+                  32
+                  Label : ARGUMENT
+                    34
+                  Label : ARGUMENT
+                    35
+                  Label : ARGUMENT
+                    36
+                    Label : ARGUMENT
+                      38
+                    Label : ARGUMENT
+                      40
+                    Label : NAME
+                      36
+                  Label : NAME
+                    32
+                Label : EXPRESSION
+                  41
                   Label : THROW
-                    40
+                    42
                     Label : NEW
-                      41
+                      43
                       Label : ARGUMENT
-                        43
+                        8
                       Label : NAME
-                        41
+                        43
             Label : EXPRESSION
-              11
+              13
               Label : LEFT
                 48
                 Label : MEMBER
@@ -170,7 +168,7 @@ Label : PROJECT
               Label : RIGHT
                 49
             Label : EXPRESSION
-              11
+              13
               Label : LEFT
                 48
                 Label : MEMBER
@@ -180,7 +178,7 @@ Label : PROJECT
               Label : RIGHT
                 53
             Label : EXPRESSION
-              11
+              13
               Label : LEFT
                 48
                 Label : MEMBER
@@ -188,11 +186,11 @@ Label : PROJECT
                 Label : OBJECT
                   54
               Label : RIGHT
-                16
+                18
                 Label : ARGUMENT
-                  43
+                  8
             Label : EXPRESSION
-              11
+              13
               Label : LEFT
                 48
                 Label : MEMBER
@@ -201,5 +199,5 @@ Label : PROJECT
                   57
               Label : RIGHT
                 60
-          Label : NAME
-            5
+          Label : RETURNTYPE
+            8

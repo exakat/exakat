@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  17
+  19
   Label : DEFINITION
-    17
+    19
     Label : DEFINITION
-      17
+      19
 Label : GLOBAL
   7
   Label : DEFINITION
@@ -12,17 +12,17 @@ Label : GLOBAL
     Label : DEFINITION
       7
 Label : GLOBAL
-  19
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      19
-Label : GLOBAL
   21
   Label : DEFINITION
     21
     Label : DEFINITION
       21
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
 Label : PROJECT
   1
   Label : DEFINITION
@@ -30,10 +30,6 @@ Label : PROJECT
     Label : DEFINITION
       7
   Label : DEFINITION
-    17
-    Label : DEFINITION
-      17
-  Label : DEFINITION
     19
     Label : DEFINITION
       19
@@ -41,6 +37,10 @@ Label : PROJECT
     21
     Label : DEFINITION
       21
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -63,21 +63,17 @@ Label : PROJECT
           14
         Label : EXPRESSION
           16
+        Label : EXPRESSION
+          18
           Label : BLOCK
             3
             Label : EXPRESSION
-              23
+              25
+            Label : EXPRESSION
+              16
           Label : INDEX
-            19
+            21
           Label : SOURCE
-            17
-          Label : VALUE
-            21
-          Label : VALUE
             19
-            Label : DEFINITION
-              19
           Label : VALUE
-            21
-            Label : DEFINITION
-              21
+            23

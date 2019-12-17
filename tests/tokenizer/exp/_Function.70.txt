@@ -3,26 +3,6 @@ Label : GLOBAL
   12
   Label : DEFINITION
     12
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        12
-        Label : DEFAULT
-          15
-        Label : NAME
-          12
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -31,26 +11,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        5
-        Label : DEFAULT
-          14
-        Label : NAME
-          5
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -59,52 +19,12 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        5
-        Label : DEFAULT
-          14
-        Label : NAME
-          5
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
     Label : DEFINITION
       5
     Label : DEFINITION
       5
   Label : DEFINITION
     12
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        12
-        Label : DEFAULT
-          15
-        Label : NAME
-          12
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          9
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -127,6 +47,10 @@ Label : PROJECT
               11
               Label : EXPRESSION
                 9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
         Label : EXPRESSION
           7
           Label : LEFT
@@ -139,6 +63,10 @@ Label : PROJECT
               11
               Label : EXPRESSION
                 9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
         Label : EXPRESSION
           7
           Label : LEFT
@@ -151,10 +79,16 @@ Label : PROJECT
                 14
               Label : NAME
                 5
+              Label : TYPEHINT
+                9
             Label : BLOCK
               11
               Label : EXPRESSION
                 9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
         Label : EXPRESSION
           7
           Label : LEFT
@@ -167,10 +101,16 @@ Label : PROJECT
                 15
               Label : NAME
                 12
+              Label : TYPEHINT
+                9
             Label : BLOCK
               11
               Label : EXPRESSION
                 9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
         Label : EXPRESSION
           16
           Label : ARGUMENT
@@ -181,6 +121,10 @@ Label : PROJECT
               9
           Label : NAME
             16
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            9
         Label : EXPRESSION
           17
           Label : ARGUMENT
@@ -191,6 +135,10 @@ Label : PROJECT
               9
           Label : NAME
             17
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            9
         Label : EXPRESSION
           18
           Label : ARGUMENT
@@ -199,12 +147,18 @@ Label : PROJECT
               14
             Label : NAME
               5
+            Label : TYPEHINT
+              9
           Label : BLOCK
             11
             Label : EXPRESSION
               9
           Label : NAME
             18
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            9
         Label : EXPRESSION
           19
           Label : ARGUMENT
@@ -213,9 +167,15 @@ Label : PROJECT
               15
             Label : NAME
               12
+            Label : TYPEHINT
+              9
           Label : BLOCK
             11
             Label : EXPRESSION
               9
           Label : NAME
             19
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            9

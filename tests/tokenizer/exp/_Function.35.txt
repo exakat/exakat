@@ -3,40 +3,12 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          13
-          Label : POSTPLUSPLUS
-            12
-      Label : DEFINITION
-        12
-        Label : DEFINITION
-          12
     Label : DEFINITION
       5
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : BLOCK
-        11
-        Label : EXPRESSION
-          13
-          Label : POSTPLUSPLUS
-            12
-      Label : DEFINITION
-        12
-        Label : DEFINITION
-          12
     Label : DEFINITION
       5
   Label : FILE
@@ -63,3 +35,7 @@ Label : PROJECT
               12
               Label : DEFINITION
                 12
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9

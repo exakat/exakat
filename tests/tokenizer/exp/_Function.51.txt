@@ -23,25 +23,39 @@ Label : PROJECT
               14
               Label : ARGUMENT
                 16
+                Label : DEFAULT
+                  17
                 Label : NAME
                   16
                   Label : DEFINITION
                     16
+                Label : TYPEHINT
+                  17
               Label : BLOCK
-                17
+                19
                 Label : EXPRESSION
-                  18
+                  20
                   Label : RETURN
-                    19
-                    Label : NAME
-                      19
+                    21
                     Label : ARGUMENT
-                      21
+                      23
                     Label : ARGUMENT
                       16
+                    Label : NAME
+                      21
               Label : NAME
                 14
               Label : RETURNED
                 16
+              Label : RETURNED
+                21
+                Label : ARGUMENT
+                  23
+                Label : ARGUMENT
+                  16
+                Label : NAME
+                  21
+              Label : RETURNTYPE
+                17
           Label : NAME
             5

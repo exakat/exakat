@@ -15,11 +15,17 @@ Label : PROJECT
               7
             Label : NAME
               6
+            Label : TYPEHINT
+              8
           Label : BLOCK
-            8
+            10
             Label : EXPRESSION
-              9
+              11
               Label : RETURN
                 7
           Label : NAME
             5
+          Label : RETURNED
+            7
+          Label : RETURNTYPE
+            8
