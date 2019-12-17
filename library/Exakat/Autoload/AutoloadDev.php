@@ -40,18 +40,14 @@ class AutoloadDev implements Autoloader {
         $this->path = $path;
     }
 
-    public function autoload($name) {
-        if (empty($this->path)) { return; }
+    public function autoload($name) : void {
+        if (empty($this->path)) { 
+            return; 
+        }
 
-        $fileName = str_replace('Exakat\\', '', $name);
-        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $fileName);
-        $file = "{$fileName}.php";
-
-        $fullPath = "{$this->path}/$file";
-        if (file_exists($fullPath)) {
+        $fileName = str_replace(array('Exakat\\', '\\'), array('', DIRECTORY_SEPARATOR), $name);
+        if (file_exists("{$this->path}/$file")) {
             include $fullPath;
-
-            return;
         }
     }
 
