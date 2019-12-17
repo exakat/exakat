@@ -90,8 +90,7 @@ class Grade extends Ambassador {
     }
 
     private function getGrades() {
-        $this->results = new Results($this->sqlite, array_keys($this->grading));
-        $this->results->load();
+        $this->results = $this->dump->fetchAnalysers(array_keys($this->grading));
 
         $this->resultsCounts = array_fill_keys(array_keys($this->grading), 0);
         foreach($this->results->toArray() as $result) {

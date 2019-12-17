@@ -139,7 +139,7 @@ class Emissary extends Reports {
         return $menu;
     }
 
-    protected function getBasedPage($file) {
+    protected function getBasedPage(string $file) : string {
         static $baseHTML;
 
         if (empty($baseHTML)) {
@@ -187,9 +187,6 @@ class Emissary extends Reports {
             return '';
         }
         $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/$file.html");
-        if (strpos($subPageHTML, '{{TITLE}}') === false) {
-            print '    ' . $file . " has not title\n";
-        }
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -2225,8 +2222,7 @@ SQL;
 
         $bugfixes = exakat('methods')->getBugFixes();
 
-        $results = new Results($this->sqlite, 'Php/MiddleVersion');
-        $results->load();
+        $results = $this->dump->fetchAnalysers(array('Php/MiddleVersion'));
 
         $rows = array();
         foreach($results->toArray() as $row) {
@@ -2530,7 +2526,7 @@ HTML;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', time()));
 
-        $php = exakat('php')
+        $php = exakat('php');
         $info[] = array('PHP used', $this->config->phpversion . ' (' . $php->getConfiguration('phpversion') . ')');
 
         $info[] = array('Exakat version', Exakat::VERSION . ' ( Build ' . Exakat::BUILD . ') ');
@@ -2557,8 +2553,7 @@ HTML;
     private function generateErrorMessages(Section $section) {
         $errorMessages = '';
 
-        $results = new Results($this->sqlite, 'Structures/ErrorMessages');
-        $results->load();
+        $results = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
 
         foreach($results->toArray() as $row) {
             $errorMessages .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
@@ -2820,8 +2815,7 @@ HTML;
     private function generateDynamicCode(Section $section) {
         $dynamicCode = '';
 
-        $results = new Results($this->sqlite, 'Structures/DynamicCode');
-        $results->load();
+        $results = $this->dump->fetchAnalysers(array('Structures/DynamicCode'));
 
         foreach($results->toArray() as $row) {
             $dynamicCode .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
@@ -2886,94 +2880,93 @@ HTML;
     }
 
     private function generateInventoriesConstants(Section $section) {
-        $this->generateInventories($section, 'Constants/Constantnames', 'List of all defined constants in the code.');
+        $this->generateInventories($section, array('Constants/Constantnames'), 'List of all defined constants in the code.');
     }
 
     private function generateInventoriesClasses(Section $section) {
-        $this->generateInventories($section, 'Constants/Classnames', 'List of all defined classes in the code.');
+        $this->generateInventories($section, array('Constants/Classnames'), 'List of all defined classes in the code.');
     }
 
     private function generateInventoriesInterfaces(Section $section) {
-        $this->generateInventories($section, 'Interfaces/Interfacenames', 'List of all defined interfaces in the code.');
+        $this->generateInventories($section, array('Interfaces/Interfacenames'), 'List of all defined interfaces in the code.');
     }
 
     private function generateInventoriesTraits(Section $section) {
-        $this->generateInventories($section, 'Traits/Traitnames', 'List of all defined traits in the code.');
+        $this->generateInventories($section, array('Traits/Traitnames'), 'List of all defined traits in the code.');
     }
 
     private function generateInventoriesFunctions(Section $section) {
-        $this->generateInventories($section, 'Functions/Functionnames', 'List of all defined functions in the code.');
+        $this->generateInventories($section, array('Functions/Functionnames'), 'List of all defined functions in the code.');
     }
 
     private function generateInventoriesNamespaces(Section $section) {
-        $this->generateInventories($section, 'Namespaces/Namespacesnames', 'List of all defined namespaces in the code.');
+        $this->generateInventories($section, array('Namespaces/Namespacesnames'), 'List of all defined namespaces in the code.');
     }
 
     private function generateInventoriesUrl(Section $section) {
-        $this->generateInventories($section, 'Type/Url', 'List of all URL mentioned in the code.');
+        $this->generateInventories($section, array('Type/Url'), 'List of all URL mentioned in the code.');
     }
 
     private function generateInventoriesRegex(Section $section) {
-        $this->generateInventories($section, 'Type/Regex', 'List of all Regex mentioned in the code.');
+        $this->generateInventories($section, array('Type/Regex'), 'List of all Regex mentioned in the code.');
     }
 
     private function generateInventoriesSql(Section $section) {
-        $this->generateInventories($section, 'Type/Sql', 'List of all SQL mentioned in the code.');
+        $this->generateInventories($section, array('Type/Sql'), 'List of all SQL mentioned in the code.');
     }
 
     private function generateInventoriesGPCIndex(Section $section) {
-        $this->generateInventories($section, 'Type/GPCIndex', 'List of all Email mentioned in the code.');
+        $this->generateInventories($section, array('Type/GPCIndex'), 'List of all Email mentioned in the code.');
     }
 
     private function generateInventoriesEmail(Section $section) {
-        $this->generateInventories($section, 'Type/Email', 'List of all incoming variables mentioned in the code.');
+        $this->generateInventories($section, array('Type/Email'), 'List of all incoming variables mentioned in the code.');
     }
 
     private function generateInventoriesMd5string(Section $section) {
-        $this->generateInventories($section, 'Type/Md5string', 'List of all MD5-like strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Md5string'), 'List of all MD5-like strings mentioned in the code.');
     }
 
     private function generateInventoriesMime(Section $section) {
-        $this->generateInventories($section, 'Type/MimeType', 'List of all Mime strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/MimeType'), 'List of all Mime strings mentioned in the code.');
     }
 
     private function generateInventoriesPack(Section $section) {
-        $this->generateInventories($section, 'Type/Pack', 'List of all packing format strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Pack'), 'List of all packing format strings mentioned in the code.');
     }
 
     private function generateInventoriesPrintf(Section $section) {
-        $this->generateInventories($section, 'Type/Printf', 'List of all printf(), sprintf(), etc. formats strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Printf'), 'List of all printf(), sprintf(), etc. formats strings mentioned in the code.');
     }
 
     private function generateInventoriesPath(Section $section) {
-        $this->generateInventories($section, 'Type/Path', 'List of all paths strings mentioned in the code.');
+        $this->generateInventories($section, array('Type/Path'), 'List of all paths strings mentioned in the code.');
     }
 
-    private function generateInventories(Section $section, $analyzer, $description) {
-            $results = new Results($this->sqlite, $analyzer);
-            $results->load();
+    private function generateInventories(Section $section, array $analyzer, $description) {
+        $results = $this->dump->fetchAnalysers($analyzer);
 
-            $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
-            $counts = array_map(function ($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
+       $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
+       $counts = array_map(function ($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
 
-            $groups = array();
-            foreach($results->toArray() as $row) {
-                $groups[$row['htmlcode']][] = $row['file'];
-            }
-            uasort($groups, function ($a, $b) { return count($a) <=> count($b);});
+       $groups = array();
+       foreach($results->toArray() as $row) {
+           $groups[$row['htmlcode']][] = $row['file'];
+       }
+       uasort($groups, function ($a, $b) { return count($a) <=> count($b);});
 
-            $theTable = array();
-            foreach($groups as $code => $list) {
-                $c = count($list);
-                $htmlList = '<ul><li>' . implode('</li><li>', $list) . '</li></ul>';
-                $theTable []= "<tr><td>{$code}</td><td>$c</td><td>{$htmlList}</td></tr>";
-            }
+       $theTable = array();
+       foreach($groups as $code => $list) {
+           $c = count($list);
+           $htmlList = '<ul><li>' . implode('</li><li>', $list) . '</li></ul>';
+           $theTable []= "<tr><td>{$code}</td><td>$c</td><td>{$htmlList}</td></tr>";
+       }
 
-            $html = $this->getBasedPage($section->source);
-            $html = $this->injectBloc($html, 'TITLE', $section->title);
-            $html = $this->injectBloc($html, 'DESCRIPTION', $description);
-            $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
-            $this->putBasedPage($section->file, $html);
+       $html = $this->getBasedPage($section->source);
+       $html = $this->injectBloc($html, 'TITLE', $section->title);
+       $html = $this->injectBloc($html, 'DESCRIPTION', $description);
+       $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
+       $this->putBasedPage($section->file, $html);
     }
 
     private function generateInterfaceTree(Section $section) {
@@ -3711,93 +3704,71 @@ SQL
     }
 
     private function generateVisibilityConstantSuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateConstante"');
-        $couldBePrivate = array();
+        $res = $this->sqlite->query(<<<SQL
+SELECT cit.type || ' ' || cit.name AS theClass, 
+       namespaces.namespace || "\\" || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
+       methods.method,
+       arguments.name AS argument,
+       init,
+       typehint
+FROM cit
+JOIN methods 
+    ON methods.citId = cit.id
+JOIN arguments 
+    ON methods.id = arguments.methodId AND
+       arguments.citId != 0
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+WHERE type in ("class", "trait", "interface")
+ORDER BY fullnspath
+;
+SQL
+);
+
+        $arguments = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
-                continue; // it is an interface or a trait
-            }
+            $theMethod = $row['fullnspath'];
+            $visibilities = array($row['typehint'], $row['init']);
 
-            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
+            $argument = '<tr><td>&nbsp;</td><td>&nbsp;</td><td>' . PHPSyntax($row['argument']) . '</td><td class="exakat_short_text">' .
+                                    implode('</td><td>', $visibilities)
+                                 . '</td></tr>' . PHP_EOL;
 
-            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
-                continue;
-            }
-
-            if (isset($couldBePrivate[$fullnspath])) {
-                $couldBePrivate[$fullnspath][] = $code[1];
-            } else {
-                $couldBePrivate[$fullnspath] = array($code[1]);
-            }
-        }
-
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedConstant"');
-        $couldBeProtected = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
-                continue; // it is an interface or a trait
-            }
-            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
-
-            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
-                continue;
-            }
-
-            if (isset($couldBeProtected[$fullnspath])) {
-                $couldBeProtected[$fullnspath][] = $code[1];
-            } else {
-                $couldBeProtected[$fullnspath] = array($code[1]);
-            }
+            array_collect_by($arguments, $theMethod, $argument);
         }
 
         $res = $this->sqlite->query(<<<SQL
-SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
- visibility, constant, value
+SELECT cit.type || ' ' || cit.name AS theClass, 
+       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+       returntype, 
+       methods.method
 FROM cit
-JOIN constants 
-    ON constants.citId = cit.id
+JOIN methods 
+    ON methods.citId = cit.id
 JOIN namespaces 
     ON cit.namespaceId = namespaces.id
-WHERE type="class"
+WHERE type in ("class", "trait", "interface")
+ORDER BY fullnspath
+;
 SQL
 );
-        $theClass = '';
-        $ranking = array(''          => 1,
-                         'public'    => 2,
-                         'protected' => 3,
-                         'private'   => 4,
-                         'constant'  => 5);
+
         $return = array();
-
+        $theClass = '';
         $aClass = array();
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
-                $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
-                $aClass = array();
-            }
+            $theClass = $row['fullnspath'];
+            $visibilities = array($row['returntype'], '&nbsp;');
 
-            $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
-            $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
-
-            if (isset($couldBePrivate[$row['fullnspath']]) &&
-                in_array($row['constant'], $couldBePrivate[$row['fullnspath']], \STRICT_COMPARISON)) {
-                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
-                    $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
-            }
-
-            if (isset($couldBeProtected[$row['fullnspath']]) &&
-                in_array($row['constant'], $couldBeProtected[$row['fullnspath']], \STRICT_COMPARISON)) {
-                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
-                    $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
-            }
-
-            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['constant']) . '</td><td class="exakat_short_text">' .
+            $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td>&nbsp;</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
                                  . '</td></tr>' . PHP_EOL;
+            $method .= implode(PHP_EOL, $arguments[$row['fullnspath'] . '::' . mb_strtolower($row['method'])] ?? array());
+
+            array_collect_by($return, $row['fullnspath'] . ':' . $row['theClass'], $method);
         }
 
-        $return[$theClass] = $aClass;
         unset($return['']);
 
         return $return;
@@ -4513,16 +4484,14 @@ JAVASCRIPT;
     }
 
     private function generateComplexExpressions(Section $section) {
-        $results = new Results($this->sqlite, 'Structures/ComplexExpression');
-        $results->load();
+        $results = $this->dump->fetchAnalysers(array('Structures/ComplexExpression'), array('phpsyntax' => array('fullcode' => 'htmlcode')));
 
         $expr = $results->getColumn('fullcode');
         $counts = array_count_values($expr);
 
         $expressions = '';
         foreach($results->toArray() as $row) {
-            $fullcode = PHPSyntax($row['fullcode']);
-            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>$fullcode</td></tr>\n";
+            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>{$row['htmlcode']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage($section->source);
@@ -4928,6 +4897,18 @@ HTML;
     private function toHtmlList(array $array) {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
     }
+
+    protected function getTotalAnalyzer($issues = false) {
+        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
+            FROM resultsCounts AS rc
+            WHERE rc.count >= 0';
+
+        $stmt = $this->sqlite->prepare($query);
+        $result = $stmt->execute();
+
+        return $result->fetchArray(\SQLITE3_NUM);
+    }
+
 }
 
 ?>

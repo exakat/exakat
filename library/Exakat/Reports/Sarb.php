@@ -29,7 +29,7 @@ class Sarb extends Reports {
     const FILE_FILENAME  = 'exakat.sarb';
 
     public function _generate($analyzerList) {
-        $analysisResults = new Results($this->sqlite, $analyzerList);
+        $analysisResults = $this->dump->fetchAnalysers($analyzerList);
         $analysisResults->load();
         $code_dir = $this->config->code_dir;
 

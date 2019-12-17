@@ -29,7 +29,7 @@ class Codesniffer extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function _generate($analyzerList) {
-        $analysisResults = new Results($this->sqlite, $analyzerList);
+        $analysisResults = $this->dump->fetchAnalysers($analyzerList);
         $analysisResults->load();
 
         $results = array();

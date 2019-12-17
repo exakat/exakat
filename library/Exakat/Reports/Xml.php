@@ -105,13 +105,12 @@ class Xml extends Reports {
     public function generate($folder, $name = self::FILE_FILENAME) {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
-        $resultsAnalyzers = new Results($this->sqlite, $list);
-        $resultsAnalyzers->load();
+        $analysisResults = $this->dump->fetchAnalysers($list);
 
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        foreach($resultsAnalyzers->toArray() as $row) {
+        foreach($analysisResults->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,

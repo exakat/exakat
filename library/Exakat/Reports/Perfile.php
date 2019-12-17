@@ -29,8 +29,7 @@ class Perfile extends Reports {
     const FILE_FILENAME  = self::STDOUT;
 
     public function _generate($analyzerList) {
-        $analysisResults = new Results($this->sqlite, $analyzerList);
-        $analysisResults->load();
+        $analysisResults = $this->dump->fetchAnalysers($analyzerList);
 
         $perfile       = array();
         $titleCache    = array();

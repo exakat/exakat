@@ -3185,15 +3185,7 @@ SQL
         // ce trait inclut l'autre
 
         // list of all traits, for building the table
-        $query = <<<'SQL'
-SELECT name FROM cit WHERE type="trait" ORDER BY name
-SQL;
-        $res = $this->sqlite->query($query);
-
-        $traits = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $traits[] = $row['name'];
-        }
+        $traits = $this->dump->getCit('trait')->getColumn('name');
 
         // INIT
         $table = array_fill_keys($traits, array_fill_keys($traits, array()));

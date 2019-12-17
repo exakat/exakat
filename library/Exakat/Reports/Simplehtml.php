@@ -122,8 +122,7 @@ HTML;
             $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         }
 
-        $analysisResults = new Results($this->sqlite, $list);
-        $analysisResults->load();
+        $analysisResults = $this->dump->fetchAnalysers($list);
 
         $results = array();
         $titleCache = array();

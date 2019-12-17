@@ -31,11 +31,15 @@ class Topology extends Reports {
     public function _generate($analyzerList) {
         switch($this->config->program) {
             case 'Dump/Typehintorder' :
-                $query = 'SELECT argument AS origin, returned AS destination FROM typehintOrder';
+                $res = $this->dump->fetchTable('typehintOrder', array('origin'      => 'argument',
+                                                                      'destination' => 'returned',
+                                                                      ));
                 break;
 
             case 'Dump/NewOrder' :
-                $query = 'SELECT calling AS origin, called AS destination FROM newOrder';
+                $res = $this->dump->fetchTable('newOrder', array('origin'      => 'calling',
+                                                                 'destination' => 'called',
+                                                                 ));
                 break;
 
             default :
@@ -43,14 +47,8 @@ class Topology extends Reports {
                 return '';
         }
 
-        $res = $this->sqlite->query($query);
-        $nodes = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $nodes[] = $row;
-        }
-
         $names = array();
-        foreach($nodes as $id => list('origin' => $origin, 'destination' => $destination)) {
+        foreach($res->toArray() as $id => list('origin' => $origin, 'destination' => $destination)) {
             if (strpos($origin, '@') !== false ||
                 strpos($destination, '@') !== false
                 ) {

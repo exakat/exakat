@@ -90,40 +90,30 @@ class Top10 extends Ambassador {
                                                           'Type/NoRealComparison', ),
                      );
 
-        $sqlList = makeList(array_merge(...array_values($top10)));
+        $res = $this->dump->fetchAnalysersCounts(array_merge(...array_values($top10)));
+        $counts = $res->toHash('analyzer', 'count');
 
-        $sql = <<<SQL
-SELECT * FROM resultsCounts
-    WHERE analyzer IN ($sqlList)
-SQL;
-        $res = $this->sqlite->query($sql);
-
-        $counts = array_fill_keys(array_keys($top10), 0);
-        $dict = array();
-        foreach($top10 as $t => $v) {
-            foreach($v as $w) {
-                $dict[$w] = $t;
+        $topCounts = array_fill_keys(array_keys($top10), 0);
+        foreach($top10 as $name => $analysis) {
+            foreach($analysis as $a) {
+                $topCounts[$name] += $counts[$a] ?? 0;
             }
         }
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$dict[$row['analyzer']]] += $row['count'];
-        }
-
-            $colors = array('#00FF00',
-                            '#32CC00',
-                            '#669900',
-                            '#996600',
-                            '#CC3300',
-                            '#FF0000',
-                            );
+        $colors = array('#00FF00',
+                        '#32CC00',
+                        '#669900',
+                        '#996600',
+                        '#CC3300',
+                        '#FF0000',
+                        );
 
         $table = array();
         $i = 0;
-        foreach($counts as $name => $count) {
+        foreach($topCounts as $name => $count) {
             ++$i;
             $color = $colors[round(log($count) / log(5), 0)];
-            $table[] = "<tr><td>$name</td><td><a href=\"issues.html#analyzer=" . $this->toId($name) . '" title="' . $row['label'] . '">' . $row['label'] . "</a></td><td bgcolor=\"$color\">$count</td></tr>\n";
+            $table[] = "<tr><td>$name</td><td><a href=\"issues.html#analyzer=" . $this->toId($name) . '" title="' . $name . '">' . $name . "</a></td><td bgcolor=\"$color\">$count</td></tr>\n";
         }
 
         $top10 = '<table class="table">' . implode(PHP_EOL, $table) . '</table>';
