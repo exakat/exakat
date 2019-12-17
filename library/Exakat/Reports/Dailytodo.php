@@ -94,14 +94,26 @@ HTML;
             ++$count;
         }
 
+        $tags = array('<reporting>',
+                      '<count>',    
+                      '<total>',    
+                      '<thema>',    
+                      '<date>',     
+                      '<todos>',    
+                      '<thanks>',   
+                      );
+
+        $values = array($reporting,         
+                        $count,             
+                        $total,             
+                        $project_rulesets,  
+                        date('l, F jS Y'),  
+                        implode('', $todos),
+                        $this->getThanks(), 
+                        );
+
         $html = file_get_contents($this->tmpName . '/invoice.html');
-        $html = str_replace('<reporting>', $reporting, $html);
-        $html = str_replace('<count>', $count, $html);
-        $html = str_replace('<total>', $total, $html);
-        $html = str_replace('<thema>', $project_rulesets, $html);
-        $html = str_replace('<date>', date('l, F jS Y'), $html);
-        $html = str_replace('<todos>', implode('', $todos), $html);
-        $html = str_replace('<thanks>', $this->getThanks(), $html);
+        $html = str_replace($tags, $values, $html);
         file_put_contents($this->tmpName . '/index.html', $html);
     }
 
