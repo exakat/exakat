@@ -25,10 +25,9 @@ namespace Exakat\Reports\Helpers;
 use SQLite3Result;
 
 class Results {
-    private $sqlite       = null;
     private $count        = -1;
     private $values       = null;
-    private $options     = array();
+    private $options      = array();
 
     public function __construct(SQLite3Result $res, $options = array()) {
         $this->res = $res;
@@ -79,7 +78,33 @@ class Results {
 
         return $this->values;
     }
-    
+
+    public function toString(string $col = '') : string {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        if ($col === '') {
+            $first = array_keys($this->values[0])[0];
+            return $this->values[0][$first];
+        } else {
+            return $this->values[0][$col] ?? '';
+        }
+    }
+
+    public function toInt(string $col = '') : int {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        if ($col === '') {
+            $first = array_keys($this->values[0])[0];
+            return (int) $this->values[0][$first];
+        } else {
+            return (int) ($this->values[0][$col] ?? 0);
+        }
+    }
+
     public function toHash($key, $value) : array {
         if ($this->values === null) {
             $this->load();

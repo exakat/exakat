@@ -32,11 +32,9 @@ class Exakat {
     const BUILD = 1027;
     
     private $config  = null;
-    private $gremlin = null;
     
     public function __construct() {
         $this->config = exakat('config');
-        $this->gremlin = exakat('graphdb');
     }
 
     public function execute() : void {

@@ -31,6 +31,7 @@ use Exakat\Exceptions\NoDumpYet;
 use Exakat\Project as ProjectName;
 use Exakat\Reports\Reports as Reports;
 use Exakat\Tasks\Helpers\ReportConfig;
+use Exakat\Dump\Dump;
 
 class Report extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -58,12 +59,10 @@ class Report extends Tasks {
             throw new NoDump($this->config->project);
         }
 
-        $dump = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
-        $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
-        $res = $dump->query($ProjectDumpSql);
-        $row = $res->fetchArray(\SQLITE3_NUM);
-
-        if (empty($row) || ($row[0] === 0)) {
+        $dump = Dump::factory($this->config->dump, Dump::REUSE);
+        $res = $dump->fetchAnalysersCounts(array('Project/Dump'));
+        
+        if ($res->toInt('count') !== 1) {
             throw new NoDumpYet($this->config->project);
         }
 

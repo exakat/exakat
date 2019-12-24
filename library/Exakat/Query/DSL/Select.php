@@ -33,7 +33,7 @@ class Select extends DSL {
             assert(in_array($k, $this->availableLabels, \STRICT_COMPARISON), "No such step as '$k'");
 
             if (is_int($k)) {
-                $select[] = $v;
+                $select[] = "by(constant($v))";
             } elseif ($v === 'id') {
                 $select[] = $k;
                 $by[]     = 'by(id())';

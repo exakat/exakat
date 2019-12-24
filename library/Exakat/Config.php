@@ -202,16 +202,16 @@ class Config {
             $this->options['tmp_dir']       = getcwd() . '/.exakat';
             $this->options['datastore']     = getcwd() . '/.exakat/datastore.sqlite';
             $this->options['dump']          = getcwd() . '/.exakat/dump.sqlite';
-            $this->options['dump_previous'] = 'none';
             $this->options['dump_tmp']      = getcwd() . '/.exakat/.dump.sqlite';
+            $this->options['dump_previous'] = 'none';
         } else {
             $this->options['project_dir']   = $this->projects_root . '/projects/' . ($this->options['project'] ?? '');
             $this->options['code_dir']      = $this->options['project_dir'] . '/code';
             $this->options['log_dir']       = $this->options['project_dir'] . '/log';
             $this->options['tmp_dir']       = $this->options['project_dir'] . '/.exakat';
             $this->options['datastore']     = $this->options['project_dir'] . '/datastore.sqlite';
-            $this->options['dump_tmp']      = $this->options['project_dir'] . '/.dump.sqlite';
             $this->options['dump']          = $this->options['project_dir'] . '/dump.sqlite';
+            $this->options['dump_tmp']      = $this->options['project_dir'] . '/.dump.sqlite';
         }
     }
 

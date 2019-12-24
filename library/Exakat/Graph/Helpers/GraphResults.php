@@ -83,6 +83,40 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         unset($data);
     }
 
+    public function deHash(array $extra = null) {
+        if (empty($this->data)) {
+            return;
+        }
+        
+        $result = array();
+        foreach($this->data as $value) {
+            foreach($value as $k => $v) {
+                $result[] = array('', $k, $v);
+            }
+        }
+        if ($extra !== null) {
+            $results = array_map($result, function ($x) use ($extra) { return array_merge($x, $extra); });
+        }
+        
+        $this->data = $result;
+    }
+
+    public function string2Array(array $extra = null) {
+        if (empty($this->data)) {
+            return;
+        }
+        
+        $result = array();
+        foreach($this->data as $value) {
+            $result[] = array('', array_pop($value));
+        }
+        if ($extra !== null) {
+            $results = array_map($result, function ($x) use ($extra) { return array_merge($x, $extra); });
+        }
+        
+        $this->data = $result;
+    }
+    
     public function toArray() {
         if ($this->type === self::EMPTY) {
             return array();

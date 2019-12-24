@@ -50,22 +50,15 @@ class Codeflower extends Reports {
     }
 
     private function getFileDependencies() {
+        $all = $this->dump->fetchTable('filesDependencies', array('including' => 'DISTINCT including',
+                                                                  'included', 
+                                                                   'type'))->toArray();
+        
+        $all = array_filter($all, function($x) { return $x['type'] === 'extends' && $x['including'] !== $x['included']; });
+        
         $files = array();
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT DISTINCT including, included 
-    FROM filesDependencies
-WHERE including != included AND
-      type in ('EXTENDS')
-
-SQL
-        );
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (isset($files[$row['including']])) {
-                $files[$row['including']][] = $row['included'];
-            } else {
-                $files[$row['including']] = array($row['included']);
-            }
+        foreach($all as $a) {
+            array_collect_by($files, $a['including'], $a['included']);
             $this->count();
         }
 

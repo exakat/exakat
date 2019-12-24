@@ -46,7 +46,7 @@ class AutoloadDev implements Autoloader {
         }
 
         $fileName = str_replace(array('Exakat\\', '\\'), array('', DIRECTORY_SEPARATOR), $name);
-        if (file_exists("{$this->path}/$file")) {
+        if (file_exists("{$this->path}/$fileName")) {
             include $fullPath;
         }
     }
