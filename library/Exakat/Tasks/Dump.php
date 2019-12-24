@@ -432,13 +432,6 @@ SQL;
     }
 
     private function collectVariables() {
-        // Name spaces
-        $this->sqlite->query('DROP TABLE IF EXISTS variables');
-        $this->sqlite->query('CREATE TABLE variables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                        variable STRING,
-                                                        type STRING
-                                                 )');
-
         $query = $this->newQuery('collectVariables');
         $query->atomIs(array('Variable', 'Variablearray', 'Variableobject'), Analyzer::WITHOUT_CONSTANTS)
               ->tokenIs('T_VARIABLE')
@@ -448,8 +441,7 @@ SQL;
         $query->prepareRawQuery();
         $variables = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
 
-        $total = 0;
-        $query = array();
+        $toDump = array();
 
         $types = array('Variable'       => 'var',
                        'Variablearray'  => 'array',
@@ -463,16 +455,13 @@ SQL;
             $name = str_replace(array('&', '...', '@'), '', $row['name']);
             $unique[$name . $row['type']] = 1;
             $type = $types[$row['type']];
-            $query[] = "(null, '" . mb_strtolower($this->sqlite->escapeString($name)) . "', '" . $type . "')";
-            ++$total;
+            $toDump[] = array('', 
+                              mb_strtolower($name), 
+                              $type,
+                             );
         }
-
-        if (!empty($query)) {
-            $query = 'INSERT INTO variables ("id", "variable", "type") VALUES ' . implode(', ', $query);
-            $this->sqlite->query($query);
-        }
-
-        display( "Variables : $total\n");
+        $total = $this->storeToDumpArray('variables', $toDump);
+        display("$total variables\n");
     }
 
     private function collectStructures(): void {
@@ -1329,7 +1318,7 @@ GREMLIN;
     }
 
     private function collectDefinitionsStats() {
-        $insert = array();
+        $toDump = array();
         $types = array('Staticconstant'   => 'staticconstants',
                        'Staticmethodcall' => 'staticmethodcalls',
                        'Staticproperty'   => 'staticproperty',
@@ -1343,17 +1332,23 @@ GREMLIN;
 g.V().hasLabel("$label").count();
 GREMLIN;
             $res = $this->gremlin->query($query);
-            $insert[] = '("' . $name . '", ' . $res->toInt() . ')';
+            $toDump[] = array('',
+                              $name,
+                              $res->toInt(),
+                              );
 
             $query = <<<GREMLIN
 g.V().hasLabel("$label").where(__.in("DEFINITION").not(hasLabel("Virtualproperty"))).count();
 GREMLIN;
             $res = $this->gremlin->query($query);
-            $insert[] = '("' . $name . ' defined", ' . $res->toInt() . ')';
+            $toDump[] = array('',
+                              "$name defined",
+                              $res->toInt(),
+                              );
         }
 
-        $this->sqlite->query('REPLACE INTO hash ("key", "value") VALUES ' . implode(', ', $insert));
-        display('Definitions Stats');
+        $count = $this->storeToDumpArray('hash', $toDump);
+        display("$count Definitions Stats");
     }
 
     private function collectFilesDependencies() {
@@ -1927,21 +1922,25 @@ GREMLIN
     private function collectHashCounts($query, $name) {
         $index = $this->gremlin->query($query);
 
-        $values = array();
+        $toDump = array();
         foreach($index->toArray()[0] as $number => $count) {
-            $values[] = "('$name', $number, $count) ";
+            $toDump[] = array($name, 
+                              $number, 
+                              $count,
+                             );
         }
 
         if (!empty($values)) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $values);
-            $this->sqlite->query($query);
+            $total = $this->storeToDumpArray('hashResults', $toDump);
+        } else {
+            $total = 0;
         }
 
-        display( "$name : " . count($values));
+        display( "$name : $total");
     }
 
     private function collectMissingDefinitions() {
-        $values = array();
+        $toDump = array();
 
         $functioncallCount  = $this->gremlin->query('g.V().hasLabel("Functioncall").count()')[0];
         $functioncallMissed = $this->gremlin->query('g.V().hasLabel("Functioncall")
@@ -1957,8 +1956,14 @@ GREMLIN
             file_put_contents("{$this->config->log_dir}/functions.missing.txt", implode(PHP_EOL, array_column($functioncallMissed->toArray(), 'fullcode')));
             $functioncallMissed = $functioncallMissed->toInt();
         }
-        $values[] = "('functioncall total', '$functioncallCount')";
-        $values[] = "('functioncall missed', '$functioncallMissed')";
+        $toDump[] = array('',
+                          'functioncall total',
+                          $functioncallCount,
+                          );
+        $toDump[] = array('',
+                          'functioncall missed',
+                          $functioncallMissed,
+                          );
 
         $methodCount  = $this->gremlin->query('g.V().hasLabel("Methodcall").count()')[0];
         $methodMissed = $this->gremlin->query('g.V().hasLabel("Methodcall")
@@ -1972,8 +1977,14 @@ GREMLIN
             file_put_contents("{$this->config->log_dir}/methodcall.missing.txt", 'Nothing found');
             $methodMissed = 0;
         }
-        $values[] = "('methodcall total', '$methodCount')";
-        $values[] = "('methodcall missed', '$methodMissed')";
+        $toDump[] = array('',
+                          'methodcall total',
+                          $methodCount,
+                          );
+        $toDump[] = array('',
+                          'methodcall missed',
+                          $methodMissed,
+                          );
 
         $memberCount  = $this->gremlin->query('g.V().hasLabel("Member").count()')[0];
         $memberMissed = $this->gremlin->query('g.V().hasLabel("Member")
@@ -1987,8 +1998,14 @@ GREMLIN
             file_put_contents("{$this->config->log_dir}/members.missing.txt", 'Nothing found');
             $memberMissed = 0;
         }
-        $values[] = "('member total', '$memberCount')";
-        $values[] = "('member missed', '$memberMissed')";
+        $toDump[] = array('',
+                          'member total',
+                          $memberCount,
+                          );
+        $toDump[] = array('',
+                          'member missed',
+                          $memberMissed,
+                          );
 
         $staticMethodCount  = $this->gremlin->query('g.V().hasLabel("Staticmethodcall").count()')[0];
         $staticMethodMissed = $this->gremlin->query('g.V().hasLabel("Staticmethodcall")
@@ -2004,8 +2021,14 @@ GREMLIN
             file_put_contents("{$this->config->log_dir}/staticmethodcall.missing.txt", 'Nothing found');
             $staticMethodMissed = 0;
         }
-        $values[] = "('static methodcall total', '$staticMethodCount')";
-        $values[] = "('static methodcall missed', '$staticMethodMissed')";
+        $toDump[] = array('',
+                          'static methodcall total',
+                          $staticMethodCount,
+                          );
+        $toDump[] = array('',
+                          'static methodcall missed',
+                          $staticMethodMissed,
+                          );
 
         $staticConstantCount  = $this->gremlin->query('g.V().hasLabel("Staticonstant").count()')[0];
         $staticConstantMissed = $this->gremlin->query('g.V().hasLabel("Staticonstant")
@@ -2020,8 +2043,14 @@ GREMLIN
             file_put_contents("{$this->config->log_dir}/staticconstant.missing.txt", 'Nothing found');
             $staticConstantMissed = 0;
         }
-        $values[] = "('static constant total', '$staticConstantCount')";
-        $values[] = "('static constant missed', '$staticConstantMissed')";
+        $toDump[] = array('',
+                          'static constant total',
+                          $staticConstantCount,
+                          );
+        $toDump[] = array('',
+                          'static constant missed',
+                          $staticConstantMissed,
+                          );
 
         $staticPropertyCount  = $this->gremlin->query('g.V().hasLabel("Staticproperty").count()')[0];
         $staticPropertyMissed = $this->gremlin->query('g.V().hasLabel("Staticproperty")
@@ -2036,8 +2065,14 @@ GREMLIN
             file_put_contents("{$this->config->log_dir}/staticproperty.missing.txt", 'Nothing found');
             $staticPropertyMissed = 0;
         }
-        $values[] = "('static property total', '$staticPropertyCount')";
-        $values[] = "('static property missed', '$staticPropertyMissed')";
+        $toDump[] = array('',
+                          'static property total',
+                          $staticPropertyCount,
+                          );
+        $toDump[] = array('',
+                          'static property missed',
+                          $staticPropertyMissed,
+                          );
 
         $constantCounts = $this->gremlin->query('g.V().hasLabel("Identifier", "Nsname").count()')[0];
         $constantMissed = $this->gremlin->query('g.V().hasLabel("Identifier", "Nsname")
@@ -2055,11 +2090,16 @@ GREMLIN
             file_put_contents("{$this->config->log_dir}/constant.missing.txt", 'Nothing found');
             $constantMissed = 0;
         }
-        $values[] = "('constant total', '$constantCounts')";
-        $values[] = "('constant missed', '$constantMissed')";
+        $toDump[] = array('',
+                          'constant total',
+                          $constantCounts,
+                          );
+        $toDump[] = array('',
+                          'constant missed',
+                          $constantMissed,
+                          );
 
-        $query = 'INSERT OR REPLACE INTO hash ("key", "value") VALUES ' . implode(', ', $values);
-        $this->sqlite->query($query);
+        $this->storeToDumpArray('hash', $toDump);
     }
 
     private function collectMethodsCounts() {
@@ -2121,20 +2161,7 @@ GREMLIN;
         return count($values);
     }
 
-    private function collectGlobalVariables() {
-        $this->sqlite->query('DROP TABLE IF EXISTS globalVariables');
-        $this->sqlite->query(<<<'GREMLIN'
-CREATE TABLE globalVariables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                variable STRING,
-                                file STRING,
-                                line INTEGER,
-                                isRead INTEGER,
-                                isModified INTEGER,
-                                type STRING
-                            )
-GREMLIN
-);
-
+    private function collectGlobalVariables() : int {
         $query = $this->newQuery('Global Variables');
         $query->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
               ->codeIsNot('$GLOBALS', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
@@ -2146,7 +2173,8 @@ GREMLIN
               ->savePropertyAs('fullcode', 'path')
               ->back('variable')
               ->raw(<<<GREMLIN
-map{['file':path,
+map{['id': '',
+     'file':path,
      'line' : it.get().value('line'),
      'variable' : it.get().value('fullcode'),
      'isRead' : 'isRead' in it.get().keys() ? 1 : 0,
@@ -2158,22 +2186,9 @@ map{['file':path,
 GREMLIN
 ,array(), array()
 );
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $total = $this->storeToDump('globalVariables', $query);
 
-        if (count($result) === 0) {
-            return 0;
-        }
-
-        $valuesSQL = array();
-        foreach($result->toArray() as $row) {
-            $valuesSQL[] = "('" . $this->sqlite->escapeString($row['variable']) . "', '" . $this->sqlite->escapeString($row['file']) . "', $row[line], $row[isRead], $row[isModified], '$row[type]') \n";
-        }
-
-        $query = 'INSERT INTO globalVariables ("variable", "file", "line", "isRead", "isModified", "type") VALUES ' . implode(', ', $valuesSQL);
-        $this->sqlite->query($query);
-
-        return count($valuesSQL);
+        return $total;
     }
 
     private function collectReadability() {
@@ -2203,30 +2218,18 @@ g.V().sideEffect{ functions = 0; name=""; expression=0;}
 GREMLIN;
         $index = $this->gremlin->query($query);
 
-        $this->sqlite->query('DROP TABLE IF EXISTS readability');
-        $query = <<<'SQL'
-CREATE TABLE readability (  
-    id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    name    STRING,
-    type    STRING,
-    tokens  INTEGER,
-    expressions INTEGER,
-    file        STRING
-                    )
-SQL;
-        $this->sqlite->query($query);
-
-        $values = array();
+        $toDump = array();
         foreach($index as $row) {
-            $values[] = "('$row[name]', '$row[type]', $row[total], $row[expression], '{$this->sqlite->escapeString($row['file'])}') ";
+            $toDump[] = array('',
+                              $row['name'],
+                              $row['type'],
+                              $row['total'],
+                              $row['expression'],
+                              $row['file'],
+                             );
         }
-
-        if (!empty($values)) {
-            $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES ' . implode(', ', $values);
-            $this->sqlite->query($query);
-        }
-
-        display( count($values) . ' readability index');
+        $total = $this->storeToDumpArray('readability', $toDump);
+        display("$total readability index");
     }
 
     public function checkRulesets($ruleset, array $analyzers) {
@@ -2315,21 +2318,21 @@ SQL;
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
-die(ici);
         $this->collectVariables();
 
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Variables: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
+
         $this->collectReadability();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Readability: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
-
         $this->collectMethodsCounts();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Method Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
+
         $this->collectPropertyCounts();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Property Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
@@ -2578,7 +2581,6 @@ GREMLIN
     private function storeToDumpArray(string $table, array $result) : int {
         return $this->dump->storeInTable($table, $result);
     }
-
 }
 
 ?>
