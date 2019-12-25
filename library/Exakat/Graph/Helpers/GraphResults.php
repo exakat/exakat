@@ -95,7 +95,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
             }
         }
         if ($extra !== null) {
-            $results = array_map($result, function ($x) use ($extra) { return array_merge($x, $extra); });
+            $results = array_map(function ($x) use ($extra) { return array_merge($x, $extra); }, $result);
         }
         
         $this->data = $result;

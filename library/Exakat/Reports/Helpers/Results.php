@@ -79,6 +79,18 @@ class Results {
         return $this->values;
     }
 
+    public function toList(string $col = null) : array {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        if ($col === null) {
+            $col = array_keys($this->values[0])[0];
+        }
+        
+        return array_column($this->values, $col);
+    }
+
     public function toString(string $col = '') : string {
         if ($this->values === null) {
             $this->load();

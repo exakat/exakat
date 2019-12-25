@@ -95,7 +95,6 @@ class Dump extends Tasks {
 
             $this->collect();
         }
-        die(collect);
 
         $counts = array();
         $datastore = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
@@ -126,8 +125,7 @@ class Dump extends Tasks {
             $this->collectHashAnalyzer();
 
             if ($missing === 0) {
-                $list = '(NULL, "' . implode('"), (NULL, "', $ruleset) . '")';
-                $this->sqlite->query("INSERT INTO themas (\"id\", \"thema\") VALUES {$list}");
+                $this->storeToDumpArray('themas', array_map(function ($x) { return array('', $x); }, $ruleset));
                 $rulesets = array();
             }
 
@@ -198,20 +196,7 @@ class Dump extends Tasks {
     }
 
     private function processMultipleResults(array $analyzers, array $counts) {
-        $classesList = makeList($analyzers);
-
-        $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
-
-        $query = array();
-        foreach($analyzers as $analyzer) {
-            if (isset($counts[$analyzer])) {
-                $query[] = "(NULL, '$analyzer', $counts[$analyzer])";
-            }
-        }
-
-        if (!empty($query)) {
-            $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES ' . implode(', ', $query));
-        }
+        $this->dump->removeResults($analyzers);
 
         $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
@@ -229,7 +214,7 @@ class Dump extends Tasks {
         $saved = 0;
         $docs = exakat('docs');
         $severities = array();
-        $readCounts = array_fill_keys($analyzers, 0);
+        $readCounts = array();
 
         $chunks = array_chunk($analyzers, 200);
         // Gremlin only accepts chunks of 255 maximum
@@ -258,7 +243,7 @@ GREMLIN
             $query->prepareRawQuery();
             $res = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
 
-            $query = array();
+            $toDump = array();
             foreach($res as $result) {
                 if (empty($result)) {
                     continue;
@@ -267,47 +252,24 @@ GREMLIN
                 if (isset($severities[$result['analyzer']])) {
                     $severity = $severities[$result['analyzer']];
                 } else {
-                    $severity = $this->sqlite->escapeString($docs->getDocs($result['analyzer'])['severity']);
+                    $severity = $docs->getDocs($result['analyzer'])['severity'];
                     $severities[$result['analyzer']] = $severity;
                 }
 
-                ++$readCounts[$result['analyzer']];
-
-                $query[] = <<<SQL
-(null, 
- '{$this->sqlite->escapeString($result['fullcode'])}', 
- '{$this->sqlite->escapeString($result['file'])}', 
-  {$this->sqlite->escapeString($result['line'])}, 
- '{$this->sqlite->escapeString($result['namespace'])}', 
- '{$this->sqlite->escapeString($result['class'])}', 
- '{$this->sqlite->escapeString($result['function'])}',
- '{$this->sqlite->escapeString($result['analyzer'])}',
- '$severity'
-)
-SQL;
-                ++$saved;
-
-                // chunk split the save.
-                if ($saved % 100 === 0) {
-                    $values = implode(', ', $query);
-                    $query = <<<SQL
-REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
-             VALUES $values
-SQL;
-                    $this->sqlite->query($query);
-                    $query = array();
-                }
+                $toDump[] = array($result['fullcode'], 
+                                  $result['file'], 
+                                  $result['line'], 
+                                  $result['namespace'], 
+                                  $result['class'], 
+                                  $result['function'],
+                                  $result['analyzer'],
+                                  $severity,
+                                  );
             }
+            
+            $readCounts[] = $this->dump->addResults($toDump);
         }
-
-        if (!empty($query)) {
-            $values = implode(', ', $query);
-            $query = <<<SQL
-REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
-             VALUES $values
-SQL;
-            $this->sqlite->query($query);
-        }
+        $readCounts = array_merge(...$readCounts);
 
         $this->log->log(implode(', ', $analyzers) . " : dumped $saved");
 
@@ -317,10 +279,10 @@ SQL;
                 continue;
             }
 
-            if ($counts[$class] === $readCounts[$class]) {
+            if ($counts[$class] === ($readCounts[$class] ?? 0)) {
                 display("All $counts[$class] results saved for $class\n");
             } else {
-                assert($counts[$class] === $readCounts[$class], "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
+                assert($counts[$class] === ($readCounts[$class] ?? 0), "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
                 $error++;
             }
         }
@@ -328,11 +290,7 @@ SQL;
         return $error;
     }
 
-    private function processResults($class, int $count) {
-        $this->sqlite->query("DELETE FROM results WHERE analyzer = '$class'");
-
-        $this->sqlite->query("REPLACE INTO resultsCounts (\"id\", \"analyzer\", \"count\") VALUES (NULL, '$class', $count)");
-
+    private function processResults(string $class, int $count) : void {
         $this->log->log( "$class : $count\n");
         // No need to go further
         if ($count <= 0) {
@@ -346,46 +304,23 @@ SQL;
         $docs = exakat('docs');
         $severity = $docs->getDocs($class)['severity'];
 
-        $query = array();
+        $toDump = array();
         foreach($res as $result) {
             if (empty($result)) {
                 continue;
             }
 
-            $query[] = <<<SQL
-(null, 
- '{$this->sqlite->escapeString($result['fullcode'])}', 
- '{$this->sqlite->escapeString($result['file'])}', 
-  {$this->sqlite->escapeString($result['line'])}, 
- '{$this->sqlite->escapeString($result['namespace'])}', 
- '{$this->sqlite->escapeString($result['class'])}', 
- '{$this->sqlite->escapeString($result['function'])}',
- '{$this->sqlite->escapeString($class)}',
- '{$this->sqlite->escapeString($severity)}'
-)
-SQL;
-            ++$saved;
-
-            // chunk split the save.
-            if ($saved % 500 === 0) {
-                $values = implode(', ', $query);
-                $query = <<<SQL
-REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
-             VALUES $values
-SQL;
-                $this->sqlite->query($query);
-                $query = array();
-            }
+            $todump[] = array(null, 
+                              $result['fullcode'], 
+                              $result['file'], 
+                              $result['line'], 
+                              $result['namespace'], 
+                              $result['class'], 
+                              $result['function'],
+                              $class,
+                              $severity);
         }
-
-        if (!empty($query)) {
-            $values = implode(', ', $query);
-            $query = <<<SQL
-REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
-             VALUES $values
-SQL;
-            $this->sqlite->query($query);
-        }
+        $saved = $this->dump->saveResults($query);
 
         $this->log->log("$class : dumped $saved");
 
@@ -412,23 +347,10 @@ SQL;
         $this->removeSnitch();
     }
 
-    private function collectTablesData($tables) {
-        $this->sqlite->query("ATTACH '{$this->config->datastore}' AS datastore");
-
-        $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('" . implode("', '", $tables) . "');";
-        $existingTables = $this->sqlite->query($query);
-
-        while($table = $existingTables->fetchArray(\SQLITE3_ASSOC)) {
-            $this->sqlite->query('REPLACE INTO ' . $table['name'] . ' SELECT * FROM datastore.' . $table['name']);
-        }
-
-        $this->sqlite->query('DETACH datastore');
-    }
-
     private function collectHashAnalyzer() {
         $tables = array('hashAnalyzer',
                        );
-        $this->collectTablesData($tables);
+        $this->dump->collectTables($tables);
     }
 
     private function collectVariables() {
@@ -1296,22 +1218,7 @@ GREMLIN;
         $res = $this->gremlin->query($query);
         $res->deHash(array($type));
         
-        $this->dump->storeInTable('atomsCounts', $res);
-
-        $total = 0;
-        $query = array();
-        foreach($res as $row) {
-            $count = current($row);
-            $name = key($row);
-            $query[] = "(null, '" . $this->sqlite->escapeString($name) . "', '$type', $count)";
-
-            ++$total;
-        }
-
-        if (!empty($query)) {
-            $query = 'INSERT INTO phpStructures ("id", "name", "type", "count") VALUES ' . implode(', ', $query);
-            $this->sqlite->query($query);
-        }
+        $total = $this->dump->storeInTable('atomsCounts', $res);
         display("$total PHP {$type}s\n");
         
         return $total;
@@ -2253,16 +2160,11 @@ GREMLIN;
 
     private function expandRulesets() {
         $analyzers = array();
-        $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzers[] = $row['analyzer'];
-        }
+        $res = $this->dump->fetchTable('resultsCounts', array('analyzer'));
+        $analyzers = $res->toList('analyzer');
 
-        $res = $this->sqlite->query('SELECT thema FROM themas');
-        $ran = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $ran[$row['thema']] = 1;
-        }
+        $res = $this->dump->fetchTable('themas', array('thema'));
+        $ran = $res->toList('analyzer');
 
         $rulesets = $this->rulesets->listAllRulesets();
         $rulesets = array_diff($rulesets, $ran);
@@ -2272,13 +2174,12 @@ GREMLIN;
         foreach($rulesets as $ruleset) {
             $analyzerList = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
             if (empty(array_diff($analyzerList, $analyzers))) {
-                $add[] = $ruleset;
+                $add[] = array('', $ruleset);
             }
         }
 
         if (!empty($add)) {
-            $query = 'INSERT INTO themas (thema) VALUES ("' . implode('"), ("', $add) . '")';
-            $this->sqlite->query($query);
+            $this->dump->storeInTable('themas', $add);
         }
     }
 
