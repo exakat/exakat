@@ -64,7 +64,7 @@ class Dump {
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
     }
 
-    static function factory(string $path, bool $init = false) : self {
+    static function factory(string $path, int $init = self::READ) : self {
         return new Dump1($path, $init);
     }
 

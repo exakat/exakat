@@ -51,11 +51,11 @@ class Dependencywheel extends Reports {
     private function makeWheel() {
         $packagenames = array('Main');
 
-        $res = $this->sqlite->query('SELECT * FROM cit');
+        $res = $this->dump->fetchTable('cit');
 
         $ids = array();
         $extends = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $packagenames[] = $row['name'];
 
             if (($row['extends'] !== '') &&
@@ -76,8 +76,8 @@ class Dependencywheel extends Reports {
             $this->count();
         }
 
-        $res = $this->sqlite->query('SELECT * FROM cit_implements');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchTable('cit_implements');
+        foreach($res->toArray() as $row) {
             if (($row['implements'] !== '') &&
                 ((int) $row['implements'] === 0) &&
                 (!in_array($row['implements'], $packagenames)) ) {
@@ -108,8 +108,7 @@ class Dependencywheel extends Reports {
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM cit_implements');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!isset($ids[$row['implements']])) {
                 continue;
             }

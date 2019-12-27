@@ -36,16 +36,9 @@ class Exakatyaml extends Reports {
                         'rulesets'        => range(0, 10),
         );
 
-        $rules = array();
-        $sqlList = makeList($analyzerList);
-        $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer IN (' . $sqlList . ') AND count >= 0');
-        while($row = $res->fetcharray(\SQLITE3_ASSOC)) {
-            if (isset($rules[$row['count']])) {
-                $rules[$row['count']][] = $row['analyzer'];
-            } else {
-                $rules[$row['count']] = array($row['analyzer']);
-            }
-        }
+        $res = $this->dump->fetchAnalysersCounts($analyzerList);
+        $rules = array_filter($res->toHash('count', 'analyzer'), function($x) { return $x > -1;});
+        $this->count($res->getCount());
 
         ksort($rules);
         $return['rulesets'] = $rules;
@@ -57,7 +50,7 @@ class Exakatyaml extends Reports {
         return $yaml;
     }
 
-    private function format($r) {
+    private function format(array $r) : string {
         $ident = str_repeat(' ', 8);
 
         $list = explode(', ', $r[2]);

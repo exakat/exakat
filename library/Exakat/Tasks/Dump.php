@@ -20,6 +20,8 @@
  *
 */
 
+declare(strict_types = 1);
+
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
@@ -45,7 +47,7 @@ class Dump extends Tasks {
 
     const WAITING_LOOP = 1000;
 
-    public function __construct($subTask = self::IS_NOT_SUBTASK) {
+    public function __construct(bool $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($subTask);
 
         $this->log = new Log('dump',
@@ -54,11 +56,11 @@ class Dump extends Tasks {
         $this->linksDown = GraphElements::linksAsList();
     }
 
-    public function setConfig($config) {
+    public function setConfig(Config $config) : void {
         $this->config = $config;
     }
 
-    public function run() {
+    public function run() : void {
         if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -125,7 +127,7 @@ class Dump extends Tasks {
             $this->collectHashAnalyzer();
 
             if ($missing === 0) {
-                $this->storeToDumpArray('themas', array_map(function ($x) { return array('', $x); }, $ruleset));
+                $this->storeToDumpArray('themas', array_map(function (string $x) { return array('', $x); }, $ruleset));
                 $rulesets = array();
             }
 
@@ -173,7 +175,7 @@ class Dump extends Tasks {
         $this->finish();
     }
 
-    public function finalMark($finalMark) {
+    public function finalMark(array $finalMark) : void {
         $sqlite = new \Sqlite3($this->config->dump);
         $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
@@ -185,17 +187,17 @@ class Dump extends Tasks {
         $sqlite->query('REPLACE INTO hash VALUES ' . implode(', ', $values));
     }
 
-    private function processResultsRuleset($ruleset, array $counts = array()) {
+    private function processResultsRuleset(array $ruleset, array $counts = array()) : int {
         $analyzers = $this->rulesets->getRulesetsAnalyzers($ruleset);
 
         return $this->processMultipleResults($analyzers, $counts);
     }
 
-    private function processResultsList(array $rulesetList, array $counts = array()) {
+    private function processResultsList(array $rulesetList, array $counts = array()) : int {
         return $this->processMultipleResults($rulesetList, $counts);
     }
 
-    private function processMultipleResults(array $analyzers, array $counts) {
+    private function processMultipleResults(array $analyzers, array $counts) : int {
         $this->dump->removeResults($analyzers);
 
         $specials = array('Php/Incompilable',
@@ -282,7 +284,7 @@ GREMLIN
             if ($counts[$class] === ($readCounts[$class] ?? 0)) {
                 display("All $counts[$class] results saved for $class\n");
             } else {
-                assert($counts[$class] === ($readCounts[$class] ?? 0), "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
+                assert(($counts[$class] ?? 0) === ($readCounts[$class] ?? 0), "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
                 $error++;
             }
         }
@@ -320,9 +322,14 @@ GREMLIN
                               $class,
                               $severity);
         }
-        $saved = $this->dump->saveResults($query);
+        
+        if (empty($toDump)) {
+            return;
+        }
+        
+        $saved = $this->dump->addResults($toDump);
 
-        $this->log->log("$class : dumped $saved");
+        $this->log->log("$class : dumped ".implode(', ', $saved));
 
         if ($count === $saved) {
             display("All $saved results saved for $class\n");
@@ -332,7 +339,7 @@ GREMLIN
         }
     }
 
-    private function getAtomCounts() {
+    private function getAtomCounts() : void {
         $query = 'g.V().groupCount("b").by(label).cap("b").next();';
         $atomsCount = $this->gremlin->query($query);
         $atomsCount->deHash();
@@ -342,18 +349,18 @@ GREMLIN
         display(count($atomsCount) . " atoms\n");
     }
 
-    private function finish() {
+    private function finish() : void {
         $this->dump->close();
         $this->removeSnitch();
     }
 
-    private function collectHashAnalyzer() {
+    private function collectHashAnalyzer() : void {
         $tables = array('hashAnalyzer',
                        );
         $this->dump->collectTables($tables);
     }
 
-    private function collectVariables() {
+    private function collectVariables() : void {
         $query = $this->newQuery('collectVariables');
         $query->atomIs(array('Variable', 'Variablearray', 'Variableobject'), Analyzer::WITHOUT_CONSTANTS)
               ->tokenIs('T_VARIABLE')
@@ -1224,7 +1231,7 @@ GREMLIN;
         return $total;
     }
 
-    private function collectDefinitionsStats() {
+    private function collectDefinitionsStats() : void {
         $toDump = array();
         $types = array('Staticconstant'   => 'staticconstants',
                        'Staticmethodcall' => 'staticmethodcalls',
@@ -1258,7 +1265,7 @@ GREMLIN;
         display("$count Definitions Stats");
     }
 
-    private function collectFilesDependencies() {
+    private function collectFilesDependencies() : void {
 
         // Direct inclusion
         $query = $this->newQuery('Inclusions');
@@ -1524,33 +1531,7 @@ GREMLIN
         // instanceof ?
     }
 
-    private function storeToTable(string $table, Query $query): int {
-        die(__METHOD__);
-        $res = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        $sqlQuery = array();
-        foreach($res->toArray() as $link) {
-            $sqlQuery[] = "(null, 
-                        '" . $this->sqlite->escapeString($link['calling']) . "', 
-                        '" . $this->sqlite->escapeString($link['calling_name']) . "', 
-                        '" . $this->sqlite->escapeString($link['calling_type']) . "', 
-                        '" . $this->sqlite->escapeString($link['called']) . "', 
-                        '" . $this->sqlite->escapeString($link['called_name']) . "', 
-                        '" . $this->sqlite->escapeString($link['called_type']) . "', 
-                        '" . $link['type'] . "')";
-        }
-
-        if (empty($sqlQuery)) {
-            return 0;
-        }
-
-        $sqlQuery = 'INSERT INTO ' . $table . ' ("id", "including", "including_name", "including_type", "included", "included_name", "included_type", "type") VALUES ' . implode(', ', $sqlQuery);
-        $this->sqlite->query($sqlQuery);
-
-        return count($res);
-    }
-
-    private function collectClassesDependencies() {
+    private function collectClassesDependencies() : void {
         // Finding extends and implements
         $query = $this->newQuery('Extensions of classes');
         $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
@@ -1826,7 +1807,7 @@ GREMLIN
         // instanceof ?
     }
 
-    private function collectHashCounts($query, $name) {
+    private function collectHashCounts(string $query, string $name) : void {
         $index = $this->gremlin->query($query);
 
         $toDump = array();
@@ -1846,7 +1827,7 @@ GREMLIN
         display( "$name : $total");
     }
 
-    private function collectMissingDefinitions() {
+    private function collectMissingDefinitions() : void {
         $toDump = array();
 
         $functioncallCount  = $this->gremlin->query('g.V().hasLabel("Functioncall").count()')[0];
@@ -2009,35 +1990,35 @@ GREMLIN
         $this->storeToDumpArray('hash', $toDump);
     }
 
-    private function collectMethodsCounts() {
+    private function collectMethodsCounts() : void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'MethodsCounts');
     }
 
-    private function collectPropertyCounts() {
+    private function collectPropertyCounts() : void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
     }
 
-    private function collectClassTraitsCounts() {
+    private function collectClassTraitsCounts() : void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassTraits');
     }
 
-    private function collectConstantCounts() {
+    private function collectConstantCounts() : void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassConstantCounts');
     }
 
-    private function collectNativeCallsPerExpressions() {
+    private function collectNativeCallsPerExpressions() : void {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(["Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"]))).as("results")
@@ -2047,25 +2028,6 @@ g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("fir
 ).cap("m")
 GREMLIN;
         $this->collectHashCounts($query, 'NativeCallPerExpression');
-    }
-
-    private function storeInDump(string $changeType, $index): int {
-        $values = array();
-        foreach($index->toArray() as $change) {
-            $values[] = "('$changeType', 
-                          '{$this->sqlite->escapeString($change['name'])}', 
-                          '$change[parent]', 
-                          '{$this->sqlite->escapeString($change['parentValue'])}', 
-                          '{$change['class']}', 
-                          '{$this->sqlite->escapeString($change['classValue'])}') ";
-        }
-
-        if (!empty($values)) {
-            $query = 'INSERT INTO classChanges ("changeType", "name", "parentClass", "parentValue", "childClass", "childValue") VALUES ' . implode(', ', $values);
-            $this->sqlite->query($query);
-        }
-
-        return count($values);
     }
 
     private function collectGlobalVariables() : int {
@@ -2098,7 +2060,7 @@ GREMLIN
         return $total;
     }
 
-    private function collectReadability() {
+    private function collectReadability() : void {
         $loops = 20;
         $query = <<<GREMLIN
 g.V().sideEffect{ functions = 0; name=""; expression=0;}
@@ -2139,7 +2101,7 @@ GREMLIN;
         display("$total readability index");
     }
 
-    public function checkRulesets($ruleset, array $analyzers) {
+    public function checkRulesets($ruleset, array $analyzers) : void {
         $sqliteFile = $this->config->dump;
 
         $sqlite = new \Sqlite3($sqliteFile);
@@ -2158,7 +2120,7 @@ GREMLIN;
         }
     }
 
-    private function expandRulesets() {
+    private function expandRulesets() : void {
         $analyzers = array();
         $res = $this->dump->fetchTable('resultsCounts', array('analyzer'));
         $analyzers = $res->toList('analyzer');
@@ -2183,11 +2145,11 @@ GREMLIN;
         }
     }
 
-    private function newQuery($title) {
-        return new Query(0, $this->config->project, $title, $this->config->executable);
+    private function newQuery(string $title) : Query {
+        return new Query(0, (string) $this->config->project, $title, $this->config->executable);
     }
 
-    public function collect() {
+    public function collect() : void {
         $begin = microtime(\TIME_AS_NUMBER);
         $this->collectClassChanges();
         $end = microtime(\TIME_AS_NUMBER);
@@ -2270,7 +2232,7 @@ GREMLIN;
         }
     }
 
-    private function collectClassChanges() {
+    private function collectClassChanges() : void {
         $total = 0;
 
         // TODO : Constant visibility and value

@@ -40,10 +40,10 @@ class Typehint4all extends Reports {
                      );
     }
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
         $analyzerList = $this->dependsOnAnalysis();
 
-        $analysisResults = new Results($this->sqlite, $analyzerList);
+        $analysisResults = $this->dump->fetchAnalysers($analyzerList);
         $analysisResults->load();
 
         $displayResults = array();

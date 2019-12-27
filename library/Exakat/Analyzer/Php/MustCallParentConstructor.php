@@ -35,7 +35,7 @@ class MustCallParentConstructor extends Analyzer {
                             '\splfileobject',
                             );
         
-        $lccode = $this->dictCode->translate('__construct');
+        $lccode = $this->dictCode->translate(array('__construct'));
         if (empty($lccode)) {
             return;
         }

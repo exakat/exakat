@@ -22,7 +22,7 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Dump;
+use Exakat\Dump\Dump;
 
 abstract class Reports {
     const STDOUT = 'stdout';
@@ -51,8 +51,6 @@ abstract class Reports {
     protected $config     = null;
     protected $docs       = null;
 
-    // remove sqlite, move to dump
-    protected $sqlite    = null;
     protected $dump      = null;
 
     protected $datastore = null;
@@ -65,9 +63,7 @@ abstract class Reports {
         $this->datastore->reuse();
 
         if (file_exists($this->config->dump)) {
-            $this->sqlite    = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READONLY);
-
-            $this->dump      = new Dump($this->sqlite);
+            $this->dump      = Dump::factory($this->config->dump);
 
             $this->rulesets  = exakat('rulesets');
 
@@ -78,14 +74,14 @@ abstract class Reports {
         }
     }
 
-    protected function _generate($analyzerList) {}
+    protected function _generate(array $analyzerList) : string {}
 
-    public static function getReportClass($report) {
+    public static function getReportClass(string $report) : string {
         $report = ucfirst(strtolower($report));
         return "\\Exakat\\Reports\\$report";
     }
 
-    public function generate($folder, $name = null) {
+    public function generate(string $folder, string $name= 'table') : string {
         if (empty($name)) {
             // FILE_FILENAME is defined in the children class
             $name = $this::FILE_FILENAME;
@@ -95,7 +91,7 @@ abstract class Reports {
         if (!empty($rulesets)) {
             if ($missing = $this->checkMissingRulesets()) {
                 print "Can't produce " . static::class . ' format. There are ' . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";
-                return false;
+                return '';
             }
 
             $list = $this->rulesets->getRulesetsAnalyzers($rulesets);
@@ -118,14 +114,15 @@ abstract class Reports {
             return $final ;
         } else {
             file_put_contents("$folder/$name." . $this::FILE_EXTENSION, $final);
+            return '';
         }
     }
 
-    protected function count($step = 1) {
+    protected function count($step = 1) : void {
         $this->count += $step;
     }
 
-    public function getCount() {
+    public function getCount() : int {
         return $this->count;
     }
 
@@ -144,15 +141,11 @@ abstract class Reports {
             return $required;
         }
 
-        $available = array();
-        $res = $this->sqlite->query('SELECT * FROM themas');
-        if ($res === false) {
+        $available = $this->dump->fetchTable('themas')->toList('thema');
+
+        if (empty($available)) {
             // Nothing found.
             return $required;
-        }
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $available[] = $row['thema'];
         }
 
         return array_diff($required, $available);

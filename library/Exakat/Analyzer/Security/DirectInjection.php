@@ -35,7 +35,7 @@ class DirectInjection extends Analyzer {
     public function analyze() {
         $vars = $this->loadIni('php_incoming.ini')->incoming;
         
-        $server = $this->dictCode->translate('$_SERVER');
+        $server = $this->dictCode->translate(array('$_SERVER'));
         if (empty($server)) {
             $server = -1; // This will always fail
         } else {

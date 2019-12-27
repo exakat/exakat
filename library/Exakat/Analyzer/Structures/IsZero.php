@@ -30,7 +30,7 @@ class IsZero extends Analyzer {
         // $a = $c + $d - $c;
         // $a = $c + $d -$e - $c;
         // $a = $d + $c -$e - $c;
-        $minus = $this->dictCode->translate('-');
+        $minus = $this->dictCode->translate(array('-'));
 
         if (empty($minus)) {
             return;

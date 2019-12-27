@@ -53,9 +53,9 @@ class Dictionary {
         $code = makeArray($code);
 
         if ($case === self::CASE_SENSITIVE) {
-            $caseClosure = function ($x) { return $x; };
+            $caseClosure = function (string $x) { return $x; };
         } else {
-            $caseClosure = function ($x) { return mb_strtolower($x); };
+            $caseClosure = function (string $x) { return mb_strtolower($x); };
         }
 
         foreach($code as $c) {
@@ -79,7 +79,7 @@ class Dictionary {
         return $return;
     }
 
-    public function source(int $code) : array {
+    public function source(array $code) : array {
         $return = array();
 
         $reverse = array_flip($this->dictionary);
@@ -93,15 +93,15 @@ class Dictionary {
         return $return;
     }
 
-    public function length(int $length) : array {
+    public function length(string $length) : array {
         $return = array();
 
         if (preg_match('/ > (\d+)/', $length, $r)) {
-            $closure = function ($s) use ($r) { return strlen($s) > $r[1]; };
+            $closure = function (string $s) use ($r) { return strlen($s) > $r[1]; };
         } elseif (preg_match('/ == (\d+)/', $length, $r)) {
-            $closure = function ($s) use ($r) { return strlen($s) === $r[1]; };
+            $closure = function (string $s) use ($r) { return strlen($s) === $r[1]; };
         } elseif (preg_match('/ < (\d+)/', $length, $r)) {
-            $closure = function ($s) use ($r) { return strlen($s) < $r[1]; };
+            $closure = function (string $s) use ($r) { return strlen($s) < $r[1]; };
         } else {
             assert(false, "codeLength didn't understand $length");
         }

@@ -30,12 +30,9 @@ class Phpcompilation extends Reports {
 
     protected function _generate($analyzerList) {
         $themed = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ') AND count > -1');
-        $sources = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $sources[$row['analyzer']] = $row['count'];
-            $this->count();
-        }
+        $res = $this->dump->fetchAnalysersCounts($themed);
+        $sources = array_filter($res->toHash('analyzer', 'count'), function($x) { return $x > -1;});
+        $this->count($res->getCount());
 
         $configureDirectives = json_decode(file_get_contents("{$this->config->dir_root}/data/configure.json"));
 

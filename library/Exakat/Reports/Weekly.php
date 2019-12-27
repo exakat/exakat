@@ -88,10 +88,8 @@ class Weekly extends Ambassador {
                 continue;
             }
 
-            $analyzerListSql = makeList($this->weeks[$date]->analysis);
-            $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($analyzerListSql)";
-            $res = $this->sqlite->query($query);
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $res = $this->dump->fetchAnalysersCounts($this->weeks[$date]->analysis);
+            foreach($res->toArray() as $row) {
                 $this->resultsCounts[$row['analyzer']] = $row['count'];
             }
         }
@@ -105,13 +103,10 @@ class Weekly extends Ambassador {
             print "Error : could not read week details for $date\n";
         }
 
-       $analyzerListSql = makeList($this->weeks[$date]->analysis);
-       $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer in ($analyzerListSql)";
-       $res = $this->sqlite->query($query);
-       while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-           $this->resultsCounts[$row['analyzer']] = $row['count'];
-       }
-
+        $res = $this->dump->fetchAnalysersCounts($this->weeks[$date]->analysis);
+        foreach($res->toArray() as $row) {
+            $this->resultsCounts[$row['analyzer']] = $row['count'];
+        }
     }
 
     private function generateWeekly(Section $section, $year, $week) {
@@ -486,31 +481,10 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function getAnalyzersCount($limit) {
-        $list = $this->weeks[$this->current]->analysis;
-        $listSQL = makeList($list);
-        $list = array_flip($list);
-
-        $query = "SELECT analyzer, count(*) AS value
-                    FROM results
-                    WHERE analyzer in ($listSQL)
-                    GROUP BY analyzer
-                    ORDER BY count(*) DESC ";
-        if ($limit) {
-            $query .= ' LIMIT ' . $limit;
-        }
-        $result = $this->sqlite->query($query);
-
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = $row;
-            unset($list[$row['analyzer']]);
-        }
-
-        foreach(array_keys($list) as $analyzer) {
-            $data[] = array('analyzer' => $analyzer,
-                            'value'    => 0,
-                            );
+    protected function getAnalyzersCount() {
+        $res = $this->dump->fetchAnalysersCounts($this->weeks[$this->current]->analysis);
+        foreach($res->toArray() as $row) {
+            $this->resultsCounts[$row['analyzer']] = $row['count'];
         }
 
         return $data;

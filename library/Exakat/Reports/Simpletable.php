@@ -30,28 +30,24 @@ class Simpletable extends Reports {
     private $tmpName     = '';
     private $finalName   = '';
 
-    public function generate($folder, $name= 'table') {
+    public function generate(string $folder, string $name= 'table') : string {
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->initFolder();
         $this->generateData($folder);
         $this->cleanFolder();
+        
+        return '';
     }
 
     private function generateData($folder, $name = 'table') {
         $list = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
-        $list = makeList($list);
 
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in (' . $list . ') ORDER BY analyzer';
-        $res = $this->sqlite->query($sqlQuery);
+        $res = $this->dump->fetchAnalysers($list);
 
-        $results = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)){
-            $results[$row['analyzer']][] = array('code' => $this->syntaxColoring($row['fullcode']),
-                                                 'file' => $row['file'],
-                                                 'line' => $row['line']);
-        }
+        $results = $res->toArrayHash();
+        asort($results);
 
         $table = '';
         foreach($results as $section => $lines) {
@@ -119,7 +115,7 @@ HTML;
         }
     }
 
-    private function syntaxColoring($source) {
+    private function syntaxColoring(string $source) : string {
         $colored = highlight_string('<?php ' . $source . ' ;?>', \RETURN_VALUE);
         $colored = substr($colored, 79, -65);
 

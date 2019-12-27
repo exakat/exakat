@@ -79,6 +79,23 @@ class Results {
         return $this->values;
     }
 
+    public function toArrayHash($key = '') : array {
+        if ($this->values === null) {
+            $this->load();
+        }
+        
+        if (empty($key)) {
+            return array();
+        }
+        
+        $return = array();
+        foreach($this->values as $value) {
+            $return[$value[$key]] = $value;
+        }
+
+        return $return;
+    }
+
     public function toList(string $col = null) : array {
         if ($this->values === null) {
             $this->load();

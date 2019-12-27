@@ -41,7 +41,7 @@ GREMLIN
         $classes = array_unique(array_merge($phpClasses, $customClasses->toArray()));
         $classes = makeFullnspath($classes);
         
-        $equal = $this->dictCode->translate('=');
+        $equal = $this->dictCode->translate(array('='));
         
         if (empty($equal)) {
             return ;
