@@ -84,22 +84,17 @@ class Stats extends Reports {
             );
 
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
 
         $analyzerList = array_merge(...array_values($this->extensions));
         $analyzerList = array_filter($analyzerList, function ($x) { return strpos($x, '/') !== false; });
 
-        $res = $this->sqlite->query('SELECT atom, count FROM atomsCounts');
-        $atoms = array();
-        while($d = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $atoms[$d['atom']] = (int) $d['count'];
-        }
+        $res = $this->dump->fetchTable('atomsCounts');
+        $atoms = $res->toHash('atom', 'count');
 
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($analyzerList) . ')');
-        while($d = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $atoms[$d['analyzer']] = (int) $d['count'];
-            $this->count();
-        }
+        $res = $this->dump->fetchAnalysersCounts($analyzerList);
+        $atoms = array_merge($atoms, $res->toHash('analyzer', 'count'));
+        $this->count(count($atoms));
 
         $results = $this->extensions;
         foreach($results as &$analyzers) {

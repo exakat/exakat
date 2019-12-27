@@ -31,13 +31,14 @@ class Filedependencieshtml extends Reports {
     private $finalName   = '';
     private $tmpName     = '';
 
-    public function generate($folder, $name= 'dependencies') {
+    public function generate(string $folder, string $name= 'dependencies') : string {
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         copyDir("{$this->config->dir_root}/media/dependencies", $this->tmpName);
 
-        $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE including != included');
+        $res = $this->dump->fetchTable('filesDependencies');
+        $res = array_filter($res->toArray(), function (array $x) { return $x['including'] !== $x['included']; });
 
         $json = new stdClass();
         $json->edges = array();
@@ -45,7 +46,7 @@ class Filedependencieshtml extends Reports {
         $in = array();
         $out = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res as $row) {
             if (isset($json->nodes[$row['including']])){
                 $source = $json->nodes[$row['including']];
                 ++$in[$source];
@@ -92,10 +93,12 @@ class Filedependencieshtml extends Reports {
 
         if (file_exists($this->finalName)) {
             display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
-            return;
+            return '';
         }
 
         rename($this->tmpName, $this->finalName);
+        
+        return '';
     }
 }
 

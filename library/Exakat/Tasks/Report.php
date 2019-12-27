@@ -59,7 +59,7 @@ class Report extends Tasks {
             throw new NoDump($this->config->project);
         }
 
-        $dump = Dump::factory($this->config->dump, Dump::REUSE);
+        $dump = Dump::factory($this->config->dump, Dump::READ);
         $res = $dump->fetchAnalysersCounts(array('Project/Dump'));
         
         if ($res->toInt('count') !== 1) {
