@@ -28,22 +28,21 @@ class Phpconfiguration extends Reports {
     const FILE_EXTENSION = 'ini-dist';
     const FILE_FILENAME  = 'php.suggested';
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
         $final = '';
 
         $themed = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("' . implode('", "', $themed) . '")');
-        $sources = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $sources[$row['analyzer']] = $row['count'];
-            $this->count();
-        }
+        $res = $this->dump->fetchAnalysersCounts($themed);
+        $sources = $res->toHash('analyzer', 'count');
+        $this->count(count($sources));
 
         $shouldDisableFunctions = json_decode(file_get_contents("{$this->config->dir_root}/data/shouldDisableFunction.json"), \JSON_OBJECT_AS_ARRAY);
         $functionsArray = array();
         $classesArray = array();
         foreach($shouldDisableFunctions as $ext => $toDisable) {
-            if ($sources[$ext] == 0) {
+            if (!isset($sources[$ext])) {
+                continue;
+            } elseif ($sources[$ext] == 0) {
                 if (isset($toDisable->functions)) {
                     $functionsArray[] = $toDisable->functions;
                 }
@@ -82,41 +81,28 @@ class Phpconfiguration extends Reports {
                             'trader', 'wincache', 'xcache'
                              );
 
-        $data = array();
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT analyzer FROM resultsCounts 
-    WHERE ( analyzer LIKE "Extensions/Ext%" OR 
-            analyzer IN ("Structures/FileUploadUsage", 
-                         "Php/UsesEnv",
-                         "Php/UseBrowscap",
-                         "Php/DlUsage",
-                         "Security/CantDisableFunction",
-                         "Security/CantDisableClass"
-                         ))
-        AND count > 0
-SQL
-        );
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($row['analyzer'] == 'Structures/FileUploadUsage') {
+        foreach($sources as $analyzer => $count) {
+            if ($analyzer == 'Structures/FileUploadUsage') {
                 $data['File Upload'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/fileupload.json'));
-            } elseif ($row['analyzer'] == 'Php/UsesEnv') {
+            } elseif ($analyzer == 'Php/UsesEnv') {
                 $data['Environment'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/env.json'));
-            } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
+            } elseif ($analyzer == 'Php/ErrorLogUsage') {
                 $data['Error log'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/errorlog.json'));
-            } elseif ($row['analyzer'] === 'Php/UseBrowscap') {
+            } elseif ($analyzer === 'Php/UseBrowscap') {
                 $data['Browscap'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/browscap.json'));
-            } elseif ($row['analyzer'] === 'Php/DlUsage') {
+            } elseif ($analyzer === 'Php/DlUsage') {
                 $data['Dl'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/enable_dl.json'));
-            } elseif ($row['analyzer'] === 'Security/CantDisableFunction' ||
-                      $row['analyzer'] === 'Security/CantDisableClass'
+            } elseif ($analyzer === 'Security/CantDisableFunction' ||
+                      $analyzer === 'Security/CantDisableClass'
                       ) {
-                $res2 = $this->sqlite->query(<<<'SQL'
-SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
-    WHERE analyzer = "Security/CantDisableFunction";
-SQL
-        );
-                $list = $res2->fetchArray(\SQLITE3_NUM);
-                $list = explode(',', $list[0]);
+
+                $res2 = $this->dump->fetchAnalysers(array('Security/CantDisableFunction'));
+                $list = $res2->getColumn('fullcode');
+                $list = array_map(function (string $x) : string {
+                    return substr($x, 0, strpos($x, '('));
+                }, $list);
+                $list = array_unique($list);
+
                 if (isset($disable)) {
                     continue;
                 }
@@ -129,20 +115,19 @@ SQL
                 $data['Disable features'][0]->suggested = implode(', ', $suggestions);
                 $data['Disable features'][0]->documentation .= "\n; " . count($list) . " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
-                $res2 = $this->sqlite->query(<<<'SQL'
-SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
-    WHERE analyzer = "Security/CantDisableClass";
-SQL
-        );
-                $list = $res2->fetchArray(\SQLITE3_NUM);
-                $list = explode(',', $list[0]);
+                $res2 = $this->dump->fetchAnalysers(array('Security/CantDisableClass'));
+                $list = $res2->getColumn('fullcode');
+                $list = array_map(function (string $x) : string {
+                    return substr($x, 0, strpos($x, '('));
+                }, $list);
+                $list = array_unique($list);
                 $suggestions = array_diff($disable['disable_classes'], $list);
 
                 // disable_functions
                 $data['Disable features'][1]->suggested = implode(',', $suggestions);
                 $data['Disable features'][1]->documentation .= "\n; " . count($list) . " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
             } else {
-                $ext = substr($row['analyzer'], 14);
+                $ext = substr($analyzer, 14);
                 if (in_array($ext, $directives)) {
                     $data[$ext] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/' . $ext . '.json'));
                 }

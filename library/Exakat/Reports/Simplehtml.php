@@ -31,7 +31,7 @@ class Simplehtml extends Reports {
     protected $finalName       = null;
     protected $tmpName         = '';
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         if ($name === self::STDOUT) {
             print "Can't produce SimpleHtml format to stdout\n";
             return false;
@@ -59,9 +59,11 @@ class Simplehtml extends Reports {
         file_put_contents("{$this->tmpName}/index.html", $html);
 
         $this->cleanFolder();
+        
+        return '';
     }
 
-    private function makeIntro() {
+    private function makeIntro() : string {
         $date = date('r');
         $text = "<tr><th>Date:</th><td>$date</td></tr>\n";
 
@@ -78,28 +80,26 @@ class Simplehtml extends Reports {
         return $text;
     }
 
-    private function makeSummary($folder) {
+    private function makeSummary(string $folder) : string {
         if (empty($this->config->project_rulesets)) {
             $list = $this->rulesets->getRulesetsAnalyzers($this->config->project_rulesets);
-            $list = makeList($list);
         } elseif (!empty($this->config->program)) {
-            $list = '"' . $this->config->program . '"';
+            $list = array($this->config->program);
         } else {
             $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-            $list = makeList($list);
         }
 
-        $sqlQuery = 'SELECT * FROM resultsCounts WHERE analyzer in (' . $list . ') AND count > 0';
-        $res = $this->sqlite->query($sqlQuery);
+        $analysis = $this->dump->fetchAnalysersCounts($list);
+        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function($x) { return $x >= 1;});
 
-        $text = '';
+        $text = [];
         $titleCache = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($analysis as $row) {
             if (!isset($titleCache[$row['analyzer']])) {
                 $titleCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'name');
             }
 
-            $text .= <<<HTML
+            $text []= <<<HTML
 <tr>
     <td class="SUMM_DESC">{$titleCache[$row['analyzer']]}</td>
     <td class="Q">{$row['count']}</td>
@@ -109,6 +109,7 @@ class Simplehtml extends Reports {
 HTML;
             $this->count();
         }
+        $text = implode(PHP_EOL, $text);
 
         return $text;
     }

@@ -24,18 +24,14 @@ namespace Exakat\Reports\Data;
 
 class CloseNaming extends Data {
     public function prepare() {
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT variable FROM variables 
-    WHERE LENGTH(variable) > 3    AND 
-          NOT(variable LIKE "{%") AND 
-          NOT(variable LIKE "${%") 
-          GROUP BY variable
-SQL
-);
-        $variables = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $variables[] = $row['variable'];
-        }
+        $res = $this->dump->fetchTable('variables');
+        $variables = $res->getColumn('variable');
+        $variables = array_filter($variables, function (string $x) : bool { 
+                                                              return strlen($x) > 3 && 
+                                                                     $x[0] !== '{'  &&
+                                                                     $x[1] !== '$'; 
+                                                                        });
+        $variables = array_unique($variables);
 
         $results = array();
         // Only _ as difference

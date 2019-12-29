@@ -31,13 +31,15 @@ class Classdependencies extends Reports {
     private $finalName   = '';
     private $tmpName     = '';
 
-    public function generate($folder, $name= 'dependencies') {
+    public function generate(string $folder, string $name= 'dependencies') : string {
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         copyDir("{$this->config->dir_root}/media/dependencies", $this->tmpName);
 
-        $res = $this->sqlite->query('SELECT * FROM classesDependencies WHERE including != included LIMIT 3000');
+        $res = $this->dump->fetchTable('classesDependencies');
+        $res = array_slice($res->toArray(), 0, 3000);
+        // This is for security
 
         $json        = new stdClass();
         $json->edges = array();
@@ -47,7 +49,7 @@ class Classdependencies extends Reports {
         $out         = array();
         $properties  = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res as $row) {
             if (isset($json->nodes[$row['including']])){
                 $source = $json->nodes[$row['including']];
                 ++$in[$source];
@@ -99,10 +101,12 @@ class Classdependencies extends Reports {
 
         if (file_exists($this->finalName)) {
             display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
-            return;
+            return '';
         }
 
         rename($this->tmpName, $this->finalName);
+        
+        return '';
     }
 }
 

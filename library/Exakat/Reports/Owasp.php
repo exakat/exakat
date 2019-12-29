@@ -365,96 +365,6 @@ class Owasp extends Ambassador {
         return $html;
     }
 
-    public function getIssuesBreakdown() {
-        $rulesets = array('Code Smells'  => 'Analyze',
-                          'Dead Code'    => 'Dead code',
-                          'Security'     => 'Security',
-                          'Performances' => 'Performances');
-
-        $data = array();
-        foreach ($rulesets AS $key => $categorie) {
-            $list = 'IN ("' . implode('", "', $this->rulesets->getRulesetsAnalyzers($categorie)) . '")';
-            $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
-            $total = $this->sqlite->querySingle($query);
-
-            $data[] = array('label' => $key, 'value' => $total);
-        }
-        // ordonné DESC par valeur
-        uasort($data, function ($a, $b) {
-            if ($a['value'] > $b['value']) {
-                return -1;
-            } elseif ($a['value'] < $b['value']) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
-        $issuesHtml = '';
-        $dataScript = '';
-
-        foreach ($data as $value) {
-            $issuesHtml .= '<div class="clearfix">
-                   <div class="block-cell">' . $value['label'] . '</div>
-                   <div class="block-cell text-center">' . $value['value'] . '</div>
-                 </div>';
-            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
-        }
-        $nb = 4 - count($data);
-        $filler = '<div class="clearfix">
-               <div class="block-cell">&nbsp;</div>
-               <div class="block-cell text-center">&nbsp;</div>
-             </div>';
-        $issuesHtml .= str_repeat($filler, $nb);
-
-        return array('html'   => $issuesHtml,
-                     'script' => $dataScript);
-    }
-
-    public function getSeverityBreakdown() {
-        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = '"' . implode('", "', $list) . '"';
-
-        $query = <<<SQL
-                SELECT severity, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY severity
-                    ORDER BY number DESC
-SQL;
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('label' => $row['severity'],
-                            'value' => $row['number']);
-        }
-
-        $html = '';
-        $dataScript = '';
-        foreach ($data as $value) {
-            $html .= '<div class="clearfix">
-                   <div class="block-cell">' . $value['label'] . '</div>
-                   <div class="block-cell text-center">' . $value['value'] . '</div>
-                 </div>';
-            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
-        }
-        $nb = 4 - count($data);
-        $filler = '<div class="clearfix">
-               <div class="block-cell">&nbsp;</div>
-               <div class="block-cell text-center">&nbsp;</div>
-             </div>';
-        $html .= str_repeat($filler, $nb);
-
-        return array('html' => $html, 'script' => $dataScript);
-    }
-
-    protected function getTotalAnalysedFile() : int {
-        $query = 'SELECT COUNT(DISTINCT file) FROM results';
-        $result = $this->sqlite->query($query);
-
-        $result = $result->fetchArray(\SQLITE3_NUM);
-        return $result[0];
-    }
-
     protected function generateAnalyzers() : void {
         $analysers = $this->getAnalyzersResultsCounts();
 
@@ -477,42 +387,6 @@ SQL;
         $this->putBasedPage('analyzers', $finalHTML);
     }
 
-    protected function getAnalyzersResultsCounts(): array {
-        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = '"' . implode('", "', $list) . '"';
-
-        $result = $this->sqlite->query(<<<SQL
-        SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
-        WHERE analyzer IN ($list)
-        GROUP BY analyzer
-        HAVING Issues > 0
-SQL
-        );
-
-        $return = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $row['label'] = $this->docs->getDocs($row['analyzer'], 'name');
-            $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
-
-            $return[] = $row;
-        }
-
-        return $return;
-    }
-
-    private function getCountFileByAnalyzers($analyzer) {
-        $query = <<<'SQL'
-                SELECT count(*)  AS number
-                FROM (SELECT DISTINCT file FROM results WHERE analyzer = :analyzer)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
-
-        return $row['number'];
-    }
-
     protected function generateFiles(Section $section) : void {
         $files = $this->getFilesResultsCounts();
 
@@ -533,38 +407,6 @@ SQL;
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Files\' list');
 
         $this->putBasedPage('files', $finalHTML);
-    }
-
-    private function getFilesResultsCounts() {
-        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = '"' . implode('", "', $list) . '"';
-
-        $result = $this->sqlite->query(<<<SQL
-SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY file
-SQL
-        );
-        $return = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['file']] = $row;
-        }
-
-        return $return;
-    }
-
-    private function getCountAnalyzersByFile($file) {
-        $query = <<<'SQL'
-                SELECT count(*)  AS number
-                FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, \SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
-
-        return $row['number'];
     }
 
     protected function getFileOverview() {
@@ -597,28 +439,6 @@ SQL;
         );
     }
 
-    protected function getAnalyzersCount($limit) {
-        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = '"' . implode('", "', $list) . '"';
-
-        $query = "SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer in ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC ";
-        if ($limit) {
-            $query .= ' LIMIT ' . $limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'],
-                            'value'    => $row['number']);
-        }
-
-        return $data;
-    }
-
     protected function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
@@ -648,41 +468,6 @@ SQL;
             'scriptDataAnalyzerNone'     => $dataNone,
             'scriptDataAnalyzerMinor'    => $dataMinor
         );
-    }
-
-    protected function generateCompatibility(Section $section, $version) : void {
-        $compatibility = '';
-
-        $list = $this->rulesets->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
-
-        $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
-        $counts = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['counts'];
-        }
-
-        foreach($list as $l) {
-            $ini = $this->docs->getDocs($l);
-            if (isset($counts[$l])) {
-                $result = (int) $counts[$l];
-            } else {
-                $result = -1;
-            }
-            $result = $this->Compatibility($result);
-            $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
-            $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
-        }
-
-        $description = <<<'HTML'
-<i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
-HTML;
-
-        $html = $this->getBasedPage('compatibility');
-        $html = $this->injectBloc($html, 'COMPATIBILITY', $compatibility);
-        $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP ' . $version[0] . '.' . $version[1]);
-        $html = $this->injectBloc($html, 'DESCRIPTION', $description);
-        $this->putBasedPage('compatibility_php' . $version, $html);
     }
 
     protected function compatibility($count, $analyzer = '') {

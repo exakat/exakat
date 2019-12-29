@@ -27,16 +27,8 @@ class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'exakat.uml';
 
-    public function _generate($analyzerList) {
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, cit.id, extends, type, namespace, 
-       (SELECT GROUP_CONCAT(method,   "||")   FROM methods    WHERE citId = cit.id) AS methods,
-       (SELECT GROUP_CONCAT( case when value != '' then property || " = " || substr(value, 0, 40) else property end, "||") FROM properties WHERE citId = cit.id) AS properties
-    FROM cit
-    JOIN namespaces
-        ON namespaces.id = cit.namespaceId
-SQL
-        );
+    public function _generate(array $analyzerList) : string {
+        $res = $this->dump->fetchTableUml();
         $id = 0;
         $ids = array();
         $dot = array();
@@ -47,7 +39,7 @@ SQL
                         'native'    => 'brown1',
                         );
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             ++$id;
             if (empty($row['properties'])) {
                 $row['properties'] = '+&nbsp;' . str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties'])) . "<br align='left'/>";
@@ -92,11 +84,8 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT implementing, implements, type FROM cit_implements
-SQL
-        );
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchTable('cit_implements');
+        foreach($res->toArray() as $row) {
             if (!isset($ids[$row['implements']])) {
                 $ids[$row['implements']] = $row['implements'];
             }

@@ -47,16 +47,18 @@ class Phpcsfixer extends Reports {
                      );
     }
 
-    protected function _generate($analyzerList) {
+    protected function _generate(array $analyzerList) : string {
         $themed = $this->rulesets->getRulesetsAnalyzers($this->dependsOnAnalysis());
 
-        $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ') AND count >= 1');
+        $analysis = $this->dump->fetchAnalysersCounts($themed);
+        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function($x) { return $x >= 1;});
+
         $rules = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $name = "'" . $this->matches[$row['analyzer']] . "'";
+        foreach($analysis as $analyzer => $count) {
+            $name = "'" . $this->matches[$analyzer] . "'";
             $rules[] = sprintf('            %- 30s => true,', $name);
-            $this->count();
         }
+        $this->count(count($analysis));
         natcasesort($rules);
 
         $date = date('Y-m-d h:i:j');

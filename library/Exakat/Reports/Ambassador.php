@@ -1486,7 +1486,7 @@ JAVASCRIPT;
         }
 
         // analyzer
-        list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
+        list($totalAnalyzerUsed, $totalAnalyzerReporting) = array_values($this->getTotalAnalyzer());
         $totalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
         if ($totalAnalyzerUsed > 0) {
             $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
@@ -1636,26 +1636,14 @@ HTML;
                      'script' => $dataScript);
     }
 
-    protected function getTotalAnalysedFile() {
+    protected function getTotalAnalysedFile() : int {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
 
-        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer IN ($list)";
-        $result = $this->sqlite->query($query);
-
-        $result = $result->fetchArray(\SQLITE3_NUM);
-        return $result[0];
+        return $this->dump->getAnalyzedFiles($list);
     }
 
-    protected function getTotalAnalyzer($issues = false) {
-        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
-            FROM resultsCounts AS rc
-            WHERE rc.count >= 0';
-
-        $stmt = $this->sqlite->prepare($query);
-        $result = $stmt->execute();
-
-        return $result->fetchArray(\SQLITE3_NUM);
+    protected function getTotalAnalyzer() : array {
+        return $this->dump->getTotalAnalyzer();
     }
 
     protected function generateAnalyzers() {

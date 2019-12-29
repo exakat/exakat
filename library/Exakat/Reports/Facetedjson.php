@@ -22,25 +22,15 @@
 
 namespace Exakat\Reports;
 
-
 class Facetedjson extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'faceted';
 
-    public function generate($dirName, $fileName = null) {
-        $sqlQuery = <<<SQL
-SELECT  id AS id,
-        fullcode AS code, 
-        file AS file, 
-        line AS line,
-        analyzer AS analyzer
-    FROM results 
-    WHERE analyzer IN $this->themesList
-SQL;
-        $res = $this->sqlite->query($sqlQuery);
+    public function generate(string $dirName, string $fileName = null) : string {
+        $res = $this->dump->fetchAnalysers($this->themesToShow);
 
         $items = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $ini = $this->docs->getDocs($row['analyzer']);
             $row['error'] = $ini['name'];
 
@@ -59,7 +49,7 @@ SQL;
             return $json;
         } else {
             file_put_contents($dirName . '/' . $fileName . '.' . self::FILE_EXTENSION, json_encode($items));
-            return true;
+            return '';
         }
     }
 }

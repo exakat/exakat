@@ -48,15 +48,17 @@ class Rector extends Reports {
                      );
     }
 
-    protected function _generate($analyzerList) {
+    protected function _generate(array $analyzerList) : string {
         $themed = $this->rulesets->getRulesetsAnalyzers($this->dependsOnAnalysis());
 
-        $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ') AND count >= 1');
+        $analysis = $this->dump->fetchAnalysersCounts($themed);
+        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function($x) { return $x >= 1;});
+
         $services = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $services[] = $this->matches[$row['analyzer']];
-            $this->count();
+        foreach($analysis as $analyzer => $count) {
+            $services[] = $this->matches[$analyzer];
         }
+        $this->count(count($services));
 
         $date = date('Y-m-d h:i:j');
         $version = Exakat::VERSION . '- build ' . Exakat::BUILD;

@@ -28,10 +28,10 @@ class Inventories extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'inventories';
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         if ($name == self::STDOUT) {
             print "Can't produce Inventories format to stdout\n";
-            return false;
+            return '';
         }
 
         $path = "$folder/$name";
@@ -49,7 +49,7 @@ class Inventories extends Reports {
         $this->saveInventory('Namespaces/Namespacesnames',   "$folder/$name/namespaces.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/exceptions.csv");
 
-        $this->saveTable(    'variables',                     "$folder/$name/variables.csv");
+        $this->saveTable(    'variables',                     "$folder/$name/variables.csv", array('variable', 'type'));
         $this->saveInventory('Php/IncomingVariables',         "$folder/$name/incomingGPC.csv");
         $this->saveInventory('Php/SessionVariables',          "$folder/$name/sessions.csv");
         $this->saveInventory('Variables/GlobalVariables',     "$folder/$name/globals.csv");
@@ -76,65 +76,54 @@ class Inventories extends Reports {
 
         $this->saveTable('globalVariables',       "$path/globals.csv", array('variable', 'file', 'line', 'isRead', 'isModified', 'type'));
         $this->saveTable('inclusions',       "$path/inclusions.csv", array('including', 'included'));
+        
+        return '';
     }
 
-    private function saveInventory($analyzer, $file) {
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="' . $analyzer . '"');
+    private function saveInventory(string $analyzer, string $file) : void {
+        $res = $this->dump->fetchAnalysers(array($analyzer));
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
-        $step = 0;
-        while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            ++$step;
+        foreach($res->toArray() as $row) {
             fputcsv($fp, $row);
         }
-        $this->count($step);
+        $this->count($res->getCount());
         fclose($fp);
     }
 
-    private function saveAtom($atom, $file) {
-        $res = $this->sqlite->query('SELECT name, file, line FROM literal' . $atom);
-        if ($res === false) {
+    private function saveAtom(string $atom, string $file) : void {
+        $res = $this->dump->fetchTable('literal' . $atom);
+        if ($res->isEmpty() === true) {
             file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
             return;
         }
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
-        $step = 0;
-        while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            ++$step;
+        foreach($res->toArray() as $row) {
             fputcsv($fp, $row);
         }
-        $this->count($step);
+        $this->count($res->getCount());
         fclose($fp);
     }
 
-    private function saveTable($table, $file, $columns = 'variable, type') {
-        if (is_array($columns)) {
-            $columns = implode(', ', $columns);
+    private function saveTable(string $table, string $file, array $columns) : void {
+        $res = $this->dump->fetchTable($table);
+        if ($res->isEmpty() === true) {
+            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
+            return ;
         }
 
-        $res = $this->sqlite->query("SELECT $columns FROM $table");
-        if ($res === false) {
-            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
-            return;
-        }
-        $step = 0;
-        $row = $res->fetchArray(\SQLITE3_ASSOC);
-        if ($row === false) {
-            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
-            return;
-        }
         $fp = fopen($file, 'w+');
+        fputcsv($fp, $columns);
 
-        ++$step;
-        fputcsv($fp, array_keys($row));
-        fputcsv($fp, $row);
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            ++$step;
-            fputcsv($fp, $row);
+        foreach($res->toArray() as $row) {
+            $r = array();
+            foreach($columns as $c) {
+                $r[$c] = $row[$c];
+            }
+            fputcsv($fp, $r);
         }
-        $this->count($step);
+        $this->count($res->getCount());
         fclose($fp);
     }
 

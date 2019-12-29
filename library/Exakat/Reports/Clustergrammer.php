@@ -27,13 +27,15 @@ class Clustergrammer extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'clustergrammer';
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         $analyzers = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         display( count($analyzers) . " analyzers\n");
 
-        $res = $this->sqlite->query('SELECT distinct analyzer FROM results WHERE analyzer IN ("' . implode('","', $analyzers) . '") ORDER BY analyzer');
+        $res = $this->dump->fetchAnalysers($analyzers);
+        $byAnalyzer = $res->toArray();
+        uksort($byAnalyzer, function ($a, $b) : bool { return $a['analyzer'] <=> $b['analyzer']; } );
         $skeleton = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($byAnalyzer as $row) {
             $skeleton[$row['analyzer']] = 0;
         }
         display( count($skeleton) . " distinct analyzers\n");
@@ -46,9 +48,10 @@ class Clustergrammer extends Reports {
         }
 
         $all = array();
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer IN ("' . implode('","', $analyzers) . '") ORDER BY file');
+        $byFile = $res->toArray();
+        uksort($byFile, function ($a, $b) : bool { return $a['file'] <=> $b['file']; } );
         $total = 0;
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($byFile as $row) {
             if (!isset($all[$row['file']])) {
                 $all[$row['file']] = $skeleton;
             }
@@ -63,12 +66,13 @@ class Clustergrammer extends Reports {
         }
 
         if ($name === self::STDOUT) {
-            echo $txt;
+            return $txt;
         } else {
             file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $txt);
 
             display( count($all) . " issues reported\n");
             print 'Upload ' . $name . '.' . self::FILE_EXTENSION . " on http://amp.pharm.mssm.edu/clustergrammer/\n";
+            return '';
         }
     }
 }

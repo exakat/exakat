@@ -27,12 +27,11 @@ class BeautyCanon extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = self::STDOUT;
 
-    public function _generate($analyzerList) {
-        $list = makeList($analyzerList);
-        $res = $this->sqlite->query("SELECT * FROM resultsCounts WHERE analyzer IN ($list) AND count = 0");
+    public function _generate(array $analyzerList) : string {
+        $res = $this->dump->fetchAnalysers($analyzerList);
 
         $results = array();
-        while( $row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $results []= sprintf('%- 70s %- 40s', $this->docs->getDocs($row['analyzer'], 'name'), $row['analyzer']);
         }
 

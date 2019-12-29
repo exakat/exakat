@@ -27,9 +27,8 @@ class Onepagejson extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'onepage';
 
-    public function generate($folder, $name = null) {
-        $sqlQuery = "SELECT * FROM results WHERE analyzer in $this->themesList";
-        $res = $this->sqlite->query($sqlQuery);
+    public function generate(string $folder, string $name = null) : string {
+        $res = $this->dump->fetchAnalysers($this->themesToShow);
 
         $results = array();
         $titleCache = array();
@@ -37,7 +36,7 @@ class Onepagejson extends Reports {
 
         $results = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
 
             if (isset($titleCache[$row['analyzer']])) {
                 $clearphp = '';
@@ -65,7 +64,7 @@ class Onepagejson extends Reports {
             return json_encode($results);
         } else {
             file_put_contents("$folder/$name." . self::FILE_EXTENSION, json_encode($results));
-            return true;
+            return '';
         }
     }
 }

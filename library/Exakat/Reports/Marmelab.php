@@ -32,20 +32,18 @@ class Marmelab extends Reports {
                     );
     }
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         $rulesets = $this->config->project_rulesets ?? $this->dependsOnAnalysis();
 
         $list = $this->rulesets->getRulesetsAnalyzers($rulesets);
-        $list = makeList($list);
 
         $analyzers = array();
         $files     = array();
 
-        $sqlQuery = "SELECT id, fullcode, file, line, analyzer FROM results WHERE analyzer in ($list)";
-        $res = $this->sqlite->query($sqlQuery);
+        $res = $this->dump->fetchAnalysers($list);
 
         $results = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!isset($analyzers[$row['analyzer']])) {
                 $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
 
@@ -82,9 +80,10 @@ class Marmelab extends Reports {
                                  );
 
         if ($name === self::STDOUT) {
-            echo json_encode($results, \JSON_PRETTY_PRINT);
+            return json_encode($results, \JSON_PRETTY_PRINT);
         } else {
             file_put_contents("$folder/$name." . self::FILE_EXTENSION, json_encode($results, \JSON_PRETTY_PRINT));
+            return '';
         }
     }
 }

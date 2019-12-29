@@ -30,32 +30,24 @@ class Dailytodo extends Reports {
     private $tmpName     = '';
     private $finalName   = '';
 
-    public function generate($folder, $name= 'todo') {
+    public function generate(string $folder, string $name= 'todo') : string {
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->initFolder();
         $this->generateData($folder);
         $this->cleanFolder();
+
+        return '';
     }
 
     private function generateData($folder, $name = 'table') {
         $project_rulesets = $this->config->project_rulesets ?? array('Analyzer');
         $list = $this->rulesets->getRulesetsAnalyzers($project_rulesets);
-        $list = makeList($list);
 
-        $sqlQuery = "SELECT count(*) AS nb FROM results WHERE analyzer in ($list)";
-        $res = $this->sqlite->query($sqlQuery);
-        $row = $res->fetchArray(\SQLITE3_ASSOC);
-        $total = $row['nb'];
-        $reporting = 10;
-
-        $all = array();
-        $sqlQuery = "SELECT * FROM results WHERE analyzer in ($list)";
-        $res = $this->sqlite->query($sqlQuery);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)){
-            $all[] = $row;
-        }
+        $res = $this->dump->fetchAnalysersCounts($list);
+        $total = $res->getCount();
+        $all = $res->toArray();
 
         if (empty($all)) {
             return;
@@ -119,7 +111,7 @@ HTML;
 
     private function initFolder() {
         if ($this->finalName === 'stdout') {
-            return "Can't produce Simpletable format to stdout";
+            return "Can't produce Dailytodo format to stdout";
         }
 
         // Clean temporary destination
@@ -128,10 +120,10 @@ HTML;
         }
 
         // Copy template
-        copyDir("{$this->config->dir_root}/media/tabler", $this->tmpName );
+        copyDir("{$this->config->dir_root}/media/tabler", $this->tmpName);
     }
 
-    private function cleanFolder() {
+    private function cleanFolder() : void {
         if (file_exists($this->finalName)) {
             rename($this->finalName, $this->tmpName . '2');
         }
@@ -143,7 +135,7 @@ HTML;
         }
     }
 
-    private function syntaxColoring($source) {
+    private function syntaxColoring(string $source) : string {
         $colored = highlight_string('<?php ' . $source . ' ;?>', \RETURN_VALUE);
         $colored = substr($colored, 79, -65);
 
@@ -154,7 +146,7 @@ HTML;
         return $colored;
     }
 
-    private function getThanks() {
+    private function getThanks() : string {
         $thanks = parse_ini_file("{$this->config->dir_root}/data/thankyou.ini", \INI_PROCESS_SECTIONS);
         $thanks = $thanks['thanks'];
         shuffle($thanks);
