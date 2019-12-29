@@ -126,12 +126,16 @@ class Results {
             $this->load();
         }
 
+        if (empty($this->values)) {
+            return 0;
+        }
+
         if ($col === '') {
             $first = array_keys($this->values[0])[0];
             return (int) $this->values[0][$first];
-        } else {
-            return (int) ($this->values[0][$col] ?? 0);
         }
+        
+        return (int) ($this->values[0][$col] ?? 0);
     }
 
     public function toHash($key, $value) : array {

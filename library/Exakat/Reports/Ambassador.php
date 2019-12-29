@@ -153,7 +153,7 @@ class Ambassador extends Reports {
         return $menu;
     }
 
-    protected function getBasedPage($file) {
+    protected function getBasedPage(string $file) : string {
         if (empty($this->baseHTML)) {
             $this->baseHtml = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
 
@@ -173,8 +173,7 @@ class Ambassador extends Reports {
                 if (strpos($fileName, '/') === false) {
                     $inventory_name = $fileName;
                 } else {
-                    $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
-                    $total = $this->sqlite->querySingle($query);
+                    $total = $this->dump->fetchAnalysersCounts(array($fileName))->toInt();
                     if ($total < 1) {
                         continue;
                     }
@@ -184,16 +183,14 @@ class Ambassador extends Reports {
             }
 
             $compatibilities = array();
-            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
-            while($row = $res->fetchArray(\SQLITE3_NUM)) {
-                $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
-            }
-
+            $rulesets = $this->dump->fetchTable('themas')->getColumn('thema');
+            $rulesets = array_filter($rulesets, function(string $x) : bool { return substr($x, 0, 13) === 'Compatibility';});
+            $compatibilities = array_map(function(string $x) : string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";}, $rulesets);
+            
             $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
             $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
             $this->baseHtml = $this->injectBloc($this->baseHtml, 'SIDEBARMENU', $menu);
         }
-
 
         if (!file_exists("{$this->config->dir_root}/media/devfaceted/data/$file.html")) {
             return '';
@@ -219,15 +216,15 @@ class Ambassador extends Reports {
         return str_replace('{{' . $bloc . '}}', $content, $html);
     }
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         if ($name === self::STDOUT) {
             print "Can't produce Ambassador format to stdout\n";
-            return false;
+            return '';
         }
 
         if ($missing = $this->checkMissingRulesets()) {
             print "Can't produce Ambassador format. There are " . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";
-            return false;
+            return '';
         }
 
         $this->finalName = "$folder/$name";
@@ -251,6 +248,7 @@ class Ambassador extends Reports {
         }
 
         $this->cleanFolder();
+        return '';
     }
 
     protected function initFolder() {
@@ -2060,14 +2058,12 @@ SQL;
         $this->generateIssuesEngine($section, $diff);
     }
 
-    protected function generateIssuesEngine(Section $section, $issues = array()) {
-        if (!empty($issues)) {
-            // Nothing, really
-        } elseif (is_array($section->ruleset)) {
-            $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($section->ruleset));
-        } else {
-            $issues = $this->getIssuesFaceted($section->ruleset);
+    protected function generateIssuesEngine(Section $section, array $issues = array()) : void {
+        if (empty($issues)) {
+            return;
         }
+
+        $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($section->ruleset));
         $total = count($issues);
         $issues = implode(', ' . PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
@@ -2135,11 +2131,11 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function getIssuesFaceted($ruleset) {
-        return $this->getIssuesFacetedDb($ruleset, $this->sqlite);
+    protected function getIssuesFaceted(array $ruleset) {
+        return $this->getIssuesFacetedDb($ruleset);
     }
 
-    public function getNewIssuesFaceted($ruleset, $path) {
+    public function getNewIssuesFaceted(array $ruleset, $path) {
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
 
@@ -2174,24 +2170,10 @@ JAVASCRIPTCODE;
         return $oldIssues;
     }
 
-    public function getIssuesFacetedDb($ruleset, \Sqlite3 $sqlite) {
-        if (is_string($ruleset)) {
-            $list = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
-        } else {
-            $list = $ruleset;
-        }
-        $list = makeList($list, "'");
-
-        $sqlQuery = <<<SQL
-SELECT fullcode, file, line, analyzer
-    FROM results
-    WHERE analyzer IN ($list) AND
-         fullcode != "Not Compatible With PHP Version" AND
-         fullcode != "Not Compatible With PHP Configuration"
-    ORDER BY file, line
-
-SQL;
-        $result = $sqlite->query($sqlQuery);
+    public function getIssuesFacetedDb(array $ruleset) {
+        $results = $this->dump->fetchAnalysers($ruleset);
+        $results = $results->toArray();
+        $results = array_filter(function (string $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); }, $results);
 
         $TTFColors = array('Instant'  => '#5f492d',
                            'Quick'    => '#e8d568',
@@ -2206,7 +2188,7 @@ SQL;
                                 );
 
         $items = array();
-        while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($results as $row) {
             $item = array();
             $ini = $this->docs->getDocs($row['analyzer']);
             $item['analyzer']       = $ini['name'];

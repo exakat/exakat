@@ -110,13 +110,13 @@ class Owasp extends Ambassador {
     'Structures/Fallthrough',
 ));
 
-    public function __construct($config) {
+    public function __construct(Config $config) {
         parent::__construct($config);
 
         $this->themesToShow      = array('Security');
     }
 
-    private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter) {
+    private function getLinesFromFile(string $filePath, int $lineNumber, int $numberBeforeAndAfter) : array {
         --$lineNumber; // array index
         $lines = array();
         if (file_exists($this->config->projects_root . '/projects/' . $this->config->project . '/code/' . $filePath)) {
@@ -144,10 +144,11 @@ class Owasp extends Ambassador {
                     );
             }
         }
+
         return $lines;
     }
 
-    private function generateOwaspDocumentation() {
+    private function generateOwaspDocumentation() : void {
         $baseHTML = $this->getBasedPage('analyses_doc');
 
         $owasp = json_decode(file_get_contents($this->config->dir_root . '/data/owasp.top10.json'));
@@ -170,7 +171,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage('owasp_doc', $finalHTML);
     }
 
-    protected function generateDetailledDashboard(Section $section) {
+    protected function generateDetailledDashboard(Section $section) : void {
         $levels = '';
 
         foreach($this->components as $group => $analyzers) {
@@ -184,15 +185,11 @@ class Owasp extends Ambassador {
                        $levelRows;
                 continue;
             }
-            $analyzersList = makeList($analyzers);
 
-            $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
-SQL
-);
+            $res = $this->dump->fetchAnalysersCounts($analyzers);
             $count = 0;
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = $this->docs->getDocs($row['name']);
+            foreach($res->toArray() as $row) {
+                $ini = $this->docs->getDocs($row['analyzer']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -211,7 +208,7 @@ SQL
                 $total += $row['count'];
                 $count += (int) ($row['count'] === 0);
 
-                $levelRows .= "<tr><td><a href=\"issues.html#analyzer={$this->toId($row['name'])}\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]; color: white; font-weight: bold; font-size: 20; text-align: center; \">$row[grade]</td></tr>\n";
+                $levelRows .= "<tr><td><a href=\"issues.html#analyzer={$this->toId($row['analyzer'])}\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]; color: white; font-weight: bold; font-size: 20; text-align: center; \">$row[grade]</td></tr>\n";
             }
 
             if ($total === 0) {
@@ -235,7 +232,7 @@ SQL
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateDashboard(Section $section) {
+    protected function generateDashboard(Section $section) : void {
         $levels = '';
 
         foreach($this->components as $group => $analyzers) {
@@ -246,13 +243,13 @@ SQL
             }
             $analyzersList = makeList($analyzers);
 
-            $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
-SQL
-);
-            $count = 0;
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = $this->docs->getDocs($row['name']);
+            $res = $this->dump->fetchAnalysersCounts($analyzers);
+            $sources = array_filter($res->toHash('analyzer', 'count'), function($x) { return $x > -1;});
+            asort($sources);
+
+            $empty = 0;
+            foreach($sources as $name => $count) {
+                $ini = $this->docs->getDocs($name);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -260,16 +257,16 @@ SQL
 #7FFF00	Average-Good
 #00FF00	Good
 
-                if ($row['count'] == 0) {
-                    $row['grade'] = 'A';
+                if ($count == 0) {
+                    $grade = 'A';
                 } else {
-                    $grade = min(ceil(log($row['count']) / log(count(self::COLORS))), count(self::COLORS) - 1);
-                    $row['grade'] = chr(66 + $grade - 1); // B to F
+                    $grade = min(ceil(log($count) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                    $grade = chr(66 + $grade - 1); // B to F
                 }
-                $row['color'] = self::COLORS[$row['grade']];
+                $color = self::COLORS[$grade];
 
-                $total += $row['count'];
-                $count += (int) $row['count'] === 0;
+                $total += $count;
+                $empty += (int) $empty === 0;
             }
 
             if ($total === 0) {
@@ -450,7 +447,7 @@ SQL;
         return array('html' => $html, 'script' => $dataScript);
     }
 
-    protected function getTotalAnalysedFile() {
+    protected function getTotalAnalysedFile() : int {
         $query = 'SELECT COUNT(DISTINCT file) FROM results';
         $result = $this->sqlite->query($query);
 
@@ -458,7 +455,7 @@ SQL;
         return $result[0];
     }
 
-    protected function generateAnalyzers() {
+    protected function generateAnalyzers() : void {
         $analysers = $this->getAnalyzersResultsCounts();
 
         $baseHTML = $this->getBasedPage('analyzers');
@@ -516,7 +513,7 @@ SQL;
         return $row['number'];
     }
 
-    protected function generateFiles(Section $section) {
+    protected function generateFiles(Section $section) : void {
         $files = $this->getFilesResultsCounts();
 
         $baseHTML = $this->getBasedPage('files');
@@ -653,7 +650,7 @@ SQL;
         );
     }
 
-    protected function generateCompatibility(Section $section, $version) {
+    protected function generateCompatibility(Section $section, $version) : void {
         $compatibility = '';
 
         $list = $this->rulesets->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));

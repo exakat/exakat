@@ -31,7 +31,7 @@ class Codeflower extends Reports {
     private $tmpName     = '';
     private $finalName   = '';
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         if ($name === self::STDOUT) {
             print "Can't produce Codeflower format to stdout\n";
             return false;
@@ -47,14 +47,16 @@ class Codeflower extends Reports {
         $this->getClassHierarchy();
 
         $this->cleanFolder();
+        
+        return '';
     }
 
-    private function getFileDependencies() {
+    private function getFileDependencies() : void {
         $all = $this->dump->fetchTable('filesDependencies', array('including' => 'DISTINCT including',
                                                                   'included', 
                                                                    'type'))->toArray();
         
-        $all = array_filter($all, function($x) { return $x['type'] === 'extends' && $x['including'] !== $x['included']; });
+        $all = array_filter($all, function(array $x) { return $x['type'] === 'extends' && $x['including'] !== $x['included']; });
         
         $files = array();
         foreach($all as $a) {
@@ -89,18 +91,12 @@ class Codeflower extends Reports {
         $this->select['By inclusions'] = 'inclusions.json';
     }
 
-    private function getClassHierarchy() {
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, cit.id AS id, extends, type, namespace
-    FROM cit
-    JOIN namespaces
-        ON namespaces.id = cit.namespaceId
-SQL
-        );
+    private function getClassHierarchy() : void {
+        $res = $this->dump->fetchTableCit();
 
         $classes = array();
         $classesId = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $class = $row['namespace'] . '\\' . $row['name'];
             $classes[$row['extends']][$class] = array();
 
@@ -155,21 +151,16 @@ SQL
         $this->select['By class hierarchy'] = 'classes.json';
     }
 
-    private function getNamespaces() {
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, cit.id, extends, type, namespace
-    FROM cit
-    JOIN namespaces
-        ON namespaces.id = cit.namespaceId
-SQL
-        );
+    private function getNamespaces() :void {
+        $res = $this->dump->fetchTableCit();
 
         $root = new \stdClass();
         $root->name = '\\';
         $root->size = 200;
         $root->children = array();
         $ns = array('' => $root);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+
+        foreach($res->toArray() as $row) {
             $c = new \stdClass();
             $c->name = $row['namespace'] . '\\' . $row['name'];
             $c->type = $row['type'];
@@ -205,7 +196,7 @@ SQL
         $this->select['By namespace'] = 'namespaces.json';
     }
 
-    private function initFolder() {
+    private function initFolder() : void {
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);
@@ -215,7 +206,7 @@ SQL
         copyDir($this->config->dir_root . '/media/codeflower', $this->tmpName );
     }
 
-    private function cleanFolder() {
+    private function cleanFolder() : void {
         $html = file_get_contents($this->tmpName . '/index.html');
         $select = '';
         foreach($this->select as $name => $file) {
