@@ -125,8 +125,11 @@ SQL
         $res = $this->sqlite->query(<<<SQL
 SELECT cit.*, 
        cit.type AS type, 
+       namespace,
 
-       ( SELECT GROUP_CONCAT(CASE WHEN cit5.id IS NULL THEN traits.implements ELSE cit5.name END, ',') FROM cit_implements AS traits
+       ( SELECT GROUP_CONCAT(CASE WHEN cit5.id IS NULL THEN traits.implements ELSE cit5.name END, ',') 
+       
+       FROM cit_implements AS traits
 LEFT JOIN cit cit5
     ON traits.implements = cit5.id
     WHERE traits.implementing = cit.id AND
@@ -150,6 +153,8 @@ LEFT JOIN cit_implements AS interfaces
        interfaces.type = 'implements'
 LEFT JOIN cit cit4
     ON interfaces.implements = cit4.id
+LEFT JOIN namespaces
+    ON namespaces.id = cit.namespaceId
 
 
 GROUP BY cit.id
@@ -158,6 +163,73 @@ SQL
 
         return new Results($res);
     }
+    
+    public function fetchTablePhpcity() : Results {
+        $query = <<<'SQL'
+SELECT
+     cit.id,
+     files.file AS file,
+     namespaces.namespace AS namespace,
+     name,
+     extends,
+     (SELECT GROUP_CONCAT(implements) FROM cit_implements WHERE cit_implements.implementing = cit.id) AS implements,
+     end - begin AS no_lines,
+     (SELECT COUNT(*) FROM properties WHERE properties.citId = cit.id) AS no_attrs,
+     (SELECT COUNT(*) FROM methods WHERE methods.citId = cit.id) AS no_methods,
+     CASE type 
+           WHEN 'trait' 
+               THEN 1 
+           ELSE 0 END AS trait,
+     abstract,
+     final,
+     'class' AS type
+        
+     FROM cit
+     JOIN namespaces
+        ON namespaces.id = cit.namespaceId
+     JOIN files
+       ON cit.file = files.id
+SQL;
+        $res = $this->sqlite->query($query);
+
+        return new Results($res);
+    }
+
+    public function fetchTableUml() : Results {
+        $query = <<<'SQL'
+SELECT name, cit.id, extends, type, namespace, 
+       (SELECT GROUP_CONCAT(method,   "||")   FROM methods    WHERE citId = cit.id) AS methods,
+       (SELECT GROUP_CONCAT( case when value != '' then property || " = " || substr(value, 0, 40) else property end, "||") FROM properties WHERE citId = cit.id) AS properties
+    FROM cit
+    JOIN namespaces
+        ON namespaces.id = cit.namespaceId
+SQL;
+        $res = $this->sqlite->query($query);
+
+        return new Results($res);
+    }
+    
+    public function getAnalyzedFiles(array $list) : int {
+        $list = makeList($list);
+
+        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer IN ($list)";
+        $result = $this->sqlite->querySingle($query);
+
+        return $result;
+    }
+
+    public function getTotalAnalyzer() : array {
+        $query = <<<SQL
+SELECT COUNT(*) AS total, 
+       COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
+    FROM resultsCounts AS rc
+    WHERE rc.count >= 0
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return $result->fetchArray(\SQLITE3_ASSOC);
+    }
+
 }
 
 ?>
