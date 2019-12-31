@@ -27,10 +27,8 @@ class FileDependencies extends Reports {
     const FILE_FILENAME  = 'filedependencies';
 
     public function generate($folder, $name= 'dependencies') {
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT * FROM filesDependencies WHERE including != included
-SQL
-);
+        $res = $this->dump->fetchTable('filesDependencies');
+        $res = array_filter($res->toArray(), function (array $x) { return $x['including'] !== $x['included']; });
 
         $colors = array('include'          => 'green',
                         'staticmethodcall' => 'purple',
@@ -50,7 +48,7 @@ SQL
         $cnodes = 0;
 
         $list = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (isset($nodes[$row['including']])) {
                 $row['including'] = $nodes[$row['including']];
             } else {

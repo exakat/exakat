@@ -28,12 +28,12 @@ class Drillinstructor extends Ambassador {
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Drillinstructor';
 
-    protected function generateLevel(Section $section) {
+    protected function generateLevel(Section $section) : void {
         $this->generateIssuesEngine($section,
-                                    $this->getIssuesFaceted('Level 1'));
+                                    $this->getIssuesFaceted(array('Level 1')));
     }
 
-    protected function generateLevels(Section $section) {
+    protected function generateLevels(Section $section) : void {
         $levels = '';
 
         foreach(range(1, 6) as $level) {
@@ -43,12 +43,9 @@ class Drillinstructor extends Ambassador {
             if (empty($analyzers)) {
                 continue;
             }
-            $analyzersList = makeList($analyzers);
 
-            $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
-SQL
-);
+            $res = $this->dump->fetchAnalysersCounts($analyzers);
+
             $colors = array('A' => '#00FF00',
                             'B' => '#32CC00',
                             'C' => '#669900',
@@ -57,8 +54,8 @@ SQL
                             'F' => '#FF0000',
                             );
             $count = 0;
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = $this->docs->getDocs($row['name']);
+            foreach($res->toArray() as $row) {
+                $ini = $this->docs->getDocs($row['analyzer']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average

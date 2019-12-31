@@ -35,7 +35,7 @@ class Manual extends Reports {
                              'Empty'       => array(),
                              );
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
         $md = '';
 
         $md .= 'Introduction' . PHP_EOL . PHP_EOL;
@@ -92,9 +92,9 @@ class Manual extends Reports {
     private function generateFolders() {
         $folders = '';
 
-        $res = $this->sqlite->query('SELECT * FROM files ORDER BY file');
+        $res = $this->dump->fetchTable('files');
         $paths = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (empty($row['file'])) {
                 continue;
             }
@@ -173,27 +173,19 @@ class Manual extends Reports {
         return implode("\n+ ", $array);
     }
 
-    private function escapeMd($string) {
+    private function escapeMd(string $string) : string {
         return str_replace('_', '\\_', $string);
     }
 
-    private function generateConstants() {
+    private function generateConstants() : string {
         $total = 0;
         $constants = '';
         $md = '';
 
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT cit.name AS class, classconstants.constant AS constant, value 
-FROM classconstants 
-JOIN cit 
-    ON cit.id = classconstants.citId
-
-    ORDER BY cit.name, classconstants.constant, value
-SQL
-);
+        $res = $this->dump->fetchTableClassConstants();
 
         $previousClass = '';
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if ($previousClass !== $row['class']) {
                 $constants .= '+ `' . $row['class'] . '`' . PHP_EOL;
                 $previousClass = $row['class'];
@@ -219,8 +211,8 @@ SQL
         $expressions = '';
         $md = '';
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Structures/DynamicCalls"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchAnalysers(array('Structures/DynamicCalls'));
+        foreach($res->toArray() as $row) {
             $expressions .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
             ++$total;
         }
@@ -242,8 +234,8 @@ SQL
         $errors = '';
         $md = '';
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Structures/ErrorMessages"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
+        foreach($res->toArray() as $row) {
             $errors .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
             ++$total;
         }
@@ -288,13 +280,13 @@ SQL
         return $this->generateGeneric('Type/Mime', 'Mime type');
     }
 
-    private function generateGeneric($analyzer, $name, $section = 'Values') {
+    private function generateGeneric(string $analyzer, string $name, string $section = 'Values') : string {
         $total = 0;
         $url = '';
         $md = '';
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="' . $analyzer . '" ORDER BY fullcode');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchAnalysers(array($analyzer));
+        foreach($res->toArray() as $row) {
             $url .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
             ++$total;
         }
@@ -313,7 +305,7 @@ SQL
        return $md;
     }
 
-    private function generateRegex() {
+    private function generateRegex() : string {
         return $this->generateGeneric('Type/Regex', 'Regular expressions');
     }
 
@@ -408,8 +400,8 @@ SQL
 
         $theTable = '';
         $total = 0;
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Exceptions/DefinedExceptions"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchAnalysers(array('Exceptions/DefinedExceptions'));
+        foreach($res->toArray() as $row) {
             ++$total;
             if (!preg_match('/ extends (\S+)/', $row['fullcode'], $r)) {
                 continue;

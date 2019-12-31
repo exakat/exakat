@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -1555,14 +1555,14 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($rulesets AS $key => $categorie) {
-            $list = 'IN (' . makeList($this->rulesets->getRulesetsAnalyzers(array($categorie))) . ')';
-            $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
-            $total = $this->sqlite->querySingle($query);
-
-            $data[] = array('label' => $key, 'value' => (int) $total);
+            $list = $this->rulesets->getRulesetsAnalyzers(array($categorie));
+            $res = $this->dump->fetchAnalysersCounts($list);
+            $counts = $res->getColumn('count');
+            $counts = array_filter($counts, function($x) { return $x >= -1;});
+            $data[] = array('label' => $key, 'value' => array_sum($counts));
         }
 
-        // ordonnÃ© DESC par valeur
+        // ordonnŽ DESC par valeur
         uasort($data, function ($a, $b) {
             if ($a['value'] > $b['value']) {
                 return -1;
@@ -1597,25 +1597,11 @@ JAVASCRIPT;
 
     public function getSeverityBreakdown() {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
-
-        $query = <<<SQL
-SELECT severity AS label, count(*) AS value
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY severity
-    ORDER BY value DESC
-SQL;
-        $result = $this->sqlite->query($query);
-
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = $row;
-        }
-
+        $res = $this->dump->getSeverityBreakdown($list);
+        
         $html = array();
         $dataScript = array();
-        foreach ($data as $value) {
+        foreach ($res->toArray() as $value) {
             $html []= <<<HTML
 <div class="clearfix">
     <div class="block-cell">$value[label]</div>
@@ -1630,7 +1616,7 @@ HTML;
         $html .= str_repeat('<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
-                 </div>', 4 - count($data));
+                 </div>', 4 - $res->getCount());
 
         return array('html'   => $html,
                      'script' => $dataScript);
@@ -1814,43 +1800,13 @@ SQL;
         return (int) $row['number'];
     }
 
-    protected function getFilesCount($themes = null, $limit = null) {
-        if ($themes === null) {
-            $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        } elseif (is_array($themes)) {
-            $list = $themes;
-        } else {
-            return array();
-        }
-        $list = makeList($list, "'");
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= ' LIMIT ' . $limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
+    protected function getFilesCount(array $list = array(), int $limit = 10) : array {
+        $res = $this->dump->getFileBreakdown($list);
+        
+        return array_slice($res->toArray(), 0, $limit);
     }
 
-    protected function getTopFile($ruleset, $file = 'issues') {
-        if (is_string($ruleset)) {
-            $list = $this->rulesets->getRulesetsAnalyzers($ruleset);
-        } elseif (is_array($ruleset)) {
-            $list = $ruleset;
-        } else {
-            die('Needs a string or an array');
-        }
-
+    protected function getTopFile(array $list, string $file = 'issues') : string {
         $data = $this->getFilesCount($list, self::TOPLIMIT);
 
         $html = '';
@@ -1872,8 +1828,10 @@ SQL;
         return $html;
     }
 
-    protected function getFileOverview() {
-        $data = $this->getFilesCount(null, self::LIMITGRAPHE);
+    protected function getFileOverview() : array {
+        $list = $this->rulesets->getRulesetsAnalyzers(array('All'));
+
+        $data = $this->getFilesCount($list, self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
         $dataCritical = array();
@@ -1902,54 +1860,26 @@ SQL;
         );
     }
 
-    protected function getAnalyzersCount($limit) {
+    protected function getAnalyzersCount(int $limit) : array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
+        $res = $this->dump->getAnalyzersCount($list);
 
-        $query = "SELECT analyzer, count(*) AS value
-                    FROM results
-                    WHERE analyzer in ($list)
-                    GROUP BY analyzer
-                    ORDER BY value DESC ";
-        if (!empty($limit)) {
-            $query .= " LIMIT  $limit";
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = $row;
-        }
-
-        return $data;
+        return array_slice($res->toArray(), 0, $limit);
     }
 
-    protected function getTopAnalyzers($ruleset, $file = 'issues') {
-        if (is_string($ruleset)) {
-            $list = $this->rulesets->getRulesetsAnalyzers($ruleset);
-        } elseif (is_array($ruleset)) {
-            $list = $ruleset;
-        } else {
-            die('Needs a string or an array');
-        }
-        $list = makeList($list, "'");
+    protected function getTopAnalyzers(array $list, string $file = 'issues') : string {
+        $res = $this->dump->getTopAnalyzers($list, self::TOPLIMIT);
 
-        $query = "SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC
-                    LIMIT " . self::TOPLIMIT;
-        $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $row) {
             $data[] = array('label' => $this->docs->getDocs($row['analyzer'], 'name'),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);
         }
 
-        $html = '';
+        $html = [];
         foreach ($data as $value) {
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                     <a href="' . $file . '.html#analyzer=' . $this->toId($value['name']) . '" title="' . $value['label'] . '">
                       <div class="block-cell-name">' . $value['label'] . '</div> 
                     </a>
@@ -1958,37 +1888,21 @@ SQL;
         }
 
         $nb = 10 - count($data);
-        $html .= str_repeat('<div class="clearfix">
+        $html []= str_repeat('<div class="clearfix">
                       <div class="block-cell-name">&nbsp;</div>
                       <div class="block-cell-issue text-center">&nbsp;</div>
                   </div>', $nb);
 
+        $html = implode(PHP_EOL, $html);
+
         return $html;
     }
 
-    protected function getSeveritiesNumberBy($type = 'file') {
+    protected function getSeveritiesNumberBy(string $type = 'file') : array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
-
-        $query = <<<SQL
-SELECT $type, severity, count(*) AS count
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY $type, severity
-SQL;
-
-        $stmt = $this->sqlite->query($query);
-
-        $return = array();
-        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
-            if ( isset($return[$row[$type]]) ) {
-                $return[$row[$type]][$row['severity']] = $row['count'];
-            } else {
-                $return[$row[$type]] = array($row['severity'] => $row['count']);
-            }
-        }
-
-        return $return;
+        
+        $res = $this->dump->getSeveritiesNumberBy($list, $type);
+        return $res->toGroupedBy($type, 'severity');
     }
 
     protected function getAnalyzerOverview() {
@@ -2003,10 +1917,10 @@ SQL;
         foreach ($data as $value) {
             $ini = $this->docs->getDocs($value['analyzer']);
             $xAxis[] = "'" . addslashes($ini['name']) . "'";
-            $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']) ? 0 : $severities[$value['analyzer']]['Major'];
-            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']) ? 0 : $severities[$value['analyzer']]['Minor'];
-            $dataNone[]     = empty($severities[$value['analyzer']]['None']) ? 0 : $severities[$value['analyzer']]['None'];
+            $dataCritical[] = empty($severities[$value['analyzer']]['Critical']['count']) ? 0 : $severities[$value['analyzer']]['Critical']['count'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']['count']) ? 0 : $severities[$value['analyzer']]['Major']['count'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']['count']) ? 0 : $severities[$value['analyzer']]['Minor']['count'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None']['count']) ? 0 : $severities[$value['analyzer']]['None']['count'];
         }
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
@@ -2119,7 +2033,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function getIssuesFaceted(array $ruleset) {
+    protected function getIssuesFaceted(array $ruleset) : array {
         return $this->getIssuesFacetedDb($ruleset);
     }
 
@@ -2137,7 +2051,7 @@ JAVASCRIPTCODE;
             $linediff[$row['file']][$row['line']] = $row['diff'];
         }
 
-        $oldIssues = $this->getIssuesFacetedDb($ruleset, $sqlite);
+        $oldIssues = $this->getIssuesFacetedDb($ruleset);
         foreach($oldIssues as &$issue) {
             $i = json_decode($issue);
             // Skip wrong lines, but why ?
@@ -2158,10 +2072,10 @@ JAVASCRIPTCODE;
         return $oldIssues;
     }
 
-    public function getIssuesFacetedDb(array $ruleset) {
+    public function getIssuesFacetedDb(array $ruleset) : array {
         $results = $this->dump->fetchAnalysers($ruleset);
         $results = $results->toArray();
-        $results = array_filter(function (string $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); }, $results);
+        $results = array_filter($results, function (string $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); });
 
         $TTFColors = array('Instant'  => '#5f492d',
                            'Quick'    => '#e8d568',

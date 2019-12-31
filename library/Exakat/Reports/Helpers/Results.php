@@ -63,13 +63,45 @@ class Results {
         return $this->count;
     }
 
-    public function getColumn($column) : array {
+    public function getColumn(string $column) : array {
         if ($this->values === null) {
             $this->load();
         }
 
         return array_column($this->values, $column);
     }
+
+    public function toGroupedBy(string $col1, string $col2 = null) : array {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        $return = array();
+        if ($col2 === null) {
+            foreach($this->values as $row) {
+                if (isset($return[$row[$col1]]) ) {
+                    $return[$row[$col1]][] = $row;
+                } else {
+                    $return[$row[$col1]] = array($row);
+                }
+            }
+        } else {
+            foreach($this->values as $row) {
+                if (!isset($return[$row[$col1]]) ) {
+                    $return[$row[$col1]] = array();
+                }
+    
+                if (!isset($return[$row[$col1]][$col2])) {
+                    $return[$row[$col1]][$col2] = array();
+                }
+    
+                $return[$row[$col1]][$col2][] = $row;
+            }
+        }
+
+        return $return;
+    }
+
 
     public function toArray() : array {
         if ($this->values === null) {
