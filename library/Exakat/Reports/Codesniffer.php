@@ -28,7 +28,7 @@ class Codesniffer extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'exakat';
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
         $analysisResults = $this->dump->fetchAnalysers($analyzerList);
         $analysisResults->load();
 

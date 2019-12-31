@@ -48,7 +48,7 @@ class FileDependencies extends Reports {
         $cnodes = 0;
 
         $list = array();
-        foreach($res->toArray() as $row) {
+        foreach($res as $row) {
             if (isset($nodes[$row['including']])) {
                 $row['including'] = $nodes[$row['including']];
             } else {
@@ -102,6 +102,7 @@ class FileDependencies extends Reports {
      }";
 
         file_put_contents("{$folder}/{$name}." . self::FILE_EXTENSION, $dot);
+        return '';
     }
 }
 

@@ -409,7 +409,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage('files', $finalHTML);
     }
 
-    protected function getFileOverview() {
+    protected function getFileOverview() : array {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -470,7 +470,7 @@ class Owasp extends Ambassador {
         );
     }
 
-    protected function compatibility($count, $analyzer = '') {
+    protected function compatibility(int $count, string $analyzer): string {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {

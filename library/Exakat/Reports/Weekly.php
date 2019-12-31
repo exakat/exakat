@@ -481,13 +481,13 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function getAnalyzersCount() {
+    protected function getAnalyzersCount(int $limit): array {
         $res = $this->dump->fetchAnalysersCounts($this->weeks[$this->current]->analysis);
         foreach($res->toArray() as $row) {
             $this->resultsCounts[$row['analyzer']] = $row['count'];
         }
 
-        return $data;
+        return $this->resultsCounts;
     }
 
     protected function generateWeeklyTable() {

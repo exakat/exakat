@@ -81,6 +81,7 @@ class Phpconfiguration extends Reports {
                             'trader', 'wincache', 'xcache'
                              );
 
+        $data = array();
         foreach($sources as $analyzer => $count) {
             if ($analyzer == 'Structures/FileUploadUsage') {
                 $data['File Upload'] = json_decode(file_get_contents($this->config->dir_root . '/data/directives/fileupload.json'));
@@ -150,6 +151,7 @@ class Phpconfiguration extends Reports {
 
 
 TEXT;
+
         foreach($data as $section => $details) {
             $directives .= "[$section]\n";
 
