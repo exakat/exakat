@@ -28,7 +28,7 @@ class Phpcompilation extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'compilePHP';
 
-    protected function _generate($analyzerList) {
+    protected function _generate(array $analyzerList) : string {
         $themed = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
         $res = $this->dump->fetchAnalysersCounts($themed);
         $sources = array_filter($res->toHash('analyzer', 'count'), function($x) { return $x > -1;});

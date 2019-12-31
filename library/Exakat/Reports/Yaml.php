@@ -30,7 +30,7 @@ class Yaml extends Reports {
     const FILE_EXTENSION = 'yaml';
     const FILE_FILENAME  = 'exakat';
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
         $analysisResults = $this->dump->fetchAnalysers($analyzerList);
 
         $results = array();

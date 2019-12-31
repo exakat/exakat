@@ -28,13 +28,10 @@ class Composer extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'composer';
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
         $themed = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("' . implode('", "', $themed) . '")');
-        $sources = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $sources[$row['analyzer']] = $row['count'];
-        }
+        $res = $this->dump->fetchAnalysersCounts($themed);
+        $sources = $res->toHash('analyzer', 'count');
 
         $configureDirectives = json_decode(file_get_contents($this->config->dir_root . '/data/configure.json'));
         // List of extensions that must be avoided

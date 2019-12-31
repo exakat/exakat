@@ -59,7 +59,7 @@ class Scrutinizer extends Reports {
         $this->cachedData .= $out->flush();
     }
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $resultsAnalyzers = $this->dump->fetchAnalysers($list);

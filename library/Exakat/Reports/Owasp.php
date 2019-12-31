@@ -288,7 +288,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage($section->file, $html);
     }
 
-    public function getHashData() {
+    public function getHashData() : string {
         $php = exakat('php');
 
         $info = array(

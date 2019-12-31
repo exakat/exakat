@@ -50,7 +50,7 @@ class Radwellcode extends Reports {
 
                              );
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $resultsAnalyzers = $this->dump->fetchAnalysers($list);
@@ -102,8 +102,10 @@ class Radwellcode extends Reports {
 
         if ($name === Reports::STDOUT) {
             echo $text;
+            return '';
         } else {
             file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $text);
+            return '';
         }
     }
 

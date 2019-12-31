@@ -31,7 +31,7 @@ class Phpconfiguration extends Reports {
     public function _generate(array $analyzerList) : string {
         $final = '';
 
-        $themed = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
+        $themed = $this->rulesets->getRulesetsAnalyzers($analyzerList);
         $res = $this->dump->fetchAnalysersCounts($themed);
         $sources = $res->toHash('analyzer', 'count');
         $this->count(count($sources));

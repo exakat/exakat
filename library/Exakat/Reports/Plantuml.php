@@ -27,24 +27,16 @@ class Plantuml extends Reports {
     const FILE_EXTENSION = 'puml';
     const FILE_FILENAME  = 'exakat';
 
-    public function generate($folder, $name= self::FILE_FILENAME) {
+    public function generate(string $folder, string $name= self::FILE_FILENAME) : string {
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT name, cit.id, extends, type, namespace, 
-       (SELECT GROUP_CONCAT(method,   "\n")   FROM methods    WHERE citId = cit.id) AS methods,
-       (SELECT GROUP_CONCAT(visibility || ' ' || case when static != 0 then 'static ' else '' end ||  case when value != '' then property || " = " || substr(value, 0, 40) else property end, "\n") 
-            FROM properties WHERE citId = cit.id) AS properties
-    FROM cit
-    JOIN namespaces
-        ON namespaces.id = cit.namespaceId
-SQL
-        );
+        $res = $this->dump->fetchPlantUml();
+
         $id = 0;
         $ids = array();
         $puml = array();
         $extends = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             ++$id;
             $ids[$id] = $row['id'];
             $properties = array();
@@ -85,11 +77,8 @@ SQL
             $puml .= "Class{$ids[$extended]} <|-- Class{$extending}\n";
         }
 
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT implementing, implements, type FROM cit_implements
-SQL
-        );
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchTable('cit_implements');
+        foreach($res->toArray() as $row) {
             if (!isset($ids[$row['implementing']])) { continue; }
             if (!isset($ids[$row['implements']])) { continue; }
 
@@ -113,9 +102,11 @@ $puml
 PUML;
 
         if ($name === self::STDOUT) {
-            echo $dot ;
+            echo $dot;
+            return '';
         } else {
             file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $dot);
+            return '';
         }
     }
 

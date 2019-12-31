@@ -8,7 +8,7 @@ use Exakat\Reports\Helpers\Results;
 
 class Dump1 extends Dump {
     public function fetchAnalysers(array $analysers) : Results {
-        $query = 'SELECT fullcode, file, line, analyzer FROM results WHERE analyzer IN (' . makeList($analysers) . ')';
+        $query = 'SELECT fullcode, file, line, analyzer, class, namespace FROM results WHERE analyzer IN (' . makeList($analysers) . ')';
         $res = $this->sqlite->query($query);
 
         return new Results($res, array('phpsyntax' => array('fullcode' => 'htmlcode')));
@@ -53,6 +53,14 @@ SQL;
         return $this->query($query);
     }
 
+    public function fetchHash(string $key) : Results {
+        $query = <<<SQL
+SELECT value FROM hash WHERE key = "$key"
+SQL;
+
+        return $this->query($query);
+    }
+
     public function fetchHashResults(string $key) : Results {
         $query = <<<SQL
 SELECT key, value FROM hashResults
@@ -63,12 +71,13 @@ SQL;
         return $this->query($query);
     }
 
-    public function getCit($type = 'class') {
+    public function getCit($type = 'class') : Results {
         assert(in_array($type, array('class', 'trait', 'interface')));
 
         $query = "SELECT name FROM cit WHERE type='$type' ORDER BY name";
+        $res = $this->query($query);
 
-        return $this->query($query);
+        return new Results($res);
     }
 
     private function query(string $query) : Results {
@@ -120,7 +129,52 @@ SQL
 
         return new Results($res);
     }
-    
+
+    public function fetchTableClassConstants() : Results {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT cit.name AS class, 
+       classconstants.constant AS constant, 
+       value, 
+       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+       visibility,
+       constant,
+       cit.type AS type
+
+FROM classconstants 
+JOIN cit 
+    ON cit.id = classconstants.citId
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+
+    ORDER BY cit.name, classconstants.constant, value
+
+SQL
+        );
+
+        return new Results($res);
+    }
+
+    public function fetchTableProperty() : Results {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT cit.name AS class, 
+       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+       visibility, 
+       property, 
+       value,
+       cit.type AS type
+
+    FROM cit
+    JOIN properties 
+        ON properties.citId = cit.id
+    JOIN namespaces 
+        ON cit.namespaceId = namespaces.id
+
+SQL
+        );
+
+        return new Results($res);
+    }
+
     public function fetchTableCit() : Results {
         $res = $this->sqlite->query(<<<SQL
 SELECT cit.*, 
@@ -228,6 +282,149 @@ SQL;
         $result = $this->sqlite->query($query);
 
         return $result->fetchArray(\SQLITE3_ASSOC);
+    }
+    
+    public function getSeverityBreakdown(array $list) : Results {
+        $list = makeList($list);
+        $query = <<<SQL
+SELECT severity AS label, count(*) AS value
+    FROM results
+    WHERE analyzer IN ($list)
+    GROUP BY severity
+    ORDER BY value DESC
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getFileBreakdown(array $list) : Results {
+        $list = makeList($list);
+        $query = <<<SQL
+SELECT file, count(*) AS value
+    FROM results
+    WHERE analyzer IN ($list)
+    GROUP BY file
+    ORDER BY value DESC
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getTopAnalyzers(array $list, int $limit) : Results {
+        $listSQL = makeList($list);
+
+        $query = <<<SQL
+SELECT analyzer, count(*) AS number
+    FROM results
+    WHERE analyzer IN ($listSQL)
+    GROUP BY analyzer
+    ORDER BY number DESC
+    LIMIT $limit
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getSeveritiesNumberBy(array $list, string $type) : Results {
+        $listSQL = makeList($list);
+
+        $query = <<<SQL
+SELECT $type, severity, count(*) AS count
+    FROM results
+    WHERE analyzer IN ($listSQL)
+    GROUP BY $type, severity
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+
+    public function getAnalyzersCount(array $list) : Results {
+        $listSQL = makeList($list);
+
+        $query = <<<SQL
+SELECT analyzer, count(*) AS value
+    FROM results
+    WHERE analyzer in ($listSQL)
+    GROUP BY analyzer
+    ORDER BY value DESC
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function fetchPlantUml() : Results {
+        $query = <<<SQL
+SELECT name, cit.id, extends, type, namespace, 
+       (SELECT GROUP_CONCAT(method,   "\n")   FROM methods    WHERE citId = cit.id) AS methods,
+       (SELECT GROUP_CONCAT(visibility || ' ' || case when static != 0 then 'static ' else '' end ||  case when value != '' then property || " = " || substr(value, 0, 40) else property end, "\n") 
+            FROM properties WHERE citId = cit.id) AS properties
+    FROM cit
+    JOIN namespaces
+        ON namespaces.id = cit.namespaceId
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getFilesResultsCounts(array $list) : Results {
+        $listSQL = makeList($list);
+
+        $query = <<<SQL
+SELECT file AS file, 
+       line AS loc, 
+       count(*) AS issues, 
+       COUNT(DISTINCT analyzer) AS analyzers 
+    FROM results
+    WHERE line != -1 AND
+          analyzer IN ($listSQL)
+    GROUP BY file
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+
+    public function getAnalyzersResultsCounts(array $list) : Results {
+        $listSQL = makeList($list);
+
+        $query = <<<SQL
+SELECT analyzer, count(*) AS issues, COUNT(DISTINCT file) AS files, 
+       severity AS severity 
+    FROM results
+    WHERE analyzer IN ($listSQL)
+    GROUP BY analyzer
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+
+    public function getCountFileByAnalyzers(array $list) : Results {
+        $listSQL = makeList($list);
+
+        $query = <<<SQL
+SELECT count(*)  AS number
+    FROM (SELECT DISTINCT file FROM results WHERE analyzer in ($listSQL))
+SQL;
+        $result = $this->sqlite->querySingle($query);
+
+        return new Results($result);
+    }
+
+    public function getFunctionsFromAnalyzer(string $analyzer) : array {
+        $query = <<<SQL
+SELECT GROUP_CONCAT(DISTINCT REPLACE(SUBSTR(fullcode, 0, instr(fullcode, '(')), '@', ''))  AS functions FROM results 
+    WHERE analyzer = "$analyzer";
+SQL;
+        $res = $this->sqlite->querySingle($query);
+        
+        return explode(',', $res);
     }
 
 }

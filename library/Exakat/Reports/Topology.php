@@ -28,7 +28,7 @@ class Topology extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'exakat.topology';
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList) : string {
         switch($this->config->program) {
             case 'Dump/Typehintorder' :
                 $res = $this->dump->fetchTable('typehintOrder', array('origin'      => 'argument',

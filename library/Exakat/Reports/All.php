@@ -27,7 +27,7 @@ class All extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'allExakat';
 
-    public function generate($folder, $name = null) {
+    public function generate(string $folder, string $name = 'table'): string {
         $omit = array('Ambassadornomenu',
                       'Facetedjson',
                       'Onepagejson',

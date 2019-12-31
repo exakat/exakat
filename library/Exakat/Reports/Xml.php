@@ -102,7 +102,7 @@ class Xml extends Reports {
         $this->cachedData .= $out->flush();
     }
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $analysisResults = $this->dump->fetchAnalysers($list);
@@ -152,6 +152,7 @@ class Xml extends Reports {
             return $return;
         } else {
             file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $return);
+            return '';
         }
     }
 }

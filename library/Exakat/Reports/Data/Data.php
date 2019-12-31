@@ -22,13 +22,14 @@
 
 namespace Exakat\Reports\Data;
 
+use Exakat\Dump\Dump;
 
 abstract class Data {
-    protected $sqlite = null;
+    protected $dump = null;
     protected $values = null;
 
-    public function __construct(\Sqlite3 $sqlite) {
-        $this->sqlite = $sqlite;
+    public function __construct(Dump $dump) {
+        $this->dump = $dump;
     }
 
     public function values() {

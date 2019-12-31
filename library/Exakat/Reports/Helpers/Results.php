@@ -23,6 +23,7 @@
 namespace Exakat\Reports\Helpers;
 
 use SQLite3Result;
+use Closure;
 
 class Results {
     private $count        = -1;
@@ -170,17 +171,39 @@ class Results {
         return (int) ($this->values[0][$col] ?? 0);
     }
 
-    public function toHash($key, $value) : array {
+    public function toHash(string $key, string $value = null) : array {
         if ($this->values === null) {
             $this->load();
         }
 
         $return = array();
-        foreach ($this->values as $row) {
-            $return[$row[$key]] = $row[$value];
+        if ($value === null) {
+            foreach ($this->values as $row) {
+                $return[$row[$key]] = $row;
+            }
+        } else {
+            foreach ($this->values as $row) {
+                $return[$row[$key]] = $row[$value];
+            }
         }
         
         return $return;
+    }
+
+    public function filter(Closure $f) {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        $this->values = array_filter($this->values, $f);
+    }
+
+    public function order(Closure $f) {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        usort($this->values, $f);
     }
 }
 

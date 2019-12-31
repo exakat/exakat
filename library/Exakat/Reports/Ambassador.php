@@ -367,7 +367,8 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage($section->source);
 
         $favorites = new Favorites($this->config);
-        $favoritesList = json_decode($favorites->generate(null, Reports::INLINE));
+        $favoritesRules = $this->getTopFile($this->rulesets->getRulesetsAnalyzers(array('Favorites')));
+        $favoritesList = json_decode($favorites->generate($favoritesRules, Reports::INLINE));
 
         $donut = array();
         $html = array(' ');
@@ -1192,27 +1193,24 @@ HTML;
 
     protected function generateForeachFavorites(Section $section) {
         // List of indentation used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT REPLACE(key, '&', '') AS key, sum(value) AS count FROM hashResults 
-WHERE name = "Foreach Names"
-GROUP BY REPLACE(key, '&', '')
-ORDER BY count DESC
-SQL
-        );
-        $html = '';
+        $res = $this->dump->fetchHashResults('Foreach Names');
+        $res = array_map(function (array $x) : array { $x['key'] = str_replace('&', '', $x['key']); return $x; }, $res->toArray());
+        uasort($res, function ($a, $b) : bool { return $a['value'] <=> $b['value']; });
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res as $value) {
             $xAxis[] = "'" . addslashes($value['key']) . "'";
 
-            $data[$value['key']] = (int) $value['count'];
+            $data[$value['key']] = (int) $value['value'];
 
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
-                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
-
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
@@ -1658,18 +1656,11 @@ HTML;
 
     protected function getAnalyzersResultsCounts(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
 
-        $result = $this->sqlite->query(<<<SQL
-SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity 
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY analyzer
-SQL
-        );
+        $result = $this->dump->getAnalyzersResultsCounts($list);
 
         $return = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($result->toArray() as $row) {
             $row['label'] = $this->docs->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1677,19 +1668,6 @@ SQL
         }
 
         return $return;
-    }
-
-    private function getCountFileByAnalyzers($analyzer) {
-        $query = <<<'SQL'
-                SELECT count(*)  AS number
-                FROM (SELECT DISTINCT file FROM results WHERE analyzer = :analyzer)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
-
-        return $row['number'];
     }
 
     private function generateNoIssues(Section $section) {
@@ -1768,23 +1746,9 @@ SQL;
 
     private function getFilesResultsCounts() {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
+        $res = $this->dump->getFilesResultsCounts($list)->toHash('file');
 
-        $result = $this->sqlite->query(<<<SQL
-SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
-        FROM results
-        WHERE line != -1 AND
-              analyzer IN ($list)
-        GROUP BY file
-SQL
-        );
-
-        $return = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['file']] = $row;
-        }
-
-        return $return;
+        return $res;
     }
 
     private function getCountAnalyzersByFile(string $file): int {
@@ -2045,9 +2009,9 @@ JAVASCRIPTCODE;
             return array();
         }
 
-        $result = $this->sqlite->query('SELECT * FROM linediff');
+        $result = $this->dump->fetchTable('linediff');
         $linediff = array();
-        while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($result->toArray() as $row) {
             $linediff[$row['file']][$row['line']] = $row['diff'];
         }
 
@@ -2075,7 +2039,8 @@ JAVASCRIPTCODE;
     public function getIssuesFacetedDb(array $ruleset) : array {
         $results = $this->dump->fetchAnalysers($ruleset);
         $results = $results->toArray();
-        $results = array_filter($results, function (string $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); });
+        $results = array_filter($results,
+                                function (array $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); });
 
         $TTFColors = array('Instant'  => '#5f492d',
                            'Quick'    => '#e8d568',
@@ -2227,7 +2192,7 @@ JAVASCRIPTCODE;
     <td>' . $cve . '</td>
                 </tr>';
             } elseif (!empty($bugfix['analyzer'])) {
-                $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "' . $bugfix['analyzer'] . '"');
+                $subanalyze = $this->dump->fetchAnalysersCounts(array($bugfix['analyzer']))->toString('count');
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
@@ -2255,7 +2220,7 @@ JAVASCRIPTCODE;
 
     protected function generatePhpConfiguration(Section $section) {
         $phpConfiguration = new Phpcompilation($this->config);
-        $report = $phpConfiguration->generate(null, Reports::INLINE);
+        $report = $phpConfiguration->generate('', Reports::INLINE);
 
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n", ), $configline);
@@ -2269,7 +2234,7 @@ JAVASCRIPTCODE;
 
     protected function generateFixesRector(Section $section) {
         $rector = new Rector($this->config);
-        $report = $rector->generate(null, Reports::INLINE);
+        $report = $rector->generate('', Reports::INLINE);
 
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n", ), $configline);
@@ -2283,7 +2248,7 @@ JAVASCRIPTCODE;
 
     protected function generateFixesPhpCsFixer(Section $section) {
         $phpcsfixer = new Phpcsfixer($this->config);
-        $report = $phpcsfixer->generate(null, Reports::INLINE);
+        $report = $phpcsfixer->generate('', Reports::INLINE);
 
         $configline = trim($report);
         $configline = PHPSyntax($configline);
@@ -2303,26 +2268,26 @@ JAVASCRIPTCODE;
         $versions = array_reverse($versions);
 
         $analyzers = array(
-                            'Php/PHP80RemovedFunctions'             => '8.0-',
-                            'Php/PHP80RemovedConstants'             => '8.0-',
+                            'Php/Php80RemovedFunctions'             => '8.0-',
+                            'Php/Php80RemovedConstant'              => '8.0-',
 
                             'Structures/toStringThrowsException'    => '7.4-',
                             'Php/NestedTernaryWithoutParenthesis'   => '7.4-',
                             'Php/TypedPropertyUsage'                => '7.4-',
-                            'Structures/UseCovariance'              => '7.4-',
-                            'Structures/UseContravariance'          => '7.4-',
+                            'Php/UseCovariance'                     => '7.4-',
+                            'Php/UseContravariance'                 => '7.4-',
                             'Php/Php74NewDirective'                 => '7.4-',
                             'Php/SpreadOperatorForArray'            => '7.4+',
                             'Php/UnpackingInsideArrays'             => '7.4+',
                             'Structures/CurlVersionNow'             => '7.4+',
-                            'Structures/Php74RemovedFunctions'      => '7.4+',
-                            'Structures/Php74Deprecation'           => '7.4+',
-                            'Structures/Php74ReservedKeyword'       => '7.4+',
+                            'Php/Php74RemovedFunctions'             => '7.4+',
+                            'Php/Php74Deprecation'                  => '7.4+',
+                            'Php/Php74ReservedKeyword'              => '7.4+',
                             'Functions/UseArrowFunctions'           => '7.4+',
-                            'Type/IntegerSeparatorUsage'            => '7.4+',
+                            'Php/IntegerSeparatorUsage'             => '7.4+',
                             'Php/NoMoreCurlyArrays'                 => '7.4+',
                             'Php/CoalesceEqual'                     => '7.4+',
-                            '/Php/ConcatAndAddition'                => '7.4+',
+                            'Php/ConcatAndAddition'                 => '7.4+',
 
                             'Php/Php73NewFunctions'                 => '7.3-',
                             'Php/ListWithReference'                 => '7.3+',
@@ -2335,9 +2300,7 @@ JAVASCRIPTCODE;
                             'Php/Php72NewConstants'                 => '7.2-',
                             'Php/Php72NewFunctions'                 => '7.2-',
                             'Php/Php72ObjectKeyword'                => '7.2-',
-                            'Php/Php72RemovedClasses'               => '7.2-',
                             'Php/Php72RemovedFunctions'             => '7.2-',
-                            'Php/Php72RemovedInterfaces'            => '7.2-',
                             'Classes/CantInheritAbstractMethod'     => '7.2+',
                             'Classes/ChildRemoveTypehint'           => '7.2+',
                             'Php/GroupUseTrailingComma'             => '7.2+',
@@ -2424,18 +2387,10 @@ JAVASCRIPTCODE;
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
 //        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
         $colors = array('59BF00', '59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5', '7900E5');
-        // This must be the same lenght than the list of versions
+        // This must be the same length than the list of versions
 
-        $list = makeList(array_keys($analyzers));
-        $query = <<<SQL
-SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0
-SQL;
-        $results = $this->sqlite->query($query);
-
-        $counts = array();
-        while($row = $results->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['count'];
-        }
+        $results = $this->dump->fetchAnalysersCounts(array_keys($analyzers));
+        $counts = $results->toHash('analyzer', 'count');
 
         $data = array();
         $data2 = array();
@@ -2444,7 +2399,7 @@ SQL;
 
             foreach($versions as $version) {
                 if (!isset($counts[$analyzer])) {
-                    continue;
+                    $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
                 } elseif ($counts[$analyzer] === 0) {
                     $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
                 } elseif ($coeff * version_compare($version, $analyzerVersion) >= 0) {
@@ -2460,27 +2415,17 @@ SQL;
         foreach($versions as $version) {
             $shortVersion = $version[0] . $version[2];
 
-            $query = <<<SQL
-SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$shortVersion';
-SQL;
-            $existence = $this->sqlite->query($query);
-            if ($existence->fetchArray(\SQLITE3_ASSOC) !== "compilation$shortVersion") {
+            $res = $this->dump->fetchHash("notCompilable$shortVersion")->toString();
+            if ($res === 'N/C') {
+                $incompilable[$shortVersion] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
                 continue;
             }
 
-            $query = <<<SQL
-SELECT count(*) AS nb FROM compilation$shortVersion
-SQL;
-            $results = $this->sqlite->query($query);
-            if ($results === false) {
-                $incompilable[$shortVersion] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
-            } else{
-                $row = $results->fetchArray(\SQLITE3_ASSOC);
-                if ($row['nb'] === 0) {
-                    $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
-                } else {
-                    $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
-                }
+            $results = $this->dump->fetchTable("compilation$shortVersion");
+            if ($results->getCount() === 0) {
+                $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+            } else {
+                $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
             }
         }
 
@@ -2636,20 +2581,11 @@ HTML;
                              );
 
         $directiveList = '';
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT analyzer, count FROM resultsCounts 
-    WHERE ( analyzer LIKE "Extensions/Ext%" OR 
-            analyzer IN ("Structures/FileUploadUsage", 
-                         "Php/UsesEnv",
-                         "Php/UseBrowscap",
-                         "Php/DlUsage",
-                         "Security/CantDisableFunction",
-                         "Security/CantDisableClass"
-                         ))
-        AND count >= 0
-SQL
-        );
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        // Possibly move this to a specific ruleset
+        $list = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
+        $res = $this->dump->fetchAnalysersCounts($list);
+
+        foreach($res->toArray() as $row) {
             $data = array();
             if ($row['analyzer'] === 'Structures/FileUploadUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
@@ -2669,13 +2605,8 @@ SQL
             } elseif ($row['analyzer'] === 'Security/CantDisableFunction' ||
                       $row['analyzer'] === 'Security/CantDisableClass'
                       ) {
-                $res2 = $this->sqlite->query(<<<'SQL'
-SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
-    WHERE analyzer = "Security/CantDisableFunction";
-SQL
-        );
-                $list = $res2->fetchArray(\SQLITE3_NUM);
-                $list = explode(',', $list[0]);
+                $list = $this->dump->getFunctionsFromAnalyzer('Security/CantDisableFunction');
+
                 if (isset($disable)) {
                     continue;
                 }
@@ -2688,13 +2619,7 @@ SQL
                 $data[0]->suggested = implode(', ', $suggestions);
                 $data[0]->documentation .= "\n; " . count($list) . " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
-                $res2 = $this->sqlite->query(<<<'SQL'
-SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
-    WHERE analyzer = "Security/CantDisableClass";
-SQL
-        );
-                $list = $res2->fetchArray(\SQLITE3_NUM);
-                $list = explode(',', $list[0]);
+                $list = $this->dump->getFunctionsFromAnalyzer('Security/CantDisableClass');
                 $suggestions = array_diff($disable['disable_classes'], $list);
 
                 // disable_functions
@@ -2723,31 +2648,25 @@ SQL
     protected function generateCompilations(Section $section) {
         $compilations = array();
 
-        $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
+        $total = $this->dump->fetchHash('files')->toInt();
 
         foreach(array_unique(array_merge(array($this->config->phpversion[0] . $this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
-            $version = "$suffix[0].$suffix[1]";
-            $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
-            if (!$res) {
+            $res = $this->dump->fetchHash("notCompilable$suffix");
+            if ($res === 'N/C') {
                 $compilations []= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>";
                 continue; // Table was not created
             }
 
-            $res = $this->sqlite->query("SELECT file FROM compilation$suffix");
-            $files = array();
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $files[] = $row['file'];
-            }
+            $res = $this->dump->fetchTable("compilation$suffix");
+            $files = $res->getColumn('file');
+
             if (empty($files)) {
                 $files       = 'No compilation error found.';
                 $errors      = 'N/A';
                 $total_error = 'N/A';
             } else {
-                $res = $this->sqlite->query('SELECT error FROM compilation' . $suffix);
-                $readErrors = array();
-                while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                    $readErrors[] = $row['error'];
-                }
+                $readErrors = $res->getColumn('error');
+
                 $errors      = array_count_values($readErrors);
                 $errors      = array_keys($errors);
                 $errors      = array_keys(array_count_values($errors));
@@ -2758,6 +2677,7 @@ SQL
                 $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
+            $version = $suffix[0].'-'.$suffix[1];
             $compilations []= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>";
         }
 
@@ -2810,11 +2730,8 @@ SQL
 
         $list = $this->rulesets->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
 
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($list) . ')');
-        $counts = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['count'];
-        }
+        $res = $this->dump->fetchAnalysersCounts($list);
+        $counts = $res->toHash('analyzer', 'count');
 
         foreach($list as $analyzer) {
             $ini = $this->docs->getDocs($analyzer);
@@ -2861,17 +2778,15 @@ HTML;
     }
 
     private function generateGlobals(Section $section = null) {
-        $res = $this->sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="globalVariables"');
-        $name = $res->fetchArray(\SQLITE3_ASSOC);
+        $res = $this->dump->fetchTable('globalVariables');
 
-        if (empty($name)) {
+        // Empty or absent is the same : no soup!
+        if ($res->isEmpty()) {
             return;
         }
 
-        $res = $this->sqlite->query('SELECT * FROM globalVariables');
-
         $tree = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $variable = trim($row['variable'], '{}&@');
             $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $variable);
             if (substr($variable, 0, 8) === '$GLOBALS') {
@@ -3284,7 +3199,7 @@ SQL
         return "<li>$root<ul>" . implode('', $return) . "</ul></li>\n";
     }
 
-    private function generateExceptionTree(Section $section) {
+    private function generateExceptionTree(Section $section) : void {
         $exceptions = array (
   'Throwable' =>
   array (
@@ -3374,8 +3289,8 @@ SQL
         $list = array();
 
         $theTable = '';
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Exceptions/DefinedExceptions"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchAnalysers('Exceptions/DefinedExceptions');
+        foreach($res->toArray() as $row) {
             if (!preg_match('/ extends (\S+)/', $row['fullcode'], $r)) {
                 continue;
             }
@@ -3719,12 +3634,12 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
 Below, is a list of classes that may be updated with final or abstract. <br />
 
 The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
 The green stars <i class="fa fa-star" style="color:green"></i> mention a valid absence of the option (an extended class, that can't be final, ...); 
-The absence of star report currently configured classes.  
+The absence of star report currently configured classes.
 
 HTML
 );
@@ -3734,10 +3649,10 @@ HTML
 
 
     private function generateClassFinalSuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Classes/CouldBeFinal"');
+        $res = $this->dump->fetchAnalysers('Classes/CouldBeFinal');
 
         $couldBeFinal = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
                 continue;
             }
@@ -3750,10 +3665,10 @@ HTML
     }
 
     private function generateClassAbstractuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Classes/CouldBeAbstractClass"');
+        $res = $this->dump->fetchAnalysers('Classes/CouldBeAbstractClass');
 
         $couldBeAbstract = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
                 continue;
             }
@@ -3766,9 +3681,10 @@ HTML
     }
 
     private function generateVisibilityMethodsSuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivateMethod'));
+
         $couldBePrivate = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
                 continue;
             }
@@ -3781,9 +3697,10 @@ HTML
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedMethod"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeProtectedMethod'));
+
         $couldBeProtected = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
                 continue;
             }
@@ -3850,10 +3767,11 @@ SQL
         return $return;
     }
 
-    private function generateVisibilityConstantSuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateConstante"');
+    private function generateVisibilityConstantSuggestions() : array {
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivateConstante'));
+
         $couldBePrivate = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
                 continue; // it is an interface or a trait
             }
@@ -3871,9 +3789,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedConstant"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeProtectedConstant'));
         $couldBeProtected = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
                 continue; // it is an interface or a trait
             }
@@ -3890,17 +3808,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
- visibility, constant, value
-FROM cit
-JOIN classconstants 
-    ON classconstants.citId = cit.id
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
-WHERE type="class"
-SQL
-);
+        $res = $this->dump->fetchTableClassConstants();
+        $res->filter(function(array $x) : bool { return $x['type'] === 'class'; });
+
         $theClass = '';
         $ranking = array(''          => 1,
                          'public'    => 2,
@@ -3910,10 +3820,10 @@ SQL
         $return = array();
 
         $aClass = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
+        foreach($res->toArray() as $row) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['class']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['class'];
                 $aClass = array();
             }
 
@@ -3945,9 +3855,9 @@ SQL
 
     private function generateVisibilityPropertySuggestions() {
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivate"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivate'));
         $couldBePrivate = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             assert(isset($classname[1]), 'Missing class in ' . $row['class']);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
@@ -3962,9 +3872,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedProperty"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeProtectedProperty'));
         $couldBeProtected = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
 
@@ -3977,9 +3887,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeClassConstant"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeClassConstant'));
         $couldBeConstant = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
 
@@ -3992,17 +3902,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
-         visibility, property, value
-        FROM cit
-        JOIN properties 
-            ON properties.citId = cit.id
-        JOIN namespaces 
-            ON cit.namespaceId = namespaces.id
-         WHERE type="class"
-SQL
-);
+        $res = $this->dump->fetchTableProperty();
+        $res->filter(function(array $x) : bool { return $x['type'] === 'class'; });
+
         $theClass = '';
         $ranking = array(''          => 1,
                          'public'    => 2,
@@ -4012,10 +3914,10 @@ SQL
         $return = array();
 
         $aClass = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
+        foreach($res->toArray() as $row) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['class']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['class'];
                 $aClass = array();
             }
 
@@ -4053,8 +3955,8 @@ SQL
 
     private function generateAlteredDirectives(Section $section) {
         $alteredDirectives = '';
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchAnalysers(array('Php/DirectivesUsage'));
+        foreach($res->toArray() as $row) {
             $alteredDirectives .= '<tr><td>' . PHPSyntax($row['fullcode']) . "</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
@@ -4066,13 +3968,16 @@ SQL
 
     private function generateChangedClasses(Section $section) {
         $changedClasses = '';
-        $res = $this->sqlite->query('SELECT * FROM classChanges');
-        if ($res) {
+        $res = $this->dump->fetchTable('classChanges');
+        
+        if ($res->isEmpty() === true) {
+            $changedClasses = 'No changes detected';
+        } else {
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['changeType'] === 'Member Visibility') {
                     $row['parentValue'] .= ' $' . $row['name'];
                     $row['childValue']   = ' $' . $row['name'];
-                } elseif ($row['changeType'] === 'Member Default') {
+                } elseif ($row['changeType'] === 'Member Defajult') {
                     $row['parentValue'] = '$' . $row['name'] . ' = ' . $row['parentValue'];
                     $row['childValue']  = '$' . $row['name'] . ' = ' . $row['childValue'];
                 }
@@ -4085,8 +3990,6 @@ SQL
                                        '</tr>' . PHP_EOL .
                                        '<tr><td colspan="2"><hr /></td></tr>';
             }
-        } else {
-            $changedClasses = 'No changes detected';
         }
 
         $html = $this->getBasedPage($section->source);
@@ -4640,7 +4543,7 @@ JAVASCRIPT;
 
     private function generateStats(Section $section) {
         $results = new Stats($this->config);
-        $report = $results->generate(null, Reports::INLINE);
+        $report = $results->generate('', Reports::INLINE);
         $report = json_decode($report);
 
         $stats = '';
@@ -4858,7 +4761,7 @@ SQL;
     }
 
     private function generateConfusingVariables(Section $section) {
-        $data = new Data\CloseNaming($this->sqlite);
+        $data = new Data\CloseNaming($this->dump);
         $results = $data->prepare();
         $reasons = array('_'       => 'One _',
                          'numbers' => 'One digit',
@@ -4889,7 +4792,7 @@ SQL;
     }
 
     protected function generateAppinfo(Section $section) {
-        $data = new Data\Appinfo($this->sqlite);
+        $data = new Data\Appinfo($this->dump);
         $data->prepare();
 
         $list = array();
@@ -4995,7 +4898,7 @@ HTML;
         return $cveHtml;
     }
 
-    protected function Compatibility($count, $analyzer) {
+    protected function Compatibility(int $count, string $analyzer) : string {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
@@ -5029,7 +4932,7 @@ HTML;
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
 
-    protected function getVCSInfo() {
+    protected function getVCSInfo() : array {
         $info = array();
 
         $vcsClass = Vcs::getVCS($this->config);
@@ -5089,11 +4992,13 @@ HTML;
         return $info;
     }
 
-    private function makeDocLink($analyzer) {
-        return "<a href=\"analyses_doc.html#{$this->toId($analyzer)}\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->docs->getDocs($analyzer, 'name')}";
+    private function makeDocLink(string $analyzer) : string {
+        $docs = $this->docs->getDocs($analyzer, 'name');
+        assert(!is_array($docs), "Missing docs('name') for $analyzer");
+        return "<a href=\"analyses_doc.html#{$this->toId($analyzer)}\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; $docs";
     }
 
-    private function toHtmlList(array $array) {
+    private function toHtmlList(array $array) : string {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
     }
 }

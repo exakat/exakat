@@ -414,12 +414,8 @@ class Appinfo extends Data {
         public function prepare() {
             // collecting information for Extensions
             $themed = array_merge(...array_values($this->extensions));
-            $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($themed) . ')');
-
-            $sources = array();
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $sources[$row['analyzer']] = $row['count'];
-            }
+            $res = $this->dump->fetchAnalysersCounts($themed);
+            $sources = $res->toHash('analyzer', 'count');
 
             foreach($this->extensions as $section => $hash) {
                 $this->values[$section] = array();
@@ -462,17 +458,16 @@ class Appinfo extends Data {
         // collecting information for Composer
         if (isset($sources['Composer/PackagesNames'])) {
             $this->values['Composer Packages'] = array();
-            $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $this->values['Composer Packages'][] = PHPSyntax($row['fullcode']);
-            }
+            $res = $this->dump->fetchAnalyzer(array('Composer/PackagesNames'));
+            $this->values = array_map('PHPsyntax', $res->getColumn('fullcode'));
         } else {
             unset($this->values['Composer Packages']);
         }
 
         // Special case for the encodings : one tick each.
-        $res = $this->sqlite->query('SELECT encoding, block FROM stringEncodings ORDER BY encoding, block');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchTable('stringEncodings');
+        // sort
+        foreach($res->toArray() as $row) {
             if (empty($row['encoding'])) {
                 $this->values['Strings']['Unknown encoding'] = Ambassador::YES;
             } elseif (empty($row['block'])) {
