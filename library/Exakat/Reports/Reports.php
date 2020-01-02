@@ -74,14 +74,14 @@ abstract class Reports {
         }
     }
 
-    protected function _generate(array $analyzerList) : string {}
+    protected function _generate(array $analyzerList): string {}
 
-    public static function getReportClass(string $report) : string {
+    public static function getReportClass(string $report): string {
         $report = ucfirst(strtolower($report));
         return "\\Exakat\\Reports\\$report";
     }
 
-    public function generate(string $folder, string $name= 'table') : string {
+    public function generate(string $folder, string $name= 'table'): string {
         if (empty($name)) {
             // FILE_FILENAME is defined in the children class
             $name = $this::FILE_FILENAME;
@@ -118,11 +118,11 @@ abstract class Reports {
         }
     }
 
-    protected function count($step = 1) : void {
+    protected function count($step = 1): void {
         $this->count += $step;
     }
 
-    public function getCount() : int {
+    public function getCount(): int {
         return $this->count;
     }
 

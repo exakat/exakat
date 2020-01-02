@@ -59,7 +59,7 @@ class Tinkergraph extends Graph {
                                    ));
     }
 
-    public function resetConnection() : void {
+    public function resetConnection(): void {
         unset($this->db);
         $this->db = new Connection(array( 'host'  => $this->config->tinkergraph_host,
                                           'port'  => $this->config->tinkergraph_port,
@@ -69,12 +69,12 @@ class Tinkergraph extends Graph {
         $this->status = self::UNCHECKED;
     }
 
-    private function checkConfiguration() : void {
+    private function checkConfiguration(): void {
         ini_set('default_socket_timeout', 1600);
         $this->db->open();
     }
 
-    public function query(string $query, array $params = array(),array $load = array()) : GraphResults {
+    public function query(string $query, array $params = array(),array $load = array()): GraphResults {
         if ($this->status === self::UNAVAILABLE) {
             return new GraphResults();
         } elseif ($this->status === self::UNCHECKED) {
@@ -114,7 +114,7 @@ class Tinkergraph extends Graph {
         }
     }
 
-    public function queryOne(string $query, array $params = array(),array $load = array()) : GraphResults {
+    public function queryOne(string $query, array $params = array(),array $load = array()): GraphResults {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }

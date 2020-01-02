@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Reports\Helpers\Results;
 
 class Radwellcode extends Reports {
     const FILE_EXTENSION = 'txt';
@@ -50,7 +49,7 @@ class Radwellcode extends Reports {
 
                              );
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $resultsAnalyzers = $this->dump->fetchAnalysers($list);

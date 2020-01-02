@@ -25,7 +25,6 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exakat;
-use Exakat\Reports\Helpers\Results;
 use Exakat\Tasks\Helpers\BaselineStash;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
@@ -153,7 +152,7 @@ class Ambassador extends Reports {
         return $menu;
     }
 
-    protected function getBasedPage(string $file) : string {
+    protected function getBasedPage(string $file): string {
         if (empty($this->baseHTML)) {
             $this->baseHtml = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
 
@@ -184,10 +183,10 @@ class Ambassador extends Reports {
 
             $compatibilities = array();
             $rulesets = $this->dump->fetchTable('themas');
-            $rulesets->filter(function(array $x) : bool { return substr($x['thema'], 0, 13) === 'Compatibility';});
-            $compatibilities = array_map(function(string $x) : string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";},
+            $rulesets->filter(function (array $x): bool { return substr($x['thema'], 0, 13) === 'Compatibility';});
+            $compatibilities = array_map(function (string $x): string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";},
                                          $rulesets->getColumn('thema'));
-            
+
             $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
             $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
             $this->baseHtml = $this->injectBloc($this->baseHtml, 'SIDEBARMENU', $menu);
@@ -217,7 +216,7 @@ class Ambassador extends Reports {
         return str_replace('{{' . $bloc . '}}', $content, $html);
     }
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name === self::STDOUT) {
             print "Can't produce Ambassador format to stdout\n";
             return '';
@@ -1195,8 +1194,8 @@ HTML;
     protected function generateForeachFavorites(Section $section) {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Foreach Names');
-        $res = array_map(function (array $x) : array { $x['key'] = str_replace('&', '', $x['key']); return $x; }, $res->toArray());
-        uasort($res, function ($a, $b) : bool { return $a['value'] <=> $b['value']; });
+        $res = array_map(function (array $x): array { $x['key'] = str_replace('&', '', $x['key']); return $x; }, $res->toArray());
+        uasort($res, function ($a, $b): bool { return $a['value'] <=> $b['value']; });
 
         $html = array();
         $xAxis = array();
@@ -1216,7 +1215,7 @@ HTML;
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generateDereferencingLevelsBreakdown(Section $section) : void {
+    protected function generateDereferencingLevelsBreakdown(Section $section): void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Dereferencing Levels');
         if ($res->isEmpty()) { return ; }
@@ -1239,11 +1238,11 @@ HTML;
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPFunctionBreakdown(Section $section) : void {
+    protected function generatePHPFunctionBreakdown(Section $section): void {
         // List of php functions used
         $res = $this->dump->fetchTable('phpStructures');
-        $res->filter(function (array $x) : bool { return $x['type'] === 'function'; });
-        $res->order(function (array $a, array $b) : bool { return $b['count'] <=> $a['count']; });
+        $res->filter(function (array $x): bool { return $x['type'] === 'function'; });
+        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
         $html = '';
         $xAxis = array();
@@ -1261,11 +1260,11 @@ HTML;
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPConstantsBreakdown(Section $section) : void {
+    protected function generatePHPConstantsBreakdown(Section $section): void {
         // List of php constant used
         $res = $this->dump->fetchTable('phpStructures');
-        $res->filter(function (array $x) : bool { return $x['type'] === 'constant'; });
-        $res->order(function (array $a, array $b) : bool { return $b['count'] <=> $a['count']; });
+        $res->filter(function (array $x): bool { return $x['type'] === 'constant'; });
+        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
         $html = '';
         $xAxis = array();
@@ -1286,8 +1285,8 @@ HTML;
     protected function generatePHPClassesBreakdown(Section $section) {
         // List of php functions used
         $res = $this->dump->fetchTable('phpStructures');
-        $res->filter(function (array $x) : bool { return in_array($x['type'], array("class", "interface", "trait"), \STRICT_COMPARISON); });
-        $res->order(function (array $a, array $b) : bool { return $b['count'] <=> $a['count']; });
+        $res->filter(function (array $x): bool { return in_array($x['type'], array('class', 'interface', 'trait'), \STRICT_COMPARISON); });
+        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
         $html = '';
         $xAxis = array();
@@ -1547,7 +1546,7 @@ JAVASCRIPT;
         foreach ($rulesets AS $key => $categorie) {
             $list = $this->rulesets->getRulesetsAnalyzers(array($categorie));
             $res = $this->dump->fetchAnalysersCounts($list);
-            $res->filter(function(array $x) : bool { return $x['count'] >= -1;});
+            $res->filter(function (array $x): bool { return $x['count'] >= -1;});
             $counts = $res->getColumn('count');
             $data[] = array('label' => $key, 'value' => array_sum($counts));
         }
@@ -1588,7 +1587,7 @@ JAVASCRIPT;
     public function getSeverityBreakdown() {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $res = $this->dump->getSeverityBreakdown($list);
-        
+
         $html = array();
         $dataScript = array();
         foreach ($res->toArray() as $value) {
@@ -1612,13 +1611,13 @@ HTML;
                      'script' => $dataScript);
     }
 
-    protected function getTotalAnalysedFile() : int {
+    protected function getTotalAnalysedFile(): int {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         return $this->dump->getAnalyzedFiles($list);
     }
 
-    protected function getTotalAnalyzer() : array {
+    protected function getTotalAnalyzer(): array {
         return $this->dump->getTotalAnalyzer();
     }
 
@@ -1682,7 +1681,7 @@ HTML;
         $sqlList = makeList($list);
 
         $result = $this->dump->fetchAnalysersCounts($list);
-        $result->filter(function(array $x) : bool { return substr($x['analyzer'], 0, 7) !== 'Common';});
+        $result->filter(function (array $x): bool { return substr($x['analyzer'], 0, 7) !== 'Common';});
 
         $baseHTML = $this->getBasedPage($section->source);
 
@@ -1750,13 +1749,13 @@ SQL;
         return (int) $row['number'];
     }
 
-    protected function getFilesCount(array $list = array(), int $limit = 10) : array {
+    protected function getFilesCount(array $list = array(), int $limit = 10): array {
         $res = $this->dump->getFileBreakdown($list);
-        
+
         return array_slice($res->toArray(), 0, $limit);
     }
 
-    protected function getTopFile(array $list, string $file = 'issues') : string {
+    protected function getTopFile(array $list, string $file = 'issues'): string {
         $data = $this->getFilesCount($list, self::TOPLIMIT);
 
         $html = '';
@@ -1778,7 +1777,7 @@ SQL;
         return $html;
     }
 
-    protected function getFileOverview() : array {
+    protected function getFileOverview(): array {
         $list = $this->rulesets->getRulesetsAnalyzers(array('All'));
 
         $data = $this->getFilesCount($list, self::LIMITGRAPHE);
@@ -1810,14 +1809,14 @@ SQL;
         );
     }
 
-    protected function getAnalyzersCount(int $limit) : array {
+    protected function getAnalyzersCount(int $limit): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $res = $this->dump->getAnalyzersCount($list);
 
         return array_slice($res->toArray(), 0, $limit);
     }
 
-    protected function getTopAnalyzers(array $list, string $file = 'issues') : string {
+    protected function getTopAnalyzers(array $list, string $file = 'issues'): string {
         $res = $this->dump->getTopAnalyzers($list, self::TOPLIMIT);
 
         $data = array();
@@ -1827,7 +1826,7 @@ SQL;
                             'name'  => $row['analyzer']);
         }
 
-        $html = [];
+        $html = array();
         foreach ($data as $value) {
             $html []= '<div class="clearfix">
                     <a href="' . $file . '.html#analyzer=' . $this->toId($value['name']) . '" title="' . $value['label'] . '">
@@ -1848,9 +1847,9 @@ SQL;
         return $html;
     }
 
-    protected function getSeveritiesNumberBy(string $type = 'file') : array {
+    protected function getSeveritiesNumberBy(string $type = 'file'): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        
+
         $res = $this->dump->getSeveritiesNumberBy($list, $type);
         return $res->toGroupedBy($type, 'severity');
     }
@@ -1910,7 +1909,7 @@ SQL;
         $this->generateIssuesEngine($section, $diff);
     }
 
-    protected function generateIssuesEngine(Section $section, array $issues = array()) : void {
+    protected function generateIssuesEngine(Section $section, array $issues = array()): void {
         if (empty($issues)) {
             return;
         }
@@ -1983,7 +1982,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function getIssuesFaceted(array $ruleset) : array {
+    protected function getIssuesFaceted(array $ruleset): array {
         return $this->getIssuesFacetedDb($ruleset);
     }
 
@@ -2022,9 +2021,9 @@ JAVASCRIPTCODE;
         return $oldIssues;
     }
 
-    public function getIssuesFacetedDb(array $ruleset) : array {
+    public function getIssuesFacetedDb(array $ruleset): array {
         $results = $this->dump->fetchAnalysers($ruleset);
-        $results->filter(function (array $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); });
+        $results->filter(function (array $x): bool { return !in_array($x['fullcode'], array('Not Compatible With PHP Version', 'Not Compatible With PHP Configuration')); });
 
         $TTFColors = array('Instant'  => '#5f492d',
                            'Quick'    => '#e8d568',
@@ -2661,7 +2660,7 @@ HTML;
                 $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
-            $version = $suffix[0].'-'.$suffix[1];
+            $version = $suffix[0] . '-' . $suffix[1];
             $compilations []= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>";
         }
 
@@ -2947,7 +2946,7 @@ HTML;
 
     }
 
-    private function generateTraitMatrix(Section $section) : void {
+    private function generateTraitMatrix(Section $section): void {
 
         // nombre de method en conflict possible
         // ce trait inclut l'autre
@@ -3001,7 +3000,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateTraitTree(Section $section) : void {
+    private function generateTraitTree(Section $section): void {
         $list = array();
 
         $res = $this->dump->getCitTree('trait');
@@ -3037,7 +3036,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassTree(Section $section) : void {
+    private function generateClassTree(Section $section): void {
         $list = array();
 
         $res = $this->dump->getCitTree('class');
@@ -3101,7 +3100,7 @@ HTML;
         return "<li>$root<ul>" . implode('', $return) . "</ul></li>\n";
     }
 
-    private function generateExceptionTree(Section $section) : void {
+    private function generateExceptionTree(Section $section): void {
         $exceptions = array (
   'Throwable' =>
   array (
@@ -3281,11 +3280,11 @@ HTML;
         return $return;
     }
 
-    private function generateNamespaceTree(Section $section) : void {
+    private function generateNamespaceTree(Section $section): void {
         $theTable = '';
         $res = $this->dump->fetchTable('namespaces');
-        $res->order(function(array $a, array $b) : bool { return $a['namespace'] <=> $b['namespace'];});
-                $res->map(function(array $x) : array { $x['namespace'] = trim($x['namespace'], '\\'); return $x;});
+        $res->order(function (array $a, array $b): bool { return $a['namespace'] <=> $b['namespace'];});
+                $res->map(function (array $x): array { $x['namespace'] = trim($x['namespace'], '\\'); return $x;});
         $paths = $res->getColumn('namespace');
 
         $paths = $this->path2tree($paths);
@@ -3298,7 +3297,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function tree2ul($tree, $display) : string {
+    private function tree2ul($tree, $display): string {
         if (empty($tree)) {
             return '';
         }
@@ -3578,7 +3577,7 @@ HTML
         }
 
         $res = $this->dump->fetchTableMethods();
-        $res->filter(function (array $x) : bool { return $x['type'] === 'class'; });
+        $res->filter(function (array $x): bool { return $x['type'] === 'class'; });
 
         $ranking = array(''          => 1,
                          'public'    => 2,
@@ -3623,7 +3622,7 @@ HTML
         return $return;
     }
 
-    private function generateVisibilityConstantSuggestions() : array {
+    private function generateVisibilityConstantSuggestions(): array {
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivateConstante'));
 
         $couldBePrivate = array();
@@ -3665,7 +3664,7 @@ HTML
         }
 
         $res = $this->dump->fetchTableClassConstants();
-        $res->filter(function(array $x) : bool { return $x['type'] === 'class'; });
+        $res->filter(function (array $x): bool { return $x['type'] === 'class'; });
 
         $theClass = '';
         $ranking = array(''          => 1,
@@ -3759,7 +3758,7 @@ HTML
         }
 
         $res = $this->dump->fetchTableProperty();
-        $res->filter(function(array $x) : bool { return $x['type'] === 'class'; });
+        $res->filter(function (array $x): bool { return $x['type'] === 'class'; });
 
         $theClass = '';
         $ranking = array(''          => 1,
@@ -3825,7 +3824,7 @@ HTML
     private function generateChangedClasses(Section $section) {
         $changedClasses = '';
         $res = $this->dump->fetchTable('classChanges');
-        
+
         if ($res->isEmpty() === true) {
             $changedClasses = 'No changes detected';
         } else {
@@ -4482,9 +4481,9 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateFileDependencies(Section $section) : void {
+    private function generateFileDependencies(Section $section): void {
         $res = $this->dump->fetchTable('filesDependencies');
-        $res->filter(function (array $x) : bool { return ($x['included'] !== $x['including']) && in_array($x['type'], array("IMPLEMENTS", "EXTENDS", "INCLUDE", "NEW"));});
+        $res->filter(function (array $x): bool { return ($x['included'] !== $x['including']) && in_array($x['type'], array('IMPLEMENTS', 'EXTENDS', 'INCLUDE', 'NEW'));});
 
         $nodes = array();
         foreach($res->toArray() as $row) {
@@ -4538,7 +4537,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateIdenticalFiles(Section $section) : void {
+    private function generateIdenticalFiles(Section $section): void {
         $res = $this->dump->getIdenticalFiles();
 
         $theTable = array();
@@ -4565,7 +4564,7 @@ HTML;
 
     private function generateConcentratedIssues(Section $section) {
         $list = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
-        
+
         $res = $this->dump->getConcentratedIssues($list);
 
         $table = array();
@@ -4724,7 +4723,7 @@ HTML;
         return $cveHtml;
     }
 
-    protected function Compatibility(int $count, string $analyzer) : string {
+    protected function Compatibility(int $count, string $analyzer): string {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
@@ -4758,7 +4757,7 @@ HTML;
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
 
-    protected function getVCSInfo() : array {
+    protected function getVCSInfo(): array {
         $info = array();
 
         $vcsClass = Vcs::getVCS($this->config);
@@ -4818,13 +4817,13 @@ HTML;
         return $info;
     }
 
-    private function makeDocLink(string $analyzer) : string {
+    private function makeDocLink(string $analyzer): string {
         $docs = $this->docs->getDocs($analyzer, 'name');
         assert(!is_array($docs), "Missing docs('name') for $analyzer");
         return "<a href=\"analyses_doc.html#{$this->toId($analyzer)}\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; $docs";
     }
 
-    private function toHtmlList(array $array) : string {
+    private function toHtmlList(array $array): string {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
     }
 }

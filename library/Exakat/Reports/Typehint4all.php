@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Reports\Helpers\Results;
 
 class Typehint4all extends Reports {
     const FILE_EXTENSION = 'txt';
@@ -40,7 +39,7 @@ class Typehint4all extends Reports {
                      );
     }
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $analyzerList = $this->dependsOnAnalysis();
 
         $analysisResults = $this->dump->fetchAnalysers($analyzerList);

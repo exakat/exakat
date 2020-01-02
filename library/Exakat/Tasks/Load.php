@@ -2095,7 +2095,7 @@ class Load extends Tasks {
                                                             ),
                      \STRICT_COMPARISON)) {
 
-            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), $this->SCALAR_TYPE, \STRICT_COMPARISON) && 
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), $this->SCALAR_TYPE, \STRICT_COMPARISON) &&
                  $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR) {
                 ++$this->id;
                 $nsname = $this->processSingle('Scalartypehint');

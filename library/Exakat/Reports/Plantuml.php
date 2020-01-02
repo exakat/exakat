@@ -27,7 +27,7 @@ class Plantuml extends Reports {
     const FILE_EXTENSION = 'puml';
     const FILE_FILENAME  = 'exakat';
 
-    public function generate(string $folder, string $name= self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name= self::FILE_FILENAME): string {
 
         $res = $this->dump->fetchPlantUml();
 

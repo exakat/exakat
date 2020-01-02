@@ -32,12 +32,12 @@ class Results {
 
     public function __construct(SQLite3Result $res, $options = array()) {
         $this->res = $res;
-        
+
         $this->options = $options;
         $this->options['phpsyntax'] = $this->options['phpsyntax']  ?? array();
     }
 
-    public function load() : int {
+    public function load(): int {
         $this->values = array();
         $this->count  = 0;
 
@@ -52,7 +52,7 @@ class Results {
         return $this->count;
     }
 
-    public function isEmpty() : bool {
+    public function isEmpty(): bool {
         if ($this->values === null) {
             $this->load();
         }
@@ -60,11 +60,11 @@ class Results {
         return $this->count === 0;
     }
 
-    public function getCount() : int {
+    public function getCount(): int {
         return $this->count;
     }
 
-    public function getColumn(string $column) : array {
+    public function getColumn(string $column): array {
         if ($this->values === null) {
             $this->load();
         }
@@ -72,7 +72,7 @@ class Results {
         return array_column($this->values, $column);
     }
 
-    public function toGroupedBy(string $col1, string $col2 = null) : array {
+    public function toGroupedBy(string $col1, string $col2 = null): array {
         if ($this->values === null) {
             $this->load();
         }
@@ -91,11 +91,11 @@ class Results {
                 if (!isset($return[$row[$col1]]) ) {
                     $return[$row[$col1]] = array();
                 }
-    
+
                 if (!isset($return[$row[$col1]][$col2])) {
                     $return[$row[$col1]][$col2] = array();
                 }
-    
+
                 $return[$row[$col1]][$col2][] = $row;
             }
         }
@@ -104,7 +104,7 @@ class Results {
     }
 
 
-    public function toArray() : array {
+    public function toArray(): array {
         if ($this->values === null) {
             $this->load();
         }
@@ -112,15 +112,15 @@ class Results {
         return $this->values;
     }
 
-    public function toArrayHash($key = '') : array {
+    public function toArrayHash($key = ''): array {
         if ($this->values === null) {
             $this->load();
         }
-        
+
         if (empty($key)) {
             return array();
         }
-        
+
         $return = array();
         foreach($this->values as $value) {
             $return[$value[$key]] = $value;
@@ -129,7 +129,7 @@ class Results {
         return $return;
     }
 
-    public function toList(string $col = null) : array {
+    public function toList(string $col = null): array {
         if ($this->values === null) {
             $this->load();
         }
@@ -137,11 +137,11 @@ class Results {
         if ($col === null) {
             $col = array_keys($this->values[0])[0];
         }
-        
+
         return array_column($this->values, $col);
     }
 
-    public function toString(string $col = '') : string {
+    public function toString(string $col = ''): string {
         if ($this->values === null) {
             $this->load();
         }
@@ -154,7 +154,7 @@ class Results {
         }
     }
 
-    public function toInt(string $col = '') : int {
+    public function toInt(string $col = ''): int {
         if ($this->values === null) {
             $this->load();
         }
@@ -167,11 +167,11 @@ class Results {
             $first = array_keys($this->values[0])[0];
             return (int) $this->values[0][$first];
         }
-        
+
         return (int) ($this->values[0][$col] ?? 0);
     }
 
-    public function toHash(string $key, string $value = null) : array {
+    public function toHash(string $key, string $value = null): array {
         if ($this->values === null) {
             $this->load();
         }
@@ -186,7 +186,7 @@ class Results {
                 $return[$row[$key]] = $row[$value];
             }
         }
-        
+
         return $return;
     }
 

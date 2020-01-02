@@ -22,13 +22,12 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Reports\Helpers\Results;
 
 class Json extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat';
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $analysisResults = $this->dump->fetchAnalysers($analyzerList);
 
         $results = array();

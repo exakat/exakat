@@ -32,7 +32,7 @@ class Marmelab extends Reports {
                     );
     }
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         $rulesets = $this->config->project_rulesets ?? $this->dependsOnAnalysis();
 
         $list = $this->rulesets->getRulesetsAnalyzers($rulesets);

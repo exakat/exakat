@@ -28,7 +28,7 @@ class Phpconfiguration extends Reports {
     const FILE_EXTENSION = 'ini-dist';
     const FILE_FILENAME  = 'php.suggested';
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $final = '';
 
         $themed = $this->rulesets->getRulesetsAnalyzers($analyzerList);
@@ -99,7 +99,7 @@ class Phpconfiguration extends Reports {
 
                 $res2 = $this->dump->fetchAnalysers(array('Security/CantDisableFunction'));
                 $list = $res2->getColumn('fullcode');
-                $list = array_map(function (string $x) : string {
+                $list = array_map(function (string $x): string {
                     return substr($x, 0, strpos($x, '('));
                 }, $list);
                 $list = array_unique($list);
@@ -118,7 +118,7 @@ class Phpconfiguration extends Reports {
 
                 $res2 = $this->dump->fetchAnalysers(array('Security/CantDisableClass'));
                 $list = $res2->getColumn('fullcode');
-                $list = array_map(function (string $x) : string {
+                $list = array_map(function (string $x): string {
                     return substr($x, 0, strpos($x, '('));
                 }, $list);
                 $list = array_unique($list);

@@ -27,7 +27,7 @@ class BeautyCanon extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = self::STDOUT;
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $res = $this->dump->fetchAnalysers($analyzerList);
 
         $results = array();

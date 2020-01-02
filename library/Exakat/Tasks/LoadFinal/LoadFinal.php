@@ -49,9 +49,9 @@ class LoadFinal {
     }
 
     protected function newQuery($title): Query {
-        return new Query(0, 
-                         $this->config->project, 
-                         $title, 
+        return new Query(0,
+                         $this->config->project,
+                         $title,
                          $this->config->executable
                          );
     }

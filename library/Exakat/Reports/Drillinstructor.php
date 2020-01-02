@@ -28,12 +28,12 @@ class Drillinstructor extends Ambassador {
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Drillinstructor';
 
-    protected function generateLevel(Section $section) : void {
+    protected function generateLevel(Section $section): void {
         $this->generateIssuesEngine($section,
                                     $this->getIssuesFaceted(array('Level 1')));
     }
 
-    protected function generateLevels(Section $section) : void {
+    protected function generateLevels(Section $section): void {
         $levels = '';
 
         foreach(range(1, 6) as $level) {

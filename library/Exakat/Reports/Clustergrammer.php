@@ -27,13 +27,13 @@ class Clustergrammer extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'clustergrammer';
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         $analyzers = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         display( count($analyzers) . " analyzers\n");
 
         $res = $this->dump->fetchAnalysers($analyzers);
         $byAnalyzer = $res->toArray();
-        uksort($byAnalyzer, function ($a, $b) : bool { return $a['analyzer'] <=> $b['analyzer']; } );
+        uksort($byAnalyzer, function ($a, $b): bool { return $a['analyzer'] <=> $b['analyzer']; } );
         $skeleton = array();
         foreach($byAnalyzer as $row) {
             $skeleton[$row['analyzer']] = 0;
@@ -49,7 +49,7 @@ class Clustergrammer extends Reports {
 
         $all = array();
         $byFile = $res->toArray();
-        uksort($byFile, function ($a, $b) : bool { return $a['file'] <=> $b['file']; } );
+        uksort($byFile, function ($a, $b): bool { return $a['file'] <=> $b['file']; } );
         $total = 0;
         foreach($byFile as $row) {
             if (!isset($all[$row['file']])) {

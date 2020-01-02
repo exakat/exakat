@@ -28,7 +28,7 @@ class Composer extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'composer';
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $themed = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
         $res = $this->dump->fetchAnalysersCounts($themed);
         $sources = $res->toHash('analyzer', 'count');

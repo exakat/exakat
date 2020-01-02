@@ -26,13 +26,13 @@ class Dependencies extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'dependencies';
 
-    public function generate(string $folder, string $name= 'dependencies') : string {
+    public function generate(string $folder, string $name= 'dependencies'): string {
         display("This report is not finished\n");
-        
+
         return '';
     }
 
-    protected function _generate(array $analyzerList) : string {
+    protected function _generate(array $analyzerList): string {
         $graph = new GSNeo4j($this->config);
 
         $links    = array();

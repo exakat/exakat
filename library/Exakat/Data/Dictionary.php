@@ -32,19 +32,19 @@ class Dictionary {
     private $datastore  = null;
     private $dictionary = array();
     private $lcindex    = array();
-    
+
     public function __construct(Datastore $datastore) {
         $this->datastore = exakat('datastore');
     }
 
-    private function init() : void {
+    private function init(): void {
         $this->dictionary = $this->datastore->getAllHash('dictionary');
         foreach(array_keys($this->dictionary) as $key) {
             $this->lcindex[mb_strtolower($key)] = 1;
         }
     }
 
-    public function translate(array $code, bool $case = self::CASE_SENSITIVE) : array {
+    public function translate(array $code, bool $case = self::CASE_SENSITIVE): array {
         if (empty($this->dictionary)) {
             $this->init();
         }
@@ -68,7 +68,7 @@ class Dictionary {
         return $return;
     }
 
-    public function grep(string $regex) : array {
+    public function grep(string $regex): array {
         $keys = preg_grep($regex, array_keys($this->dictionary));
 
         $return = array();
@@ -79,7 +79,7 @@ class Dictionary {
         return $return;
     }
 
-    public function source(array $code) : array {
+    public function source(array $code): array {
         $return = array();
 
         $reverse = array_flip($this->dictionary);
@@ -93,7 +93,7 @@ class Dictionary {
         return $return;
     }
 
-    public function length(string $length) : array {
+    public function length(string $length): array {
         $return = array();
 
         if (preg_match('/ > (\d+)/', $length, $r)) {
@@ -111,7 +111,7 @@ class Dictionary {
         return array_values($return);
     }
 
-    public function staticMethodStrings() : array {
+    public function staticMethodStrings(): array {
         $doublecolon = array_filter($this->dictionary, function ($x) { return strlen($x) > 6 &&
                                                                               strpos($x,' ') === false &&
                                                                               strpos($x,'::') !== false &&

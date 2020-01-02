@@ -26,7 +26,7 @@ class FileDependencies extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'filedependencies';
 
-    public function generate(string $folder, string $name= 'dependencies') : string {
+    public function generate(string $folder, string $name= 'dependencies'): string {
         $res = $this->dump->fetchTable('filesDependencies');
         $res = array_filter($res->toArray(), function (array $x) { return $x['including'] !== $x['included']; });
 

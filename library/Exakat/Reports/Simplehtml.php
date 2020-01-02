@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Reports\Helpers\Results;
 
 class Simplehtml extends Reports {
     const FILE_EXTENSION = '';
@@ -31,7 +30,7 @@ class Simplehtml extends Reports {
     protected $finalName       = null;
     protected $tmpName         = '';
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name === self::STDOUT) {
             print "Can't produce SimpleHtml format to stdout\n";
             return false;
@@ -59,11 +58,11 @@ class Simplehtml extends Reports {
         file_put_contents("{$this->tmpName}/index.html", $html);
 
         $this->cleanFolder();
-        
+
         return '';
     }
 
-    private function makeIntro() : string {
+    private function makeIntro(): string {
         $date = date('r');
         $text = "<tr><th>Date:</th><td>$date</td></tr>\n";
 
@@ -80,7 +79,7 @@ class Simplehtml extends Reports {
         return $text;
     }
 
-    private function makeSummary(string $folder) : string {
+    private function makeSummary(string $folder): string {
         if (empty($this->config->project_rulesets)) {
             $list = $this->rulesets->getRulesetsAnalyzers($this->config->project_rulesets);
         } elseif (!empty($this->config->program)) {
@@ -90,9 +89,9 @@ class Simplehtml extends Reports {
         }
 
         $analysis = $this->dump->fetchAnalysersCounts($list);
-        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function($x) { return $x >= 1;});
+        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function ($x) { return $x >= 1;});
 
-        $text = [];
+        $text = array();
         $titleCache = array();
         foreach($analysis as $row) {
             if (!isset($titleCache[$row['analyzer']])) {

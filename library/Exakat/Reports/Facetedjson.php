@@ -26,7 +26,7 @@ class Facetedjson extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'faceted';
 
-    public function generate(string $dirName, string $fileName = null) : string {
+    public function generate(string $dirName, string $fileName = null): string {
         $res = $this->dump->fetchAnalysers($this->themesToShow);
 
         $items = array();

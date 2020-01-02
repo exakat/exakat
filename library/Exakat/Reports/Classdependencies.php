@@ -31,7 +31,7 @@ class Classdependencies extends Reports {
     private $finalName   = '';
     private $tmpName     = '';
 
-    public function generate(string $folder, string $name= 'dependencies') : string {
+    public function generate(string $folder, string $name= 'dependencies'): string {
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
@@ -105,7 +105,7 @@ class Classdependencies extends Reports {
         }
 
         rename($this->tmpName, $this->finalName);
-        
+
         return '';
     }
 }

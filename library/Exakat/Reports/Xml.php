@@ -25,7 +25,6 @@ namespace Exakat\Reports;
 
 use XmlWriter;
 use Exakat\Exakat;
-use Exakat\Reports\Helpers\Results;
 
 /**
  * Xml report for PHP_CodeSniffer.
@@ -102,7 +101,7 @@ class Xml extends Reports {
         $this->cachedData .= $out->flush();
     }
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $analysisResults = $this->dump->fetchAnalysers($list);

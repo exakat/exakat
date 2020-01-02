@@ -25,7 +25,6 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exakat;
-use Exakat\Reports\Helpers\Results;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 
@@ -139,7 +138,7 @@ class Emissary extends Reports {
         return $menu;
     }
 
-    protected function getBasedPage(string $file) : string {
+    protected function getBasedPage(string $file): string {
         static $baseHTML;
 
         if (empty($baseHTML)) {

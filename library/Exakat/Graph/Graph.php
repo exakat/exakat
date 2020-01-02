@@ -36,8 +36,8 @@ abstract class Graph {
         $this->config = exakat('config');
     }
 
-    abstract public function query(string $query, array $params = array(),array $load = array()) : GraphResults;
-    abstract public function queryOne(string $query, array $params = array(),array $load = array()) : GraphResults;
+    abstract public function query(string $query, array $params = array(),array $load = array()): GraphResults;
+    abstract public function queryOne(string $query, array $params = array(),array $load = array()): GraphResults;
 
     abstract public function start();
     abstract public function stop();

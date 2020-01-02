@@ -116,7 +116,7 @@ class Owasp extends Ambassador {
         $this->themesToShow      = array('Security');
     }
 
-    private function getLinesFromFile(string $filePath, int $lineNumber, int $numberBeforeAndAfter) : array {
+    private function getLinesFromFile(string $filePath, int $lineNumber, int $numberBeforeAndAfter): array {
         --$lineNumber; // array index
         $lines = array();
         if (file_exists($this->config->projects_root . '/projects/' . $this->config->project . '/code/' . $filePath)) {
@@ -148,7 +148,7 @@ class Owasp extends Ambassador {
         return $lines;
     }
 
-    private function generateOwaspDocumentation() : void {
+    private function generateOwaspDocumentation(): void {
         $baseHTML = $this->getBasedPage('analyses_doc');
 
         $owasp = json_decode(file_get_contents($this->config->dir_root . '/data/owasp.top10.json'));
@@ -171,7 +171,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage('owasp_doc', $finalHTML);
     }
 
-    protected function generateDetailledDashboard(Section $section) : void {
+    protected function generateDetailledDashboard(Section $section): void {
         $levels = '';
 
         foreach($this->components as $group => $analyzers) {
@@ -232,7 +232,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateDashboard(Section $section) : void {
+    protected function generateDashboard(Section $section): void {
         $levels = '';
 
         foreach($this->components as $group => $analyzers) {
@@ -244,7 +244,7 @@ class Owasp extends Ambassador {
             $analyzersList = makeList($analyzers);
 
             $res = $this->dump->fetchAnalysersCounts($analyzers);
-            $sources = array_filter($res->toHash('analyzer', 'count'), function($x) { return $x > -1;});
+            $sources = array_filter($res->toHash('analyzer', 'count'), function ($x) { return $x > -1;});
             asort($sources);
 
             $empty = 0;
@@ -288,7 +288,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage($section->file, $html);
     }
 
-    public function getHashData() : string {
+    public function getHashData(): string {
         $php = exakat('php');
 
         $info = array(
@@ -365,7 +365,7 @@ class Owasp extends Ambassador {
         return $html;
     }
 
-    protected function generateAnalyzers() : void {
+    protected function generateAnalyzers(): void {
         $analysers = $this->getAnalyzersResultsCounts();
 
         $baseHTML = $this->getBasedPage('analyzers');
@@ -387,7 +387,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage('analyzers', $finalHTML);
     }
 
-    protected function generateFiles(Section $section) : void {
+    protected function generateFiles(Section $section): void {
         $files = $this->getFilesResultsCounts();
 
         $baseHTML = $this->getBasedPage('files');
@@ -409,7 +409,7 @@ class Owasp extends Ambassador {
         $this->putBasedPage('files', $finalHTML);
     }
 
-    protected function getFileOverview() : array {
+    protected function getFileOverview(): array {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();

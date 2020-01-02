@@ -24,13 +24,12 @@
 namespace Exakat\Reports;
 
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
-use Exakat\Reports\Helpers\Results;
 
 class Yaml extends Reports {
     const FILE_EXTENSION = 'yaml';
     const FILE_FILENAME  = 'exakat';
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $analysisResults = $this->dump->fetchAnalysers($analyzerList);
 
         $results = array();

@@ -30,7 +30,7 @@ class Dailytodo extends Reports {
     private $tmpName     = '';
     private $finalName   = '';
 
-    public function generate(string $folder, string $name= 'todo') : string {
+    public function generate(string $folder, string $name= 'todo'): string {
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
@@ -87,21 +87,21 @@ HTML;
         }
 
         $tags = array('<reporting>',
-                      '<count>',    
-                      '<total>',    
-                      '<thema>',    
-                      '<date>',     
-                      '<todos>',    
-                      '<thanks>',   
+                      '<count>',
+                      '<total>',
+                      '<thema>',
+                      '<date>',
+                      '<todos>',
+                      '<thanks>',
                       );
 
-        $values = array($reporting,         
-                        $count,             
-                        $total,             
-                        $project_rulesets,  
-                        date('l, F jS Y'),  
+        $values = array($reporting,
+                        $count,
+                        $total,
+                        $project_rulesets,
+                        date('l, F jS Y'),
                         implode('', $todos),
-                        $this->getThanks(), 
+                        $this->getThanks(),
                         );
 
         $html = file_get_contents($this->tmpName . '/invoice.html');
@@ -123,7 +123,7 @@ HTML;
         copyDir("{$this->config->dir_root}/media/tabler", $this->tmpName);
     }
 
-    private function cleanFolder() : void {
+    private function cleanFolder(): void {
         if (file_exists($this->finalName)) {
             rename($this->finalName, $this->tmpName . '2');
         }
@@ -135,7 +135,7 @@ HTML;
         }
     }
 
-    private function syntaxColoring(string $source) : string {
+    private function syntaxColoring(string $source): string {
         $colored = highlight_string('<?php ' . $source . ' ;?>', \RETURN_VALUE);
         $colored = substr($colored, 79, -65);
 
@@ -146,7 +146,7 @@ HTML;
         return $colored;
     }
 
-    private function getThanks() : string {
+    private function getThanks(): string {
         $thanks = parse_ini_file("{$this->config->dir_root}/data/thankyou.ini", \INI_PROCESS_SECTIONS);
         $thanks = $thanks['thanks'];
         shuffle($thanks);

@@ -31,7 +31,7 @@ class Codeflower extends Reports {
     private $tmpName     = '';
     private $finalName   = '';
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name === self::STDOUT) {
             print "Can't produce Codeflower format to stdout\n";
             return false;
@@ -47,17 +47,17 @@ class Codeflower extends Reports {
         $this->getClassHierarchy();
 
         $this->cleanFolder();
-        
+
         return '';
     }
 
-    private function getFileDependencies() : void {
+    private function getFileDependencies(): void {
         $all = $this->dump->fetchTable('filesDependencies', array('including' => 'DISTINCT including',
-                                                                  'included', 
+                                                                  'included',
                                                                    'type'))->toArray();
-        
-        $all = array_filter($all, function(array $x) { return $x['type'] === 'extends' && $x['including'] !== $x['included']; });
-        
+
+        $all = array_filter($all, function (array $x) { return $x['type'] === 'extends' && $x['including'] !== $x['included']; });
+
         $files = array();
         foreach($all as $a) {
             array_collect_by($files, $a['including'], $a['included']);
@@ -91,7 +91,7 @@ class Codeflower extends Reports {
         $this->select['By inclusions'] = 'inclusions.json';
     }
 
-    private function getClassHierarchy() : void {
+    private function getClassHierarchy(): void {
         $res = $this->dump->fetchTableCit();
 
         $classes = array();
@@ -151,7 +151,7 @@ class Codeflower extends Reports {
         $this->select['By class hierarchy'] = 'classes.json';
     }
 
-    private function getNamespaces() :void {
+    private function getNamespaces(): void {
         $res = $this->dump->fetchTableCit();
 
         $root = new \stdClass();
@@ -196,7 +196,7 @@ class Codeflower extends Reports {
         $this->select['By namespace'] = 'namespaces.json';
     }
 
-    private function initFolder() : void {
+    private function initFolder(): void {
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);
@@ -206,7 +206,7 @@ class Codeflower extends Reports {
         copyDir($this->config->dir_root . '/media/codeflower', $this->tmpName );
     }
 
-    private function cleanFolder() : void {
+    private function cleanFolder(): void {
         $html = file_get_contents($this->tmpName . '/index.html');
         $select = '';
         foreach($this->select as $name => $file) {

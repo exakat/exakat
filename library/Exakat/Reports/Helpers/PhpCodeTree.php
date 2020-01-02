@@ -42,7 +42,7 @@ class PhpCodeTree {
         $this->dump = $dump;
     }
 
-    public function load() : void {
+    public function load(): void {
         // collect namespaces
         $res = $this->dump->fetchTable('namespaces');
         foreach($res->toArray() as $row) {

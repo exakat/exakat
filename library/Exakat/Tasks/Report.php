@@ -61,7 +61,7 @@ class Report extends Tasks {
 
         $dump = Dump::factory($this->config->dump, Dump::READ);
         $res = $dump->fetchAnalysersCounts(array('Project/Dump'));
-        
+
         if ($res->toInt('count') !== 1) {
             throw new NoDumpYet($this->config->project);
         }

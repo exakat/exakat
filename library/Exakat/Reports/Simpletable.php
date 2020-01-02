@@ -30,14 +30,14 @@ class Simpletable extends Reports {
     private $tmpName     = '';
     private $finalName   = '';
 
-    public function generate(string $folder, string $name= 'table') : string {
+    public function generate(string $folder, string $name= 'table'): string {
         $this->finalName = "$folder/$name";
         $this->tmpName   = "{$this->config->tmp_dir}/.$name";
 
         $this->initFolder();
         $this->generateData($folder);
         $this->cleanFolder();
-        
+
         return '';
     }
 
@@ -115,7 +115,7 @@ HTML;
         }
     }
 
-    private function syntaxColoring(string $source) : string {
+    private function syntaxColoring(string $source): string {
         $colored = highlight_string('<?php ' . $source . ' ;?>', \RETURN_VALUE);
         $colored = substr($colored, 79, -65);
 

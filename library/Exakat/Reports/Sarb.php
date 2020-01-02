@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Reports\Helpers\Results;
 
 class Sarb extends Reports {
     const FILE_EXTENSION = 'json';

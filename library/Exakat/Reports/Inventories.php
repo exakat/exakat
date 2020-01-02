@@ -28,7 +28,7 @@ class Inventories extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'inventories';
 
-    public function generate(string $folder, string $name = self::FILE_FILENAME) : string {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name == self::STDOUT) {
             print "Can't produce Inventories format to stdout\n";
             return '';
@@ -76,11 +76,11 @@ class Inventories extends Reports {
 
         $this->saveTable('globalVariables',       "$path/globals.csv", array('variable', 'file', 'line', 'isRead', 'isModified', 'type'));
         $this->saveTable('inclusions',       "$path/inclusions.csv", array('including', 'included'));
-        
+
         return '';
     }
 
-    private function saveInventory(string $analyzer, string $file) : void {
+    private function saveInventory(string $analyzer, string $file): void {
         $res = $this->dump->fetchAnalysers(array($analyzer));
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
@@ -91,7 +91,7 @@ class Inventories extends Reports {
         fclose($fp);
     }
 
-    private function saveAtom(string $atom, string $file) : void {
+    private function saveAtom(string $atom, string $file): void {
         $res = $this->dump->fetchTable('literal' . $atom);
         if ($res->isEmpty() === true) {
             file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
@@ -106,7 +106,7 @@ class Inventories extends Reports {
         fclose($fp);
     }
 
-    private function saveTable(string $table, string $file, array $columns) : void {
+    private function saveTable(string $table, string $file, array $columns): void {
         $res = $this->dump->fetchTable($table);
         if ($res->isEmpty() === true) {
             file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');

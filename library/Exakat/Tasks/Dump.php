@@ -56,11 +56,11 @@ class Dump extends Tasks {
         $this->linksDown = GraphElements::linksAsList();
     }
 
-    public function setConfig(Config $config) : void {
+    public function setConfig(Config $config): void {
         $this->config = $config;
     }
 
-    public function run() : void {
+    public function run(): void {
         if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -175,7 +175,7 @@ class Dump extends Tasks {
         $this->finish();
     }
 
-    public function finalMark(array $finalMark) : void {
+    public function finalMark(array $finalMark): void {
         $sqlite = new \Sqlite3($this->config->dump);
         $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
@@ -187,17 +187,17 @@ class Dump extends Tasks {
         $sqlite->query('REPLACE INTO hash VALUES ' . implode(', ', $values));
     }
 
-    private function processResultsRuleset(array $ruleset, array $counts = array()) : int {
+    private function processResultsRuleset(array $ruleset, array $counts = array()): int {
         $analyzers = $this->rulesets->getRulesetsAnalyzers($ruleset);
 
         return $this->processMultipleResults($analyzers, $counts);
     }
 
-    private function processResultsList(array $rulesetList, array $counts = array()) : int {
+    private function processResultsList(array $rulesetList, array $counts = array()): int {
         return $this->processMultipleResults($rulesetList, $counts);
     }
 
-    private function processMultipleResults(array $analyzers, array $counts) : int {
+    private function processMultipleResults(array $analyzers, array $counts): int {
         $this->dump->removeResults($analyzers);
 
         $specials = array('Php/Incompilable',
@@ -258,17 +258,17 @@ GREMLIN
                     $severities[$result['analyzer']] = $severity;
                 }
 
-                $toDump[] = array($result['fullcode'], 
-                                  $result['file'], 
-                                  $result['line'], 
-                                  $result['namespace'], 
-                                  $result['class'], 
+                $toDump[] = array($result['fullcode'],
+                                  $result['file'],
+                                  $result['line'],
+                                  $result['namespace'],
+                                  $result['class'],
                                   $result['function'],
                                   $result['analyzer'],
                                   $severity,
                                   );
             }
-            
+
             $readCounts[] = $this->dump->addResults($toDump);
         }
         $readCounts = array_merge(...$readCounts);
@@ -292,7 +292,7 @@ GREMLIN
         return $error;
     }
 
-    private function processResults(string $class, int $count) : void {
+    private function processResults(string $class, int $count): void {
         $this->log->log( "$class : $count\n");
         // No need to go further
         if ($count <= 0) {
@@ -312,24 +312,24 @@ GREMLIN
                 continue;
             }
 
-            $todump[] = array(null, 
-                              $result['fullcode'], 
-                              $result['file'], 
-                              $result['line'], 
-                              $result['namespace'], 
-                              $result['class'], 
+            $todump[] = array(null,
+                              $result['fullcode'],
+                              $result['file'],
+                              $result['line'],
+                              $result['namespace'],
+                              $result['class'],
                               $result['function'],
                               $class,
                               $severity);
         }
-        
+
         if (empty($toDump)) {
             return;
         }
-        
+
         $saved = $this->dump->addResults($toDump);
 
-        $this->log->log("$class : dumped ".implode(', ', $saved));
+        $this->log->log("$class : dumped " . implode(', ', $saved));
 
         if ($count === $saved) {
             display("All $saved results saved for $class\n");
@@ -339,28 +339,28 @@ GREMLIN
         }
     }
 
-    private function getAtomCounts() : void {
+    private function getAtomCounts(): void {
         $query = 'g.V().groupCount("b").by(label).cap("b").next();';
         $atomsCount = $this->gremlin->query($query);
         $atomsCount->deHash();
-        
+
         $this->dump->storeInTable('atomsCounts', $atomsCount);
 
         display(count($atomsCount) . " atoms\n");
     }
 
-    private function finish() : void {
+    private function finish(): void {
         $this->dump->close();
         $this->removeSnitch();
     }
 
-    private function collectHashAnalyzer() : void {
+    private function collectHashAnalyzer(): void {
         $tables = array('hashAnalyzer',
                        );
         $this->dump->collectTables($tables);
     }
 
-    private function collectVariables() : void {
+    private function collectVariables(): void {
         $query = $this->newQuery('collectVariables');
         $query->atomIs(array('Variable', 'Variablearray', 'Variableobject'), Analyzer::WITHOUT_CONSTANTS)
               ->tokenIs('T_VARIABLE')
@@ -384,8 +384,8 @@ GREMLIN
             $name = str_replace(array('&', '...', '@'), '', $row['name']);
             $unique[$name . $row['type']] = 1;
             $type = $types[$row['type']];
-            $toDump[] = array('', 
-                              mb_strtolower($name), 
+            $toDump[] = array('',
+                              mb_strtolower($name),
                               $type,
                              );
         }
@@ -448,9 +448,9 @@ GREMLIN
                 $namespaceId = 1;
             }
 
-            $cit_implements[$row['line'].$row['fullnspath']] = $row['implements'];
+            $cit_implements[$row['line'] . $row['fullnspath']] = $row['implements'];
             unset($row['implements']);
-            $cit_use[$row['line'].$row['fullnspath']] = $row['uses'];
+            $cit_use[$row['line'] . $row['fullnspath']] = $row['uses'];
             unset($row['uses']);
             $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
             unset($row['fullnspath']);
@@ -553,7 +553,7 @@ GREMLIN;
             $row['implements'] = array(); // always empty
 
             unset($row['implements']);
-            $cit_use[$row['line'].$row['fullnspath']] = $row['uses'];
+            $cit_use[$row['line'] . $row['fullnspath']] = $row['uses'];
             unset($row['uses']);
             $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
             unset($row['fullnspath']);
@@ -570,12 +570,12 @@ GREMLIN;
             $query = array();
 
             $this->storeToDumpArray('cit', $cit);
-            
+
             $toDump = array();
             foreach($cit_implements as $id => $impl) {
                 foreach($impl as $implements) {
                     $citIds = preg_grep('/^\d+\\\\' . addslashes(mb_strtolower($implements)) . '$/', array_keys($citId));
-                    
+
                     if (empty($citIds)) {
                         $toDump[] = array('', $citId[$id], $implements, 'implements');
                     } else {
@@ -593,7 +593,7 @@ GREMLIN;
             foreach($cit_use as $id => $use1) {
                 foreach($use1 as $uses) {
                     $citIds = preg_grep('/^\d+\\\\' . addslashes(mb_strtolower($uses)) . '$/', array_keys($citId));
-                    
+
                     if (empty($citIds)) {
                         $toDump[] = array('', $citId[$id], $implements, 'use');
                     } else {
@@ -835,7 +835,7 @@ GREMLIN;
                 continue; // skip double
             }
             $propertyIds[$propertyId] = ++$propertyCount;
-            
+
             $toDump[] = array('',
                               $row['name'],
                               (int) $citId[$row['classline'] . $row['class']],
@@ -902,7 +902,7 @@ GREMLIN;
                 continue; // skip double
             }
             $propertyIds[$propertyId] = ++$propertyCount;
-            
+
             $toDump[] = array('',
                               $row['name'],
                               (int) $citId[$row['classline'] . $row['class']],
@@ -1089,18 +1089,18 @@ GREMLIN
 , array(), array());
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        
+
         $toDump = array();
         $unique = array();
         foreach($result->toArray() as $row) {
-            if (isset($unique[$row['name'].$row['line']])) {
+            if (isset($unique[$row['name'] . $row['line']])) {
                 continue;  // Skipping double definitions until we can differentiate them.
             }
-            $unique[$row['name'].$row['line']] = 1;
-            
+            $unique[$row['name'] . $row['line']] = 1;
+
             $methodIds[$row['fullnspath']] = ++$methodCount;
-            
-            $ns = preg_grep('%^'.addslashes($row['namespace']).'$%i', array_keys($namespacesId));
+
+            $ns = preg_grep('%^' . addslashes($row['namespace']) . '$%i', array_keys($namespacesId));
             $ns = $namespacesId[array_pop($ns)];
 
             $toDump[] = array($methodCount,
@@ -1169,7 +1169,7 @@ GREMLIN
             if (!isset($methodIds[$row['fullnspath']])) {
                 continue;
             }
-            
+
             $toDump[] = array( '',
                                $row['name'],
                                0,
@@ -1204,11 +1204,11 @@ GREMLIN
         return $namespacesId;
     }
 
-    private function collectFiles() : void {
+    private function collectFiles(): void {
         $this->files = $this->dump->fetchTable('files')->toHash('file', 'id');
     }
 
-    private function collectPhpStructures() : void {
+    private function collectPhpStructures(): void {
         $this->collectPhpStructures2('Functioncall', 'Functions/IsExtFunction', 'function');
         $this->collectPhpStructures2('Identifier", "Nsname', 'Constants/IsExtConstant', 'constant');
         $this->collectPhpStructures2('Identifier", "Nsname', 'Interfaces/IsExtInterface', 'interface');
@@ -1216,7 +1216,7 @@ GREMLIN
         $this->collectPhpStructures2('Newcall", "Identifier", "Nsname', 'Classes/IsExtClass', 'class');
     }
 
-    private function collectPhpStructures2(string $label, string $analyzer, string $type) : int {
+    private function collectPhpStructures2(string $label, string $analyzer, string $type): int {
         $query = <<<GREMLIN
 g.V().hasLabel("$label").where( __.in("ANALYZED").has("analyzer", "$analyzer"))
 .coalesce( __.out("NAME"), __.filter{true;})
@@ -1224,14 +1224,14 @@ g.V().hasLabel("$label").where( __.in("ANALYZED").has("analyzer", "$analyzer"))
 GREMLIN;
         $res = $this->gremlin->query($query);
         $res->deHash(array($type));
-        
+
         $total = $this->dump->storeInTable('atomsCounts', $res);
         display("$total PHP {$type}s\n");
-        
+
         return $total;
     }
 
-    private function collectDefinitionsStats() : void {
+    private function collectDefinitionsStats(): void {
         $toDump = array();
         $types = array('Staticconstant'   => 'staticconstants',
                        'Staticmethodcall' => 'staticmethodcalls',
@@ -1265,7 +1265,7 @@ GREMLIN;
         display("$count Definitions Stats");
     }
 
-    private function collectFilesDependencies() : void {
+    private function collectFilesDependencies(): void {
 
         // Direct inclusion
         $query = $this->newQuery('Inclusions');
@@ -1531,7 +1531,7 @@ GREMLIN
         // instanceof ?
     }
 
-    private function collectClassesDependencies() : void {
+    private function collectClassesDependencies(): void {
         // Finding extends and implements
         $query = $this->newQuery('Extensions of classes');
         $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
@@ -1807,13 +1807,13 @@ GREMLIN
         // instanceof ?
     }
 
-    private function collectHashCounts(string $query, string $name) : void {
+    private function collectHashCounts(string $query, string $name): void {
         $index = $this->gremlin->query($query);
 
         $toDump = array();
         foreach($index->toArray()[0] as $number => $count) {
-            $toDump[] = array($name, 
-                              $number, 
+            $toDump[] = array($name,
+                              $number,
                               $count,
                              );
         }
@@ -1827,7 +1827,7 @@ GREMLIN
         display( "$name : $total");
     }
 
-    private function collectMissingDefinitions() : void {
+    private function collectMissingDefinitions(): void {
         $toDump = array();
 
         $functioncallCount  = $this->gremlin->query('g.V().hasLabel("Functioncall").count()')[0];
@@ -1990,35 +1990,35 @@ GREMLIN
         $this->storeToDumpArray('hash', $toDump);
     }
 
-    private function collectMethodsCounts() : void {
+    private function collectMethodsCounts(): void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'MethodsCounts');
     }
 
-    private function collectPropertyCounts() : void {
+    private function collectPropertyCounts(): void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
     }
 
-    private function collectClassTraitsCounts() : void {
+    private function collectClassTraitsCounts(): void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassTraits');
     }
 
-    private function collectConstantCounts() : void {
+    private function collectConstantCounts(): void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassConstantCounts');
     }
 
-    private function collectNativeCallsPerExpressions() : void {
+    private function collectNativeCallsPerExpressions(): void {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(["Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"]))).as("results")
@@ -2030,7 +2030,7 @@ GREMLIN;
         $this->collectHashCounts($query, 'NativeCallPerExpression');
     }
 
-    private function collectGlobalVariables() : int {
+    private function collectGlobalVariables(): int {
         $query = $this->newQuery('Global Variables');
         $query->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
               ->codeIsNot('$GLOBALS', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
@@ -2060,7 +2060,7 @@ GREMLIN
         return $total;
     }
 
-    private function collectReadability() : void {
+    private function collectReadability(): void {
         $loops = 20;
         $query = <<<GREMLIN
 g.V().sideEffect{ functions = 0; name=""; expression=0;}
@@ -2101,7 +2101,7 @@ GREMLIN;
         display("$total readability index");
     }
 
-    public function checkRulesets($ruleset, array $analyzers) : void {
+    public function checkRulesets($ruleset, array $analyzers): void {
         $sqliteFile = $this->config->dump;
 
         $sqlite = new \Sqlite3($sqliteFile);
@@ -2120,7 +2120,7 @@ GREMLIN;
         }
     }
 
-    private function expandRulesets() : void {
+    private function expandRulesets(): void {
         $analyzers = array();
         $res = $this->dump->fetchTable('resultsCounts', array('analyzer'));
         $analyzers = $res->toList('analyzer');
@@ -2145,11 +2145,11 @@ GREMLIN;
         }
     }
 
-    private function newQuery(string $title) : Query {
+    private function newQuery(string $title): Query {
         return new Query(0, (string) $this->config->project, $title, $this->config->executable);
     }
 
-    public function collect() : void {
+    public function collect(): void {
         $begin = microtime(\TIME_AS_NUMBER);
         $this->collectClassChanges();
         $end = microtime(\TIME_AS_NUMBER);
@@ -2232,7 +2232,7 @@ GREMLIN;
         }
     }
 
-    private function collectClassChanges() : void {
+    private function collectClassChanges(): void {
         $total = 0;
 
         // TODO : Constant visibility and value
@@ -2434,14 +2434,14 @@ GREMLIN
         display("Found $total class changes\n");
     }
 
-    private function storeToDump(string $table, Query $query) : int {
+    private function storeToDump(string $table, Query $query): int {
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         return $this->dump->storeInTable($table, $result);
     }
 
-    private function storeToDumpArray(string $table, array $result) : int {
+    private function storeToDumpArray(string $table, array $result): int {
         return $this->dump->storeInTable($table, $result);
     }
 }

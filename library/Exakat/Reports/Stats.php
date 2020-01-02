@@ -84,7 +84,7 @@ class Stats extends Reports {
             );
 
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
 
         $analyzerList = array_merge(...array_values($this->extensions));
         $analyzerList = array_filter($analyzerList, function ($x) { return strpos($x, '/') !== false; });

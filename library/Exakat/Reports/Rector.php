@@ -48,11 +48,11 @@ class Rector extends Reports {
                      );
     }
 
-    protected function _generate(array $analyzerList) : string {
+    protected function _generate(array $analyzerList): string {
         $themed = $this->rulesets->getRulesetsAnalyzers($this->dependsOnAnalysis());
 
         $analysis = $this->dump->fetchAnalysersCounts($themed);
-        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function($x) { return $x >= 1;});
+        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function ($x) { return $x >= 1;});
 
         $services = array();
         foreach($analysis as $analyzer => $count) {

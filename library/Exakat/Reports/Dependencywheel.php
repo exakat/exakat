@@ -32,7 +32,7 @@ class Dependencywheel extends Reports {
     private $packagenames = '';
     private $matrix       = '';
 
-    public function generate(string $folder, string $name= 'wheel') : string {
+    public function generate(string $folder, string $name= 'wheel'): string {
         if ($name === self::STDOUT) {
             print "Can't produce Dependency Wheel format to stdout\n";
             return false;

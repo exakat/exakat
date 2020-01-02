@@ -27,7 +27,7 @@ class Onepagejson extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'onepage';
 
-    public function generate(string $folder, string $name = null) : string {
+    public function generate(string $folder, string $name = null): string {
         $res = $this->dump->fetchAnalysers($this->themesToShow);
 
         $results = array();

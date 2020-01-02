@@ -26,7 +26,6 @@ namespace Exakat\Query;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
-use Exakat\Phpexec;
 
 class Query {
     public const STOP_QUERY = 'filter{ false; }';
@@ -112,7 +111,7 @@ class Query {
         return $this;
     }
 
-    public function side() : self {
+    public function side(): self {
         if ($this->stopped === self::QUERY_STOPPED) {
             return $this;
         }
@@ -123,7 +122,7 @@ class Query {
         return $this;
     }
 
-    public function prepareSide() : Command {
+    public function prepareSide(): Command {
         if ($this->stopped === self::QUERY_STOPPED) {
             return new Command(Query::NO_QUERY);
         }
@@ -154,7 +153,7 @@ class Query {
         return $return;
     }
 
-    public function prepareQuery() : bool {
+    public function prepareQuery(): bool {
         if ($this->stopped === self::QUERY_STOPPED) {
             return true;
         }

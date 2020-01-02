@@ -26,10 +26,10 @@ class CloseNaming extends Data {
     public function prepare() {
         $res = $this->dump->fetchTable('variables');
         $variables = $res->getColumn('variable');
-        $variables = array_filter($variables, function (string $x) : bool { 
-                                                              return strlen($x) > 3 && 
+        $variables = array_filter($variables, function (string $x): bool {
+                                                              return strlen($x) > 3 &&
                                                                      $x[0] !== '{'  &&
-                                                                     $x[1] !== '$'; 
+                                                                     $x[1] !== '$';
                                                                         });
         $variables = array_unique($variables);
 

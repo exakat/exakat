@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Phpexec;
 use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\ProjectNeeded;

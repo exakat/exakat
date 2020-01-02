@@ -27,9 +27,9 @@ class Phpcity extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat.phpcity';
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $results = $this->dump->fetchTablePhpcity();
-        
+
         foreach($results->toArray() as $row) {
             $row['implements'] = null;
             $row['anonymous'] = null;

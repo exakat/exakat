@@ -35,7 +35,7 @@ class Manual extends Reports {
                              'Empty'       => array(),
                              );
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $md = '';
 
         $md .= 'Introduction' . PHP_EOL . PHP_EOL;
@@ -173,11 +173,11 @@ class Manual extends Reports {
         return implode("\n+ ", $array);
     }
 
-    private function escapeMd(string $string) : string {
+    private function escapeMd(string $string): string {
         return str_replace('_', '\\_', $string);
     }
 
-    private function generateConstants() : string {
+    private function generateConstants(): string {
         $total = 0;
         $constants = '';
         $md = '';
@@ -280,7 +280,7 @@ class Manual extends Reports {
         return $this->generateGeneric('Type/Mime', 'Mime type');
     }
 
-    private function generateGeneric(string $analyzer, string $name, string $section = 'Values') : string {
+    private function generateGeneric(string $analyzer, string $name, string $section = 'Values'): string {
         $total = 0;
         $url = '';
         $md = '';
@@ -305,7 +305,7 @@ class Manual extends Reports {
        return $md;
     }
 
-    private function generateRegex() : string {
+    private function generateRegex(): string {
         return $this->generateGeneric('Type/Regex', 'Regular expressions');
     }
 

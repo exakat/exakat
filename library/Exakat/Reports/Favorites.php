@@ -27,7 +27,7 @@ class Favorites extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'favorites';
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $analyzers = $this->rulesets->getRulesetsAnalyzers($analyzerList);
 
         $return = array();

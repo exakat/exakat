@@ -27,7 +27,7 @@ class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'exakat.uml';
 
-    public function _generate(array $analyzerList) : string {
+    public function _generate(array $analyzerList): string {
         $res = $this->dump->fetchTableUml();
         $id = 0;
         $ids = array();

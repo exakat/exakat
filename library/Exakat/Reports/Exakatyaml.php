@@ -37,7 +37,7 @@ class Exakatyaml extends Reports {
         );
 
         $res = $this->dump->fetchAnalysersCounts($analyzerList);
-        $rules = array_filter($res->toHash('count', 'analyzer'), function($x) { return $x > -1;});
+        $rules = array_filter($res->toHash('count', 'analyzer'), function ($x) { return $x > -1;});
         $this->count($res->getCount());
 
         ksort($rules);
@@ -50,7 +50,7 @@ class Exakatyaml extends Reports {
         return $yaml;
     }
 
-    private function format(array $r) : string {
+    private function format(array $r): string {
         $ident = str_repeat(' ', 8);
 
         $list = explode(', ', $r[2]);

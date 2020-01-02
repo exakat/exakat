@@ -87,7 +87,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         if (empty($this->data)) {
             return;
         }
-        
+
         $result = array();
         foreach($this->data as $value) {
             foreach($value as $k => $v) {
@@ -97,7 +97,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         if ($extra !== null) {
             $results = array_map(function ($x) use ($extra) { return array_merge($x, $extra); }, $result);
         }
-        
+
         $this->data = $result;
     }
 
@@ -105,7 +105,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         if (empty($this->data)) {
             return;
         }
-        
+
         $result = array();
         foreach($this->data as $value) {
             $result[] = array('', array_pop($value));
@@ -113,10 +113,10 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         if ($extra !== null) {
             $results = array_map($result, function ($x) use ($extra) { return array_merge($x, $extra); });
         }
-        
+
         $this->data = $result;
     }
-    
+
     public function toArray() {
         if ($this->type === self::EMPTY) {
             return array();
