@@ -16,10 +16,12 @@ class Dump {
     protected $sqlite         = null;
     private $sqliteFileFinal  = '';
     private $path             = '';
+    private $previousPath     = '';
 
     function __construct(string $path, int $init = self::READ, string $project = '', string $phpexecutable = '') {
         $this->sqliteFileFinal    = $path;
         $this->sqliteFile         = str_replace('/dump', '/.dump', $this->sqliteFileFinal);
+        $this->sqliteFilePrevious = str_replace('/dump', '/dump-1', $this->sqliteFileFinal);
 
         $this->project        = $project;
         $this->phpexcutable   = $phpexecutable;
@@ -321,7 +323,6 @@ SQL;
         $this->sqlite->query($query);
 
         $this->collectDatastore();
-        return;
 
         $time   = time();
         try {
@@ -329,6 +330,7 @@ SQL;
         } catch (\Throwable $e) {
             die("Couldn't generate an id for the current dump file. Aborting");
         }
+
         if (file_exists($this->sqliteFilePrevious)) {
             $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
             $sqliteOld->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
@@ -342,12 +344,13 @@ SQL;
         } else {
             $serial = 1;
         }
-        $query = <<<SQL
-INSERT INTO hash VALUES (NULL, 'dump_time', $time),
-                        (NULL, 'dump_id', $id),
-                        (NULL, 'dump_serial', $serial)
-SQL;
-        $this->sqlite->query($query);
+        
+        $toDump = array(array('', 'dump_time',   $time),
+                        array('', 'dump_id',     $id),
+                        array('', 'dump_serial', $serial),
+                        );
+
+        $this->storeInTable('hash', $toDump);
 
         display('Inited tables');
     }

@@ -41,6 +41,8 @@ class All extends Reports {
             $report = new $reportClass($this->config);
             $report->generate($folder, $report::FILE_FILENAME ===  self::STDOUT ? self::FILE_FILENAME : $report::FILE_FILENAME);
         }
+
+        return '';
     }
 
     public function dependsOnAnalysis(): array {

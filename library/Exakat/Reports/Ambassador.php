@@ -363,7 +363,7 @@ class Ambassador extends Reports {
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateFavorites(Section $section) {
+    protected function generateFavorites(Section $section): void {
         $baseHTML = $this->getBasedPage($section->source);
 
         $favorites = new Favorites($this->config);
@@ -953,7 +953,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateParameterCounts(Section $section) {
+    protected function generateParameterCounts(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
@@ -1244,18 +1244,19 @@ HTML;
         $res->filter(function (array $x): bool { return $x['type'] === 'function'; });
         $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
-        $html = '';
+        $html = array();
         $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
@@ -1266,40 +1267,42 @@ HTML;
         $res->filter(function (array $x): bool { return $x['type'] === 'constant'; });
         $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
-        $html = '';
+        $html = array();
         $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPClassesBreakdown(Section $section) {
+    protected function generatePHPClassesBreakdown(Section $section): void {
         // List of php functions used
         $res = $this->dump->fetchTable('phpStructures');
         $res->filter(function (array $x): bool { return in_array($x['type'], array('class', 'interface', 'trait'), \STRICT_COMPARISON); });
         $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
-        $html = '';
+        $html = array();
         $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
@@ -1561,11 +1564,11 @@ JAVASCRIPT;
                 return 0;
             }
         });
-        $issuesHtml = '';
+        $issuesHtml = array();
         $dataScript = array();
 
         foreach ($data as $value) {
-            $issuesHtml .= '<div class="clearfix">
+            $issuesHtml []= '<div class="clearfix">
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
@@ -1578,13 +1581,13 @@ JAVASCRIPT;
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>';
-        $issuesHtml .= str_repeat($filler, $nb);
+        $issuesHtml []= str_repeat($filler, $nb);
 
-        return array('html'   => $issuesHtml,
+        return array('html'   => implode(PHP_EOL, $issuesHtml),
                      'script' => $dataScript);
     }
 
-    public function getSeverityBreakdown() {
+    public function getSeverityBreakdown(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $res = $this->dump->getSeverityBreakdown($list);
 
@@ -1661,7 +1664,7 @@ HTML;
         return $return;
     }
 
-    private function generateNoIssues(Section $section) {
+    private function generateNoIssues(Section $section): void {
         $list = $this->rulesets->getRulesetsAnalyzers(array(
         'Analyze',
         'Security',
@@ -1678,7 +1681,6 @@ HTML;
         'CompatibilityPHP80',
         ));
         $list[] = 'Project/Dump';
-        $sqlList = makeList($list);
 
         $result = $this->dump->fetchAnalysersCounts($list);
         $result->filter(function (array $x): bool { return substr($x['analyzer'], 0, 7) !== 'Common';});
@@ -1729,24 +1731,11 @@ HTML;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function getFilesResultsCounts() {
+    private function getFilesResultsCounts(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $res = $this->dump->getFilesResultsCounts($list)->toHash('file');
 
         return $res;
-    }
-
-    private function getCountAnalyzersByFile(string $file): int {
-        $query = <<<'SQL'
-SELECT count(*)  AS number
-    FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, \SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
-
-        return (int) $row['number'];
     }
 
     protected function getFilesCount(array $list = array(), int $limit = 10): array {
@@ -1866,10 +1855,10 @@ SQL;
         foreach ($data as $value) {
             $ini = $this->docs->getDocs($value['analyzer']);
             $xAxis[] = "'" . addslashes($ini['name']) . "'";
-            $dataCritical[] = empty($severities[$value['analyzer']]['Critical']['count']) ? 0 : $severities[$value['analyzer']]['Critical']['count'];
-            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']['count']) ? 0 : $severities[$value['analyzer']]['Major']['count'];
-            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']['count']) ? 0 : $severities[$value['analyzer']]['Minor']['count'];
-            $dataNone[]     = empty($severities[$value['analyzer']]['None']['count']) ? 0 : $severities[$value['analyzer']]['None']['count'];
+            $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']) ? 0 : $severities[$value['analyzer']]['Major'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']) ? 0 : $severities[$value['analyzer']]['Minor'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None']) ? 0 : $severities[$value['analyzer']]['None'];
         }
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
@@ -1986,7 +1975,7 @@ JAVASCRIPTCODE;
         return $this->getIssuesFacetedDb($ruleset);
     }
 
-    public function getNewIssuesFaceted(array $ruleset, $path) {
+    public function getNewIssuesFaceted(array $ruleset, string  $path): array {
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
 
@@ -2201,7 +2190,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generatePhpConfiguration(Section $section) {
+    protected function generatePhpConfiguration(Section $section): void {
         $phpConfiguration = new Phpcompilation($this->config);
         $report = $phpConfiguration->generate('', Reports::INLINE);
 
@@ -2243,7 +2232,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateCompatibilityEstimate(Section $section) {
+    protected function generateCompatibilityEstimate(Section $section): void {
         $html = $this->getBasedPage($section->source);
 
         $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0');
@@ -2546,7 +2535,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateDirectiveList(Section $section) {
+    protected function generateDirectiveList(Section $section): void {
         // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
         $directives = array('standard', 'bcmath', 'date', 'file',
                             'fileupload', 'mail', 'ob', 'env',
@@ -2628,7 +2617,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateCompilations(Section $section) {
+    protected function generateCompilations(Section $section): void {
         $compilations = array();
 
         $total = $this->dump->fetchHash('files')->toInt();
@@ -2707,7 +2696,7 @@ HTML;
         $this->generateCompatibility($section, '53');
     }
 
-    protected function generateCompatibility(Section $section, $version) {
+    protected function generateCompatibility(Section $section, string $version): void {
         $compatibility = array();
         $skipped       = array();
 
@@ -2760,7 +2749,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateGlobals(Section $section = null) {
+    private function generateGlobals(Section $section = null): void {
         $res = $this->dump->fetchTable('globalVariables');
 
         // Empty or absent is the same : no soup!
@@ -2907,7 +2896,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateInterfaceTree(Section $section) {
+    private function generateInterfaceTree(Section $section): void {
         $res = $this->dump->getCitTree('interface');
         foreach($res->toArray() as $row) {
             if (empty($row['parent'])) {
@@ -2958,9 +2947,6 @@ HTML;
         $table = array_fill_keys($traits, array_fill_keys($traits, array()));
 
         // Get conflicts
-        $query = <<<'SQL'
-
-SQL;
         $res = $this->dump->getTraitConflicts();
         $table = $res->toHash('t1', 't2');
 
@@ -3511,7 +3497,7 @@ HTML
     }
 
 
-    private function generateClassFinalSuggestions() {
+    private function generateClassFinalSuggestions(): array {
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBeFinal'));
 
         $couldBeFinal = array();
@@ -3527,7 +3513,7 @@ HTML
         return $couldBeFinal;
     }
 
-    private function generateClassAbstractuggestions() {
+    private function generateClassAbstractuggestions(): array {
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBeAbstractClass'));
 
         $couldBeAbstract = array();
@@ -3543,7 +3529,7 @@ HTML
         return $couldBeAbstract;
     }
 
-    private function generateVisibilityMethodsSuggestions() {
+    private function generateVisibilityMethodsSuggestions(): array {
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivateMethod'));
 
         $couldBePrivate = array();
@@ -3561,7 +3547,6 @@ HTML
         }
 
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBeProtectedMethod'));
-
         $couldBeProtected = array();
         foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
@@ -3708,7 +3693,7 @@ HTML
         return $return;
     }
 
-    private function generateVisibilityPropertySuggestions() {
+    private function generateVisibilityPropertySuggestions(): array {
 
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivate'));
         $couldBePrivate = array();
@@ -3808,7 +3793,7 @@ HTML
         return $return;
     }
 
-    private function generateAlteredDirectives(Section $section) {
+    private function generateAlteredDirectives(Section $section): void {
         $alteredDirectives = '';
         $res = $this->dump->fetchAnalysers(array('Php/DirectivesUsage'));
         foreach($res->toArray() as $row) {
@@ -3821,14 +3806,14 @@ HTML
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateChangedClasses(Section $section) {
+    private function generateChangedClasses(Section $section): void {
         $changedClasses = '';
         $res = $this->dump->fetchTable('classChanges');
 
         if ($res->isEmpty() === true) {
             $changedClasses = 'No changes detected';
         } else {
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            foreach($res->toArray() as $row) {
                 if ($row['changeType'] === 'Member Visibility') {
                     $row['parentValue'] .= ' $' . $row['name'];
                     $row['childValue']   = ' $' . $row['name'];
@@ -3853,7 +3838,7 @@ HTML
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassDepth(Section $section) {
+    private function generateClassDepth(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
@@ -4025,7 +4010,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function generateClassSize(Section $section) {
+    private function generateClassSize(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
@@ -4196,7 +4181,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function generateMethodSize(Section $section) {
+    private function generateMethodSize(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
@@ -4374,19 +4359,20 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateStats(Section $section) {
+    private function generateStats(Section $section): void {
         $results = new Stats($this->config);
         $report = $results->generate('', Reports::INLINE);
         $report = json_decode($report);
 
-        $stats = '';
+        $stats = array();
         foreach($report as $group => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$group</td></tr>\n";
+            $stats []= "<tr><td colspan=2 bgcolor=\"#BBB\">$group</td></tr>";
 
             foreach($hash as $name => $count) {
-                $stats .= "<tr><td>$name</td><td>$count</td></tr>\n";
+                $stats []= "<tr><td>$name</td><td>$count</td></tr>";
             }
         }
+        $stats = implode(PHP_EOL, $stats);
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'STATS', $stats);
@@ -4562,7 +4548,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateConcentratedIssues(Section $section) {
+    private function generateConcentratedIssues(Section $section): void {
         $list = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
 
         $res = $this->dump->getConcentratedIssues($list);
@@ -4616,7 +4602,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateAppinfo(Section $section) {
+    protected function generateAppinfo(Section $section): void {
         $data = new Data\Appinfo($this->dump);
         $data->prepare();
 

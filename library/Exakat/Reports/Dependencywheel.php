@@ -46,6 +46,8 @@ class Dependencywheel extends Reports {
         $this->makeWheel();
 
         $this->cleanFolder();
+
+        return '';
     }
 
     private function makeWheel() {

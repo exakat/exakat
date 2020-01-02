@@ -218,6 +218,8 @@ class Dump extends Tasks {
         $severities = array();
         $readCounts = array();
 
+        $analyzers = array_filter($analyzers, function (string $s): bool { return substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
+
         $chunks = array_chunk($analyzers, 200);
         // Gremlin only accepts chunks of 255 maximum
 
@@ -2266,7 +2268,8 @@ GREMLIN;
               ->savePropertyAs('fullcode', 'default2') // collect
 
               ->raw(<<<'GREMLIN'
-map{[ "type": 'Constant Value',
+map{[ "id": "",
+      "type": 'Constant Value',
       "name":name,
       "parent":class2,
       "parentValue":name + " = " + default2,
@@ -2302,7 +2305,8 @@ GREMLIN
               ->inIs('NAME')
 
               ->raw(<<<'GREMLIN'
-map{[ "type": "Constant visibility",
+map{[ "id": "",
+      "type": "Constant visibility",
       "name":name,
       "parent":class2,
       "parentValue":visibility2 + ' ' + name,
@@ -2331,7 +2335,8 @@ GREMLIN
               ->inIs('NAME')
               ->raw('sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }.filter{ signature2 != signature1; }', array(), array())
               ->raw(<<<'GREMLIN'
-map{[ "type": "Method Signature",
+map{[ "id": "",
+      "type": "Method Signature",
       "name":name,
       "parent":class2,
       "parentValue":"function " + name + "(" + signature2.join(", ") + ")",
@@ -2355,7 +2360,8 @@ GREMLIN
               ->inIs('METHOD')
               ->savePropertyAs('fullcode', 'name2')
               ->raw(<<<'GREMLIN'
-map{ ["type": "Method Visibility",
+map{ ["id": "",
+      "type": "Method Visibility",
       "name":fnp.tokenize('::')[1],
       "parent":name1,
       "parentValue":visibility2 + ' ' + fnp.tokenize('::')[1],
@@ -2390,7 +2396,8 @@ GREMLIN
               ->savePropertyAs('fullcode', 'default2')
               ->inIs('DEFAULT')
               ->raw(<<<'GREMLIN'
-map{ ["type": "Member Default",
+map{ ["id": "",
+      "type": "Member Default",
       "name":name,
       "parent":class2,
       "parentValue":name + ' = ' + default2,
@@ -2420,7 +2427,8 @@ GREMLIN
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
 
               ->raw(<<<'GREMLIN'
-map{ ["type": "Member Visibility",
+map{ ["id": "",
+      "type": "Member Visibility",
       "name":name,
       "parent":class2,
       "parentValue":visibility2 + ' ' + name,

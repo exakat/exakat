@@ -40,7 +40,7 @@ class Section {
         $this->source  = $section['source']  ?? $this->file;  // Yes, source == file if not specified
         $this->icon    = $section['icon']    ?? $this->icon;
         $this->method  = $section['method']  ?? $this->method;
-        $this->ruleset = $section['ruleset'] ?? $this->ruleset;
+        $this->ruleset = array($section['ruleset'] ?? $this->ruleset);
     }
 
     public function __get($name) {

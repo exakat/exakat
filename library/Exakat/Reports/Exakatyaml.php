@@ -28,7 +28,7 @@ class Exakatyaml extends Reports {
     const FILE_EXTENSION = 'yml';
     const FILE_FILENAME  = '.exakat';
 
-    public function _generate($analyzerList) {
+    public function _generate(array $analyzerList): string {
         $return = array('project'         => $this->config->project,
                         'project_name'    => $this->config->project_name,
                         'project_rulesets'=> $this->config->project_rulesets,

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -27,10 +27,11 @@ class History extends Reports {
     const FILE_FILENAME  = 'history';
     const FILE_EXTENSION = 'sqlite';
 
-    public function generate($folder, $name = 'history') {
+    public function generate(string $folder, string $name = 'history'): string {
         if ($name === self::STDOUT) {
             print "Can't produce History format to stdout\n";
-            return false;
+
+            return '';
         }
 
         $sqlite = new \Sqlite3("$folder/$name." . self::FILE_EXTENSION);
@@ -62,28 +63,31 @@ SQLITE
 );
         }
 
-        $serial = $this->sqlite->querysingle('SELECT value FROM hash WHERE key="dump_serial"');
-        if (empty($serial))  {
-            print "Couldn't get a an for the current dataset. Ignoring\n";
-            return;
+        $serial = $this->dump->fetchHash('dump_serial');
+        if ($serial->isEmpty())  {
+            print "Couldn't get a serial number for the current audit. Ignoring\n";
+
+            return '';
         }
 
-        $already = $sqlite->querysingle('SELECT id FROM hash WHERE key="dump_serial" AND value="' . $serial . '"');
+        $already = $sqlite->querysingle('SELECT id FROM hash WHERE key="dump_serial" AND value="' . $serial->toString() . '"');
         if (!empty($already))  {
-            print "Dataset #$serial is already in history. Ignoring\n";
-            return;
+            print "Dataset #{$serial->toString()} is already in history. Ignoring\n";
+
+            return '';
         }
 
-        display("Add dataset #$serial to history\n");
+        display("Add dataset #{$serial->toString()} to history\n");
 
         $sqlite->query('ATTACH "' . $this->config->dump . '" AS dump');
 
-        $query = "INSERT INTO hash SELECT NULL, \"$serial\", key, value FROM dump.hash";
+        $query = "INSERT INTO hash SELECT NULL, \"{$serial->toString()}\", key, value FROM dump.hash";
         $sqlite->query($query);
 
-        $query = "INSERT INTO resultsCounts SELECT NULL, \"$serial\", analyzer, count FROM dump.resultsCounts";
+        $query = "INSERT INTO resultsCounts SELECT NULL, \"{$serial->toString()}\", analyzer, count FROM dump.resultsCounts";
         $sqlite->query($query);
 
+        return '';
     }
 }
 

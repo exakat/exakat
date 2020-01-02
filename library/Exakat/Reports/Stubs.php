@@ -89,7 +89,7 @@ class Stubs extends Reports {
             $returntype = ($method['returntype'] == ' ') ? '' : ' : ' . $method['returntype'];
             $phpdoc = ($method['phpdoc'] == ' ') ? '' : self::INDENTATION . $method['phpdoc'] . PHP_EOL;
 
-            $block = (($method['cit'] === 'interface') || ($method['abstract'] == 1)) ? ';' : ' { }';
+            $block = (($method['type'] === 'interface') || ($method['abstract'] == 1)) ? ';' : ' { }';
             return $phpdoc . self::INDENTATION . self::INDENTATION . "{$options}function $method[method]($method[signature])$returntype $block";
         });
         $code->reduce('methods', function ($carry, $item) {

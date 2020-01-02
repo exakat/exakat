@@ -37,15 +37,15 @@ week4:
     menu: A month ago
     title: A month ago
     source: weekly
-    file: week3
+    file: week4
     method: generateWeek4
     icon: dashboard
 weekNext:
     menu: Next week
     title: Next week
     source: weekly
-    file: week3
-    method: generateWeek4
+    file: weeknext
+    method: generateWeekNext
     icon: dashboard
 annexes:
     title: Annexes

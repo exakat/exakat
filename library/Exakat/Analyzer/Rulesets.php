@@ -47,7 +47,7 @@ class Rulesets implements RulesetsInterface {
         $this->extra = null;
     }
     
-    public function getRulesetsAnalyzers(array $theme = null) {
+    public function getRulesetsAnalyzers(array $theme = null): array {
         $main  = $this->main ->getRulesetsAnalyzers($theme);
         $extra = $this->extra->getRulesetsAnalyzers($theme);
         $ext   = $this->ext  ->getRulesetsAnalyzers($theme);
@@ -56,7 +56,7 @@ class Rulesets implements RulesetsInterface {
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getRulesetForAnalyzer($analyzer) {
+    public function getRulesetForAnalyzer($analyzer): array {
         $main = $this->main  ->getRulesetForAnalyzer($analyzer);
         $extra = $this->extra->getRulesetForAnalyzer($analyzer);
         $ext   = $this->ext  ->getRulesetForAnalyzer($analyzer);

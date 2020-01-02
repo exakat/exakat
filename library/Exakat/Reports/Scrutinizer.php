@@ -104,6 +104,8 @@ XML;
         } else {
             file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, $return);
         }
+
+        return '';
     }
 }
 

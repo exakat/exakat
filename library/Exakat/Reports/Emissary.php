@@ -75,7 +75,7 @@ class Emissary extends Reports {
 
     private $compatibilities = array();
 
-    public function __construct($config) {
+    public function __construct(Config $config) {
         parent::__construct($config);
 
         foreach(Config::PHP_VERSIONS as $shortVersion) {
@@ -90,7 +90,7 @@ class Emissary extends Reports {
         }
     }
 
-    protected function makeMenu() {
+    protected function makeMenu(): string {
         $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/emissary.yaml');
 
         $menu = array('<ul class="sidebar-menu">',
@@ -105,7 +105,7 @@ class Emissary extends Reports {
         return implode(PHP_EOL, $menu);
     }
 
-    protected function makeMenuHtml($section) {
+    protected function makeMenuHtml($section): string {
         if (isset($section['file'])) {
             $icon = $section['icon'] ?? 'sticky-note-o';
             $menuTitle = $section['menu'] ?? $section['title'];
@@ -160,8 +160,7 @@ class Emissary extends Reports {
                 if (strpos($fileName, '/') === false) {
                     $inventory_name = $fileName;
                 } else {
-                    $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
-                    $total = $this->sqlite->querySingle($query);
+                    $total = $this->dump->fetchAnalysersCounts(array($fileName))->toInt();
                     if ($total < 1) {
                         continue;
                     }
@@ -170,11 +169,10 @@ class Emissary extends Reports {
                 $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
 
-            $compatibilities = array();
-            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
-            while($row = $res->fetchArray(\SQLITE3_NUM)) {
-                $compatibilities []= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
-            }
+            $rulesets = $this->dump->fetchTable('themas');
+            $rulesets->filter(function (array $x): bool { return substr($x['thema'], 0, 13) === 'Compatibility';});
+            $compatibilities = array_map(function (string $x): string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";},
+                                         $rulesets->getColumn('thema'));
 
             $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
             $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
@@ -191,7 +189,7 @@ class Emissary extends Reports {
         return $combinePageHTML;
     }
 
-    protected function putBasedPage($file, $html) {
+    protected function putBasedPage(string $file, string $html): void {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
@@ -202,19 +200,21 @@ class Emissary extends Reports {
         $this->usedFiles[] = "$file.html";
     }
 
-    protected function injectBloc($html, $bloc, $content) {
+    protected function injectBloc(string $html, string $bloc, string $content): string {
         return str_replace('{{' . $bloc . '}}', $content, $html);
     }
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name === self::STDOUT) {
             print "Can't produce Emissary format to stdout\n";
-            return false;
+
+            return '';
         }
 
         if ($missing = $this->checkMissingRulesets()) {
             print "Can't produce Emissary format. There are " . count($missing) . ' missing rulesets : ' . implode(', ', $missing) . ".\n";
-            return false;
+
+            return '';
         }
 
         $this->finalName = "$folder/$name";
@@ -240,6 +240,8 @@ class Emissary extends Reports {
         }
 
         $this->cleanFolder();
+
+        return '';
     }
 
     protected function initFolder() {
@@ -372,11 +374,12 @@ class Emissary extends Reports {
                                     $this->getIssuesFaceted('Performances') );
     }
 
-    protected function generateFavorites(Section $section) {
+    protected function generateFavorites(Section $section): void {
         $baseHTML = $this->getBasedPage($section->source);
 
         $favorites = new Favorites($this->config);
-        $favoritesList = json_decode($favorites->generate(null, Reports::INLINE));
+        $favoritesRules = $this->getTopFile($this->rulesets->getRulesetsAnalyzers(array('Favorites')));
+        $favoritesList = json_decode($favorites->generate($favoritesRules, Reports::INLINE));
 
         $donut = array();
         $html = array(' ');
@@ -961,23 +964,19 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateParameterCounts(Section $section) {
+    protected function generateParameterCounts(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT key, value FROM hashResults
-WHERE name = "ParameterCounts"
-ORDER BY key + 0
-SQL
-        );
-
-        if (!$res) { return ; }
+        $res = $this->dump->fetchHashResults('ParameterCounts');
+        if ($res->isEmpty()) {
+            return ;
+        }
 
         $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'" . $value['key'] . " param.'";
             $data[$value['key']] = $value['value'];
 
@@ -1139,16 +1138,11 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateExtensionsBreakdown(Section $section) {
+    protected function generateExtensionsBreakdown(Section $section): void {
         // List of extensions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT analyzer, count(*) AS count FROM results 
-WHERE analyzer LIKE "Extensions/Ext%"
-GROUP BY analyzer
-ORDER BY count(*) DESC
-SQL
-        );
-        $html = '';
+        $extensionList = $this->dump->getExtensionList();
+
+        $html = array();
         $xAxis = array();
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -1156,91 +1150,86 @@ SQL
             $xAxis[] = "'$shortName'";
             $data[$value['analyzer']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $shortName . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPFunctionBreakdown(Section $section) {
+    protected function generatePHPFunctionBreakdown(Section $section): void {
         // List of php functions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, count
-FROM phpStructures 
-WHERE type = "function"
-ORDER BY count DESC
-SQL
-        );
-        $html = '';
+        $res = $this->dump->fetchTable('phpStructures');
+        $res->filter(function (array $x): bool { return $x['type'] === 'function'; });
+        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPConstantsBreakdown(Section $section) {
-        // List of php functions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, count
-FROM phpStructures 
-WHERE type = "constant"
-ORDER BY count DESC
-SQL
-        );
-        $html = '';
+    protected function generatePHPConstantsBreakdown(Section $section): void {
+        // List of php constant used
+        $res = $this->dump->fetchTable('phpStructures');
+        $res->filter(function (array $x): bool { return $x['type'] === 'constant'; });
+        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPClassesBreakdown(Section $section) {
+    protected function generatePHPClassesBreakdown(Section $section): void {
         // List of php functions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, count
-FROM phpStructures 
-WHERE type in ("class", "interface", "trait")
-ORDER BY count DESC
-SQL
-        );
-        $html = '';
+        $res = $this->dump->fetchTable('phpStructures');
+        $res->filter(function (array $x): bool { return in_array($x['type'], array('class', 'interface', 'trait'), \STRICT_COMPARISON); });
+        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generateGraphList($filename, $title, $xAxis, $data, $html) {
+    protected function generateGraphList(string $filename,string $title, array $xAxis, array $data, string $html): void {
         $finalHTML = $this->getBasedPage('extension_list');
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
@@ -1411,7 +1400,7 @@ JAVASCRIPT;
         }
 
         // analyzer
-        list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
+        list($totalAnalyzerUsed, $totalAnalyzerReporting) = array_values($this->getTotalAnalyzer());
         $totalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
         if ($totalAnalyzerUsed > 0) {
             $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
@@ -1479,11 +1468,11 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($rulesets AS $key => $categorie) {
-            $list = 'IN (' . makeList($this->rulesets->getRulesetsAnalyzers(array($categorie))) . ')';
-            $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
-            $total = $this->sqlite->querySingle($query);
-
-            $data[] = array('label' => $key, 'value' => (int) $total);
+            $list = $this->rulesets->getRulesetsAnalyzers(array($categorie));
+            $res = $this->dump->fetchAnalysersCounts($list);
+            $res->filter(function (array $x): bool { return $x['count'] >= -1;});
+            $counts = $res->getColumn('count');
+            $data[] = array('label' => $key, 'value' => array_sum($counts));
         }
 
         // ordonné DESC par valeur
@@ -1519,27 +1508,13 @@ JAVASCRIPT;
                      'script' => $dataScript);
     }
 
-    public function getSeverityBreakdown() {
+    public function getSeverityBreakdown(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
-
-        $query = <<<SQL
-SELECT severity AS label, count(*) AS value
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY severity
-    ORDER BY value DESC
-SQL;
-        $result = $this->sqlite->query($query);
-
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = $row;
-        }
+        $res = $this->dump->getSeverityBreakdown($list);
 
         $html = array();
         $dataScript = array();
-        foreach ($data as $value) {
+        foreach ($res->toArray() as $value) {
             $html []= <<<HTML
 <div class="clearfix">
     <div class="block-cell">$value[label]</div>
@@ -1554,21 +1529,16 @@ HTML;
         $html .= str_repeat('<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
-                 </div>', 4 - count($data));
+                 </div>', 4 - $res->getCount());
 
         return array('html'   => $html,
                      'script' => $dataScript);
     }
 
-    protected function getTotalAnalysedFile() {
+    protected function getTotalAnalysedFile(): int {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
 
-        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer IN ($list)";
-        $result = $this->sqlite->query($query);
-
-        $result = $result->fetchArray(\SQLITE3_NUM);
-        return $result[0];
+        return $this->dump->getAnalyzedFiles($list);
     }
 
     protected function generateAnalyzers() {
@@ -1595,20 +1565,13 @@ HTML;
         $this->putBasedPage('analyses', $finalHTML);
     }
 
-    protected function getAnalyzersResultsCounts() {
+    protected function getAnalyzersResultsCounts(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
 
-        $result = $this->sqlite->query(<<<SQL
-SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity 
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY analyzer
-SQL
-        );
+        $result = $this->dump->getAnalyzersResultsCounts($list);
 
         $return = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($result->toArray() as $row) {
             $row['label'] = $this->docs->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1618,20 +1581,7 @@ SQL
         return $return;
     }
 
-    private function getCountFileByAnalyzers($analyzer) {
-        $query = <<<'SQL'
-                SELECT count(*)  AS number
-                FROM (SELECT DISTINCT file FROM results WHERE analyzer = :analyzer)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
-
-        return $row['number'];
-    }
-
-    private function generateNoIssues(Section $section) {
+    private function generateNoIssues(Section $section): void {
         $list = $this->rulesets->getRulesetsAnalyzers(array(
         'Analyze',
         'Security',
@@ -1648,30 +1598,22 @@ SQL;
         'CompatibilityPHP80',
         ));
         $list[] = 'Project/Dump';
-        $sqlList = makeList($list);
-
-        $query = <<<SQL
-SELECT analyzer AS analyzer FROM resultsCounts
-WHERE analyzer NOT IN ($sqlList) AND 
-      count = 0 AND
-      analyzer LIKE "%/%" AND
-      analyzer NOT LIKE "Common/%"
-SQL;
-        $result = $this->sqlite->query($query);
+        $result = $this->dump->fetchAnalysersCounts($list);
+        $result->filter(function (array $x): bool { return substr($x['analyzer'], 0, 7) !== 'Common';});
 
         $baseHTML = $this->getBasedPage($section->source);
 
-        $filesHTML = '';
-
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        $filesHTML = array();
+        foreach ($result->toArray() as $row) {
             $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
 
             if ($analyzer === null) {
                 continue;
             }
 
-            $filesHTML.= '<tr><td>' . $this->makeDocLink($row['analyzer']) . '</td></tr>' . PHP_EOL;
+            $filesHTML []= '<tr><td>' . $this->makeDocLink($row['analyzer']) . '</td></tr>';
         }
+        $filesHTML = implode(PHP_EOL, $filesHTML);
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
@@ -1704,82 +1646,25 @@ SQL;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function getFilesResultsCounts() {
+    private function getFilesResultsCounts(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
+        $res = $this->dump->getFilesResultsCounts($list)->toHash('file');
 
-        $result = $this->sqlite->query(<<<SQL
-SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
-        FROM results
-        WHERE line != -1 AND
-              analyzer IN ($list)
-        GROUP BY file
-SQL
-        );
-
-        $return = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['file']] = $row;
-        }
-
-        return $return;
+        return $res;
     }
 
-    private function getCountAnalyzersByFile($file) {
-        $query = <<<'SQL'
-                SELECT count(*)  AS number
-                FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, \SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
+    protected function getFilesCount(array $list = array(), int $limit = 10): array {
+        $res = $this->dump->getFileBreakdown($list);
 
-        return $row['number'];
+        return array_slice($res->toArray(), 0, $limit);
     }
 
-    protected function getFilesCount($themes = null, $limit = null) {
-        if ($themes === null) {
-            $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        } elseif (is_array($themes)) {
-            $list = $themes;
-        } else {
-            return array();
-        }
-        $list = makeList($list, "'");
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= ' LIMIT ' . $limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
-    }
-
-    protected function getTopFile($theme, $file = 'issues') {
-        if (is_string($theme)) {
-            $list = $this->rulesets->getRulesetsAnalyzers($theme);
-        } elseif (is_array($theme)) {
-            $list = $theme;
-        } else {
-            die('Needs a string or an array');
-        }
-
+    protected function getTopFile(array $list, string $file = 'issues'): string {
         $data = $this->getFilesCount($list, self::TOPLIMIT);
 
-        $html = '';
+        $html = array();
         foreach ($data as $value) {
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                     <a href="' . $file . '.html#file=' . $this->toId($value['file']) . '" title="' . $value['file'] . '">
                       <div class="block-cell-name">' . $value['file'] . '</div>
                     </a>
@@ -1788,16 +1673,19 @@ SQL;
         }
 
         $nb = 10 - count($data);
-        $html .= str_repeat('<div class="clearfix">
+        $html []= str_repeat('<div class="clearfix">
                       <div class="block-cell-name">&nbsp;</div>
                       <div class="block-cell-issue text-center">&nbsp;</div>
                   </div>', $nb);
 
-        return $html;
+        return implode(PHP_EOL, $html);
     }
 
-    protected function getFileOverview() {
-        $data = $this->getFilesCount(null, self::LIMITGRAPHE);
+    protected function getFileOverview(): array {
+        $list = $this->rulesets->getRulesetsAnalyzers(array('All'));
+
+        $data = $this->getFilesCount($list, self::LIMITGRAPHE);
+
         $xAxis        = array();
         $dataMajor    = array();
         $dataCritical = array();
@@ -1826,55 +1714,26 @@ SQL;
         );
     }
 
-    protected function getAnalyzersCount($limit) {
+    protected function getAnalyzersCount(int $limit): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
+        $res = $this->dump->getAnalyzersCount($list);
 
-        $query = "SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer in ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC ";
-        if ($limit) {
-            $query .= ' LIMIT ' . $limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'],
-                            'value'    => $row['number']);
-        }
-
-        return $data;
+        return array_slice($res->toArray(), 0, $limit);
     }
 
-    protected function getTopAnalyzers($theme, $file = 'issues') {
-        if (is_string($theme)) {
-            $list = $this->rulesets->getRulesetsAnalyzers($theme);
-        } elseif (is_array($theme)) {
-            $list = $theme;
-        } else {
-            die('Needs a string or an array');
-        }
-        $list = makeList($list, "'");
+    protected function getTopAnalyzers(array $list, string $file = 'issues'): string {
+        $res = $this->dump->getTopAnalyzers($list, self::TOPLIMIT);
 
-        $query = "SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC
-                    LIMIT " . self::TOPLIMIT;
-        $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $row) {
             $data[] = array('label' => $this->docs->getDocs($row['analyzer'], 'name'),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);
         }
 
-        $html = '';
+        $html = array();
         foreach ($data as $value) {
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                     <a href="' . $file . '.html#analyzer=' . $this->toId($value['name']) . '" title="' . $value['label'] . '">
                       <div class="block-cell-name">' . $value['label'] . '</div> 
                     </a>
@@ -1883,38 +1742,23 @@ SQL;
         }
 
         $nb = 10 - count($data);
-        $html .= str_repeat('<div class="clearfix">
+        $html []= str_repeat('<div class="clearfix">
                       <div class="block-cell-name">&nbsp;</div>
                       <div class="block-cell-issue text-center">&nbsp;</div>
                   </div>', $nb);
 
+        $html = implode(PHP_EOL, $html);
+
         return $html;
     }
 
-    protected function getSeveritiesNumberBy($type = 'file') {
+    protected function getSeveritiesNumberBy(string $type = 'file'): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
-        $list = makeList($list);
 
-        $query = <<<SQL
-SELECT $type, severity, count(*) AS count
-    FROM results
-    WHERE analyzer IN ($list)
-    GROUP BY $type, severity
-SQL;
-
-        $stmt = $this->sqlite->query($query);
-
-        $return = array();
-        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
-            if ( isset($return[$row[$type]]) ) {
-                $return[$row[$type]][$row['severity']] = $row['count'];
-            } else {
-                $return[$row[$type]] = array($row['severity'] => $row['count']);
-            }
-        }
-
-        return $return;
+        $res = $this->dump->getSeveritiesNumberBy($list, $type);
+        return $res->toGroupedBy($type, 'severity');
     }
+
 
     protected function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
@@ -1968,14 +1812,12 @@ SQL;
                                     $issues );
     }
 
-    protected function generateIssuesEngine(Section $section, $issues = array()) {
-        if (!empty($issues)) {
-            // Nothing, really
-        } elseif (is_array($section->ruleset)) {
-            $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($section->ruleset));
-        } else {
-            $issues = $this->getIssuesFaceted($section->ruleset);
+    protected function generateIssuesEngine(Section $section, array $issues = array()): void {
+        if (empty($issues)) {
+            return;
         }
+
+        $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($section->ruleset));
         $total = count($issues);
         $issues = implode(', ' . PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
@@ -2043,11 +1885,11 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function getIssuesFaceted($theme) {
-        return $this->getIssuesFacetedDb($theme, $this->sqlite);
+    protected function getIssuesFaceted(array $ruleset): array {
+        return $this->getIssuesFacetedDb($ruleset);
     }
 
-    public function getNewIssuesFaceted($theme, $path) {
+    public function getNewIssuesFaceted(array $ruleset, string  $path): array {
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
 
@@ -2055,9 +1897,9 @@ JAVASCRIPTCODE;
             return array();
         }
 
-        $result = $this->sqlite->query('SELECT * FROM linediff');
+        $result = $this->dump->fetchTable('linediff');
         $linediff = array();
-        while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($result->toArray() as $row) {
             $linediff[$row['file']][$row['line']] = $row['diff'];
         }
 
@@ -2082,22 +1924,9 @@ JAVASCRIPTCODE;
         return $oldIssues;
     }
 
-    public function getIssuesFacetedDb($theme, \Sqlite3 $sqlite) {
-        if (is_string($theme)) {
-            $list = $this->rulesets->getRulesetsAnalyzers(array($theme));
-        } else {
-            $list = $theme;
-        }
-        $list = makeList($list, "'");
-
-        $sqlQuery = <<<SQL
-SELECT fullcode, file, line, analyzer
-    FROM results
-    WHERE analyzer IN ($list)
-    ORDER BY file, line
-
-SQL;
-        $result = $sqlite->query($sqlQuery);
+    public function getIssuesFacetedDb(array $ruleset): array {
+        $results = $this->dump->fetchAnalysers($ruleset);
+        $results->filter(function (array $x): bool { return !in_array($x['fullcode'], array('Not Compatible With PHP Version', 'Not Compatible With PHP Configuration')); });
 
         $TTFColors = array('Instant'  => '#5f492d',
                            'Quick'    => '#e8d568',
@@ -2112,7 +1941,7 @@ SQL;
                                 );
 
         $items = array();
-        while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($results->toArray() as $row) {
             $item = array();
             $ini = $this->docs->getDocs($row['analyzer']);
             $item['analyzer']       = $ini['name'];
@@ -2216,7 +2045,7 @@ SQL;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateBugFixes(Section $section) {
+    protected function generateBugFixes(Section $section): void {
         $table = '';
 
         $bugfixes = exakat('methods')->getBugFixes();
@@ -2249,7 +2078,7 @@ SQL;
     <td>' . $cve . '</td>
                 </tr>';
             } elseif (!empty($bugfix['analyzer'])) {
-                $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "' . $bugfix['analyzer'] . '"');
+                $subanalyze = $this->dump->fetchAnalysersCounts(array($bugfix['analyzer']))->toString('count');
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
@@ -2277,7 +2106,7 @@ SQL;
 
     protected function generatePhpConfiguration(Section $section) {
         $phpConfiguration = new Phpcompilation($this->config);
-        $report = $phpConfiguration->generate(null, Reports::INLINE);
+        $report = $phpConfiguration->generate('', Reports::INLINE);
 
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n", ), $configline);
@@ -2394,16 +2223,8 @@ SQL;
         $colors = array('59BF00', '59BF00', '59BF00', 'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5', '7900E5');
         // This must be the same lenght than the list of versions
 
-        $list = makeList(array_keys($analyzers));
-        $query = <<<SQL
-SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0
-SQL;
-        $results = $this->sqlite->query($query);
-
-        $counts = array();
-        while($row = $results->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['count'];
-        }
+        $results = $this->dump->fetchAnalysersCounts(array_keys($analyzers));
+        $counts = $results->toHash('analyzer', 'count');
 
         $data = array();
         $data2 = array();
@@ -2412,7 +2233,7 @@ SQL;
 
             foreach($versions as $version) {
                 if (!isset($counts[$analyzer])) {
-                    continue;
+                    $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
                 } elseif ($counts[$analyzer] === 0) {
                     $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
                 } elseif ($coeff * version_compare($version, $analyzerVersion) >= 0) {
@@ -2428,27 +2249,17 @@ SQL;
         foreach($versions as $version) {
             $shortVersion = $version[0] . $version[2];
 
-            $query = <<<SQL
-SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$shortVersion';
-SQL;
-            $existence = $this->sqlite->query($query);
-            if ($existence->fetchArray(\SQLITE3_ASSOC) !== "compilation$shortVersion") {
+            $res = $this->dump->fetchHash("notCompilable$shortVersion")->toString();
+            if ($res === 'N/C') {
+                $incompilable[$shortVersion] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
                 continue;
             }
 
-            $query = <<<SQL
-SELECT count(*) AS nb FROM compilation$shortVersion
-SQL;
-            $results = $this->sqlite->query($query);
-            if ($results === false) {
-                $incompilable[$shortVersion] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
-            } else{
-                $row = $results->fetchArray(\SQLITE3_ASSOC);
-                if ($row['nb'] === 0) {
-                    $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
-                } else {
-                    $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
-                }
+            $results = $this->dump->fetchTable("compilation$shortVersion");
+            if ($results->getCount() === 0) {
+                $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+            } else {
+                $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
             }
         }
 
@@ -2585,7 +2396,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateDirectiveList(Section $section) {
+    protected function generateDirectiveList(Section $section): void {
         // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
         $directives = array('standard', 'bcmath', 'date', 'file',
                             'fileupload', 'mail', 'ob', 'env',
@@ -2603,21 +2414,13 @@ HTML;
                              );
 
         $directiveList = '';
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT analyzer, count FROM resultsCounts 
-    WHERE ( analyzer LIKE "Extensions/Ext%" OR 
-            analyzer IN ("Structures/FileUploadUsage", 
-                         "Php/UsesEnv",
-                         "Php/UseBrowscap",
-                         "Php/DlUsage",
-                         "Security/CantDisableFunction",
-                         "Security/CantDisableClass"
-                         ))
-        AND count >= 0
-SQL
-        );
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        // Possibly move this to a specific ruleset
+        $list = $this->rulesets->getRulesetsAnalyzers(array('Appinfo'));
+        $res = $this->dump->fetchAnalysersCounts($list);
+
+        foreach($res->toArray() as $row) {
             $data = array();
+
             if ($row['analyzer'] === 'Structures/FileUploadUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
                 $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/fileupload.json"));
@@ -2636,13 +2439,8 @@ SQL
             } elseif ($row['analyzer'] === 'Security/CantDisableFunction' ||
                       $row['analyzer'] === 'Security/CantDisableClass'
                       ) {
-                $res2 = $this->sqlite->query(<<<'SQL'
-SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
-    WHERE analyzer = "Security/CantDisableFunction";
-SQL
-        );
-                $list = $res2->fetchArray(\SQLITE3_NUM);
-                $list = explode(',', $list[0]);
+                $list = $this->dump->getFunctionsFromAnalyzer('Security/CantDisableFunction');
+
                 if (isset($disable)) {
                     continue;
                 }
@@ -2655,13 +2453,7 @@ SQL
                 $data[0]->suggested = implode(', ', $suggestions);
                 $data[0]->documentation .= "\n; " . count($list) . " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
-                $res2 = $this->sqlite->query(<<<'SQL'
-SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
-    WHERE analyzer = "Security/CantDisableClass";
-SQL
-        );
-                $list = $res2->fetchArray(\SQLITE3_NUM);
-                $list = explode(',', $list[0]);
+                $list = $this->dump->getFunctionsFromAnalyzer('Security/CantDisableClass');
                 $suggestions = array_diff($disable['disable_classes'], $list);
 
                 // disable_functions
@@ -2687,34 +2479,28 @@ SQL
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateCompilations(Section $section) {
+    protected function generateCompilations(Section $section): void {
         $compilations = array();
 
-        $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
+        $total = $this->dump->fetchHash('files')->toInt();
 
         foreach(array_unique(array_merge(array($this->config->phpversion[0] . $this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
-            $version = "$suffix[0].$suffix[1]";
-            $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
-            if (!$res) {
+            $res = $this->dump->fetchHash("notCompilable$suffix");
+            if ($res === 'N/C') {
                 $compilations []= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>";
                 continue; // Table was not created
             }
 
-            $res = $this->sqlite->query("SELECT file FROM compilation$suffix");
-            $files = array();
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $files[] = $row['file'];
-            }
+            $res = $this->dump->fetchTable("compilation$suffix");
+            $files = $res->getColumn('file');
+
             if (empty($files)) {
                 $files       = 'No compilation error found.';
                 $errors      = 'N/A';
                 $total_error = 'N/A';
             } else {
-                $res = $this->sqlite->query('SELECT error FROM compilation' . $suffix);
-                $readErrors = array();
-                while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                    $readErrors[] = $row['error'];
-                }
+                $readErrors = $res->getColumn('error');
+
                 $errors      = array_count_values($readErrors);
                 $errors      = array_keys($errors);
                 $errors      = array_keys(array_count_values($errors));
@@ -2725,6 +2511,7 @@ SQL
                 $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
+            $version = $suffix[0] . '-' . $suffix[1];
             $compilations []= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>";
         }
 
@@ -2771,17 +2558,14 @@ SQL
         $this->generateCompatibility($section, '53');
     }
 
-    protected function generateCompatibility(Section $section, $version) {
+    protected function generateCompatibility(Section $section, string $version): void {
         $compatibility = array();
         $skipped       = array();
 
         $list = $this->rulesets->getRulesetsAnalyzers(array('CompatibilityPHP' . $version));
 
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($list) . ')');
-        $counts = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['count'];
-        }
+        $res = $this->dump->fetchAnalysersCounts($list);
+        $counts = $res->toHash('analyzer', 'count');
 
         foreach($list as $analyzer) {
             $ini = $this->docs->getDocs($analyzer);
@@ -2826,18 +2610,15 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateGlobals(Section $section = null) {
-        $res = $this->sqlite->query('SELECT name FROM sqlite_master WHERE type="table" AND name="globalVariables"');
-        $name = $res->fetchArray(\SQLITE3_ASSOC);
+    private function generateGlobals(Section $section = null): void {
+        $res = $this->dump->fetchTable('globalVariables');
 
-        if (empty($name)) {
+        if ($res->isEmpty()) {
             return;
         }
 
-        $res = $this->sqlite->query('SELECT * FROM globalVariables');
-
         $tree = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $variable = trim($row['variable'], '{}&@');
             $name = preg_replace('/^\$GLOBALS\[[ \'"]*(.*?)[ \'"]*\]$/', '$\1', $variable);
             if (substr($variable, 0, 8) === '$GLOBALS') {
@@ -2968,34 +2749,19 @@ HTML;
        $this->putBasedPage($section->file, $html);
     }
 
-    private function generateInterfaceTree(Section $section) {
-        $list = array();
-
- $res = $this->sqlite->query(<<<SQL
-SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.name AS extends 
-    FROM cit 
-    LEFT JOIN cit cit2 
-        ON cit.extends = cit2.id
-    JOIN namespaces ns
-        ON cit.namespaceId = ns.id
-    JOIN namespaces ns2
-        ON cit2.namespaceId = ns2.id
-    WHERE cit.type="interface" AND
-          cit2.type="interface"
-SQL
-);
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['extends'])) {
+    private function generateInterfaceTree(Section $section): void {
+        $res = $this->dump->getCitTree('interface');
+        foreach($res->toArray() as $row) {
+            if (empty($row['parent'])) {
                 continue;
             }
 
-            $parent = $row['extends'];
+            $parent = $row['parent'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
 
-            $list[$parent][] = $row['name'];
+            $list[$parent][] = $row['child'];
         }
 
         if (empty($list)) {
@@ -3021,75 +2787,20 @@ SQL
 
     }
 
-    private function generateTraitMatrix(Section $section) {
-
-        // nombre de method en conflict possible
-        // ce trait inclut l'autre
-
+    private function generateTraitMatrix(Section $section): void {
         // list of all traits, for building the table
-        $query = <<<'SQL'
-SELECT name FROM cit WHERE type="trait" ORDER BY name
-SQL;
-        $res = $this->sqlite->query($query);
-
-        $traits = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $traits[] = $row['name'];
-        }
+        $traits = $this->dump->getCit('trait')->getColumn('name');
 
         // INIT
         $table = array_fill_keys($traits, array_fill_keys($traits, array()));
 
         // Get conflicts
-        $query = <<<'SQL'
-SELECT
-   t1.name AS t1,
-   t2.name AS t2,
-   LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) AS method 
-FROM
-   cit AS t1 
-   JOIN
-      methods AS m1 
-      ON m1.citId = t1.id 
-   JOIN
-      methods AS m2 
-      ON m1.id != m2.id 
-      AND LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) = LOWER(SUBSTR(m2.METHOD, INSTR(m2.METHOD, 'function ') + 9, INSTR(m2.METHOD, '(') - (INSTR(m2.METHOD, 'function ') + 9))) 
-   JOIN
-      cit AS t2 
-      ON m2.citId = t2.id 
-WHERE
-   t1.type = 'trait' 
-   AND t2.type = 'trait'
-SQL;
-        $res = $this->sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $table[$row['t1']][$row['t2']][] = $row['method'];
-        }
+        $res = $this->dump->getTraitConflicts();
+        $table = $res->toHash('t1', 't2');
 
         // Get trait usage
-        $usage = array();
-        $query = <<<'SQL'
-SELECT
-   t1.name AS t1,
-   t2.name AS t2
-FROM
-   cit AS t1 
-   JOIN
-      cit_implements AS ttu 
-      ON ttu.implementing = t1.id AND
-         ttu.type = 'use'
-   JOIN
-      cit AS t2 
-      ON ttu.implements = t2.id 
-WHERE
-   t1.type = 'trait' 
-   AND t2.type = 'trait'
-SQL;
-        $res = $this->sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $usage[$row['t1']][$row['t2']][] = 1;
-        }
+        $res = $this->dump->getTraitUsage();
+        $usage = $res->toHash('t1', 't2');
 
         $rows = array();
         foreach($table as $name => $row) {
@@ -3120,34 +2831,19 @@ HTML;
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the trait matrix. Conflicting methods between any two traits are listed in the cells : when they are used in the same class, those traits will require conflict resolutions. And dark gray cells are traits that are actually included one into the other.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage($section->file, $html);    }
+        $this->putBasedPage($section->file, $html);
+    }
 
-    private function generateTraitTree(Section $section) {
+    private function generateTraitTree(Section $section): void {
         $list = array();
 
- $res = $this->sqlite->query(<<<SQL
-SELECT namespaces.namespace || '\' || cit.name AS user, namespaces2.namespace || '\' || cit2.name AS parent
-FROM cit
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
-JOIN cit_implements 
-    ON cit_implements.implementing = cit.id AND
-       cit_implements.type = 'use'
-JOIN cit cit2 
-    ON cit_implements.implements = cit2.id
-JOIN namespaces namespaces2
-    ON cit2.namespaceId = namespaces2.id
-
-WHERE cit.type="trait"
-SQL
-);
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['user'])) {
+        $res = $this->dump->getCitTree('trait');
+        foreach($res->toArray() as $row) {
+            if (empty($row['child'])) {
                 continue;
             }
 
-            $parent = $row['user'];
+            $parent = $row['child'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
@@ -3174,28 +2870,16 @@ SQL
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassTree(Section $section) {
+    private function generateClassTree(Section $section): void {
         $list = array();
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.name AS extends 
-    FROM cit 
-    LEFT JOIN cit cit2 
-        ON cit.extends = cit2.id
-    JOIN namespaces ns
-        ON cit.namespaceId = ns.id
-    JOIN namespaces ns2
-        ON cit2.namespaceId = ns2.id
-    WHERE cit.type="class" AND
-          cit2.type="class"
-SQL
-);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['extends'])) {
+        $res = $this->dump->getCitTree('class');
+        foreach($res->toArray() as $row) {
+            if (empty($row['parent'])) {
                 continue;
             }
 
-            $parent = $row['extends'];
+            $parent = $row['parent'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
@@ -3251,7 +2935,7 @@ SQL
         return $return;
     }
 
-    private function generateExceptionTree(Section $section) {
+    private function generateExceptionTree(Section $section): void {
         $exceptions = array (
   'Throwable' =>
   array (
@@ -3341,8 +3025,8 @@ SQL
         $list = array();
 
         $theTable = '';
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Exceptions/DefinedExceptions"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchAnalysers(array('Exceptions/DefinedExceptions'));
+        foreach($res->toArray() as $row) {
             if (!preg_match('/ extends (\S+)/', $row['fullcode'], $r)) {
                 continue;
             }
@@ -3431,14 +3115,12 @@ SQL
         return $return;
     }
 
-    private function generateNamespaceTree(Section $section) {
+    private function generateNamespaceTree(Section $section): void {
         $theTable = '';
-        $res = $this->sqlite->query('SELECT namespace FROM namespaces ORDER BY namespace');
-
-        $paths = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $paths[] = substr($row['namespace'], 1);
-        }
+        $res = $this->dump->fetchTable('namespaces');
+        $res->order(function (array $a, array $b): bool { return $a['namespace'] <=> $b['namespace'];});
+                $res->map(function (array $x): array { $x['namespace'] = trim($x['namespace'], '\\'); return $x;});
+        $paths = $res->getColumn('namespace');
 
         $paths = $this->path2tree($paths);
         $theTable = $this->pathtree2ul($paths);
@@ -3587,10 +3269,10 @@ HTML
 
 
     private function generateClassFinalSuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Classes/CouldBeFinal"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeFinal'));
 
         $couldBeFinal = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
                 continue;
             }
@@ -3602,11 +3284,11 @@ HTML
         return $couldBeFinal;
     }
 
-    private function generateClassAbstractuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Classes/CouldBeAbstractClass"');
+    private function generateClassAbstractuggestions(): array {
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeAbstractClass'));
 
         $couldBeAbstract = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
                 continue;
             }
@@ -3618,10 +3300,11 @@ HTML
         return $couldBeAbstract;
     }
 
-    private function generateVisibilityMethodsSuggestions() {
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
+    private function generateVisibilityMethodsSuggestions(): array {
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivateMethod'));
+
         $couldBePrivate = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
                 continue;
             }
@@ -3634,9 +3317,9 @@ HTML
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedMethod"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeProtectedMethod'));
         $couldBeProtected = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
                 continue;
             }
@@ -3649,17 +3332,9 @@ HTML
             }
         }
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
- visibility, method
-FROM cit
-JOIN methods 
-    ON methods.citId = cit.id
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
- WHERE type="class"
-SQL
-);
+        $res = $this->dump->fetchTableMethods();
+        $res->filter(function (array $x): bool { return $x['type'] === 'class'; });
+
         $ranking = array(''          => 0,
                          'public'    => 1,
                          'protected' => 2,
@@ -3669,10 +3344,10 @@ SQL
         $theClass = '';
         $aClass = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
+        foreach($res->toArray() as $row) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['class']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['class'];
                 $aClass = array();
             }
 
@@ -3702,82 +3377,97 @@ SQL
         return $return;
     }
 
-    private function generateVisibilityConstantSuggestions() {
-        $res = $this->sqlite->query(<<<SQL
-SELECT cit.type || ' ' || cit.name AS theClass, 
-       namespaces.namespace || "\\" || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
-       methods.method,
-       arguments.name AS argument,
-       init,
-       typehint
-FROM cit
-JOIN methods 
-    ON methods.citId = cit.id
-JOIN arguments 
-    ON methods.id = arguments.methodId AND
-       arguments.citId != 0
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
-WHERE type in ("class", "trait", "interface")
-ORDER BY fullnspath
-;
-SQL
-);
+    private function generateVisibilityConstantSuggestions(): array {
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivateConstante'));
 
-        $arguments = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theMethod = $row['fullnspath'];
-            $visibilities = array($row['typehint'], $row['init']);
+        $couldBePrivate = array();
+        foreach($res->toArray() as $row) {
+            if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
+                continue; // it is an interface or a trait
+            }
 
-            $argument = '<tr><td>&nbsp;</td><td>&nbsp;</td><td>' . PHPSyntax($row['argument']) . '</td><td class="exakat_short_text">' .
-                                    implode('</td><td>', $visibilities)
-                                 . '</td></tr>' . PHP_EOL;
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
 
-            array_collect_by($arguments, $theMethod, $argument);
+            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
+                continue;
+            }
+
+            if (isset($couldBePrivate[$fullnspath])) {
+                $couldBePrivate[$fullnspath][] = $code[1];
+            } else {
+                $couldBePrivate[$fullnspath] = array($code[1]);
+            }
         }
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT cit.type || ' ' || cit.name AS theClass, 
-       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
-       returntype, 
-       methods.method
-FROM cit
-JOIN methods 
-    ON methods.citId = cit.id
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
-WHERE type in ("class", "trait", "interface")
-ORDER BY fullnspath
-;
-SQL
-);
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeProtectedConstant'));
+        $couldBeProtected = array();
+        foreach($res->toArray() as $row) {
+            if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
+                continue; // it is an interface or a trait
+            }
+            $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
 
-        $return = array();
+            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
+                continue;
+            }
+
+            if (isset($couldBeProtected[$fullnspath])) {
+                $couldBeProtected[$fullnspath][] = $code[1];
+            } else {
+                $couldBeProtected[$fullnspath] = array($code[1]);
+            }
+        }
+
+        $res = $this->dump->fetchTableClassConstants();
+        $res->filter(function (array $x): bool { return $x['type'] === 'class'; });
+
         $theClass = '';
+        $ranking = array(''          => 1,
+                         'public'    => 2,
+                         'protected' => 3,
+                         'private'   => 4,
+                         'constant'  => 5);
+        $return = array();
+
         $aClass = array();
+        foreach($res->toArray() as $row) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['class']) {
+                $return[$theClass] = $aClass;
+                $theClass = $row['fullnspath'] . ':' . $row['class'];
+                $aClass = array();
+            }
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theClass = $row['fullnspath'];
-            $visibilities = array($row['returntype'], '&nbsp;');
+            $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
+            $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
-            $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td>&nbsp;</td><td class="exakat_short_text">' .
+            if (isset($couldBePrivate[$row['fullnspath']]) &&
+                in_array($row['constant'], $couldBePrivate[$row['fullnspath']], \STRICT_COMPARISON)) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
+            }
+
+            if (isset($couldBeProtected[$row['fullnspath']]) &&
+                in_array($row['constant'], $couldBeProtected[$row['fullnspath']], \STRICT_COMPARISON)) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
+            }
+
+            $aClass[] = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['constant']) . '</td><td class="exakat_short_text">' .
                                     implode('</td><td>', $visibilities)
                                  . '</td></tr>' . PHP_EOL;
-            $method .= implode(PHP_EOL, $arguments[$row['fullnspath'] . '::' . mb_strtolower($row['method'])] ?? array());
-
-            array_collect_by($return, $row['fullnspath'] . ':' . $row['theClass'], $method);
         }
 
+        $return[$theClass] = $aClass;
         unset($return['']);
 
         return $return;
     }
 
-    private function generateVisibilityPropertySuggestions() {
+    private function generateVisibilityPropertySuggestions(): array {
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivate"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBePrivate'));
         $couldBePrivate = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             assert(isset($classname[1]), 'Missing class in ' . $row['class']);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[2]);
@@ -3792,9 +3482,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedProperty"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeProtectedProperty'));
         $couldBeProtected = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
 
@@ -3807,9 +3497,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeClassConstant"');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeClassConstant'));
         $couldBeConstant = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'] . '\\' . strtolower($classname[1]);
 
@@ -3822,17 +3512,9 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
-         visibility, property, value
-        FROM cit
-        JOIN properties 
-            ON properties.citId = cit.id
-        JOIN namespaces 
-            ON cit.namespaceId = namespaces.id
-         WHERE type="class"
-SQL
-);
+        $res = $this->dump->fetchTableProperty();
+        $res->filter(function (array $x): bool { return $x['type'] === 'class'; });
+
         $theClass = '';
         $ranking = array(''          => 1,
                          'public'    => 2,
@@ -3842,10 +3524,10 @@ SQL
         $return = array();
 
         $aClass = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
+        foreach($res->toArray() as $row) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['class']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['class'];
                 $aClass = array();
             }
 
@@ -3881,12 +3563,13 @@ SQL
         return $return;
     }
 
-    private function generateAlteredDirectives(Section $section) {
-        $alteredDirectives = '';
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $alteredDirectives .= '<tr><td>' . PHPSyntax($row['fullcode']) . "</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+    private function generateAlteredDirectives(Section $section): void {
+        $alteredDirectives = array();
+        $res = $this->dump->fetchAnalysers(array('Php/DirectivesUsage'));
+        foreach($res->toArray() as $row) {
+            $alteredDirectives []= '<tr><td>' . PHPSyntax($row['fullcode']) . "</td><td>$row[file]</td><td>$row[line]</td></tr>";
         }
+        $alteredDirectives = implode(PHP_EOL, $alteredDirectives);
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
@@ -3894,11 +3577,14 @@ SQL
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateChangedClasses(Section $section) {
+    private function generateChangedClasses(Section $section): void {
         $changedClasses = '';
-        $res = $this->sqlite->query('SELECT * FROM classChanges');
-        if ($res) {
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchTable('classChanges');
+
+        if ($res->isEmpty() === true) {
+            $changedClasses = 'No changes detected';
+        } else {
+            foreach($res->toArray() as $row) {
                 if ($row['changeType'] === 'Member Visibility') {
                     $row['parentValue'] .= ' $' . $row['name'];
                     $row['childValue']   = ' $' . $row['name'];
@@ -3915,8 +3601,6 @@ SQL
                                        '</tr>' . PHP_EOL .
                                        '<tr><td colspan="2"><hr /></td></tr>';
             }
-        } else {
-            $changedClasses = 'No changes detected';
         }
 
         $html = $this->getBasedPage($section->source);
@@ -3925,28 +3609,28 @@ SQL
         $this->putBasedPage($section->source, $html);
     }
 
-    private function generateClassDepth(Section $section) {
+    private function generateClassDepth(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT * FROM hashResults
-    WHERE name="Class Depth"
-    ORDER BY key
-SQL
-        );
-        $html = '';
+        $res = $this->dump->fetchHashResults('Class Depth');
+        if ($res->isEmpty()) {
+            return ;
+        }
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
                 $data[$value['key']] = $value['value'];
                 $xAxis[] = "'" . $value['key'] . " extension'";
 
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
@@ -4099,35 +3783,27 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function generateClassSize(Section $section) {
+    private function generateClassSize(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
-SELECT namespaces.namespace || '\\' || name AS name, name AS shortName, files.file, (cit.end - cit.begin) AS size 
-    FROM cit 
-    JOIN files 
-        ON files.id = cit.file
-    JOIN namespaces 
-        ON namespaces.id = cit.namespaceId
-    WHERE
-       cit.type = 'class'
-    ORDER BY (cit.end - cit.begin) DESC
-SQL
-        );
-        $html = '';
+        $res = $this->dump->getCitBySize();
+
+        $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             if (count($data) < 50) {
                 $data[$value['name']] = $value['size'];
                 $xAxis[] = "'" . $value['shortName'] . "'";
             }
-            $html .= '<div class="clearfix">
+
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['size'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
@@ -4280,27 +3956,15 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function generateMethodSize(Section $section) {
+    private function generateMethodSize(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
-SELECT namespaces.namespace || '\\' || name || '::' || method AS name, method AS shortName, files.file, (methods.end - methods.begin) AS size 
-    FROM methods 
-    JOIN cit
-        on methods.citId = cit.id AND
-           cit.type = 'class'
-    JOIN files 
-        ON files.id = cit.file
-    JOIN namespaces 
-        ON namespaces.id = cit.namespaceId
-    ORDER BY (methods.end - methods.begin) DESC
-SQL
-        );
+        $res = $this->dump->getMethodsBySize();
         $html = '';
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             if (count($data) < 50) {
                 $data[$value['name']] = $value['size'];
                 $xAxis[] = "'" . $value['shortName'] . "'";
@@ -4310,6 +3974,7 @@ SQL
                       <div class="block-cell-issue text-center">' . $value['size'] . '</div>
                   </div>';
         }
+
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
@@ -4462,19 +4127,20 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function generateStats(Section $section) {
+    private function generateStats(Section $section): void {
         $results = new Stats($this->config);
-        $report = $results->generate(null, Reports::INLINE);
+        $report = $results->generate('', Reports::INLINE);
         $report = json_decode($report);
 
-        $stats = '';
+        $stats = array();
         foreach($report as $group => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$group</td></tr>\n";
+            $stats []= "<tr><td colspan=2 bgcolor=\"#BBB\">$group</td></tr>";
 
             foreach($hash as $name => $count) {
-                $stats .= "<tr><td>$name</td><td>$count</td></tr>\n";
+                $stats []= "<tr><td>$name</td><td>$count</td></tr>";
             }
         }
+        $stats = implode(PHP_EOL, $stats);
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'STATS', $stats);
@@ -4568,11 +4234,12 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateFileDependencies(Section $section) {
-        $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE included != including AND type in ("IMPLEMENTS", "EXTENDS", "INCLUDE", "NEW")');
+    private function generateFileDependencies(Section $section): void {
+        $res = $this->dump->fetchTable('filesDependencies');
+        $res->filter(function (array $x): bool { return ($x['included'] !== $x['including']) && in_array($x['type'], array('IMPLEMENTS', 'EXTENDS', 'INCLUDE', 'NEW'));});
 
         $nodes = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (isset($nodes[$row['including']][$row['included']])) {
                 $nodes[$row['including']][$row['included']] .= ', ' . $row['type'];
             } else {
@@ -4623,12 +4290,13 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateIdenticalFiles(Section $section) {
-        $res = $this->sqlite->query('SELECT GROUP_CONCAT(file) AS list, count(*) AS count FROM files GROUP BY fnv132 HAVING COUNT(*) > 1 ORDER BY COUNT(*), file');
+    private function generateIdenticalFiles(Section $section): void {
+        $res = $this->dump->getIdenticalFiles();
 
         $theTable = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $list = str_replace(',', "</li>\n<li>", $row['list']);
+
             $theTable[] = <<<HTML
 <tr>
     <td>$row[count]</td>
@@ -4642,33 +4310,24 @@ HTML;
         }
         $theTable = implode(PHP_EOL, $theTable);
 
-
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'IDENTICAL', $theTable);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateConcentratedIssues(Section $section) {
-        $listAnalyzers = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
-        $sqlList = makeList($listAnalyzers);
+    private function generateConcentratedIssues(Section $section): void {
+        $list = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
 
-        $sql = <<<SQL
-SELECT file, line, COUNT(*) AS count, GROUP_CONCAT(DISTINCT analyzer) AS list FROM results
-    WHERE analyzer IN ($sqlList)
-    GROUP BY file, line
-    HAVING count(DISTINCT analyzer) > 5
-    ORDER BY count(*) DESC
-SQL;
-        $res = $this->sqlite->query($sql);
+        $res = $this->dump->getConcentratedIssues($list);
 
         $table = array();
-        while(list('line' => $line, 'file' => $file, 'count' => $count, 'list' => $list) = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as list('line' => $line, 'file' => $file, 'count' => $count, 'list' => $list)) {
             $listHtml = array();
             foreach(explode(',', $list) as $l) {
                 $listHtml[] = '<li>' . $this->makeDocLink($l) . '</li>';
             }
-            $listHtml = '<ul>' . implode('', $listHtml) . '</u>';
+            $listHtml = '<ul>' . implode(PHP_EOL, $listHtml) . '</ul>';
             $table[] = "<tr><td>$file:$line</td><td>$count</td><td>$listHtml</td></tr>\n";
         }
 
@@ -4681,7 +4340,7 @@ SQL;
     }
 
     private function generateConfusingVariables(Section $section) {
-        $data = new Data\CloseNaming($this->sqlite);
+        $data = new Data\CloseNaming($this->dump);
         $results = $data->prepare();
         $reasons = array('_'       => 'One _',
                          'numbers' => 'One digit',
@@ -4712,7 +4371,7 @@ SQL;
     }
 
     protected function generateAppinfo(Section $section) {
-        $data = new Data\Appinfo($this->sqlite);
+        $data = new Data\Appinfo($this->dump);
         $data->prepare();
 
         $list = array();
@@ -4889,23 +4548,18 @@ HTML;
         return $info;
     }
 
-    private function makeDocLink($analyzer) {
-        return "<a href=\"analyses_doc.html#analyzer=$analyzer\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; {$this->docs->getDocs($analyzer, 'name')}";
+    private function makeDocLink(string $analyzer): string {
+        $docs = $this->docs->getDocs($analyzer, 'name');
+        assert(!is_array($docs), "Missing docs('name') for $analyzer");
+        return "<a href=\"analyses_doc.html#{$this->toId($analyzer)}\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; $docs";
     }
 
-    private function toHtmlList(array $array) {
+    private function toHtmlList(array $array): string {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
     }
 
-    protected function getTotalAnalyzer($issues = false) {
-        $query = 'SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
-            FROM resultsCounts AS rc
-            WHERE rc.count >= 0';
-
-        $stmt = $this->sqlite->prepare($query);
-        $result = $stmt->execute();
-
-        return $result->fetchArray(\SQLITE3_NUM);
+    protected function getTotalAnalyzer(): array {
+        return $this->dump->getTotalAnalyzer();
     }
 
 }
