@@ -183,9 +183,10 @@ class Ambassador extends Reports {
             }
 
             $compatibilities = array();
-            $rulesets = $this->dump->fetchTable('themas')->getColumn('thema');
-            $rulesets = array_filter($rulesets, function(string $x) : bool { return substr($x, 0, 13) === 'Compatibility';});
-            $compatibilities = array_map(function(string $x) : string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";}, $rulesets);
+            $rulesets = $this->dump->fetchTable('themas');
+            $rulesets->filter(function(array $x) : bool { return substr($x['thema'], 0, 13) === 'Compatibility';});
+            $compatibilities = array_map(function(string $x) : string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";},
+                                         $rulesets->getColumn('thema'));
             
             $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
             $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
@@ -1238,19 +1239,16 @@ HTML;
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPFunctionBreakdown(Section $section) {
+    protected function generatePHPFunctionBreakdown(Section $section) : void {
         // List of php functions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, count
-FROM phpStructures 
-WHERE type = "function"
-ORDER BY count DESC
-SQL
-        );
+        $res = $this->dump->fetchTable('phpStructures');
+        $res->filter(function (array $x) : bool { return $x['type'] === 'function'; });
+        $res->order(function (array $a, array $b) : bool { return $b['count'] <=> $a['count']; });
+
         $html = '';
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
@@ -1263,19 +1261,16 @@ SQL
         $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
     }
 
-    protected function generatePHPConstantsBreakdown(Section $section) {
-        // List of php functions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, count
-FROM phpStructures 
-WHERE type = "constant"
-ORDER BY count DESC
-SQL
-        );
+    protected function generatePHPConstantsBreakdown(Section $section) : void {
+        // List of php constant used
+        $res = $this->dump->fetchTable('phpStructures');
+        $res->filter(function (array $x) : bool { return $x['type'] === 'constant'; });
+        $res->order(function (array $a, array $b) : bool { return $b['count'] <=> $a['count']; });
+
         $html = '';
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
@@ -1290,17 +1285,14 @@ SQL
 
     protected function generatePHPClassesBreakdown(Section $section) {
         // List of php functions used
-        $res = $this->sqlite->query(<<<'SQL'
-SELECT name, count
-FROM phpStructures 
-WHERE type in ("class", "interface", "trait")
-ORDER BY count DESC
-SQL
-        );
+        $res = $this->dump->fetchTable('phpStructures');
+        $res->filter(function (array $x) : bool { return in_array($x['type'], array("class", "interface", "trait"), \STRICT_COMPARISON); });
+        $res->order(function (array $a, array $b) : bool { return $b['count'] <=> $a['count']; });
+
         $html = '';
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
@@ -1555,8 +1547,8 @@ JAVASCRIPT;
         foreach ($rulesets AS $key => $categorie) {
             $list = $this->rulesets->getRulesetsAnalyzers(array($categorie));
             $res = $this->dump->fetchAnalysersCounts($list);
+            $res->filter(function(array $x) : bool { return $x['count'] >= -1;});
             $counts = $res->getColumn('count');
-            $counts = array_filter($counts, function($x) { return $x >= -1;});
             $data[] = array('label' => $key, 'value' => array_sum($counts));
         }
 
@@ -1689,20 +1681,14 @@ HTML;
         $list[] = 'Project/Dump';
         $sqlList = makeList($list);
 
-        $query = <<<SQL
-SELECT analyzer AS analyzer FROM resultsCounts
-WHERE analyzer IN ($sqlList) AND 
-      count = 0 AND
-      analyzer LIKE "%/%" AND
-      analyzer NOT LIKE "Common/%"
-SQL;
-        $result = $this->sqlite->query($query);
+        $result = $this->dump->fetchAnalysersCounts($list);
+        $result->filter(function(array $x) : bool { return substr($x['analyzer'], 0, 7) !== 'Common';});
 
         $baseHTML = $this->getBasedPage($section->source);
 
         $filesHTML = array();
 
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($result->toArray() as $row) {
             $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
 
             if ($analyzer === null) {
@@ -2038,9 +2024,7 @@ JAVASCRIPTCODE;
 
     public function getIssuesFacetedDb(array $ruleset) : array {
         $results = $this->dump->fetchAnalysers($ruleset);
-        $results = $results->toArray();
-        $results = array_filter($results,
-                                function (array $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); });
+        $results->filter(function (array $x) : bool { return !in_array($x['fullcode'], array("Not Compatible With PHP Version", "Not Compatible With PHP Configuration")); });
 
         $TTFColors = array('Instant'  => '#5f492d',
                            'Quick'    => '#e8d568',
@@ -2055,7 +2039,7 @@ JAVASCRIPTCODE;
                                 );
 
         $items = array();
-        foreach($results as $row) {
+        foreach($results->toArray() as $row) {
             $item = array();
             $ini = $this->docs->getDocs($row['analyzer']);
             $item['analyzer']       = $ini['name'];
@@ -2925,33 +2909,18 @@ HTML;
     }
 
     private function generateInterfaceTree(Section $section) {
-        $list = array();
-
- $res = $this->sqlite->query(<<<SQL
-SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.name AS extends 
-    FROM cit 
-    LEFT JOIN cit cit2 
-        ON cit.extends = cit2.id
-    JOIN namespaces ns
-        ON cit.namespaceId = ns.id
-    JOIN namespaces ns2
-        ON cit2.namespaceId = ns2.id
-    WHERE cit.type="interface" AND
-          cit2.type="interface"
-SQL
-);
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['extends'])) {
+        $res = $this->dump->getCitTree('interface');
+        foreach($res->toArray() as $row) {
+            if (empty($row['parent'])) {
                 continue;
             }
 
-            $parent = $row['extends'];
+            $parent = $row['parent'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
 
-            $list[$parent][] = $row['name'];
+            $list[$parent][] = $row['child'];
         }
 
         if (empty($list)) {
@@ -2978,7 +2947,7 @@ SQL
 
     }
 
-    private function generateTraitMatrix(Section $section) {
+    private function generateTraitMatrix(Section $section) : void {
 
         // nombre de method en conflict possible
         // ce trait inclut l'autre
@@ -2991,54 +2960,14 @@ SQL
 
         // Get conflicts
         $query = <<<'SQL'
-SELECT
-   t1.name AS t1,
-   t2.name AS t2,
-   LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) AS method 
-FROM
-   cit AS t1 
-   JOIN
-      methods AS m1 
-      ON m1.citId = t1.id 
-   JOIN
-      methods AS m2 
-      ON m1.id != m2.id 
-      AND LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) = LOWER(SUBSTR(m2.METHOD, INSTR(m2.METHOD, 'function ') + 9, INSTR(m2.METHOD, '(') - (INSTR(m2.METHOD, 'function ') + 9))) 
-   JOIN
-      cit AS t2 
-      ON m2.citId = t2.id 
-WHERE
-   t1.type = 'trait' 
-   AND t2.type = 'trait'
+
 SQL;
-        $res = $this->sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $table[$row['t1']][$row['t2']][] = $row['method'];
-        }
+        $res = $this->dump->getTraitConflicts();
+        $table = $res->toHash('t1', 't2');
 
         // Get trait usage
-        $usage = array();
-        $query = <<<'SQL'
-SELECT
-   t1.name AS t1,
-   t2.name AS t2
-FROM
-   cit AS t1 
-   JOIN
-      cit_implements AS ttu 
-      ON ttu.implementing = t1.id AND
-         ttu.type = 'use'
-   JOIN
-      cit AS t2 
-      ON ttu.implements = t2.id 
-WHERE
-   t1.type = 'trait' 
-   AND t2.type = 'trait'
-SQL;
-        $res = $this->sqlite->query($query);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $usage[$row['t1']][$row['t2']][] = 1;
-        }
+        $res = $this->dump->getTraitUsage();
+        $usage = $res->toHash('t1', 't2');
 
         $rows = array();
         foreach($table as $name => $row) {
@@ -3069,34 +2998,19 @@ HTML;
         $html = $this->injectBloc($html, 'TITLE', $section->title);
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the trait matrix. Conflicting methods between any two traits are listed in the cells : when they are used in the same class, those traits will require conflict resolutions. And dark gray cells are traits that are actually included one into the other.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
-        $this->putBasedPage($section->file, $html);    }
+        $this->putBasedPage($section->file, $html);
+    }
 
-    private function generateTraitTree(Section $section) {
+    private function generateTraitTree(Section $section) : void {
         $list = array();
 
- $res = $this->sqlite->query(<<<SQL
-SELECT namespaces.namespace || '\' || cit.name AS user, namespaces2.namespace || '\' || cit2.name AS parent
-FROM cit
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
-JOIN cit_implements 
-    ON cit_implements.implementing = cit.id AND
-       cit_implements.type = 'use'
-JOIN cit cit2 
-    ON cit_implements.implements = cit2.id
-JOIN namespaces namespaces2
-    ON cit2.namespaceId = namespaces2.id
-
-WHERE cit.type="trait"
-SQL
-);
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['user'])) {
+        $res = $this->dump->getCitTree('trait');
+        foreach($res->toArray() as $row) {
+            if (empty($row['child'])) {
                 continue;
             }
 
-            $parent = $row['user'];
+            $parent = $row['child'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
@@ -3123,33 +3037,21 @@ SQL
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassTree(Section $section) {
+    private function generateClassTree(Section $section) : void {
         $list = array();
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.name AS extends 
-    FROM cit 
-    LEFT JOIN cit cit2 
-        ON cit.extends = cit2.id
-    JOIN namespaces ns
-        ON cit.namespaceId = ns.id
-    JOIN namespaces ns2
-        ON cit2.namespaceId = ns2.id
-    WHERE cit.type="class" AND
-          cit2.type="class"
-SQL
-);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['extends'])) {
+        $res = $this->dump->getCitTree('class');
+        foreach($res->toArray() as $row) {
+            if (empty($row['parent'])) {
                 continue;
             }
 
-            $parent = $row['extends'];
+            $parent = $row['parent'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
 
-            $list[$parent][] = $row['name'];
+            $list[$parent][] = $row['child'];
         }
 
         if (empty($list)) {
@@ -3289,7 +3191,7 @@ SQL
         $list = array();
 
         $theTable = '';
-        $res = $this->dump->fetchAnalysers('Exceptions/DefinedExceptions');
+        $res = $this->dump->fetchAnalysers(array('Exceptions/DefinedExceptions'));
         foreach($res->toArray() as $row) {
             if (!preg_match('/ extends (\S+)/', $row['fullcode'], $r)) {
                 continue;
@@ -3379,14 +3281,12 @@ SQL
         return $return;
     }
 
-    private function generateNamespaceTree(Section $section) {
+    private function generateNamespaceTree(Section $section) : void {
         $theTable = '';
-        $res = $this->sqlite->query('SELECT namespace FROM namespaces ORDER BY namespace');
-
-        $paths = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $paths[] = substr($row['namespace'], 1);
-        }
+        $res = $this->dump->fetchTable('namespaces');
+        $res->order(function(array $a, array $b) : bool { return $a['namespace'] <=> $b['namespace'];});
+                $res->map(function(array $x) : array { $x['namespace'] = trim($x['namespace'], '\\'); return $x;});
+        $paths = $res->getColumn('namespace');
 
         $paths = $this->path2tree($paths);
         $theTable = $this->pathtree2ul($paths);
@@ -3398,7 +3298,7 @@ SQL
         $this->putBasedPage($section->file, $html);
     }
 
-    private function tree2ul($tree, $display) {
+    private function tree2ul($tree, $display) : string {
         if (empty($tree)) {
             return '';
         }
@@ -3467,29 +3367,9 @@ HTML;
     }
 
     private function generateTypehintMethodsSuggestions() {
-        $res = $this->sqlite->query(<<<SQL
-SELECT cit.type || ' ' || cit.name AS theClass, 
-       namespaces.namespace || "\\" || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
-       methods.method,
-       arguments.name AS argument,
-       init,
-       typehint
-FROM cit
-JOIN methods 
-    ON methods.citId = cit.id
-JOIN arguments 
-    ON methods.id = arguments.methodId AND
-       arguments.citId != 0
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
-WHERE type in ("class", "trait", "interface")
-ORDER BY fullnspath
-;
-SQL
-);
-
+        $res = $this->dump->fetchTableMethodsByArgument();
         $arguments = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $theMethod = $row['fullnspath'];
             $visibilities = array($row['typehint'], $row['init']);
 
@@ -3500,27 +3380,11 @@ SQL
             array_collect_by($arguments, $theMethod, $argument);
         }
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT cit.type || ' ' || cit.name AS theClass, 
-       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
-       returntype, 
-       methods.method
-FROM cit
-JOIN methods 
-    ON methods.citId = cit.id
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
-WHERE type in ("class", "trait", "interface")
-ORDER BY fullnspath
-;
-SQL
-);
-
         $return = array();
         $theClass = '';
         $aClass = array();
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        $res = $this->dump->fetchTableMethodsByReturntype();
+        foreach($res->toArray() as $row) {
             $theClass = $row['fullnspath'];
             $visibilities = array($row['returntype'], '&nbsp;');
 
@@ -3649,7 +3513,7 @@ HTML
 
 
     private function generateClassFinalSuggestions() {
-        $res = $this->dump->fetchAnalysers('Classes/CouldBeFinal');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeFinal'));
 
         $couldBeFinal = array();
         foreach($res->toArray() as $row) {
@@ -3665,7 +3529,7 @@ HTML
     }
 
     private function generateClassAbstractuggestions() {
-        $res = $this->dump->fetchAnalysers('Classes/CouldBeAbstractClass');
+        $res = $this->dump->fetchAnalysers(array('Classes/CouldBeAbstractClass'));
 
         $couldBeAbstract = array();
         foreach($res->toArray() as $row) {
@@ -3713,17 +3577,9 @@ HTML
             }
         }
 
-        $res = $this->sqlite->query(<<<SQL
-SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
- visibility, method
-FROM cit
-JOIN methods 
-    ON methods.citId = cit.id
-JOIN namespaces 
-    ON cit.namespaceId = namespaces.id
- WHERE type="class"
-SQL
-);
+        $res = $this->dump->fetchTableMethods();
+        $res->filter(function (array $x) : bool { return $x['type'] === 'class'; });
+
         $ranking = array(''          => 1,
                          'public'    => 2,
                          'protected' => 3,
@@ -3734,10 +3590,10 @@ SQL
         $theClass = '';
         $aClass = array();
 
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['fullnspath'] . ':' . $row['theClass']) {
+        foreach($res->toArray() as $row) {
+            if ($theClass != $row['fullnspath'] . ':' . $row['class']) {
                 $return[$theClass] = $aClass;
-                $theClass = $row['fullnspath'] . ':' . $row['theClass'];
+                $theClass = $row['fullnspath'] . ':' . $row['class'];
                 $aClass = array();
             }
 
@@ -4174,22 +4030,12 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
-SELECT namespaces.namespace || '\\' || name AS name, name AS shortName, files.file, (cit.end - cit.begin) AS size 
-    FROM cit 
-    JOIN files 
-        ON files.id = cit.file
-    JOIN namespaces 
-        ON namespaces.id = cit.namespaceId
-    WHERE
-       cit.type = 'class'
-    ORDER BY (cit.end - cit.begin) DESC
-SQL
-        );
+        $res = $this->dump->getCitBySize();
+
         $html = '';
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             if (count($data) < 50) {
                 $data[$value['name']] = $value['size'];
                 $xAxis[] = "'" . $value['shortName'] . "'";
@@ -4355,23 +4201,11 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
-SELECT namespaces.namespace || '\\' || name || '::' || method AS name, method AS shortName, files.file, (methods.end - methods.begin) AS size 
-    FROM methods 
-    JOIN cit
-        on methods.citId = cit.id AND
-           cit.type = 'class'
-    JOIN files 
-        ON files.id = cit.file
-    JOIN namespaces 
-        ON namespaces.id = cit.namespaceId
-    ORDER BY (methods.end - methods.begin) DESC
-SQL
-        );
+        $res = $this->dump->getMethodsBySize();
         $html = '';
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($res->toArray() as $value) {
             if (count($data) < 50) {
                 $data[$value['name']] = $value['size'];
                 $xAxis[] = "'" . $value['shortName'] . "'";
@@ -4648,11 +4482,12 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateFileDependencies(Section $section) {
-        $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE included != including AND type in ("IMPLEMENTS", "EXTENDS", "INCLUDE", "NEW")');
+    private function generateFileDependencies(Section $section) : void {
+        $res = $this->dump->fetchTable('filesDependencies');
+        $res->filter(function (array $x) : bool { return ($x['included'] !== $x['including']) && in_array($x['type'], array("IMPLEMENTS", "EXTENDS", "INCLUDE", "NEW"));});
 
         $nodes = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             if (isset($nodes[$row['including']][$row['included']])) {
                 $nodes[$row['including']][$row['included']] .= ', ' . $row['type'];
             } else {
@@ -4703,11 +4538,11 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateIdenticalFiles(Section $section) {
-        $res = $this->sqlite->query('SELECT GROUP_CONCAT(file) AS list, count(*) AS count FROM files GROUP BY fnv132 HAVING COUNT(*) > 1 ORDER BY COUNT(*), file');
+    private function generateIdenticalFiles(Section $section) : void {
+        $res = $this->dump->getIdenticalFiles();
 
         $theTable = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as $row) {
             $list = str_replace(',', "</li>\n<li>", $row['list']);
             $theTable[] = <<<HTML
 <tr>
@@ -4722,7 +4557,6 @@ HTML;
         }
         $theTable = implode(PHP_EOL, $theTable);
 
-
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'IDENTICAL', $theTable);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
@@ -4730,20 +4564,12 @@ HTML;
     }
 
     private function generateConcentratedIssues(Section $section) {
-        $listAnalyzers = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
-        $sqlList = makeList($listAnalyzers);
-
-        $sql = <<<SQL
-SELECT file, line, COUNT(*) AS count, GROUP_CONCAT(DISTINCT analyzer) AS list FROM results
-    WHERE analyzer IN ($sqlList)
-    GROUP BY file, line
-    HAVING count(DISTINCT analyzer) > 5
-    ORDER BY count(*) DESC
-SQL;
-        $res = $this->sqlite->query($sql);
+        $list = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
+        
+        $res = $this->dump->getConcentratedIssues($list);
 
         $table = array();
-        while(list('line' => $line, 'file' => $file, 'count' => $count, 'list' => $list) = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($res->toArray() as list('line' => $line, 'file' => $file, 'count' => $count, 'list' => $list)) {
             $listHtml = array();
             foreach(explode(',', $list) as $l) {
                 $listHtml[] = '<li>' . $this->makeDocLink($l) . '</li>';

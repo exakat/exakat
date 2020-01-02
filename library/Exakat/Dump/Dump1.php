@@ -75,9 +75,8 @@ SQL;
         assert(in_array($type, array('class', 'trait', 'interface')));
 
         $query = "SELECT name FROM cit WHERE type='$type' ORDER BY name";
-        $res = $this->query($query);
 
-        return new Results($res);
+        return $this->query($query);
     }
 
     private function query(string $query) : Results {
@@ -111,21 +110,68 @@ SQL
     public function fetchTableMethods() : Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT methods.*, 
-GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
-              CASE arguments.reference WHEN 0 THEN '' ELSE '&' END || 
-              CASE arguments.variadic WHEN 0 THEN '' ELSE '...' END  || arguments.name || 
-              (CASE arguments.init WHEN ' ' THEN '' ELSE ' = ' || arguments.init END),
-             ', ' ) AS signature,
-cit.type AS cit
-FROM methods
-LEFT JOIN arguments
-    ON methods.id = arguments.methodId
-JOIN cit
-    ON methods.citId = cit.id
-GROUP BY methods.id
+       GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
+                     CASE arguments.reference WHEN 0 THEN '' ELSE '&' END || 
+                     CASE arguments.variadic WHEN 0 THEN '' ELSE '...' END  || arguments.name || 
+                     (CASE arguments.init WHEN ' ' THEN '' ELSE ' = ' || arguments.init END),
+                    ', ' ) AS signature,
+       cit.type AS type,
+       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+       cit.name AS class
+
+    FROM methods
+    LEFT JOIN arguments
+        ON methods.id = arguments.methodId
+    JOIN cit
+        ON methods.citId = cit.id
+    JOIN namespaces 
+        ON cit.namespaceId = namespaces.id
+    GROUP BY methods.id
 SQL
         );
 
+        return new Results($res);
+    }
+
+    public function fetchTableMethodsByArgument() : Results {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT cit.type || ' ' || cit.name AS theClass, 
+       namespaces.namespace || "\\" || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
+       methods.method,
+       arguments.name AS argument,
+       init,
+       typehint
+FROM cit
+JOIN methods 
+    ON methods.citId = cit.id
+JOIN arguments 
+    ON methods.id = arguments.methodId AND
+       arguments.citId != 0
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+WHERE type in ("class", "trait", "interface")
+ORDER BY fullnspath
+SQL
+        );
+
+        return new Results($res);
+    }
+    
+    public function fetchTableMethodsByReturnType() : Results {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT cit.type || ' ' || cit.name AS theClass, 
+       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+       returntype, 
+       methods.method
+FROM cit
+JOIN methods 
+    ON methods.citId = cit.id
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+WHERE type in ("class", "trait", "interface")
+ORDER BY fullnspath
+SQL
+        );
 
         return new Results($res);
     }
@@ -426,7 +472,147 @@ SQL;
         
         return explode(',', $res);
     }
+    
+    public function getCitBySize(string $type = 'class') : Results {
+        $query = <<<SQL
+SELECT namespaces.namespace || '\\' || name AS name, name AS shortName, files.file, (cit.end - cit.begin) AS size 
+    FROM cit 
+    JOIN files 
+        ON files.id = cit.file
+    JOIN namespaces 
+        ON namespaces.id = cit.namespaceId
+    WHERE
+       cit.type = '$type'
+    ORDER BY (cit.end - cit.begin) DESC
+SQL;
+        $result = $this->sqlite->query($query);
 
+        return new Results($result);
+    }
+
+    public function getMethodsBySize() : Results {
+        $query = <<<SQL
+SELECT namespaces.namespace || '\\' || name || '::' || method AS name, 
+       method AS shortName, 
+       files.file, 
+       (methods.end - methods.begin) AS size
+    FROM methods 
+    JOIN cit
+        on methods.citId = cit.id AND
+           cit.type = 'class'
+    JOIN files 
+        ON files.id = cit.file
+    JOIN namespaces 
+        ON namespaces.id = cit.namespaceId
+    ORDER BY (methods.end - methods.begin) DESC
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getConcentratedIssues(array $list = array(), int $count = 5) : Results {
+        $sqlList = makeList($list);
+
+        $query = <<<SQL
+SELECT file, 
+       line, 
+       COUNT(*) AS count, 
+       GROUP_CONCAT(DISTINCT analyzer) AS list 
+    FROM results
+    WHERE analyzer IN ($sqlList)
+    GROUP BY file, line
+    HAVING count(DISTINCT analyzer) > $count
+    ORDER BY count(*) DESC
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+
+    public function getIdenticalFiles() : Results {
+        $query = <<<SQL
+SELECT GROUP_CONCAT(file) AS list, 
+       count(*) AS count 
+    FROM files 
+    GROUP BY fnv132 
+    HAVING COUNT(*) > 1 
+    ORDER BY COUNT(*), file
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getCitTree(string $type = 'class') : Results {
+        $query = <<<SQL
+SELECT ns.namespace || '\' || cit.name AS child, 
+       ns2.namespace || '\' || cit2.name AS parent 
+    FROM cit 
+    LEFT JOIN cit cit2 
+        ON cit.extends = cit2.id
+    JOIN namespaces ns
+        ON cit.namespaceId = ns.id
+    JOIN namespaces ns2
+        ON cit2.namespaceId = ns2.id
+    WHERE cit.type="$type" AND
+          cit2.type="$type"
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getTraitConflicts() : Results {
+        $query = <<<SQL
+SELECT
+   t1.name AS t1,
+   t2.name AS t2,
+   LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) AS method 
+FROM
+   cit AS t1 
+   JOIN
+      methods AS m1 
+      ON m1.citId = t1.id 
+   JOIN
+      methods AS m2 
+      ON m1.id != m2.id 
+      AND LOWER(SUBSTR(m1.METHOD, INSTR(m1.METHOD, 'function ') + 9, INSTR(m1.METHOD, '(') - (INSTR(m1.METHOD, 'function ') + 9))) = LOWER(SUBSTR(m2.METHOD, INSTR(m2.METHOD, 'function ') + 9, INSTR(m2.METHOD, '(') - (INSTR(m2.METHOD, 'function ') + 9))) 
+   JOIN
+      cit AS t2 
+      ON m2.citId = t2.id 
+WHERE
+   t1.type = 'trait' 
+   AND t2.type = 'trait'
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
+    public function getTraitUsage() : Results {
+        $query = <<<SQL
+SELECT
+   t1.name AS t1,
+   t2.name AS t2
+FROM
+   cit AS t1 
+   JOIN
+      cit_implements AS ttu 
+      ON ttu.implementing = t1.id AND
+         ttu.type = 'use'
+   JOIN
+      cit AS t2 
+      ON ttu.implements = t2.id 
+WHERE
+   t1.type = 'trait' 
+   AND t2.type = 'trait'
+SQL;
+        $result = $this->sqlite->query($query);
+
+        return new Results($result);
+    }
+    
 }
 
 ?>

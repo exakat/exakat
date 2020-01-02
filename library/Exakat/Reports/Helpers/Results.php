@@ -205,6 +205,14 @@ class Results {
 
         usort($this->values, $f);
     }
+
+    public function map(Closure $f) {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        array_map($f, $this->values);
+    }
 }
 
 ?>
