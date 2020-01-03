@@ -987,6 +987,7 @@ GREMLIN
  sideEffect{ 
     file = ""; 
     namespace = "\\\\"; 
+    phpdoc = "";
 }
 .where( 
     __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File"))
@@ -996,6 +997,7 @@ GREMLIN
                 )
            .fold() 
 )
+.where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 GREMLIN
 , array(), array())
               ->hasNoIn('CONST') // Not class or interface
@@ -1018,7 +1020,13 @@ GREMLIN
                      array()
               )
 
-              ->raw('map{ ["name":name, "value":v, "namespace": namespace, "file": file, "type":"const"]; }', array(), array());
+              ->raw('map{ ["name":name, 
+                           "value":v, 
+                           "namespace": namespace, 
+                           "file": file, 
+                           "type":"const",
+                           "phpdoc": phpdoc
+                           ]; }', array(), array());
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
@@ -1030,6 +1038,7 @@ GREMLIN
                               $this->files[$row['file']],
                               $row['value'],
                               $row['type'],
+                              $row['phpdoc'],
                             );
         }
 
@@ -1285,7 +1294,6 @@ GREMLIN;
                              'type'    => 'include'
                              ));
         $count = $this->storeToDump('filesDependencies', $query);
-        print $count . 'inclusions';
 
         // Finding extends and implements
         $query = $this->newQuery('Extensions');

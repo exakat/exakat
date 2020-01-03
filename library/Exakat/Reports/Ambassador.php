@@ -2749,7 +2749,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateGlobals(Section $section = null): void {
+    private function generateGlobals(Section $section): void {
         $res = $this->dump->fetchTable('globalVariables');
 
         // Empty or absent is the same : no soup!

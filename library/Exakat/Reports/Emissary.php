@@ -676,7 +676,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $baseHTML);
     }
 
-    protected function generateDashboard(Section $section = null) {
+    protected function generateDashboard(Section $section) {
         $baseHTML = $this->getBasedPage($section->source);
 
         $tags = array();
@@ -1982,7 +1982,7 @@ JAVASCRIPTCODE;
         return $class;
     }
 
-    protected function generateProcFiles(Section $section = null) {
+    protected function generateProcFiles(Section $section) {
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
@@ -2005,7 +2005,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateAnalyzersList(Section $section = null) {
+    protected function generateAnalyzersList(Section $section) {
         $analyzers = array();
 
         foreach($this->rulesets->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
@@ -2610,7 +2610,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateGlobals(Section $section = null): void {
+    private function generateGlobals(Section $section): void {
         $res = $this->dump->fetchTable('globalVariables');
 
         if ($res->isEmpty()) {

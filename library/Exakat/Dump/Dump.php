@@ -449,14 +449,20 @@ SQL;
         $values = array();
         $total  = 0;
         foreach($results as $change) {
-            $values[] = str_replace('(""', '(null', '('.makeList(array_map(array($this->sqlite, 'escapeString'), $change)).')');
+            $values[] = str_replace("(''", '(null', '('.makeList(array_map(array($this->sqlite, 'escapeString'), $change), "'").')');
             // str_replace is an ugly hack for id, which should be null.
             ++$total;
         }
 
         if (!empty($values)) {
             $query = 'INSERT INTO '.$table.' VALUES ' . implode(', ', $values);
-            $this->sqlite->query($query);
+            $r = $this->sqlite->query($query);
+            
+            if ($r === false) {
+                print_r($values);
+                print $table;
+                die(__METHOD__);
+            }
         }
 
         return count($values);
