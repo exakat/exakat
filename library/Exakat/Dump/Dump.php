@@ -15,8 +15,6 @@ class Dump {
     protected $phpexcutable   = null;
     protected $sqlite         = null;
     private $sqliteFileFinal  = '';
-    private $path             = '';
-    private $previousPath     = '';
 
     function __construct(string $path, int $init = self::READ, string $project = '', string $phpexecutable = '') {
         $this->sqliteFileFinal    = $path;

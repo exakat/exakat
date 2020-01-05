@@ -969,9 +969,15 @@ GREMLIN
         $total = 0;
         $toDump = array();
         foreach($result->toArray() as $row) {
+            if (isset($namespacesId[$namespace])) {
+                $namespaceId = $namespacesId[$namespace];
+            } else {
+                $namespaceId = 1;
+            }
+
             $toDump[] = array('',
                               trim($row['name'], "'\""),
-                              $namespacesId[$row['namespace']],
+                              $namespaceId,
                               $this->files[$row['file']],
                               $row['value'],
                               $row['type'],

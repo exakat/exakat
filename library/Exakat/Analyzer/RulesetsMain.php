@@ -30,7 +30,7 @@ class RulesetsMain implements RulesetsInterface {
     private static $sqlite = null;
     private $phar_tmp      = null;
 
-    public function __construct($path) {
+    public function __construct(string $path) {
         if (substr($path, 0, 4) == 'phar') {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs') . '.sqlite';
             copy($path, $this->phar_tmp);
@@ -47,15 +47,13 @@ class RulesetsMain implements RulesetsInterface {
         }
     }
     
-    public function getRulesetsAnalyzers(?array $ruleset = null) {
-        $all = $this->listAllRulesets();
-
+    public function getRulesetsAnalyzers(?array $ruleset = null) : array {
         // Main installation
         if ($ruleset === null) {
             // Default is ALL of ruleset
             $where = 'WHERE a.folder != "Common" ';
         } else {
-            $ruleset = array_map(function ($x) { return trim($x, '"'); }, $ruleset);
+            $ruleset = array_map(function (string $x)  : string { return trim($x, '"'); }, $ruleset);
             $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($ruleset) . ')';
         }
 
@@ -73,11 +71,11 @@ SQL;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = "$row[folder]/$row[name]";
         }
-        
+
         return $return;
     }
 
-    public function getRulesetForAnalyzer($analyzer) {
+    public function getRulesetForAnalyzer($analyzer) : array {
         list($vendor, $class) = explode('/', $analyzer);
         
         $query = <<<SQL
@@ -100,7 +98,7 @@ SQL;
         return $return;
     }
 
-    public function getRulesetsForAnalyzer($list = null) {
+    public function getRulesetsForAnalyzer($list = null) : array {
         if ($list === null) {
             $where = '';
         } elseif (is_string($list)) {

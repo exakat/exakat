@@ -530,7 +530,7 @@ class Load extends Tasks {
         $this->logTime('The End');
     }
 
-    private function processProject($project) {
+    private function processProject($project) : array {
         $files = $this->datastore->getCol('files', 'file');
 
         if (empty($files)) {
@@ -612,9 +612,7 @@ class Load extends Tasks {
         return $nbTokens;
     }
 
-    private function runCollector($omittedFiles) {
-        $b = hrtime(\TIME_AS_NUMBER);
-
+    private function runCollector($omittedFiles) : void {
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->loader = new Collector($this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
@@ -641,10 +639,9 @@ class Load extends Tasks {
         $this->theGlobals = array();
 
         $this->stats = $stats;
-        $e = hrtime(\TIME_AS_NUMBER);
     }
 
-    private function processDir($dir) {
+    private function processDir($dir) : array {
         if (!file_exists($dir)) {
             return array('files'  => -1,
                          'tokens' => -1);
@@ -720,7 +717,7 @@ class Load extends Tasks {
         $this->phpDocs                 = array();
     }
 
-    public function initDiff() {
+    public function initDiff() : void {
         $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
         display("Loading with $clientClass\n");
         if (!class_exists($clientClass)) {
@@ -742,7 +739,7 @@ class Load extends Tasks {
         $this->loader = new $clientClass($this->callsDatabase, $this->id0);
     }
 
-    public function finishDiff() {
+    public function finishDiff() : void {
         $this->loader->finalize(array());
 
         $loadFinal = new LoadFinal();
@@ -753,7 +750,7 @@ class Load extends Tasks {
         $this->reset();
     }
 
-    public function processDiffFile($filename, $path) {
+    public function processDiffFile(string $filename, string $path) {
         try {
             $this->processFile($filename, $path);
         } catch(NoFileToProcess $e ) {

@@ -244,7 +244,7 @@ class Emissary extends Reports {
         return '';
     }
 
-    protected function initFolder() {
+    protected function initFolder() : void {
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);
@@ -257,7 +257,7 @@ class Emissary extends Reports {
         }
     }
 
-    protected function cleanFolder() {
+    protected function cleanFolder() : void {
         if (file_exists("{$this->tmpName}/data/base.html")) {
             unlink("{$this->tmpName}/data/base.html");
             unlink("{$this->tmpName}/data/menu.html");
@@ -283,8 +283,8 @@ class Emissary extends Reports {
         rename($this->tmpName, $this->finalName);
     }
 
-    protected function setPHPBlocs($description) {
-        $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function ($x) {
+    protected function setPHPBlocs(string $description) : string {
+        $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function (array $x) : string {
             $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . PHPSyntax($x[1]) . '?&gt;</pre>';
             return $return;
         }, $description);
@@ -292,7 +292,7 @@ class Emissary extends Reports {
         return $description;
     }
 
-    protected function generateDocumentation(Section $section) {
+    protected function generateDocumentation(Section $section) : void {
         $analyzersList = array_merge($this->rulesets->getRulesetsAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
 
@@ -329,8 +329,7 @@ class Emissary extends Reports {
             static $regex;
             if (empty($regex)) {
                 $php_native_functions = parse_ini_file("{$this->config->dir_root}/data/php_functions.ini")['functions'];
-//                $php_native_functions = array('substr', 'mb_substr');
-                usort($php_native_functions, function ($a, $b) { return strlen($b) <=> strlen($a);} );
+                usort($php_native_functions, function (string $a, string $b) : int { return strlen($b) <=> strlen($a);} );
                 $regex = '/(' . implode('|', $php_native_functions) . ')\(\)/m';
             }
             $description = preg_replace($regex, '`\1() <https://www.php.net/\1>`_', $description);
@@ -356,19 +355,19 @@ class Emissary extends Reports {
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateSecurity(Section $section) {
+    protected function generateSecurity(Section $section) : void {
         $this->generateIssuesEngine('security_issues',
                                     $section->title,
                                     $this->getIssuesFaceted('Security') );
     }
 
-    protected function generateDeadCode(Section $section) {
+    protected function generateDeadCode(Section $section) : void {
         $this->generateIssuesEngine('deadcode_issues',
                                     $section->title,
                                     $this->getIssuesFaceted('Dead code') );
     }
 
-    protected function generatePerformances(Section $section) {
+    protected function generatePerformances(Section $section) : void {
         $this->generateIssuesEngine('performances_issues',
                                     $section->title,
                                     $this->getIssuesFaceted('Performances') );
@@ -676,7 +675,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $baseHTML);
     }
 
-    protected function generateDashboard(Section $section) {
+    protected function generateDashboard(Section $section) : void {
         $baseHTML = $this->getBasedPage($section->source);
 
         $tags = array();
@@ -1381,7 +1380,7 @@ JAVASCRIPT;
         $this->putBasedPage($filename, $finalHTML);
     }
 
-    public function getHashData() {
+    public function getHashData() : string {
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
             'Number of lines of code'               => $this->datastore->getHash('loc'),
@@ -1460,7 +1459,7 @@ JAVASCRIPT;
         return $html;
     }
 
-    public function getIssuesBreakdown() {
+    public function getIssuesBreakdown() : array {
         $rulesets = array('Code Smells'  => 'Analyze',
                           'Dead Code'    => 'Dead code',
                           'Security'     => 'Security',
@@ -1476,14 +1475,8 @@ JAVASCRIPT;
         }
 
         // ordonné DESC par valeur
-        uasort($data, function ($a, $b) {
-            if ($a['value'] > $b['value']) {
-                return -1;
-            } elseif ($a['value'] < $b['value']) {
-                return 1;
-            } else {
-                return 0;
-            }
+        uasort($data, function (array $a, array $b) : int {
+            return $b['value'] <=> $a['value'];
         });
         $issuesHtml = '';
         $dataScript = array();
@@ -1541,7 +1534,7 @@ HTML;
         return $this->dump->getAnalyzedFiles($list);
     }
 
-    protected function generateAnalyzers() {
+    protected function generateAnalyzers() : void {
         $analysers = $this->getAnalyzersResultsCounts();
 
         $baseHTML = $this->getBasedPage('analyses');
@@ -1622,7 +1615,7 @@ HTML;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateFiles(Section $section) {
+    protected function generateFiles(Section $section) : void {
         $files = $this->getFilesResultsCounts();
 
         $baseHTML = $this->getBasedPage($section->source);
@@ -1760,7 +1753,7 @@ HTML;
     }
 
 
-    protected function getAnalyzerOverview() {
+    protected function getAnalyzerOverview() : array {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -1792,7 +1785,7 @@ HTML;
         );
     }
 
-    private function generateNewIssues(Section $section) {
+    private function generateNewIssues(Section $section) : void {
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
 
         if (file_exists($this->config->dump_previous)) {
@@ -1806,7 +1799,7 @@ HTML;
         $this->generateIssuesEngine($section, $diff);
     }
 
-    private function generateIssues() {
+    private function generateIssues(): void {
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
         $this->generateIssuesEngine('issues',
                                     $issues );
@@ -1966,7 +1959,7 @@ JAVASCRIPTCODE;
         return $items;
     }
 
-    private function getClassByType($type) {
+    private function getClassByType(string $type) : string {
         if ($type === 'Critical' || $type === 'Long') {
             $class = 'text-orange';
         } elseif ($type === 'Major' || $type === 'Slow') {
@@ -1982,7 +1975,7 @@ JAVASCRIPTCODE;
         return $class;
     }
 
-    protected function generateProcFiles(Section $section) {
+    protected function generateProcFiles(Section $section) : void {
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
@@ -2005,7 +1998,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateAnalyzersList(Section $section) {
+    protected function generateAnalyzersList(Section $section) : void {
         $analyzers = array();
 
         foreach($this->rulesets->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
@@ -2020,7 +2013,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->source, $html);
     }
 
-    private function generateExternalLib(Section $section) {
+    private function generateExternalLib(Section $section) : void {
         $externallibraries = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
 
         $libraries = array();
@@ -2104,7 +2097,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generatePhpConfiguration(Section $section) {
+    protected function generatePhpConfiguration(Section $section) : void {
         $phpConfiguration = new Phpcompilation($this->config);
         $report = $phpConfiguration->generate('', Reports::INLINE);
 
@@ -2118,40 +2111,60 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateCompatibilityEstimate(Section $section) {
+    protected function generateCompatibilityEstimate(Section $section) : void {
         $html = $this->getBasedPage($section->source);
 
         $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0');
         $scores = array_fill_keys(array_values($versions), 0);
         $versions = array_reverse($versions);
 
-        $analyzers = array( 'Php/Php54NewFunctions'                 => '5.3-',
-                            'Structures/DereferencingAS'            => '5.3-',
-                            'Php/ClosureThisSupport'                => '5.4-',
-                            'Php/HashAlgos54'                       => '5.4-',
-                            'Php/Php54RemovedFunctions'             => '5.4-',
-                            'Structures/Break0'                     => '5.4-',
-                            'Structures/BreakNonInteger'            => '5.4-',
-                            'Structures/CalltimePassByReference'    => '5.4-',
-                            'Php/MethodCallOnNew'                   => '5.4+',
-                            'Type/Binary'                           => '5.4+',
-                            'Php/Php55NewFunctions'                 => '5.5-',
-                            'Php/Php55RemovedFunctions'             => '5.5-',
-                            'Php/CantUseReturnValueInWriteContext'  => '5.5+',
-                            'Php/ConstWithArray'                    => '5.5+',
-                            'Php/Password55'                        => '5.5+',
-                            'Php/StaticclassUsage'                  => '5.5+',
-                            'Structures/ForeachWithList'            => '5.5+',
-                            'Structures/EmptyWithExpression'        => '5.5+',
-                            'Structures/TryFinally'                 => '5.5+',
-                            'Php/Php56NewFunctions'                 => '5.6-',
-                            'Structures/CryptWithoutSalt'           => '5.6-',
-                            'Namespaces/UseFunctionsConstants'      => '5.6+',
-                            'Php/ConstantScalarExpression'          => '5.6+',
-                            'Php/debugInfoUsage'                    => '5.6+',
-                            'Php/EllipsisUsage'                     => '5.6+',
-                            'Php/ExponentUsage'                     => '5.6+',
-                            'Structures/ConstantScalarExpression'   => '5.6+',
+        $analyzers = array(
+                            'Php/Php80RemovedFunctions'             => '8.0-',
+                            'Php/Php80RemovedConstant'              => '8.0-',
+
+                            'Structures/toStringThrowsException'    => '7.4-',
+                            'Php/NestedTernaryWithoutParenthesis'   => '7.4-',
+                            'Php/TypedPropertyUsage'                => '7.4-',
+                            'Php/UseCovariance'                     => '7.4-',
+                            'Php/UseContravariance'                 => '7.4-',
+                            'Php/Php74NewDirective'                 => '7.4-',
+                            'Php/SpreadOperatorForArray'            => '7.4+',
+                            'Php/UnpackingInsideArrays'             => '7.4+',
+                            'Structures/CurlVersionNow'             => '7.4+',
+                            'Php/Php74RemovedFunctions'             => '7.4+',
+                            'Php/Php74Deprecation'                  => '7.4+',
+                            'Php/Php74ReservedKeyword'              => '7.4+',
+                            'Functions/UseArrowFunctions'           => '7.4+',
+                            'Php/IntegerSeparatorUsage'             => '7.4+',
+                            'Php/NoMoreCurlyArrays'                 => '7.4+',
+                            'Php/CoalesceEqual'                     => '7.4+',
+                            'Php/ConcatAndAddition'                 => '7.4+',
+
+                            'Php/Php73NewFunctions'                 => '7.3-',
+                            'Php/ListWithReference'                 => '7.3+',
+                            'Constants/CaseInsensitiveConstants'    => '7.3+',
+                            'Php/FlexibleHeredoc'                   => '7.3+',
+                            'Php/PHP73LastEmptyArgument'            => '7.3+',
+
+                            'Php/Php72Deprecation'                  => '7.2-',
+                            'Php/Php72NewClasses'                   => '7.2-',
+                            'Php/Php72NewConstants'                 => '7.2-',
+                            'Php/Php72NewFunctions'                 => '7.2-',
+                            'Php/Php72ObjectKeyword'                => '7.2-',
+                            'Php/Php72RemovedFunctions'             => '7.2-',
+                            'Classes/CantInheritAbstractMethod'     => '7.2+',
+                            'Classes/ChildRemoveTypehint'           => '7.2+',
+                            'Php/GroupUseTrailingComma'             => '7.2+',
+
+                            'Php/Php71NewClasses'                   => '7.1-',
+                            'Php/Php71NewFunctions'                 => '7.1-',
+                            'Type/OctalInString'                    => '7.1-',
+                            'Classes/ConstVisibilityUsage'          => '7.1+',
+                            'Php/ListShortSyntax'                   => '7.1+',
+                            'Php/ListWithKeys'                      => '7.1+',
+                            'Php/Php71RemovedDirective'             => '7.1+',
+                            'Php/UseNullableType'                   => '7.1+',
+
                             'Classes/AbstractStatic'                => '7.0-',
                             'Classes/NullOnNew'                     => '7.0-',
                             'Classes/UsingThisOutsideAClass'        => '7.0-',
@@ -2189,33 +2202,37 @@ JAVASCRIPTCODE;
                             'Security/UnserializeSecondArg'         => '7.0+',
                             'Structures/IssetWithConstant'          => '7.0+',
                             'Php/ParenthesisAsParameter'            => '7.0+',
-                            'Php/Php71NewClasses'                   => '7.1-',
-                            'Php/Php71NewFunctions'                 => '7.1-',
-                            'Type/OctalInString'                    => '7.1-',
-                            'Classes/ConstVisibilityUsage'          => '7.1+',
-                            'Php/ListShortSyntax'                   => '7.1+',
-                            'Php/ListWithKeys'                      => '7.1+',
-                            'Php/Php71RemovedDirective'             => '7.1+',
-                            'Php/UseNullableType'                   => '7.1+',
-                            'Php/Php72Deprecation'                  => '7.2-',
-                            'Php/Php72NewClasses'                   => '7.2-',
-                            'Php/Php72NewConstants'                 => '7.2-',
-                            'Php/Php72NewFunctions'                 => '7.2-',
-                            'Php/Php72ObjectKeyword'                => '7.2-',
-                            'Php/Php72RemovedClasses'               => '7.2-',
-                            'Php/Php72RemovedFunctions'             => '7.2-',
-                            'Php/Php72RemovedInterfaces'            => '7.2-',
-                            'Classes/CantInheritAbstractMethod'     => '7.2+',
-                            'Classes/ChildRemoveTypehint'           => '7.2+',
-                            'Php/GroupUseTrailingComma'             => '7.2+',
-                            'Php/Php73NewFunctions'                 => '7.3-',
-                            'Php/ListWithReference'                 => '7.3+',
-                            'Php/FlexibleHeredoc'                   => '7.3+',
-                            'Php/PHP73LastEmptyArgument'            => '7.3+',
-                            'Php/UnpackingInsideArrays'             => '7.4+',
-                            'Structures/CurlVersionNow'             => '7.4+',
-                            'Php/PHP80RemovedFunctions'             => '8.0-',
-                            'Php/PHP80RemovedConstants'             => '8.0-',
+
+                            'Php/Php56NewFunctions'                 => '5.6-',
+                            'Structures/CryptWithoutSalt'           => '5.6-',
+                            'Namespaces/UseFunctionsConstants'      => '5.6+',
+                            'Php/ConstantScalarExpression'          => '5.6+',
+                            'Php/debugInfoUsage'                    => '5.6+',
+                            'Php/EllipsisUsage'                     => '5.6+',
+                            'Php/ExponentUsage'                     => '5.6+',
+                            'Structures/ConstantScalarExpression'   => '5.6+',
+
+                            'Php/Php55NewFunctions'                 => '5.5-',
+                            'Php/Php55RemovedFunctions'             => '5.5-',
+                            'Php/CantUseReturnValueInWriteContext'  => '5.5+',
+                            'Php/ConstWithArray'                    => '5.5+',
+                            'Php/Password55'                        => '5.5+',
+                            'Php/StaticclassUsage'                  => '5.5+',
+                            'Structures/ForeachWithList'            => '5.5+',
+                            'Structures/EmptyWithExpression'        => '5.5+',
+                            'Structures/TryFinally'                 => '5.5+',
+
+                            'Php/ClosureThisSupport'                => '5.4-',
+                            'Php/HashAlgos54'                       => '5.4-',
+                            'Php/Php54RemovedFunctions'             => '5.4-',
+                            'Structures/Break0'                     => '5.4-',
+                            'Structures/BreakNonInteger'            => '5.4-',
+                            'Structures/CalltimePassByReference'    => '5.4-',
+                            'Php/MethodCallOnNew'                   => '5.4+',
+                            'Type/Binary'                           => '5.4+',
+
+                            'Php/Php54NewFunctions'                 => '5.3-',
+                            'Structures/DereferencingAS'            => '5.3-',
                           );
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
@@ -2305,7 +2322,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateAuditConfig(Section $section) {
+    protected function generateAuditConfig(Section $section) : void {
         $ini = $this->config->toIni();
         $yaml = $this->config->toYaml();
 
@@ -2316,7 +2333,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateAnalyzerSettings(Section $section) {
+    protected function generateAnalyzerSettings(Section $section) : void {
         $settings = '';
 
         $info = array(array('Code name', $this->config->project_name));
@@ -2360,7 +2377,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateErrorMessages(Section $section) {
+    private function generateErrorMessages(Section $section) : void {
         $errorMessages = '';
 
         $results = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
@@ -2375,7 +2392,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateExternalServices(Section $section) {
+    private function generateExternalServices(Section $section) : void {
         $externalServices = array();
 
         $res = $this->datastore->getRow('configFiles');
@@ -2522,39 +2539,39 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateCompatibility74(Section $section) {
+    protected function generateCompatibility74(Section $section) : void {
         $this->generateCompatibility($section, '74');
     }
 
-    protected function generateCompatibility73(Section $section) {
+    protected function generateCompatibility73(Section $section) : void {
         $this->generateCompatibility($section, '73');
     }
 
-    protected function generateCompatibility72(Section $section) {
+    protected function generateCompatibility72(Section $section) : void {
         $this->generateCompatibility($section, '72');
     }
 
-    protected function generateCompatibility71(Section $section) {
+    protected function generateCompatibility71(Section $section) : void {
         $this->generateCompatibility($section, '71');
     }
 
-    protected function generateCompatibility70(Section $section) {
+    protected function generateCompatibility70(Section $section) : void {
         $this->generateCompatibility($section, '70');
     }
 
-    protected function generateCompatibility56(Section $section) {
+    protected function generateCompatibility56(Section $section) : void {
         $this->generateCompatibility($section, '56');
     }
 
-    protected function generateCompatibility55(Section $section) {
+    protected function generateCompatibility55(Section $section) : void {
         $this->generateCompatibility($section, '55');
     }
 
-    protected function generateCompatibility54(Section $section) {
+    protected function generateCompatibility54(Section $section) : void {
         $this->generateCompatibility($section, '54');
     }
 
-    protected function generateCompatibility53(Section $section) {
+    protected function generateCompatibility53(Section $section) : void {
         $this->generateCompatibility($section, '53');
     }
 
@@ -2595,7 +2612,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateDynamicCode(Section $section) {
+    private function generateDynamicCode(Section $section) : void {
         $dynamicCode = '';
 
         $results = $this->dump->fetchAnalysers(array('Structures/DynamicCode'));
@@ -2640,7 +2657,7 @@ HTML;
             }
         }
 
-        uasort($tree, function ($a, $b) { return $a['count'] <=> $b['count'];});
+        uasort($tree, function (array $a, array $b) : int { return $a['count'] <=> $b['count'];});
 
         $theGlobals = array();
         foreach($tree as $variable => $details) {
@@ -2659,71 +2676,71 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateInventoriesConstants(Section $section) {
+    private function generateInventoriesConstants(Section $section) : void {
         $this->generateInventories($section, array('Constants/Constantnames'), 'List of all defined constants in the code.');
     }
 
-    private function generateInventoriesClasses(Section $section) {
+    private function generateInventoriesClasses(Section $section) : void {
         $this->generateInventories($section, array('Constants/Classnames'), 'List of all defined classes in the code.');
     }
 
-    private function generateInventoriesInterfaces(Section $section) {
+    private function generateInventoriesInterfaces(Section $section) : void {
         $this->generateInventories($section, array('Interfaces/Interfacenames'), 'List of all defined interfaces in the code.');
     }
 
-    private function generateInventoriesTraits(Section $section) {
+    private function generateInventoriesTraits(Section $section) : void {
         $this->generateInventories($section, array('Traits/Traitnames'), 'List of all defined traits in the code.');
     }
 
-    private function generateInventoriesFunctions(Section $section) {
+    private function generateInventoriesFunctions(Section $section) : void {
         $this->generateInventories($section, array('Functions/Functionnames'), 'List of all defined functions in the code.');
     }
 
-    private function generateInventoriesNamespaces(Section $section) {
+    private function generateInventoriesNamespaces(Section $section) : void {
         $this->generateInventories($section, array('Namespaces/Namespacesnames'), 'List of all defined namespaces in the code.');
     }
 
-    private function generateInventoriesUrl(Section $section) {
+    private function generateInventoriesUrl(Section $section) : void {
         $this->generateInventories($section, array('Type/Url'), 'List of all URL mentioned in the code.');
     }
 
-    private function generateInventoriesRegex(Section $section) {
+    private function generateInventoriesRegex(Section $section)  : void{
         $this->generateInventories($section, array('Type/Regex'), 'List of all Regex mentioned in the code.');
     }
 
-    private function generateInventoriesSql(Section $section) {
+    private function generateInventoriesSql(Section $section)  : void{
         $this->generateInventories($section, array('Type/Sql'), 'List of all SQL mentioned in the code.');
     }
 
-    private function generateInventoriesGPCIndex(Section $section) {
+    private function generateInventoriesGPCIndex(Section $section) : void {
         $this->generateInventories($section, array('Type/GPCIndex'), 'List of all Email mentioned in the code.');
     }
 
-    private function generateInventoriesEmail(Section $section) {
+    private function generateInventoriesEmail(Section $section) : void {
         $this->generateInventories($section, array('Type/Email'), 'List of all incoming variables mentioned in the code.');
     }
 
-    private function generateInventoriesMd5string(Section $section) {
+    private function generateInventoriesMd5string(Section $section) : void {
         $this->generateInventories($section, array('Type/Md5string'), 'List of all MD5-like strings mentioned in the code.');
     }
 
-    private function generateInventoriesMime(Section $section) {
+    private function generateInventoriesMime(Section $section) : void {
         $this->generateInventories($section, array('Type/MimeType'), 'List of all Mime strings mentioned in the code.');
     }
 
-    private function generateInventoriesPack(Section $section) {
+    private function generateInventoriesPack(Section $section) : void {
         $this->generateInventories($section, array('Type/Pack'), 'List of all packing format strings mentioned in the code.');
     }
 
-    private function generateInventoriesPrintf(Section $section) {
+    private function generateInventoriesPrintf(Section $section) : void {
         $this->generateInventories($section, array('Type/Printf'), 'List of all printf(), sprintf(), etc. formats strings mentioned in the code.');
     }
 
-    private function generateInventoriesPath(Section $section) {
+    private function generateInventoriesPath(Section $section) : void {
         $this->generateInventories($section, array('Type/Path'), 'List of all paths strings mentioned in the code.');
     }
 
-    private function generateInventories(Section $section, array $analyzer, $description) {
+    private function generateInventories(Section $section, array $analyzer, string $description) : void {
         $results = $this->dump->fetchAnalysers($analyzer);
 
        $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
@@ -2733,7 +2750,7 @@ HTML;
        foreach($results->toArray() as $row) {
            $groups[$row['htmlcode']][] = $row['file'];
        }
-       uasort($groups, function ($a, $b) { return count($a) <=> count($b);});
+       uasort($groups, function (array $a, array $b) : int { return count($a) <=> count($b);});
 
        $theTable = array();
        foreach($groups as $code => $list) {
@@ -2909,7 +2926,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function extends2ul($root, $paths, $level = 0) {
+    private function extends2ul(string $root, array $paths, int $level = 0) : array {
         static $done = array();
 
         if ($level === 0) {
@@ -3052,7 +3069,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function path2tree($paths) {
+    private function path2tree(array $paths): array {
         $return = array();
 
         $recursive = array();
@@ -3078,7 +3095,7 @@ HTML;
         return $return;
     }
 
-    private function pathtree2ul($path) {
+    private function pathtree2ul(array $path) : string {
         if (empty($path)) {
             return '';
         }
@@ -3132,7 +3149,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function tree2ul($tree, $display) {
+    private function tree2ul(array $tree,array $display) : string {
         if (empty($tree)) {
             return '';
         }
@@ -3160,7 +3177,7 @@ HTML;
         return $return;
     }
 
-    private function generateVisibilitySuggestions(Section $section) {
+    private function generateVisibilitySuggestions(Section $section) : void {
         $constants  = $this->generateVisibilityConstantSuggestions();
         $properties = $this->generateVisibilityPropertySuggestions();
         $methods    = $this->generateVisibilityMethodsSuggestions();
@@ -3202,7 +3219,7 @@ HTML
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassOptionSuggestions(Section $section) {
+    private function generateClassOptionSuggestions(Section $section) : void {
         $finals  = $this->generateClassFinalSuggestions();
         $abstracts = $this->generateClassAbstractuggestions();
 
@@ -3254,7 +3271,7 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
 Below, is a list of classes that may be updated with final or abstract. <br />
 
 The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
@@ -3267,8 +3284,7 @@ HTML
         $this->putBasedPage($section->file, $html);
     }
 
-
-    private function generateClassFinalSuggestions() {
+    private function generateClassFinalSuggestions() : array {
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBeFinal'));
 
         $couldBeFinal = array();
@@ -4148,7 +4164,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->source, $html);
     }
 
-    private function generateComplexExpressions(Section $section) {
+    private function generateComplexExpressions(Section $section) : void {
         $results = $this->dump->fetchAnalysers(array('Structures/ComplexExpression'), array('phpsyntax' => array('fullcode' => 'htmlcode')));
 
         $expr = $results->getColumn('fullcode');
@@ -4165,7 +4181,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateCodes(Section $section) {
+    protected function generateCodes(Section $section) : void {
         $path = "{$this->tmpName}/data/sources";
         $pathToSource = dirname($this->tmpName) . '/code';
         mkdir($path, 0755);
@@ -4193,7 +4209,7 @@ JAVASCRIPT;
             $source = @highlight_file($sourcePath, \RETURN_VALUE);
             $files .= '<li><a href="#" id="' . $id . '" class="menuitem">' . makeHtml($row['file']) . "</a></li>\n";
             $source = substr($source, 6, -8);
-            $source = preg_replace_callback('#<br />#is', function ($x) {
+            $source = preg_replace_callback('#<br />#is', function (array $x) : string {
                 static $i = 0;
                 return '<br /><a name="l' . ++$i . '" />';
             }, $source);
@@ -4339,7 +4355,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateConfusingVariables(Section $section) {
+    private function generateConfusingVariables(Section $section) : void {
         $data = new Data\CloseNaming($this->dump);
         $results = $data->prepare();
         $reasons = array('_'       => 'One _',
@@ -4370,58 +4386,7 @@ HTML;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateAppinfo(Section $section) {
-        $data = new Data\Appinfo($this->dump);
-        $data->prepare();
-
-        $list = array();
-        $originals = $data->originals();
-        foreach($data->values() as $group => $points) {
-            $listPoint = array();
-            foreach($points as $point => $status) {
-
-                if (isset($originals[$group][$point], $this->frequences[$originals[$group][$point]])) {
-                    $percentage = $this->frequences[$originals[$group][$point]];
-                    $percentageDisplay = "$percentage %";
-                } else {
-                    $percentage = 0;
-                    $percentageDisplay = '&nbsp;';
-                }
-
-                $statusIcon = $this->makeIcon($status);
-                $htmlPoint = makeHtml($point);
-                $listPoint[] = <<<HTML
-<li><div style="width: 90%; text-align: left;display: inline-block;">$statusIcon&nbsp;$htmlPoint&nbsp;</div><div style="display: inline-block; width: 10%;"><span class="progress progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: $percentage%; color:black;">$percentageDisplay</div><div>&nbsp;</div></span></li>
-HTML;
-            }
-
-            $listPoint = implode(PHP_EOL, $listPoint);
-            $list[] = <<<HTML
-        <ul class="sidebar-menu">
-          <li class="treeview">
-            <a href="#"><i class="fa fa-certificate"></i> <span>$group</span><i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-                $listPoint
-            </ul>
-          </li>
-        </ul>
-HTML;
-        }
-
-        $listHtml = implode("\n", $list);
-        $listHtml = <<<HTML
-        <div class="sidebar">
-$listHtml
-        </div>
-HTML;
-
-        $html = $this->getBasedPage($section->source);
-        $html = $this->injectBloc($html, 'APPINFO', $listHtml);
-        $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->file, $html);
-    }
-
-    protected function makeIcon($tag) {
+    protected function makeIcon($tag) : string {
         switch($tag) {
             case self::YES :
                 return '<i class="fa fa-check-square-o"></i>';
@@ -4436,7 +4401,7 @@ HTML;
         }
     }
 
-    private function Bugfixes_cve($cve) {
+    private function Bugfixes_cve($cve) : string {
         if (empty($cve)) {
             return '-';
         }
@@ -4455,7 +4420,7 @@ HTML;
         return $cveHtml;
     }
 
-    protected function Compatibility($count, $analyzer) {
+    protected function Compatibility($count, $analyzer) : string {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
@@ -4467,15 +4432,15 @@ HTML;
         }
     }
 
-    protected function toId($name) {
+    protected function toId(string $name) : string {
         return str_replace(array('/', '*', '(', ')', '.'), '_', strtolower($name));
     }
 
-    protected function toOnlineId($name) {
+    protected function toOnlineId(string $name) : string {
         return str_replace(array(' ', '(', ')', '/'), '-', strtolower($name));
     }
 
-    protected function makeAuditDate(&$finalHTML) {
+    protected function makeAuditDate(&$finalHTML) : void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
@@ -4488,7 +4453,7 @@ HTML;
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
 
-    protected function getVCSInfo() {
+    protected function getVCSInfo() : array {
         $info = array();
 
         $vcsClass = Vcs::getVCS($this->config);
@@ -4548,18 +4513,69 @@ HTML;
         return $info;
     }
 
-    private function makeDocLink(string $analyzer): string {
+    protected function makeDocLink(string $analyzer): string {
         $docs = $this->docs->getDocs($analyzer, 'name');
         assert(!is_array($docs), "Missing docs('name') for $analyzer");
         return "<a href=\"analyses_doc.html#{$this->toId($analyzer)}\" id=\"{$this->toId($analyzer)}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a> &nbsp; $docs";
     }
 
-    private function toHtmlList(array $array): string {
+    protected function toHtmlList(array $array): string {
         return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
     }
 
     protected function getTotalAnalyzer(): array {
         return $this->dump->getTotalAnalyzer();
+    }
+
+    protected function generateAppinfo(Section $section): void {
+        $data = new Data\Appinfo($this->dump);
+        $data->prepare();
+
+        $list = array();
+        $originals = $data->originals();
+        foreach($data->values() as $group => $points) {
+            $listPoint = array();
+            foreach($points as $point => $status) {
+
+                if (isset($originals[$group][$point], $this->frequences[$originals[$group][$point]])) {
+                    $percentage = $this->frequences[$originals[$group][$point]];
+                    $percentageDisplay = "$percentage %";
+                } else {
+                    $percentage = 0;
+                    $percentageDisplay = '&nbsp;';
+                }
+
+                $statusIcon = $this->makeIcon($status);
+                $htmlPoint = makeHtml($point);
+                $listPoint[] = <<<HTML
+<li><div style="width: 90%; text-align: left;display: inline-block;">$statusIcon&nbsp;$htmlPoint&nbsp;</div><div style="display: inline-block; width: 10%;"><span class="progress progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: $percentage%; color:black;">$percentageDisplay</div><div>&nbsp;</div></span></li>
+HTML;
+            }
+
+            $listPoint = implode(PHP_EOL, $listPoint);
+            $list[] = <<<HTML
+        <ul class="sidebar-menu">
+          <li class="treeview">
+            <a href="#"><i class="fa fa-certificate"></i> <span>$group</span><i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+                $listPoint
+            </ul>
+          </li>
+        </ul>
+HTML;
+        }
+
+        $list = implode("\n", $list);
+        $list = <<<HTML
+        <div class="sidebar">
+$list
+        </div>
+HTML;
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'APPINFO', $list);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
     }
 
 }
