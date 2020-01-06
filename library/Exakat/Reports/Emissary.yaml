@@ -229,7 +229,7 @@ audit:
             method: generateMethodSize
             icon: circle-o            
         classes_depth:
-            title: Class DDepth
+            title: Class Depth
             file: classes_depth
             method: generateClassDepth
             icon: circle-o            

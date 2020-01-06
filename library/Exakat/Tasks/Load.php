@@ -530,7 +530,7 @@ class Load extends Tasks {
         $this->logTime('The End');
     }
 
-    private function processProject($project) : array {
+    private function processProject($project): array {
         $files = $this->datastore->getCol('files', 'file');
 
         if (empty($files)) {
@@ -612,7 +612,7 @@ class Load extends Tasks {
         return $nbTokens;
     }
 
-    private function runCollector($omittedFiles) : void {
+    private function runCollector($omittedFiles): void {
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->loader = new Collector($this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
@@ -641,7 +641,7 @@ class Load extends Tasks {
         $this->stats = $stats;
     }
 
-    private function processDir($dir) : array {
+    private function processDir($dir): array {
         if (!file_exists($dir)) {
             return array('files'  => -1,
                          'tokens' => -1);
@@ -717,7 +717,7 @@ class Load extends Tasks {
         $this->phpDocs                 = array();
     }
 
-    public function initDiff() : void {
+    public function initDiff(): void {
         $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
         display("Loading with $clientClass\n");
         if (!class_exists($clientClass)) {
@@ -739,7 +739,7 @@ class Load extends Tasks {
         $this->loader = new $clientClass($this->callsDatabase, $this->id0);
     }
 
-    public function finishDiff() : void {
+    public function finishDiff(): void {
         $this->loader->finalize(array());
 
         $loadFinal = new LoadFinal();
@@ -750,7 +750,7 @@ class Load extends Tasks {
         $this->reset();
     }
 
-    public function processDiffFile(string $filename, string $path) {
+    public function processDiffFile(string $filename, string $path): void {
         try {
             $this->processFile($filename, $path);
         } catch(NoFileToProcess $e ) {
@@ -758,7 +758,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processFile($filename, $path) {
+    private function processFile(string $filename,string $path): int {
         $begin = microtime(\TIME_AS_NUMBER);
         $fullpath = $path . $filename;
 
@@ -900,7 +900,7 @@ class Load extends Tasks {
         return $log['token_initial'];
     }
 
-    private function processNext() {
+    private function processNext(): Atom {
         ++$this->id;
 
         if ($this->tokens[$this->id][0] === $this->phptokens::T_END ||
@@ -1616,7 +1616,7 @@ class Load extends Tasks {
         return $interface;
     }
 
-    private function makeCitBody($class) {
+    private function makeCitBody($class): void {
         ++$this->id;
         $rank = -1;
 
@@ -1860,7 +1860,7 @@ class Load extends Tasks {
         return $atom;
     }
 
-    private function processClosingTag() {
+    private function processClosingTag(): Atom {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_INLINE_HTML &&
             in_array($this->tokens[$this->id + 2][0], array($this->phptokens::T_OPEN_TAG,
                                                             $this->phptokens::T_OPEN_TAG_WITH_ECHO,
@@ -2119,7 +2119,7 @@ class Load extends Tasks {
         return 0;
     }
 
-    private function processParameters($atom) {
+    private function processParameters($atom): Atom {
         $arguments = $this->addAtom($atom);
 
         $this->currentFunction[] = $arguments;
@@ -2265,7 +2265,7 @@ class Load extends Tasks {
         return $arguments;
     }
 
-    private function processArguments($atom, $finals = array(), &$argumentsList = array()) {
+    private function processArguments(string $atom,array $finals = array(),array &$argumentsList = array()): Atom {
         if (empty($finals)) {
             $finals = array($this->phptokens::T_CLOSE_PARENTHESIS);
         }
@@ -2942,7 +2942,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processStatic() {
+    private function processStatic(): Atom {
         $current = $this->id;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF    ) {
@@ -3058,7 +3058,7 @@ class Load extends Tasks {
         return $next;
     }
 
-    private function processSGVariable($atom = 'Ppp') {
+    private function processSGVariable($atom = 'Ppp'): Atom {
         $current = $this->id;
         $static = $this->addAtom($atom);
         $rank = 0;
@@ -3161,15 +3161,15 @@ class Load extends Tasks {
         return $static;
     }
 
-    private function processStaticVariable() {
+    private function processStaticVariable(): Atom {
         return $this->processSGVariable('Static');
     }
 
-    private function processGlobalVariable() {
+    private function processGlobalVariable(): Atom {
         return $this->processSGVariable('Global');
     }
 
-    private function processBracket() {
+    private function processBracket(): Atom {
         $bracket = $this->addAtom('Array');
         $current = $this->id;
 
@@ -3422,7 +3422,7 @@ class Load extends Tasks {
         return $foreach;
     }
 
-    private function processFollowingBlock(array $finals = array()) {
+    private function processFollowingBlock(array $finals = array()): Atom {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             ++$this->id;
             $block = $this->processBlock(self::RELATED_BLOCK);
@@ -3504,7 +3504,7 @@ class Load extends Tasks {
         return $block;
     }
 
-    private function processDo() {
+    private function processDo(): Atom {
         $dowhile = $this->addAtom('Dowhile');
         $current = $this->id;
 
@@ -3535,7 +3535,7 @@ class Load extends Tasks {
         return $dowhile;
     }
 
-    private function processWhile() {
+    private function processWhile(): Atom {
         $while = $this->addAtom('While');
         $current = $this->id;
 
@@ -3572,7 +3572,7 @@ class Load extends Tasks {
         return $while;
     }
 
-    private function processDeclare() {
+    private function processDeclare(): Atom {
         $current = $this->id;
         $declare = $this->addAtom('Declare');
         $fullcode = array();
@@ -3994,7 +3994,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processArrayLiteral() {
+    private function processArrayLiteral(): Atom {
         $current = $this->id;
 
         if ($this->tokens[$current][0] === $this->phptokens::T_ARRAY) {
@@ -4136,7 +4136,7 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single tokens
     //////////////////////////////////////////////////////
-    private function processSingle(string $atomName) {
+    private function processSingle(string $atomName): Atom {
         $atom = $this->addAtom($atomName);
         if (strlen($this->tokens[$this->id][1]) > 100000) {
             $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000) . PHP_EOL . '[.... 100000 / ' . strlen($this->tokens[$this->id][1]) . ']' . PHP_EOL;
@@ -4171,12 +4171,12 @@ class Load extends Tasks {
         return $atom;
     }
 
-    private function processInlinehtml() {
+    private function processInlinehtml(): Atom {
         $inlineHtml = $this->processSingle('Inlinehtml');
         return $inlineHtml;
     }
 
-    private function processNamespaceBlock() {
+    private function processNamespaceBlock(): Atom {
         $this->startSequence();
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
@@ -4201,7 +4201,7 @@ class Load extends Tasks {
         return $block;
     }
 
-    private function processNamespace() {
+    private function processNamespace(): Atom {
         $current = $this->id;
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR) {
@@ -4263,7 +4263,7 @@ class Load extends Tasks {
         return $namespace;
     }
 
-    private function processAlias($useType) {
+    private function processAlias($useType): Atom {
         $current = $this->id;
         $as = $this->addAtom('As');
 
@@ -4283,7 +4283,7 @@ class Load extends Tasks {
         return $as;
     }
 
-    private function processAsTrait() {
+    private function processAsTrait(): Atom {
         $current = $this->id;
         $as = $this->addAtom('As');
 
@@ -4325,7 +4325,7 @@ class Load extends Tasks {
         return $as;
     }
 
-    private function processInsteadof() {
+    private function processInsteadof(): Atom {
         $insteadof = $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'INSTEADOF'));
         while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
             ++$this->id;
@@ -4336,7 +4336,7 @@ class Load extends Tasks {
         return $insteadof;
     }
 
-    private function processUse() {
+    private function processUse(): Atom {
         if (empty($this->currentClassTrait)) {
             return $this->processUseNamespace();
         } else {
@@ -4344,7 +4344,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processUseNamespace() {
+    private function processUseNamespace(): Atom {
         $use = $this->addAtom('Usenamespace');
         $current = $this->id;
         $useType = 'class';
@@ -4529,7 +4529,7 @@ class Load extends Tasks {
         return $use;
     }
 
-    private function processUseTrait() {
+    private function processUseTrait(): Atom {
         $use = $this->addAtom('Usetrait');
         $current = $this->id;
 
@@ -4572,7 +4572,7 @@ class Load extends Tasks {
         return $use;
     }
 
-    private function processUseBlock() {
+    private function processUseBlock(): Atom {
         $this->startSequence();
 
         // Case for {}
@@ -4632,7 +4632,7 @@ class Load extends Tasks {
         return $block;
     }
 
-    private function processVariable() {
+    private function processVariable(): Atom {
         if ($this->tokens[$this->id][1] === '$this') {
             $atom = 'This';
         } elseif (in_array($this->tokens[$this->id][1], array('$GLOBALS',
@@ -4730,7 +4730,7 @@ class Load extends Tasks {
         return $nsname;
     }
 
-    private function processAppend() {
+    private function processAppend(): Atom {
         $current = $this->id;
         $append = $this->addAtom('Arrayappend');
 
@@ -4757,7 +4757,7 @@ class Load extends Tasks {
         return $append;
     }
 
-    private function processInteger() {
+    private function processInteger(): Atom {
         $integer = $this->addAtom('Integer');
 
         $integer->code     = str_replace('_', '', $this->tokens[$this->id][1]);
@@ -4772,7 +4772,7 @@ class Load extends Tasks {
         return $integer;
     }
 
-    private function processFloat() {
+    private function processFloat(): Atom {
         $float = $this->addAtom('Float');
 
         $float->code     = str_replace('_', '', $this->tokens[$this->id][1]);
@@ -4788,7 +4788,7 @@ class Load extends Tasks {
         return $float;
     }
 
-    private function processLiteral() {
+    private function processLiteral(): Atom {
         $literal = $this->processSingle('String');
         $this->pushExpression($literal);
 
@@ -4840,7 +4840,7 @@ class Load extends Tasks {
         return $literal;
     }
 
-    private function processMagicConstant() {
+    private function processMagicConstant(): Atom {
         $constant = $this->processSingle('Magicconstant');
         $this->pushExpression($constant);
 
@@ -4928,13 +4928,14 @@ class Load extends Tasks {
         return $operand;
     }
 
-    private function processCast() {
+    private function processCast(): Atom {
         $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
         $operator = $this->popExpression();
         if (strtolower($operator->code) === '(binary)') {
             $operator->binaryString = $operator->code[1];
         }
         $this->pushExpression($operator);
+
         return $operator;
     }
 
@@ -4996,7 +4997,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processThrow() {
+    private function processThrow(): Atom {
         $this->processSingleOperator('Throw', $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
         $operator = $this->popExpression();
         $this->pushExpression($operator);
@@ -5006,7 +5007,7 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function makePhpdoc(Atom $node, int $id = 0) {
+    private function makePhpdoc(Atom $node, int $id = 0): void {
         if (!isset($this->phpDocs[$id + 1])) {
             return;
         }
@@ -5112,7 +5113,7 @@ class Load extends Tasks {
         return $block;
     }
 
-    private function processDollar() {
+    private function processDollar(): Atom {
         $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
 
@@ -5159,14 +5160,15 @@ class Load extends Tasks {
         return $variable;
     }
 
-    private function processClone() {
+    private function processClone(): Atom {
         $this->processSingleOperator('Clone', $this->precedence->get($this->tokens[$this->id][0]), 'CLONE', ' ' );
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+
         return $operatorId;
     }
 
-    private function processGoto() {
+    private function processGoto(): Atom {
         $current = $this->id;
 
         $label = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
@@ -5197,7 +5199,7 @@ class Load extends Tasks {
         return $goto;
     }
 
-    private function processNoscream() {
+    private function processNoscream(): Atom {
         $atom = $this->processNext();
         $atom->noscream = 1;
         $atom->fullcode = "@$atom->fullcode";
@@ -5205,7 +5207,7 @@ class Load extends Tasks {
         return $atom;
     }
 
-    private function processNew() {
+    private function processNew(): Atom {
         $this->contexts->toggleContext(Context::CONTEXT_NEW);
         $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
@@ -5230,7 +5232,7 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing binary operators
     //////////////////////////////////////////////////////
-    private function processSign() {
+    private function processSign(): Atom {
         $current = $this->id;
         $signExpression = $this->tokens[$this->id][1];
         $code = $signExpression . '1';
@@ -5291,7 +5293,7 @@ class Load extends Tasks {
         return $signed;
     }
 
-    private function processAddition() {
+    private function processAddition(): Atom {
         if (!$this->hasExpression() ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_DOT
             ) {
@@ -5301,10 +5303,11 @@ class Load extends Tasks {
         $finals = $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF);
         $finals = array_diff($finals, $this->assignations);
         $finals = array_unique($finals);
+
         return $this->processOperator('Addition', $finals, array('LEFT', 'RIGHT'));
     }
 
-    private function processBreak() {
+    private function processBreak(): Atom {
         $current = $this->id;
         $break = $this->addAtom($this->tokens[$this->id][0] === $this->phptokens::T_BREAK ? 'Break' : 'Continue');
 
@@ -5351,7 +5354,7 @@ class Load extends Tasks {
         return $break;
     }
 
-    private function processDoubleColon() {
+    private function processDoubleColon(): Atom {
         $current = $this->id;
 
         $left = $this->popExpression();
@@ -5476,7 +5479,7 @@ class Load extends Tasks {
         return $static;
     }
 
-    private function processOperator($atom, $finals, $links = array('LEFT', 'RIGHT')) {
+    private function processOperator(string $atom, array $finals, array $links = array('LEFT', 'RIGHT')): Atom {
         $current = $this->id;
         $operator = $this->addAtom($atom);
 
@@ -5511,7 +5514,7 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function processObjectOperator() {
+    private function processObjectOperator(): Atom {
         $current = $this->id;
 
         $left = $this->popExpression();
@@ -5594,18 +5597,18 @@ class Load extends Tasks {
         return $static;
     }
 
-    private function processAssignation() {
+    private function processAssignation(): Atom {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals = array_merge($finals, $this->assignations);
 
         return $this->processOperator('Assignation', $finals);
     }
 
-    private function processCoalesce() {
+    private function processCoalesce(): Atom {
         return $this->processOperator('Coalesce', $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF));
     }
 
-    private function processEllipsis() {
+    private function processEllipsis(): Atom {
         // Simply skipping the ...
         $finals = $this->precedence->get($this->phptokens::T_ELLIPSIS);
         while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON)) {
@@ -5621,7 +5624,7 @@ class Load extends Tasks {
         return $operand;
     }
 
-    private function processAnd() {
+    private function processAnd(): Atom {
         if ($this->hasExpression()) {
             return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
         } else {
@@ -5638,23 +5641,23 @@ class Load extends Tasks {
         }
     }
 
-    private function processLogical() {
+    private function processLogical(): Atom {
         return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
-    private function processMultiplication() {
+    private function processMultiplication(): Atom {
         return $this->processOperator('Multiplication', $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF));
     }
 
-    private function processPower() {
+    private function processPower(): Atom {
         return $this->processOperator('Power', $this->precedence->get($this->tokens[$this->id][0], Precedence::WITH_SELF));
     }
 
-    private function processComparison() {
+    private function processComparison(): Atom {
         return $this->processOperator('Comparison', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
-    private function processDot() {
+    private function processDot(): Atom {
         $current       = $this->id;
         $concatenation = $this->addAtom('Concatenation');
         $fullcode      = array();
@@ -5722,7 +5725,7 @@ class Load extends Tasks {
         return $concatenation;
     }
 
-    private function processInstanceof() {
+    private function processInstanceof(): Atom {
         $current = $this->id;
         $instanceof = $this->addAtom('Instanceof');
 
@@ -5751,15 +5754,15 @@ class Load extends Tasks {
         return $instanceof;
     }
 
-    private function processKeyvalue() {
+    private function processKeyvalue(): Atom {
         return $this->processOperator('Keyvalue', $this->precedence->get($this->tokens[$this->id][0]), array('INDEX', 'VALUE'));
     }
 
-    private function processBitshift() {
+    private function processBitshift(): Atom {
         return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
-    private function processIsset() {
+    private function processIsset(): Atom {
         $current = $this->id;
 
         $atom = ucfirst(mb_strtolower($this->tokens[$current][1]));
@@ -5783,7 +5786,7 @@ class Load extends Tasks {
         return $functioncall;
     }
 
-    private function processEcho() {
+    private function processEcho(): Atom {
         $current = $this->id;
 
         $functioncall = $this->processArguments('Echo',
@@ -5814,7 +5817,7 @@ class Load extends Tasks {
         return $functioncall;
     }
 
-    private function processHalt() {
+    private function processHalt(): Atom {
         $halt = $this->addAtom('Halt');
         $halt->code     = $this->tokens[$this->id][1];
         $halt->fullcode = $this->tokens[$this->id][1];
@@ -5831,7 +5834,7 @@ class Load extends Tasks {
         return $halt;
     }
 
-    private function processPrint() {
+    private function processPrint(): Atom {
         $current = $this->id;
 
         $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
@@ -5878,19 +5881,20 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// generic methods
     //////////////////////////////////////////////////////
-    private function addAtom($atom) {
+    private function addAtom(string $atomName): Atom {
         if (!in_array($atom, GraphElements::$ATOMS, \STRICT_COMPARISON)) {
-            throw new LoadError('Undefined atom ' . $atom . ':' . $this->filename . ':' . __LINE__);
+            throw new LoadError('Undefined atom ' . $atomName . ':' . $this->filename . ':' . __LINE__);
         }
 
         $line = $this->tokens[$this->id][2] ?? $this->tokens[$this->id - 1][2] ?? $this->tokens[$this->id - 2][2] ?? -1;
-        $a = $this->atomGroup->factory($atom, $line);
-        $this->atoms[$a->id] = $a;
-        if ($a->id < $this->min_id) {
-            $this->min_id = $a->id;
+        $a = $this->atomGroup->factory($atomName, $line);
+
+        $this->atoms[$atom->id] = $atom;
+        if ($atom->id < $this->min_id) {
+            $this->min_id = $atom->id;
         }
 
-        return $a;
+        return $atom;
     }
 
     private function addAtomVoid(): Atom {
@@ -5907,7 +5911,7 @@ class Load extends Tasks {
         return $void;
     }
 
-    private function addLink(Atom $origin, Atom $destination, string $label) {
+    private function addLink(Atom $origin, Atom $destination, string $label): void {
         if (!in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT), \STRICT_COMPARISON)) {
             throw new LoadError('Undefined link ' . $label . ' for atom ' . $origin->atom . ' : ' . $this->filename . ':' . $origin->line);
         }
@@ -5921,7 +5925,7 @@ class Load extends Tasks {
         }
     }
 
-    private function pushExpression(Atom $atom) {
+    private function pushExpression(Atom $atom): void {
         $this->expressions[] = $atom;
     }
 
@@ -5939,7 +5943,7 @@ class Load extends Tasks {
         return $id;
     }
 
-    private function checkTokens($filename) {
+    private function checkTokens($filename): void {
         if (!empty($this->expressions)) {
             throw new LoadError( "Warning : expression is not empty in $filename : " . count($this->expressions));
         }
@@ -6005,7 +6009,7 @@ class Load extends Tasks {
         */
     }
 
-    private function processDefineAsClassalias($argumentsId) {
+    private function processDefineAsClassalias(int $argumentsId): void {
         if (empty($this->argumentsId[0]->noDelimiter) ||
             empty($this->argumentsId[1]->noDelimiter)   ) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
@@ -6035,7 +6039,7 @@ class Load extends Tasks {
         $this->calls->addDefinition('class', $fullnspathAlias, $argumentsId[1]);
     }
 
-    private function processDefineAsConstants($const, $name, $case_insensitive = false) {
+    private function processDefineAsConstants(string $const,Atom $name, bool $case_insensitive = false): void {
         if (empty($name->noDelimiter)) {
             $name->fullnspath = '\\';
             return;
@@ -6059,12 +6063,12 @@ class Load extends Tasks {
         }
     }
 
-    private function saveFiles() {
+    private function saveFiles(): void {
         $this->loader->saveFiles($this->config->tmp_dir, $this->atoms, $this->links); // , $this->id0
         $this->reset();
     }
 
-    private function startSequence() {
+    private function startSequence(): void {
         $this->sequence = $this->addAtom('Sequence');
         $this->sequence->code      = ';';
         $this->sequence->fullcode  = ' ' . self::FULLCODE_SEQUENCE . ' ';
@@ -6074,13 +6078,13 @@ class Load extends Tasks {
         $this->sequences->start($this->sequence);
     }
 
-    private function addToSequence(Atom $element) {
+    private function addToSequence(Atom $element): void {
         $this->addLink($this->sequence, $element, 'EXPRESSION');
 
         $this->sequences->add($element);
     }
 
-    private function endSequence() {
+    private function endSequence(): void {
         $elements = $this->sequences->getElements();
         $this->runPlugins($this->sequence, $elements);
 

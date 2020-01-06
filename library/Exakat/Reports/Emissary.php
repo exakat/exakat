@@ -244,7 +244,7 @@ class Emissary extends Reports {
         return '';
     }
 
-    protected function initFolder() : void {
+    protected function initFolder(): void {
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);
@@ -257,7 +257,7 @@ class Emissary extends Reports {
         }
     }
 
-    protected function cleanFolder() : void {
+    protected function cleanFolder(): void {
         if (file_exists("{$this->tmpName}/data/base.html")) {
             unlink("{$this->tmpName}/data/base.html");
             unlink("{$this->tmpName}/data/menu.html");
@@ -283,8 +283,8 @@ class Emissary extends Reports {
         rename($this->tmpName, $this->finalName);
     }
 
-    protected function setPHPBlocs(string $description) : string {
-        $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function (array $x) : string {
+    protected function setPHPBlocs(string $description): string {
+        $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function (array $x): string {
             $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . PHPSyntax($x[1]) . '?&gt;</pre>';
             return $return;
         }, $description);
@@ -292,7 +292,7 @@ class Emissary extends Reports {
         return $description;
     }
 
-    protected function generateDocumentation(Section $section) : void {
+    protected function generateDocumentation(Section $section): void {
         $analyzersList = array_merge($this->rulesets->getRulesetsAnalyzers($this->dependsOnAnalysis()));
         $analyzersList = array_unique($analyzersList);
 
@@ -329,7 +329,7 @@ class Emissary extends Reports {
             static $regex;
             if (empty($regex)) {
                 $php_native_functions = parse_ini_file("{$this->config->dir_root}/data/php_functions.ini")['functions'];
-                usort($php_native_functions, function (string $a, string $b) : int { return strlen($b) <=> strlen($a);} );
+                usort($php_native_functions, function (string $a, string $b): int { return strlen($b) <=> strlen($a);} );
                 $regex = '/(' . implode('|', $php_native_functions) . ')\(\)/m';
             }
             $description = preg_replace($regex, '`\1() <https://www.php.net/\1>`_', $description);
@@ -355,19 +355,19 @@ class Emissary extends Reports {
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateSecurity(Section $section) : void {
+    protected function generateSecurity(Section $section): void {
         $this->generateIssuesEngine('security_issues',
                                     $section->title,
                                     $this->getIssuesFaceted('Security') );
     }
 
-    protected function generateDeadCode(Section $section) : void {
+    protected function generateDeadCode(Section $section): void {
         $this->generateIssuesEngine('deadcode_issues',
                                     $section->title,
                                     $this->getIssuesFaceted('Dead code') );
     }
 
-    protected function generatePerformances(Section $section) : void {
+    protected function generatePerformances(Section $section): void {
         $this->generateIssuesEngine('performances_issues',
                                     $section->title,
                                     $this->getIssuesFaceted('Performances') );
@@ -675,7 +675,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->file, $baseHTML);
     }
 
-    protected function generateDashboard(Section $section) : void {
+    protected function generateDashboard(Section $section): void {
         $baseHTML = $this->getBasedPage($section->source);
 
         $tags = array();
@@ -989,148 +989,9 @@ JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<'JAVASCRIPT'
-  <script>
-    $(document).ready(function() {
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
+        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Parameters', 'data' => $data)),
+                                         'xAxis' => $xAxis));
 
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Parameters',
-              data: [CALLCOUNT]
-          }]
-      });
-
-    });
-  </script>
-JAVASCRIPT;
-
-        $tags = array();
-        $code = array();
-
-        // Filename Overview
-        $tags[] = 'CALLCOUNT';
-        $code[] = implode(', ', $data);
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = implode(', ', $xAxis);
-
-        $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
 
@@ -1232,155 +1093,16 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage('extension_list');
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<'JAVASCRIPT'
-  <script>
-    $(document).ready(function() {
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
+        $blocjs = $this->highchart(array('series' => array((object) array('name' => 'Calls', 'data' => $data)),
+                                         'xAxis'  => $xAxis));
 
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Calls',
-              data: [CALLCOUNT]
-          }]
-      });
-
-    });
-  </script>
-JAVASCRIPT;
-
-        $tags = array();
-        $code = array();
-
-        // Filename Overview
-        $tags[] = 'CALLCOUNT';
-        $code[] = implode(', ', $data);
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = implode(', ', $xAxis);
-
-        $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $title);
 
         $this->putBasedPage($filename, $finalHTML);
     }
 
-    public function getHashData() : string {
+    public function getHashData(): string {
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
             'Number of lines of code'               => $this->datastore->getHash('loc'),
@@ -1459,7 +1181,7 @@ JAVASCRIPT;
         return $html;
     }
 
-    public function getIssuesBreakdown() : array {
+    public function getIssuesBreakdown(): array {
         $rulesets = array('Code Smells'  => 'Analyze',
                           'Dead Code'    => 'Dead code',
                           'Security'     => 'Security',
@@ -1475,7 +1197,7 @@ JAVASCRIPT;
         }
 
         // ordonné DESC par valeur
-        uasort($data, function (array $a, array $b) : int {
+        uasort($data, function (array $a, array $b): int {
             return $b['value'] <=> $a['value'];
         });
         $issuesHtml = '';
@@ -1534,7 +1256,7 @@ HTML;
         return $this->dump->getAnalyzedFiles($list);
     }
 
-    protected function generateAnalyzers() : void {
+    protected function generateAnalyzers(): void {
         $analysers = $this->getAnalyzersResultsCounts();
 
         $baseHTML = $this->getBasedPage('analyses');
@@ -1615,7 +1337,7 @@ HTML;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateFiles(Section $section) : void {
+    protected function generateFiles(Section $section): void {
         $files = $this->getFilesResultsCounts();
 
         $baseHTML = $this->getBasedPage($section->source);
@@ -1753,7 +1475,7 @@ HTML;
     }
 
 
-    protected function getAnalyzerOverview() : array {
+    protected function getAnalyzerOverview(): array {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -1785,7 +1507,7 @@ HTML;
         );
     }
 
-    private function generateNewIssues(Section $section) : void {
+    private function generateNewIssues(Section $section): void {
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
 
         if (file_exists($this->config->dump_previous)) {
@@ -1959,7 +1681,7 @@ JAVASCRIPTCODE;
         return $items;
     }
 
-    private function getClassByType(string $type) : string {
+    private function getClassByType(string $type): string {
         if ($type === 'Critical' || $type === 'Long') {
             $class = 'text-orange';
         } elseif ($type === 'Major' || $type === 'Slow') {
@@ -1975,7 +1697,7 @@ JAVASCRIPTCODE;
         return $class;
     }
 
-    protected function generateProcFiles(Section $section) : void {
+    protected function generateProcFiles(Section $section): void {
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
@@ -1998,7 +1720,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateAnalyzersList(Section $section) : void {
+    protected function generateAnalyzersList(Section $section): void {
         $analyzers = array();
 
         foreach($this->rulesets->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
@@ -2013,7 +1735,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->source, $html);
     }
 
-    private function generateExternalLib(Section $section) : void {
+    private function generateExternalLib(Section $section): void {
         $externallibraries = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
 
         $libraries = array();
@@ -2097,7 +1819,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generatePhpConfiguration(Section $section) : void {
+    protected function generatePhpConfiguration(Section $section): void {
         $phpConfiguration = new Phpcompilation($this->config);
         $report = $phpConfiguration->generate('', Reports::INLINE);
 
@@ -2111,7 +1833,7 @@ JAVASCRIPTCODE;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateCompatibilityEstimate(Section $section) : void {
+    protected function generateCompatibilityEstimate(Section $section): void {
         $html = $this->getBasedPage($section->source);
 
         $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0');
@@ -2322,7 +2044,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateAuditConfig(Section $section) : void {
+    protected function generateAuditConfig(Section $section): void {
         $ini = $this->config->toIni();
         $yaml = $this->config->toYaml();
 
@@ -2333,7 +2055,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateAnalyzerSettings(Section $section) : void {
+    protected function generateAnalyzerSettings(Section $section): void {
         $settings = '';
 
         $info = array(array('Code name', $this->config->project_name));
@@ -2377,7 +2099,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateErrorMessages(Section $section) : void {
+    private function generateErrorMessages(Section $section): void {
         $errorMessages = '';
 
         $results = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
@@ -2392,7 +2114,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateExternalServices(Section $section) : void {
+    private function generateExternalServices(Section $section): void {
         $externalServices = array();
 
         $res = $this->datastore->getRow('configFiles');
@@ -2539,39 +2261,39 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateCompatibility74(Section $section) : void {
+    protected function generateCompatibility74(Section $section): void {
         $this->generateCompatibility($section, '74');
     }
 
-    protected function generateCompatibility73(Section $section) : void {
+    protected function generateCompatibility73(Section $section): void {
         $this->generateCompatibility($section, '73');
     }
 
-    protected function generateCompatibility72(Section $section) : void {
+    protected function generateCompatibility72(Section $section): void {
         $this->generateCompatibility($section, '72');
     }
 
-    protected function generateCompatibility71(Section $section) : void {
+    protected function generateCompatibility71(Section $section): void {
         $this->generateCompatibility($section, '71');
     }
 
-    protected function generateCompatibility70(Section $section) : void {
+    protected function generateCompatibility70(Section $section): void {
         $this->generateCompatibility($section, '70');
     }
 
-    protected function generateCompatibility56(Section $section) : void {
+    protected function generateCompatibility56(Section $section): void {
         $this->generateCompatibility($section, '56');
     }
 
-    protected function generateCompatibility55(Section $section) : void {
+    protected function generateCompatibility55(Section $section): void {
         $this->generateCompatibility($section, '55');
     }
 
-    protected function generateCompatibility54(Section $section) : void {
+    protected function generateCompatibility54(Section $section): void {
         $this->generateCompatibility($section, '54');
     }
 
-    protected function generateCompatibility53(Section $section) : void {
+    protected function generateCompatibility53(Section $section): void {
         $this->generateCompatibility($section, '53');
     }
 
@@ -2612,7 +2334,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateDynamicCode(Section $section) : void {
+    private function generateDynamicCode(Section $section): void {
         $dynamicCode = '';
 
         $results = $this->dump->fetchAnalysers(array('Structures/DynamicCode'));
@@ -2657,7 +2379,7 @@ HTML;
             }
         }
 
-        uasort($tree, function (array $a, array $b) : int { return $a['count'] <=> $b['count'];});
+        uasort($tree, function (array $a, array $b): int { return $a['count'] <=> $b['count'];});
 
         $theGlobals = array();
         foreach($tree as $variable => $details) {
@@ -2676,71 +2398,71 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateInventoriesConstants(Section $section) : void {
+    private function generateInventoriesConstants(Section $section): void {
         $this->generateInventories($section, array('Constants/Constantnames'), 'List of all defined constants in the code.');
     }
 
-    private function generateInventoriesClasses(Section $section) : void {
+    private function generateInventoriesClasses(Section $section): void {
         $this->generateInventories($section, array('Constants/Classnames'), 'List of all defined classes in the code.');
     }
 
-    private function generateInventoriesInterfaces(Section $section) : void {
+    private function generateInventoriesInterfaces(Section $section): void {
         $this->generateInventories($section, array('Interfaces/Interfacenames'), 'List of all defined interfaces in the code.');
     }
 
-    private function generateInventoriesTraits(Section $section) : void {
+    private function generateInventoriesTraits(Section $section): void {
         $this->generateInventories($section, array('Traits/Traitnames'), 'List of all defined traits in the code.');
     }
 
-    private function generateInventoriesFunctions(Section $section) : void {
+    private function generateInventoriesFunctions(Section $section): void {
         $this->generateInventories($section, array('Functions/Functionnames'), 'List of all defined functions in the code.');
     }
 
-    private function generateInventoriesNamespaces(Section $section) : void {
+    private function generateInventoriesNamespaces(Section $section): void {
         $this->generateInventories($section, array('Namespaces/Namespacesnames'), 'List of all defined namespaces in the code.');
     }
 
-    private function generateInventoriesUrl(Section $section) : void {
+    private function generateInventoriesUrl(Section $section): void {
         $this->generateInventories($section, array('Type/Url'), 'List of all URL mentioned in the code.');
     }
 
-    private function generateInventoriesRegex(Section $section)  : void{
+    private function generateInventoriesRegex(Section $section): void {
         $this->generateInventories($section, array('Type/Regex'), 'List of all Regex mentioned in the code.');
     }
 
-    private function generateInventoriesSql(Section $section)  : void{
+    private function generateInventoriesSql(Section $section): void {
         $this->generateInventories($section, array('Type/Sql'), 'List of all SQL mentioned in the code.');
     }
 
-    private function generateInventoriesGPCIndex(Section $section) : void {
+    private function generateInventoriesGPCIndex(Section $section): void {
         $this->generateInventories($section, array('Type/GPCIndex'), 'List of all Email mentioned in the code.');
     }
 
-    private function generateInventoriesEmail(Section $section) : void {
+    private function generateInventoriesEmail(Section $section): void {
         $this->generateInventories($section, array('Type/Email'), 'List of all incoming variables mentioned in the code.');
     }
 
-    private function generateInventoriesMd5string(Section $section) : void {
+    private function generateInventoriesMd5string(Section $section): void {
         $this->generateInventories($section, array('Type/Md5string'), 'List of all MD5-like strings mentioned in the code.');
     }
 
-    private function generateInventoriesMime(Section $section) : void {
+    private function generateInventoriesMime(Section $section): void {
         $this->generateInventories($section, array('Type/MimeType'), 'List of all Mime strings mentioned in the code.');
     }
 
-    private function generateInventoriesPack(Section $section) : void {
+    private function generateInventoriesPack(Section $section): void {
         $this->generateInventories($section, array('Type/Pack'), 'List of all packing format strings mentioned in the code.');
     }
 
-    private function generateInventoriesPrintf(Section $section) : void {
+    private function generateInventoriesPrintf(Section $section): void {
         $this->generateInventories($section, array('Type/Printf'), 'List of all printf(), sprintf(), etc. formats strings mentioned in the code.');
     }
 
-    private function generateInventoriesPath(Section $section) : void {
+    private function generateInventoriesPath(Section $section): void {
         $this->generateInventories($section, array('Type/Path'), 'List of all paths strings mentioned in the code.');
     }
 
-    private function generateInventories(Section $section, array $analyzer, string $description) : void {
+    private function generateInventories(Section $section, array $analyzer, string $description): void {
         $results = $this->dump->fetchAnalysers($analyzer);
 
        $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
@@ -2750,7 +2472,7 @@ HTML;
        foreach($results->toArray() as $row) {
            $groups[$row['htmlcode']][] = $row['file'];
        }
-       uasort($groups, function (array $a, array $b) : int { return count($a) <=> count($b);});
+       uasort($groups, function (array $a, array $b): int { return count($a) <=> count($b);});
 
        $theTable = array();
        foreach($groups as $code => $list) {
@@ -2926,7 +2648,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function extends2ul(string $root, array $paths, int $level = 0) : array {
+    private function extends2ul(string $root, array $paths, int $level = 0): array {
         static $done = array();
 
         if ($level === 0) {
@@ -3095,7 +2817,7 @@ HTML;
         return $return;
     }
 
-    private function pathtree2ul(array $path) : string {
+    private function pathtree2ul(array $path): string {
         if (empty($path)) {
             return '';
         }
@@ -3149,7 +2871,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function tree2ul(array $tree,array $display) : string {
+    private function tree2ul(array $tree,array $display): string {
         if (empty($tree)) {
             return '';
         }
@@ -3177,7 +2899,7 @@ HTML;
         return $return;
     }
 
-    private function generateVisibilitySuggestions(Section $section) : void {
+    private function generateVisibilitySuggestions(Section $section): void {
         $constants  = $this->generateVisibilityConstantSuggestions();
         $properties = $this->generateVisibilityPropertySuggestions();
         $methods    = $this->generateVisibilityMethodsSuggestions();
@@ -3219,7 +2941,7 @@ HTML
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassOptionSuggestions(Section $section) : void {
+    private function generateClassOptionSuggestions(Section $section): void {
         $finals  = $this->generateClassFinalSuggestions();
         $abstracts = $this->generateClassAbstractuggestions();
 
@@ -3284,7 +3006,7 @@ HTML
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateClassFinalSuggestions() : array {
+    private function generateClassFinalSuggestions(): array {
         $res = $this->dump->fetchAnalysers(array('Classes/CouldBeFinal'));
 
         $couldBeFinal = array();
@@ -3650,148 +3372,9 @@ HTML
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<'JAVASCRIPT'
-  <script>
-    $(document).ready(function() {
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
+        $blocjs = $this->highchart(array('series' => array((object) array('name' => 'Lines', 'data' => $data)),
+                                         'xAxis'  => $xAxis));
 
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Lines',
-              data: [CALLCOUNT]
-          }]
-      });
-
-    });
-  </script>
-JAVASCRIPT;
-
-        $tags = array();
-        $code = array();
-
-        // Filename Overview
-        $tags[] = 'CALLCOUNT';
-        $code[] = implode(', ', $data);
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = implode(', ', $xAxis);
-
-        $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Class');
@@ -3823,148 +3406,9 @@ JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<'JAVASCRIPT'
-  <script>
-    $(document).ready(function() {
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
+        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Lines', 'data' => $data)),
+                                         'xAxis' => $xAxis));
 
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Lines',
-              data: [CALLCOUNT]
-          }]
-      });
-
-    });
-  </script>
-JAVASCRIPT;
-
-        $tags = array();
-        $code = array();
-
-        // Filename Overview
-        $tags[] = 'CALLCOUNT';
-        $code[] = implode(', ', $data);
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = implode(', ', $xAxis);
-
-        $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Class');
@@ -3991,151 +3435,11 @@ JAVASCRIPT;
                   </div>';
         }
 
-
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = <<<'JAVASCRIPT'
-  <script>
-    $(document).ready(function() {
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
+        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Lines', 'data' => $data)),
+                                         'xAxis' => $xAxis));
 
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Lines',
-              data: [CALLCOUNT]
-          }]
-      });
-
-    });
-  </script>
-JAVASCRIPT;
-
-        $tags = array();
-        $code = array();
-
-        // Filename Overview
-        $tags[] = 'CALLCOUNT';
-        $code[] = implode(', ', $data);
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = implode(', ', $xAxis);
-
-        $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Method');
@@ -4164,7 +3468,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->source, $html);
     }
 
-    private function generateComplexExpressions(Section $section) : void {
+    private function generateComplexExpressions(Section $section): void {
         $results = $this->dump->fetchAnalysers(array('Structures/ComplexExpression'), array('phpsyntax' => array('fullcode' => 'htmlcode')));
 
         $expr = $results->getColumn('fullcode');
@@ -4181,7 +3485,7 @@ JAVASCRIPT;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function generateCodes(Section $section) : void {
+    protected function generateCodes(Section $section): void {
         $path = "{$this->tmpName}/data/sources";
         $pathToSource = dirname($this->tmpName) . '/code';
         mkdir($path, 0755);
@@ -4209,7 +3513,7 @@ JAVASCRIPT;
             $source = @highlight_file($sourcePath, \RETURN_VALUE);
             $files .= '<li><a href="#" id="' . $id . '" class="menuitem">' . makeHtml($row['file']) . "</a></li>\n";
             $source = substr($source, 6, -8);
-            $source = preg_replace_callback('#<br />#is', function (array $x) : string {
+            $source = preg_replace_callback('#<br />#is', function (array $x): string {
                 static $i = 0;
                 return '<br /><a name="l' . ++$i . '" />';
             }, $source);
@@ -4355,7 +3659,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function generateConfusingVariables(Section $section) : void {
+    private function generateConfusingVariables(Section $section): void {
         $data = new Data\CloseNaming($this->dump);
         $results = $data->prepare();
         $reasons = array('_'       => 'One _',
@@ -4386,7 +3690,7 @@ HTML;
         $this->putBasedPage($section->source, $html);
     }
 
-    protected function makeIcon($tag) : string {
+    protected function makeIcon($tag): string {
         switch($tag) {
             case self::YES :
                 return '<i class="fa fa-check-square-o"></i>';
@@ -4401,7 +3705,7 @@ HTML;
         }
     }
 
-    private function Bugfixes_cve($cve) : string {
+    private function Bugfixes_cve($cve): string {
         if (empty($cve)) {
             return '-';
         }
@@ -4420,7 +3724,7 @@ HTML;
         return $cveHtml;
     }
 
-    protected function Compatibility($count, $analyzer) : string {
+    protected function Compatibility($count, $analyzer): string {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
@@ -4432,15 +3736,15 @@ HTML;
         }
     }
 
-    protected function toId(string $name) : string {
+    protected function toId(string $name): string {
         return str_replace(array('/', '*', '(', ')', '.'), '_', strtolower($name));
     }
 
-    protected function toOnlineId(string $name) : string {
+    protected function toOnlineId(string $name): string {
         return str_replace(array(' ', '(', ')', '/'), '-', strtolower($name));
     }
 
-    protected function makeAuditDate(&$finalHTML) : void {
+    protected function makeAuditDate(&$finalHTML): void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
@@ -4453,7 +3757,7 @@ HTML;
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
 
-    protected function getVCSInfo() : array {
+    protected function getVCSInfo(): array {
         $info = array();
 
         $vcsClass = Vcs::getVCS($this->config);
@@ -4578,6 +3882,139 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
+    public function highchart(array $data) {
+        $series = json_encode($data['series']);
+        $xAxis  = json_encode($data['xAxis']);
+
+        return <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: $xAxis
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: $series
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+    }
 }
 
 ?>

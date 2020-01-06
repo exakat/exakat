@@ -37,12 +37,12 @@ class BaselineStash {
         $this->use               = $config->baseline_use;
     }
 
-    public function copyPrevious(string $previous) : void {
+    public function copyPrevious(string $previous): void {
         if ($this->baseline_strategy === 'none') {
             // Nothing to do
             return;
         }
-        
+
         if (file_exists($previous)) {
             $baseline_dir = dirname($previous) . '/baseline';
             if (!file_exists($baseline_dir)) {
@@ -93,7 +93,7 @@ class BaselineStash {
         }
     }
 
-    public function removeBaseline(int $id) : void {
+    public function removeBaseline(int $id): void {
         if ($id !== 0) {
             $baselines = glob("{$this->project_dir}/baseline/dump-$id-*.sqlite");
             if (empty($baselines)) {
@@ -117,7 +117,7 @@ class BaselineStash {
         }
     }
 
-    public function getBaseline() : string {
+    public function getBaseline(): string {
         if ($this->use === 'last') {
             $baselines = glob("{$this->project_dir}/baseline/dump-*-*.sqlite");
             if (empty($baselines)) {

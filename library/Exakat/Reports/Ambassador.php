@@ -22,12 +22,7 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
-use Exakat\Exakat;
-use Exakat\Tasks\Helpers\BaselineStash;
-use Exakat\Vcs\Vcs;
-use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 
 class Ambassador extends Emissary {
     const FILE_FILENAME  = 'report';
@@ -104,7 +99,7 @@ class Ambassador extends Emissary {
                      );
     }
 
-    protected function generateUsedMagic(Section $section) : void {
+    protected function generateUsedMagic(Section $section): void {
         $results = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
         $results->load();
 

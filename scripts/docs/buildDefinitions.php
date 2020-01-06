@@ -61,7 +61,6 @@ class Docs {
     private $extension_list_rst     = '';
     private $library_list           = array();
     private $reports_list           = '';
-    private $ruleset_list           = '';
     private $external_services_list = '';
     private $analyzer_introduction  = '';
     private $url_list               = '';
