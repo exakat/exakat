@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
 
 class Grade extends Ambassador {
     const FILE_FILENAME  = 'grade';
@@ -61,9 +62,10 @@ class Grade extends Ambassador {
     private $results = null;
     private $resultsCounts = null;
 
-    public function __construct($config) {
+    protected $themesToShow      = array('Security');
+
+    public function __construct(Config $config) {
         parent::__construct($config);
-        $this->themesToShow      = array('Security');
 
         $this->grading = array(
     'Security/AnchorRegex'                  => self::G_WARNING,
@@ -83,12 +85,12 @@ class Grade extends Ambassador {
                      );
     }
 
-    private function generateIssues(Section $section) {
+    private function generateIssues(Section $section) : void {
         $this->generateIssuesEngine($section,
                                     $this->getIssuesFaceted($section->ruleset));
     }
 
-    private function getGrades() {
+    private function getGrades() : void {
         $this->results = $this->dump->fetchAnalysers(array_keys($this->grading));
 
         $this->resultsCounts = array_fill_keys(array_keys($this->grading), 0);
@@ -107,7 +109,7 @@ class Grade extends Ambassador {
         $this->globalGrade = intval(100 * max(0, 20 - $grade)) / 100;
     }
 
-    protected function generateDashboard(Section $section) {
+    protected function generateDashboard(Section $section) : void {
         $this->getGrades();
 
         $baseHTML = $this->getBasedPage('index');

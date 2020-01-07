@@ -42,7 +42,9 @@ class Owasp extends Ambassador {
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
-    protected $tmpName           = '';
+    protected $tmpName         = '';
+    
+    protected $themesToShow    = array('Security');
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -64,6 +66,8 @@ class Owasp extends Ambassador {
     'Structures/EvalUsage',
     'Security/Sqlite3RequiresSingleQuotes',
     'Security/ShouldUsePreparedStatement',
+    'Security/FilterInputSource',
+    'Security/NoEntIgnore',
 ),
 'A2:2017-Broken Authentication' => array(
 
@@ -93,28 +97,31 @@ class Owasp extends Ambassador {
     'Php/BetterRand',
     'Security/MkdirDefault',
     'Security/RegisterGlobals',
+    'Security/IntegerConversion',
+    'Security/NoWeakSSLCrypto',
+    'Security/MinusOneOnError',
+    'Security/MoveUploadedFile',
 ),
 'A7:2017-Cross-Site Scripting (XSS)' => array(
     'Security/UploadFilenameInjection',
 ),
 'A8:2017-Insecure Deserialization' => array(
     'Security/UnserializeSecondArg',
+    'Security/ConfigureExtract',
 ),
 'A9:2017-Using Components with Known Vulnerabilities' => array(
+
 ),
 'A10:2017-Insufficient Logging&Monitoring' => array(
+
 ),
 'Others' => array(
     'Structures/NoReturnInFinally',
     'Security/NoSleep',
     'Structures/Fallthrough',
+    'Security/DynamicDl',
+    
 ));
-
-    public function __construct(Config $config) {
-        parent::__construct($config);
-
-        $this->themesToShow      = array('Security');
-    }
 
     private function getLinesFromFile(string $filePath, int $lineNumber, int $numberBeforeAndAfter): array {
         --$lineNumber; // array index
@@ -244,7 +251,7 @@ class Owasp extends Ambassador {
             $analyzersList = makeList($analyzers);
 
             $res = $this->dump->fetchAnalysersCounts($analyzers);
-            $sources = array_filter($res->toHash('analyzer', 'count'), function ($x) { return $x > -1;});
+            $sources = array_filter($res->toHash('analyzer', 'count'), function (int $x) : bool { return $x > -1;});
             asort($sources);
 
             $empty = 0;
@@ -439,7 +446,7 @@ class Owasp extends Ambassador {
         );
     }
 
-    protected function getAnalyzerOverview() {
+    protected function getAnalyzerOverview() : array {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();

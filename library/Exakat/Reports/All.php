@@ -31,6 +31,7 @@ class All extends Reports {
         $omit = array('Ambassadornomenu',
                       'Facetedjson',
                       'Onepagejson',
+                      'Topology',
                       );
         $reports = array_diff(Reports::$FORMATS, $omit);
 

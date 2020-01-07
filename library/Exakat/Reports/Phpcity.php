@@ -38,11 +38,11 @@ class Phpcity extends Reports {
             $row['trait'] = (bool) $row['trait'];
 
             $this->count();
-            $results[] = $row;
+            $return[] = $row;
         }
         $this->count($results->getCount());
 
-        return json_encode($results);
+        return json_encode($return);
     }
 }
 

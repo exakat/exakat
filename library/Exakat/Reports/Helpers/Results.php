@@ -30,8 +30,12 @@ class Results {
     private $values       = null;
     private $options      = array();
 
-    public function __construct(SQLite3Result $res, $options = array()) {
-        $this->res = $res;
+    public function __construct(?SQLite3Result $res = null, $options = array()) {
+        if ($res === null) {
+            $this->values = array();
+        } else {
+            $this->res = $res;
+        }
 
         $this->options = $options;
         $this->options['phpsyntax'] = $this->options['phpsyntax']  ?? array();

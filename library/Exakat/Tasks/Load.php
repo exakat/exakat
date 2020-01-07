@@ -543,7 +543,6 @@ class Load extends Tasks {
             display('Parallel processing');
             $pid = pcntl_fork();
             if ($pid === 0 ) {
-//                var_dump($this->loader);
                 $this->runCollector($omittedFiles);
                 display('Child finished working');
                 exit(0);
@@ -1904,7 +1903,7 @@ class Load extends Tasks {
             }
         } else {
             ++$this->id;
-            $return = null;
+            $return = $this->addAtomVoid();
         }
 
         return $return;
@@ -2265,7 +2264,7 @@ class Load extends Tasks {
         return $arguments;
     }
 
-    private function processArguments(string $atom,array $finals = array(),array &$argumentsList = array()): Atom {
+    private function processArguments(string $atom,array $finals = array(), ?array &$argumentsList = array()): Atom {
         if (empty($finals)) {
             $finals = array($this->phptokens::T_CLOSE_PARENTHESIS);
         }
@@ -5882,12 +5881,12 @@ class Load extends Tasks {
     /// generic methods
     //////////////////////////////////////////////////////
     private function addAtom(string $atomName): Atom {
-        if (!in_array($atom, GraphElements::$ATOMS, \STRICT_COMPARISON)) {
+        if (!in_array($atomName, GraphElements::$ATOMS, \STRICT_COMPARISON)) {
             throw new LoadError('Undefined atom ' . $atomName . ':' . $this->filename . ':' . __LINE__);
         }
 
         $line = $this->tokens[$this->id][2] ?? $this->tokens[$this->id - 1][2] ?? $this->tokens[$this->id - 2][2] ?? -1;
-        $a = $this->atomGroup->factory($atomName, $line);
+        $atom = $this->atomGroup->factory($atomName, $line);
 
         $this->atoms[$atom->id] = $atom;
         if ($atom->id < $this->min_id) {
@@ -6009,7 +6008,7 @@ class Load extends Tasks {
         */
     }
 
-    private function processDefineAsClassalias(int $argumentsId): void {
+    private function processDefineAsClassalias(array $argumentsId): void {
         if (empty($this->argumentsId[0]->noDelimiter) ||
             empty($this->argumentsId[1]->noDelimiter)   ) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all
@@ -6039,7 +6038,7 @@ class Load extends Tasks {
         $this->calls->addDefinition('class', $fullnspathAlias, $argumentsId[1]);
     }
 
-    private function processDefineAsConstants(string $const,Atom $name, bool $case_insensitive = false): void {
+    private function processDefineAsConstants(Atom $const, Atom $name, bool $case_insensitive = false): void {
         if (empty($name->noDelimiter)) {
             $name->fullnspath = '\\';
             return;

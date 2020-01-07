@@ -1361,7 +1361,7 @@ HTML;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    private function getFilesResultsCounts(): array {
+    protected function getFilesResultsCounts(): array {
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
         $res = $this->dump->getFilesResultsCounts($list)->toHash('file');
 
@@ -3724,7 +3724,7 @@ HTML;
         return $cveHtml;
     }
 
-    protected function Compatibility($count, $analyzer): string {
+    protected function Compatibility(int $count, string $analyzer): string {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
@@ -3744,7 +3744,7 @@ HTML;
         return str_replace(array(' ', '(', ')', '/'), '-', strtolower($name));
     }
 
-    protected function makeAuditDate(&$finalHTML): void {
+    protected function makeAuditDate(string &$finalHTML): void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {

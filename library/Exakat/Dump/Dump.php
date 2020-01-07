@@ -15,6 +15,8 @@ class Dump {
     protected $phpexcutable   = null;
     protected $sqlite         = null;
     private $sqliteFileFinal  = '';
+    
+    protected $tablesList = array();
 
     function __construct(string $path, int $init = self::READ, string $project = '', string $phpexecutable = '') {
         $this->sqliteFileFinal    = $path;
@@ -62,6 +64,15 @@ class Dump {
 
         $this->sqlite = new \Sqlite3($this->sqliteFileFinal,  \SQLITE3_OPEN_READONLY);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        
+        $this->initTablesList();
+    }
+
+    private function initTablesList() : void {
+        $res = $this->sqlite->query("SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%'");
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $this->tablesList[] = $row['name'];
+        }
     }
 
     static function factory(string $path, int $init = self::READ) : self {
@@ -321,6 +332,7 @@ SQL;
         $this->sqlite->query($query);
 
         $this->collectDatastore();
+        $this->initTablesList();
 
         $time   = time();
         try {
@@ -349,7 +361,6 @@ SQL;
                         );
 
         $this->storeInTable('hash', $toDump);
-
         display('Inited tables');
     }
 

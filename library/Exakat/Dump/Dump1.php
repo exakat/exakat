@@ -35,6 +35,10 @@ class Dump1 extends Dump {
             }
             $cols = implode(', ', $cols);
         }
+        
+        if (!in_array($table, $this->tablesList)) {
+            return new Results();
+        }
 
         $query = "SELECT $cols FROM $table";
         $res = $this->sqlite->query($query);

@@ -36,15 +36,12 @@ class Topology extends Reports {
                                                                       ));
                 break;
 
+            default :
             case 'Dump/NewOrder' :
                 $res = $this->dump->fetchTable('newOrder', array('origin'      => 'calling',
                                                                  'destination' => 'called',
                                                                  ));
                 break;
-
-            default :
-                display('Call this report with -P Dump/Typehintorder or -P Dump/NewOrder');
-                return '';
         }
 
         $names = array();
