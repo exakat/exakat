@@ -31,6 +31,7 @@ use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 class Emissary extends Reports {
     const FILE_FILENAME  = 'emissary';
     const FILE_EXTENSION = '';
+    const CONFIG_YAML    = 'Emissary';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -91,7 +92,7 @@ class Emissary extends Reports {
     }
 
     protected function makeMenu(): string {
-        $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/emissary.yaml');
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/'.static::CONFIG_YAML.'.yaml');
 
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
@@ -381,18 +382,18 @@ class Emissary extends Reports {
         $favoritesList = json_decode($favorites->generate($favoritesRules, Reports::INLINE));
 
         $donut = array();
-        $html = array(' ');
+        $html = array();
 
         foreach($favoritesList as $analyzer => $list) {
             $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
 
-            $table = '';
+            $table = [];
             $values = array();
             $name = $this->docs->getDocs($analyzer, 'name');
 
             $total = 0;
             foreach($analyzerList as $key => $value) {
-                $table .= '
+                $table []= '
                 <div class="clearfix">
                    <div class="block-cell">' . makeHtml($key) . '</div>
                    <div class="block-cell text-center">' . $value . '</div>
@@ -405,13 +406,14 @@ class Emissary extends Reports {
             }
 
             if (($repeat = 4 - count($analyzerList)) > 0) {
-                $table .= str_repeat('
+                $table []= str_repeat('
                 <div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>
 ', $repeat );
             }
+            $table = implode('', $table);
 
             // Ignore if we have no occurrences
             if ($total === 0) {
@@ -1005,7 +1007,7 @@ JAVASCRIPT;
         $html = array();
         $xAxis = array();
         $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach ($extensionList->toArray() as $value) {
             $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
             $xAxis[] = "'$shortName'";
             $data[$value['analyzer']] = $value['count'];
@@ -1529,10 +1531,9 @@ HTML;
 
     protected function generateIssuesEngine(Section $section, array $issues = array()): void {
         if (empty($issues)) {
-            return;
+            $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($section->ruleset));
         }
 
-        $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($section->ruleset));
         $total = count($issues);
         $issues = implode(', ' . PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
@@ -2250,7 +2251,7 @@ HTML;
                 $files       = '<ul><li>' . implode("</li>\n<li>", $files) . '</li></ul>';
             }
 
-            $version = $suffix[0] . '-' . $suffix[1];
+            $version = $suffix[0] . '.' . $suffix[1];
             $compilations []= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>";
         }
 
@@ -3882,7 +3883,200 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    public function highchart(array $data) {
+    protected function generateInventoriesEncoding(Section $section) : void {
+        // List of indentation used
+        $res = $this->dump->fetchHashResults('Mbstring Encoding');
+        if ($res->isEmpty()) { return ; }
+
+        $values = $res->toHash('key', 'value');
+        asort($values);
+
+        $theTable = array();
+        foreach($values as $encoding => $count) {
+            $codeHtml = PHPSyntax($encoding);
+            $theTable []= "<tr><td>{$codeHtml}</td><td>$count</td><td>&nbsp</td></tr>";
+        }
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Names of the encoding used in the code');
+        $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
+        $this->putBasedPage($section->file, $html);
+    }
+
+    protected function generateFixesRector(Section $section) : void {
+        $rector = new Rector($this->config);
+        $report = $rector->generate('', Reports::INLINE);
+
+        $configline = trim($report);
+        $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n", ), $configline);
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'COMPILATION', $configline);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+
+        $this->putBasedPage($section->file, $html);
+    }
+
+    protected function generateFixesPhpCsFixer(Section $section) : void {
+        $phpcsfixer = new Phpcsfixer($this->config);
+        $report = $phpcsfixer->generate('', Reports::INLINE);
+
+        $configline = trim($report);
+        $configline = PHPSyntax($configline);
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'COMPILATION', $configline);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+
+        $this->putBasedPage($section->file, $html);
+    }
+
+    protected function generateIndentationLevelsBreakdown(Section $section) : void {
+        // List of indentation used
+        $res = $this->dump->fetchHashResults('Indentation Levels');
+        if ($res->isEmpty()) { return ; }
+
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        foreach ($res->toArray() as $value) {
+            $xAxis[] = "'{$value['key']} level'";
+
+            $data[$value['key']] = (int) $value['value'];
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . ' levels</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                  </div>';
+        }
+
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+    }
+
+    private function generateTypehintSuggestions(Section $section) : void {
+//        $constants  = $this->generateVisibilityConstantSuggestions();
+//        $properties = $this->generateVisibilityPropertySuggestions();
+        $methods    = $this->generateTypehintMethodsSuggestions();
+
+        $classes = array_unique(array_merge(array_keys($methods)));
+
+        $headers = <<<'HTML'
+    <tr>
+        <td>&nbsp;</td>
+        <td>Method</td>
+        <td>Argument</td>
+        <td>Typehint</td>
+        <td>Default</td>
+    </tr>
+HTML;
+
+        $visibilityTable = array('<table class="table table-striped">',
+                                 $headers,
+                                 );
+
+        foreach($classes as $id) {
+            list(, $class) = explode(':', $id);
+            $visibilityTable []= '<tr><td colspan="9">' . PHPsyntax($class) . '</td></tr>' . PHP_EOL .
+                                $headers . PHP_EOL .
+//                                (isset($constants[$id])  ? implode('', $constants[$id])  : '') .
+//                                (isset($properties[$id]) ? implode('', $properties[$id]) : '') .
+                                (isset($methods[$id]) ? implode('', $methods[$id]) : '');
+        }
+
+        $visibilityTable []= '</table>';
+        $visibilityTable = implode(PHP_EOL, $visibilityTable);
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Below, is a summary of all classes and their parameters\'s typehinting status. ');
+        $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
+        $this->putBasedPage($section->file, $html);
+    }
+
+    protected function generateDereferencingLevelsBreakdown(Section $section): void {
+        // List of indentation used
+        $res = $this->dump->fetchHashResults('Dereferencing Levels');
+        if ($res->isEmpty()) { return ; }
+
+        $html = array();
+        $xAxis = array();
+        $data = array();
+        foreach ($res->toArray() as $value) {
+            $xAxis[] = "'{$value['key']} level'";
+
+            $data[$value['key']] = (int) $value['value'];
+
+            $html []= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . ' levels</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                  </div>';
+        }
+        $html = implode(PHP_EOL, $html);
+
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+    }
+
+    private function generateTypehintMethodsSuggestions() : array {
+        $res = $this->dump->fetchTableMethodsByArgument();
+        $arguments = array();
+        foreach($res->toArray() as $row) {
+            $theMethod = $row['fullnspath'];
+            $visibilities = array($row['typehint'], $row['init']);
+
+            $argument = '<tr><td>&nbsp;</td><td>&nbsp;</td><td>' . PHPSyntax($row['argument']) . '</td><td class="exakat_short_text">' .
+                                    implode('</td><td>', $visibilities)
+                                 . '</td></tr>' . PHP_EOL;
+
+            array_collect_by($arguments, $theMethod, $argument);
+        }
+
+        $return = array();
+        $theClass = '';
+        $aClass = array();
+        $res = $this->dump->fetchTableMethodsByReturntype();
+        foreach($res->toArray() as $row) {
+            $theClass = $row['fullnspath'];
+            $visibilities = array($row['returntype'], '&nbsp;');
+
+            $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td>&nbsp;</td><td class="exakat_short_text">' .
+                                    implode('</td><td>', $visibilities)
+                                 . '</td></tr>' . PHP_EOL;
+            $method .= implode(PHP_EOL, $arguments[$row['fullnspath'] . '::' . mb_strtolower($row['method'])] ?? array());
+
+            array_collect_by($return, $row['fullnspath'] . ':' . $row['theClass'], $method);
+        }
+
+        unset($return['']);
+
+        return $return;
+    }
+
+    protected function generateForeachFavorites(Section $section) : void {
+        // List of indentation used
+        $res = $this->dump->fetchHashResults('Foreach Names');
+        $res = array_map(function (array $x): array { $x['key'] = str_replace('&', '', $x['key']); return $x; }, $res->toArray());
+        uasort($res, function ($a, $b): bool { return $a['value'] <=> $b['value']; });
+
+        $html = array();
+        $xAxis = array();
+        $data = array();
+        foreach ($res as $value) {
+            $xAxis[] = "'" . addslashes($value['key']) . "'";
+
+            $data[$value['key']] = (int) $value['value'];
+
+            $html []= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                  </div>';
+        }
+        $html = implode(PHP_EOL, $html);
+
+        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+    }
+
+    public function highchart(array $data) : string {
         $series = json_encode($data['series']);
         $xAxis  = json_encode($data['xAxis']);
 

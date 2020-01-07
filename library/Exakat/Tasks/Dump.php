@@ -2137,18 +2137,16 @@ GREMLIN;
     }
 
     private function expandRulesets(): void {
-        $analyzers = array();
         $res = $this->dump->fetchTable('resultsCounts', array('analyzer'));
         $analyzers = $res->toList('analyzer');
 
         $res = $this->dump->fetchTable('themas', array('thema'));
-        $ran = $res->toList('analyzer');
+        $ran = $res->toList('thema');
 
         $rulesets = $this->rulesets->listAllRulesets();
         $rulesets = array_diff($rulesets, $ran);
 
         $add = array();
-
         foreach($rulesets as $ruleset) {
             $analyzerList = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
             if (empty(array_diff($analyzerList, $analyzers))) {

@@ -23,7 +23,6 @@
 namespace Exakat;
 
 use Exakat\Tasks;
-use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Configsource\Commandline;
 

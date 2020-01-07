@@ -28,7 +28,7 @@ class Favorites extends Reports {
     const FILE_FILENAME  = 'favorites';
 
     public function _generate(array $analyzerList): string {
-        $analyzers = $this->rulesets->getRulesetsAnalyzers($analyzerList);
+        $analyzers = $this->rulesets->getRulesetsAnalyzers(array('Preferences'));
 
         $return = array();
         foreach($analyzers as $analyzer) {

@@ -46,11 +46,12 @@ class Dump {
         copy($this->sqliteFileFinal, $this->sqliteFile);
         $this->sqlite = new \Sqlite3($this->sqliteFile, \SQLITE3_OPEN_READWRITE);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
+        
+        $this->initTablesList();
     }
 
     private function init() {
-        print $this->sqliteFile;
-        $this->sqlite = new \Sqlite3($this->sqliteFile, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+        $this->sqlite = new Sqlite3($this->sqliteFile, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $this->initDump();
@@ -466,12 +467,6 @@ SQL;
         if (!empty($values)) {
             $query = 'INSERT INTO '.$table.' VALUES ' . implode(', ', $values);
             $r = $this->sqlite->query($query);
-            
-            if ($r === false) {
-                print_r($values);
-                print $table;
-                die(__METHOD__);
-            }
         }
 
         return count($values);

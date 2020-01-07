@@ -146,7 +146,6 @@ favorites:
             icon: certificate
         favorite_issues:
             title: Favorite issues
-            source: issues
             file: favorites_issues
             method: generateIssuesEngine
             ruleset: Preferences
