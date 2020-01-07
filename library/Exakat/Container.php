@@ -49,31 +49,51 @@ class Container {
 
         $this->verbose = $this->config->verbose;
         $this->phar    = $this->config->isPhar;
-
-        $this->graphdb    = Graph::getConnexion();
-        $this->datastore  = new Datastore();
-        $this->dictionary = new Dictionary($this->datastore);
-        
-        $this->methods    = new Methods($this->config);
-
-        $this->docs = new Docs($this->config->dir_root, 
-                               $this->config->ext, 
-                               $this->config->dev,
-                               );
-
-        $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
-                                       $this->config->ext,
-                                       $this->config->dev,
-                                       $this->config->rulesets);
-
-        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
-        $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
     }
     
     public function __get(string $what) {
         assert(property_exists($this, $what), "No such element in the container : '$what'\n");
+        
+        if ($this->$what === null) {
+            $this->$what();
+        }
 
         return $this->$what;
+    }
+    
+    private function graphdb() {
+        $this->graphdb    = Graph::getConnexion();
+    }
+
+    private function datastore() {
+        $this->datastore  = new Datastore();
+    }
+
+    private function dictionary() {
+        $this->dictionary = new Dictionary($this->datastore);
+    }
+
+    private function methods() {
+        $this->methods    = new Methods($this->config);
+    }
+
+    private function docs() {
+        $this->docs = new Docs($this->config->dir_root, 
+                               $this->config->ext, 
+                               $this->config->dev,
+                               );
+    }
+
+    private function rulesets() {
+        $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
+                                       $this->config->ext,
+                                       $this->config->dev,
+                                       $this->config->rulesets);
+    }
+
+    private function php() {
+        $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
+        $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
     }
 }
 
