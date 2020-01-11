@@ -194,6 +194,14 @@ class Results {
         return $return;
     }
 
+    public function slice(int $begin = 0, int $end = PHP_INT_MAX) {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        $this->values = array_slice($this->values, $begin, $end);
+    }
+
     public function filter(Closure $f) {
         if ($this->values === null) {
             $this->load();
@@ -215,7 +223,7 @@ class Results {
             $this->load();
         }
 
-        array_map($f, $this->values);
+        $this->values = array_map($f, $this->values);
     }
 }
 

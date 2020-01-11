@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Highchart;
 use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Vcs\Vcs;
@@ -519,152 +520,6 @@ JAVASCRIPT;
 
       // Apply the theme
       Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATACRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATANONE]
-          }]
-      });
-
-      $('#container').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAANALYZERLIST]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATAANALYZERCRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAANALYZERMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAANALYZERMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATAANALYZERNONE]
-          }]
-      });
     });
   </script>
 
@@ -690,14 +545,10 @@ JAVASCRIPT;
         // bloc Issues
         $issues = $this->getIssuesBreakdown();
         $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
-        $tags[] = 'SCRIPTISSUES';
-        $code[] = $issues['script'];
 
         // bloc severity
         $severity = $this->getSeverityBreakdown();
         $finalHTML = $this->injectBloc($finalHTML, 'BLOCSEVERITY', $severity['html']);
-        $tags[] = 'SCRIPTSEVERITY';
-        $code[] = $severity['script'];
 
         // Marking the audit date
         $this->makeAuditDate($finalHTML);
@@ -708,6 +559,7 @@ JAVASCRIPT;
         $analyzerHTML = $this->getTopAnalyzers($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
+/*
         $blocjs = <<<'JAVASCRIPT'
   <script>
     $(document).ready(function() {
@@ -931,32 +783,32 @@ JAVASCRIPT;
     });
   </script>
 JAVASCRIPT;
+*/
 
-        // Filename Overview
+        $highchart = new Highchart();
+        
+        $highchart->addDonut('donut-chart_issues',  $issues['script']);
+        $highchart->addDonut('donut-chart_severity', $severity['script']);
+
         $fileOverview = $this->getFileOverview();
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = $fileOverview['scriptDataFiles'];
-        $tags[] = 'SCRIPTDATAMAJOR';
-        $code[] = $fileOverview['scriptDataMajor'];
-        $tags[] = 'SCRIPTDATACRITICAL';
-        $code[] = $fileOverview['scriptDataCritical'];
-        $tags[] = 'SCRIPTDATANONE';
-        $code[] = $fileOverview['scriptDataNone'];
-        $tags[] = 'SCRIPTDATAMINOR';
-        $code[] = $fileOverview['scriptDataMinor'];
+        $highchart->addSeries('filename',
+                              $fileOverview['scriptDataFiles'],
+                              array('name' => 'Critical', 'data' => $fileOverview['scriptDataCritical']),
+                              array('name' => 'Major',    'data' => $fileOverview['scriptDataMajor']),
+                              array('name' => 'Minor',    'data' => $fileOverview['scriptDataMinor']),
+                              array('name' => 'None',     'data' => $fileOverview['scriptDataNone']),
+                              );
 
-        // Analyzer Overview
         $analyzerOverview = $this->getAnalyzerOverview();
-        $tags[] = 'SCRIPTDATAANALYZERLIST';
-        $code[] = $analyzerOverview['scriptDataAnalyzer'];
-        $tags[] = 'SCRIPTDATAANALYZERMAJOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMajor'];
-        $tags[] = 'SCRIPTDATAANALYZERCRITICAL';
-        $code[] = $analyzerOverview['scriptDataAnalyzerCritical'];
-        $tags[] = 'SCRIPTDATAANALYZERNONE';
-        $code[] = $analyzerOverview['scriptDataAnalyzerNone'];
-        $tags[] = 'SCRIPTDATAANALYZERMINOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMinor'];
+        $highchart->addSeries('container',
+                              $analyzerOverview['scriptDataAnalyzer'],
+                              array('name' => 'Critical', 'data' => $analyzerOverview['scriptDataAnalyzerCritical']),
+                              array('name' => 'Major',    'data' => $analyzerOverview['scriptDataAnalyzerMajor']),
+                              array('name' => 'Minor',    'data' => $analyzerOverview['scriptDataAnalyzerMinor']),
+                              array('name' => 'None',     'data' => $analyzerOverview['scriptDataAnalyzerNone']),
+                              );
+
+        $blocjs = (string) $highchart;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
@@ -976,7 +828,7 @@ JAVASCRIPT;
         $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $data["'" . $value['key'] . " param.'"] = $value['value'];
+            $data[$value['key'] . " param."] = $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' param.</div>
@@ -988,8 +840,12 @@ JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Parameters', 'data' => array_values($data))),
-                                         'xAxis' => array_keys($data)));
+        $highchart = new Highchart();
+        $highchart->addSeries('filename',
+                              array_keys($data),
+                              array('name' => 'Parameters', 'data' => array_values($data)),
+                              );
+        $blocjs = (string) $highchart;
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
@@ -1014,7 +870,7 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $data, $html);
+        $this->generateGraphList($section->file, $section->title, 'Extensions', $data, $html);
     }
 
     protected function generatePHPFunctionBreakdown(Section $section): void {
@@ -1035,7 +891,7 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $data, $html);
+        $this->generateGraphList($section->file, $section->title, 'Functions', $data, $html);
     }
 
     protected function generatePHPConstantsBreakdown(Section $section): void {
@@ -1056,7 +912,7 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $data, $html);
+        $this->generateGraphList($section->file, $section->title, 'Constants', $data, $html);
     }
 
     protected function generatePHPClassesBreakdown(Section $section): void {
@@ -1077,15 +933,19 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $data, $html);
+        $this->generateGraphList($section->file, $section->title, 'Classes', $data, $html);
     }
 
-    protected function generateGraphList(string $filename,string $title, array $data, string $html): void {
+    protected function generateGraphList(string $filename, string $title, string $data_name, array $data, string $html): void {
         $finalHTML = $this->getBasedPage('extension_list');
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array((object) array('name' => 'Calls', 'data' => array_values($data))),
-                                         'xAxis'  => array_keys($data)));
+        $highchart = new Highchart();
+        $highchart->addSeries('filename',
+                              array_keys($data),
+                              array('name' => $data_name, 'data' => array_values($data)),
+                              );
+        $blocjs = (string) $highchart;
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $title);
@@ -1199,9 +1059,8 @@ JAVASCRIPT;
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript[] = '{label: "' . $value['label'] . '", value: ' . ( (int) $value['value']) . '}';
+            $dataScript[] = $value;
         }
-        $dataScript = implode(', ', $dataScript);
 
         $nb = 4 - count($data);
         $filler = '<div class="clearfix">
@@ -1227,15 +1086,14 @@ JAVASCRIPT;
     <div class="block-cell text-center">$value[value]</div>
 </div>
 HTML;
-            $dataScript[] = '{label: "' . $value['label'] . '", value: ' . ( (int) $value['value']) . '}';
+            $dataScript[] = $value;
         }
-        $html = implode('', $html);
-        $dataScript = implode(', ', $dataScript);
 
-        $html .= str_repeat('<div class="clearfix">
+        $html []= str_repeat('<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>', 4 - $res->getCount());
+        $html = implode('', $html);
 
         return array('html'   => $html,
                      'script' => $dataScript);
@@ -1400,24 +1258,19 @@ HTML;
         $severities = array_slice($severities, 0, 10);
 
         foreach ($severities as $file => $value) {
-            $xAxis[]        = "'" . addslashes($file) . "'";
+            $xAxis[]        = $file;
             $dataCritical[] = $value['Critical'] ?? 0;
             $dataMajor[]    = $value['Major']    ?? 0;
             $dataMinor[]    = $value['Minor']    ?? 0;
             $dataNone[]     = $value['None']     ?? 0;;
         }
-        $xAxis        = implode(', ', $xAxis);
-        $dataCritical = implode(', ', $dataCritical);
-        $dataMajor    = implode(', ', $dataMajor);
-        $dataMinor    = implode(', ', $dataMinor);
-        $dataNone     = implode(', ', $dataNone);
 
         return array(
             'scriptDataFiles'    => $xAxis,
-            'scriptDataMajor'    => $dataMajor,
             'scriptDataCritical' => $dataCritical,
+            'scriptDataMajor'    => $dataMajor,
+            'scriptDataMinor'    => $dataMinor,
             'scriptDataNone'     => $dataNone,
-            'scriptDataMinor'    => $dataMinor
         );
     }
 
@@ -1472,7 +1325,7 @@ HTML;
     }
 
     protected function getAnalyzerOverview(): array {
-        $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
+        $data = $this->getAnalyzersCount(self::TOPLIMIT);
         $xAxis        = array();
         $dataMajor    = array();
         $dataCritical = array();
@@ -1482,24 +1335,19 @@ HTML;
         $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
             $ini = $this->docs->getDocs($value['analyzer']);
-            $xAxis[] = "'" . addslashes($ini['name']) . "'";
+            $xAxis[]        = $ini['name'];
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']) ? 0 : $severities[$value['analyzer']]['Major'];
-            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']) ? 0 : $severities[$value['analyzer']]['Minor'];
-            $dataNone[]     = empty($severities[$value['analyzer']]['None']) ? 0 : $severities[$value['analyzer']]['None'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
         }
-        $xAxis        = implode(', ', $xAxis);
-        $dataCritical = implode(', ', $dataCritical);
-        $dataMajor    = implode(', ', $dataMajor);
-        $dataMinor    = implode(', ', $dataMinor);
-        $dataNone     = implode(', ', $dataNone);
 
         return array(
             'scriptDataAnalyzer'         => $xAxis,
-            'scriptDataAnalyzerMajor'    => $dataMajor,
             'scriptDataAnalyzerCritical' => $dataCritical,
+            'scriptDataAnalyzerMajor'    => $dataMajor,
+            'scriptDataAnalyzerMinor'    => $dataMinor,
             'scriptDataAnalyzerNone'     => $dataNone,
-            'scriptDataAnalyzerMinor'    => $dataMinor
         );
     }
 
@@ -3356,11 +3204,9 @@ HTML
         }
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-                $data[$value['key']] = $value['value'];
-                $xAxis[] = "'" . $value['key'] . " extension'";
+                $data[$value['key']. ' level' . ($value['key'] == 1 ? '' : 's')] = $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
@@ -3371,8 +3217,12 @@ HTML
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array((object) array('name' => 'Lines', 'data' => $data)),
-                                         'xAxis'  => $xAxis));
+        $highchart = new Highchart();
+        $highchart->addSeries('filename',
+                              array_keys($data),
+                              array('name' => 'Depth', 'data' => array_values($data)),
+                              );
+        $blocjs = (string) $highchart;
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
@@ -3405,8 +3255,12 @@ HTML
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Lines', 'data' => $data)),
-                                         'xAxis' => $xAxis));
+        $highchart = new Highchart();
+        $highchart->addSeries('filename',
+                              array_keys($data),
+                              array('name' => 'Class size (lines)', 'data' => array_values($data)),
+                              );
+        $blocjs = (string) $highchart;
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
@@ -3420,12 +3274,15 @@ HTML
 
         // List of extensions used
         $res = $this->dump->getMethodsBySize();
+        $res->order(function (array $a, array $b) : int { return $b['size'] <=> $a['size'];});
+
         $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            if (count($data) < 50) {
-                $data["'" . $value['shortName'] . "'"] = $value['size'];
+            if (count($data) < 30) {
+                $data[$value['name']] = $value['size'];
             }
+
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['size'] . '</div>
@@ -3435,8 +3292,12 @@ HTML
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Lines', 'data' => array_values($data))),
-                                         'xAxis'  => array_keys($data)));
+        $highchart = new Highchart();
+        $highchart->addSeries('filename',
+                              array_keys($data),
+                              array('name' => 'Method size', 'data' => array_values($data)),
+                              );
+        $blocjs = (string) $highchart;
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
@@ -3948,7 +3809,7 @@ HTML;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $data, $html);
+        $this->generateGraphList($section->file, $section->title, 'Indentation levels', $data, $html);
     }
 
     private function generateTypehintSuggestions(Section $section) : void {
@@ -4008,7 +3869,7 @@ HTML;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $data, $html);
+        $this->generateGraphList($section->file, $section->title, 'Dereferencing levels', $data, $html);
     }
 
     private function generateTypehintMethodsSuggestions() : array {
@@ -4049,156 +3910,26 @@ HTML;
     protected function generateForeachFavorites(Section $section) : void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Foreach Names');
-        $res = array_map(function (array $x): array { $x['key'] = str_replace('&', '', $x['key']); return $x; }, $res->toArray());
-        uasort($res, function ($a, $b): bool { return $a['value'] <=> $b['value']; });
+        $res->map(function (array $x): array { $x['key'] = str_replace('&', '', $x['key']); return $x; });
+
+        // merging results from &$v and $v into one
+        $data = array();
+        foreach ($res->toArray() as $value) {
+            $data[$value['key']] = 
+                (int) $value['value'] + ($data[$value['key']] ?? 0);
+        }
+        arsort($data);
 
         $html = array();
-        $data = array();
-        foreach ($res as $value) {
-            $data["'" . addslashes($value['key']) . "'"] = (int) $value['value'];
-
+        foreach ($data as $key => $value) {
             $html []= '<div class="clearfix">
-                      <div class="block-cell-name">' . $value['key'] . '</div>
-                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                      <div class="block-cell-name">' . $key . '</div>
+                      <div class="block-cell-issue text-center">' . $value . '</div>
                   </div>';
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $data, $html);
-    }
-
-    public function highchart(array $data) : string {
-        $series = json_encode($data['series']);
-        $xAxis  = json_encode($data['xAxis']);
-
-        return <<<JAVASCRIPT
-  <script>
-    $(document).ready(function() {
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
-
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: $xAxis
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: $series
-      });
-
-    });
-  </script>
-JAVASCRIPT;
+        $this->generateGraphList($section->file, $section->title, 'Foreach names', $data, $html);
     }
 }
 
