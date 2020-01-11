@@ -776,7 +776,6 @@ JAVASCRIPT;
             }
          },
 
-
          // General
          background2: '#F0F0EA'
       };
@@ -975,11 +974,9 @@ JAVASCRIPT;
         }
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $xAxis[] = "'" . $value['key'] . " param.'";
-            $data[$value['key']] = $value['value'];
+            $data["'" . $value['key'] . " param.'"] = $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' param.</div>
@@ -991,8 +988,8 @@ JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Parameters', 'data' => $data)),
-                                         'xAxis' => $xAxis));
+        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Parameters', 'data' => array_values($data))),
+                                         'xAxis' => array_keys($data)));
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
@@ -1005,13 +1002,11 @@ JAVASCRIPT;
         $extensionList = $this->dump->getExtensionList();
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($extensionList->toArray() as $value) {
             $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
-            $xAxis[] = "'$shortName'";
             $data[$value['analyzer']] = $value['count'];
-            //                    <a href="#" title="' . $value['analyzer'] . '">
+
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $shortName . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
@@ -1019,7 +1014,7 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $data, $html);
     }
 
     protected function generatePHPFunctionBreakdown(Section $section): void {
@@ -1029,12 +1024,10 @@ JAVASCRIPT;
         $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
-            //                    <a href="#" title="' . $value['analyzer'] . '">
+
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
@@ -1042,7 +1035,7 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $data, $html);
     }
 
     protected function generatePHPConstantsBreakdown(Section $section): void {
@@ -1052,12 +1045,10 @@ JAVASCRIPT;
         $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
-            //                    <a href="#" title="' . $value['analyzer'] . '">
+
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
@@ -1065,7 +1056,7 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $data, $html);
     }
 
     protected function generatePHPClassesBreakdown(Section $section): void {
@@ -1075,12 +1066,10 @@ JAVASCRIPT;
         $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $xAxis[] = "'$value[name]'";
             $data[$value['name']] = $value['count'];
-            //                    <a href="#" title="' . $value['analyzer'] . '">
+
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['count'] . '</div>
@@ -1088,15 +1077,15 @@ JAVASCRIPT;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $data, $html);
     }
 
-    protected function generateGraphList(string $filename,string $title, array $xAxis, array $data, string $html): void {
+    protected function generateGraphList(string $filename,string $title, array $data, string $html): void {
         $finalHTML = $this->getBasedPage('extension_list');
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array((object) array('name' => 'Calls', 'data' => $data)),
-                                         'xAxis'  => $xAxis));
+        $blocjs = $this->highchart(array('series' => array((object) array('name' => 'Calls', 'data' => array_values($data))),
+                                         'xAxis'  => array_keys($data)));
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $title);
@@ -1399,22 +1388,23 @@ HTML;
     }
 
     protected function getFileOverview(): array {
-        $list = $this->rulesets->getRulesetsAnalyzers(array('All'));
-
-        $data = $this->getFilesCount($list, self::LIMITGRAPHE);
-
         $xAxis        = array();
         $dataMajor    = array();
         $dataCritical = array();
         $dataNone     = array();
         $dataMinor    = array();
+
         $severities = $this->getSeveritiesNumberBy('file');
-        foreach ($data as $value) {
-            $xAxis[] = "'" . addslashes($value['file']) . "'";
-            $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['file']]['Major']) ? 0 : $severities[$value['file']]['Major'];
-            $dataMinor[]    = empty($severities[$value['file']]['Minor']) ? 0 : $severities[$value['file']]['Minor'];
-            $dataNone[]     = empty($severities[$value['file']]['None']) ? 0 : $severities[$value['file']]['None'];
+        unset($severities['None']);
+        uasort($severities, function (array $a, array $b) use ($severities) : int { return array_sum($b) <=> array_sum($a); });
+        $severities = array_slice($severities, 0, 10);
+
+        foreach ($severities as $file => $value) {
+            $xAxis[]        = "'" . addslashes($file) . "'";
+            $dataCritical[] = $value['Critical'] ?? 0;
+            $dataMajor[]    = $value['Major']    ?? 0;
+            $dataMinor[]    = $value['Minor']    ?? 0;
+            $dataNone[]     = $value['None']     ?? 0;;
         }
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
@@ -1473,9 +1463,13 @@ HTML;
         $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
 
         $res = $this->dump->getSeveritiesNumberBy($list, $type);
-        return $res->toGroupedBy($type, 'severity');
-    }
+        $return = array();
+        foreach($res->toArray() as $value) {
+            $return[$value[$type]][$value['severity']] = $value['count'];
+        }
 
+        return $return;
+    }
 
     protected function getAnalyzerOverview(): array {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
@@ -1699,26 +1693,28 @@ JAVASCRIPTCODE;
     }
 
     protected function generateProcFiles(Section $section): void {
-        $files = '';
+        $files = array();
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
-            $files .= "<tr><td>$file</td></tr>\n";
+            $files []= "<tr><td>$file</td></tr>";
         }
+        $files = implode(PHP_EOL, $files);
 
-        $nonFiles = '';
+        $nonFiles = array();
         $ignoredFiles = $this->datastore->getRow('ignoredFiles');
         foreach($ignoredFiles as $row) {
             if (empty($row['file'])) { continue; }
 
-            $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
+            $nonFiles []= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>";
         }
+        $nonFiles = implode(PHP_EOL, $nonFiles);
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'FILES', $files);
         $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function generateAnalyzersList(Section $section): void {
@@ -1733,7 +1729,7 @@ JAVASCRIPTCODE;
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
 
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     private function generateExternalLib(Section $section): void {
@@ -2404,7 +2400,7 @@ HTML;
     }
 
     private function generateInventoriesClasses(Section $section): void {
-        $this->generateInventories($section, array('Constants/Classnames'), 'List of all defined classes in the code.');
+        $this->generateInventories($section, array('Classes/Classnames'), 'List of all defined classes in the code.');
     }
 
     private function generateInventoriesInterfaces(Section $section): void {
@@ -2464,10 +2460,10 @@ HTML;
     }
 
     private function generateInventories(Section $section, array $analyzer, string $description): void {
-        $results = $this->dump->fetchAnalysers($analyzer);
+       $results = $this->dump->fetchAnalysers($analyzer);
 
        $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
-       $counts = array_map(function ($x) { return $x === 1 ? '&nbsp;' : $x;}, $counts);
+       $counts = array_map(function (string $x) : string { return (int) $x === 1 ? '&nbsp;' : $x;}, $counts);
 
        $groups = array();
        foreach($results->toArray() as $row) {
@@ -2536,7 +2532,9 @@ HTML;
 
         // Get conflicts
         $res = $this->dump->getTraitConflicts();
-        $table = $res->toHash('t1', 't2');
+        foreach($res->toArray() as $row) {
+            $table[$row['t1']][$row['t2']][] = $row['method'];
+        }
 
         // Get trait usage
         $res = $this->dump->getTraitUsage();
@@ -3422,24 +3420,23 @@ HTML
 
         // List of extensions used
         $res = $this->dump->getMethodsBySize();
-        $html = '';
-        $xAxis = array();
+        $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
             if (count($data) < 50) {
-                $data[$value['name']] = $value['size'];
-                $xAxis[] = "'" . $value['shortName'] . "'";
+                $data["'" . $value['shortName'] . "'"] = $value['size'];
             }
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['name'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['size'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Lines', 'data' => $data)),
-                                         'xAxis' => $xAxis));
+        $blocjs = $this->highchart(array('series' => array( (object) array('name' => 'Lines', 'data' => array_values($data))),
+                                         'xAxis'  => array_keys($data)));
 
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
@@ -3935,23 +3932,23 @@ HTML;
     protected function generateIndentationLevelsBreakdown(Section $section) : void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Indentation Levels');
-        if ($res->isEmpty()) { return ; }
+        if ($res->isEmpty()) {
+            return ; 
+        }
 
-        $html = '';
-        $xAxis = array();
+        $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $xAxis[] = "'{$value['key']} level'";
+            $data["'{$value['key']} level'"] = (int) $value['value'];
 
-            $data[$value['key']] = (int) $value['value'];
-
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' levels</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
+        $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $data, $html);
     }
 
     private function generateTypehintSuggestions(Section $section) : void {
@@ -4000,12 +3997,9 @@ HTML;
         if ($res->isEmpty()) { return ; }
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $xAxis[] = "'{$value['key']} level'";
-
-            $data[$value['key']] = (int) $value['value'];
+            $data["'{$value['key']} level'"] = (int) $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' levels</div>
@@ -4014,7 +4008,7 @@ HTML;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $data, $html);
     }
 
     private function generateTypehintMethodsSuggestions() : array {
@@ -4059,12 +4053,9 @@ HTML;
         uasort($res, function ($a, $b): bool { return $a['value'] <=> $b['value']; });
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res as $value) {
-            $xAxis[] = "'" . addslashes($value['key']) . "'";
-
-            $data[$value['key']] = (int) $value['value'];
+            $data["'" . addslashes($value['key']) . "'"] = (int) $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
@@ -4073,7 +4064,7 @@ HTML;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, $xAxis, $data, $html);
+        $this->generateGraphList($section->file, $section->title, $data, $html);
     }
 
     public function highchart(array $data) : string {
