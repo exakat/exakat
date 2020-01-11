@@ -382,8 +382,8 @@ class Emissary extends Reports {
         $favoritesRules = $this->getTopFile($this->rulesets->getRulesetsAnalyzers(array('Favorites')));
         $favoritesList = json_decode($favorites->generate($favoritesRules, Reports::INLINE));
 
-        $donut = array();
         $html = array();
+        $highchart = new Highchart();
 
         foreach($favoritesList as $analyzer => $list) {
             $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
@@ -401,7 +401,8 @@ class Emissary extends Reports {
                  </div>
 ';
                 if ($value > 0) {
-                    $values[] = '{label:"' . $key . '", value:' . ( (int) $value) . '}';
+                    $values[] = array('label' => $key, 
+                                      'value' => (int) $value);
                 }
                 $total += $value;
             }
@@ -420,7 +421,6 @@ class Emissary extends Reports {
             if ($total === 0) {
                 continue;
             }
-            $values = implode(', ', $values);
 
             $html[] = <<<HTML
             <div class="col-md-3">
@@ -444,86 +444,12 @@ HTML;
                 $html[] = '          </div>
           <div class="row">';
             }
-            $donut[] = <<<JAVASCRIPT
-      Morris.Donut({
-        element: 'donut-chart_$name',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
-        data: [$values]
-      });
-
-JAVASCRIPT;
+            
+            $highchart->addDonut('donut-chart_'.$name,  $values);
         }
-        $donut = implode(PHP_EOL, $donut);
 
-        $donut = <<<JAVASCRIPT
-  <script>
-    $(document).ready(function() {
-      $donut
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
+        $donut = (string) $highchart;
 
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-    });
-  </script>
-
-JAVASCRIPT;
         $html = '<div class="row">' . implode(PHP_EOL, $html) . '</div>';
 
         $baseHTML = $this->injectBloc($baseHTML, 'FAVORITES', $html);
@@ -559,234 +485,8 @@ JAVASCRIPT;
         $analyzerHTML = $this->getTopAnalyzers($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
-/*
-        $blocjs = <<<'JAVASCRIPT'
-  <script>
-    $(document).ready(function() {
-      Morris.Donut({
-        element: 'donut-chart_issues',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
-        data: [SCRIPTISSUES]
-      });
-      Morris.Donut({
-        element: 'donut-chart_severity',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
-        data: [SCRIPTSEVERITY]
-      });
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATACRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATANONE]
-          }]
-      });
-
-      $('#container').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAANALYZERLIST]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATAANALYZERCRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAANALYZERMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAANALYZERMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATAANALYZERNONE]
-          }]
-      });
-    });
-  </script>
-JAVASCRIPT;
-*/
-
         $highchart = new Highchart();
-        
+
         $highchart->addDonut('donut-chart_issues',  $issues['script']);
         $highchart->addDonut('donut-chart_severity', $severity['script']);
 
