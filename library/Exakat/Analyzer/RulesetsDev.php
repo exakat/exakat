@@ -47,24 +47,24 @@ class RulesetsDev {
         });
     }
 
-    public function listAllAnalyzer($folder = null) {
+    public function listAllAnalyzer(string $folder = '') : array {
         if (empty($this->all)) {
             return array();
         }
 
         $return = array_merge(...array_values($this->all));
-        if ($folder === null) {
+        if (empty($folder)) {
             return $return;
         }
         
         return preg_grep("#$folder/#", $return);
     }
 
-    public function listAllRulesets($ruleset = null) {
+    public function listAllRulesets(array $ruleset = null) : array {
         return $this->rulesets;
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = null) {
+    public function getRulesetsAnalyzers(array $ruleset = null) : array {
         if (empty($ruleset)) {
             return array();
         }
@@ -83,10 +83,10 @@ class RulesetsDev {
         return preg_grep("#/$name\$#", $this->all['All']);
     }
     
-    public function getRulesetsForAnalyzer($analyzer = null) {
+    public function getRulesetsForAnalyzer(array $analyzer = array()) : array {
         $return = array();
 
-        if ($analyzer === null) {
+        if (empty($analyzer)) {
             $list = $this->all;
             $return = array_fill_keys($list['All'], array());
             unset($list['All']);

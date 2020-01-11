@@ -30,6 +30,7 @@ class Phpcity extends Reports {
     public function _generate(array $analyzerList): string {
         $results = $this->dump->fetchTablePhpcity();
 
+        $return = array();
         foreach($results->toArray() as $row) {
             $row['implements'] = null;
             $row['anonymous'] = null;

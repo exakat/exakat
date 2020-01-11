@@ -69,10 +69,12 @@ class Dependencywheel extends Reports {
             }
             $ids[$row['id']] = $row['name'];
 
-            if (isset($extends[$row['name'] ])) {
-                $extends[$row['name'] ][] = $row['extends'];
-            } else {
-                $extends[$row['name'] ] = array($row['extends']);
+            if ($row['extends'] !== 0) {
+                if (isset($extends[$row['name'] ])) {
+                    $extends[$row['name'] ][] = $row['extends'];
+                } else {
+                    $extends[$row['name'] ] = array($row['extends']);
+                }
             }
 
             $this->count();
@@ -98,7 +100,7 @@ class Dependencywheel extends Reports {
             foreach($extend as $ext) {
                 if ($ext === '') {
                     continue;
-                } elseif ((int) $ext == 0) {
+                } elseif ((int) $ext === 0) {
                     $e = $dict[$ext];
                 } elseif ((int) $ext > 0) {
                     $e = $dict[$ids[$ext]];

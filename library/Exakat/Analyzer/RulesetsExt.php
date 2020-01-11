@@ -45,7 +45,7 @@ class RulesetsExt implements RulesetsInterface {
         }
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = null) {
+    public function getRulesetsAnalyzers(array $ruleset = array()) : array {
         if (empty($this->rulesets)) {
             return array();
         }
@@ -58,7 +58,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getRulesetForAnalyzer($analyzer = null) {
+    public function getRulesetForAnalyzer(string $analyzer = '') : array {
         if (empty($this->rulesets)) {
             return array();
         }
@@ -71,7 +71,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getRulesetsForAnalyzer($analyzer = null) {
+    public function getRulesetsForAnalyzer(array $analyzer = array()) : array {
         $return = array(array());
         foreach($this->rulesets as $extension) {
             $return[] = $extension->getRulesetsForAnalyzer($analyzer);
@@ -80,7 +80,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getSeverities() {
+    public function getSeverities() : array {
         $return = array(array());
 
         foreach($this->all as $name => $list) {
@@ -98,7 +98,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getTimesToFix() {
+    public function getTimesToFix() : array {
         $return = array(array());
 
         foreach($this->all as $name => $list) {
@@ -121,7 +121,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getFrequences() {
+    public function getFrequences() : array {
         $return = array(array());
         foreach($this->rulesets as $extension) {
             $return[] = $extension->getFrequences();
@@ -130,20 +130,20 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
     
-    public function listAllAnalyzer($folder = null) {
+    public function listAllAnalyzer(string $folder = '') : array {
         if (empty($this->all)) {
             return array();
         }
 
         $return = array_merge(...array_values($this->all));
-        if ($folder === null) {
+        if (empty($folder)) {
             return $return;
         }
-        
+
         return preg_grep("#$folder/#", $return);
     }
 
-    public function listAllRulesets($ruleset = null) {
+    public function listAllRulesets(array $ruleset = array()) : array {
         if (empty($this->rulesets)) {
             return array();
         }
@@ -157,7 +157,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getClass($name) {
+    public function getClass(string $name) : string {
         // accepted names :
         // PHP full name : Analyzer\\Type\\Class
         // PHP short name : Type\\Class
@@ -176,11 +176,11 @@ class RulesetsExt implements RulesetsInterface {
             $found = $this->getSuggestionClass($name);
 
             if (empty($found)) {
-                return false; // no class found
+                return ''; // no class found
             }
             
             if (count($found) > 1) {
-                return false;
+                return '';
             }
             
             $class = $found[0];
@@ -189,7 +189,7 @@ class RulesetsExt implements RulesetsInterface {
         }
 
         if (!class_exists($class)) {
-            return false;
+            return '';
         }
 
         $actualClassName = new \ReflectionClass($class);
@@ -197,11 +197,11 @@ class RulesetsExt implements RulesetsInterface {
             return $class;
         } else {
             // problems with the case
-            return false;
+            return '';
         }
     }
 
-    public function getSuggestionRuleset(array $rulesets) {
+    public function getSuggestionRuleset(array $rulesets = array()) : array {
         $list = $this->listAllRulesets();
         
         return array_filter($list, function ($c) use ($rulesets) {
@@ -215,7 +215,7 @@ class RulesetsExt implements RulesetsInterface {
         });
     }
     
-    public function getSuggestionClass($name) {
+    public function getSuggestionClass(string $name): array {
         if (empty($this->all)) {
             return array();
         }
@@ -227,7 +227,7 @@ class RulesetsExt implements RulesetsInterface {
         });
     }
 
-    public function getAnalyzerInExtension($name) {
+    public function getAnalyzerInExtension(string $name) : array {
         $return = array(array());
         
         foreach($this->all as $ext) {

@@ -68,13 +68,15 @@ abstract class Reports {
             $this->rulesets  = exakat('rulesets');
 
             // Default analyzers
-            $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->project_results),
+            $analyzers = array_merge($this->rulesets->getRulesetsAnalyzers($this->config->project_results ?? array()),
                                      array_keys($this->config->rulesets));
             $this->themesList = makeList($analyzers);
         }
     }
 
-    protected function _generate(array $analyzerList): string {}
+    protected function _generate(array $analyzerList): string {
+        return '';
+    }
 
     public static function getReportClass(string $report): string {
         $report = ucfirst(strtolower($report));

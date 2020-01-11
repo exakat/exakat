@@ -98,29 +98,6 @@ class Ambassador extends Emissary {
                      'Custom',
                      );
     }
-
-    protected function generateUsedMagic(Section $section): void {
-        $results = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
-        $results->load();
-
-        $expr = $results->getColumn('fullcode');
-        $expr = array_map(function ($x) { return trim($x, '{}');}, $expr);
-        $counts = array_count_values($expr);
-
-        $expressions = '';
-        foreach($results->toArray() as $row) {
-            $row['fullcode'] = trim($row['fullcode'], '{}');
-            $fullcode = PHPSyntax($row['fullcode']);
-            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>$fullcode</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage($section->source);
-        $html = $this->injectBloc($html, 'TABLE', $expressions);
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'List of magic properties used in the code');
-        $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->file, $html);
-    }
-
 }
 
 ?>

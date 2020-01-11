@@ -104,9 +104,14 @@ class Codeflower extends Reports {
         }
 
         foreach($classes as $id => $extends) {
-            if (!is_int($id)) { continue; }
+            if (!is_int($id)) { 
+                continue; 
+            }
 
             foreach($classes as &$extends2) {
+                if (!isset($classesId[$id])) {
+                    continue;
+                }
                 if (isset($extends2[$classesId[$id]])) {
                     $extends2[$classesId[$id]] = $extends;
                     unset($classes[$id]);

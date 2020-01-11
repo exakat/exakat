@@ -479,7 +479,9 @@ SQL;
     
     public function getCitBySize(string $type = 'class') : Results {
         $query = <<<SQL
-SELECT namespaces.namespace || '\\' || name AS name, name AS shortName, (cit.end - cit.begin) AS size 
+SELECT namespaces.namespace || name AS name, 
+       name AS shortName, 
+       (cit.end - cit.begin) AS size 
     FROM cit 
     JOIN namespaces 
         ON namespaces.id = cit.namespaceId

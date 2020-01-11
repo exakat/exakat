@@ -47,13 +47,13 @@ class RulesetsMain implements RulesetsInterface {
         }
     }
     
-    public function getRulesetsAnalyzers(?array $ruleset = null) : array {
+    public function getRulesetsAnalyzers(array $ruleset = array()) : array {
         // Main installation
-        if ($ruleset === null) {
+        if (empty($ruleset)) {
             // Default is ALL of ruleset
             $where = 'WHERE a.folder != "Common" ';
         } else {
-            $ruleset = array_map(function (string $x)  : string { return trim($x, '"'); }, $ruleset);
+            $ruleset = array_map(function (string $x) : string { return trim($x, '"'); }, $ruleset);
             $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($ruleset) . ')';
         }
 
@@ -75,7 +75,7 @@ SQL;
         return $return;
     }
 
-    public function getRulesetForAnalyzer($analyzer) : array {
+    public function getRulesetForAnalyzer(string $analyzer = '') : array {
         list($vendor, $class) = explode('/', $analyzer);
         
         $query = <<<SQL
@@ -98,15 +98,11 @@ SQL;
         return $return;
     }
 
-    public function getRulesetsForAnalyzer($list = null) : array {
-        if ($list === null) {
+    public function getRulesetsForAnalyzer(array $list = array()) : array {
+        if (empty($list)) {
             $where = '';
-        } elseif (is_string($list)) {
-            $where = " WHERE c.name = \"$list\" ";
         } elseif (is_array($list)) {
             $where = ' WHERE c.name IN (' . makeList($list) . ') ';
-        } else {
-            assert(false, 'Wrong type for list : ' . gettype($list) . ' in ' . __METHOD__ . "\n");
         }
 
         $query = <<<SQL
@@ -128,7 +124,7 @@ SQL;
         return $return;
     }
 
-    public function getSeverities() {
+    public function getSeverities() : array {
         $query = "SELECT folder||'/'||name AS analyzer, severity FROM analyzers";
 
         $return = array();
@@ -140,7 +136,7 @@ SQL;
         return $return;
     }
 
-    public function getTimesToFix() {
+    public function getTimesToFix() : array  {
         $query = "SELECT folder||'/'||name AS analyzer, timetofix FROM analyzers";
 
         $return = array();
@@ -152,7 +148,7 @@ SQL;
         return $return;
     }
 
-    public function getFrequences() {
+    public function getFrequences() : array {
         $query = "SELECT analyzers.folder||'/'||analyzers.name AS analyzer, frequence / 100 AS frequence 
             FROM  analyzers
             LEFT JOIN analyzers_popularity 
@@ -167,12 +163,12 @@ SQL;
         return $return;
     }
     
-    public function listAllAnalyzer($folder = null) {
+    public function listAllAnalyzer(string $folder = '') : array {
         $query = <<<'SQL'
 SELECT folder || '\\' || name AS name FROM analyzers
 
 SQL;
-        if ($folder === null) {
+        if (empty($folder)) {
             $stmt = self::$sqlite->prepare($query);
         } else {
             $query .= ' WHERE folder=:folder';
@@ -190,7 +186,7 @@ SQL;
         return $return;
     }
 
-    public function listAllRulesets($ruleset = null) {
+    public function listAllRulesets(array $ruleset = array()) : array {
         $query = <<<'SQL'
 SELECT name AS name FROM categories
 
@@ -206,7 +202,7 @@ SQL;
         return $return;
     }
 
-    public function getClass(string $name) {
+    public function getClass(string $name) : string {
         // accepted names :
         // PHP full name : Analyzer\\Type\\Class
         // PHP short name : Type\\Class
@@ -225,11 +221,11 @@ SQL;
             $found = $this->getSuggestionClass($name);
 
             if (empty($found)) {
-                return false; // no class found
+                return ''; // no class found
             }
             
             if (count($found) > 1) {
-                return false;
+                return '';
             }
             
             $class = array_pop($found);
@@ -238,7 +234,7 @@ SQL;
         }
 
         if (!class_exists($class)) {
-            return false;
+            return '';
         }
 
         $actualClassName = new \ReflectionClass($class);
@@ -246,11 +242,11 @@ SQL;
             return $class;
         } else {
             // problems with the case
-            return false;
+            return '';
         }
     }
 
-    public function getSuggestionRuleset(array $rulesets) {
+    public function getSuggestionRuleset(array $rulesets = array()) : array {
         $list = $this->listAllRulesets();
 
         return array_filter($list, function ($c) use ($rulesets) {
@@ -264,7 +260,7 @@ SQL;
         });
     }
     
-    public function getSuggestionClass($name) {
+    public function getSuggestionClass(string $name): array {
         return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
             $l = levenshtein($c, $name);
 
@@ -272,7 +268,7 @@ SQL;
         });
     }
 
-    public function getAnalyzerInExtension($name) {
+    public function getAnalyzerInExtension(string $name) : array {
         return array();
     }
 

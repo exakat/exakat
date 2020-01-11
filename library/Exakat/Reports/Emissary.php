@@ -577,7 +577,7 @@ HTML;
         // List of php functions used
         $res = $this->dump->fetchTable('phpStructures');
         $res->filter(function (array $x): bool { return $x['type'] === 'function'; });
-        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
+        $res->order(function (array $a, array $b): int { return $b['count'] <=> $a['count']; });
 
         $html = array();
         $data = array();
@@ -591,7 +591,7 @@ HTML;
         }
         $html = implode(PHP_EOL, $html);
 
-        $this->generateGraphList($section->file, $section->title, 'Functions', $data, $html);
+        $this->generateGraphList($section->file, $section->title, 'PHP Native Functions', $data, $html);
     }
 
     protected function generatePHPConstantsBreakdown(Section $section): void {
@@ -1269,13 +1269,13 @@ JAVASCRIPTCODE;
         $analyzers = array();
 
         foreach($this->rulesets->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzers []= '<tr><td>' . $this->docs->getDocs($analyzer, 'name') . "</td></tr>\n";
+            $analyzers []= '<tr><td>' . $this->docs->getDocs($analyzer, 'name') . '</td><td>' . $analyzer . "</td></tr>\n";
         }
         $analyzers = implode(PHP_EOL, $analyzers);
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
-        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'TITLE',     $section->title);
 
         $this->putBasedPage($section->file, $html);
     }
@@ -2938,12 +2938,10 @@ HTML
         $res = $this->dump->getCitBySize();
 
         $html = array();
-        $xAxis = array();
         $data = array();
         foreach ($res->toArray() as $value) {
             if (count($data) < 50) {
                 $data[$value['name']] = $value['size'];
-                $xAxis[] = "'" . $value['shortName'] . "'";
             }
 
             $html []= '<div class="clearfix">
@@ -3500,7 +3498,7 @@ HTML;
         $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $data["'{$value['key']} level'"] = (int) $value['value'];
+            $data[$value['key']. ' level '] = (int) $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' levels</div>
@@ -3631,6 +3629,31 @@ HTML;
 
         $this->generateGraphList($section->file, $section->title, 'Foreach names', $data, $html);
     }
+
+    protected function generateUsedMagic(Section $section): void {
+        $results = $this->dump->fetchAnalysers(array('Classes/MagicMethod',
+                                                     'Classes/MagicProperties',
+                                                     ));
+        $results->load();
+
+        $expr = $results->getColumn('fullcode');
+        $expr = array_map(function ($x) { return trim($x, '{}');}, $expr);
+        $counts = array_count_values($expr);
+
+        $expressions = '';
+        foreach($results->toArray() as $row) {
+            $row['fullcode'] = trim($row['fullcode'], '{}');
+            $fullcode = PHPSyntax($row['fullcode']);
+            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>$fullcode</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TABLE', $expressions);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'List of magic properties used in the code');
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $html);
+    }
+
 }
 
 ?>

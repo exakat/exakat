@@ -357,8 +357,8 @@ inventories:
             method: generateFileDependencies
         variables_confusing:
             title: Confusing Variables
-            file: empty
-            source: variables_confusing
+            source: empty
+            file: variables_confusing
             method: generateConfusingVariables
         inventories_constants:
             title: Constants Inventory

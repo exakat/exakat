@@ -89,20 +89,20 @@ class Simplehtml extends Reports {
         }
 
         $analysis = $this->dump->fetchAnalysersCounts($list);
-        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function ($x) { return $x >= 1;});
+        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function (int $x) : bool { return $x >= 1;});
 
         $text = array();
         $titleCache = array();
-        foreach($analysis as $row) {
-            if (!isset($titleCache[$row['analyzer']])) {
-                $titleCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'name');
+        foreach($analysis as $analyzer => $count) {
+            if (!isset($titleCache[$analyzer])) {
+                $titleCache[$analyzer] = $this->docs->getDocs($analyzer, 'name');
             }
 
             $text []= <<<HTML
 <tr>
-    <td class="SUMM_DESC">{$titleCache[$row['analyzer']]}</td>
-    <td class="Q">{$row['count']}</td>
-    <td><center><input type="checkbox" onClick="ToggleDisplay(this,'{$this->makeId($row['analyzer'])}');" checked/></center></td>
+    <td class="SUMM_DESC">{$titleCache[$analyzer]}</td>
+    <td class="Q">{$count}</td>
+    <td><center><input type="checkbox" onClick="ToggleDisplay(this,'{$this->makeId($analyzer)}');" checked/></center></td>
 </tr>
 
 HTML;

@@ -24,27 +24,27 @@
 namespace Exakat\Analyzer;
 
 interface RulesetsInterface {
-    public function getRulesetsAnalyzers(array $ruleset = null);
+    public function getRulesetsAnalyzers(array $ruleset = array()) : array;
 
-    public function getRulesetForAnalyzer($analyzer);
+    public function getRulesetForAnalyzer(string $analyzer = '') : array;
 
-    public function getRulesetsForAnalyzer($list = null);
+    public function getRulesetsForAnalyzer(array $list = array()) : array;
 
-    public function getSeverities();
+    public function getSeverities() : array;
 
-    public function getTimesToFix();
+    public function getTimesToFix() : array;
 
-    public function getFrequences();
+    public function getFrequences() : array;
 
-    public function listAllAnalyzer($folder = null);
+    public function listAllAnalyzer(string $folder = '') : array;
 
-    public function listAllRulesets($ruleset = null);
+    public function listAllRulesets(array $ruleset = array()) : array;
 
-    public function getSuggestionRuleset(array $ruleset);
+    public function getSuggestionRuleset(array $ruleset = array()) : array;
 
-    public function getSuggestionClass($name);
+    public function getSuggestionClass(string $name) : array;
 
-    public function getAnalyzerInExtension($name);
+    public function getAnalyzerInExtension(string $name) : array;
 
 }
 ?>
