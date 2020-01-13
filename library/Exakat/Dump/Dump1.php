@@ -549,7 +549,41 @@ SQL;
     }
     
     public function getCitTree(string $type = 'class') : Results {
-        $query = <<<SQL
+        if ($type === 'trait') {
+            // Missing when raw FQN is used
+            $query = <<<SQL
+    SELECT ns.namespace || '\' || cit.name AS child, 
+           ttu.implements AS parent
+        FROM cit 
+        JOIN
+          cit_implements AS ttu 
+          ON ttu.implementing = cit.id AND
+             ttu.type = 'use' 
+        JOIN namespaces ns
+            ON cit.namespaceId = ns.id
+        WHERE cit.type="trait" AND
+             ttu.implements + 0 = 0
+             
+UNION
+
+    SELECT ns.namespace || '\' || cit.name AS child, 
+           ns2.namespace || '\' || cit2.name AS parent 
+        FROM cit 
+        JOIN
+          cit_implements AS ttu 
+          ON ttu.implementing = cit.id AND
+             ttu.type = 'use'
+        JOIN cit cit2 
+            ON ttu.implementing = cit.id
+        JOIN namespaces ns
+            ON cit.namespaceId = ns.id
+        JOIN namespaces ns2
+            ON cit2.namespaceId = ns2.id
+        WHERE cit.type="trait" AND
+              cit2.type="trait"
+SQL;
+        } else {
+            $query = <<<SQL
 SELECT ns.namespace || '\' || cit.name AS child, 
        ns2.namespace || '\' || cit2.name AS parent 
     FROM cit 
@@ -562,6 +596,7 @@ SELECT ns.namespace || '\' || cit.name AS child,
     WHERE cit.type="$type" AND
           cit2.type="$type"
 SQL;
+        }
         $result = $this->sqlite->query($query);
 
         return new Results($result);

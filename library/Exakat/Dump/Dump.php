@@ -33,6 +33,7 @@ class Dump {
             }
 
             if (file_exists($this->sqliteFileFinal)) {
+                print "Reuse\n";
                 $this->reuse();
             } else {
                 $this->init();

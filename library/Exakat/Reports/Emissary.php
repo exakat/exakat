@@ -2170,7 +2170,7 @@ HTML;
                 $list[$parent] = array();
             }
 
-            $list[$parent][] = $row['name'];
+            $list[$parent][] = $row['child'];
         }
 
         if (empty($list)) {
@@ -2195,7 +2195,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    private function extends2ul(string $root, array $paths, int $level = 0): array {
+    private function extends2ul(string $root, array $paths, int $level = 0): string {
         static $done = array();
 
         if ($level === 0) {
@@ -2218,6 +2218,7 @@ HTML;
             }
         }
         $return = "<li>$root<ul>" . implode('', $return) . "</ul></li>\n";
+
         return $return;
     }
 

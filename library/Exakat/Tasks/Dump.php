@@ -461,7 +461,6 @@ GREMLIN
 
             ++$total;
         }
-
         display("$total classes\n");
 
         // Interfaces
@@ -488,6 +487,7 @@ g.V().hasLabel("Interface")
          'extends':extendList,
          ];
 }
+
 GREMLIN;
         $res = $this->gremlin->query($query);
 
@@ -569,8 +569,17 @@ GREMLIN;
         display("$total traits\n");
 
         if (!empty($cit)) {
-            $query = array();
+            foreach($cit as &$aCit) {
+                if (empty($aCit['extends'])) {
+                    continue;
+                }
 
+                $citIds = preg_grep('/^\d+' . preg_quote($aCit['extends'], '/') . '$/i', array_keys($citId));
+
+                if (!empty($citIds)) {
+                    $aCit['extends'] = intval($citId[array_pop($citIds)]);
+                }
+            }
             $this->storeToDumpArray('cit', $cit);
 
             $toDump = array();
@@ -597,7 +606,7 @@ GREMLIN;
                     $citIds = preg_grep('/^\d+\\\\' . addslashes(mb_strtolower($uses)) . '$/', array_keys($citId));
 
                     if (empty($citIds)) {
-                        $toDump[] = array('', $citId[$id], $implements, 'use');
+                        $toDump[] = array('', $citId[$id], $uses, 'use');
                     } else {
                         // Here, we are missing the one that are not found
                         foreach($citIds as $c) {
@@ -1040,7 +1049,7 @@ GREMLIN
         foreach($result->toArray() as $row) {
             $toDump[] = array('',
                               $row['name'],
-                              $namespacesId[$row['namespace']],
+                              $namespacesId[$row['namespace']] ?? 1,
                               $this->files[$row['file']],
                               $row['value'],
                               $row['type'],
@@ -1217,8 +1226,9 @@ GREMLIN
 
         $this->dump->storeInTable('namespaces', $namespaces);
 
-        $namespacesId = $this->dump->fetchTable('namespaces')->toHash('namespace', 'id');
-        return $namespacesId;
+        $namespacesId = $this->dump->fetchTable('namespaces');
+        $namespacesId->map(function (array $x) : array { $x['namespace'] = mb_strtolower($x['namespace']); return $x; });
+        return $namespacesId->toHash('namespace', 'id');
     }
 
     private function collectFiles(): void {
@@ -2149,6 +2159,7 @@ GREMLIN;
         $add = array();
         foreach($rulesets as $ruleset) {
             $analyzerList = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
+
             if (empty(array_diff($analyzerList, $analyzers))) {
                 $add[] = array('', $ruleset);
             }
