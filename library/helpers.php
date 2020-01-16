@@ -24,6 +24,7 @@ declare(strict_types=1);
 
 use Exakat\Exceptions\NoSuchDir;
 use Exakat\Container;
+use Exakat\Exception\WrongParameterType;
 
 const INI_PROCESS_SECTIONS      = true;
 const INI_DONT_PROCESS_SECTIONS = false;
@@ -443,8 +444,9 @@ function makeFullNsPath($functions, bool $constant = \FNP_NOT_CONSTANT) {
     } elseif (is_array($functions)) {
         $r = array_map($cb, $functions);
     } else {
-        throw new \Exception('Function is of the wrong type : ' . var_export($functions));
+        throw new WrongParameterType(gettype($functions), __METHOD__);
     }
+    
     return $r;
 }
 

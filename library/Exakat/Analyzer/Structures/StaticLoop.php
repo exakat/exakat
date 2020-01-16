@@ -102,7 +102,7 @@ class StaticLoop extends Analyzer {
         // TODO : same for references
     }
     
-    private function whereNonDeterminist() {
+    private function whereNonDeterminist() : self {
         $nonDeterminist = $this->methods->getNonDeterministFunctions();
         $nonDeterminist = makeFullnspath($nonDeterminist);
 
@@ -119,7 +119,7 @@ class StaticLoop extends Analyzer {
         return $this;
     }
 
-    private function checkBlindVariable() {
+    private function checkBlindVariable() : self {
         $this->not(
             $this->side()
                  ->atomInsideNoDefinition(array('Variable', 'Staticproperty', 'Member', 'Array', 'Variableobject', 'Variablearray'))
@@ -129,7 +129,7 @@ class StaticLoop extends Analyzer {
         return $this;
     }
     
-    private function collectVariable() {
+    private function collectVariable() : self {
         $this->filter(
             $this->side()
                  ->initVariable('blind', '[]')

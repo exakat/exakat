@@ -1293,7 +1293,7 @@ class Load extends Tasks {
             $this->addLink($fn, $returnType, 'RETURNTYPE');
         } else {
             $void = $this->addAtomVoid();
-            $this->addLink($function, $void, 'RETURNTYPE');
+            $this->addLink($fn, $void, 'RETURNTYPE');
         }
 
         ++$this->id; // skip =>
@@ -6008,7 +6008,7 @@ class Load extends Tasks {
         */
     }
 
-    private function processDefineAsClassalias(array $argumentsId): void {
+    private function processDefineAsClassalias(int $argumentsId): void {
         if (empty($this->argumentsId[0]->noDelimiter) ||
             empty($this->argumentsId[1]->noDelimiter)   ) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all

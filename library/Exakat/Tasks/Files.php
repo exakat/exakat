@@ -78,7 +78,6 @@ class Files extends Tasks {
         }
 
         if (!empty($missing)) {
-            print_r($missing);
             throw new MissingFile($missing);
         }
 
