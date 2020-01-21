@@ -1771,12 +1771,11 @@ GREMLIN;
     private function storeToTableResults() {
         ++$this->queryId;
         
+        $dumpQueries = array();
         // table always created, may be empty
-        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
-        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
         if ($this->lastAnalyzerTable !== $this->analyzerTable) {
-            $sqlite->query("DROP TABLE IF EXISTS {$this->analyzerTable}");
-            $sqlite->query($this->analyzerSQLTable);
+            $dumpQueries[] = "DROP TABLE IF EXISTS {$this->analyzerTable}";
+            $dumpQueries[] = $this->analyzerSQLTable;
             
             $this->lastAnalyzerTable = $this->analyzerTable;
         }
@@ -1807,14 +1806,19 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($c as $row) {
-            $row = array_map(array($sqlite, 'escapeString'), $row);
+            $row = array_map(array('\\Sqlite3', 'escapeString'), $row);
             $valuesSQL[] = "(NULL, '".implode("', '", $row)."') \n";
         }
 
-
-        $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $valuesSQL);
-        $sqlite->query($query);
-        unset($sqlite);
+        $chunks = array_chunk($valuesSQL, 490);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
+            $dumpQueries[] = $query;
+        }
+        
+        if (count($dumpQueries) >= 3) {
+            $this->prepareForDump($dumpQueries);
+        }
 
         return count($valuesSQL);
     }
@@ -1825,18 +1829,22 @@ GREMLIN
         $this->processedCount += count($this->analyzedValues);
         $this->rowCount       += count($this->analyzedValues);
 
-        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
-        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
         $valuesSQL = array();
         foreach($this->analyzedValues as $key => $value) {
-            $valuesSQL[] = "('{$this->analyzerName}', '".$sqlite->escapeString($key)."', '".$sqlite->escapeString($value)."') \n";
+            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString($key)."', '".\Sqlite3::escapeString($value)."') \n";
         }
 
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
-        $sqlite->query($query);
-        unset($sqlite);
+        $chunks = array_chunk($valuesSQL, 490);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
+            $dumpQueries[] = $query;
+        }
+
+        if (count($dumpQueries) >= 2) {
+            $this->prepareForDump($dumpQueries);
+        }
 
         return count($valuesSQL);
     }
@@ -1847,18 +1855,22 @@ GREMLIN
         $this->processedCount += count($this->analyzedValues);
         $this->rowCount       += count($this->analyzedValues);
 
-        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
-        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
         $valuesSQL = array();
         foreach($this->analyzedValues as list($key, $value)) {
-            $valuesSQL[] = "('{$this->analyzerName}', '".$sqlite->escapeString($key)."', '".$sqlite->escapeString($value)."') \n";
+            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString($key)."', '".\Sqlite3::escapeString($value)."') \n";
         }
 
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
-        $sqlite->query($query);
-        unset($sqlite);
+        $chunks = array_chunk($valuesSQL, 490);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
+            $dumpQueries[] = $query;
+        }
+
+        if (count($dumpQueries) >= 2) {
+            $this->prepareForDump($dumpQueries);
+        }
 
         return count($valuesSQL);
     }
@@ -1898,12 +1910,17 @@ GREMLIN
             $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
         }
 
-        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
-        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
-        $sqlite->query($query);
-        unset($sqlite);
+        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+
+        $chunks = array_chunk($valuesSQL, 490);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
+            $dumpQueries[] = $query;
+        }
+
+        if (count($dumpQueries) >= 2) {
+            $this->prepareForDump($dumpQueries);
+        }
 
         return count($valuesSQL);
     }
@@ -1924,17 +1941,18 @@ GREMLIN
         $this->rowCount       += count($result->toArray());
 
         $valuesSQL = array();
+        $chunk = 0;
         foreach($result->toArray() as $row) {
             list($name, $count) = array_values($row);
             $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
         }
 
-        $sqlite = new \Sqlite3($this->config->dump, \SQLITE3_OPEN_READWRITE);
-        $sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        $sqlite->query("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
-        $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $valuesSQL);
-        $sqlite->query($query);
-        unset($sqlite);
+        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+        $chunks = array_chunk($valuesSQL, 490);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
+            $dumpQueries[] = $query;
+        }
 
         return count($valuesSQL);
     }
@@ -2083,7 +2101,7 @@ GREMLIN
         return $cache[$fullpath];
     }
     
-    protected function load($file, $property = null) {
+    protected function load(string $file, $property = null) {
         $inifile = "{$this->config->dir_root}/data/$file.ini";
         if (file_exists($inifile)) {
             $ini = $this->loadIni("$file.ini", $property);
@@ -2108,9 +2126,9 @@ GREMLIN
         return $className;
     }
     
-    protected function loadCode(string $path) {
+    protected function loadCode(string $path) : string {
         if (file_exists($this->config->code_dir.$path)) {
-            return file_get_contents($this->config->code_dir.$path);
+            return file_get_contents($this->config->code_dir.$path) ?? '';
         } else {
             return '';
         }
@@ -2127,6 +2145,15 @@ GREMLIN
         }
 
         return $this;
+    }
+    
+    public function prepareForDump(array $dumpQueries) : void {
+        if (empty($dumpQueries)) {
+            return;
+        }
+        $id = dechex(random_int(0, \PHP_INT_MAX));
+        
+        file_put_contents($this->config->tmp_dir.'/dump-'.$id.'.php', '<?php $queries = '.var_export($dumpQueries, true).'; ?>');
     }
 }
 ?>

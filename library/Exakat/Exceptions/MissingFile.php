@@ -24,7 +24,7 @@
 namespace Exakat\Exceptions;
 
 class MissingFile extends \Exception {
-    public function __construct($missing = array(), $code = 0, \Exception $previous = null) {
+    public function __construct(array $missing = array(), int $code = 0, \Exception $previous = null) {
 
         $c = count($missing);
         if ($c > 3) {

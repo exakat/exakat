@@ -73,20 +73,29 @@ SQL;
 
     public function save(): void {
         if (!empty($this->calls)) {
-            $query = 'INSERT INTO calls VALUES ' . implode(', ', $this->calls);
-            $this->callsSqlite->query($query);
+            $chunks = array_chunk($this->calls, 490);
+            foreach($chunks as $chunk) {
+                $query = 'INSERT INTO calls VALUES ' . implode(', ', $chunk);
+                $this->callsSqlite->query($query);
+            }
             $this->calls = array();
         }
 
         if (!empty($this->definitions)) {
-            $query = 'INSERT INTO definitions VALUES ' . implode(', ', $this->definitions);
-            $this->callsSqlite->query($query);
+            $chunks = array_chunk($this->definitions, 490);
+            foreach($chunks as $chunk) {
+                $query = 'INSERT INTO calls VALUES ' . implode(', ', $chunk);
+                $this->callsSqlite->query($query);
+            }
             $this->definitions = array();
         }
 
         if (!empty($this->globals)) {
-            $query = 'INSERT INTO globals VALUES ' . implode(', ', $this->globals);
-            $this->callsSqlite->query($query);
+            $chunks = array_chunk($this->globals, 490);
+            foreach($chunks as $chunk) {
+                $query = 'INSERT INTO globals VALUES ' . implode(', ', $chunk);
+                $this->callsSqlite->query($query);
+            }
             $this->globals = array();
         }
     }

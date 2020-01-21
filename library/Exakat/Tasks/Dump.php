@@ -97,6 +97,8 @@ class Dump extends Tasks {
 
             $this->collect();
         }
+        
+        $this->loadSqlDump();
 
         $counts = array();
         $datastore = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
@@ -2474,6 +2476,16 @@ GREMLIN
 
     private function storeToDumpArray(string $table, array $result): int {
         return $this->dump->storeInTable($table, $result);
+    }
+    
+    private function loadSqlDump() : void {
+        $dumps = glob($this->config->tmp_dir.'/dump-*.php');
+
+        foreach($dumps as $dump) {
+            include $dump;
+            $this->dump->storeQueries($queries);
+            unlink($dump);
+        }
     }
 }
 

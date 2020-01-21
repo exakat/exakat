@@ -6008,7 +6008,7 @@ class Load extends Tasks {
         */
     }
 
-    private function processDefineAsClassalias(int $argumentsId): void {
+    private function processDefineAsClassalias(array $argumentsId): void {
         if (empty($this->argumentsId[0]->noDelimiter) ||
             empty($this->argumentsId[1]->noDelimiter)   ) {
             $this->argumentsId[0]->fullnspath = '\\'; // cancels it all

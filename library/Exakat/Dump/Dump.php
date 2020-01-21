@@ -463,13 +463,25 @@ SQL;
             // str_replace is an ugly hack for id, which should be null.
             ++$total;
         }
+        
 
         if (!empty($values)) {
-            $query = 'INSERT INTO '.$table.' VALUES ' . implode(', ', $values);
-            $r = $this->sqlite->query($query);
+            $chunks = array_chunk($values, 490);
+            foreach($chunks as $chunk) {
+                $query = 'INSERT INTO '.$table.' VALUES ' . implode(', ', $chunk);
+                $this->sqlite->query($query);
+            }
         }
 
         return count($values);
+    }
+
+    function storeQueries(array $queries) : int {
+        foreach($queries as $query) {
+            $this->sqlite->query($query);
+        }
+
+        return count($queries);
     }
 }
 
