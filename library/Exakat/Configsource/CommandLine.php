@@ -40,6 +40,8 @@ class CommandLine extends Config {
                                  '-json'      => 'json',
                                  '-array'     => 'array',
                                  '-dot'       => 'dot',
+                                 
+                                 '-debug'     => 'debug',
 
                                  '-nodep'     => 'noDependencies',
                                  '-norefresh' => 'noRefresh',

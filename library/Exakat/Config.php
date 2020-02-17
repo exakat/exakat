@@ -72,10 +72,6 @@ class Config {
             $this->dir_root      = phar::running();
             $this->ext_root      = substr(dirname(phar::running()) . '/ext', 5);
 
-            assert_options(ASSERT_ACTIVE, 0);
-
-            error_reporting(0);
-            ini_set('display_errors', 0);
             if (!file_exists("{$this->projects_root}/projects")) {
                 mkdir("{$this->projects_root}/projects", 0755);
             }
@@ -107,7 +103,7 @@ class Config {
         if ($file = $this->exakatConfig->loadConfig(null)) {
             $this->configFiles[] = $file;
         }
-        
+
         // then read the config from the commandline (if any)
         $this->commandLineConfig = new CommandLine();
         $this->commandLineConfig->loadConfig($argv);
@@ -154,7 +150,18 @@ class Config {
                                      $this->dotExakatYamlConfig->toArray(),
                                      $this->commandLineConfig->toArray()
                                      );
+        unset($this->options['project_themes']);
         $this->options['configFiles'] = $this->configFiles;
+
+        if ($this->options['debug'] === true) {
+            print "Debug mode\n";
+            assert_options(ASSERT_ACTIVE, 1);
+            assert_options(ASSERT_BAIL, 1);
+
+            error_reporting(E_ALL);
+            ini_set('display_errors', 1);
+        }
+
 
         //program has precedence over rulesets
         if (isset($this->commandLineConfig->toArray()['program'])) {

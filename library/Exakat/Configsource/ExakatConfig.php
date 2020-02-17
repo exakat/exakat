@@ -76,6 +76,14 @@ class ExakatConfig extends Config {
             }
         }
 
+        // Aliasing project_themes into rulesets
+        if (isset($inis['project_themes'])) {
+            print "Rename project_themes in project_rulesets, in your config/exakat.ini file\n";
+
+            if (empty($inis['project_rulesets'])) {
+                $inis['project_rulesets'] = $inis['project_themes'];
+            }
+        }
         $this->config = $inis;
 
         // Validation

@@ -45,7 +45,8 @@ class DefaultConfig extends Config {
                                'table'          => false,
                                'text'           => false,
                                'output'         => false,
-                               
+                               'debug'          => false,
+
                                'collect'        => false,
  
                                'git'            => true,
