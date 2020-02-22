@@ -81,8 +81,17 @@ class Initproject extends Tasks {
             rmdirRecursive($tmpPath);
         }
 
-        mkdir($tmpPath, 0755);
-        mkdir("{$tmpPath}/log/", 0755);
+        if (!file_exists("{$this->config->projects_root}/projects/")) {
+            mkdir("{$this->config->projects_root}/projects/", 0755);
+        }
+        
+        if (!mkdir($tmpPath, 0755)) {
+            die("Could not create project directory '$project'");
+        }
+
+        if (!mkdir("{$tmpPath}/log/", 0755)) {
+            die("Could not finalyze project directory '$project'");
+        }
 
         $repositoryBranch    = '';
         $repositoryTag       = '';
