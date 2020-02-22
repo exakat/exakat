@@ -1320,6 +1320,8 @@ class Load extends Tasks {
 
         $fn->token    = $this->getToken($this->tokens[$current][0]);
         $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') => ' . $block->fullcode;
+        $fn->fullnspath = $this->makeAnonymous('arrowfunction');
+        $fn->aliased    = self::NOT_ALIASED;
 
         $this->pushExpression($fn);
         $this->checkExpression();
@@ -6325,8 +6327,8 @@ class Load extends Tasks {
     private function makeAnonymous($type = 'class') {
         static $anonymous = 'a';
 
-        if (!in_array($type, array('class', 'function'), \STRICT_COMPARISON)) {
-            throw new LoadError('Classes and Functions are the only anonymous');
+        if (!in_array($type, array('class', 'function', 'arrowfunction'), \STRICT_COMPARISON)) {
+            throw new LoadError('Classes, Functions and ArrowFunctions are the only anonymous');
         }
 
         ++$anonymous;
