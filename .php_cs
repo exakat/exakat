@@ -1,13 +1,17 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
+/*
     ->in('./library/Exakat/Analyzer')
-    ->in('./library/Exakat/Tasks')
+    */
     ->in('./library/Exakat/Reports')
     ->in('./library/Exakat/Data')
+    ->in('./library/Exakat/Tasks')
     ->in('./library/Exakat/Vcs')
     ->in('./library/Exakat/Loader')
+
     ->in('./library/Exakat/Graph')
+
     ->in('./library/Exakat/Query')
     ->name('*.php');
 
@@ -31,9 +35,25 @@ return PhpCsFixer\Config::create()
          'declare_equal_normalize' => array('space' => 'single'),
          'concat_space' => array('spacing' => 'one'),
          'no_leading_import_slash' => true,
-//         'class_definition' => true,
+         'cast_spaces' =>  array('space' => 'single'),
+         'no_unused_imports'               => true,
+         'no_useless_return'               => true,
+         'no_whitespace_in_blank_line'     => true,
+         'return_type_declaration'         => true,
+         'single_line_after_imports'       => true,
+         'standardize_not_equals'          => true,
+         'ternary_operator_spaces'         => true,
+         'whitespace_after_comma_in_array' => true,
+         
+// Risky
+//         'self_accessor' => true,
+//         'static_lambda' => true,
+
+//         'braces' => array('position_after_functions_and_oop_constructs' => 'same', 
+                ),
 
 // Interesting, but too many fixes at once
+//         'class_definition' => false,
 //        'no_extra_consecutive_blank_lines' => true,
 
 // experimental
@@ -48,7 +68,6 @@ return PhpCsFixer\Config::create()
 //             'position_after_functions_and_oop_constructs'  => 'same',
 //             'position_after_anonymous_constructs'          => 'same',
 //    ],
-        )
     )
     ->setFinder($finder)
 ;
