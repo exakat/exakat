@@ -59,8 +59,8 @@ class ScalarOrObjectProperty extends Analyzer {
              ->inIs('DEFAULT')
              
              ->outIs('DEFAULT')
+             ->hasIn('RIGHT')
              ->atomIs(self::$LITERALS) // Another definition is a literal
-             ->hasIn('LEFT')
              ->atomIsNot('Null')
 
              ->back('results');
@@ -76,6 +76,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->atomIs(array('Methodcall', 'Functioncall', 'Staticmethodcall')) 
              ->inIs('DEFINITION')
              ->outIs('RETURNTYPE')
+             ->atomIsNot('Void')
              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
              ->back('results')
              
