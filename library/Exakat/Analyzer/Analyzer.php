@@ -522,19 +522,23 @@ GREMLIN;
         return $this->query->prepareSide();
     }
 
-    public function _as($name) {
+    public function as(string $name) : self {
         $this->query->_as($name);
         
         return $this;
     }
 
-    public function back($name = 'first') {
+    public function _as(string $name) : self {
+        return $this->as($name);
+    }
+
+    public function back(string $name = 'first') : self {
         $this->query->back($name);
         
         return $this;
     }
     
-    public function ignore() {
+    public function ignore() : self {
         $this->query->ignore();
         
         return $this;
@@ -544,25 +548,25 @@ GREMLIN;
 // Common methods
 ////////////////////////////////////////////////////////////////////////////////
 
-    protected function hasNoInstruction($atom = 'Function') {
+    protected function hasNoInstruction(string $atom = 'Function') {
         $this->query->hasNoInstruction($atom);
         
         return $this;
     }
 
-    protected function hasNoCountedInstruction($atom = 'Function', $count = 0) {
+    protected function hasNoCountedInstruction(string $atom = 'Function', $count = 0) {
         $this->query->hasNoCountedInstruction($atom, $count);
         
         return $this;
     }
 
-    protected function countBy($link = 'EXPRESSION', $property = 'fullcode', $variable = 'v') {
+    protected function countBy(string $link = 'EXPRESSION',string $property = 'fullcode', string $variable = 'v') {
         $this->query->countBy($link, $property, $variable);
         
         return $this;
     }
 
-    protected function hasInstruction($atom = 'Function') {
+    protected function hasInstruction(string $atom = 'Function') {
         $this->query->hasInstruction($atom);
 
         return $this;

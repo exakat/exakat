@@ -2524,6 +2524,7 @@ class Load extends Tasks {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
+        $typehint_fullcode = '';
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
@@ -2533,13 +2534,14 @@ class Load extends Tasks {
                  $this->addLink($next, $void, 'TYPEHINT');
              } else {
                  $this->addLink($next, $typehint, 'TYPEHINT');
+                 $typehint_fullcode = $typehint->fullcode.' ';
              }
         } else {
             $next = $this->processNext();
         }
 
         $next->visibility = 'public';
-        $next->fullcode   = "$visibility $next->fullcode";
+        $next->fullcode   = "$visibility {$typehint_fullcode}$next->fullcode";
         $this->makePhpdoc($next, $current);
 
         return $next;
@@ -2549,6 +2551,7 @@ class Load extends Tasks {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
+        $typehint_fullcode = '';
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
@@ -2558,13 +2561,14 @@ class Load extends Tasks {
                  $this->addLink($next, $void, 'TYPEHINT');
              } else {
                  $this->addLink($next, $typehint, 'TYPEHINT');
+                 $typehint_fullcode = $typehint->fullcode.' ';
              }
         } else {
             $next = $this->processNext();
         }
 
         $next->visibility = 'protected';
-        $next->fullcode   = "$visibility $next->fullcode";
+        $next->fullcode   = "$visibility {$typehint_fullcode}$next->fullcode";
         $this->makePhpdoc($next, $current);
 
         return $next;
@@ -2574,6 +2578,7 @@ class Load extends Tasks {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
         $typehint = $this->processTypehint();
+        $typehint_fullcode = '';
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
@@ -2581,15 +2586,18 @@ class Load extends Tasks {
              if (empty($typehint)) {
                  $void = $this->addAtomVoid();
                  $this->addLink($next, $void, 'TYPEHINT');
+
              } else {
                  $this->addLink($next, $typehint, 'TYPEHINT');
+                 
+                 $typehint_fullcode = $typehint->fullcode.' ';
              }
         } else {
             $next = $this->processNext();
         }
 
         $next->visibility = 'private';
-        $next->fullcode   = "$visibility $next->fullcode";
+        $next->fullcode   = "$visibility {$typehint_fullcode}$next->fullcode";
         $this->makePhpdoc($next, $current);
 
         return $next;
