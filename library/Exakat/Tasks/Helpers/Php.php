@@ -101,11 +101,11 @@ abstract class Php {
         $errors = array();
 
         if (empty($tokens)) {
-            throw new NoRecognizedTokens();
+            throw new NoRecognizedTokens($tokens);
         }
 
         //'Php80',
-        $versions = array('Php74', 'Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55', );
+        $versions = array('Php80', 'Php74', 'Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55', );
 
         foreach($versions as $version) {
             $errors = array();

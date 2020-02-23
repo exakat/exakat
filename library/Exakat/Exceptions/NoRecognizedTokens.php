@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NoRecognizedTokens extends \Exception {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
-        parent::__construct('Tokens were not recognized. Please, check with @exakat on twitter.', $code, $previous);
+        parent::__construct('Tokens \''.$message.'\' were not recognized. Please, check with @exakat on twitter.', $code, $previous);
     }
 }
 

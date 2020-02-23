@@ -26,23 +26,14 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingCases extends Analyzer {
     public function analyze() {
-        $switches = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Switch")
-     .sideEffect{ x = []; }
-     .sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));})
-     .filter{x != [];}
-     .map{x.sort();}
-GREMLIN
-);
+        $this->atomIs('Switch')
+             ->initVariable('x', '[]')
+             ->raw('sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));})')
+             ->raw('filter{x != [];}.map{x.sort();}');
+        $switches = $this->rawQuery()->toArray();
 
         if (empty($switches)) {
             return;
-        }
-        
-        if ($switches[0] instanceof \stdClass) {
-            foreach($switches as &$switch) {
-                $switch = (array) $switch;
-            }
         }
 
         // Compare switches together.
