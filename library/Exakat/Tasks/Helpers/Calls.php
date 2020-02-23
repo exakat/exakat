@@ -84,7 +84,7 @@ SQL;
         if (!empty($this->definitions)) {
             $chunks = array_chunk($this->definitions, 490);
             foreach($chunks as $chunk) {
-                $query = 'INSERT INTO calls VALUES ' . implode(', ', $chunk);
+                $query = 'INSERT INTO definitions VALUES ' . implode(', ', $chunk);
                 $this->callsSqlite->query($query);
             }
             $this->definitions = array();
