@@ -95,7 +95,7 @@ class DefaultConfig extends Config {
                                'php74'         => '',
                                'php80'         => '',
  
-                               'phpversion'    => '7.3',
+                               'phpversion'    => '7.4',
                                'token_limit'   => '1000000',
 
                                'baseline_use'  => 'last',    // none, last, name, number
