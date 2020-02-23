@@ -548,31 +548,31 @@ GREMLIN;
 // Common methods
 ////////////////////////////////////////////////////////////////////////////////
 
-    protected function hasNoInstruction(string $atom = 'Function') {
+    protected function hasNoInstruction($atom = 'Function') {
         $this->query->hasNoInstruction($atom);
         
         return $this;
     }
 
-    protected function hasNoCountedInstruction(string $atom = 'Function', $count = 0) {
+    protected function hasNoCountedInstruction($atom = 'Function', int $count = 0) : self {
         $this->query->hasNoCountedInstruction($atom, $count);
         
         return $this;
     }
 
-    protected function countBy(string $link = 'EXPRESSION',string $property = 'fullcode', string $variable = 'v') {
+    protected function countBy(string $link = 'EXPRESSION',string $property = 'fullcode', string $variable = 'v') : self {
         $this->query->countBy($link, $property, $variable);
         
         return $this;
     }
 
-    protected function hasInstruction(string $atom = 'Function') {
+    protected function hasInstruction($atom = 'Function') : self {
         $this->query->hasInstruction($atom);
 
         return $this;
     }
 
-    protected function goToInstruction($atom = 'Namespace') {
+    protected function goToInstruction($atom = 'Namespace') : self {
         $this->query->goToInstruction($atom);
         
         return $this;

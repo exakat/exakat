@@ -32,11 +32,13 @@ class CouldUseTrait extends Analyzer {
     public function analyze() {
         // Custom traits
         $this->atomIs('Trait')
-             ->_as('name')
+             ->as('name')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->_as(array('methodCount', 'static', 'ctype1'))
+             ->as('methodCount')
+             ->_as('static')
+             ->as('ctype1')
              ->outIs('NAME')
-             ->_as('method')
+             ->as('method')
              ->select(array('name'        => 'fullnspath',
                             'method'      => 'lccode',
                             'methodCount' => 'count',

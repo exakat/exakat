@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ScalarOrObjectProperty extends Analyzer {
     public function dependsOn() : array {
         return array('Complete/CreateDefaultValues',
+                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
                     );
     }
 
@@ -37,7 +38,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
-             ->_as('results')
+             ->as('results')
              ->outIs('DEFAULT')
              ->isLiteral()
              ->atomIsNot('Null')
@@ -51,7 +52,7 @@ class ScalarOrObjectProperty extends Analyzer {
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
-             ->_as('results')
+             ->as('results')
 
              ->outIs('DEFAULT')
              ->atomIs('New') // at least ONE default is a NEW
@@ -59,8 +60,28 @@ class ScalarOrObjectProperty extends Analyzer {
              
              ->outIs('DEFAULT')
              ->atomIs(self::$LITERALS) // Another definition is a literal
+             ->hasIn('LEFT')
              ->atomIsNot('Null')
-             ->inIs('DEFAULT')
+
+             ->back('results');
+        $this->prepareQuery();
+
+        // Property defined as object, assigned as literal (methodcall version)
+        $this->atomIs(self::$CLASSES_ALL)
+             ->outIs('PPP')
+             ->outIs('PPP')
+             ->as('results')
+
+             ->outIs('DEFAULT')
+             ->atomIs(array('Methodcall', 'Functioncall', 'Staticmethodcall')) 
+             ->inIs('DEFINITION')
+             ->outIs('RETURNTYPE')
+             ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
+             ->back('results')
+             
+             ->outIs('DEFAULT')
+             ->atomIs(self::$LITERALS) // Another definition is a literal
+             ->atomIsNot('Null')
 
              ->back('results');
         $this->prepareQuery();

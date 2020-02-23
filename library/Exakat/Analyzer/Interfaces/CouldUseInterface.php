@@ -32,11 +32,12 @@ class CouldUseInterface extends Analyzer {
     public function analyze() {
         // Custom interfaces
         $this->atomIs('Interface')
-             ->_as('name')
+             ->as('name')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->_as(array('methodCount', 'static'))
+             ->as('methodCount')
+             ->as('static')
              ->outIs('NAME')
-             ->_as('method')
+             ->as('method')
              ->select(array('name'        => 'fullnspath',
                             'method'      => 'lccode',
                             'methodCount' => 'count',
