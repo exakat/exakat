@@ -35,7 +35,7 @@ class RedefinedDefault extends Analyzer {
                      ->outIs('DEFAULT')
                      ->hasNoIn('RIGHT')
              )
-             ->_as('results')
+             ->as('results')
              ->goToClass()
 
              ->outIs('MAGICMETHOD')

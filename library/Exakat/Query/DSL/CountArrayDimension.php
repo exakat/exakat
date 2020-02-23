@@ -20,32 +20,19 @@
  *
 */
 
-namespace Exakat\Analyzer\Classes;
 
-use Exakat\Analyzer\Analyzer;
+namespace Exakat\Query\DSL;
 
-class UsedOnceProperty extends Analyzer {
-    public function dependsOn() : array {
-        return array('Complete/OverwrittenProperties',
-                    );
-    }
+class CountArrayDimension extends DSL {
+    public function run(): Command {
+        list($variable) = func_get_args();
 
-    public function analyze() {
-        // class x { private $p = 1; function foo() {$this->p = 1;} }
-        $this->atomIs(self::$CLASSES_ALL)
-             ->outIs('PPP')
-             ->isNot('visibility', 'public')
-             ->outIs('PPP')
-             ->atomIsNot('Virtualproperty')
-             ->as('results')
-             ->filter(
-                $this->side()
-                     ->goToAllDefinitions()
-                     ->outIs('DEFINITION')
-                     ->raw('count().is(eq(1))')
-             );
-        $this->prepareQuery();
+        $this->assertVariable($variable, self::VARIABLE_WRITE);
+
+        $command = new Command('sideEffect{ ' . $variable . ' = 0; }
+.repeat( __.in("VARIABLE", "APPEND").hasLabel("Array", "Arrayappend").sideEffect{ l = l + 1;}).emit()');
+
+        return $command;
     }
 }
-
 ?>

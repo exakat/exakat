@@ -37,7 +37,7 @@ class RedefinedMethods extends Analyzer {
         $this->atomIs('Class')
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->_as('results')
+             ->as('results')
              ->outIs('OVERWRITE')
              ->isNot('abstract', true) // abstract methods are not redefined.
              ->inIs('METHOD')

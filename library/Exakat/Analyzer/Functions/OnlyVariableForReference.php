@@ -34,7 +34,7 @@ class OnlyVariableForReference extends Analyzer {
              ->has('reference')
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
-             ->_as('functioncall')
+             ->as('functioncall')
              ->outIsIE('METHOD')   // For methods, in case
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'ranked')

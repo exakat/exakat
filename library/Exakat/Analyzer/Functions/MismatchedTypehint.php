@@ -37,7 +37,7 @@ class MismatchedTypehint extends Analyzer {
         // Based on calls to a function
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->_as('results')
+             ->as('results')
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'typehint')
              ->inIs('TYPEHINT')
@@ -55,7 +55,7 @@ class MismatchedTypehint extends Analyzer {
         // Based on Methodcalls : still missing the class of the object
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->_as('results')
+             ->as('results')
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'typehint')
              ->inIs('TYPEHINT')
@@ -74,7 +74,7 @@ class MismatchedTypehint extends Analyzer {
         // Based on staticmethodcall
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->_as('results')
+             ->as('results')
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'typehint')
              ->inIs('TYPEHINT')

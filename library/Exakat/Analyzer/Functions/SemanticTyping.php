@@ -69,7 +69,7 @@ class SemanticTyping extends Analyzer {
         // function foo($closure ) {}
         $this->atomIs(self::$FUNCTIONS)
              ->outIs('ARGUMENT')
-             ->_as('results')
+             ->as('results')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('results')

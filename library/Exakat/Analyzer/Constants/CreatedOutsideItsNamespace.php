@@ -32,7 +32,7 @@ class CreatedOutsideItsNamespace extends Analyzer {
              ->outIs('NAME')
              ->atomIs('Identifier')
              ->regexIs('noDelimiter', '\\\\\\\\')
-             ->_as('string')
+             ->as('string')
              ->goToInstruction('Namespace')
              ->outIs('NAME')
              ->savePropertyAs('fullcode', 'ns')

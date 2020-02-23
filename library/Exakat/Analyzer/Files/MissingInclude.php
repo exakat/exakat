@@ -40,9 +40,9 @@ class MissingInclude extends Analyzer {
         $this->atomIs('Include')
               ->outIs('ARGUMENT')
               ->outIsIE('CODE')
-              ->_as('include')
+              ->as('include')
               ->goToInstruction('File')
-              ->_as('file')
+              ->as('file')
               ->select(array('file'    => 'fullcode',
                              'include' => 'fullcode'));
         $result = $this->rawQuery();

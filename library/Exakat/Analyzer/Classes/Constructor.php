@@ -50,7 +50,7 @@ class Constructor extends Analyzer {
              ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").out("NAME").filter{ it.get().value("fullcode").toLowerCase() == "__construct"} ) )')
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->_as('constructor')
+             ->as('constructor')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('constructor');

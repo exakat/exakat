@@ -95,7 +95,7 @@ class ShouldUseArrayColumn extends Analyzer {
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Assignation')
-             ->_as('exp')
+             ->as('exp')
 
              ->outIs('LEFT')
              ->atomIs('Array')

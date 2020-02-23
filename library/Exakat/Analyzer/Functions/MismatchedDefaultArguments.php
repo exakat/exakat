@@ -35,7 +35,7 @@ class MismatchedDefaultArguments extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('code', 'name')
-             ->_as('results')
+             ->as('results')
              ->outIs('DEFAULT')
              ->savePropertyAs('fullcode', 'defaultValue')
              ->back('results')

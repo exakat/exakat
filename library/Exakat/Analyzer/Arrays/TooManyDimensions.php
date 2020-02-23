@@ -32,43 +32,31 @@ class TooManyDimensions extends Analyzer {
         // $a[1][ ][3][4]
         $this->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))
              ->hasIn('VARIABLE')
-             ->raw(<<<GREMLIN
- sideEffect{ l = 0;}
-.repeat( __.in("VARIABLE", "APPEND").hasLabel("Array", "Arrayappend").sideEffect{ l = l + 1;}).emit()
-.filter{ l > $this->maxDimensions }
-GREMLIN
-);
+             ->countArrayDimension('l')
+             ->raw('filter{ l > ***}', $this->maxDimensions);
         $this->prepareQuery();
 
         // $a[1][ ][3] = array()
         $this->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))
              ->hasIn('VARIABLE')
-             ->raw(<<<GREMLIN
- sideEffect{ l = 0;}
-.repeat( __.in("VARIABLE", "APPEND").hasLabel("Array", "Arrayappend").sideEffect{ l = l + 1;}).emit()
-.filter{ l > $this->maxDimensions - 1 }
-GREMLIN
-)
-            ->inIs('LEFT')
-            ->atomIs('Assignation')
-            ->_as('results')
-            ->outIs('RIGHT')
-            ->atomIs('Arrayliteral')
-            ->back('results');
+             ->countArrayDimension('l')
+             ->raw('filter{ l > ***}', $this->maxDimensions - 1)
+             ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->as('results')
+             ->outIs('RIGHT')
+             ->atomIs('Arrayliteral')
+             ->back('results');
         $this->prepareQuery();
 
         // $a[1][ ][3] = array()
         $this->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))
              ->hasIn('VARIABLE')
-             ->raw(<<<GREMLIN
- sideEffect{ l = 0;}
-.repeat( __.in("VARIABLE", "APPEND").hasLabel("Array", "Arrayappend").sideEffect{ l = l + 1;}).emit()
-.filter{ l > $this->maxDimensions - 1 }
-GREMLIN
-)
+             ->countArrayDimension('l')
+             ->raw('filter{ l > ***}', $this->maxDimensions - 1)
             ->inIs('LEFT')
             ->atomIs('Assignation')
-            ->_as('results')
+            ->as('results')
             ->outIs('RIGHT')
             ->atomIs(self::$CALLS)
             ->inIs('DEFINITION')
@@ -81,15 +69,11 @@ GREMLIN
         // $a[1][ ][3] = array()
         $this->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))
              ->hasIn('VARIABLE')
-             ->raw(<<<GREMLIN
- sideEffect{ l = 0;}
-.repeat( __.in("VARIABLE", "APPEND").hasLabel("Array", "Arrayappend").sideEffect{ l = l + 1;}).emit()
-.filter{ l > $this->maxDimensions - 1 }
-GREMLIN
-)
+             ->countArrayDimension('l')
+             ->raw('filter{ l > ***}', $this->maxDimensions - 1)
             ->inIs('LEFT')
             ->atomIs('Assignation')
-            ->_as('results')
+            ->as('results')
             ->outIs('RIGHT')
             ->functioncallIs($returnTypes['array'])
             ->back('results');

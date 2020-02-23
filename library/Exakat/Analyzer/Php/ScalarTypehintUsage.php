@@ -35,7 +35,7 @@ class ScalarTypehintUsage extends Analyzer {
         // in Arguments
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->_as('results')
+             ->as('results')
              ->outIs('TYPEHINT')
              ->fullnspathIs($scalars)
              ->back('results');

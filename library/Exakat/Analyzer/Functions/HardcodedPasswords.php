@@ -52,7 +52,7 @@ class HardcodedPasswords extends Analyzer {
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
-             ->_as('value')
+             ->as('value')
              ->outIs('INDEX')
              ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->has('noDelimiter')

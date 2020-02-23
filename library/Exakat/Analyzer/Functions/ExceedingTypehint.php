@@ -25,22 +25,12 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class ExceedingTypehint extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
-    /* List dependencies 
-    public function dependsOn() {
-        return array('Category/Analyzer',
-                     '',
-                    );
-    }
-    */
-    
     public function analyze() {
+        // interface i { methods i1(), i2(), i3()}
+        // function foo(i $i) { $i->i1(); } No i2, not i3. 
         $this->atomIs(self::$FUNCTIONS)
              ->outIs('ARGUMENT')
-             ->_as('results')
+             ->as('results')
              ->outIs('TYPEHINT')
              ->inIs('DEFINITION')
              ->atomIs(array('Class', 'Interface'))

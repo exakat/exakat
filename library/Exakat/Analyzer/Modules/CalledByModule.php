@@ -179,7 +179,7 @@ class CalledByModule extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              ->outIs('METHOD')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
@@ -193,7 +193,7 @@ class CalledByModule extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              ->outIs(self::$CLASS_METHODS)
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
@@ -211,7 +211,7 @@ class CalledByModule extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              ->outIs('METHOD')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->raw(<<<'GREMLIN'
 has("fullcode").filter{ (it.get().value("fullcode") =~ ***[fnp] ).getCount() != 0  }
@@ -241,7 +241,7 @@ GREMLIN
              ->back('first')
              ->outIs(self::$CLASS_METHODS)
              ->is('static', true)
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
@@ -256,7 +256,7 @@ GREMLIN
              ->back('first')
              ->outIs(self::$CLASS_METHODS)
              ->is('static', true)
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
@@ -277,7 +277,7 @@ GREMLIN
              ->back('first')
              ->outIs(self::$FUNCTIONS_METHOD)
              ->is('static', true)
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->raw(<<<'GREMLIN'
 has("fullcode").filter{ (it.get().value("fullcode") =~ ***[fnp] ).getCount() != 0  }

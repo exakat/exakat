@@ -44,7 +44,7 @@ class WrongTypeWithCall extends Analyzer {
              ->back('first')
              
              ->outIs('DEFINITION')
-             ->_as('results')
+             ->as('results')
              ->outWithRank('ARGUMENT', 'ranked')
              ->atomIs(array('Integer',
                             'String',
