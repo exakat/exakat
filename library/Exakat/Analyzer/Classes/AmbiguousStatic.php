@@ -28,58 +28,46 @@ use Exakat\Data\Dictionary;
 class AmbiguousStatic extends Analyzer {
     public function analyze() {
         // Methods with the same name, but with static or not.
-        $queryMethodStatic = <<<'GREMLIN'
-g.V().hasLabel("Method")
-     .has("static", true)
-     .values("lccode")
-     .unique()
-GREMLIN;
-        $staticMethod = $this->query($queryMethodStatic)->toArray();
-        $staticMethod = $this->dictCode->source($staticMethod);
-        $staticMethod = array_map('mb_strtolower', $staticMethod);
-        $staticMethod = array_unique($staticMethod);
+        $this->atomIs('Method')
+             ->is('static', true)
+             ->outIs('NAME')
+             ->values('lccode')
+             ->unique();
+        $staticMethod = $this->rawQuery()->toArray();
 
         // Global are unused if used only once
-        $queryMethod = <<<'GREMLIN'
-g.V().hasLabel("Method")
-     .not(has("static", true))
-     .values("lccode")
-     .unique()
-GREMLIN;
-        $normalMethod = $this->query($queryMethod)->toArray();
-        $normalMethod = $this->dictCode->source($normalMethod);
-        $normalMethod = array_map('mb_strtolower', $normalMethod);
-        $normalMethod = array_unique($normalMethod);
+        $this->atomIs('Method')
+             ->isNot('static', true)
+             ->outIs('NAME')
+             ->values('lccode')
+             ->unique();
+        $normalMethod = $this->rawQuery()->toArray();
 
         $mixedMethod = array_values(array_intersect($normalMethod, $staticMethod));
-        $mixedMethod = $this->dictCode->translate($mixedMethod, Dictionary::CASE_INSENSITIVE);
-        
+
         if (!empty($mixedMethod)){
             $this->atomIs('Method')
-                 ->codeIs($mixedMethod, self::NO_TRANSLATE);
+                 ->outIs('NAME')
+                 ->codeIs($mixedMethod, self::NO_TRANSLATE, self::CASE_INSENSITIVE)
+                 ->back('first');
             $this->prepareQuery();
         }
 
         // Properties with the same name, but with static or not.
         // Just like methods, they are case-insensitive, because static $X and $x are still ambiguous
-        $queryStaticProperty = <<<'GREMLIN'
-g.V().hasLabel("Ppp")
-     .has("static", true)
-     .out("PPP")
-     .values("code")
-     .unique()
-GREMLIN;
-        $staticProperty = $this->query($queryStaticProperty)->toArray();
+        $this->atomIs('Ppp')
+             ->is('static', true)
+             ->outIs('PPP')
+             ->values('code')
+             ->unique();
+        $staticProperty = $this->rawQuery()->toArray();
 
-        // Global are unused if used only once
-        $queryProperty = <<<'GREMLIN'
-g.V().hasLabel("Ppp")
-     .not(has("static", true))
-     .out("PPP")
-     .values("code")
-     .unique()
-GREMLIN;
-        $normalProperty = $this->query($queryProperty)->toArray();
+        $this->atomIs('Ppp')
+             ->isNot('static', true)
+             ->outIs('PPP')
+             ->values('code')
+             ->unique();
+        $normalProperty = $this->rawQuery()->toArray();
 
         $mixedProperty = array_values(array_intersect($normalProperty, $staticProperty));
         

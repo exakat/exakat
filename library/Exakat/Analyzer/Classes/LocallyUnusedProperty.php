@@ -38,7 +38,7 @@ class LocallyUnusedProperty extends Analyzer {
              ->hasClassTrait()
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
-             ->_as('ppp')
+             ->as('ppp')
              ->analyzerIsNot(array('Traits/LocallyUsedProperty',
                                    'Classes/LocallyUsedProperty',
                                    )

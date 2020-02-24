@@ -30,7 +30,7 @@ class ThisIsNotAnArray extends Analyzer {
         // direct class
         $this->atomIs('This')
              ->inIs(array('VARIABLE', 'APPEND'))
-             ->_as('results')
+             ->as('results')
              ->atomIs(array('Array', 'Arrayappend'))
              // class may be \ArrayAccess
              ->goToClass()

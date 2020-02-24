@@ -41,7 +41,7 @@ class MakeDefault extends Analyzer {
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Assignation')
-             ->_as('assignation')
+             ->as('assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
              ->is('constant', true)

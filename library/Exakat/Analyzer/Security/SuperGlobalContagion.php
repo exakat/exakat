@@ -44,7 +44,7 @@ class SuperGlobalContagion extends Analyzer {
              ->atomIs('Phpvariable')
              ->back('first')
              ->outIs('LEFT')
-             ->_as('result')
+             ->as('result')
              ->atomIs('Variable')
              ->back('result');
         $this->prepareQuery();
@@ -55,7 +55,7 @@ class SuperGlobalContagion extends Analyzer {
              ->atomIs('Phpvariable')
              ->back('first')
              ->outIs('LEFT')
-             ->_as('result')
+             ->as('result')
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs('Variablearray')
@@ -70,7 +70,7 @@ class SuperGlobalContagion extends Analyzer {
              ->atomIs('Phpvariable')
              ->back('first')
              ->outIs('LEFT')
-             ->_as('result')
+             ->as('result')
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs('Variablearray')

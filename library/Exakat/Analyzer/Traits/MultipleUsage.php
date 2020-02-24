@@ -33,7 +33,7 @@ class MultipleUsage extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('USE')
              ->inIs('USE')
-             ->_as('result')
+             ->as('result')
              ->filter(
                 $this->side()
                      ->goToAllTraits(self::EXCLUDE_SELF)

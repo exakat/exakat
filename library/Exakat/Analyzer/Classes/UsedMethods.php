@@ -56,7 +56,7 @@ class UsedMethods extends Analyzer {
 
         if (!empty($staticmethods)) {
             $this->atomIs(array('Method', 'Magicmethod'))
-                 ->_as('used')
+                 ->as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
                  ->is('lccode', $staticmethods)
@@ -145,7 +145,7 @@ GREMLIN
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->is('visibility', 'private')
-             ->_as('used')
+             ->as('used')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->back('first')
@@ -162,7 +162,7 @@ GREMLIN
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->isNot('visibility', 'private')
-             ->_as('used')
+             ->as('used')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->back('first')

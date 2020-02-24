@@ -53,7 +53,7 @@ class PropagateCalls extends Analyzer {
     
     private function processLocalDefinition() : int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -82,7 +82,7 @@ class PropagateCalls extends Analyzer {
        $c1 = $this->rawQuery()->toInt();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -122,7 +122,7 @@ class PropagateCalls extends Analyzer {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->back('first')
               
@@ -148,7 +148,7 @@ class PropagateCalls extends Analyzer {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->back('first')
               
@@ -175,7 +175,7 @@ class PropagateCalls extends Analyzer {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->back('first')
               
@@ -200,7 +200,7 @@ class PropagateCalls extends Analyzer {
              ->outIs('DEFINITION')
              ->inIs('OBJECT')
              ->hasNoIn('DEFINITION')
-             ->_as('member')
+             ->as('member')
              ->atomIs('Member', self::WITHOUT_CONSTANTS)
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
@@ -224,7 +224,7 @@ class PropagateCalls extends Analyzer {
 
         // (new x)->foo()
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -254,7 +254,7 @@ class PropagateCalls extends Analyzer {
 
         // (new x)::foo()
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -283,7 +283,7 @@ class PropagateCalls extends Analyzer {
 
         // (new x)::foo()
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -313,7 +313,7 @@ class PropagateCalls extends Analyzer {
 
         // (new x)::foo()
         $this->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -342,7 +342,7 @@ class PropagateCalls extends Analyzer {
 
         // (new x)::FOO
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->_as('constant')
+              ->as('constant')
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -376,7 +376,7 @@ class PropagateCalls extends Analyzer {
 
     private function propagateGlobals() : int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -406,7 +406,7 @@ class PropagateCalls extends Analyzer {
         $c1 = $this->rawQuery()->toInt();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -440,7 +440,7 @@ class PropagateCalls extends Analyzer {
     
     private function propagateTypehint() : int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -471,7 +471,7 @@ class PropagateCalls extends Analyzer {
         $c1 = $this->rawQuery()->toInt();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -502,7 +502,7 @@ class PropagateCalls extends Analyzer {
         $c2 = $this->rawQuery()->toInt();
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->_as('constante')
+              ->as('constante')
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -570,7 +570,7 @@ class PropagateCalls extends Analyzer {
     
     private function processFluentInterfaces() : int {
         $this->atomIs(array('Methodcall', 'Staticmethodcall'), self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)

@@ -33,7 +33,7 @@ class NamedRegex extends Analyzer {
              ->outIs('DEFINITION')
              ->atomIs('Variablearray')
              ->inIs('VARIABLE')
-             ->_as('results')
+             ->as('results')
              ->outIs('INDEX')
              ->atomIs('Integer')
              ->back('results');

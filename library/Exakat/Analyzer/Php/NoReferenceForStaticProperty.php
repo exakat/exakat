@@ -32,7 +32,7 @@ class NoReferenceForStaticProperty extends Analyzer {
         $this->atomIs('Staticproperty')
              ->inIs('LEFT')
              ->atomIs('Assignation')
-             ->_as('results')
+             ->as('results')
              ->outIs('RIGHT')
              ->has('reference')
              ->back('results');

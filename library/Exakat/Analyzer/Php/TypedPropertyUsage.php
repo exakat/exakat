@@ -31,7 +31,7 @@ class TypedPropertyUsage extends Analyzer {
         // class x { private y $a; }
         $this->atomIs('Propertydefinition')
              ->inIs('PPP')
-             ->_as('results')
+             ->as('results')
              ->outIs('TYPEHINT')
              ->atomIsNot('Void')
              ->back('results');

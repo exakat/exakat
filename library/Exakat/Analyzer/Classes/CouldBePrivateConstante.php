@@ -50,11 +50,11 @@ class CouldBePrivateConstante extends Analyzer {
              ->outIs('CONSTANT')
              ->atomIs('Name')
              ->savePropertyAs('code', 'name')
-             ->_as('constante')
+             ->as('constante')
              ->back('first')
              
              ->outIs('CLASS')
-             ->_as('classe')
+             ->as('classe')
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fns')
 
@@ -89,7 +89,7 @@ GREMLIN
              ->isNot('visibility', 'private')
              ->outIs('CONST')
              ->analyzerIsNot('Classes/ConstantUsedBelow')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->codeIsNot($publicUndefinedConstants, self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)

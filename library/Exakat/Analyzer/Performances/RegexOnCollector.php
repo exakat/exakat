@@ -39,7 +39,7 @@ class RegexOnCollector extends Analyzer {
              ->atomInsideNoDefinition('Assignation')
              ->tokenIs('T_CONCAT_EQUAL')
 
-             ->_as('collection')
+             ->as('collection')
              ->outIs('RIGHT')
              ->samePropertyAs('fullcode', 'increment')
              ->back('collection')
@@ -68,7 +68,7 @@ class RegexOnCollector extends Analyzer {
              ->atomInsideNoDefinition('Assignation')
              ->tokenIs('T_EQUAL')
 
-             ->_as('collection')
+             ->as('collection')
              ->outIs('RIGHT')
              ->samePropertyAs('fullcode', 'increment')
              ->back('collection')

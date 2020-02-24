@@ -37,7 +37,7 @@ class UseCaseValue extends Analyzer {
              ->outIs('EXPRESSION')
 
              ->atomIs('Case')
-             ->_as('results')
+             ->as('results')
              ->outIs('CODE')
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'variable')

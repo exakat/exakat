@@ -36,7 +36,7 @@ class IssetWholeArray extends Analyzer {
              ->back('first')
              ->inIsIE('NOT') // Skip not
              ->inIs(array('LEFT', 'RIGHT'))
-             ->_as('results')
+             ->as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->outIsIE('NOT')
              ->atomIs('Isset')
@@ -56,7 +56,7 @@ class IssetWholeArray extends Analyzer {
              ->back('first')
              ->inIsIE('NOT') // Skip not
              ->inIs(array('LEFT', 'RIGHT'))
-             ->_as('results')
+             ->as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->outIsIE('NOT')
              ->atomIs('Isset')

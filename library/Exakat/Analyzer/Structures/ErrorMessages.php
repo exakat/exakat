@@ -66,7 +66,7 @@ class ErrorMessages extends Analyzer {
         $this->atomIs('New')
              ->hasNoIn('THROW')
              ->outIs('NEW')
-             ->_as('new')
+             ->as('new')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->isNot('fullnspath', null)
              ->classDefinition()

@@ -46,7 +46,7 @@ class NoPublicAccess extends Analyzer {
                  ->is('visibility', 'public')
                  ->isNot('static', true)
                  ->outIs('PPP')
-                 ->_as('ppp')
+                 ->as('ppp')
                  ->isNot('propertyname', $properties)
                  ->back('ppp');
             $this->prepareQuery();
@@ -73,7 +73,7 @@ class NoPublicAccess extends Analyzer {
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
                  ->outIs('PPP')
-                 ->_as('results')
+                 ->as('results')
                  ->raw('filter{ !(fnp + "::" + it.get().value("code") in ***) }', $staticproperties)
                  ->back('results');
             $this->prepareQuery();

@@ -36,7 +36,7 @@ class CreateForeachDefault extends Analyzer {
              ->outIs('VALUE')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
-             ->_as('v')
+             ->as('v')
              ->back('first')
 
              ->outIs('SOURCE')
@@ -54,7 +54,7 @@ class CreateForeachDefault extends Analyzer {
              ->outIs('INDEX')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
-             ->_as('v')
+             ->as('v')
              ->back('first')
 
              ->outIs('SOURCE')

@@ -34,7 +34,7 @@ class LocallyUsedProperty extends Analyzer {
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
-             ->_as('ppp')
+             ->as('ppp')
              ->outIs('DEFINITION')
              ->atomIs(array('Member', 'Staticproperty'))
              ->goToInstruction('Trait')

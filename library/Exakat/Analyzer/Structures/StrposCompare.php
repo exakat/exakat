@@ -111,7 +111,7 @@ class StrposCompare extends Analyzer {
         // if (($x = strpos(..)) == false) {}
         $this->atomFunctionIs($fullnspaths)
              ->inIs('RIGHT')
-             ->_as('result')
+             ->as('result')
              ->atomIs('Assignation')
              ->inIs('CODE')
              ->inIs(array('RIGHT', 'LEFT'))

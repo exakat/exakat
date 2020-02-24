@@ -29,7 +29,7 @@ class CreateCompactVariables extends Analyzer {
         $this->atomFunctionIs('\compact')
               ->outIs('ARGUMENT')
               ->has('noDelimiter')
-              ->_as('varInString')
+              ->as('varInString')
               ->savePropertyAs('noDelimiter', 'name')
               ->makeVariableName('name')
               ->goToInstruction(array('Function', 'Closure', 'Method', 'Magicmethod', 'File'))

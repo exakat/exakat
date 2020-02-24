@@ -51,16 +51,16 @@ class CouldBeProtectedProperty extends Analyzer {
 
         // Case of class::property (that's another public access)
         $this->atomIs('Staticproperty')
-             ->_as('init')
+             ->as('init')
              ->outIs('CLASS')
              ->atomIs(array('Identifier', 'Nsname'))
-             ->_as('classe')
+             ->as('classe')
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->hasNoClass()
              ->outIs('MEMBER')
              ->atomIs('Staticpropertyname')
-             ->_as('variable')
+             ->as('variable')
              ->raw('select("classe", "variable").by("fullnspath").by("code")')
              ->unique();
             $res = $this->rawQuery()->toArray();

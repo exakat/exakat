@@ -31,7 +31,7 @@ class StaticMethods extends Analyzer {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->_as('function')
+             ->as('function')
              ->is('static', true)
              ->back('function')
              ->outIs('NAME');

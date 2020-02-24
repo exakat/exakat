@@ -28,7 +28,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
     public function analyze() {
 
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -58,7 +58,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -88,7 +88,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->_as('constante')
+              ->as('constante')
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)

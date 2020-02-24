@@ -35,7 +35,7 @@ class CouldUseTrait extends Analyzer {
              ->as('name')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->as('methodCount')
-             ->_as('static')
+             ->as('static')
              ->as('ctype1')
              ->outIs('NAME')
              ->as('method')

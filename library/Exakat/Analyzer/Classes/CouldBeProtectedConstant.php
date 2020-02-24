@@ -69,7 +69,7 @@ GREMLIN;
         $this->atomIs('Const')
              ->isNot('visibility', array('private', 'protected'))
              ->outIs('CONST')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->codeIsNot($publicUndefinedConstants, self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)

@@ -38,13 +38,13 @@ SQL;
 
         $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
-              ->_as('returned')
+              ->as('returned')
               ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
               ->back('first')
               ->outIs('ARGUMENT')
               ->outIs('TYPEHINT')
               ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
-              ->_as('argument')
+              ->as('argument')
               ->select(array('first'    => 'fullnspath',
                              'argument' => 'fullnspath',
                              'returned' => 'fullnspath'));
@@ -52,12 +52,12 @@ SQL;
 
         $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
-              ->_as('returned')
+              ->as('returned')
               ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
               ->back('first')
               ->outIs('ARGUMENT')
               ->atomIs('Void')
-              ->_as('argument')
+              ->as('argument')
               ->select(array('first'    => 'fullnspath',
                              'argument' => '\\\\void',
                              'returned' => 'fullnspath'));

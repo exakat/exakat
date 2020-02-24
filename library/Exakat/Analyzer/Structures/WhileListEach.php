@@ -31,7 +31,7 @@ class WhileListEach extends Analyzer {
         $this->atomIs('While')
              ->outIs('CONDITION')
              ->atomIs('Assignation')
-             ->_as('assignation')
+             ->as('assignation')
              ->outIs('LEFT')
              ->atomIs('List')
              ->back('assignation')

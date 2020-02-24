@@ -124,7 +124,7 @@ class UselessParenthesis extends Analyzer {
         $this->atomIs('Multiplication')
              ->inIs('CODE')
              ->atomIs('Parenthesis')
-             ->_as('results')
+             ->as('results')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Multiplication')
              ->back('results');

@@ -74,7 +74,7 @@ class UnknownPregOption extends Analyzer {
         $this->atomFunctionIs(self::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
-             ->_as('concat')
+             ->as('concat')
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              ->outIsIE('CONCAT') // In case it is an interpolated string

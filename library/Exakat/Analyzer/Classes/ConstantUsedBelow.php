@@ -38,7 +38,7 @@ class ConstantUsedBelow extends Analyzer {
              ->savePropertyAs('fullnspath', 'classpath')
              ->outIs('CONST')
              ->outIs('CONST')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->savePropertyAs('code', 'constname')
              ->inIs('NAME')

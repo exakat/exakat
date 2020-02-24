@@ -136,7 +136,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->back('first')
               ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
               ->goToAllParents(self::INCLUDE_SELF)
-              ->_as('theClass')
+              ->as('theClass')
               
               ->outIs('USE')
               ->outIs('BLOCK')
@@ -206,7 +206,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), self::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
               ->goToAllParents(self::INCLUDE_SELF)
-              ->_as('theClass')
+              ->as('theClass')
 
               ->outIs('USE')
               ->outIs('BLOCK')

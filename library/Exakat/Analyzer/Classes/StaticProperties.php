@@ -33,7 +33,7 @@ class StaticProperties extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->is('static', true)
-             ->_as('ppp')
+             ->as('ppp')
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')
              ->back('ppp');

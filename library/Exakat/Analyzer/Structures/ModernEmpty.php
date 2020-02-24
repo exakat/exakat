@@ -40,7 +40,7 @@ class ModernEmpty extends Analyzer {
              ->savePropertyAs('fullcode', 'storage')
              ->inIs('LEFT')
              ->nextSiblings()
-             ->_as('sibling')
+             ->as('sibling')
              ->atomInsideNoDefinition('Empty')
              ->outIs('ARGUMENT')
              ->atomIs(self::$CONTAINERS)

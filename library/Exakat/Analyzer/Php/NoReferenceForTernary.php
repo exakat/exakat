@@ -52,7 +52,7 @@ class NoReferenceForTernary extends Analyzer {
         $this->atomIs('Variable')
              ->inIs(array('THEN', 'ELSE'))
              ->atomIs(array('Ternary', 'Coalesce'))
-             ->_as('results')
+             ->as('results')
              ->back('first')
              ->inIs('DEFINITION')
              ->inIs('NAME')

@@ -67,7 +67,7 @@ GREMLIN
              ->initVariable('ranked')
              ->raw('sideEffect{ranked = it.get().value("rank") + 1}')
              ->codeIs('=')
-             ->_as('results')
+             ->as('results')
              ->outIs('LEFT')
              ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'name')

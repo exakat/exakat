@@ -31,7 +31,7 @@ class SelfTransform extends Analyzer {
              ->outIs('LEFT')
              ->atomIs(self::$VARIABLES_ALL)
              ->savePropertyAs('fullcode', 'left')
-             ->_as('results')
+             ->as('results')
              ->back('first')
              
              ->outIs('RIGHT')

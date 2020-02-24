@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 class SetClassPropertyDefinitionWithTypehint extends Analyzer {
     public function analyze() {
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
-              ->_as('property')
+              ->as('property')
               ->outIs('DEFINITION')
               ->inIs('OBJECT')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('call')
+              ->as('call')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
@@ -48,11 +48,11 @@ class SetClassPropertyDefinitionWithTypehint extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
-              ->_as('property')
+              ->as('property')
               ->outIs('DEFINITION')
               ->inIs('OBJECT')
               ->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->_as('call')
+              ->as('call')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
@@ -68,11 +68,11 @@ class SetClassPropertyDefinitionWithTypehint extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
-              ->_as('property')
+              ->as('property')
               ->outIs('DEFINITION')
               ->inIs('CLASS')
               ->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->_as('call')
+              ->as('call')
               ->outIs('CONSTANT')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')

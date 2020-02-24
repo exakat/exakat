@@ -37,7 +37,7 @@ class ShouldHaveDestructor extends Analyzer {
                       )
              )
              ->outIs('PPP')
-             ->_as('results')
+             ->as('results')
              ->outIs('PPP')
              ->outIs('DEFINITION')
              ->inIs('OBJECT')

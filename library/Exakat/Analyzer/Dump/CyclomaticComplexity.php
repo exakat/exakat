@@ -29,7 +29,7 @@ class CyclomaticComplexity extends Analyzer {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
-              ->_as('name')
+              ->as('name')
               ->back('first')
               ->outIs('BLOCK')
               ->raw(<<<GREMLIN

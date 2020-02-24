@@ -32,7 +32,7 @@ class ClassConstWithArray extends Analyzer {
         $this->atomIs('Const')
              ->hasClassInterface()
              ->outIs('CONST')
-             ->_as('results')
+             ->as('results')
              ->outIs('VALUE')
              ->atomIs('Arrayliteral')
              ->back('results');

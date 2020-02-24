@@ -38,7 +38,7 @@ class CouldUseArrayUnique extends Analyzer {
              ->outIs('BLOCK')
 
              ->atomInsideNoDefinition('Ifthen')
-             ->_as('ifthen')
+             ->as('ifthen')
              ->outIs('CONDITION')
 
              ->atomInsideNoDefinition('Functioncall')

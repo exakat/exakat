@@ -36,9 +36,9 @@ CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
         $this ->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
-              ->_as('included')
+              ->as('included')
               ->goToInstruction('File')
-              ->_as('including')
+              ->as('including')
               ->select(array('included'  => 'fullcode',
                              'including' => 'fullcode'));
 

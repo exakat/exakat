@@ -28,7 +28,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
     public function analyze() {
         // (new x)->foo()
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -57,7 +57,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
 
         // (new x)::foo()
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -85,7 +85,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
 
         // (new x)::foo()
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -114,7 +114,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
 
         // (new x)::foo()
         $this->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
-              ->_as('member')
+              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -142,7 +142,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
 
         // (new x)::FOO
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->_as('constant')
+              ->as('constant')
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)

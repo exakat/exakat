@@ -61,7 +61,7 @@ class CouldUseArrayFillKeys extends Analyzer {
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
-             ->_as('block')
+             ->as('block')
              ->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')

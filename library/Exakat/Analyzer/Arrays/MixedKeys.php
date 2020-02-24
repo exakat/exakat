@@ -33,7 +33,7 @@ class MixedKeys extends Analyzer {
         $this->atomIs('Ppp')
              ->outIs('PPP')
              ->atomInsideNoDefinition('Arrayliteral')
-             ->_as('result')
+             ->as('result')
 
              // count keys styles
              ->raw(<<<'GREMLIN'

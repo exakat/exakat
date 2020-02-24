@@ -31,7 +31,7 @@ class UselessAlias extends Analyzer {
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
              ->atomIs('As')
-             ->_as('results')
+             ->as('results')
              ->outIs('AS')
              ->savePropertyAs('lccode', 'name')
              ->inIs('AS')

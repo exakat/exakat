@@ -37,7 +37,7 @@ class NotCountNull extends Analyzer {
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->codeIs(array('==', '===', '!=', '!==', '>', '>=', '<', '<='))
-             ->_as('results')
+             ->as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Integer')
              ->codeIs('0')

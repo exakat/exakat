@@ -40,10 +40,10 @@ SQL;
               ->outIs('NEW')
               ->inIs('DEFINITION')
               ->atomIs('Class')
-              ->_as('called')
+              ->as('called')
               ->back('first')
               ->goToInstruction('Class')
-              ->_as('calling')
+              ->as('calling')
               ->select(array('calling' => 'fullnspath',
                              'called'  => 'fullnspath'));
         $this->prepareQuery(self::QUERY_TABLE);

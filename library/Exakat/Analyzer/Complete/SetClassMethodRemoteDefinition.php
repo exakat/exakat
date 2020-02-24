@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SetClassMethodRemoteDefinition extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Staticmethodcall', 'Methodcall'), self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -53,7 +53,7 @@ class SetClassMethodRemoteDefinition extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Staticmethod', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs(array('Identifier', 'Nsname'), self::WITHOUT_CONSTANTS)
@@ -71,7 +71,7 @@ class SetClassMethodRemoteDefinition extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)

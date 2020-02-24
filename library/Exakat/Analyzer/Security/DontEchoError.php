@@ -107,7 +107,7 @@ class DontEchoError extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition(array('Echo', 'Print', 'Exit', 'Functioncall'))
              ->has('fullnspath')
-             ->_as('results')
+             ->as('results')
              ->atomIs(array('Echo', 'Print', 'Exit', 'Functioncall'))
              ->has('fullnspath')
              ->fullnspathIs($displayFunctions)

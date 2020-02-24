@@ -40,7 +40,7 @@ class UseBlindVar extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Array')
 
-             ->_as('array')
+             ->as('array')
              ->isNot('isModified', true)
              ->outIs('INDEX')
              ->samePropertyAs('fullcode', 'index')

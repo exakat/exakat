@@ -30,7 +30,7 @@ class MultipleAliasDefinitionPerFile extends Analyzer {
         // use A as C;
         $this->atomIs('Usenamespace')
              ->outIs('USE')
-             ->_as('results')
+             ->as('results')
              ->savePropertyAs('fullnspath', 'usepath')
              ->savePropertyAs('fullcode', 'thecode')
              ->inIs('USE')

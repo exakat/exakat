@@ -29,7 +29,7 @@ class OverwrittenConst extends Analyzer {
     public function analyze() {
         $this->atomIs('Const')
              ->outIs('CONST')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->savePropertyAs('code', 'constante')
              ->goToClass()

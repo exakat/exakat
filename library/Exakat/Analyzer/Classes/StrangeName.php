@@ -31,7 +31,7 @@ class StrangeName extends Analyzer {
         $this->atomIs(array('Class', 'Trait', 'Interface'))
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->codeIs($names)
              ->back('results');

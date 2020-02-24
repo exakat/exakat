@@ -61,7 +61,7 @@ class AddZero extends Analyzer {
              ->nextSibling()
              ->atomIsNot(array('Function', 'Class', 'Trait', 'Interface', 'Dowhile', 'While', 'Foreach', 'For'))
              ->atomInsideNoDefinition('Addition')
-             ->_as('results')
+             ->as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->samePropertyAs('fullcode', 'varname')
              ->back('results');

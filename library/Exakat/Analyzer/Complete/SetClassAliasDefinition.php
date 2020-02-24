@@ -28,7 +28,7 @@ class SetClassAliasDefinition extends Analyzer {
     public function analyze() {
         // class_alias('A', 'B')
         $this->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs('DEFINITION')
               ->is('rank', 0)

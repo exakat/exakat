@@ -32,7 +32,7 @@ class ShouldUseForeach extends Analyzer {
              ->outIs('INIT')
              ->outIs('EXPRESSION')
              ->atomIs('Assignation')
-             ->_as('init')
+             ->as('init')
              ->outIs('RIGHT')
              ->codeIs('0')
              ->back('init')

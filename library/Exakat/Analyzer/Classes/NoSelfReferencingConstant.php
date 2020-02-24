@@ -36,12 +36,12 @@ class NoSelfReferencingConstant extends Analyzer {
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
              ->outIs('CONST')
-             ->_as('results')
-            
+             ->as('results')
+
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
-             
+
              ->outIs('VALUE')
              ->atomInsideNoDefinition('Staticconstant')
              ->outIs('CLASS')

@@ -33,7 +33,7 @@ class Autoappend extends Analyzer {
              ->back('first')
              ->inIs('LEFT')
              ->atomIs('Assignation')
-             ->_as('results')
+             ->as('results')
              ->outIs('RIGHT')
              ->samePropertyAs('fullcode', 'name')
              ->back('results');

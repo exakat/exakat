@@ -33,7 +33,7 @@ class NoStringWithAppend extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Assignation')
              ->codeIs('=')
-             ->_as('results')
+             ->as('results')
              ->outIs('RIGHT')
              ->atomIs('String')
              ->inIs('RIGHT')

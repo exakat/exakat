@@ -59,7 +59,7 @@ class TooManyNativeCalls extends Analyzer {
                                'Try',
                                'While',
                                ))
-             ->_as('results')
+             ->as('results')
              ->analyzerInsideMoreThan('Functions/IsExtFunction', 'Functioncall', $this->nativeCallCounts)
              ->back('results');
         $this->prepareQuery();

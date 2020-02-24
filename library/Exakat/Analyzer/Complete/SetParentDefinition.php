@@ -42,10 +42,10 @@ class SetParentDefinition extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
-              ->_as('parent')
+              ->as('parent')
               ->inIs('CLASS')
               ->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
-              ->_as('property')
+              ->as('property')
               ->outIs('MEMBER')
               ->tokenIs('T_VARIABLE')
               ->savePropertyAs('code', 'name')
@@ -59,10 +59,10 @@ class SetParentDefinition extends Analyzer {
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
-              ->_as('parent')
+              ->as('parent')
               ->inIs('CLASS')
               ->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->_as('constant')
+              ->as('constant')
               ->outIs('CONSTANT')
               ->tokenIs('T_STRING')
               ->savePropertyAs('code', 'name')
@@ -77,7 +77,7 @@ class SetParentDefinition extends Analyzer {
 
         $this->atomIs('String', self::WITHOUT_CONSTANTS)
               ->fullnspathIs('\\\\parent', self::CASE_SENSITIVE)
-              ->_as('parent')
+              ->as('parent')
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')

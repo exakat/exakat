@@ -39,7 +39,7 @@ class UsedPrivateMethod extends Analyzer {
              ->savePropertyAs('fullnspath', 'classname')
              ->back('first')
              ->inIs('DEFINITION')
-             ->_as('results')
+             ->as('results')
              ->is('visibility','private')
              ->inIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs('Class')

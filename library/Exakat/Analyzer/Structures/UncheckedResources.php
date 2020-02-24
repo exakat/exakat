@@ -55,7 +55,7 @@ class UncheckedResources extends Analyzer {
                      ->atomIs('Assignation')
                      // checked with a if ($resource) or while($resource)
                      ->hasNoIn('CONDITION')
-                     ->_as('result')
+                     ->as('result')
                      ->outIs('LEFT')
                      ->atomIs(self::$CONTAINERS)
                      ->savePropertyAs('fullcode', 'tmpvar')

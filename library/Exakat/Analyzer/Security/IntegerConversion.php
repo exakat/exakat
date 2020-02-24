@@ -48,7 +48,7 @@ class IntegerConversion extends Analyzer {
         $this->atomIs('Variable')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
-             ->_as('results')
+             ->as('results')
              ->codeIsNot(array('===', '!=='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Integer', self::WITH_CONSTANTS)
@@ -66,7 +66,7 @@ class IntegerConversion extends Analyzer {
         $this->atomIs('Variable')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
-             ->_as('results')
+             ->as('results')
              ->codeIsNot(array('===', '!=='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Integer', self::WITH_CONSTANTS)
@@ -87,7 +87,7 @@ class IntegerConversion extends Analyzer {
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->codeIsNot(array('===', '!=='), self::TRANSLATE, self::CASE_SENSITIVE)
-             ->_as('results')
+             ->as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Integer', self::WITH_CONSTANTS)
              ->back('results');
@@ -101,7 +101,7 @@ class IntegerConversion extends Analyzer {
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              // operator doesn't matter : it is hidden by cast
-             ->_as('results')
+             ->as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Integer', self::WITH_CONSTANTS)
              ->back('results');

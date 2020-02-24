@@ -39,7 +39,7 @@ class UsedProtectedMethod extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Method', 'Magicmethod'))
-             ->_as('method')
+             ->as('method')
              ->is('visibility', 'protected')
              ->hasOut('DEFINITION');
         $this->prepareQuery();

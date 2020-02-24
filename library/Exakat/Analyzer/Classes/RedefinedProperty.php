@@ -31,7 +31,7 @@ class RedefinedProperty extends Analyzer {
         // class y extends x { protected $p = 1; }
         $this->atomIs('Ppp')
              ->outIs('PPP')
-             ->_as('ppp')
+             ->as('ppp')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToAllParents(self::EXCLUDE_SELF)

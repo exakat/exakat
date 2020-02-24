@@ -31,7 +31,7 @@ class RedefinedConstants extends Analyzer {
              ->outIs('CONST')
              ->atomIs('Const')
              ->outIs('CONST')
-             ->_as('results')
+             ->as('results')
              ->outIs('NAME')
              ->savePropertyAs('code', 'constante')
              ->back('first')

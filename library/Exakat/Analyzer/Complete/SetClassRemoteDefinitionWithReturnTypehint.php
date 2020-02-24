@@ -39,7 +39,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Analyzer {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->_as('method')
+              ->as('method')
               ->hasNoIn('DEFINITION')
               ->back('first')
               
@@ -63,7 +63,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Analyzer {
              ->outIs('DEFINITION')
              ->inIs('OBJECT')
              ->hasNoIn('DEFINITION')
-             ->_as('member')
+             ->as('member')
              ->atomIs('Member', self::WITHOUT_CONSTANTS)
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')

@@ -32,7 +32,7 @@ class UncommonEnvVar extends Analyzer {
         $this->atomIs('Phpvariable')
              ->codeIs('$_ENV', self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE')
-             ->_as('result')
+             ->as('result')
              ->outIs('INDEX')
              ->atomIs('String')
              ->noDelimiterIsNot($classicEnv)

@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class AvoidOptionalProperties extends Analyzer {
     public function dependsOn() : array {
-        return array('Classes/Constructor');
+        return array('Classes/Constructor',
+                    );
     }
     
     public function analyze() {
@@ -48,7 +49,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->back('first')
              ->inIs('ARGUMENT')
              ->atomIs(array('Empty', 'Isset'))
-             ->_as('results')
+             ->as('results')
              ->goToClass()
              ->outIs('PPP')
              ->outIs('PPP')
@@ -67,7 +68,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->back('first')
              ->inIs('ARGUMENT')
              ->functioncallIs('\\is_null')
-             ->_as('results')
+             ->as('results')
              ->goToClass()
              ->outIs('PPP')
              ->outIs('PPP')
@@ -87,7 +88,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->back('first')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
-             ->_as('results')
+             ->as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Null')
              ->back('results')
