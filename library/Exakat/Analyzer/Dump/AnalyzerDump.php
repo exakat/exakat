@@ -27,12 +27,18 @@ use Exakat\Dump\Dump;
 
 abstract class AnalyzerDump extends Analyzer {
     public function getDumpResults() : array {
-         $dump      = Dump::factory($this->config->dump);
+        switch ($this->storageType) {
+            case self::QUERY_PHP_ARRAYS : 
+            case self::QUERY_HASH : 
+                $dump      = Dump::factory($this->config->dump);
 
-        $res = $dump->fetchHashResults($this->analyzerName);
-        return $res->toArray();
+                $res = $dump->fetchHashResults($this->analyzerName);
+                return $res->toArray();
 
-        return array();
+            default : 
+                print "Not results handling for {$this->storageType}\n";
+                return array();
+        }
     }
 }
 

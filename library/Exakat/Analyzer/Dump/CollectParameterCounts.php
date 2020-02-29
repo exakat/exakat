@@ -22,16 +22,16 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+class CollectParameterCounts extends AnalyzerDump {
+    protected $analyzerName = 'ParameterCounts';
+    protected $storageType = self::QUERY_HASH;
 
-class CollectParameterCounts extends Analyzer {
     public function analyze() {
         // foo($a, $b, ...$c) : 3 parameter
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw('groupCount("m").by("count").cap("m")');
 
-        $this->analyzerName = 'ParameterCounts';
-        $this->prepareQuery(self::QUERY_HASH);
+        $this->prepareQuery();
     }
 }
 
