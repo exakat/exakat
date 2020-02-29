@@ -139,21 +139,30 @@ abstract class Analyzer extends TestCase {
         }
 
         $shell_res = shell_exec($shell);
-        $res = json_decode($shell_res);
+        $res = json_decode($shell_res, true);
         if ($res === null) {
             $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'\n$shell");
         }
 
-        if (empty($res)) {
-            $list = array();
-        } else {
-            $list = array();
-            foreach($res as $r) {
-                $list[] = $r[0];
-            }
-            $this->assertNotEquals(count($list), 0, 'No values were read from the analyzer' );
-        }
+        $this->assertNotEmpty($res, 'No values were read from the analyzer');
         
+        $this->file = $file;
+        $this->number = $number;
+        $this->analyzer = $analyzer;
+        
+        if (isset($res[0]['fullcode'])) {
+            $list = array_column($res, 'fullcode');
+            $this->checkTestOnFullcode($list, $expected, $expected_not);
+        } elseif (isset($res[0]['key'], $res[0]['value'])) {
+            $this->checkTestOnHash($res, $expected, $expected_not);
+        } else {
+            $list = $res;
+            print_r($list); 
+            print "How shall we test this?\n";
+        }
+    }
+    
+    private function checkTestOnFullcode(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
         if (isset($expected) && is_array($expected)) {
             $missing = array();
             foreach($expected as $e) {
@@ -163,12 +172,12 @@ abstract class Analyzer extends TestCase {
                     $missing[] = $e;
                 }
             }
-            $list = array_map(function ($x) { return str_replace("'", "\\'", $x); }, $list);
+            $list = array_map(function (string $x) : string { return str_replace("'", "\\'", $x); }, $list);
             $this->assertEquals(count($missing), 0, count($missing)." expected values were not found :\n '".join("',\n '", $missing)."'\n\nin the ".count($list)." received values of \n '".join("', \n '", $list)."'
 
-source/$file.php
-exp/$file.php
-phpunit --filter=$number Test/$analyzer.php
+source/$this->file.php
+exp/$this->file.php
+phpunit --filter=$this->number Test/$this->analyzer.php
 
 ");
             // also add a phpunit --filter to rerun it easily
@@ -185,9 +194,50 @@ phpunit --filter=$number Test/$analyzer.php
             // the not expected
             $this->assertEquals(count($extra), 0, count($extra)." values were found and shouldn't be : ".join(', ', $extra)."");
         }
-        
+
         // the remainings
         $this->assertEquals(count($list), 0, count($list)." values were found and are unprocessed : ".join(', ', $list)."");
+    }
+
+    private function checkTestOnHash(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
+        $expected     = array_column($expected, 'value', 'key');
+        $expected_not = array_column($expected_not, 'value', 'key');
+        $list         = array_column($list, 'value', 'key');
+
+        if (isset($expected) && is_array($expected)) {
+            $missing = array();
+            foreach($expected as $k => $v) {
+                if (isset($list[$k]) && $list[$k] === $v) {
+                    unset($list[$k]);
+                } else {
+                    $missing[] = $k;
+                }
+            }
+
+            $this->assertEmpty($missing, count($missing)." expected values were not found :\n '".join("',\n '", $missing)."'\n\nin the ".count($list)." received values of \n '".join("', \n '", $list)."'
+
+source/$this->file.php
+exp/$this->file.php
+phpunit --filter=$this->number Test/$this->analyzer.php
+
+");
+            // also add a phpunit --filter to rerun it easily
+        }
+
+        if (isset($expected_not) && is_array($expected)) {
+            $extra = array();
+            foreach($expected_not as $k => $v) {
+                if (isset($list[$k]) && $list[$k] === $v) {
+                    $extra[] = $k;
+                    unset($list[$k]);
+                } 
+            }
+            // the not expected
+            $this->assertEquals(count($extra), 0, count($extra)." values were found and shouldn't be : ".join(', ', $extra)."");
+        }
+
+        // the remainings
+        $this->assertEquals(count($list), 0, count($list)." values were found and are unprocessed : ".join(', ', array_keys($list))."");
     }
 }
 
