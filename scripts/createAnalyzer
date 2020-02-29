@@ -161,6 +161,8 @@ $sqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idUnassigned')
 // 38 is id for All
 $sqlite->query("INSERT INTO analyzers_categories VALUES ('$id', 38)"); 
 
+$sqlite->query("VACUUM"); 
+
 // add test
 shell_exec("cd tests/analyzer/; php create_test.php $analyzer");
 
