@@ -85,6 +85,7 @@ abstract class Analyzer {
     protected $analyzerSQLTable = 'no analyzer sql creation';
     protected $missingQueries   = array();
     protected $analyzedValues   = array();
+    protected $storageType      = self::QUERY_DEFAULT;
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -339,6 +340,32 @@ g.V().hasLabel("Analysis").has("analyzer", within(args))
        "function":theFunction,
        "analyzer":analyzer];}
 GREMLIN;
+        return $this->gremlin->query($query, array('args' => array($this->shortAnalyzer)))
+                             ->toArray();
+    }
+    
+    public function getDumpResults() : array {
+        $linksDown = GraphElements::linksAsList();
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", within(args)).out("ANALYZED")
+.sideEffect{ line = it.get().value("line");
+             fullcode = it.get().value("fullcode");
+             file="None"; 
+             theFunction = "None"; 
+             theClass="None"; 
+             theNamespace="None"; 
+             }
+.where( __.until( hasLabel("Project") ).repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrowfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("code")} }
+      .sideEffect{ if (it.get().label() in ["Class", "Classanonymous", "Trait", "Interface"]) { theClass = it.get().value("fullcode")} }
+      .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
+       )
+)
+.map{ ["line":line, "file":file, "fullcode":fullcode, "function":theFunction, "class":theClass, "namespace":theNamespace]; }
+GREMLIN;
+
         return $this->gremlin->query($query, array('args' => array($this->shortAnalyzer)))
                              ->toArray();
     }
@@ -1702,8 +1729,8 @@ GREMLIN;
         $this->query->printQuery();
     }
     
-    public function prepareQuery($type = self::QUERY_DEFAULT) {
-        switch($type) {
+    public function prepareQuery() : void {
+        switch($this->storageType) {
             case self::QUERY_HASH: 
                 $this->storeToHashResults();
                 break;
@@ -1827,7 +1854,7 @@ GREMLIN
         return count($valuesSQL);
     }
     
-    private function storePhpHashToHashResults() {
+    private function storePhpHashToHashResults() : int {
         ++$this->queryId;
 
         $this->processedCount += count($this->analyzedValues);
@@ -1862,7 +1889,7 @@ GREMLIN
         $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
         $valuesSQL = array();
-        foreach($this->analyzedValues as list($key, $value)) {
+        foreach($this->analyzerValues as list($key, $value)) {
             $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString($key)."', '".\Sqlite3::escapeString($value)."') \n";
         }
 

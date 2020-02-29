@@ -22,33 +22,17 @@
 
 namespace Exakat\Analyzer\Dump;
 
-class CollectMbstringEncodings extends AnalyzerDump {
-    protected $analyzerName = 'Mbstring Encodings';
-    protected $storageType = self::QUERY_PHP_ARRAYS;
-    
-    public function analyze() {
-        // mb_stotolower('PHP', 'utf-8');
-        $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');
+use Exakat\Analyzer\Analyzer;
+use Exakat\Dump\Dump;
 
-        $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
-             ->noDelimiterIs($encodings, self::CASE_INSENSITIVE)
-             ->values('noDelimiter');
-        $encodings = $this->rawQuery()->toArray();
+abstract class AnalyzerDump extends Analyzer {
+    public function getDumpResults() : array {
+         $dump      = Dump::factory($this->config->dump);
 
-        $stats = array_count_values($encodings);
+        $res = $dump->fetchHashResults($this->analyzerName);
+        return $res->toArray();
 
-        $valuesSQL = array();
-        foreach($stats as $name => $count) {
-            $valuesSQL[] = array($name, $count);
-        }
-
-        if (empty($valuesSQL)) {
-            return;
-        }
-
-        $this->analyzerValues = $valuesSQL;
-
-        $this->prepareQuery();
+        return array();
     }
 }
 

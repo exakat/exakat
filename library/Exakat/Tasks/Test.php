@@ -67,6 +67,19 @@ class Test extends Tasks {
         $analyze->run();
         unset($analyze);
 
+        display("Dumping results\n");
+        $args = array ( 1 => 'dump',
+                        2 => '-p',
+                        3 => 'test',
+                        4 => '-load-dump',
+                        5 => '-u',
+                        );
+        $configThema = new Config($args);
+
+        $analyze = new Dump(Tasks::IS_SUBTASK);
+        $analyze->setConfig($configThema);
+        $analyze->run();
+
         $results = new Results(Tasks::IS_SUBTASK);
         $results->run();
         unset($results);

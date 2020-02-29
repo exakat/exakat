@@ -80,45 +80,13 @@ GREMLIN;
 
             $return[] = $vertices[0];
         } elseif ($this->config->style === 'ALL') {
-            $linksDown = GraphElements::linksAsList();
-
-            $analyzersClassList = makeList($analyzersClass);
-            $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out("ANALYZED")
-.sideEffect{ line = it.get().value("line");
-             fullcode = it.get().value("fullcode");
-             file="None"; 
-             theFunction = "None"; 
-             theClass="None"; 
-             theNamespace="None"; 
-             }
-.where( __.until( hasLabel("Project") ).repeat( 
-    __.in($linksDown)
-      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrowfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("code")} }
-      .sideEffect{ if (it.get().label() in ["Class", "Classanonymous", "Trait", "Interface"]) { theClass = it.get().value("fullcode")} }
-      .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
-       )
-)
-.map{ ["line":line, "file":file, "fullcode":fullcode, "function":theFunction, "class":theClass, "namespace":theNamespace]; }
-GREMLIN;
-
-            $vertices = $this->gremlin->query($query);
-            if (isset($vertices->results)) {
-                $vertices = $vertices->results;
-                print_r($vertices);
+            $results = array();
+            
+            foreach($analyzersClass as $oneAnalyzerClass) {
+                $analyzer =  $this->rulesets->getInstance($oneAnalyzerClass, null, $this->config);
+                $results[] = $analyzer->getDumpResults();
             }
-
-            $return = array();
-            foreach($vertices as $values) {
-                $row = array($values['fullcode'],
-                             $values['file'],
-                             $values['line'],
-                             $values['namespace'],
-                             $values['class'],
-                             $values['function'],
-                            );
-                $return[] = $row;
-            }
+            $return = array_merge(...$results);
         } elseif ($this->config->style === 'DISTINCT') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer . '").out("ANALYZED").values("code").unique()';
             $vertices = $this->gremlin->query($queryTemplate)->results;
