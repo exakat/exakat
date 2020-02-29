@@ -40,7 +40,7 @@ class CommandLine extends Config {
                                  '-json'      => 'json',
                                  '-array'     => 'array',
                                  '-dot'       => 'dot',
-                                 
+
                                  '-debug'     => 'debug',
 
                                  '-nodep'     => 'noDependencies',
@@ -52,6 +52,7 @@ class CommandLine extends Config {
                                  '-restart'   => 'restart',
                                  '-start'     => 'start',
                                  '-collect'   => 'collect',
+                                 '-load-dump' => 'load_dump', // for Dump
 
     // Vcs
                                  '-svn'       => 'svn',

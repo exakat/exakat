@@ -96,9 +96,13 @@ class Dump extends Tasks {
             display('Collecting data');
 
             $this->collect();
+            $this->loadSqlDump();
         }
-        
-        $this->loadSqlDump();
+
+        if ($this->config->load_dump === true) {
+            // when coupled to -collect, this will be in double, but without effect.
+            $this->loadSqlDump();
+        }
 
         $counts = array();
         $datastore = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
@@ -2480,6 +2484,7 @@ GREMLIN
     
     private function loadSqlDump() : void {
         $dumps = glob($this->config->tmp_dir.'/dump-*.php');
+        display('Loading '.count($dumps).' dumped SQL files');
 
         foreach($dumps as $dump) {
             include $dump;
