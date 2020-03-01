@@ -22,45 +22,43 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class FollowClosureDefinition extends Analyzer {
+class FollowClosureDefinition extends Complete {
     public function analyze() {
         // immediate usage : in parenthesis
-        $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
              ->inIsIE('RIGHT') // Skip all $closure =
               ->inIs('CODE')
               ->atomIs('Parenthesis')
               ->inIs('NAME')
               ->atomIs('Functioncall')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // local usage
-        $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
               ->inIs('RIGHT')
               ->outIs('LEFT')
               ->inIs('DEFINITION')  // Find all variable usage
               ->outIs('DEFINITION')
               ->inIs('NAME')
-              ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // relayed usage
-        $this->atomIs(array('Closure', 'Arrowfunction'), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
               ->hasIn('ARGUMENT')
               ->savePropertyAs('rank', 'ranked')
               ->inIs('ARGUMENT')
               ->inIs('DEFINITION')  // Find all variable usage
               ->outIs('ARGUMENT')
-              ->samePropertyAs('rank', 'ranked', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
               ->outIs('NAME')
               ->outIs('DEFINITION')
               ->inIs('NAME')
-              ->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class PhpNativeReference extends Analyzer {
+class PhpNativeReference extends Complete {
     public function analyze() {
         // PHP functions that are using references
         $functions = $this->methods->getFunctionsReferenceArgs();
@@ -40,7 +38,7 @@ class PhpNativeReference extends Analyzer {
               ->isHash('rank', $references, 'fnp')
               ->atomIs(self::$CONTAINERS)
               ->setProperty('isModified', true);
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

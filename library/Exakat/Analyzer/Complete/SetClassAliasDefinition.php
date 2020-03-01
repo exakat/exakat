@@ -22,25 +22,23 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassAliasDefinition extends Analyzer {
+class SetClassAliasDefinition extends Complete {
     public function analyze() {
         // class_alias('A', 'B')
-        $this->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Class', 'Interface', 'Trait'), self::WITHOUT_CONSTANTS)
               ->as('method')
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs('DEFINITION')
               ->is('rank', 0)
               ->inIs('ARGUMENT')
-              ->atomIs('Classalias', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Classalias', self::WITHOUT_CONSTANTS)
               ->outWithRank('ARGUMENT', 1)
               ->outIs('DEFINITION')
-              ->atomIs(array('Identifier', 'Nsname', 'Newcall', 'Name'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Identifier', 'Nsname', 'Newcall', 'Name'), self::WITHOUT_CONSTANTS)
               ->dedup('')
               ->setProperty('fullnspath', 'fnp')
               ->addEFrom('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Complete;
 
 use Exakat\Analyzer\Analyzer;
 
-class OverwrittenConstants extends Analyzer {
+class OverwrittenConstants extends Complete {
     public function analyze() {
         // class x { protected const X = 1;}
         // class xx extends x {  protected const X = 1;}
@@ -40,7 +40,7 @@ class OverwrittenConstants extends Analyzer {
               ->samePropertyAs('code', 'name',  Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
+class SetClassRemoteDefinitionWithParenthesis extends Complete {
     public function analyze() {
         // (new x)->foo()
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
@@ -53,7 +51,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // (new x)::foo()
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
@@ -81,7 +79,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // (new x)::foo()
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
@@ -110,7 +108,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // (new x)::foo()
         $this->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
@@ -138,7 +136,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // (new x)::FOO
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
@@ -168,7 +166,7 @@ class SetClassRemoteDefinitionWithParenthesis extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'constant');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

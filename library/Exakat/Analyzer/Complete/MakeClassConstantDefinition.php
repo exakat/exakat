@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class MakeClassConstantDefinition extends Analyzer {
+class MakeClassConstantDefinition extends Complete {
     public function dependsOn() : array {
         return array('Complete/SetParentDefinition',
                     );
@@ -48,10 +46,10 @@ class MakeClassConstantDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between Class constant and definition
-        $this->atomIs('Staticconstant', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->savePropertyAs('code', 'name')
@@ -69,7 +67,7 @@ class MakeClassConstantDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -90,7 +88,7 @@ class MakeClassConstantDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -111,7 +109,7 @@ class MakeClassConstantDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

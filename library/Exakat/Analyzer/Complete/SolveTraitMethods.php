@@ -22,16 +22,14 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SolveTraitMethods extends Analyzer {
+class SolveTraitMethods extends Complete {
     public function analyze() {
-        $this->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Usetrait', self::WITHOUT_CONSTANTS)
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')
-              ->atomIs('As', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('As', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
-              ->atomIs('Staticmethod', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Staticmethod', self::WITHOUT_CONSTANTS)
               ->as('results')
               ->tokenIs('T_STRING')
               ->savePropertyAs('lccode', 'methode')
@@ -40,28 +38,28 @@ class SolveTraitMethods extends Analyzer {
               ->inIs('DEFINITION')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
-              ->samePropertyAs('lccode', 'methode', Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('lccode', 'methode', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'results');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
-        $this->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Usetrait', self::WITHOUT_CONSTANTS)
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')
-              ->atomIs('As', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('As', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->as('results')
-              ->atomIs('Nsname', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Nsname', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'methode')
               ->back('first')
               ->outIs('USE')
               ->inIs('DEFINITION')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
-              ->samePropertyAs('lccode', 'methode', Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('lccode', 'methode', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'results');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

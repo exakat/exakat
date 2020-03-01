@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class CreateCompactVariables extends Analyzer {
+class CreateCompactVariables extends Complete {
     public function analyze() {
         $this->atomFunctionIs('\compact')
               ->outIs('ARGUMENT')
@@ -34,11 +32,11 @@ class CreateCompactVariables extends Analyzer {
               ->makeVariableName('name')
               ->goToInstruction(array('Function', 'Closure', 'Method', 'Magicmethod', 'File'))
               ->outIs(array('DEFINITION', 'ARGUMENT', 'USE'))
-              ->atomIs(array('Variabledefinition', 'Globaldefinition', 'Staticdefinition', 'Parameter'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Variabledefinition', 'Globaldefinition', 'Staticdefinition', 'Parameter'), self::WITHOUT_CONSTANTS)
               ->outIsIE('NAME')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('fullcode', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'varInString');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

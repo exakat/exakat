@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class CreateForeachDefault extends Analyzer {
+class CreateForeachDefault extends Complete {
     public function dependsOn() : array {
         return array('Complete/CreateDefaultValues',
                     );
@@ -47,7 +45,7 @@ class CreateForeachDefault extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
              ->addEFrom('DEFAULT', 'v');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // $a = [1 => 2]; foreach($a as $k => $v) {}
         $this->atomIs('Foreach')
@@ -65,7 +63,7 @@ class CreateForeachDefault extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('INDEX')
              ->addEFrom('DEFAULT', 'v');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

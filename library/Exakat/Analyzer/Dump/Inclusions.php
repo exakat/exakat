@@ -23,21 +23,21 @@
 namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Analyzer;
 
 class Inclusions extends AnalyzerDump {
     protected $analyzerName = 'inclusions';
     
     protected $storageType = self::QUERY_TABLE;
-    
-    public function analyze() {
-        // Store inclusionss of files within each other
-        $this->analyzerSQLTable = <<<'SQL'
+
+    protected $analyzerSQLTable = <<<'SQL'
 CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            including STRING,
                            included STRING
                         )
 SQL;
-
+    
+    public function analyze() {
         $this ->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
               ->as('included')
               ->goToInstruction('File')

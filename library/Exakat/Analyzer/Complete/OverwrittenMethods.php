@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class OverwrittenMethods extends Analyzer {
+class OverwrittenMethods extends Complete {
     public function analyze() {
         // class x { protected function foo()  {}}
         // class xx extends x { protected function foo()  {}}
@@ -38,7 +36,7 @@ class OverwrittenMethods extends Analyzer {
               ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // interface x { protected function foo()  {}}
         // interface xx extends x { protected function foo()  {}}
@@ -52,7 +50,7 @@ class OverwrittenMethods extends Analyzer {
               ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

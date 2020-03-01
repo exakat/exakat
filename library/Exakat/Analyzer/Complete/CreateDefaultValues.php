@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class CreateDefaultValues extends Analyzer {
+class CreateDefaultValues extends Complete {
     public function analyze() {
         // Link initial values for containers
         $this->atomIs(array('Variabledefinition',
@@ -34,16 +32,16 @@ class CreateDefaultValues extends Analyzer {
                             'Virtualproperty',
                             'Propertydefinition',
                             'Parametername',
-                            ), Analyzer::WITHOUT_CONSTANTS)
+                            ), self::WITHOUT_CONSTANTS)
              ->as('results')
              ->outIs('DEFINITION')
              ->inIs('LEFT')
-             ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
-             ->codeIs(array('=', '??='), Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
+             ->atomIs('Assignation', self::WITHOUT_CONSTANTS)
+             ->codeIs(array('=', '??='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->followParAs('RIGHT')
 
              ->addEFrom('DEFAULT', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

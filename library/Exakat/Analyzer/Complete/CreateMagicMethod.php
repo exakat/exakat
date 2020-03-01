@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class CreateMagicMethod extends Analyzer {
+class CreateMagicMethod extends Complete {
     public function dependsOn() : array {
         return array('Complete/OverwrittenMethods',
                      'Complete/SetParentDefinition',
@@ -61,7 +59,7 @@ class CreateMagicMethod extends Analyzer {
               ->codeIs('__call', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // link to __callStatic
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
@@ -86,7 +84,7 @@ class CreateMagicMethod extends Analyzer {
               ->codeIs('__callstatic', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

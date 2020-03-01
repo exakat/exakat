@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class MakeFunctioncallWithReference extends Analyzer {
+class MakeFunctioncallWithReference extends Complete {
     public function dependsOn() : array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/PropagateCalls',
@@ -43,7 +41,7 @@ class MakeFunctioncallWithReference extends Analyzer {
             $this->atomFunctionIs($calls)
                  ->outWithRank('ARGUMENT', $position)
                  ->setProperty('isModified', true);
-            $this->prepareQuery(self::QUERY_NO_ANALYZED);
+            $this->prepareQuery();
         }
 
         // Case of Custom native functions
@@ -56,7 +54,7 @@ class MakeFunctioncallWithReference extends Analyzer {
              ->outIsIE('METHOD')
              ->outWithRank('ARGUMENT', 'ranked')
              ->setProperty('isModified', true);
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

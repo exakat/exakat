@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class PropagateCalls extends Analyzer {
+class PropagateCalls extends Complete {
     public function dependsOn() : array {
         return array('Complete/CreateDefaultValues',
                     );

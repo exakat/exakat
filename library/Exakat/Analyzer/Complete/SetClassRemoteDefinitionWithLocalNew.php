@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
+class SetClassRemoteDefinitionWithLocalNew extends Complete {
     public function dependsOn() : array {
         return array('Complete/CreateDefaultValues',
                     );
@@ -52,7 +50,7 @@ class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->as('member')
@@ -74,7 +72,7 @@ class SetClassRemoteDefinitionWithLocalNew extends Analyzer {
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

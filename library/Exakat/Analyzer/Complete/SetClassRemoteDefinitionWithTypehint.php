@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassRemoteDefinitionWithTypehint extends Analyzer {
+class SetClassRemoteDefinitionWithTypehint extends Complete {
     public function analyze() {
 
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
@@ -55,7 +53,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->as('member')
@@ -85,7 +83,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->as('constante')
@@ -116,7 +114,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'constante');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
@@ -147,7 +145,7 @@ class SetClassRemoteDefinitionWithTypehint extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

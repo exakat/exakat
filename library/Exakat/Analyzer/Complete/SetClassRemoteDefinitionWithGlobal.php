@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassRemoteDefinitionWithGlobal extends Analyzer {
+class SetClassRemoteDefinitionWithGlobal extends Complete {
     public function analyze() {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->as('method')
@@ -41,7 +39,7 @@ class SetClassRemoteDefinitionWithGlobal extends Analyzer {
               ->outIs('DEFINITION')
               ->outIs('DEFINITION')
               ->inIs('LEFT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS) // code is =
+              ->atomIs('Assignation', self::WITHOUT_CONSTANTS) // code is =
               ->outIs('RIGHT')
               ->atomIs('New', self::WITHOUT_CONSTANTS)
               ->outIs('NEW')
@@ -53,7 +51,7 @@ class SetClassRemoteDefinitionWithGlobal extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->as('member')
@@ -81,7 +79,7 @@ class SetClassRemoteDefinitionWithGlobal extends Analyzer {
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

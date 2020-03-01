@@ -22,21 +22,19 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetCloneLink extends Analyzer {
+class SetCloneLink extends Complete {
     public function analyze() {
         // class x { function __clone() {}}
         // clone (new x)
-        $this->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Clone', self::WITHOUT_CONSTANTS)
               ->outIs('CLONE')
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Class', 'Classanonymous'), self::WITHOUT_CONSTANTS)
               ->outIs('MAGICMETHOD')
               ->outIs('NAME')
-              ->codeIs('__clone', Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+              ->codeIs('__clone', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

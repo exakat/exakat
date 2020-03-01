@@ -22,16 +22,14 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetParentDefinition extends Analyzer {
+class SetParentDefinition extends Complete {
     public function analyze() {
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->goToClass()
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Newcall', self::WITHOUT_CONSTANTS)
               ->fullnspathIs('\\parent', self::CASE_SENSITIVE)
@@ -39,7 +37,7 @@ class SetParentDefinition extends Analyzer {
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->as('parent')
@@ -56,7 +54,7 @@ class SetParentDefinition extends Analyzer {
               ->outIs('PPP')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'property');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
               ->as('parent')
@@ -73,7 +71,7 @@ class SetParentDefinition extends Analyzer {
               ->outIs('CONST')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'constant');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('String', self::WITHOUT_CONSTANTS)
               ->fullnspathIs('\\\\parent', self::CASE_SENSITIVE)
@@ -82,7 +80,7 @@ class SetParentDefinition extends Analyzer {
               ->outIs('EXTENDS')
               ->inIs('DEFINITION')
               ->addETo('DEFINITION', 'parent');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

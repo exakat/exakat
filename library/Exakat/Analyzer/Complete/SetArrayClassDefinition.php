@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetArrayClassDefinition extends Analyzer {
+class SetArrayClassDefinition extends Complete {
     public function dependsOn() : array {
         return array('Complete/PropagateCalls',
                     );
@@ -32,31 +30,31 @@ class SetArrayClassDefinition extends Analyzer {
 
     public function analyze() {
         // array(\x, foo)
-        $this->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)
               ->is('count', 2)
               ->outWithRank('ARGUMENT', 1)
-              ->atomIs(array('String', 'Heredoc', 'Concatenation'), Analyzer::WITH_CONSTANTS)
+              ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
               ->has('noDelimiter')
               ->savePropertyAs('noDelimiter', 'method')
               ->back('first')
               ->outWithRank('ARGUMENT', 0)
-              ->atomIs(array('String', 'Heredoc', 'Concatenation', 'Staticclass'), Analyzer::WITH_CONSTANTS)
+              ->atomIs(array('String', 'Heredoc', 'Concatenation', 'Staticclass'), self::WITH_CONSTANTS)
               ->outIsIE('CLASS') // For Staticclass only
               ->inIs('DEFINITION')
               ->atomIs('Class')
               ->outIs(array('MAGICMETHOD', 'METHOD'))
               ->atomIs(array('Method', 'Magicmethod'))
               ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('fullcode', 'method', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEto('DEFINITION', 'first');
         $this->prepareQuery(self::QUERY_NO_ANALYZED);
 
         // array(\x, foo)
-        $this->atomIs('Arrayliteral', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)
               ->is('count', 2)
               ->outWithRank('ARGUMENT', 1)
-              ->atomIs(array('String', 'Heredoc', 'Concatenation'), Analyzer::WITH_CONSTANTS)
+              ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
               ->has('noDelimiter')
               ->savePropertyAs('noDelimiter', 'method')
               ->back('first')
@@ -71,10 +69,10 @@ class SetArrayClassDefinition extends Analyzer {
               ->outIs(array('MAGICMETHOD', 'METHOD'))
               ->atomIs(array('Method', 'Magicmethod'))
               ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('fullcode', 'method', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEto('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

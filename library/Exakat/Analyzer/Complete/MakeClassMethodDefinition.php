@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class MakeClassMethodDefinition extends Analyzer {
+class MakeClassMethodDefinition extends Complete {
     public function dependsOn() : array {
         return array('Complete/SetParentDefinition',
                      'Complete/CreateDefaultValues',
@@ -51,7 +49,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -68,7 +66,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between Class method and definition
         // This works only for $this
@@ -87,7 +85,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between Class method and definition
         // This works only for $this
@@ -122,7 +120,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between Class method and definition
         // This works only for $this
@@ -159,7 +157,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between Class method and definition
         // This works only for $this
@@ -186,14 +184,14 @@ class MakeClassMethodDefinition extends Analyzer {
               ->inIs('METHOD')
               ->outIs('CLASS')
               ->inIs('DEFINITION')
-              ->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Trait', self::WITHOUT_CONSTANTS)
               ->GoToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between Class method and definition
         // This works only for $this
@@ -213,7 +211,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('EXPRESSION')
               ->atomIs('As', self::WITHOUT_CONSTANTS)
               ->outIs('AS')
-              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('AS')
               ->outIs('NAME')
               ->savePropertyAs('lccode', 'realname')
@@ -223,14 +221,14 @@ class MakeClassMethodDefinition extends Analyzer {
               ->outIs('USE')
               ->inIs('DEFINITION')
               ->atomIs('Trait', self::WITHOUT_CONSTANTS)
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->GoToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
 
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'realname', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
@@ -250,11 +248,11 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between static Class method and its definition
         // This works outside a class too, for static.
-        $this->atomIs('Staticmethodcall', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->savePropertyAs('lccode', 'name')
@@ -269,7 +267,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between constructor and new call
         $this->atomIs('New', self::WITHOUT_CONSTANTS)
@@ -283,7 +281,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('New', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -300,7 +298,7 @@ class MakeClassMethodDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('New', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
@@ -318,7 +316,7 @@ GREMLIN
               ->outIs('MAGICMETHOD')
               ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // Create link between __clone and clone
         // parenthesis, typehint, local new,
@@ -332,7 +330,7 @@ GREMLIN
               ->outIs('MAGICMETHOD')
               ->codeIs('__clone', self::TRANSLATE, self::CASE_INSENSITIVE)
               ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

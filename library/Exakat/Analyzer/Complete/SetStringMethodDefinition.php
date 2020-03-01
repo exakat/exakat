@@ -22,12 +22,10 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetStringMethodDefinition extends Analyzer {
+class SetStringMethodDefinition extends Complete {
     public function analyze() {
         // $a = 'B::C' with class B { function C() {}}
-        $this->atomIs('String', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('String', self::WITHOUT_CONSTANTS)
               ->hasIn('DEFINITION')
               ->regexIs('noDelimiter', '::')
               ->initVariable('name', '""')
@@ -44,12 +42,12 @@ filter{
 GREMLIN)
               ->inIs('DEFINITION')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('fullcode', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addEto('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

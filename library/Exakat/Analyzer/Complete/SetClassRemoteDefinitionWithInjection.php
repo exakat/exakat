@@ -22,27 +22,25 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassRemoteDefinitionWithInjection extends Analyzer {
+class SetClassRemoteDefinitionWithInjection extends Complete {
     public function analyze() {
-        $this->atomIs(Analyzer::$CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(self::$CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('TYPEHINT')
               ->outIs('NAME')
               ->outIs('DEFINITION')
-              ->atomIs('Variable', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Variable', self::WITHOUT_CONSTANTS)
               ->inIs('RIGHT')
-              ->atomIs('Assignation', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Assignation', self::WITHOUT_CONSTANTS)
               ->outIs('LEFT')
-              ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Member', self::WITHOUT_CONSTANTS)
 
               ->inIs('DEFINITION')
-              ->atomIs('Propertydefinition',  Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Propertydefinition',  self::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
-              ->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->addEFrom('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

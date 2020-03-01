@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Analyzer;
 
 class NewOrder extends AnalyzerDump {
     protected $analyzerName = 'newOrder';

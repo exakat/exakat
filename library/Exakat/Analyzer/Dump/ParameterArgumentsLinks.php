@@ -30,7 +30,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
     protected $storageType = self::QUERY_PHP_ARRAYS;
     
     public function analyze() {
-        $this->analyzedValues = array();
+        $this->analyzerValues = array();
         
         // Total parameter usage
         $this->atomIs('Parameter')
@@ -43,7 +43,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->outWithRank('ARGUMENT', 'ranked')
              ->count();
         $total = $this->rawQuery()->toInt();
-        $this->analyzedValues[] = array('total', $total);
+        $this->analyzerValues[] = array('total', $total);
 
         // identical parameter usage
         $this->atomIs('Parameter')
@@ -60,7 +60,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->samePropertyAs('code', 'name')
              ->count();
         $identical = $this->rawQuery()->toInt();
-        $this->analyzedValues[] = array('identical', $identical);
+        $this->analyzerValues[] = array('identical', $identical);
 
         // different variable parameter usage
         $this->atomIs('Parameter')
@@ -77,7 +77,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->notSamePropertyAs('code', 'name')
              ->count();
         $different = $this->rawQuery()->toInt();
-        $this->analyzedValues[] = array('different', $different);
+        $this->analyzerValues[] = array('different', $different);
 
         // expression parameter usage
         $this->atomIs('Parameter')
@@ -92,7 +92,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->atomIsNot(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->count();
         $build = $this->rawQuery()->toInt();
-        $this->analyzedValues[] = array('expression', $build);
+        $this->analyzerValues[] = array('expression', $build);
 
         // constant parameter usage
         $this->atomIs('Parameter')
@@ -107,7 +107,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->is('constant', true)
              ->count();
         $constant = $this->rawQuery()->toInt();
-        $this->analyzedValues[] = array('constant', $constant);
+        $this->analyzerValues[] = array('constant', $constant);
 
         $this->prepareQuery();
     }

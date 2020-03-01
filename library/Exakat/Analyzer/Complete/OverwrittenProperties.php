@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class OverwrittenProperties extends Analyzer {
+class OverwrittenProperties extends Complete {
     public function analyze() {
         // class x { protected $p = 1;}
         // class xx extends x { protected $p = 1;}
@@ -38,7 +36,7 @@ class OverwrittenProperties extends Analyzer {
               ->samePropertyAs('propertyname', 'name',  self::CASE_SENSITIVE)
               ->raw('where(neq("first"))')
               ->addEFrom('OVERWRITE', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

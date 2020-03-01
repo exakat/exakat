@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassMethodRemoteDefinition extends Analyzer {
+class SetClassMethodRemoteDefinition extends Complete {
     public function analyze() {
         $this->atomIs(array('Staticmethodcall', 'Methodcall'), self::WITHOUT_CONSTANTS)
               ->as('method')
@@ -50,7 +48,7 @@ class SetClassMethodRemoteDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Staticmethod', self::WITHOUT_CONSTANTS)
               ->as('method')
@@ -68,7 +66,7 @@ class SetClassMethodRemoteDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
               ->as('method')
@@ -95,7 +93,7 @@ class SetClassMethodRemoteDefinition extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

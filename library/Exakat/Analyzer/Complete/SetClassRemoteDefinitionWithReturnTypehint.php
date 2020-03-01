@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class SetClassRemoteDefinitionWithReturnTypehint extends Analyzer {
+class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
     public function analyze() {
         $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
@@ -52,7 +50,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Analyzer {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
              ->hasOut('RETURNTYPE')
@@ -77,7 +75,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Analyzer {
              ->outIs('PPP')
              ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
              ->addETo('DEFINITION', 'member');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 

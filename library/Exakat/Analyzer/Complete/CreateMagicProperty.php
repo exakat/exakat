@@ -22,9 +22,7 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
-
-class CreateMagicProperty extends Analyzer {
+class CreateMagicProperty extends Complete {
     public function dependsOn() : array {
         return array('Complete/OverwrittenProperties',
                      'Complete/SetClassRemoteDefinitionWithTypehint',
@@ -73,14 +71,14 @@ class CreateMagicProperty extends Analyzer {
              ->goToAllParentsTraits(self::INCLUDE_SELF)
              ->outIs('MAGICMETHOD')
              ->outIs('NAME')
-             ->codeIs('__get', Analyzer::TRANSLATE, self::CASE_INSENSITIVE)
+             ->codeIs('__get', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
 
              ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // link to __set
-        $this->atomIs('Member', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Member', self::WITHOUT_CONSTANTS)
              ->is('isModified', true)
              ->not(
                 $this->side()
@@ -120,7 +118,7 @@ class CreateMagicProperty extends Analyzer {
              ->codeIs('__set', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // isset($this->a)
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
@@ -155,7 +153,7 @@ class CreateMagicProperty extends Analyzer {
              ->codeIs('__isset', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // unset($this->a)
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
@@ -190,7 +188,7 @@ class CreateMagicProperty extends Analyzer {
              ->codeIs('__unset', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // unset() $this->a
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
@@ -226,7 +224,7 @@ class CreateMagicProperty extends Analyzer {
              ->codeIs('__unset', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->addETo('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 
