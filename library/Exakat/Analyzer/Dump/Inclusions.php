@@ -22,12 +22,15 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class Inclusions extends Analyzer {
+class Inclusions extends AnalyzerDump {
+    protected $analyzerName = 'inclusions';
+    
+    protected $storageType = self::QUERY_TABLE;
+    
     public function analyze() {
         // Store inclusionss of files within each other
-        $this->analyzerTable = 'inclusions';
         $this->analyzerSQLTable = <<<'SQL'
 CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            including STRING,
@@ -42,7 +45,7 @@ SQL;
               ->select(array('included'  => 'fullcode',
                              'including' => 'fullcode'));
 
-        $res = $this->prepareQuery(self::QUERY_TABLE);
+        $res = $this->prepareQuery();
     }
 }
 

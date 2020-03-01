@@ -22,9 +22,13 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class EnvironnementVariables extends Analyzer {
+class EnvironnementVariables extends AnalyzerDump {
+    protected $analyzerName = 'Environment Variables via Function';
+    
+    protected $storageType = self::QUERY_HASH;
+
     public function analyze() {
         //$_ENV['name']
         $this->atomIs('Phpvariable')
@@ -37,7 +41,7 @@ groupCount("m").by("noDelimiter").cap("m")
 GREMLIN
 );
         $this->analyzerName = 'Environment Variables';
-        $this->prepareQuery(self::QUERY_HASH);
+        $this->prepareQuery();
 
         //$_ENV['name']
         $this->atomFunctionIs(array('\\putenv', '\\getenv'))
@@ -47,8 +51,6 @@ GREMLIN
 groupCount("m").by("noDelimiter").cap("m")
 GREMLIN
 );
-        $this->analyzerName = 'Environment Variables via Function';
-        $this->prepareQuery(self::QUERY_HASH);
     }
 }
 

@@ -22,9 +22,13 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class CollectLiterals extends Analyzer {
+class CollectLiterals extends AnalyzerDump {
+    protected $analyzerName = 'Local Variable Counts';
+    
+    protected $storageType = self::QUERY_TABLE;
+    
     public function analyze() {
         $types = array('Integer', 'Float', 'String', 'Heredoc', 'Arrayliteral');
 
@@ -59,7 +63,7 @@ map{
 }
 GREMLIN
 );
-            $res = $this->prepareQuery(self::QUERY_TABLE);
+            $res = $this->prepareQuery();
         }
 /*
        $otherTypes = array('Null', 'Boolean', 'Closure');
@@ -100,7 +104,7 @@ map{
 
 GREMLIN
 );
-        $res = $this->prepareQuery(self::QUERY_TABLE);
+        $res = $this->prepareQuery();
     }
 }
 

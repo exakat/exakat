@@ -22,12 +22,15 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class Typehintorder extends Analyzer {
+class Typehintorder extends AnalyzerDump {
+    protected $analyzerName = 'typehintOrder';
+    
+    protected $storageType = self::QUERY_TABLE;
+    
     public function analyze() {
         // Store inclusionss of files within each other
-        $this->analyzerTable = 'typehintOrder';
         $this->analyzerSQLTable = <<<'SQL'
 CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                               host STRING,
@@ -48,7 +51,7 @@ SQL;
               ->select(array('first'    => 'fullnspath',
                              'argument' => 'fullnspath',
                              'returned' => 'fullnspath'));
-        $this->prepareQuery(self::QUERY_TABLE);
+        $this->prepareQuery();
 
         $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
@@ -61,7 +64,7 @@ SQL;
               ->select(array('first'    => 'fullnspath',
                              'argument' => '\\\\void',
                              'returned' => 'fullnspath'));
-        $this->prepareQuery(self::QUERY_TABLE);
+        $this->prepareQuery();
     }
 }
 

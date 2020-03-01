@@ -22,20 +22,23 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class NewOrder extends Analyzer {
-    public function analyze() {
-        // Store inclusionss of files within each other
-        $this->analyzerTable = 'newOrder';
-        $this->analyzerSQLTable = <<<'SQL'
+class NewOrder extends AnalyzerDump {
+    protected $analyzerName = 'newOrder';
+    
+    protected $storageType = self::QUERY_TABLE;
+
+    // Store inclusionss of files within each other
+    protected $analyzerSQLTable = <<<'SQL'
 CREATE TABLE newOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                          calling STRING,
                          called STRING,
                          CONSTRAINT "unique" UNIQUE (calling, called)  ON CONFLICT IGNORE
                         )
 SQL;
-
+    
+    public function analyze() {
         $this ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')
@@ -46,7 +49,7 @@ SQL;
               ->as('calling')
               ->select(array('calling' => 'fullnspath',
                              'called'  => 'fullnspath'));
-        $this->prepareQuery(self::QUERY_TABLE);
+        $this->prepareQuery();
     }
 }
 

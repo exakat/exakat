@@ -22,9 +22,13 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class IndentationLevels extends Analyzer {
+class IndentationLevels extends AnalyzerDump {
+    protected $analyzerName = 'Indentation Levels';
+    
+    protected $storageType = self::QUERY_HASH;
+
     public function analyze() {
         //function foo() { if (1) { /* level 2 */}}
         $this->atomIs(self::$FUNCTIONS_ALL)
@@ -33,9 +37,7 @@ class IndentationLevels extends Analyzer {
              ->atomIsNot('Sequence')
              ->raw('groupCount("m").by(__.sack()).cap("m")');
 
-        $this->analyzerName = 'Indentation Levels';
-
-        $this->prepareQuery(self::QUERY_HASH);
+        $this->prepareQuery();
     }
 }
 

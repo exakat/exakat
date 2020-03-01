@@ -22,16 +22,19 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class CollectLocalVariableCounts extends Analyzer {
+class CollectLocalVariableCounts extends AnalyzerDump {
+    protected $analyzerName = 'Local Variable Counts';
+    
+    protected $storageType = self::QUERY_HASH;
+    
     public function analyze() {
         // foo() {$t ; }
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw('groupCount("m").by(__.out("DEFINITION").hasLabel("Variabledefinition", "Staticdefinition").count()).cap("m")');
 
-        $this->analyzerName = 'Local Variable Counts';
-        $this->prepareQuery(self::QUERY_HASH);
+        $this->prepareQuery();
     }
 }
 

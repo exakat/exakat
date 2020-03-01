@@ -22,9 +22,13 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class CollectForeachFavorite extends Analyzer {
+class CollectForeachFavorite extends AnalyzerDump {
+    protected $analyzerName = 'Foreach Names';
+    
+    protected $storageType = self::QUERY_PHP_ARRAYS;
+    
     public function analyze() {
         // Foreach, values only
         $this->atomIs('Foreach')
@@ -61,10 +65,9 @@ class CollectForeachFavorite extends Analyzer {
             return;
         }
 
-        $this->analyzerName   = 'Foreach Names';
-        $this->analyzedValues = $valuesSQL;
+        $this->analyzerValues = $valuesSQL;
 
-        $this->prepareQuery(self::QUERY_PHP_ARRAYS);
+        $this->prepareQuery();
     }
 }
 

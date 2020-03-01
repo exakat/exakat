@@ -22,9 +22,13 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class ParameterArgumentsLinks extends Analyzer {
+class ParameterArgumentsLinks extends AnalyzerDump {
+    protected $analyzerName = 'Parameter Arguments';
+    
+    protected $storageType = self::QUERY_PHP_ARRAYS;
+    
     public function analyze() {
         $this->analyzedValues = array();
         
@@ -105,9 +109,7 @@ class ParameterArgumentsLinks extends Analyzer {
         $constant = $this->rawQuery()->toInt();
         $this->analyzedValues[] = array('constant', $constant);
 
-        $this->analyzerName   = 'Parameter Arguments';
-
-        $this->prepareQuery(self::QUERY_PHP_ARRAYS);
+        $this->prepareQuery();
     }
 }
 

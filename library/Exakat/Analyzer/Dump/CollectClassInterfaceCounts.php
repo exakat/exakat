@@ -22,17 +22,19 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class CollectClassInterfaceCounts extends Analyzer {
+class CollectClassInterfaceCounts extends AnalyzerDump {
+    protected $analyzerName = 'ClassInterfaces';
+    
+    protected $storageType = self::QUERY_HASH;
+    
     public function analyze() {
         //class x implements i,j,k {}
         $this->atomIs(self::$CLASSES_ALL)
              ->raw('groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m")');
 
-        $this->analyzerName = 'ClassInterfaces';
-
-        $this->prepareQuery(self::QUERY_HASH);
+        $this->prepareQuery();
     }
 }
 

@@ -22,9 +22,14 @@
 
 namespace Exakat\Analyzer\Dump;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class CyclomaticComplexity extends Analyzer {
+class CyclomaticComplexity extends AnalyzerDump {
+    protected $analyzerName = 'CyclomaticComplexity';
+    
+    protected $storageType = self::QUERY_ARRAYS;
+
     public function analyze() {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
@@ -48,9 +53,7 @@ project("cc").by(
 GREMLIN
 );
 
-        $this->analyzerName = 'CyclomaticComplexity';
-
-        $this->prepareQuery(self::QUERY_ARRAYS);
+        $this->prepareQuery();
     }
 }
 

@@ -22,16 +22,19 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class CollectClassDepth extends Analyzer {
+class CollectClassDepth extends AnalyzerDump {
+    protected $analyzerName = 'Class Depth';
+    
+    protected $storageType = self::QUERY_HASH;
+    
     public function analyze() {
         // class a {} class b extends a;
         $this->atomIs('Class')
              ->raw('groupCount("m").by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(2).count()).cap("m")');
 
-        $this->analyzerName = 'Class Depth';
-        $this->prepareQuery(self::QUERY_HASH);
+        $this->prepareQuery();
     }
 }
 
