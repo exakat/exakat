@@ -36,7 +36,7 @@ class AutoloadDev implements Autoloader {
             // Ignoring it all
             return;
         }
-        
+
         $this->path = $path;
     }
 
@@ -45,9 +45,10 @@ class AutoloadDev implements Autoloader {
             return; 
         }
 
-        $fileName = str_replace(array('Exakat\\', '\\'), array('', DIRECTORY_SEPARATOR), $name);
+        $fileName = str_replace(array('Exakat\\', '\\'), array('', DIRECTORY_SEPARATOR), $name).'.php';
+
         if (file_exists("{$this->path}/$fileName")) {
-            include $fullPath;
+            include "{$this->path}/$fileName";
         }
     }
 
