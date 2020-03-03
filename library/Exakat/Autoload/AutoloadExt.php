@@ -97,12 +97,13 @@ class AutoloadExt implements Autoloader {
         }
     }
     
-    public function checkDependencies() {
+    private function checkDependencies() {
         // Report missing extensions, but don't prevent them (some rules may still work, others will be ignored)
         foreach($this->extensions as $name => $extension) {
             $diff = array_diff($extension->dependsOnExtensions(), array_keys($this->pharList));
             if (!empty($diff)) {
-                print "$name extension requires the following missing extension : ".implode(', ', $diff)."\nProcessing may be impacted.\nDownload the missing extensions with the 'extension' command.\n";
+                // This is displayed for extensions and also for their dependencies, leading to repetition.
+                display("$name extension requires the following missing extension : ".implode(', ', $diff)."\nProcessing may be impacted.\nDownload the missing extensions with the 'extension' command.\n");
             }
          }
     }
