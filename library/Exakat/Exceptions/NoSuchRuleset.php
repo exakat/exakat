@@ -28,7 +28,7 @@ class NoSuchRuleset extends \RuntimeException {
         $exception = "No such ruleset as '$message'. \n";
         
         if (!empty($rulesets)) {
-            $exception .= 'You can try : ' . implode(', ', $rulesets) . PHP_EOL;
+            $exception .= 'You can try : ' . implode(', ', array_unique($rulesets)) . PHP_EOL;
         }
 
         parent::__construct($exception);
