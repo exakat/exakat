@@ -90,7 +90,11 @@ class RulesetsExt implements RulesetsInterface {
                 $ini = $this->ext->loadData("human/en/$analyse.ini");
                 $ini = parse_ini_string($ini);
 
-                $severities[$analyse] = constant(Analyzer::class . '::' . $ini['severity']) ?? Analyzer::S_NONE;
+                if (isset($ini['severity'])) {
+                    $severities[$analyse] = constant(Analyzer::class . '::' . $ini['severity']) ?? Analyzer::S_NONE;
+                } else {
+                    $severities[$analyse] = Analyzer::S_NONE;
+                }
             }
             $return[] = $severities;
         }
@@ -113,8 +117,6 @@ class RulesetsExt implements RulesetsInterface {
                 } else {
                     $timesToFix[$analyse] = Analyzer::T_NONE;
                 }
-
-                $timesToFix[$analyse] = constant(Analyzer::class . '::' . $ini['timetofix']) ?? Analyzer::T_NONE;
             }
             $return[] = $timesToFix;
         }
