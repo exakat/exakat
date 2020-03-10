@@ -103,7 +103,7 @@ class CloseNaming extends Data {
     private function groupSwap($a, $b) {
         $n = strlen($a) - 3;
         if (strpos($b, $a[1]) === false) { return false; }
-        for($i = 2; $i < $n; $i++) {
+        for($i = 2; $i < $n; ++$i) {
             $d = substr($a, $i + 1);
             $e = substr($a, 1, $i);
             if ($d === $e) { continue; }

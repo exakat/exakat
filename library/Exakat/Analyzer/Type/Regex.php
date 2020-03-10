@@ -30,9 +30,8 @@ class Regex extends Analyzer {
                      'Complete/CreateDefaultValues',
                     );
     }
-
-    public function analyze() {
-        $pregFunctions = array('\\preg_match_all',
+    
+    private         $pregFunctions = array('\\preg_match_all',
                                '\\preg_match',
                                '\\preg_replace',
                                '\\preg_replace_callback',
@@ -52,14 +51,16 @@ class Regex extends Analyzer {
                                '\\mb_eregi',
                                );
 
+    public function analyze() {
+
         // preg_match('/a/', ...)
-        $this->atomFunctionIs($pregFunctions)
+        $this->atomFunctionIs($this->pregFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // preg_match(array(regex1, regex2))
-        $this->atomFunctionIs($pregFunctions    )
+        $this->atomFunctionIs($this->pregFunctions    )
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Arrayliteral', Analyzer::WITH_CONSTANTS)
              ->outIs('ARGUMENT')

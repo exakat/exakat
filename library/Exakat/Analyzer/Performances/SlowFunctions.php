@@ -36,7 +36,6 @@ class SlowFunctions extends FunctionUsage {
 'array_search',
 'array_udiff',
 'array_uintersect',
-'array_unique',
 'array_unshift',
 'array_walk',
 'in_array',
@@ -46,6 +45,12 @@ class SlowFunctions extends FunctionUsage {
 'uksort',
 'usort',
 );
+
+        // array_unique was upgraded in PHP 7.2
+        if (version_compare('7.2', $this->config->phpversion) > 1) {
+            $this->functions[] = 'array_unique';
+        }
+
         parent::analyze();
     }
 }

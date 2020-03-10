@@ -151,6 +151,7 @@ class Project extends Tasks {
         $availableRulesets = $this->rulesets->listAllRulesets();
 
         $diff = array_diff($rulesetsToRun, $availableRulesets);
+
         if (!empty($diff)) {
             display('Ignoring the following unknown rulesets : ' . implode(', ', $diff) . PHP_EOL);
         }

@@ -181,6 +181,7 @@ class Owasp extends Ambassador {
     protected function generateDetailledDashboard(Section $section): void {
         $levels = '';
 
+        $countColors = count(self::COLORS);
         foreach($this->components as $group => $analyzers) {
             $levelRows = '';
             $total = 0;
@@ -207,7 +208,7 @@ class Owasp extends Ambassador {
                 if ($row['count'] == 0) {
                     $row['grade'] = 'A';
                 } else {
-                    $grade = min(ceil(log($row['count'] + 1) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                    $grade = min(ceil(log($row['count'] + 1) / log($countColors)), count($countColors) - 1);
                     $row['grade'] = chr(66 + $grade - 1); // B to F
                 }
                 $row['color'] = self::COLORS[$row['grade']];
@@ -221,7 +222,7 @@ class Owasp extends Ambassador {
             if ($total === 0) {
                 $grade = 'A';
             } else {
-                $grade = min(ceil(log($total) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                $grade = min(ceil(log($total) / log($countColors)), $countColors - 1);
                 $grade = chr(65 + $grade); // B to F
             }
             $color = self::COLORS[$grade];
@@ -242,6 +243,7 @@ class Owasp extends Ambassador {
     protected function generateDashboard(Section $section): void {
         $levels = '';
 
+        $countColors = count(self::COLORS);
         foreach($this->components as $group => $analyzers) {
             $levelRows = '';
             $total = 0;
@@ -267,7 +269,7 @@ class Owasp extends Ambassador {
                 if ($count == 0) {
                     $grade = 'A';
                 } else {
-                    $grade = min(ceil(log($count) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                    $grade = min(ceil(log($count) / log(count($countColors))), count($countColors) - 1);
                     $grade = chr(66 + $grade - 1); // B to F
                 }
                 $color = self::COLORS[$grade];
@@ -279,7 +281,7 @@ class Owasp extends Ambassador {
             if ($total === 0) {
                 $grade = 'A';
             } else {
-                $grade = min(ceil(log($total) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                $grade = min(ceil(log($total) / log(count($countColors))), count($countColors) - 1);
                 $grade = chr(65 + $grade); // B to F
             }
             $color = self::COLORS[$grade];

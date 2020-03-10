@@ -1639,10 +1639,6 @@ class Load extends Tasks {
             }
 
             $this->addLink($class, $cpm, $link);
-            if (!isset($this->tokens[$this->id + 1][0])) {
-                var_dump($this->tokens[$this->id + 1]);
-                die();
-            }
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
             }

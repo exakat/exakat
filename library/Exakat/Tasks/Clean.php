@@ -30,6 +30,36 @@ class Clean extends Tasks {
 
     protected $logname = self::LOG_NONE;
 
+    private $filesToErase = array('Flat-html.html',
+                                  'Flat-markdown.md',
+                                  'Flat-sqlite.sqlite',
+                                  'Flat-text.txt',
+                                  'Premier-ace.zip',
+                                  'Premier-html.html',
+                                  'Premier-markdown.md',
+                                  'Premier-sqlite.sqlite',
+                                  'Premier-text.txt',
+                                  'datastore.sqlite',
+                                  'magicnumber.sqlite',
+                                  'report.html',
+                                  'report.md',
+                                  'report.odt',
+                                  'report.pdf',
+                                  'report.json',
+                                  'report.xml',
+                                  'report.sqlite',
+                                  'report.txt',
+                                  'report.zip',
+                                  'EchoWithConcat.json',
+                                  'PhpFunctions.json',
+                                  'bigArrays.txt',
+                                  'counts.sqlite',
+                                  'stats.txt',
+                                  'dump.sqlite',
+                                  'faceted.zip',
+                                  'faceted2.zip',
+                                 );
+
     public function run() {
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
@@ -62,37 +92,8 @@ class Clean extends Tasks {
             mkdir($this->config->log_dir, 0755);
         }
 
-        $filesToErase = array('Flat-html.html',
-                              'Flat-markdown.md',
-                              'Flat-sqlite.sqlite',
-                              'Flat-text.txt',
-                              'Premier-ace.zip',
-                              'Premier-html.html',
-                              'Premier-markdown.md',
-                              'Premier-sqlite.sqlite',
-                              'Premier-text.txt',
-                              'datastore.sqlite',
-                              'magicnumber.sqlite',
-                              'report.html',
-                              'report.md',
-                              'report.odt',
-                              'report.pdf',
-                              'report.json',
-                              'report.xml',
-                              'report.sqlite',
-                              'report.txt',
-                              'report.zip',
-                              'EchoWithConcat.json',
-                              'PhpFunctions.json',
-                              'bigArrays.txt',
-                              'counts.sqlite',
-                              'stats.txt',
-                              'dump.sqlite',
-                              'faceted.zip',
-                              'faceted2.zip',
-                             );
         $total = 0;
-        foreach($filesToErase as $file) {
+        foreach($this->filesToErase as $file) {
             $filePath = "{$this->config->project_dir}/$file";
             if (file_exists($filePath)) {
                 display("removing $file");

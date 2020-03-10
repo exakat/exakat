@@ -861,7 +861,7 @@ HTML;
         'CompatibilityPHP74',
         'CompatibilityPHP80',
         ));
-        $list[] = 'Project/Dump';
+
         $result = $this->dump->fetchAnalysersCounts($list);
         $result->filter(function (array $x): bool { return substr($x['analyzer'], 0, 7) !== 'Common';});
 

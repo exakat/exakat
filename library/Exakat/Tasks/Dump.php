@@ -127,7 +127,7 @@ class Dump extends Tasks {
 
                 throw new NoSuchRuleset(implode(', ', $ruleset));
             }
-            display('Processing ruleset ' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
+            display('Processing ruleset' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
             $missing = $this->processResultsRuleset($ruleset, $counts);
             $this->expandRulesets();
             $this->collectHashAnalyzer();
@@ -293,7 +293,7 @@ GREMLIN
                 display("All $counts[$class] results saved for $class\n");
             } else {
                 assert(($counts[$class] ?? 0) === ($readCounts[$class] ?? 0), "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
-                $error++;
+                ++$error;
             }
         }
 

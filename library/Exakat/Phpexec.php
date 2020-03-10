@@ -182,20 +182,24 @@ class Phpexec {
             $shell      = "docker run -it -v $path:/exakat -w /exakat --entrypoint /bin/bash --rm {$this->phpexec} -c 'php -r \"\\\$code = file_get_contents(\\\"$filename\\\"); \\\$code = strpos(\\\$code, \\\"<?\\\") === false ? \\\"\\\" : \\\$code; var_export(@token_get_all(\\\$code));\"' ";
 
             $res = shell_exec($shell);
-            eval("\$tokens = $res;");
+            try {
+                eval("\$tokens = $res;");
+            } catch (\Exception $e) {
+                $tokens = array();
+            }
 
             if (empty($tokens)) {
                 return array();
             }
-        } else {
-            $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
-            // -d short_open_tag=1
-            $filename = $this->escapeFile($file);
-            shell_exec($this->phpexec . '  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(' . $filename . '); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > ' . escapeshellarg($tmpFile));
-            include $tmpFile;
+        } 
 
-            unlink($tmpFile);
-        }
+        $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
+        // -d short_open_tag=1
+        $filename = $this->escapeFile($file);
+        shell_exec($this->phpexec . '  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(' . $filename . '); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > ' . escapeshellarg($tmpFile));
+        include $tmpFile;
+
+        unlink($tmpFile);
 
         // In case the inclusion failed at parsing time
         if (!isset($tokens)) {
@@ -379,11 +383,11 @@ class Phpexec {
 );
 echo '\\\$config = '.var_export(\\\$results, true).';';
 PHP;
-            $res = shell_exec("{$this->phpexec} -r \"$php\" 2>&1");
-            if (strpos($res, 'Error') === false ) {
+            $readPHPConfig = shell_exec("{$this->phpexec} -r \"$php\" 2>&1");
+            if (strpos($readPHPConfig, 'Error') === false ) {
                 try {
                     // @ hides potential errors.
-                    @eval($res);
+                    @eval($readPHPConfig);
 
                     if ($config['crc'] === (int) $crc) {
                         unset($config['crc']);
