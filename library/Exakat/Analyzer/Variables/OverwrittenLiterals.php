@@ -33,10 +33,12 @@ class OverwrittenLiterals extends Analyzer {
              ->atomIs('Variabledefinition')
              ->variableIsAssigned(2)
              ->outIs('DEFINITION')
-             ->hasParent('Assignation', 'LEFT')
+             ->as('results')
              ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
              ->hasNoParent('For', array('EXPRESSION', 'INIT'))
-             ->outIs('LEFT');
+             ->back('results');
         $this->prepareQuery();
     }
 }
