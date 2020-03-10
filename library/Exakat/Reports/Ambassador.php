@@ -95,7 +95,7 @@ class Ambassador extends Emissary {
                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
                      'Analyze', 'Preferences', 'Inventory', 'Performances',
                      'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Suggestions', 'ClassReview',
-                     'Custom', 'Rector', 'php-cs-fixer', 
+                     'Custom', 'Rector', 'php-cs-fixable', 
                      );
     }
 }
