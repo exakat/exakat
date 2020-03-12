@@ -1,4 +1,4 @@
-Version 2.0.5 (Ao Guang, coming up)
+Version 2.0.7 (Ao Shun, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,30 @@ Version 2.0.5 (Ao Guang, coming up)
     + 
 + Tokenizer
     + 
+
+Version 2.0.6 (Ao Qin, 2020-03-04)
++ Architecture
+    + Refactored analysis types for first UT
+    + Moving to PHP 7.4 by default
++ Report
+    + Rector : added more coverage
+    + All : better display of typed properties
++ Analysis
+    + New analysis : Semantic names of arguments
+    + New analysis : !$a == $b
+    + New prototype : possibles interfaces
+    + Upgraded analysis : Overwritten literals now skips .=
+    + Upgraded analysis : Scalar or object handles return type
+    + Checked unit tests : 3322 / 3420 test pass (97% pass)
+
+Version 2.0.5 (Ao Guang, 2019-11-25)
++ Architecture
+    + Fixed access to severity and timetofix from compiled extension
++ Report
+    + Ambassador : Fixed links to documentation
++ Analysis
+    + Upgraded analysis : Mismatched Type and Default now omit undefined constants
+    + Checked unit tests : 3366 / 3402 test pass (99% pass)
 
 Version 2.0.4 (Army Defeating Star of Heaven's Gate, 2019-11-18)
 + Architecture
