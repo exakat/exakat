@@ -28,7 +28,7 @@ use Exakat\Configsource\Commandline;
 
 class Exakat {
     const VERSION = '2.0.6';
-    const BUILD = 1027;
+    const BUILD = 1035;
     
     private $config  = null;
     
@@ -280,12 +280,10 @@ class Exakat {
             default :
                 $command_value = $this->config->command_value;
                 $suggestions = array_filter(array_keys(Commandline::$commands), function($x) use ($command_value) { similar_text($command_value, $x, $percentage); return $percentage > 60; });
-                if (empty($suggestions)) {
-                    print "Unknow command '{$this->config->command_value}'. See https://exakat.readthedocs.io/en/latest/Commands.html" . PHP_EOL;
-                } else {
-                    print "Unknow command '{$this->config->command_value}'. See https://exakat.readthedocs.io/en/latest/Commands.html" . PHP_EOL.
-                          "Did you mean : ".implode(', ', $suggestions).' ? '.PHP_EOL;
-                }
+
+                print (!empty($command_value) ? "Unknown command '{$this->config->command_value}'. See https://exakat.readthedocs.io/en/latest/Commands.html" . PHP_EOL: '').
+                      (!empty($suggestions) ? "Did you mean : ".implode(', ', $suggestions).' ? ' : '') .PHP_EOL;
+
                 // fallthrough
 
             case 'version' :
