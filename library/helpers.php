@@ -42,9 +42,6 @@ const TIME_AS_NUMBER = true;
 const DISPLAY_TO_STDOUT = false;
 const RETURN_VALUE      = true;
 
-const SUCCESS = false;
-const FAILURE = true;
-
 const MAX_ARGS = 100;
 
 const SQLITE3_BUSY_TIMEOUT = 5000; // ms
@@ -594,35 +591,6 @@ function raiseDimensions($array, $split='/') : array {
             }
         }
         $sub[$last] = $value;
-    }
-    
-    return $return;
-}
-
-/*
-Array
-(
-    [a] => Array
-        (
-            [b] => 1
-        )
-
-) to array('a/b' => 1 )
-
-
-*/
-function flattenDimensions($array, $split='/') : array {
-    $return = array();
-    
-    foreach ($array as $k => $value) {
-        if (is_array($value)) {
-            $valueFlattened = flattenDimensions($value);
-            foreach ($valueFlattened as $k2 => $value2) {
-                $return["$k$split$k2"] = $value2;
-            }
-        } else {
-            $return[$k] = $value;
-        }
     }
     
     return $return;
