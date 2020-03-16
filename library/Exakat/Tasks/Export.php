@@ -75,7 +75,7 @@ class Export extends Tasks {
 
         if (in_array('Dot', $this->config->project_reports)) {
             $text = $this->display_dot($V, $E, $root);
-        } elseif (in_array('Table', $this->config->format)) {
+        } elseif (in_array('Table', $this->config->project_reports)) {
             $text = $this->display_table($V, $E, $root);
         } else {
             $text = $this->display_text($V, $E, $root);
