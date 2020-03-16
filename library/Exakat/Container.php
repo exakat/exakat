@@ -80,7 +80,7 @@ class Container {
     private function docs() {
         $this->docs = new Docs($this->config->dir_root, 
                                $this->config->ext, 
-                               $this->config->dev,
+                               $this->config->dev
                                );
     }
 
