@@ -1286,14 +1286,10 @@ class Load extends Tasks {
         $fn       = $this->processParameters($atom);
 
         // Process return type
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
-            ++$this->id;
-            $returnType = $this->processTypehint();
+        $returnTypes = $this->processTypehint();
 
+        foreach($returnTypes as $returnType) {
             $this->addLink($fn, $returnType, 'RETURNTYPE');
-        } else {
-            $void = $this->addAtomVoid();
-            $this->addLink($fn, $void, 'RETURNTYPE');
         }
 
         ++$this->id; // skip =>
@@ -1319,7 +1315,9 @@ class Load extends Tasks {
         $this->addLink($fn, $block, 'BLOCK');
 
         $fn->token    = $this->getToken($this->tokens[$current][0]);
-        $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') => ' . $block->fullcode;
+        $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') '.
+                        (isset($returnType) ? ' : ' . ($fn->nullable ? '?' : '') . $returnType->fullcode : '') .
+                        '=> ' . $block->fullcode;
         $fn->fullnspath = $this->makeAnonymous('arrowfunction');
         $fn->aliased    = self::NOT_ALIASED;
 
@@ -1461,14 +1459,10 @@ class Load extends Tasks {
         }
 
         // Process return type
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
-            ++$this->id;
-            $returnType = $this->processTypehint();
+        $returnTypes = $this->processTypehint();
 
+        foreach($returnTypes as $returnType) {
             $this->addLink($function, $returnType, 'RETURNTYPE');
-        } else {
-            $void = $this->addAtomVoid();
-            $this->addLink($function, $void, 'RETURNTYPE');
         }
 
         // Process block
@@ -2068,10 +2062,10 @@ class Load extends Tasks {
         return $this->processFCOA($nsname);
     }
 
-    private function processTypehint() {
-        // static can't be a typehint : too late for compilation
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
-            return 0;
+    private function processTypehint() : array {
+        // for return typehint, there is a :
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
+            ++$this->id;
         }
 
          if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
@@ -2086,6 +2080,7 @@ class Load extends Tasks {
                                                             $this->phptokens::T_NAMESPACE,
                                                             $this->phptokens::T_ARRAY,
                                                             $this->phptokens::T_CALLABLE,
+                                                            $this->phptokens::T_STATIC,
                                                             ),
                      \STRICT_COMPARISON)) {
 
@@ -2109,11 +2104,10 @@ class Load extends Tasks {
                 ++$this->id;
             }
 
-            return $nsname;
+            return array($nsname);
         }
 
-        // Nothing to do, return 0 for the calling method
-        return 0;
+        return array($this->addAtomVoid());
     }
 
     private function processParameters($atom): Atom {
@@ -2158,7 +2152,7 @@ class Load extends Tasks {
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
             do {
                 ++$args_max;
-                $typehint = $this->processTypehint();
+                $returnTypes = $this->processTypehint();
                 ++$this->id;
 
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
@@ -2219,13 +2213,8 @@ class Load extends Tasks {
 
                 $index->rank = ++$rank;
 
-                if ($typehint === 0) {
-                    $void = $this->addAtomVoid();
-                    $this->addLink($index, $void, 'TYPEHINT');
-                } else {
-                    $this->addLink($index, $typehint, 'TYPEHINT');
-                    $index->fullcode = "$typehint->fullcode $index->fullcode";
-                    $index->nullable = $typehint->nullable;
+                foreach($returnTypes as $returnType) {
+                    $this->addLink($index, $returnType, 'TYPEHINT');
                 }
 
                 if ($default === 0) {
@@ -2498,15 +2487,12 @@ class Load extends Tasks {
     private function processVar(): Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
-        $typehint = $this->processTypehint();
+        $returnTypes = $this->processTypehint();
 
         $ppp = $this->processSGVariable('Ppp');
 
-        if (empty($typehint)) {
-            $void = $this->addAtomVoid();
-            $this->addLink($ppp, $void, 'TYPEHINT');
-        } else {
-            $this->addLink($ppp, $typehint, 'TYPEHINT');
+        foreach($returnTypes as $returnType) {
+            $this->addLink($ppp, $returnType, 'TYPEHINT');
         }
 
         $ppp->visibility = 'none';
@@ -2519,19 +2505,17 @@ class Load extends Tasks {
     private function processPublic(): Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
-        $typehint = $this->processTypehint();
+        $returnTypes = $this->processTypehint();
         $typehint_fullcode = '';
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
 
-             if (empty($typehint)) {
-                 $void = $this->addAtomVoid();
-                 $this->addLink($next, $void, 'TYPEHINT');
-             } else {
-                 $this->addLink($next, $typehint, 'TYPEHINT');
-                 $typehint_fullcode = $typehint->fullcode.' ';
-             }
+            foreach($returnTypes as $returnType) {
+                $this->addLink($next, $returnType, 'TYPEHINT');
+
+                $typehint_fullcode = $typehint->fullcode.' ';
+            }
         } else {
             $next = $this->processNext();
         }
@@ -2546,19 +2530,17 @@ class Load extends Tasks {
     private function processProtected(): Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
-        $typehint = $this->processTypehint();
+        $returnTypes = $this->processTypehint();
         $typehint_fullcode = '';
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
 
-             if (empty($typehint)) {
-                 $void = $this->addAtomVoid();
-                 $this->addLink($next, $void, 'TYPEHINT');
-             } else {
-                 $this->addLink($next, $typehint, 'TYPEHINT');
-                 $typehint_fullcode = $typehint->fullcode.' ';
-             }
+            foreach($returnTypes as $returnType) {
+                $this->addLink($next, $returnType, 'TYPEHINT');
+
+                $typehint_fullcode = $typehint->fullcode.' ';
+            }
         } else {
             $next = $this->processNext();
         }
@@ -2573,21 +2555,17 @@ class Load extends Tasks {
     private function processPrivate(): Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
-        $typehint = $this->processTypehint();
+        $returnTypes = $this->processTypehint();
         $typehint_fullcode = '';
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
 
-             if (empty($typehint)) {
-                 $void = $this->addAtomVoid();
-                 $this->addLink($next, $void, 'TYPEHINT');
+            foreach($returnTypes as $returnType) {
+                $this->addLink($next, $returnType, 'TYPEHINT');
 
-             } else {
-                 $this->addLink($next, $typehint, 'TYPEHINT');
-                 
-                 $typehint_fullcode = $typehint->fullcode.' ';
-             }
+                $typehint_fullcode = $typehint->fullcode.' ';
+            }
         } else {
             $next = $this->processNext();
         }
@@ -2979,6 +2957,7 @@ class Load extends Tasks {
                                                              $this->phptokens::T_NAMESPACE,
                                                              ),
                             \STRICT_COMPARISON)) {
+                            die(is_this_stattic_still_used);
             $option = $this->tokens[$this->id][1];
 
             $typehint = $this->processTypehint();
