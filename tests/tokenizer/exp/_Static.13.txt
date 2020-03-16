@@ -64,13 +64,13 @@ Label : PROJECT
               Label : DEFAULT
                 10
             Label : TYPEHINT
-              11
+              7
           Label : PPP
             7
             Label : PPP
               26
             Label : TYPEHINT
-              11
+              7
           Label : PPP
             7
             Label : PPP
@@ -174,7 +174,7 @@ Label : PROJECT
               Label : DEFAULT
                 10
             Label : TYPEHINT
-              11
+              7
           Label : PPP
             7
             Label : PPP
@@ -184,7 +184,7 @@ Label : PROJECT
             Label : PPP
               80
             Label : TYPEHINT
-              11
+              7
           Label : PPP
             7
             Label : PPP
@@ -240,4 +240,4 @@ Label : PROJECT
               Label : DEFAULT
                 103
             Label : TYPEHINT
-              11
+              7

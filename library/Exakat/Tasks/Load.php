@@ -1482,7 +1482,7 @@ class Load extends Tasks {
                                 $this->tokens[$current][1] . ' ' . ($function->reference ? '&' : '') .
                                 ($function->atom === 'Closure' ? '' : $name->fullcode) . '(' . $argumentsFullcode . ')' .
                                 (isset($useFullcode) ? ' use (' . implode(', ', $useFullcode) . ')' : '') . // No space before use
-                                (isset($returnType) ? ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode : '') .
+                                ($returnType->atom === 'Void' ? '' : ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode) .
                                 $blockFullcode;
 
        if ($function->atom === 'Closure' &&
@@ -2235,7 +2235,7 @@ class Load extends Tasks {
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
 
-                $fullcode[] = $index->fullcode;
+                $fullcode[] = (empty($returnTypes) ? '' : join('|', array_column($returnTypes, 'fullcode')) . ' ' ).$index->fullcode;
                 $argumentsList[] = $index;
 
                 ++$this->id;

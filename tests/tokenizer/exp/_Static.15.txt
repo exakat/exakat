@@ -14,19 +14,27 @@ Label : PROJECT
             Label : ARGUMENT
               7
               Label : ARGUMENT
-                8
+                10
+                Label : DEFAULT
+                  8
                 Label : NAME
+                  10
+                Label : TYPEHINT
                   8
               Label : BLOCK
-                10
+                12
                 Label : EXPRESSION
-                  11
+                  13
                   Label : POSTPLUSPLUS
-                    9
+                    11
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                8
               Label : USE
-                9
+                11
                 Label : DEFINITION
-                  9
+                  11
             Label : NAME
               6
         Label : EXPRESSION
@@ -36,18 +44,26 @@ Label : PROJECT
             Label : ARGUMENT
               7
               Label : ARGUMENT
-                8
+                10
+                Label : DEFAULT
+                  8
                 Label : NAME
+                  10
+                Label : TYPEHINT
                   8
               Label : BLOCK
-                10
+                12
                 Label : EXPRESSION
-                  11
+                  13
                   Label : POSTPLUSPLUS
-                    9
+                    11
               Label : DEFINITION
-                9
+                11
                 Label : DEFINITION
-                  9
+                  11
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                8
             Label : NAME
               6

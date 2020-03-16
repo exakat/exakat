@@ -10,26 +10,26 @@ Label : PROJECT
         Label : EXPRESSION
           9
           Label : LEFT
-            8
-            Label : CLASS
-              5
-            Label : MEMBER
-              6
-          Label : RIGHT
             9
             Label : LEFT
               8
               Label : CLASS
                 5
-              Label : CONSTANT
-                10
+              Label : MEMBER
+                6
             Label : RIGHT
               8
               Label : CLASS
                 5
-              Label : METHOD
+              Label : CONSTANT
+                10
+          Label : RIGHT
+            8
+            Label : CLASS
+              5
+            Label : METHOD
+              12
+              Label : ARGUMENT
+                13
+              Label : NAME
                 12
-                Label : ARGUMENT
-                  13
-                Label : NAME
-                  12
