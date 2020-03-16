@@ -3,24 +3,12 @@ Label : GLOBAL
   20
   Label : DEFINITION
     20
-    Label : DEFAULT
-      23
-      Label : ARGUMENT
-        17
-      Label : NAME
-        23
     Label : DEFINITION
       20
 Label : PROJECT
   1
   Label : DEFINITION
     20
-    Label : DEFAULT
-      23
-      Label : ARGUMENT
-        17
-      Label : NAME
-        23
     Label : DEFINITION
       20
   Label : FILE
@@ -63,6 +51,10 @@ Label : PROJECT
                   23
               Label : NAME
                 16
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                17
           Label : NAME
             5
         Label : EXPRESSION

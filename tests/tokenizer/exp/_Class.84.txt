@@ -16,37 +16,33 @@ Label : PROJECT
           Label : DEFINITION
             19
             Label : ARGUMENT
-              11
+              7
             Label : NAME
               19
           Label : DEFINITION
             6
             Label : ARGUMENT
-              11
+              7
             Label : NAME
               6
           Label : NAME
             6
           Label : PPP
-            7
+            9
             Label : PPP
-              8
+              10
               Label : DEFAULT
-                10
+                12
                 Label : ARGUMENT
-                  11
-              Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
-                20
-                Label : MEMBER
-                  9
-                Label : OBJECT
-                  16
+                  7
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
             14
             Label : ARGUMENT
-              11
+              7
             Label : BLOCK
               15
               Label : EXPRESSION
@@ -74,7 +70,7 @@ Label : PROJECT
                   Label : NEW
                     19
                     Label : ARGUMENT
-                      11
+                      7
                     Label : NAME
                       19
               Label : EXPRESSION
@@ -86,7 +82,7 @@ Label : PROJECT
                   Label : NEW
                     6
                     Label : ARGUMENT
-                      11
+                      7
                     Label : NAME
                       6
               Label : EXPRESSION
@@ -94,37 +90,13 @@ Label : PROJECT
                 Label : LEFT
                   20
                   Label : MEMBER
-                    9
+                    11
                   Label : OBJECT
                     16
                 Label : RIGHT
                   21
             Label : DEFINITION
               16
-              Label : DEFAULT
-                18
-                Label : NEW
-                  6
-              Label : DEFAULT
-                18
-                Label : NEW
-                  19
-                  Label : ARGUMENT
-                    11
-                  Label : NAME
-                    19
-              Label : DEFAULT
-                18
-                Label : NEW
-                  6
-                  Label : ARGUMENT
-                    11
-                  Label : NAME
-                    6
-              Label : DEFAULT
-                18
-                Label : NEW
-                  19
               Label : DEFINITION
                 16
               Label : DEFINITION
@@ -137,5 +109,9 @@ Label : PROJECT
                 16
             Label : NAME
               14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             13

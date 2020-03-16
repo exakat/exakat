@@ -3,12 +3,6 @@ Label : GLOBAL
   7
   Label : DEFINITION
     7
-    Label : DEFAULT
-      12
-      Label : INDEX
-        13
-      Label : VARIABLE
-        10
     Label : DEFINITION
       7
 Label : GLOBAL
@@ -51,12 +45,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     7
-    Label : DEFAULT
-      12
-      Label : INDEX
-        13
-      Label : VARIABLE
-        10
     Label : DEFINITION
       7
   Label : DEFINITION
@@ -169,3 +157,5 @@ Label : PROJECT
               24
             Label : VARIABLE
               23
+  Label : RETURNED
+    21

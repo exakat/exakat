@@ -9,28 +9,12 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      11
-      Label : LEFT
-        10
-        Label : POSTPLUSPLUS
-          8
-      Label : RIGHT
-        12
     Label : DEFINITION
       5
 Label : GLOBAL
   13
   Label : DEFINITION
     13
-    Label : DEFAULT
-      17
-      Label : LEFT
-        10
-        Label : PREPLUSPLUS
-          15
-      Label : RIGHT
-        12
     Label : DEFINITION
       13
 Label : GLOBAL
@@ -43,14 +27,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      11
-      Label : LEFT
-        10
-        Label : POSTPLUSPLUS
-          8
-      Label : RIGHT
-        12
     Label : DEFINITION
       5
   Label : DEFINITION
@@ -59,14 +35,6 @@ Label : PROJECT
       8
   Label : DEFINITION
     13
-    Label : DEFAULT
-      17
-      Label : LEFT
-        10
-        Label : PREPLUSPLUS
-          15
-      Label : RIGHT
-        12
     Label : DEFINITION
       13
   Label : DEFINITION

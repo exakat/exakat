@@ -1,43 +1,5 @@
 test
 Label : GLOBAL
-  47
-  Label : DEFINITION
-    47
-    Label : DEFINITION
-      47
-Label : GLOBAL
-  85
-  Label : DEFINITION
-    85
-    Label : DEFAULT
-      88
-      Label : CONDITION
-        6
-        Label : CODE
-          9
-          Label : LEFT
-            20
-            Label : INDEX
-              74
-            Label : VARIABLE
-              82
-          Label : RIGHT
-            86
-      Label : ELSE
-        20
-        Label : INDEX
-          91
-        Label : VARIABLE
-          18
-      Label : THEN
-        20
-        Label : INDEX
-          89
-        Label : VARIABLE
-          18
-    Label : DEFINITION
-      85
-Label : GLOBAL
   38
   Label : DEFINITION
     38
@@ -54,25 +16,37 @@ Label : GLOBAL
     Label : DEFINITION
       38
 Label : GLOBAL
+  82
+  Label : DEFINITION
+    82
+    Label : DEFINITION
+      82
+    Label : DEFINITION
+      82
+Label : GLOBAL
+  31
+  Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+    Label : DEFINITION
+      31
+    Label : DEFINITION
+      31
+    Label : DEFINITION
+      31
+Label : GLOBAL
+  50
+  Label : DEFINITION
+    50
+    Label : DEFINITION
+      50
+    Label : DEFINITION
+      50
+Label : GLOBAL
   59
   Label : DEFINITION
     59
-    Label : DEFAULT
-      60
-      Label : ARGUMENT
-        26
-      Label : ARGUMENT
-        18
-      Label : NAME
-        60
-    Label : DEFAULT
-      60
-      Label : ARGUMENT
-        26
-      Label : ARGUMENT
-        18
-      Label : NAME
-        60
     Label : DEFINITION
       59
     Label : DEFINITION
@@ -118,49 +92,33 @@ Label : GLOBAL
     Label : DEFINITION
       81
 Label : GLOBAL
-  82
+  47
   Label : DEFINITION
-    82
+    47
     Label : DEFINITION
-      82
-    Label : DEFINITION
-      82
+      47
 Label : GLOBAL
-  50
+  93
   Label : DEFINITION
-    50
+    93
     Label : DEFINITION
-      50
+      93
     Label : DEFINITION
-      50
+      93
+    Label : DEFINITION
+      93
+Label : GLOBAL
+  85
+  Label : DEFINITION
+    85
+    Label : DEFINITION
+      85
 Label : GLOBAL
   97
   Label : DEFINITION
     97
     Label : DEFINITION
       97
-Label : GLOBAL
-  93
-  Label : DEFINITION
-    93
-    Label : DEFAULT
-      20
-      Label : INDEX
-        74
-      Label : VARIABLE
-        81
-    Label : DEFAULT
-      95
-      Label : ARGUMENT
-        93
-      Label : NAME
-        95
-    Label : DEFINITION
-      93
-    Label : DEFINITION
-      93
-    Label : DEFINITION
-      93
 Label : GLOBAL
   100
   Label : DEFINITION
@@ -219,124 +177,6 @@ Label : GLOBAL
   26
   Label : DEFINITION
     26
-    Label : DEFAULT
-      29
-      Label : ARGUMENT
-        31
-      Label : ARGUMENT
-        18
-      Label : ARGUMENT
-        35
-        Label : CONCAT
-          33
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            39
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          40
-          Label : CONCAT
-            41
-          Label : CONCAT
-            40
-            Label : INDEX
-              43
-            Label : VARIABLE
-              18
-          Label : CONCAT
-            45
-          Label : CONCAT
-            47
-          Label : CONCAT
-            50
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            53
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          54
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            53
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          56
-      Label : NAME
-        29
-    Label : DEFAULT
-      29
-      Label : ARGUMENT
-        31
-      Label : ARGUMENT
-        18
-      Label : ARGUMENT
-        35
-        Label : CONCAT
-          33
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            39
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          40
-          Label : CONCAT
-            41
-          Label : CONCAT
-            97
-          Label : CONCAT
-            100
-          Label : CONCAT
-            50
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            53
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          54
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            103
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          56
-      Label : NAME
-        29
     Label : DEFINITION
       26
     Label : DEFINITION
@@ -349,18 +189,6 @@ Label : GLOBAL
       26
     Label : DEFINITION
       26
-Label : GLOBAL
-  31
-  Label : DEFINITION
-    31
-    Label : DEFINITION
-      31
-    Label : DEFINITION
-      31
-    Label : DEFINITION
-      31
-    Label : DEFINITION
-      31
 Label : PROJECT
   1
   Label : DEFINITION
@@ -409,124 +237,6 @@ Label : PROJECT
       18
   Label : DEFINITION
     26
-    Label : DEFAULT
-      29
-      Label : ARGUMENT
-        31
-      Label : ARGUMENT
-        18
-      Label : ARGUMENT
-        35
-        Label : CONCAT
-          33
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            39
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          40
-          Label : CONCAT
-            41
-          Label : CONCAT
-            40
-            Label : INDEX
-              43
-            Label : VARIABLE
-              18
-          Label : CONCAT
-            45
-          Label : CONCAT
-            47
-          Label : CONCAT
-            50
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            53
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          54
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            53
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          56
-      Label : NAME
-        29
-    Label : DEFAULT
-      29
-      Label : ARGUMENT
-        31
-      Label : ARGUMENT
-        18
-      Label : ARGUMENT
-        35
-        Label : CONCAT
-          33
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            39
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          40
-          Label : CONCAT
-            41
-          Label : CONCAT
-            97
-          Label : CONCAT
-            100
-          Label : CONCAT
-            50
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            53
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          54
-        Label : CONCAT
-          36
-          Label : ARGUMENT
-            38
-          Label : ARGUMENT
-            103
-          Label : ARGUMENT
-            18
-          Label : NAME
-            36
-        Label : CONCAT
-          56
-      Label : NAME
-        29
     Label : DEFINITION
       26
     Label : DEFINITION
@@ -575,22 +285,6 @@ Label : PROJECT
       50
   Label : DEFINITION
     59
-    Label : DEFAULT
-      60
-      Label : ARGUMENT
-        26
-      Label : ARGUMENT
-        18
-      Label : NAME
-        60
-    Label : DEFAULT
-      60
-      Label : ARGUMENT
-        26
-      Label : ARGUMENT
-        18
-      Label : NAME
-        60
     Label : DEFINITION
       59
     Label : DEFINITION
@@ -637,48 +331,10 @@ Label : PROJECT
       82
   Label : DEFINITION
     85
-    Label : DEFAULT
-      88
-      Label : CONDITION
-        6
-        Label : CODE
-          9
-          Label : LEFT
-            20
-            Label : INDEX
-              74
-            Label : VARIABLE
-              82
-          Label : RIGHT
-            86
-      Label : ELSE
-        20
-        Label : INDEX
-          91
-        Label : VARIABLE
-          18
-      Label : THEN
-        20
-        Label : INDEX
-          89
-        Label : VARIABLE
-          18
     Label : DEFINITION
       85
   Label : DEFINITION
     93
-    Label : DEFAULT
-      20
-      Label : INDEX
-        74
-      Label : VARIABLE
-        81
-    Label : DEFAULT
-      95
-      Label : ARGUMENT
-        93
-      Label : NAME
-        95
     Label : DEFINITION
       93
     Label : DEFINITION

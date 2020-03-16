@@ -26,10 +26,6 @@ Label : PROJECT
               Label : CASE
                 10
             Label : EXPRESSION
-              11
-              Label : CASE
-                12
-            Label : EXPRESSION
               13
               Label : CASE
                 14
@@ -61,5 +57,9 @@ Label : PROJECT
               27
               Label : CASE
                 28
+            Label : EXPRESSION
+              29
+              Label : CASE
+                30
           Label : CONDITION
             6

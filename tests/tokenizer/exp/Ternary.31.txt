@@ -47,8 +47,6 @@ Label : PROJECT
               17
             Label : THEN
               15
-        Label : EXPRESSION
-          15
   Label : RETURNED
     8
   Label : RETURNED

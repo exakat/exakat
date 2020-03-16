@@ -616,13 +616,13 @@ Label : PROJECT
                 Label : NAME
                   81
                 Label : RETURNED
-                  19
-                Label : RETURNED
                   34
                   Label : LEFT
                     19
                   Label : RIGHT
                     59
+                Label : RETURNED
+                  19
                 Label : RETURNTYPE
                   14
                 Label : TYPEHINT

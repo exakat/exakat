@@ -23,9 +23,7 @@ Label : PROJECT
             6
           Label : THEN
             3
-            Label : EXPRESSION
+            Label : EXPRESSION, EXPRESSION
               8
               Label : ARGUMENT
                 9
-            Label : EXPRESSION
-              10

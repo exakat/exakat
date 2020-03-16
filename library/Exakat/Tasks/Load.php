@@ -2068,21 +2068,28 @@ class Load extends Tasks {
             ++$this->id;
         }
 
-         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
-             ++$this->id;
-             $nullable = self::NULLABLE;
-         } else {
-             $nullable = self::NOT_NULLABLE;
-         }
-
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
+        if (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
                                                             $this->phptokens::T_STRING,
                                                             $this->phptokens::T_NAMESPACE,
                                                             $this->phptokens::T_ARRAY,
                                                             $this->phptokens::T_CALLABLE,
                                                             $this->phptokens::T_STATIC,
+                                                            $this->phptokens::T_QUESTION,
                                                             ),
                      \STRICT_COMPARISON)) {
+            return array($this->addAtomVoid());
+        }
+
+        $return = array();
+        --$this->id;
+        do {
+            ++$this->id;
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
+                ++$this->id;
+                $nullable = self::NULLABLE;
+            } else {
+                $nullable = self::NOT_NULLABLE;
+            }
 
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), $this->SCALAR_TYPE, \STRICT_COMPARISON) &&
                  $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR) {
@@ -2094,20 +2101,20 @@ class Load extends Tasks {
                 $this->getFullnspath($nsname, 'class', $nsname);
                 $this->calls->addCall('class', $nsname->fullnspath, $nsname);
             }
-
+    
             if ($nullable === self::NULLABLE) {
                 $nsname->nullable = self::NULLABLE;
                 $nsname->fullcode = "?$nsname->fullcode";
             }
+            
+            $return[] = $nsname;
+        } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OR);
 
-            if ($this->tokens[$this->id + 1][1] === ',') {
-                ++$this->id;
-            }
-
-            return array($nsname);
+        if ($this->tokens[$this->id + 1][1] === ',') {
+            ++$this->id;
         }
 
-        return array($this->addAtomVoid());
+        return $return;
     }
 
     private function processParameters($atom): Atom {
@@ -2514,7 +2521,7 @@ class Load extends Tasks {
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $typehint->fullcode.' ';
+                $typehint_fullcode = $returnType->fullcode.' ';
             }
         } else {
             $next = $this->processNext();
@@ -2539,7 +2546,7 @@ class Load extends Tasks {
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $typehint->fullcode.' ';
+                $typehint_fullcode = $returnType->fullcode.' ';
             }
         } else {
             $next = $this->processNext();
@@ -2564,7 +2571,7 @@ class Load extends Tasks {
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $typehint->fullcode.' ';
+                $typehint_fullcode = $returnType->fullcode.' ';
             }
         } else {
             $next = $this->processNext();

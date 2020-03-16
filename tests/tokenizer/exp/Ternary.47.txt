@@ -155,5 +155,3 @@ Label : PROJECT
             Void
           Label : RETURNTYPE
             17
-        Label : EXPRESSION
-          17

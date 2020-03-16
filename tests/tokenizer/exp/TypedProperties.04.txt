@@ -21,12 +21,12 @@ Label : PROJECT
             7
           Label : PPP
             9
-            Label : TYPEHINT
-              8
             Label : PPP
               10
             Label : PPP
               12
+            Label : TYPEHINT
+              8
           Label : PPP
             9
             Label : PPP

@@ -31,3 +31,17 @@ Label : PROJECT
               11
               Label : ARGUMENT
                 12
+  Label : RETURNED
+    6
+  Label : RETURNED
+    10
+    Label : LEFT
+      9
+      Label : MEMBER
+        8
+      Label : OBJECT
+        6
+    Label : RIGHT
+      11
+      Label : ARGUMENT
+        12

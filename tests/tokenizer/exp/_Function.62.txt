@@ -40,21 +40,21 @@ Label : PROJECT
           Label : LEFT
             5
             Label : ARGUMENT
-              6
+              8
               Label : DEFAULT
-                7
-              Label : NAME
                 6
+              Label : NAME
+                8
               Label : TYPEHINT
-                7
+                6
             Label : ARGUMENT
               9
               Label : DEFAULT
-                7
+                6
               Label : NAME
                 9
               Label : TYPEHINT
-                7
+                6
             Label : BLOCK
               10
               Label : EXPRESSION
@@ -68,7 +68,7 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              6
           Label : RIGHT
             24
             Label : METHOD
@@ -94,21 +94,21 @@ Label : PROJECT
           Label : LEFT
             5
             Label : ARGUMENT
-              6
+              8
               Label : DEFAULT
-                7
-              Label : NAME
                 6
+              Label : NAME
+                8
               Label : TYPEHINT
-                7
+                6
             Label : ARGUMENT
               9
               Label : DEFAULT
-                7
+                6
               Label : NAME
                 9
               Label : TYPEHINT
-                7
+                6
             Label : BLOCK
               10
               Label : EXPRESSION
@@ -122,7 +122,7 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              6
           Label : RIGHT
             24
             Label : METHOD

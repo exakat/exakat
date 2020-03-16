@@ -13,6 +13,8 @@ Label : PROJECT
             8
             Label : ARGUMENT
               12
+              Label : DEFAULT
+                13
               Label : NAME
                 12
               Label : TYPEHINT
@@ -21,6 +23,10 @@ Label : PROJECT
               13
             Label : NAME
               8
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              13
           Label : NAME
             6
         Label : EXPRESSION
@@ -29,6 +35,8 @@ Label : PROJECT
             8
             Label : ARGUMENT
               12
+              Label : DEFAULT
+                13
               Label : NAME
                 12
               Label : TYPEHINT
@@ -39,6 +47,10 @@ Label : PROJECT
                 13
             Label : NAME
               8
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              13
           Label : NAME
             16
         Label : EXPRESSION
@@ -47,6 +59,8 @@ Label : PROJECT
             8
             Label : ARGUMENT
               12
+              Label : DEFAULT
+                13
               Label : NAME
                 12
               Label : TYPEHINT
@@ -57,5 +71,9 @@ Label : PROJECT
                 13
             Label : NAME
               8
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              13
           Label : NAME
             19

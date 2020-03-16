@@ -32,6 +32,10 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    31
+    Label : DEFINITION
+      31
+  Label : DEFINITION
     6
     Label : DEFINITION
       6
@@ -47,10 +51,6 @@ Label : PROJECT
     21
     Label : DEFINITION
       21
-  Label : DEFINITION
-    31
-    Label : DEFINITION
-      31
   Label : FILE
     3
     Label : EXPRESSION

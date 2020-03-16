@@ -116,16 +116,6 @@ Label : PROJECT
               Label : RIGHT
                 12
         Label : EXPRESSION
-          28
-          Label : CASE
-            30
-          Label : CODE
-            3
-            Label : EXPRESSION
-              32
-              Label : BREAK
-                33
-        Label : EXPRESSION
           7
           Label : LEFT
             5
@@ -189,5 +179,3 @@ Label : PROJECT
                     33
           Label : CONDITION
             25
-        Label : EXPRESSION
-          34

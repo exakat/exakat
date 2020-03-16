@@ -10,9 +10,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : DEFINITION
-            16
+            18
           Label : DEFINITION
-            16
+            18
             Label : ARGUMENT
               30
             Label : ARGUMENT
@@ -20,11 +20,11 @@ Label : PROJECT
             Label : ARGUMENT
               32
             Label : NAME
-              16
+              18
           Label : METHOD
             25
             Label : ARGUMENT
-              23
+              8
             Label : BLOCK
               26
               Label : EXPRESSION
@@ -34,11 +34,11 @@ Label : PROJECT
                   Label : LEFT
                     28
                     Label : NEW
-                      16
+                      18
                   Label : RIGHT
                     28
                     Label : NEW
-                      16
+                      18
                       Label : ARGUMENT
                         30
                       Label : ARGUMENT
@@ -46,32 +46,62 @@ Label : PROJECT
                       Label : ARGUMENT
                         32
                       Label : NAME
-                        16
+                        18
             Label : NAME
               25
+            Label : RETURNED
+              29
+              Label : LEFT
+                28
+                Label : NEW
+                  18
+              Label : RIGHT
+                28
+                Label : NEW
+                  18
+                  Label : ARGUMENT
+                    30
+                  Label : ARGUMENT
+                    31
+                  Label : ARGUMENT
+                    32
+                  Label : NAME
+                    18
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
           Label : PPP
-            8
+            10
             Label : PPP
-              9
+              11
+            Label : TYPEHINT
+              8
           Label : PPP
-            8
-            Label : PPP
-              10
-          Label : PPP
-            8
+            10
             Label : PPP
               12
+            Label : TYPEHINT
+              8
           Label : PPP
-            8
+            10
             Label : PPP
               14
+            Label : TYPEHINT
+              8
           Label : PPP
-            16
+            10
             Label : PPP
-              17
+              16
+            Label : TYPEHINT
+              8
+          Label : PPP
+            18
             Label : PPP
               19
             Label : PPP
               21
+            Label : PPP
+              23
+            Label : TYPEHINT
+              18

@@ -3,8 +3,6 @@ Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
     Label : DEFINITION
       15
 Label : GLOBAL
@@ -21,8 +19,6 @@ Label : PROJECT
       12
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
     Label : DEFINITION
       15
   Label : FILE

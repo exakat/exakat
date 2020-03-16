@@ -3,8 +3,6 @@ Label : GLOBAL
   6
   Label : DEFINITION
     6
-    Label : DEFAULT
-      9
     Label : DEFINITION
       6
 Label : GLOBAL
@@ -29,12 +27,6 @@ Label : GLOBAL
   23
   Label : DEFINITION
     23
-    Label : DEFAULT
-      25
-      Label : ARGUMENT
-        26
-      Label : NAME
-        25
     Label : DEFINITION
       23
 Label : GLOBAL
@@ -47,8 +39,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     6
-    Label : DEFAULT
-      9
     Label : DEFINITION
       6
   Label : DEFINITION
@@ -65,12 +55,6 @@ Label : PROJECT
       19
   Label : DEFINITION
     23
-    Label : DEFAULT
-      25
-      Label : ARGUMENT
-        26
-      Label : NAME
-        25
     Label : DEFINITION
       23
   Label : DEFINITION

@@ -13,12 +13,14 @@ Label : PROJECT
           5
           Label : STATIC
             6
+          Label : TYPEHINT
+            8
         Label : EXPRESSION
-          8
+          10
           Label : METHOD
             19
             Label : ARGUMENT
-              13
+              8
             Label : BLOCK
               20
               Label : EXPRESSION
@@ -26,24 +28,36 @@ Label : PROJECT
                 Label : STATIC
                   21
                   Label : DEFAULT
-                    12
+                    14
+                Label : TYPEHINT
+                  8
             Label : DEFINITION
               21
               Label : DEFAULT
-                12
+                14
             Label : NAME
               19
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
-            9
+            11
           Label : PPP
             5
             Label : PPP
-              10
+              12
               Label : DEFAULT
-                12
+                14
+            Label : TYPEHINT
+              5
           Label : PPP
             15
             Label : PPP
               16
               Label : DEFAULT
                 18
+            Label : TYPEHINT
+              8
+            Label : TYPEHINT
+              8

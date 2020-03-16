@@ -3,12 +3,6 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      7
-      Label : LEFT
-        6
-      Label : RIGHT
-        14
     Label : DEFINITION
       11
 Label : GLOBAL
@@ -29,12 +23,6 @@ Label : PROJECT
       6
   Label : DEFINITION
     11
-    Label : DEFAULT
-      7
-      Label : LEFT
-        6
-      Label : RIGHT
-        14
     Label : DEFINITION
       11
   Label : FILE

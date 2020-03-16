@@ -23,16 +23,14 @@ Label : GLOBAL
   18
   Label : DEFINITION
     18
-    Label : DEFAULT
-      14
-      Label : LEFT
-        6
-      Label : RIGHT
-        24
     Label : DEFINITION
       18
 Label : PROJECT
   1
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
   Label : DEFINITION
     6
     Label : DEFINITION
@@ -40,21 +38,11 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    16
-    Label : DEFINITION
-      16
-  Label : DEFINITION
     21
     Label : DEFINITION
       21
   Label : DEFINITION
     18
-    Label : DEFAULT
-      14
-      Label : LEFT
-        6
-      Label : RIGHT
-        24
     Label : DEFINITION
       18
   Label : FILE

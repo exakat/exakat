@@ -3,14 +3,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          9
-        Label : VALUE
-          11
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -19,14 +11,6 @@ Label : GLOBAL
   12
   Label : DEFINITION
     12
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          14
-        Label : VALUE
-          15
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -35,8 +19,6 @@ Label : GLOBAL
   16
   Label : DEFINITION
     16
-    Label : DEFAULT
-      18
     Label : DEFINITION
       16
     Label : DEFINITION
@@ -45,8 +27,6 @@ Label : GLOBAL
   19
   Label : DEFINITION
     19
-    Label : DEFAULT
-      21
     Label : DEFINITION
       19
     Label : DEFINITION
@@ -57,8 +37,6 @@ Label : GLOBAL
   23
   Label : DEFINITION
     23
-    Label : DEFAULT
-      25
     Label : DEFINITION
       23
     Label : DEFINITION
@@ -67,8 +45,6 @@ Label : GLOBAL
   27
   Label : DEFINITION
     27
-    Label : DEFAULT
-      29
     Label : DEFINITION
       27
     Label : DEFINITION
@@ -77,74 +53,18 @@ Label : GLOBAL
   31
   Label : DEFINITION
     31
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          33
-        Label : VALUE
-          36
-          Label : CONCAT
-            35
-            Label : SIGN
-              34
-              Label : INDEX
-                9
-              Label : VARIABLE
-                5
-          Label : CONCAT
-            19
     Label : DEFINITION
       31
 Label : GLOBAL
   37
   Label : DEFINITION
     37
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          39
-        Label : VALUE
-          36
-          Label : CONCAT
-            35
-            Label : LEFT
-              40
-            Label : RIGHT
-              34
-              Label : INDEX
-                14
-              Label : VARIABLE
-                12
-          Label : CONCAT
-            23
     Label : DEFINITION
       37
 Label : GLOBAL
   41
   Label : DEFINITION
     41
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          43
-        Label : VALUE
-          36
-          Label : CONCAT
-            19
-          Label : CONCAT
-            35
-            Label : LEFT
-              44
-            Label : RIGHT
-              16
-          Label : CONCAT
-            27
     Label : DEFINITION
       41
     Label : DEFINITION
@@ -153,44 +73,24 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          9
-        Label : VALUE
-          11
     Label : DEFINITION
       5
     Label : DEFINITION
       5
   Label : DEFINITION
     12
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          14
-        Label : VALUE
-          15
     Label : DEFINITION
       12
     Label : DEFINITION
       12
   Label : DEFINITION
     16
-    Label : DEFAULT
-      18
     Label : DEFINITION
       16
     Label : DEFINITION
       16
   Label : DEFINITION
     19
-    Label : DEFAULT
-      21
     Label : DEFINITION
       19
     Label : DEFINITION
@@ -199,86 +99,26 @@ Label : PROJECT
       19
   Label : DEFINITION
     23
-    Label : DEFAULT
-      25
     Label : DEFINITION
       23
     Label : DEFINITION
       23
   Label : DEFINITION
     27
-    Label : DEFAULT
-      29
     Label : DEFINITION
       27
     Label : DEFINITION
       27
   Label : DEFINITION
     31
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          33
-        Label : VALUE
-          36
-          Label : CONCAT
-            35
-            Label : SIGN
-              34
-              Label : INDEX
-                9
-              Label : VARIABLE
-                5
-          Label : CONCAT
-            19
     Label : DEFINITION
       31
   Label : DEFINITION
     37
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          39
-        Label : VALUE
-          36
-          Label : CONCAT
-            35
-            Label : LEFT
-              40
-            Label : RIGHT
-              34
-              Label : INDEX
-                14
-              Label : VARIABLE
-                12
-          Label : CONCAT
-            23
     Label : DEFINITION
       37
   Label : DEFINITION
     41
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        10
-        Label : INDEX
-          43
-        Label : VALUE
-          36
-          Label : CONCAT
-            19
-          Label : CONCAT
-            35
-            Label : LEFT
-              44
-            Label : RIGHT
-              16
-          Label : CONCAT
-            27
     Label : DEFINITION
       41
     Label : DEFINITION

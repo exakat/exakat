@@ -3,8 +3,6 @@ Label : GLOBAL
   8
   Label : DEFINITION
     8
-    Label : DEFAULT
-      11
     Label : DEFINITION
       8
 Label : GLOBAL
@@ -21,8 +19,6 @@ Label : PROJECT
       5
   Label : DEFINITION
     8
-    Label : DEFAULT
-      11
     Label : DEFINITION
       8
   Label : FILE

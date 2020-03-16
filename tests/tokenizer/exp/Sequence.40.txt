@@ -15,24 +15,20 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
 Label : PROJECT
   1
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
-  Label : DEFINITION
     9
     Label : DEFINITION
       9
   Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
     11
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
   Label : FILE

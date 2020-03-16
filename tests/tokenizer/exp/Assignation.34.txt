@@ -209,10 +209,6 @@ Label : PROJECT
                 11
           Label : DEFINITION
             13
-            Label : DEFAULT
-              15
-              Label : YIELD
-                7
             Label : DEFINITION
               13
             Label : DEFINITION
@@ -245,16 +241,6 @@ Label : PROJECT
               26
           Label : DEFINITION
             27
-            Label : DEFAULT
-              25
-              Label : INDEX
-                26
-              Label : VARIABLE
-                24
-                Label : MEMBER
-                  22
-                Label : OBJECT
-                  21
             Label : DEFINITION
               27
             Label : DEFINITION
@@ -263,18 +249,6 @@ Label : PROJECT
               27
           Label : DEFINITION
             33
-            Label : DEFAULT
-              34
-            Label : DEFAULT
-              25
-              Label : INDEX
-                26
-              Label : VARIABLE
-                24
-                Label : MEMBER
-                  36
-                Label : OBJECT
-                  21
             Label : DEFINITION
               33
             Label : DEFINITION
@@ -283,3 +257,7 @@ Label : PROJECT
               33
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7

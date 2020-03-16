@@ -32,10 +32,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
-  Label : DEFINITION
     11
     Label : DEFINITION
       11
@@ -57,6 +53,10 @@ Label : PROJECT
       11
     Label : DEFINITION
       11
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -80,9 +80,9 @@ Label : PROJECT
                   Label : RIGHT
                     14
             Label : EXPRESSION
-              15
+              17
               Label : CASE
-                16
+                18
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -90,11 +90,11 @@ Label : PROJECT
                   Label : LEFT
                     11
                   Label : RIGHT
-                    17
+                    19
             Label : EXPRESSION
-              18
+              20
               Label : CASE
-                19
+                21
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -102,11 +102,11 @@ Label : PROJECT
                   Label : LEFT
                     11
                   Label : RIGHT
-                    20
+                    22
             Label : EXPRESSION
-              21
+              23
               Label : CASE
-                22
+                24
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -114,11 +114,11 @@ Label : PROJECT
                   Label : LEFT
                     11
                   Label : RIGHT
-                    23
+                    25
             Label : EXPRESSION
-              24
+              26
               Label : CASE
-                25
+                27
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -126,15 +126,15 @@ Label : PROJECT
                   Label : LEFT
                     11
                   Label : RIGHT
-                    26
+                    28
             Label : EXPRESSION
-              27
+              29
               Label : CODE
                 3
                 Label : EXPRESSION
-                  28
+                  30
                   Label : BREAK
-                    29
+                    15
             Label : EXPRESSION
               31
               Label : CASE

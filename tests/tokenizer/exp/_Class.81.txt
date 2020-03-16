@@ -29,12 +29,6 @@ Label : PROJECT
               7
               Label : NAME
                 8
-              Label : OVERWRITE
-                7
-                Label : NAME
-                  8
-                Label : VALUE
-                  10
               Label : VALUE
                 12
           Label : DEFINITION
@@ -53,24 +47,6 @@ Label : PROJECT
               7
               Label : NAME
                 8
-              Label : OVERWRITE
-                7
-                Label : NAME
-                  8
-                Label : OVERWRITE
-                  7
-                  Label : NAME
-                    8
-                  Label : VALUE
-                    10
-                Label : VALUE
-                  12
-              Label : OVERWRITE
-                7
-                Label : NAME
-                  8
-                Label : VALUE
-                  10
               Label : VALUE
                 14
           Label : EXTENDS
@@ -85,24 +61,6 @@ Label : PROJECT
               7
               Label : NAME
                 8
-              Label : OVERWRITE
-                7
-                Label : NAME
-                  8
-                Label : OVERWRITE
-                  7
-                  Label : NAME
-                    8
-                  Label : VALUE
-                    10
-                Label : VALUE
-                  12
-              Label : OVERWRITE
-                7
-                Label : NAME
-                  8
-                Label : VALUE
-                  10
               Label : VALUE
                 16
           Label : EXTENDS

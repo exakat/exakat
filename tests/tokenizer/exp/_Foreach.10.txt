@@ -73,5 +73,3 @@ Label : PROJECT
               10
           Label : VALUE
             16
-        Label : EXPRESSION
-          19

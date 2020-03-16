@@ -27,7 +27,7 @@ Label : PROJECT
             6
           Label : THEN
             3
-            Label : EXPRESSION
+            Label : EXPRESSION, EXPRESSION
               8
               Label : ARGUMENT
                 10
@@ -35,8 +35,8 @@ Label : PROJECT
                   9
                 Label : RIGHT
                   9
-            Label : EXPRESSION
-              11
+        Label : EXPRESSION
+          11
         Label : EXPRESSION
           5
           Label : CONDITION

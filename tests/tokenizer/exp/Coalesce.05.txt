@@ -9,32 +9,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      15
-      Label : LEFT
-        10
-        Label : INDEX
-          14
-          Label : ARGUMENT
-            5
-          Label : NAME
-            14
-        Label : VARIABLE
-          10
-          Label : INDEX
-            12
-          Label : VARIABLE
-            10
-            Label : INDEX
-              11
-            Label : VARIABLE
-              8
-      Label : RIGHT
-        18
-        Label : CONCAT
-          16
-        Label : CONCAT
-          5
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -57,32 +31,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      15
-      Label : LEFT
-        10
-        Label : INDEX
-          14
-          Label : ARGUMENT
-            5
-          Label : NAME
-            14
-        Label : VARIABLE
-          10
-          Label : INDEX
-            12
-          Label : VARIABLE
-            10
-            Label : INDEX
-              11
-            Label : VARIABLE
-              8
-      Label : RIGHT
-        18
-        Label : CONCAT
-          16
-        Label : CONCAT
-          5
     Label : DEFINITION
       5
     Label : DEFINITION

@@ -71,7 +71,5 @@ Label : PROJECT
                 30
           Label : NAME
             26
-        Label : EXPRESSION
-          24
     Label : EXPRESSION
       32

@@ -25,12 +25,18 @@ Label : PROJECT
             7
           Label : PPP
             7
-            Label : TYPEHINT
-              8
             Label : PPP
               9
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  7
+                Label : MEMBER
+                  9
             Label : PPP
               11
+            Label : TYPEHINT
+              8
           Label : PPP
             7
             Label : PPP

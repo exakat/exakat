@@ -20,19 +20,19 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            9
-            Label : LEFT
-              6
-              Label : NOT
+            6
+            Label : NOT
+              9
+              Label : LEFT
                 7
-            Label : RIGHT
-              10
-              Label : ARGUMENT
-                11
-              Label : ARGUMENT
-                12
-              Label : NAME
+              Label : RIGHT
                 10
+                Label : ARGUMENT
+                  11
+                Label : ARGUMENT
+                  12
+                Label : NAME
+                  10
           Label : THEN
             13
             Label : EXPRESSION

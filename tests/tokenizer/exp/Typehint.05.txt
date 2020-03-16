@@ -11,25 +11,37 @@ Label : PROJECT
           5
           Label : ARGUMENT
             8
+            Label : DEFAULT
+              9
             Label : NAME
               8
             Label : TYPEHINT
               6
           Label : ARGUMENT
-            9
+            11
+            Label : DEFAULT
+              9
             Label : NAME
+              11
+            Label : TYPEHINT
               9
           Label : ARGUMENT
-            10
+            12
+            Label : DEFAULT
+              9
             Label : NAME
-              10
+              12
             Label : TYPEHINT
               6
           Label : BLOCK
-            11
+            13
             Label : EXPRESSION
-              12
+              14
               Label : RETURN
-                13
+                15
           Label : NAME
             5
+          Label : RETURNED
+            15
+          Label : RETURNTYPE
+            9
