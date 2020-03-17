@@ -69,7 +69,7 @@ class Precedence {
 
                         'T_PLUS'                        => 18,
                         'T_MINUS'                       => 18,
-                        'T_DOT'                         => 18,
+                        'T_DOT'                         => 18, // Changed at constructor time for 21
 
                         'T_SR'                          => 20,
                         'T_SL'                          => 20,
@@ -153,6 +153,10 @@ class Precedence {
             if (defined("$phpVersion::$name")) {
                 $this->precedence[constant("$phpVersion::$name")] = $priority;
             }
+        }
+        
+        if (substr($phpVersion, -2) === '80') {
+            $this->precedence[constant("$phpVersion::T_DOT")] = 21;
         }
     }
 

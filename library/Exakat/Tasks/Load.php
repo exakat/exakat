@@ -2063,20 +2063,21 @@ class Load extends Tasks {
     }
 
     private function processTypehint() : array {
-        // for return typehint, there is a :
+        $nonTypehintToken = array($this->phptokens::T_NS_SEPARATOR,
+                                  $this->phptokens::T_STRING,
+                                  $this->phptokens::T_NAMESPACE,
+                                  $this->phptokens::T_ARRAY,
+                                  $this->phptokens::T_CALLABLE,
+                                  $this->phptokens::T_QUESTION,
+        );
+
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
             ++$this->id;
+
+            $nonTypehintToken[] = $this->phptokens::T_STATIC;
         }
 
-        if (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_NS_SEPARATOR,
-                                                            $this->phptokens::T_STRING,
-                                                            $this->phptokens::T_NAMESPACE,
-                                                            $this->phptokens::T_ARRAY,
-                                                            $this->phptokens::T_CALLABLE,
-                                                            $this->phptokens::T_STATIC,
-                                                            $this->phptokens::T_QUESTION,
-                                                            ),
-                     \STRICT_COMPARISON)) {
+        if (!in_array($this->tokens[$this->id + 1][0], $nonTypehintToken, \STRICT_COMPARISON)) {
             return array($this->addAtomVoid());
         }
 
@@ -2235,7 +2236,7 @@ class Load extends Tasks {
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
 
-                $fullcode[] = (empty($returnTypes) ? '' : join('|', array_column($returnTypes, 'fullcode')) . ' ' ).$index->fullcode;
+                $fullcode[] = ((count($returnTypes) === 1 && $returnTypes[0]->atom === 'Void') ? '' : join('|', array_column($returnTypes, 'fullcode')) . ' ' ).$index->fullcode;
                 $argumentsList[] = $index;
 
                 ++$this->id;
@@ -5671,8 +5672,6 @@ class Load extends Tasks {
                                             $this->phptokens::T_REQUIRE_ONCE,
                                             $this->phptokens::T_INCLUDE,
                                             $this->phptokens::T_INCLUDE_ONCE,
-                                            $this->phptokens::T_PLUS,
-                                            $this->phptokens::T_MINUS,
                                             $this->phptokens::T_PRINT,
                                             $this->phptokens::T_ECHO,
                                             ));
