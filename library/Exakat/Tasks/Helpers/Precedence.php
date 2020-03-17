@@ -20,6 +20,8 @@
  *
 */
 
+declare (strict_types = 1);
+
 namespace Exakat\Tasks\Helpers;
 
 use Exakat\Exceptions\NoPrecedence;
@@ -146,6 +148,8 @@ class Precedence {
 
                         'T_SEMICOLON'                   => 132,
     );
+    
+    private static $cache = array();
 
     public function __construct($phpVersion) {
         foreach($this->definitions as $name => $priority) {
@@ -158,31 +162,26 @@ class Precedence {
         if (substr($phpVersion, -2) === '80') {
             $this->precedence[constant("$phpVersion::T_DOT")] = 21;
         }
-    }
 
-    public function get($token, $itself = self::WITHOUT_SELF) {
-        static $cache;
-
-        if ($cache === null) {
-            $cache = array();
-            foreach($this->precedence as $k1 => $p1) {
-                $cache[$k1] = array();
-                foreach($this->precedence as $k2 => $p2) {
-                    if ($p1 <= $p2 && $k1 !== $k2) {
-                        $cache[$k1][] = $k2;
-                    }
+        foreach($this->precedence as $k1 => $p1) {
+            self::$cache[$k1] = array();
+            foreach($this->precedence as $k2 => $p2) {
+                if ($p1 <= $p2 && $k1 !== $k2) {
+                    self::$cache[$k1][] = $k2;
                 }
             }
         }
+    }
 
-        if (!isset($cache[$token])) {
+    public function get($token, bool $itself = self::WITHOUT_SELF) : array {
+        if (!isset(self::$cache[$token])) {
             throw new NoPrecedence($token);
         }
 
         if ($itself === self::WITH_SELF) {
-            return array_merge($cache[$token], array($token));
+            return array_merge(self::$cache[$token], array($token));
         } else {
-            return $cache[$token];
+            return self::$cache[$token];
         }
     }
 }
