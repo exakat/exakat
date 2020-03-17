@@ -144,8 +144,6 @@ abstract class Analyzer extends TestCase {
             $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'\n$shell");
         }
 
-        $this->assertNotEmpty($res, 'No values were read from the analyzer');
-        
         $this->file = $file;
         $this->number = $number;
         $this->analyzer = $analyzer;
@@ -155,9 +153,9 @@ abstract class Analyzer extends TestCase {
             $this->checkTestOnFullcode($list, $expected, $expected_not);
         } elseif (isset($res[0]['key'], $res[0]['value'])) {
             $this->checkTestOnHash($res, $expected, $expected_not);
+        } elseif (empty($res)) {
+            $this->checkTestOnFullcode(array(), $expected, $expected_not);
         } else {
-            $list = $res;
-            print_r($list); 
             print "How shall we test this?\n";
         }
     }
