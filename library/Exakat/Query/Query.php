@@ -20,12 +20,14 @@
  *
 */
 
+declare(strict_types = 1);
 
 namespace Exakat\Query;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
+use Exakat\Project;
 
 class Query {
     public const STOP_QUERY = 'filter{ false; }';
@@ -49,7 +51,7 @@ class Query {
     private $sides            = array();
     private $stopped          = self::QUERY_RUNNING;
 
-    public function __construct(int $id, string $project, string $analyzer, string $php) {
+    public function __construct(int $id, Project $project, string $analyzer, string $php) {
         $this->id       = $id;
         $this->project  = $project;
         $this->analyzer = $analyzer;
