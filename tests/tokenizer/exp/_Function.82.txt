@@ -1,0 +1,311 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : NAME
+            6
+          Label : METHOD
+            9
+            Label : ARGUMENT
+              10
+              Label : DEFAULT
+                7
+              Label : NAME
+                10
+              Label : TYPEHINT
+                7
+            Label : ARGUMENT
+              11
+              Label : DEFAULT
+                12
+              Label : NAME
+                11
+              Label : TYPEHINT
+                7
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                15
+                Label : ARGUMENT
+                  16
+                  Label : DEFAULT
+                    7
+                  Label : NAME
+                    16
+                  Label : TYPEHINT
+                    7
+                Label : BLOCK
+                  14
+                  Label : EXPRESSION
+                    18
+                    Label : RETURN
+                      29
+                      Label : LEFT
+                        19
+                        Label : CODE
+                          23
+                          Label : CONDITION
+                            21
+                            Label : LEFT
+                              20
+                            Label : RIGHT
+                              22
+                          Label : ELSE
+                            21
+                            Label : LEFT
+                              26
+                              Label : MEMBER
+                                25
+                              Label : OBJECT
+                                24
+                            Label : RIGHT
+                              28
+                          Label : THEN
+                            21
+                            Label : LEFT
+                              26
+                              Label : MEMBER
+                                25
+                              Label : OBJECT
+                                24
+                            Label : RIGHT
+                              27
+                      Label : RIGHT
+                        30
+                        Label : LEFT
+                          26
+                          Label : MEMBER
+                            25
+                          Label : OBJECT
+                            24
+                        Label : RIGHT
+                          31
+                Label : DEFINITION
+                  20
+                  Label : DEFINITION
+                    20
+                Label : DEFINITION
+                  24
+                  Label : DEFINITION
+                    24
+                  Label : DEFINITION
+                    24
+                  Label : DEFINITION
+                    24
+                Label : RETURNED
+                  20
+                Label : RETURNED
+                  24
+                Label : RETURNED
+                  24
+                Label : RETURNED
+                  24
+                Label : RETURNED
+                  29
+                  Label : LEFT
+                    19
+                    Label : CODE
+                      23
+                      Label : CONDITION
+                        21
+                        Label : LEFT
+                          20
+                        Label : RIGHT
+                          22
+                      Label : ELSE
+                        21
+                        Label : LEFT
+                          26
+                          Label : MEMBER
+                            25
+                          Label : OBJECT
+                            24
+                        Label : RIGHT
+                          28
+                      Label : THEN
+                        21
+                        Label : LEFT
+                          26
+                          Label : MEMBER
+                            25
+                          Label : OBJECT
+                            24
+                        Label : RIGHT
+                          27
+                  Label : RIGHT
+                    30
+                    Label : LEFT
+                      26
+                      Label : MEMBER
+                        25
+                      Label : OBJECT
+                        24
+                    Label : RIGHT
+                      31
+                Label : RETURNTYPE
+                  7
+                Label : TYPEHINT
+                  7
+                Label : USE
+                  17
+            Label : NAME
+              9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              13
+          Label : METHOD
+            32
+            Label : ARGUMENT
+              10
+              Label : DEFAULT
+                7
+              Label : NAME
+                10
+              Label : TYPEHINT
+                7
+            Label : ARGUMENT
+              11
+              Label : DEFAULT
+                12
+              Label : NAME
+                11
+              Label : TYPEHINT
+                7
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                15
+                Label : ARGUMENT
+                  16
+                  Label : DEFAULT
+                    7
+                  Label : NAME
+                    16
+                  Label : TYPEHINT
+                    7
+                Label : BLOCK
+                  14
+                  Label : EXPRESSION
+                    18
+                    Label : RETURN
+                      29
+                      Label : LEFT
+                        19
+                        Label : CODE
+                          23
+                          Label : CONDITION
+                            21
+                            Label : LEFT
+                              20
+                            Label : RIGHT
+                              22
+                          Label : ELSE
+                            21
+                            Label : LEFT
+                              26
+                              Label : MEMBER
+                                25
+                              Label : OBJECT
+                                24
+                            Label : RIGHT
+                              28
+                          Label : THEN
+                            21
+                            Label : LEFT
+                              26
+                              Label : MEMBER
+                                25
+                              Label : OBJECT
+                                24
+                            Label : RIGHT
+                              27
+                      Label : RIGHT
+                        30
+                        Label : LEFT
+                          26
+                          Label : MEMBER
+                            25
+                          Label : OBJECT
+                            24
+                        Label : RIGHT
+                          31
+                Label : DEFINITION
+                  20
+                  Label : DEFINITION
+                    20
+                Label : DEFINITION
+                  24
+                  Label : DEFINITION
+                    24
+                  Label : DEFINITION
+                    24
+                  Label : DEFINITION
+                    24
+                Label : RETURNED
+                  20
+                Label : RETURNED
+                  24
+                Label : RETURNED
+                  24
+                Label : RETURNED
+                  24
+                Label : RETURNED
+                  29
+                  Label : LEFT
+                    19
+                    Label : CODE
+                      23
+                      Label : CONDITION
+                        21
+                        Label : LEFT
+                          20
+                        Label : RIGHT
+                          22
+                      Label : ELSE
+                        21
+                        Label : LEFT
+                          26
+                          Label : MEMBER
+                            25
+                          Label : OBJECT
+                            24
+                        Label : RIGHT
+                          28
+                      Label : THEN
+                        21
+                        Label : LEFT
+                          26
+                          Label : MEMBER
+                            25
+                          Label : OBJECT
+                            24
+                        Label : RIGHT
+                          27
+                  Label : RIGHT
+                    30
+                    Label : LEFT
+                      26
+                      Label : MEMBER
+                        25
+                      Label : OBJECT
+                        24
+                    Label : RIGHT
+                      31
+                Label : RETURNTYPE
+                  7
+                Label : USE
+                  17
+            Label : NAME
+              32
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              13

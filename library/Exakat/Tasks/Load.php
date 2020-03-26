@@ -43,7 +43,6 @@ use Exakat\Tasks\Helpers\Boolval;
 use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
-use Exakat\Tasks\Helpers\CloneType1;
 use Exakat\Tasks\Helpers\IsRead;
 use Exakat\Tasks\Helpers\IsModified;
 use Exakat\Tasks\Helpers\Php;
@@ -257,7 +256,6 @@ class Load extends Tasks {
         $this->plugins[] = new Strval();
         $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant();
-        $this->plugins[] = new CloneType1();
         $this->plugins[] = new IsRead();
         $this->plugins[] = new IsModified();
 
@@ -5674,6 +5672,9 @@ class Load extends Tasks {
                                             $this->phptokens::T_INCLUDE_ONCE,
                                             $this->phptokens::T_PRINT,
                                             $this->phptokens::T_ECHO,
+                                            // This is for 'a' . -$y
+                                            $this->phptokens::T_PLUS,
+                                            $this->phptokens::T_MINUS,
                                             ));
 
         while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON)) {
@@ -6209,8 +6210,13 @@ class Load extends Tasks {
                     $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
                     $apply->aliased = self::NOT_ALIASED;
                     return;
-                } else {
+                } elseif ($this->currentClassTrait[count($this->currentClassTrait) - 1] instanceof Atom) {
                     $apply->fullnspath = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
+                    $apply->aliased = self::NOT_ALIASED;
+                    return;
+                } else {
+                    // inside a closure 
+                    $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
                     $apply->aliased = self::NOT_ALIASED;
                     return;
                 }
