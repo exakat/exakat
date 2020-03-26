@@ -23,18 +23,12 @@ Label : PROJECT
               11
               Label : EXPRESSION
                 9
-            Label : DEFINITION
-              42
-              Label : METHOD
-                8
-                Label : ARGUMENT
-                  9
-                Label : NAME
-                  8
-              Label : OBJECT
-                41
             Label : NAME
               8
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
           Label : NAME
             6
         Label : EXPRESSION
@@ -53,24 +47,12 @@ Label : PROJECT
               11
               Label : EXPRESSION
                 9
-            Label : DEFINITION
-              42
-              Label : METHOD
-                8
-                Label : ARGUMENT
-                  9
-                Label : NAME
-                  8
-              Label : OBJECT
-                41
-            Label : DEFINITION
-              18
-              Label : CLASS
-                12
-              Label : METHOD
-                8
             Label : NAME
               8
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
           Label : NAME
             12
         Label : EXPRESSION
@@ -99,6 +81,10 @@ Label : PROJECT
                   41
             Label : NAME
               40
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
           Label : NAME
             15
           Label : USE

@@ -3,10 +3,6 @@ Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      20
-      Label : NEW
-        6
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -15,10 +11,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     17
-    Label : DEFAULT
-      20
-      Label : NEW
-        6
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -53,18 +45,12 @@ Label : PROJECT
                 11
                 Label : RETURN
                   12
-            Label : DEFINITION
-              21
-              Label : METHOD
-                7
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  7
-              Label : OBJECT
-                17
             Label : NAME
               7
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
           Label : METHOD
             13
             Label : ARGUMENT
@@ -77,6 +63,10 @@ Label : PROJECT
                   12
             Label : NAME
               13
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
           Label : METHOD
             14
             Label : ARGUMENT
@@ -89,6 +79,10 @@ Label : PROJECT
                   12
             Label : NAME
               14
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
           Label : METHOD
             15
             Label : ARGUMENT
@@ -101,6 +95,10 @@ Label : PROJECT
                   12
             Label : NAME
               15
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
           Label : METHOD
             16
             Label : ARGUMENT
@@ -113,6 +111,10 @@ Label : PROJECT
                   12
             Label : NAME
               16
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
         Label : EXPRESSION

@@ -13,8 +13,12 @@ Label : PROJECT
             22
             Label : ARGUMENT
               24
+              Label : DEFAULT
+                8
               Label : NAME
                 24
+              Label : TYPEHINT
+                8
             Label : BLOCK
               25
               Label : EXPRESSION
@@ -75,8 +79,6 @@ Label : PROJECT
                   45
             Label : DEFINITION
               27
-              Label : DEFAULT
-                29
               Label : DEFINITION
                 27
               Label : DEFINITION
@@ -101,29 +103,37 @@ Label : PROJECT
                 45
             Label : NAME
               22
-            Label : RETURNED
+            Label : RETURNED, RETURNED
               45
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
           Label : PPP
-            8
-            Label : PPP
-              9
+            10
             Label : PPP
               11
+            Label : PPP
+              13
               Label : DEFAULT
-                12
+                14
                 Label : ARGUMENT
-                  13
+                  8
+            Label : TYPEHINT
+              8
           Label : PPP
-            8
+            10
             Label : PPP
               15
               Label : DEFAULT
                 17
+            Label : TYPEHINT
+              8
           Label : PPP
-            8
+            10
             Label : PPP
               19
               Label : DEFAULT
                 21
+            Label : TYPEHINT
+              8

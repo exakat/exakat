@@ -10,27 +10,211 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            7
-            Label : NAME
+            9
+            Label : DEFAULT
               7
-              Label : DEFINITION
-                7
-                Label : DEFINITION
-                  7
-          Label : BLOCK
-            8
-            Label : EXPRESSION
+            Label : NAME
               9
-              Label : RETURN
-                10
-                Label : NEW
-                  11
-                  Label : ARGUMENT
-                    13
-                    Label : ARGUMENT
-                      14
+              Label : DEFINITION
+                9
+                Label : DEFINITION
+                  9
+            Label : TYPEHINT
+              7
+          Label : RETURNED
+            16
+          Label : RETURNED
+            16
+          Label : RETURNED
+            12
+            Label : NEW
+              13
+              Label : ARGUMENT
+                15
+                Label : ARGUMENT
+                  7
+                Label : BLOCK
+                  10
+                  Label : EXPRESSION
+                    17
+                    Label : LEFT
+                      16
+                    Label : RIGHT
+                      21
+                      Label : METHOD
+                        19
+                        Label : ARGUMENT
+                          7
+                        Label : NAME
+                          19
+                      Label : OBJECT
+                        18
+                  Label : EXPRESSION
+                    21
+                    Label : METHOD
+                      22
+                      Label : ARGUMENT
+                        7
+                      Label : NAME
+                        22
+                    Label : OBJECT
+                      16
+                  Label : EXPRESSION
+                    24
                     Label : BLOCK
-                      8
+                      3
+                      Label : EXPRESSION
+                        21
+                        Label : METHOD
+                          32
+                          Label : ARGUMENT
+                            7
+                          Label : NAME
+                            32
+                        Label : OBJECT
+                          16
+                    Label : FINAL
+                      3
+                      Label : EXPRESSION
+                        28
+                        Label : LEFT
+                          27
+                          Label : LEFT
+                            25
+                          Label : RIGHT
+                            9
+                        Label : RIGHT
+                          21
+                          Label : METHOD
+                            29
+                            Label : ARGUMENT
+                              7
+                            Label : NAME
+                              29
+                          Label : OBJECT
+                            16
+                    Label : INCREMENT
+                      3
+                      Label : EXPRESSION
+                        31
+                        Label : PREPLUSPLUS
+                          25
+                    Label : INIT
+                      3
+                      Label : EXPRESSION
+                        17
+                        Label : LEFT
+                          25
+                        Label : RIGHT
+                          26
+                  Label : EXPRESSION
+                    34
+                    Label : BLOCK
+                      10
+                      Label : EXPRESSION
+                        35
+                        Label : YIELD
+                          38
+                          Label : INDEX
+                            21
+                            Label : METHOD
+                              36
+                              Label : ARGUMENT
+                                7
+                              Label : NAME
+                                36
+                            Label : OBJECT
+                              16
+                          Label : VALUE
+                            21
+                            Label : METHOD
+                              39
+                              Label : ARGUMENT
+                                7
+                              Label : NAME
+                                39
+                            Label : OBJECT
+                              16
+                      Label : EXPRESSION
+                        21
+                        Label : METHOD
+                          32
+                          Label : ARGUMENT
+                            7
+                          Label : NAME
+                            32
+                        Label : OBJECT
+                          16
+                    Label : CONDITION
+                      21
+                      Label : METHOD
+                        29
+                        Label : ARGUMENT
+                          7
+                        Label : NAME
+                          29
+                      Label : OBJECT
+                        16
+                Label : DEFINITION
+                  16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                Label : DEFINITION
+                  25
+                  Label : DEFINITION
+                    25
+                  Label : DEFINITION
+                    25
+                  Label : DEFINITION
+                    25
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  7
+                Label : USE
+                  9
+                  Label : DEFINITION
+                    9
+              Label : NAME
+                13
+          Label : RETURNED
+            16
+          Label : RETURNED
+            16
+          Label : RETURNED
+            16
+          Label : RETURNED
+            16
+          Label : RETURNED
+            25
+          Label : BLOCK
+            10
+            Label : EXPRESSION
+              11
+              Label : RETURN
+                12
+                Label : NEW
+                  13
+                  Label : ARGUMENT
+                    15
+                    Label : ARGUMENT
+                      7
+                    Label : BLOCK
+                      10
                       Label : EXPRESSION
                         17
                         Label : LEFT
@@ -40,7 +224,7 @@ Label : PROJECT
                           Label : METHOD
                             19
                             Label : ARGUMENT
-                              14
+                              7
                             Label : NAME
                               19
                           Label : OBJECT
@@ -50,7 +234,7 @@ Label : PROJECT
                         Label : METHOD
                           22
                           Label : ARGUMENT
-                            14
+                            7
                           Label : NAME
                             22
                         Label : OBJECT
@@ -64,7 +248,7 @@ Label : PROJECT
                             Label : METHOD
                               32
                               Label : ARGUMENT
-                                14
+                                7
                               Label : NAME
                                 32
                             Label : OBJECT
@@ -78,13 +262,13 @@ Label : PROJECT
                               Label : LEFT
                                 25
                               Label : RIGHT
-                                7
+                                9
                             Label : RIGHT
                               21
                               Label : METHOD
                                 29
                                 Label : ARGUMENT
-                                  14
+                                  7
                                 Label : NAME
                                   29
                               Label : OBJECT
@@ -106,7 +290,7 @@ Label : PROJECT
                       Label : EXPRESSION
                         34
                         Label : BLOCK
-                          8
+                          10
                           Label : EXPRESSION
                             35
                             Label : YIELD
@@ -116,7 +300,7 @@ Label : PROJECT
                                 Label : METHOD
                                   36
                                   Label : ARGUMENT
-                                    14
+                                    7
                                   Label : NAME
                                     36
                                 Label : OBJECT
@@ -126,7 +310,7 @@ Label : PROJECT
                                 Label : METHOD
                                   39
                                   Label : ARGUMENT
-                                    14
+                                    7
                                   Label : NAME
                                     39
                                 Label : OBJECT
@@ -136,7 +320,7 @@ Label : PROJECT
                             Label : METHOD
                               32
                               Label : ARGUMENT
-                                14
+                                7
                               Label : NAME
                                 32
                             Label : OBJECT
@@ -146,23 +330,13 @@ Label : PROJECT
                           Label : METHOD
                             29
                             Label : ARGUMENT
-                              14
+                              7
                             Label : NAME
                               29
                           Label : OBJECT
                             16
                     Label : DEFINITION
                       16
-                      Label : DEFAULT
-                        21
-                        Label : METHOD
-                          19
-                          Label : ARGUMENT
-                            14
-                          Label : NAME
-                            19
-                        Label : OBJECT
-                          18
                       Label : DEFINITION
                         16
                       Label : DEFINITION
@@ -181,43 +355,33 @@ Label : PROJECT
                         16
                     Label : DEFINITION
                       25
-                      Label : DEFAULT
-                        26
                       Label : DEFINITION
                         25
                       Label : DEFINITION
                         25
                       Label : DEFINITION
                         25
-                    Label : USE
+                    Label : RETURNED
+                      Void
+                    Label : RETURNTYPE
                       7
+                    Label : USE
+                      9
                       Label : DEFINITION
-                        7
+                        9
                   Label : NAME
-                    11
+                    13
+          Label : RETURNED
+            9
+          Label : RETURNED
+            25
+          Label : RETURNED
+            25
+          Label : RETURNED
+            16
+          Label : RETURNED
+            16
           Label : NAME
             5
-          Label : RETURNED
-            16
-          Label : RETURNED
-            16
-          Label : RETURNED
-            25
-          Label : RETURNED
-            25
-          Label : RETURNED
+          Label : RETURNTYPE
             7
-          Label : RETURNED
-            16
-          Label : RETURNED
-            25
-          Label : RETURNED
-            16
-          Label : RETURNED
-            16
-          Label : RETURNED
-            16
-          Label : RETURNED
-            16
-          Label : RETURNED
-            16

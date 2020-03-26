@@ -42,25 +42,25 @@ Label : PROJECT
           Label : CONDITION
             12
             Label : LEFT
-              10
-              Label : INDEX
-                11
-              Label : VARIABLE
-                9
-                Label : MEMBER
-                  8
-                Label : OBJECT
-                  6
-            Label : RIGHT
               12
               Label : LEFT
+                10
+                Label : INDEX
+                  11
+                Label : VARIABLE
+                  9
+                  Label : MEMBER
+                    8
+                  Label : OBJECT
+                    6
+              Label : RIGHT
                 10
                 Label : INDEX
                   15
                 Label : VARIABLE
                   13
-              Label : RIGHT
-                17
+            Label : RIGHT
+              17
           Label : THEN
             19
             Label : EXPRESSION

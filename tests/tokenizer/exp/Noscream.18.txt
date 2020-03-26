@@ -109,11 +109,3 @@ Label : PROJECT
             31
           Label : VALUE
             33
-          Label : VALUE
-            32
-            Label : DEFINITION
-              32
-          Label : VALUE
-            33
-            Label : DEFINITION
-              33

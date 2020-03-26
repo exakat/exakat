@@ -53,16 +53,6 @@ Label : PROJECT
                 22
           Label : DEFINITION
             9
-            Label : DEFAULT
-              16
-              Label : LEFT
-                14
-                Label : INDEX
-                  15
-                Label : VARIABLE
-                  11
-              Label : RIGHT
-                17
             Label : DEFINITION
               9
             Label : DEFINITION
@@ -77,3 +67,7 @@ Label : PROJECT
             22
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6

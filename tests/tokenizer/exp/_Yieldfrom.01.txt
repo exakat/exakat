@@ -11,12 +11,6 @@ Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      5
-      Label : ARGUMENT
-        6
-      Label : NAME
-        5
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -27,12 +21,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     17
-    Label : DEFAULT
-      5
-      Label : ARGUMENT
-        6
-      Label : NAME
-        5
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -79,6 +67,16 @@ Label : PROJECT
               5
           Label : NAME
             5
+          Label : RETURNED
+            12
+            Label : YIELD
+              13
+              Label : ARGUMENT
+                6
+              Label : NAME
+                13
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           13
           Label : ARGUMENT
@@ -105,6 +103,10 @@ Label : PROJECT
               13
           Label : NAME
             13
+          Label : RETURNED
+            16
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           19
           Label : LEFT
@@ -129,12 +131,6 @@ Label : PROJECT
             17
           Label : VALUE
             21
-          Label : VALUE
-            21
-            Label : DEFINITION
-              21
-            Label : DEFINITION
-              21
         Label : EXPRESSION
           23
           Label : ARGUMENT

@@ -1,46 +1,26 @@
 test
 Label : GLOBAL
-  8
+  10
   Label : DEFINITION
-    8
-    Label : DEFAULT
-      17
+    10
     Label : DEFINITION
-      8
+      10
     Label : DEFINITION
-      8
+      10
 Label : GLOBAL
-  12
+  14
   Label : DEFINITION
-    12
-    Label : DEFAULT
+    14
+    Label : DEFINITION
       14
-      Label : NEW
-        6
-        Label : ARGUMENT
-          15
-        Label : NAME
-          6
     Label : DEFINITION
-      12
+      14
     Label : DEFINITION
-      12
-    Label : DEFINITION
-      12
+      14
 Label : GLOBAL
   18
   Label : DEFINITION
     18
-    Label : DEFAULT
-      20
-      Label : ARGUMENT
-        21
-      Label : ARGUMENT
-        17
-      Label : ARGUMENT
-        22
-      Label : ARGUMENT
-        23
     Label : DEFINITION
       18
     Label : DEFINITION
@@ -48,41 +28,21 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    12
-    Label : DEFAULT
+    14
+    Label : DEFINITION
       14
-      Label : NEW
-        6
-        Label : ARGUMENT
-          15
-        Label : NAME
-          6
     Label : DEFINITION
-      12
+      14
     Label : DEFINITION
-      12
-    Label : DEFINITION
-      12
+      14
   Label : DEFINITION
-    8
-    Label : DEFAULT
-      17
+    10
     Label : DEFINITION
-      8
+      10
     Label : DEFINITION
-      8
+      10
   Label : DEFINITION
     18
-    Label : DEFAULT
-      20
-      Label : ARGUMENT
-        21
-      Label : ARGUMENT
-        17
-      Label : ARGUMENT
-        22
-      Label : ARGUMENT
-        23
     Label : DEFINITION
       18
     Label : DEFINITION
@@ -98,7 +58,7 @@ Label : PROJECT
           Label : DEFINITION
             6
             Label : ARGUMENT
-              15
+              7
             Label : NAME
               6
           Label : DEFINITION
@@ -106,31 +66,33 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            7
+            9
             Label : PPP
-              8
+              10
               Label : DEFAULT
-                10
+                12
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
-          13
+          15
           Label : LEFT
-            12
-          Label : RIGHT
             14
+          Label : RIGHT
+            16
             Label : NEW
               6
               Label : ARGUMENT
-                15
+                7
               Label : NAME
                 6
         Label : EXPRESSION
-          13
+          15
           Label : LEFT
-            8
+            10
           Label : RIGHT
             17
         Label : EXPRESSION
-          13
+          15
           Label : LEFT
             18
           Label : RIGHT
@@ -150,9 +112,9 @@ Label : PROJECT
             Label : CONCAT
               26
               Label : MEMBER
-                8
+                10
               Label : OBJECT
-                12
+                14
             Label : CONCAT
               27
         Label : EXPRESSION
@@ -170,6 +132,6 @@ Label : PROJECT
                   Label : VARIABLE
                     18
               Label : OBJECT
-                12
+                14
             Label : CONCAT
               27

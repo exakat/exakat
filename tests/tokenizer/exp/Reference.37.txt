@@ -3,30 +3,12 @@ Label : GLOBAL
   25
   Label : DEFINITION
     25
-    Label : DEFAULT
-      23
-      Label : CLASS
-        6
-      Label : METHOD
-        16
-        Label : ARGUMENT
-          12
-        Label : NAME
-          16
     Label : DEFINITION
       25
 Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      20
-      Label : NEW
-        6
-        Label : ARGUMENT
-          12
-        Label : NAME
-          6
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -35,30 +17,12 @@ Label : PROJECT
   1
   Label : DEFINITION
     17
-    Label : DEFAULT
-      20
-      Label : NEW
-        6
-        Label : ARGUMENT
-          12
-        Label : NAME
-          6
     Label : DEFINITION
       17
     Label : DEFINITION
       17
   Label : DEFINITION
     25
-    Label : DEFAULT
-      23
-      Label : CLASS
-        6
-      Label : METHOD
-        16
-        Label : ARGUMENT
-          12
-        Label : NAME
-          16
     Label : DEFINITION
       25
   Label : FILE
@@ -103,18 +67,12 @@ Label : PROJECT
                 15
                 Label : RETURN
                   10
-            Label : DEFINITION
-              21
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  11
-              Label : OBJECT
-                17
             Label : NAME
               11
+            Label : RETURNED
+              10
+            Label : RETURNTYPE
+              12
           Label : METHOD
             16
             Label : ARGUMENT
@@ -137,6 +95,12 @@ Label : PROJECT
                   16
             Label : NAME
               16
+            Label : RETURNED
+              10
+            Label : RETURNTYPE
+              12
+            Label : TYPEHINT
+              12
           Label : NAME
             6
         Label : EXPRESSION

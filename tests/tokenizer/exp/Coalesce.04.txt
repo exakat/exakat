@@ -27,6 +27,10 @@ Label : PROJECT
               5
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           13
           Label : ARGUMENT

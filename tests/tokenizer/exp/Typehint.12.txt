@@ -58,6 +58,10 @@ Label : PROJECT
               Label : RIGHT
                 30
           Label : DEFINITION
+            30
+            Label : DEFINITION
+              30
+          Label : DEFINITION
             22
             Label : DEFINITION
               22
@@ -69,10 +73,6 @@ Label : PROJECT
             25
             Label : DEFINITION
               25
-          Label : DEFINITION
-            30
-            Label : DEFINITION
-              30
           Label : NAME
             5
           Label : RETURNED

@@ -9,8 +9,6 @@ Label : GLOBAL
   7
   Label : DEFINITION
     7
-    Label : DEFAULT
-      10
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -27,8 +25,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     7
-    Label : DEFAULT
-      10
     Label : DEFINITION
       7
     Label : DEFINITION

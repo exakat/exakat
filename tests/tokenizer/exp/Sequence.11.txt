@@ -11,10 +11,6 @@ Label : GLOBAL
   8
   Label : DEFINITION
     8
-    Label : DEFAULT
-      6
-    Label : DEFAULT
-      18
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -31,10 +27,6 @@ Label : GLOBAL
   16
   Label : DEFINITION
     16
-    Label : DEFAULT
-      18
-    Label : DEFAULT
-      19
     Label : DEFINITION
       16
     Label : DEFINITION
@@ -43,10 +35,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     8
-    Label : DEFAULT
-      6
-    Label : DEFAULT
-      18
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -65,10 +53,6 @@ Label : PROJECT
       14
   Label : DEFINITION
     16
-    Label : DEFAULT
-      18
-    Label : DEFAULT
-      19
     Label : DEFINITION
       16
     Label : DEFINITION
@@ -105,12 +89,6 @@ Label : PROJECT
             12
           Label : VALUE
             14
-          Label : VALUE
-            14
-            Label : DEFINITION
-              14
-            Label : DEFINITION
-              14
         Label : EXPRESSION
           5
           Label : CONDITION

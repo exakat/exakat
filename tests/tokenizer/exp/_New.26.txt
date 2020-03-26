@@ -19,12 +19,12 @@ Label : PROJECT
               10
               Label : EXPRESSION
                 8
-            Label : DEFINITION
-              15
-              Label : NEW
-                6
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
         Label : EXPRESSION
@@ -39,12 +39,12 @@ Label : PROJECT
               10
               Label : EXPRESSION
                 8
-            Label : DEFINITION
-              15
-              Label : NEW
-                11
             Label : NAME
               11
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             11
         Label : EXPRESSION
@@ -61,12 +61,12 @@ Label : PROJECT
               10
               Label : EXPRESSION
                 8
-            Label : DEFINITION
-              15
-              Label : NEW
-                12
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             12
         Label : EXPRESSION
@@ -87,12 +87,12 @@ Label : PROJECT
               10
               Label : EXPRESSION
                 8
-            Label : DEFINITION
-              15
-              Label : NEW
-                14
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             14
             Label : ARGUMENT
@@ -103,6 +103,10 @@ Label : PROJECT
                 8
             Label : NAME
               14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             14
         Label : EXPRESSION

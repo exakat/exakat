@@ -43,12 +43,12 @@ Label : PROJECT
                 43
             Label : EXPRESSION
               43
+              Label : NAME
+                43
               Label : ARGUMENT
                 47
               Label : ARGUMENT
                 49
-              Label : NAME
-                43
           Label : THEN
             3
             Label : EXPRESSION

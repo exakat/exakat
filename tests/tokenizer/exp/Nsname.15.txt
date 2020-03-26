@@ -10,105 +10,65 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : DEFINITION
-            6
-            Label : ARGUMENT
-              12
-            Label : NAME
-              6
-          Label : DEFINITION
-            19
-            Label : ARGUMENT
-              12
-            Label : NAME
-              19
-          Label : DEFINITION
             16
           Label : DEFINITION
             17
           Label : DEFINITION
             16
             Label : ARGUMENT
-              12
+              10
             Label : NAME
               16
           Label : DEFINITION
             17
             Label : ARGUMENT
-              12
+              10
             Label : NAME
               17
           Label : DEFINITION
             6
           Label : DEFINITION
             19
+          Label : DEFINITION
+            6
+            Label : ARGUMENT
+              10
+            Label : NAME
+              6
+          Label : DEFINITION
+            19
+            Label : ARGUMENT
+              10
+            Label : NAME
+              19
           Label : EXTENDS
             8
           Label : MAGICMETHOD
             9
             Label : ARGUMENT
-              10
+              12
+              Label : DEFAULT
+                10
               Label : NAME
+                12
+              Label : TYPEHINT
                 10
             Label : BLOCK
-              11
+              13
               Label : EXPRESSION
-                12
-            Label : DEFINITION
-              15
-              Label : NEW
-                16
-            Label : DEFINITION
-              15
-              Label : NEW
-                17
-            Label : DEFINITION
-              15
-              Label : NEW
-                6
-            Label : DEFINITION
-              15
-              Label : NEW
-                19
-            Label : DEFINITION
-              15
-              Label : NEW
-                16
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  16
-            Label : DEFINITION
-              15
-              Label : NEW
-                6
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  6
-            Label : DEFINITION
-              15
-              Label : NEW
-                17
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  17
-            Label : DEFINITION
-              15
-              Label : NEW
-                19
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  19
+                10
             Label : NAME
               9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10
           Label : METHOD
             14
             Label : ARGUMENT
-              12
+              10
             Label : BLOCK
-              11
+              13
               Label : EXPRESSION
                 15
                 Label : NEW
@@ -126,7 +86,7 @@ Label : PROJECT
                 Label : NEW
                   16
                   Label : ARGUMENT
-                    12
+                    10
                   Label : NAME
                     16
               Label : EXPRESSION
@@ -134,7 +94,7 @@ Label : PROJECT
                 Label : NEW
                   17
                   Label : ARGUMENT
-                    12
+                    10
                   Label : NAME
                     17
               Label : EXPRESSION
@@ -142,11 +102,15 @@ Label : PROJECT
                 Label : NEW
                   18
                   Label : ARGUMENT
-                    12
+                    10
                   Label : NAME
                     18
             Label : NAME
               14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10
           Label : NAME
             6
         Label : EXPRESSION
@@ -162,7 +126,7 @@ Label : PROJECT
           Label : NEW
             6
             Label : ARGUMENT
-              12
+              10
             Label : NAME
               6
         Label : EXPRESSION
@@ -170,7 +134,7 @@ Label : PROJECT
           Label : NEW
             19
             Label : ARGUMENT
-              12
+              10
             Label : NAME
               19
         Label : EXPRESSION
@@ -178,7 +142,7 @@ Label : PROJECT
           Label : NEW
             21
             Label : ARGUMENT
-              12
+              10
             Label : NAME
               21
         Label : EXPRESSION
@@ -186,7 +150,7 @@ Label : PROJECT
           Label : NEW
             23
             Label : ARGUMENT
-              12
+              10
             Label : NAME
               23
         Label : EXPRESSION

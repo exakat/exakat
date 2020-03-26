@@ -3,104 +3,32 @@ Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
-      Label : LEFT
-        8
-        Label : NEW
-          16
-      Label : RIGHT
-        11
-        Label : ARGUMENT
-          13
-        Label : NAME
-          11
     Label : DEFINITION
       15
 Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      10
-      Label : LEFT
-        8
-        Label : NEW
-          9
-      Label : RIGHT
-        11
-        Label : ARGUMENT
-          13
-        Label : NAME
-          11
     Label : DEFINITION
       5
 Label : GLOBAL
   19
   Label : DEFINITION
     19
-    Label : DEFAULT
-      22
-      Label : LEFT
-        8
-        Label : NEW
-          20
-      Label : RIGHT
-        11
-        Label : ARGUMENT
-          13
-        Label : NAME
-          11
     Label : DEFINITION
       19
 Label : PROJECT
   1
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
-      Label : LEFT
-        8
-        Label : NEW
-          16
-      Label : RIGHT
-        11
-        Label : ARGUMENT
-          13
-        Label : NAME
-          11
     Label : DEFINITION
       15
   Label : DEFINITION
     5
-    Label : DEFAULT
-      10
-      Label : LEFT
-        8
-        Label : NEW
-          9
-      Label : RIGHT
-        11
-        Label : ARGUMENT
-          13
-        Label : NAME
-          11
     Label : DEFINITION
       5
   Label : DEFINITION
     19
-    Label : DEFAULT
-      22
-      Label : LEFT
-        8
-        Label : NEW
-          20
-      Label : RIGHT
-        11
-        Label : ARGUMENT
-          13
-        Label : NAME
-          11
     Label : DEFINITION
       19
   Label : FILE

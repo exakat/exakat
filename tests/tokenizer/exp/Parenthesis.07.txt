@@ -3,8 +3,6 @@ Label : GLOBAL
   13
   Label : DEFINITION
     13
-    Label : DEFAULT
-      16
     Label : DEFINITION
       13
 Label : GLOBAL
@@ -16,15 +14,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
     6
     Label : DEFINITION
       6
-  Label : DEFINITION
-    13
-    Label : DEFAULT
-      16
-    Label : DEFINITION
-      13
   Label : FILE
     3
     Label : EXPRESSION

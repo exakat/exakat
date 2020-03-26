@@ -3,22 +3,6 @@ Label : GLOBAL
   7
   Label : DEFINITION
     7
-    Label : DEFAULT
-      10
-      Label : NEW
-        11
-        Label : ARGUMENT
-          13
-        Label : ARGUMENT
-          10
-          Label : NEW
-            15
-            Label : ARGUMENT
-              17
-            Label : NAME
-              15
-        Label : NAME
-          11
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -45,40 +29,12 @@ Label : GLOBAL
   24
   Label : DEFINITION
     24
-    Label : DEFAULT
-      26
-      Label : ARGUMENT
-        27
-      Label : ARGUMENT
-        29
-        Label : ARGUMENT
-          7
-        Label : NAME
-          29
-      Label : NAME
-        26
     Label : DEFINITION
       24
 Label : PROJECT
   1
   Label : DEFINITION
     7
-    Label : DEFAULT
-      10
-      Label : NEW
-        11
-        Label : ARGUMENT
-          13
-        Label : ARGUMENT
-          10
-          Label : NEW
-            15
-            Label : ARGUMENT
-              17
-            Label : NAME
-              15
-        Label : NAME
-          11
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -97,18 +53,6 @@ Label : PROJECT
       22
   Label : DEFINITION
     24
-    Label : DEFAULT
-      26
-      Label : ARGUMENT
-        27
-      Label : ARGUMENT
-        29
-        Label : ARGUMENT
-          7
-        Label : NAME
-          29
-      Label : NAME
-        26
     Label : DEFINITION
       24
   Label : FILE

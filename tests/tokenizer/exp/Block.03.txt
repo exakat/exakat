@@ -9,14 +9,6 @@ Label : GLOBAL
   10
   Label : DEFINITION
     10
-    Label : DEFAULT
-      13
-      Label : ARGUMENT
-        14
-      Label : ARGUMENT
-        16
-      Label : NAME
-        13
     Label : DEFINITION
       10
 Label : GLOBAL
@@ -29,8 +21,6 @@ Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      19
     Label : DEFINITION
       17
 Label : GLOBAL
@@ -59,14 +49,6 @@ Label : PROJECT
       7
   Label : DEFINITION
     10
-    Label : DEFAULT
-      13
-      Label : ARGUMENT
-        14
-      Label : ARGUMENT
-        16
-      Label : NAME
-        13
     Label : DEFINITION
       10
   Label : DEFINITION
@@ -75,8 +57,6 @@ Label : PROJECT
       14
   Label : DEFINITION
     17
-    Label : DEFAULT
-      19
     Label : DEFINITION
       17
   Label : DEFINITION

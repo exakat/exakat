@@ -57,18 +57,6 @@ Label : PROJECT
                     11
           Label : DEFINITION
             11
-            Label : DEFAULT
-              13
-              Label : YIELD
-                18
-                Label : METHOD
-                  15
-                  Label : ARGUMENT
-                    17
-                  Label : NAME
-                    15
-                Label : OBJECT
-                  14
             Label : DEFINITION
               11
             Label : DEFINITION
@@ -89,5 +77,7 @@ Label : PROJECT
               23
           Label : NAME
             5
-          Label : RETURNED
+          Label : RETURNED, RETURNED
             20
+          Label : RETURNTYPE
+            7

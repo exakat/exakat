@@ -34,9 +34,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : EXTENDS
-            17
-          Label : EXTENDS
             8
+          Label : EXTENDS
+            17
           Label : METHOD
             10
             Label : ARGUMENT

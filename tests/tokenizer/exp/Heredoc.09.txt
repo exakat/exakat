@@ -14,11 +14,13 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            8
+            10
             Label : PPP
-              9
+              11
               Label : DEFAULT
-                10
+                12
+            Label : TYPEHINT
+              8
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -28,9 +30,9 @@ Label : PROJECT
           Label : EXTENDS
             7
           Label : METHOD
-            12
+            14
             Label : ARGUMENT
-              13
+              8
             Label : BLOCK
               15
               Label : EXPRESSION
@@ -42,7 +44,7 @@ Label : PROJECT
                   Label : VARIABLE
                     16
                 Label : RIGHT
-                  10
+                  12
               Label : EXPRESSION
                 19
                 Label : LEFT
@@ -91,16 +93,48 @@ Label : PROJECT
                 16
             Label : DEFINITION
               20
-              Label : DEFAULT
-                18
               Label : DEFINITION
                 20
               Label : DEFINITION
                 20
             Label : NAME
-              12
+              14
+            Label : RETURNED
+              24
+              Label : CONCAT
+                23
+                Label : MEMBER
+                  7
+                Label : OBJECT
+                  22
+              Label : CONCAT
+                25
+                Label : CONCAT
+                  27
+                Label : CONCAT
+                  25
+                  Label : MEMBER
+                    7
+                  Label : OBJECT
+                    22
+                Label : CONCAT
+                  28
+                Label : CONCAT
+                  25
+                  Label : INDEX
+                    18
+                  Label : VARIABLE
+                    16
+                Label : CONCAT
+                  29
+                Label : CONCAT
+                  20
+                Label : CONCAT
+                  29
+            Label : RETURNTYPE
+              8
           Label : NAME
-            11
+            13
           Label : PPP
             7
             Label : PPP
@@ -117,7 +151,3 @@ Label : PROJECT
                   7
                 Label : OBJECT
                   22
-              Label : OVERWRITE
-                9
-                Label : DEFAULT
-                  10

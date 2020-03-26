@@ -3,14 +3,6 @@ Label : GLOBAL
   18
   Label : DEFINITION
     18
-    Label : DEFAULT
-      20
-      Label : ARGUMENT
-        23
-        Label : INDEX
-          21
-        Label : VALUE
-          24
     Label : DEFINITION
       18
 Label : GLOBAL
@@ -23,20 +15,6 @@ Label : GLOBAL
   26
   Label : DEFINITION
     26
-    Label : DEFAULT
-      10
-      Label : METHOD
-        28
-        Label : ARGUMENT
-          10
-          Label : MEMBER
-            32
-          Label : OBJECT
-            30
-        Label : NAME
-          28
-      Label : OBJECT
-        7
     Label : DEFINITION
       26
 Label : GLOBAL
@@ -53,32 +31,10 @@ Label : PROJECT
       15
   Label : DEFINITION
     18
-    Label : DEFAULT
-      20
-      Label : ARGUMENT
-        23
-        Label : INDEX
-          21
-        Label : VALUE
-          24
     Label : DEFINITION
       18
   Label : DEFINITION
     26
-    Label : DEFAULT
-      10
-      Label : METHOD
-        28
-        Label : ARGUMENT
-          10
-          Label : MEMBER
-            32
-          Label : OBJECT
-            30
-        Label : NAME
-          28
-      Label : OBJECT
-        7
     Label : DEFINITION
       26
   Label : DEFINITION

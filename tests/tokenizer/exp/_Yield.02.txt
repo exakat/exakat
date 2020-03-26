@@ -77,34 +77,8 @@ Label : PROJECT
                 9
               Label : VALUE
                 19
-              Label : VALUE
-                18
-                Label : DEFINITION
-                  18
-                Label : DEFINITION
-                  18
-              Label : VALUE
-                19
-                Label : DEFINITION
-                  19
-                Label : DEFINITION
-                  19
           Label : DEFINITION
             9
-            Label : DEFAULT
-              11
-              Label : ARGUMENT
-                13
-                Label : INDEX
-                  12
-                Label : VALUE
-                  14
-              Label : ARGUMENT
-                13
-                Label : INDEX
-                  15
-                Label : VALUE
-                  16
             Label : DEFINITION
               9
             Label : DEFINITION
@@ -129,6 +103,10 @@ Label : PROJECT
               5
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           17
           Label : BLOCK
@@ -155,15 +133,3 @@ Label : PROJECT
               5
           Label : VALUE
             19
-          Label : VALUE
-            18
-            Label : DEFINITION
-              18
-            Label : DEFINITION
-              18
-          Label : VALUE
-            19
-            Label : DEFINITION
-              19
-            Label : DEFINITION
-              19

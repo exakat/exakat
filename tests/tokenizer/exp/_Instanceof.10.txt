@@ -10,25 +10,31 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : DEFINITION
-            15
+            17
           Label : DEFINITION
-            15
+            17
           Label : METHOD
-            8
-            Label : ARGUMENT
-              10
-              Label : NAME
-                10
+            10
             Label : ARGUMENT
               12
+              Label : DEFAULT
+                8
               Label : NAME
                 12
               Label : TYPEHINT
-                11
-            Label : BLOCK
-              13
-              Label : EXPRESSION
+                8
+            Label : ARGUMENT
+              14
+              Label : DEFAULT
+                8
+              Label : NAME
                 14
+              Label : TYPEHINT
+                13
+            Label : BLOCK
+              15
+              Label : EXPRESSION
+                16
                 Label : CONDITION
                   25
                   Label : LEFT
@@ -42,17 +48,17 @@ Label : PROJECT
                       Label : OBJECT
                         20
                         Label : METHOD
-                          16
+                          18
                           Label : ARGUMENT
-                            18
+                            8
                           Label : NAME
-                            16
+                            18
                         Label : OBJECT
-                          15
+                          17
                   Label : RIGHT
                     26
                 Label : THEN
-                  13
+                  15
                   Label : EXPRESSION
                     28
                     Label : RETURN
@@ -70,7 +76,7 @@ Label : PROJECT
                         Label : MEMBER
                           29
                         Label : OBJECT
-                          15
+                          17
             Label : DEFINITION
               24
               Label : DEFINITION
@@ -84,11 +90,29 @@ Label : PROJECT
               Label : DEFINITION
                 34
             Label : NAME
-              8
+              10
             Label : RETURNED
               33
             Label : RETURNED
               34
+            Label : RETURNED
+              20
+              Label : METHOD
+                31
+                Label : ARGUMENT
+                  33
+                Label : ARGUMENT
+                  34
+                Label : NAME
+                  31
+              Label : OBJECT
+                20
+                Label : MEMBER
+                  29
+                Label : OBJECT
+                  17
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
           Label : PPP
@@ -100,4 +124,4 @@ Label : PROJECT
                 Label : MEMBER
                   29
                 Label : OBJECT
-                  15
+                  17

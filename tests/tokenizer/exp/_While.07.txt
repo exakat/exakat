@@ -46,91 +46,91 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            7
+            11
             Label : LEFT
-              6
-            Label : RIGHT
               7
               Label : LEFT
-                8
-              Label : RIGHT
-                11
+                7
                 Label : LEFT
-                  9
-                  Label : NOT
-                    10
+                  6
                 Label : RIGHT
-                  14
-                  Label : INDEX
-                    15
-                  Label : VARIABLE
-                    12
-          Label : THEN
-            17
-            Label : EXPRESSION
-              18
-        Label : EXPRESSION
-          20
-          Label : BLOCK
-            17
-            Label : EXPRESSION
-              18
-          Label : CONDITION
-            6
-        Label : EXPRESSION
-          5
-          Label : CONDITION
-            7
-            Label : LEFT
-              6
-            Label : RIGHT
-              7
-              Label : LEFT
-                8
+                  8
               Label : RIGHT
-                11
-                Label : LEFT
-                  21
-                  Label : NOT
-                    10
-                Label : RIGHT
-                  14
-                  Label : INDEX
-                    15
-                  Label : VARIABLE
-                    12
-          Label : THEN
-            17
-            Label : EXPRESSION
-              18
-        Label : EXPRESSION
-          20
-          Label : BLOCK
-            17
-            Label : EXPRESSION
-              18
-          Label : CONDITION
-            6
-        Label : EXPRESSION
-          5
-          Label : CONDITION
-            7
-            Label : LEFT
-              6
-            Label : RIGHT
-              7
-              Label : LEFT
-                8
-              Label : RIGHT
-                11
-                Label : LEFT
+                9
+                Label : NOT
                   10
+            Label : RIGHT
+              14
+              Label : INDEX
+                15
+              Label : VARIABLE
+                12
+          Label : THEN
+            17
+            Label : EXPRESSION
+              18
+        Label : EXPRESSION
+          20
+          Label : BLOCK
+            17
+            Label : EXPRESSION
+              18
+          Label : CONDITION
+            6
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            11
+            Label : LEFT
+              7
+              Label : LEFT
+                7
+                Label : LEFT
+                  6
                 Label : RIGHT
-                  14
-                  Label : INDEX
-                    15
-                  Label : VARIABLE
-                    12
+                  8
+              Label : RIGHT
+                21
+                Label : NOT
+                  10
+            Label : RIGHT
+              14
+              Label : INDEX
+                15
+              Label : VARIABLE
+                12
+          Label : THEN
+            17
+            Label : EXPRESSION
+              18
+        Label : EXPRESSION
+          20
+          Label : BLOCK
+            17
+            Label : EXPRESSION
+              18
+          Label : CONDITION
+            6
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            11
+            Label : LEFT
+              7
+              Label : LEFT
+                7
+                Label : LEFT
+                  6
+                Label : RIGHT
+                  8
+              Label : RIGHT
+                10
+            Label : RIGHT
+              14
+              Label : INDEX
+                15
+              Label : VARIABLE
+                12
           Label : THEN
             17
             Label : EXPRESSION

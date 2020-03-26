@@ -16,15 +16,15 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
-  Label : DEFINITION
     13
     Label : DEFINITION
       13
     Label : DEFINITION
       13
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -50,9 +50,9 @@ Label : PROJECT
                   Label : GOTO
                     16
             Label : EXPRESSION
-              19
+              21
               Label : CASE
-                21
+                23
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -60,17 +60,17 @@ Label : PROJECT
                   Label : POSTPLUSPLUS
                     13
             Label : EXPRESSION
-              23
+              25
               Label : CODE
                 3
                 Label : EXPRESSION
-                  24
+                  26
                   Label : ARGUMENT
-                    25
+                    27
           Label : CONDITION
             6
         Label : EXPRESSION
-          26
+          28
           Label : DEFINITION
             18
             Label : GOTO
@@ -78,6 +78,6 @@ Label : PROJECT
           Label : GOTOLABEL
             16
         Label : EXPRESSION
-          24
+          26
           Label : ARGUMENT
-            27
+            29

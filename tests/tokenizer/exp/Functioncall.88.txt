@@ -117,3 +117,5 @@ Label : PROJECT
                 12
                 Label : ARGUMENT
                   51
+            Label : TYPEHINT
+              10

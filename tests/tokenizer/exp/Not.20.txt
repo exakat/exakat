@@ -3,18 +3,6 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
-      Label : ARGUMENT
-        15
-      Label : NAME
-        14
-    Label : DEFAULT
-      14
-      Label : ARGUMENT
-        15
-      Label : NAME
-        14
     Label : DEFINITION
       11
     Label : DEFINITION
@@ -45,18 +33,6 @@ Label : PROJECT
       7
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
-      Label : ARGUMENT
-        15
-      Label : NAME
-        14
-    Label : DEFAULT
-      14
-      Label : ARGUMENT
-        15
-      Label : NAME
-        14
     Label : DEFINITION
       11
     Label : DEFINITION

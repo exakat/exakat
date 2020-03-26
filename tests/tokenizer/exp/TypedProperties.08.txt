@@ -13,12 +13,6 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : DEFINITION
-            8
-          Label : DEFINITION
-            8
-          Label : DEFINITION
-            8
           Label : NAME
             6
         Label : EXPRESSION
@@ -31,12 +25,18 @@ Label : PROJECT
             7
           Label : PPP
             8
-            Label : TYPEHINT
-              8
             Label : PPP
               9
+              Label : DEFINITION
+                17
+                Label : CLASS
+                  7
+                Label : MEMBER
+                  9
             Label : PPP
               11
+            Label : TYPEHINT
+              8
           Label : PPP
             8
             Label : PPP

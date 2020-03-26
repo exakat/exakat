@@ -15,8 +15,6 @@ Label : GLOBAL
   18
   Label : DEFINITION
     18
-    Label : DEFAULT
-      5
     Label : DEFINITION
       18
     Label : DEFINITION
@@ -25,8 +23,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     18
-    Label : DEFAULT
-      5
     Label : DEFINITION
       18
     Label : DEFINITION

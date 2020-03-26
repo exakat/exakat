@@ -37,7 +37,5 @@ Label : PROJECT
               14
               Label : CASE
                 15
-              Label : CODE
-                3
           Label : CONDITION
             11

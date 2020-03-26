@@ -14,25 +14,25 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
                 13
                 Label : ARGUMENT
                   14
-            Label : DEFINITION
-              8
-            Label : DEFINITION
-              8
             Label : NAME
+              10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               8
           Label : NAME
             6
         Label : EXPRESSION
-          10
+          8
         Label : EXPRESSION
           16
           Label : NAME
@@ -44,11 +44,11 @@ Label : PROJECT
               Label : EXPRESSION
                 20
                 Label : NAME
-                  8
+                  10
             Label : USE
               6
         Label : EXPRESSION
-          10
+          8
         Label : EXPRESSION
           16
           Label : NAME
@@ -62,6 +62,6 @@ Label : PROJECT
                 Label : AS
                   23
                 Label : NAME
-                  8
+                  10
             Label : USE
               6

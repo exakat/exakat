@@ -14,36 +14,50 @@ Label : PROJECT
           Label : IMPLEMENTS
             8
           Label : METHOD
-            12
+            14
             Label : ARGUMENT
-              13
+              9
             Label : BLOCK
               15
               Label : EXPRESSION
-                13
+                9
             Label : NAME
-              12
+              14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
           Label : METHOD
             17
             Label : ARGUMENT
-              13
+              9
             Label : BLOCK
               15
               Label : EXPRESSION
-                13
+                9
             Label : NAME
               17
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              9
           Label : NAME
             6
           Label : PPP
-            9
+            11
             Label : PPP
-              10
+              12
+            Label : TYPEHINT
+              9
           Label : PPP
-            9
+            11
             Label : PPP
               16
+            Label : TYPEHINT
+              9
           Label : PPP
-            9
+            11
             Label : PPP
               18
+            Label : TYPEHINT
+              9

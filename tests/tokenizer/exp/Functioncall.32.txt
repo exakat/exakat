@@ -10,24 +10,32 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            6
+            8
             Label : DEFAULT
-              7
+              9
               Label : ARGUMENT
-                8
+                6
             Label : NAME
+              8
+            Label : TYPEHINT
               6
           Label : ARGUMENT
             10
             Label : DEFAULT
-              7
+              9
               Label : ARGUMENT
-                8
+                6
             Label : NAME
               10
+            Label : TYPEHINT
+              6
           Label : BLOCK
             11
             Label : EXPRESSION
-              8
+              6
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6

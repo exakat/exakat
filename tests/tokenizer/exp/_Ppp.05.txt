@@ -10,9 +10,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            12
+            14
             Label : ARGUMENT
-              14
+              8
             Label : BLOCK
               16
               Label : EXPRESSION
@@ -24,14 +24,18 @@ Label : PROJECT
               Label : DEFINITION
                 18
             Label : NAME
-              12
-            Label : RETURNED
+              14
+            Label : RETURNED, RETURNED
               18
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
           Label : PPP
-            8
-            Label : PPP
-              9
+            10
             Label : PPP
               11
+            Label : PPP
+              13
+            Label : TYPEHINT
+              8

@@ -10,66 +10,62 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            6
+            8
             Label : DEFAULT
-              7
+              9
             Label : NAME
+              8
+            Label : TYPEHINT
               6
           Label : BLOCK
-            8
-            Label : EXPRESSION
-              10
-              Label : LEFT
-                9
-              Label : RIGHT
-                11
+            10
             Label : EXPRESSION
               12
-              Label : GLOBAL
-                9
-                Label : DEFAULT
-                  11
-                Label : DEFAULT
-                  11
-                Label : DEFINITION
-                  9
-                Label : DEFINITION
-                  9
-            Label : EXPRESSION
-              13
-              Label : STATIC
-                14
-                Label : DEFAULT
-                  15
-                Label : DEFINITION
-                  14
-            Label : EXPRESSION
-              10
               Label : LEFT
-                9
-              Label : RIGHT
                 11
-            Label : EXPRESSION
-              10
-              Label : LEFT
-                14
               Label : RIGHT
-                15
-          Label : DEFINITION
-            14
-            Label : DEFAULT
-              15
-            Label : DEFINITION
+                13
+            Label : EXPRESSION
               14
+              Label : GLOBAL
+                11
+                Label : DEFINITION
+                  11
+                Label : DEFINITION
+                  11
+            Label : EXPRESSION
+              15
+              Label : STATIC
+                16
+                Label : DEFINITION
+                  16
+              Label : TYPEHINT
+                6
+            Label : EXPRESSION
+              12
+              Label : LEFT
+                11
+              Label : RIGHT
+                13
+            Label : EXPRESSION
+              12
+              Label : LEFT
+                16
+              Label : RIGHT
+                17
+          Label : DEFINITION
+            16
+            Label : DEFINITION
+              16
           Label : DEFINITION, DEFINITION
-            9
-            Label : DEFAULT
-              11
-            Label : DEFAULT
+            11
+            Label : DEFINITION
               11
             Label : DEFINITION
-              9
-            Label : DEFINITION
-              9
+              11
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6

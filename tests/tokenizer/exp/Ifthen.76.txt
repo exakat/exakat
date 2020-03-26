@@ -10,116 +10,144 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            7
-            Label : NAME
+            9
+            Label : DEFAULT
               7
-          Label : BLOCK
-            8
-            Label : EXPRESSION
+            Label : NAME
               9
-              Label : CONDITION
-                12
-                Label : LEFT
-                  10
-                  Label : NOT
-                    11
-                Label : RIGHT
-                  10
-                  Label : NOT
-                    13
-                    Label : ARGUMENT
-                      15
-                    Label : NAME
-                      13
-              Label : THEN
-                3
-                Label : EXPRESSION
-                  16
-                  Label : RETURN
-                    17
-            Label : EXPRESSION
-              9
-              Label : CONDITION
-                19
-                Label : ARGUMENT
-                  24
-                  Label : MEMBER
-                    22
-                  Label : OBJECT
-                    21
-                Label : ARGUMENT
-                  25
-                Label : NAME
-                  19
-              Label : THEN
-                3
-                Label : EXPRESSION
-                  16
-                  Label : RETURN
-                    26
-            Label : EXPRESSION
-              9
-              Label : CONDITION
-                24
-                Label : MEMBER
-                  29
-                Label : OBJECT
-                  28
-              Label : THEN
-                3
-                Label : EXPRESSION
-                  16
-                  Label : RETURN
-                    10
-                    Label : NOT
-                      10
-                      Label : NOT
-                        31
-                        Label : ARGUMENT
-                          24
-                          Label : MEMBER
-                            34
-                          Label : OBJECT
-                            33
-                        Label : ARGUMENT
-                          36
-                        Label : NAME
-                          31
-            Label : EXPRESSION
-              16
-              Label : RETURN
-                37
-          Label : DEFINITION
-            11
-            Label : DEFINITION
-              11
-          Label : DEFINITION
-            15
-            Label : DEFINITION
-              15
-          Label : DEFINITION
-            21
-            Label : DEFINITION
-              21
-          Label : DEFINITION
-            25
-            Label : DEFINITION
-              25
-          Label : DEFINITION
-            28
-            Label : DEFINITION
-              28
-          Label : DEFINITION
-            33
-            Label : DEFINITION
-              33
-          Label : DEFINITION
-            36
-            Label : DEFINITION
-              36
+            Label : TYPEHINT
+              7
           Label : NAME
             5
           Label : RETURNED
-            33
+            28
           Label : RETURNED
-            36
+            39
+          Label : RETURNED
+            12
+            Label : NOT
+              12
+              Label : NOT
+                33
+                Label : ARGUMENT
+                  26
+                  Label : MEMBER
+                    36
+                  Label : OBJECT
+                    35
+                Label : ARGUMENT
+                  38
+                Label : NAME
+                  33
+          Label : RETURNED
+            38
+          Label : RETURNED
+            35
+          Label : RETURNED
+            19
+          Label : DEFINITION
+            38
+            Label : DEFINITION
+              38
+          Label : BLOCK
+            10
+            Label : EXPRESSION
+              11
+              Label : CONDITION
+                14
+                Label : LEFT
+                  12
+                  Label : NOT
+                    13
+                Label : RIGHT
+                  12
+                  Label : NOT
+                    15
+                    Label : ARGUMENT
+                      17
+                    Label : NAME
+                      15
+              Label : THEN
+                3
+                Label : EXPRESSION
+                  18
+                  Label : RETURN
+                    19
+            Label : EXPRESSION
+              11
+              Label : CONDITION
+                21
+                Label : ARGUMENT
+                  26
+                  Label : MEMBER
+                    24
+                  Label : OBJECT
+                    23
+                Label : ARGUMENT
+                  27
+                Label : NAME
+                  21
+              Label : THEN
+                3
+                Label : EXPRESSION
+                  18
+                  Label : RETURN
+                    28
+            Label : EXPRESSION
+              11
+              Label : CONDITION
+                26
+                Label : MEMBER
+                  31
+                Label : OBJECT
+                  30
+              Label : THEN
+                3
+                Label : EXPRESSION
+                  18
+                  Label : RETURN
+                    12
+                    Label : NOT
+                      12
+                      Label : NOT
+                        33
+                        Label : ARGUMENT
+                          26
+                          Label : MEMBER
+                            36
+                          Label : OBJECT
+                            35
+                        Label : ARGUMENT
+                          38
+                        Label : NAME
+                          33
+            Label : EXPRESSION
+              18
+              Label : RETURN
+                39
+          Label : DEFINITION
+            35
+            Label : DEFINITION
+              35
+          Label : DEFINITION
+            30
+            Label : DEFINITION
+              30
+          Label : DEFINITION
+            27
+            Label : DEFINITION
+              27
+          Label : DEFINITION
+            23
+            Label : DEFINITION
+              23
+          Label : DEFINITION
+            17
+            Label : DEFINITION
+              17
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+          Label : RETURNTYPE
+            7

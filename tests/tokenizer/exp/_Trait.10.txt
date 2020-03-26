@@ -33,26 +33,12 @@ Label : PROJECT
                     11
                   Label : CONCAT
                     14
-            Label : DEFINITION
-              21
-              Label : CLASS
-                6
-              Label : METHOD
-                6
-            Label : DEFINITION
-              6
-            Label : DEFINITION, DEFINITION
-              27
-              Label : METHOD
-                6
-                Label : ARGUMENT
-                  7
-                Label : NAME
-                  6
-              Label : OBJECT
-                26
             Label : NAME
               6
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             6
         Label : EXPRESSION
@@ -73,10 +59,12 @@ Label : PROJECT
                     11
                   Label : CONCAT
                     14
-            Label : DEFINITION
-              6
             Label : NAME
               6
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             16
         Label : EXPRESSION
@@ -99,26 +87,12 @@ Label : PROJECT
                     11
                   Label : CONCAT
                     14
-            Label : DEFINITION
-              27
-              Label : METHOD
-                6
-                Label : ARGUMENT
-                  7
-                Label : NAME
-                  6
-              Label : OBJECT
-                26
-            Label : DEFINITION
-              21
-              Label : CLASS
-                17
-              Label : METHOD
-                6
-            Label : DEFINITION
-              6
             Label : NAME
               6
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             17
         Label : EXPRESSION
@@ -126,9 +100,9 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : DEFINITION
-            19
-          Label : DEFINITION
             26
+          Label : DEFINITION
+            19
           Label : METHOD
             25
             Label : ARGUMENT
@@ -145,22 +119,12 @@ Label : PROJECT
                     6
                 Label : OBJECT
                   26
-            Label : DEFINITION
-              27
-              Label : METHOD
-                25
-                Label : ARGUMENT
-                  7
-                Label : NAME
-                  25
-              Label : OBJECT
-                28
-                Label : CODE
-                  29
-                  Label : NEW
-                    19
             Label : NAME
               25
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             19
           Label : USE

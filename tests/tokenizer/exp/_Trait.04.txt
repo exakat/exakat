@@ -3,14 +3,6 @@ Label : GLOBAL
   29
   Label : DEFINITION
     29
-    Label : DEFAULT
-      32
-      Label : NEW
-        23
-        Label : ARGUMENT
-          10
-        Label : NAME
-          23
     Label : DEFINITION
       29
     Label : DEFINITION
@@ -23,14 +15,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     29
-    Label : DEFAULT
-      32
-      Label : NEW
-        23
-        Label : ARGUMENT
-          10
-        Label : NAME
-          23
     Label : DEFINITION
       29
     Label : DEFINITION
@@ -50,9 +34,9 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -60,6 +44,10 @@ Label : PROJECT
                 Label : ARGUMENT
                   14
             Label : NAME
+              10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               8
           Label : NAME
             6
@@ -72,7 +60,7 @@ Label : PROJECT
           Label : METHOD
             18
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -81,6 +69,10 @@ Label : PROJECT
                   20
             Label : NAME
               18
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             16
         Label : EXPRESSION
@@ -88,31 +80,25 @@ Label : PROJECT
           Label : DEFINITION
             23
             Label : ARGUMENT
-              10
+              8
             Label : NAME
               23
           Label : METHOD
             26
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
                 13
                 Label : ARGUMENT
                   28
-            Label : DEFINITION
-              33
-              Label : METHOD
-                26
-                Label : ARGUMENT
-                  10
-                Label : NAME
-                  26
-              Label : OBJECT
-                29
             Label : NAME
               26
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             23
           Label : USE
@@ -130,17 +116,17 @@ Label : PROJECT
             Label : NEW
               23
               Label : ARGUMENT
-                10
+                8
               Label : NAME
                 23
         Label : EXPRESSION
           33
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
-            Label : NAME
               8
+            Label : NAME
+              10
           Label : OBJECT
             29
         Label : EXPRESSION
@@ -148,7 +134,7 @@ Label : PROJECT
           Label : METHOD
             18
             Label : ARGUMENT
-              10
+              8
             Label : NAME
               18
           Label : OBJECT
@@ -158,7 +144,7 @@ Label : PROJECT
           Label : METHOD
             26
             Label : ARGUMENT
-              10
+              8
             Label : NAME
               26
           Label : OBJECT

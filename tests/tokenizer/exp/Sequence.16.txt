@@ -1,60 +1,44 @@
 test
 Label : GLOBAL
-  8
-  Label : DEFINITION
-    8
-    Label : DEFAULT
-      11
-    Label : DEFINITION
-      8
-Label : GLOBAL
   12
   Label : DEFINITION
     12
-    Label : DEFAULT
-      6
     Label : DEFINITION
       12
+Label : GLOBAL
+  8
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
 Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      14
     Label : DEFINITION
       15
 Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      19
     Label : DEFINITION
       17
 Label : PROJECT
   1
   Label : DEFINITION
     8
-    Label : DEFAULT
-      11
     Label : DEFINITION
       8
   Label : DEFINITION
     12
-    Label : DEFAULT
-      6
     Label : DEFINITION
       12
   Label : DEFINITION
     15
-    Label : DEFAULT
-      14
     Label : DEFINITION
       15
   Label : DEFINITION
     17
-    Label : DEFAULT
-      19
     Label : DEFINITION
       17
   Label : FILE

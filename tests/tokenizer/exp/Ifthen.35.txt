@@ -117,14 +117,6 @@ Label : PROJECT
                 9
               Label : VALUE
                 13
-              Label : VALUE
-                11
-                Label : DEFINITION
-                  11
-              Label : VALUE
-                13
-                Label : DEFINITION
-                  13
         Label : EXPRESSION
           19
           Label : ARGUMENT
@@ -153,7 +145,3 @@ Label : PROJECT
             24
           Label : VALUE
             26
-          Label : VALUE
-            26
-            Label : DEFINITION
-              26

@@ -3,8 +3,6 @@ Label : GLOBAL
   14
   Label : DEFINITION
     14
-    Label : DEFAULT
-      17
     Label : DEFINITION
       14
 Label : GLOBAL
@@ -25,8 +23,6 @@ Label : PROJECT
       8
   Label : DEFINITION
     14
-    Label : DEFAULT
-      17
     Label : DEFINITION
       14
   Label : FILE

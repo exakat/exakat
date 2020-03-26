@@ -14,9 +14,9 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : METHOD
-            11
+            13
             Label : ARGUMENT
-              12
+              7
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -24,29 +24,33 @@ Label : PROJECT
                 Label : LEFT
                   16
                   Label : MEMBER
-                    9
+                    11
                   Label : OBJECT
                     15
                 Label : RIGHT
                   18
             Label : NAME
-              11
+              13
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             6
           Label : PPP
-            7
+            9
             Label : PPP
-              8
+              10
               Label : DEFAULT
-                10
-              Label : DEFAULT
-                18
+                12
               Label : DEFINITION
                 16
                 Label : MEMBER
-                  9
+                  11
                 Label : OBJECT
                   15
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -58,9 +62,9 @@ Label : PROJECT
           Label : EXTENDS
             6
           Label : METHOD
-            11
+            13
             Label : ARGUMENT
-              12
+              7
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -68,59 +72,33 @@ Label : PROJECT
                 Label : LEFT
                   16
                   Label : MEMBER
-                    9
+                    11
                   Label : OBJECT
                     15
                 Label : RIGHT
                   18
             Label : NAME
-              11
-            Label : OVERWRITE
-              11
-              Label : ARGUMENT
-                12
-              Label : BLOCK
-                14
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    16
-                    Label : MEMBER
-                      9
-                    Label : OBJECT
-                      15
-                  Label : RIGHT
-                    18
-              Label : NAME
-                11
+              13
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             19
           Label : PPP
-            7
+            9
             Label : PPP
-              8
-              Label : DEFAULT
-                18
+              10
               Label : DEFAULT
                 20
               Label : DEFINITION
                 16
                 Label : MEMBER
-                  9
+                  11
                 Label : OBJECT
                   15
-              Label : OVERWRITE
-                8
-                Label : DEFAULT
-                  10
-                Label : DEFAULT
-                  18
-                Label : DEFINITION
-                  16
-                  Label : MEMBER
-                    9
-                  Label : OBJECT
-                    15
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -128,9 +106,9 @@ Label : PROJECT
           Label : EXTENDS
             19
           Label : METHOD
-            11
+            13
             Label : ARGUMENT
-              12
+              7
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -138,119 +116,33 @@ Label : PROJECT
                 Label : LEFT
                   16
                   Label : MEMBER
-                    9
+                    11
                   Label : OBJECT
                     15
                 Label : RIGHT
                   18
             Label : NAME
-              11
-            Label : OVERWRITE
-              11
-              Label : ARGUMENT
-                12
-              Label : BLOCK
-                14
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    16
-                    Label : MEMBER
-                      9
-                    Label : OBJECT
-                      15
-                  Label : RIGHT
-                    18
-              Label : NAME
-                11
-              Label : OVERWRITE
-                11
-                Label : ARGUMENT
-                  12
-                Label : BLOCK
-                  14
-                  Label : EXPRESSION
-                    17
-                    Label : LEFT
-                      16
-                      Label : MEMBER
-                        9
-                      Label : OBJECT
-                        15
-                    Label : RIGHT
-                      18
-                Label : NAME
-                  11
-            Label : OVERWRITE
-              11
-              Label : ARGUMENT
-                12
-              Label : BLOCK
-                14
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    16
-                    Label : MEMBER
-                      9
-                    Label : OBJECT
-                      15
-                  Label : RIGHT
-                    18
-              Label : NAME
-                11
+              13
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             21
           Label : PPP
-            7
+            9
             Label : PPP
-              8
-              Label : DEFAULT
-                18
+              10
               Label : DEFAULT
                 20
               Label : DEFINITION
                 16
                 Label : MEMBER
-                  9
+                  11
                 Label : OBJECT
                   15
-              Label : OVERWRITE
-                8
-                Label : DEFAULT
-                  18
-                Label : DEFAULT
-                  20
-                Label : DEFINITION
-                  16
-                  Label : MEMBER
-                    9
-                  Label : OBJECT
-                    15
-                Label : OVERWRITE
-                  8
-                  Label : DEFAULT
-                    10
-                  Label : DEFAULT
-                    18
-                  Label : DEFINITION
-                    16
-                    Label : MEMBER
-                      9
-                    Label : OBJECT
-                      15
-              Label : OVERWRITE
-                8
-                Label : DEFAULT
-                  10
-                Label : DEFAULT
-                  18
-                Label : DEFINITION
-                  16
-                  Label : MEMBER
-                    9
-                  Label : OBJECT
-                    15
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -258,9 +150,9 @@ Label : PROJECT
           Label : EXTENDS
             19
           Label : METHOD
-            11
+            13
             Label : ARGUMENT
-              12
+              7
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -268,116 +160,30 @@ Label : PROJECT
                 Label : LEFT
                   16
                   Label : MEMBER
-                    9
+                    11
                   Label : OBJECT
                     15
                 Label : RIGHT
                   18
             Label : NAME
-              11
-            Label : OVERWRITE
-              11
-              Label : ARGUMENT
-                12
-              Label : BLOCK
-                14
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    16
-                    Label : MEMBER
-                      9
-                    Label : OBJECT
-                      15
-                  Label : RIGHT
-                    18
-              Label : NAME
-                11
-              Label : OVERWRITE
-                11
-                Label : ARGUMENT
-                  12
-                Label : BLOCK
-                  14
-                  Label : EXPRESSION
-                    17
-                    Label : LEFT
-                      16
-                      Label : MEMBER
-                        9
-                      Label : OBJECT
-                        15
-                    Label : RIGHT
-                      18
-                Label : NAME
-                  11
-            Label : OVERWRITE
-              11
-              Label : ARGUMENT
-                12
-              Label : BLOCK
-                14
-                Label : EXPRESSION
-                  17
-                  Label : LEFT
-                    16
-                    Label : MEMBER
-                      9
-                    Label : OBJECT
-                      15
-                  Label : RIGHT
-                    18
-              Label : NAME
-                11
+              13
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             22
           Label : PPP
-            7
+            9
             Label : PPP
-              8
-              Label : DEFAULT
-                18
+              10
               Label : DEFAULT
                 20
               Label : DEFINITION
                 16
                 Label : MEMBER
-                  9
+                  11
                 Label : OBJECT
                   15
-              Label : OVERWRITE
-                8
-                Label : DEFAULT
-                  18
-                Label : DEFAULT
-                  20
-                Label : DEFINITION
-                  16
-                  Label : MEMBER
-                    9
-                  Label : OBJECT
-                    15
-                Label : OVERWRITE
-                  8
-                  Label : DEFAULT
-                    10
-                  Label : DEFAULT
-                    18
-                  Label : DEFINITION
-                    16
-                    Label : MEMBER
-                      9
-                    Label : OBJECT
-                      15
-              Label : OVERWRITE
-                8
-                Label : DEFAULT
-                  10
-                Label : DEFAULT
-                  18
-                Label : DEFINITION
-                  16
-                  Label : MEMBER
-                    9
-                  Label : OBJECT
-                    15
+            Label : TYPEHINT
+              7

@@ -25,6 +25,10 @@ Label : PROJECT
                   14
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
         Label : EXPRESSION
@@ -39,6 +43,10 @@ Label : PROJECT
                 14
           Label : NAME
             7
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            8
         Label : EXPRESSION
           16
           Label : ARGUMENT
@@ -69,6 +77,10 @@ Label : PROJECT
                   14
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             18
           Label : PPP
@@ -83,9 +95,13 @@ Label : PROJECT
                   22
                 Label : OBJECT
                   29
+            Label : TYPEHINT
+              8
           Label : PPP
             23
             Label : PPP
               24
               Label : DEFAULT
                 26
+            Label : TYPEHINT
+              8

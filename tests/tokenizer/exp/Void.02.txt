@@ -3,14 +3,6 @@ Label : GLOBAL
   6
   Label : DEFINITION
     6
-    Label : DEFAULT
-      9
-      Label : ARGUMENT
-        11
-      Label : ARGUMENT
-        12
-      Label : NAME
-        9
     Label : DEFINITION
       6
 Label : GLOBAL
@@ -71,14 +63,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     6
-    Label : DEFAULT
-      9
-      Label : ARGUMENT
-        11
-      Label : ARGUMENT
-        12
-      Label : NAME
-        9
     Label : DEFINITION
       6
   Label : DEFINITION

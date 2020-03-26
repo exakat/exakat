@@ -69,6 +69,8 @@ Label : PROJECT
                   24
                   Label : CONTINUE
                     10
+                Label : EXPRESSION
+                  10
           Label : SOURCE
             12
             Label : METHOD
@@ -81,7 +83,3 @@ Label : PROJECT
               6
           Label : VALUE
             13
-          Label : VALUE
-            13
-            Label : DEFINITION
-              13

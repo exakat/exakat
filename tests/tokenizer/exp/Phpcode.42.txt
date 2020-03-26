@@ -10,21 +10,21 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            7
+            9
             Label : DEFAULT
-              8
-            Label : NAME
               7
+            Label : NAME
+              9
             Label : TYPEHINT
-              8
+              7
           Label : ARGUMENT
             10
             Label : DEFAULT
-              8
+              7
             Label : NAME
               10
             Label : TYPEHINT
-              8
+              7
           Label : BLOCK
             11
             Label : EXPRESSION
@@ -49,6 +49,8 @@ Label : PROJECT
                 14
             Label : EXPRESSION
               18
+            Label : EXPRESSION
+              7
           Label : DEFINITION
             15
             Label : DEFINITION
@@ -58,6 +60,6 @@ Label : PROJECT
           Label : RETURNED
             Void
           Label : RETURNTYPE
-            8
+            7
         Label : EXPRESSION
-          8
+          7

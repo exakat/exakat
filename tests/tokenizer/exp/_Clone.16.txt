@@ -33,6 +33,18 @@ Label : PROJECT
             5
           Label : RETURNED
             13
+          Label : RETURNED
+            10
+            Label : CLONE
+              11
+              Label : NEW
+                12
+                Label : ARGUMENT
+                  13
+                Label : NAME
+                  12
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           14
           Label : ARGUMENT
@@ -43,3 +55,7 @@ Label : PROJECT
               6
           Label : NAME
             14
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6

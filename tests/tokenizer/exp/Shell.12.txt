@@ -3,14 +3,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      11
-      Label : LEFT
-        8
-        Label : CONCAT
-          9
-      Label : RIGHT
-        12
     Label : DEFINITION
       5
 Label : GLOBAL
@@ -23,28 +15,12 @@ Label : GLOBAL
   13
   Label : DEFINITION
     13
-    Label : DEFAULT
-      11
-      Label : LEFT
-        15
-      Label : RIGHT
-        8
-        Label : CONCAT
-          16
     Label : DEFINITION
       13
 Label : GLOBAL
   16
   Label : DEFINITION
     16
-    Label : DEFAULT
-      11
-      Label : LEFT
-        18
-        Label : CONCAT
-          19
-      Label : RIGHT
-        21
     Label : DEFINITION
       16
     Label : DEFINITION
@@ -59,14 +35,6 @@ Label : GLOBAL
   22
   Label : DEFINITION
     22
-    Label : DEFAULT
-      11
-      Label : LEFT
-        24
-      Label : RIGHT
-        18
-        Label : CONCAT
-          25
     Label : DEFINITION
       22
 Label : GLOBAL
@@ -79,14 +47,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      11
-      Label : LEFT
-        8
-        Label : CONCAT
-          9
-      Label : RIGHT
-        12
     Label : DEFINITION
       5
   Label : DEFINITION
@@ -95,26 +55,10 @@ Label : PROJECT
       9
   Label : DEFINITION
     13
-    Label : DEFAULT
-      11
-      Label : LEFT
-        15
-      Label : RIGHT
-        8
-        Label : CONCAT
-          16
     Label : DEFINITION
       13
   Label : DEFINITION
     16
-    Label : DEFAULT
-      11
-      Label : LEFT
-        18
-        Label : CONCAT
-          19
-      Label : RIGHT
-        21
     Label : DEFINITION
       16
     Label : DEFINITION
@@ -125,14 +69,6 @@ Label : PROJECT
       19
   Label : DEFINITION
     22
-    Label : DEFAULT
-      11
-      Label : LEFT
-        24
-      Label : RIGHT
-        18
-        Label : CONCAT
-          25
     Label : DEFINITION
       22
   Label : DEFINITION

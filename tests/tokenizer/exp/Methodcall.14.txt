@@ -17,188 +17,12 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      12
-      Label : LEFT
-        10
-        Label : INDEX
-          11
-        Label : VARIABLE
-          8
-      Label : RIGHT
-        12
-        Label : LEFT
-          16
-          Label : LEFT
-            15
-            Label : MEMBER
-              14
-            Label : OBJECT
-              13
-          Label : RIGHT
-            15
-            Label : METHOD
-              17
-              Label : ARGUMENT
-                20
-                Label : LEFT
-                  10
-                  Label : INDEX
-                    19
-                  Label : VARIABLE
-                    8
-                Label : RIGHT
-                  10
-                  Label : INDEX
-                    11
-                  Label : VARIABLE
-                    8
-              Label : ARGUMENT
-                15
-                Label : MEMBER
-                  14
-                Label : OBJECT
-                  13
-              Label : NAME
-                17
-            Label : OBJECT
-              13
-        Label : RIGHT
-          16
-          Label : LEFT
-            21
-            Label : ARGUMENT
-              15
-              Label : MEMBER
-                14
-              Label : OBJECT
-                13
-            Label : ARGUMENT
-              23
-            Label : NAME
-              21
-          Label : RIGHT
-            15
-            Label : METHOD
-              17
-              Label : ARGUMENT
-                20
-                Label : LEFT
-                  10
-                  Label : INDEX
-                    23
-                  Label : VARIABLE
-                    8
-                Label : RIGHT
-                  10
-                  Label : INDEX
-                    19
-                  Label : VARIABLE
-                    8
-              Label : ARGUMENT
-                15
-                Label : MEMBER
-                  14
-                Label : OBJECT
-                  13
-              Label : NAME
-                17
-            Label : OBJECT
-              13
     Label : DEFINITION
       5
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      12
-      Label : LEFT
-        10
-        Label : INDEX
-          11
-        Label : VARIABLE
-          8
-      Label : RIGHT
-        12
-        Label : LEFT
-          16
-          Label : LEFT
-            15
-            Label : MEMBER
-              14
-            Label : OBJECT
-              13
-          Label : RIGHT
-            15
-            Label : METHOD
-              17
-              Label : ARGUMENT
-                20
-                Label : LEFT
-                  10
-                  Label : INDEX
-                    19
-                  Label : VARIABLE
-                    8
-                Label : RIGHT
-                  10
-                  Label : INDEX
-                    11
-                  Label : VARIABLE
-                    8
-              Label : ARGUMENT
-                15
-                Label : MEMBER
-                  14
-                Label : OBJECT
-                  13
-              Label : NAME
-                17
-            Label : OBJECT
-              13
-        Label : RIGHT
-          16
-          Label : LEFT
-            21
-            Label : ARGUMENT
-              15
-              Label : MEMBER
-                14
-              Label : OBJECT
-                13
-            Label : ARGUMENT
-              23
-            Label : NAME
-              21
-          Label : RIGHT
-            15
-            Label : METHOD
-              17
-              Label : ARGUMENT
-                20
-                Label : LEFT
-                  10
-                  Label : INDEX
-                    23
-                  Label : VARIABLE
-                    8
-                Label : RIGHT
-                  10
-                  Label : INDEX
-                    19
-                  Label : VARIABLE
-                    8
-              Label : ARGUMENT
-                15
-                Label : MEMBER
-                  14
-                Label : OBJECT
-                  13
-              Label : NAME
-                17
-            Label : OBJECT
-              13
     Label : DEFINITION
       5
   Label : DEFINITION
@@ -226,14 +50,14 @@ Label : PROJECT
           Label : RIGHT
             12
             Label : LEFT
-              10
-              Label : INDEX
-                11
-              Label : VARIABLE
-                8
-            Label : RIGHT
               12
               Label : LEFT
+                10
+                Label : INDEX
+                  11
+                Label : VARIABLE
+                  8
+              Label : RIGHT
                 16
                 Label : LEFT
                   15
@@ -269,45 +93,45 @@ Label : PROJECT
                       17
                   Label : OBJECT
                     13
-              Label : RIGHT
-                16
-                Label : LEFT
+            Label : RIGHT
+              16
+              Label : LEFT
+                21
+                Label : ARGUMENT
+                  15
+                  Label : MEMBER
+                    14
+                  Label : OBJECT
+                    13
+                Label : ARGUMENT
+                  23
+                Label : NAME
                   21
+              Label : RIGHT
+                15
+                Label : METHOD
+                  17
+                  Label : ARGUMENT
+                    20
+                    Label : LEFT
+                      10
+                      Label : INDEX
+                        23
+                      Label : VARIABLE
+                        8
+                    Label : RIGHT
+                      10
+                      Label : INDEX
+                        19
+                      Label : VARIABLE
+                        8
                   Label : ARGUMENT
                     15
                     Label : MEMBER
                       14
                     Label : OBJECT
                       13
-                  Label : ARGUMENT
-                    23
                   Label : NAME
-                    21
-                Label : RIGHT
-                  15
-                  Label : METHOD
                     17
-                    Label : ARGUMENT
-                      20
-                      Label : LEFT
-                        10
-                        Label : INDEX
-                          23
-                        Label : VARIABLE
-                          8
-                      Label : RIGHT
-                        10
-                        Label : INDEX
-                          19
-                        Label : VARIABLE
-                          8
-                    Label : ARGUMENT
-                      15
-                      Label : MEMBER
-                        14
-                      Label : OBJECT
-                        13
-                    Label : NAME
-                      17
-                  Label : OBJECT
-                    13
+                Label : OBJECT
+                  13

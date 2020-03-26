@@ -48,6 +48,8 @@ Label : PROJECT
                     Label : EXPRESSION
                       20
                     Label : EXPRESSION
+                      7
+                    Label : EXPRESSION
                       22
                       Label : POSTPLUSPLUS
                         21
@@ -63,9 +65,17 @@ Label : PROJECT
                     21
                     Label : DEFINITION
                       21
+                  Label : RETURNED
+                    Void
+                  Label : RETURNTYPE
+                    7
                 Label : NAME
                   10
             Label : NAME
               6
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : NAME
             6

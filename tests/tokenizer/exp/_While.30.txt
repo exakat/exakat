@@ -9,16 +9,6 @@ Label : GLOBAL
   6
   Label : DEFINITION
     6
-    Label : DEFAULT
-      14
-      Label : METHOD
-        10
-        Label : ARGUMENT
-          11
-        Label : NAME
-          10
-      Label : OBJECT
-        9
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -33,16 +23,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     6
-    Label : DEFAULT
-      14
-      Label : METHOD
-        10
-        Label : ARGUMENT
-          11
-        Label : NAME
-          10
-      Label : OBJECT
-        9
     Label : DEFINITION
       6
     Label : DEFINITION

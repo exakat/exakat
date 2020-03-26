@@ -3,26 +3,6 @@ Label : GLOBAL
   10
   Label : DEFINITION
     10
-    Label : DEFAULT
-      18
-      Label : METHOD
-        14
-        Label : ARGUMENT
-          15
-        Label : NAME
-          14
-      Label : OBJECT
-        13
-    Label : DEFAULT
-      18
-      Label : METHOD
-        14
-        Label : ARGUMENT
-          15
-        Label : NAME
-          14
-      Label : OBJECT
-        13
     Label : DEFINITION
       10
     Label : DEFINITION
@@ -73,26 +53,6 @@ Label : PROJECT
       7
   Label : DEFINITION
     10
-    Label : DEFAULT
-      18
-      Label : METHOD
-        14
-        Label : ARGUMENT
-          15
-        Label : NAME
-          14
-      Label : OBJECT
-        13
-    Label : DEFAULT
-      18
-      Label : METHOD
-        14
-        Label : ARGUMENT
-          15
-        Label : NAME
-          14
-      Label : OBJECT
-        13
     Label : DEFINITION
       10
     Label : DEFINITION

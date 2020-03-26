@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  12
+  10
   Label : DEFINITION
-    12
+    10
     Label : DEFINITION
-      12
+      10
 Label : GLOBAL
   8
   Label : DEFINITION
@@ -12,21 +12,21 @@ Label : GLOBAL
     Label : DEFINITION
       8
 Label : GLOBAL
-  10
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : PROJECT
+  1
   Label : DEFINITION
     10
     Label : DEFINITION
       10
-Label : PROJECT
-  1
   Label : DEFINITION
     8
     Label : DEFINITION
       8
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
   Label : DEFINITION
     12
     Label : DEFINITION
@@ -50,40 +50,46 @@ Label : PROJECT
               Label : ARGUMENT
                 12
               Label : DEFINITION
-                16
+                18
               Label : MAGICMETHOD
-                14
+                16
                 Label : ARGUMENT
                   8
+                  Label : DEFAULT
+                    14
                   Label : NAME
                     8
                     Label : DEFINITION
                       8
+                  Label : TYPEHINT
+                    14
                 Label : BLOCK
-                  15
+                  17
                   Label : EXPRESSION
-                    18
+                    20
                     Label : LEFT
-                      17
+                      19
                       Label : MEMBER
                         9
                       Label : OBJECT
-                        16
+                        18
                     Label : RIGHT
                       8
                 Label : NAME
+                  16
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
                   14
               Label : PPP
                 9
                 Label : PPP
-                  19
-                  Label : DEFAULT
-                    8
+                  21
                   Label : DEFINITION
-                    17
+                    19
                     Label : MEMBER
                       9
                     Label : OBJECT
-                      16
+                      18
           Label : NAME
             5

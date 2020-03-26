@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
-  7
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      7
-Label : GLOBAL
   9
   Label : DEFINITION
     9
     Label : DEFINITION
       9
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
 Label : PROJECT
   1
   Label : DEFINITION
@@ -41,3 +41,19 @@ Label : PROJECT
                 9
               Label : NAME
                 6
+  Label : RETURNED
+    7
+  Label : RETURNED
+    9
+  Label : RETURNED
+    12
+    Label : MEMBER
+      11
+    Label : OBJECT
+      6
+      Label : ARGUMENT
+        7
+      Label : ARGUMENT
+        9
+      Label : NAME
+        6

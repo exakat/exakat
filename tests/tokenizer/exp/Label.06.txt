@@ -3,86 +3,62 @@ Label : GLOBAL
   8
   Label : DEFINITION
     8
-    Label : DEFAULT
-      10
     Label : DEFINITION
       8
 Label : GLOBAL
   13
   Label : DEFINITION
     13
-    Label : DEFAULT
-      14
     Label : DEFINITION
       13
 Label : GLOBAL
   17
   Label : DEFINITION
     17
-    Label : DEFAULT
-      18
     Label : DEFINITION
       17
 Label : GLOBAL
   23
   Label : DEFINITION
     23
-    Label : DEFAULT
-      24
     Label : DEFINITION
       23
 Label : GLOBAL
   27
   Label : DEFINITION
     27
-    Label : DEFAULT
-      28
     Label : DEFINITION
       27
 Label : GLOBAL
   31
   Label : DEFINITION
     31
-    Label : DEFAULT
-      32
     Label : DEFINITION
       31
 Label : PROJECT
   1
   Label : DEFINITION
     8
-    Label : DEFAULT
-      10
     Label : DEFINITION
       8
   Label : DEFINITION
     13
-    Label : DEFAULT
-      14
     Label : DEFINITION
       13
   Label : DEFINITION
     17
-    Label : DEFAULT
-      18
     Label : DEFINITION
       17
   Label : DEFINITION
     23
-    Label : DEFAULT
-      24
     Label : DEFINITION
       23
   Label : DEFINITION
     27
-    Label : DEFAULT
-      28
     Label : DEFINITION
       27
   Label : DEFINITION
     31
-    Label : DEFAULT
-      32
     Label : DEFINITION
       31
   Label : FILE

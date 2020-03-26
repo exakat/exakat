@@ -9,28 +9,12 @@ Label : GLOBAL
   35
   Label : DEFINITION
     35
-    Label : DEFAULT
-      38
-      Label : NEW
-        39
-        Label : ARGUMENT
-          10
-        Label : NAME
-          39
     Label : DEFINITION
       35
 Label : PROJECT
   1
   Label : DEFINITION
     35
-    Label : DEFAULT
-      38
-      Label : NEW
-        39
-        Label : ARGUMENT
-          10
-        Label : NAME
-          39
     Label : DEFINITION
       35
   Label : DEFINITION
@@ -46,9 +30,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -56,6 +40,10 @@ Label : PROJECT
                 Label : ARGUMENT
                   14
             Label : NAME
+              10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               8
           Label : NAME
             6
@@ -64,7 +52,7 @@ Label : PROJECT
           Label : METHOD
             19
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -74,7 +62,7 @@ Label : PROJECT
                 Label : METHOD
                   23
                   Label : ARGUMENT
-                    10
+                    8
                   Label : NAME
                     23
               Label : EXPRESSION
@@ -83,6 +71,10 @@ Label : PROJECT
                   26
             Label : NAME
               19
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             17
         Label : EXPRESSION
@@ -104,7 +96,7 @@ Label : PROJECT
             Label : NEW
               39
               Label : ARGUMENT
-                10
+                8
               Label : NAME
                 39
         Label : EXPRESSION
@@ -112,7 +104,7 @@ Label : PROJECT
           Label : METHOD
             42
             Label : ARGUMENT
-              10
+              8
             Label : NAME
               42
           Label : OBJECT

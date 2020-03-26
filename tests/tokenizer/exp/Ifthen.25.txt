@@ -57,7 +57,3 @@ Label : PROJECT
                 11
               Label : VALUE
                 13
-              Label : VALUE
-                13
-                Label : DEFINITION
-                  13

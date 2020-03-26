@@ -11,16 +11,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      10
-      Label : INDEX
-        13
-      Label : VARIABLE
-        10
-        Label : INDEX
-          11
-        Label : VARIABLE
-          8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -29,24 +19,12 @@ Label : GLOBAL
   44
   Label : DEFINITION
     44
-    Label : DEFAULT
-      25
     Label : DEFINITION
       44
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      10
-      Label : INDEX
-        13
-      Label : VARIABLE
-        10
-        Label : INDEX
-          11
-        Label : VARIABLE
-          8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -59,8 +37,6 @@ Label : PROJECT
       8
   Label : DEFINITION
     44
-    Label : DEFAULT
-      25
     Label : DEFINITION
       44
   Label : FILE
@@ -87,20 +63,22 @@ Label : PROJECT
           14
         Label : EXPRESSION
           16
+        Label : EXPRESSION
+          18
           Label : CONDITION
             24
             Label : LEFT
               23
               Label : METHOD
-                19
+                21
                 Label : ARGUMENT
-                  21
+                  16
                 Label : NAME
-                  19
+                  21
               Label : OBJECT
                 10
                 Label : INDEX
-                  17
+                  19
                 Label : VARIABLE
                   8
             Label : RIGHT
@@ -110,6 +88,8 @@ Label : PROJECT
             Label : EXPRESSION
               42
             Label : EXPRESSION
+              16
+            Label : EXPRESSION
               7
               Label : LEFT
                 44
@@ -117,10 +97,14 @@ Label : PROJECT
                 25
             Label : EXPRESSION
               45
+            Label : EXPRESSION
+              16
           Label : THEN
             3
             Label : EXPRESSION
               26
+            Label : EXPRESSION
+              16
             Label : EXPRESSION
               28
               Label : ARGUMENT
@@ -151,3 +135,5 @@ Label : PROJECT
                     30
                 Label : OBJECT
                   29
+            Label : EXPRESSION
+              16

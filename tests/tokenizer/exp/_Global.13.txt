@@ -27,18 +27,26 @@ Label : PROJECT
                 7
                 Label : STATIC
                   41
-            Label : DEFINITION
-              41
+                Label : TYPEHINT
+                  11
             Label : DEFINITION
               40
+            Label : DEFINITION
+              41
             Label : NAME
               37
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              11
           Label : NAME
             6
           Label : PPP
             7
             Label : PPP
               8
+            Label : TYPEHINT
+              11
           Label : PPP
             13
             Label : PPP
@@ -47,6 +55,8 @@ Label : PROJECT
                 15
             Label : PPP
               16
+            Label : TYPEHINT
+              11
           Label : PPP
             13
             Label : PPP
@@ -55,6 +65,8 @@ Label : PROJECT
               20
               Label : DEFAULT
                 22
+            Label : TYPEHINT
+              11
           Label : PPP
             23
             Label : PPP
@@ -65,6 +77,8 @@ Label : PROJECT
                 22
             Label : PPP
               28
+            Label : TYPEHINT
+              11
           Label : PPP
             30
             Label : PPP
@@ -75,3 +89,5 @@ Label : PROJECT
                 22
             Label : PPP
               35
+            Label : TYPEHINT
+              11

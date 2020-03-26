@@ -143,6 +143,10 @@ Label : PROJECT
                     66
               Label : NAME
                 40
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                5
             Label : EXPRESSION
               38
               Label : ARGUMENT
@@ -161,6 +165,10 @@ Label : PROJECT
                   38
               Label : NAME
                 38
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                5
             Label : EXPRESSION
               69
               Label : DEFINITION
@@ -181,18 +189,12 @@ Label : PROJECT
                     68
                     Label : ARGUMENT
                       71
-                Label : DEFINITION
-                  65
-                  Label : NEW
-                    40
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      40
-                      Label : DEFINITION, DEFINITION
-                        40
                 Label : NAME
                   70
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  5
               Label : NAME
                 40
           Label : NAME

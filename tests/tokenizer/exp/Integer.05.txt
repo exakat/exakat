@@ -1,48 +1,36 @@
 test
 Label : GLOBAL
-  11
+  9
   Label : DEFINITION
-    11
-    Label : DEFAULT
-      13
+    9
     Label : DEFINITION
-      11
+      9
 Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
     Label : DEFINITION
       5
 Label : GLOBAL
-  14
+  12
   Label : DEFINITION
-    14
-    Label : DEFAULT
-      17
+    12
     Label : DEFINITION
-      14
+      12
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
     Label : DEFINITION
       5
   Label : DEFINITION
-    11
-    Label : DEFAULT
-      13
+    9
     Label : DEFINITION
-      11
+      9
   Label : DEFINITION
-    14
-    Label : DEFAULT
-      17
+    12
     Label : DEFINITION
-      14
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -58,22 +46,26 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : LEFT
-            11
+            9
           Label : RIGHT
-            13
+            11
         Label : EXPRESSION
           7
           Label : LEFT
-            14
+            12
           Label : RIGHT
-            17
+            15
+            Label : LEFT
+              14
+            Label : RIGHT
+              14
         Label : EXPRESSION
-          9
+          16
         Label : EXPRESSION
-          9
+          17
         Label : EXPRESSION
-          9
+          18
         Label : EXPRESSION
-          9
+          20
         Label : EXPRESSION
-          9
+          21

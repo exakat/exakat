@@ -30,20 +30,20 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            10
             Label : LEFT
-              6
-            Label : RIGHT
-              10
+              8
               Label : LEFT
-                9
+                6
               Label : RIGHT
-                13
-                Label : INDEX
+                9
+            Label : RIGHT
+              13
+              Label : INDEX
+                14
+                Label : ARGUMENT
+                  15
+                Label : NAME
                   14
-                  Label : ARGUMENT
-                    15
-                  Label : NAME
-                    14
-                Label : VARIABLE
-                  11
+              Label : VARIABLE
+                11

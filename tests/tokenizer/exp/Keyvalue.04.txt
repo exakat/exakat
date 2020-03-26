@@ -54,16 +54,16 @@ Label : PROJECT
               Label : ELSE
                 25
               Label : THEN
-                16
+                22
                 Label : LEFT
-                  10
-                  Label : INDEX
-                    15
-                  Label : VARIABLE
-                    13
-                Label : RIGHT
-                  22
+                  16
                   Label : LEFT
+                    10
+                    Label : INDEX
+                      15
+                    Label : VARIABLE
+                      13
+                  Label : RIGHT
                     20
                     Label : LEFT
                       10
@@ -73,5 +73,5 @@ Label : PROJECT
                         17
                     Label : RIGHT
                       21
-                  Label : RIGHT
-                    23
+                Label : RIGHT
+                  23

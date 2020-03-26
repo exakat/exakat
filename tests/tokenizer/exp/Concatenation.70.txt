@@ -5,18 +5,8 @@ Label : GLOBAL
     8
     Label : DEFINITION
       8
-Label : GLOBAL
-  5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
 Label : PROJECT
   1
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
   Label : DEFINITION
     8
     Label : DEFINITION
@@ -28,8 +18,12 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          7
-          Label : LEFT
-            5
-          Label : RIGHT
-            8
+          5
+          Label : ARGUMENT
+            7
+            Label : CONCAT
+              6
+            Label : CONCAT
+              10
+              Label : SIGN
+                8

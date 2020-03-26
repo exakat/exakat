@@ -14,57 +14,39 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : METHOD
-            11
+            13
             Label : ARGUMENT
-              12
+              7
             Label : BLOCK
               14
               Label : EXPRESSION
                 15
                 Label : RETURN
                   16
-            Label : DEFINITION
-              19
-              Label : METHOD
-                11
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  11
-              Label : OBJECT
-                17
-                Label : CODE
-                  18
-                  Label : NEW
-                    6
             Label : NAME
-              11
+              13
+            Label : RETURNED
+              16
+            Label : RETURNTYPE
+              7
           Label : NAME
             6
           Label : PPP
-            7
+            9
             Label : PPP
-              8
+              10
               Label : DEFAULT
-                10
-              Label : DEFINITION
-                19
-                Label : MEMBER
-                  9
-                Label : OBJECT
-                  17
-                  Label : CODE
-                    18
-                    Label : NEW
-                      6
+                12
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
           19
           Label : METHOD
-            11
+            13
             Label : ARGUMENT
-              12
+              7
             Label : NAME
-              11
+              13
           Label : OBJECT
             17
             Label : CODE
@@ -74,7 +56,7 @@ Label : PROJECT
         Label : EXPRESSION
           19
           Label : MEMBER
-            9
+            11
           Label : OBJECT
             17
             Label : CODE

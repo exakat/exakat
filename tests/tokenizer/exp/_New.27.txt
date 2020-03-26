@@ -3,66 +3,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : NEW
-        14
-        Label : METHOD
-          15
-          Label : ARGUMENT
-            16
-          Label : NAME
-            15
-        Label : OBJECT
-          14
-          Label : MEMBER
-            13
-          Label : OBJECT
-            12
-            Label : CLASS
-              20
-            Label : MEMBER
-              11
-    Label : DEFAULT
-      8
-      Label : NEW
-        14
-        Label : METHOD
-          15
-          Label : ARGUMENT
-            16
-          Label : NAME
-            15
-        Label : OBJECT
-          14
-          Label : MEMBER
-            13
-          Label : OBJECT
-            12
-            Label : CLASS
-              18
-            Label : MEMBER
-              11
-    Label : DEFAULT
-      8
-      Label : NEW
-        14
-        Label : METHOD
-          15
-          Label : ARGUMENT
-            16
-          Label : NAME
-            15
-        Label : OBJECT
-          14
-          Label : MEMBER
-            13
-          Label : OBJECT
-            12
-            Label : CLASS
-              9
-            Label : MEMBER
-              11
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -73,66 +13,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : NEW
-        14
-        Label : METHOD
-          15
-          Label : ARGUMENT
-            16
-          Label : NAME
-            15
-        Label : OBJECT
-          14
-          Label : MEMBER
-            13
-          Label : OBJECT
-            12
-            Label : CLASS
-              20
-            Label : MEMBER
-              11
-    Label : DEFAULT
-      8
-      Label : NEW
-        14
-        Label : METHOD
-          15
-          Label : ARGUMENT
-            16
-          Label : NAME
-            15
-        Label : OBJECT
-          14
-          Label : MEMBER
-            13
-          Label : OBJECT
-            12
-            Label : CLASS
-              18
-            Label : MEMBER
-              11
-    Label : DEFAULT
-      8
-      Label : NEW
-        14
-        Label : METHOD
-          15
-          Label : ARGUMENT
-            16
-          Label : NAME
-            15
-        Label : OBJECT
-          14
-          Label : MEMBER
-            13
-          Label : OBJECT
-            12
-            Label : CLASS
-              9
-            Label : MEMBER
-              11
     Label : DEFINITION
       5
     Label : DEFINITION

@@ -9,16 +9,6 @@ Label : GLOBAL
   8
   Label : DEFINITION
     8
-    Label : DEFAULT
-      16
-      Label : METHOD
-        12
-        Label : ARGUMENT
-          14
-        Label : NAME
-          12
-      Label : OBJECT
-        11
     Label : DEFINITION
       8
     Label : DEFINITION
@@ -27,16 +17,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     8
-    Label : DEFAULT
-      16
-      Label : METHOD
-        12
-        Label : ARGUMENT
-          14
-        Label : NAME
-          12
-      Label : OBJECT
-        11
     Label : DEFINITION
       8
     Label : DEFINITION

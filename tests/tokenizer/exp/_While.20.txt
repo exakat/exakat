@@ -10,62 +10,68 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            6
+            8
+            Label : DEFAULT
+              6
             Label : NAME
+              8
+            Label : TYPEHINT
               6
           Label : BLOCK
-            7
+            9
             Label : EXPRESSION
-              8
+              10
               Label : BLOCK
                 3
                 Label : EXPRESSION
-                  12
+                  14
                   Label : BLOCK
                     3
                     Label : EXPRESSION
-                      18
+                      6
                   Label : FINAL
                     3
                     Label : EXPRESSION
-                      15
+                      17
                       Label : LEFT
-                        13
+                        15
                       Label : RIGHT
-                        16
+                        18
                   Label : INCREMENT
                     3
                     Label : EXPRESSION
-                      17
+                      19
                       Label : POSTPLUSPLUS
-                        13
+                        15
                   Label : INIT
                     3
                     Label : EXPRESSION
-                      14
+                      16
                       Label : LEFT
-                        13
+                        15
                       Label : RIGHT
-                        11
+                        13
               Label : CONDITION
-                10
+                12
                 Label : LEFT
-                  9
-                Label : RIGHT
                   11
+                Label : RIGHT
+                  13
           Label : DEFINITION
-            9
+            11
             Label : DEFINITION
-              9
-          Label : DEFINITION
-            13
-            Label : DEFAULT
               11
+          Label : DEFINITION
+            15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6

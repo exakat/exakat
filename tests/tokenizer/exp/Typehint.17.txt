@@ -3,14 +3,6 @@ Label : GLOBAL
   9
   Label : DEFINITION
     9
-    Label : DEFAULT
-      47
-      Label : NEW
-        19
-        Label : ARGUMENT
-          17
-        Label : NAME
-          19
     Label : DEFINITION
       9
     Label : DEFINITION
@@ -19,14 +11,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     9
-    Label : DEFAULT
-      47
-      Label : NEW
-        19
-        Label : ARGUMENT
-          17
-        Label : NAME
-          19
     Label : DEFINITION
       9
     Label : DEFINITION
@@ -43,34 +27,46 @@ Label : PROJECT
             7
             Label : ARGUMENT
               9
+              Label : DEFAULT
+                10
               Label : NAME
                 9
               Label : TYPEHINT
                 8
             Label : ARGUMENT
-              11
-              Label : NAME
-                11
-              Label : TYPEHINT
-                10
-            Label : ARGUMENT
               13
+              Label : DEFAULT
+                10
               Label : NAME
                 13
               Label : TYPEHINT
                 12
             Label : ARGUMENT
               15
+              Label : DEFAULT
+                10
               Label : NAME
                 15
               Label : TYPEHINT
                 14
-            Label : BLOCK
-              16
-              Label : EXPRESSION
+            Label : ARGUMENT
+              17
+              Label : DEFAULT
+                10
+              Label : NAME
                 17
+              Label : TYPEHINT
+                16
+            Label : BLOCK
+              18
+              Label : EXPRESSION
+                10
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10
           Label : NAME
             6
         Label : EXPRESSION
@@ -82,23 +78,31 @@ Label : PROJECT
           Label : DEFINITION
             19
             Label : ARGUMENT
-              17
+              10
             Label : NAME
               19
           Label : METHOD
             21
             Label : ARGUMENT
-              11
-              Label : NAME
-                11
-            Label : ARGUMENT
               13
+              Label : DEFAULT
+                10
               Label : NAME
                 13
+              Label : TYPEHINT
+                10
+            Label : ARGUMENT
+              15
+              Label : DEFAULT
+                10
+              Label : NAME
+                15
               Label : TYPEHINT
                 23
             Label : ARGUMENT
               25
+              Label : DEFAULT
+                10
               Label : NAME
                 25
                 Label : DEFINITION
@@ -107,6 +111,8 @@ Label : PROJECT
                 24
             Label : ARGUMENT
               28
+              Label : DEFAULT
+                10
               Label : NAME
                 28
                 Label : DEFINITION
@@ -114,7 +120,7 @@ Label : PROJECT
               Label : TYPEHINT
                 26
             Label : BLOCK
-              16
+              18
               Label : EXPRESSION
                 29
                 Label : CONDITION
@@ -132,7 +138,7 @@ Label : PROJECT
                         Label : METHOD
                           31
                           Label : ARGUMENT
-                            17
+                            10
                           Label : NAME
                             31
                         Label : OBJECT
@@ -140,7 +146,7 @@ Label : PROJECT
                   Label : RIGHT
                     38
                 Label : THEN
-                  16
+                  18
                   Label : EXPRESSION
                     40
                     Label : RETURN
@@ -150,7 +156,7 @@ Label : PROJECT
                         Label : ARGUMENT
                           28
                         Label : ARGUMENT
-                          15
+                          17
                         Label : NAME
                           43
                       Label : OBJECT
@@ -160,31 +166,33 @@ Label : PROJECT
                         Label : OBJECT
                           30
             Label : DEFINITION
-              15
+              17
               Label : DEFINITION
-                15
-            Label : RETURNED
-              28
-            Label : DEFINITION
-              33
-              Label : METHOD
-                21
-                Label : ARGUMENT
-                  48
-                Label : ARGUMENT
-                  49
-                Label : ARGUMENT
-                  50
-                Label : ARGUMENT
-                  51
-                Label : NAME
-                  21
-              Label : OBJECT
-                9
+                17
             Label : NAME
               21
             Label : RETURNED
-              15
+              28
+            Label : RETURNED
+              17
+            Label : RETURNED
+              33
+              Label : METHOD
+                43
+                Label : ARGUMENT
+                  28
+                Label : ARGUMENT
+                  17
+                Label : NAME
+                  43
+              Label : OBJECT
+                33
+                Label : MEMBER
+                  41
+                Label : OBJECT
+                  30
+            Label : RETURNTYPE
+              10
           Label : NAME
             19
           Label : PPP
@@ -206,7 +214,7 @@ Label : PROJECT
             Label : NEW
               19
               Label : ARGUMENT
-                17
+                10
               Label : NAME
                 19
         Label : EXPRESSION

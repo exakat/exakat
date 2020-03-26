@@ -33,16 +33,12 @@ Label : GLOBAL
   25
   Label : DEFINITION
     25
-    Label : DEFAULT
-      28
     Label : DEFINITION
       25
 Label : GLOBAL
   29
   Label : DEFINITION
     29
-    Label : DEFAULT
-      31
     Label : DEFINITION
       29
 Label : GLOBAL
@@ -81,14 +77,10 @@ Label : PROJECT
       22
   Label : DEFINITION
     25
-    Label : DEFAULT
-      28
     Label : DEFINITION
       25
   Label : DEFINITION
     29
-    Label : DEFAULT
-      31
     Label : DEFINITION
       29
   Label : DEFINITION
@@ -155,14 +147,6 @@ Label : PROJECT
                   17
               Label : VALUE
                 22
-              Label : VALUE
-                20
-                Label : DEFINITION
-                  20
-              Label : VALUE
-                22
-                Label : DEFINITION
-                  22
         Label : EXPRESSION
           27
           Label : LEFT

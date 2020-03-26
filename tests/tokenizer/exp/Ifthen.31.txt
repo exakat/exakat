@@ -15,8 +15,6 @@ Label : GLOBAL
   10
   Label : DEFINITION
     10
-    Label : DEFAULT
-      13
     Label : DEFINITION
       10
 Label : PROJECT
@@ -31,8 +29,6 @@ Label : PROJECT
       8
   Label : DEFINITION
     10
-    Label : DEFAULT
-      13
     Label : DEFINITION
       10
   Label : FILE

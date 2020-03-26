@@ -3,22 +3,6 @@ Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
-      Label : CONCAT
-        17
-      Label : CONCAT
-        19
-        Label : LEFT
-          13
-          Label : MEMBER
-            12
-          Label : OBJECT
-            5
-        Label : RIGHT
-          20
-      Label : CONCAT
-        21
     Label : DEFINITION
       15
     Label : DEFINITION
@@ -27,14 +11,6 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : NEW
-        9
-        Label : ARGUMENT
-          10
-        Label : NAME
-          9
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -45,36 +21,12 @@ Label : PROJECT
   1
   Label : DEFINITION
     15
-    Label : DEFAULT
-      18
-      Label : CONCAT
-        17
-      Label : CONCAT
-        19
-        Label : LEFT
-          13
-          Label : MEMBER
-            12
-          Label : OBJECT
-            5
-        Label : RIGHT
-          20
-      Label : CONCAT
-        21
     Label : DEFINITION
       15
     Label : DEFINITION
       15
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : NEW
-        9
-        Label : ARGUMENT
-          10
-        Label : NAME
-          9
     Label : DEFINITION
       5
     Label : DEFINITION

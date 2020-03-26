@@ -1,20 +1,20 @@
 test
 Label : GLOBAL
-  30
+  32
   Label : DEFINITION
-    30
+    32
     Label : DEFINITION
-      30
+      32
     Label : DEFINITION
-      30
+      32
 Label : PROJECT
   1
   Label : DEFINITION
-    30
+    32
     Label : DEFINITION
-      30
+      32
     Label : DEFINITION
-      30
+      32
   Label : FILE
     3
     Label : EXPRESSION
@@ -24,196 +24,214 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            7
-            Label : NAME
-              7
-              Label : DEFINITION
-                7
-          Label : ARGUMENT
-            8
-            Label : NAME
-              8
-              Label : DEFINITION
-                8
-          Label : ARGUMENT
             9
             Label : DEFAULT
-              10
+              7
             Label : NAME
               9
               Label : DEFINITION
                 9
-          Label : BLOCK
+            Label : TYPEHINT
+              7
+          Label : ARGUMENT
+            10
+            Label : DEFAULT
+              7
+            Label : NAME
+              10
+              Label : DEFINITION
+                10
+            Label : TYPEHINT
+              7
+          Label : ARGUMENT
             11
-            Label : EXPRESSION
+            Label : DEFAULT
               12
-              Label : BLOCK
+            Label : NAME
+              11
+              Label : DEFINITION
                 11
+            Label : TYPEHINT
+              7
+          Label : BLOCK
+            13
+            Label : EXPRESSION
+              14
+              Label : BLOCK
+                13
                 Label : EXPRESSION
-                  17
+                  19
                   Label : YIELD
-                    13
+                    15
               Label : FINAL
                 3
                 Label : EXPRESSION
-                  15
+                  17
                   Label : LEFT
-                    13
+                    15
                   Label : RIGHT
-                    8
+                    10
               Label : INCREMENT
+                3
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
+                    15
+                  Label : RIGHT
+                    11
+              Label : INIT
                 3
                 Label : EXPRESSION
                   16
                   Label : LEFT
-                    13
+                    15
                   Label : RIGHT
                     9
-              Label : INIT
-                3
-                Label : EXPRESSION
-                  14
-                  Label : LEFT
-                    13
-                  Label : RIGHT
-                    7
           Label : DEFINITION
-            13
-            Label : DEFAULT
-              7
+            15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
           Label : DEFINITION
             5
             Label : ARGUMENT
-              28
+              30
             Label : ARGUMENT
-              29
+              31
             Label : NAME
               5
           Label : NAME
             5
-        Label : EXPRESSION
-          18
-          Label : ARGUMENT
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
             7
-            Label : NAME
-              7
-              Label : DEFINITION
-                7
-          Label : ARGUMENT
-            8
-            Label : NAME
-              8
-              Label : DEFINITION
-                8
+        Label : EXPRESSION
+          20
           Label : ARGUMENT
             9
             Label : DEFAULT
-              10
+              7
             Label : NAME
               9
               Label : DEFINITION
                 9
-          Label : BLOCK
+            Label : TYPEHINT
+              7
+          Label : ARGUMENT
+            10
+            Label : DEFAULT
+              7
+            Label : NAME
+              10
+              Label : DEFINITION
+                10
+            Label : TYPEHINT
+              7
+          Label : ARGUMENT
             11
-            Label : EXPRESSION
+            Label : DEFAULT
               12
-              Label : BLOCK
+            Label : NAME
+              11
+              Label : DEFINITION
                 11
+            Label : TYPEHINT
+              7
+          Label : BLOCK
+            13
+            Label : EXPRESSION
+              14
+              Label : BLOCK
+                13
                 Label : EXPRESSION
-                  17
+                  19
                   Label : YIELD
-                    20
+                    22
                     Label : INDEX
-                      10
+                      12
                     Label : VARIABLE
-                      13
+                      15
                 Label : EXPRESSION
-                  23
+                  25
                   Label : CONDITION
-                    17
+                    19
                     Label : YIELD
-                      22
+                      24
                       Label : MEMBER
-                        21
+                        23
                       Label : OBJECT
-                        13
+                        15
                   Label : ELSE
-                    26
+                    28
                     Label : LEFT
-                      25
+                      27
                     Label : RIGHT
-                      25
+                      27
                   Label : THEN
-                    24
+                    26
               Label : FINAL
                 3
                 Label : EXPRESSION
-                  15
+                  17
                   Label : LEFT
-                    13
+                    15
                   Label : RIGHT
-                    8
+                    10
               Label : INCREMENT
+                3
+                Label : EXPRESSION
+                  18
+                  Label : LEFT
+                    15
+                  Label : RIGHT
+                    11
+              Label : INIT
                 3
                 Label : EXPRESSION
                   16
                   Label : LEFT
-                    13
+                    15
                   Label : RIGHT
                     9
-              Label : INIT
-                3
-                Label : EXPRESSION
-                  14
-                  Label : LEFT
-                    13
-                  Label : RIGHT
-                    7
           Label : DEFINITION
-            13
-            Label : DEFAULT
-              7
+            15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
             Label : DEFINITION
-              13
+              15
           Label : NAME
-            18
+            20
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7
         Label : EXPRESSION
-          27
+          29
           Label : BLOCK
-            11
+            13
             Label : EXPRESSION
-              32
+              34
               Label : ARGUMENT
-                30
+                32
           Label : SOURCE
             5
             Label : ARGUMENT
-              28
+              30
             Label : ARGUMENT
-              29
+              31
             Label : NAME
               5
           Label : VALUE
-            30
-          Label : VALUE
-            30
-            Label : DEFINITION
-              30
-            Label : DEFINITION
-              30
+            32

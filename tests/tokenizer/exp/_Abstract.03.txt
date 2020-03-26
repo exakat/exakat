@@ -10,28 +10,42 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            7
+            9
             Label : ARGUMENT
-              8
+              7
             Label : BLOCK
-              8
+              7
             Label : NAME
+              9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               7
           Label : METHOD
             10
             Label : ARGUMENT
-              8
+              7
             Label : BLOCK
-              8
+              7
             Label : NAME
               10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
           Label : METHOD
             11
             Label : ARGUMENT
-              8
+              7
             Label : BLOCK
-              8
+              7
             Label : NAME
               11
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              7
+            Label : TYPEHINT
+              7
           Label : NAME
             6

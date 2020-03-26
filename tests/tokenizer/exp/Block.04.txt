@@ -3,8 +3,6 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      14
     Label : DEFINITION
       11
 Label : GLOBAL
@@ -22,15 +20,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+  Label : DEFINITION
     6
     Label : DEFINITION
       6
-  Label : DEFINITION
-    11
-    Label : DEFAULT
-      14
-    Label : DEFINITION
-      11
   Label : DEFINITION
     14
     Label : DEFINITION

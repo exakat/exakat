@@ -81,6 +81,10 @@ Label : PROJECT
               5
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           21
           Label : ARGUMENT
@@ -107,6 +111,10 @@ Label : PROJECT
               21
           Label : NAME
             21
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           25
           Label : ARGUMENT
@@ -125,6 +133,10 @@ Label : PROJECT
               25
           Label : NAME
             25
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           27
           Label : BLOCK
@@ -145,9 +157,3 @@ Label : PROJECT
               5
           Label : VALUE
             28
-          Label : VALUE
-            28
-            Label : DEFINITION
-              28
-            Label : DEFINITION
-              28

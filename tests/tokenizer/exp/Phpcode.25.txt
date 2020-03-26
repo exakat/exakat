@@ -31,12 +31,10 @@ Label : PROJECT
                 8
           Label : ELSE
             3
-            Label : EXPRESSION
+            Label : EXPRESSION, EXPRESSION
               10
               Label : ARGUMENT
                 8
-            Label : EXPRESSION
-              12
           Label : THEN
             3
             Label : EXPRESSION

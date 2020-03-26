@@ -40,28 +40,30 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            10
-            Label : LEFT
-              6
-              Label : NOT
+            6
+            Label : NOT
+              10
+              Label : LEFT
                 9
                 Label : MEMBER
                   8
                 Label : OBJECT
                   7
-            Label : RIGHT
-              11
-              Label : ARGUMENT
-                12
-              Label : ARGUMENT
-                14
-              Label : ARGUMENT
-                16
-              Label : NAME
+              Label : RIGHT
                 11
+                Label : ARGUMENT
+                  12
+                Label : ARGUMENT
+                  14
+                Label : ARGUMENT
+                  16
+                Label : NAME
+                  11
           Label : THEN
             18
             Label : EXPRESSION
               19
               Label : RETURN
                 20
+  Label : RETURNED
+    20

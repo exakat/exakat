@@ -31,6 +31,10 @@ Label : PROJECT
                     15
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             17
             Label : ARGUMENT
@@ -45,18 +49,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                17
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  17
             Label : NAME
               17
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             18
             Label : ARGUMENT
@@ -71,18 +69,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                18
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  18
             Label : NAME
               18
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             19
             Label : ARGUMENT
@@ -97,24 +89,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                19
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  19
-            Label : DEFINITION
-              27
-              Label : CLASS
-                6
-              Label : METHOD
-                19
             Label : NAME
               19
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             20
             Label : ARGUMENT
@@ -129,24 +109,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                31
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  31
-            Label : DEFINITION
-              27
-              Label : CLASS
-                6
-              Label : METHOD
-                20
             Label : NAME
               20
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
         Label : EXPRESSION
@@ -173,6 +141,10 @@ Label : PROJECT
                     15
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             22
             Label : ARGUMENT
@@ -187,18 +159,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                22
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  22
             Label : NAME
               22
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             18
             Label : ARGUMENT
@@ -213,24 +179,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                18
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  18
-            Label : DEFINITION
-              27
-              Label : CLASS
-                21
-              Label : METHOD
-                18
             Label : NAME
               18
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             19
             Label : ARGUMENT
@@ -245,18 +199,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                19
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  19
             Label : NAME
               19
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             23
             Label : ARGUMENT
@@ -271,24 +219,12 @@ Label : PROJECT
                     12
                   Label : CONCAT
                     15
-            Label : DEFINITION
-              34
-              Label : CLASS
-                33
-              Label : METHOD
-                30
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  30
-            Label : DEFINITION
-              27
-              Label : CLASS
-                21
-              Label : METHOD
-                23
             Label : NAME
               23
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             21
         Label : EXPRESSION
@@ -337,6 +273,10 @@ Label : PROJECT
                   7
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : METHOD
             32
             Label : ARGUMENT
@@ -413,22 +353,12 @@ Label : PROJECT
                     8
                   Label : NAME
                     31
-            Label : DEFINITION
-              37
-              Label : METHOD
-                32
-                Label : ARGUMENT
-                  8
-                Label : NAME
-                  32
-              Label : OBJECT
-                35
-                Label : CODE
-                  36
-                  Label : NEW
-                    25
             Label : NAME
               32
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             25
           Label : USE

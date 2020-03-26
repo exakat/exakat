@@ -3,72 +3,32 @@ Label : GLOBAL
   11
   Label : DEFINITION
     11
-    Label : DEFAULT
-      9
-      Label : LEFT
-        13
-      Label : RIGHT
-        14
     Label : DEFINITION
       11
 Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      9
-      Label : LEFT
-        8
-      Label : RIGHT
-        10
     Label : DEFINITION
       5
 Label : GLOBAL
   15
   Label : DEFINITION
     15
-    Label : DEFAULT
-      20
-      Label : SIGN
-        18
-        Label : LEFT
-          17
-        Label : RIGHT
-          19
     Label : DEFINITION
       15
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      9
-      Label : LEFT
-        8
-      Label : RIGHT
-        10
     Label : DEFINITION
       5
   Label : DEFINITION
     11
-    Label : DEFAULT
-      9
-      Label : LEFT
-        13
-      Label : RIGHT
-        14
     Label : DEFINITION
       11
   Label : DEFINITION
     15
-    Label : DEFAULT
-      20
-      Label : SIGN
-        18
-        Label : LEFT
-          17
-        Label : RIGHT
-          19
     Label : DEFINITION
       15
   Label : FILE

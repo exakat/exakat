@@ -10,72 +10,88 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            7
-            Label : ARGUMENT
-              8
-              Label : NAME
-                8
-            Label : ARGUMENT
-              9
-              Label : NAME
-                9
-                Label : DEFINITION
-                  9
+            9
             Label : ARGUMENT
               10
+              Label : DEFAULT
+                7
               Label : NAME
                 10
-            Label : BLOCK
+              Label : TYPEHINT
+                7
+            Label : ARGUMENT
               11
-              Label : EXPRESSION
-                15
-                Label : LEFT
-                  14
-                  Label : MEMBER
-                    13
-                  Label : OBJECT
-                    12
-                Label : RIGHT
-                  21
-                  Label : CONDITION
-                    16
-                    Label : CODE
-                      19
-                      Label : LEFT
-                        14
-                        Label : MEMBER
-                          18
-                        Label : OBJECT
-                          17
-                      Label : RIGHT
-                        20
-                  Label : ELSE
-                    16
-                    Label : CODE
-                      26
-                      Label : LEFT
-                        24
-                      Label : RIGHT
-                        14
-                        Label : MEMBER
-                          27
-                        Label : OBJECT
-                          9
-                  Label : THEN
-                    22
-            Label : DEFINITION
+              Label : DEFAULT
+                7
+              Label : NAME
+                11
+                Label : DEFINITION
+                  11
+              Label : TYPEHINT
+                7
+            Label : ARGUMENT
               12
-              Label : DEFINITION
+              Label : DEFAULT
+                7
+              Label : NAME
                 12
-            Label : DEFINITION
-              17
-              Label : DEFINITION
+              Label : TYPEHINT
+                7
+            Label : BLOCK
+              13
+              Label : EXPRESSION
                 17
+                Label : LEFT
+                  16
+                  Label : MEMBER
+                    15
+                  Label : OBJECT
+                    14
+                Label : RIGHT
+                  23
+                  Label : CONDITION
+                    18
+                    Label : CODE
+                      21
+                      Label : LEFT
+                        16
+                        Label : MEMBER
+                          20
+                        Label : OBJECT
+                          19
+                      Label : RIGHT
+                        22
+                  Label : ELSE
+                    18
+                    Label : CODE
+                      28
+                      Label : LEFT
+                        26
+                      Label : RIGHT
+                        16
+                        Label : MEMBER
+                          29
+                        Label : OBJECT
+                          11
+                  Label : THEN
+                    24
             Label : DEFINITION
-              24
+              14
               Label : DEFINITION
-                24
+                14
+            Label : DEFINITION
+              19
+              Label : DEFINITION
+                19
+            Label : DEFINITION
+              26
+              Label : DEFINITION
+                26
             Label : NAME
+              9
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               7
           Label : NAME
             6

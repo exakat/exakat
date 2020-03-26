@@ -35,3 +35,5 @@ Label : PROJECT
               20
             Label : PPP
               18
+            Label : TYPEHINT
+              15

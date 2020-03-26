@@ -3,16 +3,12 @@ Label : GLOBAL
   12
   Label : DEFINITION
     12
-    Label : DEFAULT
-      15
     Label : DEFINITION
       12
 Label : PROJECT
   1
   Label : DEFINITION
     12
-    Label : DEFAULT
-      15
     Label : DEFINITION
       12
   Label : FILE

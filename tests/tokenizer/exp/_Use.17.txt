@@ -114,8 +114,6 @@ Label : PROJECT
                   Label : VALUE
                     13
               Label : DEFINITION
-                24
-              Label : DEFINITION
                 18
                 Label : ARGUMENT
                   5
@@ -123,6 +121,8 @@ Label : PROJECT
                   18
                   Label : DEFINITION, DEFINITION
                     24
+              Label : DEFINITION
+                24
               Label : NAME
                 18
           Label : NAME

@@ -3,14 +3,6 @@ Label : GLOBAL
   10
   Label : DEFINITION
     10
-    Label : DEFAULT
-      13
-      Label : CAST
-        14
-        Label : CLONE
-          15
-          Label : CAST
-            8
     Label : DEFINITION
       10
 Label : GLOBAL
@@ -31,14 +23,6 @@ Label : PROJECT
       8
   Label : DEFINITION
     10
-    Label : DEFAULT
-      13
-      Label : CAST
-        14
-        Label : CLONE
-          15
-          Label : CAST
-            8
     Label : DEFINITION
       10
   Label : FILE

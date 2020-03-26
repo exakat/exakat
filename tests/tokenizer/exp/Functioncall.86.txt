@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
+  26
+  Label : DEFINITION
+    26
+    Label : DEFINITION
+      26
+Label : GLOBAL
   24
   Label : DEFINITION
     24
     Label : DEFINITION
       24
-Label : GLOBAL
-  22
-  Label : DEFINITION
-    22
-    Label : DEFINITION
-      22
 Label : PROJECT
   1
   Label : FILE
@@ -24,98 +24,146 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            7
+            9
             Label : PPP
-              8
-            Label : PPP
-              9
+              10
             Label : PPP
               11
+            Label : PPP
+              13
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
-          13
+          15
           Label : ARGUMENT
-            16
+            18
             Label : INDEX
-              14
+              16
             Label : VALUE
-              17
+              19
               Label : ARGUMENT
-                18
-                Label : NAME
-                  18
-                  Label : DEFINITION
-                    18
-                  Label : DEFINITION
-                    18
-              Label : ARGUMENT
-                19
-                Label : NAME
-                  19
-              Label : BLOCK
                 20
-                Label : EXPRESSION
+                Label : DEFAULT
+                  7
+                Label : NAME
+                  20
+                  Label : DEFINITION
+                    20
+                  Label : DEFINITION
+                    20
+                Label : TYPEHINT
+                  7
+              Label : ARGUMENT
+                21
+                Label : DEFAULT
+                  7
+                Label : NAME
                   21
-                  Label : GLOBAL
-                    22
-                    Label : DEFINITION
-                      22
+                Label : TYPEHINT
+                  7
+              Label : BLOCK
+                22
+                Label : EXPRESSION
+                  23
                   Label : GLOBAL
                     24
                     Label : DEFINITION
                       24
+                  Label : GLOBAL
+                    26
+                    Label : DEFINITION
+                      26
                 Label : EXPRESSION
-                  26
+                  28
                   Label : RETURN
-                    27
+                    29
                     Label : INDEX
-                      30
+                      32
                       Label : CONCAT
-                        28
+                        30
                       Label : CONCAT
-                        31
+                        33
                         Label : CODE
-                          35
+                          37
                           Label : CONDITION
-                            32
+                            34
                             Label : ARGUMENT
-                              27
+                              29
                               Label : INDEX
-                                33
+                                35
                               Label : VARIABLE
-                                18
+                                20
                           Label : ELSE
-                            27
+                            29
                             Label : INDEX
-                              27
+                              29
                               Label : INDEX
-                                33
+                                35
                               Label : VARIABLE
-                                18
+                                20
                             Label : VARIABLE
-                              27
+                              29
                               Label : INDEX
-                                38
+                                40
                               Label : VARIABLE
-                                24
+                                26
                           Label : THEN
-                            36
+                            38
                     Label : VARIABLE
-                      22
-              Label : DEFINITION
-                22
-                Label : DEFINITION
-                  22
+                      24
               Label : DEFINITION
                 24
                 Label : DEFINITION
                   24
-              Label : RETURNED
-                22
-              Label : RETURNED
-                18
+              Label : DEFINITION
+                26
+                Label : DEFINITION
+                  26
               Label : RETURNED
                 24
               Label : RETURNED
-                18
+                20
+              Label : RETURNED
+                26
+              Label : RETURNED
+                20
+              Label : RETURNED
+                29
+                Label : INDEX
+                  32
+                  Label : CONCAT
+                    30
+                  Label : CONCAT
+                    33
+                    Label : CODE
+                      37
+                      Label : CONDITION
+                        34
+                        Label : ARGUMENT
+                          29
+                          Label : INDEX
+                            35
+                          Label : VARIABLE
+                            20
+                      Label : ELSE
+                        29
+                        Label : INDEX
+                          29
+                          Label : INDEX
+                            35
+                          Label : VARIABLE
+                            20
+                        Label : VARIABLE
+                          29
+                          Label : INDEX
+                            40
+                          Label : VARIABLE
+                            26
+                      Label : THEN
+                        38
+                Label : VARIABLE
+                  24
+              Label : RETURNTYPE
+                7
           Label : ARGUMENT
-            40
+            42

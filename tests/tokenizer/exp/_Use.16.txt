@@ -189,6 +189,8 @@ Label : PROJECT
               33
               Label : ARGUMENT
                 34
+                Label : DEFAULT
+                  5
                 Label : NAME
                   34
                 Label : TYPEHINT
@@ -197,6 +199,8 @@ Label : PROJECT
                     10
               Label : ARGUMENT
                 35
+                Label : DEFAULT
+                  5
                 Label : NAME
                   35
                 Label : TYPEHINT
@@ -205,6 +209,8 @@ Label : PROJECT
                     23
               Label : ARGUMENT
                 36
+                Label : DEFAULT
+                  5
                 Label : NAME
                   36
                 Label : TYPEHINT
@@ -213,6 +219,8 @@ Label : PROJECT
                     24
               Label : ARGUMENT
                 37
+                Label : DEFAULT
+                  5
                 Label : NAME
                   37
                 Label : TYPEHINT
@@ -221,6 +229,8 @@ Label : PROJECT
                     25
               Label : ARGUMENT
                 38
+                Label : DEFAULT
+                  5
                 Label : NAME
                   38
                 Label : TYPEHINT
@@ -233,18 +243,24 @@ Label : PROJECT
                       15
               Label : ARGUMENT
                 40
+                Label : DEFAULT
+                  5
                 Label : NAME
                   40
                 Label : TYPEHINT
                   39
               Label : ARGUMENT
                 41
+                Label : DEFAULT
+                  5
                 Label : NAME
                   41
                 Label : TYPEHINT
                   15
               Label : ARGUMENT
                 42
+                Label : DEFAULT
+                  5
                 Label : NAME
                   42
                 Label : TYPEHINT
@@ -257,6 +273,8 @@ Label : PROJECT
                       27
               Label : ARGUMENT
                 43
+                Label : DEFAULT
+                  5
                 Label : NAME
                   43
                 Label : TYPEHINT
@@ -269,6 +287,8 @@ Label : PROJECT
                       29
               Label : ARGUMENT
                 44
+                Label : DEFAULT
+                  5
                 Label : NAME
                   44
                 Label : TYPEHINT
@@ -285,5 +305,9 @@ Label : PROJECT
                   5
               Label : NAME
                 33
+              Label : RETURNED
+                Void
+              Label : RETURNTYPE
+                5
           Label : NAME
             21

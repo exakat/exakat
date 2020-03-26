@@ -3,24 +3,12 @@ Label : GLOBAL
   24
   Label : DEFINITION
     24
-    Label : DEFAULT
-      19
-      Label : CODE
-        20
-        Label : NEW
-          17
     Label : DEFINITION
       24
 Label : PROJECT
   1
   Label : DEFINITION
     24
-    Label : DEFAULT
-      19
-      Label : CODE
-        20
-        Label : NEW
-          17
     Label : DEFINITION
       24
   Label : FILE
@@ -36,53 +24,35 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            7
+            9
             Label : PPP
-              8
+              10
               Label : DEFAULT
-                10
-              Label : DEFINITION
-                21
-                Label : MEMBER
-                  9
-                Label : OBJECT
-                  19
-                  Label : CODE
-                    20
-                    Label : NEW
-                      6
+                12
+            Label : TYPEHINT
+              7
         Label : EXPRESSION
           5
           Label : DEFINITION
-            11
+            13
           Label : METHOD
-            9
+            11
             Label : ARGUMENT
-              12
+              7
             Label : BLOCK
               14
               Label : EXPRESSION
                 15
                 Label : RETURN
                   16
-            Label : DEFINITION
-              21
-              Label : METHOD
-                9
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  9
-              Label : OBJECT
-                19
-                Label : CODE
-                  20
-                  Label : NEW
-                    11
             Label : NAME
-              9
+              11
+            Label : RETURNED
+              16
+            Label : RETURNTYPE
+              7
           Label : NAME
-            11
+            13
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -96,7 +66,7 @@ Label : PROJECT
             Label : LEFT
               21
               Label : MEMBER
-                9
+                11
               Label : OBJECT
                 19
                 Label : CODE
@@ -112,17 +82,17 @@ Label : PROJECT
           Label : LEFT
             21
             Label : METHOD
-              9
+              11
               Label : ARGUMENT
-                12
+                7
               Label : NAME
-                9
+                11
             Label : OBJECT
               19
               Label : CODE
                 20
                 Label : NEW
-                  11
+                  13
           Label : RIGHT
             16
         Label : EXPRESSION

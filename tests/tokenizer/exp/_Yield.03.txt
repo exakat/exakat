@@ -31,10 +31,6 @@ Label : PROJECT
                   10
               Label : VALUE
                 13
-              Label : VALUE
-                13
-                Label : DEFINITION
-                  13
           Label : DEFINITION
             13
             Label : DEFINITION
@@ -47,6 +43,10 @@ Label : PROJECT
               5
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           15
           Label : ARGUMENT

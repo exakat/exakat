@@ -1,10 +1,14 @@
 test
 Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -27,18 +31,10 @@ Label : GLOBAL
     17
     Label : DEFINITION
       17
-Label : GLOBAL
-  19
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      19
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
     Label : DEFINITION
       5
     Label : DEFINITION

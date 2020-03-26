@@ -1,5 +1,11 @@
 test
 Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+Label : GLOBAL
   13
   Label : DEFINITION
     13
@@ -21,74 +27,12 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      17
-      Label : LEFT
-        8
-        Label : CODE
-          15
-          Label : LEFT
-            9
-            Label : CAST
-              8
-              Label : CODE
-                12
-                Label : LEFT
-                  10
-                Label : RIGHT
-                  13
-          Label : RIGHT
-            16
-      Label : RIGHT
-        9
-        Label : CAST
-          8
-          Label : CODE
-            12
-            Label : LEFT
-              18
-            Label : RIGHT
-              20
     Label : DEFINITION
       5
-Label : GLOBAL
-  10
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      17
-      Label : LEFT
-        8
-        Label : CODE
-          15
-          Label : LEFT
-            9
-            Label : CAST
-              8
-              Label : CODE
-                12
-                Label : LEFT
-                  10
-                Label : RIGHT
-                  13
-          Label : RIGHT
-            16
-      Label : RIGHT
-        9
-        Label : CAST
-          8
-          Label : CODE
-            12
-            Label : LEFT
-              18
-            Label : RIGHT
-              20
     Label : DEFINITION
       5
   Label : DEFINITION

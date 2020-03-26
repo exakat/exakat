@@ -9,30 +9,12 @@ Label : GLOBAL
   8
   Label : DEFINITION
     8
-    Label : DEFAULT
-      11
     Label : DEFINITION
       8
 Label : GLOBAL
   12
   Label : DEFINITION
     12
-    Label : DEFAULT
-      14
-      Label : CONCAT
-        18
-        Label : MEMBER
-          17
-        Label : OBJECT
-          15
-      Label : CONCAT
-        19
-      Label : CONCAT
-        18
-        Label : MEMBER
-          22
-        Label : OBJECT
-          20
     Label : DEFINITION
       12
 Label : GLOBAL
@@ -55,28 +37,10 @@ Label : PROJECT
       6
   Label : DEFINITION
     8
-    Label : DEFAULT
-      11
     Label : DEFINITION
       8
   Label : DEFINITION
     12
-    Label : DEFAULT
-      14
-      Label : CONCAT
-        18
-        Label : MEMBER
-          17
-        Label : OBJECT
-          15
-      Label : CONCAT
-        19
-      Label : CONCAT
-        18
-        Label : MEMBER
-          22
-        Label : OBJECT
-          20
     Label : DEFINITION
       12
   Label : DEFINITION

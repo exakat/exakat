@@ -3,32 +3,6 @@ Label : GLOBAL
   7
   Label : DEFINITION
     7
-    Label : DEFAULT
-      10
-      Label : NEW
-        11
-        Label : ARGUMENT
-          10
-          Label : NEW
-            13
-            Label : ARGUMENT
-              15
-            Label : ARGUMENT
-              21
-              Label : CLASS
-                17
-              Label : CONSTANT
-                19
-            Label : NAME
-              13
-        Label : ARGUMENT
-          21
-          Label : CLASS
-            11
-          Label : CONSTANT
-            22
-        Label : NAME
-          11
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -70,33 +44,15 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    49
+    Label : DEFINITION
+      49
+  Label : DEFINITION
+    51
+    Label : DEFINITION
+      51
+  Label : DEFINITION
     7
-    Label : DEFAULT
-      10
-      Label : NEW
-        11
-        Label : ARGUMENT
-          10
-          Label : NEW
-            13
-            Label : ARGUMENT
-              15
-            Label : ARGUMENT
-              21
-              Label : CLASS
-                17
-              Label : CONSTANT
-                19
-            Label : NAME
-              13
-        Label : ARGUMENT
-          21
-          Label : CLASS
-            11
-          Label : CONSTANT
-            22
-        Label : NAME
-          11
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -119,14 +75,6 @@ Label : PROJECT
       25
     Label : DEFINITION
       25
-  Label : DEFINITION
-    49
-    Label : DEFINITION
-      49
-  Label : DEFINITION
-    51
-    Label : DEFINITION
-      51
   Label : FILE
     3
     Label : EXPRESSION
@@ -237,18 +185,6 @@ Label : PROJECT
                 7
               Label : VALUE
                 25
-              Label : VALUE
-                25
-                Label : DEFINITION
-                  25
-                Label : DEFINITION
-                  25
-                Label : DEFINITION
-                  25
-                Label : DEFINITION
-                  25
-                Label : DEFINITION
-                  25
           Label : CATCH
             46
             Label : BLOCK

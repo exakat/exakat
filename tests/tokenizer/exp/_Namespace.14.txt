@@ -34,258 +34,286 @@ Label : PROJECT
               Label : METHOD
                 18
                 Label : ARGUMENT
-                  20
-                  Label : NAME
+                  22
+                  Label : DEFAULT
                     20
-                    Label : DEFINITION
-                      20
-                    Label : DEFINITION
-                      20
-                    Label : DEFINITION
-                      20
-                    Label : DEFINITION
-                      20
-                    Label : DEFINITION
-                      20
-                Label : BLOCK
-                  21
-                  Label : EXPRESSION
+                  Label : NAME
                     22
+                    Label : DEFINITION
+                      22
+                    Label : DEFINITION
+                      22
+                    Label : DEFINITION
+                      22
+                    Label : DEFINITION
+                      22
+                    Label : DEFINITION
+                      22
+                  Label : TYPEHINT
+                    20
+                Label : RETURNED
+                  56
+                  Label : ARGUMENT
+                    22
+                  Label : NAME
+                    56
+                Label : RETURNTYPE
+                  20
+                Label : RETURNED
+                  22
+                Label : RETURNED
+                  44
+                  Label : ARGUMENT
+                    22
+                  Label : NAME
+                    44
+                Label : RETURNED
+                  22
+                Label : RETURNED
+                  56
+                  Label : ARGUMENT
+                    22
+                  Label : NAME
+                    56
+                Label : RETURNED
+                  22
+                Label : RETURNED
+                  59
+                Label : BLOCK
+                  23
+                  Label : EXPRESSION
+                    24
                     Label : CONDITION
-                      31
+                      33
                       Label : LEFT
-                        23
+                        25
                         Label : ARGUMENT
-                          25
-                          Label : ARGUMENT
-                            27
+                          27
                           Label : ARGUMENT
                             29
                           Label : ARGUMENT
-                            30
-                          Label : NAME
-                            25
-                        Label : NAME
-                          23
-                      Label : RIGHT
-                        32
-                    Label : ELSE
-                      21
-                      Label : EXPRESSION
-                        22
-                        Label : CONDITION
-                          34
+                            31
                           Label : ARGUMENT
-                            44
+                            32
                           Label : NAME
-                            34
-                        Label : THEN
-                          21
-                          Label : EXPRESSION
-                            41
-                            Label : RETURN
-                              54
-                              Label : ARGUMENT
-                                20
-                              Label : NAME
-                                54
+                            27
+                        Label : NAME
+                          25
+                      Label : RIGHT
+                        34
+                    Label : ELSE
+                      23
                       Label : EXPRESSION
-                        56
-                        Label : STATIC
-                          57
-                          Label : DEFAULT
-                            61
-                            Label : ARGUMENT
-                              63
-                            Label : ARGUMENT
-                              65
-                            Label : NAME
-                              61
-                          Label : DEFAULT
-                            58
-                          Label : DEFINITION
-                            57
-                          Label : DEFINITION
-                            57
-                          Label : DEFINITION
-                            57
-                          Label : DEFINITION
-                            57
-                          Label : DEFINITION
-                            57
-                      Label : EXPRESSION
-                        22
+                        24
                         Label : CONDITION
-                          31
-                          Label : LEFT
-                            57
-                          Label : RIGHT
-                            58
+                          36
+                          Label : ARGUMENT
+                            46
+                          Label : NAME
+                            36
                         Label : THEN
-                          21
+                          23
                           Label : EXPRESSION
-                            60
-                            Label : LEFT
-                              57
-                            Label : RIGHT
-                              61
+                            43
+                            Label : RETURN
+                              56
                               Label : ARGUMENT
-                                63
+                                22
+                              Label : NAME
+                                56
+                      Label : EXPRESSION
+                        58
+                        Label : STATIC
+                          59
+                          Label : DEFAULT
+                            60
+                          Label : DEFINITION
+                            59
+                          Label : DEFINITION
+                            59
+                          Label : DEFINITION
+                            59
+                          Label : DEFINITION
+                            59
+                          Label : DEFINITION
+                            59
+                        Label : TYPEHINT
+                          20
+                      Label : EXPRESSION
+                        24
+                        Label : CONDITION
+                          33
+                          Label : LEFT
+                            59
+                          Label : RIGHT
+                            60
+                        Label : THEN
+                          23
+                          Label : EXPRESSION
+                            62
+                            Label : LEFT
+                              59
+                            Label : RIGHT
+                              63
                               Label : ARGUMENT
                                 65
+                              Label : ARGUMENT
+                                67
                               Label : NAME
-                                61
+                                63
                       Label : EXPRESSION
-                        22
+                        24
                         Label : CONDITION
-                          38
+                          40
                           Label : LEFT
-                            67
+                            69
                             Label : LEFT
-                              57
+                              59
                             Label : RIGHT
-                              58
+                              60
                           Label : RIGHT
-                            67
+                            69
                             Label : LEFT
-                              57
+                              59
                             Label : RIGHT
-                              68
-                        Label : THEN
-                          21
-                          Label : EXPRESSION
-                            41
-                            Label : RETURN
                               70
-                              Label : ARGUMENT
-                                57
-                              Label : ARGUMENT
-                                20
-                              Label : NAME
-                                70
-                      Label : EXPRESSION
-                        22
-                        Label : CONDITION
-                          34
-                          Label : ARGUMENT
-                            36
-                          Label : NAME
-                            34
                         Label : THEN
-                          21
+                          23
                           Label : EXPRESSION
-                            41
+                            43
                             Label : RETURN
-                              42
+                              72
                               Label : ARGUMENT
-                                20
+                                59
                               Label : ARGUMENT
+                                22
+                              Label : NAME
                                 72
-                              Label : NAME
-                                42
-                    Label : THEN
-                      21
                       Label : EXPRESSION
-                        22
+                        24
                         Label : CONDITION
-                          38
-                          Label : LEFT
-                            34
-                            Label : ARGUMENT
-                              36
-                            Label : NAME
-                              34
-                          Label : RIGHT
-                            34
-                            Label : ARGUMENT
-                              39
-                            Label : NAME
-                              34
+                          36
+                          Label : ARGUMENT
+                            38
+                          Label : NAME
+                            36
                         Label : THEN
-                          21
+                          23
                           Label : EXPRESSION
-                            41
+                            43
                             Label : RETURN
-                              42
-                              Label : ARGUMENT
-                                20
-                              Label : NAME
-                                42
-                      Label : EXPRESSION
-                        22
-                        Label : CONDITION
-                          38
-                          Label : LEFT
-                            34
-                            Label : ARGUMENT
                               44
-                            Label : NAME
-                              34
-                          Label : RIGHT
-                            46
+                              Label : ARGUMENT
+                                22
+                              Label : ARGUMENT
+                                74
+                              Label : NAME
+                                44
+                    Label : THEN
+                      23
+                      Label : EXPRESSION
+                        24
+                        Label : CONDITION
+                          40
+                          Label : LEFT
+                            36
                             Label : ARGUMENT
-                              48
+                              38
+                            Label : NAME
+                              36
+                          Label : RIGHT
+                            36
+                            Label : ARGUMENT
+                              41
+                            Label : NAME
+                              36
+                        Label : THEN
+                          23
+                          Label : EXPRESSION
+                            43
+                            Label : RETURN
+                              44
+                              Label : ARGUMENT
+                                22
+                              Label : NAME
+                                44
+                      Label : EXPRESSION
+                        24
+                        Label : CONDITION
+                          40
+                          Label : LEFT
+                            36
+                            Label : ARGUMENT
+                              46
+                            Label : NAME
+                              36
+                          Label : RIGHT
+                            48
                             Label : ARGUMENT
                               50
                             Label : ARGUMENT
                               52
-                            Label : NAME
-                              46
-                        Label : THEN
-                          21
-                          Label : EXPRESSION
-                            41
-                            Label : RETURN
+                            Label : ARGUMENT
                               54
+                            Label : NAME
+                              48
+                        Label : THEN
+                          23
+                          Label : EXPRESSION
+                            43
+                            Label : RETURN
+                              56
                               Label : ARGUMENT
-                                20
+                                22
                               Label : NAME
-                                54
+                                56
                   Label : EXPRESSION
-                    74
+                    76
                     Label : THROW
-                      75
+                      77
                       Label : NEW
-                        76
+                        78
                         Label : ARGUMENT
-                          78
+                          80
                         Label : NAME
-                          76
-                Label : DEFINITION
-                  57
-                  Label : DEFAULT
-                    61
-                    Label : ARGUMENT
-                      63
-                    Label : ARGUMENT
-                      65
-                    Label : NAME
-                      61
-                  Label : DEFAULT
-                    58
-                  Label : DEFINITION
-                    57
-                  Label : DEFINITION
-                    57
-                  Label : DEFINITION
-                    57
-                  Label : DEFINITION
-                    57
-                  Label : DEFINITION
-                    57
+                          78
+                Label : RETURNED
+                  22
+                Label : RETURNED
+                  72
+                  Label : ARGUMENT
+                    59
+                  Label : ARGUMENT
+                    22
+                  Label : NAME
+                    72
+                Label : RETURNED
+                  22
+                Label : RETURNED
+                  44
+                  Label : ARGUMENT
+                    22
+                  Label : ARGUMENT
+                    74
+                  Label : NAME
+                    44
                 Label : NAME
                   18
-                Label : RETURNED
-                  20
-                Label : RETURNED
-                  20
-                Label : RETURNED
-                  20
-                Label : RETURNED
-                  57
-                Label : RETURNED
-                  20
-                Label : RETURNED
+                Label : DEFINITION
+                  59
+                  Label : DEFAULT
+                    60
+                  Label : DEFINITION
+                    59
+                  Label : DEFINITION
+                    59
+                  Label : DEFINITION
+                    59
+                  Label : DEFINITION
+                    59
+                  Label : DEFINITION
+                    59
+                Label : TYPEHINT
                   20
               Label : NAME
                 16

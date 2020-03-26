@@ -20,6 +20,12 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
     15
     Label : DEFINITION
       15
@@ -27,12 +33,6 @@ Label : PROJECT
       15
     Label : DEFINITION
       15
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -99,3 +99,67 @@ Label : PROJECT
                       10
                 Label : RIGHT
                   15
+  Label : RETURNED
+    8
+  Label : RETURNED
+    15
+  Label : RETURNED
+    6
+    Label : CAST
+      7
+      Label : CODE
+        14
+        Label : LEFT
+          13
+          Label : METHOD
+            10
+            Label : ARGUMENT
+              11
+            Label : NAME
+              10
+          Label : OBJECT
+            8
+        Label : RIGHT
+          15
+  Label : RETURNED
+    15
+  Label : RETURNED
+    6
+    Label : CAST
+      7
+      Label : CODE
+        14
+        Label : LEFT
+          17
+          Label : CLASS
+            9
+          Label : METHOD
+            10
+            Label : ARGUMENT
+              11
+            Label : NAME
+              10
+        Label : RIGHT
+          15
+  Label : RETURNED
+    8
+  Label : RETURNED
+    15
+  Label : RETURNED
+    6
+    Label : CAST
+      7
+      Label : CODE
+        14
+        Label : LEFT
+          17
+          Label : CLASS
+            8
+          Label : METHOD
+            10
+            Label : ARGUMENT
+              11
+            Label : NAME
+              10
+        Label : RIGHT
+          15

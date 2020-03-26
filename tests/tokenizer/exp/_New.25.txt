@@ -11,30 +11,30 @@ Label : PROJECT
           5
           Label : DEFINITION
             6
-          Label : DEFINITION
-            19
-          Label : DEFINITION
-            19
-          Label : DEFINITION
-            19
-            Label : ARGUMENT
-              15
-            Label : NAME
-              19
           Label : METHOD
             7
             Label : ARGUMENT
-              8
+              10
+              Label : DEFAULT
+                8
               Label : NAME
+                10
+              Label : TYPEHINT
                 8
             Label : BLOCK
-              9
+              11
               Label : EXPRESSION
-                12
+                14
                 Label : ARGUMENT
-                  10
+                  12
             Label : NAME
               7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
+            Label : TYPEHINT
+              8
           Label : NAME
             6
         Label : EXPRESSION
@@ -46,23 +46,23 @@ Label : PROJECT
           Label : DEFINITION
             20
             Label : ARGUMENT
-              15
+              8
             Label : NAME
               20
           Label : DEFINITION
             18
             Label : ARGUMENT
-              15
+              8
             Label : NAME
               18
           Label : EXTENDS
             6
           Label : METHOD
-            14
+            16
             Label : ARGUMENT
-              15
+              8
             Label : BLOCK
-              9
+              11
               Label : EXPRESSION
                 17
                 Label : NEW
@@ -80,7 +80,7 @@ Label : PROJECT
                 Label : NEW
                   20
                   Label : ARGUMENT
-                    15
+                    8
                   Label : NAME
                     20
               Label : EXPRESSION
@@ -88,7 +88,7 @@ Label : PROJECT
                 Label : NEW
                   18
                   Label : ARGUMENT
-                    15
+                    8
                   Label : NAME
                     18
               Label : EXPRESSION
@@ -96,10 +96,14 @@ Label : PROJECT
                 Label : NEW
                   19
                   Label : ARGUMENT
-                    15
+                    8
                   Label : NAME
                     19
             Label : NAME
-              14
+              16
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
-            13
+            15

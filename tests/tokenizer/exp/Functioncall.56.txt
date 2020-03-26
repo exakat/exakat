@@ -102,13 +102,13 @@ Label : PROJECT
               Label : CODE
                 9
                 Label : LEFT
-                  7
-                Label : RIGHT
                   9
                   Label : LEFT
-                    10
+                    7
                   Label : RIGHT
-                    11
+                    10
+                Label : RIGHT
+                  11
             Label : RIGHT
               14
         Label : EXPRESSION
@@ -120,13 +120,13 @@ Label : PROJECT
               Label : CODE
                 9
                 Label : LEFT
-                  7
-                Label : RIGHT
                   9
                   Label : LEFT
-                    10
+                    7
                   Label : RIGHT
-                    11
+                    10
+                Label : RIGHT
+                  11
             Label : RIGHT
               14
         Label : EXPRESSION
@@ -138,13 +138,13 @@ Label : PROJECT
               Label : CODE
                 9
                 Label : LEFT
-                  7
-                Label : RIGHT
                   9
                   Label : LEFT
-                    10
+                    7
                   Label : RIGHT
-                    11
+                    10
+                Label : RIGHT
+                  11
             Label : RIGHT
               14
         Label : EXPRESSION
@@ -156,13 +156,13 @@ Label : PROJECT
               Label : CODE
                 9
                 Label : LEFT
-                  7
-                Label : RIGHT
                   9
                   Label : LEFT
-                    10
+                    7
                   Label : RIGHT
-                    11
+                    10
+                Label : RIGHT
+                  11
             Label : RIGHT
               14
         Label : EXPRESSION
@@ -174,13 +174,13 @@ Label : PROJECT
               Label : CODE
                 9
                 Label : LEFT
-                  7
-                Label : RIGHT
                   9
                   Label : LEFT
-                    10
+                    7
                   Label : RIGHT
-                    11
+                    10
+                Label : RIGHT
+                  11
             Label : RIGHT
               14
         Label : EXPRESSION
@@ -192,13 +192,13 @@ Label : PROJECT
               Label : CODE
                 9
                 Label : LEFT
-                  7
-                Label : RIGHT
                   9
                   Label : LEFT
-                    10
+                    7
                   Label : RIGHT
-                    11
+                    10
+                Label : RIGHT
+                  11
             Label : ELSE
               21
             Label : THEN

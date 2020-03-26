@@ -10,29 +10,29 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONST
-            8
+            10
             Label : CONST
-              8
+              10
               Label : DEFINITION
                 21
                 Label : CLASS
                   20
                 Label : CONSTANT
-                  9
-              Label : NAME
-                9
-              Label : VALUE
-                12
-                Label : LEFT
                   11
-                Label : RIGHT
+              Label : NAME
+                11
+              Label : VALUE
+                14
+                Label : LEFT
                   13
+                Label : RIGHT
+                  15
           Label : DEFINITION
             20
           Label : METHOD
-            14
+            16
             Label : ARGUMENT
-              15
+              8
             Label : BLOCK
               17
               Label : EXPRESSION
@@ -44,8 +44,12 @@ Label : PROJECT
                   Label : CLASS
                     20
                   Label : CONSTANT
-                    9
+                    11
             Label : NAME
-              14
+              16
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             6

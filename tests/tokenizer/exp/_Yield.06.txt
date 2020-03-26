@@ -103,6 +103,10 @@ Label : PROJECT
               5
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           18
           Label : BLOCK
@@ -121,9 +125,3 @@ Label : PROJECT
               5
           Label : VALUE
             19
-          Label : VALUE
-            19
-            Label : DEFINITION
-              19
-            Label : DEFINITION
-              19

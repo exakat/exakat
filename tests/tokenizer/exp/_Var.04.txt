@@ -12,9 +12,7 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            7
-            Label : PPP
-              8
+            9
             Label : PPP
               10
             Label : PPP
@@ -29,3 +27,7 @@ Label : PROJECT
               20
             Label : PPP
               22
+            Label : PPP
+              24
+            Label : TYPEHINT
+              7

@@ -41,6 +41,12 @@ Label : PROJECT
                       11
                 Label : NAME
                   11
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  5
+                Label : TYPEHINT
+                  5
               Label : NAME
                 10
             Label : EXPRESSION
@@ -73,6 +79,12 @@ Label : PROJECT
                       11
                 Label : NAME
                   11
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  5
+                Label : TYPEHINT
+                  5
               Label : NAME
                 12
             Label : EXPRESSION
@@ -123,6 +135,12 @@ Label : PROJECT
                       11
                 Label : NAME
                   11
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  5
+                Label : TYPEHINT
+                  5
               Label : NAME
                 13
             Label : EXPRESSION
@@ -149,6 +167,12 @@ Label : PROJECT
                       11
                 Label : NAME
                   11
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  5
+                Label : TYPEHINT
+                  5
               Label : NAME
                 14
           Label : NAME
@@ -187,6 +211,12 @@ Label : PROJECT
                       11
                 Label : NAME
                   11
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  5
+                Label : TYPEHINT
+                  5
               Label : NAME
                 16
           Label : NAME
@@ -225,6 +255,12 @@ Label : PROJECT
                       11
                 Label : NAME
                   11
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  5
+                Label : TYPEHINT
+                  5
               Label : NAME
                 18
           Label : NAME

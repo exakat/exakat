@@ -10,73 +10,77 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            7
-            Label : NAME
+            9
+            Label : DEFAULT
               7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-              Label : DEFINITION
-                7
-          Label : BLOCK
-            8
-            Label : EXPRESSION
+            Label : NAME
               9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
+            Label : TYPEHINT
+              7
+          Label : BLOCK
+            10
+            Label : EXPRESSION
+              11
               Label : CONDITION
-                10
+                12
                 Label : ARGUMENT
-                  7
+                  9
                 Label : NAME
-                  10
+                  12
               Label : ELSE
-                16
+                18
                 Label : CONDITION
-                  17
+                  19
                   Label : CLASS
-                    18
+                    20
                   Label : VARIABLE
-                    7
+                    9
                 Label : ELSE
-                  16
+                  18
                   Label : CONDITION
-                    22
+                    24
                     Label : ARGUMENT
-                      7
+                      9
                     Label : NAME
-                      22
+                      24
                   Label : ELSE
-                    16
+                    18
                     Label : CONDITION
                       26
                       Label : ARGUMENT
-                        7
+                        9
                       Label : NAME
                         26
                     Label : ELSE
-                      16
+                      18
                       Label : CONDITION
                         63
                         Label : ARGUMENT
-                          7
+                          9
                         Label : NAME
                           63
                       Label : THEN
-                        8
+                        10
                         Label : EXPRESSION
                           43
                           Label : THROW
@@ -90,25 +94,25 @@ Label : PROJECT
                                 Label : CONCAT
                                   68
                                   Label : ARGUMENT
-                                    7
+                                    9
                                   Label : NAME
                                     68
                               Label : NAME
                                 45
                     Label : THEN
-                      8
+                      10
                       Label : EXPRESSION
                         28
                         Label : ARGUMENT
-                          7
+                          9
                         Label : NAME
                           28
                       Label : EXPRESSION
                         30
                         Label : BLOCK
-                          8
+                          10
                           Label : EXPRESSION
-                            9
+                            11
                             Label : CONDITION
                               33
                               Label : ARGUMENT
@@ -116,7 +120,7 @@ Label : PROJECT
                               Label : NAME
                                 33
                             Label : ELSE
-                              16
+                              18
                               Label : CONDITION
                                 56
                                 Label : LEFT
@@ -134,7 +138,7 @@ Label : PROJECT
                                   Label : NAME
                                     37
                               Label : ELSE
-                                8
+                                10
                                 Label : EXPRESSION
                                   50
                                   Label : LEFT
@@ -142,9 +146,9 @@ Label : PROJECT
                                   Label : RIGHT
                                     52
                                     Label : ARGUMENT
-                                      24
+                                      7
                               Label : THEN
-                                8
+                                10
                                 Label : EXPRESSION
                                   50
                                   Label : LEFT
@@ -162,7 +166,7 @@ Label : PROJECT
                                     Label : ELSE
                                       52
                                       Label : ARGUMENT
-                                        24
+                                        7
                                     Label : THEN
                                       52
                                       Label : INDEX
@@ -180,9 +184,9 @@ Label : PROJECT
                                     Label : VARIABLE
                                       32
                             Label : THEN
-                              8
+                              10
                               Label : EXPRESSION
-                                9
+                                11
                                 Label : CONDITION
                                   36
                                   Label : LEFT
@@ -216,7 +220,7 @@ Label : PROJECT
                                         Label : NAME
                                           37
                                 Label : THEN
-                                  8
+                                  10
                                   Label : EXPRESSION
                                     43
                                     Label : THROW
@@ -244,7 +248,7 @@ Label : PROJECT
                                   Label : ELSE
                                     52
                                     Label : ARGUMENT
-                                      24
+                                      7
                                   Label : THEN
                                     52
                                     Label : INDEX
@@ -272,7 +276,7 @@ Label : PROJECT
                                   Label : VARIABLE
                                     32
                           Label : EXPRESSION
-                            15
+                            17
                             Label : METHOD
                               57
                               Label : ARGUMENT
@@ -280,9 +284,9 @@ Label : PROJECT
                               Label : NAME
                                 57
                             Label : OBJECT
-                              12
+                              14
                           Label : EXPRESSION
-                            15
+                            17
                             Label : METHOD
                               59
                               Label : ARGUMENT
@@ -290,9 +294,9 @@ Label : PROJECT
                               Label : NAME
                                 59
                             Label : OBJECT
-                              12
+                              14
                           Label : EXPRESSION
-                            15
+                            17
                             Label : METHOD
                               5
                               Label : ARGUMENT
@@ -300,121 +304,53 @@ Label : PROJECT
                               Label : NAME
                                 5
                             Label : OBJECT
-                              12
+                              14
                           Label : EXPRESSION
-                            15
+                            17
                             Label : METHOD
                               61
                               Label : ARGUMENT
-                                24
+                                7
                               Label : NAME
                                 61
                             Label : OBJECT
-                              12
+                              14
                         Label : INDEX
                           31
                         Label : SOURCE
-                          7
+                          9
                         Label : VALUE
                           32
-                        Label : VALUE
-                          31
-                          Label : DEFAULT
-                            52
-                            Label : INDEX
-                              39
-                            Label : VARIABLE
-                              32
-                          Label : DEFINITION
-                            31
-                          Label : DEFINITION
-                            31
-                          Label : DEFINITION
-                            31
-                          Label : DEFINITION
-                            31
-                        Label : VALUE
-                          32
-                          Label : DEFAULT
-                            52
-                            Label : INDEX
-                              41
-                            Label : VARIABLE
-                              32
-                          Label : DEFAULT
-                            52
-                            Label : INDEX
-                              41
-                            Label : VARIABLE
-                              32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
-                          Label : DEFINITION
-                            32
                   Label : THEN
-                    8
+                    10
                     Label : EXPRESSION
-                      24
+                      7
                 Label : THEN
-                  8
+                  10
                   Label : EXPRESSION
-                    15
+                    17
                     Label : METHOD
-                      20
+                      22
                       Label : ARGUMENT
-                        12
+                        14
                       Label : NAME
-                        20
+                        22
                     Label : OBJECT
-                      7
+                      9
               Label : THEN
-                8
+                10
                 Label : EXPRESSION
-                  15
+                  17
                   Label : METHOD
-                    13
+                    15
                     Label : ARGUMENT
-                      7
+                      9
                     Label : NAME
-                      13
+                      15
                   Label : OBJECT
-                    12
+                    14
           Label : DEFINITION
             31
-            Label : DEFAULT
-              52
-              Label : INDEX
-                39
-              Label : VARIABLE
-                32
             Label : DEFINITION
               31
             Label : DEFINITION
@@ -425,18 +361,6 @@ Label : PROJECT
               31
           Label : DEFINITION
             32
-            Label : DEFAULT
-              52
-              Label : INDEX
-                41
-              Label : VARIABLE
-                32
-            Label : DEFAULT
-              52
-              Label : INDEX
-                41
-              Label : VARIABLE
-                32
             Label : DEFINITION
               32
             Label : DEFINITION
@@ -471,50 +395,6 @@ Label : PROJECT
               32
           Label : DEFINITION
             49
-            Label : DEFAULT
-              55
-              Label : CONDITION
-                51
-                Label : ARGUMENT
-                  52
-                  Label : INDEX
-                    53
-                  Label : VARIABLE
-                    32
-              Label : ELSE
-                52
-                Label : ARGUMENT
-                  24
-              Label : THEN
-                52
-                Label : INDEX
-                  53
-                Label : VARIABLE
-                  32
-            Label : DEFAULT
-              52
-              Label : ARGUMENT
-                24
-            Label : DEFAULT
-              55
-              Label : CONDITION
-                51
-                Label : ARGUMENT
-                  52
-                  Label : INDEX
-                    53
-                  Label : VARIABLE
-                    32
-              Label : ELSE
-                52
-                Label : ARGUMENT
-                  24
-              Label : THEN
-                52
-                Label : INDEX
-                  53
-                Label : VARIABLE
-                  32
             Label : DEFINITION
               49
             Label : DEFINITION
@@ -525,3 +405,7 @@ Label : PROJECT
               49
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            7

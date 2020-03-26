@@ -83,6 +83,10 @@ Label : PROJECT
                       38
             Label : NAME
               32
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              23
           Label : METHOD
             39
             Label : ARGUMENT
@@ -101,6 +105,10 @@ Label : PROJECT
                 38
             Label : NAME
               39
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              23
           Label : NAME
             30
         Label : EXPRESSION
@@ -125,14 +133,26 @@ Label : PROJECT
                     38
             Label : NAME
               39
+            Label : RETURNED
+              41
+              Label : MEMBER
+                46
+              Label : OBJECT
+                38
+            Label : RETURNTYPE
+              23
           Label : METHOD
             48
             Label : ARGUMENT
               50
+              Label : DEFAULT
+                23
               Label : NAME
                 50
                 Label : DEFINITION
                   50
+              Label : TYPEHINT
+                23
             Label : BLOCK
               11
               Label : EXPRESSION
@@ -147,14 +167,16 @@ Label : PROJECT
                   50
             Label : NAME
               48
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              23
           Label : NAME
             42
           Label : PPP
             44
             Label : PPP
               45
-              Label : DEFAULT
-                50
               Label : DEFINITION
                 41
                 Label : MEMBER
@@ -167,6 +189,8 @@ Label : PROJECT
                   46
                 Label : OBJECT
                   38
+            Label : TYPEHINT
+              23
           Label : USE
             8
             Label : USE

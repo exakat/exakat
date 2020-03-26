@@ -3,18 +3,6 @@ Label : GLOBAL
   14
   Label : DEFINITION
     14
-    Label : DEFAULT
-      23
-      Label : CONCAT
-        25
-    Label : DEFAULT
-      27
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      19
-      Label : CONCAT
-        21
     Label : DEFINITION
       14
     Label : DEFINITION
@@ -27,18 +15,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     14
-    Label : DEFAULT
-      23
-      Label : CONCAT
-        25
-    Label : DEFAULT
-      27
-    Label : DEFAULT
-      17
-    Label : DEFAULT
-      19
-      Label : CONCAT
-        21
     Label : DEFINITION
       14
     Label : DEFINITION
@@ -89,6 +65,10 @@ Label : PROJECT
               13
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           16
           Label : LEFT
@@ -153,3 +133,7 @@ Label : PROJECT
               32
           Label : NAME
             29
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6

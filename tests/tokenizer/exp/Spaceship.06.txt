@@ -3,16 +3,6 @@ Label : GLOBAL
   18
   Label : DEFINITION
     18
-    Label : DEFAULT
-      20
-      Label : ARGUMENT
-        7
-      Label : ARGUMENT
-        21
-      Label : ARGUMENT
-        22
-      Label : NAME
-        20
     Label : DEFINITION
       18
     Label : DEFINITION
@@ -21,14 +11,6 @@ Label : GLOBAL
   7
   Label : DEFINITION
     7
-    Label : DEFAULT
-      10
-      Label : ARGUMENT
-        11
-      Label : ARGUMENT
-        12
-      Label : NAME
-        10
     Label : DEFINITION
       7
     Label : DEFINITION
@@ -46,37 +28,19 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    7
-    Label : DEFAULT
-      10
-      Label : ARGUMENT
-        11
-      Label : ARGUMENT
-        12
-      Label : NAME
-        10
-    Label : DEFINITION
-      7
-    Label : DEFINITION
-      7
-    Label : DEFINITION
-      7
-  Label : DEFINITION
     18
-    Label : DEFAULT
-      20
-      Label : ARGUMENT
-        7
-      Label : ARGUMENT
-        21
-      Label : ARGUMENT
-        22
-      Label : NAME
-        20
     Label : DEFINITION
       18
     Label : DEFINITION
       18
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
   Label : DEFINITION
     23
     Label : DEFINITION
@@ -151,43 +115,67 @@ Label : PROJECT
                 25
         Label : EXPRESSION
           26
+          Label : NAME
+            26
           Label : ARGUMENT
             23
           Label : ARGUMENT
             27
             Label : ARGUMENT
-              28
-              Label : NAME
+              30
+              Label : DEFAULT
                 28
-                Label : DEFINITION
-                  28
-            Label : ARGUMENT
-              29
               Label : NAME
-                29
+                30
                 Label : DEFINITION
-                  29
+                  30
+              Label : TYPEHINT
+                28
+            Label : ARGUMENT
+              31
+              Label : DEFAULT
+                28
+              Label : NAME
+                31
+                Label : DEFINITION
+                  31
+              Label : TYPEHINT
+                28
             Label : BLOCK
               16
               Label : EXPRESSION
-                30
+                32
                 Label : RETURN
-                  33
+                  35
                   Label : LEFT
-                    31
+                    33
                     Label : INDEX
-                      32
+                      34
                     Label : VARIABLE
-                      28
+                      30
                   Label : RIGHT
-                    31
+                    33
                     Label : INDEX
-                      32
+                      34
                     Label : VARIABLE
-                      29
+                      31
             Label : RETURNED
+              30
+            Label : RETURNED
+              31
+            Label : RETURNED
+              35
+              Label : LEFT
+                33
+                Label : INDEX
+                  34
+                Label : VARIABLE
+                  30
+              Label : RIGHT
+                33
+                Label : INDEX
+                  34
+                Label : VARIABLE
+                  31
+            Label : RETURNTYPE
               28
-            Label : RETURNED
-              29
-          Label : NAME
-            26

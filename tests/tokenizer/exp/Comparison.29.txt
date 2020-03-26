@@ -1,5 +1,11 @@
 test
 Label : GLOBAL
+  39
+  Label : DEFINITION
+    39
+    Label : DEFINITION
+      39
+Label : GLOBAL
   9
   Label : DEFINITION
     9
@@ -29,12 +35,6 @@ Label : GLOBAL
     35
     Label : DEFINITION
       35
-Label : GLOBAL
-  39
-  Label : DEFINITION
-    39
-    Label : DEFINITION
-      39
 Label : PROJECT
   1
   Label : DEFINITION

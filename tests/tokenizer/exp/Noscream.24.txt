@@ -9,9 +9,9 @@ Label : GLOBAL
       5
     Label : DEFINITION
       5
-    Label : DEFINITION, DEFAULT
+    Label : DEFINITION
       5
-    Label : DEFINITION, DEFAULT
+    Label : DEFINITION
       5
 Label : PROJECT
   1
@@ -23,9 +23,9 @@ Label : PROJECT
       5
     Label : DEFINITION
       5
-    Label : DEFINITION, DEFAULT
+    Label : DEFINITION
       5
-    Label : DEFINITION, DEFAULT
+    Label : DEFINITION
       5
   Label : FILE
     3

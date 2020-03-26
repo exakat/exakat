@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
-  5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-Label : GLOBAL
   13
   Label : DEFINITION
     13
     Label : DEFINITION
       13
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : GLOBAL
   17
   Label : DEFINITION

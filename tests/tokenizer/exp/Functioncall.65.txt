@@ -9,42 +9,12 @@ Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        11
-        Label : INDEX
-          18
-          Label : LEFT
-            12
-            Label : CODE
-              7
-              Label : LEFT
-                13
-              Label : RIGHT
-                15
-                Label : ARGUMENT
-                  16
-                Label : NAME
-                  15
-          Label : RIGHT
-            19
-        Label : VARIABLE
-          9
-      Label : NAME
-        8
     Label : DEFINITION
       5
 Label : GLOBAL
   13
   Label : DEFINITION
     13
-    Label : DEFAULT
-      15
-      Label : ARGUMENT
-        16
-      Label : NAME
-        15
     Label : DEFINITION
       13
 Label : GLOBAL
@@ -59,30 +29,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        11
-        Label : INDEX
-          18
-          Label : LEFT
-            12
-            Label : CODE
-              7
-              Label : LEFT
-                13
-              Label : RIGHT
-                15
-                Label : ARGUMENT
-                  16
-                Label : NAME
-                  15
-          Label : RIGHT
-            19
-        Label : VARIABLE
-          9
-      Label : NAME
-        8
     Label : DEFINITION
       5
   Label : DEFINITION
@@ -91,12 +37,6 @@ Label : PROJECT
       9
   Label : DEFINITION
     13
-    Label : DEFAULT
-      15
-      Label : ARGUMENT
-        16
-      Label : NAME
-        15
     Label : DEFINITION
       13
   Label : DEFINITION
@@ -180,14 +120,22 @@ Label : PROJECT
         Label : EXPRESSION
           27
           Label : ARGUMENT
-            28
+            30
+            Label : DEFAULT
+              28
             Label : NAME
+              30
+            Label : TYPEHINT
               28
           Label : BLOCK
-            29
+            31
             Label : EXPRESSION
-              30
+              28
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            28
         Label : EXPRESSION
           20
           Label : ARGUMENT
-            30
+            28

@@ -3,8 +3,6 @@ Label : GLOBAL
   12
   Label : DEFINITION
     12
-    Label : DEFAULT
-      15
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -13,8 +11,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     12
-    Label : DEFAULT
-      15
     Label : DEFINITION
       12
     Label : DEFINITION
@@ -39,6 +35,10 @@ Label : PROJECT
             15
           Label : NAME
             5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
         Label : EXPRESSION
           14
           Label : LEFT

@@ -10,40 +10,52 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            6
-            Label : NAME
-              6
-              Label : DEFINITION
-                6
-          Label : ARGUMENT
-            7
-            Label : NAME
-              7
-              Label : DEFINITION
-                7
-          Label : BLOCK
             8
-            Label : EXPRESSION
+            Label : DEFAULT
+              6
+            Label : NAME
+              8
+              Label : DEFINITION
+                8
+            Label : TYPEHINT
+              6
+          Label : ARGUMENT
+            9
+            Label : DEFAULT
+              6
+            Label : NAME
               9
+              Label : DEFINITION
+                9
+            Label : TYPEHINT
+              6
+          Label : BLOCK
+            10
+            Label : EXPRESSION
+              11
               Label : CONDITION
-                12
+                14
                 Label : LEFT
-                  10
-                  Label : INDEX
-                    11
-                  Label : VARIABLE
-                    6
-                Label : RIGHT
-                  10
+                  12
                   Label : INDEX
                     13
                   Label : VARIABLE
-                    7
+                    8
+                Label : RIGHT
+                  12
+                  Label : INDEX
+                    15
+                  Label : VARIABLE
+                    9
               Label : THEN
                 3
                 Label : EXPRESSION
-                  14
+                  16
                   Label : RETURN
-                    15
+                    17
           Label : NAME
             5
+          Label : RETURNED
+            17
+          Label : RETURNTYPE
+            6

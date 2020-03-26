@@ -12,15 +12,11 @@ Label : GLOBAL
     Label : DEFINITION
       8
 Label : GLOBAL
-  12
+  14
   Label : DEFINITION
-    12
-    Label : DEFAULT
-      15
-      Label : ARGUMENT
-        16
+    14
     Label : DEFINITION
-      12
+      14
 Label : GLOBAL
   19
   Label : DEFINITION
@@ -50,13 +46,9 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    12
-    Label : DEFAULT
-      15
-      Label : ARGUMENT
-        16
+    14
     Label : DEFINITION
-      12
+      14
   Label : DEFINITION
     19
     Label : DEFINITION
@@ -88,13 +80,15 @@ Label : PROJECT
         Label : EXPRESSION
           11
         Label : EXPRESSION
-          14
+          12
+        Label : EXPRESSION
+          16
           Label : LEFT
-            12
+            14
           Label : RIGHT
-            15
+            17
             Label : ARGUMENT
-              16
+              12
         Label : EXPRESSION
           18
           Label : CONDITION
@@ -102,7 +96,7 @@ Label : PROJECT
           Label : THEN
             21
             Label : EXPRESSION
-              14
+              16
               Label : LEFT
                 22
                 Label : APPEND

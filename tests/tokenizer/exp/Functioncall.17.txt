@@ -3,58 +3,22 @@ Label : GLOBAL
   12
   Label : DEFINITION
     12
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : ARGUMENT
-        10
-      Label : ARGUMENT
-        11
-      Label : ARGUMENT
-        14
     Label : DEFINITION
       12
 Label : GLOBAL
   5
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : ARGUMENT
-        10
-      Label : ARGUMENT
-        11
     Label : DEFINITION
       5
 Label : PROJECT
   1
   Label : DEFINITION
     5
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : ARGUMENT
-        10
-      Label : ARGUMENT
-        11
     Label : DEFINITION
       5
   Label : DEFINITION
     12
-    Label : DEFAULT
-      8
-      Label : ARGUMENT
-        9
-      Label : ARGUMENT
-        10
-      Label : ARGUMENT
-        11
-      Label : ARGUMENT
-        14
     Label : DEFINITION
       12
   Label : FILE

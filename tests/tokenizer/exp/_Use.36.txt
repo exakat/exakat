@@ -3,14 +3,6 @@ Label : GLOBAL
   28
   Label : DEFINITION
     28
-    Label : DEFAULT
-      31
-      Label : NEW
-        26
-        Label : ARGUMENT
-          10
-        Label : NAME
-          26
     Label : DEFINITION
       28
     Label : DEFINITION
@@ -21,14 +13,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     28
-    Label : DEFAULT
-      31
-      Label : NEW
-        26
-        Label : ARGUMENT
-          10
-        Label : NAME
-          26
     Label : DEFINITION
       28
     Label : DEFINITION
@@ -46,9 +30,9 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -56,6 +40,10 @@ Label : PROJECT
                 Label : ARGUMENT
                   14
             Label : NAME
+              10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               8
           Label : NAME
             6
@@ -66,7 +54,7 @@ Label : PROJECT
           Label : METHOD
             18
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -75,6 +63,10 @@ Label : PROJECT
                   20
             Label : NAME
               18
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
           Label : NAME
             16
         Label : EXPRESSION
@@ -94,7 +86,7 @@ Label : PROJECT
           Label : DEFINITION
             26
             Label : ARGUMENT
-              10
+              8
             Label : NAME
               26
           Label : NAME
@@ -112,17 +104,17 @@ Label : PROJECT
             Label : NEW
               26
               Label : ARGUMENT
-                10
+                8
               Label : NAME
                 26
         Label : EXPRESSION
           32
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
-            Label : NAME
               8
+            Label : NAME
+              10
           Label : OBJECT
             28
         Label : EXPRESSION
@@ -130,7 +122,7 @@ Label : PROJECT
           Label : METHOD
             18
             Label : ARGUMENT
-              10
+              8
             Label : NAME
               18
           Label : OBJECT

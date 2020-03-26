@@ -36,21 +36,25 @@ Label : PROJECT
               Label : NAME
                 20
               Label : PPP
-                22
+                24
                 Label : PPP
-                  23
+                  25
                   Label : DEFAULT
-                    25
+                    27
                     Label : ARGUMENT
-                      26
+                      22
+                Label : TYPEHINT
+                  22
               Label : PPP
-                22
+                24
                 Label : PPP
                   28
                   Label : DEFAULT
-                    25
+                    27
                     Label : ARGUMENT
-                      26
+                      22
+                Label : TYPEHINT
+                  22
             Label : EXPRESSION
               19
               Label : EXTENDS

@@ -20,13 +20,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    14
-    Label : DEFINITION
-      14
-  Label : DEFINITION
     8
     Label : DEFINITION
       8
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
   Label : DEFINITION
     18
     Label : DEFINITION
@@ -83,3 +83,33 @@ Label : PROJECT
               12
               Label : RETURN
                 13
+  Label : RETURNED
+    17
+    Label : LEFT
+      7
+      Label : ARGUMENT
+        10
+        Label : INDEX
+          16
+        Label : VARIABLE
+          10
+          Label : INDEX
+            11
+          Label : VARIABLE
+            14
+    Label : RIGHT
+      10
+      Label : INDEX
+        20
+      Label : VARIABLE
+        10
+        Label : INDEX
+          11
+        Label : VARIABLE
+          18
+  Label : RETURNED
+    13
+  Label : RETURNED
+    14
+  Label : RETURNED
+    18

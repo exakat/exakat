@@ -3,14 +3,6 @@ Label : GLOBAL
   22
   Label : DEFINITION
     22
-    Label : DEFAULT
-      25
-      Label : NEW
-        17
-        Label : ARGUMENT
-          10
-        Label : NAME
-          17
     Label : DEFINITION
       22
     Label : DEFINITION
@@ -19,14 +11,6 @@ Label : PROJECT
   1
   Label : DEFINITION
     22
-    Label : DEFAULT
-      25
-      Label : NEW
-        17
-        Label : ARGUMENT
-          10
-        Label : NAME
-          17
     Label : DEFINITION
       22
     Label : DEFINITION
@@ -42,9 +26,9 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -52,6 +36,10 @@ Label : PROJECT
                 Label : ARGUMENT
                   14
             Label : NAME
+              10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               8
           Label : NAME
             6
@@ -60,30 +48,24 @@ Label : PROJECT
           Label : DEFINITION
             17
             Label : ARGUMENT
-              10
+              8
             Label : NAME
               17
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
+              8
             Label : BLOCK
               12
               Label : EXPRESSION
                 13
                 Label : ARGUMENT
                   20
-            Label : DEFINITION
-              26
-              Label : METHOD
-                8
-                Label : ARGUMENT
-                  10
-                Label : NAME
-                  8
-              Label : OBJECT
-                22
             Label : NAME
+              10
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
               8
           Label : NAME
             17
@@ -100,16 +82,16 @@ Label : PROJECT
             Label : NEW
               17
               Label : ARGUMENT
-                10
+                8
               Label : NAME
                 17
         Label : EXPRESSION
           26
           Label : METHOD
-            8
+            10
             Label : ARGUMENT
-              10
-            Label : NAME
               8
+            Label : NAME
+              10
           Label : OBJECT
             22

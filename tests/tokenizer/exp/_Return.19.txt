@@ -10,70 +10,104 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            7
+            9
+            Label : DEFAULT
+              7
             Label : NAME
+              9
+            Label : TYPEHINT
               7
           Label : BLOCK
-            8
-            Label : EXPRESSION
-              9
-              Label : RETURN
-                14
-                Label : CONDITION
-                  11
-                  Label : CLASS
-                    12
-                  Label : VARIABLE
-                    10
-                Label : ELSE
-                  19
-                  Label : METHOD
-                    21
-                    Label : ARGUMENT
-                      23
-                    Label : NAME
-                      21
-                  Label : OBJECT
-                    20
-                Label : THEN
-                  19
-                  Label : METHOD
-                    16
-                    Label : ARGUMENT
-                      18
-                    Label : NAME
-                      16
-                  Label : OBJECT
-                    15
-          Label : DEFINITION
             10
-            Label : DEFINITION
-              10
+            Label : EXPRESSION
+              11
+              Label : RETURN
+                16
+                Label : CONDITION
+                  13
+                  Label : CLASS
+                    14
+                  Label : VARIABLE
+                    12
+                Label : ELSE
+                  21
+                  Label : METHOD
+                    23
+                    Label : ARGUMENT
+                      25
+                    Label : NAME
+                      23
+                  Label : OBJECT
+                    22
+                Label : THEN
+                  21
+                  Label : METHOD
+                    18
+                    Label : ARGUMENT
+                      20
+                    Label : NAME
+                      18
+                  Label : OBJECT
+                    17
           Label : DEFINITION
-            15
+            12
             Label : DEFINITION
-              15
+              12
           Label : DEFINITION
-            18
+            17
             Label : DEFINITION
-              18
+              17
           Label : DEFINITION
             20
             Label : DEFINITION
               20
           Label : DEFINITION
-            23
+            22
             Label : DEFINITION
-              23
+              22
+          Label : DEFINITION
+            25
+            Label : DEFINITION
+              25
           Label : NAME
             5
           Label : RETURNED
-            10
+            16
+            Label : CONDITION
+              13
+              Label : CLASS
+                14
+              Label : VARIABLE
+                12
+            Label : ELSE
+              21
+              Label : METHOD
+                23
+                Label : ARGUMENT
+                  25
+                Label : NAME
+                  23
+              Label : OBJECT
+                22
+            Label : THEN
+              21
+              Label : METHOD
+                18
+                Label : ARGUMENT
+                  20
+                Label : NAME
+                  18
+              Label : OBJECT
+                17
           Label : RETURNED
-            15
+            12
           Label : RETURNED
-            18
+            17
           Label : RETURNED
             20
           Label : RETURNED
-            23
+            22
+          Label : RETURNED
+            25
+          Label : RETURNTYPE
+            7

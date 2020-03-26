@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  17
+  19
   Label : DEFINITION
-    17
+    19
     Label : DEFINITION
-      17
+      19
 Label : GLOBAL
   6
   Label : DEFINITION
@@ -18,9 +18,9 @@ Label : PROJECT
     Label : DEFINITION
       6
   Label : DEFINITION
-    17
+    19
     Label : DEFINITION
-      17
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -39,19 +39,25 @@ Label : PROJECT
             3
             Label : EXPRESSION
               11
-              Label : ARGUMENT
-                13
-              Label : NAME
-                11
             Label : EXPRESSION
-              15
+              13
+              Label : ARGUMENT
+                15
+              Label : NAME
+                13
+            Label : EXPRESSION
+              17
+            Label : EXPRESSION
+              11
             Label : EXPRESSION
               10
               Label : METHOD
-                18
+                20
                 Label : ARGUMENT
-                  20
+                  11
                 Label : NAME
-                  18
+                  20
               Label : OBJECT
-                17
+                19
+            Label : EXPRESSION
+              11

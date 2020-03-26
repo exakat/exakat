@@ -33,12 +33,10 @@ Label : PROJECT
                 10
           Label : ELSE
             3
-            Label : EXPRESSION
+            Label : EXPRESSION, EXPRESSION
               11
               Label : ARGUMENT
                 10
-            Label : EXPRESSION
-              14
           Label : THEN
             3
             Label : EXPRESSION
@@ -59,6 +57,8 @@ Label : PROJECT
             18
         Label : EXPRESSION
           23
+        Label : EXPRESSION
+          14
         Label : EXPRESSION
           28
           Label : ARGUMENT

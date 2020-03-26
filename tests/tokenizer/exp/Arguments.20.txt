@@ -12,14 +12,22 @@ Label : PROJECT
           Label : ARGUMENT
             6
             Label : ARGUMENT
-              7
+              9
+              Label : DEFAULT
+                7
               Label : NAME
+                9
+              Label : TYPEHINT
                 7
             Label : BLOCK
-              8
+              10
               Label : EXPRESSION
-                9
+                11
                 Label : RETURN
-                  10
+                  12
+            Label : RETURNED
+              12
+            Label : RETURNTYPE
+              7
           Label : NAME
             5

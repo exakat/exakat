@@ -10,40 +10,48 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONST
-            15
+            17
             Label : CONST
-              15
+              17
               Label : NAME
-                9
+                11
               Label : VALUE
-                16
+                18
           Label : NAME
             6
           Label : PPP
-            7
+            9
             Label : PPP
-              8
+              10
               Label : DEFAULT
-                10
+                12
+            Label : TYPEHINT
+              7
           Label : PPP
-            7
-            Label : PPP
-              11
+            9
             Label : PPP
               13
-          Label : PPP
-            7
             Label : PPP
-              17
+              15
+            Label : TYPEHINT
+              7
+          Label : PPP
+            9
             Label : PPP
               19
-              Label : DEFAULT
-                21
-          Label : PPP
-            7
             Label : PPP
-              22
+              21
               Label : DEFAULT
-                16
+                23
+            Label : TYPEHINT
+              7
+          Label : PPP
+            9
             Label : PPP
               24
+              Label : DEFAULT
+                18
+            Label : PPP
+              26
+            Label : TYPEHINT
+              7

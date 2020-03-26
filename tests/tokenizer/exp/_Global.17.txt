@@ -13,3 +13,5 @@ Label : PROJECT
           5
           Label : STATIC
             6
+          Label : TYPEHINT
+            7

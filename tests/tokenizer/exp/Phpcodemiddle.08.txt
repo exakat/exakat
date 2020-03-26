@@ -12,33 +12,23 @@ Label : GLOBAL
     Label : DEFINITION
       6
 Label : GLOBAL
-  10
+  12
   Label : DEFINITION
-    10
-    Label : DEFAULT
-      16
-      Label : INDEX
-        17
-      Label : VARIABLE
-        15
-        Label : MEMBER
-          14
-        Label : OBJECT
-          13
+    12
     Label : DEFINITION
-      10
+      12
     Label : DEFINITION
-      10
+      12
 Label : GLOBAL
-  17
+  19
   Label : DEFINITION
-    17
+    19
     Label : DEFINITION
-      17
+      19
     Label : DEFINITION
-      17
+      19
     Label : DEFINITION
-      17
+      19
 Label : PROJECT
   1
   Label : DEFINITION
@@ -50,29 +40,19 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    10
-    Label : DEFAULT
-      16
-      Label : INDEX
-        17
-      Label : VARIABLE
-        15
-        Label : MEMBER
-          14
-        Label : OBJECT
-          13
+    12
     Label : DEFINITION
-      10
+      12
     Label : DEFINITION
-      10
+      12
   Label : DEFINITION
-    17
+    19
     Label : DEFINITION
-      17
+      19
     Label : DEFINITION
-      17
+      19
     Label : DEFINITION
-      17
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -84,78 +64,84 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              12
+              10
+            Label : EXPRESSION
+              14
               Label : LEFT
-                10
+                12
               Label : RIGHT
-                16
+                18
                 Label : INDEX
-                  17
+                  19
                 Label : VARIABLE
-                  15
-                  Label : MEMBER
-                    14
-                  Label : OBJECT
-                    13
-            Label : EXPRESSION
-              19
-            Label : EXPRESSION
-              20
-              Label : ARGUMENT
-                21
-                Label : LEFT
                   17
+                  Label : MEMBER
+                    16
+                  Label : OBJECT
+                    15
+            Label : EXPRESSION
+              21
+            Label : EXPRESSION
+              10
+            Label : EXPRESSION
+              22
+              Label : ARGUMENT
+                23
+                Label : LEFT
+                  19
                 Label : RIGHT
-                  22
+                  24
             Label : EXPRESSION
-              23
+              25
             Label : EXPRESSION
-              24
+              10
+            Label : EXPRESSION
+              26
               Label : CONDITION
-                15
+                17
                 Label : MEMBER
                   29
                 Label : OBJECT
-                  15
+                  17
                   Label : METHOD
-                    25
+                    27
                     Label : ARGUMENT
-                      27
+                      10
                     Label : NAME
-                      25
+                      27
                   Label : OBJECT
-                    13
+                    15
               Label : THEN
                 3
                 Label : EXPRESSION
-                  20
+                  22
                   Label : ARGUMENT
                     31
             Label : EXPRESSION
               33
             Label : EXPRESSION
-              20
+              10
+            Label : EXPRESSION
+              22
               Label : ARGUMENT
-                15
+                17
                 Label : METHOD
                   35
                   Label : ARGUMENT
-                    27
+                    10
                   Label : NAME
                     35
                 Label : OBJECT
-                  10
+                  12
             Label : EXPRESSION
               37
             Label : EXPRESSION
+              10
+            Label : EXPRESSION
               39
               Label : PREPLUSPLUS
-                17
+                19
           Label : SOURCE
             6
           Label : VALUE
             8
-          Label : VALUE
-            8
-            Label : DEFINITION
-              8

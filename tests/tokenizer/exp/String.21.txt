@@ -3,54 +3,8 @@ Label : GLOBAL
   20
   Label : DEFINITION
     20
-    Label : DEFAULT
-      27
     Label : DEFINITION
       20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
-    Label : DEFAULT
-      29
-    Label : DEFAULT
-      24
-    Label : DEFAULT
-      28
-    Label : DEFAULT
-      32
-    Label : DEFAULT
-      25
-    Label : DEFAULT
-      23
-    Label : DEFAULT
-      26
-    Label : DEFAULT
-      30
-    Label : DEFAULT
-      31
-    Label : DEFINITION
-      20
-Label : PROJECT
-  1
-  Label : DEFINITION
-    20
-    Label : DEFAULT
-      27
     Label : DEFINITION
       20
     Label : DEFINITION
@@ -71,24 +25,30 @@ Label : PROJECT
       20
     Label : DEFINITION
       20
-    Label : DEFAULT
-      29
-    Label : DEFAULT
-      24
-    Label : DEFAULT
-      28
-    Label : DEFAULT
-      32
-    Label : DEFAULT
-      25
-    Label : DEFAULT
-      23
-    Label : DEFAULT
-      26
-    Label : DEFAULT
-      30
-    Label : DEFAULT
-      31
+Label : PROJECT
+  1
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
     Label : DEFINITION
       20
   Label : FILE
@@ -139,6 +99,10 @@ Label : PROJECT
                         18
                 Label : NAME
                   10
+                Label : RETURNED
+                  Void
+                Label : RETURNTYPE
+                  11
               Label : NAME
                 9
             Label : EXPRESSION

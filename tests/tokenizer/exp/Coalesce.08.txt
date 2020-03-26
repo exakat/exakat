@@ -11,6 +11,8 @@ Label : PROJECT
           5
           Label : ARGUMENT
             9
+            Label : DEFAULT
+              10
             Label : NAME
               9
               Label : DEFINITION
@@ -20,29 +22,29 @@ Label : PROJECT
             Label : TYPEHINT
               7
           Label : BLOCK
-            10
+            12
             Label : EXPRESSION
-              11
+              13
               Label : CONDITION
-                12
+                14
                 Label : NOT
-                  13
+                  15
                   Label : ARGUMENT
-                    15
+                    17
                   Label : ARGUMENT
-                    18
+                    20
                     Label : INDEX
-                      19
+                      21
                     Label : VARIABLE
-                      17
+                      19
                   Label : NAME
-                    13
+                    15
               Label : THEN
-                10
+                12
                 Label : EXPRESSION
-                  21
+                  23
                   Label : RETURN
-                    22
+                    10
             Label : EXPRESSION
               25
               Label : LEFT
@@ -74,7 +76,7 @@ Label : PROJECT
               Label : RIGHT
                 37
                 Label : YIELD
-                  17
+                  19
             Label : EXPRESSION
               25
               Label : LEFT
@@ -110,7 +112,7 @@ Label : PROJECT
                     Label : METHOD
                       29
                       Label : ARGUMENT
-                        22
+                        10
                       Label : NAME
                         29
                   Label : CONSTANT
@@ -128,7 +130,7 @@ Label : PROJECT
                   Label : MEMBER
                     32
                   Label : OBJECT
-                    18
+                    20
                     Label : INDEX
                       44
                     Label : VARIABLE
@@ -136,7 +138,7 @@ Label : PROJECT
                       Label : MEMBER
                         29
                       Label : OBJECT
-                        18
+                        20
                         Label : INDEX
                           43
                           Label : LEFT
@@ -148,93 +150,17 @@ Label : PROJECT
                 Label : RIGHT
                   35
           Label : DEFINITION
-            17
+            19
             Label : DEFINITION
-              17
+              19
             Label : DEFINITION
-              17
+              19
           Label : DEFINITION
             24
-            Label : DEFAULT
-              26
             Label : DEFINITION
               24
           Label : DEFINITION
             28
-            Label : DEFAULT
-              34
-              Label : LEFT
-                41
-                Label : CLASS
-                  41
-                  Label : CLASS
-                    39
-                  Label : METHOD
-                    29
-                    Label : ARGUMENT
-                      22
-                    Label : NAME
-                      29
-                Label : CONSTANT
-                  32
-              Label : RIGHT
-                35
-            Label : DEFAULT
-              34
-              Label : LEFT
-                31
-                Label : MEMBER
-                  32
-                Label : OBJECT
-                  31
-                  Label : MEMBER
-                    29
-                  Label : OBJECT
-                    9
-              Label : RIGHT
-                35
-            Label : DEFAULT
-              34
-              Label : LEFT
-                31
-                Label : MEMBER
-                  32
-                Label : OBJECT
-                  38
-                  Label : CODE
-                    41
-                    Label : CLASS
-                      39
-                    Label : CONSTANT
-                      29
-              Label : RIGHT
-                35
-            Label : DEFAULT
-              34
-              Label : LEFT
-                31
-                Label : MEMBER
-                  32
-                Label : OBJECT
-                  18
-                  Label : INDEX
-                    44
-                  Label : VARIABLE
-                    31
-                    Label : MEMBER
-                      29
-                    Label : OBJECT
-                      18
-                      Label : INDEX
-                        43
-                        Label : LEFT
-                          42
-                        Label : RIGHT
-                          42
-                      Label : VARIABLE
-                        9
-              Label : RIGHT
-                35
             Label : DEFINITION
               28
             Label : DEFINITION
@@ -245,11 +171,11 @@ Label : PROJECT
               28
           Label : DEFINITION
             36
-            Label : DEFAULT
-              37
-              Label : YIELD
-                17
             Label : DEFINITION
               36
           Label : NAME
             5
+          Label : RETURNED
+            10
+          Label : RETURNTYPE
+            10

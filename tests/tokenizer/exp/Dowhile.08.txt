@@ -63,9 +63,5 @@ Label : PROJECT
                 7
               Label : VALUE
                 9
-              Label : VALUE
-                9
-                Label : DEFINITION
-                  9
           Label : CONDITION
             15

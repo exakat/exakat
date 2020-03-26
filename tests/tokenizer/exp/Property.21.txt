@@ -27,26 +27,6 @@ Label : GLOBAL
   20
   Label : DEFINITION
     20
-    Label : DEFAULT
-      9
-      Label : INDEX
-        22
-      Label : VARIABLE
-        9
-        Label : INDEX
-          10
-        Label : VARIABLE
-          7
-    Label : DEFAULT
-      9
-      Label : INDEX
-        22
-      Label : VARIABLE
-        9
-        Label : INDEX
-          10
-        Label : VARIABLE
-          7
     Label : DEFINITION
       20
     Label : DEFINITION
@@ -75,26 +55,6 @@ Label : PROJECT
       10
   Label : DEFINITION
     20
-    Label : DEFAULT
-      9
-      Label : INDEX
-        22
-      Label : VARIABLE
-        9
-        Label : INDEX
-          10
-        Label : VARIABLE
-          7
-    Label : DEFAULT
-      9
-      Label : INDEX
-        22
-      Label : VARIABLE
-        9
-        Label : INDEX
-          10
-        Label : VARIABLE
-          7
     Label : DEFINITION
       20
     Label : DEFINITION
