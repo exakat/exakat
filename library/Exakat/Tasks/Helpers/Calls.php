@@ -203,7 +203,7 @@ SQL;
         } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
             $globalpath = $r[1];
         } else {
-            $globalpath = substr($fullnspath, strrpos($fullnspath, '\\'));
+            $globalpath = substr($fullnspath, (int) strrpos($fullnspath, '\\'));
         }
 
         return $globalpath;

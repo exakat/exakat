@@ -96,13 +96,9 @@ class Dump extends Tasks {
             display('Collecting data');
 
             $this->collect();
-            $this->loadSqlDump();
         }
 
-        if ($this->config->load_dump === true) {
-            // when coupled to -collect, this will be in double, but without effect.
-            $this->loadSqlDump();
-        }
+        $this->loadSqlDump();
 
         $counts = array();
         $datastore = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
@@ -204,8 +200,6 @@ class Dump extends Tasks {
     }
 
     private function processMultipleResults(array $analyzers, array $counts): int {
-        $this->dump->removeResults($analyzers);
-
         $specials = array('Php/Incompilable',
                           'Composer/UseComposer',
                           'Composer/UseComposerLock',
@@ -213,6 +207,7 @@ class Dump extends Tasks {
                           );
         $diff = array_intersect($specials, $analyzers);
         if (!empty($diff)) {
+            $this->dump->removeResults($diff);
             foreach($diff as $d) {
                 $this->processResults($d, $counts[$d] ?? -3);
             }
@@ -224,7 +219,8 @@ class Dump extends Tasks {
         $severities = array();
         $readCounts = array();
 
-        $analyzers = array_filter($analyzers, function (string $s): bool { return substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
+        $analyzers = array_filter($analyzers, function (string $s): bool { return $s !== 'Type/CharString' && substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
+        $this->dump->removeResults($analyzers);
 
         $chunks = array_chunk($analyzers, 200);
         // Gremlin only accepts chunks of 255 maximum
@@ -2488,6 +2484,7 @@ GREMLIN
 
         foreach($dumps as $dump) {
             include $dump;
+
             $this->dump->storeQueries($queries);
             unlink($dump);
         }

@@ -52,6 +52,7 @@ abstract class Analyzer {
     const QUERY_PHP_ARRAYS  = 10;  // store a PHP array of values into hashResults
     const QUERY_PHP_HASH    = 11;  // store a PHP array of values into hashResults
     const QUERY_NO_ANALYZED = 12;  // store links, but not the ANALYZED one
+    const QUERY_RESULTS     = 13;  // store results directly to dump, no ANALYZED
 
     protected $datastore  = null;
 
@@ -1760,6 +1761,10 @@ GREMLIN;
                 $this->storeToGraph(false);
                 break;
 
+            case self::QUERY_RESULTS:
+                $this->storeToResults();
+                break;
+
             case self::QUERY_DEFAULT:
             default:
                 $this->storeToGraph(true);
@@ -1798,6 +1803,49 @@ GREMLIN;
         $this->gremlin->query($query);
 
         $this->datastore->addRow('analyzed', array($this->shortAnalyzer => -1 ) );
+    }
+
+    private function storeToResults() {
+        ++$this->queryId;
+        
+        $dumpQueries = array();
+        // table always created, may be empty
+        if ($this->lastAnalyzerTable !== $this->analyzerTable) {
+            $dumpQueries[] = "DELETE FROM results WHERE analyzer = \"{$this->shortAnalyzer}\"";
+        }
+
+        $this->query->prepareQuery();
+        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
+
+        ++$this->queryCount;
+
+        $c = $result->toArray();
+        if (!is_array($c) || !isset($c[0])) {
+            return 0;
+        }
+
+        $this->processedCount += count($c);
+        $this->rowCount       += count($c);
+
+        $valuesSQL = array();
+        foreach($c as $row) {
+            $row = array_map(array('\\Sqlite3', 'escapeString'), $row);
+            $row['analyzer']  = $this->shortAnalyzer;
+            $valuesSQL[] = "(NULL, '".implode("', '", $row)."', 0) \n";
+        }
+
+        $chunks = array_chunk($valuesSQL, 490);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
+            $dumpQueries[] = $query;
+        }
+        $dumpQueries[] = "REPLACE INTO resultsCounts VALUES (NULL, \"{$this->shortAnalyzer}\", $this->rowCount)";
+
+        if (count($dumpQueries) >= 3) {
+            $this->prepareForDump($dumpQueries);
+        }
+
+        return count($valuesSQL);
     }
 
     private function storeToTableResults() {

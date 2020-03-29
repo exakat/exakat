@@ -23,16 +23,45 @@
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class CharString extends Analyzer {
+class CharString extends AnalyzerDump {
+    protected $analyzerName = 'CharString';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
 
     public function analyze() {
         $this->atomIs(array('String', 'Heredoc'))
-             ->tokenIsNot('T_QUOTE');
+             ->tokenIsNot('T_QUOTE')
+             ->raw(<<<GREMLIN
+sideEffect{ line = it.get().value("line");
+             fullcode = it.get().value("fullcode");
+             file="None"; 
+             theFunction = ""; 
+             theClass=""; 
+             theNamespace=""; 
+             }
+.where( __.until( hasLabel("Project") ).repeat( 
+    __.in($this->linksDown)
+      .sideEffect{ if (theFunction == "" && it.get().label() in ["Function", "Closure", "Arrayfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("fullcode")} }
+      .sideEffect{ if (theClass == ""    && it.get().label() in ["Class", "Trait", "Interface", "Classanonymous"]                ) { theClass = it.get().value("fullcode")   } }
+      .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
+       ).fold()
+)
+.map{ ["fullcode":fullcode, 
+       "file":file, 
+       "line":line, 
+       "namespace":theNamespace, 
+       "class":theClass, 
+       "function":theFunction,
+       "analyzer":"xxxx"];}
+GREMLIN
+);
         $this->prepareQuery();
     }
-
 }
 
 ?>

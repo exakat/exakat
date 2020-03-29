@@ -100,32 +100,7 @@ class Files extends Tasks {
 
             $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
             $resFiles = $php->compileFiles($this->config->code_dir, $tmpFileName);
-
-            $incompilables = array();
-
-            foreach($resFiles as $resFile) {
-                if (trim($resFile) == '') {
-                    continue; // do nothing. All is fine.
-                }
-
-                if ($php->isError($resFile)) {
-                    $error = $php->getError();
-
-                    $file = trim($error['file'], '.');
-                    $error['file'] = $file;
-
-                    $incompilables[$file] = $error;
-                    $toRemoveFromFiles["/$file"] = 1;
-                }
-            }
-
-            $this->datastore->cleanTable("compilation$version");
-            $this->datastore->addRow("compilation$version", array_values($incompilables));
-            $stats["notCompilable$version"] = count($incompilables);
         }
-
-        $files = array_diff($files, array_keys($toRemoveFromFiles));
-        unset($toRemoveFromFiles);
 
         display('Check short tag (normal pass)');
         $shell = "cd '{$this->config->code_dir}'; cat '$tmpFileName' | xargs -n1 -P5 {$this->config->php} -d short_open_tag=0 -d error_reporting=0 -r \"echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true";
@@ -138,11 +113,6 @@ class Files extends Tasks {
 
         $resultSot = shell_exec($shell) ?? '';
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
-
-        // Extra check
-        if (file_exists($tmpFileName)) {
-            unlink($tmpFileName);
-        }
 
         if ($tokenssot === $tokens) {
             display('Short tag OK');

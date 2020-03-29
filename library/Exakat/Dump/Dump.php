@@ -455,7 +455,7 @@ SQL;
         rename($this->sqliteFile, $this->sqliteFileFinal);
     }
 
-    function storeInTable($table, Iterable $results) : int {
+    public function storeInTable($table, Iterable $results) : int {
         $values = array();
         $total  = 0;
         foreach($results as $change) {
@@ -476,9 +476,12 @@ SQL;
         return count($values);
     }
 
-    function storeQueries(array $queries) : int {
+    public function storeQueries(array $queries) : int {
         foreach($queries as $query) {
-            $this->sqlite->query($query);
+            $res = $this->sqlite->query($query);
+            if (!$res) {
+                display("Error  in  query : $query\n");
+            }
         }
 
         return count($queries);

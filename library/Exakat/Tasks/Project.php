@@ -209,6 +209,7 @@ class Project extends Tasks {
         // initialization and first collection (action done once)
         display('Initial dump');
         $dumpConfig = $this->config->duplicate(array('collect'            => true,
+                                                     'load_dump'          => true,
                                                      'project_rulesets'   => array('First')));
         $firstDump = new Dump(Tasks::IS_SUBTASK);
         $firstDump->setConfig($dumpConfig);
@@ -290,6 +291,7 @@ class Project extends Tasks {
             $this->logTime('Analyze : ' . makeList($analyzers, ''));
 
             $dumpConfig = $this->config->duplicate(array('update'    => true,
+                                                         'load_dump' => true,
                                                          'program'   => $analyzers,
                                                          ));
 
@@ -360,6 +362,7 @@ class Project extends Tasks {
 
                 $dumpConfig = $this->config->duplicate(array('update'               => true,
                                                              'project_rulesets'     => array($ruleset),
+                                                             'load_dump'            => true,
                                                              'verbose'              => false,
                                                              ));
 
