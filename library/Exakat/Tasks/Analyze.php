@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -50,13 +50,11 @@ class Analyze extends Tasks {
     }
 
     public function run() {
-        $project = new ProjectName($this->config->project);
-
-        if (!$project->validate()) {
-            throw new InvalidProjectName($project->getError());
+        if (!$this->config->project->validate()) {
+            throw new InvalidProjectName($this->config->project->getError());
         }
 
-        if ($project == 'default') {
+        if ($this->config->project->isDefault()) {
             throw new ProjectNeeded();
         }
 
@@ -65,7 +63,7 @@ class Analyze extends Tasks {
         }
 
         if (!file_exists($this->config->project_dir)) {
-            throw new NoSuchProject($project);
+            throw new NoSuchProject((string) $this->config->project);
         }
 
         $this->checkTokenLimit();
@@ -101,7 +99,7 @@ class Analyze extends Tasks {
             throw new NeedsAnalyzerThema();
         }
 
-        $this->log->log("Analyzing project $project");
+        $this->log->log("Analyzing project ".(string) $this->config->project);
         $this->log->log("Runnable analyzers\t" . count($analyzersClass));
 
         $this->php = exakat('php');
@@ -174,7 +172,7 @@ class Analyze extends Tasks {
 
         $lock = new Lock($this->config->tmp_dir, $analyzer_class);
         if (!$lock->check()) {
-            display(" Concurency lock activated for $analyzer_class \n");
+            display("Concurency lock activated for $analyzer_class\n");
             return false;
         }
 
@@ -187,7 +185,7 @@ class Analyze extends Tasks {
 
         if (!(!isset($this->analyzed[$analyzer_class]) ||
               $this->config->noRefresh !== true)         ) {
-            display( "$analyzer_class is already processed\n");
+            display("$analyzer_class is already processed\n");
 
             return $this->analyzed[$analyzer_class];
         }
@@ -219,7 +217,7 @@ class Analyze extends Tasks {
 
             } catch(QueryException $e) {
                 $end = microtime(true);
-                display( "$analyzer_class : DSL running exception\n");
+                display("$analyzer_class : DSL running exception\n");
                 display($e->getMessage());
                 $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );

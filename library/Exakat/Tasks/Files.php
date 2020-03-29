@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -130,13 +130,13 @@ class Files extends Tasks {
         display('Check short tag (normal pass)');
         $shell = "cd '{$this->config->code_dir}'; cat '$tmpFileName' | xargs -n1 -P5 {$this->config->php} -d short_open_tag=0 -d error_reporting=0 -r \"echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true";
 
-        $resultNosot = shell_exec($shell);
+        $resultNosot = shell_exec($shell) ?? '';
         $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
         $shell = "cd '{$this->config->code_dir}'; cat '$tmpFileName' |  xargs -n1 -P5 {$this->config->php} -d short_open_tag=1 -d error_reporting=0 -r \"echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true ";
 
-        $resultSot = shell_exec($shell);
+        $resultSot = shell_exec($shell) ?? '';
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
 
         // Extra check

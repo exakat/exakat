@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,7 +24,6 @@ namespace Exakat\Tasks;
 
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NeedsAnalyzerThema;
-use Exakat\GraphElements;
 
 class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -81,7 +80,7 @@ GREMLIN;
             $return[] = $vertices[0];
         } elseif ($this->config->style === 'ALL') {
             $results = array();
-            
+
             foreach($analyzersClass as $oneAnalyzerClass) {
                 $analyzer =  $this->rulesets->getInstance($oneAnalyzerClass, null, $this->config);
                 $results[] = $analyzer->getDumpResults();

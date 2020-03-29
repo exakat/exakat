@@ -148,7 +148,7 @@ class Precedence {
 
                         'T_SEMICOLON'                   => 132,
     );
-    
+
     private static $cache = array();
 
     public function __construct($phpVersion) {
@@ -158,7 +158,7 @@ class Precedence {
                 $this->precedence[constant("$phpVersion::$name")] = $priority;
             }
         }
-        
+
         if (substr($phpVersion, -2) === '80') {
             $this->precedence[constant("$phpVersion::T_DOT")] = 21;
         }
@@ -173,7 +173,7 @@ class Precedence {
         }
     }
 
-    public function get($token, bool $itself = self::WITHOUT_SELF) : array {
+    public function get($token, bool $itself = self::WITHOUT_SELF): array {
         if (!isset(self::$cache[$token])) {
             throw new NoPrecedence($token);
         }

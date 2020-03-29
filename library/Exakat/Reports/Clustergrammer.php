@@ -33,7 +33,7 @@ class Clustergrammer extends Reports {
 
         $res = $this->dump->fetchAnalysers($analyzers);
         $byAnalyzer = $res->toArray();
-        uksort($byAnalyzer, function ($a, $b): bool { return $a['analyzer'] <=> $b['analyzer']; } );
+        usort($byAnalyzer, function (array $a, array $b): bool { return $a['analyzer'] <=> $b['analyzer']; } );
         $skeleton = array();
         foreach($byAnalyzer as $row) {
             $skeleton[$row['analyzer']] = 0;
@@ -49,7 +49,7 @@ class Clustergrammer extends Reports {
 
         $all = array();
         $byFile = $res->toArray();
-        uksort($byFile, function ($a, $b): bool { return $a['file'] <=> $b['file']; } );
+        usort($byFile, function (array $a, array $b): bool { return $a['file'] <=> $b['file']; } );
         $total = 0;
         foreach($byFile as $row) {
             if (!isset($all[$row['file']])) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -84,7 +84,7 @@ class Initproject extends Tasks {
         if (!file_exists("{$this->config->projects_root}/projects/")) {
             mkdir("{$this->config->projects_root}/projects/", 0755);
         }
-        
+
         if (!mkdir($tmpPath, 0755)) {
             die("Could not create project directory '$project'");
         }

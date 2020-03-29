@@ -20,6 +20,7 @@
  *
 */
 
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer;
 
@@ -35,6 +36,7 @@ use Exakat\Query\Query;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Query\DSL\DSL;
 use Exakat\Query\DSL\FollowParAs;
+use Exakat\Project;
 
 abstract class Analyzer {
     // Query types
@@ -311,8 +313,7 @@ GREMLIN;
     public function getName(string $classname) : string {
         return str_replace( array('Exakat\\Analyzer\\', '\\'), array('', '/'), $classname);
     }
-    
-    
+
     public function getDump() : array {
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", within(args))
@@ -1864,7 +1865,7 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($this->analyzedValues as $key => $value) {
-            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString($key)."', '".\Sqlite3::escapeString($value)."') \n";
+            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString((string) $key)."', '".\Sqlite3::escapeString((string) $value)."') \n";
         }
 
         $chunks = array_chunk($valuesSQL, 490);
@@ -1890,7 +1891,7 @@ GREMLIN
 
         $valuesSQL = array();
         foreach($this->analyzerValues as list($key, $value)) {
-            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString($key)."', '".\Sqlite3::escapeString($value)."') \n";
+            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString((string) $key)."', '".\Sqlite3::escapeString((string) $value)."') \n";
         }
 
         $chunks = array_chunk($valuesSQL, 490);
@@ -2036,7 +2037,7 @@ GREMLIN
     
     private function initNewQuery() {
         $this->query = new Query((count($this->queries) + 1),
-                                  $this->config->project ?? 'test',
+                                  new Project('test'),
                                   $this->analyzerQuoted,
                                   $this->config->executable,
                                   $this->datastore);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -37,14 +37,12 @@ class Report extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $project = new ProjectName($this->config->project);
-
-        if (!$project->validate()) {
-            throw new InvalidProjectName($project->getError());
+        if ($this->config->project->isDefault()) {
+            throw new ProjectNeeded();
         }
 
-        if ($this->config->project === 'default') {
-            throw new ProjectNeeded();
+        if (!$this->config->project->validate()) {
+            throw new InvalidProjectName($this->config->project->getError());
         }
 
         if (!file_exists($this->config->project_dir)) {

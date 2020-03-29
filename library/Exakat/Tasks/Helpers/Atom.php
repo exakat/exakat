@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -68,8 +68,8 @@ class Atom {
     public $final        = '';
     public $abstract     = '';
     public $static       = '';
-    public $ctype1       = '';
-    public $ctype1_size  = 0;
+//    public $ctype1       = '';
+//    public $ctype1_size  = '';
     public $noscream     = 0;
     public $nullable     = 0;
     public $trailing     = 0;
@@ -108,7 +108,7 @@ class Atom {
         $this->strval        = $this->protectString($this->strval     );
         $this->noDelimiter   = $this->protectString($this->noDelimiter);
         $this->visibility    = $this->protectString($this->visibility );
-        $this->ctype1        = $this->protectString($this->ctype1     );
+//        $this->ctype1        = $this->protectString($this->ctype1     );
 
         $this->alternative   = $this->alternative ? 1 : null;
         $this->reference     = $this->reference ? 1 : null;

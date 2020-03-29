@@ -1233,7 +1233,7 @@ GREMLIN
         $this->dump->storeInTable('namespaces', $namespaces);
 
         $namespacesId = $this->dump->fetchTable('namespaces');
-        $namespacesId->map(function (array $x) : array { $x['namespace'] = mb_strtolower($x['namespace']); return $x; });
+        $namespacesId->map(function (array $x): array { $x['namespace'] = mb_strtolower($x['namespace']); return $x; });
         return $namespacesId->toHash('namespace', 'id');
     }
 
@@ -2177,7 +2177,7 @@ GREMLIN;
     }
 
     private function newQuery(string $title): Query {
-        return new Query(0, (string) $this->config->project, $title, $this->config->executable);
+        return new Query(0, $this->config->project, $title, $this->config->executable);
     }
 
     public function collect(): void {
@@ -2481,10 +2481,10 @@ GREMLIN
     private function storeToDumpArray(string $table, array $result): int {
         return $this->dump->storeInTable($table, $result);
     }
-    
-    private function loadSqlDump() : void {
-        $dumps = glob($this->config->tmp_dir.'/dump-*.php');
-        display('Loading '.count($dumps).' dumped SQL files');
+
+    private function loadSqlDump(): void {
+        $dumps = glob($this->config->tmp_dir . '/dump-*.php');
+        display('Loading ' . count($dumps) . ' dumped SQL files');
 
         foreach($dumps as $dump) {
             include $dump;

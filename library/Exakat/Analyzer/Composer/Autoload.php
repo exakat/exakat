@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Autoload extends Analyzer {
     public function analyze() {
-        $this->rowCount       = $this->hasResults();
+        $this->rowCount       = (int) $this->hasResults();
         $this->processedCount = 1;
         $this->queryCount     = 0;
         $this->rawQueryCount  = 0;

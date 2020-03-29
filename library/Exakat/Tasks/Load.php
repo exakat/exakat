@@ -1313,7 +1313,7 @@ class Load extends Tasks {
         $this->addLink($fn, $block, 'BLOCK');
 
         $fn->token    = $this->getToken($this->tokens[$current][0]);
-        $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') '.
+        $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') ' .
                         (isset($returnType) ? ' : ' . ($fn->nullable ? '?' : '') . $returnType->fullcode : '') .
                         '=> ' . $block->fullcode;
         $fn->fullnspath = $this->makeAnonymous('arrowfunction');
@@ -2060,7 +2060,7 @@ class Load extends Tasks {
         return $this->processFCOA($nsname);
     }
 
-    private function processTypehint() : array {
+    private function processTypehint(): array {
         $nonTypehintToken = array($this->phptokens::T_NS_SEPARATOR,
                                   $this->phptokens::T_STRING,
                                   $this->phptokens::T_NAMESPACE,
@@ -2100,12 +2100,12 @@ class Load extends Tasks {
                 $this->getFullnspath($nsname, 'class', $nsname);
                 $this->calls->addCall('class', $nsname->fullnspath, $nsname);
             }
-    
+
             if ($nullable === self::NULLABLE) {
                 $nsname->nullable = self::NULLABLE;
                 $nsname->fullcode = "?$nsname->fullcode";
             }
-            
+
             $return[] = $nsname;
         } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OR);
 
@@ -2234,7 +2234,7 @@ class Load extends Tasks {
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
 
-                $fullcode[] = ((count($returnTypes) === 1 && $returnTypes[0]->atom === 'Void') ? '' : join('|', array_column($returnTypes, 'fullcode')) . ' ' ).$index->fullcode;
+                $fullcode[] = ((count($returnTypes) === 1 && $returnTypes[0]->atom === 'Void') ? '' : join('|', array_column($returnTypes, 'fullcode')) . ' ' ) . $index->fullcode;
                 $argumentsList[] = $index;
 
                 ++$this->id;
@@ -2520,7 +2520,7 @@ class Load extends Tasks {
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $returnType->fullcode.' ';
+                $typehint_fullcode = $returnType->fullcode . ' ';
             }
         } else {
             $next = $this->processNext();
@@ -2545,7 +2545,7 @@ class Load extends Tasks {
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $returnType->fullcode.' ';
+                $typehint_fullcode = $returnType->fullcode . ' ';
             }
         } else {
             $next = $this->processNext();
@@ -2570,7 +2570,7 @@ class Load extends Tasks {
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $returnType->fullcode.' ';
+                $typehint_fullcode = $returnType->fullcode . ' ';
             }
         } else {
             $next = $this->processNext();
@@ -6215,7 +6215,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
                 } else {
-                    // inside a closure 
+                    // inside a closure
                     $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
                     $apply->aliased = self::NOT_ALIASED;
                     return;

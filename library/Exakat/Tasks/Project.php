@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -58,13 +58,11 @@ class Project extends Tasks {
     }
 
     public function run(): void {
-        if ($this->config->project === null) {
+        if ($this->config->project->isDefault()) {
             throw new ProjectNeeded();
         }
 
-        $project = new Projectname($this->config->project);
-
-        if (!$project->validate()) {
+        if (!$this->config->project->validate()) {
             throw new InvalidProjectName($project->getError());
         }
 
@@ -73,11 +71,11 @@ class Project extends Tasks {
         }
 
         if (!file_exists($this->config->project_dir)) {
-            throw new NoSuchProject($this->config->project);
+            throw new NoSuchProject((string) $this->config->project);
         }
 
         if (!file_exists($this->config->code_dir)) {
-            throw new NoCodeInProject($this->config->project);
+            throw new NoCodeInProject((string) $this->config->project);
         }
 
         // Baseline is always the previous audit done, not the current one!
@@ -164,7 +162,7 @@ class Project extends Tasks {
             $rulesetsToRun = $this->rulesetsToRun;
         }
 
-        display("Running project '$project'" . PHP_EOL);
+        display("Running project '".(string) $this->config->project."'" . PHP_EOL);
         display('Running the following analysis : ' . implode(', ', $rulesetsToRun));
         display('Producing the following reports : ' . implode(', ', $namesToRun));
 
@@ -425,6 +423,10 @@ class Project extends Tasks {
     }
 
     private function getLineDiff($current, $vcs) {
+        if ($this->config->dump_previous === null) {
+            return ;
+        }
+
         if (!file_exists($this->config->dump_previous)) {
             return ;
         }

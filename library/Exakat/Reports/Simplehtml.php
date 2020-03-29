@@ -115,7 +115,7 @@ HTML;
 
     private function makeList($folder) {
         if (!empty($this->config->project_rulesets)) {
-            $list = $this->rulesets->getRulesetsAnalyzers(array($this->config->project_rulesets));
+            $list = $this->rulesets->getRulesetsAnalyzers(makeArray($this->config->project_rulesets));
         } elseif (!empty($this->config->program)) {
             $list = array($this->config->program);
         } else {
