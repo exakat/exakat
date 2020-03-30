@@ -24,12 +24,19 @@
 namespace Exakat\Analyzer\Variables;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class RealVariables extends Analyzer {
+class RealVariables extends AnalyzerDump {
+    protected $analyzerName = 'RealVariables';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
         // $a = 1;
-        $this->atomIs(self::$VARIABLES_SCALAR)
-             ->hasNoParent('Staticproperty', 'MEMBER');
+        $this->atomIs(array('Variabledefinition', 'Parameter', 'Globaldefinition', 'Static'))
+             ->outIs(array('DEFINITION', 'NAME', 'GLOBAL', 'STATIC'));
         $this->prepareQuery();
     }
 }

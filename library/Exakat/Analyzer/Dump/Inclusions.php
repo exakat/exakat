@@ -27,6 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class Inclusions extends AnalyzerDump {
     protected $analyzerName = 'inclusions';
+
+    protected $analyzerTable = 'inclusions';
     
     protected $storageType = self::QUERY_TABLE;
 

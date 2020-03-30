@@ -24,8 +24,15 @@
 namespace Exakat\Analyzer\Arrays;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class Arrayindex extends Analyzer {
+class Arrayindex extends AnalyzerDump {
+    protected $analyzerName = 'CharString';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
 
         // $a[1]
