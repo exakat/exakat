@@ -30,7 +30,7 @@ class Show extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $project = new ProjectName($this->config->project);
+        $project = $this->config->project;
 
         if (!$project->validate()) {
             throw new InvalidProjectName($project->getError());

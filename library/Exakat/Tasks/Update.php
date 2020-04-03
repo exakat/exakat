@@ -36,7 +36,7 @@ class Update extends Tasks {
     protected $logname = self::LOG_NONE;
 
     public function run() {
-        $project = new ProjectName($this->config->project);
+        $project = $this->config->project;
 
         if (!$project->validate()) {
             throw new InvalidProjectName($project->getError());
