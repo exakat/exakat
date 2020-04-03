@@ -2963,7 +2963,6 @@ class Load extends Tasks {
                                                              $this->phptokens::T_NAMESPACE,
                                                              ),
                             \STRICT_COMPARISON)) {
-                            die(is_this_stattic_still_used);
             $option = $this->tokens[$this->id][1];
 
             $typehint = $this->processTypehint();
