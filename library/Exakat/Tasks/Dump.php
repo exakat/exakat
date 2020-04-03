@@ -159,7 +159,7 @@ class Dump extends Tasks {
             } else {
                 $analyzer = array_pop($rulesets);
                 if (isset($counts[$analyzer])) {
-                    $this->processResults($analyzer, $counts[$analyzer]);
+                    $this->processMultipleResults(array($analyzer), $counts);
                     $this->collectHashAnalyzer();
                     $rulesets = array();
                 } else {
@@ -219,7 +219,13 @@ class Dump extends Tasks {
         $severities = array();
         $readCounts = array();
 
-        $analyzers = array_filter($analyzers, function (string $s): bool { return $s !== 'Type/CharString' && substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
+        $skipAnalysis = array('Type/CharString', 
+                              'Variables/RealVariables', 
+                              'Arrays/Arrayindex', 
+                              'Type/UnicodeBlock', 
+                              'Type/Email',
+                              );
+        $analyzers = array_filter($analyzers, function (string $s) use ($skipAnalysis): bool { return !in_array($s, $skipAnalysis, STRICT_COMPARISON) && substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
         $this->dump->removeResults($analyzers);
 
         $chunks = array_chunk($analyzers, 200);
@@ -280,18 +286,24 @@ GREMLIN
         $this->log->log(implode(', ', $analyzers) . " : dumped $saved");
 
         $error = 0;
+        $emptyResults = $skipAnalysis;
         foreach($analyzers as $class) {
             if (!isset($counts[$class]) || $counts[$class] < 0) {
                 continue;
             }
-
-            if ($counts[$class] === ($readCounts[$class] ?? 0)) {
+            
+            if ($counts[$class] === 0 && !isset($readCounts[$class])) {
+                display("No results saved for $class\n");
+                $emptyResults[] = $class;
+            } elseif ($counts[$class] === ($readCounts[$class] ?? 0)) {
                 display("All $counts[$class] results saved for $class\n");
             } else {
                 assert(($counts[$class] ?? 0) === ($readCounts[$class] ?? 0), "'results were not correctly dumped in $class : $readCounts[$class]/$counts[$class]");
                 ++$error;
             }
         }
+
+        $this->dump->addEmptyResults($emptyResults);
 
         return $error;
     }
@@ -300,6 +312,7 @@ GREMLIN
         $this->log->log( "$class : $count\n");
         // No need to go further
         if ($count <= 0) {
+            $saved = $this->dump->addEmptyResults([$class]);
             return;
         }
 
@@ -328,6 +341,7 @@ GREMLIN
         }
 
         if (empty($toDump)) {
+            $saved = $this->dump->addEmptyResults([$class]);
             return;
         }
 
@@ -2162,7 +2176,9 @@ GREMLIN;
         foreach($rulesets as $ruleset) {
             $analyzerList = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
 
-            if (empty(array_diff($analyzerList, $analyzers))) {
+            $diff = array_diff($analyzerList, $analyzers);
+            $diff = array_filter($diff, function(string  $x) : bool { return (substr($x, 0, 5) !== 'Dump/') && (substr($x, 0, 9) !== 'Complete/');  });
+            if (empty($diff)) {
                 $add[] = array('', $ruleset);
             }
         }

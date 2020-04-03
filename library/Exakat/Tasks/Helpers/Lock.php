@@ -20,13 +20,18 @@
  *
 */
 
+declare( strict_types=  1);
+
 namespace Exakat\Tasks\Helpers;
 
 class Lock {
     private $path = null;
 
     public function __construct(string $path, string $name) {
-        $this->path = $path . '/' . md5($name);
+        $b = array_reverse(explode('/', $name));
+        
+        $name = $b[0].'-'.$b[1];
+        $this->path = $path . '/' . $name;
     }
 
     public function check(): bool {
@@ -36,6 +41,7 @@ class Lock {
             return false;
         }
         if (flock($fp, LOCK_EX | LOCK_NB)) {
+            fwrite($fp, (string) getmypid());
             return true;
         } else {
             $this->path = null;
@@ -45,6 +51,10 @@ class Lock {
 
     public function __destruct() {
         if (!empty($this->path) && file_exists($this->path)) {
+            $pid = file_get_contents($this->path);
+            
+            assert($pid == getmypid(), "Alert : removing wrong pid for $this->path");
+
             unlink($this->path);
         }
     }

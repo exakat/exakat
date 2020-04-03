@@ -403,7 +403,7 @@ SQL;
             return array();
         }
 
-        $chunks = array_chunk($toDump, 12);
+        $chunks = array_chunk($toDump, 490);
         foreach($chunks as $chunk) {
             foreach($chunk as &$c) {
                 $c = array_map(array($this->sqlite, 'escapeString'), $c);
@@ -425,6 +425,17 @@ SQL;
         
         // Pretty sneaaaaky, as it doesn't count the stored rows
         return $return;
+    }
+
+    public function addEmptyResults(array $toDump) : void {
+        $chunks = array_chunk($toDump, 490);
+        foreach($chunks as $chunk) {
+            foreach($chunk as &$c) {
+                $c = "(NULL, '".$c."', 0)";
+            }
+            $sql = 'REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES ' . implode(', ', $chunk);
+            $this->sqlite->query($sql);
+        }
     }
 
     public function getTableCount(string $table) : int {
@@ -477,10 +488,11 @@ SQL;
     }
 
     public function storeQueries(array $queries) : int {
+        $this->sqlite->lastErrorCode();
         foreach($queries as $query) {
             $res = $this->sqlite->query($query);
-            if (!$res) {
-                display("Error  in  query : $query\n");
+            if ($this->sqlite->lastErrorCode()) {
+                print  $query.PHP_EOL.PHP_EOL;
             }
         }
 

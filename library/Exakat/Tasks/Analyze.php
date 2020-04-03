@@ -86,7 +86,7 @@ class Analyze extends Tasks {
         } elseif (!empty($this->config->project_rulesets)) {
             $ruleset = $this->config->project_rulesets;
 
-            if (!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($ruleset)) {
+            if ((!$analyzersClass = $this->rulesets->getRulesetsAnalyzers($ruleset)) && ($ruleset[0] !== 'None')) {
                 throw new NoSuchRuleset(implode(', ', $ruleset), $this->rulesets->getSuggestionRuleset($ruleset));
             }
 
@@ -135,12 +135,13 @@ class Analyze extends Tasks {
         display("Done\n");
     }
 
-    private function fetchAnalyzers($analyzer_class, array &$analyzers, array &$dependencies) {
+    private function fetchAnalyzers(string $analyzer_class, array &$analyzers, array &$dependencies) : void {
         if (isset($analyzers[$analyzer_class])) {
             return;
         }
 
         $analyzers[$analyzer_class] = $this->rulesets->getInstance($analyzer_class);
+
         if ($analyzers[$analyzer_class] === null) {
             display("No such analyzer as $analyzer_class\n");
             return;
@@ -149,10 +150,10 @@ class Analyze extends Tasks {
         if (isset($this->analyzed[$analyzer_class]) &&
             $this->config->noRefresh === true) {
             display("$analyzer_class is already processed\n");
-            return $this->analyzed[$analyzer_class];
-        } else {
-            $analyzers[$analyzer_class]->init();
+            return ;
         }
+
+//        $analyzers[$analyzer_class]->init();
 
         if ($this->config->noDependencies === true) {
             $dependencies[$analyzer_class] = array();
@@ -176,16 +177,20 @@ class Analyze extends Tasks {
             return false;
         }
 
-        if (isset($this->analyzed[$analyzer_class]) &&
-             $this->config->noRefresh === true) {
-            display( "$analyzer_class is already processed\n");
-            return $this->analyzed[$analyzer_class];
+        if (isset($this->analyzed[$analyzer_class])) {
+            if ($this->config->noRefresh === true) {
+                display( "$analyzer_class is already processed (1)\n");
+                return $this->analyzed[$analyzer_class];
+            } else {
+                print "Skip analysis for $analyzer_class\n";
+            }
+        } else {
+            $analyzer->init();
         }
-        $analyzer->init();
 
         if (!(!isset($this->analyzed[$analyzer_class]) ||
               $this->config->noRefresh !== true)         ) {
-            display("$analyzer_class is already processed\n");
+            display("$analyzer_class is already processed (2)\n");
 
             return $this->analyzed[$analyzer_class];
         }
@@ -252,10 +257,14 @@ class Analyze extends Tasks {
     }
 
     private function checkAnalyzed() {
-        $rows = $this->datastore->getRow('analyzed');
-        foreach($rows as $row) {
-            if (!isset($this->analyzed[$row['analyzer']])) {
-                $this->analyzed[$row['analyzer']] = $row['counts'];
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Analysis").as("analyzer", "count").select("analyzer", "count").by("analyzer").by("count");
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        foreach($res as ['analyzer' => $analyzer, 'count' => $count]) {
+            if ($count != -1 && !isset($this->analyzed[$analyzer])) {
+                $this->analyzed[$analyzer] = $count;
             }
         }
     }
