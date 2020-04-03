@@ -31,6 +31,7 @@ class IdenticalMethods extends Analyzer {
     }
 
     public function analyze() {
+        return;
         // class a           { public function foo() { /some code/ } }
         // class b extends a { public function foo() { /some code/ } }
         $this->atomIs(self::$FUNCTIONS_METHOD)
