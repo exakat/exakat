@@ -83,7 +83,7 @@ abstract class Analyzer {
     protected $queryId          = 0;
     
     protected $analyzerName      = 'no analyzer name';
-    protected $analyzerTable     = 'no analyzer table name';
+//    protected $analyzerTable     = 'no analyzer table name';
     private   $lastAnalyzerTable = 'none';
     protected $analyzerSQLTable = 'no analyzer sql creation';
     protected $missingQueries   = array();
@@ -236,7 +236,8 @@ abstract class Analyzer {
     }
 
     public function init(int $analyzerId = null) : int {
-        if (self::$rulesId === null) {
+    
+        // always reload list of analysis from the database
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
 GREMLIN;
@@ -245,28 +246,30 @@ GREMLIN;
             // Double is a safe guard, in case analysis were created twice
             $double = array();
             foreach($res as ['analyzer' => $analyzer, 'id' => $id]) {
-                if (isset(self::$rulesId[$analyzer])) {
+                if (isset(self::$rulesId[$analyzer]) && self::$rulesId[$analyzer] !== $id) {
                     $double[] = $id;
                 } else {
                     self::$rulesId[$analyzer] = $id;
                 }
             }
-            
+
             if (!empty($double)) {
-                $list = makeList($double);
-                $query = <<<GREMLIN
+                $chunks = array_chunk($double, 200);
+                foreach($chunks as $list) {
+                    $list = makeList($list);
+                    $query = <<<GREMLIN
 g.V({$list}).drop()
 GREMLIN;
-                $this->gremlin->query($query);
+                    $this->gremlin->query($query);
+                }
             }
-        }
 
         if ($analyzerId === null) {
             if (isset(self::$rulesId[$this->shortAnalyzer])) {
                 // Removing all edges
                 $this->analyzerId = self::$rulesId[$this->shortAnalyzer];
                 $query = <<<GREMLIN
-g.V({$this->analyzerId}).outE("ANALYZED").drop()
+g.V({$this->analyzerId}).property("count", -2).outE("ANALYZED").drop()
 GREMLIN;
                 $this->gremlin->query($query);
             } else {
@@ -276,7 +279,7 @@ GREMLIN;
 g.addV().property(T.id, $resId)
         .property(T.label, "Analysis")
         .property("analyzer", "{$this->analyzerQuoted}")
-        .property("count", 0)
+        .property("count", -1)
         .id()
 GREMLIN;
                 $res = $this->gremlin->query($query);

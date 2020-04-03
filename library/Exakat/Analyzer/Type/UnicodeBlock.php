@@ -24,10 +24,18 @@
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class UnicodeBlock extends Analyzer {
+class UnicodeBlock extends AnalyzerDump {
+    protected $analyzerName = 'UnicodeBlock';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
-        $this->atomIs(array('String', 'Heredoc'));
+        $this->atomIs(array('String', 'Heredoc'))
+             ->toResults();
         $this->prepareQuery();
     }
 }

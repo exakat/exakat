@@ -23,6 +23,7 @@
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
 class Email extends Analyzer {
@@ -31,13 +32,19 @@ class Email extends Analyzer {
                     );
     }
 
+    protected $analyzerName = 'Email';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
 
     public function analyze() {
         // $x = 'a@b.com';
         $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
              ->hasNoIn('CONCAT')
              ->has('noDelimiter')
-             ->regexIs('noDelimiter', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})');
+             ->regexIs('noDelimiter', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})')
+             ->toResults();
         $this->prepareQuery();
     }
 }

@@ -27,6 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NewOrder extends AnalyzerDump {
     protected $analyzerName = 'newOrder';
+
+    protected $analyzerTable = 'newOrder';
     
     protected $storageType = self::QUERY_TABLE;
 

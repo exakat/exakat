@@ -36,7 +36,8 @@ class RealVariables extends AnalyzerDump {
     public function analyze() {
         // $a = 1;
         $this->atomIs(array('Variabledefinition', 'Parameter', 'Globaldefinition', 'Static'))
-             ->outIs(array('DEFINITION', 'NAME', 'GLOBAL', 'STATIC'));
+             ->outIs(array('DEFINITION', 'NAME', 'GLOBAL', 'STATIC'))
+             ->toResults();
         $this->prepareQuery();
     }
 }

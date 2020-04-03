@@ -39,7 +39,8 @@ class Arrayindex extends AnalyzerDump {
         $this->atomIs('Array')
              ->outIs('INDEX')
              ->is('constant', true)
-             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS);
+             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
+             ->toResults();
         $this->prepareQuery();
 
         // list( 'a' => 2) = ['b' => 2];
@@ -48,7 +49,8 @@ class Arrayindex extends AnalyzerDump {
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->is('constant', true)
-             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS);
+             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
+             ->toResults();
         $this->prepareQuery();
 
         // array( 'a' => 2) = ['b' => 2];
@@ -57,7 +59,8 @@ class Arrayindex extends AnalyzerDump {
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->is('constant', true)
-             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS);
+             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
+             ->toResults();
         $this->prepareQuery();
     }
 }
