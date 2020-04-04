@@ -2,10 +2,12 @@
 
 $expected     = array('$a',
                       '$b',
-                      '$c',
+                      '$c1',
                      );
 
 $expected_not = array('$d',
+                      '$e',
+                      '$c2',
                      );
 
 ?>
