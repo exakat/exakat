@@ -944,10 +944,10 @@ GREMLIN;
         // Global Constants
         $query = $this->newQuery('Constants define()');
         $query->atomIs('Defineconstant', Analyzer::WITHOUT_CONSTANTS)
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
  sideEffect{ 
     file = ""; 
-    namespace = "\\\\"; 
+    namespace = "\\"; 
     phpdoc = "";
 }
 .where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
@@ -1014,10 +1014,10 @@ GREMLIN
 
         $query = $this->newQuery('Constants const');
         $query->atomIs('Const', Analyzer::WITHOUT_CONSTANTS)
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
  sideEffect{ 
     file = ""; 
-    namespace = "\\\\"; 
+    namespace = "\\"; 
     phpdoc = "";
 }
 .where( 
@@ -1098,10 +1098,10 @@ GREMLIN
 .where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 GREMLIN
 , array(), array())
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
  sideEffect{ 
     file = ""; 
-    namespace = "\\\\"; 
+    namespace = "\\"; 
 }
 .where( 
     __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File"))
@@ -1113,7 +1113,7 @@ GREMLIN
 )
 GREMLIN
 , array(), array())
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 map{ ["name":name, 
       "type":it.get().label().toString().toLowerCase(),
       "line":it.get().value("line"),
@@ -1351,12 +1351,12 @@ GREMLIN;
               ->_as('classe')
               ->_as('id')
               ->_as('type')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File"))
 GREMLIN
 , array(), array())
                 ->_as('file')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 select("classe").out("EXTENDS")
 .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File"))
 GREMLIN
@@ -2083,14 +2083,14 @@ GREMLIN;
               ->goToInstruction('File')
               ->savePropertyAs('fullcode', 'path')
               ->back('variable')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 map{['id': '',
      'file':path,
      'line' : it.get().value('line'),
      'variable' : it.get().value('fullcode'),
      'isRead' : 'isRead' in it.get().keys() ? 1 : 0,
      'isModified' : 'isModified' in it.get().keys() ? 1 : 0,
-     'type' : type == 'Variabledefinition' ? 'implicit' : type == 'Globaldefinition' ? 'global' : '\$GLOBALS'
+     'type' : type == 'Variabledefinition' ? 'implicit' : type == 'Globaldefinition' ? 'global' : '$GLOBALS'
      ];
 
 }
@@ -2177,7 +2177,7 @@ GREMLIN;
             $analyzerList = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
 
             $diff = array_diff($analyzerList, $analyzers);
-            $diff = array_filter($diff, function (string  $x): bool { return (substr($x, 0, 5) !== 'Dump/') && (substr($x, 0, 9) !== 'Complete/');  });
+            $diff = array_filter($diff, function (string $x): bool { return (substr($x, 0, 5) !== 'Dump/') && (substr($x, 0, 9) !== 'Complete/');  });
             if (empty($diff)) {
                 $add[] = array('', $ruleset);
             }
