@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -36,7 +36,7 @@ class ProjectConfig extends Config {
                               'project_description' => '',
                               'project_branch'      => '',
                               'project_tag'         => '',
-// No default value, 
+// No default value,
 //                              'project_rulesets'    => array(),
                               'file_extensions'     => array('php',
                                                              'php3',
@@ -71,11 +71,11 @@ class ProjectConfig extends Config {
                                                              '/var',
                                                             ),
                               );
-    
+
     public function __construct($projects_root) {
         $this->projects_root = "$projects_root/projects/";
     }
-    
+
     public function setProject($project) {
         $this->project = new Project($project);
     }
@@ -94,7 +94,7 @@ class ProjectConfig extends Config {
             print "Couldn't parse $pathToIni : $error[message]\nIgnoring file\n";
             return self::NOT_LOADED;
         }
-        
+
         foreach(array_keys($this->config) as $key) {
             if (!isset($ini[$key])) {
                 $ini[$key] = $this->config[$key];
@@ -104,7 +104,7 @@ class ProjectConfig extends Config {
         // Aliasing project_themes into rulesets
         if (isset($ini['project_themes'])) {
             print "rename project_themes in project_rulesets, in your config.ini file\n";
-            
+
             if (empty($this->config['project_rulesets'])) {
                 $this->config['project_rulesets'] = $ini['project_themes'];
             }
@@ -121,12 +121,12 @@ class ProjectConfig extends Config {
         }
 
         $this->config['project_vcs'] = $this->config['project_vcs'] ?? '';
-        
+
         // Default behavior to keep exakat running until everyone has a filled file_extension option in config.ini
         if (empty($this->config['file_extensions'])) {
             $this->config['file_extensions'] = 'php,php3,inc,tpl,phtml,tmpl,phps,ctp,module';
         }
-        
+
         // Converting the string format to arrays when necessary
         if (isset($this->config['other_php_versions']) &&
             is_string($this->config['other_php_versions'])) {
@@ -182,7 +182,7 @@ class ProjectConfig extends Config {
     public function setConfig($name, $value) {
         $this->config[$name] = $value;
     }
-    
+
     public function getConfig($dir_root = '') {
         // $vendor
         if ($this->config['include_dirs'] === array('/')) {
@@ -192,7 +192,7 @@ class ProjectConfig extends Config {
         }
         $ignore_dirs  = 'ignore_dirs[] = "' . implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs']) . "\";\n";
         $file_extensions  = implode(',', $this->config['file_extensions']);
-        
+
         $custom_configs = array();
 
         $iniFiles = glob("$dir_root/human/en/*/*.ini");
@@ -200,15 +200,15 @@ class ProjectConfig extends Config {
         foreach($iniFiles as $file) {
             $ini = parse_ini_file($file, \INI_PROCESS_SECTIONS);
             if (isset($ini['parameter1'])) {
-                $default[basename(dirname($file)).'/'.basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
+                $default[basename(dirname($file)) . '/' . basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
             }
         }
-        
+
         foreach($this->config as $key => $value) {
             if (strpos($key, '/') === false) {
                 continue;
             }
-            
+
             $cc = "[$key]\n";
             foreach($value as $name => $values) {
                 if (is_array($values)) {
@@ -222,9 +222,9 @@ class ProjectConfig extends Config {
                 } elseif (is_int($values)) {
                     $cc .= "{$name} = $values;\n; default = {$default[$key][$name]}\n";
                 } else {
-                    assert(false, "Unknown type for INI creation : ".gettype($values));
+                    assert(false, 'Unknown type for INI creation : ' . gettype($values));
                 }
-                
+
                 unset($default[$key]);
             }
             $cc .= PHP_EOL;
@@ -246,12 +246,12 @@ class ProjectConfig extends Config {
                 } elseif (is_int($values)) {
                     $cc2 .= "{$name} = $values;\n; default value\n\n";
                 } else {
-                    assert(false, "Unknown type for INI creation : ".gettype($values));
+                    assert(false, 'Unknown type for INI creation : ' . gettype($values));
                 }
             }
             $custom_configs[] = $cc2;
         }
-        
+
         $custom_configs = implode('', $custom_configs);
 
         $configIni = <<<INI
@@ -280,7 +280,7 @@ project_tag         = "{$this->config['project_tag']}";
 $custom_configs
 
 INI;
-        
+
         return $configIni;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,13 +27,13 @@ abstract class Config {
     const NOT_LOADED = false;
 
     protected $config = array();
-    
+
     abstract public function loadConfig($args) ;
 
     public function toArray() {
         return $this->config;
     }
-    
+
     public function get($index) {
         return $this->config[$index] ?? null;
     }

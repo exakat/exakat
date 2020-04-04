@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,9 +25,9 @@ namespace Exakat\Configsource;
 class EnvConfig extends Config {
     public function loadConfig($args) {
         // Which ENV variable are worth using ?
-        
+
         return self::NOT_LOADED;
-        
+
         // return 'ENVIRONNMENT';
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -105,7 +105,7 @@ class ExakatConfig extends Config {
         // Update values with actual loaders and gremlin
         $this->config['gremlin'] = $this->gremlins[$this->config['graphdb']];
         $this->config['loader']  = $this->loaders[$this->config['graphdb']];
-        
+
         if (isset($this->config['concurencyCheck'])) {
             $this->config['concurencyCheck'] = (int) $this->config['concurencyCheck'];
             if ($this->config['concurencyCheck'] < 1024) {
@@ -133,7 +133,7 @@ class ExakatConfig extends Config {
         if (isset($this->config['parallel_processing'])) {
             $this->config['parallel_processing'] = ((bool) $this->config['parallel_processing']) && function_exists('pcntl_fork');
         }
-        
+
         return str_replace(getcwd(), '.', $configFile);
     }
 }

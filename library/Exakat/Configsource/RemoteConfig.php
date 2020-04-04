@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,7 +24,7 @@ namespace Exakat\Configsource;
 
 class RemoteConfig extends Config {
     private $remoteJsonFile = 'config/remotes.json';
-    
+
     public function __construct($projects_root) {
         $this->remoteJsonFile = $projects_root . '/config/remotes.json';
     }
@@ -43,7 +43,7 @@ class RemoteConfig extends Config {
         if (empty($remotes)) {
             return self::NOT_LOADED;
         }
-        
+
         foreach($remotes as $remote) {
             $this->config[$remote->name] = $remote->URI;
         }

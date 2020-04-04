@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -180,7 +180,7 @@ class CommandLine extends Config {
                     case 'project' :
                         if (!isset($this->config['project'])) {
                             $this->config['project'] = new Project($args[$id + 1]);
-                        } 
+                        }
                         // Multiple -p are ignored : keep the first
                         break;
 
@@ -222,7 +222,7 @@ class CommandLine extends Config {
                     case 'program' :
                         if (isset($this->config['project_rulesets'])) {
                             // program and project_rulesets are mutually exclusive
-                            break; 
+                            break;
                         } elseif (!isset($this->config['program'])) {
                             $this->config['program'] = $args[$id + 1];
                         } elseif (is_string($this->config['program'])) {
@@ -237,7 +237,7 @@ class CommandLine extends Config {
                     case 'project_rulesets' :
                         if (isset($this->config['program'])) {
                             // program and project_rulesets are mutually exclusive
-                            break; 
+                            break;
                         } elseif (isset($this->config['project_rulesets'])) {
                             $this->config['project_rulesets'][] = $args[$id + 1];
                         } else {
@@ -257,14 +257,14 @@ class CommandLine extends Config {
         $command = array_shift($args);
         if (isset($command, self::$commands[$command])) {
             $this->config['command'] = $command;
-        
+
             if ($this->config['command'] === 'extension') {
                 $subcommand = array_shift($args);
                 if (!in_array($subcommand, Extension::ACTIONS, STRICT_COMPARISON)) {
                     $subcommand = 'local';
                 }
                 $this->config['subcommand'] = $subcommand;
-                
+
                 if (in_array($subcommand, array('install', 'uninstall', 'update'), STRICT_COMPARISON)) {
                     $this->config['extension'] = array_shift($args);
                 }
@@ -274,12 +274,12 @@ class CommandLine extends Config {
                     $subcommand = 'list';
                 }
                 $this->config['subcommand'] = $subcommand;
-                
+
                 if (in_array($subcommand, array('remove'), STRICT_COMPARISON)) {
                     $this->config['baseline_id'] = array_shift($args);
                 } elseif (in_array($subcommand, array('save'), STRICT_COMPARISON)) {
                     $this->config['baseline_set'] = array_shift($args);
-                } 
+                }
             }
         } else {
             $this->config['command']       = 'unknown';
@@ -298,7 +298,7 @@ class CommandLine extends Config {
 
             $this->config['project']   = 'onepage';
             $this->config['ruleset']   = 'OneFile';
-            
+
             $this->config['format']    = array('OnepageJson');
             $this->config['file']      = str_replace('/code/', '/reports/', substr($this->config['filename'], 0, -4));
             $this->config['quiet']     = true;

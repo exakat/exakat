@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -51,7 +51,7 @@ class DotExakatConfig extends Config {
 
         if (isset($tmp_config['project_themes'])) {
             display("please, rename project_themes into project_rulesets in your .exakat.ini file\n");
-            
+
             if (empty($this->config['project_rulesets'])) {
                 $this->config['project_rulesets'] = $this->config['project_themes'];
             }
@@ -67,7 +67,7 @@ class DotExakatConfig extends Config {
                 $other_php_versions[] = $version;
             }
         }
-    
+
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,

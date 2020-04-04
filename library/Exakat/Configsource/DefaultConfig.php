@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -48,7 +48,7 @@ class DefaultConfig extends Config {
                                'debug'          => false,
 
                                'collect'        => false,
- 
+
                                'git'            => true,
                                'svn'            => false,
                                'bzr'            => false,
@@ -59,7 +59,7 @@ class DefaultConfig extends Config {
                                'zip'            => false,
                                'rar'            => false,
                                'seven7'         => false,
- 
+
                                 // directives with literal value
                                'filename'           => '',
                                'dirname'            => '',
@@ -70,18 +70,18 @@ class DefaultConfig extends Config {
                                'project_reports'    => array('Text'),
                                'file'               =>  '',
                                'style'              => 'ALL',
- 
+
                                'gsneo4j_host'       => '127.0.0.1',
                                'gsneo4j_port'       => '7474',
                                'gsneo4j_folder'     => 'tinkergraph',
-                               
+
                                'tinkergraph_host'   => '127.0.0.1',
                                'tinkergraph_port'   => '7474',
                                'tinkergraph_folder' => 'tinkergraph',
 
                                'branch'         => '',
                                'tag'            => '',
- 
+
                                'php'           => PHP_BINARY,
                                'php52'         => '',
                                'php53'         => '',
@@ -94,7 +94,7 @@ class DefaultConfig extends Config {
                                'php73'         => '',
                                'php74'         => '',
                                'php80'         => '',
- 
+
                                'phpversion'    => '7.4',
                                'token_limit'   => '1000000',
 
@@ -102,7 +102,7 @@ class DefaultConfig extends Config {
                                'baseline_set'  => 'one',   // none, one, always
 
                                'concurencyCheck' => 7610,
- 
+
                                'command'       => 'version',
 
                                'include_dirs'        => array('',
@@ -134,9 +134,9 @@ class DefaultConfig extends Config {
                                'project_description' => '',
                                'project_packagist'   => '',
                                'other_php_versions'  => array(),
-                               
+
                                'remote'              => 'none',
- 
+
                                'project_reports'     => array('Diplomat',
                                                              ),
                                'project_rulesets'    => array('CompatibilityPHP53',
@@ -159,13 +159,13 @@ class DefaultConfig extends Config {
                                                               ),
 
                                 'inside_code'          => Configuration::WITH_PROJECTS,
-                                
+
                                 'parallel_processing'  => false,
                               );
 
     public function __construct() {
         $this->project = new Project();
-        
+
         $this->config['parallel_processing'] = function_exists('pcntl_fork');
     }
 

@@ -36,9 +36,9 @@ class DotExakatYamlConfig extends Config {
 
     public function __construct() {
         $this->dotExakatYaml = getcwd() . '/' . self::YAML_FILE;
-        
+
         if (!file_exists($this->dotExakatYaml)) {
-            $secondary = substr($this->dotExakatYaml, 0, -3).'yaml';
+            $secondary = substr($this->dotExakatYaml, 0, -3) . 'yaml';
             if (file_exists($secondary)) {
                 $this->dotExakatYaml = $secondary;
             }
@@ -54,10 +54,10 @@ class DotExakatYamlConfig extends Config {
         try {
             $tmp_config = Yaml::parseFile($this->dotExakatYaml);
         } catch (ParseException $exception) {
-            display("Error while parsing ".basename($this->dotExakatYaml));
+            display('Error while parsing ' . basename($this->dotExakatYaml));
 
             return self::NOT_LOADED;
-            // Empty on purppose 
+            // Empty on purppose
         }
 
         if (!is_array($tmp_config)) {
@@ -85,7 +85,7 @@ class DotExakatYamlConfig extends Config {
                 $other_php_versions[] = $version;
             }
         }
-    
+
         // check and default values
         $defaults = array( 'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
@@ -121,7 +121,7 @@ class DotExakatYamlConfig extends Config {
                            'project_description' => '',
                            'project_branch'      => '',
                            'project_tag'         => '',
-                           
+
                         );
 
         $this->config['inside_code'] = Configuration::INSIDE_CODE;
@@ -133,7 +133,7 @@ class DotExakatYamlConfig extends Config {
 
         if (isset($tmp_config['project_themes'])) {
             display("please, rename project_themes into project_rulesets in your .exakat.yaml file\n");
-            
+
             if (empty($this->config['project_rulesets'])) {
                 $this->config['project_rulesets'] = $this->config['project_themes'];
             }
@@ -173,7 +173,7 @@ class DotExakatYamlConfig extends Config {
 
         if (isset($this->config['project'])) {
             $this->config['project'] = new Project($this->config['project']);
-        } 
+        }
 
         if (isset($this->config['rulesets'])) {
             $this->rulesets = array_map('array_values', $this->config['rulesets']);
@@ -181,10 +181,10 @@ class DotExakatYamlConfig extends Config {
         }
 
         foreach($tmp_config as $name => $tmp) {
-            if (class_exists("Exakat\\Analyzer\\".str_replace('/', '\\', $name))) {
+            if (class_exists('Exakat\\Analyzer\\' . str_replace('/', '\\', $name))) {
                 $this->config[$name] = $tmp;
                 unset($tmp_config[$name]);
-            } 
+            }
         }
 
         if (!empty($tmp_config)) {
@@ -193,7 +193,7 @@ class DotExakatYamlConfig extends Config {
 
         return self::YAML_FILE;
     }
-    
+
     public function getRulesets() {
         return $this->rulesets;
     }
@@ -207,17 +207,17 @@ class DotExakatYamlConfig extends Config {
         }
         $ignore_dirs  = 'ignore_dirs[] = "' . implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs']) . "\";\n";
         $file_extensions  = implode(',', $this->config['file_extensions']);
-        
+
         $custom_configs = array();
-        
+
         $iniFiles = glob("$dir_root/human/en/*/*.ini");
         foreach($iniFiles as $file) {
             $ini = parse_ini_file($file, \INI_PROCESS_SECTIONS);
             if (isset($ini['parameter1'])) {
-                $default[basename(dirname($file)).'/'.basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
+                $default[basename(dirname($file)) . '/' . basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
             }
         }
-        
+
         foreach($this->config as $key => $value) {
             if (strpos($key, '/') === false) {
                 continue;
@@ -245,7 +245,7 @@ class DotExakatYamlConfig extends Config {
 'file_extensions'     => $file_extensions,
 'custom'              => $default,
         );
-        
+
         return $yaml = Yaml::dump($configIni);
     }
 
