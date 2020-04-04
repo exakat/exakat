@@ -20,14 +20,14 @@
  *
 */
 
-declare( strict_types = 1);
+
 
 namespace Exakat\Tasks\Helpers;
 
 abstract class Plugin {
     public function __construct() {}
 
-    abstract public function run(Atom $atom, array $extras) : void;
+    abstract public function run(Atom $atom, array $extras): void;
 }
 
 ?>

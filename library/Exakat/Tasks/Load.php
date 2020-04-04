@@ -448,7 +448,7 @@ class Load extends Tasks {
                 $plugin->run($atom, $linked);
             }
         } catch (\Throwable $t) {
-            print $t->getMessage().' '.$t->getFile().' '.$t->getLine();
+            print $t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine();
         }
     }
 

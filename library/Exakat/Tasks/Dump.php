@@ -219,10 +219,10 @@ class Dump extends Tasks {
         $severities = array();
         $readCounts = array();
 
-        $skipAnalysis = array('Type/CharString', 
-                              'Variables/RealVariables', 
-                              'Arrays/Arrayindex', 
-                              'Type/UnicodeBlock', 
+        $skipAnalysis = array('Type/CharString',
+                              'Variables/RealVariables',
+                              'Arrays/Arrayindex',
+                              'Type/UnicodeBlock',
                               'Type/Email',
                               );
         $analyzers = array_filter($analyzers, function (string $s) use ($skipAnalysis): bool { return !in_array($s, $skipAnalysis, STRICT_COMPARISON) && substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
@@ -291,7 +291,7 @@ GREMLIN
             if (!isset($counts[$class]) || $counts[$class] < 0) {
                 continue;
             }
-            
+
             if ($counts[$class] === 0 && !isset($readCounts[$class])) {
                 display("No results saved for $class\n");
                 $emptyResults[] = $class;
@@ -312,7 +312,7 @@ GREMLIN
         $this->log->log( "$class : $count\n");
         // No need to go further
         if ($count <= 0) {
-            $saved = $this->dump->addEmptyResults([$class]);
+            $saved = $this->dump->addEmptyResults(array($class));
             return;
         }
 
@@ -341,7 +341,7 @@ GREMLIN
         }
 
         if (empty($toDump)) {
-            $saved = $this->dump->addEmptyResults([$class]);
+            $saved = $this->dump->addEmptyResults(array($class));
             return;
         }
 
@@ -2177,7 +2177,7 @@ GREMLIN;
             $analyzerList = $this->rulesets->getRulesetsAnalyzers(array($ruleset));
 
             $diff = array_diff($analyzerList, $analyzers);
-            $diff = array_filter($diff, function(string  $x) : bool { return (substr($x, 0, 5) !== 'Dump/') && (substr($x, 0, 9) !== 'Complete/');  });
+            $diff = array_filter($diff, function (string  $x): bool { return (substr($x, 0, 5) !== 'Dump/') && (substr($x, 0, 9) !== 'Complete/');  });
             if (empty($diff)) {
                 $add[] = array('', $ruleset);
             }

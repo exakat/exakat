@@ -33,7 +33,6 @@ use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchReport;
 use Exakat\Exceptions\ProjectNeeded;
-use Exakat\Project as Projectname;
 use Exakat\Tasks\Helpers\BaselineStash;
 use Exakat\Tasks\Helpers\ReportConfig;
 
@@ -162,7 +161,7 @@ class Project extends Tasks {
             $rulesetsToRun = $this->rulesetsToRun;
         }
 
-        display("Running project '".(string) $this->config->project."'" . PHP_EOL);
+        display("Running project '" . (string) $this->config->project . "'" . PHP_EOL);
         display('Running the following analysis : ' . implode(', ', $rulesetsToRun));
         display('Producing the following reports : ' . implode(', ', $namesToRun));
 

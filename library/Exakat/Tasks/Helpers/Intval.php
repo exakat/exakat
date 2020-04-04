@@ -28,7 +28,7 @@ class Intval extends Plugin {
     public $name = 'intval';
     public $type = 'integer';
 
-    public function run(Atom $atom, array $extras) : void {
+    public function run(Atom $atom, array $extras): void {
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
             if ($atom->code === '=') {

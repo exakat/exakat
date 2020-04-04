@@ -27,7 +27,7 @@ class Strval extends Plugin {
     public $name = 'noDelimiter';
     public $type = 'string';
 
-    public function run(Atom $atom, array $extras) : void {
+    public function run(Atom $atom, array $extras): void {
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
             if ($atom->code === '=') {

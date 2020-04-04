@@ -39,7 +39,7 @@ class Constant extends Plugin {
         $this->deterministFunctions = array_map(function ($x) { return "\\$x";}, $deterministFunctions);
     }
 
-    public function run(Atom $atom, array $extras = array()) :  void {
+    public function run(Atom $atom, array $extras = array()): void {
         foreach($extras as $extra) {
             if ($extra->constant === null)  {
                 $atom->constant = null;

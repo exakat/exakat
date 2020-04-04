@@ -29,7 +29,7 @@ class IsModified extends Plugin {
     public $type = 'boolean';
     private $variables = array('Variable', 'Array', 'Member', 'Staticproperty', 'Phpvariable', );
 
-    public function run(Atom $atom, array  $extras) : void {
+    public function run(Atom $atom, array  $extras): void {
         switch ($atom->atom) {
             case 'Assignation' :
                 if (in_array($extras['LEFT']->atom, $this->variables)) {

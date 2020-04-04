@@ -32,7 +32,7 @@ class IsRead extends Plugin {
                                'Phpvariable', 'This',
                                'Array', );
 
-    public function run(Atom $atom, array $extras) : void {
+    public function run(Atom $atom, array $extras): void {
         switch ($atom->atom) {
             case 'Assignation' :
                 if (in_array($extras['RIGHT']->atom, $this->variables, STRICT_COMPARISON)) {

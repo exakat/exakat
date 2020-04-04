@@ -28,7 +28,6 @@ use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNotInited;
 use Exakat\Exceptions\NoDump;
 use Exakat\Exceptions\NoDumpYet;
-use Exakat\Project as ProjectName;
 use Exakat\Reports\Reports as Reports;
 use Exakat\Tasks\Helpers\ReportConfig;
 use Exakat\Dump\Dump;
