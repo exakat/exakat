@@ -20,13 +20,15 @@
  *
 */
 
+declare(strict_types = 1);
+
 namespace Exakat\Tasks\Helpers;
 
 class Intval extends Plugin {
     public $name = 'intval';
     public $type = 'integer';
 
-    public function run($atom, $extras) {
+    public function run(Atom $atom, array $extras) : void {
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
             if ($atom->code === '=') {
@@ -45,7 +47,7 @@ class Intval extends Plugin {
 
         switch ($atom->atom) {
             case 'Integer' :
-                $value = $atom->code;
+                $value = (string) $atom->code;
 
                 if (strtolower(substr($value, 0, 2)) === '0b') {
                     $actual = bindec(substr($value, 2));
@@ -61,7 +63,7 @@ class Intval extends Plugin {
                     $actual = (int) $value;
                 }
 
-                $atom->intval = abs($actual) > PHP_INT_MAX ? 0 : $actual;
+                $atom->intval = $actual == PHP_INT_MIN ? 0 : $actual;
                 break;
 
             case 'Float' :

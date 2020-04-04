@@ -20,13 +20,15 @@
  *
 */
 
+declare( strict_types = 1);
+
 namespace Exakat\Tasks\Helpers;
 
 class Boolval extends Plugin {
     public $name = 'boolean';
     public $type = 'boolean';
 
-    public function run($atom, $extras) {
+    public function run(Atom $atom, array $extras) : void {
         // Special case for Arraylist, so it won't be blocked by the filter behind.
         switch ($atom->atom) {
             case 'Arrayliteral' :

@@ -20,13 +20,15 @@
  *
 */
 
+declare( strict_types = 1);
+
 namespace Exakat\Tasks\Helpers;
 
 class Nullval extends Plugin {
     public $name = 'isNull';
     public $type = 'boolean';
 
-    public function run($atom, $extras) {
+    public function run(Atom $atom, array $extras) : void {
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
             if ($atom->code === '=') {

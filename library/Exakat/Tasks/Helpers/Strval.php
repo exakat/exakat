@@ -19,6 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
+declare( strict_types = 1);
 
 namespace Exakat\Tasks\Helpers;
 
@@ -26,7 +27,7 @@ class Strval extends Plugin {
     public $name = 'noDelimiter';
     public $type = 'string';
 
-    public function run($atom, $extras) {
+    public function run(Atom $atom, array $extras) : void {
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
             if ($atom->code === '=') {
@@ -61,7 +62,7 @@ class Strval extends Plugin {
                     $actual = (string) (int) $value;
                 }
 
-                $atom->noDelimiter = (string) (abs($actual) > PHP_INT_MAX ? 0 : $actual);
+                $atom->noDelimiter = $actual;
                 break;
 
             case 'Float' :

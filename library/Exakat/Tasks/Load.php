@@ -443,8 +443,12 @@ class Load extends Tasks {
     }
 
     public function runPlugins(Atom $atom, array $linked = array()): void {
-        foreach($this->plugins as $plugin) {
-            $plugin->run($atom, $linked);
+        try {
+            foreach($this->plugins as $plugin) {
+                $plugin->run($atom, $linked);
+            }
+        } catch (\Throwable $t) {
+            print $t->getMessage().' '.$t->getFile().' '.$t->getLine();
         }
     }
 
@@ -858,11 +862,10 @@ class Load extends Tasks {
             $this->addLink($id1, $sequence, 'FILE');
             $sequence->root = true;
         } catch (LoadError $e) {
-//            print_r($this->expressions[0]);
             $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
             $this->reset();
             $this->calls->reset();
-            throw new NoFileToProcess($filename, 'empty', 0, $e);
+            throw new NoFileToProcess($filename, 'empty (1)', 0, $e);
         } finally {
             try {
                 $this->checkTokens($filename);
@@ -871,7 +874,7 @@ class Load extends Tasks {
                 $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (finally) (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
                 $this->reset();
                 $this->calls->reset();
-                throw new NoFileToProcess($filename, 'empty', 0, $e);
+                throw new NoFileToProcess($filename, 'empty (2)', 0, $e);
             }
 
             $this->stats['totalLoc'] += $line;
@@ -4751,8 +4754,8 @@ class Load extends Tasks {
 
         $this->pushExpression($integer);
         $this->runPlugins($integer);
-
         $this->checkExpression();
+
 
         return $integer;
     }

@@ -20,6 +20,8 @@
  *
 */
 
+declare( strict_types = 1);
+
 namespace Exakat\Tasks\Helpers;
 
 class IsRead extends Plugin {
@@ -30,7 +32,7 @@ class IsRead extends Plugin {
                                'Phpvariable', 'This',
                                'Array', );
 
-    public function run($atom, $extras) {
+    public function run(Atom $atom, array $extras) : void {
         switch ($atom->atom) {
             case 'Assignation' :
                 if (in_array($extras['RIGHT']->atom, $this->variables, STRICT_COMPARISON)) {
