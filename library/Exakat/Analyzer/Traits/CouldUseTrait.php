@@ -30,6 +30,7 @@ class CouldUseTrait extends Analyzer {
     // class x could use trait i but it was forgotten
 
     public function analyze() {
+        return;
         // Custom traits
         $this->atomIs('Trait')
              ->as('name')

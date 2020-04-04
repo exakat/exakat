@@ -1860,7 +1860,7 @@ GREMLIN
                              );
         }
 
-        if (!empty($values)) {
+        if (!empty($toDump)) {
             $total = $this->storeToDumpArray('hashResults', $toDump);
         } else {
             $total = 0;

@@ -44,9 +44,9 @@ class Install extends Tasks {
             print "Zip 3.0 : OK\n";
         }
 
-        if (!empty($errors)) {
-            $errors[] = 'Fix the above ' . count($errors) . " and try again\n";
-            print implode(PHP_EOL, $errors) . PHP_EOL;
+        if (!empty($error)) {
+            $errors[] = 'Fix the above ' . count($error) . " and try again\n";
+            print implode(PHP_EOL, $error) . PHP_EOL;
             die();
         }
 

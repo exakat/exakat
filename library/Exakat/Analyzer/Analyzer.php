@@ -74,6 +74,9 @@ abstract class Analyzer {
     private static $calledTraits          = null;
     private static $calledNamespaces      = null;
     private static $calledDirectives      = null;
+    
+    private static $jsonCache = [];
+    private static $iniCache  = [];
 
     private   $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerTitle    = '';       // Name use when storing in the dump.sqlites
@@ -83,7 +86,6 @@ abstract class Analyzer {
     protected $queryId          = 0;
     
     protected $analyzerName      = 'no analyzer name';
-//    protected $analyzerTable     = 'no analyzer table name';
     private   $lastAnalyzerTable = 'none';
     protected $analyzerSQLTable = 'no analyzer sql creation';
     protected $missingQueries   = array();
@@ -525,23 +527,6 @@ GREMLIN;
         }
 
         return $result;
-    }
-
-    public function queryHash($queryString, $arguments = array()) {
-        try {
-            $result = $this->gremlin->query($queryString, $arguments);
-        } catch (GremlinException $e) {
-            display($e->getMessage() .
-                    $queryString);
-            $result = new \StdClass();
-            $result->processed = 0;
-            $result->total = 0;
-            return array($result);
-        }
-        
-        $return = array_combine(array_column($row, 'key'), array_column($row, 'value'));
-
-        return $return;
     }
 
     public function side() {
@@ -2145,23 +2130,19 @@ GREMLIN
             assert(false, "No INI for '$file'.");
         }
 
-        static $cache;
-
-        if (!isset($cache[$fullpath])) {
-            $cache[$fullpath] = $ini;
+        if (!isset(self::$iniCache[$fullpath])) {
+            self::$iniCache[$fullpath] = $ini;
         }
 
-        if ($index !== null && isset($cache[$fullpath]->$index)) {
-            return $cache[$fullpath]->$index;
+        if ($index !== null && isset($iniCache[$fullpath]->$index)) {
+            return self::$iniCache[$fullpath]->$index;
         }
 
-        return $cache[$fullpath];
+        return self::$iniCache[$fullpath];
     }
 
     protected function loadJson($file, $property = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
-
-        static $cache = array();
 
         if (!isset($cache[$fullpath])) {
             if (file_exists($fullpath)) {
@@ -2177,11 +2158,11 @@ GREMLIN
             $cache[$fullpath] = $json;
         }
 
-        if ($property !== null && isset($cache[$fullpath]->$property)) {
-            return $cache[$fullpath]->$property;
+        if ($property !== null && isset(self::$jsonCache[$fullpath]->$property)) {
+            return self::$jsonCache[$fullpath]->$property;
         }
 
-        return $cache[$fullpath];
+        return self::$jsonCache[$fullpath];
     }
     
     protected function load(string $file, $property = null) {

@@ -63,7 +63,7 @@ class Project extends Tasks {
         }
 
         if (!$this->config->project->validate()) {
-            throw new InvalidProjectName($project->getError());
+            throw new InvalidProjectName($this->config->project->getError());
         }
 
         if ($this->config->gremlin === 'NoGremlin') {

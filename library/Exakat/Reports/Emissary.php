@@ -1161,7 +1161,7 @@ JAVASCRIPTCODE;
             $linediff[$row['file']][$row['line']] = $row['diff'];
         }
 
-        $oldIssues = $this->getIssuesFacetedDb($theme, $sqlite);
+        $oldIssues = $this->getIssuesFacetedDb($ruleset, $sqlite);
         foreach($oldIssues as &$issue) {
             $i = json_decode($issue);
             // Skip wrong lines, but why ?

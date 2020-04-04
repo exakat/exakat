@@ -34,7 +34,7 @@ abstract class Data {
 
     public function __construct(string $name) {
         $this->name = $name;
-        $this->$config = exakat('config');
+        $this->config = exakat('config');
 
         $fullpath = $this->config->dir_root . "/data/$name.sqlite";
         if ($this->config->is_phar) {

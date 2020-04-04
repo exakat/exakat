@@ -565,10 +565,6 @@ class Load extends Tasks {
             $nbTokens = $this->runProjectCore($files);
         }
 
-        if (isset($progressBar)) {
-            echo $progressBar->advance();
-        }
-
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
     }
