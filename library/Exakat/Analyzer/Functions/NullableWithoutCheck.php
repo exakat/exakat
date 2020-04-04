@@ -26,8 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class NullableWithoutCheck extends Analyzer {
     public function analyze() {
+        // function foo(?D $c) { echo $c->d;} // No check, but nullable??
         $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
              ->is('nullable', true)
+             ->back('first')
              ->not(
                 $this->side()
                      ->outIs('NAME')
