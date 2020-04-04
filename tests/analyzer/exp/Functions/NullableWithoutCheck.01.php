@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('?E $e',
-                      '?D $d',
+$expected     = array('$e',
+                      '$d',
                      );
 
 $expected_not = array('$a',

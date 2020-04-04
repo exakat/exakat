@@ -10,7 +10,6 @@ $expected     = array('$yyy',
                       '$xy = 2',
                       '$x',
                       '$staticxywd = 2',
-                      '$y',
                       '$yyt',
                       '$yyyt',
                       '$t',
@@ -25,6 +24,7 @@ $expected_not = array('$t',
                       '$xWithDefault',
                       '$x2',
                       '$x',
+                      '$t = 2',
                      );
 
 ?>
