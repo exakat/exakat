@@ -153,8 +153,6 @@ class Analyze extends Tasks {
             return ;
         }
 
-//        $analyzers[$analyzer_class]->init();
-
         if ($this->config->noDependencies === true) {
             $dependencies[$analyzer_class] = array();
         } else {
@@ -177,16 +175,12 @@ class Analyze extends Tasks {
             return false;
         }
 
-        if (isset($this->analyzed[$analyzer_class])) {
-            if ($this->config->noRefresh === true) {
+        if (isset($this->analyzed[$analyzer_class]) && $this->config->noRefresh === true) {
                 display( "$analyzer_class is already processed (1)\n");
                 return $this->analyzed[$analyzer_class];
-            } else {
-                print "Skip analysis for $analyzer_class\n";
-            }
-        } else {
-            $analyzer->init();
         }
+
+        $analyzer->init();
 
         if (!(!isset($this->analyzed[$analyzer_class]) ||
               $this->config->noRefresh !== true)         ) {
