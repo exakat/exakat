@@ -221,8 +221,8 @@ SQL;
     public function getFunctionsByReturn() {
         $return = array();
 
-        $query = <<<'SQL'
-SELECT return, lower(GROUP_CONCAT('\' || name)) AS functions FROM args_type WHERE class='PHP' GROUP BY return
+        $query = <<<SQL
+SELECT return, lower(GROUP_CONCAT('\' || name)) AS functions FROM args_type WHERE class='PHP' AND return IS NOT NULL GROUP BY return
 SQL;
         $res = $this->sqlite->query($query);
 

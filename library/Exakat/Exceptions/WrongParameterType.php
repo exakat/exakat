@@ -19,34 +19,14 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-declare (strict_types = 1);
 
-namespace Exakat\Analyzer\Structures;
+declare(strict_types = 1);
 
-use Exakat\Analyzer\Analyzer;
+namespace Exakat\Exceptions;
 
-class CastToBoolean extends Analyzer {
-    public function analyze() {
-        // $a == 1 ? 1 : 0
-        $this->atomIs('Ternary')
-             ->outIs('THEN')
-             ->atomIs('Integer')
-             ->codeIs(array("0", "1"))
-             ->inIs('THEN')
-             ->outIs('ELSE')
-             ->codeIs(array("0", "1"))
-             ->back('first');
-        $this->prepareQuery();
-
-        // $a == 1 ? true : false
-        $this->atomIs('Ternary')
-             ->outIs('THEN')
-             ->atomIs('Boolean')
-             ->inIs('THEN')
-             ->outIs('ELSE')
-             ->atomIs('Boolean')
-             ->back('first');
-        $this->prepareQuery();
+class WrongParameterType extends \RuntimeException {
+    public function __construct(string $vcs = '', string $message = '') {
+        parent::__construct("$vcs reported an error and no code could be loaded : $message.", 0, null);
     }
 }
 

@@ -1849,12 +1849,19 @@ GREMLIN
         // instanceof ?
     }
 
-    private function collectHashCounts(string $query, string $name): void {
-        $index = $this->gremlin->query($query);
+    private function collectHashCounts($query, string $name): void {
+        if ($query instanceof Query) {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $index = $result->toArray()[0];
+        } else {
+            $index = $this->gremlin->query($query);
+            $index = $index->toArray()[0];
+        }
 
         $toDump = array();
-        foreach($index->toArray()[0] as $number => $count) {
-            $toDump[] = array($name,
+        foreach($index as $number => $count) {
+            $toDump[] = array('',
+                              $name,
                               $number,
                               $count,
                              );
@@ -2062,13 +2069,21 @@ GREMLIN;
 
     private function collectNativeCallsPerExpressions(): void {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
-        $query = <<<GREMLIN
-g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(["Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"]))).as("results")
-.groupCount("m").by( __.emit( ).repeat( __.out($this->linksDown).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel("Functioncall")
+
+        $query = $this->newQuery('collectNativeCallsPerExpressions');
+        $query->atomIs('Sequence', Analyzer::WITHOUT_CONSTANTS)
+              ->outIs('EXPRESSION')
+              ->atomIsNot(array("Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"), Analyzer::WITHOUT_CONSTANTS)
+              ->_as('results')
+              ->raw(<<<GREMLIN
+groupCount("m").by( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel("Functioncall")
       .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
       .count()
 ).cap("m")
-GREMLIN;
+GREMLIN
+,array(), array()
+);
+        $query->prepareRawQuery();
         $this->collectHashCounts($query, 'NativeCallPerExpression');
     }
 

@@ -31,7 +31,7 @@ class Ports extends Analyzer {
         $ports = $this->load('ports', 'port');
         
         $this->atomIs('Integer')
-             ->codeIs(array_keys($ports));
+             ->codeIs(array_map(function (int $i) : string { return (string) $i; }, array_keys($ports)));
         $this->prepareQuery();
     }
 }

@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 use Exakat\Exceptions\NoSuchDir;
 use Exakat\Container;
-use Exakat\Exception\WrongParameterType;
+use Exakat\Exceptions\WrongParameterType;
 
 const INI_PROCESS_SECTIONS      = true;
 const INI_DONT_PROCESS_SECTIONS = false;

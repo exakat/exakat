@@ -19,7 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Data;
 
@@ -40,7 +40,7 @@ class Dictionary {
     private function init(): void {
         $this->dictionary = $this->datastore->getAllHash('dictionary');
         foreach(array_keys($this->dictionary) as $key) {
-            $this->lcindex[mb_strtolower($key)] = 1;
+            $this->lcindex[mb_strtolower((string)$key)] = 1;
         }
     }
 
@@ -59,6 +59,10 @@ class Dictionary {
         }
 
         foreach($code as $c) {
+            if (!is_string($c)) {
+                debug_print_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS);
+                var_dump($c);die();
+            }
             $d = $caseClosure($c);
             if (isset($this->dictionary[$d])) {
                 $return[] = $this->dictionary[$d];

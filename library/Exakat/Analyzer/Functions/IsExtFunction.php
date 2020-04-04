@@ -19,7 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Functions;
 
@@ -29,13 +29,13 @@ class IsExtFunction extends Analyzer {
 
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        
-        $f = array($this->loadIni('php_functions.ini', 'functions'));
+
+        $f = array((array) $this->loadIni('php_functions.ini', 'functions'));
         foreach($exts as $ext) {
             $ini = $this->load( str_replace('Extensions\\Ext', '', $ext), 'functions');
 
             if (!empty($ini[0])) {
-                $f[] = $ini;
+                $f[] =  $ini;
             }
         }
         $functions = array_merge(...$f);

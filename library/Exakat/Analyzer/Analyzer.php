@@ -2111,11 +2111,11 @@ GREMLIN
     protected function loadIni(string $file, string $index = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
         
-        if (isset($cache[$fullpath]->$index)) {
+        if (isset(self::$iniCache[$fullpath]->$index)) {
             if ($index === null) {
-                return $cache[$fullpath];
+                return self::$iniCache[$fullpath];
             } else {
-                return $cache[$fullpath]->$index;
+                return self::$iniCache[$fullpath]->$index;
             }
         }
 
@@ -2134,7 +2134,7 @@ GREMLIN
             self::$iniCache[$fullpath] = $ini;
         }
 
-        if ($index !== null && isset($iniCache[$fullpath]->$index)) {
+        if ($index !== null && isset(self::$iniCache[$fullpath]->$index)) {
             return self::$iniCache[$fullpath]->$index;
         }
 
@@ -2144,7 +2144,7 @@ GREMLIN
     protected function loadJson($file, $property = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
 
-        if (!isset($cache[$fullpath])) {
+        if (!isset(self::$jsonCache[$fullpath])) {
             if (file_exists($fullpath)) {
                 $json = json_decode(file_get_contents($fullpath), \JSON_OBJECT);
             } elseif ((!$this->config->ext !== null) && !empty($jsonString = $this->config->ext->loadData("data/$file"))) {
@@ -2155,7 +2155,7 @@ GREMLIN
                 assert(false, "No JSON for '$file'.");
             }
 
-            $cache[$fullpath] = $json;
+            self::$jsonCache[$fullpath] = $json;
         }
 
         if ($property !== null && isset(self::$jsonCache[$fullpath]->$property)) {

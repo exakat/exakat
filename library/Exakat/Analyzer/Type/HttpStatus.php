@@ -31,13 +31,13 @@ class HttpStatus extends Analyzer {
         
         // $http = "418";
         $this->atomIs('Integer')
-             ->codeIs(array_keys($ini));
+             ->codeIs(array_map(function (int $i) : string { return (string) $i; }, array_keys($ini)));
         $this->prepareQuery();
 
         // $code = "418";
         $this->atomIs('String')
              ->has('noDelimiter')
-             ->noDelimiterIs(array_keys($ini));
+             ->noDelimiterIs(array_map(function (int $i) : string { return (string) $i; }, array_keys($ini)));
         $this->prepareQuery();
     }
 }

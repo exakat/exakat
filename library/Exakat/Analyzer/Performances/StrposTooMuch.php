@@ -33,7 +33,7 @@ class StrposTooMuch extends Analyzer {
              ->codeIs(array('==', '==='))
              ->outIs('RIGHT')
              ->has('intval')
-             ->codeIs(0)
+             ->codeIs(array("0"))
              ->back('first');
         $this->prepareQuery();
     }

@@ -81,7 +81,7 @@ class ProjectConfig extends Config {
     }
 
     public function loadConfig($project) {
-        $this->project = new Project($project);
+        $this->project = $project;
 
         $pathToIni = "{$this->projects_root}{$project}/config.ini";
         if (!file_exists($pathToIni)) {
