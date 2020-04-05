@@ -30,7 +30,7 @@ class TraitUsage extends CommonTraitUsage {
 
     public function analyze() {
         // class x { use trait; }
-        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
+        $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('USE')
              ->atomIs('Usetrait');
         $this->prepareQuery();

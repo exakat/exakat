@@ -146,6 +146,7 @@ abstract class Analyzer {
 
     public static $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     public static $CLASSES_ALL      = array('Class', 'Classanonymous');
+    public const CLASSES_TRAITS   = array('Class', 'Classanonymous', 'Trait');
     public static $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     public static $STATIC_NAMES     = array('Nsname', 'Identifier');
     public static $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
@@ -1411,7 +1412,7 @@ GREMLIN;
         return $this->hasNoInstruction('Trait');
     }
 
-    public function goToClassTrait($classes = array('Trait', 'Class', 'Classanonymous')) {
+    public function goToClassTrait($classes = self::CLASSES_TRAITS) {
         $this->goToInstruction($classes);
         
         return $this;

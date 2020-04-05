@@ -34,7 +34,7 @@ class UsedPrivateProperty extends Analyzer {
     public function analyze() {
         // property used in a staticproperty \a\b::$b
         // a property must be read to be used.
-        $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
+        $this->atomIs(self::CLASSES_TRAITS)
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('PPP')
              ->atomIs('Ppp')
@@ -45,14 +45,14 @@ class UsedPrivateProperty extends Analyzer {
              ->outIs('DEFINITION')
              ->atomIs('Staticproperty')
              ->is('isRead', true)
-             ->goToClassTrait(array('Trait', 'Class', 'Classanonymous'))
+             ->goToClassTrait(self::CLASSES_TRAITS)
              ->samePropertyAs('fullnspath', 'fqn')
              ->back('ppp');
         $this->prepareQuery();
 
         // property used in a normal propertycall with $this $this->b
         // a property must be read to be used.
-        $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
+        $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->is('visibility', 'private')
@@ -69,7 +69,7 @@ class UsedPrivateProperty extends Analyzer {
 
         // property used in a normal propertycall with $this $this->b, from a trait
         // a property must be read to be used.
-        $this->atomIs(array('Trait', 'Class', 'Classanonymous'))
+        $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->is('visibility', 'private')

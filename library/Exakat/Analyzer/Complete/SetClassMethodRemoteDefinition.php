@@ -41,7 +41,7 @@ class SetClassMethodRemoteDefinition extends Complete {
                      ->prepareSide()
               )
               ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'), self::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_TRAITS, self::WITHOUT_CONSTANTS)
               ->goToAllParents(self::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')

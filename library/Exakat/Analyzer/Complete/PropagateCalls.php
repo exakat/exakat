@@ -581,7 +581,7 @@ class PropagateCalls extends Complete {
               ->atomIs(array('Method', 'Magicmethod'))
               ->inIs(array('METHOD', 'MAGICMETHOD'))
 
-              ->atomIs(array('Class', 'Classanonymous', 'Trait'), self::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_TRAITS, self::WITHOUT_CONSTANTS)
               ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')

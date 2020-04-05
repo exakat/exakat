@@ -30,7 +30,7 @@ class HasMagicProperty extends Analyzer {
         $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Nsname that is not used somewhere else
-        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
+        $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->outIs('NAME')

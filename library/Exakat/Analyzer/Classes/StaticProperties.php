@@ -29,7 +29,7 @@ class StaticProperties extends Analyzer {
 
     public function analyze() {
         // class x { static $y = 3;}
-        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
+        $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->is('static', true)

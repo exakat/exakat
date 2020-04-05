@@ -32,7 +32,7 @@ class PropertyVariableConfusion extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('PPP')
              ->inIs('PPP')
-             ->atomIs(array('Class', 'Trait', 'Classanonymous'))
+             ->atomIs(self::CLASSES_TRAITS)
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
