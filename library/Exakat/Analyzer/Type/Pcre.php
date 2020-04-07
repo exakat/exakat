@@ -19,16 +19,21 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class Pcre extends Analyzer {
+class Pcre extends AnalyzerDump {
+    protected $analyzerName = 'Pcre';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
-        $atoms = array('String', 'Concatenation');
-        
         $delimiters = array('\\$'     => '\\$',
                             '#'       => '#',
                             '~'       => '~',
@@ -42,7 +47,7 @@ class Pcre extends Analyzer {
         
         foreach($delimiters as $in => $out) {
             // regex like $in....$out
-            $this->atomIs($atoms)
+            $this->atomIs(self::STRINGS_LITERALS)
                  ->regexIs('fullcode', '^([\'\\"])' . $in . '[^' . $out . ']+?' . $out . '[imsxeADSUXJu]*[\'\\"]');
             $this->prepareQuery();
         }

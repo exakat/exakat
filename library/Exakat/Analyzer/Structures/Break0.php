@@ -19,7 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Structures;
 
@@ -32,7 +32,7 @@ class Break0 extends Analyzer {
         $this->atomIs('Break')
              ->outIs('LEVEL')
              ->atomIs('Integer')
-             ->codeIs(0)
+             ->codeIs('0')
              ->back('first');
         $this->prepareQuery();
     }

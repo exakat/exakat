@@ -19,7 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Arrays;
 
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class Arrayindex extends AnalyzerDump {
-    protected $analyzerName = 'CharString';
+    protected $analyzerName = 'Arrayindex';
 
     protected $storageType = self::QUERY_RESULTS;
 

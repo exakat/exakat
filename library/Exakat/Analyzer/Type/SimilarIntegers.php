@@ -19,9 +19,11 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
 class SimilarIntegers extends Analyzer {
@@ -29,6 +31,7 @@ class SimilarIntegers extends Analyzer {
         // $x = 10; $y = 0xa; $z = -+-10;
         $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication', 'Sign', 'Bitshift'))
              ->has('intval')
+             ->isNot('intval', array(0, 1))
              ->raw(<<<'GREMLIN'
 group("m").by("intval").by("fullcode").cap("m").next().findAll{ a,b -> b.unique().size() > 1}
 GREMLIN

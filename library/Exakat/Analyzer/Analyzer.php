@@ -39,20 +39,21 @@ use Exakat\Query\DSL\FollowParAs;
 use Exakat\Project;
 
 abstract class Analyzer {
-    // Query types
-    const QUERY_DEFAULT     = 1;   // For compatibility purposes
-    const QUERY_ANALYZER    = 2;   // same as above, but explicit
-    const QUERY_VALUE       = 3;   // returns a single value
-    const QUERY_RAW         = 4;   // returns data, no storage
-    const QUERY_HASH        = 5;   // returns a list of values
-    const QUERY_MULTIPLE    = 6;   // returns several links at the same time (TBD)
-    const QUERY_ARRAYS      = 7;   // arrays of array
-    const QUERY_TABLE       = 8;   // to specific table
-    const QUERY_MISSING     = 9;   // store values that are not in the graph
-    const QUERY_PHP_ARRAYS  = 10;  // store a PHP array of values into hashResults
-    const QUERY_PHP_HASH    = 11;  // store a PHP array of values into hashResults
-    const QUERY_NO_ANALYZED = 12;  // store links, but not the ANALYZED one
-    const QUERY_RESULTS     = 13;  // store results directly to dump, no ANALYZED
+    // Query types  
+    const QUERY_DEFAULT       = 1;   // For compatibility purposes
+    const QUERY_ANALYZER      = 2;   // same as above, but explicit
+    const QUERY_VALUE         = 3;   // returns a single value
+    const QUERY_RAW           = 4;   // returns data, no storage
+    const QUERY_HASH          = 5;   // returns a list of values
+    const QUERY_MULTIPLE      = 6;   // returns several links at the same time (TBD)
+    const QUERY_ARRAYS        = 7;   // arrays of array
+    const QUERY_TABLE         = 8;   // to specific table
+    const QUERY_MISSING       = 9;   // store values that are not in the graph
+    const QUERY_PHP_ARRAYS    = 10;  // store a PHP array of values into hashResults
+    const QUERY_PHP_HASH      = 11;  // store a PHP array of values into hashResults
+    const QUERY_NO_ANALYZED   = 12;  // store links, but not the ANALYZED one
+    const QUERY_RESULTS       = 13;  // store results directly to dump, no ANALYZED
+    const QUERY_HASH_ANALYZER = 14;  // store results directly to hashAnalyzer
 
     protected $datastore  = null;
 
@@ -146,7 +147,7 @@ abstract class Analyzer {
 
     public static $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     public static $CLASSES_ALL      = array('Class', 'Classanonymous');
-    public const CLASSES_TRAITS   = array('Class', 'Classanonymous', 'Trait');
+    public const  CLASSES_TRAITS    = array('Class', 'Classanonymous', 'Trait');
     public static $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     public static $STATIC_NAMES     = array('Nsname', 'Identifier');
     public static $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
@@ -158,6 +159,7 @@ abstract class Analyzer {
     public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
     public static $STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String', 'Identifier', 'Nsname');
+    public const  STRINGS_LITERALS  = array('Concatenation', 'Heredoc', 'String');
 
     public static $CONSTANTS_ALL    = array('Identifier', 'Nsname');
 
@@ -1753,6 +1755,10 @@ GREMLIN;
             case self::QUERY_RESULTS:
                 $this->storeToResults();
                 break;
+            
+            case self::QUERY_HASH_ANALYZER:
+                $this->storeArraysToHashAnalyzer();
+                break;
 
             case self::QUERY_DEFAULT:
             default:
@@ -2026,6 +2032,29 @@ GREMLIN
         return count($valuesSQL);
     }
 
+    private function storeArraysToHashAnalyzer() {
+        $this->processedCount += count($this->analyzerValues);
+        $this->rowCount       += count($this->analyzerValues);
+
+        $valuesSQL = array();
+        $chunk = 0;
+        foreach($this->analyzerValues as $values) {
+            $values = array_map(array('\\Sqlite3', 'escapeString'), $values);
+            $valuesSQL[] = "('".join("', '", $values)."') \n";
+        }
+
+        $dumpQueries = array("DELETE FROM hashAnalyzer WHERE name = '{$this->analyzerName}'");
+        $chunks = array_chunk($valuesSQL, 490);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
+            $dumpQueries[] = $query;
+        }
+
+        $this->prepareForDump($dumpQueries);
+
+        return count($valuesSQL);
+    }
+
     private function storeToGraph(bool $analyzed = true) : void {
         ++$this->queryId;
 
@@ -2072,7 +2101,7 @@ GREMLIN
         die(__METHOD__);
     }
     
-    private function initNewQuery() {
+    private function initNewQuery() : void {
         $this->query = new Query((count($this->queries) + 1),
                                   new Project('test'),
                                   $this->analyzerQuoted,
@@ -2080,9 +2109,9 @@ GREMLIN
                                   $this->datastore);
     }
 
-    public function execQuery() {
+    public function execQuery() : int {
         if (empty($this->queries)) {
-            return true;
+            return 0;
         }
 
         // @todo add a test here ?

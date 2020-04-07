@@ -23,10 +23,16 @@
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class Path extends Analyzer {
-    
+class Path extends AnalyzerDump {
+    protected $analyzerName = 'Path';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
         $protocols = array('http',
                            'https',
@@ -53,7 +59,8 @@ class Path extends Analyzer {
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
              ->has('noDelimiter')
-             ->analyzerIsNot('self');
+             ->analyzerIsNot('self')
+             ->toResults();
         $this->prepareQuery();
         
     }

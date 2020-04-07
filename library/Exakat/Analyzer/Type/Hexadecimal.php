@@ -19,13 +19,20 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 
-class Hexadecimal extends Analyzer {
+class Hexadecimal extends AnalyzerDump {
+    protected $analyzerName = 'Hexadecimal';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
         // $a = 0x123ee;
         $this->atomIs('Integer')

@@ -19,6 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
@@ -26,7 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class DuplicateLiteral extends Analyzer {
     protected $minDuplicate = 15;
-    
+
+    protected $analyzerName = 'Type/DuplicateLiteral';
+
+    protected $storageType = self::QUERY_HASH_ANALYZER;
+
     public function analyze() {
         // No need for boolean and null
         $this->atomIs(array('String', 'Heredoc'))
@@ -40,34 +45,21 @@ class DuplicateLiteral extends Analyzer {
               )
              ->raw('groupCount("m").by("noDelimiter").cap("m").next().findAll{ it.value >= ' . $this->minDuplicate . '; }');
         $strings = $this->rawQuery();
-        
+
         if (!empty($strings->toArray())) {
-            $results = array();
-            $store = array();
             foreach($strings->toArray() as $v) {
                 foreach($v as $key => $value)  {
                     $results[] = $key;
-                    $store[] = compact('key', 'value');
+                    $this->analyzerValues[] = array($this->analyzerName, $key, $value);
                 }
             }
 
-            $this->atomIs('String')
-                 ->hasNoIn('INDEX')
-                 ->noDelimiterIsNot(array(''))
-                 ->not(
-                    $this->side()
-                         ->inIs('VALUE')
-                         ->atomIs(array('Constant', 'Defineconstant'))
-                  )
-                 ->noDelimiterIs($results);
             $this->prepareQuery();
-
-            $this->datastore->addRowAnalyzer($this->analyzerQuoted, $store);
         }
 
         $this->atomIs(array('Integer', 'Float'))
              ->hasNoIn('INDEX') // Skipping arrays $x[0]
-             ->fullcodeIsNot(array(0, 1, 2, 10))  // skip some values
+             ->fullcodeIsNot(array('0', '1', '2', '10'))  // skip some values
              ->not(
                 $this->side()
                      ->inIs('VALUE')
@@ -77,26 +69,14 @@ class DuplicateLiteral extends Analyzer {
         $integers = $this->rawQuery();
         
         if (!empty($integers->toArray())) {
-            $results = array();
-            $store = array();
             foreach($integers->toArray() as $v) {
                 foreach($v as $key => $value)  {
                     $results[] = $key;
-                    $store[] = compact('key', 'value');
+                    $this->analyzerValues[] = array($this->analyzerName, $key, $value);
                 }
             }
 
-            $this->atomIs(array('Integer', 'Float'))
-                 ->hasNoIn('INDEX')
-                 ->not(
-                    $this->side()
-                         ->inIs('VALUE')
-                         ->atomIs(array('Constant', 'Defineconstant'))
-                  )
-                 ->fullcodeIs($results);
             $this->prepareQuery();
-
-            $this->datastore->addRowAnalyzer($this->analyzerQuoted, $store);
         }
         
         // could we do this for array?

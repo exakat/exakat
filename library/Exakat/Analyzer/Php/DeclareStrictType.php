@@ -20,6 +20,8 @@
  *
 */
 
+declare(strict_types = 1);
+
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
@@ -40,7 +42,7 @@ class DeclareStrictType extends Analyzer {
              ->codeIs('strict_types')
              ->inIs('NAME')
              ->outIs('VALUE')
-             ->codeIs(1)
+             ->codeIs("1")
              ->back('first');
         $this->prepareQuery();
     }

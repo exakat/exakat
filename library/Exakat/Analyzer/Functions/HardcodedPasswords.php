@@ -19,7 +19,7 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-
+declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Functions;
 
@@ -42,7 +42,7 @@ class HardcodedPasswords extends Analyzer {
             $function = makeFullNsPath($function);
             $this->atomFunctionIs($function)
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+                 ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -54,12 +54,12 @@ class HardcodedPasswords extends Analyzer {
              ->atomIs('Keyvalue')
              ->as('value')
              ->outIs('INDEX')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->has('noDelimiter')
              ->noDelimiterIs($passwordsKeys, self::CASE_SENSITIVE)
              ->back('value')
              ->outIs('VALUE')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->regexIsNot('code', '/required/')
              ->back('first');
         $this->prepareQuery();
@@ -76,7 +76,7 @@ class HardcodedPasswords extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->regexIsNot('code', '/required/')
              ->back('first');
         $this->prepareQuery();

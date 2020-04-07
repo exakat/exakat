@@ -20,11 +20,20 @@
  *
 */
 
+declare(strict_types = 1);
+
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
 class Printf extends Analyzer {
+    protected $analyzerName = 'Printf';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
         $functions = array('\\printf',
                            '\\sscanf',
