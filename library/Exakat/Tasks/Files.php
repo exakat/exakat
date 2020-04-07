@@ -32,6 +32,8 @@ use Exakat\Vcs\Vcs;
 
 class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
+    
+    private $tmpFileName = '';
 
     public function run() {
         $stats = array();
@@ -60,13 +62,13 @@ class Files extends Tasks {
         self::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
         display('Found ' . count($files) . " files.\n");
 
-        $tmpFileName = "{$this->config->tmp_dir}/files{$this->config->pid}.txt";
+        $this->tmpFileName = "{$this->config->tmp_dir}/files{$this->config->pid}.txt";
         $tmpFiles = array_map(function ($file) {
             return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ';', '&', '`', '|', "\t"),
                                array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', '\\;', '\\&', '\\`', '\\|', "\\\t", ),
                                ".$file");
                                }, $files);
-        file_put_contents($tmpFileName, implode("\n", $tmpFiles));
+        file_put_contents($this->tmpFileName, implode("\n", $tmpFiles));
 
         $versions = Config::PHP_VERSIONS;
 
@@ -99,10 +101,10 @@ class Files extends Tasks {
             $stats["notCompilable$version"] = -1;
 
             $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
-            $resFiles = $php->compileFiles($this->config->code_dir, $tmpFileName);
+            $resFiles = $php->compileFiles($this->config->code_dir, $this->tmpFileName);
         }
 
-        $shell = "nohup php server/lint_short_tags.php {$this->config->php} {$this->config->project_dir} $tmpFileName >/dev/null & echo $!";
+        $shell = "nohup php server/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {this->tmpFileName} >/dev/null & echo $!";
         shell_exec($shell);
 
         $vcsClass = Vcs::getVcs($this->config);
@@ -319,6 +321,12 @@ class Files extends Tasks {
                 $ignoredFiles[$file] = "Ignored extension ($ext)";
                 continue;
             }
+        }
+    }
+    
+    function __destruct() {
+        if (file_exists($this->tmpFileName)) {
+            unlink($this->tmpFileName);
         }
     }
 }

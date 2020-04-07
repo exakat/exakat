@@ -134,11 +134,11 @@ class Datastore {
             if (is_array($row)) {
                 $d = array_values($row);
                 foreach($d as &$e) {
-                    $e = \Sqlite3::escapeString($e);
+                    $e = \Sqlite3::escapeString((string) $e);
                 }
                 unset($e);
             } else {
-                $d = array(\Sqlite3::escapeString($key), \Sqlite3::escapeString($row));
+                $d = array(\Sqlite3::escapeString((string) $key), \Sqlite3::escapeString((string) $row));
             }
 
             $values[] = '(' . makeList($d, "'") . ')';
