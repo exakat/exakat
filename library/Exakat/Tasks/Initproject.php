@@ -35,8 +35,6 @@ class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $project = new Project($this->config->project);
-
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
@@ -45,23 +43,23 @@ class Initproject extends Tasks {
             throw new InvalidProjectName('Can\t use test as project name.');
         }
 
-        if (!$project->validate()) {
+        if (!$this->config->project->validate()) {
             throw new InvalidProjectName($project->getError());
         }
 
         $repositoryURL = $this->config->repository;
 
         if ($this->config->delete === true) {
-            display("Deleting $project");
+            display("Deleting {$this->config->project}");
 
             // final wait..., just in case
             sleep(2);
 
-            rmdirRecursive("{$this->config->projects_root}/projects/$project");
+            rmdirRecursive("{$this->config->projects_root}/projects/{$this->config->project}");
         }
 
-        display("Initializing $project" . (!empty($repositoryURL) ? " with $repositoryURL" : '') );
-        $this->init_project($project, $repositoryURL);
+        display("Initializing {$this->config->project}" . (!empty($repositoryURL) ? " with $repositoryURL" : '') );
+        $this->init_project($this->config->project, $repositoryURL);
 
         display('Done');
     }

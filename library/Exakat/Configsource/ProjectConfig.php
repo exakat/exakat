@@ -76,8 +76,8 @@ class ProjectConfig extends Config {
         $this->projects_root = "$projects_root/projects/";
     }
 
-    public function setProject($project) {
-        $this->project = new Project($project);
+    public function setProject(Project $project) {
+        $this->project = $project;
     }
 
     public function loadConfig($project) {

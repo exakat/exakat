@@ -301,7 +301,8 @@ GREMLIN;
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
 
-        $query = <<<GREMLIN
+        if (file_exists($this->pathLink)) {
+            $query = <<<GREMLIN
 new File('$this->pathLink').eachLine {
     (theLabel, fromVertex, toVertex) = it.split('-');
 
@@ -309,8 +310,9 @@ new File('$this->pathLink').eachLine {
 }
 
 GREMLIN;
-        $this->graphdb->query($query);
-        unlink($this->pathLink);
+            $this->graphdb->query($query);
+            unlink($this->pathLink);
+        }
 
         $this->total = 0;
     }

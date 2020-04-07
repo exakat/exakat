@@ -25,7 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Exakat;
 
 class Ambassadornomenu extends Ambassador {
-    protected function getBasedPage($file) {
+    protected function getBasedPage($file) : string {
         static $baseHTML;
 
         if (empty($baseHTML)) {

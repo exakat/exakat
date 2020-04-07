@@ -1073,7 +1073,7 @@ HTML;
 
     protected function generateIssuesEngine(Section $section, array $issues = array()): void {
         if (empty($issues)) {
-            $issues = $this->getIssuesFaceted(makeArray($this->rulesets->getRulesetsAnalyzers($section->ruleset)));
+            $issues = $this->getIssuesFaceted(makeArray($this->rulesets->getRulesetsAnalyzers(makeArray($section->ruleset))));
         }
 
         $total = count($issues);
