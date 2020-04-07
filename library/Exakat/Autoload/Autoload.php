@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,7 +22,7 @@
 
 namespace Exakat\Autoload;
 
-include __DIR__.'/Autoloader.php';
+include __DIR__ . '/Autoloader.php';
 
 class Autoload implements Autoloader {
     public function autoload($name) {

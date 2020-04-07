@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat;
 
 class Project {
     public const IS_DEFAULT = '/unnamed/';
-    
+
     private $project  = self::IS_DEFAULT;
     private $error    = '';
 

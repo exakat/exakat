@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,28 +22,26 @@
 
 namespace Exakat\Autoload;
 
-use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Extensions\Extension;
 
-
 class AutoloadExt implements Autoloader {
     const LOAD_ALL = null;
-    
+
     private $pharList   = array();
     private $extensions = array();
-    
+
     public function __construct($path) {
         if (!extension_loaded('phar')) {
             // Ignoring it all
             return;
         }
         $list = glob("$path/*.phar", GLOB_NOSORT);
-        
+
         foreach($list as $phar) {
             $this->pharList[basename($phar, '.phar')] = $phar;
         }
-        
+
         // Add a list of check on the phars
         // Could we autoload everything ?
     }
@@ -63,10 +61,10 @@ class AutoloadExt implements Autoloader {
 
     public function registerAutoload() {
         spl_autoload_register(array($this, 'autoload'));
-        
+
         $this->checkExtensions();
     }
-    
+
     private function checkExtensions() {
         foreach($this->pharList as $name => $phar) {
             $className = "\Exakat\Extensions\\$name";
@@ -96,14 +94,14 @@ class AutoloadExt implements Autoloader {
             }
         }
     }
-    
+
     private function checkDependencies() {
         // Report missing extensions, but don't prevent them (some rules may still work, others will be ignored)
         foreach($this->extensions as $name => $extension) {
             $diff = array_diff($extension->dependsOnExtensions(), array_keys($this->pharList));
             if (!empty($diff)) {
                 // This is displayed for extensions and also for their dependencies, leading to repetition.
-                display("$name extension requires the following missing extension : ".implode(', ', $diff)."\nProcessing may be impacted.\nDownload the missing extensions with the 'extension' command.\n");
+                display("$name extension requires the following missing extension : " . implode(', ', $diff) . "\nProcessing may be impacted.\nDownload the missing extensions with the 'extension' command.\n");
             }
          }
     }
@@ -117,14 +115,14 @@ class AutoloadExt implements Autoloader {
 
         foreach($this->pharList as $name => $phar) {
             $fullPath = "phar://$phar/Exakat/Analyzer/analyzers.ini";
-            
+
             if (!file_exists($fullPath)) {
                 $return[] = array();
                 continue;
             }
             $ini = parse_ini_file($fullPath);
             unset($ini['All']); // And other pre-defined themes ?
-            
+
             $return[$name] = array_keys($ini);
         }
 
@@ -136,13 +134,13 @@ class AutoloadExt implements Autoloader {
 
         foreach($this->pharList as $name => $phar) {
             $fullPath = "phar://$phar/Exakat/Analyzer/analyzers.ini";
-            
+
             if (!file_exists($fullPath)) {
                 $return[] = array();
                 continue;
             }
             $ini = parse_ini_file($fullPath);
-            
+
             $return[$name] = $ini[$theme] ?? array();
         }
 
@@ -154,14 +152,14 @@ class AutoloadExt implements Autoloader {
 
         foreach($this->pharList as $name => $phar) {
             $fullPath = "phar://$phar/Exakat/Analyzer/analyzers.ini";
-            
+
             if (!file_exists($fullPath)) {
                 display("Missing analyzers.ini in $name\n");
                 $return[] = array();
                 continue;
             }
             $ini = parse_ini_file($fullPath);
-            
+
             $return[$name] = $ini;
         }
 
@@ -177,19 +175,19 @@ class AutoloadExt implements Autoloader {
             if (!file_exists($fullPath)) {
                 continue;
             }
-            
+
             $ini = parse_ini_file($fullPath, \INI_PROCESS_SECTIONS);
             if (empty($ini)) {
                 continue;
             }
-            
+
             if ($libel === self::LOAD_ALL) {
                 $return[] = $ini;
             } else {
                 $return[] = $ini[$libel];
             }
         }
-        
+
         if (empty($return)) {
             return array();
         }
@@ -206,7 +204,7 @@ class AutoloadExt implements Autoloader {
             if (!file_exists($fullPath)) {
                 continue;
             }
-            
+
             $json = file_get_contents($fullPath);
             if (empty($json)) {
                 continue;
@@ -220,7 +218,7 @@ class AutoloadExt implements Autoloader {
             if (empty($data)) {
                 continue;
             }
-            
+
             if ($libel === self::LOAD_ALL) {
                 $return[] = array_column($data, $libel);
             } else {
@@ -240,7 +238,7 @@ class AutoloadExt implements Autoloader {
                 $return[] = file_get_contents($fullPath);
             }
         }
-        
+
         return implode('', $return);
     }
 
@@ -252,7 +250,7 @@ class AutoloadExt implements Autoloader {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -264,7 +262,7 @@ class AutoloadExt implements Autoloader {
                 copy($fullPath, $to);
             }
         }
-        
+
         return null;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,14 +22,11 @@
 
 namespace Exakat;
 
-use Exakat\Config;
-use Exakat\Datastore;
 use Exakat\Data\Dictionary;
 use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
 use Exakat\Data\Methods;
 use Exakat\Analyzer\Rulesets;
-use Exakat\Phpexec;
 
 class Container {
     private $verbose    = 0;
@@ -43,24 +40,24 @@ class Container {
     private $methods    = null;
     private $rulesets   = null;
     private $php        = null;
-    
+
     public function init() {
         $this->config = new Config($GLOBALS['argv']);
 
         $this->verbose = $this->config->verbose;
         $this->phar    = $this->config->isPhar;
     }
-    
+
     public function __get(string $what) {
         assert(property_exists($this, $what), "No such element in the container : '$what'\n");
-        
+
         if ($this->$what === null) {
             $this->$what();
         }
 
         return $this->$what;
     }
-    
+
     private function graphdb() {
         $this->graphdb    = Graph::getConnexion();
     }
@@ -78,8 +75,8 @@ class Container {
     }
 
     private function docs() {
-        $this->docs = new Docs($this->config->dir_root, 
-                               $this->config->ext, 
+        $this->docs = new Docs($this->config->dir_root,
+                               $this->config->ext,
                                $this->config->dev
                                );
     }

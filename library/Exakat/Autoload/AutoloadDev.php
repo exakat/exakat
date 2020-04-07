@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,14 +22,13 @@
 
 namespace Exakat\Autoload;
 
-use Exakat\Config;
 use Phar;
 
 class AutoloadDev implements Autoloader {
     const LOAD_ALL = null;
 
     private $path = '';
-    
+
     public function __construct($path) {
         if (class_exists('\\Phar') && phar::running()) {
             // No autoloadDev with phar
@@ -40,12 +39,12 @@ class AutoloadDev implements Autoloader {
         $this->path = $path;
     }
 
-    public function autoload($name) : void {
-        if (empty($this->path)) { 
-            return; 
+    public function autoload($name): void {
+        if (empty($this->path)) {
+            return;
         }
 
-        $fileName = str_replace(array('Exakat\\', '\\'), array('', DIRECTORY_SEPARATOR), $name).'.php';
+        $fileName = str_replace(array('Exakat\\', '\\'), array('', DIRECTORY_SEPARATOR), $name) . '.php';
 
         if (file_exists("{$this->path}/$fileName")) {
             include "{$this->path}/$fileName";
@@ -74,12 +73,12 @@ class AutoloadDev implements Autoloader {
         if (!file_exists($fullPath)) {
             return array();
         }
-        
+
         $ini = parse_ini_file($fullPath, \INI_PROCESS_SECTIONS);
         if (empty($ini)) {
             return array();
         }
-        
+
         if ($libel === self::LOAD_ALL) {
             $return = $ini;
         } else {
@@ -95,7 +94,7 @@ class AutoloadDev implements Autoloader {
         if (!file_exists($fullPath)) {
             return array();
         }
-        
+
         $json = file_get_contents($fullPath);
         if (empty($json)) {
             return array();

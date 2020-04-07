@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -151,7 +151,7 @@ abstract class GraphElements {
     public static $ATOMS_EXAKAT = array('Analysis',
                                         'Noresult',
                                        );
-    
+
     public static $LINKS = array('APPEND',
                                  'ARGUMENT',
                                  'AS',
@@ -361,7 +361,7 @@ abstract class GraphElements {
                                        'Preplusplus'               => array('PREPLUSPLUS'),
                                        'Print'                     => array('ARGUMENT'),
                                        'Project'                   => array('PROJECT'),
-                                       'Propertydefinition'        => array('DEFAULT', 'NAME','DEFINITION', 'OVERWRITE'),
+                                       'Propertydefinition'        => array('DEFAULT', 'NAME', 'DEFINITION', 'OVERWRITE'),
                                        'Float'                     => array(),
                                        'Return'                    => array('RETURN'),
                                        'Scalartypehint'            => array(),

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,8 +22,6 @@
 
 namespace Exakat;
 
-use Exakat\Config;
-use Exakat\Exakat;
 use Exakat\Exceptions\WrongNumberOfColsForAHash;
 use Exakat\Exceptions\NoStructureForTable;
 
@@ -41,13 +39,13 @@ class Datastore {
         $this->config = exakat('config');
     }
 
-    function create() : void {
+    public function create(): void {
         if (file_exists($this->config->datastore)) {
             unlink($this->config->datastore);
         }
         // force creation
         $this->sqliteWrite = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
-    
+
         $this->cleanTable('hash');
         $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
                                     'exakat_build'         => Exakat::BUILD,
@@ -55,7 +53,7 @@ class Datastore {
                                     'project'              => $this->config->project,
                                     'write_acces'          => 0,
                                     ));
-    
+
         $this->cleanTable('hashAnalyzer');
         $this->cleanTable('analyzed');
         $this->cleanTable('tokenCounts');
@@ -68,22 +66,22 @@ class Datastore {
         $this->cleanTable('configFiles');
         $this->cleanTable('dictionary');
         $this->cleanTable('linediff');
-    
+
         $this->cleanTable('ignoredCit');
         $this->cleanTable('ignoredFunctions');
         $this->cleanTable('ignoredConstants');
-    
+
         $this->sqliteWrite->close();
         $this->sqliteWrite = null;
 
         $this->reuse();
     }
 
-    function reuse() : void {
+    public function reuse(): void {
         try {
             $this->sqliteWrite = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         } catch(\Throwable $e) {
-            return; 
+            return;
         }
 
         try {
@@ -101,7 +99,7 @@ class Datastore {
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
     }
 
-    public function addRow(string $table, $data) : bool {
+    public function addRow(string $table, $data): bool {
         if (empty($data)) {
             return true;
         }
@@ -142,9 +140,9 @@ class Datastore {
             } else {
                 $d = array(\Sqlite3::escapeString($key), \Sqlite3::escapeString($row));
             }
-            
+
             $values[] = '(' . makeList($d, "'") . ')';
-            
+
             if (count($values) > 10) {
                 $query = "REPLACE INTO $table ($colList) VALUES " . makeList($values, '');
                 $this->sqliteWrite->querySingle($query);
@@ -161,7 +159,7 @@ class Datastore {
         return true;
     }
 
-    public function deleteRow(string $table, iterable $data) : bool {
+    public function deleteRow(string $table, iterable $data): bool {
         if (empty($data)) {
             return true;
         }
@@ -187,7 +185,7 @@ class Datastore {
         return true;
     }
 
-    public function getRow(string $table) : array {
+    public function getRow(string $table): array {
         try {
             $query = "SELECT * FROM $table";
             $res = $this->sqliteRead->query($query);
@@ -204,7 +202,7 @@ class Datastore {
         return $return;
     }
 
-    public function getCol(string $table, string $col) : array {
+    public function getCol(string $table, string $col): array {
         $query = "SELECT $col FROM $table";
         try {
             $res = $this->sqliteRead->query($query);
@@ -222,7 +220,7 @@ class Datastore {
         return $return;
     }
 
-    public function getHash(string $key) : ?string {
+    public function getHash(string $key): ?string {
         $query = 'SELECT value FROM hash WHERE key=:key';
         $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
@@ -240,7 +238,7 @@ class Datastore {
         }
     }
 
-    public function getAllHash(string $table) : array {
+    public function getAllHash(string $table): array {
         $query = "SELECT key, value FROM $table";
         $stmt = $this->sqliteRead->prepare($query);
         $res = $stmt->execute();
@@ -248,7 +246,7 @@ class Datastore {
         if ($res === false) {
             return array();
         }
-        
+
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $return[$row[0]] = (int) $row[1];
@@ -256,7 +254,7 @@ class Datastore {
         return $return;
     }
 
-    public function getHashAnalyzer(string $analyzer) : array {
+    public function getHashAnalyzer(string $analyzer): array {
         $query = 'SELECT key, value FROM hashAnalyzer WHERE analyzer=:analyzer';
         $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
@@ -274,7 +272,7 @@ class Datastore {
         return $return;
     }
 
-    public function addRowAnalyzer(string $analyzer, $key, string $value = '') : bool {
+    public function addRowAnalyzer(string $analyzer, $key, string $value = ''): bool {
         if (is_array($key)) {
             foreach($key as &$v) {
                 $v['analyzer'] = $analyzer;
@@ -287,14 +285,14 @@ class Datastore {
         }
     }
 
-    public function hasResult(string $table) : bool {
+    public function hasResult(string $table): bool {
         $query = "SELECT * FROM $table LIMIT 1";
         $r = $this->sqliteRead->querySingle($query);
 
         return !empty($r);
     }
 
-    public function cleanTable(string $table) : bool {
+    public function cleanTable(string $table): bool {
         // Total destroy table
         $query = "DROP TABLE IF EXISTS $table";
         $this->sqliteWrite->querySingle($query);
@@ -303,7 +301,7 @@ class Datastore {
         return true;
     }
 
-    private function checkTable(string $table) : bool {
+    private function checkTable(string $table): bool {
         $res = $this->sqliteWrite->querySingle("SELECT count(*) FROM sqlite_master WHERE name=\"$table\"");
 
         if ($res === 1) {
@@ -506,7 +504,7 @@ SQLITE;
         return true;
     }
 
-    public function reload() : void {
+    public function reload(): void {
         $this->sqliteRead->close();
         $this->sqliteWrite->close();
 
@@ -516,8 +514,8 @@ SQLITE;
         $this->sqliteRead = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
         $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
-    
-    public function ignoreFile(string $file, string $reason = 'unknown') : void {
+
+    public function ignoreFile(string $file, string $reason = 'unknown'): void {
         $this->sqliteWrite->query('DELETE FROM files WHERE file = \'' . $this->sqliteWrite->escapeString($file) . '\'');
         $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, \'' . $this->sqliteWrite->escapeString($file) . '\', "' . $reason . '")');
     }

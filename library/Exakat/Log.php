@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -52,7 +52,7 @@ class Log {
         if ($this->log === null) {
             return;
         }
-        
+
         $this->log('Duration : ' . number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
         $this->log('Memory : ' . memory_get_usage(true));
         $this->log('Memory peak : ' . memory_get_peak_usage(true));

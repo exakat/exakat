@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -46,7 +46,7 @@ class Remote {
             // Throw error
         }
     }
-    
+
     private function sendWithPipe($json) {
         $queuePipe = fopen($this->bits['path'], 'w');
         fwrite($queuePipe, $json . PHP_EOL);
@@ -70,7 +70,7 @@ class Remote {
 
         $context  = stream_context_create($options);
         $html = file_get_contents($this->bits['scheme'] . '://' . $this->bits['host'] . ':' . $this->bits['port'], false, $context);
-        
+
         return $html;
     }
 
@@ -86,7 +86,7 @@ class Remote {
         $nonce = random_bytes(
             SODIUM_CRYPTO_SECRETBOX_NONCEBYTES
         );
-    
+
         $cipher = base64_encode(
             $nonce .
             sodium_crypto_secretbox(

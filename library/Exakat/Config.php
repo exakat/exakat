@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,17 +25,16 @@ namespace Exakat;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, RulesetConfig, Config as Configsource };
 use Exakat\Exceptions\InaptPHPBinary;
-use Exakat\Reports\Reports;
 use Exakat\Autoload\AutoloadDev;
 use Exakat\Autoload\AutoloadExt;
 use Phar;
 
 class Config {
-    const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74', '80',);
+    const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74', '80', );
 
     const INSIDE_CODE   = true;
     const WITH_PROJECTS = false;
-    
+
     const IS_PHAR      = true;
     const IS_NOT_PHAR  = false;
 
@@ -61,7 +60,7 @@ class Config {
     private $options     = array();
     private $remotes     = array();
     private $rulesets    = array();
-    
+
     public function __construct(array $argv) {
         $this->argv = $argv;
 
@@ -115,7 +114,7 @@ class Config {
 
         // then read the config for the project in its folder
         if ($this->commandLineConfig->get('project') === null) {
-            
+
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
@@ -140,7 +139,7 @@ class Config {
             $this->dotExakatConfig     = new EmptyConfig();
             $this->dotExakatYamlConfig = new EmptyConfig();
         }
-        
+
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->defaultConfig->toArray(),
                                      $this->exakatConfig->toArray(),
@@ -179,7 +178,7 @@ class Config {
             $this->configFiles[] = $file;
             $this->rulesets = $rulesets->toArray();
         }
-        
+
         if ($this->dotExakatYamlConfig instanceof DotExakatYamlConfig) {
             $this->rulesets = array_merge($this->rulesets, $this->dotExakatYamlConfig->getRulesets());
         }
@@ -198,8 +197,8 @@ class Config {
 
         $this->finishConfigs();
     }
-    
-    private function finishConfigs() : void {
+
+    private function finishConfigs(): void {
         $this->options['pid'] = getmypid();
 
         if ($this->options['inside_code'] === self::INSIDE_CODE) {
@@ -222,7 +221,7 @@ class Config {
         }
     }
 
-    public function __isset($name) : bool {
+    public function __isset($name): bool {
         return isset($this->options[$name]);
     }
 
@@ -247,30 +246,30 @@ class Config {
     }
 
     public function __set($name, $value) {
-        display("It is not possible to modify configuration $name with value '".var_export($value, true)."'\n");
+        display("It is not possible to modify configuration $name with value '" . var_export($value, true) . "'\n");
     }
 
-    private function checkSelf() : void {
+    private function checkSelf(): void {
         if (version_compare(PHP_VERSION, '7.0.0') < 0) {
             throw new InaptPHPBinary('PHP needs to be version 7.0.0 or more to run exakat.(' . PHP_VERSION . ' provided)');
         }
         $extensions = array('curl', 'mbstring', 'sqlite3', 'hash', 'json');
-        
+
         $missing = array();
         foreach($extensions as $extension) {
             if (!extension_loaded($extension)) {
                 $missing[] = $extension;
             }
         }
-        
+
         if (!empty($missing)) {
            throw new InaptPHPBinary('PHP needs ' . (count($missing) == 1 ? 'one' : count($missing)) . ' extension' . (count($missing) > 1 ? 's' : '') . ' with the current version : ' . implode(', ', $missing));
         }
     }
 
-    public function commandLineJson() : string {
+    public function commandLineJson(): string {
         $return = $this->argv;
-        
+
         $id = array_search('-remote', $return);
         unset($return[$id]);
         unset($return[$id + 1]);
@@ -278,7 +277,7 @@ class Config {
         return json_encode(array_values($return));
     }
 
-    public function toIni() : string {
+    public function toIni(): string {
         $ini = array();
 
         $ini[] = ';Main PHP version for this code.';
@@ -330,7 +329,7 @@ class Config {
         return implode(PHP_EOL, $ini);
     }
 
-    public function toYaml() : string {
+    public function toYaml(): string {
         $yaml = array('phpversion'          => $this->options['phpversion'],
                       'ignore_dirs'         => $this->options['ignore_dirs'],
                       'include_dirs'        => $this->options['include_dirs'],
@@ -362,16 +361,16 @@ class Config {
         return Symfony_Yaml::dump($yaml);
     }
 
-    public function duplicate($options) : self {
+    public function duplicate($options): self {
         $return = clone $this;
-        
+
         // Only update existing values : ignoring the rest
         foreach($options as $key => $value) {
             if (isset($return->options[$key])) {
                 $return->options[$key] = $value;
                 continue;
             }
-            
+
             if (isset($this->$key)) {
                 $return->rulesets = makeArray($value);
             }

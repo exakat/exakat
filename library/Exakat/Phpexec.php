@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,7 +22,6 @@
 
 namespace Exakat;
 
-use Exakat\Config;
 use Exakat\Exceptions\NoPhpBinary;
 
 class Phpexec {
@@ -65,10 +64,10 @@ class Phpexec {
     private $actualVersion    = null;
     private $requestedVersion = null;
     private $error            = array();
-    
+
     private const CLI_OR_DOCKER_REGEX = '#[a-z0-9]+/[a-z0-9]+:[a-z0-9]+#i';
-    
-    const VERSIONS         = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0',);
+
+    const VERSIONS         = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', );
     const VERSIONS_COMPACT = array('52',  '53',  '54',  '55',  '56',  '70',  '71',  '72',  '73',  '74',  '80', );
 
     public function __construct(string $phpversion = null, string $pathToBinary = '') {
@@ -96,14 +95,14 @@ class Phpexec {
             if (preg_match('/PHP (\d\.\d+\.\d+)/', $res, $r)) {
                 $this->actualVersion = $r[1];
             } else {
-                $this->actualVersion = 'Error while reading PHP version for '.$phpversion;
+                $this->actualVersion = 'Error while reading PHP version for ' . $phpversion;
             }
         } else {
             $res = shell_exec("$pathToBinary -v");
             if (preg_match('/PHP (\d\.\d+\.\d+)/', $res, $r)) {
                 $this->actualVersion = $r[1];
             } else {
-                $this->actualVersion = 'Error while reading PHP version for '.$phpversion;
+                $this->actualVersion = 'Error while reading PHP version for ' . $phpversion;
             }
         }
 
@@ -114,7 +113,7 @@ class Phpexec {
         } else {
             $this->phpexec = $pathToBinary;
         }
-        
+
         $this->readConfig();
 
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
@@ -191,7 +190,7 @@ class Phpexec {
             if (empty($tokens)) {
                 return array();
             }
-        } 
+        }
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
         // -d short_open_tag=1
@@ -207,7 +206,7 @@ class Phpexec {
         }
         return $tokens;
     }
-    
+
     private function escapeFile($file) {
         return "'" . str_replace(array("'", '"', '$'), array("\\'", '\\"', '\\$'), $file) . "'";
     }
@@ -241,7 +240,7 @@ class Phpexec {
         } else {
             $res = shell_exec("{$this->phpexec} -v 2>&1");
         }
-        
+
         if (!preg_match('/^PHP ([0-9\.]+)/', $res, $r)) {
             return false;
         }
@@ -254,7 +253,7 @@ class Phpexec {
 
         return strpos($res, 'The PHP Group') !== false;
     }
-    
+
     public function getActualVersion() {
         return  $this->actualVersion;
     }
@@ -270,7 +269,7 @@ class Phpexec {
             $res = shell_exec($this->phpexec . ' -l ' . escapeshellarg($file) . ' 2>&1');
             $res = trim($res);
        }
-        
+
         return !$this->isError(explode("\n", $res)[0]);
     }
 
@@ -279,7 +278,7 @@ class Phpexec {
         $this->error = array();
         return $r;
     }
-    
+
     public function isError($resFile) {
         if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
             return false;
@@ -306,7 +305,7 @@ class Phpexec {
         if (preg_match('#^(?:PHP )?Deprecated: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
             return false;
         }
-        
+
         if (preg_match('#^(?:PHP )?Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
             $this->error = array('error' => $r[1],
                                  'file'  => $r[2],
@@ -357,7 +356,7 @@ class Phpexec {
             return $this->config;
         }
     }
-    
+
     private function readConfig() {
         if ($this->isCurrentVersion === true){
             // this code is also in the ELSE, but we avoid eval here.
@@ -403,8 +402,8 @@ PHP;
             }
         }
     }
-    
-    public function compileFiles($project_code, $tmpFileName) : void {
+
+    public function compileFiles($project_code, $tmpFileName): void {
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $shell = "docker run -it -v \"{$project_code}\":/exakat -w /exakat/code --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'cat /exakat/.exakat/" . basename($tmpFileName) . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "php -l {} 2>&1 || true "\'';
         } else {
