@@ -2226,22 +2226,26 @@ class Load extends Tasks {
                     } else {
                         ++$args_min;
                     }
-                    $default = 0;
+                    $default = $this->addAtomVoid();
+                }
+                $this->addLink($index, $default, 'DEFAULT');
+                if ($default->atom !== 'Void') {
+                    $index->fullcode .= ' = ' . $default->fullcode;
                 }
 
                 $index->rank = ++$rank;
 
+                $types = array();
                 foreach($returnTypes as $returnType) {
                     $this->addLink($index, $returnType, 'TYPEHINT');
+                    
+                    if ($returnType->atom !== 'Void') {
+                        $typehints[] = $returnType->fullcode;
+                    } 
                 }
 
-                if ($default === 0) {
-                    $void = $this->addAtomVoid();
-                    $this->addLink($index, $void, 'DEFAULT');
-                } else {
-                    $this->addLink($index, $default, 'DEFAULT');
-                    $index->fullcode .= ' = ' . $default->fullcode;
-                    $default = 0;
+                if (!empty($typehints)) {
+                    $index->fullcode = join('|', $typehints). ' ' . $index->fullcode;
                 }
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
@@ -6289,18 +6293,18 @@ class Load extends Tasks {
             if (isset($this->uses[$type][$prefix])) {
                 $this->addLink( $name, $this->uses[$type][$prefix], 'DEFINITION');
                 $apply->fullnspath = $this->uses[$type][$prefix]->fullnspath . mb_strtolower( substr($name->fullcode, strlen($prefix)) ) ;
-                    $apply->aliased = 0;
+                    $apply->aliased = self::NOT_ALIASED;
                     return;
             } elseif ($type === 'const') {
                 $parts = explode('\\', $name->fullcode);
                 $last = array_pop($parts);
                 $fullnspath = $this->namespace . mb_strtolower(implode('\\', $parts)) . '\\' . $last;
                 $apply->fullnspath = $fullnspath;
-                    $apply->aliased = 0;
+                    $apply->aliased = self::NOT_ALIASED;
                     return;
             } else {
                 $apply->fullnspath = $this->namespace . mb_strtolower($name->fullcode);
-                    $apply->aliased = 0;
+                    $apply->aliased = self::NOT_ALIASED;
                     return;
             }
         }
