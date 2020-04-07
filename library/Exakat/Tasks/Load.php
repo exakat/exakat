@@ -33,6 +33,7 @@ use Exakat\Exceptions\MustBeADir;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchLoader;
 use Exakat\Tasks\LoadFinal\LoadFinal;
+use Exakat\Tasks\Helpers\Fullnspaths;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\AtomGroup;
 use Exakat\Tasks\Helpers\Calls;
@@ -99,16 +100,7 @@ class Load extends Tasks {
     private $theGlobals = array();
 
     private $namespace = '\\';
-    private $uses   = array('function'       => array(),
-                            'staticmethod'   => array(),
-                            'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                            'staticconstant' => array(),
-                            'property'       => array(),
-                            'staticproperty' => array(),
-                            'const'          => array(),
-                            'define'         => array(),
-                            'class'          => array(),
-                            );
+    private $uses       = null;
     private $filename   = null;
 
     private $links   = array();
@@ -693,16 +685,7 @@ class Load extends Tasks {
 
         $this->contexts    = new Context();
         $this->expressions = array();
-        $this->uses        = array('function'       => array(),
-                                   'staticmethod'   => array(),
-                                   'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                                   'staticconstant' => array(),
-                                   'property'       => array(),
-                                   'staticproperty' => array(),
-                                   'const'          => array(),
-                                   'define'         => array(),
-                                   'class'          => array(),
-                                   );
+        $this->uses        = new Fullnspaths();
 
         $this->currentMethod           = array();
         $this->currentFunction         = array();
@@ -837,16 +820,7 @@ class Load extends Tasks {
         $this->stats['tokens'] += count($tokens);
         unset($tokens);
 
-        $this->uses   = array('function'       => array(),
-                              'staticmethod'   => array(),
-                              'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                              'staticconstant' => array(),
-                              'property'       => array(),
-                              'staticproperty' => array(),
-                              'const'          => array(),
-                              'define'         => array(),
-                              'class'          => array(),
-                              );
+        $this->uses   = new Fullnspaths();
 
         $id1 = $this->addAtom('File');
         $id1->code     = $filename;
@@ -2236,6 +2210,7 @@ class Load extends Tasks {
                 $index->rank = ++$rank;
 
                 $types = array();
+                $typehints = array();
                 foreach($returnTypes as $returnType) {
                     $this->addLink($index, $returnType, 'TYPEHINT');
                     
@@ -4449,8 +4424,8 @@ class Load extends Tasks {
 
                 $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
 
-                if (isset($this->uses['class'][$prefix])) {
-                    $this->addLink($as, $this->uses['class'][$prefix], 'DEFINITION');
+                if (($use2 = $this->uses->get('class', $prefix)) instanceof Atom) {
+                    $this->addLink($as, $use2, 'DEFINITION');
                 }
                 $this->addLink($use, $as, 'USE');
 
@@ -4548,8 +4523,8 @@ class Load extends Tasks {
                 $namespace->fullnspath = $fullnspath;
                 $namespace->origin     = $fullnspath;
 
-                if (isset($this->uses['class'][$prefix])) {
-                    $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
+                if (($use2 = $this->uses->get('class', $prefix)) instanceof Atom) {
+                    $this->addLink($namespace, $use2, 'DEFINITION');
                 }
 
                 $namespace->fullnspath = $fullnspath;
@@ -5446,8 +5421,8 @@ class Load extends Tasks {
             $this->runPlugins($left);
             $this->runPlugins($static, array('CLASS' => $left));
             // This should actually be the value of any USE statement
-            if (isset($this->uses['class'][mb_strtolower($left->fullcode)])) {
-                $noDelimiter = $this->uses['class'][mb_strtolower($left->fullcode)]->fullcode;
+            if (($use = $this->uses->get('class', mb_strtolower($left->fullcode))) instanceof Atom) {
+                $noDelimiter = $use->fullcode;
                 if (($length = strpos($noDelimiter, ' ')) !== false) {
                     $noDelimiter = substr($noDelimiter, 0, $length);
                 }
@@ -6149,7 +6124,7 @@ class Load extends Tasks {
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             if ($type === 'const') {
-                if (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
+                if (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof Atom) {
                     $apply->fullnspath = mb_strtolower($name->fullnspath);
                     $apply->aliased = self::NOT_ALIASED;
                     return;
@@ -6222,24 +6197,24 @@ class Load extends Tasks {
             }
 
             // This is an identifier, self or parent
-            if ($type === 'class' && isset($this->uses['class'][mb_strtolower($fnp)])) {
-                $this->addLink($name, $this->uses['class'][mb_strtolower($fnp)], 'DEFINITION');
-                $apply->fullnspath = $this->uses['class'][mb_strtolower($fnp)]->fullnspath;
-                    $apply->aliased = self::ALIASED;
-                    return;
+            if ($type === 'class' && ($use = $this->uses->get('class',mb_strtolower($fnp) )) instanceof Atom) {
+                $this->addLink($name, $use, 'DEFINITION');
+                $apply->fullnspath = $use->fullnspath;
+                $apply->aliased = self::ALIASED;
+                return;
 
-            } elseif ($type === 'class' && isset($this->uses['class'][$prefix])) {
-                $this->addLink($name, $this->uses['class'][$prefix], 'DEFINITION');
-                $apply->fullnspath = $this->uses['class'][$prefix]->fullnspath . str_replace($prefix, '', $fnp);
+            } elseif ($type === 'class' && ($use = $this->uses->get('class', $prefix)) instanceof Atom) {
+                $this->addLink($name, $use, 'DEFINITION');
+                $apply->fullnspath = $use->fullnspath . str_replace($prefix, '', $fnp);
                     $apply->aliased = self::ALIASED;
                     return;
 
             } elseif ($type === 'const') {
-                if (isset($this->uses['const'][$name->code])) {
-                    $apply->fullnspath = $this->uses['const'][$name->code]->fullnspath;
+                if (($use = $this->uses->get('const', $name->code)) instanceof Atom) {
+                    $apply->fullnspath = $use->fullnspath;
                     $apply->aliased = self::ALIASED;
                     return;
-                } elseif (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
+                } elseif (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof Atom) {
                     $apply->fullnspath = mb_strtolower($name->fullnspath);
                     $apply->aliased = self::NOT_ALIASED;
                     return;
@@ -6249,10 +6224,10 @@ class Load extends Tasks {
                     return;
                 }
 
-            } elseif ($type === 'function' && isset($this->uses['function'][$prefix])) {
+            } elseif ($type === 'function' && ($use = $this->uses->get('function', $prefix)) instanceof Atom) {
 
-                $this->addLink($this->uses['function'][$prefix], $name, 'DEFINITION');
-                $apply->fullnspath = $this->uses['function'][$prefix]->fullnspath;
+                $this->addLink($use, $name, 'DEFINITION');
+                $apply->fullnspath = $use->fullnspath;
                     $apply->aliased = self::ALIASED;
                     return;
 
@@ -6290,9 +6265,9 @@ class Load extends Tasks {
             // Finally, the case for a nsname
             $prefix = mb_strtolower( substr($name->code, 0, strpos($name->code . '\\', '\\')) );
 
-            if (isset($this->uses[$type][$prefix])) {
-                $this->addLink( $name, $this->uses[$type][$prefix], 'DEFINITION');
-                $apply->fullnspath = $this->uses[$type][$prefix]->fullnspath . mb_strtolower( substr($name->fullcode, strlen($prefix)) ) ;
+            if (($use = $this->uses->get($type, $prefix)) instanceof Atom) {
+                $this->addLink( $name, $use, 'DEFINITION');
+                $apply->fullnspath = $use->fullnspath . mb_strtolower( substr($name->fullcode, strlen($prefix)) ) ;
                     $apply->aliased = self::NOT_ALIASED;
                     return;
             } elseif ($type === 'const') {
@@ -6313,16 +6288,7 @@ class Load extends Tasks {
     private function setNamespace($namespace = self::NO_NAMESPACE) {
         if ($namespace === self::NO_NAMESPACE) {
             $this->namespace = '\\';
-            $this->uses = array('function'       => array(),
-                                'staticmethod'   => array(),
-                                'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                                'staticconstant' => array(),
-                                'property'       => array(),
-                                'staticproperty' => array(),
-                                'const'          => array(),
-                                'define'         => array(),
-                                'class'          => array(),
-                                );
+            $this->uses = new Fullnspaths();
         } elseif ($namespace->atom === 'Void') {
             $this->namespace = '\\';
         } else {
@@ -6333,7 +6299,7 @@ class Load extends Tasks {
         }
     }
 
-    private function addNamespaceUse($origin, $alias, $useType, Atom $use) {
+    private function addNamespaceUse(Atom $origin, Atom $alias, string $useType, Atom $use) : string {
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' as ');
@@ -6354,7 +6320,7 @@ class Load extends Tasks {
             $alias = mb_strtolower($alias);
         }
 
-        $this->uses[$useType][$alias] = $use;
+        $this->uses->set($useType, $alias, $use);
 
         return $alias;
     }
