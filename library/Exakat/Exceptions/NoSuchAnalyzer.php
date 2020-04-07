@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 
 namespace Exakat\Exceptions;
 
-use Exakat\Analyzer\Analyzer;
 
 class NoSuchAnalyzer extends \RuntimeException {
     public function __construct($analyzer, $themes) {
