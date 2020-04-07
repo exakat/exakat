@@ -102,61 +102,8 @@ class Files extends Tasks {
             $resFiles = $php->compileFiles($this->config->code_dir, $tmpFileName);
         }
 
-        display('Check short tag (normal pass)');
-        $shell = "cd '{$this->config->code_dir}'; cat '$tmpFileName' | xargs -n1 -P5 {$this->config->php} -d short_open_tag=0 -d error_reporting=0 -r \"echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true";
-
-        $resultNosot = shell_exec($shell) ?? '';
-        $tokens = (int) array_sum(explode("\n", $resultNosot));
-
-        display('Check short tag (with directive activated)');
-        $shell = "cd '{$this->config->code_dir}'; cat '$tmpFileName' |  xargs -n1 -P5 {$this->config->php} -d short_open_tag=1 -d error_reporting=0 -r \"echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";\" 2>>/dev/null || true ";
-
-        $resultSot = shell_exec($shell) ?? '';
-        $tokenssot = (int) array_sum(explode("\n", $resultSot));
-
-        if ($tokenssot === $tokens) {
-            display('Short tag OK');
-        } else {
-            $nosot = explode("\n", trim($resultNosot));
-            $nosot2 = array();
-            foreach($nosot as $value) {
-                if (strpos($value, ' ') === false) {
-                    continue;
-                }
-                list($count, $file) = explode(' ', $value);
-                $nosot2[$file] = $count;
-            }
-            $nosot = $nosot2;
-            unset($nosot2);
-
-            $sot = explode("\n", trim($resultSot));
-            $sot2 = array();
-            foreach($sot as $value) {
-                list($count, $file) = explode(' ', $value);
-                $sot2[$file] = $count;
-            }
-            $sot = $sot2;
-            unset($sot2);
-
-            if (count($nosot) === count($sot)) {
-                display('Short tag has diff');
-                $shortOpenTag = array();
-                foreach($nosot as $file => $countNoSot) {
-                    if ($sot[$file] != $countNoSot) {
-                        $file = trim($file, '.');
-                        $shortOpenTag[] = array('file' => trim($file, '.'));
-                        if (ini_get('short_open_tag') == false) {
-                            $ignoredFiles[$file] = 'Uses short tags';
-                            $id = array_search($file, $files);
-                            unset($files[$id]);
-                        }
-                    }
-                }
-                $this->datastore->addRow('shortopentag', $shortOpenTag);
-            } else {
-                $this->log->log('Error in short open tag analyze : not the same number of files ' . count($nosot) . ' / ' . count($sot) . ".\n");
-            }
-        }
+        $shell = "nohup php server/lint_short_tags.php {$this->config->php} {$this->config->project_dir} $tmpFileName >/dev/null & echo $!";
+        shell_exec($shell);
 
         $vcsClass = Vcs::getVcs($this->config);
         $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
