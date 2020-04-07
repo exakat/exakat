@@ -2374,7 +2374,7 @@ HTML;
         foreach($path as $k => $v) {
             $return .= '<li>';
 
-            $parent = '\\' . strtolower($k);
+            $parent = '\\' . strtolower((string) $k);
             if (is_string($v)) {
                 if (empty($v)) {
                     $return .= '<div style="font-weight: bold">\\</div>';

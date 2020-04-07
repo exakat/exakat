@@ -49,7 +49,7 @@ class Uml extends Reports {
                 $row['properties'] = '<i>No properties</i>';
             }
             if (empty($row['methods'])) {
-                $row['methods'] = '+&nbsp;' . str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['methods'])) . "<br align='left'/>";
+                $row['methods'] = '+&nbsp;' . str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['methods'] ?? '')) . "<br align='left'/>";
             } else {
                 $row['methods'] = '<i>No methods</i>';
             }

@@ -416,12 +416,12 @@ GREMLIN
 sideEffect{ 
       if (it.get().value("token") == 'T_BOOLEAN_AND' ||
           it.get().value("token") == 'T_LOGICAL_AND') {
-        i = x[0] && x[1];
+        i = (x[0] != 0) && (x[1] != 0);
       } else if (it.get().value("token") == 'T_BOOLEAN_OR' ||
                  it.get().value("token") == 'T_LOGICAL_OR') {
-        i = x[0] || x[1];
+        i = (x[0] != 0) || (x[1] != 0);
       } else if (it.get().value("token") == 'T_LOGICAL_XOR') {
-        i = x[0] ^ x[1];
+        i = (x[0] != 0) ^ (x[1] != 0);
       } else if (it.get().value("token") == 'T_AND') {
         i = x[0] & x[1];
       } else if (it.get().value("token") == 'T_XOR') {
