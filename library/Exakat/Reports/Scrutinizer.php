@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -45,7 +45,7 @@ class Scrutinizer extends Reports {
                 foreach ($colErrors as $error) {
 
                     $out->startElement('error');
-                    $out->writeAttribute('line', $line);
+                    $out->writeAttribute('line', (string) $line);
                     $out->writeAttribute('message', $error['message']);
                     $out->writeAttribute('source', $error['source']);
                     $out->endElement();

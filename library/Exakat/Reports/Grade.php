@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -85,17 +85,17 @@ class Grade extends Ambassador {
                      );
     }
 
-    private function generateIssues(Section $section) : void {
+    private function generateIssues(Section $section): void {
         $this->generateIssuesEngine($section,
                                     $this->getIssuesFaceted($section->ruleset));
     }
 
-    private function getGrades() : void {
+    private function getGrades(): void {
         $this->results = $this->dump->fetchAnalysers(array_keys($this->grading));
 
         $this->resultsCounts = array_fill_keys(array_keys($this->grading), 0);
         foreach($this->results->toArray() as $result) {
-            $this->resultsCounts[$result['analyzer']]++;
+            ++$this->resultsCounts[$result['analyzer']];
         }
 
         $this->globalGrade = 0;
@@ -109,7 +109,7 @@ class Grade extends Ambassador {
         $this->globalGrade = intval(100 * max(0, 20 - $grade)) / 100;
     }
 
-    protected function generateDashboard(Section $section) : void {
+    protected function generateDashboard(Section $section): void {
         $this->getGrades();
 
         $baseHTML = $this->getBasedPage('index');

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -47,7 +47,7 @@ class Results {
 
         while($row = $this->res->fetchArray(\SQLITE3_ASSOC)) {
             foreach ($this->options['phpsyntax'] as $source => $destination) {
-                $row[$destination] = PHPSyntax($row[$source]);
+                $row[$destination] = PHPSyntax((string) $row[$source]);
             }
             $this->values[] = $row;
             ++$this->count;
@@ -154,7 +154,7 @@ class Results {
             $first = array_keys($this->values[0])[0];
             return $this->values[0][$first];
         } else {
-            return $this->values[0][$col] ?? '';
+            return (string) $this->values[0][$col] ?? '';
         }
     }
 

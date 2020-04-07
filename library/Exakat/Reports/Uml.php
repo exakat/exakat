@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,7 +42,7 @@ class Uml extends Reports {
         foreach($res->toArray() as $row) {
             ++$id;
             if (empty($row['properties'])) {
-                $row['properties'] = '+&nbsp;' . str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties'])) . "<br align='left'/>";
+                $row['properties'] = '+&nbsp;' . str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties'] ?? '')) . "<br align='left'/>";
             } elseif ($row['type'] === 'interface') {
                 $row['properties'] = '&nbsp;';
             } else {
@@ -116,11 +116,11 @@ DOT
         return $dot;
     }
 
-    private function str2dot($str) {
+    private function str2dot(string $str) : string {
         return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 , 'UTF-8');
     }
 
-    private function subgraphs($array, $level = 1, $nsname = '') {
+    private function subgraphs(array $array, int $level = 1, string $nsname = '') : string {
         static $id = 0;
         $r = '';
 

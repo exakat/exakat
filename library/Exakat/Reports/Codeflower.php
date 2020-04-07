@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -104,8 +104,8 @@ class Codeflower extends Reports {
         }
 
         foreach($classes as $id => $extends) {
-            if (!is_int($id)) { 
-                continue; 
+            if (!is_int($id)) {
+                continue;
             }
 
             foreach($classes as &$extends2) {

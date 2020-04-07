@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -95,7 +95,7 @@ class Ambassador extends Emissary {
                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', 'CompatibilityPHP74',
                      'Analyze', 'Preferences', 'Inventory', 'Performances',
                      'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Suggestions', 'ClassReview',
-                     'Custom', 'Rector', 'php-cs-fixable', 
+                     'Custom', 'Rector', 'php-cs-fixable',
                      );
     }
 }

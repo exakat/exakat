@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -46,7 +46,7 @@ class Perfile extends Reports {
         }
 
         $text = '';
-        $line = strlen($maxLine) + $maxTitle + 10;
+        $line = strlen((string) $maxLine) + $maxTitle + 10;
 
         foreach($perfile as &$list) {
             sort($list);

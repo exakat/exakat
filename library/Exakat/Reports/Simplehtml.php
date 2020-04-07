@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -89,7 +89,7 @@ class Simplehtml extends Reports {
         }
 
         $analysis = $this->dump->fetchAnalysersCounts($list);
-        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function (int $x) : bool { return $x >= 1;});
+        $analysis = array_filter($analysis->toHash('analyzer', 'count'), function (int $x): bool { return $x >= 1;});
 
         $text = array();
         $titleCache = array();

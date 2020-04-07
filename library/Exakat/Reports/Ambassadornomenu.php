@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Exakat;
 
 class Ambassadornomenu extends Ambassador {
-    protected function getBasedPage($file) : string {
+    protected function getBasedPage($file): string {
         static $baseHTML;
 
         if (empty($baseHTML)) {

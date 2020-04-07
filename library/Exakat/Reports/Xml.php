@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -74,9 +74,9 @@ class Xml extends Reports {
 
         $out->startElement('file');
         $out->writeAttribute('name', $report['filename']);
-        $out->writeAttribute('errors', $report['errors']);
-        $out->writeAttribute('warnings', $report['warnings']);
-        $out->writeAttribute('fixable', $report['fixable']);
+        $out->writeAttribute('errors', (string) $report['errors']);
+        $out->writeAttribute('warnings', (string) $report['warnings']);
+        $out->writeAttribute('fixable', (string) $report['fixable']);
 
         foreach ($report['messages'] as $line => $lineErrors) {
             foreach ($lineErrors as $column => $colErrors) {
@@ -85,8 +85,8 @@ class Xml extends Reports {
                     $error['type'] = strtolower($error['type']);
 
                     $out->startElement($error['type']);
-                    $out->writeAttribute('line', $line);
-                    $out->writeAttribute('column', $column);
+                    $out->writeAttribute('line', (string) $line);
+                    $out->writeAttribute('column', (string) $column);
                     $out->writeAttribute('source', $error['source']);
                     $out->writeAttribute('severity', $error['severity']);
                     $out->writeAttribute('fixable', $error['fixable']);

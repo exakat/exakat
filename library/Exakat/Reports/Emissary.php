@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -93,7 +93,7 @@ class Emissary extends Reports {
     }
 
     protected function makeMenu(): string {
-        $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/'.static::CONFIG_YAML.'.yaml');
+        $menuYaml = Symfony_Yaml::parseFile(__DIR__ . '/' . static::CONFIG_YAML . '.yaml');
 
         $menu = array('<ul class="sidebar-menu">',
                       '<li class="header">&nbsp;</li>',
@@ -147,7 +147,7 @@ class Emissary extends Reports {
             $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
+            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', (string) Exakat::BUILD);
             $project_name = $this->config->project_name;
             if (empty($project_name)) {
                 $project_name = 'E';
@@ -388,7 +388,7 @@ class Emissary extends Reports {
         foreach($favoritesList as $analyzer => $list) {
             $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
 
-            $table = [];
+            $table = array();
             $values = array();
             $name = $this->docs->getDocs($analyzer, 'name');
 
@@ -401,7 +401,7 @@ class Emissary extends Reports {
                  </div>
 ';
                 if ($value > 0) {
-                    $values[] = array('label' => $key, 
+                    $values[] = array('label' => $key,
                                       'value' => (int) $value);
                 }
                 $total += $value;
@@ -444,8 +444,8 @@ HTML;
                 $html[] = '          </div>
           <div class="row">';
             }
-            
-            $highchart->addDonut('donut-chart_'.$name,  $values);
+
+            $highchart->addDonut('donut-chart_' . $name,  $values);
         }
 
         $donut = (string) $highchart;
@@ -528,7 +528,7 @@ HTML;
         $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $data[$value['key'] . " param."] = $value['value'];
+            $data[$value['key'] . ' param.'] = $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' param.</div>
@@ -954,7 +954,7 @@ HTML;
 
         $severities = $this->getSeveritiesNumberBy('file');
         unset($severities['None']);
-        uasort($severities, function (array $a, array $b) use ($severities) : int { return array_sum($b) <=> array_sum($a); });
+        uasort($severities, function (array $a, array $b) use ($severities): int { return array_sum($b) <=> array_sum($a); });
         $severities = array_slice($severities, 0, 10);
 
         foreach ($severities as $file => $value) {
@@ -1037,9 +1037,9 @@ HTML;
             $ini = $this->docs->getDocs($value['analyzer']);
             $xAxis[]        = $ini['name'];
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
-            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
-            $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major']) ? 0 : $severities[$value['analyzer']]['Major'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor']) ? 0 : $severities[$value['analyzer']]['Minor'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None']) ? 0 : $severities[$value['analyzer']]['None'];
         }
 
         return array(
@@ -1054,7 +1054,7 @@ HTML;
     private function generateNewIssues(Section $section): void {
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
 
-        if (file_exists($this->config->dump_previous)) {
+        if ($this->config->dump_previous !== null && file_exists($this->config->dump_previous)) {
             $oldissues = $this->getNewIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow), $this->config->dump_previous);
 
             $diff = array_diff($issues, $oldissues);
@@ -1139,7 +1139,7 @@ JAVASCRIPTCODE;
         $baseHTML = $this->getBasedPage($section->source);
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
-        $finalHTML = $this->injectBloc($finalHTML, 'TOTAL', $total);
+        $finalHTML = $this->injectBloc($finalHTML, 'TOTAL', (string) $total);
         $this->putBasedPage($section->file, $finalHTML);
     }
 
@@ -1147,7 +1147,7 @@ JAVASCRIPTCODE;
         return $this->getIssuesFacetedDb($ruleset);
     }
 
-    public function getNewIssuesFaceted(array $ruleset, string  $path): array {
+    public function getNewIssuesFaceted(array $ruleset, string $path): array {
         $sqlite = new \Sqlite3($path);
         $res = $sqlite->query('SELECT count(*) FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence";');
 
@@ -1314,7 +1314,7 @@ JAVASCRIPTCODE;
 
         $rows = array();
         foreach($results->toArray() as $row) {
-            $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
+            $rows[strtolower(substr($row['fullcode'], 0, (int) strpos($row['fullcode'], '(')))] = $row;
         }
 
         foreach($bugfixes as $bugfix) {
@@ -1616,7 +1616,7 @@ HTML;
         $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
         $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
 
-        $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
+        $info[] = array('Analysis execution date', date('r', (int) $this->datastore->getHash('audit_end')));
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', time()));
 
@@ -2011,7 +2011,7 @@ HTML;
        $results = $this->dump->fetchAnalysers($analyzer);
 
        $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
-       $counts = array_map(function (string $x) : string { return (int) $x === 1 ? '&nbsp;' : $x;}, $counts);
+       $counts = array_map(function (string $x): string { return (int) $x === 1 ? '&nbsp;' : $x;}, $counts);
 
        $groups = array();
        foreach($results->toArray() as $row) {
@@ -2405,7 +2405,7 @@ HTML;
     private function generateNamespaceTree(Section $section): void {
         $theTable = '';
         $res = $this->dump->fetchTable('namespaces');
-        $res->order(function (array $a, array $b): bool { return $a['namespace'] <=> $b['namespace'];});
+        $res->order(function (array $a, array $b): int { return $a['namespace'] <=> $b['namespace'];});
                 $res->map(function (array $x): array { $x['namespace'] = trim($x['namespace'], '\\'); return $x;});
         $paths = $res->getColumn('namespace');
 
@@ -2541,7 +2541,7 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
 Below, is a list of classes that may be updated with final or abstract. <br />
 
 The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
@@ -2907,7 +2907,7 @@ HTML
         $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-                $data[$value['key']. ' level' . ($value['key'] == 1 ? '' : 's')] = $value['value'];
+                $data[$value['key'] . ' level' . ($value['key'] == 1 ? '' : 's')] = $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
@@ -2973,7 +2973,7 @@ HTML
 
         // List of extensions used
         $res = $this->dump->getMethodsBySize();
-        $res->order(function (array $a, array $b) : int { return $b['size'] <=> $a['size'];});
+        $res->order(function (array $a, array $b): int { return $b['size'] <=> $a['size'];});
 
         $html = array();
         $data = array();
@@ -3440,7 +3440,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateInventoriesEncoding(Section $section) : void {
+    protected function generateInventoriesEncoding(Section $section): void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Mbstring Encoding');
         if ($res->isEmpty()) { return ; }
@@ -3461,7 +3461,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateFixesRector(Section $section) : void {
+    protected function generateFixesRector(Section $section): void {
         $rector = new Rector($this->config);
         $report = $rector->generate('', Reports::INLINE);
 
@@ -3475,7 +3475,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateFixesPhpCsFixer(Section $section) : void {
+    protected function generateFixesPhpCsFixer(Section $section): void {
         $phpcsfixer = new Phpcsfixer($this->config);
         $report = $phpcsfixer->generate('', Reports::INLINE);
 
@@ -3489,17 +3489,17 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function generateIndentationLevelsBreakdown(Section $section) : void {
+    protected function generateIndentationLevelsBreakdown(Section $section): void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Indentation Levels');
         if ($res->isEmpty()) {
-            return ; 
+            return ;
         }
 
         $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $data[$value['key']. ' level '] = (int) $value['value'];
+            $data[$value['key'] . ' level '] = (int) $value['value'];
 
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' levels</div>
@@ -3511,7 +3511,7 @@ HTML;
         $this->generateGraphList($section->file, $section->title, 'Indentation levels', $data, $html);
     }
 
-    private function generateTypehintSuggestions(Section $section) : void {
+    private function generateTypehintSuggestions(Section $section): void {
 //        $constants  = $this->generateVisibilityConstantSuggestions();
 //        $properties = $this->generateVisibilityPropertySuggestions();
         $methods    = $this->generateTypehintMethodsSuggestions();
@@ -3571,7 +3571,7 @@ HTML;
         $this->generateGraphList($section->file, $section->title, 'Dereferencing levels', $data, $html);
     }
 
-    private function generateTypehintMethodsSuggestions() : array {
+    private function generateTypehintMethodsSuggestions(): array {
         $res = $this->dump->fetchTableMethodsByArgument();
         $arguments = array();
         foreach($res->toArray() as $row) {
@@ -3606,7 +3606,7 @@ HTML;
         return $return;
     }
 
-    protected function generateForeachFavorites(Section $section) : void {
+    protected function generateForeachFavorites(Section $section): void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Foreach Names');
         $res->map(function (array $x): array { $x['key'] = str_replace('&', '', $x['key']); return $x; });
@@ -3614,7 +3614,7 @@ HTML;
         // merging results from &$v and $v into one
         $data = array();
         foreach ($res->toArray() as $value) {
-            $data[$value['key']] = 
+            $data[$value['key']] =
                 (int) $value['value'] + ($data[$value['key']] ?? 0);
         }
         arsort($data);

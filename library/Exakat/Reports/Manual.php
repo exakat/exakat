@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -213,7 +213,7 @@ class Manual extends Reports {
 
         $res = $this->dump->fetchAnalysers(array('Structures/DynamicCalls'));
         foreach($res->toArray() as $row) {
-            $expressions .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
+            $expressions .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
             ++$total;
         }
 
@@ -229,14 +229,14 @@ class Manual extends Reports {
        return $md;
     }
 
-    private function generateErrorMessages() {
+    private function generateErrorMessages() : string {
         $total = 0;
         $errors = '';
         $md = '';
 
         $res = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
         foreach($res->toArray() as $row) {
-            $errors .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
+            $errors .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
             ++$total;
         }
 
@@ -252,31 +252,31 @@ class Manual extends Reports {
        return $md;
     }
 
-    private function generateSQL() {
+    private function generateSQL() : string {
         return $this->generateGeneric('Type/SQL', 'SQL');
     }
 
-    private function generateURL() {
+    private function generateURL() : string {
         return $this->generateGeneric('Type/URL', 'URL');
     }
 
-    private function generateEmail() {
+    private function generateEmail() : string {
         return $this->generateGeneric('Type/Email', 'Email');
     }
 
-    private function generateIncoming() {
+    private function generateIncoming() : string {
         return $this->generateGeneric('Type/GPCIndex', 'Incoming variables');
     }
 
-    private function generateSession() {
+    private function generateSession() : string {
         return $this->generateGeneric('Php/SessionVariables', 'Session variables');
     }
 
-    private function generateHash() {
+    private function generateHash() : string {
         return $this->generateGeneric('Type/Md5String', 'Hash String');
     }
 
-    private function generateMime() {
+    private function generateMime() : string {
         return $this->generateGeneric('Type/Mime', 'Mime type');
     }
 
@@ -287,7 +287,7 @@ class Manual extends Reports {
 
         $res = $this->dump->fetchAnalysers(array($analyzer));
         foreach($res->toArray() as $row) {
-            $url .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd($row['line']) . PHP_EOL;
+            $url .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
             ++$total;
         }
 
@@ -309,7 +309,7 @@ class Manual extends Reports {
         return $this->generateGeneric('Type/Regex', 'Regular expressions');
     }
 
-    private function generateExceptionTree() {
+    private function generateExceptionTree() : string {
         $exceptions = array (
   'Throwable' =>
   array (

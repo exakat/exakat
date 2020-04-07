@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -75,10 +75,10 @@ class Codesniffer extends Reports {
             $text .= 'FOUND ' . $c . ' ISSUE' . ( $c > 1 ? 'S' : '') . ' AFFECTING ' . $l . ' LINE' . ( $l > 1 ? 'S' : '') . "\n";
             $text .= $separator;
 
-            $maxSize = strlen(max(array_keys($file['messages'])));
+            $maxSize = strlen((string) max(array_keys($file['messages'])));
             $padding = str_repeat(' ', $maxSize);
 
-            $maxSize = strlen(max(array_keys($file['messages'])));
+            $maxSize = strlen((string) max(array_keys($file['messages'])));
             $padding = str_repeat(' ', $maxSize);
 
             foreach($file['messages'] as $line => $column) {

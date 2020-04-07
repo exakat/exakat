@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -40,7 +40,7 @@ class Section {
         $this->source  = $section['source']  ?? $this->file;  // Yes, source == file if not specified
         $this->icon    = $section['icon']    ?? $this->icon;
         $this->method  = $section['method']  ?? $this->method;
-        
+
         if (!isset($section['ruleset'])) {
             $this->ruleset = 'None';
         } elseif (is_array($section['ruleset'])) {

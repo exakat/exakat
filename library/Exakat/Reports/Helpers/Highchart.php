@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,22 +27,22 @@ class Highchart {
     private $xAxis  = array();
     private $donuts = array();
 
-    public function addSeries(string $name, array $xAxis, array ...$series) : void {
+    public function addSeries(string $name, array $xAxis, array ...$series): void {
         $this->xAxis  [$name]= $xAxis;
         $this->series [$name]= $series;
     }
 
-    public function addDonut(string $name, array $data) : void {
+    public function addDonut(string $name, array $data): void {
         $this->donuts[$name] = $data;
     }
-    
-    public function __toString() : string {
+
+    public function __toString(): string {
         $return = array();
         foreach($this->xAxis as $name => $x) {
             $return []= $this->chart($name, $x, $this->series[$name]);
         }
         $return = implode(PHP_EOL, $return);
-        
+
         $donuts = array();
         foreach($this->donuts as $name => $donut) {
             $data = json_encode($donut);
@@ -132,8 +132,8 @@ JAVASCRIPT;
 
         return $return;
     }
-    
-    private function chart($name, $xAxis, $series) : string {
+
+    private function chart($name, $xAxis, $series): string {
         $return = array();
         $xAxis  = json_encode($xAxis);
         $series  = json_encode($series);

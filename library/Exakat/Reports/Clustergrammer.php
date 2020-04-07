@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -33,7 +33,7 @@ class Clustergrammer extends Reports {
 
         $res = $this->dump->fetchAnalysers($analyzers);
         $byAnalyzer = $res->toArray();
-        usort($byAnalyzer, function (array $a, array $b): bool { return $a['analyzer'] <=> $b['analyzer']; } );
+        usort($byAnalyzer, function (array $a, array $b): int { return $a['analyzer'] <=> $b['analyzer']; } );
         $skeleton = array();
         foreach($byAnalyzer as $row) {
             $skeleton[$row['analyzer']] = 0;
@@ -49,7 +49,7 @@ class Clustergrammer extends Reports {
 
         $all = array();
         $byFile = $res->toArray();
-        usort($byFile, function (array $a, array $b): bool { return $a['file'] <=> $b['file']; } );
+        usort($byFile, function (array $a, array $b): int { return $a['file'] <=> $b['file']; } );
         $total = 0;
         foreach($byFile as $row) {
             if (!isset($all[$row['file']])) {

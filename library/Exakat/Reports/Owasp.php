@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -43,7 +43,7 @@ class Owasp extends Ambassador {
     protected $projectPath     = null;
     protected $finalName       = null;
     protected $tmpName         = '';
-    
+
     protected $themesToShow    = array('Security');
 
     const TOPLIMIT = 10;
@@ -120,7 +120,7 @@ class Owasp extends Ambassador {
     'Security/NoSleep',
     'Structures/Fallthrough',
     'Security/DynamicDl',
-    
+
 ));
 
     private function getLinesFromFile(string $filePath, int $lineNumber, int $numberBeforeAndAfter): array {
@@ -253,7 +253,7 @@ class Owasp extends Ambassador {
             $analyzersList = makeList($analyzers);
 
             $res = $this->dump->fetchAnalysersCounts($analyzers);
-            $sources = array_filter($res->toHash('analyzer', 'count'), function (int $x) : bool { return $x > -1;});
+            $sources = array_filter($res->toHash('analyzer', 'count'), function (int $x): bool { return $x > -1;});
             asort($sources);
 
             $empty = 0;
@@ -448,7 +448,7 @@ class Owasp extends Ambassador {
         );
     }
 
-    protected function getAnalyzerOverview() : array {
+    protected function getAnalyzerOverview(): array {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
