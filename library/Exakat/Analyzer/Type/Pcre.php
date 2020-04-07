@@ -48,7 +48,8 @@ class Pcre extends AnalyzerDump {
         foreach($delimiters as $in => $out) {
             // regex like $in....$out
             $this->atomIs(self::STRINGS_LITERALS)
-                 ->regexIs('fullcode', '^([\'\\"])' . $in . '[^' . $out . ']+?' . $out . '[imsxeADSUXJu]*[\'\\"]');
+                 ->regexIs('fullcode', '^([\'\\"])' . $in . '[^' . $out . ']+?' . $out . '[imsxeADSUXJu]*[\'\\"]')
+                 ->toResults();
             $this->prepareQuery();
         }
     }

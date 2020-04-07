@@ -36,7 +36,8 @@ class Hexadecimal extends AnalyzerDump {
     public function analyze() {
         // $a = 0x123ee;
         $this->atomIs('Integer')
-             ->regexIs('fullcode', '^0[xX][0-9a-fA-F]+\$');
+             ->regexIs('fullcode', '^0[xX][0-9a-fA-F]+\$')
+             ->toResults();
         $this->prepareQuery();
     }
 }

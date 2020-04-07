@@ -794,18 +794,31 @@ class Load extends Tasks {
         $line         = 0;
         foreach($tokens as $t) {
             if (is_array($t)) {
-                if ($t[0] === $this->phptokens::T_WHITESPACE) {
-                    $line += substr_count($t[1], "\n");
-                } elseif ($t[0] === $this->phptokens::T_COMMENT) {
-                    $line += substr_count($t[1], "\n");
-                    $comments += substr_count($t[1], "\n");
-                } elseif ($t[0] === $this->phptokens::T_DOC_COMMENT) {
-                    $this->phpDocs[$total + 1] = $t;
-                } else {
-                    $line = $t[2];
-                    $this->tokens[] = $t;
-                    ++$total;
-                }
+                switch($t[0]) {
+                    case $this->phptokens::T_WHITESPACE: 
+                        $line += substr_count($t[1], "\n");
+                        break;
+
+                    case $this->phptokens::T_COMMENT : 
+                        $line += substr_count($t[1], "\n");
+                        $comments += substr_count($t[1], "\n") + 1;
+                        break;
+
+                    case $this->phptokens::T_DOC_COMMENT:
+                        $this->phpDocs[$total + 1] = $t;
+                        $comments += substr_count($t[1], "\n") + 1;
+                        break; 
+
+                    case $this->phptokens::T_DOC_COMMENT:
+                        $this->phpDocs[$total + 1] = $t;
+                        $comments += substr_count($t[1], "\n");
+                        break; 
+
+                    default : 
+                        $line = $t[2];
+                        $this->tokens[] = $t;
+                        ++$total;
+                    }
             } elseif (is_string($t)) {
                 $this->tokens[] = array(0 => $this->phptokens::TOKENS[$t],
                                         1 => $t,
@@ -2964,16 +2977,20 @@ class Load extends Tasks {
                             \STRICT_COMPARISON)) {
             $option = $this->tokens[$this->id][1];
 
-            $typehint = $this->processTypehint();
-            $this->optionsTokens['Typehint'] = $typehint->fullcode;
+            $typehints = $this->processTypehint();
+            $optionsTokens = array();
+            foreach($typehints as $typehint) {
+                $optionsTokens[] = $typehint->fullcode;
 
-            if (in_array(mb_strtolower($typehint->code), $this->SCALAR_TYPE, \STRICT_COMPARISON)) {
-                $typehint->fullnspath = '\\' . mb_strtolower($typehint->code);
-            } else {
-                $this->getFullnspath($typehint, 'class', $typehint);
-
-                $this->calls->addCall('class', $typehint->fullnspath, $typehint);
+                if (in_array(mb_strtolower($typehint->code), $this->SCALAR_TYPE, \STRICT_COMPARISON)) {
+                    $typehint->fullnspath = '\\' . mb_strtolower($typehint->code);
+                } else {
+                    $this->getFullnspath($typehint, 'class', $typehint);
+    
+                    $this->calls->addCall('class', $typehint->fullnspath, $typehint);
+                }
             }
+            $this->optionsTokens['Typehint'] = join('|', $optionsTokens);
 
             $static = $this->processSGVariable('Ppp');
             $this->popExpression();
