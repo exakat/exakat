@@ -2509,12 +2509,23 @@ class Load extends Tasks {
 
         $ppp = $this->processSGVariable('Ppp');
 
+        $typehints = array();
         foreach($returnTypes as $returnType) {
             $this->addLink($ppp, $returnType, 'TYPEHINT');
+
+            if ($returnType->atom !== 'Void'){
+                $typehints[] = $returnType->fullcode;
+            }
+        }
+        
+        if (empty($typehints)) {
+            $typehint_fullcode = '';
+        } else {
+            $typehint_fullcode = join('|', $typehints).' ';
         }
 
         $ppp->visibility = 'none';
-        $ppp->fullcode   = "$visibility $ppp->fullcode";
+        $ppp->fullcode   = "$visibility {$typehint_fullcode}$ppp->fullcode";
         $this->makePhpdoc($ppp, $current);
 
         return $ppp;
@@ -2529,10 +2540,19 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
 
+            $typehints = array();
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $returnType->fullcode . ' ';
+                if ($returnType->atom !== 'Void'){
+                    $typehints[] = $returnType->fullcode;
+                }
+            }
+            
+            if (empty($typehints)) {
+                $typehint_fullcode = '';
+            } else {
+                $typehint_fullcode = join('|', $typehints).' ';
             }
         } else {
             $next = $this->processNext();
@@ -2554,10 +2574,19 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
 
+            $typehints = array();
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $returnType->fullcode . ' ';
+                if ($returnType->atom !== 'Void'){
+                    $typehints[] = $returnType->fullcode;
+                }
+            }
+            
+            if (empty($typehints)) {
+                $typehint_fullcode = '';
+            } else {
+                $typehint_fullcode = join('|', $typehints).' ';
             }
         } else {
             $next = $this->processNext();
@@ -2579,10 +2608,19 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             $next = $this->processSGVariable('Ppp');
 
+            $typehints = array();
             foreach($returnTypes as $returnType) {
                 $this->addLink($next, $returnType, 'TYPEHINT');
 
-                $typehint_fullcode = $returnType->fullcode . ' ';
+                if ($returnType->atom !== 'Void'){
+                    $typehints[] = $returnType->fullcode;
+                }
+            }
+            
+            if (empty($typehints)) {
+                $typehint_fullcode = '';
+            } else {
+                $typehint_fullcode = join('|', $typehints).' ';
             }
         } else {
             $next = $this->processNext();
