@@ -31,7 +31,7 @@ SQL
 
             if ($error  =  isError($resFile)) {
                 ++$total;
-                $incompilables[] = 'INSERT INTO compilation'.$phpversion.' ("error", "file", "line") VALUES ("'.sqlite3::escapeString($error['error']).'","'.sqlite3::escapeString($error['file']).'",'.(int) $error['line'].' )';
+                $incompilables[] = 'INSERT INTO compilation'.$phpversion.' ("error", "file", "line") VALUES (\''.sqlite3::escapeString($error['error']).'\',\''.sqlite3::escapeString($error['file']).'\','.(int) $error['line'].' )';
             }
         }
 
