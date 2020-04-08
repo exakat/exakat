@@ -84,7 +84,7 @@ GREMLIN
           .hasLabel("String", "Variable", "Array", "Functioncall", "Methodcall", "Staticmethodcall", "Member", "Staticproperty", "Identifier", "Nsname", "Staticconstant", 'Parenthesis')
           .sideEffect{ 
                if ('noDelimiter' in it.get().keys()) {
-                   liste.add(it.get().value("noDelimiter").replaceAll('\\\\([\$\\\'"\\\\])', "\$1"));
+                   liste.add(it.get().value("noDelimiter").toString().replaceAll('\\\\([\$\\\'"\\\\])', "\$1"));
                 } else {
                    liste.add("smi"); // smi is compatible with flags
                 }

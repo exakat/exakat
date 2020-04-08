@@ -229,6 +229,9 @@ class Dump extends Tasks {
                               'Type/Pcre',
                               'Type/Path',
                               'Type/Printf',
+                              'Type/HexadecimalString',
+                              'Type/Heredoc',
+                              'Type/Pack',
                               );
         $analyzers = array_filter($analyzers, function (string $s) use ($skipAnalysis): bool { return !in_array($s, $skipAnalysis, STRICT_COMPARISON) && substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
         $this->dump->removeResults($analyzers);

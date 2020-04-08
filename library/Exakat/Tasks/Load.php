@@ -4790,7 +4790,6 @@ class Load extends Tasks {
         $this->runPlugins($integer);
         $this->checkExpression();
 
-
         return $integer;
     }
 
@@ -4961,7 +4960,7 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function processReturn() {
+    private function processReturn() : Atom {
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
                                                             $this->phptokens::T_SEMICOLON,
                                                             ),
@@ -6114,11 +6113,12 @@ class Load extends Tasks {
         $this->sequence = $this->sequences->end();
     }
 
-    private function getToken($token) {
+    // token may be string or int
+    private function getToken($token) : string {
         return $this->php->getTokenName($token);
     }
 
-    private function getFullnspath($name, $type = 'class', Atom $apply = null) {
+    private function getFullnspath(Atom $name, string $type = 'class', Atom $apply = null) : void {
         assert($apply !== null, "\$apply can't be null in " . __METHOD__);
 
         // Handle static, self, parent and PHP natives function
