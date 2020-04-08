@@ -229,7 +229,7 @@ class Manual extends Reports {
        return $md;
     }
 
-    private function generateErrorMessages() : string {
+    private function generateErrorMessages(): string {
         $total = 0;
         $errors = '';
         $md = '';
@@ -252,31 +252,31 @@ class Manual extends Reports {
        return $md;
     }
 
-    private function generateSQL() : string {
+    private function generateSQL(): string {
         return $this->generateGeneric('Type/SQL', 'SQL');
     }
 
-    private function generateURL() : string {
+    private function generateURL(): string {
         return $this->generateGeneric('Type/URL', 'URL');
     }
 
-    private function generateEmail() : string {
+    private function generateEmail(): string {
         return $this->generateGeneric('Type/Email', 'Email');
     }
 
-    private function generateIncoming() : string {
+    private function generateIncoming(): string {
         return $this->generateGeneric('Type/GPCIndex', 'Incoming variables');
     }
 
-    private function generateSession() : string {
+    private function generateSession(): string {
         return $this->generateGeneric('Php/SessionVariables', 'Session variables');
     }
 
-    private function generateHash() : string {
+    private function generateHash(): string {
         return $this->generateGeneric('Type/Md5String', 'Hash String');
     }
 
-    private function generateMime() : string {
+    private function generateMime(): string {
         return $this->generateGeneric('Type/Mime', 'Mime type');
     }
 
@@ -309,7 +309,7 @@ class Manual extends Reports {
         return $this->generateGeneric('Type/Regex', 'Regular expressions');
     }
 
-    private function generateExceptionTree() : string {
+    private function generateExceptionTree(): string {
         $exceptions = array (
   'Throwable' =>
   array (

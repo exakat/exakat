@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -141,14 +141,14 @@ class Websocket {
         if ($masked) {
             // generate a random mask:
             $mask = '';
-            for ($i = 0; $i < 4; $i++) {
+            for ($i = 0; $i < 4; ++$i) {
                 $mask .= chr(rand(0, 255));
             }
             $frame .= $mask;
         }
 
         // Append payload to frame:
-        for ($i = 0; $i < $payload_length; $i++) {
+        for ($i = 0; $i < $payload_length; ++$i) {
             $frame .= ($masked === true) ? $payload[$i] ^ $mask[$i % 4] : $payload[$i];
         }
 
@@ -225,7 +225,7 @@ class Websocket {
 
             if ($mask) {
                 // Unmask payload.
-                for ($i = 0; $i < $payload_length; $i++) {
+                for ($i = 0; $i < $payload_length; ++$i) {
                     $payload .= ($data[$i] ^ $masking_key[$i % 4]);
                 }
             } else {
@@ -330,7 +330,7 @@ class Websocket {
      */
     protected static function sprintB($string) {
         $return = '';
-        for ($i = 0; $i < strlen($string); $i++) {
+        for ($i = 0; $i < strlen($string); ++$i) {
             $return .= sprintf('%08b', ord($string[$i]));
         }
         return $return;
@@ -508,7 +508,7 @@ class Websocket {
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"$&/()=[]{}0123456789';
         $key = '';
         $chars_length = strlen($chars);
-        for ($i = 0; $i < 16; $i++) {
+        for ($i = 0; $i < 16; ++$i) {
             $key .= $chars[mt_rand(0, $chars_length-1)];
         }
         return base64_encode($key);

@@ -778,11 +778,11 @@ class Load extends Tasks {
         foreach($tokens as $t) {
             if (is_array($t)) {
                 switch($t[0]) {
-                    case $this->phptokens::T_WHITESPACE: 
+                    case $this->phptokens::T_WHITESPACE:
                         $line += substr_count($t[1], "\n");
                         break;
 
-                    case $this->phptokens::T_COMMENT : 
+                    case $this->phptokens::T_COMMENT :
                         $line += substr_count($t[1], "\n");
                         $comments += substr_count($t[1], "\n") + 1;
                         break;
@@ -790,14 +790,14 @@ class Load extends Tasks {
                     case $this->phptokens::T_DOC_COMMENT:
                         $this->phpDocs[$total + 1] = $t;
                         $comments += substr_count($t[1], "\n") + 1;
-                        break; 
+                        break;
 
                     case $this->phptokens::T_DOC_COMMENT:
                         $this->phpDocs[$total + 1] = $t;
                         $comments += substr_count($t[1], "\n");
-                        break; 
+                        break;
 
-                    default : 
+                    default :
                         $line = $t[2];
                         $this->tokens[] = $t;
                         ++$total;
@@ -2213,14 +2213,14 @@ class Load extends Tasks {
                 $typehints = array();
                 foreach($returnTypes as $returnType) {
                     $this->addLink($index, $returnType, 'TYPEHINT');
-                    
+
                     if ($returnType->atom !== 'Void') {
                         $typehints[] = $returnType->fullcode;
-                    } 
+                    }
                 }
 
                 if (!empty($typehints)) {
-                    $index->fullcode = join('|', $typehints). ' ' . $index->fullcode;
+                    $index->fullcode = join('|', $typehints) . ' ' . $index->fullcode;
                 }
 
                 $this->addLink($arguments, $index, 'ARGUMENT');
@@ -2496,11 +2496,11 @@ class Load extends Tasks {
                 $typehints[] = $returnType->fullcode;
             }
         }
-        
+
         if (empty($typehints)) {
             $typehint_fullcode = '';
         } else {
-            $typehint_fullcode = join('|', $typehints).' ';
+            $typehint_fullcode = join('|', $typehints) . ' ';
         }
 
         $ppp->visibility = 'none';
@@ -2527,11 +2527,11 @@ class Load extends Tasks {
                     $typehints[] = $returnType->fullcode;
                 }
             }
-            
+
             if (empty($typehints)) {
                 $typehint_fullcode = '';
             } else {
-                $typehint_fullcode = join('|', $typehints).' ';
+                $typehint_fullcode = join('|', $typehints) . ' ';
             }
         } else {
             $next = $this->processNext();
@@ -2561,11 +2561,11 @@ class Load extends Tasks {
                     $typehints[] = $returnType->fullcode;
                 }
             }
-            
+
             if (empty($typehints)) {
                 $typehint_fullcode = '';
             } else {
-                $typehint_fullcode = join('|', $typehints).' ';
+                $typehint_fullcode = join('|', $typehints) . ' ';
             }
         } else {
             $next = $this->processNext();
@@ -2595,11 +2595,11 @@ class Load extends Tasks {
                     $typehints[] = $returnType->fullcode;
                 }
             }
-            
+
             if (empty($typehints)) {
                 $typehint_fullcode = '';
             } else {
-                $typehint_fullcode = join('|', $typehints).' ';
+                $typehint_fullcode = join('|', $typehints) . ' ';
             }
         } else {
             $next = $this->processNext();
@@ -3003,7 +3003,7 @@ class Load extends Tasks {
                     $typehint->fullnspath = '\\' . mb_strtolower($typehint->code);
                 } else {
                     $this->getFullnspath($typehint, 'class', $typehint);
-    
+
                     $this->calls->addCall('class', $typehint->fullnspath, $typehint);
                 }
             }
@@ -4960,7 +4960,7 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function processReturn() : Atom {
+    private function processReturn(): Atom {
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
                                                             $this->phptokens::T_SEMICOLON,
                                                             ),
@@ -6114,11 +6114,11 @@ class Load extends Tasks {
     }
 
     // token may be string or int
-    private function getToken($token) : string {
+    private function getToken($token): string {
         return $this->php->getTokenName($token);
     }
 
-    private function getFullnspath(Atom $name, string $type = 'class', Atom $apply = null) : void {
+    private function getFullnspath(Atom $name, string $type = 'class', Atom $apply = null): void {
         assert($apply !== null, "\$apply can't be null in " . __METHOD__);
 
         // Handle static, self, parent and PHP natives function
@@ -6299,7 +6299,7 @@ class Load extends Tasks {
         }
     }
 
-    private function addNamespaceUse(Atom $origin, Atom $alias, string $useType, Atom $use) : string {
+    private function addNamespaceUse(Atom $origin, Atom $alias, string $useType, Atom $use): string {
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' as ');

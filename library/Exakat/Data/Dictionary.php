@@ -40,7 +40,7 @@ class Dictionary {
     private function init(): void {
         $this->dictionary = $this->datastore->getAllHash('dictionary');
         foreach(array_keys($this->dictionary) as $key) {
-            $this->lcindex[mb_strtolower((string)$key)] = 1;
+            $this->lcindex[mb_strtolower((string) $key)] = 1;
         }
     }
 

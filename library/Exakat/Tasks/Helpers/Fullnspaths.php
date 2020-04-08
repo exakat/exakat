@@ -24,7 +24,6 @@ declare(strict_types = 1);
 
 namespace Exakat\Tasks\Helpers;
 
-use Exakat\Tasks\Helpers\Atom;
 
 class Fullnspaths {
     private $uses   = array('function'       => array(),
@@ -38,11 +37,11 @@ class Fullnspaths {
                             'class'          => array(),
                             );
 
-    public function set(string $type, string $name, Atom $path) : void {
+    public function set(string $type, string $name, Atom $path): void {
         $this->uses[$type][$name] = $path;
     }
 
-    public function get(string $type, string $name) : ?Atom {
+    public function get(string $type, string $name): ?Atom {
         return $this->uses[$type][$name] ?? null;
     }
 }

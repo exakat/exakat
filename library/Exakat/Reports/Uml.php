@@ -116,11 +116,11 @@ DOT
         return $dot;
     }
 
-    private function str2dot(string $str) : string {
+    private function str2dot(string $str): string {
         return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 , 'UTF-8');
     }
 
-    private function subgraphs(array $array, int $level = 1, string $nsname = '') : string {
+    private function subgraphs(array $array, int $level = 1, string $nsname = ''): string {
         static $id = 0;
         $r = '';
 

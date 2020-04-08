@@ -32,7 +32,7 @@ use Exakat\Vcs\Vcs;
 
 class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     private $tmpFileName = '';
 
     public function run() {
@@ -323,8 +323,8 @@ class Files extends Tasks {
             }
         }
     }
-    
-    function __destruct() {
+
+    public function __destruct() {
         if (file_exists($this->tmpFileName)) {
             unlink($this->tmpFileName);
         }

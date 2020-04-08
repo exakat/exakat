@@ -2081,7 +2081,7 @@ GREMLIN;
         $query = $this->newQuery('collectNativeCallsPerExpressions');
         $query->atomIs('Sequence', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('EXPRESSION')
-              ->atomIsNot(array("Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIsNot(array('Assignation', 'Case', 'Catch', 'Class', 'Classanonymous', 'Closure', 'Concatenation', 'Default', 'Dowhile', 'Finally', 'For', 'Foreach', 'Function', 'Ifthen', 'Include', 'Method', 'Namespace', 'Php', 'Return', 'Switch', 'Trait', 'Try', 'While'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('results')
               ->raw(<<<GREMLIN
 groupCount("m").by( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel("Functioncall")
