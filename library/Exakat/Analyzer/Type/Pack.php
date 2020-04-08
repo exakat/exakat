@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,9 +23,16 @@
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class Pack extends Analyzer {
+class Pack extends AnalyzerDump {
+    protected $analyzerName = 'Pack';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
         $packFunctions = array('\\pack',
                                '\\unpack',
@@ -33,7 +41,8 @@ class Pack extends Analyzer {
         // pack("nvc*", 0x1234, 0x5678, 65, 66);
         $this->atomFunctionIs($packFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'));
+             ->atomIs(array('String', 'Concatenation'))
+             ->toResults();
         $this->prepareQuery();
     }
 }

@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,9 +24,10 @@
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class HexadecimalString extends Analyzer {
+class HexadecimalString extends AnalyzerDump {
     public function analyze() {
         $regex = '^\\\\s*0[xX][0-9a-fA-F]+';
 
@@ -33,7 +35,8 @@ class HexadecimalString extends Analyzer {
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
              ->hasNoParent('Heredoc', 'CONCAT')
-             ->regexIs('noDelimiter', $regex);
+             ->regexIs('noDelimiter', $regex)
+             ->toResults();
         $this->prepareQuery();
 
         // Concatenation String
@@ -41,7 +44,8 @@ class HexadecimalString extends Analyzer {
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              ->regexIs('noDelimiter', $regex)
-             ->back('first');
+             ->back('first')
+             ->toResults();
         $this->prepareQuery();
 
         // Simple Heredoc and nowdoc
@@ -49,7 +53,8 @@ class HexadecimalString extends Analyzer {
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              ->regexIs('noDelimiter', $regex)
-             ->back('first');
+             ->back('first')
+             ->toResults();
         $this->prepareQuery();
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,12 +23,20 @@
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class Heredoc extends Analyzer {
+class Heredoc extends AnalyzerDump {
+    protected $analyzerName = 'Heredoc';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
         $this->atomIs('Heredoc')
-             ->is('heredoc', true);
+             ->is('heredoc', true)
+             ->toResults();
         $this->prepareQuery();
     }
 }

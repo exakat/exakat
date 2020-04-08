@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,9 +23,16 @@
 
 namespace Exakat\Analyzer\Type;
 
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
-class Ports extends Analyzer {
+class Ports extends AnalyzerDump {
+    protected $analyzerName = 'Ports';
+
+    protected $storageType = self::QUERY_RESULTS;
+
+    protected $analyzerTable   = 'results';
+
     public function analyze() {
         // 443
         $ports = $this->load('ports', 'port');
