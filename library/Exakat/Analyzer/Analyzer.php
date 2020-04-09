@@ -329,7 +329,7 @@ GREMLIN;
              ->savePropertyAs('analyzer', 'analyzer')
              ->outIs('ANALYZED')
              ->raw(<<<GREMLIN
-.sideEffect{ line = it.get().value("line");
+ sideEffect{ line = it.get().value("line");
              fullcode = it.get().value("fullcode");
              file="None"; 
              theFunction = ""; 
@@ -1867,7 +1867,7 @@ GREMLIN
             $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
             $dumpQueries[] = $query;
         }
-        
+
         if (count($dumpQueries) >= 3) {
             $this->prepareForDump($dumpQueries);
         }
@@ -2020,10 +2020,10 @@ GREMLIN
             $valuesSQL[] = "('".join("', '", $values)."') \n";
         }
 
-        $dumpQueries = array("DELETE FROM hashAnalyzer WHERE name = '{$this->analyzerName}'");
+        $dumpQueries = array("DELETE FROM hashAnalyzer WHERE analyzer = '{$this->analyzerName}'");
         $chunks = array_chunk($valuesSQL, 490);
         foreach($chunks as $chunk) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
+            $query = 'INSERT INTO hashResults ("analyzer", "key", "value") VALUES ' . implode(', ', $chunk);
             $dumpQueries[] = $query;
         }
 

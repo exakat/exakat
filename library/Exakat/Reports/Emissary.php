@@ -2065,7 +2065,45 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the interface : an interface is extended by another interface. Interface without extension are not represented here');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the interface trees : the interfaces that are extended by another interface. Interface without extension are not represented here');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage($section->file, $html);
+
+    }
+
+    private function generateConstantTree(Section $section): void {
+        $res = $this->dump->fetchTable('constantOrder');
+        foreach($res->toArray() as $row) {
+            if (empty($row['built'])) {
+                continue;
+            }
+
+            $built = $row['built'];
+            if (!isset($list[$built])) {
+                $list[$built] = array();
+            }
+
+            $list[$built][] = $row['building'];
+        }
+
+        if (empty($list)) {
+            $theTable = 'No structured constant were found in this repository.';
+        } else {
+            array_sub_sort($list);
+
+            $secondaries = array_merge(...array_values($list));
+            $top = array_diff(array_keys($list), $secondaries);
+
+            $theTableArray = array();
+            foreach($top as $t) {
+                $theTableArray[] = '<ul class="tree">' . $this->extends2ul($t, $list) . '</ul>';
+            }
+            $theTable = implode(PHP_EOL, $theTableArray);
+        }
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the constant trees : a constant (global or classs) is build based on another constant. Constants built only with literals are not represented here.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
 

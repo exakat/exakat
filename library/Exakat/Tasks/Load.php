@@ -5438,6 +5438,8 @@ class Load extends Tasks {
             $static = $this->addAtom('Staticconstant');
             $this->addLink($static, $right, 'CONSTANT');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
+            $static->fullnspath = "{$left->fullnspath}::{$right->fullcode}";
+            $static->aliased = self::NOT_ALIASED;
             $this->runPlugins($static, array('CLASS'    => $left,
                                              'CONSTANT' => $right));
         } elseif (in_array($right->atom, array('Variable',

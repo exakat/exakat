@@ -355,6 +355,11 @@ inventories:
             source: empty
             file: files_tree
             method: generateFileDependencies
+        constant_tree:
+            title: Constant dependencies tree
+            source: empty
+            file: constant_tree
+            method: generateConstantTree
         variables_confusing:
             title: Confusing Variables
             source: empty

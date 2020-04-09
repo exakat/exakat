@@ -42,7 +42,7 @@ class Dump {
         }
     }
 
-    private function reuse() {
+    private function reuse() : void {
         copy($this->sqliteFileFinal, $this->sqliteFile);
         $this->sqlite = new \Sqlite3($this->sqliteFile, \SQLITE3_OPEN_READWRITE);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
@@ -50,14 +50,14 @@ class Dump {
         $this->initTablesList();
     }
 
-    private function init() {
+    private function init() : void {
         $this->sqlite = new Sqlite3($this->sqliteFile, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $this->initDump();
     }
 
-    private function openForRead() {
+    private function openForRead() : void {
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
             display('Removing old .dump.sqlite');
@@ -80,7 +80,7 @@ class Dump {
         return new Dump1($path, $init);
     }
 
-    private function initDump() {
+    private function initDump() : void {
         $query = <<<'SQL'
 CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
                        thema STRING,
@@ -365,7 +365,7 @@ SQL;
         display('Inited tables');
     }
 
-    private function collectDatastore() {
+    private function collectDatastore() : void {
         $tables = array('analyzed',
                         'compilation52',
                         'compilation53',
@@ -442,7 +442,7 @@ SQL;
         return $this->sqlite->querySingle('SELECT count(*) FROM '.$table);
     }
 
-    public function collectTables($tables) {
+    public function collectTables($tables): void {
         $config = exakat('config');
         $this->sqlite->query("ATTACH '{$config->datastore}' AS datastore");
 
@@ -460,7 +460,7 @@ SQL;
         $this->sqlite->query('DETACH datastore');
     }
 
-    public function close() {
+    public function close() : void {
         $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, \'Project/Dump\', 1)');
         
         rename($this->sqliteFile, $this->sqliteFileFinal);
