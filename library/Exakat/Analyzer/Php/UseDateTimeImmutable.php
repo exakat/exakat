@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseDateTimeImmutable extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() : array {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // new DateTime
         $this->atomIs('New')

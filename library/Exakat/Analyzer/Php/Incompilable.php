@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer\Php;
 
-use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
 
 class Incompilable extends Analyzer {
@@ -38,51 +37,51 @@ class Incompilable extends Analyzer {
         // This is not actually done here....
         return true;
     }
-    
+
     public function toArray() {
         $report = array();
-        
+
         foreach($this->config->other_php_versions as $version) {
             $r = $this->datastore->getRow('compilation' . $version);
-            
+
             foreach($r as $l) {
                 $l['version'] = $version;
                 $report[] = $l;
             }
         }
-        
+
         return $report;
     }
 
-    public function getDump() : array {
+    public function getDump(): array {
         if (!$this->hasResults()) {
             return array();
         }
-        
+
         $report = array();
         // Collect version from datastore
         $r = $this->datastore->getHash('php_version');
         $version = $r[0] . $r[2];
         $r = $this->datastore->getRow('compilation' . $version);
         $report = array();
-        
+
         foreach($r as $l) {
             $l['fullcode']  = $l['error'];
             $l['code']      = $l['error'];
             $l['namespace'] = '';
             $l['class']     = '';
             $l['function']  = '';
-            
+
             $report[] = $l;
         }
-        
+
         return $report;
     }
 
-    public function hasResults() : bool {
+    public function hasResults(): bool {
         foreach($this->config->other_php_versions as $version) {
             $r = $this->datastore->getRow('compilation' . $version);
-            
+
             if (!empty($r)) {
                 return true;
             }

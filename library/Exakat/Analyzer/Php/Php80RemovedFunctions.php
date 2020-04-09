@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,12 +23,11 @@
 
 namespace Exakat\Analyzer\Php;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class Php80RemovedFunctions extends FunctionUsage {
     protected $phpVersion = '8.0-';
-    
+
     public function analyze() {
         $this->functions = array('image2wbmp',
                                  'png2wbmp',

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class PHP73LastEmptyArgument extends Analyzer {
     protected $phpVersion = '7.3+';
-    
+
     public function analyze() {
         // $object->method($a, )
         // $functioncall($a, )

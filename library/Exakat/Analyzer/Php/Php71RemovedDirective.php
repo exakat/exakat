@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,12 +22,11 @@
 
 namespace Exakat\Analyzer\Php;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\UsedDirective;
 
 class Php71RemovedDirective extends UsedDirective {
     protected $phpVersion = '7.1+';
-    
+
     public function analyze() {
         $this->directives = array('session.hash_function',
                                   'session.hash_bits_per_charactor',

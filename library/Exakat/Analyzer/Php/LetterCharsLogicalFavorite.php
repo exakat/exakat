@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class LetterCharsLogicalFavorite extends Analyzer {
     public function analyze() {
         $operators = $this->dictCode->translate(array('&&', '||', '^'));
         $operatorsList = makeList($operators, '');
-        
+
         $mapping = <<<GREMLIN
 if (it.get().value("code") in [$operatorsList]) {
     x2 = "chars";

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class ScalarTypehintUsage extends Analyzer {
     public function analyze() {
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
         $scalars = array_values(array_diff($scalars, array('\array', '\callable', )));
-        
+
         // in Arguments
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ScalarAreNotArrays extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/MakeClassMethodDefinition',
                      'Complete/CreateDefaultValues',
                     );
@@ -124,7 +124,7 @@ class ScalarAreNotArrays extends Analyzer {
              ->atomIs(array('Boolean', 'Integer', 'Float', 'Null'))
              ->savePropertyAs('rank', 'ranked')
              ->back('first')
-             
+
              ->outWithRank('ARGUMENT', 'ranked')
              ->outIs('NAME')
              ->outIs('DEFINITION')

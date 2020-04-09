@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 class UseContravariance extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                     );
     }
-    
+
     public function analyze() {
         // class x { function foo(y $a) {}}
         // class y extends x { function foo(x $a) {}}
@@ -41,12 +41,12 @@ class UseContravariance extends Analyzer {
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
-             
+
              ->outIs('OVERWRITE')
              ->outWithRank('ARGUMENT', 'ranked')
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'fnp')
-             
+
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')

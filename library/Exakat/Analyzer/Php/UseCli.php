@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -40,7 +40,7 @@ class UseCli extends Analyzer {
              ->noDelimiterIs(array('argc', 'argv' ))
             ->back('first');
         $this->prepareQuery();
-        
+
         // getopt()
         $this->atomFunctionIs('\\getopt');
         $this->prepareQuery();

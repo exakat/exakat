@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,19 +26,19 @@ use Exakat\Analyzer\Analyzer;
 class MiddleVersion extends Analyzer {
     private $bugfixes = array();
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         $this->bugfixes = $this->methods->getBugFixes();
-        
+
         $depends = array();
         foreach($this->bugfixes as $bugfix) {
             if (!empty($bugfix['analyzer'])) {
                 $depends[] = $bugfix['analyzer'];
             }
         }
-        
+
         return $depends;
     }
-    
+
     public function analyze() {
         // bugfixes based on functions
         $functions = array();

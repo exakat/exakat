@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,21 +31,21 @@ class ShortOpenTagRequired extends Analyzer {
         // This is not actually done here....
         return true;
     }
-    
+
     public function getArray() {
         $r = $this->datastore->getRow('shortopentag');
-        
+
         $report = array();
         foreach($r as $l) {
             $report[] = array($l['file']);
         }
-        
+
         return $report;
     }
-    
-    public function hasResults() : bool {
+
+    public function hasResults(): bool {
        $r = $this->datastore->getRow('shortopentag');
-       
+
        return !empty($r);
     }
 }

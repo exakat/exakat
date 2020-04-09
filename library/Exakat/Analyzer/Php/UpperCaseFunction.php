@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,11 +26,11 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UpperCaseFunction extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Functions/IsExtFunction',
                     );
     }
-    
+
     public function analyze() {
         // STRTOLOWER()
         $this->atomIs('Functioncall')
@@ -41,7 +41,7 @@ class UpperCaseFunction extends Analyzer {
         $this->atomIs(array('List', 'Unset', 'Echo', 'Print', 'Exit', 'Isset'))
              ->isNotLowerCase('code');
         $this->prepareQuery();
-        
+
         // some of the keywords are lost anyway : implements, extends, as in foreach(), endforeach/while/for/* are lost in tokenizer (may be keep track of that)
 
     }

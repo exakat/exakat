@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class UnknownPcre2Option extends Analyzer {
     public function analyze() {
         // Options list : S and X
         $options = '[a-zA-Z\\\\s]*[S][a-zA-Z\\\\s]*';
-        
+
         // preg_match with a string
         $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)

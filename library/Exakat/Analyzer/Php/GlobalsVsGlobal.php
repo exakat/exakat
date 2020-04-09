@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class GlobalsVsGlobal extends Analyzer {
     public function analyze() {
         $globals = $this->dictCode->translate(array('$GLOBALS'));
-        
+
         if (empty($globals)) {
             return;
         }
@@ -66,7 +66,7 @@ GREMLIN;
         if (empty($types)) {
             return;
         }
-        
+
         $this->atomIs(self::$VARIABLES_ALL)
              ->raw('or( has("code", ' . $globals[0] . '), __.in("GLOBAL")) ')
              ->raw('sideEffect{ ' . $mapping . ' }')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class NoSubstrMinusOne extends Analyzer {
     protected $phpVersion = '7.1+';
-    
+
     public function analyze() {
         // $x[-1] is wrong for version before PHP 7.1
         // Possible false positive with arrays..

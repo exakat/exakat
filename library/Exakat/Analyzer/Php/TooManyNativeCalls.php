@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,12 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class TooManyNativeCalls extends Analyzer {
     protected $nativeCallCounts = 3;
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Functions/IsExtFunction',
                     );
     }
-    
+
     public function analyze() {
         $this->atomIs('Sequence')
              ->outIs('EXPRESSION')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class ReservedNames extends Analyzer {
 
     public function analyze() {
         $phpNames = $this->loadIni('php_keywords.ini', 'keyword');
-        
+
         $reservedNames = array_merge(str2array($this->reservedNames),
                                      array_diff($phpNames, str2array($this->allowedNames)));
 

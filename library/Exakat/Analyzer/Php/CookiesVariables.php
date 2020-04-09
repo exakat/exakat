@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CookiesVariables extends Analyzer {
     public function analyze() {
         $cookie = $this->dictCode->translate(array('$_COOKIE'));
-        
+
         if (!empty($cookie)) {
             // $_COOKIE['name'];
             $this->atomIs('Phpvariable')

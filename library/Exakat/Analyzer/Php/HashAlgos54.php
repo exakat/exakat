@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class HashAlgos54 extends Analyzer {
     public function analyze() {
         $algos = array_merge($this->loadIni('hash_algos.ini', 'removed54'),
                              $this->loadIni('hash_algos.ini', 'new56'));
-        
+
         $this->atomFunctionIs(HashAlgos71::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)

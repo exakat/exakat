@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,11 +30,11 @@ class UpperCaseKeyword extends Analyzer {
         $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Usenamese', 'Usetrait', 'Function', 'Method',
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
                             'Clone', 'Dowhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
-                            'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Static',))
+                            'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Static', ))
              ->codeIsNot(array('&&', '||', '^', '&', '|'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->isNotLowercase('code');
         $this->prepareQuery();
-        
+
         // some of the keywords are lost anyway : implements, extends, as in foreach(), endforeach/while/for/* are lost in tokenizer (may be keep track of that)
         // As (in use commands) are not preserved.
     }

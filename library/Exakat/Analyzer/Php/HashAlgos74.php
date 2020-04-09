@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class HashAlgos74 extends Analyzer {
     protected $phpVersion = '7.4-';
-    
+
     public function analyze() {
         $algos = $this->loadIni('hash_algos.ini', 'new74');
-        
+
         $this->atomFunctionIs(HashAlgos71::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)

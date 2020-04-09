@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -40,7 +40,7 @@ class Php72Deprecation extends Analyzer {
         $this->atomIs(self::$STATIC_NAMES)
              ->fullnspathIs('\\INTL_IDNA_VARIANT_2003', self::CASE_SENSITIVE);
         $this->prepareQuery();
-        
+
         // Usage of \\parse_str with no 2nd argument
         $this->atomFunctionIs('\\parse_str')
              ->noChildWithRank('ARGUMENT', 1)
@@ -53,7 +53,7 @@ class Php72Deprecation extends Analyzer {
              ->atomIs(self::$STRINGS_ALL)
              ->back('first');
         $this->prepareQuery();
-        
+
         // usage of $php_errormsg
         $this->atomIs('Phpvariable')
              ->codeIs('$php_errormsg', self::TRANSLATE, self::CASE_SENSITIVE);
@@ -63,7 +63,7 @@ class Php72Deprecation extends Analyzer {
         $this->atomIs('Cast')
              ->tokenIs('T_UNSET_CAST');
         $this->prepareQuery();
-        
+
         //mbstring.func_overload
         // error handler 's 5th argument
     }

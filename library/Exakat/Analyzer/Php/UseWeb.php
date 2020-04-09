@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -40,7 +40,7 @@ class UseWeb extends Analyzer {
              ->noDelimiterIs(array('SERVER_PROTOCOL',
                                    'SERVER_NAME',
                                    'SERVER_PORT',
-         
+
                                    'HTTP_HOST',
                                    'HTTP_ORIGIN',
                                    'HTTP_USER_AGENT',
@@ -52,9 +52,9 @@ class UseWeb extends Analyzer {
                                    'HTTP_REFERER',
                                    'HTTP_IF_MODIFIED_SINCE',
                                    'HTTP_IF_NONE_MATCH',
-         
+
                                    'CONTENT_TYPE',
-         
+
                                    'REQUEST_URI',
                                    'REQUEST_METHOD',
                                    'QUERY_STRING',

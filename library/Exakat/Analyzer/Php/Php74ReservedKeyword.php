@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class Php74ReservedKeyword extends Analyzer {
 
     public function analyze() {
         $keyword = 'fn';
-        
+
         $this->atomIs('Identifier')
              ->codeIs($keyword, self::TRANSLATE, self::CASE_INSENSITIVE);
         $this->prepareQuery();

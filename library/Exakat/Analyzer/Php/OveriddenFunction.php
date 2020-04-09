@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,12 +28,12 @@ class OveriddenFunction extends Analyzer {
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
         $exts[] = 'php_functions';
-        
+
         $functions = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\\Ext', '', $ext);
             $ini = $this->load($inifile, 'functions');
-            
+
             if (!empty($ini[0])) {
                 $functions[] = $ini;
             }
