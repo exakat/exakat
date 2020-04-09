@@ -352,7 +352,7 @@ GREMLIN;
        "analyzer":analyzer];
 }
 GREMLIN
-,array($this->shortAnalyzer));
+);
 
         return $this->rawQuery()->toArray();
     }
