@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectMbstringEncodings extends AnalyzerDump {
     protected $analyzerName = 'Mbstring Encodings';
     protected $storageType = self::QUERY_PHP_ARRAYS;
-    
+
     public function analyze() {
         // mb_stotolower('PHP', 'utf-8');
         $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');

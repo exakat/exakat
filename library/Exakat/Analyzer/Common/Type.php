@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Common;
 use Exakat\Analyzer\Analyzer;
 
 class Type extends Analyzer {
-    
+
     protected $type = null;
 
     public function analyze() {
@@ -34,7 +34,7 @@ class Type extends Analyzer {
         $this->prepareQuery();
     }
 
-    public function getDump() : array {
+    public function getDump(): array {
         $query = <<<GREMLIN
 g.V().hasLabel("{$this->type}")
 .sideEffect{ line = it.get().value('line');

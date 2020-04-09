@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class SpecialIntegers extends Analyzer {
         $codes = $this->load('SpecialIntegers', 'code');
         $codes = array_keys($codes);
         $codes = array_map(function ($x) { return (string) $x; }, $codes);
-        
+
         $this->atomIs('Integer')
              ->codeIs($codes, self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();

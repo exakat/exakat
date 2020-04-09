@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyUsage extends Analyzer {
     protected $properties = array();
-    
+
     public function analyze() {
         $staticHash = array();
         $propertyHash = array();
@@ -41,7 +41,7 @@ class PropertyUsage extends Analyzer {
                 array_collect_by($propertyHash, $class, $property);
             }
         }
-        
+
         // A::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -41,7 +41,7 @@ class Autoload extends Analyzer {
         return $report;
     }
 
-    public function hasResults() : bool {
+    public function hasResults(): bool {
         $res = $this->datastore->getHash('autoload');
 
         $report = $res === 'psr-0' || $res === 'psr-4' ;
@@ -49,7 +49,7 @@ class Autoload extends Analyzer {
         return $report;
     }
 
-    public function getDump() : array {
+    public function getDump(): array {
         if (!$this->hasResults()) {
             return array();
         }

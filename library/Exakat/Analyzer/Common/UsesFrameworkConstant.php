@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,14 +23,13 @@
 namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\ConstantUsage;
 
 class UsesFrameworkConstant extends Analyzer {
     protected $constants   = array();
-    
+
     public function analyze() {
         $analyzerId = null;
-        
+
         if (!empty($this->constants[0])) {
             $constants = makeFullNsPath($this->constants, \FNP_CONSTANT);
 

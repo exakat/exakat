@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,16 +28,16 @@ use Exakat\Analyzer\Analyzer;
 class HttpStatus extends Analyzer {
     public function analyze() {
         $ini = $this->load('HttpStatus', 'code');
-        
+
         // $http = "418";
         $this->atomIs('Integer')
-             ->codeIs(array_map(function (int $i) : string { return (string) $i; }, array_keys($ini)));
+             ->codeIs(array_map(function (int $i): string { return (string) $i; }, array_keys($ini)));
         $this->prepareQuery();
 
         // $code = "418";
         $this->atomIs('String')
              ->has('noDelimiter')
-             ->noDelimiterIs(array_map(function (int $i) : string { return (string) $i; }, array_keys($ini)));
+             ->noDelimiterIs(array_map(function (int $i): string { return (string) $i; }, array_keys($ini)));
         $this->prepareQuery();
     }
 }

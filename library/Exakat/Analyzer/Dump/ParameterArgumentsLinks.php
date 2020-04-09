@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,21 +22,20 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class ParameterArgumentsLinks extends AnalyzerDump {
     protected $analyzerName = 'Parameter Arguments';
-    
+
     protected $storageType = self::QUERY_PHP_ARRAYS;
-    
+
     public function analyze() {
         $this->analyzerValues = array();
-        
+
         // Total parameter usage
         $this->atomIs('Parameter')
              ->savePropertyAs('rank', 'ranked')
              ->back('first')
-             
+
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
              ->outIsIE('METHOD')
@@ -51,7 +50,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')
-             
+
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
              ->outIsIE('METHOD')
@@ -68,7 +67,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')
-             
+
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
              ->outIsIE('METHOD')
@@ -84,7 +83,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->savePropertyAs('rank', 'ranked')
              ->outIs('NAME')
              ->back('first')
-             
+
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
              ->outIsIE('METHOD')
@@ -99,7 +98,7 @@ class ParameterArgumentsLinks extends AnalyzerDump {
              ->savePropertyAs('rank', 'ranked')
              ->outIs('NAME')
              ->back('first')
-             
+
              ->inIs('ARGUMENT')
              ->outIs('DEFINITION')
              ->outIsIE('METHOD')

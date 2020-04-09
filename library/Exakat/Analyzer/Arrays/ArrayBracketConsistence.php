@@ -29,7 +29,7 @@ class ArrayBracketConsistence extends Analyzer {
     protected $array_ratio = 10;
 
     public function analyze() {
-        $this->array_ratio = readIniPercentage($this->array_ratio);
+        $this->array_ratio = readIniPercentage((string) $this->array_ratio);
 
         $mapping = <<<'GREMLIN'
 x2 = it.get().value("token");

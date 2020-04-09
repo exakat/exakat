@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedTrait extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Modules/DefinedTraits',
                     );
     }

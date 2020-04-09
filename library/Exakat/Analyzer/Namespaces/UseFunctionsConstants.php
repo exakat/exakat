@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class UseFunctionsConstants extends Analyzer {
     protected $phpVersion = '5.6+';
-    
+
     public function analyze() {
         // use function foo
         // use const FOO
         $this->atomIs('Usenamespace')
-             ->outIs(array('CONST','FUNCTION'))
+             ->outIs(array('CONST', 'FUNCTION'))
              ->back('first');
         $this->prepareQuery();
     }

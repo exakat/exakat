@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class TypehintingStats extends AnalyzerDump {
      protected $analyzerName   = 'Typehinting stats';
-     
+
      protected $storageType = self::QUERY_PHP_HASH;
 
     public function analyze() {
@@ -124,7 +123,7 @@ class TypehintingStats extends AnalyzerDump {
                  )
                  ->count();
             $return["{$name}WithTypehint"] = $this->rawQuery()->toInt();
-    
+
             //typehinted
             $this->atomIs($atom)
                  ->outIs('RETURNTYPE')
@@ -134,7 +133,7 @@ class TypehintingStats extends AnalyzerDump {
         }
 
         $this->analyzedValues = $return;
-        
+
         $this->prepareQuery();
     }
 }

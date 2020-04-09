@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -41,14 +41,14 @@ class PossibleInterfaces extends Analyzer {
     // remove extended ... ??
     // remove already interfaced (tough luck)
     // include traits?? Nope, for the first take
-    
+
     public function analyze() {
         $this->atomIs('Class')
              ->collectMethods('methods')
              ->raw('filter{ methods.size() > 1; }')
              ->raw('map{ methods.add(it.get().value("fullnspath")); methods; }');
         $res = $this->rawQuery();
-        
+
         $interfaces = $res->toArray();
         // at least one method
         $interfaces = array_filter($interfaces, function ($x) { return count($x) > 1; });
@@ -65,7 +65,7 @@ class PossibleInterfaces extends Analyzer {
                 $interface_name = array_pop($interface);
 //                if ($current === $interface_name) { continue; }
                 if (!empty($diff = array_intersect($interface, $one))) {
-                    $stats[$id]++;
+                    ++$stats[$id];
 
                     if (count($diff) >= 2) {
                         sort($diff);
@@ -82,11 +82,11 @@ class PossibleInterfaces extends Analyzer {
 
         // at least 2 methods in common
         $counts = array_filter($counts, function ($x) { return $x >= 2;});
-        
+
         if (empty($counts)) {
             return ;
         }
-        
+
         foreach(array_keys($counts) as $count) {
             $arg = explode('-', $count);
             $arg = array_map('intval', $arg);

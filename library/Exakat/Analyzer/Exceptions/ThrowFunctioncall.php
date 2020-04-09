@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ class ThrowFunctioncall extends Analyzer {
     public function analyze() {
         $phpClasses    = $this->loadIni('php_classes.ini', 'classes');
         $phpClassesFnp = makeFullNsPath($phpClasses);
-        
+
         // throw className(), defined class, no function
         $this->atomIs('Throw')
              ->outIs('THROW')

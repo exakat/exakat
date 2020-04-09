@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -38,9 +38,9 @@ class WindowsOnlyConstants extends Analyzer {
                             'PHP_WINDOWS_NT_SERVER',
                             'PHP_WINDOWS_NT_WORKSTATION',
                 );
-        
+
         $fnp = makeFullnspath($constants, \FNP_CONSTANT);
-        
+
         $this->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($fnp, Analyzer::CASE_SENSITIVE);
         $this->prepareQuery();

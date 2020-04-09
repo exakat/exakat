@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,14 +23,13 @@
 
 namespace Exakat\Analyzer\Interfaces;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\InterfaceUsage as CommonInterfaceUsage;
 
 class InterfaceUsage extends CommonInterfaceUsage {
 
     public function analyze() {
         $this->interfaces = array();
-        
+
         parent::analyze();
     }
 }

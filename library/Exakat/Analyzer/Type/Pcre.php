@@ -24,7 +24,6 @@ declare(strict_types = 1);
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Dump\AnalyzerDump;
-use Exakat\Analyzer\Analyzer;
 
 class Pcre extends AnalyzerDump {
     protected $analyzerName = 'Pcre';
@@ -44,7 +43,7 @@ class Pcre extends AnalyzerDump {
                             '\\"'     => '\\"',
                             "'"       => "'",
                             );
-        
+
         foreach($delimiters as $in => $out) {
             // regex like $in....$out
             $this->atomIs(self::STRINGS_LITERALS)

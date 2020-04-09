@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Modules;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\TraitUsage;
 
 class DefinedTraits extends TraitUsage {
@@ -30,11 +29,11 @@ class DefinedTraits extends TraitUsage {
 
     public function analyze() {
         $traits = $this->config->ext->loadIni('traits.ini', 'traits');
-        
+
         if (empty($traits)) {
             return;
         }
-        
+
         $this->traits = $traits;
         return parent::analyze();
     }

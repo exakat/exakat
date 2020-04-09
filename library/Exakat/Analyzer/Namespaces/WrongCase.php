@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,15 +30,15 @@ class WrongCase extends Analyzer {
              ->outIs('NAME')
              ->values('fullcode');
         $res = $this->rawQuery();
-        
+
         $all = $res->toArray();
         $all[] = "TYPO3\CMS\Recordlist\LINKHandler";
         $all = array_unique($all);
         $all = array_map('mb_strtolower', $all);
         $stats = array_count_values($all);
-        
+
         $doubles = array_filter($stats, function ($x) { return $x > 1; });
-        
+
         if (empty($doubles)) {
             return;
         }

@@ -32,10 +32,10 @@ class PropagateConstants extends Analyzer {
         $this->pushConstantValues();
         $this->PropagateConstants();
     }
-    
+
     private function propagateConstants($level = 0) {
         $total = 0;
-        
+
         //Currently handles + - * / % . << >> ** ()
         //Currently handles intval, boolean, noDelimiter (String)
         //Needs realval, arrayval
@@ -79,7 +79,7 @@ class PropagateConstants extends Analyzer {
 
                  ->outIs('NAME')
                  ->hasNo('propagated')
-                 ->raw(<<<GREMLIN
+                 ->raw(<<<'GREMLIN'
  sideEffect{ 
         if ("noDelimiter" in x.keys()) {
             it.get().property("noDelimiter", x.value("noDelimiter")); 
@@ -102,7 +102,7 @@ GREMLIN
 )
                  ->count();
             $res = $this->rawQuery();
-        
+
             display( $res->toInt() . " constants inited\n");
             return $res->toInt();
         }
@@ -136,7 +136,7 @@ GREMLIN
 )
             ->count();
             $res = $this->rawQuery();
-            
+
             display( $res->toInt() . " constants propagated\n");
             return $res->toInt();
         }
@@ -160,8 +160,8 @@ GREMLIN
                      ->has('intval')
                      ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
              )
-     
-            ->raw(<<<GREMLIN
+
+            ->raw(<<<'GREMLIN'
  filter{x.size() == 2; }.
 sideEffect{ 
     if (it.get().value("token") == 'T_PLUS') {
@@ -205,7 +205,7 @@ GREMLIN
                      ->hasNo('propagated')
              )
              ->raw('where( __.out("CONCAT").order().by("rank").sideEffect{ x.add( it.get().value("noDelimiter") ) }.count() )')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     s = x.join("");
     it.get().property("noDelimiter", s);
@@ -244,7 +244,7 @@ GREMLIN
                      ->hasNo('intval')
              )
              ->raw('where( __.out("SIGN").sideEffect{ x = it.get().value("intval") }.count() )')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
         if (it.get().value("token") == 'T_PLUS') {
             it.get().property("intval", x); 
@@ -293,7 +293,7 @@ GREMLIN
                      ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
              )
 
-            ->raw(<<<GREMLIN
+            ->raw(<<<'GREMLIN'
  filter{ x.size() == 2; }.
 sideEffect{ 
     try {
@@ -314,10 +314,10 @@ sideEffect{
 GREMLIN
 )
             ->count();
-        
+
             $res = $this->rawQuery();
             display('propagating ' . $res->toInt() . ' power with constants');
-        
+
             return $res->toInt();
         }
 
@@ -346,7 +346,7 @@ GREMLIN
                          ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
                  )
 
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
  filter{x.size() == 2; }.
 sideEffect{ 
         if (it.get().value("token") == 'T_GREATER') {
@@ -410,7 +410,7 @@ GREMLIN
                          ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
                  )
 
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
  filter{x.size() == 2; }.
 sideEffect{ 
       if (it.get().value("token") == 'T_BOOLEAN_AND' ||
@@ -456,7 +456,7 @@ GREMLIN
                      ->hasNo('intval')
              )
              ->raw('where( __.out("CODE").sideEffect{ x = it.get() }.count() )')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     it.get().property("intval", x.value("intval")); 
     it.get().property("boolean", x.value("boolean"));
@@ -488,7 +488,7 @@ GREMLIN
                      ->hasNo('intval')
              )
              ->raw('where( __.out("NOT").sideEffect{ x = it.get() }.count() )')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == 'T_BANG') {
       i = !x.value("intval");
@@ -535,7 +535,7 @@ GREMLIN
                      ->has('intval')
                      ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
              )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (x[0] == 0) {
       i = x[1];
@@ -588,7 +588,7 @@ GREMLIN
                      ->has('intval')
                      ->raw('sideEffect{ x.add( it.get() ) }.fold()')
              )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (x[0].value("intval") == 0) {
       if (x[1].label() == 'Void') {
@@ -615,7 +615,7 @@ GREMLIN
         display('propagating ' . $res->toInt() . ' Ternary with constants');
         return $res->toInt();
     }
-    
+
     private function processBitshift() {
         display('propagating Constant value in Bitshift');
         $this->atomIs('Bitshift')
@@ -639,7 +639,7 @@ GREMLIN
                      ->has('intval')
                      ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
              )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == 'T_SL') {
       i = x[0] << x[1];
@@ -686,7 +686,7 @@ GREMLIN
                      ->has('intval')
                      ->raw('sideEffect{ x.add( it.get().value("intval") ) }.fold()')
              )
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().value("token") == 'T_STAR') {
       i = x[0] * x[1];

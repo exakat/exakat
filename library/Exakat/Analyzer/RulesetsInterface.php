@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,27 +24,27 @@
 namespace Exakat\Analyzer;
 
 interface RulesetsInterface {
-    public function getRulesetsAnalyzers(array $ruleset = array()) : array;
+    public function getRulesetsAnalyzers(array $ruleset = array()): array;
 
-    public function getRulesetForAnalyzer(string $analyzer = '') : array;
+    public function getRulesetForAnalyzer(string $analyzer = ''): array;
 
-    public function getRulesetsForAnalyzer(array $list = array()) : array;
+    public function getRulesetsForAnalyzer(array $list = array()): array;
 
-    public function getSeverities() : array;
+    public function getSeverities(): array;
 
-    public function getTimesToFix() : array;
+    public function getTimesToFix(): array;
 
-    public function getFrequences() : array;
+    public function getFrequences(): array;
 
-    public function listAllAnalyzer(string $folder = '') : array;
+    public function listAllAnalyzer(string $folder = ''): array;
 
-    public function listAllRulesets(array $ruleset = array()) : array;
+    public function listAllRulesets(array $ruleset = array()): array;
 
-    public function getSuggestionRuleset(array $ruleset = array()) : array;
+    public function getSuggestionRuleset(array $ruleset = array()): array;
 
-    public function getSuggestionClass(string $name) : array;
+    public function getSuggestionClass(string $name): array;
 
-    public function getAnalyzerInExtension(string $name) : array;
+    public function getAnalyzerInExtension(string $name): array;
 
 }
 ?>

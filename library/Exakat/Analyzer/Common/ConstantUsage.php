@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ConstantUsage extends Analyzer {
     protected $constants = array();
-    
+
     public function analyze() {
         $constants =  makeFullNsPath($this->constants, \FNP_CONSTANT);
 
@@ -35,7 +35,7 @@ class ConstantUsage extends Analyzer {
              ->fullnspathIs($constants, Analyzer::CASE_SENSITIVE);
         $this->prepareQuery();
     }
-    
+
     public function setConstants(array $constants) {
         $this->constants = $constants;
     }

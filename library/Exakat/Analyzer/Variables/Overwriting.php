@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -54,7 +54,7 @@ class Overwriting extends Analyzer {
              ->back('first');
         $this->prepareQuery();
     }
-    
+
     // todo : add cases of on-the-spot modification (like sort())
 }
 

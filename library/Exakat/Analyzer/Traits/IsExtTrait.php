@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class IsExtTrait extends Analyzer {
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Traits/TraitUsage',
                     );
     }
-    
+
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
@@ -40,7 +40,7 @@ class IsExtTrait extends Analyzer {
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
             $ini = $this->load($inifile, 'traits');
-            
+
             if (!empty($ini[0])) {
                 $t[] = $ini;
             }
@@ -52,7 +52,7 @@ class IsExtTrait extends Analyzer {
 
         $traits = array_merge(...$t);
         $traits = makeFullNsPath($traits);
-        
+
         $this->analyzerIs('Traits/TraitUsage')
              ->fullnspathIs($traits);
         $this->prepareQuery();

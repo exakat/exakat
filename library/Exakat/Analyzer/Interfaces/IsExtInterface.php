@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class IsExtInterface extends Analyzer {
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        
+
         $interfaces = array($this->loadIni('php_interfaces.ini', 'interfaces'));
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
@@ -44,7 +44,7 @@ class IsExtInterface extends Analyzer {
         }
         $interfaces = array_merge(...$interfaces);
         $interfaces = makeFullNsPath($interfaces);
-        
+
         $this->atomIs('Class')
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))
              ->fullnspathIs($interfaces);

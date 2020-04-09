@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class PropagateCalls extends Complete {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                     );
     }
@@ -37,10 +37,10 @@ class PropagateCalls extends Complete {
 
         $this->propagateCalls();
     }
-    
-    private function propagateCalls($level = 0) : void {
+
+    private function propagateCalls($level = 0): void {
         $total = 0;
-        
+
         $total += $this->processReturnedType();
         $total += $this->processParenthesis();
 
@@ -48,8 +48,8 @@ class PropagateCalls extends Complete {
             $this->propagateCalls($level + 1);
         }
     }
-    
-    private function processLocalDefinition() : int {
+
+    private function processLocalDefinition(): int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -105,7 +105,7 @@ class PropagateCalls extends Complete {
        return $c1 + $c2;
     }
 
-    private function processReturnedType() : int {
+    private function processReturnedType(): int {
         // function foo() : X {}; $a = foo(); $a->b();
         $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
@@ -123,7 +123,7 @@ class PropagateCalls extends Complete {
               ->as('method')
               ->hasNoIn('DEFINITION')
               ->back('first')
-              
+
               ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
               ->atomIs('Class', self::WITHOUT_CONSTANTS)
@@ -149,7 +149,7 @@ class PropagateCalls extends Complete {
               ->as('method')
               ->hasNoIn('DEFINITION')
               ->back('first')
-              
+
               ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
               ->atomIs('Class', self::WITHOUT_CONSTANTS)
@@ -176,7 +176,7 @@ class PropagateCalls extends Complete {
               ->as('method')
               ->hasNoIn('DEFINITION')
               ->back('first')
-              
+
               ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
               ->atomIs('Class', self::WITHOUT_CONSTANTS)
@@ -203,7 +203,7 @@ class PropagateCalls extends Complete {
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
              ->back('first')
-             
+
              ->outIs('RETURNTYPE')
              ->inIs('DEFINITION')
              ->atomIs('Class', self::WITHOUT_CONSTANTS)
@@ -217,8 +217,8 @@ class PropagateCalls extends Complete {
 
        return $c1 + $c2 + $c3;
     }
-    
-    private function processParenthesis() : int {
+
+    private function processParenthesis(): int {
 
         // (new x)->foo()
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
@@ -368,11 +368,11 @@ class PropagateCalls extends Complete {
               ->addETo('DEFINITION', 'constant')
               ->count();
         $c5 = $this->rawQuery()->toInt();
-        
+
         return $c1 + $c2 + $c3 + $c4 + $c5;
     }
 
-    private function propagateGlobals() : int {
+    private function propagateGlobals(): int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -431,12 +431,12 @@ class PropagateCalls extends Complete {
               ->addETo('DEFINITION', 'member')
               ->count();
         $c2 = $this->rawQuery()->toInt();
-        
+
         return $c1 + $c2;
     }
-    
-    
-    private function propagateTypehint() : int {
+
+
+    private function propagateTypehint(): int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -562,11 +562,11 @@ class PropagateCalls extends Complete {
               ->addETo('DEFINITION', 'first')
               ->count();
         $c4 = $this->rawQuery()->toInt();
-        
+
         return $c1 + $c2 + $c3 + $c4;
     }
-    
-    private function processFluentInterfaces() : int {
+
+    private function processFluentInterfaces(): int {
         $this->atomIs(array('Methodcall', 'Staticmethodcall'), self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -591,7 +591,7 @@ class PropagateCalls extends Complete {
               ->addETo('DEFINITION', 'method')
               ->count();
         $res = $this->rawQuery();
-        
+
         return $res->toInt();
     }
 }

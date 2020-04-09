@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class InterfaceUsage extends Analyzer {
     protected $interfaces = array();
-    
+
     public function setInterfaces($interfaces) {
         $this->interfaces = $interfaces;
     }
@@ -46,7 +46,7 @@ class InterfaceUsage extends Analyzer {
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
-        
+
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->atomIs(array('Identifier', 'Nsname'))
@@ -69,7 +69,7 @@ class InterfaceUsage extends Analyzer {
              ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
-        
+
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->atomIs(array('Identifier', 'Nsname'))

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,19 +23,16 @@
 namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\ClassUsage;
-use Exakat\Analyzer\Common\InterfaceUsage;
-use Exakat\Analyzer\Common\TraitUsage;
 
 class UsesFramework extends Analyzer {
     protected $classes    = array();
     protected $interfaces = array();
     protected $traits     = array();
     protected $namespaces = array();
-    
+
     public function analyze() {
         $analyzerId = null;
-        
+
         if (!empty($this->classes[0])) {
             $classes    = makeFullNsPath($this->classes);
 
@@ -55,7 +52,7 @@ class UsesFramework extends Analyzer {
 
         if (!empty($this->interfaces[0])) {
             $interfaces = makeFullNsPath($this->interfaces);
-        
+
             if (!empty($interfaces)) {
                 $interfacesUsage = new InterfaceUsage();
                 $interfacesUsage->setAnalyzer(get_class($this));

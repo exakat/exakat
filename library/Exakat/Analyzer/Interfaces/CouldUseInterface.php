@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -59,7 +59,7 @@ class CouldUseInterface extends Analyzer {
             if (count($methods) !== count($translations)) {
                 continue;
             }
-            
+
             // translations are in the same order than original
             foreach($methods as $id => $method) {
                 $interfaces[$interface][] = $translations[$id] . "-$method->count-";

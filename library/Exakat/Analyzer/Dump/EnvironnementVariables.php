@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class EnvironnementVariables extends AnalyzerDump {
     protected $analyzerName = 'Environment Variables via Function';
-    
+
     protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
@@ -36,7 +35,7 @@ class EnvironnementVariables extends AnalyzerDump {
               ->inIs('VARIABLE')
               ->outIs('INDEX')
               ->has('noDelimiter')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 groupCount("m").by("noDelimiter").cap("m")
 GREMLIN
 );
@@ -47,7 +46,7 @@ GREMLIN
         $this->atomFunctionIs(array('\\putenv', '\\getenv'))
               ->outWithRank('ARGUMENT', 0)
               ->has('noDelimiter')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 groupCount("m").by("noDelimiter").cap("m")
 GREMLIN
 );

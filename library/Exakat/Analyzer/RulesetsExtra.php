@@ -23,9 +23,6 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\RulesetsInterface;
-use Exakat\Autoload\Autoloader;
 
 class RulesetsExtra implements RulesetsInterface {
     private $extra_rulesets  = array();
@@ -34,7 +31,7 @@ class RulesetsExtra implements RulesetsInterface {
         $this->extra_rulesets = $extra_rulesets;
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = array()) : array {
+    public function getRulesetsAnalyzers(array $ruleset = array()): array {
         // Main installation
         if ($ruleset === null) {
             if (empty($this->extra_rulesets)) {
@@ -56,18 +53,18 @@ class RulesetsExtra implements RulesetsInterface {
         }
     }
 
-    public function getRulesetForAnalyzer(string $analyzer = '') : array {
+    public function getRulesetForAnalyzer(string $analyzer = ''): array {
         $return = array();
         foreach($this->extra_rulesets as $ruleset => $analyzers) {
             if (in_array($analyzer, $analyzers)) {
                 $return[] = $ruleset;
             }
         }
-        
+
         return $return;
     }
 
-    public function getRulesetsForAnalyzer(array $analyzer = array()) : array {
+    public function getRulesetsForAnalyzer(array $analyzer = array()): array {
         $return = array();
 
         if ($analyzer === null) {
@@ -76,7 +73,7 @@ class RulesetsExtra implements RulesetsInterface {
                     array_collect_by($return, $analyzer, $ruleset);
                 }
             }
-            
+
             return $return;
         }
 
@@ -89,28 +86,28 @@ class RulesetsExtra implements RulesetsInterface {
         return $return;
     }
 
-    public function getSeverities() : array {
+    public function getSeverities(): array {
         return array();
     }
 
-    public function getTimesToFix() : array {
+    public function getTimesToFix(): array {
         return array();
     }
 
-    public function getFrequences() : array {
+    public function getFrequences(): array {
         return array();
     }
 
-    public function listAllAnalyzer(string $folder = '') : array {
+    public function listAllAnalyzer(string $folder = ''): array {
         // This is not providing any new analysers.
         return array();
     }
 
-    public function listAllRulesets(array $ruleset = array()) : array {
+    public function listAllRulesets(array $ruleset = array()): array {
         return array_keys($this->extra_rulesets);
     }
 
-    public function getClass(string $name) : string {
+    public function getClass(string $name): string {
         // accepted names :
         // PHP full name : Analyzer\\Type\\Class
         // PHP short name : Type\\Class
@@ -142,10 +139,10 @@ class RulesetsExtra implements RulesetsInterface {
         }
     }
 
-    public function getSuggestionRuleset(array $rulesets = array()) : array {
+    public function getSuggestionRuleset(array $rulesets = array()): array {
         $list = $this->listAllRulesets();
 
-        return array_filter($list, function (string $c) use ($rulesets) : bool {
+        return array_filter($list, function (string $c) use ($rulesets): bool {
             foreach($rulesets as $ruleset) {
                 $l = levenshtein($c, $ruleset);
                 if ($l < 8) {
@@ -156,7 +153,7 @@ class RulesetsExtra implements RulesetsInterface {
         });
     }
 
-    public function getSuggestionClass(string $name) : array {
+    public function getSuggestionClass(string $name): array {
         return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
             $l = levenshtein($c, $name);
 
@@ -164,7 +161,7 @@ class RulesetsExtra implements RulesetsInterface {
         });
     }
 
-    public function getAnalyzerInExtension(string $name) : array {
+    public function getAnalyzerInExtension(string $name): array {
         return array();
     }
 }

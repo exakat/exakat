@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,13 +25,13 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Regex extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/CreateDefaultValues',
                     );
     }
-    
-    private         $pregFunctions = array('\\preg_match_all',
+
+    private $pregFunctions = array('\\preg_match_all',
                                '\\preg_match',
                                '\\preg_replace',
                                '\\preg_replace_callback',

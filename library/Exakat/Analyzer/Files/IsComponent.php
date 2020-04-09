@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,10 +27,10 @@ class IsComponent extends Analyzer {
     public function analyze() {
         $inert = '.not(hasLabel("Usenamespace", "Class", "Const", "Interface", "Function", "Trait", "Include", "Global", "Static", "Void", "Defineconstant"))
                   .not(where( __.hasLabel("Functioncall").filter{ it.get().value("token") in ["T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE_ONCE", "T_REQUIRE"] }) )';
-        
+
         $inertWithIfthen = $inert . '
                   .where( __.hasLabel("Ifthen").where( __.out("THEN", "ELSE").out("EXPRESSION")' . $inert . '.count().is(eq(0)) ).count().is(eq(0)) )';
-        
+
         $this->atomIs('File')
              ->outIs('FILE')
              ->outIs('EXPRESSION')

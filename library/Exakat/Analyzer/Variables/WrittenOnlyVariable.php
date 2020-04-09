@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class WrittenOnlyVariable extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateCompactVariables',
                     );
     }
@@ -47,7 +47,7 @@ coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
 GREMLIN
 )                     ->is('isRead', true)
               )
-              
+
               // variable is read in a compact()
              ->not(
                 $this->side()

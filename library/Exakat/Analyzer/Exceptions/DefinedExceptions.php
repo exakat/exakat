@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class DefinedExceptions extends Analyzer {
     public function analyze() {
         $exceptions = $this->loadIni('php_exception.ini', 'classes');
         $exceptions = makeFullNsPath($exceptions);
-        
+
         // class X extends \Exception {}
         // class Y extends X {}
         $this->atomIs('Class')

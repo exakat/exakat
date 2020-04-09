@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,8 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\RulesetsInterface;
 use Exakat\Autoload\Autoloader;
 
 class RulesetsExt implements RulesetsInterface {
@@ -34,7 +32,7 @@ class RulesetsExt implements RulesetsInterface {
 
     public function __construct(Autoloader $ext) {
         $this->ext = $ext;
-        
+
         foreach($ext->getAllAnalyzers() as $name => $list) {
             if (!isset($list['All'])) {
                 continue; // ignore
@@ -45,20 +43,20 @@ class RulesetsExt implements RulesetsInterface {
         }
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = array()) : array {
+    public function getRulesetsAnalyzers(array $ruleset = array()): array {
         if (empty($this->rulesets)) {
             return array();
         }
-        
+
         $return = array(array());
         foreach($this->rulesets as $t) {
             $return[] = $t->getRulesetsAnalyzers($ruleset);
         }
-        
+
         return array_merge(...$return);
     }
 
-    public function getRulesetForAnalyzer(string $analyzer = '') : array {
+    public function getRulesetForAnalyzer(string $analyzer = ''): array {
         if (empty($this->rulesets)) {
             return array();
         }
@@ -71,21 +69,21 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getRulesetsForAnalyzer(array $analyzer = array()) : array {
+    public function getRulesetsForAnalyzer(array $analyzer = array()): array {
         $return = array(array());
         foreach($this->rulesets as $extension) {
             $return[] = $extension->getRulesetsForAnalyzer($analyzer);
         }
-        
+
         return array_merge(...$return);
     }
 
-    public function getSeverities() : array {
+    public function getSeverities(): array {
         $return = array(array());
 
         foreach($this->all as $name => $list) {
             $severities = array();
-            
+
             foreach($list as $analyse) {
                 $ini = $this->ext->loadData("human/en/$analyse.ini");
                 $ini = parse_ini_string($ini);
@@ -102,16 +100,16 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getTimesToFix() : array {
+    public function getTimesToFix(): array {
         $return = array(array());
 
         foreach($this->all as $name => $list) {
             $timesToFix = array();
-            
+
             foreach($list as $analyse) {
                 $ini = $this->ext->loadData("human/en/$analyse.ini");
                 $ini = parse_ini_string($ini);
-                
+
                 if (isset($ini['timetofix'])) {
                     $timesToFix[$analyse] = constant(Analyzer::class . '::' . $ini['timetofix']) ?? Analyzer::T_NONE;
                 } else {
@@ -124,7 +122,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getFrequences() : array {
+    public function getFrequences(): array {
         $return = array(array());
         foreach($this->rulesets as $extension) {
             $return[] = $extension->getFrequences();
@@ -132,8 +130,8 @@ class RulesetsExt implements RulesetsInterface {
 
         return array_merge(...$return);
     }
-    
-    public function listAllAnalyzer(string $folder = '') : array {
+
+    public function listAllAnalyzer(string $folder = ''): array {
         if (empty($this->all)) {
             return array();
         }
@@ -146,7 +144,7 @@ class RulesetsExt implements RulesetsInterface {
         return preg_grep("#$folder/#", $return);
     }
 
-    public function listAllRulesets(array $ruleset = array()) : array {
+    public function listAllRulesets(array $ruleset = array()): array {
         if (empty($this->rulesets)) {
             return array();
         }
@@ -160,7 +158,7 @@ class RulesetsExt implements RulesetsInterface {
         return array_merge(...$return);
     }
 
-    public function getClass(string $name) : string {
+    public function getClass(string $name): string {
         // accepted names :
         // PHP full name : Analyzer\\Type\\Class
         // PHP short name : Type\\Class
@@ -181,11 +179,11 @@ class RulesetsExt implements RulesetsInterface {
             if (empty($found)) {
                 return ''; // no class found
             }
-            
+
             if (count($found) > 1) {
                 return '';
             }
-            
+
             $class = $found[0];
         } else {
             $class = $name;
@@ -204,9 +202,9 @@ class RulesetsExt implements RulesetsInterface {
         }
     }
 
-    public function getSuggestionRuleset(array $rulesets = array()) : array {
+    public function getSuggestionRuleset(array $rulesets = array()): array {
         $list = $this->listAllRulesets();
-        
+
         return array_filter($list, function ($c) use ($rulesets) {
             foreach($rulesets as $r) {
                 $l = levenshtein($c, $r);
@@ -217,7 +215,7 @@ class RulesetsExt implements RulesetsInterface {
             return false;
         });
     }
-    
+
     public function getSuggestionClass(string $name): array {
         if (empty($this->all)) {
             return array();
@@ -230,9 +228,9 @@ class RulesetsExt implements RulesetsInterface {
         });
     }
 
-    public function getAnalyzerInExtension(string $name) : array {
+    public function getAnalyzerInExtension(string $name): array {
         $return = array(array());
-        
+
         foreach($this->all as $ext) {
             $return[] = preg_grep("#/$name\$#", $ext);
         }

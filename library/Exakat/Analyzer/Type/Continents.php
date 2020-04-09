@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Continents extends Analyzer {
     public function analyze() {
         $ini = $this->loadIni('Continents_en.ini', 'continents_en');
-        
+
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
              ->noDelimiterIs($ini);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,14 +22,13 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
 class NewOrder extends AnalyzerDump {
     protected $analyzerName = 'newOrder';
 
     protected $analyzerTable = 'newOrder';
-    
+
     protected $storageType = self::QUERY_TABLE;
 
     // Store inclusionss of files within each other
@@ -40,7 +39,7 @@ CREATE TABLE newOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                          CONSTRAINT "unique" UNIQUE (calling, called)  ON CONFLICT IGNORE
                         )
 SQL;
-    
+
     public function analyze() {
         $this ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NEW')

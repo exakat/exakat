@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class MakeFunctioncallWithReference extends Complete {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/PropagateCalls',
                     );
@@ -36,7 +36,7 @@ class MakeFunctioncallWithReference extends Complete {
         foreach($methods as $method) {
             array_collect_by($functions, $method['position'], makeFullnspath($method['function']));
         }
-        
+
         foreach($functions as $position => $calls) {
             $this->atomFunctionIs($calls)
                  ->outWithRank('ARGUMENT', $position)

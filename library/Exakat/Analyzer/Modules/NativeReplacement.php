@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -33,10 +33,10 @@ class NativeReplacement extends Analyzer {
         if (empty($this->replacements)) {
             return;
         }
-        
+
         if (isset($this->replacements->variables)) {
             $variables = $this->replacements->variables;
-            
+
             $this->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Phpvariable'))
                   ->codeIs(array_keys((array) $variables));
             $this->prepareQuery();
@@ -45,7 +45,7 @@ class NativeReplacement extends Analyzer {
         if (isset($this->replacements->functions)) {
             $functions = $this->replacements->functions;
             $functions = makeFullnspath(array_keys((array) $functions));
-            
+
             $this->atomFunctionIs($functions);
             $this->prepareQuery();
         }
@@ -53,7 +53,7 @@ class NativeReplacement extends Analyzer {
         if (isset($this->replacements->classes)) {
             $classes = $this->replacements->classes;
             $classes = makeFullnspath(array_keys((array) $classes));
-            
+
             $this->atomIs('Class')
                  ->fullnspathIs($classes);
             $this->prepareQuery();

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Modules;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class DefinedFunctions extends FunctionUsage {
@@ -30,11 +29,11 @@ class DefinedFunctions extends FunctionUsage {
 
     public function analyze() {
         $functions = $this->config->dev->loadIni('functions.ini', 'functions');
-        
+
         if (empty($functions)) {
             return;
         }
-        
+
         $this->functions = $functions;
         parent::analyze();
     }

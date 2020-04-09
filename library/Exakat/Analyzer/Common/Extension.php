@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class Extension extends Analyzer {
     protected $source = '';
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Classes/ClassUsage',
                      'Interfaces/InterfaceUsage',
                      'Traits/TraitUsage',
@@ -38,8 +38,8 @@ class Extension extends Analyzer {
                      'Complete/PropagateCalls',
                      );
     }
-    
-    
+
+
     public function analyze() {
         if (substr($this->source, -4) === '.ini') {
             $ini = (object) $this->loadIni($this->source);
@@ -54,7 +54,7 @@ class Extension extends Analyzer {
             $this->atomFunctionIs($functions);
             $this->prepareQuery();
         }
-        
+
         if (!empty($ini->constants)) {
             $this->atomIs(array('Identifier', 'Nsname'))
                  ->analyzerIs('Constants/ConstantUsage')
@@ -64,7 +64,7 @@ class Extension extends Analyzer {
 
         if (!empty($ini->classes)) {
             $classes = makeFullNsPath($ini->classes);
-            
+
             $usedClasses = array_intersect(self::getCalledClasses(), $classes);
             if (!empty($usedClasses)) {
                 $usedClasses = array_values($usedClasses);
@@ -73,13 +73,13 @@ class Extension extends Analyzer {
                      ->hasNoIn('DEFINITION')
                      ->fullnspathIs($usedClasses);
                 $this->prepareQuery();
-    
+
                 $this->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'))
                      ->outIs('CLASS')
                      ->hasNoIn('DEFINITION')
                      ->fullnspathIs($usedClasses);
                 $this->prepareQuery();
-    
+
                 $this->atomIs(self::$FUNCTIONS_ALL)
                      ->outIs('ARGUMENT')
                      ->outIs('TYPEHINT')
@@ -91,13 +91,13 @@ class Extension extends Analyzer {
                      ->outIs('RETURNTYPE')
                      ->fullnspathIs($usedClasses);
                 $this->prepareQuery();
-    
+
                 $this->atomIs('Catch')
                      ->outIs('CLASS')
                      ->hasNoIn('DEFINITION')
                      ->fullnspathIs($usedClasses);
                 $this->prepareQuery();
-    
+
                 $this->atomIs('Instanceof')
                      ->outIs('CLASS')
                      ->hasNoIn('DEFINITION')
@@ -108,7 +108,7 @@ class Extension extends Analyzer {
 
         if (!empty($ini->interfaces)) {
             $interfaces = makeFullNsPath($ini->interfaces);
-            
+
             $usedInterfaces = array_intersect(self::getCalledinterfaces(), $interfaces);
 
             if (!empty($usedInterfaces)) {
@@ -121,7 +121,7 @@ class Extension extends Analyzer {
 
         if (!empty($ini->traits)) {
             $traits = makeFullNsPath($ini->traits);
-            
+
             $usedTraits = array_intersect(self::getCalledtraits(), $traits);
 
             if (!empty($usedTraits)) {
@@ -134,7 +134,7 @@ class Extension extends Analyzer {
 
         if (!empty($ini->namespaces)) {
             $namespaces = makeFullNsPath($ini->namespaces);
-            
+
             $usedNamespaces = array_intersect(self::getCalledNamespaces(), $namespaces);
 
             if (!empty($usedNamespaces)) {
@@ -165,7 +165,7 @@ class Extension extends Analyzer {
                  ->fullnspathIs(array_keys($classesconstants))
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->back('first')
-                 
+
                  ->outIs('CONSTANT')
                  ->isHash('fullcode', $classesconstants, 'fqn', self::CASE_SENSITIVE)
                  ->back('first');
@@ -180,7 +180,7 @@ class Extension extends Analyzer {
                  ->fullnspathIs(array_keys($methods))
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->back('first')
-                 
+
                  ->outIs('METHOD')
                  ->outIs('NAME')
                  ->tokenIs('T_STRING')
@@ -193,7 +193,7 @@ class Extension extends Analyzer {
                  ->fullnspathIs(array_keys($methods))
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->back('first')
-                 
+
                  ->outIs('METHOD')
                  ->outIs('NAME')
                  ->tokenIs('T_STRING')
@@ -213,7 +213,7 @@ class Extension extends Analyzer {
                  ->fullnspathIs(array_keys($properties))
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->back('first')
-                 
+
                  ->outIs('MEMBER')
                  ->isHash('fullcode', $properties, 'fqn', self::CASE_SENSITIVE)
                  ->back('first');

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class ClassDefinition extends Analyzer {
     protected $classes = array();
-    
+
     public function analyze() {
         $classes =  makeFullNsPath($this->classes);
-        
+
         $this->atomIs('Class')
              ->fullnspathIs($classes);
         $this->prepareQuery();

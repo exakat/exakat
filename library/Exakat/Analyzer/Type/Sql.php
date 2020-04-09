@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ class Sql extends Analyzer {
     public function analyze() {
         $sqlKeywords = $this->loadIni('sqlKeywords.ini', 'keywords');
         $regex = '^(?i)(<<<\\\\w+)?(<<<\'\\\\w+\')?[\\"\']?\\\\s*(' . implode('|', $sqlKeywords) . ') ';
-        
+
         // SQL in a literal 'SELECT col FROM table';
         $this->atomIs(self::$STRINGS_ALL)
              ->hasNoIn('CONCAT')

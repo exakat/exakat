@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedDirective extends Analyzer {
     protected $directives = array();
-    
+
     public function analyze() {
         // Processing ini_get_all ?
         // ini_set($var ? )
@@ -45,7 +45,7 @@ class UsedDirective extends Analyzer {
              ->noDelimiterIs($this->directives, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
-        
+
         $functions = array();
         if (in_array('include_path', $this->directives, STRICT_COMPARISON)) {
             $functions[] = array('\\set_include_path',

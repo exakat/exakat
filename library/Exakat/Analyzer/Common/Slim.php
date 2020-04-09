@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,9 +29,9 @@ abstract class Slim extends Analyzer {
     protected function getAppVariables() {
         $appClasses = array('\\\\slim\\\\slim',
                             '\\\\slim\\\\app');
-                            
+
         $appClassesList = makeList($appClasses);
-        
+
         $query = <<<GREMLIN
 g.V().hasLabel("Newcall")
      .has("fullnspath").has("fullnspath", within($appClassesList))

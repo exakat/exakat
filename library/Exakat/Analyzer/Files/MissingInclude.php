@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingInclude extends Analyzer {
     protected $constant_or_variable_name = 100;
-    
+
     public function analyze() {
         $files = array_merge($this->datastore->getCol('files', 'file'),
                              $this->datastore->getCol('ignoredFiles', 'file'));
@@ -69,7 +69,7 @@ class MissingInclude extends Analyzer {
               ->back('first');
         $this->prepareQuery();
     }
-    
+
     private function searchFile($file, $files, $including) {
         if (empty($file)) {
             return false;
@@ -120,17 +120,17 @@ class MissingInclude extends Analyzer {
             unset($bit);
             $file = implode('', $bits);
         }
-        
+
         // simplify /dir/../ => /
         while(preg_match('|^(.*/)[^/\.]+?/\.\./(.*)$|', $file, $r)) {
             $file = $r[1] . $r[2];
         }
 
         if (in_array($file, $files, \STRICT_COMPARISON)) { return true; }
-        
+
         if (substr($file, 0, 2) === './') {
             if (in_array(ltrim($file, '.'), $files, \STRICT_COMPARISON)) { return true; }
-            
+
             if (in_array(dirname($including) . substr($file, 1), $files, \STRICT_COMPARISON)) { return true; }
         }
 
@@ -144,7 +144,7 @@ class MissingInclude extends Analyzer {
             in_array(dirname($including) . '/' . $file, $files, \STRICT_COMPARISON)) {
              return true;
         }
-        
+
         if (strpos($file, '$')  !== false) { return true;}
         if (strpos($file, '::') !== false) { return true;}
         if (strpos($file, '->') !== false) { return true;}

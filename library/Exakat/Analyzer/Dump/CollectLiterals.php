@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class CollectLiterals extends AnalyzerDump {
     protected $analyzerName = 'Local Variable Counts';
-    
+
     protected $storageType = self::QUERY_TABLE;
-    
+
     public function analyze() {
         $types = array('Integer', 'Float', 'String', 'Heredoc', 'Arrayliteral');
 
@@ -54,7 +53,7 @@ GREMLIN
 )
                  ->goToFile()
                  ->savePropertyAs('fullcode', 'file')
-                 ->raw(<<<GREMLIN
+                 ->raw(<<<'GREMLIN'
 map{ 
   x = ['name': name,
        'file': file,
@@ -80,7 +79,7 @@ GREMLIN;
 */
 
             $this->analyzerTable = 'stringEncodings';
-            $this->analyzerSQLTable = <<<SQL
+            $this->analyzerSQLTable = <<<'SQL'
 CREATE TABLE stringEncodings (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 encoding STRING,
                                 block STRING,

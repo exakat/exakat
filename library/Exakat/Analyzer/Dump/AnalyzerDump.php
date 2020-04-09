@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,23 +26,23 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Dump\Dump;
 
 abstract class AnalyzerDump extends Analyzer {
-    public function getDumpResults() : array {
+    public function getDumpResults(): array {
         switch ($this->storageType) {
-            case self::QUERY_PHP_ARRAYS : 
-            case self::QUERY_HASH : 
+            case self::QUERY_PHP_ARRAYS :
+            case self::QUERY_HASH :
                 $dump      = Dump::factory($this->config->dump);
 
                 $res = $dump->fetchHashResults($this->analyzerName);
                 return $res->toArray();
 
-            case self::QUERY_RESULTS : 
+            case self::QUERY_RESULTS :
                 $dump      = Dump::factory($this->config->dump);
 
                 $res = $dump->fetchAnalysers(array($this->shortAnalyzer));
                 return $res->toArray();
 
-            default : 
-                print "Not results handling for {$this->storageType} in ".__CLASS__."\n";
+            default :
+                print "Not results handling for {$this->storageType} in " . __CLASS__ . "\n";
                 return array();
         }
     }

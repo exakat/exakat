@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Vendors;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\UsesFramework;
 
 class Concrete5 extends UsesFramework {
     public function analyze() {
         $detections = $this->loadIni('vendors/concrete5.ini');
-        
+
         $this->classes    = $detections->classes;
         $this->interfaces = $detections->interfaces;
         $this->traits     = $detections->traits;

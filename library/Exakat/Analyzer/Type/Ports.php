@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Dump\AnalyzerDump;
-use Exakat\Analyzer\Analyzer;
 
 class Ports extends AnalyzerDump {
     protected $analyzerName = 'Ports';
@@ -36,9 +35,9 @@ class Ports extends AnalyzerDump {
     public function analyze() {
         // 443
         $ports = $this->load('ports', 'port');
-        
+
         $this->atomIs('Integer')
-             ->codeIs(array_map(function (int $i) : string { return (string) $i; }, array_keys($ports)))
+             ->codeIs(array_map(function (int $i): string { return (string) $i; }, array_keys($ports)))
              ->toResults();
         $this->prepareQuery();
     }

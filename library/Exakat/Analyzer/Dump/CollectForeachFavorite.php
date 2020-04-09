@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class CollectForeachFavorite extends AnalyzerDump {
     protected $analyzerName = 'Foreach Names';
-    
+
     protected $storageType = self::QUERY_PHP_ARRAYS;
-    
+
     public function analyze() {
         // Foreach, values only
         $this->atomIs('Foreach')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class MakeClassMethodDefinition extends Complete {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetParentDefinition',
                      'Complete/CreateDefaultValues',
                     );
@@ -99,7 +99,7 @@ class MakeClassMethodDefinition extends Complete {
               ->back('first')
               ->goToInstruction(self::CLASSES_TRAITS)
               ->goToAllParents(self::INCLUDE_SELF)
-              
+
               ->outIs('USE')
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')
@@ -135,7 +135,7 @@ class MakeClassMethodDefinition extends Complete {
               ->goToInstruction(self::CLASSES_TRAITS)
               ->goToAllParents(self::INCLUDE_SELF)
               ->as('theClass')
-              
+
               ->outIs('USE')
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')
@@ -170,7 +170,7 @@ class MakeClassMethodDefinition extends Complete {
               ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), self::WITHOUT_CONSTANTS)
               ->inIs('DEFINITION')
               ->goToAllParents(self::INCLUDE_SELF)
-              
+
               ->outIs('USE')
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -33,7 +33,7 @@ class SelfTransform extends Analyzer {
              ->savePropertyAs('fullcode', 'left')
              ->as('results')
              ->back('first')
-             
+
              ->outIs('RIGHT')
              ->atomInside(self::$VARIABLES_ALL)
              ->samePropertyAs('fullcode', 'left')

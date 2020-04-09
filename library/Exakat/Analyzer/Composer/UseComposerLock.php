@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -41,13 +41,13 @@ class UseComposerLock extends Analyzer {
         return $report;
     }
 
-    public function hasResults() : bool {
+    public function hasResults(): bool {
         $report = $this->datastore->getHash('composer.lock') === 1;
 
         return $report;
     }
 
-    public function getDump() : array {
+    public function getDump(): array {
         if ($this->hasResults()) {
             return array();
         }

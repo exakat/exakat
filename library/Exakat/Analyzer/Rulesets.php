@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\Autoloader;
 
 class Rulesets implements RulesetsInterface {
@@ -46,7 +45,7 @@ class Rulesets implements RulesetsInterface {
         $this->ext   = null;
         $this->extra = null;
     }
-    
+
     public function getRulesetsAnalyzers(array $theme = array()): array {
         $main  = $this->main ->getRulesetsAnalyzers($theme);
         $extra = $this->extra->getRulesetsAnalyzers($theme);
@@ -65,25 +64,25 @@ class Rulesets implements RulesetsInterface {
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getRulesetsForAnalyzer(array $list = array()) : array {
+    public function getRulesetsForAnalyzer(array $list = array()): array {
         $main  = $this->main ->getRulesetsForAnalyzer($list);
         $extra = $this->extra->getRulesetsForAnalyzer($list);
         $ext   = $this->ext  ->getRulesetsForAnalyzer($list);
         $dev   = $this->dev  ->getRulesetsForAnalyzer($list);
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getSeverities() : array {
+    public function getSeverities(): array {
         $main  = $this->main ->getSeverities();
         $extra = $this->extra->getSeverities();
         $ext   = $this->ext  ->getSeverities();
         $dev   = $this->dev  ->getSeverities();
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getTimesToFix() : array {
+    public function getTimesToFix(): array {
         $main  = $this->main ->getTimesToFix();
         $extra = $this->extra->getTimesToFix();
         $ext   = $this->ext  ->getTimesToFix();
@@ -92,13 +91,13 @@ class Rulesets implements RulesetsInterface {
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getFrequences() : array {
+    public function getFrequences(): array {
         $main = $this->main->getFrequences();
 
         return array_merge($main);
     }
-    
-    public function listAllAnalyzer(string $folder = '') : array {
+
+    public function listAllAnalyzer(string $folder = ''): array {
         $main  = $this->main ->listAllAnalyzer($folder);
         $extra = $this->extra->listAllAnalyzer($folder);
         $ext   = $this->ext  ->listAllAnalyzer($folder);
@@ -107,16 +106,16 @@ class Rulesets implements RulesetsInterface {
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function listAllRulesets(array $ruleset = array()) : array {
+    public function listAllRulesets(array $ruleset = array()): array {
         $main  = $this->main ->listAllRulesets($ruleset);
         $extra = $this->extra->listAllRulesets($ruleset);
         $ext   = $this->ext  ->listAllRulesets($ruleset);
         $dev   = $this->dev  ->listAllRulesets($ruleset);
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getClass(string $name) : string {
+    public function getClass(string $name): string {
         if ($class = $this->main->getClass($name)) {
             return $class;
         }
@@ -136,38 +135,38 @@ class Rulesets implements RulesetsInterface {
         return '';
     }
 
-    public function getSuggestionRuleset(array $ruleset = array()) : array {
+    public function getSuggestionRuleset(array $ruleset = array()): array {
         $main  = $this->main ->getSuggestionRuleset($ruleset);
         $extra = $this->extra->getSuggestionRuleset($ruleset);
         $ext   = $this->ext  ->getSuggestionRuleset($ruleset);
         $dev   = $this->dev  ->getSuggestionRuleset($ruleset);
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
-    
-    public function getSuggestionClass(string $name) : array {
+
+    public function getSuggestionClass(string $name): array {
         $main  = $this->main ->getSuggestionClass($name);
         $extra = $this->extra->getSuggestionClass($name);
         $ext   = $this->ext  ->getSuggestionClass($name);
         $dev   = $this->dev  ->getSuggestionClass($name);
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public function getAnalyzerInExtension(string $name) : array {
+    public function getAnalyzerInExtension(string $name): array {
         $main  = $this->main ->getAnalyzerInExtension($name);
         $extra = $this->extra->getAnalyzerInExtension($name);
         $ext   = $this->ext  ->getAnalyzerInExtension($name);
         $dev   = $this->dev  ->getAnalyzerInExtension($name);
-        
+
         return array_merge($main, $extra, $ext, $dev);
     }
 
-    public static function resetCache() : void {
+    public static function resetCache(): void {
         self::$instanciated = array();
     }
-    
-    public function getInstance(string $name)  {
+
+    public function getInstance(string $name) {
         if ($analyzer = $this->getClass($name)) {
             if (!isset(self::$instanciated[$analyzer])) {
                 self::$instanciated[$analyzer] = new $analyzer();

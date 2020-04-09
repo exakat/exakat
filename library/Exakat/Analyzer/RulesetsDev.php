@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Autoload\Autoloader;
 
 class RulesetsDev {
@@ -34,8 +33,8 @@ class RulesetsDev {
         $this->all      = $dev->getAllAnalyzers() ?: array('All' => array());
         $this->rulesets = array_keys($this->all);
     }
-    
-    public function getSuggestionRuleset(array $ruleset) : array {
+
+    public function getSuggestionRuleset(array $ruleset): array {
         return array_filter($this->rulesets, function ($c) use ($ruleset) {
             foreach($ruleset as $r) {
                 $l = levenshtein($c, $r);
@@ -47,7 +46,7 @@ class RulesetsDev {
         });
     }
 
-    public function listAllAnalyzer(string $folder = '') : array {
+    public function listAllAnalyzer(string $folder = ''): array {
         if (empty($this->all)) {
             return array();
         }
@@ -56,15 +55,15 @@ class RulesetsDev {
         if (empty($folder)) {
             return $return;
         }
-        
+
         return preg_grep("#$folder/#", $return);
     }
 
-    public function listAllRulesets(array $ruleset = null) : array {
+    public function listAllRulesets(array $ruleset = null): array {
         return $this->rulesets;
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = null) : array {
+    public function getRulesetsAnalyzers(array $ruleset = null): array {
         if (empty($ruleset)) {
             return array();
         }
@@ -82,15 +81,15 @@ class RulesetsDev {
         }
         return preg_grep("#/$name\$#", $this->all['All']);
     }
-    
-    public function getRulesetsForAnalyzer(array $analyzer = array()) : array {
+
+    public function getRulesetsForAnalyzer(array $analyzer = array()): array {
         $return = array();
 
         if (empty($analyzer)) {
             $list = $this->all;
             $return = array_fill_keys($list['All'], array());
             unset($list['All']);
-            
+
             foreach($list as $rulesets => $ruleset) {
                 foreach($ruleset as $rule) {
                     $return[$rule][] = $rulesets;
@@ -103,7 +102,7 @@ class RulesetsDev {
                 }
             }
         }
-        
+
         return $return;
     }
 
@@ -136,11 +135,11 @@ class RulesetsDev {
             if (empty($found)) {
                 return false; // no class found
             }
-            
+
             if (count($found) > 1) {
                 return false;
             }
-            
+
             $class = $found[0];
         } else {
             $class = $name;

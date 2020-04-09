@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class MethodcallUsage extends Analyzer {
     protected $calledMethods = array();
-    
+
     public function analyze() {
         // Currently ignoring the object :(
         $calledMethods = array_map('strtolower', $this->calledMethods);
-        
+
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs($calledMethods, self::TRANSLATE, self::CASE_INSENSITIVE)

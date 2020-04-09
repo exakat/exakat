@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class CalledByModule extends Analyzer {
 
     public function analyze() {
         $calledBy = $this->config->dev->loadJson('called_by.json');
-        
+
         // Merging ALL values of all versions.
         if (empty($calledBy)) {
             return;
@@ -49,7 +49,7 @@ class CalledByModule extends Analyzer {
                 if (isset($what['classes'])) {
                     $classes[] = $class;
                 }
-    
+
                 // No properties : it makes no sense
                 // Methods (No handling of visibility)
                 if (isset($what['methods'])) {
@@ -204,7 +204,7 @@ class CalledByModule extends Analyzer {
         if (empty($methods_regex)) {
             return;
         }
-        
+
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->fullnspathIs(array_keys($methods_regex))
@@ -261,7 +261,7 @@ GREMLIN
              ->isHash('lccode', $methods, 'fnp')
              ->back('results');
         $this->prepareQuery();
-        
+
         //what can we do with Trait?
     }
 
@@ -269,7 +269,7 @@ GREMLIN
         if (empty($methods_regex)) {
             return;
         }
-        
+
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->fullnspathIs(array_keys($methods_regex))

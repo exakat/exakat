@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class Typehintorder extends AnalyzerDump {
     protected $analyzerName = 'typehintOrder';
-    
+
     protected $storageType = self::QUERY_TABLE;
-    
+
     public function analyze() {
         // Store inclusionss of files within each other
         $this->analyzerSQLTable = <<<'SQL'

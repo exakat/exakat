@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseTry extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }
@@ -71,7 +71,7 @@ class CouldUseTry extends Analyzer {
              ->hasNoTryCatch()
              ->back('first');
         $this->prepareQuery();
-        
+
         $throws = $this->loadJson('throw_exceptions.json');
         $functions = array();
         $news = array();
@@ -82,7 +82,7 @@ class CouldUseTry extends Analyzer {
                 $functions[] = makeFullnspath($throw->function);
                 continue;
             }
-            
+
             if (isset($throw->class) && $throw->method === '__construct') {
                 $news[] = makeFullnspath($throw->class);
                 continue;
@@ -106,7 +106,7 @@ class CouldUseTry extends Analyzer {
              ->is('fullnspath', array_keys($methods))
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-             
+
              ->outIs('METHOD')
              ->outIs('NAME')
              ->isHash('fullcode', $methods, 'fqn', self::CASE_INSENSITIVE)

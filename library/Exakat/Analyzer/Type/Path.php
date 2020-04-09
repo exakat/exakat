@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Dump\AnalyzerDump;
-use Exakat\Analyzer\Analyzer;
 
 class Path extends AnalyzerDump {
     protected $analyzerName = 'Path';
@@ -50,7 +49,7 @@ class Path extends AnalyzerDump {
              ->regexIs('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$')
              ->toResults();
         $this->prepareQuery();
-        
+
         $functions = array('\fopen',
                            '\file_get_contents',
                            '\file_put_contents',
@@ -63,7 +62,7 @@ class Path extends AnalyzerDump {
              ->analyzerIsNot('self')
              ->toResults();
         $this->prepareQuery();
-        
+
     }
 }
 

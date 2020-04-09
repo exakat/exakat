@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class UnresolvedUse extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/IsExtClass',
                      'Interfaces/IsExtInterface',
                      'Traits/IsExtTrait',
@@ -37,12 +37,12 @@ class UnresolvedUse extends Analyzer {
     public function analyze() {
         $cits = $this->query('g.V().hasLabel("Class", "Interface", "Trait").values("fullnspath").unique()')->toArray();
         $namespaces = $this->query('g.V().hasLabel("Namespace").values("fullnspath").unique()')->toArray();
-        
+
         $all = array_merge($cits, $namespaces);
         if (empty($all)) {
             return;
         }
-        
+
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->analyzerIsNot(array('Classes/IsExtClass',

@@ -25,7 +25,6 @@
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Dump\AnalyzerDump;
-use Exakat\Analyzer\Analyzer;
 
 class HexadecimalString extends AnalyzerDump {
     public function analyze() {

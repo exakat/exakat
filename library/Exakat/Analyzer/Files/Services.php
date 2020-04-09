@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Services extends Analyzer {
     private $report = null;
-    
+
     public function analyze() {
         // Just a place holder
         return true;
@@ -37,15 +37,15 @@ class Services extends Analyzer {
         if ($this->report === null) {
             $this->hasResults();
         }
-        
+
         return $this->report;
     }
 
-    public function hasResults() : bool {
+    public function hasResults(): bool {
         if ($this->report === null) {
             $this->report = $this->datastore->getRow('configFiles');
         }
-        
+
         return !empty($this->report);
     }
 }

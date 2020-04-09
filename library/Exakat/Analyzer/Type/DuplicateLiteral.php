@@ -67,7 +67,7 @@ class DuplicateLiteral extends Analyzer {
               )
              ->raw('groupCount("m").by("fullcode").cap("m").next().findAll{ it.value >= ' . $this->minDuplicate . '; }');
         $integers = $this->rawQuery();
-        
+
         if (!empty($integers->toArray())) {
             foreach($integers->toArray() as $v) {
                 foreach($v as $key => $value)  {
@@ -78,7 +78,7 @@ class DuplicateLiteral extends Analyzer {
 
             $this->prepareQuery();
         }
-        
+
         // could we do this for array?
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class CloseNaming extends Analyzer {
-    
+
     public function analyze() {
         $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
              ->tokenIs('T_VARIABLE')
@@ -46,7 +46,7 @@ class CloseNaming extends Analyzer {
                 if ($v1 === $v2) { continue; }
                 if ($v1 . 's' === $v2) { continue; }
                 if ($v1 === $v2 . 's') { continue; }
-                
+
                 if (levenshtein($v1, $v2) === 1) {
                     $closeVariables[$v1] = 1;
                     $closeVariables[$v2] = 1;
@@ -71,7 +71,7 @@ class CloseNaming extends Analyzer {
         $uniques = array_filter($uniques, function ($x) { return count($x) > 1; });
         if (!empty($uniques)) {
             $doubles = array_merge(...array_values($uniques));
-    
+
             $this->atomIs(self::$VARIABLES_USER)
                  ->is('fullcode', $doubles);
             $this->prepareQuery();
@@ -81,7 +81,7 @@ class CloseNaming extends Analyzer {
         $cleaned = array_map(function ($x) { return strtr('_', '', $x); }, $variables);
         $counts = array_count_values($cleaned);
         $doubles = array_filter($counts, function ($x) { return $x > 1; });
-        
+
         if (!empty($uniques)) {
             $this->atomIs(self::$VARIABLES_USER)
                  ->is('fullcode', $doubles);

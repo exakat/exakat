@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ use Exakat\Data\Dictionary;
 
 class MethodUsage extends Analyzer {
     protected $methodList = array();
-    
+
     public function analyze() {
         $staticHash = array();
         $methodHash = array();
@@ -47,7 +47,7 @@ class MethodUsage extends Analyzer {
                 }
             }
         }
-        
+
         foreach($staticHash as &$methods) {
             $methods = $this->dictCode->translate(array_unique($methods), Dictionary::CASE_INSENSITIVE);
         }

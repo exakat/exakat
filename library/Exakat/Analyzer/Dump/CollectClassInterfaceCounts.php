@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class CollectClassInterfaceCounts extends AnalyzerDump {
     protected $analyzerName = 'ClassInterfaces';
-    
+
     protected $storageType = self::QUERY_HASH;
-    
+
     public function analyze() {
         //class x implements i,j,k {}
         $this->atomIs(self::$CLASSES_ALL)

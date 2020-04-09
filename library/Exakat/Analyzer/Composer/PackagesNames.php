@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class PackagesNames extends Analyzer {
     private $report = null;
-    
+
     public function analyze() {
         return true;
     }
@@ -40,13 +40,13 @@ class PackagesNames extends Analyzer {
         return $this->report;
     }
 
-    public function hasResults() : bool {
+    public function hasResults(): bool {
         $data = $this->datastore->getRow('composer');
         $this->report = array();
         foreach($data as $d) {
             $this->report[$d['component'] . ' (' . $d['version'] . ')'] = true;
         }
-        
+
         return !empty($this->report);
     }
 

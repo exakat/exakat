@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -38,7 +38,7 @@ class VariableOneLetter extends Analyzer {
              ->tokenIs(array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->fullcodeLength(' == 4 ');
         $this->prepareQuery();
-        
+
         // {$variables}
         $this->atomIs(self::$VARIABLES_USER)
              ->tokenIs('T_DOLLAR')

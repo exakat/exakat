@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,14 +22,13 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Analyzer\Analyzer;
 
 class Inclusions extends AnalyzerDump {
     protected $analyzerName = 'inclusions';
 
     protected $analyzerTable = 'inclusions';
-    
+
     protected $storageType = self::QUERY_TABLE;
 
     protected $analyzerSQLTable = <<<'SQL'
@@ -38,7 +37,7 @@ CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            included STRING
                         )
 SQL;
-    
+
     public function analyze() {
         $this ->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
               ->as('included')

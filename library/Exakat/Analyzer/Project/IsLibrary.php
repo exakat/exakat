@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,11 +24,11 @@ namespace Exakat\Analyzer\Project;
 use Exakat\Analyzer\Analyzer;
 
 class IsLibrary extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Files/DefinitionsOnly',
                     );
     }
-    
+
     public function analyze() {
         // Only contains definitions
         $this->atomIs('Project')

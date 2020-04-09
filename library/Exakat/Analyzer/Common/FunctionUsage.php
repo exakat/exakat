@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,14 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class FunctionUsage extends Analyzer {
     protected $functions = array();
-    
+
     public function analyze() {
         $functions =  makeFullNsPath($this->functions);
 
         $this->atomFunctionIs($functions);
         $this->prepareQuery();
     }
-    
+
     public function setFunctions(array $functions) {
         $this->functions = $functions;
     }

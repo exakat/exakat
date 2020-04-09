@@ -24,10 +24,9 @@ declare(strict_types = 1);
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Dump\AnalyzerDump;
-use Exakat\Analyzer\Analyzer;
 
 class Email extends AnalyzerDump {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }
