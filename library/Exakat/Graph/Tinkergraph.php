@@ -70,7 +70,7 @@ class Tinkergraph extends Graph {
     }
 
     private function checkConfiguration(): void {
-        ini_set('default_socket_timeout', 1600);
+        ini_set('default_socket_timeout', '1600');
         $this->db->open();
     }
 

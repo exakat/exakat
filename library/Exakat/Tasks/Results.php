@@ -83,7 +83,7 @@ GREMLIN;
 
             foreach($analyzersClass as $oneAnalyzerClass) {
                 $analyzer =  $this->rulesets->getInstance($oneAnalyzerClass, null, $this->config);
-                $results[] = $analyzer->getDumpResults();
+                $results[] = $analyzer->getDump();
             }
             $return = array_merge(...$results);
         } elseif ($this->config->style === 'DISTINCT') {

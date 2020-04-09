@@ -48,6 +48,7 @@ class Test extends Tasks {
         $args = array ( 1 => 'cleandb',
                         2 => '-p',
                         3 => 'test',
+                        4 => '-stop',
                         );
         $configThema = new Config($args);
 
