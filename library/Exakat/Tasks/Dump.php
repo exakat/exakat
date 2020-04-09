@@ -114,23 +114,27 @@ class Dump extends Tasks {
 
         if (!empty($this->config->project_rulesets)) {
             $ruleset = $this->config->project_rulesets;
-            $rulesets = $this->rulesets->getRulesetsAnalyzers($ruleset);
-            if (empty($rulesets)) {
-                $r = $this->rulesets->getSuggestionRuleset($ruleset);
-                if (!empty($r)) {
-                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
-                }
-
-                throw new NoSuchRuleset(implode(', ', $ruleset));
-            }
-            display('Processing ruleset' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
-            $missing = $this->processResultsRuleset($ruleset, $counts);
-            $this->expandRulesets();
-            $this->collectHashAnalyzer();
-
-            if ($missing === 0) {
-                $this->storeToDumpArray('themas', array_map(function (string $x) { return array('', $x); }, $ruleset));
+            if ($ruleset === ['None']) {
                 $rulesets = array();
+            } else {
+                $rulesets = $this->rulesets->getRulesetsAnalyzers($ruleset);
+                if (empty($rulesets)) {
+                    $r = $this->rulesets->getSuggestionRuleset($ruleset);
+                    if (!empty($r)) {
+                        echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
+                    }
+    
+                    throw new NoSuchRuleset(implode(', ', $ruleset));
+                }
+                display('Processing ruleset' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
+                $missing = $this->processResultsRuleset($ruleset, $counts);
+                $this->expandRulesets();
+                $this->collectHashAnalyzer();
+    
+                if ($missing === 0) {
+                    $this->storeToDumpArray('themas', array_map(function (string $x) { return array('', $x); }, $ruleset));
+                    $rulesets = array();
+                }
             }
 
         } elseif (!empty($this->config->program)) {
