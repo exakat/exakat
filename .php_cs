@@ -13,6 +13,8 @@ $finder = PhpCsFixer\Finder::create()
     ->in('./library/Exakat/Graph')
 
     ->in('./library/Exakat/Query')
+    ->in('./library/Exakat/Analyzer')
+    
     ->name('*.php');
 
 return PhpCsFixer\Config::create()
