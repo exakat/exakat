@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnresolvedClasses extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/IsExtClass',
                      'Composer/IsComposerNsname',
                      'Composer/IsComposerClass',
@@ -37,7 +37,7 @@ class UnresolvedClasses extends Analyzer {
     public function analyze() {
         $classes = $this->loadIni('php_classes.ini', 'classes');
         $classes = makeFullNsPath($classes);
-        
+
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIsNot(array('Self', 'Parent', 'Static'))
@@ -59,7 +59,7 @@ class UnresolvedClasses extends Analyzer {
              ->analyzerIsNot('Composer/IsComposerClass')
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
-        
+
         // also add property/constant/methods/catch/try/typehint
     }
 }

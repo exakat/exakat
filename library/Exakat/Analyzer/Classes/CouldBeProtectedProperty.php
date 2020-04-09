@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -38,7 +38,7 @@ class CouldBeProtectedProperty extends Analyzer {
              ->values('code')
              ->unique();
         $publicProperties = $this->rawQuery()->toArray();
-        
+
         // Member that is not used outside this class or its children
         $this->atomIs('Ppp')
              ->isNot('visibility', array('protected', 'private'))
@@ -69,7 +69,7 @@ class CouldBeProtectedProperty extends Analyzer {
         foreach($res as $value) {
             array_collect_by($publicStaticProperties, $value['classe'], $value['variable']);
         }
-        
+
         if (!empty($publicStaticProperties)) {
             // Member that is not used outside this class or its children
             $this->atomIs('Ppp')

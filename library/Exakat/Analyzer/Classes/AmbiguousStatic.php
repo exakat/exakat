@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Dictionary;
 
 class AmbiguousStatic extends Analyzer {
     public function analyze() {
@@ -70,7 +69,7 @@ class AmbiguousStatic extends Analyzer {
         $normalProperty = $this->rawQuery()->toArray();
 
         $mixedProperty = array_values(array_intersect($normalProperty, $staticProperty));
-        
+
         if (!empty($mixedProperty)){
             $this->atomIs('Propertydefinition')
                  ->codeIs($mixedProperty, self::NO_TRANSLATE, self::CASE_SENSITIVE)

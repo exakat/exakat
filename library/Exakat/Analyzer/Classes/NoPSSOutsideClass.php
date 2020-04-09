@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -49,7 +49,7 @@ class NoPSSOutsideClass extends Analyzer {
              ->atomIs(self::$RELATIVE_CLASS)
              ->back('first');
         $this->prepareQuery();
-        
+
         $this->atomIs('Arrayliteral')
              ->is('count', 2)
              ->hasNoClassTrait()
@@ -58,7 +58,7 @@ class NoPSSOutsideClass extends Analyzer {
              ->noDelimiterIs(array('static', 'self', 'parent'))
              ->back('first');
         $this->prepareQuery();
-        
+
         // typehint are checked by PHP for functions and closures
         $this->atomIs('Parent')
              ->inIs('TYPEHINT')

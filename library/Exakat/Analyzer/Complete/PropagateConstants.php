@@ -31,7 +31,6 @@ class PropagateConstants extends Analyzer {
 
         $this->pushConstantValues();
         $this->PropagateConstants();
-
     }
     
     private function propagateConstants($level = 0) {

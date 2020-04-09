@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ScalarOrObjectProperty extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                      'Complete/SetClassRemoteDefinitionWithReturnTypehint',
                     );
@@ -57,7 +57,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->outIs('DEFAULT')
              ->atomIs('New') // at least ONE default is a NEW
              ->inIs('DEFAULT')
-             
+
              ->outIs('DEFAULT')
              ->hasIn('RIGHT')
              ->atomIs(self::$LITERALS) // Another definition is a literal
@@ -73,13 +73,13 @@ class ScalarOrObjectProperty extends Analyzer {
              ->as('results')
 
              ->outIs('DEFAULT')
-             ->atomIs(array('Methodcall', 'Functioncall', 'Staticmethodcall')) 
+             ->atomIs(array('Methodcall', 'Functioncall', 'Staticmethodcall'))
              ->inIs('DEFINITION')
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
              ->back('results')
-             
+
              ->outIs('DEFAULT')
              ->atomIs(self::$LITERALS) // Another definition is a literal
              ->atomIsNot('Null')

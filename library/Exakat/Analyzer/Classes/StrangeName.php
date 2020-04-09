@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class StrangeName extends Analyzer {
     public function analyze() {
         $names = $this->loadIni('php_strange_names.ini', 'classes');
-        
+
         $this->atomIs(array('Class', 'Trait', 'Interface'))
              ->outIs('METHOD')
              ->atomIs('Method')

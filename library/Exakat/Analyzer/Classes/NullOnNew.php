@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class NullOnNew extends Analyzer {
     protected $phpVersion = '7.0-';
-    
+
     public function analyze() {
         $names = array('finfo',
                        'PDO',
@@ -38,7 +38,7 @@ class NullOnNew extends Analyzer {
                        'ResourceBundle',
                        'IntlRuleBasedBreakIterator');
         $names = makeFullNsPath($names);
-        
+
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))

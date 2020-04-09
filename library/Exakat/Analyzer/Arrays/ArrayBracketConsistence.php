@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -36,17 +36,17 @@ x2 = it.get().value("token");
 GREMLIN;
         $storage = array('array()' => 'T_ARRAY',
                          '[]'      => 'T_OPEN_BRACKET');
-        
+
         $this->atomIs('Arrayliteral')
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray();
-        
+
         if (empty($types)) {
             return;
         }
         $types = $types[0];
-        
+
         $store = array();
         $total = 0;
         foreach($storage as $key => $v) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,14 +26,14 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedStaticMP extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                      'Complete/OverwrittenProperties',
                      'Complete/SetClassMethodRemoteDefinition',
                      'Composer/IsComposerNsname',
                      );
     }
-    
+
     public function analyze() {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')

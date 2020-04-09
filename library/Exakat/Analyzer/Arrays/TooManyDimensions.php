@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class TooManyDimensions extends Analyzer {
     protected $maxDimensions = 2;
-    
+
     public function analyze() {
         // $a[1][2][3][4]
         // $a[1][ ][3][4]
@@ -64,7 +64,7 @@ class TooManyDimensions extends Analyzer {
             ->fullnspathIs('\\array')
             ->back('results');
         $this->prepareQuery();
-        
+
         $returnTypes = $this->methods->getFunctionsByReturn();
         // $a[1][ ][3] = array()
         $this->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))

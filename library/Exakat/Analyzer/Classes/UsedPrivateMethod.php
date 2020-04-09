@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedPrivateMethod extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/MakeClassMethodDefinition',
                     );
     }
@@ -73,7 +73,7 @@ class UsedPrivateMethod extends Analyzer {
              ->codeIs('__destruct')
              ->back('first');
         $this->prepareQuery();
-        
+
         // Other magic methods are missing
     }
 }

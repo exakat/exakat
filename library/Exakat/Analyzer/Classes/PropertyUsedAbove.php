@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyUsedAbove extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenProperties',
                     );
     }
@@ -43,7 +43,7 @@ class PropertyUsedAbove extends Analyzer {
                      ->outIs('DEFINITION')
              );
         $this->prepareQuery();
-        
+
         // This could be also checking for fnp : it needs to be a 'family' class check.
     }
 }

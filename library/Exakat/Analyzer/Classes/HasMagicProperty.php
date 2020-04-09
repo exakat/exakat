@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class HasMagicProperty extends Analyzer {
     public function analyze() {
         $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
-        
+
         // Nsname that is not used somewhere else
         $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('MAGICMETHOD')

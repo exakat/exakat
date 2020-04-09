@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class NullBoolean extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                     );
     }
@@ -35,7 +35,7 @@ class NullBoolean extends Analyzer {
         $this->atomIs(array('Null', 'Boolean'))
              ->inIs('VARIABLE');
         $this->prepareQuery();
-        
+
         // const A = true; echo A[1];
         $this->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
              ->inIs('DEFINITION')
@@ -56,7 +56,7 @@ class NullBoolean extends Analyzer {
              ;
         $this->prepareQuery();
 
-        
+
     }
 }
 

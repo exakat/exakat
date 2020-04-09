@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IsInterfaceMethod extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                     );
     }
@@ -42,14 +42,14 @@ class IsInterfaceMethod extends Analyzer {
 
         // PHP or extension defined interface
         $interfaces = $this->loadJson('php_interfaces_methods.json', 'interface');
-        
+
         foreach($interfaces as $interface => $methods) {
             if (empty($methods)) {
                 // may be the case for Traversable : interface without methods
                 continue;
             }
             $methodNames = array_column($methods, 'name');
-            
+
             // interface locally implemented
             $this->atomIs(self::$FUNCTIONS_METHOD)
                  ->outIs('NAME')

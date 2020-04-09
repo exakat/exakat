@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AccessPrivate extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetParentDefinition',
                      'Complete/MakeClassMethodDefinition',
                      'Complete/SolveTraitMethods',
@@ -48,7 +48,7 @@ class AccessPrivate extends Analyzer {
                                                   .coalesce(out("LEFT"),  __.filter{true} )
                                                   .filter{it.get().value("code") == name} ) 
                                     )';
-        
+
         // methods
         // classname::method() direct class
         // classname::method() parent class through extension (not the direct class)

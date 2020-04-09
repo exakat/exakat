@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -61,7 +61,7 @@ class AccessProtected extends Analyzer {
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
-        
+
         // Non-static methods/properties : ??? Don't know how to do that yet
     }
 }

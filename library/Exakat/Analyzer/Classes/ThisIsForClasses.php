@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -86,7 +86,7 @@ class ThisIsForClasses extends Analyzer {
              ->hasNoIn('METHOD')
              ->back('first');
         $this->prepareQuery();
-        
+
         // self, parent, static : when outside a class, in static or typehint
         $this->atomIs(array('Self', 'Parent', 'Static'))
              ->hasNoClassTrait()

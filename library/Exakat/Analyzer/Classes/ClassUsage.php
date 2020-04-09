@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer\Classes;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\ClassUsage as CommonClassUsage;
 
 class ClassUsage extends CommonClassUsage {
@@ -31,7 +30,7 @@ class ClassUsage extends CommonClassUsage {
     public function analyze() {
         // Empty array to handle ALL classes
         $this->classes = array();
-        
+
         parent::analyze();
     }
 }

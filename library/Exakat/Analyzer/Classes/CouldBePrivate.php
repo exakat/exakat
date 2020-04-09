@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,11 +26,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBePrivate extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/PropertyUsedBelow',
                     );
     }
-    
+
     public function analyze() {
         // Searching for properties that are never used outside the definition class or its children
 
@@ -104,7 +104,7 @@ class CouldBePrivate extends Analyzer {
                 $calls[$value['property']] = array($value['classe']);
             }
         }
-        
+
         // Property that is not used outside this class or its children
         $this->atomIs('Ppp')
              ->isNot('visibility', 'private')

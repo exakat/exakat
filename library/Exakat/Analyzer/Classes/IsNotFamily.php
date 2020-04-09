@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -60,7 +60,7 @@ class IsNotFamily extends Analyzer {
              ->atomIs('Classanonymous')
              ->back('first');
         $this->prepareQuery();
-        
+
         // All non-in-class calls are OK
         $this->atomIs('Staticmethodcall')
              ->hasNoClassTrait();

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SameNameAsFile extends Analyzer {
     public function analyze() {
-        $this->atomIs(array('Interface','Class', 'Trait'))
+        $this->atomIs(array('Interface', 'Class', 'Trait'))
              ->outIs('NAME')
              ->savePropertyAs('fullcode', 'classname')
              ->goToFile()
@@ -36,7 +36,7 @@ class SameNameAsFile extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs(array('Interface','Class', 'Trait'))
+        $this->atomIs(array('Interface', 'Class', 'Trait'))
              ->outIs('NAME')
              ->savePropertyAs('fullcode', 'classname')
              ->goToFile()

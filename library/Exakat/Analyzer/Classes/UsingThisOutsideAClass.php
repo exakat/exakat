@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UsingThisOutsideAClass extends Analyzer {
     protected $phpVersion = '7.0-';
-    
+
     public function analyze() {
         // $this outside a class or a trait
         $this->atomIs(self::$VARIABLES_ALL)

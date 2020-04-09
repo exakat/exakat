@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -38,7 +38,7 @@ class WeakType extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'variable')
              ->back('first')
-             
+
              ->outIs('THEN')
              ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')
@@ -57,13 +57,13 @@ class WeakType extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'variable')
              ->back('first')
-             
+
              ->outIs('ELSE')
              ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')
              ->back('first');
         $this->prepareQuery();
-        
+
         // if (!is_null($a)){    $a->method(); }
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
@@ -74,7 +74,7 @@ class WeakType extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'variable')
              ->back('first')
-             
+
              ->outIs('THEN')
              ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')
@@ -89,7 +89,7 @@ class WeakType extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'variable')
              ->back('first')
-             
+
              ->outIs('ELSE')
              ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')

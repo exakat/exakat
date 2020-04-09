@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,17 +26,17 @@ use Exakat\Analyzer\Analyzer;
 
 class FossilizedMethod extends Analyzer {
     protected $fossilizationThreshold = 6;
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                     );
     }
 
     public function analyze() {
-        // class x 
+        // class x
         $this->atomIs(self::$FUNCTIONS_METHOD)
              ->hasNoOut('OVERWRITE')
-             ->raw('where( __.emit().repeat( __.in("OVERWRITE")).count().is(gt('.$this->fossilizationThreshold.')) )');
+             ->raw('where( __.emit().repeat( __.in("OVERWRITE")).count().is(gt(' . $this->fossilizationThreshold . ')) )');
         $this->prepareQuery();
     }
 }

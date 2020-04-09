@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class UseInstanceof extends Analyzer {
         // is_object()
         $this->atomFunctionIs('\\is_object');
         $this->prepareQuery();
-        
+
         // check for class_implements call too.
         // relax on !is_object (or suggest is_scalar)
     }

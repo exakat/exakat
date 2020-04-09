@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,14 +25,14 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnreachableConstant extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/MakeClassConstantDefinition',
                     );
     }
 
     public function analyze() {
         // class x { private const A = 1;} echo x::A;
-        
+
         // Outside a class
         $this->atomIs('Staticconstant')
              ->hasNoClass()
@@ -54,8 +54,8 @@ class UnreachableConstant extends Analyzer {
              ->notSamePropertyAs('fullnspath', 'fnp')
              ->back('first');
         $this->prepareQuery();
-        
-        
+
+
     }
 }
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -38,7 +38,7 @@ if( it.get().value('fullcode').toString().reverse().take(4).reverse() == ',  )' 
 GREMLIN;
         $storage = array('Empty'  => 'trailing',
                          'Filled' => 'full');
-        
+
         $this->atomIs('Arrayliteral')
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
@@ -47,7 +47,7 @@ GREMLIN;
         if (empty($types)) {
             return;
         }
-        
+
         $types = $types[0];
 
         $store = array();

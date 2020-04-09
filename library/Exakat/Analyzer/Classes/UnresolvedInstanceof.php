@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UnresolvedInstanceof extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassAliasDefinition',
                      'Classes/IsExtClass',
                      'Interfaces/IsExtInterface',
@@ -39,7 +39,7 @@ class UnresolvedInstanceof extends Analyzer {
 
         $interfaces = $this->loadIni('php_interfaces.ini', 'interfaces');
         $interfaces = makeFullNsPath($interfaces);
-        
+
         //general case
         // traits are omitted here
         $this->atomIs('Instanceof')

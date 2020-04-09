@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -48,7 +48,7 @@ class CouldBeClassConstant extends Analyzer {
                      ->is('isModified', true)
              )
              ->back('first');
-             
+
              // Exclude situations where property is used as an object or a resource (can't be class constant)
         $this->prepareQuery();
     }

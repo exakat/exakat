@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,11 +29,11 @@ use Exakat\Data\Dictionary;
 class Constructor extends Analyzer {
     public function analyze() {
         $construct = $this->dictCode->translate(array('__construct'), Dictionary::CASE_INSENSITIVE);
-        
+
         if (empty($construct)) {
             return;
         }
-        
+
         // __construct is the main constructor of the class
         $this->atomIs('Magicmethod')
              ->hasClass()

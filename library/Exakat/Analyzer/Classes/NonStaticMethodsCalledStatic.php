@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NonStaticMethodsCalledStatic extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/SetArrayClassDefinition',
                     );
     }
-    
+
     public function analyze() {
         // check outside the class : the first found class has not method
         // Here, we find methods that are in the grand parents, and not static.
@@ -42,7 +42,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->isNot('static', true)
              ->back('first');
         $this->prepareQuery();
-        
+
         // ['a', 'm']() ; class a { function m() {}}
         $this->atomIs('Functioncall')
              ->outIs('NAME')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,13 +23,12 @@
 
 namespace Exakat\Analyzer\Classes;
 
-use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidUsing extends Analyzer {
     public function analyze() {
         $classes = $this->config->Classes_AvoidUsing;
-        
+
         if (empty($classes)) {
             return ;
         }
@@ -39,7 +38,7 @@ class AvoidUsing extends Analyzer {
         $this->atomIs('Class')
              ->fullnspathIs($classesPath);
         $this->prepareQuery();
-        
+
         // class may be used in a new
         $this->atomIs('New')
              ->outIs('NEW')

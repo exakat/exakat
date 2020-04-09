@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -36,7 +36,7 @@ g.V().hasLabel("Ppp")
      .unique()
 GREMLIN;
         $visibilities = $this->query($query)->toArray();
-        
+
         $mixed = array();
         foreach($visibilities as $case) {
             $mixed[$case['ppp']][$case['visibility'] === 'none' ? 'public' : $case['visibility']] = 1;

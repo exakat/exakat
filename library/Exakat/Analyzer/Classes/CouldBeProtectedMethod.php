@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -50,7 +50,7 @@ class CouldBeProtectedMethod extends Analyzer {
         $this->prepareQuery();
 
         // Case of class::methodcall (that's another public access)
-        
+
         $publicUsage = $this->query(<<<GREMLIN
 g.V().hasLabel("Staticmethodcall").as("init")
      .out("CLASS").hasLabel("Identifier", "Nsname").as("classe")
@@ -65,7 +65,7 @@ g.V().hasLabel("Staticmethodcall").as("init")
      .unique();
 GREMLIN
 )->toArray();
-        
+
         $publicStaticMethods = array();
         foreach($publicUsage as $value) {
             array_collect_by($publicStaticMethods, $value['classe'], $value['method']);

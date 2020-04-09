@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -64,7 +64,7 @@ GREMLIN;
         foreach($publicConstants as $value) {
             array_collect_by($calls, $value['constante'], $value['classe']);
         }
-        
+
         // global static constants : the one with no definition class : they are all ignored.
         $this->atomIs('Const')
              ->isNot('visibility', array('private', 'protected'))

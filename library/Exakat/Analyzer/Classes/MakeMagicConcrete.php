@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MakeMagicConcrete extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateMagicProperty',
                     );
     }
@@ -40,7 +40,7 @@ class MakeMagicConcrete extends Analyzer {
              ->codeIs('__get')
              ->back('first')
 
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{ members = [:]; }
 .where(
       __.out("DEFINITION").hasLabel("Member").out("MEMBER").has("token", "T_STRING")

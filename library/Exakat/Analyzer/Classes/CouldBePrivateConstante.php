@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,11 +26,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBePrivateConstante extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/ConstantUsedBelow',
                     );
     }
-    
+
     public function analyze() {
         // Searching for constants that are never used outside the definition class
 
@@ -52,14 +52,14 @@ class CouldBePrivateConstante extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->as('constante')
              ->back('first')
-             
+
              ->outIs('CLASS')
              ->as('classe')
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fns')
 
              ->goToInstruction(array('Class', 'Classanonymous', 'File'))
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 filter{
     if (it.get().label() == 'File') {
         true;
@@ -83,7 +83,7 @@ GREMLIN
                 $calls[$value['constante']] = array($value['classe']);
             }
         }
-        
+
         // global static constants : the one with no definition class : they are all ignored.
         $this->atomIs('Const')
              ->isNot('visibility', 'private')

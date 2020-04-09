@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -35,7 +35,7 @@ class IsUpperFamily extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING') // Avoid dynamical names
              ->savePropertyAs('lccode', 'methode')
-             
+
              ->goToClass()
              ->not(
                 $this->side()
@@ -66,7 +66,7 @@ class IsUpperFamily extends Analyzer {
              ->outIs('MEMBER')
              ->tokenIs('T_VARIABLE')
              ->savePropertyAs('code', 'property')
-             
+
              ->goToClass()
              ->raw('not( where( __.out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("NAME"), __.filter{true; }).filter{it.get().value("code") == property } ) )')
 
@@ -86,7 +86,7 @@ class IsUpperFamily extends Analyzer {
              ->outIs('CONSTANT')
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'constante')
-             
+
              ->goToClass()
              ->raw('not( where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constante } ) )')
 

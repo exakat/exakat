@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedClasses extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return  array('Complete/MakeClassMethodDefinition',
                       'Complete/SetClassAliasDefinition',
                       'Classes/IsExtClass',
@@ -36,7 +36,7 @@ class UndefinedClasses extends Analyzer {
                       'Interfaces/IsExtInterface',
                      );
     }
-    
+
     public function analyze() {
         $omitted = array('Classes/IsExtClass',
                          'Composer/IsComposerNsname',

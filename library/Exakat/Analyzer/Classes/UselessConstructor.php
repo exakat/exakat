@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UselessConstructor extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/Constructor');
     }
 
@@ -36,7 +36,7 @@ not( __.where( __.out("METHOD", "MAGICMETHOD").hasLabel("Method", "Magicmethod")
        .where( __.in("ANALYZED").has("analyzer", "Classes/Constructor")) )
    )
 GREMLIN;
-        
+
         // class a (no extends, no implements)
         $this->atomIs('Class')
              ->hasNoOut(array('EXTENDS', 'IMPLEMENTS'))

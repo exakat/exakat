@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,13 +26,13 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedProperty extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/DefinedProperty',
                      'Classes/HasMagicProperty',
                      'Modules/DefinedProperty',
                     );
     }
-    
+
     public function analyze() {
         // only for calls internal to the class. External calls still needs some work
         $this->atomIs('Member')

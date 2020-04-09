@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MethodSignatureMustBeCompatible extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                     );
     }
@@ -92,7 +92,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->notSamePropertyAs('fullnspath', 'typehint')
              ->back('first');
         $this->prepareQuery();
-        
+
         // also checks for reference
         // also checks for ellipsis
     }

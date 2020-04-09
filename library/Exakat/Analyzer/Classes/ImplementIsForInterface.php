@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ImplementIsForInterface extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/IsExtClass',
                      'Composer/IsComposerClass',
                     );
     }
-    
+
     public function analyze() {
         $this->atomIs(array('Class', 'Trait'))
              ->values('fullnspath')
@@ -42,7 +42,7 @@ class ImplementIsForInterface extends Analyzer {
              ->values('fullnspath')
              ->unique();
         $interfaces = $this->rawQuery()->toArray();
-        
+
         $notValid = array_diff($classesTraits, $interfaces);
 
         // class a with implements

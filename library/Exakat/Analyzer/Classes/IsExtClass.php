@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class IsExtClass extends Analyzer {
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/ClassUsage',
                     );
     }
-    
+
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
@@ -39,7 +39,7 @@ class IsExtClass extends Analyzer {
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
             $ini = $this->load($inifile, 'classes');
-            
+
             if (!empty($ini[0])) {
                 $c[] = $ini;
             }
@@ -48,7 +48,7 @@ class IsExtClass extends Analyzer {
         if (empty($c)) {
             return;
         }
-        
+
         $classes = array_merge(...$c);
         $classes = makeFullNsPath($classes);
         $classes = array_keys(array_count_values($classes));

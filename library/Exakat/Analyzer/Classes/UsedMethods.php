@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UsedMethods extends Analyzer {
     public function analyze() {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
-        
+
         // Normal Methodcall
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
@@ -71,7 +71,7 @@ class UsedMethods extends Analyzer {
              ->hasIn('DEFINITION')
              ->has('noDelimiter')
              ->regexIs('noDelimiter', '::.')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 map{
     // Strings
     if (it.get().label() == "String") {
@@ -127,7 +127,7 @@ GREMLIN
         $callablesThisArray = $this->rawQuery()->toArray();
 
         $callables = array_unique(array_merge($callablesArray, $callablesThisArray, $callablesStrings));
-        
+
         if (!empty($callables)) {
             $callables = array_map('strtolower', $callables);
             // method used statically in a callback with an array
@@ -138,7 +138,7 @@ GREMLIN
                  ->back('first');
             $this->prepareQuery();
         }
-        
+
         // Private constructors
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fnp')

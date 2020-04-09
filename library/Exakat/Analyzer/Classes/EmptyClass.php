@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,11 +26,11 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class EmptyClass extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Exceptions/DefinedExceptions',
                     );
     }
-    
+
     public function analyze() {
         // class x { /* nothing */ }
         $this->atomIs('Class')
