@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -56,11 +56,11 @@ class ReturnTrueFalse extends Analyzer {
              ->outIs('THEN')
              ->outIs('EXPRESSION')
              ->atomIs('Assignation')
-             
+
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'container')
              ->inIs('LEFT')
-             
+
              ->outIs('RIGHT')
              ->atomIs(array('Boolean', 'Null', 'Integer'))
              ->savePropertyAs('boolean', 'valeur')
@@ -69,11 +69,11 @@ class ReturnTrueFalse extends Analyzer {
              ->outIs('ELSE')
              ->outIs('EXPRESSION')
              ->atomIs('Assignation')
-             
+
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'container')
              ->inIs('LEFT')
-             
+
              ->outIs('RIGHT')
              ->atomIs(array('Boolean', 'Null', 'Integer'))
              ->notSamePropertyAs('boolean', 'valeur')

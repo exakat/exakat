@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Break0 extends Analyzer {
     protected $phpVersion = '5.4-';
-    
+
     public function analyze() {
         $this->atomIs('Break')
              ->outIs('LEVEL')

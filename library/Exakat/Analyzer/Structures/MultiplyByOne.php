@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -60,7 +60,7 @@ class MultiplyByOne extends Analyzer {
              ->isNot('intval', 1)
              ->savePropertyAs('intval', 'operand')
              ->back('first')
-             
+
              ->outIs('LEFT')
              ->atomIs('Multiplication')
              ->codeIs('*')
@@ -77,7 +77,7 @@ class MultiplyByOne extends Analyzer {
              ->isNot('intval', 1)
              ->savePropertyAs('intval', 'operand')
              ->back('first')
-             
+
              ->outIs('LEFT')
              ->atomIs('Multiplication')
              ->codeIs('/')

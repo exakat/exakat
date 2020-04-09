@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,11 +26,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldPreprocess extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Constants/IsPhpConstant',
                     );
     }
-    
+
     public function analyze() {
         $dynamicAtoms = array('Variable',
                               'Array',
@@ -41,7 +41,7 @@ class ShouldPreprocess extends Analyzer {
                               'Methodcall',
                               );
         //'Functioncall' : if they also have only constants.
-        
+
         $functionList = $this->methods->getDeterministFunctions();
         $functionList = makeFullNsPath($functionList);
 

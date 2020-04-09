@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class Noscream extends Analyzer {
                              '\token_get_all',
                              '\stream_socket_server',
         );
-        
+
         $list = array('Addition',
                       'Array',
                       'Arrayappend',
@@ -104,7 +104,7 @@ class Noscream extends Analyzer {
                       'Yield',
                       'Yieldfrom',
                       );
-                                
+
         // @$s
         $this->atomIs($list)
              ->is('noscream', true);

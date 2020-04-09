@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,10 +23,9 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Structures\UnknownPregOption;
 
 class InvalidRegex extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }
@@ -95,7 +94,7 @@ GREMLIN
 GREMLIN
 );
         $regexComplex = $this->rawQuery();
-        
+
         $regexList = array_merge($regexSimple->toArray(), $regexComplex->toArray());
 
         $invalid = array();

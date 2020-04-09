@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class VardumpUsage extends Analyzer {
     public function analyze() {
         $debugFunctions       = array('var_dump', 'print_r', 'var_export');
         $returnDebugFunctions = array('\\print_r', '\\var_export');
-        
+
         // print_r (but not print_r($a, 1))
         $this->atomFunctionIs($debugFunctions)
              ->outWithRank('ARGUMENT', 1)
@@ -37,7 +37,7 @@ class VardumpUsage extends Analyzer {
              ->atomIsNot(self::$CONTAINERS)
              ->back('first');
         $this->prepareQuery();
-        
+
         $this->atomFunctionIs('\\var_dump')
              ->back('first');
         $this->prepareQuery();
@@ -54,7 +54,7 @@ class VardumpUsage extends Analyzer {
              ->functioncallIs($returnDebugFunctions)
              ->back('first');
         $this->prepareQuery();
-        
+
 //         call_user_func_array('var_dump', )
         $this->atomIs('Functioncall')
              ->functioncallIs(array('\\call_user_func_array', '\\call_user_func'))

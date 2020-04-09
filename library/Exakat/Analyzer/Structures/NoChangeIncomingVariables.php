@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,9 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class NoChangeIncomingVariables extends Analyzer {
     public function analyze() {
-        $incomingVariables = array('$_GET','$_POST','$_REQUEST','$_FILES',
+        $incomingVariables = array('$_GET', '$_POST', '$_REQUEST', '$_FILES',
                                    '$_ENV', '$_SERVER',
-                                   '$PHP_SELF','$HTTP_RAW_POST_DATA');
+                                   '$PHP_SELF', '$HTTP_RAW_POST_DATA');
         //'$_COOKIE', '$_SESSION' : those are OK
 
         // $_POST

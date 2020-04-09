@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ErrorReportingWithInteger extends Analyzer {
     public function analyze() {
-        $allowedIntegers = array("-1", "0");
-        
+        $allowedIntegers = array('-1', '0');
+
         $this->atomFunctionIs('\\error_reporting')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('Integer', 'Addition'))
@@ -44,7 +44,7 @@ class ErrorReportingWithInteger extends Analyzer {
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Integer')
-             ->codeIsNot("0")
+             ->codeIsNot('0')
              ->codeIsNot($allowedIntegers)
              ->back('first');
         $this->prepareQuery();

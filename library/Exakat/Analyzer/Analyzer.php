@@ -325,10 +325,10 @@ GREMLIN;
 
     public function getDump() : array {
         $this->atomIs('Analysis')
+             ->is('analyzer', array($this->shortAnalyzer))
+             ->savePropertyAs('analyzer', 'analyzer')
+             ->outIs('ANALYZED')
              ->raw(<<<GREMLIN
-has("analyzer", within(***))
-.sideEffect{ analyzer = it.get().value("analyzer"); }
-.out("ANALYZED")
 .sideEffect{ line = it.get().value("line");
              fullcode = it.get().value("fullcode");
              file="None"; 
@@ -357,16 +357,16 @@ GREMLIN
         return $this->rawQuery()->toArray();
     }
 
-    public function getRulesets() {
+    public function getRulesets() : array {
         $analyzer = $this->getName($this->analyzerQuoted);
         return $this->rulesets->getRulesetForAnalyzer($analyzer);
     }
 
-    public function getPhpVersion() {
+    public function getPhpVersion() : string {
         return $this->phpVersion;
     }
     
-    public function checkPhpConfiguration($Php) {
+    public function checkPhpConfiguration($Php) : bool {
         // this handles Any version of PHP
         if ($this->phpConfiguration === 'Any') {
             return true;
@@ -381,7 +381,7 @@ GREMLIN
         return true;
     }
     
-    public function getCalledClasses() {
+    public function getCalledClasses() : array {
         if (self::$calledClasses === null) {
             $news = $this->query('g.V().hasLabel("New").out("NEW").not(where( __.in("DEFINITION"))).values("fullnspath")')
                          ->toArray();
@@ -400,7 +400,7 @@ GREMLIN
         return self::$calledClasses;
     }
     
-    public function getCalledInterfaces() {
+    public function getCalledInterfaces() : array {
         if (self::$calledInterfaces === null) {
             self::$calledInterfaces = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Interfaces/InterfaceUsage").out("ANALYZED").values("fullnspath")')
                                            ->toArray();
@@ -409,7 +409,7 @@ GREMLIN
         return self::$calledInterfaces;
     }
 
-    public function getCalledTraits() {
+    public function getCalledTraits() : array {
         if (self::$calledTraits === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analyzer")
@@ -424,7 +424,7 @@ GREMLIN;
         return self::$calledTraits;
     }
 
-    public function getCalledNamespaces() {
+    public function getCalledNamespaces() : array {
         if (self::$calledNamespaces === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Namespace")
@@ -438,7 +438,7 @@ GREMLIN;
         return self::$calledNamespaces;
     }
 
-    public function getCalledDirectives() {
+    public function getCalledDirectives() : array {
         if (self::$calledDirectives === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis")
@@ -458,7 +458,7 @@ GREMLIN;
         return self::$calledDirectives;
     }
 
-    public function checkPhpVersion($version) {
+    public function checkPhpVersion(string $version) : bool {
         // this handles Any version of PHP
         if ($this->phpVersion === self::PHP_VERSION_ANY) {
             return true;
@@ -495,7 +495,7 @@ GREMLIN;
         return array();
     }
     
-    public function query($queryString, $arguments = array()) {
+    public function query(string $queryString, array $arguments = array()) {
         try {
             $result = $this->gremlin->query($queryString, $arguments);
         } catch (GremlinException $e) {
@@ -509,7 +509,7 @@ GREMLIN;
         return $result;
     }
 
-    public function side() {
+    public function side() : self {
         $this->query->side();
         
         return $this;

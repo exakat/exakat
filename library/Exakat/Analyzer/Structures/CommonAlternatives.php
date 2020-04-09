@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Query\DSL\FollowParAs;
 class CommonAlternatives extends Analyzer {
         // some expressions are common between two then / else block
         public function analyze() {
-        
+
         $omit = array('For',
                       'Foreach',
                       'Ifthen',
@@ -39,7 +39,7 @@ class CommonAlternatives extends Analyzer {
                       'Continue',
                       'Break',
                       );
-        
+
         // if ($c) { $a = 1; } else { $a = 1; $b = 2;}
         $this->atomIs('Ifthen')
              ->tokenIs('T_IF')
@@ -50,7 +50,7 @@ class CommonAlternatives extends Analyzer {
              ->followParAs(FollowParAs::FOLLOW_NONE)
              ->atomIsNot($omit)
              ->savePropertyAs('fullcode', 'expression')
-             
+
              ->back('first')
              ->outIs('ELSE')
              ->tokenIs('T_ELSE')
@@ -73,7 +73,7 @@ class CommonAlternatives extends Analyzer {
              ->followParAs(FollowParAs::FOLLOW_NONE)
              ->atomIsNot($omit)
              ->savePropertyAs('fullcode', 'expression')
-             
+
              ->back('first')
              ->outIs('ELSE')
              ->tokenIs('T_ELSEIF')
@@ -109,7 +109,7 @@ class CommonAlternatives extends Analyzer {
              ->as('results')
              ->savePropertyAs('fullcode', 'expression')
              ->back('cases')
-             
+
              ->filter(
                 $this->side()
                      ->outIs('EXPRESSION')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,14 +30,14 @@ class HeredocDelimiterFavorite extends Analyzer {
              ->raw('map{ it.get().value("delimiter").trim(); }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray();
-        
+
         if (empty($types)) {
             return;
         }
 
         $types = $types[0];
         $storage = array_combine(array_keys($types), array_keys($types));
-        
+
         $store = array();
         $total = 0;
         foreach($storage as $key => $v) {

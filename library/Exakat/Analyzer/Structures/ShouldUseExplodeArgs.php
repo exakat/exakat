@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -36,7 +36,7 @@ class ShouldUseExplodeArgs extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'name')
              ->inIs('LEFT')
-             
+
              ->nextSibling('EXPRESSION')
              ->functioncallIs('\\array_pop')
              ->outWithRank('ARGUMENT', 0)
@@ -55,7 +55,7 @@ class ShouldUseExplodeArgs extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'name')
              ->inIs('LEFT')
-             
+
              ->nextSibling('EXPRESSION')
              ->atomIs('Assignation')
              ->outIs('RIGHT')

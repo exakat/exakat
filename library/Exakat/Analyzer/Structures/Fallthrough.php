@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -33,7 +33,7 @@ class Fallthrough extends Analyzer {
              ->savePropertyAs('fullcode', 'theCase')
              ->outIs('CODE')
              ->hasOut('EXPRESSION')
-             ->noAtomInside(array('Break', 'Continue', 'Return', 'Throw', 'Goto', 'Exit',))
+             ->noAtomInside(array('Break', 'Continue', 'Return', 'Throw', 'Goto', 'Exit', ))
              ->back('first')
              ->outIs('CASES')
              ->outWithRank('EXPRESSION', 'last')

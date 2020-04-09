@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -68,7 +68,7 @@ class DynamicCode extends Analyzer {
         // class_alias, extract and parse_url
         $this->atomFunctionIs('\\extract');
         $this->prepareQuery();
-        
+
         $this->atomFunctionIs(array('\parse_str', '\mb_parse_str'))
              ->noChildWithRank('ARGUMENT', 1);
         $this->prepareQuery();

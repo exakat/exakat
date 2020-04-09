@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -56,13 +56,13 @@ class MissingCases extends Analyzer {
                 $commons[] = $a;
             }
         }
-        
+
         if (empty($commons)) {
             return;
         }
-        
+
         $commons = array_array_unique($commons);
-        
+
         $this->atomIs('Switch')
              ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x != [];}.map{x.sort();}')
              ->raw('filter{ y = ***; if (y.getClass() == "java.util.ArrayList") { x in y.values();} else { x in y; } }', $commons)

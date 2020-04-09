@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ModernEmpty extends Analyzer {
     protected $phpVersion = '5.5+';
-    
+
     public function analyze() {
         // $a = 2; empty($a) ; in a row
         // only works for variables

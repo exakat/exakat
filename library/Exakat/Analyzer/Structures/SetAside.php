@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -45,7 +45,7 @@ class SetAside extends Analyzer {
              ->outIs('RIGHT')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
-             
+
              // second variable
              ->outIs('DEFINITION')
              ->inIs('LEFT')
@@ -76,7 +76,7 @@ class SetAside extends Analyzer {
              ->outIs('RIGHT')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
-             
+
              // local variable
              ->outIs('DEFINITION')
              ->inIs('LEFT')

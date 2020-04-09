@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -39,7 +39,7 @@ class UseConstant extends Analyzer {
              ->noDelimiterIs(array('php://stdin', 'php://stdout', 'php://stderr'))
              ->back('first');
         $this->prepareQuery();
-        
+
         // dirname(__FILE__) => __DIR__
         $this->atomFunctionIs('\\dirname')
              ->outWithRank('ARGUMENT', 0)

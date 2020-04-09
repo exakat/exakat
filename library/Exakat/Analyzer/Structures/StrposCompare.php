@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class StrposCompare extends Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
         $fullnspaths = makeFullnspath($operator);
-        
+
         // if (.. == strpos(..)) {}
         $this->atomFunctionIs($fullnspaths)
              ->inIs('RIGHT')

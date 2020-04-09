@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -40,7 +40,7 @@ class NoHardcodedPath extends Analyzer {
 
         $regexPhpProtocol = '^php://(input|output|fd|memory|filter|stdin|stdout|stderr)';
         $regexAllowedProtocol = '^(https|http|php|ssh2|ftp):\\\/\\\/';
-        
+
         // string literal fopen('a', 'r');
         // may need some regex to exclude protocol...
         $this->atomFunctionIs($functions)

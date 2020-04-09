@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class ConstantScalarExpression extends Analyzer {
     protected $phpVersion = '5.6+';
-    
+
     public function analyze() {
         $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null', 'Identifier');
-        
+
         // in constants
         $this->atomIs('Const')
              ->outIs('CONST')

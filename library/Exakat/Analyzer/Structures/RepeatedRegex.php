@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class RepeatedRegex extends Analyzer {
         // pcre_last_error is too much here
         $functions = $this->loadIni('pcre.ini', 'functions');
         $functionsList = '"\\\\' . implode('", "\\\\', $functions) . '"';
-    
+
         $repeatedRegex = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").has("fullnspath", within($functionsList))
      .out("ARGUMENT")
@@ -37,7 +37,7 @@ g.V().hasLabel("Functioncall").has("fullnspath", within($functionsList))
      .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()
 GREMLIN
 )->toArray();
-                              
+
         if (empty($repeatedRegex)) {
             return;
         }

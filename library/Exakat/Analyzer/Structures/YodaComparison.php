@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,9 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class YodaComparison extends Analyzer {
     public function analyze() {
         $literals = array('String', 'Integer', 'Float', 'Boolean', 'Null', 'Identifier', 'Nsname');
-        
+
         $this->atomIs('Comparison')
-             ->codeIs(array('==','==='))
+             ->codeIs(array('==', '==='))
              ->outIs('RIGHT')
              ->atomIs($literals)
              ->inIs('RIGHT')

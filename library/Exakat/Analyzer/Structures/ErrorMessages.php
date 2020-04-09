@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ErrorMessages extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Exceptions/DefinedExceptions',
                      'Exceptions/IsPhpException',
                     );
     }
-    
+
     public function analyze() {
         $messages = array('String', 'Concatenation', 'Integer', 'Functioncall', 'Heredoc', 'Magicconstant');
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ class OneLevelOfIndentation extends Analyzer {
     public function analyze() {
         $atoms = array('Ifthen', 'Foreach', 'For', 'While', 'Dowhile', 'Switch');
         $blocks = array('THEN', 'ELSE', 'BLOCK', 'CASES');
-        
+
         // function foo() { if ($a === 1) { if ($b === 2) {}}}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')

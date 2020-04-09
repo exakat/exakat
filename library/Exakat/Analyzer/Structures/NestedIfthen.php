@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,11 +30,11 @@ class NestedIfthen extends Analyzer {
     public function analyze() {
         $this->nestedIfthen = abs((int) $this->nestedIfthen);
         $this->nestedIfthen = $this->nestedIfthen === 0 ? 1 : $this->nestedIfthen;
-        
+
         // 3 level of ifthen (2 is OK)
         $this->atomIs('Ifthen')
              ->tokenIsNot('T_ELSEIF');
-        
+
         // Skip the first one
         for ($i = 1; $i < $this->nestedIfthen; ++$i) {
             $this->outIs(array('THEN', 'ELSE'))

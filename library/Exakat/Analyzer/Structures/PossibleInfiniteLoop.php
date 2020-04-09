@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class PossibleInfiniteLoop extends Analyzer {
                                '\fgetss',
                                '\fgetcsv',
                               );
-        
+
         //while($line = fgets($fp1) != 'a') {}
         $this->atomIs('Dowhile')
              ->outIs('CONDITION')

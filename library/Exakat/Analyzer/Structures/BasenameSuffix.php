@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -43,7 +43,7 @@ class BasenameSuffix extends Analyzer {
              ->functioncallIs($substringFunctions)
              ->back('first');
         $this->prepareQuery();
-        
+
         // str_replace('.php', '', basename($path));
         $this->atomFunctionIs(array('\str_replace', '\str_ireplace'))
              ->outWithRank('ARGUMENT', 2)

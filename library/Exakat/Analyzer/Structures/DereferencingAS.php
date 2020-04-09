@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class DereferencingAS extends Analyzer {
     protected $phpVersion = '5.3-';
-    
+
     public function analyze() {
         // $x = array(1,2,3)
         // $x[3];

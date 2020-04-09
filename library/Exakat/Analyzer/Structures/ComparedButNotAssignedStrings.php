@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ class ComparedButNotAssignedStrings extends Analyzer {
     public function analyze() {
         $compareCode = $this->dictCode->translate(array('==', '===', '!=', '!=='));
         $compareCodeList = implode(',', $compareCode);
-        
+
         $query = <<<GREMLIN
 g.V().hasLabel('Comparison').has("code", within($compareCodeList)).out('LEFT', 'RIGHT').hasLabel('String').not(where(__.out('CONCAT'))).not(has("noDelimiter", "")).values('noDelimiter').unique()
 GREMLIN;
@@ -38,9 +38,9 @@ GREMLIN;
 g.V().hasLabel('Assignation').out('RIGHT').hasLabel('String').not(where(__.out('CONCAT'))).not(has("noDelimiter", "")).values('noDelimiter').unique()
 GREMLIN;
         $assignedStrings = $this->query($query)->toArray();
-        
+
         $unassigned = array_diff($comparedStrings, $assignedStrings);
-        
+
         $this->atomIs('Comparison')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('String')

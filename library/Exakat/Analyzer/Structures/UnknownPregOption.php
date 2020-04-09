@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -38,7 +38,7 @@ class UnknownPregOption extends Analyzer {
     public function analyze() {
         // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
         $options = 'eimsuxADJSUX';
-        
+
         // preg_match with a string
         $this->atomFunctionIs(self::$functions)
              ->outWithRank('ARGUMENT', 0)

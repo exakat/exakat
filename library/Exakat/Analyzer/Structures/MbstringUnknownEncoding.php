@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\FollowParAs;
 
 class MbstringUnknownEncoding extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/PropagateCalls',
                     );
@@ -37,13 +37,13 @@ class MbstringUnknownEncoding extends Analyzer {
 
         $positions = array('\\mb_preferred_mime_name' => 0,
                            '\\mb_regex_encoding' => 0,
-                           
+
                            '\\mb_check_encoding'       => 1,
                            '\\mb_chr'                  => 1,
                            '\\mb_ord'                  => 1,
                            '\\mb_scrub'                => 1,
                            '\\mb_strlen'               => 1,
-        
+
                            '\\mb_convert_case'         => 2,
                            '\\mb_convert_encoding'     => 2,
                            '\\mb_convert_kana'         => 2,
@@ -55,7 +55,7 @@ class MbstringUnknownEncoding extends Analyzer {
                            '\\mb_strtoupper'           => 2,
                            '\\mb_strwidth'             => 2,
                            '\\mb_substr_count'         => 2,
-                           
+
                            '\\mb_stripos'              => 3,
                            '\\mb_stristr'              => 3,
                            '\\mb_strpos'               => 3,
@@ -65,7 +65,7 @@ class MbstringUnknownEncoding extends Analyzer {
                            '\\mb_strrichr'             => 3,
                            '\\mb_strstr'               => 3,
                            '\\mb_substr'               => 3,
-                           
+
                            '\\mb_strimwidth' => 4,
                           );
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,7 +42,7 @@ filter{
     }
 }
 GREMLIN;
-        
+
     const MAKE_DELIMITER_FINAL = <<<'GREMLIN'
 sideEffect{ 
          if (delimiter == "{") { delimiter = "\\{";   delimiterFinal = "\\}"; } 
@@ -72,7 +72,7 @@ GREMLIN;
 
     public function analyze() {
         $functions = '\\preg_replace';
-        
+
         // preg_match with a string
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)

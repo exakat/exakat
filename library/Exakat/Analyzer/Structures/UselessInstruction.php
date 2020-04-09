@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessInstruction extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Classes/IsaMagicProperty',
                     );
@@ -44,7 +44,7 @@ class UselessInstruction extends Analyzer {
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'Variable', 'Arrayliteral', 'New'))
              ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'Defineconstant', ));
         $this->prepareQuery();
-        
+
         // foreach($i = 0; $i < 10, $j < 20; $i++)
         $this->atomIs('For')
              ->outIs('FINAL')
@@ -61,7 +61,7 @@ class UselessInstruction extends Analyzer {
         foreach($methods as $method) {
             $functions[$method['function']] = 1;
         }
-        
+
         // foo(1) // except for functions with references
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')
@@ -223,13 +223,13 @@ class UselessInstruction extends Analyzer {
                                     ))
              ->back('first');
         $this->prepareQuery();
-        
+
         // $a = $b ? 'c' : $a = 3;
         $this->atomIs('Assignation')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'var')
              ->back('first')
-             
+
              ->outIs('RIGHT')
              ->atomIs(array('Ternary', 'Coalesce'))
              ->outIs(array('THEN', 'ELSE', 'RIGHT'))

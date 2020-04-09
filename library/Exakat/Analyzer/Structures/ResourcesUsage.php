@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer\Structures;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Extension;
 
 class ResourcesUsage extends Extension {
@@ -31,7 +30,7 @@ class ResourcesUsage extends Extension {
     public function analyze() {
         // use of Common\Extension, but only really care for functions
         $this->source = 'resource_creation.ini';
-        
+
         parent::analyze();
     }
 }

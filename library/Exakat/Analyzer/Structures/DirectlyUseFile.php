@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -50,7 +50,7 @@ class DirectlyUseFile extends Analyzer {
                                       '\\openssl_pkey_export',
                                       '\\openssl_x509_export'
 */
-        
+
         foreach($functions as $position => $function) {
             $this->atomFunctionIs($function)
                  ->outWithRank('ARGUMENT', $position)

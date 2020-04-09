@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -35,7 +35,7 @@ class IsZero extends Analyzer {
         if (empty($minus)) {
             return;
         }
-        
+
         $MAX_LOOPING = self::MAX_LOOPING;
         $labels = array('Variable',
                         'Integer',

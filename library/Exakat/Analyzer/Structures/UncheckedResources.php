@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -39,7 +39,7 @@ class UncheckedResources extends Analyzer {
                     continue;
                 }
                 $functions = makeFullNsPath((array) $usage->{$position});
-                
+
                 //direct usage of the resource :
                 // readdir(opendir('uncheckedDir4'));
                 $this->atomFunctionIs($creation)
@@ -74,7 +74,7 @@ class UncheckedResources extends Analyzer {
 
                      // checked with a $variable &&
                      ->hasNoChildren('Logical', array('LEFT', 'RIGHT'))
-                     
+
                      // checked with a if ($resource == false) or while($resource == false)
                      ->hasNoComparison()
 

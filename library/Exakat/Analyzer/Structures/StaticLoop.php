@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -49,7 +49,7 @@ class StaticLoop extends Analyzer {
 
         $this->atomIs('For')
              ->collectVariable()
-             
+
              ->outIs('BLOCK')
              // check if the variables are used here
              ->checkBlindVariable()
@@ -96,13 +96,13 @@ class StaticLoop extends Analyzer {
         $this->prepareQuery();
 
         // while with complex structures (property, static property, arrays, references... ?)
-        
+
         // TODO : handle the case of compact
         // TODO : handle the case of localproperties used in the conditions : with a method call, they may be also updated
         // TODO : same for references
     }
-    
-    private function whereNonDeterminist() : self {
+
+    private function whereNonDeterminist(): self {
         $nonDeterminist = $this->methods->getNonDeterministFunctions();
         $nonDeterminist = makeFullnspath($nonDeterminist);
 
@@ -115,21 +115,21 @@ class StaticLoop extends Analyzer {
                          ->fullnspathIs($nonDeterminist)
                  )
         );
-        
+
         return $this;
     }
 
-    private function checkBlindVariable() : self {
+    private function checkBlindVariable(): self {
         $this->not(
             $this->side()
                  ->atomInsideNoDefinition(array('Variable', 'Staticproperty', 'Member', 'Array', 'Variableobject', 'Variablearray'))
                  ->raw('filter{ it.get().value("fullcode").replaceAll("&", "") in blind }')
         );
-        
+
         return $this;
     }
-    
-    private function collectVariable() : self {
+
+    private function collectVariable(): self {
         $this->filter(
             $this->side()
                  ->initVariable('blind', '[]')

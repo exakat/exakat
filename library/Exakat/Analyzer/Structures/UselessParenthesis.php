@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -89,14 +89,14 @@ class UselessParenthesis extends Analyzer {
              ->atomIs('Assignation')
              ->inIs('CODE');
         $this->prepareQuery();
-        
+
         // f(($x))
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
              ->back('first');
         $this->prepareQuery();
-        
+
         // (expression);
         $this->atomIs('Parenthesis')
              ->hasIn('EXPRESSION');
@@ -137,7 +137,7 @@ class UselessParenthesis extends Analyzer {
              ->atomIs('Parenthesis')
              ->back('first');
         $this->prepareQuery();
-        
+
     }
 }
 

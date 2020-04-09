@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -32,7 +32,7 @@ class CanCountNonCountable extends Analyzer {
              ->atomIs(array('String', 'Boolean', 'Integer', 'Float', 'Null'))
              ->back('first');
         $this->prepareQuery();
-        
+
         // todo : use types to do the same with variables.
     }
 }

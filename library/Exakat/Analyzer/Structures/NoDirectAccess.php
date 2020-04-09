@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class NoDirectAccess extends Analyzer {
     public function analyze() {
         //defined('AJXP_EXEC') or die('Access not allowed'); : Constant used!
         $this->atomIs('Logical')
-             ->tokenIs(array('T_BOOLEAN_AND', 'T_BOOLEAN_OR','T_LOGICAL_AND', 'T_LOGICAL_OR'))
+             ->tokenIs(array('T_BOOLEAN_AND', 'T_BOOLEAN_OR', 'T_LOGICAL_AND', 'T_LOGICAL_OR'))
              // find !defined and defined
              ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\defined')

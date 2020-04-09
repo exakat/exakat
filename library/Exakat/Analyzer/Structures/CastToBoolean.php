@@ -31,10 +31,10 @@ class CastToBoolean extends Analyzer {
         $this->atomIs('Ternary')
              ->outIs('THEN')
              ->atomIs('Integer')
-             ->codeIs(array("0", "1"))
+             ->codeIs(array('0', '1'))
              ->inIs('THEN')
              ->outIs('ELSE')
-             ->codeIs(array("0", "1"))
+             ->codeIs(array('0', '1'))
              ->back('first');
         $this->prepareQuery();
 

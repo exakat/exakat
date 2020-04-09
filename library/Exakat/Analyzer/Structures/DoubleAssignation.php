@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class DoubleAssignation extends Analyzer {
     public function analyze() {
         // $a = 1; $a = 2;
         $this->atomIs('Sequence')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
     __.sideEffect{ doubles = [:]; }
       .out("EXPRESSION")

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,13 +26,13 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnreachableCode extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Functions/KillsApp',
                      'Structures/AlwaysFalse',
                     );
     }
-    
+
     public function analyze() {
         // code after a halt_compiler is expected to be unreachable.
         $finalTokens = array('Gotolabel', 'Class', 'Function', 'Interface', 'Trait');
@@ -85,7 +85,7 @@ class UnreachableCode extends Analyzer {
              ->atomIsNot($finalTokens)
              ->back('first');
         $this->prepareQuery();
-        
+
         // function foo(array $a) { if ($a === 3) { }}
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

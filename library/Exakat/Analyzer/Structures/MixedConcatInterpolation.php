@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -45,7 +45,7 @@ GREMLIN
              ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
-        
+
         // This analysis is currently missing the 2nd level of evertyhing : $a->{$b . $c}->$d....
     }
 }

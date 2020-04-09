@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class DuplicateCalls extends Analyzer {
     public function analyze() {
         // This is counting ALL occurences as itself.
         $atoms = array('Methodcall', 'Functioncall');
-        
+
         foreach($atoms as $atom) {
             $calls = $this->query('g.V().hasLabel("' . $atom . '").not( where( __.in("METHOD") ) )
                                       .groupCount("m").by("fullcode").cap("m").next().findAll{ it.value >= 2; }.keySet()');

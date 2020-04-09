@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,10 +27,10 @@ class NoHardcodedHash extends Analyzer {
     public function analyze() {
         $algos = $this->loadJson('hash_length.json');
         $stopwords = $this->loadIni('NotHash.ini', 'ignore');
-        
+
         $regexDate = '^\\\\d{4}(0?[1-9]|1[012])(0?[1-9]|[12][0-9]|3[01])\$';
-        
-        $sizes = array_keys((array)$algos);
+
+        $sizes = array_keys((array) $algos);
         // Find common hashes, based on hexadecimal and length
         $this->atomIs(self::$STRINGS_ALL)
              ->has('noDelimiter')

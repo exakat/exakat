@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PrintfArguments extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }
@@ -33,7 +33,7 @@ class PrintfArguments extends Analyzer {
     public function analyze() {
         //The %2$s contains %1$04d monkeys
         //The %02s contains %-'.3d monkeys
-    
+
         $countParameters = <<<REGEX
     d2 = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0-9\']*\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
     d = [:];

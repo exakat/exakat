@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class ShouldUseMath extends Analyzer {
         return array('MethodDefinition');
     }
     */
-    
+
     public function analyze() {
         // $a += $a;
         $this->atomIs('Assignation')

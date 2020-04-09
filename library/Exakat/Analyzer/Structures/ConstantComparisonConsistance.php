@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -53,7 +53,7 @@ GREMLIN;
         if (empty($types)) {
             return;
         }
-        
+
         $types = $types[0];
 
         $store = array();
@@ -69,7 +69,7 @@ GREMLIN;
         if ($total == 0) {
             return;
         }
-        
+
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
         if (empty($types)) {
             return;

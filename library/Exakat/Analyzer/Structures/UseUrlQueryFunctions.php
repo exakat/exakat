@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,14 +25,14 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseUrlQueryFunctions extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }
 
     public function analyze() {
         // explode('&', $string);
-        $this->atomFunctionIs(array('\\explode', '\\implode', '\\join', '\\split',))
+        $this->atomFunctionIs(array('\\explode', '\\implode', '\\join', '\\split', ))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String', self::WITH_CONSTANTS)
              ->noDelimiterIs('&')

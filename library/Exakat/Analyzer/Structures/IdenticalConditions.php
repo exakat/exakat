@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -182,7 +182,7 @@ class IdenticalConditions extends Analyzer {
              ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
-        
+
         // TODO : also adding situations like ($a and !$a) ?
     }
 }

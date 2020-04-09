@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DoubleInstruction extends Analyzer {
     public function analyze() {
         $this->atomIs('Sequence')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
     __.sideEffect{ doubles = [:]; }
       .out("EXPRESSION")

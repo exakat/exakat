@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessCasting extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateCalls',
                     );
     }
@@ -38,9 +38,9 @@ class UselessCasting extends Analyzer {
                        'T_ARRAY_CAST'   => 'array',
                        'T_DOUBLE_CAST'  => 'float'
                   );
-        
+
         $returnTypes = $this->methods->getFunctionsByReturn();
-        
+
         foreach($casts as $token => $type) {
             if (is_array($type)) {
                 $returned = array();
@@ -51,7 +51,7 @@ class UselessCasting extends Analyzer {
             } else {
                 $returned = $returnTypes[$type];
             }
-            
+
             // native PHP functions
             $this->atomIs('Cast')
                  ->tokenIs($token)
@@ -61,7 +61,7 @@ class UselessCasting extends Analyzer {
                  ->fullnspathIs($returned)
                  ->back('first');
             $this->prepareQuery();
-            
+
             // custom user methods
             $this->atomIs('Cast')
                  ->tokenIs($token)
@@ -74,7 +74,7 @@ class UselessCasting extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
-        
+
         // (bool) ($a > 2)
         $this->atomIs('Cast')
              ->tokenIs('T_BOOL_CAST')
