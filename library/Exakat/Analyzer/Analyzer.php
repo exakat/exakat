@@ -81,7 +81,7 @@ abstract class Analyzer {
 
     private   $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerTitle    = '';       // Name use when storing in the dump.sqlites
-    private   $shortAnalyzer    = '';
+    protected $shortAnalyzer    = '';
     protected $analyzerQuoted   = '';
     protected $analyzerId       = 0;
     protected $queryId          = 0;
@@ -324,8 +324,9 @@ GREMLIN;
     }
 
     public function getDump() : array {
-        $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", within(args))
+        $this->atomIs('Analysis')
+             ->raw(<<<GREMLIN
+has("analyzer", within(***))
 .sideEffect{ analyzer = it.get().value("analyzer"); }
 .out("ANALYZED")
 .sideEffect{ line = it.get().value("line");
@@ -348,36 +349,12 @@ g.V().hasLabel("Analysis").has("analyzer", within(args))
        "namespace":theNamespace, 
        "class":theClass, 
        "function":theFunction,
-       "analyzer":analyzer];}
-GREMLIN;
-        return $this->gremlin->query($query, array('args' => array($this->shortAnalyzer)))
-                             ->toArray();
-    }
-    
-    public function getDumpResults() : array {
-        $linksDown = GraphElements::linksAsList();
+       "analyzer":analyzer];
+}
+GREMLIN
+,array($this->shortAnalyzer));
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", within(args)).out("ANALYZED")
-.sideEffect{ line = it.get().value("line");
-             fullcode = it.get().value("fullcode");
-             file="None"; 
-             theFunction = "None"; 
-             theClass="None"; 
-             theNamespace="None"; 
-             }
-.where( __.until( hasLabel("Project") ).repeat( 
-    __.in($linksDown)
-      .sideEffect{ if (it.get().label() in ["Function", "Closure", "Arrowfunction", "Magicmethod", "Method"]) { theFunction = it.get().value("code")} }
-      .sideEffect{ if (it.get().label() in ["Class", "Classanonymous", "Trait", "Interface"]) { theClass = it.get().value("fullcode")} }
-      .sideEffect{ if (it.get().label() == "File") { file = it.get().value("fullcode")} }
-       )
-)
-.map{ ["line":line, "file":file, "fullcode":fullcode, "function":theFunction, "class":theClass, "namespace":theNamespace]; }
-GREMLIN;
-
-        return $this->gremlin->query($query, array('args' => array($this->shortAnalyzer)))
-                             ->toArray();
+        return $this->rawQuery()->toArray();
     }
 
     public function getRulesets() {
@@ -2061,7 +2038,7 @@ GREMLIN
         if ($analyzed === true) {
             $analyzed = ".addE(\"ANALYZED\").from(g.V({$this->analyzerId}))";
         } else {
-            $analyzed = '';
+            $analyzed = '.property("complete", "'.$this->shortAnalyzer.'")';
         }
 
         $this->raw(<<<GREMLIN

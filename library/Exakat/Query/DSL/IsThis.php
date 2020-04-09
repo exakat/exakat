@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 
 class IsThis extends DSL {
     public function run() {
-        return new Command(<<<GREMLIN
+        return new Command(<<<'GREMLIN'
 or( __.hasLabel("This"),
     // Typehinted variable
     __.hasLabel("Variableobject", "Variable").in("DEFINITION").in("NAME").as("definition").out("TYPEHINT").in("DEFINITION").as("typehint").select("definition").in("ARGUMENT").in("METHOD", "MAGICMETHOD").as("classe").where("typehint", eq("classe") ),

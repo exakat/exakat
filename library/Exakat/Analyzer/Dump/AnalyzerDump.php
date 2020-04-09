@@ -35,8 +35,14 @@ abstract class AnalyzerDump extends Analyzer {
                 $res = $dump->fetchHashResults($this->analyzerName);
                 return $res->toArray();
 
+            case self::QUERY_RESULTS : 
+                $dump      = Dump::factory($this->config->dump);
+
+                $res = $dump->fetchAnalysers(array($this->shortAnalyzer));
+                return $res->toArray();
+
             default : 
-                print "Not results handling for {$this->storageType}\n";
+                print "Not results handling for {$this->storageType} in ".__CLASS__."\n";
                 return array();
         }
     }
