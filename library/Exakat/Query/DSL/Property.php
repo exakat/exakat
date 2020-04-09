@@ -33,6 +33,8 @@ class Property extends DSL {
         // special case for boolean
         if (is_bool($value)) {
             return new Command('sideEffect{ it.get().property("' . $property . '", ' . ($value === true ? 'true' : 'false') . '); }', array());
+        } elseif (is_int($value)) {
+            return new Command('sideEffect{ it.get().property("' . $property . '", ' . $value . '); }', array());
         } else {
             assert($this->assertVariable($value, self::VARIABLE_READ), "$value is not a variable");
             // Default, a gremlin variable

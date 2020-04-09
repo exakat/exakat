@@ -208,7 +208,7 @@ class Owasp extends Ambassador {
                 if ($row['count'] == 0) {
                     $row['grade'] = 'A';
                 } else {
-                    $grade = min(ceil(log($row['count'] + 1) / log($countColors)), count($countColors) - 1);
+                    $grade = intval(min(ceil(log($row['count'] + 1) / log($countColors)), $countColors - 1));
                     $row['grade'] = chr(66 + $grade - 1); // B to F
                 }
                 $row['color'] = self::COLORS[$row['grade']];
@@ -222,7 +222,7 @@ class Owasp extends Ambassador {
             if ($total === 0) {
                 $grade = 'A';
             } else {
-                $grade = min(ceil(log($total) / log($countColors)), $countColors - 1);
+                $grade = intval(min(ceil(log($total) / log($countColors)), $countColors - 1));
                 $grade = chr(65 + $grade); // B to F
             }
             $color = self::COLORS[$grade];
@@ -269,7 +269,7 @@ class Owasp extends Ambassador {
                 if ($count == 0) {
                     $grade = 'A';
                 } else {
-                    $grade = min(ceil(log($count) / log(count($countColors))), count($countColors) - 1);
+                    $grade = intval(min(ceil(log($count) / log($countColors)), $countColors - 1));
                     $grade = chr(66 + $grade - 1); // B to F
                 }
                 $color = self::COLORS[$grade];
@@ -281,7 +281,7 @@ class Owasp extends Ambassador {
             if ($total === 0) {
                 $grade = 'A';
             } else {
-                $grade = min(ceil(log($total) / log(count($countColors))), count($countColors) - 1);
+                $grade = intval(min(ceil(log($total) / log($countColors)), $countColors - 1));
                 $grade = chr(65 + $grade); // B to F
             }
             $color = self::COLORS[$grade];

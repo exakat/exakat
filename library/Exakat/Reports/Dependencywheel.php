@@ -35,7 +35,7 @@ class Dependencywheel extends Reports {
     public function generate(string $folder, string $name= 'wheel'): string {
         if ($name === self::STDOUT) {
             print "Can't produce Dependency Wheel format to stdout\n";
-            return false;
+            return '';
         }
 
         $this->finalName = "$folder/$name";

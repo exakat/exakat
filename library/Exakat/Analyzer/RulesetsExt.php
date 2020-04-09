@@ -189,6 +189,10 @@ class RulesetsExt implements RulesetsInterface {
             $class = $name;
         }
 
+        if ($class === null) {
+            return '';
+        }
+
         if (!class_exists($class)) {
             return '';
         }

@@ -27,9 +27,6 @@ php exakat remove -p ut4
 php exakat init -p ut5 -zip -R tests/cli/sculpin.zip -v
 php exakat remove -p ut5
 
-php exakat init -p ut5 -rar -R tests/cli/sculpin.rar -v
-php exakat remove -p ut5
-
 php exakat init -p ut5 -sevenz -R  tests/cli/sculpin.7z -v
 php exakat remove -p ut5
 

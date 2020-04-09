@@ -44,7 +44,7 @@ class Initproject extends Tasks {
         }
 
         if (!$this->config->project->validate()) {
-            throw new InvalidProjectName($project->getError());
+            throw new InvalidProjectName($this->config->project->getError());
         }
 
         $repositoryURL = $this->config->repository;
@@ -228,7 +228,7 @@ class Initproject extends Tasks {
                                                    'inited'     => date('r')));
             display("An error prevented code initialization : '$errorMessage'\n.No code was loaded.");
 
-            $projectConfig->writeConfig();
+            file_put_contents("{$this->config->project_dir}/config.ini", $projectConfig->getConfig($this->config->dir_root));
 
             return;
         }

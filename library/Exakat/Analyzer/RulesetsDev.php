@@ -145,6 +145,10 @@ class RulesetsDev {
             $class = $name;
         }
 
+        if ($class === null) {
+            return false;
+        }
+
         if (!class_exists($class)) {
             return false;
         }

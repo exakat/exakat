@@ -54,6 +54,7 @@ class Drillinstructor extends Ambassador {
                             'F' => '#FF0000',
                             );
             $count = 0;
+            $countColors = count($colors);
             foreach($res->toArray() as $row) {
                 $ini = $this->docs->getDocs($row['analyzer']);
 
@@ -66,7 +67,7 @@ class Drillinstructor extends Ambassador {
                 if ($row['count'] == 0) {
                     $row['grade'] = 'A';
                 } else {
-                    $grade = min(ceil(log($row['count']) / log(count($colors))), count($colors) - 1);
+                    $grade = intval(min(ceil(log($row['count']) / log(count($colors))), count($colors) - 1));
                     $row['grade'] = chr(66 + $grade); // B to F
                 }
                 $row['color'] = $colors[$row['grade']];
@@ -80,7 +81,7 @@ class Drillinstructor extends Ambassador {
             if (count($analyzers) === 1) {
                 $grade = 'A';
             } else {
-                $grade = floor($count / (count($analyzers) - 1) * (count($colors) - 1));
+                $grade = intval(floor($count / (count($analyzers) - 1) * ($countColors - 1)));
                 $grade = chr(65 + $grade); // B to F
             }
             $color = $colors[$grade];

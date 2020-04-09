@@ -78,7 +78,7 @@ class Git extends Vcs {
         }
 
         $shell .= ' code 2>&1 ';
-        $shellResult = shell_exec($shell);
+        $shellResult = shell_exec($shell) ?? '';
 
         if (($offset = strpos($shellResult, 'fatal: ')) !== false) {
             $errorMessage = str_replace($repositoryNormalizedURL, $source, $shellResult);

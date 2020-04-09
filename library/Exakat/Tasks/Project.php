@@ -35,6 +35,7 @@ use Exakat\Exceptions\NoSuchReport;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Tasks\Helpers\BaselineStash;
 use Exakat\Tasks\Helpers\ReportConfig;
+use Exception;
 
 use Exakat\Vcs\Vcs;
 
@@ -271,7 +272,7 @@ class Project extends Tasks {
         $begin = $end;
     }
 
-    private function analyzeOne($analyzers, $audit_start, $verbose) {
+    private function analyzeOne(string $analyzers, int $audit_start, bool $verbose): void {
         $this->addSnitch(array('step'    => 'Analyzer',
                                'project' => $this->config->project));
 
@@ -325,7 +326,7 @@ class Project extends Tasks {
         }
     }
 
-    private function analyzeRulesets($rulesets, $audit_start, $verbose) {
+    private function analyzeRulesets($rulesets, int $audit_start,bool $verbose): void {
         if (empty($rulesets)) {
             $rulesets = $this->config->project_rulesets;
         }
@@ -359,12 +360,6 @@ class Project extends Tasks {
                 unset($analyzeConfig);
                 $this->logTime("Analyze : $ruleset");
 
-                $dumpConfig = $this->config->duplicate(array('update'               => true,
-                                                             'project_rulesets'     => array($ruleset),
-                                                             'load_dump'            => true,
-                                                             'verbose'              => false,
-                                                             ));
-
                 $audit_end = time();
                 $query = 'g.V().count()';
                 $res = $this->gremlin->query($query);
@@ -390,18 +385,29 @@ class Project extends Tasks {
                 // Skip Dump, as it is auto-saving itself.
                 if ($ruleset === 'Dump') { continue; }
 
+                $dumpConfig = $this->config->duplicate(array('update'               => true,
+                                                             'project_rulesets'     => array($ruleset),
+                                                             'load_dump'            => true,
+                                                             'verbose'              => false,
+                                                             ));
+/*
+                $shell = "nohup php exakat dump -p {$this->config->project} -T $ruleset -load-dump -u >/dev/null & echo $!";
+                $pid = shell_exec($shell);
+                print "New PID : $pid\n";
+                print "Slept for PID : $pid\n";
+*/
                 $dump = new Dump(Tasks::IS_SUBTASK);
                 $dump->setConfig($dumpConfig);
                 $dump->run();
                 $dump->finalMark($finalMark);
                 unset($dump);
                 unset($dumpConfig);
+
                 gc_collect_cycles();
                 $this->logTime("Dumped : $ruleset");
-            } catch (\Exception $e) {
-//                print $e->getMessage();
-                echo "Error while running the ruleset $ruleset.\nTrying next ruleset.\n";
-                file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage());
+            } catch (Exception $e) {
+                display("Error while running the ruleset $ruleset.\nTrying next ruleset.\n");
+                file_put_contents("{$this->config->log_dir}/analyze.$rulesetForFile.final.log", $e->getMessage(), FILE_APPEND);
             }
         }
         $VERBOSE = $oldVerbose;
@@ -424,7 +430,7 @@ class Project extends Tasks {
         return ucfirst($adjective) . ' ' . $name;
     }
 
-    private function getLineDiff($current, $vcs) {
+    private function getLineDiff(string $current, VCS $vcs): void {
         if ($this->config->dump_previous === null) {
             return ;
         }

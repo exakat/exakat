@@ -34,7 +34,7 @@ class Codeflower extends Reports {
     public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name === self::STDOUT) {
             print "Can't produce Codeflower format to stdout\n";
-            return false;
+            return '';
         }
 
         $this->finalName = "$folder/$name";
