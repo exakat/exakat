@@ -1445,8 +1445,13 @@ class Load extends Tasks {
         // Process return type
         $returnTypes = $this->processTypehint();
 
+        $return = array();
         foreach($returnTypes as $returnType) {
             $this->addLink($function, $returnType, 'RETURNTYPE');
+            
+            if ($returnType->atom !== 'Void') {
+                $return[] = $returnType->fullcode;
+            }
         }
 
         // Process block
@@ -1466,7 +1471,7 @@ class Load extends Tasks {
                                 $this->tokens[$current][1] . ' ' . ($function->reference ? '&' : '') .
                                 ($function->atom === 'Closure' ? '' : $name->fullcode) . '(' . $argumentsFullcode . ')' .
                                 (isset($useFullcode) ? ' use (' . implode(', ', $useFullcode) . ')' : '') . // No space before use
-                                ($returnType->atom === 'Void' ? '' : ' : ' . ($function->nullable ? '?' : '') . $returnType->fullcode) .
+                                (empty($return) ? '' : ' : ' . ($function->nullable ? '?' : '').join('|', $return) ) .
                                 $blockFullcode;
 
        if ($function->atom === 'Closure' &&
