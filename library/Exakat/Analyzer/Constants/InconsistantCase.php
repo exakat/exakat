@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class InconsistantCase extends Analyzer {
     public function analyze() {
         $lower = $this->dictCode->translate(array('true', 'false', 'null'));
         $upper = $this->dictCode->translate(array('TRUE', 'FALSE', 'NULL'));
-        
+
         if (empty($lower) && empty($upper)) {
             return;
         }
@@ -53,7 +53,7 @@ GREMLIN;
              ->raw('map{ ' . $mapping . ' }', $lower, $upper)
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray();
-        
+
         if (empty($types)) {
             return;
         }
@@ -69,7 +69,7 @@ GREMLIN;
             $total += $c;
         }
         $this->datastore->addRowAnalyzer($this->analyzerQuoted, $store);
-        
+
         if ($total === 0) {
             return;
         }

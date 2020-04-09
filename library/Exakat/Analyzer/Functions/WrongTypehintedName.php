@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ class WrongTypehintedName extends Analyzer {
     public function analyze() {
         $scalars   = array('array',  'int',              'string'  , 'bool',            );
         $variables = array('$array', '$int', '$integer', '$string' , '$bool', '$boolean', '$void', '$null');
-        
+
         // function(string $int, array $boolean)
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')

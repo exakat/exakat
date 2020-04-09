@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -32,7 +32,7 @@ class CompareHash extends Analyzer {
              ->codeIs(array('==', '!='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Functioncall')
-             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32','crypt'))
+             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32', 'crypt'))
              ->back('first');
         $this->prepareQuery();
 
@@ -40,7 +40,7 @@ class CompareHash extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomIs('Functioncall')
-             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32','crypt'))
+             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32', 'crypt'))
              ->back('first');
         $this->prepareQuery();
     }

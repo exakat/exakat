@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,12 +25,12 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NoLiteralForReference extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/PropagateConstants',
                     );
     }
-    
+
     public function analyze() {
         // foo(1)
         // function foo(&$r) {}
@@ -54,7 +54,7 @@ class NoLiteralForReference extends Analyzer {
              ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
              ->inIs('DEFINITION')
              ->isNot('reference', true)
-             
+
              ->back('first')
              ->inIs('DEFINITION')
              ->outWithRank('ARGUMENT', 'ranked')

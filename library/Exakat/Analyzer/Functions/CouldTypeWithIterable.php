@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class CouldTypeWithIterable extends Analyzer {
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
-             
+
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('SOURCE')
@@ -44,7 +44,7 @@ class CouldTypeWithIterable extends Analyzer {
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
-             
+
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('YIELD')
@@ -57,7 +57,7 @@ class CouldTypeWithIterable extends Analyzer {
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
-             
+
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->atomIs('Variable')

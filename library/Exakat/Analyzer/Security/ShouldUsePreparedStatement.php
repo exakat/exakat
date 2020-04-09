@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -46,7 +46,7 @@ class ShouldUsePreparedStatement extends Analyzer {
                             '\\mysqli_slave_query',
                             '\\mysqli_master_query',
                             '\\sqlite_single_query');
-        
+
         // dynamic type in the code : mysql_query($res, "select ".$a." from table");
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 1)

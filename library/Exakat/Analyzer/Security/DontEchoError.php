@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,10 +29,10 @@ class DontEchoError extends Analyzer {
         // echo mysql_error();
         $errorMessageFunctions = $this->loadIni('errorMessageFunctions.ini', 'functions');
         $errorMessageFunctions = makeFullNsPath($errorMessageFunctions);
-        
+
         $displayFunctions = $this->loadIni('displayFunctions.ini', 'functions');
         $displayFunctions = makeFullNsPath($displayFunctions);
-        
+
         $this->atomFunctionIs($displayFunctions)
              ->outIs('ARGUMENT')
              ->atomIs('Functioncall')
@@ -77,7 +77,7 @@ class DontEchoError extends Analyzer {
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
         $this->prepareQuery();
-        
+
         // try {} catch ($e) { echo $e->getMessage(); }
         $this->atomIs('Try')
              ->outIs('CATCH')
@@ -129,7 +129,7 @@ class DontEchoError extends Analyzer {
              ->is('boolean', true)
              ->back('first');
         $this->prepareQuery();
-    
+
     }
 }
 

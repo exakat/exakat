@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ExceedingTypehint extends Analyzer {
     public function analyze() {
         // interface i { methods i1(), i2(), i3()}
-        // function foo(i $i) { $i->i1(); } No i2, not i3. 
+        // function foo(i $i) { $i->i1(); } No i2, not i3.
         $this->atomIs(self::$FUNCTIONS)
              ->outIs('ARGUMENT')
              ->as('results')

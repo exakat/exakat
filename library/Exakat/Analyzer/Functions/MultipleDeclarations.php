@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,13 +23,12 @@
 
 namespace Exakat\Analyzer\Functions;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\MultipleDeclarations as CommonMultipleDeclarations;
 
 class MultipleDeclarations extends CommonMultipleDeclarations {
     public function analyze() {
         $this->atom = 'Function';
-        
+
         parent::analyze();
     }
 }

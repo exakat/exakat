@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,7 +42,7 @@ class BadConstantnames extends Analyzer {
              ->atomIs('Concatenation')
              ->regexIs('noDelimiter', '^__(.*)__\\$');
         $this->prepareQuery();
-        
+
         //with const
         $this->atomIs('Const')
              ->outIs('CONST')

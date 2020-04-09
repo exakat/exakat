@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CallbackNeedsReturn extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetArrayClassDefinition',
                      'Complete/PropagateConstants',
                     );
@@ -101,7 +101,7 @@ class CallbackNeedsReturn extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
 
-            
+
             //the callback declares void as return types
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,14 +26,14 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class CustomConstantUsage extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Constants/ConstantUsage',
                     );
     }
-    
+
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        
+
         $c = array($this->loadIni('php_constants.ini', 'constants'));
         $constants = array();
         foreach($exts as $ext) {
@@ -44,7 +44,7 @@ class CustomConstantUsage extends Analyzer {
                 $constants[] = $ini;
             }
         }
-        
+
         if (empty($constants)) {
             return;
         }

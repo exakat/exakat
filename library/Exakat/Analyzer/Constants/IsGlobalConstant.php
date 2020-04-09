@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,30 +26,30 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class IsGlobalConstant extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Constants/ConstantUsage',
                     );
     }
-    
+
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
-        
+
         $c = array($this->loadIni('php_constants.ini', 'constants'));
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
             $ini = $this->load($inifile, 'constants');
-            
+
             if (!empty($ini[0])) {
                 $c[] = $ini;
             }
         }
-        
+
         if (empty($c)) {
             return ;
         }
         $constants = array_merge(...$c);
         $constantsFullNs = makeFullNsPath($constants, true);
-        
+
         $this->analyzerIs('Constants/ConstantUsage')
              ->tokenIs('T_STRING')
              ->atomIsNot(array('Boolean', 'Null'))

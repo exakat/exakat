@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,9 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class SensitiveArgument extends Analyzer {
     public function analyze() {
         $unsafe = $this->loadIni('security_vulnerable_functions.ini');
-        
+
         $positions = array(0, 1, 2);
-        
+
         foreach($positions as $position) {
             $functions = makeFullNsPath($unsafe->{"functions{$position}"});
 
@@ -39,7 +39,7 @@ class SensitiveArgument extends Analyzer {
                  ->outWithRank('ARGUMENT', $position);
             $this->prepareQuery();
         }
-        
+
         $this->atomIs(array('Echo', 'Print', 'Exit', 'Eval'))
              ->followParAs('ARGUMENT');
         $this->prepareQuery();

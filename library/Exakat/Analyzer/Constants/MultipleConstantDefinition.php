@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -63,7 +63,7 @@ GREMLIN
             $this->applyToConst(array_intersect($a, $constDefinitions->toArray()));
             $this->applyToCsDefine(array_intersect($a, $csDefinitions->toArray()));
         }
-        
+
         if ($a = $this->CsCisCollisions($csDefinitions->toArray(), $cisDefinitions->toArray())) {
             $this->applyToCisDefine($a);
             $this->applyToCsDefine($a);
@@ -74,23 +74,23 @@ GREMLIN
             $this->applyToConst($a);
         }
     }
-    
+
     private function selfCollisions($array) {
         // two definitions are case sensitive
         return array_keys(array_filter(array_count_values($array), function ($x) { return $x > 1; }));
     }
-    
+
     private function CsCisCollisions($csDefinitions, $cisDefinitions) {
         return array_merge( array_intersect($csDefinitions, $cisDefinitions),
                             array_intersect($csDefinitions, array_map(function ($x) { return strtoupper($x); }, $cisDefinitions) ) );
     }
-    
+
     private function applyToCisDefine($array) {
         if (empty($array)) {
             return;
         }
         $array = array_values($array);
-        
+
         $this->atomIs('Defineconstant')
              ->outIs('CASE')
              ->is('boolean', true)

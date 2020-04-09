@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class HardcodedPasswords extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }

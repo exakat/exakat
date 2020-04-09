@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -43,10 +43,10 @@ class LogicalToInArray extends Analyzer {
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(self::$LITERALS)
              ->back('first')
-             
+
              ->atomInside('Logical')
              ->tokenIs(array('T_LOGICAL_OR', 'T_BOOLEAN_OR'))
-             
+
              ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->atomIs('Comparison')
@@ -57,7 +57,7 @@ class LogicalToInArray extends Analyzer {
              ->inIs(array('LEFT', 'RIGHT'))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(self::$LITERALS)
-             
+
              ->back('first');
         $this->prepareQuery();
     }

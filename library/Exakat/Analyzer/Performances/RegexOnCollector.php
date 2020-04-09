@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -23,7 +23,6 @@
 namespace Exakat\Analyzer\Performances;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Structures\NoEmptyRegex;
 
 class RegexOnCollector extends Analyzer {
     public function analyze() {
@@ -46,7 +45,7 @@ class RegexOnCollector extends Analyzer {
 
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'collector')
-             
+
              ->back('first')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
@@ -77,7 +76,7 @@ class RegexOnCollector extends Analyzer {
              ->atomIs('Arrayappend')
              ->outIs('APPEND')
              ->savePropertyAs('fullcode', 'collector')
-             
+
              ->back('first')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UnserializeSecondArg extends Analyzer {
     protected $phpVersion = '7.0+';
-    
+
     public function analyze() {
         $this->atomFunctionIs('\\unserialize')
              ->noChildWithRank('ARGUMENT', 1)

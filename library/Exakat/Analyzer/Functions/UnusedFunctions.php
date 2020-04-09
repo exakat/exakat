@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedFunctions extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Functions/Recursive',
                      'Modules/CalledByModule',
                     );
@@ -48,7 +48,7 @@ class UnusedFunctions extends Analyzer {
         $this->linearlyUnusedFunction();
         $this->linearlyUnusedFunction();
     }
-    
+
     private function linearlyUnusedFunction() {
        // level 2 of unused : only used by unused functions
        // function foo() {} // no foo();

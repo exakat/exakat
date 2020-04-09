@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,12 +24,12 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class CurlOptions extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Constants/ConstantUsage');
     }
     public function analyze() {
         $options = array('\\curlopt_ssl_verifypeer', '\\curlopt_ssl_verifyhost');
-        
+
         // Via curl_setopt
         $this->atomFunctionIs('\curl_setopt')
              ->outWithRank('ARGUMENT', 1)

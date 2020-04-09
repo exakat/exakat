@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SubstrFirst extends Analyzer {
       private $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr', '\basename', '\dirname',
-                                        '\\chop', '\\trim', '\\rtrim', '\\ltrim',);
+                                        '\\chop', '\\trim', '\\rtrim', '\\ltrim', );
       private $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords',
                                     '\\iconv',
                                     '\\mb_string_convert', '\\mb_strtoupper', '\\mb_strtolower', '\\mb_ereg_replace_callback', '\\mb_ereg_replace', '\\mb_eregi_replace', '\\mb_strcut', '\\mb_strimwidth',

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,13 +26,13 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class EmptyFunction extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetParentDefinition',
                      'Complete/OverwrittenMethods',
                      'Composer/IsComposerNsname',
                     );
     }
-    
+
     public function analyze() {
         // standalone function : empty is empty. Same for closure.
         $this->atomIs(array('Function', 'Closure'))

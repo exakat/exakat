@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -53,7 +53,7 @@ class Sqlite3RequiresSingleQuotes extends Analyzer {
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
-             
+
              ->nextSibling()
              ->atomInsideNoDefinition('Concatenation')
              ->outIs('CONCAT')

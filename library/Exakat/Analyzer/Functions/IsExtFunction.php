@@ -42,7 +42,7 @@ class IsExtFunction extends Analyzer {
 
         $functions = array_keys(array_count_values($functions));
         $functions = makeFullNsPath($functions);
-        
+
         $this->atomFunctionIs($functions);
         $this->prepareQuery();
 

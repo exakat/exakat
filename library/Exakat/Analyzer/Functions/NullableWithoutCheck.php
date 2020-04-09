@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -43,9 +43,9 @@ class NullableWithoutCheck extends Analyzer {
                 $this->side()
                      ->outIs('NAME')
                      ->outIs('DEFINITION')
-                     ->inIs(array('LEFT','RIGHT'))
+                     ->inIs(array('LEFT', 'RIGHT'))
                      ->atomIs('Comparison')
-                     ->outIs(array('LEFT','RIGHT'))
+                     ->outIs(array('LEFT', 'RIGHT'))
                      ->atomIs('Null')
              )
              ->back('first');

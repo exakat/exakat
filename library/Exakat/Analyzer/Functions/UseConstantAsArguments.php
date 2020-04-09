@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,11 +26,11 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UseConstantAsArguments extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Constants/IsPhpConstant',
                     );
     }
-    
+
     public function analyze() {
         $functions = $this->loadJson('php_constant_arguments.json');
 
@@ -39,7 +39,7 @@ class UseConstantAsArguments extends Analyzer {
         foreach($functions->alternative as $position => $functionsList) {
             foreach(array_keys((array) $functionsList) as $function) {
                 $fqn = makeFullNsPath($function);
-                
+
                 array_collect_by($positionsWithConstants, $fqn, (int) $position);
             }
         }
@@ -87,7 +87,7 @@ class UseConstantAsArguments extends Analyzer {
         foreach($functions->combinaison as $position => $functionsList) {
             foreach((array) $functionsList as $function => $constants) {
                 $fqn = makeFullNsPath($function);
-                
+
                 array_collect_by($positionsWithConstants, $fqn, (int) $position);
             }
         }

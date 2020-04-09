@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -52,7 +52,7 @@ class UselessReturn extends Analyzer {
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
-        
+
 // @todo : spot such functions
 //Also `__autoload`, methods used for autoloading and methods registered for shutdown, have no need to return anything.
 

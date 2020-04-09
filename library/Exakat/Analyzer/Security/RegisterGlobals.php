@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class RegisterGlobals extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/MakeClassMethodDefinition',
                      'Complete/PropagateCalls',
                     );
@@ -99,7 +99,7 @@ class RegisterGlobals extends Analyzer {
         // With import_request_variables
         $this->atomFunctionIs('\\import_request_variables');
         $this->prepareQuery();
-        
+
         // Other methods?
     }
 }

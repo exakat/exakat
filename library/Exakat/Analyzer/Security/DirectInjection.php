@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,22 +26,22 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class DirectInjection extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Security/SensitiveArgument',
                      'Modules/IncomingData',
                     );
     }
-    
+
     public function analyze() {
         $vars = $this->loadIni('php_incoming.ini')->incoming;
-        
+
         $server = $this->dictCode->translate(array('$_SERVER'));
         if (empty($server)) {
             $server = -1; // This will always fail
         } else {
             $server = $server[0];
         }
-        
+
         $safe = array('DOCUMENT_ROOT',
                       'REQUEST_TIME',
                       'REQUEST_TIME_FLOAT',
@@ -77,7 +77,7 @@ GREMLIN;
 
              ->outIs('NAME')
              ->outIs('DEFINITION')
-             
+
              ->analyzerIs('Security/SensitiveArgument')
              ->back('first');
         $this->prepareQuery();

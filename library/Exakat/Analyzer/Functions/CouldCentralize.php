@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -31,7 +31,7 @@ class CouldCentralize extends Analyzer {
                           '\\\\extension_loaded',
                          );
         $excludedList = makeList($excluded);
-        
+
         foreach(range(0, 3) as $i) {
             $query = <<<GREMLIN
 g.V().hasLabel("Functioncall", "Exit")
@@ -59,11 +59,11 @@ GREMLIN;
                     array_collect_by($args, $r[1], $r[2]);
                 }
             }
-            
+
             if (empty($args)) {
                 continue;
             }
-            
+
             $this->atomFunctionIs($functions)
                  ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'name')

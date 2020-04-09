@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,21 +26,21 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WrongNumberOfArgumentsMethods extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                      'Complete/SetClassMethodRemoteDefinition',
                      'Complete/PropagateCalls',
                      'Functions/VariableArguments',
                     );
     }
-    
+
     public function analyze() {
         $methods = $this->methods->getMethodsArgsInterval();
         $argsMins = array_fill(1, 10, array());
         $argsMaxs = array_fill(1, 10, array());
         $argsMinsFNP = array_fill(0, 10, array());
         $argsMaxsFNP = array_fill(0, 10, array());
-        
+
         // Needs to finish the list of methods and their arguments.
         // Needs to checks on constructors too
         // Refactor this analysis to link closely fullnspath and method name. Currently, it is done by batch
@@ -91,13 +91,13 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->isHash('fullnspath', $argsMinsFNP, "$nb")
                  ->back('first');
             $this->prepareQuery();
-            
+
             // TODO : add support for typehint, member property
         }
 
         foreach($argsMaxs as $nb => $f) {
             if (empty($f)) { continue; }
-            
+
             $this->atomIs('Staticmethodcall')
                  ->outIs('METHOD')
                  ->codeIs($f, self::TRANSLATE, self::CASE_INSENSITIVE)

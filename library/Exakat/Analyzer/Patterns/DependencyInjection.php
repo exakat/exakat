@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,14 +25,14 @@ namespace Exakat\Analyzer\Patterns;
 use Exakat\Analyzer\Analyzer;
 
 class DependencyInjection extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Classes/Constructor',
                     );
     }
-    
+
     public function analyze() {
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
-        
+
         // Assigned to a property at constructor
         $this->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NoNetForXmlLoad extends Analyzer {
     public function analyze() {
         $methods = array('loadXML', 'loadHTML', 'loadHTMLFile', 'load');
-    
+
         // $dom->loadXml($uri); // No options, so default options
         $this->atomIs('Methodcall')
              ->outIs('OBJECT')

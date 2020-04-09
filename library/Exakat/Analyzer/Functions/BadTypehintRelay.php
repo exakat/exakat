@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class BadTypehintRelay extends Analyzer {
     public function analyze() {
         // foo(A $a) { goo($a); } function goo(B $a) {}
-        
+
         // todo : handle class hierarchy
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

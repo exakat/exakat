@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -36,7 +36,7 @@ class UsesDefaultArguments extends Analyzer {
             // Only test if the last is missing. This is sufficient
             $positions[$function['args_max'] - 1][] = "\\$function[name]";
         }
-        
+
         foreach($positions as $position => $f) {
             $this->atomFunctionIs($f)
                  ->noChildWithRank('ARGUMENT', $position)

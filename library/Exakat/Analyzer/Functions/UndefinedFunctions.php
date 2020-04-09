@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2018 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedFunctions extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Functions/IsExtFunction',
                      'Modules/DefinedFunctions',
                     );
     }
-    
+
     public function analyze() {
         // foo(); (no function foo())
         $this->atomIs('Functioncall')
@@ -39,7 +39,7 @@ class UndefinedFunctions extends Analyzer {
              ->atomIs(array('Name', 'Nsname'))
              ->inIs('NAME')
              ->analyzerIsNot(array('Functions/IsExtFunction',
-                                   'Modules/DefinedFunctions',)
+                                   'Modules/DefinedFunctions', )
               )
              ->hasNoFunctionDefinition()
              ->isNotIgnored();

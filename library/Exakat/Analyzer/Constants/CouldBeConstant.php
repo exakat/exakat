@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class CouldBeConstant extends Analyzer {
         // We do that for strings.
         // Not for : Boolean, integers (may be non-trivial ones? ), Floats
         // May be for arrays (sorting issues)
-        
+
         // const A = 'a'; $a = 'a';
         $this->atomIs('Const')
              ->outIs('CONST')
@@ -45,14 +45,14 @@ class CouldBeConstant extends Analyzer {
              ->values('noDelimiter')
              ->unique();
         $stringsDefine = $this->rawQuery()->toArray();
-        
+
         $strings = array_merge($stringsConst, $stringsDefine);
         $strings = array_unique($strings);
-        
+
         if (empty($strings)) {
             return;
         }
-        
+
         $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
              ->hasNoParent('Constant', array('VALUE'))
              ->hasNoParent('Defineconstant', array('VALUE'))

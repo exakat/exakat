@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,11 +25,11 @@ namespace Exakat\Analyzer\Patterns;
 use Exakat\Analyzer\Analyzer;
 
 class CourrierAntiPattern extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Patterns/DependencyInjection',
                     );
     }
-    
+
     public function analyze() {
         $this->analyzerIs('Patterns/DependencyInjection')
              ->outIsIE('LEFT')

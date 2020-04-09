@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ class CantDisableFunction extends Analyzer {
     public function analyze() {
         $disableFunctions = $this->loadIni('disable_functions.ini', 'disable_functions');
         $disableFunctions = makeFullNsPath($disableFunctions);
-        
+
         $this->atomFunctionIs($disableFunctions);
         $this->prepareQuery();
     }

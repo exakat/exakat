@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -74,7 +74,7 @@ class SemanticTyping extends Analyzer {
              ->atomIs('Void')
              ->back('results')
              ->outIs('NAME')
-             
+
              ->codeIs($typed_names, self::TRANSLATE, self::CASE_INSENSITIVE);
         $this->prepareQuery();
 
@@ -83,7 +83,7 @@ class SemanticTyping extends Analyzer {
              ->outIs('RETURNTYPE')
              ->atomIs('Void')
              ->back('first')
-             
+
              ->outIs('RETURNED')
              ->atomIs('Variable')
              ->codeIs($typed_names, self::TRANSLATE, self::CASE_INSENSITIVE);

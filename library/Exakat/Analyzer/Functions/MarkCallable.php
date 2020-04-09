@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MarkCallable extends Analyzer {
     public function analyze() {
         $atoms = 'String';
-        
+
         $ini = $this->loadIni('php_with_callback.ini');
         $callbacks = array();
         foreach($ini as $position => $functions) {
@@ -38,7 +38,7 @@ class MarkCallable extends Analyzer {
             }
             $callbacks[$rank] = $functions;
         }
-        
+
         /* Supports :
             string as callable : array_map($array, 'string');
             array with static call : array_map($array, array('string', 'string'));
@@ -149,7 +149,7 @@ GREMLIN;
 
         $firstArgIsAVariable = 'where ( __.out("ARGUMENT").has("rank", 0).hasLabel("Variable", "This"))';
         $secondArgIsAString = 'where ( __.out("ARGUMENT").has("rank", 1).hasLabel("String").where( __.out("CONCAT").count().is(eq(0))) )';
-        
+
         // callable is in # position
         foreach($callbacks as $position => $functions) {
             $this->atomFunctionIs($functions)

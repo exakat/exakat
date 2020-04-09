@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,13 +42,13 @@ class ConstantUsage extends Analyzer {
         // special case for Boolean and Null
         $this->atomIs(array('Boolean', 'Null'));
         $this->prepareQuery();
-        
+
         // defined('constant') : then the string is a constant
         $this->atomFunctionIs(array('\defined', '\constant'))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String');
         $this->prepareQuery();
-        
+
         // Const outside a class
     }
 }
