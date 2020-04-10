@@ -22,11 +22,8 @@
 
 namespace Exakat\Analyzer\Dump;
 
-
-class ParameterArgumentsLinks extends AnalyzerDump {
+class ParameterArgumentsLinks extends AnalyzerArrayHashResults {
     protected $analyzerName = 'Parameter Arguments';
-
-    protected $storageType = self::QUERY_PHP_ARRAYS;
 
     public function analyze() {
         $this->analyzerValues = array();

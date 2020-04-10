@@ -63,6 +63,7 @@ map{
 GREMLIN
 );
             $res = $this->prepareQuery();
+            $this->execQuery();
         }
 /*
        $otherTypes = array('Null', 'Boolean', 'Closure');

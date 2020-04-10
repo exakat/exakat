@@ -1710,10 +1710,6 @@ GREMLIN;
                 $this->storeToTableResults();
                 break;
 
-            case self::QUERY_ARRAYS: 
-                $this->storeArraysToHashResult();
-                break;
-
             case self::QUERY_MISSING:
                 $this->storeMissing();
                 break;
@@ -1899,40 +1895,6 @@ GREMLIN
 
         return count($valuesSQL);
     }
-
-    private function execStorePhpHashToHashResults() {
-        array_unshift($this->dumpQueries, "DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
-
-        if (count($this->dumpQueries) >= 3) {
-            $this->prepareForDump($this->dumpQueries);
-        }
-
-        $this->dumpQueries = array();
-    }
-    
-    private function storePhpArraysToHashResults() {
-        ++$this->queryId;
-
-        $this->processedCount += count($this->analyzedValues);
-        $this->rowCount       += count($this->analyzedValues);
-
-        $valuesSQL = array();
-        foreach($this->analyzerValues as list($key, $value)) {
-            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString((string) $key)."', '".\Sqlite3::escapeString((string) $value)."') \n";
-        }
-
-        $chunks = array_chunk($valuesSQL, 490);
-        foreach($chunks as $chunk) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
-            $this->dumpQueries[] = $query;
-        }
-
-        if (count($this->dumpQueries) >= 2) {
-            $this->prepareForDump($this->dumpQueries);
-        }
-
-        return count($valuesSQL);
-    }
  
     private function storeToHashResults() {
         ++$this->queryId;
@@ -1979,38 +1941,6 @@ GREMLIN
 
         if (count($dumpQueries) >= 2) {
             $this->prepareForDump($dumpQueries);
-        }
-
-        return count($valuesSQL);
-    }
-
-    private function storeArraysToHashResult() {
-        ++$this->queryId;
-
-        $this->query->prepareQuery();
-        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
-
-        ++$this->queryCount;
-
-        if (count($result) === 0) {
-            return 0;
-        }
-
-        $this->processedCount += count($result->toArray());
-        $this->rowCount       += count($result->toArray());
-
-        $valuesSQL = array();
-        $chunk = 0;
-        foreach($result->toArray() as $row) {
-            list($name, $count) = array_values($row);
-            $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
-        }
-
-        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
-        $chunks = array_chunk($valuesSQL, 490);
-        foreach($chunks as $chunk) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
-            $dumpQueries[] = $query;
         }
 
         return count($valuesSQL);
@@ -2078,10 +2008,6 @@ GREMLIN
 
             case self::QUERY_TABLE:
                 $this->execStoreToTable();
-                break;
-
-            case self::QUERY_ARRAYS:
-                $this->execStoreArraysToHashResult();
                 break;
 
             default:

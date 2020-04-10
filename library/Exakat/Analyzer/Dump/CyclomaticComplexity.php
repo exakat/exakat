@@ -24,10 +24,8 @@ namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Analyzer;
 
-class CyclomaticComplexity extends AnalyzerDump {
+class CyclomaticComplexity extends AnalyzerHashResults {
     protected $analyzerName = 'CyclomaticComplexity';
-
-    protected $storageType = self::QUERY_ARRAYS;
 
     public function analyze() {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
