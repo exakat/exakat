@@ -23,12 +23,10 @@
 
 namespace Exakat\Analyzer\Variables;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class RealVariables extends AnalyzerDump {
+class RealVariables extends AnalyzerResults {
     protected $analyzerName = 'RealVariables';
-
-    protected $storageType = self::QUERY_RESULTS;
 
     protected $analyzerTable   = 'results';
 

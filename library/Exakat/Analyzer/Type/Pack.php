@@ -23,12 +23,10 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class Pack extends AnalyzerDump {
+class Pack extends AnalyzerResults {
     protected $analyzerName = 'Pack';
-
-    protected $storageType = self::QUERY_RESULTS;
 
     protected $analyzerTable   = 'results';
 

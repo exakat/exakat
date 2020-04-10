@@ -23,9 +23,11 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\AnalyzerResults;
 
-class Binary extends Analyzer {
+class Binary extends AnalyzerResults {
+    protected $analyzerName = 'Binary';
+
     protected $phpVersion = '5.4+';
 
     public function analyze() {

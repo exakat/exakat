@@ -23,19 +23,15 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class Email extends AnalyzerDump {
+class Email extends AnalyzerResults {
+    protected $analyzerName = 'Email';
+
     public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }
-
-    protected $analyzerName = 'Email';
-
-    protected $storageType = self::QUERY_RESULTS;
-
-    protected $analyzerTable   = 'results';
 
     public function analyze() {
         // $x = 'a@b.com';

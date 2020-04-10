@@ -22,9 +22,11 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\AnalyzerResults;
 
-class UdpDomains extends Analyzer {
+class UdpDomains extends AnalyzerResults {
+    protected $analyzerName = 'UpdDomains';
+
     public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );

@@ -22,9 +22,11 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\AnalyzerResults;
 
-class Sql extends Analyzer {
+class Sql extends AnalyzerResults {
+    protected $analyzerName = 'Sql';
+
     public function analyze() {
         $sqlKeywords = $this->loadIni('sqlKeywords.ini', 'keywords');
         $regex = '^(?i)(<<<\\\\w+)?(<<<\'\\\\w+\')?[\\"\']?\\\\s*(' . implode('|', $sqlKeywords) . ') ';

@@ -1718,10 +1718,6 @@ GREMLIN;
                 $this->storeToGraph(false);
                 break;
 
-            case self::QUERY_RESULTS:
-                $this->storeToResults();
-                break;
-
             case self::QUERY_DEFAULT:
             default:
                 $this->storeToGraph(true);
@@ -1760,53 +1756,6 @@ GREMLIN;
         $this->gremlin->query($query);
 
         $this->datastore->addRow('analyzed', array($this->shortAnalyzer => -1 ) );
-    }
-
-    private function storeToResults() {
-        ++$this->queryId;
-
-        $this->query->prepareQuery();
-        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
-
-        ++$this->queryCount;
-
-        $c = $result->toArray();
-        if (!is_array($c) || !isset($c[0])) {
-            return 0;
-        }
-
-        $this->processedCount += count($c);
-        $this->rowCount       += count($c);
-
-        $valuesSQL = array();
-        foreach($c as $row) {
-            $row = array_map(array('\\Sqlite3', 'escapeString'), $row);
-            $row['analyzer']  = $this->shortAnalyzer;
-            $valuesSQL[] = "(NULL, '".implode("', '", $row)."', 0) \n";
-        }
-
-        $chunks = array_chunk($valuesSQL, 490);
-        foreach($chunks as $chunk) {
-            $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
-            $this->dumpQueries[] = $query;
-        }
-
-        return count($valuesSQL);
-    }
-
-    private function execStoreToResults() {
-        // table always created, may be empty
-        if ($this->lastAnalyzerTable !== $this->analyzerTable) {
-             array_unshift($this->dumpQueries, "DELETE FROM results WHERE analyzer = \"{$this->shortAnalyzer}\"");
-        }
-
-        $this->dumpQueries[] = "REPLACE INTO resultsCounts VALUES (NULL, \"{$this->shortAnalyzer}\", $this->rowCount)";
-
-        if (count($this->dumpQueries) >= 3) {
-            $this->prepareForDump($this->dumpQueries);
-        }
-
-        $this->dumpQueries = array();
     }
 
     private function storePhpHashToHashResults() : int {
@@ -1934,19 +1883,6 @@ GREMLIN
     }
 
     public function execQuery() : int {
-        switch($this->storageType) {
-            case self::QUERY_RESULTS:
-                $this->execStoreToResults();
-                break;
-/*
-            case self::QUERY_TABLE:
-                $this->execStoreToTable();
-                break;
-*/
-            default:
-                // continue
-        }
-
         if (empty($this->queries)) {
             return 0;
         }

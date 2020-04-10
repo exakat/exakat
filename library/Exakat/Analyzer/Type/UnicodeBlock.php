@@ -23,12 +23,10 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class UnicodeBlock extends AnalyzerDump {
+class UnicodeBlock extends AnalyzerResults {
     protected $analyzerName = 'UnicodeBlock';
-
-    protected $storageType = self::QUERY_RESULTS;
 
     protected $analyzerTable   = 'results';
 

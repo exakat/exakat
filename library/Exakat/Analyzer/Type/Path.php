@@ -23,14 +23,10 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class Path extends AnalyzerDump {
+class Path extends AnalyzerResults {
     protected $analyzerName = 'Path';
-
-    protected $storageType = self::QUERY_RESULTS;
-
-    protected $analyzerTable   = 'results';
 
     public function analyze() {
         $protocols = array('http',

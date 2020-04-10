@@ -23,12 +23,10 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class Heredoc extends AnalyzerDump {
+class Heredoc extends AnalyzerResults {
     protected $analyzerName = 'Heredoc';
-
-    protected $storageType = self::QUERY_RESULTS;
 
     protected $analyzerTable   = 'results';
 

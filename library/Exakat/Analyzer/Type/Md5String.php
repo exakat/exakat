@@ -23,9 +23,11 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\AnalyzerResults;
 
-class Md5String extends Analyzer {
+class Md5String extends AnalyzerResults {
+    protected $analyzerName = 'Md5 strings';
+
     public function analyze() {
         // 'eccbc87e4b5ce2fe28308fd9f2a7baf3'
         $this->atomIs('String')

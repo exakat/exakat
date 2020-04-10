@@ -23,9 +23,11 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\AnalyzerResults;
 
-class Nowdoc extends Analyzer {
+class Nowdoc extends AnalyzerResults {
+    protected $analyzerName = 'Nowdoc';
+
     public function analyze() {
         $this->atomIs('Heredoc')
              ->isNot('heredoc', true);

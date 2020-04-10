@@ -23,12 +23,10 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class Pcre extends AnalyzerDump {
+class Pcre extends AnalyzerResults {
     protected $analyzerName = 'Pcre';
-
-    protected $storageType = self::QUERY_RESULTS;
 
     protected $analyzerTable   = 'results';
 

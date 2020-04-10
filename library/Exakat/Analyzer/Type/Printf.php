@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -20,18 +20,12 @@
  *
 */
 
-declare(strict_types = 1);
-
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\AnalyzerResults;
 
-class Printf extends Analyzer {
+class Printf extends AnalyzerResults {
     protected $analyzerName = 'Printf';
-
-    protected $storageType = self::QUERY_RESULTS;
-
-    protected $analyzerTable   = 'results';
 
     public function analyze() {
         $functions = array('\\printf',

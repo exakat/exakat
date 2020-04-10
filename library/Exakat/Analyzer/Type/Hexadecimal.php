@@ -23,12 +23,10 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class Hexadecimal extends AnalyzerDump {
+class Hexadecimal extends AnalyzerResults {
     protected $analyzerName = 'Hexadecimal';
-
-    protected $storageType = self::QUERY_RESULTS;
 
     protected $analyzerTable   = 'results';
 

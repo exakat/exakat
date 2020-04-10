@@ -22,9 +22,11 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\AnalyzerResults;
 
-class Regex extends Analyzer {
+class Regex extends AnalyzerResults {
+    protected $analyzerName = 'Regex';
+
     public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/CreateDefaultValues',
