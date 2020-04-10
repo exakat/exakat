@@ -155,9 +155,48 @@ abstract class Analyzer extends TestCase {
             $this->checkTestOnHash($res, $expected, $expected_not);
         } elseif (empty($res)) {
             $this->checkTestOnFullcode(array(), $expected, $expected_not);
+        } elseif (isset($res[0]['built'])) {
+            $this->checkTestOnFullarray($res, $expected, $expected_not);
         } else {
             print "How shall we test this?\n";
+            print_r($res);
         }
+    }
+
+    private function checkTestOnFullarray(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
+        $list = array_map(function(array $x) : array { unset($x['id']); return $x;}, $list);
+        $list2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $list);
+
+        $expected2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected);
+        $expected_not2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected_not);
+
+        $display = array();
+        $missed = array_diff($expected2, $list2);
+        if(!empty($missed)) {
+            foreach($missed as $key => $value) {
+                $display[] = $list[$key];
+            }
+        }
+        $this->assertEmpty($missed, count($missed)." expected values were not found :\n '".join("',\n '", $missed)."'\n\nin the ".count($display)." received values of \n".print_r($display, true));
+
+        $list2 = array_diff($list2, $expected2);
+        $not = array_intersect($expected_not2, $list2);
+
+        if(!empty($not)) {
+            foreach($not as $key => $value) {
+                $display[] = $list[$key];
+            }
+        }
+        $this->assertEmpty($not, count($not)." values that are not expected, were found :\n '".join("',\n '", $missed)."'\n\nin the ".count($display)." received values of \n".print_r($display, true));
+        
+        $extra = array_diff($list2, $expected_not2);
+        if(!empty($extra)) {
+            foreach($extra as $key => $value) {
+                $display[] = $list[$key];
+            }
+        }
+        $this->assertEmpty($extra, count($extra)." extra values were found :\n '".join("',\n '", $missed)."'\n\nin the ".count($list)." received values of \n".print_r($display, true));
+        
     }
     
     private function checkTestOnFullcode(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
@@ -208,7 +247,7 @@ phpunit --filter=$this->number Test/$this->analyzer.php
                 if (isset($list[$k]) && $list[$k] === $v) {
                     unset($list[$k]);
                 } else {
-                    $missing[] = $k;
+                    $missing[] = $k.' ('.$v.')';
                 }
             }
 
