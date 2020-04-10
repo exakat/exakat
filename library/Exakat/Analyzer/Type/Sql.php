@@ -22,7 +22,7 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\AnalyzerResults;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Sql extends AnalyzerResults {
     protected $analyzerName = 'Sql';

@@ -23,7 +23,7 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\AnalyzerResults;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Nowdoc extends AnalyzerResults {
     protected $analyzerName = 'Nowdoc';

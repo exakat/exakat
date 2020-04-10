@@ -23,7 +23,7 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\AnalyzerResults;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Binary extends AnalyzerResults {
     protected $analyzerName = 'Binary';
