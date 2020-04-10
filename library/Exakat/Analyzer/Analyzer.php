@@ -1714,10 +1714,6 @@ GREMLIN;
                 $this->storeMissing();
                 break;
 
-            case self::QUERY_PHP_ARRAYS:
-                $this->storePhpArraysToHashResults();
-                break;
-
             case self::QUERY_PHP_HASH:
                 $this->storePhpHashToHashResults();
                 break;

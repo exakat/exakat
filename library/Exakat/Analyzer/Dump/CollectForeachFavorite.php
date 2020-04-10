@@ -22,11 +22,8 @@
 
 namespace Exakat\Analyzer\Dump;
 
-
-class CollectForeachFavorite extends AnalyzerDump {
+class CollectForeachFavorite extends AnalyzerArrayHashResults {
     protected $analyzerName = 'Foreach Names';
-
-    protected $storageType = self::QUERY_PHP_ARRAYS;
 
     public function analyze() {
         // Foreach, values only
