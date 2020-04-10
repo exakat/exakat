@@ -107,7 +107,7 @@ class Git extends Vcs {
             $branch = '';
         }
 
-        trim(shell_exec("cd {$this->destinationFull}/;GIT_TERMINAL_PROMPT=0  {$this->executable} pull --quiet"));
+        trim(shell_exec("cd {$this->destinationFull}/;GIT_TERMINAL_PROMPT=0  {$this->executable} pull --quiet") ?? '');
         $resFinal = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
         if (strpos($resFinal, ' ') !== false) {
             list($resFinal, ) = explode(' ', $resFinal);

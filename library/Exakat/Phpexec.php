@@ -98,7 +98,7 @@ class Phpexec {
                 $this->actualVersion = 'Error while reading PHP version for ' . $phpversion;
             }
         } else {
-            $res = shell_exec("$pathToBinary -v");
+            $res = shell_exec("$pathToBinary -v") ?? '';
             if (preg_match('/PHP (\d\.\d+\.\d+)/', $res, $r)) {
                 $this->actualVersion = $r[1];
             } else {
