@@ -31,6 +31,7 @@ class UseNullableType extends Analyzer {
         // Return type function foo(): ?String
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs(array('RETURNTYPE', 'ARGUMENT'))
+             ->outIsIE('TYPEHINT')
              ->is('nullable', true)
              ->back('first'); // Go back to fucntion
         $this->prepareQuery();
