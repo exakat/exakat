@@ -32,7 +32,8 @@ class Binary extends AnalyzerResults {
 
     public function analyze() {
         $this->atomIs('Integer')
-             ->regexIs('fullcode', '^0[bB][01]+\$');
+             ->regexIs('fullcode', '^0[bB][01]+\$')
+             ->toResults();
         $this->prepareQuery();
     }
 }

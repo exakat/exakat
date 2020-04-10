@@ -22,8 +22,6 @@
 
 namespace Exakat\Analyzer\Portability;
 
-use Exakat\Analyzer\Analyzer;
-
 class WindowsOnlyConstants extends Analyzer {
     public function analyze() {
         $constants = array( 'PHP_WINDOWS_VERSION_MAJOR',
@@ -42,7 +40,7 @@ class WindowsOnlyConstants extends Analyzer {
         $fnp = makeFullnspath($constants, \FNP_CONSTANT);
 
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIs($fnp, Analyzer::CASE_SENSITIVE);
+             ->fullnspathIs($fnp, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }

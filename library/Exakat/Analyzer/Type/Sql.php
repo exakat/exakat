@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Sql extends AnalyzerResults {
-    protected $analyzerName = 'Sql';
+    protected $analyzerName = 'Type/Sql';
 
     public function analyze() {
         $sqlKeywords = $this->loadIni('sqlKeywords.ini', 'keywords');
@@ -34,7 +34,8 @@ class Sql extends AnalyzerResults {
         // SQL in a literal 'SELECT col FROM table';
         $this->atomIs(self::$STRINGS_ALL)
              ->hasNoIn('CONCAT')
-             ->regexIs('fullcode', $regex);
+             ->regexIs('fullcode', $regex)
+             ->toResults();
         $this->prepareQuery();
     }
 }

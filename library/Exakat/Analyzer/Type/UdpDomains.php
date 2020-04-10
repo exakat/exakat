@@ -37,7 +37,8 @@ class UdpDomains extends AnalyzerResults {
 
         $this->atomIs('String', self::WITH_CONSTANTS)
              ->regexIs('noDelimiter', '^(' . implode('|', $domains) . ')://')
-             ->back('first');
+             ->back('first')
+             ->toResults();
         $this->prepareQuery();
     }
 }

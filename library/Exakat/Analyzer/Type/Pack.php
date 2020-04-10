@@ -28,8 +28,6 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Pack extends AnalyzerResults {
     protected $analyzerName = 'Pack';
 
-    protected $analyzerTable   = 'results';
-
     public function analyze() {
         $packFunctions = array('\\pack',
                                '\\unpack',

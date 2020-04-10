@@ -28,8 +28,6 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Hexadecimal extends AnalyzerResults {
     protected $analyzerName = 'Hexadecimal';
 
-    protected $analyzerTable   = 'results';
-
     public function analyze() {
         // $a = 0x123ee;
         $this->atomIs('Integer')

@@ -30,7 +30,8 @@ class Nowdoc extends AnalyzerResults {
 
     public function analyze() {
         $this->atomIs('Heredoc')
-             ->isNot('heredoc', true);
+             ->isNot('heredoc', true)
+             ->toResults();
         $this->prepareQuery();
     }
 }

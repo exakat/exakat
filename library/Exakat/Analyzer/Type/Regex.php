@@ -58,16 +58,18 @@ class Regex extends AnalyzerResults {
         // preg_match('/a/', ...)
         $this->atomFunctionIs($this->pregFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
+             ->atomIs(array('String', 'Concatenation'), self::WITH_CONSTANTS)
+             ->toResults();
         $this->prepareQuery();
 
         // preg_match(array(regex1, regex2))
         $this->atomFunctionIs($this->pregFunctions    )
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('Arrayliteral', Analyzer::WITH_CONSTANTS)
+             ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'), Analyzer::WITH_CONSTANTS);
+             ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
+             ->toResults();
         $this->prepareQuery();
 
         // preg_relace_callback_array(array(regex1 => callback, regex2))
@@ -76,7 +78,8 @@ class Regex extends AnalyzerResults {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIs('INDEX')
-             ->atomIs(array('String', 'Concatenation'), Analyzer::WITH_CONSTANTS);
+             ->atomIs(array('String', 'Concatenation'), self::WITH_CONSTANTS)
+             ->toResults();
         $this->prepareQuery();
     }
 }

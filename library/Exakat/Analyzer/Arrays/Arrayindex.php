@@ -27,8 +27,6 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Arrayindex extends AnalyzerResults {
     protected $analyzerName = 'Arrayindex';
 
-    protected $analyzerTable   = 'results';
-
     public function analyze() {
 
         // $a[1]

@@ -52,16 +52,18 @@ abstract class AnalyzerResults extends AnalyzerDump {
 
         $chunks = array_chunk($valuesSQL, 490);
         foreach($chunks as $chunk) {
-            $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
+            $query = 'INSERT INTO results VALUES ' . implode(', ', $chunk);
             $this->dumpQueries[] = $query;
         }
+
+        $this->dumpQueries[] = "INSERT INTO resultsCounts (\"id\", \"analyzer\", \"count\") VALUES (NULL, '{$this->shortAnalyzer}', ".(count($valuesSQL)).")";
 
     }
     
     public function execQuery() : int {
-        array_unshift($this->dumpQueries, "DELETE FROM results WHERE analyzer = '{$this->analyzerName}'");
+        array_unshift($this->dumpQueries, "DELETE FROM results WHERE analyzer = '{$this->shortAnalyzer}'");
 
-        if (count($this->dumpQueries) >= 1) {
+        if (count($this->dumpQueries) >= 2) {
             $this->prepareForDump($this->dumpQueries);
         }
 

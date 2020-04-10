@@ -28,8 +28,6 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Pcre extends AnalyzerResults {
     protected $analyzerName = 'Pcre';
 
-    protected $analyzerTable   = 'results';
-
     public function analyze() {
         $delimiters = array('\\$'     => '\\$',
                             '#'       => '#',

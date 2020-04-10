@@ -29,7 +29,7 @@ class AddZero extends Analyzer {
     public function analyze() {
         // $x += 0
         $this->atomIs('Assignation')
-             ->codeIs(array('+=', '-='), Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
+             ->codeIs(array('+=', '-='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
              ->is('intval', 0)
              ->is('boolean', false)

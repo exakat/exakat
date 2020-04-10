@@ -121,7 +121,7 @@ class CouldUseTry extends Analyzer {
              ->is('fullnspath', '\\phar')
              ->inIs('CLASS')
              ->outIs('METHOD')
-             ->codeIs(array('mungserver', 'webphar'), Analyzer::TRANSLATE, Analyzer::CASE_INSENSITIVE)
+             ->codeIs(array('mungserver', 'webphar'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->hasNoTryCatch()
              ->back('first');
         $this->prepareQuery();
