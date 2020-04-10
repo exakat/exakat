@@ -2224,13 +2224,9 @@ class Load extends Tasks {
                     }
                 }
 
-                if (!empty($typehints)) {
-                    $index->fullcode = join('|', $typehints) . ' ' . $index->fullcode;
-                }
-
+                $index->fullcode = (!empty($typehints) ? join('|', $typehints) . ' ' : '').$index->fullcode;
+                $fullcode[] = $index->fullcode;
                 $this->addLink($arguments, $index, 'ARGUMENT');
-
-                $fullcode[] = ((count($returnTypes) === 1 && $returnTypes[0]->atom === 'Void') ? '' : join('|', array_column($returnTypes, 'fullcode')) . ' ' ) . $index->fullcode;
                 $argumentsList[] = $index;
 
                 ++$this->id;
