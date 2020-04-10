@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
+use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
-class EnvironnementVariables extends AnalyzerDump {
+class EnvironnementVariables extends AnalyzerHashHashResults {
     protected $analyzerName = 'Environment Variables via Function';
-
-    protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
         //$_ENV['name']

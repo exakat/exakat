@@ -22,9 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
-class CollectParameterCounts extends AnalyzerDump {
+use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
+
+class CollectParameterCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'ParameterCounts';
-    protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
         // foo($a, $b, ...$c) : 3 parameter

@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
+use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
-class DereferencingLevels extends AnalyzerDump {
+class DereferencingLevels extends AnalyzerHashHashResults {
     protected $analyzerName = 'Dereferencing Levels';
-
-    protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
         //$a->b->c()::d()->e::F (only -> and ::)

@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
+use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
-class IndentationLevels extends AnalyzerDump {
+class IndentationLevels extends AnalyzerHashHashResults {
     protected $analyzerName = 'Indentation Levels';
-
-    protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
         //function foo() { if (1) { /* level 2 */}}

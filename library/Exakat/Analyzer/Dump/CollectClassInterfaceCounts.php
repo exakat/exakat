@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
+use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
-class CollectClassInterfaceCounts extends AnalyzerDump {
+class CollectClassInterfaceCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'ClassInterfaces';
-
-    protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
         //class x implements i,j,k {}

@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
+use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
-class CollectLocalVariableCounts extends AnalyzerDump {
+class CollectLocalVariableCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'Local Variable Counts';
-
-    protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
         // foo() {$t ; }

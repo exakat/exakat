@@ -22,11 +22,10 @@
 
 namespace Exakat\Analyzer\Dump;
 
+use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
-class CollectClassChildren extends AnalyzerDump {
+class CollectClassChildren extends AnalyzerHashHashResults {
     protected $analyzerName = 'Class Children';
-
-    protected $storageType = self::QUERY_HASH;
 
     public function analyze() {
         // class a {} class b extends a;
