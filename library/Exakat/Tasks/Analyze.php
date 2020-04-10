@@ -33,7 +33,6 @@ use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\QueryException;
 use Exakat\Exceptions\MissingGremlin;
 use Exakat\Exceptions\DSLException;
-use Exakat\Project as ProjectName;
 use ProgressBar\Manager as ProgressBar;
 use Exception;
 use Exakat\Log;
@@ -99,7 +98,7 @@ class Analyze extends Tasks {
             throw new NeedsAnalyzerThema();
         }
 
-        $this->log->log("Analyzing project ".(string) $this->config->project);
+        $this->log->log('Analyzing project ' . (string) $this->config->project);
         $this->log->log("Runnable analyzers\t" . count($analyzersClass));
 
         $this->php = exakat('php');
@@ -135,7 +134,7 @@ class Analyze extends Tasks {
         display("Done\n");
     }
 
-    private function fetchAnalyzers(string $analyzer_class, array &$analyzers, array &$dependencies) : void {
+    private function fetchAnalyzers(string $analyzer_class, array &$analyzers, array &$dependencies): void {
         if (isset($analyzers[$analyzer_class])) {
             return;
         }
@@ -256,7 +255,7 @@ g.V().hasLabel("Analysis").as("analyzer", "count").select("analyzer", "count").b
 GREMLIN;
         $res = $this->gremlin->query($query);
 
-        foreach($res as ['analyzer' => $analyzer, 'count' => $count]) {
+        foreach($res as list('analyzer' => $analyzer, 'count' => $count)) {
             if ($count != -1 && !isset($this->analyzed[$analyzer])) {
                 $this->analyzed[$analyzer] = $count;
             }

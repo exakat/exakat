@@ -24,22 +24,16 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer;
 
-use Exakat\Datastore;
-use Exakat\Data\Dictionary;
 use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\UnknownDsl;
-use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Query\Query;
-use Exakat\Tasks\Helpers\Atom;
-use Exakat\Query\DSL\DSL;
-use Exakat\Query\DSL\FollowParAs;
 use Exakat\Project;
 
 abstract class Analyzer {
-    // Query types  
+    // Query types
     const QUERY_DEFAULT       = 1;   // For compatibility purposes
     const QUERY_ANALYZER      = 2;   // same as above, but explicit
     const QUERY_VALUE         = 3;   // returns a single value
@@ -75,19 +69,19 @@ abstract class Analyzer {
     private static $calledTraits          = null;
     private static $calledNamespaces      = null;
     private static $calledDirectives      = null;
-    
-    private static $jsonCache = [];
-    private static $iniCache  = [];
 
-    private   $analyzer         = '';       // Current class of the analyzer (called from below)
+    private static $jsonCache = array();
+    private static $iniCache  = array();
+
+    private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerTitle    = '';       // Name use when storing in the dump.sqlites
     protected $shortAnalyzer    = '';
     protected $analyzerQuoted   = '';
     protected $analyzerId       = 0;
     protected $queryId          = 0;
-    
+
     protected $analyzerName      = 'no analyzer name';
-    private   $lastAnalyzerTable = 'none';
+    private $lastAnalyzerTable = 'none';
     protected $analyzerSQLTable = 'no analyzer sql creation';
     protected $missingQueries   = array();
     protected $analyzedValues   = array();
@@ -109,14 +103,14 @@ abstract class Analyzer {
     const T_QUICK   = 'Quick';   //30';
     const T_SLOW    = 'Slow';    //60';
     const T_LONG    = 'Long';    //360';
-    
+
     const PHP_VERSION_ANY = 'Any';
 
     const COMPATIBLE                 =  0;
     const UNKNOWN_COMPATIBILITY      = -1;
     const VERSION_INCOMPATIBLE       = -2;
     const CONFIGURATION_INCOMPATIBLE = -3;
-    
+
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
@@ -137,7 +131,7 @@ abstract class Analyzer {
     public static $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
 
     public static $LITERALS         = array('Integer', 'Float', 'Null', 'Boolean', 'String', 'Heredoc');
-    public static $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
+    public static $LOOPS_ALL        = array('For' , 'Foreach', 'While', 'Dowhile');
 
     public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction');
@@ -154,7 +148,7 @@ abstract class Analyzer {
     public static $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
     public static $CLASS_METHODS    = array('METHOD', 'MAGICMETHOD');
 
-    public static $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
+    public static $FUNCTIONS_CALLS  = array('Functioncall' , 'Newcall', 'Methodcall', 'Staticmethodcall');
     public static $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
@@ -173,20 +167,20 @@ abstract class Analyzer {
 
     const CONTEXT_IN_CLOSURE = 1;
     const CONTEXT_OUTSIDE_CLOSURE = 2;
-    
+
     const MAX_LOOPING = 15;
-    
+
     protected $rulesets  = null;
 
     protected $methods = null;
     protected $gremlin = null;
     protected $dictCode = null;
-    
+
     protected $linksDown = '';
     protected $dumpQueries = array();
 
     public function __construct() {
-        assert(func_num_args() === 0, "Too many arguments for ".__CLASS__);
+        assert(func_num_args() === 0, 'Too many arguments for ' . __CLASS__);
         $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
@@ -204,13 +198,13 @@ abstract class Analyzer {
             $parameters = $this->docs->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
- 
+
                 if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
                     $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
                 } else {
                     $this->{$parameter['name']} = $parameter['default'];
                 }
-                
+
                 if ($parameter['type'] === 'integer') {
                     $this->{$parameter['name']} = (int) $this->{$parameter['name']};
                 }
@@ -235,14 +229,14 @@ abstract class Analyzer {
 
             self::$availableFunctioncalls = $this->datastore->getCol('functioncalls', 'functioncall');
         }
-        
+
         $this->initNewQuery();
-        
+
         $this->methods = exakat('methods');
     }
 
-    public function init(int $analyzerId = null) : int {
-    
+    public function init(int $analyzerId = null): int {
+
         // always reload list of analysis from the database
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
@@ -251,7 +245,7 @@ GREMLIN;
 
             // Double is a safe guard, in case analysis were created twice
             $double = array();
-            foreach($res as ['analyzer' => $analyzer, 'id' => $id]) {
+            foreach($res as list('analyzer' => $analyzer, 'id' => $id)) {
                 if (isset(self::$rulesId[$analyzer]) && self::$rulesId[$analyzer] !== $id) {
                     $double[] = $id;
                 } else {
@@ -297,17 +291,17 @@ GREMLIN;
         }
 
         assert($this->analyzerId != 0, self::class . ' was inited with Id 0. Can\'t save with that!');
-        
+
         return $this->analyzerId;
     }
-    
+
     public function __destruct() {
         if ($this->path_tmp !== null) {
             unlink($this->path_tmp);
         }
     }
-    
-    public function setAnalyzer(string $analyzer) : void {
+
+    public function setAnalyzer(string $analyzer): void {
         $this->analyzer = $this->rulesets->getClass($analyzer);
         if ($this->analyzer === false) {
             throw new NoSuchAnalyzer($analyzer, $this->rulesets);
@@ -315,16 +309,16 @@ GREMLIN;
         $this->analyzerQuoted = $this->getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
     }
-    
-    public function getInBaseName() : string {
+
+    public function getInBaseName(): string {
         return $this->analyzerQuoted;
     }
-    
-    public function getName(string $classname) : string {
+
+    public function getName(string $classname): string {
         return str_replace( array('Exakat\\Analyzer\\', '\\'), array('', '/'), $classname);
     }
 
-    public function getDump() : array {
+    public function getDump(): array {
         $this->atomIs('Analysis')
              ->is('analyzer', array($this->shortAnalyzer))
              ->savePropertyAs('analyzer', 'analyzer')
@@ -358,31 +352,31 @@ GREMLIN
         return $this->rawQuery()->toArray();
     }
 
-    public function getRulesets() : array {
+    public function getRulesets(): array {
         $analyzer = $this->getName($this->analyzerQuoted);
         return $this->rulesets->getRulesetForAnalyzer($analyzer);
     }
 
-    public function getPhpVersion() : string {
+    public function getPhpVersion(): string {
         return $this->phpVersion;
     }
-    
-    public function checkPhpConfiguration($Php) : bool {
+
+    public function checkPhpConfiguration($Php): bool {
         // this handles Any version of PHP
         if ($this->phpConfiguration === 'Any') {
             return true;
         }
-        
+
         foreach($this->phpConfiguration as $ini => $value) {
             if ($Php->getConfiguration($ini) != $value) {
                 return false;
             }
         }
-        
+
         return true;
     }
-    
-    public function getCalledClasses() : array {
+
+    public function getCalledClasses(): array {
         if (self::$calledClasses === null) {
             $news = $this->query('g.V().hasLabel("New").out("NEW").not(where( __.in("DEFINITION"))).values("fullnspath")')
                          ->toArray();
@@ -397,20 +391,20 @@ GREMLIN
                                                             $typehints,
                                                             $returntype));
         }
-        
+
         return self::$calledClasses;
     }
-    
-    public function getCalledInterfaces() : array {
+
+    public function getCalledInterfaces(): array {
         if (self::$calledInterfaces === null) {
             self::$calledInterfaces = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Interfaces/InterfaceUsage").out("ANALYZED").values("fullnspath")')
                                            ->toArray();
         }
-        
+
         return self::$calledInterfaces;
     }
 
-    public function getCalledTraits() : array {
+    public function getCalledTraits(): array {
         if (self::$calledTraits === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analyzer")
@@ -421,11 +415,11 @@ GREMLIN;
             self::$calledTraits = $this->query($query)
                                        ->toArray();
         }
-        
+
         return self::$calledTraits;
     }
 
-    public function getCalledNamespaces() : array {
+    public function getCalledNamespaces(): array {
         if (self::$calledNamespaces === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Namespace")
@@ -435,11 +429,11 @@ GREMLIN;
             self::$calledNamespaces = $this->query($query)
                                            ->toArray();
         }
-        
+
         return self::$calledNamespaces;
     }
 
-    public function getCalledDirectives() : array {
+    public function getCalledDirectives(): array {
         if (self::$calledDirectives === null) {
             $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis")
@@ -455,11 +449,11 @@ GREMLIN;
             self::$calledDirectives = $this->query($query)
                                            ->toArray();
         }
-        
+
         return self::$calledDirectives;
     }
 
-    public function checkPhpVersion(string $version) : bool {
+    public function checkPhpVersion(string $version): bool {
         // this handles Any version of PHP
         if ($this->phpVersion === self::PHP_VERSION_ANY) {
             return true;
@@ -480,22 +474,22 @@ GREMLIN;
             list($lower, $upper) = explode('-', $this->phpVersion);
             return version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0;
         }
-        
+
         // One version only
         if (version_compare($version, $this->phpVersion) == 0) {
             return true;
         }
-        
+
         // Default behavior if we don't understand :
         return false;
     }
 
     // @doc return the list of dependences that must be prepared before the execution of an analyzer
     // @doc by default, nothing.
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array();
     }
-    
+
     public function query(string $queryString, array $arguments = array()) {
         try {
             $result = $this->gremlin->query($queryString, $arguments);
@@ -510,9 +504,9 @@ GREMLIN;
         return $result;
     }
 
-    public function side() : self {
+    public function side(): self {
         $this->query->side();
-        
+
         return $this;
     }
 
@@ -520,25 +514,25 @@ GREMLIN;
         return $this->query->prepareSide();
     }
 
-    public function as(string $name) : self {
+    public function as(string $name): self {
         $this->query->_as($name);
-        
+
         return $this;
     }
 
-    public function _as(string $name) : self {
+    public function _as(string $name): self {
         return $this->as($name);
     }
 
-    public function back(string $name = 'first') : self {
+    public function back(string $name = 'first'): self {
         $this->query->back($name);
-        
+
         return $this;
     }
-    
-    public function ignore() : self {
+
+    public function ignore(): self {
         $this->query->ignore();
-        
+
         return $this;
     }
 
@@ -548,64 +542,64 @@ GREMLIN;
 
     protected function hasNoInstruction($atom = 'Function') {
         $this->query->hasNoInstruction($atom);
-        
+
         return $this;
     }
 
-    protected function hasNoCountedInstruction($atom = 'Function', int $count = 0) : self {
+    protected function hasNoCountedInstruction($atom = 'Function', int $count = 0): self {
         $this->query->hasNoCountedInstruction($atom, $count);
-        
+
         return $this;
     }
 
-    protected function countBy(string $link = 'EXPRESSION',string $property = 'fullcode', string $variable = 'v') : self {
+    protected function countBy(string $link = 'EXPRESSION',string $property = 'fullcode', string $variable = 'v'): self {
         $this->query->countBy($link, $property, $variable);
-        
+
         return $this;
     }
 
-    protected function hasInstruction($atom = 'Function') : self {
+    protected function hasInstruction($atom = 'Function'): self {
         $this->query->hasInstruction($atom);
 
         return $this;
     }
 
-    protected function goToInstruction($atom = 'Namespace') : self {
+    protected function goToInstruction($atom = 'Namespace'): self {
         $this->query->goToInstruction($atom);
-        
+
         return $this;
     }
 
     protected function goToAllElse() {
         $this->query->GoToAllElse();
-        
+
         return $this;
     }
 
     protected function goToAllDefinitions() {
         $this->query->GoToAllDefinitions();
-        
+
         return $this;
     }
 
     public function tokenIs($token) {
         $this->query->tokenIs($token);
-        
+
         return $this;
     }
 
     public function tokenIsNot($token) {
         $this->query->tokenIsNot($token);
-        
+
         return $this;
     }
 
     public function isNotEmptyArray() {
         $this->query->isNotEmptyArray();
-        
+
         return $this;
     }
-    
+
     public function atomIs($atom, $flag = self::WITHOUT_CONSTANTS) {
         $this->query->atomIs($atom, $flag);
 
@@ -614,22 +608,22 @@ GREMLIN;
 
     public function atomIsNot($atom, $flag = self::WITHOUT_CONSTANTS) {
         $this->query->atomIsNot($atom, $flag);
-        
+
         return $this;
     }
 
     public function atomFunctionIs($fullnspath) {
         $this->query->atomFunctionIs($fullnspath);
-        
+
         return $this;
     }
 
     public function isNotIgnored() {
         $this->query->isNotIgnored();
-        
+
         return $this;
     }
-    
+
     public function functioncallIs($fullnspath) {
         $this->query->functioncallIs($fullnspath);
 
@@ -644,55 +638,55 @@ GREMLIN;
 
     public function atomInsideMoreThan($atom, $times = 1) {
         $this->query->atomInsideMoreThan($atom, $times);
-        
+
         return $this;
     }
-    
+
     public function noAtomInside($atom) {
         $this->query->noAtomInside($atom);
-        
+
         return $this;
     }
 
     public function noCodeInside($atom, $values) {
         $this->query->noCodeInside($atom, $values);
-        
+
         return $this;
     }
 
     public function noPropertyInside($atom, $property, $values) {
         $this->query->noPropertyInside($atom, $property, $values);
-        
+
         return $this;
     }
-    
+
     public function noAtomWithoutPropertyInside($atom, $property, $values) {
         $this->query->NoAtomWithoutPropertyInside($atom, $property, $values);
-        
+
         return $this;
     }
-    
+
     public function noAnalyzerInside($atoms, $analyzer) {
         $this->query->NoAnalyzerInside($atoms, $analyzer);
-        
+
         return $this;
     }
 
     public function noAnalyzerInsideWithProperty($atoms, $analyzer, $property, $value) {
         $this->query->NoAnalyzerInsideWithProperty($atoms, $analyzer, $property, $value);
-        
+
         return $this;
     }
 
     public function noAtomPropertyInside($atom, $property, $values) {
         $this->query->noAtomPropertyInside($atom, $property, $values);
-        
+
         return $this;
     }
 
     public function trim($variable, $chars = '\'\"') {
         $this->query->trim($variable, $chars);
-        
+
         return $this;
     }
 
@@ -724,19 +718,19 @@ GREMLIN;
 
     public function has($property) {
         $this->query->has($property);
-        
+
         return $this;
     }
 
     public function hasNo($property) {
         $this->query->hasNo($property);
-        
+
         return $this;
     }
-    
+
     public function is($property, $value = true) {
         $this->query->is($property, $value);
-        
+
         return $this;
     }
 
@@ -745,7 +739,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function isReassigned($name) {
         $this->query->IsReassigned($name);
 
@@ -763,7 +757,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function IsPropertyDefined() {
         $this->query->isPropertyDefined();
 
@@ -775,7 +769,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function isMissingOrNull() {
         $this->query->isMissingOrNull();
 
@@ -784,19 +778,19 @@ GREMLIN;
 
     public function isNotHash($property, $hash, $index) {
         $this->query->isNotHash($property, $hash, $index);
-        
+
         return $this;
     }
 
     public function isNot($property, $value = true) {
         $this->query->isNot($property, $value);
-        
+
         return $this;
     }
 
     public function isNotExtendingComposer() {
         $this->query->IsNotExtendingComposer();
-        
+
         return $this;
     }
 
@@ -856,7 +850,7 @@ GREMLIN;
 
     public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->codeIs($code, $translate, $caseSensitive);
-        
+
         return $this;
     }
 
@@ -869,14 +863,14 @@ GREMLIN;
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
         $this->query->noDelimiterIs($code, $caseSensitive);
-        
+
         return $this;
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
         $this->query->noDelimiterIsNot($code, $caseSensitive);
-        
+
         return $this;
     }
 
@@ -912,19 +906,19 @@ GREMLIN;
 
     public function values($property) {
         $this->query->values($property);
-        
+
         return $this;
     }
 
     public function addETo($edgeName, $from) {
         $this->query->addETo($edgeName, $from);
-        
+
         return $this;
     }
 
     public function addEFrom($edgeName, $from) {
         $this->query->addEFrom($edgeName, $from);
-        
+
         return $this;
     }
 
@@ -948,31 +942,31 @@ GREMLIN;
 
     public function saveMethodNameAs($name) {
         $this->query->saveMethodNameAs($name);
-        
+
         return $this;
     }
 
     public function fullcodeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->propertyIs('fullcode', $code, $caseSensitive);
-        
+
         return $this;
     }
 
     public function fullcodeVariableIs($variable) {
         $this->query->fullcodeVariableIs($variable);
-        
+
         return $this;
     }
 
     public function variableIsAssigned($times) {
         $this->query->variableIsAssigned($times);
-        
+
         return $this;
     }
-    
+
     public function fullcodeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->propertyIsNot('fullcode', $code, $caseSensitive);
-        
+
         return $this;
     }
 
@@ -999,7 +993,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function isNotMixedcase($property = 'fullcode') {
         $this->query->IsNotMixedcase($property);
 
@@ -1009,7 +1003,7 @@ GREMLIN;
     private function cleanAnalyzerName($gremlin) {
         $dependencies = $this->dependsOn();
         $fullNames = array_map(array($this, 'makeBaseName'), $dependencies);
-        
+
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
@@ -1047,10 +1041,10 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function groupCount($column) {
         $this->query->groupCount($column);
-        
+
         return $this;
     }
 
@@ -1062,13 +1056,13 @@ GREMLIN;
 
     public function regexIsNot($column, $regex) {
         $this->query->regexIsNot($column, $regex);
-        
+
         return $this;
     }
 
     protected function outIs($link = array()) {
         $this->query->outIs($link);
-        
+
         return $this;
     }
 
@@ -1081,7 +1075,7 @@ GREMLIN;
 
     public function outIsNot($link) {
         $this->query->outIsNot($link);
-        
+
         return $this;
     }
 
@@ -1148,9 +1142,9 @@ GREMLIN;
 
     public function raw($query, ...$args) {
         ++$this->rawQueryCount;
-        
+
         $this->query->raw($query, $this->dependsOn(), $args);
-        
+
         return $this;
     }
 
@@ -1159,10 +1153,10 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function hasNoIn($link) {
         $this->query->hasNoIn($link);
-        
+
         return $this;
     }
 
@@ -1171,7 +1165,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function hasNoOut($link) {
         $this->query->hasNoOut($link);
 
@@ -1186,7 +1180,7 @@ GREMLIN;
 
     public function isInCatchBlock() {
         $this->query->isInCatchBlock();
-        
+
         return $this;
     }
 
@@ -1214,25 +1208,25 @@ GREMLIN;
 
     public function hasNoChildren($childrenClass, $outs = array()) {
         $this->query->hasNoChildren($childrenClass, $outs);
-        
+
         return $this;
     }
 
     public function hasConstantDefinition() {
         $this->query->hasConstantDefinition();
-    
+
         return $this;
     }
 
     public function hasNoConstantDefinition() {
         $this->query->hasNoConstantDefinition();
-    
+
         return $this;
     }
 
     protected function hasFunctionDefinition() {
         $this->query->hasFunctionDefinition();
-    
+
         return $this;
     }
 
@@ -1244,97 +1238,97 @@ GREMLIN;
 
     protected function functionDefinition() {
         $this->query->FunctionDefinition();
-    
+
         return $this;
     }
 
     protected function goToArray() {
         $this->query->goToArray();
-        
+
         return $this;
     }
 
     protected function goToExpression() {
         $this->query->goToExpression();
-        
+
         return $this;
     }
-    
+
     protected function goToFirstExpression() {
         $this->query->goToFirstExpression();
-        
+
         return $this;
     }
-    
+
     protected function goToCurrentScope() {
         $this->query->goToCurrentScope();
-        
+
         return $this;
     }
 
     protected function goToFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         $this->query->goToFunction($type);
-        
+
         return $this;
     }
 
     protected function hasNoFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         $this->query->hasNoFunction($type);
-        
+
         return $this;
     }
 
     protected function goToFile() {
         $this->goToInstruction('File');
-        
+
         return $this;
     }
-    
+
     protected function goToLoop() {
         $this->goToInstruction(self::$LOOPS_ALL);
-        
+
         return $this;
     }
 
     protected function classDefinition() {
         $this->query->classDefinition();
-    
+
         return $this;
     }
 
     protected function noClassDefinition($type = 'Class') {
         $this->query->noClassDefinition($type);
-    
+
         return $this;
     }
 
     protected function hasClassDefinition($type = 'Class') {
         $this->query->hasClassDefinition($type);
-    
+
         return $this;
     }
 
     public function noUseDefinition() {
         $this->query->noUseDefinition();
-    
+
         return $this;
     }
 
     public function interfaceDefinition() {
         $this->query->interfaceDefinition();
-    
+
         return $this;
     }
 
     public function noInterfaceDefinition() {
         $this->query->noInterfaceDefinition();
-    
+
         return $this;
     }
 
     public function hasInterfaceDefinition() {
         $this->query->hasInterfaceDefinition();
-    
+
         return $this;
     }
 
@@ -1346,35 +1340,35 @@ GREMLIN;
 
     public function noTraitDefinition() {
         $this->query->noTraitDefinition();
-    
+
         return $this;
     }
-    
+
     public function groupFilter($characteristic, $percentage) {
         $this->query->groupFilter($characteristic, $percentage);
 
         return $this;
     }
-    
+
     public function goToClass() {
         $this->query->goToClass();
-        
+
         return $this;
     }
-    
+
     public function hasNoClass() {
         return $this->hasNoInstruction(self::$CLASSES_ALL);
     }
 
     public function hasClass() {
         $this->hasInstruction(self::$CLASSES_ALL);
-        
+
         return $this;
     }
 
     public function goToInterface() {
         $this->query->goToInstruction('Interface');
-        
+
         return $this;
     }
 
@@ -1384,7 +1378,7 @@ GREMLIN;
 
     public function goToTrait() {
         $this->query->goToTrait();
-        
+
         return $this;
     }
 
@@ -1394,7 +1388,7 @@ GREMLIN;
 
     public function goToClassTrait($classes = self::CLASSES_TRAITS) {
         $this->goToInstruction($classes);
-        
+
         return $this;
     }
 
@@ -1405,7 +1399,7 @@ GREMLIN;
 
     public function goToClassInterface() {
         $this->goToInstruction(array('Interface', 'Class', 'Classanonymous'));
-        
+
         return $this;
     }
 
@@ -1415,7 +1409,7 @@ GREMLIN;
 
     public function goToClassInterfaceTrait() {
         $this->goToInstruction(self::$CIT);
-        
+
         return $this;
     }
 
@@ -1434,61 +1428,61 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function goToAllTraits($self = self::INCLUDE_SELF) {
         $this->query->goToAllTraits($self);
-        
+
         return $this;
     }
 
     public function goToAllImplements($self = self::INCLUDE_SELF) {
         $this->query->goToAllImplements($self);
-        
+
         return $this;
     }
 
     public function goToTraits($self = self::INCLUDE_SELF) {
         $this->query->goToTraits($self);
-        
+
         return $this;
     }
 
     public function hasFunction() {
         $this->query->HasFunction();
-        
+
         return $this;
     }
 
     public function hasClassTrait() {
         $this->query->hasClassTrait();
-        
+
         return $this;
     }
 
     public function hasClassInterface() {
         $this->query->hasClassInterface();
-        
+
         return $this;
     }
 
     public function hasTrait() {
         $this->hasInstruction('Trait');
-        
+
         return $this;
     }
 
     public function hasInterface() {
         $this->hasInstruction('Interface');
-        
+
         return $this;
     }
 
     public function hasLoop() {
         $this->hasInstruction(self::$LOOPS_ALL);
-        
+
         return $this;
     }
-    
+
     public function hasNoLoop() {
         $this->hasNoInstruction(self::$LOOPS_ALL);
 
@@ -1497,7 +1491,7 @@ GREMLIN;
 
     public function hasIfthen() {
         $this->hasInstruction('Ifthen');
-        
+
         return $this;
     }
 
@@ -1507,13 +1501,13 @@ GREMLIN;
 
     public function hasNoComparison() {
         $this->query->hasNoComparison();
-        
+
         return $this;
     }
 
     public function hasTryCatch() {
         $this->hasInstruction('Try');
-        
+
         return $this;
     }
 
@@ -1527,19 +1521,19 @@ GREMLIN;
 
     public function isLocalClass() {
         $this->query->isLocalClass();
-        
+
         return $this;
     }
-    
+
     public function isNotLocalClass() {
         $this->query->isNotLocalClass();
-        
+
         return $this;
     }
 
     public function goToNamespace() {
         $this->query->goToNamespace();
-        
+
         return $this;
     }
 
@@ -1548,13 +1542,13 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function isNotLiteral() {
         $this->query->isNotLiteral();
 
         return $this;
     }
-    
+
     public function implementing($fullnspath) {
         $this->query->implementing(array($fullnspath));
 
@@ -1566,7 +1560,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function extending($fullnspath) {
         $this->query->extending(array($fullnspath));
 
@@ -1590,52 +1584,52 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function getNameInFNP($variable) {
         $this->query->getNameInFNP($variable);
-        
+
         return $this;
     }
 
     public function makeVariableName($variable) {
         $this->query->makeVariableName($variable);
-        
+
         return $this;
     }
-    
+
     public function goToLiteralValue() {
         $this->query->goToLiteralValue();
-        
+
         return $this;
     }
-    
+
     public function collectContainers($containers = 'containers') {
         $this->query->collectContainers($containers);
-        
+
         return $this;
     }
 
     public function collectVariables($variables = 'variables', $type = 'fullcode') {
         $this->query->collectVariables($variables, $type);
-        
+
         return $this;
     }
-    
+
     public function collectImplements($variable = 'interfaces') {
         $this->query->collectImplements($variable);
-        
+
         return $this;
     }
 
     public function collectExtends($variable = 'classes') {
         $this->query->collectExtends($variable);
-        
+
         return $this;
     }
 
     public function collectTraits($variable = 'classes') {
         $this->query->collectTraits($variable);
-        
+
         return $this;
     }
 
@@ -1645,7 +1639,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function isReferencedArgument($variable = 'variable') {
         $this->query->isReferencedArgument($variable);
 
@@ -1657,7 +1651,7 @@ GREMLIN;
 
         return $this;
     }
-    
+
     public function processLevels() {
         $this->query->processLevels();
 
@@ -1670,27 +1664,27 @@ GREMLIN;
         return $this;
     }
 
-    public function run() : int {
+    public function run(): int {
         $this->analyze();
 
         $this->execQuery();
-        
-        return $this->rowCount;
-    }
-    
-    public function getRowCount() : int {
+
         return $this->rowCount;
     }
 
-    public function getProcessedCount() : int {
+    public function getRowCount(): int {
+        return $this->rowCount;
+    }
+
+    public function getProcessedCount(): int {
         return $this->processedCount;
     }
 
-    public function getRawQueryCount() : int {
+    public function getRawQueryCount(): int {
         return $this->rawQueryCount;
     }
 
-    public function getQueryCount() : int {
+    public function getQueryCount(): int {
         return $this->queryCount;
     }
 
@@ -1699,10 +1693,10 @@ GREMLIN;
     public function printQuery() {
         $this->query->printQuery();
     }
-    
-    public function prepareQuery() : void {
+
+    public function prepareQuery(): void {
         switch($this->storageType) {
-            case self::QUERY_HASH: 
+            case self::QUERY_HASH:
                 $this->storeToHashResults();
                 break;
 
@@ -1723,7 +1717,7 @@ GREMLIN;
          // initializing a new query
         $this->initNewQuery();
     }
-    
+
     public function storeMissing() {
         foreach($this->missingQueries as $m) {
             $query = <<<GREMLIN
@@ -1733,7 +1727,7 @@ g.addV().{$m->toAddV()}
 GREMLIN;
 
             $this->gremlin->query($query, array());
-            
+
             ++$this->processedCount;
             ++$this->rowCount;
         }
@@ -1804,13 +1798,13 @@ GREMLIN
         return count($valuesSQL);
     }
 
-    private function storeToGraph(bool $analyzed = true) : void {
+    private function storeToGraph(bool $analyzed = true): void {
         ++$this->queryId;
 
         if ($analyzed === true) {
             $analyzed = ".addE(\"ANALYZED\").from(g.V({$this->analyzerId}))";
         } else {
-            $analyzed = '.property("complete", "'.$this->shortAnalyzer.'")';
+            $analyzed = '.property("complete", "' . $this->shortAnalyzer . '")';
         }
 
         $this->raw(<<<GREMLIN
@@ -1837,20 +1831,20 @@ GREMLIN
         $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
 
         $this->initNewQuery();
-        
+
         return $result;
     }
 
     public function printRawQuery() {
         $this->query->prepareRawQuery();
         print $this->query->getQuery();
-        
+
         print_r($this->query->getArguments());
 
         die(__METHOD__);
     }
-    
-    private function initNewQuery() : void {
+
+    private function initNewQuery(): void {
         $this->query = new Query((count($this->queries) + 1),
                                   new Project('test'),
                                   $this->analyzerQuoted,
@@ -1858,7 +1852,7 @@ GREMLIN
                                   $this->datastore);
     }
 
-    public function execQuery() : int {
+    public function execQuery(): int {
         if (empty($this->queries)) {
             return 0;
         }
@@ -1889,7 +1883,7 @@ GREMLIN
 
     protected function loadIni(string $file, string $index = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
-        
+
         if (isset(self::$iniCache[$fullpath]->$index)) {
             if ($index === null) {
                 return self::$iniCache[$fullpath];
@@ -1902,7 +1896,7 @@ GREMLIN
             $ini = (object) parse_ini_file($fullpath, \INI_PROCESS_SECTIONS);
         } elseif (($this->config->ext !== null) && ($iniString = $this->config->ext->loadData("data/$file")) != '') {
             $ini = (object) parse_ini_string($iniString, \INI_PROCESS_SECTIONS);
-        } elseif (($this->config->extension_dev !== null) && 
+        } elseif (($this->config->extension_dev !== null) &&
                   file_exists("{$this->config->extension_dev}/data/$file")) {
             $ini = (object) parse_ini_file("{$this->config->extension_dev}/data/$file", \INI_PROCESS_SECTIONS);
         } else {
@@ -1943,7 +1937,7 @@ GREMLIN
 
         return self::$jsonCache[$fullpath];
     }
-    
+
     protected function load(string $file, $property = null) {
         $inifile = "{$this->config->dir_root}/data/$file.ini";
         if (file_exists($inifile)) {
@@ -1956,27 +1950,27 @@ GREMLIN
                 $ini = array();
             }
         }
-        
+
         return $ini;
     }
-    
-    public function hasResults() : bool {
+
+    public function hasResults(): bool {
         return $this->rowCount > 0;
     }
 
-    public static function makeBaseName($className) : string {
+    public static function makeBaseName($className): string {
         // No Exakat, no Analyzer, using / instead of \
         return $className;
     }
-    
-    protected function loadCode(string $path) : string {
-        if (file_exists($this->config->code_dir.$path)) {
-            return file_get_contents($this->config->code_dir.$path) ?? '';
+
+    protected function loadCode(string $path): string {
+        if (file_exists($this->config->code_dir . $path)) {
+            return file_get_contents($this->config->code_dir . $path) ?? '';
         } else {
             return '';
         }
     }
-    
+
     public function __call($name, $args) {
         try {
             $this->query->$name(...$args);
@@ -1989,14 +1983,14 @@ GREMLIN
 
         return $this;
     }
-    
-    public function prepareForDump(array $dumpQueries) : void {
+
+    public function prepareForDump(array $dumpQueries): void {
         if (empty($dumpQueries)) {
             return;
         }
         $id = dechex(random_int(0, \PHP_INT_MAX));
-        
-        file_put_contents($this->config->tmp_dir.'/dump-'.$id.'.php', '<?php $queries = '.var_export($dumpQueries, true).'; ?>');
+
+        file_put_contents($this->config->tmp_dir . '/dump-' . $id . '.php', '<?php $queries = ' . var_export($dumpQueries, true) . '; ?>');
     }
 }
 ?>
