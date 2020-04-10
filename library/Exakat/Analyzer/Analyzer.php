@@ -1696,10 +1696,6 @@ GREMLIN;
 
     public function prepareQuery(): void {
         switch($this->storageType) {
-            case self::QUERY_HASH:
-                $this->storeToHashResults();
-                break;
-
             case self::QUERY_MISSING:
                 $this->storeMissing();
                 break;
@@ -1746,56 +1742,6 @@ GREMLIN;
         $this->gremlin->query($query);
 
         $this->datastore->addRow('analyzed', array($this->shortAnalyzer => -1 ) );
-    }
-
-    private function storeToHashResults() {
-        ++$this->queryId;
-
-/*
-    // Can't add that, as it requires a real step
-        $this->raw(<<<GREMLIN
-// Query (#{$this->queryId}) for {$this->analyzer}
-// php {$this->config->php} analyze -p {$this->config->project} -P {$this->analyzer} -v
-// hasResults storage
-
-GREMLIN
-);
-*/
-        $this->query->prepareQuery();
-        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
-
-        ++$this->queryCount;
-
-        $c = $result->toArray();
-        if (!is_array($c) || !isset($c[0])) {
-            return 0;
-        }
-        $c = $c[0];
-        if (!is_array($c) || count($c) === 0) {
-            return 0;
-        }
-
-        $this->processedCount += count($c);
-        $this->rowCount       += count($c);
-
-        $valuesSQL = array();
-        foreach($c as $name => $count) {
-            $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
-        }
-
-        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
-
-        $chunks = array_chunk($valuesSQL, SQLITE_CHUNK_SIZE);
-        foreach($chunks as $chunk) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
-            $dumpQueries[] = $query;
-        }
-
-        if (count($dumpQueries) >= 2) {
-            $this->prepareForDump($dumpQueries);
-        }
-
-        return count($valuesSQL);
     }
 
     private function storeToGraph(bool $analyzed = true): void {
