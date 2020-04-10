@@ -39,7 +39,7 @@ abstract class AnalyzerArrayHashResults extends AnalyzerDump {
             $valuesSQL[] = "('{$this->analyzerName}', '" . \Sqlite3::escapeString((string) $key) . "', '" . \Sqlite3::escapeString((string) $value) . "') \n";
         }
 
-        $chunks = array_chunk($valuesSQL, 490);
+        $chunks = array_chunk($valuesSQL, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
             $this->dumpQueries[] = $query;

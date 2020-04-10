@@ -403,7 +403,7 @@ SQL;
             return array();
         }
 
-        $chunks = array_chunk($toDump, 490);
+        $chunks = array_chunk($toDump, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             foreach($chunk as &$c) {
                 $c = array_map(array($this->sqlite, 'escapeString'), $c);
@@ -428,7 +428,7 @@ SQL;
     }
 
     public function addEmptyResults(array $toDump) : void {
-        $chunks = array_chunk($toDump, 490);
+        $chunks = array_chunk($toDump, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             foreach($chunk as &$c) {
                 $c = "(NULL, '".$c."', 0)";
@@ -477,7 +477,7 @@ SQL;
         
 
         if (!empty($values)) {
-            $chunks = array_chunk($values, 490);
+            $chunks = array_chunk($values, SQLITE_CHUNK_SIZE);
             foreach($chunks as $chunk) {
                 $query = 'INSERT INTO '.$table.' VALUES ' . implode(', ', $chunk);
                 $this->sqlite->query($query);

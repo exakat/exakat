@@ -73,7 +73,7 @@ SQL;
 
     public function save(): void {
         if (!empty($this->calls)) {
-            $chunks = array_chunk($this->calls, 490);
+            $chunks = array_chunk($this->calls, SQLITE_CHUNK_SIZE);
             foreach($chunks as $chunk) {
                 $query = 'INSERT INTO calls VALUES ' . implode(', ', $chunk);
                 $this->callsSqlite->query($query);
@@ -82,7 +82,7 @@ SQL;
         }
 
         if (!empty($this->definitions)) {
-            $chunks = array_chunk($this->definitions, 490);
+            $chunks = array_chunk($this->definitions, SQLITE_CHUNK_SIZE);
             foreach($chunks as $chunk) {
                 $query = 'INSERT INTO definitions VALUES ' . implode(', ', $chunk);
                 $this->callsSqlite->query($query);
@@ -91,7 +91,7 @@ SQL;
         }
 
         if (!empty($this->globals)) {
-            $chunks = array_chunk($this->globals, 490);
+            $chunks = array_chunk($this->globals, SQLITE_CHUNK_SIZE);
             foreach($chunks as $chunk) {
                 $query = 'INSERT INTO globals VALUES ' . implode(', ', $chunk);
                 $this->callsSqlite->query($query);

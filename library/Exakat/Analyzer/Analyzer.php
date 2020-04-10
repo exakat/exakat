@@ -1785,7 +1785,7 @@ GREMLIN
 
         $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
-        $chunks = array_chunk($valuesSQL, 490);
+        $chunks = array_chunk($valuesSQL, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
             $dumpQueries[] = $query;

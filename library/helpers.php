@@ -44,6 +44,8 @@ const RETURN_VALUE      = true;
 
 const MAX_ARGS = 100;
 
+const SQLITE_CHUNK_SIZE = 490;
+
 const SQLITE3_BUSY_TIMEOUT = 5000; // ms
 
 function display(string $text) : void {

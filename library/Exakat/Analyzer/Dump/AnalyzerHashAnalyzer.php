@@ -38,7 +38,7 @@ abstract class AnalyzerHashAnalyzer extends AnalyzerDump {
             $valuesSQL[] = "('" . join("', '", $values) . "') \n";
         }
 
-        $chunks = array_chunk($valuesSQL, 490);
+        $chunks = array_chunk($valuesSQL, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
             $this->dumpQueries[] = $query;

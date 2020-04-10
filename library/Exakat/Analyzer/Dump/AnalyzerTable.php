@@ -52,7 +52,7 @@ abstract class AnalyzerTable extends AnalyzerDump {
             $valuesSQL[] = "(NULL, '" . implode("', '", $row) . "') \n";
         }
 
-        $chunks = array_chunk($valuesSQL, 490);
+        $chunks = array_chunk($valuesSQL, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             $query = 'INSERT INTO ' . $this->analyzerTable . ' VALUES ' . implode(', ', $chunk);
             $this->dumpQueries[] = $query;
