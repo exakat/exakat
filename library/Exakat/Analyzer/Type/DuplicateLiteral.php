@@ -24,13 +24,12 @@ declare(strict_types = 1);
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerHashAnalyzer;
 
-class DuplicateLiteral extends Analyzer {
+class DuplicateLiteral extends AnalyzerHashAnalyzer {
     protected $minDuplicate = 15;
 
     protected $analyzerName = 'Type/DuplicateLiteral';
-
-    protected $storageType = self::QUERY_HASH_ANALYZER;
 
     public function analyze() {
         // No need for boolean and null
@@ -59,7 +58,7 @@ class DuplicateLiteral extends Analyzer {
 
         $this->atomIs(array('Integer', 'Float'))
              ->hasNoIn('INDEX') // Skipping arrays $x[0]
-             ->fullcodeIsNot(array('0', '1', '2', '10'))  // skip some values
+             ->fullcodeIsNot(array('0', '1', '2', '10'))  // skip some very common values
              ->not(
                 $this->side()
                      ->inIs('VALUE')

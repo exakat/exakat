@@ -183,6 +183,7 @@ abstract class Analyzer {
     protected $dictCode = null;
     
     protected $linksDown = '';
+    private $dumpQueries = array();
 
     public function __construct() {
         assert(func_num_args() === 0, "Too many arguments for ".__CLASS__);
@@ -1732,10 +1733,6 @@ GREMLIN;
             case self::QUERY_RESULTS:
                 $this->storeToResults();
                 break;
-            
-            case self::QUERY_HASH_ANALYZER:
-                $this->storeArraysToHashAnalyzer();
-                break;
 
             case self::QUERY_DEFAULT:
             default:
@@ -1779,12 +1776,6 @@ GREMLIN;
 
     private function storeToResults() {
         ++$this->queryId;
-        
-        $dumpQueries = array();
-        // table always created, may be empty
-        if ($this->lastAnalyzerTable !== $this->analyzerTable) {
-            $dumpQueries[] = "DELETE FROM results WHERE analyzer = \"{$this->shortAnalyzer}\"";
-        }
 
         $this->query->prepareQuery();
         $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
@@ -1809,26 +1800,32 @@ GREMLIN;
         $chunks = array_chunk($valuesSQL, 490);
         foreach($chunks as $chunk) {
             $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
-            $dumpQueries[] = $query;
-        }
-        $dumpQueries[] = "REPLACE INTO resultsCounts VALUES (NULL, \"{$this->shortAnalyzer}\", $this->rowCount)";
-
-        if (count($dumpQueries) >= 3) {
-            $this->prepareForDump($dumpQueries);
+            $this->dumpQueries[] = $query;
         }
 
         return count($valuesSQL);
     }
 
+    private function execStoreToResults() {
+        // table always created, may be empty
+        if ($this->lastAnalyzerTable !== $this->analyzerTable) {
+             array_unshift($this->dumpQueries, "DELETE FROM results WHERE analyzer = \"{$this->shortAnalyzer}\"");
+        }
+
+        $this->dumpQueries[] = "REPLACE INTO resultsCounts VALUES (NULL, \"{$this->shortAnalyzer}\", $this->rowCount)";
+
+        if (count($this->dumpQueries) >= 3) {
+            $this->prepareForDump($this->dumpQueries);
+        }
+
+        $this->dumpQueries = array();
+    }
+
     private function storeToTableResults() {
         ++$this->queryId;
         
-        $dumpQueries = array();
         // table always created, may be empty
         if ($this->lastAnalyzerTable !== $this->analyzerTable) {
-            $dumpQueries[] = "DROP TABLE IF EXISTS {$this->analyzerTable}";
-            $dumpQueries[] = $this->analyzerSQLTable;
-            
             $this->lastAnalyzerTable = $this->analyzerTable;
         }
         // else : fills the table with more data
@@ -1865,14 +1862,22 @@ GREMLIN
         $chunks = array_chunk($valuesSQL, 490);
         foreach($chunks as $chunk) {
             $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
-            $dumpQueries[] = $query;
-        }
-
-        if (count($dumpQueries) >= 3) {
-            $this->prepareForDump($dumpQueries);
+            $this->dumpQueries[] = $query;
         }
 
         return count($valuesSQL);
+    }
+
+    public function execStoreToTable() {
+        // table always created, may be empty
+        array_unshift($this->dumpQueries, $this->analyzerSQLTable);
+        array_unshift($this->dumpQueries, "DROP TABLE IF EXISTS {$this->analyzerTable}");
+
+        if (count($this->dumpQueries) >= 3) {
+            $this->prepareForDump($this->dumpQueries);
+        }
+
+        $this->dumpQueries = array();
     }
     
     private function storePhpHashToHashResults() : int {
@@ -1880,8 +1885,6 @@ GREMLIN
 
         $this->processedCount += count($this->analyzedValues);
         $this->rowCount       += count($this->analyzedValues);
-
-        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
         $valuesSQL = array();
         foreach($this->analyzedValues as $key => $value) {
@@ -1894,20 +1897,24 @@ GREMLIN
             $dumpQueries[] = $query;
         }
 
-        if (count($dumpQueries) >= 2) {
-            $this->prepareForDump($dumpQueries);
-        }
-
         return count($valuesSQL);
     }
 
+    private function execStorePhpHashToHashResults() {
+        array_unshift($this->dumpQueries, "DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
+
+        if (count($this->dumpQueries) >= 3) {
+            $this->prepareForDump($this->dumpQueries);
+        }
+
+        $this->dumpQueries = array();
+    }
+    
     private function storePhpArraysToHashResults() {
         ++$this->queryId;
 
         $this->processedCount += count($this->analyzedValues);
         $this->rowCount       += count($this->analyzedValues);
-
-        $dumpQueries = array("DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
         $valuesSQL = array();
         foreach($this->analyzerValues as list($key, $value)) {
@@ -1917,11 +1924,11 @@ GREMLIN
         $chunks = array_chunk($valuesSQL, 490);
         foreach($chunks as $chunk) {
             $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
-            $dumpQueries[] = $query;
+            $this->dumpQueries[] = $query;
         }
 
-        if (count($dumpQueries) >= 2) {
-            $this->prepareForDump($dumpQueries);
+        if (count($this->dumpQueries) >= 2) {
+            $this->prepareForDump($this->dumpQueries);
         }
 
         return count($valuesSQL);
@@ -2009,29 +2016,6 @@ GREMLIN
         return count($valuesSQL);
     }
 
-    private function storeArraysToHashAnalyzer() {
-        $this->processedCount += count($this->analyzerValues);
-        $this->rowCount       += count($this->analyzerValues);
-
-        $valuesSQL = array();
-        $chunk = 0;
-        foreach($this->analyzerValues as $values) {
-            $values = array_map(array('\\Sqlite3', 'escapeString'), $values);
-            $valuesSQL[] = "('".join("', '", $values)."') \n";
-        }
-
-        $dumpQueries = array("DELETE FROM hashAnalyzer WHERE analyzer = '{$this->analyzerName}'");
-        $chunks = array_chunk($valuesSQL, 490);
-        foreach($chunks as $chunk) {
-            $query = 'INSERT INTO hashResults ("analyzer", "key", "value") VALUES ' . implode(', ', $chunk);
-            $dumpQueries[] = $query;
-        }
-
-        $this->prepareForDump($dumpQueries);
-
-        return count($valuesSQL);
-    }
-
     private function storeToGraph(bool $analyzed = true) : void {
         ++$this->queryId;
 
@@ -2087,6 +2071,23 @@ GREMLIN
     }
 
     public function execQuery() : int {
+        switch($this->storageType) {
+            case self::QUERY_RESULTS:
+                $this->execStoreToResults();
+                break;
+
+            case self::QUERY_TABLE:
+                $this->execStoreToTable();
+                break;
+
+            case self::QUERY_ARRAYS:
+                $this->execStoreArraysToHashResult();
+                break;
+
+            default:
+                // continue
+        }
+
         if (empty($this->queries)) {
             return 0;
         }
