@@ -23,10 +23,8 @@
 namespace Exakat\Analyzer\Dump;
 
 
-class Typehintorder extends AnalyzerDump {
+class Typehintorder extends AnalyzerTable {
     protected $analyzerName = 'typehintOrder';
-
-    protected $storageType = self::QUERY_TABLE;
 
     public function analyze() {
         // Store inclusionss of files within each other

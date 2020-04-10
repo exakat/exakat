@@ -183,7 +183,7 @@ abstract class Analyzer {
     protected $dictCode = null;
     
     protected $linksDown = '';
-    private $dumpQueries = array();
+    protected $dumpQueries = array();
 
     public function __construct() {
         assert(func_num_args() === 0, "Too many arguments for ".__CLASS__);
@@ -1706,10 +1706,6 @@ GREMLIN;
                 $this->storeToHashResults();
                 break;
 
-            case self::QUERY_TABLE: 
-                $this->storeToTableResults();
-                break;
-
             case self::QUERY_MISSING:
                 $this->storeMissing();
                 break;
@@ -1813,65 +1809,6 @@ GREMLIN;
         $this->dumpQueries = array();
     }
 
-    private function storeToTableResults() {
-        ++$this->queryId;
-        
-        // table always created, may be empty
-        if ($this->lastAnalyzerTable !== $this->analyzerTable) {
-            $this->lastAnalyzerTable = $this->analyzerTable;
-        }
-        // else : fills the table with more data
-
-/*
-    // Can't add that, as it requires a real step
-        $this->raw(<<<GREMLIN
-// Query (#{$this->queryId}) for {$this->analyzer}
-// php {$this->config->php} analyze -p {$this->config->project} -P {$this->analyzer} -v
-// hasResults storage
-
-GREMLIN
-);
-*/
-        $this->query->prepareQuery();
-        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
-
-        ++$this->queryCount;
-
-        $c = $result->toArray();
-        if (!is_array($c) || !isset($c[0])) {
-            return 0;
-        }
-
-        $this->processedCount += count($c);
-        $this->rowCount       += count($c);
-
-        $valuesSQL = array();
-        foreach($c as $row) {
-            $row = array_map(array('\\Sqlite3', 'escapeString'), $row);
-            $valuesSQL[] = "(NULL, '".implode("', '", $row)."') \n";
-        }
-
-        $chunks = array_chunk($valuesSQL, 490);
-        foreach($chunks as $chunk) {
-            $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
-            $this->dumpQueries[] = $query;
-        }
-
-        return count($valuesSQL);
-    }
-
-    public function execStoreToTable() {
-        // table always created, may be empty
-        array_unshift($this->dumpQueries, $this->analyzerSQLTable);
-        array_unshift($this->dumpQueries, "DROP TABLE IF EXISTS {$this->analyzerTable}");
-
-        if (count($this->dumpQueries) >= 3) {
-            $this->prepareForDump($this->dumpQueries);
-        }
-
-        $this->dumpQueries = array();
-    }
-    
     private function storePhpHashToHashResults() : int {
         ++$this->queryId;
 
@@ -2001,11 +1938,11 @@ GREMLIN
             case self::QUERY_RESULTS:
                 $this->execStoreToResults();
                 break;
-
+/*
             case self::QUERY_TABLE:
                 $this->execStoreToTable();
                 break;
-
+*/
             default:
                 // continue
         }

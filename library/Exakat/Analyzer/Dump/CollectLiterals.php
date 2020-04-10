@@ -23,10 +23,8 @@
 namespace Exakat\Analyzer\Dump;
 
 
-class CollectLiterals extends AnalyzerDump {
+class CollectLiterals extends AnalyzerTable {
     protected $analyzerName = 'Local Variable Counts';
-
-    protected $storageType = self::QUERY_TABLE;
 
     public function analyze() {
         $types = array('Integer', 'Float', 'String', 'Heredoc', 'Arrayliteral');

@@ -24,12 +24,10 @@ namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Analyzer;
 
-class Inclusions extends AnalyzerDump {
+class Inclusions extends AnalyzerTable {
     protected $analyzerName = 'inclusions';
 
     protected $analyzerTable = 'inclusions';
-
-    protected $storageType = self::QUERY_TABLE;
 
     protected $analyzerSQLTable = <<<'SQL'
 CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,

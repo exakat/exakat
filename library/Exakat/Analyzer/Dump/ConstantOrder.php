@@ -24,12 +24,10 @@ namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Analyzer;
 
-class ConstantOrder extends AnalyzerDump {
+class ConstantOrder extends AnalyzerTable {
     protected $analyzerName = 'constantOrder';
 
     protected $analyzerTable = 'constantOrder';
-
-    protected $storageType = self::QUERY_TABLE;
 
     // Store inclusionss of files within each other
     protected $analyzerSQLTable = <<<'SQL'
