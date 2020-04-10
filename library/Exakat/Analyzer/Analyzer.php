@@ -1710,10 +1710,6 @@ GREMLIN;
                 $this->storeMissing();
                 break;
 
-            case self::QUERY_PHP_HASH:
-                $this->storePhpHashToHashResults();
-                break;
-
             case self::QUERY_NO_ANALYZED:
                 $this->storeToGraph(false);
                 break;
@@ -1758,26 +1754,6 @@ GREMLIN;
         $this->datastore->addRow('analyzed', array($this->shortAnalyzer => -1 ) );
     }
 
-    private function storePhpHashToHashResults() : int {
-        ++$this->queryId;
-
-        $this->processedCount += count($this->analyzedValues);
-        $this->rowCount       += count($this->analyzedValues);
-
-        $valuesSQL = array();
-        foreach($this->analyzedValues as $key => $value) {
-            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString((string) $key)."', '".\Sqlite3::escapeString((string) $value)."') \n";
-        }
-
-        $chunks = array_chunk($valuesSQL, 490);
-        foreach($chunks as $chunk) {
-            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES ' . implode(', ', $chunk);
-            $dumpQueries[] = $query;
-        }
-
-        return count($valuesSQL);
-    }
- 
     private function storeToHashResults() {
         ++$this->queryId;
 

@@ -29,7 +29,7 @@ class Raw extends DSL {
         list($query, $dependencies, $args) = func_get_args();
 
         $query = trim($this->cleanAnalyzerName($query, $dependencies));
-        assert($query[0] !== '.', "Raw() step shall not start with a . in the Gremiln Code");
+        assert($query[0] !== '.', 'Raw() step shall not start with a . in the Gremiln Code');
 
         return new Command($query, $args);
     }

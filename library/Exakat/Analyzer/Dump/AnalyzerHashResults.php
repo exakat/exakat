@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Dump\Dump;
 
 abstract class AnalyzerHashResults extends AnalyzerDump {
     protected $storageType = self::QUERY_ARRAYS;
 
-    public function prepareQuery() : void {
+    public function prepareQuery(): void {
         ++$this->queryId;
 
         $result = $this->rawQuery();
@@ -53,8 +52,8 @@ abstract class AnalyzerHashResults extends AnalyzerDump {
             $this->dumpQueries[] = $query;
         }
     }
-    
-    public function execQuery() : int {
+
+    public function execQuery(): int {
         array_unshift($this->dumpQueries, "DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
         if (count($this->dumpQueries) >= 1) {
@@ -62,7 +61,7 @@ abstract class AnalyzerHashResults extends AnalyzerDump {
         }
 
         $this->dumpQueries = array();
-        
+
         return 0;
     }
 

@@ -25,6 +25,7 @@ declare(strict_types = 1);
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Config;
 use Exakat\Exceptions\MissingGremlin;
 use Exakat\Exceptions\NoSuchAnalyzer;
@@ -114,7 +115,7 @@ class Dump extends Tasks {
 
         if (!empty($this->config->project_rulesets)) {
             $ruleset = $this->config->project_rulesets;
-            if ($ruleset === ['None']) {
+            if ($ruleset === array('None')) {
                 $rulesets = array();
             } else {
                 $rulesets = $this->rulesets->getRulesetsAnalyzers($ruleset);
@@ -123,14 +124,14 @@ class Dump extends Tasks {
                     if (!empty($r)) {
                         echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                     }
-    
+
                     throw new NoSuchRuleset(implode(', ', $ruleset));
                 }
                 display('Processing ruleset' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
                 $missing = $this->processResultsRuleset($ruleset, $counts);
                 $this->expandRulesets();
                 $this->collectHashAnalyzer();
-    
+
                 if ($missing === 0) {
                     $this->storeToDumpArray('themas', array_map(function (string $x) { return array('', $x); }, $ruleset));
                     $rulesets = array();
@@ -223,21 +224,16 @@ class Dump extends Tasks {
         $severities = array();
         $readCounts = array();
 
-        $skipAnalysis = array('Type/CharString',
-                              'Variables/RealVariables',
-                              'Arrays/Arrayindex',
-                              'Type/UnicodeBlock',
-                              'Type/Email',
-                              'Type/Hexadecimal',
-                              'Type/Ports',
-                              'Type/Pcre',
-                              'Type/Path',
-                              'Type/Printf',
-                              'Type/HexadecimalString',
-                              'Type/Heredoc',
-                              'Type/Pack',
-                              );
-        $analyzers = array_filter($analyzers, function (string $s) use ($skipAnalysis): bool { return !in_array($s, $skipAnalysis, STRICT_COMPARISON) && substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
+        $skipAnalysis = array();
+        $analyzers = array_filter($analyzers, function (string $s): bool { return substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
+        // Remove analysis that are not exported via dump
+        foreach($analyzers as $id => $analyzer) {
+            $a = $this->rulesets->getInstance($analyzer);
+            if ($a instanceof AnalyzerDump) {
+                unset($analyzers[$id]);
+                $skipAnalysis[] = $analyzer;
+            }
+        }
         $this->dump->removeResults($analyzers);
 
         $chunks = array_chunk($analyzers, 200);

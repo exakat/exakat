@@ -23,7 +23,6 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Dump\AnalyzerHashAnalyzer;
 
 class DuplicateLiteral extends AnalyzerHashAnalyzer {

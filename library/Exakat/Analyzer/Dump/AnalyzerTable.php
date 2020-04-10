@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Dump\Dump;
 
 abstract class AnalyzerTable extends AnalyzerDump {
     protected $storageType = self::QUERY_TABLE;
 
-    public function prepareQuery() : void {
+    public function prepareQuery(): void {
         ++$this->queryId;
 
         $result = $this->rawQuery();
@@ -50,17 +49,17 @@ abstract class AnalyzerTable extends AnalyzerDump {
         $valuesSQL = array();
         foreach($c as $row) {
             $row = array_map(array('\\Sqlite3', 'escapeString'), $row);
-            $valuesSQL[] = "(NULL, '".implode("', '", $row)."') \n";
+            $valuesSQL[] = "(NULL, '" . implode("', '", $row) . "') \n";
         }
 
         $chunks = array_chunk($valuesSQL, 490);
         foreach($chunks as $chunk) {
-            $query = 'INSERT INTO '.$this->analyzerTable.' VALUES ' . implode(', ', $chunk);
+            $query = 'INSERT INTO ' . $this->analyzerTable . ' VALUES ' . implode(', ', $chunk);
             $this->dumpQueries[] = $query;
         }
     }
 
-    public function execQuery() : int {
+    public function execQuery(): int {
         // table always created, may be empty
         array_unshift($this->dumpQueries, $this->analyzerSQLTable);
         array_unshift($this->dumpQueries, "DROP TABLE IF EXISTS {$this->analyzerTable}");
@@ -76,7 +75,7 @@ abstract class AnalyzerTable extends AnalyzerDump {
 
     public function getDump(): array {
         $dump      = Dump::factory($this->config->dump);
-    
+
         $res = $dump->fetchTable($this->analyzerTable);
         return $res->toArray();
     }

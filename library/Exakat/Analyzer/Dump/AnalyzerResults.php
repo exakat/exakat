@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Dump\Dump;
 
 abstract class AnalyzerResults extends AnalyzerDump {
     protected $storageType = self::QUERY_RESULTS;
 
-    public function prepareQuery() : void {
+    public function prepareQuery(): void {
         ++$this->queryId;
 
         $result = $this->rawQuery();
@@ -47,7 +46,7 @@ abstract class AnalyzerResults extends AnalyzerDump {
         foreach($c as $row) {
             $row = array_map(array('\\Sqlite3', 'escapeString'), $row);
             $row['analyzer']  = $this->shortAnalyzer;
-            $valuesSQL[] = "(NULL, '".implode("', '", $row)."', 0) \n";
+            $valuesSQL[] = "(NULL, '" . implode("', '", $row) . "', 0) \n";
         }
 
         $chunks = array_chunk($valuesSQL, 490);
@@ -56,11 +55,11 @@ abstract class AnalyzerResults extends AnalyzerDump {
             $this->dumpQueries[] = $query;
         }
 
-        $this->dumpQueries[] = "INSERT INTO resultsCounts (\"id\", \"analyzer\", \"count\") VALUES (NULL, '{$this->shortAnalyzer}', ".(count($valuesSQL)).")";
+        $this->dumpQueries[] = "INSERT INTO resultsCounts (\"id\", \"analyzer\", \"count\") VALUES (NULL, '{$this->shortAnalyzer}', " . (count($valuesSQL)) . ')';
 
     }
-    
-    public function execQuery() : int {
+
+    public function execQuery(): int {
         array_unshift($this->dumpQueries, "DELETE FROM results WHERE analyzer = '{$this->shortAnalyzer}'");
 
         if (count($this->dumpQueries) >= 2) {
@@ -68,13 +67,13 @@ abstract class AnalyzerResults extends AnalyzerDump {
         }
 
         $this->dumpQueries = array();
-        
+
         return 0;
     }
 
     public function getDump(): array {
         $dump      = Dump::factory($this->config->dump);
-    
+
         $res = $dump->fetchAnalysers(array($this->shortAnalyzer));
         return $res->toArray();
     }

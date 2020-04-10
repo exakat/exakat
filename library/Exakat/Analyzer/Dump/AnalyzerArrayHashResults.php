@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
 use Exakat\Dump\Dump;
 
 abstract class AnalyzerArrayHashResults extends AnalyzerDump {
     protected $storageType = self::QUERY_PHP_ARRAYS;
 
-    public function prepareQuery() : void {
+    public function prepareQuery(): void {
         ++$this->queryId;
 
         $this->processedCount += count($this->analyzedValues);
@@ -36,7 +35,8 @@ abstract class AnalyzerArrayHashResults extends AnalyzerDump {
 
         $valuesSQL = array();
         foreach($this->analyzerValues as list($key, $value)) {
-            $valuesSQL[] = "('{$this->analyzerName}', '".\Sqlite3::escapeString((string) $key)."', '".\Sqlite3::escapeString((string) $value)."') \n";
+            if (empty($key)) { continue; }
+            $valuesSQL[] = "('{$this->analyzerName}', '" . \Sqlite3::escapeString((string) $key) . "', '" . \Sqlite3::escapeString((string) $value) . "') \n";
         }
 
         $chunks = array_chunk($valuesSQL, 490);
@@ -50,21 +50,21 @@ abstract class AnalyzerArrayHashResults extends AnalyzerDump {
         }
     }
 
-    public function execQuery() : int {
+    public function execQuery(): int {
         array_unshift($this->dumpQueries, "DELETE FROM hashResults WHERE name = '{$this->analyzerName}'");
 
-        if (count($this->dumpQueries) >= 3) {
+        if (count($this->dumpQueries) >= 2) {
             $this->prepareForDump($this->dumpQueries);
         }
 
         $this->dumpQueries = array();
-        
+
         return 0;
     }
 
     public function getDump(): array {
         $dump      = Dump::factory($this->config->dump);
-    
+
         $res = $dump->fetchHashResults($this->analyzerName);
         return $res->toArray();
     }

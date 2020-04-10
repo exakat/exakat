@@ -1448,7 +1448,7 @@ class Load extends Tasks {
         $return = array();
         foreach($returnTypes as $returnType) {
             $this->addLink($function, $returnType, 'RETURNTYPE');
-            
+
             if ($returnType->atom !== 'Void') {
                 $return[] = $returnType->fullcode;
             }
@@ -1471,7 +1471,7 @@ class Load extends Tasks {
                                 $this->tokens[$current][1] . ' ' . ($function->reference ? '&' : '') .
                                 ($function->atom === 'Closure' ? '' : $name->fullcode) . '(' . $argumentsFullcode . ')' .
                                 (isset($useFullcode) ? ' use (' . implode(', ', $useFullcode) . ')' : '') . // No space before use
-                                (empty($return) ? '' : ' : ' . ($function->nullable ? '?' : '').join('|', $return) ) .
+                                (empty($return) ? '' : ' : ' . ($function->nullable ? '?' : '') . join('|', $return) ) .
                                 $blockFullcode;
 
        if ($function->atom === 'Closure' &&
@@ -2224,7 +2224,7 @@ class Load extends Tasks {
                     }
                 }
 
-                $index->fullcode = (!empty($typehints) ? join('|', $typehints) . ' ' : '').$index->fullcode;
+                $index->fullcode = (!empty($typehints) ? join('|', $typehints) . ' ' : '') . $index->fullcode;
                 $fullcode[] = $index->fullcode;
                 $this->addLink($arguments, $index, 'ARGUMENT');
                 $argumentsList[] = $index;

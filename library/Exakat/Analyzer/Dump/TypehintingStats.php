@@ -23,10 +23,8 @@
 namespace Exakat\Analyzer\Dump;
 
 
-class TypehintingStats extends AnalyzerDump {
+class TypehintingStats extends AnalyzerArrayHashResults {
      protected $analyzerName   = 'Typehinting stats';
-
-     protected $storageType = self::QUERY_PHP_HASH;
 
     public function analyze() {
         //total parameters
@@ -132,7 +130,9 @@ class TypehintingStats extends AnalyzerDump {
             $return["{$name}WithReturnTypehint"] = $this->rawQuery()->toInt();
         }
 
-        $this->analyzedValues = $return;
+        array_walk($return, function (&$value, $key) { $value = array($key, $value); });
+        $return = array_values($return);
+        $this->analyzerValues = $return;
 
         $this->prepareQuery();
     }
