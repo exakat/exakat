@@ -26,11 +26,17 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PlusEgalOne extends Analyzer {
+    public function dependsOn(): array {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // $a += 1; $b -= -1;
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
+             ->atomIs('Integer', self::WITH_CONSTANTS)
              ->codeIs(array('1', '-1'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
@@ -45,6 +51,7 @@ class PlusEgalOne extends Analyzer {
              ->atomIs('Addition')
              ->as('B')
              ->outIs('LEFT')
+             ->atomIs('Integer', self::WITH_CONSTANTS)
              ->codeIs(array('1', '-1'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('B')
              ->outIs('RIGHT')
@@ -62,6 +69,7 @@ class PlusEgalOne extends Analyzer {
              ->atomIs('Addition')
              ->as('B')
              ->outIs('RIGHT')
+             ->atomIs('Integer', self::WITH_CONSTANTS)
              ->codeIs(array('1', '-1'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('B')
              ->outIs('LEFT')
