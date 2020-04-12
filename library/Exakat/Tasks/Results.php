@@ -24,11 +24,37 @@ namespace Exakat\Tasks;
 
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NeedsAnalyzerThema;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\InvalidProjectName;
+use Exakat\Exceptions\ProjectNotInited;
+use Exakat\Exceptions\NoDump;
+use Exakat\Exceptions\NoDumpYet;
 
 class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
+        if ($this->config->project->isDefault()) {
+            throw new ProjectNeeded();
+        }
+
+        if (!$this->config->project->validate()) {
+            throw new InvalidProjectName($this->config->project->getError());
+        }
+
+        if (!file_exists($this->config->project_dir)) {
+            throw new NoSuchProject($this->config->project);
+        }
+
+        if (!file_exists($this->config->datastore)) {
+            throw new ProjectNotInited($this->config->project);
+        }
+
+        if (!file_exists($this->config->dump)) {
+            throw new NoDump($this->config->project);
+        }
+
         if (!empty($this->config->program)) {
             if (is_array($this->config->program)) {
                 $analyzersClass = $this->config->program;
