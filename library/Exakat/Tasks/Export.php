@@ -26,15 +26,15 @@ class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $gremlinVersion = $this->gremlin->serverInfo()->toArray()[0];
+        $gremlinVersion = $this->gremlin->serverInfo()->toString()[0];
 
-        if (version_compare($gremlinVersion, '3.4.0') >= 0) {
+        if (version_compare($gremlinVersion, '3.4.0') <= 0) {
             $queryTemplate = 'g.V().valueMap().with(WithOptions.tokens).by(unfold())';
         } else {
             $queryTemplate = 'g.V()';
         }
 
-        $vertices = $this->gremlin->query($queryTemplate);
+        $vertices = $this->gremlin->query($queryTemplate, array());
 
         $V = array();
         $root = 0;
@@ -46,7 +46,7 @@ class Export extends Tasks {
         }
 
         $gremlinVersion = $this->gremlin->serverInfo()->toArray()[0];
-        if (version_compare($gremlinVersion, '3.4.0') >= 0) {
+        if (version_compare($gremlinVersion, '3.4.0') <= 0) {
             $queryTemplate = 'g.E().as("e").outV().as("outV").select("e").inV().as("inV").select("e", "inV", "outV").by(valueMap(true).by(unfold())).by(id()).by(id())';
         } else {
             $queryTemplate = 'g.E()';
