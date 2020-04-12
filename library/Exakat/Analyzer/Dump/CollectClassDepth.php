@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
 class CollectClassDepth extends AnalyzerHashHashResults {
     protected $analyzerName = 'Class Depth';

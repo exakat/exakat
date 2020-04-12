@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
 class DereferencingLevels extends AnalyzerHashHashResults {
     protected $analyzerName = 'Dereferencing Levels';

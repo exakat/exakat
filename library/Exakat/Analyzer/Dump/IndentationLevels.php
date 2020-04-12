@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
 class IndentationLevels extends AnalyzerHashHashResults {
     protected $analyzerName = 'Indentation Levels';

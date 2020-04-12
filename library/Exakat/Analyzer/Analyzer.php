@@ -24,7 +24,6 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer;
 
-use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;

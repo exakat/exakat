@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerHashHashResults;
 
 class EnvironnementVariables extends AnalyzerHashHashResults {
     protected $analyzerName = 'Environment Variables via Function';
