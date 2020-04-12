@@ -37,7 +37,7 @@ repeat(
       .coalesce( __.out("USE"), __.filter{ true; })
       .in("DEFINITION")
       .hasLabel("Class", "Classanonymous", "Trait")
-      .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} 
+      .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} 
 )
 .emit( )
 .times($MAX_LOOPING)
@@ -52,7 +52,7 @@ emit( ).repeat(
       .coalesce( __.out("USE"), __.filter{true; })
       .in("DEFINITION")
       .hasLabel("Class", "Classanonymous", "Trait")
-      .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} 
+      .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} 
 )
 .times($MAX_LOOPING)
 .hasLabel("Class", "Classanonymous", "Trait")

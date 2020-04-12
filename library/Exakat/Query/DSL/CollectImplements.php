@@ -36,8 +36,8 @@ __.sideEffect{ ' . $variable . ' = []; }
   .repeat( __.out("EXTENDS", "IMPLEMENTS")
   .in("DEFINITION")
   .hasLabel("Class", "Classanonymous", "Interface")
-  .filter{!it.sack().contains(it.get().value("fullnspath")) }
-  .sack {m,v -> m.add(v.value("fullnspath")); m} )
+  .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }
+  .sack {m,v -> m["m"].add(v.value("fullnspath")); m} )
   .times(' . self::$MAX_LOOPING . ')
   .hasLabel("Class", "Classanonymous", "Interface")
   .out("EXTENDS", "IMPLEMENTS")

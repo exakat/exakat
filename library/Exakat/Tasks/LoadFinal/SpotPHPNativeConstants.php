@@ -34,33 +34,36 @@ class SpotPHPNativeConstants extends LoadFinal {
         $constants = array_merge(...$this->PHPconstants);
         $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
         $constantsPHP = array_values($constants);
+        $constantsPHP = makeFullNsPath($constantsPHP, \FNP_CONSTANT);
 
         $query = $this->newQuery('SpotPHPNativeConstants');
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
-              ->values('code')
+              ->values('fullnspath')
               ->unique();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        if ($query->canSkip()) {
+            $usedConstants = array();
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $usedConstants = $result->toArray();
+        }
 
-        if (empty($constantsPHP)) {
+        if (empty($usedConstants)) {
+            display('No Constants');
+            return;
+        }
+        $used = array_intersect($usedConstants, $constantsPHP);
+        if (empty($used)) {
             display('No PHP Constants');
             return;
         }
 
         $query = $this->newQuery('SpotPHPNativeConstants');
-        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS )
+        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
-              ->codeIs($constantsPHP, Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
-              ->raw(<<<'GREMLIN'
-sideEffect{
-   tokens = it.get().value("fullnspath").tokenize('\\');
-   fullnspath = "\\" + tokens.last();
-   it.get().property("fullnspath", fullnspath); 
-}
-GREMLIN
-,array(), array())
+              ->fullnspathIs($used, Analyzer::CASE_SENSITIVE)
                 ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());

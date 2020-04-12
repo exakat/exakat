@@ -1744,6 +1744,9 @@ GREMLIN;
     }
 
     private function storeToGraph(bool $analyzed = true): void {
+        if ($this->query->canSkip()) {
+            return;
+        }
         ++$this->queryId;
 
         if ($analyzed === true) {
@@ -1753,10 +1756,11 @@ GREMLIN;
         }
 
         $this->raw(<<<GREMLIN
-dedup().groupCount("total").by(count())
+dedup().sack{m,v -> ++m["total"]; m;}
         $analyzed
-        .sideEffect( g.V({$this->analyzerId}).property('count', -1))
-        .cap("processed", "total")
+       .sideEffect( g.V({$this->analyzerId}).property("count", -1))
+       .count()
+       .sack()
 
 // Query (#{$this->queryId}) for {$this->analyzer}
 // php {$this->config->php} analyze -p {$this->config->project} -P {$this->analyzer} -v
@@ -1811,8 +1815,8 @@ GREMLIN
             $r = $this->gremlin->query($query->getQuery(), $query->getArguments());
             ++$this->queryCount;
 
-            $this->processedCount += $r['processed'];
-            $this->rowCount       += $r['total'];
+            $this->processedCount += $r[0]['processed'];
+            $this->rowCount       += $r[0]['total'];
         }
 
         // count the number of results

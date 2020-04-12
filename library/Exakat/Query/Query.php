@@ -85,7 +85,7 @@ class Query {
                 case 'atomis' :
                 case 'atomfunctionis' :
                     $this->_as('first');
-                    $this->raw('groupCount("processed").by(count())', array(), array());
+                    $this->raw('sack{m,v -> ++m["processed"]; m;}', array(), array());
                     break;
 
                 case 'analyzeris' :
@@ -168,7 +168,20 @@ class Query {
             return true;
         }
 
+        /*
+        Sack is ignored ATM
         $sack = $this->prepareSack($this->commands);
+        if (is_array($sack)) {
+            $sack['processed'] = 0;
+            $sack['total'] = 0;
+        } else {
+            $sack = array('processed' => 0,
+                          'total' => 0,
+                          );
+        }
+        $sack = $this->sackToGremlin($sack);
+        */
+        $sack = '.withSack(["m":[], "processed":0, "total":0])';
         $this->query = "g{$sack}.V()";
 
         $commands  = array_column($this->commands, 'gremlin');
@@ -219,7 +232,8 @@ class Query {
         $commands = implode('.', $commands);
         $this->arguments = array_merge(...$arguments);
 
-        $sack = $this->prepareSack($this->commands);
+//        $sack = $this->prepareSack($this->commands);
+        $sack = '.withSack(["m":[], "processed":0, "total":0])';
 
         $this->query = <<<GREMLIN
 g{$sack}.V().as('first').$commands
@@ -256,20 +270,30 @@ GREMLIN;
         die(__METHOD__);
     }
 
-    private function prepareSack($commands, $toGremlin = self::TO_GREMLIN) {
+    private function prepareSack(array $commands) {
         foreach($commands as $command) {
             if ($command->getSack() === Command::SACK_NONE) {
                 continue;
             }
-
-            if ($toGremlin === self::TO_GREMLIN) {
-                return '.withSack' . $command->getSack();
-            } else {
-                return $command->getSack();
-            }
+            
+            return $command->getSack();
         }
 
         return Command::SACK_NONE;
+    }
+
+    private function sackToGremlin(array $sack) : string {
+        if (empty($sack)) {
+            return '';
+        }
+
+        $return = array();
+        foreach($sack as $name => $init) {
+            $return[] = "\"$name\":".trim((string) $init, ' {}');
+        }
+
+        $return = '.withSack{['.join(', ', $return).']}';
+        return $return;
     }
 
     public function canSkip(): bool {

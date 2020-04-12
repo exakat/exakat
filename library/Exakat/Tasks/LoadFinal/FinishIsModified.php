@@ -58,8 +58,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countNew = $result->toInt();
+        if ($query->canSkip()) {
+            $countNew = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countNew = $result->toInt();
+        }
 
         $query = $this->newQuery('isModified with function calls');
         $query->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'), Analyzer::WITHOUT_CONSTANTS)
@@ -75,8 +79,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countFunction = $result->toInt();
+        if ($query->canSkip()) {
+            $countFunction = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countFunction = $result->toInt();
+        }
 
         $count = $countNew + $countFunction;
         display("Created $count isModified values");
@@ -90,8 +98,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countAppend0 = $result->toInt();
+        if ($query->canSkip()) {
+            $countAppend0 = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countAppend0 = $result->toInt();
+        }
 
         $query = $this->newQuery('isModified with append $a[1][]');
         $query->atomIs('Arrayappend', Analyzer::WITHOUT_CONSTANTS)
@@ -101,8 +113,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countAppend1 = $result->toInt();
+        if ($query->canSkip()) {
+            $countAppend1 = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countAppend1 = $result->toInt();
+        }
 
         $query = $this->newQuery('isModified with append $a[1][2][]');
         $query->atomIs('Arrayappend', Analyzer::WITHOUT_CONSTANTS)
@@ -113,8 +129,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countAppend2 = $result->toInt();
+        if ($query->canSkip()) {
+            $countAppend2 = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countAppend2 = $result->toInt();
+        }
 
         $count = $countAppend0 + $countAppend1 + $countAppend2;
         display("Created $count isModified values with array append");
@@ -129,8 +149,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countFunction = $result->toInt();
+        if ($query->canSkip()) {
+            $countFunction = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countFunction = $result->toInt();
+        }
 
         $query = $this->newQuery('isModified with unset operator');
         $query->atomIs('Cast', Analyzer::WITHOUT_CONSTANTS)
@@ -142,8 +166,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countOperator = $result->toInt();
+        if ($query->canSkip()) {
+            $countOperator = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countOperator = $result->toInt();
+        }
 
         $count = $countFunction + $countOperator;
         display("Created $count isModified values with unset");
@@ -158,8 +186,12 @@ class FinishIsModified extends LoadFinal {
               ->setProperty('isModified', true)
               ->returnCount();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $countOperator = $result->toInt();
+        if ($query->canSkip()) {
+            $countOperator = 0;
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $countOperator = $result->toInt();
+        }
 
         $count = $countFunction + $countOperator;
         display("Created $count isModified values with => ");

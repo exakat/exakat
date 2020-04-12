@@ -35,7 +35,7 @@ class GoToAllParents extends DSL {
 repeat( __.out("EXTENDS", "IMPLEMENTS")
           .in("DEFINITION")
           .hasLabel("Class", "Classanonymous", "Interface", "Trait")
-          .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} 
+          .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} 
 ).emit( )
  .times($MAX_LOOPING)
  .hasLabel("Class", "Classanonymous", "Interface", "Trait")
@@ -49,7 +49,7 @@ emit( )
 .repeat( __.out("EXTENDS", "IMPLEMENTS")
            .in("DEFINITION")
            .hasLabel("Class", "Classanonymous", "Interface", "Trait")
-           .filter{!it.sack().contains(it.get().value("fullnspath")) }.sack {m,v -> m.add(v.value("fullnspath")); m} 
+           .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} 
         )
         .times($MAX_LOOPING)
         .hasLabel("Class", "Classanonymous", "Interface", "Trait")

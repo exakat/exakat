@@ -49,8 +49,12 @@ class SpotPHPNativeFunctions extends LoadFinal {
               ->raw('map{ name = parts.last().toLowerCase();}', array(), array())
               ->unique();
         $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $fallingback = $result->toArray();
+        if ($query->canSkip()) {
+            $fallingback = array();
+        } else {
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+            $fallingback = $result->toArray();
+        }
 
         if (!empty($fallingback)) {
             $phpfunctions = array_merge(...$this->PHPfunctions);

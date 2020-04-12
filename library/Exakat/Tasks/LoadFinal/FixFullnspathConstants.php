@@ -45,7 +45,11 @@ GREMLIN
               ->setProperty('fullnspath', 'actual')
               ->returnCount();
         $query->prepareRawQuery();
-        $this->gremlin->query($query->getQuery(), $query->getArguments());
+        if ($query->canSkip()) {
+            $fallingback = array();
+        } else {
+            $this->gremlin->query($query->getQuery(), $query->getArguments());
+        }
 
         display('Fixed Fullnspath for Constants');
     }
