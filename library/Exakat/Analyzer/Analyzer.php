@@ -30,6 +30,7 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\UnknownDsl;
 use Exakat\Query\Query;
 use Exakat\Project;
+use Exakat\Graph\Helpers\GraphResults;
 
 abstract class Analyzer {
     // Query types
@@ -1777,7 +1778,11 @@ GREMLIN
 
     public function rawQuery() {
         $this->query->prepareRawQuery();
-        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
+        if ($this->query->canSkip()) {
+            $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
+        } else {
+            $result = new GraphResults();
+        }
 
         $this->initNewQuery();
 
