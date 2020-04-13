@@ -38,6 +38,8 @@ class Query {
 
     const QUERY_RUNNING = true;
     const QUERY_STOPPED = false;
+    
+    private const SACK = '.withSack(["m":[], "processed":0, "total":0])';
 
     private $id         = null;
     private $project    = null;
@@ -181,7 +183,7 @@ class Query {
         }
         $sack = $this->sackToGremlin($sack);
         */
-        $sack = '.withSack(["m":[], "processed":0, "total":0])';
+        $sack = self::SACK;;
         $this->query = "g{$sack}.V()";
 
         $commands  = array_column($this->commands, 'gremlin');
@@ -232,8 +234,7 @@ class Query {
         $commands = implode('.', $commands);
         $this->arguments = array_merge(...$arguments);
 
-//        $sack = $this->prepareSack($this->commands);
-        $sack = '.withSack(["m":[], "processed":0, "total":0])';
+        $sack = self::SACK;
 
         $this->query = <<<GREMLIN
 g{$sack}.V().as('first').$commands

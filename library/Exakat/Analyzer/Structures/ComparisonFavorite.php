@@ -49,7 +49,7 @@ GREMLIN;
              ->codeIs($comparators)
              ->raw('map{ ' . $mapping . ' }', $codeInt)
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = $this->rawQuery()->toArray()[0];
+        $types = $this->rawQuery()->toArray();
 
         $store = array();
         $total = 0;

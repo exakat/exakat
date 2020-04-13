@@ -102,11 +102,6 @@ class GSNeo4j extends Graph {
         } elseif ($result[0] === null) {
             return new GraphResults();
         } elseif (is_array($result[0])) {
-            if (isset($result[0]['processed'])) {
-                $result = array('processed' => empty($result[0]['processed']) ? 0 : array_shift($result[0]['processed']),
-                                'total'     => empty($result[0]['total']) ? 0 : array_shift($result[0]['total']));
-            }
-
             if (isset($result[0]['type'])) {
                 $result = $this->simplifyArray($result);
             }

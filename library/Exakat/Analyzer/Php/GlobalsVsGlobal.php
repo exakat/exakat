@@ -46,7 +46,7 @@ GREMLIN;
              ->raw('or( has("code", ' . $globals[0] . '), __.in("GLOBAL")) ')
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = $this->rawQuery()->toArray()[0];
+        $types = $this->rawQuery()->toArray();
 
         $store = array();
         $total = 0;

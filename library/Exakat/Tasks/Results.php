@@ -23,8 +23,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Exceptions\NoSuchAnalyzer;
-use Exakat\Exceptions\NeedsAnalyzerThema;
-use Exakat\Exceptions\NoSuchProject;
+    use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNotInited;
@@ -111,6 +110,7 @@ GREMLIN;
                 $analyzer =  $this->rulesets->getInstance($oneAnalyzerClass, null, $this->config);
                 $results[] = $analyzer->getDump();
             }
+
             $return = array_merge(...$results);
         } elseif ($this->config->style === 'DISTINCT') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer . '").out("ANALYZED").values("code").unique()';

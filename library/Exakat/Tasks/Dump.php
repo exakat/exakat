@@ -62,6 +62,7 @@ class Dump extends Tasks {
     }
 
     public function run(): void {
+
         if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -70,8 +71,7 @@ class Dump extends Tasks {
             throw new MissingGremlin();
         }
 
-        $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("code")')
-                                        ->toArray();
+        $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("code")');
         if (empty($projectInGraph)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -1317,7 +1317,6 @@ GREMLIN;
     }
 
     private function collectFilesDependencies(): void {
-
         // Direct inclusion
         $query = $this->newQuery('Inclusions');
         $query->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
@@ -2508,6 +2507,9 @@ GREMLIN
 
     private function storeToDump(string $table, Query $query): int {
         $query->prepareRawQuery();
+        if ($query->canSkip()) {
+            return 0;
+        }
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         return $this->dump->storeInTable($table, $result);

@@ -1652,18 +1652,6 @@ GREMLIN;
         return $this;
     }
 
-    public function processLevels() {
-        $this->query->processLevels();
-
-        return $this;
-    }
-
-    public function processDereferencing() {
-        $this->query->processDereferencing();
-
-        return $this;
-    }
-
     public function run(): int {
         $this->analyze();
 
@@ -1779,9 +1767,9 @@ GREMLIN
     public function rawQuery() {
         $this->query->prepareRawQuery();
         if ($this->query->canSkip()) {
-            $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
-        } else {
             $result = new GraphResults();
+        } else {
+            $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
         }
 
         $this->initNewQuery();

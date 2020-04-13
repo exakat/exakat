@@ -26,16 +26,17 @@ namespace Exakat\Query\DSL;
 
 class ProcessDereferencing extends DSL {
     public function run(): Command {
-        $command = new Command(<<<'GREMLIN'
-emit().repeat( __.sack(sum).by(choose(__.hasLabel("Array", "Arrayappend"),
-                                     constant(0),
-                                     constant(1)
-                 ) ).out("CLASS", "OBJECT", "VARIABLE", "APPEND")).until(__.not(hasLabel("Array", "Arrayappend", "Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant")))
+        list($tooManyDereferencing) = func_get_args();
 
+        $command = new Command(<<<GREMLIN
+local(__.sideEffect{levels=0;}
+        .emit().repeat( __.sideEffect{levels += ["Array", "Arrayappend", "Member", "Methodcall", "Staticmethodcall"].contains( it.get().label() ) ? 1 : 0; } 
+               .out("CLASS", "OBJECT", "VARIABLE", "APPEND"))
+               .until(__.not(hasLabel("Array", "Arrayappend", "Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant")))
+        .filter{ levels > $tooManyDereferencing}
+)
 GREMLIN
 );
-
-        $command->setSack(Command::SACK_INTEGER);
 
         return $command;
     }

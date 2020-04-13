@@ -32,9 +32,8 @@ class MaxLevelOfIdentation extends Analyzer {
         // only reporting the method, not each line.
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
-             ->processLevels()
+             ->processLevels($this->maxLevel)
              ->atomIsNot('Sequence')
-             ->raw('filter{ it.sack() > ' . $this->maxLevel . '; }')
              ->back('first');
         $this->prepareQuery();
     }

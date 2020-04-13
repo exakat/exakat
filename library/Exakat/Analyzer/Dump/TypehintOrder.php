@@ -25,10 +25,8 @@ namespace Exakat\Analyzer\Dump;
 
 class Typehintorder extends AnalyzerTable {
     protected $analyzerName = 'typehintOrder';
-
-    public function analyze() {
-        // Store inclusionss of files within each other
-        $this->analyzerSQLTable = <<<'SQL'
+    
+    protected $analyzerSQLTable = <<<'SQL'
 CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                               host STRING,
                               argument STRING,
@@ -36,6 +34,7 @@ CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
 
+    public function analyze() {
         $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->as('returned')
