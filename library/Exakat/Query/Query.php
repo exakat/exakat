@@ -38,7 +38,7 @@ class Query {
 
     const QUERY_RUNNING = true;
     const QUERY_STOPPED = false;
-    
+
     private const SACK = '.withSack(["m":[], "processed":0, "total":0])';
 
     private $id         = null;
@@ -276,24 +276,24 @@ GREMLIN;
             if ($command->getSack() === Command::SACK_NONE) {
                 continue;
             }
-            
+
             return $command->getSack();
         }
 
         return Command::SACK_NONE;
     }
 
-    private function sackToGremlin(array $sack) : string {
+    private function sackToGremlin(array $sack): string {
         if (empty($sack)) {
             return '';
         }
 
         $return = array();
         foreach($sack as $name => $init) {
-            $return[] = "\"$name\":".trim((string) $init, ' {}');
+            $return[] = "\"$name\":" . trim((string) $init, ' {}');
         }
 
-        $return = '.withSack{['.join(', ', $return).']}';
+        $return = '.withSack{[' . join(', ', $return) . ']}';
         return $return;
     }
 

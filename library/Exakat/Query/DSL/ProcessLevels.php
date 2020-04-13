@@ -30,7 +30,7 @@ class ProcessLevels extends DSL {
             list($maxLevel) = func_get_args();
             $filter = ".filter{ levels > $maxLevel}";
         } else {
-            $filter = "";
+            $filter = '';
         }
 
         $MAX_LOOPING = self::$MAX_LOOPING;

@@ -23,12 +23,11 @@
 namespace Exakat\Tasks;
 
 use Exakat\Exceptions\NoSuchAnalyzer;
-    use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNotInited;
 use Exakat\Exceptions\NoDump;
-use Exakat\Exceptions\NoDumpYet;
 
 class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
