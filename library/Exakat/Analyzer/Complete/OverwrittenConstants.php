@@ -22,22 +22,21 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
 
 class OverwrittenConstants extends Complete {
     public function analyze() {
         // class x { protected const X = 1;}
         // class xx extends x {  protected const X = 1;}
-        $this->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs('Constant', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('code', 'name')
               ->goToClass()
-              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->goToAllImplements(self::EXCLUDE_SELF)
               ->outIs('CONST')
               ->outIs('CONST')
-              ->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs('Constant', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
-              ->samePropertyAs('code', 'name',  Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('code', 'name',  self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();

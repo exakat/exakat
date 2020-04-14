@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
 
 class Inclusions extends AnalyzerTable {
     protected $analyzerName = 'inclusions';
@@ -37,7 +36,7 @@ CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
     public function analyze() {
-        $this ->atomIs('Include', Analyzer::WITHOUT_CONSTANTS)
+        $this ->atomIs('Include', self::WITHOUT_CONSTANTS)
               ->as('included')
               ->goToInstruction('File')
               ->as('including')

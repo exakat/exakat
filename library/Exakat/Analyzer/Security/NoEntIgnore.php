@@ -28,7 +28,7 @@ class NoEntIgnore extends Analyzer {
     public function analyze() {
         // Just don't use this one
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIs('\\ENT_IGNORE', Analyzer::CASE_SENSITIVE)
+             ->fullnspathIs('\\ENT_IGNORE', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

@@ -22,8 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
-
 class NewOrder extends AnalyzerTable {
     protected $analyzerName = 'newOrder';
 
@@ -39,7 +37,7 @@ CREATE TABLE newOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
     public function analyze() {
-        $this ->atomIs('New', Analyzer::WITHOUT_CONSTANTS)
+        $this ->atomIs('New', self::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')
               ->atomIs('Class')

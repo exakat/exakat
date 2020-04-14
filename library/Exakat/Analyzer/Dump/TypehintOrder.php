@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class Typehintorder extends AnalyzerTable {
     protected $analyzerName = 'typehintOrder';
 
-    protected $analyzerSQLTable = <<<'SQL'
+    protected $analyzerTable = <<<'SQL'
 CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                               host STRING,
                               argument STRING,
@@ -35,24 +35,24 @@ CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
     public function analyze() {
-        $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+        $this ->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->as('returned')
-              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)
               ->back('first')
               ->outIs('ARGUMENT')
               ->outIs('TYPEHINT')
-              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)
               ->as('argument')
               ->select(array('first'    => 'fullnspath',
                              'argument' => 'fullnspath',
                              'returned' => 'fullnspath'));
         $this->prepareQuery();
 
-        $this ->atomIs(self::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+        $this ->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->as('returned')
-              ->atomIsNot(array('Void', 'Scalartypehint'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)
               ->back('first')
               ->outIs('ARGUMENT')
               ->atomIs('Void')

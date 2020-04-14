@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
 
 class ConstantOrder extends AnalyzerTable {
     protected $analyzerName = 'constantOrder';
@@ -41,7 +40,7 @@ CREATE TABLE constantOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
     public function analyze() {
-        $this ->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+        $this ->atomIs('Constant', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->as('built')
               ->as('built_fullcode')

@@ -42,6 +42,7 @@ class IsNotFamily extends Analyzer {
                 $this->side()
                      ->filter(
                         $this->side()
+                             ->atomIs('Class')
                              ->goToAllParents(self::INCLUDE_SELF)
                              ->fullnspathIs('fnp')
                      )
