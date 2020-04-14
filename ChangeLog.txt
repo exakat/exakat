@@ -1,4 +1,4 @@
-Version 2.0.7 (Ao Shun, coming up)
+Version 2.0.8 (Ao Run, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,26 @@ Version 2.0.7 (Ao Shun, coming up)
     + 
 + Tokenizer
     + 
+
+Version 2.0.7 (Ao Shun, 2020-04-14)
++ Architecture
+    + Adopted strict_types
+    + Removed ctype1 attribute
+    + Moved linting into separate processes
+    + Refactored analysis to export to dump via SQL
+    + Added 'None' ruleset to Dump task
++ Report
+    + Ambassador : Added Constant's order report
+    + None : Added support for No report
++ Analysis
+    + Upgraded analysis : Undefined class constants
+    + Upgraded analysis : Undefined global constants
+    + Upgraded analysis : Undefined property
+    + Checked unit tests : 3347 / 3420 test pass (97% pass)
++ Tokenizer
+    + Support PHP 8.0's tokens
+    + Added support for multiple typehint in the engine
+    + Fixed edge case for boolean type casting
 
 Version 2.0.6 (Ao Qin, 2020-03-04)
 + Architecture

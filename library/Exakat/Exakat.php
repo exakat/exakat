@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,33 +22,31 @@
 
 namespace Exakat;
 
-use Exakat\Tasks;
-use Exakat\Config;
 use Exakat\Configsource\Commandline;
 
 class Exakat {
-    const VERSION = '2.0.6';
-    const BUILD = 1036;
-    
+    const VERSION = '2.0.7';
+    const BUILD = 1047;
+
     private $config  = null;
-    
+
     public function __construct() {
         $this->config = exakat('config');
     }
 
-    public function execute() : void {
+    public function execute(): void {
         if ($this->config->remote === 'none') {
             $this->local();
         } else {
             $this->remote();
         }
     }
-    
-    private function remote() : void {
+
+    private function remote(): void {
         $json = $this->config->commandLineJson();
 
         $remote = new Remote($this->config->remotes[$this->config->remote], $this->config->transit_key);
-        
+
         switch ($this->config->command) {
             case 'init' :
                 // replicate init, because we'll need later
@@ -69,12 +67,12 @@ class Exakat {
                         print "Couldn't read an answer from remote.\n";
                         return;
                     }
-                    
+
                     if (empty($json->error)) {
                         print "Couldn't read an error from remote.\n";
                         return;
                     }
-                    
+
                     print "Error: $json->error\n";
                     return;
                 }
@@ -99,8 +97,8 @@ class Exakat {
                 break;
         }
     }
-        
-    private function local() : void {
+
+    private function local(): void {
         switch ($this->config->command) {
             case 'doctor' :
                 $doctor = new Tasks\Doctor();
@@ -279,10 +277,10 @@ class Exakat {
 
             default :
                 $command_value = $this->config->command_value;
-                $suggestions = array_filter(array_keys(Commandline::$commands), function($x) use ($command_value) { similar_text($command_value, $x, $percentage); return $percentage > 60; });
+                $suggestions = array_filter(array_keys(Commandline::$commands), function ($x) use ($command_value) { similar_text((string) $command_value, $x, $percentage); return $percentage > 60; });
 
-                print (!empty($command_value) ? "Unknown command '{$this->config->command_value}'. See https://exakat.readthedocs.io/en/latest/Commands.html" . PHP_EOL: '').
-                      (!empty($suggestions) ? "Did you mean : ".implode(', ', $suggestions).' ? ' : '') .PHP_EOL;
+                print (!empty($command_value) ? "Unknown command '{$this->config->command_value}'. See https://exakat.readthedocs.io/en/latest/Commands.html" . PHP_EOL : '') .
+                      (!empty($suggestions) ? 'Did you mean : ' . implode(', ', $suggestions) . ' ? ' : '') . PHP_EOL;
 
                 // fallthrough
 

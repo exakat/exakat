@@ -1,8 +1,8 @@
 <?php
 
 try {
-    if (version_compare(PHP_VERSION, '7.1.0') < 0) {
-        die("Exakat requires PHP 7.1 or more recent to run. \n");
+    if (version_compare(PHP_VERSION, '7.2.0') < 0) {
+        die("Exakat requires PHP 7.2 or more recent to run. \n");
     }
     
     register_shutdown_function(function () {
