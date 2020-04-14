@@ -76,7 +76,7 @@ SQL
 
             return $error;
         }
-
+    
         // Warnings are considered OK.
         if (preg_match('#^(?:PHP )?Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r)) {
             return false;
@@ -96,7 +96,7 @@ SQL
             return $error;
         }
 
-        print ("\nCan't understand this php feedback : $resFile\n");
+        print "\nCan't understand this php feedback : $resFile\n";
 
         return false;
     }
