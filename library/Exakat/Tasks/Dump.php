@@ -589,7 +589,6 @@ GREMLIN;
 
             ++$total;
         }
-
         display("$total traits\n");
 
         if (!empty($cit)) {

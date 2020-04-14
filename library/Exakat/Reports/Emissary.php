@@ -2103,7 +2103,7 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the constant trees : a constant (global or classs) is build based on another constant. Constants built only with literals are not represented here.');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the constant trees : a constant (global or class) is build based on another constant. Constants built only with literals are not represented here.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
 

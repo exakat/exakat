@@ -104,7 +104,7 @@ class Files extends Tasks {
             $resFiles = $php->compileFiles($this->config->code_dir, $this->tmpFileName);
         }
 
-        $shell = "nohup php server/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {this->tmpFileName} >/dev/null & echo $!";
+        $shell = "nohup php server/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} >/dev/null & echo $!";
         shell_exec($shell);
 
         $vcsClass = Vcs::getVcs($this->config);
