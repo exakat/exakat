@@ -33,7 +33,7 @@ class Not extends DSL {
             if ($filter->gremlin === Query::STOP_QUERY) {
                 $filter->gremlin = Query::NO_QUERY;
             } else {
-                $filter->gremlin = "not( where($filter->gremlin ))";
+                $filter->gremlin = "not( __.where($filter->gremlin ))";
             }
             return $filter;
         } else {

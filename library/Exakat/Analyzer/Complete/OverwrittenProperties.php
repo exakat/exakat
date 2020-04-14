@@ -28,8 +28,10 @@ class OverwrittenProperties extends Complete {
         // class xx extends x { protected $p = 1;}
         $this->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
               ->savePropertyAs('propertyname', 'name')
-              ->goToInstruction(self::CLASSES_TRAITS)
-              ->goToAllParentsTraits(self::INCLUDE_SELF)
+              ->inIs('PPP')
+              ->inIs('PPP')
+              ->atomIs('Class')
+              ->goToAllParentsTraits(self::INCLUDE_SELF) // also covers local traits
               ->outIs('PPP')
               ->outIs('PPP')
               ->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)

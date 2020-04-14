@@ -32,12 +32,11 @@ class GoToAllParentsTraits extends DSL {
         $MAX_LOOPING = self::$MAX_LOOPING;
         if ($self === Analyzer::EXCLUDE_SELF) {
             $command = new Command(<<<GREMLIN
-repeat( 
-    __.out("USE", "EXTENDS")
-      .coalesce( __.out("USE"), __.filter{ true; })
+as("gotoallparentstraits").repeat( 
+    __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS"))
       .in("DEFINITION")
+      .simplePath().from("gotoallparentstraits")
       .hasLabel("Class", "Classanonymous", "Trait")
-      .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} 
 )
 .emit( )
 .times($MAX_LOOPING)
@@ -47,12 +46,11 @@ GREMLIN
             $command->setSack(Command::SACK_ARRAY);
         } else {
             $command = new Command(<<<GREMLIN
-emit( ).repeat( 
-    __.out("USE", "EXTENDS")
-      .coalesce( __.out("USE"), __.filter{true; })
+as("gotoallparentstraits").emit( ).repeat( 
+    __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS"))
       .in("DEFINITION")
+      .simplePath().from("gotoallparentstraits")
       .hasLabel("Class", "Classanonymous", "Trait")
-      .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} 
 )
 .times($MAX_LOOPING)
 .hasLabel("Class", "Classanonymous", "Trait")

@@ -45,17 +45,14 @@ GREMLIN
 
         } else {
             $command = new Command(<<<GREMLIN
-
 as("gotoallparents").emit( )
-.repeat( __.local(out("EXTENDS", "IMPLEMENTS")
+.repeat( __.out("EXTENDS", "IMPLEMENTS")
            .in("DEFINITION")
            .hasLabel("Class", "Classanonymous", "Interface", "Trait")
            .simplePath().from("gotoallparents")
-           )
         )
         .times($MAX_LOOPING)
         .hasLabel("Class", "Classanonymous", "Interface", "Trait")
-
 GREMLIN
 );
             $command->setSack(Command::SACK_ARRAY);
