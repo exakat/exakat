@@ -236,8 +236,8 @@ SQL;
         }
 
         $actualClassName = new \ReflectionClass($class);
-        if ($class === $actualClassName->getName()) {
-            return $class;
+        if (strtolower($class) === strtolower($actualClassName->getName())) {
+            return $actualClassName->getName();
         } else {
             // problems with the case
             return '';
