@@ -40,6 +40,8 @@ Label : PROJECT
               Label : OBJECT
                 11
   Label : RETURNED
+    11
+  Label : RETURNED
     9
     Label : CONCAT
       8
@@ -59,5 +61,3 @@ Label : PROJECT
           13
       Label : OBJECT
         11
-  Label : RETURNED
-    11

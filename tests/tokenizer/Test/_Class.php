@@ -101,5 +101,6 @@ class _Class extends Tokenizer {
     public function test_Class90()  { $this->generic_test('_Class.90'); }
     public function test_Class91()  { $this->generic_test('_Class.91'); }
     public function test_Class92()  { $this->generic_test('_Class.92'); }
+    public function test_Class92()  { $this->generic_test('_Class.92'); }
 
 ?>
