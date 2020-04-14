@@ -28,7 +28,7 @@ use Exakat\Analyzer\Dump\AnalyzerDump;
 
 class HexadecimalString extends AnalyzerDump {
     public function analyze() {
-        $regex = '^\\\\s*0[xX][0-9a-fA-F]+';
+        $regex = '^\\\\\\\\s*0[xX][0-9a-fA-F]+';
 
         // Strings
         $this->atomIs('String')

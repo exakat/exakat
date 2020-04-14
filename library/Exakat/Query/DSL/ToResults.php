@@ -27,12 +27,12 @@ class ToResults extends DSL {
     public function run(): Command {
         $linksDown = self::$linksDown;
         return new Command(<<<GREMLIN
-sideEffect{ line = it.get().value("line");
-             fullcode = it.get().value("fullcode");
-             file="None"; 
+sideEffect{ line = ""; //it.get().value("line");""
+             fullcode = ""; //it.get().value("fullcode");
+             file = "None"; 
              theFunction = ""; 
-             theClass=""; 
-             theNamespace=""; 
+             theClass = ""; 
+             theNamespace = ""; 
              }
 .where( __.until( hasLabel("Project") ).repeat( 
     __.in({$linksDown})
