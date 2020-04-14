@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 25 Nov 2019 06:13:41 +0000
-.. comment: Generation hash : ed0328f4d65d6c0f8c899ec4c66e3391c5b10196
+.. comment: Generation date : Tue, 14 Apr 2020 14:11:12 +0000
+.. comment: Generation hash : 115fe3f5ffca63e5e32d3b6d0b439d9045491cd0
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -4287,6 +4287,38 @@ Suggestions
 
 
 
+.. _coalesce-equal:
+
+Coalesce Equal
+##############
+
+
+Usage of coalesce assignement operator. The operator is available in PHP since PHP 7.4.
+
+.. code-block:: php
+
+   <?php
+   
+   // Coalesce operator, since PHP 5.3
+   $a ??= 'default value';
+   
+   // Equivalent to $a = $a ?? 'default value';
+   
+   ?>
+
+
+See also `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_.
+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/CoalesceEqual                                                                                                                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Php Version | With PHP 7.4 and more recent                                                                                                                                                                                           |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _common-alternatives:
 
 Common Alternatives
@@ -6166,65 +6198,6 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Examples    | :ref:`churchcrm-structures-coulduseshortassignation`, :ref:`thelia-structures-coulduseshortassignation`     |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _could-use-trait:
-
-Could Use Trait
-###############
-
-
-The following classes have been found implementing all of a trait's methods : it could use this trait, and remove duplicated code.
-
-.. code-block:: php
-
-   <?php
-   
-   trait t {
-       function t1() {}
-       function t2() {}
-       function t3() {}
-   }
-   
-   // t1, t2, t3 method could be dropped, and replaced with 'use t'
-   class foo1 {
-       function t1() {}
-       function t2() {}
-       function t3() {}
-   
-       function j() {}
-   }
-   
-   // foo2 is just the same as foo1
-   class foo2 {
-       use t;
-   
-       function j() {}
-   }
-   
-   ?>
-
-
-The comparison between the class methods' and the trait's methods are based on token. They may yieldd some false-positives.
-
-See also :ref:`forgotten-interface`. 
- 
-
-Suggestions
-^^^^^^^^^^^
-
-* Use trait, and remove duplicated code
-
-+-------------+----------------------+
-| Short name  | Traits/CouldUseTrait |
-+-------------+----------------------+
-| Rulesets    | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
 
 
 
@@ -8865,8 +8838,6 @@ Suggestions
 +-------------+-----------------------------+
 | Rulesets    | :ref:`ClassReview`          |
 +-------------+-----------------------------+
-| Php Version | 7.4-                        |
-+-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
 | Time To Fix | Quick (30 mins)             |
@@ -9708,6 +9679,58 @@ Suggestions
 +-------------+--------------------------------+
 | Time To Fix | Instant (5 mins)               |
 +-------------+--------------------------------+
+
+
+
+.. _fossilized-method:
+
+Fossilized Method
+#################
+
+
+A method is fossilized when it is overwriten so often that changing a default value, a return type or an argument type is getting difficult.
+
+This happens when a class is extended. When a method is overwritten once, it may be easy to update the signature in two places. The more methods are overwriting a parent method, the more difficult it is to update it.
+
+This analysis counts the number of times a method is overwriten, and report any method that is ovrewriten more than 6 times. This threshold is parametrable.
+
+.. code-block:: php
+
+   <?php
+   
+   class x1 {
+       // foo1() is never overwritten. It is easy to update.
+       function foo1() {}
+   
+       // foo7() is overwritten seven times. It is hard to update.
+       function foo7() {}
+   }
+   
+   // classes x2 to x7, all overwrite foo7();
+   // Only x2 is presente here.
+   class x2 extends x1 {
+       function foo7() {}
+   }
+   
+   ?>
+
++------------------------+---------+---------+---------------------------------------------------------------------------------+
+| Name                   | Default | Type    | Description                                                                     |
++------------------------+---------+---------+---------------------------------------------------------------------------------+
+| fossilizationThreshold | 6       | integer | Minimal number of overwriting methods to consider a method difficult to update. |
++------------------------+---------+---------+---------------------------------------------------------------------------------+
+
+
+
++-------------+---------------------------------------+
+| Short name  | Classes/FossilizedMethod              |
++-------------+---------------------------------------+
+| Rulesets    | :ref:`ClassReview`, :ref:`Typechecks` |
++-------------+---------------------------------------+
+| Severity    | Minor                                 |
++-------------+---------------------------------------+
+| Time To Fix | Quick (30 mins)                       |
++-------------+---------------------------------------+
 
 
 
@@ -10821,59 +10844,6 @@ They may be a copy/paste with unmodified content. When the content has to be dup
 +-------------+---------------------------------+
 | Time To Fix | Instant (5 mins)                |
 +-------------+---------------------------------+
-
-
-
-.. _identical-methods:
-
-Identical Methods
-#################
-
-
-When the parent class and the child class have the same method, the child might drop it. This reduces code duplication. 
-
-Duplicate code in methods is often the results of code evolution, where a method was copied with the hierarchy, but the original wasn't removed.
-
-This doesn't apply to `private` methods, which are reserved for one class.
-
-.. code-block:: php
-
-   <?php
-   
-   class a {
-       public function foo() {
-           return rand(0, 100);
-       }
-   }
-   
-   class b extends a {
-       public function foo() {
-           return rand(0, 100);
-       }
-   }
-   
-   ?>
-
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Drop the method from the parent class, in particular if only one child uses the method.
-* Drop the method from the child class, in particular if there are several children class
-* Use an abstract method, and make sure every child has its own implementation
-* Modify one of the methods so they are different
-
-+-------------+------------------------------------+
-| Short name  | Classes/IdenticalMethods           |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
 
 
 
@@ -14558,6 +14528,47 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 
 
 
+.. _missing-typehint:
+
+Missing Typehint
+################
+
+
+No typehint was found for this parameter, or as a return type for the function.
+
+void is considered a specified typehint, and is not reported here.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($no_typehint) : void {}
+   
+   function no_return_type() {}
+   
+   ?>
+
+
+See also `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------+
+| Short name  | Functions/MissingTypehint |
++-------------+---------------------------+
+| Rulesets    | :ref:`Typechecks`         |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _mistaken-concatenation:
 
 Mistaken Concatenation
@@ -15110,52 +15121,6 @@ This is a backward incompatible feature of PHP 7.1.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _multiple-identical-closure:
-
-Multiple Identical Closure
-##########################
-
-
-Several closures are defined with the same code. 
-
-It may be interesting to check if a named function could be defined from them.
-
-.. code-block:: php
-
-   <?php
-   
-   // the first squares, with closure
-   $squares= array_map(function ($a) {return $a * $a; }, range(0, 10) );
-   
-   // later, in another file...
-   // another identical closure 
-   $squaring = function ($x) { return $x * $x; };
-   foo($x, $squaring);
-   
-   ?>
-
-
-This analysis also reports functions and methods that look like the closures : they may be considered for switch.
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Create a function with the body of those closures, and replace the closures by the function's name.
-
-+-------------+------------------------------------+
-| Short name  | Functions/MultipleIdenticalClosure |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Suggestions`                 |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
-+-------------+------------------------------------+
 
 
 
@@ -18816,6 +18781,78 @@ Suggestions
 +-------------+-------------------+
 | Time To Fix | Instant (5 mins)  |
 +-------------+-------------------+
+
+
+
+.. _not-equal-is-not-!==:
+
+Not Equal Is Not !==
+####################
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the != or !==
+* Use parenthesis
+
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/NotEqual                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ClearPHP    | `Not and Equal operators, used separately, don't amount to the different operator.
+
+<?php
+
+if ($string != 'abc') {
+    // doSomething()
+}
+
+// Here, string will be an boolean, leading 
+if (!$string == 'abc') {
+    // doSomething()
+}
+
+// operator priority may be confusing
+if (!$object instanceof OneClass) {
+    // doSomething()
+}
+?>
+
+Note that the `instanceof` operator may be use with this syntax, due to operator precedence.
+
+See also `Operator Precedence <https://www.php.net/manual/en/language.operators.precedence.php>`_.
+
+ <https://github.com/dseguy/clearPHP/tree/master/rules/Not and Equal operators, used separately, don't amount to the different operator.
+
+<?php
+
+if ($string != 'abc') {
+    // doSomething()
+}
+
+// Here, string will be an boolean, leading 
+if (!$string == 'abc') {
+    // doSomething()
+}
+
+// operator priority may be confusing
+if (!$object instanceof OneClass) {
+    // doSomething()
+}
+?>
+
+Note that the `instanceof` operator may be use with this syntax, due to operator precedence.
+
+See also `Operator Precedence <https://www.php.net/manual/en/language.operators.precedence.php>`_.
+
+.md>`__ |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -23370,6 +23407,52 @@ Suggestions
 +-------------+--------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                    |
 +-------------+--------------------------------------------------+
+
+
+
+.. _semantic-typing:
+
+Semantic Typing
+###############
+
+
+Arguments names are only useful inside the method's body. They are not actual type.
+
+.. code-block:: php
+
+   <?php
+   
+   // arguments should be a string and an array
+   function foo($array, $str) {
+       // more code
+       return $boolean;
+   }
+   
+   // typehint is actually checking the values
+   function bar(iterable $closure) : bool {
+       // more code
+       return true;
+   }
+   
+   ?>
+
+
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a typehint to make sure the argument is of the expected type.
+
++-------------+--------------------------+
+| Short name  | Functions/SemanticTyping |
++-------------+--------------------------+
+| Rulesets    | :ref:`Semantics`         |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
 
 
 

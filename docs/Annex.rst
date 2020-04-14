@@ -52,6 +52,7 @@ Exakat groups analysis by rulesets. This way, analyzing 'Security' runs all poss
 * Level 5
 * LintButWontExec
 * Newfeatures
+* None
 * OneFile
 * PHP recommendations
 * Performances
@@ -308,9 +309,10 @@ Supported Frameworks
 
 Frameworks, components and libraries are supported via Exakat extensions.
 
-List of extensions : there are 10 extensions
+List of extensions : there are 11 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
+* :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Pmb <extension-pmb>`
@@ -439,19 +441,37 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.0.7
+
+  * Constant Order (Dump/ConstantOrder)
+
+* 2.0.6
+
+  * Fossilized Method (Classes/FossilizedMethod)
+  * Links Between Parameter And Argument (Dump/ParameterArgumentsLinks ; Appinfo)
+  * Not Equal Is Not !== (Structures/NotEqual ; Analyze)
+  * Possible Interfaces (Interfaces/PossibleInterfaces ; Internal)
+
+* 2.0.5
+
+  * Missing Typehint (Functions/MissingTypehint)
+  * Semantic Typing (Functions/SemanticTyping ; Semantics)
+
+* 2.0.4
+
+  * Coalesce Equal (Php/CoalesceEqual)
+
 * 2.0.3
 
   * Collect Class Children Count (Dump/CollectClassChildren)
   * Collect Class Depth (Dump/CollectClassDepth ; Dump)
   * Collect Class Interface Counts (Dump/CollectClassInterfaceCounts ; Dump)
   * Exceeding Typehint (Functions/ExceedingTypehint ; ClassReview)
-  * Interfaces/PossibleInterfaces (Interfaces/PossibleInterfaces ; )
 
 * 2.0.2
 
   * Dump/Inclusions (Dump/Inclusions ; Dump)
   * Dump/NewOrder (Dump/NewOrder ; Unassigned)
-  * Dump/ParameterArgumentsLinks (Dump/ParameterArgumentsLinks ; Unassigned)
   * Insufficient Property Typehint (Classes/InsufficientPropertyTypehint)
   * Nullable Without Check (Functions/NullableWithoutCheck ; ClassReview)
   * Typehint Order (Dump/TypehintOrder ; Unassigned)
@@ -459,13 +479,13 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.9.9
 
+  * Collect Mbstring Encodings (Dump/CollectMbstringEncodings ; Dump)
   * Complete/CreateForeachDefault (Complete/CreateForeachDefault ; Complete)
   * Concrete usage (Vendors/Concrete5 ; Appinfo)
   * Could Type With Array (Functions/CouldTypeWithArray ; Typechecks)
   * Could Type With Boolean (Functions/CouldTypeWithBool ; Typechecks)
   * Could Type With Int (Functions/CouldTypeWithInt ; Typechecks)
   * Could Type With String (Functions/CouldTypeWithString ; Typechecks)
-  * Dump/CollectMbstringEncodings (Dump/CollectMbstringEncodings ; Dump)
   * Filter To add_slashes() (Php/FilterToAddSlashes ; CompatibilityPHP74)
   * Functions/CouldTypeWithIterable (Functions/CouldTypeWithIterable ; Typechecks)
   * Immutable Signature (Classes/ImmutableSignature ; Appinfo)
@@ -495,10 +515,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.9.6
 
+  * Collect Parameter Counts (Dump/CollectParameterCounts ; Dump)
   * Create Magic Method (Complete/CreateMagicMethod ; )
   * Custom/NotInThisList (Custom/NotInThisList ; Unassigned)
   * Dump/CollectLocalVariableCounts (Dump/CollectLocalVariableCounts ; Dump)
-  * Dump/CollectParameterCounts (Dump/CollectParameterCounts ; Dump)
   * Dump/DereferencingLevels (Dump/DereferencingLevels ; Dump)
   * Duplicate Literal (Type/DuplicateLiteral ; Semantics)
   * Internet Domains (Type/UdpDomains ; Inventory)
@@ -2619,8 +2639,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2851,6 +2871,7 @@ List of external links mentionned in this documentation.
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
+* `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
@@ -2878,8 +2899,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
@@ -2988,7 +3009,6 @@ _______
 |   analyzer[] = "Classes/DontUnsetProperties";
 |   analyzer[] = "Classes/EmptyClass";
 |   analyzer[] = "Classes/FinalByOcramius";
-|   analyzer[] = "Classes/IdenticalMethods";
 |   analyzer[] = "Classes/ImplementIsForInterface";
 |   analyzer[] = "Classes/ImplementedMethodsArePublic";
 |   analyzer[] = "Classes/IncompatibleSignature";
@@ -3267,6 +3287,7 @@ _______
 |   analyzer[] = "Structures/NoSubstrOne";
 |   analyzer[] = "Structures/NoVariableIsACondition";
 |   analyzer[] = "Structures/Noscream";
+|   analyzer[] = "Structures/NotEqual";
 |   analyzer[] = "Structures/NotNot";
 |   analyzer[] = "Structures/ObjectReferences";
 |   analyzer[] = "Structures/OnceUsage";
@@ -3321,7 +3342,6 @@ _______
 |   analyzer[] = "Structures/pregOptionE";
 |   analyzer[] = "Structures/toStringThrowsException";
 |   analyzer[] = "Traits/AlreadyParentsTrait";
-|   analyzer[] = "Traits/CouldUseTrait";
 |   analyzer[] = "Traits/DependantTrait";
 |   analyzer[] = "Traits/EmptyTrait";
 |   analyzer[] = "Traits/MethodCollisionTraits";
@@ -3372,7 +3392,7 @@ ___________
 |   analyzer[] = "Classes/DisconnectedClasses";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
-|   analyzer[] = "Classes/IdenticalMethods";
+|   analyzer[] = "Classes/FossilizedMethod";
 |   analyzer[] = "Classes/InsufficientPropertyTypehint";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoParent";
@@ -3468,6 +3488,7 @@ __________________
 |   analyzer[] = "Php/CaseForPSS";
 |   analyzer[] = "Php/ClassConstWithArray";
 |   analyzer[] = "Php/ClosureThisSupport";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
@@ -3555,6 +3576,7 @@ __________________
 |   analyzer[] = "Php/CantUseReturnValueInWriteContext";
 |   analyzer[] = "Php/CaseForPSS";
 |   analyzer[] = "Php/ClassConstWithArray";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
@@ -3640,6 +3662,7 @@ __________________
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Namespaces/UseFunctionsConstants";
 |   analyzer[] = "Php/ClassConstWithArray";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
@@ -3715,6 +3738,7 @@ __________________
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Functions/GeneratorCannotReturn";
 |   analyzer[] = "Functions/MultipleSameArguments";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/DirectCallToClone";
@@ -3781,6 +3805,7 @@ __________________
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Extensions/Extereg";
 |   analyzer[] = "Functions/funcGetArgModified";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/EmptyList";
 |   analyzer[] = "Php/FlexibleHeredoc";
@@ -3839,6 +3864,7 @@ __________________
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Extensions/Extmcrypt";
 |   analyzer[] = "Php/BetterRand";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseTrailingComma";
@@ -3879,6 +3905,7 @@ __________________
 | [CompatibilityPHP72]
 |   analyzer[] = "Constants/UndefinedConstants";
 |   analyzer[] = "Php/AvoidSetErrorHandlerContextArg";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/HashAlgos53";
@@ -3916,6 +3943,7 @@ __________________
 | [CompatibilityPHP73]
 |   analyzer[] = "Constants/CaseInsensitiveConstants";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
+|   analyzer[] = "Php/CoalesceEqual";
 |   analyzer[] = "Php/CompactInexistant";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/IntegerSeparatorUsage";
@@ -4200,6 +4228,7 @@ _________
 |   analyzer[] = "Arrays/WeirdIndex";
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Functions/ParameterHiding";
+|   analyzer[] = "Functions/SemanticTyping";
 |   analyzer[] = "Functions/WrongTypehintedName";
 |   analyzer[] = "Php/ClassFunctionConfusion";
 |   analyzer[] = "Structures/PropertyVariableConfusion";
@@ -4237,7 +4266,6 @@ ___________
 |   analyzer[] = "Functions/CouldBeStaticClosure";
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/CouldReturnVoid";
-|   analyzer[] = "Functions/MultipleIdenticalClosure";
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/TooManyParameters";
@@ -4360,6 +4388,7 @@ __________
 
 | [Typechecks]
 |   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Classes/FossilizedMethod";
 |   analyzer[] = "Functions/BadTypehintRelay";
 |   analyzer[] = "Functions/CouldBeCallable";
 |   analyzer[] = "Functions/CouldTypeWithArray";
@@ -4372,6 +4401,7 @@ __________
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MismatchedDefaultArguments";
 |   analyzer[] = "Functions/MismatchedTypehint";
+|   analyzer[] = "Functions/MissingTypehint";
 |   analyzer[] = "Functions/NoClassAsTypehint";
 |   analyzer[] = "Functions/ShouldBeTypehinted";
 |   analyzer[] = "Functions/WrongTypeWithCall";

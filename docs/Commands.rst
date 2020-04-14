@@ -21,6 +21,7 @@ List of commands :
 * `show`_
 * `update`_
 * `upgrade`_
+* `install`_
 
 anonymize
 ---------
@@ -630,6 +631,35 @@ Command
 ::
 
     exakat upgrade 
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -u        | Yes | Actually upgrades exakat. Without it, it is a dry run.                      |
++-----------+-----+-----------------------------------------------------------------------------+
+| -version  | No  | Select a specific Exakat version and update to it. By default, it upgrades  |
+|           |     | to the latest version, as published on the https://www.exakat.io/ site.     |
+|           |     | Example value : 1.8.8                                                       |
++-----------+-----+-----------------------------------------------------------------------------+
+
+Install
+-------
+
+Install exakat's graph dependency. This command is an integrated installation script, and it is only accessible once the .phar is downloaded locally.
+
+Command
+#######
+::
+
+    mkdir exakat
+    cd exakat
+    
+    // Download exakat.phar, like this, or any other valid means
+    curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
+    exakat.phar upgrade 
 
 Options
 #######

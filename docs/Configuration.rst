@@ -343,6 +343,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + maxDimensions : 3
 
     + Number of valid dimensions in an array.
+:ref:`Fossilized Method <fossilized-method>`
+  + fossilizationThreshold : 6
+
+    + Minimal number of overwriting methods to consider a method difficult to update.
 :ref:`Make Magic Concrete <make-magic-concrete>`
   + magicMemberUsage : 1
 

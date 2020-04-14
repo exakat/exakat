@@ -7,6 +7,7 @@ Summary
 -------
 
 * `Requirements`_
+* `Quick installation with exakat.phar`_
 * `Quick installation with OSX`_
 * `Full installation with Debian/Ubuntu`_
 * `Quick installation with Debian/Ubuntu`_
@@ -25,11 +26,11 @@ Basic requirements :
 * exakat.phar, the main code.
 * Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.4.x is the recommended version, while version 3.3.x are still supported. Gremlin version 3.2.* are unsupported. 
 * Java 8.x. Java 9.x/10.x will be supported later. Java 7.x was used, but is not actively supported.
-* PHP 7.0 or later to run. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
+* PHP 7.4 to run. PHP 7.4 is recommended, PHP 7.1 or later are possible. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 
 Optional requirements : 
 
-* PHP 5.2 to 8.0 for analysis. Those versions only require the ext/tokenizer extension. 
+* PHP 5.2 to 8.0-dev for analysis purposes. Those versions only require the ext/tokenizer extension. 
 * VCS (Version Control Software), such as Git, SVN, bazaar, Mercurial. They all are optional, though git is recommended. 
 * Archives, such as zip, tgz, tbz2 may also be opened with optional helpers.
 
@@ -74,30 +75,52 @@ For each version, MD5 and SHA256 signatures are available. The downloaded MD5 mu
     //gpg: Good signature from "Seguy Damien <damien.seguy@gmail.com>" [ultimate]
 
 
-Quick installation with OSX
----------------------------
+Quick installation with exakat.phar
+-----------------------------------
 
-Paste the following commands in a terminal prompt. It downloads Exakat, and installs tinkerpop version 3.4.3. 
-PHP 7.0 or more recent, curl, homebrew are required.
-
-OSX installation with tinkergraph 3.4.3
+OSX installation with tinkergraph 3.4.4
 ***************************************
 
-This is the installation script for Exakat and tinkergraph 3.4.3. 
+Exakat.phar includes its own installation script, as long as PHP is available. Exakat will then check different pre-requisites, and proceed to install some of the last elements.
+
+Exakat checks for Java and Zip installations. Then, it downloads tinkergraph and the Neo4j plugin from exakat.io and runs the `doctor` command.
+
+The script is based on the one displayed on the next section.
+
+You can use the `install` command this way : 
 
 ::
 
     mkdir exakat
     cd exakat
     curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.4.3 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
+    php exakat.phar install 
+
+
+Quick installation with OSX
+---------------------------
+
+Paste the following commands in a terminal prompt. It downloads Exakat, and installs tinkerpop version 3.4.4. 
+PHP 7.0 or more recent, curl, homebrew are required.
+
+OSX installation with tinkergraph 3.4.4
+***************************************
+
+This is the installation script for Exakat and tinkergraph 3.4.4. 
+
+::
+
+    mkdir exakat
+    cd exakat
+    curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
+    curl -o apache-tinkerpop-gremlin-server-3.4.4-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.4-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.4.4-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.4.4 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.4.4-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.4.3
+    ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.4.4
     cd ..
     
     php exakat.phar doctor
@@ -150,10 +173,10 @@ The following commands are an optional pre-requisite to the Quick installation g
 Quick installation with Debian/Ubuntu
 -------------------------------------
 
-Debian/Ubuntu installation with Tinkergraph 3.4.3
+Debian/Ubuntu installation with Tinkergraph 3.4.4
 *************************************************
 
-Paste the following commands in a terminal prompt. It installs Exakat most recent version with Tinkergraph 3.4.3. 
+Paste the following commands in a terminal prompt. It installs Exakat most recent version with Tinkergraph 3.4.4. 
 PHP 7.3 (7.0 or more recent), wget and unzip are expected.
 
 ::
@@ -161,14 +184,14 @@ PHP 7.3 (7.0 or more recent), wget and unzip are expected.
     mkdir exakat
     cd exakat
     wget -O exakat.phar https://www.exakat.io/versions/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.4.3-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.3-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.4.3 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.4.3-bin.zip 
+    wget -O apache-tinkerpop-gremlin-server-3.4.4-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.4-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.4.4-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.4.4 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.4.4-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.4.3
+    ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.4.4
     cd ..
 
     php exakat.phar doctor

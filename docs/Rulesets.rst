@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 25 Nov 2019 06:13:41 +0000
-.. comment: Generation hash : ed0328f4d65d6c0f8c899ec4c66e3391c5b10196
+.. comment: Generation date : Tue, 14 Apr 2020 14:11:12 +0000
+.. comment: Generation hash : 115fe3f5ffca63e5e32d3b6d0b439d9045491cd0
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 386 analysis
+Total : 385 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -159,7 +159,6 @@ Total : 386 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
-* :ref:`Could Use Trait <could-use-trait>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
@@ -207,7 +206,6 @@ Total : 386 analysis
 * :ref:`Htmlentities Calls <htmlentities-calls>`
 * :ref:`Identical Conditions <identical-conditions>`
 * :ref:`Identical Consecutive Expression <identical-consecutive-expression>`
-* :ref:`Identical Methods <identical-methods>`
 * :ref:`Identical On Both Sides <identical-on-both-sides>`
 * :ref:`If With Same Conditions <if-with-same-conditions>`
 * :ref:`Iffectations <iffectations>`
@@ -304,6 +302,7 @@ Total : 386 analysis
 * :ref:`Non Nullable Getters <non-nullable-getters>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
+* :ref:`Not Equal Is Not !== <not-equal-is-not-!==>`
 * :ref:`Not Not <not-not>`
 * :ref:`Null Or Boolean Arrays <null-or-boolean-arrays>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
@@ -507,7 +506,7 @@ Total : 38 analysis
 * :ref:`Exceeding Typehint <exceeding-typehint>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
-* :ref:`Identical Methods <identical-methods>`
+* :ref:`Fossilized Method <fossilized-method>`
 * :ref:`Insufficient Property Typehint <insufficient-property-typehint>`
 * :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Memoize MagicCall <memoize-magiccall>`
@@ -572,7 +571,7 @@ CompatibilityPHP53
 
 This ruleset centralizes all analysis for the migration from PHP 5.2 to 5.3.
 
-Total : 78 analysis
+Total : 79 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -582,6 +581,7 @@ Total : 78 analysis
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Const With Array <const-with-array>`
@@ -660,7 +660,7 @@ CompatibilityPHP54
 
 This ruleset centralizes all analysis for the migration from PHP 5.3 to 5.4.
 
-Total : 74 analysis
+Total : 75 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -669,6 +669,7 @@ Total : 74 analysis
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Const With Array <const-with-array>`
@@ -744,12 +745,13 @@ CompatibilityPHP55
 
 This ruleset centralizes all analysis for the migration from PHP 5.4 to 5.5.
 
-Total : 66 analysis
+Total : 67 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Const With Array <const-with-array>`
@@ -820,12 +822,13 @@ CompatibilityPHP56
 
 This ruleset centralizes all analysis for the migration from PHP 5.5 to 5.6.
 
-Total : 55 analysis
+Total : 56 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
@@ -885,11 +888,12 @@ CompatibilityPHP70
 
 This ruleset centralizes all analysis for the migration from PHP 5.6 to 7.0.
 
-Total : 46 analysis
+Total : 47 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
@@ -941,11 +945,12 @@ CompatibilityPHP71
 
 This ruleset centralizes all analysis for the migration from PHP 7.0 to 7.1.
 
-Total : 32 analysis
+Total : 33 analysis
 
 * :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
@@ -983,10 +988,11 @@ CompatibilityPHP72
 
 This ruleset centralizes all analysis for the migration from PHP 7.1 to 7.2.
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
@@ -1017,10 +1023,11 @@ CompatibilityPHP73
 
 This ruleset centralizes all analysis for the migration from PHP 7.2 to 7.3.
 
-Total : 13 analysis
+Total : 14 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
+* :ref:`Coalesce Equal <coalesce-equal>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
@@ -1276,13 +1283,14 @@ Semantics
 
 This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
 
-Total : 9 analysis
+Total : 10 analysis
 
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Duplicate Literal <duplicate-literal>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`Parameter Hiding <parameter-hiding>`
 * :ref:`Property Variable Confusion <property-variable-confusion>`
+* :ref:`Semantic Typing <semantic-typing>`
 * :ref:`Similar Integers <similar-integers>`
 * :ref:`Variables With One Letter Names <variables-with-one-letter-names>`
 * :ref:`Weird Array Index <weird-array-index>`
@@ -1295,7 +1303,7 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 86 analysis
+Total : 85 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1330,7 +1338,6 @@ Total : 86 analysis
 * :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
-* :ref:`Multiple Identical Closure <multiple-identical-closure>`
 * :ref:`Multiple Unset() <multiple-unset()>`
 * :ref:`Multiple Usage Of Same Trait <multiple-usage-of-same-trait>`
 * :ref:`Named Regex <named-regex>`
@@ -1429,7 +1436,7 @@ Typechecks
 
 This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint, are reported. 
 
-Total : 18 analysis
+Total : 20 analysis
 
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
@@ -1439,12 +1446,14 @@ Total : 18 analysis
 * :ref:`Could Type With Int <could-type-with-int>`
 * :ref:`Could Type With String <could-type-with-string>`
 * :ref:`Could Typehint <could-typehint>`
+* :ref:`Fossilized Method <fossilized-method>`
 * :ref:`Functions/BadTypehintRelay <functions/badtypehintrelay>`
 * :ref:`Functions/CouldTypeWithIterable <functions/couldtypewithiterable>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Typehint <mismatched-typehint>`
+* :ref:`Missing Typehint <missing-typehint>`
 * :ref:`No Class As Typehint <no-class-as-typehint>`
 * :ref:`Not A Scalar Type <not-a-scalar-type>`
 * :ref:`Useless Interfaces <useless-interfaces>`
