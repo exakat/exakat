@@ -97,6 +97,7 @@ class Query {
                     $this->propertyIs('analyzer', $args[0], Analyzer::CASE_SENSITIVE);
                     $this->outIs('ANALYZED');
                     $this->_as('first');
+                    $this->raw('sack{m,v -> ++m["processed"]; m;}', array(), array());
 
                     $this->raw('groupCount("processed").by(count())', array(), array());
 

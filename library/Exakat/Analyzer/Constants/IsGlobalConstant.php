@@ -48,7 +48,9 @@ class IsGlobalConstant extends Analyzer {
             return ;
         }
         $constants = array_merge(...$c);
-        $constantsFullNs = makeFullNsPath($constants, true);
+        $constants = array_unique($constants);
+        $constants = array_values($constants);
+        $constantsFullNs = makeFullNsPath($constants, \FNP_CONSTANT);
 
         $this->analyzerIs('Constants/ConstantUsage')
              ->tokenIs('T_STRING')
@@ -56,7 +58,7 @@ class IsGlobalConstant extends Analyzer {
              ->hasNoIn('AS')
 
              // Exclude PHP constants
-             ->fullnspathIsNot($constantsFullNs)
+             ->fullnspathIsNot($constantsFullNs, self::CASE_SENSITIVE)
 
              // Check that the final fullnspath is actually \something (no multiple \)
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$');

@@ -29,7 +29,6 @@ class IsExtConstant extends Analyzer {
 
     public function dependsOn(): array {
         return array('Constants/ConstantUsage',
-                     'Constants/IsGlobalConstant',
                     );
     }
 
@@ -51,18 +50,22 @@ class IsExtConstant extends Analyzer {
             return;
         }
         $constants = array_merge(...$constants);
-        $constantsFullNs = makeFullNsPath($constants, true);
+        $constants = array_unique($constants);
+        $constants = array_values($constants);
+        $constantsFullNs = makeFullNsPath($constants, \FNP_CONSTANT);
 
         // based on fullnspath
         $this->analyzerIs('Constants/ConstantUsage')
              ->atomIsNot(array('Boolean', 'Null', 'String'))
-             ->fullnspathIs($constantsFullNs);
+             ->fullnspathIs($constantsFullNs, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
         $this->analyzerIs('Constants/ConstantUsage')
-             ->analyzerIs('Constants/IsGlobalConstant')
-             ->fullnspathIs($constantsFullNs);
+             ->atomIs('Identifier')
+             ->atomIsNot(array('Boolean', 'Null', 'String'))
+             ->raw('filter{ fnp = it.get().value("fullnspath"); d = fnp.tokenize("\\\\").last(); ***.contains("\\\\" + d);}', $constantsFullNs);
         $this->prepareQuery();
+
     }
 }
 

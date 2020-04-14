@@ -64,7 +64,7 @@ class SpotPHPNativeConstants extends LoadFinal {
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
               ->fullnspathIs($used, Analyzer::CASE_SENSITIVE)
-                ->returnCount();
+              ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         display($result->toInt() . ' SpotPHPNativeConstants');

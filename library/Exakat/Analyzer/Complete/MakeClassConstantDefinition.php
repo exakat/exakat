@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -29,26 +29,27 @@ class MakeClassConstantDefinition extends Complete {
     }
 
     public function analyze() {
+        // X::Constante -> class X { const Constante}
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->hasNoIn('DEFINITION')
-              ->outIs('CONSTANT')
-              ->savePropertyAs('code', 'name')
-              ->back('first')
-              ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), self::WITHOUT_CONSTANTS)
-              ->inIs('DEFINITION')
-              ->atomIs(array('Class', 'Classanonymous', 'Interface'), self::WITHOUT_CONSTANTS)
-              ->goToAllParents(self::INCLUDE_SELF)
-              ->outIs('CONST')
-              ->atomIs('Const', self::WITHOUT_CONSTANTS)
-              ->outIs('CONST')
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first');
+             ->hasNoIn('DEFINITION')
+             ->outIs('CONSTANT')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->outIs('CLASS')
+             ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static'), self::WITHOUT_CONSTANTS)
+             ->inIs('DEFINITION')
+             ->atomIs(array('Class', 'Classanonymous', 'Interface'), self::WITHOUT_CONSTANTS)
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('CONST')
+             ->atomIs('Const', self::WITHOUT_CONSTANTS)
+             ->outIs('CONST')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->inIs('NAME')
+             ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
-        // Create link between Class constant and definition
+        // static::Constante -> class { const Constante}
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
@@ -69,6 +70,7 @@ class MakeClassConstantDefinition extends Complete {
               ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
+        // X::Constante -> class X { const Constante} non-private
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
@@ -90,6 +92,7 @@ class MakeClassConstantDefinition extends Complete {
               ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
+        // parent::Constante -> class { const Constante}
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
