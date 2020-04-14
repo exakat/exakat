@@ -36,6 +36,7 @@ class UndefinedConstants extends Analyzer {
     public function analyze() {
         // echo UNDEFINED_CONSTANT
         $this->analyzerIs('Constants/ConstantUsage')
+             ->atomIsNot(array('Boolean', 'Null'))
              ->hasNoIn(array('AS', 'TYPEHINT', 'RETURNTYPE', 'GOTOLABEL', 'GOTO'))
              ->analyzerIsNot(array('Constants/CustomConstantUsage',
                                    'Constants/IsExtConstant',
