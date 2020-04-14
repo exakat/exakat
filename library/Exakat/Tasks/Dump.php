@@ -639,7 +639,7 @@ GREMLIN;
                 }
             }
             $total = $this->storeToDumpArray('cit_implements', $toDump);
-            display("$total uses \n");
+            display("$total uses\n");
         }
 
         // Methods
