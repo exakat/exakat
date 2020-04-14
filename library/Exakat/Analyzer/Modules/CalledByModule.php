@@ -149,7 +149,7 @@ class CalledByModule extends Analyzer {
             return;
         }
 
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->fullnspathIs(array_keys($constants))
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('CONST')
@@ -233,7 +233,7 @@ GREMLIN
         }
 
         // Check that the class extends one of the mentionned called class
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
              ->fullnspathIs(array_keys($methods))
@@ -248,7 +248,7 @@ GREMLIN
         $this->prepareQuery();
 
         // Check that the class implements one of the mentionned called interface
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->goToAllImplements(self::INCLUDE_SELF)
              ->outIs('IMPLEMENTS')
              ->fullnspathIs(array_keys($methods))

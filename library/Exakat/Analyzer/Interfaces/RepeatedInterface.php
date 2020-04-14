@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class RepeatedInterface extends Analyzer {
     public function analyze() {
         // class a implements i, i, i
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->countBy('IMPLEMENTS', 'fullnspath', 'interfaces')
              ->raw('filter{ interfaces.findAll{ it.value > 1}.size() > 0; }')
              ->back('first');

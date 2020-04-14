@@ -40,7 +40,7 @@ class ThrownExceptions extends Analyzer {
              ->outIsIE(array('RIGHT', 'CODE'))
              ->outIs('NEW')
              ->inIs('DEFINITION')
-             ->atomIs(self::$CLASSES_ALL);
+             ->atomIs(self::CLASSES_ALL);
         $this->prepareQuery();
 
         // $x = new X;
@@ -52,7 +52,7 @@ class ThrownExceptions extends Analyzer {
              ->atomIs('New')
              ->outIs('NEW')
              ->inIs('DEFINITION')
-             ->atomIs(self::$CLASSES_ALL)
+             ->atomIs(self::CLASSES_ALL)
              ->analyzerIs('Exceptions/DefinedExceptions');
         $this->prepareQuery();
     }

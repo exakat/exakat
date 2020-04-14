@@ -27,17 +27,46 @@ use Exakat\Analyzer\Analyzer;
 
 class GoToAllTraits extends DSL {
     public function run(): Command {
-        list($self) = func_get_args();
+        if (func_num_args() === 1) {
+            list($self) = func_get_args();
+        } else {
+            $self = Analyzer::INCLUDE_SELF;
+        }
+        
+        $MAX_LOOPING = self::$MAX_LOOPING;
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").hasLabel("Trait").filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} ).emit( ).times(' . self::$MAX_LOOPING . ').hasLabel("Trait")');
+            $command = new Command(<<<GREMLIN
+ as("gotoalltraits")
+.repeat( __.out("USE")
+          .hasLabel("Usetrait")
+          .out("USE")
+          .in("DEFINITION")
+          .hasLabel("Trait")
+          .simplePath().from("gotoalltraits")
+      ).emit( )
+      .times($MAX_LOOPING)
+      .hasLabel("Trait")
+GREMLIN
+);
         } elseif ($self === Analyzer::INCLUDE_SELF) {
-            $command = new Command('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION").hasLabel("Trait").filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack {m,v -> m["m"].add(v.value("fullnspath")); m} ).emit( ).times(' . self::$MAX_LOOPING . ').hasLabel("Trait")');
+            $command = new Command(<<<GREMLIN
+ as("gotoalltraits")
+.repeat( __.out("USE")
+          .hasLabel("Usetrait")
+          .out("USE")
+          .in("DEFINITION")
+          .hasLabel("Trait")
+          .simplePath().from("gotoalltraits")
+        ).emit( )
+        .times($MAX_LOOPING)
+        .hasLabel("Trait")
+GREMLIN
+);
         } else {
             assert(false, 'No such configuration for ' . self::class . ' : use EXCLUDE_SELF or INCLUDE_SELF');
         }
 
-        $command->setSack(Command::SACK_ARRAY);
         return $command;
     }
 }

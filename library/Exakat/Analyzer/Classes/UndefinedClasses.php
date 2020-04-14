@@ -179,7 +179,7 @@ class UndefinedClasses extends Analyzer {
         $this->prepareQuery();
 
         // in a property typehint class x (private someClass $c)
-        $this->atomIs(self::$CIT)
+        $this->atomIs(self::CIT)
              ->outIs('PPP')
              ->outIs('TYPEHINT')
              ->analyzerIsNot($omittedAll)
@@ -191,7 +191,7 @@ class UndefinedClasses extends Analyzer {
         $this->prepareQuery();
 
         // in a property typehint class x (private parent $c)
-        $this->atomIs(self::$CIT)
+        $this->atomIs(self::CIT)
              ->outIs('PPP')
              ->outIs('TYPEHINT')
              ->atomIs('Parent')
@@ -202,7 +202,7 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs(self::$CIT)
+        $this->atomIs(self::CIT)
              ->outIs('PPP')
              ->outIs('TYPEHINT')
              ->atomIs('Parent')

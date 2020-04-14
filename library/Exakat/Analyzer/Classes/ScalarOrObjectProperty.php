@@ -34,7 +34,7 @@ class ScalarOrObjectProperty extends Analyzer {
     public function analyze() {
         // todo : extend to array  : warning : string-array syntax
         // Property defined as literal, used as object
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
@@ -49,7 +49,7 @@ class ScalarOrObjectProperty extends Analyzer {
         $this->prepareQuery();
 
         // Property defined as object, assigned as literal
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
              ->as('results')
@@ -67,7 +67,7 @@ class ScalarOrObjectProperty extends Analyzer {
         $this->prepareQuery();
 
         // Property defined as object, assigned as literal (methodcall version)
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
              ->as('results')

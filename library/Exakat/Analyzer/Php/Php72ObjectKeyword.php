@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Php72ObjectKeyword extends Analyzer {
     public function analyze() {
         // class object {}
-        $this->atomIs(self::$CIT)
+        $this->atomIs(self::CIT)
              ->outIs('NAME')
              ->codeIs('object')
              ->back('first');

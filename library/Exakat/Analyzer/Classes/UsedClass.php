@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UsedClass extends Analyzer {
     public function analyze() {
 
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
@@ -43,7 +43,7 @@ class UsedClass extends Analyzer {
 
         // class X; autoload('X::x')
         // link is build with the method, not the class
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
               ->filter(
                 $this->side()
                      ->outIs('METHOD')

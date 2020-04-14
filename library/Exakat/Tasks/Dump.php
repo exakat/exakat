@@ -1378,7 +1378,7 @@ GREMLIN
 
         // Finding typehint
         $query = $this->newQuery('Typehint');
-        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(Analyzer::FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('ARGUMENT')
               ->outIs('TYPEHINT')
               ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
@@ -1399,7 +1399,7 @@ GREMLIN
         $count1 = $this->storeToDump('filesDependencies', $query);
 
         $query = $this->newQuery('Return Typehint');
-        $query->atomIs(Analyzer::$FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(Analyzer::FUNCTIONS_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
               ->inIs('DEFINITION')
@@ -1657,7 +1657,7 @@ GREMLIN
               ->savePropertyAs('fullcode', 'called_name')
 
               ->back('first')
-              ->goToInstruction(Analyzer::$CIT)
+              ->goToInstruction(Analyzer::CIT)
 
               ->savePropertyAs('fullnspath', 'calling')
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
@@ -1691,7 +1691,7 @@ GREMLIN
               ->savePropertyAs('fullcode', 'called_name')
               ->back('first')
 
-              ->goToInstruction(Analyzer::$CIT)
+              ->goToInstruction(Analyzer::CIT)
 
               ->savePropertyAs('fullnspath', 'calling')
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
@@ -1783,7 +1783,7 @@ GREMLIN
         // Clone
         $query = $this->newQuery('Clone');
         $query->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
-              ->goToInstruction(Analyzer::$CIT)
+              ->goToInstruction(Analyzer::CIT)
               ->savePropertyAs('fullnspath', 'calling')
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')
@@ -1819,7 +1819,7 @@ GREMLIN
         $query->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->raw('sideEffect{ type = it.get().label().toLowerCase(); }', array(), array())
 
-              ->goToInstruction(Analyzer::$CIT)
+              ->goToInstruction(Analyzer::CIT)
               ->savePropertyAs('fullnspath', 'calling')
               ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
               ->outIs('NAME')

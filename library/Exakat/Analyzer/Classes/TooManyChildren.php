@@ -36,7 +36,7 @@ class TooManyChildren extends Analyzer {
                 $this->side()
                      ->outIs('DEFINITION')
                      ->inIs('EXTENDS')
-                     ->atomIs(self::$CLASSES_ALL)
+                     ->atomIs(self::CLASSES_ALL)
                      ->count()
                      ->raw('is(gte(' . $this->childrenClassCount . '))')
             );

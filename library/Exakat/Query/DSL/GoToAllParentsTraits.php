@@ -27,7 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class GoToAllParentsTraits extends DSL {
     public function run(): Command {
-        list($self) = func_get_args();
+        if (func_num_args() === 1) {
+            list($self) = func_get_args();
+        } else {
+            $self = Analyzer::EXCLUDE_SELF;
+        }
 
         $MAX_LOOPING = self::$MAX_LOOPING;
         if ($self === Analyzer::EXCLUDE_SELF) {
@@ -43,7 +47,6 @@ as("gotoallparentstraits").repeat(
 .hasLabel("Class", "Classanonymous", "Trait")
 GREMLIN
 );
-            $command->setSack(Command::SACK_ARRAY);
         } else {
             $command = new Command(<<<GREMLIN
 as("gotoallparentstraits").emit( ).repeat( 
@@ -56,7 +59,6 @@ as("gotoallparentstraits").emit( ).repeat(
 .hasLabel("Class", "Classanonymous", "Trait")
 GREMLIN
 );
-            $command->setSack(Command::SACK_ARRAY);
         }
 
         return $command;

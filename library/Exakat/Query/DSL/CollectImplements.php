@@ -30,22 +30,25 @@ class CollectImplements extends DSL {
 
         $this->assertVariable($variable, self::VARIABLE_WRITE);
 
-        $command = new Command('where( 
-__.sideEffect{ ' . $variable . ' = []; }
-  .emit( )
-  .repeat( __.out("EXTENDS", "IMPLEMENTS")
-  .in("DEFINITION")
-  .hasLabel("Class", "Classanonymous", "Interface")
-  .filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }
-  .sack {m,v -> m["m"].add(v.value("fullnspath")); m} )
-  .times(' . self::$MAX_LOOPING . ')
-  .hasLabel("Class", "Classanonymous", "Interface")
-  .out("EXTENDS", "IMPLEMENTS")
-  .sideEffect{ ' . $variable . '.add(it.get().value("fullnspath")) ; }
-  .fold() 
+        $MAX_LOOPING = self::$MAX_LOOPING;
+        $command = new Command(<<<GREMLIN
+where( 
+    __.sideEffect{ {$variable} = []; }
+      .as("collectimplements")
+      .emit( )
+      .repeat( __.out("EXTENDS", "IMPLEMENTS")
+                 .in("DEFINITION")
+                 .hasLabel("Class", "Classanonymous", "Interface")
+                 .simplePath().from("collectimplements")
+              )
+              .times($MAX_LOOPING)
+              .hasLabel("Class", "Classanonymous", "Interface")
+              .out("EXTENDS", "IMPLEMENTS")
+              .sideEffect{ {$variable}.add(it.get().value("fullnspath")) ; }
+              .fold() 
 )
-');
-        $command->setSack(Command::SACK_ARRAY);
+GREMLIN
+);
         return $command;
     }
 }

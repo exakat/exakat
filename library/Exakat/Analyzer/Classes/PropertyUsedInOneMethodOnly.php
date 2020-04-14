@@ -31,7 +31,7 @@ class PropertyUsedInOneMethodOnly extends Analyzer {
     }
 
     public function analyze() {
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')

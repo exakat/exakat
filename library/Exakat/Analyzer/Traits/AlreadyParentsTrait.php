@@ -28,7 +28,7 @@ class AlreadyParentsTrait extends Analyzer {
     public function analyze() {
         // class a { use t; }; class b extends a { use t;}
         // trait a { use t; }; class b extends a { use t;}
-        $this->atomIs(self::$CIT) // Interface is too many, but won't get use expression
+        $this->atomIs(self::CIT) // Interface is too many, but won't get use expression
              ->outIs('USE')
              ->outIs('USE')
              ->savePropertyAs('fullnspath', 'i')

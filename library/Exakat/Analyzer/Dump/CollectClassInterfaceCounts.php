@@ -28,7 +28,7 @@ class CollectClassInterfaceCounts extends AnalyzerHashHashResults {
 
     public function analyze() {
         //class x implements i,j,k {}
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->raw('groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m")');
 
         $this->prepareQuery();

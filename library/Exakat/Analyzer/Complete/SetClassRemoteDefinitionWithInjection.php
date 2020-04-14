@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Complete;
 
 class SetClassRemoteDefinitionWithInjection extends Complete {
     public function analyze() {
-        $this->atomIs(self::$CLASSES_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
               ->inIs('TYPEHINT')
               ->outIs('NAME')

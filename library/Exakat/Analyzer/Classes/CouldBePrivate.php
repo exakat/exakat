@@ -87,6 +87,7 @@ class CouldBePrivate extends Analyzer {
              ->as('classe')
              ->not(
                 $this->side()
+                     ->atomIs(self::CLASSES_ALL)
                      ->goToAllParentsTraits(self::INCLUDE_SELF)
                      ->samePropertyAs('fullnspath', 'fnp')
              )

@@ -23,11 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
+
 class HasFunction extends DSL {
     public function run(): Command {
         $return = $this->dslfactory->factory('hasInstruction');
 
-        return $return->run(array('Function', 'Closure', 'Method', 'Magicmethod'));
+        return $return->run(Analyzer::FUNCTIONS_ALL);
     }
 }
 ?>

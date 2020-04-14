@@ -27,15 +27,37 @@ use Exakat\Analyzer\Analyzer;
 
 class GoToAllChildren extends DSL {
     public function run() {
-        list($self) = func_get_args();
+        if (func_num_args() === 1) {
+            list($self) = func_get_args();
+        }  else {
+            $self = Analyzer::INCLUDE_SELF;
+        }
+        
+        $MAX_LOOPING = self::$MAX_LOOPING;
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS").filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack{m,v -> m["m"].add(v.value("fullnspath")); m} ).emit( ).times(' . self::$MAX_LOOPING . ')');
-            $command->setSack(Command::SACK_ARRAY);
+            $command = new Command(<<<GREMLIN
+ as("gotoallchildren")
+.repeat( __.out("DEFINITION")
+           .in("EXTENDS", "IMPLEMENTS")
+           .simplePath().from("gotoallchildren")
+          )
+          .emit( )
+          .times($MAX_LOOPING)
+GREMLIN
+);
             return $command;
         } else {
-            $command = new Command('emit().repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS").filter{s = it.sack(); !s["m"].contains(it.get().value("fullnspath")) }.sack{m,v -> m["m"].add(v.value("fullnspath")); m} ).times(' . self::$MAX_LOOPING . ')');
-            $command->setSack(Command::SACK_ARRAY);
+            $command = new Command(<<<GREMLIN
+ as("gotoallchildren")
+.emit( )
+.repeat( __.out("DEFINITION")
+           .in("EXTENDS", "IMPLEMENTS")
+           .simplePath().from("gotoallchildren")
+          )
+          .times($MAX_LOOPING)
+GREMLIN
+);
             return $command;
         }
     }

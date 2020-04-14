@@ -28,7 +28,7 @@ class SetAside extends Analyzer {
     public function analyze() {
         // $b = $a; $a = 3; $a = $b;
         // local variable
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
              ->savePropertyAs('code', 'name')
@@ -58,7 +58,7 @@ class SetAside extends Analyzer {
 
         // $b = $this->a; $this->a = 3; $this->a = $b;
         // property
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')

@@ -32,7 +32,7 @@ class UsedOnceProperty extends Analyzer {
 
     public function analyze() {
         // class x { private $p = 1; function foo() {$this->p = 1;} }
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->isNot('visibility', 'public')
              ->outIs('PPP')

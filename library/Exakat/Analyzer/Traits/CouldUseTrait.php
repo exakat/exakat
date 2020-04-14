@@ -73,7 +73,7 @@ class CouldUseTrait extends Analyzer {
 */
         $methodNames = array_keys($methodNames);
 
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->filter(
                 $this->side()
                      ->outIs(array('METHOD', 'MAGICMETHOD'))

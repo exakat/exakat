@@ -29,7 +29,7 @@ class PropertyUsedInternally extends Analyzer {
 
     public function analyze() {
         // property + $this->property
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->isNot('static', true)
              ->outIs('PPP')
@@ -45,7 +45,7 @@ class PropertyUsedInternally extends Analyzer {
         //////////////////////////////////////////////////////////////////
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('PPP')
              ->is('static', true)

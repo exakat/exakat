@@ -33,7 +33,7 @@ class MakeDefault extends Analyzer {
 
     public function analyze() {
         // class x { private $y; }
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->outIs('NAME')

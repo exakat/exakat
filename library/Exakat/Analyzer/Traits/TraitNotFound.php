@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TraitNotFound extends Analyzer {
     public function analyze() {
         // class x  { use a, b { c::d insteadof e}}
-        $this->atomIs(self::$CIT)
+        $this->atomIs(self::CIT)
              ->collectTraits('traits')
              ->outIs('USE')
              ->outIs('BLOCK')

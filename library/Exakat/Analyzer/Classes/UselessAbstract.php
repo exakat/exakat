@@ -58,7 +58,7 @@ class UselessAbstract extends Analyzer {
                 $this->side()
                      ->filter(
                         $this->side()
-                             ->outIs(self::$CLASS_ELEMENTS)
+                             ->outIs(self::CLASS_ELEMENTS)
                              ->atomIsNot('Virtualproperty')
                      )
              );
@@ -77,7 +77,7 @@ class UselessAbstract extends Analyzer {
                 $this->side()
                      ->filter(
                         $this->side()
-                             ->outIs(self::$CLASS_ELEMENTS)
+                             ->outIs(self::CLASS_ELEMENTS)
                              ->atomIsNot('Virtualproperty')
                      )
              );

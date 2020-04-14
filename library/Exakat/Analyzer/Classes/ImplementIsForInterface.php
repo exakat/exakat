@@ -46,21 +46,21 @@ class ImplementIsForInterface extends Analyzer {
         $notValid = array_diff($classesTraits, $interfaces);
 
         // class a with implements
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->fullnspathIs($notValid)
              ->back('first');
         $this->prepareQuery();
 
         // class a implements a PHP class
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->analyzerIs('Classes/IsExtClass')
              ->back('first');
         $this->prepareQuery();
 
         // class a implements a PHP class
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->analyzerIs('Composer/IsComposerClass')
              ->back('first');

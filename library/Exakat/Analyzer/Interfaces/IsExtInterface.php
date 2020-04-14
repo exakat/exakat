@@ -55,13 +55,13 @@ class IsExtInterface extends Analyzer {
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->fullnspathIs($interfaces);
         $this->prepareQuery();

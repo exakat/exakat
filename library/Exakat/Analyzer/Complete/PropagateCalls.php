@@ -51,7 +51,6 @@ class PropagateCalls extends Complete {
 
     private function processLocalDefinition(): int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -68,19 +67,19 @@ class PropagateCalls extends Complete {
               // Get only the first method found. Possibly OK for class, but may fail later
               ->filter(
                   $this->side()
+                       ->atomIs('Class', self::WITHOUT_CONSTANTS)
                        ->goToAllParentsTraits(self::INCLUDE_SELF)
                        ->outIs('METHOD')
                        ->outIs('NAME')
                        ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
                        ->inIs('NAME')
                        ->raw('range(0, 1)')
-                       ->addETo('DEFINITION', 'method')
+                       ->addETo('DEFINITION', 'first')
                 )
               ->count();
        $c1 = $this->rawQuery()->toInt();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -98,7 +97,7 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
+              ->addETo('DEFINITION', 'first')
               ->count();
        $c2 = $this->rawQuery()->toInt();
 
@@ -222,7 +221,6 @@ class PropagateCalls extends Complete {
 
         // (new x)->foo()
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -246,13 +244,12 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c1 = $this->rawQuery()->toInt();
 
         // (new x)::foo()
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -275,13 +272,12 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c2 = $this->rawQuery()->toInt();
 
         // (new x)::foo()
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -305,13 +301,12 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c3 = $this->rawQuery()->toInt();
 
         // (new x)::foo()
         $this->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
-              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -334,13 +329,12 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c4 = $this->rawQuery()->toInt();
 
         // (new x)::FOO
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->as('constant')
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -365,7 +359,7 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'constant')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c5 = $this->rawQuery()->toInt();
 
@@ -374,7 +368,6 @@ class PropagateCalls extends Complete {
 
     private function propagateGlobals(): int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -399,12 +392,11 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c1 = $this->rawQuery()->toInt();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -428,7 +420,7 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c2 = $this->rawQuery()->toInt();
 
@@ -438,7 +430,6 @@ class PropagateCalls extends Complete {
 
     private function propagateTypehint(): int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -464,12 +455,11 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c1 = $this->rawQuery()->toInt();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
-              ->as('member')
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -495,12 +485,11 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'member')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c2 = $this->rawQuery()->toInt();
 
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->as('constante')
               ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->atomIs('Name', self::WITHOUT_CONSTANTS)
@@ -527,7 +516,7 @@ class PropagateCalls extends Complete {
               ->outIs('CONST')
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'constante')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $c3 = $this->rawQuery()->toInt();
 
@@ -568,7 +557,7 @@ class PropagateCalls extends Complete {
 
     private function processFluentInterfaces(): int {
         $this->atomIs(array('Methodcall', 'Staticmethodcall'), self::WITHOUT_CONSTANTS)
-              ->as('method')
+              ->as('first')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -588,7 +577,7 @@ class PropagateCalls extends Complete {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
 
-              ->addETo('DEFINITION', 'method')
+              ->addETo('DEFINITION', 'first')
               ->count();
         $res = $this->rawQuery();
 

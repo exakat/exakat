@@ -28,7 +28,7 @@ class CouldBeFinal extends Analyzer {
     // class x {}
     // no child extends x
     public function analyze() {
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->isNot('final', true)
              ->isNot('abstract', true) // though, this is another problem
              ->not(

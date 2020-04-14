@@ -134,18 +134,20 @@ abstract class Analyzer {
     public static $LOOPS_ALL        = array('For' , 'Foreach', 'While', 'Dowhile');
 
     public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    public static $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction');
+    public const  FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction');
+    public static $FUNCTIONS_ALL   = self::FUNCTIONS_ALL;
+
     public static $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
     public static $FUNCTIONS        = array('Function', 'Closure', 'Arrowfunction');
     public static $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
 
-    public static $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
-    public static $CLASSES_ALL      = array('Class', 'Classanonymous');
+    public const CIT                = array('Class', 'Classanonymous', 'Interface', 'Trait');
+    public const CLASSES_ALL      = array('Class', 'Classanonymous');
     public const  CLASSES_TRAITS    = array('Class', 'Classanonymous', 'Trait');
     public static $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     public static $STATIC_NAMES     = array('Nsname', 'Identifier');
     public static $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
-    public static $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
+    public const CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
     public static $CLASS_METHODS    = array('METHOD', 'MAGICMETHOD');
 
     public static $FUNCTIONS_CALLS  = array('Functioncall' , 'Newcall', 'Methodcall', 'Staticmethodcall');
@@ -1357,11 +1359,11 @@ GREMLIN;
     }
 
     public function hasNoClass() {
-        return $this->hasNoInstruction(self::$CLASSES_ALL);
+        return $this->hasNoInstruction(self::CLASSES_ALL);
     }
 
     public function hasClass() {
-        $this->hasInstruction(self::$CLASSES_ALL);
+        $this->hasInstruction(self::CLASSES_ALL);
 
         return $this;
     }
@@ -1408,49 +1410,13 @@ GREMLIN;
     }
 
     public function goToClassInterfaceTrait() {
-        $this->goToInstruction(self::$CIT);
+        $this->goToInstruction(self::CIT);
 
         return $this;
     }
 
     public function hasNoClassInterfaceTrait() {
-        return $this->hasNoInstruction(self::$CIT);
-    }
-
-    public function goToAllParentsTraits($self = self::EXCLUDE_SELF) {
-        $this->query->goToAllParentsTraits($self);
-
-        return $this;
-    }
-
-    public function goToAllChildren($self = self::INCLUDE_SELF) {
-        $this->query->goToAllChildren($self);
-
-        return $this;
-    }
-
-    public function goToAllTraits($self = self::INCLUDE_SELF) {
-        $this->query->goToAllTraits($self);
-
-        return $this;
-    }
-
-    public function goToAllImplements($self = self::INCLUDE_SELF) {
-        $this->query->goToAllImplements($self);
-
-        return $this;
-    }
-
-    public function goToTraits($self = self::INCLUDE_SELF) {
-        $this->query->goToTraits($self);
-
-        return $this;
-    }
-
-    public function hasFunction() {
-        $this->query->HasFunction();
-
-        return $this;
+        return $this->hasNoInstruction(self::CIT);
     }
 
     public function hasClassTrait() {

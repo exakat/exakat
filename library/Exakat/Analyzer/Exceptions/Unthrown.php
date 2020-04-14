@@ -43,7 +43,7 @@ class Unthrown extends Analyzer {
             return;
         }
 
-        $this->atomIs(self::$CLASSES_ALL)
+        $this->atomIs(self::CLASSES_ALL)
              ->analyzerIs('Exceptions/DefinedExceptions')
              ->fullnspathIsNot($thrown);
         $this->prepareQuery();

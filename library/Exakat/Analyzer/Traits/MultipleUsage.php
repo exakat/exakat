@@ -36,6 +36,7 @@ class MultipleUsage extends Analyzer {
              ->as('result')
              ->filter(
                 $this->side()
+                     ->atomIs(self::CIT)
                      ->goToAllTraits(self::EXCLUDE_SELF)
                      ->outIs('USE')
                      ->outIs('USE')
