@@ -59,10 +59,6 @@ class Dictionary {
         }
 
         foreach($code as $c) {
-            if (!is_string($c)) {
-                debug_print_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS);
-                var_dump($c);die();
-            }
             $d = $caseClosure($c);
             if (isset($this->dictionary[$d])) {
                 $return[] = $this->dictionary[$d];
