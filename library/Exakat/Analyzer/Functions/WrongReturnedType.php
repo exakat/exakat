@@ -141,6 +141,7 @@ class WrongReturnedType extends Analyzer {
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
              ->outIs('RETURNED')
+             ->hasIn('RETURN')
              ->as('results')
              ->followParAs(FollowParAs::FOLLOW_NONE)
              ->atomIsNot(array('Variable', 'Staticproperty', 'Member'))
@@ -150,6 +151,25 @@ class WrongReturnedType extends Analyzer {
                      ->prepareSide()
              )
              ->checkTypeWithAtom('fqn')
+             ->back('results')
+             ->inIs('RETURN');
+        $this->prepareQuery();
+
+        // Type is not the argument type
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->analyzerIsNot('Functions/IsGenerator')
+             ->outIs('RETURNTYPE')
+             ->atomIs('Scalartypehint')
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->back('first')
+             ->outIs('RETURNED')
+             ->hasIn('RETURN')
+             ->as('results')
+             ->atomIs('Variable')
+             ->inIs('DEFINITION')
+             ->inIs('NAME')
+             ->outIs('TYPEHINT')
+             ->notSamePropertyAs('fullnspath', 'fqn')
              ->back('results')
              ->inIs('RETURN');
         $this->prepareQuery();

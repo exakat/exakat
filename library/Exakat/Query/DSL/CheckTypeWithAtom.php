@@ -45,7 +45,7 @@ filter{
     } else if ($var == "\\\\float") {
         !((it.get().label() in ["Float", "Integer"]) ||
            (it.get().label() == "Cast" &&  it.get().value("token") in ["T_DOUBLE_CAST", "T_INT_CAST"]));
-    } else if ($var == "\\\\boolean") {
+    } else if ($var == "\\\\bool") {
         !((it.get().label() in ["Boolean", "Comparison"]) ||
            (it.get().label() == "Cast" &&  it.get().value("token") == "T_BOOL_CAST"));
     } else if ($var == "\\\\object") {
