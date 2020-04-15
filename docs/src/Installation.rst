@@ -26,7 +26,7 @@ Basic requirements :
 * exakat.phar, the main code.
 * Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.4.x is the recommended version, while version 3.3.x are still supported. Gremlin version 3.2.* are unsupported. 
 * Java 8.x. Java 9.x/10.x will be supported later. Java 7.x was used, but is not actively supported.
-* PHP 7.4 to run. PHP 7.4 is recommended, PHP 7.1 or later are possible. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
+* PHP 7.4 to run. PHP 7.4 is recommended, PHP 7.2 or later are possible. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 
 Optional requirements : 
 
@@ -219,7 +219,7 @@ You need at least one version of PHP to run exakat. This version needs the `curl
 
 Extra PHP-CLI versions allow more linting of the code. They only need to have the `tokenizer <http://www.php.net/tokenizer>`_ extension available.  
 
-Exakat recommends PHP 7.3.4 (or newer version) to run Exakat. We also recommend the installation of PHP versions 5.6, 7.1, 7.2, 7.3, 7.4 and 8.0 (aka php-src master).
+Exakat recommends PHP 7.4.4 (or newer version) to run Exakat. We also recommend the installation of PHP versions 5.6, 7.1, 7.2, 7.3, 7.4 and 8.0 (aka php-src master).
 
 To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (7.4, 7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
 You may also check the dotdeb repository, at `dotdeb instruction <https://www.dotdeb.org/instructions/>`_ or compile PHP yourself. 

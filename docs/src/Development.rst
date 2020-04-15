@@ -290,7 +290,7 @@ Patch level version are never taken into consideration : PHP 7.0.0 or PHP 7.0.30
 * '7.1-' : the analysis only runs until PHP 7.1 version. PHP 7.1 is excluded.
 * '7.2+' : the analysis only runs after PHP 7.2 version. PHP 7.2 is included.
 
-Generally speaking, PHP version are the official middle versions : 5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4. This changes with the publication of PHP versions.
+Generally speaking, PHP version are the official middle versions : 5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0. This changes with the publication of PHP versions.
 
 Analyzer extends
 ################

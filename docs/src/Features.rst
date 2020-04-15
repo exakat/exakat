@@ -7,8 +7,8 @@ Features list
 -------------
 
 * {{ANALYZERS_COUNT}} analyzers
-* Compatible with PHP 5.2 to 7.4dev
-* Migration guide from 5.2 to 7.4 and dev
+* Compatible with PHP 5.2 to 8.0-dev
+* Migration guide from 5.2 to 7.4 and 8.0-dev
 * Modernize your code
 * List bug fixes for your code
 * appinfo(): the list of PHP features
@@ -29,15 +29,15 @@ Some of them track rare occurrences, and some are frequent. Some track careless 
     :alt: {{ANALYZERS_COUNT}} analysis with faceted search
 
 
-Compatible with PHP 5.2 to 7.4-dev
+Compatible with PHP 5.2 to 8.0-dev
 ----------------------------------
 
-The Exakat engine audits code with PHP versions that range from PHP 5.2 to PHP 7.4-dev. 
+The Exakat engine audits code with PHP versions that range from PHP 5.2 to PHP 8.0-dev. 
 
 The Exakat engine itself runs on PHP 7.x+ and is regularly checked on those versions. It is possible to run Exakat on 7.2 and audit a code with PHP 5.6. 
 
 
-Migration guide from 5.2 to 7.4 and dev
+Migration guide from 5.2 to 8.0-dev
 ----------------------------------------
 
 Every middle version of PHP comes with its migration guide from the manual, and from community's feedback. Incompatibilities are included as analyzers in Exakat, and report everything they can find that may prevent you from moving to the newer version. 
