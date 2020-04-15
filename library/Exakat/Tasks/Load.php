@@ -5001,7 +5001,9 @@ class Load extends Tasks {
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
             if (!empty($this->currentFunction)) {
                 $method = end($this->currentFunction);
-                $this->addLink($method, $return, 'RETURNED');
+                if (in_array($return, array('Variable', 'Variableobject', 'Variablearray'), \STRICT_COMPARISON) ) {
+                    $this->addLink($method, $return, 'RETURNED');
+                }
             }
 
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);

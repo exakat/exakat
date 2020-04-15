@@ -171,7 +171,8 @@ class WrongReturnedType extends Analyzer {
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'fqn')
              ->back('results')
-             ->inIs('RETURN');
+             ->inIs('RETURN')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
