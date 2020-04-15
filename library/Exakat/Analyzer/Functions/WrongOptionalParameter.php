@@ -34,6 +34,19 @@ class WrongOptionalParameter extends Analyzer {
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
              ->inIs('DEFAULT')
+             
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('TYPEHINT')
+                             ->atomIsNot('Void')
+                             ->inIs('TYPEHINT')
+                             ->outIs('DEFAULT')
+                             ->atomIs('Null')
+                             ->hasNoIn('RIGHT')
+                     )
+             )
 
              ->nextSibling('ARGUMENT')
              ->outIs('DEFAULT')
