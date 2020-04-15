@@ -342,11 +342,9 @@ A number of applications were scanned in order to find real life examples of pat
 * `FuelCMS <https://www.getfuelcms.com/>`_
 * `HuMo-Gen <http://humogen.com/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
-* Livezilla
 * `Magento <https://magento.com/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
-* Mediawiki
 * `NextCloud <https://nextcloud.com/>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
@@ -356,7 +354,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Piwigo <https://www.piwigo.org/>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
-* SugarCRM
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `TeamPass <https://teampass.net/>`_
@@ -503,12 +500,12 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.9.8
 
   * Cant Implement Traversable (Interfaces/CantImplementTraversable ; Analyze, LintButWontExec)
-  * Complete/PropagateCalls (Complete/PropagateCalls)
   * Parameter Hiding (Functions/ParameterHiding ; Semantics)
+  * Propagate Calls (Complete/PropagateCalls)
 
 * 1.9.7
 
-  * Dump/CollectForeachFavorite (Dump/CollectForeachFavorite ; Dump)
+  * Foreach() Favorite (Dump/CollectForeachFavorite ; Dump)
   * Make Functioncall With Reference (Complete/MakeFunctioncallWithReference ; Complete)
   * Too Many Dereferencing (Classes/TooManyDereferencing)
   * Use Url Query Functions (Structures/UseUrlQueryFunctions ; Suggestions)
@@ -529,7 +526,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.9.5
 
-  * Dump/CollectLiterals (Dump/CollectLiterals ; Dump)
+  * Collect Literals (Dump/CollectLiterals ; Dump)
   * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, ClassReview)
   * Magic Properties (Classes/MagicProperties)
   * No Garantee For Property Constant (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
@@ -2483,7 +2480,7 @@ List of external links mentionned in this documentation.
 * `empty <http://www.php.net/empty>`_
 * `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
-* `empty() <http://www.php.net/empty>`_
+* `empty() <https://www.php.net/empty>`_
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
 * `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_
@@ -2576,7 +2573,7 @@ List of external links mentionned in this documentation.
 * `Holger Woltersdorf <https://twitter.com/hollodotme>`_
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
-* `htmlentities <http://www.php.net/htmlentities>`_
+* `htmlentities <https://www.php.net/htmlentities>`_
 * `htmlspecialchars <https://www.php.net/htmlspecialchars>`_
 * `https://www.exakat.io/ <https://www.exakat.io/>`_
 * `https://www.exakat.io/versionss/index.php?file=latest <https://www.exakat.io/versions/index.php?file=latest>`_
@@ -2594,7 +2591,7 @@ List of external links mentionned in this documentation.
 * `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up array_key_exists() <https://github.com/php/php-src/pull/3360>`_
 * `implode <http://php.net/implode>`_
 * `In a PHP5 class, when does a private constructor get called? <https://stackoverflow.com/questions/26079/in-a-php5-class-when-does-a-private-constructor-get-called>`_
-* `in_array() <http://www.php.net/in_array>`_
+* `in_array() <https://www.php.net/in_array>`_
 * `include <http://php.net/manual/en/function.include.php>`_
 * `include_once <http://php.net/manual/en/function.include-once.php>`_
 * `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
@@ -2817,6 +2814,7 @@ List of external links mentionned in this documentation.
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `set_error_handler <http://www.php.net/set_error_handler>`_
 * `setcookie <http://www.php.net/setcookie>`_
+* `setcookie <https://www.php.net/setcookie>`_
 * `setlocale <http://php.net/setlocale>`_
 * `shell_exec <http://www.php.net/shell_exec>`_
 * `SimpleXML <http://php.net/manual/en/book.simplexml.php>`_
@@ -2899,8 +2897,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_

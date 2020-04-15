@@ -6887,7 +6887,7 @@ Scalar Or Object Property
 
 .. _sugarcrm-classes-scalarorobjectproperty:
 
-SugarCRM
+SugarCrm
 ^^^^^^^^
 
 :ref:`scalar-or-object-property`, in SugarCE-Full-6.5.26/data/Link.php:54. 
@@ -7067,7 +7067,7 @@ Unconditional Break In Loop
 
 .. _livezilla-structures-unconditionloopbreak:
 
-Livezilla
+LiveZilla
 ^^^^^^^^^
 
 :ref:`unconditional-break-in-loop`, in wp-admin/includes/misc.php:74. 
@@ -7092,7 +7092,7 @@ Only one row is read from the DBManager, and the rest is ignored. The result has
 
 .. _mediawiki-structures-unconditionloopbreak:
 
-Mediawiki
+MediaWiki
 ^^^^^^^^^
 
 :ref:`unconditional-break-in-loop`, in includes/htmlform/HTMLFormField.php:138. 

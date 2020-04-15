@@ -401,7 +401,7 @@ Here is the list of the 117 available atoms :
 * Preplusplus : ++ or -- when it is before the variable.
 * Print : A call to the function print.
 * Project : The project node : the root above all File.
-* Propertydefinition : A property definition. For example : `class x { private $property = 1; var $x; }
+* Propertydefinition : A property definition. For example : ``class x { private $property = 1; var $x; }``
 * Real : A float number
 * Return : The return expression.
 * Self : The `self` keyword, as used inside a class.
@@ -4187,7 +4187,7 @@ Propertydefinition
 ___________________________
 
 
-A property definition. For example : `class x { private $property = 1; var $x; }
+A property definition. For example : ``class x { private $property = 1; var $x; }``
 
 .. image:: images/Propertydefinition.png
                             :alt: Propertydefinition's outgoing diagramm

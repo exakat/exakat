@@ -8,14 +8,17 @@ Here are four tutorials to run Exakat on your code. You may install exakat with 
 + Bare metal install
  + with projects folder
  + within the code
+ 
 + Docker container
  + with projects folder
  + within the code
+ 
  
 All four tutorials offer the same steps : 
 + Project initialisation
 + Audit run
 + Reports access
+
 
 Bare metal install, with projects folder
 ----------------------------------------

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 14 Apr 2020 14:11:12 +0000
-.. comment: Generation hash : 115fe3f5ffca63e5e32d3b6d0b439d9045491cd0
+.. comment: Generation date : Wed, 15 Apr 2020 08:11:25 +0000
+.. comment: Generation hash : f668d64f849f821badd7348adbd2552498131845
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -8093,7 +8093,7 @@ It may be in function definitions, either in functioncalls.
    ?>
 
 
-See also `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_, `PHP 5.6 and the Splat Operator <https://lornajane.net/posts/2014/php-5-6-and-the-splat-operator>`_, and `Variable-length argument lists <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_.
+See also `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_, `PHP 5.6 and the Splat Operator <https://lornajane.net/posts/2014/php-5-6-and-the-splat-operator>`_, and `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_.
 
 +-------------+---------------------------------------------------------------------------------+
 | Short name  | Php/EllipsisUsage                                                               |
@@ -10739,7 +10739,7 @@ The third argument of the functions is the encoding of the string. In PHP 5.3, i
 
 Also, note that arguments 2 and 3 are constants and string, respectively, and should be issued from the list of values available in the manual. Other values than those will make PHP use the default values. 
 
-See also `htmlentities <http://www.php.net/htmlentities>`_ and `htmlspecialchars <http://www.php.net/htmlspecialchars>`_.
+See also `htmlentities <https://www.php.net/htmlentities>`_ and `htmlspecialchars <https://www.php.net/htmlspecialchars>`_.
 
 
 Suggestions
@@ -12934,7 +12934,7 @@ Even two 'or' comparisons are slower than using a `in_array() <https://www.php.n
    ?>
 
 
-See also `in_array() <http://www.php.net/in_array>`_.
+See also `in_array() <https://www.php.net/in_array>`_.
 
 
 Suggestions
@@ -14785,7 +14785,7 @@ There is no need to store the expression in a variable before testing, unless it
    ?>
 
 
-See also `empty() <http://www.php.net/empty>`_ and `empty() supports arbitrary expressions <https://www.php.net/manual/en/migration55.new-features.php#migration55.new-features.empty>`_.
+See also `empty() <https://www.php.net/empty>`_ and `empty() supports arbitrary expressions <https://www.php.net/manual/en/migration55.new-features.php#migration55.new-features.empty>`_.
 
 
 Suggestions
@@ -18790,69 +18790,50 @@ Not Equal Is Not !==
 ####################
 
 
+Not and Equal operators, used separately, don't amount to the different operator ``!==``.
+
+``!$a == $b`` first turns ``$a``into the opposite boolean, then compares this boolean value to ``$b``. On the other hand, ``$a !== $b`` compares the two variables for type and value, and returns a boolean. 
+
+.. code-block:: php
+
+   <?php
+   
+   if ($string != 'abc') {
+       // doSomething()
+   }
+   
+   // Here, string will be an boolean, leading 
+   if (!$string == 'abc') {
+       // doSomething()
+   }
+   
+   // operator priority may be confusing
+   if (!$object instanceof OneClass) {
+       // doSomething()
+   }
+   ?>
+
+
+Note that the ``instanceof`` operator may be use with this syntax, due to operator precedence.
+
+See also `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
+
 Suggestions
 ^^^^^^^^^^^
 
 * Use the != or !==
 * Use parenthesis
 
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/NotEqual                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `Not and Equal operators, used separately, don't amount to the different operator.
-
-<?php
-
-if ($string != 'abc') {
-    // doSomething()
-}
-
-// Here, string will be an boolean, leading 
-if (!$string == 'abc') {
-    // doSomething()
-}
-
-// operator priority may be confusing
-if (!$object instanceof OneClass) {
-    // doSomething()
-}
-?>
-
-Note that the `instanceof` operator may be use with this syntax, due to operator precedence.
-
-See also `Operator Precedence <https://www.php.net/manual/en/language.operators.precedence.php>`_.
-
- <https://github.com/dseguy/clearPHP/tree/master/rules/Not and Equal operators, used separately, don't amount to the different operator.
-
-<?php
-
-if ($string != 'abc') {
-    // doSomething()
-}
-
-// Here, string will be an boolean, leading 
-if (!$string == 'abc') {
-    // doSomething()
-}
-
-// operator priority may be confusing
-if (!$object instanceof OneClass) {
-    // doSomething()
-}
-?>
-
-Note that the `instanceof` operator may be use with this syntax, due to operator precedence.
-
-See also `Operator Precedence <https://www.php.net/manual/en/language.operators.precedence.php>`_.
-
-.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------+---------------------+
+| Short name  | Structures/NotEqual |
++-------------+---------------------+
+| Rulesets    | :ref:`Analyze`      |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Quick (30 mins)     |
++-------------+---------------------+
 
 
 
@@ -23612,7 +23593,7 @@ The ``$samesite`` argument limits the sending of the cookie to the domain that i
    ?>
 
 
-See also `setcookie <http://www.php.net/setcookie>`_ and `'SameSite' cookie attribute <https://www.chromestatus.com/feature/4672634709082112>`_.
+See also `setcookie <https://www.php.net/setcookie>`_ and `'SameSite' cookie attribute <https://www.chromestatus.com/feature/4672634709082112>`_.
 
 +-------------+------------------------+
 | Short name  | Security/SetCookieArgs |
@@ -24708,7 +24689,7 @@ Both functions help by giving a checklist of important attributes to be used wit
    ?>
 
 
-See also `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_, `setcookie <https://php.net/setcookie>`_.
+See also `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_, `setcookie <https://www.php.net/setcookie>`_.
 
 
 Suggestions

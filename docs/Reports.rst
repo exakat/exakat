@@ -174,7 +174,7 @@ Warning : for browser security reasons, the report will NOT load as a local file
 
 Warning : large applications (> 1000 classes) will require a lot of resources to open.
 
-.. image:: images/report.classdependencieshtml.png
+.. image:: images/report.classdependencies.png
     :alt: Example of a Classes dependendies HTML report (0)
 
 Classes dependendies HTML is a HTML report format.

@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 14 Apr 2020 14:11:12 +0000
-.. comment: Generation hash : 115fe3f5ffca63e5e32d3b6d0b439d9045491cd0
+.. comment: Generation date : Wed, 15 Apr 2020 08:11:25 +0000
+.. comment: Generation hash : f668d64f849f821badd7348adbd2552498131845
 
 
 .. _analyze:
