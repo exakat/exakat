@@ -2143,7 +2143,6 @@ class Load extends Tasks {
         $args_min       = 0;
         $rank       = -1;
         $default    = 0;
-        $typehint   = 0;
         $variadic   = self::NOT_ELLIPSIS;
 
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
@@ -2214,7 +2213,6 @@ class Load extends Tasks {
 
                 $index->rank = ++$rank;
 
-                $types = array();
                 $typehints = array();
                 foreach($returnTypes as $returnType) {
                     $this->addLink($index, $returnType, 'TYPEHINT');
@@ -4914,6 +4912,8 @@ class Load extends Tasks {
         $constant->intval  = (int) $constant->noDelimiter;
         $constant->boolean = (int) (bool) $constant->intval;
         $this->runPlugins($constant);
+
+        $constant = $this->processFCOA($constant);
 
         return $constant;
     }
