@@ -26,11 +26,19 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MultiplyByOne extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
+        $atoms = array('String', 'Integer', 'Boolean', 'Float', 'Identifier', 'Nsname', 'Assignation', 'Parenthesis', 'Multiplication');
+        
         // $x *= 1;
         $this->atomIs('Assignation')
              ->codeIs(array('*=', '/=', '%=', '**='))
              ->outIs('RIGHT')
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->is('intval', 1)
              ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
@@ -40,6 +48,7 @@ class MultiplyByOne extends Analyzer {
         $this->atomIs('Multiplication')
              ->codeIs('*')
              ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->is('intval', 1)
              ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
@@ -48,6 +57,7 @@ class MultiplyByOne extends Analyzer {
         $this->atomIs('Multiplication')
              ->codeIs(array('/', '%'))
              ->outIs('RIGHT')
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->is('intval', 1)
              ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
@@ -57,6 +67,7 @@ class MultiplyByOne extends Analyzer {
         $this->atomIs('Multiplication')
              ->codeIs('/')
              ->outIs('RIGHT')
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->isNot('intval', 1)
              ->savePropertyAs('intval', 'operand')
              ->back('first')
@@ -74,6 +85,7 @@ class MultiplyByOne extends Analyzer {
         $this->atomIs('Multiplication')
              ->codeIs('*')
              ->outIs('RIGHT')
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->isNot('intval', 1)
              ->savePropertyAs('intval', 'operand')
              ->back('first')
@@ -90,6 +102,7 @@ class MultiplyByOne extends Analyzer {
         // $x = $y ** 1
         $this->atomIs('Power')
              ->outIs('RIGHT')
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->is('intval', 1)
              ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
@@ -98,6 +111,7 @@ class MultiplyByOne extends Analyzer {
         // 1 ** $a;
         $this->atomIs('Power')
              ->outIs('LEFT')
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->is('intval', 1)
              ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');

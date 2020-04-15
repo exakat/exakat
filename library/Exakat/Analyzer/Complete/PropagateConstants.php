@@ -699,7 +699,7 @@ sideEffect{
       }
     } else if (it.get().value("token") == 'T_PERCENTAGE') {
       if (x[0] != 0) {
-          i = x[1] % x[0];
+          i = x[0] % x[1];
       } else {
           i = 0;
       }

@@ -22,6 +22,8 @@
 
 namespace Exakat\Analyzer\Portability;
 
+use Exakat\Analyzer\Analyzer;
+
 class WindowsOnlyConstants extends Analyzer {
     public function analyze() {
         $constants = array( 'PHP_WINDOWS_VERSION_MAJOR',
