@@ -32,7 +32,6 @@ class Ambassador extends Emissary {
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
-    protected $tmpName           = '';
 
     protected $frequences        = array();
     protected $timesToFix        = array();

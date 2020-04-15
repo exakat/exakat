@@ -39,7 +39,6 @@ class Weekly extends Ambassador {
 
     protected $projectPath     = null;
     protected $finalName       = null;
-    protected $tmpName           = '';
     private $globalGrade  = 0;
 
     const TOPLIMIT = 10;

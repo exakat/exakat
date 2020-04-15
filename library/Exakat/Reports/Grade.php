@@ -39,9 +39,6 @@ class Grade extends Ambassador {
                          );
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
-    protected $projectPath     = null;
-    protected $finalName       = null;
-    protected $tmpName           = '';
     private $globalGrade = 0;
 
     const TOPLIMIT = 10;

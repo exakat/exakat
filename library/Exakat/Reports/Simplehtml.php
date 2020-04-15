@@ -28,7 +28,7 @@ class Simplehtml extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     protected $finalName       = null;
-    protected $tmpName         = '';
+    private $tmpName         = '';
 
     public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name === self::STDOUT) {

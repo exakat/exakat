@@ -42,7 +42,6 @@ class Owasp extends Ambassador {
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
-    protected $tmpName         = '';
 
     protected $themesToShow    = array('Security');
 
