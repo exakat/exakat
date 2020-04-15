@@ -41,7 +41,7 @@ class CsvInLoops extends Analyzer {
                      ->outWithRank('ARGUMENT', 0)
                      ->regexIsNot('noDelimiter', '(?i)^php://(memory|temp)')
              )
-             ->hasInstruction(self::$LOOPS_ALL)
+             ->hasInstruction(self::LOOPS_ALL)
              ->back('first');
         $this->prepareQuery();
     }

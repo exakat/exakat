@@ -30,7 +30,7 @@ class OverwrittenProperties extends Complete {
               ->savePropertyAs('propertyname', 'name')
               ->inIs('PPP')
               ->inIs('PPP')
-              ->atomIs('Class')
+              ->atomIs(self::CLASSES_TRAITS)
               ->goToAllParentsTraits(self::INCLUDE_SELF) // also covers local traits
               ->outIs('PPP')
               ->outIs('PPP')

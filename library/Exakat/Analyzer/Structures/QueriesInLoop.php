@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class QueriesInLoop extends Analyzer {
     public function analyze() {
         // for() { mysql_query(); }
-        $this->atomIs(array('Foreach', 'For', 'While'))
+        $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->codeIs(array('cubrid_query',
@@ -72,7 +72,7 @@ class QueriesInLoop extends Analyzer {
         $this->prepareQuery();
 
         // for() { $pdo->query(); }
-        $this->atomIs(self::$LOOPS_ALL)
+        $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->hasIn('METHOD')

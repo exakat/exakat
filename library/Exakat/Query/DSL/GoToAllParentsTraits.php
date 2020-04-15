@@ -39,8 +39,8 @@ class GoToAllParentsTraits extends DSL {
 as("gotoallparentstraits").repeat( 
     __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS"))
       .in("DEFINITION")
-      .simplePath().from("gotoallparentstraits")
       .hasLabel("Class", "Classanonymous", "Trait")
+      .simplePath().from("gotoallparentstraits")
 )
 .emit( )
 .times($MAX_LOOPING)
@@ -52,8 +52,8 @@ GREMLIN
 as("gotoallparentstraits").emit( ).repeat( 
     __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS"))
       .in("DEFINITION")
-      .simplePath().from("gotoallparentstraits")
       .hasLabel("Class", "Classanonymous", "Trait")
+      .simplePath().from("gotoallparentstraits")
 )
 .times($MAX_LOOPING)
 .hasLabel("Class", "Classanonymous", "Trait")

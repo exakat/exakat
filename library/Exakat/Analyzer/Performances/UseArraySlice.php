@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseArraySlice extends Analyzer {
     public function analyze() {
         // while($cdg) { array_pop($c); }
-        $this->atomIs(self::$LOOPS_ALL)
+        $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')

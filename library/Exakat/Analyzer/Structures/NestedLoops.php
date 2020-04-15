@@ -27,27 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class NestedLoops extends Analyzer {
     public function analyze() {
-        $this->atomIs('For')
+        // foreach() { foreach() {}}
+        $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')
-             ->atomInsideNoDefinition(self::$LOOPS_ALL)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Foreach')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition(self::$LOOPS_ALL)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Dowhile')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition(self::$LOOPS_ALL)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('While')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition(self::$LOOPS_ALL)
+             ->atomInsideNoDefinition(self::LOOPS_ALL)
              ->back('first');
         $this->prepareQuery();
     }

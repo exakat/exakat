@@ -557,7 +557,6 @@ class PropagateCalls extends Complete {
 
     private function processFluentInterfaces(): int {
         $this->atomIs(array('Methodcall', 'Staticmethodcall'), self::WITHOUT_CONSTANTS)
-              ->as('first')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)

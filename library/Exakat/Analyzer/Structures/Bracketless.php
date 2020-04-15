@@ -42,7 +42,7 @@ class Bracketless extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs(self::$LOOPS_ALL)
+        $this->atomIs(self::LOOPS_ALL)
              ->isNot('alternative', true)
              ->outIs('BLOCK')
              ->isNot('bracket', true)

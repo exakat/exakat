@@ -28,10 +28,10 @@ class UnconditionLoopBreak extends Analyzer {
 
     public function analyze() {
         // foreach($a as $b) { $c++; continue; }
-        $this->atomIs(self::$LOOPS_ALL)
+        $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
-             ->atomIs(self::$BREAKS)
+             ->atomIs(self::BREAKS)
              ->back('first');
         $this->prepareQuery();
     }
