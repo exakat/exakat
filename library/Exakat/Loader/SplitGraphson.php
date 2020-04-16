@@ -263,7 +263,7 @@ GREMLIN;
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);
 
-            $v = mb_strtolower($V);
+            $v = mb_strtolower((string) $V);
             $j->properties['lccode'][0]->value = $this->dictCode->get($v);
 
             if (isset($j->properties['propertyname']) ) {
