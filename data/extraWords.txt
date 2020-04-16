@@ -267,3 +267,6 @@ contravariant
 returntype
 calltime
 injectable
+ruleset
+multibyte
+encodings
