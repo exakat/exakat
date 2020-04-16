@@ -83,7 +83,7 @@ class Project extends Tasks {
         $baselinestash->copyPrevious($this->config->dump);
 
         display("Cleaning project\n");
-        $clean = new Clean(Tasks::IS_SUBTASK);
+        $clean = new Clean(self::IS_SUBTASK);
         $clean->run();
         $this->datastore = exakat('datastore');
         // Reset datastore for the others
@@ -167,7 +167,7 @@ class Project extends Tasks {
         display('Producing the following reports : ' . implode(', ', $namesToRun));
 
         display('Running files' . PHP_EOL);
-        $analyze = new Files(Tasks::IS_SUBTASK);
+        $analyze = new Files(self::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
         $this->logTime('Files');
@@ -180,7 +180,7 @@ class Project extends Tasks {
         }
 
         display('Cleaning DB' . PHP_EOL);
-        $analyze = new CleanDb(Tasks::IS_SUBTASK);
+        $analyze = new CleanDb(self::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
         $this->logTime('CleanDb');
@@ -190,7 +190,7 @@ class Project extends Tasks {
 
         $this->checkTokenLimit();
 
-        $load = new Load(Tasks::IS_SUBTASK);
+        $load = new Load(self::IS_SUBTASK);
         try {
             $load->run();
         } catch (NoFileToProcess $e) {
@@ -211,7 +211,7 @@ class Project extends Tasks {
         $dumpConfig = $this->config->duplicate(array('collect'            => true,
                                                      'load_dump'          => true,
                                                      'project_rulesets'   => array('First')));
-        $firstDump = new Dump(Tasks::IS_SUBTASK);
+        $firstDump = new Dump(self::IS_SUBTASK);
         $firstDump->setConfig($dumpConfig);
         $firstDump->run();
         unset($firstDump);
@@ -233,14 +233,14 @@ class Project extends Tasks {
 
         $this->logTime('Analyze');
 
-        $dump = new Dump(Tasks::IS_SUBTASK);
+        $dump = new Dump(self::IS_SUBTASK);
         foreach($this->config->rulesets as $name => $analyzers) {
             $dump->checkRulesets($name, $analyzers);
         }
 
         $this->logTime('Reports');
         try {
-            $report = new Report(Tasks::IS_SUBTASK);
+            $report = new Report(self::IS_SUBTASK);
 
             $report->run();
         } catch (\Throwable $e) {
@@ -284,7 +284,7 @@ class Project extends Tasks {
                                                             'quiet'     => !$verbose,
                                                             ));
 
-            $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
+            $analyze = new Analyze($this->gremlin, $analyzeConfig, self::IS_SUBTASK);
             $analyze->run();
             unset($analyze);
             unset($analyzeConfig);
@@ -316,7 +316,7 @@ class Project extends Tasks {
                                                    'graphNodes'   => $nodes,
                                                    'graphLinks'   => $links));
 
-            $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
+            $dump = new Dump($this->gremlin, $dumpConfig, self::IS_SUBTASK);
             $dump->run();
             unset($dump);
             unset($dumpConfig);
@@ -353,7 +353,7 @@ class Project extends Tasks {
                                                                 'quiet'            => !$verbose,
                                                                 ));
 
-                $analyze = new Analyze(Tasks::IS_SUBTASK);
+                $analyze = new Analyze(self::IS_SUBTASK);
                 $analyze->setConfig($analyzeConfig);
                 $analyze->run();
                 unset($analyze);
@@ -396,7 +396,7 @@ class Project extends Tasks {
                 print "New PID : $pid\n";
                 print "Slept for PID : $pid\n";
 */
-                $dump = new Dump(Tasks::IS_SUBTASK);
+                $dump = new Dump(self::IS_SUBTASK);
                 $dump->setConfig($dumpConfig);
                 $dump->run();
                 $dump->finalMark($finalMark);

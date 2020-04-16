@@ -212,7 +212,7 @@ class Load extends Tasks {
                            'files'     => 0,
                            'tokens'    => 0);
 
-    public function __construct($subtask = Tasks::IS_NOT_SUBTASK) {
+    public function __construct($subtask = self::IS_NOT_SUBTASK) {
         parent::__construct($subtask);
 
         $this->atomGroup = new AtomGroup();

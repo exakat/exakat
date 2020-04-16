@@ -52,19 +52,19 @@ class Test extends Tasks {
                         );
         $configThema = new Config($args);
 
-        $analyze = new CleanDb(Tasks::IS_SUBTASK);
+        $analyze = new CleanDb(self::IS_SUBTASK);
         $analyze->run();
 
         display("Cleaning project\n");
-        $clean = new Clean(Tasks::IS_SUBTASK);
+        $clean = new Clean(self::IS_SUBTASK);
         $clean->run();
 
-        $load = new Load(Tasks::IS_SUBTASK);
+        $load = new Load(self::IS_SUBTASK);
         $load->run();
         unset($load);
         display("Project loaded\n");
 
-        $analyze = new Analyze(Tasks::IS_SUBTASK);
+        $analyze = new Analyze(self::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
 
@@ -77,11 +77,11 @@ class Test extends Tasks {
                         );
         $configThema = new Config($args);
 
-        $analyze = new Dump(Tasks::IS_SUBTASK);
+        $analyze = new Dump(self::IS_SUBTASK);
         $analyze->setConfig($configThema);
         $analyze->run();
 
-        $results = new Results(Tasks::IS_SUBTASK);
+        $results = new Results(self::IS_SUBTASK);
         $results->run();
         unset($results);
 

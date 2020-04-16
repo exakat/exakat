@@ -28,14 +28,14 @@ class CleanDb extends Tasks {
     protected $logname = self::LOG_NONE;
 
     public function run() {
-         if (Tasks::$semaphore === null) {
+         if (self::$semaphore === null) {
             $this->manageServer();
         } else {
-            fclose(Tasks::$semaphore);
+            fclose(self::$semaphore);
             try {
                 $this->manageServer();
             } finally {
-                Tasks::$semaphore = @stream_socket_server('udp://0.0.0.0:' . Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
+                self::$semaphore = @stream_socket_server('udp://0.0.0.0:' . self::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
             }
         }
 

@@ -52,7 +52,7 @@ class OnePage extends Tasks {
         $this->cleanLogForProject('onepage');
 
         display("Cleaning project\n");
-        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean = new Clean($this->gremlin, $this->config, self::IS_SUBTASK);
         $clean->run();
         $this->datastore = new Datastore($this->config);
 
@@ -63,18 +63,18 @@ class OnePage extends Tasks {
                                                ));
 
         display('Cleaning DB');
-        $task = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $task = new CleanDb($this->gremlin, $this->config, self::IS_SUBTASK);
         $task->run();
 
         display('Running project "onepage"');
 
-        $task = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $task = new Load($this->gremlin, $this->config, self::IS_SUBTASK);
         $task->run();
 
         display('Project loaded');
         $this->logTime('Loading');
 
-        $task = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $task = new Analyze($this->gremlin, $this->config, self::IS_SUBTASK);
         $task->run();
 
         rename($this->config->projects_root . '/projects/onepage/log/analyze.log',
@@ -83,7 +83,7 @@ class OnePage extends Tasks {
         display('Project analyzed');
         $this->logTime('Analyze');
 
-        $task = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $task = new Dump($this->gremlin, $this->config, self::IS_SUBTASK);
         $task->run();
         display('Project dumped');
 
@@ -91,7 +91,7 @@ class OnePage extends Tasks {
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                'audit_length' => $audit_end - $audit_start));
 
-        $task = new Report($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $task = new Report($this->gremlin, $this->config, self::IS_SUBTASK);
         $task->run();
         display('Project reported');
         $this->logTime('Report');

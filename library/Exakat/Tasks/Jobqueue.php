@@ -148,7 +148,7 @@ class Jobqueue extends Tasks {
 
     private function processInit($job) {
         $config = new ConfigExakat($job);
-        $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
+        $analyze = new Initproject($this->gremlin, $config, self::IS_SUBTASK);
 
         display( 'processing init job ' . $job[2] . PHP_EOL);
         $this->log('start init : ' . $job[2]);
@@ -176,7 +176,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Report($this->gremlin, $config, Tasks::IS_SUBTASK);
+        $analyze = new Report($this->gremlin, $config, self::IS_SUBTASK);
 
         display( 'processing report job ' . $job[2] . PHP_EOL);
         $this->log('start report : ' . $job[2]);
@@ -193,7 +193,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
+        $analyze = new Project($this->gremlin, $config, self::IS_SUBTASK);
 
         display( 'processing project job ' . $job[2] . PHP_EOL);
         $this->log('start project : ' . $job[2]);
@@ -217,7 +217,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Config($this->gremlin, $config, Tasks::IS_SUBTASK);
+        $analyze = new Config($this->gremlin, $config, self::IS_SUBTASK);
 
         display( 'processing config job ' . $job[2] . PHP_EOL);
         $this->log('start config : ' . $job[2]);
@@ -238,7 +238,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Remove($this->gremlin, $config, Tasks::IS_SUBTASK);
+        $analyze = new Remove($this->gremlin, $config, self::IS_SUBTASK);
 
         display( 'processing remove job ' . $job[2] . PHP_EOL);
         $this->log('start report : ' . $job[2]);
