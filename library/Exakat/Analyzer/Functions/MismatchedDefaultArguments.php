@@ -32,7 +32,7 @@ class MismatchedDefaultArguments extends Analyzer {
 
     public function analyze() {
         // Based on calls to a function
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('code', 'name')
              ->as('results')

@@ -33,7 +33,7 @@ class ArrayKeyExistsWithObjects extends Analyzer {
 
     public function analyze() {
         // WIth typehint
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->analyzerIsNot('Php/ScalarTypehintUsage')
              ->outIs('NAME')
@@ -49,9 +49,9 @@ class ArrayKeyExistsWithObjects extends Analyzer {
              ->atomIs('Variable')
              ->inIs('DEFINITION')
              ->outIs('DEFAULT')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_ALL)
+             ->atomIs(self::FUNCTIONS_ALL)
              ->hasOut('RETURNTYPE')
              ->analyzerIsNot('Php/ScalarTypehintUsage')
              ->back('first');

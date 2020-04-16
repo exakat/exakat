@@ -35,14 +35,14 @@ class ArrayMergeInLoops extends Analyzer {
         // foreach($a as $b) { $c = array_merge($c, $b); };
         $this->atomFunctionIs($functions)
              ->hasLoop()
-             ->atomInsideNoDefinition(self::$CONTAINERS)
+             ->atomInsideNoDefinition(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'var')
              ->back('first')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->goToLoop();
         $this->prepareQuery();

@@ -30,7 +30,7 @@ class OneLevelOfIndentation extends Analyzer {
         $blocks = array('THEN', 'ELSE', 'BLOCK', 'CASES');
 
         // function foo() { if ($a === 1) { if ($b === 2) {}}}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
              ->atomIs($atoms)

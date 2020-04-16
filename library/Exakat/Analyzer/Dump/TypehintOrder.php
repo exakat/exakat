@@ -35,7 +35,7 @@ CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
     public function analyze() {
-        $this ->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this ->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->as('returned')
               ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)
@@ -49,7 +49,7 @@ SQL;
                              'returned' => 'fullnspath'));
         $this->prepareQuery();
 
-        $this ->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this ->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->as('returned')
               ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)

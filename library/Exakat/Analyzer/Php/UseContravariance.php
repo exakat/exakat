@@ -35,7 +35,7 @@ class UseContravariance extends Analyzer {
     public function analyze() {
         // class x { function foo(y $a) {}}
         // class y extends x { function foo(x $a) {}}
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')

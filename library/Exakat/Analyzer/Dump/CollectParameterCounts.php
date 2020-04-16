@@ -28,7 +28,7 @@ class CollectParameterCounts extends AnalyzerHashHashResults {
 
     public function analyze() {
         // foo($a, $b, ...$c) : 3 parameter
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->raw('groupCount("m").by("count").cap("m")');
 
         $this->prepareQuery();

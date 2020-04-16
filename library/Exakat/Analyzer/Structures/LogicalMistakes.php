@@ -35,7 +35,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('!=', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'var')
              ->inIs(array('LEFT', 'RIGHT'))
              ->inIsIE('CODE')
@@ -46,7 +46,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('!=', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
         $this->prepareQuery();
@@ -59,7 +59,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'var')
              ->inIs(array('LEFT', 'RIGHT'))
              ->inIsIE('CODE')
@@ -70,7 +70,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('!=', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
         $this->prepareQuery();
@@ -83,7 +83,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'var')
              ->inIs(array('LEFT', 'RIGHT'))
              ->inIsIE('CODE')
@@ -94,7 +94,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
         $this->prepareQuery();
@@ -107,7 +107,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'var')
              ->inIs(array('LEFT', 'RIGHT'))
              ->inIsIE('CODE')
@@ -118,7 +118,7 @@ class LogicalMistakes extends Analyzer {
              ->atomIs('Comparison')
              ->codeIs(array('!=', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
         $this->prepareQuery();

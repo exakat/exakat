@@ -30,14 +30,14 @@ class DynamicClass extends Analyzer {
         // $class::method()
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
 
         // $class::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
 

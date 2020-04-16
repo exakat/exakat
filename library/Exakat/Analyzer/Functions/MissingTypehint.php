@@ -40,7 +40,7 @@ class MissingTypehint extends Analyzer {
         $this->prepareQuery();
 
         // function foo(string $a) ;
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->not(
                 $this->side()
                      ->outIs('NAME')

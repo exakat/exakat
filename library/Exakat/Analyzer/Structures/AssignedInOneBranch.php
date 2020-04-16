@@ -37,7 +37,7 @@ class AssignedInOneBranch extends Analyzer {
              ->atomIs(self::LITERALS)
              ->inIs('RIGHT')
              ->outIs('LEFT')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->not(
@@ -66,7 +66,7 @@ class AssignedInOneBranch extends Analyzer {
              ->atomIs(self::LITERALS)
              ->inIs('RIGHT')
              ->outIs('LEFT')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->not(

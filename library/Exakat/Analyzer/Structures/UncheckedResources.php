@@ -57,11 +57,11 @@ class UncheckedResources extends Analyzer {
                      ->hasNoIn('CONDITION')
                      ->as('result')
                      ->outIs('LEFT')
-                     ->atomIs(self::$CONTAINERS)
+                     ->atomIs(self::CONTAINERS)
                      ->savePropertyAs('fullcode', 'tmpvar')
                      ->inIs('LEFT')
                      ->nextSibling()
-                     ->atomInsideNoBlock(self::$CONTAINERS)
+                     ->atomInsideNoBlock(self::CONTAINERS)
                      ->samePropertyAs('fullcode', 'tmpvar')
 
                      // checked with a is_resource

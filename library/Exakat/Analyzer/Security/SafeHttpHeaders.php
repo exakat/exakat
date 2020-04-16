@@ -36,7 +36,7 @@ class SafeHttpHeaders extends Analyzer {
         $this->prepareQuery();
 
         //header('X-Xss-Protection', '0');
-        $this->atomIs(self::$FUNCTIONS_CALLS)
+        $this->atomIs(self::FUNCTIONS_CALLS)
              ->outIs('ARGUMENT')
              ->has('noDelimiter')
              ->noDelimiterIs(array('x-xss-protection', 'access-control-allow-origin'), self::CASE_INSENSITIVE)

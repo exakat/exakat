@@ -33,7 +33,7 @@ class CloneWithNonObject extends Analyzer {
              // can't return a scalar, a nullable, or anything untyped
              ->not(
                 $this->side()
-                     ->atomIs(self::$CALLS)
+                     ->atomIs(self::CALLS)
                      ->inIs('DEFINITION')
                      ->outIs('RETURNTYPE')
                      ->atomIsNot(array('Void', 'Scalartypehint'))
@@ -41,7 +41,7 @@ class CloneWithNonObject extends Analyzer {
              )
              ->not(
                 $this->side()
-                     ->atomIs(self::$CALLS)
+                     ->atomIs(self::CALLS)
                      ->hasNoIn('DEFINITION')
              )
              ->not(

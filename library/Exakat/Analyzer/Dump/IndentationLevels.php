@@ -28,7 +28,7 @@ class IndentationLevels extends AnalyzerHashAnalyzer {
 
     public function analyze() {
         //function foo() { if (1) { /* level 2 */}}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->processLevels()
              ->atomIsNot('Sequence')

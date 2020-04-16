@@ -39,7 +39,7 @@ class MethodUsedBelow extends Analyzer {
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'theClass')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomIs(self::$FUNCTIONS_METHOD)
+             ->atomIs(self::FUNCTIONS_METHOD)
              ->as('results')
              ->outIs('DEFINITION')
              ->atomIs(array('Methodcall', 'Staticmethodcall'))

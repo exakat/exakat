@@ -34,7 +34,7 @@ class FossilizedMethod extends Analyzer {
 
     public function analyze() {
         // class x
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->hasNoOut('OVERWRITE')
              ->raw('where( __.emit().repeat( __.in("OVERWRITE")).count().is(gt(' . $this->fossilizationThreshold . ')) )');
         $this->prepareQuery();

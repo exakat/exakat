@@ -39,7 +39,7 @@ class UndefinedConstants extends Analyzer {
                                    'Modules/DefinedClassConstants',
                                   ))
              ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->back('first');
         $this->prepareQuery();
     }

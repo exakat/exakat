@@ -37,7 +37,7 @@ class Php72Deprecation extends Analyzer {
         $this->prepareQuery();
 
         // usage of INTL_IDNA_VARIANT_2003
-        $this->atomIs(self::$STATIC_NAMES)
+        $this->atomIs(self::STATIC_NAMES)
              ->fullnspathIs('\\INTL_IDNA_VARIANT_2003', self::CASE_SENSITIVE);
         $this->prepareQuery();
 

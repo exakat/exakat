@@ -43,7 +43,7 @@ class CatchShadowsVariable extends Analyzer {
 
         // Catch outside a function
         $this->atomIs('Catch')
-             ->hasNoFunction(self::$FUNCTIONS_ALL)
+             ->hasNoFunction(self::FUNCTIONS_ALL)
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'catchVariable')
              ->goToFile()

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CantUse extends Analyzer {
     public function analyze() {
         // Function foo() { throw new exception(); }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
@@ -36,7 +36,7 @@ class CantUse extends Analyzer {
         $this->prepareQuery();
 
         // Function foo() { trigger_error(); }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
@@ -47,11 +47,11 @@ class CantUse extends Analyzer {
         // propagation to custom functions
         // Function foo() { trigger_error(); }
         // Function bar() { bar(); }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
              ->analyzerIs('self')
              ->back('first');

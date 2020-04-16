@@ -33,7 +33,7 @@ class IsInterfaceMethod extends Analyzer {
 
     public function analyze() {
         // interface extended in the local class
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->outIs('OVERWRITE')
              ->inIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs('Interface')
@@ -51,7 +51,7 @@ class IsInterfaceMethod extends Analyzer {
             $methodNames = array_column($methods, 'name');
 
             // interface locally implemented
-            $this->atomIs(self::$FUNCTIONS_METHOD)
+            $this->atomIs(self::FUNCTIONS_METHOD)
                  ->outIs('NAME')
                  ->codeIs($methodNames, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->inIs('NAME')

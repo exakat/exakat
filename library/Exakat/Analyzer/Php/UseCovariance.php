@@ -35,7 +35,7 @@ class UseCovariance extends Analyzer {
     public function analyze() {
         // class x { function foo() : x {}}
         // class y extends x { function foo() : y {}}
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->outIs('RETURNTYPE')
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')

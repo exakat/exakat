@@ -54,7 +54,7 @@ where(
 .filter{ x.findAll{ a,b -> b > 0}.size() > 0}
 GREMLIN
                 )
-                ->atomInsideNoDefinition(self::$FUNCTIONS_CALLS)
+                ->atomInsideNoDefinition(self::FUNCTIONS_CALLS)
                 ->hasNoChildren('Void', array('ARGUMENT'))
                 ->raw(<<<GREMLIN
       not(

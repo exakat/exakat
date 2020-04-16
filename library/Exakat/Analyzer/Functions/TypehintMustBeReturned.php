@@ -28,7 +28,7 @@ class TypehintMustBeReturned extends Analyzer {
     public function analyze() {
         // function foo() : A { }
         // function foo() :A { return; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
              ->fullnspathIsNot('\\void')

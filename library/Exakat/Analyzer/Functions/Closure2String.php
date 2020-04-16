@@ -44,7 +44,7 @@ class Closure2String extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('ARGUMENT')
-                     ->atomIs(array_merge(self::$CALLS,
+                     ->atomIs(array_merge(self::CALLS,
                                           array('Array', 'Integer', 'String', 'Nsname', 'Identifier', 'Float', 'Boolean', 'Null')))
              )
 

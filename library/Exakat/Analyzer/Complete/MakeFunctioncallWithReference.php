@@ -45,7 +45,7 @@ class MakeFunctioncallWithReference extends Complete {
         }
 
         // Case of Custom native functions
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->savePropertyAs('rank', 'ranked')

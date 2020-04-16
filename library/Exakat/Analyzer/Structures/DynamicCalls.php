@@ -41,7 +41,7 @@ class DynamicCalls extends Analyzer {
         // dynamic functioncall
         $this->atomIs('Functioncall')
              ->outIs('NAME')
-             ->tokenIsNot(self::$FUNCTIONS_TOKENS)
+             ->tokenIsNot(self::FUNCTIONS_TOKENS)
              ->back('first');
         $this->prepareQuery();
 
@@ -82,7 +82,7 @@ class DynamicCalls extends Analyzer {
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_OPEN_BRACKET'))
-             ->atomIsNot(self::$RELATIVE_CLASS)
+             ->atomIsNot(self::RELATIVE_CLASS)
              ->back('first');
         $this->prepareQuery();
 

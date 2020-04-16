@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NoAssignationInFunction extends Analyzer {
     public function analyze() {
         // function foo() { $a = array(1, ... 2000);}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Arrayliteral')
              ->isMore('count', 10)

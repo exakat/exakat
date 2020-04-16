@@ -29,7 +29,7 @@ class BadTypehintRelay extends Analyzer {
         // foo(A $a) { goo($a); } function goo(B $a) {}
 
         // todo : handle class hierarchy
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'typehint')
@@ -39,7 +39,7 @@ class BadTypehintRelay extends Analyzer {
              ->has('rank')
              ->savePropertyAs('rank', 'theRank')
              ->inIs('ARGUMENT')
-             ->atomIs(self::$CALLS)
+             ->atomIs(self::CALLS)
              ->inIs('DEFINITION')
              ->as('result')
              ->outIs('ARGUMENT')

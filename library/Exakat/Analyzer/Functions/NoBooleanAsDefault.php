@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NoBooleanAsDefault extends Analyzer {
     public function analyze() {
         // function foo($a = true) {}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomInsideNoDefinition('Boolean')

@@ -28,7 +28,7 @@ class CollectLocalVariableCounts extends AnalyzerHashHashResults {
 
     public function analyze() {
         // foo() {$t ; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->raw('groupCount("m").by(__.out("DEFINITION").hasLabel("Variabledefinition", "Staticdefinition").count()).cap("m")');
 
         $this->prepareQuery();

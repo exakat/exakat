@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class AvoidBooleanArgument extends Analyzer {
     public function analyze() {
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIs('Boolean')

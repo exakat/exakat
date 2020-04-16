@@ -32,7 +32,7 @@ class UselessTypeCheck extends Analyzer {
 
     public function analyze() {
         // function foo(A $a) { if (is_null($a)) {}}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->isNot('nullable', true)
 
@@ -54,7 +54,7 @@ class UselessTypeCheck extends Analyzer {
         $this->prepareQuery();
 
         // function foo(A $a) { if ($a === null) {}}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->isNot('nullable', true)
 

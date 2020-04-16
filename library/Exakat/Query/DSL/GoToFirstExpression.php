@@ -33,7 +33,7 @@ class GoToFirstExpression extends DSL {
 until( __.in($linksDown).not(hasLabel(within(***))) ).repeat( __.in($linksDown) )
 
 GREMLIN
-, array(Analyzer::$EXPRESSION_ATOMS));
+, array(Analyzer::EXPRESSION_ATOMS));
     }
 }
 ?>

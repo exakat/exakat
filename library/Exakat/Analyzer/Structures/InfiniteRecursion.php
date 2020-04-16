@@ -45,7 +45,7 @@ class InfiniteRecursion extends Analyzer {
              )
              ->collectArguments('args')
              ->outIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->collectArguments('called')
              ->raw('filter{args.equals(called)}')
@@ -53,7 +53,7 @@ class InfiniteRecursion extends Analyzer {
         $this->prepareQuery();
 
         // foo($a, $b) { foo($a, $b); }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIs('Functions/Recursive')
              ->isNot('count', 0) //Except at least one parameter
              ->not(
@@ -65,7 +65,7 @@ class InfiniteRecursion extends Analyzer {
              )
              ->collectArguments('args')
              ->outIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->outIs(array('OBJECT', 'CLASS')) // Only works on static calls, if the class is a variable : $a::foo();
              ->isThis()
              ->inIs(array('OBJECT', 'CLASS'))
@@ -76,12 +76,12 @@ class InfiniteRecursion extends Analyzer {
         $this->prepareQuery();
 
         // foo() { foo(); } // No argument
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->savePropertyAs('id', 'start')
              ->analyzerIs('Functions/Recursive')
              ->is('count', 0)
              ->outIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->is('count', 0)
              ->goToFunction()
@@ -89,7 +89,7 @@ class InfiniteRecursion extends Analyzer {
         $this->prepareQuery();
 
         // foo($a, $b) { foo($a, $b); } // No condition of any kind...
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('self')
              ->analyzerIs('Functions/Recursive')
              ->noAtomInside(array('Ifthen', 'Ternary'));

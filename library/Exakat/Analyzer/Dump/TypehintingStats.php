@@ -33,7 +33,7 @@ class TypehintingStats extends AnalyzerArrayHashResults {
         $totalArguments = $this->rawQuery()->toInt();
 
         //total parameters
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->not(
                 $this->side()
                      ->atomIs('Magicmethod')
@@ -51,7 +51,7 @@ class TypehintingStats extends AnalyzerArrayHashResults {
         $withTypehint = $this->rawQuery()->toInt();
 
         //typehinted
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
              ->count();
@@ -66,7 +66,7 @@ class TypehintingStats extends AnalyzerArrayHashResults {
         $argNullable = $this->rawQuery()->toInt();
 
         //typehinted
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
              ->is('nullable', true)
@@ -98,7 +98,7 @@ class TypehintingStats extends AnalyzerArrayHashResults {
         $return = compact('totalArguments', 'totalFunctions', 'withTypehint','withReturnTypehint', 'scalartype', 'returnNullable', 'argNullable');
         $return = $return + $scalartypes;
 
-        $atoms = array('all'            => self::$FUNCTIONS_ALL,
+        $atoms = array('all'            => self::FUNCTIONS_ALL,
                        'function'       => 'Function',
                        'method'         => array('Method', 'Magicmethod'),
                        'closure'        => 'Closure',

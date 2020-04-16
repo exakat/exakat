@@ -61,7 +61,7 @@ class UseThis extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
              ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot('Parent')
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()

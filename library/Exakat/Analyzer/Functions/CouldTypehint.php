@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CouldTypehint extends Analyzer {
     public function analyze() {
         // An argument is processed with a instanceof later
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
@@ -40,7 +40,7 @@ class CouldTypehint extends Analyzer {
         $this->prepareQuery();
 
         // An argument is processed with a instanceof later
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIs('Void')

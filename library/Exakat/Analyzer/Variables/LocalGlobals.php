@@ -36,7 +36,7 @@ class LocalGlobals extends Analyzer {
         $globals = $this->rawQuery()->toArray();
         $globals = array_values(array_unique($globals));
 
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->atomInsideNoDefinition('Variable')
              ->analyzerIsNot('Variables/Globals')
              ->codeIs($globals, self::NO_TRANSLATE, self::CASE_SENSITIVE);

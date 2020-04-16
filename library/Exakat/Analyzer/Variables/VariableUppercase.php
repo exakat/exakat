@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class VariableUppercase extends Analyzer {
     public function analyze() {
         // $UPPER_CASE
-        $this->atomIs(self::$VARIABLES_USER)
+        $this->atomIs(self::VARIABLES_USER)
              ->regexIs('fullcode', '^\\\\\$[a-zA-Z0-9_]{2,}\\$')
              ->isUppercase('fullcode');
         $this->prepareQuery();

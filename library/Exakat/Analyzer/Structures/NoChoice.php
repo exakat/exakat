@@ -45,11 +45,11 @@ class NoChoice extends Analyzer {
                      ->isEqual(1)
               )
              ->outIs('CONDITION')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'cdt')
              ->inIs('CONDITION')
              ->outIs('ELSE')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'cdt', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();

@@ -31,7 +31,7 @@ class ComplexDynamicNames extends Analyzer {
              ->outIs('MEMBER')
              ->atomIs('Block')
              ->outIs('CODE')
-             ->atomIsNot(self::$CONTAINERS)
+             ->atomIsNot(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
 
@@ -41,7 +41,7 @@ class ComplexDynamicNames extends Analyzer {
              ->outIs('NAME')
              ->atomIs('Block')
              ->outIs('CODE')
-             ->atomIsNot(self::$CONTAINERS)
+             ->atomIsNot(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
 
@@ -49,7 +49,7 @@ class ComplexDynamicNames extends Analyzer {
         $this->atomIs('Variable')
              ->tokenIs('T_DOLLAR_OPEN_CURLY_BRACES')
              ->outIs('NAME')
-             ->atomIsNot(self::$CONTAINERS)
+             ->atomIsNot(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
     }

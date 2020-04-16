@@ -28,19 +28,19 @@ use Exakat\Analyzer\Analyzer;
 class VariableOneLetter extends Analyzer {
     public function analyze() {
         // Normal variables
-        $this->atomIs(self::$VARIABLES_USER)
+        $this->atomIs(self::VARIABLES_USER)
              ->tokenIs('T_VARIABLE')
              ->fullcodeLength(' == 2 ');
         $this->prepareQuery();
 
         // ${variables}
-        $this->atomIs(self::$VARIABLES_USER)
+        $this->atomIs(self::VARIABLES_USER)
              ->tokenIs(array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->fullcodeLength(' == 4 ');
         $this->prepareQuery();
 
         // {$variables}
-        $this->atomIs(self::$VARIABLES_USER)
+        $this->atomIs(self::VARIABLES_USER)
              ->tokenIs('T_DOLLAR')
              ->outIs('NAME')
              ->tokenIs('T_STRING')

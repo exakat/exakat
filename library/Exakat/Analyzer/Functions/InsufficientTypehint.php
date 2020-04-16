@@ -34,7 +34,7 @@ class InsufficientTypehint extends Analyzer {
 
     public function analyze() {
         // function foo(i $a) { $i->a(); } // but interface i has no function a()
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('arg')
              ->outIs('TYPEHINT')
@@ -51,7 +51,7 @@ class InsufficientTypehint extends Analyzer {
         $this->prepareQuery();
 
         // function foo(i $a) { $i->a; } // but class i has no property a()
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('arg')
              ->outIs('TYPEHINT')
@@ -68,7 +68,7 @@ class InsufficientTypehint extends Analyzer {
         $this->prepareQuery();
 
         // function foo(i $a) { $i->a; } // but class i has no property a()
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('arg')
              ->outIs('TYPEHINT')

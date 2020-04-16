@@ -35,12 +35,12 @@ class StrangeName extends Analyzer {
 
         // multiple identical characters : $aaab
         // skip . as it may be a variadic
-        $this->atomIs(self::$CONTAINERS_ROOTS)
+        $this->atomIs(self::CONTAINERS_ROOTS)
              ->regexIs('fullcode', '([^\\\\.])\\\\1{2,}');
         $this->prepareQuery();
 
         // Using strange type of data
-        $this->atomIs(self::$VARIABLES_SCALAR)
+        $this->atomIs(self::VARIABLES_SCALAR)
              ->outIs('NAME')
              ->atomIs(array('Integer', 'Boolean', 'Float', 'Null', 'Arrayliteral', 'Comparison', 'Bitshift', 'Typecast'))
              ->tokenIsNot('T_STRING_CAST')

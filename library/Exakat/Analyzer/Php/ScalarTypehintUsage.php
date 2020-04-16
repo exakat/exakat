@@ -33,7 +33,7 @@ class ScalarTypehintUsage extends Analyzer {
         $scalars = array_values(array_diff($scalars, array('\array', '\callable', )));
 
         // in Arguments
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('results')
              ->outIs('TYPEHINT')
@@ -42,7 +42,7 @@ class ScalarTypehintUsage extends Analyzer {
         $this->prepareQuery();
 
         // in Return
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->fullnspathIs($scalars)
              ->back('first');

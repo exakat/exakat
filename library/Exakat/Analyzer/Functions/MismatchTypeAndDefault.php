@@ -53,7 +53,7 @@ class MismatchTypeAndDefault extends Analyzer {
                      );
 
         // function foo(string $s = 3)
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('arg')
              ->outIs('DEFAULT')
@@ -107,7 +107,7 @@ GREMLIN
         $this->prepareQuery();
 
         // function foo(?string $s = 3)
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('arg')
              ->outIs('DEFAULT')

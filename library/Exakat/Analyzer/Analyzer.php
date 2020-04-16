@@ -123,36 +123,35 @@ abstract class Analyzer {
     const TRANSLATE    = true;
     const NO_TRANSLATE = false;
 
-    public static $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
-    public static $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray');
-    public static $CONTAINERS_PHP   = array('Variable', 'Staticproperty', 'Member', 'Array', 'Phpvariable');
-    public static $CONTAINERS_ROOTS = array('Variable', 'Staticproperty', 'Member', 'Array', 'Variableobject', 'Variablearray');
-    public static $VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parametername');
+    public const CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
+    public const VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray');
+    public const CONTAINERS_PHP   = array('Variable', 'Staticproperty', 'Member', 'Array', 'Phpvariable');
+    public const CONTAINERS_ROOTS = array('Variable', 'Staticproperty', 'Member', 'Array', 'Variableobject', 'Variablearray');
+    public const VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parametername');
     public const VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
 
     public const LITERALS         = array('Integer', 'Float', 'Null', 'Boolean', 'String', 'Heredoc');
     public const LOOPS_ALL        = array('For' , 'Foreach', 'While', 'Dowhile');
 
-    public static $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    public const  FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction');
-    public static $FUNCTIONS_ALL   = self::FUNCTIONS_ALL;
+    public const FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
+    public const FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction');
 
-    public static $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
-    public static $FUNCTIONS        = array('Function', 'Closure', 'Arrowfunction');
-    public static $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
+    public const FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
+    public const FUNCTIONS        = array('Function', 'Closure', 'Arrowfunction');
+    public const FUNCTIONS_METHOD = array('Method', 'Magicmethod');
 
     public const CIT                = array('Class', 'Classanonymous', 'Interface', 'Trait');
     public const CLASSES_ALL      = array('Class', 'Classanonymous');
     public const  CLASSES_TRAITS    = array('Class', 'Classanonymous', 'Trait');
-    public static $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
-    public static $STATIC_NAMES     = array('Nsname', 'Identifier');
-    public static $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
+    public const RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
+    public const STATIC_NAMES     = array('Nsname', 'Identifier');
+    public const STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     public const CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
-    public static $CLASS_METHODS    = array('METHOD', 'MAGICMETHOD');
+    public const CLASS_METHODS    = array('METHOD', 'MAGICMETHOD');
 
-    public static $FUNCTIONS_CALLS  = array('Functioncall' , 'Newcall', 'Methodcall', 'Staticmethodcall');
-    public static $CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
-    public static $FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
+    public const FUNCTIONS_CALLS  = array('Functioncall' , 'Newcall', 'Methodcall', 'Staticmethodcall');
+    public const CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
+    public const FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
     public const STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String', 'Identifier', 'Nsname');
     public const STRINGS_LITERALS  = array('Concatenation', 'Heredoc', 'String');
@@ -162,8 +161,6 @@ abstract class Analyzer {
     public const EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     public const BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
 
-    private static $rulesId         = null;
-
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
 
@@ -171,6 +168,8 @@ abstract class Analyzer {
     const CONTEXT_OUTSIDE_CLOSURE = 2;
 
     const MAX_LOOPING = 15;
+
+    private static $rulesId         = null;
 
     protected $rulesets  = null;
 

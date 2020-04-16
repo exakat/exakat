@@ -61,7 +61,7 @@ or(
 GREMLIN;
 
         // Relayed call to another function
-        $this->atomIs(self::$FUNCTIONS_CALLS)
+        $this->atomIs(self::FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')

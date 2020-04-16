@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ParameterHiding extends Analyzer {
     public function analyze() {
         // foo($a) { $b = $a; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('NAME')
              ->outIs('DEFINITION')
@@ -39,7 +39,7 @@ class ParameterHiding extends Analyzer {
              ->inIs('LEFT')
              ->inIs('EXPRESSION')
              ->inIs('BLOCK')
-             ->atomIs(self::$FUNCTIONS_ALL)
+             ->atomIs(self::FUNCTIONS_ALL)
              ->back('first');
         $this->prepareQuery();
     }

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UniqueUsage extends Analyzer {
     public function analyze() {
         // function foo() { $a = 1; echo $a;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
              ->raw(<<<'GREMLIN'

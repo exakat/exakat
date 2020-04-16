@@ -35,7 +35,7 @@ class WrongTypeWithCall extends Analyzer {
 
     public function analyze() {
         // foo(1); function foo(string $s) {}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')

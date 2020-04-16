@@ -35,7 +35,7 @@ class DoubleArrayFlip extends Analyzer {
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'container')
              ->inIs('LEFT')
              ->nextSiblings()
@@ -43,7 +43,7 @@ class DoubleArrayFlip extends Analyzer {
              ->outIs('RIGHT')
              ->functioncallIs('\array_flip')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'container')
              ->back('first');
         $this->prepareQuery();

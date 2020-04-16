@@ -32,7 +32,7 @@ class MemoizeMagicCall extends Analyzer {
 
     public function analyze() {
         // function foo() { $a = $this->a; $b = $this->a; } // $this->a is routed to __get();
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->initVariable('members', '[:]')
              ->filter(

@@ -80,14 +80,14 @@ class Extension extends Analyzer {
                      ->fullnspathIs($usedClasses);
                 $this->prepareQuery();
 
-                $this->atomIs(self::$FUNCTIONS_ALL)
+                $this->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('ARGUMENT')
                      ->outIs('TYPEHINT')
                      ->hasNoIn('DEFINITION')
                      ->fullnspathIs($usedClasses);
                 $this->prepareQuery();
 
-                $this->atomIs(self::$FUNCTIONS_ALL)
+                $this->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('RETURNTYPE')
                      ->fullnspathIs($usedClasses);
                 $this->prepareQuery();

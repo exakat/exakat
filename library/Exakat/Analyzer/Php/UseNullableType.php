@@ -29,7 +29,7 @@ class UseNullableType extends Analyzer {
 
     public function analyze() {
         // Return type function foo(): ?String
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs(array('RETURNTYPE', 'ARGUMENT'))
              ->outIsIE('TYPEHINT')
              ->is('nullable', true)

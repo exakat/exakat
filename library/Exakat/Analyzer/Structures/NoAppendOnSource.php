@@ -29,7 +29,7 @@ class NoAppendOnSource extends Analyzer {
         // foreach($a as $b) { $a[] = 1;}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'source')
              ->back('first')
 

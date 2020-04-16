@@ -34,7 +34,7 @@ class NoLiteralForReference extends Analyzer {
     public function analyze() {
         // foo(1)
         // function foo(&$r) {}
-        $this->atomIs(self::$CALLS)
+        $this->atomIs(self::CALLS)
              ->outIs('ARGUMENT')
              ->is('constant', true)
              ->atomIsNot(array('Void', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
@@ -48,7 +48,7 @@ class NoLiteralForReference extends Analyzer {
 
         // foo(bar_without_reference)
         // function foo(&$r) {}
-        $this->atomIs(self::$CALLS)
+        $this->atomIs(self::CALLS)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))

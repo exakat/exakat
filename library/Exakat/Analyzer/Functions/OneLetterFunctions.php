@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class OneLetterFunctions extends Analyzer {
     public function analyze() {
         // function s() {}
-        $this->atomIs(self::$FUNCTIONS_NAMED)
+        $this->atomIs(self::FUNCTIONS_NAMED)
              ->outIs('NAME')
              ->fullcodeLength(' == 1 ');
         $this->prepareQuery();

@@ -36,7 +36,7 @@ class VariableUsedOnceByContext extends Analyzer {
         $this->prepareQuery();
 
         // argument by function
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->hasNoInterface()
              ->isNot('abstract', true)
              ->outIs(array('ARGUMENT', 'USE'))
@@ -45,7 +45,7 @@ class VariableUsedOnceByContext extends Analyzer {
         $this->prepareQuery();
 
         // Normal variables and inherited functions from closures
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->isUsed(1)
              ->outIs('DEFINITION');

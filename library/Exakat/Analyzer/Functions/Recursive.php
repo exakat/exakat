@@ -59,11 +59,11 @@ class Recursive extends Analyzer {
         // arrow functions? Simply set to a local variable that is reused.
 
         // function foo() { $this->foo(); }
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('DEFINITION')
              ->atomIs(array('Methodcall', 'Staticmethodcall'))
-             ->goToInstruction(self::$FUNCTIONS_METHOD)
+             ->goToInstruction(self::FUNCTIONS_METHOD)
              ->samePropertyAs('fullnspath', 'fqn');
         $this->prepareQuery();
     }

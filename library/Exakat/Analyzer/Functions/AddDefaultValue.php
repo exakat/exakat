@@ -32,7 +32,7 @@ class AddDefaultValue extends Analyzer {
 
     public function analyze() {
         // function foo($x) { ...; $x = 0; ...}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->isNot('reference', true)
              ->isNot('variadic', true)

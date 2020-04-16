@@ -58,7 +58,7 @@ class TooManyDimensions extends Analyzer {
             ->atomIs('Assignation')
             ->as('results')
             ->outIs('RIGHT')
-            ->atomIs(self::$CALLS)
+            ->atomIs(self::CALLS)
             ->inIs('DEFINITION')
             ->outIs('RETURNTYPE')
             ->fullnspathIs('\\array')

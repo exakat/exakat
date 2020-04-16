@@ -36,7 +36,7 @@ class ScalarAreNotArrays extends Analyzer {
 
         // WIth typehint
         // function foo(in $x) { echo $x[2]; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIs(array('\\int', '\\bool', '\\float'))
@@ -49,7 +49,7 @@ class ScalarAreNotArrays extends Analyzer {
 
         // WIth typehint
         // function foo($x = 2) { echo $x[2]; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->analyzerIsNot('self')
              ->outIs('DEFAULT')
@@ -63,7 +63,7 @@ class ScalarAreNotArrays extends Analyzer {
 
         // WIth typehint (here, null is the most important)
         // function foo(?A $x) { echo $x[2]; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->analyzerIsNot('self')
              ->hasOut('TYPEHINT')
@@ -79,9 +79,9 @@ class ScalarAreNotArrays extends Analyzer {
         $this->atomIs('Variablearray')
              ->inIs('DEFINITION')
              ->outIs('DEFAULT')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_ALL)
+             ->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->fullnspathIs(array('\\int', '\\bool', '\\float', '\\void', '\\callable'))
              ->back('first')
@@ -93,9 +93,9 @@ class ScalarAreNotArrays extends Analyzer {
         $this->atomIs('Variablearray')
              ->inIs('DEFINITION')
              ->outIs('DEFAULT')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_ALL)
+             ->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->is('nullable', true)
              ->back('first')
@@ -105,7 +105,7 @@ class ScalarAreNotArrays extends Analyzer {
 
         // With argument's default value
         // function foo(in $x) { echo $x[2]; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->fullnspathIs(array('\\int', '\\bool', '\\float', '\\null'))
@@ -118,7 +118,7 @@ class ScalarAreNotArrays extends Analyzer {
         $this->prepareQuery();
 
         // foo(1.2); function foo($a) { $a[3]; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->outIs('ARGUMENT')
              ->atomIs(array('Boolean', 'Integer', 'Float', 'Null'))

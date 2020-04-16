@@ -33,7 +33,7 @@ class UnusedProtectedMethods extends Analyzer {
     public function analyze() {
         // class x { protected function foo() {} }
         // class y extends x {}
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->is('visibility', 'protected')
              ->analyzerIsNot('Classes/UsedProtectedMethod');
         $this->prepareQuery();

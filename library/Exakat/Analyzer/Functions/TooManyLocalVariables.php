@@ -28,7 +28,7 @@ class TooManyLocalVariables extends Analyzer {
     protected $tooManyLocalVariableThreshold = 15;
 
     public function analyze() {
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              // Collect all arguments
              ->raw(<<<GREMLIN
 where( __.out("DEFINITION")

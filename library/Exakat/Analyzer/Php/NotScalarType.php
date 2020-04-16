@@ -34,7 +34,7 @@ class NotScalarType extends Analyzer {
                                );
 
         // Typehint
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->codeIs($fakeTypehints)
@@ -44,7 +44,7 @@ class NotScalarType extends Analyzer {
         $this->prepareQuery();
 
         // Return Typehint
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->codeIs($fakeTypehints)
              ->noClassDefinition()

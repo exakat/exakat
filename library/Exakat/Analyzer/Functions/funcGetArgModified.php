@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class funcGetArgModified extends Analyzer {
     public function analyze() {
         // function foo($a = 3) { $args = func_get_args(); $a++; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              // Argument is modified

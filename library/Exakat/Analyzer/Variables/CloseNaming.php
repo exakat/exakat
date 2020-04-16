@@ -72,7 +72,7 @@ class CloseNaming extends Analyzer {
         if (!empty($uniques)) {
             $doubles = array_merge(...array_values($uniques));
 
-            $this->atomIs(self::$VARIABLES_USER)
+            $this->atomIs(self::VARIABLES_USER)
                  ->is('fullcode', $doubles);
             $this->prepareQuery();
         }
@@ -83,7 +83,7 @@ class CloseNaming extends Analyzer {
         $doubles = array_filter($counts, function ($x) { return $x > 1; });
 
         if (!empty($uniques)) {
-            $this->atomIs(self::$VARIABLES_USER)
+            $this->atomIs(self::VARIABLES_USER)
                  ->is('fullcode', $doubles);
             $this->prepareQuery();
         }
@@ -94,7 +94,7 @@ class CloseNaming extends Analyzer {
         $doubles = array_filter($counts, function ($x) { return $x > 1; });
 
         if (!empty($doubles)) {
-            $this->atomIs(self::$VARIABLES_USER)
+            $this->atomIs(self::VARIABLES_USER)
                  ->is('fullcode', $doubles);
             $this->prepareQuery();
         }

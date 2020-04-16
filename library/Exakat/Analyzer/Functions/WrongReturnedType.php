@@ -37,7 +37,7 @@ class WrongReturnedType extends Analyzer {
 // missing support for return typehint from functions (custom and natives)
 
         // function foo() : A { return new A;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
@@ -60,7 +60,7 @@ class WrongReturnedType extends Analyzer {
             $this->prepareQuery();
 
         // function foo() : A { return new A;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
              ->atomIsNot(array('Void', 'Scalartypehint'))
@@ -71,7 +71,7 @@ class WrongReturnedType extends Analyzer {
         $this->prepareQuery();
 
         // function foo() : A { $a = 1; return $a;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
              ->atomIsNot(array('Void', 'Scalartypehint'))
@@ -87,7 +87,7 @@ class WrongReturnedType extends Analyzer {
         $this->prepareQuery();
 
         // function foo() : A { $a = new B; return $a;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
              ->atomIsNot(array('Void', 'Scalartypehint'))
@@ -115,7 +115,7 @@ class WrongReturnedType extends Analyzer {
         $this->prepareQuery();
 
         // function foo(B $b) : A { return $b;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
              ->atomIsNot(array('Void', 'Scalartypehint'))
@@ -134,7 +134,7 @@ class WrongReturnedType extends Analyzer {
 
         // PHP scalar types
         // Don't process void : it is checked at lint time
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
              ->atomIs('Scalartypehint')
@@ -156,7 +156,7 @@ class WrongReturnedType extends Analyzer {
         $this->prepareQuery();
 
         // Type is not the argument type
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('Functions/IsGenerator')
              ->outIs('RETURNTYPE')
              ->atomIs('Scalartypehint')

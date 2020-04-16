@@ -31,7 +31,7 @@ class FunctionSubscripting extends Analyzer {
     public function analyze() {
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->back('first')
              ->inIsIE(array('MEMBER', 'VARIABLE'));
         $this->prepareQuery();

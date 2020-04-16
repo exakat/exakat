@@ -29,7 +29,7 @@ class ReturnTypehintUsage extends Analyzer {
     protected $phpVersion = '7.0+';
 
     public function analyze() {
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
              ->back('first');

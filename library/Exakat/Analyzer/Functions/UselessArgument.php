@@ -34,7 +34,7 @@ class UselessArgument extends Analyzer {
     public function analyze() {
         // function foo($a)
         // foo(2); foo(2); foo(2); // always provide the same arg
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->back('first')

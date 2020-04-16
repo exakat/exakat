@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class VariableVariables extends Analyzer {
     public function analyze() {
         // $$a ${$x}
-        $this->atomIs(self::$VARIABLES_USER)
+        $this->atomIs(self::VARIABLES_USER)
              ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'));
         $this->prepareQuery();
     }

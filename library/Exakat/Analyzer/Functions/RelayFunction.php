@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class RelayFunction extends Analyzer {
     public function analyze() {
         // function foo($a, $b, $c) { return foo2($a, $b, $c);}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIsIE('NAME')
              ->codeIsNot(array('__construct', '__destruct'))
              ->inIsIE('NAME')
@@ -37,7 +37,7 @@ class RelayFunction extends Analyzer {
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->outIsIE('RETURN')
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->saveOutAs('args2', 'ARGUMENT', '')
              ->raw('filter{ args2 == args; }')

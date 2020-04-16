@@ -43,7 +43,7 @@ class NoSpreadForHash extends Analyzer {
         $this->prepareQuery();
 
         // const A = ['a' => 3]; ...A
-        $this->atomIs(self::$STATIC_NAMES, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::STATIC_NAMES, self::WITHOUT_CONSTANTS)
              ->is('variadic', true)
              ->inIs('DEFINITION')
              ->outIs('VALUE')

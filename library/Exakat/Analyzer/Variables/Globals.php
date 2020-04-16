@@ -29,7 +29,7 @@ class Globals extends Analyzer {
         // Global in a function
         $this->atomIs('Globaldefinition')
              ->savePropertyAs('code', 'name')
-             ->goToFunction(self::$FUNCTIONS_ALL)
+             ->goToFunction(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition(self::VARIABLES_ALL)
              ->samePropertyAs('code', 'name', self::CASE_SENSITIVE);
@@ -52,7 +52,7 @@ class Globals extends Analyzer {
         $this->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition'))
              ->codeIsNot($superglobals, self::TRANSLATE, self::CASE_SENSITIVE)
              ->hasNoClassInterfaceTrait()
-             ->hasNoFunction(self::$FUNCTIONS_ALL);
+             ->hasNoFunction(self::FUNCTIONS_ALL);
         $this->prepareQuery();
     }
 }

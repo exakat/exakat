@@ -33,7 +33,7 @@ class WrittenOnlyVariable extends Analyzer {
 
     public function analyze() {
         // function foo($a) { $a = 1; $a += 2;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs(array('ARGUMENT', 'DEFINITION'))
              ->atomIs(array('Parameter', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition')) // static and global ?
              ->outIsIE('NAME')
@@ -58,7 +58,7 @@ GREMLIN
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
-                     ->atomIs(self::$VARIABLES_USER)
+                     ->atomIs(self::VARIABLES_USER)
                      ->raw(<<<'GREMLIN'
 coalesce( __.in("VARIABLE", "OBJECT").hasLabel("Array", "Member"),
           __.filter{ true; }
@@ -67,7 +67,7 @@ GREMLIN
 )                     ->is('isModified', true)
               )
               ->outIs('DEFINITION')
-              ->atomIs(self::$VARIABLES_USER);
+              ->atomIs(self::VARIABLES_USER);
         $this->prepareQuery();
     }
 }

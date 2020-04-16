@@ -33,12 +33,12 @@ class OnlyVariablePassedByReference extends Analyzer {
 
     public function analyze() {
         // custom calls
-        $this->atomIs(self::$CALLS)
+        $this->atomIs(self::CALLS)
              ->hasIn('DEFINITION')  // No definition, no check
              ->outIsIE('METHOD')
              ->outIs('ARGUMENT')
              ->is('isModified', true)
-             ->atomIsNot(self::$CONTAINERS_PHP)
+             ->atomIsNot(self::CONTAINERS_PHP)
              ->back('first');
         $this->prepareQuery();
 
@@ -54,7 +54,7 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->fullnspathIs($phpNative)
              ->outIs('ARGUMENT')
              ->is('isModified', true)
-             ->atomIsNot(self::$CONTAINERS_PHP)
+             ->atomIsNot(self::CONTAINERS_PHP)
              ->back('first');
         $this->prepareQuery();
     }

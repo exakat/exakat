@@ -35,7 +35,7 @@ class TestThenCast extends Analyzer {
              ->is('intval', 0)
              ->inIs(array('LEFT', 'RIGHT'))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'name')
              ->back('first')
              ->outIs(array('THEN', 'ELSE'))

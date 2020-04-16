@@ -67,7 +67,7 @@ class UselessCasting extends Analyzer {
                  ->tokenIs($token)
                  ->outIs('CAST')
                  ->outIsIE('CODE') // In case there are some parenthesis
-                 ->atomIs(self::$CALLS)
+                 ->atomIs(self::CALLS)
                  ->inIs('DEFINITION')
                  ->outIs('RETURNTYPE')
                  ->is('fullnspath', makeFullnspath($type))

@@ -24,10 +24,10 @@ namespace Exakat\Analyzer\Complete;
 
 class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
     public function analyze() {
-        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
               ->outIs('DEFINITION')
-              ->atomIs(self::$FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
+              ->atomIs(self::FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
               ->inIs('DEFAULT')
               ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
@@ -52,10 +52,10 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
               ->addETo('DEFINITION', 'method');
         $this->prepareQuery();
 
-        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
              ->hasOut('RETURNTYPE')
              ->outIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
+             ->atomIs(self::FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
              ->inIs('DEFAULT')
              ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
              ->outIs('DEFINITION')

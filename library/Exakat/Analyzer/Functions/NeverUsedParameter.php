@@ -34,7 +34,7 @@ class NeverUsedParameter extends Analyzer {
 
     public function analyze() {
         // foo($a, $b = 2, $c = 3) {}; foo(1,2);
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->filter(
                  $this->side()

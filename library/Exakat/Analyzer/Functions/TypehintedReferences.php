@@ -28,7 +28,7 @@ class TypehintedReferences extends Analyzer {
     public function analyze() {
         // function foo(object &$x)
         // function foo(X &$x)
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->outIs('TYPEHINT')
@@ -37,7 +37,7 @@ class TypehintedReferences extends Analyzer {
         $this->prepareQuery();
 
         // function &foo($x) : X
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->is('reference', true)
              ->outIs('RETURNTYPE')
              ->atomIsNot(array('Void', 'Scalartypehint'))

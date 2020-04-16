@@ -131,7 +131,7 @@ class UselessParenthesis extends Analyzer {
         $this->prepareQuery();
 
         //function foo($c = (PHP_OS == 1 ? 1 : 2) ){}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIs('Parenthesis')

@@ -36,7 +36,7 @@ class PhpNativeReference extends Complete {
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs('ARGUMENT')
               ->isHash('rank', $references, 'fnp')
-              ->atomIs(self::$CONTAINERS)
+              ->atomIs(self::CONTAINERS)
               ->setProperty('isModified', true);
         $this->prepareQuery();
     }

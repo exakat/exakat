@@ -31,7 +31,7 @@ class UndefinedVariable extends Analyzer {
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('BLOCK')
                      ->atomInsideNoDefinition(array('Eval', 'Include'))
              )
@@ -39,7 +39,7 @@ class UndefinedVariable extends Analyzer {
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('BLOCK')
                      ->atomInsideNoDefinition('Functioncall')
                      ->functioncallIs('\\extract')
@@ -73,14 +73,14 @@ class UndefinedVariable extends Analyzer {
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('BLOCK')
                      ->atomInsideNoDefinition(array('Eval', 'Include'))
              )
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->atomIs(self::$FUNCTIONS_ALL)
+                     ->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('BLOCK')
                      ->atomInsideNoDefinition('Functioncall')
                      ->functioncallIs('\\extract')

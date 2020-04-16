@@ -54,7 +54,7 @@ class ImplodeArgsOrder extends Analyzer {
         // Returntype
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
              ->outIs('RETURNYTPE')
              ->fullnspathIs('\\array')
@@ -82,7 +82,7 @@ class ImplodeArgsOrder extends Analyzer {
         // Returntype
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs(self::$FUNCTIONS_CALLS)
+             ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
              ->outIs('RETURNYTPE')
              ->fullnspathIs('\\string')

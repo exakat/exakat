@@ -73,10 +73,10 @@ class WrongCase extends Analyzer {
         $this->prepareQuery();
 
 // Typehint
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->atomIsNot(self::$RELATIVE_CLASS)
+             ->atomIsNot(self::RELATIVE_CLASS)
              ->getClassName('classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')
@@ -86,9 +86,9 @@ class WrongCase extends Analyzer {
         $this->prepareQuery();
 
 // Return Typehint
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
-             ->atomIsNot(self::$RELATIVE_CLASS)
+             ->atomIsNot(self::RELATIVE_CLASS)
              ->getClassName('classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')

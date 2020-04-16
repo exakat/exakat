@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class OverwrittenLiterals extends Analyzer {
     public function analyze() {
         // function foo() { $a = 1; $a = 2;}
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
              ->variableIsAssigned(2)

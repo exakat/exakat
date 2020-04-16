@@ -53,7 +53,7 @@ class InterfaceUsage extends Analyzer {
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIs(array('Identifier', 'Nsname'))
@@ -62,7 +62,7 @@ class InterfaceUsage extends Analyzer {
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIs(array('Identifier', 'Nsname'))
              ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))

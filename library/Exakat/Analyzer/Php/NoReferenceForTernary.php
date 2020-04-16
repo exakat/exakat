@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NoReferenceForTernary extends Analyzer {
     public function analyze() {
         // function &foo() { return $a ?? $b; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->is('reference', true)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Return')

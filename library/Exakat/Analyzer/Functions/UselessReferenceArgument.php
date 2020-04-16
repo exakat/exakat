@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UselessReferenceArgument extends Analyzer {
     public function analyze() {
         //function foo(&$a) { echo $a; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->savePropertyAs('code', 'name')
@@ -35,7 +35,7 @@ class UselessReferenceArgument extends Analyzer {
              ->outIs('BLOCK')
              ->not(
                 $this->side()
-                     ->atomInsideNoDefinition(self::$VARIABLES_USER)
+                     ->atomInsideNoDefinition(self::VARIABLES_USER)
                      ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
                      ->inIsIE(array('VARIABLE', 'OBJECT'))
                      ->is('isModified', true)

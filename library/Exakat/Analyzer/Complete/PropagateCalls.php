@@ -106,10 +106,10 @@ class PropagateCalls extends Complete {
 
     private function processReturnedType(): int {
         // function foo() : X {}; $a = foo(); $a->b();
-        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
               ->outIs('DEFINITION')
-              ->atomIs(self::$FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
+              ->atomIs(self::FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
               ->inIs('DEFAULT')
               ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
               ->outIs('DEFINITION')
@@ -136,7 +136,7 @@ class PropagateCalls extends Complete {
         $c1 = $this->rawQuery()->toInt();
 
         // function foo() : X {}; foo()->b();
-        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
               ->outIs('DEFINITION')
               ->inIs('OBJECT')
@@ -162,10 +162,10 @@ class PropagateCalls extends Complete {
         $c1 += $this->rawQuery()->toInt();
 
         // function foo() : X {};foo()->b();
-        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
               ->outIs('DEFINITION')
-              ->atomIs(self::$FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
+              ->atomIs(self::FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
               ->inIs('OBJECT')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -188,10 +188,10 @@ class PropagateCalls extends Complete {
               ->count();
         $c2 = $this->rawQuery()->toInt();
 
-        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
              ->hasOut('RETURNTYPE')
              ->outIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
+             ->atomIs(self::FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
              ->inIs('DEFAULT')
              ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
              ->outIs('DEFINITION')

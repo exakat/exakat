@@ -35,7 +35,7 @@ class MismatchedTypehint extends Analyzer {
 
     public function analyze() {
         // Based on calls to a function
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('results')
              ->outIs('TYPEHINT')
@@ -53,7 +53,7 @@ class MismatchedTypehint extends Analyzer {
         $this->prepareQuery();
 
         // Based on Methodcalls : still missing the class of the object
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('results')
              ->outIs('TYPEHINT')
@@ -72,7 +72,7 @@ class MismatchedTypehint extends Analyzer {
         $this->prepareQuery();
 
         // Based on staticmethodcall
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('results')
              ->outIs('TYPEHINT')

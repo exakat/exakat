@@ -39,7 +39,7 @@ class UnusedMethods extends Analyzer {
         // Could be checked for __clone, __get, __set...
 
         // Methods definitions in class
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('abstract', true)
              ->hasClass()
              ->analyzerIsNot(array('Classes/UsedMethods',

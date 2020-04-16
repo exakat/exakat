@@ -30,7 +30,7 @@ class MaxLevelOfIdentation extends Analyzer {
     public function analyze() {
         // if (a) { if (b) { }}
         // only reporting the method, not each line.
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->processLevels($this->maxLevel)
              ->atomIsNot('Sequence')

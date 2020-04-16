@@ -29,7 +29,7 @@ class ThisIsForClasses extends Analyzer {
     public function analyze() {
         // General case
         $this->atomIs('This')
-             ->hasNoInstruction(self::$FUNCTIONS_ALL)
+             ->hasNoInstruction(self::FUNCTIONS_ALL)
              ->back('first');
         $this->prepareQuery();
 

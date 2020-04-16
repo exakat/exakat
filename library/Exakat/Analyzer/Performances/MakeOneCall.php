@@ -41,7 +41,7 @@ class MakeOneCall extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              ->outIs('LEFT')
-             ->atomIs(self::$CONTAINERS)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'string')
              ->back('first')
              ->nextSibling()

@@ -42,7 +42,7 @@ class EmptyFunction extends Analyzer {
         $this->prepareQuery();
 
         // method : then, it should not overwrite a parent's method
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->hasClassTrait()
              ->isNot('abstract', true)
              ->IsNotInheritedMethod()

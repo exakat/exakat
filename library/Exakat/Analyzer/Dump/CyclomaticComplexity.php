@@ -28,7 +28,7 @@ class CyclomaticComplexity extends AnalyzerHashResults {
 
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
-        $this->atomIs(self::$FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->as('name')
               ->back('first')

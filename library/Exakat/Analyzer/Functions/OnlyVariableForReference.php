@@ -28,7 +28,7 @@ class OnlyVariableForReference extends Analyzer {
     // function foo(&$a) {}
     // foo(3);
     public function analyze() {
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->has('reference')
@@ -43,7 +43,7 @@ class OnlyVariableForReference extends Analyzer {
                 $this->side()
                      ->filter(
                         $this->side()
-                             ->atomIs(self::$CALLS)
+                             ->atomIs(self::CALLS)
                              ->inIs('DEFINITION')
                              ->is('reference', true)
                      )
@@ -52,7 +52,7 @@ class OnlyVariableForReference extends Analyzer {
                 $this->side()
                      ->filter(
                         $this->side()
-                             ->atomIs(self::$CALLS)
+                             ->atomIs(self::CALLS)
                              ->hasNoIn('DEFINITION')
                      )
              )

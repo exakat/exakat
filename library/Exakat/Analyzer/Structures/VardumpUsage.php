@@ -34,7 +34,7 @@ class VardumpUsage extends Analyzer {
         $this->atomFunctionIs($debugFunctions)
              ->outWithRank('ARGUMENT', 1)
              ->is('boolean', false)
-             ->atomIsNot(self::$CONTAINERS)
+             ->atomIsNot(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
 

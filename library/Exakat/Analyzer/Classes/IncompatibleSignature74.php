@@ -34,7 +34,7 @@ class IncompatibleSignature74 extends Analyzer {
 
     public function analyze() {
         // non-matching reference
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
@@ -49,7 +49,7 @@ class IncompatibleSignature74 extends Analyzer {
 
         // non-matching argument count :
         // abstract : exact count
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->savePropertyAs('count', 'counted')
              ->outIs('OVERWRITE')
              ->is('abstract', true) //then, it is not private
@@ -59,7 +59,7 @@ class IncompatibleSignature74 extends Analyzer {
 
         // non-matching argument count :
         // non-abstract : count may be more but not less
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->savePropertyAs('count', 'counted')
              ->outIs('OVERWRITE')
@@ -69,7 +69,7 @@ class IncompatibleSignature74 extends Analyzer {
         $this->prepareQuery();
 
         // non-matching typehint
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
@@ -83,7 +83,7 @@ class IncompatibleSignature74 extends Analyzer {
         $this->prepareQuery();
 
         // non-matching return typehint
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->hasOut('OVERWRITE')
              ->savePropertyAs('id', 'method')
              ->isNot('visibility', 'private')
@@ -113,7 +113,7 @@ class IncompatibleSignature74 extends Analyzer {
         $this->prepareQuery();
 
         // non-matching nullable
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
@@ -127,7 +127,7 @@ class IncompatibleSignature74 extends Analyzer {
         $this->prepareQuery();
 
         // non-matching return nullable
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->raw('sideEffect{ nullable = it.get().properties("nullable").any(); }')
              ->outIs('OVERWRITE')
@@ -136,7 +136,7 @@ class IncompatibleSignature74 extends Analyzer {
         $this->prepareQuery();
 
         // non-matching visibility
-        $this->atomIs(self::$FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->raw('sideEffect{ if (it.get().properties("visibility").any()) { v = it.get().value("visibility");} else { v = false; }}')
              ->outIs('OVERWRITE')
              ->raw(<<<'GREMLIN'

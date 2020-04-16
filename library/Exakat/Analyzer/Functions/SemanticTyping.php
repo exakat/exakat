@@ -67,7 +67,7 @@ class SemanticTyping extends Analyzer {
         );
 
         // function foo($closure ) {}
-        $this->atomIs(self::$FUNCTIONS)
+        $this->atomIs(self::FUNCTIONS)
              ->outIs('ARGUMENT')
              ->as('results')
              ->outIs('TYPEHINT')
@@ -79,7 +79,7 @@ class SemanticTyping extends Analyzer {
         $this->prepareQuery();
 
         // function foo(return $closure ) {}
-        $this->atomIs(self::$FUNCTIONS)
+        $this->atomIs(self::FUNCTIONS)
              ->outIs('RETURNTYPE')
              ->atomIs('Void')
              ->back('first')

@@ -29,7 +29,7 @@ class GeneratorCannotReturn extends Analyzer {
 
     public function analyze() {
         // no return in generators before PHP 7.0
-        $this->atomIs(self::$FUNCTIONS_ALL)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->hasAtomInside(array('Yield', 'Yieldfrom'))
              ->hasAtomInside('Return');
         $this->prepareQuery();
