@@ -1,0 +1,95 @@
+test
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : PROJECT
+  1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : NEW
+            6
+            Label : CODE
+              7
+        Label : EXPRESSION
+          11
+          Label : CLASS
+            6
+            Label : CODE
+              14
+              Label : CONCAT
+                12
+              Label : CONCAT
+                15
+          Label : VARIABLE
+            9
+        Label : EXPRESSION
+          5
+          Label : NEW
+            17
+        Label : EXPRESSION
+          11
+          Label : CLASS
+            12
+          Label : VARIABLE
+            9

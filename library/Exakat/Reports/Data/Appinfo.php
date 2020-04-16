@@ -35,7 +35,7 @@ class Appinfo extends Data {
                             '@ operator'                    => 'Structures/Noscream',
                             'Alternative syntax'            => 'Php/AlternativeSyntax',
                             'Magic constants'               => 'Constants/MagicConstantUsage',
-                            'halt compiler'                 => 'Php/Haltcompiler',
+                            'halt_compiler()'               => 'Php/Haltcompiler',
 
                             'Casting'                       => 'Php/CastingUsage',
                             'Resources'                     => 'Structures/ResourcesUsage',
@@ -53,6 +53,7 @@ class Appinfo extends Data {
                             'Coalesce'                      => 'Php/Coalesce',
                             'Coalesce Equal'                => 'Php/CoalesceEqual',
                             'Trailing Comma'                => 'Php/TrailingComma',
+                            'PHP 8.0 Variable Syntax'       => 'Php/Php80VariableSyntax',
 
                             'File upload'                   => 'Structures/FileUploadUsage',
                             'Environment Variables'         => 'Php/UsesEnv',

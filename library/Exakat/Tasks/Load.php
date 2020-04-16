@@ -1139,8 +1139,12 @@ class Load extends Tasks {
         }
 
         $this->runPlugins($string, $elements);
-
         $this->pushExpression($string);
+
+        if ($type === $this->phptokens::T_QUOTE) {
+            $string = $this->processFCOA($string);
+        }
+
         $this->checkExpression();
 
         return $string;
@@ -4853,7 +4857,7 @@ class Load extends Tasks {
 
         if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+        } else {
             $literal = $this->processFCOA($literal);
         }
 

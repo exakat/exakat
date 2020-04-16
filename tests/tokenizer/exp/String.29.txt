@@ -1,0 +1,99 @@
+test
+Label : GLOBAL
+  10
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+Label : PROJECT
+  1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          6
+          Label : INDEX
+            7
+          Label : VARIABLE
+            5
+        Label : EXPRESSION
+          6
+          Label : INDEX
+            12
+          Label : VARIABLE
+            8
+            Label : CONCAT
+              9
+            Label : CONCAT
+              10
+        Label : EXPRESSION
+          16
+          Label : METHOD
+            13
+            Label : ARGUMENT
+              14
+            Label : NAME
+              13
+          Label : OBJECT
+            8
+            Label : CONCAT
+              9
+            Label : CONCAT
+              10
+        Label : EXPRESSION
+          17
+          Label : CLASS
+            8
+            Label : CONCAT
+              9
+            Label : CONCAT
+              10
+          Label : METHOD
+            13
+            Label : ARGUMENT
+              14
+            Label : NAME
+              13
+        Label : EXPRESSION
+          18
+          Label : ARGUMENT
+            17
+            Label : CLASS
+              6
+              Label : INDEX
+                12
+              Label : VARIABLE
+                17
+                Label : CLASS
+                  19
+                Label : CONSTANT
+                  20
+            Label : MEMBER
+              22
+        Label : EXPRESSION
+          18
+          Label : ARGUMENT
+            17
+            Label : CLASS
+              17
+              Label : CLASS
+                19
+              Label : CONSTANT
+                20
+            Label : MEMBER
+              22
