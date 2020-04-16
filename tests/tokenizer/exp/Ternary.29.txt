@@ -83,5 +83,3 @@ Label : PROJECT
                     21
               Label : CONCAT
                 24
-        Label : EXPRESSION
-          27

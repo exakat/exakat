@@ -117,5 +117,3 @@ Label : PROJECT
               19
             Label : NAME
               11
-        Label : EXPRESSION
-          28
