@@ -39,6 +39,8 @@ class UseCaseValue extends Analyzer {
              ->atomIs('Case')
              ->as('results')
              ->outIs('CODE')
+             // code is not shared with previous case or default
+             ->raw('where(__.in("CODE").count().is(eq(1)))')
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'variable')
              ->is('isRead', true)
@@ -49,7 +51,7 @@ class UseCaseValue extends Analyzer {
                 $this->side()
                      ->previousSibling('EXPRESSION')
                      ->outIs('CODE')
-                     ->noAtomInside(array('Break', 'Return', 'Continue'))
+                     ->noAtomInside(self::BREAKS)
              );
         $this->prepareQuery();
     }
