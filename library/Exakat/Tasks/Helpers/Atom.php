@@ -225,6 +225,10 @@ class Atom {
     private function protectString($code) {
         return addcslashes($code , '\\"');
     }
+
+    public function isA(array $atoms) : bool {
+        return in_array($right->atom, $atoms, \STRICT_COMPARISON);
+    }
 }
 
 ?>

@@ -380,7 +380,7 @@ class Emissary extends Reports {
 
         $favorites = new Favorites($this->config);
         $favoritesRules = $this->getTopFile($this->rulesets->getRulesetsAnalyzers(array('Favorites')));
-        $favoritesList = json_decode($favorites->generate($favoritesRules, Reports::INLINE));
+        $favoritesList = json_decode($favorites->generate($favoritesRules, self::INLINE));
 
         $html = array();
         $highchart = new Highchart();
@@ -1366,7 +1366,7 @@ JAVASCRIPTCODE;
 
     protected function generatePhpConfiguration(Section $section): void {
         $phpConfiguration = new Phpcompilation($this->config);
-        $report = $phpConfiguration->generate('', Reports::INLINE);
+        $report = $phpConfiguration->generate('', self::INLINE);
 
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n", ), $configline);
@@ -3045,7 +3045,7 @@ HTML
 
     private function generateStats(Section $section): void {
         $results = new Stats($this->config);
-        $report = $results->generate('', Reports::INLINE);
+        $report = $results->generate('', self::INLINE);
         $report = json_decode($report);
 
         $stats = array();
@@ -3501,7 +3501,7 @@ HTML;
 
     protected function generateFixesRector(Section $section): void {
         $rector = new Rector($this->config);
-        $report = $rector->generate('', Reports::INLINE);
+        $report = $rector->generate('', self::INLINE);
 
         $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array('&nbsp;', "<br />\n", ), $configline);
@@ -3515,7 +3515,7 @@ HTML;
 
     protected function generateFixesPhpCsFixer(Section $section): void {
         $phpcsfixer = new Phpcsfixer($this->config);
-        $report = $phpcsfixer->generate('', Reports::INLINE);
+        $report = $phpcsfixer->generate('', self::INLINE);
 
         $configline = trim($report);
         $configline = PHPSyntax($configline);

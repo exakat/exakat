@@ -2894,7 +2894,7 @@ class Load extends Tasks {
 
         $this->pushExpression($string);
 
-        if (in_array($string->atom, array('Parent', 'Self', 'Static', 'Newcall'), \STRICT_COMPARISON)) {
+        if ($string->isA(array('Parent', 'Self', 'Static', 'Newcall'))) {
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
                 $this->getFullnspath($string, 'class', $string);
 
@@ -2915,7 +2915,7 @@ class Load extends Tasks {
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             $this->getFullnspath($string, 'function', $string);
-        } elseif (in_array($string->atom, array('Boolean', 'Null'))) {
+        } elseif ($string->isA(array('Boolean', 'Null'))) {
             $string->fullnspath = '\\' . mb_strtolower($string->fullcode);
             $string->aliased    = self::NOT_ALIASED;
         } else {
@@ -3120,7 +3120,7 @@ class Load extends Tasks {
                     $element = $this->processSingle($atom);
                 }
 
-                if (in_array($element->atom, array('Globaldefinition', 'Staticdefinition', 'Variabledefinition'), \STRICT_COMPARISON)) {
+                if ($element->isA(array('Globaldefinition', 'Staticdefinition', 'Variabledefinition'))) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
                 }
@@ -4136,7 +4136,7 @@ class Load extends Tasks {
             $this->popExpression();
         }
 
-        if (in_array($then->atom, array('Identifier', 'Nsname'), \STRICT_COMPARISON)) {
+        if ($then->isA(array('Identifier', 'Nsname'))) {
             $this->calls->addCall('const', $then->fullnspath, $then);
         }
         $this->addLink($ternary, $condition, 'CONDITION');
@@ -4740,8 +4740,7 @@ class Load extends Tasks {
             return $nsname;
         }
 
-        if (in_array($nsname->atom, array('Nsname', 'Identifier'), \STRICT_COMPARISON)) {
-
+        if ($nsname->isA(array('Nsname', 'Identifier'))) {
             $type = $this->contexts->isContext(Context::CONTEXT_NEW) ? 'class' : 'const';
             $this->getFullnspath($nsname, $type, $nsname);
 
@@ -5442,17 +5441,16 @@ class Load extends Tasks {
             $static->aliased = self::NOT_ALIASED;
             $this->runPlugins($static, array('CLASS'    => $left,
                                              'CONSTANT' => $right));
-        } elseif (in_array($right->atom, array('Variable',
-                                               'Array',
-                                               'Arrayappend',
-                                               'MagicConstant',
-                                               'Concatenation',
-                                               'Block',
-                                               'Boolean',
-                                               'Null',
-                                               'Staticpropertyname',
-                                               ),
-                        \STRICT_COMPARISON)) {
+        } elseif ($right->isA(array('Variable',
+                                    'Array',
+                                    'Arrayappend',
+                                    'MagicConstant',
+                                    'Concatenation',
+                                    'Block',
+                                    'Boolean',
+                                    'Null',
+                                    'Staticpropertyname',
+                                    ))) {
             $static = $this->addAtom('Staticproperty');
             $this->addLink($static, $right, 'MEMBER');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
@@ -5486,7 +5484,7 @@ class Load extends Tasks {
         $static->token    = $this->getToken($this->tokens[$current][0]);
 
         if (!empty($left->fullnspath)){
-            if (in_array($static->atom, array('Staticmethodcall', 'Staticmethod', ), \STRICT_COMPARISON)) {
+            if ($static->isA(array('Staticmethodcall', 'Staticmethod'))) {
                 $name = mb_strtolower($right->code);
                 $this->calls->addCall('staticmethod',  "$left->fullnspath::$name", $static);
             } elseif ($static->atom === 'Staticconstant') {
@@ -5572,22 +5570,21 @@ class Load extends Tasks {
         $this->contexts->exitContext(Context::CONTEXT_NEW);
         $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
-        if (in_array($right->atom, array('Variable',
-                                         'Array',
-                                         'Name',
-                                         'Concatenation',
-                                         'Arrayappend',
-                                         'Member',
-                                         'MagicConstant',
-                                         'Block',
-                                         'Boolean',
-                                         'Null',
-                                         ),
-                \STRICT_COMPARISON)) {
+        if ($right->isA(array('Variable',
+                              'Array',
+                              'Name',
+                              'Concatenation',
+                              'Arrayappend',
+                              'Member',
+                              'MagicConstant',
+                              'Block',
+                              'Boolean',
+                              'Null',
+                              ))) {
             $static = $this->addAtom('Member');
             $links = 'MEMBER';
             $static->enclosing = self::NO_ENCLOSING;
-        } elseif (in_array($right->atom, array('Methodcallname', 'Methodcall'), \STRICT_COMPARISON)) {
+        } elseif ($right->isA(array('Methodcallname', 'Methodcall'))) {
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
@@ -6148,7 +6145,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
             }
-        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname'), \STRICT_COMPARISON)) {
+        } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname'))) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
                     $apply->aliased = self::NOT_ALIASED;
@@ -6163,7 +6160,7 @@ class Load extends Tasks {
             $apply->fullnspath = substr($this->namespace, 0, -1) . mb_strtolower(substr($name->fullcode, 9));
                     $apply->aliased = self::NOT_ALIASED;
                     return;
-        } elseif (in_array($name->atom, array('Static', 'Self'), \STRICT_COMPARISON)) {
+        } elseif ($name->isA(array('Static', 'Self'))) {
             if (empty($this->currentClassTrait) || empty($this->currentClassTrait[count($this->currentClassTrait) - 1])) {
                 $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
                     $apply->aliased = self::NOT_ALIASED;
@@ -6187,12 +6184,12 @@ class Load extends Tasks {
             $apply->fullnspath = '\\parent';
                     $apply->aliased = self::NOT_ALIASED;
                     return;
-        } elseif (in_array($name->atom, array('Boolean', 'Null'), \STRICT_COMPARISON)) {
+        } elseif ($name->isA(array('Boolean', 'Null'))) {
             $apply->fullnspath = '\\' . mb_strtolower($name->fullcode);
                     $apply->aliased = self::NOT_ALIASED;
                     return;
-        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Newcall'), \STRICT_COMPARISON)) {
-            if (in_array($name->atom, array('Newcall', 'Name'), \STRICT_COMPARISON)) {
+        } elseif ($name->isA(array('Identifier', 'Name', 'Newcall'))) {
+            if ($name->isA(array('Newcall', 'Name')))) {
                $fnp = mb_strtolower($name->code);
             } else {
                $fnp = $name->code;
