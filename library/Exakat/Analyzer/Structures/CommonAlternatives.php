@@ -53,7 +53,6 @@ class CommonAlternatives extends Analyzer {
 
              ->back('first')
              ->outIs('ELSE')
-             ->tokenIs('T_ELSE')
              ->atomIs('Sequence')
              ->outIs('EXPRESSION')
              ->followParAs(FollowParAs::FOLLOW_NONE)
