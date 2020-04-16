@@ -51,7 +51,7 @@ class ReservedNames extends Analyzer {
 
         // variables
         $reservedNamesVariables = array_map(function ($x) { return "\$$x"; }, $reservedNames);
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->tokenIs('T_VARIABLE') // avoid dynamical variables
              ->codeIs($reservedNamesVariables);
         $this->prepareQuery();

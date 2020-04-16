@@ -50,7 +50,7 @@ class Php72Deprecation extends Analyzer {
         // Usage of \\assert with string argument
         $this->atomFunctionIs('\\assert')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$STRINGS_ALL)
+             ->atomIs(self::STRINGS_ALL)
              ->back('first');
         $this->prepareQuery();
 

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class FileUploadUsage extends Analyzer {
     public function analyze() {
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->codeIs('$_FILES', true);
         $this->prepareQuery();
 

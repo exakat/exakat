@@ -52,7 +52,7 @@ class CustomConstantUsage extends Analyzer {
         $constants = makeFullNsPath($constants);
 
         // @note NSnamed are OK by default (may be not always!)
-        $this->atomIs(self::$CONSTANTS_ALL)
+        $this->atomIs(self::CONSTANTS_ALL)
              ->analyzerIs('Constants/ConstantUsage')
              ->hasIn('DEFINITION')
              ->fullnspathIsNot($constants);

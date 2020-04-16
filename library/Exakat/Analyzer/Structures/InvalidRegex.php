@@ -111,7 +111,7 @@ GREMLIN
 
         $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
              ->fullcodeIs($invalid)
              ->back('first');
         $this->prepareQuery();

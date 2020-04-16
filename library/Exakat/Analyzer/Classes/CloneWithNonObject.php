@@ -29,7 +29,7 @@ class CloneWithNonObject extends Analyzer {
         // clone x
         $this->atomIs('Clone')
              ->outIs('CLONE')
-             ->atomIsNot(array_merge(self::$VARIABLES_ALL, array('New', 'This', 'Clone')))
+             ->atomIsNot(array_merge(self::VARIABLES_ALL, array('New', 'This', 'Clone')))
              // can't return a scalar, a nullable, or anything untyped
              ->not(
                 $this->side()

@@ -29,7 +29,7 @@ class StrangeName extends Analyzer {
         $names = $this->loadIni('php_strange_names.ini', 'variables');
 
         // typos, like $_PSOT
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->codeIs($names);
         $this->prepareQuery();
 
@@ -50,7 +50,7 @@ class StrangeName extends Analyzer {
 
 /*
     // base for letter diversity : this needs nore testing, as diversity drops with size of the name
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->raw('filter{
 it.get().value("code").drop(1).split("").toUnique().size() / it.get().value("code").drop(1).length()
              }');

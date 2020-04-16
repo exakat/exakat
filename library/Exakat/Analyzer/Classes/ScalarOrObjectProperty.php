@@ -60,7 +60,7 @@ class ScalarOrObjectProperty extends Analyzer {
 
              ->outIs('DEFAULT')
              ->hasIn('RIGHT')
-             ->atomIs(self::$LITERALS) // Another definition is a literal
+             ->atomIs(self::LITERALS) // Another definition is a literal
              ->atomIsNot('Null')
 
              ->back('results');
@@ -81,7 +81,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->back('results')
 
              ->outIs('DEFAULT')
-             ->atomIs(self::$LITERALS) // Another definition is a literal
+             ->atomIs(self::LITERALS) // Another definition is a literal
              ->atomIsNot('Null')
 
              ->back('results');

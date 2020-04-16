@@ -36,13 +36,13 @@ class MailUsage extends Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Newcall')
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->has('fullnspath')
              ->fullnspathIs($mailerClasses);
         $this->prepareQuery();
 
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->has('fullnspath')
              ->fullnspathIs($mailerClasses);
         $this->prepareQuery();
     }

@@ -67,7 +67,7 @@ GREMLIN;
              ->savePropertyAs('rank', 'ranked')
              ->raw($safeIndex)
              ->outIsIE('VARIABLE')
-             ->atomIs(self::$VARIABLES_ALL)
+             ->atomIs(self::VARIABLES_ALL)
              ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first')
 
@@ -122,7 +122,7 @@ GREMLIN;
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
              ->goToArray()
              ->inIs('SOURCE');

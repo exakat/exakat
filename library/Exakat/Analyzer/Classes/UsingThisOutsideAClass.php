@@ -28,7 +28,7 @@ class UsingThisOutsideAClass extends Analyzer {
 
     public function analyze() {
         // $this outside a class or a trait
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->atomIs('This')
              ->hasNoClass()
              ->hasNoTrait();

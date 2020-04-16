@@ -36,7 +36,7 @@ class NoEmptyRegex extends Analyzer {
         // preg_match(''.$b, $d, $d); Empty delimiter
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
              ->outIsIE('CONCAT')
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
              ->noDelimiterIs('')
@@ -46,7 +46,7 @@ class NoEmptyRegex extends Analyzer {
         // preg_match('a'.$b, $d, $d); Non-alpha numerical delimiter
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
              ->outWithRank('CONCAT', 0)
              ->outIsIE('CONCAT') // keep going in case
              ->is('rank', 0)
@@ -59,7 +59,7 @@ class NoEmptyRegex extends Analyzer {
         // preg_match('abc', $d, $d); Non-alpha numerical delimiter
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
              ->hasNoOut('CONCAT')
              ->noDelimiterIsNot('')
              ->regexIs('noDelimiter', '^[A-Za-z0-9]')

@@ -41,7 +41,7 @@ class LogicalToInArray extends Analyzer {
              ->savePropertyAs('fullcode', 'name')
              ->inIs(array('LEFT', 'RIGHT'))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$LITERALS)
+             ->atomIs(self::LITERALS)
              ->back('first')
 
              ->atomInside('Logical')
@@ -56,7 +56,7 @@ class LogicalToInArray extends Analyzer {
              ->samePropertyAs('fullcode', 'name')
              ->inIs(array('LEFT', 'RIGHT'))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$LITERALS)
+             ->atomIs(self::LITERALS)
 
              ->back('first');
         $this->prepareQuery();

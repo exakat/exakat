@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UseCli extends Analyzer {
     public function analyze() {
         // GPC + R
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->codeIs(array('$argv', '$argc'), self::TRANSLATE);
         $this->prepareQuery();
 

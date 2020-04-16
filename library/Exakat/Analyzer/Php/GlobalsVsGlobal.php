@@ -42,7 +42,7 @@ GREMLIN;
         $storage = array('$GLOBALS' => 'GLOBALS',
                          'global'   => 'global');
 
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->raw('or( has("code", ' . $globals[0] . '), __.in("GLOBAL")) ')
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
@@ -67,7 +67,7 @@ GREMLIN;
             return;
         }
 
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->raw('or( has("code", ' . $globals[0] . '), __.in("GLOBAL")) ')
              ->raw('sideEffect{ ' . $mapping . ' }')
              ->raw('filter{ x2 in ***}', $types)

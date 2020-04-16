@@ -65,7 +65,7 @@ class UndefinedInterfaces extends Analyzer {
              ->analyzerIsNot($omitted);
         $this->prepareQuery();
 
-        $this->atomIs(self::$CONSTANTS_ALL)
+        $this->atomIs(self::CONSTANTS_ALL)
              ->hasIn(array('TYPEHINT', 'RETURNTYPE'))
              ->atomIsNot(array('Self', 'Parent'))
              ->has('fullnspath')

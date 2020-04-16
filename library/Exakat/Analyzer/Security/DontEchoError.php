@@ -44,8 +44,7 @@ class DontEchoError extends Analyzer {
                              ->atomIs(array('Array', 'Variable', 'Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
                      )
              )
-//             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->has('fullnspath')
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
         $this->prepareQuery();
@@ -54,7 +53,7 @@ class DontEchoError extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Functioncall')
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->has('fullnspath')
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
         $this->prepareQuery();

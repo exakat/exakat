@@ -34,7 +34,7 @@ class NoListWithString extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs(self::$STRINGS_ALL)
+             ->atomIs(self::STRINGS_ALL)
              ->back('first');
         $this->prepareQuery();
 
@@ -53,7 +53,7 @@ class NoListWithString extends Analyzer {
              ->samePropertyAs('code', 'name')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->atomIs(self::$STRINGS_ALL)
+             ->atomIs(self::STRINGS_ALL)
              ->back('first');
         $this->prepareQuery();
     }

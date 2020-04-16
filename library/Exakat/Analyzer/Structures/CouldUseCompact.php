@@ -61,7 +61,7 @@ class CouldUseCompact extends Analyzer {
                                 $this->side()
                                      ->filter(
                                         $this->side()
-                                             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+                                             ->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
                                              ->has('noDelimiter')
                                      )
                              )
@@ -94,7 +94,7 @@ class CouldUseCompact extends Analyzer {
                              ->filter(
                                 $this->side()
                                      ->outIs('INDEX')
-                                     ->atomIs(self::$STRINGS_ALL)
+                                     ->atomIs(self::STRINGS_ALL)
                                      ->savePropertyAs('noDelimiter', 'name')
                                      ->makeVariableName('name')
                                      ->inIs('INDEX')

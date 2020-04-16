@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConstantComparisonConsistance extends Analyzer {
 
     public function analyze() {
-        $literalsList = makeList(self::$LITERALS);
+        $literalsList = makeList(self::LITERALS);
         $mapping = <<<GREMLIN
 if (it.get().vertices(OUT, "LEFT").next().label() in [$literalsList]) { 
     x2 = "left"; 
@@ -44,7 +44,7 @@ GREMLIN;
 
         $this->atomIs('Comparison')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$LITERALS)
+             ->atomIs(self::LITERALS)
              ->back('first')
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
@@ -78,7 +78,7 @@ GREMLIN;
 
         $this->atomIs('Comparison')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(self::$LITERALS)
+             ->atomIs(self::LITERALS)
              ->back('first')
              ->raw('sideEffect{ ' . $mapping . '; }')
              ->raw('filter{ x2 in *** ; }', $types)

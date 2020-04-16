@@ -27,20 +27,20 @@ use Exakat\Analyzer\Analyzer;
 class NoVariableIsACondition extends Analyzer {
     public function analyze() {
         // if ($a) {}
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->inIsIE('CODE')
              ->inIs('CONDITION')
              ->atomIsNot('Switch');
         $this->prepareQuery();
 
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->inIsIE('CODE')
              ->inIs('EXPRESSION')
              ->inIs('FINAL')
              ->atomIs('For');
         $this->prepareQuery();
 
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->inIsIE('CODE')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Logical')
@@ -48,7 +48,7 @@ class NoVariableIsACondition extends Analyzer {
              ->hasNoIn('CONDITION');
         $this->prepareQuery();
 
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->inIsIE('CODE')
              ->inIs('NOT')
              ->atomIs('Not')

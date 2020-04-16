@@ -61,7 +61,7 @@ class ArrayMergeInLoops extends Analyzer {
              ->hasNoLoop()
              ->goToFunction()
              ->outIs('DEFINITION')
-             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
              ->inIs('ARGUMENT')
              ->functioncallIs('\\array_map');
         $this->prepareQuery();

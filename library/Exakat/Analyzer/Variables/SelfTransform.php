@@ -29,13 +29,13 @@ class SelfTransform extends Analyzer {
         // $x = strtolower($x);
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs(self::$VARIABLES_ALL)
+             ->atomIs(self::VARIABLES_ALL)
              ->savePropertyAs('fullcode', 'left')
              ->as('results')
              ->back('first')
 
              ->outIs('RIGHT')
-             ->atomInside(self::$VARIABLES_ALL)
+             ->atomInside(self::VARIABLES_ALL)
              ->samePropertyAs('fullcode', 'left')
              ->back('results');
         $this->prepareQuery();

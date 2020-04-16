@@ -47,13 +47,13 @@ class FileUsage extends Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs(array('Identifier', 'Nsname'))
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->has('fullnspath')
              ->fullnspathIs($fileClasses);
         $this->prepareQuery();
 
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->has('fullnspath')
              ->fullnspathIs($fileClasses);
         $this->prepareQuery();
     }

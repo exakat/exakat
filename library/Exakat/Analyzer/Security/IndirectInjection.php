@@ -41,7 +41,7 @@ class IndirectInjection extends Analyzer {
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('VARIABLE')
-             ->atomIs(self::$VARIABLES_ALL)
+             ->atomIs(self::VARIABLES_ALL)
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
@@ -81,7 +81,7 @@ class IndirectInjection extends Analyzer {
 
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')
@@ -108,7 +108,7 @@ class IndirectInjection extends Analyzer {
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->filter(
                 $this->side()
                      ->inIs('DEFINITION')

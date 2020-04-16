@@ -32,7 +32,7 @@ class CurlVersionNow extends Analyzer {
              ->atomIsNot('Void')
              ->not(
                 $this->side()
-                     ->atomIs(self::$CONSTANTS_ALL)
+                     ->atomIs(self::CONSTANTS_ALL)
                      ->fullnspathIs('\\CURLVERSION_NOW')
              )
              ->back('first');

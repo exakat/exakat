@@ -32,7 +32,7 @@ class Sql extends AnalyzerResults {
         $regex = '^(?i)(<<<\\\\w+)?(<<<\'\\\\w+\')?[\\"\']?\\\\s*(' . implode('|', $sqlKeywords) . ') ';
 
         // SQL in a literal 'SELECT col FROM table';
-        $this->atomIs(self::$STRINGS_ALL)
+        $this->atomIs(self::STRINGS_ALL)
              ->hasNoIn('CONCAT')
              ->regexIs('fullcode', $regex)
              ->toResults();

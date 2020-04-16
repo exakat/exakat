@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IsRead extends Analyzer {
     public function analyze() {
-        $variables = self::$VARIABLES_ALL;
+        $variables = self::VARIABLES_ALL;
         $variables[] = 'This';
 
         $this->atomIs($variables)

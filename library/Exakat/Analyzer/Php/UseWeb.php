@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UseWeb extends Analyzer {
     public function analyze() {
         // GPC + R
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::VARIABLES_ALL)
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'), true);
         $this->prepareQuery();
 

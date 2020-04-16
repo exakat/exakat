@@ -35,7 +35,7 @@ class YodaComparison extends Analyzer {
              ->atomIs($literals)
              ->inIs('RIGHT')
              ->outIs('LEFT')
-             ->atomIs(array_merge(self::$VARIABLES_ALL, array('Array')))
+             ->atomIs(array_merge(self::VARIABLES_ALL, array('Array')))
              ->back('first');
         $this->prepareQuery();
     }

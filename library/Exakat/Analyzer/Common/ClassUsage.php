@@ -44,7 +44,7 @@ class ClassUsage extends Analyzer {
 
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
              ->outIs('CLASS')
-             ->atomIs(self::$CONSTANTS_ALL)
+             ->atomIs(self::CONSTANTS_ALL)
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
@@ -54,14 +54,14 @@ class ClassUsage extends Analyzer {
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
-        $this->atomIs(self::$CONSTANTS_ALL)
+        $this->atomIs(self::CONSTANTS_ALL)
              ->hasIn(array('TYPEHINT', 'RETURNTYPE'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->atomIs(self::$CONSTANTS_ALL)
+             ->atomIs(self::CONSTANTS_ALL)
              ->fullnspathIs($classes);
         $this->prepareQuery();
 

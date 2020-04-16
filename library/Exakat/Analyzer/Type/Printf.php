@@ -38,7 +38,7 @@ class Printf extends AnalyzerResults {
         // echo sprintf("%'.9d\n", 123);
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
              ->toResults();
         $this->prepareQuery();
     }

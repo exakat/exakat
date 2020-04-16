@@ -49,7 +49,7 @@ class UseConstantAsArguments extends Analyzer {
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('ARGUMENT')
              ->isHash('rank', $positionsWithConstants, 'fqn')
-             ->atomIs(self::$CONSTANTS_ALL)
+             ->atomIs(self::CONSTANTS_ALL)
              ->analyzerIsNot('Constants/IsPhpConstant')
              ->back('first');
         $this->prepareQuery();
@@ -74,7 +74,7 @@ class UseConstantAsArguments extends Analyzer {
             $this->atomFunctionIs(array_keys($constantsWithPosition))
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIs(self::$CONSTANTS_ALL)
+                 ->atomIs(self::CONSTANTS_ALL)
                  ->analyzerIs('Constants/IsPhpConstant')
                  ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
                  ->back('first');
@@ -97,7 +97,7 @@ class UseConstantAsArguments extends Analyzer {
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('ARGUMENT')
              ->isHash('rank', $positionsWithConstants, 'fqn')
-             ->atomIs(self::$CONSTANTS_ALL)
+             ->atomIs(self::CONSTANTS_ALL)
              ->analyzerIsNot('Constants/IsPhpConstant')
              ->back('first');
         $this->prepareQuery();
@@ -108,7 +108,7 @@ class UseConstantAsArguments extends Analyzer {
              ->outIs('ARGUMENT')
              ->isHash('rank', $positionsWithConstants, 'fqn')
              ->atomIs('Logical')
-             ->atomInsideNoDefinition(self::$CONSTANTS_ALL)
+             ->atomInsideNoDefinition(self::CONSTANTS_ALL)
              ->analyzerIsNot('Constants/IsPhpConstant')
              ->back('first');
         $this->prepareQuery();
@@ -144,7 +144,7 @@ class UseConstantAsArguments extends Analyzer {
             $this->atomFunctionIs(array_keys($constantsWithPosition))
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomInsideNoDefinition(self::$CONSTANTS_ALL)
+                 ->atomInsideNoDefinition(self::CONSTANTS_ALL)
                  ->analyzerIs('Constants/IsPhpConstant')
                  ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
                  ->back('first');
@@ -155,7 +155,7 @@ class UseConstantAsArguments extends Analyzer {
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Logical')
-                 ->atomInsideNoDefinition(self::$CONSTANTS_ALL)
+                 ->atomInsideNoDefinition(self::CONSTANTS_ALL)
                  ->analyzerIs('Constants/IsPhpConstant')
                  ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
                  ->back('first');

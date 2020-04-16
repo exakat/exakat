@@ -35,7 +35,7 @@ class Url extends AnalyzerResults {
 
     public function analyze() {
         // 'http://www.exakat.io/'
-        $this->atomIs(self::$STRINGS_ALL, self::WITH_CONSTANTS)
+        $this->atomIs(self::STRINGS_ALL, self::WITH_CONSTANTS)
              ->hasNoIn('CONCAT')
              ->has('noDelimiter')
              ->regexIs('noDelimiter', '^.?([a-z]+)://[-\\\\p{L}0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|].?\\$')
