@@ -227,7 +227,7 @@ class Atom {
     }
 
     public function isA(array $atoms) : bool {
-        return in_array($right->atom, $atoms, \STRICT_COMPARISON);
+        return in_array($this->atom, $atoms, \STRICT_COMPARISON);
     }
 }
 
