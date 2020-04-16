@@ -6189,7 +6189,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
         } elseif ($name->isA(array('Identifier', 'Name', 'Newcall'))) {
-            if ($name->isA(array('Newcall', 'Name')))) {
+            if ($name->isA(array('Newcall', 'Name'))) {
                $fnp = mb_strtolower($name->code);
             } else {
                $fnp = $name->code;
