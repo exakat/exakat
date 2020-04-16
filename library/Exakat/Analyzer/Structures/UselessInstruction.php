@@ -62,7 +62,9 @@ class UselessInstruction extends Analyzer {
             $functions[$method['function']] = 1;
         }
 
+        /*
         // foo(1) // except for functions with references
+        // Too soon : this must skip functions with side effects : ini_set, echo, rmdir, unlink, etc.
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')
              ->outIs('EXPRESSION')
@@ -77,6 +79,7 @@ class UselessInstruction extends Analyzer {
              )
              ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'New', ));
         $this->prepareQuery();
+        */
 
 /*
         // too soon

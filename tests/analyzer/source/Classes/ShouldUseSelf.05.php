@@ -14,6 +14,7 @@ class D extends C {
         echo A::A;
         echo B::A;
         echo A::G;
+        echo G::G;
         echo self::B;
     }
 }
