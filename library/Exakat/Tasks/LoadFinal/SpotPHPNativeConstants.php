@@ -53,17 +53,36 @@ class SpotPHPNativeConstants extends LoadFinal {
             display('No Constants');
             return;
         }
-        $used = array_intersect($usedConstants, $constantsPHP);
+
+        $found = array();
+        foreach($usedConstants as $constant) {
+            if (!preg_match('/(\\\\[^\\\\]+)$/', $constant, $r)) {
+                continue;
+            }
+            array_collect_by($found, $r[1], $constant);
+        }
+
+        $used = array_intersect(array_keys($found), $constantsPHP);
         if (empty($used)) {
             display('No PHP Constants');
             return;
         }
+        
+        $search = array();
+        foreach($used as $key) {
+            $search[] = $found[$key];
+        }
+        $search = array_merge(...$search);
 
         $query = $this->newQuery('SpotPHPNativeConstants');
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
-              ->fullnspathIs($used, Analyzer::CASE_SENSITIVE)
+              ->fullnspathIs($search, Analyzer::CASE_SENSITIVE)
+              ->raw(<<<GREMLIN
+sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\\\").last();  it.get().property("fullnspath", "\\\\"  + fnp);}
+GREMLIN
+, array(), array())
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
