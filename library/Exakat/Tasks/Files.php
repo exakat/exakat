@@ -71,6 +71,7 @@ class Files extends Tasks {
         file_put_contents($this->tmpFileName, implode("\n", $tmpFiles));
 
         $versions = Config::PHP_VERSIONS;
+        $SQLresults = 0;
 
         $missing = array();
         foreach($files as $file) {
@@ -85,8 +86,10 @@ class Files extends Tasks {
 
         $analyzingVersion = $this->config->phpversion[0] . $this->config->phpversion[2];
         $this->datastore->cleanTable("compilation$analyzingVersion");
-        $id = array_search($analyzingVersion, $versions);
-        unset($versions[$id]);
+        if ($this->is_subtask === self::IS_SUBTASK) {
+            $id = array_search($analyzingVersion, $versions);
+            unset($versions[$id]);
+        }
 
         $toRemoveFromFiles = array();
         foreach($versions as $version) {
@@ -101,11 +104,15 @@ class Files extends Tasks {
             $stats["notCompilable$version"] = -1;
 
             $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
-            $resFiles = $php->compileFiles($this->config->code_dir, $this->tmpFileName);
+            $php->compileFiles($this->config->code_dir, $this->tmpFileName, $this->config->dir_root);
+            ++$SQLresults;
         }
 
-        $shell = "nohup php server/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} >/dev/null & echo $!";
+        $tmpDir = sys_get_temp_dir();
+        copy("{$this->config->dir_root}/server/lint_short_tags.php", "{$this->config->project_dir}/.exakat/lint_short_tags.php");
+        $shell = "nohup php {$this->config->project_dir}/.exakat/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} >/dev/null & echo $!";
         shell_exec($shell);
+        ++$SQLresults;
 
         $vcsClass = Vcs::getVcs($this->config);
         $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
@@ -166,6 +173,26 @@ class Files extends Tasks {
         }
         $this->datastore->addRow('configFiles', $configFiles);
         // Composer is checked previously
+        
+        $files = array();
+        $i = 0;
+        while(count($files) != $SQLresults) {
+            $files = glob("{$this->config->project_dir}/.exakat/dump-*.php");
+            usleep(random_int(0,1000) * 1000);
+            
+            ++$i;
+            if ($i >= 60) {
+                break 1;
+            }
+        };
+        // TODO : log it when 
+        
+        foreach($files as $file) {
+            include $file;
+
+            $this->datastore->storeQueries($queries);
+            unlink($file);
+        }
 
         display('Done');
 
@@ -328,6 +355,12 @@ class Files extends Tasks {
     public function __destruct() {
         if (file_exists($this->tmpFileName)) {
             unlink($this->tmpFileName);
+        }
+        if (file_exists($this->config->tmp_dir.'/lint.php')) {
+            unlink($this->config->tmp_dir.'/lint.php');
+        }
+        if (file_exists($this->config->tmp_dir.'/lint_short_tag.php')) {
+            unlink($this->config->tmp_dir.'/lint_short_tag.php');
         }
     }
 }

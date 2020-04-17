@@ -403,11 +403,12 @@ PHP;
         }
     }
 
-    public function compileFiles($project_code, $tmpFileName): void {
+    public function compileFiles(string $project_code, string $tmpFileName, string $script_prefix): void {
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $shell = "docker run -it -v \"{$project_code}\":/exakat -w /exakat/code --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'cat /exakat/.exakat/" . basename($tmpFileName) . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "php -l {} 2>&1 || true "\'';
         } else {
-            $shell = "nohup php server/lint.php $this->phpexec {$this->actualVersion[0]}{$this->actualVersion[2]} $project_code $tmpFileName >/dev/null & echo $!";
+            copy("{$script_prefix}/server/lint.php", dirname($tmpFileName).'/lint.php');
+            $shell = "nohup php ".dirname($tmpFileName)."/lint.php $this->phpexec {$this->actualVersion[0]}{$this->actualVersion[2]} $project_code $tmpFileName >/dev/null & echo $!";
         }
 
         $pid = shell_exec($shell);

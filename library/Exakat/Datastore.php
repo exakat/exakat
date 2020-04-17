@@ -520,6 +520,19 @@ SQLITE;
         $this->sqliteWrite->query('DELETE FROM files WHERE file = \'' . $this->sqliteWrite->escapeString($file) . '\'');
         $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, \'' . $this->sqliteWrite->escapeString($file) . '\', "' . $reason . '")');
     }
+
+    public function storeQueries(array $queries) : int {
+        $this->sqliteWrite->lastErrorCode();
+        foreach($queries as $query) {
+            $res = $this->sqliteWrite->query($query);
+            if ($this->sqliteWrite->lastErrorCode()) {
+                print  $query.PHP_EOL.PHP_EOL;
+            }
+        }
+
+        return count($queries);
+    }
+
 }
 
 ?>
