@@ -22,14 +22,13 @@
 
 namespace Exakat;
 
-use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, RulesetConfig, Config as Configsource };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Autoload\AutoloadDev;
 use Exakat\Autoload\AutoloadExt;
 use Phar;
 
-class Config {
+class Config extends Configsource {
     const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73', '74', '80', );
 
     const INSIDE_CODE   = true;
@@ -57,7 +56,7 @@ class Config {
     private $screen_cols           = 100;
 
     private $configFiles = array();
-    private $options     = array();
+//    private $options     = array();
     private $remotes     = array();
     private $rulesets    = array();
 
@@ -93,8 +92,12 @@ class Config {
             error_reporting(E_ALL);
             ini_set('display_errors', '1');
         }
+        
+        $this->loadConfig(array());
+    }
 
-        unset($argv[0]);
+    public function loadConfig($args) {
+        unset($this->argv[0]);
 
         $this->defaultConfig = new DefaultConfig();
 
@@ -105,7 +108,7 @@ class Config {
 
         // then read the config from the commandline (if any)
         $this->commandLineConfig = new CommandLine();
-        $this->commandLineConfig->loadConfig($argv);
+        $this->commandLineConfig->loadConfig($this->argv);
 
         $this->envConfig = new EnvConfig();
         if ($file = $this->envConfig->loadConfig(null)) {
@@ -275,90 +278,6 @@ class Config {
         unset($return[$id + 1]);
         unset($return[0]);
         return json_encode(array_values($return));
-    }
-
-    public function toIni(): string {
-        $ini = array();
-
-        $ini[] = ';Main PHP version for this code.';
-        $ini[] = "phpversion = {$this->options['phpversion']}";
-        $ini[] = '';
-
-        $ini[] = ';Ignored dirs and files, relative to code source root.';
-        foreach($this->ignore_dirs as $ignore_dir) {
-            $ini[] = "ignore_dirs[] = \"$ignore_dir\"";
-        }
-        $ini[] = '';
-
-        $ini[] = ';Included dirs or files, relative to code source root. Default to all.';
-        $ini[] = ';Those are added after ignoring directories';
-        foreach($this->include_dirs as $include_dir) {
-            $ini[] = "include_dirs[] = \"$include_dir\"";
-        }
-        $ini[] = '';
-
-        $ini[] = ';Accepted file extensions';
-        $ini[] = 'file_extensions = "' . implode(',', $this->file_extensions) . '"';
-        $ini[] = '';
-
-        $ini[] = ';Description of the project';
-        $ini[] = "project_name        = \"{$this->project_name}\";";
-        $ini[] = "project_url         = \"{$this->project_url}\";";
-        $ini[] = "project_vcs         = \"{$this->project_vcs}\";";
-        $ini[] = "project_description = \"{$this->project_description}\";";
-        $ini[] = "project_branch      = \"{$this->project_branch}\";";
-        $ini[] = "project_tag         = \"{$this->project_tag}\";";
-        $ini[] = '';
-
-        $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));
-        foreach($parameters as $parameter) {
-            $class = "\Exakat\Analyzer\\" . str_replace('/', '\\', $parameter);
-            if (!class_exists($class)) {
-                continue;
-            }
-            $ini[] = "[$parameter]";
-            foreach($this->options[$parameter] as $name => $value) {
-                if (!property_exists($class, $name)) {
-                    continue;
-                }
-                $ini[] = "$name = $value;";
-            }
-            $ini[] = '';
-        }
-
-        return implode(PHP_EOL, $ini);
-    }
-
-    public function toYaml(): string {
-        $yaml = array('phpversion'          => $this->options['phpversion'],
-                      'ignore_dirs'         => $this->options['ignore_dirs'],
-                      'include_dirs'        => $this->options['include_dirs'],
-                      'file_extensions'     => $this->options['file_extensions'],
-                      'project_name'        => $this->project_name,
-                      'project_url'         => $this->project_url,
-                      'project_vcs'         => $this->project_vcs,
-                      'project_description' => $this->project_description,
-                      'project_branch'      => $this->project_branch,
-                      'project_tag'         => $this->project_tag,
-                      'project_rulesets'    => $this->project_rulesets,
-                      );
-
-        $parameters = preg_grep('#^[A-Z][^/]+/[A-Z].+$#', array_keys($this->options));
-        foreach($parameters as $parameter) {
-            $class = "\Exakat\Analyzer\\" . str_replace('/', '\\', $parameter);
-            if (!class_exists($class)) {
-                continue;
-            }
-            $yaml[$parameter] = array();
-            foreach($this->options[$parameter] as $name => $value) {
-                if (!property_exists($class, $name)) {
-                    continue;
-                }
-                $yaml[$parameter][$name] = $value;
-            }
-        }
-
-        return Symfony_Yaml::dump($yaml);
     }
 
     public function duplicate($options): self {

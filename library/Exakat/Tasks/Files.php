@@ -140,8 +140,9 @@ class Files extends Tasks {
         $this->datastore->cleanTable('files');
 
         $this->datastore->addRow('files', $filesRows);
-        $this->datastore->addRow('hash', array('files'  => count($files),
-                                               'tokens' => $tokens));
+        $this->datastore->addRow('hash', array('files'        => count($files),
+                                               'filesIgnored' => count($ignoredFiles),
+                                               'tokens'       => $tokens));
         $this->datastore->reload();
 
         $stats['php'] = count($files);

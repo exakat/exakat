@@ -51,6 +51,7 @@ class Datastore {
                                     'exakat_build'         => Exakat::BUILD,
                                     'datastore_creation'   => date('r', time()),
                                     'project'              => $this->config->project,
+                                    'project_description'  => $this->config->project_description,
                                     'write_acces'          => 0,
                                     ));
 

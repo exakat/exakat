@@ -68,10 +68,17 @@ class Status extends Tasks {
             throw new NoSuchProject($project);
         }
 
-        $status = array('project' => $project,
-                        'files'   => $this->datastore->getHash('files')  ?? -1,
-                        'loc'     => $this->datastore->getHash('loc')    ?? -1,
-                        'tokens'  => $this->datastore->getHash('tokens') ?? -1,
+        $status = array('project'      => $project,
+                        'files'        => $this->datastore->getHash('files')        ?? -1,
+                        'filesIgnored' => $this->datastore->getHash('filesIgnored') ?? -1,
+                        'loc'          => $this->datastore->getHash('loc')          ?? -1,
+                        'loc_all'      => $this->datastore->getHash('locTotal')     ?? -1,
+                        'tokens'       => $this->datastore->getHash('tokens')       ?? -1,
+                        'vcs'          => $this->datastore->getHash('vcs_type')     ?? -1,
+                        'url'          => $this->datastore->getHash('vcs_url')      ?? -1,
+                        'branch'       => $this->datastore->getHash('vcs_branch')   ?? -1,
+                        'revision'     => $this->datastore->getHash('vcs_revision') ?? -1,
+                        'php'          => $this->datastore->getHash('php_version')  ?? -1,
                         );
         if (file_exists("{$this->config->tmp_dir}/Project.json")) {
             $text = file_get_contents("{$this->config->tmp_dir}/Project.json");

@@ -28,6 +28,7 @@ use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
+use Exakat\Configsource\DatastoreConfig;
 
 class Emissary extends Reports {
     const FILE_FILENAME  = 'emissary';
@@ -598,7 +599,7 @@ HTML;
         // List of php constant used
         $res = $this->dump->fetchTable('phpStructures');
         $res->filter(function (array $x): bool { return $x['type'] === 'constant'; });
-        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
+        $res->order(function (array $a, array $b): int { return $b['count'] <=> $a['count']; });
 
         $html = array();
         $data = array();
@@ -619,7 +620,7 @@ HTML;
         // List of php functions used
         $res = $this->dump->fetchTable('phpStructures');
         $res->filter(function (array $x): bool { return in_array($x['type'], array('class', 'interface', 'trait'), \STRICT_COMPARISON); });
-        $res->order(function (array $a, array $b): bool { return $b['count'] <=> $a['count']; });
+        $res->order(function (array $a, array $b): int { return $b['count'] <=> $a['count']; });
 
         $html = array();
         $data = array();
@@ -1590,8 +1591,9 @@ HTML;
     }
 
     protected function generateAuditConfig(Section $section): void {
-        $ini = $this->config->toIni();
-        $yaml = $this->config->toYaml();
+        $config = new DatastoreConfig();
+        $ini  = $config->toIni();
+        $yaml = $config->toYaml();
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CONFIG_INI', $ini);
@@ -2579,7 +2581,7 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
 Below, is a list of classes that may be updated with final or abstract. <br />
 
 The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
@@ -2761,7 +2763,7 @@ HTML
                 $aClass = array();
             }
 
-            $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
+            $visibilities = array(PHPSyntax((string) $row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) &&
