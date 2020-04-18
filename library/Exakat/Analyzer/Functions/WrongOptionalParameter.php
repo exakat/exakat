@@ -34,7 +34,7 @@ class WrongOptionalParameter extends Analyzer {
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
              ->inIs('DEFAULT')
-             
+
              ->not(
                 $this->side()
                      ->filter(

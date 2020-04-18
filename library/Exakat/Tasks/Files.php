@@ -173,20 +173,20 @@ class Files extends Tasks {
         }
         $this->datastore->addRow('configFiles', $configFiles);
         // Composer is checked previously
-        
+
         $files = array();
         $i = 0;
         while(count($files) != $SQLresults) {
             $files = glob("{$this->config->project_dir}/.exakat/dump-*.php");
             usleep(random_int(0,1000) * 1000);
-            
+
             ++$i;
             if ($i >= 60) {
                 break 1;
             }
         };
-        // TODO : log it when 
-        
+        // TODO : log it when
+
         foreach($files as $file) {
             include $file;
 
@@ -356,11 +356,11 @@ class Files extends Tasks {
         if (file_exists($this->tmpFileName)) {
             unlink($this->tmpFileName);
         }
-        if (file_exists($this->config->tmp_dir.'/lint.php')) {
-            unlink($this->config->tmp_dir.'/lint.php');
+        if (file_exists($this->config->tmp_dir . '/lint.php')) {
+            unlink($this->config->tmp_dir . '/lint.php');
         }
-        if (file_exists($this->config->tmp_dir.'/lint_short_tag.php')) {
-            unlink($this->config->tmp_dir.'/lint_short_tag.php');
+        if (file_exists($this->config->tmp_dir . '/lint_short_tag.php')) {
+            unlink($this->config->tmp_dir . '/lint_short_tag.php');
         }
     }
 }

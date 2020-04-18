@@ -226,7 +226,7 @@ class Atom {
         return addcslashes($code , '\\"');
     }
 
-    public function isA(array $atoms) : bool {
+    public function isA(array $atoms): bool {
         return in_array($this->atom, $atoms, \STRICT_COMPARISON);
     }
 }

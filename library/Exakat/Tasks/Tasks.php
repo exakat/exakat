@@ -55,8 +55,8 @@ abstract class Tasks {
     const LOG_AUTONAMING = '';
 
     public function __construct(bool $subTask = self::IS_NOT_SUBTASK) {
-        $this->gremlin = exakat('graphdb');
-        $this->config  = exakat('config');
+        $this->gremlin    = exakat('graphdb');
+        $this->config     = exakat('config');
         $this->datastore  = exakat('datastore');
         $this->datastore->reuse();
         $this->is_subtask = $subTask;

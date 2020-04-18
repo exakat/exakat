@@ -152,17 +152,17 @@ abstract class DSL {
 
     abstract public function run();
 
-    protected function normalizeAtoms($atoms) : array {
+    protected function normalizeAtoms($atoms): array {
         $atoms = makeArray($atoms);
         return array_values(array_intersect($atoms, $this->availableAtoms));
     }
 
-    protected function normalizeLinks($links) : array {
+    protected function normalizeLinks($links): array {
         $links = makeArray($links);
         return array_values(array_intersect($links, $this->availableLinks));
     }
 
-    protected function normalizeFunctioncalls($fullnspaths) : array {
+    protected function normalizeFunctioncalls($fullnspaths): array {
         $fullnspaths = makeArray($fullnspaths);
         return array_values(array_intersect($fullnspaths, $this->availableFunctioncalls));
     }
@@ -177,7 +177,7 @@ abstract class DSL {
         }
     }
 
-    protected function assertLabel($name, $read = self::LABEL_GO) : bool {
+    protected function assertLabel($name, $read = self::LABEL_GO): bool {
         if (is_array($name)) {
             foreach($name as $n) {
                 $this->assertLabel($n, $read);
@@ -186,7 +186,7 @@ abstract class DSL {
         }
 
         if ($read === self::LABEL_SET) {
-            assert(!in_array($name, $this->availableLabels), "Label '$name' is already set : ".join(', ', $this->availableLabels));
+            assert(!in_array($name, $this->availableLabels), "Label '$name' is already set : " . join(', ', $this->availableLabels));
             $this->availableLabels[] = $name;
         } else {
             assert(in_array($name, $this->availableLabels), "Label '$name' is not set");
@@ -194,11 +194,11 @@ abstract class DSL {
         return true;
     }
 
-    protected function isVariable($name) : bool {
+    protected function isVariable($name): bool {
         return in_array($name, $this->availableVariables);
     }
 
-    protected function assertVariable($name, $write = self::VARIABLE_READ) : bool {
+    protected function assertVariable($name, $write = self::VARIABLE_READ): bool {
         if ($write === self::VARIABLE_WRITE) {
             assert(!$this->isVariable($name), "Variable '$name' is already taken");
             assert(!in_array($name, self::PROPERTIES), "Don't use a property name as a variable ($name)");
@@ -209,7 +209,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function assertLink($link) : bool {
+    protected function assertLink($link): bool {
         if (is_string($link)) {
             if(in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')) ) {
                 throw new DSLException("$link is no more", self::LEVELS_TO_ANALYSE);
@@ -230,7 +230,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function assertTokens($token) : bool {
+    protected function assertTokens($token): bool {
         if (is_string($token)) {
             assert(substr($token, 0, 2) === 'T_', "Wrong prefix for TOKEN name : $token");
             assert($token === strtoupper($token), "Wrong format for TOKEN name : $token");

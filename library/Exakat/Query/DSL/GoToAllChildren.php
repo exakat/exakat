@@ -32,7 +32,7 @@ class GoToAllChildren extends DSL {
         }  else {
             $self = Analyzer::INCLUDE_SELF;
         }
-        
+
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         if ($self === Analyzer::EXCLUDE_SELF) {

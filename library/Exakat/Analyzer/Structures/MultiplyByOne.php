@@ -26,14 +26,14 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MultiplyByOne extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }
 
     public function analyze() {
         $atoms = array('String', 'Integer', 'Boolean', 'Float', 'Identifier', 'Nsname', 'Assignation', 'Parenthesis', 'Multiplication');
-        
+
         // $x *= 1;
         $this->atomIs('Assignation')
              ->codeIs(array('*=', '/=', '%=', '**='))

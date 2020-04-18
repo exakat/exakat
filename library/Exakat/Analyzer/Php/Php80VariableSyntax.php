@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -46,7 +46,7 @@ class Php80VariableSyntax extends Analyzer {
              ->inIs('CLASS')
              ->atomIs('Staticproperty');
         $this->prepareQuery();
-        
+
         // new ($expression)
         // $x instanceof ($y.$z)
         $this->atomIs(array('Instanceof', 'New'))
@@ -54,7 +54,7 @@ class Php80VariableSyntax extends Analyzer {
              ->atomIs('Parenthesis')
              ->back('first');
         $this->prepareQuery();
-        
+
     }
 }
 

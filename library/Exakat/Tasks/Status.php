@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Reports\Reports;
 use Exakat\Vcs\Vcs;
+use Exakat\Exakat;
 
 class Status extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -32,7 +33,7 @@ class Status extends Tasks {
     public function run() {
         $project = $this->config->project;
 
-        if ($project === 'default') {
+        if ($project->isDefault()) {
             $status = array();
 
             if (file_exists("{$this->config->tmp_dir}/Project.json")) {
@@ -62,23 +63,37 @@ class Status extends Tasks {
             return;
         }
 
-        $path = $this->config->projects_root . '/projects/' . $project;
-
-        if (!file_exists($path . '/')) {
+        if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($project);
         }
 
-        $status = array('project'      => $project,
-                        'files'        => $this->datastore->getHash('files')        ?? -1,
-                        'filesIgnored' => $this->datastore->getHash('filesIgnored') ?? -1,
-                        'loc'          => $this->datastore->getHash('loc')          ?? -1,
-                        'loc_all'      => $this->datastore->getHash('locTotal')     ?? -1,
-                        'tokens'       => $this->datastore->getHash('tokens')       ?? -1,
-                        'vcs'          => $this->datastore->getHash('vcs_type')     ?? -1,
-                        'url'          => $this->datastore->getHash('vcs_url')      ?? -1,
-                        'branch'       => $this->datastore->getHash('vcs_branch')   ?? -1,
-                        'revision'     => $this->datastore->getHash('vcs_revision') ?? -1,
-                        'php'          => $this->datastore->getHash('php_version')  ?? -1,
+        if ($this->datastore->getHash('exakat_version') === null) {
+            $this->datastore->create();
+            $this->datastore->addRow('hash', array('exakat_version'  => Exakat::VERSION,
+                                                   'exakat_build'    => Exakat::BUILD,
+                                                   'php_version'     => $this->config->phpversion,
+                                                   'file_extensions' => json_encode($this->config->file_extensions),
+                                                   'ignore_dirs'     => json_encode($this->config->ignore_dirs),
+                                                   'include_dirs'    => json_encode($this->config->include_dirs),
+                                                   'vcs_url'         => $this->config->project_url,
+                                                   'project'         => (string) $this->config->project,
+                                                ));
+        }
+
+        $status = array('project'          => (string) $project,
+                        'files'            => $this->datastore->getHash('files')         ?? '',
+                        'filesIgnored'     => $this->datastore->getHash('filesIgnored')  ?? '',
+                        'loc'              => $this->datastore->getHash('loc')           ?? '',
+                        'loc_all'          => $this->datastore->getHash('locTotal')      ?? '',
+                        'tokens'           => $this->datastore->getHash('tokens')        ?? '',
+                        'vcs'              => $this->datastore->getHash('vcs_type')      ?? '',
+                        'url'              => $this->datastore->getHash('vcs_url')       ?? '',
+                        'branch'           => $this->datastore->getHash('vcs_branch')    ?? '',
+                        'revision'         => $this->datastore->getHash('vcs_revision')  ?? '',
+                        'php'              => $this->datastore->getHash('php_version')   ?? '',
+                        'include_dirs'     => join(', ', json_decode($this->datastore->getHash('include_dirs') ?? '[]')),
+                        'ignore_dirs'      => join(', ', json_decode($this->datastore->getHash('ignore_dirs')  ?? '[]')),
+                        'file_extensions'  => join(', ', json_decode($this->datastore->getHash('file_extensions')  ?? '[]')),
                         );
         if (file_exists("{$this->config->tmp_dir}/Project.json")) {
             $text = file_get_contents("{$this->config->tmp_dir}/Project.json");
@@ -110,7 +125,7 @@ class Status extends Tasks {
         $status['updatable'] = $status['updatable'] === true ? 'Yes' : 'No';
 
         // Check the logs
-        $errors = $this->getErrors($path);
+        $errors = $this->getErrors($this->config->project_dir);
         if (!empty($errors)) {
             $status['errors'] = $errors;
         }
@@ -131,7 +146,7 @@ class Status extends Tasks {
         $this->display($status, $this->config->json);
     }
 
-    private function display($status, $json = false) {
+    private function display(array $status, bool $json = false) {
         // Json publication
         if ($json === true) {
             print json_encode($status);
@@ -165,7 +180,7 @@ class Status extends Tasks {
         print $text;
     }
 
-    private function getErrors($path) {
+    private function getErrors(string $path): array {
         $errors = array();
 
         // Init error

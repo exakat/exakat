@@ -67,7 +67,7 @@ class SpotPHPNativeConstants extends LoadFinal {
             display('No PHP Constants');
             return;
         }
-        
+
         $search = array();
         foreach($used as $key) {
             $search[] = $found[$key];
@@ -79,8 +79,8 @@ class SpotPHPNativeConstants extends LoadFinal {
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
               ->fullnspathIs($search, Analyzer::CASE_SENSITIVE)
-              ->raw(<<<GREMLIN
-sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\\\").last();  it.get().property("fullnspath", "\\\\"  + fnp);}
+              ->raw(<<<'GREMLIN'
+sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\").last();  it.get().property("fullnspath", "\\"  + fnp);}
 GREMLIN
 , array(), array())
               ->returnCount();
