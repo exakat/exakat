@@ -80,7 +80,9 @@ class SpotPHPNativeConstants extends LoadFinal {
               ->hasNoIn('DEFINITION')
               ->fullnspathIs($search, Analyzer::CASE_SENSITIVE)
               ->raw(<<<'GREMLIN'
-sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\").last();  it.get().property("fullnspath", "\\"  + fnp);}
+sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\").last();  
+                it.get().property("fullnspath", "\\"  + fnp);
+                it.get().property("is_php", true);}
 GREMLIN
 , array(), array())
               ->returnCount();

@@ -45,8 +45,7 @@ class SpotPHPNativeFunctions extends LoadFinal {
                       ->prepareSide(),
                       array()
               )
-              ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
-              ->raw('map{ name = parts.last().toLowerCase();}', array(), array())
+              ->raw('map{ parts = it.get().value("fullnspath").tokenize("\\\\"); name = parts.last().toLowerCase();}', array(), array())
               ->unique();
         $query->prepareRawQuery();
         if ($query->canSkip()) {
@@ -78,11 +77,11 @@ class SpotPHPNativeFunctions extends LoadFinal {
                          ->prepareSide(),
                           array()
                   )
-                  ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
-                  ->raw('filter{ name = parts.last().toLowerCase(); name in *** }', array(), array($diff))
+                  ->raw('filter{ name = it.get().value("fullnspath").tokenize("\\\\").last().toLowerCase(); name in *** }', array(), array($diff))
                   ->raw('sideEffect{
          fullnspath = "\\\\" + name;
-         it.get().property("fullnspath", fullnspath); 
+         it.get().property("fullnspath", fullnspath);
+         it.get().property("is_php", true); 
      }', array(), array())
                   ->returnCount();
             $query->prepareRawQuery();
