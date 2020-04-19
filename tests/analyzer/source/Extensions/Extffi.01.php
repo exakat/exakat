@@ -7,6 +7,10 @@ try {
         "libc.so.6");
     // call C's printf()
     $ffi->printf("Hello %s!\n", "world");
+
+    $ffi = fFi::cdef();
+    $ffi = ffi::cdef();
+
 } catch(ffi\parserexception $e) {
 } catch(parserexception $e) {
 }

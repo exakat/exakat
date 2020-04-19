@@ -1,6 +1,8 @@
 <?php
 
 $expected     = array('ffi\\parserexception',
+                      'FFI',
+                      'fFi',
                       'ffi',
                      );
 
