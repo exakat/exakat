@@ -72,7 +72,7 @@ class Phpexec {
 
     public function __construct(string $phpversion = null, string $pathToBinary = '') {
         assert($phpversion !== null, "Php version must be a valid version, not $phpversion.");
-        assert($pathToBinary !== '', "Path to PHP binary can't be empty.");
+        assert($pathToBinary !== '', "Path to PHP binary can't be empty for '$phpversion'.");
 
         $this->requestedVersion = substr($phpversion, 0, 3);
 
