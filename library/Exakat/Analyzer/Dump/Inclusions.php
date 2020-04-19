@@ -37,10 +37,12 @@ SQL;
 
     public function analyze() {
         $this ->atomIs('Include', self::WITHOUT_CONSTANTS)
+              ->outIs('ARGUMENT')
+              ->has('noDelimiter')
               ->as('included')
               ->goToInstruction('File')
               ->as('including')
-              ->select(array('included'  => 'fullcode',
+              ->select(array('included'  => 'noDelimiter',
                              'including' => 'fullcode'));
 
         $res = $this->prepareQuery();
