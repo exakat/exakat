@@ -223,8 +223,16 @@ class Datastore {
 
     public function getHash(string $key): ?string {
         $query = 'SELECT value FROM hash WHERE key=:key';
-        $stmt = $this->sqliteRead->prepare($query);
+        try {
+            $stmt = $this->sqliteRead->prepare($query);
+        } catch (\Exception $e) {
+            $stmt = null;
+        }
+        if ($stmt === null) {
+            return null;
+        }
         $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
+
         $res = $stmt->execute();
 
         if ($res === false) {
