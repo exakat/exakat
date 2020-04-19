@@ -159,6 +159,8 @@ abstract class Analyzer extends TestCase {
             $this->checkTestOnFullarray($res, $expected, $expected_not);
         } elseif (isset($res[0]['including'])) {
             $this->checkTestOnFullarray($res, $expected, $expected_not);
+        } elseif (isset($res[0]['host'])) {
+            $this->checkTestOnFullarray($res, $expected, $expected_not);
         } else {
             print "How shall we test this?\n";
             print_r($res);

@@ -81,6 +81,7 @@ abstract class Analyzer {
     protected $queryId          = 0;
 
     protected $analyzerName      = 'no analyzer name';
+    protected $analyzerTable     = 'no analyzer table name';
     private $lastAnalyzerTable = 'none';
     protected $analyzerSQLTable = 'no analyzer sql creation';
     protected $missingQueries   = array();
