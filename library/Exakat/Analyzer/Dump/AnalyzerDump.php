@@ -26,19 +26,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Dump\Dump;
 
 abstract class AnalyzerDump extends Analyzer {
-    public function getDump(): array {
-        switch ($this->storageType) {
-            case self::QUERY_HASH :
-                $dump      = Dump::factory($this->config->dump);
-
-                $res = $dump->fetchHashResults($this->analyzerName);
-                return $res->toArray();
-
-            default :
-                print "Not results handling for {$this->storageType} in " . __CLASS__ . "\n";
-                return array();
-        }
-    }
 }
 
 ?>

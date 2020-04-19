@@ -1,7 +1,7 @@
 <?php
 
-$withSequence    = "\ncan't support this. ";
-$withSingleQuote = "can't support this. ";
-$normal          = "can support this.";
+$withSequence    = "\ncan't support this1. ";
+$withSingleQuote = "can't support this2. ";
+$normal          = "can support this3.";
 
 ?>
