@@ -56,11 +56,7 @@ class IsExtConstant extends Analyzer {
 
         // based on fullnspath
         $this->analyzerIs('Constants/ConstantUsage')
-             ->atomIsNot(array('Boolean', 'Null', 'String'))
-             ->fullnspathIs($constantsFullNs, self::CASE_SENSITIVE);
-        $this->prepareQuery();
-
-        $this->analyzerIs('Constants/ConstantUsage')
+             ->hasNoIn('DEFINITION')
              ->atomIs('Identifier')
              ->atomIsNot(array('Boolean', 'Null', 'String'))
              ->raw('filter{ fnp = it.get().value("fullnspath"); d = fnp.tokenize("\\\\").last(); ***.contains("\\\\" + d);}', $constantsFullNs);
