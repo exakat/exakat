@@ -164,7 +164,7 @@ class DefaultConfig extends Config {
                               );
 
     public function __construct() {
-        $this->project = new Project();
+        $this->config['project'] = new Project();
 
         $this->config['parallel_processing'] = function_exists('pcntl_fork');
     }

@@ -56,7 +56,6 @@ class Config extends Configsource {
     private $screen_cols           = 100;
 
     private $configFiles = array();
-//    private $options     = array();
     private $remotes     = array();
     private $rulesets    = array();
 
@@ -156,14 +155,13 @@ class Config extends Configsource {
         $this->options['configFiles'] = $this->configFiles;
 
         if ($this->options['debug'] === true) {
-            print "Debug mode\n";
+            display("Debug mode\n");
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
 
             error_reporting(E_ALL);
-            ini_set('display_errors', 1);
+            ini_set('display_errors', "1");
         }
-
 
         //program has precedence over rulesets
         if (isset($this->commandLineConfig->toArray()['program'])) {

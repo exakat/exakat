@@ -26,7 +26,7 @@ namespace Exakat\Exceptions;
 class ProjectNeeded extends \RuntimeException {
     public function __construct() {
 
-        parent::__construct( "This command requires a project (option -p).\nAborting\n");
+        parent::__construct( "This command requires a project name. Pass the -p option, or use .exakat.yaml config file.\nAborting\n");
     }
 }
 
