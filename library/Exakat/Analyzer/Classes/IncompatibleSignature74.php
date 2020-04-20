@@ -38,12 +38,12 @@ class IncompatibleSignature74 extends Analyzer {
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->raw('sideEffect{ if (it.get().properties("reference").any()) { reference = it.get().value("reference");} else { reference = false; }}')
+             ->savePropertyAs('reference', 'ref')
              ->inIs('ARGUMENT')
              ->outIs('OVERWRITE')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'ranked')
-             ->raw('filter{ if (it.get().properties("reference").any()) { reference != it.get().value("reference");} else { reference != false; }}')
+             ->notSamePropertyAs('reference', 'ref')
              ->back('first');
         $this->prepareQuery();
 
@@ -73,12 +73,15 @@ class IncompatibleSignature74 extends Analyzer {
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->raw('sideEffect{ if (it.get().vertices(OUT, "TYPEHINT").any()) { typehint = it.get().vertices(OUT, "TYPEHINT").next().value("fullnspath");} else { typehint = false; }}')
-             ->inIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->savePropertyAs('fullnspath', 'typehint')
+             ->back('first')
+
              ->outIs('OVERWRITE')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'ranked')
-             ->raw('filter{ if (it.get().vertices(OUT, "TYPEHINT").any()) { typehint != it.get().vertices(OUT, "TYPEHINT").next().value("fullnspath");} else { typehint != false; }}')
+             ->outIs('TYPEHINT')
+             ->notSamePropertyAs('fullnspath', 'typehint')
              ->back('first');
         $this->prepareQuery();
 
@@ -106,9 +109,13 @@ class IncompatibleSignature74 extends Analyzer {
                      ->hasNoIn('DEFINITION')
              )
              ->back('first')
-             ->raw('sideEffect{ if (it.get().vertices(OUT, "RETURNTYPE").any()) { typehint = it.get().vertices(OUT, "RETURNTYPE").next().value("fullnspath");} else { typehint = false; }}')
+             ->outIs('RETURNTYPE')
+             ->savePropertyAs('fullnspath', 'typehint')
+             ->back('first')
+
              ->outIs('OVERWRITE')
-             ->raw('filter{ if (it.get().vertices(OUT, "RETURNTYPE").any()) { typehint != it.get().vertices(OUT, "RETURNTYPE").next().value("fullnspath");} else { typehint != false; }}')
+             ->outIs('RETURNTYPE')
+             ->notSamePropertyAs('fullnspath', 'typehint')
              ->back('first');
         $this->prepareQuery();
 
@@ -117,27 +124,36 @@ class IncompatibleSignature74 extends Analyzer {
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->raw('sideEffect{ nullable = it.get().properties("nullable").any(); }')
-             ->inIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->isNot('nullable', true)
+             ->savePropertyAs('nullable', 'n')
+             ->back('first')
+
              ->outIs('OVERWRITE')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked')
-             ->raw('filter{ nullable != it.get().properties("nullable").any(); }')
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->outIs('TYPEHINT')
+             ->notSamePropertyAs('nullable', 'n')
              ->back('first');
         $this->prepareQuery();
 
         // non-matching return nullable
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->raw('sideEffect{ nullable = it.get().properties("nullable").any(); }')
+             ->outIs('RETURNTYPE')
+             ->is('nullable', true)
+             ->savePropertyAs('nullable', 'n')
+             ->back('first')
+
              ->outIs('OVERWRITE')
-             ->raw('filter{ nullable != it.get().properties("nullable").any(); }')
+             ->outIs('RETURNTYPE')
+             ->notSamePropertyAs('nullable', 'n')
+
              ->back('first');
         $this->prepareQuery();
 
         // non-matching visibility
         $this->atomIs(self::FUNCTIONS_METHOD)
-             ->raw('sideEffect{ if (it.get().properties("visibility").any()) { v = it.get().value("visibility");} else { v = false; }}')
+             ->savePropertyAs('visibility', 'v')
              ->outIs('OVERWRITE')
              ->raw(<<<'GREMLIN'
 filter{ 

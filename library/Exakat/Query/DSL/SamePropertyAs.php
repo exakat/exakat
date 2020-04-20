@@ -42,6 +42,8 @@ class SamePropertyAs extends DSL {
             return new Command('filter{ if ( it.get().properties("' . $property . '").any()) { ' . $name . ' == it.get().value("' . $property . '")} else {' . $name . ' == false; }; }');
         } elseif ($property === 'intval') {
             return new Command('has("intval").filter{ it.get().value("intval") == ' . $name . '}');
+        } elseif (in_array($property, array('reference', 'nullable'), \STRICT_COMPARISON) ) {
+            return new Command('filter{ if (it.get().properties("' . $property . '").any()) { ' . $name . ' == it.get().value("' . $property . '");} else { ' . $name . ' == false; }}');
         } elseif ($property === 'code' || $property === 'lccode') {
             if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
                 return new Command('filter{ it.get().value("code") == ' . $name . '}');

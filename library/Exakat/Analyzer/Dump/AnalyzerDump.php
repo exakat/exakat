@@ -23,7 +23,6 @@
 namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Dump\Dump;
 
 abstract class AnalyzerDump extends Analyzer {
 }

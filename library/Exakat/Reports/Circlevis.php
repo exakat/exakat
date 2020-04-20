@@ -32,38 +32,38 @@ class Circlevis extends Reports {
         $analysisResults->load();
         $code_dir = $this->config->code_dir;
 
-        $results = array("name" => "\\",
-                         "children" => array(),
-                         "size" => 0,
+        $results = array('name' => '\\',
+                         'children' => array(),
+                         'size' => 0,
                          );
         foreach($analysisResults->toArray() as $row) {
             $bits = explode('\\', trim($row['namespace'], '\\'));
-            
+
             $level = &$results;
             foreach($bits as $bit) {
                 $id = strtolower($bit);
-                if (isset($level["children"][$id])) {
-                    $level = &$level["children"][$id];
+                if (isset($level['children'][$id])) {
+                    $level = &$level['children'][$id];
                     ++$level['size'];
                 } else {
-                    $level["children"][$id] = array("name" => $bit,
-                                                "children" => array(array("name" => "\\",
-                                                "children" => array(),
-                                                "size" => 0,
+                    $level['children'][$id] = array('name' => $bit,
+                                                'children' => array(array('name' => '\\',
+                                                'children' => array(),
+                                                'size' => 0,
                                                 )),
-                                                "size" => 1,
+                                                'size' => 1,
                                                 );
-                    $level = &$level["children"][$id];
+                    $level = &$level['children'][$id];
                 }
             }
         }
-        
+
         $results = $this->cleanResults($results);
 
         return json_encode($results, \JSON_PRETTY_PRINT);
     }
-    
-    private function cleanResults($results) : array {
+
+    private function cleanResults($results): array {
         if (empty($results['children'])) {
             unset($results['children']);
             $results['size'] = 1;
@@ -75,7 +75,7 @@ class Circlevis extends Reports {
             }
             unset($child);
         }
-        
+
         return $results;
     }
 }

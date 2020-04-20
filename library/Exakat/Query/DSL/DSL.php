@@ -200,7 +200,7 @@ abstract class DSL {
 
     protected function assertVariable($name, $write = self::VARIABLE_READ): bool {
         if ($write === self::VARIABLE_WRITE) {
-            assert(!$this->isVariable($name), "Variable '$name' is already taken : ".print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true));
+            assert(!$this->isVariable($name), "Variable '$name' is already taken : " . print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true));
             assert(!in_array($name, self::PROPERTIES), "Don't use a property name as a variable ($name)");
             $this->availableVariables[] = $name;
         } else {

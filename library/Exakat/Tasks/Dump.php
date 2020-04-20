@@ -654,7 +654,7 @@ GREMLIN
         $methodCount = 0;
         $methodIds = array();
         $query = $this->newQuery('cit methods');
-        $query->atomIs(array("Method", "Magicmethod"), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<GREMLIN
      coalesce( 
             __.out("BLOCK").out("EXPRESSION").hasLabel("As"),

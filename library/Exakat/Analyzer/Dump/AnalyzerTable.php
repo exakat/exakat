@@ -60,8 +60,8 @@ abstract class AnalyzerTable extends AnalyzerDump {
     }
 
     public function execQuery(): int {
-        assert($this->analyzerTable != 'no analyzer table name', "No table name for ".static::class);
-        assert($this->analyzerSQLTable != 'no analyzer sql creation', "No table name for ".static::class);
+        assert($this->analyzerTable != 'no analyzer table name', 'No table name for ' . static::class);
+        assert($this->analyzerSQLTable != 'no analyzer sql creation', 'No table name for ' . static::class);
         // table always created, may be empty
         array_unshift($this->dumpQueries, $this->analyzerSQLTable);
         array_unshift($this->dumpQueries, "DROP TABLE IF EXISTS {$this->analyzerTable}");
