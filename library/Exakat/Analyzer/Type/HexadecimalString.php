@@ -24,11 +24,11 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerDump;
+use Exakat\Analyzer\Dump\AnalyzerResults;
 
-class HexadecimalString extends AnalyzerDump {
+class HexadecimalString extends AnalyzerResults {
     public function analyze() {
-        $regex = '^\\\\\\\\s*0[xX][0-9a-fA-F]+';
+        $regex = '^\\\\s*0[xX][0-9a-fA-F]+';
 
         // Strings
         $this->atomIs('String')

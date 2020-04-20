@@ -51,11 +51,12 @@ class Path extends AnalyzerResults {
                            '\file_put_contents',
                            );
 
-        // fopen()/path/to/file.php
+        // fopen('/path/to/file.php')
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String', self::WITH_CONSTANTS)
              ->has('noDelimiter')
-             ->analyzerIsNot('self')
+             ->regexIsNot('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$')
              ->toResults();
         $this->prepareQuery();
 
