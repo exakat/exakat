@@ -25,9 +25,9 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleUsage extends Analyzer {
-    // trait a { use b, c;}
-    // trait b { use c;}
     public function analyze() {
+        // trait a { use b, c;}
+        // trait b { use c;}
         $this->atomIs('Usetrait')
              ->outIs('USE')
              ->savePropertyAs('fullnspath', 'fnp')
@@ -43,6 +43,18 @@ class MultipleUsage extends Analyzer {
                      ->samePropertyAs('fullnspath', 'fnp')
              )
              ->back('result');
+        $this->prepareQuery();
+
+        // trait a { use b;}
+        // trait b { use a;}
+        $this->atomIs('Trait')
+             ->analyzerIsNot('self')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->goToAllTraits(self::INCLUDE_SELF)
+             ->outIs('USE')
+             ->outIs('USE')
+             ->samePropertyAs('fullnspath', 'fnp')
+             ->back('first');
         $this->prepareQuery();
     }
 }

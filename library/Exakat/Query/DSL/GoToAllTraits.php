@@ -42,7 +42,7 @@ class GoToAllTraits extends DSL {
           .hasLabel("Usetrait")
           .out("USE")
           .in("DEFINITION")
-          .hasLabel("Trait")
+          //.hasLabel("Trait")
           .simplePath().from("gotoalltraits")
       ).emit( )
       .times($MAX_LOOPING)
@@ -52,13 +52,14 @@ GREMLIN
         } elseif ($self === Analyzer::INCLUDE_SELF) {
             $command = new Command(<<<GREMLIN
  as("gotoalltraits")
+.emit( )
 .repeat( __.out("USE")
           .hasLabel("Usetrait")
           .out("USE")
           .in("DEFINITION")
           .hasLabel("Trait")
           .simplePath().from("gotoalltraits")
-        ).emit( )
+        )
         .times($MAX_LOOPING)
         .hasLabel("Trait")
 GREMLIN
