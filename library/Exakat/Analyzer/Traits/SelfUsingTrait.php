@@ -29,8 +29,11 @@ class SelfUsingTrait extends Analyzer {
     public function analyze() {
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->goToAllTraits(self::EXCLUDE_SELF)
-             ->samePropertyAs('fullnspath', 'fnp');
+             ->goToAllTraits(self::INCLUDE_SELF)
+             ->outIs('USE')
+             ->outIs('USE')
+             ->samePropertyAs('fullnspath', 'fnp')
+             ->back('first');
         $this->prepareQuery();
     }
 }
