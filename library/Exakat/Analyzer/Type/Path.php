@@ -27,6 +27,11 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Path extends AnalyzerResults {
     protected $analyzerName = 'Path';
+    
+    public function dependsOn() : array {
+        return array('Complete/PropagateConstants',
+                    );
+    }
 
     public function analyze() {
         $protocols = array('http',
@@ -40,26 +45,35 @@ class Path extends AnalyzerResults {
         $protocolList = implode('|', $protocols);
 
         // /path/to/file.php
-        $this->atomIs('String')
+        $this->atomIs('String', self::WITH_CONSTANTS)
              ->has('noDelimiter')
              ->regexIs('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$')
              ->toResults();
         $this->prepareQuery();
 
-        $functions = array('\fopen',
-                           '\file_get_contents',
-                           '\file_put_contents',
-                           );
+        $pathArgs = array(0 => array('\fopen',
+                                      '\file_get_contents',
+                                      '\file_put_contents',
+                                      '\getimagesize',
+                                    ),
+                           1 => array('\imagegif',
+                                      '\imagepng',
+                                      '\imagebmp',
+                                      '\imagejpeg',
+                                      '\imagewbmp',
+                                    ),
+                                 );
 
         // fopen('/path/to/file.php')
-        $this->atomFunctionIs($functions)
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String', self::WITH_CONSTANTS)
-             ->has('noDelimiter')
-             ->regexIsNot('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$')
-             ->toResults();
-        $this->prepareQuery();
-
+        foreach($pathArgs as $position => $functions) {
+            $this->atomFunctionIs($functions)
+                 ->outWithRank('ARGUMENT', $position)
+                 ->atomIs('String', self::WITH_CONSTANTS)
+                 ->has('noDelimiter')
+                 ->regexIsNot('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$')
+                 ->toResults();
+            $this->prepareQuery();
+        }
     }
 }
 
