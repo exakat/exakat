@@ -466,7 +466,7 @@ SQL;
         rename($this->sqliteFile, $this->sqliteFileFinal);
     }
 
-    public function storeInTable($table, Iterable $results) : int {
+    public function storeInTable(string $table, Iterable $results) : int {
         $values = array();
         $total  = 0;
         foreach($results as $change) {
@@ -474,7 +474,9 @@ SQL;
             // str_replace is an ugly hack for id, which should be null.
             ++$total;
         }
-        
+
+        $query = 'DELETE FROM '.$table;
+        $this->sqlite->query($query);
 
         if (!empty($values)) {
             $chunks = array_chunk($values, SQLITE_CHUNK_SIZE);
