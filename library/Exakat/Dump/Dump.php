@@ -475,8 +475,9 @@ SQL;
             ++$total;
         }
 
-        $query = 'DELETE FROM '.$table;
-        $this->sqlite->query($query);
+// Can't delete, as some tables are incrementally filled
+//        $query = 'DELETE FROM '.$table;
+//        $this->sqlite->query($query);
 
         if (!empty($values)) {
             $chunks = array_chunk($values, SQLITE_CHUNK_SIZE);
