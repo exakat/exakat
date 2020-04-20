@@ -488,9 +488,10 @@ GREMLIN
         display("$total classes\n");
 
         // Interfaces
-        $query = <<<GREMLIN
-g.V().hasLabel("Interface")
-.sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
+        $query = $this->newQuery('cit interfaces');
+        $query->atomIs('Interface', Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<GREMLIN
+ sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = [];}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
@@ -512,11 +513,14 @@ g.V().hasLabel("Interface")
          ];
 }
 
-GREMLIN;
-        $res = $this->gremlin->query($query);
+GREMLIN
+, array(), array()
+);
+        $query->prepareRawQuery();
+        $interfaces = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $total = 0;
-        foreach($res as $row) {
+        foreach($interfaces as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
 
             if (isset($namespacesId[$namespace])) {
@@ -537,9 +541,10 @@ GREMLIN;
         display("$total interfaces\n");
 
         // Traits
-        $query = <<<GREMLIN
-g.V().hasLabel("Trait")
-.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+        $query = $this->newQuery('cit traits');
+        $query->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<GREMLIN
+ sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
@@ -563,11 +568,14 @@ g.V().hasLabel("Trait")
          ];
 }
 
-GREMLIN;
-        $res = $this->gremlin->query($query);
+GREMLIN
+, array(), array()
+);
+        $query->prepareRawQuery();
+        $traits = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $total = 0;
-        foreach($res as $row) {
+        foreach($traits as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
 
             if (isset($namespacesId[$namespace])) {
@@ -645,9 +653,10 @@ GREMLIN;
         // Methods
         $methodCount = 0;
         $methodIds = array();
-        $query = <<<GREMLIN
-g.V().hasLabel("Method", "Magicmethod")
-    .coalesce( 
+        $query = $this->newQuery('cit methods');
+        $query->atomIs(array("Method", "Magicmethod"), Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<GREMLIN
+     coalesce( 
             __.out("BLOCK").out("EXPRESSION").hasLabel("As"),
             __.hasLabel("Method", "Magicmethod")
      )
@@ -680,8 +689,9 @@ g.V().hasLabel("Method", "Magicmethod")
     } else {
         signature = it.get().value("fullcode").replaceFirst("function .*?\\\\(", "function "+alias+"(" );
     }
-
-    x = ["signature": signature,
+        }
+      ) 
+.map{["signature": signature,
          "name":name,
          "abstract":it.get().properties("abstract").any(),
          "final":it.get().properties("final").any(),
@@ -696,18 +706,18 @@ g.V().hasLabel("Method", "Magicmethod")
          "begin":     lines.min(),
          "end":       lines.max(),
          "classline": classline
-         ];
-            }
-      ) 
-.map{x;}
+         ];}
 
-GREMLIN;
-        $res = $this->gremlin->query($query);
+GREMLIN
+, array(), array()
+);
+        $query->prepareRawQuery();
+        $methods = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $total = 0;
         $toDump = array();
         $unique = array();
-        foreach($res as $row) {
+        foreach($methods as $row) {
             if ($row['public']) {
                 $visibility = 'public';
             } elseif ($row['protected']) {
