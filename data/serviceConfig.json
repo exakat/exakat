@@ -63,7 +63,7 @@
            "file":[".editorconfig"]},
  "eslint":{"homepage":"http://eslint.org/",
            "file":[".eslintrc", ".eslintignore", "eslintrc.js", ".eslintrc.js", ".eslintrc.json"]},
- "exakat":{"homepage":"https://www.exakat.io/",
+ "Exakat":{"homepage":"https://www.exakat.io/",
            "file":[".exakat.yaml", ".exakat.yml", ".exakat.ini"]},
  "flintci":{"homepage":"https://flintci.io/",
            "file":[".flintci.yml"]},
