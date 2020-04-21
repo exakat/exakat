@@ -25,8 +25,8 @@ namespace Exakat;
 use Exakat\Configsource\Commandline;
 
 class Exakat {
-    const VERSION = '2.0.7';
-    const BUILD = 1047;
+    const VERSION = '2.0.8';
+    const BUILD = 1063;
 
     private $config  = null;
 
@@ -297,7 +297,7 @@ class Exakat {
 |________|[__]`\_]\'-;__/[__|  \_]\'-;__/\__/  
                                                
 
-Exakat : @ 2014-2019 Damien Seguy. 
+Exakat : @ 2014-2020 Damien Seguy. 
 Version : ", $version, ' - Build ', $build, ' - ', $date, "\n";
 
                 break;

@@ -1,4 +1,4 @@
-Version 2.0.8 (Ao Run, coming up)
+Version 2.0.9 (Jialan, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,16 @@ Version 2.0.8 (Ao Run, coming up)
     + 
 + Tokenizer
     + 
+
+Version 2.0.8 (Ao Run, 2020-04-20)
++ Architecture
+    + Added new information in dump.sqlite, to make report autonomous
++ Analysis
+    + Upgraded analysis : Paths are also recognized with constants, and more functions
+    + Upgraded analysis : Should Use single Quotes
+    + Checked unit tests : 3328 / 3398 test pass (97% pass)
++ Tokenizer
+    + Fixed detection of PHP constants
 
 Version 2.0.7 (Ao Shun, 2020-04-14)
 + Architecture
