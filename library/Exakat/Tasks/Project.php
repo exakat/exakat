@@ -98,9 +98,6 @@ class Project extends Tasks {
                                                'exakat_build'    => Exakat::BUILD,
                                                'php_version'     => $this->config->phpversion,
                                                'audit_name'      => $this->generateName(),
-                                               'file_extensions' => json_encode($this->config->file_extensions),
-                                               'ignore_dirs'     => json_encode($this->config->ignore_dirs),
-                                               'include_dirs'    => json_encode($this->config->include_dirs),
                                          ));
 
         $info = array();

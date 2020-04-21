@@ -199,8 +199,8 @@ class Initproject extends Tasks {
         $projectConfig->setConfig('project_name',   $projectName);
         $projectConfig->setConfig('project_url',    $repositoryURL);
         $projectConfig->setConfig('project_vcs',    $vcs->getName());
-        $projectConfig->setConfig('project_tag',    $repositoryBranch);
-        $projectConfig->setConfig('project_branch', $repositoryTag);
+        $projectConfig->setConfig('project_tag',    $repositoryTag);
+        $projectConfig->setConfig('project_branch', $repositoryBranch);
 
         $projectConfig->setConfig('ignore_dirs',    $ignore_dirs);
         $projectConfig->setConfig('include_dirs',   $include_dirs);
