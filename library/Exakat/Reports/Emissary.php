@@ -768,7 +768,9 @@ HTML;
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>';
-        $issuesHtml .= str_repeat($filler, $nb);
+        if ($nb > 0) {
+            $issuesHtml .= str_repeat($filler, $nb);
+        }
 
         return array('html'   => $issuesHtml,
                      'script' => $dataScript);
@@ -790,10 +792,12 @@ HTML;
             $dataScript[] = $value;
         }
 
-        $html []= str_repeat('<div class="clearfix">
-                   <div class="block-cell">&nbsp;</div>
-                   <div class="block-cell text-center">&nbsp;</div>
-                 </div>', 4 - $res->getCount());
+        if ($c = 4 - $res->getCount()) {
+            $html []= str_repeat('<div class="clearfix">
+                       <div class="block-cell">&nbsp;</div>
+                       <div class="block-cell text-center">&nbsp;</div>
+                     </div>', $c);
+        }
         $html = implode('', $html);
 
         return array('html'   => $html,
@@ -938,10 +942,12 @@ HTML;
         }
 
         $nb = 10 - count($data);
-        $html []= str_repeat('<div class="clearfix">
-                      <div class="block-cell-name">&nbsp;</div>
-                      <div class="block-cell-issue text-center">&nbsp;</div>
-                  </div>', $nb);
+        if ($nb > 0) {
+            $html []= str_repeat('<div class="clearfix">
+                          <div class="block-cell-name">&nbsp;</div>
+                          <div class="block-cell-issue text-center">&nbsp;</div>
+                      </div>', $nb);
+        }
 
         return implode(PHP_EOL, $html);
     }
@@ -1003,10 +1009,12 @@ HTML;
         }
 
         $nb = 10 - count($data);
-        $html []= str_repeat('<div class="clearfix">
-                      <div class="block-cell-name">&nbsp;</div>
-                      <div class="block-cell-issue text-center">&nbsp;</div>
-                  </div>', $nb);
+        if ($nb > 0) {
+            $html []= str_repeat('<div class="clearfix">
+                          <div class="block-cell-name">&nbsp;</div>
+                          <div class="block-cell-issue text-center">&nbsp;</div>
+                      </div>', $nb);
+        }
 
         $html = implode(PHP_EOL, $html);
 
