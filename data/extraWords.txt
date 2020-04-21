@@ -270,3 +270,8 @@ injectable
 ruleset
 multibyte
 encodings
+unsecable
+templating
+github.com
+Yaml
+PNG
