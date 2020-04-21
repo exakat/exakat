@@ -237,7 +237,7 @@ class Docs {
         
             if (isset($ini['phpError'])) {
                 foreach($ini['phpError'] as $phpError) {
-                    $list[] = $this->rst_link($phpError, $this->rst_anchor($ini['name']));
+                    $list[] = $this->rst_link(str_replace('`', '', $phpError) , $this->rst_anchor($ini['name']));
                 }
             }
         }
