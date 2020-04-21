@@ -33,6 +33,19 @@ class Php80RemovedFunctions extends FunctionUsage {
                                  'png2wbmp',
                                  'jpeg2wbmp',
                                  'ldap_sort',
+                                 'hebrevc',
+                                 'convert_cyr_string',
+                                 'ezmlm_hash',
+                                 'money_format',
+                                 'get_magic_quotes_gpc',
+                                 'get_magic_quotes_gpc_runtime',
+                                 'create_function',
+                                 'each',
+                                 'read_exif_data',
+                                 'gmp_random',
+                                 'fgetss',
+                                 'restore_include_path',
+                                 'gzgetss',
                                  );
         parent::analyze();
     }
