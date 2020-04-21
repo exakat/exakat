@@ -43,7 +43,8 @@ class Svn extends Vcs {
         $this->check();
 
         $source = escapeshellarg($source);
-        shell_exec("cd {$this->destinationFull}; {$this->executable} checkout --quiet $source code");
+        $codePath = dirname($this->destinationFull);
+        shell_exec("cd {$codePath}; {$this->executable} checkout --quiet $source code");
     }
 
     public function update() {
@@ -62,7 +63,7 @@ class Svn extends Vcs {
     }
 
     private function getInfo() {
-        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info"));
+        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info") ?? '');
 
         if (empty($res)) {
             $this->info['svn'] = '';
