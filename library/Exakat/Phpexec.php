@@ -408,7 +408,7 @@ PHP;
             $shell = "docker run -it -v \"{$project_code}\":/exakat -w /exakat/code --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'cat /exakat/.exakat/" . basename($tmpFileName) . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "php -l {} 2>&1 || true "\'';
         } else {
             copy("{$script_prefix}/server/lint.php", dirname($tmpFileName).'/lint.php');
-            $shell = "nohup php ".dirname($tmpFileName)."/lint.php $this->phpexec {$this->actualVersion[0]}{$this->actualVersion[2]} $project_code $tmpFileName >/dev/null & echo $!";
+            $shell = "nohup php ".dirname($tmpFileName)."/lint.php $this->phpexec {$this->actualVersion[0]}{$this->actualVersion[2]} $project_code $tmpFileName 2>&1 >/dev/null & echo $!";
         }
 
         $pid = shell_exec($shell);

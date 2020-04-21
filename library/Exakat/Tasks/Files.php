@@ -110,7 +110,7 @@ class Files extends Tasks {
 
         $tmpDir = sys_get_temp_dir();
         copy("{$this->config->dir_root}/server/lint_short_tags.php", "{$this->config->project_dir}/.exakat/lint_short_tags.php");
-        $shell = "nohup php {$this->config->project_dir}/.exakat/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} >/dev/null & echo $!";
+        $shell = "nohup php {$this->config->project_dir}/.exakat/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} 2>&1 >/dev/null & echo $!";
         shell_exec($shell);
         ++$SQLresults;
 
@@ -147,9 +147,14 @@ class Files extends Tasks {
         $this->datastore->cleanTable('files');
 
         $this->datastore->addRow('files', $filesRows);
-        $this->datastore->addRow('hash', array('files'        => count($files),
-                                               'filesIgnored' => count($ignoredFiles),
-                                               'tokens'       => $tokens));
+        $this->datastore->addRow('hash', array('files'           => count($files),
+                                               'filesIgnored'    => count($ignoredFiles),
+                                               'tokens'          => $tokens,
+                                               'file_extensions' => json_encode($this->config->file_extensions),
+                                               'ignore_dirs'     => json_encode($this->config->ignore_dirs),
+                                               'include_dirs'    => json_encode($this->config->include_dirs),
+                                               )
+                                            );
         $this->datastore->reload();
 
         $stats['php'] = count($files);
