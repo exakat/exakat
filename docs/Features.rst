@@ -6,9 +6,9 @@ Exakat features
 Features list
 -------------
 
-* 385 analyzers
-* Compatible with PHP 5.2 to 7.4dev
-* Migration guide from 5.2 to 7.4 and dev
+* 384 analyzers
+* Compatible with PHP 5.2 to 8.0-dev
+* Migration guide from 5.2 to 7.4 and 8.0-dev
 * Modernize your code
 * List bug fixes for your code
 * appinfo(): the list of PHP features
@@ -18,26 +18,26 @@ Features list
 * Code visualizations
 
 
-385 analyzers
+384 analyzers
 -----------------------------
 
-There are currently 385 different analyzers that check the PHP code to report code smells. Analyzers are inspired by PHP manual, migration documents, community good practices, computer science or simple logic. 
+There are currently 384 different analyzers that check the PHP code to report code smells. Analyzers are inspired by PHP manual, migration documents, community good practices, computer science or simple logic. 
 
 Some of them track rare occurrences, and some are frequent. Some track careless mistakes and some are highly complex situations. In any case, exakat has your back, and will warn you. 
 
 .. image:: images/dashboard.748.png
-    :alt: 385 analysis with faceted search
+    :alt: 384 analysis with faceted search
 
 
-Compatible with PHP 5.2 to 7.4-dev
+Compatible with PHP 5.2 to 8.0-dev
 ----------------------------------
 
-The Exakat engine audits code with PHP versions that range from PHP 5.2 to PHP 7.4-dev. 
+The Exakat engine audits code with PHP versions that range from PHP 5.2 to PHP 8.0-dev. 
 
 The Exakat engine itself runs on PHP 7.x+ and is regularly checked on those versions. It is possible to run Exakat on 7.2 and audit a code with PHP 5.6. 
 
 
-Migration guide from 5.2 to 7.4 and dev
+Migration guide from 5.2 to 8.0-dev
 ----------------------------------------
 
 Every middle version of PHP comes with its migration guide from the manual, and from community's feedback. Incompatibilities are included as analyzers in Exakat, and report everything they can find that may prevent you from moving to the newer version. 

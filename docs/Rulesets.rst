@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 15 Apr 2020 08:11:25 +0000
-.. comment: Generation hash : f668d64f849f821badd7348adbd2552498131845
+.. comment: Generation date : Tue, 21 Apr 2020 07:02:58 +0000
+.. comment: Generation hash : 2da72b5a8eb9aa903ffb65dc4c295ed09aaa1e4a
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 385 analysis
+Total : 384 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -212,7 +212,6 @@ Total : 385 analysis
 * :ref:`Illegal Name For Method <illegal-name-for-method>`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Implemented Methods Are Public <implemented-methods-are-public>`
-* :ref:`Implicit Global <implicit-global>`
 * :ref:`Implied If <implied-if>`
 * :ref:`Inclusion Wrong Case <inclusion-wrong-case>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
@@ -1047,7 +1046,7 @@ CompatibilityPHP74
 
 This ruleset centralizes all analysis for the migration from PHP 7.3 to 7.4.
 
-Total : 22 analysis
+Total : 24 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
@@ -1057,12 +1056,14 @@ Total : 22 analysis
 * :ref:`Nested Ternary Without Parenthesis <nested-ternary-without-parenthesis>`
 * :ref:`New Constants In PHP 7.4 <new-constants-in-php-7.4>`
 * :ref:`New Functions In PHP 7.4 <new-functions-in-php-7.4>`
+* :ref:`New Functions In PHP 8.0 <new-functions-in-php-8.0>`
 * :ref:`No More Curly Arrays <no-more-curly-arrays>`
 * :ref:`PHP 7.4 Constant Deprecation <php-7.4-constant-deprecation>`
 * :ref:`PHP 7.4 Removed Directives <php-7.4-removed-directives>`
 * :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
 * :ref:`PHP 7.4 Reserved Keyword <php-7.4-reserved-keyword>`
 * :ref:`Php 7.4 New Class <php-7.4-new-class>`
+* :ref:`Php 8.0 Variable Syntax Tweaks <php-8.0-variable-syntax-tweaks>`
 * :ref:`Php/Php74mbstrrpos3rdArg <php/php74mbstrrpos3rdarg>`
 * :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
 * :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
@@ -1358,7 +1359,7 @@ Total : 85 analysis
 * :ref:`Set Aside Code <set-aside-code>`
 * :ref:`Should Deep Clone <should-deep-clone>`
 * :ref:`Should Have Destructor <should-have-destructor>`
-* :ref:`Should Preprocess Chr <should-preprocess-chr>`
+* :ref:`Should Preprocess Chr() <should-preprocess-chr()>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Math <should-use-math>`

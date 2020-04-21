@@ -295,7 +295,7 @@ Glossary
 
     + `chr()`
 
-      + :ref:`Should Preprocess Chr <should-preprocess-chr>`
+      + :ref:`Should Preprocess Chr() <should-preprocess-chr()>`
       + :ref:`Should Use Operator <should-use-operator>`
 
     + `chroot()`

@@ -438,6 +438,11 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.0.8
+
+  * New Functions In PHP 8.0 (Php/Php80NewFunctions)
+  * Php 8.0 Variable Syntax Tweaks (Php/Php80VariableSyntax ; Appinfo, CompatibilityPHP74)
+
 * 2.0.7
 
   * Constant Order (Dump/ConstantOrder)
@@ -984,7 +989,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.1.9
 
-  * Should Preprocess Chr (Php/ShouldPreprocess ; Suggestions)
+  * Should Preprocess Chr() (Php/ShouldPreprocess ; Suggestions)
   * Too Many Parameters (Functions/TooManyParameters)
 
 * 1.1.8
@@ -1649,7 +1654,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * If With Same Conditions (Structures/IfWithSameConditions ; Analyze, Simple)
   * Iffectations (Structures/Iffectation ; Analyze)
   * Implement Is For Interface (Classes/ImplementIsForInterface ; Analyze, Simple)
-  * Implicit Global (Structures/ImplicitGlobal ; Analyze)
+  * Implicit Global (Structures/ImplicitGlobal ; )
   * Implied If (Structures/ImpliedIf ; Analyze, ClearPHP, Simple)
   * Inclusions (Structures/IncludeUsage ; Appinfo)
   * Incompilable Files (Php/Incompilable ; Analyze, Appinfo, ClearPHP, Simple)
@@ -1976,8 +1981,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Usort Sorting In PHP 7.0 (Php/UsortSorting ; CompatibilityPHP70)
   * Var Keyword (Classes/OldStyleVar ; Analyze, OneFile, ClearPHP, Simple, Level 1)
   * Variable Constants (Constants/VariableConstant ; Appinfo, Stats)
-  * Variable Is Modified (Variables/IsModified ; Internal)
-  * Variable Is Read (Variables/IsRead ; Internal)
   * Variables Variables (Variables/VariableVariables ; Appinfo, Stats)
   * Variables With Long Names (Variables/VariableLong ; Appinfo)
   * Variables With One Letter Names (Variables/VariableOneLetter ; Semantics)
@@ -2360,8 +2363,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2636,8 +2639,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2682,8 +2685,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2707,8 +2710,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2752,6 +2755,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
+* `PHP RFC: Variable Syntax Tweaks <https://wiki.php.net/rfc/variable_syntax_tweaks>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP why pi() and M_PI <https://stackoverflow.com/questions/42021176/php-why-pi-and-m-pi>`_
 * `PHP-cs-fixer <https://github.com/FriendsOfPHP/PHP-CS-Fixer>`_
@@ -2830,6 +2834,7 @@ List of external links mentionned in this documentation.
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `str_contains <http://php.net/str_contains>`_
 * `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
@@ -2870,8 +2875,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -2897,8 +2902,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
@@ -3237,7 +3242,6 @@ _______
 |   analyzer[] = "Structures/IdenticalOnBothSides";
 |   analyzer[] = "Structures/IfWithSameConditions";
 |   analyzer[] = "Structures/Iffectation";
-|   analyzer[] = "Structures/ImplicitGlobal";
 |   analyzer[] = "Structures/ImpliedIf";
 |   analyzer[] = "Structures/ImplodeArgsOrder";
 |   analyzer[] = "Structures/InconsistentElseif";
@@ -3983,6 +3987,8 @@ __________________
 |   analyzer[] = "Php/Php74RemovedFunctions";
 |   analyzer[] = "Php/Php74ReservedKeyword";
 |   analyzer[] = "Php/Php74mbstrrpos3rdArg";
+|   analyzer[] = "Php/Php80NewFunctions";
+|   analyzer[] = "Php/Php80VariableSyntax";
 |   analyzer[] = "Php/ReflectionExportIsDeprecated";
 |   analyzer[] = "Php/ScalarAreNotArrays";
 |   analyzer[] = "Structures/CurlVersionNow";

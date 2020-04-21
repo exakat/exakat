@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 15 Apr 2020 08:11:25 +0000
-.. comment: Generation hash : f668d64f849f821badd7348adbd2552498131845
+.. comment: Generation date : Tue, 21 Apr 2020 07:02:58 +0000
+.. comment: Generation hash : 2da72b5a8eb9aa903ffb65dc4c295ed09aaa1e4a
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -4517,9 +4517,9 @@ Complex Dynamic Names
 
 Avoid using expressions as names for variables or methods. 
 
-There are no place for checks or flow control, leading to any rogue value to be used as is. Besides, the expression is often overlooke, and not expected there : this makes the code less readable.
+There are no place for checks or flow control, leading to any rogue value to be used as is. Besides, the expression is often overlooked, and not expected there : this makes the code less readable.
 
-It is recommended to buildd the name in a separate variable, apply the usual checks for existence and validity, and then use the name.
+It is recommended to build the name in a separate variable, apply the usual checks for existence and validity, and then use the name.
 
 .. code-block:: php
 
@@ -6694,7 +6694,7 @@ Dependant Abstract Classes
 ##########################
 
 
-Abstract classes should be autonomous. It is recommended to avoid depending on methods, constant or properties that should be made available in inheriting classes, without explictely abstracting them.
+Abstract classes should be autonomous. It is recommended to avoid depending on methods, constant or properties that should be made available in inheriting classes, without explicitly abstracting them.
 
 The following abstract classes make usage of constant, methods and properties, static or not, that are not defined in the class. This means the inheriting classes must provide those constants, methods and properties, but there is no way to enforce this. 
 
@@ -7090,7 +7090,7 @@ Disconnected Classes
 
 One class is extending the other, but they do not use any features from one another. Basically, those two classes are using extends, but they are completely independent and may be separated. 
 
-When using the 'extends' keyword, the newly created classes are now acting together and making one. This should be visibile in calls from one class to the other, or simply by property usage : they can't live without each other.
+When using the 'extends' keyword, the newly created classes are now acting together and making one. This should be visible in calls from one class to the other, or simply by property usage : they can't live without each other.
 
 On the other hand, two completely independent classes that are merged, although they should be kept separated.
 
@@ -9688,11 +9688,11 @@ Fossilized Method
 #################
 
 
-A method is fossilized when it is overwriten so often that changing a default value, a return type or an argument type is getting difficult.
+A method is fossilized when it is overwritten so often that changing a default value, a return type or an argument type is getting difficult.
 
 This happens when a class is extended. When a method is overwritten once, it may be easy to update the signature in two places. The more methods are overwriting a parent method, the more difficult it is to update it.
 
-This analysis counts the number of times a method is overwriten, and report any method that is ovrewriten more than 6 times. This threshold is parametrable.
+This analysis counts the number of times a method is overwriten, and report any method that is ovrewriten more than 6 times. This threshold may be configured.
 
 .. code-block:: php
 
@@ -11162,50 +11162,6 @@ Suggestions
 +-------------+-------------------------------------+
 | Time To Fix | Instant (5 mins)                    |
 +-------------+-------------------------------------+
-
-
-
-.. _implicit-global:
-
-Implicit Global
-###############
-
-
-Global variables, that are used in local scope with global keyword, but are not declared as global in the global scope. They may be mistaken with distinct values, while, in PHP, variables in the global scope are truly global.
-
-.. code-block:: php
-
-   <?php
-   
-   // This is implicitely global
-   $implicitGlobal = 1;
-   
-   global $explicitGlobal;
-   $explicitGlobal = 2;
-   
-   foo();
-   echo $explicitFunctionGlobal;
-   
-   function foo() {
-       // This global is needed, but not the one in the global space
-       global $implicitGlobal, $explicitGlobal, $explicitFunctionGlobal;
-       
-       // This won't be a global, as it must be 'global' in a function scope
-       $notImplicitGlobal = 3;
-       $explicitFunctionGlobal = 3;
-   }
-   
-   ?>
-
-+-------------+---------------------------+
-| Short name  | Structures/ImplicitGlobal |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
 
 
 
@@ -16078,7 +16034,7 @@ See also `New global constants in 7.4 <http://php.net/manual/en/migration74.cons
 Suggestions
 ^^^^^^^^^^^
 
-* Move the constants to a new namspace
+* Move the constants to a new namespace
 * Remove the old constants
 * Rename the old constants
 
@@ -16307,6 +16263,36 @@ Note : At the moment of writing, all links to the manual are not working.
 | Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
 | Php Version | With PHP 7.3 and older    |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
+.. _new-functions-in-php-8.0:
+
+New Functions In PHP 8.0
+########################
+
+
+New functions are added to new PHP version.
+
+The following functions are now native functions in PHP 7.3. It is compulsory to rename any custom function that was created in older versions. One alternative is to move the function to a custom namespace, and update the ``use`` list at the beginning of the script. 
+
+* `str_contains <http://php.net/str_contains>`_
+* `fdiv <http://php.net/fdiv>`_
+* `preg_last_error_msg <http://php.net/preg_last_error_msg>`_
+
+Note : At the moment of writing, all links to the manual are not working.
+
++-------------+---------------------------+
+| Short name  | Php/Php80NewFunctions     |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | With PHP 8.0 and older    |
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
@@ -18696,7 +18682,7 @@ Non-lowercase Keywords
 ######################
 
 
-The usual convention is to write PHP keywords (like as, ``foreach``, ``switch``, ``case``, ``break``, etc.) all in lowercase. 
+The usual convention is to write PHP keywords (like ``as``, ``foreach``, ``switch``, ``case``, ``break``, etc.) all in lowercase. 
 
 .. code-block:: php
 
@@ -20436,7 +20422,7 @@ PHP 7.4 Reserved Keyword
 ########################
 
 
-fn is a new PHP keyword. In PHP 7.4, it is used to build the arrow functions. When used at an illegal position, ``fn`` generates a Fatal error at compile time.
+``fn`` is a new PHP keyword. In PHP 7.4, it is used to build the arrow functions. When used at an illegal position, ``fn`` generates a Fatal error at compile time.
 
 As a key word, ``fn`` is not allowed as constant name, function name, class name or inside namespaces. 
 
@@ -20493,20 +20479,19 @@ PHP 74 New Directives
 #####################
 
 
-List of directives that are removed in PHP 7.4.
+List of directives that are new in PHP 7.4.
 
-+ zend.exception_ignore_args : From the php.ini : ``Allows to include or exclude arguments from stack traces generated for exceptions. Default: Off``
-+ opcache.preload_user
++ ``zend.exception_ignore_args`` : From the php.ini : ``Allows to include or exclude arguments from stack traces generated for exceptions. Default: Off``
++ ``opcache.preload_user``
 
 
-See `RFC Preload <https://wiki.php.net/rfc/preload>`_ et
-    `RFC Preload <https://wiki.php.net/rfc/preload>`_ et.
+See `RFC Preload <https://wiki.php.net/rfc/preload>`_.
 
 
 Suggestions
 ^^^^^^^^^^^
 
-* Do not use those directives with PHP before 7.4
+* Do not use those directives with PHP before version 7.4
 
 +-------------+---------------------------+
 | Short name  | Php/Php74NewDirective     |
@@ -21173,6 +21158,59 @@ Suggestions
 | Severity    | Major                     |
 +-------------+---------------------------+
 | Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+
+
+
+.. _php-8.0-variable-syntax-tweaks:
+
+Php 8.0 Variable Syntax Tweaks
+##############################
+
+
+Several variable syntaxes are added in version 8.0. They extends the PHP 7.0 syntax updates, and fix a number of edges cases.
+
+In particular, ``new``and ``instanceof`` now support a way to inline the expression, rather than use a temporary variable.
+
+Magic constants are now accessible with array notation, just like another constant. It is also possible to use method calls : although this is Syntactly correct for PHP, this won't be executed, as the left operand is a string, and not an object.
+
+.. code-block:: php
+
+   <?php
+   
+    // array name is dynamically build
+    echo foo$bar[0];
+    // static method
+    foo$bar::baz();
+    // static property 
+    foo$bar::$baz;
+    
+    // Syntactly correct, but not executable
+    foo$bar->baz();
+    
+    // expressions with instanceof and new
+       $object = new (class_.$name);
+       $x instanceof (class_$name);
+   
+       // PHP 7.0 style
+       $className = class_.$name;
+       $object = new $className;
+   
+   ?>
+
+
+See also `PHP RFC: Variable Syntax Tweaks <https://wiki.php.net/rfc/variable_syntax_tweaks>`_ and `scalar_objects in PHP <https://github.com/nikic/scalar_objects>`_.
+
++-------------+---------------------------+
+| Short name  | Php/Php80VariableSyntax   |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | 8.0+                      |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
 
 
@@ -24075,16 +24113,16 @@ This way, they are less verbose, compatible with assignation and easier to read.
 
 
 
-.. _should-preprocess-chr:
+.. _should-preprocess-chr():
 
-Should Preprocess Chr
-#####################
+Should Preprocess Chr()
+#######################
 
 
 Replace literal `chr() <https://www.php.net/chr>`_ calls with their escape sequence.
 
 `chr() <https://www.php.net/chr>`_ is a functioncall, that cannot be cached. It is only resolved at execution time. 
-On the other hand, literal values are presprocessed by PHP and may be cached.
+On the other hand, literal values are preprocessed by PHP and may be cached.
 
 .. code-block:: php
 
@@ -24102,7 +24140,7 @@ On the other hand, literal values are presprocessed by PHP and may be cached.
    ?>
 
 
-This is a micro-optimisation. 
+This is a micro-optimisation.
 
 See also `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_.
 
@@ -28487,7 +28525,7 @@ Unpacking Inside Arrays
 #######################
 
 
-The variadic operartor is now available inside arrays. Until PHP 7.4, it is not possible to use the variadic operator, or ``...`` inside arrays. 
+The variadic operator is now available inside arrays. Until PHP 7.4, it is not possible to use the variadic operator, or ``...`` inside arrays. 
 
 The workaround is to use `array_merge() <https://www.php.net/array_merge>`_, after checking that arrays are not empty.
 
@@ -30326,7 +30364,7 @@ Use DateTimeImmutable Class
 
 The DateTimeImmutable class is the immutable version of the `Datetime <http://www.php.net/manual/en/class.datetime.php>`_ class. 
 
-While DateTime may be modified 'in situ', DateTimeImmutable cannot be modified. Any modication to such an object will return a new and distinct object. This avoid interferences that are hard to track.
+While DateTime may be modified 'in situ', ``DateTimeImmutable`` cannot be modified. Any modification to such an object will return a new and distinct object. This avoid interferences that are hard to track.
 
 .. code-block:: php
 
@@ -33427,6 +33465,8 @@ When a function have both compulsory and optional parameters, the compulsory one
 PHP will solve this problem at runtime, assign values in the same other, but will miss some of the default values and emits warnings. 
 
 It is better to put all the optional parameters at the end of the method's signature.
+
+Optional parameter wrongly placed are now a Notice in PHP 8.0. The only previous case that is now allowed is when the ``null`` value is used as default for typed arguments.
 
 
 

@@ -10495,15 +10495,15 @@ ChurchCRM
     public function StartNewPage($fam_ID, $fam_Name, $fam_Address1, $fam_Address2, $fam_City, $fam_State, $fam_Zip, $fam_Country, $fundOnlyString, $iFYID) 
     {
 
-Should Preprocess Chr
-=====================
+Should Preprocess Chr()
+=======================
 
 .. _phpadsnew-php-shouldpreprocess:
 
 phpadsnew
 ^^^^^^^^^
 
-:ref:`should-preprocess-chr`, in phpAdsNew-2.0/adview.php:302. 
+:ref:`should-preprocess-chr()`, in phpAdsNew-2.0/adview.php:302. 
 
 Each call to chr() may be done before. First, chr() may be replace with the hexadecimal sequence "0x3B"; Secondly, 0x3b is a rather long replacement for a simple semi-colon. The whole pragraph could be stored in a separate file, for easier modifications. 
 
