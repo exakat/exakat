@@ -121,7 +121,7 @@ The title of the analysis is listed on the left, and the analysis short name is 
 This analysis uses Analysis as default rule. It may otherwise parametered with the -T option.
 
 ::
-    
+
 Compare Hash                                                           :ref:`compare-hash`                     
 Configure Extract                                                      :ref:`configure-extract`                
 Dynamic Library Loading                                                :ref:`dynamic-library-loading`                       
@@ -134,8 +134,6 @@ No ENT_IGNORE                                                          :ref:`no-
 No Hardcoded Hash                                                      :ref:`no-hardcoded-hash`               
 No Hardcoded Ip                                                        :ref:`no-hardcoded-ip`                 
 No Hardcoded Port                                                      :ref:`no-hardcoded-port`               
-   
-   
 
 
 
@@ -1669,7 +1667,7 @@ ______________
 
 This represents a topological order in the code.
 
-Topology displays all dependencies between code structures. Such dependencies lead to a code hierachy, which is presented here.
+Topology displays all dependencies between code structures. Such dependencies lead to a code hierarchy, which is presented here.
 
 There are currently two topology available:
 

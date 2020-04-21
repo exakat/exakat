@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 21 Apr 2020 07:02:58 +0000
-.. comment: Generation hash : 2da72b5a8eb9aa903ffb65dc4c295ed09aaa1e4a
+.. comment: Generation date : Tue, 21 Apr 2020 08:58:17 +0000
+.. comment: Generation hash : d448965d3e12624d1a0c6fe5580b03d873b1316f
 
 
 .. _analyze:
@@ -483,7 +483,7 @@ Total : 384 analysis
 ClassReview
 +++++++++++
 
-This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methodes, properties, constants.
+This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
 Total : 38 analysis
 

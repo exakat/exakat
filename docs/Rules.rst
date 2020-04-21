@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 21 Apr 2020 07:02:58 +0000
-.. comment: Generation hash : 2da72b5a8eb9aa903ffb65dc4c295ed09aaa1e4a
+.. comment: Generation date : Tue, 21 Apr 2020 08:58:17 +0000
+.. comment: Generation hash : d448965d3e12624d1a0c6fe5580b03d873b1316f
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2064,7 +2064,7 @@ Avoid Those Hash Functions
 ##########################
 
 
-The following cryptographic algorithms are considered unsecure, and should be replaced with new and more performant algorithms. 
+The following cryptographic algorithms are considered insecure, and should be replaced with new and more performent algorithms. 
 
 ``MD2``, ``MD4``, ``MD5``, ``SHA0``, ``SHA1``, ``CRC``, ``DES``, ``3DES``, ``RC2``, ``RC4``. 
 
@@ -4759,7 +4759,7 @@ See also `extract <http://php.net/extract>`_.
 Suggestions
 ^^^^^^^^^^^
 
-* Always use the second argument of extract(), and avoid using EXTR_OVERWRITE
+* Always use the second argument of extract(), and avoid using ``EXTR_OVERWRITE``
 
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Security/ConfigureExtract                                                         |
@@ -6643,17 +6643,17 @@ Suggestions
 
 * Move function definitions to th global space : outside structures, and method.
 
-+-------------+------------------------------------------------------------------------------------+
-| Short name  | Functions/DeepDefinitions                                                          |
-+-------------+------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                     |
-+-------------+------------------------------------------------------------------------------------+
-| Severity    | Major                                                                              |
-+-------------+------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                      |
-+-------------+------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-functions-deepdefinitions`, :ref:`dolphin-functions-deepdefinitions` |
-+-------------+------------------------------------------------------------------------------------+
++-------------+------------------------------------------+
+| Short name  | Functions/DeepDefinitions                |
++-------------+------------------------------------------+
+| Rulesets    | :ref:`Analyze`                           |
++-------------+------------------------------------------+
+| Severity    | Major                                    |
++-------------+------------------------------------------+
+| Time To Fix | Slow (1 hour)                            |
++-------------+------------------------------------------+
+| Examples    | :ref:`dolphin-functions-deepdefinitions` |
++-------------+------------------------------------------+
 
 
 
@@ -6795,7 +6795,7 @@ See also :ref:`dependant-abstract-classes`.
 Suggestions
 ^^^^^^^^^^^
 
-* Add local property definitions to make the trait independant
+* Add local property definitions to make the trait independent
 * Make the trait only use its own resources
 * Split the trait in autonomous traits
 
@@ -8687,7 +8687,7 @@ Some simple letters are written in escape sequence.
 
 Usually, escape sequences are made to encode unusual characters. Using escape sequences for simple characters, like letters or numbers is suspicious.
 
-This analysis also detect unicode codepoint with superfluous leading zeros.
+This analysis also detects Unicode codepoint with superfluous leading zeros.
 
 .. code-block:: php
 
@@ -13572,7 +13572,7 @@ This analysis takes in charge all ``mbstring`` encoding and aliases. The full li
    ?>
 
 
-See also `ext/mbstring <https://www.php.net/manual/en/book.mbstring.php>`_.
+See also `ext/mbstring <http://www.php.net/manual/en/book.mbstring.php>`_.
 
 
 Suggestions
@@ -14023,7 +14023,7 @@ Minus One On Error
 
 Some PHP native functions return -1 on error. They also return 1 in case of success, and 0 in case of failure. This leads to confusions.
 
-In case the native function is used as a condition without explicit comparaison, PHP typecase the return value to a boolean. In this case, -1 and 1 are both converted to true, and the condition applies. This means that an error situation is mistaken for a successful event. 
+In case the native function is used as a condition without explicit comparison, PHP type cast the return value to a boolean. In this case, -1 and 1 are both converted to true, and the condition applies. This means that an error situation is mistaken for a successful event. 
 
 .. code-block:: php
 
@@ -14041,7 +14041,7 @@ In case the native function is used as a condition without explicit comparaison,
    ?>
 
 
-This analysis searches for if/then structures, ternary operators dans `while() <http://php.net/manual/en/control-structures.while.php>`_ / do...`while() <http://php.net/manual/en/control-structures.while.php>`_ loops. 
+This analysis searches for if/then structures, ternary operators inside `while() <http://php.net/manual/en/control-structures.while.php>`_ / do...`while() <http://php.net/manual/en/control-structures.while.php>`_ loops. 
 
 See also `Can you spot the vulnerability? (openssl_verify) <https://twitter.com/ripstech/status/1124325237967994880>`_ and `Incorrect Signature Verification <https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSIMPLESAMLPHPMODULEINFOCARD-70167>`_.
 
@@ -18186,7 +18186,7 @@ All the SSL protocol, and TLS (its successor) v 1.0 are not unsafe. The best is 
 
 stream_socket_enable_crypto() and `curl_setopt() <https://www.php.net/curl_setopt>`_ are checked.
 
-See also `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>s`_ an `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_.
+See also `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>`_ and `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_.
 
 
 Suggestions
@@ -19379,7 +19379,7 @@ Suggestions
 
 * Drop the surrounding string, keep the variable (or property...)
 * Include in the string any concatenation that comes unconditionaly after or before
-* Convert the variable to a strign with the (type) operator
+* Convert the variable to a string with the (type) operator
 
 +-------------+-----------------------------------------------------------------------------------+
 | Short name  | Type/OneVariableStrings                                                           |
@@ -23631,7 +23631,7 @@ The ``$samesite`` argument limits the sending of the cookie to the domain that i
    ?>
 
 
-See also `setcookie <https://www.php.net/setcookie>`_ and `'SameSite' cookie attribute <https://www.chromestatus.com/feature/4672634709082112>`_.
+See also `setcookie <http://www.php.net/setcookie>`_ and `'SameSite' cookie attribute <https://www.chromestatus.com/feature/4672634709082112>`_.
 
 +-------------+------------------------+
 | Short name  | Security/SetCookieArgs |
@@ -24727,7 +24727,7 @@ Both functions help by giving a checklist of important attributes to be used wit
    ?>
 
 
-See also `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_, `setcookie <https://www.php.net/setcookie>`_.
+See also `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_, `setcookie <http://www.php.net/setcookie>`_.
 
 
 Suggestions
@@ -26469,7 +26469,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Use parenthesis 
-* Avoid ternaries and coalesace operators inside a string
+* Avoid ternaries and coalesce operators inside a string
 
 +-------------+--------------------------------------------+
 | Short name  | Structures/TernaryInConcat                 |
@@ -26716,7 +26716,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * For small time intervals, use hrtime() functions
-* For larger time intervals, use add() method with DateTime
+* For larger time intervals, use add() method with ``DateTime``
 
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Structures/TimestampDifference                                                              |
@@ -27258,9 +27258,9 @@ Trait Not Found
 
 A unknown trait is mentioned in the use expression. 
 
-The used traits all exist, but in the configuration block, some un-mentioned trait is called.
+The used traits all exist, but in the configuration block, some unmentioned trait is called.
 
-Be aware that the traits used in any configuration block may originate in any use expression. PHP will check the configuration block at instanciation only, and after compiling : at that moment, it will know all the used traits across the class.
+Be aware that the traits used in any configuration block may originate in any use expression. PHP will check the configuration block at instantiation only, and after compiling : at that moment, it will know all the used traits across the class.
 
 .. code-block:: php
 
@@ -33226,17 +33226,17 @@ Suggestions
 * Match the property call with the definition
 * Make the property static
 
-+-------------+----------------------------------------------------------------------------------------------------+
-| Short name  | Classes/UndeclaredStaticProperty                                                                   |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`                                                                 |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                                           |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`humo-gen-classes-undeclaredstaticproperty`, :ref:`humo-gen-classes-undeclaredstaticproperty` |
-+-------------+----------------------------------------------------------------------------------------------------+
++-------------+--------------------------------------------------+
+| Short name  | Classes/UndeclaredStaticProperty                 |
++-------------+--------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`               |
++-------------+--------------------------------------------------+
+| Severity    | Critical                                         |
++-------------+--------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                  |
++-------------+--------------------------------------------------+
+| Examples    | :ref:`humo-gen-classes-undeclaredstaticproperty` |
++-------------+--------------------------------------------------+
 
 
 

@@ -6,14 +6,17 @@ Tutorials
 Here are four tutorials to run Exakat on your code. You may install exakat with the projects folder, and centralize your audits in one place, or run exakat in-code, right from the source code. You may also run exakat with a bare-metal installation, or as a docker container.
 
 + Bare metal install
+
  + with projects folder
+
  + within the code
- 
+
 + Docker container
+
  + with projects folder
+
  + within the code
- 
- 
+
 All four tutorials offer the same steps : 
 + Project initialisation
 + Audit run

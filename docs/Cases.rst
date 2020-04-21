@@ -2487,39 +2487,6 @@ The ConstructHiddenValues function builds the ConstructHiddenSubValues function.
         return $Result;
     }
 
-
---------
-
-
-.. _dolphin-functions-deepdefinitions:
-
-Dolphin
-^^^^^^^
-
-:ref:`deep-definitions`, in source.php:247. 
-
-person_data() is a short-cut, only used with a PDF display environnement. 
-
-.. code-block:: php
-
-    function source_display($sourcenum) {
-    	global $dbh, $db_functions, $tree_id, $dataDb, $user, $pdf, $screen_mode, $language;
-    
-    /// More code 
-    
-    		$person_cls = New person_cls;
-    
-    		// *** Find person data if source is connected to a family item ***
-    		// *** This seperate function speeds up the sources page ***
-    		function person_data($familyDb){
-    			global $dbh, $db_functions;
-    			if ($familyDb->fam_man)
-    				$personDb=$db_functions->get_person ($familyDb->fam_man);
-    			else
-    				$personDb=$db_functions->get_person ($familyDb->fam_woman);
-    			return $personDb;
-    		}
-
 Repeated print()
 ================
 
@@ -3458,7 +3425,7 @@ xataface
 
 :ref:`undefined-interfaces`, in Dataface/Error.php:112. 
 
-Exception_ seems to be a typo, and leads to an always-true expression.
+Exception seems to be a typo, and leads to an always-true expression.
 
 .. code-block:: php
 
@@ -8383,27 +8350,6 @@ HuMo-Gen
 ^^^^^^^^
 
 :ref:`wrong-access-style-to-property`, in wp-admin/includes/misc.php:74. 
-
-lame_binary_path is a static property, but it is accessed as a normal property in the exception call, while it is checked with a valid syntax.
-
-.. code-block:: php
-
-    protected function wavToMp3($data)
-        {
-            if (!file_exists(self::$lame_binary_path) || !is_executable(self::$lame_binary_path)) {
-                throw new Exception('Lame binary  . $this->lame_binary_path .  does not exist or is not executable');
-            }
-
-
---------
-
-
-.. _humo-gen-classes-undeclaredstaticproperty:
-
-HuMo-Gen
-^^^^^^^^
-
-:ref:`wrong-access-style-to-property`, in include/securimage/securimage.php:3065. 
 
 lame_binary_path is a static property, but it is accessed as a normal property in the exception call, while it is checked with a valid syntax.
 

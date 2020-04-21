@@ -2277,7 +2277,7 @@ List of external services whose configuration files has been commited in the cod
 * `drush <https://www.drupal.org/project/drupalci>`_ - drush.services.yml
 * `editorconfig <https://editorconfig.org/>`_ - .editorconfig
 * `eslint <http://eslint.org/>`_ - .eslintrc, .eslintignore, eslintrc.js, .eslintrc.js, .eslintrc.json
-* `exakat <https://www.exakat.io/>`_ - .exakat.yaml, .exakat.yml, .exakat.ini
+* `Exakat <https://www.exakat.io/>`_ - .exakat.yaml, .exakat.yml, .exakat.ini
 * `flintci <https://flintci.io/>`_ - .flintci.yml
 * `git <https://git-scm.com/>`_ - .git, .gitignore, .gitattributes, .gitmodules, .mailmap, .githooks
 * `github <https://www.github.com/>`_ - .github
@@ -2512,7 +2512,7 @@ List of external links mentionned in this documentation.
 * `ext/inotify manual <http://php.net/manual/en/book.inotify.php>`_
 * `ext/leveldb on Github <https://github.com/reeze/php-leveldb>`_
 * `ext/lua manual <http://php.net/manual/en/book.lua.php>`_
-* `ext/mbstring <https://www.php.net/manual/en/book.mbstring.php>`_
+* `ext/mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `ext/memcached manual <http://php.net/manual/en/book.memcached.php>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
@@ -2599,6 +2599,7 @@ List of external links mentionned in this documentation.
 * `include_once <http://php.net/manual/en/function.include-once.php>`_
 * `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
 * `Info Predefined Constants <http://php.net/manual/en/info.constants.php>`_
+* `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>`_
 * `Instanceof <http://php.net/manual/en/language.operators.type.php>`_
 * `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
@@ -2639,8 +2640,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2685,8 +2686,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2818,7 +2819,6 @@ List of external links mentionned in this documentation.
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `set_error_handler <http://www.php.net/set_error_handler>`_
 * `setcookie <http://www.php.net/setcookie>`_
-* `setcookie <https://www.php.net/setcookie>`_
 * `setlocale <http://php.net/setlocale>`_
 * `shell_exec <http://www.php.net/shell_exec>`_
 * `SimpleXML <http://php.net/manual/en/book.simplexml.php>`_
@@ -2855,7 +2855,6 @@ List of external links mentionned in this documentation.
 * `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
 * `tetraweb/php <https://hub.docker.com/r/tetraweb/php/>`_
-* `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
@@ -2875,15 +2874,15 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
-* `Typo3 <https://www.typo3.org/>`_
+* `Typo3 <https://typo3.org/>`_
 * `Unbinding $this from non-static closures <https://wiki.php.net/rfc/deprecations_php_7_4#unbinding_this_from_non-static_closures>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2902,8 +2901,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
@@ -3375,7 +3374,7 @@ _______
 .. _ruleset_ini_classreview:
 
 ClassReview
-This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methodes, properties, constants.
+This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 ___________
 
 | [ClassReview]
