@@ -110,7 +110,7 @@ GREMLIN
     private function pushConstantValues() {
         $this->atomIs(array('Constant', 'Defineconstant'))
              ->outIs('NAME')
-             ->has('propagated', true)
+             ->is('propagated', true)
              ->savePropertyAs('constante')
              ->back('first')
 

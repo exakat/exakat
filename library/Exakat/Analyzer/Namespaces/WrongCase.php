@@ -47,7 +47,7 @@ class WrongCase extends Analyzer {
              ->outIs('NAME')
              ->raw('filter{ it.get().value("fullcode").toLowerCase() in ***}', array_keys($doubles))
              ->back('first');
-        $res = $this->prepareQuery();
+        $this->prepareQuery();
     }
 }
 

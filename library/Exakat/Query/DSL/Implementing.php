@@ -33,7 +33,7 @@ class Implementing extends DSL {
 where( __.emit().repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION")).times({$MAX_LOOPING})
                         .out("IMPLEMENTS", "EXTENDS").has("fullnspath", within(***)) ) 
 GREMLIN
-, $fullnspath);
+, array($fullnspath));
     }
 }
 ?>

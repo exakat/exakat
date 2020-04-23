@@ -63,7 +63,7 @@ class PossibleInterfaces extends Analyzer {
 
             foreach($list as $interface) {
                 $interface_name = array_pop($interface);
-//                if ($current === $interface_name) { continue; }
+
                 if (!empty($diff = array_intersect($interface, $one))) {
                     ++$stats[$id];
 
@@ -88,7 +88,7 @@ class PossibleInterfaces extends Analyzer {
         }
 
         foreach(array_keys($counts) as $count) {
-            $arg = explode('-', $count);
+            $arg = explode('-', (string) $count);
             $arg = array_map('intval', $arg);
             $this->atomIs('Class')
                  ->analyzerIsNot('self')

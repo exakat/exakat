@@ -26,6 +26,7 @@ use Exakat\Vcs\Vcs;
 use Exakat\Tasks\Baseline;
 use Exakat\Tasks\Extension;
 use Exakat\Project;
+use Exakat\Graph\Graph;
 
 class CommandLine extends Config {
     private $booleanOptions = array(
@@ -204,7 +205,7 @@ class CommandLine extends Config {
                         }
                         break;
 
-                    case 'graphdb' :
+                    case 'gremlin' :
                         $this->config['gremlin'] = $args[$id + 1];
                         if (!in_array($this->config['gremlin'], Graph::GRAPHDB)) {
                             $this->config['gremlin'] = 'nogremlin';

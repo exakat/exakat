@@ -45,6 +45,7 @@ class Dump extends Tasks {
     protected $logname = self::LOG_NONE;
 
     private $linksDown = '';
+    private $dump      = null;
 
     const WAITING_LOOP = 1000;
 
@@ -337,7 +338,7 @@ GREMLIN
                 continue;
             }
 
-            $todump[] = array(null,
+            $toDump[] = array(null,
                               $result['fullcode'],
                               $result['file'],
                               $result['line'],
@@ -345,7 +346,8 @@ GREMLIN
                               $result['class'],
                               $result['function'],
                               $class,
-                              $severity);
+                              $severity,
+                              );
         }
 
         if (empty($toDump)) {

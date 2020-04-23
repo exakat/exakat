@@ -33,7 +33,7 @@ class RulesetsExtra implements RulesetsInterface {
 
     public function getRulesetsAnalyzers(array $ruleset = array()): array {
         // Main installation
-        if ($ruleset === null) {
+        if (empty($ruleset)) {
             if (empty($this->extra_rulesets)) {
                 return array();
             } else {
@@ -67,7 +67,7 @@ class RulesetsExtra implements RulesetsInterface {
     public function getRulesetsForAnalyzer(array $analyzer = array()): array {
         $return = array();
 
-        if ($analyzer === null) {
+        if (empty($analyzer)) {
             foreach($this->extra_rulesets as $ruleset => $analyzers) {
                 foreach($analyzers as $analyzer)  {
                     array_collect_by($return, $analyzer, $ruleset);

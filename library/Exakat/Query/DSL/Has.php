@@ -26,7 +26,8 @@ namespace Exakat\Query\DSL;
 
 class Has extends DSL {
     public function run() {
-        assert(func_num_args() === 1, 'Wrong number of arguments with ' . __METHOD__);
+        assert(func_num_args() === 1, 'Wrong number of arguments with ' . __METHOD__ . func_num_args().' provided.'.PHP_EOL.print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true));
+
         list($property) = func_get_args();
 
         assert($this->assertProperty($property));

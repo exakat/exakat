@@ -200,7 +200,7 @@ class Load extends Tasks {
     private $expressions         = array();
     private $atoms               = array();
     private $argumentsId         = array();
-    private $sequence            = array();
+    private $sequence            = null;
     private $callsDatabase       = null;
 
     private $processing = array();
@@ -1274,9 +1274,15 @@ class Load extends Tasks {
         // Process return type
         $returnTypes = $this->processTypehint();
 
+        $returnTypeFullcode = array();
         foreach($returnTypes as $returnType) {
             $this->addLink($fn, $returnType, 'RETURNTYPE');
+            
+            if (!$returnType->isA('Void')) {
+                $returnTypeFullcode[] = $returnType->fullcode;
+            }
         }
+        $returnTypeFullcode = join('|', $returnTypeFullcode);
 
         ++$this->id; // skip =>
 
@@ -1302,7 +1308,7 @@ class Load extends Tasks {
 
         $fn->token    = $this->getToken($this->tokens[$current][0]);
         $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') ' .
-                        (isset($returnType) ? ' : ' . ($fn->nullable ? '?' : '') . $returnType->fullcode : '') .
+                        (empty($returnType) ? '' : ' : ' . ($fn->nullable ? '?' : '') . $returnTypeFullcode) .
                         '=> ' . $block->fullcode;
         $fn->fullnspath = $this->makeAnonymous('arrowfunction');
         $fn->aliased    = self::NOT_ALIASED;
@@ -1382,8 +1388,9 @@ class Load extends Tasks {
 
         if ($function->atom === 'Function') {
             $this->getFullnspath($name, 'function', $function);
-
             $this->calls->addDefinition('function', $function->fullnspath, $function);
+
+            $this->addLink($function, $name, 'NAME');
         } elseif ($function->atom === 'Closure') {
             $function->fullnspath = $this->makeAnonymous('function');
             $function->aliased    = self::NOT_ALIASED;
@@ -1399,6 +1406,8 @@ class Load extends Tasks {
             if (empty($function->visibility)) {
                 $function->visibility = 'none';
             }
+
+            $this->addLink($function, $name, 'NAME');
         } else {
             throw new LoadError(__METHOD__ . ' : wrong type of function ' . $function->atom);
         }
@@ -1407,18 +1416,15 @@ class Load extends Tasks {
 
         $argumentsFullcode = $function->fullcode;
         $function->reference = $reference;
-        if (isset($name)) {
-            $this->addLink($function, $name, 'NAME');
-        }
 
         // Process use
+        $useFullcode = array();
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_USE) {
             ++$this->id; // Skip use
             ++$this->id; // Skip (
 
             $rank = 0;
             $uses = array();
-            $useFullcode = array();
             do {
                 ++$this->id; // Skip ( or ,
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
@@ -1451,7 +1457,7 @@ class Load extends Tasks {
         foreach($returnTypes as $returnType) {
             $this->addLink($function, $returnType, 'RETURNTYPE');
 
-            if ($returnType->atom !== 'Void') {
+            if (!$returnType->isA('Void')) {
                 $return[] = $returnType->fullcode;
             }
         }
@@ -1472,7 +1478,7 @@ class Load extends Tasks {
         $function->fullcode   = (empty($fullcode) ? '' : implode(' ', $fullcode) . ' ' ) .
                                 $this->tokens[$current][1] . ' ' . ($function->reference ? '&' : '') .
                                 ($function->atom === 'Closure' ? '' : $name->fullcode) . '(' . $argumentsFullcode . ')' .
-                                (isset($useFullcode) ? ' use (' . implode(', ', $useFullcode) . ')' : '') . // No space before use
+                                (empty($useFullcode) ? '' : ' use (' . implode(', ', $useFullcode) . ')') . // No space before use
                                 (empty($return) ? '' : ' : ' . ($function->nullable ? '?' : '') . join('|', $return) ) .
                                 $blockFullcode;
 
@@ -1573,6 +1579,7 @@ class Load extends Tasks {
         // Process extends
         $rank = 0;
         $fullcode= array();
+        $extendsKeyword = '';
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EXTENDS) {
             $extendsKeyword = $this->tokens[$this->id + 1][1];
             do {
@@ -1591,7 +1598,7 @@ class Load extends Tasks {
         $this->makeCitBody($interface);
 
         $interface->code       = $this->tokens[$current][1];
-        $interface->fullcode   = $this->tokens[$current][1] . ' ' . $name->fullcode . (isset($extendsKeyword) ? ' ' . $extendsKeyword . ' ' . implode(', ', $fullcode) : '') . static::FULLCODE_BLOCK;
+        $interface->fullcode   = $this->tokens[$current][1] . ' ' . $name->fullcode . (empty($extendsKeyword) ? '' : ' ' . $extendsKeyword . ' ' . implode(', ', $fullcode)) . static::FULLCODE_BLOCK;
         $interface->token      = $this->getToken($this->tokens[$current][0]);
 
         $this->addToSequence($interface);
@@ -2249,7 +2256,7 @@ class Load extends Tasks {
         return $arguments;
     }
 
-    private function processArguments(string $atom,array $finals = array(), ?array &$argumentsList = array()): Atom {
+    private function processArguments(string $atom,array $finals = array(), array &$argumentsList = array()): Atom {
         if (empty($finals)) {
             $finals = array($this->phptokens::T_CLOSE_PARENTHESIS);
         }

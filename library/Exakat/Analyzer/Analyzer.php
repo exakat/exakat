@@ -194,10 +194,10 @@ abstract class Analyzer {
         $this->datastore->reuse();
 
         $this->dictCode  = exakat('dictionary');
-        $this->docs      = exakat('docs');
+        $docs            = exakat('docs');
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $parameters = $this->docs->getDocs($this->shortAnalyzer)['parameter'];
+            $parameters = $docs->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
 

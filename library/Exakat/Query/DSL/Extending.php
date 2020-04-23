@@ -33,7 +33,7 @@ class Extending extends DSL {
 where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION")).times($MAX_LOOPING)
                 .out("EXTENDS").has("fullnspath", within(***)) ) 
 GREMLIN
-, $fullnspath);
+, array($fullnspath));
     }
 }
 ?>
