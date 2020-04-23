@@ -2790,6 +2790,7 @@ class Load extends Tasks {
             $atom = 'Methodcallname';
         }
 
+        $argumentsList = array();
         $functioncall = $this->processArguments($atom, array($this->phptokens::T_CLOSE_PARENTHESIS), $argumentsList);
         $argumentsFullcode       = $functioncall->fullcode;
 
@@ -4027,6 +4028,7 @@ class Load extends Tasks {
     private function processArrayLiteral(): Atom {
         $current = $this->id;
 
+        $argumentList = array();
         if ($this->tokens[$current][0] === $this->phptokens::T_ARRAY) {
             ++$this->id; // Skipping the name, set on (
             $array = $this->processArguments('Arrayliteral', array(), $argumentsList);
@@ -5798,6 +5800,7 @@ class Load extends Tasks {
 
         $atom = ucfirst(mb_strtolower($this->tokens[$current][1]));
         ++$this->id;
+        $argumentList = array();
         $functioncall = $this->processArguments($atom, array(), $argumentsList);
 
         $argumentsFullcode = $functioncall->fullcode;
@@ -5820,6 +5823,7 @@ class Load extends Tasks {
     private function processEcho(): Atom {
         $current = $this->id;
 
+        $argumentsList = array();
         $functioncall = $this->processArguments('Echo',
                                                 array($this->phptokens::T_SEMICOLON,
                                                       $this->phptokens::T_CLOSE_TAG,
