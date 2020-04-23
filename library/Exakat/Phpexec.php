@@ -64,6 +64,7 @@ class Phpexec {
     private $actualVersion    = null;
     private $requestedVersion = null;
     private $error            = array();
+    private $version          = '';
 
     private const CLI_OR_DOCKER_REGEX = '#[a-z0-9]+/[a-z0-9]+:[a-z0-9]+#i';
 
@@ -132,6 +133,10 @@ class Phpexec {
                 throw new NoPhpBinary('PHP binary for version ' . $phpversion . ' exists but is not executable : "' . $this->phpexec . '". Please, check config/exakat.ini');
             }
         }
+    }
+    
+    public function getVersion() : string {
+        return $this->version;
     }
 
     public function getTokens() {

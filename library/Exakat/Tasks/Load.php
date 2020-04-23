@@ -542,7 +542,7 @@ class Load extends Tasks {
                 exit(0);
             } else {
                 unset($this->gremlin);
-                $this->gremlin = Graph::getConnexion($this->config);
+                $this->gremlin = Graph::getConnexion();
 
                 $nbTokens = $this->runProjectCore($files);
                 $b = microtime(true);
@@ -556,7 +556,7 @@ class Load extends Tasks {
             $this->runCollector($omittedFiles);
 
             unset($this->gremlin);
-            $this->gremlin = Graph::getConnexion($this->config);
+            $this->gremlin = Graph::getConnexion();
 
             $nbTokens = $this->runProjectCore($files);
         }
@@ -760,6 +760,9 @@ class Load extends Tasks {
         if (!$this->php->compile($fullpath)) {
             $error = $this->php->getError();
             $error['file'] = $filename;
+
+            $version = $this->php->getVersion();
+            $this->datastore->addRow('compilation'.$version[0].$version[2], array($error));
 
             return 0;
         }
@@ -6307,12 +6310,12 @@ class Load extends Tasks {
             } else {
                 $alias = mb_strtolower(substr($alias->fullcode, $offset + 4));
             }
-        } elseif (($offset = strrpos($alias->code, '\\')) === false) {
-            // namespace without \
-            $alias = $alias->code;
-        } else {
+        } elseif (($offset = strrpos($alias->code, '\\')) !== false) {
             // namespace with \
             $alias = substr($alias->code, $offset + 1);
+        } else {
+            // namespace without \
+            $alias = $alias->code;
         }
 
         if ($useType !== 'const') {
