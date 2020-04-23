@@ -249,7 +249,7 @@ TEXT
                             3 => "test$id",
                           );
             $initConfig = new Config($args);
-            $init = new Initproject($this->gremlin, $initConfig, self::IS_SUBTASK);
+            $init = new Initproject(self::IS_SUBTASK);
             $init->run();
             rename("{$this->config->projects_root}/projects/test$id", "{$this->config->projects_root}/projects/test");
             unset($init);

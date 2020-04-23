@@ -156,12 +156,11 @@ SQL;
         } else {
             display("loading $total definitions");
             $this->saveLinks($f);
-            $chunk = 0;
             display("loaded $total definitions");
         }
         $end = microtime(true);
 
-        self::saveTokenCounts();
+        $this->saveTokenCounts();
 
         display('loaded nodes (duration : ' . number_format( ($end - $begin) * 1000, 2) . ' ms)');
 

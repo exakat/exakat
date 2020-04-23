@@ -73,7 +73,7 @@ class PropagateConstants extends Analyzer {
 
             $this->atomIs(array('Constant', 'Defineconstant'))
                  ->outIs('VALUE')
-                 ->has('propagated', true)
+                 ->is('propagated', true)
                  ->savePropertyAs('x')
                  ->back('first')
 

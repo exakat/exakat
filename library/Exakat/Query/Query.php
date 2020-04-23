@@ -59,7 +59,7 @@ class Query {
         $this->analyzer = $analyzer;
         $this->php      = $php;
 
-        $this->queryFactory = new DSLFactory(exakat('datastore'));
+        $this->queryFactory = new DSLFactory();
     }
 
     public function __call($name, $args) {
@@ -148,7 +148,7 @@ class Query {
 
         $query = str_replace(array_keys($args), '***', $query);
 
-        $sack = $this->prepareSack($this->commands, self::NO_GREMLIN);
+        $sack = $this->prepareSack($this->commands);
 
         $return = new Command($query, array_values($args));
         $return->setSack($sack);

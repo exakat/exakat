@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Config;
 
 class Grade extends Ambassador {
     const FILE_FILENAME  = 'grade';
@@ -61,8 +60,8 @@ class Grade extends Ambassador {
 
     protected $themesToShow      = array('Security');
 
-    public function __construct(Config $config) {
-        parent::__construct($config);
+    public function __construct() {
+        parent::__construct();
 
         $this->grading = array(
     'Security/AnchorRegex'                  => self::G_WARNING,

@@ -148,7 +148,7 @@ class Jobqueue extends Tasks {
 
     private function processInit($job) {
         $config = new ConfigExakat($job);
-        $analyze = new Initproject($this->gremlin, $config, self::IS_SUBTASK);
+        $analyze = new Initproject(self::IS_SUBTASK);
 
         display( 'processing init job ' . $job[2] . PHP_EOL);
         $this->log('start init : ' . $job[2]);
@@ -156,7 +156,7 @@ class Jobqueue extends Tasks {
         try {
             $analyze->run();
         } catch (\Exception $e) {
-            $datastore = new Datastore($config);
+            $datastore = new Datastore();
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
         } finally {
             unset($analyze);
@@ -176,7 +176,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Report($this->gremlin, $config, self::IS_SUBTASK);
+        $analyze = new Report(self::IS_SUBTASK);
 
         display( 'processing report job ' . $job[2] . PHP_EOL);
         $this->log('start report : ' . $job[2]);
@@ -193,7 +193,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Project($this->gremlin, $config, self::IS_SUBTASK);
+        $analyze = new Project(self::IS_SUBTASK);
 
         display( 'processing project job ' . $job[2] . PHP_EOL);
         $this->log('start project : ' . $job[2]);
@@ -201,7 +201,7 @@ class Jobqueue extends Tasks {
         try {
             $analyze->run();
         } catch (\Exception $e) {
-            $datastore = new Datastore($config);
+            $datastore = new Datastore();
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
         } finally {
             unset($analyze);
@@ -217,7 +217,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Config($this->gremlin, $config, self::IS_SUBTASK);
+        $analyze = new Config(self::IS_SUBTASK);
 
         display( 'processing config job ' . $job[2] . PHP_EOL);
         $this->log('start config : ' . $job[2]);
@@ -238,7 +238,7 @@ class Jobqueue extends Tasks {
             $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-        $analyze = new Remove($this->gremlin, $config, self::IS_SUBTASK);
+        $analyze = new Remove(self::IS_SUBTASK);
 
         display( 'processing remove job ' . $job[2] . PHP_EOL);
         $this->log('start report : ' . $job[2]);
@@ -246,7 +246,7 @@ class Jobqueue extends Tasks {
         try {
             $analyze->run();
         } catch (\Exception $e) {
-            $datastore = new Datastore($config);
+            $datastore = new Datastore();
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
         }
         $end = microtime(true);

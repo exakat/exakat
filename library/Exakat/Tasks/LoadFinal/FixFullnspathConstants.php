@@ -45,9 +45,7 @@ GREMLIN
               ->setProperty('fullnspath', 'actual')
               ->returnCount();
         $query->prepareRawQuery();
-        if ($query->canSkip()) {
-            $fallingback = array();
-        } else {
+        if (!$query->canSkip()) {
             $this->gremlin->query($query->getQuery(), $query->getArguments());
         }
 

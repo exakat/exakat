@@ -31,10 +31,10 @@ class UncaughtExceptions extends Analyzer {
     }
 
     public function analyze() {
-        $caughtDirect = $this->atomIs('Catch')
-                             ->outIs('CLASS')
-                             ->values('fullnspath')
-                             ->unique();
+        $this->atomIs('Catch')
+             ->outIs('CLASS')
+             ->values('fullnspath')
+             ->unique();
         $caught = $this->rawQuery()->toArray();
 
         if (empty($caught)) {

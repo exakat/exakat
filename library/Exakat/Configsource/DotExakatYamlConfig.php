@@ -246,7 +246,7 @@ class DotExakatYamlConfig extends Config {
 'custom'              => $default,
         );
 
-        return $yaml = Yaml::dump($configIni);
+        return Yaml::dump($configIni);
     }
 
 }

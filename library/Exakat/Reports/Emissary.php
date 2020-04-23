@@ -78,8 +78,8 @@ class Emissary extends Reports {
 
     private $compatibilities = array();
 
-    public function __construct(Config $config) {
-        parent::__construct($config);
+    public function __construct() {
+        parent::__construct();
 
         foreach(Config::PHP_VERSIONS as $shortVersion) {
             $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
@@ -358,28 +358,10 @@ class Emissary extends Reports {
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateSecurity(Section $section): void {
-        $this->generateIssuesEngine('security_issues',
-                                    $section->title,
-                                    $this->getIssuesFaceted('Security') );
-    }
-
-    protected function generateDeadCode(Section $section): void {
-        $this->generateIssuesEngine('deadcode_issues',
-                                    $section->title,
-                                    $this->getIssuesFaceted('Dead code') );
-    }
-
-    protected function generatePerformances(Section $section): void {
-        $this->generateIssuesEngine('performances_issues',
-                                    $section->title,
-                                    $this->getIssuesFaceted('Performances') );
-    }
-
     protected function generateFavorites(Section $section): void {
         $baseHTML = $this->getBasedPage($section->source);
 
-        $favorites = new Favorites($this->config);
+        $favorites = new Favorites();
         $favoritesRules = $this->getTopFile($this->rulesets->getRulesetsAnalyzers(array('Favorites')));
         $favoritesList = json_decode($favorites->generate($favoritesRules, self::INLINE));
 
@@ -1170,7 +1152,7 @@ JAVASCRIPTCODE;
             $linediff[$row['file']][$row['line']] = $row['diff'];
         }
 
-        $oldIssues = $this->getIssuesFacetedDb($ruleset, $sqlite);
+        $oldIssues = $this->getIssuesFacetedDb($ruleset);
         foreach($oldIssues as &$issue) {
             $i = json_decode($issue);
             // Skip wrong lines, but why ?
@@ -1374,7 +1356,7 @@ JAVASCRIPTCODE;
     }
 
     protected function generatePhpConfiguration(Section $section): void {
-        $phpConfiguration = new Phpcompilation($this->config);
+        $phpConfiguration = new Phpcompilation();
         $report = $phpConfiguration->generate('', self::INLINE);
 
         $configline = trim($report);
@@ -2082,6 +2064,7 @@ HTML;
     }
 
     private function generateConstantTree(Section $section): void {
+        $list = array();
         $res = $this->dump->fetchTable('constantOrder');
         foreach($res->toArray() as $row) {
             if (empty($row['built'])) {
@@ -2406,7 +2389,7 @@ HTML;
             $return[$first][] = implode('\\', array_slice($folders, 1));
         }
 
-        foreach($recursive as $recurrent => $foo) {
+        foreach(array_keys($recursive) as $recurrent) {
             $return[$recurrent] = $this->path2tree($return[$recurrent]);
         }
 
@@ -3054,7 +3037,7 @@ HTML
     }
 
     private function generateStats(Section $section): void {
-        $results = new Stats($this->config);
+        $results = new Stats();
         $report = $results->generate('', self::INLINE);
         $report = json_decode($report);
 
@@ -3510,7 +3493,7 @@ HTML;
     }
 
     protected function generateFixesRector(Section $section): void {
-        $rector = new Rector($this->config);
+        $rector = new Rector();
         $report = $rector->generate('', self::INLINE);
 
         $configline = trim($report);
@@ -3524,7 +3507,7 @@ HTML;
     }
 
     protected function generateFixesPhpCsFixer(Section $section): void {
-        $phpcsfixer = new Phpcsfixer($this->config);
+        $phpcsfixer = new Phpcsfixer();
         $report = $phpcsfixer->generate('', self::INLINE);
 
         $configline = trim($report);

@@ -1011,8 +1011,8 @@ GREMLIN
         $total = 0;
         $toDump = array();
         foreach($result->toArray() as $row) {
-            if (isset($namespacesId[$namespace])) {
-                $namespaceId = $namespacesId[$namespace];
+            if (isset($namespacesId[$row['namespace']])) {
+                $namespaceId = $namespacesId[$row['namespace']];
             } else {
                 $namespaceId = 1;
             }

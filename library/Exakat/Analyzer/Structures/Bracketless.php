@@ -34,7 +34,7 @@ class Bracketless extends Analyzer {
              ->isNot('bracket', true)
              ->not(
                 $this->side()
-                     ->has('count', 1)
+                     ->is('count', 1)
                      ->outIs('EXPRESSION')
                      ->atomIs('Ifthen')
              )

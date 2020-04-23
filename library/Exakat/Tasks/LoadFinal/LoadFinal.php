@@ -71,12 +71,12 @@ class LoadFinal {
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
 
-        $task = new SpotPHPNativeFunctions($this->datastore);
+        $task = new SpotPHPNativeFunctions();
         $task->setPHPfunctions($this->PHPfunctions);
         $task->run();
         $this->log('SpotPHPNativeFunctions');
 
-        $task = new SpotExtensionNativeFunctions($this->datastore);
+        $task = new SpotExtensionNativeFunctions();
         $task->run();
         $this->log('Spot Extensions Native Functions');
 
@@ -96,11 +96,11 @@ GREMLIN;
         // This is needed AFTER functionnames are found
         $this->spotFallbackConstants();
         $this->log('spotFallbackConstants');
-        $task = new FixFullnspathConstants($this->datastore);
+        $task = new FixFullnspathConstants();
         $task->run();
         $this->log('FixFullnspathConstants');
 
-        $task = new SpotPHPNativeConstants($this->datastore);
+        $task = new SpotPHPNativeConstants();
         $task->setPHPconstants($this->PHPconstants);
         $task->run();
         $this->log('spotPHPNativeConstants');
@@ -109,7 +109,7 @@ GREMLIN;
         $task->run();
         $this->log('FinishIsModified');
 
-        $task = new IsInIgnoredDir($this->datastore);
+        $task = new IsInIgnoredDir();
         $task->run();
         $this->log('IsInIgnoredDir');
 

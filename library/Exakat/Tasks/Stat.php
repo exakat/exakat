@@ -28,7 +28,7 @@ class Stat extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $stats = new Stats($this->gremlin);
+        $stats = new Stats();
         if ($this->config->filename) {
             $stats->setFileFilter($this->config->filename);
         }

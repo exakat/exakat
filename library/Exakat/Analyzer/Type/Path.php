@@ -27,8 +27,8 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Path extends AnalyzerResults {
     protected $analyzerName = 'Path';
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }

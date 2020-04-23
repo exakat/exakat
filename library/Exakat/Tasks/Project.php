@@ -284,7 +284,7 @@ class Project extends Tasks {
                                                             'quiet'     => !$verbose,
                                                             ));
 
-            $analyze = new Analyze($this->gremlin, $analyzeConfig, self::IS_SUBTASK);
+            $analyze = new Analyze(self::IS_SUBTASK);
             $analyze->run();
             unset($analyze);
             unset($analyzeConfig);
@@ -316,7 +316,7 @@ class Project extends Tasks {
                                                    'graphNodes'   => $nodes,
                                                    'graphLinks'   => $links));
 
-            $dump = new Dump($this->gremlin, $dumpConfig, self::IS_SUBTASK);
+            $dump = new Dump(self::IS_SUBTASK);
             $dump->run();
             unset($dump);
             unset($dumpConfig);

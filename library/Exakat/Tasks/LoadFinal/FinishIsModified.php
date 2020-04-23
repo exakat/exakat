@@ -28,7 +28,7 @@ class FinishIsModified extends LoadFinal {
     protected $methods = null;
 
     public function __construct() {
-        parent::__construct(exakat('datastore'));
+        parent::__construct();
 
         $this->methods = exakat('methods');
     }

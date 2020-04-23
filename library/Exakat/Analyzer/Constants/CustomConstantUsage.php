@@ -34,8 +34,7 @@ class CustomConstantUsage extends Analyzer {
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
-        $c = array($this->loadIni('php_constants.ini', 'constants'));
-        $constants = array();
+        $constants = array($this->loadIni('php_constants.ini', 'constants'));
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
             $ini = $this->load($inifile, 'constants');

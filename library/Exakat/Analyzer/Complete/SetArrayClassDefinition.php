@@ -48,7 +48,7 @@ class SetArrayClassDefinition extends Complete {
               ->samePropertyAs('fullcode', 'method', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addEto('DEFINITION', 'first');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         // array(\x, foo)
         $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)

@@ -41,7 +41,6 @@ class Git extends Vcs {
             $this->version   = $r[1];
         } else {
             $this->installed = false;
-            $this->optional  = true;
         }
     }
 

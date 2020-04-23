@@ -43,7 +43,7 @@ class SetClassPropertyDefinitionWithTypehint extends Complete {
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'call');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->as('property')
@@ -63,7 +63,7 @@ class SetClassPropertyDefinitionWithTypehint extends Complete {
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_INSENSITIVE)
               ->addETo('DEFINITION', 'call');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
 
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->as('property')
@@ -83,7 +83,7 @@ class SetClassPropertyDefinitionWithTypehint extends Complete {
               ->outIs('CONST')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'call');
-        $this->prepareQuery(self::QUERY_NO_ANALYZED);
+        $this->prepareQuery();
     }
 }
 
