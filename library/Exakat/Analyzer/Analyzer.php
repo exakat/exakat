@@ -718,18 +718,6 @@ GREMLIN;
         return $this;
     }
 
-    public function has($property) {
-        $this->query->has($property);
-
-        return $this;
-    }
-
-    public function hasNo($property) {
-        $this->query->hasNo($property);
-
-        return $this;
-    }
-
     public function is($property, $value = true) {
         $this->query->is($property, $value);
 
@@ -1485,72 +1473,6 @@ GREMLIN;
         return $this->hasNoInstruction('Catch');
     }
 
-    public function isLocalClass() {
-        $this->query->isLocalClass();
-
-        return $this;
-    }
-
-    public function isNotLocalClass() {
-        $this->query->isNotLocalClass();
-
-        return $this;
-    }
-
-    public function goToNamespace() {
-        $this->query->goToNamespace();
-
-        return $this;
-    }
-
-    public function isLiteral() {
-        $this->query->isLiteral();
-
-        return $this;
-    }
-
-    public function isNotLiteral() {
-        $this->query->isNotLiteral();
-
-        return $this;
-    }
-
-    public function implementing($fullnspath) {
-        $this->query->implementing(array($fullnspath));
-
-        return $this;
-    }
-
-    public function notImplementing($fullnspath) {
-        $this->query->notImplementing(array($fullnspath));
-
-        return $this;
-    }
-
-    public function extending($fullnspath) {
-        $this->query->extending(array($fullnspath));
-
-        return $this;
-    }
-
-    public function notExtending($fullnspath) {
-        $this->query->notExtending(array($fullnspath));
-
-        return $this;
-    }
-
-    public function hasNoVariadicArgument() {
-        $this->query->hasNoVariadicArgument();
-
-        return $this;
-    }
-
-    public function hasVariadicArgument() {
-        $this->query->hasVariadicArgument();
-
-        return $this;
-    }
-
     public function getNameInFNP($variable) {
         $this->query->getNameInFNP($variable);
 
@@ -1756,8 +1678,7 @@ GREMLIN
         $this->query = new Query((count($this->queries) + 1),
                                   new Project('test'),
                                   $this->analyzerQuoted,
-                                  $this->config->executable,
-                                  $this->datastore);
+                                  $this->config->executable);
     }
 
     public function execQuery(): int {
@@ -1873,7 +1794,7 @@ GREMLIN
 
     protected function loadCode(string $path): string {
         if (file_exists($this->config->code_dir . $path)) {
-            return file_get_contents($this->config->code_dir . $path) ?? '';
+            return (string) file_get_contents($this->config->code_dir . $path);
         } else {
             return '';
         }

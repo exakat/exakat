@@ -100,7 +100,7 @@ class Datastore {
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
     }
 
-    public function addRow(string $table, $data): bool {
+    public function addRow(string $table, array $data): bool {
         if (empty($data)) {
             return true;
         }
