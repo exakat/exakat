@@ -440,7 +440,7 @@ class Load extends Tasks {
                 $plugin->run($atom, $linked);
             }
         } catch (\Throwable $t) {
-            print $t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine();
+//            print $t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine();
         }
     }
 
@@ -494,7 +494,7 @@ class Load extends Tasks {
                 }
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($filename, $e->getMessage());
-                print "PHP reported an error : {$e->getMessage()}\n";
+//                print "PHP reported an error : {$e->getMessage()}\n";
             }
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
@@ -856,6 +856,7 @@ class Load extends Tasks {
                 $this->checkTokens($filename);
                 $this->calls->save();
             } catch (LoadError $e) {
+//                print $e->getMessage();
                 $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (finally) (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
                 $this->reset();
                 $this->calls->reset();
@@ -1457,7 +1458,7 @@ class Load extends Tasks {
         foreach($returnTypes as $returnType) {
             $this->addLink($function, $returnType, 'RETURNTYPE');
 
-            if (!$returnType->isA('Void')) {
+            if (!$returnType->isA(array('Void'))) {
                 $return[] = $returnType->fullcode;
             }
         }
@@ -4028,7 +4029,7 @@ class Load extends Tasks {
     private function processArrayLiteral(): Atom {
         $current = $this->id;
 
-        $argumentList = array();
+        $argumentsList = array();
         if ($this->tokens[$current][0] === $this->phptokens::T_ARRAY) {
             ++$this->id; // Skipping the name, set on (
             $array = $this->processArguments('Arrayliteral', array(), $argumentsList);
@@ -5800,7 +5801,7 @@ class Load extends Tasks {
 
         $atom = ucfirst(mb_strtolower($this->tokens[$current][1]));
         ++$this->id;
-        $argumentList = array();
+        $argumentsList = array();
         $functioncall = $this->processArguments($atom, array(), $argumentsList);
 
         $argumentsFullcode = $functioncall->fullcode;
