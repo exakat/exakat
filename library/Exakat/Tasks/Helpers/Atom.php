@@ -48,9 +48,9 @@ class Atom {
     public $origin       = '';
     public $encoding     = '';
     public $block        = '';
-    public $intval       = '';
-    public $strval       = '';
-    public $boolean      = '';
+    public $intval       = Intval::NO_VALUE;
+    public $strval       = Strval::NO_VALUE;
+    public $boolean      = Boolval::NO_VALUE;
     public $enclosing    = Load::NO_ENCLOSING;
     public $args_max     = '';
     public $args_min     = '';
@@ -68,8 +68,6 @@ class Atom {
     public $final        = '';
     public $abstract     = '';
     public $static       = '';
-//    public $ctype1       = '';
-//    public $ctype1_size  = '';
     public $noscream     = 0;
     public $nullable     = 0;
     public $trailing     = 0;
@@ -108,7 +106,6 @@ class Atom {
         $this->strval        = $this->protectString($this->strval     );
         $this->noDelimiter   = $this->protectString($this->noDelimiter);
         $this->visibility    = $this->protectString($this->visibility );
-//        $this->ctype1        = $this->protectString($this->ctype1     );
 
         $this->alternative   = $this->alternative ? 1 : null;
         $this->reference     = $this->reference ? 1 : null;
@@ -125,7 +122,7 @@ class Atom {
         $this->flexible      = $this->flexible ? 1 : null;
         $this->close_tag     = $this->close_tag ? 1 : null;
         $this->aliased       = $this->aliased ? 1 : null;
-
+        
         if ($this->intval > 2147483647) {
             $this->intval = 2147483647;
         }
@@ -159,6 +156,7 @@ class Atom {
                                'reference',
                                'static',
                                'variadic',
+                               'isNull',
                                );
         $integerValues = array('args_max',
                                'args_min',
@@ -210,6 +208,10 @@ class Atom {
                 $value = (integer) $value;
             }
             $properties[$l] = array( new Property($id++, $value) );
+        }
+        
+        if ($this->atom === 'Logical') {
+            print_r($this);
         }
 
         $object = array('id'         => $this->id,

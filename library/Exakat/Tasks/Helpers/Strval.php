@@ -24,6 +24,8 @@ declare( strict_types = 1);
 namespace Exakat\Tasks\Helpers;
 
 class Strval extends Plugin {
+    const NO_VALUE = null;
+    
     public $name = 'noDelimiter';
     public $type = 'string';
 
@@ -38,8 +40,8 @@ class Strval extends Plugin {
         }
 
         foreach($extras as $extra) {
-            if ($extra->noDelimiter === null)  {
-                $atom->noDelimiter = null;
+            if ($extra->noDelimiter === self::NO_VALUE)  {
+                $atom->noDelimiter = self::NO_VALUE;
                 return ;
             }
         }

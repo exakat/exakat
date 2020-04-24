@@ -25,6 +25,8 @@ declare( strict_types = 1);
 namespace Exakat\Tasks\Helpers;
 
 class Boolval extends Plugin {
+    const NO_VALUE = null;
+    
     public $name = 'boolean';
     public $type = 'boolean';
 
@@ -41,6 +43,13 @@ class Boolval extends Plugin {
 
         }
 
+        foreach($extras as $extra) {
+            if ($extra->intval === self::NO_VALUE)  {
+                $atom->intval = self::NO_VALUE;
+                return ;
+            }
+        }
+
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
 
@@ -48,12 +57,12 @@ class Boolval extends Plugin {
         }
 
         switch ($atom->atom) {
-            case 'Staticclass' :
-            case 'Self'        :
-            case 'Parent'      :
-            case 'Closure'     :
-            case 'Sequence'    :
-            case 'Magicconstant'    :
+            case 'Staticclass'   :
+            case 'Self'          :
+            case 'Parent'        :
+            case 'Closure'       :
+            case 'Sequence'      :
+            case 'Magicconstant' :
                 $atom->boolean = true;
                 break;
 
@@ -63,12 +72,12 @@ class Boolval extends Plugin {
                 break;
 
             case 'Constant' :
-                $atom->boolean    = $extras['VALUE']->boolean;
+                $atom->boolean    = (int) $extras['VALUE']->boolean;
                 break;
 
             case 'Nsname' :
                 // when it is a string, there is no fallback
-                $atom->boolean = false;
+                $atom->boolean = 0;
                 break;
 
             case 'Float' :
@@ -193,21 +202,21 @@ class Boolval extends Plugin {
 
             case 'Comparison' :
                 if ($atom->code === '==') {
-                    $atom->boolean = $extras['LEFT']->boolean == $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean == $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '===') {
-                    $atom->boolean = $extras['LEFT']->boolean === $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean === $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '!=' || $atom->code === '<>') {
-                    $atom->boolean = $extras['LEFT']->boolean != $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean != $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '!==') {
-                    $atom->boolean = $extras['LEFT']->boolean !== $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean !== $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '>') {
-                    $atom->boolean = $extras['LEFT']->boolean > $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean > $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '<') {
-                    $atom->boolean = $extras['LEFT']->boolean < $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean < $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '>=') {
-                    $atom->boolean = $extras['LEFT']->boolean >= $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean >= $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '<=') {
-                    $atom->boolean = $extras['LEFT']->boolean <= $extras['RIGHT']->boolean;
+                    $atom->boolean = (int) ($extras['LEFT']->boolean <= $extras['RIGHT']->boolean);
                 }
                 break;
 

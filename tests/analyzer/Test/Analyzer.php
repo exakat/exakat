@@ -120,16 +120,25 @@ abstract class Analyzer extends TestCase {
         }
 
         $shell_res = shell_exec($shell);
-        $res = json_decode($shell_res, true);
-        if ($res === null) {
-            $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'\n$shell");
+        
+        if (isset($fetch_query)) {
+            $gremlin = exakat('graphdb');
+            
+            $res = $gremlin->query($fetch_query)->toArray();
+        } else {
+            $res = json_decode($shell_res, true);
+            if ($res === null) {
+                $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'\n$shell");
+            }
         }
 
         $this->file = $file;
         $this->number = $number;
         $this->analyzer = $analyzer;
         
-        if (isset($res[0]['fullcode'])) {
+        if (!is_array($res[0])) {
+            $this->checkTestOnFullcode($res, $expected, $expected_not);
+        } elseif (isset($res[0]['fullcode'])) {
             $list = array_column($res, 'fullcode');
             $this->checkTestOnFullcode($list, $expected, $expected_not);
         } elseif (isset($res[0]['key'], $res[0]['value'])) {

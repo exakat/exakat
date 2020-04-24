@@ -25,6 +25,8 @@ declare(strict_types = 1);
 namespace Exakat\Tasks\Helpers;
 
 class Intval extends Plugin {
+    const NO_VALUE = '';
+
     public $name = 'intval';
     public $type = 'integer';
 
@@ -39,8 +41,8 @@ class Intval extends Plugin {
         }
 
         foreach($extras as $extra) {
-            if ($extra->intval === '')  {
-                $atom->intval = '';
+            if ($extra->intval === self::NO_VALUE)  {
+                $atom->intval = self::NO_VALUE;
                 return ;
             }
         }
@@ -88,7 +90,7 @@ class Intval extends Plugin {
             case 'Null'        :
             case 'Void'        :
             case 'Magicconstant' :
-                $atom->intval = 0;
+                $atom->intval = self::NO_VALUE;
                 break;
 
             case 'Parenthesis' :

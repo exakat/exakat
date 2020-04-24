@@ -25,6 +25,8 @@ declare( strict_types = 1);
 namespace Exakat\Tasks\Helpers;
 
 class Nullval extends Plugin {
+    const NO_VALUE = null;
+    
     public $name = 'isNull';
     public $type = 'boolean';
 
@@ -36,13 +38,6 @@ class Nullval extends Plugin {
             }
 
             return;
-        }
-
-        foreach($extras as $extra) {
-            if ($extra->isNull === null)  {
-                $atom->isNull = true;
-                return ;
-            }
         }
 
         switch ($atom->atom) {
@@ -64,12 +59,12 @@ class Nullval extends Plugin {
             case 'Sequence' :
             case 'Magicconstant' :
             case 'Identifier' :
-                $atom->isNull = false;
+                $atom->isNull = 0;
                 break;
 
             case 'Null' :
             case 'Void' :
-                $atom->isNull = true;
+                $atom->isNull = 1;
                 break;
 
             case 'Parenthesis' :
