@@ -41,8 +41,8 @@ class Container {
     private $rulesets   = null;
     private $php        = null;
 
-    public function init() {
-        $this->config = new Config($GLOBALS['argv']);
+    public function init(array $argv = array()) {
+        $this->config = new Config($argv);
 
         $this->verbose = $this->config->verbose;
         $this->phar    = $this->config->isPhar;

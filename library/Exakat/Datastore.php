@@ -43,6 +43,11 @@ class Datastore {
         if (file_exists($this->config->datastore)) {
             unlink($this->config->datastore);
         }
+        
+        if ($this->config->project->isDefault()) {
+            die("Could not create datastore for a project without name. Aborting\n");
+        }
+
         // force creation
         $this->sqliteWrite = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
 
@@ -94,7 +99,7 @@ class Datastore {
             // ignore
         }
 
-       // open the read connexion AFTER the write, to have the sqlite databse created
+       // open the read connexion AFTER the write, to have the sqlite database created
        $this->sqliteRead = new \Sqlite3($this->config->datastore, \SQLITE3_OPEN_READONLY);
        $this->sqliteRead->enableExceptions(true);
        $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);

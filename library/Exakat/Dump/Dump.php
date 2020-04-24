@@ -406,6 +406,7 @@ SQL;
         $chunks = array_chunk($toDump, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             foreach($chunk as &$c) {
+                assert(count($c) === 8, "Wrong column count for results : ".print_r($c, true));
                 $c = array_map(array($this->sqlite, 'escapeString'), $c);
                 $c = '(NULL, \''.implode('\', \'', $c).'\')';
             }

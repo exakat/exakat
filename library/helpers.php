@@ -670,7 +670,7 @@ function exakat(string $what) {
     if ($container === null) {
         $container = new Container();
         
-        $container->init();
+        $container->init($GLOBALS['argv']);
     }
 
     return $container->$what;

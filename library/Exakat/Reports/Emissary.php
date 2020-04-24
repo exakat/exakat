@@ -774,7 +774,7 @@ HTML;
             $dataScript[] = $value;
         }
 
-        if ($c = 4 - $res->getCount()) {
+        if (($c = 4 - $res->getCount()) > 0) {
             $html []= str_repeat('<div class="clearfix">
                        <div class="block-cell">&nbsp;</div>
                        <div class="block-cell text-center">&nbsp;</div>
