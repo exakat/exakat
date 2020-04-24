@@ -117,7 +117,13 @@ class UselessInstruction extends Analyzer {
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
              ->outIs('POSTPLUSPLUS')
-             ->atomIsNot(array('Variable', 'Member', 'Staticproperty'))
+             ->atomIsNot(array('Member', 'Staticproperty'))
+             ->not(
+                $this->side()
+                     ->atomIs('Variable')
+                     ->inIs('DEFINITION')
+                     ->atomIs(array('Staticdefinition', 'Globaldefinition'))
+              )
              ->back('first');
         $this->prepareQuery();
 
@@ -127,7 +133,12 @@ class UselessInstruction extends Analyzer {
              ->atomIs('Postplusplus')
              ->outIs('POSTPLUSPLUS')
              ->atomIs('Variable')
-             ->raw('where( __.in("DEFINITION").coalesce(__.in("NAME"), filter{ true; }).not(has("reference")) )')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIsIE('NAME')
+                     ->isNot('reference', true)
+             )
              ->back('first');
         $this->prepareQuery();
 
@@ -143,7 +154,12 @@ class UselessInstruction extends Analyzer {
             // It is not an argument with reference
              ->isReferencedArgument('variable')
             // it is not a global nor a static
-             ->raw('not( where( __.in("DEFINITION").where(__.in("STATIC", "GLOBAL"))) )')
+             ->not(
+                $this->side()
+                     ->atomIs('Variable')
+                     ->inIs('DEFINITION')
+                     ->atomIs(array('Staticdefinition', 'Globaldefinition'))
+              )
              ->back('first');
         $this->prepareQuery();
 
