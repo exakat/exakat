@@ -136,7 +136,7 @@ class FindExternalLibraries extends Tasks {
         if (count($newConfigs) === 1) {
             display('One external library is going to be omitted : ' . implode(', ', array_keys($newConfigs)));
         } elseif (!empty($newConfigs)) {
-            display(count(array_keys($newConfigs)) . ' external libraries are going to be omitted : ' . implode(', ', array_keys($newConfigs)));
+            display(count($newConfigs) . ' external libraries are going to be omitted : ' . implode(', ', array_keys($newConfigs)));
         }
 
         $store = array();

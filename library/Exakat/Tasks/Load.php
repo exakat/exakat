@@ -919,7 +919,7 @@ class Load extends Tasks {
             $class = end($this->currentClassTrait)->fullcode;
         }
 
-        $method = empty($this->currentFunction) ? '' : $method = end($this->currentFunction)->fullnspath;
+        $method = empty($this->currentFunction) ? '' : end($this->currentFunction)->fullnspath;
 
         $this->calls->addDefinition('goto', "$class::$method..$tag->fullcode", $label);
 
@@ -963,7 +963,7 @@ class Load extends Tasks {
                 $openQuote = substr($openQuote, 1);
             }
 
-            $closeQuote = $openQuote[3] === "'" ? substr($openQuote, 4, -2) : $closeQuote = substr($openQuote, 3);
+            $closeQuote = $openQuote[3] === "'" ? substr($openQuote, 4, -2) : substr($openQuote, 3);
 
             $type = $this->phptokens::T_START_HEREDOC;
         } else {

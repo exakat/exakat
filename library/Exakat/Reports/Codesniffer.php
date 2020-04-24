@@ -71,7 +71,7 @@ class Codesniffer extends Reports {
             $text .= 'FILE : ' . $file['filename'] . "\n";
             $text .= $separator;
             $c = count($file['messages']);
-            $l = count(array_filter(array_unique(array_keys($file['messages'])), function ($x) { return $x > 0; }));
+            $l = count(array_filter(array_keys($file['messages']), function ($x) { return $x > 0; }));
             $text .= 'FOUND ' . $c . ' ISSUE' . ( $c > 1 ? 'S' : '') . ' AFFECTING ' . $l . ' LINE' . ( $l > 1 ? 'S' : '') . "\n";
             $text .= $separator;
 
