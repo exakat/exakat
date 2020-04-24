@@ -25,28 +25,35 @@ namespace Exakat\Analyzer\Complete;
 class PropagateCalls extends Complete {
     public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
+                     'Complete/SetClassMethodRemoteDefinition',
                     );
     }
 
     public function analyze() {
+        print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
         // No need to run twice
         $this->processLocalDefinition();
         $this->propagateGlobals();
         $this->propagateTypehint();
         $this->processFluentInterfaces();
 
-        $this->propagateCalls();
+        $count = $this->propagateCalls();
+        
+        var_dump($count);
+        $this->setCount($count);
     }
 
-    private function propagateCalls($level = 0): void {
+    private function propagateCalls($level = 0): int {
         $total = 0;
 
         $total += $this->processReturnedType();
         $total += $this->processParenthesis();
 
         if ($total > 0 && $level < 15) {
-            $this->propagateCalls($level + 1);
+            $total += $this->propagateCalls($level + 1);
         }
+
+        return $total;
     }
 
     private function processLocalDefinition(): int {
@@ -73,7 +80,7 @@ class PropagateCalls extends Complete {
                        ->outIs('NAME')
                        ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
                        ->inIs('NAME')
-                       ->raw('range(0, 1)')
+                       ->range(0, 1)
                        ->addETo('DEFINITION', 'first')
                 )
               ->count();
@@ -426,7 +433,6 @@ class PropagateCalls extends Complete {
 
         return $c1 + $c2;
     }
-
 
     private function propagateTypehint(): int {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)

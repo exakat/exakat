@@ -23,7 +23,13 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetClassMethodRemoteDefinition extends Complete {
+    public function dependsOn() : array {
+        return array('Complete/SetParentDefinition',
+                    );
+    }
+
     public function analyze() {
+        // class x { function foo() {}} x::foo();
         $this->atomIs(array('Staticmethodcall', 'Methodcall'), self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -50,6 +56,7 @@ class SetClassMethodRemoteDefinition extends Complete {
               ->addETo('DEFINITION', 'method');
         $this->prepareQuery();
 
+        // class x { use t} trait t {function foo() {}} x::foo();
         $this->atomIs('Staticmethod', self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -67,7 +74,7 @@ class SetClassMethodRemoteDefinition extends Complete {
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
         $this->prepareQuery();
-
+/*
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -94,6 +101,7 @@ class SetClassMethodRemoteDefinition extends Complete {
               ->inIs('NAME')
               ->addETo('DEFINITION', 'method');
         $this->prepareQuery();
+        */
     }
 }
 

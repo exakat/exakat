@@ -26,6 +26,10 @@ use Exakat\Analyzer\Analyzer;
 
 abstract class Complete extends Analyzer {
     protected $storageType = self::QUERY_NO_ANALYZED;
+    
+    protected function setCount(int $count) : void {
+        $this->gremlin->query("g.V().hasLabel(\"Analysis\").has(\"analyzer\", \"{$this->shortAnalyzer}\").property(\"count\", $count)");
+    }
 }
 
 ?>
