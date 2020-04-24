@@ -91,7 +91,6 @@ class Files extends Tasks {
             unset($versions[$id]);
         }
 
-        $toRemoveFromFiles = array();
         foreach($versions as $version) {
             $phpVersion = "php$version";
 
@@ -108,7 +107,6 @@ class Files extends Tasks {
             ++$SQLresults;
         }
 
-        $tmpDir = sys_get_temp_dir();
         copy("{$this->config->dir_root}/server/lint_short_tags.php", "{$this->config->project_dir}/.exakat/lint_short_tags.php");
         $shell = "nohup php {$this->config->project_dir}/.exakat/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} 2>&1 >/dev/null & echo $!";
         shell_exec($shell);

@@ -31,8 +31,6 @@ class Stubs extends Reports {
     const INDENTATION = '    ';
 
     public function _generate(array $analyzerList): string {
-        $stubCode = array();
-
         $code = new PhpCodeTree($this->dump);
         $code->load();
 

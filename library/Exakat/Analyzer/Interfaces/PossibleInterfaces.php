@@ -62,7 +62,7 @@ class PossibleInterfaces extends Analyzer {
             $current = array_pop($one);
 
             foreach($list as $interface) {
-                $interface_name = array_pop($interface);
+                array_pop($interface);
 
                 if (!empty($diff = array_intersect($interface, $one))) {
                     ++$stats[$id];

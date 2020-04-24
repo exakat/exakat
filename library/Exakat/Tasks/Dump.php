@@ -459,7 +459,6 @@ GREMLIN
         $classes = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $total = 0;
-        $usesId = array();
 
         $cit = array();
         $citId = array();
