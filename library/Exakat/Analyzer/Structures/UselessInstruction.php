@@ -124,11 +124,19 @@ class UselessInstruction extends Analyzer {
                      ->inIs('DEFINITION')
                      ->atomIs(array('Staticdefinition', 'Globaldefinition'))
               )
+             ->not(
+                $this->side()
+                     ->atomIs('Variable')
+                     ->inIs('DEFINITION')
+                     ->inIsIE('NAME')
+                     ->is('reference', true)
+              )
              ->back('first');
         $this->prepareQuery();
 
         // return an argument that is also a reference
         $this->atomIs('Return')
+             ->analyzerIsNot('self')
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
              ->outIs('POSTPLUSPLUS')
@@ -136,8 +144,8 @@ class UselessInstruction extends Analyzer {
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
-                     ->outIsIE('NAME')
-                     ->isNot('reference', true)
+                     ->inIsIE('NAME')
+                     ->is('reference', true)
              )
              ->back('first');
         $this->prepareQuery();
@@ -145,6 +153,7 @@ class UselessInstruction extends Analyzer {
         // return an assigned variable
         // todo : add support for static, referenc argument, global
         $this->atomIs('Return')
+             ->analyzerIsNot('self')
              ->atomInsideNoDefinition('Assignation')
              ->outIs('LEFT')
              ->atomIsNot(array('Member', 'Staticproperty', 'Phpvariable'))
