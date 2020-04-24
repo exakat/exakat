@@ -48,6 +48,7 @@ class UselessAbstract extends Analyzer {
 
         // abstract class without nothing in
         $this->atomIs('Class')
+             ->analyzerIsNot('self')
              ->is('abstract', true)
              ->filter(
                 $this->side()
@@ -66,6 +67,7 @@ class UselessAbstract extends Analyzer {
 
         // abstract class with not methods nor const nor trait
         $this->atomIs('Class')
+             ->analyzerIsNot('self')
              ->is('abstract', true)
              ->filter(
                 $this->side()
