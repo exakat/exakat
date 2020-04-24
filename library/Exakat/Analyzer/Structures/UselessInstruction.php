@@ -144,6 +144,11 @@ class UselessInstruction extends Analyzer {
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
+                     ->atomIs(array('Staticdefinition', 'Globaldefinition'))
+              )
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
                      ->inIsIE('NAME')
                      ->is('reference', true)
              )
