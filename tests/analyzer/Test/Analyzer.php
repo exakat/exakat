@@ -63,44 +63,25 @@ abstract class Analyzer extends TestCase {
 
         // collect the expected values
         require("$test_path/exp/$file.php");
-
-        $themes = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
-                               new AutoloadExt(''),
-                               new AutoloadDev('')
-                            );
-
-        $analyzerobject = $themes->getInstance($test_config);
-        if ($analyzerobject === null) {
-            $this->markTestSkipped("Couldn\'t get an analyzer for $test_config.");
-        }
-        if (!$analyzerobject->checkPhpVersion($phpversion)) {
-            $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
-        }
-
 /*
-
-        // initialize Config (needed by phpexec)
-        $pwd = getcwd();
-        chdir($EXAKAT_PATH);
-        $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
-        chdir($pwd);
-
-        $themes = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
+        $rulesets = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
                                new AutoloadExt(''),
                                new AutoloadDev('')
                             );
-        
-        $analyzerobject = $themes->getInstance($test_config, null, $config);
+
+        $analyzerobject = $rulesets->getInstance($test_config);
         if ($analyzerobject === null) {
             $this->markTestSkipped("Couldn\'t get an analyzer for $test_config.");
         }
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
-
-        require("$test_path/exp/$file.php");
-        */
+*/
         $config = exakat('config');
+//        $datastore = exakat('datastore');
+//        $datastore->create();
+//        $data = $datastore->getCol('TokenCounts', 'token');
+
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
         if (empty($config->$versionPHP)) {
             die("Warning : No binary for $phpversion\n");
@@ -115,7 +96,7 @@ abstract class Analyzer extends TestCase {
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
-
+/*
         $Php = new Phpexec($phpversion, $config->{'php'.str_replace('.', '', $config->phpversion)});
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
@@ -129,7 +110,7 @@ abstract class Analyzer extends TestCase {
             
             $this->markTestSkipped("Needs configuration : $confs.");
         }
-
+*/
         $analyzer = escapeshellarg($test_config);
 
         if (is_dir("$test_path/source/$file.php")) {

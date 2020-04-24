@@ -238,33 +238,32 @@ abstract class Analyzer {
     }
 
     public function init(int $analyzerId = null): int {
-
         // always reload list of analysis from the database
-            $query = <<<'GREMLIN'
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
 GREMLIN;
-            $res = $this->gremlin->query($query);
+        $res = $this->gremlin->query($query);
 
-            // Double is a safe guard, in case analysis were created twice
-            $double = array();
-            foreach($res as list('analyzer' => $analyzer, 'id' => $id)) {
-                if (isset(self::$rulesId[$analyzer]) && self::$rulesId[$analyzer] !== $id) {
-                    $double[] = $id;
-                } else {
-                    self::$rulesId[$analyzer] = $id;
-                }
+        // Double is a safe guard, in case analysis were created twice
+        $double = array();
+        foreach($res as list('analyzer' => $analyzer, 'id' => $id)) {
+            if (isset(self::$rulesId[$analyzer]) && self::$rulesId[$analyzer] !== $id) {
+                $double[] = $id;
+            } else {
+                self::$rulesId[$analyzer] = $id;
             }
+        }
 
-            if (!empty($double)) {
-                $chunks = array_chunk($double, 200);
-                foreach($chunks as $list) {
-                    $list = makeList($list);
-                    $query = <<<GREMLIN
+        if (!empty($double)) {
+            $chunks = array_chunk($double, 200);
+            foreach($chunks as $list) {
+                $list = makeList($list);
+                $query = <<<GREMLIN
 g.V({$list}).drop()
 GREMLIN;
-                    $this->gremlin->query($query);
-                }
-            }
+               $this->gremlin->query($query);
+           }
+       }
 
         if ($analyzerId === null) {
             if (isset(self::$rulesId[$this->shortAnalyzer])) {
