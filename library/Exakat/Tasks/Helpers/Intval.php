@@ -87,10 +87,13 @@ class Intval extends Plugin {
 //            case 'Nsname'      : This leads to a fatal error
             case 'Self'        :
             case 'Parent'      :
-            case 'Null'        :
-            case 'Void'        :
             case 'Magicconstant' :
                 $atom->intval = self::NO_VALUE;
+                break;
+
+            case 'Null'        :
+            case 'Void'        :
+                $atom->intval = 0;
                 break;
 
             case 'Parenthesis' :

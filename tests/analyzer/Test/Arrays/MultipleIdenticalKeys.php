@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class MultipleIdenticalKeys extends Analyzer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function testArrays_MultipleIdenticalKeys01()  { $this->generic_test('Arrays/MultipleIdenticalKeys.01'); }
     public function testArrays_MultipleIdenticalKeys02()  { $this->generic_test('Arrays/MultipleIdenticalKeys.02'); }
@@ -21,5 +21,6 @@ class MultipleIdenticalKeys extends Analyzer {
     public function testArrays_MultipleIdenticalKeys10()  { $this->generic_test('Arrays/MultipleIdenticalKeys.10'); }
     public function testArrays_MultipleIdenticalKeys11()  { $this->generic_test('Arrays/MultipleIdenticalKeys.11'); }
     public function testArrays_MultipleIdenticalKeys12()  { $this->generic_test('Arrays/MultipleIdenticalKeys.12'); }
+    public function testArrays_MultipleIdenticalKeys13()  { $this->generic_test('Arrays/MultipleIdenticalKeys.13'); }
 }
 ?>

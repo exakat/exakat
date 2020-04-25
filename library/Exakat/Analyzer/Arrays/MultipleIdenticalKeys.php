@@ -47,7 +47,7 @@ where(
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
       .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant", "Staticclass", "Identifier", "Nsname")
       .not(where(__.out("CONCAT")) )
-      .or(__.has("intval"), __.has("noDelimiter"))
+      .or(__.has("intval"), __.hasLabel("String", "Staticclass").has("noDelimiter"))
       .sideEffect{ 
             if (it.get().label() in ["String", "Staticclass"] ) { 
                 k = it.get().value("noDelimiter"); 
