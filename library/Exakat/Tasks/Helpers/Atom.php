@@ -210,10 +210,6 @@ class Atom {
             $properties[$l] = array( new Property($id++, $value) );
         }
         
-        if ($this->atom === 'Logical') {
-            print_r($this);
-        }
-
         $object = array('id'         => $this->id,
                         'label'      => $this->atom,
                         'inE'        => new \stdClass(),

@@ -50,7 +50,8 @@ class IsComposerNsname extends Analyzer {
         for($i = 0; $i < $n; ++$i) {
             $this->atomIs('Usenamespace')
                  ->outIs('USE')
-                 ->is('origin', array_slice($list, $i * 10000, ($i + 1) * 10000));
+                 ->is('origin', array_slice($list, $i * 10000, ($i + 1) * 10000))
+                 ->analyzerIsNot('self');
             $this->prepareQuery();
         }
 
@@ -62,7 +63,8 @@ class IsComposerNsname extends Analyzer {
         for($i = 0; $i < $n; ++$i) {
             $this->atomIs('Class')
                  ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-                 ->fullnspathIs(array_slice($list, $i * 10000, ($i + 1) * 10000));
+                 ->fullnspathIs(array_slice($list, $i * 10000, ($i + 1) * 10000))
+                 ->analyzerIsNot('self');
             $this->prepareQuery();
         }
 
@@ -76,7 +78,8 @@ class IsComposerNsname extends Analyzer {
                  ->atomIs(array('Nsname', 'Identifier'))
                  ->tokenIsNot('T_STATIC')
                  ->analyzerIsNot('self')
-                 ->fullnspathIs(array_slice($packagistInterfacesFullNs, $i * 10000, ($i + 1) * 10000));
+                 ->fullnspathIs(array_slice($packagistInterfacesFullNs, $i * 10000, ($i + 1) * 10000))
+                 ->analyzerIsNot('self');
             $this->prepareQuery();
         }
 

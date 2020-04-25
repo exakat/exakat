@@ -1728,7 +1728,7 @@ class Load extends Tasks {
             $fullcodeImplements = array();
             do {
                 ++$this->id; // Skip implements
-                $implements = $this->processOneNsname();
+                $implements = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
                 $this->addLink($class, $implements, 'IMPLEMENTS');
                 $fullcodeImplements[] = $implements->fullcode;
 
@@ -4703,10 +4703,9 @@ class Load extends Tasks {
         }
         $this->runPlugins($variable);
 
-        if (in_array($atom, array('Variable', 'Variableobject', 'Variablearray'), \STRICT_COMPARISON) ) {
-            if ($this->currentReturn !== null) {
-                $this->addLink($this->currentReturn, $variable, 'RETURNED');
-            }
+        if (in_array($atom, array('Variable', 'Variableobject', 'Variablearray'), \STRICT_COMPARISON) &&
+            $this->currentReturn !== null) {
+            $this->addLink($this->currentReturn, $variable, 'RETURNED');
         }
 
         if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -4984,10 +4983,6 @@ class Load extends Tasks {
 
             $returnArg = $this->addAtomVoid();
             $this->addLink($return, $returnArg, 'RETURN');
-            if (!empty($this->currentFunction)) {
-                $method = end($this->currentFunction);
-                $this->addLink($method, $returnArg, 'RETURNED');
-            }
 
             $return->code     = $this->tokens[$current][1];
             $return->fullcode = $this->tokens[$current][1] . ' ;';
@@ -5012,7 +5007,6 @@ class Load extends Tasks {
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
             if (!empty($this->currentFunction)) {
                 $method = end($this->currentFunction);
-                $this->addLink($method, $return, 'RETURNED');
             }
 
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
