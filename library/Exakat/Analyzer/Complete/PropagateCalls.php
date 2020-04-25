@@ -30,7 +30,6 @@ class PropagateCalls extends Complete {
     }
 
     public function analyze() {
-        print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
         // No need to run twice
         $this->processLocalDefinition();
         $this->propagateGlobals();
@@ -39,7 +38,6 @@ class PropagateCalls extends Complete {
 
         $count = $this->propagateCalls();
         
-        var_dump($count);
         $this->setCount($count);
     }
 
