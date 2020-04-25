@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingInclude extends Analyzer {
     protected $constant_or_variable_name = 100;
-
+    
     public function analyze() {
         $files = array_merge($this->datastore->getCol('files', 'file'),
                              $this->datastore->getCol('ignoredFiles', 'file'));
@@ -41,6 +41,8 @@ class MissingInclude extends Analyzer {
               ->outIs('ARGUMENT')
               ->outIsIE('CODE')
               ->as('include')
+              ->atomIsNot(self::CONTAINERS)
+              ->noAtomInside(self::CONTAINERS)
               ->goToInstruction('File')
               ->as('file')
               ->select(array('file'    => 'fullcode',
@@ -54,13 +56,13 @@ class MissingInclude extends Analyzer {
 
             $notFound = $row['include'];
             $missing[$notFound] = 1;
-            if (isset($inclusions[$row['file']])) {
-                $inclusions[$row['file']][] = $notFound;
-            } else {
-                $inclusions[$row['file']] = array($notFound);
-            }
+            array_collect_by($inclusions, $row['file'], $notFound);
         }
         $missing = array_keys($missing);
+        
+        if (empty($missing)) {
+            return;
+        }
 
         $this->atomIs('Include')
               ->outIs('ARGUMENT')
