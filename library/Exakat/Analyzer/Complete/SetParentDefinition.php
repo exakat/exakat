@@ -25,61 +25,72 @@ namespace Exakat\Analyzer\Complete;
 class SetParentDefinition extends Complete {
     public function analyze() {
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
-              ->goToClass()
-              ->outIs('EXTENDS')
-              ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'first');
+             ->hasNoIn('DEFINITION')
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->inIs('DEFINITION')
+             ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
         $this->atomIs('Newcall', self::WITHOUT_CONSTANTS)
-              ->fullnspathIs('\\parent', self::CASE_SENSITIVE)
-              ->goToClass()
-              ->outIs('EXTENDS')
-              ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'first');
+             ->hasNoIn('DEFINITION')
+             ->fullnspathIs('\\parent', self::CASE_SENSITIVE)
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->inIs('DEFINITION')
+             ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
-              ->as('parent')
-              ->inIs('CLASS')
-              ->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
-              ->as('property')
-              ->outIs('MEMBER')
-              ->tokenIs('T_VARIABLE')
-              ->savePropertyAs('code', 'name')
-              ->back('first')
-              ->inIs('DEFINITION')
-              ->goToAllParentsTraits(self::INCLUDE_SELF)
-              ->outIs('PPP')
-              ->outIs('PPP')
-              ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'property');
+             ->as('parent')
+             ->inIs('CLASS')
+             ->atomIs('Staticproperty', self::WITHOUT_CONSTANTS)
+             ->hasNoIn('DEFINITION')
+             ->as('property')
+             ->outIs('MEMBER')
+             ->tokenIs('T_VARIABLE')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->goToAllParentsTraits(self::INCLUDE_SELF)
+             ->outIs('PPP')
+             ->outIs('PPP')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('property', 'origin'))
+             ->addETo('DEFINITION', 'property');
         $this->prepareQuery();
 
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
-              ->as('parent')
-              ->inIs('CLASS')
-              ->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
-              ->as('constant')
-              ->outIs('CONSTANT')
-              ->tokenIs('T_STRING')
-              ->savePropertyAs('code', 'name')
-              ->back('first')
-              ->inIs('DEFINITION')
-              ->goToAllParentsTraits(self::INCLUDE_SELF)
-              ->outIs('CONST')
-              ->outIs('CONST')
-              ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'constant');
+             ->as('parent')
+             ->inIs('CLASS')
+             ->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
+             ->hasNoIn('DEFINITION')
+             ->as('constant')
+             ->outIs('CONSTANT')
+             ->tokenIs('T_STRING')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->goToAllParentsTraits(self::INCLUDE_SELF)
+             ->outIs('CONST')
+             ->outIs('CONST')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('constant', 'origin'))
+             ->addETo('DEFINITION', 'constant');
         $this->prepareQuery();
 
         $this->atomIs('String', self::WITHOUT_CONSTANTS)
-              ->fullnspathIs('\\\\parent', self::CASE_SENSITIVE)
-              ->as('parent')
-              ->goToClass()
-              ->outIs('EXTENDS')
-              ->inIs('DEFINITION')
-              ->addETo('DEFINITION', 'parent');
+             ->fullnspathIs('\\\\parent', self::CASE_SENSITIVE)
+             ->hasNoIn('DEFINITION')
+             ->as('parent')
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->inIs('DEFINITION')
+              ->as('origin')
+              ->dedup(array('parent', 'origin'))
+             ->addETo('DEFINITION', 'parent');
         $this->prepareQuery();
     }
 }

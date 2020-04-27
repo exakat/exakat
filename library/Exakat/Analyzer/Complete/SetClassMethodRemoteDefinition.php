@@ -31,7 +31,6 @@ class SetClassMethodRemoteDefinition extends Complete {
     public function analyze() {
         // class x { function foo() {}} x::foo();
         $this->atomIs(array('Staticmethodcall', 'Methodcall'), self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
@@ -53,13 +52,15 @@ class SetClassMethodRemoteDefinition extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method');
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
+              ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
         // class x { use t} trait t {function foo() {}} x::foo();
         $this->atomIs('Staticmethod', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
+              ->as('first')
               ->outIs('METHOD')
               ->atomIs(array('Identifier', 'Nsname'), self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
@@ -72,7 +73,7 @@ class SetClassMethodRemoteDefinition extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method');
+              ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 /*
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)

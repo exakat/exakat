@@ -35,6 +35,8 @@ class OverwrittenMethods extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
 
@@ -49,6 +51,8 @@ class OverwrittenMethods extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
     }

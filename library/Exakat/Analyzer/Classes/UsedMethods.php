@@ -56,11 +56,11 @@ class UsedMethods extends Analyzer {
 
         if (!empty($staticmethods)) {
             $this->atomIs(array('Method', 'Magicmethod'))
-                 ->as('used')
+                 ->analyzerIsNot('self')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
                  ->is('lccode', $staticmethods)
-                 ->back('used');
+                 ->back('first');
             $this->prepareQuery();
         }
 

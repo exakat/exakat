@@ -37,7 +37,7 @@ class PropagateCalls extends Complete {
         $this->processFluentInterfaces();
 
         $count = $this->propagateCalls();
-        
+        print "Setting $count propagation\n";
         $this->setCount($count);
     }
 
@@ -136,6 +136,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'method')
               ->count();
         $c1 = $this->rawQuery()->toInt();
@@ -150,8 +152,8 @@ class PropagateCalls extends Complete {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
+              ->as('method')
               ->back('first')
 
               ->outIs('RETURNTYPE')
@@ -162,6 +164,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'method')
               ->count();
         $c1 += $this->rawQuery()->toInt();
@@ -177,8 +181,8 @@ class PropagateCalls extends Complete {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
+              ->as('method')
               ->back('first')
 
               ->outIs('RETURNTYPE')
@@ -189,6 +193,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('method', 'origin'))
               ->addETo('DEFINITION', 'method')
               ->count();
         $c2 = $this->rawQuery()->toInt();
@@ -215,6 +221,8 @@ class PropagateCalls extends Complete {
              ->outIs('PPP')
              ->outIs('PPP')
              ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('member', 'origin'))
              ->addETo('DEFINITION', 'member')
               ->count();
         $c3 = $this->rawQuery()->toInt();
@@ -249,6 +257,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c1 = $this->rawQuery()->toInt();
@@ -277,6 +287,8 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c2 = $this->rawQuery()->toInt();
@@ -306,6 +318,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c3 = $this->rawQuery()->toInt();
@@ -334,6 +348,8 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c4 = $this->rawQuery()->toInt();
@@ -364,6 +380,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c5 = $this->rawQuery()->toInt();
@@ -397,6 +415,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c1 = $this->rawQuery()->toInt();
@@ -425,6 +445,8 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c2 = $this->rawQuery()->toInt();
@@ -459,6 +481,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c1 = $this->rawQuery()->toInt();
@@ -489,6 +513,8 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c2 = $this->rawQuery()->toInt();
@@ -520,6 +546,8 @@ class PropagateCalls extends Complete {
               ->outIs('CONST')
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c3 = $this->rawQuery()->toInt();
@@ -552,6 +580,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
         $c4 = $this->rawQuery()->toInt();
@@ -579,6 +609,8 @@ class PropagateCalls extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
 
               ->addETo('DEFINITION', 'first')
               ->count();

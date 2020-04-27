@@ -37,6 +37,8 @@ class OverwrittenProperties extends Complete {
               ->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
               ->samePropertyAs('propertyname', 'name',  self::CASE_SENSITIVE)
               ->raw('where(neq("first"))')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
     }

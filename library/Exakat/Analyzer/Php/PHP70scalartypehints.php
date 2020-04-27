@@ -44,6 +44,7 @@ class PHP70scalartypehints extends Analyzer {
 
         // function foo(bool $x)
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->outIs('RETURNTYPE')
              ->fullnspathIs($scalartypehints)
              ->back('first');

@@ -33,6 +33,7 @@ class CreateDefaultValues extends Complete {
                             'Propertydefinition',
                             'Parametername',
                             ), self::WITHOUT_CONSTANTS)
+             ->hasNoOut('DEFAULT')
              ->as('results')
              ->outIs('DEFINITION')
              ->inIs('LEFT')

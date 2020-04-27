@@ -51,13 +51,13 @@ class MiddleVersion extends Analyzer {
         $this->prepareQuery();
 
         // bugfixes based on analyzers
-        foreach($this->bugfixes as $bugfix) {
-            if (!empty($bugfix['analyzer'])) {
-                $this->analyzerIs($bugfix['analyzer'])
-                     ->ignore();
-                $this->prepareQuery();
-            }
-        }
+        $analyzers = array_column($this->bugfixes, 'analyzer');
+        $available = array_filter($analyzers);
+        
+        $this->analyzerIs($available)
+             ->analyzerIsNot('self')
+             ->ignore();
+        $this->prepareQuery();
     }
 }
 

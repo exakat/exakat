@@ -1585,7 +1585,7 @@ class Load extends Tasks {
             $extendsKeyword = $this->tokens[$this->id + 1][1];
             do {
                 ++$this->id; // Skip extends or ,
-                $extends = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+                $extends = $this->processOneNsname(self::WITH_FULLNSPATH);
                 $extends->rank = $rank;
 
                 $this->addLink($interface, $extends, 'EXTENDS');
@@ -2915,6 +2915,7 @@ class Load extends Tasks {
                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_NEW
             ) {
+//            $this->getFullnspath($string, 'class', $string);
 
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
                 $this->calls->addCall('class', $string->fullnspath, $string);
@@ -4946,6 +4947,8 @@ class Load extends Tasks {
 
         $this->popExpression();
         $this->addLink($operator, $operand, $link);
+//        print_r($operand);
+//        print_r($this->links);
 
         $operator->code      = $this->tokens[$current][1];
         $operator->fullcode  = $this->tokens[$current][1] . $separator . $operand->fullcode;
@@ -5438,6 +5441,8 @@ class Load extends Tasks {
             $static = $this->addAtom('Staticconstant');
             $this->addLink($static, $right, 'CONSTANT');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
+
+            $this->getFullnspath($left, 'class', $left);
             $static->fullnspath = "{$left->fullnspath}::{$right->fullcode}";
             $static->aliased = self::NOT_ALIASED;
             $this->runPlugins($static, array('CLASS'    => $left,
@@ -5460,6 +5465,8 @@ class Load extends Tasks {
         } elseif ($right->atom === 'Methodcallname') {
             $static = $this->addAtom('Staticmethodcall');
             $this->addLink($static, $right, 'METHOD');
+
+            $this->getFullnspath($left, 'class', $left);
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'METHOD' => $right));
@@ -6185,8 +6192,8 @@ class Load extends Tasks {
             }
         } elseif ($name->atom === 'Parent') {
             $apply->fullnspath = '\\parent';
-                    $apply->aliased = self::NOT_ALIASED;
-                    return;
+            $apply->aliased = self::NOT_ALIASED;
+            return;
         } elseif ($name->isA(array('Boolean', 'Null'))) {
             $apply->fullnspath = '\\' . mb_strtolower($name->fullcode);
                     $apply->aliased = self::NOT_ALIASED;

@@ -38,6 +38,8 @@ class OverwrittenConstants extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('code', 'name',  self::CASE_SENSITIVE)
               ->inIs('NAME')
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
     }
