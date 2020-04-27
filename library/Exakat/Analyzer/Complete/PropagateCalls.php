@@ -37,7 +37,7 @@ class PropagateCalls extends Complete {
         $this->processFluentInterfaces();
 
         $count = $this->propagateCalls();
-        print "Setting $count propagation\n";
+
         $this->setCount($count);
     }
 
