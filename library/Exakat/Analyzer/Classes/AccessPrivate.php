@@ -53,6 +53,7 @@ class AccessPrivate extends Analyzer {
         // classname::method() direct class
         // classname::method() parent class through extension (not the direct class)
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
@@ -68,6 +69,7 @@ class AccessPrivate extends Analyzer {
 
         // Case of parent::
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
@@ -86,6 +88,7 @@ class AccessPrivate extends Analyzer {
         // static : the class which is called
         // self   : the class where the definition is
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
@@ -105,6 +108,7 @@ class AccessPrivate extends Analyzer {
         // properties
         // className::$property direct call
         $this->atomIs('Staticproperty')
+             ->analyzerIsNot('self')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
@@ -121,6 +125,7 @@ class AccessPrivate extends Analyzer {
 
         // parent::$property
         $this->atomIs('Staticproperty')
+             ->analyzerIsNot('self')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
@@ -137,6 +142,7 @@ class AccessPrivate extends Analyzer {
 
         // $this->method()
         $this->atomIs('Methodcall')
+             ->analyzerIsNot('self')
              ->goToClass()
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')

@@ -35,6 +35,7 @@ class IncompatibleSignature74 extends Analyzer {
     public function analyze() {
         // non-matching reference
         $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
@@ -50,6 +51,7 @@ class IncompatibleSignature74 extends Analyzer {
         // non-matching argument count :
         // abstract : exact count
         $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
              ->savePropertyAs('count', 'counted')
              ->outIs('OVERWRITE')
              ->is('abstract', true) //then, it is not private
@@ -60,6 +62,7 @@ class IncompatibleSignature74 extends Analyzer {
         // non-matching argument count :
         // non-abstract : count may be more but not less
         $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
              ->isNot('visibility', 'private')
              ->savePropertyAs('count', 'counted')
              ->outIs('OVERWRITE')
@@ -71,6 +74,7 @@ class IncompatibleSignature74 extends Analyzer {
         // non-matching typehint
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
+             ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
@@ -87,6 +91,7 @@ class IncompatibleSignature74 extends Analyzer {
 
         // non-matching return typehint
         $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
              ->hasOut('OVERWRITE')
              ->savePropertyAs('id', 'method')
              ->isNot('visibility', 'private')
@@ -121,6 +126,7 @@ class IncompatibleSignature74 extends Analyzer {
 
         // non-matching nullable
         $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
@@ -138,6 +144,7 @@ class IncompatibleSignature74 extends Analyzer {
 
         // non-matching return nullable
         $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
              ->isNot('visibility', 'private')
              ->outIs('RETURNTYPE')
              ->is('nullable', true)
@@ -153,6 +160,7 @@ class IncompatibleSignature74 extends Analyzer {
 
         // non-matching visibility
         $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
              ->savePropertyAs('visibility', 'v')
              ->outIs('OVERWRITE')
              ->raw(<<<'GREMLIN'

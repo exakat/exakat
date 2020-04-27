@@ -69,7 +69,6 @@ class UndefinedVariable extends Analyzer {
 
         // function foo() { $b->c = 2;}
         $this->atomIs('Variabledefinition')
-             ->analyzerIsNot('self')
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
@@ -96,10 +95,9 @@ class UndefinedVariable extends Analyzer {
                      ->atomIs('Variable')
                      ->is('isModified', true)
             )
-            ->outIs('DEFINITION');
+            ->outIs('DEFINITION')
+            ->analyzerIsNot('self');
         $this->prepareQuery();
-
-
     }
 }
 

@@ -27,33 +27,35 @@ class OverwrittenMethods extends Complete {
         // class x { protected function foo()  {}}
         // class xx extends x { protected function foo()  {}}
         $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->savePropertyAs('lccode', 'name')
-              ->goToClass()
-              ->goToAllParents(self::EXCLUDE_SELF)
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->as('origin')
-              ->dedup(array('first', 'origin'))
-              ->addEFrom('OVERWRITE', 'first');
+             ->hasNoOut('OVERWRITE')
+             ->outIs('NAME')
+             ->savePropertyAs('lccode', 'name')
+             ->goToClass()
+             ->goToAllParents(self::EXCLUDE_SELF)
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->as('origin')
+             ->dedup(array('first', 'origin'))
+             ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
 
         // interface x { protected function foo()  {}}
         // interface xx extends x { protected function foo()  {}}
         $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
-              ->outIs('NAME')
-              ->savePropertyAs('lccode', 'name')
-              ->goToInterface()
-              ->goToAllImplements(self::EXCLUDE_SELF)
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->as('origin')
-              ->dedup(array('first', 'origin'))
-              ->addEFrom('OVERWRITE', 'first');
+             ->hasNoOut('OVERWRITE')
+             ->outIs('NAME')
+             ->savePropertyAs('lccode', 'name')
+             ->goToInterface()
+             ->goToAllImplements(self::EXCLUDE_SELF)
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->as('origin')
+             ->dedup(array('first', 'origin'))
+             ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
     }
 }

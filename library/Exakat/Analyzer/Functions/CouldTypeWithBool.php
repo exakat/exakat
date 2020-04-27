@@ -35,6 +35,7 @@ class CouldTypeWithBool extends Analyzer {
 
         // function foo($a) { $a && 1; }
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -48,6 +49,7 @@ class CouldTypeWithBool extends Analyzer {
 
         // function foo($a) { $a === false; }
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -63,6 +65,7 @@ class CouldTypeWithBool extends Analyzer {
 
         // function foo($a) { !$a;  if ($a) {} }
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -76,6 +79,7 @@ class CouldTypeWithBool extends Analyzer {
         // function foo($a) { }; only foo(1)
         // function foo($a) { }; only foo((int))
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -105,6 +109,7 @@ class CouldTypeWithBool extends Analyzer {
 
         // function foo($a) { bar($a); } function bar(int $b) {}
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -124,6 +129,7 @@ class CouldTypeWithBool extends Analyzer {
         $natives = $this->methods->getFunctionsByArgType('bool', Methods::STRICT);
 
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
