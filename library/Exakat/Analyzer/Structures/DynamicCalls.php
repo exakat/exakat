@@ -40,6 +40,7 @@ class DynamicCalls extends Analyzer {
 
         // dynamic functioncall
         $this->atomIs('Functioncall')
+             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->tokenIsNot(self::FUNCTIONS_TOKENS)
              ->back('first');
@@ -47,6 +48,7 @@ class DynamicCalls extends Analyzer {
 
         // dynamic new
         $this->atomIs('New')
+             ->analyzerIsNot('self')
              ->outIs('NEW')
              ->outIs('NAME')
              ->atomIs('Variable')
@@ -57,12 +59,14 @@ class DynamicCalls extends Analyzer {
         // property
         // $o->{$p}
         $this->atomIs('Member')
+             ->analyzerIsNot('self')
              ->outIs('MEMBER')
              ->tokenIsNot(array('T_STRING', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Member')
+             ->analyzerIsNot('self')
              ->outIs('MEMBER')
              ->atomIs('Block')
              ->back('first');
@@ -70,6 +74,7 @@ class DynamicCalls extends Analyzer {
 
         // $o->{$m}()
         $this->atomIs('Methodcall')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->tokenIsNot('T_STRING')
              ->back('first');
@@ -80,6 +85,7 @@ class DynamicCalls extends Analyzer {
 
         // static property
         $this->atomIs('Staticproperty')
+             ->analyzerIsNot('self')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_OPEN_BRACKET'))
              ->atomIsNot(self::RELATIVE_CLASS)
@@ -88,6 +94,7 @@ class DynamicCalls extends Analyzer {
 
         // static methods (class part)
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
              ->outIs('CLASS')
              ->atomIsNot(array('Identifier', 'Nsname', 'Static', 'Parent', 'Self'))
              ->back('first');

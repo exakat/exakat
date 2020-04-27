@@ -36,6 +36,7 @@ class CheckJson extends Analyzer {
 
         // json_decode() (no checks)
         $this->atomFunctionIs(array('\\json_encode', '\\json_decode'))
+             ->analyzerIsNot('self')
              ->hasNoTryCatch()
              ->goToExpression()
              ->nextSibling('EXPRESSION')

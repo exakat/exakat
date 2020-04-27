@@ -34,6 +34,7 @@ class ArrayKeyExistsWithObjects extends Analyzer {
     public function analyze() {
         // WIth typehint
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
              ->analyzerIsNot('Php/ScalarTypehintUsage')
              ->outIs('NAME')
@@ -45,6 +46,7 @@ class ArrayKeyExistsWithObjects extends Analyzer {
         // WIth return typehint
         // array_key_exists('', $a); $a = foo(); function foo() : TTT {}
         $this->atomFunctionIs('\\array_key_exists')
+             ->analyzerIsNot('self')
              ->outWIthRank('ARGUMENT', 1)
              ->atomIs('Variable')
              ->inIs('DEFINITION')
@@ -60,6 +62,7 @@ class ArrayKeyExistsWithObjects extends Analyzer {
         // WIth object operator
         // array_key_exists('', $a); $a->p  = 2;
         $this->atomFunctionIs('\\array_key_exists')
+             ->analyzerIsNot('self')
              ->outWIthRank('ARGUMENT', 1)
              ->atomIs('Variable')
              ->inIs('DEFINITION')

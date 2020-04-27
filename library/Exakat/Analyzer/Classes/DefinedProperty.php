@@ -41,6 +41,7 @@ class DefinedProperty extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Member')
+             ->analyzerIsNot('self')
              ->inIs('DEFINITION')
              ->atomIs('Virtualproperty')
              ->outIs('OVERWRITE')

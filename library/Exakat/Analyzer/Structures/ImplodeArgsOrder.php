@@ -36,6 +36,7 @@ class ImplodeArgsOrder extends Analyzer {
         // detect an array in first arg
         // Constants
         $this->atomFunctionIs($functions)
+             ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
              ->back('first');
@@ -43,6 +44,7 @@ class ImplodeArgsOrder extends Analyzer {
 
         // Local variable
         $this->atomFunctionIs($functions)
+             ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Variable')
              ->inIs('DEFINITION')
@@ -53,6 +55,7 @@ class ImplodeArgsOrder extends Analyzer {
 
         // Returntype
         $this->atomFunctionIs($functions)
+             ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
@@ -71,6 +74,7 @@ class ImplodeArgsOrder extends Analyzer {
 
         // Local variable
         $this->atomFunctionIs($functions)
+             ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Variable')
              ->inIs('DEFINITION')
@@ -81,6 +85,7 @@ class ImplodeArgsOrder extends Analyzer {
 
         // Returntype
         $this->atomFunctionIs($functions)
+             ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')

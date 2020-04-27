@@ -35,6 +35,7 @@ class NoConcatInLoop extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs(array('Foreach', 'For'))
+             ->analyzerIsNot('self')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Concatenation')
              ->outIs('CONCAT')

@@ -69,7 +69,12 @@ class UselessParenthesis extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Parenthesis')
-             ->raw('not(where( __.out("CODE").hasLabel("Logical").has("token", within("T_LOGICAL_XOR", "T_LOGICAL_AND", "T_LOGICAL_OR"))))');
+             ->not(
+                $this->side()
+                     ->outIs('CODE')
+                     ->atomIs('Logical')
+                     ->tokenIs(array("T_LOGICAL_XOR", "T_LOGICAL_AND", "T_LOGICAL_OR"))
+             );
         $this->prepareQuery();
 
         // ($y) == (1);
@@ -104,6 +109,7 @@ class UselessParenthesis extends Analyzer {
 
         // (literal);
         $this->atomIs('Parenthesis')
+             ->analyzerIsNot('self')
              ->outIs('CODE')
              ->atomIs(array('Integer', 'Float', 'Boolean', 'Identifier', 'Variable',
                             'Magicconstant', 'Null', 'Functioncall', 'Member', 'Methodcall',
@@ -113,6 +119,7 @@ class UselessParenthesis extends Analyzer {
 
         //$d = ((($a)+$b)+$c);
         $this->atomIs('Addition')
+             ->analyzerIsNot('self')
              ->inIs('CODE')
              ->atomIs('Parenthesis')
              ->inIs(array('LEFT', 'RIGHT'))
@@ -122,6 +129,7 @@ class UselessParenthesis extends Analyzer {
 
         //$d = ((($a)*$b)*$c);
         $this->atomIs('Multiplication')
+             ->analyzerIsNot('self')
              ->inIs('CODE')
              ->atomIs('Parenthesis')
              ->as('results')
@@ -135,6 +143,7 @@ class UselessParenthesis extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIs('Parenthesis')
+             ->hasNoIn('RIGHT')
              ->back('first');
         $this->prepareQuery();
 

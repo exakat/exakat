@@ -58,6 +58,7 @@ class AssignedInOneBranch extends Analyzer {
 
         // if() {} else {$b = 1;  }
         $this->atomIs('Ifthen')
+             ->analyzerIsNot('self')
              ->isNot('token', 'T_ELSEIF')
              ->outIs('ELSE')
              ->atomInsideNoDefinition('Assignation')
