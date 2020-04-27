@@ -5458,6 +5458,8 @@ class Load extends Tasks {
                                     'Staticpropertyname',
                                     ))) {
             $static = $this->addAtom('Staticproperty');
+
+            $this->getFullnspath($left, 'class', $left);
             $this->addLink($static, $right, 'MEMBER');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
