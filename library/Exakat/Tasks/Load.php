@@ -3522,7 +3522,9 @@ class Load extends Tasks {
                     $expression = $this->processNext();
                 }
                 $this->popExpression();
-                $this->addToSequence($expression);
+                if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG) {
+                    $this->addToSequence($expression);
+                }
                 $this->runPlugins($block, array($expression));
             }
 
