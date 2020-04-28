@@ -2041,12 +2041,10 @@ class Load extends Tasks {
             $this->getFullnspath($nsname, 'class', $nsname);
 
             $this->calls->addCall('class', $nsname->fullnspath, $nsname);
-        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW) && 
+                  $this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
             $this->getFullnspath($nsname, 'class', $nsname);
-
-            if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
-                $this->calls->addCall('class', $nsname->fullnspath, $nsname);
-            }
+            $this->calls->addCall('class', $nsname->fullnspath, $nsname);
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // DO nothing
 
@@ -4949,8 +4947,9 @@ class Load extends Tasks {
 
         $this->popExpression();
         $this->addLink($operator, $operand, $link);
-//        print_r($operand);
-//        print_r($this->links);
+        print_r($operand);
+        print_r($this->links);
+        
 
         $operator->code      = $this->tokens[$current][1];
         $operator->fullcode  = $this->tokens[$current][1] . $separator . $operand->fullcode;
