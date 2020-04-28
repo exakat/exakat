@@ -136,7 +136,7 @@ abstract class Analyzer extends TestCase {
         $this->number = $number;
         $this->analyzer = $analyzer;
         
-        if (!is_array($res[0])) {
+        if (isset($res[0]) && !is_array($res[0])) {
             $this->checkTestOnFullcode($res, $expected, $expected_not);
         } elseif (isset($res[0]['fullcode'])) {
             $list = array_column($res, 'fullcode');
