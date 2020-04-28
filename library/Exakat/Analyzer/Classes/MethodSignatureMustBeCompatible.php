@@ -36,6 +36,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
         // argument name may be arbitrary; argment default too.
         // typehint and number of arguments must always be the same
         $this->atomIs('Method') // No need for magicmethods
+             ->analyzerIsNot('self')
              ->savePropertyAs('count', 'signature')
              ->outIs('OVERWRITE')
              ->notSamePropertyAs('count', 'signature', self::CASE_SENSITIVE)
@@ -44,6 +45,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // Check if typehint is different between
         $this->atomIs('Method') // No need for magicmethods
+             ->analyzerIsNot('self')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
@@ -60,6 +62,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // Check if reference is the same between the versions
         $this->atomIs('Method') // No need for magicmethods
+             ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->savePropertyAs('reference', 'referenced')
@@ -72,6 +75,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // Check if variadic is the same between the versions
         $this->atomIs('Method') // No need for magicmethods
+             ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->savePropertyAs('variadic', 'variadiced')
@@ -84,6 +88,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // Check if return typehint is different between
         $this->atomIs('Method') // No need for magicmethods
+             ->analyzerIsNot('self')
              ->outIs('RETURNTYPE')
              ->savePropertyAs('fullnspath', 'typehint')
              ->back('first')

@@ -37,6 +37,7 @@ class UnresolvedCatch extends Analyzer {
         $exceptions = makeFullNsPath($exceptions);
 
         $this->atomIs('Catch')
+             ->analyzerIsNot('self')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIsNot($exceptions)
@@ -45,6 +46,7 @@ class UnresolvedCatch extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Catch')
+             ->analyzerIsNot('self')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIsNot($exceptions)

@@ -29,6 +29,7 @@ class UseInstanceof extends Analyzer {
     public function analyze() {
         // get_class($x) == 'Function'
         $this->atomIs('Comparison')
+             ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->functioncallIs('\\get_class')
              ->back('first');
@@ -36,6 +37,7 @@ class UseInstanceof extends Analyzer {
 
         // 'Function' == get_class($x)
         $this->atomIs('Comparison')
+             ->analyzerIsNot('self')
              ->outIs('RIGHT')
              ->functioncallIs('\\get_class')
              ->back('first');

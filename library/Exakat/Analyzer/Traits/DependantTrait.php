@@ -37,6 +37,7 @@ class DependantTrait extends Analyzer {
         // Case for $this->method()
         // Case for class::methodcall()
         $this->atomIs('Trait')
+             ->analyzerIsNot('self')
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
              ->inIs(array('OBJECT', 'CLASS'))
@@ -48,6 +49,7 @@ class DependantTrait extends Analyzer {
         // Case for $this->$properties
         // Case for class::$properties
         $this->atomIs('Trait')
+             ->analyzerIsNot('self')
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
              ->inIs(array('OBJECT', 'CLASS'))
@@ -59,6 +61,7 @@ class DependantTrait extends Analyzer {
         // Case for class::constant
         // self will be solved at excution time, but is set to the trait statically
         $this->atomIs('Trait')
+             ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
