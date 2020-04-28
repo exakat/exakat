@@ -4947,9 +4947,6 @@ class Load extends Tasks {
 
         $this->popExpression();
         $this->addLink($operator, $operand, $link);
-        print_r($operand);
-        print_r($this->links);
-        
 
         $operator->code      = $this->tokens[$current][1];
         $operator->fullcode  = $this->tokens[$current][1] . $separator . $operand->fullcode;
@@ -6158,7 +6155,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
             }
-        } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname'))) {
+        } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', "This"))) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
                     $apply->aliased = self::NOT_ALIASED;
@@ -6173,7 +6170,7 @@ class Load extends Tasks {
             $apply->fullnspath = substr($this->namespace, 0, -1) . mb_strtolower(substr($name->fullcode, 9));
                     $apply->aliased = self::NOT_ALIASED;
                     return;
-        } elseif ($name->isA(array('Static', 'Self'))) {
+        } elseif ($name->isA(array('Static', 'Self', 'This'))) {
             if (empty($this->currentClassTrait) || empty($this->currentClassTrait[count($this->currentClassTrait) - 1])) {
                 $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
                     $apply->aliased = self::NOT_ALIASED;

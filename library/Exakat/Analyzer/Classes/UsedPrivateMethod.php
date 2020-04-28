@@ -30,6 +30,7 @@ class UsedPrivateMethod extends Analyzer {
         return array('Complete/MakeClassMethodDefinition',
                     );
     }
+
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         // method used in a static methodcall static::b() or self

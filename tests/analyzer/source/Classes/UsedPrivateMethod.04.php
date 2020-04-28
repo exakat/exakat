@@ -1,13 +1,16 @@
 <?php
 
 class x {
-    private function used() {}
+    private function usedSelf() {}
+    private function usedClass() {}
+    private function usedThis() {}
     private function unused() {}
     
     private function foo() {
-        $class::used(1);
+        $class::usedClass(1);
         $class::unused(1);
-        $this::used(1);
+        $this::usedThis(1);
+        self::usedSelf(1);
     }
 }
 ?>
