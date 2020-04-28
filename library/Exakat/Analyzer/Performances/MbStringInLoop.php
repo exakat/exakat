@@ -35,12 +35,12 @@ class MbStringInLoop extends Analyzer {
                      ->inIs('DEFINITION')
                      ->outIs('DEFINITION')
                      ->inIs(array('VALUE', 'INDEX'))
-             )
-             ->back('first');
+             );
         $this->prepareQuery();
 
         //for( ; ++$i) { mb_substr(1, $i, 3);}
         $this->atomFunctionIs('\mb_substr')
+             ->analyzerIsNot('self')
              //in a foreach
              ->filter(
                 $this->side()
@@ -49,8 +49,7 @@ class MbStringInLoop extends Analyzer {
                      ->outIs('DEFINITION')
                      ->goToInstruction('Sequence')
                      ->inIs('INCREMENT')
-             )
-             ->back('first');
+             );
         $this->prepareQuery();
 
         // dowhile, loop ?

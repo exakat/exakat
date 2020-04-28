@@ -29,6 +29,7 @@ class UsedClass extends Analyzer {
     public function analyze() {
 
         $this->atomIs(self::CLASSES_ALL)
+             ->analyzerIsNot('self')
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
@@ -44,6 +45,7 @@ class UsedClass extends Analyzer {
         // class X; autoload('X::x')
         // link is build with the method, not the class
         $this->atomIs(self::CLASSES_ALL)
+             ->analyzerIsNot('self')
               ->filter(
                 $this->side()
                      ->outIs('METHOD')

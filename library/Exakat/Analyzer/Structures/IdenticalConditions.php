@@ -29,6 +29,7 @@ class IdenticalConditions extends Analyzer {
         // $a || $a
         // ($a) && ($a)
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->hasNoIn(array('LEFT', 'RIGHT'))
              ->outIs('RIGHT')
              ->outIsIE('CODE')
@@ -47,6 +48,7 @@ class IdenticalConditions extends Analyzer {
         // ($a) && ($a)
         // two levels
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'right')
@@ -62,6 +64,7 @@ class IdenticalConditions extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
@@ -78,6 +81,7 @@ class IdenticalConditions extends Analyzer {
 
         // case for $a || $b || $b
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              // Ignore LEFT
              ->outIs('RIGHT')
              ->outIsIE('CODE')
@@ -100,6 +104,7 @@ class IdenticalConditions extends Analyzer {
         // three levels
         // straight structure
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
@@ -118,6 +123,7 @@ class IdenticalConditions extends Analyzer {
 
         // reverse structure
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
@@ -138,6 +144,7 @@ class IdenticalConditions extends Analyzer {
         // ($a) && ($a)
         // four levels
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')
@@ -161,6 +168,7 @@ class IdenticalConditions extends Analyzer {
         // ($a) && ($a)
         // four levels
         $this->atomIs('Logical')
+             ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
              ->savePropertyAs('fullcode', 'left')

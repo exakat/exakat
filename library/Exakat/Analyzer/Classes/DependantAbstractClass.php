@@ -35,6 +35,7 @@ class DependantAbstractClass extends Analyzer {
         // Case for $this->method()
         // Case for class::methodcall()
         $this->atomIs(self::CLASSES_ALL)
+             ->analyzerIsNot('self')
              ->is('abstract', true)
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
@@ -47,6 +48,7 @@ class DependantAbstractClass extends Analyzer {
         // Case for $this->$properties
         // Case for class::$properties
         $this->atomIs(self::CLASSES_ALL)
+             ->analyzerIsNot('self')
              ->is('abstract', true)
              ->outIs('DEFINITION')
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
@@ -59,6 +61,7 @@ class DependantAbstractClass extends Analyzer {
         // Case for class::constant
         // statics will be solved at excution time, but is set to the trait statically
         $this->atomIs(self::CLASSES_ALL)
+             ->analyzerIsNot('self')
              ->is('abstract', true)
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('DEFINITION')

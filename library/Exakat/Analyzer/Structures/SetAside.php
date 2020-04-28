@@ -29,6 +29,7 @@ class SetAside extends Analyzer {
         // $b = $a; $a = 3; $a = $b;
         // local variable
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
              ->savePropertyAs('code', 'name')
@@ -86,7 +87,8 @@ class SetAside extends Analyzer {
              ->outIs('MEMBER')
              ->tokenIs('T_STRING')
              ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
-             ->goToFunction();
+             ->goToFunction()
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

@@ -29,6 +29,7 @@ class ForWithFunctioncall extends Analyzer {
     public function analyze() {
         //for(; $b < 10; $a++)
         $this->atomIs('For')
+             ->analyzerIsNot('self')
             // This looks for variables inside the INCREMENT
              ->outIs('INCREMENT')
              ->collectVariables('variables')
@@ -41,6 +42,7 @@ class ForWithFunctioncall extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('For')
+             ->analyzerIsNot('self')
              ->outIs('INCREMENT')
              ->atomInsideNoDefinition('Functioncall')
              ->back('first');

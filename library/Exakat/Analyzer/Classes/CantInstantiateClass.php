@@ -29,6 +29,7 @@ class CantInstantiateClass extends Analyzer {
         // new X();
         // class x { private function __construct() {}}
         $this->atomIs('New')
+             ->analyzerIsNot('self')
              ->outIs('NEW')
              ->inIs('DEFINITION')
              ->outIs('MAGICMETHOD')
@@ -39,6 +40,7 @@ class CantInstantiateClass extends Analyzer {
 
         // in the parent
         $this->atomIs('New')
+             ->analyzerIsNot('self')
              ->outIs('NEW')
              ->inIs('DEFINITION')
              ->outIs('EXTENDS')
@@ -51,6 +53,7 @@ class CantInstantiateClass extends Analyzer {
 
         // in the trait
         $this->atomIs('New')
+             ->analyzerIsNot('self')
              ->outIs('NEW')
              ->inIs('DEFINITION')
              ->outIs('USE')

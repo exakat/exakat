@@ -49,7 +49,8 @@ class BetterRand extends Analyzer {
                                     '\strrev',
                                     '\uniqid',
                                     '\base64_encode',
-                                    ));
+                                    ))
+            ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

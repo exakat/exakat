@@ -34,6 +34,7 @@ class NonNullableSetters extends Analyzer {
         // class x { private $p = 1;
         //           function foo() : C { return $this->p; }}
         $this->atomIs('Method')
+             ->analyzerIsNot('self')
              ->outIs('RETURNTYPE')
              ->isNot('nullable', true)
              ->savePropertyAs('fullnspath', 'fnp')
@@ -63,6 +64,7 @@ class NonNullableSetters extends Analyzer {
         // class x { private $p = 1;
         //           function foo() : C { return $this->p; }}
         $this->atomIs('Method')
+             ->analyzerIsNot('self')
              ->outIs('RETURNTYPE')
              ->isNot('nullable', true)
              ->savePropertyAs('fullnspath', 'fnp')

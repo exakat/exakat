@@ -36,6 +36,7 @@ class InsufficientPropertyTypehint extends Analyzer {
 
         // class x { function __construct(Y $p) { $this->p = $p; } function foo() { $this->p->p2 = 1;} }
         $this->atomIs('Propertydefinition')
+             ->analyzerIsNot('self')
              ->outIs('DEFINITION')
              ->inIs('OBJECT')
              ->atomIs('Member')
@@ -70,6 +71,7 @@ class InsufficientPropertyTypehint extends Analyzer {
 
         // class x { function __construct(Y $p) { $this->p = $p; } } interface Y {}
         $this->atomIs('Propertydefinition')
+             ->analyzerIsNot('self')
              ->outIs('DEFINITION')
              ->inIs('OBJECT')
              ->atomIs('Member')
@@ -95,6 +97,7 @@ class InsufficientPropertyTypehint extends Analyzer {
 
         // class x { function __construct(Y $p) { $this->p = $p; } function foo() { $this->p->m2();} }
         $this->atomIs('Propertydefinition')
+             ->analyzerIsNot('self')
              ->outIs('DEFINITION')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')

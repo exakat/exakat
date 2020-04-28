@@ -39,6 +39,7 @@ class UsedMethods extends Analyzer {
 
         if (!empty($methods)) {
             $this->atomIs(array('Method', 'Magicmethod'))
+                 ->analyzerIsNot('self')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
                  ->is('lccode', $methods)
@@ -56,6 +57,7 @@ class UsedMethods extends Analyzer {
 
         if (!empty($staticmethods)) {
             $this->atomIs(array('Method', 'Magicmethod'))
+                 ->analyzerIsNot('self')
                  ->analyzerIsNot('self')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -132,6 +134,7 @@ GREMLIN
             $callables = array_map('strtolower', $callables);
             // method used statically in a callback with an array
             $this->atomIs('Method')
+                 ->analyzerIsNot('self')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
                  ->codeIs($callables, self::TRANSLATE, self::CASE_INSENSITIVE)
@@ -144,6 +147,7 @@ GREMLIN
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
+             ->analyzerIsNot('self')
              ->is('visibility', 'private')
              ->as('used')
              ->outIs('NAME')
@@ -161,6 +165,7 @@ GREMLIN
         $this->atomIs('Class')
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
+             ->analyzerIsNot('self')
              ->isNot('visibility', 'private')
              ->as('used')
              ->outIs('NAME')

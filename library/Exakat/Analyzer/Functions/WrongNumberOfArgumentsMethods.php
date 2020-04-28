@@ -62,6 +62,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
             if (empty($f)) { continue; }
 
             $this->atomIs('Staticmethodcall')
+                 ->analyzerIsNot('self')
                  ->outIs('METHOD')
                  ->codeIs($f, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->isLess('count', $nb)
@@ -74,6 +75,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
 
             // Check for type with new assignation
             $this->atomIs('Methodcall')
+                 ->analyzerIsNot('self')
                  ->outIs('METHOD')
                  ->codeIs($f)
                  ->isLess('count', $nb)
@@ -99,6 +101,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
             if (empty($f)) { continue; }
 
             $this->atomIs('Staticmethodcall')
+                 ->analyzerIsNot('self')
                  ->outIs('METHOD')
                  ->codeIs($f, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->isMore('count', $nb)
@@ -111,6 +114,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
 
             // Check for type with new assignation
             $this->atomIs('Methodcall')
+                 ->analyzerIsNot('self')
                  ->outIs('METHOD')
                  ->codeIs($f)
                  ->isMore('count', $nb)
@@ -132,6 +136,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
 
         //Custom methods, when we can find the definition
         $this->atomIs(array('Methodcall', 'Staticmethodcall'))
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->savePropertyAs('count', 'call')
              ->back('first')
@@ -143,6 +148,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs(array('Methodcall', 'Staticmethodcall'))
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->savePropertyAs('count', 'call')
              ->back('first')
