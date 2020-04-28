@@ -57,9 +57,8 @@ class UnsetInForeach extends Analyzer {
              ->atomInsideNoDefinition('Unset')
              ->outIs('ARGUMENT')
              ->outIsIE(array('VARIABLE', 'OBJECT'))
+             ->atomIs('Variable')
              ->samePropertyAs('code', 'blind', self::CASE_SENSITIVE)
-             ->inIsIE(array('VARIABLE', 'OBJECT'))
-             ->atomIsNot('Member')
              ->back('first');
         $this->prepareQuery();
 
