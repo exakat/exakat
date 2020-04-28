@@ -31,8 +31,16 @@ class CouldBeAbstractClass extends Analyzer {
         // No new a()
         $this->atomIs('Class')
              ->isNot('abstract', true)
-             ->raw('where( __.out("DEFINITION").in("EXTENDS"))')
-             ->raw('not(where( __.out("DEFINITION").in("NEW")))');
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('EXTENDS')
+             )
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('NEW')
+             );
         $this->prepareQuery();
     }
 }

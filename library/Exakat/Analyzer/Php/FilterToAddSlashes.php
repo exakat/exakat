@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class FilterToAddSlashes extends Analyzer {
     public function analyze() {
-        $this->atomIs(array('Identifier', 'Nsname'))
+        //filter_var($var, FILTER_SANITIZE_MAGIC_QUOTES)
+        $this->atomIs(self::STATIC_NAMES)
              ->fullnspathIs('\FILTER_SANITIZE_MAGIC_QUOTES', self::CASE_SENSITIVE);
         $this->prepareQuery();
     }

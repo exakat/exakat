@@ -62,7 +62,7 @@ class MismatchTypeAndDefault extends Analyzer {
              ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
              ->atomIs($values, self::WITH_CONSTANTS)
              // In case we stay here, even after following the constants
-             ->atomIsNot(array('Nsname', 'Identifier'))
+             ->atomIsNot(self::STATIC_NAMES)
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')
@@ -116,7 +116,7 @@ GREMLIN
              ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
              ->atomIs($values, self::WITH_CONSTANTS)
              // In case we stay here, even after following the constants
-             ->atomIsNot(array('Nsname', 'Identifier'))
+             ->atomIsNot(self::STATIC_NAMES)
              ->savePropertyAs('label', 'type')
              ->back('arg')
              ->outIs('TYPEHINT')

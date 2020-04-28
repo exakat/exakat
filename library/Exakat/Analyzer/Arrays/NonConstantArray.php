@@ -36,7 +36,7 @@ class NonConstantArray extends Analyzer {
         $this->atomIs('Array')
              ->hasNoParent('String', 'CONCAT')
              ->outIs('INDEX')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->analyzerIsNot('Constants/IsExtConstant')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
@@ -46,7 +46,7 @@ class NonConstantArray extends Analyzer {
              ->hasParent(array('String', 'Heredoc'), 'CONCAT')
              ->tokenIs(array('T_DOLLAR_OPEN_CURLY_BRACES', 'T_CURLY_OPEN'))
              ->outIs('INDEX')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->analyzerIsNot('Constants/IsExtConstant')
              ->hasNoConstantDefinition();
         $this->prepareQuery();

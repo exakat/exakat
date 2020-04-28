@@ -34,7 +34,7 @@ class IdenticalMethods extends Analyzer {
         return;
         // class a           { public function foo() { /some code/ } }
         // class b extends a { public function foo() { /some code/ } }
-        $this->atomIs(self::FUNCTIONS_METHOD)
+        $this->atomIs(self::FUNCTIONS_METHODS)
              ->isNot('visibility', 'private')
              ->isNot('abstract', true)
              ->hasNoInterface()

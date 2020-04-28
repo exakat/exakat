@@ -56,7 +56,7 @@ class Extension extends Analyzer {
         }
 
         if (!empty($ini->constants)) {
-            $this->atomIs(array('Identifier', 'Nsname'))
+            $this->atomIs(self::STATIC_NAMES)
                  ->analyzerIs('Constants/ConstantUsage')
                  ->fullnspathIs(makeFullNsPath($ini->constants));
             $this->prepareQuery();
@@ -135,7 +135,7 @@ class Extension extends Analyzer {
         if (!empty($ini->namespaces)) {
             $namespaces = makeFullNsPath($ini->namespaces);
 
-            $usedNamespaces = array_intersect(self::getCalledNamespaces(), $namespaces);
+            $usedNamespaces = array_intersect($this->getCalledNamespaces(), $namespaces);
 
             if (!empty($usedNamespaces)) {
                 $usedNamespaces = array_values($usedNamespaces);

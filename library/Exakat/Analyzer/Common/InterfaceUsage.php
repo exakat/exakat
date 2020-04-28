@@ -37,26 +37,26 @@ class InterfaceUsage extends Analyzer {
 
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
         $this->atomIs('Interface')
              ->outIs('EXTENDS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))
              ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->fullnspathIs($interfaces);
@@ -64,7 +64,7 @@ class InterfaceUsage extends Analyzer {
 
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))
              ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->fullnspathIs($interfaces);
@@ -72,7 +72,7 @@ class InterfaceUsage extends Analyzer {
 
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
     }

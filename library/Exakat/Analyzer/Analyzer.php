@@ -141,9 +141,9 @@ abstract class Analyzer {
     public const FUNCTIONS        = array('Function', 'Closure', 'Arrowfunction');
     public const FUNCTIONS_METHOD = array('Method', 'Magicmethod');
 
-    public const CIT                = array('Class', 'Classanonymous', 'Interface', 'Trait');
+    public const CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     public const CLASSES_ALL      = array('Class', 'Classanonymous');
-    public const  CLASSES_TRAITS    = array('Class', 'Classanonymous', 'Trait');
+    public const CLASSES_TRAITS   = array('Class', 'Classanonymous', 'Trait');
     public const RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     public const STATIC_NAMES     = array('Nsname', 'Identifier');
     public const STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
@@ -759,68 +759,8 @@ GREMLIN;
         return $this;
     }
 
-    public function isMissingOrNull() {
-        $this->query->isMissingOrNull();
-
-        return $this;
-    }
-
     public function isNotHash($property, $hash, $index) {
         $this->query->isNotHash($property, $hash, $index);
-
-        return $this;
-    }
-
-    public function isNot($property, $value = true) {
-        $this->query->isNot($property, $value);
-
-        return $this;
-    }
-
-    public function isNotExtendingComposer() {
-        $this->query->IsNotExtendingComposer();
-
-        return $this;
-    }
-
-    public function isMore($property, $value = 0) {
-        $this->query->isMore($property, $value);
-
-        return $this;
-    }
-
-    public function isMoreHash($property, $hash, $index) {
-        $this->query->isMoreHash($property, $hash, $index);
-
-        return $this;
-    }
-
-    public function isLess($property, $value = 0) {
-        $this->query->isLess($property, $value);
-
-        return $this;
-    }
-
-    public function isLessHash($property, $hash, $index) {
-        $this->query->isLessHash($property, $hash, $index);
-
-        return $this;
-    }
-
-    public function isEqual($value = 0) {
-        $this->query->isEqual((int) $value);
-
-        return $this;
-    }
-
-    public function count() {
-        $this->query->count();
-
-        return $this;
-    }
-
-    public function outWithRank($link = 'ARGUMENT', $rank = 0) {
-        $this->query->outWithRank($link, $rank);
 
         return $this;
     }

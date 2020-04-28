@@ -58,7 +58,7 @@ class PregMatchAllFlag extends Analyzer {
         // Using explicit configuration
         $this->atomFunctionIs('\preg_match_all')
              ->outWithRank('ARGUMENT', 3)
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->fullnspathIsNot('\PREG_SET_ORDER')
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 2)

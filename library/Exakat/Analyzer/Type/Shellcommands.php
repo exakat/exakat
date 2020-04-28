@@ -25,10 +25,6 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Shellcommands extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
     public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
@@ -41,7 +37,7 @@ class Shellcommands extends Analyzer {
 
         // shell_exec('ls -1')
         $this->atomFunctionIs(array('\\exec', '\\shell_exec', '\\system', '\\proc_open'))
-             ->outWithRank('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('Concatenation', 'Heredoc', 'String'), self::WITH_CONSTANTS);
         $this->prepareQuery();
     }

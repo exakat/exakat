@@ -41,7 +41,7 @@ class WindowsOnlyConstants extends Analyzer {
 
         $fnp = makeFullnspath($constants, \FNP_CONSTANT);
 
-        $this->atomIs(array('Identifier', 'Nsname'))
+        $this->atomIs(self::STATIC_NAMES)
              ->fullnspathIs($fnp, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }

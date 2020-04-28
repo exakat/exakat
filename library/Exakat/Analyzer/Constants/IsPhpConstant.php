@@ -31,7 +31,7 @@ class IsPhpConstant extends Analyzer {
         $constantsFNP = makeFullNsPath($constants, true);
 
         // Namespaced constant (\PATHINFO_BASENAME)
-        $this->atomIs(array('Identifier', 'Nsname'))
+        $this->atomIs(self::STATIC_NAMES)
              ->fullnspathIs($constantsFNP, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
@@ -43,7 +43,7 @@ class IsPhpConstant extends Analyzer {
              ->fullnspathIs($constantsFNP);
         $this->prepareQuery();
 
-        $this->atomIs(array('Identifier', 'Nsname'))
+        $this->atomIs(self::STATIC_NAMES)
              ->analyzerIsNot('self')
              ->inIs('DEFINITION')
              ->hasNoIn('USE')

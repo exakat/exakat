@@ -138,7 +138,7 @@ class CalledByModule extends Analyzer {
 
         $this->atomIs('Class')
              ->outIs('EXTENDS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(self::STATIC_NAMES)
              ->is('fullnspath', $classes)
              ->back('first');
         $this->prepareQuery();

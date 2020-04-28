@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CantImplementTraversable extends Analyzer {
     public function analyze() {
         // class x implements traversable
-        $this->atomIs(array('Identifier', 'Nsname'))
+        $this->atomIs(self::STATIC_NAMES)
              ->fullnspathIs('\traversable')
              ->inIs(array('EXTENDS', 'IMPLEMENTS'));
         $this->prepareQuery();
