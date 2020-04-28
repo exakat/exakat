@@ -1279,7 +1279,7 @@ class Load extends Tasks {
         foreach($returnTypes as $returnType) {
             $this->addLink($fn, $returnType, 'RETURNTYPE');
             
-            if (!$returnType->isA('Void')) {
+            if (!$returnType->isA(array('Void'))) {
                 $returnTypeFullcode[] = $returnType->fullcode;
             }
         }
