@@ -64,6 +64,8 @@ class Load extends Tasks {
                                  'callable',
                                  'iterable',
                                  'object',
+                                 'false',
+                                 'null',
                                  );
     private $PHP_SUPERGLOBALS = array('$GLOBALS',
                                       '$_SERVER',
@@ -440,7 +442,7 @@ class Load extends Tasks {
                 $plugin->run($atom, $linked);
             }
         } catch (\Throwable $t) {
-//            print $t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine();
+            $this->log->log('Runplugin error : '.$t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine());
         }
     }
 
@@ -494,7 +496,7 @@ class Load extends Tasks {
                 }
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($filename, $e->getMessage());
-//                print "PHP reported an error : {$e->getMessage()}\n";
+                $this->log->log('Process File error : '.$e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getLine());
             }
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
@@ -2913,8 +2915,6 @@ class Load extends Tasks {
                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_NEW
             ) {
-//            $this->getFullnspath($string, 'class', $string);
-
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
                 $this->calls->addCall('class', $string->fullnspath, $string);
             }
@@ -5005,10 +5005,6 @@ class Load extends Tasks {
             $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
 
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
-            if (!empty($this->currentFunction)) {
-                $method = end($this->currentFunction);
-            }
-
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
 
             $operator = $this->popExpression();
