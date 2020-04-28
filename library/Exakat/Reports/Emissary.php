@@ -663,54 +663,56 @@ HTML;
             $percentAnalyzer = 100;
         }
 
-        $html = '<div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Project Overview</h3>
+        $html = <<<HTML
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Project Overview</h3>
+        </div>
+    
+        <div class="box-body chart-responsive">
+            <div class="row">
+                <div class="sub-div">
+                    <p class="title"><span># of PHP</span> files</p>
+                    <p class="value">{$info['Number of PHP files']}</p>
+                </div>
+                <div class="sub-div">
+                    <p class="title"><span>PHP</span> Used</p>
+                    <p class="value">{$info['PHP used']}</p>
+                 </div>
+            </div>
+            <div class="row">
+                <div class="sub-div">
+                    <p class="title"><span>PHP</span> LoC</p>
+                    <p class="value">{$info['Number of lines of code']}</p>
+                </div>
+                <div class="sub-div">
+                    <p class="title"><span>Total</span> LoC</p>
+                    <p class="value">{$info['Number of lines of code with comments']}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sub-div">
+                    <div class="title">Files free of issues (%)</div>
+                    <div class="progress progress-sm">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {$percentFile}%">
+                            {$totalFileSansError}
+                        </div><div style="color:black; text-align:center;">{$totalFileAnalysed}</div>
                     </div>
-
-                    <div class="box-body chart-responsive">
-                        <div class="row">
-                            <div class="sub-div">
-                                <p class="title"><span># of PHP</span> files</p>
-                                <p class="value">' . $info['Number of PHP files'] . '</p>
-                            </div>
-                            <div class="sub-div">
-                                <p class="title"><span>PHP</span> Used</p>
-                                <p class="value">' . $info['PHP used'] . '</p>
-                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="sub-div">
-                                <p class="title"><span>PHP</span> LoC</p>
-                                <p class="value">' . $info['Number of lines of code'] . '</p>
-                            </div>
-                            <div class="sub-div">
-                                <p class="title"><span>Total</span> LoC</p>
-                                <p class="value">' . $info['Number of lines of code with comments'] . '</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="sub-div">
-                                <div class="title">Files free of issues (%)</div>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentFile . '%">
-                                        ' . $totalFileSansError . '
-                                    </div><div style="color:black; text-align:center;">' . $totalFileAnalysed . '</div>
-                                </div>
-                                <div class="pourcentage">' . $percentFile . '%</div>
-                            </div>
-                            <div class="sub-div">
-                                <div class="title">Analyzers free of issues (%)</div>
-                                <div class="progress progress-sm active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentAnalyzer . '%">
-                                        ' . $totalAnalyzerWithoutError . '
-                                    </div><div style="color:black; text-align:center;">' . $totalAnalyzerReporting . '</div>
-                                </div>
-                                <div class="pourcentage">' . $percentAnalyzer . '%</div>
-                            </div>
-                        </div>
+                    <div class="pourcentage">{$percentFile}%</div>
+                </div>
+                <div class="sub-div">
+                    <div class="title">Analyzers free of issues (%)</div>
+                    <div class="progress progress-sm active">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {$percentAnalyzer}%">
+                            {$totalAnalyzerWithoutError}
+                        </div><div style="color:black; text-align:center;">{$totalAnalyzerReporting}</div>
                     </div>
-                </div>';
+                    <div class="pourcentage">{$percentAnalyzer}%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+HTML;
 
         return $html;
     }

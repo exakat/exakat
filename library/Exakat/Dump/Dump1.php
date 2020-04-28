@@ -316,7 +316,15 @@ SQL;
     public function getAnalyzedFiles(array $list) : int {
         $list = makeList($list);
 
-        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' AND analyzer IN ($list)";
+        $query = <<<SQL
+SELECT COUNT(DISTINCT results.file) 
+                            FROM results 
+                            JOIN files 
+                                ON files.file = results.file
+                            WHERE results.file != 'None'               AND 
+                                  results.file LIKE '/%'               AND 
+                                  analyzer IN ($list)
+SQL;
         $result = $this->sqlite->querySingle($query);
 
         return $result;
