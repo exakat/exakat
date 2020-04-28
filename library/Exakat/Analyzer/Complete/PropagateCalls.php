@@ -55,6 +55,7 @@ class PropagateCalls extends Complete {
     }
 
     private function processLocalDefinition(): int {
+        //$a = new A; $a->method()
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
@@ -79,11 +80,14 @@ class PropagateCalls extends Complete {
                        ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
                        ->inIs('NAME')
                        ->range(0, 1)
+                       ->as('origin')
+                       ->dedup(array('first', 'origin'))
                        ->addETo('DEFINITION', 'first')
                 )
               ->count();
-       $c1 = $this->rawQuery()->toInt();
+        $c1 = $this->rawQuery()->toInt();
 
+        //$a = new A; $a->property
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('MEMBER')
@@ -102,6 +106,8 @@ class PropagateCalls extends Complete {
               ->outIs('PPP')
               ->outIs('PPP')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
+              ->as('origin')
+              ->dedup(array('first', 'origin'))
               ->addETo('DEFINITION', 'first')
               ->count();
        $c2 = $this->rawQuery()->toInt();

@@ -29,6 +29,7 @@ class CouldTypeWithArray extends Analyzer {
     public function analyze() {
         // function foo($a) { $a[1] = 2; $a[] = 2}
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -41,6 +42,7 @@ class CouldTypeWithArray extends Analyzer {
 
         // function foo($a) { bar($a); } function bar(int $b) {}
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -62,6 +64,7 @@ class CouldTypeWithArray extends Analyzer {
         // function foo($a) { }; only foo(array())
         // function foo($a) { }; only foo((array))
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -90,6 +93,7 @@ class CouldTypeWithArray extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')

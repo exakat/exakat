@@ -35,6 +35,7 @@ class CouldTypeWithInt extends Analyzer {
 
         // function foo($a) { $a + 1; }
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -49,6 +50,7 @@ class CouldTypeWithInt extends Analyzer {
         // function foo($a) { }; only foo(1)
         // function foo($a) { }; only foo((int))
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -78,6 +80,7 @@ class CouldTypeWithInt extends Analyzer {
 
         // function foo($a) { bar($a); } function bar(int $b) {}
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -97,6 +100,7 @@ class CouldTypeWithInt extends Analyzer {
         $natives = $this->methods->getFunctionsByArgType('int', Methods::STRICT);
 
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')

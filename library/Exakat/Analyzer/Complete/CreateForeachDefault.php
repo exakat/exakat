@@ -44,6 +44,8 @@ class CreateForeachDefault extends Complete {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
+             ->as('string')
+             ->dedup(array('v', 'string'))
              ->addEFrom('DEFAULT', 'v');
         $this->prepareQuery();
 
@@ -62,6 +64,8 @@ class CreateForeachDefault extends Complete {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIs('INDEX')
+             ->as('string')
+             ->dedup(array('v', 'string'))
              ->addEFrom('DEFAULT', 'v');
         $this->prepareQuery();
     }

@@ -30,6 +30,7 @@ class CouldTypeWithString extends Analyzer {
 
         // function foo($a) { $a . "b"; }
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -43,6 +44,7 @@ class CouldTypeWithString extends Analyzer {
 
         // function foo($a) { bar($a); } function bar(string $b) {}
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -61,6 +63,7 @@ class CouldTypeWithString extends Analyzer {
         // function foo($a) { }; only foo("f")
         // function foo($a) { }; only foo((string))
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')
@@ -92,6 +95,7 @@ class CouldTypeWithString extends Analyzer {
         $natives = $this->methods->getFunctionsByArgType('string', Methods::STRICT);
 
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first')

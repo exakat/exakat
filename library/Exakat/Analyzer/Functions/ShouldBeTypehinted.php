@@ -29,6 +29,7 @@ class ShouldBeTypehinted extends Analyzer {
     public function analyze() {
         // spotting objects with property
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->hasNoIn('RIGHT')
@@ -43,6 +44,7 @@ class ShouldBeTypehinted extends Analyzer {
 
         // spotting array with array[index]
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->hasNoIn('RIGHT')
@@ -63,6 +65,7 @@ class ShouldBeTypehinted extends Analyzer {
 
         // spotting array in a functioncall
         $this->atomIs('Parameter')
+             ->analyzerIsNot('self')
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->hasNoIn('RIGHT')

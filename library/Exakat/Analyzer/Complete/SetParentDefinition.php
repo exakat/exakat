@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Complete;
 
 class SetParentDefinition extends Complete {
     public function analyze() {
+        //parent:: -> class -> extends
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
              ->hasNoIn('DEFINITION')
              ->goToClass()
@@ -32,7 +33,9 @@ class SetParentDefinition extends Complete {
              ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
+        //new parent -> class -> extends
         $this->atomIs('Newcall', self::WITHOUT_CONSTANTS)
+             ->analyzerIsNot('self')
              ->hasNoIn('DEFINITION')
              ->fullnspathIs('\\parent', self::CASE_SENSITIVE)
              ->goToClass()
@@ -41,6 +44,7 @@ class SetParentDefinition extends Complete {
              ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
+        //parent::$property
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
              ->as('parent')
              ->inIs('CLASS')
@@ -61,6 +65,7 @@ class SetParentDefinition extends Complete {
              ->addETo('DEFINITION', 'property');
         $this->prepareQuery();
 
+        // parent::constant
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
              ->as('parent')
              ->inIs('CLASS')

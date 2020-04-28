@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Complete;
 
 class SetClassPropertyDefinitionWithTypehint extends Complete {
     public function analyze() {
+        // $object->property->method()
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->as('property')
               ->outIs('DEFINITION')
@@ -45,6 +46,7 @@ class SetClassPropertyDefinitionWithTypehint extends Complete {
               ->addETo('DEFINITION', 'call');
         $this->prepareQuery();
 
+        // $object->property->property2
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->as('property')
               ->outIs('DEFINITION')
@@ -65,6 +67,7 @@ class SetClassPropertyDefinitionWithTypehint extends Complete {
               ->addETo('DEFINITION', 'call');
         $this->prepareQuery();
 
+        // $object->property::constant
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->as('property')
               ->outIs('DEFINITION')
