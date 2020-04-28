@@ -26,6 +26,7 @@ namespace Exakat\Query\DSL;
 
 class IsEqual extends DSL {
     public function run() {
+        assert(func_num_args() === 1, 'Wrong number of argument for '.__METHOD__.'. 1 is expected, '.func_num_args().' provided');
         list($value) = func_get_args();
 
         return new Command("is(eq($value))");

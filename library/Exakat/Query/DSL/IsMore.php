@@ -26,6 +26,7 @@ namespace Exakat\Query\DSL;
 
 class IsMore extends DSL {
     public function run() {
+        assert(func_num_args() === 2, 'Wrong number of argument for '.__METHOD__.'. 2 are expected, '.func_num_args().' provided');
         list($value1, $value2) = func_get_args();
 
         $g1 = $this->makeGremlin($value1);
