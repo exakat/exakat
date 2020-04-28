@@ -187,7 +187,7 @@ class Files extends Tasks {
             if ($i >= 60) {
                 break 1;
             }
-        };
+        }
         // TODO : log it when
 
         foreach($files as $file) {
@@ -321,7 +321,7 @@ class Files extends Tasks {
 
         $exts = $config->file_extensions;
 
-        $notIgnored = preg_grep($ignoreDirsRegex, $allFiles, PREG_GREP_INVERT);
+        $notIgnored = preg_grep($ignoreDirsRegex, $allFiles, \PREG_GREP_INVERT);
 
         if (empty($includeDirsRegex)) {
             $files = $notIgnored;
