@@ -142,6 +142,8 @@ class Appinfo extends Data {
                             'Scalar Typehint'             => 'Php/ScalarTypehintUsage',
                             'Return Typehint'             => 'Php/ReturnTypehintUsage',
                             'Nullable Typehint'           => 'Php/UseNullableType',
+                            'PHP 8.0 Scalar Typehints'    => 'Php/Php80OnlyTypeHints',
+                            'PHP 8.0 Union Typehints'     => 'Php/Php80OnlyTypeHints',
                             'Static variables'            => 'Variables/StaticVariables',
 
                             'Function dereferencing'      => 'Structures/FunctionSubscripting',
