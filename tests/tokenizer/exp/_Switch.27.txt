@@ -115,5 +115,5 @@ Label : PROJECT
                     20
           Label : CONDITION
             6
-  Label : RETURNED, RETURNED
+  Label : RETURNED
     30

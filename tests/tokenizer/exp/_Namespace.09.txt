@@ -41,12 +41,6 @@ Label : PROJECT
                   17
                 Label : RETURNED
                   21
-                Label : RETURNED
-                  24
-                  Label : MEMBER
-                    22
-                  Label : OBJECT
-                    21
                 Label : RETURNTYPE
                   15
               Label : METHOD
@@ -85,12 +79,6 @@ Label : PROJECT
                   25
                 Label : RETURNED
                   30
-                Label : RETURNED
-                  24
-                  Label : MEMBER
-                    31
-                  Label : OBJECT
-                    30
                 Label : RETURNTYPE
                   15
           Label : NAME

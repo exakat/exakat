@@ -35,5 +35,3 @@ Label : PROJECT
                 10
             Label : EXPRESSION
               10
-  Label : RETURNED
-    10

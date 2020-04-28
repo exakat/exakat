@@ -67,7 +67,7 @@ Label : PROJECT
                   15
               Label : THEN
                 3
-                Label : EXPRESSION, EXPRESSION
+                Label : EXPRESSION
                   17
                   Label : CONTINUE
                     11
