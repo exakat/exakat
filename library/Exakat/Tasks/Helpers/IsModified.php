@@ -64,7 +64,7 @@ class IsModified extends Plugin {
 
             case 'List' :
             case 'Unset' :
-                foreach($extras as &$extra) {
+                foreach($extras as $extra) {
                     if (in_array($extra->atom, $this->variables)) {
                         $extra->isModified = true;
                     }

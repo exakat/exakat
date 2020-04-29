@@ -278,7 +278,7 @@ class IsRead extends Plugin {
             case 'Empty' :
             case 'Print' :
             case 'Sequence' :
-                foreach($extras as &$extra) {
+                foreach($extras as $extra) {
                     if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {
                         $extra->isRead = true;
                     }
@@ -301,7 +301,7 @@ class IsRead extends Plugin {
             case 'Heredoc' :
             case 'String' :
             case 'Shell' :
-                foreach($extras as &$extra) {
+                foreach($extras as $extra) {
                     if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {
                         $extra->isRead = true;
                     }
