@@ -39,12 +39,13 @@ class ScalarOrObjectProperty extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
              ->as('results')
+             ->analyzerIsNot('self')
              ->outIs('DEFAULT')
+             ->atomIsNot(array('Void', 'Null'))
              ->isLiteral()
-             ->atomIsNot('Null')
              ->inIs('DEFAULT')
              ->outIs('DEFINITION')
-             ->inIs('OBJECT') // Good for methodcall and properties
+             ->inIs(array('OBJECT', 'CLASS')) // Good for methodcall and properties
              ->back('results');
         $this->prepareQuery();
 
@@ -52,6 +53,7 @@ class ScalarOrObjectProperty extends Analyzer {
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
+             ->analyzerIsNot('self')
              ->as('results')
 
              ->outIs('DEFAULT')
@@ -66,10 +68,30 @@ class ScalarOrObjectProperty extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
+        // Property with typehint, assigned as literal
+        $this->atomIs(self::CLASSES_ALL)
+             ->outIs('PPP')
+             ->outIs('TYPEHINT')
+             ->atomisNot('Void')
+             ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
+             ->inIs('TYPEHINT')
+             ->outIs('PPP')
+             ->analyzerIsNot('self')
+             ->as('results')
+
+             ->outIs('DEFAULT')
+             ->hasIn('RIGHT')
+             ->atomIs(self::LITERALS) // Another definition is a literal
+             ->atomIsNot('Null')
+
+             ->back('results');
+        $this->prepareQuery();
+
         // Property defined as object, assigned as literal (methodcall version)
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')
+             ->analyzerIsNot('self')
              ->as('results')
 
              ->outIs('DEFAULT')

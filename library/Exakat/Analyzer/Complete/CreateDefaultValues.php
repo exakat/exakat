@@ -33,12 +33,18 @@ class CreateDefaultValues extends Complete {
                             'Propertydefinition',
                             'Parametername',
                             ), self::WITHOUT_CONSTANTS)
-             ->hasNoOut('DEFAULT')
-             ->as('results')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFAULT')
+                             ->hasIn('RIGHT')
+                     )
+             )
              ->outIs('DEFINITION')
              ->inIs('LEFT')
              ->atomIs('Assignation', self::WITHOUT_CONSTANTS)
-             ->codeIs(array('=', '??='), self::TRANSLATE, self::CASE_SENSITIVE)
+             ->codeIs(array('=', '??='), self::TRANSLATE, self::CASE_SENSITIVE) // can't accept .=, +=, etc.
              ->followParAs('RIGHT')
 
              ->addEFrom('DEFAULT', 'first');
