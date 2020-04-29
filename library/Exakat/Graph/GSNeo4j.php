@@ -122,16 +122,7 @@ class GSNeo4j extends Graph {
             $this->checkConfiguration();
         }
 
-        $res = $this->query($query, $params, $load);
-        if (!($res instanceof stdClass) || !isset($res->results)) {
-            throw new GremlinException('Server is not responding');
-        }
-
-        if (is_array($res->results)) {
-            return $res->results[0];
-        } else {
-            return $res->results;
-        }
+        return $this->query($query, $params, $load);
     }
 
     public function checkConnection(): bool {
