@@ -28,7 +28,7 @@ use Exakat\Autoload\Autoloader;
 class Rulesets implements RulesetsInterface {
     private $main   = null;
     private $ext    = null;
-    private $extra  = array();
+    private $extra  = null;
     private $dev    = null;
 
     private static $instanciated = array();

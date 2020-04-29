@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Modules;
 use Exakat\Analyzer\Analyzer;
 
 class NativeReplacement extends Analyzer {
-    protected $replacements = array();
+    protected $replacements = null;
 
     public function analyze() {
         $this->replacements = $this->loadJson('native_replacement.json');
