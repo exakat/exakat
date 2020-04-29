@@ -1622,6 +1622,7 @@ GREMLIN
 
     public function execQuery(): int {
         if (empty($this->queries)) {
+            $this->gremlin->query("g.V({$this->analyzerId}).property(\"count\", g.V({$this->analyzerId}).out(\"ANALYZED\").count())", array());
             return 0;
         }
 
