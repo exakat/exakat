@@ -271,12 +271,10 @@ class IsRead extends Plugin {
             case 'Methodcallname' :
             case 'Arrayliteral' :
             case 'Functioncall' :
-            case 'Methodcall' :
             case 'Newcall' :
             case 'Echo' :
             case 'Exit' :
             case 'Eval' :
-//            case 'Isset' : isset() doesn't read the variable. Just checks its existence
             case 'Empty' :
             case 'Print' :
             case 'Sequence' :
@@ -310,6 +308,7 @@ class IsRead extends Plugin {
                 }
                 break;
 
+//            case 'Isset' : isset() doesn't read the variable. Just checks its existence
             default :
 //            print $atom->atom.PHP_EOL;
         }
