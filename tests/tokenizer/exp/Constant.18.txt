@@ -1,0 +1,63 @@
+test
+Label : GLOBAL
+  17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+Label : PROJECT
+  1
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              9
+              Label : CONST
+                10
+              Label : USE
+                11
+                Label : DEFINITION
+                  11
+            Label : EXPRESSION
+              9
+              Label : CONST
+                10
+              Label : USE
+                13
+                Label : DEFINITION
+                  21
+            Label : EXPRESSION
+              9
+              Label : FUNCTION
+                15
+              Label : USE
+                16
+                Label : DEFINITION
+                  16
+            Label : EXPRESSION
+              16
+              Label : ARGUMENT
+                17
+              Label : NAME
+                16
+            Label : EXPRESSION
+              20
+              Label : ARGUMENT
+                11
+            Label : EXPRESSION
+              20
+              Label : ARGUMENT
+                21
+          Label : NAME
+            5

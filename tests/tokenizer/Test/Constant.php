@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Constant extends Tokenizer {
-    /* 17 methods */
+    /* 18 methods */
     public function testConstant01()  { $this->generic_test('Constant.01'); }
     public function testConstant02()  { $this->generic_test('Constant.02'); }
     public function testConstant03()  { $this->generic_test('Constant.03'); }
@@ -26,5 +26,6 @@ class Constant extends Tokenizer {
     public function testConstant16()  { $this->generic_test('Constant.16'); }
 
     public function testConstant17()  { $this->generic_test('Constant.17'); }
+    public function testConstant18()  { $this->generic_test('Constant.18'); }
 }
 ?>
