@@ -39,10 +39,11 @@ class IsExtInterface extends Analyzer {
             }
         }
 
+        $interfaces = array_merge(...$interfaces);
         if (empty($interfaces)) {
             return;
         }
-        $interfaces = array_merge(...$interfaces);
+
         $interfaces = makeFullNsPath($interfaces);
 
         $this->atomIs('Class')

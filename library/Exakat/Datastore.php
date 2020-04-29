@@ -165,7 +165,7 @@ class Datastore {
         return true;
     }
 
-    public function deleteRow(string $table, iterable $data): bool {
+    public function deleteRow(string $table, array $data): bool {
         if (empty($data)) {
             return true;
         }

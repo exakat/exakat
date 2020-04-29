@@ -23,7 +23,6 @@ declare(strict_types = 1);
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
 
 class PropagateConstants extends Complete {
     public function analyze() {
@@ -31,11 +30,11 @@ class PropagateConstants extends Complete {
 
         $this->pushConstantValues();
         $count = $this->PropagateConstants();
-        
+
         $this->setCount($count);
     }
 
-    private function propagateConstants(int $level = 0) : int {
+    private function propagateConstants(int $level = 0): int {
         $total = 0;
 
         //Currently handles + - * / % . << >> ** ()
@@ -60,7 +59,7 @@ class PropagateConstants extends Complete {
         if ($total > 0 && $level < 15) {
             $total += $this->propagateConstants($level + 1);
         }
-        
+
         return $total;
     }
 

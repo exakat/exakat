@@ -44,10 +44,11 @@ class CustomConstantUsage extends Analyzer {
             }
         }
 
+        $constants = array_merge(...$constants);
         if (empty($constants)) {
             return;
         }
-        $constants = array_merge(...$constants);
+
         $constants = makeFullNsPath($constants);
 
         // @note NSnamed are OK by default (may be not always!)

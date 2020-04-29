@@ -73,7 +73,7 @@ class UselessParenthesis extends Analyzer {
                 $this->side()
                      ->outIs('CODE')
                      ->atomIs('Logical')
-                     ->tokenIs(array("T_LOGICAL_XOR", "T_LOGICAL_AND", "T_LOGICAL_OR"))
+                     ->tokenIs(array('T_LOGICAL_XOR', 'T_LOGICAL_AND', 'T_LOGICAL_OR'))
              );
         $this->prepareQuery();
 

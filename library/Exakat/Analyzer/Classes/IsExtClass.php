@@ -45,11 +45,11 @@ class IsExtClass extends Analyzer {
             }
         }
 
-        if (empty($c)) {
+        $classes = array_merge(...$c);
+        if (empty($classes)) {
             return;
         }
 
-        $classes = array_merge(...$c);
         $classes = makeFullNsPath($classes);
         $classes = array_keys(array_count_values($classes));
 

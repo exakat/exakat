@@ -25,7 +25,7 @@ namespace Exakat\Tasks\Helpers;
 
 class Strval extends Plugin {
     const NO_VALUE = null;
-    
+
     public $name = 'noDelimiter';
     public $type = 'string';
 

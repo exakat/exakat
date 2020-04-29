@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetClassMethodRemoteDefinition extends Complete {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetParentDefinition',
                     );
     }

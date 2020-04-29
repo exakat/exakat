@@ -122,7 +122,7 @@ class Atom {
         $this->flexible      = $this->flexible ? 1 : null;
         $this->close_tag     = $this->close_tag ? 1 : null;
         $this->aliased       = $this->aliased ? 1 : null;
-        
+
         if ($this->intval > 2147483647) {
             $this->intval = 2147483647;
         }
@@ -209,7 +209,7 @@ class Atom {
             }
             $properties[$l] = array( new Property($id++, $value) );
         }
-        
+
         $object = array('id'         => $this->id,
                         'label'      => $this->atom,
                         'inE'        => new \stdClass(),

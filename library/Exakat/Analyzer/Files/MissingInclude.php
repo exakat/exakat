@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingInclude extends Analyzer {
     protected $constant_or_variable_name = 100;
-    
+
     public function analyze() {
         $files = array_merge($this->datastore->getCol('files', 'file'),
                              $this->datastore->getCol('ignoredFiles', 'file'));
@@ -59,7 +59,7 @@ class MissingInclude extends Analyzer {
             array_collect_by($inclusions, $row['file'], $notFound);
         }
         $missing = array_keys($missing);
-        
+
         if (empty($missing)) {
             return;
         }

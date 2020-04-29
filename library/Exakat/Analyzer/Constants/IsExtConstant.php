@@ -45,11 +45,12 @@ class IsExtConstant extends Analyzer {
             }
         }
 
+        $constants = array_merge(...$constants);
         if (empty($constants)) {
             // This won't happen, unless the above reading has failed
             return;
         }
-        $constants = array_merge(...$constants);
+
         $constants = array_unique($constants);
         $constants = array_values($constants);
         $constantsFullNs = makeFullNsPath($constants, \FNP_CONSTANT);

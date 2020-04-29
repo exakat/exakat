@@ -357,13 +357,13 @@ GREMLIN
         $saved = $this->dump->addResults($toDump);
         $saved = $saved[$class];
 
-        $this->log->log("$class : dumped ".$saved);
+        $this->log->log("$class : dumped " . $saved);
 
         if ($count === $saved) {
-            display("All ".$saved." results saved for $class\n");
+            display('All ' . $saved . " results saved for $class\n");
         } else {
-            assert($count === $saved, "'results were not correctly dumped in $class : ".$saved."/$count");
-            display("".$saved." results saved, $count expected for $class\n");
+            assert($count === $saved, "'results were not correctly dumped in $class : " . $saved . "/$count");
+            display('' . $saved . " results saved, $count expected for $class\n");
         }
     }
 

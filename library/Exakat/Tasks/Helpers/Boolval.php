@@ -26,7 +26,7 @@ namespace Exakat\Tasks\Helpers;
 
 class Boolval extends Plugin {
     const NO_VALUE = null;
-    
+
     public $name = 'boolean';
     public $type = 'boolean';
 

@@ -38,7 +38,7 @@ class Command {
         $c = substr_count($command, '***');
 
         assert(is_array($args), "Args is not an array : ($command)." . print_r($args, true));
-        assert($c === count($args), "Wrong number of arguments for Command : $c placeholders, " . count($args) . " provided. ($command)\n".print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true));
+        assert($c === count($args), "Wrong number of arguments for Command : $c placeholders, " . count($args) . " provided. ($command)\n" . print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true));
 
         $arguments = array();
         foreach($args as $arg) {

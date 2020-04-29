@@ -27,7 +27,7 @@ class Range extends DSL {
     public function run(): Command {
         list($min, $max) = func_get_args();
 
-        return new Command('range('.(int) $min.', '.(int) $max.')');
+        return new Command('range(' . (int) $min . ', ' . (int) $max . ')');
     }
 }
 ?>

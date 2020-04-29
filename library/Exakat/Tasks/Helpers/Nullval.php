@@ -26,7 +26,7 @@ namespace Exakat\Tasks\Helpers;
 
 class Nullval extends Plugin {
     const NO_VALUE = null;
-    
+
     public $name = 'isNull';
     public $type = 'boolean';
 

@@ -154,7 +154,7 @@ class Results {
             $first = array_keys($this->values[0])[0];
             return $this->values[0][$first];
         } else {
-            return (string) $this->values[0][$col] ?? '';
+            return (string) ($this->values[0][$col] ?? '');
         }
     }
 

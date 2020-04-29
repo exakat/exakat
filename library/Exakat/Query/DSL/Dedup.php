@@ -36,7 +36,7 @@ class Dedup extends DSL {
             foreach($by as $b) {
                 assert($this->assertLabel($b));
             }
-            return new Command('dedup('.makeList($by).')');
+            return new Command('dedup(' . makeList($by) . ')');
         }
 
         assert($this->assertProperty($by));

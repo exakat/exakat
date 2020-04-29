@@ -144,7 +144,7 @@ class Doctor extends Tasks {
             $stats['java']['error'] = $res;
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         }
-        $stats['java']['$JAVA_HOME'] = getenv('JAVA_HOME') ?? '<none>';
+        $stats['java']['$JAVA_HOME'] = getenv('JAVA_HOME') ? getenv('JAVA_HOME') : '<none>';
         $stats['java']['$JAVA_OPTIONS'] = getenv('JAVA_OPTIONS') ?? ' (set $JAVA_OPTIONS="-Xms32m -Xmx****m", with **** = RAM in Mb. The more the better.';
 
         $stats['tinkergraph'] = $this->getTinkerGraph();

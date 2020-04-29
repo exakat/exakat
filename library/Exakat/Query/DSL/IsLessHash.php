@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 
 class IsLessHash extends DSL {
     public function run() {
-        assert(func_num_args() === 3, 'Wrong number of argument for '.__METHOD__.'. 3 are expected, '.func_num_args().' provided');
+        assert(func_num_args() === 3, 'Wrong number of argument for ' . __METHOD__ . '. 3 are expected, ' . func_num_args() . ' provided');
         list($property, $hash, $index) = func_get_args();
 
         if (empty($hash)) {

@@ -442,7 +442,7 @@ class Load extends Tasks {
                 $plugin->run($atom, $linked);
             }
         } catch (\Throwable $t) {
-            $this->log->log('Runplugin error : '.$t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine());
+            $this->log->log('Runplugin error : ' . $t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine());
         }
     }
 
@@ -496,7 +496,7 @@ class Load extends Tasks {
                 }
             } catch (NoFileToProcess $e) {
                 $this->datastore->ignoreFile($filename, $e->getMessage());
-                $this->log->log('Process File error : '.$e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getLine());
+                $this->log->log('Process File error : ' . $e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getLine());
             }
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
@@ -764,7 +764,7 @@ class Load extends Tasks {
             $error['file'] = $filename;
 
             $version = $this->php->getVersion();
-            $this->datastore->addRow('compilation'.$version[0].$version[2], array($error));
+            $this->datastore->addRow('compilation' . $version[0] . $version[2], array($error));
 
             return 0;
         }
@@ -1280,7 +1280,7 @@ class Load extends Tasks {
         $returnTypeFullcode = array();
         foreach($returnTypes as $returnType) {
             $this->addLink($fn, $returnType, 'RETURNTYPE');
-            
+
             if (!$returnType->isA(array('Void'))) {
                 $returnTypeFullcode[] = $returnType->fullcode;
             }
@@ -1621,9 +1621,7 @@ class Load extends Tasks {
 
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
             $cpm = $this->processNext();
-            if (empty($cpm)) {
-                continue;
-            }
+
             $this->popExpression();
 
             $cpm->rank = ++$rank;
@@ -2043,7 +2041,7 @@ class Load extends Tasks {
             $this->getFullnspath($nsname, 'class', $nsname);
 
             $this->calls->addCall('class', $nsname->fullnspath, $nsname);
-        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW) && 
+        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW) &&
                   $this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
             $this->getFullnspath($nsname, 'class', $nsname);
             $this->calls->addCall('class', $nsname->fullnspath, $nsname);
@@ -3859,9 +3857,10 @@ class Load extends Tasks {
         $current = $this->id;
         ++$this->id; // Skip (
 
-        while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
+        do {
             $condition = $this->processNext();
-        }
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS);
+
         $this->popExpression();
         $this->addLink($ifthen, $condition, 'CONDITION');
         $extras = array('CONDITION' => $condition);
@@ -6138,7 +6137,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
                 } else {
-                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (array $r) : string {
+                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (array $r): string {
                         return mb_strtolower($r[1]) . '\\' . $r[2];
                     }, $name->fullcode);
                     $apply->fullnspath = $fullnspath;
@@ -6150,7 +6149,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
             }
-        } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', "This"))) {
+        } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', 'This'))) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
                     $apply->aliased = self::NOT_ALIASED;
@@ -6295,7 +6294,7 @@ class Load extends Tasks {
         }
     }
 
-    private function setNamespace($namespace = self::NO_NAMESPACE) : void {
+    private function setNamespace($namespace = self::NO_NAMESPACE): void {
         if ($namespace === self::NO_NAMESPACE) {
             $this->namespace = '\\';
             $this->uses = new Fullnspaths();
@@ -6335,7 +6334,7 @@ class Load extends Tasks {
         return $alias;
     }
 
-    private function logTime(string $step) : void {
+    private function logTime(string $step): void {
         static $begin, $end, $start;
 
         if ($this->logTimeFile === null) {
@@ -6352,7 +6351,7 @@ class Load extends Tasks {
         $begin = $end;
     }
 
-    private function makeAnonymous(string $type = 'class') : string {
+    private function makeAnonymous(string $type = 'class'): string {
         static $anonymous = 'a';
 
         if (!in_array($type, array('class', 'function', 'arrowfunction'), \STRICT_COMPARISON)) {
@@ -6363,7 +6362,7 @@ class Load extends Tasks {
         return "$type@$anonymous";
     }
 
-    private function finishWithAlternative(bool $isColon) : void {
+    private function finishWithAlternative(bool $isColon): void {
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
             ++$this->id; // Skip endforeach
             if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -6387,7 +6386,7 @@ class Load extends Tasks {
         }
     }
 
-    private function whichSyntax(int $current, int $colon) : bool {
+    private function whichSyntax(int $current, int $colon): bool {
         return in_array($this->tokens[$current][0], array($this->phptokens::T_FOR,
                                                           $this->phptokens::T_FOREACH,
                                                           $this->phptokens::T_WHILE,
@@ -6402,7 +6401,7 @@ class Load extends Tasks {
                 self::NORMAL_SYNTAX;
     }
 
-    private function makeGlobal(Atom $element) : void {
+    private function makeGlobal(Atom $element): void {
         if ($element->atom === 'Globaldefinition') {
             $name = $element->code;
         } elseif ($element->atom === 'Variabledefinition') {

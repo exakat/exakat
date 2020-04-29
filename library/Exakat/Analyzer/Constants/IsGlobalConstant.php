@@ -44,10 +44,11 @@ class IsGlobalConstant extends Analyzer {
             }
         }
 
-        if (empty($c)) {
+        $constants = array_merge(...$c);
+        if (empty($constants)) {
             return ;
         }
-        $constants = array_merge(...$c);
+
         $constants = array_unique($constants);
         $constants = array_values($constants);
         $constantsFullNs = makeFullNsPath($constants, \FNP_CONSTANT);

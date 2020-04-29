@@ -47,9 +47,9 @@ class RulesetsExtra implements RulesetsInterface {
 
             if (empty($return)) {
                 return array();
-            } else {
-                return array_unique(array_merge(...$return));
             }
+
+            return array_unique(array_merge(...$return));
         }
     }
 

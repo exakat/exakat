@@ -64,7 +64,7 @@ class AutoloadDev implements Autoloader {
 
         $ini = parse_ini_file($fullPath);
 
-        return $ini ?? array();
+        return $ini === false ? array() : $ini;
     }
 
     public function loadIni($name, $libel = self::LOAD_ALL) {

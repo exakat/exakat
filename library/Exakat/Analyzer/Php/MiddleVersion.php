@@ -53,7 +53,7 @@ class MiddleVersion extends Analyzer {
         // bugfixes based on analyzers
         $analyzers = array_column($this->bugfixes, 'analyzer');
         $available = array_filter($analyzers);
-        
+
         $this->analyzerIs($available)
              ->analyzerIsNot('self')
              ->ignore();

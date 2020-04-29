@@ -99,7 +99,7 @@ class Dictionary {
         if (preg_match('/ > (\d+)/', $length, $r)) {
             $closure = function (string $s) use ($r) { return strlen($s) > $r[1]; };
         } elseif (preg_match('/ == (\d+)/', $length, $r)) {
-            $closure = function (string $s) use ($r) { return strlen($s) === $r[1]; };
+            $closure = function (string $s) use ($r) { return strlen($s) === (int) $r[1]; };
         } elseif (preg_match('/ < (\d+)/', $length, $r)) {
             $closure = function (string $s) use ($r) { return strlen($s) < $r[1]; };
         } else {
