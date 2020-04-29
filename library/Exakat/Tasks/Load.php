@@ -567,7 +567,7 @@ class Load extends Tasks {
                      'tokens' => $nbTokens);
     }
 
-    private function runProjectCore($files): int {
+    private function runProjectCore(array $files): int {
         $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
         display("Loading with $clientClass\n");
         if (!class_exists($clientClass)) {
@@ -603,7 +603,7 @@ class Load extends Tasks {
         return $nbTokens;
     }
 
-    private function runCollector($omittedFiles): void {
+    private function runCollector(array $omittedFiles): void {
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->loader = new Collector($this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
@@ -632,7 +632,7 @@ class Load extends Tasks {
         $this->stats = $stats;
     }
 
-    private function processDir($dir): array {
+    private function processDir(string $dir): array {
         if (!file_exists($dir)) {
             return array('files'  => -1,
                          'tokens' => -1);
@@ -1517,7 +1517,7 @@ class Load extends Tasks {
         return $function;
     }
 
-    private function processOneNsname($getFullnspath = self::WITH_FULLNSPATH): Atom {
+    private function processOneNsname(bool $getFullnspath = self::WITH_FULLNSPATH): Atom {
         ++$this->id;
         if ($this->tokens[$this->id][0] === $this->phptokens::T_NAMESPACE) {
             ++$this->id;
@@ -1612,7 +1612,7 @@ class Load extends Tasks {
         return $interface;
     }
 
-    private function makeCitBody($class): void {
+    private function makeCitBody(Atom $class): void {
         ++$this->id;
         $rank = -1;
 
@@ -2117,7 +2117,7 @@ class Load extends Tasks {
         return $return;
     }
 
-    private function processParameters($atom): Atom {
+    private function processParameters(string $atom): Atom {
         $arguments = $this->addAtom($atom);
 
         $this->currentFunction[] = $arguments;
@@ -2386,7 +2386,7 @@ class Load extends Tasks {
         return $arguments;
     }
 
-    private function processNextAsIdentifier($getFullnspath = self::WITH_FULLNSPATH): Atom {
+    private function processNextAsIdentifier(bool $getFullnspath = self::WITH_FULLNSPATH): Atom {
         ++$this->id;
 
         $identifier = $this->addAtom($getFullnspath === self::WITH_FULLNSPATH ? 'Identifier' : 'Name');
@@ -2763,7 +2763,7 @@ class Load extends Tasks {
         return $namecall;
     }
 
-    private function processFunctioncall($getFullnspath = self::WITH_FULLNSPATH) {
+    private function processFunctioncall(bool $getFullnspath = self::WITH_FULLNSPATH) {
         $name = $this->popExpression();
         ++$this->id; // Skipping the name, set on (
 
@@ -2919,13 +2919,11 @@ class Load extends Tasks {
                 $this->calls->addCall('class', $string->fullnspath, $string);
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-            $this->getFullnspath($string, 'function', $string);
+            // Nothing to do
         } elseif ($string->isA(array('Boolean', 'Null'))) {
             $string->fullnspath = '\\' . mb_strtolower($string->fullcode);
             $string->aliased    = self::NOT_ALIASED;
         } else {
-            $this->getFullnspath($string, 'const', $string);
-
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
@@ -3088,7 +3086,7 @@ class Load extends Tasks {
         return $next;
     }
 
-    private function processSGVariable($atom = 'Ppp'): Atom {
+    private function processSGVariable(string $atom = 'Ppp'): Atom {
         $current = $this->id;
         $static = $this->addAtom($atom);
         $rank = 0;
@@ -3258,7 +3256,7 @@ class Load extends Tasks {
         return $bracket;
     }
 
-    private function processBlock($standalone = self::STANDALONE_BLOCK) {
+    private function processBlock(bool $standalone = self::STANDALONE_BLOCK) {
         $this->startSequence();
 
         // Case for {}
@@ -3293,7 +3291,7 @@ class Load extends Tasks {
         return $block;
     }
 
-    private function processForblock($finals): Atom {
+    private function processForblock(array $finals = array()): Atom {
         $this->startSequence();
         $block = $this->sequence;
 
@@ -4296,7 +4294,7 @@ class Load extends Tasks {
         return $namespace;
     }
 
-    private function processAlias($useType): Atom {
+    private function processAlias(string $useType): Atom {
         $current = $this->id;
         $as = $this->addAtom('As');
 
@@ -4717,7 +4715,7 @@ class Load extends Tasks {
         return $variable;
     }
 
-    private function processFCOA($nsname): Atom {
+    private function processFCOA(Atom $nsname): Atom {
         // For functions and constants
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
@@ -5975,7 +5973,7 @@ class Load extends Tasks {
         return $id;
     }
 
-    private function checkTokens($filename): void {
+    private function checkTokens(string $filename): void {
         if (!empty($this->expressions)) {
             throw new LoadError( "Warning : expression is not empty in $filename : " . count($this->expressions));
         }
@@ -6139,7 +6137,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
                 } else {
-                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function ($r) {
+                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (string $r) : string {
                         return mb_strtolower($r[1]) . '\\' . $r[2];
                     }, $name->fullcode);
                     $apply->fullnspath = $fullnspath;
@@ -6221,6 +6219,7 @@ class Load extends Tasks {
 
             } elseif ($type === 'const') {
                 if (($use = $this->uses->get('const', $name->code)) instanceof Atom) {
+                    $this->addLink($use, $name, 'DEFINITION');
                     $apply->fullnspath = $use->fullnspath;
                     $apply->aliased = self::ALIASED;
                     return;
@@ -6235,17 +6234,17 @@ class Load extends Tasks {
                 }
 
             } elseif ($type === 'function' && ($use = $this->uses->get('function', $prefix)) instanceof Atom) {
-
                 $this->addLink($use, $name, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath;
-                    $apply->aliased = self::ALIASED;
-                    return;
+                $apply->aliased = self::ALIASED;
+                return;
 
             } else {
                 $apply->fullnspath = $this->namespace . mb_strtolower($name->fullcode);
-                    $apply->aliased = self::NOT_ALIASED;
-                    return;
+                $apply->aliased = self::NOT_ALIASED;
+                return;
             }
+
         } elseif ($name->atom === 'String' && isset($name->noDelimiter)) {
             if (in_array(mb_strtolower($name->noDelimiter), array('self', 'static'), \STRICT_COMPARISON)) {
                 if (empty($this->currentClassTrait)) {
@@ -6295,7 +6294,7 @@ class Load extends Tasks {
         }
     }
 
-    private function setNamespace($namespace = self::NO_NAMESPACE) {
+    private function setNamespace($namespace = self::NO_NAMESPACE) : void {
         if ($namespace === self::NO_NAMESPACE) {
             $this->namespace = '\\';
             $this->uses = new Fullnspaths();
@@ -6335,7 +6334,7 @@ class Load extends Tasks {
         return $alias;
     }
 
-    private function logTime($step) {
+    private function logTime(string $step) : void {
         static $begin, $end, $start;
 
         if ($this->logTimeFile === null) {
@@ -6352,7 +6351,7 @@ class Load extends Tasks {
         $begin = $end;
     }
 
-    private function makeAnonymous($type = 'class') {
+    private function makeAnonymous(string $type = 'class') : string {
         static $anonymous = 'a';
 
         if (!in_array($type, array('class', 'function', 'arrowfunction'), \STRICT_COMPARISON)) {
@@ -6363,7 +6362,7 @@ class Load extends Tasks {
         return "$type@$anonymous";
     }
 
-    private function finishWithAlternative($isColon) {
+    private function finishWithAlternative(bool $isColon) : void {
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
             ++$this->id; // Skip endforeach
             if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -6387,7 +6386,7 @@ class Load extends Tasks {
         }
     }
 
-    private function whichSyntax($current, $colon) {
+    private function whichSyntax(int $current, int $colon) : bool {
         return in_array($this->tokens[$current][0], array($this->phptokens::T_FOR,
                                                           $this->phptokens::T_FOREACH,
                                                           $this->phptokens::T_WHILE,
@@ -6402,7 +6401,7 @@ class Load extends Tasks {
                 self::NORMAL_SYNTAX;
     }
 
-    private function makeGlobal($element) {
+    private function makeGlobal(Atom $element) : void {
         if ($element->atom === 'Globaldefinition') {
             $name = $element->code;
         } elseif ($element->atom === 'Variabledefinition') {
