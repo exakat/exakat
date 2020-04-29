@@ -2051,9 +2051,8 @@ class Load extends Tasks {
             // DO nothing
 
         } else {
-            $this->getFullnspath($nsname, 'const', $nsname);
-
             $this->calls->addCall('const', $nsname->fullnspath, $nsname);
+
         }
 
         $this->pushExpression($nsname);
@@ -4752,8 +4751,6 @@ class Load extends Tasks {
             if ($type === 'const') {
                 $this->calls->addCall('const', $nsname->fullnspath, $nsname);
             }
-
-            return $nsname;
         }
 
         return $nsname;
@@ -5416,6 +5413,7 @@ class Load extends Tasks {
         if (is_string($right) && mb_strtolower($right) === 'class') {
             $static = $this->addAtom('Staticclass');
             $fullcode = "$left->fullcode::$right";
+            $this->calls->addCall('class', $left->fullnspath, $left);
             // We are not sending $left, as it has no impact
             $this->runPlugins($left);
             $this->runPlugins($static, array('CLASS' => $left));
@@ -5435,6 +5433,7 @@ class Load extends Tasks {
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
 
             $this->getFullnspath($left, 'class', $left);
+            $this->calls->addCall('class', $left->fullnspath, $left);
             $static->fullnspath = "{$left->fullnspath}::{$right->fullcode}";
             $static->aliased = self::NOT_ALIASED;
             $this->runPlugins($static, array('CLASS'    => $left,
@@ -5452,6 +5451,7 @@ class Load extends Tasks {
             $static = $this->addAtom('Staticproperty');
 
             $this->getFullnspath($left, 'class', $left);
+            $this->calls->addCall('class', $left->fullnspath, $left);
             $this->addLink($static, $right, 'MEMBER');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
@@ -5461,6 +5461,7 @@ class Load extends Tasks {
             $this->addLink($static, $right, 'METHOD');
 
             $this->getFullnspath($left, 'class', $left);
+            $this->calls->addCall('class', $left->fullnspath, $left);
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'METHOD' => $right));
@@ -6137,7 +6138,7 @@ class Load extends Tasks {
                     $apply->aliased = self::NOT_ALIASED;
                     return;
                 } else {
-                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (string $r) : string {
+                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (array $r) : string {
                         return mb_strtolower($r[1]) . '\\' . $r[2];
                     }, $name->fullcode);
                     $apply->fullnspath = $fullnspath;
