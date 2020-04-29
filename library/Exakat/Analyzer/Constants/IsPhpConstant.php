@@ -37,9 +37,9 @@ class IsPhpConstant extends Analyzer {
 
         // inside Use
         $this->atomIs('Usenamespace')
-             ->analyzerIsNot('self')
              ->hasOut('CONST')
              ->outIs('USE')
+             ->analyzerIsNot('self')
              ->fullnspathIs($constantsFNP);
         $this->prepareQuery();
 
