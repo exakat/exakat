@@ -139,7 +139,7 @@ class Phpexec {
         return $this->version;
     }
 
-    public function getTokens() {
+    public function getTokens() : array {
         // prepare the list of tokens
         if ($this->isCurrentVersion === true) {
             $x = get_defined_constants(true);
@@ -172,11 +172,11 @@ class Phpexec {
         return self::$tokens;
     }
 
-    public function getTokenName($token) {
+    public function getTokenName($token) : string {
         return self::$tokens[$token];
     }
 
-    public function getTokenFromFile($file) {
+    public function getTokenFromFile(string $file) : array {
         if ($this->isCurrentVersion === true) {
             $tokens = @token_get_all(file_get_contents($file));
         } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
@@ -212,11 +212,11 @@ class Phpexec {
         return $tokens;
     }
 
-    private function escapeFile($file) {
+    private function escapeFile(string $file) : string {
         return "'" . str_replace(array("'", '"', '$'), array("\\'", '\\"', '\\$'), $file) . "'";
     }
 
-    public function countTokenFromFile($file) {
+    public function countTokenFromFile(string $file) : string {
         // Can't use PHP_SELF, because short_ini_tag can't be changed.
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $filename = $this->escapeFile($file);
@@ -229,11 +229,11 @@ class Phpexec {
         return $res;
     }
 
-    public function getExec() {
+    public function getExec() : string {
         return $this->phpexec;
     }
 
-    public function isValid() {
+    public function isValid() : bool {
         if (empty($this->phpexec)) {
             return false;
         }
@@ -259,11 +259,11 @@ class Phpexec {
         return strpos($res, 'The PHP Group') !== false;
     }
 
-    public function getActualVersion() {
+    public function getActualVersion() : string {
         return  $this->actualVersion;
     }
 
-    public function compile($file) {
+    public function compile(string $file) : bool {
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $filename = basename($file);
             $dirname  = realpath(dirname($file));
@@ -278,13 +278,13 @@ class Phpexec {
         return !$this->isError(explode("\n", $res)[0]);
     }
 
-    public function getError() {
+    public function getError() : array {
         $r = $this->error;
         $this->error = array();
         return $r;
     }
 
-    public function isError($resFile) {
+    public function isError(string $resFile) : bool {
         if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
             return false;
             // do nothing. All is fine.
@@ -344,7 +344,7 @@ class Phpexec {
         return false;
     }
 
-    public function getWhiteCode() {
+    public function getWhiteCode() : array {
         return array(
             array_search('T_WHITESPACE',  self::$tokens) => 1,
             array_search('T_DOC_COMMENT', self::$tokens) => 1,
@@ -352,7 +352,7 @@ class Phpexec {
         );
     }
 
-    public function getConfiguration($name = null) {
+    public function getConfiguration(string $name = null) {
         if ($name === null) {
             return $this->config;
         } elseif (isset($this->config[$name])) {
@@ -362,7 +362,7 @@ class Phpexec {
         }
     }
 
-    private function readConfig() {
+    private function readConfig() : void {
         if ($this->isCurrentVersion === true){
             // this code is also in the ELSE, but we avoid eval here.
             $this->config = array(
