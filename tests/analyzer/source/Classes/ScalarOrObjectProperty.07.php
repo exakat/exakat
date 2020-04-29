@@ -18,6 +18,7 @@ class x {
         $this->staticD::$property;
 
 // PHP 8.0
+
 //        $this->literalA::class;
         $this->literalB::constante;
         $this->literalC::methode();
