@@ -25,8 +25,8 @@ namespace Exakat;
 use Exakat\Configsource\Commandline;
 
 class Exakat {
-    const VERSION = '2.0.8';
-    const BUILD = 1063;
+    const VERSION = '2.0.9';
+    const BUILD = 1066;
 
     private $config  = null;
 
@@ -182,11 +182,6 @@ class Exakat {
 
             case 'cleandb' :
                 $task = new Tasks\CleanDb();
-                $task->run();
-                break;
-
-            case 'onepage' :
-                $task = new Tasks\OnePage();
                 $task->run();
                 break;
 

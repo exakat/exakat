@@ -1,12 +1,33 @@
-Version 2.0.9 (Jialan, coming up)
+Version 2.1.0 (City God, coming up)
 + Architecture
     + 
 + Report
     + 
 + Analysis
-    + 
+    + Upgraded analysis : PHP 8.0 new scalar typehint, stringable interface
 + Tokenizer
     + 
+
+Version 2.0.9 (Jialan, 2020-04-30)
++ Architecture
+    + Added option in TU for analysis that won't fill the result table.
+    + Reduced the number of duplicate links in the graph
+    + Upgraded tokens for PHP 8.0. 
++ Analysis
+    + New analysis : Don't collect void
+    + New analysis : Wrongly inited properties
+    + New analysis : Not inited properties
+    + Upgraded analysis : PHP 8.0 removed functions
+    + Upgraded analysis : Useless instructions also include global/static variables
+    + Upgraded analysis : Bad Relay Function now works with return types and property types
+    + Upgraded analysis : 'Scalar or object properties' are upgraded with static calls
+    + Removed analysis : Classes and Arrays IsRead and IsModified. Use properties now.
+    + Checked unit tests : 3347 / 3420 test pass (97% pass)
++ Tokenizer
+    + Fixed edge case for xor, with intval
+    + Refactored multiple calculation for cast values
+    + Added support for links between constants and use expressions
+    + Linked classes with calls, when using use expression
 
 Version 2.0.8 (Ao Run, 2020-04-20)
 + Architecture
