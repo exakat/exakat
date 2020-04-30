@@ -29,7 +29,23 @@ use Exakat\Data\Dictionary;
 
 class CodeIs extends DSL {
     public function run() {
-        list($code, $translate, $caseSensitive) = func_get_args();
+        switch(func_num_args()) {
+            case 1 :
+                $code = func_get_arg(0);
+                $translate = Analyzer::TRANSLATE;
+                $caseSensitive = Analyzer::CASE_INSENSITIVE;
+                break;
+            
+            case 2: 
+                $code = func_get_arg(0);
+                $translate = func_get_arg(1);
+                $caseSensitive = Analyzer::CASE_INSENSITIVE;
+                break;
+            
+            default:
+            case 2: 
+                list($code,$translate, $caseSensitive) = func_get_args();
+        }
 
         if (is_array($code) && empty($code)) {
             return new Command(Query::STOP_QUERY);

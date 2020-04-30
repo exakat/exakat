@@ -28,7 +28,12 @@ use Exakat\Analyzer\Analyzer;
 
 class AtomIsNot extends DSL {
     public function run() {
-        list($atoms, $flags) = func_get_args();
+        if (func_num_args() === 2) {
+            list($atoms, $flags) = func_get_args();
+        } else {
+            $atoms = func_get_arg(0);
+            $flags = Analyzer::WITHOUT_CONSTANTS;
+        }
 
         assert(func_num_args() <= 2, 'Too many arguments for ' . __METHOD__);
         $this->assertAtom($atoms);

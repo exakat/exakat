@@ -27,9 +27,8 @@ use Exakat\Query\Query;
 
 class OutIsIE extends DSL {
     public function run(): Command {
-        list($links) = func_get_args();
-
         assert(func_num_args() === 1, 'Too many arguments for ' . __METHOD__);
+        list($links) = func_get_args();
         assert($this->assertLink($links));
 
         $diff = $this->normalizeLinks($links);

@@ -26,6 +26,7 @@ namespace Exakat\Query\DSL;
 
 class Is extends DSL {
     public function run() {
+        assert(func_num_args() === 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
         list($property, $value) = func_get_args();
 
         $this->assertProperty($property);

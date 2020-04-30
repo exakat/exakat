@@ -27,7 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class FullnspathIsNot extends DSL {
     public function run() {
-        list($code) = func_get_args();
+        if (func_num_args() === 1) {
+            list($code) = func_get_args();
+            $caseSensitive = Analyzer::CASE_SENSITIVE;
+        } else {
+            list($code, $caseSensitive) = func_get_args();
+        }
 
         $has = $this->dslfactory->factory('has');
         $return = $has->run('fullnspath');

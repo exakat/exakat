@@ -29,6 +29,7 @@ use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\UnknownDsl;
 use Exakat\Query\Query;
+use Exakat\Query\QueryDoc;
 use Exakat\Project;
 use Exakat\Graph\Helpers\GraphResults;
 
@@ -515,28 +516,6 @@ GREMLIN;
         return $this->query->prepareSide();
     }
 
-    public function as(string $name): self {
-        $this->query->_as($name);
-
-        return $this;
-    }
-
-    public function _as(string $name): self {
-        return $this->as($name);
-    }
-
-    public function back(string $name = 'first'): self {
-        $this->query->back($name);
-
-        return $this;
-    }
-
-    public function ignore(): self {
-        $this->query->ignore();
-
-        return $this;
-    }
-
 ////////////////////////////////////////////////////////////////////////////////
 // Common methods
 ////////////////////////////////////////////////////////////////////////////////
@@ -601,18 +580,6 @@ GREMLIN;
         return $this;
     }
 
-    public function atomIs($atom, $flag = self::WITHOUT_CONSTANTS) {
-        $this->query->atomIs($atom, $flag);
-
-        return $this;
-    }
-
-    public function atomIsNot($atom, $flag = self::WITHOUT_CONSTANTS) {
-        $this->query->atomIsNot($atom, $flag);
-
-        return $this;
-    }
-
     public function atomFunctionIs($fullnspath) {
         $this->query->atomFunctionIs($fullnspath);
 
@@ -639,48 +606,6 @@ GREMLIN;
 
     public function atomInsideMoreThan($atom, $times = 1) {
         $this->query->atomInsideMoreThan($atom, $times);
-
-        return $this;
-    }
-
-    public function noAtomInside($atom) {
-        $this->query->noAtomInside($atom);
-
-        return $this;
-    }
-
-    public function noCodeInside($atom, $values) {
-        $this->query->noCodeInside($atom, $values);
-
-        return $this;
-    }
-
-    public function noPropertyInside($atom, $property, $values) {
-        $this->query->noPropertyInside($atom, $property, $values);
-
-        return $this;
-    }
-
-    public function noAtomWithoutPropertyInside($atom, $property, $values) {
-        $this->query->NoAtomWithoutPropertyInside($atom, $property, $values);
-
-        return $this;
-    }
-
-    public function noAnalyzerInside($atoms, $analyzer) {
-        $this->query->NoAnalyzerInside($atoms, $analyzer);
-
-        return $this;
-    }
-
-    public function noAnalyzerInsideWithProperty($atoms, $analyzer, $property, $value) {
-        $this->query->NoAnalyzerInsideWithProperty($atoms, $analyzer, $property, $value);
-
-        return $this;
-    }
-
-    public function noAtomPropertyInside($atom, $property, $values) {
-        $this->query->noAtomPropertyInside($atom, $property, $values);
 
         return $this;
     }
@@ -713,12 +638,6 @@ GREMLIN;
         $analyzer = array_map('self::getName', $analyzer);
 
         $this->query->analyzerIsNot($analyzer);
-
-        return $this;
-    }
-
-    public function is($property, $value = true) {
-        $this->query->is($property, $value);
 
         return $this;
     }
@@ -777,18 +696,6 @@ GREMLIN;
         return $this;
     }
 
-    public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->codeIs($code, $translate, $caseSensitive);
-
-        return $this;
-    }
-
-    public function codeIsNot($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->codeIsNot($code, $translate, $caseSensitive);
-
-        return $this;
-    }
-
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
         $this->query->noDelimiterIs($code, $caseSensitive);
@@ -799,54 +706,6 @@ GREMLIN;
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
         $this->query->noDelimiterIsNot($code, $caseSensitive);
-
-        return $this;
-    }
-
-    public function fullnspathIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->fullnspathIs($code, $caseSensitive);
-
-        return $this;
-    }
-
-    public function fullnspathIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->fullnspathIsNot($code, $caseSensitive);
-
-        return $this;
-    }
-
-    public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->samePropertyAs($property, $name, $caseSensitive);
-
-        return $this;
-    }
-
-    public function samePropertyAsArray($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->samePropertyAsArray($property, $name, $caseSensitive);
-
-        return $this;
-    }
-
-    public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->notSamePropertyAs($property, $name, $caseSensitive);
-
-        return $this;
-    }
-
-    public function values($property) {
-        $this->query->values($property);
-
-        return $this;
-    }
-
-    public function addETo($edgeName, $from) {
-        $this->query->addETo($edgeName, $from);
-
-        return $this;
-    }
-
-    public function addEFrom($edgeName, $from) {
-        $this->query->addEFrom($edgeName, $from);
 
         return $this;
     }
@@ -988,26 +847,7 @@ GREMLIN;
 
         return $this;
     }
-
-    protected function outIs($link = array()) {
-        $this->query->outIs($link);
-
-        return $this;
-    }
-
-    // follows a link if it is there (and do nothing otherwise)
-    protected function outIsIE($link = array()) {
-        $this->query->outIsIE($link);
-
-        return $this;
-    }
-
-    public function outIsNot($link) {
-        $this->query->outIsNot($link);
-
-        return $this;
-    }
-
+    
     public function hasNextSibling($link = 'EXPRESSION') {
         $this->query->hasNextSibling($link);
 
@@ -1618,6 +1458,8 @@ GREMLIN
                                   new Project('test'),
                                   $this->analyzerQuoted,
                                   $this->config->executable);
+
+        $this->queryDoc = new QueryDoc();
     }
 
     public function execQuery(): int {
@@ -1741,8 +1583,15 @@ GREMLIN
     }
 
     public function __call($name, $args) {
+        if ($this->query->canSkip()) {
+            return $this;
+        }
+
+        $name = $name === 'as' ? '_as' : $name;
+
         try {
             $this->query->$name(...$args);
+//            $this->queryDoc->$name(...$args);
         } catch (UnknownDsl $e) {
             $this->query->StopQuery();
             $rank = $this->queryId + 1;

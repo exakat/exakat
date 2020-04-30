@@ -27,7 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class SamePropertyAs extends DSL {
     public function run() {
-        list($property, $name, $caseSensitive) = func_get_args();
+        if (func_num_args() === 2) {
+            list($property, $name) = func_get_args();
+            $caseSensitive = Analyzer::CASE_SENSITIVE;
+        } else {
+            list($property, $name, $caseSensitive) = func_get_args();
+        }
 
         $this->assertProperty($property);
         $this->assertVariable($name);
