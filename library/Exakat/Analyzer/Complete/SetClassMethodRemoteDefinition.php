@@ -60,7 +60,6 @@ class SetClassMethodRemoteDefinition extends Complete {
         // class x { use t} trait t {function foo() {}} x::foo();
         $this->atomIs('Staticmethod', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
-              ->as('first')
               ->outIs('METHOD')
               ->atomIs(array('Identifier', 'Nsname'), self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
