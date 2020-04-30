@@ -56,12 +56,14 @@ Glossary
       + :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
       + :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
       + :ref:`Should Use Operator <should-use-operator>`
+      + :ref:`Useless Instructions <useless-instructions>`
 
 
 + `@`
     + `@`
 
       + :ref:`@ Operator <@-operator>`
+      + :ref:`Useless Instructions <useless-instructions>`
 
 
 + `A`
@@ -167,6 +169,10 @@ Glossary
       + :ref:`Avoid array_push() <avoid-array\_push()>`
       + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Use Array Functions <use-array-functions>`
+
+    + `array_replace()`
+
+      + :ref:`Useless Instructions <useless-instructions>`
 
     + `array_search()`
 
@@ -343,6 +349,7 @@ Glossary
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
+      + :ref:`Useless Instructions <useless-instructions>`
 
     + `convert_cyr_string()`
 
@@ -853,6 +860,7 @@ Glossary
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`Implode One Arg <implode-one-arg>`
+      + :ref:`Implode() Arguments Order <implode()-arguments-order>`
       + :ref:`Joining file() <joining-file()>`
       + :ref:`Use Array Functions <use-array-functions>`
 
@@ -1061,6 +1069,7 @@ Glossary
     + `mb_strrpos()`
 
       + :ref:`Mbstring Third Arg <mbstring-third-arg>`
+      + :ref:`mb_strrpos() Third Argument <mb\_strrpos()-third-argument>`
 
     + `mb_strstr()`
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 21 Apr 2020 08:58:17 +0000
-.. comment: Generation hash : d448965d3e12624d1a0c6fe5580b03d873b1316f
+.. comment: Generation date : Wed, 29 Apr 2020 17:37:28 +0000
+.. comment: Generation hash : 1d426ab121c4ec281387cc2433101d027affce78
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2587,6 +2587,54 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------+
 | Examples    | :ref:`prestashop-constants-badconstantnames`, :ref:`zencart-constants-badconstantnames` |
 +-------------+-----------------------------------------------------------------------------------------+
+
+
+
+.. _bad-typehint-relay:
+
+Bad Typehint Relay
+##################
+
+
+A bad typehint relay happens where a type hinted argument is relayed to a parameter with another typehint. This will lead to a Fatal error, and stop the code. This is possibly a piece of dead code.
+
+.. code-block:: php
+
+   <?php
+   
+   // the $i argument is relayed to bar, which is expecting a string. 
+   function foo(int $i) : string {
+       return bar($i);
+   }
+   
+   // the return value for the bar function is not compatible with the one from foo;
+   function bar(string $s) : int {
+       return (int) $string + 1;
+   }
+   
+   ?>
+
+
+It is recommended to harmonize the typehint, so the two functions are still compatible.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Harmonize the typehint so they match one with the other.
+* Remove dead code
+* Apply type casting before calling the next function, or return value
+
++-------------+----------------------------+
+| Short name  | Functions/BadTypehintRelay |
++-------------+----------------------------+
+| Rulesets    | :ref:`Typechecks`          |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
 
 
 
@@ -5924,6 +5972,53 @@ Suggestions
 
 
 
+.. _could-type-with-iterable:
+
+Could Type With Iterable
+########################
+
+
+Suggest using ``iterable`` typehint for arguments.
+
+``iterable`` represents both ``array`` and objects that implements ``Iterator`` interface. Both types are coerced, and usable here. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $s may be both an array or an iterator
+   function foo($s) : int {
+       $t = 0;
+       foreach($s as $v) {
+           $t += (int) $v;
+       }
+       
+       return $t;
+   }
+   
+   ?>
+
+
+See also `Iterables <https://www.php.net/manual/en/language.types.iterable.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------------+
+| Short name  | Functions/CouldTypeWithIterable |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Typechecks`               |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+
+
+
 .. _could-type-with-string:
 
 Could Type With String
@@ -7623,6 +7718,51 @@ When the value has to be prepared before usage, then save the filtered value in 
 +-------------+-------------------------------+
 | Time To Fix | Quick (30 mins)               |
 +-------------+-------------------------------+
+
+
+
+.. _dont-collect-void:
+
+Dont Collect Void
+#################
+
+
+When a method returns void, there is no need to use the result. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() : void {
+       // doSomething()
+   }
+   
+   // This is useless
+   $result = foo(); 
+   
+   // This is useless. It looks like this is a left over from code refactoring
+   echo foo(); 
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the call to the function to its own expression with a semi-colon.
+* Remove assignation of the result of such calls.
+
++-------------+-----------------------+
+| Short name  | Functions/DontUseVoid |
++-------------+-----------------------+
+| Rulesets    | :ref:`Analyze`        |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
 
 
 
@@ -9957,52 +10097,6 @@ See also `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55
 
 
 
-.. _functions/badtypehintrelay:
-
-Functions/BadTypehintRelay
-##########################
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+----------------------------+
-| Short name  | Functions/BadTypehintRelay |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Typechecks`          |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
-
-
-
-.. _functions/couldtypewithiterable:
-
-Functions/CouldTypeWithIterable
-###############################
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+---------------------------------+
-| Short name  | Functions/CouldTypeWithIterable |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Typechecks`               |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-
-
-
 .. _generator-cannot-return:
 
 Generator Cannot Return
@@ -11255,6 +11349,54 @@ Suggestions
 +-------------+-------------------------------------------+
 | Time To Fix | Quick (30 mins)                           |
 +-------------+-------------------------------------------+
+
+
+
+.. _implode()-arguments-order:
+
+Implode() Arguments Order
+#########################
+
+
+`implode() <https://www.php.net/implode>`_ accepted two signatures, but is only recommending one. Both types orders of string then array, and array then string have been possible until PHP 7.4.
+
+In PHP 7.4, the order array then string is deprecated, and emits a warning. It will be removed in PHP 8.0.
+
+.. code-block:: php
+
+   <?php
+   
+   $glue = ',';
+   $pieces = range(0, 4);
+   
+   // documented argument order
+   $s = implode($glue, $pieces);
+   
+   // Pre 7.4 argument order
+   $s = implode($pieces, $glue);
+   
+   // both produces 0,1,2,3,4
+   
+   ?>
+
+
+See also `implode() <https://www.php.net/implode>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-----------------------------+
+| Short name  | Structures/ImplodeArgsOrder |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Analyze`              |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
 
 
 
@@ -21162,6 +21304,55 @@ Suggestions
 
 
 
+.. _php-8.0-only-typehints:
+
+Php 8.0 Only TypeHints
+######################
+
+
+Two scalar typehints are introduced in version 8. They are ``false`` and ``null``. In PHP 7.0, both those values could not be used as a class or interface name, to avoid confusion with the actual booleans, nor ``null`` value.
+
+``false`` represents a false boolean, and nothing else. It is more restrictive than a boolean, which accepts true too. 
+``null`` is an alternative syntax to ``?`` : it allows the type to be ``null``. 
+
+Both the above typehints are to be used in cunjonction with other types : they can't be used alone.
+
+.. code-block:: php
+
+   <?php
+   
+   // function accepts an A object, or null. 
+   function foo(A|null $x) {}
+   
+   // same as above
+   function foo2(A|null $x) {}
+   
+   // returns an object of class B, or false
+   function bar($x) : false|B {}
+   
+   ?>
+
+
+See also `PHP RFC: Union Types 2.0 <https://wiki.php.net/rfc/union_types_v2>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/Php80OnlyTypeHints                                                                                                                                           |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP56` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                            |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                                                  |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _php-8.0-variable-syntax-tweaks:
 
 Php 8.0 Variable Syntax Tweaks
@@ -21209,29 +21400,6 @@ See also `PHP RFC: Variable Syntax Tweaks <https://wiki.php.net/rfc/variable_syn
 | Php Version | 8.0+                      |
 +-------------+---------------------------+
 | Severity    | Major                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
-
-
-
-.. _php/php74mbstrrpos3rdarg:
-
-Php/Php74mbstrrpos3rdArg
-########################
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+---------------------------+
-| Short name  | Php/Php74mbstrrpos3rdArg  |
-+-------------+---------------------------+
-| Rulesets    | :ref:`CompatibilityPHP74` |
-+-------------+---------------------------+
-| Severity    | Minor                     |
 +-------------+---------------------------+
 | Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
@@ -26011,29 +26179,6 @@ Suggestions
 
 
 
-.. _structures/implodeargsorder:
-
-Structures/ImplodeArgsOrder
-###########################
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+-----------------------------+
-| Short name  | Structures/ImplodeArgsOrder |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
-+-------------+-----------------------------+
-
-
-
 .. _substr-to-trim:
 
 Substr To Trim
@@ -28391,6 +28536,108 @@ See also `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/uni
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                                                              |
 +-------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _uninited-property:
+
+Uninited Property
+#################
+
+
+Uninited properties are not fully bootstrapped at the end of the constructor. 
+
+Properties may be inited at definition time, along with their visibility and type. Some types are not inited at definition time, as any object, so they should be inited during constructor. At the end of the former, all properties shall have a legit value, and be ready for usage.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       private $foo = null;
+       private $uninited;
+       
+       function __construct($arg) {
+           $this->foo = $args;
+           
+           // $this->uninited is not inited, nor at definition, nor in constructor
+           // it will hold null at the beginning of the next method call
+       }
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the property, and move it to another class
+* Add an initialisation for this property
+
++-------------+--------------------------+
+| Short name  | Classes/UninitedProperty |
++-------------+--------------------------+
+| Rulesets    | :ref:`ClassReview`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+
+
+
+.. _union-typehint:
+
+Union Typehint
+##############
+
+
+Union typehints allows the specification of several typehint for the same argument or return value. This is a PHP 8.0 new feature.
+
+Several typehints are specified at the same place as a single one. The different values are separated by a pipe character ``|``, like for exceptions 
+
+.. code-block:: php
+
+   <?php
+   
+   // Example from the RFC https://wiki.php.net/rfc/union_types_v2
+   class Number {
+       private int|float $number;
+    
+       public function setNumber(int|float $number): void {
+           $this->number = $number;
+       }
+    
+       public function getNumber(): int|float {
+           return $this->number;
+       }
+   }
+   ?>
+
+
+Union types are not compatible with PHP 7 and older.
+
+See also `PHP RFC: Union Types 2.0 <https://wiki.php.net/rfc/union_types_v2>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/Php80UnionTypehint                                                                                                                |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Php Version | 8.0+                                                                                                                                  |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                 |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                       |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -32228,53 +32475,52 @@ For example, an addition whose result is not stored in a variable, or immediatel
 
 Here the useless instructions that are spotted : 
 
-.. code-block:: php
+<?php
 
-   <?php
-   
-   // Concatenating with an empty string is useless.
-   $string = 'This part '.$is.' usefull but '.$not.'';
-   
-   // This is a typo, that PHP turns into a constant, then a string, then nothing.
-   continue;
-   
-   // Empty string in a concatenation
-   $a = 'abc' . '';
-   
-   // Returning expression, whose result is not used (additions, comparisons, properties, closures, new without =, ...)
-   1 + 2;
-   
-   // Returning post-incrementation
-   function foo($a) {
-       return $a++;
-   }
-   
-   // array_replace() with only one argument
-   $replaced = array_replace($array);
-   // array_replace() is OK with ... 
-   $replaced = array_replace(...$array);
-   
-   // @ operator on source array, in foreach, or when assigning literals
-   $array = @array(1,2,3);
-   
-   // Multiple comparisons in a for loop : only the last is actually used.
-   for($i = 0; $j = 0; $j < 10, $i < 20; ++$j, ++$i) {
-       print $i.' '.$j.PHP_EOL;
-   }
-   
-   ?>
+// Concatenating with an empty string is useless.
+$string = 'This part '.$is.' usefull but '.$not.'';
 
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/UselessInstruction                                                                               |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                              |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                       |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                             |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------------------------+
+// This is a typo, that PHP turns into a constant, then a string, then nothing.
+`continue <http://www.php.net/manual/en/control-structures.continue.php>`_;
+
+// Empty string in a concatenation
+$a = 'abc' . '';
+
+// Returning expression, whose result is not used (additions, comparisons, properties, closures, new without =, `...) <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
+1 + 2;
+
+// Returning post-incrementation
+function foo($a) {
+    return $a++;
+}
+
+// `array_replace() <https://www.php.net/array_replace>`_ with only one argument
+$replaced = array_replace($array);
+// `array_replace() <https://www.php.net/array_replace>`_ is OK with `... <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_ 
+$replaced = array_replace(`... <http://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_$array);
+
+// `@ <http://www.php.net/manual/en/language.operators.errorcontrol.php>`_ operator on source array, in foreach, or when assigning literals
+$array = @array(1,2,3);
+
+// Multiple comparisons in a for loop : only the last is actually used.
+for($i = 0; $j = 0; $j < 10, $i < 20; ++$j, ++$i) {
+    print $i.' '.$j.PHP_EOL;
+}
+
+// Counting the keys and counting the array is the same.
+$c = count(array_keys($array))
+
+//array_keys already provides an array with only unique values, as they were keys in a previous array
+$d = array_unique(array_keys($file['messages']))
+
+// No need for assignation inside the ternary operator
+$closeQuote = $openQuote[3] ===
+
++------------+-------------------------------+
+| Short name | Structures/UselessInstruction |
++------------+-------------------------------+
+| Rulesets   | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -33676,6 +33922,62 @@ Suggestions
 
 
 
+.. _wrong-typed-property-init:
+
+Wrong Typed Property Init
+#########################
+
+
+Property is typed with an incompatible init type.
+
+Init type might be a new instance, the return of a method call or an interface compatible object.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       private A $property;
+       private B $incompatible;
+       
+       function __construct() {
+           // This is compatible
+           $this->property = new A();
+           
+           // This is incompatible : new B() expected
+           $this->incompatible = new C();
+           
+       }
+   }
+   
+   ?>
+
+
+PHP compiles such code, but won't execute it, as it detects the incompatibility.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the type hint of the property
+* Fix the initialization call
+* Use an interface for typehint
+
++-------------+------------------------------------------------------------+
+| Short name  | Classes/WrongTypedPropertyInit                             |
++-------------+------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`ClassReview` |
++-------------+------------------------------------------------------------+
+| Php Version | 7.4+                                                       |
++-------------+------------------------------------------------------------+
+| Severity    | Minor                                                      |
++-------------+------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                            |
++-------------+------------------------------------------------------------+
+
+
+
 .. _wrong-typehinted-name:
 
 Wrong Typehinted Name
@@ -34961,6 +35263,46 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------+
 | Examples    | :ref:`openconf-structures-listomissions`, :ref:`fuelcms-structures-listomissions` |
 +-------------+-----------------------------------------------------------------------------------+
+
+
+
+.. _mb\_strrpos()-third-argument:
+
+mb_strrpos() Third Argument
+###########################
+
+
+Passing the encoding as 3rd parameter to `mb_strrpos() <https://www.php.net/mb_strrpos>`_ is deprecated. Instead pass a 0 offset, and encoding as 4th parameter.
+
+.. code-block:: php
+
+   <?php
+   
+   // Finds the position of the last occurrence of of a string in a string, starting at position 10
+   $extract = mb_strrpos($haystack, $needle, 10, 'utf8');
+   
+   // This is the old behavior. Here, the offset will be 0, by default
+   $extract = mb_strrpos($haystack, $needle, 'utf8');
+   ?>
+
+
+See also `mb_strrpos() <https://www.php.net/mb_strrpos>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------+
+| Short name  | Php/Php74mbstrrpos3rdArg  |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
 
 
 

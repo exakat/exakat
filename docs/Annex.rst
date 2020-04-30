@@ -438,6 +438,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.0.9
+
+  * Dont Collect Void (Functions/DontUseVoid ; Analyze)
+  * Php 8.0 Only TypeHints (Php/Php80OnlyTypeHints ; Appinfo, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
+  * Uninited Property (Classes/UninitedProperty)
+  * Union Typehint (Php/Php80UnionTypehint ; Appinfo, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
+  * Wrong Typed Property Init (Classes/WrongTypedPropertyInit ; Analyze, LintButWontExec, ClassReview)
+
 * 2.0.8
 
   * New Functions In PHP 8.0 (Php/Php80NewFunctions)
@@ -487,9 +495,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Type With Array (Functions/CouldTypeWithArray ; Typechecks)
   * Could Type With Boolean (Functions/CouldTypeWithBool ; Typechecks)
   * Could Type With Int (Functions/CouldTypeWithInt ; Typechecks)
+  * Could Type With Iterable (Functions/CouldTypeWithIterable ; Typechecks)
   * Could Type With String (Functions/CouldTypeWithString ; Typechecks)
   * Filter To add_slashes() (Php/FilterToAddSlashes ; CompatibilityPHP74)
-  * Functions/CouldTypeWithIterable (Functions/CouldTypeWithIterable ; Typechecks)
   * Immutable Signature (Classes/ImmutableSignature ; Appinfo)
   * Is_A() With String (Php/IsAWithString ; Analyze, Simple, Rector)
   * Mbstring Third Arg (Structures/MbstringThirdArg ; Analyze)
@@ -579,6 +587,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Create Default Values (Complete/CreateDefaultValues ; Complete)
   * Create Magic Property (Complete/CreateMagicProperty ; Complete)
   * Follow Closure Definition (Complete/FollowClosureDefinition ; Complete)
+  * Implode() Arguments Order (Structures/ImplodeArgsOrder ; Analyze)
   * Make Class Constant Definition (Complete/MakeClassConstantDefinition ; Complete)
   * Make Class Method Definition (Complete/MakeClassMethodDefinition ; Complete)
   * No ENT_IGNORE (Security/NoEntIgnore ; Security)
@@ -592,7 +601,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Set Clone Link (Complete/SetCloneLink ; Complete)
   * Set Parent Definition (Complete/SetParentDefinition ; Complete)
   * Solve Trait Methods (Complete/SolveTraitMethods ; Complete)
-  * Structures/ImplodeArgsOrder (Structures/ImplodeArgsOrder ; Analyze)
   * array_merge() And Variadic (Structures/ArrayMergeAndVariadic ; Analyze)
 
 * 1.9.1
@@ -617,8 +625,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Disconnected Classes (Classes/DisconnectedClasses)
   * Not Or Tilde (Structures/NotOrNot ; Preferences)
   * Overwritten Source And Value (Structures/ForeachSourceValue ; Analyze, OneFile)
-  * Php/Php74mbstrrpos3rdArg (Php/Php74mbstrrpos3rdArg ; CompatibilityPHP74)
   * Useless Type Check (Functions/UselessTypeCheck ; Dead code, OneFile)
+  * mb_strrpos() Third Argument (Php/Php74mbstrrpos3rdArg ; CompatibilityPHP74)
 
 * 1.8.8
 
@@ -737,7 +745,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.6.6
 
-  * Functions/BadTypehintRelay (Functions/BadTypehintRelay)
+  * Bad Typehint Relay (Functions/BadTypehintRelay)
   * Insufficient Typehint (Functions/InsufficientTypehint ; Analyze, Typechecks)
 
 * 1.6.5
@@ -1482,8 +1490,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Anonymous Classes (Classes/Anonymous ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Argument Should Be Typehinted (Functions/ShouldBeTypehinted ; Typechecks)
   * Array Index (Arrays/Arrayindex ; Appinfo)
-  * Arrays Is Modified (Arrays/IsModified ; Internal)
-  * Arrays Is Read (Arrays/IsRead ; Internal)
   * Assertions (Php/AssertionUsage ; Appinfo)
   * Assign Default To Properties (Classes/MakeDefault ; Analyze, ClearPHP, Simple, Level 2)
   * Autoloading (Php/AutoloadUsage ; Appinfo)
@@ -1810,8 +1816,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Preprocessable (Structures/ShouldPreprocess ; Analyze, Rector)
   * Print And Die (Structures/PrintAndDie ; Analyze, Simple)
   * Property Could Be Private Property (Classes/CouldBePrivate ; ClassReview)
-  * Property Is Modified (Classes/IsModified ; Internal)
-  * Property Is Read (Classes/IsRead ; Internal)
   * Property Names (Classes/PropertyDefinition ; Internal)
   * Property Used Above (Classes/PropertyUsedAbove ; Internal)
   * Property Used Below (Classes/PropertyUsedBelow ; Internal)
@@ -1968,7 +1972,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Useless Constructor (Classes/UselessConstructor ; Analyze, Simple, Level 3)
   * Useless Final (Classes/UselessFinal ; Analyze, OneFile, ClearPHP, Simple)
   * Useless Global (Structures/UselessGlobal ; Analyze, OneFile, Simple, Level 2)
-  * Useless Instructions (Structures/UselessInstruction ; Analyze, OneFile, ClearPHP, Simple, Level 1)
   * Useless Interfaces (Interfaces/UselessInterfaces ; Analyze, ClearPHP, Simple, ClassReview, Typechecks)
   * Useless Parenthesis (Structures/UselessParenthesis ; Analyze, Simple)
   * Useless Return (Functions/UselessReturn ; Analyze, OneFile, Simple, Level 4)
@@ -2207,7 +2210,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Invalid numeric literal <malformed-octal>`
 * :ref:`Methods with the same name as their class will not be constructors in a future version of PHP; %s has a deprecated constructor <old-style-constructor>`
 * :ref:`Non-static method A\:\:B() should not be called statically <non-static-methods-called-in-a-static>`
-* :ref:`Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use ``__construct()`` in new code. <old-style-constructor>`
+* :ref:`Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code. <old-style-constructor>`
 * :ref:`Only variable references should be returned by reference <no-reference-for-ternary>`
 * :ref:`Only variables can be passed by reference <only-variable-for-reference>`
 * :ref:`Only variables should be passed by reference <typehinted-references>`
@@ -2227,7 +2230,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Undefined class constant <avoid-self-in-interface>`
 * :ref:`Undefined function <undefined-functions>`
 * :ref:`Undefined variable:  <undefined-variable>`
-* :ref:`Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` <nested-ternary-without-parenthesis>`
+* :ref:`Unparenthesized a ? b : c ? d : e is deprecated. Use either (a ? b : c) ? d : e or a ? b : (c ? d : e) <nested-ternary-without-parenthesis>`
 * :ref:`Unsupported operand types <unsupported-operand-types>`
 * :ref:`Using $this when not in object context <$this-belongs-to-classes-or-traits>`
 * :ref:`__autoload() is deprecated, use spl_autoload_register() instead <old-style-\_\_autoload()>`
@@ -2363,8 +2366,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2611,6 +2614,7 @@ List of external links mentionned in this documentation.
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
+* `Iterables <https://www.php.net/manual/en/language.types.iterable.php>`_
 * `Joomla <http://www.joomla.org/>`_
 * `json_decode <http://php.net/json_decode>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
@@ -2686,8 +2690,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2711,8 +2715,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2756,6 +2760,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
+* `PHP RFC: Union Types 2.0 <https://wiki.php.net/rfc/union_types_v2>`_
 * `PHP RFC: Variable Syntax Tweaks <https://wiki.php.net/rfc/variable_syntax_tweaks>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP why pi() and M_PI <https://stackoverflow.com/questions/42021176/php-why-pi-and-m-pi>`_
@@ -2790,6 +2795,7 @@ List of external links mentionned in this documentation.
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `RabbitMQ AMQP client library <https://github.com/alanxz/rabbitmq-c>`_
 * `Rar archiving <http://php.net/manual/en/book.rar.php>`_
+* `Rector <https://github.com/rectorphp/rector>`_
 * `References <http://php.net/references>`_
 * `Reflection <http://php.net/manual/en/book.reflection.php>`_
 * `Reflection export() methods <https://wiki.php.net/rfc/deprecations_php_7_4#reflection_export_methods>`_
@@ -2874,11 +2880,11 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -3071,6 +3077,7 @@ _______
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Classes/WeakType";
 |   analyzer[] = "Classes/WrongName";
+|   analyzer[] = "Classes/WrongTypedPropertyInit";
 |   analyzer[] = "Constants/BadConstantnames";
 |   analyzer[] = "Constants/ConstRecommended";
 |   analyzer[] = "Constants/ConstantStrangeNames";
@@ -3093,6 +3100,7 @@ _______
 |   analyzer[] = "Functions/CallbackNeedsReturn";
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/DeepDefinitions";
+|   analyzer[] = "Functions/DontUseVoid";
 |   analyzer[] = "Functions/EmptyFunction";
 |   analyzer[] = "Functions/HardcodedPasswords";
 |   analyzer[] = "Functions/InsufficientTypehint";
@@ -3404,8 +3412,10 @@ ___________
 |   analyzer[] = "Classes/RedefinedProperty";
 |   analyzer[] = "Classes/ShouldUseSelf";
 |   analyzer[] = "Classes/UndeclaredStaticProperty";
+|   analyzer[] = "Classes/UninitedProperty";
 |   analyzer[] = "Classes/UnreachableConstant";
 |   analyzer[] = "Classes/UnusedConstant";
+|   analyzer[] = "Classes/WrongTypedPropertyInit";
 |   analyzer[] = "Functions/ExceedingTypehint";
 |   analyzer[] = "Functions/NullableWithoutCheck";
 |   analyzer[] = "Functions/WrongReturnedType";
@@ -3769,6 +3779,7 @@ __________________
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/Php80OnlyTypeHints";
 |   analyzer[] = "Php/RawPostDataUsage";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
@@ -3830,6 +3841,8 @@ __________________
 |   analyzer[] = "Php/Php71NewClasses";
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php80OnlyTypeHints";
+|   analyzer[] = "Php/Php80UnionTypehint";
 |   analyzer[] = "Php/ReservedKeywords7";
 |   analyzer[] = "Php/SetExceptionHandlerPHP7";
 |   analyzer[] = "Php/TrailingComma";
@@ -3882,6 +3895,8 @@ __________________
 |   analyzer[] = "Php/Php71microseconds";
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php80OnlyTypeHints";
+|   analyzer[] = "Php/Php80UnionTypehint";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -3922,6 +3937,8 @@ __________________
 |   analyzer[] = "Php/Php72ObjectKeyword";
 |   analyzer[] = "Php/Php72RemovedFunctions";
 |   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php80OnlyTypeHints";
+|   analyzer[] = "Php/Php80UnionTypehint";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -3951,6 +3968,8 @@ __________________
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php73RemovedFunctions";
 |   analyzer[] = "Php/Php74NewDirective";
+|   analyzer[] = "Php/Php80OnlyTypeHints";
+|   analyzer[] = "Php/Php80UnionTypehint";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnknownPcre2Option";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -3987,6 +4006,8 @@ __________________
 |   analyzer[] = "Php/Php74ReservedKeyword";
 |   analyzer[] = "Php/Php74mbstrrpos3rdArg";
 |   analyzer[] = "Php/Php80NewFunctions";
+|   analyzer[] = "Php/Php80OnlyTypeHints";
+|   analyzer[] = "Php/Php80UnionTypehint";
 |   analyzer[] = "Php/Php80VariableSyntax";
 |   analyzer[] = "Php/ReflectionExportIsDeprecated";
 |   analyzer[] = "Php/ScalarAreNotArrays";
@@ -4073,6 +4094,7 @@ _______________
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
 |   analyzer[] = "Classes/RaisedAccessLevel";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
+|   analyzer[] = "Classes/WrongTypedPropertyInit";
 |   analyzer[] = "Exceptions/CantThrow";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MustReturn";
@@ -4153,7 +4175,7 @@ ____________
 .. _ruleset_ini_rector:
 
 Rector
-[Rector](https://github.com/rectorphp/rector) is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
+`Rector <https://github.com/rectorphp/rector>`_ is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
 ______
 
 | [Rector]

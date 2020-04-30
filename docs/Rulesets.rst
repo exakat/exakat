@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 21 Apr 2020 08:58:17 +0000
-.. comment: Generation hash : d448965d3e12624d1a0c6fe5580b03d873b1316f
+.. comment: Generation date : Wed, 29 Apr 2020 17:37:28 +0000
+.. comment: Generation hash : 1d426ab121c4ec281387cc2433101d027affce78
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 384 analysis
+Total : 386 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -174,6 +174,7 @@ Total : 384 analysis
 * :ref:`Don't Send $this In Constructor <don't-send-$this-in-constructor>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
+* :ref:`Dont Collect Void <dont-collect-void>`
 * :ref:`Dont Mix ++ <dont-mix-++>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instructions <double-instructions>`
@@ -213,6 +214,7 @@ Total : 384 analysis
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Implemented Methods Are Public <implemented-methods-are-public>`
 * :ref:`Implied If <implied-if>`
+* :ref:`Implode() Arguments Order <implode()-arguments-order>`
 * :ref:`Inclusion Wrong Case <inclusion-wrong-case>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Incompatible Signature Methods With Covariance <incompatible-signature-methods-with-covariance>`
@@ -367,7 +369,6 @@ Total : 384 analysis
 * :ref:`Strings With Strange Space <strings-with-strange-space>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 * :ref:`Strtr Arguments <strtr-arguments>`
-* :ref:`Structures/ImplodeArgsOrder <structures/implodeargsorder>`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch Without Default <switch-without-default>`
@@ -462,6 +463,7 @@ Total : 384 analysis
 * :ref:`Wrong Range Check <wrong-range-check>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
 * :ref:`Wrong Type With Call <wrong-type-with-call>`
+* :ref:`Wrong Typed Property Init <wrong-typed-property-init>`
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
@@ -485,7 +487,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 38 analysis
+Total : 40 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -520,11 +522,13 @@ Total : 38 analysis
 * :ref:`Raised Access Level <raised-access-level>`
 * :ref:`Redefined Property <redefined-property>`
 * :ref:`Self Using Trait <self-using-trait>`
+* :ref:`Uninited Property <uninited-property>`
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
 * :ref:`Unused Class Constant <unused-class-constant>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
+* :ref:`Wrong Typed Property Init <wrong-typed-property-init>`
 
 .. _coding-conventions:
 
@@ -821,7 +825,7 @@ CompatibilityPHP56
 
 This ruleset centralizes all analysis for the migration from PHP 5.5 to 5.6.
 
-Total : 56 analysis
+Total : 57 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA Usage <$http\_raw\_post\_data-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -869,6 +873,7 @@ Total : 56 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -887,7 +892,7 @@ CompatibilityPHP70
 
 This ruleset centralizes all analysis for the migration from PHP 5.6 to 7.0.
 
-Total : 47 analysis
+Total : 49 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -923,11 +928,13 @@ Total : 47 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
+* :ref:`Union Typehint <union-typehint>`
 * :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
@@ -944,7 +951,7 @@ CompatibilityPHP71
 
 This ruleset centralizes all analysis for the migration from PHP 7.0 to 7.1.
 
-Total : 33 analysis
+Total : 35 analysis
 
 * :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -971,9 +978,11 @@ Total : 33 analysis
 * :ref:`PHP 7.2 Scalar Typehints <php-7.2-scalar-typehints>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`String Initialization <string-initialization>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
+* :ref:`Union Typehint <union-typehint>`
 * :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
@@ -987,7 +996,7 @@ CompatibilityPHP72
 
 This ruleset centralizes all analysis for the migration from PHP 7.1 to 7.2.
 
-Total : 25 analysis
+Total : 27 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -1009,9 +1018,11 @@ Total : 25 analysis
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
+* :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Undefined Constants <undefined-constants>`
+* :ref:`Union Typehint <union-typehint>`
 * :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -1022,7 +1033,7 @@ CompatibilityPHP73
 
 This ruleset centralizes all analysis for the migration from PHP 7.2 to 7.3.
 
-Total : 14 analysis
+Total : 16 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -1035,7 +1046,9 @@ Total : 14 analysis
 * :ref:`Numeric Literal Separator <numeric-literal-separator>`
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
 * :ref:`PHP 74 New Directives <php-74-new-directives>`
+* :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Typed Property Usage <typed-property-usage>`
+* :ref:`Union Typehint <union-typehint>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 * :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
 
@@ -1046,7 +1059,7 @@ CompatibilityPHP74
 
 This ruleset centralizes all analysis for the migration from PHP 7.3 to 7.4.
 
-Total : 24 analysis
+Total : 26 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
@@ -1063,14 +1076,16 @@ Total : 24 analysis
 * :ref:`PHP 7.4 Removed Functions <php-7.4-removed-functions>`
 * :ref:`PHP 7.4 Reserved Keyword <php-7.4-reserved-keyword>`
 * :ref:`Php 7.4 New Class <php-7.4-new-class>`
+* :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Php 8.0 Variable Syntax Tweaks <php-8.0-variable-syntax-tweaks>`
-* :ref:`Php/Php74mbstrrpos3rdArg <php/php74mbstrrpos3rdarg>`
 * :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
 * :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
 * :ref:`Unbinding Closures <unbinding-closures>`
+* :ref:`Union Typehint <union-typehint>`
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
 * :ref:`curl_version() Has No Argument <curl\_version()-has-no-argument>`
 * :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
+* :ref:`mb_strrpos() Third Argument <mb\_strrpos()-third-argument>`
 * :ref:`openssl_random_pseudo_byte() Second Argument <openssl\_random\_pseudo\_byte()-second-argument>`
 
 .. _compatibilityphp80:
@@ -1129,7 +1144,7 @@ LintButWontExec
 
 This ruleset focuses on PHP code that lint (php -l), but that will not run. As such, this ruleset tries to go further than PHP, by connecting files, just like during execution.
 
-Total : 25 analysis
+Total : 26 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -1155,6 +1170,7 @@ Total : 25 analysis
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Useless Alias <useless-alias>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
+* :ref:`Wrong Typed Property Init <wrong-typed-property-init>`
 * :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 
 .. _performances:
@@ -1217,7 +1233,7 @@ Total : 45 analysis
 Rector
 ++++++
 
-[Rector](https://github.com/rectorphp/rector) is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
+`Rector <https://github.com/rectorphp/rector>`_ is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
 
 Total : 3 analysis
 
@@ -1440,16 +1456,16 @@ This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint,
 Total : 20 analysis
 
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+* :ref:`Bad Typehint Relay <bad-typehint-relay>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Type With Array <could-type-with-array>`
 * :ref:`Could Type With Boolean <could-type-with-boolean>`
 * :ref:`Could Type With Int <could-type-with-int>`
+* :ref:`Could Type With Iterable <could-type-with-iterable>`
 * :ref:`Could Type With String <could-type-with-string>`
 * :ref:`Could Typehint <could-typehint>`
 * :ref:`Fossilized Method <fossilized-method>`
-* :ref:`Functions/BadTypehintRelay <functions/badtypehintrelay>`
-* :ref:`Functions/CouldTypeWithIterable <functions/couldtypewithiterable>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
