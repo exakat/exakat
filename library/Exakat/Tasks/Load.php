@@ -1270,9 +1270,17 @@ class Load extends Tasks {
     private function processFn(): Atom {
         $current = $this->id;
 
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AND) {
+            ++$this->id;
+            $reference = self::REFERENCE;
+        } else {
+            $reference = self::NOT_REFERENCE;
+        }
+
         ++$this->id;
         $atom     = 'Arrowfunction';
         $fn       = $this->processParameters($atom);
+        $fn->reference = $reference;
 
         // Process return type
         $returnTypes = $this->processTypehint();
@@ -1310,8 +1318,10 @@ class Load extends Tasks {
         $this->addLink($fn, $block, 'BLOCK');
 
         $fn->token    = $this->getToken($this->tokens[$current][0]);
-        $fn->fullcode = $this->tokens[$current][1] . ' (' . $fn->fullcode . ') ' .
-                        (empty($returnType) ? '' : ' : ' . ($fn->nullable ? '?' : '') . $returnTypeFullcode) .
+        $fn->fullcode = $this->tokens[$current][1] . ' ' .
+                        ($fn->reference ? '&' : '') .
+                        '(' . $fn->fullcode . ') ' .
+                        (empty($returnTypeFullcode) ? '' : ' : ' . ($fn->nullable ? '?' : '') . $returnTypeFullcode) .
                         '=> ' . $block->fullcode;
         $fn->fullnspath = $this->makeAnonymous('arrowfunction');
         $fn->aliased    = self::NOT_ALIASED;

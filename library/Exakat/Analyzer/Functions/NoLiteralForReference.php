@@ -32,6 +32,21 @@ class NoLiteralForReference extends Analyzer {
     }
 
     public function analyze() {
+        $atoms = array('Integer', 
+                       'Null', 
+                       'Void', 
+                       'Float', 
+                       'Addition', 
+                       'Multiplication', 
+                       'Bitshift', 
+                       'Logical', 
+                       'Ternary', 
+                       'Identifier', 
+                       'Nsname', 
+                       'Assignation',
+                       'Ternary',
+                       );
+
         // foo(1)
         // function foo(&$r) {}
         $this->atomIs(self::CALLS)
@@ -59,6 +74,90 @@ class NoLiteralForReference extends Analyzer {
              ->inIs('DEFINITION')
              ->outWithRank('ARGUMENT', 'ranked')
              ->is('reference', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // function &foo($r) { return 2; }
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->is('reference', true)
+             ->outIs('BLOCK')
+             ->atomInside('Return')
+             ->outIs('RETURN')
+             ->outIsIE('CODE') // Skip parenthesis
+             ->atomIs($atoms)
+             ->back('first');
+        $this->prepareQuery();
+
+        // function &foo($r) { return foo_without_ref(); }
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->is('reference', true)
+             ->outIs('BLOCK')
+             ->atomInside('Return')
+             ->outIs('RETURN')
+             ->outIsIE('CODE') // Skip parenthesis
+             ->atomIs(self::CALLS)
+             ->inIs('DEFINITION')
+             ->isNot('reference', true)
+             ->outIs('RETURNTYPE')
+             ->atomIs('Scalartypehint')
+             ->back('first');
+        $this->prepareQuery();
+
+        // function &foo($r) { return foo_without_ref(); }
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->is('reference', true)
+             ->outIs('BLOCK')
+             ->atomInside('Return')
+             ->outIs('RETURN')
+             ->outIsIE('CODE') // Skip parenthesis
+             ->atomIs(self::CALLS)
+             ->inIs('DEFINITION')
+             ->isNot('reference', true)
+             ->outIs('RETURNTYPE')
+             ->atomIs('Void')
+             ->inIs('RETURNTYPE')
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Return')
+             ->atomIsNot(self::CONTAINERS)
+             ->back('first');
+        $this->prepareQuery();
+
+        // fn &foo($r) { return 2; }
+        $this->atomIs('Arrowfunction')
+             ->is('reference', true)
+             ->outIs('BLOCK')
+             ->outIsIE('CODE') // Skip parenthesis
+             ->atomIs($atoms)
+             ->back('first');
+        $this->prepareQuery();
+
+        // fn &foo($r) { return foo_without_ref(); }
+        $this->atomIs('Arrowfunction')
+             ->is('reference', true)
+             ->outIs('BLOCK')
+             ->outIsIE('CODE') // Skip parenthesis
+             ->atomIs(self::CALLS)
+             ->inIs('DEFINITION')
+             ->isNot('reference', true)
+             ->outIs('RETURNTYPE')
+             ->atomIs('Scalartypehint')
+             ->back('first');
+        $this->prepareQuery();
+
+        // function &foo($r) { return foo_without_ref(); }
+        $this->atomIs('Arrowfunction')
+             ->is('reference', true)
+             ->outIs('BLOCK')
+             ->outIsIE('CODE') // Skip parenthesis
+             ->atomIs(self::CALLS)
+             ->inIs('DEFINITION')
+             ->isNot('reference', true)
+             ->outIs('RETURNTYPE')
+             ->atomIs('Void')
+             ->inIs('RETURNTYPE')
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Return')
+             ->atomIsNot(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
     }
