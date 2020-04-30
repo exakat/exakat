@@ -309,8 +309,6 @@ Label : PROJECT
               5
           Label : RIGHT
             39
-            Label : NAME
-              39
             Label : ARGUMENT
               40
             Label : ARGUMENT
@@ -341,3 +339,5 @@ Label : PROJECT
                 Void
               Label : RETURNTYPE
                 9
+            Label : NAME
+              39

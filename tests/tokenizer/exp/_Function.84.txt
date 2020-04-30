@@ -1,0 +1,103 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            8
+            Label : DEFAULT
+              6
+            Label : NAME
+              8
+            Label : TYPEHINT
+              6
+          Label : BLOCK
+            9
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            10
+            Label : DEFAULT
+              6
+            Label : NAME
+              10
+            Label : TYPEHINT
+              6
+          Label : BLOCK
+            11
+          Label : DEFINITION
+            11
+            Label : DEFINITION
+              11
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            6
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            8
+            Label : DEFAULT
+              6
+            Label : NAME
+              8
+            Label : TYPEHINT
+              6
+          Label : BLOCK
+            9
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            12
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            10
+            Label : DEFAULT
+              6
+            Label : NAME
+              10
+            Label : TYPEHINT
+              6
+          Label : BLOCK
+            14
+            Label : ARGUMENT
+              11
+              Label : DEFAULT
+                6
+              Label : NAME
+                11
+              Label : TYPEHINT
+                6
+            Label : BLOCK
+              15
+              Label : EXPRESSION
+                16
+                Label : RETURN
+                  18
+                  Label : LEFT
+                    17
+                  Label : RIGHT
+                    19
+            Label : DEFINITION
+              17
+              Label : DEFINITION
+                17
+            Label : RETURNED
+              17
+            Label : RETURNTYPE
+              6
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            13
