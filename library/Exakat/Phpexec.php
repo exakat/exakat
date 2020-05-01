@@ -275,7 +275,15 @@ class Phpexec {
             $res = trim($res);
        }
 
-        return !$this->isError(explode("\n", $res)[0]);
+        $return = false;
+        foreach(explode("\n", $res) as $r) {
+            if (empty($r)) { continue; }
+
+            if ($this->isError($r)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public function getError() : array {
@@ -284,7 +292,7 @@ class Phpexec {
         return $r;
     }
 
-    public function isError(string $resFile) : bool {
+    private function isError(string $resFile) : bool {
         if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
             return false;
             // do nothing. All is fine.
@@ -339,7 +347,7 @@ class Phpexec {
             return true;
         }
 
-        display("\nCan't understand this php feedback : $resFile\n");
+        display("\nCan't understand this php feedback for '$filename': $resFile\n");
 
         return false;
     }
