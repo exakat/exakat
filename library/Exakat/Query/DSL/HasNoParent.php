@@ -27,7 +27,12 @@ use Exakat\Query\Query;
 
 class HasNoParent extends DSL {
     public function run() {
+        assert(func_num_args() === 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
         list($parentClass, $ins) = func_get_args();
+
+        if (empty($diff)){
+            return new Command(Query::NO_QUERY);
+        }
 
         $this->assertAtom($parentClass);
         $this->assertLink($ins);

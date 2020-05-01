@@ -26,7 +26,11 @@ namespace Exakat\Query\DSL;
 
 class IsNotMixedcase extends DSL {
     public function run() {
-        list($property) = func_get_args();
+        if (func_num_args() === 1) {
+            list($property) = func_get_args();
+        } else {
+            $property = 'fullcode';
+        }
 
         assert($this->assertProperty($property));
         return new Command('filter{it.get().value("' . $property . '") == it.get().value("' . $property . '").toString().toLowerCase() || it.get().value("' . $property . '") == it.get().value("' . $property . '").toString().toUpperCase()}');

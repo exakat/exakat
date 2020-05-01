@@ -25,7 +25,11 @@ namespace Exakat\Query\DSL;
 
 class PreviousSibling extends DSL {
     public function run(): Command {
-        list($link) = func_get_args();
+        if (func_num_args() === 1) {
+            list($link) = func_get_args();
+        } else {
+            $link = 'EXPRESSION';
+        }
 
         $hasIn = $this->dslfactory->factory('hasIn');
         $return = $hasIn->run($link);

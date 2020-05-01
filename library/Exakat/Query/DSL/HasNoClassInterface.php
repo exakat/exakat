@@ -23,13 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
 
-class HasClassDefinition extends DSL {
+class HasNoClassInterface extends DSL {
     public function run() {
-        assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
-        list($type) = func_get_args();
+        $return = $this->dslfactory->factory('hasNoInstruction');
 
-        return new Command('where(__.in("DEFINITION").hasLabel(within(***)) )', makeArray($type) );
+        return $return->run(array('Class', 'Classanonymous', 'Interface'));
     }
 }
 ?>

@@ -26,7 +26,11 @@ namespace Exakat\Query\DSL;
 
 class IsUppercase extends DSL {
     public function run() {
-        list($property) = func_get_args();
+        if (func_num_args() === 1) {
+            list($property) = func_get_args();
+        } else {
+            $property = 'fullcode';
+        }
 
         return new Command('filter{it.get().value("' . $property . '") == it.get().value("' . $property . '").toUpperCase()}');
     }

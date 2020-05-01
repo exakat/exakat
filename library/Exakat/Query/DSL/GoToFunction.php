@@ -23,9 +23,15 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
+
 class GoToFunction extends DSL {
     public function run(): Command {
-        list($atoms) = func_get_args();
+        if (func_num_args() === 1) {
+            list($atoms) = func_get_args();
+        } else {
+            $atoms = Analyzer::FUNCTIONS_ALL;
+        }
 
         $this->assertAtom($atoms);
         $linksDown = self::$linksDown;

@@ -26,7 +26,20 @@ namespace Exakat\Query\DSL;
 
 class CollectVariables extends DSL {
     public function run(): Command {
-        list($variable, $type) = func_get_args();
+        switch(func_num_args()) {
+            case 2:
+                list($variable, $type) = func_get_args();
+                break;
+                
+            case 1 :
+                list($variable) = func_get_args();
+                $type = 'fullcode';
+                break;
+                
+            default: 
+                $variables = 'variables';
+                $type = 'fullcode';
+        }
 
         assert(in_array($type, array('fullcode', 'code')), 'collectVariable type should be code or fullcode');
         $this->assertVariable($variable, self::VARIABLE_WRITE);

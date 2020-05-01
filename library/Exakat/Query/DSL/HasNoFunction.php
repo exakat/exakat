@@ -23,13 +23,12 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
 
 class HasNoFunction extends DSL {
     public function run() {
-        list($type) = func_get_args();
-
         $return = $this->dslfactory->factory('hasNoInstruction');
-        return $return->run($type);
+        return $return->run(Analyzer::FUNCTIONS_ALL);
     }
 }
 ?>

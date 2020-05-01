@@ -26,14 +26,22 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class OtherSiblings extends DSL {
-    public function run(): Command {
-        list($link, $self) = func_get_args();
+    private static $sibling = 0;
 
-        static $sibling = 0; // This is for calling the method multiple times
-        ++$sibling;
+    public function run(): Command {
+        if (func_num_args() === 2) {
+            list($link, $self) = func_get_args();
+        } elseif (func_num_args() === 1) {
+            list($link) = func_get_args();
+            $self = Analyzer::EXCLUDE_SELF;
+        } else {
+            $link = 'EXPRESSION';
+        }
+
+        ++self::$sibling;
 
         if ($self === Analyzer::EXCLUDE_SELF) {
-            return new Command('as("sibling' . $sibling . '").in("' . $link . '").out("' . $link . '").where(neq("sibling' . $sibling . '"))');
+            return new Command('as("sibling' . self::$sibling . '").in("' . $link . '").out("' . $link . '").where(neq("sibling' . self::$sibling . '"))');
         } else {
             return new Command('in("' . $link . '").out("' . $link . '")');
         }

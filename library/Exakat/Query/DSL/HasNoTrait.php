@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class HasNoTrait extends DSL {
     public function run() {
         $return = $this->dslfactory->factory('hasNoInstruction');
+
         return $return->run('Trait');
     }
 }

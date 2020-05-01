@@ -26,7 +26,11 @@ namespace Exakat\Query\DSL;
 
 class CollectTraits extends DSL {
     public function run(): Command {
-        list($variable) = func_get_args();
+        if (func_num_args() === 1) {
+            list($variable) = func_get_args();
+        } else {
+            $variable = 'classes';
+        }
 
         $this->assertVariable($variable, self::VARIABLE_WRITE);
 

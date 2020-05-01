@@ -23,10 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
 
-class IsInCatchBlock extends DSL {
-    public function run(): Command {
-        return new Command('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any()');
+class HasNoLoop extends DSL {
+    public function run() {
+        $return = $this->dslfactory->factory('hasNoInstruction');
+
+        return $return->run(Analyzer::LOOPS_ALL);
     }
 }
 ?>
