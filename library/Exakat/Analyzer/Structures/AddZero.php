@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class AddZero extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // $x += 0
         $this->atomIs('Assignation')
