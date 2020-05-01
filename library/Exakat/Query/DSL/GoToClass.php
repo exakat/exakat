@@ -23,11 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
+
 class GoToClass extends DSL {
     public function run() {
         $return = $this->dslfactory->factory('goToInstruction');
 
-        return $return->run(array('Class', 'Classanonymous'));
+        return $return->run(Analyzer::CLASSES_ALL);
     }
 }
 ?>

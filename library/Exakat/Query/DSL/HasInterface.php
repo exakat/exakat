@@ -23,34 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
-class AtomInsideMoreThan extends DSL {
+class HasInterface extends DSL {
     public function run(): Command {
-        if (func_get_args() === 2) {
-            list($atoms, $times) = func_get_args();
-        } else {
-            $atoms = func_get_arg(0);
-            $times = 1;
-        }
+        $return = $this->dslfactory->factory('hasInstruction');
 
-        $this->assertAtom($atoms);
-        $diff = $this->normalizeAtoms($atoms);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
-        }
-
-        $linksDown = self::$linksDown;
-        $MAX_LOOPING  = self::$MAX_LOOPING;
-
-        $gremlin = <<<GREMLIN
-where(
-    __.emit( ).repeat( __.out({$linksDown}).not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait", "Interface")) ).times($MAX_LOOPING)
-      .hasLabel(within(***))
-      .count().is(gt($times))
-)
-GREMLIN;
-        return new Command($gremlin, array($diff));
+        return $return->run('Interface');
     }
 }
 ?>

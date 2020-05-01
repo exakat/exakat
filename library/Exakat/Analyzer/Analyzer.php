@@ -550,72 +550,6 @@ GREMLIN;
         return $this;
     }
 
-    protected function goToAllElse() {
-        $this->query->GoToAllElse();
-
-        return $this;
-    }
-
-    protected function goToAllDefinitions() {
-        $this->query->GoToAllDefinitions();
-
-        return $this;
-    }
-
-    public function tokenIs($token) {
-        $this->query->tokenIs($token);
-
-        return $this;
-    }
-
-    public function tokenIsNot($token) {
-        $this->query->tokenIsNot($token);
-
-        return $this;
-    }
-
-    public function isNotEmptyArray() {
-        $this->query->isNotEmptyArray();
-
-        return $this;
-    }
-
-    public function atomFunctionIs($fullnspath) {
-        $this->query->atomFunctionIs($fullnspath);
-
-        return $this;
-    }
-
-    public function isNotIgnored() {
-        $this->query->isNotIgnored();
-
-        return $this;
-    }
-
-    public function functioncallIs($fullnspath) {
-        $this->query->functioncallIs($fullnspath);
-
-        return $this;
-    }
-
-    public function functioncallIsNot($fullnspath) {
-        $this->query->functioncallIsNot($fullnspath);
-
-        return $this;
-    }
-
-    public function atomInsideMoreThan($atom, $times = 1) {
-        $this->query->atomInsideMoreThan($atom, $times);
-
-        return $this;
-    }
-
-    public function trim($variable, $chars = '\'\"') {
-        $this->query->trim($variable, $chars);
-
-        return $this;
-    }
-
     public function analyzerIs($analyzer) {
         $analyzer = makeArray($analyzer);
 
@@ -1119,46 +1053,8 @@ GREMLIN;
         return $this;
     }
 
-    public function goToClass() {
-        $this->query->goToClass();
-
-        return $this;
-    }
-
-    public function hasNoClass() {
-        return $this->hasNoInstruction(self::CLASSES_ALL);
-    }
-
-    public function hasClass() {
-        $this->hasInstruction(self::CLASSES_ALL);
-
-        return $this;
-    }
-
-    public function goToInterface() {
-        $this->query->goToInstruction('Interface');
-
-        return $this;
-    }
-
-    public function hasNoInterface() {
-        return $this->hasNoInstruction('Interface');
-    }
-
-    public function goToTrait() {
-        $this->query->goToTrait();
-
-        return $this;
-    }
-
     public function hasNoTrait() {
         return $this->hasNoInstruction('Trait');
-    }
-
-    public function goToClassTrait($classes = self::CLASSES_TRAITS) {
-        $this->goToInstruction($classes);
-
-        return $this;
     }
 
     public function hasNoClassTrait() {
@@ -1166,54 +1062,12 @@ GREMLIN;
         return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait', 'Method', 'Magicmethod'));
     }
 
-    public function goToClassInterface() {
-        $this->goToInstruction(array('Interface', 'Class', 'Classanonymous'));
-
-        return $this;
-    }
-
     public function hasNoClassInterface() {
         return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Interface'));
     }
 
-    public function goToClassInterfaceTrait() {
-        $this->goToInstruction(self::CIT);
-
-        return $this;
-    }
-
     public function hasNoClassInterfaceTrait() {
         return $this->hasNoInstruction(self::CIT);
-    }
-
-    public function hasClassTrait() {
-        $this->query->hasClassTrait();
-
-        return $this;
-    }
-
-    public function hasClassInterface() {
-        $this->query->hasClassInterface();
-
-        return $this;
-    }
-
-    public function hasTrait() {
-        $this->hasInstruction('Trait');
-
-        return $this;
-    }
-
-    public function hasInterface() {
-        $this->hasInstruction('Interface');
-
-        return $this;
-    }
-
-    public function hasLoop() {
-        $this->hasInstruction(self::LOOPS_ALL);
-
-        return $this;
     }
 
     public function hasNoLoop() {
@@ -1222,26 +1076,8 @@ GREMLIN;
         return $this;
     }
 
-    public function hasIfthen() {
-        $this->hasInstruction('Ifthen');
-
-        return $this;
-    }
-
     public function hasNoIfthen() {
         return $this->hasNoInstruction('Ifthen');
-    }
-
-    public function hasNoComparison() {
-        $this->query->hasNoComparison();
-
-        return $this;
-    }
-
-    public function hasTryCatch() {
-        $this->hasInstruction('Try');
-
-        return $this;
     }
 
     public function hasNoTryCatch() {
