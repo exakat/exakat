@@ -26,6 +26,7 @@ namespace Exakat\Query\DSL;
 
 class SaveMethodNameAs extends DSL {
     public function run() {
+        assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
         list($name) = func_get_args();
 
         $this->assertVariable($name, self::VARIABLE_WRITE);

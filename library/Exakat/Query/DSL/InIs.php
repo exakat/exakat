@@ -27,9 +27,12 @@ use Exakat\Query\Query;
 
 class InIs extends DSL {
     public function run() {
-        list($link) = func_get_args();
+        if (func_num_args() === 1) {
+            list($link) = func_get_args();
+        } else {
+            $link = array();
+        }
 
-        assert(func_num_args() <= 1, 'Too many arguments for ' . __METHOD__);
         $this->assertLink($link);
 
         if (empty($link)) {

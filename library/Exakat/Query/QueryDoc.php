@@ -1,0 +1,221 @@
+<?php
+/*
+ * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+
+declare(strict_types = 1);
+
+namespace Exakat\Query;
+
+
+class QueryDoc {
+    public function __construct() {    }
+
+    public function __call($name, $args) {
+        print "$name\n";
+    }
+
+    public function side(): self {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return $this;
+        }
+
+        $this->sides[] = $this->commands;
+        $this->commands = array();
+
+        return $this;
+    }
+
+    public function prepareSide(): Command {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return new Command(Query::NO_QUERY);
+        }
+
+        $commands = array_column($this->commands, 'gremlin');
+
+        assert(!empty($this->sides), 'No side was started! Missing $this->side() ? ');
+        assert(!empty($commands), 'No command in side query');
+
+        if (in_array(self::STOP_QUERY, $commands) !== false) {
+            $this->commands = array_pop($this->sides);
+            return new Command(Query::STOP_QUERY);
+        }
+
+        $query = '__.' . implode(".\n", $commands);
+        $args = array_column($this->commands, 'arguments');
+        $args = array_merge(...$args);
+
+        $query = str_replace(array_keys($args), '***', $query);
+
+        $sack = $this->prepareSack($this->commands);
+
+        $return = new Command($query, array_values($args));
+        $return->setSack($sack);
+
+        $this->commands = array_pop($this->sides);
+
+        return $return;
+    }
+
+    public function prepareQuery(): bool {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return true;
+        }
+
+        assert($this->query === null, 'query is already ready');
+        assert(empty($this->sides), 'sides are not empty : left ' . count($this->sides) . ' element');
+
+        // @doc This is when the object is a placeholder for others.
+        if (empty($this->commands)) {
+            return true;
+        }
+
+        /*
+        Sack is ignored ATM
+        $sack = $this->prepareSack($this->commands);
+        if (is_array($sack)) {
+            $sack['processed'] = 0;
+            $sack['total'] = 0;
+        } else {
+            $sack = array('processed' => 0,
+                          'total' => 0,
+                          );
+        }
+        $sack = $this->sackToGremlin($sack);
+        */
+        $sack = self::SACK;;
+        $this->query = "g{$sack}.V()";
+
+        $commands  = array_column($this->commands, 'gremlin');
+        $arguments = array_column($this->commands, 'arguments');
+
+        if (in_array(self::STOP_QUERY, $commands) !== false) {
+            // any 'stop_query' is blocking
+            $this->query = '';
+            return false;
+        }
+
+        foreach($commands as $id => $command) {
+            if ($command === self::NO_QUERY) {
+                unset($commands[$id], $arguments[$id]);
+            }
+        }
+
+        $this->query .= '.' . implode(".\n", $commands);
+
+        if (empty($arguments)) {
+            $this->arguments = array();
+        } else {
+            $this->arguments = array_merge(...$arguments);
+        }
+
+        return true;
+    }
+
+    public function prepareRawQuery() {
+        if ($this->stopped === self::QUERY_STOPPED) {
+            return true;
+        }
+
+        $commands = array_column($this->commands, 'gremlin');
+        $arguments = array_column($this->commands, 'arguments');
+
+        if (in_array(self::STOP_QUERY, $commands) !== false) {
+            // any 'stop_query' is blocking
+            return $this->query = "// Query with STOP_QUERY\n";
+        }
+
+        foreach($commands as $id => $command) {
+            if ($command === self::NO_QUERY) {
+                unset($commands[$id], $arguments[$id]);
+            }
+        }
+
+        $commands = implode('.', $commands);
+        $this->arguments = array_merge(...$arguments);
+
+        $sack = self::SACK;
+
+        $this->query = <<<GREMLIN
+g{$sack}.V().as('first').$commands
+
+// Query (#{$this->id}) for {$this->analyzer}
+// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n
+
+GREMLIN;
+
+    }
+
+    public function printRawQuery() {
+        $this->prepareRawQuery();
+
+        print $this->query . PHP_EOL;
+        print_r($this->arguments);
+        die(__METHOD__);
+    }
+
+    public function getQuery() {
+        assert($this->query !== null, 'Null Query found!');
+        return $this->query;
+    }
+
+    public function getArguments() {
+        return $this->arguments;
+    }
+
+    public function printQuery() {
+        $this->prepareQuery();
+
+        var_dump($this->query);
+        print_r($this->arguments);
+        die(__METHOD__);
+    }
+
+    private function prepareSack(array $commands) {
+        foreach($commands as $command) {
+            if ($command->getSack() === Command::SACK_NONE) {
+                continue;
+            }
+
+            return $command->getSack();
+        }
+
+        return Command::SACK_NONE;
+    }
+
+    private function sackToGremlin(array $sack): string {
+        if (empty($sack)) {
+            return '';
+        }
+
+        $return = array();
+        foreach($sack as $name => $init) {
+            $return[] = "\"$name\":" . trim((string) $init, ' {}');
+        }
+
+        $return = '.withSack{[' . join(', ', $return) . ']}';
+        return $return;
+    }
+
+    public function canSkip(): bool {
+        return $this->stopped !== self::QUERY_RUNNING;
+    }
+}
+?>

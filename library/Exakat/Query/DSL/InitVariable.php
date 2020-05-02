@@ -26,7 +26,13 @@ namespace Exakat\Query\DSL;
 
 class InitVariable extends DSL {
     public function run() {
-        list($name, $value) = func_get_args();
+        if (func_num_args() === 2) {
+            list($name, $value) = func_get_args();
+        } else {
+            list($name) = func_get_args();
+            $value = '[]';
+        }
+
 
         if (is_string($name)) {
             // Value should not be a direct groovy code!!!

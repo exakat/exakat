@@ -69,7 +69,7 @@ class NoHardcodedHash extends Analyzer {
              ->regexIs('noDelimiter', '^[a-zA-Z0-9]+={0,2}\\$')
              ->raw('filter{ it.get().value("noDelimiter").toString().length() % 4 == 0}')
              ->isNotMixedcase('noDelimiter')
-             ->codeLength(' > 101');
+             ->fullcodeLength(' > 101');
         $this->prepareQuery();
     }
 }

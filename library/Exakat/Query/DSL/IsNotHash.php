@@ -27,6 +27,7 @@ use Exakat\Query\Query;
 
 class IsNotHash extends DSL {
     public function run() {
+        assert(func_num_args() <= 3, __METHOD__ . ' should get 3 arguments max, ' . func_num_args() . ' provided.');
         list($property, $hash, $index) = func_get_args();
 
         if (empty($hash)) {

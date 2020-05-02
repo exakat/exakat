@@ -26,16 +26,21 @@ namespace Exakat\Query\DSL;
 
 class NoChildWithRank extends DSL {
     public function run() {
-        list($link, $rank) = func_get_args();
+        if (func_num_args() === 2) {
+            list($links, $rank) = func_get_args();
+        } else {
+            list($links) = func_get_args();
+            $rank = 0;
+        }
 
-        $this->assertLink($link);
+        $this->assertLink($links);
 
         if (is_int($rank)) {
-            return new Command('not( where( __.out(' . $this->SorA($link) . ').has("rank", ***) ) )', array(abs($rank)));
+            return new Command('not( where( __.out(' . $this->SorA($links) . ').has("rank", ***) ) )', array(abs($rank)));
         } elseif ($this->isVariable($rank)) {
             assert($this->assertVariable($rank), "$rank is not a variable");
 
-            return new Command('not( where( __.out(' . $this->SorA($link) . ').filter{it.get().value("rank") == ' . $rank . '; } ) )');
+            return new Command('not( where( __.out(' . $this->SorA($links) . ').filter{it.get().value("rank") == ' . $rank . '; } ) )');
         }
     }
 }

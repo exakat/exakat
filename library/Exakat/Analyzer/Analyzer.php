@@ -576,60 +576,6 @@ GREMLIN;
         return $this;
     }
 
-    public function isGlobalCode() {
-        $this->query->IsGlobalCode();
-
-        return $this;
-    }
-
-    public function isReassigned($name) {
-        $this->query->IsReassigned($name);
-
-        return $this;
-    }
-
-    public function isUsed($times = 1) {
-        $this->query->isUsed($times);
-
-        return $this;
-    }
-
-    public function isComplexExpression($threshold = 30) {
-        $this->query->isComplexExpression($threshold);
-
-        return $this;
-    }
-
-    public function IsPropertyDefined() {
-        $this->query->isPropertyDefined();
-
-        return $this;
-    }
-
-    public function IsNotPropertyDefined() {
-        $this->query->isNotPropertyDefined();
-
-        return $this;
-    }
-
-    public function isNotHash($property, $hash, $index) {
-        $this->query->isNotHash($property, $hash, $index);
-
-        return $this;
-    }
-
-    public function hasChildWithRank($edgeName, $rank = 0) {
-        $this->query->hasChildWithRank($edgeName, $rank);
-
-        return $this;
-    }
-
-    public function noChildWithRank($edgeName, $rank = 0) {
-        $this->query->noChildWithRank($edgeName, $rank);
-
-        return $this;
-    }
-
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
         $this->query->noDelimiterIs($code, $caseSensitive);
@@ -650,18 +596,6 @@ GREMLIN;
         return $this;
     }
 
-    public function InitVariable($name, $value = '[]') {
-        $this->query->initVariable($name, $value);
-
-        return $this;
-    }
-
-    public function saveMethodNameAs($name) {
-        $this->query->saveMethodNameAs($name);
-
-        return $this;
-    }
-
     public function fullcodeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->propertyIs('fullcode', $code, $caseSensitive);
 
@@ -670,12 +604,6 @@ GREMLIN;
 
     public function fullcodeVariableIs($variable) {
         $this->query->fullcodeVariableIs($variable);
-
-        return $this;
-    }
-
-    public function variableIsAssigned($times) {
-        $this->query->variableIsAssigned($times);
 
         return $this;
     }
@@ -714,57 +642,6 @@ GREMLIN;
         return $this;
     }
 
-    public function codeLength($length = ' == 1 ') {
-        $values = $this->dictCode->length($length);
-        $this->query->codeLength($values);
-
-        return $this;
-    }
-
-    public function fullcodeLength($length = ' == 1 ') {
-        // @todo add some tests ? Like Operator / value ?
-        $this->query->fullcodeLength($length);
-
-        return $this;
-    }
-
-    public function groupCount($column) {
-        $this->query->groupCount($column);
-
-        return $this;
-    }
-
-    public function regexIs($column, $regex) {
-        $this->query->regexIs($column, $regex);
-
-        return $this;
-    }
-
-    public function regexIsNot($column, $regex) {
-        $this->query->regexIsNot($column, $regex);
-
-        return $this;
-    }
-
-    public function inIs($link = array()) {
-        $this->query->inIs($link);
-
-        return $this;
-    }
-
-    // follows a link if it is there (and do nothing otherwise)
-    protected function inIsIE($link = array()) {
-        $this->query->inIsIE($link);
-
-        return $this;
-    }
-
-    public function inIsNot($link) {
-        $this->query->inIsNot($link);
-
-        return $this;
-    }
-
     public function raw($query, ...$args) {
         ++$this->rawQueryCount;
 
@@ -773,7 +650,7 @@ GREMLIN;
         return $this;
     }
 
-    // Calculate The lenght of a string in a property, and report it in the named string
+    // Calculate The length of a string in a property, and report it in the named string
     public function getStringLength($property = 'noDelimiter', $variable = 'l') {
         $this->query->getStringLength($property, $variable);
 
@@ -782,12 +659,6 @@ GREMLIN;
 
     public function isReferencedArgument($variable = 'variable') {
         $this->query->isReferencedArgument($variable);
-
-        return $this;
-    }
-
-    public function hasNoUsage() {
-        $this->query->hasNoUsage();
 
         return $this;
     }

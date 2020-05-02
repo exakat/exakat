@@ -27,10 +27,10 @@ use Exakat\Query\Query;
 
 class InIsNot extends DSL {
     public function run() {
+        assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
         list($link) = func_get_args();
 
         $this->assertLink($link);
-        assert(func_num_args() <= 1, 'Too many arguments for ' . __METHOD__);
 
         $diff = $this->normalizeLinks($link);
         if (empty($diff)) {

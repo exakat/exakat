@@ -27,6 +27,7 @@ use Exakat\Query\Query;
 
 class RegexIsNot extends DSL {
     public function run() {
+        assert(func_num_args() === 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
         list($property, $regex) = func_get_args();
 
         $this->assertProperty($property);

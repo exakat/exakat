@@ -26,7 +26,11 @@ namespace Exakat\Query\DSL;
 
 class IsUsed extends DSL {
     public function run() {
-        list($times) = func_get_args();
+        if (func_num_args() === 1) {
+            list($times) = func_get_args();
+        } else {
+            $times = 1;
+        }
 
         $gremlin = <<<GREMLIN
 where(

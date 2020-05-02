@@ -27,7 +27,12 @@ use Exakat\Query\Query;
 
 class HasChildWithRank extends DSL {
     public function run() {
-        list($links, $rank) = func_get_args();
+        if (func_num_args() === 2) {
+            list($links, $rank) = func_get_args();
+        } else {
+            list($links) = func_get_args();
+            $rank = 0;
+        }
 
         $this->assertLink($links);
         $diff = $this->normalizeLinks($links);

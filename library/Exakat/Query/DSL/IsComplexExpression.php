@@ -26,7 +26,11 @@ namespace Exakat\Query\DSL;
 
 class IsComplexExpression extends DSL {
     public function run() {
-        list($threshold) = func_get_args();
+        if (func_num_args() === 1) {
+            list($threshold) = func_get_args();
+        } else {
+            $threshold = 30;
+        }
 
         $MAX_LOOPING = self::$MAX_LOOPING;
         $linksDown = self::$linksDown;
