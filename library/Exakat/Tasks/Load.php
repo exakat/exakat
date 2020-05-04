@@ -858,7 +858,7 @@ class Load extends Tasks {
                 $this->checkTokens($filename);
                 $this->calls->save();
             } catch (LoadError $e) {
-//                print $e->getMessage();
+                print $e->getMessage();
                 $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (finally) (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
                 $this->reset();
                 $this->calls->reset();
@@ -4976,14 +4976,15 @@ class Load extends Tasks {
     }
 
     private function processReturn(): Atom {
+        $current = $this->id;
+        // Case of return ;
+        $return = $this->addAtom('Return');
+
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
                                                             $this->phptokens::T_SEMICOLON,
                                                             ),
                 \STRICT_COMPARISON)) {
-            $current = $this->id;
 
-            // Case of return ;
-            $return = $this->addAtom('Return');
 
             $returnArg = $this->addAtomVoid();
             $this->addLink($return, $returnArg, 'RETURN');
@@ -5000,28 +5001,43 @@ class Load extends Tasks {
             }
 
             return $return;
-        } else {
-            if (!empty($this->currentMethod)) {
-                $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
-            }
-
-            $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
-            $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
-
-            $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
-            $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
-
-            $operator = $this->popExpression();
-            $this->pushExpression($operator);
-
-            $this->currentReturn = null;
-
-            $this->runPlugins($operator, array('RETURN' => $return) );
-
-            $this->checkExpression();
-
-            return $operator;
+        } 
+        
+        if (!empty($this->currentMethod)) {
+            $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
         }
+
+        $return = $this->addAtom('Return');
+
+        $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+        $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
+        $finals =  $this->precedence->get($this->tokens[$this->id][0]);
+        do {
+            $returned = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
+        $this->popExpression();
+
+        $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
+
+        $this->addLink($return, $returned, 'RETURN');
+
+        $return->code     = $this->tokens[$current][1];
+        $return->fullcode = $this->tokens[$current][1] . ' ' . $returned->fullcode;
+        $return->token    = $this->getToken($this->tokens[$current][0]);
+
+        // raw variables are done 
+        if (!$returned->isA(array('Variable', 'Variableobject', 'Variablearray')) &&
+            $this->currentReturn !== null) {
+            $this->addLink($this->currentReturn, $returned, 'RETURNED');
+       }
+        $this->currentReturn = null;
+
+       $this->runPlugins($return, array('RETURN' => $returned) );
+
+       $this->pushExpression($return);
+       $this->checkExpression();
+
+        return $return;
     }
 
     private function processThrow(): Atom {
