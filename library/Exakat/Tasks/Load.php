@@ -5422,6 +5422,7 @@ class Load extends Tasks {
         if (is_string($right) && mb_strtolower($right) === 'class') {
             $static = $this->addAtom('Staticclass');
             $fullcode = "$left->fullcode::$right";
+            $this->getFullnspath($left, 'class', $left);
             $this->calls->addCall('class', $left->fullnspath, $left);
             // We are not sending $left, as it has no impact
             $this->runPlugins($left);

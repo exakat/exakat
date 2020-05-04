@@ -1,6 +1,6 @@
 <?php
 
-const A = 1;
+const A = 13;
 const B = 'b';
 define('C', 1 + 2);
 
