@@ -2380,9 +2380,9 @@ class Load extends Tasks {
     }
 
     private function processConst(): Atom {
+        $current = $this->id;
         $const = $this->addAtom('Const', $current);
         $this->makePhpdoc($const, $this->id);
-        $current = $this->id;
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
 
