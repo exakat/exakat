@@ -38,7 +38,7 @@ class AnalyzerIsNot extends DSL {
 
         assert($this->assertAnalyzer($analyzer));
 
-        return new Command('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
+        return new Command('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', array($analyzer));
     }
 }
 ?>
