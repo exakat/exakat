@@ -41,7 +41,7 @@ class GetStringLength extends DSL {
                 $property = 'noDelimiter';
                 $variable = 1;
                 break;
-            
+
             default:
                 assert(false, 'No enought arguments for ' . __METHOD__);
         }

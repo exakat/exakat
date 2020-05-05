@@ -30,7 +30,7 @@ class SaveOutAs extends DSL {
             case 3:
                 list($name, $out, $sort) = func_get_args();
                 break 1;
-            
+
             case 2:
                 list($name, $out) = func_get_args();
                 $sort = 'rank';
@@ -41,7 +41,7 @@ class SaveOutAs extends DSL {
                 $sort = 'rank';
                 $out = 'ARGUMENT';
                 break 1;
-            
+
             default:
                 assert(false, 'Wrong number of argument for ' . __METHOD__ . '. 1 to 3 are expected, ' . func_num_args() . ' provided');
         }

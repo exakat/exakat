@@ -38,7 +38,7 @@ class NoDelimiterIs extends DSL {
                 list($code) = func_get_args();
                 $caseSensitive = Analyzer::CASE_INSENSITIVE;
                 break;
-            
+
             default:
                 assert(false, 'No enought arguments for ' . __METHOD__);
         }

@@ -55,7 +55,7 @@ class BadTypehintRelay extends Analyzer {
              ->outIs('RETURNTYPE')
              ->savePropertyAs('fullnspath', 'typehint')
              ->back('first')
-             
+
              ->outIs('DEFINITION')
              ->inIs('RETURN')
              ->goToFunction()
@@ -69,7 +69,7 @@ class BadTypehintRelay extends Analyzer {
              ->outIs('RETURNTYPE')
              ->savePropertyAs('fullnspath', 'typehint')
              ->back('first')
-             
+
              ->atomInsideNoDefinition('Return')
              ->outIs('RETURN')
              ->atomIs('Member')

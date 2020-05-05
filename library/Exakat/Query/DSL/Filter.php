@@ -32,7 +32,7 @@ class Filter extends DSL {
 
             return $filter;
         } else {
-            assert(false, "Filter needs a command, it received a ".get_class($filter));
+            assert(false, 'Filter needs a command, it received a ' . get_class($filter));
         }
     }
 }

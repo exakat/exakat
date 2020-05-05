@@ -32,17 +32,17 @@ class NoLiteralForReference extends Analyzer {
     }
 
     public function analyze() {
-        $atoms = array('Integer', 
-                       'Null', 
-                       'Void', 
-                       'Float', 
-                       'Addition', 
-                       'Multiplication', 
-                       'Bitshift', 
-                       'Logical', 
-                       'Ternary', 
-                       'Identifier', 
-                       'Nsname', 
+        $atoms = array('Integer',
+                       'Null',
+                       'Void',
+                       'Float',
+                       'Addition',
+                       'Multiplication',
+                       'Bitshift',
+                       'Logical',
+                       'Ternary',
+                       'Identifier',
+                       'Nsname',
                        'Assignation',
                        'Ternary',
                        );

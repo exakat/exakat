@@ -506,7 +506,7 @@ GREMLIN;
         return $result;
     }
 
-    public function prepareSide() : Command {
+    public function prepareSide(): Command {
         return $this->query->prepareSide();
     }
 

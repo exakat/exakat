@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,14 +26,14 @@ use Exakat\Analyzer\Analyzer;
 
 class WrongTypedPropertyInit extends Analyzer {
     protected $phpVersion = '7.4+';
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                      'Complete/PropagateCalls',
                      'Complete/FollowClosureDefinition',
                     );
     }
-    
+
     public function analyze() {
         // class x { a $a; function foo() { $this->a = new b()}}
         $this->atomIs('Propertydefinition')
@@ -42,7 +42,7 @@ class WrongTypedPropertyInit extends Analyzer {
              ->atomIsNot('Void')
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
-             
+
              ->outIs('DEFAULT')
              ->atomIs('New')
              ->hasIn('RIGHT')
@@ -66,7 +66,7 @@ class WrongTypedPropertyInit extends Analyzer {
              ->atomIsNot('Void')
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
-             
+
              ->outIs('DEFAULT')
              ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')

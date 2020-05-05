@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
 
 class HasNoClassInterface extends DSL {
     public function run() {

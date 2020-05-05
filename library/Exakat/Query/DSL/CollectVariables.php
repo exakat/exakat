@@ -30,13 +30,13 @@ class CollectVariables extends DSL {
             case 2:
                 list($variable, $type) = func_get_args();
                 break;
-                
+
             case 1 :
                 list($variable) = func_get_args();
                 $type = 'fullcode';
                 break;
-                
-            default: 
+
+            default:
                 $variables = 'variables';
                 $type = 'fullcode';
         }

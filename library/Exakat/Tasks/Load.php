@@ -4908,8 +4908,8 @@ class Load extends Tasks {
             }
 
             return $return;
-        } 
-        
+        }
+
         if (!empty($this->currentMethod)) {
             $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
         }
@@ -4930,7 +4930,7 @@ class Load extends Tasks {
 
         $return->fullcode = $this->tokens[$current][1] . ' ' . $returned->fullcode;
 
-        // raw variables are done 
+        // raw variables are done
         if (!$returned->isA(array('Variable', 'Variableobject', 'Variablearray')) &&
             $this->currentReturn !== null) {
             $this->addLink($this->currentReturn, $returned, 'RETURNED');
@@ -5824,7 +5824,7 @@ class Load extends Tasks {
 
         $line = $this->tokens[$this->id][2] ?? $this->tokens[$this->id - 1][2] ?? $this->tokens[$this->id - 2][2] ?? -1;
         $atom = $this->atomGroup->factory($atomName, $line);
-        
+
         if ($id !== null) {
             $atom->code  = $this->tokens[$id][1];
             $atom->token = $this->getToken($this->tokens[$id][0]);

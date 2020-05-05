@@ -35,15 +35,15 @@ class CodeIsNot extends DSL {
                 $translate = Analyzer::TRANSLATE;
                 $caseSensitive = Analyzer::CASE_INSENSITIVE;
                 break;
-            
-            case 2: 
+
+            case 2:
                 $code = func_get_arg(0);
                 $translate = func_get_arg(1);
                 $caseSensitive = Analyzer::CASE_INSENSITIVE;
                 break;
-            
+
             default:
-            case 2: 
+            case 2:
                 list($code,$translate, $caseSensitive) = func_get_args();
         }
 

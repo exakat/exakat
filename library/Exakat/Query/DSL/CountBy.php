@@ -43,7 +43,7 @@ class CountBy extends DSL {
                 break;
 
             case 0:
-            default: 
+            default:
                 $variable = 'v';
                 $property = 'fullcode';
                 $link = 'EXPRESSION';

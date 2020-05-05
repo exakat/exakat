@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnsupportedOperandTypes extends Analyzer {
-    public function dependsOn() : array  {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/SetClassPropertyDefinitionWithTypehint',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',

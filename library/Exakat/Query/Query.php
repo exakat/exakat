@@ -63,7 +63,7 @@ class Query {
         $this->queryFactory = new DSLFactory($analyzer, $dependsOn);
     }
 
-    public function __call(string $name, array $args) : self {
+    public function __call(string $name, array $args): self {
         if ($this->stopped === self::QUERY_STOPPED) {
             return $this;
         }
@@ -127,8 +127,8 @@ class Query {
 
         return $this;
     }
-    
-    public function not(Command $filter) : self {
+
+    public function not(Command $filter): self {
         $command = $this->queryFactory->factory('Not');
         $last = $command->run($filter);
         $this->commands[] = $last;

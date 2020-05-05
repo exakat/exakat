@@ -37,7 +37,7 @@ class HasNoCountedInstruction extends DSL {
                 break;
 
             case 0:
-            default: 
+            default:
                 $atom = 'Function';
                 $count = '0';
                 break;

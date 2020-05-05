@@ -46,7 +46,7 @@ class DSLFactory {
     protected $analyzerQuoted         = '';
     protected $MAX_LOOPING            = Analyzer::MAX_LOOPING;
 
-    public function __construct(string $analyzer, 
+    public function __construct(string $analyzer,
                                 array $dependsOn = array()) {
         $this->dependsOn = $dependsOn;
         $this->analyzerQuoted = $analyzer;

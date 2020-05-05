@@ -23,7 +23,6 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
 
 class HasIfThen extends DSL {
     public function run(): Command {

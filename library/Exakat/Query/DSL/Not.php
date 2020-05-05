@@ -37,7 +37,7 @@ class Not extends DSL {
             }
             return $filter;
         } else {
-            assert(false, 'Not requires a Command object, it received a '.gettype($filter));
+            assert(false, 'Not requires a Command object, it received a ' . gettype($filter));
         }
     }
 }

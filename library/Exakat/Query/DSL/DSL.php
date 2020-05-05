@@ -301,13 +301,13 @@ abstract class DSL {
         return true;
     }
 
-    protected function cleanAnalyzerName(string $gremlin, array $dependencies = array()) : string {
+    protected function cleanAnalyzerName(string $gremlin, array $dependencies = array()): string {
         $fullNames = array_map(array($this, 'makeBaseName'), $dependencies);
 
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public static function makeBaseName(string $className) : string {
+    public static function makeBaseName(string $className): string {
         // No Exakat, no Analyzer, using / instead of \
         return $className;
     }
