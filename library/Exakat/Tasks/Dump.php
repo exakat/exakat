@@ -258,7 +258,7 @@ where( __.until( hasLabel("Project") ).repeat(
        ).fold()
 )
 GREMLIN
-,array(), array())
+)
             ->getVariable(array('fullcode_', 'file', 'ligne', 'theNamespace', 'theClass', 'theFunction', 'analyzer'),
                           array('fullcode',  'file', 'line' , 'namespace',    'class',    'function',    'analyzer'));
             $query->prepareRawQuery();
@@ -454,7 +454,7 @@ GREMLIN
          ];
 }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $classes = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
@@ -515,7 +515,6 @@ GREMLIN
 }
 
 GREMLIN
-, array(), array()
 );
         $query->prepareRawQuery();
         $interfaces = $this->gremlin->query($query->getQuery(), $query->getArguments());
@@ -570,7 +569,6 @@ GREMLIN
 }
 
 GREMLIN
-, array(), array()
 );
         $query->prepareRawQuery();
         $traits = $this->gremlin->query($query->getQuery(), $query->getArguments());
@@ -710,7 +708,6 @@ GREMLIN
          ];}
 
 GREMLIN
-, array(), array()
 );
         $query->prepareRawQuery();
         $methods = $this->gremlin->query($query->getQuery(), $query->getArguments());
@@ -762,7 +759,7 @@ GREMLIN
               ->raw(<<<'GREMLIN'
 where( __.out('NAME').sideEffect{ methode = it.get().value("fullcode").toString().toLowerCase() }.fold())
 GREMLIN
-, array(), array())
+)
              ->inIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Class', 'Interface', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
              ->savePropertyAs('fullnspath', 'classe')
@@ -793,7 +790,7 @@ sideEffect{
 }
 
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
@@ -978,7 +975,7 @@ GREMLIN;
            .fold() 
 )
 GREMLIN
-, array(), array())
+)
               ->filter(
                 $query->side()
                      ->outIs('NAME')
@@ -1005,7 +1002,7 @@ map{ ["name":name,
     ]; 
 }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
@@ -1048,7 +1045,7 @@ GREMLIN
 )
 .where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 GREMLIN
-, array(), array())
+)
               ->hasNoIn('CONST') // Not class or interface
               ->outIs('CONST')
               ->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
@@ -1075,7 +1072,7 @@ GREMLIN
                            "file": file, 
                            "type":"const",
                            "phpdoc": phpdoc
-                           ]; }', array(), array());
+                           ]; }');
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
@@ -1115,7 +1112,7 @@ GREMLIN
 .where( __.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.fold())
 .where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 GREMLIN
-, array(), array())
+)
               ->raw(<<<'GREMLIN'
  sideEffect{ 
     file = ""; 
@@ -1130,7 +1127,7 @@ GREMLIN
            .fold() 
 )
 GREMLIN
-, array(), array())
+)
               ->raw(<<<'GREMLIN'
 map{ ["name":name, 
       "type":it.get().label().toString().toLowerCase(),
@@ -1146,7 +1143,7 @@ map{ ["name":name,
       ]; 
 }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
@@ -1219,7 +1216,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
 }
 
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
@@ -1351,14 +1348,14 @@ GREMLIN;
               ->savePropertyAs('fullcode', 'calling')
               ->back('first')
 
-              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label().toLowerCase(); }.inV()', array(), array())
+              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label().toLowerCase(); }.inV()')
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
 
               ->goToInstruction('File')
               ->savePropertyAs('fullcode', 'called')
 
-              ->raw('map{ ["id": "", "file":calling, "include":called, "type":type]; }', array(), array());
+              ->raw('map{ ["id": "", "file":calling, "include":called, "type":type]; }');
         $count = $this->storeToDump('filesDependencies', $query);
         display($count . ' extends for classes');
 
@@ -1371,13 +1368,13 @@ GREMLIN;
               ->raw(<<<'GREMLIN'
 repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
                 ->_as('file')
               ->raw(<<<'GREMLIN'
 select("classe").out("EXTENDS")
 .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1438,7 +1435,7 @@ GREMLIN
               ->raw(<<<GREMLIN
 repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('file')
               ->_as('id')
               ->_as('type')
@@ -1446,7 +1443,7 @@ GREMLIN
 select("classe").in("DEFINITION")
 .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1464,7 +1461,7 @@ GREMLIN
               ->raw(<<<GREMLIN
 repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('file')
               ->_as('id')
               ->_as('type')
@@ -1472,7 +1469,7 @@ GREMLIN
 select("classe").in("DEFINITION")
 .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1489,7 +1486,7 @@ GREMLIN
               ->raw(<<<GREMLIN
 repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('file')
               ->_as('id')
               ->_as('type')
@@ -1497,7 +1494,7 @@ GREMLIN
 select("functioncall").in("DEFINITION")
 .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1515,7 +1512,7 @@ GREMLIN
               ->raw(<<<GREMLIN
 repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('file')
               ->_as('id')
               ->_as('type')
@@ -1523,7 +1520,7 @@ GREMLIN
 select("constant").in("DEFINITION")
 .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1541,7 +1538,7 @@ GREMLIN
               ->raw(<<<GREMLIN
 repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('file')
               ->_as('id')
               ->_as('type')
@@ -1549,7 +1546,7 @@ GREMLIN
 select("constant").in("DEFINITION")
 .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1567,7 +1564,7 @@ GREMLIN
               ->raw(<<<GREMLIN
 repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('file')
               ->_as('id')
               ->_as('type')
@@ -1575,7 +1572,7 @@ GREMLIN
 select("constant").in("DEFINITION")
 .repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
 GREMLIN
-, array(), array())
+)
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1594,16 +1591,16 @@ GREMLIN
         // Finding extends and implements
         $query = $this->newQuery('Extensions of classes');
         $query->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
-              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
               ->back('first')
               ->savePropertyAs('fullnspath', 'calling')
 
-              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label().toLowerCase(); }.inV()', array(), array())
+              ->raw('outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label().toLowerCase(); }.inV()')
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
-              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'called_name')
 
@@ -1619,7 +1616,7 @@ map{ ["calling":calling,
       "called_type":called_type, 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count = $this->storeToDump('classesDependencies', $query);
         display($count . ' extends for classes');
@@ -1651,7 +1648,7 @@ map{ ["id": "",
       "called_type":"interface", 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count = $this->storeToDump('classesDependencies', $query);
         display($count . ' extends for interfaces');
@@ -1662,7 +1659,7 @@ GREMLIN
               ->outIs('TYPEHINT')
               ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
               ->inIs('DEFINITION')
-              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }')
               ->savePropertyAs('fullnspath', 'called')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'called_name')
@@ -1671,7 +1668,7 @@ GREMLIN
               ->goToInstruction(Analyzer::CIT)
 
               ->savePropertyAs('fullnspath', 'calling')
-              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
 
@@ -1686,7 +1683,7 @@ map{ ["id": "",
       "called_type":called_type, 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count1 = $this->storeToDump('classesDependencies', $query);
 
@@ -1696,7 +1693,7 @@ GREMLIN
               ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
-              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }')
               ->savePropertyAs('fullnspath', 'called')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'called_name')
@@ -1705,7 +1702,7 @@ GREMLIN
               ->goToInstruction(Analyzer::CIT)
 
               ->savePropertyAs('fullnspath', 'calling')
-              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
 
@@ -1720,7 +1717,7 @@ map{ ["id": "",
       "called_type":called_type, 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count2 = $this->storeToDump('classesDependencies', $query);
 
@@ -1730,7 +1727,7 @@ GREMLIN
         $query = $this->newQuery('Traits');
         $query->atomIs(array('Class', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'calling')
-              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
               ->back('first')
@@ -1752,7 +1749,7 @@ map{ ["id": "",
       "called_type":"trait", 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count = $this->storeToDump('classesDependencies', $query);
         display($count . ' trait use ');
@@ -1771,7 +1768,7 @@ GREMLIN
               ->goToInstruction('Class') // no trait?
 
               ->savePropertyAs('fullnspath', 'calling')
-              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
 
@@ -1786,7 +1783,7 @@ map{ ["id": "",
       "called_type":"class", 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count = $this->storeToDump('classesDependencies', $query);
         display($count . ' new ');
@@ -1796,7 +1793,7 @@ GREMLIN
         $query->atomIs('Clone', Analyzer::WITHOUT_CONSTANTS)
               ->goToInstruction(Analyzer::CIT)
               ->savePropertyAs('fullnspath', 'calling')
-              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
               ->back('first')
@@ -1805,7 +1802,7 @@ GREMLIN
               ->inIs('DEFINITION')
               ->atomIs(array('Class'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
-              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'called_name')
 
@@ -1820,7 +1817,7 @@ map{ ["id": "",
       "called_type":called_type, 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count = $this->storeToDump('classesDependencies', $query);
         display($count . ' clone');
@@ -1828,11 +1825,11 @@ GREMLIN
         // static calls (property, constant, method)
         $query = $this->newQuery('Static calls');
         $query->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'), Analyzer::WITHOUT_CONSTANTS)
-              ->raw('sideEffect{ type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ type = it.get().label().toLowerCase(); }')
 
               ->goToInstruction(Analyzer::CIT)
               ->savePropertyAs('fullnspath', 'calling')
-              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ calling_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'calling_name')
               ->back('first')
@@ -1841,7 +1838,7 @@ GREMLIN
               ->inIs('DEFINITION')
               ->atomIs(array('Class', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'called')
-              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }', array(), array())
+              ->raw('sideEffect{ called_type = it.get().label().toLowerCase(); }')
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'called_name')
 
@@ -1856,7 +1853,7 @@ map{ ["id": "",
       "called_type":called_type, 
            ]; }
 GREMLIN
-, array(), array());
+);
         $query->prepareRawQuery();
         $count = $this->storeToDump('classesDependencies', $query);
         display($count . ' static calls CPM');
@@ -2098,7 +2095,6 @@ groupCount("m").by( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("
       .count()
 ).cap("m")
 GREMLIN
-,array(), array()
 );
         $query->prepareRawQuery();
         $this->collectHashCounts($query, 'NativeCallPerExpression');
@@ -2127,7 +2123,6 @@ map{['id': '',
 
 }
 GREMLIN
-,array(), array()
 );
         $total = $this->storeToDump('globalVariables', $query);
 
@@ -2350,7 +2345,7 @@ map{[ "id": "",
       "classValue":name + " = " + default1];
 }
 GREMLIN
-, array(), array());
+);
         $total += $this->storeToDump('classChanges', $query);
 
         $query = $this->newQuery('Constant visibility');
@@ -2387,7 +2382,7 @@ map{[ "id": "",
       "classValue":visibility1 + ' ' + name];
 }
 GREMLIN
-, array(), array());
+);
         $total += $this->storeToDump('classChanges', $query);
 
         $query = $this->newQuery('Method Signature');
@@ -2395,7 +2390,7 @@ GREMLIN
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'name')
               ->inIs('NAME')
-              ->raw('sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }', array(), array())
+              ->raw('sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }')
               ->inIs('METHOD')
               ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
 
@@ -2406,7 +2401,7 @@ GREMLIN
               ->outIs('NAME')
               ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->raw('sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }.filter{ signature2 != signature1; }', array(), array())
+              ->raw('sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }.filter{ signature2 != signature1; }')
               ->raw(<<<'GREMLIN'
 map{[ "id": "",
       "type": "Method Signature",
@@ -2417,7 +2412,7 @@ map{[ "id": "",
       "classValue":"function " + name + "(" + signature1.join(", ") + ")"];
 }
 GREMLIN
-, array(), array());
+);
         $total += $this->storeToDump('classChanges', $query);
 
          $query = $this->newQuery('Method Visibility');
@@ -2429,7 +2424,7 @@ GREMLIN
               ->back('first')
               ->inIs('OVERWRITE')
               ->savePropertyAs('visibility', 'visibility2')
-              ->raw('filter{visibility1  != visibility2;}', array(), array())
+              ->raw('filter{visibility1  != visibility2;}')
               ->inIs('METHOD')
               ->savePropertyAs('fullcode', 'name2')
               ->raw(<<<'GREMLIN'
@@ -2442,7 +2437,7 @@ map{ ["id": "",
       "classValue":visibility1 + ' ' + fnp.tokenize('::')[1]];
 }
 GREMLIN
-, array(), array());
+);
         $total += $this->storeToDump('classChanges', $query);
 
         $query = $this->newQuery('Member Default');
@@ -2478,7 +2473,7 @@ map{ ["id": "",
       "classValue":name + ' = ' + default1];
 }
 GREMLIN
-, array(), array());
+);
         $total += $this->storeToDump('classChanges', $query);
 
         $query = $this->newQuery('Member Visibility');
@@ -2509,7 +2504,7 @@ map{ ["id": "",
       "classValue":visibility1 + ' ' + name];
 }
 GREMLIN
-, array(), array());
+);
         $total += $this->storeToDump('classChanges', $query);
 
         display("Found $total class changes\n");

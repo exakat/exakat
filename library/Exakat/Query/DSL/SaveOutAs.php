@@ -26,7 +26,25 @@ namespace Exakat\Query\DSL;
 
 class SaveOutAs extends DSL {
     public function run() {
-        list($name, $out, $sort) = func_get_args();
+        switch(func_num_args()) {
+            case 3:
+                list($name, $out, $sort) = func_get_args();
+                break 1;
+            
+            case 2:
+                list($name, $out) = func_get_args();
+                $sort = 'rank';
+                break 1;
+
+            case 1:
+                list($name) = func_get_args();
+                $sort = 'rank';
+                $out = 'ARGUMENT';
+                break 1;
+            
+            default:
+                assert(false, 'Wrong number of argument for ' . __METHOD__ . '. 1 to 3 are expected, ' . func_num_args() . ' provided');
+        }
 
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)

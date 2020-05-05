@@ -23,14 +23,22 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
 
 class AnalyzerIsNot extends DSL {
     public function run() {
         list($analyzer) = func_get_args();
+        
+        $analyzer = makeArray($analyzer);
+
+        if (($id = array_search('self', $analyzer)) !== false) {
+            $analyzer[$id] = $this->analyzerQuoted;
+        }
+        $analyzer = array_map(Analyzer::class.'::getName', $analyzer);
 
         assert($this->assertAnalyzer($analyzer));
 
-        return new Command('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', array($analyzer));
+        return new Command('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
     }
 }
 ?>

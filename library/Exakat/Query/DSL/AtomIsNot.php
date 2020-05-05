@@ -31,7 +31,7 @@ class AtomIsNot extends DSL {
         if (func_num_args() === 2) {
             list($atoms, $flags) = func_get_args();
         } else {
-            $atoms = func_get_arg(0);
+            list($atoms) = func_get_args();
             $flags = Analyzer::WITHOUT_CONSTANTS;
         }
 

@@ -27,7 +27,11 @@ use Exakat\Query\Query;
 
 class HasInstruction extends DSL {
     public function run() {
-        list($atoms) = func_get_args();
+        if (func_num_args() === 1) {
+            list($atoms) = func_get_args();
+        } else {
+            $atoms = 'Namespaces';
+        }
 
         $this->assertAtom($atoms);
         $diff = $this->normalizeAtoms($atoms);

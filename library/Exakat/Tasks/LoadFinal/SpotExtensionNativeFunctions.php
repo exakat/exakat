@@ -32,8 +32,8 @@ class SpotExtensionNativeFunctions extends LoadFinal {
               ->tokenIs('T_STRING')
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
-              ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
-              ->raw('map{ name = "\\\\" + parts.last().toLowerCase();}', array(), array())
+              ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }')
+              ->raw('map{ name = "\\\\" + parts.last().toLowerCase();}')
               ->unique();
         $query->prepareRawQuery();
         if ($query->canSkip()) {
@@ -59,11 +59,11 @@ class SpotExtensionNativeFunctions extends LoadFinal {
               ->isNot('absolute', true)
               ->tokenIs('T_STRING')
               ->hasNoIn('DEFINITION')
-              ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }', array(), array())
-              ->raw('filter{ name = "\\\\" + parts.last().toLowerCase(); name in *** }', array(), array($diff))
+              ->raw('filter{ parts = it.get().value("fullnspath").tokenize("\\\\"); parts.size() > 1 }')
+              ->raw('filter{ name = "\\\\" + parts.last().toLowerCase(); name in *** }', $diff)
               ->raw('sideEffect{
          it.get().property("fullnspath", name); 
-     }', array(), array())
+     }')
                   ->returnCount();
          $query->prepareRawQuery();
          $result = $this->gremlin->query($query->getQuery(), $query->getArguments());

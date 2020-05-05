@@ -26,7 +26,29 @@ namespace Exakat\Query\DSL;
 
 class CountBy extends DSL {
     public function run() {
-        list($link, $property, $variable) = func_get_args();
+        switch (func_num_args()) {
+            case 3:
+                list($link, $property, $variable) = func_get_args();
+                break;
+
+            case 2:
+                list($link, $property) = func_get_args();
+                $variable = 'v';
+                break;
+
+            case 1:
+                list($link) = func_get_args();
+                $variable = 'v';
+                $property = 'fullcode';
+                break;
+
+            case 0:
+            default: 
+                $variable = 'v';
+                $property = 'fullcode';
+                $link = 'EXPRESSION';
+                break;
+        }
 
         $this->assertLink($link);
         $this->assertProperty($property);

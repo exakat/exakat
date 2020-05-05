@@ -30,7 +30,7 @@ class HasNoParent extends DSL {
         assert(func_num_args() === 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
         list($parentClass, $ins) = func_get_args();
 
-        if (empty($diff)){
+        if (empty($ins)){
             return new Command(Query::NO_QUERY);
         }
 

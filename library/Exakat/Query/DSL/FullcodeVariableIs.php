@@ -25,6 +25,7 @@ namespace Exakat\Query\DSL;
 
 class FullcodeVariableIs extends DSL {
     public function run(): Command {
+        assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
         list($variable) = func_get_args();
 
         return new Command("filter{it.get().value(\"fullcode\") == $variable; }");

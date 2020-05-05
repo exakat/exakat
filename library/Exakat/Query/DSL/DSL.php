@@ -121,6 +121,8 @@ abstract class DSL {
     protected $ignoredcit             = null;
     protected $ignoredfunctions       = null;
     protected $ignoredconstants       = null;
+    protected $dependsOn              = array();
+    protected $analyzerQuoted         = '';
 
     protected static $linksDown     = '';
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
@@ -133,7 +135,9 @@ abstract class DSL {
                                 &$availableLabels,
                                 $ignoredcit,
                                 $ignoredfunctions,
-                                $ignoredconstants) {
+                                $ignoredconstants,
+                                $dependsOn,
+                                $analyzerQuoted) {
         $this->dslfactory             = $dslfactory;
         $this->dictCode               = exakat('dictionary');
         $this->availableAtoms         = $availableAtoms;
@@ -144,6 +148,8 @@ abstract class DSL {
         $this->ignoredcit             = $ignoredcit;
         $this->ignoredfunctions       = $ignoredfunctions;
         $this->ignoredconstants       = $ignoredconstants;
+        $this->dependsOn              = $dependsOn;
+        $this->analyzerQuoted         = $analyzerQuoted;
 
         if (empty(self::$linksDown)) {
             self::$linksDown = GraphElements::linksAsList();
@@ -295,13 +301,13 @@ abstract class DSL {
         return true;
     }
 
-    protected function cleanAnalyzerName($gremlin, $dependencies) {
+    protected function cleanAnalyzerName(string $gremlin, array $dependencies = array()) : string {
         $fullNames = array_map(array($this, 'makeBaseName'), $dependencies);
 
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public static function makeBaseName($className) {
+    public static function makeBaseName(string $className) : string {
         // No Exakat, no Analyzer, using / instead of \
         return $className;
     }

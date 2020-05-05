@@ -42,9 +42,16 @@ class DSLFactory {
     protected $dictCode               = null;
     protected $datastore              = null;
     protected $linksDown              = '';
+    protected $dependsOn              = array();
+    protected $analyzerQuoted         = '';
     protected $MAX_LOOPING            = Analyzer::MAX_LOOPING;
 
-    public function __construct() {
+    public function __construct(string $analyzer, 
+                                array $dependsOn = array()) {
+        $this->dependsOn = $dependsOn;
+        $this->analyzerQuoted = $analyzer;
+
+
         $this->dictCode  = exakat('dictionary');
         $this->datastore = exakat('datastore');
 
@@ -104,7 +111,9 @@ class DSLFactory {
                               $this->availableLabels,
                               $this->ignoredcit,
                               $this->ignoredfunctions,
-                              $this->ignoredconstants
+                              $this->ignoredconstants,
+                              $this->dependsOn,
+                              $this->analyzerQuoted,
                               );
     }
 }

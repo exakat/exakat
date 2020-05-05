@@ -26,10 +26,11 @@ namespace Exakat\Query\DSL;
 
 class Raw extends DSL {
     public function run() {
-        list($query, $dependencies, $args) = func_get_args();
+        $args = func_get_args();
+        $query = array_shift($args);
 
-        $query = trim($this->cleanAnalyzerName($query, $dependencies));
-        assert($query[0] !== '.', 'Raw() step shall not start with a . in the Gremiln Code');
+        $query = trim($this->cleanAnalyzerName($query, $this->dependsOn));
+        assert($query[0] !== '.', 'Raw() step shall not start with a . in the Gremlin Code');
 
         return new Command($query, $args);
     }

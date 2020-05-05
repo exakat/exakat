@@ -34,7 +34,7 @@ class DontUseVoid extends Analyzer {
         // function foo(): void {}; $a = foo();
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
-             ->atomIsNot('Scalartypehint')
+             ->atomIs('Scalartypehint')
              ->fullnspathIs('\\void')
              ->back('first')
              ->outIs('DEFINITION')

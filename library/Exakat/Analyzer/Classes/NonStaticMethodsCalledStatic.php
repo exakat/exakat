@@ -38,6 +38,10 @@ class NonStaticMethodsCalledStatic extends Analyzer {
 
         // Go to all parents class
         $this->atomIs('Staticmethodcall')
+             ->outIs('CLASS')
+             ->atomIsNot(array('Parent', 'Self', 'Static'))
+             ->back('first')
+
              ->inIs('DEFINITION')
              ->isNot('static', true)
              ->back('first');

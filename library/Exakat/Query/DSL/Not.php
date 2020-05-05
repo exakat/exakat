@@ -33,11 +33,11 @@ class Not extends DSL {
             if ($filter->gremlin === Query::STOP_QUERY) {
                 $filter->gremlin = Query::NO_QUERY;
             } else {
-                $filter->gremlin = "not( __.where($filter->gremlin ))";
+                $filter->gremlin = "not( __.where($filter->gremlin))";
             }
             return $filter;
         } else {
-            assert(false, 'Not requires a command object');
+            assert(false, 'Not requires a Command object, it received a '.gettype($filter));
         }
     }
 }

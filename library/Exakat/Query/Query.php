@@ -53,16 +53,17 @@ class Query {
     private $sides            = array();
     private $stopped          = self::QUERY_RUNNING;
 
-    public function __construct(int $id, Project $project, string $analyzer, string $php) {
-        $this->id       = $id;
-        $this->project  = $project;
-        $this->analyzer = $analyzer;
-        $this->php      = $php;
+    public function __construct(int $id, Project $project, string $analyzer, string $php, ?array $dependsOn = array()) {
+        $this->id        = $id;
+        $this->project   = $project;
+        $this->analyzer  = $analyzer;
+        $this->php       = $php;
+        $this->dependsOn = $dependsOn;
 
-        $this->queryFactory = new DSLFactory();
+        $this->queryFactory = new DSLFactory($analyzer, $dependsOn);
     }
 
-    public function __call($name, $args) {
+    public function __call(string $name, array $args) : self {
         if ($this->stopped === self::QUERY_STOPPED) {
             return $this;
         }
@@ -87,7 +88,7 @@ class Query {
                 case 'atomis' :
                 case 'atomfunctionis' :
                     $this->_as('first');
-                    $this->raw('sack{m,v -> ++m["processed"]; m;}', array(), array());
+                    $this->raw('sack{m,v -> ++m["processed"]; m;}');
                     break;
 
                 case 'analyzeris' :
@@ -97,9 +98,9 @@ class Query {
                     $this->propertyIs('analyzer', $args[0], Analyzer::CASE_SENSITIVE);
                     $this->outIs('ANALYZED');
                     $this->_as('first');
-                    $this->raw('sack{m,v -> ++m["processed"]; m;}', array(), array());
+                    $this->raw('sack{m,v -> ++m["processed"]; m;}');
 
-                    $this->raw('groupCount("processed").by(count())', array(), array());
+                    $this->raw('groupCount("processed").by(count())');
 
                     break;
 
@@ -123,6 +124,14 @@ class Query {
 
         $this->sides[] = $this->commands;
         $this->commands = array();
+
+        return $this;
+    }
+    
+    public function not(Command $filter) : self {
+        $command = $this->queryFactory->factory('Not');
+        $last = $command->run($filter);
+        $this->commands[] = $last;
 
         return $this;
     }
@@ -171,19 +180,6 @@ class Query {
             return true;
         }
 
-        /*
-        Sack is ignored ATM
-        $sack = $this->prepareSack($this->commands);
-        if (is_array($sack)) {
-            $sack['processed'] = 0;
-            $sack['total'] = 0;
-        } else {
-            $sack = array('processed' => 0,
-                          'total' => 0,
-                          );
-        }
-        $sack = $this->sackToGremlin($sack);
-        */
         $sack = self::SACK;;
         $this->query = "g{$sack}.V()";
 

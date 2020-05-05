@@ -43,7 +43,7 @@ class MistakenConcatenation extends Analyzer {
                      ->outIs('ARGUMENT')
                      ->atomIs('Float')
                      ->count()
-                     ->isEquals(1)
+                     ->isEqual(1)
              )
              ->outIs('ARGUMENT')
              ->atomIs('Float')

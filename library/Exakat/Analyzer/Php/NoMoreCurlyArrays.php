@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class NoMoreCurlyArrays extends Analyzer {
-    protected $phpVersion = '7.4-';
+    protected $phpVersion = '8.0-';
 
     public function analyze() {
         // $a{3}

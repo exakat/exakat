@@ -26,7 +26,22 @@ namespace Exakat\Query\DSL;
 
 class HasNoCountedInstruction extends DSL {
     public function run() {
-        list($atom, $count) = func_get_args();
+        switch (func_num_args()) {
+            case 2:
+                list($atom, $count) = func_get_args();
+                break;
+
+            case 1:
+                list($atom) = func_get_args();
+                $count = '0';
+                break;
+
+            case 0:
+            default: 
+                $atom = 'Function';
+                $count = '0';
+                break;
+        }
 
         assert($this->assertAtom($atom));
         assert($count >= 0);

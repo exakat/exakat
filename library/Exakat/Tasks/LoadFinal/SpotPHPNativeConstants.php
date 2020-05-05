@@ -83,8 +83,7 @@ class SpotPHPNativeConstants extends LoadFinal {
 sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\").last();  
                 it.get().property("fullnspath", "\\"  + fnp);
                 it.get().property("is_php", true);}
-GREMLIN
-, array(), array())
+GREMLIN)
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());

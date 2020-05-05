@@ -26,7 +26,25 @@ namespace Exakat\Query\DSL;
 
 class GetStringLength extends DSL {
     public function run() {
-        list($property, $variable) = func_get_args();
+        // Calculate The length of a string in a property, and report it in the named string
+        switch (func_num_args()) {
+            case 2:
+                list($property, $variable) = func_get_args();
+                break;
+
+            case 1:
+                list($property) = func_get_args();
+                $variable = 1;
+                break;
+
+            case 0:
+                $property = 'noDelimiter';
+                $variable = 1;
+                break;
+            
+            default:
+                assert(false, 'No enought arguments for ' . __METHOD__);
+        }
 
         $gremlin = <<<'GREMLIN'
 sideEffect{

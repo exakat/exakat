@@ -58,7 +58,7 @@ class Extension extends Analyzer {
         if (!empty($ini->constants)) {
             $this->atomIs(self::STATIC_NAMES)
                  ->analyzerIs('Constants/ConstantUsage')
-                 ->fullnspathIs(makeFullNsPath($ini->constants));
+                 ->fullnspathIs(makeFullNsPath($ini->constants, \FNP_CONSTANT));
             $this->prepareQuery();
         }
 

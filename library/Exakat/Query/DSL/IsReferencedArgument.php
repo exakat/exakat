@@ -26,7 +26,15 @@ namespace Exakat\Query\DSL;
 
 class IsReferencedArgument extends DSL {
     public function run() {
-        list($variable) = func_get_args();
+        switch (func_num_args()) {
+            case 1:
+                list($variable) = func_get_args();
+                break;
+
+            case 0:
+                $variable = 'variable';
+                break;
+        }
 
         $gremlin = <<<GREMLIN
 not(

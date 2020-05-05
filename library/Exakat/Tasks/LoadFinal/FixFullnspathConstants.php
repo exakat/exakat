@@ -37,10 +37,9 @@ class FixFullnspathConstants extends LoadFinal {
 coalesce( __.out("ARGUMENT").has("rank", 0), 
           __.hasLabel("Constant").out('NAME'), 
           filter{ true; })
-GREMLIN
-, array(), array())
+GREMLIN)
               ->savePropertyAs('fullnspath', 'actual')
-              ->raw('filter{ actual != cc; }', array(), array())
+              ->raw('filter{ actual != cc; }')
               ->back('identifier')
               ->setProperty('fullnspath', 'actual')
               ->returnCount();

@@ -32,6 +32,7 @@ use Exakat\Query\Query;
 use Exakat\Query\QueryDoc;
 use Exakat\Project;
 use Exakat\Graph\Helpers\GraphResults;
+use Exakat\Query\DSL\Command;
 
 abstract class Analyzer {
     // Query types
@@ -185,7 +186,7 @@ abstract class Analyzer {
     public function __construct() {
         assert(func_num_args() === 0, 'Too many arguments for ' . __CLASS__);
         $this->analyzer       = get_class($this);
-        $this->analyzerQuoted = $this->getName($this->analyzer);
+        $this->analyzerQuoted = self::getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
         $this->config    = exakat('config');
@@ -232,10 +233,9 @@ abstract class Analyzer {
 
             self::$availableFunctioncalls = $this->datastore->getCol('functioncalls', 'functioncall');
         }
+        $this->methods = exakat('methods');
 
         $this->initNewQuery();
-
-        $this->methods = exakat('methods');
     }
 
     public function init(int $analyzerId = null): int {
@@ -308,7 +308,7 @@ GREMLIN;
         if ($this->analyzer === false) {
             throw new NoSuchAnalyzer($analyzer, $this->rulesets);
         }
-        $this->analyzerQuoted = $this->getName($this->analyzer);
+        $this->analyzerQuoted = self::getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
     }
 
@@ -316,7 +316,7 @@ GREMLIN;
         return $this->analyzerQuoted;
     }
 
-    public function getName(string $classname): string {
+    public static function getName(string $classname): string {
         return str_replace( array('Exakat\\Analyzer\\', '\\'), array('', '/'), $classname);
     }
 
@@ -506,162 +506,32 @@ GREMLIN;
         return $result;
     }
 
-    public function side(): self {
-        $this->query->side();
-
-        return $this;
-    }
-
-    public function prepareSide() {
+    public function prepareSide() : Command {
         return $this->query->prepareSide();
     }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Common methods
+// Query methods
 ////////////////////////////////////////////////////////////////////////////////
 
-    protected function hasNoInstruction($atom = 'Function') {
-        $this->query->hasNoInstruction($atom);
-
-        return $this;
-    }
-
-    protected function hasNoCountedInstruction($atom = 'Function', int $count = 0): self {
-        $this->query->hasNoCountedInstruction($atom, $count);
-
-        return $this;
-    }
-
-    protected function countBy(string $link = 'EXPRESSION',string $property = 'fullcode', string $variable = 'v'): self {
-        $this->query->countBy($link, $property, $variable);
-
-        return $this;
-    }
-
-    protected function hasInstruction($atom = 'Function'): self {
-        $this->query->hasInstruction($atom);
-
-        return $this;
-    }
-
-    protected function goToInstruction($atom = 'Namespace'): self {
-        $this->query->goToInstruction($atom);
-
-        return $this;
-    }
-
-    public function analyzerIs($analyzer) {
-        $analyzer = makeArray($analyzer);
-
-        if (($id = array_search('self', $analyzer)) !== false) {
-            $analyzer[$id] = $this->analyzerQuoted;
-        }
-        $analyzer = array_map('self::getName', $analyzer);
-
-        $this->query->analyzerIs($analyzer);
-
-        return $this;
-    }
-
-    public function analyzerIsNot($analyzer) {
-        $analyzer = makeArray($analyzer);
-
-        if (($id = array_search('self', $analyzer)) !== false) {
-            $analyzer[$id] = $this->analyzerQuoted;
-        }
-        $analyzer = array_map('self::getName', $analyzer);
-
-        $this->query->analyzerIsNot($analyzer);
-
-        return $this;
-    }
-
-    public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
-        $this->query->noDelimiterIs($code, $caseSensitive);
-
-        return $this;
-    }
-
-    public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert(func_num_args() <= 2, 'Wrong number of arguments for ' . __METHOD__);
-        $this->query->noDelimiterIsNot($code, $caseSensitive);
-
-        return $this;
-    }
-
-    public function saveOutAs($name, $out = 'ARGUMENT', $sort = 'rank') {
-        $this->query->saveOutAs($name, $out, $sort);
-
-        return $this;
-    }
-
-    public function fullcodeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->propertyIs('fullcode', $code, $caseSensitive);
-
-        return $this;
-    }
-
-    public function fullcodeVariableIs($variable) {
-        $this->query->fullcodeVariableIs($variable);
-
-        return $this;
-    }
-
-    public function fullcodeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->propertyIsNot('fullcode', $code, $caseSensitive);
-
-        return $this;
-    }
-
-    private function cleanAnalyzerName($gremlin) {
-        $dependencies = $this->dependsOn();
-        $fullNames = array_map(array($this, 'makeBaseName'), $dependencies);
-
-        return str_replace($dependencies, $fullNames, $gremlin);
-    }
-
-    public function not(self $filter, $args = array()) {
-        // use func_get_args here
+    // must convert self to Query here
+    public function not(self $filter) {
         $filterClean = $filter->prepareSide();
-        $this->query->not($filterClean, $args);
+        $this->query->not($filterClean);
 
         return $this;
     }
 
-    public function filter($filter, array $args = array()) {
-        if (is_string($filter)) {
-            $filterClean = $this->cleanAnalyzerName($filter);
-        } elseif ($filter instanceof self) {
-            $filterClean = $filter->prepareSide();
-        } else {
-            assert(false, 'Wrong type for filter : ' . gettype($filter));
-        }
-        $this->query->filter($filterClean, $args);
+    public function filter(self $filter, array $args = array()) {
+        $filterClean = $filter->prepareSide();
+        $this->query->filter($filterClean);
 
         return $this;
     }
 
-    public function raw($query, ...$args) {
-        ++$this->rawQueryCount;
-
-        $this->query->raw($query, $this->dependsOn(), $args);
-
-        return $this;
-    }
-
-    // Calculate The length of a string in a property, and report it in the named string
-    public function getStringLength($property = 'noDelimiter', $variable = 'l') {
-        $this->query->getStringLength($property, $variable);
-
-        return $this;
-    }
-
-    public function isReferencedArgument($variable = 'variable') {
-        $this->query->isReferencedArgument($variable);
-
-        return $this;
-    }
+////////////////////////////////////////////////////////////////////////////////
+// Query methods
+////////////////////////////////////////////////////////////////////////////////
 
     public function run(): int {
         $this->analyze();
@@ -801,7 +671,9 @@ GREMLIN
         $this->query = new Query((count($this->queries) + 1),
                                   new Project('test'),
                                   $this->analyzerQuoted,
-                                  $this->config->executable);
+                                  $this->config->executable,
+                                  $this->dependsOn(),
+                                  );
 
         $this->queryDoc = new QueryDoc();
     }

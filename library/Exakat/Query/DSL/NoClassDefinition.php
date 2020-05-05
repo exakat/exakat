@@ -30,7 +30,7 @@ class NoClassDefinition extends DSL {
         if (func_num_args() === 1) {
             list($type) = func_get_args();
         } else {
-            $type = Analyzer::CLASSES_ALL;
+            $type = array(Analyzer::CLASSES_ALL);
         }
 
         return new Command('not(where(__.in("DEFINITION").hasLabel(within(***)) ) )', makeArray($type) );

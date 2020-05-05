@@ -45,7 +45,7 @@ class SpotPHPNativeFunctions extends LoadFinal {
                       ->prepareSide(),
                       array()
               )
-              ->raw('map{ parts = it.get().value("fullnspath").tokenize("\\\\"); name = parts.last().toLowerCase();}', array(), array())
+              ->raw('map{ parts = it.get().value("fullnspath").tokenize("\\\\"); name = parts.last().toLowerCase();}')
               ->unique();
         $query->prepareRawQuery();
         if ($query->canSkip()) {
@@ -77,12 +77,12 @@ class SpotPHPNativeFunctions extends LoadFinal {
                          ->prepareSide(),
                           array()
                   )
-                  ->raw('filter{ name = it.get().value("fullnspath").tokenize("\\\\").last().toLowerCase(); name in *** }', array(), array($diff))
+                  ->raw('filter{ name = it.get().value("fullnspath").tokenize("\\\\").last().toLowerCase(); name in *** }', $diff)
                   ->raw('sideEffect{
          fullnspath = "\\\\" + name;
          it.get().property("fullnspath", fullnspath);
          it.get().property("is_php", true); 
-     }', array(), array())
+     }')
                   ->returnCount();
             $query->prepareRawQuery();
             $result = $this->gremlin->query($query->getQuery(), $query->getArguments());

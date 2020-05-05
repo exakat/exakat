@@ -23,11 +23,25 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
 
 class NoDelimiterIs extends DSL {
     public function run() {
-        list($code, $caseSensitive) = func_get_args();
         assert(func_num_args() <= 2, 'Too many arguments for ' . __METHOD__);
+
+        switch (func_num_args()) {
+            case 2:
+                list($code, $caseSensitive) = func_get_args();
+                break;
+
+            case 1:
+                list($code) = func_get_args();
+                $caseSensitive = Analyzer::CASE_INSENSITIVE;
+                break;
+            
+            default:
+                assert(false, 'No enought arguments for ' . __METHOD__);
+        }
 
         $return = new Command('has("noDelimiter")');
         $propertyIs = $this->dslfactory->factory('propertyIs');
