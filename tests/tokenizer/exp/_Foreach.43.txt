@@ -69,7 +69,7 @@ Label : PROJECT
               5
               Label : BLOCK
                 3
-                Label : EXPRESSION, EXPRESSION
+                Label : EXPRESSION
                   16
                   Label : ARGUMENT
                     19

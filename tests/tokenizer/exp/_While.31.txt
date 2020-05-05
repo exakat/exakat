@@ -102,7 +102,7 @@ Label : PROJECT
                     Label : NOT
                       22
                       Label : ARGUMENT
-                        23
+                        10
                         Label : INDEX
                           7
                         Label : VARIABLE
@@ -110,15 +110,15 @@ Label : PROJECT
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      24
+                      23
                       Label : CONTINUE
-                        25
+                        24
                 Label : EXPRESSION
                   12
                   Label : LEFT
-                    23
+                    19
                     Label : INDEX
-                      23
+                      10
                       Label : INDEX
                         7
                       Label : VARIABLE

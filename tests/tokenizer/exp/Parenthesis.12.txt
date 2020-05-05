@@ -1,26 +1,26 @@
 test
 Label : GLOBAL
-  20
+  19
   Label : DEFINITION
-    20
+    19
     Label : DEFINITION
-      20
+      19
 Label : GLOBAL
-  13
+  12
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
-      13
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
-      13
+      12
   Label : DEFINITION
-    20
+    19
     Label : DEFINITION
-      20
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,11 +28,11 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          10
+          9
           Label : LEFT
-            8
+            6
             Label : INDEX
-              9
+              8
             Label : VARIABLE
               7
               Label : CLASS
@@ -40,22 +40,22 @@ Label : PROJECT
               Label : MEMBER
                 6
           Label : RIGHT
-            17
+            16
             Label : CONCAT
-              11
+              10
+              Label : CONCAT
+                11
               Label : CONCAT
                 12
-              Label : CONCAT
-                8
                 Label : INDEX
-                  15
+                  14
                 Label : VARIABLE
-                  13
+                  12
               Label : CONCAT
-                16
+                15
             Label : CONCAT
-              18
+              17
               Label : CODE
-                19
+                18
                 Label : PREPLUSPLUS
-                  20
+                  19

@@ -6,11 +6,11 @@ Label : GLOBAL
     Label : DEFINITION
       12
 Label : GLOBAL
-  10
+  9
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
-      10
+      9
 Label : GLOBAL
   27
   Label : DEFINITION
@@ -26,9 +26,9 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
-      10
+      9
   Label : DEFINITION
     12
     Label : DEFINITION
@@ -54,21 +54,21 @@ Label : PROJECT
             Label : CONDITION
               16
               Label : LEFT
-                9
+                11
                 Label : INDEX
                   15
                 Label : VARIABLE
-                  9
+                  11
                   Label : INDEX
-                    9
+                    12
                     Label : INDEX
                       14
                     Label : VARIABLE
                       12
                   Label : VARIABLE
-                    9
+                    7
                     Label : INDEX
-                      10
+                      9
                     Label : VARIABLE
                       8
                       Label : CLASS
@@ -92,19 +92,19 @@ Label : PROJECT
             Label : CONDITION
               16
               Label : LEFT
-                9
+                11
                 Label : INDEX
                   32
                 Label : VARIABLE
-                  9
+                  11
                   Label : INDEX
-                    9
+                    29
                     Label : INDEX
                       31
                     Label : VARIABLE
                       29
                   Label : VARIABLE
-                    9
+                    26
                     Label : INDEX
                       27
                     Label : VARIABLE

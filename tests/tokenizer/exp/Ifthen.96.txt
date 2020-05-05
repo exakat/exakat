@@ -87,7 +87,7 @@ Label : PROJECT
                   27
               Label : THEN
                 3
-                Label : EXPRESSION, EXPRESSION
+                Label : EXPRESSION
                   19
                   Label : ARGUMENT
                     29

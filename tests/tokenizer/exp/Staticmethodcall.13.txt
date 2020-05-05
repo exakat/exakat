@@ -19,7 +19,7 @@ Label : PROJECT
               12
               Label : EXTENDS
                 15
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
                   10
               Label : NAME
                 13
@@ -27,7 +27,7 @@ Label : PROJECT
               23
               Label : CLASS
                 17
-                Label : DEFINITION
+                Label : DEFINITION, DEFINITION
                   10
               Label : METHOD
                 19

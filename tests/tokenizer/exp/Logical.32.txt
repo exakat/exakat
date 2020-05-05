@@ -54,23 +54,23 @@ Label : PROJECT
             Label : LEFT
               6
               Label : NOT
-                9
+                10
                 Label : INDEX
                   11
                 Label : VARIABLE
-                  9
+                  7
                   Label : INDEX
-                    10
+                    9
                   Label : VARIABLE
                     7
             Label : RIGHT
               12
               Label : LEFT
-                9
+                10
                 Label : INDEX
                   16
                 Label : VARIABLE
-                  9
+                  13
                   Label : INDEX
                     15
                   Label : VARIABLE
@@ -82,7 +82,7 @@ Label : PROJECT
                   Label : LEFT
                     17
                   Label : RIGHT
-                    9
+                    20
                     Label : INDEX
                       22
                     Label : VARIABLE
@@ -90,11 +90,11 @@ Label : PROJECT
                 Label : RIGHT
                   28
                   Label : LEFT
-                    9
+                    10
                     Label : INDEX
                       27
                     Label : VARIABLE
-                      9
+                      24
                       Label : INDEX
                         26
                       Label : VARIABLE

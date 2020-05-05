@@ -199,7 +199,3 @@ Label : PROJECT
                     19
           Label : CONDITION
             6
-  Label : RETURNED
-    19
-  Label : RETURNED
-    19

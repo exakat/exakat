@@ -1,14 +1,14 @@
 test
 Label : GLOBAL
-  8
+  7
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
-      8
+      7
     Label : DEFINITION
-      8
+      7
     Label : DEFINITION
-      8
+      7
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -36,13 +36,13 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
-      8
+      7
     Label : DEFINITION
-      8
+      7
     Label : DEFINITION
-      8
+      7
   Label : DEFINITION
     17
     Label : DEFINITION
@@ -56,17 +56,17 @@ Label : PROJECT
         Label : EXPRESSION
           12
           Label : LEFT
-            7
+            10
             Label : INDEX
               11
             Label : VARIABLE
-              7
+              5
               Label : INDEX
                 7
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
-                  8
+                  7
               Label : VARIABLE
                 5
           Label : RIGHT
@@ -74,7 +74,7 @@ Label : PROJECT
         Label : EXPRESSION
           12
           Label : LEFT
-            7
+            10
             Label : INDEX
               14
               Label : LEFT
@@ -82,13 +82,13 @@ Label : PROJECT
               Label : RIGHT
                 15
             Label : VARIABLE
-              7
+              5
               Label : INDEX
                 7
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
-                  8
+                  7
               Label : VARIABLE
                 5
           Label : RIGHT
@@ -96,7 +96,7 @@ Label : PROJECT
         Label : EXPRESSION
           12
           Label : LEFT
-            7
+            10
             Label : INDEX
               19
               Label : CONDITION
@@ -114,13 +114,13 @@ Label : PROJECT
               Label : THEN
                 20
             Label : VARIABLE
-              7
+              5
               Label : INDEX
                 7
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
-                  8
+                  7
               Label : VARIABLE
                 5
           Label : RIGHT

@@ -28,7 +28,7 @@ Label : PROJECT
             Label : EXPRESSION
               7
         Label : EXPRESSION
-          12
+          10
           Label : INDEX
             6
             Label : ARGUMENT
