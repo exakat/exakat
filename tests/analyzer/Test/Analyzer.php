@@ -63,7 +63,7 @@ abstract class Analyzer extends TestCase {
 
         // collect the expected values
         require("$test_path/exp/$file.php");
-/*
+
         $rulesets = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
                                new AutoloadExt(''),
                                new AutoloadDev('')
@@ -76,7 +76,7 @@ abstract class Analyzer extends TestCase {
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
-*/
+
         $config = exakat('config');
 //        $datastore = exakat('datastore');
 //        $datastore->create();

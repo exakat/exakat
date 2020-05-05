@@ -212,7 +212,8 @@ class Datastore {
         $query = "SELECT $col FROM $table";
         try {
             $res = $this->sqliteRead->query($query);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            // This also catch when the datastore is not available
         }
 
         $return = array();
