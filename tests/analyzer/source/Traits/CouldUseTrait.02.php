@@ -26,7 +26,7 @@ class WithFoo3 {
     function foo3() { ++$a; if ($a == 1) { --$b;}}
 }
 class WithFoo4 {
-    function foo4() { ++$a; if ($a == 1) { --$b;}}
+    function foo4($a) { ++$a; if ($a == 1) { --$b;}}
 }
 
 ?>

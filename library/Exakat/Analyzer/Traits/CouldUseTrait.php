@@ -30,21 +30,18 @@ class CouldUseTrait extends Analyzer {
     // class x could use trait i but it was forgotten
 
     public function analyze() {
-        return;
         // Custom traits
         $this->atomIs('Trait')
              ->as('name')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->as('methodCount')
              ->as('static')
-             ->as('ctype1')
              ->outIs('NAME')
              ->as('method')
              ->select(array('name'        => 'fullnspath',
                             'method'      => 'lccode',
                             'methodCount' => 'count',
-                            'static'      => 'fullcode',
-                            'ctype1'      => 'ctype1',
+                            'static'      => 'fullcode'
                             ));
         $res = $this->rawQuery();
 
@@ -52,7 +49,7 @@ class CouldUseTrait extends Analyzer {
         $methodNames = array();
         foreach($res->toArray() as $row) {
             $row['static'] = preg_match('/^.*static.*function /i', $row['static']) === 0 ? '' : 'static';
-            array_collect_by($traits, $row['name'], "$row[method]-$row[methodCount]-$row[static]-$row[ctype1]");
+            array_collect_by($traits, $row['name'], "$row[method]-$row[methodCount]-$row[static]");
             $methodNames[$row['method']] = 1;
         }
 
@@ -93,7 +90,7 @@ where(
         } else {
             s = '';
         }
-        x.add(it.get().vertices(OUT, "NAME").next().value("lccode") + "-" + it.get().value("count") + "-" + s + "-" + it.get().value("ctype1")) ; 
+        x.add(it.get().vertices(OUT, "NAME").next().value("lccode") + "-" + it.get().value("count") + "-" + s ) ; 
        }
       .fold() 
 )
