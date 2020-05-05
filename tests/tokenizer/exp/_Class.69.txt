@@ -36,7 +36,7 @@ Label : PROJECT
           Label : METHOD
             14
             Label : ARGUMENT
-              10
+              11
             Label : NAME
               14
           Label : OBJECT
@@ -48,25 +48,25 @@ Label : PROJECT
                 Label : EXTENDS
                   8
                 Label : METHOD
-                  12
+                  10
                   Label : ARGUMENT
-                    10
+                    11
                   Label : BLOCK
                     13
                     Label : EXPRESSION
-                      10
+                      11
                   Label : NAME
-                    12
+                    10
                   Label : RETURNED
                     Void
                   Label : RETURNTYPE
-                    10
+                    11
         Label : EXPRESSION
           16
           Label : RETURN
             6
             Label : NEW
-              7
+              5
               Label : ARGUMENT
                 17
               Label : IMPLEMENTS
@@ -76,21 +76,21 @@ Label : PROJECT
                 Label : ARGUMENT
                   17
                   Label : DEFAULT
-                    10
+                    11
                   Label : NAME
                     17
-                  Label : TYPEHINT
-                    10
+                  Label : RETURNTYPE
+                    11
                 Label : BLOCK
                   13
                   Label : EXPRESSION
-                    10
+                    11
                 Label : NAME
                   21
                 Label : RETURNED
                   Void
                 Label : RETURNTYPE
-                  10
+                  11
         Label : EXPRESSION
           7
           Label : DEFINITION
@@ -106,21 +106,21 @@ Label : PROJECT
             Label : ARGUMENT
               17
               Label : DEFAULT
-                10
+                11
               Label : NAME
                 17
-              Label : TYPEHINT
-                10
+              Label : RETURNTYPE
+                11
             Label : BLOCK
               13
               Label : EXPRESSION
-                10
+                11
             Label : NAME
               21
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              10
+              11
           Label : NAME
             22
         Label : EXPRESSION
@@ -138,7 +138,7 @@ Label : PROJECT
           Label : RETURN
             6
             Label : NEW
-              7
+              5
               Label : ARGUMENT
                 24
               Label : EXTENDS
@@ -148,7 +148,7 @@ Label : PROJECT
   Label : RETURNED
     6
     Label : NEW
-      7
+      5
       Label : ARGUMENT
         17
       Label : IMPLEMENTS
@@ -158,21 +158,21 @@ Label : PROJECT
         Label : ARGUMENT
           17
           Label : DEFAULT
-            10
+            11
           Label : NAME
             17
-          Label : TYPEHINT
-            10
+          Label : RETURNTYPE
+            11
         Label : BLOCK
           13
           Label : EXPRESSION
-            10
+            11
         Label : NAME
           21
         Label : RETURNED
           Void
         Label : RETURNTYPE
-          10
+          11
   Label : RETURNED
     17
   Label : RETURNED
@@ -188,7 +188,7 @@ Label : PROJECT
   Label : RETURNED
     6
     Label : NEW
-      7
+      5
       Label : ARGUMENT
         24
       Label : EXTENDS

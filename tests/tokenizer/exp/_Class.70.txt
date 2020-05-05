@@ -52,17 +52,17 @@ Label : PROJECT
               Label : DEFINITION
                 18
               Label : MAGICMETHOD
-                16
+                14
                 Label : ARGUMENT
                   8
                   Label : DEFAULT
-                    14
+                    15
                   Label : NAME
                     8
                     Label : DEFINITION
                       8
-                  Label : TYPEHINT
-                    14
+                  Label : RETURNTYPE
+                    15
                 Label : BLOCK
                   17
                   Label : EXPRESSION
@@ -76,11 +76,11 @@ Label : PROJECT
                     Label : RIGHT
                       8
                 Label : NAME
-                  16
+                  14
                 Label : RETURNED
                   Void
                 Label : RETURNTYPE
-                  14
+                  15
               Label : PPP
                 9
                 Label : PPP

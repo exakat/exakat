@@ -12,13 +12,13 @@ Label : PROJECT
           Label : METHOD
             8
             Label : ARGUMENT
-              12
+              10
               Label : DEFAULT
                 13
               Label : NAME
-                12
-              Label : TYPEHINT
                 10
+              Label : TYPEHINT
+                11
             Label : BLOCK
               13
             Label : NAME
@@ -34,13 +34,13 @@ Label : PROJECT
           Label : METHOD
             8
             Label : ARGUMENT
-              12
+              10
               Label : DEFAULT
                 13
               Label : NAME
-                12
-              Label : TYPEHINT
                 10
+              Label : TYPEHINT
+                11
             Label : BLOCK
               17
               Label : EXPRESSION
@@ -58,13 +58,13 @@ Label : PROJECT
           Label : METHOD
             8
             Label : ARGUMENT
-              12
+              10
               Label : DEFAULT
                 13
               Label : NAME
-                12
-              Label : TYPEHINT
                 10
+              Label : TYPEHINT
+                11
             Label : BLOCK
               17
               Label : EXPRESSION

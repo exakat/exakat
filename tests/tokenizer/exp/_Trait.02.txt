@@ -30,9 +30,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            10
+            8
             Label : ARGUMENT
-              8
+              10
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -40,11 +40,11 @@ Label : PROJECT
                 Label : ARGUMENT
                   14
             Label : NAME
-              10
+              8
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              8
+              10
           Label : NAME
             6
         Label : EXPRESSION
@@ -52,7 +52,7 @@ Label : PROJECT
           Label : METHOD
             19
             Label : ARGUMENT
-              8
+              10
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -62,7 +62,7 @@ Label : PROJECT
                 Label : METHOD
                   23
                   Label : ARGUMENT
-                    8
+                    10
                   Label : NAME
                     23
               Label : EXPRESSION
@@ -74,7 +74,7 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              8
+              10
           Label : NAME
             17
         Label : EXPRESSION
@@ -96,7 +96,7 @@ Label : PROJECT
             Label : NEW
               39
               Label : ARGUMENT
-                8
+                10
               Label : NAME
                 39
         Label : EXPRESSION
@@ -104,7 +104,7 @@ Label : PROJECT
           Label : METHOD
             42
             Label : ARGUMENT
-              8
+              10
             Label : NAME
               42
           Label : OBJECT

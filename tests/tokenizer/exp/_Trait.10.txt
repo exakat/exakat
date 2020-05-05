@@ -100,17 +100,17 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : DEFINITION
-            26
+            25
           Label : DEFINITION
             19
           Label : METHOD
-            25
+            24
             Label : ARGUMENT
               7
             Label : BLOCK
               9
               Label : EXPRESSION
-                27
+                26
                 Label : METHOD
                   6
                   Label : ARGUMENT
@@ -118,9 +118,9 @@ Label : PROJECT
                   Label : NAME
                     6
                 Label : OBJECT
-                  26
+                  25
             Label : NAME
-              25
+              24
             Label : RETURNED
               Void
             Label : RETURNTYPE
@@ -132,7 +132,7 @@ Label : PROJECT
             Label : BLOCK
               9
               Label : EXPRESSION
-                22
+                21
                 Label : INSTEADOF
                   6
                 Label : INSTEADOF
@@ -140,25 +140,25 @@ Label : PROJECT
                 Label : INSTEADOF
                   6
                 Label : NAME
-                  21
+                  6
                   Label : CLASS
                     6
                   Label : METHOD
                     6
               Label : EXPRESSION
-                22
+                21
                 Label : INSTEADOF
                   6
                 Label : NAME
-                  21
+                  6
                   Label : CLASS
                     17
                   Label : METHOD
                     6
               Label : EXPRESSION
-                23
+                22
                 Label : AS
-                  24
+                  23
                 Label : NAME
                   6
             Label : USE
@@ -168,16 +168,16 @@ Label : PROJECT
             Label : USE
               17
         Label : EXPRESSION
-          27
+          26
           Label : METHOD
-            25
+            24
             Label : ARGUMENT
               7
             Label : NAME
-              25
+              24
           Label : OBJECT
-            28
+            27
             Label : CODE
-              29
+              28
               Label : NEW
                 19

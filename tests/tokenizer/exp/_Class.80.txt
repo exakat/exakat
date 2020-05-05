@@ -16,7 +16,7 @@ Label : PROJECT
           Label : METHOD
             13
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -34,11 +34,11 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              8
           Label : NAME
             6
           Label : PPP
-            9
+            7
             Label : PPP
               10
               Label : DEFAULT
@@ -49,8 +49,8 @@ Label : PROJECT
                   11
                 Label : OBJECT
                   15
-            Label : TYPEHINT
-              7
+            Label : RETURNTYPE
+              8
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -64,7 +64,7 @@ Label : PROJECT
           Label : METHOD
             13
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -82,11 +82,11 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              8
           Label : NAME
             19
           Label : PPP
-            9
+            7
             Label : PPP
               10
               Label : DEFAULT
@@ -97,8 +97,8 @@ Label : PROJECT
                   11
                 Label : OBJECT
                   15
-            Label : TYPEHINT
-              7
+            Label : RETURNTYPE
+              8
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -108,7 +108,7 @@ Label : PROJECT
           Label : METHOD
             13
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -126,11 +126,11 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              8
           Label : NAME
             21
           Label : PPP
-            9
+            7
             Label : PPP
               10
               Label : DEFAULT
@@ -141,8 +141,8 @@ Label : PROJECT
                   11
                 Label : OBJECT
                   15
-            Label : TYPEHINT
-              7
+            Label : RETURNTYPE
+              8
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -152,7 +152,7 @@ Label : PROJECT
           Label : METHOD
             13
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               14
               Label : EXPRESSION
@@ -170,11 +170,11 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              8
           Label : NAME
             22
           Label : PPP
-            9
+            7
             Label : PPP
               10
               Label : DEFAULT
@@ -185,5 +185,5 @@ Label : PROJECT
                   11
                 Label : OBJECT
                   15
-            Label : TYPEHINT
-              7
+            Label : RETURNTYPE
+              8

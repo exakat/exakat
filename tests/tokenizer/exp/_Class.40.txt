@@ -16,36 +16,36 @@ Label : PROJECT
           Label : MAGICMETHOD
             14
             Label : ARGUMENT
-              9
+              10
             Label : BLOCK
               15
               Label : EXPRESSION
-                9
+                10
             Label : NAME
               14
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              9
+              10
           Label : MAGICMETHOD
             16
             Label : ARGUMENT
-              9
+              10
             Label : BLOCK
               15
               Label : EXPRESSION
-                9
+                10
             Label : NAME
               16
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              9
+              10
           Label : NAME
             6
           Label : PPP
-            11
+            9
             Label : PPP
               12
-            Label : TYPEHINT
-              9
+            Label : RETURNTYPE
+              10

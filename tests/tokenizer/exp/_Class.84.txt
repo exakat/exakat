@@ -16,33 +16,33 @@ Label : PROJECT
           Label : DEFINITION
             19
             Label : ARGUMENT
-              7
+              8
             Label : NAME
               19
           Label : DEFINITION
             6
             Label : ARGUMENT
-              7
+              8
             Label : NAME
               6
           Label : NAME
             6
           Label : PPP
-            9
+            7
             Label : PPP
               10
               Label : DEFAULT
                 12
                 Label : ARGUMENT
-                  7
-            Label : TYPEHINT
-              7
+                  8
+            Label : RETURNTYPE
+              8
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
             14
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               15
               Label : EXPRESSION
@@ -70,7 +70,7 @@ Label : PROJECT
                   Label : NEW
                     19
                     Label : ARGUMENT
-                      7
+                      8
                     Label : NAME
                       19
               Label : EXPRESSION
@@ -82,7 +82,7 @@ Label : PROJECT
                   Label : NEW
                     6
                     Label : ARGUMENT
-                      7
+                      8
                     Label : NAME
                       6
               Label : EXPRESSION
@@ -112,6 +112,6 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              8
           Label : NAME
             13

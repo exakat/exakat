@@ -10,17 +10,17 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : DEFINITION
-            8
+            9
           Label : METHOD
             7
             Label : ARGUMENT
-              9
+              8
               Label : DEFAULT
                 10
               Label : NAME
-                9
-              Label : TYPEHINT
                 8
+              Label : TYPEHINT
+                9
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -36,17 +36,17 @@ Label : PROJECT
         Label : EXPRESSION
           13
           Label : DEFINITION
-            8
+            9
           Label : METHOD
             7
             Label : ARGUMENT
-              9
+              8
               Label : DEFAULT
                 10
               Label : NAME
-                9
-              Label : TYPEHINT
                 8
+              Label : TYPEHINT
+                9
             Label : BLOCK
               10
             Label : NAME
@@ -60,17 +60,17 @@ Label : PROJECT
         Label : EXPRESSION
           15
           Label : DEFINITION
-            8
+            9
           Label : METHOD
             7
             Label : ARGUMENT
-              9
+              8
               Label : DEFAULT
                 10
               Label : NAME
-                9
-              Label : TYPEHINT
                 8
+              Label : TYPEHINT
+                9
             Label : BLOCK
               12
               Label : EXPRESSION

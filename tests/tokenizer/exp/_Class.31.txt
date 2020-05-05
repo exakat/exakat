@@ -12,7 +12,9 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            9
+            7
+            Label : RETURNTYPE
+              8
             Label : PPP
               10
               Label : DEFAULT
@@ -21,5 +23,3 @@ Label : PROJECT
               13
               Label : DEFAULT
                 15
-            Label : TYPEHINT
-              7
