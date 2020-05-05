@@ -2980,10 +2980,12 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
             if ($this->contexts->isContext(Context::CONTEXT_CLASS) &&
                 !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
+
                 // something like public static
                 $option = $this->tokens[$this->id][1];
 
-                $ppp = $this->processSGVariable('Ppp');
+                $ppp = $this->addAtom('Ppp', $current);
+                $this->processSGVariable($ppp);
 
                 $void = $this->addAtomVoid();
                 $this->addLink($ppp, $void, 'TYPEHINT');
