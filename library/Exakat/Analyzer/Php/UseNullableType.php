@@ -32,7 +32,7 @@ class UseNullableType extends Analyzer {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs(array('RETURNTYPE', 'ARGUMENT'))
              ->outIsIE('TYPEHINT')
-             ->is('nullable', true)
+             ->atomIs('Null')
              ->back('first'); // Go back to fucntion
         $this->prepareQuery();
     }
