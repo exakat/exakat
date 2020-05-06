@@ -205,10 +205,10 @@ class GSNeo4j extends Graph {
 
     public function stop() {
         if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
-            display('stop gremlin server 3.3.x');
-            putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');
+            display("stop gremlin server {$this->gremlinVersion}.x");
+            putenv("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            shell_exec("GREMLIN_YAML=conf/gsneo4j.3.3.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf db/gremlin.pid");
+            shell_exec("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf db/gremlin.pid");
         }
 
         if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
