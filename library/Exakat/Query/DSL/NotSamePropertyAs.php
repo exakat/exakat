@@ -47,7 +47,6 @@ class NotSamePropertyAs extends DSL {
             case 'self':
                 return new Command("filter{ it.get() != $name }");
 
-            case 'nullable':
             case 'reference':
                 return new Command('filter{ if (it.get().properties("' . $property . '").any()) { ' . $name . ' != it.get().value("' . $property . '");} else { ' . $name . ' != false; }}');
 

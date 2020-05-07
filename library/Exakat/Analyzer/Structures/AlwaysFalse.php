@@ -42,8 +42,7 @@ class AlwaysFalse extends Analyzer {
 
             // function foo(array $a) { if ($a === 'b')}
             $this->atomIs('Parameter')
-                 ->raw('or(__.has("nullable", true), 
-                           __.out("DEFAULT").hasLabel("Null"))')
+                 ->isNullable()
                  ->outIs('TYPEHINT')
                  ->fullnspathIs($typehint)
                  ->back('first')
@@ -62,7 +61,7 @@ class AlwaysFalse extends Analyzer {
             $atomsWithNull = array_merge($atoms, array('Null'));
             // function foo(array $a) { if ($a === 'b')}
             $this->atomIs('Parameter')
-                 ->isNot('nullable', true)
+                 ->isNotNullable()
                  ->not(
                     $this->side()
                          ->outIs('DEFAULT')
@@ -88,7 +87,7 @@ class AlwaysFalse extends Analyzer {
         $functions = array('\is_array', '\is_int', '\is_float', '\is_bool', '\is_string', '\is_scalar');
         // function foo(array $a) { if (is_array($a))}
         $this->atomIs('Parameter')
-             ->isNot('nullable', true)
+             ->isNotNullable()
              ->not(
                 $this->side()
                      ->outIs('DEFAULT')
@@ -108,8 +107,7 @@ class AlwaysFalse extends Analyzer {
 
         $functionsWithNull = array_merge($functions, array('is_null'));
         $this->atomIs('Parameter')
-             ->raw('or(__.has("nullable", true), 
-                       __.out("DEFAULT").hasLabel("Null"))')
+             ->isNullable()
              ->outIs('TYPEHINT')
              ->fullnspathIs(array_keys($conf))
              ->back('first')

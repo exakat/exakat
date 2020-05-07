@@ -35,9 +35,9 @@ class CloneWithNonObject extends Analyzer {
                 $this->side()
                      ->atomIs(self::CALLS)
                      ->inIs('DEFINITION')
+                     ->isNotNullable()
                      ->outIs('RETURNTYPE')
                      ->atomIsNot(array('Void', 'Scalartypehint'))
-                     ->isNot('nullable', true)
              )
              ->not(
                 $this->side()

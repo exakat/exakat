@@ -28,9 +28,9 @@ class NullableWithoutCheck extends Analyzer {
     public function analyze() {
         // function foo(?D $c) { echo $c->d;} // No check, but nullable??
         $this->atomIs('Parameter')
+             ->isNullable()
              ->outIs('TYPEHINT')
              ->atomIsNot('Void')
-             ->is('nullable', true)
              ->back('first')
              ->not(
                 $this->side()

@@ -65,9 +65,9 @@ class MismatchTypeAndDefault extends Analyzer {
              ->atomIsNot(self::STATIC_NAMES)
              ->savePropertyAs('label', 'type')
              ->back('arg')
+             ->isNotNullable()
              ->outIs('TYPEHINT')
              ->atomIsNot('Void', self::WITH_CONSTANTS)
-             ->isNot('nullable', true)
              ->raw(<<<'GREMLIN'
 filter{
     switch(it.get().value("fullnspath")) {
@@ -103,7 +103,6 @@ filter{
 GREMLIN
 )
              ->back('first');
-
         $this->prepareQuery();
 
         // function foo(?string $s = 3)
@@ -119,8 +118,9 @@ GREMLIN
              ->atomIsNot(self::STATIC_NAMES)
              ->savePropertyAs('label', 'type')
              ->back('arg')
+             ->isNullable()
              ->outIs('TYPEHINT')
-             ->is('nullable', true)
+             ->atomIsNot('Null')
              ->raw(<<<'GREMLIN'
 filter{
     switch(it.get().value("fullnspath")) {

@@ -59,17 +59,17 @@ class TypehintingStats extends AnalyzerArrayHashResults {
 
         //typehinted
         $this->atomIs('Parameter')
+             ->isNullable()
              ->outIs('TYPEHINT')
              ->atomIsNot('Void')
-             ->is('nullable', true)
              ->count();
         $argNullable = $this->rawQuery()->toInt();
 
         //typehinted
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->isNullable()
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
-             ->is('nullable', true)
              ->count();
         $returnNullable = $this->rawQuery()->toInt();
 

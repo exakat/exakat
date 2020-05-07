@@ -79,7 +79,6 @@ abstract class DSL {
                              'abstract',
                              'static',
                              'noscream',
-                             'nullable',
                              'trailing',
                              );
 
@@ -95,7 +94,6 @@ abstract class DSL {
                                              'isModified',
                                              'isRead',
                                              'noscream',
-                                             'nullable',
                                              'reference',
                                              'static',
                                              'trailing',

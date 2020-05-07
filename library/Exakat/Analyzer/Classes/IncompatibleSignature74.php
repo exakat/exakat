@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\IsVisible;
 
 class IncompatibleSignature74 extends Analyzer {
     protected $phpVersion = '7.4+';
@@ -79,13 +80,12 @@ class IncompatibleSignature74 extends Analyzer {
              ->savePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'typehint')
+             ->atomIsNot(array('Null', 'Void'))
              ->back('first')
 
              ->outIs('OVERWRITE')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked')
-             ->outIs('TYPEHINT')
-             ->notSamePropertyAs('fullnspath', 'typehint')
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->notSameTypehintAs('typehint')
              ->back('first');
         $this->prepareQuery();
 
@@ -130,15 +130,12 @@ class IncompatibleSignature74 extends Analyzer {
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->outIs('TYPEHINT')
-             ->isNot('nullable', true)
-             ->savePropertyAs('nullable', 'n')
+             ->isNotNullable()
              ->back('first')
 
              ->outIs('OVERWRITE')
              ->outWithRank('ARGUMENT', 'ranked')
-             ->outIs('TYPEHINT')
-             ->notSamePropertyAs('nullable', 'n')
+             ->isNullable()
              ->back('first');
         $this->prepareQuery();
 
@@ -146,15 +143,11 @@ class IncompatibleSignature74 extends Analyzer {
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->analyzerIsNot('self')
              ->isNot('visibility', 'private')
-             ->outIs('RETURNTYPE')
-             ->is('nullable', true)
-             ->savePropertyAs('nullable', 'n')
+             ->isNullable()
              ->back('first')
 
              ->outIs('OVERWRITE')
-             ->outIs('RETURNTYPE')
-             ->notSamePropertyAs('nullable', 'n')
-
+             ->isNotNullable()
              ->back('first');
         $this->prepareQuery();
 
@@ -163,22 +156,8 @@ class IncompatibleSignature74 extends Analyzer {
              ->analyzerIsNot('self')
              ->savePropertyAs('visibility', 'v')
              ->outIs('OVERWRITE')
-             ->raw(<<<'GREMLIN'
-filter{ 
-    if (it.get().properties("visibility").any()) { 
-        if (v == "private") {
-            it.get().value("visibility") in ["protected", "none", "public"];
-        } else if (v == "protected") {
-            it.get().value("visibility") in ["none", "public"];
-        } else {
-            false;
-        }
-    } else { 
-        visibility != false; 
-    }
-}
-GREMLIN
-)
+             ->isVisible('v', IsVisible::VISIBLE_ABOVE)
+             ->notSamePropertyAs('visibility', 'v')
              ->back('first');
         $this->prepareQuery();
     }

@@ -35,8 +35,8 @@ class NonNullableSetters extends Analyzer {
         //           function foo() : C { return $this->p; }}
         $this->atomIs('Method')
              ->analyzerIsNot('self')
+             ->isNotNullable()
              ->outIs('RETURNTYPE')
-             ->isNot('nullable', true)
              ->savePropertyAs('fullnspath', 'fnp')
              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
 
@@ -65,8 +65,8 @@ class NonNullableSetters extends Analyzer {
         //           function foo() : C { return $this->p; }}
         $this->atomIs('Method')
              ->analyzerIsNot('self')
+             ->isNotNullable()
              ->outIs('RETURNTYPE')
-             ->isNot('nullable', true)
              ->savePropertyAs('fullnspath', 'fnp')
              ->fullnspathIsNot(array('\\int', '\\\float', '\\object', '\\boolean', '\\string', '\\array', '\\callable', '\\iterable', '\\void'))
 

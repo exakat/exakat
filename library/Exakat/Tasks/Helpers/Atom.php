@@ -69,7 +69,6 @@ class Atom {
     public $abstract     = '';
     public $static       = '';
     public $noscream     = 0;
-    public $nullable     = 0;
     public $trailing     = 0;
     public $isRead       = 0;
     public $isModified   = 0;
@@ -149,7 +148,6 @@ class Atom {
                                'flexible',
                                'heredoc',
                                'noscream',
-                               'nullable',
                                'trailing',
                                'isRead',
                                'isModified',
@@ -170,7 +168,6 @@ class Atom {
                              'globalvar',
                              'heredoc',
                              'noscream',
-                             'nullable',
                              'trailing',
                              'isRead',
                              'isModified',

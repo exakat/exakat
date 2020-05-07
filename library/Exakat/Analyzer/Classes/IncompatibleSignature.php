@@ -101,20 +101,23 @@ class IncompatibleSignature extends Analyzer {
              ->isNot('visibility', 'private')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->savePropertyAs('nullable', 'nullabled')
+             ->saveNullableAs('nullabled')
              ->inIs('ARGUMENT')
              ->outIs('OVERWRITE')
              ->outWithRank('ARGUMENT', 'ranked')
-             ->notSamePropertyAs('nullable', 'nullabled')
+             ->saveNullableAs('nullabled2')
+             ->raw('filter{nullabled != nullabled2; }')
              ->back('first');
         $this->prepareQuery();
 
         // non-matching return nullable
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
-             ->savePropertyAs('nullable', 'nullabled')
+             ->saveNullableAs('nullabled')
              ->outIs('OVERWRITE')
-             ->notSamePropertyAs('nullable', 'nullabled')
+             ->saveNullableAs('nullabled2')
+             ->notEqual('nullabled', 'nullabled2')
+             ->raw('filter{nullabled != nullabled2; }')
              ->back('first');
         $this->prepareQuery();
 
