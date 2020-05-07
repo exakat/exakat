@@ -67,7 +67,7 @@ class ScalarAreNotArrays extends Analyzer {
              ->outIs('ARGUMENT')
              ->analyzerIsNot('self')
              ->hasOut('TYPEHINT')
-             ->is('nullable', true)
+             ->isNullable()
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->atomIs('Variablearray')
@@ -97,7 +97,7 @@ class ScalarAreNotArrays extends Analyzer {
              ->inIs('DEFINITION')
              ->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
-             ->is('nullable', true)
+             ->isNullable()
              ->back('first')
              ->inIs('VARIABLE')
              ->analyzerIsNot('self');
