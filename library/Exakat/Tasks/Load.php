@@ -2060,7 +2060,13 @@ class Load extends Tasks {
             $nonTypehintToken[] = $this->phptokens::T_STATIC;
             $link = 'RETURNTYPE';
         } else {
-            $link = 'TYPEHINT';
+            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OPEN_CURLY,
+                                                                $this->phptokens::T_DOUBLE_ARROW,
+                                                        ), \STRICT_COMPARISON)) {
+                $link = 'RETURNTYPE';
+            } else {
+                $link = 'TYPEHINT';
+            }
         }
 
         if (!in_array($this->tokens[$this->id + 1][0], $nonTypehintToken, \STRICT_COMPARISON)) {
