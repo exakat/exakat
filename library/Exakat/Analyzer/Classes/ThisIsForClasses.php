@@ -42,7 +42,7 @@ class ThisIsForClasses extends Analyzer {
 
         $this->atomIs('This')
              ->goToFunction()
-             ->atomIs('Closure')
+             ->atomIs(array('Closure', 'Arrowfunction'))
              ->is('static', true)
              ->back('first');
         $this->prepareQuery();
