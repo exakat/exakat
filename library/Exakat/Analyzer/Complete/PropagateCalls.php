@@ -112,7 +112,24 @@ class PropagateCalls extends Complete {
               ->count();
        $c2 = $this->rawQuery()->toInt();
 
-       return $c1 + $c2;
+        //$a = function () {}; $a()
+        $this->atomIs(array('Variabledefinition', 'Parametername', 'Propertydefinition', 'Globaldefinition', 'Staticdefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
+             ->outIs('DEFAULT')
+             ->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
+             ->hasIn('RIGHT')
+             ->hasNoIn('DEFINITION')
+             ->as('origin')
+             ->back('first')
+             ->outIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
+             ->as('call')
+             ->dedup(array('call', 'origin'))
+             ->addEFrom('DEFINITION', 'origin')
+             ->count();
+       $c3 = $this->rawQuery()->toInt();
+
+       return $c1 + $c2 + $c3;
     }
 
     private function processReturnedType(): int {
