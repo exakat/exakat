@@ -858,7 +858,7 @@ class Load extends Tasks {
                 $this->checkTokens($filename);
                 $this->calls->save();
             } catch (LoadError $e) {
-                print $e->getMessage();
+//                print $e->getMessage();
                 $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (finally) (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
                 $this->reset();
                 $this->calls->reset();
@@ -1262,6 +1262,10 @@ class Load extends Tasks {
 
         ++$this->id;
         $atom     = 'Arrowfunction';
+        
+        // Keep a copy of the current variables, to remove the arguments when we are done
+        $previousContextVariables = $this->currentVariables;
+
         $fn       = $this->processParameters($atom);
         $fn->reference = $reference;
 
@@ -1272,6 +1276,11 @@ class Load extends Tasks {
 
         $this->contexts->nestContext(Context::CONTEXT_FUNCTION);
         $this->contexts->toggleContext(Context::CONTEXT_FUNCTION);
+
+        // arrowfunction may be static
+        if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
+            $this->currentClassTrait[] = '';
+        }
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
                                                                 $this->phptokens::T_CLOSE_PARENTHESIS,
@@ -1286,6 +1295,12 @@ class Load extends Tasks {
         }
 
         $this->popExpression();
+
+       // arrowfunction may be static
+       if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
+           array_pop($this->currentClassTrait);
+       }
+
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         $this->addLink($fn, $block, 'BLOCK');
@@ -1293,12 +1308,13 @@ class Load extends Tasks {
         $fn->token    = $this->getToken($this->tokens[$current][0]);
         $fn->fullcode = $this->tokens[$current][1] . ' ' .
                         ($fn->reference ? '&' : '') .
-                        '(' . $fn->fullcode . ') ' .
+                        '(' . $fn->fullcode . ')' .
                         $returnTypeFullcode .
-//                        (empty($returnTypeFullcode) ? '' : ' : ' . ($fn->nullable ? '?' : '') . $returnTypeFullcode) .
-                        '=> ' . $block->fullcode;
+                        ' => ' . $block->fullcode;
         $fn->fullnspath = $this->makeAnonymous('arrowfunction');
         $fn->aliased    = self::NOT_ALIASED;
+
+        $this->currentVariables = $previousContextVariables;
 
         $this->pushExpression($fn);
         $this->checkExpression();
@@ -1309,9 +1325,12 @@ class Load extends Tasks {
     private function processFunction(): Atom {
         $current = $this->id;
 
+/*
         if ($this->tokens[$this->id][0] === $this->phptokens::T_FN) {
             $atom = 'Arrowfunction';
-        } elseif ( $this->contexts->isContext(Context::CONTEXT_CLASS) &&
+        } else */
+        
+        if ( $this->contexts->isContext(Context::CONTEXT_CLASS) &&
 
              !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]),
@@ -2045,7 +2064,7 @@ class Load extends Tasks {
         }
 
         if (!in_array($this->tokens[$this->id + 1][0], $nonTypehintToken, \STRICT_COMPARISON)) {
-            $this->addLink($holder, $this->addAtomVoid(), 'RETURNTYPE');
+            $this->addLink($holder, $this->addAtomVoid(), $link);
             return '';
         }
 
@@ -2058,6 +2077,7 @@ class Load extends Tasks {
             $null->token       = $this->phptokens::T_STRING;
             $null->noDelimiter = '';
             $null->delimiter   = '';
+            $null->fullnspath   = '\\null';
 
             $return[] = $null;
             ++$this->id;
@@ -2115,7 +2135,7 @@ class Load extends Tasks {
 
         switch($link) {
             case 'RETURNTYPE':
-                $returnTypeFullcode = ' : ' . $returnTypeFullcode . ' ';
+                $returnTypeFullcode = ' : ' . $returnTypeFullcode;
                 break;
 
             case 'TYPEHINT':
