@@ -39,7 +39,7 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->back('first')
              ->inIs('ARGUMENT')
-             ->atomIs(array('Function', 'Closure'))
+             ->atomIs(array('Function', 'Closure', 'Arrowfunction'))
              ->as('results')
              ->back('first')
              ->outIs('NAME')
