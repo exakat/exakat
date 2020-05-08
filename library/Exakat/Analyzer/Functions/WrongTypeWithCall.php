@@ -38,6 +38,7 @@ class WrongTypeWithCall extends Analyzer {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
+             ->isNot('variadic', true)
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'type')
              ->atomIsNot('Void')
