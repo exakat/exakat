@@ -29,13 +29,20 @@ class OtherSiblings extends DSL {
     private static $sibling = 0;
 
     public function run(): Command {
-        if (func_num_args() === 2) {
-            list($link, $self) = func_get_args();
-        } elseif (func_num_args() === 1) {
-            list($link) = func_get_args();
-            $self = Analyzer::EXCLUDE_SELF;
-        } else {
-            $link = 'EXPRESSION';
+        switch (func_num_args()) {
+            case 2:
+                list($link, $self) = func_get_args();
+                break;
+            
+            case 1:
+                list($link) = func_get_args();
+                $self = Analyzer::EXCLUDE_SELF;
+                break;
+
+            default:
+                $link = 'EXPRESSION';
+                $self = Analyzer::EXCLUDE_SELF;
+                break;
         }
 
         ++self::$sibling;
