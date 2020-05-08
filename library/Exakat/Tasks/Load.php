@@ -2070,7 +2070,15 @@ class Load extends Tasks {
         }
 
         if (!in_array($this->tokens[$this->id + 1][0], $nonTypehintToken, \STRICT_COMPARISON)) {
-            $this->addLink($holder, $this->addAtomVoid(), $link);
+            if ($this->tokens[$this->id + 1][0] === T_ELLIPSIS) {
+                $typehint = $this->addAtom('Scalartypehint', $this->id + 1);
+                $typehint->fullnspath = '\\array';
+                $typehint->fullcode = '';
+            } else {
+                $typehint = $this->addAtomVoid();
+            }
+
+            $this->addLink($holder, $typehint, $link);
             return '';
         }
 
@@ -5580,18 +5588,18 @@ class Load extends Tasks {
     private function processAnd(): Atom {
         if ($this->hasExpression()) {
             return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
-        } else {
-            // Simply skipping the &
-            $this->processNext();
+        } 
 
-            $operand = $this->popExpression();
-            $operand->fullcode  = '&' . $operand->fullcode;
-            $operand->reference = self::REFERENCE;
+        // Simply skipping the &
+        $this->processNext();
 
-            $this->pushExpression($operand);
+        $operand = $this->popExpression();
+        $operand->fullcode  = '&' . $operand->fullcode;
+        $operand->reference = self::REFERENCE;
 
-            return $operand;
-        }
+        $this->pushExpression($operand);
+
+        return $operand;
     }
 
     private function processLogical(): Atom {
