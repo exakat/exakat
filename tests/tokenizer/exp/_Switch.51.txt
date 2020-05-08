@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  27
+  26
   Label : DEFINITION
-    27
+    26
     Label : DEFINITION
-      27
+      26
 Label : GLOBAL
   8
   Label : DEFINITION
@@ -26,6 +26,20 @@ Label : GLOBAL
     Label : DEFINITION
       8
 Label : GLOBAL
+  35
+  Label : DEFINITION
+    35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+Label : GLOBAL
   36
   Label : DEFINITION
     36
@@ -37,20 +51,6 @@ Label : GLOBAL
       36
     Label : DEFINITION
       36
-    Label : DEFINITION
-      36
-Label : GLOBAL
-  37
-  Label : DEFINITION
-    37
-    Label : DEFINITION
-      37
-    Label : DEFINITION
-      37
-    Label : DEFINITION
-      37
-    Label : DEFINITION
-      37
 Label : PROJECT
   1
   Label : DEFINITION
@@ -72,9 +72,21 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    27
+    26
     Label : DEFINITION
-      27
+      26
+  Label : DEFINITION
+    35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
   Label : DEFINITION
     36
     Label : DEFINITION
@@ -85,18 +97,6 @@ Label : PROJECT
       36
     Label : DEFINITION
       36
-    Label : DEFINITION
-      36
-  Label : DEFINITION
-    37
-    Label : DEFINITION
-      37
-    Label : DEFINITION
-      37
-    Label : DEFINITION
-      37
-    Label : DEFINITION
-      37
   Label : FILE
     3
     Label : EXPRESSION
@@ -112,89 +112,89 @@ Label : PROJECT
             Label : NAME
               6
           Label : ELSE
-            30
+            29
             Label : CONDITION
-              31
+              30
               Label : CLASS
-                33
+                32
               Label : VARIABLE
                 8
             Label : ELSE
-              30
+              29
               Label : CONDITION
-                31
+                30
                 Label : CLASS
-                  33
+                  32
                 Label : VARIABLE
                   8
               Label : ELSE
-                30
+                29
                 Label : CONDITION
-                  31
+                  30
                   Label : CLASS
-                    33
+                    32
                   Label : VARIABLE
                     8
                 Label : THEN
                   9
                   Label : EXPRESSION
-                    43
+                    42
                     Label : BLOCK
                       9
                       Label : EXPRESSION
-                        39
+                        38
                         Label : POSTPLUSPLUS
-                          37
+                          36
                     Label : CONDITION
-                      36
+                      35
                   Label : EXPRESSION
                     20
               Label : THEN
                 9
                 Label : EXPRESSION
-                  40
+                  39
                   Label : BLOCK
                     9
                     Label : EXPRESSION
-                      39
+                      38
                       Label : POSTPLUSPLUS
-                        37
+                        36
                   Label : FINAL
                     3
                     Label : EXPRESSION
-                      41
+                      40
                       Label : LEFT
-                        36
+                        35
                       Label : RIGHT
-                        42
+                        41
                   Label : INCREMENT
                     3
                     Label : EXPRESSION
-                      39
+                      38
                       Label : POSTPLUSPLUS
-                        36
+                        35
                   Label : INIT
                     3
                     Label : EXPRESSION
                       16
                       Label : LEFT
-                        36
+                        35
                       Label : RIGHT
                         15
             Label : THEN
               9
               Label : EXPRESSION
-                35
+                34
                 Label : BLOCK
                   9
                   Label : EXPRESSION
-                    39
+                    38
                     Label : POSTPLUSPLUS
-                      37
+                      36
                 Label : SOURCE
-                  36
+                  35
                 Label : VALUE
-                  37
+                  36
           Label : THEN
             9
             Label : EXPRESSION
@@ -218,9 +218,9 @@ Label : PROJECT
                       Label : BREAK
                         20
                 Label : EXPRESSION
-                  22
+                  14
                   Label : CASE
-                    23
+                    22
                   Label : CODE
                     3
                     Label : EXPRESSION
@@ -228,25 +228,25 @@ Label : PROJECT
                       Label : LEFT
                         8
                       Label : RIGHT
-                        24
+                        23
                         Label : ARGUMENT
                           8
                         Label : NAME
-                          24
+                          23
                     Label : EXPRESSION
                       19
                       Label : BREAK
                         20
                 Label : EXPRESSION
-                  26
+                  25
                   Label : CODE
                     3
                     Label : EXPRESSION
                       16
                       Label : LEFT
-                        27
+                        26
                       Label : RIGHT
-                        28
+                        27
                     Label : EXPRESSION
                       19
                       Label : BREAK

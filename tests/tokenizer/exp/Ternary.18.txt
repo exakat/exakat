@@ -1,11 +1,5 @@
 test
 Label : GLOBAL
-  5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-Label : GLOBAL
   8
   Label : DEFINITION
     8
@@ -24,11 +18,17 @@ Label : GLOBAL
     Label : DEFINITION
       14
 Label : GLOBAL
-  21
+  20
   Label : DEFINITION
-    21
+    20
     Label : DEFINITION
-      21
+      20
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
@@ -48,9 +48,9 @@ Label : PROJECT
     Label : DEFINITION
       14
   Label : DEFINITION
-    21
+    20
     Label : DEFINITION
-      21
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -66,28 +66,26 @@ Label : PROJECT
             Label : CONDITION
               8
             Label : ELSE
-              23
+              22
               Label : CLASS
-                18
+                17
                 Label : INDEX
-                  19
+                  18
                 Label : VARIABLE
-                  16
+                  14
                   Label : INDEX
-                    17
+                    16
                   Label : VARIABLE
                     14
               Label : METHOD
-                20
+                19
                 Label : ARGUMENT
-                  21
-                Label : NAME
                   20
+                Label : NAME
+                  19
             Label : THEN
               11
               Label : ARGUMENT
                 12
               Label : NAME
                 11
-        Label : EXPRESSION
-          24

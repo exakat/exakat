@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  12
+  11
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
-      12
+      11
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -14,9 +14,9 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
-      12
+      11
   Label : DEFINITION
     5
     Label : DEFINITION
@@ -32,13 +32,13 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            11
+            9
             Label : INDEX
               11
               Label : INDEX
-                14
+                13
               Label : VARIABLE
-                12
+                11
             Label : VARIABLE
               10
               Label : CLASS

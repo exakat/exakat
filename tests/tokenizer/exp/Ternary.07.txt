@@ -14,13 +14,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-  Label : DEFINITION
     11
     Label : DEFINITION
       11
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -43,5 +43,3 @@ Label : PROJECT
                 11
             Label : THEN
               10
-        Label : EXPRESSION
-          15

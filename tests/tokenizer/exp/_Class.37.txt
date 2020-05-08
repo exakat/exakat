@@ -23,7 +23,7 @@ Label : PROJECT
             7
             Label : PPP
               10
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
           Label : PPP
             7
@@ -31,11 +31,11 @@ Label : PROJECT
               12
               Label : DEFAULT
                 14
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
           Label : PPP
             7
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
             Label : PPP
               15
@@ -43,7 +43,7 @@ Label : PROJECT
               17
           Label : PPP
             7
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
             Label : PPP
               21
@@ -53,7 +53,7 @@ Label : PROJECT
                 25
           Label : PPP
             7
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
             Label : PPP
               26

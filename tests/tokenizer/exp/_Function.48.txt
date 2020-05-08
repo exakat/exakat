@@ -61,7 +61,7 @@ Label : PROJECT
                         19
                       Label : VALUE
                         20
-                Label : RETURNTYPE
+                Label : TYPEHINT
                   6
             Label : EXPRESSION
               14
@@ -75,5 +75,5 @@ Label : PROJECT
             5
           Label : RETURNED
             21
-          Label : RETURNTYPE
+          Label : TYPEHINT
             6

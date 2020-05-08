@@ -18,12 +18,12 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          10
+          9
           Label : CLASS
-            7
+            5
             Label : INDEX
-              8
+              7
             Label : VARIABLE
               5
           Label : MEMBER
-            9
+            8

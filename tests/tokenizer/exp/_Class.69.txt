@@ -79,7 +79,7 @@ Label : PROJECT
                     11
                   Label : NAME
                     17
-                  Label : RETURNTYPE
+                  Label : TYPEHINT
                     11
                 Label : BLOCK
                   13
@@ -109,7 +109,7 @@ Label : PROJECT
                 11
               Label : NAME
                 17
-              Label : RETURNTYPE
+              Label : TYPEHINT
                 11
             Label : BLOCK
               13
@@ -161,7 +161,7 @@ Label : PROJECT
             11
           Label : NAME
             17
-          Label : RETURNTYPE
+          Label : TYPEHINT
             11
         Label : BLOCK
           13

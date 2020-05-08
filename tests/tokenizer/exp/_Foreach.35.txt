@@ -175,5 +175,3 @@ Label : PROJECT
             29
           Label : VALUE
             31
-        Label : EXPRESSION
-          33

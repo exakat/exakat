@@ -24,13 +24,13 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : ARGUMENT
-              11
+              9
               Label : DEFAULT
-                9
+                10
               Label : NAME
-                11
-              Label : TYPEHINT
                 9
+              Label : TYPEHINT
+                10
             Label : BLOCK
               12
               Label : EXPRESSION
@@ -43,5 +43,5 @@ Label : PROJECT
                 13
             Label : RETURNED
               Void
-            Label : RETURNTYPE
-              9
+            Label : TYPEHINT
+              10

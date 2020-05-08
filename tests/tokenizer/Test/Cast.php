@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Cast extends Tokenizer {
-    /* 24 methods */
+    /* 25 methods */
 
     public function testCast01()  { $this->generic_test('Cast.01'); }
     public function testCast02()  { $this->generic_test('Cast.02'); }
@@ -33,5 +33,6 @@ class Cast extends Tokenizer {
     public function testCast22()  { $this->generic_test('Cast.22'); }
     public function testCast23()  { $this->generic_test('Cast.23'); }
     public function testCast24()  { $this->generic_test('Cast.24'); }
+    public function testCast25()  { $this->generic_test('Cast.25'); }
 }
 ?>

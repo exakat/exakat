@@ -27,5 +27,3 @@ Label : PROJECT
             10
           Label : THEN
             9
-        Label : EXPRESSION
-          11

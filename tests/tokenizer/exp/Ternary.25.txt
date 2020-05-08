@@ -12,17 +12,17 @@ Label : GLOBAL
     Label : DEFINITION
       5
 Label : GLOBAL
-  13
+  12
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
-      13
+      12
 Label : GLOBAL
-  17
+  16
   Label : DEFINITION
-    17
+    16
     Label : DEFINITION
-      17
+      16
 Label : PROJECT
   1
   Label : DEFINITION
@@ -34,13 +34,13 @@ Label : PROJECT
     Label : DEFINITION
       8
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
-      13
+      12
   Label : DEFINITION
-    17
+    16
     Label : DEFINITION
-      17
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -52,38 +52,36 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            23
+            22
             Label : CONDITION
-              12
+              11
               Label : LEFT
-                10
+                8
                 Label : INDEX
-                  11
+                  10
                 Label : VARIABLE
                   8
               Label : RIGHT
-                15
+                14
                 Label : LEFT
-                  13
+                  12
                 Label : RIGHT
-                  21
+                  20
                   Label : LEFT
-                    16
+                    15
                     Label : CODE
-                      15
+                      14
                       Label : LEFT
-                        10
+                        16
                         Label : INDEX
-                          19
+                          18
                         Label : VARIABLE
-                          17
+                          16
                       Label : RIGHT
-                        20
+                        19
                   Label : RIGHT
-                    22
+                    21
             Label : ELSE
-              25
-            Label : THEN
               24
-        Label : EXPRESSION
-          26
+            Label : THEN
+              23

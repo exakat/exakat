@@ -39,5 +39,5 @@ Label : PROJECT
                 15
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               7

@@ -10,9 +10,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : DEFINITION
-            6
-          Label : DEFINITION
             8
+          Label : DEFINITION
+            6
           Label : DEFINITION
             6
           Label : METHOD
@@ -54,6 +54,16 @@ Label : PROJECT
                   Label : NAME
                     9
             Label : DEFINITION
+              23
+              Label : CLASS
+                6
+              Label : METHOD
+                14
+                Label : ARGUMENT
+                  12
+                Label : NAME
+                  14
+            Label : DEFINITION
               9
               Label : DEFINITION
                 9
@@ -65,16 +75,6 @@ Label : PROJECT
                 20
               Label : DEFINITION
                 20
-            Label : DEFINITION
-              23
-              Label : CLASS
-                6
-              Label : METHOD
-                14
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  14
             Label : NAME
               14
             Label : RETURNED

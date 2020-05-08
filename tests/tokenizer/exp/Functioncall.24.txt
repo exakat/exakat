@@ -115,8 +115,6 @@ Label : PROJECT
               22
             Label : ARGUMENT
               24
-            Label : ARGUMENT
-              6
             Label : NAME
               5
           Label : RIGHT

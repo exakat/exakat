@@ -10,29 +10,29 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
-              6
+              7
             Label : NAME
-              8
-            Label : TYPEHINT
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
             9
           Label : RETURNED
             Void
-          Label : RETURNTYPE
-            6
+          Label : TYPEHINT
+            7
         Label : EXPRESSION
           5
           Label : ARGUMENT
             10
             Label : DEFAULT
-              6
+              7
             Label : NAME
               10
             Label : TYPEHINT
-              6
+              7
           Label : BLOCK
             11
           Label : DEFINITION
@@ -41,18 +41,18 @@ Label : PROJECT
               11
           Label : RETURNED
             Void
-          Label : RETURNTYPE
-            6
+          Label : TYPEHINT
+            7
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
-              6
+              7
             Label : NAME
-              8
-            Label : TYPEHINT
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
             9
           Label : RETURNED
@@ -64,21 +64,21 @@ Label : PROJECT
           Label : ARGUMENT
             10
             Label : DEFAULT
-              6
+              7
             Label : NAME
               10
             Label : TYPEHINT
-              6
+              7
           Label : BLOCK
             14
             Label : ARGUMENT
               11
               Label : DEFAULT
-                6
+                7
               Label : NAME
                 11
               Label : TYPEHINT
-                6
+                7
             Label : BLOCK
               15
               Label : EXPRESSION
@@ -95,8 +95,14 @@ Label : PROJECT
                 17
             Label : RETURNED
               17
-            Label : RETURNTYPE
-              6
+            Label : RETURNED
+              18
+              Label : LEFT
+                17
+              Label : RIGHT
+                19
+            Label : TYPEHINT
+              7
           Label : RETURNED
             Void
           Label : RETURNTYPE

@@ -1,6 +1,6 @@
 <?php
 
-class x {
+class x extends y {
     function y () {
         echo parent::class."\n";
         echo self::class."\n";

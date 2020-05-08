@@ -219,7 +219,5 @@ Label : PROJECT
           40
           Label : RETURN
             41
-        Label : EXPRESSION
-          24
-  Label : RETURNED, RETURNED
+  Label : RETURNED
     41

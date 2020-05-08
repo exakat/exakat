@@ -49,7 +49,7 @@ Label : PROJECT
               10
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               11
             Label : TYPEHINT
               11

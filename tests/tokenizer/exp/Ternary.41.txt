@@ -375,8 +375,6 @@ Label : PROJECT
                     25
                   Label : NAME
                     16
-        Label : EXPRESSION
-          23
   Label : RETURNED
     9
     Label : LEFT

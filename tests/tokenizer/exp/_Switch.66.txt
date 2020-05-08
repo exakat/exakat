@@ -18,10 +18,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
-  Label : DEFINITION
     11
     Label : DEFINITION
       11
@@ -29,6 +25,10 @@ Label : PROJECT
       11
     Label : DEFINITION
       11
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,7 +56,23 @@ Label : PROJECT
                   Label : BREAK
                     16
             Label : EXPRESSION
-              18
+              9
+              Label : CASE
+                18
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  13
+                  Label : LEFT
+                    11
+                  Label : RIGHT
+                    14
+                Label : EXPRESSION
+                  15
+                  Label : BREAK
+                    16
+            Label : EXPRESSION
+              9
               Label : CASE
                 19
               Label : CODE
@@ -73,8 +89,6 @@ Label : PROJECT
                     16
             Label : EXPRESSION
               20
-              Label : CASE
-                21
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -82,20 +96,6 @@ Label : PROJECT
                   Label : LEFT
                     11
                   Label : RIGHT
-                    14
-                Label : EXPRESSION
-                  15
-                  Label : BREAK
-                    16
-            Label : EXPRESSION
-              22
-              Label : CODE
-                3
-                Label : EXPRESSION
-                  13
-                  Label : LEFT
-                    11
-                  Label : RIGHT
-                    21
+                    19
           Label : CONDITION
             6

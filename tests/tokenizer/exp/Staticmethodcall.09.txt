@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
-  9
+  8
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
-      9
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
-      9
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,17 +18,17 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          14
+          13
           Label : METHOD
-            11
+            10
             Label : ARGUMENT
-              12
-            Label : NAME
               11
+            Label : NAME
+              10
           Label : OBJECT
-            8
+            6
             Label : INDEX
-              9
+              8
             Label : VARIABLE
               7
               Label : CLASS

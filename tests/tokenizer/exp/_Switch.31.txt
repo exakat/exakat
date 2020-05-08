@@ -24,22 +24,22 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : CASE
-                15
+                14
                 Label : CONDITION
-                  13
+                  12
                   Label : LEFT
-                    11
+                    10
                   Label : RIGHT
-                    14
+                    13
                 Label : ELSE
-                  17
-                Label : THEN
                   16
+                Label : THEN
+                  15
               Label : CODE
                 3
                 Label : EXPRESSION
-                  19
+                  18
                   Label : BREAK
-                    20
+                    19
           Label : CONDITION
             6

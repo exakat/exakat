@@ -77,5 +77,3 @@ Label : PROJECT
                   12
           Label : VALUE
             18
-        Label : EXPRESSION
-          21

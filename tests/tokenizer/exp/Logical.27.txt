@@ -34,10 +34,10 @@ Label : PROJECT
             Label : NOT
               6
           Label : RIGHT
-            13
+            12
             Label : POSTPLUSPLUS
-              11
+              9
               Label : INDEX
-                12
+                11
               Label : VARIABLE
                 9

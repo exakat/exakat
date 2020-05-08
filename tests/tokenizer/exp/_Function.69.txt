@@ -315,8 +315,6 @@ Label : PROJECT
             19
             Label : ARGUMENT
               12
-            Label : ARGUMENT
-              6
             Label : NAME
               19
           Label : RIGHT
@@ -353,8 +351,6 @@ Label : PROJECT
               10
             Label : ARGUMENT
               12
-            Label : ARGUMENT
-              6
             Label : NAME
               19
           Label : RIGHT
@@ -391,8 +387,6 @@ Label : PROJECT
             19
             Label : ARGUMENT
               10
-            Label : ARGUMENT
-              6
             Label : ARGUMENT
               6
             Label : NAME
@@ -433,8 +427,6 @@ Label : PROJECT
               6
             Label : ARGUMENT
               12
-            Label : ARGUMENT
-              6
             Label : NAME
               19
           Label : RIGHT

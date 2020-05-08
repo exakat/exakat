@@ -24,13 +24,13 @@ Label : PROJECT
         Label : EXPRESSION
           10
           Label : ARGUMENT
-            12
+            11
             Label : DEFAULT
               6
             Label : NAME
-              12
-            Label : TYPEHINT
               11
+            Label : TYPEHINT
+              12
           Label : BLOCK
             9
             Label : EXPRESSION

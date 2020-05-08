@@ -32,44 +32,44 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NOT
-            8
+            6
             Label : INDEX
-              9
+              8
             Label : VARIABLE
               6
         Label : EXPRESSION
           5
           Label : NOT
-            8
+            9
             Label : INDEX
               10
             Label : VARIABLE
-              8
+              6
               Label : INDEX
-                9
+                8
               Label : VARIABLE
                 6
         Label : EXPRESSION
           5
           Label : NOT
-            8
+            9
             Label : INDEX
               11
             Label : VARIABLE
-              8
+              9
               Label : INDEX
                 10
               Label : VARIABLE
-                8
+                6
                 Label : INDEX
-                  9
+                  8
                 Label : VARIABLE
                   6
         Label : EXPRESSION
           5
           Label : NOT
-            12
+            6
             Label : INDEX
-              9
+              8
             Label : VARIABLE
               6

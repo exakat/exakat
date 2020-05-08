@@ -23,7 +23,7 @@ Label : PROJECT
               8
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               10
             Label : TYPEHINT
               10
@@ -87,7 +87,7 @@ Label : PROJECT
               15
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               10
             Label : TYPEHINT
               10
@@ -111,7 +111,7 @@ Label : PROJECT
               18
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               10
             Label : TYPEHINT
               10

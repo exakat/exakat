@@ -26,9 +26,11 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : CASE
-                11
+                10
               Label : CODE
                 3
+                Label : EXPRESSION
+                  11
                 Label : EXPRESSION
                   13
                   Label : BREAK

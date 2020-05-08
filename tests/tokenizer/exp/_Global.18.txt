@@ -16,23 +16,23 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
-              Label : DEFINITION
-                8
-            Label : TYPEHINT
               6
+              Label : DEFINITION
+                6
+            Label : TYPEHINT
+              7
           Label : BLOCK
             10
             Label : EXPRESSION
               11
               Label : GLOBAL
-                8
+                6
                 Label : DEFINITION
-                  8
+                  6
             Label : EXPRESSION
               11
               Label : GLOBAL
@@ -40,17 +40,17 @@ Label : PROJECT
                 Label : DEFINITION
                   12
             Label : EXPRESSION
-              13
+              14
               Label : LEFT
-                8
+                6
               Label : RIGHT
-                14
+                15
             Label : EXPRESSION
-              13
+              14
               Label : LEFT
                 12
               Label : RIGHT
-                15
+                16
           Label : DEFINITION
             12
             Label : DEFINITION
@@ -60,4 +60,4 @@ Label : PROJECT
           Label : RETURNED
             Void
           Label : RETURNTYPE
-            6
+            7

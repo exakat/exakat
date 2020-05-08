@@ -10,42 +10,44 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            9
+            8
             Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : RETURN
-                  14
-            Label : NAME
               9
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                12
+                Label : RETURN
+                  13
+            Label : NAME
+              8
             Label : RETURNED
-              14
+              13
             Label : RETURNTYPE
-              10
+              9
+            Label : TYPEHINT
+              9
           Label : NAME
             6
         Label : EXPRESSION
           5
           Label : METHOD
-            9
+            8
             Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                13
-                Label : RETURN
-                  14
-            Label : NAME
               9
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                12
+                Label : RETURN
+                  13
+            Label : NAME
+              8
             Label : RETURNED
-              14
+              13
             Label : RETURNTYPE
-              10
+              9
             Label : TYPEHINT
-              10
+              9
           Label : NAME
-            15
+            14

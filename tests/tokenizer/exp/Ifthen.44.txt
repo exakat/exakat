@@ -39,7 +39,7 @@ Label : PROJECT
                 10
           Label : THEN
             3
-            Label : EXPRESSION, EXPRESSION
+            Label : EXPRESSION
               13
               Label : ARGUMENT
                 11

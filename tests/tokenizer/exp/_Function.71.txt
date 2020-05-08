@@ -43,7 +43,7 @@ Label : PROJECT
                 9
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               9
             Label : TYPEHINT
               9
@@ -67,7 +67,7 @@ Label : PROJECT
                 9
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               9
             Label : TYPEHINT
               9
@@ -99,7 +99,7 @@ Label : PROJECT
                 9
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               9
             Label : TYPEHINT
               9
@@ -131,7 +131,7 @@ Label : PROJECT
                 9
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               9
             Label : TYPEHINT
               9

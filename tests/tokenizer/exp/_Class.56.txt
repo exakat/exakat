@@ -31,7 +31,7 @@ Label : PROJECT
               7
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
             Label : TYPEHINT
               8
@@ -45,7 +45,7 @@ Label : PROJECT
               14
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
             Label : TYPEHINT
               8

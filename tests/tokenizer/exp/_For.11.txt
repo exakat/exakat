@@ -77,5 +77,3 @@ Label : PROJECT
                 6
               Label : RIGHT
                 9
-        Label : EXPRESSION
-          19

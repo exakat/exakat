@@ -107,5 +107,3 @@ Label : PROJECT
               35
     Label : EXPRESSION
       39
-  Label : RETURNED
-    21

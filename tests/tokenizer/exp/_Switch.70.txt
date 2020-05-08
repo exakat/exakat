@@ -36,9 +36,9 @@ Label : PROJECT
                   Label : BREAK
                     10
             Label : EXPRESSION
-              14
+              9
               Label : CASE
-                15
+                14
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -46,9 +46,9 @@ Label : PROJECT
                   Label : BREAK
                     12
             Label : EXPRESSION
-              16
+              9
               Label : CASE
-                17
+                15
               Label : CODE
                 3
                 Label : EXPRESSION
@@ -56,9 +56,9 @@ Label : PROJECT
                   Label : CASES
                     8
                     Label : EXPRESSION
-                      18
+                      9
                       Label : CASE
-                        19
+                        16
                       Label : CODE
                         3
                         Label : EXPRESSION
@@ -66,9 +66,9 @@ Label : PROJECT
                           Label : BREAK
                             10
                     Label : EXPRESSION
-                      20
+                      9
                       Label : CASE
-                        21
+                        17
                       Label : CODE
                         3
                         Label : EXPRESSION
@@ -76,9 +76,9 @@ Label : PROJECT
                           Label : BREAK
                             12
                     Label : EXPRESSION
-                      22
+                      9
                       Label : CASE
-                        23
+                        18
                       Label : CODE
                         3
                         Label : EXPRESSION

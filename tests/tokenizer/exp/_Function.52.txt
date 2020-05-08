@@ -55,7 +55,7 @@ Label : PROJECT
               7
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               9
           Label : NAME
             6

@@ -13,6 +13,8 @@ Label : PROJECT
             16
           Label : DEFINITION
             17
+          Label : EXTENDS
+            7
           Label : METHOD
             7
             Label : ARGUMENT

@@ -85,5 +85,3 @@ Label : PROJECT
                     11
               Label : VALUE
                 17
-        Label : EXPRESSION
-          23

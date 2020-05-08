@@ -157,5 +157,3 @@ Label : PROJECT
                 17
                 Label : ARGUMENT
                   18
-        Label : EXPRESSION
-          18

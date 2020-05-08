@@ -36,6 +36,12 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
     6
     Label : DEFINITION
       6
@@ -43,12 +49,6 @@ Label : PROJECT
       6
     Label : DEFINITION
       6
-  Label : DEFINITION
-    13
-    Label : DEFINITION
-      13
-    Label : DEFINITION
-      13
   Label : DEFINITION
     18
     Label : DEFINITION
@@ -154,9 +154,9 @@ Label : PROJECT
                   Label : RIGHT
                     27
             Label : EXPRESSION
-              29
+              9
               Label : CASE
-                30
+                29
               Label : CODE
                 3
                 Label : EXPRESSION

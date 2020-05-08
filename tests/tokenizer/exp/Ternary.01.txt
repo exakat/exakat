@@ -15,5 +15,3 @@ Label : PROJECT
             8
           Label : THEN
             7
-        Label : EXPRESSION
-          9

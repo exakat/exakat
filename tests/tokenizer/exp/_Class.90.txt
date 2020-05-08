@@ -19,7 +19,7 @@ Label : PROJECT
                 9
               Label : NAME
                 8
-              Label : RETURNTYPE
+              Label : TYPEHINT
                 9
             Label : BLOCK
               11
@@ -47,7 +47,7 @@ Label : PROJECT
                 9
               Label : NAME
                 8
-              Label : RETURNTYPE
+              Label : TYPEHINT
                 9
             Label : BLOCK
               11

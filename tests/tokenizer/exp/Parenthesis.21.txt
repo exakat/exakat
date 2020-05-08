@@ -125,7 +125,7 @@ Label : PROJECT
               26
             Label : RETURNED
               30
-            Label : RETURNTYPE
+            Label : TYPEHINT
               10
           Label : NAME
             6

@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  8
+  7
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
-      8
+      7
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -24,9 +24,9 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    8
+    7
     Label : DEFINITION
-      8
+      7
   Label : DEFINITION
     11
     Label : DEFINITION
@@ -40,21 +40,21 @@ Label : PROJECT
         Label : EXPRESSION
           14
           Label : LEFT
-            7
+            5
             Label : INDEX
-              7
+              10
               Label : INDEX
-                7
+                11
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
                   11
               Label : VARIABLE
                 7
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
-                  8
+                  7
             Label : VARIABLE
               5
           Label : RIGHT

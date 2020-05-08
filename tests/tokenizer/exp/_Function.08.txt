@@ -21,7 +21,7 @@ Label : PROJECT
               6
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               7
           Label : NAME
             6

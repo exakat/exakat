@@ -59,5 +59,3 @@ Label : PROJECT
             6
           Label : VALUE
             12
-        Label : EXPRESSION
-          16

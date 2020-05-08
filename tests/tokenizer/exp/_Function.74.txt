@@ -113,7 +113,7 @@ Label : PROJECT
               22
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               7
           Label : METHOD
             24
@@ -125,7 +125,7 @@ Label : PROJECT
               24
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               7
         Label : EXPRESSION
           26

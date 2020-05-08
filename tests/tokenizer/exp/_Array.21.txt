@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
-  14
+  13
   Label : DEFINITION
-    14
+    13
     Label : DEFINITION
-      14
+      13
 Label : PROJECT
   1
   Label : DEFINITION
-    14
+    13
     Label : DEFINITION
-      14
+      13
   Label : FILE
     3
     Label : EXPRESSION
@@ -21,8 +21,6 @@ Label : PROJECT
           5
           Label : CONST
             5
-            Label : DEFINITION
-              6
             Label : NAME
               6
             Label : VALUE
@@ -36,32 +34,32 @@ Label : PROJECT
         Label : EXPRESSION
           11
           Label : ARGUMENT
-            12
+            6
             Label : INDEX
-              13
+              12
             Label : VARIABLE
               6
         Label : EXPRESSION
           11
           Label : ARGUMENT
-            12
+            6
             Label : INDEX
-              13
+              12
             Label : VARIABLE
-              16
+              15
               Label : MEMBER
                 6
               Label : OBJECT
-                14
+                13
         Label : EXPRESSION
           11
           Label : ARGUMENT
-            12
+            6
             Label : INDEX
-              13
+              12
             Label : VARIABLE
-              18
+              17
               Label : CLASS
-                17
+                16
               Label : CONSTANT
                 6

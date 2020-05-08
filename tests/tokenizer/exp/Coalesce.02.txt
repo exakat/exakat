@@ -116,19 +116,19 @@ Label : PROJECT
             Label : LEFT
               16
               Label : LEFT
-                17
+                5
                 Label : INDEX
                   21
                 Label : VARIABLE
                   5
               Label : RIGHT
-                17
+                5
                 Label : INDEX
                   22
                 Label : VARIABLE
                   5
             Label : RIGHT
-              17
+              5
               Label : INDEX
                 23
               Label : VARIABLE

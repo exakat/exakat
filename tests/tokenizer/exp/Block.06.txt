@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  15
+  14
   Label : DEFINITION
-    15
+    14
     Label : DEFINITION
-      15
+      14
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -18,9 +18,9 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    15
+    14
     Label : DEFINITION
-      15
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,15 +40,15 @@ Label : PROJECT
           Label : RIGHT
             10
             Label : ARGUMENT
-              14
+              12
               Label : INDEX
-                18
+                17
                 Label : POSTPLUSPLUS
                   8
                   Label : MEMBER
-                    17
+                    16
                   Label : OBJECT
-                    15
+                    14
               Label : VARIABLE
                 13
                 Label : CLASS

@@ -22,14 +22,14 @@ Label : PROJECT
           Label : NAME
             7
           Label : PPP
-            9
+            8
+            Label : TYPEHINT
+              9
             Label : PPP
               10
-            Label : TYPEHINT
-              8
           Label : PPP
-            6
-            Label : PPP
-              12
+            8
             Label : TYPEHINT
               6
+            Label : PPP
+              12

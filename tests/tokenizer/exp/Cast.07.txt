@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
-  12
+  9
   Label : DEFINITION
-    12
+    9
     Label : DEFINITION
-      12
+      9
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    9
     Label : DEFINITION
-      12
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,24 +20,16 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CAST
-            8
+            7
             Label : CLASS
               6
-            Label : MEMBER
-              7
-        Label : EXPRESSION
-          9
-          Label : CAST
-            8
-            Label : CLASS
-              10
             Label : CONSTANT
-              10
+              6
         Label : EXPRESSION
-          11
+          8
           Label : CAST
-            15
+            12
             Label : MEMBER
-              14
+              11
             Label : OBJECT
-              12
+              9

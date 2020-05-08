@@ -21,5 +21,5 @@ Label : PROJECT
             5
           Label : RETURNED
             10
-          Label : RETURNTYPE
+          Label : TYPEHINT
             6

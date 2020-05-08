@@ -30,27 +30,27 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            9
+            7
             Label : DEFAULT
-              7
+              8
             Label : NAME
-              9
-            Label : TYPEHINT
               7
+            Label : TYPEHINT
+              8
           Label : BLOCK
             10
             Label : EXPRESSION
-              7
+              8
           Label : NAME
             5
           Label : RETURNED
             Void
           Label : RETURNTYPE
-            7
+            8
         Label : EXPRESSION
           5
         Label : EXPRESSION
-          7
+          8
         Label : EXPRESSION
           11
           Label : ARGUMENT
@@ -72,7 +72,7 @@ Label : PROJECT
           Label : NAME
             11
         Label : EXPRESSION
-          7
+          8
         Label : EXPRESSION
           24
           Label : ARGUMENT
@@ -80,7 +80,7 @@ Label : PROJECT
           Label : NAME
             24
         Label : EXPRESSION
-          7
+          8
         Label : EXPRESSION
           28
           Label : ARGUMENT
@@ -90,7 +90,7 @@ Label : PROJECT
           Label : NAME
             28
         Label : EXPRESSION
-          7
+          8
         Label : EXPRESSION
           34
           Label : ARGUMENT
@@ -98,7 +98,7 @@ Label : PROJECT
           Label : NAME
             34
         Label : EXPRESSION
-          7
+          8
         Label : EXPRESSION
           38
           Label : CONDITION
@@ -122,4 +122,4 @@ Label : PROJECT
           Label : THEN
             10
             Label : EXPRESSION
-              7
+              8

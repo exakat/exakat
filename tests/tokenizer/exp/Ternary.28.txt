@@ -109,5 +109,3 @@ Label : PROJECT
                       13
                     Label : RIGHT
                       16
-        Label : EXPRESSION
-          27

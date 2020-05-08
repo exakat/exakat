@@ -32,22 +32,22 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            13
+            12
             Label : CONDITION
-              10
+              8
               Label : INDEX
-                11
+                10
               Label : VARIABLE
                 8
             Label : ELSE
-              17
+              16
               Label : CLASS
-                14
+                13
               Label : CONSTANT
-                18
+                17
             Label : THEN
-              17
+              16
               Label : CLASS
-                14
+                13
               Label : CONSTANT
-                15
+                14

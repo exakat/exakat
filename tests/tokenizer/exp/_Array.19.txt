@@ -52,11 +52,11 @@ Label : PROJECT
           Label : NAME
             6
         Label : EXPRESSION
-          18
+          17
           Label : ARGUMENT
-            16
+            8
             Label : INDEX
-              17
+              16
             Label : VARIABLE
               15
               Label : CLASS
@@ -64,13 +64,13 @@ Label : PROJECT
               Label : CONSTANT
                 8
         Label : EXPRESSION
-          18
+          17
           Label : ARGUMENT
-            16
+            18
             Label : INDEX
               14
             Label : VARIABLE
-              16
+              8
               Label : INDEX
                 12
               Label : VARIABLE
@@ -80,9 +80,9 @@ Label : PROJECT
                 Label : CONSTANT
                   8
         Label : EXPRESSION
-          18
+          17
           Label : ARGUMENT
-            16
+            18
             Label : INDEX
               20
               Label : LEFT
@@ -90,11 +90,11 @@ Label : PROJECT
               Label : RIGHT
                 21
             Label : VARIABLE
-              16
+              18
               Label : INDEX
                 14
               Label : VARIABLE
-                16
+                8
                 Label : INDEX
                   12
                 Label : VARIABLE

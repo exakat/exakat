@@ -85,7 +85,7 @@ Label : PROJECT
                     16
                 Label : NAME
                   15
-          Label : RETURNTYPE
+          Label : TYPEHINT
             6
         Label : EXPRESSION
           12
@@ -159,7 +159,7 @@ Label : PROJECT
                     16
                 Label : NAME
                   15
-          Label : RETURNTYPE
+          Label : TYPEHINT
             6
         Label : EXPRESSION
           15
@@ -263,5 +263,5 @@ Label : PROJECT
                     16
                 Label : NAME
                   15
-          Label : RETURNTYPE
+          Label : TYPEHINT
             6

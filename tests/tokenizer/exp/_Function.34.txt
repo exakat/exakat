@@ -10,13 +10,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
-            Label : TYPEHINT
               6
+            Label : TYPEHINT
+              7
           Label : ARGUMENT
             11
             Label : DEFAULT
@@ -24,7 +24,7 @@ Label : PROJECT
             Label : NAME
               11
             Label : TYPEHINT
-              6
+              7
           Label : ARGUMENT
             12
             Label : DEFAULT
@@ -32,7 +32,7 @@ Label : PROJECT
             Label : NAME
               12
             Label : TYPEHINT
-              6
+              7
           Label : ARGUMENT
             13
             Label : DEFAULT
@@ -40,7 +40,7 @@ Label : PROJECT
             Label : NAME
               13
             Label : TYPEHINT
-              6
+              7
           Label : ARGUMENT
             14
             Label : DEFAULT
@@ -48,7 +48,7 @@ Label : PROJECT
             Label : NAME
               14
             Label : TYPEHINT
-              6
+              7
           Label : ARGUMENT
             15
             Label : DEFAULT
@@ -56,7 +56,7 @@ Label : PROJECT
             Label : NAME
               15
             Label : TYPEHINT
-              6
+              7
           Label : BLOCK
             16
             Label : EXPRESSION

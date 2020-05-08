@@ -151,5 +151,3 @@ Label : PROJECT
                     26
                   Label : RIGHT
                     28
-        Label : EXPRESSION
-          23

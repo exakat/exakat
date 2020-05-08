@@ -66,20 +66,20 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
             Label : BLOCK
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6
         Label : EXPRESSION
           12
@@ -88,20 +88,20 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
             Label : BLOCK
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6
         Label : EXPRESSION
           12
@@ -110,20 +110,20 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
             Label : BLOCK
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6
         Label : EXPRESSION
           12
@@ -132,22 +132,22 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
               Label : TYPEHINT
                 17
             Label : BLOCK
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6
         Label : EXPRESSION
           12
@@ -156,15 +156,15 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
               Label : TYPEHINT
                 17
               Label : TYPEHINT
@@ -173,7 +173,7 @@ Label : PROJECT
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6
         Label : EXPRESSION
           12
@@ -182,15 +182,15 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
               Label : TYPEHINT
                 17
               Label : TYPEHINT
@@ -201,7 +201,7 @@ Label : PROJECT
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6
         Label : EXPRESSION
           12
@@ -210,15 +210,15 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
               Label : TYPEHINT
                 17
               Label : TYPEHINT
@@ -231,7 +231,7 @@ Label : PROJECT
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6
         Label : EXPRESSION
           12
@@ -240,15 +240,15 @@ Label : PROJECT
           Label : RIGHT
             13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 6
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 8
               Label : TYPEHINT
-                14
+                15
               Label : TYPEHINT
                 17
               Label : TYPEHINT
@@ -261,5 +261,5 @@ Label : PROJECT
               16
             Label : RETURNED
               Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               6

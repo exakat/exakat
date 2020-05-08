@@ -20,13 +20,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
-  Label : DEFINITION
     9
     Label : DEFINITION
       9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
   Label : DEFINITION
     11
     Label : DEFINITION
@@ -51,5 +51,3 @@ Label : PROJECT
               9
           Label : VALUE
             11
-        Label : EXPRESSION
-          14

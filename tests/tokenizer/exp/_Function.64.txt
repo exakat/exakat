@@ -34,21 +34,21 @@ Label : PROJECT
           Label : ARGUMENT
             6
             Label : ARGUMENT
-              9
+              7
               Label : DEFAULT
-                7
+                8
               Label : NAME
-                9
-              Label : TYPEHINT
                 7
+              Label : TYPEHINT
+                8
             Label : ARGUMENT
               10
               Label : DEFAULT
-                7
+                8
               Label : NAME
                 10
               Label : TYPEHINT
-                7
+                8
             Label : BLOCK
               11
               Label : EXPRESSION
@@ -62,7 +62,7 @@ Label : PROJECT
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              8
           Label : ARGUMENT
             24
             Label : METHOD

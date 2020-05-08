@@ -93,8 +93,6 @@ Label : PROJECT
               22
             Label : THEN
               21
-        Label : EXPRESSION
-          10
   Label : RETURNED
     7
   Label : RETURNED

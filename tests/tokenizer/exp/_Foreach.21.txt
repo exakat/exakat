@@ -1,5 +1,11 @@
 test
 Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+Label : GLOBAL
   6
   Label : DEFINITION
     6
@@ -24,17 +30,11 @@ Label : GLOBAL
     Label : DEFINITION
       12
 Label : GLOBAL
-  17
+  16
   Label : DEFINITION
-    17
+    16
     Label : DEFINITION
-      17
-Label : GLOBAL
-  20
-  Label : DEFINITION
-    20
-    Label : DEFINITION
-      20
+      16
 Label : PROJECT
   1
   Label : DEFINITION
@@ -54,13 +54,13 @@ Label : PROJECT
     Label : DEFINITION
       12
   Label : DEFINITION
-    17
+    16
     Label : DEFINITION
-      17
+      16
   Label : DEFINITION
-    20
+    19
     Label : DEFINITION
-      20
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -72,11 +72,11 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              19
+              18
               Label : LEFT
-                16
+                14
                 Label : INDEX
-                  17
+                  16
                 Label : VARIABLE
                   15
                   Label : MEMBER
@@ -84,12 +84,10 @@ Label : PROJECT
                   Label : OBJECT
                     12
               Label : RIGHT
-                20
+                19
           Label : INDEX
             8
           Label : SOURCE
             6
           Label : VALUE
             10
-        Label : EXPRESSION
-          22

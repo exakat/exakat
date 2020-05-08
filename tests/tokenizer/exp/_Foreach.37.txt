@@ -101,5 +101,3 @@ Label : PROJECT
                 7
           Label : VALUE
             12
-        Label : EXPRESSION
-          25

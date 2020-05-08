@@ -237,5 +237,3 @@ Label : PROJECT
             33
           Label : VALUE
             35
-        Label : EXPRESSION
-          37

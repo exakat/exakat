@@ -30,17 +30,17 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-    Label : DEFINITION
-      5
-  Label : DEFINITION
     11
     Label : DEFINITION
       11
     Label : DEFINITION
       11
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
   Label : DEFINITION
     17
     Label : DEFINITION
@@ -95,5 +95,3 @@ Label : PROJECT
               11
           Label : VALUE
             17
-        Label : EXPRESSION
-          23

@@ -6,17 +6,17 @@ Label : GLOBAL
     Label : DEFINITION
       8
 Label : GLOBAL
-  5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-Label : GLOBAL
   16
   Label : DEFINITION
     16
     Label : DEFINITION
       16
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : PROJECT
   1
   Label : DEFINITION
@@ -48,13 +48,13 @@ Label : PROJECT
               Label : LEFT
                 13
                 Label : LEFT
-                  10
+                  11
                   Label : INDEX
                     12
                   Label : VARIABLE
-                    10
+                    8
                     Label : INDEX
-                      11
+                      10
                     Label : VARIABLE
                       8
                 Label : RIGHT
@@ -62,11 +62,11 @@ Label : PROJECT
               Label : RIGHT
                 13
                 Label : LEFT
-                  10
+                  11
                   Label : INDEX
                     19
                   Label : VARIABLE
-                    10
+                    16
                     Label : INDEX
                       18
                     Label : VARIABLE
@@ -77,5 +77,3 @@ Label : PROJECT
               23
             Label : THEN
               22
-        Label : EXPRESSION
-          24

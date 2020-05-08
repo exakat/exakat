@@ -10,13 +10,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
-            Label : TYPEHINT
               6
+            Label : TYPEHINT
+              7
           Label : ARGUMENT
             11
             Label : DEFAULT
@@ -32,7 +32,7 @@ Label : PROJECT
             Label : NAME
               12
             Label : TYPEHINT
-              6
+              7
           Label : BLOCK
             13
             Label : EXPRESSION
@@ -48,11 +48,11 @@ Label : PROJECT
         Label : EXPRESSION
           16
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
+              6
             Label : TYPEHINT
               17
           Label : ARGUMENT
@@ -92,11 +92,11 @@ Label : PROJECT
             Label : TYPEHINT
               21
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
+              6
             Label : TYPEHINT
               22
           Label : BLOCK
@@ -122,11 +122,11 @@ Label : PROJECT
             Label : TYPEHINT
               21
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
+              6
             Label : TYPEHINT
               25
           Label : BLOCK
@@ -152,13 +152,13 @@ Label : PROJECT
             Label : TYPEHINT
               21
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
-            Label : TYPEHINT
               6
+            Label : TYPEHINT
+              7
           Label : BLOCK
             13
             Label : EXPRESSION
@@ -182,11 +182,11 @@ Label : PROJECT
             Label : TYPEHINT
               21
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
               9
             Label : NAME
-              8
+              6
             Label : TYPEHINT
               29
           Label : BLOCK

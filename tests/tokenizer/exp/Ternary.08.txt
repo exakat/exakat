@@ -14,13 +14,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-  Label : DEFINITION
     11
     Label : DEFINITION
       11
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -36,12 +36,10 @@ Label : PROJECT
             Label : CONDITION
               8
             Label : ELSE
-              13
+              11
               Label : INDEX
                 8
               Label : VARIABLE
                 11
             Label : THEN
               10
-        Label : EXPRESSION
-          14

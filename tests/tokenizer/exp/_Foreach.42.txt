@@ -74,15 +74,15 @@ Label : PROJECT
           Label : INDEX
             14
           Label : SOURCE
-            11
+            10
             Label : LEFT
-              8
+              6
               Label : INDEX
-                9
+                8
               Label : VARIABLE
                 6
             Label : RIGHT
-              8
+              11
               Label : ARGUMENT
                 12
           Label : VALUE
@@ -100,17 +100,17 @@ Label : PROJECT
           Label : SOURCE
             24
             Label : CONDITION
-              8
+              20
               Label : INDEX
                 22
               Label : VARIABLE
                 20
             Label : ELSE
-              8
+              11
               Label : ARGUMENT
                 12
             Label : THEN
-              8
+              11
               Label : ARGUMENT
                 25
           Label : VALUE
