@@ -118,7 +118,6 @@ class Load extends Tasks {
     private $currentVariables        = array();
     private $currentReturn           = null;
     private $currentClassTrait       = array();
-    private $currentParentClassTrait = array();
     private $currentProperties       = array();
     private $currentPropertiesCalls  = array();
     private $cases                   = null; // NestedCollector
@@ -479,7 +478,7 @@ class Load extends Tasks {
 
             try {
                 $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
-                $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+                $this->calls = new Calls($this->callsDatabase);
 
                 $clientClass = "\\Exakat\\Loader\\{$this->config->loader}";
                 display("Loading with $clientClass\n");
@@ -576,7 +575,7 @@ class Load extends Tasks {
 
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->loader = new $clientClass($this->callsDatabase, $this->id0);
-        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+        $this->calls = new Calls($this->callsDatabase);
 
         $nbTokens = 0;
         if ($this->config->verbose && !$this->config->quiet) {
@@ -606,7 +605,7 @@ class Load extends Tasks {
     private function runCollector(array $omittedFiles): void {
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
         $this->loader = new Collector($this->callsDatabase, $this->id0);
-        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+        $this->calls = new Calls($this->callsDatabase);
 
         $file_extensions = $this->config->file_extensions;
         $atomGroup = clone $this->atomGroup;
@@ -649,7 +648,7 @@ class Load extends Tasks {
             throw new NoSuchLoader($clientClass, $this->loaderList);
         }
         $this->callsDatabase = new \Sqlite3($this->sqliteLocation);
-        $this->calls = new Calls($this->config->projects_root, $this->callsDatabase);
+        $this->calls = new Calls($this->callsDatabase);
         $this->loader = new $clientClass($this->callsDatabase, $this->id0);
 
         $nbTokens = 0;
@@ -692,7 +691,6 @@ class Load extends Tasks {
         $this->currentMethod           = array();
         $this->currentFunction         = array();
         $this->currentClassTrait       = array();
-        $this->currentParentClassTrait = array();
         $this->currentVariables        = array();
 
         $this->tokens                  = array();
@@ -1706,8 +1704,6 @@ class Load extends Tasks {
             $this->getFullnspath($extends, 'class', $extends);
 
             $this->calls->addCall('class', $extends->fullnspath, $extends);
-
-            $this->currentParentClassTrait[] = $extends;
         } else {
             $extends = '';
         }
@@ -1748,9 +1744,6 @@ class Load extends Tasks {
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         array_pop($this->currentClassTrait);
-        if (!empty($extends)) {
-            array_pop($this->currentParentClassTrait);
-        }
 
         $this->currentVariables = $previousContextVariables;
         return $class;
@@ -3326,7 +3319,6 @@ class Load extends Tasks {
         $block = $this->processFollowingBlock($isColon === self::ALTERNATIVE_SYNTAX ? array($this->phptokens::T_ENDFOR) : array());
         $this->addLink($for, $block, 'BLOCK');
 
-        $code = $this->tokens[$current][1];
         if ($isColon === self::ALTERNATIVE_SYNTAX) {
             $fullcode = $this->tokens[$current][1] . '(' . $init->fullcode . ' ; ' . $final->fullcode . ' ; ' . $increment->fullcode . ') : ' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id + 1][1];
         } else {
@@ -5619,7 +5611,6 @@ class Load extends Tasks {
     }
 
     private function processDot(): Atom {
-        $current       = $this->id;
         $concatenation = $this->addAtom('Concatenation', $this->id);
         $fullcode      = array();
         $concat        = array();
