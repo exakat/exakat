@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UselessArgument extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/PropagateCalls',
+//                     'Complete/PropagateConstants',
                      'Complete/FollowClosureDefinition',
                     );
     }
@@ -47,10 +48,12 @@ class UselessArgument extends Analyzer {
 
              ->filter(
                 $this->side()
+                     ->initVariable('x', '[:]')
                      ->outIs('DEFINITION')
                      ->outIsIE('METHOD')
                      ->outWithRank('ARGUMENT', 'ranked')
-                     ->raw('groupCount("m").by("fullcode").cap("m").filter{ it.get().size() == 1}')
+                     ->atomIs(array('Integer', 'Float', 'String'), self::WITH_CONSTANTS)
+                     ->raw('sideEffect{x[it.get().value("code")] = 1;}.fold().filter{ x.size() == 1;}')
              )
              ->back('first');
         $this->prepareQuery();
