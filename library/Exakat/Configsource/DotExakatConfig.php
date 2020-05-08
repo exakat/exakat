@@ -27,6 +27,7 @@ use Exakat\Config as Configuration;
 
 class DotExakatConfig extends Config {
     private $dotExakat = '';
+    private $ini       = array();
 
     public function __construct() {
         $this->dotExakat = getcwd() . '/.exakat.ini';
@@ -49,7 +50,7 @@ class DotExakatConfig extends Config {
         }
         unset($value);
 
-        if (isset($tmp_config['project_themes'])) {
+        if (isset($this->config['project_themes'])) {
             display("please, rename project_themes into project_rulesets in your .exakat.ini file\n");
 
             if (empty($this->config['project_rulesets'])) {

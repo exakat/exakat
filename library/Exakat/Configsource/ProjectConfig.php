@@ -28,6 +28,7 @@ use Exakat\Vcs\Vcs;
 
 class ProjectConfig extends Config {
     private $projects_root = '.';
+    private $project       = '';
 
     protected $config = array('phpversion'          => PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION,
                               'project_name'        => '',

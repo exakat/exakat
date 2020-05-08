@@ -244,7 +244,7 @@ class Project extends Tasks {
 
             $report->run();
         } catch (\Throwable $e) {
-            display( "Error while building $format : " . $e->getMessage() . "\n");
+            display( "Error while building the reports : " . $e->getMessage() . "\n");
         }
         display('Reported project' . PHP_EOL);
 

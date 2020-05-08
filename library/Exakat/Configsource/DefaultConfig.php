@@ -67,7 +67,6 @@ class DefaultConfig extends Config {
                                'repository'         => false,
                                'analyzers'          => array(),
                                'report'             => 'Diplomat',
-                               'project_reports'    => array('Text'),
                                'file'               =>  '',
                                'style'              => 'ALL',
 

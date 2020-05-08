@@ -29,9 +29,7 @@ class Calls {
     private $calls       = array();
     private $globals     = array();
 
-    public function __construct(string $projects_root, \Sqlite3 $sqlite) {
-        $this->projects_root = $projects_root;
-
+    public function __construct(\Sqlite3 $sqlite) {
         $this->callsSqlite = $sqlite;
 
         $calls = <<<'SQL'

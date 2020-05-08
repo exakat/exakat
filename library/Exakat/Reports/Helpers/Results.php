@@ -29,6 +29,7 @@ class Results {
     private $count        = -1;
     private $values       = null;
     private $options      = array();
+    private $res          = null;
 
     public function __construct(?SQLite3Result $res = null, $options = array()) {
         if ($res === null) {

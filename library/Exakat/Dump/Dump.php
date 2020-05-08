@@ -11,10 +11,12 @@ class Dump {
     const READ  = 1;
     const INIT  = 0;
     
-    protected $project        = null;
-    protected $phpexcutable   = null;
-    protected $sqlite         = null;
-    private $sqliteFileFinal  = '';
+    protected $project          = null;
+    protected $phpexcutable     = null;
+    protected $sqlite           = null;
+    private $sqliteFileFinal    = '';
+    private $sqliteFile         = null;
+    private $sqliteFilePrevious = null;
     
     protected $tablesList = array();
 

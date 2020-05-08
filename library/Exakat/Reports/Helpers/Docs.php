@@ -28,13 +28,13 @@ use Exakat\Autoload\AutoloadDev;
 
 class Docs {
     private $pathToIni = null;
-    private $ext = null;
+    private $ext       = null;
+    private $dev       = null;
 
     private static $docs = null;
 
     public function __construct(string $pathToIni, AutoloadExt $ext = null, AutoloadDev $dev = null) {
         $this->pathToIni = $pathToIni;
-
         $this->ext = $ext;
         $this->dev = $dev;
     }

@@ -27,16 +27,17 @@ use Exakat\Project;
 use Exakat\Vcs\Vcs;
 
 class DatastoreConfig extends Config {
-    private $datastore = null;
-    protected $ignore_dirs = array();
-    protected $include_dirs = array();
-    protected $project_name = '';
-    protected $project_url = '';
-    protected $project_vcs = '';
+    private $datastore             = null;
+    protected $ignore_dirs         = array();
+    protected $include_dirs        = array();
+    protected $project_name        = '';
+    protected $project_url         = '';
+    protected $project_vcs         = '';
     protected $project_description = '';
-    protected $project_branch = '';
-    protected $project_tag = '';
-    
+    protected $project_branch      = '';
+    protected $project_tag         = '';
+    protected $project             = '';
+    protected $file_extensions     = array();
 
     protected $options = array('phpversion'          => '',
                                'project_name'        => '',
@@ -60,9 +61,9 @@ class DatastoreConfig extends Config {
 
     public function loadConfig($project) {
         $this->options['phpversion'] = $this->datastore->getHash('php_version');
-        $this->ignore_dirs = json_decode($this->datastore->getHash('ignore_dirs') ?? "[]");
-        $this->include_dirs = json_decode($this->datastore->getHash('include_dirs') ?? "[]");
-        $this->file_extensions = json_decode($this->datastore->getHash('file_extensions') ?? '[]');
+        $this->ignore_dirs           = json_decode($this->datastore->getHash('ignore_dirs')     ?? "[]");
+        $this->include_dirs          = json_decode($this->datastore->getHash('include_dirs')    ?? "[]");
+        $this->file_extensions       = json_decode($this->datastore->getHash('file_extensions') ?? '[]');
 
         $this->project_name        = $this->datastore->getHash('project');
         $this->project_url         = $this->datastore->getHash('vcs_url');

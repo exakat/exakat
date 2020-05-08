@@ -58,7 +58,6 @@ class Query {
         $this->project   = $project;
         $this->analyzer  = $analyzer;
         $this->php       = $php;
-        $this->dependsOn = $dependsOn;
 
         $this->queryFactory = new DSLFactory($analyzer, $dependsOn);
     }
