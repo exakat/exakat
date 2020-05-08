@@ -34,7 +34,7 @@ class LoadFinal {
     private $PHPconstants = array();
     private $PHPfunctions = array();
 
-    protected $log       = null;
+    protected $log        = null;
 
     public function __construct() {
         $this->gremlin    = exakat('graphdb');
@@ -42,9 +42,7 @@ class LoadFinal {
         $this->datastore  = exakat('datastore');
         $this->datastore->reuse();
 
-        $a = self::class;
-        $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
-        $this->log = new Log($this->logname,
+        $this->log = new Log(strtolower(substr(static::class, strrpos(self::class, '\\') + 1)),
                              "{$this->config->projects_root}/projects/{$this->config->project}");
     }
 
