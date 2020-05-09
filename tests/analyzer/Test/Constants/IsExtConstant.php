@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class IsExtConstant extends Analyzer {
-    /* 10 methods */
+    /* 11 methods */
 
     public function testConstants_IsExtConstant01()  { $this->generic_test('Constants_IsExtConstant.01'); }
     public function testConstants_IsExtConstant02()  { $this->generic_test('Constants_IsExtConstant.02'); }
@@ -19,5 +19,6 @@ class IsExtConstant extends Analyzer {
     public function testConstants_IsExtConstant08()  { $this->generic_test('Constants_IsExtConstant.08'); }
     public function testConstants_IsExtConstant09()  { $this->generic_test('Constants_IsExtConstant.09'); }
     public function testConstants_IsExtConstant10()  { $this->generic_test('Constants/IsExtConstant.10'); }
+    public function testConstants_IsExtConstant11()  { $this->generic_test('Constants/IsExtConstant.11'); }
 }
 ?>

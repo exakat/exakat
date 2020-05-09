@@ -144,7 +144,7 @@ class WrongReturnedType extends Analyzer {
              ->hasIn('RETURN')
              ->as('results')
              ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIsNot(array('Variable', 'Staticproperty', 'Member'))
+             ->atomIsNot(array('Variable', 'Staticproperty', 'Member', 'Functioncall', 'Methodacall', 'Staticmethodcall'))
              ->optional(
                 $this->side()
                      ->atomIs(array('Identifier', 'Nsname'), self::WITH_CONSTANTS)

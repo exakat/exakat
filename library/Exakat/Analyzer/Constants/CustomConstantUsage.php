@@ -54,8 +54,10 @@ class CustomConstantUsage extends Analyzer {
         // @note NSnamed are OK by default (may be not always!)
         $this->atomIs(self::CONSTANTS_ALL)
              ->analyzerIs('Constants/ConstantUsage')
-             ->hasIn('DEFINITION')
-             ->fullnspathIsNot($constants);
+             ->fullnspathIsNot($constants)
+             ->inIs('DEFINITION')
+             ->atomIs(array('Constant', 'Defineconstant'))
+             ->back('first');
         $this->prepareQuery();
     }
 }

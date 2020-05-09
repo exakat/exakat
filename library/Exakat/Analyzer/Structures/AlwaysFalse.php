@@ -107,7 +107,7 @@ class AlwaysFalse extends Analyzer {
 
         $functionsWithNull = array_merge($functions, array('is_null'));
         $this->atomIs('Parameter')
-             ->isNullable()
+                ->isNullable()
              ->outIs('TYPEHINT')
              ->fullnspathIs(array_keys($conf))
              ->back('first')

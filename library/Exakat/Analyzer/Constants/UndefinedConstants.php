@@ -41,7 +41,6 @@ class UndefinedConstants extends Analyzer {
              ->analyzerIsNot(array('Constants/CustomConstantUsage',
                                    'Constants/IsExtConstant',
                                    ))
-             ->hasNoConstantDefinition()
              ->isNotIgnored();
         $this->prepareQuery();
     }

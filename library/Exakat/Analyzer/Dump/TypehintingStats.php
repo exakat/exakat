@@ -86,17 +86,33 @@ class TypehintingStats extends AnalyzerArrayHashResults {
 
         //typehinted 2
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIs(array('\\resource', '\\mixed', '\\numeric'))
+             ->fullnspathIs(array('\\resource', '\\mixed', '\\numeric', '\\false'))
              ->groupCount('fullnspath')
              ->raw('cap("m")');
         $scalartypes2 = $this->rawQuery()->toArray();
 
         $scalartypes = ($scalartypes1[0] ?? array()) + ($scalartypes2[0] ?? array());
 
-        // object is the difference
+        //typehinted object
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->groupCount('fullnspath')
+             ->raw('cap("m")');
+        $objecttypes1 = $this->rawQuery()->toArray();
+
+        //typehinted object2
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->groupCount('fullnspath')
+             ->raw('cap("m")');
+        $objecttypes2 = $this->rawQuery()->toArray();
+
+        $objecttypes = ($objecttypes1[0] ?? array()) + ($objecttypes1[0] ?? array());
 
         $return = compact('totalArguments', 'totalFunctions', 'withTypehint','withReturnTypehint', 'scalartype', 'returnNullable', 'argNullable');
-        $return = $return + $scalartypes;
+        $return = $return + $scalartypes + $objecttypes;
 
         $atoms = array('all'            => self::FUNCTIONS_ALL,
                        'function'       => 'Function',
