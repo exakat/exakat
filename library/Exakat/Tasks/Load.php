@@ -1619,6 +1619,10 @@ class Load extends Tasks {
                 $link = strtoupper($cpm->atom);
             }
 
+            if ($class->atom === 'Interface' && in_array($cpm->atom, array('Method', 'Magicethod'))) {
+                $cpm->abstract = 1;
+            }
+
             $this->addLink($class, $cpm, $link);
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
