@@ -128,7 +128,6 @@ class Dump extends Tasks {
 
                     throw new NoSuchRuleset(implode(', ', $ruleset));
                 }
-                display('Processing ruleset' . (count($ruleset) > 1 ? 's' : '' ) . ' : ' . implode(', ', $ruleset));
                 $missing = $this->processResultsRuleset($ruleset, $counts);
                 $this->expandRulesets();
                 $this->collectHashAnalyzer();
