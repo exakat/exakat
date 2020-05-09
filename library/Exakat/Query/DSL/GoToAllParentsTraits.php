@@ -37,7 +37,7 @@ class GoToAllParentsTraits extends DSL {
         if ($self === Analyzer::EXCLUDE_SELF) {
             $command = new Command(<<<GREMLIN
 as("gotoallparentstraits").repeat( 
-    __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS"))
+    __.union( __.out("USE").out("USE"), __.out("EXTENDS"))
       .in("DEFINITION")
       .hasLabel("Class", "Classanonymous", "Trait")
       .simplePath().from("gotoallparentstraits")
@@ -49,14 +49,19 @@ GREMLIN
 );
         } else {
             $command = new Command(<<<GREMLIN
-as("gotoallparentstraits").emit( ).repeat( 
-    __.coalesce( __.out("USE").out("USE"), __.out("EXTENDS"))
+union(
+__.as("gotoallparentstraits").repeat( 
+    __.union( __.out("USE").out("USE"), __.out("EXTENDS"))
       .in("DEFINITION")
       .hasLabel("Class", "Classanonymous", "Trait")
       .simplePath().from("gotoallparentstraits")
 )
+.emit( )
 .times($MAX_LOOPING)
-.hasLabel("Class", "Classanonymous", "Trait")
+.hasLabel("Class", "Classanonymous", "Trait"),
+identity()
+)
+
 GREMLIN
 );
         }
