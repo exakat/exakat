@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Dump;
 
 use Exakat\Dump\Dump;
+use Exakat\Reports\Helpers\Results;
 
 abstract class AnalyzerHashResults extends AnalyzerDump {
     protected $storageType = self::QUERY_ARRAYS;

@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Dump;
 
 use Exakat\Dump\Dump;
+use Exakat\Reports\Helpers\Results;
 
 abstract class AnalyzerHashAnalyzer extends AnalyzerDump {
     protected $storageType = self::QUERY_HASH_ANALYZER;
@@ -68,6 +69,11 @@ abstract class AnalyzerHashAnalyzer extends AnalyzerDump {
         $res = $dump->fetchHashResults($this->analyzerName);
         return $res->toArray();
     }
+
+    public function getResults(Dump $dump) : Results {
+        return $dump->fetchHashResults($this->shortAnalyzer);
+    }
+
 }
 
 ?>

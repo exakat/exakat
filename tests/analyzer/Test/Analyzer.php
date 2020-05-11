@@ -3,7 +3,9 @@
 namespace Test;
 
 use Exakat\Phpexec;
+use Exakat\Dump\Dump;
 use Exakat\Analyzer\Rulesets;
+use Exakat\Analyzer\Dump\AnalyzerHashAnalyzer;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestSuite;
 use Exakat\Autoload\AutoloadExt;
@@ -70,6 +72,7 @@ abstract class Analyzer extends TestCase {
                             );
 
         $analyzerobject = $rulesets->getInstance($test_config);
+        
         if ($analyzerobject === null) {
             $this->markTestSkipped("Couldn\'t get an analyzer for $test_config.");
         }
@@ -136,7 +139,9 @@ abstract class Analyzer extends TestCase {
         $this->number = $number;
         $this->analyzer = $analyzer;
         
-        if (isset($res[0]) && !is_array($res[0])) {
+        if ($analyzerobject instanceof AnalyzerHashAnalyzer) {
+            $this->checkTestOnHashAnalyzer($res, $expected, $expected_not, $analyzerobject);
+        } elseif (isset($res[0]) && !is_array($res[0])) {
             $this->checkTestOnFullcode($res, $expected, $expected_not);
         } elseif (isset($res[0]['fullcode'])) {
             $list = array_column($res, 'fullcode');
@@ -157,6 +162,41 @@ abstract class Analyzer extends TestCase {
         }
     }
 
+    private function checkTestOnHashAnalyzer(array $list = array(), array $expected = array(), array $expected_not = array(), AnalyzerHashAnalyzer $analyzerobject) : void {
+        global $EXAKAT_PATH;
+        
+        $dump = Dump::factory("$EXAKAT_PATH/projects/test/dump.sqlite", Dump::READ);
+        $res = $analyzerobject->getResults($dump)->toHash('key', 'value');
+        
+        foreach($expected as $key => $value) {
+            if (isset($res[$key]) && $res[$key] == $value) {
+                unset($expected[$key]);
+                unset($res[$key]);
+            }
+        }
+
+        $missed = array();
+        foreach($expected as $key => $value) {
+            $missed[] = "$key => $value";
+        }
+        $this->assertEmpty($missed, count($missed)." expected values were not found :\n '".join("',\n '", $missed)."'\n");
+
+        $missed = array();
+        foreach($expected_not as $key => $value) {
+            if (isset($res[$key]) && $res[$key] == $value) {
+                unset($res[$key]);
+                $missed[] = "$key => $value";
+            }
+        }
+        $this->assertEmpty($missed, count($missed)." not expected values were found :\n '".join("',\n '", $missed)."'\n");
+
+        $missed = array();
+        foreach($res as $key => $value) {
+            $missed[] = "$key => $value";
+        }
+        $this->assertEmpty($res, count($res)." too many values were found :\n '".join("',\n '", $missed)."'\n");
+    }
+    
     private function checkTestOnFullarray(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
         $list = array_map(function(array $x) : array { unset($x['id']); return $x;}, $list);
         $list2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $list);
