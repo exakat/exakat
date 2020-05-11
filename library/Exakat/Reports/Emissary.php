@@ -3001,6 +3001,76 @@ HTML
         $this->putBasedPage($section->file, $finalHTML);
     }
 
+    private function generateTypehintStats(Section $section): void {
+        $finalHTML = $this->getBasedPage($section->source);
+
+        // List of extensions used
+        $res = $this->dump->fetchHashResults('Typehinting stats');
+
+        $data = array('object' => 0);
+        $total = 0;
+        foreach ($res->toArray() as $value) {
+            if (in_array($value['key'], array('totalArguments',
+                                               'totalFunctions',))) {
+                $total += (int) $value['value'];
+                continue;
+            }
+
+            if (in_array($value['key'], array('\\array',
+                                               '\callable',
+                                               '\\int',
+                                               '\\string',
+                                               '\\void',
+                                               '\\iterable',
+                                               '\\bool',
+                                               '\\float',
+                                              ))) { 
+                $data[$value['key']] = $value['value'];
+                continue;
+            }
+            
+        if (strpos($value['key'], '\\') !== false) {
+            $data['object'] += $value['value'];
+        }
+            
+            $html []= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                  </div>';
+        }
+
+        $data['no type'] = $total - array_sum($data);
+        arsort($data);
+
+        $html = array();
+        foreach($data as $name => $value) {
+            $html []= <<<HTML
+<div class="clearfix">
+    <div class="block-cell-name">$name</div>
+    <div class="block-cell-issue text-center">$value</div>
+</div>
+
+HTML;
+        }
+        $html = implode(PHP_EOL, $html);
+
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
+
+        $highchart = new Highchart();
+        $highchart->addSeries('filename',
+                              array_keys($data),
+                              array('name' => 'Typehint stats', 
+                                    'data' => array_values($data)),
+                              );
+        $blocjs = (string) $highchart;
+
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Class');
+
+        $this->putBasedPage($section->file, $finalHTML);
+    }
+
     private function generateMethodSize(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
@@ -3278,7 +3348,7 @@ HTML;
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $this->putBasedPage($section->source, $html);
+        $this->putBasedPage($section->file, $html);
     }
 
     protected function makeIcon($tag): string {
@@ -3475,8 +3545,10 @@ HTML;
 
     protected function generateInventoriesEncoding(Section $section): void {
         // List of indentation used
-        $res = $this->dump->fetchHashResults('Mbstring Encoding');
-        if ($res->isEmpty()) { return ; }
+        $res = $this->dump->fetchHashResults('Mbstring Encodings');
+        if ($res->isEmpty()) { 
+            return ; 
+        }
 
         $values = $res->toHash('key', 'value');
         asort($values);
@@ -3524,7 +3596,7 @@ HTML;
 
     protected function generateIndentationLevelsBreakdown(Section $section): void {
         // List of indentation used
-        $res = $this->dump->fetchHashResults('Indentation Levels');
+        $res = $this->dump->fetchHashResults('Dump/IndentationLevels');
         if ($res->isEmpty()) {
             return ;
         }
@@ -3586,7 +3658,7 @@ HTML;
 
     protected function generateDereferencingLevelsBreakdown(Section $section): void {
         // List of indentation used
-        $res = $this->dump->fetchHashResults('Dereferencing Levels');
+        $res = $this->dump->fetchHashResults('Dump/DereferencingLevels');
         if ($res->isEmpty()) { return ; }
 
         $html = array();

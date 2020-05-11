@@ -242,6 +242,11 @@ audit:
             file: typehint_suggestions
             method: generateTypehintSuggestions
             icon: circle-o
+        typehint_stats:
+            title: Class Typehint Stats
+            file: typehint_stats
+            method: generateTypehintStats
+            icon: circle-o
         class_options_suggestions:
             title: Class Option Recommendations
             source: empty
