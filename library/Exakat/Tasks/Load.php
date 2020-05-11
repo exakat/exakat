@@ -2874,6 +2874,7 @@ class Load extends Tasks {
             $string = $this->addAtom('Parent', $this->id);
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'list') {
             $string = $this->addAtom('Name', $this->id);
+            $string->fullnspath = '\\list';
         } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             // This catchs new A and new A()
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
@@ -2887,8 +2888,12 @@ class Load extends Tasks {
             $string = $this->addAtom('Boolean', $this->id);
 
             $string->noDelimiter = mb_strtolower($string->code) === 'true' ? 1 : '';
+            $string->fullnspath = '\\boolean';
+            $string->aliased    = self::NOT_ALIASED;
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null', $this->id);
+            $string->fullnspath = '\\null';
+            $string->aliased    = self::NOT_ALIASED;
         } else {
             $string = $this->addAtom('Identifier', $this->id);
         }
@@ -2918,9 +2923,6 @@ class Load extends Tasks {
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // Nothing to do
-        } elseif ($string->isA(array('Boolean', 'Null'))) {
-            $string->fullnspath = '\\' . mb_strtolower($string->fullcode);
-            $string->aliased    = self::NOT_ALIASED;
         } else {
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
