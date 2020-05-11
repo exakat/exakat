@@ -42,7 +42,7 @@ class PropertyIs extends DSL {
             $this->tolowercase($code);
             $caseSensitive = '.toString().toLowerCase()';
         }
-        
+
 //        var_dump($code);die();
 
         // code is a variable. We don't know if it is an array

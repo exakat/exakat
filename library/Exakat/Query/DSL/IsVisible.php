@@ -28,7 +28,7 @@ class IsVisible extends DSL {
     const VISIBLE_ABOVE = 1;
     const VISIBLE_BELOW = 2;
     const ALL_VISIBLE   = array(self::VISIBLE_ABOVE, self::VISIBLE_BELOW);
-    
+
     public function run() {
         switch (func_num_args()) {
             case 2:
@@ -39,9 +39,9 @@ class IsVisible extends DSL {
                 list($variable) = func_get_args();
                 $by = self::VISIBLE_ABOVE;
                 break;
-                
+
             default:
-                assert(false, "wrong number of argument for ".__METHOD__);
+                assert(false, 'wrong number of argument for ' . __METHOD__);
         }
 
         $this->assertVariable($variable, self::VARIABLE_READ);
@@ -49,10 +49,10 @@ class IsVisible extends DSL {
         if (!in_array($by, self::ALL_VISIBLE)) {
             $by = self::VISIBLE_ABOVE;
         }
-        
+
         if ($by === self::VISIBLE_ABOVE) {
             // The incoming variable is located above the current one
-            // This is covariant : 
+            // This is covariant :
             return new Command(<<<GREMLIN
 filter{ 
     if (it.get().properties("visibility").any()) { 

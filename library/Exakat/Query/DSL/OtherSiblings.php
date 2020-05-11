@@ -33,7 +33,7 @@ class OtherSiblings extends DSL {
             case 2:
                 list($link, $self) = func_get_args();
                 break;
-            
+
             case 1:
                 list($link) = func_get_args();
                 $self = Analyzer::EXCLUDE_SELF;

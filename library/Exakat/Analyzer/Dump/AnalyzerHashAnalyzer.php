@@ -70,7 +70,7 @@ abstract class AnalyzerHashAnalyzer extends AnalyzerDump {
         return $res->toArray();
     }
 
-    public function getResults(Dump $dump) : Results {
+    public function getResults(Dump $dump): Results {
         return $dump->fetchHashResults($this->shortAnalyzer);
     }
 

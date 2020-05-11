@@ -42,7 +42,7 @@ class FinalByOcramius extends Analyzer {
                 $this->side()
                      ->filter(
                         $this->side()
-                             ->outIs(array("METHOD", "MAGICMETHOD"))
+                             ->outIs(array('METHOD', 'MAGICMETHOD'))
                              ->atomis(self::FUNCTIONS_METHOD)
                              ->outIs('NAME')
                              ->raw('filter{ !(it.get().value("code") in interfaces)}')

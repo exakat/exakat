@@ -23,11 +23,10 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
 
 class SameTypehintAs extends DSL {
     public function run() {
-        assert(func_num_args() === 1, 'One argument ncessary for '.__METHOD__);
+        assert(func_num_args() === 1, 'One argument ncessary for ' . __METHOD__);
         list($variable) = func_get_args();
 
         $this->assertVariable($variable);

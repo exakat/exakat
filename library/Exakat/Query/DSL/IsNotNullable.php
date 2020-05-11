@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 class IsNotNullable extends DSL {
     public function run(): Command {
-        return new Command(<<<GREMLIN
+        return new Command(<<<'GREMLIN'
  not( __.where( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null")))
 .not( __.where( __.out("DEFAULT").hasLabel("Null").not(__.in("LEFT")) ))
 GREMLIN

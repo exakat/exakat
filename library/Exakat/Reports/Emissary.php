@@ -3011,7 +3011,7 @@ HTML
         $total = 0;
         foreach ($res->toArray() as $value) {
             if (in_array($value['key'], array('totalArguments',
-                                               'totalFunctions',))) {
+                                               'totalFunctions', ))) {
                 $total += (int) $value['value'];
                 continue;
             }
@@ -3024,15 +3024,15 @@ HTML
                                                '\\iterable',
                                                '\\bool',
                                                '\\float',
-                                              ))) { 
+                                              ))) {
                 $data[$value['key']] = $value['value'];
                 continue;
             }
-            
+
         if (strpos($value['key'], '\\') !== false) {
             $data['object'] += $value['value'];
         }
-            
+
             $html []= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
@@ -3059,7 +3059,7 @@ HTML;
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => 'Typehint stats', 
+                              array('name' => 'Typehint stats',
                                     'data' => array_values($data)),
                               );
         $blocjs = (string) $highchart;
@@ -3546,8 +3546,8 @@ HTML;
     protected function generateInventoriesEncoding(Section $section): void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Mbstring Encodings');
-        if ($res->isEmpty()) { 
-            return ; 
+        if ($res->isEmpty()) {
+            return ;
         }
 
         $values = $res->toHash('key', 'value');

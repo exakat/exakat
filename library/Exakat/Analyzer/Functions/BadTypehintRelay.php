@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class BadTypehintRelay extends Analyzer {
     public function analyze() {
-        // todo : handle union typehint : 
+        // todo : handle union typehint :
         // todo : handle class hierarchy
         // todo : handle relay via local variables
 

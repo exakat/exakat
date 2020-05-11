@@ -41,7 +41,7 @@ class UselessDefault extends Analyzer {
              ->atomIsNot('Void')
              ->hasNoIn('LEFT')
              ->back('first')
-             // at lease 2 usage of the method call. 
+             // at lease 2 usage of the method call.
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')

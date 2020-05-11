@@ -1260,7 +1260,7 @@ class Load extends Tasks {
 
         ++$this->id;
         $atom     = 'Arrowfunction';
-        
+
         // Keep a copy of the current variables, to remove the arguments when we are done
         $previousContextVariables = $this->currentVariables;
 
@@ -1327,7 +1327,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id][0] === $this->phptokens::T_FN) {
             $atom = 'Arrowfunction';
         } else */
-        
+
         if ( $this->contexts->isContext(Context::CONTEXT_CLASS) &&
 
              !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
@@ -3175,7 +3175,7 @@ class Load extends Tasks {
     private function processGlobalVariable(): Atom {
         $variable = $this->addAtom('Global');
         $this->processSGVariable($variable);
-        
+
         return $variable;
     }
 
@@ -5586,7 +5586,7 @@ class Load extends Tasks {
     private function processAnd(): Atom {
         if ($this->hasExpression()) {
             return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
-        } 
+        }
 
         // Simply skipping the &
         $this->processNext();

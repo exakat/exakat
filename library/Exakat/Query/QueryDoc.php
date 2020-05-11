@@ -30,7 +30,7 @@ class QueryDoc {
     private $commands = null;
     private $arguments = null;
     private $query = null;
-    
+
     public function __construct() {    }
 
     public function __call($name, $args) {
