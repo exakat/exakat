@@ -27,19 +27,34 @@ use Exakat\Analyzer\Analyzer;
 class SessionLazyWrite extends Analyzer {
     public function analyze() {
         // class mysessionhandler extends sessionhandlerinterface {}
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->is('fullnspath', '\\sessionhandlerinterface')
              ->back('first')
-             ->raw('not( __.where(__.out("IMPLEMENTS").has("fullnspath","\\\\sessionupdatetimestamphandlerinterface")))')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('IMPLEMENTS')
+                             ->fullnspathIs('\\sessionupdatetimestamphandlerinterface')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
 
+        // interface mysessionhandler extends sessionhandlerinterface {}
         $this->atomIs('Interface')
              ->outIs('EXTENDS')
              ->is('fullnspath', '\\sessionhandlerinterface')
              ->back('first')
-             ->raw('not( __.where(__.out("EXTENDS").has("fullnspath","\\\\sessionupdatetimestamphandlerinterface")))')
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs('EXTENDS')
+                             ->fullnspathIs('\\sessionupdatetimestamphandlerinterface')
+                     )
+             )
              ->back('first');
         $this->prepareQuery();
     }

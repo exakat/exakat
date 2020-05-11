@@ -26,28 +26,30 @@ use Exakat\Analyzer\Analyzer;
 
 class FinalByOcramius extends Analyzer {
     public function analyze() {
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
              ->hasNoOut('EXTENDS')
              ->isNot('final', true)
              ->raw('sideEffect{ interfaces = []; }')
              ->outIs('IMPLEMENTS')
              ->inIs('DEFINITION')
              ->atomIs('Interface')
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->isNot('abstract', true)
+             ->outIs(self::CLASS_METHODS)
+             ->atomIs(self::FUNCTIONS_METHOD)
              ->outIs('NAME')
              ->raw('sideEffect{ interfaces.add( it.get().value("code")); }')
              ->back('first')
-             ->raw(<<<'GREMLIN'
-not( 
-    where( __.out("METHOD", "MAGICMETHOD").hasLabel("Method", "Magicmethod")
-             .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
-             .not(has("visibility", within("protected", "private")))
-          )
-)
-GREMLIN
-);
+             ->not(
+                $this->side()
+                     ->filter(
+                        $this->side()
+                             ->outIs(array("METHOD", "MAGICMETHOD"))
+                             ->atomis(self::FUNCTIONS_METHOD)
+                             ->outIs('NAME')
+                             ->raw('filter{ !(it.get().value("code") in interfaces)}')
+                             ->inIs('NAME')
+                             ->isNot('visibility', array('protected', 'private'))
+                     )
+             );
         $this->prepareQuery();
     }
 }

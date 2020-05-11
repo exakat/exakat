@@ -26,8 +26,14 @@ use Exakat\Analyzer\Analyzer;
 
 class TryMultipleCatch extends Analyzer {
     public function analyze() {
+        // try {} catch (E1 $e) {}catch (E2 $e) {}
         $this->atomIs('Try')
-             ->raw('where( __.out("CATCH").count().is(gte(2)) )');
+             ->filter(
+                $this->side()
+                     ->outIs('CATCH')
+                     ->count()
+                     ->raw('is(gte(2))')
+             );
         $this->prepareQuery();
     }
 }

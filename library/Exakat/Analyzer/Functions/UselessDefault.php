@@ -39,7 +39,9 @@ class UselessDefault extends Analyzer {
              ->savePropertyAs('rank', 'ranked')
              ->outIs('DEFAULT')
              ->atomIsNot('Void')
+             ->hasNoIn('LEFT')
              ->back('first')
+             // at lease 2 usage of the method call. 
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
