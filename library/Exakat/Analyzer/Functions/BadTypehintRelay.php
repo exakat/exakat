@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class BadTypehintRelay extends Analyzer {
     public function analyze() {
+        // todo : handle union typehint : 
         // todo : handle class hierarchy
         // todo : handle relay via local variables
 
@@ -45,8 +46,11 @@ class BadTypehintRelay extends Analyzer {
              ->as('result')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'theRank')
-             ->outIs('TYPEHINT')
-             ->notSamePropertyAs('fullnspath', 'typehint')
+             ->not(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->samePropertyAs('fullnspath', 'typehint')
+             )
              ->back('result');
         $this->prepareQuery();
 
@@ -59,24 +63,11 @@ class BadTypehintRelay extends Analyzer {
              ->outIs('DEFINITION')
              ->inIs('RETURN')
              ->goToFunction()
-             ->outIs('RETURNTYPE')
-             ->notSamePropertyAs('fullnspath', 'typehint')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foo() : int { return goo(); } function goo() : B
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('RETURNTYPE')
-             ->savePropertyAs('fullnspath', 'typehint')
-             ->back('first')
-
-             ->atomInsideNoDefinition('Return')
-             ->outIs('RETURN')
-             ->atomIs('Member')
-             ->inIs('DEFINITION')
-             ->inIs('PPP')
-             ->outIs('TYPEHINT')
-             ->notSamePropertyAs('fullnspath', 'typehint')
+             ->not(
+                $this->side()
+                     ->outIs('RETURNTYPE')
+                     ->samePropertyAs('fullnspath', 'typehint')
+             )
              ->back('first');
         $this->prepareQuery();
     }

@@ -1,11 +1,9 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('function gooB(B|C $a) { /**/ } ',
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('function gooA(A|B $a) { /**/ } ',
                      );
 
 ?>
