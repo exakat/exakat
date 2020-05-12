@@ -648,7 +648,7 @@ HTML;
         $totalFile = $this->datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFile - $totalFileAnalysed;
-        if ($totalFile === 0) {
+        if ((int) $totalFile === 0) {
             $percentFile = 100;
         } else {
             $percentFile = abs(round($totalFileSansError / $totalFile * 100));
