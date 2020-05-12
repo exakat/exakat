@@ -1,4 +1,5 @@
 <?php
+const B = 2;
         switch($b[0]) {
             case B: 
                 $b[1] = $c++;

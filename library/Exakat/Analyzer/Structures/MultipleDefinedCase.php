@@ -27,22 +27,60 @@ use Exakat\Analyzer\Analyzer;
 
 class MultipleDefinedCase extends Analyzer {
     public function analyze() {
-        // Check that fullcode is the same or not
+        // Check that fullcode is the same or not for integers
         $this->atomIs('Switch')
-             ->raw('where( __.sideEffect{ counts = [:]; }
-                             .out("CASES").out("EXPRESSION").hasLabel("Case").out("CASE").not(hasLabel("String"))
-                             .sideEffect{ k = it.get().value("fullcode"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}
-                             .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
-                              )');
+             ->filter(
+                $this->side()
+                     ->outIs('CASES')
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Case')
+                     ->outIs('CASE')
+                     ->atomIs(array('Integer', 'Null', 'Boolean'), self::WITH_CONSTANTS)
+                     ->raw('groupCount().by("intval").map{ it.get().findAll{ it.value > 1}.size()}.is(gte(1))')
+             );
         $this->prepareQuery();
 
         // Special case for strings (avoiding ' and ")
         $this->atomIs('Switch')
-             ->raw('where( __.sideEffect{ counts = [:]; }
-                             .out("CASES").out("EXPRESSION").hasLabel("Case").out("CASE").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
-                             .sideEffect{ k = it.get().value("noDelimiter"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}
-                             .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
-                              )');
+             ->analyzerIsNot('self')
+             ->filter(
+                $this->side()
+                     ->outIs('CASES')
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Case')
+                     ->outIs('CASE')
+                     ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
+                     ->has('noDelimiter')
+                     ->raw('groupCount().by("noDelimiter").map{ it.get().findAll{ it.value > 1}.size()}.is(gte(1))')
+             );
+        $this->prepareQuery();
+
+        // Check that fullcode is the same or not for constants, based on fullnspath
+        $this->atomIs('Switch')
+             ->analyzerIsNot('self')
+             ->filter(
+                $this->side()
+                     ->outIs('CASES')
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Case')
+                     ->outIs('CASE')
+                     ->atomIs(array('Nsname', 'Identifier'), self::WITHOUT_CONSTANTS)
+                     ->raw('groupCount().by("fullnspath").map{ it.get().findAll{ it.value > 1}.size()}.is(gte(1))')
+             );
+        $this->prepareQuery();
+
+        // Check that fullcode which are expressions  $a == 1
+        $this->atomIs('Switch')
+             ->analyzerIsNot('self')
+             ->filter(
+                $this->side()
+                     ->outIs('CASES')
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Case')
+                     ->outIs('CASE')
+                     ->atomIsNot(array('Nsname', 'Identifier', 'Integer', 'Null', 'Boolean', 'String', 'Concatenation', 'Heredoc' ), self::WITHOUT_CONSTANTS)
+                     ->raw('groupCount().by("fullcode").map{ it.get().findAll{ it.value > 1}.size()}.is(gte(1))')
+             );
         $this->prepareQuery();
 
         // Special case for mix of strings and constants
