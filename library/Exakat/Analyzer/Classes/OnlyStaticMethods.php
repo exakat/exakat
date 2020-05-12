@@ -30,11 +30,22 @@ class OnlyStaticMethods extends Analyzer {
         // class x { static function foo() {} }
         $this->atomIs('Class')
              // Avoid empty classes
-             ->raw('where( __.out("METHOD", "PPP", "USE", "CONST") )')
+             ->hasOut(array("METHOD", "PPP", "USE", "CONST"))
              //There are static methods
-             ->raw('where( __.out("METHOD").has("static", true) )')
+             ->filter(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->is('static', true)
+             )
              //There are no non-static methods
-             ->raw('not( where( __.out("METHOD").not( has("static", true) ) ) )');
+             ->not(
+                $this->side()
+                     ->filter(
+                           $this->side()
+                                ->outIs('METHOD')
+                                ->isNot('static', true)
+                 )
+            );
         $this->prepareQuery();
     }
 }

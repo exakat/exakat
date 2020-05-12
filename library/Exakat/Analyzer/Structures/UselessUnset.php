@@ -76,7 +76,11 @@ class UselessUnset extends Analyzer {
              ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->inIsIE('OBJECT')
-             ->raw('not( where( out("OBJECT").hasLabel("Member") ) )')
+             ->not(
+                $this->side()
+                     ->outIs('OBJECT')
+                     ->atomIs('Member')
+             )
              ->back('result');
         $this->prepareQuery();
 
@@ -95,7 +99,11 @@ class UselessUnset extends Analyzer {
              ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->inIsIE('OBJECT')
-             ->raw('not( where( out("OBJECT").hasLabel("Member") ) )')
+             ->not(
+                $this->side()
+                     ->outIs('OBJECT')
+                     ->atomIs('Member')
+             )
              ->back('result');
         $this->prepareQuery();
 

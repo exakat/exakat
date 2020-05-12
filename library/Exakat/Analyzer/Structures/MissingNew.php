@@ -26,40 +26,33 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingNew extends Analyzer {
     public function dependsOn(): array {
-        return array('Functions/IsExtFunction'
+        return array('Functions/IsExtFunction',
+                     'Constants/IsExtConstant',
                     );
     }
 
     public function analyze() {
-        $customClasses = $this->query(<<<'GREMLIN'
-g.V().hasLabel('Class').values('fullnspath').unique();
-GREMLIN
-);
+        $this->atomIs(self::CLASSES_ALL)
+             ->values('fullnspath')
+             ->unique();
+        $customClasses = $this->rawQuery();
 
         $phpClasses = $this->loadIni('php_classes.ini', 'classes');
 
         $classes = array_unique(array_merge($phpClasses, $customClasses->toArray()));
         $classes = makeFullnspath($classes);
 
-        $equal = $this->dictCode->translate(array('='));
-
-        if (empty($equal)) {
-            return ;
-        }
-
         // $a = file();
         $this->atomIs('Functioncall')
              ->analyzerIsNot('Functions/IsExtFunction')
-             ->raw('or( where( __.in("ARGUMENT")), 
-                        where( __.in("RIGHT").hasLabel("Assignation").has("code", ***) ) )', $equal[0])
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoFunctionDefinition()
-             ->fullnspathIs($classes);
+             ->fullnspathIs($classes, self::CASE_INSENSITIVE);
         $this->prepareQuery();
 
+        // $a = C;
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->raw('or( where( __.in("ARGUMENT")), 
-                        where( __.in("RIGHT").hasLabel("Assignation").has("code", ***) ) )', $equal[0])
+             ->analyzerIsNot('Constants/IsExtConstant')
              ->hasNoConstantDefinition()
              ->fullnspathIs($classes, self::CASE_INSENSITIVE);
         $this->prepareQuery();

@@ -30,7 +30,11 @@ class InconsistentConcatenation extends Analyzer {
         // "a$b".$c.PHP_EOL;
         $this->atomIs('Concatenation')
             // constant, methodcall and functioncall are ignored as not interpolable.
-             ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Member") )')
+             ->filter(
+                $this->side()
+                     ->outIs('CONCAT')
+                     ->atomIs(array("Variable", "Array", "Member"))
+             )
              ->outIs('CONCAT')
              ->atomIs('String')
              ->hasOut('CONCAT')
