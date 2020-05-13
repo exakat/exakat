@@ -748,6 +748,7 @@ GREMLIN
                              );
             ++$total;
         }
+        $this->dump->cleanTable('methods');
         $total = $this->storeToDumpArray('methods', $toDump);
 
         // Arguments
@@ -1154,10 +1155,14 @@ GREMLIN
             }
             $unique[$row['name'] . $row['line']] = 1;
 
-            $methodIds[$row['fullnspath']] = ++$methodCount;
-
-            $ns = preg_grep('%^' . addslashes($row['namespace']) . '$%i', array_keys($namespacesId));
-            $ns = $namespacesId[array_pop($ns)];
+            if (strpos($row['fullnspath'], '@') !== false) {
+                // case of closure or arrow function
+                $ns = '';
+            } else {
+                $methodIds[$row['fullnspath']] = ++$methodCount;
+                $ns = preg_grep('%^' . addslashes($row['namespace']) . '$%i', array_keys($namespacesId));
+                $ns = $namespacesId[array_pop($ns)];
+            }
 
             $toDump[] = array($methodCount,
                               $row['name'],
@@ -1172,6 +1177,7 @@ GREMLIN
                               (int) $row['line'],
                               );
         }
+        $this->dump->cleanTable('functions');
         $total = $this->storeToDumpArray('functions', $toDump);
         display("$total functions\n");
 
@@ -2122,6 +2128,7 @@ map{['id': '',
 }
 GREMLIN
 );
+        $this->dump->cleanTable('globalVariables');
         $total = $this->storeToDump('globalVariables', $query);
 
         return $total;

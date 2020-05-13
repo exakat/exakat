@@ -468,6 +468,11 @@ SQL;
         
         rename($this->sqliteFile, $this->sqliteFileFinal);
     }
+    
+    public function cleanTable(string $table) : void {
+        $query = 'DELETE FROM '.$table;
+        $this->sqlite->query($query);
+    }
 
     public function storeInTable(string $table, Iterable $results) : int {
         $values = array();
@@ -478,14 +483,10 @@ SQL;
             ++$total;
         }
 
-// Can't delete, as some tables are incrementally filled
-//        $query = 'DELETE FROM '.$table;
-//        $this->sqlite->query($query);
-
         if (!empty($values)) {
             $chunks = array_chunk($values, SQLITE_CHUNK_SIZE);
             foreach($chunks as $chunk) {
-                $query = 'INSERT INTO '.$table.' VALUES ' . implode(', ', $chunk);
+                $query = 'REPLACE INTO '.$table.' VALUES ' . implode(', ', $chunk);
                 $this->sqlite->query($query);
             }
         }

@@ -32,6 +32,7 @@ use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchLoader;
+use Exakat\Exceptions\UnknownCase;
 use Exakat\Tasks\LoadFinal\LoadFinal;
 use Exakat\Tasks\Helpers\Fullnspaths;
 use Exakat\Tasks\Helpers\Atom;
@@ -835,10 +836,7 @@ class Load extends Tasks {
             $this->id = -1;
             do {
                 $theExpression = $this->processNext();
-
-                if ($theExpression instanceof Atom) {
-                    $this->addToSequence($theExpression);
-                }
+                $this->addToSequence($theExpression);
             } while ($this->id < $n);
 
             $sequence = $this->sequence;
@@ -1066,7 +1064,7 @@ class Load extends Tasks {
                         $index = $this->processVariable();
                         $this->popExpression();
                     } else {
-                        assert(false, 'Couldn\'t read that token inside quotes : ' . $this->tokens[$this->id][0]);
+                        throw new UnknownCase('Couldn\'t read that token inside quotes : ' . $this->tokens[$this->id][0]);
                     }
                     ++$this->id; // Skip ]
 
@@ -4584,7 +4582,7 @@ class Load extends Tasks {
                 } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
                     $this->processInsteadof();
                 } else {
-                    assert(false, 'Usetrait without as or insteadof : ' . $this->tokens[$this->id + 1][1]);
+                    throw new UnknownCase('Usetrait without as or insteadof : ' . $this->tokens[$this->id + 1][1]);
                 }
 
                 $this->processSemicolon(); // ;
