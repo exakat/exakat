@@ -1170,6 +1170,7 @@ Glossary
       + :ref:`Casting Ternary <casting-ternary>`
       + :ref:`Check All Types <check-all-types>`
       + :ref:`Don't Unset Properties <don't-unset-properties>`
+      + :ref:`Hidden Nullable <hidden-nullable>`
       + :ref:`No Reference For Ternary <no-reference-for-ternary>`
       + :ref:`No get_class() With Null <no-get\_class()-with-null>`
       + :ref:`Null On New <null-on-new>`

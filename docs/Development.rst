@@ -5706,7 +5706,7 @@ All steps
 _________
 
 
-Here is the list of the 190 available steps : 
+Here is the list of the 200 available steps : 
 
 * AddEFrom : adds a link between the current atom from the atom called  (see _As())
 
@@ -5753,6 +5753,8 @@ Here is the list of the 190 available steps :
 * CollectExtends : Docs for CollectExtends
 
 * CollectImplements : Docs for CollectImplements
+
+* CollectTraits : Collect all the used traits from the current class or anonymous class, into the 'variable'. This will be a list of traits.
 
 * CollectVariables : Docs for CollectVariables
 
@@ -5814,6 +5816,8 @@ Here is the list of the 190 available steps :
 
 * GoToClass : Docs for GoToClass
 
+* GoToClassInterface : The traversal will go from the current atom to the first class or interface it find, upward. This may be a class, an anonymous class or an interface.
+
 * GoToCurrentScope : Docs for GoToCurrentScope
 
 * GoToExpression : Docs for GoToExpression
@@ -5870,9 +5874,13 @@ Here is the list of the 190 available steps :
 
 * HasInterfaceDefinition : Docs for HasInterfaceDefinition
 
+* HasLoop : This step checks that the current atom is inside a loop structure. A loop structure is a for, a foreach, a while or a do while structure.
+
 * HasNextSibling : Docs for HasNextSibling
 
 * HasNo : Docs for HasNo
+
+* HasNoCatch : Checks that the current atom is inside a catch block. The block has to be in the current scope.
 
 * HasNoChildren : Docs for HasNoChildren
 
@@ -5888,9 +5896,13 @@ Here is the list of the 190 available steps :
 
 * HasNoFunctionDefinition : Docs for HasNoFunctionDefinition
 
+* HasNoIfthen : Checks that the current atom is not inside a if/then/else structure.
+
 * HasNoIn : checks if the current atom has no incoming link with a name
 
 * HasNoInstruction : Docs for HasNoInstruction
+
+* HasNoInterface : This step checks that the current atom is inside an interface or not.
 
 * HasNoNamedInstruction : Docs for HasNoNamedInstruction
 
@@ -5911,6 +5923,8 @@ Here is the list of the 190 available steps :
 * HasPropertyInside : Docs for HasPropertyInside
 
 * HasTraitDefinition : Docs for HasTraitDefinition
+
+* HasTryCatch : Check that the current atom is inside a try/catch structure. This means a try block, a catch block or a finally block.
 
 * HasVariadicArgument : Docs for HasVariadicArgument
 
@@ -5998,7 +6012,7 @@ Here is the list of the 190 available steps :
 
 * NoAtomPropertyInside : Docs for NoAtomPropertyInside
 
-* NoAtomWithoutPropertyInside : Docs for NoAtomWithoutPropertyInside
+* NoAtomWithoutPropertyInside : Checks that no atom, located below the current one, contains the property mentionned.
 
 * NoChildWithRank : checks that the current atom has no children, after following the link , and checking for the rank 
 
@@ -6016,17 +6030,21 @@ Here is the list of the 190 available steps :
 
 * NoInterfaceDefinition : Docs for NoInterfaceDefinition
 
+* NoQuery : This steps represents an empty step. It doesn't do anything, and may be used when a step is necessary, but no special process should apply.
+
 * NoTraitDefinition : Docs for NoTraitDefinition
 
 * NoUseDefinition : Docs for NoUseDefinition
 
-* Not : Docs for Not
+* Not : A filter that checks that the provided sub-query doesn't return anything. If the provided sub-query returns one result, at least, then the current query stops.
 
 * NotExtending : Docs for NotExtending
 
 * NotImplementing : Docs for NotImplementing
 
 * NotSamePropertyAs : Docs for NotSamePropertyAs
+
+* Optional : Apply the provided sub-query, only if the sub-query returns a valid value. When the subquery returns null, or fails, the current query stays in place. 
 
 * OtherSiblings : Docs for OtherSiblings
 
@@ -6071,6 +6089,8 @@ Here is the list of the 190 available steps :
 * SetProperty : Docs for SetProperty
 
 * Side : Docs for Side
+
+* StopQuery : StopQuery stops the current query. The query will not be executed, and will be skipped. When inside a sub-query, the sub-query will be skipped, not the main one.
 
 * TokenIs : checks that the current atom uses the token 
 

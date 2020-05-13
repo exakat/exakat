@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 29 Apr 2020 17:37:28 +0000
-.. comment: Generation hash : 1d426ab121c4ec281387cc2433101d027affce78
+.. comment: Generation date : Wed, 13 May 2020 09:32:02 +0000
+.. comment: Generation hash : 3a98e88a11670b0c19301a8015e0a7717d3b86f1
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -620,9 +620,9 @@ Adding Zero
 ###########
 
 
-Adding 0 is useless, as 0 is the neutral element for addition. In PHP, it triggers a cast to integer. 
+Adding 0 is useless, as 0 is the neutral element for addition. Besides, when one of the argument is an integer, PHP triggers a cast to integer. 
 
-It is recommended to make the cast explicit with (int) 
+It is recommended to make the cast explicit with ``(int)``. 
 
 .. code-block:: php
 
@@ -645,13 +645,16 @@ It is recommended to make the cast explicit with (int)
    ?>
 
 
-If it is used to type cast a value to integer, then casting (integer) is clearer. 
+Adding zero is also reported when the zero is a defined constants. 
+
+If it is used to type cast a value to integer, then casting with ``(int)`` is clearer. 
+
 
 
 Suggestions
 ^^^^^^^^^^^
 
-* Remove the + 0
+* Remove the +/- 0, may be the whole assignation
 * Use an explicit type casting operator (int)
 
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -9382,6 +9385,58 @@ See also `Heredoc <http://php.net/manual/en/language.types.string.php#language.t
 
 
 
+.. _fn-argument-variable-confusion:
+
+Fn Argument Variable Confusion
+##############################
+
+
+Avoid using local variables as arrow function arguments.
+
+When a local variable name is used as an argument's name in an arrow function, the local variable from the original scope is not imported. They are now two distinct variables.
+
+When the local variable is not listed as argument, it is then imported in the arrow function.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       $locale = 1;
+   
+       // Actually ignores the argument, and returns the local variable ``$locale``.
+       $fn2 = fn ($argument) => $locale;
+   
+       // Seems similar to above, but returns the incoming argument    
+       $fn2 = fn ($locale) => $locale;
+   }
+   
+   ?>
+
+
+See also `Arrow functions <https://www.php.net/manual/en/functions.arrow.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Change the name of the local variable
+* Change the name of the argument
+
++-------------+---------------------------------------+
+| Short name  | Functions/FnArgumentVariableConfusion |
++-------------+---------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Semantics`      |
++-------------+---------------------------------------+
+| Php Version | 7.4+                                  |
++-------------+---------------------------------------+
+| Severity    | Minor                                 |
++-------------+---------------------------------------+
+| Time To Fix | Quick (30 mins)                       |
++-------------+---------------------------------------+
+
+
+
 .. _for-using-functioncall:
 
 For Using Functioncall
@@ -10747,6 +10802,59 @@ PHP 7.1 and later, emits a 'A non-numeric value encountered' warning, and conver
 +-------------+------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                        |
 +-------------+------------------------------------------------------+
+
+
+
+.. _hidden-nullable:
+
+Hidden Nullable
+###############
+
+
+Argument with default value of null are nullable. Even when the ``null`` typehint (PHP 8.0), or the ``?`` operator are not used, setting the default value to null is allowed, and makes the argument nullable.
+
+This doesn't happen with properties : they must be defined with the nullable type to accept a ``null``value as default value.
+
+This doesn't happen with constant, which can't be typehinted. 
+
+.. code-block:: php
+
+   <?php
+   
+   // explicit nullable parameter $s
+   function bar(?string $s = null) {
+   
+   // implicit nullable parameter $s
+   function foo(string $s = null) {
+       echo $s ?? 'NULL-value';
+   }
+   
+   // both display NULL-value
+   foo(); 
+   foo(null);
+   
+   ?>
+
+
+See also `Nullable types <https://wiki.php.net/rfc/nullable_types>`_ and `Type declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Change the default value to a compatible literal : for example, ``string $s = ''``
+* Add the explicit ``?`` nullable operator, or ``null``with PHP 8.0
+* Remove the default value
+
++-------------+------------------------------------+
+| Short name  | Classes/HiddenNullable             |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 
@@ -17351,10 +17459,45 @@ No Literal For Reference
 ########################
 
 
+Method arguments and return values may be by reference. Then, they need to be a valid variable.
+
+Objects are always passed by reference, so there is no need to explicitely declare it.
+
+Expressions, including ternary operator, produce value, and can't be used by reference directly. This is also the case for expression that include one or more reference. 
+
+.. code-block:: php
+
+   <?php
+   
+   // variables, properties, static properties, array items are all possible
+   $a = 1;
+   foo($a);
+   
+   //This is not possible, as a literal can't be a reference
+   foo(1);
+   
+   function foo(&$int) { return $int; }
+   
+   
+   // This is not a valid reference
+   function &bar() { return 2; }
+   function &bar2() { return 2 + $r; }
+   
+   ?>
+
+
+Wrongly passing a value as a reference leads to a PHP Notice.
+
+See also `References <http://php.net/references>`_.
+
+
+
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Remove the reference in the method signature (argument or return value)
+* Make the argument an object, by using a typehint (non-scalar)
+* Put the value into a variable prior to call (or return) the method
 
 +-------------+---------------------------------+
 | Short name  | Functions/NoLiteralForReference |
@@ -17472,7 +17615,7 @@ Suggestions
 +-------------+---------------------------+
 | Rulesets    | :ref:`CompatibilityPHP74` |
 +-------------+---------------------------+
-| Php Version | 7.4-                      |
+| Php Version | 8.0-                      |
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
@@ -25165,6 +25308,60 @@ Suggestions
 
 
 
+.. _signature-trailing-comma:
+
+Signature Trailing Comma
+########################
+
+
+Trailing comma in method signature. This feature was added in PHP 8.0. 
+
+Allowing the trailing comma makes it possible to reduce the size of VCS's diff, when adding , removing a parameter.
+
+.. code-block:: php
+
+   <?php
+   
+   // Example from the RFC
+   class Uri {
+       private function __construct(
+           ?string $scheme,
+           ?string $user,
+           ?string $pass,
+           ?string $host,
+           ?int $port,
+           string $path,
+           ?string $query,
+           ?string $fragment // <-- ARGH!
+       ) {
+           ...
+       }
+   }
+   ?>
+
+
+See also `PHP RFC: Allow trailing comma in parameter list <https://wiki.php.net/rfc/trailing_comma_in_parameter_list>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/SignatureTrailingComma                                                                                 |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Php Version | 8.0+                                                                                                       |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                      |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                            |
++-------------+------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _silently-cast-integer:
 
 Silently Cast Integer
@@ -32063,7 +32260,8 @@ Suggestions
 ^^^^^^^^^^^
 
 * Remove the argument and hard code its value inside the method
-* Add calls to the method, with various arguments
+* Add the value as default in the method signature, and drop it from the calls
+* Add calls to the method, with more varied arguments
 
 +-------------+---------------------------+
 | Short name  | Functions/UselessArgument |

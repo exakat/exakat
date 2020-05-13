@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 29 Apr 2020 17:37:28 +0000
-.. comment: Generation hash : 1d426ab121c4ec281387cc2433101d027affce78
+.. comment: Generation date : Wed, 13 May 2020 09:32:02 +0000
+.. comment: Generation hash : 3a98e88a11670b0c19301a8015e0a7717d3b86f1
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 386 analysis
+Total : 388 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -193,6 +193,7 @@ Total : 386 analysis
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
 * :ref:`Failed Substr Comparison <failed-substr-comparison>`
+* :ref:`Fn Argument Variable Confusion <fn-argument-variable-confusion>`
 * :ref:`Foreach On Object <foreach-on-object>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
 * :ref:`Forgotten Interface <forgotten-interface>`
@@ -203,6 +204,7 @@ Total : 386 analysis
 * :ref:`Global Usage <global-usage>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Hash Algorithms <hash-algorithms>`
+* :ref:`Hidden Nullable <hidden-nullable>`
 * :ref:`Hidden Use Expression <hidden-use-expression>`
 * :ref:`Htmlentities Calls <htmlentities-calls>`
 * :ref:`Identical Conditions <identical-conditions>`
@@ -487,7 +489,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 40 analysis
+Total : 41 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -508,6 +510,7 @@ Total : 40 analysis
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Fossilized Method <fossilized-method>`
+* :ref:`Hidden Nullable <hidden-nullable>`
 * :ref:`Insufficient Property Typehint <insufficient-property-typehint>`
 * :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Memoize MagicCall <memoize-magiccall>`
@@ -951,7 +954,7 @@ CompatibilityPHP71
 
 This ruleset centralizes all analysis for the migration from PHP 7.0 to 7.1.
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`Avoid Substr() One <avoid-substr()-one>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -979,6 +982,7 @@ Total : 35 analysis
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
+* :ref:`Signature Trailing Comma <signature-trailing-comma>`
 * :ref:`String Initialization <string-initialization>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
@@ -996,7 +1000,7 @@ CompatibilityPHP72
 
 This ruleset centralizes all analysis for the migration from PHP 7.1 to 7.2.
 
-Total : 27 analysis
+Total : 28 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -1019,6 +1023,7 @@ Total : 27 analysis
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
+* :ref:`Signature Trailing Comma <signature-trailing-comma>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -1033,7 +1038,7 @@ CompatibilityPHP73
 
 This ruleset centralizes all analysis for the migration from PHP 7.2 to 7.3.
 
-Total : 16 analysis
+Total : 17 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -1047,6 +1052,7 @@ Total : 16 analysis
 * :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
 * :ref:`PHP 74 New Directives <php-74-new-directives>`
 * :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
+* :ref:`Signature Trailing Comma <signature-trailing-comma>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Union Typehint <union-typehint>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
@@ -1059,7 +1065,7 @@ CompatibilityPHP74
 
 This ruleset centralizes all analysis for the migration from PHP 7.3 to 7.4.
 
-Total : 26 analysis
+Total : 27 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
@@ -1080,6 +1086,7 @@ Total : 26 analysis
 * :ref:`Php 8.0 Variable Syntax Tweaks <php-8.0-variable-syntax-tweaks>`
 * :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
 * :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
+* :ref:`Signature Trailing Comma <signature-trailing-comma>`
 * :ref:`Unbinding Closures <unbinding-closures>`
 * :ref:`Union Typehint <union-typehint>`
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
@@ -1300,10 +1307,11 @@ Semantics
 
 This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
 
-Total : 10 analysis
+Total : 11 analysis
 
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Duplicate Literal <duplicate-literal>`
+* :ref:`Fn Argument Variable Confusion <fn-argument-variable-confusion>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`Parameter Hiding <parameter-hiding>`
 * :ref:`Property Variable Confusion <property-variable-confusion>`

@@ -438,6 +438,13 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.1.0
+
+  * Fn Argument Variable Confusion (Functions/FnArgumentVariableConfusion ; Analyze, Semantics)
+  * Hidden Nullable (Classes/HiddenNullable)
+  * Missing Abstract Method (Classes/MissingAbstractMethod ; Unassigned)
+  * Signature Trailing Comma (Php/SignatureTrailingComma ; CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
+
 * 2.0.9
 
   * Dont Collect Void (Functions/DontUseVoid ; Analyze)
@@ -2154,7 +2161,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-83 PHP error message detailled : 
+86 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
@@ -2177,6 +2184,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Cannot access static\:\: when no class scope is active <self,-parent,-static-outside-class>`
 * :ref:`Cannot override final method Foo\:\:Bar() <final-class-usage>`
 * :ref:`Cannot override final method Foo\:\:FooBar() <final-methods-usage>`
+* :ref:`Cannot pass parameter 1 by reference <no-literal-for-reference>`
 * :ref:`Cannot pass parameter 1 by reference <only-variable-for-reference>`
 * :ref:`Cannot unpack array with string keys <no-spread-for-hash>`
 * :ref:`Cannot use "parent" when no class scope is active <self,-parent,-static-outside-class>`
@@ -2191,6 +2199,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A\:\:aFoo) <abstract-or-implements>`
 * :ref:`Class b cannot implement previously implemented interface i <cant-implement-traversable>`
 * :ref:`Class b cannot implement previously implemented interface i <repeated-interface>`
+* :ref:`Class c contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (a\:\:foo) <missing-abstract-method>`
 * :ref:`Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead <can't-throw-throwable>`
 * :ref:`Class x contains 2 abstract methods and must therefore be declared abstract or implement the remaining methods (x\:\:m1, x\:\:m2) <interfaces-is-not-implemented>`
 * :ref:`Class x must implement interface Traversable as part of either Iterator or IteratorAggregate <cant-implement-traversable>`
@@ -2211,6 +2220,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Methods with the same name as their class will not be constructors in a future version of PHP; %s has a deprecated constructor <old-style-constructor>`
 * :ref:`Non-static method A\:\:B() should not be called statically <non-static-methods-called-in-a-static>`
 * :ref:`Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code. <old-style-constructor>`
+* :ref:`Only variable references should be returned by reference <no-literal-for-reference>`
 * :ref:`Only variable references should be returned by reference <no-reference-for-ternary>`
 * :ref:`Only variables can be passed by reference <only-variable-for-reference>`
 * :ref:`Only variables should be passed by reference <typehinted-references>`
@@ -2366,8 +2376,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2379,6 +2389,7 @@ List of external links mentionned in this documentation.
 * `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_
+* `Arrow functions <https://www.php.net/manual/en/functions.arrow.php>`_
 * `assert <http://php.net/assert>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
@@ -2412,6 +2423,7 @@ List of external links mentionned in this documentation.
 * `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
 * `class_alias <http://php.net/class_alias>`_
 * `Classes abstraction <http://php.net/abstract>`_
+* `Classes Abstraction <https://www.php.net/manual/en/language.oop5.abstract.php>`_
 * `Closure class <http://php.net/closure>`_
 * `Closure::bind <http://php.net/manual/en/closure.bind.php>`_
 * `Cmark <https://github.com/commonmark/cmark>`_
@@ -2686,12 +2698,13 @@ List of external links mentionned in this documentation.
 * `Null Coalescing Assignment Operator <https://wiki.php.net/rfc/null_coalesce_equal_operator>`_
 * `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
+* `Nullable types <https://wiki.php.net/rfc/nullable_types>`_
 * `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2715,8 +2728,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2749,6 +2762,7 @@ List of external links mentionned in this documentation.
 * `PHP return(value); vs return value; <https://stackoverflow.com/questions/2921843/php-returnvalue-vs-return-value>`_
 * `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
+* `PHP RFC: Allow trailing comma in parameter list <https://wiki.php.net/rfc/trailing_comma_in_parameter_list>`_
 * `PHP RFC: Arrow Functions <https://wiki.php.net/rfc/arrow_functions>`_
 * `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.net/rfc/convert_numeric_keys_in_object_array_casts>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
@@ -2883,8 +2897,8 @@ List of external links mentionned in this documentation.
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -2907,8 +2921,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
@@ -3017,6 +3031,7 @@ _______
 |   analyzer[] = "Classes/DontUnsetProperties";
 |   analyzer[] = "Classes/EmptyClass";
 |   analyzer[] = "Classes/FinalByOcramius";
+|   analyzer[] = "Classes/HiddenNullable";
 |   analyzer[] = "Classes/ImplementIsForInterface";
 |   analyzer[] = "Classes/ImplementedMethodsArePublic";
 |   analyzer[] = "Classes/IncompatibleSignature";
@@ -3102,6 +3117,7 @@ _______
 |   analyzer[] = "Functions/DeepDefinitions";
 |   analyzer[] = "Functions/DontUseVoid";
 |   analyzer[] = "Functions/EmptyFunction";
+|   analyzer[] = "Functions/FnArgumentVariableConfusion";
 |   analyzer[] = "Functions/HardcodedPasswords";
 |   analyzer[] = "Functions/InsufficientTypehint";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
@@ -3402,6 +3418,7 @@ ___________
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/FossilizedMethod";
+|   analyzer[] = "Classes/HiddenNullable";
 |   analyzer[] = "Classes/InsufficientPropertyTypehint";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoParent";
@@ -3897,6 +3914,7 @@ __________________
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php80OnlyTypeHints";
 |   analyzer[] = "Php/Php80UnionTypehint";
+|   analyzer[] = "Php/SignatureTrailingComma";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -3939,6 +3957,7 @@ __________________
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php80OnlyTypeHints";
 |   analyzer[] = "Php/Php80UnionTypehint";
+|   analyzer[] = "Php/SignatureTrailingComma";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -3970,6 +3989,7 @@ __________________
 |   analyzer[] = "Php/Php74NewDirective";
 |   analyzer[] = "Php/Php80OnlyTypeHints";
 |   analyzer[] = "Php/Php80UnionTypehint";
+|   analyzer[] = "Php/SignatureTrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnknownPcre2Option";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -4011,6 +4031,7 @@ __________________
 |   analyzer[] = "Php/Php80VariableSyntax";
 |   analyzer[] = "Php/ReflectionExportIsDeprecated";
 |   analyzer[] = "Php/ScalarAreNotArrays";
+|   analyzer[] = "Php/SignatureTrailingComma";
 |   analyzer[] = "Structures/CurlVersionNow";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";
 |   analyzer[] = "Structures/OpensslRandomPseudoByteSecondArg";| 
@@ -4251,6 +4272,7 @@ _________
 
 | [Semantics]
 |   analyzer[] = "Arrays/WeirdIndex";
+|   analyzer[] = "Functions/FnArgumentVariableConfusion";
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Functions/ParameterHiding";
 |   analyzer[] = "Functions/SemanticTyping";

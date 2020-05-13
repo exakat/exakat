@@ -7,6 +7,7 @@ There are several reports that may be extracted from Exakat :
 
 * `Ambassador`_
 * `BeautyCanon`_
+* `ClassReview`_
 * `Classes dependendies HTML`_
 * `Clustergrammer`_
 * `Code Flower`_
@@ -38,6 +39,7 @@ There are several reports that may be extracted from Exakat :
 * `Text`_
 * `Top10`_
 * `Topology Order`_
+* `TypeChecks`_
 * `Uml`_
 * `Xml`_
 * `Yaml`_
@@ -88,7 +90,7 @@ __________
 
 Ambassador is the most complete Exakat report. It used to be the default report, until Exakat 1.7.0
 
-Ambassador includes : 
+The Ambassador report includes : 
 
 + Full configuration for the audit
 + Full documentation of the analysis
@@ -99,6 +101,8 @@ Ambassador includes :
     + PHP compilation recommendations
     + Error messages list
     + List of processed files
+    
+
 
 .. image:: images/report.ambassador.png
     :alt: Example of a Ambassador report (0)
@@ -156,6 +160,25 @@ No Hardcoded Port                                                      :ref:`no-
 BeautyCanon is a Text report format.
 
 BeautyCanon accepts any arbitrary list of results.
+
+ClassReview
+___________
+
+The ClassReview report focuses on reviewing classes, traits and interfaces.
+
+The ClassReview report focuses on good code hygene for classes, interfaces and traits. 
+
+It checks the internal structure of classes, and suggest visibility, typehint updates.
+
+
+
+::
+
+    
+
+ClassReview is a HTML report format.
+
+ClassReview depends on the following theme : ClassReview.
 
 Classes dependendies HTML
 _________________________
@@ -1682,6 +1705,25 @@ There are currently two topology available:
 Topology Order is a DOT report format.
 
 Topology Order doesn't depend on themes.
+
+TypeChecks
+__________
+
+The TypeChecks report focuses on reviewing typehint usage.
+
+The TypeChecks report focuses on usage and good usage of typehints. 
+
+It checks the presence of typehint, suggests possible type hinting, and check the systemic organisation of the types.
+
+
+
+::
+
+    
+
+TypeChecks is a HTML report format.
+
+TypeChecks depends on the following theme : TypeChecks.
 
 Uml
 ___
