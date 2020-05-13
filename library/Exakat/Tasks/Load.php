@@ -1321,14 +1321,9 @@ class Load extends Tasks {
     private function processFunction(): Atom {
         $current = $this->id;
 
-/*
-        if ($this->tokens[$this->id][0] === $this->phptokens::T_FN) {
-            $atom = 'Arrowfunction';
-        } else */
-
         if ( $this->contexts->isContext(Context::CONTEXT_CLASS) &&
-
              !$this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
+
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]),
                          array('__construct',
                                '__destruct',
@@ -1350,6 +1345,7 @@ class Load extends Tasks {
                                ),
                             \STRICT_COMPARISON)) {
                 $atom = 'Magicmethod';
+                
             } else {
                 $atom = 'Method';
             }
@@ -1502,6 +1498,11 @@ class Load extends Tasks {
             $this->calls->addDefinition('method', $function->fullnspath, $function);
             // double call for internal reference
             $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
+        } elseif ($function->atom === 'Magicmethod') {
+            if (mb_strtolower($this->tokens[$current + 1][1]) === '__construct' && 
+                end($this->currentClassTrait)->atom === 'Classanonymous') {
+                    $this->addLink(end($this->currentClassTrait), $function, 'DEFINITION');
+            }
         }
 
         return $function;
@@ -1679,6 +1680,7 @@ class Load extends Tasks {
             } else {
                 $class = $this->addAtom('Classanonymous', $current);
             }
+            print_r($class);
 
             $class->fullnspath = $this->makeAnonymous();
             $class->aliased    = self::NOT_ALIASED;

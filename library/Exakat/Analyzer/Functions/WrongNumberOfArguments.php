@@ -75,6 +75,31 @@ class WrongNumberOfArguments extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // new A
+        // new A()
+        // new class() { function __construct($a) {}}
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->hasNoVariadicArgument()
+             ->savePropertyAs('count', 'args_count')
+             ->outIs('DEFINITION')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->isLess('args_min', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
+
+        // new A($a)
+        // new class($a) { function __construct() {}}
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->hasNoVariadicArgument()
+             ->savePropertyAs('count', 'args_count')
+             ->outIs('DEFINITION')
+             ->analyzerIsNot('Functions/VariableArguments')
+             ->isMore('args_max', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
+
         $this->atomIs(array('Self', 'Parent'))
              ->hasIn('NEW')
              ->outIsIE('METHOD') // for methods calls, static or not.
