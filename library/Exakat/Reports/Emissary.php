@@ -2222,8 +2222,8 @@ HTML;
         }
 
         $html = $this->getBasedPage($section->source);
-        $html = $this->injectBloc($html, 'TITLE', 'Classes inventory');
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the classes. Classes without any extension are not represented');
+        $html = $this->injectBloc($html, 'TITLE', 'Classes Tree');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the classes tree, built with class extensions. Classes without any extension are not represented.');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage($section->file, $html);
     }

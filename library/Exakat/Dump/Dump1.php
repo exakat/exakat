@@ -560,7 +560,7 @@ SQL;
         if ($type === 'trait') {
             // Missing when raw FQN is used
             $query = <<<SQL
-    SELECT ns.namespace || '\' || cit.name AS child, 
+    SELECT ns.namespace || cit.name AS child, 
            ttu.implements AS parent
         FROM cit 
         JOIN
@@ -574,8 +574,8 @@ SQL;
              
 UNION
 
-    SELECT ns.namespace || '\' || cit.name AS child, 
-           ns2.namespace || '\' || cit2.name AS parent 
+    SELECT ns.namespace || cit.name AS child, 
+           ns2.namespace || cit2.name AS parent 
         FROM cit 
         JOIN
           cit_implements AS ttu 
@@ -592,8 +592,8 @@ UNION
 SQL;
         } else {
             $query = <<<SQL
-SELECT ns.namespace || '\' || cit.name AS child, 
-       ns2.namespace || '\' || cit2.name AS parent 
+SELECT ns.namespace || cit.name AS child, 
+       ns2.namespace || cit2.name AS parent 
     FROM cit 
     LEFT JOIN cit cit2 
         ON cit.extends = cit2.id
