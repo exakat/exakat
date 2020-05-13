@@ -1246,8 +1246,7 @@ GREMLIN
         $query = $this->newQuery('collectStructures_namespaces');
         $query->atomIs('Namespace', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
-              ->initVariable('name', '"\\\\" + it.get().value("fullcode")')
-              ->_as('name')
+              ->initVariable('name', 'it.get().value("fullcode") == " " ? "\\\\" : "\\\\" + it.get().value("fullcode") + "\\\\"')
               ->getVariable('name')
               ->unique();
         $query->prepareRawQuery();
