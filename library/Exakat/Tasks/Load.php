@@ -1680,7 +1680,6 @@ class Load extends Tasks {
             } else {
                 $class = $this->addAtom('Classanonymous', $current);
             }
-            print_r($class);
 
             $class->fullnspath = $this->makeAnonymous();
             $class->aliased    = self::NOT_ALIASED;
