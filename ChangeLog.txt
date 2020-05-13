@@ -1,4 +1,4 @@
-Version 2.1.0 (City God, coming up)
+Version 2.1.0 (Earth Deity, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,40 @@ Version 2.1.0 (City God, coming up)
     + Upgraded analysis : PHP 8.0 new scalar typehint, stringable interface
 + Tokenizer
     + 
+
+Version 2.1.0 (City God, 2010-05-13)
++ Architecture
+    + results stored in HashResults are now testable
+    + Moved all query methods to Query/DSL namespace, from Analyzer class
++ Report
+    + New report : ClassReview, with focus on classes structures
+    + New report : Typechecks, with focus on type hint usage
+    + Ambassador : Added typehint stats section
+    + Ambassador : fixed display of classes name in classes tree
+    + Ambassador : some missing sections have been rehabilitated
++ Analysis
+    + New analysis : Trailing comma in signature (PHP 8.0)
+    + New analysis : Hidden nullable types
+    + New analysis : Not implemented abstract methods
+    + New analysis : Report confusion between variables and arguments with arrow functions
+    + Upgraded analysis : No literal for reference was extended 
+    + Upgraded analysis : Add zero is extended to constants
+    + Upgraded analysis : This is for classes is now valid with arrow functions
+    + Upgraded analysis : Useless arguments takes also into account constants
+    + Upgraded analysis : Wrong Type With Call supports variadic arguments
+    + Upgraded analysis : Extension constants now support fully qualified names
+    + Upgraded analysis : Bad Typehint relay is compatible with union types
+    + Upgraded analysis : Multiple Identical Cases now handles constants too
+    + Checked unit tests : 3383 / 3444 test pass (98% pass)
++ Tokenizer
+    + Restored 'List' atom
+    + Interface methods are now 'abstract' by default
+    + Added 'array' typehint for variadic arguments
+    + Distinguish between argument and local variable in fn functions
+    + Removed nullable property
+    + propagate calls now propagates closures and arrow functions
+    + Added support for union types (PHP 8.0)
+    + Check all error messages from php, not just the first ones
 
 Version 2.0.9 (Jialan, 2020-04-30)
 + Architecture
