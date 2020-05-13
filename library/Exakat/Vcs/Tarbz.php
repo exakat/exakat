@@ -29,12 +29,12 @@ class Tarbz extends Vcs {
     private $executableBzip2 = 'bzip2';
 
     protected function selfCheck() {
-        $res = shell_exec("{$this->executableTar} --version 2>&1");
+        $res = shell_exec("{$this->executableTar} --version 2>&1") ?? '';
         if (!preg_match('#\d+\.\d+(\.\d+)?#s', $res)) {
             throw new HelperException('Tar');
         }
 
-        $res = shell_exec("{$this->executableBzip2} --help 2>&1");
+        $res = shell_exec("{$this->executableBzip2} --help 2>&1") ?? '';
         if (strpos($res, 'bzip2') === false) {
             throw new HelperException('bzip2');
         }
