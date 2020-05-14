@@ -38,6 +38,7 @@ class DontUseVoid extends Analyzer {
              ->fullnspathIs('\\void')
              ->back('first')
              ->outIs('DEFINITION')
+             ->atomIsNot(array('Variabledefinition', 'Staticdefinition', 'Globaldefinition'))
              ->hasNoIn('EXPRESSION');
         $this->prepareQuery();
     }
