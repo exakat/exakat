@@ -23,7 +23,8 @@
 namespace Exakat\Analyzer\Complete;
 
 class CreateCompactVariables extends Complete {
-    public function analyze() {
+    public function analyze() : void {
+        // compact('a') : 'a' is one usage of a variable
         $this->atomFunctionIs('\compact')
               ->outIs('ARGUMENT')
               ->has('noDelimiter')

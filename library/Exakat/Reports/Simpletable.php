@@ -41,7 +41,7 @@ class Simpletable extends Reports {
         return '';
     }
 
-    private function generateData($folder, $name = 'table') {
+    private function generateData($folder, $name = 'table') : void {
         $list = $this->rulesets->getRulesetsAnalyzers(array('Analyze'));
 
         $res = $this->dump->fetchAnalysers($list);
@@ -89,7 +89,7 @@ HTML;
         file_put_contents($this->tmpName . '/index.html', $html);
     }
 
-    private function initFolder() {
+    private function initFolder() : void {
         if ($this->finalName === 'stdout') {
             return "Can't produce Simpletable format to stdout";
         }
@@ -103,7 +103,7 @@ HTML;
         copyDir($this->config->dir_root . '/media/simpletable', $this->tmpName );
     }
 
-    private function cleanFolder() {
+    private function cleanFolder() : void {
         if (file_exists($this->finalName)) {
             rename($this->finalName, $this->tmpName . '2');
         }

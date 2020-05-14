@@ -304,6 +304,9 @@ class Emissary extends Reports {
 
         foreach($analyzersList as $analyzerName) {
             $analyzer = $this->rulesets->getInstance($analyzerName, null, $this->config);
+            if (!$analyzer instanceof Analyzer) {
+                var_dump($analyzer);
+            }
             $description = $this->docs->getDocs($analyzerName);
             $analyzersDocHTML = '<h2><a href="issues.html#analyzer=' . $this->toId($analyzerName) . '" id="' . $this->toId($analyzerName) . '">' . $description['name'] . '</a></h2>';
 
@@ -368,7 +371,7 @@ class Emissary extends Reports {
         $html = array();
         $highchart = new Highchart();
 
-        foreach($favoritesList as $analyzer => $list) {
+        foreach(array_keys($favoritesList) as $analyzer) {
             $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
 
             $table = array();
@@ -1060,8 +1063,7 @@ HTML;
 
     private function generateIssues(): void {
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
-        $this->generateIssuesEngine('issues',
-                                    $issues );
+        $this->generateIssuesEngine('issues', $issues);
     }
 
     protected function generateIssuesEngine(Section $section, array $issues = array()): void {
@@ -1261,7 +1263,9 @@ JAVASCRIPTCODE;
     protected function generateAnalyzersList(Section $section): void {
         $analyzers = array();
 
+        print_r($this->themesToShow);
         foreach($this->rulesets->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
+            print $analyzer.PHP_EOL;
             $analyzers []= '<tr><td>' . $this->docs->getDocs($analyzer, 'name') . '</td><td>' . $analyzer . "</td></tr>\n";
         }
         $analyzers = implode(PHP_EOL, $analyzers);
@@ -2402,37 +2406,36 @@ HTML;
         if (empty($path)) {
             return '';
         }
-        $return = '<ul>';
+        $return = array('<ul>');
 
         foreach($path as $k => $v) {
-            $return .= '<li>';
+            $return []= '<li>';
 
-            $parent = '\\' . strtolower((string) $k);
             if (is_string($v)) {
                 if (empty($v)) {
-                    $return .= '<div style="font-weight: bold">\\</div>';
+                    $return []= '<div style="font-weight: bold">\\</div>';
                 } else {
-                    $return .= '<div style="font-weight: bold">' . $v . '</div>';
+                    $return []= '<div style="font-weight: bold">' . $v . '</div>';
                 }
             } elseif (count($v) === 1) {
                 if (empty($v[0])) {
                     if (empty($k)) {
-                        $return .= '<div style="font-weight: bold">\\</div>';
+                        $return []= '<div style="font-weight: bold">\\</div>';
                     } else {
-                        $return .= '<div style="font-weight: bold">' . $k . '</div>';
+                        $return []= '<div style="font-weight: bold">' . $k . '</div>';
                     }
                 } else {
-                    $return .= '<div style="font-weight: bold">' . $k . '</div>' . $this->pathtree2ul($v);
+                    $return []= '<div style="font-weight: bold">' . $k . '</div>' . $this->pathtree2ul($v);
                 }
             } else {
-                $return .= '<div style="font-weight: bold">' . $k . '</div>' . $this->pathtree2ul($v);
+                $return []= '<div style="font-weight: bold">' . $k . '</div>' . $this->pathtree2ul($v);
             }
 
-            $return .= '</li>';
+            $return []= '</li>';
         }
-        $return .= '</ul>';
+        $return []= '</ul>';
 
-        return $return;
+        return implode('', $return);
     }
 
     private function generateNamespaceTree(Section $section): void {
@@ -2461,7 +2464,7 @@ HTML;
         foreach($tree as $k => $v) {
             $return .= '<li>';
 
-            $parent = '\\' . strtolower($k);
+            $parent = '\\' . strtolower((string) $k);
             if (isset($display[$parent])) {
                 $return .= '<div style="font-weight: bold">' . $k . '</div><ul><li>' . implode('</li><li>', $display[$parent]) . '</li></ul>';
             } else {
@@ -3176,6 +3179,7 @@ HTML;
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function (array $x): string {
                 static $i = 0;
+
                 return '<br /><a name="l' . ++$i . '" />';
             }, $source);
             file_put_contents("$path$row[file]", $source);
@@ -3692,7 +3696,6 @@ HTML;
 
         $return = array();
         $theClass = '';
-        $aClass = array();
         $res = $this->dump->fetchTableMethodsByReturntype();
         foreach($res->toArray() as $row) {
             $theClass = $row['fullnspath'];

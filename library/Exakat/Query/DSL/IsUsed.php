@@ -34,7 +34,7 @@ class IsUsed extends DSL {
 
         $gremlin = <<<GREMLIN
 where(
-    __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray", "Parameter").count().is(eq($times))
+    __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray", "Parameter", "String").count().is(eq($times))
      )
 GREMLIN;
 

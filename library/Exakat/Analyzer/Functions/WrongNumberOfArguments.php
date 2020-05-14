@@ -33,7 +33,7 @@ class WrongNumberOfArguments extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // this is for functions defined within PHP
         $functions = $this->methods->getFunctionsArgsInterval();
         $argsMins = array();
@@ -83,6 +83,7 @@ class WrongNumberOfArguments extends Analyzer {
              ->hasNoVariadicArgument()
              ->savePropertyAs('count', 'args_count')
              ->outIs('DEFINITION')
+             ->atomIs('Magicmethod')
              ->analyzerIsNot('Functions/VariableArguments')
              ->isLess('args_min', 'args_count')
              ->back('first');
@@ -95,6 +96,7 @@ class WrongNumberOfArguments extends Analyzer {
              ->hasNoVariadicArgument()
              ->savePropertyAs('count', 'args_count')
              ->outIs('DEFINITION')
+             ->atomIs('Magicmethod')
              ->analyzerIsNot('Functions/VariableArguments')
              ->isMore('args_max', 'args_count')
              ->back('first');

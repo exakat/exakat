@@ -257,8 +257,6 @@ class Owasp extends Ambassador {
 
             $empty = 0;
             foreach($sources as $name => $count) {
-                $ini = $this->docs->getDocs($name);
-
 #FF0000	Bad
 #FFFF00	Bad-Average
 #FFFF00	Average
