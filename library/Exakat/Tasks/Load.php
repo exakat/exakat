@@ -195,7 +195,7 @@ class Load extends Tasks {
     const STANDALONE_BLOCK         = true;
     const RELATED_BLOCK            = false;
 
-    const NO_NAMESPACE = 0;
+    const NO_NAMESPACE = '';
 
     private $contexts              = null;
 

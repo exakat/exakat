@@ -30,53 +30,78 @@ class QueryDoc {
     private $commands = null;
     private $arguments = null;
     private $query = null;
+    private $stats = array();
+    
+    private $steps = array();
+
+    private $cursor    = 1;
+    private $cursors   = array();
+    private $nodes     = array(1=> 'root');
+    private $links     = array();
+    private $labels    = array('first' => 1,);
 
     public function __construct() {    }
 
     public function __call($name, $args) {
-        print "$name\n";
+        if (in_array($name, array('not', 'filter'))) {
+            $chain = $this->prepareSide();
+            $this->steps[] = $name.'[ '.$chain.' ]';
+            print "$name\n";
+
+            $next = array_pop($this->head);
+            $this->nodes[$next] = "Node $name";
+            $this->cursor = array_pop($this->cursors);
+
+            $this->links[] = array($this->cursor, $next, $name);
+            $this->cursor = $next;
+        } elseif (in_array($name, array('back'))) {
+            $this->steps[] = $name;
+            print "$name\n";
+            
+            $this->cursor = $this->labels[$args[0]];
+        } elseif (in_array($name, array('as'))) {
+            $this->steps[] = $name;
+            print "$name\n";
+            
+            $this->labels[$args[0]] = $this->cursor;
+        } else {
+            $this->steps[] = $name;
+            print "$name\n";
+
+            $this->nodes[] = "Node $name";
+            $next = count($this->nodes);
+            $this->links[] = array($this->cursor, $next, $name);
+            $this->cursor = $next;
+        }
+
+
+        $this->stats[$name] = ($this->stats[$name] ?? 0) + 1;
+        
     }
 
     public function side(): self {
-        if ($this->stopped === self::QUERY_STOPPED) {
-            return $this;
-        }
+        $this->sides[] = $this->steps;
+        $this->steps = array('side');
+        
+        $this->cursors[] = $this->cursor;
+        $this->nodes[] = "Node SIDE";
+        $next = count($this->nodes);
+        $this->head[]    = $next;
+        $this->cursor    = $next;
 
-        $this->sides[] = $this->commands;
-        $this->commands = array();
+        $this->stats['side'] = ($this->stats['side'] ?? 0) + 1;
+
+        print "  Side\n";
 
         return $this;
     }
 
-    public function prepareSide(): Command {
-        if ($this->stopped === self::QUERY_STOPPED) {
-            return new Command(Query::NO_QUERY);
-        }
+    public function prepareSide() {
+        print "  prepareSide\n";
+        $chain = implode('-', $this->steps);
+        $this->steps = array_pop($this->sides);
 
-        $commands = array_column($this->commands, 'gremlin');
-
-        assert(!empty($this->sides), 'No side was started! Missing $this->side() ? ');
-        assert(!empty($commands), 'No command in side query');
-
-        if (in_array(self::STOP_QUERY, $commands) !== false) {
-            $this->commands = array_pop($this->sides);
-            return new Command(Query::STOP_QUERY);
-        }
-
-        $query = '__.' . implode(".\n", $commands);
-        $args = array_column($this->commands, 'arguments');
-        $args = array_merge(...$args);
-
-        $query = str_replace(array_keys($args), '***', $query);
-
-        $sack = $this->prepareSack($this->commands);
-
-        $return = new Command($query, array_values($args));
-        $return->setSack($sack);
-
-        $this->commands = array_pop($this->sides);
-
-        return $return;
+        return $chain;
     }
 
     public function prepareQuery(): bool {
@@ -221,6 +246,23 @@ GREMLIN;
 
     public function canSkip(): bool {
         return $this->stopped !== self::QUERY_RUNNING;
+    }
+    
+    public function display() : void {
+        print '('.implode('-', $this->steps).')';
+        
+//        print_r($this->stats);
+        $graph = array();
+        
+        foreach($this->nodes as $id => $node) {
+            $graph[] = "$id [label=\"$node\"];\n";
+        }
+
+        foreach($this->links as list($a, $b, $label)) {
+            $graph[] = "$a -> $b;\n";
+        }
+        
+        file_put_contents('/tmp/docs.dot', "digraph{ ".implode('', $graph)."}");
     }
 }
 ?>

@@ -60,6 +60,7 @@ abstract class Analyzer {
 
     private $queries          = array();
     private $query            = null;
+    private $queryDoc         = null;
 
     public $config         = null;
 
@@ -510,29 +511,6 @@ GREMLIN;
         return $this->query->prepareSide();
     }
 
-////////////////////////////////////////////////////////////////////////////////
-// Query methods
-////////////////////////////////////////////////////////////////////////////////
-
-    // must convert self to Query here
-    public function not(self $filter) {
-        $filterClean = $filter->prepareSide();
-        $this->query->not($filterClean);
-
-        return $this;
-    }
-
-    public function filter(self $filter, array $args = array()) {
-        $filterClean = $filter->prepareSide();
-        $this->query->filter($filterClean);
-
-        return $this;
-    }
-
-////////////////////////////////////////////////////////////////////////////////
-// Query methods
-////////////////////////////////////////////////////////////////////////////////
-
     public function run(): int {
         $this->analyze();
 
@@ -674,7 +652,10 @@ GREMLIN
                                   $this->config->executable,
                                   $this->dependsOn(),
                                   );
-
+/*
+        if ($this->queryDoc !== null) {
+            $this->queryDoc->display();
+        }*/
         $this->queryDoc = new QueryDoc();
     }
 
@@ -799,6 +780,7 @@ GREMLIN
     }
 
     public function __call($name, $args) {
+//        $this->queryDoc->$name(...$args);
         if ($this->query->canSkip()) {
             return $this;
         }

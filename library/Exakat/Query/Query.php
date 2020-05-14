@@ -70,7 +70,12 @@ class Query {
         assert(!(empty($this->commands) && empty($this->sides)) || in_array(strtolower($name), array('atomis', 'analyzeris', 'atomfunctionis')), "First step in Query must be atomIs, atomFunctionIs or analyzerIs ($name used)");
 
         $command = $this->queryFactory->factory($name);
-        $last = $command->run(...$args);
+        if (in_array($name, array('not', 'filter'))) {
+            $chain = $this->prepareSide();
+            $last = $command->run($chain);
+        } else {
+            $last = $command->run(...$args);
+        }
         $this->commands[] = $last;
 
         if ($last->gremlin === self::STOP_QUERY && empty($this->sides)) {
