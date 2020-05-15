@@ -359,10 +359,10 @@ GREMLIN
         $this->log->log("$class : dumped " . $saved);
 
         if ($count === $saved) {
-            display('All ' . $saved . " results saved for $class\n");
+            display("All $saved results saved for $class\n");
         } else {
-            assert($count === $saved, "'results were not correctly dumped in $class : " . $saved . "/$count");
-            display('' . $saved . " results saved, $count expected for $class\n");
+            assert($count === $saved, "'results were not correctly dumped in $class : $saved/$count");
+            display("$saved results saved, $count expected for $class\n");
         }
     }
 
@@ -981,16 +981,12 @@ GREMLIN
                      ->outIs('NAME')
                      ->is('constant', true)
                      ->savePropertyAs('fullcode', 'name')
-                     ->prepareSide(),
-                     array()
               )
               ->filter(
                 $query->side()
                      ->outIs('VALUE')
                      ->is('constant', true)
                      ->savePropertyAs('fullcode', 'v')
-                     ->prepareSide(),
-                     array()
               )
               ->raw(<<<'GREMLIN'
 map{ ["name":name, 
@@ -1054,16 +1050,12 @@ GREMLIN
                      ->outIs('NAME')
                      ->is('constant', true)
                      ->savePropertyAs('fullcode', 'name')
-                     ->prepareSide(),
-                     array()
               )
               ->filter(
                 $query->side()
                      ->outIs('VALUE')
                      ->is('constant', true)
                      ->savePropertyAs('fullcode', 'v')
-                     ->prepareSide(),
-                     array()
               )
 
               ->raw('map{ ["name":name, 
@@ -1160,8 +1152,21 @@ GREMLIN
                 $ns = '';
             } else {
                 $methodIds[$row['fullnspath']] = ++$methodCount;
-                $ns = preg_grep('%^' . addslashes($row['namespace']) . '$%i', array_keys($namespacesId));
-                $ns = $namespacesId[array_pop($ns)];
+                $n = $row['namespace'];
+                if ($n[-1] !== '\\') {
+                    $n .= '\\';
+                }
+                $ns = preg_grep('%^' . addslashes($n) . '$%i', array_keys($namespacesId));
+                $k = array_pop($ns);
+                
+                if (empty($k) || !isset($namespacesId[$k])) {
+                    print_r(array_keys($namespacesId));
+                    print_r($k);
+                    print_r($row);
+                    die();
+                } else {
+                    $ns = $namespacesId[$k];
+                }
             }
 
             $toDump[] = array($methodCount,

@@ -490,6 +490,7 @@ class Load extends Tasks {
 
                 ++$this->stats['files'];
                 if ($this->processFile($filename, '')) {
+//                    var_dump($this->processFile('/Users/famille/Desktop/analyzeG3/stub.php', ''));
                     $this->loader->finalize($this->relicat);
                 } else {
                     print "Error while loading the file.\n";
@@ -739,7 +740,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processFile(string $filename,string $path): int {
+    private function processFile(string $filename, string $path): int {
         $begin = microtime(\TIME_AS_NUMBER);
         $fullpath = $path . $filename;
 
@@ -885,8 +886,8 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id][0] === $this->phptokens::T_END ||
             !isset($this->processing[ $this->tokens[$this->id][0] ])) {
-            display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring" . PHP_EOL);
-            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring" . PHP_EOL);
+            display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
+            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
 
             throw new LoadError('Processing error (processNext end)');
         }
@@ -1108,7 +1109,7 @@ class Load extends Tasks {
                 $part->noDelimiter = rtrim($part->noDelimiter, "\n");
                 $part->code        = rtrim($part->code,        "\n");
                 $part->fullcode    = rtrim($part->fullcode,    "\n");
-                $elements[] = $part;
+                $elements[]        = $part;
             }
             // Get the closing quote for flexibility
             $closeQuote = $this->tokens[$this->id + 1][1];
@@ -3138,7 +3139,7 @@ class Load extends Tasks {
                 $this->currentProperties[$element->propertyname] = $element;
 
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
-                $this->calls->addDefinition('staticproperty', $currentFNP . "::$element->code", $element);
+                $this->calls->addDefinition('staticproperty', $currentFNP . "::" . $element->code, $element);
                 $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
             }
 
@@ -5910,19 +5911,19 @@ class Load extends Tasks {
         }
 
         if (($count = $this->contexts->getCount(Context::CONTEXT_NOSEQUENCE)) !== false) {
-            throw new LoadError( "Warning : context for sequence is not back to 0 in $filename : it is " . $count . PHP_EOL);
+            throw new LoadError( "Warning : context for sequence is not back to 0 in $filename : it is $count\n");
         }
 
         if (($count = $this->contexts->getCount(Context::CONTEXT_NEW)) !== false) {
-            throw new LoadError( "Warning : context for new is not back to 0 in $filename : it is " . $count . PHP_EOL);
+            throw new LoadError( "Warning : context for new is not back to 0 in $filename : it is $count\n");
         }
 
         if (($count = $this->contexts->getCount(Context::CONTEXT_FUNCTION)) !== false) {
-            throw new LoadError( "Warning : context for function is not back to 0 in $filename : it is " . $count . PHP_EOL);
+            throw new LoadError( "Warning : context for function is not back to 0 in $filename : it is $count\n");
         }
 
         if (($count = $this->contexts->getCount(Context::CONTEXT_CLASS)) !== false) {
-            throw new LoadError( "Warning : context for class is not back to 0 in $filename : it is " . $count . PHP_EOL);
+            throw new LoadError( "Warning : context for class is not back to 0 in $filename : it is $count\n");
         }
 
 /*

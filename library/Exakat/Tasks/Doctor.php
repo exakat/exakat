@@ -70,7 +70,7 @@ class Doctor extends Tasks {
 
         $doctor = '';
         foreach($stats as $section => $details) {
-            $doctor .= "$section : " . PHP_EOL;
+            $doctor .= $section." : " . PHP_EOL;
             foreach($details as $k => $v) {
                 $doctor .= '    ' . substr("$k                          ", 0, 20) . ' : ' . $v . PHP_EOL;
             }

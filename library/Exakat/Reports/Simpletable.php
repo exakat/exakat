@@ -91,7 +91,8 @@ HTML;
 
     private function initFolder() : void {
         if ($this->finalName === 'stdout') {
-            return "Can't produce Simpletable format to stdout";
+            print "Can't produce Simpletable format to stdout";
+            return;
         }
 
         // Clean temporary destination

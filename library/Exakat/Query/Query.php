@@ -132,14 +132,6 @@ class Query {
         return $this;
     }
 
-    public function not(Command $filter): self {
-        $command = $this->queryFactory->factory('Not');
-        $last = $command->run($filter);
-        $this->commands[] = $last;
-
-        return $this;
-    }
-
     public function prepareSide(): Command {
         if ($this->stopped === self::QUERY_STOPPED) {
             return new Command(Query::NO_QUERY);

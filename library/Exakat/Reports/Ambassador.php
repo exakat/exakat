@@ -43,8 +43,6 @@ class Ambassador extends Emissary {
 
     protected $usedFiles         = array();
 
-    protected $baseHTML          = null;
-
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 

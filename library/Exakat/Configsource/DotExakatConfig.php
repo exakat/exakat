@@ -27,7 +27,6 @@ use Exakat\Config as Configuration;
 
 class DotExakatConfig extends Config {
     private $dotExakat = '';
-    private $ini       = array();
 
     public function __construct() {
         $this->dotExakat = getcwd() . '/.exakat.ini';

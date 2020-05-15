@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UnpackingInsideArrays extends Analyzer {
-    protected $phpVdersion = '7.4+';
+    protected $phpVersion = '7.4+';
 
     public function analyze() {
         // $a = [1, ...$b, $c];

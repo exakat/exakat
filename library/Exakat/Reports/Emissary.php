@@ -35,7 +35,6 @@ class Emissary extends Reports {
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Emissary';
 
-    protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
     private $tmpName           = '';
@@ -371,7 +370,7 @@ class Emissary extends Reports {
         $html = array();
         $highchart = new Highchart();
 
-        foreach(array_keys($favoritesList) as $analyzer) {
+        foreach(array_keys((array) $favoritesList) as $analyzer) {
             $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
 
             $table = array();
@@ -1263,9 +1262,7 @@ JAVASCRIPTCODE;
     protected function generateAnalyzersList(Section $section): void {
         $analyzers = array();
 
-        print_r($this->themesToShow);
         foreach($this->rulesets->getRulesetsAnalyzers($this->themesToShow) as $analyzer) {
-            print $analyzer.PHP_EOL;
             $analyzers []= '<tr><td>' . $this->docs->getDocs($analyzer, 'name') . '</td><td>' . $analyzer . "</td></tr>\n";
         }
         $analyzers = implode(PHP_EOL, $analyzers);

@@ -32,8 +32,8 @@ abstract class AnalyzerArrayHashResults extends AnalyzerDump {
     public function prepareQuery(): void {
         ++$this->queryId;
 
-        $this->processedCount += count($this->analyzedValues);
-        $this->rowCount       += count($this->analyzedValues);
+        $this->processedCount += count($this->analyzerValues);
+        $this->rowCount       += count($this->analyzerValues);
 
         $valuesSQL = array();
         foreach($this->analyzerValues as list($key, $value)) {
