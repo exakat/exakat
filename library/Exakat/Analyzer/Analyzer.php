@@ -76,7 +76,7 @@ abstract class Analyzer {
     private static $jsonCache = array();
     private static $iniCache  = array();
 
-    private $analyzer         = '';       // Current class of the analyzer (called from below)
+    private $analyzer           = '';       // Current class of the analyzer (called from below)
     protected $analyzerTitle    = '';       // Name use when storing in the dump.sqlites
     protected $shortAnalyzer    = '';
     protected $analyzerQuoted   = '';
@@ -85,11 +85,10 @@ abstract class Analyzer {
 
     protected $analyzerName      = 'no analyzer name';
     protected $analyzerTable     = 'no analyzer table name';
-    private $lastAnalyzerTable = 'none';
-    protected $analyzerSQLTable = 'no analyzer sql creation';
-    protected $missingQueries   = array();
-    protected $analyzedValues   = array();
-    protected $storageType      = self::QUERY_DEFAULT;
+    protected $analyzerSQLTable  = 'no analyzer sql creation';
+    protected $missingQueries    = array();
+    protected $analyzerValues    = array();
+    protected $storageType       = self::QUERY_DEFAULT;
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -182,7 +181,6 @@ abstract class Analyzer {
     protected $dictCode = null;
 
     protected $linksDown = '';
-    protected $dumpQueries = array();
 
     public function __construct() {
         assert(func_num_args() === 0, 'Too many arguments for ' . __CLASS__);

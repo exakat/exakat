@@ -26,10 +26,48 @@ namespace Exakat\Query\DSL;
 
 class IsEqual extends DSL {
     public function run() {
-        assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
-        list($value) = func_get_args();
+        switch(func_num_args()) {
+            case 2:
+                list($value1, $value2) = func_get_args();
 
-        return new Command("is(eq($value))");
+                $g1 = $this->makeGremlin($value1);
+                $g2 = $this->makeGremlin($value2);
+
+                return new Command("filter{ {$g1} == {$g2};}");
+                
+            case 1:
+                list($value1) = func_get_args();
+
+                $g1 = $this->makeGremlin($value1);
+
+                return new Command("is(eq($g1))");
+
+                break;
+            
+            default:
+                assert(false, 'Wrong number of argument for ' . __METHOD__ . '. 2 or 1 are expected, ' . func_num_args() . ' provided');
+        }
+    }
+
+    private function makeGremlin($value) {
+        // It is an integer
+        if (is_int($value)) {
+            return $value;
+        }
+
+        // It is a gremlin variable
+        if ($this->isVariable($value)) {
+            assert($this->assertVariable($value));
+            return $value;
+        }
+
+        // It is a gremlin property
+        if ($this->isProperty($value)) {
+            assert($this->assertProperty($value));
+            return " it.get().value(\"{$value}\").toLong()";
+        }
+
+        assert(false, '$value must be int or gremlin variable or property in ' . __METHOD__);
     }
 }
 ?>

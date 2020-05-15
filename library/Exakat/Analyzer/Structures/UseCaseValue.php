@@ -40,7 +40,12 @@ class UseCaseValue extends Analyzer {
              ->as('results')
              ->outIs('CODE')
              // code is not shared with previous case or default
-             ->raw('where(__.in("CODE").count().is(eq(1)))')
+             ->filter(
+                $this->side()
+                     ->inIs('CODE')
+                     ->count()
+                     ->isEqual(1)
+             )
              ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'variable')
              ->is('isRead', true)
