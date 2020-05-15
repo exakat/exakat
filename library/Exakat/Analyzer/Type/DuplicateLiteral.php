@@ -47,7 +47,6 @@ class DuplicateLiteral extends AnalyzerHashAnalyzer {
         if (!empty($strings->toArray())) {
             foreach($strings->toArray() as $v) {
                 foreach($v as $key => $value)  {
-                    $results[] = $key;
                     $this->analyzerValues[] = array($this->analyzerName, $key, $value);
                 }
             }
@@ -69,7 +68,6 @@ class DuplicateLiteral extends AnalyzerHashAnalyzer {
         if (!empty($integers->toArray())) {
             foreach($integers->toArray() as $v) {
                 foreach($v as $key => $value)  {
-                    $results[] = $key;
                     $this->analyzerValues[] = array($this->analyzerName, $key, $value);
                 }
             }

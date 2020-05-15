@@ -32,7 +32,7 @@ class NullBoolean extends Analyzer {
 
     public function analyze() {
         // true[1], null[0]
-        $this->atomIs(array('Null', 'Boolean'))
+        $this->atomIs(array('Null', 'Boolean', 'Nsname', 'Identifier'), self::WITH_CONSTANTS)
              ->inIs('VARIABLE');
         $this->prepareQuery();
 
