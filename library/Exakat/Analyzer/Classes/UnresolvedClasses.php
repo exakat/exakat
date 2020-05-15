@@ -38,6 +38,14 @@ class UnresolvedClasses extends Analyzer {
         $classes = $this->loadIni('php_classes.ini', 'classes');
         $classes = makeFullNsPath($classes);
 
+        $interfaces = $this->loadIni('php_interfaces.ini', 'interfaces');
+        $interfaces = makeFullNsPath($interfaces);
+
+        $traits = $this->loadIni('php_traits.ini', 'traits');
+        $traits = makeFullNsPath($traits);
+        
+        $cit = array_values(array_merge($classes, $interfaces, $traits));
+
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIsNot(array('Self', 'Parent', 'Static'))
@@ -46,7 +54,7 @@ class UnresolvedClasses extends Analyzer {
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->analyzerIsNot('Composer/IsComposerInterface')
              ->analyzerIsNot('Composer/IsComposerClass')
-             ->fullnspathIsNot($classes);
+             ->fullnspathIsNot($cit);
         $this->prepareQuery();
 
         $this->atomIs('Catch')
@@ -57,7 +65,7 @@ class UnresolvedClasses extends Analyzer {
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->analyzerIsNot('Composer/IsComposerInterface')
              ->analyzerIsNot('Composer/IsComposerClass')
-             ->fullnspathIsNot($classes);
+             ->fullnspathIsNot($cit);
         $this->prepareQuery();
 
         // also add property/constant/methods/catch/try/typehint

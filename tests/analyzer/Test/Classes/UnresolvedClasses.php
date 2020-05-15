@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UnresolvedClasses extends Analyzer {
-    /* 13 methods */
+    /* 14 methods */
 
     public function testClasses_UnresolvedClasses01()  { $this->generic_test('Classes_UnresolvedClasses.01'); }
     public function testClasses_UnresolvedClasses02()  { $this->generic_test('Classes_UnresolvedClasses.02'); }
@@ -22,5 +22,6 @@ class UnresolvedClasses extends Analyzer {
     public function testClasses_UnresolvedClasses11()  { $this->generic_test('Classes/UnresolvedClasses.11'); }
     public function testClasses_UnresolvedClasses12()  { $this->generic_test('Classes/UnresolvedClasses.12'); }
     public function testClasses_UnresolvedClasses13()  { $this->generic_test('Classes/UnresolvedClasses.13'); }
+    public function testClasses_UnresolvedClasses14()  { $this->generic_test('Classes/UnresolvedClasses.14'); }
 }
 ?>

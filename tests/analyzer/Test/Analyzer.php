@@ -167,6 +167,7 @@ abstract class Analyzer extends TestCase {
         
         $dump = Dump::factory("$EXAKAT_PATH/projects/test/dump.sqlite", Dump::READ);
         $res = $analyzerobject->getResults($dump)->toHash('key', 'value');
+        $expected = array_column($expected, 'value', 'key');
         
         foreach($expected as $key => $value) {
             if (isset($res[$key]) && $res[$key] == $value) {

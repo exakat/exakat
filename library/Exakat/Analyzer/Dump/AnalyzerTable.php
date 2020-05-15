@@ -48,8 +48,7 @@ abstract class AnalyzerTable extends AnalyzerDump {
 
         $valuesSQL = array();
         foreach($c as $row) {
-            $row = array_map(array('\\Sqlite3', 'escapeString'), $row);
-            $valuesSQL[] = "(NULL, '" . implode("', '", $row) . "') \n";
+            $valuesSQL[] = "(NULL, '" . implode("', '", array_map(array('\\Sqlite3', 'escapeString'), $row)) . "') \n";
         }
 
         $chunks = array_chunk($valuesSQL, SQLITE_CHUNK_SIZE);
