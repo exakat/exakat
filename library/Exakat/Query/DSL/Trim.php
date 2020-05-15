@@ -26,11 +26,18 @@ namespace Exakat\Query\DSL;
 
 class Trim extends DSL {
     public function run() {
-        if (func_get_args() === 2) {
-            list($variable, $chars) = func_get_args();
-        } else {
-            $variable = func_get_arg(0);
-            $chars = '\'\"';
+        switch (func_get_args()) {
+            case 2:
+                list($variable, $chars) = func_get_args();
+                break 1;
+
+            case 1:
+                $variable = func_get_arg(0);
+                $chars = '\'\"';
+                break 1;
+
+            default:
+                assert(false, 'Not enough arguments for ' . __METHOD__);
         }
 
         $this->assertVariable($variable);
