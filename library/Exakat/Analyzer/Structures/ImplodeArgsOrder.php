@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ImplodeArgsOrder extends Analyzer {
     public function dependsOn(): array {
-        return array('Complete/PropagateConstants',
+        return array('Complete/CreateDefaultValues',
+                     'Complete/PropagateConstants',
                     );
     }
 
@@ -42,12 +43,13 @@ class ImplodeArgsOrder extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Local variable
+        // Local variable, argument 0
         $this->atomFunctionIs($functions)
              ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Variable')
              ->inIs('DEFINITION')
+             ->inIsIE('NAME')
              ->outIs('DEFAULT')
              ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
              ->back('first');
@@ -72,12 +74,13 @@ class ImplodeArgsOrder extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Local variable
+        // Local variable, argument 1
         $this->atomFunctionIs($functions)
              ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Variable')
              ->inIs('DEFINITION')
+             ->inIsIE('NAME')
              ->outIs('DEFAULT')
              ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->back('first');
