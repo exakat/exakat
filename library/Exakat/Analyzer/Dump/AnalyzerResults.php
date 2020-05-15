@@ -27,6 +27,8 @@ use Exakat\Dump\Dump;
 abstract class AnalyzerResults extends AnalyzerDump {
     protected $storageType = self::QUERY_RESULTS;
 
+    protected $dumpQueries = array();
+
     public function prepareQuery(): void {
         ++$this->queryId;
 
