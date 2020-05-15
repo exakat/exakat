@@ -40,9 +40,8 @@ class Filedependencieshtml extends Reports {
         $res = $this->dump->fetchTable('filesDependencies');
         $res = array_filter($res->toArray(), function (array $x) { return $x['including'] !== $x['included']; });
 
-        $json = new stdClass();
-        $json->edges = array();
-        $json->nodes = array();
+        $json = (object) array('edges' => array(),
+                               'nodes' => array());
         $in = array();
         $out = array();
 

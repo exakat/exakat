@@ -2141,7 +2141,7 @@ class Load extends Tasks {
                     $returnTypeFullcode = array_values($returnTypeFullcode);
                 }
             }
-            $returnTypeFullcode = join('|', $returnTypeFullcode);
+            $returnTypeFullcode = implode('|', $returnTypeFullcode);
         }
 
         switch($link) {

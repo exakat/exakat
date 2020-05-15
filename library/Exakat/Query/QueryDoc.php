@@ -240,7 +240,7 @@ GREMLIN;
             $return[] = "\"$name\":" . trim((string) $init, ' {}');
         }
 
-        $return = '.withSack{[' . join(', ', $return) . ']}';
+        $return = '.withSack{[' . implode(', ', $return) . ']}';
         return $return;
     }
 
