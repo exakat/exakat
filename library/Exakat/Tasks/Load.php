@@ -3511,7 +3511,7 @@ class Load extends Tasks {
 
     private function processDo(): Atom {
         $current = $this->id;
-        $dowhile = $this->addAtom('Dowhile');
+        $dowhile = $this->addAtom('Dowhile', $this->id);
 
         $block = $this->processFollowingBlock(array($this->phptokens::T_WHILE));
         $this->addLink($dowhile, $block, 'BLOCK');

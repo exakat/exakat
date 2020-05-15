@@ -278,7 +278,7 @@ phpunit --filter=$this->number Test/$this->analyzer.php
         if (isset($expected) && is_array($expected)) {
             $missing = array();
             foreach($expected as $k => $v) {
-                if (isset($list[$k]) && $list[$k] === $v) {
+                if (isset($list[$k]) && $list[$k] == $v) {
                     unset($list[$k]);
                 } else {
                     $missing[] = $k.' ('.$v.')';
@@ -298,17 +298,24 @@ phpunit --filter=$this->number Test/$this->analyzer.php
         if (isset($expected_not) && is_array($expected)) {
             $extra = array();
             foreach($expected_not as $k => $v) {
-                if (isset($list[$k]) && $list[$k] === $v) {
+                if (isset($list[$k]) && $list[$k] == $v) {
                     $extra[] = $k;
                     unset($list[$k]);
                 } 
             }
             // the not expected
-            $this->assertEquals(count($extra), 0, count($extra)." values were found and shouldn't be : ".join(', ', $extra)."");
+            $this->assertEquals(count($extra), 0, count($extra)." values were found and shouldn't be : \n".join(', ', $extra)."");
         }
 
         // the remainings
-        $this->assertEquals(count($list), 0, count($list)." values were found and are unprocessed : ".join(', ', array_keys($list))."");
+        $display = array();
+        foreach($list as $key => $value) {
+            $display[] = "                      array('key'    => '$key',
+                            'value' => '$value',
+                           ),
+";
+        }
+        $this->assertEquals(count($list), 0, count($list)." values were found and are unprocessed : \n".join(PHP_EOL, $display));
     }
 }
 
