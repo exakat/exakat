@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldCentralize extends Analyzer {
+    protected $centralizeThreshold = 8;
+    
     // Looking for calls to function with identical literals
     public function analyze() {
         $excluded = array('\\\\defined',
@@ -33,18 +35,14 @@ class CouldCentralize extends Analyzer {
         $excludedList = makeList($excluded);
 
         foreach(range(0, 3) as $i) {
-            $query = <<<GREMLIN
-g.V().hasLabel("Functioncall", "Exit")
-     .has('fullnspath', without($excludedList))
-     .where( 
-      __.sideEffect{x = [it.get().value('fullnspath')];}
-        .out('ARGUMENT').has('rank', $i)
-        .hasLabel('String').sideEffect{x.add(it.get().value('fullcode')); }
-      )
-     .map{ x; }
-     .groupCount('m').by{x;}.cap('m')
-GREMLIN;
-            $res = $this->query($query);
+            $this->atomIs('Functioncall')
+                 ->savePropertyAs('fullnspath', 'f')
+                 ->fullnspathIsNot($excluded)
+                 ->outWithRank('ARGUMENT', $i)
+                 ->atomIs(array('String', 'Integer', 'Null', 'Boolean', 'Float'))
+                 ->savePropertyAs('fullcode', 'arg')
+                 ->raw('groupCount("m").by{f + ", " + arg;}.cap("m").next().findAll {a,b -> b > '.$this->centralizeThreshold.'}.keySet()');
+            $res = $this->rawQuery();
 
             if (empty($res)) {
                 continue;
@@ -52,16 +50,11 @@ GREMLIN;
 
             $functions = array();
             $args = array();
-            foreach($res[0] as $key => $count) {
-                if ($count < 4) { continue; }
-                if (preg_match('/^\[(\S+), (.*?)\]$/is', $key, $r)) {
+            foreach($res as $pattern) {
+                if (preg_match('/^(\S+), (.*?)$/is', $pattern, $r)) {
                     $functions[] = $r[1];
                     array_collect_by($args, $r[1], $r[2]);
                 }
-            }
-
-            if (empty($args)) {
-                continue;
             }
 
             $this->atomFunctionIs($functions)
@@ -71,15 +64,23 @@ GREMLIN;
                  ->isHash('fullcode', $args, 'name')
                  ->back('first');
             $this->prepareQuery();
-
-            $this->atomIs('Exit')
-                 ->savePropertyAs('fullnspath', 'name')
-                 ->outWithRank('ARGUMENT', $i)
-                 ->outIsIE('CODE')
-                 ->isHash('fullcode', $args, 'name')
-                 ->back('first');
-            $this->prepareQuery();
         }
+
+       $this->atomIs('Exit')
+            ->outWithRank('ARGUMENT', 0)
+            ->atomIs(array('String', 'Integer', 'Null', 'Boolean', 'Float'))
+            ->savePropertyAs('fullcode', 'arg')
+            ->raw('groupCount("m").by{arg;}.cap("m").next().findAll {a,b -> b > '.$this->centralizeThreshold.'}.keySet()');
+       $res = $this->rawQuery();
+       
+       if (!empty($res)) {
+           $this->atomIs('Exit')
+                ->outWithRank('ARGUMENT', 0)
+                ->outIsIE('CODE')
+                ->is('fullcode', $res->toArray())
+                ->back('first');
+           $this->prepareQuery();
+       }
     }
 }
 

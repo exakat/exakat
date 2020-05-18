@@ -4,6 +4,11 @@ $expected     = array('custom(\'b\', \'a4\', $c1)',
                       'custom(\'d\', \'a4\', $c2)',
                       'custom(\'d\', \'a4\', $c3)',
                       'custom(\'d\', \'a4\', $c4)',
+                      'custom(\'b\', \'a4\', $c1)',
+                      'custom(\'d\', \'a4\', $c2)',
+                      'custom(\'d\', \'a4\', $c3)',
+                      'custom(\'d\', \'a4\', $c4)',
+                      'custom(\'b\', \'a4\', $c1)',
                      );
 
 $expected_not = array('str_replace(\'a2\', \'b\', $c)',
