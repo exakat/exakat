@@ -954,7 +954,7 @@ class Load extends Tasks {
             $string = $this->addAtom('Heredoc', $current);
             $finalToken = $this->phptokens::T_END_HEREDOC;
             $openQuote = $this->tokens[$this->id][1];
-            if ($openQuote[0] === 'b' || $openQuote[0] === 'B') {
+            if (strtolower($openQuote[0]) === 'b') {
                 $string->binaryString = $openQuote[0];
                 $openQuote = substr($openQuote, 1);
             }
@@ -1398,7 +1398,7 @@ class Load extends Tasks {
             if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
                 $this->currentClassTrait[] = '';
             }
-        } elseif ($function->atom === 'Method' || $function->atom === 'Magicmethod') {
+        } elseif (in_array($function->atom, array('Method', 'Magicmethod'), \STRICT_COMPARISON)) {
             $function->fullnspath = end($this->currentClassTrait)->fullnspath . '::' . mb_strtolower($name->code);
             $function->aliased    = self::NOT_ALIASED;
 
@@ -2649,7 +2649,7 @@ class Load extends Tasks {
             $name = $this->processSingle('Identifier');
             $this->runPlugins($name);
             $name->delimiter   = $name->code[0];
-            if ($name->delimiter === 'b' || $name->delimiter === 'B') {
+            if (strtolower($name->delimiter) === 'b') {
                 $name->binaryString = $name->delimiter;
                 $name->delimiter    = $name->code[1];
                 $name->noDelimiter  = substr($name->code, 2, -1);
@@ -2808,7 +2808,7 @@ class Load extends Tasks {
             $functioncall->aliased    = self::NOT_ALIASED;
 
             $this->processDefineAsClassalias($argumentsList);
-        } elseif ($atom === 'Methodcallname' || $atom === 'List') {
+        } elseif (in_array($atom, array('Methodcallname', 'List'), \STRICT_COMPARISON)) {
             // literally, nothing
         } elseif (in_array(mb_strtolower($name->code), array('defined', 'constant'), \STRICT_COMPARISON)) {
             if ($argumentsList[0]->constant === true &&
@@ -4440,14 +4440,14 @@ class Load extends Tasks {
                                 $nsname->fullnspath = $prefix . $nsname->fullcode;
                                 $nsname->origin     = $prefix . $nsname->fullcode;
 
-                                $alias->fullnspath  = $prefix . $nsname->fullcode;
-                                $alias->origin      = $prefix . $nsname->fullcode;
+                                $alias->fullnspath  = $nsname->fullnspath;
+                                $alias->origin      = $nsname->origin;
                             } else {
                                 $nsname->fullnspath = $prefix . mb_strtolower($nsname->fullcode);
                                 $nsname->origin     = $prefix . mb_strtolower($nsname->fullcode);
 
-                                $alias->fullnspath  = $prefix . mb_strtolower($nsname->fullcode);
-                                $alias->origin      = $prefix . mb_strtolower($nsname->fullcode);
+                                $alias->fullnspath  = $nsname->fullnspath;
+                                $alias->origin      = $nsname->origin;
                             }
 
                             $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
@@ -5387,7 +5387,9 @@ class Load extends Tasks {
                                     ))) {
             $static = $this->addAtom('Staticproperty', $current);
 
-            $this->getFullnspath($left, 'class', $left);
+            if (!$left->isA(array('Functioncall', 'Methodcall', 'Staticmethodcall'))) {
+                $this->getFullnspath($left, 'class', $left);
+            }
             $this->calls->addCall('class', $left->fullnspath, $left);
             $this->addLink($static, $right, 'MEMBER');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
