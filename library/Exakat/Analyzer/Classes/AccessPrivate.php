@@ -43,12 +43,6 @@ class AccessPrivate extends Analyzer {
                                                         .has("visibility", "private") ) 
                                              ) ';
 
-        $hasPrivateProperty = 'where( __.out("PPP").hasLabel("Ppp").has("visibility", "private")
-                                        .where( __.out("PPP")
-                                                  .coalesce(out("LEFT"),  __.filter{true} )
-                                                  .filter{it.get().value("code") == name} ) 
-                                    )';
-
         // methods
         // classname::method() direct class
         // classname::method() parent class through extension (not the direct class)
@@ -105,38 +99,40 @@ class AccessPrivate extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // properties
-        // className::$property direct call
+        // parent::$p
         $this->atomIs('Staticproperty')
              ->analyzerIsNot('self')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('CLASS')
-             ->tokenIs(self::STATICCALL_TOKEN)
-             ->atomIsNot(self::RELATIVE_CLASS)
-             ->isNotLocalClass()
+             ->atomis('Parent')
 
-             ->goToClass()
-             ->raw($hasPrivateProperty)
+             ->inIs('CLASS')
+
+             ->inIs('DEFINITION')
+             ->inIs('PPP')
+             ->is('visibility', 'private')
 
              ->back('first');
         $this->prepareQuery();
 
-        // parent::$property
+        // properties
+        // className::$property direct call
+        // C::$property
         $this->atomIs('Staticproperty')
              ->analyzerIsNot('self')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('CLASS')
-             ->atomIs('Parent')
+             ->atomIs(self::STATIC_NAMES)
              ->isNotLocalClass()
+             ->inIs('CLASS')
 
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->raw($hasPrivateProperty)
-
+             ->inIs('DEFINITION')
+             ->inIs('PPP')
+             ->is('visibility', 'private')
              ->back('first');
         $this->prepareQuery();
 
