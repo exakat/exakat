@@ -28,6 +28,8 @@ abstract class AnalyzerArrayHashResults extends AnalyzerDump {
     protected $storageType = self::QUERY_PHP_ARRAYS;
 
     protected $analyzerValues = array();
+    
+    protected $dumpQueries = array();
 
     public function prepareQuery(): void {
         ++$this->queryId;

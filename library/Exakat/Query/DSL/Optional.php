@@ -31,16 +31,16 @@ class Optional extends DSL {
 
         list($filter) = func_get_args();
 
-        if ($filter instanceof Command) {
-            if ($filter->gremlin === Query::STOP_QUERY) {
-                $filter->gremlin = Query::NO_QUERY;
-            } else {
-                $filter->gremlin = "optional(\n{$filter->gremlin}\n)";
-            }
-            return $filter;
-        } else {
+        if (!$filter instanceof Command) {
             assert(false, 'Optional requires a command object');
         }
+
+        if ($filter->gremlin === Query::STOP_QUERY) {
+            $filter->gremlin = Query::NO_QUERY;
+        } else {
+            $filter->gremlin = "optional(\n{$filter->gremlin}\n)";
+        }
+        return $filter;
     }
 }
 ?>

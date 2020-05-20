@@ -669,6 +669,7 @@ GREMLIN
     private function processMultiplication() {
         display('propagating Constant value in Multiplication');
         $this->atomIs('Multiplication')
+             ->tokenIs('T_PERCENTAGE')
              ->hasNo('propagated')
              ->initVariable('x', '[ ]')
              ->not(
@@ -701,7 +702,7 @@ sideEffect{
           i = 0;
       }
     } else if (it.get().value("token") == 'T_PERCENTAGE') {
-      if (x[0] != 0) {
+      if (x[1] != 0) {
           i = x[0] % x[1];
       } else {
           i = 0;

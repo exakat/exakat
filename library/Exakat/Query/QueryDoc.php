@@ -259,7 +259,7 @@ GREMLIN;
         }
 
         foreach($this->links as list($a, $b, $label)) {
-            $graph[] = "$a -> $b;\n";
+            $graph[] = "$a -> $b [label = \"$label\"];\n";
         }
         
         file_put_contents('/tmp/docs.dot', "digraph{ ".implode('', $graph)."}");

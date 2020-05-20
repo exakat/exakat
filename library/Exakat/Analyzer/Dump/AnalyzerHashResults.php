@@ -27,6 +27,8 @@ use Exakat\Dump\Dump;
 abstract class AnalyzerHashResults extends AnalyzerDump {
     protected $storageType = self::QUERY_ARRAYS;
 
+    protected $dumpQueries = array();
+
     public function prepareQuery(): void {
         ++$this->queryId;
 

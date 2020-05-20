@@ -207,7 +207,7 @@ class CommandLine extends Config {
 
                     case 'gremlin' :
                         $this->config['gremlin'] = $args[$id + 1];
-                        if (!in_array($this->config['gremlin'], Graph::GRAPHDB)) {
+                        if (!in_array($this->config['gremlin'], Graph::GRAPHDB, LOOSE_COMPARISON)) {
                             $this->config['gremlin'] = 'nogremlin';
                         }
                         break;

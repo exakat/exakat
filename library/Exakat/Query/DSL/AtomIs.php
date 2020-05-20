@@ -41,7 +41,6 @@ class AtomIs extends DSL {
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } elseif ($flags === Analyzer::WITH_VARIABLES) {
-            // Ternary are unsupported
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
 coalesce( // literal value, passed as an argument (Method, closure, function)
@@ -59,7 +58,6 @@ GREMLIN;
             return new Command($gremlin, array($diff));
         } elseif ($flags === Analyzer::WITH_CONSTANTS &&
                  array_intersect($diff, array('String', 'Concatenation', 'Ternary', 'Arrayliteral', 'Integer', 'Null', 'Boolean', 'Magicmethod', 'Float'))) {
-            // Ternary are unsupported
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
 coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),

@@ -29,16 +29,18 @@ use Exakat\Exceptions\NoPhpBinary;
 class ExakatConfig extends Config {
     private $projects_root = '';
 
-    private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
-                               'gsneo4j'     => 'GSNeo4j',
-                               'janusgraph'  => 'Janusgraph',
-                               'nogremlin'   => 'NoGremlin',
+    private $gremlins = array( 'tinkergraph'   => 'Tinkergraph',
+                               'tinkergraphv3' => 'TinkergraphV3',
+                               'gsneo4j'       => 'GSNeo4j',
+                               'janusgraph'    => 'Janusgraph',
+                               'nogremlin'     => 'NoGremlin',
                                );
 
-    private $loaders = array( 'tinkergraph' => 'SplitGraphson',
-                              'gsneo4j'     => 'SplitGraphson',
-                              'janusgraph'  => 'SplitGraphson',
-                              'nogremlin'   => 'None',
+    private $loaders = array( 'tinkergraph'   => 'SplitGraphson',
+                              'tinkergraphv3' => 'SplitGraphson',
+                              'gsneo4j'       => 'SplitGraphson',
+                              'janusgraph'    => 'SplitGraphson',
+                              'nogremlin'     => 'None',
                               );
 
     public function __construct($projects_root) {

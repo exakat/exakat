@@ -33,7 +33,7 @@ class Dictionary {
     private $dictionary = array();
     private $lcindex    = array();
 
-    public function __construct(Datastore $datastore) {
+    public function __construct() {
         $this->datastore = exakat('datastore');
     }
 

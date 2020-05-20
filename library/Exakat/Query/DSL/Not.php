@@ -29,16 +29,16 @@ class Not extends DSL {
     public function run(): Command {
         list($filter) = func_get_args();
 
-        if ($filter instanceof Command) {
-            if ($filter->gremlin === Query::STOP_QUERY) {
-                $filter->gremlin = Query::NO_QUERY;
-            } else {
-                $filter->gremlin = "not( __.where($filter->gremlin))";
-            }
-            return $filter;
-        } else {
+        if (!$filter instanceof Command) {
             assert(false, 'Not requires a Command object, it received a ' . gettype($filter));
         }
+
+        if ($filter->gremlin === Query::STOP_QUERY) {
+            $filter->gremlin = Query::NO_QUERY;
+        } else {
+            $filter->gremlin = "not( __.where($filter->gremlin))";
+        }
+        return $filter;
     }
 }
 ?>

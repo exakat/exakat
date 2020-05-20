@@ -62,9 +62,9 @@ class CodeIs extends DSL {
                 return new Command(Query::STOP_QUERY);
             }
 
-            return new Command("filter{ it.get().value(\"$col\") in ***; }", array($translatedCode));
+            return new Command("has(\"$col\", within(***))", array($translatedCode));
         } else {
-            return new Command("filter{ it.get().value(\"$col\") in ***; }", array(makeArray($code)));
+            return new Command("has(\"$col\", within(***))", array(makeArray($code)));
         }
     }
 }

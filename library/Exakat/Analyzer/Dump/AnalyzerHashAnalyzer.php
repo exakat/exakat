@@ -27,6 +27,8 @@ use Exakat\Reports\Helpers\Results;
 
 abstract class AnalyzerHashAnalyzer extends AnalyzerDump {
     protected $storageType = self::QUERY_HASH_ANALYZER;
+    
+    protected $dumpQueries = array();
 
     protected $analyzerValues = array();
 
