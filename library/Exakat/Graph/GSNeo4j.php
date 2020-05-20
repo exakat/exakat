@@ -24,6 +24,7 @@ namespace Exakat\Graph;
 
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
+use Exakat\Exceptions\UnkownGremlinVersion;
 use Brightzone\GremlinDriver\Connection;
 use stdClass;
 
@@ -36,11 +37,50 @@ class GSNeo4j extends Graph {
 
     private $db         = null;
 
-    private $gremlinVersion = '3.3';
+    private $gremlinVersion = '3.4';
 
-    public function __construct() {
-        parent::__construct();
+    public function getInfo() : array {
+        $stats = array();
 
+        if (empty($this->config->gsneo4j_folder)) {
+            $stats['configured'] = 'No gsneo4j_folder configured in config/exakat.ini.';
+        } elseif (!file_exists($this->config->gsneo4j_folder)) {
+            $stats['installed'] = 'No (folder : ' . $this->config->gsneo4j_folder . ')';
+        } elseif (!file_exists($this->config->gsneo4j_folder . '/ext/neo4j-gremlin/')) {
+            $stats['installed'] = 'Partially (missing neo4j folder : ' . $this->config->gsneo4j_folder . ')';
+        } else {
+            $stats['installed'] = "Yes (folder : {$this->config->gsneo4j_folder})";
+            $stats['host'] = $this->config->gsneo4j_host;
+            $stats['port'] = $this->config->gsneo4j_port;
+
+            $plugins = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/plugin/*.jar");
+            if (count($plugins) !== 72) {
+                $stats['grapes failed'] = 'Partially installed neo4j plugin. Please, check installation docs, and "grab" again : some of the files are missing for neo4j.';
+            }
+
+            $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
+            $gremlinVersion = basename(array_pop($gremlinJar));
+            //gremlin-core-3.2.5.jar
+            $gremlinVersion = substr($gremlinVersion, 13, -4);
+            $stats['gremlin version'] = $gremlinVersion;
+
+            $neo4jJar = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/lib/neo4j-*.jar");
+            $neo4jJar = array_filter($neo4jJar, function ($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
+            $neo4jVersion = basename(array_pop($neo4jJar));
+
+            //neo4j-2.3.3.jar
+            $neo4jVersion = substr($neo4jVersion, 6, -4);
+            $stats['neo4j version'] = $neo4jVersion;
+
+            if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
+                $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) . ')';
+            }
+        }
+
+        return $stats;
+    }
+
+    public function init() : void {
         if (!file_exists("{$this->config->gsneo4j_folder}/lib/")) {
             // No local production, just skip init.
             $this->status = self::UNAVAILABLE;
@@ -51,18 +91,16 @@ class GSNeo4j extends Graph {
         $gremlinVersion = basename(array_pop($gremlinJar));
         // 3.4 or 3.3 or 3.2
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
-        assert(in_array($this->gremlinVersion, array('3.2', '3.3', '3.4')), "Unknown Gremlin version : $this->gremlinVersion\n");
+        if(!in_array($this->gremlinVersion, array('3.2', '3.3', '3.4'), STRICT_COMPARISON)) {
+            throw new UnkownGremlinVersion($this->gremlinVersion);
+        }
 
         $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
                                           'port'     => $this->config->gsneo4j_port,
                                           'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
-    }
-
-    public function resetConnection() {
-        unset($this->db);
-        $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
+                                           $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
                                           'port'     => $this->config->gsneo4j_port,
                                           'graph'    => 'graph',
                                           'emptySet' => true,
@@ -89,13 +127,7 @@ class GSNeo4j extends Graph {
             $this->db->message->bindValue($name, $value);
         }
 
-//        static $query_count = 0;
-//        ++$query_count;
-//        $b = hrtime(true);
         $result = $this->db->send($query);
-//        $e = hrtime(true);
-//        $d = ( ($e - $b) / 1000000 );
-//        file_put_contents('./gremlin.query.log', "$query_count\t$d\t".hash('fnv132', $query)."\t$query\n", \FILE_APPEND);
 
         if (empty($result)) {
             return new GraphResults();
@@ -151,7 +183,7 @@ class GSNeo4j extends Graph {
         $this->start();
     }
 
-    public function start() {
+    public function start() : void {
         if (!file_exists("{$this->config->gsneo4j_folder}/conf")) {
             throw new GremlinException('No graphdb found.');
         }
@@ -203,7 +235,7 @@ class GSNeo4j extends Graph {
         display("started [$pid] in $ms ms");
     }
 
-    public function stop() {
+    public function stop() : void {
         if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
             display('stop gremlin server 3.3.x');
             putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');

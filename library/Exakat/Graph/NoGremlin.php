@@ -33,10 +33,13 @@ class NoGremlin extends Graph {
         return new GraphResults();
     }
 
-    public function start() {
+    public function init() : void {
     }
 
-    public function stop() {
+    public function start() : void {
+    }
+
+    public function stop() : void {
     }
 
     public function serverInfo() {
@@ -58,6 +61,12 @@ class NoGremlin extends Graph {
     public function resetConnection() {
         return true;
     }
+
+    public function getInfo() : array {
+        return array('installed' => 'Always',
+                    );
+    }
+
 }
 
 ?>

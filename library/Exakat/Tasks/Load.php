@@ -544,7 +544,6 @@ class Load extends Tasks {
                 display('Child finished working');
                 exit(0);
             } else {
-                unset($this->gremlin);
                 $this->gremlin = Graph::getConnexion();
 
                 $nbTokens = $this->runProjectCore($files);
@@ -558,7 +557,6 @@ class Load extends Tasks {
             display('Sequential processing');
             $this->runCollector($omittedFiles);
 
-            unset($this->gremlin);
             $this->gremlin = Graph::getConnexion();
 
             $nbTokens = $this->runProjectCore($files);
@@ -1145,9 +1143,9 @@ class Load extends Tasks {
         $variable = $this->addAtom($atom, $current);
 
         ++$this->id; // Skip ${
-        while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
+        do {
             $name = $this->processNext();
-        }
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY);
         ++$this->id; // Skip }
 
         $this->popExpression();
@@ -1238,7 +1236,7 @@ class Load extends Tasks {
             $this->runPlugins($finally, array('BLOCK' => $finallyBlock));
         }
 
-        $try->fullcode = $this->tokens[$current][1] . static::FULLCODE_BLOCK . implode('', $fullcode) . ( isset($finallyId) ? $finally->fullcode : '');
+        $try->fullcode = $this->tokens[$current][1] . static::FULLCODE_BLOCK . implode('', $fullcode) . ( isset($finally) ? $finally->fullcode : '');
         $try->count    = $rank;
 
         $this->addToSequence($try);
@@ -1279,7 +1277,9 @@ class Load extends Tasks {
             $this->currentClassTrait[] = '';
         }
 
-        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+        do {
+           $block = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
                                                                 $this->phptokens::T_CLOSE_PARENTHESIS,
                                                                 $this->phptokens::T_CLOSE_CURLY,
                                                                 $this->phptokens::T_SEMICOLON,
@@ -1287,9 +1287,7 @@ class Load extends Tasks {
                                                                 $this->phptokens::T_CLOSE_TAG,
                                                                 $this->phptokens::T_COLON,
                                                                 ),
-               \STRICT_COMPARISON)) {
-           $block = $this->processNext();
-        }
+               \STRICT_COMPARISON));
 
         $this->popExpression();
 
@@ -2992,6 +2990,8 @@ class Load extends Tasks {
                                                              $this->phptokens::T_QUESTION,
                                                              $this->phptokens::T_STRING,
                                                              $this->phptokens::T_NAMESPACE,
+                                                             $this->phptokens::T_ARRAY,
+                                                             $this->phptokens::T_CALLABLE,
                                                              ),
                             \STRICT_COMPARISON)) {
             $current = $this->id;

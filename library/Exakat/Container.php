@@ -60,6 +60,7 @@ class Container {
 
     private function graphdb() {
         $this->graphdb    = Graph::getConnexion();
+        $this->graphdb->init();
     }
 
     private function datastore() {

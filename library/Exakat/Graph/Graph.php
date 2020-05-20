@@ -30,6 +30,8 @@ abstract class Graph {
     public const GRAPHDB = array('nogremlin',
                                  'gsneo4j',
                                  'tinkergraph',
+                                 'tinkergraphv3',
+                                 'janusgraph',
                                  );
 
     public function __construct() {
@@ -37,16 +39,24 @@ abstract class Graph {
     }
 
     abstract public function query(string $query, array $params = array(),array $load = array()): GraphResults;
+
     abstract public function queryOne(string $query, array $params = array(),array $load = array()): GraphResults;
 
-    abstract public function start();
-    abstract public function stop();
-    public function restart() {
+    abstract public function init() : void;
+
+    abstract public function getInfo() : array;
+
+    abstract public function start() : void;
+
+    abstract public function stop() : void;
+
+    public function restart() : void {
         $this->stop();
         $this->start();
     }
 
     abstract public function serverInfo();
+
     abstract public function checkConnection();
 
     abstract public function clean();
@@ -57,13 +67,19 @@ abstract class Graph {
     public function getId() {
         return 'null';
     }
+
     public function fixId($id) {
         return $id;
     }
 
-    public static function getConnexion() {
-        $config = exakat('config');
-        $graphDBClass = "\\Exakat\\Graph\\{$config->gremlin}";
+    public static function getConnexion(string $gremlin = null) : self {
+        if ($gremlin === null) {
+            $config = exakat('config');
+            $gremlin = $config->gremlin;
+        }
+
+        $graphDBClass = "\\Exakat\\Graph\\$gremlin";
+
         return new $graphDBClass();
     }
 }

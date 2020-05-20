@@ -34,29 +34,41 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
     public function __construct($data = null) {
         // Case of empty result set.
+        
+//        print "\nExtracted from JSON\n";
+//        var_dump($data);
+//        print "\nExtracted from JSON------\n";
 
+// A garder. Aucun résultat.
         if ($data === null) {
             $this->type = self::EMPTY;
             $this->data = $data;
 
             return;
         }
-
+/*
         if (is_scalar($data)) {
             $this->type = self::SCALAR;
             $this->data = $data;
 
             return;
         }
-
+*/
+// A garder. liste de résultats
         if (is_array($data)) {
-            $this->type = self::ARRAY;
-            $this->data = $data;
-            $this->checkArray();
+            if (!isset($data[0]) || ($data[0] === null)) {
+                $this->type = self::EMPTY;
+                $this->data = null;
+
+            } else {
+                $this->type = self::ARRAY;
+                $this->data = $data;
+                $this->checkArray();
+            }
 
             return;
         }
-
+/*
         if ($data instanceof stdClass) {
             $this->type = self::ARRAY;
             $this->data = (array) $data;
@@ -64,7 +76,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
             return;
         }
-
+*/
         assert(false, 'Could not understand GraphResults incoming data');
     }
 
@@ -117,7 +129,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         $this->data = $result;
     }
 
-    public function toArray() {
+    public function toArray() : array {
         if ($this->type === self::EMPTY) {
             return array();
         } else {

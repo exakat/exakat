@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 use Exakat\Exakat;
 use Exakat\Config;
 use Exakat\Phpexec;
+use Exakat\Graph\Graph;
 use Exakat\Tasks\Helpers\Php;
 use Exakat\Exceptions\NoPhpBinary;
 use Exakat\Exceptions\HelperException;
@@ -38,7 +39,7 @@ class Doctor extends Tasks {
 
     private $reportList = array();
 
-    public function __construct($subTask = self::IS_NOT_SUBTASK) {
+    public function __construct() {
         $this->config  = exakat('config');
         $this->gremlin = exakat('graphdb');
         // Ignoring everything else
@@ -147,8 +148,10 @@ class Doctor extends Tasks {
         $stats['java']['$JAVA_HOME'] = getenv('JAVA_HOME') ? getenv('JAVA_HOME') : '<none>';
         $stats['java']['$JAVA_OPTIONS'] = getenv('JAVA_OPTIONS') ?? ' (set $JAVA_OPTIONS="-Xms32m -Xmx****m", with **** = RAM in Mb. The more the better.';
 
-        $stats['tinkergraph'] = $this->getTinkerGraph();
-        $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();
+        $stats['tinkergraph']   = Graph::getConnexion('Tinkergraph')->getInfo();
+        $stats['tinkergraphv3'] = Graph::getConnexion('TinkergraphV3')->getInfo();
+        $stats['gsneo4j']       = Graph::getConnexion('Gsneo4j')->getInfo();
+        $stats['nogremlin']     = Graph::getConnexion('NoGremlin')->getInfo();
 
         if ($this->config->project !== null) {
             $stats['project']['name']             = $this->config->project_name;
@@ -290,7 +293,7 @@ TEXT
 
         $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
         $gremlinVersion = basename(array_pop($gremlinJar));
-        //gremlin-core-3.2.5.jar
+
         $gremlinVersion = substr($gremlinVersion, 13, -4);
         if (version_compare('3.4.0', $gremlinVersion) < 0) {
             $version = '.3.4';
@@ -377,74 +380,6 @@ TEXT
 
     private function array2list(array $array) {
         return implode(",\n                           ", $array);
-    }
-
-    private function getTinkerGraph() {
-        $stats = array();
-
-        if (empty($this->config->tinkergraph_folder)) {
-            $stats['configured'] = 'No tinkergraph configured in config/exakat.ini.';
-        } elseif (!file_exists($this->config->tinkergraph_folder)) {
-            $stats['installed'] = 'No (folder : ' . $this->config->tinkergraph_folder . ')';
-        } else {
-            $stats['installed'] = 'Yes (folder : ' . $this->config->tinkergraph_folder . ')';
-            $stats['host'] = $this->config->tinkergraph_host;
-            $stats['port'] = $this->config->tinkergraph_port;
-
-            $gremlinJar = glob("{$this->config->tinkergraph_folder}/lib/gremlin-core-*.jar");
-            $gremlinVersion = basename(array_pop($gremlinJar));
-            //example : gremlin-core-3.2.5.jar
-            $gremlinVersion = substr($gremlinVersion, 13, -4);
-
-            $stats['gremlin version'] = $gremlinVersion;
-
-            if (file_exists("{$this->config->tinkergraph_port}/db/tinkergraph.pid")) {
-                $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->tinkergraph_port}/db/tinkergraph.pid")) . ')';
-            }
-        }
-
-        return $stats;
-    }
-
-    private function getTinkerGraphNeo4j() {
-        $stats = array();
-
-        if (empty($this->config->gsneo4j_folder)) {
-            $stats['configured'] = 'No tinkergraph/neo4j configured in config/exakat.ini.';
-        } elseif (!file_exists($this->config->gsneo4j_folder)) {
-            $stats['installed'] = 'No (folder : ' . $this->config->gsneo4j_folder . ')';
-        } elseif (!file_exists($this->config->gsneo4j_folder . '/ext/neo4j-gremlin/')) {
-            $stats['installed'] = 'Partially (missing neo4j folder : ' . $this->config->gsneo4j_folder . ')';
-        } else {
-            $stats['installed'] = "Yes (folder : {$this->config->gsneo4j_folder})";
-            $stats['host'] = $this->config->gsneo4j_host;
-            $stats['port'] = $this->config->gsneo4j_port;
-
-            $plugins = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/plugin/*.jar");
-            if (count($plugins) !== 72) {
-                $stats['grapes failed'] = 'Partially installed neo4j plugin. Please, check installation docs, and "grab" again : some of the files are missing for neo4j.';
-            }
-
-            $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
-            $gremlinVersion = basename(array_pop($gremlinJar));
-            //gremlin-core-3.2.5.jar
-            $gremlinVersion = substr($gremlinVersion, 13, -4);
-            $stats['gremlin version'] = $gremlinVersion;
-
-            $neo4jJar = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/lib/neo4j-*.jar");
-            $neo4jJar = array_filter($neo4jJar, function ($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
-            $neo4jVersion = basename(array_pop($neo4jJar));
-
-            //neo4j-2.3.3.jar
-            $neo4jVersion = substr($neo4jVersion, 6, -4);
-            $stats['neo4j version'] = $neo4jVersion;
-
-            if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
-                $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) . ')';
-            }
-        }
-
-        return $stats;
     }
 }
 ?>
