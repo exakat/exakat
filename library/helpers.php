@@ -160,15 +160,15 @@ function duration(int $seconds) : string {
 }
 
 function unparse_url(array $parsed_url) : string {
-    $scheme   = isset($parsed_url['scheme'])   ? "$parsed_url[scheme]://"      : '';
-    $host     = isset($parsed_url['host'])     ? $parsed_url['host']           : '';
+    $scheme   = $parsed_url['scheme'] ?: '';
+    $host     = $parsed_url['host']   ?: '';
     $port     = isset($parsed_url['port'])     ? ":$parsed_url[port]"          : '';
 
     $user     = empty($parsed_url['user'])     ? '' : $parsed_url['user'];
     $pass     = empty($parsed_url['pass'])     ? '' : ":$parsed_url[pass]";
     $userpass = ($user || $pass)               ? "$user$pass@"                 : '';
 
-    $path     = isset($parsed_url['path'])     ? $parsed_url['path']           : '';
+    $path     = $parsed_url['path']   ?: '';
     $query    = isset($parsed_url['query'])    ? "?$parsed_url[query]"         : '';
     $fragment = isset($parsed_url['fragment']) ? "#$parsed_url[fragment]"      : '';
 

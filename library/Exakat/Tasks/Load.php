@@ -3142,7 +3142,7 @@ class Load extends Tasks {
 
             if ($atom === 'Propertydefinition') {
                 // drop $
-                $element->propertyname = substr($element->code, 1);
+                $element->propertyname = ltrim($element->code, '$');
                 $this->currentProperties[$element->propertyname] = $element;
 
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
@@ -6357,7 +6357,7 @@ class Load extends Tasks {
             $this->theGlobals[$name]->code = $element->code;
             $this->theGlobals[$name]->lccode = $element->code;
             $this->theGlobals[$name]->line = -1;
-            $this->theGlobals[$name]->globalvar = substr($name, 1);
+            $this->theGlobals[$name]->globalvar = ltrim($name, '$');
         }
     }
 }

@@ -226,7 +226,6 @@ class DotExakatYamlConfig extends Config {
             }
         }
         $this->config['stubs'] = array_unique(array_merge(...array_values($stubs)));
-        print_r($this->config['stubs']);
 
         return self::YAML_FILE;
     }

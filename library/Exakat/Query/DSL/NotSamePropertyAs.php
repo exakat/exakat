@@ -48,7 +48,7 @@ class NotSamePropertyAs extends DSL {
                 return new Command("filter{ it.get() != $name }");
 
             case 'reference':
-                return new Command('filter{ if (it.get().properties("' . $property . '").any()) { ' . $name . ' != it.get().value("' . $property . '");} else { ' . $name . ' != false; }}');
+                return new Command('filter{ if (it.get().properties("reference").any()) { ' . $name . ' != it.get().value("reference");} else { ' . $name . ' != false; }}');
 
             default :
                 if (in_array($property, self::BOOLEAN_PROPERTY, \STRICT_COMPARISON)) {

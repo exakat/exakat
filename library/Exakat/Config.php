@@ -192,7 +192,6 @@ class Config extends Configsource {
                                                           $this->exakatConfig->toArray()['stubs']         ?? array(),
                                                           $this->dotExakatYamlConfig->toArray()['stubs']  ?? array(),
                                             ));
-print_r($this->projectConfig->toArray());
 
         // autoload dev
         $this->dev = new AutoloadDev($this->extension_dev);

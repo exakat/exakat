@@ -972,11 +972,9 @@ Glossary
 GLOSSARY;
         ksort($this->glossary);
         
-        $found = 0;
-        foreach($this->glossary as $items) {
-            $found += count($items);
-        }
-        print "$found found\n";
+        $found = count($this->glossary, COUNT_RECURSIVE);
+        print "$found entry in glossary found\n";
+
         print count($this->entries)." defined\n";
         
         foreach($this->entries as $name => $url) {

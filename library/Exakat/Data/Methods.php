@@ -218,11 +218,21 @@ SQL;
         return $return;
     }
 
-    public function getFunctionsByReturn() {
+    public function getFunctionsByReturn(bool $singleTypeOnly = false) {
         $return = array();
 
+        if ($singleTypeOnly === true) {
+            $where = ' AND return NOT LIKE "%,%"';
+        } else {
+            $where = '';
+        }
+
         $query = <<<SQL
-SELECT return, lower(GROUP_CONCAT('\' || name)) AS functions FROM args_type WHERE class='PHP' AND return IS NOT NULL GROUP BY return
+SELECT return, lower(GROUP_CONCAT('\' || name)) AS functions 
+    FROM args_type 
+    WHERE class='PHP'         AND 
+          return IS NOT NULL $where
+    GROUP BY return
 SQL;
         $res = $this->sqlite->query($query);
 

@@ -71,7 +71,7 @@ class Strval extends Plugin {
             case 'String' :
             case 'Identifier': // Nsname creates a fatal error
                 if (empty($extra)) {
-                    $atom->noDelimiter = (string) trimOnce($atom->code);
+                    $atom->noDelimiter = trimOnce($atom->code);
                 } else {
                     $noDelimiters = array_column($extras, 'noDelimiter');
                     $atom->noDelimiter = implode('', $noDelimiters);
