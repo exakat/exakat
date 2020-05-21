@@ -32,14 +32,14 @@ class UselessCasting extends Analyzer {
 
     public function analyze() {
         // Function returning a type, then casted to that type
-        $casts = array('T_STRING_CAST'  => array('string', 'array'),
+        $casts = array('T_STRING_CAST'  => 'string',
                        'T_BOOL_CAST'    => 'bool',
                        'T_INT_CAST'     => 'int',
                        'T_ARRAY_CAST'   => 'array',
                        'T_DOUBLE_CAST'  => 'float'
                   );
 
-        $returnTypes = $this->methods->getFunctionsByReturn();
+        $returnTypes = $this->methods->getFunctionsByReturn(true);
 
         foreach($casts as $token => $type) {
             if (is_array($type)) {
@@ -54,6 +54,7 @@ class UselessCasting extends Analyzer {
 
             // native PHP functions
             $this->atomIs('Cast')
+                 ->analyzerIsNot('self')
                  ->tokenIs($token)
                  ->outIs('CAST')
                  ->outIsIE('CODE') // In case there are some parenthesis
@@ -64,11 +65,18 @@ class UselessCasting extends Analyzer {
 
             // custom user methods
             $this->atomIs('Cast')
+                 ->analyzerIsNot('self')
                  ->tokenIs($token)
                  ->outIs('CAST')
                  ->outIsIE('CODE') // In case there are some parenthesis
                  ->atomIs(self::CALLS)
                  ->inIs('DEFINITION')
+                 ->not(
+                    $this->side()
+                         ->outIs('RETURNTYPE')
+                         ->count()
+                         ->isMore(1)
+                 )
                  ->outIs('RETURNTYPE')
                  ->is('fullnspath', makeFullnspath($type))
                  ->back('first');
