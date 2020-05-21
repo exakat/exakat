@@ -31,7 +31,7 @@ class AddZero extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $x += 0
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='), self::TRANSLATE, self::CASE_SENSITIVE)

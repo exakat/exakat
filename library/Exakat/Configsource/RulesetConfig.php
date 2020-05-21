@@ -25,17 +25,22 @@ namespace Exakat\Configsource;
 class RulesetConfig extends Config {
     private $remoteIniFile = false;
 
-    public function __construct($exakat_root) {
+    public function __construct(string $exakat_root) {
+        // Normal case : rulesets.ini
         $this->remoteIniFile = "{$exakat_root}/config/rulesets.ini";
-
-        if (!file_exists($this->remoteIniFile) &&
-            file_exists("{$exakat_root}/config/themes.ini")) {
-            display("Warning : themes.ini is obsolete, and will be replaced by rulesets.ini. Please, rename it.\n");
-
-            $this->remoteIniFile = "{$exakat_root}/config/themes.ini";
-        } else {
-            $this->remoteIniFile = false;
+        if (file_exists($this->remoteIniFile)) {
+            return;
         }
+
+        // Old case : rulesets.ini
+        $this->remoteIniFile = "{$exakat_root}/config/themes.ini";
+        if (file_exists($this->remoteIniFile)) {
+            display("Warning : config/themes.ini is obsolete, and will be replaced by config/rulesets.ini. Please, rename it.\n");
+
+            return;
+        }
+
+        $this->remoteIniFile = false;
     }
 
     public function loadConfig($project) {

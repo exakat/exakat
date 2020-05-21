@@ -45,7 +45,7 @@ class CreateDefaultValues extends Complete {
              ->inIs('LEFT')
              ->atomIs('Assignation', self::WITHOUT_CONSTANTS)
              ->codeIs(array('=', '??='), self::TRANSLATE, self::CASE_SENSITIVE) // can't accept .=, +=, etc.
-             
+
              // doesn't use self
              ->followParAs('RIGHT')
              ->not(

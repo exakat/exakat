@@ -260,7 +260,7 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
     }
 
-    public static function findFiles($path, &$files, &$ignoredFiles, $config) {
+    public static function findFiles(string $path, array &$files, array &$ignoredFiles, Config $config) {
         $ignore_dirs = $config->ignore_dirs;
 
         $ignore_files = parse_ini_file("{$config->dir_root}/data/ignore_files.ini");

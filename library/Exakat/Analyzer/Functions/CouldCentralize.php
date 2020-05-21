@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldCentralize extends Analyzer {
     protected $centralizeThreshold = 8;
-    
+
     // Looking for calls to function with identical literals
     public function analyze() {
         $excluded = array('\\\\defined',
@@ -41,7 +41,7 @@ class CouldCentralize extends Analyzer {
                  ->outWithRank('ARGUMENT', $i)
                  ->atomIs(array('String', 'Integer', 'Null', 'Boolean', 'Float'))
                  ->savePropertyAs('fullcode', 'arg')
-                 ->raw('groupCount("m").by{f + ", " + arg;}.cap("m").next().findAll {a,b -> b > '.$this->centralizeThreshold.'}.keySet()');
+                 ->raw('groupCount("m").by{f + ", " + arg;}.cap("m").next().findAll {a,b -> b > ' . $this->centralizeThreshold . '}.keySet()');
             $res = $this->rawQuery();
 
             if (empty($res)) {
@@ -70,9 +70,9 @@ class CouldCentralize extends Analyzer {
             ->outWithRank('ARGUMENT', 0)
             ->atomIs(array('String', 'Integer', 'Null', 'Boolean', 'Float'))
             ->savePropertyAs('fullcode', 'arg')
-            ->raw('groupCount("m").by{arg;}.cap("m").next().findAll {a,b -> b > '.$this->centralizeThreshold.'}.keySet()');
+            ->raw('groupCount("m").by{arg;}.cap("m").next().findAll {a,b -> b > ' . $this->centralizeThreshold . '}.keySet()');
        $res = $this->rawQuery();
-       
+
        if (!empty($res)) {
            $this->atomIs('Exit')
                 ->outWithRank('ARGUMENT', 0)

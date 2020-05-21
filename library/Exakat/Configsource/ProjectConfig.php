@@ -71,6 +71,7 @@ class ProjectConfig extends Config {
                                                              '/version',
                                                              '/var',
                                                             ),
+                                'stubs'              => array(),
                               );
 
     public function __construct($projects_root) {
@@ -176,10 +177,47 @@ class ProjectConfig extends Config {
             $this->config['git'] = false; // remove Git, which is by default
             $this->config[$this->config['project_vcs']] = true; // potentially, revert git
         }
+        
+        // Calculate the stubs recursivement if it is a folder
+        // all path are relative to the project_dir/code, cannot be outside.
+        $stubs = array();
+        $code_dir="{$this->projects_root}{$project}/code/";
+        $this->config['stubs'] = makeArray($this->config['stubs']);
+        foreach($this->config['stubs'] as $stub) {
+            $d = getcwd();
+            $path = realpath($code_dir.$stub);
+
+            if ($path === false) {
+                continue;
+            }
+
+            if (!file_exists($path)) {
+                $stubs[$stub] = array();
+
+                continue;
+            }
+
+            if (is_file($path)) {
+                $stubs[$stub] = array($stub);
+
+                continue;
+            }
+
+            if (is_dir($path)) {
+                chdir($path);
+                $allFiles = rglob('.');
+                $allFiles = array_map(function ($path) use ($stub) { return $stub.ltrim($path, '.'); }, $allFiles);
+                chdir($d);
+            
+                $stubs[$stub] = $allFiles;
+            }
+        }
+        $this->config['stubs'] = array_unique(array_merge(...array_values($stubs)));
 
         return "$project/config.ini";
     }
 
+    // requiered for Init Project
     public function setConfig($name, $value) {
         $this->config[$name] = $value;
     }

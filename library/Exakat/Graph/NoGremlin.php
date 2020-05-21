@@ -33,13 +33,13 @@ class NoGremlin extends Graph {
         return new GraphResults();
     }
 
-    public function init() : void {
+    public function init(): void {
     }
 
-    public function start() : void {
+    public function start(): void {
     }
 
-    public function stop() : void {
+    public function stop(): void {
     }
 
     public function serverInfo() {
@@ -58,7 +58,7 @@ class NoGremlin extends Graph {
         return 'PRAGMA no_sql;';
     }
 
-    public function getInfo() : array {
+    public function getInfo(): array {
         return array('installed' => 'Always',
                     );
     }

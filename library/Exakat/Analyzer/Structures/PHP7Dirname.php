@@ -27,14 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class PHP7Dirname extends Analyzer {
     protected $phpVersion = '7.0+';
-    
+
     // dirname(dirname($path))
     public function analyze() {
         $this->atomFunctionIs('\\dirname')
              ->not(
                 $this->side()
                      ->inIs('ARGUMENT')
-                     ->fullnspathIs("\\dirname")
+                     ->fullnspathIs('\\dirname')
              )
              ->noChildWithRank('ARGUMENT', 1)
              ->outWithRank('ARGUMENT', 0)

@@ -174,7 +174,7 @@ class Config extends Configsource {
             $this->remotes = $remote->toArray();
         }
 
-        $rulesets = new RulesetConfig($this->projects_root);
+        $rulesets = new RulesetConfig($this->dir_root);
         if ($file = $rulesets->loadConfig($this->commandLineConfig->get('project'))) {
             $this->configFiles[] = $file;
             $this->rulesets = $rulesets->toArray();
@@ -187,6 +187,10 @@ class Config extends Configsource {
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();
         }
+
+        $this->config['stubs'] = array_unique(array_merge($this->projectConfig->toArray()['stubs'] ?? array(),
+                                                          $this->exakatConfig->toArray()['stubs']  ?? array(),
+                                            ));
 
         // autoload dev
         $this->dev = new AutoloadDev($this->extension_dev);

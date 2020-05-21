@@ -31,21 +31,21 @@ class QueryDoc {
     private $arguments = null;
     private $query = null;
     private $stats = array();
-    
+
     private $steps = array();
 
     private $cursor    = 1;
     private $cursors   = array();
     private $nodes     = array(1=> 'root');
     private $links     = array();
-    private $labels    = array('first' => 1,);
+    private $labels    = array('first' => 1, );
 
     public function __construct() {    }
 
     public function __call($name, $args) {
         if (in_array($name, array('not', 'filter'))) {
             $chain = $this->prepareSide();
-            $this->steps[] = $name.'[ '.$chain.' ]';
+            $this->steps[] = $name . '[ ' . $chain . ' ]';
             print "$name\n";
 
             $next = array_pop($this->head);
@@ -57,12 +57,12 @@ class QueryDoc {
         } elseif (in_array($name, array('back'))) {
             $this->steps[] = $name;
             print "$name\n";
-            
+
             $this->cursor = $this->labels[$args[0]];
         } elseif (in_array($name, array('as'))) {
             $this->steps[] = $name;
             print "$name\n";
-            
+
             $this->labels[$args[0]] = $this->cursor;
         } else {
             $this->steps[] = $name;
@@ -76,15 +76,15 @@ class QueryDoc {
 
 
         $this->stats[$name] = ($this->stats[$name] ?? 0) + 1;
-        
+
     }
 
     public function side(): self {
         $this->sides[] = $this->steps;
         $this->steps = array('side');
-        
+
         $this->cursors[] = $this->cursor;
-        $this->nodes[] = "Node SIDE";
+        $this->nodes[] = 'Node SIDE';
         $next = count($this->nodes);
         $this->head[]    = $next;
         $this->cursor    = $next;
@@ -247,13 +247,13 @@ GREMLIN;
     public function canSkip(): bool {
         return $this->stopped !== self::QUERY_RUNNING;
     }
-    
-    public function display() : void {
-        print '('.implode('-', $this->steps).')';
-        
+
+    public function display(): void {
+        print '(' . implode('-', $this->steps) . ')';
+
 //        print_r($this->stats);
         $graph = array();
-        
+
         foreach($this->nodes as $id => $node) {
             $graph[] = "$id [label=\"$node\"];\n";
         }
@@ -261,8 +261,8 @@ GREMLIN;
         foreach($this->links as list($a, $b, $label)) {
             $graph[] = "$a -> $b [label = \"$label\"];\n";
         }
-        
-        file_put_contents('/tmp/docs.dot', "digraph{ ".implode('', $graph)."}");
+
+        file_put_contents('/tmp/docs.dot', 'digraph{ ' . implode('', $graph) . '}');
     }
 }
 ?>

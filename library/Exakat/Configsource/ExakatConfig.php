@@ -138,6 +138,45 @@ class ExakatConfig extends Config {
             $this->config['parallel_processing'] = ((bool) $this->config['parallel_processing']) && function_exists('pcntl_fork');
         }
 
+        // Calculate the stubs recursivement if it is a folder
+        // all path are absolute, may be placed anywhere
+        if (!isset($this->config['stubs'])) {
+            $this->config['stubs'] = array();
+        } else {
+            $stubs = array();
+            $this->config['stubs'] = makeArray($this->config['stubs']);
+            foreach($this->config['stubs'] as $stub) {
+                $d = getcwd();
+                $path = realpath($stub);
+
+                if ($path === false) {
+                    continue;
+                }
+
+                if (!file_exists($path)) {
+                    $stubs[$stub] = array();
+    
+                    continue;
+                }
+    
+                if (is_file($path)) {
+                    $stubs[$stub] = array($stub);
+    
+                    continue;
+                }
+    
+                if (is_dir($path)) {
+                    chdir($path);
+                    $allFiles = rglob('.');
+                    $allFiles = array_map(function ($path) use ($stub) { return $stub.ltrim($path, '.'); }, $allFiles);
+                    chdir($d);
+                
+                    $stubs[$stub] = $allFiles;
+                }
+            }
+            $this->config['stubs'] = array_unique(array_merge(...array_values($stubs))); 
+        }
+
         return str_replace(getcwd(), '.', $configFile);
     }
 }

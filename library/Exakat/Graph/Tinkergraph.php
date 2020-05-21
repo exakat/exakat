@@ -65,7 +65,7 @@ class Tinkergraph extends Graph {
         $this->db->open();
     }
 
-    public function getInfo() : array {
+    public function getInfo(): array {
         $stats = array();
 
         if (empty($this->config->tinkergraphv3_folder)) {
@@ -163,7 +163,7 @@ class Tinkergraph extends Graph {
         $this->start();
     }
 
-    public function start() : void {
+    public function start(): void {
         if (!file_exists("{$this->config->tinkergraph_folder}/conf")) {
             throw new GremlinException('No tinkgergraph configuration folder found.');
         }
@@ -173,7 +173,7 @@ class Tinkergraph extends Graph {
                  "{$this->config->tinkergraph_folder}/conf/tinkergraph.{$this->gremlinVersion}.yaml");
         }
 
-        if (in_array($this->gremlinVersion, array('3.3', '3.4'), true)) {
+        if (in_array($this->gremlinVersion, array('3.3', '3.4'), STRICT_COMPARISON)) {
             putenv("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
             exec("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
@@ -207,7 +207,7 @@ class Tinkergraph extends Graph {
         display('started [' . $pid . '] in ' . number_format(($e - $b) * 1000, 2) . ' ms' );
     }
 
-    public function stop() : void {
+    public function stop(): void {
         if (file_exists("{$this->config->tinkergraph_folder}/db/gremlin.pid")) {
             display("stop gremlin server {$this->gremlinVersion}");
             putenv("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml");

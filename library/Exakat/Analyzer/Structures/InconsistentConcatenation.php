@@ -33,7 +33,7 @@ class InconsistentConcatenation extends Analyzer {
              ->filter(
                 $this->side()
                      ->outIs('CONCAT')
-                     ->atomIs(array("Variable", "Array", "Member"))
+                     ->atomIs(array('Variable', 'Array', 'Member'))
              )
              ->outIs('CONCAT')
              ->atomIs('String')

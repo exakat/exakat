@@ -30,7 +30,7 @@ class OnlyStaticMethods extends Analyzer {
         // class x { static function foo() {} }
         $this->atomIs('Class')
              // Avoid empty classes
-             ->hasOut(array("METHOD", "PPP", "USE", "CONST"))
+             ->hasOut(array('METHOD', 'PPP', 'USE', 'CONST'))
              //There are static methods
              ->filter(
                 $this->side()

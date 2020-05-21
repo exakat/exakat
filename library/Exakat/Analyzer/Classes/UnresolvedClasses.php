@@ -43,7 +43,7 @@ class UnresolvedClasses extends Analyzer {
 
         $traits = $this->loadIni('php_traits.ini', 'traits');
         $traits = makeFullNsPath($traits);
-        
+
         $cit = array_values(array_merge($classes, $interfaces, $traits));
 
         $this->atomIs('New')

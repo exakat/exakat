@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Exakat\Graph\Helpers;
 
@@ -31,41 +31,41 @@ class GraphsonV3 implements SerializerInterface
     /**
      * @var array The native supported types that the serializer can convert to graphson
      */
-    protected static $supportedFromTypes = [
-        "string",
-        "boolean",
-        "double",
-        "integer",
-        "array",
-        "object",
-        "NULL",
-    ];
+    protected static $supportedFromTypes = array(
+        'string',
+        'boolean',
+        'double',
+        'integer',
+        'array',
+        'object',
+        'NULL',
+    );
 
     /**
      * @var array The GraphSON supported types that the serializer can deconvert from
      */
-    protected static $supportedGSTypes = [
-        "g:Int32",
-        "g:Int64",
-        "g:Date",
-        "g:Timestamp",
-        "g:UUID",
-        "g:Float",
-        "g:Double",
-        "g:List",
-        "g:Map",
-        "g:Set",
-        "g:Class",
-        "g:Path",
-        "g:Tree",
-        "g:Vertex",
-        "g:VertexProperty",
-        "tinker:graph",
-        "g:Edge",
-        "g:Property",
-        "g:T",
-        "gx:BigDecimal",
-    ];
+    protected static $supportedGSTypes = array(
+        'g:Int32',
+        'g:Int64',
+        'g:Date',
+        'g:Timestamp',
+        'g:UUID',
+        'g:Float',
+        'g:Double',
+        'g:List',
+        'g:Map',
+        'g:Set',
+        'g:Class',
+        'g:Path',
+        'g:Tree',
+        'g:Vertex',
+        'g:VertexProperty',
+        'tinker:graph',
+        'g:Edge',
+        'g:Property',
+        'g:T',
+        'gx:BigDecimal',
+    );
 
     /**
      * Serializes the data
@@ -79,7 +79,7 @@ class GraphsonV3 implements SerializerInterface
     {
         //convert the array into the correct format
         $data = $this->convert($data);
-        $jsonEncoder = new Json;
+        $jsonEncoder = new Json();
 
         return $jsonEncoder->serialize($data);
     }
@@ -131,17 +131,17 @@ class GraphsonV3 implements SerializerInterface
      */
     public function convert($item)
     {
-        $converted = [];
+        $converted = array();
         $type = gettype($item);
         if(in_array($type, self::$supportedFromTypes))
         {
             //use the type name to run the proper method
-            $method = "convert" . ucfirst($type);
+            $method = 'convert' . ucfirst($type);
             $converted = $this->$method($item);
         }
         else
         {
-            throw new InternalException("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ")", 500);
+            throw new InternalException("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
         }
 
         return $converted;
@@ -168,15 +168,15 @@ class GraphsonV3 implements SerializerInterface
      */
     public function convertInteger($int)
     {
-        $intSize = [
-            4 => "g:Int32",
-            8 => "g:Int64",
-        ];
+        $intSize = array(
+            4 => 'g:Int32',
+            8 => 'g:Int64',
+        );
 
-        return [
-            "@type"  => $intSize[PHP_INT_SIZE],
-            "@value" => $int,
-        ];
+        return array(
+            '@type'  => $intSize[PHP_INT_SIZE],
+            '@value' => $int,
+        );
     }
 
     /**
@@ -200,10 +200,10 @@ class GraphsonV3 implements SerializerInterface
      */
     public function convertDouble($double)
     {
-        return [
-            "@type"  => "g:Double",
-            "@value" => $double,
-        ];
+        return array(
+            '@type'  => 'g:Double',
+            '@value' => $double,
+        );
     }
 
     /**
@@ -244,14 +244,14 @@ class GraphsonV3 implements SerializerInterface
      */
     public function convertList($array)
     {
-        $converted = [
-            "@type"  => "g:List",
-            "@value" => [],
-        ];
+        $converted = array(
+            '@type'  => 'g:List',
+            '@value' => array(),
+        );
 
         foreach($array as $value)
         {
-            $converted["@value"][] = $this->convert($value);
+            $converted['@value'][] = $this->convert($value);
         }
 
         return $converted;
@@ -267,14 +267,14 @@ class GraphsonV3 implements SerializerInterface
      */
     public function convertMap($array)
     {
-        $converted = [
-            "@type"  => "g:Map",
-            "@value" => [],
-        ];
+        $converted = array(
+            '@type'  => 'g:Map',
+            '@value' => array(),
+        );
         foreach($array as $key => $value)
         {
-            $converted["@value"][] = $this->convert($key);
-            $converted["@value"][] = $this->convert($value);
+            $converted['@value'][] = $this->convert($key);
+            $converted['@value'][] = $this->convert($value);
         }
 
         return $converted;
@@ -293,7 +293,7 @@ class GraphsonV3 implements SerializerInterface
     {
         if($object instanceof RequestMessage)
         {
-            $converted = [];
+            $converted = array();
             foreach($object->jsonSerialize() as $key => $value)
             {
                 $converted[$key] = $this->convert($value);
@@ -303,7 +303,7 @@ class GraphsonV3 implements SerializerInterface
         }
         else
         {
-            throw new InternalException("Objects other than RequestMessage aren't currently supported by the " . self::$name . " serializer (" . __CLASS__ . "). Error produced by: " . get_class($object), 500);
+            throw new InternalException("Objects other than RequestMessage aren't currently supported by the " . self::$name . ' serializer (' . __CLASS__ . '). Error produced by: ' . get_class($object), 500);
         }
     }
 
@@ -317,20 +317,20 @@ class GraphsonV3 implements SerializerInterface
      */
     public function deconvert($item)
     {
-        $deconverted = [];
+        $deconverted = array();
 
-        if(is_array($item) && isset($item["@type"]) && in_array($item["@type"], self::$supportedGSTypes))
+        if(is_array($item) && isset($item['@type']) && in_array($item['@type'], self::$supportedGSTypes))
         {
             //type exists in array and is found in our supported types
-            $method = "deconvert" . ucfirst(str_replace(["g:", "gx:", ":"], "", $item["@type"]));
-            $deconverted = $this->$method($item["@value"]);
+            $method = 'deconvert' . ucfirst(str_replace(array('g:', 'gx:', ':'), '', $item['@type']));
+            $deconverted = $this->$method($item['@value']);
         }
-        elseif(is_array($item) && isset($item["@type"]) && !in_array($item["@type"], self::$supportedGSTypes))
+        elseif(is_array($item) && isset($item['@type']) && !in_array($item['@type'], self::$supportedGSTypes))
         {
             //type exists in array but is not currently supported
-            throw new InternalException("Item type '{$item["@type"]}' is not currently supported by the serializer (" . __CLASS__ . ")", 500);
+            throw new InternalException("Item type '{$item['@type']}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
         }
-        elseif(is_array($item) && !isset($item["@type"]))
+        elseif(is_array($item) && !isset($item['@type']))
         {
             //regular array, just pass it along
             foreach($item as $key => $value)
@@ -383,7 +383,7 @@ class GraphsonV3 implements SerializerInterface
     {
         if(PHP_INT_SIZE == 4)
         {
-            throw new InternalException("You are running a 32bit PHP and cannot convert the 64bit Int provided in the GraphSON 3.0");
+            throw new InternalException('You are running a 32bit PHP and cannot convert the 64bit Int provided in the GraphSON 3.0');
         }
 
         return $int;
@@ -459,7 +459,7 @@ class GraphsonV3 implements SerializerInterface
      */
     public function deconvertList($list)
     {
-        $deconverted = [];
+        $deconverted = array();
         foreach($list as $value)
         {
             $deconverted[] = $this->deconvert($value);
@@ -492,14 +492,14 @@ class GraphsonV3 implements SerializerInterface
     public function deconvertMap($map)
     {
         if (empty($map)) {
-            return [];
+            return array();
         }
 
-        $deconverted = [];
+        $deconverted = array();
 
         if(count($map) % 2 != 0)
         {
-            throw new InternalException("Failed to deconvert Map item from graphson 3.0. Odd number of elements found (should be even)", 500);
+            throw new InternalException('Failed to deconvert Map item from graphson 3.0. Odd number of elements found (should be even)', 500);
         }
 
         $i = 0;
@@ -511,10 +511,10 @@ class GraphsonV3 implements SerializerInterface
             if(!is_numeric($key) && !is_string($key))
             {
 
-                throw new InternalException("Failed to deconvert Map item from graphson 3.0. A key was of type [" . gettype($key) . "], only Integers and Strings are supported", 500);
+                throw new InternalException('Failed to deconvert Map item from graphson 3.0. A key was of type [' . gettype($key) . '], only Integers and Strings are supported', 500);
             }
             $deconverted[$key] = $value;
-            
+
             ++$i;
         }
 
@@ -583,13 +583,13 @@ class GraphsonV3 implements SerializerInterface
      */
     public function deconvertTree($tree)
     {
-        $deconvert = [];
+        $deconvert = array();
         $result = $this->deconvert($tree);
         foreach($result as $value)
         {
-            if(isset($value["key"]) && isset($value["key"]["id"]))
+            if(isset($value['key']) && isset($value['key']['id']))
             {
-                $deconvert[$value["key"]["id"]] = $value;
+                $deconvert[$value['key']['id']] = $value;
             }
             else
                 $deconvert[] = $value;
@@ -621,7 +621,7 @@ class GraphsonV3 implements SerializerInterface
      */
     public function deconvertVertex($vertex)
     {
-        $vertex["type"] = "vertex";
+        $vertex['type'] = 'vertex';
 
         return $this->deconvert($vertex);
     }
@@ -636,7 +636,7 @@ class GraphsonV3 implements SerializerInterface
      */
     public function deconvertEdge($edge)
     {
-        $edge["type"] = "edge";
+        $edge['type'] = 'edge';
 
         return $this->deconvert($edge);
     }
@@ -689,7 +689,7 @@ class Json implements SerializerInterface
      */
     public function unserialize($data)
     {
-        $mssg = json_decode($data, TRUE, JSON_UNESCAPED_UNICODE);
+        $mssg = json_decode($data, true, JSON_UNESCAPED_UNICODE);
 
         return $mssg;
     }

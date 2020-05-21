@@ -42,15 +42,15 @@ abstract class Graph {
 
     abstract public function queryOne(string $query, array $params = array(),array $load = array()): GraphResults;
 
-    abstract public function init() : void;
+    abstract public function init(): void;
 
-    abstract public function getInfo() : array;
+    abstract public function getInfo(): array;
 
-    abstract public function start() : void;
+    abstract public function start(): void;
 
-    abstract public function stop() : void;
+    abstract public function stop(): void;
 
-    public function restart() : void {
+    public function restart(): void {
         $this->stop();
         $this->start();
     }
@@ -72,7 +72,7 @@ abstract class Graph {
         return $id;
     }
 
-    public static function getConnexion(string $gremlin = null) : self {
+    public static function getConnexion(string $gremlin = null): self {
         if ($gremlin === null) {
             $config = exakat('config');
             $gremlin = $config->gremlin;

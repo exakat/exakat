@@ -34,7 +34,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
     public function __construct($data = null) {
         // Case of empty result set.
-        
+
 //        print "\nExtracted from JSON\n";
 //        var_dump($data);
 //        print "\nExtracted from JSON------\n";
@@ -129,7 +129,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         $this->data = $result;
     }
 
-    public function toArray() : array {
+    public function toArray(): array {
         if ($this->type === self::EMPTY) {
             return array();
         } else {

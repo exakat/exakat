@@ -39,7 +39,7 @@ class GSNeo4j extends Graph {
 
     private $gremlinVersion = '3.4';
 
-    public function getInfo() : array {
+    public function getInfo(): array {
         $stats = array();
 
         if (empty($this->config->gsneo4j_folder)) {
@@ -80,7 +80,7 @@ class GSNeo4j extends Graph {
         return $stats;
     }
 
-    public function init() : void {
+    public function init(): void {
         if (!file_exists("{$this->config->gsneo4j_folder}/lib/")) {
             // No local production, just skip init.
             $this->status = self::UNAVAILABLE;
@@ -183,7 +183,7 @@ class GSNeo4j extends Graph {
         $this->start();
     }
 
-    public function start() : void {
+    public function start(): void {
         if (!file_exists("{$this->config->gsneo4j_folder}/conf")) {
             throw new GremlinException('No graphdb found.');
         }
@@ -235,7 +235,7 @@ class GSNeo4j extends Graph {
         display("started [$pid] in $ms ms");
     }
 
-    public function stop() : void {
+    public function stop(): void {
         if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
             display('stop gremlin server 3.3.x');
             putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');

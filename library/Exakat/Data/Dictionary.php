@@ -23,7 +23,6 @@ declare(strict_types = 1);
 
 namespace Exakat\Data;
 
-use Exakat\Datastore;
 
 class Dictionary {
     const CASE_SENSITIVE   = true;

@@ -38,7 +38,7 @@ class NoNeedForElse extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('EXPRESSION')
-                     ->atomIs(array("Return", "Break", "Continue"))
+                     ->atomIs(array('Return', 'Break', 'Continue'))
              )
              ->back('first');
         $this->prepareQuery();
@@ -54,7 +54,7 @@ class NoNeedForElse extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('EXPRESSION')
-                     ->atomIs(array("Return", "Break", "Continue"))
+                     ->atomIs(array('Return', 'Break', 'Continue'))
              )
              ->back('first');
         $this->prepareQuery();

@@ -534,7 +534,8 @@ class Load extends Tasks {
             throw new NoFileToProcess($project, "No file to load.\n");
         }
 
-        $omittedFiles = $this->datastore->getCol('ignoredFiles', 'file');
+//        $omittedFiles = $this->datastore->getCol('ignoredFiles', 'file');
+        $omittedFiles = $this->config->stubs;
 
         if ($this->config->parallel_processing === true) {
             display('Parallel processing');
@@ -1344,7 +1345,7 @@ class Load extends Tasks {
                                ),
                             \STRICT_COMPARISON)) {
                 $atom = 'Magicmethod';
-                
+
             } else {
                 $atom = 'Method';
             }
@@ -1498,7 +1499,7 @@ class Load extends Tasks {
             // double call for internal reference
             $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
         } elseif ($function->atom === 'Magicmethod') {
-            if (mb_strtolower($this->tokens[$current + 1][1]) === '__construct' && 
+            if (mb_strtolower($this->tokens[$current + 1][1]) === '__construct' &&
                 end($this->currentClassTrait)->atom === 'Classanonymous') {
                     $this->addLink(end($this->currentClassTrait), $function, 'DEFINITION');
             }
@@ -3139,7 +3140,7 @@ class Load extends Tasks {
                 $this->currentProperties[$element->propertyname] = $element;
 
                 $currentFNP = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
-                $this->calls->addDefinition('staticproperty', $currentFNP . "::" . $element->code, $element);
+                $this->calls->addDefinition('staticproperty', $currentFNP . '::' . $element->code, $element);
                 $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
             }
 

@@ -121,6 +121,8 @@ class DotExakatYamlConfig extends Config {
                            'project_description' => '',
                            'project_branch'      => '',
                            'project_tag'         => '',
+                           
+                           'stubs'               => array(),
 
                         );
 
@@ -190,6 +192,41 @@ class DotExakatYamlConfig extends Config {
         if (!empty($tmp_config)) {
             display('Ignoring ' . count($tmp_config) . ' unkown directives : ' . implode(', ', array_keys($tmp_config)));
         }
+
+        // Collect stubs. Stubs MUST be in the same code repository, so they are chrooted with the current directory.
+        $stubs = array();
+        $code_dir = getcwd();
+        $this->config['stubs'] = makeArray($this->config['stubs']);
+        foreach($this->config['stubs'] as $stub) {
+            $d = getcwd();
+            $path = realpath($code_dir.$stub);
+            if ($path === false) {
+                continue;
+            }
+
+            if (!file_exists($path)) {
+                $stubs[$stub] = array();
+
+                continue;
+            }
+
+            if (is_file($path)) {
+                $stubs[$stub] = array($stub);
+
+                continue;
+            }
+
+            if (is_dir($path)) {
+                chdir($path);
+                $allFiles = rglob('.');
+                $allFiles = array_map(function ($path) use ($stub) { return $stub.ltrim($path, '.'); }, $allFiles);
+                chdir($d);
+            
+                $stubs[$stub] = $allFiles;
+            }
+        }
+        $this->config['stubs'] = array_unique(array_merge(...array_values($stubs)));
+        print_r($this->config['stubs']);
 
         return self::YAML_FILE;
     }

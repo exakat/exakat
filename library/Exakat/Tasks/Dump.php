@@ -1158,7 +1158,7 @@ GREMLIN
                 }
                 $ns = preg_grep('%^' . addslashes($n) . '$%i', array_keys($namespacesId));
                 $k = array_pop($ns);
-                
+
                 if (empty($k) || !isset($namespacesId[$k])) {
                     print_r(array_keys($namespacesId));
                     print_r($k);

@@ -24,7 +24,6 @@ namespace Exakat\Graph;
 
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
-use Exakat\Exceptions\UnknownGremlinException;
 use Brightzone\GremlinDriver\Connection;
 
 class TinkergraphV3 extends Graph {
@@ -60,8 +59,8 @@ class TinkergraphV3 extends Graph {
         $this->db->message->registerSerializer('\Exakat\Graph\Helpers\GraphsonV3', true);
         $this->status = self::UNCHECKED;
     }
-    
-    public function getInfo() : array {
+
+    public function getInfo(): array {
         $stats = array();
 
         if (empty($this->config->tinkergraphv3_folder)) {
@@ -146,7 +145,7 @@ class TinkergraphV3 extends Graph {
         $this->start();
     }
 
-    public function start() : void {
+    public function start(): void {
         if (!file_exists("{$this->config->tinkergraphv3_folder}/conf")) {
             throw new GremlinException('No tinkgergraph configuration folder found.');
         }
@@ -188,7 +187,7 @@ class TinkergraphV3 extends Graph {
         display('started [' . $pid . '] in ' . number_format(($e - $b) * 1000, 2) . ' ms' );
     }
 
-    public function stop() : void {
+    public function stop(): void {
         if (file_exists("{$this->config->tinkergraphv3_folder}/db/gremlin.pid")) {
             display("stop gremlin server {$this->gremlinVersion}");
             putenv("GREMLIN_YAML=conf/tinkergraphv3.{$this->gremlinVersion}.yaml");
