@@ -38,6 +38,7 @@ class DatastoreConfig extends Config {
     protected $project_tag         = '';
     protected $project             = '';
     protected $file_extensions     = array();
+    protected $stubs               = array();
 
     protected $options = array('phpversion'          => '',
                                'project_name'        => '',
@@ -64,6 +65,7 @@ class DatastoreConfig extends Config {
         $this->ignore_dirs           = json_decode($this->datastore->getHash('ignore_dirs')     ?? "[]");
         $this->include_dirs          = json_decode($this->datastore->getHash('include_dirs')    ?? "[]");
         $this->file_extensions       = json_decode($this->datastore->getHash('file_extensions') ?? '[]');
+        $this->stubs                 = json_decode($this->datastore->getHash('stubs_config')    ?? '[]');
 
         $this->project_name        = $this->datastore->getHash('project');
         $this->project_url         = $this->datastore->getHash('vcs_url');
@@ -72,15 +74,8 @@ class DatastoreConfig extends Config {
         $this->project_branch      = $this->datastore->getHash('vcs_branch');
         $this->project_tag         = $this->datastore->getHash('vcs_tag');
 
-
         return "datastore";
     }
-
-    public function setConfig($name, $value) {
-        $this->config[$name] = $value;
-    }
-
-    public function getConfig($dir_root = '') {}
 }
 
 ?>

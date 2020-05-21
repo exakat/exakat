@@ -116,11 +116,13 @@ class Project extends Tasks {
                 $this->getLineDiff($info['vcs_revision'], $vcs);
             }
         }
+
+        $info['stubs_config'] = json_encode($this->config->stubs);
         $this->datastore->addRow('hash', $info);
 
         $rulesetsToRun = array($this->config->project_rulesets);
-        $reportToRun = array();
-        $namesToRun  = array();
+        $reportToRun   = array();
+        $namesToRun    = array();
 
         foreach($this->reports as $format) {
             try {

@@ -55,7 +55,7 @@ use Exakat\Loader\Collector;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
-
+    
     private $SCALAR_TYPE = array('int',
                                  'bool',
                                  'void',
@@ -196,6 +196,12 @@ class Load extends Tasks {
     const RELATED_BLOCK            = false;
 
     const NO_NAMESPACE = '';
+
+    const CASE_SENSITIVE         = true;
+    const CASE_INSENSITIVE       = false;
+
+    const COMPILE_CHECK    = true;
+    const COMPILE_NO_CHECK = false;
 
     private $contexts              = null;
 
@@ -534,14 +540,13 @@ class Load extends Tasks {
             throw new NoFileToProcess($project, "No file to load.\n");
         }
 
-//        $omittedFiles = $this->datastore->getCol('ignoredFiles', 'file');
-        $omittedFiles = $this->config->stubs;
+        $stubs = $this->config->stubs;
 
         if ($this->config->parallel_processing === true) {
             display('Parallel processing');
             $pid = pcntl_fork();
             if ($pid === 0 ) {
-                $this->runCollector($omittedFiles);
+                $this->runCollector($stubs);
                 display('Child finished working');
                 exit(0);
             } else {
@@ -556,7 +561,7 @@ class Load extends Tasks {
             }
         } else {
             display('Sequential processing');
-            $this->runCollector($omittedFiles);
+            $this->runCollector($stubs);
 
             $this->gremlin = Graph::getConnexion();
 
@@ -619,7 +624,7 @@ class Load extends Tasks {
                     continue;
                 }
 
-                $this->processFile($file, $this->config->code_dir);
+                $this->processFile($file, $this->config->code_dir, self::COMPILE_NO_CHECK);
             } catch (NoFileToProcess $e2) {
                 // Ignore
             }
@@ -739,7 +744,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processFile(string $filename, string $path): int {
+    private function processFile(string $filename, string $path, bool $compileCheck = self::COMPILE_CHECK): int {
         $begin = microtime(\TIME_AS_NUMBER);
         $fullpath = $path . $filename;
 
@@ -758,7 +763,7 @@ class Load extends Tasks {
             throw new NoFileToProcess($filename, 'empty file');
         }
 
-        if (!$this->php->compile($fullpath)) {
+        if ($compileCheck === self::COMPILE_CHECK && !$this->php->compile($fullpath)) {
             $error = $this->php->getError();
             $error['file'] = $filename;
 
@@ -845,7 +850,9 @@ class Load extends Tasks {
             $this->addLink($id1, $sequence, 'FILE');
             $sequence->root = true;
         } catch (LoadError $e) {
-            $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
+            if ($compileCheck === self::COMPILE_CHECK) {
+                $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
+            }
             $this->reset();
             $this->calls->reset();
             throw new NoFileToProcess($filename, 'empty (1)', 0, $e);
@@ -854,7 +861,6 @@ class Load extends Tasks {
                 $this->checkTokens($filename);
                 $this->calls->save();
             } catch (LoadError $e) {
-//                print $e->getMessage();
                 $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (finally) (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
                 $this->reset();
                 $this->calls->reset();
@@ -2712,7 +2718,7 @@ class Load extends Tasks {
                                                ));
             ++$this->id; // Skip )
 
-            $this->processDefineAsConstants($namecall, $name, false);
+            $this->processDefineAsConstants($namecall, $name, self::CASE_INSENSITIVE);
 
             $this->checkExpression();
             return $namecall;
@@ -6000,7 +6006,7 @@ class Load extends Tasks {
         $this->calls->addDefinition('class', $fullnspathAlias, $argumentsId[1]);
     }
 
-    private function processDefineAsConstants(Atom $const, Atom $name, bool $case_insensitive = false): void {
+    private function processDefineAsConstants(Atom $const, Atom $name, bool $case_insensitive = self::CASE_INSENSITIVE): void {
         if (empty($name->noDelimiter)) {
             $name->fullnspath = '\\';
             return;

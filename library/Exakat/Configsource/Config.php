@@ -65,6 +65,17 @@ abstract class Config {
         $ini[] = 'file_extensions = "' . implode(',', $this->file_extensions) . '"';
         $ini[] = '';
 
+        $ini[] = ';Stub files and folders';
+        if (empty($this->stubs)) {
+            $ini[] = "stub[] = '';";
+        } else {
+            foreach($this->stubs as $stub) {
+                $ini[] = "stub[] = \"$stub\"";
+            }
+        
+        }
+        $ini[] = '';
+
         $ini[] = ';Description of the project';
         $ini[] = "project_name        = \"{$this->project_name}\";";
         $ini[] = "project_url         = \"{$this->project_url}\";";
@@ -98,6 +109,7 @@ abstract class Config {
                       'ignore_dirs'         => $this->ignore_dirs,
                       'include_dirs'        => $this->include_dirs,
                       'file_extensions'     => $this->file_extensions,
+                      'stub'                => $this->stubs,
                       'project_name'        => $this->project_name,
                       'project_url'         => $this->project_url,
                       'project_vcs'         => $this->project_vcs,
