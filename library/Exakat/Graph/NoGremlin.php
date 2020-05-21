@@ -58,10 +58,6 @@ class NoGremlin extends Graph {
         return 'PRAGMA no_sql;';
     }
 
-    public function resetConnection() {
-        return true;
-    }
-
     public function getInfo() : array {
         return array('installed' => 'Always',
                     );

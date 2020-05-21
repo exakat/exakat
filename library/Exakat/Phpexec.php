@@ -275,9 +275,10 @@ class Phpexec {
             $res = trim($res);
        }
 
-        $return = false;
         foreach(explode("\n", $res) as $r) {
-            if (empty($r)) { continue; }
+            if (empty($r)) { 
+                continue; 
+            }
 
             if ($this->isError($r)) {
                 return false;

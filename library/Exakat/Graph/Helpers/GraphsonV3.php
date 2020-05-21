@@ -231,7 +231,7 @@ class GraphsonV3 implements SerializerInterface
     {
         $isList = (empty($array) || array_keys($array) === range(0, count($array) - 1));
 
-        return ($isList ? $this->convertList($array) : $this->convertMap($array));
+        return $isList ? $this->convertList($array) : $this->convertMap($array);
     }
 
     /**

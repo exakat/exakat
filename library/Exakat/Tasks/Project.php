@@ -186,7 +186,7 @@ class Project extends Tasks {
         $this->logTime('CleanDb');
         $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
-        $this->gremlin->resetConnection();
+        $this->gremlin->init();
 
         $this->checkTokenLimit();
 
