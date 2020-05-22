@@ -31,6 +31,7 @@ class ReturnTrueFalse extends Analyzer {
         $this->atomIs('Ifthen')
 
              ->outIs('THEN')
+             ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Return')
              ->outIs('RETURN')
@@ -41,6 +42,7 @@ class ReturnTrueFalse extends Analyzer {
              ->inIs('THEN')
 
              ->outIs('ELSE')
+             ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Return')
              ->outIs('RETURN')
@@ -54,6 +56,7 @@ class ReturnTrueFalse extends Analyzer {
         // If ($a == 2) { $b = false; } else { $b = true; }
         $this->atomIs('Ifthen')
              ->outIs('THEN')
+             ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Assignation')
 
@@ -67,6 +70,7 @@ class ReturnTrueFalse extends Analyzer {
              ->back('first')
 
              ->outIs('ELSE')
+             ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomIs('Assignation')
 
