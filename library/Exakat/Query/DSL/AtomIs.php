@@ -74,6 +74,8 @@ coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DE
           __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
 
           __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
+
+          __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED'),
           
           // default case, will be filtered by hasLabel()
           __.filter{true})
