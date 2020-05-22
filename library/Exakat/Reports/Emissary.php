@@ -3567,6 +3567,26 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
+    protected function generateInventoriesOpenSSLCiphers(Section $section): void {
+        // List of indentation used
+        $res = $this->dump->fetchHashResults('OpenSSL Ciphers');
+
+        $values = $res->toHash('key', 'value');
+        asort($values);
+
+        $theTable = array();
+        foreach($values as $encoding => $count) {
+            $codeHtml = PHPSyntax($encoding);
+            $theTable []= "<tr><td>{$codeHtml}</td><td>$count</td><td>&nbsp</td></tr>";
+        }
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'List of all the OpenSSL cipher used in the code.');
+        $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
+        $this->putBasedPage($section->file, $html);
+    }
+
     protected function generateFixesRector(Section $section): void {
         $rector = new Rector();
         $report = $rector->generate('', self::INLINE);

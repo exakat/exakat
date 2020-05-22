@@ -51,25 +51,6 @@ class Ambassador extends Emissary {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $inventories = array('constants'          => 'Constants',
-                                 'classes'            => 'Classes',
-                                 'interfaces'         => 'Interfaces',
-                                 'functions'          => 'Functions',
-                                 'traits'             => 'Traits',
-                                 'namespaces'         => 'Namespaces',
-                                 'Type/Url'           => 'URL',
-                                 'Type/Regex'         => 'Regular Expr.',
-                                 'Type/Sql'           => 'SQL',
-                                 'Type/Email'         => 'Email',
-                                 'Type/GPCIndex'      => 'Incoming variables',
-                                 'Type/Md5string'     => 'MD5 string',
-                                 'Type/Mime'          => 'Mime types',
-                                 'Type/Pack'          => 'Pack format',
-                                 'Type/Printf'        => 'Printf format',
-                                 'Type/Path'          => 'Paths',
-                                 'Type/Shellcommands' => 'Shell',
-                                 );
-
     private $compatibilities = array();
 
     public function __construct() {

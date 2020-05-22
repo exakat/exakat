@@ -455,7 +455,11 @@ inventories:
             source: inventories
             file: inventories_encoding
             method: generateInventoriesEncoding
-
+        inventories_opensslcipher:
+            title: OpenSSL Ciphers
+            source: inventories
+            file: inventories_opensslciphers
+            method: generateInventoriesOpenSSLCiphers
 Fixes:
     title: Fixes
     icon: wrench
