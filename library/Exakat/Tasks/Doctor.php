@@ -150,7 +150,7 @@ class Doctor extends Tasks {
 
         $stats['tinkergraph']   = Graph::getConnexion('Tinkergraph')->getInfo();
         $stats['tinkergraphv3'] = Graph::getConnexion('TinkergraphV3')->getInfo();
-        $stats['gsneo4j']       = Graph::getConnexion('Gsneo4j')->getInfo();
+        $stats['gsneo4j']       = Graph::getConnexion('GSNeo4j')->getInfo();
         $stats['nogremlin']     = Graph::getConnexion('NoGremlin')->getInfo();
 
         if ($this->config->project !== null) {
