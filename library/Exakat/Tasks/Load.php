@@ -108,7 +108,7 @@ class Load extends Tasks {
 
     private $links   = array();
     private $relicat = array();
-    private $min_id  = \PHP_INT_MAX;
+    private $minId   = \PHP_INT_MAX;
 
     private $logTimeFile   = null;
 
@@ -471,7 +471,7 @@ class Load extends Tasks {
         $this->id0->fullcode  = $this->config->project_name;
         $this->id0->token     = 'T_WHOLE';
         $this->atoms          = array();
-        $this->min_id         = \PHP_INT_MAX;
+        $this->minId          = \PHP_INT_MAX;
 
         // Cleaning the databases
         $this->datastore->cleanTable('tokenCounts');
@@ -613,14 +613,14 @@ class Load extends Tasks {
         $this->loader = new Collector($this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->callsDatabase);
 
-        $file_extensions = $this->config->file_extensions;
+        $fileExtensions = $this->config->file_extensions;
         $atomGroup = clone $this->atomGroup;
 
         $stats = $this->stats;
         foreach($omittedFiles as $file) {
             try {
                 $ext = pathinfo($file, PATHINFO_EXTENSION);
-                if (!in_array($ext, $file_extensions, \STRICT_COMPARISON)) {
+                if (!in_array($ext, $fileExtensions, \STRICT_COMPARISON)) {
                     continue;
                 }
 
@@ -688,7 +688,7 @@ class Load extends Tasks {
     private function reset(): void {
         $this->atoms   = array();
         $this->links   = array();
-        $this->min_id  = \PHP_INT_MAX;
+        $this->minId  = \PHP_INT_MAX;
 
         $this->contexts    = new Context();
         $this->expressions = array();
@@ -720,7 +720,7 @@ class Load extends Tasks {
         $this->id0->fullcode  = $this->config->project_name;
         $this->id0->token     = 'T_WHOLE';
         $this->atoms          = array();
-        $this->min_id         = \PHP_INT_MAX;
+        $this->minId         = \PHP_INT_MAX;
 
         $this->loader = new $clientClass($this->callsDatabase, $this->id0);
     }
@@ -1804,15 +1804,15 @@ class Load extends Tasks {
         }
 
         if ($this->tokens[$this->id - 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $close_tag = self::CLOSING_TAG;
+            $closeTag = self::CLOSING_TAG;
             $closing = '?>';
         } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_HALT_COMPILER) {
-            $close_tag = self::NO_CLOSING_TAG;
+            $closeTag = self::NO_CLOSING_TAG;
             ++$this->id; // Go to HaltCompiler
             $this->processHalt();
             $closing = '';
         } else {
-            $close_tag = self::NO_CLOSING_TAG;
+            $closeTag = self::NO_CLOSING_TAG;
             $closing = '';
         }
 
@@ -1826,7 +1826,7 @@ class Load extends Tasks {
         $phpcode->code         = $this->tokens[$current][1];
         $phpcode->fullcode     = '<?php ' . self::FULLCODE_SEQUENCE . ' ' . $closing;
         $phpcode->token        = $this->getToken($this->tokens[$current][0]);
-        $phpcode->close_tag    = $close_tag;
+        $phpcode->close_tag    = $closeTag;
 
         return $phpcode;
     }
@@ -2196,8 +2196,8 @@ class Load extends Tasks {
         }
 
         $fullcode       = array();
-        $args_max       = 0;
-        $args_min       = 0;
+        $argsMax        = 0;
+        $argsMin        = 0;
         $rank       = -1;
         $default    = 0;
         $variadic   = self::NOT_ELLIPSIS;
@@ -2213,7 +2213,7 @@ class Load extends Tasks {
 
                 $index = $this->addAtom('Parameter');
                 $variable = $this->addAtom('Parametername');
-                ++$args_max;
+                ++$argsMax;
                 $typehints = $this->processTypehint($index);
                 ++$this->id;
 
@@ -2267,9 +2267,9 @@ class Load extends Tasks {
                     $this->popExpression();
                 } else {
                     if ($index->variadic === self::ELLIPSIS) {
-                        $args_max = \MAX_ARGS;
+                        $argsMax = \MAX_ARGS;
                     } else {
-                        ++$args_min;
+                        ++$argsMin;
                     }
                     $default = $this->addAtomVoid();
                 }
@@ -2297,8 +2297,8 @@ class Load extends Tasks {
 
         $arguments->fullcode = implode(', ', $fullcode);
         $arguments->token    = 'T_COMMA';
-        $arguments->args_max = $args_max;
-        $arguments->args_min = $args_min;
+        $arguments->args_max = $argsMax;
+        $arguments->args_min = $argsMin;
         $this->runPlugins($arguments, $argumentsList);
 
         return $arguments;
@@ -2339,14 +2339,14 @@ class Load extends Tasks {
             ++$this->id;
         } else {
             $index      = 0;
-            $args_max   = 0;
-            $args_min   = 0;
+            $argsMax    = 0;
+            $argsMin    = 0;
             $rank       = -1;
             $argumentsList  = array();
 
             while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON)) {
                 $initialId = $this->id;
-                ++$args_max;
+                ++$argsMax;
 
                 while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
                                                                         $this->phptokens::T_CLOSE_PARENTHESIS,
@@ -2421,8 +2421,8 @@ class Load extends Tasks {
             $arguments->fullcode = implode(', ', $fullcode);
             $arguments->token    = 'T_COMMA';
             $arguments->count    = $rank + 1;
-            $arguments->args_max = $args_max;
-            $arguments->args_min = $args_min;
+            $arguments->args_max = $argsMax;
+            $arguments->args_min = $argsMin;
             $this->runPlugins($arguments, $argumentsList);
         }
 
@@ -3366,7 +3366,7 @@ class Load extends Tasks {
 
         $as = $this->tokens[$this->id + 1][1];
         ++$this->id; // Skip as
-        $variables_start = max(array_keys($this->atoms));
+        $variablesStart = max(array_keys($this->atoms));
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                                 $this->phptokens::T_DOUBLE_ARROW,
@@ -3379,7 +3379,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_ARROW) {
             $this->addLink($foreach, $value, 'INDEX');
-            $variables_start = max(array_keys($this->atoms));
+            $variablesStart = max(array_keys($this->atoms));
             $index = $value;
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
@@ -3395,7 +3395,7 @@ class Load extends Tasks {
         // Warning : this is also connecting variables used for reading : foreach($a as [$b => $c]) { }
         $max = max(array_keys($this->atoms));
         $double = array($value->code => 1);
-        for($i = $variables_start + 1; $i < $max; ++$i) {
+        for($i = $variablesStart + 1; $i < $max; ++$i) {
             if ($this->atoms[$i]->atom === 'Variable' && !isset($double[$this->atoms[$i]->code])) {
                 $double[$this->atoms[$i]->code] = 1;
                 $this->addLink($foreach, $this->atoms[$i], 'VALUE');
@@ -3586,7 +3586,7 @@ class Load extends Tasks {
         $fullcode = array();
 
         ++$this->id; // Skip declare
-        $strict_types = false;
+        $strictTypes = false;
         do {
             ++$this->id; // Skip ( or ,
             $name = $this->processSingle('Name');
@@ -3599,7 +3599,7 @@ class Load extends Tasks {
             $this->addLink($declaredefinition, $name, 'NAME');
             $this->addLink($declaredefinition, $config, 'VALUE');
 
-            $strict_types |= strtolower($name->code) === 'strict_types';
+            $strictTypes |= strtolower($name->code) === 'strict_types';
 
             $this->addLink($declare, $declaredefinition, 'DECLARE');
             $declaredefinition->fullcode = $name->fullcode . ' = ' . $config->fullcode;
@@ -3608,7 +3608,7 @@ class Load extends Tasks {
             ++$this->id; // Skip value
         } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
 
-        if ($strict_types === true) {
+        if ($strictTypes === true) {
             $fullcode = $this->tokens[$current][1] . ' (' . implode(', ', $fullcode) . ') ';
 
             ++$this->id;
@@ -4616,23 +4616,7 @@ class Load extends Tasks {
     private function processVariable(): Atom {
         if ($this->tokens[$this->id][1] === '$this') {
             $atom = 'This';
-        } elseif (in_array($this->tokens[$this->id][1], array('$GLOBALS',
-                                                              '$_SERVER',
-                                                              '$_GET',
-                                                              '$_POST',
-                                                              '$_FILES',
-                                                              '$_REQUEST',
-                                                              '$_SESSION',
-                                                              '$_ENV',
-                                                              '$_COOKIE',
-                                                              '$php_errormsg',
-                                                              '$HTTP_RAW_POST_DATA',
-                                                              '$http_response_header',
-                                                              '$argc',
-                                                              '$argv',
-                                                              '$HTTP_POST_VARS',
-                                                              '$HTTP_GET_VARS',
-                                                              ),
+        } elseif (in_array($this->tokens[$this->id][1], $this->PHP_SUPERGLOBALS,
                 \STRICT_COMPARISON)) {
             $atom = 'Phpvariable';
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OBJECT_OPERATOR) {
@@ -5857,8 +5841,8 @@ class Load extends Tasks {
         }
 
         $this->atoms[$atom->id] = $atom;
-        if ($atom->id < $this->min_id) {
-            $this->min_id = $atom->id;
+        if ($atom->id < $this->minId) {
+            $this->minId = $atom->id;
         }
 
         return $atom;
@@ -5883,9 +5867,9 @@ class Load extends Tasks {
             throw new LoadError('Undefined link ' . $label . ' for atom ' . $origin->atom . ' : ' . $this->filename . ':' . $origin->line);
         }
 
-        if ($origin->id < $this->min_id) {
+        if ($origin->id < $this->minId) {
             $this->relicat[] = array($origin->id, $destination->id);
-        } elseif ($destination->id < $this->min_id) {
+        } elseif ($destination->id < $this->minId) {
             $this->relicat[] = array($origin->id, $destination->id);
         } else {
             $this->links[] = array($label, $origin->id, $destination->id);
@@ -6006,7 +5990,7 @@ class Load extends Tasks {
         $this->calls->addDefinition('class', $fullnspathAlias, $argumentsId[1]);
     }
 
-    private function processDefineAsConstants(Atom $const, Atom $name, bool $case_insensitive = self::CASE_INSENSITIVE): void {
+    private function processDefineAsConstants(Atom $const, Atom $name, bool $caseInsensitive = self::CASE_INSENSITIVE): void {
         if (empty($name->noDelimiter)) {
             $name->fullnspath = '\\';
             return;
@@ -6025,7 +6009,7 @@ class Load extends Tasks {
         $this->calls->addDefinition('const', $fullnspath, $const);
         $name->fullnspath = $fullnspath;
 
-        if ($case_insensitive === true) {
+        if ($caseInsensitive === true) {
             $this->calls->addDefinition('const', mb_strtolower($fullnspath), $const);
         }
     }

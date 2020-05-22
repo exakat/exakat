@@ -1553,7 +1553,7 @@ JAVASCRIPTCODE;
 
             $link = '<a href="analyses_doc.html#' . $this->toId($name) . '" alt="Documentation for ' . $name . '"><i class="fa fa-book"></i></a>';
 
-            $color = $colors[array_search(substr($analyzers[$name], 0, -1), $versions)];
+            $color = $colors[array_search(rtrim($analyzers[$name], '+-'), $versions)];
             $table []= "<tr><td style=\"background-color: #{$color};\">$analyzers[$name]</td><td>$link {$this->docs->getDocs($name, 'name')}</td><td>" . implode('</td><td>', $row) . "</td></tr>\n";
         }
 

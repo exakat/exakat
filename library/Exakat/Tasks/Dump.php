@@ -742,9 +742,9 @@ GREMLIN
                              (int) $row['abstract'],
                              $visibility,
                              $row['returntype'],
+                             $row['phpdoc'],
                              (int) $row['begin'],
-                             (int) $row['end'],
-                             $row['phpdoc']
+                             (int) $row['end']
                              );
             ++$total;
         }
