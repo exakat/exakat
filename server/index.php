@@ -202,7 +202,7 @@ function report($args) {
 function status($args) {
     global $initTime;
     
-    if (isset($args[0]) && !empty($args[0])) {
+    if (!empty($args[0])) {
         if (!file_exists(__DIR__.'/'.$args[0])) {
     	    error('No such project', $args[0]);
         } elseif (file_exists(__DIR__.'/'.$args[0].'/')) {

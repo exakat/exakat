@@ -37,8 +37,9 @@ $config = new Config(array());
 
 $begin = microtime(true);
 //$graphDB = new \Exakat\Graph\Tinkergraph($config);
-$graphDB = new \Exakat\Graph\Gsneo4j($config);
-//$graphDB = new \Exakat\Graph\Bitsy($config);
+$graphDB = new \Exakat\Graph\TinkergraphV3($config);
+//$graphDB = new \Exakat\Graph\Gsneo4j($config);
+$graphDB->init();
 
 $end = microtime(true);
 print "Connect : ".number_format(($end - $begin) * 1000, 2)." ms\n";

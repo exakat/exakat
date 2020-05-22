@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -103,9 +103,9 @@ class Stubs extends Reports {
             $use = ($cit['use'] === null) ? '' : self::INDENTATION . self::INDENTATION . 'use ' . $cit['use'] . ';' . PHP_EOL;
 
             return $phpdoc . self::INDENTATION . "{$final}{$abstract}$cit[type] $cit[name]{$extends}{$implements} {\n$use"
-                                               . ($cit['classconstants'][$cit['id']]['reduced']     ?? self::INDENTATION . self::INDENTATION . '/* No class constants */ ') . PHP_EOL
-                                               . ($cit['properties'][$cit['id']]['reduced']         ?? self::INDENTATION . self::INDENTATION . '/* No properties      */ ') . PHP_EOL
-                                               . ($cit['methods'][$cit['id']]['reduced']            ?? self::INDENTATION . self::INDENTATION . '/* No methods         */ ') . PHP_EOL
+                                               . ($cit['classconstants'][$cit['id']]['reduced']     ?? (self::INDENTATION . self::INDENTATION . '/* No class constants */ ')) . PHP_EOL
+                                               . ($cit['properties'][$cit['id']]['reduced']         ?? (self::INDENTATION . self::INDENTATION . '/* No properties      */ ')) . PHP_EOL
+                                               . ($cit['methods'][$cit['id']]['reduced']            ?? (self::INDENTATION . self::INDENTATION . '/* No methods         */ ')) . PHP_EOL
                                                . self::INDENTATION . "}\n";
         });
         $code->reduce('cits', function ($carry, $item) {
@@ -123,9 +123,9 @@ class Stubs extends Reports {
             // empty namspaces are also displayed
 
             return 'namespace ' . ltrim($namespace['namespace'], '\\') . " {\n"
-                                            . ($namespace['constants'][$namespace['id']]['reduced'] ?? self::INDENTATION . '/* No constant definitions */ ') . PHP_EOL
-                                            . ($namespace['functions'][$namespace['id']]['reduced'] ?? self::INDENTATION . '/* No function definitions */ ') . PHP_EOL
-                                            . ($namespace['cits'][$namespace['id']]['reduced']      ?? self::INDENTATION . '/* No cit      definitions */ ') . PHP_EOL
+                                            . ($namespace['constants'][$namespace['id']]['reduced'] ?? (self::INDENTATION . '/* No constant definitions */ ')) . PHP_EOL
+                                            . ($namespace['functions'][$namespace['id']]['reduced'] ?? (self::INDENTATION . '/* No function definitions */ ')) . PHP_EOL
+                                            . ($namespace['cits'][$namespace['id']]['reduced']      ??( self::INDENTATION . '/* No cit      definitions */ ')) . PHP_EOL
                                             . "\n}\n";
         });
 

@@ -36,7 +36,7 @@ class Git extends Vcs {
             throw new HelperException('git');
         }
 
-        if (preg_match('/git version ([0-9\.]+)/', trim($res), $r)) {//
+        if (preg_match('/git version ([0-9\.]+)/', trim($res), $r)) {
             $this->installed = true;
             $this->version   = $r[1];
         } else {

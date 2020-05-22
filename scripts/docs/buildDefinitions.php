@@ -702,7 +702,7 @@ $exampleTxt
         $examples = array();
         $issues_examples_section_list = array();
         $previous = '';
-        for($i = 0; $i < 10; $i++) {
+        for($i = 0; $i < 10; ++$i) {
             if (isset($ini["example$i"])) {
                 $issues_examples_section = '';
                 if (!isset($ini['example'.$i]['project'])) {
@@ -750,7 +750,7 @@ SPHINX;
         $issues_examples_section = implode(PHP_EOL.'--------'.PHP_EOL.PHP_EOL, $issues_examples_section_list);
         
         $parameters = array();
-        for($i = 0; $i < 10; $i++) {
+        for($i = 0; $i < 10; ++$i) {
             if (isset($ini['parameter'.$i])) {
                 if (isset($this->parameter_list[$ini['name']])) {
                     $this->parameter_list[$ini['name']][$ini['parameter'.$i]['name']] = $ini['parameter'.$i]['default'];
