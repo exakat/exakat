@@ -70,6 +70,7 @@ class MakeClassMethodDefinition extends Complete {
 
         // Create link between Class method and definition
         // This works only for $this
+        // First case for the local class
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
               ->outIs('OBJECT')
@@ -78,14 +79,56 @@ class MakeClassMethodDefinition extends Complete {
               ->outIs('METHOD')
               ->savePropertyAs('lccode', 'name')
               ->back('first')
-              ->goToInstruction(self::CLASSES_TRAITS)
-              ->goToAllParentsTraits(self::INCLUDE_SELF)
+              ->goToClass(self::CLASSES_TRAITS)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
+
+        // Second case for the local traits
+        $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('OBJECT')
+              ->atomIs('This', self::WITHOUT_CONSTANTS)
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->goToClass(self::CLASSES_TRAITS)
+              ->outIs('USE')
+              ->outIs('USE')
+              ->inIs('DEFINITION')
+              ->atomIs('Trait')
+
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery();
+
+        // Third case for the parents
+        $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
+              ->hasNoIn('DEFINITION')
+              ->outIs('OBJECT')
+              ->atomIs('This', self::WITHOUT_CONSTANTS)
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->goToClass(self::CLASSES_TRAITS)
+              ->goToAllParentsTraits(self::EXCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery();
+        
+        // This will take care of the first step : class - trait - parent. (Above is currently not detailled, any method is linked.)
+
 
         // Create link between Class method and definition
         // This works only for $this
