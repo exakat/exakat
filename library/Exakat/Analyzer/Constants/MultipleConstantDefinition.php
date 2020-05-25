@@ -29,47 +29,49 @@ class MultipleConstantDefinition extends Analyzer {
     public function analyze() {
         // case-insensitive constants with Define
         // Search for definitions and count them
-        $csDefinitions = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Defineconstant")
-     .or( __.out("CASE").count().is(eq(0)),
-          __.out("CASE").has('boolean', false),
-         )
-     .out("NAME").hasLabel("Identifier").not(where(__.out("CONCAT") ) )
-     .values("noDelimiter")
-GREMLIN
-);
+        //define() 
+        $this->atomIs('Defineconstant')
+             ->raw('or( __.out("CASE").count().is(eq(0)),
+          __.out("CASE").has("boolean", false))')
+             ->outIs('NAME')
+             ->atomis(self::STATIC_NAMES)
+             ->values('noDelimiter');
+        $csDefinitions = $this->rawQuery()->toArray();
 
-        $constDefinitions = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Const").not( where( __.in("CONST").hasLabel("Class", "Trait") ) )
-                       .out("CONST")
-                       .out("NAME").values("fullcode")
-GREMLIN
-);
+        //const
+        $this->atomIs('Const')
+             ->hasNoClassTrait()
+             ->outIs('CONST')
+             ->outIs('NAME')
+             ->values('fullcode');
+        $constDefinitions = $this->rawQuery()->toArray();
 
-        $cisDefinitions = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Defineconstant")
-     .where( __.out("CASE").has("boolean", true)) 
-     .out("NAME")
-     .hasLabel("Identifier").not( where( __.out("CONCAT") ) )
-     .map{ it.get().value("noDelimiter").toLowerCase()}
-GREMLIN
-);
+        //define(, , true) 
+        $this->atomIs('Defineconstant')
+             ->outIs('CASE')
+             ->is('boolean', true)
+             ->back('first')
+             ->outIs('NAME')
+             ->atomis(self::STATIC_NAMES)
+             ->values('noDelimiter');
+        $cisDefinitions = $this->rawQuery()->toArray();
+        $cisDefinitions = array_map('strtolower', $cisDefinitions);
 
-        if ($a = $this->selfCollisions($cisDefinitions->toArray())) {
+        if ($a = $this->selfCollisions($cisDefinitions)) {
             $this->applyToCisDefine($a);
         }
 
-        if ($a = $this->selfCollisions(array_merge($constDefinitions->toArray(), $csDefinitions->toArray()))) {
-            $this->applyToConst(array_intersect($a, $constDefinitions->toArray()));
-            $this->applyToCsDefine(array_intersect($a, $csDefinitions->toArray()));
+        if ($a = $this->selfCollisions(array_merge($constDefinitions, $csDefinitions))) {
+            $this->applyToConst(array_intersect($a, $constDefinitions));
+            $this->applyToCsDefine(array_intersect($a, $csDefinitions));
         }
 
-        if ($a = $this->CsCisCollisions($csDefinitions->toArray(), $cisDefinitions->toArray())) {
+        if ($a = $this->CsCisCollisions($csDefinitions, $cisDefinitions)) {
             $this->applyToCisDefine($a);
             $this->applyToCsDefine($a);
         }
 
-        if ($a = $this->CsCisCollisions($constDefinitions->toArray(), $cisDefinitions->toArray())) {
+        if ($a = $this->CsCisCollisions($constDefinitions, $cisDefinitions)) {
             $this->applyToCisDefine($a);
             $this->applyToConst($a);
         }
