@@ -46,6 +46,7 @@ class CouldBePrivateConstante extends Analyzer {
         $publicUndefinedConstants = $this->rawQuery()
                                          ->toArray();
 
+        // list of defined constants
         $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->atomIs('Name')
@@ -77,11 +78,7 @@ GREMLIN
 
         $calls = array();
         foreach($publicConstants as $value) {
-            if (isset($calls[$value['constante']])) {
-                $calls[$value['constante']][] = $value['classe'];
-            } else {
-                $calls[$value['constante']] = array($value['classe']);
-            }
+            array_collect_by($calls, $value['constante'], $value['classe']);
         }
 
         // global static constants : the one with no definition class : they are all ignored.
@@ -92,7 +89,7 @@ GREMLIN
              ->as('results')
              ->outIs('NAME')
              ->codeIsNot($publicUndefinedConstants, self::NO_TRANSLATE, self::CASE_SENSITIVE)
-             ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
+             ->codeIsNot(array_keys($calls),        self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->savePropertyAs('code', 'constante')
              ->goToClass()
              ->isNotHash('fullnspath', $calls, 'constante')
