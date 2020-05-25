@@ -85,7 +85,7 @@ class PropagateConstants extends Complete {
                  ->raw(<<<'GREMLIN'
  sideEffect{ 
         if ("noDelimiter" in x.keys()) {
-            it.get().property("noDelimiter", x.value("noDelimiter")); 
+            it.get().property("noDelimiter", x.value("noDelimiter").toString()); 
         }
         if ("intval" in x.keys()) {
             it.get().property("intval", x.value("intval")); 
@@ -128,7 +128,7 @@ sideEffect{
             it.get().property("boolean", constante.value("boolean")); 
         }
         if ("noDelimiter" in constante.keys()) {
-            it.get().property("noDelimiter", constante.value("noDelimiter")); 
+            it.get().property("noDelimiter", constante.value("noDelimiter").toString()); 
         }
         if ("isNull" in constante.keys()) {
             it.get().property("isNull", constante.value("isNull")); 
@@ -465,7 +465,7 @@ sideEffect{
     it.get().property("boolean", x.value("boolean"));
     if ("noDelimiter" in x.keys()) {
         // Ternary, Comparison
-        it.get().property("noDelimiter", x.value("noDelimiter")); 
+        it.get().property("noDelimiter", x.value("noDelimiter").toString()); 
     }
     it.get().property("propagated", true); 
 
@@ -501,7 +501,7 @@ sideEffect{
 
     it.get().property("intval", x.value("intval")); 
     it.get().property("boolean", x.value("boolean"));
-    it.get().property("noDelimiter", x.value("noDelimiter")); 
+    it.get().property("noDelimiter", x.value("noDelimiter").toString()); 
     it.get().property("propagated", true); 
 
     x = null;
