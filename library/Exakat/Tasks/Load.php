@@ -2929,6 +2929,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // Nothing to do
         } else {
+            $this->getFullnspath($string, 'const', $string);
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
