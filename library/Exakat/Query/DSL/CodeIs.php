@@ -43,7 +43,7 @@ class CodeIs extends DSL {
                 break;
 
             default:
-            case 2:
+            case 3:
                 list($code,$translate, $caseSensitive) = func_get_args();
         }
 

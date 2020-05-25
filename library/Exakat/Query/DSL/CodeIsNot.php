@@ -43,7 +43,7 @@ class CodeIsNot extends DSL {
                 break;
 
             default:
-            case 2:
+            case 3:
                 list($code,$translate, $caseSensitive) = func_get_args();
         }
 
@@ -63,9 +63,9 @@ class CodeIsNot extends DSL {
                 return new Command(Query::NO_QUERY);
             }
 
-            return new Command("filter{ !(it.get().value(\"$col\") in ***); }", array($translatedCode));
+            return new Command("not(has(\"$col\", within(***)))", array($translatedCode));
         } else {
-            return new Command("filter{ !(it.get().value(\"$col\") in ***); }", array(makeArray($code)));
+            return new Command("not(has(\"$col\", within(***)))", array(makeArray($code)));
         }
     }
 }
