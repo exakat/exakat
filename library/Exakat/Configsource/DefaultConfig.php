@@ -147,6 +147,8 @@ class DefaultConfig extends Config {
                                                               'CompatibilityPHP72',
                                                               'CompatibilityPHP73',
                                                               'CompatibilityPHP74',
+                                                              'CompatibilityPHP80',
+                                                              'Suggestions',
                                                               'Dead code',
                                                               'Security',
                                                               'Analyze',
