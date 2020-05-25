@@ -802,9 +802,10 @@ GREMLIN
         if (empty($dumpQueries)) {
             return;
         }
-        $id = dechex(random_int(0, \PHP_INT_MAX));
+        $export = '<?php $queries = ' . var_export($dumpQueries, true) . '; ?>';
+        $id = crc32($export);
 
-        file_put_contents($this->config->tmp_dir . '/dump-' . $id . '.php', '<?php $queries = ' . var_export($dumpQueries, true) . '; ?>');
+        file_put_contents($this->config->tmp_dir . '/dump-' . $id . '.php', $export);
     }
 }
 ?>

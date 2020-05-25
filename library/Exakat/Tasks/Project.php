@@ -424,9 +424,18 @@ class Project extends Tasks {
         shuffle($names);
         shuffle($adjectives);
 
-        $x = random_int(0, PHP_INT_MAX);
-
+        try {
+            $x = random_int(0, PHP_INT_MAX);
+        } catch (\Throwable $t) {
+            $x = (int) microtime(true) * 1000000;
+        }
         $name = $names[ $x % (count($names) - 1)];
+
+        try {
+            $x = random_int(0, PHP_INT_MAX);
+        } catch (\Throwable $t) {
+            $x = (int) microtime(true) * 1000000;
+        }
         $adjective = $adjectives[ $x % (count($adjectives) - 1)];
 
         return ucfirst($adjective) . ' ' . $name;

@@ -383,7 +383,12 @@ class Phpexec {
                 'phpversion'      => PHP_VERSION,
             );
         } else {
-            $crc = random_int(0, PHP_INT_MAX);
+            try {
+                $crc = random_int(0, PHP_INT_MAX);
+            } catch (\Throwable $t) {
+                $crc = (int) microtime(true);
+            }
+
             $php = <<<PHP
 \\\$results = array(
     'zend.assertions' => ini_get('zend.assertions'),
