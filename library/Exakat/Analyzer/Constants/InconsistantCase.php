@@ -36,9 +36,9 @@ class InconsistantCase extends Analyzer {
         }
 
         $mapping = <<<'GREMLIN'
-if (it.get().value('code') in ***) { 
+if (it.get().value('code').toLong() in ***) { 
     x2 = 'lower'; 
-} else if (it.get().value('code') in ***) { 
+} else if (it.get().value('code').toLong() in ***) { 
     x2 = 'upper'; 
 } else {
     x2 = 'mixed'; 

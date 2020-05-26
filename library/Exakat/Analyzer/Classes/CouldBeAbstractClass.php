@@ -36,7 +36,7 @@ class CouldBeAbstractClass extends Analyzer {
                      ->outIs('DEFINITION')
                      ->inIs('EXTENDS')
              )
-             ->filter(
+             ->not(
                 $this->side()
                      ->outIs('DEFINITION')
                      ->inIs('NEW')
