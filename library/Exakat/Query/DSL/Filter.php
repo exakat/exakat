@@ -25,15 +25,15 @@ namespace Exakat\Query\DSL;
 
 class Filter extends DSL {
     public function run(): Command {
+        assert(func_num_args() === 1, 'Wrong number of arguments with ' . __METHOD__ . '. ' . func_num_args() . ' provided, while 1 is expected.');
         list($filter) = func_get_args();
 
-        if ($filter instanceof Command) {
-            $filter->gremlin = "where( {$filter->gremlin} )";
-
-            return $filter;
-        } else {
-            assert(false, 'Filter needs a command, it received a ' . get_class($filter));
+        if (!$filter instanceof Command) {
+            assert(false, 'Not requires a Command object, it received a ' . gettype($filter));
         }
+
+        $filter->gremlin = "where( {$filter->gremlin} )";
+        return $filter;
     }
 }
 ?>

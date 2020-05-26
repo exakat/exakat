@@ -62,7 +62,6 @@ class CallbackNeedsReturn extends Analyzer {
                  ->optional(
                     $this->side()
                          ->inIs('DEFINITION')
-                         ->prepareSide()
                  )
                  ->not(
                     $this->side()

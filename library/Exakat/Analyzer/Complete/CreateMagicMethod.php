@@ -48,7 +48,6 @@ class CreateMagicMethod extends Complete {
                      ->atomIs('Parametername', self::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
-                     ->prepareSide()
              )
 
               ->inIs('DEFINITION')
@@ -74,7 +73,6 @@ class CreateMagicMethod extends Complete {
                      ->atomIs('Parametername', self::WITHOUT_CONSTANTS)
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
-                     ->prepareSide()
              )
 
               ->inIs('DEFINITION')

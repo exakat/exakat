@@ -148,7 +148,6 @@ class WrongReturnedType extends Analyzer {
              ->optional(
                 $this->side()
                      ->atomIs(array('Identifier', 'Nsname'), self::WITH_CONSTANTS)
-                     ->prepareSide()
              )
              ->checkTypeWithAtom('fqn')
              ->back('results')

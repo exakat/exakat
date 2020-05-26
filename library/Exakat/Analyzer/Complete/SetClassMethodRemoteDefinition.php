@@ -43,7 +43,6 @@ class SetClassMethodRemoteDefinition extends Complete {
                      ->inIs('DEFINITION')
                      ->outIs('DEFAULT')
                      ->outIs('NEW')
-                     ->prepareSide()
               )
               ->inIs('DEFINITION')
               ->atomIs(self::CLASSES_TRAITS, self::WITHOUT_CONSTANTS)

@@ -70,7 +70,7 @@ class Query {
         assert(!(empty($this->commands) && empty($this->sides)) || in_array(strtolower($name), array('atomis', 'analyzeris', 'atomfunctionis')), "First step in Query must be atomIs, atomFunctionIs or analyzerIs ($name used)");
 
         $command = $this->queryFactory->factory($name);
-        if (in_array($name, array('not', 'filter'))) {
+        if (in_array($name, array('not', 'filter', 'optional'))) {
             $chain = $this->prepareSide();
             $last = $command->run($chain);
         } else {

@@ -9,7 +9,8 @@ interface B {
 
 
 class x {
-    private $a, $b;
+    private A $a;
+    private B $b;
 
     function constructor(A $a, B $b) {
         $this->a = $a;

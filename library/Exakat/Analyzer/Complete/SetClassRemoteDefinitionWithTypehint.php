@@ -44,7 +44,6 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
                        ->outIs('DEFINITION')
                        ->atomIs(self::STATIC_NAMES, self::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(self::INCLUDE_SELF)
@@ -75,7 +74,6 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
                        ->outIs('DEFINITION')
                        ->atomIs(self::STATIC_NAMES, self::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(self::INCLUDE_SELF)
@@ -104,7 +102,6 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
                        ->outIs('DEFINITION')
                        ->atomIs(self::STATIC_NAMES, self::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide()
               )
               ->atomIs('Class', self::WITHOUT_CONSTANTS)
               // No check on Atom == Class, as it may not exists
@@ -135,7 +132,6 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
                        ->outIs('DEFINITION')
                        ->atomIs(self::STATIC_NAMES, self::WITHOUT_CONSTANTS)
                        ->inIs('IMPLEMENTS')
-                       ->prepareSide()
               )
               // No check on Atom == Class, as it may not exists
               ->goToAllParents(self::INCLUDE_SELF)

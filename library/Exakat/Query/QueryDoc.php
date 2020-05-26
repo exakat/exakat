@@ -43,7 +43,7 @@ class QueryDoc {
     public function __construct() {    }
 
     public function __call($name, $args) {
-        if (in_array($name, array('not', 'filter'))) {
+        if (in_array($name, array('not', 'filter', 'optional'))) {
             $chain = $this->prepareSide();
             $this->steps[] = $name . '[ ' . $chain . ' ]';
             print "$name\n";

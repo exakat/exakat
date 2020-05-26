@@ -18,7 +18,10 @@ class B {
 
 
 class x {
-    private $a, $b, $a2, $a3;
+    private A $a;
+    private B $b;
+    private A $a2;
+    private A $a3;
 
     function constructor(A $a, B $b, A $a2, A $a3) {
         $this->a = $a;

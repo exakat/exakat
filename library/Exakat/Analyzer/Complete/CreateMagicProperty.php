@@ -56,7 +56,6 @@ class CreateMagicProperty extends Complete {
                      ->atomIs('Parameter', self::WITHOUT_CONSTANTS)
                      ->outIs('TYPEHINT')
                      ->inIs('DEFINITION')
-                     ->prepareSide()
              )
 
             // In case we are in an interface
@@ -65,7 +64,6 @@ class CreateMagicProperty extends Complete {
                      ->atomIs('Interface', self::WITHOUT_CONSTANTS)
                      ->outIs('DEFINITION')
                      ->inIs('IMPLEMENTS')
-                     ->prepareSide()
              )
 
              ->goToAllParentsTraits(self::INCLUDE_SELF)
@@ -100,7 +98,6 @@ class CreateMagicProperty extends Complete {
                      ->atomIs('Parameter', self::WITHOUT_CONSTANTS)
                      ->outIs('TYPEHINT')
                      ->inIs('DEFINITION')
-                     ->prepareSide()
              )
 
             // In case we are in an interface
@@ -109,7 +106,6 @@ class CreateMagicProperty extends Complete {
                      ->atomIs('Interface', self::WITHOUT_CONSTANTS)
                      ->outIs('DEFINITION')
                      ->inIs('IMPLEMENTS')
-                     ->prepareSide()
              )
 
              ->goToAllParentsTraits(self::INCLUDE_SELF)
@@ -144,7 +140,6 @@ class CreateMagicProperty extends Complete {
                      ->inIs('DEFINITION')
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
-                     ->prepareSide()
              )
              ->inIs('DEFINITION')
              ->goToAllParentsTraits(self::INCLUDE_SELF)
@@ -179,7 +174,6 @@ class CreateMagicProperty extends Complete {
                      ->inIs('DEFINITION')
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
-                     ->prepareSide()
              )
              ->inIs('DEFINITION')
              ->goToAllParentsTraits(self::INCLUDE_SELF)
@@ -215,7 +209,6 @@ class CreateMagicProperty extends Complete {
                      ->inIs('DEFINITION')
                      ->inIs('NAME')
                      ->outIs('TYPEHINT')
-                     ->prepareSide()
              )
              ->inIs('DEFINITION')
              ->goToAllParentsTraits(self::INCLUDE_SELF)

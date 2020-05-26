@@ -37,7 +37,6 @@ class Closure2String extends Analyzer {
                      ->outIs('EXPRESSION')
                      ->atomIs('Return')
                      ->outIs('RETURN')
-                     ->prepareSide()
              )
              ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
              // Avoid extra arguments that can't be set from outside

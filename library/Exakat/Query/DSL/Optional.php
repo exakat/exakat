@@ -28,18 +28,13 @@ use Exakat\Query\Query;
 class Optional extends DSL {
     public function run(): Command {
         assert(func_num_args() === 1, 'Wrong number of arguments with ' . __METHOD__ . '. ' . func_num_args() . ' provided, while 1 is expected.');
-
         list($filter) = func_get_args();
 
         if (!$filter instanceof Command) {
-            assert(false, 'Optional requires a command object');
+            assert(false, 'Not requires a Command object, it received a ' . gettype($filter));
         }
 
-        if ($filter->gremlin === Query::STOP_QUERY) {
-            $filter->gremlin = Query::NO_QUERY;
-        } else {
-            $filter->gremlin = "optional(\n{$filter->gremlin}\n)";
-        }
+        $filter->gremlin = "optional($filter->gremlin)";
         return $filter;
     }
 }
