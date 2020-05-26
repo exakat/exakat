@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,11 +24,21 @@ namespace Exakat\Analyzer\Security;
 
 use Exakat\Analyzer\Analyzer;
 
-class MkdirDefault extends Analyzer {
+class KeepFilesRestricted extends Analyzer {
+    protected $filePrivileges = array(0777);
+
     public function analyze() {
-        // mkdir($dir) : 0777, as 2nd arg, is by defailt.
-        $this->atomFunctionIs('\\mkdir')
-             ->noChildWithRank('ARGUMENT', 1);
+        if (is_string($this->filePrivileges)) {
+            $this->filePrivileges = str2array($this->filePrivileges);
+            // todo : interpret values from ini : 0777 will be 777, not 0777;
+        }
+
+        // chmod($file, 0777);
+        $this->atomFunctionIs(array('\\chmod', '\\mkdir'))
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs('Integer', self::WITH_CONSTANTS)
+             ->raw('filter{ x = '.implode(', ', $this->filePrivileges).'; (it.get().value("intval") & 0777) in x;}')
+             ->back('first');
         $this->prepareQuery();
     }
 }
