@@ -188,7 +188,7 @@ class Phpexec {
             $res = shell_exec($shell);
             try {
                 eval("\$tokens = $res;");
-            } catch (\Exception $e) {
+            } catch (\Throwable $t) {
                 $tokens = array();
             }
 
