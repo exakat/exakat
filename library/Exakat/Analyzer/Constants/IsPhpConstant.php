@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class IsPhpConstant extends Analyzer {
     public function analyze() {
         $constants = $this->loadIni('php_constants.ini', 'constants');
-        $constantsFNP = makeFullNsPath($constants, true);
+        $constantsFNP = makeFullNsPath($constants, \FNP_CONSTANT);
 
         // Namespaced constant (\PATHINFO_BASENAME)
         $this->atomIs(self::STATIC_NAMES)

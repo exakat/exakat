@@ -46,6 +46,7 @@ class UseConstantAsArguments extends Analyzer {
 
         // Not a PHP constant
         $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('ARGUMENT')
              ->isHash('rank', $positionsWithConstants, 'fqn')
@@ -56,6 +57,7 @@ class UseConstantAsArguments extends Analyzer {
 
        // unwanted guests
         $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('ARGUMENT')
              ->isHash('rank', $positionsWithConstants, 'fqn')
@@ -72,6 +74,25 @@ class UseConstantAsArguments extends Analyzer {
             }
 
             $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->analyzerIsNot('self')
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->outWithRank('ARGUMENT', $position)
+                 ->is('constant', true)
+                 ->atomIsNot(self::CONSTANTS_ALL)
+                 ->back('first');
+            $this->prepareQuery();
+
+            $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->analyzerIsNot('self')
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->outWithRank('ARGUMENT', $position)
+                 ->atomIs(self::CONSTANTS_ALL)
+                 ->analyzerIsNot('Constants/IsPhpConstant')
+                 ->back('first');
+            $this->prepareQuery();
+
+            $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'fqn')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs(self::CONSTANTS_ALL)
@@ -88,12 +109,13 @@ class UseConstantAsArguments extends Analyzer {
             foreach((array) $functionsList as $function => $constants) {
                 $fqn = makeFullNsPath($function);
 
-                array_collect_by($positionsWithConstants, $fqn, (int) $position);
+                $positionsWithConstants[$fqn] = (int) $position;
             }
         }
 
         // Not a PHP constant
         $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('ARGUMENT')
              ->isHash('rank', $positionsWithConstants, 'fqn')
@@ -104,6 +126,7 @@ class UseConstantAsArguments extends Analyzer {
 
         // in a logical combinaison, check that constants are at least PHP's one
         $this->atomFunctionIs(array_keys($positionsWithConstants))
+             ->analyzerIsNot('self')
              ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('ARGUMENT')
              ->isHash('rank', $positionsWithConstants, 'fqn')
@@ -115,24 +138,27 @@ class UseConstantAsArguments extends Analyzer {
 
        // unwanted guests
        $this->atomFunctionIs(array_keys($positionsWithConstants))
-             ->savePropertyAs('fullnspath', 'fqn')
-             ->outIs('ARGUMENT')
-             ->isHash('rank', $positionsWithConstants, 'fqn')
-             ->atomIs(array('Boolean', 'Null', 'Float'))
-             ->back('first');
+            ->analyzerIsNot('self')
+            ->savePropertyAs('fullnspath', 'fqn')
+            ->outIs('ARGUMENT')
+            ->isHash('rank', $positionsWithConstants, 'fqn')
+            ->atomIs(array('Boolean', 'Null', 'Float'))
+            ->back('first');
        $this->prepareQuery();
 
        $this->atomFunctionIs(array_keys($positionsWithConstants))
-             ->savePropertyAs('fullnspath', 'fqn')
-             ->outIs('ARGUMENT')
-             ->isHash('rank', $positionsWithConstants, 'fqn')
-             ->atomIs('Integer')
-             ->codeIsNot(array('0', '-1'))
-             ->back('first');
+            ->analyzerIsNot('self')
+            ->savePropertyAs('fullnspath', 'fqn')
+            ->outWithRank('ARGUMENT', 0)
+            ->isHash('rank', $positionsWithConstants, 'fqn')
+            ->atomIs('Integer')
+            ->codeIsNot(array('0', '-1'))
+            ->back('first');
        $this->prepareQuery();
 
         // combinaison : several constants may be combined with a logical operator
         foreach($functions->combinaison as $position => $functionsList) {
+            $position = (int) $position;
 
             $constantsWithPosition = array();
             foreach($functionsList as $function => $constants) {
@@ -142,8 +168,20 @@ class UseConstantAsArguments extends Analyzer {
             }
 
             $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'fqn')
-                 ->outWithRank('ARGUMENT', $position)
+                 ->outWithRank('ARGUMENT', (int) $position)
+                 ->atomIs(array('Logical', 'Identifier', 'Nsname'))
+                 ->atomInsideNoDefinition(self::CONSTANTS_ALL)
+                 ->analyzerIsNot('Constants/IsPhpConstant')
+                 ->back('first');
+            $this->prepareQuery();
+
+            $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->analyzerIsNot('self')
+                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->outWithRank('ARGUMENT', (int) $position)
+                 ->atomIs(array('Logical', 'Identifier', 'Nsname'))
                  ->atomInsideNoDefinition(self::CONSTANTS_ALL)
                  ->analyzerIs('Constants/IsPhpConstant')
                  ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
@@ -152,9 +190,10 @@ class UseConstantAsArguments extends Analyzer {
 
             // in a logical combinaison, check that constants are the one for the function
             $this->atomFunctionIs(array_keys($constantsWithPosition))
+                 ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'fqn')
-                 ->outWithRank('ARGUMENT', $position)
-                 ->atomIs('Logical')
+                 ->outWithRank('ARGUMENT', (int) $position)
+                 ->atomIs(array('Logical', 'Identifier', 'Nsname'))
                  ->atomInsideNoDefinition(self::CONSTANTS_ALL)
                  ->analyzerIs('Constants/IsPhpConstant')
                  ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
