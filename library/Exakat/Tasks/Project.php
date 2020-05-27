@@ -219,9 +219,6 @@ class Project extends Tasks {
         unset($firstDump);
         $this->logTime('Initial dump');
 
-        // Dumps, when moved to the Analyzer category
-        $this->analyzeRulesets(array('Dump'), $audit_start, $this->config->verbose);
-
         if (empty($this->config->program)) {
             $this->analyzeRulesets($rulesetsToRun, $audit_start, $this->config->verbose);
         } else {

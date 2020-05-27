@@ -303,10 +303,11 @@ class Emissary extends Reports {
 
         foreach($analyzersList as $analyzerName) {
             $analyzer = $this->rulesets->getInstance($analyzerName, null, $this->config);
-            if (!$analyzer instanceof Analyzer) {
-                var_dump($analyzer);
-            }
+            assert ($analyzer instanceof Analyzer, "Could not get an analyzer for $analyzerName in the documentation\n");
+
             $description = $this->docs->getDocs($analyzerName);
+            assert(isset($description['name'], $description['description']), "Could not get a name or description for $analyzerName in the documentation\n");
+
             $analyzersDocHTML = '<h2><a href="issues.html#analyzer=' . $this->toId($analyzerName) . '" id="' . $this->toId($analyzerName) . '">' . $description['name'] . '</a></h2>';
 
             $badges = array();
@@ -314,6 +315,7 @@ class Emissary extends Reports {
             if(!empty($exakatSince)){
                 $badges[] = "[Since $exakatSince]";
             }
+
             $badges[] = '[ -P ' . $analyzer->getInBaseName() . ' ]';
             if (isset($description['name'])) {
                 $badges[] = '[ <a href="https://exakat.readthedocs.io/en/latest/Rules.html#' . $this->toOnlineId($description['name']) . '">Online docs</a> ]';
