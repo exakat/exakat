@@ -671,7 +671,7 @@ class Load extends Tasks {
 
         $this->loader = new Collector($this->callsDatabase, $this->id0);
         $stats = $this->stats;
-        foreach(array_keys($ignoredFiles) as $file) {
+        foreach($ignoredFiles as $file) {
             try {
                 $this->processFile($file, $dir);
             } catch (NoFileToProcess $e) {
