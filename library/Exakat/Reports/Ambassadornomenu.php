@@ -25,6 +25,8 @@ namespace Exakat\Reports;
 use Exakat\Exakat;
 
 class Ambassadornomenu extends Ambassador {
+    const CONFIG_YAML    = 'Ambassadornomenu';
+
     protected function getBasedPage($file): string {
         static $baseHTML;
 
@@ -62,6 +64,82 @@ class Ambassadornomenu extends Ambassador {
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
+    }
+
+    protected function generateIssuesEngine(Section $section, array $issues = array()): void {
+        if (empty($issues)) {
+            $issues = $this->getIssuesFaceted(makeArray($this->rulesets->getRulesetsAnalyzers(makeArray($section->ruleset))));
+        }
+
+        $total = count($issues);
+        $issues = implode(', ' . PHP_EOL, $issues);
+        $blocjs = <<<JAVASCRIPTCODE
+        
+  <script>
+  "use strict";
+
+    $(document).ready(function() {
+
+      var data_items = [
+$issues
+];
+
+      var item_template =  
+        '<tr>' +
+          '<td width="20%"><a href="<%= "analyses_doc.html#" + obj.analyzer_md5 %>" title="Documentation for <%= obj.analyzer %>"><i class="fa fa-book"></i></a> <%= obj.analyzer %></td>' +
+          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
+          '<td width="18%"><%= obj.code %></td>' + 
+          '<td width="2%"><%= obj.code_detail %></td>' +
+          '<td width="7%" align="center"><%= obj.severity %></td>' +
+          '<td width="7%" align="center"><%= obj.complexity %></td>' +
+          '<td width="16%"><%= obj.recipe %></td>' +
+        '</tr>' +
+        '<tr class="fullcode">' +
+          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="<%= "codes.html#file=" + obj.file + "&line=" + obj.line %>" class="btn btn-info">View File</a></div></pre></td>' +
+        '</tr>';
+      var settings = { 
+        items           : data_items,
+        facets          : { 
+          'analyzer'  : 'Analysis',
+          'file'      : 'File',
+          'severity'  : 'Severity',
+          'complexity': 'Time To Fix',
+          'receipt'   : 'Rulesets'
+        },
+        facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
+        facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
+        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu" style="max-height: 450px; overflow: auto;"></ul>',
+        listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
+        bottomContainer    : '<div class=bottomline></div>',  
+        resultSelector   : '#results',
+        facetSelector    : '#facets',
+        resultTemplate   : item_template,
+        paginationCount  : 50
+      }   
+      $.facetelize(settings);
+      
+      var analyzerParam = window.location.hash.split('analyzer=')[1];
+      console.log(analyzerParam);
+      var fileParam = window.location.hash.split('file=')[1];
+      if(analyzerParam !== undefined) {
+        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam.toLowerCase() + "']").click();
+      }
+      if(fileParam !== undefined) {
+        $('#file .facetlist').find("[data-file='" + fileParam.toLowerCase() + "']").click();
+      }
+    });
+  </script>
+JAVASCRIPTCODE;
+
+        $baseHTML = $this->getBasedPage($section->source);
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $finalHTML = $this->injectBloc($finalHTML, 'TOTAL', (string) $total);
+        $this->putBasedPage($section->file, $finalHTML);
+    }
+
+    protected function generateCodes(Section $section): void {
+        // $this is short-circuited on purpose.
     }
 }
 
