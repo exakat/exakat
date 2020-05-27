@@ -34,7 +34,7 @@ class GtOrLtFavorite extends Analyzer {
         }
 
         $mapping = <<<'GREMLIN'
-if (it.get().value("code") in ***) {
+if (it.get().value("code").toLong() in ***) {
     x2 = '>';
 } else {
     x2 = '<';

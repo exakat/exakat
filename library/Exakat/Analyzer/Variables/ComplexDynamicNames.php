@@ -47,7 +47,7 @@ class ComplexDynamicNames extends Analyzer {
 
         // ${strtolower($a)};
         $this->atomIs('Variable')
-             ->tokenIs('T_DOLLAR_OPEN_CURLY_BRACES')
+             ->tokenIs('T_DOLLAR')
              ->outIs('NAME')
              ->atomIsNot(self::CONTAINERS)
              ->back('first');
