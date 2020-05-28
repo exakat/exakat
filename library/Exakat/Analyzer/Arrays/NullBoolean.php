@@ -52,8 +52,7 @@ class NullBoolean extends Analyzer {
              ->back('first')
              ->outIs('DEFINITION')
              ->inIs('VARIABLE')
-             ->atomIs('Array')
-             ;
+             ->atomIs('Array');
         $this->prepareQuery();
 
 
