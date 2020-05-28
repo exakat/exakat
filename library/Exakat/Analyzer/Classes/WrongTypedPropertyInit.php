@@ -28,9 +28,9 @@ class WrongTypedPropertyInit extends Analyzer {
     protected $phpVersion = '7.4+';
 
     public function dependsOn(): array {
-        return array('Complete/CreateDefaultValues',
-                     'Complete/PropagateCalls',
+        return array('Complete/PropagateCalls',
                      'Complete/FollowClosureDefinition',
+                     'Complete/CreateDefaultValues',
                     );
     }
 
@@ -74,13 +74,10 @@ class WrongTypedPropertyInit extends Analyzer {
 
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->inIs('DEFINITION')
-                             ->atomIs(self::CIT)
-                             ->goToAllImplements(self::INCLUDE_SELF)
-                             ->samePropertyAs('fullnspath', 'fnp')
-                        )
+                     ->inIs('DEFINITION')
+                     ->atomIs(self::CIT)
+                     ->goToAllImplements(self::INCLUDE_SELF)
+                     ->samePropertyAs('fullnspath', 'fnp')
              )
              ->back('first');
         $this->prepareQuery();

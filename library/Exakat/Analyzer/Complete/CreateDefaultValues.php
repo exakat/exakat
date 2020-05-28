@@ -46,10 +46,11 @@ class CreateDefaultValues extends Complete {
              ->atomIs('Assignation', self::WITHOUT_CONSTANTS)
              ->codeIs(array('=', '??='), self::TRANSLATE, self::CASE_SENSITIVE) // can't accept .=, +=, etc.
 
-             // doesn't use self
+             // doesn't use self : $a = $a + 1 is not a default value
              ->followParAs('RIGHT')
              ->not(
                 $this->side()
+                     ->outIs('LEFT')
                      ->atomInsideNoDefinition(self::VARIABLES_ALL)
                      ->inIs('DEFINITION')
                      ->inIsIE('NAME')
