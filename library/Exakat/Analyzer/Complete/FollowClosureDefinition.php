@@ -27,37 +27,40 @@ class FollowClosureDefinition extends Complete {
         // immediate usage : in parenthesis
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
              ->inIsIE('RIGHT') // Skip all $closure =
-              ->inIs('CODE')
-              ->atomIs('Parenthesis')
-              ->inIs('NAME')
-              ->atomIs('Functioncall')
-              ->addETo('DEFINITION', 'first');
+             ->inIs('CODE')
+             ->atomIs('Parenthesis')
+             ->inIs('NAME')
+             ->atomIs('Functioncall')
+             ->hasNoIn('DEFINITION')
+             ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
         // local usage
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
-              ->inIs('RIGHT')
-              ->outIs('LEFT')
-              ->inIs('DEFINITION')  // Find all variable usage
-              ->outIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'first');
+             ->inIs('RIGHT')
+             ->outIs('LEFT')
+             ->inIs('DEFINITION')  // Find all variable usage
+             ->outIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
+             ->hasNoIn('DEFINITION')
+             ->addEFrom('DEFINITION', 'first');
         $this->prepareQuery();
 
         // relayed usage
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
-              ->hasIn('ARGUMENT')
-              ->savePropertyAs('rank', 'ranked')
-              ->inIs('ARGUMENT')
-              ->inIs('DEFINITION')  // Find all variable usage
-              ->outIs('ARGUMENT')
-              ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
-              ->outIs('NAME')
-              ->outIs('DEFINITION')
-              ->inIs('NAME')
-              ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
-              ->addEFrom('DEFINITION', 'first');
+             ->hasIn('ARGUMENT')
+             ->savePropertyAs('rank', 'ranked')
+             ->inIs('ARGUMENT')
+             ->inIs('DEFINITION')  // Find all variable usage
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
+             ->hasNoIn('DEFINITION')
+             ->addEFrom('DEFINITION', 'first');
         $this->prepareQuery();
     }
 }
