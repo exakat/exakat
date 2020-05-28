@@ -38,7 +38,7 @@ class Zip extends Vcs {
         }
     }
 
-    public function clone($source) {
+    public function clone(string $source) : void {
         $this->check();
 
         $binary = file_get_contents($source);

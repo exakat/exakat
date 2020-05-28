@@ -38,7 +38,7 @@ class Bazaar extends Vcs {
         }
     }
 
-    public function clone($source) {
+    public function clone(string $source) : string {
         $this->check();
 
         $source = escapeshellarg($source);

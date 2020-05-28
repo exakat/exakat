@@ -190,7 +190,7 @@ class Config extends Configsource {
 
         $this->config['stubs'] = array_unique(array_merge($this->projectConfig->toArray()['stubs']        ?? array(),
                                                           $this->exakatConfig->toArray()['stubs']         ?? array(),
-                                                          $this->dotExakatYamlConfig->toArray()['stubs']  ?? array(),
+                                                          $this->dotExakatYamlConfig->toArray()['stubs']  ?? array()
                                             ));
 
         // autoload dev

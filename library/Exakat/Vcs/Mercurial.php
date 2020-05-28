@@ -34,7 +34,7 @@ class Mercurial extends Vcs {
         }
     }
 
-    public function clone($source) {
+    public function clone(string $source) : string {
         $this->check();
 
         $sourceArg = escapeshellarg($source);

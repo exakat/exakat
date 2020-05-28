@@ -44,7 +44,7 @@ class Git extends Vcs {
         }
     }
 
-    public function clone($source): void {
+    public function clone(string $source): void {
         $this->check();
         $repositoryDetails = parse_url($source);
 

@@ -160,7 +160,7 @@ function duration(int $seconds) : string {
 }
 
 function unparse_url(array $parsed_url) : string {
-    $scheme   = $parsed_url['scheme'] ?: '';
+    $scheme   = empty($parsed_url['scheme'])     ? '' : $parsed_url['scheme'].'://';
     $host     = $parsed_url['host']   ?: '';
     $port     = isset($parsed_url['port'])     ? ":$parsed_url[port]"          : '';
 

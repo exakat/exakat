@@ -42,7 +42,7 @@ class SevenZ extends Vcs {
         }
     }
 
-    public function clone($source) {
+    public function clone(string $source) : string {
         $this->check();
 
         $binary = file_get_contents($source);
