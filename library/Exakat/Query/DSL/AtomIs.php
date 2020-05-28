@@ -61,14 +61,15 @@ GREMLIN;
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
 emit().repeat(
-coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
+__.hasLabel("Identifier", "Nsname", "Staticconstant", "Variable" , "Ternary", "Coalesce", "Parenthesis", "Functioncall", "Methodcall", "Staticmethodcall")
+.union( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
 
           // local variable
           __.hasLabel(within(["Variable"])).in("DEFINITION").hasLabel('Variabledefinition', 'Staticdefinition').out("DEFAULT"),
           
           // literal value, passed as an argument (Method, closure, function)
           __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter").as("p1").union( __.out("DEFAULT"),
-                                                                                                            __.in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank")),
+                                                                                                              __.in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank")),
 
           // literal value, passed as an argument
           __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
@@ -78,10 +79,8 @@ coalesce( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DE
           __.hasLabel(within(["Parenthesis"])).out("CODE"),
 
           __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED'),
-          
-          // default case, will be filtered by hasLabel()
-          __.identity())
-).times(12)
+          )
+).times(6)
 .hasLabel(within(***))
 GREMLIN;
             return new Command($gremlin, array($diff));
