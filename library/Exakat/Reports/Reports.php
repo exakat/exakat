@@ -36,6 +36,7 @@ abstract class Reports {
                                           'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable', 'Exakatyaml',
                                           'Codeflower', 'Dependencywheel', 'Phpcity', 'Sarb',
                                           'Exakatvendors', 'Topology',
+                                          'Meters',
                                           //'DailyTodo',
                                           );
 
@@ -43,7 +44,9 @@ abstract class Reports {
                                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                                     'CompatibilityPHP74',
                                     'CompatibilityPHP80',
-                                    'Dead code', 'Security', 'Analyze', 'Inventories');
+                                    'Dead code', 'Security', 'Analyze', 'Inventories', 
+                                    'Dump',
+                                    );
 
     private $count = 0;
 
