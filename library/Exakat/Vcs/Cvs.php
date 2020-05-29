@@ -35,7 +35,7 @@ class Cvs extends Vcs {
         }
     }
 
-    public function clone(string $source) : string {
+    public function clone(string $source) : void {
         $this->check();
 
         $source = escapeshellarg($source);

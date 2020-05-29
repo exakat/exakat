@@ -41,7 +41,7 @@ class Targz extends Vcs {
         }
     }
 
-    public function clone(string $source) : string {
+    public function clone(string $source) : void {
         $this->check();
 
         $binary = file_get_contents($source);

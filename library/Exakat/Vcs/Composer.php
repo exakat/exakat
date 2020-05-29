@@ -38,7 +38,7 @@ class Composer extends Vcs {
         }
     }
 
-    public function clone(string $source) : string {
+    public function clone(string $source) : void {
         $this->check();
 
         // composer install
