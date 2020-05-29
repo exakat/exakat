@@ -323,7 +323,7 @@ SELECT COUNT(DISTINCT results.file)
                                   results.file LIKE '/%'               AND 
                                   analyzer IN ($list)
 SQL;
-        $result = $this->sqlite->querySingle($query);
+        $result = $this->sqlite->querySingle($query) ?? '';
 
         return $result;
     }
@@ -468,7 +468,7 @@ SQL;
 SELECT count(*)  AS number
     FROM (SELECT DISTINCT file FROM results WHERE analyzer in ($listSQL))
 SQL;
-        $result = $this->sqlite->querySingle($query);
+        $result = $this->sqlite->querySingle($query) ?? '';
 
         return new Results($result);
     }
@@ -478,7 +478,7 @@ SQL;
 SELECT GROUP_CONCAT(DISTINCT REPLACE(SUBSTR(fullcode, 0, instr(fullcode, '(')), '@', ''))  AS functions FROM results 
     WHERE analyzer = "$analyzer";
 SQL;
-        $res = $this->sqlite->querySingle($query);
+        $res = $this->sqlite->querySingle($query) ?? '';
 
         return explode(',', $res);
     }
