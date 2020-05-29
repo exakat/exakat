@@ -1,27 +1,25 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Exakat\Dump;
 
-use Sqlite3;
 use Exakat\Reports\Helpers\Results;
 
-
 class Dump1 extends Dump {
-    public function fetchAnalysers(array $analysers) : Results {
+    public function fetchAnalysers(array $analysers): Results {
         $query = 'SELECT fullcode, file, line, analyzer, class, namespace FROM results WHERE analyzer IN (' . makeList($analysers) . ')';
         $res = $this->sqlite->query($query);
 
         return new Results($res, array('phpsyntax' => array('fullcode' => 'htmlcode')));
     }
 
-    public function fetchAnalysersCounts(array $analysers) : Results {
+    public function fetchAnalysersCounts(array $analysers): Results {
         $query = 'SELECT analyzer, count FROM resultsCounts WHERE analyzer IN (' . makeList($analysers) . ')';
         $res = $this->sqlite->query($query);
 
         return new Results($res);
     }
 
-    public function fetchTable(string $table, array $cols = array()) : Results {
+    public function fetchTable(string $table, array $cols = array()): Results {
         if (empty($cols)) {
             $cols = '*';
         } else {
@@ -35,7 +33,7 @@ class Dump1 extends Dump {
             }
             $cols = implode(', ', $cols);
         }
-        
+
         if (!in_array($table, $this->tablesList)) {
             return new Results();
         }
@@ -46,7 +44,7 @@ class Dump1 extends Dump {
         return new Results($res);
     }
 
-    public function getExtensionList() : Results {
+    public function getExtensionList(): Results {
         $query = <<<'SQL'
 SELECT analyzer, count(*) AS count FROM results 
     WHERE analyzer LIKE "Extensions/Ext%"
@@ -57,7 +55,7 @@ SQL;
         return $this->query($query);
     }
 
-    public function fetchHash(string $key) : Results {
+    public function fetchHash(string $key): Results {
         $query = <<<SQL
 SELECT value FROM hash WHERE key = "$key"
 SQL;
@@ -65,7 +63,7 @@ SQL;
         return $this->query($query);
     }
 
-    public function fetchHashResults(string $key) : Results {
+    public function fetchHashResults(string $key): Results {
         $query = <<<SQL
 SELECT key, value FROM hashResults
 WHERE name = "$key"
@@ -75,7 +73,7 @@ SQL;
         return $this->query($query);
     }
 
-    public function getCit($type = 'class') : Results {
+    public function getCit($type = 'class'): Results {
         assert(in_array($type, array('class', 'trait', 'interface')));
 
         $query = "SELECT name FROM cit WHERE type='$type' ORDER BY name";
@@ -83,13 +81,13 @@ SQL;
         return $this->query($query);
     }
 
-    private function query(string $query) : Results {
+    private function query(string $query): Results {
         $res = $this->sqlite->query($query);
 
         return new Results($res);
     }
-    
-    public function fetchTableFunctions() : Results {
+
+    public function fetchTableFunctions(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT functions.*, 
 GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
@@ -111,7 +109,7 @@ SQL
         return new Results($res);
     }
 
-    public function fetchTableMethods() : Results {
+    public function fetchTableMethods(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT methods.*, 
        GROUP_CONCAT((CASE arguments.typehint WHEN ' ' THEN '' ELSE arguments.typehint || ' ' END ) || 
@@ -137,7 +135,7 @@ SQL
         return new Results($res);
     }
 
-    public function fetchTableMethodsByArgument() : Results {
+    public function fetchTableMethodsByArgument(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.type || ' ' || cit.name AS theClass, 
        namespaces.namespace || "\\" || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
@@ -160,8 +158,8 @@ SQL
 
         return new Results($res);
     }
-    
-    public function fetchTableMethodsByReturnType() : Results {
+
+    public function fetchTableMethodsByReturnType(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.type || ' ' || cit.name AS theClass, 
        namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
@@ -180,7 +178,7 @@ SQL
         return new Results($res);
     }
 
-    public function fetchTableClassConstants() : Results {
+    public function fetchTableClassConstants(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.name AS class, 
        classconstants.constant AS constant, 
@@ -204,7 +202,7 @@ SQL
         return new Results($res);
     }
 
-    public function fetchTableProperty() : Results {
+    public function fetchTableProperty(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.name AS class, 
        namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
@@ -225,8 +223,8 @@ SQL
         return new Results($res);
     }
 
-    public function fetchTableCit() : Results {
-        $res = $this->sqlite->query(<<<SQL
+    public function fetchTableCit(): Results {
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.*, 
        cit.type AS type, 
        namespace,
@@ -267,8 +265,8 @@ SQL
 
         return new Results($res);
     }
-    
-    public function fetchTablePhpcity() : Results {
+
+    public function fetchTablePhpcity(): Results {
         $query = <<<'SQL'
 SELECT
      cit.id,
@@ -299,7 +297,7 @@ SQL;
         return new Results($res);
     }
 
-    public function fetchTableUml() : Results {
+    public function fetchTableUml(): Results {
         $query = <<<'SQL'
 SELECT name, cit.id, extends, type, namespace, 
        (SELECT GROUP_CONCAT(method,   "||")   FROM methods    WHERE citId = cit.id) AS methods,
@@ -312,8 +310,8 @@ SQL;
 
         return new Results($res);
     }
-    
-    public function getAnalyzedFiles(array $list) : int {
+
+    public function getAnalyzedFiles(array $list): int {
         $list = makeList($list);
 
         $query = <<<SQL
@@ -330,8 +328,8 @@ SQL;
         return $result;
     }
 
-    public function getTotalAnalyzer() : array {
-        $query = <<<SQL
+    public function getTotalAnalyzer(): array {
+        $query = <<<'SQL'
 SELECT COUNT(*) AS total, 
        COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
     FROM resultsCounts AS rc
@@ -341,8 +339,8 @@ SQL;
 
         return $result->fetchArray(\SQLITE3_ASSOC);
     }
-    
-    public function getSeverityBreakdown(array $list) : Results {
+
+    public function getSeverityBreakdown(array $list): Results {
         $list = makeList($list);
         $query = <<<SQL
 SELECT severity AS label, count(*) AS value
@@ -355,8 +353,8 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getFileBreakdown(array $list) : Results {
+
+    public function getFileBreakdown(array $list): Results {
         $list = makeList($list);
         $query = <<<SQL
 SELECT file, count(*) AS value
@@ -369,8 +367,8 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getTopAnalyzers(array $list, int $limit) : Results {
+
+    public function getTopAnalyzers(array $list, int $limit): Results {
         $listSQL = makeList($list);
 
         $query = <<<SQL
@@ -385,8 +383,8 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getSeveritiesNumberBy(array $list, string $type) : Results {
+
+    public function getSeveritiesNumberBy(array $list, string $type): Results {
         $listSQL = makeList($list);
 
         $query = <<<SQL
@@ -400,7 +398,7 @@ SQL;
         return new Results($result);
     }
 
-    public function getAnalyzersCount(array $list) : Results {
+    public function getAnalyzersCount(array $list): Results {
         $listSQL = makeList($list);
 
         $query = <<<SQL
@@ -414,8 +412,8 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function fetchPlantUml() : Results {
+
+    public function fetchPlantUml(): Results {
         $query = <<<SQL
 SELECT name, cit.id, extends, type, namespace, 
        (SELECT GROUP_CONCAT(method,   "\n")   FROM methods    WHERE citId = cit.id) AS methods,
@@ -429,8 +427,8 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getFilesResultsCounts(array $list) : Results {
+
+    public function getFilesResultsCounts(array $list): Results {
         $listSQL = makeList($list);
 
         $query = <<<SQL
@@ -448,7 +446,7 @@ SQL;
         return new Results($result);
     }
 
-    public function getAnalyzersResultsCounts(array $list) : Results {
+    public function getAnalyzersResultsCounts(array $list): Results {
         $listSQL = makeList($list);
 
         $query = <<<SQL
@@ -463,7 +461,7 @@ SQL;
         return new Results($result);
     }
 
-    public function getCountFileByAnalyzers(array $list) : Results {
+    public function getCountFileByAnalyzers(array $list): Results {
         $listSQL = makeList($list);
 
         $query = <<<SQL
@@ -475,17 +473,17 @@ SQL;
         return new Results($result);
     }
 
-    public function getFunctionsFromAnalyzer(string $analyzer) : array {
+    public function getFunctionsFromAnalyzer(string $analyzer): array {
         $query = <<<SQL
 SELECT GROUP_CONCAT(DISTINCT REPLACE(SUBSTR(fullcode, 0, instr(fullcode, '(')), '@', ''))  AS functions FROM results 
     WHERE analyzer = "$analyzer";
 SQL;
         $res = $this->sqlite->querySingle($query);
-        
+
         return explode(',', $res);
     }
-    
-    public function getCitBySize(string $type = 'class') : Results {
+
+    public function getCitBySize(string $type = 'class'): Results {
         $query = <<<SQL
 SELECT namespaces.namespace || name AS name, 
        name AS shortName, 
@@ -502,9 +500,9 @@ SQL;
         return new Results($result);
     }
 
-    public function getMethodsBySize() : Results {
-        $query = <<<SQL
-SELECT namespaces.namespace || '\\' || name || '::' || method AS name, 
+    public function getMethodsBySize(): Results {
+        $query = <<<'SQL'
+SELECT namespaces.namespace || '\' || name || '::' || method AS name, 
        method AS shortName, 
        files.file, 
        (methods.end - methods.begin) AS size
@@ -522,8 +520,8 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getConcentratedIssues(array $list = array(), int $count = 5) : Results {
+
+    public function getConcentratedIssues(array $list = array(), int $count = 5): Results {
         $sqlList = makeList($list);
 
         $query = <<<SQL
@@ -542,8 +540,8 @@ SQL;
         return new Results($result);
     }
 
-    public function getIdenticalFiles() : Results {
-        $query = <<<SQL
+    public function getIdenticalFiles(): Results {
+        $query = <<<'SQL'
 SELECT GROUP_CONCAT(file) AS list, 
        count(*) AS count 
     FROM files 
@@ -555,11 +553,11 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getCitTree(string $type = 'class') : Results {
+
+    public function getCitTree(string $type = 'class'): Results {
         if ($type === 'trait') {
             // Missing when raw FQN is used
-            $query = <<<SQL
+            $query = <<<'SQL'
     SELECT ns.namespace || cit.name AS child, 
            ttu.implements AS parent
         FROM cit 
@@ -609,9 +607,9 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getTraitConflicts() : Results {
-        $query = <<<SQL
+
+    public function getTraitConflicts(): Results {
+        $query = <<<'SQL'
 SELECT
    t1.name AS t1,
    t2.name AS t2,
@@ -636,9 +634,9 @@ SQL;
 
         return new Results($result);
     }
-    
-    public function getTraitUsage() : Results {
-        $query = <<<SQL
+
+    public function getTraitUsage(): Results {
+        $query = <<<'SQL'
 SELECT
    t1.name AS t1,
    t2.name AS t2
@@ -659,7 +657,7 @@ SQL;
 
         return new Results($result);
     }
-    
+
 }
 
 ?>

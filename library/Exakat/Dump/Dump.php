@@ -1,26 +1,23 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Exakat\Dump;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Query\Query;
 use Sqlite3;
-use Exakat\Graph\Helpers\GraphResults as Results;
 
 class Dump {
     const READ  = 1;
     const INIT  = 0;
-    
+
     protected $project          = null;
     protected $phpexcutable     = null;
     protected $sqlite           = null;
     private $sqliteFileFinal    = '';
     private $sqliteFile         = null;
     private $sqliteFilePrevious = null;
-    
+
     protected $tablesList = array();
 
-    function __construct(string $path, int $init = self::READ, string $project = '', string $phpexecutable = '') {
+    public function __construct(string $path, int $init = self::READ, string $project = '', string $phpexecutable = '') {
         $this->sqliteFileFinal    = $path;
         $this->sqliteFile         = str_replace('/dump', '/.dump', $this->sqliteFileFinal);
         $this->sqliteFilePrevious = str_replace('/dump', '/dump-1', $this->sqliteFileFinal);
@@ -44,22 +41,22 @@ class Dump {
         }
     }
 
-    private function reuse() : void {
+    private function reuse(): void {
         copy($this->sqliteFileFinal, $this->sqliteFile);
         $this->sqlite = new \Sqlite3($this->sqliteFile, \SQLITE3_OPEN_READWRITE);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        
+
         $this->initTablesList();
     }
 
-    private function init() : void {
+    private function init(): void {
         $this->sqlite = new Sqlite3($this->sqliteFile, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
 
         $this->initDump();
     }
 
-    private function openForRead() : void {
+    private function openForRead(): void {
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
             display('Removing old .dump.sqlite');
@@ -67,22 +64,22 @@ class Dump {
 
         $this->sqlite = new \Sqlite3($this->sqliteFileFinal,  \SQLITE3_OPEN_READONLY);
         $this->sqlite->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-        
+
         $this->initTablesList();
     }
 
-    private function initTablesList() : void {
+    private function initTablesList(): void {
         $res = $this->sqlite->query("SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%'");
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $this->tablesList[] = $row['name'];
         }
     }
 
-    static function factory(string $path, int $init = self::READ) : self {
+    public static function factory(string $path, int $init = self::READ): self {
         return new Dump1($path, $init);
     }
 
-    private function initDump() : void {
+    private function initDump(): void {
         $query = <<<'SQL'
 CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
                        thema STRING,
@@ -234,7 +231,7 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                      )
 SQL;
         $this->sqlite->query($query);
-        
+
         $query = <<<'SQL'
 CREATE TABLE arguments (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         name STRING,
@@ -357,7 +354,7 @@ SQL;
         } else {
             $serial = 1;
         }
-        
+
         $toDump = array(array('', 'dump_time',   $time),
                         array('', 'dump_id',     $id),
                         array('', 'dump_serial', $serial),
@@ -367,7 +364,7 @@ SQL;
         display('Inited tables');
     }
 
-    private function collectDatastore() : void {
+    private function collectDatastore(): void {
         $tables = array('analyzed',
                         'compilation52',
                         'compilation53',
@@ -393,14 +390,14 @@ SQL;
         $this->collectTables($tables);
     }
 
-    public function removeResults(array $analyzers) : void {
+    public function removeResults(array $analyzers): void {
         $classesList = makeList($analyzers);
 
         $this->sqlite->query("DELETE FROM results WHERE analyzer IN ($classesList)");
         $this->sqlite->query("DELETE FROM resultsCounts WHERE analyzer IN ($classesList)");
     }
-    
-    public function addResults(array $toDump) : array {
+
+    public function addResults(array $toDump): array {
         if (empty($toDump)) {
             return array();
         }
@@ -408,9 +405,9 @@ SQL;
         $chunks = array_chunk($toDump, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             foreach($chunk as &$c) {
-                assert(count($c) === 8, "Wrong column count for results : ".print_r($c, true));
+                assert(count($c) === 8, 'Wrong column count for results : ' . print_r($c, true));
                 $c = array_map(array($this->sqlite, 'escapeString'), $c);
-                $c = '(NULL, \''.implode('\', \'', $c).'\')';
+                $c = '(NULL, \'' . implode('\', \'', $c) . '\')';
             }
             $sql = 'REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") VALUES ' . implode(', ', $chunk);
             $this->sqlite->query($sql);
@@ -418,31 +415,31 @@ SQL;
 
         $return = array_column($toDump, 6);
         $return = array_count_values($return);
-        
+
         $query = array();
         foreach($return as $k => $v) {
             $query[] = "(NULL, '$k', $v)";
         }
 
-        $this->sqlite->query("INSERT INTO resultsCounts (\"id\", \"analyzer\", \"count\") VALUES ".implode(', ', $query));
-        
+        $this->sqlite->query('INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES ' . implode(', ', $query));
+
         // Pretty sneaaaaky, as it doesn't count the stored rows
         return $return;
     }
 
-    public function addEmptyResults(array $toDump) : void {
+    public function addEmptyResults(array $toDump): void {
         $chunks = array_chunk($toDump, SQLITE_CHUNK_SIZE);
         foreach($chunks as $chunk) {
             foreach($chunk as &$c) {
-                $c = "(NULL, '".$c."', 0)";
+                $c = "(NULL, '" . $c . "', 0)";
             }
             $sql = 'REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES ' . implode(', ', $chunk);
             $this->sqlite->query($sql);
         }
     }
 
-    public function getTableCount(string $table) : int {
-        return $this->sqlite->querySingle('SELECT count(*) FROM '.$table);
+    public function getTableCount(string $table): int {
+        return $this->sqlite->querySingle('SELECT count(*) FROM ' . $table);
     }
 
     public function collectTables($tables): void {
@@ -463,22 +460,22 @@ SQL;
         $this->sqlite->query('DETACH datastore');
     }
 
-    public function close() : void {
+    public function close(): void {
         $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, \'Project/Dump\', 1)');
-        
+
         rename($this->sqliteFile, $this->sqliteFileFinal);
     }
-    
-    public function cleanTable(string $table) : void {
-        $query = 'DELETE FROM '.$table;
+
+    public function cleanTable(string $table): void {
+        $query = 'DELETE FROM ' . $table;
         $this->sqlite->query($query);
     }
 
-    public function storeInTable(string $table, Iterable $results) : int {
+    public function storeInTable(string $table, Iterable $results): int {
         $values = array();
         $total  = 0;
         foreach($results as $change) {
-            $values[] = str_replace("(''", '(null', '('.makeList(array_map(array($this->sqlite, 'escapeString'), $change), "'").')');
+            $values[] = str_replace("(''", '(null', '(' . makeList(array_map(array($this->sqlite, 'escapeString'), $change), "'") . ')');
             // str_replace is an ugly hack for id, which should be null.
             ++$total;
         }
@@ -486,7 +483,7 @@ SQL;
         if (!empty($values)) {
             $chunks = array_chunk($values, SQLITE_CHUNK_SIZE);
             foreach($chunks as $chunk) {
-                $query = 'REPLACE INTO '.$table.' VALUES ' . implode(', ', $chunk);
+                $query = 'REPLACE INTO ' . $table . ' VALUES ' . implode(', ', $chunk);
                 $this->sqlite->query($query);
             }
         }
@@ -494,12 +491,12 @@ SQL;
         return count($values);
     }
 
-    public function storeQueries(array $queries) : int {
+    public function storeQueries(array $queries): int {
         $this->sqlite->lastErrorCode();
         foreach($queries as $query) {
             $res = $this->sqlite->query($query);
             if ($this->sqlite->lastErrorCode()) {
-                print  $query.PHP_EOL.PHP_EOL;
+                print  $query . PHP_EOL . PHP_EOL;
             }
         }
 
