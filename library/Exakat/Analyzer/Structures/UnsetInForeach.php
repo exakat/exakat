@@ -56,7 +56,6 @@ class UnsetInForeach extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Unset')
              ->outIs('ARGUMENT')
-             ->outIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIs('Variable')
              ->samePropertyAs('code', 'blind', self::CASE_SENSITIVE)
              ->back('first');

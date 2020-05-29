@@ -130,7 +130,7 @@ class QueryDoc {
         }
         $sack = $this->sackToGremlin($sack);
         */
-        $sack = self::SACK;;
+        $sack = self::SACK;
         $this->query = "g{$sack}.V()";
 
         $commands  = array_column($this->commands, 'gremlin');

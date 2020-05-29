@@ -957,7 +957,7 @@ HTML;
             $dataCritical[] = $value['Critical'] ?? 0;
             $dataMajor[]    = $value['Major']    ?? 0;
             $dataMinor[]    = $value['Minor']    ?? 0;
-            $dataNone[]     = $value['None']     ?? 0;;
+            $dataNone[]     = $value['None']     ?? 0;
         }
 
         return array(
