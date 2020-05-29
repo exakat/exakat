@@ -30,7 +30,7 @@ class MagicMethod extends Analyzer {
         // class x { function __clone() {}}
         $this->atomIs('Magicmethod')
              ->outIs('NAME')
-             ->codeIsNot(array('__construct', '__destruct'))
+             ->codeIsNot(array('__construct', '__destruct'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }
