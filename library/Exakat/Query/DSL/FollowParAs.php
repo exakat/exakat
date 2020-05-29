@@ -49,17 +49,17 @@ class FollowParAs extends DSL {
             $out = 'out(' . makeList($out) . ').';
         }
 
-        $TIME_LIMIT = self::$TIME_LIMIT;
+         $TIME_LIMIT = self::$TIME_LIMIT;
         return new Command(<<<GREMLIN
  {$out}repeat( 
-    __.timelimit({$TIME_LIMIT})
+    __.timeLimit(10000)
       .coalesce(__.hasLabel("Parenthesis").out("CODE"), 
                 __.hasLabel("Assignation").out("RIGHT"), 
                 __.hasLabel("Ternary").where(__.out("THEN").not(hasLabel("Void"))).out("THEN", "ELSE"), 
                 __.hasLabel("Ternary").where(__.out("THEN").    hasLabel("Void" )).out("CONDITION", "ELSE"), 
                 __.hasLabel("Coalesce").out("RIGHT", "LEFT")
       )
-.until(__.not(hasLabel("Parenthesis", "Assignation", "Ternary", "Coalesce")))
+).until(__.not(hasLabel("Parenthesis", "Assignation", "Ternary", "Coalesce")))
 GREMLIN
 );
     }
