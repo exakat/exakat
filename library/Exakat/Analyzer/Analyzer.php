@@ -171,6 +171,7 @@ abstract class Analyzer {
     const CONTEXT_OUTSIDE_CLOSURE = 2;
 
     const MAX_LOOPING = 15;
+    const TIME_LIMIT  = 10000;  // 10s, used with timelimit() from gremlin.
 
     private static $rulesId         = null;
 

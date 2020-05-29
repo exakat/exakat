@@ -124,13 +124,14 @@ abstract class DSL {
 
     protected static $linksDown     = '';
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
+    protected static $TIME_LIMIT    = Analyzer::TIME_LIMIT;
 
-    public function __construct($dslfactory,
-                                $availableAtoms,
-                                $availableLinks,
-                                $availableFunctioncalls,
-                                &$availableVariables,
-                                &$availableLabels,
+    public function __construct(DSLfactory $dslfactory,
+                                array $availableAtoms = array(),
+                                array $availableLinks,
+                                array $availableFunctioncalls,
+                                array &$availableVariables,
+                                array &$availableLabels,
                                 $ignoredcit,
                                 $ignoredfunctions,
                                 $ignoredconstants,
@@ -198,11 +199,11 @@ abstract class DSL {
         return true;
     }
 
-    protected function isVariable($name): bool {
+    protected function isVariable(string $name): bool {
         return in_array($name, $this->availableVariables);
     }
 
-    protected function assertVariable($name, $write = self::VARIABLE_READ): bool {
+    protected function assertVariable(string $name, bool $write = self::VARIABLE_READ): bool {
         if ($write === self::VARIABLE_WRITE) {
             assert(!$this->isVariable($name), "Variable '$name' is already taken : " . print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true) . PHP_EOL . print_r($this, true));
             assert(!in_array($name, self::PROPERTIES), "Don't use a property name as a variable ($name)");
@@ -249,7 +250,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function assertAtom($atom) {
+    protected function assertAtom($atom) : bool {
         if (is_string($atom)) {
             assert($atom === ucfirst(strtolower($atom)), "Wrong format for Atom name : $atom");
         } elseif (is_array($atom)) {
@@ -263,7 +264,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function assertAnalyzer($analyzer) {
+    protected function assertAnalyzer($analyzer) : bool {
         if (is_string($analyzer)) {
             assert(preg_match('#^[A-Z]\w+/[A-Z]\w+$#', $analyzer) !== false, "Wrong format for Analyzer : $analyzer");
             assert(class_exists('\\Exakat\\Analyzer\\' . str_replace('/', '\\', $analyzer)), "No such analyzer as $analyzer");
@@ -279,7 +280,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function isProperty($property) {
+    protected function isProperty($property) : bool {
         return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir', 'virtual', 'analyzer', 'propagated'));
     }
 

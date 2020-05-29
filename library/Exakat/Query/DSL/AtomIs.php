@@ -61,7 +61,7 @@ GREMLIN;
             // arrays, members, static members are not supported
             $gremlin = <<<'GREMLIN'
 emit().repeat(
-__.hasLabel("Identifier", "Nsname", "Staticconstant", "Variable" , "Ternary", "Coalesce", "Parenthesis", "Functioncall", "Methodcall", "Staticmethodcall")
+__.timeLimit($this->TIME_LIMIT).hasLabel("Identifier", "Nsname", "Staticconstant", "Variable" , "Ternary", "Coalesce", "Parenthesis", "Functioncall", "Methodcall", "Staticmethodcall")
 .union( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
 
           // local variable
