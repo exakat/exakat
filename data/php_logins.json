@@ -32,7 +32,13 @@
  "cubrid_pconnect_with_url":2,
  "openssl_pkcs12_export_to_file":3,
  "openssl_pkcs12_export":3,
- "openssl_pkcs12_read":2
+ "openssl_pkcs12_read":2,
+ "openssl_encrypt":2,
+ "openssl_decrypt":2,
+ "openssl_open":2,
+ "openssl_sign":2,
+ "openssl_verify":2,
+ "sodium_crypto_sign":1
  },
  "methods":[
  {"class":"\\ziparchive", "method":"setPassword", "position":0 },
