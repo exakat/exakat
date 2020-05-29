@@ -26,6 +26,11 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableOneLetter extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+
     public function analyze() {
         // Normal variables
         $this->atomIs(self::VARIABLES_USER)
@@ -33,18 +38,28 @@ class VariableOneLetter extends Analyzer {
              ->fullcodeLength(' == 2 ');
         $this->prepareQuery();
 
+        // Normal variables in a string : {$y}
+        $this->atomIs(self::VARIABLES_USER)
+             ->tokenIs('T_CURLY_OPEN')
+             ->fullcodeLength(' == 4 '); // fullcode includes the {}
+        $this->prepareQuery();
+
         // ${variables}
         $this->atomIs(self::VARIABLES_USER)
-             ->tokenIs(array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'))
-             ->fullcodeLength(' == 4 ');
+             ->tokenIs(array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES', 'T_STRING_VARNAME'))
+             ->outIs('NAME')
+             ->atomIs(array('String', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
+             ->fullcodeLength(' == 3 ')
+             ->back('first');
         $this->prepareQuery();
 
         // {$variables}
         $this->atomIs(self::VARIABLES_USER)
              ->tokenIs('T_DOLLAR')
              ->outIs('NAME')
-             ->tokenIs('T_STRING')
-             ->fullcodeLength(' == 1 ');
+             ->atomIs(array('String', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
+             ->fullcodeLength(' == 3 ')
+             ->back('first');
         $this->prepareQuery();
     }
 }

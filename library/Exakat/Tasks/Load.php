@@ -378,10 +378,10 @@ class Load extends Tasks {
             $this->phptokens::T_GOTO                     => 'processGoto',
 
             $this->phptokens::T_STRING                   => 'processString',
+            $this->phptokens::T_STRING_VARNAME           => 'processString', // ${x} x is here 
             $this->phptokens::T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
             $this->phptokens::T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
             $this->phptokens::T_NUM_STRING               => 'processLiteral',
-            $this->phptokens::T_STRING_VARNAME           => 'processVariable',
 
             $this->phptokens::T_ARRAY_CAST               => 'processCast',
             $this->phptokens::T_BOOL_CAST                => 'processCast',
@@ -1157,6 +1157,12 @@ class Load extends Tasks {
 
         $this->popExpression();
         $this->addLink($variable, $name, 'NAME');
+        
+        if ($atom === 'Identifier') {
+            $this->getFullnspath($name, 'const', $name);
+            print_r($name);
+            $this->calls->addCall('const', $name->fullnspath, $name);
+        }
 
         $variable->fullcode  = '${' . $name->fullcode . '}';
         $variable->enclosing = self::ENCLOSING;
@@ -2029,10 +2035,12 @@ class Load extends Tasks {
             $this->getFullnspath($nsname, 'class', $nsname);
 
             $this->calls->addCall('class', $nsname->fullnspath, $nsname);
+
         } elseif ($this->contexts->isContext(Context::CONTEXT_NEW) &&
                   $this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
             $this->getFullnspath($nsname, 'class', $nsname);
             $this->calls->addCall('class', $nsname->fullnspath, $nsname);
+
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // DO nothing
 

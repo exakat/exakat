@@ -2,7 +2,7 @@
 
 $expected     = array('${x}',
                       '{$y}',
-                      '${z}',
+                      '${z2}',
                      );
 
 $expected_not = array('${x2}',
