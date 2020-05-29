@@ -29,6 +29,7 @@ abstract class Graph {
 
     public const GRAPHDB = array('nogremlin',
                                  'gsneo4j',
+                                 'gsneo4jV3',
                                  'tinkergraph',
                                  'tinkergraphv3',
                                  'janusgraph',

@@ -32,6 +32,7 @@ class ExakatConfig extends Config {
     private $gremlins = array( 'tinkergraph'   => 'Tinkergraph',
                                'tinkergraphv3' => 'TinkergraphV3',
                                'gsneo4j'       => 'GSNeo4j',
+                               'gsneo4jv3'     => 'GSNeo4jV3',
                                'janusgraph'    => 'Janusgraph',
                                'nogremlin'     => 'NoGremlin',
                                );
@@ -39,6 +40,7 @@ class ExakatConfig extends Config {
     private $loaders = array( 'tinkergraph'   => 'SplitGraphson',
                               'tinkergraphv3' => 'SplitGraphson',
                               'gsneo4j'       => 'SplitGraphson',
+                              'gsneo4jv3'     => 'SplitGraphson',
                               'janusgraph'    => 'SplitGraphson',
                               'nogremlin'     => 'None',
                               );
