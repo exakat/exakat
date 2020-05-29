@@ -29,19 +29,10 @@ class Ambassador extends Emissary {
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Ambassador';
 
-    protected $analyzers       = array(); // cache for analyzers [Title] = object
-    protected $projectPath     = null;
-    protected $finalName       = null;
-
     protected $frequences        = array();
     protected $timesToFix        = array();
     protected $themesForAnalyzer = array();
     protected $severities        = array();
-
-    protected $generations       = array();
-    protected $generations_files = array();
-
-    protected $usedFiles         = array();
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
