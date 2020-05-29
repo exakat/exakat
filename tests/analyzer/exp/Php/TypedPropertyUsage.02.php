@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('private static $y1', 
+$expected     = array('private static y $y1', 
                       'static private y $y2', 
                       'var y $y5',
                      );

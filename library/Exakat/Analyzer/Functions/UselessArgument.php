@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class UselessArgument extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/PropagateCalls',
-//                     'Complete/PropagateConstants',
                      'Complete/FollowClosureDefinition',
                     );
     }

@@ -36,8 +36,6 @@ class Typechecks extends Emissary {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $compatibilities = array();
-
     public function __construct() {
         parent::__construct();
 
