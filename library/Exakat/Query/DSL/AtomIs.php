@@ -59,9 +59,10 @@ GREMLIN;
         } elseif ($flags === Analyzer::WITH_CONSTANTS &&
                  array_intersect($diff, array('String', 'Concatenation', 'Ternary', 'Arrayliteral', 'Integer', 'Null', 'Boolean', 'Magicmethod', 'Float'))) {
             // arrays, members, static members are not supported
-            $gremlin = <<<'GREMLIN'
+            $TIME_LIMIT = self::$TIME_LIMIT;
+            $gremlin = <<<GREMLIN
 emit().repeat(
-__.timeLimit($this->TIME_LIMIT).hasLabel("Identifier", "Nsname", "Staticconstant", "Variable" , "Ternary", "Coalesce", "Parenthesis", "Functioncall", "Methodcall", "Staticmethodcall")
+__.timeLimit($TIME_LIMIT).hasLabel("Identifier", "Nsname", "Staticconstant", "Variable" , "Ternary", "Coalesce", "Parenthesis", "Functioncall", "Methodcall", "Staticmethodcall")
 .union( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
 
           // local variable
