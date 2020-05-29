@@ -56,6 +56,7 @@ class UnreachableCode extends Analyzer {
 
         $this->atomFunctionIs('\\assert')
              ->outWithRank('ARGUMENT', 0)
+             ->is('constant', true)
              ->is('boolean', false)
              ->inIs('ARGUMENT')
              ->nextSiblings()

@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UnreachableCode extends Analyzer {
-    /* 14 methods */
+    /* 15 methods */
 
     public function testStructures_UnreachableCode01()  { $this->generic_test('Structures_UnreachableCode.01'); }
     public function testStructures_UnreachableCode02()  { $this->generic_test('Structures_UnreachableCode.02'); }
@@ -23,5 +23,6 @@ class UnreachableCode extends Analyzer {
     public function testStructures_UnreachableCode12()  { $this->generic_test('Structures/UnreachableCode.12'); }
     public function testStructures_UnreachableCode13()  { $this->generic_test('Structures/UnreachableCode.13'); }
     public function testStructures_UnreachableCode14()  { $this->generic_test('Structures/UnreachableCode.14'); }
+    public function testStructures_UnreachableCode15()  { $this->generic_test('Structures/UnreachableCode.15'); }
 }
 ?>
