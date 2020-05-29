@@ -60,7 +60,7 @@ class HardcodedPasswords extends Analyzer {
              ->back('value')
              ->outIs('VALUE')
              ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
-             ->regexIsNot('code', '/required/')
+             ->regexIsNot('noDelimiter', 'required')
              ->back('first');
         $this->prepareQuery();
 
@@ -77,7 +77,7 @@ class HardcodedPasswords extends Analyzer {
              ->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
-             ->regexIsNot('code', '/required/')
+             ->regexIsNot('noDelimiter', 'required')
              ->back('first');
         $this->prepareQuery();
     }
