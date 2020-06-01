@@ -31,6 +31,7 @@ class UnusedMethods extends Analyzer {
                      'Classes/UsedMethods',
                      'Modules/CalledByModule',
                      'Classes/IsInterfaceMethod',
+                     'Classes/DynamicSelfCalls',
                     );
     }
 
@@ -41,6 +42,11 @@ class UnusedMethods extends Analyzer {
         // Methods definitions in class
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('abstract', true)
+
+             // Skip methods that are overwriten. They are default behavior, expected to be replaced
+             ->hasNoIn('OVERWRITE')
+
+             // Skip traits
              ->hasClass()
              ->analyzerIsNot(array('Classes/UsedMethods',
                                    'Modules/CalledByModule',
@@ -49,11 +55,18 @@ class UnusedMethods extends Analyzer {
              ->not(
                 $this->side()
                      ->analyzerIs('Classes/IsInterfaceMethod')
+             )
+
+             // Skip classes that do self dynamical calls : $this->$m() 
+             ->filter(
+                $this->side()
+                     ->goToClass()
+                     ->analyzerIsNot('Classes/DynamicSelfCalls')
              );
         $this->prepareQuery();
 
         // Methods definitions in trait
-        // Missing OVERWRITE and IsInterfaceDDefinition analysiss
+        // Missing OVERWRITE
     }
 }
 

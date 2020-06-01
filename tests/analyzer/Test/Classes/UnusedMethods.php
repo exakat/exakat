@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UnusedMethods extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testClasses_UnusedMethods01()  { $this->generic_test('Classes_UnusedMethods.01'); }
     public function testClasses_UnusedMethods02()  { $this->generic_test('Classes_UnusedMethods.02'); }
@@ -16,5 +16,7 @@ class UnusedMethods extends Analyzer {
     public function testClasses_UnusedMethods05()  { $this->generic_test('Classes_UnusedMethods.05'); }
     public function testClasses_UnusedMethods06()  { $this->generic_test('Classes/UnusedMethods.06'); }
     public function testClasses_UnusedMethods07()  { $this->generic_test('Classes/UnusedMethods.07'); }
+    public function testClasses_UnusedMethods08()  { $this->generic_test('Classes/UnusedMethods.08'); }
+    public function testClasses_UnusedMethods09()  { $this->generic_test('Classes/UnusedMethods.09'); }
 }
 ?>
