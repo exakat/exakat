@@ -68,7 +68,7 @@ class Container {
     }
 
     private function dictionary() {
-        $this->dictionary = new Dictionary($this->datastore);
+        $this->dictionary = new Dictionary();
     }
 
     private function methods() {

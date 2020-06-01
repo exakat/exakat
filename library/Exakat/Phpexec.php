@@ -348,7 +348,7 @@ class Phpexec {
             return true;
         }
 
-        display("\nCan't understand this php feedback for '$filename': $resFile\n");
+        display("\nCan't understand this php feedback for $resFile\n");
 
         return false;
     }

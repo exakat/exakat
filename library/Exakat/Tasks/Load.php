@@ -3366,9 +3366,9 @@ class Load extends Tasks {
         $foreach = $this->addAtom('Foreach', $current);
         ++$this->id; // Skip foreach
 
-        while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_AS) {
+        do {
             $source = $this->processNext();
-        }
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_AS);
 
         $this->popExpression();
         $this->addLink($foreach, $source, 'SOURCE');
@@ -3505,9 +3505,9 @@ class Load extends Tasks {
             if (in_array($this->tokens[$this->id + 1][0], $specials, \STRICT_COMPARISON)) {
                 $this->processNext();
             } else {
-                while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON)) {
+                do {
                     $expression = $this->processNext();
-                }
+                } while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
                 $this->popExpression();
                 if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG) {
                     $this->addToSequence($expression);
@@ -3766,9 +3766,9 @@ class Load extends Tasks {
         ++$this->id; // Skip (
         $this->cases->push();
 
-        while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
+        do {
             $name = $this->processNext();
-        }
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS);
         $this->popExpression();
         $this->addLink($switch, $name, 'CONDITION');
 

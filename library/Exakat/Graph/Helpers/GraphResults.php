@@ -46,14 +46,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
             return;
         }
-/*
-        if (is_scalar($data)) {
-            $this->type = self::SCALAR;
-            $this->data = $data;
 
-            return;
-        }
-*/
 // A garder. liste de résultats
         if (is_array($data)) {
             if (!isset($data[0]) || ($data[0] === null)) {
@@ -68,19 +61,11 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
             return;
         }
-/*
-        if ($data instanceof stdClass) {
-            $this->type = self::ARRAY;
-            $this->data = (array) $data;
-            $this->checkArray();
 
-            return;
-        }
-*/
         assert(false, 'Could not understand GraphResults incoming data');
     }
 
-    private function checkArray() {
+    private function checkArray() : void {
         if (empty($this->data)) {
             return;
         }
