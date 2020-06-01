@@ -2,11 +2,11 @@
 
 $expected     = array('function unusedCMethod( ) { /**/ } ',
                       'function abstractCMethod( ) { /**/ } ',
-                      'function unusedCMethod( ) { /**/ } ',
                      );
 
 $expected_not = array('function usedCMethod( ) { /**/ } ',
                       'abstract function abstractCMethod( ) { /**/ } ',
+                      'function unusedCMethod( ) { /**/ } ', // Only one has to be found. The other is overwritten, so OK.
                      );
 
 ?>
