@@ -550,12 +550,14 @@ function rstlist2html(string $raw) : string {
     return implode(PHP_EOL, $html);
 }
 
+// split a string into an array, based on delimiter, then apply trim to clean hidden spaces
 function str2array(string $string, string $delimiter = ',') : array {
     $array = explode($delimiter, $string);
     
     return array_map('trim', $array);
 }
 
+// convert a number into its English ordinal name
 function ordinal(int $number) : string {
     $ends = array('th','st','nd','rd','th','th','th','th','th','th');
     if (($number % 100 >= 11) && ($number % 100 <= 13)) {

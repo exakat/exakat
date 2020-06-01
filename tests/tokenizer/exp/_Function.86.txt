@@ -1,0 +1,121 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              9
+            Label : NAME
+              6
+            Label : TYPEHINT
+              7
+            Label : TYPEHINT
+              8
+          Label : BLOCK
+            12
+            Label : EXPRESSION
+              10
+          Label : NAME
+            5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            10
+        Label : EXPRESSION
+          13
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              9
+            Label : NAME
+              6
+            Label : TYPEHINT
+              8
+            Label : TYPEHINT
+              9
+          Label : BLOCK
+            12
+            Label : EXPRESSION
+              10
+          Label : NAME
+            13
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            10
+        Label : EXPRESSION
+          14
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              15
+              Label : ARGUMENT
+                10
+            Label : NAME
+              6
+            Label : TYPEHINT
+              7
+            Label : TYPEHINT
+              8
+          Label : BLOCK
+            12
+            Label : EXPRESSION
+              10
+          Label : NAME
+            14
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            10
+        Label : EXPRESSION
+          16
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              9
+            Label : NAME
+              6
+            Label : TYPEHINT
+              10
+            Label : TYPEHINT
+              9
+          Label : BLOCK
+            12
+            Label : EXPRESSION
+              10
+          Label : NAME
+            16
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            10
+        Label : EXPRESSION
+          17
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              9
+            Label : NAME
+              6
+            Label : TYPEHINT
+              18
+            Label : TYPEHINT
+              9
+          Label : BLOCK
+            12
+            Label : EXPRESSION
+              10
+          Label : NAME
+            17
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            10

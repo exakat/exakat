@@ -1,0 +1,17 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CAST
+            8
+            Label : CLASS
+              6
+            Label : MEMBER
+              7
