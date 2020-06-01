@@ -124,6 +124,19 @@ class InsufficientPropertyTypehint extends Analyzer {
              )
              ->back('first');
         $this->prepareQuery();
+
+        // class x { private $p = null; function foo() { $this->p->m2();} }
+        // No typehint, but used as an object
+        $this->atomIs('Propertydefinition')
+             ->analyzerIsNot('self')
+             ->inIs('PPP')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->back('first')
+             ->outIs('DEFINITION')
+             ->hasIn(array('OBJECT', 'CLASS'))
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

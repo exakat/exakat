@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class InsufficientPropertyTypehint extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testClasses_InsufficientPropertyTypehint01()  { $this->generic_test('Classes/InsufficientPropertyTypehint.01'); }
     public function testClasses_InsufficientPropertyTypehint02()  { $this->generic_test('Classes/InsufficientPropertyTypehint.02'); }
@@ -15,5 +15,6 @@ class InsufficientPropertyTypehint extends Analyzer {
     public function testClasses_InsufficientPropertyTypehint04()  { $this->generic_test('Classes/InsufficientPropertyTypehint.04'); }
     public function testClasses_InsufficientPropertyTypehint05()  { $this->generic_test('Classes/InsufficientPropertyTypehint.05'); }
     public function testClasses_InsufficientPropertyTypehint06()  { $this->generic_test('Classes/InsufficientPropertyTypehint.06'); }
+    public function testClasses_InsufficientPropertyTypehint07()  { $this->generic_test('Classes/InsufficientPropertyTypehint.07'); }
 }
 ?>
