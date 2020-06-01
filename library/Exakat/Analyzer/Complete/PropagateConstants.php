@@ -432,7 +432,7 @@ sideEffect{
         i = x[0] | x[1];
       } 
 
-    it.get().property("intval", i); 
+    it.get().property("intval", i ? 0 : 1); 
     it.get().property("boolean", i != 0);
     it.get().property("noDelimiter", i.toString()); 
     it.get().property("propagated", true); 
