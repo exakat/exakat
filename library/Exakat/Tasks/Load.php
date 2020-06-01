@@ -2261,17 +2261,18 @@ class Load extends Tasks {
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                     ++$this->id; // Skip =
-                    while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
-                                                                            $this->phptokens::T_CLOSE_PARENTHESIS,
-                                                                            $this->phptokens::T_CLOSE_CURLY,
-                                                                            $this->phptokens::T_SEMICOLON,
-                                                                            $this->phptokens::T_CLOSE_BRACKET,
-                                                                            $this->phptokens::T_CLOSE_TAG,
-                                                                            $this->phptokens::T_COLON,
-                                                                            ),
-                            \STRICT_COMPARISON)) {
+                    do {
                         $default = $this->processNext();
-                    }
+                    } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+                                                                              $this->phptokens::T_CLOSE_PARENTHESIS,
+                                                                              $this->phptokens::T_CLOSE_CURLY,
+                                                                              $this->phptokens::T_SEMICOLON,
+                                                                              $this->phptokens::T_CLOSE_BRACKET,
+                                                                              $this->phptokens::T_CLOSE_TAG,
+                                                                              $this->phptokens::T_COLON,
+                                                                              ),
+                            \STRICT_COMPARISON));
+
                     $this->popExpression();
                 } else {
                     if ($index->variadic === self::ELLIPSIS) {
@@ -2284,6 +2285,17 @@ class Load extends Tasks {
                 $this->addLink($index, $default, 'DEFAULT');
                 if ($default->atom !== 'Void') {
                     $index->fullcode .= ' = ' . $default->fullcode;
+
+                    if ($default->atom === 'Null' && 
+                        strpos($typehints, '?') === false &&
+                        preg_match('/\bnull\b/i', $typehints) === 0
+                        ) {
+                        $null = $this->addAtom('Null', $this->id);
+                        $null->fullnspath = '\\null';
+                        $null->aliased    = self::NOT_ALIASED;
+
+                        $this->addLink($index, $null, 'TYPEHINT');
+                    }
                 }
 
                 $index->rank = ++$rank;
