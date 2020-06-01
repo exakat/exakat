@@ -50,9 +50,9 @@ class IsHash extends DSL {
         assert($this->assertProperty($property));
 
         if ($case === Analyzer::CASE_INSENSITIVE) {
-            return new Command("has(\"$property\").filter{ x = ***[$index].collect{ it.toLowerCase() }; it.get().value(\"$property\").toLowerCase() in x; }", array($hash));
+            return new Command("has(\"$property\").filter{ x = ***[$index].collect{ it.toLowerCase() }; [it.get().value(\"$property\").toLowerCase()].intersect(x) != []; }", array($hash));
         } else {
-            return new Command("has(\"$property\").filter{ it.get().value(\"$property\") in ***[$index]}", array($hash));
+            return new Command("has(\"$property\").filter{ [it.get().value(\"$property\")].intersect(***[$index]) != []}", array($hash));
         }
     }
 }

@@ -36,10 +36,10 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
 
     public function analyze() {
         $methods = $this->methods->getMethodsArgsInterval();
-        $argsMins = array_fill(1, 10, array());
-        $argsMaxs = array_fill(1, 10, array());
-        $argsMinsFNP = array_fill(0, 10, array());
-        $argsMaxsFNP = array_fill(0, 10, array());
+        $argsMins    = array();
+        $argsMaxs    = array();
+        $argsMinsFNP = array();
+        $argsMaxsFNP = array();
 
         // Needs to finish the list of methods and their arguments.
         // Needs to checks on constructors too
@@ -48,12 +48,12 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
         // Checking PHP functions
         foreach($methods as $method) {
             if ($method['args_min'] > 0) {
-                $argsMins[$method['args_min']][]    = mb_strtolower($method['name']);
-                $argsMinsFNP[$method['args_min']][makeFullNSpath($method['class'])] = 1;
+                array_collect_by($argsMins, $method['args_min'], mb_strtolower($method['name']));
+                array_collect_by($argsMinsFNP, $method['args_min'], makeFullNSpath($method['class']));
             }
             if ($method['args_max'] < \MAX_ARGS) {
-                $argsMaxs[$method['args_max']][] =  mb_strtolower($method['name']);
-                $argsMaxsFNP[$method['args_max']][makeFullNSpath($method['class'])] = 1;
+                array_collect_by($argsMaxs, $method['args_max'], mb_strtolower($method['name']));
+                array_collect_by($argsMaxsFNP, $method['args_max'], makeFullNSpath($method['class']));
             }
         }
 
@@ -68,7 +68,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->isLess('count', $nb)
                  ->inIs('METHOD')
                  ->outIs('CLASS')
-                 ->isHash('fullnspath', $argsMinsFNP, "$nb")
+                 ->isHash('fullnspath', $argsMinsFNP, (string) $nb)
                  ->inIs('CLASS')
                  ->back('first');
             $this->prepareQuery();
@@ -90,7 +90,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->outIs('RIGHT')
                  ->atomIs('New')
                  ->outIs('NEW')
-                 ->isHash('fullnspath', $argsMinsFNP, "$nb")
+                 ->isHash('fullnspath', $argsMinsFNP, (string) $nb)
                  ->back('first');
             $this->prepareQuery();
 
@@ -107,7 +107,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->isMore('count', $nb)
                  ->inIs('METHOD')
                  ->outIs('CLASS')
-                 ->isHash('fullnspath', $argsMaxsFNP, "$nb")
+                 ->isHash('fullnspath', $argsMaxsFNP, (string) $nb)
                  ->inIs('CLASS')
                  ->back('first');
             $this->prepareQuery();
@@ -129,7 +129,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->outIs('RIGHT')
                  ->atomIs('New')
                  ->outIs('NEW')
-                 ->isHash('fullnspath', $argsMaxsFNP, "$nb")
+                 ->isHash('fullnspath', $argsMaxsFNP, (string) $nb)
                  ->back('first');
             $this->prepareQuery();
         }

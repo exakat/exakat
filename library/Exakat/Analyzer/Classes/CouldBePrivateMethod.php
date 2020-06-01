@@ -82,7 +82,7 @@ class CouldBePrivateMethod extends Analyzer {
         if (!empty($publicStaticMethods)) {
             $calls = array();
             foreach($publicStaticMethods as $value) {
-                array_collect_by($calls, $value['method'], $value['classe']);
+                array_collect_by($calls, $value['classe'], $value['method']);
             }
 
             // Property that is not used outside this class or its children
@@ -90,12 +90,16 @@ class CouldBePrivateMethod extends Analyzer {
                  ->isNot('visibility', 'private')
                  ->is('static', true)
                  ->analyzerIsNot('Classes/MethodUsedBelow')
-                 ->as('results')
-                 ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)
-                 ->savePropertyAs('code', 'variable')
+
                  ->goToClass()
-                 ->isNotHash('fullnspath', $calls, 'variable')
-                 ->back('results');
+                 ->fullnspathIs(array_keys($calls))
+                 ->savePropertyAs('fullnspath', 'fnq')
+                 ->back('first')
+
+                 ->outIs('NAME')
+                 ->isNotHash('lccode', $calls, 'fnq')
+                 ->back('first')
+                 ->dedup();
             $this->prepareQuery();
         }
     }

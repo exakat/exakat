@@ -93,11 +93,11 @@ class UseConstantAsArguments extends Analyzer {
 
             $this->atomFunctionIs(array_keys($constantsWithPosition))
                  ->analyzerIsNot('self')
-                 ->savePropertyAs('fullnspath', 'fqn')
+                 ->savePropertyAs('fullnspath', 'fnq')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs(self::CONSTANTS_ALL)
                  ->analyzerIs('Constants/IsPhpConstant')
-                 ->isNotHash('fullnspath', $constantsWithPosition, 'fqn')
+                 ->isNotHash('fullnspath', $constantsWithPosition, 'fnq')
                  ->back('first');
             $this->prepareQuery();
         }
@@ -109,7 +109,7 @@ class UseConstantAsArguments extends Analyzer {
             foreach((array) $functionsList as $function => $constants) {
                 $fqn = makeFullNsPath($function);
 
-                $positionsWithConstants[$fqn] = (int) $position;
+                $positionsWithConstants[$fqn] = array((int) $position);
             }
         }
 

@@ -78,21 +78,24 @@ GREMLIN
 
         $calls = array();
         foreach($publicConstants as $value) {
-            array_collect_by($calls, $value['constante'], $value['classe']);
+            array_collect_by($calls, $value['classe'], $value['constante']);
         }
 
         // global static constants : the one with no definition class : they are all ignored.
         $this->atomIs('Const')
              ->isNot('visibility', 'private')
+
+             ->goToClass()
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+
              ->outIs('CONST')
              ->analyzerIsNot('Classes/ConstantUsedBelow')
              ->as('results')
              ->outIs('NAME')
              ->codeIsNot($publicUndefinedConstants, self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->codeIsNot(array_keys($calls),        self::NO_TRANSLATE, self::CASE_SENSITIVE)
-             ->savePropertyAs('code', 'constante')
-             ->goToClass()
-             ->isNotHash('fullnspath', $calls, 'constante')
+             ->isNotHash('code', $calls, 'fnp')
              ->back('results');
         $this->prepareQuery();
     }

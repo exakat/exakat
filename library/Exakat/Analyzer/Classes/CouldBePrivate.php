@@ -70,7 +70,9 @@ class CouldBePrivate extends Analyzer {
              ->back('first')
              ->outIs('MEMBER')
              ->as('property')
-             ->raw('select("classe", "property").by("fullnspath").by("code").unique()');
+             ->select(array('classe'    => 'fullnspath',
+                            'property' => 'code'))
+             ->unique();
         $nakedPublicStaticProperties = $this->rawQuery()
                                             ->toArray();
 
@@ -91,7 +93,9 @@ class CouldBePrivate extends Analyzer {
                      ->goToAllParentsTraits(self::INCLUDE_SELF)
                      ->samePropertyAs('fullnspath', 'fnp')
              )
-             ->raw('select("classe", "property").by("fullnspath").by("code").unique()');
+             ->select(array('classe'    => 'fullnspath',
+                            'property'  => 'code'))
+             ->unique();
         $insidePublicStaticProperties = $this->rawQuery()
                                              ->toArray();
         $publicStaticProperties = array_merge($insidePublicStaticProperties, $nakedPublicStaticProperties);
@@ -99,28 +103,26 @@ class CouldBePrivate extends Analyzer {
         // Empty $publicStaticProperties also matters
         $calls = array();
         foreach($publicStaticProperties as $value) {
-            if (isset($calls[$value['property']])) {
-                $calls[$value['property']][] = $value['classe'];
-            } else {
-                $calls[$value['property']] = array($value['classe']);
-            }
+            array_collect_by($calls, $value['classe'], $value['property']);
         }
 
         // Property that is not used outside this class or its children
         $this->atomIs('Ppp')
              ->isNot('visibility', 'private')
              ->is('static', true)
+
+             ->goToClass()
+             ->fullnspathis(array_keys($calls))
+             ->savePropertyAs('fullnspath', 'fnq')
+
+             ->back('first')
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')
              ->analyzerIsNot('Classes/PropertyUsedBelow')
              ->as('results')
-             ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
-             ->savePropertyAs('code', 'variable')
-             ->goToClass()
-             ->isNotHash('fullnspath', $calls, 'variable')
+             ->isNotHash('code', $calls, 'fnq')
              ->back('results');
         $this->prepareQuery();
-
     }
 }
 

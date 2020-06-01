@@ -3,13 +3,8 @@
 $expected     = array('$aspublicButSBProtectedSelf',
                       '$aspublicButSBProtectedStatic',
                       '$aspublicButSBProtectedFull',
-                      '$apublicButSBProtected',
-                      '$aspublicButSBProtectedSelf',
-                      '$aspublicButSBProtectedStatic',
-                      '$aspublicButSBProtectedFull',
-                      '$apublicButSBProtected',
-                      '$aspublicButReally',
-                      '$aspublicButReally2',
+                      '$apublicButSBProtected',  // line 6
+                      '$apublicButSBProtected',  // line 25
                      );
 
 $expected_not = array('$asprotected',

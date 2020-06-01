@@ -35,40 +35,41 @@ class MbstringUnknownEncoding extends Analyzer {
     public function analyze() {
         $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');
 
-        $positions = array('\\mb_preferred_mime_name' => 0,
-                           '\\mb_regex_encoding' => 0,
+        $positions = array('\\mb_preferred_mime_name'  => array(0),
+                           '\\mb_regex_encoding'       => array(0),
 
-                           '\\mb_check_encoding'       => 1,
-                           '\\mb_chr'                  => 1,
-                           '\\mb_ord'                  => 1,
-                           '\\mb_scrub'                => 1,
-                           '\\mb_strlen'               => 1,
+                           '\\mb_check_encoding'       => array(1),
+                           '\\mb_chr'                  => array(1),
+                           '\\mb_ord'                  => array(1),
+                           '\\mb_scrub'                => array(1),
+                           '\\mb_strlen'               => array(1),
 
-                           '\\mb_convert_case'         => 2,
-                           '\\mb_convert_encoding'     => 2,
-                           '\\mb_convert_kana'         => 2,
-                           '\\mb_decode_numericentity' => 2,
-                           '\\mb_encode_numericentity' => 2,
-                           '\\mb_internal_encoding'    => 2,
-                           '\\mb_strcut'               => 2,
-                           '\\mb_strtolower'           => 2,
-                           '\\mb_strtoupper'           => 2,
-                           '\\mb_strwidth'             => 2,
-                           '\\mb_substr_count'         => 2,
+                           '\\mb_convert_case'         => array(2),
+                           '\\mb_convert_encoding'     => array(2),
+                           '\\mb_convert_kana'         => array(2),
+                           '\\mb_decode_numericentity' => array(2),
+                           '\\mb_encode_numericentity' => array(2),
+                           '\\mb_internal_encoding'    => array(2),
+                           '\\mb_strcut'               => array(2),
+                           '\\mb_strtolower'           => array(2),
+                           '\\mb_strtoupper'           => array(2),
+                           '\\mb_strwidth'             => array(2),
+                           '\\mb_substr_count'         => array(2),
 
-                           '\\mb_stripos'              => 3,
-                           '\\mb_stristr'              => 3,
-                           '\\mb_strpos'               => 3,
-                           '\\mb_strripos'             => 3,
-                           '\\mb_strrpos'              => 3,
-                           '\\mb_strrchr'              => 3,
-                           '\\mb_strrichr'             => 3,
-                           '\\mb_strstr'               => 3,
-                           '\\mb_substr'               => 3,
+                           '\\mb_stripos'              => array(3),
+                           '\\mb_stristr'              => array(3),
+                           '\\mb_strpos'               => array(3),
+                           '\\mb_strripos'             => array(3),
+                           '\\mb_strrpos'              => array(3),
+                           '\\mb_strrchr'              => array(3),
+                           '\\mb_strrichr'             => array(3),
+                           '\\mb_strstr'               => array(3),
+                           '\\mb_substr'               => array(3),
 
-                           '\\mb_strimwidth' => 4,
+                           '\\mb_strimwidth'           => array(4),
                           );
 
+        //mb_check_encoding($x, 'UTF9');
         $this->atomFunctionIs(array_keys($positions))
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('ARGUMENT')

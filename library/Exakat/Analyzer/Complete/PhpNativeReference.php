@@ -32,6 +32,7 @@ class PhpNativeReference extends Complete {
             array_collect_by($references, makeFullnspath($function['function']), $function['position']);
         }
 
+        //sort($a);
         $this->atomFunctionIs(array_keys($references))
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs('ARGUMENT')

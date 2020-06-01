@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldBeProtectedProperty extends Analyzer {
     public function analyze() {
+
         // Case of $object->property (that's another public access)
         $this->atomIs('Member')
              ->not(
@@ -51,17 +52,17 @@ class CouldBeProtectedProperty extends Analyzer {
 
         // Case of class::property (that's another public access)
         $this->atomIs('Staticproperty')
-             ->as('init')
              ->outIs('CLASS')
              ->atomIs(array('Identifier', 'Nsname'))
              ->as('classe')
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->inIs('CLASS')
+             ->back('first')
+
              ->hasNoClass()
              ->outIs('MEMBER')
              ->atomIs('Staticpropertyname')
              ->as('variable')
-             ->raw('select("classe", "variable").by("fullnspath").by("code")')
+             ->select(array('classe' => 'fullnspath',
+                            'variable' => 'code'))
              ->unique();
             $res = $this->rawQuery()->toArray();
 
@@ -73,14 +74,16 @@ class CouldBeProtectedProperty extends Analyzer {
         if (!empty($publicStaticProperties)) {
             // Member that is not used outside this class or its children
             $this->atomIs('Ppp')
-                 ->isNot('visibility', array('protected', 'private'))
+                 ->is('visibility', array('public', 'none'))
                  ->is('static', true)
                  ->goToClass()
+                 ->fullnspathIs(array_keys($publicStaticProperties))
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
                  ->outIs('PPP')
                  ->atomIsNot('Virtualproperty')
-                 ->isNotHash('code', $publicStaticProperties, 'fnp');
+                 ->isNotHash('code', $publicStaticProperties, 'fnp')
+                 ->dedup();
             $this->prepareQuery();
         }
     }

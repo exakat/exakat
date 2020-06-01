@@ -27,8 +27,20 @@ use Exakat\Query\Query;
 
 class IsNotHash extends DSL {
     public function run() {
-        assert(func_num_args() <= 3, __METHOD__ . ' should get 3 arguments max, ' . func_num_args() . ' provided.');
-        list($property, $hash, $index) = func_get_args();
+        switch (func_num_args()) {
+            case 3 :
+                list($property, $hash, $index) = func_get_args();
+                $case = Analyzer::CASE_SENSITIVE;
+                break;
+
+            case 4 :
+                list($property, $hash, $index, $case) = func_get_args();
+                assert(in_array($case, array(Analyzer::CASE_INSENSITIVE, Analyzer::CASE_SENSITIVE)));
+                break;
+
+            default:
+                assert(false, 'Wrong number of arguments for ' . __METHOD__);
+        }
 
         if (empty($hash)) {
             return new Command(Query::NO_QUERY);
@@ -36,7 +48,12 @@ class IsNotHash extends DSL {
 
         assert($this->assertProperty($property));
 
-        return new Command("filter{ !(it.get().value(\"$property\") in ***[$index]); }", array($hash));
+        // Cannot make this to work with contains / in (Classes/CouldBeProtectedProperty)
+        if ($case === Analyzer::CASE_INSENSITIVE) {
+            return new Command("has(\"$property\").filter{ x = ***[$index].collect{ it.toLowerCase() }; [it.get().value(\"$property\").toLowerCase()].intersect(x) == []; }", array($hash));
+        } else {
+            return new Command("has(\"$property\").filter{ [it.get().value(\"$property\")].intersect(***[$index]) == []}", array($hash));
+        }
     }
 }
 ?>

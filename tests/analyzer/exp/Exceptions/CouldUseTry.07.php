@@ -6,7 +6,6 @@ $expected     = array('simplexmlelement($a)',
                      );
 
 $expected_not = array('eval(1)',
-                      '',
                      );
 
 ?>

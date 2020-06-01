@@ -30,52 +30,50 @@ class CouldBeProtectedConstant extends Analyzer {
         // Searching for properties that are never used outside the definition class or its children
 
         // global static constants : the one with no definition class : they are all ignored.
-        $queryUndefinedConstants = <<<'GREMLIN'
-g.V().hasLabel("Staticconstant")
-     .not( __.where( __.out("CLASS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface") ) )
-     .out("CONSTANT")
-     .hasLabel("Name")
-     .values("code")
-     .unique()
-GREMLIN;
-        $publicUndefinedConstants = $this->query($queryUndefinedConstants)
-                                         ->toArray();
+        $this->atomIs('Staticconstant')
+             ->hasNoIn('DEFINITION')
+             ->outIs('CONSTANT')
+             ->atomIs('Name')
+             ->values('code')
+             ->unique();
+        $undefinedConstants = $this->rawQuery()->toArray();
 
-        $queryPublicConstants = <<<GREMLIN
-g.V().hasLabel("Staticconstant")
-     .out("CLASS")
-     .as("classe")
-     .has("fullnspath")
-     .sideEffect{ fns = it.get().value("fullnspath"); }
-     .in("CLASS")
-     .out("CONSTANT")
-     .hasLabel("Name")
-     .sideEffect{ name = it.get().value("code"); }
-     .as("constante")
-     .repeat( __.in({$this->linksDown})).until(hasLabel("Class", "Interface", "Classanonymous", "File") )
-     .hasLabel("File")
-     .select("classe", "constante").by("fullnspath").by("code")
-     .unique()
-GREMLIN;
-        $publicConstants = $this->query($queryPublicConstants)
-                                ->toArray();
+        $this->atomIs('Staticconstant')
+             ->hasNoClass()
+
+             ->outIs('CLASS')
+             ->has('fullnspath')
+             ->as('classe')
+             ->back('first')
+             
+             ->outIs('CONSTANT')
+             ->atomIs('Name')
+             ->as('constante')
+
+             ->select(array('classe'    => 'fullnspath', 
+                            'constante' => 'code',
+                            ))
+             ->unique();
+        $publicConstants = $this->rawQuery()->toArray();
 
         $calls = array();
         foreach($publicConstants as $value) {
-            array_collect_by($calls, $value['constante'], $value['classe']);
+            array_collect_by($calls, $value['classe'], $value['constante']);
         }
 
         // global static constants : the one with no definition class : they are all ignored.
         $this->atomIs('Const')
-             ->isNot('visibility', array('private', 'protected'))
+             ->is('visibility', array('none', 'public'))
+             ->goToClass()
+             ->savePropertyAs('fullnspath', 'fnq')
+             ->back('first')
+
              ->outIs('CONST')
              ->as('results')
              ->outIs('NAME')
-             ->codeIsNot($publicUndefinedConstants, self::NO_TRANSLATE, self::CASE_SENSITIVE)
-             ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
-             ->savePropertyAs('code', 'constante')
-             ->goToClass()
-             ->isNotHash('fullnspath', $calls, 'constante')
+             ->codeIsNot($undefinedConstants, self::NO_TRANSLATE, self::CASE_SENSITIVE)
+//             ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
+             ->isNotHash('code', $calls, 'fnq')
              ->back('results');
         $this->prepareQuery();
     }

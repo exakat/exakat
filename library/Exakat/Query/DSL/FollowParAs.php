@@ -37,7 +37,7 @@ class FollowParAs extends DSL {
         if ($out === self::FOLLOW_ALL) {
             $out = 'out(' . self::$linksDown . ').';
         } elseif ($out === self::FOLLOW_NONE) { // To be used in-place
-            $out = 'filter{ true; }.';
+            $out = 'identity().';
         } else {
             $this->assertLink($out);
             $out = $this->normalizeLinks($out);
@@ -51,7 +51,7 @@ class FollowParAs extends DSL {
 
          $TIME_LIMIT = self::$TIME_LIMIT;
         return new Command(<<<GREMLIN
- {$out}repeat( 
+ {$out}emit().repeat( 
     __.timeLimit(10000)
       .coalesce(__.hasLabel("Parenthesis").out("CODE"), 
                 __.hasLabel("Assignation").out("RIGHT"), 
