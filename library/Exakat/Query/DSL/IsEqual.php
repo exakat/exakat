@@ -67,7 +67,7 @@ class IsEqual extends DSL {
             return " it.get().value(\"{$value}\").toLong()";
         }
 
-        assert(false, '$value must be int or gremlin variable or property in ' . __METHOD__);
+        assert(false, $value.' must be an integer, atom property or gremlin variable in ' . __METHOD__);
     }
 }
 ?>

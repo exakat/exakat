@@ -29,9 +29,11 @@ class RelayFunction extends Analyzer {
     public function analyze() {
         // function foo($a, $b, $c) { return foo2($a, $b, $c);}
         $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIsIE('NAME')
-             ->codeIsNot(array('__construct', '__destruct'))
-             ->inIsIE('NAME')
+             ->filter(
+                $this->side()
+                     ->outIsIE('NAME')
+                     ->codeIsNot(array('__construct', '__destruct'))
+             )
              ->saveOutAs('args', 'ARGUMENT', '')
              ->outIs('BLOCK')
              ->is('count', 1)
@@ -40,7 +42,7 @@ class RelayFunction extends Analyzer {
              ->atomIs(self::FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->saveOutAs('args2', 'ARGUMENT', '')
-             ->raw('filter{ args2 == args; }')
+             ->isEqual('args2', 'args')
              ->back('first');
         $this->prepareQuery();
     }

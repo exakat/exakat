@@ -54,6 +54,9 @@ class SaveOutAs extends DSL {
             $sortStep = ".sort{it.value(\"$sort\")}";
         }
 
+        $check = $this->dslfactory->factory('initVariable');
+        $return = $check->run($name);
+
         $gremlin = <<<GREMLIN
 sideEffect{ 
     s = [];
@@ -65,8 +68,7 @@ sideEffect{
 }
 
 GREMLIN;
-
-        return new Command($gremlin);
+        return $return->add(new Command($gremlin));
     }
 }
 ?>
