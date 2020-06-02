@@ -1382,6 +1382,12 @@ JAVASCRIPTCODE;
         $versions = array_reverse($versions);
 
         $analyzers = array(
+                            'Php/SignatureTrailingComma'            => '8.0+',
+                            'Php/Php80OnlyTypeHints'                => '8.0+',
+                            'Php/Php80UnionTypehint'                => '8.0+',
+                            'Php/Php80VariableSyntax'               => '8.0+',
+                            'Php/ThrowWasAnExpression'              => '8.0+',
+                            'Php/Php80NewFunctions'                 => '8.0-',
                             'Php/Php80RemovedFunctions'             => '8.0-',
                             'Php/Php80RemovedConstant'              => '8.0-',
 
