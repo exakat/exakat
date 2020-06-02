@@ -583,6 +583,9 @@ class Load extends Tasks {
         $this->loader = new $clientClass($this->callsDatabase, $this->id0);
         $this->calls = new Calls($this->callsDatabase);
 
+        $version = $this->php->getVersion();
+        $this->datastore->addRow('hash', array('notCompilable' . $version[0] . $version[2] => 0));
+
         $nbTokens = 0;
         if ($this->config->verbose && !$this->config->quiet) {
            $progressBar = new Progressbar(0, count($files) + 1, $this->config->screen_cols);
@@ -769,6 +772,9 @@ class Load extends Tasks {
 
             $version = $this->php->getVersion();
             $this->datastore->addRow('compilation' . $version[0] . $version[2], array($error));
+
+            $count = $this->datastore->gethash('notCompilable' . $version[0] . $version[2]);
+            $this->datastore->addRow('hash', array('notCompilable' . $version[0] . $version[2] => intval($count) + 1));
 
             return 0;
         }
