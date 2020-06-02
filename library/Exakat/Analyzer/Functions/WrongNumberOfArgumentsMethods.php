@@ -36,113 +36,140 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
 
     public function analyze() {
         $methods = $this->methods->getMethodsArgsInterval();
-        $argsMins    = array_fill(1, 10, array());
-        $argsMaxs    = array_fill(1, 10, array());
-        $argsMinsFNP = array_fill(0, 10, array());
-        $argsMaxsFNP = array_fill(0, 10, array());
 
         // Needs to finish the list of methods and their arguments.
         // Needs to checks on constructors too
         // Refactor this analysis to link closely fullnspath and method name. Currently, it is done by batch
 
         // Checking PHP functions
-        $class2methods = array();
         $minArgs = array();
+        $maxArgs = array();
         foreach($methods as $method) {
-            array_collect_by($class2methods, makeFullNSpath($method['class']), mb_strtolower($method['name']));
+            $ns = $this->dictCode->translate([$method['class']], self::CASE_INSENSITIVE);
+            if (empty($ns)) { 
+                continue; 
+            }
+
+            $name = $this->dictCode->translate([$method['name']], self::CASE_INSENSITIVE);
+            if (empty($name)) { 
+                continue; 
+            }
+
+            $mfnp = makeFullNSpath($method['class']).'::'.$name[0];
+
             if ($method['args_min'] > 0) {
-                $minArgs[$this->dictCode->translate([$method['name']], self::CASE_INSENSITIVE)[0] ?? ''] = $method['args_min'];
+                $minArgs[$mfnp] = $method['args_min'];
             }
             if ($method['args_max'] < \MAX_ARGS) {
-                $maxArgs[mb_strtolower($method['name'])] = [$method['args_max']];
+                $maxArgs[$mfnp] = $method['args_max'];
             }
         }
-        
-        unset($minArgs['']);
 
-            $this->atomIs('Staticmethodcall')
-                 ->analyzerIsNot('self')
+        // less argument than the minimum number of arguments
+        $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
+             ->filter(
+                $this->side()
+                     ->outIs('CLASS')
+                     ->savePropertyAs('fullnspath', 'fnp')
+             )
 
-                 ->outIs('CLASS')
-                 ->savePropertyAs('fullnspath', 'fnp')
-                 ->back('first')
+             ->filter(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->outIs('NAME')
+                     ->savePropertyAs('lccode', 'name')
+             )
+             ->initVariable('mfnp', '0')
+             ->raw('sideEffect{ mfnp = fnp + "::" + name;}')
 
-                 ->outIs('METHOD')
-                 ->outIs('NAME')
-                 ->isHash('fullcode', $class2methods, 'fnp', self::CASE_INSENSITIVE)
-                 ->savePropertyAs('lccode', 'name')
-                 ->inIs('NAME')
-                 ->isLessHash('count', $minArgs, 'name')
+             ->outIs('METHOD')
+             ->isLessHash('count', $minArgs, 'mfnp')
 
-                 ->back('first');
-            $this->prepareQuery();
-            return;
-        // case for methods
-        foreach($argsMins as $nb => $f) {
-            if (empty($f)) { continue; }
+             ->back('first');
+        $this->prepareQuery();
 
+        // more arguments than the minimum number of arguments
+        $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
+             ->filter(
+                $this->side()
+                     ->outIs('CLASS')
+                     ->savePropertyAs('fullnspath', 'fnp')
+             )
 
+             ->filter(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->outIs('NAME')
+                     ->savePropertyAs('lccode', 'name')
+             )
+             ->initVariable('mfnp', '0')
+             ->raw('sideEffect{ mfnp = fnp + "::" + name;}')
 
-            // Check for type with new assignation
-            $this->atomIs('Methodcall')
-                 ->analyzerIsNot('self')
-                 ->outIs('METHOD')
-                 ->codeIs($f)
-                 ->isLess('count', $nb)
-                 ->inIs('METHOD')
-                 ->outIs('OBJECT')
-                 ->inIs('DEFINITION')
-                 ->atomIs('Variabledefinition')
-                 ->outIs('DEFINITION')
-                 ->inIs('LEFT')
-                 ->atomIs('Assignation')
-                 ->codeIs('=')
-                 ->outIs('RIGHT')
-                 ->atomIs('New')
-                 ->outIs('NEW')
-                 ->isHash('fullnspath', $argsMinsFNP, (int) $nb)
-                 ->back('first');
-            $this->prepareQuery();
+             ->outIs('METHOD')
+             ->isMoreHash('count', $maxArgs, 'mfnp')
 
-            // TODO : add support for typehint, member property
-        }
-return;
-        foreach($argsMaxs as $nb => $f) {
-            if (empty($f)) { continue; }
+             ->back('first');
+        $this->prepareQuery();
 
-            $this->atomIs('Staticmethodcall')
-                 ->analyzerIsNot('self')
-                 ->outIs('METHOD')
-                 ->codeIs($f, self::TRANSLATE, self::CASE_INSENSITIVE)
-                 ->isMore('count', $nb)
-                 ->inIs('METHOD')
-                 ->outIs('CLASS')
-                 ->isHash('fullnspath', $argsMaxsFNP, (int) $nb)
-                 ->inIs('CLASS')
-                 ->back('first');
-            $this->prepareQuery();
+       // $o->m(), too little arguments
+       $this->atomIs('Methodcall')
+            ->analyzerIsNot('self')
+             ->filter(
+                $this->side()
+                     ->outIs('OBJECT')
+                     ->inIs('DEFINITION')
+                     ->atomIs('Variabledefinition')
+                     ->outIs('DEFAULT')
+                     ->atomIs('New')
+                     ->outIs('NEW')
+                     ->savePropertyAs('fullnspath', 'fnp')
+             )
 
-            // Check for type with new assignation
-            $this->atomIs('Methodcall')
-                 ->analyzerIsNot('self')
-                 ->outIs('METHOD')
-                 ->codeIs($f)
-                 ->isMore('count', $nb)
-                 ->inIs('METHOD')
-                 ->outIs('OBJECT')
-                 ->inIs('DEFINITION')
-                 ->atomIs('Variabledefinition')
-                 ->outIs('DEFINITION')
-                 ->inIs('LEFT')
-                 ->atomIs('Assignation')
-                 ->codeIs('=')
-                 ->outIs('RIGHT')
-                 ->atomIs('New')
-                 ->outIs('NEW')
-                 ->isHash('fullnspath', $argsMaxsFNP, (int) $nb)
-                 ->back('first');
-            $this->prepareQuery();
-        }
+             ->filter(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->outIs('NAME')
+                     ->savePropertyAs('lccode', 'name')
+             )
+             ->initVariable('mfnp', '0')
+             ->raw('sideEffect{ mfnp = fnp + "::" + name;}')
+
+             ->outIs('METHOD')
+             ->isLessHash('count', $minArgs, 'mfnp')
+
+            ->back('first');
+       $this->prepareQuery();
+
+       // $o->m(), too many arguments
+       $this->atomIs('Methodcall')
+            ->analyzerIsNot('self')
+             ->filter(
+                $this->side()
+                     ->outIs('OBJECT')
+                     ->inIs('DEFINITION')
+                     ->atomIs('Variabledefinition')
+                     ->outIs('DEFAULT')
+                     ->atomIs('New')
+                     ->outIs('NEW')
+                     ->savePropertyAs('fullnspath', 'fnp')
+             )
+
+             ->filter(
+                $this->side()
+                     ->outIs('METHOD')
+                     ->outIs('NAME')
+                     ->savePropertyAs('lccode', 'name')
+             )
+             ->initVariable('mfnp', '0')
+             ->raw('sideEffect{ mfnp = fnp + "::" + name;}')
+
+             ->outIs('METHOD')
+             ->isMoreHash('count', $maxArgs, 'mfnp')
+
+            ->back('first');
+       $this->prepareQuery();
 
         //Custom methods, when we can find the definition
         $this->atomIs(array('Methodcall', 'Staticmethodcall'))
@@ -153,7 +180,7 @@ return;
              ->inIs('DEFINITION')
              ->atomIs(array('Method', 'Magicmethod'))
              ->analyzerIsNot('Functions/VariableArguments')
-             ->IsLess('call', 'args_min')
+             ->isLess('call', 'args_min')
              ->back('first');
         $this->prepareQuery();
 
@@ -168,7 +195,6 @@ return;
              ->isMore('call', 'args_max')
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 

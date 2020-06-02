@@ -65,6 +65,7 @@ class CouldBeProtectedConstant extends Analyzer {
         $this->atomIs('Const')
              ->is('visibility', array('none', 'public'))
              ->goToClass()
+             ->fullnspathIs(array_keys($calls))
              ->savePropertyAs('fullnspath', 'fnq')
              ->back('first')
 
@@ -72,7 +73,6 @@ class CouldBeProtectedConstant extends Analyzer {
              ->as('results')
              ->outIs('NAME')
              ->codeIsNot($undefinedConstants, self::NO_TRANSLATE, self::CASE_SENSITIVE)
-//             ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->isNotHash('code', $calls, 'fnq')
              ->back('results');
         $this->prepareQuery();
