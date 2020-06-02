@@ -28,9 +28,23 @@ use Exakat\Analyzer\Analyzer;
 class CitSameName extends Analyzer {
     public function analyze() {
 
-        $classes = $this->query('g.V().hasLabel("Class").out("NAME").groupCount("m").by("lccode").cap("m").next().keySet()');
-        $interfaces = $this->query('g.V().hasLabel("Interface").out("NAME").groupCount("m").by("lccode").cap("m").next().keySet()');
-        $traits = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("lccode").cap("m").next().keySet()');
+        $this->atomIs(self::CLASSES_ALL)
+             ->outIs('NAME')
+             ->values('lccode')
+             ->unique();
+        $classes = $this->rawQuery();
+
+        $this->atomIs('Interface')
+             ->outIs('NAME')
+             ->values('lccode')
+             ->unique();
+        $interfaces = $this->rawQuery();
+
+        $this->atomIs('Trait')
+             ->outIs('NAME')
+             ->values('lccode')
+             ->unique();
+        $traits = $this->rawQuery();
 
         $names = array_merge($classes->toArray(), $interfaces->toArray(), $traits->toArray());
         $counts = array_count_values($names);
@@ -40,22 +54,8 @@ class CitSameName extends Analyzer {
             return;
         }
 
-        // Classes
-        $this->atomIs('Class')
-             ->outIs('NAME')
-             ->codeIs($doubles, self::NO_TRANSLATE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Trait
-        $this->atomIs('Trait')
-             ->outIs('NAME')
-             ->codeIs($doubles, self::NO_TRANSLATE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Interfaces
-        $this->atomIs('Interface')
+        // Classes, traits, interfaces
+        $this->atomIs(self::CIT)
              ->outIs('NAME')
              ->codeIs($doubles, self::NO_TRANSLATE)
              ->back('first');

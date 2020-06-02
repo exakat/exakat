@@ -24,6 +24,7 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
 class IsNotHash extends DSL {
     public function run() {

@@ -36,42 +36,52 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
 
     public function analyze() {
         $methods = $this->methods->getMethodsArgsInterval();
-        $argsMins    = array();
-        $argsMaxs    = array();
-        $argsMinsFNP = array();
-        $argsMaxsFNP = array();
+        $argsMins    = array_fill(1, 10, array());
+        $argsMaxs    = array_fill(1, 10, array());
+        $argsMinsFNP = array_fill(0, 10, array());
+        $argsMaxsFNP = array_fill(0, 10, array());
 
         // Needs to finish the list of methods and their arguments.
         // Needs to checks on constructors too
         // Refactor this analysis to link closely fullnspath and method name. Currently, it is done by batch
 
         // Checking PHP functions
+        $class2methods = array();
+        $minArgs = array();
         foreach($methods as $method) {
+            array_collect_by($class2methods, makeFullNSpath($method['class']), mb_strtolower($method['name']));
             if ($method['args_min'] > 0) {
-                array_collect_by($argsMins, $method['args_min'], mb_strtolower($method['name']));
-                array_collect_by($argsMinsFNP, $method['args_min'], makeFullNSpath($method['class']));
+                $minArgs[$this->dictCode->translate([$method['name']], self::CASE_INSENSITIVE)[0] ?? ''] = $method['args_min'];
             }
             if ($method['args_max'] < \MAX_ARGS) {
-                array_collect_by($argsMaxs, $method['args_max'], mb_strtolower($method['name']));
-                array_collect_by($argsMaxsFNP, $method['args_max'], makeFullNSpath($method['class']));
+                $maxArgs[mb_strtolower($method['name'])] = [$method['args_max']];
             }
         }
+        
+        unset($minArgs['']);
 
+            $this->atomIs('Staticmethodcall')
+                 ->analyzerIsNot('self')
+
+                 ->outIs('CLASS')
+                 ->savePropertyAs('fullnspath', 'fnp')
+                 ->back('first')
+
+                 ->outIs('METHOD')
+                 ->outIs('NAME')
+                 ->isHash('fullcode', $class2methods, 'fnp', self::CASE_INSENSITIVE)
+                 ->savePropertyAs('lccode', 'name')
+                 ->inIs('NAME')
+                 ->isLessHash('count', $minArgs, 'name')
+
+                 ->back('first');
+            $this->prepareQuery();
+            return;
         // case for methods
         foreach($argsMins as $nb => $f) {
             if (empty($f)) { continue; }
 
-            $this->atomIs('Staticmethodcall')
-                 ->analyzerIsNot('self')
-                 ->outIs('METHOD')
-                 ->codeIs($f, self::TRANSLATE, self::CASE_INSENSITIVE)
-                 ->isLess('count', $nb)
-                 ->inIs('METHOD')
-                 ->outIs('CLASS')
-                 ->isHash('fullnspath', $argsMinsFNP, (string) $nb)
-                 ->inIs('CLASS')
-                 ->back('first');
-            $this->prepareQuery();
+
 
             // Check for type with new assignation
             $this->atomIs('Methodcall')
@@ -90,13 +100,13 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->outIs('RIGHT')
                  ->atomIs('New')
                  ->outIs('NEW')
-                 ->isHash('fullnspath', $argsMinsFNP, (string) $nb)
+                 ->isHash('fullnspath', $argsMinsFNP, (int) $nb)
                  ->back('first');
             $this->prepareQuery();
 
             // TODO : add support for typehint, member property
         }
-
+return;
         foreach($argsMaxs as $nb => $f) {
             if (empty($f)) { continue; }
 
@@ -107,7 +117,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->isMore('count', $nb)
                  ->inIs('METHOD')
                  ->outIs('CLASS')
-                 ->isHash('fullnspath', $argsMaxsFNP, (string) $nb)
+                 ->isHash('fullnspath', $argsMaxsFNP, (int) $nb)
                  ->inIs('CLASS')
                  ->back('first');
             $this->prepareQuery();
@@ -129,7 +139,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                  ->outIs('RIGHT')
                  ->atomIs('New')
                  ->outIs('NEW')
-                 ->isHash('fullnspath', $argsMaxsFNP, (string) $nb)
+                 ->isHash('fullnspath', $argsMaxsFNP, (int) $nb)
                  ->back('first');
             $this->prepareQuery();
         }

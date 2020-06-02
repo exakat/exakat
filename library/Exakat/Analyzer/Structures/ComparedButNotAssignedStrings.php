@@ -26,26 +26,38 @@ use Exakat\Analyzer\Analyzer;
 
 class ComparedButNotAssignedStrings extends Analyzer {
     public function analyze() {
-        $compareCode = $this->dictCode->translate(array('==', '===', '!=', '!=='));
-        $compareCodeList = implode(',', $compareCode);
+        // $a === 'b' 
+        $this->atomIs('Comparison')
+             ->codeIs(array('==', '===', '!=', '!=='))
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             ->isNot('noDelimiter', '')
+             ->values('noDelimiter')
+             ->unique();
+        $comparedStrings = $this->rawQuery()->toArray();
 
-        $query = <<<GREMLIN
-g.V().hasLabel('Comparison').has("code", within($compareCodeList)).out('LEFT', 'RIGHT').hasLabel('String').not(where(__.out('CONCAT'))).not(has("noDelimiter", "")).values('noDelimiter').unique()
-GREMLIN;
-        $comparedStrings = $this->query($query)->toArray();
-
-        $query = <<<'GREMLIN'
-g.V().hasLabel('Assignation').out('RIGHT').hasLabel('String').not(where(__.out('CONCAT'))).not(has("noDelimiter", "")).values('noDelimiter').unique()
-GREMLIN;
-        $assignedStrings = $this->query($query)->toArray();
+        $this->atomIs('Assignation')
+             ->codeIs(array('='))
+             ->outIs('RIGHT')
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             ->isNot('noDelimiter', '')
+             ->values('noDelimiter')
+             ->unique();
+        $assignedStrings = $this->rawQuery()->toArray();
 
         $unassigned = array_diff($comparedStrings, $assignedStrings);
+
+        if (empty($unassigned)) {
+            return;
+        }
 
         $this->atomIs('Comparison')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->noDelimiterIs($unassigned);
+             ->noDelimiterIs(array_values($unassigned));
         $this->prepareQuery();
     }
 }

@@ -75,17 +75,8 @@ class MbstringUnknownEncoding extends Analyzer {
              ->outIs('ARGUMENT')
              ->isHash('rank', $positions, 'fnp')
              ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIs(array('String', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(array('String', 'Concatenation', 'Integer', 'Boolean', 'Null'), self::WITH_CONSTANTS)
              ->noDelimiterIsNot($encodings, self::CASE_INSENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomFunctionIs(array_keys($positions))
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('ARGUMENT')
-             ->isHash('rank', $positions, 'fnp')
-             ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIsNot(array('String', 'Concatenation'), self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
     }

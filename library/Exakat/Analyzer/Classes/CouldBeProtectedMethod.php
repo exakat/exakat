@@ -51,20 +51,21 @@ class CouldBeProtectedMethod extends Analyzer {
 
         // Case of class::methodcall (that's another public access)
 
-        $publicUsage = $this->query(<<<GREMLIN
-g.V().hasLabel("Staticmethodcall").as("init")
-     .out("CLASS").hasLabel("Identifier", "Nsname").as("classe")
-     .sideEffect{ fnp = it.get().value("fullnspath") }
-     .in("CLASS")
-     .where( __.repeat( __.in($this->linksDown)).until(hasLabel("Class", "Classanonymous", "File"))
-               .or(hasLabel("File"), 
-                   hasLabel("Class", "Classanonymous").filter{ it.get().values("fullnspath") == fnp; }) 
-           )
-     .out("METHOD").hasLabel("Methodcallname").as("method")
-     .select("classe", "method").by("fullnspath").by("lccode")
-     .unique();
-GREMLIN
-)->toArray();
+        $this->atomIs('Staticmethodcall')
+             ->outIs('CLASS')
+             ->tokenIs(self::STATICCALL_TOKEN)
+             ->as('classe')
+             ->back('first')
+             
+             ->hasNoClass()
+             ->outIs('METHOD')
+             ->atomIs('Methodcallname')
+             ->as('method')
+             ->select(array('classe' => 'fullnspath',
+                            'method' => 'lccode',
+                            ))
+             ->unique();
+        $publicUsage = $this->rawQuery()->toArray();
 
         $publicStaticMethods = array();
         foreach($publicUsage as $value) {
@@ -77,6 +78,7 @@ GREMLIN
                  ->isNot('visibility', array('protected', 'private'))
                  ->is('static', true)
                  ->goToClass()
+                 ->fullnspathIs(array_keys($publicStaticMethods))
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
                  ->outIs('NAME')

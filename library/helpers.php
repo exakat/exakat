@@ -401,7 +401,7 @@ function PHPSyntax(string $code) : string {
 
 function makeArray($value) : array {
     if (is_array($value)) {
-        return $value;
+        return array_values($value);
     } else {
         return array($value);
     }

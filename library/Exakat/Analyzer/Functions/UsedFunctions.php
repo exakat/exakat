@@ -33,10 +33,11 @@ class UsedFunctions extends Analyzer {
         $this->prepareQuery();
 
         // function name used in a string
-        $functionsInStrings = $this->query(<<<'GREMLIN'
-g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()
-GREMLIN
-)->toArray();
+        $this->atomIs('String')
+             ->has('fullnspath')
+             ->values('fullnspath')
+             ->unique();
+        $functionsInStrings = $this->rawQuery()->toArray();
 
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')

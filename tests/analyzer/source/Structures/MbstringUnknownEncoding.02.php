@@ -18,6 +18,7 @@ echo \mb_strimwidth("Hello World", 0, 10, "...", 'UUENCODE');
 echo \mb_strimwidth("Hello World", 0, 10, "...", 'UUENCODE2');
 
 echo \mb_strimwidth("Hello World", 0, 10, "...", UUENCODE);
+echo \mb_strimwidth("Hello World", 0, 10, "...", ($x = UUENCODE));
 echo \mb_strimwidth("Hello World", 0, 10, "...", HIDDEN);
 
 
