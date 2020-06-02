@@ -103,13 +103,13 @@ class CouldUseTry extends Analyzer {
 
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->is('fullnspath', array_keys($methods))
-             ->savePropertyAs('fullnspath', 'fqn')
+             ->fullnspathIs(array_keys($methods))
+             ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
 
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->isHash('fullcode', $methods, 'fqn', self::CASE_INSENSITIVE)
+             ->isHash('fullcode', $methods, 'fnp', self::CASE_INSENSITIVE)
              ->hasNoTryCatch()
              ->back('first');
         $this->prepareQuery();

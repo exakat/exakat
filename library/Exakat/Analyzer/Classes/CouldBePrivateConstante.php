@@ -86,6 +86,7 @@ GREMLIN
              ->isNot('visibility', 'private')
 
              ->goToClass()
+             ->fullnspathIs(array_keys($calls))
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
 

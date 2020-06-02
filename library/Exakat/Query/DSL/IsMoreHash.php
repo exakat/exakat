@@ -36,7 +36,7 @@ class IsMoreHash extends DSL {
 
         assert($this->assertProperty($property));
 
-        return new Command("has(\"$property\").filter{ it.get().value(\"$property\") > ***[$index]}", array($hash));
+        return new Command("has(\"$property\").filter{ x = ***[$index]; x != null; }.filter{ it.get().value(\"$property\") > x}", array($hash));
     }
 }
 ?>
