@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 13 May 2020 09:32:02 +0000
-.. comment: Generation hash : 3a98e88a11670b0c19301a8015e0a7717d3b86f1
+.. comment: Generation date : Wed, 03 Jun 2020 17:17:59 +0000
+.. comment: Generation hash : c7413281d678097e66b5a3928b7f07044980cb78
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -22,7 +22,7 @@ $HTTP_RAW_POST_DATA Usage
 
 ``$HTTP_RAW_POST_DATA`` is deprecated since PHP 5.6.
 
-It is possible to ready by setting ``always_populate_raw_post_data`` to -1.
+It is possible to prepare code to this lack of feature by setting ``always_populate_raw_post_data`` to -1.
 
 .. code-block:: php
 
@@ -39,6 +39,13 @@ It is possible to ready by setting ``always_populate_raw_post_data`` to -1.
 
 See also `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use php://input with fopen() instead.
+
 +-------------+---------------------------+
 | Short name  | Php/RawPostDataUsage      |
 +-------------+---------------------------+
@@ -46,7 +53,7 @@ See also `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variab
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/RawPostDataUsage      |
 +-------------+---------------------------+
 
 
@@ -119,17 +126,17 @@ Suggestions
 
 * Do not use `$this` as a variable name, except for the current object, in a class, trait or closure.
 
-+-------------+-----------------------------------------+
-| Short name  | Classes/ThisIsForClasses                |
-+-------------+-----------------------------------------+
-| Rulesets    | :ref:`Analyze`                          |
-+-------------+-----------------------------------------+
-| Severity    | Major                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
-+-------------+-----------------------------------------+
-| Examples    | :ref:`openemr-classes-thisisforclasses` |
-+-------------+-----------------------------------------+
++-------------+--------------------------+
+| Short name  | Classes/ThisIsForClasses |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Classes/ThisIsForClasses |
++-------------+--------------------------+
 
 
 
@@ -181,7 +188,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Classes/ThisIsNotAnArray |
 +-------------+--------------------------+
 
 
@@ -229,17 +236,17 @@ Suggestions
 * Remove the usage of $this in the method, replacing it with static properties
 * Make $this an argument (and change its name) : then, make the method a function
 
-+-------------+---------------------------------------------------------------------------------------------+
-| Short name  | Classes/ThisIsNotForStatic                                                                  |
-+-------------+---------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                              |
-+-------------+---------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                       |
-+-------------+---------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                             |
-+-------------+---------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------+
++-------------+----------------------------+
+| Short name  | Classes/ThisIsNotForStatic |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Major                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+| ClearPHP    | Classes/ThisIsNotForStatic |
++-------------+----------------------------+
 
 
 
@@ -288,19 +295,19 @@ Suggestions
 * For powers of 2, use the bitshift operators
 * For literal powers of 2, consider using the ``0xFFFFFFFFF`` syntax.
 
-+-------------+--------------------------------------------------------------+
-| Short name  | Php/NewExponent                                              |
-+-------------+--------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable`                    |
-+-------------+--------------------------------------------------------------+
-| Php Version | With PHP 5.6 and more recent                                 |
-+-------------+--------------------------------------------------------------+
-| Severity    | Minor                                                        |
-+-------------+--------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                              |
-+-------------+--------------------------------------------------------------+
-| Examples    | :ref:`traq-php-newexponent`, :ref:`teampass-php-newexponent` |
-+-------------+--------------------------------------------------------------+
++-------------+-------------------------------------------+
+| Short name  | Php/NewExponent                           |
++-------------+-------------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable` |
++-------------+-------------------------------------------+
+| Php Version | With PHP 5.6 and more recent              |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Examples    | Php/NewExponent                           |
++-------------+-------------------------------------------+
 
 
 
@@ -356,7 +363,7 @@ Suggestions
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
+| Time To Fix | Php/StaticclassUsage                                 |
 +-------------+------------------------------------------------------+
 
 
@@ -406,7 +413,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | ClearPHP    | `no-noscream <https://github.com/dseguy/clearPHP/tree/master/rules/no-noscream.md>`__ |
 +-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`phinx-structures-noscream`, :ref:`phpipam-structures-noscream`                  |
+| Examples    | Structures/Noscream                                                                   |
 +-------------+---------------------------------------------------------------------------------------+
 
 
@@ -448,17 +455,17 @@ Suggestions
 * Implements all the abstract methods of the class
 * Make the class abstract
 
-+-------------+-------------------------------------------+
-| Short name  | Classes/AbstractOrImplements              |
-+-------------+-------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`    |
-+-------------+-------------------------------------------+
-| Severity    | Major                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`zurmo-classes-abstractorimplements` |
-+-------------+-------------------------------------------+
++-------------+----------------------------------------+
+| Short name  | Classes/AbstractOrImplements           |
++-------------+----------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Severity    | Major                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
+| Examples    | Classes/AbstractOrImplements           |
++-------------+----------------------------------------+
 
 
 
@@ -497,7 +504,7 @@ See also `Why does PHP 5.2+ disallow abstract static class methods? <https://sta
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
+| Time To Fix | Classes/AbstractStatic |
 +-------------+------------------------+
 
 
@@ -530,7 +537,7 @@ It is not allowed to access protected properties or methods from outside the cla
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Classes/AccessProtected |
 +-------------+-------------------------+
 
 
@@ -566,7 +573,7 @@ List of calls to private properties/methods that will compile but yield some fat
 +-------------+-----------------------+
 | Severity    | Major                 |
 +-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
+| Time To Fix | Classes/AccessPrivate |
 +-------------+-----------------------+
 
 
@@ -600,17 +607,17 @@ Suggestions
 
 * Add a default value for parameters
 
-+-------------+--------------------------------------------------------------------------------+
-| Short name  | Functions/AddDefaultValue                                                      |
-+-------------+--------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                             |
-+-------------+--------------------------------------------------------------------------------+
-| Severity    | Minor                                                                          |
-+-------------+--------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                |
-+-------------+--------------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-functions-adddefaultvalue`, :ref:`typo3-functions-adddefaultvalue` |
-+-------------+--------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Functions/AddDefaultValue |
++-------------+---------------------------+
+| Rulesets    | :ref:`Suggestions`        |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Examples    | Functions/AddDefaultValue |
++-------------+---------------------------+
 
 
 
@@ -668,7 +675,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`thelia-structures-addzero`, :ref:`openemr-structures-addzero`                           |
+| Examples    | Structures/AddZero                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -719,7 +726,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | ClearPHP    | `no-aliases <https://github.com/dseguy/clearPHP/tree/master/rules/no-aliases.md>`__ |
 +-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`cleverstyle-functions-aliasesusage`, :ref:`phpmyadmin-functions-aliasesusage` |
+| Examples    | Functions/AliasesUsage                                                              |
 +-------------+-------------------------------------------------------------------------------------+
 
 
@@ -756,7 +763,7 @@ See also `Predefined Variables <http://php.net/manual/en/reserved.variables.php>
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                  |
+| Time To Fix | Variables/VariableUppercase                    |
 +-------------+------------------------------------------------+
 
 
@@ -816,17 +823,17 @@ Suggestions
 
 * Keep the implements call in the class that do implements the methods. Remove it from the children classes.
 
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Short name  | Interfaces/AlreadyParentsInterface                                                                    |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                                    |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                 |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                      |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-interfaces-alreadyparentsinterface`, :ref:`thelia-interfaces-alreadyparentsinterface` |
-+-------------+-------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Interfaces/AlreadyParentsInterface |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Instant (5 mins)                   |
++-------------+------------------------------------+
+| Examples    | Interfaces/AlreadyParentsInterface |
++-------------+------------------------------------+
 
 
 
@@ -878,7 +885,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Traits/AlreadyParentsTrait |
 +-------------+----------------------------+
 
 
@@ -935,7 +942,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`contao-structures-alteringforeachwithoutreference`, :ref:`wordpress-structures-alteringforeachwithoutreference`             |
+| Examples    | Structures/AlteringForeachWithoutReference                                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -974,7 +981,7 @@ This analysis reports files that are using both syntax at the same time. This is
 +-------------+-----------------------------------------+
 | Severity    | Major                                   |
 +-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
+| Time To Fix | Structures/AlternativeConsistenceByFile |
 +-------------+-----------------------------------------+
 
 
@@ -1025,6 +1032,13 @@ This analysis reports false positive when the regex is used to search a pattern 
 
 See also `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/definitions/625.html>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add an anchor to the beginning and ending of the string
+
 +-------------+----------------------+
 | Short name  | Security/AnchorRegex |
 +-------------+----------------------+
@@ -1032,7 +1046,7 @@ See also `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/def
 +-------------+----------------------+
 | Severity    | Major                |
 +-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
+| Time To Fix | Security/AnchorRegex |
 +-------------+----------------------+
 
 
@@ -1066,17 +1080,17 @@ Suggestions
 * Compare count() to non-zero values
 * Use empty()
 
-+-------------+-----------------------------------------+
-| Short name  | Structures/NeverNegative                |
-+-------------+-----------------------------------------+
-| Rulesets    | :ref:`Analyze`                          |
-+-------------+-----------------------------------------+
-| Severity    | Major                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Instant (5 mins)                        |
-+-------------+-----------------------------------------+
-| Examples    | :ref:`magento-structures-nevernegative` |
-+-------------+-----------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/NeverNegative |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Instant (5 mins)         |
++-------------+--------------------------+
+| Examples    | Structures/NeverNegative |
++-------------+--------------------------+
 
 
 
@@ -1128,7 +1142,7 @@ Suggestions
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
-| Time To Fix | Quick (30 mins)                  |
+| Time To Fix | Performances/Php74ArrayKeyExists |
 +-------------+----------------------------------+
 
 
@@ -1171,17 +1185,17 @@ Suggestions
 * Only use string or integer as key for an array. 
 * Use transtyping operator (string) and (int) to make sure of the type
 
-+-------------+----------------------------------------------------------------------------+
-| Short name  | Arrays/AmbiguousKeys                                                       |
-+-------------+----------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                             |
-+-------------+----------------------------------------------------------------------------+
-| Severity    | Minor                                                                      |
-+-------------+----------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                            |
-+-------------+----------------------------------------------------------------------------+
-| Examples    | :ref:`prestashop-arrays-ambiguouskeys`, :ref:`mautic-arrays-ambiguouskeys` |
-+-------------+----------------------------------------------------------------------------+
++-------------+----------------------+
+| Short name  | Arrays/AmbiguousKeys |
++-------------+----------------------+
+| Rulesets    | :ref:`Analyze`       |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+| Examples    | Arrays/AmbiguousKeys |
++-------------+----------------------+
 
 
 
@@ -1222,7 +1236,7 @@ Try to keep the methods simple and unique. Consider renaming the methods and pro
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
+| Time To Fix | Classes/AmbiguousStatic |
 +-------------+-------------------------+
 
 
@@ -1269,17 +1283,17 @@ Suggestions
 * Sync visibilities for both properties, in the different classes
 * Use different names for properties with different usages
 
-+-------------+--------------------------------------------+
-| Short name  | Classes/AmbiguousVisibilities              |
-+-------------+--------------------------------------------+
-| Rulesets    | :ref:`Analyze`                             |
-+-------------+--------------------------------------------+
-| Severity    | Minor                                      |
-+-------------+--------------------------------------------+
-| Time To Fix | Slow (1 hour)                              |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`typo3-classes-ambiguousvisibilities` |
-+-------------+--------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Classes/AmbiguousVisibilities |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Slow (1 hour)                 |
++-------------+-------------------------------+
+| Examples    | Classes/AmbiguousVisibilities |
++-------------+-------------------------------+
 
 
 
@@ -1309,7 +1323,7 @@ Anonymous classes.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Classes/Anonymous                                                                                          |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -1357,7 +1371,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-functions-shouldbetypehinted`, :ref:`mautic-functions-shouldbetypehinted`       |
+| Examples    | Functions/ShouldBeTypehinted                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -1411,7 +1425,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Severity    | Critical                                  |
 +-------------+-------------------------------------------+
-| Time To Fix | Slow (1 hour)                             |
+| Time To Fix | Php/AssertFunctionIsReserved              |
 +-------------+-------------------------------------------+
 
 
@@ -1466,7 +1480,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/AssigneAndCompare |
 +-------------+------------------------------+
 
 
@@ -1525,7 +1539,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-properties-default-values <https://github.com/dseguy/clearPHP/tree/master/rules/use-properties-default-values.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`livezilla-classes-makedefault`, :ref:`phpmyadmin-classes-makedefault`                                               |
+| Examples    | Classes/MakeDefault                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -1567,17 +1581,17 @@ Suggestions
 * Always use symbol && rather than letter and
 * To be safe, add parenthesis to enforce priorities
 
-+-------------+-------------------------------+
-| Short name  | Php/AssignAnd                 |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Critical                      |
-+-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
-+-------------+-------------------------------+
-| Examples    | :ref:`xataface-php-assignand` |
-+-------------+-------------------------------+
++-------------+-----------------+
+| Short name  | Php/AssignAnd   |
++-------------+-----------------+
+| Rulesets    | :ref:`Analyze`  |
++-------------+-----------------+
+| Severity    | Critical        |
++-------------+-----------------+
+| Time To Fix | Quick (30 mins) |
++-------------+-----------------+
+| Examples    | Php/AssignAnd   |
++-------------+-----------------+
 
 
 
@@ -1622,7 +1636,7 @@ Incremental changes to a variables are not reported here.
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Variables/AssignedTwiceOrMore |
 +-------------+-------------------------------+
 
 
@@ -1666,7 +1680,7 @@ Suggestions
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Performances/Autoappend |
 +-------------+-------------------------+
 
 
@@ -1710,17 +1724,17 @@ Suggestions
 
 * Collect all pieces in an array, then implode() the array in one call.
 
-+-------------+------------------------------------------------------------------------------------------+
-| Short name  | Performances/NoConcatInLoop                                                              |
-+-------------+------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`, :ref:`Top10`                                                        |
-+-------------+------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                    |
-+-------------+------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                            |
-+-------------+------------------------------------------------------------------------------------------+
-| Examples    | :ref:`suitecrm-performances-noconcatinloop`, :ref:`thinkphp-performances-noconcatinloop` |
-+-------------+------------------------------------------------------------------------------------------+
++-------------+-----------------------------------+
+| Short name  | Performances/NoConcatInLoop       |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Performances`, :ref:`Top10` |
++-------------+-----------------------------------+
+| Severity    | Major                             |
++-------------+-----------------------------------+
+| Time To Fix | Slow (1 hour)                     |
++-------------+-----------------------------------+
+| Examples    | Performances/NoConcatInLoop       |
++-------------+-----------------------------------+
 
 
 
@@ -1802,7 +1816,7 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
+| Time To Fix | Structures/NoAssignationInFunction |
 +-------------+------------------------------------+
 
 
@@ -1851,17 +1865,17 @@ Suggestions
 * Use a null object to fill any missing value
 * Make sure the property is set at constructor time
 
-+-------------+---------------------------------------------------------------------------------------------------+
-| Short name  | Classes/AvoidOptionalProperties                                                                   |
-+-------------+---------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                    |
-+-------------+---------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                             |
-+-------------+---------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                     |
-+-------------+---------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-classes-avoidoptionalproperties`, :ref:`dolibarr-classes-avoidoptionalproperties` |
-+-------------+---------------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Classes/AvoidOptionalProperties |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Major                           |
++-------------+---------------------------------+
+| Time To Fix | Slow (1 hour)                   |
++-------------+---------------------------------+
+| Examples    | Classes/AvoidOptionalProperties |
++-------------+---------------------------------+
 
 
 
@@ -1899,7 +1913,7 @@ Even if most of the time, usage of parenthesis is legit, it is recommended to av
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Structures/PrintWithoutParenthesis |
 +-------------+------------------------------------+
 
 
@@ -1948,7 +1962,7 @@ Suggestions
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
-| Time To Fix | Quick (30 mins)                  |
+| Time To Fix | Php/AvoidReal                    |
 +-------------+----------------------------------+
 
 
@@ -2001,7 +2015,7 @@ Suggestions
 +-------------+---------------------------------+
 | Severity    | Critical                        |
 +-------------+---------------------------------+
-| Time To Fix | Slow (1 hour)                   |
+| Time To Fix | Interfaces/AvoidSelfInInterface |
 +-------------+---------------------------------+
 
 
@@ -2056,7 +2070,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                                 |
 +-------------+--------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-structures-nosubstrone`, :ref:`livezilla-structures-nosubstrone`                 |
+| Examples    | Structures/NoSubstrOne                                                                           |
 +-------------+--------------------------------------------------------------------------------------------------+
 
 
@@ -2093,6 +2107,13 @@ Weak cryptography is commonly used for hashing values when caching them. In such
 
 See also `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Keep the current crypto, and add a call to a stronger one. 
+* Change the crypto for a more modern one and update the related databases
+
 +-------------+---------------------------+
 | Short name  | Security/AvoidThoseCrypto |
 +-------------+---------------------------+
@@ -2100,7 +2121,7 @@ See also `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algo
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Security/AvoidThoseCrypto |
 +-------------+---------------------------+
 
 
@@ -2149,7 +2170,7 @@ If you need a ``stdClass`` object, it is faster to build it as an array, then ca
 +-------------+-----------------+
 | Severity    | Minor           |
 +-------------+-----------------+
-| Time To Fix | Slow (1 hour)   |
+| Time To Fix | Php/UseStdclass |
 +-------------+-----------------+
 
 
@@ -2201,7 +2222,7 @@ This is a micro-optimisation.
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Instant (5 mins)            |
+| Time To Fix | Performances/AvoidArrayPush |
 +-------------+-----------------------------+
 
 
@@ -2255,7 +2276,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Structures/NoArrayUnique |
 +-------------+--------------------------+
 
 
@@ -2301,7 +2322,7 @@ See also `get_class <http://php.net/get_class>`_ and `Instanceof <http://php.net
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
+| Time To Fix | Structures/UseInstanceof       |
 +-------------+--------------------------------+
 
 
@@ -2351,17 +2372,17 @@ Suggestions
 * Use FilesystemIterator, DirectoryIterator classes.
 * Use ``RegexIterator`` to filter any unwanted results from ``FilesystemIterator``.
 
-+-------------+------------------------------------------------------------------------+
-| Short name  | Performances/NoGlob                                                    |
-+-------------+------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`                                                    |
-+-------------+------------------------------------------------------------------------+
-| Severity    | Major                                                                  |
-+-------------+------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                        |
-+-------------+------------------------------------------------------------------------+
-| Examples    | :ref:`phinx-performances-noglob`, :ref:`nextcloud-performances-noglob` |
-+-------------+------------------------------------------------------------------------+
++-------------+---------------------+
+| Short name  | Performances/NoGlob |
++-------------+---------------------+
+| Rulesets    | :ref:`Performances` |
++-------------+---------------------+
+| Severity    | Major               |
++-------------+---------------------+
+| Time To Fix | Quick (30 mins)     |
++-------------+---------------------+
+| Examples    | Performances/NoGlob |
++-------------+---------------------+
 
 
 
@@ -2399,7 +2420,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Php/AvoidMbDectectEncoding |
 +-------------+----------------------------+
 
 
@@ -2455,7 +2476,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/AvoidOptionArrays          |
 +-------------+------------------------------------+
 
 
@@ -2489,17 +2510,17 @@ Suggestions
 
 * Remove the 6th argument of registered handlers.
 
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Short name  | Php/AvoidSetErrorHandlerContextArg                                                                    |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`CompatibilityPHP72`                                                                             |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                 |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                         |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`shopware-php-avoidseterrorhandlercontextarg`, :ref:`vanilla-php-avoidseterrorhandlercontextarg` |
-+-------------+-------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Php/AvoidSetErrorHandlerContextArg |
++-------------+------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP72`          |
++-------------+------------------------------------+
+| Severity    | Major                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| Examples    | Php/AvoidSetErrorHandlerContextArg |
++-------------+------------------------------------+
 
 
 
@@ -2534,6 +2555,14 @@ As much as possible, avoid delaying the end of the script.
 
 `sleep() <https://www.php.net/sleep>`_ and `usleep() <https://www.php.net/usleep>`_ have less impact in commandline (``CLI``).
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a deadline of usage in the session, and wait past this deadline to start serving again. Until then, abort immediately.
+* Use element in the GUI to delay or slow usage.
+
 +-------------+------------------+
 | Short name  | Security/NoSleep |
 +-------------+------------------+
@@ -2541,7 +2570,7 @@ As much as possible, avoid delaying the end of the script.
 +-------------+------------------+
 | Severity    | Minor            |
 +-------------+------------------+
-| Time To Fix | Quick (30 mins)  |
+| Time To Fix | Security/NoSleep |
 +-------------+------------------+
 
 
@@ -2579,17 +2608,17 @@ Suggestions
 
 * Avoid using names that doesn't comply with PHP's convention
 
-+-------------+-----------------------------------------------------------------------------------------+
-| Short name  | Constants/BadConstantnames                                                              |
-+-------------+-----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                          |
-+-------------+-----------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                   |
-+-------------+-----------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                           |
-+-------------+-----------------------------------------------------------------------------------------+
-| Examples    | :ref:`prestashop-constants-badconstantnames`, :ref:`zencart-constants-badconstantnames` |
-+-------------+-----------------------------------------------------------------------------------------+
++-------------+----------------------------+
+| Short name  | Constants/BadConstantnames |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Slow (1 hour)              |
++-------------+----------------------------+
+| Examples    | Constants/BadConstantnames |
++-------------+----------------------------+
 
 
 
@@ -2636,7 +2665,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Functions/BadTypehintRelay |
 +-------------+----------------------------+
 
 
@@ -2722,17 +2751,17 @@ Suggestions
 * Detect errors, and then, return as soon as possible.
 * When a if...then branches are unbalanced, test for the small branch, finish it with return. Then keep the other branch as the main code.
 
-+-------------+--------------------------------------------------------------------------------+
-| Short name  | Structures/BailOutEarly                                                        |
-+-------------+--------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                 |
-+-------------+--------------------------------------------------------------------------------+
-| Severity    | Minor                                                                          |
-+-------------+--------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                |
-+-------------+--------------------------------------------------------------------------------+
-| Examples    | :ref:`openemr-structures-bailoutearly`, :ref:`opencfp-structures-bailoutearly` |
-+-------------+--------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/BailOutEarly |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Structures/BailOutEarly |
++-------------+-------------------------+
 
 
 
@@ -2762,7 +2791,7 @@ List of all the integer values using the binary format.
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Type/Binary                  |
 +-------------+------------------------------+
 
 
@@ -2801,7 +2830,7 @@ It is generally considered a bad practice, as readability is lower and there are
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
+| Time To Fix | Structures/Bracketless                         |
 +-------------+------------------------------------------------+
 
 
@@ -2845,7 +2874,7 @@ It is not possible anymore to include a piece of code inside a loop that will th
 +-------------+-------------------------------------------+
 | Severity    | Major                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Slow (1 hour)                             |
+| Time To Fix | Structures/BreakOutsideLoop               |
 +-------------+-------------------------------------------+
 
 
@@ -2883,7 +2912,7 @@ Cannot `break <http://www.php.net/manual/en/control-structures.break.php>`_ 0, a
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Structures/Break0         |
 +-------------+---------------------------+
 
 
@@ -2925,7 +2954,7 @@ Other values were acceptable in PHP 5.3 and previous version, but this is now re
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Structures/BreakNonInteger |
 +-------------+----------------------------+
 
 
@@ -2965,17 +2994,17 @@ Suggestions
 * Extract the assignation and set it on its own line, prior to the current expression.
 * Check if the local variable is necessary
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Structures/BuriedAssignation                                                          |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                        |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                         |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`xoops-structures-buriedassignation`, :ref:`mautic-structures-buriedassignation` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/BuriedAssignation |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
+| Examples    | Structures/BuriedAssignation |
++-------------+------------------------------+
 
 
 
@@ -3014,10 +3043,18 @@ One of the classic example if doing ``count($array)`` in a ``for`` loop : since 
 
 Depending on the load of the called method, this may increase the speed of the loop from little to enormously.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using blind variables outside loops.
+* Store blind variables in local variables or properties for later reuse.
+
 +------------+---------------------------------------+
 | Short name | Performances/CacheVariableOutsideLoop |
 +------------+---------------------------------------+
-| Rulesets   | :ref:`Performances`                   |
+| Rulesets   | Performances/CacheVariableOutsideLoop |
 +------------+---------------------------------------+
 
 
@@ -3070,17 +3107,17 @@ Suggestions
 * Add an explicit return to the callback
 * Use `null` to unset elements in an array without destroying the index
 
-+-------------+-------------------------------------------------------------------------------------------------+
-| Short name  | Functions/CallbackNeedsReturn                                                                   |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                  |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                           |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`contao-functions-callbackneedsreturn`, :ref:`phpdocumentor-functions-callbackneedsreturn` |
-+-------------+-------------------------------------------------------------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Functions/CallbackNeedsReturn |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Major                         |
++-------------+-------------------------------+
+| Time To Fix | Instant (5 mins)              |
++-------------+-------------------------------+
+| Examples    | Functions/CallbackNeedsReturn |
++-------------+-------------------------------+
 
 
 
@@ -3108,6 +3145,16 @@ Either the function use a reference in its signature, either the reference won't
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the signature of the called method accept references
+* Remove the reference from the method call
+* Use an object instead of a scalar
+
 +-------------+------------------------------------+
 | Short name  | Structures/CalltimePassByReference |
 +-------------+------------------------------------+
@@ -3117,7 +3164,7 @@ Either the function use a reference in its signature, either the reference won't
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Structures/CalltimePassByReference |
 +-------------+------------------------------------+
 
 
@@ -3157,7 +3204,7 @@ See also `Warn when counting non-countable types <http://php.net/manual/en/migra
 +-------------+---------------------------------+
 | Severity    | Major                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Structures/CanCountNonCountable |
 +-------------+---------------------------------+
 
 
@@ -3212,7 +3259,7 @@ Suggestions
 +-------------+----------------------------------------------+
 | Severity    | Critical                                     |
 +-------------+----------------------------------------------+
-| Time To Fix | Instant (5 mins)                             |
+| Time To Fix | Classes/CantExtendFinal                      |
 +-------------+----------------------------------------------+
 
 
@@ -3256,7 +3303,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Slow (1 hour)                          |
+| Time To Fix | Exceptions/CantThrow                   |
 +-------------+----------------------------------------+
 
 
@@ -3303,7 +3350,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Interfaces/CantImplementTraversable    |
 +-------------+----------------------------------------+
 
 
@@ -3338,7 +3385,7 @@ See also `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/al
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                                                                         |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                  |
+| Time To Fix | Classes/CantInheritAbstractMethod                                                                                                                                |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -3377,17 +3424,17 @@ PHP reports an error similar to this one : 'Call to private Y\:\:`__construct() 
 
 See also `In a PHP5 class, when does a private constructor get called? <https://stackoverflow.com/questions/26079/in-a-php5-class-when-does-a-private-constructor-get-called>`_, `Named Constructors in PHP <http://verraes.net/2014/06/named-constructors-in-php/>`_ and `PHP Constructor Best Practices And The Prototype Pattern <http://ralphschindler.com/2012/03/09/php-constructor-best-practices-and-the-prototype-pattern>`_.
 
-+-------------+-----------------------------------------------+
-| Short name  | Classes/CantInstantiateClass                  |
-+-------------+-----------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                |
-+-------------+-----------------------------------------------+
-| Severity    | Critical                                      |
-+-------------+-----------------------------------------------+
-| Time To Fix | Quick (30 mins)                               |
-+-------------+-----------------------------------------------+
-| Examples    | :ref:`wordpress-classes-cantinstantiateclass` |
-+-------------+-----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Classes/CantInstantiateClass |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Critical                     |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Classes/CantInstantiateClass |
++-------------+------------------------------+
 
 
 
@@ -3426,7 +3473,7 @@ See also `Cant Use Return Value In Write Context <https://stackoverflow.com/ques
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                      |
+| Time To Fix | Php/CantUseReturnValueInWriteContext                 |
 +-------------+------------------------------------------------------+
 
 
@@ -3471,7 +3518,7 @@ See also `define <http://php.net/manual/en/function.define.php>`_.
 +-------------+------------------------------------+
 | Severity    | Critical                           |
 +-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
+| Time To Fix | Constants/CaseInsensitiveConstants |
 +-------------+------------------------------------+
 
 
@@ -3515,17 +3562,17 @@ Suggestions
 * Change the target values from true/false, or 0/1 to non-binary values, like strings or integers beyond 0 and 1.
 * Complete the current branches with other commands
 
-+-------------+-------------------------------------------------------------------------------------+
-| Short name  | Structures/CastToBoolean                                                            |
-+-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                      |
-+-------------+-------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                    |
-+-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`mediawiki-structures-casttoboolean`, :ref:`dolibarr-structures-casttoboolean` |
-+-------------+-------------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/CastToBoolean |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Instant (5 mins)         |
++-------------+--------------------------+
+| Examples    | Structures/CastToBoolean |
++-------------+--------------------------+
 
 
 
@@ -3567,7 +3614,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Structures/CastingTernary |
 +-------------+---------------------------+
 
 
@@ -3622,7 +3669,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-catch-overwrite <https://github.com/dseguy/clearPHP/tree/master/rules/no-catch-overwrite.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpipam-structures-catchshadowsvariable`, :ref:`suitecrm-structures-catchshadowsvariable`     |
+| Examples    | Structures/CatchShadowsVariable                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -3679,17 +3726,75 @@ Suggestions
 * Include a default case to handle all unknown situations
 * Include and process explicit types as much as possible
 
-+-------------+--------------------------------------------------------------------------------------+
-| Short name  | Structures/CheckAllTypes                                                             |
-+-------------+--------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                       |
-+-------------+--------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                |
-+-------------+--------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                      |
-+-------------+--------------------------------------------------------------------------------------+
-| Examples    | :ref:`zend-config-structures-checkalltypes`, :ref:`vanilla-structures-checkalltypes` |
-+-------------+--------------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/CheckAllTypes |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Structures/CheckAllTypes |
++-------------+--------------------------+
+
+
+
+.. _check-crypto-key-length:
+
+Check Crypto Key Length
+#######################
+
+
+Each cryptographic algorithm requires a reasonable length. Make sure an up-to-date length is used. 
+
+This rule use the following recommendations : 
+
++ \OPENSSL_KEYTYPE_RSA' => 3072
++ \OPENSSL_KEYTYPE_DSA' => 2048
++ \OPENSSL_KEYTYPE_DH'  => 2048
++ \OPENSSL_KEYTYPE_EC'  => 512
+
+The values above are used with the openssl PHP extension. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Extracted from the documentation
+   
+   // Generates a new and strong key 
+   $private_key = openssl_pkey_new(array(
+       private_key_type => OPENSSL_KEYTYPE_EC,
+       private_key_bits => 1024,
+   ));
+   
+   // Generates a new and weak key 
+   $private_key = openssl_pkey_new(array(
+       private_key_type => OPENSSL_KEYTYPE_EC,
+       private_key_bits => 256,
+   ));
+   
+   ?>
+
+
+See also `The Definitive 2019 Guide to Cryptographic Key Sizes and Algorithm Recommendations <https://paragonie.com/blog/2019/03/definitive-2019-guide-cryptographic-key-sizes-and-algorithm-recommendations>`_ and `Cryptographic Key Length Recommendation <https://www.keylength.com/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+--------------------------+
+| Short name  | Security/CryptoKeyLength |
++-------------+--------------------------+
+| Rulesets    | :ref:`Security`          |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Security/CryptoKeyLength |
++-------------+--------------------------+
 
 
 
@@ -3732,17 +3837,17 @@ Suggestions
 * Add a call to json_last_error()
 * Configure operations to throw an exception upon error (``JSON_THROW_ON_ERROR``), and catch it.
 
-+-------------+-----------------------------------------+
-| Short name  | Structures/CheckJson                    |
-+-------------+-----------------------------------------+
-| Rulesets    | :ref:`Analyze`                          |
-+-------------+-----------------------------------------+
-| Severity    | Major                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
-+-------------+-----------------------------------------+
-| Examples    | :ref:`woocommerce-structures-checkjson` |
-+-------------+-----------------------------------------+
++-------------+----------------------+
+| Short name  | Structures/CheckJson |
++-------------+----------------------+
+| Rulesets    | :ref:`Analyze`       |
++-------------+----------------------+
+| Severity    | Major                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+| Examples    | Structures/CheckJson |
++-------------+----------------------+
 
 
 
@@ -3796,7 +3901,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Classes/CheckOnCallUsage |
 +-------------+--------------------------+
 
 
@@ -3832,7 +3937,7 @@ PHP 7.2 introduced the ability to remove a typehint when overloading a method. T
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                               |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                     |
+| Time To Fix | Classes/ChildRemoveTypehint                                                                                                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -3854,7 +3959,7 @@ Constant defined with const keyword may be arrays but only stating with PHP 5.6.
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Critical                                                                        |
 +-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                   |
+| Time To Fix | Php/ClassConstWithArray                                                         |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -3900,7 +4005,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/CouldBeFinal               |
 +-------------+------------------------------------+
 
 
@@ -3929,6 +4034,16 @@ When functions and classes bear the same name, calling them may be confusing. Th
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a naming convention to distinguish functions and classes
+* Rename the class or the function (or both)
+* Use an alias with a `use` expression
+
 +-------------+----------------------------+
 | Short name  | Php/ClassFunctionConfusion |
 +-------------+----------------------------+
@@ -3936,7 +4051,7 @@ When functions and classes bear the same name, calling them may be confusing. Th
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Slow (1 hour)              |
+| Time To Fix | Php/ClassFunctionConfusion |
 +-------------+----------------------------+
 
 
@@ -3980,7 +4095,7 @@ See also `When to declare classes final <http://ocramius.github.io/blog/when-to-
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
+| Time To Fix | Classes/FinalByOcramius |
 +-------------+-------------------------+
 
 
@@ -4025,7 +4140,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/NoParent                   |
 +-------------+------------------------------------+
 
 
@@ -4061,17 +4176,17 @@ Suggestions
 * Use distinct names for every class, trait and interface. 
 * Keep eponymous classes, traits and interfaces in distinct files, for definition but also for usage. When this happens, rename one of them.
 
-+-------------+---------------------------------------------------------------------------+
-| Short name  | Classes/CitSameName                                                       |
-+-------------+---------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                            |
-+-------------+---------------------------------------------------------------------------+
-| Severity    | Minor                                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                           |
-+-------------+---------------------------------------------------------------------------+
-| Examples    | :ref:`shopware-classes-citsamename`, :ref:`nextcloud-classes-citsamename` |
-+-------------+---------------------------------------------------------------------------+
++-------------+---------------------+
+| Short name  | Classes/CitSameName |
++-------------+---------------------+
+| Rulesets    | :ref:`Analyze`      |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Quick (30 mins)     |
++-------------+---------------------+
+| Examples    | Classes/CitSameName |
++-------------+---------------------+
 
 
 
@@ -4105,7 +4220,7 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 +-------------+--------------------------------------------+
 | Severity    | Major                                      |
 +-------------+--------------------------------------------+
-| Time To Fix | Quick (30 mins)                            |
+| Time To Fix | Classes/MutualExtension                    |
 +-------------+--------------------------------------------+
 
 
@@ -4155,7 +4270,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Classes/CloneWithNonObject             |
 +-------------+----------------------------------------+
 
 
@@ -4168,17 +4283,17 @@ Close Tags
 
 PHP manual recommends that script should be left open, without the final closing ?>. This way, one will avoid the infamous bug 'Header already sent', associated with left-over spaces, that are lying after this closing tag.
 
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Short name  | Php/CloseTags                                                                                               |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>`                                                              |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                       |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                            |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Php/CloseTags                                  |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Instant (5 mins)                               |
++-------------+------------------------------------------------+
+| ClearPHP    | Php/CloseTags                                  |
++-------------+------------------------------------------------+
 
 
 
@@ -4230,17 +4345,17 @@ Suggestions
 * Replace the closure by a string, with the name of the called function
 * Replace the closure by an array, with the name of the called method and the object as first element
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Functions/Closure2String                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`Performances`                                           |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`tine20-functions-closure2string`, :ref:`nextcloud-functions-closure2string` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+-----------------------------------------+
+| Short name  | Functions/Closure2String                |
++-------------+-----------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`Performances` |
++-------------+-----------------------------------------+
+| Severity    | Minor                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Quick (30 mins)                         |
++-------------+-----------------------------------------+
+| Examples    | Functions/Closure2String                |
++-------------+-----------------------------------------+
 
 
 
@@ -4289,7 +4404,7 @@ See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/ClosureThisSupport    |
 +-------------+---------------------------+
 
 
@@ -4333,7 +4448,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/CoalesceAndConcat |
 +-------------+------------------------------+
 
 
@@ -4365,7 +4480,7 @@ See also `Ternary Operator <http://php.net/manual/en/language.operators.comparis
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Php Version | With PHP 7.4 and more recent                                                                                                                                                                                           |
+| Php Version | Php/CoalesceEqual                                                                                                                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -4415,17 +4530,17 @@ Suggestions
 * Collect common expressions, and move them before of after the if/then expression.
 * Move a prefix and suffixes to a third-party method
 
-+-------------+-----------------------------------------------------------------------------------------------+
-| Short name  | Structures/CommonAlternatives                                                                 |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                              |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-commonalternatives`, :ref:`nextcloud-structures-commonalternatives` |
-+-------------+-----------------------------------------------------------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Structures/CommonAlternatives |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Major                         |
++-------------+-------------------------------+
+| Time To Fix | Instant (5 mins)              |
++-------------+-------------------------------+
+| Examples    | Structures/CommonAlternatives |
++-------------+-------------------------------+
 
 
 
@@ -4462,7 +4577,7 @@ See also `compact <http://www.php.net/compact>`_ and `PHP RFC: Make compact func
 +-------------+-----------------------------------------------+
 | Severity    | Major                                         |
 +-------------+-----------------------------------------------+
-| Time To Fix | Quick (30 mins)                               |
+| Time To Fix | Php/CompactInexistant                         |
 +-------------+-----------------------------------------------+
 
 
@@ -4477,7 +4592,7 @@ When comparing hash values, it is important to use the strict comparison : `hash
 
 In a number of situations, the hash value will start with ``0e``, and PHP will understand that the comparison involves integers : it will then convert the strings into numbers, and it may end up converting them to 0.
 
-Here is an example 
+Here is an example : 
 
 .. code-block:: php
 
@@ -4509,6 +4624,15 @@ You may also use `password_hash() <https://www.php.net/password_hash>`_ and `pas
 
 See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ `What is the best way to compare hashed strings? (PHP) <https://stackoverflow.com/questions/5211132/what-is-the-best-way-to-compare-hashed-strings-php/23959696#23959696>`_ and `md5('240610708') == md5('QNKCDZO') <https://news.ycombinator.com/item?id=9484757>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use dedicated functions for hash comparisons
+* Use identity operators (===), and not equality operators (==) to compare hashes
+* Compare hashes in the database (or external system), where such confusion is not possible
+
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Security/CompareHash                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -4520,7 +4644,7 @@ See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ `What is t
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`traq-security-comparehash`, :ref:`livezilla-security-comparehash`                             |
+| Examples    | Security/CompareHash                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -4555,7 +4679,7 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Structures/ComparedComparison |
 +-------------+-------------------------------+
 
 
@@ -4609,7 +4733,7 @@ Suggestions
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Variables/ComplexDynamicNames |
 +-------------+-------------------------------+
 
 
@@ -4661,7 +4785,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                                                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                                                                                                            |
+| Time To Fix | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -4713,7 +4837,7 @@ Suggestions
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
+| Time To Fix | Structures/ConcatEmpty |
 +-------------+------------------------+
 
 
@@ -4764,7 +4888,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Instant (5 mins)                       |
+| Time To Fix | Interfaces/ConcreteVisibility          |
 +-------------+----------------------------------------+
 
 
@@ -4812,17 +4936,17 @@ Suggestions
 
 * Always use the second argument of extract(), and avoid using ``EXTR_OVERWRITE``
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Security/ConfigureExtract                                                         |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Security`                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                  |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-security-configureextract`, :ref:`dolibarr-security-configureextract` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Security/ConfigureExtract |
++-------------+---------------------------+
+| Rulesets    | :ref:`Security`           |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Instant (5 mins)          |
++-------------+---------------------------+
+| Examples    | Security/ConfigureExtract |
++-------------+---------------------------+
 
 
 
@@ -4868,7 +4992,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                         |
+| Time To Fix | Classes/ConstVisibilityUsage                                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -4909,7 +5033,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                   |
+| Time To Fix | Php/ConstWithArray                                                              |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -4954,7 +5078,7 @@ Suggestions
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
-| Time To Fix | Slow (1 hour)         |
+| Time To Fix | Classes/ConstantClass |
 +-------------+-----------------------+
 
 
@@ -5001,7 +5125,7 @@ Every comparison operator is used when finding the favorite.
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
+| Time To Fix | Structures/ConstantComparisonConsistance       |
 +-------------+------------------------------------------------+
 
 
@@ -5045,7 +5169,7 @@ See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exp
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                 |
+| Time To Fix | Structures/ConstantScalarExpression                                             |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -5086,7 +5210,7 @@ However, this makes the code confusing and difficult to debug. It is recommended
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
-| Time To Fix | Slow (1 hour)                        |
+| Time To Fix | Constants/CreatedOutsideItsNamespace |
 +-------------+--------------------------------------+
 
 
@@ -5125,7 +5249,7 @@ See also `PHP Constants <http://php.net/manual/en/language.constants.php>`_.
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Slow (1 hour)                  |
+| Time To Fix | Constants/ConstantStrangeNames |
 +-------------+--------------------------------+
 
 
@@ -5173,7 +5297,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                                                                                                                                        |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`xoops-structures-continueisforloop`                                                                                                                                                                                              |
+| Examples    | Structures/ContinueIsForLoop                                                                                                                                                                                                           |
 +-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -5220,17 +5344,17 @@ Suggestions
 
 * Make this class an abstract class
 
-+-------------+-------------------------------------------------------------------------------------------+
-| Short name  | Classes/CouldBeAbstractClass                                                              |
-+-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`                                                        |
-+-------------+-------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                     |
-+-------------+-------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                           |
-+-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`edusoho-classes-couldbeabstractclass`, :ref:`shopware-classes-couldbeabstractclass` |
-+-------------+-------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Classes/CouldBeAbstractClass       |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | Classes/CouldBeAbstractClass       |
++-------------+------------------------------------+
 
 
 
@@ -5273,7 +5397,7 @@ Starting with PHP 5.6, even `array() <https://www.php.net/array>`_ may be define
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Classes/CouldBeClassConstant |
 +-------------+------------------------------+
 
 
@@ -5331,7 +5455,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Constants/CouldBeConstant |
 +-------------+---------------------------+
 
 
@@ -5377,17 +5501,17 @@ Suggestions
 * Merge the two conditions into one structure
 * Check if the second condition is still applicable
 
-+-------------+-------------------------------------------------------------------------------+
-| Short name  | Structures/CouldBeElse                                                        |
-+-------------+-------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                |
-+-------------+-------------------------------------------------------------------------------+
-| Severity    | Minor                                                                         |
-+-------------+-------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                              |
-+-------------+-------------------------------------------------------------------------------+
-| Examples    | :ref:`sugarcrm-structures-couldbeelse`, :ref:`openemr-structures-couldbeelse` |
-+-------------+-------------------------------------------------------------------------------+
++-------------+------------------------+
+| Short name  | Structures/CouldBeElse |
++-------------+------------------------+
+| Rulesets    | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Instant (5 mins)       |
++-------------+------------------------+
+| Examples    | Structures/CouldBeElse |
++-------------+------------------------+
 
 
 
@@ -5435,17 +5559,17 @@ They also have to be public in the case of component : some of those constants h
 
 See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_.
 
-+-------------+----------------------------------------------+
-| Short name  | Classes/CouldBePrivateConstante              |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`ClassReview`                           |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`phinx-classes-couldbeprivateconstante` |
-+-------------+----------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Classes/CouldBePrivateConstante |
++-------------+---------------------------------+
+| Rulesets    | :ref:`ClassReview`              |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Classes/CouldBePrivateConstante |
++-------------+---------------------------------+
 
 
 
@@ -5502,7 +5626,7 @@ As a general rule, it is recommended to make constant 'private' by default, and 
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
-| Time To Fix | Quick (30 mins)                  |
+| Time To Fix | Classes/CouldBeProtectedConstant |
 +-------------+----------------------------------+
 
 
@@ -5546,7 +5670,7 @@ These properties may even be made private.
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
+| Time To Fix | Classes/CouldBeProtectedMethod |
 +-------------+--------------------------------+
 
 
@@ -5589,7 +5713,7 @@ This property may even be made private.
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
-| Time To Fix | Slow (1 hour)                    |
+| Time To Fix | Classes/CouldBeProtectedProperty |
 +-------------+----------------------------------+
 
 
@@ -5611,17 +5735,17 @@ This global is only used in one function or method. It may be called 'static', i
    }
    ?>
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Structures/CouldBeStatic                                                        |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`Analyze`, :ref:`ClassReview`          |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Major                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                 |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-structures-couldbestatic`, :ref:`contao-structures-couldbestatic` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------------+
+| Short name  | Structures/CouldBeStatic                                               |
++-------------+------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------------------------------------------+
+| Severity    | Major                                                                  |
++-------------+------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                        |
++-------------+------------------------------------------------------------------------+
+| Examples    | Structures/CouldBeStatic                                               |
++-------------+------------------------------------------------------------------------+
 
 
 
@@ -5674,17 +5798,17 @@ Suggestions
 * Add the static keyword to the closure.
 * Make actual usage of $this in the closure.
 
-+-------------+----------------------------------------------+
-| Short name  | Functions/CouldBeStaticClosure               |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                           |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`piwigo-functions-couldbestaticclosure` |
-+-------------+----------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Functions/CouldBeStaticClosure |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Suggestions`             |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
+| Examples    | Functions/CouldBeStaticClosure |
++-------------+--------------------------------+
 
 
 
@@ -5729,17 +5853,17 @@ Suggestions
 * Add the typehint callable
 * Use the function is_callable() inside the method if 'callable' is too strong.
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Functions/CouldBeCallable                                                             |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`Typechecks`                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                       |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`magento-functions-couldbecallable`, :ref:`prestashop-functions-couldbecallable` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+---------------------------------------+
+| Short name  | Functions/CouldBeCallable             |
++-------------+---------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`Typechecks` |
++-------------+---------------------------------------+
+| Severity    | Minor                                 |
++-------------+---------------------------------------+
+| Time To Fix | Quick (30 mins)                       |
++-------------+---------------------------------------+
+| Examples    | Functions/CouldBeCallable             |
++-------------+---------------------------------------+
 
 
 
@@ -5793,6 +5917,14 @@ Suggestions
 * Create a function based on context-free repeated elements
 * Create a class based on repeated elements with dependent values
 
++---------------------+---------+---------+-------------+
+| Name                | Default | Type    | Description |
++---------------------+---------+---------+-------------+
+| centralizeThreshold | 8       | integer | Description |
++---------------------+---------+---------+-------------+
+
+
+
 +-------------+------------------------------------+
 | Short name  | Functions/CouldCentralize          |
 +-------------+------------------------------------+
@@ -5800,7 +5932,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
+| Time To Fix | Functions/CouldCentralize          |
 +-------------+------------------------------------+
 
 
@@ -5841,17 +5973,17 @@ Suggestions
 
 * Add the return type void to the method or function
 
-+-------------+--------------------------------------------+
-| Short name  | Functions/CouldReturnVoid                  |
-+-------------+--------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                         |
-+-------------+--------------------------------------------+
-| Severity    | Minor                                      |
-+-------------+--------------------------------------------+
-| Time To Fix | Quick (30 mins)                            |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`wordpress-functions-couldreturnvoid` |
-+-------------+--------------------------------------------+
++-------------+---------------------------+
+| Short name  | Functions/CouldReturnVoid |
++-------------+---------------------------+
+| Rulesets    | :ref:`Suggestions`        |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Examples    | Functions/CouldReturnVoid |
++-------------+---------------------------+
 
 
 
@@ -5890,7 +6022,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Functions/CouldTypeWithArray |
 +-------------+------------------------------+
 
 
@@ -5930,7 +6062,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Functions/CouldTypeWithBool |
 +-------------+-----------------------------+
 
 
@@ -5970,7 +6102,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Functions/CouldTypeWithInt |
 +-------------+----------------------------+
 
 
@@ -6017,7 +6149,7 @@ Suggestions
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Functions/CouldTypeWithIterable |
 +-------------+---------------------------------+
 
 
@@ -6057,7 +6189,7 @@ Suggestions
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Functions/CouldTypeWithString |
 +-------------+-------------------------------+
 
 
@@ -6091,6 +6223,14 @@ Arguments that are tested with `instanceof <http://php.net/manual/en/language.op
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the typehint, remove the test on the type
+
 +-------------+-------------------------+
 | Short name  | Functions/CouldTypehint |
 +-------------+-------------------------+
@@ -6098,7 +6238,7 @@ Arguments that are tested with `instanceof <http://php.net/manual/en/language.op
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Functions/CouldTypehint |
 +-------------+-------------------------+
 
 
@@ -6161,7 +6301,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Namespaces/CouldUseAlias |
 +-------------+--------------------------+
 
 
@@ -6203,17 +6343,17 @@ Suggestions
 
 * Replace the array() call with a compact() call.
 
-+-------------+---------------------------------------------+
-| Short name  | Structures/CouldUseCompact                  |
-+-------------+---------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                          |
-+-------------+---------------------------------------------+
-| Severity    | Minor                                       |
-+-------------+---------------------------------------------+
-| Time To Fix | Quick (30 mins)                             |
-+-------------+---------------------------------------------+
-| Examples    | :ref:`wordpress-structures-couldusecompact` |
-+-------------+---------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/CouldUseCompact |
++-------------+----------------------------+
+| Rulesets    | :ref:`Suggestions`         |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+| Examples    | Structures/CouldUseCompact |
++-------------+----------------------------+
 
 
 
@@ -6294,7 +6434,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-structures-coulduseshortassignation`, :ref:`thelia-structures-coulduseshortassignation`     |
+| Examples    | Structures/CouldUseShortAssignation                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -6324,17 +6464,17 @@ Suggestions
 * Add a try/catch clause around those commands
 * Add a check on the values used with those operator : for example, check a dividend is not 0, or a bitshift is not negative
 
-+-------------+--------------------------------------+
-| Short name  | Exceptions/CouldUseTry               |
-+-------------+--------------------------------------+
-| Rulesets    | :ref:`Suggestions`                   |
-+-------------+--------------------------------------+
-| Severity    | Minor                                |
-+-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
-+-------------+--------------------------------------+
-| Examples    | :ref:`mautic-exceptions-couldusetry` |
-+-------------+--------------------------------------+
++-------------+------------------------+
+| Short name  | Exceptions/CouldUseTry |
++-------------+------------------------+
+| Rulesets    | :ref:`Suggestions`     |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Quick (30 mins)        |
++-------------+------------------------+
+| Examples    | Exceptions/CouldUseTry |
++-------------+------------------------+
 
 
 
@@ -6375,17 +6515,17 @@ Suggestions
 
 * Use __DIR__ instead of ``dirname(__FILE__);``
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Structures/CouldUseDir                                                          |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`php-cs-fixable`                       |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Major                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                 |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`woocommerce-structures-couldusedir`, :ref:`piwigo-structures-couldusedir` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+-----------------------------------------------------------+
+| Short name  | Structures/CouldUseDir                                    |
++-------------+-----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`php-cs-fixable` |
++-------------+-----------------------------------------------------------+
+| Severity    | Major                                                     |
++-------------+-----------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                           |
++-------------+-----------------------------------------------------------+
+| Examples    | Structures/CouldUseDir                                    |
++-------------+-----------------------------------------------------------+
 
 
 
@@ -6433,17 +6573,17 @@ Suggestions
 
 * Use array_fill_keys()
 
-+-------------+----------------------------------------------------------------------------------------------------+
-| Short name  | Structures/CouldUseArrayFillKeys                                                                   |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                                 |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                              |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                      |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-structures-couldusearrayfillkeys`, :ref:`phpipam-structures-couldusearrayfillkeys` |
-+-------------+----------------------------------------------------------------------------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/CouldUseArrayFillKeys |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Suggestions`               |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| Examples    | Structures/CouldUseArrayFillKeys |
++-------------+----------------------------------+
 
 
 
@@ -6480,17 +6620,17 @@ Suggestions
 * Turn the foreach() and its condition into a call to array_unique()
 * Extract the condition from the foreach() and add a separate call to array_unique()
 
-+-------------+-----------------------------------------------------------------------------------------------+
-| Short name  | Structures/CouldUseArrayUnique                                                                |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                            |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                               |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-couldusearrayunique`, :ref:`openemr-structures-couldusearrayunique` |
-+-------------+-----------------------------------------------------------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Structures/CouldUseArrayUnique |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Suggestions`             |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
+| Examples    | Structures/CouldUseArrayUnique |
++-------------+--------------------------------+
 
 
 
@@ -6528,17 +6668,17 @@ Suggestions
 
 * replace the explicit name with self
 
-+-------------+--------------------------------------------------------------------------------+
-| Short name  | Classes/ShouldUseSelf                                                          |
-+-------------+--------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`ClassReview`                         |
-+-------------+--------------------------------------------------------------------------------+
-| Severity    | Minor                                                                          |
-+-------------+--------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                               |
-+-------------+--------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-classes-shoulduseself`, :ref:`livezilla-classes-shoulduseself` |
-+-------------+--------------------------------------------------------------------------------+
++-------------+--------------------------------------------------------+
+| Short name  | Classes/ShouldUseSelf                                  |
++-------------+--------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`ClassReview` |
++-------------+--------------------------------------------------------+
+| Severity    | Minor                                                  |
++-------------+--------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                       |
++-------------+--------------------------------------------------------+
+| Examples    | Classes/ShouldUseSelf                                  |
++-------------+--------------------------------------------------------+
 
 
 
@@ -6579,17 +6719,17 @@ Suggestions
 
 * Use strrepeat() whenever possible
 
-+-------------+---------------------------------------------+
-| Short name  | Structures/CouldUseStrrepeat                |
-+-------------+---------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                |
-+-------------+---------------------------------------------+
-| Severity    | Minor                                       |
-+-------------+---------------------------------------------+
-| Time To Fix | Slow (1 hour)                               |
-+-------------+---------------------------------------------+
-| Examples    | :ref:`zencart-structures-couldusestrrepeat` |
-+-------------+---------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/CouldUseStrrepeat |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
+| Examples    | Structures/CouldUseStrrepeat |
++-------------+------------------------------+
 
 
 
@@ -6628,7 +6768,7 @@ See also `crc32() <https://www.php.net/crc32>`_.
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
+| Time To Fix | Php/Crc32MightBeNegative |
 +-------------+--------------------------+
 
 
@@ -6656,8 +6796,6 @@ It is highly recommended to unset blind variables when they are set up as refere
    unset($a);
    
    
-   
-   
    // Dangling array problem
    foreach($array as &$a) {
        $a += 1;
@@ -6668,6 +6806,14 @@ It is highly recommended to unset blind variables when they are set up as refere
    // $a is already a reference, even if it doesn't show here.
    foreach($array as $a) {}
    //$array === array(3,4,5,5);
+   
+   // subtle variation of the dangling reference problem.
+   // Here, $c is reused across all items in $a (via $b)
+   foreach($a as &$b) {
+       foreach($b as &$c) {
+           $c += 1;
+       }
+   }
    
    ?>
 
@@ -6694,7 +6840,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-dangling-reference <https://github.com/dseguy/clearPHP/tree/master/rules/no-dangling-reference.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`typo3-structures-danglingarrayreferences`, :ref:`sugarcrm-structures-danglingarrayreferences`       |
+| Examples    | Structures/DanglingArrayReferences                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 
 
@@ -6741,17 +6887,17 @@ Suggestions
 
 * Move function definitions to th global space : outside structures, and method.
 
-+-------------+------------------------------------------+
-| Short name  | Functions/DeepDefinitions                |
-+-------------+------------------------------------------+
-| Rulesets    | :ref:`Analyze`                           |
-+-------------+------------------------------------------+
-| Severity    | Major                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Slow (1 hour)                            |
-+-------------+------------------------------------------+
-| Examples    | :ref:`dolphin-functions-deepdefinitions` |
-+-------------+------------------------------------------+
++-------------+---------------------------+
+| Short name  | Functions/DeepDefinitions |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+| Examples    | Functions/DeepDefinitions |
++-------------+---------------------------+
 
 
 
@@ -6781,7 +6927,7 @@ PHP 7.0 has the ability to define an array as a constant, using the `define() <h
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Php/DefineWithArray                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -6842,7 +6988,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/DependantAbstractClass     |
 +-------------+------------------------------------+
 
 
@@ -6897,17 +7043,17 @@ Suggestions
 * Make the trait only use its own resources
 * Split the trait in autonomous traits
 
-+-------------+--------------------------------------+
-| Short name  | Traits/DependantTrait                |
-+-------------+--------------------------------------+
-| Rulesets    | :ref:`Analyze`                       |
-+-------------+--------------------------------------+
-| Severity    | Minor                                |
-+-------------+--------------------------------------+
-| Time To Fix | Slow (1 hour)                        |
-+-------------+--------------------------------------+
-| Examples    | :ref:`zencart-traits-dependanttrait` |
-+-------------+--------------------------------------+
++-------------+-----------------------+
+| Short name  | Traits/DependantTrait |
++-------------+-----------------------+
+| Rulesets    | :ref:`Analyze`        |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Slow (1 hour)         |
++-------------+-----------------------+
+| Examples    | Traits/DependantTrait |
++-------------+-----------------------+
 
 
 
@@ -6953,7 +7099,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-deprecated <https://github.com/dseguy/clearPHP/tree/master/rules/no-deprecated.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-php-deprecated`                                                             |
+| Examples    | Php/Deprecated                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
 
 
@@ -6988,7 +7134,7 @@ This was added in PHP 5.5. There is no need anymore for an intermediate variable
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                      |
+| Time To Fix | Structures/DereferencingAS                           |
 +-------------+------------------------------------------------------+
 
 
@@ -7035,7 +7181,7 @@ See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecatio
 +-------------+-----------------------------------------------+
 | Rulesets    | :ref:`Suggestions`, :ref:`CompatibilityPHP74` |
 +-------------+-----------------------------------------------+
-| Php Version | With PHP 8.0 and older                        |
+| Php Version | Php/DetectCurrentClass                        |
 +-------------+-----------------------------------------------+
 
 
@@ -7074,7 +7220,7 @@ See also `Directly calling `__clone <http://www.php.net/manual/en/language.oop5.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Php/DirectCallToClone                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -7120,7 +7266,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Security/DirectInjection |
 +-------------+--------------------------+
 
 
@@ -7175,7 +7321,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
+| Time To Fix | Structures/DirectlyUseFile |
 +-------------+----------------------------+
 
 
@@ -7233,17 +7379,17 @@ Suggestions
 * Remove the extension
 * Make actual usage of the classes, at least from one of them
 
-+-------------+----------------------------------------------+
-| Short name  | Classes/DisconnectedClasses                  |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`ClassReview`                           |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Slow (1 hour)                                |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`wordpress-classes-disconnectedclasses` |
-+-------------+----------------------------------------------+
++-------------+-----------------------------+
+| Short name  | Classes/DisconnectedClasses |
++-------------+-----------------------------+
+| Rulesets    | :ref:`ClassReview`          |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Slow (1 hour)               |
++-------------+-----------------------------+
+| Examples    | Classes/DisconnectedClasses |
++-------------+-----------------------------+
 
 
 
@@ -7276,6 +7422,14 @@ Use SQL expression to compute aggregates.
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Rework the query to move the calculations in the database
+
 +-------------+-----------------------+
 | Short name  | Performances/DoInBase |
 +-------------+-----------------------+
@@ -7283,7 +7437,7 @@ Use SQL expression to compute aggregates.
 +-------------+-----------------------+
 | Severity    | Major                 |
 +-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
+| Time To Fix | Performances/DoInBase |
 +-------------+-----------------------+
 
 
@@ -7323,7 +7477,7 @@ Suggestions
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
+| Time To Fix | Structures/DontBeTooManual                     |
 +-------------+------------------------------------------------+
 
 
@@ -7358,7 +7512,7 @@ It is recommended to put the modified values in another variable, and keep the o
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
-| Time To Fix | Slow (1 hour)                        |
+| Time To Fix | Structures/NoChangeIncomingVariables |
 +-------------+--------------------------------------+
 
 
@@ -7407,17 +7561,17 @@ Suggestions
 
 * Remove any echo, print, printf() call built with error messages from an exception, or external source.
 
-+-------------+--------------------------------------------------------------------------------------+
-| Short name  | Security/DontEchoError                                                               |
-+-------------+--------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                      |
-+-------------+--------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                             |
-+-------------+--------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                     |
-+-------------+--------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-security-dontechoerror`, :ref:`phpdocumentor-security-dontechoerror` |
-+-------------+--------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Security/DontEchoError          |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security` |
++-------------+---------------------------------+
+| Severity    | Critical                        |
++-------------+---------------------------------+
+| Time To Fix | Instant (5 mins)                |
++-------------+---------------------------------+
+| Examples    | Security/DontEchoError          |
++-------------+---------------------------------+
 
 
 
@@ -7465,17 +7619,17 @@ Suggestions
 
 * Use `yield from` instead of the whole foreach() loop
 
-+-------------+----------------------------------------------------------------------------------------+
-| Short name  | Structures/DontLoopOnYield                                                             |
-+-------------+----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                     |
-+-------------+----------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                  |
-+-------------+----------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                        |
-+-------------+----------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-dontlooponyield`, :ref:`tikiwiki-structures-dontlooponyield` |
-+-------------+----------------------------------------------------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/DontLoopOnYield |
++-------------+----------------------------+
+| Rulesets    | :ref:`Suggestions`         |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+| Examples    | Structures/DontLoopOnYield |
++-------------+----------------------------+
 
 
 
@@ -7517,7 +7671,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------+
 | Severity    | Critical                                                             |
 +-------------+----------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                      |
+| Time To Fix | Structures/DontReadAndWriteInOneExpression                           |
 +-------------+----------------------------------------------------------------------+
 
 
@@ -7590,17 +7744,17 @@ Suggestions
 * Sending $this should be made accessible in a separate method, so external objects may call it.
 * Sending the current may be the responsibility of the method creating the object.
 
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Short name  | Classes/DontSendThisInConstructor                                                                     |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                        |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                 |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                         |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`woocommerce-classes-dontsendthisinconstructor`, :ref:`contao-classes-dontsendthisinconstructor` |
-+-------------+-------------------------------------------------------------------------------------------------------+
++-------------+-----------------------------------+
+| Short name  | Classes/DontSendThisInConstructor |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Analyze`                    |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Slow (1 hour)                     |
++-------------+-----------------------------------+
+| Examples    | Classes/DontSendThisInConstructor |
++-------------+-----------------------------------+
 
 
 
@@ -7654,17 +7808,17 @@ Suggestions
 * Never unset properties : set it to null or its default value instead
 * Make the property an array, and set/unset its index
 
-+-------------+--------------------------------------------------------------------------------------+
-| Short name  | Classes/DontUnsetProperties                                                          |
-+-------------+--------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`php-cs-fixable`                                  |
-+-------------+--------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                |
-+-------------+--------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                        |
-+-------------+--------------------------------------------------------------------------------------+
-| Examples    | :ref:`vanilla-classes-dontunsetproperties`, :ref:`typo3-classes-dontunsetproperties` |
-+-------------+--------------------------------------------------------------------------------------+
++-------------+-----------------------------------------------------+
+| Short name  | Classes/DontUnsetProperties                         |
++-------------+-----------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`php-cs-fixable` |
++-------------+-----------------------------------------------------+
+| Severity    | Major                                               |
++-------------+-----------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                       |
++-------------+-----------------------------------------------------+
+| Examples    | Classes/DontUnsetProperties                         |
++-------------+-----------------------------------------------------+
 
 
 
@@ -7719,7 +7873,7 @@ When the value has to be prepared before usage, then save the filtered value in 
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Structures/DontChangeBlindKey |
 +-------------+-------------------------------+
 
 
@@ -7730,7 +7884,7 @@ Dont Collect Void
 #################
 
 
-When a method returns void, there is no need to use the result. 
+When a method returns void, there is no need to collect the result. The collected value will actually be ``null``.
 
 .. code-block:: php
 
@@ -7764,7 +7918,7 @@ Suggestions
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
+| Time To Fix | Functions/DontUseVoid |
 +-------------+-----------------------+
 
 
@@ -7800,17 +7954,17 @@ Suggestions
 
 * Extract the increment from the expression, and put it on a separate line.
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/DontMixPlusPlus                                                        |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                    |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                  |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`contao-structures-dontmixplusplus`, :ref:`typo3-structures-dontmixplusplus` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/DontMixPlusPlus |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Instant (5 mins)           |
++-------------+----------------------------+
+| Examples    | Structures/DontMixPlusPlus |
++-------------+----------------------------+
 
 
 
@@ -7842,7 +7996,7 @@ This happens when a container (variable, property, array index) is assigned with
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/DoubleAssignation |
 +-------------+------------------------------+
 
 
@@ -7859,7 +8013,23 @@ Twice the same call in a row. This is worth a check.
 
    <?php
    
+   // repetition of the same command, with the same effect each time. 
+   $a = array_merge($b, $c);
+   $a = array_merge($b, $c);
+   
+   // false positive : commands are identical, but the effect is compounded 
+   $a = array_merge($a, $c);
+   $a = array_merge($a, $c);
+   
    ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove double work
+* Avoid repetition by using loops, variadic or quantifiers `(dirname($path, 2))`
 
 +-------------+------------------------------+
 | Short name  | Structures/DoubleInstruction |
@@ -7868,7 +8038,7 @@ Twice the same call in a row. This is worth a check.
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
+| Time To Fix | Structures/DoubleInstruction |
 +-------------+------------------------------+
 
 
@@ -7879,7 +8049,7 @@ Double array_flip()
 ###################
 
 
-Avoid double `array_flip() <https://www.php.net/array_flip>`_ to gain speed. While `array_flip() <https://www.php.net/array_flip>`_ alone is usually useful, a double `array_flip() <https://www.php.net/array_flip>`_ usually is made to handle values and keys. 
+Avoid double `array_flip() <https://www.php.net/array_flip>`_ to gain speed. While `array_flip() <https://www.php.net/array_flip>`_ alone is usually useful, a double call to `array_flip() <https://www.php.net/array_flip>`_ is made to make values and keys unique. 
 
 .. code-block:: php
 
@@ -7906,17 +8076,27 @@ Avoid double `array_flip() <https://www.php.net/array_flip>`_ to gain speed. Whi
    
    ?>
 
-+-------------+-----------------------------------------------+
-| Short name  | Performances/DoubleArrayFlip                  |
-+-------------+-----------------------------------------------+
-| Rulesets    | :ref:`Performances`                           |
-+-------------+-----------------------------------------------+
-| Severity    | Major                                         |
-+-------------+-----------------------------------------------+
-| Time To Fix | Quick (30 mins)                               |
-+-------------+-----------------------------------------------+
-| Examples    | :ref:`nextcloud-performances-doublearrayflip` |
-+-------------+-----------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* use array_unique() or array_count_values
+* use array_flip() once, and let PHP garbage collect it later
+* Keep the original values in a separate variable
+
++-------------+------------------------------+
+| Short name  | Performances/DoubleArrayFlip |
++-------------+------------------------------+
+| Rulesets    | :ref:`Performances`          |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Performances/DoubleArrayFlip |
++-------------+------------------------------+
 
 
 
@@ -7967,7 +8147,7 @@ This is also true if else has a return, and then not. When doing so, don't forge
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Structures/DropElseAfterReturn     |
 +-------------+------------------------------------+
 
 
@@ -8004,17 +8184,17 @@ Suggestions
 * Use negative length
 * Omit the last argument to get the string till its end
 
-+-------------+----------------------------------------------------------------------------------+
-| Short name  | Structures/SubstrLastArg                                                         |
-+-------------+----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                               |
-+-------------+----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                  |
-+-------------+----------------------------------------------------------------------------------+
-| Examples    | :ref:`suitecrm-structures-substrlastarg`, :ref:`tine20-structures-substrlastarg` |
-+-------------+----------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/SubstrLastArg |
++-------------+--------------------------+
+| Rulesets    | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Structures/SubstrLastArg |
++-------------+--------------------------+
 
 
 
@@ -8053,11 +8233,11 @@ Suggestions
 
 *
 
-+--------------+---------+---------+---------------------------------------------------------------+
-| Name         | Default | Type    | Description                                                   |
-+--------------+---------+---------+---------------------------------------------------------------+
-| minDuplicate | 15      | integer | Minimal number of duplication before the literal is reported. |
-+--------------+---------+---------+---------------------------------------------------------------+
++--------------+---------+---------+-------------+
+| Name         | Default | Type    | Description |
++--------------+---------+---------+-------------+
+| minDuplicate | 15      | integer | Description |
++--------------+---------+---------+-------------+
 
 
 
@@ -8068,7 +8248,7 @@ Suggestions
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
-| Time To Fix | Quick (30 mins)       |
+| Time To Fix | Type/DuplicateLiteral |
 +-------------+-----------------------+
 
 
@@ -8101,6 +8281,13 @@ In case of injection in the variable, the dynamic loading of a library gives a l
 
 See also `dl <http://www.php.net/dl>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a switch structure, to make the dl() calls static.
+* Avoid using dl() and make the needed extension always available in PHP binary.
+
 +-------------+--------------------+
 | Short name  | Security/DynamicDl |
 +-------------+--------------------+
@@ -8108,7 +8295,7 @@ See also `dl <http://www.php.net/dl>`_.
 +-------------+--------------------+
 | Severity    | Major              |
 +-------------+--------------------+
-| Time To Fix | Slow (1 hour)      |
+| Time To Fix | Security/DynamicDl |
 +-------------+--------------------+
 
 
@@ -8155,7 +8342,7 @@ It happens that print, echo or <?= are used depending on coding style and files.
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
+| Time To Fix | Structures/EchoPrintConsistance                |
 +-------------+------------------------------------------------+
 
 
@@ -8205,7 +8392,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpdocumentor-structures-echowithconcat`, :ref:`teampass-structures-echowithconcat`                                             |
+| Examples    | Structures/EchoWithConcat                                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -8247,7 +8434,7 @@ See also `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/varia
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                   |
+| Time To Fix | Php/EllipsisUsage                                                               |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -8294,17 +8481,17 @@ Suggestions
 * Turn the else expression into a block, and have more than the second if in this block
 * Turn the if / else if / else into a switch structure
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Structures/ElseIfElseif                                                               |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`, :ref:`Rector`                                  |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                       |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`teampass-structures-elseifelseif`, :ref:`phpdocumentor-structures-elseifelseif` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Structures/ElseIfElseif                              |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`, :ref:`Rector` |
++-------------+------------------------------------------------------+
+| Severity    | Minor                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                      |
++-------------+------------------------------------------------------+
+| Examples    | Structures/ElseIfElseif                              |
++-------------+------------------------------------------------------+
 
 
 
@@ -8352,17 +8539,17 @@ Suggestions
 * Fill the block with a comment that explain the situation
 * Remove the block and its commanding operator
 
-+-------------+----------------------------------------------------------------------------------+
-| Short name  | Structures/EmptyBlocks                                                           |
-+-------------+----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                   |
-+-------------+----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                 |
-+-------------+----------------------------------------------------------------------------------+
-| Examples    | :ref:`cleverstyle-structures-emptyblocks`, :ref:`phpipam-structures-emptyblocks` |
-+-------------+----------------------------------------------------------------------------------+
++-------------+------------------------+
+| Short name  | Structures/EmptyBlocks |
++-------------+------------------------+
+| Rulesets    | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Instant (5 mins)       |
++-------------+------------------------+
+| Examples    | Structures/EmptyBlocks |
++-------------+------------------------+
 
 
 
@@ -8401,17 +8588,17 @@ Suggestions
 * Remove an empty class :it is probably dead code.
 * Add some code to the class to make it concrete.
 
-+-------------+-------------------------------------+
-| Short name  | Classes/EmptyClass                  |
-+-------------+-------------------------------------+
-| Rulesets    | :ref:`Analyze`                      |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Quick (30 mins)                     |
-+-------------+-------------------------------------+
-| Examples    | :ref:`wordpress-classes-emptyclass` |
-+-------------+-------------------------------------+
++-------------+--------------------+
+| Short name  | Classes/EmptyClass |
++-------------+--------------------+
+| Rulesets    | :ref:`Analyze`     |
++-------------+--------------------+
+| Severity    | Minor              |
++-------------+--------------------+
+| Time To Fix | Quick (30 mins)    |
++-------------+--------------------+
+| Examples    | Classes/EmptyClass |
++-------------+--------------------+
 
 
 
@@ -8460,17 +8647,17 @@ Suggestions
 * Fill the function with actual code
 * Remove any usage of the function, then remove the function
 
-+-------------+---------------------------------------+
-| Short name  | Functions/EmptyFunction               |
-+-------------+---------------------------------------+
-| Rulesets    | :ref:`Analyze`                        |
-+-------------+---------------------------------------+
-| Severity    | Minor                                 |
-+-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
-+-------------+---------------------------------------+
-| Examples    | :ref:`contao-functions-emptyfunction` |
-+-------------+---------------------------------------+
++-------------+-------------------------+
+| Short name  | Functions/EmptyFunction |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Functions/EmptyFunction |
++-------------+-------------------------+
 
 
 
@@ -8502,17 +8689,17 @@ Suggestions
 * Remove the empty lines
 * Fill the empty lines
 
-+-------------+---------------------------------------------------------------------------+
-| Short name  | Structures/EmptyLines                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Analyze`                              |
-+-------------+---------------------------------------------------------------------------+
-| Severity    | Minor                                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                          |
-+-------------+---------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-structures-emptylines`, :ref:`thinkphp-structures-emptylines` |
-+-------------+---------------------------------------------------------------------------+
++-------------+----------------------------------------------+
+| Short name  | Structures/EmptyLines                        |
++-------------+----------------------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++-------------+----------------------------------------------+
+| Severity    | Minor                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Instant (5 mins)                             |
++-------------+----------------------------------------------+
+| Examples    | Structures/EmptyLines                        |
++-------------+----------------------------------------------+
 
 
 
@@ -8553,7 +8740,7 @@ See also `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-p
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Instant (5 mins)          |
+| Time To Fix | Interfaces/EmptyInterface |
 +-------------+---------------------------+
 
 
@@ -8587,7 +8774,7 @@ Empty `list() <https://www.php.net/list>`_ are not allowed anymore in PHP 7. The
 +-------------+-------------------------------------------+
 | Severity    | Major                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
+| Time To Fix | Php/EmptyList                             |
 +-------------+-------------------------------------------+
 
 
@@ -8635,17 +8822,17 @@ Using bracket-style syntax :
    
    ?>
 
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Short name  | Namespaces/EmptyNamespace                                                                           |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                               |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                    |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-empty-namespace <https://github.com/dseguy/clearPHP/tree/master/rules/no-empty-namespace.md>`__ |
-+-------------+-----------------------------------------------------------------------------------------------------+
++-------------+----------------------------------------------+
+| Short name  | Namespaces/EmptyNamespace                    |
++-------------+----------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++-------------+----------------------------------------------+
+| Severity    | Minor                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Instant (5 mins)                             |
++-------------+----------------------------------------------+
+| ClearPHP    | Namespaces/EmptyNamespace                    |
++-------------+----------------------------------------------+
 
 
 
@@ -8671,7 +8858,7 @@ PHP tolerates the last element of an array to be empty.
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
+| Time To Fix | Arrays/EmptySlots                              |
 +-------------+------------------------------------------------+
 
 
@@ -8716,7 +8903,7 @@ Suggestions
 +-------------+-------------------+
 | Severity    | Minor             |
 +-------------+-------------------+
-| Time To Fix | Instant (5 mins)  |
+| Time To Fix | Traits/EmptyTrait |
 +-------------+-------------------+
 
 
@@ -8756,17 +8943,17 @@ Suggestions
 * Add a comment to mention why the catch is empty
 * Change the exception, chain it and throw again
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/EmptyTryCatch                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                    |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`livezilla-structures-emptytrycatch`, :ref:`mautic-structures-emptytrycatch` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/EmptyTryCatch |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Structures/EmptyTryCatch |
++-------------+--------------------------+
 
 
 
@@ -8804,19 +8991,19 @@ Suggestions
 
 * Use the compatible syntax, and store the result in a local variable before testing it with empty
 
-+-------------+------------------------------------------------+
-| Short name  | Structures/EmptyWithExpression                 |
-+-------------+------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                             |
-+-------------+------------------------------------------------+
-| Php Version | With PHP 5.5 and more recent                   |
-+-------------+------------------------------------------------+
-| Severity    | Major                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
-+-------------+------------------------------------------------+
-| Examples    | :ref:`humo-gen-structures-emptywithexpression` |
-+-------------+------------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Structures/EmptyWithExpression |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Suggestions`             |
++-------------+--------------------------------+
+| Php Version | With PHP 5.5 and more recent   |
++-------------+--------------------------------+
+| Severity    | Major                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
+| Examples    | Structures/EmptyWithExpression |
++-------------+--------------------------------+
 
 
 
@@ -8858,17 +9045,17 @@ Suggestions
 * Make all simple letter appear clearly
 * Add comments about why this code is encoded
 
-+-------------+--------------------------------------+
-| Short name  | Security/EncodedLetters              |
-+-------------+--------------------------------------+
-| Rulesets    | :ref:`Security`                      |
-+-------------+--------------------------------------+
-| Severity    | Minor                                |
-+-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
-+-------------+--------------------------------------+
-| Examples    | :ref:`zurmo-security-encodedletters` |
-+-------------+--------------------------------------+
++-------------+-------------------------+
+| Short name  | Security/EncodedLetters |
++-------------+-------------------------+
+| Rulesets    | :ref:`Security`         |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Security/EncodedLetters |
++-------------+-------------------------+
 
 
 
@@ -8927,7 +9114,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | ClearPHP    | `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__ |
 +-------------+-------------------------------------------------------------------------------+
-| Examples    | :ref:`xoops-structures-evalusage`, :ref:`mautic-structures-evalusage`         |
+| Examples    | Structures/EvalUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
 
 
@@ -8983,7 +9170,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Functions/ExceedingTypehint |
 +-------------+-----------------------------+
 
 
@@ -9013,13 +9200,13 @@ When catching exception, the most specialized exceptions must be in the early ca
    
    ?>
 
-+------------+---------------------------------------------+
-| Short name | Exceptions/AlreadyCaught                    |
-+------------+---------------------------------------------+
-| Rulesets   | :ref:`Dead code <dead-code>`                |
-+------------+---------------------------------------------+
-| Examples   | :ref:`woocommerce-exceptions-alreadycaught` |
-+------------+---------------------------------------------+
++------------+------------------------------+
+| Short name | Exceptions/AlreadyCaught     |
++------------+------------------------------+
+| Rulesets   | :ref:`Dead code <dead-code>` |
++------------+------------------------------+
+| Examples   | Exceptions/AlreadyCaught     |
++------------+------------------------------+
 
 
 
@@ -9070,7 +9257,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | ClearPHP    | `no-exit <https://github.com/dseguy/clearPHP/tree/master/rules/no-exit.md>`__ |
 +-------------+-------------------------------------------------------------------------------+
-| Examples    | :ref:`traq-structures-exitusage`, :ref:`thinkphp-structures-exitusage`        |
+| Examples    | Structures/ExitUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
 
 
@@ -9106,7 +9293,7 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                |
+| Time To Fix | Php/ExponentUsage                                                               |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -9147,17 +9334,17 @@ Suggestions
 * Fix the length of the string
 * Put the string in a constant, and use strlen() or mb_strlen()
 
-+-------------+------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/FailingSubstrComparison                                                                   |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                         |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                     |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-structures-failingsubstrcomparison`, :ref:`mediawiki-structures-failingsubstrcomparison` |
-+-------------+------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Structures/FailingSubstrComparison |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`       |
++-------------+------------------------------------+
+| Severity    | Major                              |
++-------------+------------------------------------+
+| Time To Fix | Instant (5 mins)                   |
++-------------+------------------------------------+
+| Examples    | Structures/FailingSubstrComparison |
++-------------+------------------------------------+
 
 
 
@@ -9191,6 +9378,13 @@ When reading results with ext/Sqlite3, it is recommended to explicitly request S
 
 This is a micro-optimisation. The difference may be visible with 200k rows fetches, and measurable with 10k.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Specify the result format when reading rows from a Sqlite3 database
+
 +-------------+--------------------------------+
 | Short name  | Performances/FetchOneRowFormat |
 +-------------+--------------------------------+
@@ -9198,7 +9392,7 @@ This is a micro-optimisation. The difference may be visible with 200k rows fetch
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Instant (5 mins)               |
+| Time To Fix | Performances/FetchOneRowFormat |
 +-------------+--------------------------------+
 
 
@@ -9243,7 +9437,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/FilterToAddSlashes    |
 +-------------+---------------------------+
 
 
@@ -9282,11 +9476,11 @@ final may be applied to classes and methods.
 
 See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
 
-+------------+--------------------------------------------+
-| Short name | Classes/Finalclass                         |
-+------------+--------------------------------------------+
-| Rulesets   | :ref:`ClassReview`, :ref:`LintButWontExec` |
-+------------+--------------------------------------------+
++------------+--------------------+
+| Short name | Classes/Finalclass |
++------------+--------------------+
+| Rulesets   | Classes/Finalclass |
++------------+--------------------+
 
 
 
@@ -9324,11 +9518,11 @@ final may be applied to classes and methods.
 
 See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
 
-+------------+--------------------------------------------+
-| Short name | Classes/Finalmethod                        |
-+------------+--------------------------------------------+
-| Rulesets   | :ref:`LintButWontExec`, :ref:`ClassReview` |
-+------------+--------------------------------------------+
++------------+---------------------+
+| Short name | Classes/Finalmethod |
++------------+---------------------+
+| Rulesets   | Classes/Finalmethod |
++------------+---------------------+
 
 
 
@@ -9380,7 +9574,7 @@ See also `Heredoc <http://php.net/manual/en/language.types.string.php#language.t
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                                                                                                    |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                                                                                                            |
+| Time To Fix | Php/FlexibleHeredoc                                                                                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -9432,7 +9626,7 @@ Suggestions
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
+| Time To Fix | Functions/FnArgumentVariableConfusion |
 +-------------+---------------------------------------+
 
 
@@ -9476,17 +9670,17 @@ It is recommended to avoid functioncall in the `for() <http://www.php.net/manual
 
 This is true with any kind of functioncall that returns the same value throughout the loop.
 
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/ForWithFunctioncall                                                                                |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`, :ref:`Top10`                                                                             |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                 |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-functioncall-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-functioncall-in-loop.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------------------------+
++-------------+-----------------------------------+
+| Short name  | Structures/ForWithFunctioncall    |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Performances`, :ref:`Top10` |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Slow (1 hour)                     |
++-------------+-----------------------------------+
+| ClearPHP    | Structures/ForWithFunctioncall    |
++-------------+-----------------------------------+
 
 
 
@@ -9527,7 +9721,7 @@ See also `foreach no longer changes the internal array pointer <http://php.net/m
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
+| Time To Fix | Php/ForeachDontChangePointer |
 +-------------+------------------------------+
 
 
@@ -9565,7 +9759,7 @@ Foreach on an object member is a legit PHP syntax, though it is very rare : blin
 +-------------+-------------------+
 | Severity    | Major             |
 +-------------+-------------------+
-| Time To Fix | Instant (5 mins)  |
+| Time To Fix | Php/ForeachObject |
 +-------------+-------------------+
 
 
@@ -9607,17 +9801,17 @@ Suggestions
 * Remove the reference from the foreach
 * Actually modify the content of the reference
 
-+-------------+-------------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/ForeachReferenceIsNotModified                                                                          |
-+-------------+-------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                    |
-+-------------+-------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                             |
-+-------------+-------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                   |
-+-------------+-------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-foreachreferenceisnotmodified`, :ref:`vanilla-structures-foreachreferenceisnotmodified` |
-+-------------+-------------------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------------+
+| Short name  | Structures/ForeachReferenceIsNotModified |
++-------------+------------------------------------------+
+| Rulesets    | :ref:`Analyze`                           |
++-------------+------------------------------------------+
+| Severity    | Minor                                    |
++-------------+------------------------------------------+
+| Time To Fix | Quick (30 mins)                          |
++-------------+------------------------------------------+
+| Examples    | Structures/ForeachReferenceIsNotModified |
++-------------+------------------------------------------+
 
 
 
@@ -9670,7 +9864,7 @@ See also `The list function & practical uses of array destructuring in PHP <http
 +-------------+------------------------------------------------------+
 | Severity    | Minor                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
+| Time To Fix | Structures/ForeachWithList                           |
 +-------------+------------------------------------------------------+
 
 
@@ -9722,7 +9916,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Interfaces/CouldUseInterface |
 +-------------+------------------------------+
 
 
@@ -9763,7 +9957,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Major                      |
 +-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
+| Time To Fix | Exceptions/ForgottenThrown |
 +-------------+----------------------------+
 
 
@@ -9829,7 +10023,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `always-have-visibility <https://github.com/dseguy/clearPHP/tree/master/rules/always-have-visibility.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`fuelcms-classes-nonppp`, :ref:`livezilla-classes-nonppp`                                              |
+| Examples    | Classes/NonPpp                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -9872,7 +10066,7 @@ Suggestions
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Instant (5 mins)               |
+| Time To Fix | Structures/ForgottenWhiteSpace |
 +-------------+--------------------------------+
 
 
@@ -9909,11 +10103,11 @@ This analysis counts the number of times a method is overwriten, and report any 
    
    ?>
 
-+------------------------+---------+---------+---------------------------------------------------------------------------------+
-| Name                   | Default | Type    | Description                                                                     |
-+------------------------+---------+---------+---------------------------------------------------------------------------------+
-| fossilizationThreshold | 6       | integer | Minimal number of overwriting methods to consider a method difficult to update. |
-+------------------------+---------+---------+---------------------------------------------------------------------------------+
++------------------------+---------+---------+-------------+
+| Name                   | Default | Type    | Description |
++------------------------+---------+---------+-------------+
+| fossilizationThreshold | 6       | integer | Description |
++------------------------+---------+---------+-------------+
 
 
 
@@ -9924,7 +10118,7 @@ This analysis counts the number of times a method is overwriten, and report any 
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
+| Time To Fix | Classes/FossilizedMethod              |
 +-------------+---------------------------------------+
 
 
@@ -9964,7 +10158,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Severity    | Minor                             |
 +-------------+-----------------------------------+
-| Time To Fix | Slow (1 hour)                     |
+| Time To Fix | Namespaces/ConstantFullyQualified |
 +-------------+-----------------------------------+
 
 
@@ -10013,7 +10207,7 @@ Storing the result in a variable is still useful if the result is actually used 
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Instant (5 mins)                |
+| Time To Fix | Structures/FunctionSubscripting |
 +-------------+---------------------------------+
 
 
@@ -10054,19 +10248,19 @@ Suggestions
 
 * Skip the local variable and directly use the return value from the function
 
-+-------------+----------------------------------------------------+
-| Short name  | Structures/FunctionPreSubscripting                 |
-+-------------+----------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                 |
-+-------------+----------------------------------------------------+
-| Php Version | With PHP 5.4 and more recent                       |
-+-------------+----------------------------------------------------+
-| Severity    | Minor                                              |
-+-------------+----------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                   |
-+-------------+----------------------------------------------------+
-| Examples    | :ref:`openconf-structures-functionpresubscripting` |
-+-------------+----------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Structures/FunctionPreSubscripting |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Suggestions`                 |
++-------------+------------------------------------+
+| Php Version | With PHP 5.4 and more recent       |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Instant (5 mins)                   |
++-------------+------------------------------------+
+| Examples    | Structures/FunctionPreSubscripting |
++-------------+------------------------------------+
 
 
 
@@ -10104,7 +10298,7 @@ See also `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php54RemovedFunctions |
 +-------------+---------------------------+
 
 
@@ -10138,6 +10332,13 @@ Those functions were removed in PHP 5.5.
 
 See also `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Stop using those functions
+
 +-------------+---------------------------+
 | Short name  | Php/Php55RemovedFunctions |
 +-------------+---------------------------+
@@ -10147,7 +10348,7 @@ See also `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php55RemovedFunctions |
 +-------------+---------------------------+
 
 
@@ -10187,7 +10388,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Functions/GeneratorCannotReturn                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -10233,6 +10434,16 @@ array_key_last() was added in PHP 7.3. Before that,
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use PHP native function : array_key_last(), when using PHP 7.4 and later
+* Use PHP native function : array_pop()
+* Organise the code to put the last element in the first position (array_unshift instead of append operator [])
+
 +-------------+---------------------------+
 | Short name  | Arrays/GettingLastElement |
 +-------------+---------------------------+
@@ -10241,6 +10452,8 @@ array_key_last() was added in PHP 7.3. Before that,
 | Severity    | Minor                     |
 +-------------+---------------------------+
 | Time To Fix | Instant (5 mins)          |
++-------------+---------------------------+
+| Examples    | Arrays/GettingLastElement |
 +-------------+---------------------------+
 
 
@@ -10273,7 +10486,7 @@ The global keyword must be out of loops. It is evaluated each loop, slowing the 
 +------------+------------------------------+
 | Short name | Structures/GlobalOutsideLoop |
 +------------+------------------------------+
-| Rulesets   | :ref:`Performances`          |
+| Rulesets   | Structures/GlobalOutsideLoop |
 +------------+------------------------------+
 
 
@@ -10304,17 +10517,17 @@ It is recommended to avoid using global variables, at it makes it very difficult
 
 See also `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_.
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/GlobalUsage                                                            |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                    |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                     |
-+-------------+-----------------------------------------------------------------------------------+
-| ClearPHP    | `no-global <https://github.com/dseguy/clearPHP/tree/master/rules/no-global.md>`__ |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+------------------------+
+| Short name  | Structures/GlobalUsage |
++-------------+------------------------+
+| Rulesets    | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Slow (1 hour)          |
++-------------+------------------------+
+| ClearPHP    | Structures/GlobalUsage |
++-------------+------------------------+
 
 
 
@@ -10361,7 +10574,7 @@ See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarat
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                           |
+| Time To Fix | Php/GroupUseDeclaration                                                                                    |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -10403,7 +10616,7 @@ See also `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-t
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                                                                                 |
+| Time To Fix | Php/GroupUseTrailingComma                                                                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -10439,17 +10652,17 @@ Suggestions
 
 * Remove all passwords from the code. Also, check for history if you are using a VCS.
 
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Short name  | Functions/HardcodedPasswords                                                                                  |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                                               |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                 |
-+-------------+---------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Functions/HardcodedPasswords    |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security` |
++-------------+---------------------------------+
+| Severity    | Major                           |
++-------------+---------------------------------+
+| Time To Fix | Slow (1 hour)                   |
++-------------+---------------------------------+
+| ClearPHP    | Functions/HardcodedPasswords    |
++-------------+---------------------------------+
 
 
 
@@ -10491,7 +10704,7 @@ Suggestions
 +-------------+----------------+
 | Severity    | Major          |
 +-------------+----------------+
-| Time To Fix | Slow (1 hour)  |
+| Time To Fix | Php/HashAlgos  |
 +-------------+----------------+
 
 
@@ -10526,7 +10739,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                                                                               |
+| Time To Fix | Php/HashAlgos53                                                                                                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -10563,7 +10776,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                                                    |
+| Time To Fix | Php/HashAlgos54                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -10602,7 +10815,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                         |
+| Time To Fix | Php/HashAlgos71                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -10641,7 +10854,7 @@ See also `hash_algos <http://php.net/hash_algos>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/HashAlgos74           |
 +-------------+---------------------------+
 
 
@@ -10684,7 +10897,7 @@ See also `Move ext/hash from resources to objects <http://php.net/manual/en/migr
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/HashUsesObjects       |
 +-------------+---------------------------+
 
 
@@ -10755,11 +10968,11 @@ Generally, one or two delimiters are used, with generic value. It is recommended
    
    ?>
 
-+------------+------------------------------------------------+
-| Short name | Structures/HeredocDelimiterFavorite            |
-+------------+------------------------------------------------+
-| Rulesets   | :ref:`Coding Conventions <coding-conventions>` |
-+------------+------------------------------------------------+
++------------+-------------------------------------+
+| Short name | Structures/HeredocDelimiterFavorite |
++------------+-------------------------------------+
+| Rulesets   | Structures/HeredocDelimiterFavorite |
++------------+-------------------------------------+
 
 
 
@@ -10800,7 +11013,7 @@ PHP 7.1 and later, emits a 'A non-numeric value encountered' warning, and conver
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
+| Time To Fix | Type/HexadecimalString                               |
 +-------------+------------------------------------------------------+
 
 
@@ -10853,7 +11066,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/HiddenNullable             |
 +-------------+------------------------------------+
 
 
@@ -10899,17 +11112,17 @@ Suggestions
 
 * Group all uses together, at the beginning of the namespace or class
 
-+-------------+---------------------------------------------------------------------------+
-| Short name  | Namespaces/HiddenUse                                                      |
-+-------------+---------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                            |
-+-------------+---------------------------------------------------------------------------+
-| Severity    | Minor                                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                          |
-+-------------+---------------------------------------------------------------------------+
-| Examples    | :ref:`tikiwiki-namespaces-hiddenuse`, :ref:`openemr-namespaces-hiddenuse` |
-+-------------+---------------------------------------------------------------------------+
++-------------+----------------------+
+| Short name  | Namespaces/HiddenUse |
++-------------+----------------------+
+| Rulesets    | :ref:`Analyze`       |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Instant (5 mins)     |
++-------------+----------------------+
+| Examples    | Namespaces/HiddenUse |
++-------------+----------------------+
 
 
 
@@ -10956,7 +11169,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Major                       |
 +-------------+-----------------------------+
-| Time To Fix | Instant (5 mins)            |
+| Time To Fix | Structures/Htmlentitiescall |
 +-------------+-----------------------------+
 
 
@@ -10994,17 +11207,17 @@ Suggestions
 * Add extra expressions between the two structures
 * Nest the structures, to show that different attempts are made
 
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/IdenticalConditions                                                                                                                |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                                                |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                                                                                      |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                               |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-structures-identicalconditions`, :ref:`dolibarr-structures-identicalconditions`, :ref:`mautic-structures-identicalconditions` |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Structures/IdenticalConditions |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Severity    | Critical                       |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
+| Examples    | Structures/IdenticalConditions |
++-------------+--------------------------------+
 
 
 
@@ -11044,7 +11257,7 @@ They may be a copy/paste with unmodified content. When the content has to be dup
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Instant (5 mins)                |
+| Time To Fix | Structures/IdenticalConsecutive |
 +-------------+---------------------------------+
 
 
@@ -11095,17 +11308,17 @@ Suggestions
 * Remove one of the alternative, and remove the logical link
 * Modify one of the alternative, and make it different from the other
 
-+-------------+----------------------------------------------------------------------------------------------------+
-| Short name  | Structures/IdenticalOnBothSides                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                     |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                              |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpmyadmin-structures-identicalonbothsides`, :ref:`humo-gen-structures-identicalonbothsides` |
-+-------------+----------------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/IdenticalOnBothSides |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Major                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Structures/IdenticalOnBothSides |
++-------------+---------------------------------+
 
 
 
@@ -11166,17 +11379,17 @@ Suggestions
 * Change one of the condition, so they are different
 * Make it obvious that the first condition is a try, preparing the normal conditions.
 
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/IfWithSameConditions                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                          |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                   |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpmyadmin-structures-ifwithsameconditions`, :ref:`phpdocumentor-structures-ifwithsameconditions` |
-+-------------+---------------------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/IfWithSameConditions |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Major                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Structures/IfWithSameConditions |
++-------------+---------------------------------+
 
 
 
@@ -11214,7 +11427,7 @@ They may also be typos, such as if ($x = 3) { `... <http://www.php.net/manual/en
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
+| Time To Fix | Structures/Iffectation |
 +-------------+------------------------+
 
 
@@ -11254,17 +11467,17 @@ Suggestions
 * Avoid method names starting with a double underscore : ``__``
 * Use method visibilities to ensure that methods are only available to the current class or its children
 
-+-------------+-----------------------------------------------------------------------+
-| Short name  | Classes/WrongName                                                     |
-+-------------+-----------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                        |
-+-------------+-----------------------------------------------------------------------+
-| Severity    | Major                                                                 |
-+-------------+-----------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                         |
-+-------------+-----------------------------------------------------------------------+
-| Examples    | :ref:`prestashop-classes-wrongname`, :ref:`magento-classes-wrongname` |
-+-------------+-----------------------------------------------------------------------+
++-------------+-------------------+
+| Short name  | Classes/WrongName |
++-------------+-------------------+
+| Rulesets    | :ref:`Analyze`    |
++-------------+-------------------+
+| Severity    | Major             |
++-------------+-------------------+
+| Time To Fix | Slow (1 hour)     |
++-------------+-------------------+
+| Examples    | Classes/WrongName |
++-------------+-------------------+
 
 
 
@@ -11312,7 +11525,7 @@ Suggestions
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Classes/ImplementIsForInterface |
 +-------------+---------------------------------+
 
 
@@ -11362,7 +11575,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Severity    | Major                               |
 +-------------+-------------------------------------+
-| Time To Fix | Instant (5 mins)                    |
+| Time To Fix | Classes/ImplementedMethodsArePublic |
 +-------------+-------------------------------------+
 
 
@@ -11400,17 +11613,17 @@ However, such structures are confusing. It is easy to misread them as conditions
 
 It is recommended to use a real 'if then' structures, to make the condition readable.
 
-+-------------+-------------------------------------------------------------------------------------------+
-| Short name  | Structures/ImpliedIf                                                                      |
-+-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                            |
-+-------------+-------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                     |
-+-------------+-------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                          |
-+-------------+-------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------+
++-------------+----------------------+
+| Short name  | Structures/ImpliedIf |
++-------------+----------------------+
+| Rulesets    | :ref:`Analyze`       |
++-------------+----------------------+
+| Severity    | Major                |
++-------------+----------------------+
+| Time To Fix | Instant (5 mins)     |
++-------------+----------------------+
+| ClearPHP    | Structures/ImpliedIf |
++-------------+----------------------+
 
 
 
@@ -11455,7 +11668,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
+| Time To Fix | Php/ImplodeOneArg                         |
 +-------------+-------------------------------------------+
 
 
@@ -11503,7 +11716,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Structures/ImplodeArgsOrder |
 +-------------+-----------------------------+
 
 
@@ -11549,7 +11762,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
+| Time To Fix | Files/InclusionWrongCase |
 +-------------+--------------------------+
 
 
@@ -11595,19 +11808,19 @@ Suggestions
 
 * Make signatures compatible again
 
-+-------------+-----------------------------------------------+
-| Short name  | Classes/IncompatibleSignature                 |
-+-------------+-----------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`        |
-+-------------+-----------------------------------------------+
-| Php Version | 7.4-                                          |
-+-------------+-----------------------------------------------+
-| Severity    | Critical                                      |
-+-------------+-----------------------------------------------+
-| Time To Fix | Quick (30 mins)                               |
-+-------------+-----------------------------------------------+
-| Examples    | :ref:`suitecrm-classes-incompatiblesignature` |
-+-------------+-----------------------------------------------+
++-------------+----------------------------------------+
+| Short name  | Classes/IncompatibleSignature          |
++-------------+----------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Php Version | 7.4-                                   |
++-------------+----------------------------------------+
+| Severity    | Critical                               |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
+| Examples    | Classes/IncompatibleSignature          |
++-------------+----------------------------------------+
 
 
 
@@ -11655,19 +11868,19 @@ Suggestions
 
 * Make signatures compatible again
 
-+-------------+-------------------------------------------------+
-| Short name  | Classes/IncompatibleSignature74                 |
-+-------------+-------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                  |
-+-------------+-------------------------------------------------+
-| Php Version | 7.4+                                            |
-+-------------+-------------------------------------------------+
-| Severity    | Critical                                        |
-+-------------+-------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                 |
-+-------------+-------------------------------------------------+
-| Examples    | :ref:`suitecrm-classes-incompatiblesignature74` |
-+-------------+-------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Classes/IncompatibleSignature74 |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Php Version | 7.4+                            |
++-------------+---------------------------------+
+| Severity    | Critical                        |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Classes/IncompatibleSignature74 |
++-------------+---------------------------------+
 
 
 
@@ -11714,7 +11927,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-incompilable <https://github.com/dseguy/clearPHP/tree/master/rules/no-incompilable.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`xataface-php-incompilable`                                                              |
+| Examples    | Php/Incompilable                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -11771,7 +11984,7 @@ This analysis reports chains of elseif that don't share a common variable (or ar
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
-| Time To Fix | Slow (1 hour)                 |
+| Time To Fix | Structures/InconsistentElseif |
 +-------------+-------------------------------+
 
 
@@ -11869,17 +12082,17 @@ Suggestions
 * Do not use any type but string or integer
 * Force typecast the keys when building an array
 
-+-------------+-------------------------------------------------------------------------------------------------+
-| Short name  | Structures/IndicesAreIntOrString                                                                |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                  |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                           |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                 |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zencart-structures-indicesareintorstring`, :ref:`mautic-structures-indicesareintorstring` |
-+-------------+-------------------------------------------------------------------------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/IndicesAreIntOrString |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`                   |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/IndicesAreIntOrString |
++-------------+----------------------------------+
 
 
 
@@ -11921,7 +12134,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Critical                   |
 +-------------+----------------------------+
-| Time To Fix | Slow (1 hour)              |
+| Time To Fix | Security/IndirectInjection |
 +-------------+----------------------------+
 
 
@@ -11972,7 +12185,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/InfiniteRecursion |
 +-------------+------------------------------+
 
 
@@ -12018,7 +12231,7 @@ See also `Class Abstraction <http://php.net/abstract>`_.
 +-------------+------------------------------------+
 | Severity    | Major                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/InstantiatingAbstractClass |
 +-------------+------------------------------------+
 
 
@@ -12088,7 +12301,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
+| Time To Fix | Classes/InsufficientPropertyTypehint |
 +-------------+--------------------------------------+
 
 
@@ -12141,7 +12354,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Severity    | Major                             |
 +-------------+-----------------------------------+
-| Time To Fix | Quick (30 mins)                   |
+| Time To Fix | Functions/InsufficientTypehint    |
 +-------------+-----------------------------------+
 
 
@@ -12184,7 +12397,7 @@ See also `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                                                    |
+| Time To Fix | Classes/IntegerAsProperty                                                                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -12243,7 +12456,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Major                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Security/IntegerConversion |
 +-------------+----------------------------+
 
 
@@ -12274,7 +12487,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Interfaces/IsNotImplemented        |
 +-------------+------------------------------------+
 
 
@@ -12318,7 +12531,7 @@ See also `Double quoted <http://php.net/manual/en/language.types.string.php#lang
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
+| Time To Fix | Type/StringInterpolation                       |
 +-------------+------------------------------------------------+
 
 
@@ -12356,17 +12569,17 @@ Suggestions
 
 * Change constant name
 
-+-------------+--------------------------------------+
-| Short name  | Constants/InvalidName                |
-+-------------+--------------------------------------+
-| Rulesets    | :ref:`Analyze`                       |
-+-------------+--------------------------------------+
-| Severity    | Major                                |
-+-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
-+-------------+--------------------------------------+
-| Examples    | :ref:`openemr-constants-invalidname` |
-+-------------+--------------------------------------+
++-------------+-----------------------+
+| Short name  | Constants/InvalidName |
++-------------+-----------------------+
+| Rulesets    | :ref:`Analyze`        |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Examples    | Constants/InvalidName |
++-------------+-----------------------+
 
 
 
@@ -12376,24 +12589,35 @@ Invalid Octal In String
 #######################
 
 
-Any octal sequence inside a string can't be beyond 7. Those will be a fatal error at parsing time. 
+Any octal sequence inside a string can't be go 7. Those will be a fatal error at parsing time. 
 
-This is true, starting with PHP 7.1. In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
+The check is applied to the string, starting with PHP 7.1. In PHP 7.0 and older, those sequences were silently adapted (modulo/% 0).
 
 .. code-block:: php
 
    <?php
    
-   // Emit no error in PHP 7.1
+   // A valid octal in a PHP string
    echo 0; // @
    
-   // Emit an error in PHP 7.1
+   // Emit a warning in PHP 7.1
+   //Octal escape sequence overflow 0 is greater than 7
    echo 0; // @
+   
+   // Silent conversion
+   echo 8; // 8
    
    ?>
 
 
 See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a double slash to avoid the sequence to be an octal sequence
+* Use a function call, such as decoct() to convert larger number to octal notation
 
 +-------------+---------------------------+
 | Short name  | Type/OctalInString        |
@@ -12404,7 +12628,7 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Type/OctalInString        |
 +-------------+---------------------------+
 
 
@@ -12450,7 +12674,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/InvalidPackFormat |
 +-------------+------------------------------+
 
 
@@ -12489,17 +12713,17 @@ Suggestions
 
 * Fix the regex before running it
 
-+-------------+-----------------------------------------+
-| Short name  | Structures/InvalidRegex                 |
-+-------------+-----------------------------------------+
-| Rulesets    | :ref:`Analyze`                          |
-+-------------+-----------------------------------------+
-| Severity    | Major                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
-+-------------+-----------------------------------------+
-| Examples    | :ref:`sugarcrm-structures-invalidregex` |
-+-------------+-----------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/InvalidRegex |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Structures/InvalidRegex |
++-------------+-------------------------+
 
 
 
@@ -12541,17 +12765,17 @@ Suggestions
 * Fix one of the variable : this expression needs another variable here
 * When adding differences, calculate the difference in a temporary variable first.
 
-+-------------+----------------------------------------------------------------------+
-| Short name  | Structures/IsZero                                                    |
-+-------------+----------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                       |
-+-------------+----------------------------------------------------------------------+
-| Severity    | Minor                                                                |
-+-------------+----------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                     |
-+-------------+----------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-iszero`, :ref:`suitecrm-structures-iszero` |
-+-------------+----------------------------------------------------------------------+
++-------------+-------------------+
+| Short name  | Structures/IsZero |
++-------------+-------------------+
+| Rulesets    | :ref:`Analyze`    |
++-------------+-------------------+
+| Severity    | Minor             |
++-------------+-------------------+
+| Time To Fix | Instant (5 mins)  |
++-------------+-------------------+
+| Examples    | Structures/IsZero |
++-------------+-------------------+
 
 
 
@@ -12591,7 +12815,7 @@ Suggestions
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Php/IsAWithString             |
 +-------------+-------------------------------+
 
 
@@ -12629,17 +12853,17 @@ Suggestions
 
 * Merge all isset() calls into one
 
-+-------------+-------------------------------------------------------------------------------+
-| Short name  | Php/IssetMultipleArgs                                                         |
-+-------------+-------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable`                                     |
-+-------------+-------------------------------------------------------------------------------+
-| Severity    | Minor                                                                         |
-+-------------+-------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                              |
-+-------------+-------------------------------------------------------------------------------+
-| Examples    | :ref:`thinkphp-php-issetmultipleargs`, :ref:`livezilla-php-issetmultipleargs` |
-+-------------+-------------------------------------------------------------------------------+
++-------------+-------------------------------------------+
+| Short name  | Php/IssetMultipleArgs                     |
++-------------+-------------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`php-cs-fixable` |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Instant (5 mins)                          |
++-------------+-------------------------------------------+
+| Examples    | Php/IssetMultipleArgs                     |
++-------------+-------------------------------------------+
 
 
 
@@ -12681,17 +12905,17 @@ Suggestions
 
 * Remove all unnecessary calls to isset()
 
-+-------------+--------------------------------------------------------------------------------------------------+
-| Short name  | Performances/IssetWholeArray                                                                     |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`Performances`                                                          |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                            |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                 |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tine20-performances-issetwholearray`, :ref:`expressionengine-performances-issetwholearray` |
-+-------------+--------------------------------------------------------------------------------------------------+
++-------------+-----------------------------------------+
+| Short name  | Performances/IssetWholeArray            |
++-------------+-----------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`Performances` |
++-------------+-----------------------------------------+
+| Severity    | Minor                                   |
++-------------+-----------------------------------------+
+| Time To Fix | Instant (5 mins)                        |
++-------------+-----------------------------------------+
+| Examples    | Performances/IssetWholeArray            |
++-------------+-----------------------------------------+
 
 
 
@@ -12740,17 +12964,72 @@ Suggestions
 * Use readfile() to echo the content to stdout at once.
 * Use fopen() to read the lines one by one, generator style.
 
-+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Performances/JoinFile                                                                                                                                             |
-+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`                                                                                                                                               |
-+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                                                             |
-+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                   |
-+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-performances-joinfile`, :ref:`spip-performances-joinfile`, :ref:`expressionengine-performances-joinfile`, :ref:`prestashop-performances-joinfile` |
-+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Performances/JoinFile |
++-------------+-----------------------+
+| Rulesets    | :ref:`Performances`   |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Examples    | Performances/JoinFile |
++-------------+-----------------------+
+
+
+
+.. _keep-files-access-restricted:
+
+Keep Files Access Restricted
+############################
+
+
+Avoid using 0777 as file or directory mode. In particular, setting a file or a directory to 0777 (or universal read-write-execute) may lead to security vulnerabilities, as anything on the server may read, write and even execute
+
+File mode may be changed using the `chmod() <https://www.php.net/chmod>`_ function, or at directory creation, with `mkdir() <https://www.php.net/mkdir>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   file_put_contents($file, $content);
+   
+   // this file is accessible to the current user, and to his group, for reading and writing. 
+   chmod($file, 0550); 
+   
+   // this file is accessible to everyone 
+   chmod($file, 0777); 
+   
+   ?>
+
+
+By default, this analysis report universal access (0777). It is possible to make this analysis more restrictive, by providing more forbidden modes in the ``filePrivileges`` parameter. For example : ``511,510,489``. Only use a decimal representation. 
+
+See also :ref:`mkdir-default` and `Least Privilege Violation <https://owasp.org/www-community/vulnerabilities/Least_Privilege_Violation>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Set the file mode to a level of restriction as low as possible.
+
++----------------+---------+--------+-------------+
+| Name           | Default | Type   | Description |
++----------------+---------+--------+-------------+
+| filePrivileges | 0777    | string | Description |
++----------------+---------+--------+-------------+
+
+
+
++-------------+------------------------------+
+| Short name  | Security/KeepFilesRestricted |
++-------------+------------------------------+
+| Rulesets    | :ref:`Security`              |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Security/KeepFilesRestricted |
++-------------+------------------------------+
 
 
 
@@ -12784,7 +13063,7 @@ Usage of short syntax version of `list() <https://www.php.net/list>`_.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                       |
+| Time To Fix | Php/ListShortSyntax                                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -12838,7 +13117,7 @@ In PHP 5.6, results are :::
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/ListWithAppends       |
 +-------------+---------------------------+
 
 
@@ -12869,7 +13148,7 @@ Setting keys when using `list() <https://www.php.net/list>`_ is a PHP 7.1 featur
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                       |
+| Time To Fix | Php/ListWithKeys                                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -12907,7 +13186,7 @@ See also `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_a
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                                                                               |
+| Time To Fix | Php/ListWithReference                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -12949,7 +13228,7 @@ While this is syntactically correct, it is unusual that defined resources are us
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Slow (1 hour)                 |
+| Time To Fix | Classes/LocallyUnusedProperty |
 +-------------+-------------------------------+
 
 
@@ -12992,17 +13271,17 @@ Suggestions
 
 * Change the expressions for them to have a real meaning
 
-+-------------+-------------------------------------------------------------------------------------------+
-| Short name  | Structures/LogicalMistakes                                                                |
-+-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                            |
-+-------------+-------------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                                  |
-+-------------+-------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                           |
-+-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-logicalmistakes`, :ref:`cleverstyle-structures-logicalmistakes` |
-+-------------+-------------------------------------------------------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/LogicalMistakes |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Critical                   |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+| Examples    | Structures/LogicalMistakes |
++-------------+----------------------------+
 
 
 
@@ -13044,7 +13323,7 @@ See also `Logical Operators <http://php.net/manual/en/language.operators.logical
 +------------+--------------------------------+
 | Short name | Php/LetterCharsLogicalFavorite |
 +------------+--------------------------------+
-| Rulesets   | :ref:`Top10`                   |
+| Rulesets   | Php/LetterCharsLogicalFavorite |
 +------------+--------------------------------+
 
 
@@ -13097,7 +13376,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-letter-logical <https://github.com/dseguy/clearPHP/tree/master/rules/no-letter-logical.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`cleverstyle-php-logicalinletters`, :ref:`openconf-php-logicalinletters`                     |
+| Examples    | Php/LogicalInLetters                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -13148,17 +13427,17 @@ Suggestions
 
 * Replace the list of comparisons with a in_array() call
 
-+-------------+----------------------------------------------+
-| Short name  | Performances/LogicalToInArray                |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`Analyze`                               |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`zencart-performances-logicaltoinarray` |
-+-------------+----------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Performances/LogicalToInArray |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+| Examples    | Performances/LogicalToInArray |
++-------------+-------------------------------+
 
 
 
@@ -13193,17 +13472,17 @@ Suggestions
 
 * Remove the useless curly brackets
 
-+-------------+--------------------------------------------------------------------------+
-| Short name  | Structures/LoneBlock                                                     |
-+-------------+--------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                           |
-+-------------+--------------------------------------------------------------------------+
-| Severity    | Minor                                                                    |
-+-------------+--------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                         |
-+-------------+--------------------------------------------------------------------------+
-| Examples    | :ref:`thinkphp-structures-loneblock`, :ref:`tine20-structures-loneblock` |
-+-------------+--------------------------------------------------------------------------+
++-------------+----------------------+
+| Short name  | Structures/LoneBlock |
++-------------+----------------------+
+| Rulesets    | :ref:`Analyze`       |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Instant (5 mins)     |
++-------------+----------------------+
+| Examples    | Structures/LoneBlock |
++-------------+----------------------+
 
 
 
@@ -13248,25 +13527,25 @@ Suggestions
 
 * Put the long arguments in a separate variable, and use the variable in the second expression, reducing its total length
 
-+-------------+---------+---------+---------------------------------------------------------------------------+
-| Name        | Default | Type    | Description                                                               |
-+-------------+---------+---------+---------------------------------------------------------------------------+
-| codeTooLong | 100     | integer | Minimum size of a functioncall or a methodcall to be considered too long. |
-+-------------+---------+---------+---------------------------------------------------------------------------+
++-------------+---------+---------+-------------+
+| Name        | Default | Type    | Description |
++-------------+---------+---------+-------------+
+| codeTooLong | 100     | integer | Description |
++-------------+---------+---------+-------------+
 
 
 
-+-------------+-------------------------------------------------------------------------------------+
-| Short name  | Structures/LongArguments                                                            |
-+-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                      |
-+-------------+-------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                     |
-+-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`cleverstyle-structures-longarguments`, :ref:`contao-structures-longarguments` |
-+-------------+-------------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/LongArguments |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Structures/LongArguments |
++-------------+--------------------------+
 
 
 
@@ -13311,17 +13590,17 @@ Suggestions
 
 * Always assign new value to an referenced argument, and don't reassign a new reference
 
-+-------------+-------------------------------------------+
-| Short name  | Variables/LostReferences                  |
-+-------------+-------------------------------------------+
-| Rulesets    | :ref:`Analyze`                            |
-+-------------+-------------------------------------------+
-| Severity    | Major                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`wordpress-variables-lostreferences` |
-+-------------+-------------------------------------------+
++-------------+--------------------------+
+| Short name  | Variables/LostReferences |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Variables/LostReferences |
++-------------+--------------------------+
 
 
 
@@ -13365,7 +13644,7 @@ See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Classes/toStringPss       |
 +-------------+---------------------------+
 
 
@@ -13427,7 +13706,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Slow (1 hour)               |
+| Time To Fix | Classes/MakeGlobalAProperty |
 +-------------+-----------------------------+
 
 
@@ -13473,11 +13752,11 @@ Suggestions
 
 * Make frequently used properties concrete; keep the highly dynamic as magic
 
-+------------------+---------+---------+---------------------------------------------------------------------------------------+
-| Name             | Default | Type    | Description                                                                           |
-+------------------+---------+---------+---------------------------------------------------------------------------------------+
-| magicMemberUsage | 1       | integer | Minimal number of magic member usage across the code, to trigger a concrete property. |
-+------------------+---------+---------+---------------------------------------------------------------------------------------+
++------------------+---------+---------+-------------+
+| Name             | Default | Type    | Description |
++------------------+---------+---------+-------------+
+| magicMemberUsage | 1       | integer | Description |
++------------------+---------+---------+-------------+
 
 
 
@@ -13488,7 +13767,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Classes/MakeMagicConcrete |
 +-------------+---------------------------+
 
 
@@ -13586,17 +13865,17 @@ Suggestions
 * use preg_replace() with arrays as arguments.
 * use preg_replace_callback() for merging multiple complex calls.
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Performances/MakeOneCall                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`                                                               |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Major                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`humo-gen-performances-makeonecall`, :ref:`edusoho-performances-makeonecall` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Performances/MakeOneCall |
++-------------+--------------------------+
+| Rulesets    | :ref:`Performances`      |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Performances/MakeOneCall |
++-------------+--------------------------+
 
 
 
@@ -13633,7 +13912,7 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                           |
+| Time To Fix | Type/MalformedOctal                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -13720,11 +13999,11 @@ Suggestions
 * Refactor code to avoid nesting
 * Export some nested blocks to an external method or function
 
-+----------+---------+---------+---------------------------------------------------------------------+
-| Name     | Default | Type    | Description                                                         |
-+----------+---------+---------+---------------------------------------------------------------------+
-| maxLevel | 4       | integer | Maximum level of nesting for control flow structures in one scope.  |
-+----------+---------+---------+---------------------------------------------------------------------+
++----------+---------+---------+-------------+
+| Name     | Default | Type    | Description |
++----------+---------+---------+-------------+
+| maxLevel | 4       | integer | Description |
++----------+---------+---------+-------------+
 
 
 
@@ -13735,7 +14014,7 @@ Suggestions
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Structures/MaxLevelOfIdentation |
 +-------------+---------------------------------+
 
 
@@ -13792,7 +14071,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Structures/MbstringThirdArg |
 +-------------+-----------------------------+
 
 
@@ -13837,7 +14116,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Structures/MbstringUnknownEncoding |
 +-------------+------------------------------------+
 
 
@@ -13905,7 +14184,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Performances/MemoizeMagicCall      |
 +-------------+------------------------------------+
 
 
@@ -13952,7 +14231,7 @@ Suggestions
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
+| Time To Fix | Structures/MergeIfThen |
 +-------------+------------------------+
 
 
@@ -14005,7 +14284,7 @@ See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
 +-------------+----------------------------------------+
 | Severity    | Critical                               |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Traits/MethodCollisionTraits           |
 +-------------+----------------------------------------+
 
 
@@ -14057,7 +14336,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Classes/CouldBePrivateMethod |
 +-------------+------------------------------+
 
 
@@ -14107,17 +14386,17 @@ Suggestions
 * Make the method a standalone function
 * Make use of $this in the method : may be it was forgotten.
 
-+-------------+-------------------------------------------------------------------------------------+
-| Short name  | Classes/CouldBeStatic                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | none                                                                                |
-+-------------+-------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                     |
-+-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`fuelcms-classes-couldbestatic`, :ref:`expressionengine-classes-couldbestatic` |
-+-------------+-------------------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Classes/CouldBeStatic |
++-------------+-----------------------+
+| Rulesets    | none                  |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Examples    | Classes/CouldBeStatic |
++-------------+-----------------------+
 
 
 
@@ -14163,7 +14442,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Severity    | Critical                                |
 +-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
+| Time To Fix | Classes/MethodSignatureMustBeCompatible |
 +-------------+-----------------------------------------+
 
 
@@ -14207,7 +14486,7 @@ This syntax is interesting when the object is not reused, and may be discarded
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Php/MethodCallOnNew          |
 +-------------+------------------------------+
 
 
@@ -14260,7 +14539,7 @@ Suggestions
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Functions/WithoutReturn |
 +-------------+-------------------------+
 
 
@@ -14308,7 +14587,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Critical                 |
 +-------------+--------------------------+
-| Time To Fix | Instant (5 mins)         |
+| Time To Fix | Security/MinusOneOnError |
 +-------------+--------------------------+
 
 
@@ -14373,7 +14652,7 @@ Suggestions
 +-------------+-----------------------------------------------------------+
 | Severity    | Critical                                                  |
 +-------------+-----------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                             |
+| Time To Fix | Functions/MismatchTypeAndDefault                          |
 +-------------+-----------------------------------------------------------+
 
 
@@ -14414,17 +14693,17 @@ Suggestions
 * Synchronize default values to avoid surprises
 * Drop some of the default values
 
-+-------------+--------------------------------------------------+
-| Short name  | Functions/MismatchedDefaultArguments             |
-+-------------+--------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Typechecks`                |
-+-------------+--------------------------------------------------+
-| Severity    | Minor                                            |
-+-------------+--------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                  |
-+-------------+--------------------------------------------------+
-| Examples    | :ref:`spip-functions-mismatcheddefaultarguments` |
-+-------------+--------------------------------------------------+
++-------------+--------------------------------------+
+| Short name  | Functions/MismatchedDefaultArguments |
++-------------+--------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks`    |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
+| Examples    | Functions/MismatchedDefaultArguments |
++-------------+--------------------------------------+
 
 
 
@@ -14464,17 +14743,17 @@ Suggestions
 * Use compatible data type in both branch of the alternative
 * Turn the ternary into a if/then, with different processing
 
-+-------------+--------------------------------------------------------------------------------------------+
-| Short name  | Structures/MismatchedTernary                                                               |
-+-------------+--------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                         |
-+-------------+--------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                      |
-+-------------+--------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                            |
-+-------------+--------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpadsnew-structures-mismatchedternary`, :ref:`openemr-structures-mismatchedternary` |
-+-------------+--------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Structures/MismatchedTernary       |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Major                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | Structures/MismatchedTernary       |
++-------------+------------------------------------+
 
 
 
@@ -14515,17 +14794,72 @@ Suggestions
 
 * Ensure that the default value match the expected typehint.
 
-+-------------+-----------------------------------------------+
-| Short name  | Functions/MismatchedTypehint                  |
-+-------------+-----------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Typechecks`             |
-+-------------+-----------------------------------------------+
-| Severity    | Major                                         |
-+-------------+-----------------------------------------------+
-| Time To Fix | Quick (30 mins)                               |
-+-------------+-----------------------------------------------+
-| Examples    | :ref:`wordpress-functions-mismatchedtypehint` |
-+-------------+-----------------------------------------------+
++-------------+-----------------------------------+
+| Short name  | Functions/MismatchedTypehint      |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks` |
++-------------+-----------------------------------+
+| Severity    | Major                             |
++-------------+-----------------------------------+
+| Time To Fix | Quick (30 mins)                   |
++-------------+-----------------------------------+
+| Examples    | Functions/MismatchedTypehint      |
++-------------+-----------------------------------+
+
+
+
+.. _missing-abstract-method:
+
+Missing Abstract Method
+#######################
+
+
+Abstract methods must have a non-abstract version for the class to be complete. A class that is missing one abstract definition cannot be instantiated.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is a valid definition
+   class b extends a {
+       function foo() {}
+       function bar() {}
+   }
+   
+   // This compiles, but will emit a fatal error if instantiated
+   class c extends a {
+       function bar() {}
+   }
+   
+   // This illustration lint but doesn't run.
+   // moving this class at the beginning of the code will make lint fail
+   abstract class a {
+       abstract function foo() ;
+   }
+   
+   ?>
+
+
+See also `Classes Abstraction <https://www.php.net/manual/en/language.oop5.abstract.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Implement the missing methods
+* Remove the partially implemented class
+* Mark the partially implemented class abstract
+
++-------------+------------------------------------+
+| Short name  | Classes/MissingAbstractMethod      |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Classes/MissingAbstractMethod      |
++-------------+------------------------------------+
 
 
 
@@ -14576,17 +14910,17 @@ Suggestions
 * Add the missing cases
 * Add comments to mention that missing cases are processed in the default case
 
-+-------------+-----------------------------------------+
-| Short name  | Structures/MissingCases                 |
-+-------------+-----------------------------------------+
-| Rulesets    | :ref:`Analyze`                          |
-+-------------+-----------------------------------------+
-| Severity    | Minor                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Slow (1 hour)                           |
-+-------------+-----------------------------------------+
-| Examples    | :ref:`tikiwiki-structures-missingcases` |
-+-------------+-----------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/MissingCases |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Slow (1 hour)           |
++-------------+-------------------------+
+| Examples    | Structures/MissingCases |
++-------------+-------------------------+
 
 
 
@@ -14616,11 +14950,11 @@ The analysis doesn't take into account ``include_path``. This may yield false po
 
 Missing included files may lead to a fatal error, a warning or other error later in the execution.
 
-+---------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Name                      | Default | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                    |
-+---------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| constant_or_variable_name | 100     | string | Literal value to be used when including files. For example, by configuring 'Files_MissingInclude["HOME_DIR"] = "/tmp/myDir/";', then 'include HOME_DIR . "my_class.php"; will be actually be used as '/tmp/myDir/my_class.php'. Constants must be configured with their correct case. Variable must be configured with their initial '$'. Configure any number of variable and constant names. |
-+---------------------------+---------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------------+---------+--------+-------------+
+| Name                      | Default | Type   | Description |
++---------------------------+---------+--------+-------------+
+| constant_or_variable_name | 100     | string | Description |
++---------------------------+---------+--------+-------------+
 
 
 
@@ -14631,7 +14965,7 @@ Missing included files may lead to a fatal error, a warning or other error later
 +-------------+----------------------+
 | Severity    | Critical             |
 +-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
+| Time To Fix | Files/MissingInclude |
 +-------------+----------------------+
 
 
@@ -14687,7 +15021,7 @@ Suggestions
 +-------------+-----------------------+
 | Severity    | Critical              |
 +-------------+-----------------------+
-| Time To Fix | Instant (5 mins)      |
+| Time To Fix | Structures/MissingNew |
 +-------------+-----------------------+
 
 
@@ -14729,7 +15063,7 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
-| Time To Fix | Instant (5 mins)              |
+| Time To Fix | Structures/MissingParenthesis |
 +-------------+-------------------------------+
 
 
@@ -14770,7 +15104,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Functions/MissingTypehint |
 +-------------+---------------------------+
 
 
@@ -14804,7 +15138,7 @@ A unexpected structure is built for initialization. It may be a typo that create
 +-------------+------------------------------------------------+
 | Severity    | Major                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
+| Time To Fix | Arrays/MistakenConcatenation                   |
 +-------------+------------------------------------------------+
 
 
@@ -14850,17 +15184,17 @@ Suggestions
 
 * Only use one type of variable usage : either interpolation, or concatenation
 
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/MixedConcatInterpolation                                                                     |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze`                                          |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                   |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`suitecrm-structures-mixedconcatinterpolation`, :ref:`edusoho-structures-mixedconcatinterpolation` |
-+-------------+---------------------------------------------------------------------------------------------------------+
++-------------+----------------------------------------------------------------+
+| Short name  | Structures/MixedConcatInterpolation                            |
++-------------+----------------------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
++-------------+----------------------------------------------------------------+
+| Severity    | Minor                                                          |
++-------------+----------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                |
++-------------+----------------------------------------------------------------+
+| Examples    | Structures/MixedConcatInterpolation                            |
++-------------+----------------------------------------------------------------+
 
 
 
@@ -14903,7 +15237,7 @@ Suggestions
 +-------------+------------------------------------------------------+
 | Severity    | Minor                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
+| Time To Fix | Arrays/MixedKeys                                     |
 +-------------+------------------------------------------------------+
 
 
@@ -14941,17 +15275,17 @@ Suggestions
 * Always use the lowest possible privileges on folders
 * Don't use the PHP default : at least, make it explicit that the 'universal' rights are voluntary
 
-+-------------+---------------------------------------------------------------------------+
-| Short name  | Security/MkdirDefault                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Rulesets    | :ref:`Security`                                                           |
-+-------------+---------------------------------------------------------------------------+
-| Severity    | Major                                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                           |
-+-------------+---------------------------------------------------------------------------+
-| Examples    | :ref:`mautic-security-mkdirdefault`, :ref:`openemr-security-mkdirdefault` |
-+-------------+---------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Security/MkdirDefault |
++-------------+-----------------------+
+| Rulesets    | :ref:`Security`       |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Examples    | Security/MkdirDefault |
++-------------+-----------------------+
 
 
 
@@ -15008,7 +15342,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/ModernEmpty       |
 +-------------+------------------------------+
 
 
@@ -15047,17 +15381,17 @@ Suggestions
 * Give more specific names to classes
 * Use an alias 'use A\B ac BC' to give locally another name
 
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Short name  | Namespaces/MultipleAliasDefinitions                                                                    |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                         |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                  |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                       |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-namespaces-multiplealiasdefinitions`, :ref:`phinx-namespaces-multiplealiasdefinitions` |
-+-------------+--------------------------------------------------------------------------------------------------------+
++-------------+-------------------------------------+
+| Short name  | Namespaces/MultipleAliasDefinitions |
++-------------+-------------------------------------+
+| Rulesets    | :ref:`Analyze`                      |
++-------------+-------------------------------------+
+| Severity    | Minor                               |
++-------------+-------------------------------------+
+| Time To Fix | Instant (5 mins)                    |
++-------------+-------------------------------------+
+| Examples    | Namespaces/MultipleAliasDefinitions |
++-------------+-------------------------------------+
 
 
 
@@ -15093,7 +15427,7 @@ See also Namespaces/MultipleAliasDefinition.
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Slow (1 hour)                             |
+| Time To Fix | Namespaces/MultipleAliasDefinitionPerFile |
 +-------------+-------------------------------------------+
 
 
@@ -15136,7 +15470,7 @@ It is recommended to avoid declaring several times the same class in the code. T
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Classes/MultipleDeclarations |
 +-------------+------------------------------+
 
 
@@ -15174,7 +15508,7 @@ See also `Is it a bad practice to have multiple classes in the same file? <https
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
+| Time To Fix | Classes/MultipleClassesInFile                  |
 +-------------+------------------------------------------------+
 
 
@@ -15212,17 +15546,17 @@ Suggestions
 * Give different names to the constants, and keep the condition close to utilisation.
 * Move the constants to an external configuration file : it will be easier to identify that those constants may change.
 
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Short name  | Constants/MultipleConstantDefinition                                                                       |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                             |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
-+-------------+------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-constants-multipleconstantdefinition`, :ref:`openconf-constants-multipleconstantdefinition` |
-+-------------+------------------------------------------------------------------------------------------------------------+
++-------------+--------------------------------------+
+| Short name  | Constants/MultipleConstantDefinition |
++-------------+--------------------------------------+
+| Rulesets    | :ref:`Analyze`                       |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
+| Examples    | Constants/MultipleConstantDefinition |
++-------------+--------------------------------------+
 
 
 
@@ -15270,7 +15604,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `all-unique-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/all-unique-arguments.md>`__    |
+| ClearPHP    | Functions/MultipleSameArguments                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -15325,7 +15659,7 @@ This is a backward incompatible feature of PHP 7.1.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                       |
+| Time To Fix | Exceptions/MultipleCatch                                                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -15361,7 +15695,7 @@ Up to PHP 7.1 (at least), this doesn't raise any warning. Traits are only import
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
-| Time To Fix | Instant (5 mins)                 |
+| Time To Fix | Classes/MultipleTraitOrInterface |
 +-------------+----------------------------------+
 
 
@@ -15403,17 +15737,17 @@ Suggestions
 * Review your code and check that arrays only have keys defined once.
 * Review carefully your code and check indirect values, like constants, static constants.
 
-+-------------+--------------------------------------------------------------------------------------------+
-| Short name  | Arrays/MultipleIdenticalKeys                                                               |
-+-------------+--------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                             |
-+-------------+--------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                      |
-+-------------+--------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                           |
-+-------------+--------------------------------------------------------------------------------------------+
-| Examples    | :ref:`magento-arrays-multipleidenticalkeys`, :ref:`mediawiki-arrays-multipleidenticalkeys` |
-+-------------+--------------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Arrays/MultipleIdenticalKeys |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Arrays/MultipleIdenticalKeys |
++-------------+------------------------------+
 
 
 
@@ -15462,17 +15796,17 @@ Suggestions
 * Use different variable for each type of data format : $rows (for array), $list (for implode('', $rows))
 * Pass the final result as argument to another method, avoiding the temporary variable
 
-+-------------+----------------------------------------------------------------------------------------------+
-| Short name  | Structures/MultipleTypeVariable                                                              |
-+-------------+----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                               |
-+-------------+----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                        |
-+-------------+----------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                              |
-+-------------+----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`typo3-structures-multipletypevariable`, :ref:`vanilla-structures-multipletypevariable` |
-+-------------+----------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/MultipleTypeVariable |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Structures/MultipleTypeVariable |
++-------------+---------------------------------+
 
 
 
@@ -15515,7 +15849,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
+| Time To Fix | Structures/MultipleUnset                  |
 +-------------+-------------------------------------------+
 
 
@@ -15550,17 +15884,17 @@ Suggestions
 * Remove any multiple traits from use expressions
 * Review the class tree, and remove any trait mentioned multiple times
 
-+-------------+---------------------------------------+
-| Short name  | Traits/MultipleUsage                  |
-+-------------+---------------------------------------+
-| Rulesets    | :ref:`Suggestions`                    |
-+-------------+---------------------------------------+
-| Severity    | Minor                                 |
-+-------------+---------------------------------------+
-| Time To Fix | Instant (5 mins)                      |
-+-------------+---------------------------------------+
-| Examples    | :ref:`nextcloud-traits-multipleusage` |
-+-------------+---------------------------------------+
++-------------+----------------------+
+| Short name  | Traits/MultipleUsage |
++-------------+----------------------+
+| Rulesets    | :ref:`Suggestions`   |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Instant (5 mins)     |
++-------------+----------------------+
+| Examples    | Traits/MultipleUsage |
++-------------+----------------------+
 
 
 
@@ -15606,19 +15940,19 @@ Suggestions
 * Remove the double case
 * Change the case to another and rightful value
 
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/MultipleDefinedCase                                                                         |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                         |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                  |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                        |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__      |
-+-------------+--------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`sugarcrm-structures-multipledefinedcase`, :ref:`expressionengine-structures-multipledefinedcase` |
-+-------------+--------------------------------------------------------------------------------------------------------+
++-------------+---------------------------------------------------------------------------------------------------+
+| Short name  | Structures/MultipleDefinedCase                                                                    |
++-------------+---------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                                    |
++-------------+---------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                             |
++-------------+---------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                   |
++-------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP    | `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__ |
++-------------+---------------------------------------------------------------------------------------------------+
+| Examples    | Structures/MultipleDefinedCase                                                                    |
++-------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -15669,7 +16003,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`sugarcrm-structures-multiplybyone`, :ref:`edusoho-structures-multiplybyone`             |
+| Examples    | Structures/MultiplyByOne                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -15717,7 +16051,7 @@ Suggestions
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Php/MustCallParentConstructor |
 +-------------+-------------------------------+
 
 
@@ -15774,7 +16108,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Functions/MustReturn                   |
 +-------------+----------------------------------------+
 
 
@@ -15818,13 +16152,13 @@ Suggestions
 
 * Use named regex, and stop using integer-named subpatterns
 
-+------------+---------------------------------------------------------------------------+
-| Short name | Structures/NamedRegex                                                     |
-+------------+---------------------------------------------------------------------------+
-| Rulesets   | :ref:`Suggestions`                                                        |
-+------------+---------------------------------------------------------------------------+
-| Examples   | :ref:`phinx-structures-namedregex`, :ref:`shopware-structures-namedregex` |
-+------------+---------------------------------------------------------------------------+
++------------+-----------------------+
+| Short name | Structures/NamedRegex |
++------------+-----------------------+
+| Rulesets   | :ref:`Suggestions`    |
++------------+-----------------------+
+| Examples   | Structures/NamedRegex |
++------------+-----------------------+
 
 
 
@@ -15866,7 +16200,7 @@ Suggestions
 +-------------+------------------------+
 | Severity    | Major                  |
 +-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
+| Time To Fix | Structures/NegativePow |
 +-------------+------------------------+
 
 
@@ -15906,25 +16240,25 @@ Three levels of ifthen is too much. The method should be split into smaller func
    
    ?>
 
-+--------------+---------+---------+------------------------------------------------------------+
-| Name         | Default | Type    | Description                                                |
-+--------------+---------+---------+------------------------------------------------------------+
-| nestedIfthen | 3       | integer | Maximal number of acceptable nesting of if-then structures |
-+--------------+---------+---------+------------------------------------------------------------+
++--------------+---------+---------+-------------+
+| Name         | Default | Type    | Description |
++--------------+---------+---------+-------------+
+| nestedIfthen | 3       | integer | Description |
++--------------+---------+---------+-------------+
 
 
 
-+-------------+------------------------------------------------------------------------------------+
-| Short name  | Structures/NestedIfthen                                                            |
-+-------------+------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                     |
-+-------------+------------------------------------------------------------------------------------+
-| Severity    | Major                                                                              |
-+-------------+------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                    |
-+-------------+------------------------------------------------------------------------------------+
-| Examples    | :ref:`livezilla-structures-nestedifthen`, :ref:`mediawiki-structures-nestedifthen` |
-+-------------+------------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/NestedIfthen |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Structures/NestedIfthen |
++-------------+-------------------------+
 
 
 
@@ -16012,7 +16346,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-nested-ternary <https://github.com/dseguy/clearPHP/tree/master/rules/no-nested-ternary.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`spip-structures-nestedternary`, :ref:`zencart-structures-nestedternary`                     |
+| Examples    | Structures/NestedTernary                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -16061,7 +16395,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Severity    | Minor                               |
 +-------------+-------------------------------------+
-| Time To Fix | Quick (30 mins)                     |
+| Time To Fix | Php/NestedTernaryWithoutParenthesis |
 +-------------+-------------------------------------+
 
 
@@ -16105,17 +16439,17 @@ Suggestions
 * Actually use the argument when calling the method
 * Drop the default value, and check warnings that mention usage of this parameter
 
-+-------------+--------------------------------------------+
-| Short name  | Functions/NeverUsedParameter               |
-+-------------+--------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`         |
-+-------------+--------------------------------------------+
-| Severity    | Minor                                      |
-+-------------+--------------------------------------------+
-| Time To Fix | Slow (1 hour)                              |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`piwigo-functions-neverusedparameter` |
-+-------------+--------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Functions/NeverUsedParameter       |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| Examples    | Functions/NeverUsedParameter       |
++-------------+------------------------------------+
 
 
 
@@ -16170,17 +16504,17 @@ Suggestions
 * Move the properties to children classes
 * Find usage for unused properties
 
-+-------------+--------------------------------------------+
-| Short name  | Classes/PropertyNeverUsed                  |
-+-------------+--------------------------------------------+
-| Rulesets    | :ref:`Analyze`                             |
-+-------------+--------------------------------------------+
-| Severity    | Minor                                      |
-+-------------+--------------------------------------------+
-| Time To Fix | Slow (1 hour)                              |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`wordpress-classes-propertyneverused` |
-+-------------+--------------------------------------------+
++-------------+---------------------------+
+| Short name  | Classes/PropertyNeverUsed |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+| Examples    | Classes/PropertyNeverUsed |
++-------------+---------------------------+
 
 
 
@@ -16222,7 +16556,7 @@ See also `New global constants in 7.2 <http://php.net/manual/en/migration72.cons
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php72NewConstants     |
 +-------------+---------------------------+
 
 
@@ -16297,7 +16631,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php74NewConstants     |
 +-------------+---------------------------+
 
 
@@ -16319,7 +16653,7 @@ PHP introduced new functions in PHP 5.4. If there are defined functions with suc
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php54NewFunctions     |
 +-------------+---------------------------+
 
 
@@ -16341,7 +16675,7 @@ PHP introduced new functions in PHP 5.5. If you have already defined functions w
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
+| Time To Fix | Php/Php55NewFunctions                                |
 +-------------+------------------------------------------------------+
 
 
@@ -16363,7 +16697,7 @@ PHP introduced new functions in PHP 5.6. If you have already defined functions w
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                   |
+| Time To Fix | Php/Php56NewFunctions                                                           |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -16394,7 +16728,7 @@ The following functions are now native functions in PHP 7.0. It is advised to ch
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Php/Php70NewFunctions                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -16424,7 +16758,7 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php71NewFunctions     |
 +-------------+---------------------------+
 
 
@@ -16435,13 +16769,22 @@ New Functions In PHP 7.2
 ########################
 
 
-The following functions are now native functions in PHP 7.2. It is advised to change them before moving to this new version.
+The following functions are now native functions in PHP 7.2. It is advised to change custom functions that are currently created, and using those names, before moving to this new version.
 
 * `mb_ord() <https://www.php.net/mb_ord>`_
 * `mb_chr() <https://www.php.net/mb_chr>`_
 * `mb_scrub() <https://www.php.net/mb_scrub>`_
 * `stream_isatty() <https://www.php.net/stream_isatty>`_
 * `proc_nice() <https://www.php.net/proc_nice>`_ (Windows only)
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move custom functions with the same name to a new namespace
+* Change the name of any custom functions with the same name
+* Add a condition to the functions definition to avoid conflict
 
 +-------------+---------------------------+
 | Short name  | Php/Php72NewFunctions     |
@@ -16452,7 +16795,7 @@ The following functions are now native functions in PHP 7.2. It is advised to ch
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php72NewFunctions     |
 +-------------+---------------------------+
 
 
@@ -16487,7 +16830,7 @@ Note : At the moment of writing, all links to the manual are not working.
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
+| Time To Fix | Php/Php73NewFunctions                                                                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -16516,7 +16859,7 @@ Note : At the moment of writing, all links to the manual are not working.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php74NewFunctions     |
 +-------------+---------------------------+
 
 
@@ -16546,7 +16889,7 @@ Note : At the moment of writing, all links to the manual are not working.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php80NewFunctions     |
 +-------------+---------------------------+
 
 
@@ -16590,17 +16933,17 @@ Suggestions
 * Use datetime() and other classes, not PHP native functions
 * Use a external library, like carbon, to handle dates
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Structures/NextMonthTrap                                                        |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                    |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Major                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`contao-structures-nextmonthtrap`, :ref:`edusoho-structures-nextmonthtrap` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/NextMonthTrap     |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Structures/NextMonthTrap     |
++-------------+------------------------------+
 
 
 
@@ -16660,7 +17003,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Structures/NoAppendOnSource |
 +-------------+-----------------------------+
 
 
@@ -16708,17 +17051,17 @@ Suggestions
 * When constants have been defined, use them when calling the code
 * Split the method into two methods, one for each case
 
-+-------------+----------------------------------------------+
-| Short name  | Functions/NoBooleanAsDefault                 |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`Analyze`                               |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`openconf-functions-nobooleanasdefault` |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Functions/NoBooleanAsDefault |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Functions/NoBooleanAsDefault |
++-------------+------------------------------+
 
 
 
@@ -16757,17 +17100,17 @@ Suggestions
 * Replace one of the alternative with a distinct call
 * Remove the whole conditional : it may end up being useless
 
-+-------------+--------------------------------------------------------------------------+
-| Short name  | Structures/NoChoice                                                      |
-+-------------+--------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                             |
-+-------------+--------------------------------------------------------------------------+
-| Severity    | Major                                                                    |
-+-------------+--------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                         |
-+-------------+--------------------------------------------------------------------------+
-| Examples    | :ref:`nextcloud-structures-nochoice`, :ref:`zencart-structures-nochoice` |
-+-------------+--------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/NoChoice          |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Structures/NoChoice          |
++-------------+------------------------------+
 
 
 
@@ -16822,17 +17165,17 @@ Suggestions
 * Create an interface with the important methods, and use that interface
 * Create an abstract class, when public properties are also needed
 
-+-------------+-------------------------------------------------------------------------------------------+
-| Short name  | Functions/NoClassAsTypehint                                                               |
-+-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Typechecks`                                                                         |
-+-------------+-------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                     |
-+-------------+-------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                           |
-+-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`vanilla-functions-noclassastypehint`, :ref:`phpmyadmin-functions-noclassastypehint` |
-+-------------+-------------------------------------------------------------------------------------------+
++-------------+-----------------------------+
+| Short name  | Functions/NoClassAsTypehint |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Typechecks`           |
++-------------+-----------------------------+
+| Severity    | Major                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+| Examples    | Functions/NoClassAsTypehint |
++-------------+-----------------------------+
 
 
 
@@ -16868,17 +17211,17 @@ Suggestions
 
 * Use a specific namespace for your classes
 
-+-------------+------------------------------------+
-| Short name  | Php/NoClassInGlobal                |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`                     |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Slow (1 hour)                      |
-+-------------+------------------------------------+
-| Examples    | :ref:`dolphin-php-noclassinglobal` |
-+-------------+------------------------------------+
++-------------+---------------------+
+| Short name  | Php/NoClassInGlobal |
++-------------+---------------------+
+| Rulesets    | :ref:`Analyze`      |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Slow (1 hour)       |
++-------------+---------------------+
+| Examples    | Php/NoClassInGlobal |
++-------------+---------------------+
 
 
 
@@ -16949,17 +17292,17 @@ Suggestions
 * Use empty() on the data
 * Compare the variable with a default value, such as an empty array
 
-+-------------+-------------------------------------------------------------------------------------+
-| Short name  | Performances/NotCountNull                                                           |
-+-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`                                                                 |
-+-------------+-------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                    |
-+-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`contao-performances-notcountnull`, :ref:`wordpress-performances-notcountnull` |
-+-------------+-------------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Performances/NotCountNull |
++-------------+---------------------------+
+| Rulesets    | :ref:`Performances`       |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Instant (5 mins)          |
++-------------+---------------------------+
+| Examples    | Performances/NotCountNull |
++-------------+---------------------------+
 
 
 
@@ -17008,7 +17351,7 @@ See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_ and
 +-------------+---------------------------------+
 | Severity    | Major                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Classes/DirectCallToMagicMethod |
 +-------------+---------------------------------+
 
 
@@ -17043,17 +17386,17 @@ Suggestions
 
 * Check the return of the function before using it, in particular for false, or array().
 
-+-------------+--------------------------------------------------------------------------------+
-| Short name  | Structures/NoDirectUsage                                                       |
-+-------------+--------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                 |
-+-------------+--------------------------------------------------------------------------------+
-| Severity    | Major                                                                          |
-+-------------+--------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                  |
-+-------------+--------------------------------------------------------------------------------+
-| Examples    | :ref:`edusoho-structures-nodirectusage`, :ref:`xoops-structures-nodirectusage` |
-+-------------+--------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/NoDirectUsage |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Slow (1 hour)            |
++-------------+--------------------------+
+| Examples    | Structures/NoDirectUsage |
++-------------+--------------------------+
 
 
 
@@ -17099,7 +17442,7 @@ Suggestions
 +-------------+----------------------+
 | Severity    | Minor                |
 +-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
+| Time To Fix | Security/NoEntIgnore |
 +-------------+----------------------+
 
 
@@ -17138,17 +17481,17 @@ Suggestions
 
 * Fix the regex by adding regex delimiters
 
-+-------------+-----------------------------------------+
-| Short name  | Structures/NoEmptyRegex                 |
-+-------------+-----------------------------------------+
-| Rulesets    | :ref:`Analyze`                          |
-+-------------+-----------------------------------------+
-| Severity    | Critical                                |
-+-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
-+-------------+-----------------------------------------+
-| Examples    | :ref:`tikiwiki-structures-noemptyregex` |
-+-------------+-----------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/NoEmptyRegex |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Critical                |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Structures/NoEmptyRegex |
++-------------+-------------------------+
 
 
 
@@ -17204,7 +17547,7 @@ Suggestions
 +-------------+------------------------------------------+
 | Severity    | Minor                                    |
 +-------------+------------------------------------------+
-| Time To Fix | Quick (30 mins)                          |
+| Time To Fix | Interfaces/NoGaranteeForPropertyConstant |
 +-------------+------------------------------------------+
 
 
@@ -17242,17 +17585,17 @@ Suggestions
 
 * Put any hardcoded hash in a configuration file, a database or a environment variable. An external source.
 
-+-------------+----------------------------------------------------------------------------------------+
-| Short name  | Structures/NoHardcodedHash                                                             |
-+-------------+----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                        |
-+-------------+----------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                               |
-+-------------+----------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                          |
-+-------------+----------------------------------------------------------------------------------------+
-| Examples    | :ref:`shopware-structures-nohardcodedhash`, :ref:`sugarcrm-structures-nohardcodedhash` |
-+-------------+----------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/NoHardcodedHash      |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security` |
++-------------+---------------------------------+
+| Severity    | Critical                        |
++-------------+---------------------------------+
+| Time To Fix | Slow (1 hour)                   |
++-------------+---------------------------------+
+| Examples    | Structures/NoHardcodedHash      |
++-------------+---------------------------------+
 
 
 
@@ -17296,17 +17639,17 @@ Suggestions
 * Remove the hardcoded IP and ask for it at execution.
 * Use a literal value for default messages in form.
 
-+-------------+------------------------------------------------------------------------------------+
-| Short name  | Structures/NoHardcodedIp                                                           |
-+-------------+------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                    |
-+-------------+------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                              |
-+-------------+------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                      |
-+-------------+------------------------------------------------------------------------------------+
-| Examples    | :ref:`openemr-structures-nohardcodedip`, :ref:`nextcloud-structures-nohardcodedip` |
-+-------------+------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/NoHardcodedIp        |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security` |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Slow (1 hour)                   |
++-------------+---------------------------------+
+| Examples    | Structures/NoHardcodedIp        |
++-------------+---------------------------------+
 
 
 
@@ -17365,7 +17708,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-hardcoded-path <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-path.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tine20-structures-nohardcodedpath`, :ref:`thelia-structures-nohardcodedpath`                |
+| Examples    | Structures/NoHardcodedPath                                                                        |
 +-------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -17399,17 +17742,17 @@ Suggestions
 
 * Move the port to a configuration file, an environment variable
 
-+-------------+---------------------------------------------+
-| Short name  | Structures/NoHardcodedPort                  |
-+-------------+---------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`             |
-+-------------+---------------------------------------------+
-| Severity    | Minor                                       |
-+-------------+---------------------------------------------+
-| Time To Fix | Quick (30 mins)                             |
-+-------------+---------------------------------------------+
-| Examples    | :ref:`wordpress-structures-nohardcodedport` |
-+-------------+---------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/NoHardcodedPort      |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security` |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Structures/NoHardcodedPort      |
++-------------+---------------------------------+
 
 
 
@@ -17448,7 +17791,7 @@ See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migrat
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                           |
+| Time To Fix | Php/NoListWithString                                                                                       |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -17506,7 +17849,7 @@ Suggestions
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Functions/NoLiteralForReference |
 +-------------+---------------------------------+
 
 
@@ -17574,7 +17917,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Slow (1 hour)                          |
+| Time To Fix | Classes/NoMagicWithArray               |
 +-------------+----------------------------------------+
 
 
@@ -17619,7 +17962,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/NoMoreCurlyArrays     |
 +-------------+---------------------------+
 
 
@@ -17680,17 +18023,17 @@ Suggestions
 
 * Remove else block, but keep the code
 
-+-------------+----------------------------------------------------------------------------------+
-| Short name  | Structures/NoNeedForElse                                                         |
-+-------------+----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                   |
-+-------------+----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                  |
-+-------------+----------------------------------------------------------------------------------+
-| Examples    | :ref:`thelia-structures-noneedforelse`, :ref:`thinkphp-structures-noneedforelse` |
-+-------------+----------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/NoNeedForElse |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Structures/NoNeedForElse |
++-------------+--------------------------+
 
 
 
@@ -17732,7 +18075,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Structures/NoNeedGetClass |
 +-------------+---------------------------+
 
 
@@ -17798,7 +18141,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
+| Time To Fix | Security/NoNetForXmlLoad |
 +-------------+--------------------------+
 
 
@@ -17844,7 +18187,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-parenthesis-for-language-construct <https://github.com/dseguy/clearPHP/tree/master/rules/no-parenthesis-for-language-construct.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpdocumentor-structures-noparenthesisforlanguageconstruct`, :ref:`phpmyadmin-structures-noparenthesisforlanguageconstruct`         |
+| Examples    | Structures/NoParenthesisForLanguageConstruct                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -17887,7 +18230,7 @@ Incrementing a variable should be done with the ++ or -- operators. Any other wa
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
+| Time To Fix | Structures/PlusEgalOne                         |
 +-------------+------------------------------------------------+
 
 
@@ -17926,7 +18269,7 @@ The properties below are declared with public access, but are never used publicl
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
+| Time To Fix | Classes/NoPublicAccess |
 +-------------+------------------------+
 
 
@@ -17985,7 +18328,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-real-comparison <https://github.com/dseguy/clearPHP/tree/master/rules/no-real-comparison.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`magento-type-norealcomparison`, :ref:`spip-type-norealcomparison`                             |
+| Examples    | Type/NoRealComparison                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -18030,7 +18373,7 @@ See also `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee0
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                                                                               |
+| Time To Fix | Php/NoReferenceForStaticProperty                                                                                                                                                            |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -18078,17 +18421,17 @@ Suggestions
 * Drop the reference in the argument definition
 * Drop the reference in the function return definition
 
-+-------------+--------------------------------------------+
-| Short name  | Php/NoReferenceForTernary                  |
-+-------------+--------------------------------------------+
-| Rulesets    | :ref:`Analyze`                             |
-+-------------+--------------------------------------------+
-| Severity    | Major                                      |
-+-------------+--------------------------------------------+
-| Time To Fix | Slow (1 hour)                              |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`phpadsnew-php-noreferenceforternary` |
-+-------------+--------------------------------------------+
++-------------+---------------------------+
+| Short name  | Php/NoReferenceForTernary |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+| Examples    | Php/NoReferenceForTernary |
++-------------+---------------------------+
 
 
 
@@ -18126,7 +18469,7 @@ Note that PHP won't compile the code if the operator is a short operator (+=, .=
 +-------------+------------------------------+
 | Severity    | Critical                     |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/NoReferenceOnLeft |
 +-------------+------------------------------+
 
 
@@ -18162,7 +18505,7 @@ See also `Generators overview <http://php.net/manual/en/language.generators.over
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Php/NoReturnForGenerator                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -18227,7 +18570,7 @@ See also `Return Inside Finally Block <https://www.owasp.org/index.php/Return_In
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/NoReturnInFinally |
 +-------------+------------------------------+
 
 
@@ -18276,17 +18619,17 @@ Suggestions
 * Remove the return statement in the function
 * Actually use the value returned by the method, for test or combination with other values
 
-+-------------+-----------------------------------------------------------------------------+
-| Short name  | Functions/NoReturnUsed                                                      |
-+-------------+-----------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                          |
-+-------------+-----------------------------------------------------------------------------+
-| Severity    | Minor                                                                       |
-+-------------+-----------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                               |
-+-------------+-----------------------------------------------------------------------------+
-| Examples    | :ref:`spip-functions-noreturnused`, :ref:`livezilla-functions-noreturnused` |
-+-------------+-----------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Functions/NoReturnUsed             |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| Examples    | Functions/NoReturnUsed             |
++-------------+------------------------------------+
 
 
 
@@ -18340,7 +18683,7 @@ Suggestions
 +-------------+------------------------------------------------------------+
 | Severity    | Minor                                                      |
 +-------------+------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                            |
+| Time To Fix | Classes/NoSelfReferencingConstant                          |
 +-------------+------------------------------------------------------------+
 
 
@@ -18382,7 +18725,7 @@ Suggestions
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Quick (30 mins)        |
+| Time To Fix | Arrays/NoSpreadForHash |
 +-------------+------------------------+
 
 
@@ -18418,7 +18761,7 @@ This was possible in PHP 5, but is now forbidden in PHP 7.
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Php/NoStringWithAppend                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -18443,7 +18786,7 @@ Negative index were introduced in PHP 7.1. This syntax is not compatible with PH
    ?>
 
 
-Seel also `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_.
+See also `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_.
 
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoSubstrMinusOne                                                                                                                  |
@@ -18454,7 +18797,7 @@ Seel also `Generalize support of negative string offsets <https://wiki.php.net/r
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                       |
+| Time To Fix | Php/NoSubstrMinusOne                                                                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -18486,7 +18829,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Security/NoWeakSSLCrypto |
 +-------------+--------------------------+
 
 
@@ -18557,7 +18900,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-array_merge-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-array_merge-in-loop.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tine20-performances-arraymergeinloops`                                                                |
+| Examples    | Performances/ArrayMergeInLoops                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -18596,7 +18939,7 @@ It is not possible to pass explicitly null to `get_class() <https://www.php.net/
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                                                                                                                            |
+| Time To Fix | Structures/NoGetClassNull                                                                                                                                                                                   |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -18639,17 +18982,17 @@ Suggestions
 * Only use empty(), just drop the empty()
 * Use a null value, so the variable is always set
 
-+-------------+------------------------------------------+
-| Short name  | Structures/NoIssetWithEmpty              |
-+-------------+------------------------------------------+
-| Rulesets    | :ref:`Analyze`                           |
-+-------------+------------------------------------------+
-| Severity    | Minor                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Instant (5 mins)                         |
-+-------------+------------------------------------------+
-| Examples    | :ref:`xoops-structures-noissetwithempty` |
-+-------------+------------------------------------------+
++-------------+-----------------------------+
+| Short name  | Structures/NoIssetWithEmpty |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Analyze`              |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Instant (5 mins)            |
++-------------+-----------------------------+
+| Examples    | Structures/NoIssetWithEmpty |
++-------------+-----------------------------+
 
 
 
@@ -18701,7 +19044,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Performances/MbStringInLoop |
 +-------------+-----------------------------+
 
 
@@ -18740,17 +19083,17 @@ Suggestions
 
 * Make sure those special chars have actual meaning.
 
-+-------------+-------------------------------------------+
-| Short name  | Variables/VariableNonascii                |
-+-------------+-------------------------------------------+
-| Rulesets    | :ref:`Analyze`                            |
-+-------------+-------------------------------------------+
-| Severity    | Minor                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Slow (1 hour)                             |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`magento-variables-variablenonascii` |
-+-------------+-------------------------------------------+
++-------------+----------------------------+
+| Short name  | Variables/VariableNonascii |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Slow (1 hour)              |
++-------------+----------------------------+
+| Examples    | Variables/VariableNonascii |
++-------------+----------------------------+
 
 
 
@@ -18817,7 +19160,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/NonNullableSetters         |
 +-------------+------------------------------------+
 
 
@@ -18894,7 +19237,7 @@ Suggestions
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                            |
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-classes-nonstaticmethodscalledstatic`, :ref:`magento-classes-nonstaticmethodscalledstatic`                   |
+| Examples    | Classes/NonStaticMethodsCalledStatic                                                                                       |
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -18947,17 +19290,17 @@ Suggestions
 * Declare the constant to give it an actual value
 * Turn the constant name into a string
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Arrays/NonConstantArray                                                         |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                  |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Minor                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-arrays-nonconstantarray`, :ref:`zencart-arrays-nonconstantarray` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Arrays/NonConstantArray |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Instant (5 mins)        |
++-------------+-------------------------+
+| Examples    | Arrays/NonConstantArray |
++-------------+-------------------------+
 
 
 
@@ -19003,7 +19346,7 @@ Suggestions
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
+| Time To Fix | Php/UpperCaseKeyword                           |
 +-------------+------------------------------------------------+
 
 
@@ -19050,7 +19393,7 @@ Suggestions
 +-------------+-------------------+
 | Severity    | Major             |
 +-------------+-------------------+
-| Time To Fix | Instant (5 mins)  |
+| Time To Fix | Php/NotScalarType |
 +-------------+-------------------+
 
 
@@ -19103,7 +19446,7 @@ Suggestions
 +-------------+---------------------+
 | Severity    | Minor               |
 +-------------+---------------------+
-| Time To Fix | Quick (30 mins)     |
+| Time To Fix | Structures/NotEqual |
 +-------------+---------------------+
 
 
@@ -19151,7 +19494,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-implied-cast <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-cast.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`cleverstyle-structures-notnot`, :ref:`tine20-structures-notnot`                         |
+| Examples    | Structures/NotNot                                                                             |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -19183,6 +19526,12 @@ This inconsistency has been cleaned in PHP 7 : see See `Internal Constructor Beh
 
 See also `PHP RFC: Constructor behaviour of internal classes <https://wiki.php.net/rfc/internal_constructor_behaviour>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the check on null after a new instantiation
+
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/NullOnNew                                                                                          |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -19192,7 +19541,7 @@ See also `PHP RFC: Constructor behaviour of internal classes <https://wiki.php.n
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                           |
+| Time To Fix | Classes/NullOnNew                                                                                          |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -19235,7 +19584,7 @@ Suggestions
 +-------------+--------------------+
 | Severity    | Minor              |
 +-------------+--------------------+
-| Time To Fix | Quick (30 mins)    |
+| Time To Fix | Arrays/NullBoolean |
 +-------------+--------------------+
 
 
@@ -19283,7 +19632,7 @@ Suggestions
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
+| Time To Fix | Functions/NullableWithoutCheck |
 +-------------+--------------------------------+
 
 
@@ -19326,7 +19675,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/IntegerSeparatorUsage |
 +-------------+---------------------------+
 
 
@@ -19390,7 +19739,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-references-on-objects <https://github.com/dseguy/clearPHP/tree/master/rules/no-references-on-objects.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zencart-structures-objectreferences`, :ref:`xoops-structures-objectreferences`                            |
+| Examples    | Structures/ObjectReferences                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 
 
@@ -19449,17 +19798,17 @@ Suggestions
 * Remove old style constructor and make it ``__construct()``
 * Remove old libraries and use a modern component
 
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Short name  | Classes/OldStyleConstructor                                                                             |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                          |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                   |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------------------+
++-------------+-----------------------------+
+| Short name  | Classes/OldStyleConstructor |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Analyze`              |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+| ClearPHP    | Classes/OldStyleConstructor |
++-------------+-----------------------------+
 
 
 
@@ -19514,7 +19863,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-smart-autoload <https://github.com/dseguy/clearPHP/tree/master/rules/use-smart-autoload.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`piwigo-php-oldautoloadusage`                                                                  |
+| Examples    | Php/oldAutoloadUsage                                                                                |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -19564,17 +19913,17 @@ Suggestions
 
 * Switch the if...then conditions, to reduce the amount of conditions to read.
 
-+-------------+----------------------------------------------+
-| Short name  | Structures/OneIfIsSufficient                 |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                           |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
-| Examples    | :ref:`tikiwiki-structures-oneifissufficient` |
-+-------------+----------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/OneIfIsSufficient |
++-------------+------------------------------+
+| Rulesets    | :ref:`Suggestions`           |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Structures/OneIfIsSufficient |
++-------------+------------------------------+
 
 
 
@@ -19611,17 +19960,17 @@ Suggestions
 * Use full names for functions
 * Remove the function name altogether : use a closure
 
-+-------------+-----------------------------------------------------------------------------------------------+
-| Short name  | Functions/OneLetterFunctions                                                                  |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Semantics`                              |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                               |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`thinkphp-functions-oneletterfunctions`, :ref:`cleverstyle-functions-oneletterfunctions` |
-+-------------+-----------------------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------+
+| Short name  | Functions/OneLetterFunctions                                     |
++-------------+------------------------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Semantics` |
++-------------+------------------------------------------------------------------+
+| Severity    | Minor                                                            |
++-------------+------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                  |
++-------------+------------------------------------------------------------------+
+| Examples    | Functions/OneLetterFunctions                                     |
++-------------+------------------------------------------------------------------+
 
 
 
@@ -19666,17 +20015,17 @@ Suggestions
 * Include in the string any concatenation that comes unconditionaly after or before
 * Convert the variable to a string with the (type) operator
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Type/OneVariableStrings                                                           |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                    |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                  |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`tikiwiki-type-onevariablestrings`, :ref:`nextcloud-type-onevariablestrings` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Type/OneVariableStrings |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Instant (5 mins)        |
++-------------+-------------------------+
+| Examples    | Type/OneVariableStrings |
++-------------+-------------------------+
 
 
 
@@ -19723,7 +20072,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Critical                               |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Functions/OnlyVariableForReference     |
 +-------------+----------------------------------------+
 
 
@@ -19763,17 +20112,17 @@ Suggestions
 
 * Store the previous result in a variable, and then call the function.
 
-+-------------+----------------------------------------------------------------------------------------------------------------+
-| Short name  | Functions/OnlyVariablePassedByReference                                                                        |
-+-------------+----------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                 |
-+-------------+----------------------------------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                                                       |
-+-------------+----------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                  |
-+-------------+----------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-functions-onlyvariablepassedbyreference`, :ref:`phpipam-functions-onlyvariablepassedbyreference` |
-+-------------+----------------------------------------------------------------------------------------------------------------+
++-------------+-----------------------------------------+
+| Short name  | Functions/OnlyVariablePassedByReference |
++-------------+-----------------------------------------+
+| Rulesets    | :ref:`Analyze`                          |
++-------------+-----------------------------------------+
+| Severity    | Critical                                |
++-------------+-----------------------------------------+
+| Time To Fix | Slow (1 hour)                           |
++-------------+-----------------------------------------+
+| Examples    | Functions/OnlyVariablePassedByReference |
++-------------+-----------------------------------------+
 
 
 
@@ -19813,7 +20162,7 @@ Anything else, like literals or static expressions, yield a warning at execution
 +-------------+--------------------------------------------+
 | Severity    | Major                                      |
 +-------------+--------------------------------------------+
-| Time To Fix | Quick (30 mins)                            |
+| Time To Fix | Structures/OnlyVariableReturnedByReference |
 +-------------+--------------------------------------------+
 
 
@@ -19859,7 +20208,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tine20-structures-ordie`, :ref:`openconf-structures-ordie`                          |
+| Examples    | Structures/OrDie                                                                          |
 +-------------+-------------------------------------------------------------------------------------------+
 
 
@@ -19898,11 +20247,11 @@ Optional characteristics, like final, static... are not specified. Special metho
    
    ?>
 
-+------------+------------------------------------------------+
-| Short name | Classes/OrderOfDeclaration                     |
-+------------+------------------------------------------------+
-| Rulesets   | :ref:`Coding Conventions <coding-conventions>` |
-+------------+------------------------------------------------+
++------------+----------------------------+
+| Short name | Classes/OrderOfDeclaration |
++------------+----------------------------+
+| Rulesets   | Classes/OrderOfDeclaration |
++------------+----------------------------+
 
 
 
@@ -19939,7 +20288,7 @@ In catch blocks, it is good practice not to overwrite the incoming exception, as
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Exceptions/OverwriteException      |
 +-------------+------------------------------------+
 
 
@@ -19981,7 +20330,7 @@ This analysis doesn't take into account the distance between two assignations : 
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
-| Time To Fix | Instant (5 mins)              |
+| Time To Fix | Variables/OverwrittenLiterals |
 +-------------+-------------------------------+
 
 
@@ -20036,17 +20385,17 @@ Suggestions
 
 * Keep the source, the index and the values distinct
 
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/ForeachSourceValue                                                                         |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                        |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                 |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                       |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-structures-foreachsourcevalue`, :ref:`expressionengine-structures-foreachsourcevalue` |
-+-------------+-------------------------------------------------------------------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Structures/ForeachSourceValue |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+| Examples    | Structures/ForeachSourceValue |
++-------------+-------------------------------+
 
 
 
@@ -20102,7 +20451,7 @@ See also `New Classes and Interfaces <http://php.net/manual/en/migration70.class
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Php/Php70NewClasses                                                                                        |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -20124,7 +20473,7 @@ The following interfaces are introduced in PHP 7.0. They shouldn't be defined in
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Php/Php70NewInterfaces                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -20146,7 +20495,7 @@ List of directives that are removed in PHP 7.0.
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
+| Time To Fix | Php/Php70RemovedDirective                            |
 +-------------+------------------------------------------------------+
 
 
@@ -20206,7 +20555,7 @@ Suggestions
 +-------------+------------------------------------------------------+
 | Severity    | Major                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                        |
+| Time To Fix | Php/Php70RemovedFunctions                            |
 +-------------+------------------------------------------------------+
 
 
@@ -20249,7 +20598,7 @@ See also `Scalar type declarations <http://php.net/manual/en/migration70.new-fea
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Php/PHP70scalartypehints                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -20301,7 +20650,7 @@ See also `Backward incompatible changes <http://php.net/manual/en/migration71.in
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php71microseconds     |
 +-------------+---------------------------+
 
 
@@ -20323,7 +20672,7 @@ List of directives that are removed in PHP 7.1.
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
+| Time To Fix | Php/Php71RemovedDirective    |
 +-------------+------------------------------+
 
 
@@ -20371,7 +20720,7 @@ See also `iterable pseudo-type <http://php.net/manual/en/migration71.new-feature
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                       |
+| Time To Fix | Php/PHP71scalartypehints                                                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -20412,7 +20761,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php72Deprecation      |
 +-------------+---------------------------+
 
 
@@ -20450,7 +20799,7 @@ See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php72ObjectKeyword    |
 +-------------+---------------------------+
 
 
@@ -20482,7 +20831,7 @@ See also `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php72RemovedFunctions |
 +-------------+---------------------------+
 
 
@@ -20522,7 +20871,7 @@ See also `New object type <http://php.net/manual/en/migration72.new-features.php
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                                                                         |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                  |
+| Time To Fix | Php/PHP72scalartypehints                                                                                                                                         |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -20569,7 +20918,7 @@ See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/tra
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                                                                                                                    |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                             |
+| Time To Fix | Php/PHP73LastEmptyArgument                                                                                                                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -20597,7 +20946,7 @@ See also `PHP 7.3 Removed Functions <http://php.net/manual/en/migration73.incomp
 +-------------+---------------------------+
 | Severity    | Critical                  |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php73RemovedFunctions |
 +-------------+---------------------------+
 
 
@@ -20630,7 +20979,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php74Deprecation      |
 +-------------+---------------------------+
 
 
@@ -20662,7 +21011,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php74RemovedDirective |
 +-------------+---------------------------+
 
 
@@ -20696,7 +21045,7 @@ See also `PHP 7.4 Removed Functions <http://php.net/manual/en/migration74.incomp
 +-------------+---------------------------+
 | Severity    | Critical                  |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php74RemovedFunctions |
 +-------------+---------------------------+
 
 
@@ -20753,7 +21102,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php74ReservedKeyword  |
 +-------------+---------------------------+
 
 
@@ -20787,7 +21136,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php74NewDirective     |
 +-------------+---------------------------+
 
 
@@ -20816,7 +21165,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Critical                  |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php80RemovedConstant  |
 +-------------+---------------------------+
 
 
@@ -20843,7 +21192,7 @@ The following PHP native functions were removed in PHP 8.0.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php80RemovedFunctions |
 +-------------+---------------------------+
 
 
@@ -20885,27 +21234,27 @@ Suggestions
 * Rename the structure
 * Choose another naming convention to avoid conflict and rename the current structures
 
-+---------------+---------+--------+------------------------------------------------------------------------------------+
-| Name          | Default | Type   | Description                                                                        |
-+---------------+---------+--------+------------------------------------------------------------------------------------+
-| reservedNames |         | string | Other reserved names : all in a string, comma separated.                           |
-+---------------+---------+--------+------------------------------------------------------------------------------------+
-| allowedNames  |         | string | PHP reserved names that can be used in the code. All in a string, comma separated. |
-+---------------+---------+--------+------------------------------------------------------------------------------------+
++---------------+---------+--------+----------------------------------------------------------+
+| Name          | Default | Type   | Description                                              |
++---------------+---------+--------+----------------------------------------------------------+
+| reservedNames |         | string | Other reserved names : all in a string, comma separated. |
++---------------+---------+--------+----------------------------------------------------------+
+| allowedNames  |         | string | Description                                              |
++---------------+---------+--------+----------------------------------------------------------+
 
 
 
-+-------------+-----------------------------------------------------------------------+
-| Short name  | Php/ReservedNames                                                     |
-+-------------+-----------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                        |
-+-------------+-----------------------------------------------------------------------+
-| Severity    | Major                                                                 |
-+-------------+-----------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                       |
-+-------------+-----------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-php-reservednames`, :ref:`xataface-php-reservednames` |
-+-------------+-----------------------------------------------------------------------+
++-------------+-------------------+
+| Short name  | Php/ReservedNames |
++-------------+-------------------+
+| Rulesets    | :ref:`Analyze`    |
++-------------+-------------------+
+| Severity    | Major             |
++-------------+-------------------+
+| Time To Fix | Quick (30 mins)   |
++-------------+-------------------+
+| Examples    | Php/ReservedNames |
++-------------+-------------------+
 
 
 
@@ -20966,7 +21315,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Variables/Php5IndirectExpression                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -21006,11 +21355,13 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions`, :ref:`php-cs-fixable` |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Php Version | 7.0+                                                                                                                                                  |
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                 |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`openconf-structures-php7dirname`, :ref:`mediawiki-structures-php7dirname`                                                                       |
+| Examples    | Structures/PHP7Dirname                                                                                                                                |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -21055,7 +21406,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Functions/ParameterHiding |
 +-------------+---------------------------+
 
 
@@ -21109,17 +21460,17 @@ Suggestions
 
 * Use ``parent\:\:__construct`` as the first call in the constructor.
 
-+-------------+----------------------------------------------------------------------------+
-| Short name  | Classes/ParentFirst                                                        |
-+-------------+----------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                         |
-+-------------+----------------------------------------------------------------------------+
-| Severity    | Minor                                                                      |
-+-------------+----------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                            |
-+-------------+----------------------------------------------------------------------------+
-| Examples    | :ref:`shopware-classes-parentfirst`, :ref:`prestashop-classes-parentfirst` |
-+-------------+----------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Classes/ParentFirst                |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | Classes/ParentFirst                |
++-------------+------------------------------------+
 
 
 
@@ -21162,7 +21513,7 @@ Static may be used in a function or a closure, but not globally.
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Classes/PssWithoutClass |
 +-------------+-------------------------+
 
 
@@ -21194,7 +21545,7 @@ Using parenthesis around parameters used to silent some internal check. This is 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Php/ParenthesisAsParameter                                                                                 |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -21241,17 +21592,17 @@ Suggestions
 
 * Add a check on the return value of pathinfo() before using it.
 
-+-------------+--------------------------------------+
-| Short name  | Php/PathinfoReturns                  |
-+-------------+--------------------------------------+
-| Rulesets    | :ref:`Analyze`                       |
-+-------------+--------------------------------------+
-| Severity    | Minor                                |
-+-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
-+-------------+--------------------------------------+
-| Examples    | :ref:`nextcloud-php-pathinforeturns` |
-+-------------+--------------------------------------+
++-------------+---------------------+
+| Short name  | Php/PathinfoReturns |
++-------------+---------------------+
+| Rulesets    | :ref:`Analyze`      |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Quick (30 mins)     |
++-------------+---------------------+
+| Examples    | Php/PathinfoReturns |
++-------------+---------------------+
 
 
 
@@ -21308,7 +21659,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                         |
+| Time To Fix | Variables/Php7IndirectExpression                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -21343,7 +21694,7 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                         |
+| Time To Fix | Php/Php71NewClasses                                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -21387,7 +21738,7 @@ The new class is : HashContext.
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                                                                                                               |
+| Time To Fix | Php/Php72NewClasses                                                                                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -21442,7 +21793,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/Php74NewClasses       |
 +-------------+---------------------------+
 
 
@@ -21458,7 +21809,7 @@ Two scalar typehints are introduced in version 8. They are ``false`` and ``null`
 ``false`` represents a false boolean, and nothing else. It is more restrictive than a boolean, which accepts true too. 
 ``null`` is an alternative syntax to ``?`` : it allows the type to be ``null``. 
 
-Both the above typehints are to be used in cunjonction with other types : they can't be used alone.
+Both the above typehints are to be used in cunjunction with other types : they can't be used alone.
 
 .. code-block:: php
 
@@ -21491,7 +21842,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                  |
+| Time To Fix | Php/Php80OnlyTypeHints                                                                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -21506,7 +21857,7 @@ Several variable syntaxes are added in version 8.0. They extends the PHP 7.0 syn
 
 In particular, ``new``and ``instanceof`` now support a way to inline the expression, rather than use a temporary variable.
 
-Magic constants are now accessible with array notation, just like another constant. It is also possible to use method calls : although this is Syntactly correct for PHP, this won't be executed, as the left operand is a string, and not an object.
+Magic constants are now accessible with array notation, just like another constant. It is also possible to use method calls : although this is Syntacticly correct for PHP, this won't be executed, as the left operand is a string, and not an object.
 
 .. code-block:: php
 
@@ -21544,7 +21895,7 @@ See also `PHP RFC: Variable Syntax Tweaks <https://wiki.php.net/rfc/variable_syn
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php80VariableSyntax   |
 +-------------+---------------------------+
 
 
@@ -21585,7 +21936,7 @@ See also `Loosening Reserved Word Restrictions <http://php.net/manual/en/migrati
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Php/Php7RelaxedKeyword                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -21624,17 +21975,17 @@ Suggestions
 * Add one or more constant to fine-tune the phpinfo(), and limit the amount of displayed information
 * Replace phpinfo() with a more adapted method : get_loaded_extensions() to access the list of loaded extensions
 
-+-------------+----------------------------------------+
-| Short name  | Structures/PhpinfoUsage                |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Security`                        |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
-+-------------+----------------------------------------+
-| Examples    | :ref:`dolphin-structures-phpinfousage` |
-+-------------+----------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/PhpinfoUsage |
++-------------+-------------------------+
+| Rulesets    | :ref:`Security`         |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Structures/PhpinfoUsage |
++-------------+-------------------------+
 
 
 
@@ -21670,17 +22021,17 @@ Suggestions
 * Make this a negative operator : -$b
 * Make the casting explicit : (int) $b
 
-+-------------+------------------------------------------------------------------------------------------+
-| Short name  | Structures/PossibleIncrement                                                             |
-+-------------+------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                       |
-+-------------+------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                    |
-+-------------+------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                         |
-+-------------+------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-structures-possibleincrement`, :ref:`mediawiki-structures-possibleincrement` |
-+-------------+------------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/PossibleIncrement |
++-------------+------------------------------+
+| Rulesets    | :ref:`Suggestions`           |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Structures/PossibleIncrement |
++-------------+------------------------------+
 
 
 
@@ -21719,7 +22070,7 @@ It is recommended to check the file resources when they are opened, and always u
 +-------------+---------------------------------+
 | Severity    | Critical                        |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Structures/PossibleInfiniteLoop |
 +-------------+---------------------------------+
 
 
@@ -21783,17 +22134,17 @@ Suggestions
 * Add a test on the last index of the resulting array, to ensure it is available when needed
 * Use the PREG_UNMATCHED_AS_NULL option (PHP 7.4+)
 
-+-------------+----------------------------------------------------------------------------+
-| Short name  | Php/MissingSubpattern                                                      |
-+-------------+----------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                               |
-+-------------+----------------------------------------------------------------------------+
-| Severity    | Minor                                                                      |
-+-------------+----------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                            |
-+-------------+----------------------------------------------------------------------------+
-| Examples    | :ref:`phpmyadmin-php-missingsubpattern`, :ref:`spip-php-missingsubpattern` |
-+-------------+----------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Php/MissingSubpattern        |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Php/MissingSubpattern        |
++-------------+------------------------------+
 
 
 
@@ -21831,17 +22182,109 @@ Suggestions
 
 * Use the pre increment when the new value is not reused.
 
-+-------------+--------------------------------------------------------------------------------------------------+
-| Short name  | Performances/PrePostIncrement                                                                    |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`                                                              |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                            |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                  |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`expressionengine-performances-prepostincrement`, :ref:`traq-performances-prepostincrement` |
-+-------------+--------------------------------------------------------------------------------------------------+
++-------------+-------------------------------------+
+| Short name  | Performances/PrePostIncrement       |
++-------------+-------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Performances` |
++-------------+-------------------------------------+
+| Severity    | Minor                               |
++-------------+-------------------------------------+
+| Time To Fix | Quick (30 mins)                     |
++-------------+-------------------------------------+
+| Examples    | Performances/PrePostIncrement       |
++-------------+-------------------------------------+
+
+
+
+.. _prefix-and-suffixes-with-typehint:
+
+Prefix And Suffixes With Typehint
+#################################
+
+
+This analysis checks the relationship between methods prefixes and suffixes, with their corresponding return typehint.
+
+For example, a method with the signature ``function isACustomer() {}`` should return a boolean. That boolean can then be read when calling the method : ``if ($user->isACustomer()) {}``.
+
+There are multiple such convention that may be applied. For example, ``has*`` should return a boolean, ``set*`` should return nothing (a.k.a ``void``), and ``get*``shall return any kind of type. 
+
+.. code-block:: php
+
+   <?php
+   
+   class x  {
+       // Easy to read convention
+       function isAUser() : bool {}
+   
+       // shall return a boolean
+       function isACustomer() {}
+   
+       // shall return a string, based on suffix 'name => string'
+       function getName() {}
+   
+       // shall return a string, based on suffix 'name => string'
+       function getUsername() {}
+   
+       // shall return \Uuid, based on prefix 'uuid => \Uuid'
+       function getUuid() {}
+   
+       // shall return anything, based on no prefix nor suffix
+       function getBirthday() {}
+   
+   }
+   
+   ?>
+
+
+There are 2 parameters for this analysis. It is recommended to customize them to get an better results, related to the naming conventions used in the code.
+
+``prefixedType`` is used for prefix in method names, which is the beginning of the name. ``suffixedType`` is used for suffixes : the ending part of the name. Matching is case insensitive.
+
+The prefix is configured as the index of the map, while the related type is configured as the value of the map.
+
+``prefixToType['is'] = 'bool';`` will be use as ``is*`` shall use the ``bool`` typehint.
+
+Multiple typehints may be used at the same time. PHP supports multiple types since PHP 8.0, and Exakat will support them with any PHP version. Specify multiple types by separating them with comma. Any typehint not found in this list will be reported, including ``null``.
+
+PHP scalar types are available : ``string``, ``int``, ``void``, etc. Explicit types, based on classes or interfaces, must use the fully qualified name, not the short name. ``suffixToType['uuid'] = '\Uuid';`` will be use as ``*uuid`` shall use the ``\Uuid`` typehint.
+
+When multiple rules applies, only one is reported. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++--------------+-----------------------------------------+----------+------------------------------------------------+
+| Name         | Default                                 | Type     | Description                                    |
++--------------+-----------------------------------------+----------+------------------------------------------------+
+| prefixedType | prefixedType['is'] = 'bool';            | ini_hash | List of prefixes and their expected returntype |
+|              | prefixedType['has'] = 'bool';           |          |                                                |
+|              | prefixedType['set'] = 'void';           |          |                                                |
+|              | prefixedType['list'] = 'array';         |          |                                                |
++--------------+-----------------------------------------+----------+------------------------------------------------+
+| suffixedType | prefixedType['list'] = 'bool';          | ini_hash | Description                                    |
+|              | prefixedType['int'] = 'int';            |          |                                                |
+|              | prefixedType['string'] = 'string';      |          |                                                |
+|              | prefixedType['name'] = 'string';        |          |                                                |
+|              | prefixedType['description'] = 'string'; |          |                                                |
+|              | prefixedType['id'] = 'int';             |          |                                                |
+|              | prefixedType['uuid'] = '\Uuid';         |          |                                                |
++--------------+-----------------------------------------+----------+------------------------------------------------+
+
+
+
++-------------+------------------------+
+| Short name  | Functions/PrefixToType |
++-------------+------------------------+
+| Rulesets    | :ref:`Semantics`       |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Functions/PrefixToType |
++-------------+------------------------+
 
 
 
@@ -21915,7 +22358,7 @@ If the array has to be completed rather than created, it is also faster to use +
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Arrays/ShouldPreprocess |
 +-------------+-------------------------+
 
 
@@ -21963,7 +22406,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                      |
 +-------------+-----------------------------------------------------------------------+
-| Examples    | :ref:`phpadsnew-structures-shouldpreprocess`                          |
+| Examples    | Structures/ShouldPreprocess                                           |
 +-------------+-----------------------------------------------------------------------+
 
 
@@ -22003,7 +22446,7 @@ When stopping a script with `die() <https://www.php.net/`die <http://www.php.net
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
+| Time To Fix | Structures/PrintAndDie |
 +-------------+------------------------+
 
 
@@ -22043,17 +22486,17 @@ Omitted arguments produce an error.
 
 See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>`_.
 
-+-------------+-------------------------------------------+
-| Short name  | Structures/PrintfArguments                |
-+-------------+-------------------------------------------+
-| Rulesets    | :ref:`Analyze`                            |
-+-------------+-------------------------------------------+
-| Severity    | Minor                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Instant (5 mins)                          |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`phpipam-structures-printfarguments` |
-+-------------+-------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/PrintfArguments |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Instant (5 mins)           |
++-------------+----------------------------+
+| Examples    | Structures/PrintfArguments |
++-------------+----------------------------+
 
 
 
@@ -22096,7 +22539,7 @@ It is better to apply the `preg_replace() <https://www.php.net/preg_replace>`_ t
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Slow (1 hour)                 |
+| Time To Fix | Performances/RegexOnCollector |
 +-------------+-------------------------------+
 
 
@@ -22147,17 +22590,17 @@ Suggestions
 * Remove the property and make it an argument in the method
 * Use that property elsewhere
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Classes/PropertyCouldBeLocal                                                          |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`                                                    |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                         |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`mautic-classes-propertycouldbelocal`, :ref:`typo3-classes-propertycouldbelocal` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Classes/PropertyCouldBeLocal       |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| Examples    | Classes/PropertyCouldBeLocal       |
++-------------+------------------------------------+
 
 
 
@@ -22208,7 +22651,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Slow (1 hour)          |
+| Time To Fix | Classes/CouldBePrivate |
 +-------------+------------------------+
 
 
@@ -22272,17 +22715,17 @@ Suggestions
 * Drop the property, and make the property a local variable
 * Use the property in another method
 
-+-------------+---------------------------------------------------+
-| Short name  | Classes/PropertyUsedInOneMethodOnly               |
-+-------------+---------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                    |
-+-------------+---------------------------------------------------+
-| Severity    | Minor                                             |
-+-------------+---------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                     |
-+-------------+---------------------------------------------------+
-| Examples    | :ref:`contao-classes-propertyusedinonemethodonly` |
-+-------------+---------------------------------------------------+
++-------------+-------------------------------------+
+| Short name  | Classes/PropertyUsedInOneMethodOnly |
++-------------+-------------------------------------+
+| Rulesets    | :ref:`Analyze`                      |
++-------------+-------------------------------------+
+| Severity    | Minor                               |
++-------------+-------------------------------------+
+| Time To Fix | Slow (1 hour)                       |
++-------------+-------------------------------------+
+| Examples    | Classes/PropertyUsedInOneMethodOnly |
++-------------+-------------------------------------+
 
 
 
@@ -22311,17 +22754,24 @@ The property and the variable may easily be confused one for another and lead to
 
 Sometimes, when the property is going to be replaced by the incoming argument, or data based on that argument, this naming schema is made on purpose, indicating that the current argument will eventually end up in the property. When the argument has the same name as the property, no warning is reported.
 
-+-------------+-----------------------------------------------------+
-| Short name  | Structures/PropertyVariableConfusion                |
-+-------------+-----------------------------------------------------+
-| Rulesets    | :ref:`Semantics`                                    |
-+-------------+-----------------------------------------------------+
-| Severity    | Minor                                               |
-+-------------+-----------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                       |
-+-------------+-----------------------------------------------------+
-| Examples    | :ref:`phpipam-structures-propertyvariableconfusion` |
-+-------------+-----------------------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use different names for the properties and variables
+* Adopt and apply a naming convention for variables and properties.
+
++-------------+--------------------------------------+
+| Short name  | Structures/PropertyVariableConfusion |
++-------------+--------------------------------------+
+| Rulesets    | :ref:`Semantics`                     |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Slow (1 hour)                        |
++-------------+--------------------------------------+
+| Examples    | Structures/PropertyVariableConfusion |
++-------------+--------------------------------------+
 
 
 
@@ -22380,17 +22830,17 @@ Suggestions
 * Batch calls by using WHERE clauses and applying the same operation to all similar data
 * Use native commands to avoid double query : REPLACE instead of SELECT-(UPDATE/INSERT), or UPSERT, for example
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/QueriesInLoop                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                      |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Major                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                     |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`teampass-structures-queriesinloop`, :ref:`openemr-structures-queriesinloop` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/QueriesInLoop     |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
+| Examples    | Structures/QueriesInLoop     |
++-------------+------------------------------+
 
 
 
@@ -22448,7 +22898,7 @@ Suggestions
 +-------------+--------------------------------------------+
 | Severity    | Critical                                   |
 +-------------+--------------------------------------------+
-| Time To Fix | Quick (30 mins)                            |
+| Time To Fix | Classes/RaisedAccessLevel                  |
 +-------------+--------------------------------------------+
 
 
@@ -22491,7 +22941,7 @@ Since PHP 7.4, `openssl_random_pseudo_bytes() <https://www.php.net/openssl_rando
 +-------------+------------------------------+
 | Severity    | Critical                     |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/RandomWithoutTry  |
 +-------------+------------------------------+
 
 
@@ -22536,17 +22986,17 @@ Suggestions
 * Leave the arrays intact : the order may be important.
 * For hash arrays, consider turning the array in a class.
 
-+-------------+-------------------------------------------------------------------------------------------+
-| Short name  | Arrays/RandomlySortedLiterals                                                             |
-+-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                        |
-+-------------+-------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                     |
-+-------------+-------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                             |
-+-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`contao-arrays-randomlysortedliterals`, :ref:`vanilla-arrays-randomlysortedliterals` |
-+-------------+-------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Arrays/RandomlySortedLiterals      |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| Examples    | Arrays/RandomlySortedLiterals      |
++-------------+------------------------------------+
 
 
 
@@ -22581,7 +23031,7 @@ This is possible when managing some backward compatibility, like emulating an ol
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Slow (1 hour)                   |
+| Time To Fix | Functions/RedeclaredPhpFunction |
 +-------------+---------------------------------+
 
 
@@ -22625,7 +23075,7 @@ It is recommended to use distinct names.
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Slow (1 hour)              |
+| Time To Fix | Classes/RedefinedConstants |
 +-------------+----------------------------+
 
 
@@ -22660,17 +23110,17 @@ Suggestions
 * Move the default assignation to the property definition
 * Drop the reassignation in the constructor
 
-+-------------+----------------------------------------+
-| Short name  | Classes/RedefinedDefault               |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`                         |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Slow (1 hour)                          |
-+-------------+----------------------------------------+
-| Examples    | :ref:`piwigo-classes-redefineddefault` |
-+-------------+----------------------------------------+
++-------------+--------------------------+
+| Short name  | Classes/RedefinedDefault |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Slow (1 hour)            |
++-------------+--------------------------+
+| Examples    | Classes/RedefinedDefault |
++-------------+--------------------------+
 
 
 
@@ -22698,17 +23148,17 @@ However, having two or more properties with the same name, in the class hierarch
    
    ?>
 
-+-------------+-----------------------------------------------+
-| Short name  | Classes/RedefinedPrivateProperty              |
-+-------------+-----------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                |
-+-------------+-----------------------------------------------+
-| Severity    | Major                                         |
-+-------------+-----------------------------------------------+
-| Time To Fix | Slow (1 hour)                                 |
-+-------------+-----------------------------------------------+
-| Examples    | :ref:`zurmo-classes-redefinedprivateproperty` |
-+-------------+-----------------------------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/RedefinedPrivateProperty |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`                   |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| Examples    | Classes/RedefinedPrivateProperty |
++-------------+----------------------------------+
 
 
 
@@ -22751,7 +23201,7 @@ It is recommended to avoid redefining the same property in a hierarchy.
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Classes/RedefinedProperty |
 +-------------+---------------------------+
 
 
@@ -22798,7 +23248,7 @@ Suggestions
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
-| Time To Fix | Quick (30 mins)                  |
+| Time To Fix | Php/ReflectionExportIsDeprecated |
 +-------------+----------------------------------+
 
 
@@ -22861,7 +23311,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Performances/RegexOnArrays |
 +-------------+----------------------------+
 
 
@@ -22894,17 +23344,26 @@ Mimicking ``register_globals`` is achieved with variables variables, `extract() 
    
    ?>
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Security/RegisterGlobals                                                        |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Security`                                                                 |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Critical                                                                        |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                   |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`teampass-security-registerglobals`, :ref:`xoops-security-registerglobals` |
-+-------------+---------------------------------------------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid reimplementing register_globals
+* Use a container to store and access commonly used values
+
++-------------+--------------------------+
+| Short name  | Security/RegisterGlobals |
++-------------+--------------------------+
+| Rulesets    | :ref:`Security`          |
++-------------+--------------------------+
+| Severity    | Critical                 |
++-------------+--------------------------+
+| Time To Fix | Slow (1 hour)            |
++-------------+--------------------------+
+| Examples    | Security/RegisterGlobals |
++-------------+--------------------------+
 
 
 
@@ -22939,17 +23398,17 @@ Suggestions
 * Remove the target function, and move the code here
 * Add more logic to that function, like conditions or cache
 
-+-------------+------------------------------------------------------------------------------+
-| Short name  | Functions/RelayFunction                                                      |
-+-------------+------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                               |
-+-------------+------------------------------------------------------------------------------+
-| Severity    | Major                                                                        |
-+-------------+------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                              |
-+-------------+------------------------------------------------------------------------------+
-| Examples    | :ref:`teampass-functions-relayfunction`, :ref:`spip-functions-relayfunction` |
-+-------------+------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Functions/RelayFunction |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Functions/RelayFunction |
++-------------+-------------------------+
 
 
 
@@ -22997,7 +23456,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Instant (5 mins)                       |
+| Time To Fix | Interfaces/RepeatedInterface           |
 +-------------+----------------------------------------+
 
 
@@ -23041,17 +23500,17 @@ Suggestions
 * Create a central library of regex
 * Use the regex inventory to spot other regex that are close, and should be identical.
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/RepeatedRegex                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                    |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`vanilla-structures-repeatedregex`, :ref:`tikiwiki-structures-repeatedregex` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/RepeatedRegex |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Structures/RepeatedRegex |
++-------------+--------------------------+
 
 
 
@@ -23099,7 +23558,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-repeated-print <https://github.com/dseguy/clearPHP/tree/master/rules/no-repeated-print.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`edusoho-structures-repeatedprint`, :ref:`humo-gen-structures-repeatedprint`                 |
+| Examples    | Structures/RepeatedPrint                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -23135,7 +23594,7 @@ See also `List of other reserved words <http://php.net/manual/en/reserved.other-
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/ReservedKeywords7     |
 +-------------+---------------------------+
 
 
@@ -23163,7 +23622,7 @@ Results May Be Missing
 +-------------+-------------------------------+
 | Severity    | Major                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Structures/ResultMayBeMissing |
 +-------------+-------------------------------+
 
 
@@ -23204,17 +23663,17 @@ Suggestions
 * Remove the try/catch and let the rest of the application handle this exception.
 * Chain the exception, by throwing a new exception, including the caught exception.
 
-+-------------+---------------------------------------+
-| Short name  | Exceptions/Rethrown                   |
-+-------------+---------------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>`          |
-+-------------+---------------------------------------+
-| Severity    | Minor                                 |
-+-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
-+-------------+---------------------------------------+
-| Examples    | :ref:`prestashop-exceptions-rethrown` |
-+-------------+---------------------------------------+
++-------------+------------------------------+
+| Short name  | Exceptions/Rethrown          |
++-------------+------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Exceptions/Rethrown          |
++-------------+------------------------------+
 
 
 
@@ -23275,17 +23734,17 @@ Suggestions
 * Return directly the comparison, without using the if/then structure
 * Cast the value to (boolean) and use it instead of the ternary
 
-+-------------+-------------------------------------------------------------------------------------+
-| Short name  | Structures/ReturnTrueFalse                                                          |
-+-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                      |
-+-------------+-------------------------------------------------------------------------------------+
-| Severity    | Major                                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                     |
-+-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`mautic-structures-returntruefalse`, :ref:`fuelcms-structures-returntruefalse` |
-+-------------+-------------------------------------------------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/ReturnTrueFalse |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Major                      |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+| Examples    | Structures/ReturnTrueFalse |
++-------------+----------------------------+
 
 
 
@@ -23334,7 +23793,7 @@ Suggestions
 +-------------+--------------------------------------------------------------------+
 | Severity    | Minor                                                              |
 +-------------+--------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                   |
+| Time To Fix | Php/ReturnWithParenthesis                                          |
 +-------------+--------------------------------------------------------------------+
 
 
@@ -23345,7 +23804,9 @@ Reuse Variable
 ##############
 
 
-A variable is already holding the content that is re-calculated later. Use the cached value.
+A variable is already holding the content that is calculated multiple times over. 
+
+It is recommended to use the cached value. This saves some computation, in particular when used in a loop, and speeds up the process.
 
 .. code-block:: php
 
@@ -23362,6 +23823,14 @@ A variable is already holding the content that is re-calculated later. Use the c
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Reuse the variable
+
 +-------------+--------------------------+
 | Short name  | Structures/ReuseVariable |
 +-------------+--------------------------+
@@ -23369,7 +23838,7 @@ A variable is already holding the content that is re-calculated later. Use the c
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
+| Time To Fix | Structures/ReuseVariable |
 +-------------+--------------------------+
 
 
@@ -23407,17 +23876,17 @@ Suggestions
 
 * Always use CURLOPT_SSL_VERIFYPEER and HTTPS for communication with other servers
 
-+-------------+--------------------------------------+
-| Short name  | Security/CurlOptions                 |
-+-------------+--------------------------------------+
-| Rulesets    | :ref:`Security`                      |
-+-------------+--------------------------------------+
-| Severity    | Major                                |
-+-------------+--------------------------------------+
-| Time To Fix | Quick (30 mins)                      |
-+-------------+--------------------------------------+
-| Examples    | :ref:`openconf-security-curloptions` |
-+-------------+--------------------------------------+
++-------------+----------------------+
+| Short name  | Security/CurlOptions |
++-------------+----------------------+
+| Rulesets    | :ref:`Security`      |
++-------------+----------------------+
+| Severity    | Major                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+| Examples    | Security/CurlOptions |
++-------------+----------------------+
 
 
 
@@ -23446,6 +23915,12 @@ There are a lot of HTTP headers those days, targeting various vulnerabilities. T
 
 See also `Hardening Your HTTP Security Headers <https://www.keycdn.com/blog/http-security-headers>`_, `How To Secure Your Web App With HTTP Headers <https://www.smashingmagazine.com/2017/04/secure-web-app-http-headers/>`_ and `SecurityHeaders <https://securityheaders.com/>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove usage of those headers
+
 +-------------+--------------------------+
 | Short name  | Security/SafeHttpHeaders |
 +-------------+--------------------------+
@@ -23453,7 +23928,7 @@ See also `Hardening Your HTTP Security Headers <https://www.keycdn.com/blog/http
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Security/SafeHttpHeaders |
 +-------------+--------------------------+
 
 
@@ -23504,17 +23979,17 @@ Suggestions
 * Merge the two conditions into one
 * Make the two conditions different
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/SameConditions                                                         |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                    |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Critical                                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`teampass-structures-sameconditions`, :ref:`typo3-structures-sameconditions` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Structures/SameConditions |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Critical                  |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Examples    | Structures/SameConditions |
++-------------+---------------------------+
 
 
 
@@ -23559,7 +24034,7 @@ The source will also be destroyed immediately after the blind variable has been 
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Structures/AutoUnsetForeach |
 +-------------+-----------------------------+
 
 
@@ -23601,7 +24076,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
+| Time To Fix | Php/ScalarAreNotArrays                    |
 +-------------+-------------------------------------------+
 
 
@@ -23676,17 +24151,17 @@ Suggestions
 
 * Only use one type of syntax with your properties.
 
-+-------------+------------------------------------------------+
-| Short name  | Classes/ScalarOrObjectProperty                 |
-+-------------+------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                 |
-+-------------+------------------------------------------------+
-| Severity    | Minor                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                  |
-+-------------+------------------------------------------------+
-| Examples    | :ref:`sugarcrm-classes-scalarorobjectproperty` |
-+-------------+------------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Classes/ScalarOrObjectProperty |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Slow (1 hour)                  |
++-------------+--------------------------------+
+| Examples    | Classes/ScalarOrObjectProperty |
++-------------+--------------------------------+
 
 
 
@@ -23735,7 +24210,7 @@ Suggestions
 +-------------+--------------------------------------------------+
 | Severity    | Minor                                            |
 +-------------+--------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                    |
+| Time To Fix | Traits/SelfUsingTrait                            |
 +-------------+--------------------------------------------------+
 
 
@@ -23781,7 +24256,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Functions/SemanticTyping |
 +-------------+--------------------------+
 
 
@@ -23816,6 +24291,12 @@ This was spotted by ``Nicolas Grekas``, and fixed in Symfony `[HttpFoundation] M
 
 See also `Sessions: Improve original RFC about lazy_write <https://wiki.php.net/rfc/session-read_only-lazy_write>`_ and the `Sessions <http://php.net/manual/en/book.session.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Implements the SessionUpdateTimestampHandlerInterface interface
+
 +-------------+---------------------------+
 | Short name  | Security/SessionLazyWrite |
 +-------------+---------------------------+
@@ -23823,7 +24304,7 @@ See also `Sessions: Improve original RFC about lazy_write <https://wiki.php.net/
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Security/SessionLazyWrite |
 +-------------+---------------------------+
 
 
@@ -23899,7 +24380,7 @@ Suggestions
 +-------------+---------------------+
 | Severity    | Minor               |
 +-------------+---------------------+
-| Time To Fix | Quick (30 mins)     |
+| Time To Fix | Structures/SetAside |
 +-------------+---------------------+
 
 
@@ -23944,6 +24425,13 @@ The ``$samesite`` argument limits the sending of the cookie to the domain that i
 
 See also `setcookie <http://www.php.net/setcookie>`_ and `'SameSite' cookie attribute <https://www.chromestatus.com/feature/4672634709082112>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use all the argument when setting cookies with PHP functions
+
 +-------------+------------------------+
 | Short name  | Security/SetCookieArgs |
 +-------------+------------------------+
@@ -23951,7 +24439,7 @@ See also `setcookie <http://www.php.net/setcookie>`_ and `'SameSite' cookie attr
 +-------------+------------------------+
 | Severity    | Major                  |
 +-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
+| Time To Fix | Security/SetCookieArgs |
 +-------------+------------------------+
 
 
@@ -23992,7 +24480,7 @@ See also `setlocale <http://php.net/setlocale>`_.
 +-------------+------------------------------------+
 | Severity    | Major                              |
 +-------------+------------------------------------+
-| Time To Fix | Instant (5 mins)                   |
+| Time To Fix | Structures/SetlocaleNeedsConstants |
 +-------------+------------------------------------+
 
 
@@ -24031,17 +24519,17 @@ This is good for readability, and help at understanding the code. This is especi
 
 See also `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_.
 
-+-------------+--------------------------------------------------------------------------------------------------+
-| Short name  | Structures/OneLineTwoInstructions                                                                |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                   |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                            |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                 |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`piwigo-structures-onelinetwoinstructions`, :ref:`tine20-structures-onelinetwoinstructions` |
-+-------------+--------------------------------------------------------------------------------------------------+
++-------------+-----------------------------------+
+| Short name  | Structures/OneLineTwoInstructions |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Analyze`                    |
++-------------+-----------------------------------+
+| Severity    | Major                             |
++-------------+-----------------------------------+
+| Time To Fix | Instant (5 mins)                  |
++-------------+-----------------------------------+
+| Examples    | Structures/OneLineTwoInstructions |
++-------------+-----------------------------------+
 
 
 
@@ -24060,7 +24548,7 @@ Usage of short open tags is discouraged. The following files were found to be im
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Php/ShortOpenTagRequired |
 +-------------+--------------------------+
 
 
@@ -24097,7 +24585,7 @@ See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 +-------------+---------------------------+
 | Severity    | Critical                  |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Arrays/ArrayNSUsage       |
 +-------------+---------------------------+
 
 
@@ -24129,17 +24617,17 @@ Static content inside a string, that has no single quotes nor escape sequence (s
 
 If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
 
-+-------------+-----------------------------------------------------------------------------------------------+
-| Short name  | Type/ShouldBeSingleQuote                                                                      |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Coding Conventions <coding-conventions>`                                                |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                              |
-+-------------+-----------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__ |
-+-------------+-----------------------------------------------------------------------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Type/ShouldBeSingleQuote                       |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Coding Conventions <coding-conventions>` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Instant (5 mins)                               |
++-------------+------------------------------------------------+
+| ClearPHP    | Type/ShouldBeSingleQuote                       |
++-------------+------------------------------------------------+
 
 
 
@@ -24176,17 +24664,17 @@ Suggestions
 
 * Add the incoming exception to the newly thrown exception
 
-+-------------+-----------------------------------------------------------------------------------------------+
-| Short name  | Structures/ShouldChainException                                                               |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                              |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`magento-structures-shouldchainexception`, :ref:`tine20-structures-shouldchainexception` |
-+-------------+-----------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/ShouldChainException |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Instant (5 mins)                |
++-------------+---------------------------------+
+| Examples    | Structures/ShouldChainException |
++-------------+---------------------------------+
 
 
 
@@ -24252,7 +24740,7 @@ Suggestions
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Classes/ShouldDeepClone |
 +-------------+-------------------------+
 
 
@@ -24324,7 +24812,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
+| Time To Fix | Classes/ShouldHaveDestructor |
 +-------------+------------------------------+
 
 
@@ -24371,7 +24859,7 @@ Finally, short names makes the rest of the code readable.
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Namespaces/ShouldMakeAlias |
 +-------------+----------------------------+
 
 
@@ -24419,7 +24907,7 @@ This way, they are less verbose, compatible with assignation and easier to read.
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
+| Time To Fix | Structures/ShouldMakeTernary |
 +-------------+------------------------------+
 
 
@@ -24462,13 +24950,13 @@ Suggestions
 
 * Use PHP string sequences, and skip chr() at execution time
 
-+------------+---------------------------------------+
-| Short name | Php/ShouldPreprocess                  |
-+------------+---------------------------------------+
-| Rulesets   | none                                  |
-+------------+---------------------------------------+
-| Examples   | :ref:`phpadsnew-php-shouldpreprocess` |
-+------------+---------------------------------------+
++------------+----------------------+
+| Short name | Php/ShouldPreprocess |
++------------+----------------------+
+| Rulesets   | none                 |
++------------+----------------------+
+| Examples   | Php/ShouldPreprocess |
++------------+----------------------+
 
 
 
@@ -24509,17 +24997,17 @@ Suggestions
 
 * Use a typecast, instead of a functioncall.
 
-+-------------+--------------------------------------------------------------------------+
-| Short name  | Type/ShouldTypecast                                                      |
-+-------------+--------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                           |
-+-------------+--------------------------------------------------------------------------+
-| Severity    | Minor                                                                    |
-+-------------+--------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                          |
-+-------------+--------------------------------------------------------------------------+
-| Examples    | :ref:`xataface-type-shouldtypecast`, :ref:`openconf-type-shouldtypecast` |
-+-------------+--------------------------------------------------------------------------+
++-------------+---------------------+
+| Short name  | Type/ShouldTypecast |
++-------------+---------------------+
+| Rulesets    | :ref:`Analyze`      |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Quick (30 mins)     |
++-------------+---------------------+
+| Examples    | Type/ShouldTypecast |
++-------------+---------------------+
 
 
 
@@ -24556,19 +25044,19 @@ Suggestions
 
 * Replace the long syntax with the short one
 
-+-------------+----------------------------------------------------------------------------------+
-| Short name  | Php/ShouldUseCoalesce                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                               |
-+-------------+----------------------------------------------------------------------------------+
-| Php Version | With PHP 7.0 and more recent                                                     |
-+-------------+----------------------------------------------------------------------------------+
-| Severity    | Major                                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                  |
-+-------------+----------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-php-shouldusecoalesce`, :ref:`cleverstyle-php-shouldusecoalesce` |
-+-------------+----------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Php/ShouldUseCoalesce              |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Php Version | With PHP 7.0 and more recent       |
++-------------+------------------------------------+
+| Severity    | Major                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | Php/ShouldUseCoalesce              |
++-------------+------------------------------------+
 
 
 
@@ -24601,17 +25089,17 @@ Suggestions
 
 * Use PHP native constants whenever possible, for better readability.
 
-+-------------+--------------------------------------------+
-| Short name  | Functions/ShouldUseConstants               |
-+-------------+--------------------------------------------+
-| Rulesets    | :ref:`Analyze`                             |
-+-------------+--------------------------------------------+
-| Severity    | Minor                                      |
-+-------------+--------------------------------------------+
-| Time To Fix | Quick (30 mins)                            |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`tine20-functions-shoulduseconstants` |
-+-------------+--------------------------------------------+
++-------------+------------------------------+
+| Short name  | Functions/ShouldUseConstants |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Functions/ShouldUseConstants |
++-------------+------------------------------+
 
 
 
@@ -24660,7 +25148,7 @@ Suggestions
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Structures/ShouldUseExplodeArgs |
 +-------------+---------------------------------+
 
 
@@ -24711,17 +25199,17 @@ Suggestions
 
 * Move for() loops to foreach(), whenever they apply to a finite list of elements
 
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Short name  | Structures/ShouldUseForeach                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                                  |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                               |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                    |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`expressionengine-structures-shoulduseforeach`, :ref:`woocommerce-structures-shoulduseforeach` |
-+-------------+-----------------------------------------------------------------------------------------------------+
++-------------+-----------------------------+
+| Short name  | Structures/ShouldUseForeach |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Suggestions`          |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Instant (5 mins)            |
++-------------+-----------------------------+
+| Examples    | Structures/ShouldUseForeach |
++-------------+-----------------------------+
 
 
 
@@ -24778,7 +25266,7 @@ Suggestions
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
-| Time To Fix | Slow (1 hour)         |
+| Time To Fix | Php/ShouldUseFunction |
 +-------------+-----------------------+
 
 
@@ -24828,17 +25316,17 @@ Methods which are overwritten by a child class are omitted : the parent class ac
 
 Note that a method using a class constant is not considered as using the local class, for this analyzer.
 
-+-------------+-----------------------------------------------------------------------------------------+
-| Short name  | Classes/ShouldUseThis                                                                   |
-+-------------+-----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                          |
-+-------------+-----------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                   |
-+-------------+-----------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                           |
-+-------------+-----------------------------------------------------------------------------------------+
-| ClearPHP    | `not-a-method <https://github.com/dseguy/clearPHP/tree/master/rules/not-a-method.md>`__ |
-+-------------+-----------------------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Classes/ShouldUseThis |
++-------------+-----------------------+
+| Rulesets    | :ref:`Analyze`        |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Slow (1 hour)         |
++-------------+-----------------------+
+| ClearPHP    | Classes/ShouldUseThis |
++-------------+-----------------------+
 
 
 
@@ -24890,17 +25378,17 @@ Suggestions
 
 * Use explicit math assignation
 
-+-------------+-----------------------------------------+
-| Short name  | Structures/ShouldUseMath                |
-+-------------+-----------------------------------------+
-| Rulesets    | :ref:`Suggestions`                      |
-+-------------+-----------------------------------------+
-| Severity    | Minor                                   |
-+-------------+-----------------------------------------+
-| Time To Fix | Instant (5 mins)                        |
-+-------------+-----------------------------------------+
-| Examples    | :ref:`openemr-structures-shouldusemath` |
-+-------------+-----------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/ShouldUseMath |
++-------------+--------------------------+
+| Rulesets    | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Instant (5 mins)         |
++-------------+--------------------------+
+| Examples    | Structures/ShouldUseMath |
++-------------+--------------------------+
 
 
 
@@ -24938,17 +25426,17 @@ Suggestions
 * Use PHP_VERSION instead of php_version()
 * Use typehint instead of is_int(), is_string(), is_bool(), etc.
 
-+-------------+-------------------------------------------------------------------------------------------+
-| Short name  | Structures/ShouldUseOperator                                                              |
-+-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                        |
-+-------------+-------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                     |
-+-------------+-------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                          |
-+-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zencart-structures-shoulduseoperator`, :ref:`sugarcrm-structures-shoulduseoperator` |
-+-------------+-------------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/ShouldUseOperator |
++-------------+------------------------------+
+| Rulesets    | :ref:`Suggestions`           |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Structures/ShouldUseOperator |
++-------------+------------------------------+
 
 
 
@@ -24999,17 +25487,17 @@ Suggestions
 * Use an Active Record library
 * Change the query to hard code it and make it not injectable
 
-+-------------+-----------------------------------------------------+
-| Short name  | Security/ShouldUsePreparedStatement                 |
-+-------------+-----------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                     |
-+-------------+-----------------------------------------------------+
-| Severity    | Major                                               |
-+-------------+-----------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                       |
-+-------------+-----------------------------------------------------+
-| Examples    | :ref:`dolibarr-security-shouldusepreparedstatement` |
-+-------------+-----------------------------------------------------+
++-------------+-------------------------------------+
+| Short name  | Security/ShouldUsePreparedStatement |
++-------------+-------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`     |
++-------------+-------------------------------------+
+| Severity    | Major                               |
++-------------+-------------------------------------+
+| Time To Fix | Slow (1 hour)                       |
++-------------+-------------------------------------+
+| Examples    | Security/ShouldUsePreparedStatement |
++-------------+-------------------------------------+
 
 
 
@@ -25054,7 +25542,7 @@ Suggestions
 +-------------+------------------+
 | Severity    | Major            |
 +-------------+------------------+
-| Time To Fix | Instant (5 mins) |
+| Time To Fix | Php/UseSetCookie |
 +-------------+------------------+
 
 
@@ -25101,7 +25589,7 @@ See also `[blog] `array_column() <https://www.php.net/array_column>`_ <https://b
 +-------------+-----------------------------------------+
 | Severity    | Minor                                   |
 +-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
+| Time To Fix | Php/ShouldUseArrayColumn                |
 +-------------+-----------------------------------------+
 
 
@@ -25152,17 +25640,17 @@ Suggestions
 
 * Use array_filter()
 
-+-------------+------------------------------------------------------------------------------------+
-| Short name  | Php/ShouldUseArrayFilter                                                           |
-+-------------+------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                 |
-+-------------+------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                              |
-+-------------+------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                      |
-+-------------+------------------------------------------------------------------------------------+
-| Examples    | :ref:`xataface-php-shouldusearrayfilter`, :ref:`shopware-php-shouldusearrayfilter` |
-+-------------+------------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Php/ShouldUseArrayFilter |
++-------------+--------------------------+
+| Rulesets    | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Slow (1 hour)            |
++-------------+--------------------------+
+| Examples    | Php/ShouldUseArrayFilter |
++-------------+--------------------------+
 
 
 
@@ -25213,7 +25701,7 @@ Suggestions
 +-------------+---------------------------------------+
 | Severity    | Major                                 |
 +-------------+---------------------------------------+
-| Time To Fix | Slow (1 hour)                         |
+| Time To Fix | Security/ShouldUseSessionRegenerateId |
 +-------------+---------------------------------------+
 
 
@@ -25303,7 +25791,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
+| Time To Fix | Functions/ShouldYieldWithKey |
 +-------------+------------------------------+
 
 
@@ -25357,7 +25845,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Php/SignatureTrailingComma                                                                                 |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -25409,17 +25897,17 @@ Suggestions
 
 * Make sure hexadecimal numbers have the right number of digits : generally, it is 15, but it may depends on your PHP version.
 
-+-------------+-------------------------------------------+
-| Short name  | Type/SilentlyCastInteger                  |
-+-------------+-------------------------------------------+
-| Rulesets    | :ref:`Analyze`                            |
-+-------------+-------------------------------------------+
-| Severity    | Minor                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`mediawiki-type-silentlycastinteger` |
-+-------------+-------------------------------------------+
++-------------+--------------------------+
+| Short name  | Type/SilentlyCastInteger |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Type/SilentlyCastInteger |
++-------------+--------------------------+
 
 
 
@@ -25468,7 +25956,7 @@ Suggestions
 +-------------+------------------------------------------------------------------+
 | Severity    | Minor                                                            |
 +-------------+------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                  |
+| Time To Fix | Type/SimilarIntegers                                             |
 +-------------+------------------------------------------------------------------+
 
 
@@ -25505,7 +25993,7 @@ The global keyword should only be used with simple variables. Since PHP 7, it ca
 +-------------+---------------------------------+
 | Severity    | Critical                        |
 +-------------+---------------------------------+
-| Time To Fix | Slow (1 hour)                   |
+| Time To Fix | Php/GlobalWithoutSimpleVariable |
 +-------------+---------------------------------+
 
 
@@ -25558,6 +26046,13 @@ Since PHP 7.2, simple switches that use only strings or integers are optimized. 
 
 See also `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Split the switch between literal and dynamic cases
+* Remove the dynamic cases from the switch
+
 +-------------+------------------------------+
 | Short name  | Performances/SimpleSwitch    |
 +-------------+------------------------------+
@@ -25567,7 +26062,7 @@ See also `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-swit
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Performances/SimpleSwitch    |
 +-------------+------------------------------+
 
 
@@ -25603,17 +26098,17 @@ Suggestions
 
 * Use str_replace(), strtr() or even strpos()
 
-+-------------+---------------------------------------------------------------------------+
-| Short name  | Structures/SimplePreg                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`                                                       |
-+-------------+---------------------------------------------------------------------------+
-| Severity    | Major                                                                     |
-+-------------+---------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                           |
-+-------------+---------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-structures-simplepreg`, :ref:`openconf-structures-simplepreg` |
-+-------------+---------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Structures/SimplePreg |
++-------------+-----------------------+
+| Rulesets    | :ref:`Performances`   |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Examples    | Structures/SimplePreg |
++-------------+-----------------------+
 
 
 
@@ -25655,7 +26150,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Time To Fix | Quick (30 mins)                         |
 +-------------+-----------------------------------------+
-| Examples    | :ref:`wordpress-arrays-slicefirst`      |
+| Examples    | Arrays/SliceFirst                       |
 +-------------+-----------------------------------------+
 
 
@@ -25727,7 +26222,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-performances-slowfunctions`, :ref:`suitecrm-performances-slowfunctions`                             |
+| Examples    | Performances/SlowFunctions                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 
 
@@ -25759,6 +26254,13 @@ Quote from the PHP manual comments : ``The reason this function doesn't escape d
 
 See also `SQLite3\:\:escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use prepared statements whenever possible
+* Switch the query to use single quote
+
 +-------------+--------------------------------------+
 | Short name  | Security/Sqlite3RequiresSingleQuotes |
 +-------------+--------------------------------------+
@@ -25766,7 +26268,7 @@ See also `SQLite3\:\:escapeString <http://php.net/manual/en/sqlite3.escapestring
 +-------------+--------------------------------------+
 | Severity    | Major                                |
 +-------------+--------------------------------------+
-| Time To Fix | Slow (1 hour)                        |
+| Time To Fix | Security/Sqlite3RequiresSingleQuotes |
 +-------------+--------------------------------------+
 
 
@@ -25825,7 +26327,7 @@ Suggestions
 +-------------+-----------------------+
 | Severity    | Minor                 |
 +-------------+-----------------------+
-| Time To Fix | Slow (1 hour)         |
+| Time To Fix | Structures/StaticLoop |
 +-------------+-----------------------+
 
 
@@ -25862,7 +26364,7 @@ To maintain code readability, it is recommended to call static method in a stati
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
+| Time To Fix | Classes/StaticMethodsCalledFromObject |
 +-------------+---------------------------------------+
 
 
@@ -25917,7 +26419,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------+
-| Examples    | :ref:`xataface-classes-staticcontainsthis`, :ref:`sugarcrm-classes-staticcontainsthis`      |
+| Examples    | Classes/StaticContainsThis                                                                  |
 +-------------+---------------------------------------------------------------------------------------------+
 
 
@@ -25958,7 +26460,7 @@ Suggestions
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Slow (1 hour)                  |
+| Time To Fix | Constants/StrangeName          |
 +-------------+--------------------------------+
 
 
@@ -26008,17 +26510,17 @@ Suggestions
 * Rename the variable to something better
 * Drop the variable
 
-+-------------+----------------------------------------------------------------------------+
-| Short name  | Variables/StrangeName                                                      |
-+-------------+----------------------------------------------------------------------------+
-| Rulesets    | none                                                                       |
-+-------------+----------------------------------------------------------------------------+
-| Severity    | Minor                                                                      |
-+-------------+----------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                              |
-+-------------+----------------------------------------------------------------------------+
-| Examples    | :ref:`fuelcms-variables-strangename`, :ref:`phpipam-variables-strangename` |
-+-------------+----------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Variables/StrangeName |
++-------------+-----------------------+
+| Rulesets    | none                  |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Slow (1 hour)         |
++-------------+-----------------------+
+| Examples    | Variables/StrangeName |
++-------------+-----------------------+
 
 
 
@@ -26074,17 +26576,17 @@ Suggestions
 
 * Use strict comparison whenever possible
 
-+-------------+--------------------------------------------------------------------------------------------------+
-| Short name  | Structures/BooleanStrictComparison                                                               |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                               |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                            |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                  |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phinx-structures-booleanstrictcomparison`, :ref:`typo3-structures-booleanstrictcomparison` |
-+-------------+--------------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Structures/BooleanStrictComparison |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | Structures/BooleanStrictComparison |
++-------------+------------------------------------+
 
 
 
@@ -26132,7 +26634,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Arrays/StringInitialization |
 +-------------+-----------------------------+
 
 
@@ -26182,7 +26684,7 @@ However, there are some potential variables in those strings, making it possible
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Instant (5 mins)         |
+| Time To Fix | Type/StringHoldAVariable |
 +-------------+--------------------------+
 
 
@@ -26224,17 +26726,17 @@ Suggestions
 * Replace the odd spaces with a normal space
 * If unsecable spaces are important for presentation, add them at the templating level.
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Type/StringWithStrangeSpace                                                           |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                        |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                       |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`openemr-type-stringwithstrangespace`, :ref:`thelia-type-stringwithstrangespace` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+-----------------------------+
+| Short name  | Type/StringWithStrangeSpace |
++-------------+-----------------------------+
+| Rulesets    | :ref:`Analyze`              |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Quick (30 mins)             |
++-------------+-----------------------------+
+| Examples    | Type/StringWithStrangeSpace |
++-------------+-----------------------------+
 
 
 
@@ -26319,7 +26821,7 @@ See also `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`piwigo-structures-strposcompare`, :ref:`thelia-structures-strposcompare`                      |
+| Examples    | Structures/StrposCompare                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -26362,17 +26864,17 @@ Suggestions
 * Replace strtr() with str_replace(), which works with strings and array, not chars
 * Replace strtr() with preg_match(), which works with patterns and not chars
 
-+-------------+------------------------------------+
-| Short name  | Php/StrtrArguments                 |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`                     |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Instant (5 mins)                   |
-+-------------+------------------------------------+
-| Examples    | :ref:`suitecrm-php-strtrarguments` |
-+-------------+------------------------------------+
++-------------+--------------------+
+| Short name  | Php/StrtrArguments |
++-------------+--------------------+
+| Rulesets    | :ref:`Analyze`     |
++-------------+--------------------+
+| Severity    | Major              |
++-------------+--------------------+
+| Time To Fix | Instant (5 mins)   |
++-------------+--------------------+
+| Examples    | Php/StrtrArguments |
++-------------+--------------------+
 
 
 
@@ -26424,7 +26926,7 @@ Suggestions
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Structures/SubstrToTrim |
 +-------------+-------------------------+
 
 
@@ -26460,17 +26962,17 @@ Suggestions
 
 * Always reduce the string first, then apply some transformation
 
-+-------------+----------------------------------------------------------------------------------+
-| Short name  | Performances/SubstrFirst                                                         |
-+-------------+----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`, :ref:`Suggestions`, :ref:`Top10`                            |
-+-------------+----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                 |
-+-------------+----------------------------------------------------------------------------------+
-| Examples    | :ref:`spip-performances-substrfirst`, :ref:`prestashop-performances-substrfirst` |
-+-------------+----------------------------------------------------------------------------------+
++-------------+-------------------------------------------------------+
+| Short name  | Performances/SubstrFirst                              |
++-------------+-------------------------------------------------------+
+| Rulesets    | :ref:`Performances`, :ref:`Suggestions`, :ref:`Top10` |
++-------------+-------------------------------------------------------+
+| Severity    | Minor                                                 |
++-------------+-------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                      |
++-------------+-------------------------------------------------------+
+| Examples    | Performances/SubstrFirst                              |
++-------------+-------------------------------------------------------+
 
 
 
@@ -26512,17 +27014,17 @@ Suggestions
 * Move the comparison to its right place : that, or more the parenthesis.
 * This may be what is intended : just leave it.
 
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/SuspiciousComparison                                                                         |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                          |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                   |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                        |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpipam-structures-suspiciouscomparison`, :ref:`expressionengine-structures-suspiciouscomparison` |
-+-------------+---------------------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/SuspiciousComparison |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Major                           |
++-------------+---------------------------------+
+| Time To Fix | Instant (5 mins)                |
++-------------+---------------------------------+
+| Examples    | Structures/SuspiciousComparison |
++-------------+---------------------------------+
 
 
 
@@ -26545,7 +27047,7 @@ When the case block is empty, this analysis doesn't report it : the case is then
 
    <?php
    switch($variable) {
-       case 1 :   // 1 is not reported, as it actually shares the same body as 33
+       case 1 :   // case 1 is not reported, as it actually shares the same body as case 33
        case 33 :  
            break ;
        case 2 : 
@@ -26558,9 +27060,15 @@ When the case block is empty, this analysis doesn't report it : the case is then
    ?>
 
 
-This analysis cannot take into account comments about the fallthrough. 
+This analysis doesn't take into account comments about the fallthrough. 
 
 See also `CWE-484: Omitted `Break <http://www.php.net/manual/en/control-structures.break.php>`_ Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_ and `Rule: no-switch-case-fall-through <https://palantir.github.io/tslint/rules/no-switch-case-fall-through/>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make separate code for each case. Always use break at the end of a case or default.
 
 +-------------+------------------------+
 | Short name  | Structures/Fallthrough |
@@ -26569,7 +27077,7 @@ See also `CWE-484: Omitted `Break <http://www.php.net/manual/en/control-structur
 +-------------+------------------------+
 | Severity    | Minor                  |
 +-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
+| Time To Fix | Structures/Fallthrough |
 +-------------+------------------------+
 
 
@@ -26638,17 +27146,17 @@ Suggestions
 
 * Use a simple switch statement, rather than a long string of if/else
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Structures/SwitchToSwitch                                                       |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                  |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Minor                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                 |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`thelia-structures-switchtoswitch`, :ref:`xoops-structures-switchtoswitch` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Structures/SwitchToSwitch |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Examples    | Structures/SwitchToSwitch |
++-------------+---------------------------+
 
 
 
@@ -26698,7 +27206,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Structures/SwitchWithMultipleDefault                                                                       |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -26773,7 +27281,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-switch-without-default <https://github.com/dseguy/clearPHP/tree/master/rules/no-switch-without-default.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zencart-structures-switchwithoutdefault`, :ref:`traq-structures-switchwithoutdefault`                       |
+| Examples    | Structures/SwitchWithoutDefault                                                                                   |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
 
 
@@ -26813,17 +27321,17 @@ Suggestions
 * Use parenthesis 
 * Avoid ternaries and coalesce operators inside a string
 
-+-------------+--------------------------------------------+
-| Short name  | Structures/TernaryInConcat                 |
-+-------------+--------------------------------------------+
-| Rulesets    | :ref:`Analyze`                             |
-+-------------+--------------------------------------------+
-| Severity    | Critical                                   |
-+-------------+--------------------------------------------+
-| Time To Fix | Quick (30 mins)                            |
-+-------------+--------------------------------------------+
-| Examples    | :ref:`teampass-structures-ternaryinconcat` |
-+-------------+--------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/TernaryInConcat |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Critical                   |
++-------------+----------------------------+
+| Time To Fix | Quick (30 mins)            |
++-------------+----------------------------+
+| Examples    | Structures/TernaryInConcat |
++-------------+----------------------------+
 
 
 
@@ -26863,17 +27371,17 @@ Suggestions
 
 * Test with the cast value
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Structures/TestThenCast                                                         |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                  |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Major                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`dolphin-structures-testthencast`, :ref:`suitecrm-structures-testthencast` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/TestThenCast |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Instant (5 mins)        |
++-------------+-------------------------+
+| Examples    | Structures/TestThenCast |
++-------------+-------------------------+
 
 
 
@@ -26913,17 +27421,17 @@ Suggestions
 * Add the new operator to the call
 * Make sure the function is really a functioncall, not a class name
 
-+-------------+-----------------------------------------------------------------------------------------+
-| Short name  | Exceptions/ThrowFunctioncall                                                            |
-+-------------+-----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                          |
-+-------------+-----------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                   |
-+-------------+-----------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                        |
-+-------------+-----------------------------------------------------------------------------------------+
-| Examples    | :ref:`sugarcrm-exceptions-throwfunctioncall`, :ref:`zurmo-exceptions-throwfunctioncall` |
-+-------------+-----------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Exceptions/ThrowFunctioncall |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Exceptions/ThrowFunctioncall |
++-------------+------------------------------+
 
 
 
@@ -26973,8 +27481,50 @@ See also `Constructors and Destructors <http://php.net/manual/en/language.oop5.d
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Classes/ThrowInDestruct |
 +-------------+-------------------------+
+
+
+
+.. _throw-was-an-expression:
+
+Throw Was An Expression
+#######################
+
+
+Throw used to be an expression. In PHP 7.0, there were some location where one couldn't use a throw : this was the case for arrow functions, which expect one expression as function's body. 
+
+Using throw as an instruction makes the code incompatible with PHP 7 version and older. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Valid in PHP 8.0 and more recent
+   $fn = fn($a) => throw new Exception($a);
+   
+   ?>
+
+
+See also `Throw Expression <https://wiki.php.net/rfc/throw_expression>`_ and `Exceptions <https://www.php.net/manual/en/language.exceptions.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------------------------------------------------------------+
+| Short name  | Php/ThrowWasAnExpression                                                        |
++-------------+---------------------------------------------------------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP74` |
++-------------+---------------------------------------------------------------------------------+
+| Php Version | 8.0+                                                                            |
++-------------+---------------------------------------------------------------------------------+
+| Severity    | Major                                                                           |
++-------------+---------------------------------------------------------------------------------+
+| Time To Fix | Php/ThrowWasAnExpression                                                        |
++-------------+---------------------------------------------------------------------------------+
 
 
 
@@ -27017,7 +27567,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
+| Time To Fix | Structures/ThrowsAndAssign |
 +-------------+----------------------------+
 
 
@@ -27060,17 +27610,17 @@ Suggestions
 * For small time intervals, use hrtime() functions
 * For larger time intervals, use add() method with ``DateTime``
 
-+-------------+---------------------------------------------------------------------------------------------+
-| Short name  | Structures/TimestampDifference                                                              |
-+-------------+---------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                              |
-+-------------+---------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                       |
-+-------------+---------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                               |
-+-------------+---------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-structures-timestampdifference`, :ref:`shopware-structures-timestampdifference` |
-+-------------+---------------------------------------------------------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Structures/TimestampDifference |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Severity    | Major                          |
++-------------+--------------------------------+
+| Time To Fix | Slow (1 hour)                  |
++-------------+--------------------------------+
+| Examples    | Structures/TimestampDifference |
++-------------+--------------------------------+
 
 
 
@@ -27103,11 +27653,11 @@ Suggestions
 
 *
 
-+---------------+---------+---------+-----------------------------------------+
-| Name          | Default | Type    | Description                             |
-+---------------+---------+---------+-----------------------------------------+
-| maxDimensions | 3       | integer | Number of valid dimensions in an array. |
-+---------------+---------+---------+-----------------------------------------+
++---------------+---------+---------+-------------+
+| Name          | Default | Type    | Description |
++---------------+---------+---------+-------------+
+| maxDimensions | 3       | integer | Description |
++---------------+---------+---------+-------------+
 
 
 
@@ -27118,7 +27668,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Arrays/TooManyDimensions |
 +-------------+--------------------------+
 
 
@@ -27168,25 +27718,25 @@ The analysis doesn't work recursively : only direct generations are counted. Onl
 
 See also `Why is subclassing too much bad (and hence why should we use prototypes to do away with it)? <https://softwareengineering.stackexchange.com/questions/137687/why-is-subclassing-too-much-bad-and-hence-why-should-we-use-prototypes-to-do-aw>`_.
 
-+--------------------+---------+---------+--------------------------------------------------------+
-| Name               | Default | Type    | Description                                            |
-+--------------------+---------+---------+--------------------------------------------------------+
-| childrenClassCount | 15      | integer | Threshold for too many children classes for one class. |
-+--------------------+---------+---------+--------------------------------------------------------+
++--------------------+---------+---------+-------------+
+| Name               | Default | Type    | Description |
++--------------------+---------+---------+-------------+
+| childrenClassCount | 15      | integer | Description |
++--------------------+---------+---------+-------------+
 
 
 
-+-------------+----------------------------------------------------------------------------------+
-| Short name  | Classes/TooManyChildren                                                          |
-+-------------+----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                               |
-+-------------+----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                    |
-+-------------+----------------------------------------------------------------------------------+
-| Examples    | :ref:`typo3-classes-toomanychildren`, :ref:`woocommerce-classes-toomanychildren` |
-+-------------+----------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Classes/TooManyChildren |
++-------------+-------------------------+
+| Rulesets    | :ref:`Suggestions`      |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Slow (1 hour)           |
++-------------+-------------------------+
+| Examples    | Classes/TooManyChildren |
++-------------+-------------------------+
 
 
 
@@ -27221,11 +27771,11 @@ Suggestions
 
 *
 
-+----------------------+---------+---------+----------------------------------+
-| Name                 | Default | Type    | Description                      |
-+----------------------+---------+---------+----------------------------------+
-| tooManyDereferencing | 7       | integer | Maximum number of dereferencing. |
-+----------------------+---------+---------+----------------------------------+
++----------------------+---------+---------+-------------+
+| Name                 | Default | Type    | Description |
++----------------------+---------+---------+-------------+
+| tooManyDereferencing | 7       | integer | Description |
++----------------------+---------+---------+-------------+
 
 
 
@@ -27236,7 +27786,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Classes/TooManyDereferencing |
 +-------------+------------------------------+
 
 
@@ -27278,7 +27828,7 @@ See also `On Taming Repository Classes in Doctrine <https://beberlei.de/2013/03/
 +-------------+----------------------+
 | Severity    | Minor                |
 +-------------+----------------------+
-| Time To Fix | Slow (1 hour)        |
+| Time To Fix | Classes/TooManyFinds |
 +-------------+----------------------+
 
 
@@ -27324,25 +27874,25 @@ Suggestions
 
 * Split the class into smaller classes. Try to do less in that class.
 
-+-----------------+---------+---------+-----------------------------------------------------------+
-| Name            | Default | Type    | Description                                               |
-+-----------------+---------+---------+-----------------------------------------------------------+
-| injectionsCount | 5       | integer | Threshold for too many injected parameters for one class. |
-+-----------------+---------+---------+-----------------------------------------------------------+
++-----------------+---------+---------+-------------+
+| Name            | Default | Type    | Description |
++-----------------+---------+---------+-------------+
+| injectionsCount | 5       | integer | Description |
++-----------------+---------+---------+-------------+
 
 
 
-+-------------+-------------------------------------------------------------------------------------+
-| Short name  | Classes/TooManyInjections                                                           |
-+-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                      |
-+-------------+-------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                       |
-+-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`nextcloud-classes-toomanyinjections`, :ref:`thelia-classes-toomanyinjections` |
-+-------------+-------------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Classes/TooManyInjections |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+| Examples    | Classes/TooManyInjections |
++-------------+---------------------------+
 
 
 
@@ -27428,25 +27978,25 @@ Suggestions
 * Break the big function into smaller ones
 * Find repeated code and make it a separate function
 
-+-------------------------------+---------+---------+------------------------------------------------------------------+
-| Name                          | Default | Type    | Description                                                      |
-+-------------------------------+---------+---------+------------------------------------------------------------------+
-| tooManyLocalVariableThreshold | 15      | integer | Minimal number of variables in one function or method to report. |
-+-------------------------------+---------+---------+------------------------------------------------------------------+
++-------------------------------+---------+---------+-------------+
+| Name                          | Default | Type    | Description |
++-------------------------------+---------+---------+-------------+
+| tooManyLocalVariableThreshold | 15      | integer | Description |
++-------------------------------+---------+---------+-------------+
 
 
 
-+-------------+-------------------------------------------------+
-| Short name  | Functions/TooManyLocalVariables                 |
-+-------------+-------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                  |
-+-------------+-------------------------------------------------+
-| Severity    | Minor                                           |
-+-------------+-------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                   |
-+-------------+-------------------------------------------------+
-| Examples    | :ref:`humo-gen-functions-toomanylocalvariables` |
-+-------------+-------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Functions/TooManyLocalVariables |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Slow (1 hour)                   |
++-------------+---------------------------------+
+| Examples    | Functions/TooManyLocalVariables |
++-------------+---------------------------------+
 
 
 
@@ -27483,25 +28033,25 @@ This analysis reports any situation where more than 3 PHP native calls are neste
    
    ?>
 
-+------------------+---------+---------+---------------------------------------------------+
-| Name             | Default | Type    | Description                                       |
-+------------------+---------+---------+---------------------------------------------------+
-| nativeCallCounts | 3       | integer | Number of native calls found inside another call. |
-+------------------+---------+---------+---------------------------------------------------+
++------------------+---------+---------+-------------+
+| Name             | Default | Type    | Description |
++------------------+---------+---------+-------------+
+| nativeCallCounts | 3       | integer | Description |
++------------------+---------+---------+-------------+
 
 
 
-+-------------+------------------------------------+
-| Short name  | Php/TooManyNativeCalls             |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`                     |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
-| Examples    | :ref:`spip-php-toomanynativecalls` |
-+-------------+------------------------------------+
++-------------+------------------------+
+| Short name  | Php/TooManyNativeCalls |
++-------------+------------------------+
+| Rulesets    | :ref:`Analyze`         |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Quick (30 mins)        |
++-------------+------------------------+
+| Examples    | Php/TooManyNativeCalls |
++-------------+------------------------+
 
 
 
@@ -27529,21 +28079,21 @@ A method that needs more than 8 parameters is trying to do too much : it should 
 
 See also `How many parameters is too many ? <https://www.exakat.io/how-many-parameters-is-too-many/>`_ and `Too Many Parameters <http://wiki.c2.com/?TooManyParameters>`_.
 
-+-----------------+---------+---------+-----------------------------------------+
-| Name            | Default | Type    | Description                             |
-+-----------------+---------+---------+-----------------------------------------+
-| parametersCount | 8       | integer | Minimal number of parameters to report. |
-+-----------------+---------+---------+-----------------------------------------+
++-----------------+---------+---------+-------------+
+| Name            | Default | Type    | Description |
++-----------------+---------+---------+-------------+
+| parametersCount | 8       | integer | Description |
++-----------------+---------+---------+-------------+
 
 
 
-+------------+--------------------------------------------------------------------------------------------+
-| Short name | Functions/TooManyParameters                                                                |
-+------------+--------------------------------------------------------------------------------------------+
-| Rulesets   | :ref:`Suggestions`                                                                         |
-+------------+--------------------------------------------------------------------------------------------+
-| Examples   | :ref:`wordpress-functions-toomanyparameters`, :ref:`churchcrm-functions-toomanyparameters` |
-+------------+--------------------------------------------------------------------------------------------+
++------------+-----------------------------+
+| Short name | Functions/TooManyParameters |
++------------+-----------------------------+
+| Rulesets   | :ref:`Suggestions`          |
++------------+-----------------------------+
+| Examples   | Functions/TooManyParameters |
++------------+-----------------------------+
 
 
 
@@ -27587,7 +28137,7 @@ See also `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.ne
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                             |
+| Time To Fix | Php/TrailingComma                                                                                                                                                                           |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -27634,7 +28184,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Traits/TraitNotFound                   |
 +-------------+----------------------------------------+
 
 
@@ -27679,7 +28229,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
+| Time To Fix | Php/TypedPropertyUsage                                                                                                                                                                                                 |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -27722,7 +28272,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Functions/TypehintMustBeReturned       |
 +-------------+----------------------------------------+
 
 
@@ -27778,7 +28328,7 @@ Suggestions
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Instant (5 mins)               |
+| Time To Fix | Functions/TypehintedReferences |
 +-------------+--------------------------------+
 
 
@@ -27834,7 +28384,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Functions/UnbindingClosures |
 +-------------+-----------------------------+
 
 
@@ -27885,7 +28435,7 @@ Suggestions
 +-------------+-------------------------------+
 | Severity    | Minor                         |
 +-------------+-------------------------------+
-| Time To Fix | Quick (30 mins)               |
+| Time To Fix | Exceptions/UncaughtExceptions |
 +-------------+-------------------------------+
 
 
@@ -27931,17 +28481,17 @@ Always check that resources are correctly created before using them.
 
 See also `resources <http://php.net/manual/en/language.types.resource.php>`_.
 
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/UncheckedResources                                                                               |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                              |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                       |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                               |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-unchecked-resources <https://github.com/dseguy/clearPHP/tree/master/rules/no-unchecked-resources.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Structures/UncheckedResources |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Major                         |
++-------------+-------------------------------+
+| Time To Fix | Slow (1 hour)                 |
++-------------+-------------------------------+
+| ClearPHP    | Structures/UncheckedResources |
++-------------+-------------------------------+
 
 
 
@@ -27991,17 +28541,17 @@ Suggestions
 
 * Remove the loop and call the content of the loop once.
 
-+-------------+----------------------------------------------------------------------------------------------------+
-| Short name  | Structures/UnconditionLoopBreak                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                     |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                              |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`livezilla-structures-unconditionloopbreak`, :ref:`mediawiki-structures-unconditionloopbreak` |
-+-------------+----------------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/UnconditionLoopBreak |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Major                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Structures/UnconditionLoopBreak |
++-------------+---------------------------------+
 
 
 
@@ -28039,7 +28589,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Classes/UndefinedStaticclass |
 +-------------+------------------------------+
 
 
@@ -28079,7 +28629,7 @@ They may be externally defined, such as in core PHP, extensions or libraries. Ma
 +------------+-------------------------------+
 | Short name | Exceptions/CaughtButNotThrown |
 +------------+-------------------------------+
-| Rulesets   | :ref:`Dead code <dead-code>`  |
+| Rulesets   | Exceptions/CaughtButNotThrown |
 +------------+-------------------------------+
 
 
@@ -28122,7 +28672,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Major                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Classes/UndefinedConstants |
 +-------------+----------------------------+
 
 
@@ -28165,7 +28715,7 @@ or if some external libraries, such as PEAR, are not provided during the analysi
 +-------------+--------------------------+
 | Severity    | Major                    |
 +-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
+| Time To Fix | Classes/UndefinedClasses |
 +-------------+--------------------------+
 
 
@@ -28214,7 +28764,7 @@ Suggestions
 +-------------+-----------------------------------------------------------+
 | Severity    | Minor                                                     |
 +-------------+-----------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                           |
+| Time To Fix | Constants/UndefinedConstants                              |
 +-------------+-----------------------------------------------------------+
 
 
@@ -28262,7 +28812,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Functions/UndefinedFunctions |
 +-------------+------------------------------+
 
 
@@ -28318,7 +28868,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Instant (5 mins)                       |
+| Time To Fix | Traits/UndefinedInsteadof              |
 +-------------+----------------------------------------+
 
 
@@ -28360,17 +28910,17 @@ Suggestions
 * Implement the missing interfaces
 * Remove the code governed by the missing interface : the whole method if it is an typehint, the whole if/then if it is a condition.
 
-+-------------+------------------------------------------------+
-| Short name  | Interfaces/UndefinedInterfaces                 |
-+-------------+------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                 |
-+-------------+------------------------------------------------+
-| Severity    | Major                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
-+-------------+------------------------------------------------+
-| Examples    | :ref:`xataface-interfaces-undefinedinterfaces` |
-+-------------+------------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Interfaces/UndefinedInterfaces |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Severity    | Major                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
+| Examples    | Interfaces/UndefinedInterfaces |
++-------------+--------------------------------+
 
 
 
@@ -28429,7 +28979,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Classes/UndefinedParentMP |
 +-------------+---------------------------+
 
 
@@ -28497,7 +29047,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-classes-undefinedproperty`, :ref:`mediawiki-classes-undefinedproperty`                        |
+| Examples    | Classes/UndefinedProperty                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 
 
@@ -28549,7 +29099,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Critical                               |
 +-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
+| Time To Fix | Traits/UndefinedTrait                  |
 +-------------+----------------------------------------+
 
 
@@ -28599,7 +29149,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
+| Time To Fix | Variables/UndefinedVariable |
 +-------------+-----------------------------+
 
 
@@ -28643,17 +29193,17 @@ Suggestions
 * Remove usage of that undefined method or property
 * Fix name to call an actual local structure
 
-+-------------+--------------------------------------------------------------------------------------+
-| Short name  | Classes/UndefinedStaticMP                                                            |
-+-------------+--------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                       |
-+-------------+--------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                |
-+-------------+--------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                      |
-+-------------+--------------------------------------------------------------------------------------+
-| Examples    | :ref:`xataface-classes-undefinedstaticmp`, :ref:`sugarcrm-classes-undefinedstaticmp` |
-+-------------+--------------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Classes/UndefinedStaticMP |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Examples    | Classes/UndefinedStaticMP |
++-------------+---------------------------+
 
 
 
@@ -28694,7 +29244,7 @@ Is is recommended to check all those strings, and make sure they will behave cor
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Php/UnicodeEscapePartial                                                                                   |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -28731,7 +29281,7 @@ See also `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/uni
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                              |
+| Time To Fix | Php/UnicodeEscapeSyntax                                                                                    |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -28780,7 +29330,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Classes/UninitedProperty |
 +-------------+--------------------------+
 
 
@@ -28833,7 +29383,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                       |
+| Time To Fix | Php/Php80UnionTypehint                                                                                                                |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -28875,17 +29425,17 @@ Suggestions
 
 * Add an explicit initialization for each property.
 
-+-------------+-------------------------------------------+
-| Short name  | Classes/UnitializedProperties             |
-+-------------+-------------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`Top10`          |
-+-------------+-------------------------------------------+
-| Severity    | Major                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
-+-------------+-------------------------------------------+
-| Examples    | :ref:`spip-classes-unitializedproperties` |
-+-------------+-------------------------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/UnitializedProperties    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`Top10` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Classes/UnitializedProperties    |
++-------------+----------------------------------+
 
 
 
@@ -28921,7 +29471,7 @@ See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.mod
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Instant (5 mins)                          |
+| Time To Fix | Php/UnknownPcre2Option                    |
 +-------------+-------------------------------------------+
 
 
@@ -28958,7 +29508,7 @@ See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.mod
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
+| Time To Fix | Structures/UnknownPregOption |
 +-------------+------------------------------+
 
 
@@ -29003,9 +29553,11 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Rulesets    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Php Version | 7.4+                                                                                                                                                                                                                   |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                                                                                                        |
+| Time To Fix | Php/UnpackingInsideArrays                                                                                                                                                                                              |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -29069,7 +29621,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP    | `always-preprocess <https://github.com/dseguy/clearPHP/tree/master/rules/always-preprocess.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-structures-unpreprocessed`, :ref:`piwigo-structures-unpreprocessed`                   |
+| Examples    | Structures/Unpreprocessed                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -29119,7 +29671,7 @@ Suggestions
 +-------------+-----------------------------+
 | Severity    | Major                       |
 +-------------+-----------------------------+
-| Time To Fix | Slow (1 hour)               |
+| Time To Fix | Classes/UnreachableConstant |
 +-------------+-----------------------------+
 
 
@@ -29175,17 +29727,17 @@ For example, it be located after throw, return, `exit() <https://www.php.net/`ex
 
 This is dead code, that may be removed.
 
-+-------------+-----------------------------------------------------------------------------------------+
-| Short name  | Structures/UnreachableCode                                                              |
-+-------------+-----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Suggestions`                                        |
-+-------------+-----------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                   |
-+-------------+-----------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                        |
-+-------------+-----------------------------------------------------------------------------------------+
-| ClearPHP    | `no-dead-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-dead-code.md>`__ |
-+-------------+-----------------------------------------------------------------------------------------+
++-------------+--------------------------------------------------+
+| Short name  | Structures/UnreachableCode                       |
++-------------+--------------------------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
++-------------+--------------------------------------------------+
+| Severity    | Major                                            |
++-------------+--------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                 |
++-------------+--------------------------------------------------+
+| ClearPHP    | Structures/UnreachableCode                       |
++-------------+--------------------------------------------------+
 
 
 
@@ -29214,17 +29766,28 @@ Catch clauses check that the emitted expression is of the requested Class, but i
    }
    ?>
 
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Short name  | Classes/UnresolvedCatch                                                                               |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>`                                                                          |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                 |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                       |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-unresolved-catch <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-catch.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------------------+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the name of the exception
+* Remove the catch clause
+* Add a use expression with a valid name
+* Create/import the missing exception
+
++-------------+------------------------------+
+| Short name  | Classes/UnresolvedCatch      |
++-------------+------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| ClearPHP    | Classes/UnresolvedCatch      |
++-------------+------------------------------+
 
 
 
@@ -29264,7 +29827,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Classes/UnresolvedClasses |
 +-------------+---------------------------+
 
 
@@ -29325,7 +29888,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-unresolved-instanceof <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-instanceof.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-classes-unresolvedinstanceof`                                                                   |
+| Examples    | Classes/UnresolvedInstanceof                                                                                    |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 
 
@@ -29372,17 +29935,17 @@ Suggestions
 * Remove the use expression
 * Fix the use expression
 
-+-------------+---------------------------------------------------------------------------------------------------+
-| Short name  | Namespaces/UnresolvedUse                                                                          |
-+-------------+---------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                    |
-+-------------+---------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                             |
-+-------------+---------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                     |
-+-------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-unresolved-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-use.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Namespaces/UnresolvedUse |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Slow (1 hour)            |
++-------------+--------------------------+
+| ClearPHP    | Namespaces/UnresolvedUse |
++-------------+--------------------------+
 
 
 
@@ -29428,19 +29991,19 @@ Suggestions
 
 * Add a list of class as second argument of any call to unserialize(). This is valid for PHP 7.0 and later.
 
-+-------------+---------------------------------------------------------------------------------------------+
-| Short name  | Security/UnserializeSecondArg                                                               |
-+-------------+---------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Security`                                                                             |
-+-------------+---------------------------------------------------------------------------------------------+
-| Php Version | With PHP 7.0 and more recent                                                                |
-+-------------+---------------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                                    |
-+-------------+---------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                             |
-+-------------+---------------------------------------------------------------------------------------------+
-| Examples    | :ref:`piwigo-security-unserializesecondarg`, :ref:`livezilla-security-unserializesecondarg` |
-+-------------+---------------------------------------------------------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Security/UnserializeSecondArg |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Security`               |
++-------------+-------------------------------+
+| Php Version | With PHP 7.0 and more recent  |
++-------------+-------------------------------+
+| Severity    | Critical                      |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+| Examples    | Security/UnserializeSecondArg |
++-------------+-------------------------------+
 
 
 
@@ -29496,7 +30059,7 @@ Suggestions
 +-------------+----------------------------------------------+
 | Severity    | Major                                        |
 +-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
+| Time To Fix | Structures/UnsetInForeach                    |
 +-------------+----------------------------------------------+
 
 
@@ -29526,17 +30089,17 @@ These are exceptions that are defined in the code but never thrown.
 
 See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Short name  | Exceptions/Unthrown                                                                                         |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                       |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                             |
-+-------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-unthrown-exceptions <https://github.com/dseguy/clearPHP/tree/master/rules/no-unthrown-exceptions.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------------------------+
++-------------+----------------------------------------------+
+| Short name  | Exceptions/Unthrown                          |
++-------------+----------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++-------------+----------------------------------------------+
+| Severity    | Minor                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Quick (30 mins)                              |
++-------------+----------------------------------------------+
+| ClearPHP    | Exceptions/Unthrown                          |
++-------------+----------------------------------------------+
 
 
 
@@ -29571,17 +30134,17 @@ Suggestions
 * Drop the argument from the signature
 * Actually use that argument in the body of the method
 
-+-------------+----------------------------------------------------------------------------------------+
-| Short name  | Functions/UnusedArguments                                                              |
-+-------------+----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                         |
-+-------------+----------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                  |
-+-------------+----------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                        |
-+-------------+----------------------------------------------------------------------------------------+
-| Examples    | :ref:`thinkphp-functions-unusedarguments`, :ref:`phpmyadmin-functions-unusedarguments` |
-+-------------+----------------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Functions/UnusedArguments |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Examples    | Functions/UnusedArguments |
++-------------+---------------------------+
 
 
 
@@ -29625,7 +30188,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Classes/UnusedConstant             |
 +-------------+------------------------------------+
 
 
@@ -29659,7 +30222,7 @@ Also, this analyzer may find classes that are, in fact, dynamically loaded.
 +-------------+----------------------------------------------+
 | Severity    | Major                                        |
 +-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
+| Time To Fix | Classes/UnusedClass                          |
 +-------------+----------------------------------------------+
 
 
@@ -29695,7 +30258,7 @@ It is recommended to comment them out, and only define them when it is necessary
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
+| Time To Fix | Constants/UnusedConstants    |
 +-------------+------------------------------+
 
 
@@ -29732,17 +30295,17 @@ Suggestions
 * Use the function in the code
 * Remove the functions from the code
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Functions/UnusedFunctions                                                             |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>`                                                          |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                       |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`woocommerce-functions-unusedfunctions`, :ref:`piwigo-functions-unusedfunctions` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Functions/UnusedFunctions    |
++-------------+------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Examples    | Functions/UnusedFunctions    |
++-------------+------------------------------+
 
 
 
@@ -29773,17 +30336,17 @@ Suggestions
 * Remove the global declaration
 * Remove the global variable altogether
 
-+-------------+----------------------------------------+
-| Short name  | Structures/UnusedGlobal                |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`                         |
-+-------------+----------------------------------------+
-| Severity    | Minor                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Quick (30 mins)                        |
-+-------------+----------------------------------------+
-| Examples    | :ref:`dolphin-structures-unusedglobal` |
-+-------------+----------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/UnusedGlobal |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Examples    | Structures/UnusedGlobal |
++-------------+-------------------------+
 
 
 
@@ -29821,17 +30384,17 @@ Suggestions
 * Remove the unused inherited variable
 * Make us of the unused inherited variable
 
-+-------------+----------------------------------------------------------------------------------------------------+
-| Short name  | Functions/UnusedInheritedVariable                                                                  |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                       |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                              |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`shopware-functions-unusedinheritedvariable`, :ref:`mautic-functions-unusedinheritedvariable` |
-+-------------+----------------------------------------------------------------------------------------------------+
++-------------+----------------------------------------------+
+| Short name  | Functions/UnusedInheritedVariable            |
++-------------+----------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++-------------+----------------------------------------------+
+| Severity    | Major                                        |
++-------------+----------------------------------------------+
+| Time To Fix | Quick (30 mins)                              |
++-------------+----------------------------------------------+
+| Examples    | Functions/UnusedInheritedVariable            |
++-------------+----------------------------------------------+
 
 
 
@@ -29886,7 +30449,7 @@ Suggestions
 +-------------+--------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                 |
 +-------------+--------------------------------------------------+
-| Examples    | :ref:`tine20-interfaces-unusedinterfaces`        |
+| Examples    | Interfaces/UnusedInterfaces                      |
 +-------------+--------------------------------------------------+
 
 
@@ -29921,6 +30484,15 @@ There is no analysis for undefined goto call, as PHP checks that goto has a dest
 
 See also `Goto <http://php.net/manual/en/control-structures.goto.php>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the unused label
+* Add a goto call to this label
+* Check for spelling mistakes
+
 +-------------+------------------------------+
 | Short name  | Structures/UnusedLabel       |
 +-------------+------------------------------+
@@ -29928,7 +30500,7 @@ See also `Goto <http://php.net/manual/en/control-structures.goto.php>`_.
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/UnusedLabel       |
 +-------------+------------------------------+
 
 
@@ -29939,9 +30511,13 @@ Unused Methods
 ##############
 
 
-Those methods are never called as methods. 
+Those methods are never called. 
 
 They are probably dead code, unless they are called dynamically.
+
+This analysis omits methods which are in a class that makes dynamical self calls : ``$this->$m()``. That way, any method may be called. 
+
+This analysis omits methods which are overwritten by a child class. That way, they are considered to provide a default behavior. 
 
 .. code-block:: php
 
@@ -29968,6 +30544,17 @@ They are probably dead code, unless they are called dynamically.
    
    ?>
 
+
+See also `Dead Code: Unused Method <https://vulncat.fortify.com/en/detail?id=desc.structural.java.dead_code_unused_method>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make use of the method
+* Remove the method
+* Move the method to another class
+
 +-------------+------------------------------+
 | Short name  | Classes/UnusedMethods        |
 +-------------+------------------------------+
@@ -29975,7 +30562,7 @@ They are probably dead code, unless they are called dynamically.
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
+| Time To Fix | Classes/UnusedMethods        |
 +-------------+------------------------------+
 
 
@@ -30018,7 +30605,7 @@ Private methods are reserved for the defining class. Thus, they must be used wit
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Classes/UnusedPrivateMethod  |
 +-------------+------------------------------+
 
 
@@ -30066,17 +30653,17 @@ Suggestions
 * Check if the property is correctly named
 * Change the visibility to protected or public : may be a visibility refactoring was too harsh
 
-+-------------+----------------------------------------------------------------------------------------------+
-| Short name  | Classes/UnusedPrivateProperty                                                                |
-+-------------+----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>`                                                                 |
-+-------------+----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                        |
-+-------------+----------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                              |
-+-------------+----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`openemr-classes-unusedprivateproperty`, :ref:`phpadsnew-classes-unusedprivateproperty` |
-+-------------+----------------------------------------------------------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Classes/UnusedPrivateProperty |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>`  |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Quick (30 mins)               |
++-------------+-------------------------------+
+| Examples    | Classes/UnusedPrivateProperty |
++-------------+-------------------------------+
 
 
 
@@ -30136,7 +30723,7 @@ This analysis is impacted by dynamic method calls.
 +-------------+--------------------------------+
 | Severity    | Major                          |
 +-------------+--------------------------------+
-| Time To Fix | Slow (1 hour)                  |
+| Time To Fix | Classes/UnusedProtectedMethods |
 +-------------+--------------------------------+
 
 
@@ -30187,8 +30774,73 @@ Note that this analysis ignores functions that return void (same meaning that PH
 +-------------+----------------------------------------------+
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
+| Time To Fix | Functions/UnusedReturnedValue                |
 +-------------+----------------------------------------------+
+
+
+
+.. _unused-trait-in-class:
+
+Unused Trait In Class
+#####################
+
+
+A trait has been summoned in a class, but is not used. Traits may be used as a copy/paste of code, bringing a batch of methods and properties to a class. In the current case, the imported trait is never called. As such, it may be removed. 
+
+Currently, the analysis covers only traits that are used in the class where they are imported. Also, the properties are not covered yet. 
+
+.. code-block:: php
+
+   <?php
+   
+   trait t {
+       function foo() { return 1;}
+   }
+   
+   // this class imports and uses the trait
+   class UsingTrait {
+       use t;
+       
+       function bar() {
+           return $this->foo() + 1;
+       }
+   }
+   
+   // this class imports but doesn't uses the trait
+   class UsingTrait {
+       use t;
+       
+       function bar() {
+           return 1;
+       }
+   }
+   
+   ?>
+
+
+There are some sneaky situations, where a trait falls into decay : for example, creating a method in the importing class, with the name of a trait class, will exclude the trait method, as the class method has priority. Other precedence rules may lead to the same effect.
+
+See also `Traits <https://www.php.net/manual/en/language.oop5.traits.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the trait from the class
+* Actually use the trait, at least in the importing class
+* Use conflict resolution to make the trait accessible
+
++-------------+-------------------------+
+| Short name  | Traits/UnusedClassTrait |
++-------------+-------------------------+
+| Rulesets    | :ref:`ClassReview`      |
++-------------+-------------------------+
+| Php Version | 7.4-                    |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Traits/UnusedClassTrait |
++-------------+-------------------------+
 
 
 
@@ -30211,17 +30863,17 @@ Unused use statements. They may be removed, as they clutter the code and slows P
    
    ?>
 
-+-------------+---------------------------------------------------------------------------------------------+
-| Short name  | Namespaces/UnusedUse                                                                        |
-+-------------+---------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Dead code <dead-code>`                                                                |
-+-------------+---------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                       |
-+-------------+---------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                            |
-+-------------+---------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-useless-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-use.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Namespaces/UnusedUse         |
++-------------+------------------------------+
+| Rulesets    | :ref:`Dead code <dead-code>` |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| ClearPHP    | Namespaces/UnusedUse         |
++-------------+------------------------------+
 
 
 
@@ -30249,7 +30901,7 @@ Usually, PHP functions are written all in lower case.
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Instant (5 mins)                               |
+| Time To Fix | Php/UpperCaseFunction                          |
 +-------------+------------------------------------------------+
 
 
@@ -30299,6 +30951,13 @@ It is highly recommended to validate any incoming file, generate a name for it, 
 
 See also `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_, `CWE-616: Incomplete Identification of Uploaded File Variables <https://cwe.mitre.org/data/definitions/616.html>`_, `Why File Upload Forms are a Major Security Threat <https://www.acunetix.com/websitesecurity/upload-forms-threat/>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Validate uploaded filenames
+* Rename files upon storage, and keep the original name in a database
+
 +-------------+----------------------------------+
 | Short name  | Security/UploadFilenameInjection |
 +-------------+----------------------------------+
@@ -30306,7 +30965,7 @@ See also `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_, `CWE-
 +-------------+----------------------------------+
 | Severity    | Major                            |
 +-------------+----------------------------------+
-| Time To Fix | Instant (5 mins)                 |
+| Time To Fix | Security/UploadFilenameInjection |
 +-------------+----------------------------------+
 
 
@@ -30336,17 +30995,17 @@ It is faster to use === null instead of `is_null() <https://www.php.net/is_null>
    
    ?>
 
-+-------------+---------------------------------------------------------------------------------------------------------------------+
-| Short name  | Php/IsnullVsEqualNull                                                                                               |
-+-------------+---------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`                                                                               |
-+-------------+---------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                               |
-+-------------+---------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                     |
-+-------------+---------------------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
-+-------------+---------------------------------------------------------------------------------------------------------------------+
++-------------+---------------------------------------+
+| Short name  | Php/IsnullVsEqualNull                 |
++-------------+---------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable` |
++-------------+---------------------------------------+
+| Severity    | Minor                                 |
++-------------+---------------------------------------+
+| Time To Fix | Quick (30 mins)                       |
++-------------+---------------------------------------+
+| ClearPHP    | Php/IsnullVsEqualNull                 |
++-------------+---------------------------------------+
 
 
 
@@ -30399,7 +31058,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Structures/UseArrayFunctions |
 +-------------+------------------------------+
 
 
@@ -30437,13 +31096,13 @@ Suggestions
 
 * Use basename(), remove more complex code based on substr() or str_replace()
 
-+------------+---------------------------------------------------------------------------------------+
-| Short name | Structures/BasenameSuffix                                                             |
-+------------+---------------------------------------------------------------------------------------+
-| Rulesets   | :ref:`Suggestions`                                                                    |
-+------------+---------------------------------------------------------------------------------------+
-| Examples   | :ref:`nextcloud-structures-basenamesuffix`, :ref:`dolibarr-structures-basenamesuffix` |
-+------------+---------------------------------------------------------------------------------------+
++------------+---------------------------+
+| Short name | Structures/BasenameSuffix |
++------------+---------------------------+
+| Rulesets   | :ref:`Suggestions`        |
++------------+---------------------------+
+| Examples   | Structures/BasenameSuffix |
++------------+---------------------------+
 
 
 
@@ -30490,7 +31149,7 @@ Suggestions
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
+| Time To Fix | Structures/UseCaseValue |
 +-------------+-------------------------+
 
 
@@ -30545,7 +31204,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Severity    | Minor                               |
 +-------------+-------------------------------------+
-| Time To Fix | Instant (5 mins)                    |
+| Time To Fix | Classes/UseClassOperator            |
 +-------------+-------------------------------------+
 
 
@@ -30588,7 +31247,7 @@ See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/languag
 +-------------+---------------------------------------------------------------------------------+
 | Severity    | Major                                                                           |
 +-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                   |
+| Time To Fix | Namespaces/UseFunctionsConstants                                                |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -30635,7 +31294,7 @@ Suggestions
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
-| Time To Fix | Instant (5 mins)                      |
+| Time To Fix | Structures/UseConstant                |
 +-------------+---------------------------------------+
 
 
@@ -30737,17 +31396,17 @@ Suggestions
 
 * Use PHP native constants, whenever possible, instead of meaningless literals.
 
-+-------------+----------------------------------------------------------------------------------------------------+
-| Short name  | Functions/UseConstantAsArguments                                                                   |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                     |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                              |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tikiwiki-functions-useconstantasarguments`, :ref:`shopware-functions-useconstantasarguments` |
-+-------------+----------------------------------------------------------------------------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/UseConstantAsArguments |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`                   |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Functions/UseConstantAsArguments |
++-------------+----------------------------------+
 
 
 
@@ -30786,17 +31445,17 @@ Suggestions
 
 * Drop the loop and use the 2nd argument of count()
 
-+-------------+-----------------------------------------------------------------------------------------------+
-| Short name  | Structures/UseCountRecursive                                                                  |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                                                                            |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                 |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-structures-usecountrecursive`, :ref:`prestashop-structures-usecountrecursive` |
-+-------------+-----------------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/UseCountRecursive |
++-------------+------------------------------+
+| Rulesets    | :ref:`Suggestions`           |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Slow (1 hour)                |
++-------------+------------------------------+
+| Examples    | Structures/UseCountRecursive |
++-------------+------------------------------+
 
 
 
@@ -30841,7 +31500,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Php/UseDateTimeImmutable |
 +-------------+--------------------------+
 
 
@@ -30905,17 +31564,17 @@ Suggestions
 * Use typehint when possible
 * Avoid mixing scalar types and objects in the same variable
 
-+-------------+-----------------------------------------------------------------------------+
-| Short name  | Classes/UseInstanceof                                                       |
-+-------------+-----------------------------------------------------------------------------+
-| Rulesets    | none                                                                        |
-+-------------+-----------------------------------------------------------------------------+
-| Severity    | Major                                                                       |
-+-------------+-----------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                             |
-+-------------+-----------------------------------------------------------------------------+
-| Examples    | :ref:`teampass-classes-useinstanceof`, :ref:`zencart-classes-useinstanceof` |
-+-------------+-----------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Classes/UseInstanceof |
++-------------+-----------------------+
+| Rulesets    | none                  |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Examples    | Classes/UseInstanceof |
++-------------+-----------------------+
 
 
 
@@ -30962,17 +31621,17 @@ Suggestions
 
 * Use the list keyword (or the short syntax), and simplify the array calls in the loop.
 
-+-------------+------------------------------------------------+
-| Short name  | Structures/UseListWithForeach                  |
-+-------------+------------------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`Top10`               |
-+-------------+------------------------------------------------+
-| Severity    | Minor                                          |
-+-------------+------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                |
-+-------------+------------------------------------------------+
-| Examples    | :ref:`mediawiki-structures-uselistwithforeach` |
-+-------------+------------------------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UseListWithForeach    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`Top10` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/UseListWithForeach    |
++-------------+----------------------------------+
 
 
 
@@ -31016,7 +31675,7 @@ Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 +-------------+------------------------------------------------------+
 | Severity    | Minor                                                |
 +-------------+------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                     |
+| Time To Fix | Php/CaseForPSS                                       |
 +-------------+------------------------------------------------------+
 
 
@@ -31056,17 +31715,17 @@ It is recommended to use explicit constant names, instead. They are more readabl
 
 See also `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_, to avoid boolean altogether.
 
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Short name  | Functions/AvoidBooleanArgument                                                                      |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                      |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                               |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                       |
-+-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpmyadmin-functions-avoidbooleanargument`, :ref:`cleverstyle-functions-avoidbooleanargument` |
-+-------------+-----------------------------------------------------------------------------------------------------+
++-------------+--------------------------------+
+| Short name  | Functions/AvoidBooleanArgument |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Slow (1 hour)                  |
++-------------+--------------------------------+
+| Examples    | Functions/AvoidBooleanArgument |
++-------------+--------------------------------+
 
 
 
@@ -31104,7 +31763,7 @@ See also `Type declarations <http://php.net/manual/en/functions.arguments.php#fu
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                                 |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                                       |
+| Time To Fix | Php/UseNullableType                                                                                                                   |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -31177,19 +31836,19 @@ Suggestions
 
 * Use the object API
 
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Short name  | Php/UseObjectApi                                                                                        |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                          |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                   |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                           |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__             |
-+-------------+---------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-php-useobjectapi`, :ref:`prestashop-php-useobjectapi`, :ref:`sugarcrm-php-useobjectapi` |
-+-------------+---------------------------------------------------------------------------------------------------------+
++-------------+---------------------------------------------------------------------------------------------+
+| Short name  | Php/UseObjectApi                                                                            |
++-------------+---------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`                                                                              |
++-------------+---------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                       |
++-------------+---------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                               |
++-------------+---------------------------------------------------------------------------------------------+
+| ClearPHP    | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__ |
++-------------+---------------------------------------------------------------------------------------------+
+| Examples    | Php/UseObjectApi                                                                            |
++-------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -31229,7 +31888,7 @@ See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <h
 +------------+----------------------------------+
 | Short name | Performances/PHP7EncapsedStrings |
 +------------+----------------------------------+
-| Rulesets   | :ref:`Performances`              |
+| Rulesets   | Performances/PHP7EncapsedStrings |
 +------------+----------------------------------+
 
 
@@ -31268,17 +31927,17 @@ Suggestions
 
 * Use pathinfo() and its second argument
 
-+-------------+---------------------------------+
-| Short name  | Php/UsePathinfo                 |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-| Examples    | :ref:`suitecrm-php-usepathinfo` |
-+-------------+---------------------------------+
++-------------+-----------------+
+| Short name  | Php/UsePathinfo |
++-------------+-----------------+
+| Rulesets    | :ref:`Analyze`  |
++-------------+-----------------+
+| Severity    | Minor           |
++-------------+-----------------+
+| Time To Fix | Quick (30 mins) |
++-------------+-----------------+
+| Examples    | Php/UsePathinfo |
++-------------+-----------------+
 
 
 
@@ -31332,17 +31991,17 @@ Suggestions
 
 * Invert the code in the if branches, and the condition
 
-+-------------+------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/UsePositiveCondition                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                       |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`spip-structures-usepositivecondition`, :ref:`expressionengine-structures-usepositivecondition` |
-+-------------+------------------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/UsePositiveCondition |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Structures/UsePositiveCondition |
++-------------+---------------------------------+
 
 
 
@@ -31387,7 +32046,7 @@ Suggestions
 +-------------+-------------------------+
 | Severity    | Major                   |
 +-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
+| Time To Fix | Structures/UseSystemTmp |
 +-------------+-------------------------+
 
 
@@ -31422,6 +32081,14 @@ Note that it is also faster to use the value with a reference to handle the writ
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the blind var
+
 +-------------+--------------------------+
 | Short name  | Performances/UseBlindVar |
 +-------------+--------------------------+
@@ -31429,7 +32096,7 @@ Note that it is also faster to use the value with a reference to handle the writ
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Instant (5 mins)         |
+| Time To Fix | Performances/UseBlindVar |
 +-------------+--------------------------+
 
 
@@ -31484,7 +32151,7 @@ Suggestions
 +-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
+| Time To Fix | Structures/UseUrlQueryFunctions |
 +-------------+---------------------------------+
 
 
@@ -31518,7 +32185,7 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
 +-------------+----------------------------------------------------------------+
 | Severity    | Minor                                                          |
 +-------------+----------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                  |
+| Time To Fix | Namespaces/UseWithFullyQualifiedNS                             |
 +-------------+----------------------------------------------------------------+
 
 
@@ -31572,7 +32239,7 @@ Suggestions
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
+| Time To Fix | Performances/UseArraySlice |
 +-------------+----------------------------+
 
 
@@ -31621,17 +32288,17 @@ Suggestions
 
 * Use const instead of define()
 
-+-------------+----------------------------------------------------------------------------------------+
-| Short name  | Constants/ConstRecommended                                                             |
-+-------------+----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10`           |
-+-------------+----------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                  |
-+-------------+----------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                          |
-+-------------+----------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpmyadmin-constants-constrecommended`, :ref:`piwigo-constants-constrecommended` |
-+-------------+----------------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------+
+| Short name  | Constants/ConstRecommended                                                   |
++-------------+------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
++-------------+------------------------------------------------------------------------------+
+| Severity    | Minor                                                                        |
++-------------+------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                |
++-------------+------------------------------------------------------------------------------+
+| Examples    | Constants/ConstRecommended                                                   |
++-------------+------------------------------------------------------------------------------+
 
 
 
@@ -31678,13 +32345,13 @@ Suggestions
 * Use is_countable()
 * Create a compatibility function that replaces is_countable() until the code is ready for PHP 7.3
 
-+-------------+------------------------------+
-| Short name  | Php/CouldUseIsCountable      |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Suggestions`           |
-+-------------+------------------------------+
-| Php Version | With PHP 7.3 and more recent |
-+-------------+------------------------------+
++-------------+-------------------------+
+| Short name  | Php/CouldUseIsCountable |
++-------------+-------------------------+
+| Rulesets    | :ref:`Suggestions`      |
++-------------+-------------------------+
+| Php Version | Php/CouldUseIsCountable |
++-------------+-------------------------+
 
 
 
@@ -31726,7 +32393,7 @@ See also `json_decode <http://php.net/json_decode>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Structures/JsonWithOption |
 +-------------+---------------------------+
 
 
@@ -31776,7 +32443,7 @@ See also `Password hashing <http://php.net/manual/en/book.password.php>`_.
 +-------------+------------------------------+
 | Severity    | Major                        |
 +-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
+| Time To Fix | Php/Password55               |
 +-------------+------------------------------+
 
 
@@ -31822,17 +32489,23 @@ Depending on the situation, the functions `dirname() <https://www.php.net/dirnam
 
 See also `list <http://php.net/manual/en/function.list.php>`_.
 
-+-------------+-----------------------------------------------------------------------------+
-| Short name  | Php/UsePathinfoArgs                                                         |
-+-------------+-----------------------------------------------------------------------------+
-| Rulesets    | :ref:`Performances`                                                         |
-+-------------+-----------------------------------------------------------------------------+
-| Severity    | Minor                                                                       |
-+-------------+-----------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                             |
-+-------------+-----------------------------------------------------------------------------+
-| Examples    | :ref:`zend-config-php-usepathinfoargs`, :ref:`thinkphp-php-usepathinfoargs` |
-+-------------+-----------------------------------------------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use PHP native function pathinfo() and its arguments
+
++-------------+---------------------+
+| Short name  | Php/UsePathinfoArgs |
++-------------+---------------------+
+| Rulesets    | :ref:`Performances` |
++-------------+---------------------+
+| Severity    | Minor               |
++-------------+---------------------+
+| Time To Fix | Quick (30 mins)     |
++-------------+---------------------+
+| Examples    | Php/UsePathinfoArgs |
++-------------+---------------------+
 
 
 
@@ -31886,17 +32559,17 @@ Suggestions
 
 * Use random_bytes() and randon_int(). At least, use them as a base for random data, and then add extra prefix and suffix, and a hash call on top.
 
-+-------------+-------------------------------------------------------------+
-| Short name  | Php/BetterRand                                              |
-+-------------+-------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71`  |
-+-------------+-------------------------------------------------------------+
-| Severity    | Major                                                       |
-+-------------+-------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                            |
-+-------------+-------------------------------------------------------------+
-| Examples    | :ref:`thelia-php-betterrand`, :ref:`fuelcms-php-betterrand` |
-+-------------+-------------------------------------------------------------+
++-------------+------------------------------------------------------------+
+| Short name  | Php/BetterRand                                             |
++-------------+------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71` |
++-------------+------------------------------------------------------------+
+| Severity    | Major                                                      |
++-------------+------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                           |
++-------------+------------------------------------------------------------+
+| Examples    | Php/BetterRand                                             |
++-------------+------------------------------------------------------------+
 
 
 
@@ -31937,15 +32610,15 @@ Suggestions
 
 * Use session_start() with array arguments
 
-+-------------+---------------------------------------------+
-| Short name  | Php/UseSessionStartOptions                  |
-+-------------+---------------------------------------------+
-| Rulesets    | :ref:`Suggestions`                          |
-+-------------+---------------------------------------------+
-| Php Version | With PHP 7.0 and more recent                |
-+-------------+---------------------------------------------+
-| Examples    | :ref:`wordpress-php-usesessionstartoptions` |
-+-------------+---------------------------------------------+
++-------------+------------------------------+
+| Short name  | Php/UseSessionStartOptions   |
++-------------+------------------------------+
+| Rulesets    | :ref:`Suggestions`           |
++-------------+------------------------------+
+| Php Version | With PHP 7.0 and more recent |
++-------------+------------------------------+
+| Examples    | Php/UseSessionStartOptions   |
++-------------+------------------------------+
 
 
 
@@ -32003,7 +32676,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
+| Time To Fix | Classes/UsedOnceProperty |
 +-------------+--------------------------+
 
 
@@ -32046,17 +32719,17 @@ Suggestions
 * Fix the name of variable
 * Use the variable a second time, at least
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Variables/VariableUsedOnce                                                            |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                          |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                      |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`shopware-variables-variableusedonce`, :ref:`vanilla-variables-variableusedonce` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Variables/VariableUsedOnce   |
++-------------+------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Variables/VariableUsedOnce   |
++-------------+------------------------------+
 
 
 
@@ -32097,17 +32770,17 @@ Suggestions
 * Fix the name of variable
 * Use the variable a second time in the current scope, at least
 
-+-------------+-----------------------------------------------------+
-| Short name  | Variables/VariableUsedOnceByContext                 |
-+-------------+-----------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                      |
-+-------------+-----------------------------------------------------+
-| Severity    | Minor                                               |
-+-------------+-----------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                     |
-+-------------+-----------------------------------------------------+
-| Examples    | :ref:`shopware-variables-variableusedoncebycontext` |
-+-------------+-----------------------------------------------------+
++-------------+-------------------------------------+
+| Short name  | Variables/VariableUsedOnceByContext |
++-------------+-------------------------------------+
+| Rulesets    | :ref:`Analyze`                      |
++-------------+-------------------------------------+
+| Severity    | Minor                               |
++-------------+-------------------------------------+
+| Time To Fix | Quick (30 mins)                     |
++-------------+-------------------------------------+
+| Examples    | Variables/VariableUsedOnceByContext |
++-------------+-------------------------------------+
 
 
 
@@ -32158,7 +32831,7 @@ Suggestions
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
+| Time To Fix | Classes/UselessAbstract |
 +-------------+-------------------------+
 
 
@@ -32218,7 +32891,7 @@ Suggestions
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Instant (5 mins)                       |
+| Time To Fix | Traits/UselessAlias                    |
 +-------------+----------------------------------------+
 
 
@@ -32270,7 +32943,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Functions/UselessArgument |
 +-------------+---------------------------+
 
 
@@ -32311,17 +32984,17 @@ Suggestions
 * Restore the flow-control operation that was there and removed
 * Move the block into a method or function, and call it
 
-+-------------+---------------------------------------------------------------------------------------+
-| Short name  | Structures/UselessBrackets                                                            |
-+-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                        |
-+-------------+---------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                 |
-+-------------+---------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                      |
-+-------------+---------------------------------------------------------------------------------------+
-| Examples    | :ref:`churchcrm-structures-uselessbrackets`, :ref:`piwigo-structures-uselessbrackets` |
-+-------------+---------------------------------------------------------------------------------------+
++-------------+----------------------------+
+| Short name  | Structures/UselessBrackets |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Instant (5 mins)           |
++-------------+----------------------------+
+| Examples    | Structures/UselessBrackets |
++-------------+----------------------------+
 
 
 
@@ -32357,17 +33030,17 @@ Suggestions
 
 * Remove the type cast
 
-+-------------+-------------------------------------------------------------------------------------+
-| Short name  | Structures/UselessCasting                                                           |
-+-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                      |
-+-------------+-------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                               |
-+-------------+-------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                    |
-+-------------+-------------------------------------------------------------------------------------+
-| Examples    | :ref:`fuelcms-structures-uselesscasting`, :ref:`thinkphp-structures-uselesscasting` |
-+-------------+-------------------------------------------------------------------------------------+
++-------------+---------------------------+
+| Short name  | Structures/UselessCasting |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Instant (5 mins)          |
++-------------+---------------------------+
+| Examples    | Structures/UselessCasting |
++-------------+---------------------------+
 
 
 
@@ -32412,17 +33085,17 @@ Suggestions
 * Add a log call to the catch block
 * Handle correctly the exception
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Exceptions/UselessCatch                                                         |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                  |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Minor                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                   |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`zurmo-exceptions-uselesscatch`, :ref:`prestashop-exceptions-uselesscatch` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Exceptions/UselessCatch |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Slow (1 hour)           |
++-------------+-------------------------+
+| Examples    | Exceptions/UselessCatch |
++-------------+-------------------------+
 
 
 
@@ -32465,17 +33138,17 @@ Suggestions
 * Drop the condition and the check
 * Turn the condition into isset(), empty() and is_array()
 
-+-------------+------------------------------------------------------------------------------+
-| Short name  | Structures/UselessCheck                                                      |
-+-------------+------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                               |
-+-------------+------------------------------------------------------------------------------+
-| Severity    | Minor                                                                        |
-+-------------+------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                             |
-+-------------+------------------------------------------------------------------------------+
-| Examples    | :ref:`magento-structures-uselesscheck`, :ref:`phinx-structures-uselesscheck` |
-+-------------+------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/UselessCheck |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Instant (5 mins)        |
++-------------+-------------------------+
+| Examples    | Structures/UselessCheck |
++-------------+-------------------------+
 
 
 
@@ -32513,7 +33186,7 @@ Class constructor that have empty bodies are useless. They may be removed.
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Slow (1 hour)              |
+| Time To Fix | Classes/UselessConstructor |
 +-------------+----------------------------+
 
 
@@ -32565,7 +33238,7 @@ Suggestions
 +-------------+--------------------------+
 | Severity    | Minor                    |
 +-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
+| Time To Fix | Functions/UselessDefault |
 +-------------+--------------------------+
 
 
@@ -32599,17 +33272,17 @@ There is no need to declare them individually final.
 
 See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_, and `When to declare final <https://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
-+-------------+-------------------------------------------------------------------------------------------------+
-| Short name  | Classes/UselessFinal                                                                            |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                  |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                           |
-+-------------+-------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                |
-+-------------+-------------------------------------------------------------------------------------------------+
-| ClearPHP    | `no-useless-final <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-final.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------------+
++-------------+----------------------+
+| Short name  | Classes/UselessFinal |
++-------------+----------------------+
+| Rulesets    | :ref:`Analyze`       |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Instant (5 mins)     |
++-------------+----------------------+
+| ClearPHP    | Classes/UselessFinal |
++-------------+----------------------+
 
 
 
@@ -32647,17 +33320,17 @@ Suggestions
 
 * Drop the global expression
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/UselessGlobal                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                    |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`zencart-structures-uselessglobal`, :ref:`humo-gen-structures-uselessglobal` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/UselessGlobal |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Quick (30 mins)          |
++-------------+--------------------------+
+| Examples    | Structures/UselessGlobal |
++-------------+--------------------------+
 
 
 
@@ -32717,7 +33390,7 @@ $closeQuote = $openQuote[3] ===
 +------------+-------------------------------+
 | Short name | Structures/UselessInstruction |
 +------------+-------------------------------+
-| Rulesets   | :ref:`Analyze`                |
+| Rulesets   | Structures/UselessInstruction |
 +------------+-------------------------------+
 
 
@@ -32780,7 +33453,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-interfaces <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-interfaces.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`woocommerce-interfaces-uselessinterfaces`                                                           |
+| Examples    | Interfaces/UselessInterfaces                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 
 
@@ -32829,17 +33502,17 @@ Suggestions
 
 * Remove useless parenthesis, unless they are important for readability.
 
-+-------------+-----------------------------------------------------------------------------------------------+
-| Short name  | Structures/UselessParenthesis                                                                 |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                         |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                              |
-+-------------+-----------------------------------------------------------------------------------------------+
-| Examples    | :ref:`mautic-structures-uselessparenthesis`, :ref:`woocommerce-structures-uselessparenthesis` |
-+-------------+-----------------------------------------------------------------------------------------------+
++-------------+-------------------------------+
+| Short name  | Structures/UselessParenthesis |
++-------------+-------------------------------+
+| Rulesets    | :ref:`Analyze`                |
++-------------+-------------------------------+
+| Severity    | Minor                         |
++-------------+-------------------------------+
+| Time To Fix | Instant (5 mins)              |
++-------------+-------------------------------+
+| Examples    | Structures/UselessParenthesis |
++-------------+-------------------------------+
 
 
 
@@ -32881,17 +33554,17 @@ Suggestions
 * Remove the useless & from the argument
 * Make an actual use of the argument before the end of the method
 
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Short name  | Functions/UselessReferenceArgument                                                                       |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                           |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                    |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                            |
-+-------------+----------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`woocommerce-functions-uselessreferenceargument`, :ref:`magento-functions-uselessreferenceargument` |
-+-------------+----------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Functions/UselessReferenceArgument |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`                     |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| Examples    | Functions/UselessReferenceArgument |
++-------------+------------------------------------+
 
 
 
@@ -32931,17 +33604,17 @@ Suggestions
 
 * Remove the return expression. Keep any other calculation.
 
-+-------------+---------------------------------------------------------------------------------+
-| Short name  | Functions/UselessReturn                                                         |
-+-------------+---------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                  |
-+-------------+---------------------------------------------------------------------------------+
-| Severity    | Minor                                                                           |
-+-------------+---------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                |
-+-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`thinkphp-functions-uselessreturn`, :ref:`vanilla-functions-uselessreturn` |
-+-------------+---------------------------------------------------------------------------------+
++-------------+-------------------------+
+| Short name  | Functions/UselessReturn |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Minor                   |
++-------------+-------------------------+
+| Time To Fix | Instant (5 mins)        |
++-------------+-------------------------+
+| Examples    | Functions/UselessReturn |
++-------------+-------------------------+
 
 
 
@@ -32979,17 +33652,17 @@ Suggestions
 * Turn the switch into a if/then for better readability
 * Add other cases to the switch, making it adapted to the situation
 
-+-------------+----------------------------------------------------------------------------------------+
-| Short name  | Structures/UselessSwitch                                                               |
-+-------------+----------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                         |
-+-------------+----------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                  |
-+-------------+----------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                       |
-+-------------+----------------------------------------------------------------------------------------+
-| Examples    | :ref:`phpdocumentor-structures-uselessswitch`, :ref:`dolphin-structures-uselessswitch` |
-+-------------+----------------------------------------------------------------------------------------+
++-------------+--------------------------+
+| Short name  | Structures/UselessSwitch |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Major                    |
++-------------+--------------------------+
+| Time To Fix | Instant (5 mins)         |
++-------------+--------------------------+
+| Examples    | Structures/UselessSwitch |
++-------------+--------------------------+
 
 
 
@@ -33046,7 +33719,7 @@ Suggestions
 +-------------+------------------------------+
 | Severity    | Minor                        |
 +-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
+| Time To Fix | Functions/UselessTypeCheck   |
 +-------------+------------------------------+
 
 
@@ -33111,7 +33784,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-unset <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-unset.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tine20-structures-uselessunset`, :ref:`typo3-structures-uselessunset`                     |
+| Examples    | Structures/UselessUnset                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------+
 
 
@@ -33157,7 +33830,7 @@ Suggestions
 +-------------+--------------------------------+
 | Severity    | Minor                          |
 +-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
+| Time To Fix | Functions/UsesDefaultArguments |
 +-------------+--------------------------------+
 
 
@@ -33203,7 +33876,7 @@ See also `Closure\:\:bind <http://php.net/manual/en/closure.bind.php>`_ and `The
 +-------------+-------------------------------------------------------------------+
 | Severity    | Critical                                                          |
 +-------------+-------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                  |
+| Time To Fix | Classes/UsingThisOutsideAClass                                    |
 +-------------+-------------------------------------------------------------------+
 
 
@@ -33263,7 +33936,7 @@ in PHP 7, the result is :::
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Php/UsortSorting          |
 +-------------+---------------------------+
 
 
@@ -33310,7 +33983,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`xataface-classes-oldstylevar`                                                                     |
+| Examples    | Classes/OldStyleVar                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------+
 
 
@@ -33347,7 +34020,7 @@ Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be rep
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                            |
+| Time To Fix | Structures/VariableGlobal                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -33395,7 +34068,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Severity    | Minor                             |
 +-------------+-----------------------------------+
-| Time To Fix | Quick (30 mins)                   |
+| Time To Fix | Structures/NoVariableIsACondition |
 +-------------+-----------------------------------+
 
 
@@ -33430,7 +34103,7 @@ See also `Using single characters for variable names in loops/exceptions <https:
 +------------+-----------------------------+
 | Short name | Variables/VariableOneLetter |
 +------------+-----------------------------+
-| Rulesets   | :ref:`Semantics`            |
+| Rulesets   | Variables/VariableOneLetter |
 +------------+-----------------------------+
 
 
@@ -33464,17 +34137,17 @@ Suggestions
 * Use is_array() when checking for arrays. Also consider is_string(), is_int(), etc.
 * Use typehint when the variable is an argument
 
-+-------------+----------------------------------+
-| Short name  | Classes/WeakType                 |
-+-------------+----------------------------------+
-| Rulesets    | :ref:`Analyze`                   |
-+-------------+----------------------------------+
-| Severity    | Minor                            |
-+-------------+----------------------------------+
-| Time To Fix | Instant (5 mins)                 |
-+-------------+----------------------------------+
-| Examples    | :ref:`teampass-classes-weaktype` |
-+-------------+----------------------------------+
++-------------+------------------+
+| Short name  | Classes/WeakType |
++-------------+------------------+
+| Rulesets    | :ref:`Analyze`   |
++-------------+------------------+
+| Severity    | Minor            |
++-------------+------------------+
+| Time To Fix | Instant (5 mins) |
++-------------+------------------+
+| Examples    | Classes/WeakType |
++-------------+------------------+
 
 
 
@@ -33525,7 +34198,7 @@ Suggestions
 +-------------+-------------------+
 | Severity    | Minor             |
 +-------------+-------------------+
-| Time To Fix | Quick (30 mins)   |
+| Time To Fix | Arrays/WeirdIndex |
 +-------------+-------------------+
 
 
@@ -33563,17 +34236,17 @@ Suggestions
 * Change this loop with foreach
 * Change this loop with an array_* function with a callback
 
-+-------------+----------------------------------------------------------------------------------+
-| Short name  | Structures/WhileListEach                                                         |
-+-------------+----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions`                          |
-+-------------+----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                            |
-+-------------+----------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                 |
-+-------------+----------------------------------------------------------------------------------+
-| Examples    | :ref:`openemr-structures-whilelisteach`, :ref:`dolphin-structures-whilelisteach` |
-+-------------+----------------------------------------------------------------------------------+
++-------------+---------------------------------------------------------+
+| Short name  | Structures/WhileListEach                                |
++-------------+---------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
++-------------+---------------------------------------------------------+
+| Severity    | Minor                                                   |
++-------------+---------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                        |
++-------------+---------------------------------------------------------+
+| Examples    | Structures/WhileListEach                                |
++-------------+---------------------------------------------------------+
 
 
 
@@ -33619,7 +34292,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-unused-variable <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-variable.md>`__ |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-variables-writtenonlyvariable`, :ref:`suitecrm-variables-writtenonlyvariable`        |
+| Examples    | Variables/WrittenOnlyVariable                                                                       |
 +-------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -33670,17 +34343,17 @@ Suggestions
 * Match the property call with the definition
 * Make the property static
 
-+-------------+--------------------------------------------------+
-| Short name  | Classes/UndeclaredStaticProperty                 |
-+-------------+--------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`               |
-+-------------+--------------------------------------------------+
-| Severity    | Critical                                         |
-+-------------+--------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                  |
-+-------------+--------------------------------------------------+
-| Examples    | :ref:`humo-gen-classes-undeclaredstaticproperty` |
-+-------------+--------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Classes/UndeclaredStaticProperty   |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Critical                           |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | Classes/UndeclaredStaticProperty   |
++-------------+------------------------------------+
 
 
 
@@ -33719,7 +34392,7 @@ Suggestions
 +-------------+----------------------+
 | Severity    | Minor                |
 +-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
+| Time To Fix | Namespaces/WrongCase |
 +-------------+----------------------+
 
 
@@ -33768,7 +34441,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`wordpress-classes-wrongcase`                                                                                                             |
+| Examples    | Classes/WrongCase                                                                                                                              |
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -33815,7 +34488,7 @@ Suggestions
 +-------------+---------------------+
 | Severity    | Minor               |
 +-------------+---------------------+
-| Time To Fix | Instant (5 mins)    |
+| Time To Fix | Functions/WrongCase |
 +-------------+---------------------+
 
 
@@ -33871,7 +34544,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-missing-argument.md <https://github.com/dseguy/clearPHP/tree/master/rules/no-missing-argument.md.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`xataface-functions-wrongnumberofarguments`                                                            |
+| Examples    | Functions/WrongNumberOfArguments                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -33921,17 +34594,17 @@ Suggestions
 * Remove default values to all but last parameters. That is probably a weak solution.
 * Change the order of the values, so default-valued parameters are at the end. This will probably have impact on the rest of the code, as the API is changing.
 
-+-------------+--------------------------------------------------------------------------------------------------+
-| Short name  | Functions/WrongOptionalParameter                                                                 |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                   |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                            |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                  |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`fuelcms-functions-wrongoptionalparameter`, :ref:`vanilla-functions-wrongoptionalparameter` |
-+-------------+--------------------------------------------------------------------------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/WrongOptionalParameter |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`                   |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Functions/WrongOptionalParameter |
++-------------+----------------------------------+
 
 
 
@@ -33960,17 +34633,17 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
    
    ?>
 
-+-------------+------------------------------------------+
-| Short name  | Php/InternalParameterType                |
-+-------------+------------------------------------------+
-| Rulesets    | :ref:`Analyze`                           |
-+-------------+------------------------------------------+
-| Severity    | Major                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Quick (30 mins)                          |
-+-------------+------------------------------------------+
-| Examples    | :ref:`zencart-php-internalparametertype` |
-+-------------+------------------------------------------+
++-------------+---------------------------+
+| Short name  | Php/InternalParameterType |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Examples    | Php/InternalParameterType |
++-------------+---------------------------+
 
 
 
@@ -34002,17 +34675,17 @@ Suggestions
 * Make the interval easy to read and understand
 * Check the truth table for the logical operation
 
-+-------------+-------------------------------------------------------------------------------+
-| Short name  | Structures/WrongRange                                                         |
-+-------------+-------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                |
-+-------------+-------------------------------------------------------------------------------+
-| Severity    | Major                                                                         |
-+-------------+-------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                              |
-+-------------+-------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-structures-wrongrange`, :ref:`wordpress-structures-wrongrange` |
-+-------------+-------------------------------------------------------------------------------+
++-------------+-----------------------+
+| Short name  | Structures/WrongRange |
++-------------+-----------------------+
+| Rulesets    | :ref:`Analyze`        |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Instant (5 mins)      |
++-------------+-----------------------+
+| Examples    | Structures/WrongRange |
++-------------+-----------------------+
 
 
 
@@ -34069,7 +34742,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Functions/WrongReturnedType        |
 +-------------+------------------------------------+
 
 
@@ -34115,7 +34788,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Severity    | Minor                             |
 +-------------+-----------------------------------+
-| Time To Fix | Quick (30 mins)                   |
+| Time To Fix | Functions/WrongTypeWithCall       |
 +-------------+-----------------------------------+
 
 
@@ -34171,7 +34844,7 @@ Suggestions
 +-------------+------------------------------------------------------------+
 | Severity    | Minor                                                      |
 +-------------+------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                            |
+| Time To Fix | Classes/WrongTypedPropertyInit                             |
 +-------------+------------------------------------------------------------+
 
 
@@ -34218,7 +34891,7 @@ Suggestions
 +-------------+------------------------------------------------------------------+
 | Severity    | Minor                                                            |
 +-------------+------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                  |
+| Time To Fix | Functions/WrongTypehintedName                                    |
 +-------------+------------------------------------------------------------------+
 
 
@@ -34257,17 +34930,17 @@ Suggestions
 
 * Check the docs, choose the right opening mode.
 
-+-------------+--------------------------------------------------------------+
-| Short name  | Php/FopenMode                                                |
-+-------------+--------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                               |
-+-------------+--------------------------------------------------------------+
-| Severity    | Major                                                        |
-+-------------+--------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                              |
-+-------------+--------------------------------------------------------------+
-| Examples    | :ref:`tikiwiki-php-fopenmode`, :ref:`humo-gen-php-fopenmode` |
-+-------------+--------------------------------------------------------------+
++-------------+-----------------+
+| Short name  | Php/FopenMode   |
++-------------+-----------------+
+| Rulesets    | :ref:`Analyze`  |
++-------------+-----------------+
+| Severity    | Major           |
++-------------+-----------------+
+| Time To Fix | Quick (30 mins) |
++-------------+-----------------+
+| Examples    | Php/FopenMode   |
++-------------+-----------------+
 
 
 
@@ -34309,7 +34982,7 @@ See also `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_, `Yo
 +-------------+------------------------------------------------+
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                  |
+| Time To Fix | Structures/YodaComparison                      |
 +-------------+------------------------------------------------+
 
 
@@ -34351,17 +35024,17 @@ Suggestions
 * Add a '/' at the beginning of the path after __DIR__.
 * Add a call to realpath() or file_exists(), before accessing the file.
 
-+-------------+-------------------------------------+
-| Short name  | Structures/DirThenSlash             |
-+-------------+-------------------------------------+
-| Rulesets    | :ref:`Analyze`                      |
-+-------------+-------------------------------------+
-| Severity    | Major                               |
-+-------------+-------------------------------------+
-| Time To Fix | Instant (5 mins)                    |
-+-------------+-------------------------------------+
-| Examples    | :ref:`traq-structures-dirthenslash` |
-+-------------+-------------------------------------+
++-------------+-------------------------+
+| Short name  | Structures/DirThenSlash |
++-------------+-------------------------+
+| Rulesets    | :ref:`Analyze`          |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Instant (5 mins)        |
++-------------+-------------------------+
+| Examples    | Structures/DirThenSlash |
++-------------+-------------------------+
 
 
 
@@ -34418,7 +35091,7 @@ See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 +-------------+---------------------------------------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                                                   |
 +-------------+---------------------------------------------------------------------------------+
-| Examples    | :ref:`dolibarr-php-debuginfousage`                                              |
+| Examples    | Php/debugInfoUsage                                                              |
 +-------------+---------------------------------------------------------------------------------+
 
 
@@ -34480,7 +35153,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Major                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Structures/toStringThrowsException |
 +-------------+------------------------------------+
 
 
@@ -34533,7 +35206,7 @@ Suggestions
 +-------------+-----------------------------------------+
 | Severity    | Minor                                   |
 +-------------+-----------------------------------------+
-| Time To Fix | Quick (30 mins)                         |
+| Time To Fix | Performances/ArrayKeyExistsSpeedup      |
 +-------------+-----------------------------------------+
 
 
@@ -34579,7 +35252,7 @@ Suggestions
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
+| Time To Fix | Php/ArrayKeyExistsWithObjects             |
 +-------------+-------------------------------------------+
 
 
@@ -34623,7 +35296,7 @@ Suggestions
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
-| Time To Fix | Quick (30 mins)                  |
+| Time To Fix | Structures/ArrayMergeAndVariadic |
 +-------------+----------------------------------+
 
 
@@ -34644,17 +35317,23 @@ According to the manual : The salt parameter is optional. However, `crypt() <htt
    // Set the password
    $password = 'mypassword';
    
+   // salted crypt usage (always valid)
+   $hash = crypt($password, '123salt');
+   
    // Get the hash, letting the salt be automatically generated
    // This generates a notice after PHP 5.6
-   $hash = crypt($password);
-   
-   
    $hash = crypt($password);
    
    ?>
 
 
 See also `crypt <http://www.php.net/crypt>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always provide the second argument
 
 +-------------+-----------------------------+
 | Short name  | Structures/CryptWithoutSalt |
@@ -34665,7 +35344,7 @@ See also `crypt <http://www.php.net/crypt>`_.
 +-------------+-----------------------------+
 | Severity    | Minor                       |
 +-------------+-----------------------------+
-| Time To Fix | Instant (5 mins)            |
+| Time To Fix | Structures/CryptWithoutSalt |
 +-------------+-----------------------------+
 
 
@@ -34705,7 +35384,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Structures/CurlVersionNow |
 +-------------+---------------------------+
 
 
@@ -34737,17 +35416,17 @@ Using named constants with error_reporting is strongly encouraged to ensure comp
 
 See also `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_ and `error_reporting <http://php.net/manual/en/function.error-reporting.php>`_.
 
-+-------------+------------------------------------------------------+
-| Short name  | Structures/ErrorReportingWithInteger                 |
-+-------------+------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                       |
-+-------------+------------------------------------------------------+
-| Severity    | Minor                                                |
-+-------------+------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                     |
-+-------------+------------------------------------------------------+
-| Examples    | :ref:`sugarcrm-structures-errorreportingwithinteger` |
-+-------------+------------------------------------------------------+
++-------------+--------------------------------------+
+| Short name  | Structures/ErrorReportingWithInteger |
++-------------+--------------------------------------+
+| Rulesets    | :ref:`Analyze`                       |
++-------------+--------------------------------------+
+| Severity    | Minor                                |
++-------------+--------------------------------------+
+| Time To Fix | Instant (5 mins)                     |
++-------------+--------------------------------------+
+| Examples    | Structures/ErrorReportingWithInteger |
++-------------+--------------------------------------+
 
 
 
@@ -34787,19 +35466,19 @@ Suggestions
 
 * Always add a try/catch block around eval() call
 
-+-------------+---------------------------------------------------------------------------------------------+
-| Short name  | Structures/EvalWithoutTry                                                                   |
-+-------------+---------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                             |
-+-------------+---------------------------------------------------------------------------------------------+
-| Php Version | With PHP 7.0 and more recent                                                                |
-+-------------+---------------------------------------------------------------------------------------------+
-| Severity    | Critical                                                                                    |
-+-------------+---------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                             |
-+-------------+---------------------------------------------------------------------------------------------+
-| Examples    | :ref:`fuelcms-structures-evalwithouttry`, :ref:`expressionengine-structures-evalwithouttry` |
-+-------------+---------------------------------------------------------------------------------------------+
++-------------+---------------------------------+
+| Short name  | Structures/EvalWithoutTry       |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security` |
++-------------+---------------------------------+
+| Php Version | With PHP 7.0 and more recent    |
++-------------+---------------------------------+
+| Severity    | Critical                        |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+| Examples    | Structures/EvalWithoutTry       |
++-------------+---------------------------------+
 
 
 
@@ -34841,7 +35520,7 @@ See also `Alternative PHP Cache <http://php.net/apc>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Extensions/Extapc         |
 +-------------+---------------------------+
 
 
@@ -34887,7 +35566,7 @@ See also `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Extensions/Extdba         |
 +-------------+---------------------------+
 
 
@@ -34922,7 +35601,7 @@ See also `Ereg <http://php.net/manual/en/function.ereg.php>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Extensions/Extereg        |
 +-------------+---------------------------+
 
 
@@ -34962,7 +35641,7 @@ See also `Form Data Format <http://php.net/manual/en/book.fdf.php>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Extensions/Extfdf         |
 +-------------+---------------------------+
 
 
@@ -35047,7 +35726,7 @@ See also `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_ and 
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Extensions/Extmcrypt      |
 +-------------+---------------------------+
 
 
@@ -35082,7 +35761,7 @@ See also `Extension mhash <http://php.net/manual/en/book.mhash.php>`_.
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Extensions/Extmhash       |
 +-------------+---------------------------+
 
 
@@ -35148,7 +35827,7 @@ See also `Ming (flash) <http://www.libming.org/>`_ and `Ming <http://www.libming
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Extensions/Extming        |
 +-------------+---------------------------+
 
 
@@ -35172,7 +35851,7 @@ This extension is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
+| Time To Fix | Extensions/Extmysql       |
 +-------------+---------------------------+
 
 
@@ -35209,6 +35888,13 @@ Thanks to `Frederic Bouchery <https://twitter.com/FredBouchery/>`_ for reporting
 
 See also `Data filtering <http://php.net/manual/en/book.filter.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the classic $_GET, $_POST super globals, which are easier to audit.
+* Use your framework's parameter access.
+
 +-------------+----------------------------+
 | Short name  | Security/FilterInputSource |
 +-------------+----------------------------+
@@ -35216,7 +35902,7 @@ See also `Data filtering <http://php.net/manual/en/book.filter.php>`_.
 +-------------+----------------------------+
 | Severity    | Minor                      |
 +-------------+----------------------------+
-| Time To Fix | Slow (1 hour)              |
+| Time To Fix | Security/FilterInputSource |
 +-------------+----------------------------+
 
 
@@ -35273,7 +35959,7 @@ Suggestions
 +-------------+-----------------------------------+
 | Severity    | Minor                             |
 +-------------+-----------------------------------+
-| Time To Fix | Quick (30 mins)                   |
+| Time To Fix | Performances/CsvInLoops           |
 +-------------+-----------------------------------+
 
 
@@ -35308,7 +35994,7 @@ This code will display 1 in PHP 7, and 0 in PHP 5.
 +-------------+-------------------------------------------+
 | Severity    | Major                                     |
 +-------------+-------------------------------------------+
-| Time To Fix | Quick (30 mins)                           |
+| Time To Fix | Functions/funcGetArgModified              |
 +-------------+-------------------------------------------+
 
 
@@ -35332,11 +36018,17 @@ The default parameter value of `idn_to_ascii() <https://www.php.net/idn_to_ascii
 
 See also `idn_to_ascii <http://php.net/manual/en/function.idn-to-ascii.php>`_, `idn_to_utf8 <http://php.net/manual/en/function.idn-to-utf8.php>`_ and `Unicode IDNA Compatibility Processing <http://unicode.org/reports/tr46/>`_.
 
-+------------+---------------------------+
-| Short name | Php/IdnUts46              |
-+------------+---------------------------+
-| Rulesets   | :ref:`CompatibilityPHP74` |
-+------------+---------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Explicitely add the second parameter to the idn_to_ascii() and idn_to_utf8() functions.
+
++------------+--------------+
+| Short name | Php/IdnUts46 |
++------------+--------------+
+| Rulesets   | Php/IdnUts46 |
++------------+--------------+
 
 
 
@@ -35370,17 +36062,17 @@ Suggestions
 * Avoid using include_once() whenever possible 
 * Use autoload() to load classes, and avoid loading them with include
 
-+-------------+-------------------------------------------------------------------------+
-| Short name  | Structures/OnceUsage                                                    |
-+-------------+-------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                          |
-+-------------+-------------------------------------------------------------------------+
-| Severity    | Minor                                                                   |
-+-------------+-------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                         |
-+-------------+-------------------------------------------------------------------------+
-| Examples    | :ref:`xoops-structures-onceusage`, :ref:`tikiwiki-structures-onceusage` |
-+-------------+-------------------------------------------------------------------------+
++-------------+----------------------+
+| Short name  | Structures/OnceUsage |
++-------------+----------------------+
+| Rulesets    | :ref:`Analyze`       |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+| Examples    | Structures/OnceUsage |
++-------------+----------------------+
 
 
 
@@ -35412,7 +36104,7 @@ This would yield an error : ``Cannot use `isset() <http://www.www.php.net/isset>
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                      |
 +-------------+------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                           |
+| Time To Fix | Structures/IssetWithConstant                                                                               |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -35450,17 +36142,17 @@ Suggestions
 * Remove the unused variables from the list call
 * When the ignored values are at the beginning or the end of the array, array_slice() may be used to shorten the array.
 
-+-------------+-----------------------------------------------------------------------------------+
-| Short name  | Structures/ListOmissions                                                          |
-+-------------+-----------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                |
-+-------------+-----------------------------------------------------------------------------------+
-| Severity    | Minor                                                                             |
-+-------------+-----------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                   |
-+-------------+-----------------------------------------------------------------------------------+
-| Examples    | :ref:`openconf-structures-listomissions`, :ref:`fuelcms-structures-listomissions` |
-+-------------+-----------------------------------------------------------------------------------+
++-------------+------------------------------------+
+| Short name  | Structures/ListOmissions           |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+| Examples    | Structures/ListOmissions           |
++-------------+------------------------------------+
 
 
 
@@ -35499,7 +36191,7 @@ Suggestions
 +-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Php/Php74mbstrrpos3rdArg  |
 +-------------+---------------------------+
 
 
@@ -35540,7 +36232,7 @@ See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv
 +-------------+----------------------------------------+
 | Severity    | Minor                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Instant (5 mins)                       |
+| Time To Fix | Structures/McryptcreateivWithoutOption |
 +-------------+----------------------------------------+
 
 
@@ -35570,6 +36262,13 @@ Always use `move_uploaded_file() <https://www.php.net/move_uploaded_file>`_ with
 
 See also `move_uploaded_file <http://php.net/move_uploaded_file>`_ and `Uploading Files with PHP <https://www.sitepoint.com/file-uploads-with-php/>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use move_uploaded_file() 
+* Extract the needed information from the file, and leave it for PHP to remove without storage
+
 +-------------+---------------------------+
 | Short name  | Security/MoveUploadedFile |
 +-------------+---------------------------+
@@ -35577,7 +36276,7 @@ See also `move_uploaded_file <http://php.net/move_uploaded_file>`_ and `Uploadin
 +-------------+---------------------------+
 | Severity    | Major                     |
 +-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
+| Time To Fix | Security/MoveUploadedFile |
 +-------------+---------------------------+
 
 
@@ -35625,7 +36324,7 @@ Suggestions
 +-------------+---------------------------------------------+
 | Severity    | Minor                                       |
 +-------------+---------------------------------------------+
-| Time To Fix | Quick (30 mins)                             |
+| Time To Fix | Structures/OpensslRandomPseudoByteSecondArg |
 +-------------+---------------------------------------------+
 
 
@@ -35653,19 +36352,26 @@ The `parse_str() <https://www.php.net/parse_str>`_ function parses a query strin
    ?>
 
 
-Always use an empty variable a second parameter to `parse_str() <https://www.php.net/parse_str>`_, so as to collect the incoming values, and then, filter them in that array.
+Always use an empty variable a second parameter to `parse_str() <https://www.php.net/parse_str>`_, so as to collect the incoming values, and then, filter them in that array. 
 
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Short name  | Security/parseUrlWithoutParameters                                                                    |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Security`                                                                                       |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                 |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                                         |
-+-------------+-------------------------------------------------------------------------------------------------------+
-| ClearPHP    | `know-your-variables <https://github.com/dseguy/clearPHP/tree/master/rules/know-your-variables.md>`__ |
-+-------------+-------------------------------------------------------------------------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the second parameter when calling parse_url();
+* Change to PHP 8.0 version, which made the second argument compulsory
+
++-------------+------------------------------------+
+| Short name  | Security/parseUrlWithoutParameters |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Security`                    |
++-------------+------------------------------------+
+| Severity    | Major                              |
++-------------+------------------------------------+
+| Time To Fix | Slow (1 hour)                      |
++-------------+------------------------------------+
+| ClearPHP    | Security/parseUrlWithoutParameters |
++-------------+------------------------------------+
 
 
 
@@ -35709,17 +36415,17 @@ Suggestions
 
 * Use flags to adapt the results of preg_match_all() to your code, not the contrary.
 
-+-------------+-------------------------------------+
-| Short name  | Php/PregMatchAllFlag                |
-+-------------+-------------------------------------+
-| Rulesets    | :ref:`Suggestions`                  |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Quick (30 mins)                     |
-+-------------+-------------------------------------+
-| Examples    | :ref:`fuelcms-php-pregmatchallflag` |
-+-------------+-------------------------------------+
++-------------+----------------------+
+| Short name  | Php/PregMatchAllFlag |
++-------------+----------------------+
+| Rulesets    | :ref:`Suggestions`   |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+| Examples    | Php/PregMatchAllFlag |
++-------------+----------------------+
 
 
 
@@ -35769,7 +36475,7 @@ Suggestions
 +-------------+------------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                                  |
 +-------------+------------------------------------------------------------------------------------------------------------------+
-| Examples    | :ref:`edusoho-structures-pregoptione`                                                                            |
+| Examples    | Structures/pregOptionE                                                                                           |
 +-------------+------------------------------------------------------------------------------------------------------------------+
 
 
@@ -35824,7 +36530,7 @@ See also `Scope Resolution Operator (\:\:) <http://php.net/manual/en/language.oo
 +-------------+----------------------------------------+
 | Severity    | Major                                  |
 +-------------+----------------------------------------+
-| Time To Fix | Slow (1 hour)                          |
+| Time To Fix | Classes/NoPSSOutsideClass              |
 +-------------+----------------------------------------+
 
 
@@ -35863,7 +36569,7 @@ When in doubt about backward compatibility, just drop the typehint. Otherwise, u
 +-------------+-----------------------------+
 | Severity    | Major                       |
 +-------------+-----------------------------+
-| Time To Fix | Slow (1 hour)               |
+| Time To Fix | Php/SetExceptionHandlerPHP7 |
 +-------------+-----------------------------+
 
 
@@ -35905,7 +36611,7 @@ Suggestions
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
+| Time To Fix | Structures/StripTagsSkipsClosedTag |
 +-------------+------------------------------------+
 
 
@@ -35960,17 +36666,17 @@ Suggestions
 * use substr() and compare the extracted string
 * For single chars, try using the position in the string
 
-+-------------+---------------------------------------------+
-| Short name  | Performances/StrposTooMuch                  |
-+-------------+---------------------------------------------+
-| Rulesets    | :ref:`Analyze`                              |
-+-------------+---------------------------------------------+
-| Severity    | Minor                                       |
-+-------------+---------------------------------------------+
-| Time To Fix | Instant (5 mins)                            |
-+-------------+---------------------------------------------+
-| Examples    | :ref:`wordpress-performances-strpostoomuch` |
-+-------------+---------------------------------------------+
++-------------+----------------------------+
+| Short name  | Performances/StrposTooMuch |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Instant (5 mins)           |
++-------------+----------------------------+
+| Examples    | Performances/StrposTooMuch |
++-------------+----------------------------+
 
 
 
@@ -36004,17 +36710,17 @@ Suggestions
 
 * Replace strtotime() with time(). Do not change strtotime() with other value than 'now'.
 
-+-------------+-------------------------------------------------+
-| Short name  | Performances/timeVsstrtotime                    |
-+-------------+-------------------------------------------------+
-| Rulesets    | :ref:`Performances`                             |
-+-------------+-------------------------------------------------+
-| Severity    | Minor                                           |
-+-------------+-------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                |
-+-------------+-------------------------------------------------+
-| Examples    | :ref:`woocommerce-performances-timevsstrtotime` |
-+-------------+-------------------------------------------------+
++-------------+------------------------------+
+| Short name  | Performances/timeVsstrtotime |
++-------------+------------------------------+
+| Rulesets    | :ref:`Performances`          |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
+| Examples    | Performances/timeVsstrtotime |
++-------------+------------------------------+
 
 
 
@@ -36062,7 +36768,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------+
-| Examples    | :ref:`tine20-structures-vardumpusage`, :ref:`piwigo-structures-vardumpusage`              |
+| Examples    | Structures/VardumpUsage                                                                   |
 +-------------+-------------------------------------------------------------------------------------------+
 
 

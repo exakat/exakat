@@ -73,104 +73,122 @@ Available Options
 
 Here are the currently available options in Exakat's configuration file : config/config.ini
 
-+--------------------+-------------------------------------------------------------------------------------------+
-| Option             | Description                                                                               |
-+====================+===========================================================================================+
-| graphdb            | The graph database to use.                                                                |
-|                    | Currently, it may be gsneo4j, or tinkergraph.                                             |
-+--------------------+-------------------------------------------------------------------------------------------+
-| gsneo4j_host       | The host to connect to reach the graph database, when using gsneo4j driver.               |
-|                    | The default value is 'localhost'                                                          |
-+--------------------+-------------------------------------------------------------------------------------------+
-| gsneo4j_host       | The port to use on the host to reach the graph database, when using gsneo4j driver..      |
-|                    | The default value is '8182'                                                               |
-+--------------------+-------------------------------------------------------------------------------------------+
-| gsneo4j_folder     | The folder where the code for the graph database resides, when using gsneo4j driver.      |
-|                    | The default value is 'tinkergraph', and is located near exakat.phar                       |
-+--------------------+-------------------------------------------------------------------------------------------+
-| tinkergraph_host   | The host to connect to reach the graph database, when using tinkergraph driver.           |
-|                    | The default value is 'localhost'                                                          |
-+--------------------+-------------------------------------------------------------------------------------------+
-| tinkergraph_port   | The port to use on the host to reach the graph database, when using tinkergraph driver.   |
-|                    | The default value is '8182'                                                               |
-+--------------------+-------------------------------------------------------------------------------------------+
-| tinkergraph_folder | The folder where the code for the graph database resides, when using tinkergraph driver.  |
-|                    | The default value is 'tinkergraph', and is located near exakat.phar                       |
-+--------------------+-------------------------------------------------------------------------------------------+
-| project_rulesets   | List of analysis rulesets to be run. The list may include extra rulesets that are not     |
-|                    | used by the default reports : you can then summon them manually.                          |
-|                    | project_themes[] = 'Theme', one per line.                                                 |
-+--------------------+-------------------------------------------------------------------------------------------+
-| project_themes     | Obsolete. Use the one above : project_rulesets                                            |
-+--------------------+-------------------------------------------------------------------------------------------+
-| project_reports    | The list of reports that can be produced when running 'project' command.                  |
-|                    | This list may automatically add extra rulesets if a report requires them. For example,    |
-|                    | the 'Ambassador' report requires 'Security' ruleset, while 'Text' has no pre-requisite.   |
-|                    | project_reports is 'Ambassador', by default.                                              |
-|                    | project_reports[] = 'Report', one per line.                                               |
-+--------------------+-------------------------------------------------------------------------------------------+
-| token_limit        | Maximum size of the analyzed project, in number of PHP tokens (excluding whitespace).     |
-|                    | Use this to avoid running a really long analyze without knowing it.                       |
-|                    | Default is 1 million.                                                                     |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php                | Link to the PHP binary. This binary is the one that runs Exakat. It is recommended to use |
-|                    | PHP 7.3, or 7.4. The same binary may be used with the following options.                  |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php80              | Path to the PHP 8.0.x binary. This binary is needed to test the compilation with the 8.0  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php74              | Path to the PHP 7.4.x binary. This binary is needed to test the compilation with the 7.4  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php73              | Path to the PHP 7.3.x binary. This binary is needed to test the compilation with the 7.3  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is recommended to use this       |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php72              | Path to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php71              | Path to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php70              | Path to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php56              | Path to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php55              | Path to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php54              | Path to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php53              | Path to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
-| php52              | Path to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
-|                    | series or if the analyze should be run with this version (see project's config.ini).      |
-|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                    | version for the analyze                                                                   |
-+--------------------+-------------------------------------------------------------------------------------------+
++----------------------+-------------------------------------------------------------------------------------------+
+| Option               | Description                                                                               |
++======================+===========================================================================================+
+| graphdb              | The graph database to use.                                                                |
+|                      | Currently, it may be gsneo4j, or tinkergraph.                                             |
++----------------------+-------------------------------------------------------------------------------------------+
+| gsneo4j_host         | The host to connect to reach the graph database, when using gsneo4j driver.               |
+|                      | The default value is 'localhost'                                                          |
++----------------------+-------------------------------------------------------------------------------------------+
+| gsneo4j_host         | The port to use on the host to reach the graph database, when using gsneo4j driver..      |
+|                      | The default value is '8182'                                                               |
++----------------------+-------------------------------------------------------------------------------------------+
+| gsneo4j_folder       | The folder where the code for the graph database resides, when using gsneo4j driver.      |
+|                      | The default value is 'tinkergraph', and is located near exakat.phar                       |
++----------------------+-------------------------------------------------------------------------------------------+
+| tinkergraph_host     | The host to connect to reach the graph database, when using tinkergraph driver.           |
+|                      | The default value is 'localhost'                                                          |
++----------------------+-------------------------------------------------------------------------------------------+
+| tinkergraph_port     | The port to use on the host to reach the graph database, when using tinkergraph driver.   |
+|                      | The default value is '8182'                                                               |
++----------------------+-------------------------------------------------------------------------------------------+
+| tinkergraph_folder   | The folder where the code for the graph database resides, when using tinkergraph driver.  |
+|                      | The default value is 'tinkergraph', and is located near exakat.phar                       |
++----------------------+-------------------------------------------------------------------------------------------+
+| gsneo4jv3_host       | The host to connect to reach the graph database, when using gsneo4j driver.               |
+|                      | The default value is 'localhost'                                                          |
++----------------------+-------------------------------------------------------------------------------------------+
+| gsneo4jve_host       | The port to use on the host to reach the graph database, when using gsneo4j driver..      |
+|                      | The default value is '8182'                                                               |
++----------------------+-------------------------------------------------------------------------------------------+
+| gsneo4jv3_folder     | The folder where the code for the graph database resides, when using gsneo4j driver.      |
+|                      | The default value is 'tinkergraph', and is located near exakat.phar                       |
++----------------------+-------------------------------------------------------------------------------------------+
+| tinkergraphv3_host   | The host to connect to reach the graph database, when using tinkergraph driver.           |
+|                      | The default value is 'localhost'                                                          |
++----------------------+-------------------------------------------------------------------------------------------+
+| tinkergraphv3_port   | The port to use on the host to reach the graph database, when using tinkergraph driver.   |
+|                      | The default value is '8182'                                                               |
++----------------------+-------------------------------------------------------------------------------------------+
+| tinkergraphv3_folder | The folder where the code for the graph database resides, when using tinkergraph driver.  |
+|                      | The default value is 'tinkergraph', and is located near exakat.phar                       |
++----------------------+-------------------------------------------------------------------------------------------+
+| project_rulesets     | List of analysis rulesets to be run. The list may include extra rulesets that are not     |
+|                      | used by the default reports : you can then summon them manually.                          |
+|                      | project_themes[] = 'Theme', one per line.                                                 |
++----------------------+-------------------------------------------------------------------------------------------+
+| project_themes       | Obsolete. Use the one above : project_rulesets                                            |
++----------------------+-------------------------------------------------------------------------------------------+
+| project_reports      | The list of reports that can be produced when running 'project' command.                  |
+|                      | This list may automatically add extra rulesets if a report requires them. For example,    |
+|                      | the 'Ambassador' report requires 'Security' ruleset, while 'Text' has no pre-requisite.   |
+|                      | project_reports is 'Ambassador', by default.                                              |
+|                      | project_reports[] = 'Report', one per line.                                               |
++----------------------+-------------------------------------------------------------------------------------------+
+| token_limit          | Maximum size of the analyzed project, in number of PHP tokens (excluding whitespace).     |
+|                      | Use this to avoid running a really long analyze without knowing it.                       |
+|                      | Default is 1 million.                                                                     |
++----------------------+-------------------------------------------------------------------------------------------+
+| php                  | Link to the PHP binary. This binary is the one that runs Exakat. It is recommended to use |
+|                      | PHP 7.3, or 7.4. The same binary may be used with the following options.                  |
++----------------------+-------------------------------------------------------------------------------------------+
+| php80                | Path to the PHP 8.0.x binary. This binary is needed to test the compilation with the 8.0  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php74                | Path to the PHP 7.4.x binary. This binary is needed to test the compilation with the 7.4  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php73                | Path to the PHP 7.3.x binary. This binary is needed to test the compilation with the 7.3  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is recommended to use this       |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php72                | Path to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php71                | Path to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php70                | Path to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php56                | Path to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php55                | Path to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php54                | Path to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php53                | Path to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
+| php52                | Path to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
+|                      | series or if the analyze should be run with this version (see project's config.ini).      |
+|                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                      | version for the analyze                                                                   |
++----------------------+-------------------------------------------------------------------------------------------+
 
 Note : php** configuration may be either a valid PHP binary path, or a valid Docker image. The path on the system may be `/usr/bin/php`, `/usr/sbin/php80`, or `/usr/local/Cellar/php71/7.1.30/bin/php`. The Docker configuration must have the form `abc/def:tag`. The image's name may be any value, as long as Exakat manage to run it, and get the valid PHP signature, with `php -v`. When using Docker, the docker server must be running. 
 
@@ -278,11 +296,61 @@ In-code Configuration
 
 In-code configuration is a configuration file that sits at the root of the code. When exakat finds it, it uses it for in-code auditing.
 
-The file is `.exakat.yml`, and is a valid YAML file. 
+The file is `.exakat.yaml`, and is a valid YAML file. `.exakat.yml` is also valid, but not recommended.
 
-In case the file is found but not valid, Exakat reverts to default value, and complains that the project is called '/unnamed/'. 
+In case the file is found but not valid, Exakat reverts to default values. 
+
+Unrecognized values are ignored. 
+
+Exakat in-code example
+######################
+:: 
+
+    project: exakat
+    project_name: exakat
+    project_rulesets: 
+    - my_ruleset
+    - Security
+    project_report: 
+    - Ambassador
+    file_extensions: php,php3,phtml
+    include_dirs: 
+      - /
+    ignore_dirs: 
+      - /tests
+      - /vendor
+      - /docs
+      - /media
+    rulesets: 
+      my_ruleset: 
+          - Structures/AddZero
+          - Structures/MultiplyByOne
 
 
+Exakat in-code skeleton
+#######################
+
+Copy-paste this YAML code into a file called `.exakat.yaml`, located at the root of your repository.
+
+:: 
+
+    file_extensions: php,php3,phtml
+    project: <project short name>
+    project_name: <project name, as displayed in reports>
+    project_rulesets: 
+    - <list of rulesets to apply>
+    - Analysis
+    file_extensions: php,php3,phtml
+    project_report: 
+    - <list of reports to build>
+    - Ambassador
+    include_dirs: 
+      - /
+    ignore_dirs: 
+      - /tests
+      - /vendor
+      - /docs
+      - /media
 
 
 Available Options
@@ -367,6 +435,27 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + constant_or_variable_name : 100
 
     + Literal value to be used when including files. For example, by configuring 'Files_MissingInclude["HOME_DIR"] = "/tmp/myDir/";', then 'include HOME_DIR . "my_class.php"; will be actually be used as '/tmp/myDir/my_class.php'. Constants must be configured with their correct case. Variable must be configured with their initial '$'. Configure any number of variable and constant names.
+:ref:`Could Make A Function <could-make-a-function>`
+  + centralizeThreshold : 8
+
+    + Minimal number of calls of the function with one common argument.
+:ref:`Prefix And Suffixes With Typehint <prefix-and-suffixes-with-typehint>`
+  + prefixedType : prefixedType['is'] = 'bool';
+prefixedType['has'] = 'bool';
+prefixedType['set'] = 'void';
+prefixedType['list'] = 'array';
+
+    + List of prefixes and their expected returntype
+:ref:`Prefix And Suffixes With Typehint <prefix-and-suffixes-with-typehint>`
+  + suffixedType : prefixedType['list'] = 'bool';
+prefixedType['int'] = 'int';
+prefixedType['string'] = 'string';
+prefixedType['name'] = 'string';
+prefixedType['description'] = 'string';
+prefixedType['id'] = 'int';
+prefixedType['uuid'] = '\Uuid';
+
+    + List of suffixes and their expected returntype
 :ref:`Too Many Local Variables <too-many-local-variables>`
   + tooManyLocalVariableThreshold : 15
 
@@ -387,6 +476,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + nativeCallCounts : 3
 
     + Number of native calls found inside another call.
+:ref:`Keep Files Access Restricted <keep-files-access-restricted>`
+  + filePrivileges : 0777
+
+    + List of forbidden file modes (comma separated).
 :ref:`Long Arguments <long-arguments>`
   + codeTooLong : 100
 

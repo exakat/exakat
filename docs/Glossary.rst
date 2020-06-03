@@ -299,6 +299,10 @@ Glossary
 
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
 
+    + `chmod()`
+
+      + :ref:`Keep Files Access Restricted <keep-files-access-restricted>`
+
     + `chr()`
 
       + :ref:`Should Preprocess Chr() <should-preprocess-chr()>`
@@ -1116,6 +1120,7 @@ Glossary
 
     + `mkdir()`
 
+      + :ref:`Keep Files Access Restricted <keep-files-access-restricted>`
       + :ref:`Mkdir Default <mkdir-default>`
 
     + `money_format()`

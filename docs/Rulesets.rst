@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 13 May 2020 09:32:02 +0000
-.. comment: Generation hash : 3a98e88a11670b0c19301a8015e0a7717d3b86f1
+.. comment: Generation date : Wed, 03 Jun 2020 17:17:59 +0000
+.. comment: Generation hash : c7413281d678097e66b5a3928b7f07044980cb78
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 388 analysis
+Total : 389 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -252,6 +252,7 @@ Total : 388 analysis
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Mismatched Typehint <mismatched-typehint>`
+* :ref:`Missing Abstract Method <missing-abstract-method>`
 * :ref:`Missing Cases In Switch <missing-cases-in-switch>`
 * :ref:`Missing Include <missing-include>`
 * :ref:`Missing New ? <missing-new-?>`
@@ -489,7 +490,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 41 analysis
+Total : 43 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -516,6 +517,7 @@ Total : 41 analysis
 * :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Could Be Static <method-could-be-static>`
+* :ref:`Missing Abstract Method <missing-abstract-method>`
 * :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Non Nullable Getters <non-nullable-getters>`
@@ -528,6 +530,7 @@ Total : 41 analysis
 * :ref:`Uninited Property <uninited-property>`
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
 * :ref:`Unused Class Constant <unused-class-constant>`
+* :ref:`Unused Trait In Class <unused-trait-in-class>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
@@ -1000,7 +1003,7 @@ CompatibilityPHP72
 
 This ruleset centralizes all analysis for the migration from PHP 7.1 to 7.2.
 
-Total : 28 analysis
+Total : 29 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -1024,6 +1027,7 @@ Total : 28 analysis
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Signature Trailing Comma <signature-trailing-comma>`
+* :ref:`Throw Was An Expression <throw-was-an-expression>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -1038,7 +1042,7 @@ CompatibilityPHP73
 
 This ruleset centralizes all analysis for the migration from PHP 7.2 to 7.3.
 
-Total : 17 analysis
+Total : 18 analysis
 
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
@@ -1053,6 +1057,7 @@ Total : 17 analysis
 * :ref:`PHP 74 New Directives <php-74-new-directives>`
 * :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Signature Trailing Comma <signature-trailing-comma>`
+* :ref:`Throw Was An Expression <throw-was-an-expression>`
 * :ref:`Typed Property Usage <typed-property-usage>`
 * :ref:`Union Typehint <union-typehint>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
@@ -1065,7 +1070,7 @@ CompatibilityPHP74
 
 This ruleset centralizes all analysis for the migration from PHP 7.3 to 7.4.
 
-Total : 27 analysis
+Total : 28 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
@@ -1087,6 +1092,7 @@ Total : 27 analysis
 * :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
 * :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
 * :ref:`Signature Trailing Comma <signature-trailing-comma>`
+* :ref:`Throw Was An Expression <throw-was-an-expression>`
 * :ref:`Unbinding Closures <unbinding-closures>`
 * :ref:`Union Typehint <union-typehint>`
 * :ref:`array_key_exists() Works On Arrays <array\_key\_exists()-works-on-arrays>`
@@ -1255,11 +1261,12 @@ Security
 
 This ruleset focuses on code security. 
 
-Total : 42 analysis
+Total : 44 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
+* :ref:`Check Crypto Key Length <check-crypto-key-length>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Configure Extract <configure-extract>`
 * :ref:`Direct Injection <direct-injection>`
@@ -1270,6 +1277,7 @@ Total : 42 analysis
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
 * :ref:`Integer Conversion <integer-conversion>`
+* :ref:`Keep Files Access Restricted <keep-files-access-restricted>`
 * :ref:`Minus One On Error <minus-one-on-error>`
 * :ref:`Mkdir Default <mkdir-default>`
 * :ref:`No ENT_IGNORE <no-ent\_ignore>`
@@ -1307,13 +1315,14 @@ Semantics
 
 This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
 
-Total : 11 analysis
+Total : 12 analysis
 
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Duplicate Literal <duplicate-literal>`
 * :ref:`Fn Argument Variable Confusion <fn-argument-variable-confusion>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`Parameter Hiding <parameter-hiding>`
+* :ref:`Prefix And Suffixes With Typehint <prefix-and-suffixes-with-typehint>`
 * :ref:`Property Variable Confusion <property-variable-confusion>`
 * :ref:`Semantic Typing <semantic-typing>`
 * :ref:`Similar Integers <similar-integers>`

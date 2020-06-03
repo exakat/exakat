@@ -22,6 +22,7 @@ There are several reports that may be extracted from Exakat :
 * `Inventories`_
 * `Json`_
 * `Marmelab`_
+* `Meters`_
 * `None`_
 * `Owasp`_
 * `Perfile`_
@@ -166,7 +167,7 @@ ___________
 
 The ClassReview report focuses on reviewing classes, traits and interfaces.
 
-The ClassReview report focuses on good code hygene for classes, interfaces and traits. 
+The ClassReview report focuses on good code hygiene for classes, interfaces and traits. 
 
 It checks the internal structure of classes, and suggest visibility, typehint updates.
 
@@ -269,7 +270,7 @@ ________
 
 The Composer report provide elements for the require attribute in the composer.json.
 
-It helps documenting the composer.json, by providing more informations, extracted from the code.
+It helps documenting the composer.json, by providing more information, extracted from the code.
 
 This report makes a copy then updates the composer.json, if available. It creates a totally new composer.json if the latter is not available. 
 
@@ -310,7 +311,7 @@ The DependencyWheel represents dependencies in a code source.
 
 Dependency Wheel is a javascript visualization of the classes dependencies in the code. Every class, interface and trait are represented as a circle, and every relation between the classes are represented by a link between them, inside the circle. 
 
-It is based on Francois Zaninotto's [DependencyWheel](http://fzaninotto.github.com/DependencyWheel) and the [d3.js](https://github.com/mbostock/d3).
+It is based on Francois Zaninotto's `DependencyWheel <http://fzaninotto.github.com/DependencyWheel`_ and the `d3.js <https://github.com/mbostock/d3>`_.
 
 .. image:: images/report.dependencywheel.png
     :alt: Example of a Dependency Wheel report (0)
@@ -928,7 +929,7 @@ For example, `A.php` depends on `B.php`, because `A.php` uses the function `foo`
 
 This diagram shows which files may be used without others.
 
-The resulting diagram is a DOT file, which is readable with [Graphviz](https://www.graphviz.org/about/). Those viewers will display the diagramm, and also convert it to other format, such as PNG, JPEG, PDF or others.  
+The resulting diagram is a DOT file, which is readable with [Graphviz](https://www.graphviz.org/about/). Those viewers will display the diagram, and also convert it to other format, such as PNG, JPEG, PDF or others.  
 
 Another version of the same diagram is called Filedependencieshtml
 
@@ -954,7 +955,7 @@ The resulting diagram is in HTML file, which is readable with most browsers, fro
 
 Warning : for browser security reasons, the report will NOT load as a local file. It needs to be served by an HTTP server, so all resources are correctly located.
 
-Warning : large applicatoins (> 1000 files) will require a lot of resources to open.
+Warning : large applications (> 1000 files) will require a lot of resources to open.
 
 Another version of the same diagram is called Filedependencies, and produces a DOT file
 
@@ -975,7 +976,7 @@ The history tables are the same as the dump.sqlite tables, except for the extra 
 
 + 'dump_timestamp' : this is a timmestamp taken when the dump was build
 + 'dump_serial'    : this is a serial number, based on the previous audit, and incremented by one. This is handy to keep the values in sequence
-+ 'dump_id'        : this is a unique random id, which helps distinguish audits which may have inconsistence between serial or timestamp.
++ 'dump_id'        : this is a unique random id, which helps distinguish audits which may have inconsistency between serial or timestamp.
 
 This report provides a 'history.sqlite' database. The following tables are inventoried : 
 
@@ -1004,16 +1005,16 @@ The following values and names are inventoried :
 + Constants
 + Functions
 + Classes
-+ Interfaces
-+ Traitnames
++ Interface names
++ Trait names
 + Namespaces
 + Exceptions
 + Regex
-+ SQL
++ SQL queries
 + URL
 + Unicode blocks
-+ Integer
-+ Real
++ Integers
++ Reals numbers
 + Literal Arrays
 + Strings
 
@@ -1124,6 +1125,28 @@ You may also learn more about GraphQL at [Introducing Json GraphQL Server](https
 Marmelab is a JSON report format.
 
 Marmelab depends on the following theme : Analyze.
+
+Meters
+______
+
+The Meters report export various dimensions of the audited code.
+
+Exakat measures a large number of code dimensions, such as number of files, lines of code, tokens. All those are collected in this report.
+
+::
+
+{
+	loc: 95950,
+	locTotal: 140260,
+	files: 1824,
+	tokens: 677213
+}
+
+
+
+Meters is a JSON report format.
+
+Meters depends on the following theme : None.
 
 None
 ____

@@ -120,6 +120,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Sarb
   * Exakatvendors
   * Topology
+  * Meters
 
 
 Supported PHP Extensions
@@ -438,11 +439,23 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.1.1
+
+  * Check Crypto Key Length (Security/CryptoKeyLength ; Security)
+  * Dynamic Self Calls (Classes/DynamicSelfCalls)
+  * Keep Files Access Restricted (Security/KeepFilesRestricted ; Security)
+  * OpenSSL Ciphers Used (Type/OpensslCipher ; Inventory)
+  * Prefix And Suffixes With Typehint (Functions/PrefixToType ; Semantics)
+  * Structures/DoubleReference (Structures/DoubleReference ; )
+  * Throw Was An Expression (Php/ThrowWasAnExpression ; CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
+  * Undefined Constant Name (Variables/UndefinedConstantName ; Unassigned)
+  * Unused Trait In Class (Traits/UnusedClassTrait ; ClassReview)
+
 * 2.1.0
 
   * Fn Argument Variable Confusion (Functions/FnArgumentVariableConfusion ; Analyze, Semantics)
   * Hidden Nullable (Classes/HiddenNullable)
-  * Missing Abstract Method (Classes/MissingAbstractMethod ; Unassigned)
+  * Missing Abstract Method (Classes/MissingAbstractMethod ; Analyze, ClassReview)
   * Signature Trailing Comma (Php/SignatureTrailingComma ; CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
 
 * 2.0.9
@@ -488,7 +501,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 2.0.2
 
   * Dump/Inclusions (Dump/Inclusions ; Dump)
-  * Dump/NewOrder (Dump/NewOrder ; Unassigned)
+  * Dump/NewOrder (Dump/NewOrder ; Dump)
   * Insufficient Property Typehint (Classes/InsufficientPropertyTypehint)
   * Nullable Without Check (Functions/NullableWithoutCheck ; ClassReview)
   * Typehint Order (Dump/TypehintOrder ; Unassigned)
@@ -547,6 +560,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.9.5
 
   * Collect Literals (Dump/CollectLiterals ; Dump)
+  * Environnement Variable Usage (Dump/EnvironnementVariables ; Dump)
   * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, ClassReview)
   * Magic Properties (Classes/MagicProperties)
   * No Garantee For Property Constant (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
@@ -570,7 +584,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Complete/SetClassRemoteDefinitionWithParenthesis (Complete/SetClassRemoteDefinitionWithParenthesis ; Complete)
   * Complete/SetClassRemoteDefinitionWithTypehint (Complete/SetClassRemoteDefinitionWithTypehint ; Complete)
   * Environment Variables (Dump/EnvironmentVariables ; )
-  * Indentation Levels (Dump/IndentationLevels ; Unassigned, Dump)
+  * Indentation Levels (Dump/IndentationLevels ; Dump)
   * Max Level Of Nesting (Structures/MaxLevelOfIdentation ; Analyze)
   * No Spread For Hash (Arrays/NoSpreadForHash)
   * PHP 7.4 Constant Deprecation (Php/Php74Deprecation ; CompatibilityPHP74)
@@ -2161,7 +2175,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-86 PHP error message detailled : 
+88 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
@@ -2238,10 +2252,12 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Trying to access array offset on value of type null <scalar-are-not-arrays>`
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
 * :ref:`Undefined class constant <avoid-self-in-interface>`
+* :ref:`Undefined constant 'y' <undefined-constant-name>`
 * :ref:`Undefined function <undefined-functions>`
 * :ref:`Undefined variable:  <undefined-variable>`
 * :ref:`Unparenthesized a ? b : c ? d : e is deprecated. Use either (a ? b : c) ? d : e or a ? b : (c ? d : e) <nested-ternary-without-parenthesis>`
 * :ref:`Unsupported operand types <unsupported-operand-types>`
+* :ref:`Use of undefined constant y - assumed 'y' (this will throw an Error in a future version of PHP) <undefined-constant-name>`
 * :ref:`Using $this when not in object context <$this-belongs-to-classes-or-traits>`
 * :ref:`__autoload() is deprecated, use spl_autoload_register() instead <old-style-\_\_autoload()>`
 * :ref:`__clone method called on non-object <clone-with-non-object>`
@@ -2376,8 +2392,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2455,11 +2471,13 @@ List of external links mentionned in this documentation.
 * `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_
 * `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/definitions/625.html>`_
 * `Cyrus <http://php.net/manual/en/book.cyrus.php>`_
+* `d3.js <https://github.com/mbostock/d3>`_
 * `Data filtering <http://php.net/manual/en/book.filter.php>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
 * `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.dba.php>`_
 * `Date and Time <http://php.net/manual/en/book.datetime.php>`_
 * `DCDFLIB <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
+* `Dead Code: Unused Method <https://vulncat.fortify.com/en/detail?id=desc.structural.java.dead_code_unused_method>`_
 * `declare <http://php.net/manual/en/control-structures.declare.php>`_
 * `define <http://php.net/manual/en/function.define.php>`_
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
@@ -2485,7 +2503,6 @@ List of external links mentionned in this documentation.
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
 * `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_
-* `Don't repeat yourself (DRY) <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`_
 * `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
 * `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_
@@ -2656,8 +2673,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2703,13 +2720,14 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
+* `OpennSSL [PHP manual] <https://www.php.net/manual/en/book.openssl.php>`_
 * `openssl_random_pseudo_byte <https://www.php.net/openssl_random_pseudo_bytes>`_
 * `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
@@ -2877,9 +2895,11 @@ List of external links mentionned in this documentation.
 * `tetraweb/php <https://hub.docker.com/r/tetraweb/php/>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
+* `The Definitive 2019 Guide to Cryptographic Key Sizes and Algorithm Recommendations <https://paragonie.com/blog/2019/03/definitive-2019-guide-cryptographic-key-sizes-and-algorithm-recommendations>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The list function & practical uses of array destructuring in PHP <https://sebastiandedeyne.com/the-list-function-and-practical-uses-of-array-destructuring-in-php>`_
 * `The main PPA for PHP (7.4, 7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
+* `Throw Expression <https://wiki.php.net/rfc/throw_expression>`_
 * `Throwable <http://php.net/manual/en/class.throwable.php>`_
 * `Tidy <http://php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
@@ -2887,6 +2907,7 @@ List of external links mentionned in this documentation.
 * `trader <https://pecl.php.net/package/trader>`_
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
+* `Traits <https://www.php.net/manual/en/language.oop5.traits.php>`_
 * `Traversable <https://www.php.net/manual/en/class.traversable.php>`_
 * `trigger_error <http://php.net/trigger_error>`_
 * `trim <https://www.php.net/manual/en/function.trim.php>`_
@@ -2894,8 +2915,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -3040,6 +3061,7 @@ _______
 |   analyzer[] = "Classes/MakeDefault";
 |   analyzer[] = "Classes/MakeGlobalAProperty";
 |   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
+|   analyzer[] = "Classes/MissingAbstractMethod";
 |   analyzer[] = "Classes/MultipleDeclarations";
 |   analyzer[] = "Classes/MultipleTraitOrInterface";
 |   analyzer[] = "Classes/NoMagicWithArray";
@@ -3420,6 +3442,7 @@ ___________
 |   analyzer[] = "Classes/FossilizedMethod";
 |   analyzer[] = "Classes/HiddenNullable";
 |   analyzer[] = "Classes/InsufficientPropertyTypehint";
+|   analyzer[] = "Classes/MissingAbstractMethod";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoParent";
 |   analyzer[] = "Classes/NoSelfReferencingConstant";
@@ -3442,7 +3465,8 @@ ___________
 |   analyzer[] = "Interfaces/UselessInterfaces";
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Structures/CouldBeStatic";
-|   analyzer[] = "Traits/SelfUsingTrait";| 
+|   analyzer[] = "Traits/SelfUsingTrait";
+|   analyzer[] = "Traits/UnusedClassTrait";| 
 
 
 
@@ -3958,6 +3982,7 @@ __________________
 |   analyzer[] = "Php/Php80OnlyTypeHints";
 |   analyzer[] = "Php/Php80UnionTypehint";
 |   analyzer[] = "Php/SignatureTrailingComma";
+|   analyzer[] = "Php/ThrowWasAnExpression";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -3990,6 +4015,7 @@ __________________
 |   analyzer[] = "Php/Php80OnlyTypeHints";
 |   analyzer[] = "Php/Php80UnionTypehint";
 |   analyzer[] = "Php/SignatureTrailingComma";
+|   analyzer[] = "Php/ThrowWasAnExpression";
 |   analyzer[] = "Php/TypedPropertyUsage";
 |   analyzer[] = "Php/UnknownPcre2Option";
 |   analyzer[] = "Php/UnpackingInsideArrays";
@@ -4032,6 +4058,7 @@ __________________
 |   analyzer[] = "Php/ReflectionExportIsDeprecated";
 |   analyzer[] = "Php/ScalarAreNotArrays";
 |   analyzer[] = "Php/SignatureTrailingComma";
+|   analyzer[] = "Php/ThrowWasAnExpression";
 |   analyzer[] = "Structures/CurlVersionNow";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";
 |   analyzer[] = "Structures/OpensslRandomPseudoByteSecondArg";| 
@@ -4222,6 +4249,7 @@ ________
 |   analyzer[] = "Security/AvoidThoseCrypto";
 |   analyzer[] = "Security/CompareHash";
 |   analyzer[] = "Security/ConfigureExtract";
+|   analyzer[] = "Security/CryptoKeyLength";
 |   analyzer[] = "Security/CurlOptions";
 |   analyzer[] = "Security/DirectInjection";
 |   analyzer[] = "Security/DontEchoError";
@@ -4230,6 +4258,7 @@ ________
 |   analyzer[] = "Security/FilterInputSource";
 |   analyzer[] = "Security/IndirectInjection";
 |   analyzer[] = "Security/IntegerConversion";
+|   analyzer[] = "Security/KeepFilesRestricted";
 |   analyzer[] = "Security/MinusOneOnError";
 |   analyzer[] = "Security/MkdirDefault";
 |   analyzer[] = "Security/MoveUploadedFile";
@@ -4275,6 +4304,7 @@ _________
 |   analyzer[] = "Functions/FnArgumentVariableConfusion";
 |   analyzer[] = "Functions/OneLetterFunctions";
 |   analyzer[] = "Functions/ParameterHiding";
+|   analyzer[] = "Functions/PrefixToType";
 |   analyzer[] = "Functions/SemanticTyping";
 |   analyzer[] = "Functions/WrongTypehintedName";
 |   analyzer[] = "Php/ClassFunctionConfusion";

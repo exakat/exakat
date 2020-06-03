@@ -5706,7 +5706,7 @@ All steps
 _________
 
 
-Here is the list of the 200 available steps : 
+Here is the list of the 217 available steps : 
 
 * AddEFrom : adds a link between the current atom from the atom called  (see _As())
 
@@ -5774,11 +5774,17 @@ Here is the list of the 200 available steps :
 
 * Filter : Docs for Filter
 
+* FollowCalls : Follow calls of the argument of a function to another function. foo($a, $b) { goo($b); } : the call to $b may be followed to goo(), while no calls may be followed by $a. 
+
 * FollowExpression : Docs for FollowExpression
+
+* FollowParAs : Follow links while skipping parenthesis, assignations, ternary and coalese operators, as they do not provide any meaning there. This step was initially called 'Follow Parenthesis Assignations'. The links provided are followed as long as they match the provided ones in argument, or the 4 atoms mentioned previously. Ternary and Coalesce are followed in all their branches.
 
 * FullcodeInside : Docs for FullcodeInside
 
 * FullcodeIs : Docs for FullcodeIs
+
+* FullcodeIsNot : Checks that the current atom's fullcode property is not one of the provided values. One value may be provided as a string, multiple values must be provided as an array of string. The step may be case-sensitive or not, by using self::CASE_SENSITIVE or self::CASE_INSENSITIVE as the second argument (default to self::CASE_INSENSITIVE)
 
 * FullcodeLength : Docs for FullcodeLength
 
@@ -5836,6 +5842,8 @@ Here is the list of the 200 available steps :
 
 * GoToLiteralValue : Docs for GoToLiteralValue
 
+* GoToLoop : Go from the current atom to the closest loop. A loop is a for(), foreach(), while() or do...while().
+
 * GoToNamespace : Docs for GoToNamespace
 
 * GoToParent : Docs for GoToParent
@@ -5856,6 +5864,8 @@ Here is the list of the 200 available steps :
 
 * HasChildren : Docs for HasChildren
 
+* HasClass : Checks that the current atom is in a class, or an anonymous class.
+
 * HasClassDefinition : Docs for HasClassDefinition
 
 * HasClassInterface : Docs for HasClassInterface
@@ -5868,9 +5878,13 @@ Here is the list of the 200 available steps :
 
 * HasFunctionDefinition : Docs for HasFunctionDefinition
 
+* HasIfthen : Checks that the current atom is in an if/then/else structure.
+
 * HasIn : checks if the current atom has an incoming link with a name
 
 * HasInstruction : Docs for HasInstruction
+
+* HasInterface : Checks that the current atom is in an interface.
 
 * HasInterfaceDefinition : Docs for HasInterfaceDefinition
 
@@ -5883,6 +5897,14 @@ Here is the list of the 200 available steps :
 * HasNoCatch : Checks that the current atom is inside a catch block. The block has to be in the current scope.
 
 * HasNoChildren : Docs for HasNoChildren
+
+* HasNoClass : Checks that the current atom is not inside a class or an anonymous class.
+
+* HasNoClassInterface : Checks that the current atom is not inside a class (anonymous or not), or an interface.
+
+* HasNoClassInterfaceTrait : Checks that the current atom is not inside a class (anonymous or not), an interface or a trait.
+
+* HasNoClassTrait : Checks that the current atom is not inside a class (anonymous or not), or a trait.
 
 * HasNoComparison : Docs for HasNoComparison
 
@@ -5904,6 +5926,8 @@ Here is the list of the 200 available steps :
 
 * HasNoInterface : This step checks that the current atom is inside an interface or not.
 
+* HasNoLoop : Checks that the current atom is not inside a loop : foreach(), while, do...while, for. 
+
 * HasNoNamedInstruction : Docs for HasNoNamedInstruction
 
 * HasNoNextSibling : Docs for HasNoNextSibling
@@ -5911,6 +5935,8 @@ Here is the list of the 200 available steps :
 * HasNoOut : checks if the current atom has no outgoing link with a name
 
 * HasNoParent : Docs for HasNoParent
+
+* HasNoTrait : Checks that the current atom is not inside a trait.
 
 * HasNoUsage : Docs for HasNoUsage
 
@@ -5921,6 +5947,8 @@ Here is the list of the 200 available steps :
 * HasParent : Docs for HasParent
 
 * HasPropertyInside : Docs for HasPropertyInside
+
+* HasTrait : Checks that the current atom is in an trait.
 
 * HasTraitDefinition : Docs for HasTraitDefinition
 
@@ -5993,6 +6021,8 @@ Here is the list of the 200 available steps :
 * IsReassigned : Docs for IsReassigned
 
 * IsReferencedArgument : Docs for IsReferencedArgument
+
+* isThis : Checks that the current atom represent the current class. It may be ``$this``, but also a property or a variable with the same type.
 
 * IsUppercase : Docs for IsUppercase
 
@@ -6068,7 +6098,9 @@ Here is the list of the 200 available steps :
 
 * PropertyIsNot : Docs for PropertyIsNot
 
-* Raw : Docs for Raw
+* Range : Limit the results to the values ranking from a-th to b-th.
+
+* Raw : Runs a raw gremlin query. The query shall be a step, without any '.' before or after.
 
 * RegexIs : apply a regex on the property 
 
@@ -6086,6 +6118,8 @@ Here is the list of the 200 available steps :
 
 * SavePropertyAs : Docs for SavePropertyAs
 
+* Select : Extract an array of data from the query. select() takes a array with labels as keys and properties as values. ``select(array('first' => 'fullnspath'))``. This is closely related to ``select`` in Gremlin.
+
 * SetProperty : Docs for SetProperty
 
 * Side : Docs for Side
@@ -6096,7 +6130,7 @@ Here is the list of the 200 available steps :
 
 * TokenIsNot : checks that the current atom uses a different token than the token 
 
-* Trim : Docs for Trim
+* Trim : Trim the content of the provided variable with the chars in the second argument. The trim is a left trim, and the default trimmed values are single quotes and double quotes.
 
 * Unique : Docs for Unique
 

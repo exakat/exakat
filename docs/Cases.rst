@@ -9178,6 +9178,22 @@ time() would be faster here, as an entropy generator. Yet, it would still be bet
     		return wp_hash( $this->get_id() . strtotime( 'now' ) );
     	}
 
+Getting Last Element
+====================
+
+.. _thelia-arrays-gettinglastelement:
+
+Thelia
+^^^^^^
+
+:ref:`getting-last-element`, in /core/lib/Thelia/Core/Security/AccessManager.php:61. 
+
+This code extract the last element with array_slice (position -1) as an array, then get the element in the array with current().
+
+.. code-block:: php
+
+    current(\array_slice(self::$accessPows, -1, 1, true))
+
 Avoid glob() Usage
 ==================
 
