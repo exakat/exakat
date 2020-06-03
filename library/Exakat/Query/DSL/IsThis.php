@@ -28,8 +28,10 @@ class IsThis extends DSL {
     public function run() {
         return new Command(<<<'GREMLIN'
 or( __.hasLabel("This"),
+
     // Typehinted variable
     __.hasLabel("Variableobject", "Variable").in("DEFINITION").in("NAME").as("definition").out("TYPEHINT").in("DEFINITION").as("typehint").select("definition").in("ARGUMENT").in("METHOD", "MAGICMETHOD").as("classe").where("typehint", eq("classe") ),
+
     // Typehinted property
     __.hasLabel("Member").in("DEFINITION").in("PPP").as("definition").out("TYPEHINT").in("DEFINITION").as("typehint").select("definition").in("PPP").as("classe").where("typehint", eq("classe") )
   )

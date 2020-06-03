@@ -253,7 +253,7 @@ class Datastore {
         }
     }
 
-    public function getAllHash(string $table): array {
+    public function getAllHash(string $table = 'hash'): array {
         $query = "SELECT key, value FROM $table";
         $stmt = $this->sqliteRead->prepare($query);
         $res = $stmt->execute();

@@ -1,4 +1,4 @@
-signature = "HasNoClassInterface( )";
-title = "HasNoClassInterface";
-description = "Checks that the current atom is not inside a class (anonymous or not), or an interface.";
+signature = "IsVisible( )";
+title = "IsVisible";
+description = "Checks that the visibility of the current property or method. The visibility may be compared ABOVE or BELOW.";
 arguments = "";
