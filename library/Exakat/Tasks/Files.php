@@ -61,7 +61,7 @@ class Files extends Tasks {
         display("Searching for files \n");
         self::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
         display('Found ' . count($files) . " files.\n");
-        
+
         if (empty($files)) {
             $this->datastore->addRow('hash', array('files'           => 0,
                                                    'filesIgnored'    => count($ignoredFiles),

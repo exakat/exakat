@@ -1,9 +1,9 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-/*
+    ->in('./library/Exakat/Dump')
+
     ->in('./library/Exakat/Analyzer')
-    */
     ->in('./library/Exakat/Reports')
     ->in('./library/Exakat/Data')
     ->in('./library/Exakat/Tasks')
