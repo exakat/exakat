@@ -100,6 +100,8 @@ class Owasp extends Ambassador {
     'Security/NoWeakSSLCrypto',
     'Security/MinusOneOnError',
     'Security/MoveUploadedFile',
+    'Security/NoWeakSSLCrypto',
+    'Security/KeepFilesRestricted',
 ),
 'A7:2017-Cross-Site Scripting (XSS)' => array(
     'Security/UploadFilenameInjection',
