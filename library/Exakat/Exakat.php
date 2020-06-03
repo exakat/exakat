@@ -25,8 +25,8 @@ namespace Exakat;
 use Exakat\Configsource\Commandline;
 
 class Exakat {
-    const VERSION = '2.1.0';
-    const BUILD = 1068;
+    const VERSION = '2.1.1';
+    const BUILD = 1070;
 
     private $config  = null;
 
