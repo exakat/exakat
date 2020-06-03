@@ -126,7 +126,7 @@ class MakeClassMethodDefinition extends Complete {
               ->inIs('NAME')
               ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
-        
+
         // This will take care of the first step : class - trait - parent. (Above is currently not detailled, any method is linked.)
 
 

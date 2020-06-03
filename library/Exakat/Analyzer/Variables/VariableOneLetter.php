@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableOneLetter extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
     }

@@ -783,7 +783,7 @@ JOIN categories
 
             $results = $sqlite->query('PRAGMA foreign_key_check');
             $response = $results->fetchArray();
-            if (isset($response['foreign_key_check']) && empty($response['foreign_key_check'])) {
+            if (empty($response['foreign_key_check'])) {
                 $errors[] = "$file is SQLITE3 invalid (foreign key check : $response[foreign_key_check])\n";
                 continue;
             }

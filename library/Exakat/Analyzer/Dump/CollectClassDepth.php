@@ -29,7 +29,7 @@ class CollectClassDepth extends AnalyzerHashHashResults {
     public function analyze() {
         // class a {} class b extends a;
         $this->atomIs(self::CLASSES_ALL)
-             ->raw('groupCount("m").by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times('.self::MAX_LOOPING.').count()).cap("m")');
+             ->raw('groupCount("m").by(__.repeat( __.as("x").out("EXTENDS").in("DEFINITION") ).emit( ).times(' . self::MAX_LOOPING . ').count()).cap("m")');
 
         $this->prepareQuery();
     }

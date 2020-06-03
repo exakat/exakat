@@ -55,7 +55,7 @@ use Exakat\Loader\Collector;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
-    
+
     private $SCALAR_TYPE = array('int',
                                  'bool',
                                  'void',
@@ -378,7 +378,7 @@ class Load extends Tasks {
             $this->phptokens::T_GOTO                     => 'processGoto',
 
             $this->phptokens::T_STRING                   => 'processString',
-            $this->phptokens::T_STRING_VARNAME           => 'processString', // ${x} x is here 
+            $this->phptokens::T_STRING_VARNAME           => 'processString', // ${x} x is here
             $this->phptokens::T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
             $this->phptokens::T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
             $this->phptokens::T_NUM_STRING               => 'processLiteral',
@@ -1163,7 +1163,7 @@ class Load extends Tasks {
 
         $this->popExpression();
         $this->addLink($variable, $name, 'NAME');
-        
+
         if ($atom === 'Identifier') {
             $this->getFullnspath($name, 'const', $name);
             print_r($name);
@@ -2292,7 +2292,7 @@ class Load extends Tasks {
                 if ($default->atom !== 'Void') {
                     $index->fullcode .= ' = ' . $default->fullcode;
 
-                    if ($default->atom === 'Null' && 
+                    if ($default->atom === 'Null' &&
                         strpos($typehints, '?') === false &&
                         preg_match('/\bnull\b/i', $typehints) === 0
                         ) {

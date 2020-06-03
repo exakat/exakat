@@ -25,7 +25,7 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\NoSuchDir;
 
 class Copy extends Vcs {
-    public function clone(string $source) : void {
+    public function clone(string $source): void {
         $source = realpath($source);
         if (empty($source)) {
             throw new NoSuchDir();

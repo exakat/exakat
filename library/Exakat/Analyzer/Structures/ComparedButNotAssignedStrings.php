@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ComparedButNotAssignedStrings extends Analyzer {
     public function analyze() {
-        // $a === 'b' 
+        // $a === 'b'
         $this->atomIs('Comparison')
              ->codeIs(array('==', '===', '!=', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))

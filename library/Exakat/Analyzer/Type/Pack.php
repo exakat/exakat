@@ -27,8 +27,8 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Pack extends AnalyzerResults {
     protected $analyzerName = 'Pack';
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/CreateDefaultValues',
                     );

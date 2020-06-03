@@ -44,7 +44,7 @@ abstract class Reports {
                                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                                     'CompatibilityPHP74',
                                     'CompatibilityPHP80',
-                                    'Dead code', 'Security', 'Analyze', 'Inventories', 
+                                    'Dead code', 'Security', 'Analyze', 'Inventories',
                                     'Dump',
                                     );
 

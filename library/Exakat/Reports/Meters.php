@@ -28,9 +28,9 @@ class Meters extends Reports {
     const FILE_FILENAME  = 'exakat.meters';
 
     public function _generate(array $analyzerList): string {
-        
+
         $results = array();
-        
+
         $values = array('loc',
                         'locTotal',
                         'files',

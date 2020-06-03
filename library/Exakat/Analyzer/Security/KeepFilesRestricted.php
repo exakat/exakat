@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -37,7 +37,7 @@ class KeepFilesRestricted extends Analyzer {
         $this->atomFunctionIs(array('\\chmod', '\\mkdir'))
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Integer', self::WITH_CONSTANTS)
-             ->raw('filter{ x = '.implode(', ', $this->filePrivileges).'; (it.get().value("intval") & 0777) in x;}')
+             ->raw('filter{ x = ' . implode(', ', $this->filePrivileges) . '; (it.get().value("intval") & 0777) in x;}')
              ->back('first');
         $this->prepareQuery();
     }

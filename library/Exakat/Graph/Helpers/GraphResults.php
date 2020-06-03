@@ -65,7 +65,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         assert(false, 'Could not understand GraphResults incoming data');
     }
 
-    private function checkArray() : void {
+    private function checkArray(): void {
         if (empty($this->data)) {
             return;
         }

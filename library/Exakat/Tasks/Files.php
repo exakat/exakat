@@ -316,7 +316,7 @@ class Files extends Tasks {
                     continue 2;
                 }
             }
-            
+
             $files[] = $file;
         }
 

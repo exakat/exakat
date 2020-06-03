@@ -29,7 +29,7 @@ class MultipleConstantDefinition extends Analyzer {
     public function analyze() {
         // case-insensitive constants with Define
         // Search for definitions and count them
-        //define() 
+        //define()
         $this->atomIs('Defineconstant')
              ->raw('or( __.out("CASE").count().is(eq(0)),
           __.out("CASE").has("boolean", false))')
@@ -46,7 +46,7 @@ class MultipleConstantDefinition extends Analyzer {
              ->values('fullcode');
         $constDefinitions = $this->rawQuery()->toArray();
 
-        //define(, , true) 
+        //define(, , true)
         $this->atomIs('Defineconstant')
              ->outIs('CASE')
              ->is('boolean', true)

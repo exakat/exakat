@@ -45,12 +45,12 @@ class CouldBeProtectedConstant extends Analyzer {
              ->has('fullnspath')
              ->as('classe')
              ->back('first')
-             
+
              ->outIs('CONSTANT')
              ->atomIs('Name')
              ->as('constante')
 
-             ->select(array('classe'    => 'fullnspath', 
+             ->select(array('classe'    => 'fullnspath',
                             'constante' => 'code',
                             ))
              ->unique();

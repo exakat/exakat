@@ -250,7 +250,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function assertAtom($atom) : bool {
+    protected function assertAtom($atom): bool {
         if (is_string($atom)) {
             assert($atom === ucfirst(strtolower($atom)), "Wrong format for Atom name : $atom");
         } elseif (is_array($atom)) {
@@ -264,7 +264,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function assertAnalyzer($analyzer) : bool {
+    protected function assertAnalyzer($analyzer): bool {
         if (is_string($analyzer)) {
             assert(preg_match('#^[A-Z]\w+/[A-Z]\w+$#', $analyzer) !== false, "Wrong format for Analyzer : $analyzer");
             assert(class_exists('\\Exakat\\Analyzer\\' . str_replace('/', '\\', $analyzer)), "No such analyzer as $analyzer");
@@ -280,7 +280,7 @@ abstract class DSL {
         return true;
     }
 
-    protected function isProperty($property) : bool {
+    protected function isProperty($property): bool {
         return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir', 'virtual', 'analyzer', 'propagated'));
     }
 

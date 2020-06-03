@@ -27,8 +27,8 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class OpensslCipher extends AnalyzerResults {
     protected $analyzerName = 'OpenSSL Ciphers';
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/CreateDefaultValues',
                     );

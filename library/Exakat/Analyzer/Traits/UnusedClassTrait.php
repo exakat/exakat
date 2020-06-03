@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,11 +29,11 @@ class UnusedClassTrait extends Analyzer {
     protected $phpVersion = '7.4-';
     */
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/MakeClassMethodDefinition',
                     );
     }
-    
+
     public function analyze() {
         // trait t {}
         // class x { use T; /* No use of T */ }
@@ -46,7 +46,7 @@ class UnusedClassTrait extends Analyzer {
                      ->inIs('DEFINITION')
                      ->outIs(self::CLASS_METHODS)
                      ->as('r')
-             
+
                      ->outIs('DEFINITION')
                      ->atomIs(array('Methodcall'))
                      ->goToClass('Class')

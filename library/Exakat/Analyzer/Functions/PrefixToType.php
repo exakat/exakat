@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,12 +42,12 @@ class PrefixToType extends Analyzer {
                                     );
 
     public function analyze() {
-    
+
         // Prefixes : isPath() : is => bool
         foreach($this->prefixedType as $prefix => $type) {
             $this->atomIs(self::FUNCTIONS_METHOD)
                  ->outIs('NAME')
-                 ->regexIs('fullcode', '(?i)^'.$prefix)
+                 ->regexIs('fullcode', '(?i)^' . $prefix)
                  ->back('first')
                  ->not(
                     $this->side()
@@ -58,12 +58,12 @@ class PrefixToType extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
-        
+
         // Suffices : getId() : Id => int
         foreach($this->suffixedType as $suffix => $type) {
             $this->atomIs(self::FUNCTIONS_METHOD)
                  ->outIs('NAME')
-                 ->regexIs('fullcode', '(?i)'.$suffix.'\\$')
+                 ->regexIs('fullcode', '(?i)' . $suffix . '\\$')
                  ->back('first')
                  ->not(
                     $this->side()

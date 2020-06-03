@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Rulesets;
 use Exakat\Datastore;
 use Exakat\Exakat;

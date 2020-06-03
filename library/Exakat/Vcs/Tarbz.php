@@ -44,7 +44,7 @@ class Tarbz extends Vcs {
         }
     }
 
-    public function clone(string $source) : void {
+    public function clone(string $source): void {
         $this->check();
 
         $binary = file_get_contents($source);

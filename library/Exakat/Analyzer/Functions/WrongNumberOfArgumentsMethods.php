@@ -45,17 +45,17 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
         $minArgs = array();
         $maxArgs = array();
         foreach($methods as $method) {
-            $ns = $this->dictCode->translate([$method['class']], self::CASE_INSENSITIVE);
-            if (empty($ns)) { 
-                continue; 
+            $ns = $this->dictCode->translate(array($method['class']), self::CASE_INSENSITIVE);
+            if (empty($ns)) {
+                continue;
             }
 
-            $name = $this->dictCode->translate([$method['name']], self::CASE_INSENSITIVE);
-            if (empty($name)) { 
-                continue; 
+            $name = $this->dictCode->translate(array($method['name']), self::CASE_INSENSITIVE);
+            if (empty($name)) {
+                continue;
             }
 
-            $mfnp = makeFullNSpath($method['class']).'::'.$name[0];
+            $mfnp = makeFullNSpath($method['class']) . '::' . $name[0];
 
             if ($method['args_min'] > 0) {
                 $minArgs[$mfnp] = $method['args_min'];

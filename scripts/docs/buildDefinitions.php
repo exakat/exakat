@@ -453,24 +453,52 @@ SQL
                             );
     }
 
-    private function makeTable($array) {
+    private function makeTable(array $array) {
+        foreach($array as &$row) {
+            foreach($row as &$r) {
+                $r = explode(PHP_EOL, $r);
+            }
+        }
+
+        // padding the missing lines
+        foreach($array as &$row) {
+            $count = 1;
+            foreach($row as $r) {
+                $count = max($count, count($r));
+            }
+            
+            if ($count > 1) {
+                foreach($row as &$r) {
+                    $r = array_pad($r, $count, '');
+                }
+            }
+            unset($r);
+        }
+        unset($row);
+
         $sizes = array();
         foreach(array_keys($array[0]) as $col) {
-            $values = array_column($array, $col);
+            $values = array_merge(...array_column($array, $col));
+            foreach($values as &$value) {
+                $value = explode(PHP_EOL, $value);
+                $value = array_reduce($value, function($carry, $item) { return strlen($carry) > strlen($item) ? $carry : $item;});
+            }
             $strlens = array_map('strlen', $values);
             $sizes[] = max($strlens);
         }
-        
+
         $separator = '+'.implode('+', array_map(function($x) { return str_pad('', $x + 2, '-'); }, $sizes)).'+'.PHP_EOL;
-    
+
         $return = $separator;
         foreach($array as $row) {
-            $str = '|';
-            foreach($row as $col => $value) {
-                $str .= ' '.str_pad($value, $sizes[$col], ' ').' |';
+            foreach(array_keys($row[0]) as $w) {
+                $str = '|';
+                foreach(array_keys($row) as $col) {
+                    $str .= ' '.str_pad($row[$col][$w] ?? 's', $sizes[$col], ' ').' |';
+                }
+                $return .= $str.PHP_EOL;
             }
-            
-            $return .= $str.PHP_EOL.$separator;
+            $return .= $separator;
         }
     
         return $return;
@@ -674,6 +702,8 @@ $exampleTxt
             }
             
             $desc .= "\n\nSuggestions\n^^^^^^^^^^^\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
+        } else {
+            print "Missing modifications : ./human/en/$analyzer.ini\n";
         }
         $desc = trim($this->rst_escape($desc));
         $desc = preg_replace_callback('/See also .*?`_\./s', function($x) {

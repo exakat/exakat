@@ -57,7 +57,7 @@ class UnusedMethods extends Analyzer {
                      ->analyzerIs('Classes/IsInterfaceMethod')
              )
 
-             // Skip classes that do self dynamical calls : $this->$m() 
+             // Skip classes that do self dynamical calls : $this->$m()
              ->filter(
                 $this->side()
                      ->goToClass()

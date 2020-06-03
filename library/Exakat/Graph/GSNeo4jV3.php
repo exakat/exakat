@@ -26,7 +26,6 @@ use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\UnkownGremlinVersion;
 use Brightzone\GremlinDriver\Connection;
-use stdClass;
 
 class GSNeo4jV3 extends Graph {
     const CHECKED     = true;

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -45,18 +45,18 @@ class CryptoKeyLength extends Analyzer {
              ->outIs('INDEX')
              ->noDelimiterIs('private_key_type', self::WITH_CONSTANTS)
              ->inIs('INDEX')
-             
+
              ->outIs('VALUE')
              ->fullnspathIs(array_keys($lengths), self::CASE_SENSITIVE)
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-             
+
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->noDelimiterIs('private_key_bits', self::WITH_CONSTANTS)
              ->inIs('INDEX')
-             
+
              ->outIs('VALUE')
              ->isLessHash('intval', $lengths, 'fqn')
 
@@ -81,7 +81,7 @@ class CryptoKeyLength extends Analyzer {
              ->fullnspathIs(array_keys($lengths), self::CASE_SENSITIVE)
              ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-             
+
              ->outIs('PPP')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')

@@ -45,7 +45,7 @@ abstract class Vcs {
         $this->destinationFull = $code_dir;
     }
 
-    abstract public function clone(string $source) : void;
+    abstract public function clone(string $source): void;
 
     public function getDiffLines($r1, $r2) {
         return array();

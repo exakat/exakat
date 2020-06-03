@@ -56,7 +56,7 @@ class CouldBeProtectedMethod extends Analyzer {
              ->tokenIs(self::STATICCALL_TOKEN)
              ->as('classe')
              ->back('first')
-             
+
              ->hasNoClass()
              ->outIs('METHOD')
              ->atomIs('Methodcallname')
