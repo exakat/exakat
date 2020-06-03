@@ -36,21 +36,21 @@ class RulesetsExtra implements RulesetsInterface {
         if (empty($ruleset)) {
             if (empty($this->extra_rulesets)) {
                 return array();
-            } else {
-                return array_unique(array_merge(...array_values($this->extra_rulesets)));
-            }
-        } else {
-            $return = array();
-            foreach($ruleset as $t) {
-                $return[] = $this->extra_rulesets[$t] ?? array();
             }
 
-            if (empty($return)) {
-                return array();
-            }
-
-            return array_unique(array_merge(...$return));
+            return array_unique(array_merge(...array_values($this->extra_rulesets)));
         }
+
+        $return = array();
+        foreach($ruleset as $t) {
+            $return[] = $this->extra_rulesets[$t] ?? array();
+        }
+
+        if (empty($return)) {
+            return array();
+        }
+
+        return array_unique(array_merge(...$return));
     }
 
     public function getRulesetForAnalyzer(string $analyzer = ''): array {

@@ -175,8 +175,8 @@ class Project extends Tasks {
         $this->addSnitch(array('step'    => 'Files',
                                'project' => $this->config->project));
 
-        $nb_files = $this->datastore->getHash('files');
-        if ($nb_files === '0') {
+        $nb_files = (int) $this->datastore->getHash('files');
+        if ($nb_files === 0) {
             throw new NoCodeInProject($this->config->project);
         }
 

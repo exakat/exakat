@@ -28,6 +28,7 @@ use Exakat\Project;
 use Exakat\Config as Configuration;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
+use Exakat\Configsource\RulesetConfig;
 
 class DotExakatYamlConfig extends Config {
     const YAML_FILE = '.exakat.yml';
@@ -54,10 +55,9 @@ class DotExakatYamlConfig extends Config {
         try {
             $tmp_config = Yaml::parseFile($this->dotExakatYaml);
         } catch (ParseException $exception) {
-            display('Error while parsing ' . basename($this->dotExakatYaml));
+            print 'Error while parsing ' . basename($this->dotExakatYaml).'. Configuration ignored.'.PHP_EOL;
 
             return self::NOT_LOADED;
-            // Empty on purppose
         }
 
         if (!is_array($tmp_config)) {
@@ -114,7 +114,7 @@ class DotExakatYamlConfig extends Config {
                                                         ),
                            'include_dirs'        => array(),
                            'rulesets'            => array(),
-                           'project'             => new Project(),
+                           'project'             => null,
                            'project_name'        => '',
                            'project_url'         => '',
                            'project_vcs'         => '',
@@ -175,10 +175,15 @@ class DotExakatYamlConfig extends Config {
 
         if (isset($this->config['project'])) {
             $this->config['project'] = new Project($this->config['project']);
+        } elseif (isset($this->config['project_name'])) {
+            $this->config['project'] = new Project(mb_strtolower(preg_replace('/\W/', '_', $this->config['project_name'] )));
+        } else {
+            $this->config['project'] = new Project('in-code-audit');
         }
-
         if (isset($this->config['rulesets'])) {
-            $this->rulesets = array_map('array_values', $this->config['rulesets']);
+            // clean the read 
+            $this->rulesets = RulesetConfig::cleanRulesets($this->config['rulesets']);
+            
             unset($this->config['rulesets']);
         }
 

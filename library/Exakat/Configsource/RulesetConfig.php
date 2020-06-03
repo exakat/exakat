@@ -72,7 +72,26 @@ class RulesetConfig extends Config {
             $this->config[$name] = $list;
         }
 
+        $this->config = self::cleanRulesets($this->config);
+
         return 'config/rulesets.ini';
+    }
+    
+    public static function cleanRulesets(array $rulesets) {
+        // hash=>array
+        $rulesets = array_map('array_values', $rulesets);
+        
+        $rulesets = array_map(function (array $rules) : array {
+            return preg_grep('#^[^/]+/[^/]+$#', $rules);
+        }, $rulesets);
+
+
+        $rulesets = array_filter($rulesets);
+        $rulesets = array_map('array_filter', $rulesets);
+
+        $rulesets = array_map('array_unique', $rulesets);
+
+        return $rulesets;
     }
 }
 

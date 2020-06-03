@@ -213,15 +213,15 @@ abstract class Analyzer {
                     case 'integer':
                         $this->{$parameter['name']} = (int) $this->{$parameter['name']};
                         break;
-                        
+
                     case 'ini_hash':
-                        $this->{$parameter['name']} = parse_ini_string($this->{$parameter['name']})[$parameter['name']] ?? [];
+                        $this->{$parameter['name']} = parse_ini_string($this->{$parameter['name']})[$parameter['name']] ?? array();
                         break;
 
                     case 'json':
                         $this->{$parameter['name']} = json_decode($this->{$parameter['name']});
                         break;
-                        
+
                     default :
                         // Nothing, really
                 }

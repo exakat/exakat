@@ -180,6 +180,7 @@ class Config extends Configsource {
             $this->rulesets = $rulesets->toArray();
         }
 
+        // Local configuration replaces server configuration
         if ($this->dotExakatYamlConfig instanceof DotExakatYamlConfig) {
             $this->rulesets = array_merge($this->rulesets, $this->dotExakatYamlConfig->getRulesets());
         }
