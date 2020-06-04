@@ -24,7 +24,7 @@ namespace Exakat\Graph;
 
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
-use Exakat\Exceptions\UnkownGremlinVersion;
+use Exakat\Exceptions\UnknownGremlinVersion;
 use Brightzone\GremlinDriver\Connection;
 
 class Tinkergraph extends Graph {

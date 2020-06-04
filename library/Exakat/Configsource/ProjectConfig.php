@@ -167,17 +167,16 @@ class ProjectConfig extends Config {
         if (isset($this->config['project_rulesets']) &&
             is_string($this->config['project_rulesets'])) {
             $this->config['project_rulesets'] = listToArray($this->config['project_rulesets']);
-            foreach($this->config['project_rulesets'] as &$ext) {
-                $ext = trim($ext);
-            }
-            unset($ext);
         }
+        $this->config['project_rulesets'] = array_filter($this->config['project_rulesets']);
+        $this->config['project_rulesets'] = array_map('trim', $this->config['project_rulesets']);
+        $this->config['project_rulesets'] = array_unique($this->config['project_rulesets']);
 
         if (in_array($this->config['project_vcs'], Vcs::SUPPORTED_VCS)) {
             $this->config['git'] = false; // remove Git, which is by default
             $this->config[$this->config['project_vcs']] = true; // potentially, revert git
         }
-        
+
         // Calculate the stubs recursivement if it is a folder
         // all path are relative to the project_dir/code, cannot be outside.
         $stubs = array(array());

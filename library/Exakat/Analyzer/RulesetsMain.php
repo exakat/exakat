@@ -40,7 +40,7 @@ class RulesetsMain implements RulesetsInterface {
     }
 
     public function __destruct() {
-        if ($this->phar_tmp !== null) {
+        if ($this->phar_tmp !== null && file_exists($this->phar_tmp)) {
             unlink($this->phar_tmp);
         }
     }
