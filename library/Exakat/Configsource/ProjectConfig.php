@@ -168,7 +168,7 @@ class ProjectConfig extends Config {
             is_string($this->config['project_rulesets'])) {
             $this->config['project_rulesets'] = listToArray($this->config['project_rulesets']);
         }
-        $this->config['project_rulesets'] = array_filter($this->config['project_rulesets']);
+        $this->config['project_rulesets'] = array_filter($this->config['project_rulesets'] ?? array());
         $this->config['project_rulesets'] = array_map('trim', $this->config['project_rulesets']);
         $this->config['project_rulesets'] = array_unique($this->config['project_rulesets']);
 
