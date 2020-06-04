@@ -180,7 +180,7 @@ class ProjectConfig extends Config {
         
         // Calculate the stubs recursivement if it is a folder
         // all path are relative to the project_dir/code, cannot be outside.
-        $stubs = array();
+        $stubs = array(array());
         $code_dir="{$this->projects_root}{$project}/code/";
         $this->config['stubs'] = makeArray($this->config['stubs']);
         foreach($this->config['stubs'] as $stub) {
