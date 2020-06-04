@@ -145,19 +145,27 @@ class Project extends Tasks {
         }
 
         $rulesetsToRun = array_merge(...$rulesetsToRun);
+        $rulesetsToRun = array_filter($rulesetsToRun);
         $rulesetsToRun = array_unique($rulesetsToRun);
 
         $availableRulesets = $this->rulesets->listAllRulesets();
+        $availableRulesets = array_map('strtolower', $availableRulesets);
 
-        $diff = array_diff($rulesetsToRun, $availableRulesets);
+        $diff = array();
+        $rulesetsToRunShort = array();
+        foreach($rulesetsToRun as $rule) {
+            if (in_array(strtolower($rule), $availableRulesets, \STRICT_COMPARISON)) {
+                $rulesetsToRunShort[] = $rule;
+            } else {
+                $diff[] = $rule;
+            }
+        }
 
         if (!empty($diff)) {
             display('Ignoring the following unknown rulesets : ' . implode(', ', $diff) . PHP_EOL);
         }
-        $rulesetsToRun = array_diff($rulesetsToRun, $diff);
 
-        $reportToRun = array_unique($reportToRun);
-
+        $reportToRun = array_unique($rulesetsToRunShort);
         if (empty($rulesetsToRun)) {
             // Default values
             $rulesetsToRun = $this->rulesetsToRun;
