@@ -167,8 +167,7 @@ abstract class Analyzer extends TestCase {
         
         $dump = Dump::factory("$EXAKAT_PATH/projects/test/dump.sqlite", Dump::READ);
         $res = $analyzerobject->getResults($dump)->toHash('key', 'value');
-        $expected = array_column($expected, 'value', 'key');
-        
+
         foreach($expected as $key => $value) {
             if (isset($res[$key]) && $res[$key] == $value) {
                 unset($expected[$key]);
@@ -195,7 +194,7 @@ abstract class Analyzer extends TestCase {
         foreach($res as $key => $value) {
             $missed[] = "$key => $value";
         }
-        $this->assertEmpty($res, count($res)." too many values were found :\n '".join("',\n '", $missed)."'\n");
+        $this->assertEmpty($missed, count($res)." too many values were found :\n ".join(",\n ", $missed).",\n");
     }
     
     private function checkTestOnFullarray(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
