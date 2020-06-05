@@ -92,28 +92,26 @@ class BaselineStash {
         }
     }
 
-    public function removeBaseline(int $id): void {
-        if ($id !== 0) {
-            $baselines = glob("{$this->project_dir}/baseline/dump-$id-*.sqlite");
-            if (empty($baselines)) {
-                display("$id : no such baseline  to remove");
-            } else {
-                $file = array_pop($baselines);
-                unlink($file);
-                display(substr(basename($file, '.sqlite'), 5) . ' was removed');
-            }
-
+    public function removeBaseline(string $id): void {
+        $id = basename($id);
+        if (file_exists("{$this->baseline_dir}/$id.sqlite")) {
+            display("Removing baseline '$id'\n");
+            unlink("{$this->baseline_dir}/$id.sqlite");
+            
             return;
         }
 
-        $baselines = glob("{$this->project_dir}/baseline/dump-*-$id.sqlite");
-        if (empty($baselines)) {
-            display("$id : no such baseline to remove");
-        } else {
-            $file = array_pop($baselines);
-            unlink($file);
-            display(substr(basename($file, '.sqlite'), 5) . ' was removed');
+        $baselines = glob("{$this->baseline_dir}/dump-*-$id.sqlite");
+        if (!empty($baselines) && count($baselines) === 1) {
+            $baseline = basename($baselines[0], '.sqlite');
+            display("Removing baseline '$baseline'\n");
+            
+            unlink($baselines[0]);
+            
+            return;
         }
+        
+        display("Could not find $id baseline\n");
     }
 
     public function getBaseline(): string {
@@ -132,7 +130,13 @@ class BaselineStash {
             return array_pop($baselines);
         }
         
+        // full name in use
         if (file_exists("{$this->baseline_dir}/{$this->baseline_strategy}.sqlite")) {
+            return "{$this->baseline_dir}/{$this->baseline_strategy}.sqlite";
+        }
+
+        // dump-xxx-AAAAAAA.sqlite name
+        if (file_exists("{$this->baseline_dir}/dump-\d+-{$this->baseline_strategy}.sqlite")) {
             return "{$this->baseline_dir}/{$this->baseline_strategy}.sqlite";
         }
     }

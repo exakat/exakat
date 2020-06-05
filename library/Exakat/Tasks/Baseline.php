@@ -60,14 +60,19 @@ class Baseline extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        $list = glob($this->config->project_dir . '/baseline/dump-*.sqlite');
+        $list = glob($this->config->project_dir . '/baseline/*.sqlite');
         sort($list);
 
         print PHP_EOL;
         printf(self::FORMAT, '#', 'Name', 'Date');
         print str_repeat('-', 40) . PHP_EOL;
         foreach($list as $l) {
-            list(, $id, $name) = explode('-', basename($l, '.sqlite'));
+            if (preg_match('/^dump-(\d+)-(.*?)$/', basename($l, '.sqlite'), $r) ) {
+                list(, $id, $name) = $r;
+            } else {
+                $id = ' ';
+                $name = basename($l, '.sqlite');
+            }
             $date = date('Y-m-d', filemtime($l));
             printf(self::FORMAT, $id, $name, $date);
         }
