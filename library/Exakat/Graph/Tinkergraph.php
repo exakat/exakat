@@ -49,7 +49,7 @@ class Tinkergraph extends Graph {
 
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
         if (in_array($this->gremlinVersion, array('3.4'), STRICT_COMPARISON)) {
-            throw new UnkownGremlinVersion($this->gremlinVersion);
+            throw new UnknownGremlinVersion($this->gremlinVersion);
         }
 
         $this->db = new Connection(array( 'host'  => $this->config->tinkergraph_host,
