@@ -38,8 +38,7 @@ class Email extends AnalyzerResults {
         $this->atomIs(self::STRINGS_LITERALS)
              ->hasNoIn('CONCAT')
              ->has('noDelimiter')
-             ->regexIs('noDelimiter', '^[^@#]+@[^@#]+\\\\.[^@#]+')
-             //->regexIs('noDelimiter', '[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})')
+             ->regexIs('noDelimiter', '^[^@## <>\'+\\"\\$\\\\\\\\]+@[^@#]+\\\\.[^@#]+')
              ->toResults()
              ;
         $this->prepareQuery();
