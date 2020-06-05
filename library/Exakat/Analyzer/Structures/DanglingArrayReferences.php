@@ -55,16 +55,6 @@ class DanglingArrayReferences extends Analyzer {
 
             ->back('first');
         $this->prepareQuery();
-
-        //foreach($a as &$b) {}
-        // No following unset()
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->is('reference', true)
-             ->savePropertyAs('code', 'array')
-             ->back('first')
-             ->hasNoNextSibling();
-        $this->prepareQuery();
     }
 }
 
