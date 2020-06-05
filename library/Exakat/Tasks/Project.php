@@ -165,7 +165,7 @@ class Project extends Tasks {
             display('Ignoring the following unknown rulesets : ' . implode(', ', $diff) . PHP_EOL);
         }
 
-        $reportToRun = array_unique($rulesetsToRunShort);
+        $rulesetsToRun = array_unique($rulesetsToRunShort);
         if (empty($rulesetsToRun)) {
             // Default values
             $rulesetsToRun = $this->rulesetsToRun;

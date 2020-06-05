@@ -29,6 +29,7 @@ use Exakat\Exakat;
 use Exakat\Vcs\Vcs;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 use Exakat\Configsource\DatastoreConfig;
+use Exakat\Tasks\Helpers\BaselineStash;
 
 class Emissary extends Reports {
     const FILE_FILENAME  = 'emissary';
@@ -1050,15 +1051,19 @@ HTML;
     }
 
     private function generateNewIssues(Section $section): void {
+        $baselines = new BaselineStash($this->config);
+        $previous = $baselines->getBaseline();
+        
+        if ($previous === BaselineStash::NO_BASELINE) {
+            $this->emptyResult($section);
+            
+            return;
+        }
+
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
 
-        if ($this->config->dump_previous !== null && file_exists($this->config->dump_previous)) {
-            $oldissues = $this->getNewIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow), $this->config->dump_previous);
-
-            $diff = array_diff($issues, $oldissues);
-        } else {
-            $diff = $issues;
-        }
+        $oldissues = $this->getNewIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow), $previous);
+        $diff = array_diff($issues, $oldissues);
 
         $this->generateIssuesEngine($section, $diff);
     }
@@ -1161,8 +1166,12 @@ JAVASCRIPTCODE;
         $oldIssues = $this->getIssuesFacetedDb($ruleset);
         foreach($oldIssues as &$issue) {
             $i = json_decode($issue);
+
             // Skip wrong lines, but why ?
-            if (!($i instanceof \stdClass)) { continue; }
+            if (!($i instanceof \stdClass)) { 
+                continue; 
+            }
+
             if (isset($linediff[$i->file]) && $i->line > -1) {
                 foreach($linediff[$i->file] as $line => $diff) {
                     if ($i->line > $line) {
