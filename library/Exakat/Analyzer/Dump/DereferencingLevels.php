@@ -29,6 +29,11 @@ class DereferencingLevels extends AnalyzerHashAnalyzer {
     public function analyze() {
         //$a->b->c()::d()->e::F (only -> and ::)
         $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant'))
+             ->not(
+                $this->side()
+                     ->inIsIE(array('RIGHT', 'CODE'))
+                     ->hasIn(array('VARIABLE', 'OBJECT'))
+             )
              ->processDereferencing(0)
              ->raw('map{levels}');
 

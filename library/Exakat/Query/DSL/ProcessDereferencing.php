@@ -29,11 +29,13 @@ class ProcessDereferencing extends DSL {
         list($tooManyDereferencing) = func_get_args();
 
         $command = new Command(<<<GREMLIN
-local(__.sideEffect{levels=0;}
-        .emit().repeat( __.sideEffect{levels += ["Array", "Arrayappend", "Member", "Methodcall", "Staticmethodcall"].contains( it.get().label() ) ? 1 : 0; } 
-               .out("CLASS", "OBJECT", "VARIABLE", "APPEND"))
-               .until(__.not(hasLabel("Array", "Arrayappend", "Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant")))
+where(
+__.sideEffect{levels=0;}
+        .repeat( __.sideEffect{levels += ["Array", "Arrayappend", "Member", "Methodcall", "Staticmethodcall"].contains( it.get().label() ) ? 1 : 0; } 
+               .out("CLASS", "OBJECT", "VARIABLE", "APPEND", "CODE", "RIGHT"))
+               .until(__.not(hasLabel("Array", "Arrayappend", "Member", "Staticproperty", "Methodcall", "Staticmethodcall", "Staticconstant", "Assignation", "Parenthesis")))
         .filter{ levels > $tooManyDereferencing}
+
 )
 GREMLIN
 );
