@@ -509,6 +509,7 @@ HTML;
         // List of extensions used
         $res = $this->dump->fetchHashResults('ParameterCounts');
         if ($res->isEmpty()) {
+            $this->emptyResult($section);
             return ;
         }
 
@@ -517,12 +518,12 @@ HTML;
         foreach ($res->toArray() as $value) {
             $data[$value['key'] . ' param.'] = $value['value'];
 
-            $html []= '<div class="clearfix">
+            $html [(int)  $value['value'] ]= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . ' param.</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
-        sort($html);
+        krsort($html);
         $html = implode('', $html);
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
@@ -1902,6 +1903,7 @@ HTML;
         $res = $this->dump->fetchTable('globalVariables');
 
         if ($res->isEmpty()) {
+            $this->emptyResult($section);
             return;
         }
 
@@ -2937,12 +2939,23 @@ HTML
         $this->putBasedPage($section->source, $html);
     }
 
+    private function emptyResult(Section $section) : void {
+        $finalHTML = $this->getBasedPage('empty');
+
+        $finalHTML = $this->injectBloc($finalHTML, 'DESCRIPTION',  'No result were found for this analysis.');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $finalHTML = $this->injectBloc($finalHTML, 'CONTENT', '');
+        $this->putBasedPage($section->file, $finalHTML);
+    }
+
     private function generateClassDepth(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
         $res = $this->dump->fetchHashResults('Class Depth');
         if ($res->isEmpty()) {
+            $this->emptyResult($section);
+
             return ;
         }
 
@@ -3557,6 +3570,8 @@ HTML;
         // List of indentation used
         $res = $this->dump->fetchHashResults('Mbstring Encodings');
         if ($res->isEmpty()) {
+            $this->emptyResult($section);
+
             return ;
         }
 
@@ -3628,6 +3643,8 @@ HTML;
         // List of indentation used
         $res = $this->dump->fetchHashResults('Dump/IndentationLevels');
         if ($res->isEmpty()) {
+            $this->emptyResult($section);
+
             return ;
         }
 
@@ -3689,7 +3706,10 @@ HTML;
     protected function generateDereferencingLevelsBreakdown(Section $section): void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Dump/DereferencingLevels');
-        if ($res->isEmpty()) { return ; }
+        if ($res->isEmpty()) { 
+            $this->emptyResult($section);
+            return ; 
+        }
 
         $html = array();
         $data = array();
