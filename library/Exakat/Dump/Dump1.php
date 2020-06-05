@@ -502,7 +502,7 @@ SQL;
 
     public function getMethodsBySize(): Results {
         $query = <<<'SQL'
-SELECT namespaces.namespace || '\' || name || '::' || method AS name, 
+SELECT namespaces.namespace || CASE namespaces.namespace WHEN '\' THEN '' ELSE '\' END || name || '::' || method AS name, 
        method AS shortName, 
        files.file, 
        (methods.end - methods.begin) AS size
@@ -510,9 +510,9 @@ SELECT namespaces.namespace || '\' || name || '::' || method AS name,
     JOIN cit
         on methods.citId = cit.id AND
            cit.type = 'class'
-    JOIN files 
+    LEFT JOIN files 
         ON files.id = cit.file
-    JOIN namespaces 
+    LEFT JOIN namespaces 
         ON namespaces.id = cit.namespaceId
     ORDER BY (methods.end - methods.begin) DESC
 SQL;
