@@ -1542,7 +1542,8 @@ JAVASCRIPTCODE;
             }
 
             $results = $this->dump->fetchTable("compilation$shortVersion");
-            if ($results->getCount() === 0) {
+            // -1 is for no result found.
+            if ($results->getCount() <= 0) { 
                 $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
             } else {
                 $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';

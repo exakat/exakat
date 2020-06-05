@@ -245,6 +245,7 @@ class Dump extends Tasks {
                   ->is('analyzer', $chunk)
                   ->savePropertyAs('analyzer', 'analyzer')
                   ->outIs('ANALYZED')
+                  ->atomIsNot('Noresult')
                   ->initVariable(array('ligne',                  'fullcode_',                  'file', 'theFunction', 'theClass', 'theNamespace'),
                                  array('it.get().value("line")', 'it.get().value("fullcode")', '"None"', '""', '""', '""'),
                                 )
@@ -297,6 +298,7 @@ GREMLIN
         $emptyResults = $skipAnalysis;
         foreach($analyzers as $class) {
             if (!isset($counts[$class]) || $counts[$class] < 0) {
+                $emptyResults[] = $class;
                 continue;
             }
 

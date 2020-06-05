@@ -64,6 +64,7 @@ class DSLFactory {
                                           'File',
                                           'Virtualproperty',
                                           'Analysis',
+                                          'Noresult',
                                           'Void',
                                           );
             $this->availableLinks = array('DEFINITION',

@@ -30,9 +30,10 @@ class SignatureTrailingComma extends Analyzer {
     public function analyze() {
         // function foo($a, $b,) {}
         $this->atomIs(self::FUNCTIONS_ALL)
-                // warnign : arrow functions are not like the others
+                // warning : arrow functions are not like the others
              ->regexIs('fullcode', ',  ?\\\) (\\\{|=)');
-        $this->prepareQuery();    }
+        $this->prepareQuery();
+    }
 }
 
 ?>
