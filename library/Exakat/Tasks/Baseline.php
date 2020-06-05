@@ -24,6 +24,8 @@ namespace Exakat\Tasks;
 
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Tasks\Helpers\BaselineStash;
+use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\InvalidProjectName;
 
 class Baseline extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -34,6 +36,18 @@ class Baseline extends Tasks {
 
     //install, list, local, uninstall, upgrade
     public function run() {
+        if (!$this->config->project->validate()) {
+            throw new InvalidProjectName($this->config->project->getError());
+        }
+
+        if ($this->config->project->isDefault()) {
+            throw new ProjectNeeded();
+        }
+
+        if (!file_exists($this->config->project_dir)) {
+            throw new NoSuchProject((string) $this->config->project);
+        }
+
         if (in_array($this->config->subcommand, self::ACTIONS)) {
             $this->{$this->config->subcommand}();
         } else {
@@ -68,7 +82,7 @@ class Baseline extends Tasks {
 
     private function save() {
         $baselineStash = new BaselineStash($this->config);
-        $baselineStash->copyPrevious($this->config->dump);
+        $baselineStash->copyPrevious($this->config->dump, $this->config->baseline_set);
         display('Save current audit to ' . $this->config->baseline_set);
     }
 }
