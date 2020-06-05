@@ -275,7 +275,7 @@ SELECT
      name,
      extends,
      (SELECT GROUP_CONCAT(implements) FROM cit_implements WHERE cit_implements.implementing = cit.id) AS implements,
-     end - begin AS no_lines,
+     end - begin + 1 AS no_lines,
      (SELECT COUNT(*) FROM properties WHERE properties.citId = cit.id) AS no_attrs,
      (SELECT COUNT(*) FROM methods WHERE methods.citId = cit.id) AS no_methods,
      CASE type 
@@ -487,7 +487,7 @@ SQL;
         $query = <<<SQL
 SELECT namespaces.namespace || name AS name, 
        name AS shortName, 
-       (cit.end - cit.begin) AS size 
+       (cit.end - cit.begin + 1) AS size 
     FROM cit 
     JOIN namespaces 
         ON namespaces.id = cit.namespaceId
@@ -505,7 +505,7 @@ SQL;
 SELECT namespaces.namespace || CASE namespaces.namespace WHEN '\' THEN '' ELSE '\' END || name || '::' || method AS name, 
        method AS shortName, 
        files.file, 
-       (methods.end - methods.begin) AS size
+       (methods.end - methods.begin + 1) AS size
     FROM methods 
     JOIN cit
         on methods.citId = cit.id AND
