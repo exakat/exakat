@@ -164,13 +164,15 @@ class ProjectConfig extends Config {
             unset($ext);
         }
 
-        if (isset($this->config['project_rulesets']) &&
-            is_string($this->config['project_rulesets'])) {
-            $this->config['project_rulesets'] = listToArray($this->config['project_rulesets']);
+        if (isset($this->config['project_rulesets'])) {
+            if (is_string($this->config['project_rulesets'])) {
+                $this->config['project_rulesets'] = listToArray($this->config['project_rulesets']);
+            }
+
+            $this->config['project_rulesets'] = array_filter($this->config['project_rulesets'] ?? array());
+            $this->config['project_rulesets'] = array_map('trim', $this->config['project_rulesets']);
+            $this->config['project_rulesets'] = array_unique($this->config['project_rulesets']);
         }
-        $this->config['project_rulesets'] = array_filter($this->config['project_rulesets'] ?? array());
-        $this->config['project_rulesets'] = array_map('trim', $this->config['project_rulesets']);
-        $this->config['project_rulesets'] = array_unique($this->config['project_rulesets']);
 
         if (in_array($this->config['project_vcs'], Vcs::SUPPORTED_VCS)) {
             $this->config['git'] = false; // remove Git, which is by default
