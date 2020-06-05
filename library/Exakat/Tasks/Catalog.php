@@ -39,7 +39,7 @@ class Catalog extends Tasks {
             }
             return $x;
         }, $rulesets);
-        $data['rulesest'] = $rulesets;
+        $data['rulesets'] = $rulesets;
 
         // List of reports
         $reports = Reports::$FORMATS;
