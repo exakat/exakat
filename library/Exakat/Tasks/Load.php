@@ -2216,18 +2216,39 @@ class Load extends Tasks {
         $default    = 0;
         $variadic   = self::NOT_ELLIPSIS;
 
-        while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS) {
+        do {
             do {
                 // PHP 8.0's trailing comma in signature
-                if ($this->tokens[$this->id + 1 ][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
                     $fullcode[] = ' ';
                     ++$this->id;
                     break 1;
                 }
+                
+                ++$argsMax;
+                if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PUBLIC,
+                                                                    $this->phptokens::T_PRIVATE,
+                                                                    $this->phptokens::T_PROTECTED,
+                    ), \STRICT_COMPARISON)
+                ) {
+                    ++$this->id;
+                    $index = $this->processPublic();
+                    
+                    ++$this->id;
+
+                    $this->addLink(end($this->currentClassTrait), $index, 'PPP');
+
+                    $index->rank = ++$rank;
+                    $this->popExpression();
+                    $fullcode[] = $index->fullcode;
+                    $this->addLink($arguments, $index, 'ARGUMENT');
+                    $argumentsList[] = $index;
+
+                    continue;
+                }
 
                 $index = $this->addAtom('Parameter');
                 $variable = $this->addAtom('Parametername');
-                ++$argsMax;
                 $typehints = $this->processTypehint($index);
                 ++$this->id;
 
@@ -2315,7 +2336,7 @@ class Load extends Tasks {
             } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
 
             --$this->id;
-        }
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS);
         $arguments->count    = $rank + 1;
 
         // Skip the )
@@ -3150,12 +3171,14 @@ class Load extends Tasks {
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                     ++$this->id;
-                    while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
-                                                                            $this->phptokens::T_COMMA,
-                                                                            ),
-                           \STRICT_COMPARISON)) {
+                    do {
                         $default = $this->processNext();
-                    }
+                    } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
+                                       $this->phptokens::T_COMMA,
+                                       $this->phptokens::T_CLOSE_PARENTHESIS,
+                                       ),
+                           \STRICT_COMPARISON));
+
                     $this->popExpression();
                 }
             } else {
@@ -3187,8 +3210,11 @@ class Load extends Tasks {
             }
             $fullcode[] = $element->fullcode;
             $extras[] = $element;
-        }  while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
-                  $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG);
+        }  while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
+                                                                   $this->phptokens::T_CLOSE_TAG,
+                                                                   $this->phptokens::T_CLOSE_PARENTHESIS,
+                                                                   $this->phptokens::T_COMMA,
+                                                                   ), \STRICT_COMPARISON));
 
         $static->fullcode = (!empty($fullcodePrefix) ? $fullcodePrefix . ' ' : '') . implode(', ', $fullcode);
         $static->count    = $rank;
