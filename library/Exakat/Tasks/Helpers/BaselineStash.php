@@ -139,6 +139,8 @@ class BaselineStash {
         if (file_exists("{$this->baseline_dir}/dump-\d+-{$this->baseline_strategy}.sqlite")) {
             return "{$this->baseline_dir}/{$this->baseline_strategy}.sqlite";
         }
+
+        return self::NO_BASELINE;
     }
 }
 
