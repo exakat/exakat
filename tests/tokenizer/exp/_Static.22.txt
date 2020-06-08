@@ -1,0 +1,71 @@
+test
+Label : GLOBAL
+  14
+  Label : DEFINITION, DEFINITION
+    14
+    Label : DEFAULT
+      18
+Label : GLOBAL
+  13
+  Label : DEFINITION, DEFINITION
+    13
+Label : GLOBAL
+  16
+  Label : DEFINITION, DEFINITION
+    16
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              8
+            Label : NAME
+              6
+            Label : TYPEHINT
+              7
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              12
+              Label : GLOBAL
+                13
+              Label : GLOBAL
+                14
+                Label : DEFAULT
+                  18
+              Label : GLOBAL
+                16
+            Label : EXPRESSION
+              12
+              Label : STATIC
+                13
+              Label : STATIC
+                14
+                Label : DEFAULT
+                  18
+              Label : STATIC
+                16
+              Label : TYPEHINT
+                9
+          Label : DEFINITION
+            13
+          Label : DEFINITION
+            14
+            Label : DEFAULT
+              18
+          Label : DEFINITION
+            16
+          Label : NAME
+            5
+          Label : RETURNED
+            Void
+          Label : RETURNTYPE
+            9

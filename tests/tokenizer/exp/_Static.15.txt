@@ -14,13 +14,13 @@ Label : PROJECT
             Label : ARGUMENT
               7
               Label : ARGUMENT
-                10
+                8
                 Label : DEFAULT
-                  8
+                  9
                 Label : NAME
-                  10
-                Label : TYPEHINT
                   8
+                Label : TYPEHINT
+                  9
               Label : BLOCK
                 12
                 Label : EXPRESSION
@@ -30,7 +30,7 @@ Label : PROJECT
               Label : RETURNED
                 Void
               Label : RETURNTYPE
-                8
+                9
               Label : USE
                 11
                 Label : DEFINITION
@@ -44,13 +44,13 @@ Label : PROJECT
             Label : ARGUMENT
               7
               Label : ARGUMENT
-                10
+                8
                 Label : DEFAULT
-                  8
+                  9
                 Label : NAME
-                  10
-                Label : TYPEHINT
                   8
+                Label : TYPEHINT
+                  9
               Label : BLOCK
                 12
                 Label : EXPRESSION
@@ -64,6 +64,6 @@ Label : PROJECT
               Label : RETURNED
                 Void
               Label : RETURNTYPE
-                8
+                9
             Label : NAME
               6

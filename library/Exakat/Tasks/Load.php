@@ -3159,7 +3159,8 @@ class Load extends Tasks {
                     $element = $this->processSingle($atom);
                 }
 
-                if ($element->isA(array('Globaldefinition', 'Staticdefinition', 'Variabledefinition'))) {
+                if ($element->isA(array('Globaldefinition', 'Staticdefinition', 'Variabledefinition')) && 
+                    !isset($this->currentVariables[$element->code])) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
                 }
@@ -3174,9 +3175,11 @@ class Load extends Tasks {
                     ++$this->id;
                     do {
                         $default = $this->processNext();
-                    } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
-                                       $this->phptokens::T_COMMA,
-                                       $this->phptokens::T_CLOSE_PARENTHESIS,
+                    } while (!in_array($this->tokens[$this->id + 1][0], 
+                                      array($this->phptokens::T_SEMICOLON,
+                                            $this->phptokens::T_COMMA,
+                                            $this->phptokens::T_CLOSE_TAG,
+                                            $this->phptokens::T_CLOSE_PARENTHESIS,
                                        ),
                            \STRICT_COMPARISON));
 
@@ -3190,7 +3193,7 @@ class Load extends Tasks {
 
             $element->rank = ++$rank;
             $this->addLink($static, $element, $link);
-
+            
             if ($atom === 'Propertydefinition') {
                 // drop $
                 $element->propertyname = ltrim($element->code, '$');
@@ -3214,7 +3217,6 @@ class Load extends Tasks {
         }  while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
                                                                    $this->phptokens::T_CLOSE_TAG,
                                                                    $this->phptokens::T_CLOSE_PARENTHESIS,
-                                                                   $this->phptokens::T_COMMA,
                                                                    ), \STRICT_COMPARISON));
 
         $static->fullcode = (!empty($fullcodePrefix) ? $fullcodePrefix . ' ' : '') . implode(', ', $fullcode);
