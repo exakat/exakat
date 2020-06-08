@@ -204,6 +204,9 @@ class Load extends Tasks {
     const COMPILE_CHECK    = true;
     const COMPILE_NO_CHECK = false;
 
+    const PROMOTED     = true;
+    const PROMOTED_NOT = false;
+
     private $contexts              = null;
 
     private $expressions         = array();
@@ -418,9 +421,9 @@ class Load extends Tasks {
 
             $this->phptokens::T_ABSTRACT                 => 'processAbstract',
             $this->phptokens::T_FINAL                    => 'processFinal',
-            $this->phptokens::T_PRIVATE                  => 'processPrivate',
-            $this->phptokens::T_PROTECTED                => 'processProtected',
-            $this->phptokens::T_PUBLIC                   => 'processPublic',
+            $this->phptokens::T_PRIVATE                  => 'processPPP',
+            $this->phptokens::T_PROTECTED                => 'processPPP',
+            $this->phptokens::T_PUBLIC                   => 'processPPP',
             $this->phptokens::T_VAR                      => 'processVar',
 
             $this->phptokens::T_QUOTE                    => 'processQuote',
@@ -2233,7 +2236,7 @@ class Load extends Tasks {
                     ), \STRICT_COMPARISON)
                 ) {
                     ++$this->id;
-                    $index = $this->processPublic();
+                    $index = $this->processPPP(self::PROMOTED);
                     
                     ++$this->id;
 
@@ -2593,7 +2596,7 @@ class Load extends Tasks {
         return $ppp;
     }
 
-    private function processPublic(): Atom {
+    private function processPPP(bool $promoted = self::PROMOTED_NOT): Atom {
         $current = $this->id;
         $visibility = $this->tokens[$this->id][1];
 
@@ -2610,64 +2613,10 @@ class Load extends Tasks {
             $ppp = $this->addAtom('Ppp', $current);
             $returnTypes = $this->processTypehint($ppp);
 
-            $this->processSGVariable($ppp);
+            $this->processSGVariable($ppp, $promoted);
         }
 
-        $ppp->visibility = 'public';
-        $ppp->fullcode   = "$visibility {$returnTypes}$ppp->fullcode";
-        $this->makePhpdoc($ppp, $current);
-
-        return $ppp;
-    }
-
-    private function processProtected(): Atom {
-        $current = $this->id;
-        $visibility = $this->tokens[$this->id][1];
-
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_STATIC,
-                                                            $this->phptokens::T_FUNCTION,
-                                                            $this->phptokens::T_FINAL,
-                                                            $this->phptokens::T_ABSTRACT,
-                                                            $this->phptokens::T_CONST,
-                                                           ),
-                     \STRICT_COMPARISON)) {
-            $ppp = $this->processNext();
-            $returnTypes = '';
-        } else {
-            $ppp = $this->addAtom('Ppp', $current);
-            $returnTypes = $this->processTypehint($ppp);
-
-            $this->processSGVariable($ppp);
-        }
-
-        $ppp->visibility = 'protected';
-        $ppp->fullcode   = "$visibility {$returnTypes}$ppp->fullcode";
-        $this->makePhpdoc($ppp, $current);
-
-        return $ppp;
-    }
-
-    private function processPrivate(): Atom {
-        $current = $this->id;
-        $visibility = $this->tokens[$this->id][1];
-
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_STATIC,
-                                                            $this->phptokens::T_FUNCTION,
-                                                            $this->phptokens::T_FINAL,
-                                                            $this->phptokens::T_ABSTRACT,
-                                                            $this->phptokens::T_CONST,
-                                                           ),
-                     \STRICT_COMPARISON)) {
-            $ppp = $this->processNext();
-            $returnTypes = '';
-        } else {
-            $ppp = $this->addAtom('Ppp', $current);
-            $returnTypes = $this->processTypehint($ppp);
-
-            $this->processSGVariable($ppp);
-        }
-
-        $ppp->visibility = 'private';
+        $ppp->visibility = strtolower($visibility);
         $ppp->fullcode   = "$visibility {$returnTypes}$ppp->fullcode";
         $this->makePhpdoc($ppp, $current);
 
@@ -3123,7 +3072,7 @@ class Load extends Tasks {
         return $next;
     }
 
-    private function processSGVariable(Atom $static): void {
+    private function processSGVariable(Atom $static, bool $promoted = self::PROMOTED_NOT): void {
         $current = $this->id;
         $rank = 0;
 
@@ -3151,7 +3100,7 @@ class Load extends Tasks {
                         $this->phptokens::T_CLOSE_PARENTHESIS,
                         );
         // This is only for promoted properties. Only one definition per PPP
-        if ($this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
+        if ($promoted === self::PROMOTED) {
             $finals[] = $this->phptokens::T_COMMA;
         }
 
@@ -3191,13 +3140,7 @@ class Load extends Tasks {
                     ++$this->id;
                     do {
                         $default = $this->processNext();
-                    } while (!in_array($this->tokens[$this->id + 1][0], 
-                                      array($this->phptokens::T_SEMICOLON,
-                                            $this->phptokens::T_COMMA,
-                                            $this->phptokens::T_CLOSE_TAG,
-                                            $this->phptokens::T_CLOSE_PARENTHESIS,
-                                       ),
-                           \STRICT_COMPARISON));
+                    } while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
 
                     $this->popExpression();
                 }
