@@ -311,7 +311,7 @@ abstract class DSL {
         return $className;
     }
 
-    protected function tolowercase($code) : string {
+    protected function tolowercase($code) {
         if (is_array($code)) {
             $code = array_map('mb_strtolower', $code);
         } elseif (is_scalar($code)) {

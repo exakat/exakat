@@ -4970,6 +4970,10 @@ class Load extends Tasks {
                 $this->processSemicolon();
             }
 
+            if (!empty($this->currentMethod) !== null) {
+                $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $returnArg, 'RETURNED');
+            }
+
             return $return;
         }
 

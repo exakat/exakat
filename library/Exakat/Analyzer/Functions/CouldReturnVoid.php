@@ -27,24 +27,23 @@ use Exakat\Analyzer\Analyzer;
 class CouldReturnVoid extends Analyzer {
     public function analyze() {
         // function foo() {} // empty function
-        $this->atomIs('Function')
-             ->outIs('BLOCK')
-             ->noAtomInside('Return')
+        $this->atomIs(array('Function', 'Arrowfunction', 'Closure', 'Method'))
+             ->analyzerIsNot('self')
+             ->outIs('RETURNED')
+             ->atomIs('Void')
+             ->hasNoIn('RETURN')
              ->back('first');
         $this->prepareQuery();
 
         // function foo() { } // always return ;
-        $this->atomIs('Function')
-             ->outIs('BLOCK')
-             ->hasAtomInside('Return')
+        $this->atomIs(array('Function', 'Arrowfunction', 'Closure', 'Method'))
+             ->analyzerIsNot('self')
+             ->hasOut('RETURNED')
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->atomInsideNoDefinition('Return')
-                             ->outIs('RETURN')
-                             ->atomIsNot('Void')
-                     )
+                     ->outIs('RETURNED')
+                     ->atomIsNot('Void')
+                     ->hasIn('RETURN')
              )
              ->back('first');
         $this->prepareQuery();
