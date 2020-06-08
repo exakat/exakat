@@ -3146,11 +3146,27 @@ class Load extends Tasks {
             $fullcodePrefix = $this->tokens[$current][1];
         }
 
+        $finals = array($this->phptokens::T_SEMICOLON,
+                        $this->phptokens::T_CLOSE_TAG,
+                        $this->phptokens::T_CLOSE_PARENTHESIS,
+                        );
+        // This is only for promoted properties. Only one definition per PPP
+        if ($this->contexts->isContext(Context::CONTEXT_FUNCTION)) {
+            $finals[] = $this->phptokens::T_COMMA;
+        }
+
         $fullcode = array();
         $extras = array();
         --$this->id;
         do {
             ++$this->id;
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
+                $reference = self::REFERENCE;
+                ++$this->id;
+            } else {
+                $reference = self::NOT_REFERENCE;
+            }
+
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
                 if (isset($this->currentVariables[$this->tokens[$this->id][1]])) {
@@ -3190,6 +3206,11 @@ class Load extends Tasks {
                 $element = $this->processNext();
                 $this->popExpression();
             }
+            
+            if ($reference === self::REFERENCE) {
+                $element->fullcode  = '&' . $index->fullcode;
+                $element->reference = self::REFERENCE;
+            }
 
             $element->rank = ++$rank;
             $this->addLink($static, $element, $link);
@@ -3214,10 +3235,7 @@ class Load extends Tasks {
             }
             $fullcode[] = $element->fullcode;
             $extras[] = $element;
-        }  while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
-                                                                   $this->phptokens::T_CLOSE_TAG,
-                                                                   $this->phptokens::T_CLOSE_PARENTHESIS,
-                                                                   ), \STRICT_COMPARISON));
+        }  while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
 
         $static->fullcode = (!empty($fullcodePrefix) ? $fullcodePrefix . ' ' : '') . implode(', ', $fullcode);
         $static->count    = $rank;

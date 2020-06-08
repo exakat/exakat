@@ -1,0 +1,303 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              8
+              Label : TYPEHINT
+                9
+              Label : PPP
+                10
+                Label : DEFAULT
+                  11
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                12
+            Label : NAME
+              7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            6
+          Label : PPP
+            8
+            Label : TYPEHINT
+              9
+            Label : PPP
+              10
+              Label : DEFAULT
+                11
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              8
+              Label : TYPEHINT
+                16
+              Label : PPP
+                10
+                Label : DEFAULT
+                  17
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                12
+            Label : NAME
+              7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            15
+          Label : PPP
+            8
+            Label : TYPEHINT
+              16
+            Label : PPP
+              10
+              Label : DEFAULT
+                17
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              19
+              Label : TYPEHINT
+                20
+              Label : PPP
+                10
+                Label : DEFAULT
+                  22
+              Label : TYPEHINT
+                21
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                12
+            Label : NAME
+              7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            18
+          Label : PPP
+            19
+            Label : TYPEHINT
+              20
+            Label : PPP
+              10
+              Label : DEFAULT
+                22
+            Label : TYPEHINT
+              21
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                25
+              Label : PPP
+                10
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                12
+            Label : NAME
+              7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            23
+          Label : PPP
+            24
+            Label : TYPEHINT
+              25
+            Label : PPP
+              10
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                25
+              Label : PPP
+                10
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                12
+            Label : DEFINITION
+              10
+              Label : DEFINITION
+                10
+            Label : NAME
+              7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            27
+          Label : PPP
+            24
+            Label : TYPEHINT
+              25
+            Label : PPP
+              10
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                35
+              Label : PPP
+                10
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                36
+              Label : PPP
+                38
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                12
+            Label : DEFINITION
+              38
+              Label : DEFINITION
+                38
+            Label : NAME
+              7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            28
+          Label : PPP
+            24
+            Label : PPP
+              29
+            Label : PPP
+              31
+            Label : PPP
+              33
+            Label : TYPEHINT
+              12
+          Label : PPP
+            24
+            Label : TYPEHINT
+              35
+            Label : PPP
+              10
+          Label : PPP
+            24
+            Label : TYPEHINT
+              36
+            Label : PPP
+              38
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            7
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                35
+              Label : PPP
+                10
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                36
+              Label : PPP
+                38
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                35
+              Label : PPP
+                40
+            Label : ARGUMENT
+              24
+              Label : TYPEHINT
+                36
+              Label : PPP
+                41
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                12
+            Label : DEFINITION
+              10
+              Label : DEFINITION
+                10
+            Label : DEFINITION
+              38
+              Label : DEFINITION
+                38
+            Label : DEFINITION
+              40
+              Label : DEFINITION
+                40
+            Label : DEFINITION
+              41
+              Label : DEFINITION
+                41
+            Label : NAME
+              7
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            39
+          Label : PPP
+            24
+            Label : TYPEHINT
+              35
+            Label : PPP
+              10
+          Label : PPP
+            24
+            Label : TYPEHINT
+              36
+            Label : PPP
+              38
+          Label : PPP
+            24
+            Label : TYPEHINT
+              35
+            Label : PPP
+              40
+          Label : PPP
+            24
+            Label : TYPEHINT
+              36
+            Label : PPP
+              41
