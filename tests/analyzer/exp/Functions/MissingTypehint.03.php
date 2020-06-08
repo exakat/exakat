@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$a1', 
-                      '$a2', 
+$expected     = array('function ($a1) : void { /**/ } ', 
+                      'fn ($a2) : int => 1',
                       'fn (C $b2) => new C( )',
                       'function (C $b) { /**/ } ',
                      );

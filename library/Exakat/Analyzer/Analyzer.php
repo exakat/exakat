@@ -132,7 +132,7 @@ abstract class Analyzer {
     public const CONTAINERS_ROOTS = array('Variable', 'Staticproperty', 'Member', 'Array', 'Variableobject', 'Variablearray');
     public const VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parametername');
     public const VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
-    public const ARGUMENTS        = array('Ppp', 'Paramter');
+    public const ARGUMENTS        = array('Ppp', 'Parameter');
 
     public const LITERALS         = array('Integer', 'Float', 'Null', 'Boolean', 'String', 'Heredoc');
     public const LOOPS_ALL        = array('For' , 'Foreach', 'While', 'Dowhile');

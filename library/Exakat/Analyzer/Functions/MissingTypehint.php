@@ -27,24 +27,36 @@ use Exakat\Analyzer\Analyzer;
 class MissingTypehint extends Analyzer {
     public function analyze() {
         // function foo($a) : void;
-        $this->atomIs('Parameter')
+        // missing argument's typehint
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->not(
                 $this->side()
-                     ->inIs('ARGUMENT')
                      ->outIs('NAME')
-                     ->codeIs(array('__get', '__set'), self::TRANSLATE, self::CASE_INSENSITIVE)
+                     ->codeIs(array('__get', 
+                                    '__set',
+                                    ), 
+                              self::TRANSLATE, self::CASE_INSENSITIVE)
               )
+             ->outIs('ARGUMENT')
+             ->atomIs(self::ARGUMENTS)
              ->outIs('TYPEHINT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
 
         // function foo(string $a) ;
+        // missing methods's return typehint
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->not(
                 $this->side()
                      ->outIs('NAME')
-                     ->codeIs(array('__construct', '__get', '__set'), self::TRANSLATE, self::CASE_INSENSITIVE)
+                     ->codeIs(array('__construct', 
+                                    '__destruct', 
+                                    '__get', 
+                                    '__set',
+                                    ), self::TRANSLATE, self::CASE_INSENSITIVE)
               )
              ->outIs('RETURNTYPE')
              ->atomIs('Void')

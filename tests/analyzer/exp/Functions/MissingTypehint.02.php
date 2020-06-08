@@ -1,7 +1,6 @@
 <?php
 
-$expected     = array('$a1', 
-                      '$a4', 
+$expected     = array('function foo($a1) : false|null|A|B { /**/ } ', 
                       'function foo4($a4) { /**/ } ',
                      );
 
