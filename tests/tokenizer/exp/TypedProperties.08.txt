@@ -25,39 +25,39 @@ Label : PROJECT
             7
           Label : PPP
             8
-            Label : PPP
+            Label : TYPEHINT
               9
+            Label : PPP
+              10
               Label : DEFINITION
-                17
+                21
                 Label : CLASS
                   7
                 Label : MEMBER
-                  9
+                  10
             Label : PPP
-              11
-            Label : TYPEHINT
-              8
+              12
           Label : PPP
-            8
-            Label : PPP
-              13
+            14
             Label : TYPEHINT
-              8
-          Label : PPP
-            8
+              9
             Label : PPP
               15
-            Label : TYPEHINT
-              8
-        Label : EXPRESSION
-          18
-          Label : LEFT
+          Label : PPP
             17
+            Label : TYPEHINT
+              9
+            Label : PPP
+              19
+        Label : EXPRESSION
+          22
+          Label : LEFT
+            21
             Label : CLASS
               7
             Label : MEMBER
-              9
+              10
           Label : RIGHT
-            19
+            23
             Label : NEW
               6

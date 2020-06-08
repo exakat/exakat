@@ -58,7 +58,7 @@ Label : PROJECT
           Label : DEFINITION
             6
             Label : ARGUMENT
-              7
+              8
             Label : NAME
               6
           Label : DEFINITION
@@ -66,13 +66,13 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            9
+            7
             Label : PPP
               10
               Label : DEFAULT
                 12
             Label : TYPEHINT
-              7
+              8
         Label : EXPRESSION
           15
           Label : LEFT
@@ -82,7 +82,7 @@ Label : PROJECT
             Label : NEW
               6
               Label : ARGUMENT
-                7
+                8
               Label : NAME
                 6
         Label : EXPRESSION
@@ -124,11 +124,11 @@ Label : PROJECT
             Label : CONCAT
               26
               Label : MEMBER
-                30
+                29
                 Label : CODE
-                  28
+                  18
                   Label : INDEX
-                    29
+                    28
                   Label : VARIABLE
                     18
               Label : OBJECT

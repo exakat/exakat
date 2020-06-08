@@ -1,5 +1,5 @@
 <?php
 
 
-return (string) $a{$b};
+return (string) $a[$b][$x[3]];
 ?>

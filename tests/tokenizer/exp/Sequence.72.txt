@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  74
+  73
   Label : DEFINITION
-    74
+    73
     Label : DEFINITION
-      74
+      73
 Label : GLOBAL
   30
   Label : DEFINITION
@@ -114,17 +114,17 @@ Label : GLOBAL
     Label : DEFINITION
       54
 Label : GLOBAL
-  63
+  62
   Label : DEFINITION
-    63
+    62
     Label : DEFINITION
-      63
+      62
 Label : GLOBAL
-  69
+  68
   Label : DEFINITION
-    69
+    68
     Label : DEFINITION
-      69
+      68
 Label : PROJECT
   1
   Label : DEFINITION
@@ -210,39 +210,39 @@ Label : PROJECT
           Label : ARGUMENT
             52
           Label : ARGUMENT
-            56
+            54
             Label : INDEX
-              57
+              56
             Label : VARIABLE
               54
           Label : ARGUMENT
-            59
+            58
             Label : ARGUMENT
-              62
+              61
               Label : INDEX
-                60
+                59
               Label : VALUE
-                56
+                62
                 Label : INDEX
-                  65
+                  64
                 Label : VARIABLE
-                  63
+                  62
             Label : ARGUMENT
-              62
+              61
               Label : INDEX
-                67
+                66
               Label : VALUE
-                56
+                68
                 Label : INDEX
-                  71
+                  70
                 Label : VARIABLE
-                  69
+                  68
           Label : NAME
             50
         Label : EXPRESSION
-          73
+          72
           Label : RETURN
-            74
+            73
   Label : DEFINITION
     16
     Label : DEFINITION
@@ -308,16 +308,16 @@ Label : PROJECT
     Label : DEFINITION
       54
   Label : DEFINITION
-    63
+    62
     Label : DEFINITION
-      63
+      62
   Label : DEFINITION
-    69
+    68
     Label : DEFINITION
-      69
+      68
   Label : DEFINITION
-    74
+    73
     Label : DEFINITION
-      74
-  Label : RETURNED, RETURNED
-    74
+      73
+  Label : RETURNED
+    73

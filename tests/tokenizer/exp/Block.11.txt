@@ -76,11 +76,11 @@ Label : PROJECT
               Label : POSTPLUSPLUS
                 14
           Label : EXPRESSION
-            20
+            19
             Label : LEFT
-              18
+              16
               Label : INDEX
-                19
+                18
               Label : VARIABLE
                 16
             Label : RIGHT

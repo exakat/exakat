@@ -1,20 +1,20 @@
 test
 Label : GLOBAL
-  9
+  8
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
-      9
+      8
     Label : DEFINITION
-      9
+      8
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
-      9
+      8
     Label : DEFINITION
-      9
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -26,37 +26,37 @@ Label : PROJECT
           Label : METHOD
             7
             Label : ARGUMENT
-              9
+              8
               Label : DEFAULT
                 10
               Label : NAME
-                9
-              Label : TYPEHINT
                 8
+              Label : TYPEHINT
+                9
             Label : ARGUMENT
-              13
+              12
               Label : DEFAULT
                 10
               Label : NAME
-                13
-              Label : TYPEHINT
                 12
+              Label : TYPEHINT
+                13
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 10
               Label : NAME
-                15
-              Label : TYPEHINT
                 14
+              Label : TYPEHINT
+                15
             Label : ARGUMENT
-              17
+              16
               Label : DEFAULT
                 10
               Label : NAME
-                17
-              Label : TYPEHINT
                 16
+              Label : TYPEHINT
+                17
             Label : BLOCK
               18
               Label : EXPRESSION
@@ -84,41 +84,41 @@ Label : PROJECT
           Label : METHOD
             21
             Label : ARGUMENT
-              13
+              12
               Label : DEFAULT
                 10
               Label : NAME
-                13
+                12
               Label : TYPEHINT
                 10
             Label : ARGUMENT
-              15
+              14
               Label : DEFAULT
                 10
               Label : NAME
-                15
+                14
               Label : TYPEHINT
                 23
             Label : ARGUMENT
-              25
+              24
               Label : DEFAULT
                 10
               Label : NAME
-                25
-                Label : DEFINITION
-                  25
-              Label : TYPEHINT
                 24
+                Label : DEFINITION
+                  24
+              Label : TYPEHINT
+                25
             Label : ARGUMENT
-              28
+              26
               Label : DEFAULT
                 10
               Label : NAME
-                28
-                Label : DEFINITION
-                  28
-              Label : TYPEHINT
                 26
+                Label : DEFINITION
+                  26
+              Label : TYPEHINT
+                27
             Label : BLOCK
               18
               Label : EXPRESSION
@@ -128,7 +128,7 @@ Label : PROJECT
                   Label : LEFT
                     36
                     Label : CLASS
-                      25
+                      24
                     Label : VARIABLE
                       33
                       Label : MEMBER
@@ -154,9 +154,9 @@ Label : PROJECT
                       Label : METHOD
                         43
                         Label : ARGUMENT
-                          28
+                          26
                         Label : ARGUMENT
-                          17
+                          16
                         Label : NAME
                           43
                       Label : OBJECT
@@ -166,23 +166,23 @@ Label : PROJECT
                         Label : OBJECT
                           30
             Label : DEFINITION
-              17
+              16
               Label : DEFINITION
-                17
+                16
             Label : NAME
               21
             Label : RETURNED
-              28
+              26
             Label : RETURNED
-              17
+              16
             Label : RETURNED
               33
               Label : METHOD
                 43
                 Label : ARGUMENT
-                  28
+                  26
                 Label : ARGUMENT
-                  17
+                  16
                 Label : NAME
                   43
               Label : OBJECT
@@ -208,7 +208,7 @@ Label : PROJECT
         Label : EXPRESSION
           46
           Label : LEFT
-            9
+            8
           Label : RIGHT
             47
             Label : NEW
@@ -232,4 +232,4 @@ Label : PROJECT
             Label : NAME
               21
           Label : OBJECT
-            9
+            8

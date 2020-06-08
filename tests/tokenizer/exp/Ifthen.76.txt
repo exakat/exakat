@@ -10,13 +10,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            9
+            7
             Label : DEFAULT
-              7
+              8
             Label : NAME
-              9
-            Label : TYPEHINT
               7
+            Label : TYPEHINT
+              8
           Label : NAME
             5
           Label : RETURNED
@@ -150,4 +150,4 @@ Label : PROJECT
             Label : DEFINITION
               13
           Label : RETURNTYPE
-            7
+            8
