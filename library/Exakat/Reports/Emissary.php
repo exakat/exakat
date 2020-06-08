@@ -108,7 +108,7 @@ class Emissary extends Reports {
         return implode(PHP_EOL, $menu);
     }
 
-    protected function makeMenuHtml($section): string {
+    protected function makeMenuHtml(array $section): string {
         if (isset($section['file'])) {
             $icon = $section['icon'] ?? 'sticky-note-o';
             $menuTitle = $section['menu'] ?? $section['title'];
@@ -1332,7 +1332,7 @@ JAVASCRIPTCODE;
             if (!empty($bugfix['function'])) {
                 if (!isset($rows[$bugfix['function']])) { continue; }
 
-                $cve = $this->Bugfixes_cve($bugfix['cve']);
+                $cve = $this->Bugfixes_cve($bugfix['cve'] ?? '');
                 $table .= '<tr>
     <td>' . $bugfix['title'] . '</td>
     <td>' . ($bugfix['solvedIn73'] ? $bugfix['solvedIn73'] : '-') . '</td>
@@ -3383,7 +3383,7 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
-    protected function makeIcon($tag): string {
+    protected function makeIcon(string $tag): string {
         switch($tag) {
             case self::YES :
                 return '<i class="fa fa-check-square-o"></i>';
@@ -3398,7 +3398,7 @@ HTML;
         }
     }
 
-    private function Bugfixes_cve($cve): string {
+    private function Bugfixes_cve(string $cve): string {
         if (empty($cve)) {
             return '-';
         }
@@ -3801,7 +3801,7 @@ HTML;
         $results->load();
 
         $expr = $results->getColumn('fullcode');
-        $expr = array_map(function ($x) { return trim($x, '{}');}, $expr);
+        $expr = array_map(function (string $x) : string { return trim($x, '{}');}, $expr);
         $counts = array_count_values($expr);
 
         $expressions = '';

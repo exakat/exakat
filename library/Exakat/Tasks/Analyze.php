@@ -225,7 +225,7 @@ class Analyze extends Tasks {
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");
                 display($e->getMessage());
-                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
+                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\texception : ".get_class($e)."\terror : " . $e->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();
 

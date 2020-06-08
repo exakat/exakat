@@ -35,7 +35,7 @@ class Files extends Tasks {
 
     private $tmpFileName = '';
 
-    public function run() {
+    public function run() : void {
         $stats = array();
         foreach(Config::PHP_VERSIONS as $version) {
             $stats["notCompilable$version"] = 'N/C';
@@ -75,7 +75,7 @@ class Files extends Tasks {
         }
 
         $this->tmpFileName = "{$this->config->tmp_dir}/files{$this->config->pid}.txt";
-        $tmpFiles = array_map(function ($file) {
+        $tmpFiles = array_map(function (string $file) : string {
             return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ';', '&', '`', '|', "\t"),
                                array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', '\\;', '\\&', '\\`', '\\|', "\\\t", ),
                                ".$file");
@@ -218,7 +218,7 @@ class Files extends Tasks {
         $this->checkTokenLimit();
     }
 
-    private function checkComposer($dir) {
+    private function checkComposer(string $dir) : void {
         // composer.json
         display('Check composer');
         $composerInfo = array();
@@ -241,7 +241,7 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', $composerInfo);
     }
 
-    private function countTokens($path, &$files, &$ignoredFiles) {
+    private function countTokens(string $path, array &$files, array &$ignoredFiles) {
         $tokens = 0;
 
         $php = exakat('php');
@@ -258,7 +258,7 @@ class Files extends Tasks {
         return $tokens;
     }
 
-    private function checkLicence($dir) {
+    private function checkLicence(string $dir) : bool {
         $licenses = parse_ini_file($this->config->dir_root . '/data/license.ini');
         $licenses = $licenses['files'];
 
@@ -270,9 +270,11 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
+        
+        return false;
     }
 
-    public static function findFiles(string $path, array &$files, array &$ignoredFiles, Config $config) {
+    public static function findFiles(string $path, array &$files, array &$ignoredFiles, Config $config) : void {
         $ignoreFileNames = parse_ini_file("{$config->dir_root}/data/ignore_files.ini");
         $ignoreFileNames = array_flip($ignoreFileNames['files']);
 
@@ -316,7 +318,7 @@ class Files extends Tasks {
         }
         chdir($path);
         $allFiles = rglob('.');
-        $allFiles = array_map(function ($path) { return ltrim($path, '.'); }, $allFiles);
+        $allFiles = array_map(function (string $path) : string { return ltrim($path, '.'); }, $allFiles);
         chdir($d);
 
         $exts = $config->file_extensions;

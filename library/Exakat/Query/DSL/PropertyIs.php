@@ -39,7 +39,7 @@ class PropertyIs extends DSL {
         if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {
-            $this->tolowercase($code);
+            $code = $this->tolowercase($code);
             $caseSensitive = '.toString().toLowerCase()';
         }
 

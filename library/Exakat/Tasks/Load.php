@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 
 use Exakat\GraphElements;
 use Exakat\Graph\Graph;
+use Exakat\Project;
 use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
@@ -220,7 +221,7 @@ class Load extends Tasks {
                            'files'     => 0,
                            'tokens'    => 0);
 
-    public function __construct($subtask = self::IS_NOT_SUBTASK) {
+    public function __construct(bool $subtask = self::IS_NOT_SUBTASK) {
         parent::__construct($subtask);
 
         $this->atomGroup = new AtomGroup();
@@ -452,7 +453,7 @@ class Load extends Tasks {
         }
     }
 
-    public function run() {
+    public function run() : void {
         $this->logTime('Start');
         // Clean tmp folder
         $files = glob("{$this->config->tmp_dir}/*.csv");
@@ -533,7 +534,7 @@ class Load extends Tasks {
         $this->logTime('The End');
     }
 
-    private function processProject($project): array {
+    private function processProject(Project $project): array {
         $files = $this->datastore->getCol('files', 'file');
 
         if (empty($files)) {
@@ -3296,7 +3297,7 @@ class Load extends Tasks {
         return $bracket;
     }
 
-    private function processBlock(bool $standalone = self::STANDALONE_BLOCK) {
+    private function processBlock(bool $standalone = self::STANDALONE_BLOCK) : Atom {
         $this->startSequence();
 
         // Case for {}
@@ -6242,8 +6243,8 @@ class Load extends Tasks {
 
             // define doesn't care about use...
             $apply->fullnspath = $prefix;
-                    $apply->aliased = self::NOT_ALIASED;
-                    return;
+            $apply->aliased = self::NOT_ALIASED;
+            return;
         } else {
             // Finally, the case for a nsname
             $prefix = mb_strtolower( substr($name->code, 0, strpos($name->code . '\\', '\\')) );
