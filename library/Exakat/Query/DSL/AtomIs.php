@@ -69,8 +69,9 @@ __.timeLimit($TIME_LIMIT).hasLabel("Identifier", "Nsname", "Staticconstant", "Va
           __.hasLabel(within(["Variable"])).in("DEFINITION").hasLabel('Variabledefinition', 'Staticdefinition').out("DEFAULT"),
           
           // literal value, passed as an argument (Method, closure, function)
-          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter").as("p1").union( __.out("DEFAULT"),
-                                                                                                              __.in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank")),
+          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").out("DEFAULT"),
+
+          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").as("p1").timeLimit($TIME_LIMIT).in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
 
           // literal value, passed as an argument
           __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
