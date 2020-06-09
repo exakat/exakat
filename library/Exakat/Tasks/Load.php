@@ -3140,7 +3140,13 @@ class Load extends Tasks {
                     ++$this->id;
                     do {
                         $default = $this->processNext();
-                    } while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
+                    } while (!in_array($this->tokens[$this->id + 1][0], 
+                                       array($this->phptokens::T_SEMICOLON,
+                                             $this->phptokens::T_CLOSE_TAG,
+                                             $this->phptokens::T_COMMA,
+                                             $this->phptokens::T_CLOSE_PARENTHESIS,
+                                             ), 
+                                        \STRICT_COMPARISON));
 
                     $this->popExpression();
                 }
