@@ -25,7 +25,7 @@ namespace Exakat\Tasks\Helpers;
 use Exakat\Config;
 
 class BaselineStash {
-    const STRATEGIES = ['none', 'always'];
+    const STRATEGIES = array('none', 'always');
 
     // 'none', 'always', '<Name>'
     private $baseline_strategy = 'none';
@@ -56,8 +56,8 @@ class BaselineStash {
 
         if (!empty($name) && !in_array($name, self::STRATEGIES)) {
             // overwrite
-            if (!copy($previous, $this->baseline_dir.'/'.$name.'.sqlite')) {
-                display('Could not save the baseline with the name '.$name);
+            if (!copy($previous, $this->baseline_dir . '/' . $name . '.sqlite')) {
+                display('Could not save the baseline with the name ' . $name);
             }
 
             return;
@@ -84,7 +84,7 @@ class BaselineStash {
                 // md5 is here for uuid purpose.
                 $sqliteFilePrevious = $this->baseline_dir . '/dump-' . ($last_id + 1) . '-' . substr(md5($this->baseline_dir . ($last_id + 1)), 0, 7) . '.sqlite';
                 if (!copy($previous, $sqliteFilePrevious)) {
-                    display('Could not save the baseline with the name '.$name);
+                    display('Could not save the baseline with the name ' . $name);
                 }
 
                 return;
@@ -97,7 +97,7 @@ class BaselineStash {
         if (file_exists("{$this->baseline_dir}/$id.sqlite")) {
             display("Removing baseline '$id'\n");
             unlink("{$this->baseline_dir}/$id.sqlite");
-            
+
             return;
         }
 
@@ -105,12 +105,12 @@ class BaselineStash {
         if (!empty($baselines) && count($baselines) === 1) {
             $baseline = basename($baselines[0], '.sqlite');
             display("Removing baseline '$baseline'\n");
-            
+
             unlink($baselines[0]);
-            
+
             return;
         }
-        
+
         display("Could not find $id baseline\n");
     }
 
@@ -118,18 +118,18 @@ class BaselineStash {
         if ($this->baseline_strategy === 'none') {
             return self::NO_BASELINE;
         }
-        
+
         if ($this->baseline_strategy === 'always') {
             $baselines = glob("{$this->baseline_dir}//dump-*-*.sqlite");
             if (empty($baselines)) {
                 return self::NO_BASELINE;
             }
 
-            // Get the last one 
+            // Get the last one
             sort($baselines);
             return array_pop($baselines);
         }
-        
+
         // full name in use
         if (file_exists("{$this->baseline_dir}/{$this->baseline_strategy}.sqlite")) {
             return "{$this->baseline_dir}/{$this->baseline_strategy}.sqlite";
