@@ -29,7 +29,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   10
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     10
               Label : NAME
                 10
@@ -71,7 +71,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   16
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     26
                     Label : AS
                       16
@@ -114,15 +114,15 @@ Label : PROJECT
                   Label : VALUE
                     13
               Label : DEFINITION
+                24
+              Label : DEFINITION
                 18
                 Label : ARGUMENT
                   5
                 Label : NAME
                   18
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     24
-              Label : DEFINITION
-                24
               Label : NAME
                 18
           Label : NAME
@@ -149,7 +149,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   20
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     25
               Label : NAME
                 20
@@ -215,7 +215,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   10
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     10
             Label : EXPRESSION
               33
@@ -233,7 +233,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   18
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     24
             Label : EXPRESSION
               33
@@ -243,7 +243,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   20
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     25
             Label : EXPRESSION
               33
@@ -253,7 +253,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   16
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     26
                     Label : AS
                       16
@@ -283,7 +283,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   28
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     26
                     Label : AS
                       28
@@ -297,7 +297,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   30
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     26
                     Label : AS
                       30
@@ -311,7 +311,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   32
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     26
                     Label : AS
                       32

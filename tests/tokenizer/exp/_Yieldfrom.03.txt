@@ -64,17 +64,17 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            6
             Label : DEFAULT
-              6
+              7
             Label : NAME
-              8
-              Label : DEFINITION
-                8
-              Label : DEFINITION
-                8
-            Label : TYPEHINT
               6
+              Label : DEFINITION
+                6
+              Label : DEFINITION
+                6
+            Label : TYPEHINT
+              7
           Label : BLOCK
             9
             Label : EXPRESSION
@@ -86,7 +86,7 @@ Label : PROJECT
                   Label : LEFT
                     11
                     Label : YIELD
-                      8
+                      6
                   Label : RIGHT
                     13
               Label : CATCH
@@ -112,7 +112,7 @@ Label : PROJECT
               Label : LEFT
                 11
                 Label : YIELD
-                  8
+                  6
               Label : RIGHT
                 22
           Label : DEFINITION
@@ -138,11 +138,11 @@ Label : PROJECT
           Label : RETURNED
             Void
           Label : RETURNTYPE
-            6
+            7
         Label : EXPRESSION
           23
           Label : ARGUMENT
-            6
+            7
           Label : BLOCK
             9
             Label : EXPRESSION
@@ -218,7 +218,7 @@ Label : PROJECT
           Label : DEFINITION
             23
             Label : ARGUMENT
-              6
+              7
             Label : NAME
               23
           Label : DEFINITION
@@ -236,7 +236,7 @@ Label : PROJECT
           Label : RETURNED
             Void
           Label : RETURNTYPE
-            6
+            7
         Label : EXPRESSION
           31
           Label : LEFT
@@ -258,7 +258,7 @@ Label : PROJECT
                     Label : METHOD
                       41
                       Label : ARGUMENT
-                        6
+                        7
                       Label : NAME
                         41
                     Label : OBJECT
@@ -272,7 +272,7 @@ Label : PROJECT
                   Label : METHOD
                     34
                     Label : ARGUMENT
-                      6
+                      7
                     Label : NAME
                       34
                   Label : OBJECT
@@ -308,7 +308,7 @@ Label : PROJECT
                   Label : RIGHT
                     23
                     Label : ARGUMENT
-                      6
+                      7
                     Label : NAME
                       23
           Label : CATCH
@@ -336,7 +336,7 @@ Label : PROJECT
             Label : METHOD
               34
               Label : ARGUMENT
-                6
+                7
               Label : NAME
                 34
             Label : OBJECT

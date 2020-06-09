@@ -65,7 +65,7 @@ Label : PROJECT
                 12
                 Label : ARGUMENT
                   8
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
             Label : TYPEHINT
               8
@@ -77,7 +77,7 @@ Label : PROJECT
                 12
                 Label : ARGUMENT
                   8
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
         Label : EXPRESSION
           17

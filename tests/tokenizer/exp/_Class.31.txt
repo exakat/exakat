@@ -13,7 +13,7 @@ Label : PROJECT
             6
           Label : PPP
             7
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
             Label : PPP
               10

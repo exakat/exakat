@@ -33,5 +33,5 @@ Label : PROJECT
               22
               Label : DEFAULT
                 24
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8

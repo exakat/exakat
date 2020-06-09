@@ -21,7 +21,7 @@ Label : PROJECT
             3
             Label : EXPRESSION
               11
-            Label : EXPRESSION, EXPRESSION
+            Label : EXPRESSION
               10
               Label : ARGUMENT
                 11

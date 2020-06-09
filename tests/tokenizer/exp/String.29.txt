@@ -1,24 +1,24 @@
 test
 Label : GLOBAL
-  10
+  9
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
 Label : PROJECT
   1
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -26,74 +26,74 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          5
           Label : INDEX
-            7
+            6
           Label : VARIABLE
             5
         Label : EXPRESSION
-          6
+          7
           Label : INDEX
-            12
+            11
           Label : VARIABLE
-            8
+            7
+            Label : CONCAT
+              8
             Label : CONCAT
               9
+        Label : EXPRESSION
+          15
+          Label : METHOD
+            12
+            Label : ARGUMENT
+              13
+            Label : NAME
+              12
+          Label : OBJECT
+            7
             Label : CONCAT
-              10
+              8
+            Label : CONCAT
+              9
         Label : EXPRESSION
           16
-          Label : METHOD
-            13
-            Label : ARGUMENT
-              14
-            Label : NAME
-              13
-          Label : OBJECT
-            8
+          Label : CLASS
+            7
+            Label : CONCAT
+              8
             Label : CONCAT
               9
-            Label : CONCAT
-              10
+          Label : METHOD
+            12
+            Label : ARGUMENT
+              13
+            Label : NAME
+              12
         Label : EXPRESSION
           17
-          Label : CLASS
-            8
-            Label : CONCAT
-              9
-            Label : CONCAT
-              10
-          Label : METHOD
-            13
-            Label : ARGUMENT
-              14
-            Label : NAME
-              13
-        Label : EXPRESSION
-          18
           Label : ARGUMENT
-            17
+            16
             Label : CLASS
-              6
+              19
               Label : INDEX
-                12
+                11
               Label : VARIABLE
-                17
+                16
                 Label : CLASS
-                  19
+                  18
                 Label : CONSTANT
-                  20
+                  19
             Label : MEMBER
-              22
+              21
         Label : EXPRESSION
-          18
+          17
           Label : ARGUMENT
-            17
+            16
             Label : CLASS
-              17
+              16
               Label : CLASS
-                19
+                18
               Label : CONSTANT
-                20
+                19
             Label : MEMBER
-              22
+              21

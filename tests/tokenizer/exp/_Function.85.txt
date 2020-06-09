@@ -86,7 +86,7 @@ Label : PROJECT
               Label : NAME
                 17
               Label : TYPEHINT
-                15
+                18
             Label : RETURNED
               Void
             Label : RETURNTYPE
@@ -112,7 +112,7 @@ Label : PROJECT
               Label : NAME
                 17
               Label : TYPEHINT
-                15
+                18
             Label : BLOCK
               9
             Label : RETURNED
@@ -132,7 +132,7 @@ Label : PROJECT
             Label : ARGUMENT
               5
               Label : DEFAULT
-                18
+                19
               Label : NAME
                 5
                 Label : DEFINITION
@@ -146,7 +146,7 @@ Label : PROJECT
               Label : NAME
                 17
               Label : TYPEHINT
-                15
+                18
             Label : RETURNED
               Void
             Label : RETURNTYPE
