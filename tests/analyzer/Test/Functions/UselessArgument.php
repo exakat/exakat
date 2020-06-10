@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UselessArgument extends Analyzer {
-    /* 8 methods */
+    /* 10 methods */
 
     public function testFunctions_UselessArgument01()  { $this->generic_test('Functions/UselessArgument.01'); }
     public function testFunctions_UselessArgument02()  { $this->generic_test('Functions/UselessArgument.02'); }
@@ -17,5 +17,7 @@ class UselessArgument extends Analyzer {
     public function testFunctions_UselessArgument06()  { $this->generic_test('Functions/UselessArgument.06'); }
     public function testFunctions_UselessArgument07()  { $this->generic_test('Functions/UselessArgument.07'); }
     public function testFunctions_UselessArgument08()  { $this->generic_test('Functions/UselessArgument.08'); }
+    public function testFunctions_UselessArgument09()  { $this->generic_test('Functions/UselessArgument.09'); }
+    public function testFunctions_UselessArgument10()  { $this->generic_test('Functions/UselessArgument.10'); }
 }
 ?>

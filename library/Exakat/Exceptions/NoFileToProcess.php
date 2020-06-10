@@ -23,8 +23,10 @@
 
 namespace Exakat\Exceptions;
 
+use Exception;
+
 class NoFileToProcess extends \RuntimeException {
-    public function __construct($filename = '', $type = 'empty or doesn\'t compile', $code = 0, $previous = null) {
+    public function __construct(string $filename = '', string $type = 'empty or doesn\'t compile', int $code = 0, Exception $previous = null) {
         parent::__construct($filename . ' ' . $type, $code, $previous);
     }
 }
