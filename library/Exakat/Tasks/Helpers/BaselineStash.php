@@ -29,14 +29,13 @@ class BaselineStash {
 
     // 'none', 'always', '<Name>'
     private $baseline_strategy = 'none';
-    private $project_dir       = '';
+    private $baseline_dir       = '';
     private $use               = 'none';
 
     const NO_BASELINE          = '';
 
     public function __construct(Config $config) {
         $this->baseline_strategy = $config->baseline_set;
-        $this->project_dir       = $config->project_dir;
         $this->baseline_dir      = $config->project_dir . '/baseline';
         $this->use               = $config->baseline_use;
 
@@ -71,7 +70,6 @@ class BaselineStash {
         if ($this->baseline_strategy === 'always') {
             $baselines = glob("{$this->baseline_dir}/dump-*.sqlite");
             if (empty($baselines)) {
-                $baselines = array();
                 $last_id = 1;
             } else {
                 usort($baselines, function (string $a, string $b) { return $b <=> $a;} ); // simplistic reverse sorting
