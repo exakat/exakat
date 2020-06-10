@@ -205,9 +205,9 @@ class Query {
         return true;
     }
 
-    public function prepareRawQuery() {
+    public function prepareRawQuery() : void {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return true;
+            return;
         }
 
         $commands = array_column($this->commands, 'gremlin');
@@ -215,7 +215,8 @@ class Query {
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             // any 'stop_query' is blocking
-            return $this->query = "// Query with STOP_QUERY\n";
+            $this->query = "// Query with STOP_QUERY\n";
+            return ;
         }
 
         foreach($commands as $id => $command) {
@@ -239,7 +240,7 @@ GREMLIN;
 
     }
 
-    public function printRawQuery() {
+    public function printRawQuery(): void {
         $this->prepareRawQuery();
 
         print $this->query . PHP_EOL;
@@ -247,16 +248,16 @@ GREMLIN;
         die(__METHOD__);
     }
 
-    public function getQuery() {
+    public function getQuery() : string {
         assert($this->query !== null, 'Null Query found!');
         return $this->query;
     }
 
-    public function getArguments() {
+    public function getArguments() : array {
         return $this->arguments;
     }
 
-    public function printQuery() {
+    public function printQuery() : void {
         $this->prepareQuery();
 
         var_dump($this->query);
