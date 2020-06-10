@@ -33,6 +33,7 @@ use Exakat\Query\QueryDoc;
 use Exakat\Project;
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Query\DSL\Command;
+use Exakat\Phpexec;
 
 abstract class Analyzer {
     // Query types
@@ -377,14 +378,14 @@ GREMLIN
         return $this->phpVersion;
     }
 
-    public function checkPhpConfiguration($Php): bool {
+    public function checkPhpConfiguration(Phpexec $php): bool {
         // this handles Any version of PHP
         if ($this->phpConfiguration === 'Any') {
             return true;
         }
 
         foreach($this->phpConfiguration as $ini => $value) {
-            if ($Php->getConfiguration($ini) != $value) {
+            if ($php->getConfiguration($ini) != $value) {
                 return false;
             }
         }
