@@ -51,7 +51,7 @@ class UselessArgument extends Analyzer {
                      ->outIs('DEFINITION')
                      ->outIsIE('METHOD')
                      ->outWithRank('ARGUMENT', 'ranked')
-                     ->atomIs(array('Integer', 'Float', 'String'), self::WITH_CONSTANTS)
+                     ->atomIs(array('Integer', 'Float', 'String', 'Boolean', 'Null'), self::WITH_CONSTANTS)
                      ->raw('sideEffect{x[it.get().value("code")] = 1;}.fold().filter{ x.size() == 1;}')
              )
              ->back('first');
