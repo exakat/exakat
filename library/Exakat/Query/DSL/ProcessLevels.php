@@ -28,20 +28,22 @@ class ProcessLevels extends DSL {
     public function run(): Command {
         if (func_num_args() === 1) {
             list($maxLevel) = func_get_args();
-            $filter = ".filter{ levels > $maxLevel}";
+            $filter = ".filter{ levels.max() > $maxLevel}";
         } else {
-            $filter = '';
+            $filter = 'map{levels.max();}';
         }
 
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         $command = new Command(<<<GREMLIN
-local(__.sideEffect{levels=0;}
-        .emit().repeat( __.sideEffect{levels += (it.get().property("token") != "T_ELSEIF" && ["Ifthen", "While", "Dowhile", "For", "Foreach", "Switch"].contains(it.get().label())) ? 1 : 0;}
-               .out().not(hasLabel("Closure", "Arrowfunction", "Function", "Class", "Classanonymous", "Trait", "Interface")) ).times($MAX_LOOPING)
-        $filter
-)
-
+where(
+    __.sideEffect{ levels = []; }
+      .repeat( __.out('BLOCK', 'EXPRESSION', 'THEN', 'ELSE', 'CASES')).emit().times($MAX_LOOPING)
+      .not(hasLabel('Sequence'))
+      .path()
+      .sideEffect{ levels.add((it.get().size() - 1 ) / 2 - 1);}
+      .count()
+)$filter
 GREMLIN
 );
 
