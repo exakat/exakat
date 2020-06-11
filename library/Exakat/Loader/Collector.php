@@ -36,13 +36,15 @@ class Collector extends Loader {
         $this->datastore = exakat('datastore');
     }
 
-    public function finalize(array $relicat) {
+    public function finalize(array $relicat) : bool {
         $this->datastore->addRow('ignoredCit',       $this->cit);
         $this->datastore->addRow('ignoredFunctions', $this->functions);
         $this->datastore->addRow('ignoredConstants', $this->constants);
+        
+        return true;
     }
 
-    public function saveFiles($exakatDir, $atoms, $links) {
+    public function saveFiles(string $exakatDir, array $atoms, array $links) : void {
         $isDefine = false;
 
         $lastConst = array();
