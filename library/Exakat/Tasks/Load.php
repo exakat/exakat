@@ -4906,6 +4906,8 @@ class Load extends Tasks {
     private function processSingleOperator(Atom $operator, array $finals = array(), string $link = '', string $separator = ''): Atom {
         assert($link !== '', 'Link cannot be empty');
 
+        $current = $this->id;
+
         $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         // Do while, so that AT least one loop is done.
@@ -4917,7 +4919,7 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($operator, $operand, $link);
 
-        $operator->fullcode .= $separator . $operand->fullcode;
+        $operator->fullcode = $this->tokens[$current][1] . $separator . $operand->fullcode;
 
         $this->runPlugins($operator, array($link => $operand));
         $this->pushExpression($operator);
@@ -5064,10 +5066,6 @@ class Load extends Tasks {
             unset($finals[$id]);
             $operator = $this->addAtom('Yield', $this->id);
             $operand = $this->processSingleOperator($operator, $finals, 'YIELD', ' ');
-            $yield = $this->popExpression();
-            $this->pushExpression($yield);
-
-            $this->runPlugins($yield, array('YIELD' => $operand) );
 
             return $yield;
         }
@@ -5076,10 +5074,6 @@ class Load extends Tasks {
     private function processYieldfrom(): Atom {
         $operator = $this->addAtom('Yieldfrom', $this->id);
         $yieldfrom = $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
-        $operator = $this->popExpression();
-        $this->pushExpression($operator);
-
-        $this->runPlugins($operator, array('YIELD' => $yieldfrom) );
 
         $this->checkExpression();
 
@@ -5093,14 +5087,9 @@ class Load extends Tasks {
         $operator = $this->addAtom('Not', $this->id);
         $this->processSingleOperator($operator, $finals, 'NOT');
 
-        $not = $this->popExpression();
-        $this->pushExpression($not);
-
-        $this->runPlugins($not, array('NOT' => $not));
-
         $this->checkExpression();
 
-        return $not;
+        return $operator;
     }
 
     private function processCurlyExpression(): Atom {
