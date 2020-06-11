@@ -25,11 +25,12 @@ namespace Exakat\Loader;
 
 use Exakat\Data\Collector;
 use Exakat\Tasks\Helpers\Atom;
+use stdClass;
 
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
     private const LOAD_CHUNK      = 20000;
-    private const LOAD_CHUNK_LINK = 8000;
+    private const LOAD_CHUNK_LINK = 20000;
 
     private $tokenCounts   = array('Project' => 1);
     private $functioncalls = array();
@@ -48,6 +49,8 @@ class SplitGraphson extends Loader {
 
     private $datastore = null;
     private $sqlite3   = null;
+    
+    private $log = null;
 
     public function __construct(\Sqlite3 $sqlite3, Atom $id0) {
         $this->config         = exakat('config');
@@ -60,6 +63,8 @@ class SplitGraphson extends Loader {
 
         $this->dictCode  = new Collector();
         $this->datastore = exakat('datastore');
+        
+        $this->log = fopen($this->config->log_dir.'/loader.timing.csv', 'w+');
 
         $this->cleanCsv();
 
@@ -75,7 +80,7 @@ class SplitGraphson extends Loader {
         $this->cleanCsv();
     }
 
-    public function finalize(array $relicat) {
+    public function finalize(array $relicat) : bool {
         if ($this->total !== 0) {
             $this->saveNodes();
         }
@@ -174,37 +179,30 @@ SQL;
         rewind($f);
         $fp = fopen($this->pathDef, 'w+');
         $length = fwrite($fp, stream_get_contents($f));
-//        print "Writing $length octets\n";
         fclose($fp);
         fclose($f);
 
         if ($length > 0) {
+            $begin = hrtime(true);
             $query = <<<GREMLIN
-getIt = { id ->
-  def p = g.V(id);
-  p.next();
-}
-
 new File('$this->pathDef').eachLine {
-    (fromVertex, target) = it.split(',')
-    fromVertex = g.V(fromVertex).next();
+    (fromVertex, target) = it.split(',');
 
-    toVertices = target.split('-').collect(getIt);
-    
-    toVertices.each{
-        g.V(fromVertex).addE('DEFINITION').to(V(it)).iterate()
-    }
-
+    toVertices = target.split('-'); 
+    g.V(toVertices).as('a').V(fromVertex).addE('DEFINITION').to('a')
 }
 
 GREMLIN;
             $this->graphdb->query($query);
+            $end = hrtime(true);
+
+            $this->log("links finalize\t".($end - $begin));
         }
 
         return fopen('php://memory', 'r+');
     }
 
-    private function cleanCsv() {
+    private function cleanCsv() : void {
         if (file_exists($this->path)) {
             unlink($this->path);
         }
@@ -218,13 +216,13 @@ GREMLIN;
         }
     }
 
-    private function saveTokenCounts() {
+    private function saveTokenCounts() : void {
         $datastore = exakat('datastore');
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
     }
 
-    public function saveFiles($exakatDir, $atoms, $links) {
+    public function saveFiles(string $exakatDir, array $atoms, array $links) : void {
         $fileName = 'unknown';
 
         $json = array();
@@ -286,6 +284,7 @@ GREMLIN;
 
             ++$total;
         }
+        
         file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
         file_put_contents($this->pathLink, implode(PHP_EOL, $links) . PHP_EOL, \FILE_APPEND);
 
@@ -296,11 +295,15 @@ GREMLIN;
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
     }
 
-    private function saveNodes() {
+    private function saveNodes() : void {
+        $begin = hrtime(true);
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
+        $end = hrtime(true);
+        $this->log("path\t".($end - $begin));
 
         if (file_exists($this->pathLink)) {
+            $begin = hrtime(true);
             $query = <<<GREMLIN
 new File('$this->pathLink').eachLine {
     (theLabel, fromVertex, toVertex) = it.split('-');
@@ -310,13 +313,17 @@ new File('$this->pathLink').eachLine {
 
 GREMLIN;
             $this->graphdb->query($query);
+            $end = hrtime(true);
+
             unlink($this->pathLink);
+
+            $this->log("links\t".($end - $begin));
         }
 
         $this->total = 0;
     }
 
-    private function json_encode($object) {
+    private function json_encode(Stdclass $object) : string {
         // in case the function name is full of non-encodable characters.
         if (isset($object->properties['fullnspath']) && !mb_check_encoding($object->properties['fullnspath'][0]->value, 'UTF-8')) {
             $object->properties['fullnspath'][0]->value = utf8_encode($object->properties['fullnspath'][0]->value);
@@ -337,6 +344,10 @@ GREMLIN;
             $object->properties['globalvar'][0]->value = utf8_encode($object->properties['globalvar'][0]->value);
         }
         return json_encode($object);
+    }
+    
+    private function log(string $message) : void {
+        fwrite($this->log, $message.PHP_EOL);
     }
 }
 
