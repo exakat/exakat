@@ -28,12 +28,14 @@ use Exakat\Analyzer\Analyzer;
 class UnusedPrivateMethod extends Analyzer {
     public function dependsOn(): array {
         return array('Classes/UsedPrivateMethod',
+                     'Classes/DynamicSelfCalls',
                     );
     }
 
     public function analyze() {
         // class X { private function foo() { } }
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
+             ->analyzerIsNot('Classes/DynamicSelfCalls')
              ->outIs('METHOD')
              ->atomIs('Method')
              ->is('visibility', 'private')
