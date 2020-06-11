@@ -504,23 +504,26 @@ HTML;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
-    protected function generateLocalVariableCounts(Section $section): void {
+    protected function generateCounts(Section $section, string $hash, string $suffix = '', string $name = ''): void {
         $finalHTML = $this->getBasedPage($section->source);
 
         // List of extensions used
-        $res = $this->dump->fetchHashResults('Local Variable Counts');
+        $res = $this->dump->fetchHashResults($hash);
         if ($res->isEmpty()) {
             $this->emptyResult($section);
-            return ;
+            
+            print "Empty $name ($hash)\n";
+
+            return;
         }
 
         $html = array();
         $data = array();
         foreach ($res->toArray() as $value) {
-            $data[$value['key'] . ' var.'] = $value['value'];
+            $data[$value['key'] . $suffix] = $value['value'];
 
             $html [(int)  $value['value'] ]= '<div class="clearfix">
-                      <div class="block-cell-name">' . $value['key'] . ' var.</div>
+                      <div class="block-cell-name">' . $value['key'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
         }
@@ -532,7 +535,7 @@ HTML;
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => 'Parameters', 'data' => array_values($data)),
+                              array('name' => $name, 'data' => array_values($data)),
                               );
         $blocjs = (string) $highchart;
 
@@ -542,42 +545,24 @@ HTML;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
+    protected function generateLocalVariableCounts(Section $section): void {
+        $this->generateCounts($section, 'Local Variable Counts', ' var.', 'Local variables');
+    }
+
     protected function generateParameterCounts(Section $section): void {
-        $finalHTML = $this->getBasedPage($section->source);
+        $this->generateCounts($section, 'ParameterCounts', ' param.', 'Parameters');
+    }
 
-        // List of extensions used
-        $res = $this->dump->fetchHashResults('ParameterCounts');
-        if ($res->isEmpty()) {
-            $this->emptyResult($section);
-            return ;
-        }
+    protected function generatePropertyCounts(Section $section): void {
+        $this->generateCounts($section, 'CIT property counts', ' prop.', 'Properties');
+    }
 
-        $html = array();
-        $data = array();
-        foreach ($res->toArray() as $value) {
-            $data[$value['key'] . ' param.'] = $value['value'];
+    protected function generateMethodCounts(Section $section): void {
+        $this->generateCounts($section, 'CIT method counts', ' method.', 'Methods');
+    }
 
-            $html [(int)  $value['value'] ]= '<div class="clearfix">
-                      <div class="block-cell-name">' . $value['key'] . ' param.</div>
-                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
-                  </div>';
-        }
-        krsort($html);
-        $html = implode('', $html);
-
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
-
-        $highchart = new Highchart();
-        $highchart->addSeries('filename',
-                              array_keys($data),
-                              array('name' => 'Parameters', 'data' => array_values($data)),
-                              );
-        $blocjs = (string) $highchart;
-
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
-
-        $this->putBasedPage($section->file, $finalHTML);
+    protected function generateClassConstantCounts(Section $section): void {
+        $this->generateCounts($section, 'CIT class constant counts', ' const.', 'Class Constant');
     }
 
     protected function generateExtensionsBreakdown(Section $section): void {

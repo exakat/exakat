@@ -389,8 +389,6 @@ class Project extends Tasks {
                 $this->datastore->addRow('hash', $finalMark);
 
                 // Skip Dump, as it is auto-saving itself.
-                if ($ruleset === 'Dump') { continue; }
-
                 $dumpConfig = $this->config->duplicate(array('update'               => true,
                                                              'project_rulesets'     => array($ruleset),
                                                              'load_dump'            => true,

@@ -2057,32 +2057,11 @@ GREMLIN
         $this->storeToDumpArray('hash', $toDump);
     }
 
-    private function collectMethodsCounts(): void {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
-GREMLIN;
-        $this->collectHashCounts($query, 'MethodsCounts');
-    }
-
-    private function collectPropertyCounts(): void {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
-GREMLIN;
-        $this->collectHashCounts($query, 'ClassPropertyCounts');
-    }
-
     private function collectClassTraitsCounts(): void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassTraits');
-    }
-
-    private function collectConstantCounts(): void {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
-GREMLIN;
-        $this->collectHashCounts($query, 'ClassConstantCounts');
     }
 
     private function collectNativeCallsPerExpressions(): void {
@@ -2266,19 +2245,7 @@ GREMLIN;
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Readability: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
-        $this->collectMethodsCounts();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Method Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
 
-        $this->collectPropertyCounts();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Property Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
-        $this->collectConstantCounts();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Constant Counts: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
         $this->collectNativeCallsPerExpressions();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
@@ -2534,6 +2501,7 @@ GREMLIN
         display('Loading ' . count($dumps) . ' dumped SQL files');
 
         foreach($dumps as $dump) {
+            print "Load $dump\n";
             include $dump;
 
             $this->dump->storeQueries($queries);

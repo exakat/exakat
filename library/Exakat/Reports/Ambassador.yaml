@@ -210,6 +210,21 @@ audit:
             file: local_variable_counts
             method: generateLocalVariableCounts
             icon: circle-o
+        property_counts:
+            title: Properties Counts
+            file: property_counts
+            method: generatePropertyCounts
+            icon: circle-o
+        class_constant_counts:
+            title: Class Constant Counts
+            file: class_constant_counts
+            method: generateClassConstantCounts
+            icon: circle-o
+        method_counts:
+            title: Method Counts
+            file: method_counts
+            method: generateMethodCounts
+            icon: circle-o
         indentation_levels:
             title: Indentation levels
             file: indentation_levels
