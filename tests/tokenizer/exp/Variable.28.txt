@@ -1,44 +1,20 @@
 test
 Label : GLOBAL
   5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
 Label : GLOBAL
   9
-  Label : DEFINITION
-    9
 Label : GLOBAL
-  13
-  Label : DEFINITION
-    13
+  12
 Label : GLOBAL
-  19
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      19
+  18
+Label : GLOBAL
+  21
 Label : GLOBAL
   22
-  Label : DEFINITION
-    22
-Label : GLOBAL
-  23
-  Label : DEFINITION
-    23
-    Label : DEFINITION
-      23
 Label : GLOBAL
   27
-  Label : DEFINITION
-    27
-    Label : DEFINITION
-      27
 Label : GLOBAL
   31
-  Label : DEFINITION
-    31
 Label : GLOBAL
   35
   Label : DEFINITION
@@ -52,13 +28,13 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    19
+    18
     Label : DEFINITION
-      19
+      18
   Label : DEFINITION
-    23
+    22
     Label : DEFINITION
-      23
+      22
   Label : DEFINITION
     27
     Label : DEFINITION
@@ -80,31 +56,31 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : CONCAT
-              12
+              9
               Label : INDEX
                 12
                 Label : INDEX
-                  16
+                  15
                 Label : VARIABLE
-                  13
+                  12
               Label : VARIABLE
                 9
             Label : CONCAT
-              18
-            Label : CONCAT
-              19
+              17
             Label : CONCAT
               18
             Label : CONCAT
-              8
+              17
+            Label : CONCAT
+              24
               Label : INDEX
                 25
               Label : VARIABLE
-                22
+                21
             Label : CONCAT
-              18
+              17
             Label : CONCAT
-              23
+              22
         Label : EXPRESSION
           7
           Label : LEFT
@@ -112,13 +88,13 @@ Label : PROJECT
           Label : RIGHT
             29
             Label : CONCAT
-              29
+              24
               Label : INDEX
                 34
               Label : VARIABLE
                 31
             Label : CONCAT
-              18
+              17
             Label : CONCAT
               35
             Label : CONCAT

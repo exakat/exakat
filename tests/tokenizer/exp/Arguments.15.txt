@@ -1,22 +1,10 @@
 test
 Label : GLOBAL
-  12
-  Label : DEFINITION
-    12
-    Label : DEFINITION
-      12
+  11
 Label : GLOBAL
   7
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      7
 Label : GLOBAL
   18
-  Label : DEFINITION
-    18
-    Label : DEFINITION
-      18
 Label : GLOBAL
   21
   Label : DEFINITION
@@ -26,9 +14,9 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    11
     Label : DEFINITION
-      12
+      11
   Label : DEFINITION
     7
     Label : DEFINITION
@@ -52,13 +40,13 @@ Label : PROJECT
           Label : CONDITION
             6
             Label : CODE
-              11
+              10
               Label : LEFT
                 6
                 Label : CODE
-                  9
+                  7
                   Label : INDEX
-                    10
+                    9
                   Label : VARIABLE
                     7
               Label : RIGHT
@@ -66,27 +54,27 @@ Label : PROJECT
                 Label : CODE
                   17
                   Label : LEFT
-                    9
+                    15
                     Label : INDEX
                       16
                     Label : VARIABLE
-                      9
+                      11
                       Label : INDEX
-                        15
+                        14
                       Label : VARIABLE
-                        12
+                        11
                   Label : RIGHT
                     6
                     Label : CODE
-                      11
+                      10
                       Label : LEFT
-                        9
+                        18
                         Label : INDEX
                           20
                         Label : VARIABLE
                           18
                       Label : RIGHT
-                        9
+                        21
                         Label : INDEX
                           23
                         Label : VARIABLE
@@ -96,6 +84,6 @@ Label : PROJECT
             Label : EXPRESSION
               8
               Label : ARGUMENT
-                10
+                9
               Label : NAME
                 8

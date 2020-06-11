@@ -10,17 +10,17 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            9
+            7
             Label : DEFAULT
               10
             Label : NAME
-              9
-              Label : DEFINITION
-                9
-              Label : DEFINITION
-                9
-            Label : TYPEHINT
               7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+            Label : TYPEHINT
+              8
           Label : BLOCK
             12
             Label : EXPRESSION
@@ -32,9 +32,9 @@ Label : PROJECT
                   Label : ARGUMENT
                     17
                   Label : ARGUMENT
-                    20
+                    19
                     Label : INDEX
-                      21
+                      20
                     Label : VARIABLE
                       19
                   Label : NAME
@@ -42,113 +42,113 @@ Label : PROJECT
               Label : THEN
                 12
                 Label : EXPRESSION
-                  23
+                  22
                   Label : RETURN
                     10
             Label : EXPRESSION
-              25
+              24
               Label : LEFT
-                24
+                23
               Label : RIGHT
-                26
+                25
             Label : EXPRESSION
-              25
+              24
               Label : LEFT
-                28
+                27
               Label : RIGHT
-                34
+                33
                 Label : LEFT
-                  31
+                  30
                   Label : MEMBER
-                    32
-                  Label : OBJECT
                     31
+                  Label : OBJECT
+                    30
                     Label : MEMBER
-                      29
+                      28
                     Label : OBJECT
-                      9
+                      7
                 Label : RIGHT
-                  35
+                  34
             Label : EXPRESSION
-              25
+              24
               Label : LEFT
-                36
+                35
               Label : RIGHT
-                37
+                36
                 Label : YIELD
                   19
             Label : EXPRESSION
-              25
+              24
               Label : LEFT
-                28
+                27
               Label : RIGHT
-                34
+                33
                 Label : LEFT
-                  31
+                  30
                   Label : MEMBER
-                    32
+                    31
                   Label : OBJECT
-                    38
+                    37
                     Label : CODE
-                      41
+                      40
                       Label : CLASS
-                        39
+                        38
                       Label : CONSTANT
-                        29
+                        28
                 Label : RIGHT
-                  35
+                  34
             Label : EXPRESSION
-              25
+              24
               Label : LEFT
-                28
+                27
               Label : RIGHT
-                34
+                33
                 Label : LEFT
-                  41
+                  40
                   Label : CLASS
-                    41
+                    40
                     Label : CLASS
-                      39
+                      38
                     Label : METHOD
-                      29
+                      28
                       Label : ARGUMENT
                         10
                       Label : NAME
-                        29
+                        28
                   Label : CONSTANT
-                    32
+                    31
                 Label : RIGHT
-                  35
+                  34
             Label : EXPRESSION
-              25
+              24
               Label : LEFT
-                28
+                27
               Label : RIGHT
-                34
+                33
                 Label : LEFT
-                  31
+                  30
                   Label : MEMBER
-                    32
+                    31
                   Label : OBJECT
-                    20
+                    28
                     Label : INDEX
-                      44
+                      43
                     Label : VARIABLE
-                      31
+                      30
                       Label : MEMBER
-                        29
+                        28
                       Label : OBJECT
-                        20
+                        7
                         Label : INDEX
-                          43
+                          42
                           Label : LEFT
-                            42
+                            41
                           Label : RIGHT
-                            42
+                            41
                         Label : VARIABLE
-                          9
+                          7
                 Label : RIGHT
-                  35
+                  34
           Label : DEFINITION
             19
             Label : DEFINITION
@@ -156,23 +156,23 @@ Label : PROJECT
             Label : DEFINITION
               19
           Label : DEFINITION
-            24
+            23
             Label : DEFINITION
-              24
+              23
           Label : DEFINITION
-            28
+            27
             Label : DEFINITION
-              28
+              27
             Label : DEFINITION
-              28
+              27
             Label : DEFINITION
-              28
+              27
             Label : DEFINITION
-              28
+              27
           Label : DEFINITION
-            36
+            35
             Label : DEFINITION
-              36
+              35
           Label : NAME
             5
           Label : RETURNED

@@ -1,10 +1,6 @@
 test
 Label : GLOBAL
   23
-  Label : DEFINITION
-    23
-    Label : DEFINITION
-      23
 Label : PROJECT
   1
   Label : DEFINITION
@@ -43,8 +39,6 @@ Label : PROJECT
                   7
             Label : EXPRESSION
               18
-              Label : DEFINITION
-                29
               Label : NAME
                 19
             Label : EXPRESSION

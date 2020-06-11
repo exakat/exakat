@@ -21,16 +21,6 @@ Label : PROJECT
                     12
                   Label : VALUE
                     13
-              Label : DEFINITION
-                10
-              Label : DEFINITION
-                10
-                Label : ARGUMENT
-                  5
-                Label : NAME
-                  10
-                  Label : DEFINITION
-                    10
               Label : NAME
                 10
             Label : EXPRESSION
@@ -43,14 +33,6 @@ Label : PROJECT
                     12
                   Label : VALUE
                     13
-              Label : DEFINITION
-                23
-              Label : DEFINITION
-                23
-                Label : ARGUMENT
-                  5
-                Label : NAME
-                  23
               Label : NAME
                 14
             Label : EXPRESSION
@@ -63,20 +45,6 @@ Label : PROJECT
                     12
                   Label : VALUE
                     13
-              Label : DEFINITION
-                15
-              Label : DEFINITION
-                16
-                Label : ARGUMENT
-                  5
-                Label : NAME
-                  16
-                  Label : DEFINITION
-                    26
-                    Label : AS
-                      16
-                    Label : NAME
-                      15
               Label : NAME
                 15
             Label : EXPRESSION
@@ -89,12 +57,6 @@ Label : PROJECT
                     12
                   Label : VALUE
                     13
-              Label : DEFINITION
-                34
-                Label : ARGUMENT
-                  5
-                Label : NAME
-                  34
               Label : NAME
                 16
           Label : NAME
@@ -113,16 +75,6 @@ Label : PROJECT
                     12
                   Label : VALUE
                     13
-              Label : DEFINITION
-                24
-              Label : DEFINITION
-                18
-                Label : ARGUMENT
-                  5
-                Label : NAME
-                  18
-                  Label : DEFINITION
-                    24
               Label : NAME
                 18
           Label : NAME

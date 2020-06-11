@@ -1,56 +1,40 @@
 test
 Label : GLOBAL
   6
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
 Label : GLOBAL
-  9
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
+  8
 Label : GLOBAL
-  18
-  Label : DEFINITION
-    18
-    Label : DEFINITION
-      18
+  17
 Label : GLOBAL
-  21
-  Label : DEFINITION
-    21
-    Label : DEFINITION
-      21
+  20
 Label : GLOBAL
-  31
+  28
   Label : DEFINITION
-    31
+    28
     Label : DEFINITION
-      31
+      28
 Label : PROJECT
   1
   Label : DEFINITION
-    31
+    28
     Label : DEFINITION
-      31
+      28
   Label : DEFINITION
     6
     Label : DEFINITION
       6
   Label : DEFINITION
-    9
+    8
     Label : DEFINITION
-      9
+      8
   Label : DEFINITION
-    18
+    17
     Label : DEFINITION
-      18
+      17
   Label : DEFINITION
-    21
+    20
     Label : DEFINITION
-      21
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -64,40 +48,40 @@ Label : PROJECT
             Label : EXPRESSION
               13
               Label : CASE
-                15
+                14
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  16
                   Label : CONDITION
-                    18
+                    17
                   Label : THEN
-                    20
+                    19
                     Label : EXPRESSION
-                      23
+                      22
                       Label : POSTPLUSPLUS
-                        21
-                Label : EXPRESSION
-                  24
-                  Label : BREAK
-                    25
-            Label : EXPRESSION
-              27
-              Label : CASE
-                29
-              Label : CODE
-                3
+                        20
                 Label : EXPRESSION
                   23
+                  Label : BREAK
+                    24
+            Label : EXPRESSION
+              13
+              Label : CASE
+                26
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  22
                   Label : POSTPLUSPLUS
-                    31
+                    28
           Label : CONDITION
-            8
+            10
             Label : INDEX
               11
             Label : VARIABLE
-              8
+              6
               Label : INDEX
-                9
+                8
               Label : VARIABLE
                 6

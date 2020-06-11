@@ -1,10 +1,6 @@
 test
 Label : GLOBAL
   19
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      19
 Label : PROJECT
   1
   Label : DEFINITION
@@ -21,8 +17,6 @@ Label : PROJECT
           5
           Label : CONST
             5
-            Label : DEFINITION
-              6
             Label : NAME
               6
             Label : VALUE

@@ -1,62 +1,26 @@
 test
 Label : GLOBAL
-  25
-  Label : DEFINITION
-    25
-    Label : DEFINITION
-      25
+  24
 Label : GLOBAL
-  29
-  Label : DEFINITION
-    29
-    Label : DEFINITION
-      29
+  28
 Label : GLOBAL
-  31
-  Label : DEFINITION
-    31
-    Label : DEFINITION
-      31
+  30
 Label : GLOBAL
-  33
-  Label : DEFINITION
-    33
-    Label : DEFINITION
-      33
+  32
 Label : GLOBAL
-  38
-  Label : DEFINITION
-    38
-    Label : DEFINITION
-      38
+  37
 Label : GLOBAL
-  40
+  39
   Label : DEFINITION
-    40
+    39
     Label : DEFINITION
-      40
+      39
 Label : GLOBAL
   5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
 Label : GLOBAL
   9
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
 Label : GLOBAL
   11
-  Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
 Label : PROJECT
   1
   Label : DEFINITION
@@ -76,29 +40,29 @@ Label : PROJECT
     Label : DEFINITION
       11
   Label : DEFINITION
-    25
+    24
     Label : DEFINITION
-      25
+      24
   Label : DEFINITION
-    29
+    28
     Label : DEFINITION
-      29
+      28
   Label : DEFINITION
-    31
+    30
     Label : DEFINITION
-      31
+      30
   Label : DEFINITION
-    33
+    32
     Label : DEFINITION
-      33
+      32
   Label : DEFINITION
-    38
+    37
     Label : DEFINITION
-      38
+      37
   Label : DEFINITION
-    40
+    39
     Label : DEFINITION
-      40
+      39
   Label : FILE
     3
     Label : EXPRESSION
@@ -116,68 +80,68 @@ Label : PROJECT
             Label : EXPRESSION
               14
               Label : CONDITION
-                18
+                17
                 Label : LEFT
-                  15
+                  9
                   Label : INDEX
-                    16
+                    15
                     Label : LEFT
                       11
                     Label : RIGHT
-                      17
+                      16
                   Label : VARIABLE
                     9
                 Label : RIGHT
-                  19
+                  18
               Label : THEN
                 13
                 Label : EXPRESSION
-                  20
+                  19
                   Label : BREAK
-                    21
+                    20
           Label : SOURCE
             9
           Label : VALUE
             11
         Label : EXPRESSION
-          23
+          22
           Label : BLOCK
             3
             Label : EXPRESSION
-              21
+              20
           Label : CONDITION
-            37
+            36
             Label : LEFT
-              24
+              23
               Label : CODE
-                27
+                26
                 Label : LEFT
-                  25
+                  24
                 Label : RIGHT
-                  28
+                  27
                   Label : ARGUMENT
-                    29
-                  Label : ARGUMENT
-                    31
-                  Label : ARGUMENT
-                    35
-                    Label : LEFT
-                      33
-                    Label : RIGHT
-                      36
-                  Label : NAME
                     28
+                  Label : ARGUMENT
+                    30
+                  Label : ARGUMENT
+                    34
+                    Label : LEFT
+                      32
+                    Label : RIGHT
+                      35
+                  Label : NAME
+                    27
             Label : RIGHT
-              18
+              17
               Label : LEFT
-                15
+                37
                 Label : INDEX
-                  16
+                  15
                   Label : LEFT
-                    40
+                    39
                   Label : RIGHT
-                    42
+                    41
                 Label : VARIABLE
-                  38
+                  37
               Label : RIGHT
-                43
+                42

@@ -1,2 +1,2 @@
 <?php
-            return $this->B{$this->C++};
+            return $a->B{$b->C++};

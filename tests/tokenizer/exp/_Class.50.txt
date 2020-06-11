@@ -19,5 +19,5 @@ Label : PROJECT
             9
             Label : PPP
               12
-            Label : RETURNTYPE
+            Label : TYPEHINT
               10
