@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -128,7 +128,8 @@ class Load extends Tasks {
     private $id     = 0;
     private $id0    = null;
 
-    private $phpDocs = array();
+    private $phpDocs    = array();
+    private $attributes = array();
 
 //    private $sqliteLocation = '/tmp/load.sqlite';
 // for debug purpose
@@ -432,6 +433,8 @@ class Load extends Tasks {
             $this->phptokens::T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
             $this->phptokens::T_STATIC                   => 'processStatic',
             $this->phptokens::T_GLOBAL                   => 'processGlobalVariable',
+            
+            $this->phptokens::T_DOC_COMMENT              => 'processPhpdoc',
         );
 
         $this->cases = new NestedCollector();
@@ -708,6 +711,7 @@ class Load extends Tasks {
 
         $this->tokens                  = array();
         $this->phpDocs                 = array();
+        $this->attributes              = array();
     }
 
     public function initDiff(): void {
@@ -807,7 +811,7 @@ class Load extends Tasks {
                         break;
 
                     case $this->phptokens::T_DOC_COMMENT:
-                        $this->phpDocs[$total + 1] = $t;
+                        $this->tokens[] = $t;
                         $comments += substr_count($t[1], "\n") + 1;
                         break;
 
@@ -908,9 +912,9 @@ class Load extends Tasks {
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
 
-//        print "  $method in".PHP_EOL;
+        print "  $method in".PHP_EOL;
         $atom = $this->$method();
-//        print "  $method out ".PHP_EOL;
+        print "  $method out ".PHP_EOL;
 
         return $atom;
     }
@@ -1322,6 +1326,7 @@ class Load extends Tasks {
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         $this->addLink($fn, $block, 'BLOCK');
+        $this->makeAttributes($fn);
 
         $fn->token    = $this->getToken($this->tokens[$current][0]);
         $fn->fullcode = $this->tokens[$current][1] . ' ' .
@@ -1405,6 +1410,7 @@ class Load extends Tasks {
         $function       = $this->processParameters($atom);
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
         $this->makePhpdoc($function, $current);
+        $this->makeAttributes($function);
 
         if ($function->atom === 'Function') {
             $this->getFullnspath($name, 'function', $function);
@@ -1629,6 +1635,11 @@ class Load extends Tasks {
         $this->currentPropertiesCalls = array();
 
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
+                // It is an attribute
+                $this->processNext();
+                continue; 
+            }
             $cpm = $this->processNext();
 
             $this->popExpression();
@@ -1686,6 +1697,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
             $class = $this->addAtom('Class', $current);
             $this->makePhpdoc($class, $this->id);
+            $this->makeAttributes($class);
 
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
 
@@ -1706,6 +1718,8 @@ class Load extends Tasks {
             $class->fullnspath = $this->makeAnonymous();
             $class->aliased    = self::NOT_ALIASED;
             $this->calls->addDefinition('class', $class->fullnspath, $class);
+
+            $this->makeAttributes($class);
         }
 
         $this->currentClassTrait[] = $class;
@@ -2228,7 +2242,14 @@ class Load extends Tasks {
                     ++$this->id;
                     break 1;
                 }
-                
+
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
+                    // attributes
+                    $this->processNext();
+
+                    continue;
+                }
+
                 ++$argsMax;
                 if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PUBLIC,
                                                                     $this->phptokens::T_PRIVATE,
@@ -2254,6 +2275,7 @@ class Load extends Tasks {
                 $index = $this->addAtom('Parameter');
                 $variable = $this->addAtom('Parametername');
                 $typehints = $this->processTypehint($index);
+                $this->makeAttributes($index);
                 ++$this->id;
 
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
@@ -2501,6 +2523,8 @@ class Load extends Tasks {
         $current = $this->id;
         $const = $this->addAtom('Const', $current);
         $this->makePhpdoc($const, $this->id);
+        $this->makeAttributes($const);
+
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
 
@@ -2515,12 +2539,12 @@ class Load extends Tasks {
             $name = $this->processNextAsIdentifier();
 
             ++$this->id; // Skip =
-            while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
+            do {
+                $value = $this->processNext();
+            } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
                                                                     $this->phptokens::T_COMMA,
                                                                     ),
-                    \STRICT_COMPARISON)) {
-                $value = $this->processNext();
-            }
+                    \STRICT_COMPARISON));
             $this->popExpression();
 
             $def = $this->addAtom('Constant', $constId);
@@ -2619,6 +2643,7 @@ class Load extends Tasks {
         $ppp->visibility = strtolower($visibility);
         $ppp->fullcode   = "$visibility {$returnTypes}$ppp->fullcode";
         $this->makePhpdoc($ppp, $current);
+        $this->makeAttributes($ppp);
 
         return $ppp;
     }
@@ -4878,12 +4903,9 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single operators
     //////////////////////////////////////////////////////
-    private function processSingleOperator(string $atom, array $finals = array(), string $link = '', string $separator = ''): Atom {
+    private function processSingleOperator(Atom $operator, array $finals = array(), string $link = '', string $separator = ''): Atom {
         assert($link !== '', 'Link cannot be empty');
 
-        $current = $this->id;
-
-        $operator = $this->addAtom($atom, $current);
         $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
         $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         // Do while, so that AT least one loop is done.
@@ -4895,7 +4917,7 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($operator, $operand, $link);
 
-        $operator->fullcode  = $this->tokens[$current][1] . $separator . $operand->fullcode;
+        $operator->fullcode .= $separator . $operand->fullcode;
 
         $this->runPlugins($operator, array($link => $operand));
         $this->pushExpression($operator);
@@ -4991,16 +5013,20 @@ class Load extends Tasks {
         return $operator;
     }
 
-    private function makePhpdoc(Atom $node, int $id = 0): void {
-        if (!isset($this->phpDocs[$id + 1])) {
-            return;
+    private function makeAttributes(Atom $node): void {
+        foreach($this->attributes as $attribute) {
+            $this->addLink($node, $attribute, 'ATTRIBUTE');
         }
-
-        $phpDoc = $this->addAtom('Phpdoc', $id + 1);
-        $phpDoc->fullcode = $this->phpDocs[$id + 1][1];
-        unset($this->phpDocs[$id + 1]);
-
-        $this->addLink($node, $phpDoc, 'PHPDOC');
+        
+        $this->attributes = array();
+    }
+    
+    private function makePhpdoc(Atom $node): void {
+        foreach($this->phpDocs as $phpdoc) {
+            $this->addLink($node, $phpdoc, 'PHPDOC');
+        }
+        
+        $this->phpDocs = array();
     }
 
     private function processYield(): Atom {
@@ -5183,13 +5209,22 @@ class Load extends Tasks {
     }
 
     private function processNew(): Atom {
+        $current = $this->id;
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
+            ++$this->id;
+            $this->processBitshift();
+        }
+
         $this->contexts->toggleContext(Context::CONTEXT_NEW);
         $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
             $this->contexts->toggleContext(Context::CONTEXT_NOSEQUENCE);
         }
 
-        $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
+        $operator = $this->addAtom('New', $current);
+        $operator->fullcode = $this->tokens[$current][1];
+        $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$current][0]), 'NEW', ' ');
 
         $this->contexts->toggleContext(Context::CONTEXT_NEW);
         if ($noSequence === false) {
@@ -5733,8 +5768,40 @@ class Load extends Tasks {
         return $this->processOperator('Keyvalue', $this->precedence->get($this->tokens[$this->id][0]), array('INDEX', 'VALUE'));
     }
 
+    private function processPhpdoc(): Atom {
+        if (isset($this->phpDocs[0])) {
+            $phpDoc = $this->phpDocs[0];
+            $phpDoc->fullcode = $this->tokens[$this->id][1];
+        } else {
+            $phpDoc = $this->addAtom('Phpdoc', $this->id);
+            $phpDoc->fullcode = $this->tokens[$this->id][1];
+
+            $this->phpDocs[0] = $phpDoc;
+        }
+
+        return $phpDoc;
+    }
+
     private function processBitshift(): Atom {
-        return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
+        if ($this->hasExpression() ){
+            // Classic bitshift expression
+            return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
+        } else {
+            // PHP 8.0 attributes
+            do {
+                $attribute = $this->processNext();
+            } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SR), \STRICT_COMPARISON));
+            
+            // skip >>
+            ++$this->id;
+            $this->popExpression();
+            
+            $attribute->fullcode = '<< '.$attribute->fullcode.' >>';
+            
+            $this->attributes[] = $attribute;
+        }
+
+        return $attribute;
     }
 
     private function processIsset(): Atom {
