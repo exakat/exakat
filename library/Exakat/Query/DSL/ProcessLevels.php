@@ -35,13 +35,15 @@ class ProcessLevels extends DSL {
 
         $MAX_LOOPING = self::$MAX_LOOPING;
 
+        // round() is used for lone blocks in the code 
+        // it may be excessive
         $command = new Command(<<<GREMLIN
 where(
     __.sideEffect{ levels = []; }
       .repeat( __.out('BLOCK', 'EXPRESSION', 'THEN', 'ELSE', 'CASES')).emit().times($MAX_LOOPING)
-      .not(hasLabel('Sequence'))
+      .not(hasLabel('Sequence', 'Block'))
       .path()
-      .sideEffect{ levels.add((it.get().size() - 1 ) / 2 - 1);}
+      .sideEffect{ levels.add(Math.round((it.get().size() - 1 ) / 2 - 1));}
       .count()
 )$filter
 GREMLIN
