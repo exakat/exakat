@@ -30,7 +30,7 @@ class Lock {
     public function __construct(string $path, string $name) {
         $b = array_reverse(explode('/', $name));
 
-        $name = $b[0] . '-' . $b[1];
+        $name = $b[1] . '-' . $b[0];
         $this->path = $path . '/' . $name;
     }
 
