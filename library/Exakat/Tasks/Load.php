@@ -912,9 +912,9 @@ class Load extends Tasks {
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
 
-        print "  $method in".PHP_EOL;
+//        print "  $method in".PHP_EOL;
         $atom = $this->$method();
-        print "  $method out ".PHP_EOL;
+//        print "  $method out ".PHP_EOL;
 
         return $atom;
     }
@@ -1174,7 +1174,6 @@ class Load extends Tasks {
 
         if ($atom === 'Identifier') {
             $this->getFullnspath($name, 'const', $name);
-            print_r($name);
             $this->calls->addCall('const', $name->fullnspath, $name);
         }
 
@@ -2982,7 +2981,8 @@ class Load extends Tasks {
             return $plusplus;
         } else {
             // preplusplus
-            $this->processSingleOperator('Preplusplus', $this->precedence->get($this->tokens[$this->id][0]), 'PREPLUSPLUS');
+            $operator = $this->addAtom('Preplusplus', $this->id);
+            $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'PREPLUSPLUS');
             $operator = $this->popExpression();
             $this->pushExpression($operator);
 
@@ -4928,7 +4928,8 @@ class Load extends Tasks {
     }
 
     private function processCast(): Atom {
-        $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
+        $operator = $this->addAtom('cast', $this->id);
+        $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
         $operator = $this->popExpression();
         if (strtolower($operator->code) === '(binary)') {
             $operator->binaryString = $operator->code[1];
@@ -5004,7 +5005,8 @@ class Load extends Tasks {
     }
 
     private function processThrow(): Atom {
-        $this->processSingleOperator('Throw', $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
+        $operator = $this->addAtom('Throw', $this->id);
+        $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
         $operator = $this->popExpression();
         $this->pushExpression($operator);
 
@@ -5060,7 +5062,8 @@ class Load extends Tasks {
             $finals = $this->precedence->get($this->tokens[$this->id][0]);
             $id = array_search($this->phptokens::T_DOUBLE_ARROW, $finals);
             unset($finals[$id]);
-            $operand = $this->processSingleOperator('Yield', $finals, 'YIELD', ' ');
+            $operator = $this->addAtom('Yield', $this->id);
+            $operand = $this->processSingleOperator($operator, $finals, 'YIELD', ' ');
             $yield = $this->popExpression();
             $this->pushExpression($yield);
 
@@ -5071,7 +5074,8 @@ class Load extends Tasks {
     }
 
     private function processYieldfrom(): Atom {
-        $yieldfrom = $this->processSingleOperator('Yieldfrom', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+        $operator = $this->addAtom('Yieldfrom', $this->id);
+        $yieldfrom = $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
         $operator = $this->popExpression();
         $this->pushExpression($operator);
 
@@ -5086,7 +5090,8 @@ class Load extends Tasks {
         $finals = array_diff($this->precedence->get($this->tokens[$this->id][0]),
                              $this->assignations
                              );
-        $this->processSingleOperator('Not', $finals, 'NOT');
+        $operator = $this->addAtom('Not', $this->id);
+        $this->processSingleOperator($operator, $finals, 'NOT');
 
         $not = $this->popExpression();
         $this->pushExpression($not);
@@ -5151,7 +5156,8 @@ class Load extends Tasks {
                 $variable = $this->processFCOA($variable);
             }
         } else {
-            $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
+            $operator = $this->addAtom('Variable', $this->id);
+            $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
             $variable = $this->popExpression();
 
             $this->pushExpression($variable);
@@ -5164,7 +5170,8 @@ class Load extends Tasks {
     }
 
     private function processClone(): Atom {
-        $this->processSingleOperator('Clone', $this->precedence->get($this->tokens[$this->id][0]), 'CLONE', ' ' );
+        $operator = $this->addAtom('Clone', $this->id);
+        $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'CLONE', ' ' );
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
 
