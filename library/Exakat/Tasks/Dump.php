@@ -2501,7 +2501,6 @@ GREMLIN
         display('Loading ' . count($dumps) . ' dumped SQL files');
 
         foreach($dumps as $dump) {
-            print "Load $dump\n";
             include $dump;
 
             $this->dump->storeQueries($queries);
