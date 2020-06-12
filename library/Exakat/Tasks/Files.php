@@ -373,8 +373,8 @@ class Files extends Tasks {
         if (file_exists($this->config->tmp_dir . '/lint.php')) {
             unlink($this->config->tmp_dir . '/lint.php');
         }
-        if (file_exists($this->config->tmp_dir . '/lint_short_tag.php')) {
-            unlink($this->config->tmp_dir . '/lint_short_tag.php');
+        if (file_exists($this->config->tmp_dir . '/lint_short_tags.php')) {
+            unlink($this->config->tmp_dir . '/lint_short_tags.php');
         }
     }
 }
