@@ -1,20 +1,8 @@
 test
 Label : GLOBAL
   19
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      19
-    Label : DEFINITION
-      19
 Label : GLOBAL
   18
-  Label : DEFINITION
-    18
-    Label : DEFINITION
-      18
-    Label : DEFINITION
-      18
 Label : PROJECT
   1
   Label : DEFINITION

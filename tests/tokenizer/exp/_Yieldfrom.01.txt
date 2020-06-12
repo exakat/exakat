@@ -1,22 +1,8 @@
 test
 Label : GLOBAL
   21
-  Label : DEFINITION
-    21
-    Label : DEFINITION
-      21
-    Label : DEFINITION
-      21
 Label : GLOBAL
   17
-  Label : DEFINITION
-    17
-    Label : DEFINITION
-      17
-    Label : DEFINITION
-      17
-    Label : DEFINITION
-      17
 Label : PROJECT
   1
   Label : DEFINITION
@@ -59,12 +45,6 @@ Label : PROJECT
                     6
                   Label : NAME
                     13
-          Label : DEFINITION
-            5
-            Label : ARGUMENT
-              6
-            Label : NAME
-              5
           Label : NAME
             5
           Label : RETURNED

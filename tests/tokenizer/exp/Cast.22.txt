@@ -1,16 +1,8 @@
 test
 Label : GLOBAL
   9
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
 Label : GLOBAL
   5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
 Label : GLOBAL
   12
   Label : DEFINITION
@@ -20,13 +12,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
-  Label : DEFINITION
     9
     Label : DEFINITION
       9
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
   Label : DEFINITION
     12
     Label : DEFINITION
@@ -43,6 +35,8 @@ Label : PROJECT
             5
           Label : RIGHT
             8
+            Label : NAME
+              8
             Label : ARGUMENT
               9
             Label : ARGUMENT
@@ -53,5 +47,3 @@ Label : PROJECT
                   14
                 Label : NAME
                   12
-            Label : NAME
-              8

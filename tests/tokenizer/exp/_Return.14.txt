@@ -1,22 +1,10 @@
 test
 Label : GLOBAL
   11
-  Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
 Label : GLOBAL
   7
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      7
 Label : GLOBAL
   14
-  Label : DEFINITION
-    14
-    Label : DEFINITION
-      14
 Label : GLOBAL
   17
   Label : DEFINITION

@@ -7,10 +7,6 @@ Label : GLOBAL
       10
 Label : GLOBAL
   5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
 Label : PROJECT
   1
   Label : DEFINITION

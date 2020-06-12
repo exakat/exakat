@@ -20,7 +20,7 @@ Label : PROJECT
         Label : EXPRESSION
           12
           Label : LEFT
-            7
+            8
             Label : INDEX
               10
               Label : LEFT
@@ -28,13 +28,13 @@ Label : PROJECT
               Label : RIGHT
                 11
             Label : VARIABLE
-              7
+              8
               Label : INDEX
                 9
               Label : VARIABLE
-                7
+                5
                 Label : INDEX
-                  8
+                  7
                 Label : VARIABLE
                   5
           Label : RIGHT

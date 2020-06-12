@@ -1,30 +1,10 @@
 test
 Label : GLOBAL
   17
-  Label : DEFINITION
-    17
-    Label : DEFINITION
-      17
-    Label : DEFINITION
-      17
 Label : GLOBAL
   10
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
 Label : GLOBAL
   20
-  Label : DEFINITION
-    20
-    Label : DEFINITION
-      20
-    Label : DEFINITION
-      20
 Label : PROJECT
   1
   Label : DEFINITION
@@ -73,7 +53,7 @@ Label : PROJECT
                     14
                   Label : NAME
                     13
-                    Label : DEFINITION, DEFINITION
+                    Label : DEFINITION
                       9
             Label : EXPRESSION
               11
@@ -87,7 +67,7 @@ Label : PROJECT
                     14
                   Label : NAME
                     16
-                    Label : DEFINITION, DEFINITION
+                    Label : DEFINITION
                       9
             Label : EXPRESSION
               11
@@ -101,7 +81,7 @@ Label : PROJECT
                     14
                   Label : NAME
                     19
-                    Label : DEFINITION, DEFINITION
+                    Label : DEFINITION
                       9
             Label : EXPRESSION
               11
@@ -141,7 +121,7 @@ Label : PROJECT
                 23
                 Label : CLASS
                   19
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     9
                 Label : VARIABLE
                   17
@@ -155,22 +135,6 @@ Label : PROJECT
             7
             Label : EXPRESSION
               24
-              Label : DEFINITION
-                13
-                Label : ARGUMENT
-                  14
-                Label : NAME
-                  13
-                  Label : DEFINITION, DEFINITION
-                    9
-              Label : DEFINITION
-                13
-                Label : DEFINITION
-                  9
-              Label : DEFINITION
-                13
-                Label : DEFINITION
-                  9
               Label : NAME
                 18
           Label : NAME
@@ -187,13 +151,13 @@ Label : PROJECT
                   14
                 Label : NAME
                   19
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     9
               Label : DEFINITION
                 9
               Label : DEFINITION
                 19
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
                   9
               Label : DEFINITION
                 9

@@ -1,16 +1,8 @@
 test
 Label : GLOBAL
   11
-  Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
 Label : GLOBAL
   18
-  Label : DEFINITION
-    18
-    Label : DEFINITION
-      18
 Label : GLOBAL
   21
   Label : DEFINITION
@@ -19,10 +11,6 @@ Label : GLOBAL
       21
 Label : GLOBAL
   6
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
 Label : PROJECT
   1
   Label : DEFINITION
@@ -60,13 +48,13 @@ Label : PROJECT
                 Label : NOT
                   10
                   Label : ARGUMENT
-                    13
+                    14
                     Label : INDEX
                       15
                     Label : VARIABLE
-                      13
+                      11
                       Label : INDEX
-                        14
+                        13
                       Label : VARIABLE
                         11
               Label : THEN

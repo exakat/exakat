@@ -7,10 +7,6 @@ Label : GLOBAL
       18
 Label : GLOBAL
   10
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
 Label : PROJECT
   1
   Label : DEFINITION

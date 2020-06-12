@@ -1,36 +1,28 @@
 test
 Label : GLOBAL
-  10
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
+  9
 Label : GLOBAL
   6
-  Label : DEFINITION
-    6
-    Label : DEFINITION
-      6
 Label : GLOBAL
-  13
+  12
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
-      13
+      12
 Label : PROJECT
   1
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
-      10
+      9
   Label : DEFINITION
     6
     Label : DEFINITION
       6
   Label : DEFINITION
-    13
+    12
     Label : DEFINITION
-      13
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,14 +32,14 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NOT
-            15
+            14
             Label : POSTPLUSPLUS
-              8
+              6
               Label : INDEX
-                9
+                8
                 Label : CONCAT
-                  10
+                  9
                 Label : CONCAT
-                  13
+                  12
               Label : VARIABLE
                 6

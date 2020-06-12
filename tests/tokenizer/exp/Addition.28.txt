@@ -1,40 +1,30 @@
 test
 Label : GLOBAL
-  11
-  Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-    Label : DEFINITION
-      11
+  10
 Label : GLOBAL
   8
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
 Label : GLOBAL
-  22
+  21
   Label : DEFINITION
-    22
+    21
     Label : DEFINITION
-      22
+      21
 Label : PROJECT
   1
   Label : DEFINITION
-    11
+    10
     Label : DEFINITION
-      11
+      10
     Label : DEFINITION
-      11
+      10
   Label : DEFINITION
     8
     Label : DEFINITION
       8
   Label : DEFINITION
-    22
+    21
     Label : DEFINITION
-      22
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -48,40 +38,40 @@ Label : PROJECT
           Label : THEN
             7
             Label : EXPRESSION
-              18
+              17
               Label : LEFT
-                10
+                8
                 Label : INDEX
-                  16
+                  15
                   Label : MEMBER
-                    17
-                  Label : OBJECT
                     16
+                  Label : OBJECT
+                    15
                     Label : METHOD
-                      13
+                      12
                       Label : ARGUMENT
-                        14
-                      Label : NAME
                         13
+                      Label : NAME
+                        12
                     Label : OBJECT
-                      11
+                      10
                 Label : VARIABLE
                   8
               Label : RIGHT
-                20
+                19
                 Label : LEFT
-                  19
+                  18
                 Label : RIGHT
-                  21
+                  20
         Label : EXPRESSION
-          20
+          19
           Label : LEFT
-            22
+            21
           Label : RIGHT
-            24
+            23
         Label : EXPRESSION
-          25
+          24
           Label : CONCAT
-            11
+            10
           Label : CONCAT
-            26
+            25

@@ -1,20 +1,14 @@
 test
 Label : GLOBAL
-  32
-  Label : DEFINITION
-    32
-    Label : DEFINITION
-      32
-    Label : DEFINITION
-      32
+  31
 Label : PROJECT
   1
   Label : DEFINITION
-    32
+    31
     Label : DEFINITION
-      32
+      31
     Label : DEFINITION
-      32
+      31
   Label : FILE
     3
     Label : EXPRESSION
@@ -24,25 +18,25 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            9
+            7
             Label : DEFAULT
-              7
+              8
             Label : NAME
-              9
-              Label : DEFINITION
-                9
-            Label : TYPEHINT
               7
+              Label : DEFINITION
+                7
+            Label : TYPEHINT
+              8
           Label : ARGUMENT
             10
             Label : DEFAULT
-              7
+              8
             Label : NAME
               10
               Label : DEFINITION
                 10
             Label : TYPEHINT
-              7
+              8
           Label : ARGUMENT
             11
             Label : DEFAULT
@@ -52,7 +46,7 @@ Label : PROJECT
               Label : DEFINITION
                 11
             Label : TYPEHINT
-              7
+              8
           Label : BLOCK
             13
             Label : EXPRESSION
@@ -86,7 +80,7 @@ Label : PROJECT
                   Label : LEFT
                     15
                   Label : RIGHT
-                    9
+                    7
           Label : DEFINITION
             15
             Label : DEFINITION
@@ -100,9 +94,9 @@ Label : PROJECT
           Label : DEFINITION
             5
             Label : ARGUMENT
-              30
+              29
             Label : ARGUMENT
-              31
+              30
             Label : NAME
               5
           Label : NAME
@@ -110,29 +104,29 @@ Label : PROJECT
           Label : RETURNED
             Void
           Label : RETURNTYPE
-            7
+            8
         Label : EXPRESSION
           20
           Label : ARGUMENT
-            9
+            7
             Label : DEFAULT
-              7
+              8
             Label : NAME
-              9
-              Label : DEFINITION
-                9
-            Label : TYPEHINT
               7
+              Label : DEFINITION
+                7
+            Label : TYPEHINT
+              8
           Label : ARGUMENT
             10
             Label : DEFAULT
-              7
+              8
             Label : NAME
               10
               Label : DEFINITION
                 10
             Label : TYPEHINT
-              7
+              8
           Label : ARGUMENT
             11
             Label : DEFAULT
@@ -142,7 +136,7 @@ Label : PROJECT
               Label : DEFINITION
                 11
             Label : TYPEHINT
-              7
+              8
           Label : BLOCK
             13
             Label : EXPRESSION
@@ -152,29 +146,29 @@ Label : PROJECT
                 Label : EXPRESSION
                   19
                   Label : YIELD
-                    22
+                    15
                     Label : INDEX
                       12
                     Label : VARIABLE
                       15
                 Label : EXPRESSION
-                  25
+                  24
                   Label : CONDITION
                     19
                     Label : YIELD
-                      24
+                      23
                       Label : MEMBER
-                        23
+                        22
                       Label : OBJECT
                         15
                   Label : ELSE
-                    28
+                    27
                     Label : LEFT
-                      27
+                      26
                     Label : RIGHT
-                      27
+                      26
                   Label : THEN
-                    26
+                    25
               Label : FINAL
                 3
                 Label : EXPRESSION
@@ -198,7 +192,7 @@ Label : PROJECT
                   Label : LEFT
                     15
                   Label : RIGHT
-                    9
+                    7
           Label : DEFINITION
             15
             Label : DEFINITION
@@ -216,22 +210,22 @@ Label : PROJECT
           Label : RETURNED
             Void
           Label : RETURNTYPE
-            7
+            8
         Label : EXPRESSION
-          29
+          28
           Label : BLOCK
             13
             Label : EXPRESSION
-              34
+              33
               Label : ARGUMENT
-                32
+                31
           Label : SOURCE
             5
             Label : ARGUMENT
-              30
+              29
             Label : ARGUMENT
-              31
+              30
             Label : NAME
               5
           Label : VALUE
-            32
+            31

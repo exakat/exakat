@@ -7,12 +7,6 @@ Label : GLOBAL
       15
 Label : GLOBAL
   8
-  Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-    Label : DEFINITION
-      8
 Label : PROJECT
   1
   Label : DEFINITION

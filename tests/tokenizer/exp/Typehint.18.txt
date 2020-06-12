@@ -71,6 +71,8 @@ Label : PROJECT
               12
             Label : TYPEHINT
               17
+            Label : TYPEHINT
+              19
           Label : BLOCK
             13
             Label : EXPRESSION

@@ -7,10 +7,6 @@ Label : GLOBAL
       9
 Label : GLOBAL
   5
-  Label : DEFINITION
-    5
-    Label : DEFINITION
-      5
 Label : PROJECT
   1
   Label : DEFINITION
@@ -34,8 +30,8 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : CLONE
-              11
+              9
               Label : INDEX
-                12
+                11
               Label : VARIABLE
                 9

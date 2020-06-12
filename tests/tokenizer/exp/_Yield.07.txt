@@ -1,12 +1,6 @@
 test
 Label : GLOBAL
   17
-  Label : DEFINITION
-    17
-    Label : DEFINITION
-      17
-    Label : DEFINITION
-      17
 Label : PROJECT
   1
   Label : DEFINITION

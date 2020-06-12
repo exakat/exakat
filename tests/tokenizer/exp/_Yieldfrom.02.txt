@@ -1,18 +1,6 @@
 test
 Label : GLOBAL
   9
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
 Label : PROJECT
   1
   Label : DEFINITION
@@ -56,13 +44,15 @@ Label : PROJECT
                     Label : TYPEHINT
                       13
                   Label : ARGUMENT
-                    18
+                    16
                     Label : DEFAULT
                       19
                     Label : NAME
-                      18
-                    Label : TYPEHINT
                       16
+                    Label : TYPEHINT
+                      17
+                    Label : TYPEHINT
+                      19
                   Label : BLOCK
                     22
                     Label : EXPRESSION
@@ -71,14 +61,8 @@ Label : PROJECT
                         31
                         Label : CONST
                           31
-                          Label : DEFINITION
-                            36
-                            Label : CLASS
-                              35
-                            Label : CONSTANT
-                              16
                           Label : NAME
-                            16
+                            17
                           Label : VALUE
                             32
                       Label : CONST
@@ -92,19 +76,13 @@ Label : PROJECT
                             Label : CLASS
                               35
                             Label : CONSTANT
-                              16
+                              17
                         Label : CONST
                           40
                           Label : NAME
                             37
                           Label : VALUE
                             39
-                      Label : DEFINITION
-                        35
-                      Label : DEFINITION
-                        24
-                      Label : DEFINITION
-                        24
                       Label : EXTENDS
                         25
                       Label : IMPLEMENTS
@@ -117,21 +95,11 @@ Label : PROJECT
                           14
                         Label : BLOCK
                           14
-                        Label : DEFINITION
-                          36
-                          Label : CLASS
-                            24
-                          Label : METHOD
-                            45
-                            Label : ARGUMENT
-                              14
-                            Label : NAME
-                              45
                         Label : NAME
                           45
                         Label : RETURNED
                           Void
-                        Label : RETURNTYPE
+                        Label : TYPEHINT
                           14
                       Label : METHOD
                         46
@@ -146,13 +114,13 @@ Label : PROJECT
                               Label : EXPRESSION
                                 11
                                 Label : LEFT
-                                  55
+                                  54
                                   Label : INDEX
                                     48
                                   Label : VARIABLE
                                     54
                                 Label : RIGHT
-                                  55
+                                  9
                                   Label : INDEX
                                     49
                                   Label : VARIABLE
@@ -190,29 +158,29 @@ Label : PROJECT
                                 Label : RIGHT
                                   50
                           Label : EXPRESSION
-                            56
+                            55
                             Label : BLOCK
                               22
                               Label : EXPRESSION
-                                62
+                                61
                                 Label : ARGUMENT
-                                  59
+                                  58
+                                  Label : CONCAT
+                                    56
+                                  Label : CONCAT
+                                    59
                                   Label : CONCAT
                                     57
                                   Label : CONCAT
                                     60
-                                  Label : CONCAT
-                                    58
-                                  Label : CONCAT
-                                    61
                             Label : INDEX
-                              57
+                              56
                             Label : SOURCE
                               9
                             Label : VALUE
-                              58
+                              57
                           Label : EXPRESSION
-                            63
+                            62
                             Label : BLOCK
                               22
                               Label : EXPRESSION
@@ -220,13 +188,13 @@ Label : PROJECT
                                 Label : POSTPLUSPLUS
                                   48
                             Label : CONDITION
-                              55
+                              54
                               Label : INDEX
                                 48
                               Label : VARIABLE
                                 54
                           Label : EXPRESSION
-                            64
+                            63
                             Label : BLOCK
                               22
                               Label : EXPRESSION
@@ -234,7 +202,7 @@ Label : PROJECT
                                 Label : POSTPLUSPLUS
                                   48
                             Label : CONDITION
-                              55
+                              54
                               Label : INDEX
                                 48
                               Label : VARIABLE
@@ -242,19 +210,19 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               45
                               Label : ARGUMENT
-                                66
+                                65
                                 Label : LEFT
                                   9
                                 Label : RIGHT
                                   42
                               Label : ARGUMENT
-                                67
+                                66
                               Label : ARGUMENT
-                                55
+                                67
                                 Label : ARGUMENT
                                   42
                                 Label : ARGUMENT
@@ -266,7 +234,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               70
                               Label : ARGUMENT
@@ -282,7 +250,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -296,7 +264,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -316,7 +284,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -336,7 +304,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               73
                               Label : METHOD
@@ -346,11 +314,11 @@ Label : PROJECT
                                 Label : NAME
                                   45
                               Label : OBJECT
-                                65
+                                64
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               73
                               Label : METHOD
@@ -370,7 +338,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               73
                               Label : METHOD
@@ -386,7 +354,7 @@ Label : PROJECT
                                     Label : CONCAT
                                       72
                               Label : OBJECT
-                                65
+                                64
                           Label : EXPRESSION
                             11
                             Label : LEFT
@@ -394,7 +362,7 @@ Label : PROJECT
                               Label : MEMBER
                                 10
                               Label : OBJECT
-                                65
+                                64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -440,7 +408,7 @@ Label : PROJECT
                                   Label : CONCAT
                                     72
                               Label : OBJECT
-                                65
+                                64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -450,7 +418,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -460,7 +428,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -476,7 +444,7 @@ Label : PROJECT
                           Label : EXPRESSION
                             11
                             Label : LEFT
-                              65
+                              64
                             Label : RIGHT
                               36
                               Label : CLASS
@@ -550,49 +518,49 @@ Label : PROJECT
                           Label : DEFINITION
                             9
                         Label : DEFINITION
+                          56
+                          Label : DEFINITION
+                            56
+                          Label : DEFINITION
+                            56
+                        Label : DEFINITION
                           57
                           Label : DEFINITION
                             57
                           Label : DEFINITION
                             57
                         Label : DEFINITION
-                          58
+                          64
                           Label : DEFINITION
-                            58
+                            64
                           Label : DEFINITION
-                            58
-                        Label : DEFINITION
-                          65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
-                          Label : DEFINITION
-                            65
-                          Label : DEFINITION
-                            65
+                            64
                         Label : DEFINITION
                           74
                           Label : DEFINITION
@@ -609,14 +577,14 @@ Label : PROJECT
                         24
                       Label : PPP
                         41
+                        Label : TYPEHINT
+                          14
                         Label : PPP
                           9
                           Label : DEFAULT
                             42
                         Label : PPP
-                          18
-                        Label : TYPEHINT
-                          14
+                          16
                       Label : PPP
                         43
                         Label : PPP
@@ -666,23 +634,19 @@ Label : PROJECT
                     Label : TYPEHINT
                       13
                   Label : ARGUMENT
-                    18
+                    16
                     Label : DEFAULT
                       19
                     Label : NAME
-                      18
-                    Label : TYPEHINT
                       16
+                    Label : TYPEHINT
+                      17
+                    Label : TYPEHINT
+                      19
                   Label : BLOCK
                     22
                     Label : EXPRESSION
                       23
-                      Label : DEFINITION
-                        35
-                      Label : DEFINITION
-                        24
-                      Label : DEFINITION
-                        24
                       Label : METHOD
                         75
                         Label : ARGUMENT
@@ -694,7 +658,7 @@ Label : PROJECT
                             Label : CONDITION
                               77
                               Label : NOT
-                                65
+                                64
                             Label : THEN
                               22
                               Label : EXPRESSION
@@ -706,7 +670,7 @@ Label : PROJECT
                             Label : CONDITION
                               79
                               Label : LEFT
-                                65
+                                64
                               Label : RIGHT
                                 42
                             Label : ELSE
@@ -716,7 +680,7 @@ Label : PROJECT
                                 Label : CONDITION
                                   79
                                   Label : LEFT
-                                    65
+                                    64
                                   Label : RIGHT
                                     68
                                 Label : ELSE
@@ -726,7 +690,7 @@ Label : PROJECT
                                     Label : CONDITION
                                       79
                                       Label : LEFT
-                                        65
+                                        64
                                       Label : RIGHT
                                         69
                                     Label : ELSE
@@ -736,7 +700,7 @@ Label : PROJECT
                                         Label : CONDITION
                                           79
                                           Label : LEFT
-                                            65
+                                            64
                                           Label : RIGHT
                                             80
                                         Label : THEN
@@ -747,14 +711,10 @@ Label : PROJECT
                                               80
                                       Label : EXPRESSION
                                         83
-                                        Label : DEFINITION
-                                          97
-                                          Label : GOTO
-                                            81
                                         Label : GOTOLABEL
                                           81
                                       Label : EXPRESSION
-                                        64
+                                        63
                                         Label : BLOCK
                                           22
                                           Label : EXPRESSION
@@ -764,7 +724,7 @@ Label : PROJECT
                                               Label : EXPRESSION
                                                 86
                                                 Label : CASE
-                                                  67
+                                                  66
                                                 Label : CODE
                                                   3
                                                   Label : EXPRESSION
@@ -772,47 +732,47 @@ Label : PROJECT
                                                     Label : BREAK
                                                       14
                                               Label : EXPRESSION
-                                                88
+                                                86
                                                 Label : CASE
-                                                  89
+                                                  88
                                                 Label : CODE
                                                   3
                                                   Label : EXPRESSION
-                                                    90
+                                                    89
                                                     Label : CONTINUE
                                                       14
                                               Label : EXPRESSION
-                                                91
+                                                86
+                                                Label : CASE
+                                                  90
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    87
+                                                    Label : BREAK
+                                                      68
+                                              Label : EXPRESSION
+                                                86
+                                                Label : CASE
+                                                  91
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    89
+                                                    Label : CONTINUE
+                                                      68
+                                              Label : EXPRESSION
+                                                86
                                                 Label : CASE
                                                   92
                                                 Label : CODE
                                                   3
                                                   Label : EXPRESSION
-                                                    87
-                                                    Label : BREAK
-                                                      68
-                                              Label : EXPRESSION
-                                                93
-                                                Label : CASE
-                                                  94
-                                                Label : CODE
-                                                  3
-                                                  Label : EXPRESSION
-                                                    90
-                                                    Label : CONTINUE
-                                                      68
-                                              Label : EXPRESSION
-                                                95
-                                                Label : CASE
-                                                  96
-                                                Label : CODE
-                                                  3
-                                                  Label : EXPRESSION
-                                                    97
+                                                    93
                                                     Label : GOTO
                                                       81
                                               Label : EXPRESSION
-                                                98
+                                                94
                                                 Label : CODE
                                                   3
                                                   Label : EXPRESSION
@@ -820,7 +780,7 @@ Label : PROJECT
                                                     Label : RETURN
                                                       14
                                             Label : CONDITION
-                                              65
+                                              64
                                         Label : CONDITION
                                           6
                                     Label : THEN
@@ -842,19 +802,19 @@ Label : PROJECT
                                 Label : RETURN
                                   42
                         Label : DEFINITION
-                          65
+                          64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                           Label : DEFINITION
-                            65
+                            64
                         Label : NAME
                           75
                         Label : RETURNED
@@ -906,13 +866,15 @@ Label : PROJECT
                     Label : TYPEHINT
                       13
                   Label : ARGUMENT
-                    18
+                    16
                     Label : DEFAULT
                       19
                     Label : NAME
-                      18
-                    Label : TYPEHINT
                       16
+                    Label : TYPEHINT
+                      17
+                    Label : TYPEHINT
+                      19
                   Label : BLOCK
                     22
                     Label : EXPRESSION
@@ -928,47 +890,47 @@ Label : PROJECT
                       Label : NAME
                         24
                       Label : USE
-                        99
+                        95
                         Label : BLOCK
                           22
                           Label : EXPRESSION
-                            105
+                            100
                             Label : INSTEADOF
                               45
                             Label : NAME
-                              104
+                              45
                               Label : CLASS
-                                100
+                                96
                               Label : METHOD
                                 45
                           Label : EXPRESSION
-                            106
+                            101
                             Label : AS
-                              107
+                              102
                             Label : NAME
-                              104
+                              45
                               Label : CLASS
-                                102
+                                98
                               Label : METHOD
                                 45
                           Label : EXPRESSION
-                            106
+                            101
                             Label : NAME
-                              108
+                              103
                           Label : EXPRESSION
-                            106
+                            101
                             Label : AS
-                              17
+                              18
                             Label : NAME
-                              109
+                              104
                         Label : USE
-                          100
+                          96
                         Label : USE
-                          102
+                          98
                       Label : USE
-                        99
+                        95
                         Label : USE
-                          110
+                          105
                   Label : RETURNED
                     Void
                   Label : RETURNTYPE
@@ -1004,25 +966,25 @@ Label : PROJECT
                   Label : BLOCK
                     22
                     Label : EXPRESSION
-                      112
+                      107
                       Label : BLOCK
                         3
                         Label : EXPRESSION
                           14
                       Label : DECLARE
-                        104
+                        108
                         Label : NAME
                           24
                         Label : VALUE
                           42
                       Label : DECLARE
-                        104
+                        108
                         Label : NAME
                           25
                         Label : VALUE
                           68
                     Label : EXPRESSION
-                      113
+                      109
                       Label : BLOCK
                         22
                         Label : EXPRESSION
@@ -1030,35 +992,35 @@ Label : PROJECT
                           Label : POSTPLUSPLUS
                             48
                       Label : CATCH
-                        114
+                        110
                         Label : BLOCK
                           22
                           Label : EXPRESSION
-                            118
+                            114
                             Label : ARGUMENT
                               42
                         Label : CLASS
-                          115
+                          111
                         Label : VARIABLE
-                          117
+                          113
                       Label : CATCH
-                        114
+                        110
                         Label : BLOCK
                           22
                           Label : EXPRESSION
-                            118
+                            114
                             Label : ARGUMENT
                               68
                         Label : CLASS
-                          119
+                          115
                         Label : VARIABLE
-                          117
+                          113
                       Label : FINALLY
-                        121
+                        117
                         Label : BLOCK
                           22
                           Label : EXPRESSION
-                            118
+                            114
                             Label : ARGUMENT
                               69
                   Label : DEFINITION
@@ -1066,11 +1028,11 @@ Label : PROJECT
                     Label : DEFINITION
                       48
                   Label : DEFINITION
-                    117
+                    113
                     Label : DEFINITION
-                      117
+                      113
                     Label : DEFINITION
-                      117
+                      113
                   Label : RETURNED
                     Void
                   Label : RETURNTYPE
@@ -1096,15 +1058,15 @@ Label : PROJECT
                   Label : BLOCK
                     22
                     Label : EXPRESSION
-                      112
+                      107
                       Label : BLOCK
                         22
                         Label : EXPRESSION
-                          118
+                          114
                           Label : ARGUMENT
                             42
                       Label : DECLARE
-                        104
+                        108
                         Label : NAME
                           27
                         Label : VALUE
@@ -1112,35 +1074,35 @@ Label : PROJECT
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        122
+                        118
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        59
+                        58
                         Label : CONCAT
-                          123
+                          119
                         Label : CONCAT
                           9
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        124
+                        120
                         Label : CONCAT
-                          125
+                          121
                         Label : CONCAT
                           9
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        59
+                        58
                         Label : CONCAT
                           9
                         Label : CONCAT
@@ -1148,11 +1110,11 @@ Label : PROJECT
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        59
+                        58
                         Label : CONCAT
-                          59
+                          58
                           Label : NAME
                             10
                         Label : CONCAT
@@ -1160,43 +1122,43 @@ Label : PROJECT
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        59
+                        58
                         Label : CONCAT
-                          126
+                          122
                         Label : CONCAT
                           73
                           Label : MEMBER
-                            107
+                            102
                           Label : OBJECT
-                            127
+                            123
                         Label : CONCAT
-                          126
+                          122
                         Label : CONCAT
-                          126
+                          122
                           Label : NAME
                             73
                             Label : MEMBER
-                              107
+                              102
                             Label : OBJECT
-                              127
+                              123
                         Label : CONCAT
-                          126
+                          122
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        59
+                        58
                         Label : CONCAT
-                          126
+                          122
                         Label : CONCAT
-                          126
+                          122
                           Label : NAME
-                            128
+                            124
                         Label : CONCAT
-                          126
+                          122
                     Label : EXPRESSION
                       45
                       Label : ARGUMENT
@@ -1204,41 +1166,41 @@ Label : PROJECT
                       Label : NAME
                         45
                     Label : EXPRESSION
-                      129
+                      125
                       Label : ARGUMENT
                         14
                       Label : NAME
-                        129
+                        125
                     Label : EXPRESSION
-                      130
+                      126
                       Label : ARGUMENT
                         14
                       Label : NAME
-                        130
+                        126
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
                         45
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        129
+                        125
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        130
+                        126
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        131
+                        127
                         Label : NEW
                           45
                           Label : ARGUMENT
@@ -1248,35 +1210,35 @@ Label : PROJECT
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        131
+                        127
                         Label : NEW
-                          129
+                          125
                           Label : ARGUMENT
                             14
                           Label : NAME
-                            129
+                            125
                     Label : EXPRESSION
                       11
                       Label : LEFT
-                        65
+                        64
                       Label : RIGHT
-                        131
+                        127
                         Label : NEW
-                          130
+                          126
                           Label : ARGUMENT
                             14
                           Label : NAME
-                            130
+                            126
                     Label : EXPRESSION
                       76
                       Label : CONDITION
                         9
                       Label : ELSE
-                        132
+                        128
                         Label : CONDITION
-                          18
+                          16
                         Label : THEN
                           22
                           Label : EXPRESSION
@@ -1286,33 +1248,33 @@ Label : PROJECT
                         Label : EXPRESSION
                           14
                   Label : DEFINITION
-                    65
+                    64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                     Label : DEFINITION
-                      65
+                      64
                   Label : DEFINITION
                     9
                     Label : DEFINITION
@@ -1324,15 +1286,15 @@ Label : PROJECT
                     Label : DEFINITION
                       9
                   Label : DEFINITION
-                    127
+                    123
                     Label : DEFINITION
-                      127
+                      123
                     Label : DEFINITION
-                      127
+                      123
                   Label : DEFINITION
-                    18
+                    16
                     Label : DEFINITION
-                      18
+                      16
                   Label : RETURNED
                     Void
                   Label : RETURNTYPE

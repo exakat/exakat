@@ -40,30 +40,32 @@ Label : PROJECT
           Label : METHOD
             23
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               30
               Label : EXPRESSION
-                7
+                8
             Label : NAME
               23
             Label : RETURNED
               Void
             Label : RETURNTYPE
-              7
+              8
+            Label : TYPEHINT
+              8
           Label : NAME
             6
           Label : PPP
-            9
+            7
             Label : PPP
               10
               Label : DEFAULT
                 12
             Label : TYPEHINT
-              7
+              8
           Label : PPP
             27
             Label : PPP
               28
             Label : TYPEHINT
-              27
+              8

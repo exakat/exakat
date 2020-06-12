@@ -9,80 +9,78 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : DEFINITION
-            7
           Label : NAME
             6
           Label : PPP
-            10
+            8
             Label : PPP
               11
               Label : DEFAULT
                 12
             Label : TYPEHINT
-              8
+              9
         Label : EXPRESSION
           5
           Label : DEFINITION
-            22
+            21
           Label : DEFINITION
-            22
+            21
           Label : EXTENDS
             7
           Label : METHOD
             14
             Label : ARGUMENT
-              8
+              9
             Label : BLOCK
               15
               Label : EXPRESSION
-                19
+                18
                 Label : LEFT
-                  17
+                  16
                   Label : INDEX
-                    18
+                    17
                   Label : VARIABLE
                     16
                 Label : RIGHT
                   12
               Label : EXPRESSION
-                19
+                18
                 Label : LEFT
-                  20
+                  19
                 Label : RIGHT
-                  18
+                  17
               Label : EXPRESSION
-                21
+                20
                 Label : RETURN
-                  24
+                  23
                   Label : CONCAT
-                    23
+                    22
                     Label : MEMBER
                       7
                     Label : OBJECT
-                      22
+                      21
                   Label : CONCAT
-                    25
+                    24
                     Label : CONCAT
-                      27
+                      26
                     Label : CONCAT
-                      25
+                      21
                       Label : MEMBER
                         7
                       Label : OBJECT
-                        22
+                        21
+                    Label : CONCAT
+                      27
                     Label : CONCAT
                       28
-                    Label : CONCAT
-                      25
                       Label : INDEX
-                        18
+                        17
                       Label : VARIABLE
                         16
                     Label : CONCAT
                       29
                     Label : CONCAT
-                      20
+                      19
                     Label : CONCAT
                       29
             Label : DEFINITION
@@ -92,47 +90,47 @@ Label : PROJECT
               Label : DEFINITION
                 16
             Label : DEFINITION
-              20
+              19
               Label : DEFINITION
-                20
+                19
               Label : DEFINITION
-                20
+                19
             Label : NAME
               14
             Label : RETURNED
-              24
+              23
               Label : CONCAT
-                23
+                22
                 Label : MEMBER
                   7
                 Label : OBJECT
-                  22
+                  21
               Label : CONCAT
-                25
+                24
                 Label : CONCAT
-                  27
+                  26
                 Label : CONCAT
-                  25
+                  21
                   Label : MEMBER
                     7
                   Label : OBJECT
-                    22
+                    21
+                Label : CONCAT
+                  27
                 Label : CONCAT
                   28
-                Label : CONCAT
-                  25
                   Label : INDEX
-                    18
+                    17
                   Label : VARIABLE
                     16
                 Label : CONCAT
                   29
                 Label : CONCAT
-                  20
+                  19
                 Label : CONCAT
                   29
             Label : RETURNTYPE
-              8
+              9
           Label : NAME
             13
           Label : PPP
@@ -140,14 +138,14 @@ Label : PROJECT
             Label : PPP
               30
               Label : DEFINITION
-                23
+                22
                 Label : MEMBER
                   7
                 Label : OBJECT
-                  22
+                  21
               Label : DEFINITION
-                25
+                21
                 Label : MEMBER
                   7
                 Label : OBJECT
-                  22
+                  21

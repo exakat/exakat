@@ -83,29 +83,29 @@ Label : PROJECT
               31
               Label : DEFAULT
                 7
-            Label : RETURNTYPE
+            Label : TYPEHINT
               29
           Label : PPP
             28
             Label : PPP
               33
-            Label : RETURNTYPE
+            Label : TYPEHINT
               29
           Label : PPP
             28
             Label : PPP
               35
-            Label : RETURNTYPE
+            Label : TYPEHINT
               29
           Label : PPP
             28
             Label : PPP
               37
-            Label : RETURNTYPE
+            Label : TYPEHINT
               29
           Label : PPP
             28
             Label : PPP
               39
-            Label : RETURNTYPE
+            Label : TYPEHINT
               29
