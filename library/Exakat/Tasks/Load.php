@@ -4930,9 +4930,9 @@ class Load extends Tasks {
     }
 
     private function processCast(): Atom {
-        $operator = $this->addAtom('cast', $this->id);
+        $operator = $this->addAtom('Cast', $this->id);
         $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
-        $operator = $this->popExpression();
+        $this->popExpression();
         if (strtolower($operator->code) === '(binary)') {
             $operator->binaryString = $operator->code[1];
         }
@@ -5067,7 +5067,7 @@ class Load extends Tasks {
             $operator = $this->addAtom('Yield', $this->id);
             $operand = $this->processSingleOperator($operator, $finals, 'YIELD', ' ');
 
-            return $yield;
+            return $operator;
         }
     }
 
