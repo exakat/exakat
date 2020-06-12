@@ -1,11 +1,11 @@
 <?php
 
 class a {
-    function b() {}
-    function c() {}
-    function d() {}
-    function e() {}
-    function g() {}
+    function b() : a {}
+    function c() : a {}
+    function d() : a {}
+    function e() : a {}
+    function g() : a {}
 }
 
 class b extends a {

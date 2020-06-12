@@ -30,8 +30,7 @@ class SetClassRemoteDefinitionWithLocalNew extends Complete {
 
     public function analyze() {
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
-              ->hasNoIn('DEFINITION')
+              //->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
@@ -49,7 +48,7 @@ class SetClassRemoteDefinitionWithLocalNew extends Complete {
               ->outIs('NAME')
               ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
               ->inIs('NAME')
-              ->addETo('DEFINITION', 'method');
+              ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)

@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('function e( ) { /**/ } ',
-                      'function b( ) { /**/ } ',
-                      'function c( ) { /**/ } ',
-                      'function d( ) { /**/ } ',
+$expected     = array('function e( ) : a { /**/ } ',
+                      'function b( ) : a { /**/ } ',
+                      'function c( ) : a { /**/ } ',
+                      'function d( ) : a { /**/ } ',
                      );
 
-$expected_not = array('function f( ) { /**/ } ',
-                      'function g( ) { /**/ } ',
+$expected_not = array('function f( ) : a { /**/ } ',
+                      'function g( ) : a { /**/ } ',
                      );
 
 ?>

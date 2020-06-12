@@ -26,124 +26,24 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedMethods extends Analyzer {
-    public function analyze() {
-        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
-
-        // Normal Methodcall
-        $this->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->values('lccode')
-             ->unique();
-        $methods = $this->rawQuery()->toArray();
-
-        if (!empty($methods)) {
-            $this->atomIs(array('Method', 'Magicmethod'))
-                 ->analyzerIsNot('self')
-                 ->outIs('NAME')
-                 ->codeIsNot($magicMethods)
-                 ->is('lccode', $methods)
-                 ->back('first');
-            $this->prepareQuery();
-        }
-
-        // Staticmethodcall
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->values('lccode')
-             ->unique();
-        $staticmethods = $this->rawQuery()->toArray();
-
-        if (!empty($staticmethods)) {
-            $this->atomIs(array('Method', 'Magicmethod'))
-                 ->analyzerIsNot('self')
-                 ->analyzerIsNot('self')
-                 ->outIs('NAME')
-                 ->codeIsNot($magicMethods)
-                 ->is('lccode', $staticmethods)
-                 ->back('first');
-            $this->prepareQuery();
-        }
-
-        // Staticmethodcall in arrays
-        // non-staticmethodcall in arrays, with $this
-        $this->atomIs('String')
-             ->atomIs('String', self::WITH_CONSTANTS)
-             ->hasIn('DEFINITION')
-             ->has('noDelimiter')
-             ->regexIs('noDelimiter', '::.')
-             ->raw(<<<'GREMLIN'
-map{
-    // Strings
-    if (it.get().label() == "String") {
-        if (it.get().value("noDelimiter") =~ /::/) {
-            s = it.get().value("noDelimiter").split("::");
-            s[1].toLowerCase();
-        } else {
-            it.get().value("noDelimiter").toLowerCase();
-        }
-    } else if (it.get().label() == "Arrayliteral") {
-        it.get().vertices(OUT, "ARGUMENT").each{
-            if (it.value("rank") == 1) {
-                s = it.value("noDelimiter").toLowerCase();
-            }
-        }
-        s;
-    } else {
-        it.get().value("noDelimiter").toLowerCase();
+    public function dependsOn() : array {
+        return array('Complete/SetClassMethodRemoteDefinition',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
+                     'Complete/SetStringMethodDefinition',
+                     'Complete/SetArrayClassDefinition',
+                    );
     }
-}
-GREMLIN
-)
-                ->unique();
-                $callablesStrings = $this->rawQuery()->toArray();
 
-        $this->atomIs('Arrayliteral')
-             ->is('count', 2)
-             ->filter(
-                $this->side()
-                     ->outWithRank('ARGUMENT', 0)
-                     ->atomIs('String', self::WITH_CONSTANTS)
-                     ->inIs('DEFINITION')
-             )
-             ->outWithRank('ARGUMENT', 1)
-             ->atomIs('String', self::WITH_CONSTANTS)
-             ->has('noDelimiter')
-             ->values('noDelimiter')
-             ->unique();
-        $callablesArray = $this->rawQuery()->toArray();
-
-        $this->atomIs('Arrayliteral')
-             ->is('count', 2)
-             ->filter(
-                $this->side()
-                     ->outWithRank('ARGUMENT', 0)
-                     ->atomIs('This', self::WITH_CONSTANTS)
-             )
-             ->outWithRank('ARGUMENT', 1)
-             ->atomIs('String', self::WITH_CONSTANTS)
-             ->has('noDelimiter')
-             ->values('noDelimiter')
-             ->unique();
-        $callablesThisArray = $this->rawQuery()->toArray();
-
-        $callables = array_unique(array_merge($callablesArray, $callablesThisArray, $callablesStrings));
-
-        if (!empty($callables)) {
-            $callables = array_map('strtolower', $callables);
-            // method used statically in a callback with an array
-            $this->atomIs('Method')
-                 ->analyzerIsNot('self')
-                 ->outIs('NAME')
-                 ->codeIsNot($magicMethods)
-                 ->codeIs($callables, self::TRANSLATE, self::CASE_INSENSITIVE)
-                 ->back('first');
-            $this->prepareQuery();
-        }
+    public function analyze() {
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->outIs('DEFINITION')
+             ->atomIs(array('Methodcall', 'Staticmethodcall', 'String', 'Arrayliteral'))
+             ->back('first');
+        $this->prepareQuery();
 
         // Private constructors
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
@@ -162,7 +62,7 @@ GREMLIN
         $this->prepareQuery();
 
         // Normal Constructors
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
              ->analyzerIsNot('self')
@@ -175,9 +75,6 @@ GREMLIN
              ->hasIn('NEW')
              ->back('used');
         $this->prepareQuery();
-
-        // the special methods must be processed independantly
-        // __destruct is always used, no need to spot
     }
 }
 

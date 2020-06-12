@@ -74,6 +74,27 @@ class SetArrayClassDefinition extends Complete {
              ->inIs('NAME')
              ->addEto('DEFINITION', 'first');
         $this->prepareQuery();
+
+        // array($this, foo)
+        $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)
+             ->hasNoIn('DEFINITION')
+             ->is('count', 2)
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->has('noDelimiter')
+             ->savePropertyAs('noDelimiter', 'method')
+             ->back('first')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('This')
+             ->goToClass()
+             ->atomIs('Class')
+             ->outIs(array('MAGICMETHOD', 'METHOD'))
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->outIs('NAME')
+             ->samePropertyAs('fullcode', 'method', self::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->addEto('DEFINITION', 'first');
+        $this->prepareQuery();
     }
 }
 

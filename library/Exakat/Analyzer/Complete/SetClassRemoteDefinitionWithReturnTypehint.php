@@ -23,22 +23,32 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
+    public function dependsOn() : array {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
+        // class a { function b() }; function foo() : a {}; $a = foo(); $a->b()
+        // class a { function b() }; function foo() : a {}; foo()->b()
         $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->hasOut('RETURNTYPE')
               ->outIs('DEFINITION')
               ->atomIs(self::FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
-              ->inIs('DEFAULT')
-              ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
-              ->outIs('DEFINITION')
+              ->optional(
+                $this->side()
+                     ->inIs('DEFAULT')
+                     ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
+                     ->outIs('DEFINITION')
+              )
               ->inIs('OBJECT')
               ->outIs('METHOD')
               ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->as('method')
               ->hasNoIn('DEFINITION')
+              ->as('method')
               ->back('first')
 
               ->outIs('RETURNTYPE')
@@ -52,13 +62,19 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
               ->addETo('DEFINITION', 'method');
         $this->prepareQuery();
 
+        // class a { private $b }; function foo() : a {}; $a = foo(); $a->b
+        // class a { private $b }; function foo() : a {}; foo()->b
         $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
              ->hasOut('RETURNTYPE')
              ->outIs('DEFINITION')
              ->atomIs(self::FUNCTIONS_CALLS, self::WITHOUT_CONSTANTS)
-             ->inIs('DEFAULT')
-             ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
-             ->outIs('DEFINITION')
+              ->optional(
+                $this->side()
+                     ->inIs('DEFAULT')
+                     ->atomIs(array('Propertydefinition', 'Variabledefinition', 'Globaldefinition', 'Staticdefinition'), self::WITHOUT_CONSTANTS)
+                     ->outIs('DEFINITION')
+              )
+
              ->inIs('OBJECT')
              ->hasNoIn('DEFINITION')
              ->as('member')

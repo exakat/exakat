@@ -6,6 +6,7 @@ $expected     = array('public function usedStaticallyInStringMethod( ) { /**/ } 
                      );
 
 $expected_not = array('public function unusedMethod( ) { /**/ } ',
+                      'protected function process( ) { /**/ } ',
                      );
 
 ?>
