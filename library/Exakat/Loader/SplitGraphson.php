@@ -186,10 +186,11 @@ SQL;
             $begin = hrtime(true);
             $query = <<<GREMLIN
 new File('$this->pathDef').eachLine {
-    (fromVertex, target) = it.split(',');
+    (fromVertex, target) = it.split(',')
 
-    toVertices = target.split('-'); 
-    g.V(toVertices).as('a').V(fromVertex).addE('DEFINITION').to('a')
+    toVertices = target.split('-');
+
+    g.V(toVertices).addE('DEFINITION').from(V(fromVertex)).iterate();
 }
 
 GREMLIN;
