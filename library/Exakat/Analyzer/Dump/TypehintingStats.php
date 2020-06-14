@@ -32,7 +32,7 @@ class TypehintingStats extends AnalyzerArrayHashResults {
              ->count();
         $totalArguments = $this->rawQuery()->toInt();
 
-        //total parameters
+        //total fonctions, closures, etc.
         $this->atomIs(self::FUNCTIONS_ALL)
              ->not(
                 $this->side()
@@ -45,35 +45,47 @@ class TypehintingStats extends AnalyzerArrayHashResults {
 
         //typehinted
         $this->atomIs('Parameter')
-             ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
+             ->filter(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->atomIsNot('Void')
+             )
              ->count();
         $withTypehint = $this->rawQuery()->toInt();
 
         //typehinted
         $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('RETURNTYPE')
-             ->atomIsNot('Void')
+             ->filter(
+                $this->side()
+                     ->outIs('RETURNTYPE')
+                     ->atomIsNot('Void')
+             )
              ->count();
         $withReturnTypehint = $this->rawQuery()->toInt();
 
-        //typehinted
+        //nullable typehinted
         $this->atomIs('Parameter')
+             ->filter(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->atomIsNot('Void')
+             )
              ->isNullable()
-             ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
              ->count();
         $argNullable = $this->rawQuery()->toInt();
 
-        //typehinted
+        //nullable typehinted
         $this->atomIs(self::FUNCTIONS_ALL)
              ->isNullable()
-             ->outIs('RETURNTYPE')
-             ->atomIsNot('Void')
+             ->filter(
+                $this->side()
+                     ->outIs('RETURNTYPE')
+                     ->atomIsNot('Void')
+             )
              ->count();
         $returnNullable = $this->rawQuery()->toInt();
 
-        //typehinted
+        //scalar typehint used
         $this->atomIs('Scalartypehint')
              ->count();
         $scalartype = $this->rawQuery()->toInt();
@@ -122,12 +134,12 @@ class TypehintingStats extends AnalyzerArrayHashResults {
                        );
 
         foreach($atoms as $name => $atom) {
-            //returntypehinted
+            //total
             $this->atomIs($atom)
                  ->count();
             $return["{$name}Total"] = $this->rawQuery()->toInt();
 
-            //returntypehinted
+            //parameter typehinted
             $this->atomIs($atom)
                  ->filter(
                     $this->side()
@@ -138,10 +150,13 @@ class TypehintingStats extends AnalyzerArrayHashResults {
                  ->count();
             $return["{$name}WithTypehint"] = $this->rawQuery()->toInt();
 
-            //typehinted
+            //return typehinted
             $this->atomIs($atom)
-                 ->outIs('RETURNTYPE')
-                 ->atomIsNot('Void')
+                 ->filter(
+                    $this->side()
+                         ->outIs('RETURNTYPE')
+                         ->atomIsNot('Void')
+                 )
                  ->count();
             $return["{$name}WithReturnTypehint"] = $this->rawQuery()->toInt();
         }
