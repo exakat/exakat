@@ -1197,7 +1197,8 @@ class Load extends Tasks {
 
         $rank = 0;
         $fullcode = array();
-        while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CATCH) {
+        do {
+            $this->checkPhpdoc();
             $catchId = $this->id + 1;
             ++$this->id; // Skip catch
             ++$this->id; // Skip (
@@ -1245,8 +1246,9 @@ class Load extends Tasks {
 
             $extras['CATCH' . $rank] = $catch;
             $this->runPlugins($catch, $extrasCatch);
-        }
+        } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CATCH);
 
+        $this->checkPhpdoc();
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_FINALLY) {
             $finallyId = $this->id + 1;
             $finally = $this->addAtom('Finally', $finallyId);
@@ -3481,6 +3483,7 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock(array $finals = array()): Atom {
+        $this->checkPhpdoc();
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             ++$this->id;
             $block = $this->processBlock(self::RELATED_BLOCK);
@@ -3889,10 +3892,14 @@ class Load extends Tasks {
         $isInitialIf = $this->tokens[$current][0] === $this->phptokens::T_IF;
         $isColon = $this->whichSyntax($current, $this->id + 1);
 
-        $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF, $this->phptokens::T_ELSE, $this->phptokens::T_ELSEIF));
+        $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF, 
+                                                   $this->phptokens::T_ELSE, 
+                                                   $this->phptokens::T_ELSEIF,
+                                                   ));
         $this->addLink($ifthen, $then, 'THEN');
         $extras['THEN'] = $then;
 
+        $this->checkPhpdoc();
         // Managing else case
         if (in_array($this->tokens[$this->id][0], array($this->phptokens::T_END,
                                                         $this->phptokens::T_CLOSE_TAG),
@@ -3955,6 +3962,13 @@ class Load extends Tasks {
         return $ifthen;
     }
 
+    private function checkPhpdoc(): void {
+        while($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT){
+            $this->processPhpdoc();
+            ++$this->id;
+        }
+    }
+    
     private function processParenthesis(): Atom {
         $current = $this->id;
         $parenthese = $this->addAtom('Parenthesis', $current);
@@ -4407,6 +4421,7 @@ class Load extends Tasks {
         do {
             $prefix = '';
             ++$this->id;
+            $this->checkPhpdoc();
             $namespace = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
             // Default case : use A\B
             $alias = $namespace;
