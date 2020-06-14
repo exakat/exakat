@@ -80,6 +80,7 @@ abstract class DSL {
                              'static',
                              'noscream',
                              'trailing',
+                             'isPhp',
                              );
 
     protected const BOOLEAN_PROPERTY = array('abstract',
@@ -98,6 +99,7 @@ abstract class DSL {
                                              'static',
                                              'trailing',
                                              'variadic',
+                                             'isPhp',
                                              );
 
     protected const INTEGER_PROPERTY = array('line',
@@ -281,17 +283,17 @@ abstract class DSL {
     }
 
     protected function isProperty($property): bool {
-        return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir', 'virtual', 'analyzer', 'propagated'));
+        return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir', 'virtual', 'analyzer', 'propagated', 'isPhp'));
     }
 
     protected function assertProperty($property): bool {
         if (is_string($property)) {
-            assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified')) , 'Wrong format for property name : "' . $property . '"');
+            assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified', 'isPhp')) , 'Wrong format for property name : "' . $property . '"');
             assert($this->isProperty($property), 'No such property in Atom : "' . $property . '"');
         } elseif (is_array($property)) {
             $properties = $property;
             foreach($properties as $property) {
-                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter'), "Wrong format for property name : '$property'");
+                assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified', 'isPhp')), "Wrong format for property name : '$property'");
                 assert($this->isProperty($property), "No such property in Atom : '$property'");
             }
         } else {

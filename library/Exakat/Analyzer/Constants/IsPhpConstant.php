@@ -27,12 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class IsPhpConstant extends Analyzer {
     public function analyze() {
-        $constants = $this->loadIni('php_constants.ini', 'constants');
-        $constantsFNP = makeFullNsPath($constants, \FNP_CONSTANT);
-
         // Namespaced constant (\PATHINFO_BASENAME)
         $this->atomIs(self::STATIC_NAMES)
-             ->fullnspathIs($constantsFNP, self::CASE_SENSITIVE);
+             ->is('isPhp', true);
         $this->prepareQuery();
 
         // inside Use
@@ -40,15 +37,7 @@ class IsPhpConstant extends Analyzer {
              ->hasOut('CONST')
              ->outIs('USE')
              ->analyzerIsNot('self')
-             ->fullnspathIs($constantsFNP);
-        $this->prepareQuery();
-
-        $this->atomIs(self::STATIC_NAMES)
-             ->analyzerIsNot('self')
-             ->inIs('DEFINITION')
-             ->hasNoIn('USE')
-             ->analyzerIs('self')
-             ->back('first');
+             ->is('isPhp', true);
         $this->prepareQuery();
     }
 }

@@ -37,7 +37,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         $constantsPHP = makeFullNsPath($constantsPHP, \FNP_CONSTANT);
 
         $query = $this->newQuery('SpotPHPNativeConstants');
-        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(Analyzer::STATIC_NAMES, Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->values('fullnspath')
               ->unique();
@@ -75,19 +75,43 @@ class SpotPHPNativeConstants extends LoadFinal {
         $search = array_merge(...$search);
 
         $query = $this->newQuery('SpotPHPNativeConstants');
-        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(Analyzer::STATIC_NAMES, Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
               ->fullnspathIs($search, Analyzer::CASE_SENSITIVE)
               ->raw(<<<'GREMLIN'
 sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\").last();  
                 it.get().property("fullnspath", "\\"  + fnp);
-                it.get().property("is_php", true);}
+                it.get().property("isPhp", true);}
 GREMLIN)
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         display($result->toInt() . ' SpotPHPNativeConstants');
+
+        $query = $this->newQuery('SpotPHPNativeConstants in Usenamespace');
+        $query->atomIs('Usenamespace', Analyzer::WITHOUT_CONSTANTS)
+              ->hasOut('CONST')
+              ->outIs('USE')
+              ->fullnspathIs($search, Analyzer::CASE_SENSITIVE)
+              ->raw(<<<'GREMLIN'
+sideEffect{ 
+    fnp = it.get().value("fullnspath").tokenize("\\").last();  
+    it.get().property("fullnspath", "\\"  + fnp);
+    it.get().property("isPhp", true);
+}
+GREMLIN)
+              // propagate to all usage of this constant
+              ->outIs('DEFINITION')
+              ->raw(<<<'GREMLIN'
+sideEffect{     
+    it.get().property("fullnspath", "\\"  + fnp);
+    it.get().property("isPhp", true);}
+GREMLIN)
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        display($result->toInt() . ' SpotPHPNativeConstants in Use');
     }
 
     public function setPHPconstants(array $PHPconstants = array()) {

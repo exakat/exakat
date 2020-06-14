@@ -55,4 +55,20 @@ GREMLIN
         return $command;
     }
 }
+
+/* debugging purposes
+.sideEffect{ name = it.get().value('fullcode'); }
+.where(
+    __.sideEffect{ levels = []; fullcodes = [];}
+      .repeat( __.out('BLOCK', 'EXPRESSION', 'THEN', 'ELSE', 'CASES')).emit().times(100)
+      .not(hasLabel('Sequence', 'Block', "Void"))
+      .sideEffect{ fullcodes.add(it.get().value('fullcode'));}
+      .path()
+      .sideEffect{ levels.add(Math.round((it.get().size() - 1 ) / 2 - 1)); }
+      .fold()
+)
+//.filter{ levels.sum() / levels.size() > 1}
+.map{['name':name, 'levels':levels, 'average':levels.sum() / levels.size(), 'max':levels.max(), 'fullcode':fullcodes ];}
+
+*/
 ?>

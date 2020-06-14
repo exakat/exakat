@@ -34,7 +34,7 @@ class IsGlobalConstant extends Analyzer {
     public function analyze() {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
-        $c = array($this->loadIni('php_constants.ini', 'constants'));
+        $c = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
             $ini = $this->load($inifile, 'constants');
@@ -60,6 +60,7 @@ class IsGlobalConstant extends Analyzer {
 
              // Exclude PHP constants
              ->fullnspathIsNot($constantsFullNs, self::CASE_SENSITIVE)
+             ->isNot('isPhp', true)
 
              // Check that the final fullnspath is actually \something (no multiple \)
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$');

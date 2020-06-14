@@ -32,10 +32,13 @@ class PhpConstantUsage extends Analyzer {
     }
 
     public function analyze() {
-        $ini = $this->loadIni('php_constants.ini', 'constants');
-
+        // echo PHP_OS
+        // print \PHP_SELF
         $this->analyzerIs('Constants/ConstantUsage')
-             ->codeIs($ini, self::TRANSLATE, self::CASE_SENSITIVE);
+             ->is('isPhp', true);
+        $this->prepareQuery();
+        
+        $this->atomIs(array('Boolean', 'Null'));
         $this->prepareQuery();
     }
 }
