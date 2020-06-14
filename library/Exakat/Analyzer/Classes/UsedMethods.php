@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedMethods extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassMethodRemoteDefinition',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
                      'Complete/SetClassRemoteDefinitionWithReturnTypehint',

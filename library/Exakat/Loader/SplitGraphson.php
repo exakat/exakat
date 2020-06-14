@@ -49,7 +49,7 @@ class SplitGraphson extends Loader {
 
     private $datastore = null;
     private $sqlite3   = null;
-    
+
     private $log = null;
 
     public function __construct(\Sqlite3 $sqlite3, Atom $id0) {
@@ -63,8 +63,8 @@ class SplitGraphson extends Loader {
 
         $this->dictCode  = new Collector();
         $this->datastore = exakat('datastore');
-        
-        $this->log = fopen($this->config->log_dir.'/loader.timing.csv', 'w+');
+
+        $this->log = fopen($this->config->log_dir . '/loader.timing.csv', 'w+');
 
         $this->cleanCsv();
 
@@ -80,7 +80,7 @@ class SplitGraphson extends Loader {
         $this->cleanCsv();
     }
 
-    public function finalize(array $relicat) : bool {
+    public function finalize(array $relicat): bool {
         if ($this->total !== 0) {
             $this->saveNodes();
         }
@@ -197,13 +197,13 @@ GREMLIN;
             $this->graphdb->query($query);
             $end = hrtime(true);
 
-            $this->log("links finalize\t".($end - $begin));
+            $this->log("links finalize\t" . ($end - $begin));
         }
 
         return fopen('php://memory', 'r+');
     }
 
-    private function cleanCsv() : void {
+    private function cleanCsv(): void {
         if (file_exists($this->path)) {
             unlink($this->path);
         }
@@ -217,13 +217,13 @@ GREMLIN;
         }
     }
 
-    private function saveTokenCounts() : void {
+    private function saveTokenCounts(): void {
         $datastore = exakat('datastore');
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
     }
 
-    public function saveFiles(string $exakatDir, array $atoms, array $links) : void {
+    public function saveFiles(string $exakatDir, array $atoms, array $links): void {
         $fileName = 'unknown';
 
         $json = array();
@@ -285,7 +285,7 @@ GREMLIN;
 
             ++$total;
         }
-        
+
         file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
         file_put_contents($this->pathLink, implode(PHP_EOL, $links) . PHP_EOL, \FILE_APPEND);
 
@@ -296,12 +296,12 @@ GREMLIN;
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
     }
 
-    private function saveNodes() : void {
+    private function saveNodes(): void {
         $begin = hrtime(true);
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
         $end = hrtime(true);
-        $this->log("path\t".($end - $begin));
+        $this->log("path\t" . ($end - $begin));
 
         if (file_exists($this->pathLink)) {
             $begin = hrtime(true);
@@ -318,13 +318,13 @@ GREMLIN;
 
             unlink($this->pathLink);
 
-            $this->log("links\t".($end - $begin));
+            $this->log("links\t" . ($end - $begin));
         }
 
         $this->total = 0;
     }
 
-    private function json_encode(Stdclass $object) : string {
+    private function json_encode(Stdclass $object): string {
         // in case the function name is full of non-encodable characters.
         if (isset($object->properties['fullnspath']) && !mb_check_encoding($object->properties['fullnspath'][0]->value, 'UTF-8')) {
             $object->properties['fullnspath'][0]->value = utf8_encode($object->properties['fullnspath'][0]->value);
@@ -346,9 +346,9 @@ GREMLIN;
         }
         return json_encode($object);
     }
-    
-    private function log(string $message) : void {
-        fwrite($this->log, $message.PHP_EOL);
+
+    private function log(string $message): void {
+        fwrite($this->log, $message . PHP_EOL);
     }
 }
 

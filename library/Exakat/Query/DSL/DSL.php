@@ -284,7 +284,7 @@ abstract class DSL {
         return property_exists(Atom::class, $property) || in_array($property, array('label', 'self', 'ignored_dir', 'virtual', 'analyzer', 'propagated'));
     }
 
-    protected function assertProperty($property) : bool {
+    protected function assertProperty($property): bool {
         if (is_string($property)) {
             assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified')) , 'Wrong format for property name : "' . $property . '"');
             assert($this->isProperty($property), 'No such property in Atom : "' . $property . '"');
@@ -323,7 +323,7 @@ abstract class DSL {
         return $code;
     }
 
-    protected function makeLinks($links, string $direction = 'in') : string {
+    protected function makeLinks($links, string $direction = 'in'): string {
         if (empty($links)) {
             return '.out( )';
         }

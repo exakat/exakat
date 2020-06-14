@@ -511,7 +511,7 @@ HTML;
         $res = $this->dump->fetchHashResults($hash);
         if ($res->isEmpty()) {
             $this->emptyResult($section);
-            
+
             print "Empty $name ($hash)\n";
 
             return;
@@ -522,7 +522,7 @@ HTML;
         foreach ($res->toArray() as $value) {
             $data[$value['key'] . $suffix] = $value['value'];
 
-            $html [(int)  $value['value'] ]= '<div class="clearfix">
+            $html [(int) $value['value'] ]= '<div class="clearfix">
                       <div class="block-cell-name">' . $value['key'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                   </div>';
@@ -1076,10 +1076,10 @@ HTML;
     private function generateNewIssues(Section $section): void {
         $baselines = new BaselineStash($this->config);
         $previous = $baselines->getBaseline();
-        
+
         if ($previous === BaselineStash::NO_BASELINE) {
             $this->emptyResult($section);
-            
+
             return;
         }
 
@@ -1191,8 +1191,8 @@ JAVASCRIPTCODE;
             $i = json_decode($issue);
 
             // Skip wrong lines, but why ?
-            if (!($i instanceof \stdClass)) { 
-                continue; 
+            if (!($i instanceof \stdClass)) {
+                continue;
             }
 
             if (isset($linediff[$i->file]) && $i->line > -1) {
@@ -1576,7 +1576,7 @@ JAVASCRIPTCODE;
 
             $results = $this->dump->fetchTable("compilation$shortVersion");
             // -1 is for no result found.
-            if ($results->getCount() <= 0) { 
+            if ($results->getCount() <= 0) {
                 $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
             } else {
                 $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
@@ -2971,7 +2971,7 @@ HTML
         $this->putBasedPage($section->source, $html);
     }
 
-    private function emptyResult(Section $section) : void {
+    private function emptyResult(Section $section): void {
         $finalHTML = $this->getBasedPage('empty');
 
         $finalHTML = $this->injectBloc($finalHTML, 'DESCRIPTION',  'No result were found for this analysis.');
@@ -3738,9 +3738,9 @@ HTML;
     protected function generateDereferencingLevelsBreakdown(Section $section): void {
         // List of indentation used
         $res = $this->dump->fetchHashResults('Dump/DereferencingLevels');
-        if ($res->isEmpty()) { 
+        if ($res->isEmpty()) {
             $this->emptyResult($section);
-            return ; 
+            return ;
         }
 
         $html = array();
@@ -3824,7 +3824,7 @@ HTML;
         $results->load();
 
         $expr = $results->getColumn('fullcode');
-        $expr = array_map(function (string $x) : string { return trim($x, '{}');}, $expr);
+        $expr = array_map(function (string $x): string { return trim($x, '{}');}, $expr);
         $counts = array_count_values($expr);
 
         $expressions = '';

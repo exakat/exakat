@@ -33,9 +33,9 @@ class MissingTypehint extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('NAME')
-                     ->codeIs(array('__get', 
+                     ->codeIs(array('__get',
                                     '__set',
-                                    ), 
+                                    ),
                               self::TRANSLATE, self::CASE_INSENSITIVE)
               )
              ->outIs('ARGUMENT')
@@ -52,9 +52,9 @@ class MissingTypehint extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('NAME')
-                     ->codeIs(array('__construct', 
-                                    '__destruct', 
-                                    '__get', 
+                     ->codeIs(array('__construct',
+                                    '__destruct',
+                                    '__get',
                                     '__set',
                                     ), self::TRANSLATE, self::CASE_INSENSITIVE)
               )

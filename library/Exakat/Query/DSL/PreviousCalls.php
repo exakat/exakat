@@ -39,9 +39,12 @@ class PreviousCalls extends DSL {
         if ($times === 0) {
             return new Command(Query::NO_QUERY);
         } else {
+            $TIME_LIMIT = self::$TIME_LIMIT;
+
             return new Command(<<<GREMLIN
 emit().repeat(
      __
+     .timeLimit($TIME_LIMIT)
      .sideEffect{ ranked = it.get().value('rank');}
      .in('ARGUMENT')
      .out('DEFINITION')

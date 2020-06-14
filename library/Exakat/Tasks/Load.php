@@ -433,7 +433,7 @@ class Load extends Tasks {
             $this->phptokens::T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
             $this->phptokens::T_STATIC                   => 'processStatic',
             $this->phptokens::T_GLOBAL                   => 'processGlobalVariable',
-            
+
             $this->phptokens::T_DOC_COMMENT              => 'processPhpdoc',
         );
 
@@ -459,7 +459,7 @@ class Load extends Tasks {
         }
     }
 
-    public function run() : void {
+    public function run(): void {
         $this->logTime('Start');
         // Clean tmp folder
         $files = glob("{$this->config->tmp_dir}/*.csv");
@@ -1639,7 +1639,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
                 // It is an attribute
                 $this->processNext();
-                continue; 
+                continue;
             }
             $cpm = $this->processNext();
 
@@ -2259,7 +2259,7 @@ class Load extends Tasks {
                 ) {
                     ++$this->id;
                     $index = $this->processPPP(self::PROMOTED);
-                    
+
                     ++$this->id;
 
                     $this->addLink(end($this->currentClassTrait), $index, 'PPP');
@@ -3151,7 +3151,7 @@ class Load extends Tasks {
                     $element = $this->processSingle($atom);
                 }
 
-                if ($element->isA(array('Globaldefinition', 'Staticdefinition', 'Variabledefinition')) && 
+                if ($element->isA(array('Globaldefinition', 'Staticdefinition', 'Variabledefinition')) &&
                     !isset($this->currentVariables[$element->code])) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
@@ -3167,12 +3167,12 @@ class Load extends Tasks {
                     ++$this->id;
                     do {
                         $default = $this->processNext();
-                    } while (!in_array($this->tokens[$this->id + 1][0], 
+                    } while (!in_array($this->tokens[$this->id + 1][0],
                                        array($this->phptokens::T_SEMICOLON,
                                              $this->phptokens::T_CLOSE_TAG,
                                              $this->phptokens::T_COMMA,
                                              $this->phptokens::T_CLOSE_PARENTHESIS,
-                                             ), 
+                                             ),
                                         \STRICT_COMPARISON));
 
                     $this->popExpression();
@@ -3182,7 +3182,7 @@ class Load extends Tasks {
                 $element = $this->processNext();
                 $this->popExpression();
             }
-            
+
             if ($reference === self::REFERENCE) {
                 $element->fullcode  = '&' . $index->fullcode;
                 $element->reference = self::REFERENCE;
@@ -3190,7 +3190,7 @@ class Load extends Tasks {
 
             $element->rank = ++$rank;
             $this->addLink($static, $element, $link);
-            
+
             if ($atom === 'Propertydefinition') {
                 // drop $
                 $element->propertyname = ltrim($element->code, '$');
@@ -3293,7 +3293,7 @@ class Load extends Tasks {
         return $bracket;
     }
 
-    private function processBlock(bool $standalone = self::STANDALONE_BLOCK) : Atom {
+    private function processBlock(bool $standalone = self::STANDALONE_BLOCK): Atom {
         $this->startSequence();
 
         // Case for {}
@@ -3892,8 +3892,8 @@ class Load extends Tasks {
         $isInitialIf = $this->tokens[$current][0] === $this->phptokens::T_IF;
         $isColon = $this->whichSyntax($current, $this->id + 1);
 
-        $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF, 
-                                                   $this->phptokens::T_ELSE, 
+        $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF,
+                                                   $this->phptokens::T_ELSE,
                                                    $this->phptokens::T_ELSEIF,
                                                    ));
         $this->addLink($ifthen, $then, 'THEN');
@@ -3968,7 +3968,7 @@ class Load extends Tasks {
             ++$this->id;
         }
     }
-    
+
     private function processParenthesis(): Atom {
         $current = $this->id;
         $parenthese = $this->addAtom('Parenthesis', $current);
@@ -5036,15 +5036,15 @@ class Load extends Tasks {
         foreach($this->attributes as $attribute) {
             $this->addLink($node, $attribute, 'ATTRIBUTE');
         }
-        
+
         $this->attributes = array();
     }
-    
+
     private function makePhpdoc(Atom $node): void {
         foreach($this->phpDocs as $phpdoc) {
             $this->addLink($node, $phpdoc, 'PHPDOC');
         }
-        
+
         $this->phpDocs = array();
     }
 
@@ -5802,13 +5802,13 @@ class Load extends Tasks {
             do {
                 $attribute = $this->processNext();
             } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SR), \STRICT_COMPARISON));
-            
+
             // skip >>
             ++$this->id;
             $this->popExpression();
-            
-            $attribute->fullcode = '<< '.$attribute->fullcode.' >>';
-            
+
+            $attribute->fullcode = '<< ' . $attribute->fullcode . ' >>';
+
             $this->attributes[] = $attribute;
         }
 

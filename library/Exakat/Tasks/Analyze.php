@@ -218,16 +218,16 @@ class Analyze extends Tasks {
                 display("$analyzer_class : Query running exception\n");
                 display($e->getMessage());
                 $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
-                $counts = $this->gremlin->query('g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer->getInBaseName().'").property("count", __.out("ANALYZED").count()).values("count")')->toInt();
+                $counts = $this->gremlin->query('g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer->getInBaseName() . '").property("count", __.out("ANALYZED").count()).values("count")')->toInt();
                 $this->datastore->addRow('analyzed', array($analyzer_class => $counts ) );
                 $this->checkAnalyzed();
 
             } catch(Exception $e) {
                 $end = microtime(true);
                 display( "$analyzer_class : generic exception \n");
-                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\texception : ".get_class($e)."\terror : " . $e->getMessage());
+                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\texception : " . get_class($e) . "\terror : " . $e->getMessage());
                 if (strpos($e->getMessage(), 'The server exceeded one of the timeout settings ') !== false) {
-                    $counts = $this->gremlin->query('g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer->getInBaseName().'").property("count", __.out("ANALYZED").count()).values("count")')->toInt();
+                    $counts = $this->gremlin->query('g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer->getInBaseName() . '").property("count", __.out("ANALYZED").count()).values("count")')->toInt();
                     $this->datastore->addRow('analyzed', array($analyzer_class => $counts ) );
                 } else {
                     display($e->getMessage());

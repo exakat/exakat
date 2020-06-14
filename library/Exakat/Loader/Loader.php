@@ -28,9 +28,9 @@ use Exakat\Tasks\Helpers\Atom;
 abstract class Loader {
     abstract public function __construct(\Sqlite3 $sqlite3, Atom $id0) ;
 
-    public function finalize(array $relicat) : bool {}
+    public function finalize(array $relicat): bool {}
 
-    public function saveFiles(string $exakatDir, array $atoms, array $links) : void {}
+    public function saveFiles(string $exakatDir, array $atoms, array $links): void {}
 }
 
 ?>

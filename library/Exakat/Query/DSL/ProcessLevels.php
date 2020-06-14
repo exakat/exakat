@@ -35,7 +35,7 @@ class ProcessLevels extends DSL {
 
         $MAX_LOOPING = self::$MAX_LOOPING;
 
-        // round() is used for lone blocks in the code 
+        // round() is used for lone blocks in the code
         // it may be excessive
         $command = new Command(<<<GREMLIN
 where(

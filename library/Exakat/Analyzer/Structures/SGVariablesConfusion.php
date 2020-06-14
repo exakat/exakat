@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -36,7 +36,7 @@ class SGVariablesConfusion extends Analyzer {
                     );
     }
     */
-    
+
     public function analyze() {
         // function foo() { $a = 1; global $a; static $a; }
         $this->atomIs('Variabledefinition')

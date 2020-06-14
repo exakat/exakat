@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -34,11 +34,11 @@ class LongBlock extends Analyzer {
              ->outWithRank('EXPRESSION', 'first')
              ->savePropertyAs('line', 'begin')
              ->inIs('EXPRESSION')
-             
+
              ->outWithRank('EXPRESSION', 'last')
              ->savePropertyAs('line', 'finish')
-             
-             ->raw('filter{ finish - begin > '.$this->longBlock.' }')
+
+             ->raw('filter{ finish - begin > ' . $this->longBlock . ' }')
 
              ->back('first');
         $this->prepareQuery();

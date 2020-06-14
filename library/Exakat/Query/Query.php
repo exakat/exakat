@@ -205,7 +205,7 @@ class Query {
         return true;
     }
 
-    public function prepareRawQuery() : void {
+    public function prepareRawQuery(): void {
         if ($this->stopped === self::QUERY_STOPPED) {
             return;
         }
@@ -248,16 +248,16 @@ GREMLIN;
         die(__METHOD__);
     }
 
-    public function getQuery() : string {
+    public function getQuery(): string {
         assert($this->query !== null, 'Null Query found!');
         return $this->query;
     }
 
-    public function getArguments() : array {
+    public function getArguments(): array {
         return $this->arguments;
     }
 
-    public function printQuery() : void {
+    public function printQuery(): void {
         $this->prepareQuery();
 
         var_dump($this->query);
