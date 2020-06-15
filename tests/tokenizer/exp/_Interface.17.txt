@@ -1,0 +1,43 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : EXTENDS
+            7
+          Label : MAGICMETHOD
+            8
+            Label : ARGUMENT
+              9
+              Label : DEFAULT
+                12
+              Label : NAME
+                9
+              Label : TYPEHINT
+                10
+            Label : ARGUMENT
+              13
+              Label : DEFAULT
+                14
+              Label : NAME
+                13
+              Label : TYPEHINT
+                10
+            Label : ATTRIBUTE
+              7
+            Label : BLOCK
+              10
+            Label : NAME
+              8
+            Label : RETURNED
+              Void
+            Label : TYPEHINT
+              10
+          Label : NAME
+            6

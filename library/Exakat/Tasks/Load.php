@@ -1411,7 +1411,7 @@ class Load extends Tasks {
         // Process arguments
         $function       = $this->processParameters($atom);
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
-        $this->makePhpdoc($function, $current);
+        $this->makePhpdoc($function);
         $this->makeAttributes($function);
 
         if ($function->atom === 'Function') {
@@ -1557,7 +1557,7 @@ class Load extends Tasks {
         $current = $this->id;
         $trait = $this->addAtom('Trait', $current);
         $this->currentClassTrait[] = $trait;
-        $this->makePhpdoc($trait, $this->id);
+        $this->makePhpdoc($trait);
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
@@ -1586,7 +1586,7 @@ class Load extends Tasks {
         $current = $this->id;
         $interface = $this->addAtom('Interface', $current);
         $this->currentClassTrait[] = $interface;
-        $this->makePhpdoc($interface, $this->id);
+        $this->makePhpdoc($interface);
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
@@ -1597,6 +1597,8 @@ class Load extends Tasks {
         $this->getFullnspath($name, 'class', $interface);
 
         $this->calls->addDefinition('class', $interface->fullnspath, $interface);
+
+        $this->checkPhpdoc();
 
         // Process extends
         $rank = 0;
@@ -1615,6 +1617,8 @@ class Load extends Tasks {
                 $fullcode[] = $extends->fullcode;
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         }
+
+        $this->checkPhpdoc();
 
         // Process block
         $this->makeCitBody($interface);
@@ -1636,7 +1640,9 @@ class Load extends Tasks {
         $this->currentProperties      = array();
         $this->currentPropertiesCalls = array();
 
+        $this->checkPhpdoc();
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
+            $this->checkPhpdoc();
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
                 // It is an attribute
                 $this->processNext();
@@ -1646,12 +1652,21 @@ class Load extends Tasks {
 
             $this->popExpression();
 
-            $cpm->rank = ++$rank;
-            if ($cpm->atom === 'Usetrait') {
-                $link = 'USE';
-            } else {
-                $link = strtoupper($cpm->atom);
+            switch ($cpm->atom) {
+                case 'Usetrait':
+                    $link = 'USE';
+                    break; 
+
+                case 'Phpdoc':
+                    // Skip everything for phpdocs
+                    continue 2;
+                    break; 
+
+                default:
+                    $link = strtoupper($cpm->atom);
+                    break;
             }
+            $cpm->rank = ++$rank;
 
             if ($class->atom === 'Interface' && in_array($cpm->atom, array('Method', 'Magicethod'))) {
                 $cpm->abstract = 1;
@@ -1698,8 +1713,6 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
             $class = $this->addAtom('Class', $current);
-            $this->makePhpdoc($class, $this->id);
-            $this->makeAttributes($class);
 
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
 
@@ -1720,9 +1733,9 @@ class Load extends Tasks {
             $class->fullnspath = $this->makeAnonymous();
             $class->aliased    = self::NOT_ALIASED;
             $this->calls->addDefinition('class', $class->fullnspath, $class);
-
-            $this->makeAttributes($class);
         }
+        $this->makePhpdoc($class);
+        $this->makeAttributes($class);
 
         $this->currentClassTrait[] = $class;
 
@@ -1748,6 +1761,7 @@ class Load extends Tasks {
         } else {
             $extends = '';
         }
+        $this->checkPhpdoc();
 
         // Process implements
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_IMPLEMENTS) {
@@ -1763,6 +1777,7 @@ class Load extends Tasks {
                 $this->calls->addCall('class', $implements->fullnspath, $implements);
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         }
+        $this->checkPhpdoc();
 
         // Process block
         $this->makeCitBody($class);
@@ -2524,7 +2539,7 @@ class Load extends Tasks {
     private function processConst(): Atom {
         $current = $this->id;
         $const = $this->addAtom('Const', $current);
-        $this->makePhpdoc($const, $this->id);
+        $this->makePhpdoc($const);
         $this->makeAttributes($const);
 
         $rank = -1;
@@ -2589,7 +2604,7 @@ class Load extends Tasks {
 
         $next->abstract = 1;
         $next->fullcode = "$abstract $next->fullcode";
-        $this->makePhpdoc($next, $current);
+        $this->makePhpdoc($next);
 
         return $next;
     }
@@ -2602,7 +2617,7 @@ class Load extends Tasks {
 
         $next->final    = 1;
         $next->fullcode = "$final $next->fullcode";
-        $this->makePhpdoc($next, $current);
+        $this->makePhpdoc($next);
 
         return $next;
     }
@@ -2617,7 +2632,7 @@ class Load extends Tasks {
 
         $ppp->visibility = 'none';
         $ppp->fullcode   = "$visibility {$returnTypes}$ppp->fullcode";
-        $this->makePhpdoc($ppp, $current);
+        $this->makePhpdoc($ppp);
 
         return $ppp;
     }
@@ -2644,7 +2659,7 @@ class Load extends Tasks {
 
         $ppp->visibility = strtolower($visibility);
         $ppp->fullcode   = "$visibility {$returnTypes}$ppp->fullcode";
-        $this->makePhpdoc($ppp, $current);
+        $this->makePhpdoc($ppp);
         $this->makeAttributes($ppp);
 
         return $ppp;
@@ -2655,7 +2670,7 @@ class Load extends Tasks {
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
         $namecall->aliased    = self::NOT_ALIASED;
-        $this->makePhpdoc($namecall, $current);
+        $this->makePhpdoc($namecall);
 
         // Empty call
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
@@ -3038,7 +3053,7 @@ class Load extends Tasks {
             $ppp->static = 1;
             $ppp->visibility = 'none';
             $ppp->fullcode   = "$option {$returnTypes}$ppp->fullcode";
-            $this->makePhpdoc($ppp, $current);
+            $this->makePhpdoc($ppp);
 
             return $ppp;
         }
@@ -3096,7 +3111,7 @@ class Load extends Tasks {
 
         $next->static   = 1;
         $next->fullcode = "$static $next->fullcode";
-        $this->makePhpdoc($next, $current);
+        $this->makePhpdoc($next);
         return $next;
     }
 
@@ -3104,6 +3119,7 @@ class Load extends Tasks {
         $current = $this->id;
         $rank = 0;
 
+        $this->makePhpdoc($static);
         if (in_array($static->atom, array('Global', 'Static'), \STRICT_COMPARISON)) {
             $fullcodePrefix = $this->tokens[$this->id][1];
             $link = strtoupper($static->atom);
@@ -4276,7 +4292,7 @@ class Load extends Tasks {
         }
 
         $namespace = $this->addAtom('Namespace', $current);
-        $this->makePhpdoc($namespace, $current);
+        $this->makePhpdoc($namespace);
         $this->addLink($namespace, $name, 'NAME');
         $this->setNamespace($name);
 
@@ -5043,7 +5059,7 @@ class Load extends Tasks {
 
     private function makePhpdoc(Atom $node): void {
         foreach($this->phpDocs as $phpdoc) {
-            $this->addLink($node, $phpdoc, 'PHPDOC');
+            $this->addLink($node, $phpdoc, 'ATTRIBUTE');
         }
 
         $this->phpDocs = array();

@@ -1,0 +1,95 @@
+test
+Label : GLOBAL
+  27
+  Label : DEFINITION, DEFINITION
+    27
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : EXTENDS
+            7
+          Label : IMPLEMENTS
+            8
+          Label : MAGICMETHOD
+            19
+            Label : ARGUMENT
+              20
+              Label : DEFAULT
+                21
+              Label : NAME
+                20
+              Label : TYPEHINT
+                10
+            Label : ARGUMENT
+              22
+              Label : DEFAULT
+                23
+              Label : NAME
+                22
+              Label : TYPEHINT
+                10
+            Label : BLOCK
+              24
+              Label : EXPRESSION
+                26
+                Label : ATTRIBUTE
+                  25
+                Label : GLOBAL
+                  27
+                Label : GLOBAL
+                  22
+              Label : EXPRESSION
+                26
+                Label : ATTRIBUTE
+                  29
+                Label : STATIC
+                  27
+                Label : STATIC
+                  22
+                Label : TYPEHINT
+                  10
+            Label : DEFINITION
+              27
+            Label : NAME
+              19
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              10
+          Label : NAME
+            6
+          Label : PPP
+            9
+            Label : ATTRIBUTE
+              7
+            Label : PPP
+              12
+            Label : TYPEHINT
+              10
+          Label : PPP
+            9
+            Label : ATTRIBUTE
+              3
+            Label : PPP
+              13
+            Label : TYPEHINT
+              10
+          Label : PPP
+            9
+            Label : PPP
+              15
+            Label : TYPEHINT
+              10
+          Label : PPP
+            9
+            Label : PPP
+              17
+            Label : TYPEHINT
+              10

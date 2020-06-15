@@ -1,0 +1,77 @@
+test
+Label : GLOBAL
+  22
+  Label : DEFINITION, DEFINITION
+    22
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : MAGICMETHOD
+            14
+            Label : ARGUMENT
+              15
+              Label : DEFAULT
+                16
+              Label : NAME
+                15
+              Label : TYPEHINT
+                8
+            Label : ARGUMENT
+              17
+              Label : DEFAULT
+                18
+              Label : NAME
+                17
+              Label : TYPEHINT
+                8
+            Label : BLOCK
+              19
+              Label : EXPRESSION
+                21
+                Label : ATTRIBUTE
+                  20
+                Label : GLOBAL
+                  22
+                Label : GLOBAL
+                  17
+              Label : EXPRESSION
+                21
+                Label : ATTRIBUTE
+                  24
+                Label : STATIC
+                  22
+                Label : STATIC
+                  17
+                Label : TYPEHINT
+                  8
+            Label : DEFINITION
+              22
+            Label : NAME
+              14
+            Label : RETURNED
+              Void
+            Label : RETURNTYPE
+              8
+          Label : NAME
+            6
+          Label : PPP
+            7
+            Label : PPP
+              10
+            Label : TYPEHINT
+              8
+          Label : PPP
+            7
+            Label : ATTRIBUTE
+              3
+            Label : PPP
+              12
+            Label : TYPEHINT
+              8
