@@ -1,0 +1,77 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : METHOD
+            7
+            Label : ARGUMENT
+              8
+              Label : DEFAULT
+                9
+              Label : NAME
+                8
+              Label : TYPEHINT
+                9
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                12
+                Label : BLOCK
+                  11
+                  Label : EXPRESSION
+                    9
+                Label : CATCH
+                  14
+                  Label : BLOCK
+                    11
+                    Label : EXPRESSION
+                      18
+                      Label : ARGUMENT
+                        19
+                  Label : CLASS
+                    15
+                  Label : VARIABLE
+                    17
+                Label : CATCH
+                  14
+                  Label : BLOCK
+                    11
+                    Label : EXPRESSION
+                      18
+                      Label : ARGUMENT
+                        23
+                  Label : CLASS
+                    21
+                  Label : VARIABLE
+                    17
+              Label : EXPRESSION
+                25
+                Label : RETURN
+                  26
+            Label : DEFINITION
+              17
+              Label : DEFINITION
+                17
+              Label : DEFINITION
+                17
+            Label : DEFINITION
+              26
+              Label : DEFINITION
+                26
+            Label : NAME
+              7
+            Label : PHPDOC
+              13
+            Label : RETURNED
+              26
+            Label : RETURNTYPE
+              9
+          Label : NAME
+            6

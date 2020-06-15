@@ -1197,8 +1197,8 @@ class Load extends Tasks {
 
         $rank = 0;
         $fullcode = array();
+        $this->checkPhpdoc();
         do {
-            $this->checkPhpdoc();
             $catchId = $this->id + 1;
             ++$this->id; // Skip catch
             ++$this->id; // Skip (
@@ -1246,6 +1246,7 @@ class Load extends Tasks {
 
             $extras['CATCH' . $rank] = $catch;
             $this->runPlugins($catch, $extrasCatch);
+            $this->checkPhpdoc();
         } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CATCH);
 
         $this->checkPhpdoc();
