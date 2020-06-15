@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Trait extends Tokenizer {
-    /* 16 methods */
+    /* 17 methods */
 
     public function test_Trait01()  { $this->generic_test('_Trait.01'); }
     public function test_Trait02()  { $this->generic_test('_Trait.02'); }
@@ -25,5 +25,6 @@ class _Trait extends Tokenizer {
     public function test_Trait14()  { $this->generic_test('_Trait.14'); }
     public function test_Trait15()  { $this->generic_test('_Trait.15'); }
     public function test_Trait16()  { $this->generic_test('_Trait.16'); }
+    public function test_Trait17()  { $this->generic_test('_Trait.17'); }
 }
 ?>
