@@ -509,6 +509,10 @@ annexes:
             title: Audit Configuration
             file: annex_config
             method: generateAuditConfig
+        annex_ruleset:
+            title: Minimal Ruleset Configuration
+            file: annex_ruleset
+            method: generateTailoredRuleset
         processed_files:
             title: Processed files
             source: proc_files

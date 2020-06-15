@@ -565,6 +565,24 @@ HTML;
         $this->generateCounts($section, 'CIT class constant counts', ' const.', 'Class Constant');
     }
 
+    protected function generateTailoredRuleset(Section $section): void {
+        $finalHTML = $this->getBasedPage($section->source);
+
+        $list = $this->rulesets->getRulesetsAnalyzers($this->themesToShow);
+        $res = $this->dump->fetchAnalysersCounts($list);
+        $rulesets = array('[ruleset_name]');
+        foreach($res->toArray() as $r) {
+            $rulesets[] = "analyzer[] = \"$r[analyzer]\";";
+        }
+        
+        $rulesets = implode(PHP_EOL, $rulesets);
+
+        $finalHTML = $this->injectBloc($finalHTML, 'RULESET',  $rulesets);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+
+        $this->putBasedPage($section->file, $finalHTML);
+    }
+
     protected function generateExtensionsBreakdown(Section $section): void {
         // List of extensions used
         $extensionList = $this->dump->getExtensionList();
