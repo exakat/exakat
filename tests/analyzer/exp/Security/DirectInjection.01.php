@@ -11,9 +11,11 @@ $expected     = array('foreach($_FILES["pictures"]["error"] as $key => $error) {
                       '"{$_ENV[\'incoming1\']}"',
                       '"{$_ENV[\'incoming0\']}"',
                       '"{$_ENV[\'incoming2\']}"',
+                      'include $_GET[\'x\']',
                      );
 
-$expected_not = array('strtolower($_GET[\'variable\']);',
+$expected_not = array('strtolower($_GET[\'variable\'])',
+                      'print array_sum($_POST)',
                      );
 
 ?>

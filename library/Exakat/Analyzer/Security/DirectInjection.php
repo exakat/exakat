@@ -29,89 +29,58 @@ class DirectInjection extends Analyzer {
     public function dependsOn(): array {
         return array('Security/SensitiveArgument',
                      'Modules/IncomingData',
+                     'Php/SafePhpvars',
                     );
     }
 
     public function analyze() {
         $vars = $this->loadIni('php_incoming.ini')->incoming;
 
-        $server = $this->dictCode->translate(array('$_SERVER'));
-        if (empty($server)) {
-            $server = -1; // This will always fail
-        } else {
-            $server = $server[0];
-        }
-
-        $safe = array('DOCUMENT_ROOT',
-                      'REQUEST_TIME',
-                      'REQUEST_TIME_FLOAT',
-                      'SCRIPT_NAME',
-                      'SERVER_ADMIN',
-                      '_',
-                      );
-        $safeList = makeList($safe);
-        $safeIndex = <<<GREMLIN
-or( 
-    __.hasLabel("Phpvariable"), 
-    __.out("VARIABLE").not(has("code", $server)), 
-    __.out("INDEX").hasLabel("String")
-      .not(where(__.out("CONCAT") ) )
-      .not(has("noDelimiter", within([ $safeList ])))
-)
-GREMLIN;
-
         // Relayed call to another function
-        $this->atomIs(self::FUNCTIONS_CALLS)
-             ->outIsIE('METHOD')
-             ->outIs('ARGUMENT')
+        // foo($_GET)
+        $this->atomIs('Phpvariable')
+             ->inIsIE('VARIABLE')
+             ->analyzerIsNot('Php/SafePhpvars')
              ->savePropertyAs('rank', 'ranked')
-             ->raw($safeIndex)
-             ->outIsIE('VARIABLE')
-             ->atomIs(self::VARIABLES_ALL)
-             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
-             ->back('first')
+             ->inIs('ARGUMENT')
+             ->atomIs(self::FUNCTIONS_CALLS)
+             ->as('result')
 
              ->inIs('DEFINITION')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked')
+             ->outWithRank('ARGUMENT', 'ranked')
 
              ->outIs('NAME')
              ->outIs('DEFINITION')
 
              ->analyzerIs('Security/SensitiveArgument')
-             ->back('first');
+             ->back('result');
         $this->prepareQuery();
 
         // $_GET/_POST ... directly as argument of PHP functions
         $this->atomIs('Phpvariable')
-             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
-             ->inIs('VARIABLE')
-             ->raw($safeIndex)
-             ->goToArray()
+             ->inIsIE('VARIABLE')
+             ->analyzerIsNot('Php/SafePhpvars')
              ->analyzerIs('Security/SensitiveArgument')
-             ->inIsIE('CODE')
-             ->inIs('ARGUMENT');
+             ->goToInstruction(array_merge(self::FUNCTIONS_CALLS, array('Include', 'Print', 'Echo', 'Exit')));
         $this->prepareQuery();
-
+/*
         // Other source of tainted data
         $this->analyzerIs('Modules/IncomingData')
              ->analyzerIs('Security/SensitiveArgument')
              ->inIsIE('CODE')
              ->inIs('ARGUMENT');
-        $this->prepareQuery();
+        $this->prepareQuery();*/
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Phpvariable')
-             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
-             ->inIs('VARIABLE')
-             ->raw($safeIndex)
-             ->goToArray()
-             ->inIsIE('CODE')
-             ->inIs('CONCAT');
+             ->inIsIE('VARIABLE')
+             ->analyzerIsNot('Php/SafePhpvars')
+             ->goToInstruction(array('String', 'Concatenation'));
         $this->prepareQuery();
 
+/*
         // Other source of tainted data
         $this->analyzerIs('Modules/IncomingData')
              ->inIs('VARIABLE')
@@ -120,19 +89,20 @@ GREMLIN;
              ->inIsIE('CODE')
              ->inIs('CONCAT');
         $this->prepareQuery();
-
+*/
         // foreach (looping on incoming variables)
-        $this->atomIs(self::VARIABLES_ALL)
-             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
+        $this->atomIs('Phpvariable')
+             ->inIsIE('VARIABLE')
+             ->analyzerIsNot('Php/SafePhpvars')
              ->goToArray()
              ->inIs('SOURCE');
         $this->prepareQuery();
-
+/*
         $this->analyzerIs('Modules/IncomingData')
              ->goToArray()
              ->inIs('SOURCE');
         $this->prepareQuery();
-
+*/
     }
 }
 

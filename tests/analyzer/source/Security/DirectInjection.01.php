@@ -2,6 +2,7 @@
 
 echo $_GET['incoming'];
 print array_sum($_POST);
+include $_GET['x'];
 
 custom_function($_SERVER);
 custom_function2($_ENV['2']);
