@@ -1694,6 +1694,7 @@ class Load extends Tasks {
             $virtual->propertyname = $missing;
             $virtual->line         = -1;
             $this->addLink($ppp, $virtual, 'PPP');
+            $this->addLink($virtual, $this->addAtomVoid(), 'DEFAULT');
 
             foreach($this->currentPropertiesCalls[$missing] as $member) {
                 $this->addLink($virtual, $member, 'DEFINITION');

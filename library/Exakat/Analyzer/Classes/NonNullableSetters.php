@@ -42,9 +42,7 @@ class NonNullableSetters extends Analyzer {
 
              ->back('first')
 
-             ->outIs('BLOCK')
-             ->atomInside('Return')
-             ->outIs(array('RETURN'))
+             ->outIs('RETURNED')
              ->atomIs('Member')
              ->outIs('OBJECT')
              ->atomIs('This')
@@ -72,15 +70,14 @@ class NonNullableSetters extends Analyzer {
 
              ->back('first')
 
-             ->outIs('BLOCK')
-             ->atomInside('Return')
-             ->outIs(array('RETURN'))
+             ->outIs('RETURNED')
              ->atomIs('Member')
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
              ->inIs('DEFINITION')
-             ->hasNoOut('DEFAULT')
+             ->outIs('DEFAULT')
+             ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
 
