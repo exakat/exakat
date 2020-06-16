@@ -34,41 +34,41 @@ class Regex extends AnalyzerResults {
     }
 
     private $pregFunctions = array('\\preg_match_all',
-                               '\\preg_match',
-                               '\\preg_replace',
-                               '\\preg_replace_callback',
-                               '\\preg_relace_callback_array',
-                               '\\mb_ereg_match',
-                               '\\mb_ereg_replace_callback',
-                               '\\mb_ereg_replace',
-                               '\\mb_ereg_search_getpos',
-                               '\\mb_ereg_search_getregs',
-                               '\\mb_ereg_search_init',
-                               '\\mb_ereg_search_pos',
-                               '\\mb_ereg_search_regs',
-                               '\\mb_ereg_search_setpos',
-                               '\\mb_ereg_search',
-                               '\\mb_ereg',
-                               '\\mb_eregi_replace',
-                               '\\mb_eregi',
-                               );
+                                   '\\preg_match',
+                                   '\\preg_replace',
+                                   '\\preg_replace_callback',
+//                                   '\\preg_replace_callback_array',
+                                   '\\mb_ereg_match',
+                                   '\\mb_ereg_replace_callback',
+                                   '\\mb_ereg_replace',
+                                   '\\mb_ereg_search_getpos',
+                                   '\\mb_ereg_search_getregs',
+                                   '\\mb_ereg_search_init',
+                                   '\\mb_ereg_search_pos',
+                                   '\\mb_ereg_search_regs',
+                                   '\\mb_ereg_search_setpos',
+                                   '\\mb_ereg_search',
+                                   '\\mb_ereg',
+                                   '\\mb_eregi_replace',
+                                   '\\mb_eregi',
+                                   );
 
     public function analyze() {
 
         // preg_match('/a/', ...)
         $this->atomFunctionIs($this->pregFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->toResults();
         $this->prepareQuery();
 
         // preg_match(array(regex1, regex2))
-        $this->atomFunctionIs($this->pregFunctions    )
+        $this->atomFunctionIs($this->pregFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
              ->outIs('ARGUMENT')
              ->outIsIE('VALUE')
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->toResults();
         $this->prepareQuery();
 
@@ -78,7 +78,7 @@ class Regex extends AnalyzerResults {
              ->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->outIs('INDEX')
-             ->atomIs(array('String', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->toResults();
         $this->prepareQuery();
     }

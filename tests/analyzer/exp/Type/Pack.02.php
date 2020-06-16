@@ -4,6 +4,7 @@ $expected     = array('"nnnvc*"',
                       '"cchars/nint"', 
                       '"ncv*"', 
                       '"cnv*"', 
+                      '"ccc*"',
                       '\'A\'', 
                       '\'B\'',
                      );

@@ -61,31 +61,33 @@ GREMLIN;
             // arrays, members, static members are not supported
             $TIME_LIMIT = self::$TIME_LIMIT;
             $gremlin = <<<GREMLIN
-emit().repeat(
-__.timeLimit($TIME_LIMIT).hasLabel("Identifier", "Nsname", "Staticconstant", "Variable" , "Ternary", "Coalesce", "Parenthesis", "Functioncall", "Methodcall", "Staticmethodcall")
-.union( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
-
-          // local variable
-          __.hasLabel(within(["Variable"])).in("DEFINITION").hasLabel('Variabledefinition', 'Staticdefinition').out("DEFAULT"),
-          
-          // literal value, passed as an argument (Method, closure, function)
-          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").out("DEFAULT"),
-
-          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").as("p1").timeLimit($TIME_LIMIT).in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
-
-          // literal value, passed as an argument
-          __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
-
-          __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
-
-          __.hasLabel(within(["Parenthesis"])).out("CODE"),
-
-          __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED'),
-          )
-).times(6)
+union( __.identity(), 
+       __.repeat(
+            __.timeLimit($TIME_LIMIT).hasLabel(within(["Identifier", "Nsname", "Staticconstant", "Variable" , "Ternary", "Coalesce", "Parenthesis", "Functioncall", "Methodcall", "Staticmethodcall"]))
+            .union( __.hasLabel(within(["Identifier", "Nsname", "Staticconstant"])).in("DEFINITION").out("VALUE"),
+            
+                      // local variable
+                      __.hasLabel(within(["Variable"])).in("DEFINITION").hasLabel('Variabledefinition', 'Staticdefinition').out("DEFAULT"),
+                      
+                      // literal value, passed as an argument (Method, closure, function)
+                      __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").out("DEFAULT"),
+            
+                      __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").as("p1").timeLimit($TIME_LIMIT).in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
+            
+                      // literal value, passed as an argument
+                      __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
+            
+                      __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
+            
+                      __.hasLabel(within(["Parenthesis"])).out("CODE"),
+            
+                      __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED')
+                      )
+            ).times(1).emit()
+)
 .hasLabel(within(***))
 GREMLIN;
-            return new Command($gremlin, array($diff));
+            return new Command($gremlin, array($atoms));
         } else {
             // WITHOUT_CONSTANTS or non-constant atoms
             return new Command('hasLabel(within(***))', array($diff));
