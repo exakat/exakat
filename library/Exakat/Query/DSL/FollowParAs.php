@@ -60,6 +60,7 @@ class FollowParAs extends DSL {
                 __.hasLabel("Coalesce").out("RIGHT", "LEFT")
       )
 ).until(__.not(hasLabel("Parenthesis", "Assignation", "Ternary", "Coalesce")))
+.not(hasLabel("Parenthesis", "Assignation", "Ternary", "Coalesce"))
 GREMLIN
 );
     }
