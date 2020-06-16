@@ -8,6 +8,8 @@ $expected_not = array('array &$a',
                       'array &$a2',
                       'Callable &$c2',
                       'Callable &$c',
+                      'function (&$b2 = null) { /**/ } ',
+                      'function (string &$b3 = null) { /**/ } ',
                      );
 
 ?>

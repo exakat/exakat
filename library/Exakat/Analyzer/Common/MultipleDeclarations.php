@@ -34,7 +34,7 @@ class MultipleDeclarations extends Analyzer {
 
         $this->atomIs($this->atom)
              ->raw(<<<'GREMLIN'
-groupCount("m").by("fullcode").cap("m").next().findAll{ a,b -> b > 1}
+groupCount("m").by("fullnspath").cap("m").next().findAll{ a,b -> b > 1}
 GREMLIN
 );
         $multiples = $this->rawQuery();
@@ -43,9 +43,9 @@ GREMLIN
             return;
         }
 
-        $fullcode = array_merge(...$multiples->toArray());
+        $fullcode = array_merge(...array_map('array_keys', $multiples->toArray()));
         $this->atomIs($this->atom)
-             ->fullcodeIs($fullcode);
+             ->fullnspathIs($fullcode);
         $this->prepareQuery();
     }
 }

@@ -34,7 +34,7 @@ class ObjectReferences extends Analyzer {
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
+             ->atomIsNot(array('Void', 'Null'))
              ->fullnspathIsNot($scalars)
              ->back('first');
         $this->prepareQuery();
