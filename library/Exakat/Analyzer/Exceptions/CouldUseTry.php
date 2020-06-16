@@ -114,9 +114,7 @@ class CouldUseTry extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        /* Not yet available : No DEFINITION link to the native PHP classes
-        $this->atomIs('Methodcall')
-             
+        $this->atomIs(array('Staticmethodcall', 'Methodcall'))
              ->outIs('CLASS')
              ->is('fullnspath', '\\phar')
              ->inIs('CLASS')
@@ -125,7 +123,6 @@ class CouldUseTry extends Analyzer {
              ->hasNoTryCatch()
              ->back('first');
         $this->prepareQuery();
-        */
     }
 }
 

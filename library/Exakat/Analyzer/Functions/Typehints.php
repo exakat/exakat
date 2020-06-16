@@ -31,7 +31,7 @@ class Typehints extends Analyzer {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void');
+             ->atomIsNot(array('Void', 'Null'));
         $this->prepareQuery();
     }
 }
