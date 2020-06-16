@@ -30,27 +30,63 @@ class WrongOptionalParameter extends Analyzer {
         // function foo($a, $b = 2, $c) {}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
+             ->as('x')
              ->outIs('DEFAULT')
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
-             ->inIs('DEFAULT')
 
+             ->back('x')
+            // with typehint, but nullable (so, optional)
+            // valid since PHP 8.0
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outIs('TYPEHINT')
-                             ->atomIsNot('Void')
-                             ->inIs('TYPEHINT')
-                             ->outIs('DEFAULT')
-                             ->atomIs('Null')
-                             ->hasNoIn('RIGHT')
-                     )
+                     ->outIs('TYPEHINT')
+                     ->atomIsNot(array('Void', 'Null'))
+                     ->inIs('TYPEHINT')
+                     ->outIs('DEFAULT')
+                     ->atomIs('Null')
+                     ->hasNoIn('RIGHT')
              )
 
-             ->nextSibling('ARGUMENT')
+             ->nextSibling('ARGUMENT')  
+             ->outIsIE('PPP')
              ->outIs('DEFAULT')
              ->atomIs('Void')
+             ->hasNoIn('RIGHT')
+
+             ->back('first');
+        $this->prepareQuery();
+
+        // function __construct($a, $b = 2, $c) {}
+        $this->atomIs('Magicmethod')
+             ->outIs('ARGUMENT')
+             ->atomIs('Ppp')
+             ->as('x')
+             ->outIs('PPP')
+             ->outIs('DEFAULT')
+             ->atomIsNot('Void')
+             ->hasNoIn('RIGHT')
+
+             ->back('x')
+            // with typehint, but nullable (so, optional)
+            // valid since PHP 8.0
+             ->not(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->atomIsNot(array('Void', 'Null'))
+                     ->inIs('TYPEHINT')
+                     ->outIs('PPP')
+                     ->outIs('DEFAULT')
+                     ->atomIs('Null')
+                     ->hasNoIn('RIGHT')
+             )
+
+             ->nextSibling('ARGUMENT')  
+             // case of promoted properties
+             ->outIsIE('PPP')
+             ->outIs('DEFAULT')
+             ->atomIs('Void')
+             ->hasNoIn('RIGHT')
 
              ->back('first');
         $this->prepareQuery();

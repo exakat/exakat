@@ -1776,6 +1776,8 @@ class Load extends Tasks {
                 $this->getFullnspath($implements, 'class', $implements);
                 $this->calls->addCall('class', $implements->fullnspath, $implements);
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
+        } else {
+            $implements = '';
         }
         $this->checkPhpdoc();
 
@@ -1785,7 +1787,7 @@ class Load extends Tasks {
         $class->fullcode   = $this->tokens[$current][1] . ($class->atom === 'Classanonymous' ? '' : ' ' . $name->fullcode)
                              . (isset($argumentsFullcode) ? ' (' . $argumentsFullcode . ')' : '')
                              . (empty($extends) ? '' : ' ' . $extendsKeyword . ' ' . $extends->fullcode)
-                             . (isset($implements) ? ' ' . $implementsKeyword . ' ' . implode(', ', $fullcodeImplements) : '')
+                             . (empty($implements) ? '' : ' ' . $implementsKeyword . ' ' . implode(', ', $fullcodeImplements))
                              . static::FULLCODE_BLOCK;
 
         $this->pushExpression($class);
@@ -3193,6 +3195,8 @@ class Load extends Tasks {
                                         \STRICT_COMPARISON));
 
                     $this->popExpression();
+                } else {
+                    $default = $this->addAtomVoid();
                 }
             } else {
                 // global $a[2] = 2 ?
@@ -3218,11 +3222,10 @@ class Load extends Tasks {
                 $this->calls->addDefinition('property', $currentFNP . '::' . ltrim($element->code, '$'), $element);
             }
 
-            if (isset($default)) {
-                $this->addLink($element, $default, 'DEFAULT');
+            $this->addLink($element, $default, 'DEFAULT');
+            if ($default->atom !== 'Void') {
                 $element->fullcode .= " = {$default->fullcode}";
                 $this->runPlugins($element, array('DEFAULT' => $default));
-                unset($default);
             } else {
                 $this->runPlugins($element);
             }

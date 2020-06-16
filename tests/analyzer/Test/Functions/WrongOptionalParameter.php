@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class WrongOptionalParameter extends Analyzer {
-    /* 8 methods */
+    /* 11 methods */
 
     public function testFunctions_WrongOptionalParameter01()  { $this->generic_test('Functions_WrongOptionalParameter.01'); }
     public function testFunctions_WrongOptionalParameter02()  { $this->generic_test('Functions_WrongOptionalParameter.02'); }
@@ -17,5 +17,8 @@ class WrongOptionalParameter extends Analyzer {
     public function testFunctions_WrongOptionalParameter06()  { $this->generic_test('Functions/WrongOptionalParameter.06'); }
     public function testFunctions_WrongOptionalParameter07()  { $this->generic_test('Functions/WrongOptionalParameter.07'); }
     public function testFunctions_WrongOptionalParameter08()  { $this->generic_test('Functions/WrongOptionalParameter.08'); }
+    public function testFunctions_WrongOptionalParameter09()  { $this->generic_test('Functions/WrongOptionalParameter.09'); }
+    public function testFunctions_WrongOptionalParameter10()  { $this->generic_test('Functions/WrongOptionalParameter.10'); }
+    public function testFunctions_WrongOptionalParameter11()  { $this->generic_test('Functions/WrongOptionalParameter.11'); }
 }
 ?>
