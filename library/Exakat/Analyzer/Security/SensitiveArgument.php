@@ -29,10 +29,10 @@ class SensitiveArgument extends Analyzer {
     public function analyze() {
         $unsafe = $this->loadIni('security_vulnerable_functions.ini');
 
-        $positions = array(0, 1, 2);
-
-        foreach($positions as $position) {
-            $functions = makeFullNsPath($unsafe->{"functions{$position}"});
+        foreach($unsafe as $position => $functions) {
+            $functions = makeFullNsPath($functions);
+            
+            $position = (int) str_replace("functions", '', $position);
 
             // $_GET/_POST ... directly as argument of PHP functions
             $this->atomFunctionIs($functions)
@@ -40,7 +40,7 @@ class SensitiveArgument extends Analyzer {
             $this->prepareQuery();
         }
 
-        $this->atomIs(array('Echo', 'Print', 'Exit', 'Eval'))
+        $this->atomIs(array('Echo', 'Print', 'Exit', 'Eval', 'Include'))
              ->followParAs('ARGUMENT');
         $this->prepareQuery();
 
