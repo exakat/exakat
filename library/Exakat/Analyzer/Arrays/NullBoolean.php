@@ -42,7 +42,8 @@ class NullBoolean extends Analyzer {
              ->outIs('VALUE')
              ->atomIs(array('Null', 'Boolean'))
              ->back('first')
-             ->inIs('VARIABLE');
+             ->inIs('VARIABLE')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $a = true; echo $a[1];
@@ -52,7 +53,8 @@ class NullBoolean extends Analyzer {
              ->back('first')
              ->outIs('DEFINITION')
              ->inIs('VARIABLE')
-             ->atomIs('Array');
+             ->atomIs('Array')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
 
