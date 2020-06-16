@@ -12,7 +12,7 @@
         return 1;
     }
 
-    function trim2(int $b = E::D)
+    function trim2(int $b = E::D)  // unknown values are not reported
     {
         return 1;
     }

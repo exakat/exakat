@@ -40,9 +40,6 @@ class MismatchTypeAndDefault extends Analyzer {
                         'Integer',
                         'Float',
                         'Boolean',
-                        'Nsname',
-                        'Identifier',
-                        'Staticconstant',
                         'Addition',
                         'Multiplication',
                         'Power',
@@ -50,6 +47,7 @@ class MismatchTypeAndDefault extends Analyzer {
                         'Concatenation',
                         'Staticclass',
                         'Comparison',
+                        'Bitshift',
                      );
 
         // function foo(string $s = 3)
@@ -67,7 +65,7 @@ class MismatchTypeAndDefault extends Analyzer {
              ->back('arg')
              ->isNotNullable()
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void', self::WITH_CONSTANTS)
+             ->atomIsNot('Void')
              ->raw(<<<'GREMLIN'
 filter{
     switch(it.get().value("fullnspath")) {
@@ -84,7 +82,7 @@ filter{
             break;
 
         case '\\bool' : 
-            !(type in ["Boolean", "Comparison", "Logical", "Not", "Null"]);
+            !(type in ["Boolean", "Comparison", "Logical", "Bitshift", "Not", "Null"]);
             break;
 
         case '\\array' : 
