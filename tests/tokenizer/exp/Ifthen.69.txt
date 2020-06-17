@@ -162,11 +162,11 @@ Label : PROJECT
                     Label : CONDITION
                       65
                       Label : ARGUMENT
-                        24
+                        26
                         Label : INDEX
                           70
                         Label : VARIABLE
-                          24
+                          67
                           Label : INDEX
                             68
                           Label : VARIABLE
@@ -208,11 +208,11 @@ Label : PROJECT
                       Label : NOT
                         46
                         Label : ARGUMENT
-                          24
+                          26
                           Label : INDEX
                             52
                           Label : VARIABLE
-                            24
+                            48
                             Label : INDEX
                               50
                             Label : VARIABLE
@@ -254,13 +254,13 @@ Label : PROJECT
                     Label : NOT
                       20
                       Label : ARGUMENT
-                        24
+                        26
                         Label : INDEX
                           27
                         Label : VARIABLE
-                          24
+                          22
                           Label : INDEX
-                            25
+                            24
                           Label : VARIABLE
                             22
                       Label : ARGUMENT

@@ -18,23 +18,23 @@ Label : GLOBAL
     Label : DEFINITION
       16
 Label : GLOBAL
-  19
+  18
   Label : DEFINITION
-    19
+    18
     Label : DEFINITION
-      19
+      18
 Label : GLOBAL
-  23
+  22
   Label : DEFINITION
-    23
+    22
     Label : DEFINITION
-      23
+      22
 Label : GLOBAL
-  25
+  24
   Label : DEFINITION
-    25
+    24
     Label : DEFINITION
-      25
+      24
 Label : PROJECT
   1
   Label : DEFINITION
@@ -50,17 +50,17 @@ Label : PROJECT
     Label : DEFINITION
       16
   Label : DEFINITION
-    19
+    18
     Label : DEFINITION
-      19
+      18
   Label : DEFINITION
-    23
+    22
     Label : DEFINITION
-      23
+      22
   Label : DEFINITION
-    25
+    24
     Label : DEFINITION
-      25
+      24
   Label : FILE
     3
     Label : EXPRESSION
@@ -88,27 +88,27 @@ Label : PROJECT
               Label : ELSE
                 3
                 Label : EXPRESSION
-                  21
+                  20
                   Label : LEFT
-                    18
+                    22
                     Label : INDEX
-                      25
+                      24
                     Label : VARIABLE
-                      23
+                      22
                   Label : RIGHT
-                    27
+                    26
               Label : THEN
                 3
                 Label : EXPRESSION
-                  21
+                  20
                   Label : LEFT
-                    18
+                    16
                     Label : INDEX
-                      19
+                      18
                     Label : VARIABLE
                       16
                   Label : RIGHT
-                    22
+                    21
           Label : THEN
             3
             Label : EXPRESSION

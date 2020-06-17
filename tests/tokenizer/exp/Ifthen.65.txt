@@ -3,16 +3,20 @@ Label : GLOBAL
   6
   Label : DEFINITION
     6
+    Label : DEFAULT
+      8
 Label : GLOBAL
-  8
+  10
   Label : DEFINITION
-    8
+    10
+    Label : DEFAULT
+      8
 Label : GLOBAL
-  13
+  15
   Label : DEFINITION
-    13
+    15
     Label : DEFINITION
-      13
+      15
 Label : GLOBAL
   24
   Label : DEFINITION
@@ -35,12 +39,16 @@ Label : PROJECT
   1
   Label : DEFINITION
     6
+    Label : DEFAULT
+      8
   Label : DEFINITION
-    8
+    10
+    Label : DEFAULT
+      8
   Label : DEFINITION
-    13
+    15
     Label : DEFINITION
-      13
+      15
   Label : DEFINITION
     24
     Label : DEFINITION
@@ -63,36 +71,40 @@ Label : PROJECT
           5
           Label : GLOBAL
             6
+            Label : DEFAULT
+              8
         Label : EXPRESSION
           5
           Label : GLOBAL
-            8
+            10
+            Label : DEFAULT
+              8
         Label : EXPRESSION
-          10
+          12
           Label : CONDITION
-            11
+            13
             Label : NOT
-              12
+              14
               Label : ARGUMENT
-                17
+                19
                 Label : INDEX
-                  18
+                  20
                 Label : VARIABLE
-                  13
+                  15
                   Label : INDEX
-                    15
+                    17
                   Label : VARIABLE
-                    13
+                    15
               Label : NAME
-                12
+                14
           Label : THEN
             3
             Label : EXPRESSION
-              20
+              22
               Label : RETURN
-                21
+                23
                 Label : ARGUMENT
-                  22
+                  8
         Label : EXPRESSION
           26
           Label : LEFT
@@ -100,7 +112,7 @@ Label : PROJECT
           Label : RIGHT
             27
             Label : ARGUMENT
-              17
+              19
               Label : INDEX
                 33
               Label : VARIABLE
@@ -116,10 +128,10 @@ Label : PROJECT
           Label : LEFT
             35
           Label : RIGHT
-            21
+            23
             Label : ARGUMENT
-              22
+              8
   Label : RETURNED
-    21
+    23
     Label : ARGUMENT
-      22
+      8

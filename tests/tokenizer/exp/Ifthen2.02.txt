@@ -1,12 +1,12 @@
 test
 Label : GLOBAL
-  19
+  18
   Label : DEFINITION
-    19
+    18
     Label : DEFINITION
-      19
+      18
     Label : DEFINITION
-      19
+      18
 Label : GLOBAL
   7
   Label : DEFINITION
@@ -18,13 +18,13 @@ Label : GLOBAL
     Label : DEFINITION
       7
 Label : GLOBAL
-  33
+  32
   Label : DEFINITION
-    33
+    32
     Label : DEFINITION
-      33
+      32
     Label : DEFINITION
-      33
+      32
 Label : PROJECT
   1
   Label : DEFINITION
@@ -36,17 +36,17 @@ Label : PROJECT
     Label : DEFINITION
       7
   Label : DEFINITION
-    19
+    18
     Label : DEFINITION
-      19
+      18
     Label : DEFINITION
-      19
+      18
   Label : DEFINITION
-    33
+    32
     Label : DEFINITION
-      33
+      32
     Label : DEFINITION
-      33
+      32
   Label : FILE
     3
     Label : EXPRESSION
@@ -56,68 +56,68 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            12
+            11
             Label : LEFT
               6
               Label : ARGUMENT
-                9
+                7
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
                   7
             Label : RIGHT
-              17
+              16
               Label : CLASS
-                13
+                12
               Label : METHOD
-                15
+                14
                 Label : ARGUMENT
-                  9
+                  7
                   Label : INDEX
-                    10
+                    9
                   Label : VARIABLE
                     7
                 Label : NAME
-                  15
+                  14
           Label : ELSE
-            18
+            17
             Label : EXPRESSION
-              21
+              20
               Label : LEFT
-                19
+                18
               Label : RIGHT
-                24
+                23
           Label : THEN
-            18
+            17
             Label : EXPRESSION
-              21
+              20
               Label : LEFT
-                19
+                18
               Label : RIGHT
-                22
+                21
         Label : EXPRESSION
-          32
+          31
           Label : CONDITION
-            26
+            25
             Label : CODE
-              29
+              28
               Label : LEFT
-                9
+                7
                 Label : INDEX
-                  27
+                  26
                 Label : VARIABLE
                   7
               Label : RIGHT
-                30
+                29
           Label : ELSE
-            21
+            20
             Label : LEFT
-              33
+              32
             Label : RIGHT
-              36
+              35
           Label : THEN
-            21
+            20
             Label : LEFT
-              33
+              32
             Label : RIGHT
-              34
+              33

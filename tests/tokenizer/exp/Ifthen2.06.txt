@@ -1,36 +1,38 @@
 test
 Label : GLOBAL
-  11
+  12
   Label : DEFINITION
-    11
+    12
     Label : DEFINITION
-      11
+      12
 Label : GLOBAL
   6
   Label : DEFINITION
     6
     Label : DEFINITION
       6
-Label : GLOBAL
-  17
-  Label : DEFINITION
-    17
     Label : DEFINITION
-      17
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
 Label : PROJECT
   1
   Label : DEFINITION
     6
     Label : DEFINITION
       6
-  Label : DEFINITION
-    11
     Label : DEFINITION
-      11
-  Label : DEFINITION
-    17
+      6
     Label : DEFINITION
-      17
+      6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -42,30 +44,24 @@ Label : PROJECT
           Label : CONDITION
             6
           Label : ELSE
-            16
+            11
             Label : CONDITION
-              17
-            Label : THEN
-              3
-              Label : EXPRESSION
-                19
+              12
+            Label : ELSE
+              8
               Label : EXPRESSION
                 9
-          Label : THEN
-            3
-            Label : EXPRESSION
+                Label : PREPLUSPLUS
+                  6
+            Label : THEN
               8
+              Label : EXPRESSION
+                9
+                Label : PREPLUSPLUS
+                  6
+          Label : THEN
+            8
             Label : EXPRESSION
               9
-            Label : EXPRESSION
-              14
-              Label : ARGUMENT
-                11
-                Label : INDEX
-                  13
-                Label : VARIABLE
-                  11
-            Label : EXPRESSION
-              15
-            Label : EXPRESSION
-              9
+              Label : PREPLUSPLUS
+                6

@@ -3903,7 +3903,7 @@ class Load extends Tasks {
         $current = $this->id;
         $ifthen = $this->addAtom('Ifthen', $current);
         ++$this->id; // Skip (
-
+        
         do {
             $condition = $this->processNext();
         } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS);
@@ -3919,6 +3919,7 @@ class Load extends Tasks {
         $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF,
                                                    $this->phptokens::T_ELSE,
                                                    $this->phptokens::T_ELSEIF,
+                                                   $this->phptokens::T_DOC_COMMENT,
                                                    ));
         $this->addLink($ifthen, $then, 'THEN');
         $extras['THEN'] = $then;
@@ -3989,6 +3990,7 @@ class Load extends Tasks {
     private function checkPhpdoc(): void {
         while($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT){
             $this->processPhpdoc();
+            ++$this->id;
         }
     }
 
@@ -5812,7 +5814,6 @@ class Load extends Tasks {
 
             $this->phpDocs[0] = $phpDoc;
         }
-        ++$this->id;
 
         return $phpDoc;
     }
