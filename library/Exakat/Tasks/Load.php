@@ -1642,7 +1642,6 @@ class Load extends Tasks {
 
         $this->checkPhpdoc();
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
-            $this->checkPhpdoc();
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
                 // It is an attribute
                 $this->processNext();
@@ -1676,6 +1675,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
                 ++$this->id;
             }
+            $this->checkPhpdoc();
         }
 
         $diff = array_diff(array_keys($this->currentPropertiesCalls), array_keys($this->currentProperties));
@@ -2556,13 +2556,15 @@ class Load extends Tasks {
         do {
             ++$this->id;
             $constId = $this->id;
+            $this->checkPhpdoc();
             $name = $this->processNextAsIdentifier();
 
             ++$this->id; // Skip =
             do {
                 $value = $this->processNext();
             } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
-                                                                    $this->phptokens::T_COMMA,
+                                                                      $this->phptokens::T_COMMA,
+                                                                      $this->phptokens::T_DOC_COMMENT,
                                                                     ),
                     \STRICT_COMPARISON));
             $this->popExpression();
@@ -2588,7 +2590,8 @@ class Load extends Tasks {
             } else {
                 $this->calls->addDefinition('const', $name->fullnspath, $def);
             }
-
+            $this->makePhpdoc($def);
+            $this->checkPhpdoc();
         } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON);
 
         $const->fullcode = $this->tokens[$current][1] . ' ' . implode(', ', $fullcode);
@@ -3986,7 +3989,6 @@ class Load extends Tasks {
     private function checkPhpdoc(): void {
         while($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT){
             $this->processPhpdoc();
-            ++$this->id;
         }
     }
 
@@ -5063,7 +5065,7 @@ class Load extends Tasks {
 
     private function makePhpdoc(Atom $node): void {
         foreach($this->phpDocs as $phpdoc) {
-            $this->addLink($node, $phpdoc, 'ATTRIBUTE');
+            $this->addLink($node, $phpdoc, 'PHPDOC');
         }
 
         $this->phpDocs = array();
@@ -5803,13 +5805,14 @@ class Load extends Tasks {
     private function processPhpdoc(): Atom {
         if (isset($this->phpDocs[0])) {
             $phpDoc = $this->phpDocs[0];
-            $phpDoc->fullcode = $this->tokens[$this->id][1];
+            $phpDoc->fullcode = $this->tokens[$this->id + 1][1];
         } else {
             $phpDoc = $this->addAtom('Phpdoc', $this->id);
-            $phpDoc->fullcode = $this->tokens[$this->id][1];
+            $phpDoc->fullcode = $this->tokens[$this->id + 1][1];
 
             $this->phpDocs[0] = $phpDoc;
         }
+        ++$this->id;
 
         return $phpDoc;
     }
