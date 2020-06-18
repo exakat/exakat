@@ -1,8 +1,14 @@
 <?php
-$a = function(&$b, $c) { $b++; };
+$z = function(&$b, $c) { $b++; };
 
 foreach ($val as &$a) {
-    $a($a, 0);
+    $z($a, 0);
+}
+
+$z2 = function($b, $c) { $b++; };
+
+foreach ($val as &$a2) {
+    $z2($a2, 0);
 }
 
 foreach ($val as &$b) {

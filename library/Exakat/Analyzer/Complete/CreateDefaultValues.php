@@ -50,7 +50,7 @@ class CreateDefaultValues extends Complete {
              ->followParAs('RIGHT')
              ->not(
                 $this->side()
-                     ->outIs('LEFT')
+                     ->outIs('RIGHT')
                      ->atomInsideNoDefinition(self::VARIABLES_ALL)
                      ->inIs('DEFINITION')
                      ->inIsIE('NAME')
