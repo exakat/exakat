@@ -45,7 +45,6 @@ class CreateDefaultValues extends Complete {
              ->codeIs(array('=', '??='), self::TRANSLATE, self::CASE_SENSITIVE) // can't accept .=, +=, etc.
 
              // doesn't use self : $a = $a + 1 is not a default value
-//             ->followParAs('RIGHT')
              ->not(
                 $this->side()
                      ->outIs('RIGHT')
@@ -54,7 +53,7 @@ class CreateDefaultValues extends Complete {
                      ->inIsIE('NAME')
                      ->raw('is(neq("first"))')
              )
-
+             ->followParAs('RIGHT')
              ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery();
     }
