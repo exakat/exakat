@@ -28,16 +28,10 @@ class HiddenNullable extends Analyzer {
     public function analyze() {
         // function foo(int $i = null)
         $this->atomIs('Parameter')
-             ->not(
-                $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outIs('TYPEHINT')
-                             ->atomIs('Null')
-                     )
-             )
+             ->regexIsNot('fullcode', '\\\\?')
+             ->regexIsNot('fullcode', '^\\\\S*(?i)null\\\\S*')
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
+             ->atomIsNot(array('Void', 'Null'))
              ->back('first')
              ->outIs('DEFAULT')
              ->hasNoIn('RIGHT')

@@ -73,7 +73,7 @@ class ImplodeArgsOrder extends Analyzer {
              ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
-
+return;
         // Local variable, argument 1
         $this->atomFunctionIs($functions)
              ->analyzerIsNot('self')

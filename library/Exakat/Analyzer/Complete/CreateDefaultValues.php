@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Complete;
 
 class CreateDefaultValues extends Complete {
     public function analyze() {
+
         // Link initial values for containers
         $this->atomIs(array('Variabledefinition',
                             'Staticdefinition',
@@ -35,11 +36,8 @@ class CreateDefaultValues extends Complete {
                             ), self::WITHOUT_CONSTANTS)
              ->not(
                 $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outIs('DEFAULT')
-                             ->hasIn('RIGHT')
-                     )
+                     ->outIs('DEFAULT')
+                     ->hasIn('RIGHT')
              )
              ->outIs('DEFINITION')
              ->inIs('LEFT')
@@ -47,7 +45,7 @@ class CreateDefaultValues extends Complete {
              ->codeIs(array('=', '??='), self::TRANSLATE, self::CASE_SENSITIVE) // can't accept .=, +=, etc.
 
              // doesn't use self : $a = $a + 1 is not a default value
-             ->followParAs('RIGHT')
+//             ->followParAs('RIGHT')
              ->not(
                 $this->side()
                      ->outIs('RIGHT')

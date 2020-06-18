@@ -6,6 +6,7 @@ class x {
     function unused() {}
 }
 
+$a = new x;
 $a->used();
 
 ?>

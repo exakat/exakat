@@ -6,7 +6,7 @@ $expected     = array('implode(AR, $theTable)',
 
 $expected_not = array('implode($theTable, AR)',
                       'implode(\', \', $return)',
-                      'implode(\', \', $returnStatic)'
+                      'implode(\', \', $returnStatic)',
                      );
 
 ?>

@@ -41,8 +41,6 @@ class GlobalUsage extends Analyzer {
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
-             ->inIs('VARIABLE')
-             ->outIs('INDEX')
              ->back('first');
         $this->prepareQuery();
     }
