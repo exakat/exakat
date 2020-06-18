@@ -61,10 +61,11 @@ GREMLIN;
         if (empty($types)) {
             return;
         }
+        $types = array_keys($types);
 
         $this->atomIs(array('Concatenation', 'String'))
              ->hasOut('CONCAT') // Obvious for concat, selective for String
-             ->raw('map{ ' . $mapping . ' }')
+             ->raw("sideEffect{ $mapping }")
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();
