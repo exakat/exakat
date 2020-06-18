@@ -3,6 +3,8 @@ Label : GLOBAL
   10
   Label : DEFINITION
     10
+    Label : DEFAULT
+      6
 Label : PROJECT
   1
   Label : FILE
@@ -21,10 +23,10 @@ Label : PROJECT
               9
               Label : GLOBAL
                 10
+                Label : DEFAULT
+                  6
             Label : EXPRESSION
               9
-              Label : TYPEHINT
-                6
               Label : STATIC
                 12
                 Label : DEFAULT
@@ -33,8 +35,12 @@ Label : PROJECT
                 14
                 Label : DEFAULT
                   15
+              Label : TYPEHINT
+                6
           Label : DEFINITION
             10
+            Label : DEFAULT
+              6
           Label : DEFINITION
             12
             Label : DEFAULT

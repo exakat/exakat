@@ -3,6 +3,8 @@ Label : GLOBAL
   12
   Label : DEFINITION
     12
+    Label : DEFAULT
+      7
     Label : DEFINITION
       12
 Label : PROJECT
@@ -21,6 +23,8 @@ Label : PROJECT
               9
             Label : NAME
               6
+              Label : DEFAULT
+                7
               Label : DEFINITION
                 6
             Label : TYPEHINT
@@ -31,12 +35,16 @@ Label : PROJECT
               11
               Label : GLOBAL
                 6
+                Label : DEFAULT
+                  7
                 Label : DEFINITION
                   6
             Label : EXPRESSION
               11
               Label : GLOBAL
                 12
+                Label : DEFAULT
+                  7
                 Label : DEFINITION
                   12
             Label : EXPRESSION
@@ -53,6 +61,8 @@ Label : PROJECT
                 16
           Label : DEFINITION
             12
+            Label : DEFAULT
+              7
             Label : DEFINITION
               12
           Label : NAME

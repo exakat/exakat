@@ -25,6 +25,8 @@ Label : PROJECT
               11
               Label : STATIC
                 12
+                Label : DEFAULT
+                  7
                 Label : DEFINITION
                   12
               Label : TYPEHINT
@@ -43,6 +45,8 @@ Label : PROJECT
                 15
           Label : DEFINITION
             12
+            Label : DEFAULT
+              7
             Label : DEFINITION
               12
           Label : NAME

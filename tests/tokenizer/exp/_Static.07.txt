@@ -3,6 +3,8 @@ Label : PROJECT
   1
   Label : DEFINITION
     6
+    Label : DEFAULT
+      7
   Label : FILE
     3
     Label : EXPRESSION
@@ -13,6 +15,8 @@ Label : PROJECT
           5
           Label : STATIC
             6
+            Label : DEFAULT
+              7
           Label : TYPEHINT
             7
         Label : EXPRESSION
@@ -25,10 +29,14 @@ Label : PROJECT
               5
               Label : STATIC
                 11
+                Label : DEFAULT
+                  7
               Label : TYPEHINT
                 7
           Label : DEFINITION
             11
+            Label : DEFAULT
+              7
           Label : NAME
             9
           Label : RETURNED

@@ -3206,6 +3206,7 @@ class Load extends Tasks {
                 // global $a[2] = 2 ?
                 $element = $this->processNext();
                 $this->popExpression();
+                $default = $this->addAtomVoid();
             }
 
             if ($reference === self::REFERENCE) {
@@ -3919,7 +3920,6 @@ class Load extends Tasks {
         $then = $this->processFollowingBlock(array($this->phptokens::T_ENDIF,
                                                    $this->phptokens::T_ELSE,
                                                    $this->phptokens::T_ELSEIF,
-                                                   $this->phptokens::T_DOC_COMMENT,
                                                    ));
         $this->addLink($ifthen, $then, 'THEN');
         $extras['THEN'] = $then;

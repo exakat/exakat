@@ -25,6 +25,8 @@ Label : PROJECT
               12
               Label : STATIC
                 13
+                Label : DEFAULT
+                  9
               Label : STATIC
                 14
                 Label : DEFAULT
@@ -43,6 +45,8 @@ Label : PROJECT
                   19
           Label : DEFINITION
             13
+            Label : DEFAULT
+              9
           Label : DEFINITION
             14
             Label : DEFAULT

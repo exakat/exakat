@@ -1,0 +1,59 @@
+test
+Label : GLOBAL
+  15
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : PROJECT
+  1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      15
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : GLOBAL
+            6
+            Label : DEFAULT
+              11
+            Label : NAME
+              10
+              Label : CLASS
+                7
+              Label : MEMBER
+                9
+        Label : EXPRESSION
+          5
+          Label : GLOBAL
+            6
+            Label : DEFAULT
+              11
+            Label : NAME
+              9
+              Label : INDEX
+                14
+              Label : VARIABLE
+                9
+          Label : GLOBAL
+            6
+            Label : DEFAULT
+              11
+            Label : NAME
+              15

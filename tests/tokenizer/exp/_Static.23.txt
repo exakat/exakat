@@ -29,18 +29,30 @@ Label : PROJECT
               15
               Label : GLOBAL
                 12
+                Label : DEFAULT
+                  9
+                Label : DEFAULT
+                  9
                 Label : DEFINITION
                   12
             Label : EXPRESSION
               15
               Label : STATIC
                 12
+                Label : DEFAULT
+                  9
+                Label : DEFAULT
+                  9
                 Label : DEFINITION
                   12
               Label : TYPEHINT
                 9
           Label : DEFINITION
             12
+            Label : DEFAULT
+              9
+            Label : DEFAULT
+              9
             Label : DEFINITION
               12
           Label : NAME
