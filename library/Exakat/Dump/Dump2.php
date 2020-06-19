@@ -151,6 +151,7 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         abstract INTEGER,
                         visibility STRING,
                         returntype STRING,
+                        returntype_fnp STRING,
                         phpdoc STRING,
                         begin INTEGER,
                         end INTEGER
@@ -181,7 +182,9 @@ CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            visibility STRING,
                            static INTEGER,
                            phpdoc STRING,
-                           value STRING
+                           value STRING,
+                           typehint STRING,
+                           typehint_fnp STRING
                            )
 SQL;
         $this->sqlite->query($query);
@@ -215,13 +218,13 @@ CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           type STRING,
                           namespaceId INTEGER,
                           returntype STRING,
+                          returntype_fnp STRING,
                           reference INTEGER,
                           file STRING,
                           phpdoc STRING,
                           begin INTEGER,
                           end INTEGER,
-                          line INTEGER,
-                          CONSTRAINT "unique" UNIQUE (function, line)
+                          CONSTRAINT "unique" UNIQUE (function, begin)
 )
 SQL;
         $this->sqlite->query($query);
