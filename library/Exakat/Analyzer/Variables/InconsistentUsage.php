@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class InconsistentUsage extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         $this->atomIs('Variabledefinition')
              ->raw(<<<'GREMLIN'
@@ -42,34 +47,46 @@ GREMLIN
         // Not taking into account absence of default on purpose.
         // improve with return typehint of functions
         $this->atomIs('Propertydefinition')
-             ->raw(<<<'GREMLIN'
-where(
-__.sideEffect{ s = ['class':0, 'array':0, 'variable':0];}
-  .where(
-    __.out('DEFAULT').sideEffect{
-        if (it.get().label() == 'Null')            { s['class']++; }
-   else if (it.get().label() == 'Arrayliteral')    { s['array']++; }
-   else if (it.get().label() == 'New')             { s['class']++; }
-   else if (it.get().label() == 'Clone')           { s['class']++; }
-   else                                            { s['variable']++; }
+             ->filter(
+                $this->side()
+                     ->initVariable('s', "['class':0, 'array':0, 'variable':0]")
+                     ->filter(
+                        $this->side()
+                             ->outIs('DEFAULT')
+                             ->raw(<<<'GREMLIN'
+sideEffect{
+        if (it.get().label() == "Null")            { s["class"]++; }
+   else if (it.get().label() == "Arrayliteral")    { s["array"]++; }
+   else if (it.get().label() == "New")             { s["class"]++; }
+   else if (it.get().label() == "Clone")           { s["class"]++; }
+   else if (it.get().label() == "Void")            { /* Nothing */ }
+   else                                            { s["variable"]++; }
     }.fold()
-  )
-  .out('DEFINITION')
-  .not( __.where(__.in('LEFT').hasLabel('Assignation').out('RIGHT').hasLabel('New')))
-  .inE().not(hasLabel('ANALYZED', 'DEFINITION', 'RETURN')).sideEffect{
-          if (it.get().label() == 'OBJECT')   { s['class']++; }
-     else if (it.get().label() == 'CLASS')    { s['class']++; }
-     else if (it.get().label() == 'CLONE')    { s['class']++; }
-     else if (it.get().label() == 'NEW')      { s['class']++; }
-     else if (it.get().label() == 'APPEND')   { s['array']++; }
-     else if (it.get().label() == 'VARIABLE') { s['array']++; }
-     else { s['variable']++; };
-     }.fold()
-)
-.filter{s.findAll{a,b -> b != 0}.size() > 1}
-
 GREMLIN
-);
+)
+                     )
+                     ->outIs('DEFINITION')
+                     ->not(
+                        $this->side()
+                             ->inIs('LEFT')
+                             ->atomIs('Assignation')
+                             ->outIs('RIGHT')
+                             ->atomIs(array('New', 'Clone'))
+                     )
+                     ->raw(<<<'GREMLIN'
+inE().not(hasLabel("ANALYZED", "DEFINITION", "RETURN")).sideEffect{
+          if (it.get().label() == "OBJECT")   { s["class"]++; }
+     else if (it.get().label() == "CLASS")    { s["class"]++; }
+     else if (it.get().label() == "CLONE")    { s["class"]++; }
+     else if (it.get().label() == "NEW")      { s["class"]++; }
+     else if (it.get().label() == "APPEND")   { s["array"]++; }
+     else if (it.get().label() == "VARIABLE") { s["array"]++; }
+     else { s["variable"]++; };
+     }.fold()
+GREMLIN
+                )
+             )
+             ->raw('filter{s.findAll{a,b -> b != 0}.size() > 1}');
         $this->prepareQuery();
     }
 }
