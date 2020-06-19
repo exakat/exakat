@@ -468,12 +468,13 @@ GREMLIN
         $citCount = $this->dump->getTableCount('cit');
 
         foreach($classes as $row) {
-            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']) . '\\';
 
             if (isset($namespacesId[$namespace])) {
                 $namespaceId = $namespacesId[$namespace];
             } else {
                 $namespaceId = 1;
+                
             }
 
             $cit_implements[$row['line'] . $row['fullnspath']] = $row['implements'];
@@ -487,7 +488,6 @@ GREMLIN
 
             ++$total;
         }
-        display("$total classes\n");
 
         // Interfaces
         $query = $this->newQuery('cit interfaces');
@@ -522,7 +522,7 @@ GREMLIN
 
         $total = 0;
         foreach($interfaces as $row) {
-            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']) . '\\';
 
             if (isset($namespacesId[$namespace])) {
                 $namespaceId = $namespacesId[$namespace];
@@ -576,7 +576,7 @@ GREMLIN
 
         $total = 0;
         foreach($traits as $row) {
-            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']) . '\\';
 
             if (isset($namespacesId[$namespace])) {
                 $namespaceId = $namespacesId[$namespace];
@@ -773,7 +773,7 @@ sideEffect{
     typehint = 'None';
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
-.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode")}.fold())
+.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode"); typehint_fnp = it.get().value("fullnspath");}.fold())
 .where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .map{ 
     x = ["name": name,
@@ -788,6 +788,7 @@ sideEffect{
 
          "init": init,
          "typehint":typehint,
+         "typehint_fnp": typehint_fnp,
          ];
 }
 
@@ -801,14 +802,15 @@ GREMLIN
         foreach($result->toArray() as $row) {
             $toDump[] = array('',
                               $row['name'],
-                              (int) $row['rank'],
                               (int) $citId[$row['classline'] . $row['classe']],
-                               $methodIds[$row['classe'] . '::' . $row['methode']],
+                              $methodIds[$row['classe'] . '::' . $row['methode']],
+                              (int) $row['rank'],
                                $row['init'],
                                (int) $row['reference'],
                                (int) $row['variadic'],
-                               $row['typehint'],
                                (int) $row['line'],
+                               $row['typehint'],
+                               $row['typehint_fnp'],
             );
         }
         $total = $this->storeToDumpArray('arguments', $toDump);
@@ -893,68 +895,61 @@ GREMLIN;
         display("$total properties\n");
 
         // Class Constant
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class", "Trait")
-.sideEffect{ 
-    line = it.get().value("line");
-    classe = it.get().value("fullnspath");
-}
-     .out('CONST')
-.sideEffect{ 
-    x_public    = it.get().value("visibility") == 'public';
-    x_protected = it.get().value("visibility") == 'protected';
-    x_private   = it.get().value("visibility") == 'private';
-    phpdoc = '';
-}
-     .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
+        $query = $this->newQuery('cit methods');
+        $query->atomIs(array("Class", "Classanonymous", "Interface"), Analyzer::WITHOUT_CONSTANTS)
+              ->savePropertyAs('line', 'ligne')
+              ->savePropertyAs('line', 'classline')
+              ->savePropertyAs('fullnspath', 'classe')
+              ->outIs('CONST')
+              ->savePropertyAs('visibility', 'visibilite')
+              ->initVariable('phpdoc', '""')
+              ->raw(<<<GREMLIN
+      where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .where( __.out('CONST').out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
      .where( __.out('CONST').out('VALUE').sideEffect{ valeur = it.get().value("fullcode")}.fold())
      .map{ 
     x = ["name": name,
          "value": valeur,
-         "public":x_public,
-         "protected":x_protected,
-         "private":x_private,
+         "visibility": visibilite,
          "class": classe,
          "phpdoc": phpdoc,
-         "line": line
+         "line": ligne,
+         "classline": classline
          ];
 }
 
-GREMLIN;
-        $res = $this->gremlin->query($query);
+GREMLIN
+);
+        $query->prepareRawQuery();
+        $classConstants = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
         $total = 0;
         $toDump = array();
 
-        foreach($result->toArray() as $row) {
-            if ($row['public']) {
-                $visibility = 'public';
-            } elseif ($row['protected']) {
-                $visibility = 'protected';
-            } elseif ($row['private']) {
-                $visibility = 'private';
-            } else {
-                continue;
-            }
+        $classConstIds = array();
+        $classConstCount = 0;
+        foreach($classConstants as $row) {
+            $row['visibility'] = $row['visibility'] === 'none' ? '' : $row['visibility'];
 
             // If we haven't found any definition for this class, just ignore it.
             if (!isset($citId[$row['classline'] . $row['class']])) {
                 continue;
             }
-            $propertyId = $row['class'] . '::' . $row['name'];
-            if (isset($propertyIds[$propertyId])) {
+            $classConstId = $row['class'] . '::' . $row['name'];
+            if (isset($classConstIds[$classConstId])) {
                 continue; // skip double
             }
-            $propertyIds[$propertyId] = ++$propertyCount;
+            $classConstIds[$classConstId] = ++$classConstCount;
 
             $toDump[] = array('',
                               $row['name'],
                               (int) $citId[$row['classline'] . $row['class']],
-                              $visibility,
+                              $row['visibility'],
                               $row['value'],
                               $row['phpdoc'],
             );
         }
+
         $total = $this->storeToDumpArray('classconstants', $toDump);
         display("$total class constants\n");
 
@@ -1203,7 +1198,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
     typehint = 'None';
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
-.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode")}.fold())
+.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode"); typehint_fnp = it.get().value("fullnspath");}.fold())
 .where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .map{ 
     x = ["name": name,
@@ -1217,6 +1212,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
 
          "init": init,
          "typehint":typehint,
+         "typehint_fnp":typehint_fnp,
          ];
 }
 
@@ -1242,6 +1238,7 @@ GREMLIN
                                $row['init'],
                                (int) $row['line'],
                                $row['typehint'],
+                               $row['typehint_fnp'],
             );
         }
         $total = $this->storeToDumpArray('arguments', $toDump);
