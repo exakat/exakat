@@ -3989,8 +3989,8 @@ class Load extends Tasks {
 
     private function checkPhpdoc(): void {
         while($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOC_COMMENT){
-            $this->processPhpdoc();
             ++$this->id;
+            $this->processPhpdoc();
         }
     }
 
