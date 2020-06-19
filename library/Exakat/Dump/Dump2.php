@@ -4,7 +4,7 @@ namespace Exakat\Dump;
 
 use Exakat\Reports\Helpers\Results;
 
-class Dump1 extends Dump {
+class Dump2 extends Dump1 {
     protected function initDump(): void {
         $query = <<<'SQL'
 CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -168,7 +168,8 @@ CREATE TABLE arguments (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         variadic INTEGER,
                         init STRING,
                         line INTEGER,
-                        typehint STRING
+                        typehint STRING,
+                        typehint_fnp STRING
                      )
 SQL;
         $this->sqlite->query($query);
@@ -404,7 +405,9 @@ SELECT methods.*,
                     ', ' ) AS signature,
        cit.type AS type,
        namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
-       cit.name AS class
+       cit.name AS class,
+       cit.file AS file,
+       methods.begin AS line
 
     FROM methods
     LEFT JOIN arguments
@@ -423,11 +426,17 @@ SQL
     public function fetchTableMethodsByArgument(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.type || ' ' || cit.name AS theClass, 
-       namespaces.namespace || "\\" || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
+       cit.type AS citType,
+       cit.name AS citName, 
+       lower(namespaces.namespace) || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
        methods.method,
        arguments.name AS argument,
        init,
-       typehint
+       typehint,
+       typehint_fnp,
+       rank,
+       arguments.line,
+       cit.file
 FROM cit
 JOIN methods 
     ON methods.citId = cit.id

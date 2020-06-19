@@ -4,16 +4,16 @@ namespace Exakat\Dump;
 
 use Sqlite3;
 
-class Dump {
+abstract class Dump {
     const READ  = 1;
     const INIT  = 0;
 
     protected $project          = null;
     protected $phpexcutable     = null;
     protected $sqlite           = null;
-    private $sqliteFileFinal    = '';
-    private $sqliteFile         = null;
-    private $sqliteFilePrevious = null;
+    protected $sqliteFileFinal    = '';
+    protected $sqliteFile         = null;
+    protected $sqliteFilePrevious = null;
 
     protected $tablesList = array();
 
@@ -68,7 +68,7 @@ class Dump {
         $this->initTablesList();
     }
 
-    private function initTablesList(): void {
+    protected function initTablesList(): void {
         $res = $this->sqlite->query("SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%'");
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $this->tablesList[] = $row['name'];
@@ -76,295 +76,10 @@ class Dump {
     }
 
     public static function factory(string $path, int $init = self::READ): self {
-        return new Dump1($path, $init);
+        return new Dump2($path, $init);
     }
 
-    private function initDump(): void {
-        $query = <<<'SQL'
-CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
-                       thema STRING,
-                       CONSTRAINT "themas" UNIQUE (thema) ON CONFLICT IGNORE
-                    )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        fullcode STRING,
-                        file STRING,
-                        line INTEGER,
-                        namespace STRING,
-                        class STRING,
-                        function STRING,
-                        analyzer STRING,
-                        severity STRING
-                     )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                             analyzer STRING,
-                             count INTEGER DEFAULT -6,
-                             CONSTRAINT "analyzers" UNIQUE (analyzer) ON CONFLICT REPLACE
-                           )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
-                            analyzer STRING,
-                            key STRING UNIQUE,
-                            value STRING
-                          );
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            name STRING,
-                            key STRING,
-                            value STRING
-                          );
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE classChanges (  
-    id           INTEGER PRIMARY KEY AUTOINCREMENT,
-    changeType   STRING,
-    name         STRING,
-    parentClass  STRING,
-    parentValue  STRING,
-    childClass   STRING,
-    childValue   STRING
-                    )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                 including STRING,
-                                 included STRING,
-                                 type STRING
-                                )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE classesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                   including STRING,
-                                   including_name STRING,
-                                   including_type STRING,
-                                   included STRING,
-                                   included_name STRING,
-                                   included_type STRING,
-                                   type STRING
-                                  )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE atomsCounts (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            atom STRING,
-                            count INTEGER
-                         )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              name STRING,
-                              type STRING,
-                              count INTEGER
-)
-SQL;
-        $this->sqlite->query($query);
-
-        // Name spaces
-        $query = <<<'SQL'
-CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                           namespace STRING
-                        )
-SQL;
-        $this->sqlite->query($query);
-        $this->sqlite->query("INSERT INTO namespaces VALUES (1, '\\')");
-
-        $query = <<<'SQL'
-CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name STRING,
-                    namespaceId INTEGER DEFAULT 1,
-                    type STRING,
-                    abstract INTEGER,
-                    final INTEGER,
-                    phpdoc STRING,
-                    begin INTEGER,
-                    end INTEGER,
-                    file INTEGER,
-                    line INTEGER,
-                    extends STRING DEFAULT ""
-                  )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                               implementing INTEGER,
-                               implements STRING,
-                               type    STRING
-                            )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        method INTEGER,
-                        citId INTEGER,
-                        static INTEGER,
-                        final INTEGER,
-                        abstract INTEGER,
-                        visibility STRING,
-                        returntype STRING,
-                        phpdoc STRING,
-                        begin INTEGER,
-                        end INTEGER
-                     )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE arguments (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name STRING,
-                        citId INTEGER,
-                        methodId INTEGER,
-                        rank INTEGER,
-                        reference INTEGER,
-                        variadic INTEGER,
-                        init STRING,
-                        line INTEGER,
-                        typehint STRING
-                     )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                           property INTEGER,
-                           citId INTEGER,
-                           visibility STRING,
-                           static INTEGER,
-                           phpdoc STRING,
-                           value STRING
-                           )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE classconstants ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              constant INTEGER,
-                              citId INTEGER,
-                              visibility STRING,
-                              phpdoc STRING,
-                              value STRING
-                            )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                          constant INTEGER,
-                          namespaceId INTEGER,
-                          file STRING,
-                          value STRING,
-                          phpdoc STRING,
-                          type STRING
-                       )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                          function STRING,
-                          type STRING,
-                          namespaceId INTEGER,
-                          returntype STRING,
-                          reference INTEGER,
-                          file STRING,
-                          phpdoc STRING,
-                          begin INTEGER,
-                          end INTEGER,
-                          line INTEGER,
-                          CONSTRAINT "unique" UNIQUE (function, line)
-)
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE readability ( id      INTEGER PRIMARY KEY AUTOINCREMENT,
-                           name    STRING,
-                           type    STRING,
-                           tokens  INTEGER,
-                           expressions INTEGER,
-                           file        STRING
-                         )
-SQL;
-        $this->sqlite->query($query);
-
-
-        $query = <<<'SQL'
-CREATE TABLE variables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                          variable STRING,
-                          type STRING
-                       )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE globalVariables ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                               variable STRING,
-                               file STRING,
-                               line INTEGER,
-                               isRead INTEGER,
-                               isModified INTEGER,
-                               type STRING
-                             )
-SQL;
-        $this->sqlite->query($query);
-
-        $this->collectDatastore();
-        $this->initTablesList();
-
-        $time   = time();
-        try {
-            $id     = random_int(0, PHP_INT_MAX);
-        } catch (\Throwable $e) {
-            die("Couldn't generate an id for the current dump file. Aborting");
-        }
-
-        if (file_exists($this->sqliteFilePrevious)) {
-            $sqliteOld = new \Sqlite3($this->sqliteFilePrevious);
-            $sqliteOld->busyTimeout(\SQLITE3_BUSY_TIMEOUT);
-
-            $presence = $sqliteOld->querySingle('SELECT count(*) FROM sqlite_master WHERE type="table" AND name="hash"');
-            if ($presence == 1) {
-                $serial = $sqliteOld->querySingle('SELECT value FROM hash WHERE key="dump_serial"') + 1;
-            } else {
-                $serial = 0;
-            }
-        } else {
-            $serial = 1;
-        }
-
-        $toDump = array(array('', 'dump_time',   $time),
-                        array('', 'dump_id',     $id),
-                        array('', 'dump_serial', $serial),
-                        );
-
-        $this->storeInTable('hash', $toDump);
-        display('Inited tables');
-    }
-
-    private function collectDatastore(): void {
+    protected function collectDatastore(): void {
         $tables = array('analyzed',
                         'compilation52',
                         'compilation53',
