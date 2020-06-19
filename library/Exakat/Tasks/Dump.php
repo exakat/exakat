@@ -661,7 +661,8 @@ GREMLIN
             __.hasLabel("Method", "Magicmethod")
      )
      .sideEffect{ 
-        returntype = 'None';
+        returntype = [];
+        returntype_fnp = [];
         phpdoc     = '';
       }
      .where(
@@ -673,13 +674,13 @@ GREMLIN
          .as("method")
          .in("METHOD", "MAGICMETHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value("fullnspath"); classline =  it.get().value("line"); }
          .select("method")
-         .where( __.sideEffect{ lines = [];}
+         .where( __.sideEffect{ lines = [it.get().value("line")];}
                    .out("BLOCK").out("EXPRESSION")
                    .emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING)
                    .sideEffect{ lines.add(it.get().value("line")); }
                    .fold()
           )
-          .where( __.out('RETURNTYPE').sideEffect{ returntype = it.get().value("fullcode")}.fold())
+          .where( __.out('RETURNTYPE').not(hasLabel('Void')).sideEffect{ returntype.add(it.get().value("fullcode"));  returntype_fnp.add(it.get().value("fullnspath"));}.fold())
           .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
           .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
           .map{ 
@@ -696,7 +697,8 @@ GREMLIN
          "abstract":it.get().properties("abstract").any(),
          "final":it.get().properties("final").any(),
          "static":it.get().properties("static").any(),
-         "returntype": returntype,
+         "returntype": returntype.join("|"),
+         "returntype_fnp": returntype_fnp.join("|"),
 
          "public":    it.get().value("visibility") == "public",
          "protected": it.get().value("visibility") == "protected",
@@ -744,6 +746,7 @@ GREMLIN
                              (int) $row['abstract'],
                              $visibility,
                              $row['returntype'],
+                             $row['returntype_fnp'],
                              $row['phpdoc'],
                              (int) $row['begin'],
                              (int) $row['end']
@@ -770,10 +773,11 @@ GREMLIN
              ->raw(<<<'GREMLIN'
 sideEffect{
     init = 'None';
-    typehint = 'None';
+    typehint = [];
+    typehint_fnp = [];
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
-.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode"); typehint_fnp = it.get().value("fullnspath");}.fold())
+.where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
 .where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .map{ 
     x = ["name": name,
@@ -787,8 +791,8 @@ sideEffect{
          "classline": classline,
 
          "init": init,
-         "typehint":typehint,
-         "typehint_fnp": typehint_fnp,
+         "typehint":typehint.join('|'),
+         "typehint_fnp": typehint_fnp.join('|'),
          ];
 }
 
@@ -827,9 +831,12 @@ g.V().hasLabel("Propertydefinition").as("property")
     x_private = it.get().value("visibility") == "private";
     x_var = it.get().value("token") == "T_VAR";
     phpdoc = '';
-    v = '';
+    init = '';
+    typehint = [];
+    typehint_fnp = [];
 }
-     .where( __.out('DEFAULT').not(where( __.in("RIGHT"))).sideEffect{ v = it.get().value("fullcode")}.fold())
+     .where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
+     .where( __.out('DEFAULT').not(where( __.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
      .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .in("PPP").hasLabel("Class", "Interface", "Trait")
      .sideEffect{classe = it.get().value("fullnspath"); }
@@ -846,9 +853,11 @@ g.V().hasLabel("Propertydefinition").as("property")
     "private":x_private,
     "var":x_var,
     "name": name,
-    "value": v,
+    "value": init,
     "phpdoc":phpdoc,
-    "classline":classline
+    "classline":classline,
+    "typehint":typehint.join('|'),
+    "typehint_fnp": typehint_fnp.join('|')
     ];
 }
 
@@ -886,9 +895,11 @@ GREMLIN;
                               $row['name'],
                               (int) $citId[$row['classline'] . $row['class']],
                               $visibility,
-                               $row['value'],
-                               (int) $row['static'],
-                               $row['phpdoc'],
+                              (int) $row['static'],
+                              $row['phpdoc'],
+                              $row['value'],
+                              $row['typehint'],
+                              $row['typehint_fnp'],
             );
         }
         $total = $this->storeToDumpArray('properties', $toDump);
@@ -1089,7 +1100,8 @@ GREMLIN
     lines = []; 
     reference = it.get().properties("reference").any(); 
     fullnspath = it.get().value("fullnspath"); 
-    returntype = 'None'; 
+    returntype = []; 
+    returntype_fnp = []; 
     name = it.get().label();
     phpdoc = '';
 }
@@ -1098,6 +1110,7 @@ GREMLIN
       .sideEffect{ lines.add(it.get().value("line")); }
       .fold()
  )
+.where( __.out('RETURNTYPE').not(hasLabel('Void')).sideEffect{ returntype.add(it.get().value("fullcode"));returntype_fnp.add(it.get().value("fullnspath"));}.fold())
 .where( __.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.fold())
 .where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 GREMLIN
@@ -1125,7 +1138,8 @@ map{ ["name":name,
       "namespace":namespace, 
       "fullnspath":fullnspath, 
       "reference":reference,
-      "returntype":returntype,
+      "returntype":returntype.join('|'),
+      "returntype_fnp":returntype_fnp.join('|'),
       "begin": lines.min(), 
       "end":lines.max(),
       "phpdoc":phpdoc
@@ -1139,6 +1153,7 @@ GREMLIN
         $toDump = array();
         $unique = array();
         foreach($result->toArray() as $row) {
+            print_r($row);
             if (isset($unique[$row['name'] . $row['line']])) {
                 continue;  // Skipping double definitions until we can differentiate them.
             }
@@ -1147,6 +1162,7 @@ GREMLIN
             if (strpos($row['fullnspath'], '@') !== false) {
                 // case of closure or arrow function
                 $ns = '';
+                ++$methodCount;
             } else {
                 $methodIds[$row['fullnspath']] = ++$methodCount;
                 $n = $row['namespace'];
@@ -1162,16 +1178,17 @@ GREMLIN
             $toDump[] = array($methodCount,
                               $row['name'],
                               $row['type'],
-                              $this->files[$row['file']],
                               $ns,
-                              (int) $row['reference'],
                               $row['returntype'],
+                              $row['returntype_fnp'],
+                              (int) $row['reference'],
+                              $this->files[$row['file']],
+                              $row['phpdoc'],
                               (int) $row['begin'],
                               (int) $row['end'],
-                              $row['phpdoc'],
-                              (int) $row['line'],
                               );
         }
+
         $this->dump->cleanTable('functions');
         $total = $this->storeToDumpArray('functions', $toDump);
         display("$total functions\n");
@@ -1195,10 +1212,11 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
 
 .sideEffect{
     init = 'None';
-    typehint = 'None';
+    typehint = [];
+    typehint_fnp = [];
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
-.where( __.out('TYPEHINT').sideEffect{ typehint = it.get().value("fullcode"); typehint_fnp = it.get().value("fullnspath");}.fold())
+.where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
 .where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .map{ 
     x = ["name": name,
@@ -1211,8 +1229,8 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
          "function":fonction,
 
          "init": init,
-         "typehint":typehint,
-         "typehint_fnp":typehint_fnp,
+         "typehint":typehint.join('|'),
+         "typehint_fnp":typehint_fnp.join('|'),
          ];
 }
 
@@ -1429,7 +1447,7 @@ GREMLIN
         display(($count1 + $count2) . ' typehint ');
 
         // Finding trait use
-        $query = $this->newQuery('Return Typehint');
+        $query = $this->newQuery('Trait use');
         $query->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('USE')
               ->_as('classe')
