@@ -51,7 +51,7 @@ class CreateDefaultValues extends Complete {
                      ->atomInsideNoDefinition(self::VARIABLES_ALL)
                      ->inIs('DEFINITION')
                      ->inIsIE('NAME')
-                     ->raw('is(neq("first"))')
+                     ->raw('is(eq("first"))')
              )
              ->followParAs('RIGHT')
              ->addEFrom('DEFAULT', 'first');

@@ -28,9 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class IndirectInjection extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/PropagateConstants',
+                     'Complete/PropagateCalls',
+                     'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
                      'Complete/CreateDefaultValues',
                      'Security/SensitiveArgument',
-                     'Security/GPRAliases',
                     );
     }
 
@@ -40,84 +42,48 @@ class IndirectInjection extends Analyzer {
         $this->atomIs(self::FUNCTIONS_USAGE)
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
+             ->atomInsideNoDefinition(self::VARIABLES_ALL)
+             ->inIs('DEFINITION')
+             ->outIs('DEFAULT')
              ->outIsIE('VARIABLE')
-             ->atomIs(self::VARIABLES_ALL)
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('DEFAULT')
-                     ->inIs('RIGHT')
-                     ->outIs('LEFT')
-                     ->analyzerIs('Security/GPRAliases')
-             )
+             ->atomIs('Phpvariable')
              ->back('first');
         $this->prepareQuery();
 
         // Relayed via argument to sensitive function
         //  function f($_GET['a']) {  exec($a);}
-        $this->atomIs(self::FUNCTIONS_CALLS)
-             ->outIsIE('METHOD')
-             ->outIs('ARGUMENT')
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('DEFAULT')
-                     ->inIs('RIGHT')
-                     ->outIs('LEFT')
-                     ->analyzerIs('Security/GPRAliases')
-             )
-             ->savePropertyAs('rank', 'ranked')
-             ->back('first')
-
-             ->inIs('DEFINITION')
-
-             ->outWithRank('ARGUMENT', 'ranked')
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
+        $this->atomIs('Phpvariable')
+             ->inIsIE('VARIABLE')
+             ->followValue(5)
              ->analyzerIs('Security/SensitiveArgument')
-             ->back('first');
+             ->inIs('ARGUMENT')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
         //function f() {  $a = $_GET['a'];exec($a);}
 
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
-        $this->atomIs(self::VARIABLES_ALL)
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('DEFAULT')
-                     ->inIs('RIGHT')
-                     ->outIs('LEFT')
-                     ->analyzerIs('Security/GPRAliases')
-             )
-             ->inIs('CONCAT');
-        $this->prepareQuery();
-
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
-        $this->atomIs('Variablearray')
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('DEFAULT')
-                     ->inIs('RIGHT')
-                     ->outIs('LEFT')
-                     ->analyzerIs('Security/GPRAliases')
-             )
-             ->inIs('VARIABLE')
+        $this->atomIs(self::VARIABLES_ALL)
+             ->analyzerIsNot('self')
+             ->inIs('DEFINITION')
+             ->outIs('DEFAULT')
+             ->outIsIE('VARIABLE')
+             ->atomIs('Phpvariable')
+             ->back('first')
+             ->inIsIE('VARIABLE')
              ->inIs('CONCAT');
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)
-        $this->atomIs(self::VARIABLES_ALL)
-             ->filter(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->outIs('DEFAULT')
-                     ->inIs('RIGHT')
-                     ->outIs('LEFT')
-                     ->analyzerIs('Security/GPRAliases')
-             )
-             ->inIs('SOURCE');
+        $this->atomIs('Foreach')
+             ->outIs('SOURCE')
+             ->atomInsideNoDefinition(self::VARIABLES_ALL)
+             ->inIs('DEFINITION')
+             ->outIs('DEFAULT')
+             ->outIsIE('VARIABLE')
+             ->atomIs('Phpvariable')
+             ->back('first');
         $this->prepareQuery();
     }
 }

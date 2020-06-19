@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 
-class FollowCalls extends DSL {
+class FollowValue extends DSL {
     public function run(): Command {
         
         $TIME_LIMIT = self::$TIME_LIMIT;
@@ -41,17 +41,20 @@ class FollowCalls extends DSL {
 
         // Coalesce is not supported
         return new Command(<<<GREMLIN
-emit().repeat(
-    __.timeLimit($TIME_LIMIT).out("NAME").out("DEFINITION")
-      .union(__.identity(),
-            // local assignation to variable
-            __.emit().repeat(
-                 __.in("DEFAULT").hasLabel("Variabledefinition").out("DEFINITION")
-             ).times(4)
-      )
-      .as("a").in("ARGUMENT").in("DEFINITION").out("ARGUMENT").as("b")
-      .where("a", eq("b") ).by("rank")
-).times($loopings)
+repeat(
+    __.timeLimit($TIME_LIMIT).union(
+        // \$b = \$a; => \$b
+        __.in("DEFAULT").out("DEFINITION"),
+        // foo(\$a) => function (\$c)
+        __.as('a').in("ARGUMENT").in("DEFINITION").out("ARGUMENT").as("b").where("a", eq("b") ).by("rank").out("NAME").out("DEFINITION"),
+        // foo(bar(\$a)) => function foo(\$c)
+        __.in("RETURNED").out("DEFINITION"),
+        // global
+        __.hasLabel("Variable").in('DEFINITION').as('c').in('DEFINITION').hasLabel('Virtualglobal').out('DEFINITION').out('DEFINITION'),
+        // property, static or not
+        __.hasLabel("Property", "Staticproperty").in('DEFINITION').hasLabel('Propertydefinition').out('DEFINITION')
+    )
+).emit().times($loopings)
 GREMLIN
 );
     }

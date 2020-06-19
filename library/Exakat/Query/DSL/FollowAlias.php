@@ -24,7 +24,7 @@
 namespace Exakat\Query\DSL;
 
 
-class FollowCalls extends DSL {
+class FollowAlias extends DSL {
     public function run(): Command {
         
         $TIME_LIMIT = self::$TIME_LIMIT;
@@ -42,15 +42,7 @@ class FollowCalls extends DSL {
         // Coalesce is not supported
         return new Command(<<<GREMLIN
 emit().repeat(
-    __.timeLimit($TIME_LIMIT).out("NAME").out("DEFINITION")
-      .union(__.identity(),
-            // local assignation to variable
-            __.emit().repeat(
-                 __.in("DEFAULT").hasLabel("Variabledefinition").out("DEFINITION")
-             ).times(4)
-      )
-      .as("a").in("ARGUMENT").in("DEFINITION").out("ARGUMENT").as("b")
-      .where("a", eq("b") ).by("rank")
+    __.out("DEFINITION").in("DEFAULT").hasLabel("Variabledefinition")
 ).times($loopings)
 GREMLIN
 );

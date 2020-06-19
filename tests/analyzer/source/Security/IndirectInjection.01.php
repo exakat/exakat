@@ -9,6 +9,9 @@ function f($a1a) {
 Can't do that yet (@todo)
 */
 
+$a1 = $_POST['x'];
+shell_exec($a1);
+
 $a2 = $_POST;
 shell_exec('a'.$a2);
 
