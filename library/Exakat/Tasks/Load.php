@@ -5807,10 +5807,10 @@ class Load extends Tasks {
     private function processPhpdoc(): Atom {
         if (isset($this->phpDocs[0])) {
             $phpDoc = $this->phpDocs[0];
-            $phpDoc->fullcode = $this->tokens[$this->id + 1][1];
+            $phpDoc->fullcode = $this->tokens[$this->id][1];
         } else {
             $phpDoc = $this->addAtom('Phpdoc', $this->id);
-            $phpDoc->fullcode = $this->tokens[$this->id + 1][1];
+            $phpDoc->fullcode = $this->tokens[$this->id][1];
 
             $this->phpDocs[0] = $phpDoc;
         }
