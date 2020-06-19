@@ -36,30 +36,36 @@ class AtomIs extends DSL {
         }
 
         assert($this->assertAtom($atoms));
+        $TIME_LIMIT = self::$TIME_LIMIT;
+        $MAX_LOOPING = self::$MAX_LOOPING;
 
         $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } elseif ($flags === Analyzer::WITH_VARIABLES) {
             // arrays, members, static members are not supported
-            $gremlin = <<<'GREMLIN'
-coalesce( // literal value, passed as an argument (Method, closure, function)
-          __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel('Parameter').sideEffect{ rank = it.get().value('rank');}.in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").filter{ rank == it.get().value('rank');},
+            $gremlin = <<<GREMLIN
+union( __.identity(), 
+       __.repeat(
+            __.timeLimit($TIME_LIMIT).hasLabel(within(["Variable", "Phpvariable", "Ternary", "Coalesce"]))
+              .union( 
+                 // literal value, passed as an argument (Method, closure, function)
+                  __.hasLabel(within(["Variable", "Phpvariable"])).in("DEFINITION").in("NAME").hasLabel('Parameter').as("p1").in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD", "NEW")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
 
-         // literal value, passed as an argument
-          __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
+                 // literal value, passed as an argument
+                  __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
 
-          __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
-          
-          // default case, will be filtered by hasLabel()
-          __.filter{true})
+                // 
+                  __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT")
+                )
+            ).times($MAX_LOOPING).emit()
+    )
 .hasLabel(within(***))
 GREMLIN;
             return new Command($gremlin, array($diff));
         } elseif ($flags === Analyzer::WITH_CONSTANTS &&
                  array_intersect($diff, array('String', 'Concatenation', 'Ternary', 'Arrayliteral', 'Integer', 'Null', 'Boolean', 'Magicmethod', 'Float'))) {
             // arrays, members, static members are not supported
-            $TIME_LIMIT = self::$TIME_LIMIT;
             $gremlin = <<<GREMLIN
 union( __.identity(), 
        __.repeat(
@@ -72,7 +78,7 @@ union( __.identity(),
                       // literal value, passed as an argument (Method, closure, function)
                       __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").out("DEFAULT"),
             
-                      __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").as("p1").timeLimit($TIME_LIMIT).in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
+                      __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").as("p1").timeLimit($TIME_LIMIT).in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD", "NEW")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
             
                       // literal value, passed as an argument
                       __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
@@ -83,7 +89,7 @@ union( __.identity(),
             
                       __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED')
                       )
-            ).times(1).emit()
+            ).times($MAX_LOOPING).emit()
 )
 .hasLabel(within(***))
 GREMLIN;
