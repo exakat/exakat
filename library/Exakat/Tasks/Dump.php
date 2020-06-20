@@ -697,6 +697,7 @@ GREMLIN
          "abstract":it.get().properties("abstract").any(),
          "final":it.get().properties("final").any(),
          "static":it.get().properties("static").any(),
+         "reference":it.get().properties("reference").any(),
          "returntype": returntype.join("|"),
          "returntype_fnp": returntype_fnp.join("|"),
 
@@ -744,6 +745,7 @@ GREMLIN
                              (int) $row['static'],
                              (int) $row['final'],
                              (int) $row['abstract'],
+                             (int) $row['reference'],
                              $visibility,
                              $row['returntype'],
                              $row['returntype_fnp'],
@@ -1013,8 +1015,8 @@ GREMLIN
         $total = 0;
         $toDump = array();
         foreach($result->toArray() as $row) {
-            if (isset($namespacesId[$row['namespace']])) {
-                $namespaceId = $namespacesId[$row['namespace']];
+            if (isset($namespacesId[$row['namespace'].'\\'])) {
+                $namespaceId = $namespacesId[$row['namespace'].'\\'];
             } else {
                 $namespaceId = 1;
             }
@@ -1024,8 +1026,8 @@ GREMLIN
                               $namespaceId,
                               $this->files[$row['file']],
                               $row['value'],
-                              $row['type'],
                               $row['phpdoc'],
+                              $row['type'],
             );
         }
         $total = $this->storeToDumpArray('constants', $toDump);
@@ -1080,7 +1082,7 @@ GREMLIN
         foreach($result->toArray() as $row) {
             $toDump[] = array('',
                               $row['name'],
-                              $namespacesId[$row['namespace']] ?? 1,
+                              $namespacesId[$row['namespace'] . '\\'] ?? 1,
                               $this->files[$row['file']],
                               $row['value'],
                               $row['type'],
@@ -1153,7 +1155,6 @@ GREMLIN
         $toDump = array();
         $unique = array();
         foreach($result->toArray() as $row) {
-            print_r($row);
             if (isset($unique[$row['name'] . $row['line']])) {
                 continue;  // Skipping double definitions until we can differentiate them.
             }

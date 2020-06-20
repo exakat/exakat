@@ -149,6 +149,7 @@ CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         static INTEGER,
                         final INTEGER,
                         abstract INTEGER,
+                        reference INTEGER,
                         visibility STRING,
                         returntype STRING,
                         returntype_fnp STRING,
@@ -194,8 +195,8 @@ CREATE TABLE classconstants ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                               constant INTEGER,
                               citId INTEGER,
                               visibility STRING,
-                              phpdoc STRING,
-                              value STRING
+                              value STRING,
+                              phpdoc STRING
                             )
 SQL;
         $this->sqlite->query($query);
