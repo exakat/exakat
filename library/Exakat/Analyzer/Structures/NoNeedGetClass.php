@@ -25,14 +25,20 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoNeedGetClass extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // get_class($a->b)::$c   => $a->b::$c
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->outIsIE('CODE') // Skip parenthesis only
-             ->atomIs('Functioncall')
-             ->fullnspathIs('\\get_class')
-             ->back('first');
+             ->outIsIE('CODE') // Skip parenthesis
+             ->atomIs('Functioncall', self::WITH_VARIABLES)
+//             ->fullnspathIs('\\get_class')
+//             ->back('first')
+             ;
         $this->prepareQuery();
     }
 }

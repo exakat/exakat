@@ -47,16 +47,22 @@ class AtomIs extends DSL {
             $gremlin = <<<GREMLIN
 union( __.identity(), 
        __.repeat(
-            __.timeLimit($TIME_LIMIT).hasLabel(within(["Variable", "Phpvariable", "Ternary", "Coalesce"]))
+            __.timeLimit($TIME_LIMIT).hasLabel(within(["Variable", "Phpvariable", "Ternary", "Coalesce", "Parenthesis"]))
               .union( 
+                 // literal local value
+                  __.hasLabel(within(["Variable", "Phpvariable"])).in("DEFINITION").hasLabel("Variabledefinition").out("DEFAULT"),
+
                  // literal value, passed as an argument (Method, closure, function)
                   __.hasLabel(within(["Variable", "Phpvariable"])).in("DEFINITION").in("NAME").hasLabel('Parameter').as("p1").in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD", "NEW")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
 
                  // literal value, passed as an argument
                   __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
 
-                // 
-                  __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT")
+                // \$a ?? 'b'
+                  __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
+
+                // (\$a)
+                  __.hasLabel(within(["Parenthesis"])).out("CODE")
                 )
             ).times($MAX_LOOPING).emit()
     )
