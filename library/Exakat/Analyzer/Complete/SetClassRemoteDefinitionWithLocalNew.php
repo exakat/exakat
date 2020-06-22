@@ -42,7 +42,7 @@ class SetClassRemoteDefinitionWithLocalNew extends Complete {
               ->atomIs('New', self::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')
-              ->atomIs('Class', self::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs('METHOD')
               ->outIs('NAME')
@@ -65,10 +65,11 @@ class SetClassRemoteDefinitionWithLocalNew extends Complete {
               ->atomIs('New', self::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')
-              ->atomIs('Class', self::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->goToAllParentsTraits(self::INCLUDE_SELF)
               ->outIs('PPP')
               ->outIs('PPP')
+              ->atomIs('Propertydefinition')
               ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
               ->addETo('DEFINITION', 'member');
         $this->prepareQuery();

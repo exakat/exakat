@@ -18,9 +18,9 @@ class x {
         if (is_null($this->optionalComparison4)) {}
 
         if ($this->optionalComparisonArray === null) {}
-        if (empty($this->optionalComparison2Array)) {}
-        if (isset($this->optionalComparison3Array)) {}
-        if (is_null($this->optionalComparison4Array)) {}
+        if (empty($this->optionalComparisonArray2)) {}
+        if (isset($this->optionalComparisonArray3)) {}
+        if (is_null($this->optionalComparisonArray4)) {}
 
         if ($a->optionalAComparison === null) {}
         if (empty($a->optionalAComparison2)) {}

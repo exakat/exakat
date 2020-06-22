@@ -27,38 +27,38 @@ use Exakat\Analyzer\Analyzer;
 class AvoidOptionalProperties extends Analyzer {
     public function dependsOn(): array {
         return array('Classes/Constructor',
+                     'Complete/CreateDefaultValues',
+                     'Complete/SetClassRemoteDefinitionWithGlobal',
+                     'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
+                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
+                     'Complete/SetClassMethodRemoteDefinition',
                     );
     }
 
     public function analyze() {
+        // if ($this->p)  {}
         $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->back('first')
              ->hasIn('CONDITION')
+             ->inIs("DEFINITION")
+             ->isMissingOrNull()
              ->back('first');
         $this->prepareQuery();
 
         // if (empty($this->a))
         $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->back('first')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
              ->inIs('ARGUMENT')
              ->atomIs(array('Empty', 'Isset'))
              ->as('results')
-             ->goToClass()
-             ->outIs('PPP')
-             ->outIs('PPP')
-             ->atomIs('Propertydefinition')
-             ->samePropertyAs('propertyname', 'name', self::CASE_INSENSITIVE)
+             ->back('first')
+             ->inIs("DEFINITION")
              ->isMissingOrNull()
              ->back('results');
         $this->prepareQuery();
 
+        // if (is_null($this->a))
         $this->atomIs('Member')
              ->outIs('OBJECT')
              ->atomIs('This')
@@ -101,12 +101,16 @@ class AvoidOptionalProperties extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
+        // class x { function x($a = null) {} ...}
         $this->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENT')
-             ->hasOut('TYPEHINT')
-             ->outIs('RIGHT')
-             ->atomIs('Null')
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
+             ->inIs('TYPEHINT')
+             ->outIs('DEFAULT')
+             ->atomIs('Null', self::WITH_CONSTANTS)
+             ->hasNoIn('RIGHT')
              ->back('first');
         $this->prepareQuery();
     }

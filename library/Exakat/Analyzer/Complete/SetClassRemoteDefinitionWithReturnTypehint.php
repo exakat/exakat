@@ -53,7 +53,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
 
               ->outIs('RETURNTYPE')
               ->inIs('DEFINITION')
-              ->atomIs('Class', self::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->goToAllParents(self::INCLUDE_SELF)
               ->outIs('METHOD')
               ->outIs('NAME')
@@ -85,12 +85,36 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
 
              ->outIs('RETURNTYPE')
              ->inIs('DEFINITION')
-             ->atomIs('Class', self::WITHOUT_CONSTANTS)
+             ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('PPP')
              ->outIs('PPP')
              ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
              ->addETo('DEFINITION', 'member');
+        $this->prepareQuery();
+
+        // $b = foo(); $b->p; function foo() : C {}
+        $this->atomIs('Member', self::WITHOUT_CONSTANTS)
+              ->as('member')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->atomIs('Name', self::WITHOUT_CONSTANTS)
+              ->savePropertyAs('code', 'name')
+              ->inIs('MEMBER')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Variabledefinition', 'Parametername', 'Propertydefinition', 'Globaldefinition', 'Staticdefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
+              ->outIs('DEFAULT')
+              ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
+              ->inIs('DEFINITION')
+              ->outIs('RETURNTYPE')
+              ->inIs('DEFINITION')
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
+              ->goToAllParentsTraits(self::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name', self::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'member');
         $this->prepareQuery();
     }
 }
