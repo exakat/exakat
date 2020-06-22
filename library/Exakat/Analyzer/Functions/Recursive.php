@@ -35,11 +35,11 @@ class Recursive extends Analyzer {
     public function analyze() {
         // function foo() { foo(); }
         $this->atomIs('Function')
-             ->savePropertyAs('fullcode', 'fqn')
+             ->savePropertyAs('fullnspath', 'fqn')
              ->outIs('DEFINITION')
              ->atomIs('Functioncall')
              ->goToInstruction('Function')
-             ->samePropertyAs('fullcode', 'fqn');
+             ->samePropertyAs('fullnspath', 'fqn');
         $this->prepareQuery();
 
         // $a = function () use (&$a) { foo(); }
