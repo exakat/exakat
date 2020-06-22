@@ -123,7 +123,8 @@ class DotExakatYamlConfig extends Config {
                            'project_tag'         => '',
                            
                            'stubs'               => array(),
-
+                           
+                           'ignore_rules'        => array(),
                         );
 
         $this->config['inside_code'] = Configuration::INSIDE_CODE;
@@ -283,6 +284,7 @@ class DotExakatYamlConfig extends Config {
 'project_tag'         => "{$this->config['project_tag']}",
 'include_dirs'        => $this->config['include_dirs'],
 'ignore_dirs'         => $this->config['ignore_dirs'],
+'ignore_rules'        => $this->config['ignore_rules'],
 'file_extensions'     => $file_extensions,
 'custom'              => $default,
         );

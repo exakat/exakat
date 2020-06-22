@@ -33,26 +33,30 @@ class Rulesets implements RulesetsInterface {
 
     private static $instanciated = array();
 
-    public function __construct($path, Autoloader $ext, Autoloader $dev, array $extra_rulesets = array()) {
-        $this->main  = new RulesetsMain($path);
-        $this->ext   = new RulesetsExt($ext);
-        $this->extra = new RulesetsExtra($extra_rulesets);
-        $this->dev   = new RulesetsDev($dev);
+    public function __construct($path, Autoloader $ext, Autoloader $dev, array $extra_rulesets = array(), array $ignore_rulesets = array()) {
+        $this->main   = new RulesetsMain($path);
+        $this->ext    = new RulesetsExt($ext);
+        $this->extra  = new RulesetsExtra($extra_rulesets);
+        $this->dev    = new RulesetsDev($dev);
+        $this->ignore = new RulesetsIgnore($ignore_rulesets);
     }
 
     public function __destruct() {
-        $this->main  = null;
-        $this->ext   = null;
-        $this->extra = null;
+        $this->main   = null;
+        $this->ext    = null;
+        $this->extra  = null;
+        $this->dev    = null;
+        $this->ignore = null;
     }
 
     public function getRulesetsAnalyzers(array $theme = array()): array {
-        $main  = $this->main ->getRulesetsAnalyzers($theme);
-        $extra = $this->extra->getRulesetsAnalyzers($theme);
-        $ext   = $this->ext  ->getRulesetsAnalyzers($theme);
-        $dev   = $this->dev  ->getRulesetsAnalyzers($theme);
+        $main     = $this->main   ->getRulesetsAnalyzers($theme);
+        $extra    = $this->extra  ->getRulesetsAnalyzers($theme);
+        $ext      = $this->ext    ->getRulesetsAnalyzers($theme);
+        $dev      = $this->dev    ->getRulesetsAnalyzers($theme);
+        $ignore   = $this->ignore ->getRulesetsAnalyzers($theme);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_diff(array_merge($main, $extra, $ext, $dev), $ignore);
     }
 
     public function getRulesetForAnalyzer(string $analyzer = ''): array {

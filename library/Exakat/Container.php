@@ -86,7 +86,9 @@ class Container {
         $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                        $this->config->ext,
                                        $this->config->dev,
-                                       $this->config->rulesets);
+                                       $this->config->rulesets,
+                                       $this->config->ignore_rules,
+                                       );
     }
 
     private function php() {

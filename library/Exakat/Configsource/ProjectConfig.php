@@ -230,7 +230,9 @@ class ProjectConfig extends Config {
         } else {
             $include_dirs = 'include_dirs[] = "' . implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs']) . "\";\n";
         }
-        $ignore_dirs  = 'ignore_dirs[] = "' . implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs']) . "\";\n";
+        $ignore_dirs   = $this->makeIniArray('ignore_dirs', $this->config['ignore_dirs']);
+        $ignore_rules   = $this->makeIniArray('ignore_rules', $this->config['ignore_rules']);
+
         $file_extensions  = implode(',', $this->config['file_extensions']);
 
         $custom_configs = array();
@@ -302,6 +304,9 @@ class ProjectConfig extends Config {
 ;Ignored dirs and files, relative to code source root.
 $ignore_dirs
 
+;Ignored rules.
+$ignore_rules
+
 ;Included dirs or files, relative to code source root. Default to all.
 ;Those are added after ignoring directories
 $include_dirs
@@ -322,6 +327,10 @@ $custom_configs
 INI;
 
         return $configIni;
+    }
+    
+    private static function makeIniArray(string $name, array $array) : string {
+        return $name.'[] = "' . implode("\";\n{$name}[] = \"", $array) . "\";\n";
     }
 }
 
