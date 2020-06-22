@@ -37,7 +37,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         $constantsPHP = makeFullNsPath($constantsPHP, \FNP_CONSTANT);
 
         $query = $this->newQuery('SpotPHPNativeConstants');
-        $query->atomIs(Analyzer::STATIC_NAMES, Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->values('fullnspath')
               ->unique();
@@ -75,7 +75,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         $search = array_merge(...$search);
 
         $query = $this->newQuery('SpotPHPNativeConstants');
-        $query->atomIs(Analyzer::STATIC_NAMES, Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->hasNoIn('DEFINITION')
               ->fullnspathIs($search, Analyzer::CASE_SENSITIVE)
