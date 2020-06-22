@@ -134,6 +134,8 @@ class DefaultConfig extends Config {
                                'project_packagist'   => '',
                                'other_php_versions'  => array(),
 
+                               'ignore_rules'        => array(),
+
                                'remote'              => 'none',
 
                                'project_reports'     => array('Diplomat',
