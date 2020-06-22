@@ -34,10 +34,9 @@ class UselessTypeCheck extends Analyzer {
         // function foo(A $a) { if (is_null($a)) {}}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->isNotNullable()
 
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
+             ->atomIsNot(array('Void', 'Null'))
              ->inIs('TYPEHINT')
 
              ->not(
@@ -56,10 +55,8 @@ class UselessTypeCheck extends Analyzer {
         // function foo(A $a) { if ($a === null) {}}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->isNotNullable()
-
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
+             ->atomIsNot(array('Void', 'Null'))
              ->inIs('TYPEHINT')
 
              ->not(

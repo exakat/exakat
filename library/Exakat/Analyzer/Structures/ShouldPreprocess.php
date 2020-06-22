@@ -57,8 +57,10 @@ class ShouldPreprocess extends Analyzer {
                             ))
              ->hasNoInstruction('Constant')
 
-            // Functioncall, that are not authorized
+            // Filter functioncalls, that are not authorized
              ->noAtomWithoutPropertyInside('Functioncall', 'fullnspath', $functionList)
+
+            // Filter php constants
              ->noAnalyzerInside(array('Identifier', 'Nsname'), 'Constants/IsPhpConstant')
 
             // PHP Constants are not authorized
