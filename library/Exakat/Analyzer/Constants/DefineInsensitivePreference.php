@@ -73,7 +73,7 @@ GREMLIN;
 
         $this->atomIs('Defineconstant')
              ->raw("sideEffect{ $mapping }")
-             ->raw('filter{ x2 in ***}', $types)
+             ->raw('filter{ x2.toLong() in ***}', $types)
              ->back('first');
         $this->prepareQuery();
     }

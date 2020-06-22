@@ -28,13 +28,13 @@ use Exakat\Analyzer\Analyzer;
 class ComparisonFavorite extends Analyzer {
 
     public function analyze() {
-        $codeInt = $this->dictCode->translate(array('!==', '==='));
+        $codeInt = array_values($this->dictCode->translate(array('!==', '===')));
         if (empty($codeInt)) {
             return;
         }
 
         $mapping = <<<'GREMLIN'
-if (it.get().value("code") in ***) {
+if (it.get().value("code").toLong() in ***) {
     x2 = 'strict';
 } else {
     x2 = 'relaxed';
@@ -70,10 +70,6 @@ GREMLIN;
             return;
         }
         $types = array_keys($types);
-
-        if (empty($types)) {
-            return;
-        }
 
         $this->atomIs('Comparison')
              ->codeIs($comparators)
