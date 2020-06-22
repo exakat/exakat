@@ -104,6 +104,7 @@ class Doctor extends Tasks {
 
         $stats['exakat']['rulesets']       = $this->array2list($this->config->project_rulesets);
         $stats['exakat']['extra rulesets'] = $this->array2list(array_keys($this->config->rulesets));
+        $stats['exakat']['ignored rules']  = $this->array2list($this->config->ignore_rules);
 
         $stats['exakat']['tokenslimit'] = number_format((int) $this->config->token_limit, 0, '', ' ');
         if ($list = $this->config->ext->getPharList()) {
