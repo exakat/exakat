@@ -5438,8 +5438,10 @@ class Load extends Tasks {
         if (is_string($right) && mb_strtolower($right) === 'class') {
             $static = $this->addAtom('Staticclass', $current);
             $fullcode = "$left->fullcode::$right";
-            $this->getFullnspath($left, 'class', $left);
-            $this->calls->addCall('class', $left->fullnspath, $left);
+            if (!$left->isA(array('Functioncall', 'Methodcall', 'Staticmethodcall'))) {
+                $this->getFullnspath($left, 'class', $left);
+                $this->calls->addCall('class', $left->fullnspath, $left);
+            }
             // We are not sending $left, as it has no impact
             $this->runPlugins($left);
             $this->runPlugins($static, array('CLASS' => $left));
@@ -5458,8 +5460,10 @@ class Load extends Tasks {
             $this->addLink($static, $right, 'CONSTANT');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
 
-            $this->getFullnspath($left, 'class', $left);
-            $this->calls->addCall('class', $left->fullnspath, $left);
+            if (!$left->isA(array('Functioncall', 'Methodcall', 'Staticmethodcall'))) {
+                $this->getFullnspath($left, 'class', $left);
+                $this->calls->addCall('class', $left->fullnspath, $left);
+            }
             $static->fullnspath = "{$left->fullnspath}::{$right->fullcode}";
             $static->aliased = self::NOT_ALIASED;
             $this->runPlugins($static, array('CLASS'    => $left,
@@ -5478,8 +5482,8 @@ class Load extends Tasks {
 
             if (!$left->isA(array('Functioncall', 'Methodcall', 'Staticmethodcall'))) {
                 $this->getFullnspath($left, 'class', $left);
+                $this->calls->addCall('class', $left->fullnspath, $left);
             }
-            $this->calls->addCall('class', $left->fullnspath, $left);
             $this->addLink($static, $right, 'MEMBER');
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
@@ -5488,8 +5492,10 @@ class Load extends Tasks {
             $static = $this->addAtom('Staticmethodcall', $current);
             $this->addLink($static, $right, 'METHOD');
 
-            $this->getFullnspath($left, 'class', $left);
-            $this->calls->addCall('class', $left->fullnspath, $left);
+            if (!$left->isA(array('Functioncall', 'Methodcall', 'Staticmethodcall'))) {
+                $this->getFullnspath($left, 'class', $left);
+                $this->calls->addCall('class', $left->fullnspath, $left);
+            }
             $fullcode = "{$left->fullcode}::{$right->fullcode}";
             $this->runPlugins($static, array('CLASS'  => $left,
                                              'METHOD' => $right));

@@ -57,7 +57,7 @@ class LoadFinal {
     public function run() {
         $this->log('Start');
         display('Start load final');
-
+return;
         $this->init();
 
         $this->addReturnedVoid();

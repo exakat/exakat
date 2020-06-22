@@ -29,7 +29,9 @@ class NoNeedGetClass extends Analyzer {
         // get_class($a->b)::$c   => $a->b::$c
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->functioncallIs('\\get_class')
+             ->outIsIE('CODE') // Skip parenthesis only
+             ->atomIs('Functioncall')
+             ->fullnspathIs('\\get_class')
              ->back('first');
         $this->prepareQuery();
     }
