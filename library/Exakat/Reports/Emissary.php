@@ -574,7 +574,7 @@ HTML;
         foreach($res->toArray() as $r) {
             $rulesets[] = "analyzer[] = \"$r[analyzer]\";";
         }
-        
+
         $rulesets = implode(PHP_EOL, $rulesets);
 
         $finalHTML = $this->injectBloc($finalHTML, 'RULESET',  $rulesets);

@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Reports\Helpers\PhpCodeTree;
 
 class Stubs extends Reports {
     const FILE_EXTENSION = 'php';
@@ -31,109 +30,115 @@ class Stubs extends Reports {
     const INDENTATION = '    ';
 
     public function _generate(array $analyzerList): string {
-        $code = new PhpCodeTree($this->dump);
-        $code->load();
+        $report = new StubsJson();
 
-        $code->map('functions', function ($function) {
-            if ($function['function'] === 'Closure') { return '';}
-            $phpdoc = ($function['phpdoc'] == ' ') ? '' : self::INDENTATION . $function['phpdoc'] . PHP_EOL;
+        $code = json_decode( $report->_generate(array()));
 
-            $returntype = ($function['returntype'] === null) ? '' : ' : ' . $function['returntype'];
-            return "$phpdoc    function $function[function]($function[signature])$returntype { }";
-        });
-        $code->reduce('functions', function ($carry, $item) {
-            return $carry . "\n" . $item;
-        });
-
-        $code->map('constants', function ($constant) {
-            $phpdoc = ($constant['phpdoc'] == ' ') ? '' : self::INDENTATION . $constant['phpdoc'];
-
-            if ($constant['type'] === 'define') {
-                return $phpdoc . self::INDENTATION . "define('$constant[constant]', $constant[value]);";
-            } else {
-                return $phpdoc . self::INDENTATION . "const $constant[constant] = $constant[value];";
+        $result = array();
+        foreach($code as $version) {
+            foreach($version as $name => $namespace) {
+                $result[] = $this->namespace($name, $namespace);
             }
-        });
-        $code->reduce('constants', function ($carry, $item) {
-            return $carry . "\n" . $item;
-        });
+        }
 
-        $code->map('classconstants', function ($classconstants) {
-            $phpdoc = ($classconstants['phpdoc'] == ' ') ? '' : self::INDENTATION . $classconstants['phpdoc'];
-            return $phpdoc . self::INDENTATION . self::INDENTATION . ($classconstants['visibility'] ? $classconstants['visibility'] . ' ' : '') . "const $classconstants[constant] = $classconstants[value];";
-        });
-        $code->reduce('classconstants', function ($carry, $item) {
-            return $carry . "\n" . $item;
-        });
+        $return =  "<?php\n" . implode(PHP_EOL, $result) . "\n?>\n";
 
-        $code->map('properties', function ($properties) {
-            $phpdoc = ($properties['phpdoc'] == ' ') ? '' : self::INDENTATION . $properties['phpdoc'];
+        print $return;
 
-            $default = ($properties['value'] == '' ? '' : ' = ' . $properties['value']);
-            $properties['visibility'] = ($properties['visibility'] == '' ? 'var' : $properties['visibility'] );
-            return "$phpdoc        $properties[visibility] $properties[property]$default;";
-        });
-        $code->reduce('properties', function ($carry, $item) {
-            return $carry . "\n" . $item;
-        });
+        return $return;
+    }
 
-        $code->map('methods', function ($method) {
-            $options = ($method['visibility'] == '' ? '' : $method['visibility'] . ' ') .
-                       ($method['static']     == 0 ? '' : 'static ') .
-                       ($method['abstract']   == 0 ? '' : 'abstract ') .
-                       ($method['final']      == 0 ? '' : 'final ');
-            $options = trim($options);
-            $options .= !empty($options) ? ' ' : '';
-            $returntype = ($method['returntype'] == ' ') ? '' : ' : ' . $method['returntype'];
-            $phpdoc = ($method['phpdoc'] == ' ') ? '' : self::INDENTATION . $method['phpdoc'] . PHP_EOL;
+    private function namespace(string $name, object $namespace): string {
+        $result = array('namespace ' . trim($name, '\\') . ' {');
 
-            $block = (($method['type'] === 'interface') || ($method['abstract'] == 1)) ? ';' : ' { }';
-            return $phpdoc . self::INDENTATION . self::INDENTATION . "{$options}function $method[method]($method[signature])$returntype $block";
-        });
-        $code->reduce('methods', function ($carry, $item) {
-            return $carry . "\n" . $item;
-        });
-
-        $code->map('cits', function ($cit) {
-            $abstract = $cit['abstract'] === 1 ? 'abstract ' : '';
-            $final = $cit['final'] === 1 ? 'final ' : '';
-            $extends = empty($cit['extends']) ? '' : ' extends ' . $cit['extends'] . ' ';
-            $implements = empty($cit['implements']) ? '' : ' implements ' . $cit['implements'] . ' ';
-            $phpdoc = ($cit['phpdoc'] == ' ') ? '' : self::INDENTATION . $cit['phpdoc'] . PHP_EOL;
-            $use = ($cit['use'] === null) ? '' : self::INDENTATION . self::INDENTATION . 'use ' . $cit['use'] . ';' . PHP_EOL;
-
-            return $phpdoc . self::INDENTATION . "{$final}{$abstract}$cit[type] $cit[name]{$extends}{$implements} {\n$use"
-                                               . ($cit['classconstants'][$cit['id']]['reduced']     ?? (self::INDENTATION . self::INDENTATION . '/* No class constants */ ')) . PHP_EOL
-                                               . ($cit['properties'][$cit['id']]['reduced']         ?? (self::INDENTATION . self::INDENTATION . '/* No properties      */ ')) . PHP_EOL
-                                               . ($cit['methods'][$cit['id']]['reduced']            ?? (self::INDENTATION . self::INDENTATION . '/* No methods         */ ')) . PHP_EOL
-                                               . self::INDENTATION . "}\n";
-        });
-        $code->reduce('cits', function ($carry, $item) {
-            return $carry . "\n" . $item;
-        });
-
-        $code->map('namespaces', function ($namespace) {
-            if ($namespace['namespace'] === '\\' &&
-                empty($namespace['constants'][$namespace['id']]['reduced']) &&
-                empty($namespace['functions'][$namespace['id']]['reduced']) &&
-                empty($namespace['cits'][$namespace['id']]['reduced'])) {
-                return '';
+        if (isset($namespace->constants)) {
+            foreach($namespace->constants as $constantName => $constant) {
+                $result[] = self::INDENTATION . $this->constant($constantName, $constant);
             }
+            $result[] = '';
+        }
 
-            // empty namspaces are also displayed
+        if (isset($namespace->functions)) {
+            foreach($namespace->functions as $functionName => $function) {
+                $result[] = self::INDENTATION . $this->function($functionName, $function);
+            }
+            $result[] = '';
+        }
 
-            return 'namespace ' . ltrim($namespace['namespace'], '\\') . " {\n"
-                                            . ($namespace['constants'][$namespace['id']]['reduced'] ?? (self::INDENTATION . '/* No constant definitions */ ')) . PHP_EOL
-                                            . ($namespace['functions'][$namespace['id']]['reduced'] ?? (self::INDENTATION . '/* No function definitions */ ')) . PHP_EOL
-                                            . ($namespace['cits'][$namespace['id']]['reduced']      ??( self::INDENTATION . '/* No cit      definitions */ ')) . PHP_EOL
-                                            . "\n}\n";
-        });
+        if (isset($namespace->class)) {
+            foreach($namespace->class as $className => $class) {
+                $result[] = $this->class($className, $class);
+            }
+            $result[] = '';
+        }
 
-        $code->reduce('namespaces', function ($carry, $item) {
-            return $carry . "\n" . $item;
-        });
+        $result[] = "}\n";
 
-        return "<?php\n" . $code->get('namespaces') . "\n?>\n";
+        return join(PHP_EOL, $result);
+    }
+
+    private function class(string $name, object $class): string {
+        $result = array(self::INDENTATION . "class $name {");
+
+        if (isset($class->constants)) {
+            foreach($class->constants as $constantName => $constant) {
+                $result[] = self::INDENTATION . self::INDENTATION . $this->constant($constantName, $constant);
+            }
+        }
+
+        if (isset($class->properties)) {
+            foreach($class->properties as $propertyName => $property) {
+                $result[] = self::INDENTATION . self::INDENTATION . $this->property($propertyName, $property);
+            }
+        }
+
+        if (isset($class->methods)) {
+            foreach($class->methods as $functionName => $function) {
+                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function);
+            }
+        }
+
+        $result[] = self::INDENTATION . "}\n";
+
+        return join(PHP_EOL, $result);
+    }
+
+    private function constant(string $name, object $values): string {
+        if (isset($values->type) && $values->type == 'define') {
+            return "define('$name', $values->value);";
+        } else {
+            return "$values->visibility const $name = $values->value;";
+        }
+    }
+
+    private function property(string $name, object $values): string {
+        $static   = empty($values->static) ? '' : 'static ';
+        $typehint = implode('|', $values->typehint);
+        $phpdoc   = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL;
+        return $phpdoc . self::INDENTATION . $static . "$values->visibility $name;";
+    }
+
+    private function function(string $name, object $values): string {
+        $reference  = empty($values->reference) ? '' : '&';
+        $visibility = empty($values->visibility) ? '' : $values->visibility . ' ';
+        $static     = empty($values->static) ? '' : 'static ';
+        $final      = empty($values->final) ? '' : 'static ';
+        $typehint   = $values->returntypes[0] === '' ? '' : ': ' . implode('|', $values->returntypes) . ' ';
+        $phpdoc     = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL . self::INDENTATION;
+
+        $arguments = array();
+        if (isset($values->arguments)) {
+            foreach($values->arguments as $argName => $argDetails) {
+                $referenceArgs  = empty($values->referenceArgs) ? '' : ' &';
+                $typehintArgs   = empty($argDetails->returntypes) ? '' : implode('|', $argDetails->returntypes) . ' ';
+                $default        = $argDetails->value === '' ? '' : ' = ' . $argDetails->value;
+
+                $arguments[] = $typehintArgs . $referenceArgs . $argDetails->name . $default;
+            }
+        }
+        $arguments = implode(', ', $arguments);
+
+        return $phpdoc . "{$final}{$visibility}{$static}function {$reference}$name($arguments) $typehint{}";
     }
 }
 

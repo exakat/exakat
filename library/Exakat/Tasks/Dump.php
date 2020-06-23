@@ -474,7 +474,7 @@ GREMLIN
                 $namespaceId = $namespacesId[$namespace];
             } else {
                 $namespaceId = 1;
-                
+
             }
 
             $cit_implements[$row['line'] . $row['fullnspath']] = $row['implements'];
@@ -774,13 +774,13 @@ GREMLIN
              ->back('first')
              ->raw(<<<'GREMLIN'
 sideEffect{
-    init = 'None';
+    init = '';
     typehint = [];
     typehint_fnp = [];
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
 .where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
-.where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+.where( __.out('DEFAULT').not(hasLabel('Void')).not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .map{ 
     x = ["name": name,
          "rank":it.get().value("rank"),
@@ -811,12 +811,12 @@ GREMLIN
                               (int) $citId[$row['classline'] . $row['classe']],
                               $methodIds[$row['classe'] . '::' . $row['methode']],
                               (int) $row['rank'],
-                               $row['init'],
-                               (int) $row['reference'],
-                               (int) $row['variadic'],
-                               (int) $row['line'],
-                               $row['typehint'],
-                               $row['typehint_fnp'],
+                              (int) $row['reference'],
+                              (int) $row['variadic'],
+                              $row['init'],
+                              (int) $row['line'],
+                              $row['typehint'],
+                              $row['typehint_fnp'],
             );
         }
         $total = $this->storeToDumpArray('arguments', $toDump);
@@ -838,7 +838,7 @@ g.V().hasLabel("Propertydefinition").as("property")
     typehint_fnp = [];
 }
      .where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
-     .where( __.out('DEFAULT').not(where( __.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+     .where( __.out('DEFAULT').not(hasLabel('Void')).not(where( __.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
      .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .in("PPP").hasLabel("Class", "Interface", "Trait")
      .sideEffect{classe = it.get().value("fullnspath"); }
@@ -909,14 +909,14 @@ GREMLIN;
 
         // Class Constant
         $query = $this->newQuery('cit methods');
-        $query->atomIs(array("Class", "Classanonymous", "Interface"), Analyzer::WITHOUT_CONSTANTS)
+        $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('line', 'ligne')
               ->savePropertyAs('line', 'classline')
               ->savePropertyAs('fullnspath', 'classe')
               ->outIs('CONST')
               ->savePropertyAs('visibility', 'visibilite')
               ->initVariable('phpdoc', '""')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
       where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .where( __.out('CONST').out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
      .where( __.out('CONST').out('VALUE').sideEffect{ valeur = it.get().value("fullcode")}.fold())
@@ -1015,8 +1015,8 @@ GREMLIN
         $total = 0;
         $toDump = array();
         foreach($result->toArray() as $row) {
-            if (isset($namespacesId[$row['namespace'].'\\'])) {
-                $namespaceId = $namespacesId[$row['namespace'].'\\'];
+            if (isset($namespacesId[$row['namespace'] . '\\'])) {
+                $namespaceId = $namespacesId[$row['namespace'] . '\\'];
             } else {
                 $namespaceId = 1;
             }
@@ -1212,13 +1212,13 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
 .select('first')
 
 .sideEffect{
-    init = 'None';
+    init = '';
     typehint = [];
     typehint_fnp = [];
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
 .where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
-.where( __.out('DEFAULT').not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+.where( __.out('DEFAULT').not(hasLabel('Void')).not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .map{ 
     x = ["name": name,
          "fullnspath":fullnspath,

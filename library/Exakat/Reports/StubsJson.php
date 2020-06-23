@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Reports\Helpers\PhpCodeTree;
 
 class StubsJson extends Reports {
     const FILE_EXTENSION = 'json';
@@ -32,12 +31,12 @@ class StubsJson extends Reports {
 
     public function _generate(array $analyzerList): string {
         $data = array('versions' => array());
-        
+
         // namespaces
         $res = $this->dump->fetchTable('namespaces');
         foreach($res->toArray() as $namespace) {
             $data['versions'][$namespace['namespace']] = array();
-            
+
             $namespaces[$namespace['id']] = $namespace['namespace'];
         }
 
@@ -57,9 +56,9 @@ class StubsJson extends Reports {
         $res = $this->dump->fetchTable('functions');
         foreach($res->toArray() as $function) {
             if ($function['type'] === 'closure') { continue; }
-            
+
             $details = array('returntypes' => explode('|', $function['returntype']),
-                             'reference'   => json_encode($function['reference'] === 1),
+                             'reference'   => $function['reference'] === 1,
                                 );
             $data['versions'][$namespaces[$function['namespaceId']]]['functions'][$function['function']] = $details;
 
@@ -74,11 +73,11 @@ class StubsJson extends Reports {
         $res = $this->dump->fetchTable('cit');
 //        print_r($res->toArray());die();
         foreach($res->toArray() as $cit) {
-            $details = array('abstract'   => json_encode($cit['abstract'] === 1),
-                             'final'   => json_encode($cit['final'] === 1),
+            $details = array('abstract'   => $cit['abstract'] === 1,
+                             'final'   => $cit['final'] === 1,
                              );
             $data['versions'][$namespaces[$cit['namespaceId']]][$cit['type']][$cit['name']] = $details;
-            
+
             $cits[$cit['id']] = $cit['name'];
             $cits2ns[$cit['id']] = $cit['namespaceId'];
             $cits2type[$cit['id']] = $cit['type'];
@@ -91,6 +90,7 @@ class StubsJson extends Reports {
         foreach($res->toArray() as $classconstant) {
             $details = array('value'        => $classconstant['value'],
                              'visibility'   => $classconstant['visibility'],
+                             'phpdoc'       => $classconstant['phpdoc'] ?? '',
                              );
 
             $data['versions'][$namespaces[$cits2ns[$classconstant['citId']]]][$cits2type[$classconstant['citId']]][$cits[$classconstant['citId']]]['constants'][$classconstant['constant']] = $details;
@@ -102,8 +102,9 @@ class StubsJson extends Reports {
         foreach($res->toArray() as $property) {
             $details = array('value'        => $property['value'],
                              'visibility'   => $property['visibility'],
-                             'static'       => json_encode($property['static'] === 1),
+                             'static'       => $property['static'] === 1,
                              'typehint'     => explode('|', $property['typehint']),
+                             'phpdoc'       => $property['phpdoc'] ?? '',
                              );
 
             $data['versions'][$namespaces[$cits2ns[$property['citId']]]][$cits2type[$property['citId']]][$cits[$property['citId']]]['properties'][$property['property']] = $details;
@@ -113,9 +114,9 @@ class StubsJson extends Reports {
 //        print_r($res->toArray());die();
         foreach($res->toArray() as $method) {
             $details = array('visibility'   => $method['visibility'],
-                             'static'       => json_encode($method['static'] === 1),
-                             'reference'       => json_encode($method['reference'] === 1),
-                             'returntype'     => explode('|', $method['returntype']),
+                             'static'       => $method['static'] === 1,
+                             'reference'    => $method['reference'] === 1,
+                             'returntypes'  => explode('|', $method['returntype']),
                              );
 
             $data['versions'][$namespaces[$cits2ns[$method['citId']]]][$cits2type[$method['citId']]][$cits[$method['citId']]]['methods'][$method['method']] = $details;
@@ -126,7 +127,8 @@ class StubsJson extends Reports {
         $res = $this->dump->fetchTable('arguments');
 //        print_r($res->toArray());die();
         foreach($res->toArray() as $argument) {
-            $details = array('name'   => $argument['name'],
+            $details = array('name'         => $argument['name'],
+                             'reference'    => $argument['reference'] === 1,
                              'typehint'     => explode('|', $argument['typehint']),
                              'value'        => $argument['init'],
                              );
