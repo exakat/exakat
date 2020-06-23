@@ -74,15 +74,26 @@ class StubsJson extends Reports {
 //        print_r($res->toArray());die();
         foreach($res->toArray() as $cit) {
             $details = array('abstract'   => $cit['abstract'] === 1,
-                             'final'   => $cit['final'] === 1,
+                             'final'      => $cit['final'] === 1,
+                             'extends'    => $cit['extends'],
+                             'implements' => array(),
+                             'use'        => array(),
                              );
             $data['versions'][$namespaces[$cit['namespaceId']]][$cit['type']][$cit['name']] = $details;
 
-            $cits[$cit['id']] = $cit['name'];
-            $cits2ns[$cit['id']] = $cit['namespaceId'];
+            $cits[$cit['id']]      = $cit['name'];
+            $cits2ns[$cit['id']]   = $cit['namespaceId'];
             $cits2type[$cit['id']] = $cit['type'];
         }
-//        print_r($cits);
+//        print_r($cits2ns);
+
+        // extensions
+        $res = $this->dump->fetchTable('cit_implements');
+        foreach($res->toArray() as $cit) {
+            print_r($cit);
+            $data['versions'][$namespaces[$cits2ns[$cit['implementing']]]][$cits2type[$cit['implementing']]][$cits[$cit['implementing']]][$cit['type']][] = $cit['implements'];
+        }
+//        print_r($cits);die();
 
         // class constants
         $res = $this->dump->fetchTable('classconstants');
@@ -115,6 +126,7 @@ class StubsJson extends Reports {
         foreach($res->toArray() as $method) {
             $details = array('visibility'   => $method['visibility'],
                              'static'       => $method['static'] === 1,
+                             'abstract'     => $method['abstract'] === 1,
                              'reference'    => $method['reference'] === 1,
                              'returntypes'  => explode('|', $method['returntype']),
                              );

@@ -37,7 +37,7 @@ class Stubs extends Reports {
         $result = array();
         foreach($code as $version) {
             foreach($version as $name => $namespace) {
-                $result[] = $this->namespace($name, $namespace);
+                $result[] = $this->namespace($name, (object) $namespace);
             }
         }
 
@@ -72,13 +72,32 @@ class Stubs extends Reports {
             $result[] = '';
         }
 
+        if (isset($namespace->interface)) {
+            foreach($namespace->interface as $interfaceName => $interface) {
+                $result[] = $this->interface($interfaceName, $interface);
+            }
+            $result[] = '';
+        }
+
+        if (isset($namespace->trait)) {
+            foreach($namespace->trait as $traitName => $trait) {
+                $result[] = $this->trait($traitName, $trait);
+            }
+            $result[] = '';
+        }
+
         $result[] = "}\n";
 
         return join(PHP_EOL, $result);
     }
 
     private function class(string $name, object $class): string {
-        $result = array(self::INDENTATION . "class $name {");
+        $final      = empty($class->final)      ? '' : 'static ';
+        $abstract   = empty($class->abstract)   ? '' : 'abstract ';
+        $implements = empty($class->implements) ? '' : ' implements '.implode(', ', $class->implements);
+        $extends    = empty($class->extends)    ? '' : ' extends '.$class->extends;
+        $use        = empty($class->use)        ? '' : PHP_EOL.self::INDENTATION.'use '.implode(', ', $class->use).';'.PHP_EOL;
+        $result = array(self::INDENTATION . "{$abstract}{$final}class $name{$extends}{$implements} {".$use);
 
         if (isset($class->constants)) {
             foreach($class->constants as $constantName => $constant) {
@@ -94,6 +113,48 @@ class Stubs extends Reports {
 
         if (isset($class->methods)) {
             foreach($class->methods as $functionName => $function) {
+                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function);
+            }
+        }
+
+        $result[] = self::INDENTATION . "}\n";
+
+        return join(PHP_EOL, $result);
+    }
+
+    private function trait(string $name, object $trait): string {
+        $use        = empty($class->use)        ? '' : PHP_EOL.self::INDENTATION.'use '.implode(', ', $class->use).';'.PHP_EOL;
+        $result = array(self::INDENTATION . "trait $name {".$use);
+
+        if (isset($trait->properties)) {
+            foreach($trait->properties as $propertyName => $property) {
+                $result[] = self::INDENTATION . self::INDENTATION . $this->property($propertyName, $property);
+            }
+        }
+
+        if (isset($trait->methods)) {
+            foreach($trait->methods as $functionName => $function) {
+                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function);
+            }
+        }
+
+        $result[] = self::INDENTATION . "}\n";
+
+        return join(PHP_EOL, $result);
+    }
+
+    private function interface(string $name, object $interface): string {
+        $extends    = empty($interface->extends) ? '' : ' extends '.$interface->extends;
+        $result = array(self::INDENTATION . "interface $name{$extends} {");
+
+        if (isset($interface->constants)) {
+            foreach($interface->constants as $constantName => $constant) {
+                $result[] = self::INDENTATION . self::INDENTATION . $this->constant($constantName, $constant);
+            }
+        }
+
+        if (isset($interface->methods)) {
+            foreach($interface->methods as $functionName => $function) {
                 $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function);
             }
         }
@@ -123,6 +184,8 @@ class Stubs extends Reports {
         $visibility = empty($values->visibility) ? '' : $values->visibility . ' ';
         $static     = empty($values->static) ? '' : 'static ';
         $final      = empty($values->final) ? '' : 'static ';
+        $abstract   = empty($values->abstract) ? '' : 'abstract ';
+        $block      = empty($values->abstract) ? '{}' : ' ;';
         $typehint   = $values->returntypes[0] === '' ? '' : ': ' . implode('|', $values->returntypes) . ' ';
         $phpdoc     = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL . self::INDENTATION;
 
@@ -138,7 +201,7 @@ class Stubs extends Reports {
         }
         $arguments = implode(', ', $arguments);
 
-        return $phpdoc . "{$final}{$visibility}{$static}function {$reference}$name($arguments) $typehint{}";
+        return $phpdoc . "{$final}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
     }
 }
 

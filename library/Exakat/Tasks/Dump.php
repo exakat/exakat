@@ -535,6 +535,7 @@ GREMLIN
             $row['namespace'] = $namespaceId;
 
             $cit[] = $row;
+            print_r($row);
 
             ++$total;
         }
@@ -563,8 +564,8 @@ GREMLIN
          'file':file,
          'line':it.get().value("line"),
          
-         'extends':0,
-         'implements':0,
+         'extends':'',
+         'implements':[],
          'uses':useList
          ];
 }
@@ -614,6 +615,7 @@ GREMLIN
             $this->storeToDumpArray('cit', $cit);
 
             $toDump = array();
+            print_r($cit_implements);
             foreach($cit_implements as $id => $impl) {
                 foreach($impl as $implements) {
                     $citIds = preg_grep('/^\d+\\\\' . addslashes(mb_strtolower($implements)) . '$/', array_keys($citId));
@@ -628,6 +630,7 @@ GREMLIN
                     }
                 }
             }
+            print_r($toDump);
             $total = $this->storeToDumpArray('cit_implements', $toDump);
             display("$total implements \n");
 
