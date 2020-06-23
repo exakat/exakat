@@ -2655,9 +2655,11 @@ class Load extends Tasks {
                                                            ),
                      \STRICT_COMPARISON)) {
             $ppp = $this->processNext();
+            $this->makePhpdoc($ppp);
             $returnTypes = '';
         } else {
             $ppp = $this->addAtom('Ppp', $current);
+            $this->makePhpdoc($ppp);
             $returnTypes = $this->processTypehint($ppp);
 
             $this->processSGVariable($ppp, $promoted);
@@ -2665,7 +2667,6 @@ class Load extends Tasks {
 
         $ppp->visibility = strtolower($visibility);
         $ppp->fullcode   = "$visibility {$returnTypes}$ppp->fullcode";
-        $this->makePhpdoc($ppp);
         $this->makeAttributes($ppp);
 
         return $ppp;
@@ -3159,6 +3160,7 @@ class Load extends Tasks {
         --$this->id;
         do {
             ++$this->id;
+            $this->checkPhpdoc();
             if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
                 $reference = self::REFERENCE;
                 ++$this->id;
@@ -3173,6 +3175,7 @@ class Load extends Tasks {
                 } else {
                     $element = $this->processSingle($atom);
                 }
+                $this->makePhpdoc($element);
 
                 if ($element->isA(array('Globaldefinition', 'Staticdefinition', 'Variabledefinition')) &&
                     !isset($this->currentVariables[$element->code])) {
@@ -3195,6 +3198,7 @@ class Load extends Tasks {
                                              $this->phptokens::T_CLOSE_TAG,
                                              $this->phptokens::T_COMMA,
                                              $this->phptokens::T_CLOSE_PARENTHESIS,
+                                             $this->phptokens::T_DOC_COMMENT,
                                              ),
                                         \STRICT_COMPARISON));
 
@@ -3205,6 +3209,7 @@ class Load extends Tasks {
             } else {
                 // global $a[2] = 2 ?
                 $element = $this->processNext();
+                $this->makePhpdoc($element);
                 $this->popExpression();
                 $default = $this->addAtomVoid();
             }
@@ -3236,6 +3241,7 @@ class Load extends Tasks {
             }
             $fullcode[] = $element->fullcode;
             $extras[] = $element;
+            $this->checkPhpdoc();
         }  while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
 
         $static->fullcode = (!empty($fullcodePrefix) ? $fullcodePrefix . ' ' : '') . implode(', ', $fullcode);
@@ -5067,6 +5073,7 @@ class Load extends Tasks {
 
     private function makePhpdoc(Atom $node): void {
         foreach($this->phpDocs as $phpdoc) {
+            print "PHPDOC to $node->atom\n";
             $this->addLink($node, $phpdoc, 'PHPDOC');
         }
 

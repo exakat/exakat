@@ -1,0 +1,37 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : NAME
+            6
+          Label : PPP
+            9
+            Label : PHPDOC
+              8
+            Label : PPP
+              13
+              Label : DEFAULT
+                15
+                Label : ARGUMENT
+                  17
+                  Label : INDEX
+                    16
+                  Label : VALUE
+                    18
+              Label : PHPDOC
+                12
+            Label : PPP
+              20
+              Label : DEFAULT
+                22
+              Label : PHPDOC
+                19
+            Label : TYPEHINT
+              10
