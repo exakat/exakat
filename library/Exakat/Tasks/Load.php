@@ -1654,12 +1654,12 @@ class Load extends Tasks {
             switch ($cpm->atom) {
                 case 'Usetrait':
                     $link = 'USE';
-                    break; 
+                    break;
 
                 case 'Phpdoc':
                     // Skip everything for phpdocs
                     continue 2;
-                    break; 
+                    break;
 
                 default:
                     $link = strtoupper($cpm->atom);
@@ -3904,7 +3904,7 @@ class Load extends Tasks {
         $current = $this->id;
         $ifthen = $this->addAtom('Ifthen', $current);
         ++$this->id; // Skip (
-        
+
         do {
             $condition = $this->processNext();
         } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class SafePhpvars extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                     );
     }
@@ -43,7 +43,7 @@ class SafePhpvars extends Analyzer {
         $this->atomIs('Phpvariable')
              ->codeIs('$_SERVER', self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE')
-             
+
              ->atomIs('Array')
              ->as('result')
 

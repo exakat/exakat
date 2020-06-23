@@ -48,7 +48,7 @@ class WrongOptionalParameter extends Analyzer {
                      ->hasNoIn('RIGHT')
              )
 
-             ->nextSibling('ARGUMENT')  
+             ->nextSibling('ARGUMENT')
              ->outIsIE('PPP')
              ->outIs('DEFAULT')
              ->atomIs('Void')
@@ -81,7 +81,7 @@ class WrongOptionalParameter extends Analyzer {
                      ->hasNoIn('RIGHT')
              )
 
-             ->nextSibling('ARGUMENT')  
+             ->nextSibling('ARGUMENT')
              // case of promoted properties
              ->outIsIE('PPP')
              ->outIs('DEFAULT')

@@ -37,7 +37,7 @@ class PhpConstantUsage extends Analyzer {
         $this->analyzerIs('Constants/ConstantUsage')
              ->is('isPhp', true);
         $this->prepareQuery();
-        
+
         $this->atomIs(array('Boolean', 'Null'));
         $this->prepareQuery();
     }

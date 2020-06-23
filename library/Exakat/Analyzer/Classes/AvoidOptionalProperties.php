@@ -42,7 +42,7 @@ class AvoidOptionalProperties extends Analyzer {
         // if ($this->p)  {}
         $this->atomIs('Member')
              ->hasIn('CONDITION')
-             ->inIs("DEFINITION")
+             ->inIs('DEFINITION')
              ->isMissingOrNull()
              ->back('first');
         $this->prepareQuery();
@@ -53,7 +53,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->atomIs(array('Empty', 'Isset'))
              ->as('results')
              ->back('first')
-             ->inIs("DEFINITION")
+             ->inIs('DEFINITION')
              ->isMissingOrNull()
              ->back('results');
         $this->prepareQuery();

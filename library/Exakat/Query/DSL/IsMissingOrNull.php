@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 class IsMissingOrNull extends DSL {
     public function run(): Command {
         // check for DEFINTION link and the Virtualproperty atom
-        return new Command(<<<GREMLIN
+        return new Command(<<<'GREMLIN'
  where( __.out("DEFAULT").hasLabel("Void", "Null").not(__.in("RIGHT") ))
 GREMLIN
 );

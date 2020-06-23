@@ -31,8 +31,8 @@ class SensitiveArgument extends Analyzer {
 
         foreach($unsafe as $position => $functions) {
             $functions = makeFullNsPath($functions);
-            
-            $position = (int) str_replace("functions", '', $position);
+
+            $position = (int) str_replace('functions', '', $position);
 
             // $_GET/_POST ... directly as argument of PHP functions
             $this->atomFunctionIs($functions)

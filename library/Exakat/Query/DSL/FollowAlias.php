@@ -26,11 +26,11 @@ namespace Exakat\Query\DSL;
 
 class FollowAlias extends DSL {
     public function run(): Command {
-        
+
         $TIME_LIMIT = self::$TIME_LIMIT;
-        
+
         switch(func_num_args()) {
-            case 1: 
+            case 1:
                 $loopings = (int) func_get_arg(0);
                 break;
 
