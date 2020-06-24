@@ -5706,11 +5706,13 @@ All steps
 _________
 
 
-Here is the list of the 217 available steps : 
+Here is the list of the 238 available steps : 
 
 * AddEFrom : adds a link between the current atom from the atom called  (see _As())
 
 * AddETo : adds a link between the current atom to the atom called  (see _As())
+
+* AnalyzerInside : Find occurrences of results for the analyzers mentioned as argument, inside the current atom, or its children.
 
 * AnalyzerInsideMoreThan : Docs for AnalyzerInsideMoreThan
 
@@ -5732,11 +5734,15 @@ Here is the list of the 217 available steps :
 
 * AtomInsideNoDefinition : searches for all atom  inside the current one, by searching every outgoing links, but skips any definition, closure, class, interface, function, etc.
 
+* AtomInsideWithCall : Searches for a method call inside the current atom.
+
 * AtomIs : checks that an atom has a specified name
 
 * AtomIsNot : checks that an atom is not a specified name
 
 * Back : moves the query to the atom called () (see _As()
+
+* CheckTypeWithAtom : Check if the current Atom is compatible with the provided scalar type. Scalar is in the full namespace path form : '\\int', '\\string', '\\void', ...
 
 * ClassDefinition : moves the query to the classDefinition, if it exists
 
@@ -5748,11 +5754,15 @@ Here is the list of the 217 available steps :
 
 * CodeLength : report the length of the string that represents the code
 
+* CollectArguments : Collect all arguments names, by their 'code' property, and store them in a variable (an array), named after the passed argument. Void arguments are skipped, and the final array may be empty, in case of no arguments.
+
 * CollectContainers : Docs for CollectContainers
 
 * CollectExtends : Docs for CollectExtends
 
 * CollectImplements : Docs for CollectImplements
+
+* CollectMethods : Collect all methods names, by their lowercase 'lccode' property, and store them in a variable (an array), named after the passed argument.The final array may be empty, in case of no methods.
 
 * CollectTraits : Collect all the used traits from the current class or anonymous class, into the 'variable'. This will be a list of traits.
 
@@ -5774,11 +5784,15 @@ Here is the list of the 217 available steps :
 
 * Filter : Docs for Filter
 
+* FollowAlias : Follow the tracks of the current variable. 
+
 * FollowCalls : Follow calls of the argument of a function to another function. foo($a, $b) { goo($b); } : the call to $b may be followed to goo(), while no calls may be followed by $a. 
 
 * FollowExpression : Docs for FollowExpression
 
 * FollowParAs : Follow links while skipping parenthesis, assignations, ternary and coalese operators, as they do not provide any meaning there. This step was initially called 'Follow Parenthesis Assignations'. The links provided are followed as long as they match the provided ones in argument, or the 4 atoms mentioned previously. Ternary and Coalesce are followed in all their branches.
+
+* FollowAlias : Find all variables that are using this current one as assignement.
 
 * FullcodeInside : Docs for FullcodeInside
 
@@ -5806,6 +5820,8 @@ Here is the list of the 217 available steps :
 
 * GetStringLength : Docs for GetStringLength
 
+* GetVariable : Returns the requested query variables. Those variables are initialized with initVariable. 
+
 * GoToAllChildren : Docs for GoToAllChildren
 
 * GoToAllElse : Docs for GoToAllElse
@@ -5824,11 +5840,17 @@ Here is the list of the 217 available steps :
 
 * GoToClassInterface : The traversal will go from the current atom to the first class or interface it find, upward. This may be a class, an anonymous class or an interface.
 
+* GoToClassInterfaceTrait : Move the traverser to the class, trait or interface of the current atom, if any. 
+
+* GoToClassTrait : Move the traverser to the class or trait of the current atom, if any. 
+
 * GoToCurrentScope : Docs for GoToCurrentScope
 
 * GoToExpression : Docs for GoToExpression
 
 * GoToExtends : Docs for GoToExtends
+
+* GoToFile : Move the traverser to the file of the current atom. 
 
 * GoToFirstExpression : Docs for GoToFirstExpression
 
@@ -5938,6 +5960,8 @@ Here is the list of the 217 available steps :
 
 * HasNoTrait : Checks that the current atom is not inside a trait.
 
+* HasNoTryCatch : Check if the current atom is inside a try catch structure, in the current context.
+
 * HasNoUsage : Docs for HasNoUsage
 
 * HasNoVariadicArgument : checks if any argument uses the variadic operator 
@@ -5992,6 +6016,8 @@ Here is the list of the 217 available steps :
 
 * IsLowercase : Docs for IsLowercase
 
+* IsMissingOrNull : Checks if the current atom has no explicit default value, and that value is not null.
+
 * IsMore : Docs for IsMore
 
 * IsNot : checks if a property is present, and if its value is different from the given value
@@ -6006,6 +6032,8 @@ Here is the list of the 217 available steps :
 
 * IsNotHash : Docs for IsNotHash
 
+* IsNotIgnored : Check if the atom is not in one of the ignored directory.
+
 * IsNotInheritedMethod : Docs for IsNotInheritedMethod
 
 * IsNotLiteral : Docs for IsNotLiteral
@@ -6016,7 +6044,15 @@ Here is the list of the 217 available steps :
 
 * IsNotMixedcase : Docs for IsNotMixedcase
 
+* IsNotNullable : Checks that a typehint doesn't include the Null type. 
+
+* IsNotPropertyDefined : Checks if the current property as no explicit definition. Exakat assign virtual definitions for every properties, when no definition has been found.
+
 * IsNotUppercase : Docs for IsNotUppercase
+
+* IsNullable : Checks that a typehint include the Null type. 
+
+* IsPropertyDefined : Checks if the current property as an explicit definition. Exakat assign virtual definitions for every properties, when no definition has been found.
 
 * IsReassigned : Docs for IsReassigned
 
@@ -6074,6 +6110,8 @@ Here is the list of the 217 available steps :
 
 * NotSamePropertyAs : Docs for NotSamePropertyAs
 
+* NotSameTypehintAs : Checks if the provided typehint is different from the current atom typehint.
+
 * Optional : Apply the provided sub-query, only if the sub-query returns a valid value. When the subquery returns null, or fails, the current query stays in place. 
 
 * OtherSiblings : Docs for OtherSiblings
@@ -6087,6 +6125,8 @@ Here is the list of the 217 available steps :
 * OutWithRank : follow an outgoing link to the given rank
 
 * OutWithoutLastRank : Docs for OutWithoutLastRank
+
+* PreviousCalls : Find all calls to the current methods.
 
 * PreviousSibling : Docs for PreviousSibling
 
@@ -6111,6 +6151,8 @@ Here is the list of the 217 available steps :
 * SamePropertyAs : Docs for SamePropertyAs
 
 * SamePropertyAsArray : Docs for SamePropertyAsArray
+
+* SameTypehintAs : Checks if the provided typehint is equal to the current atom typehint.
 
 * SaveMethodNameAs : Docs for SaveMethodNameAs
 

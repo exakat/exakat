@@ -37,6 +37,7 @@ There are several reports that may be extracted from Exakat :
 * `SimpleTable`_
 * `Stats`_
 * `Stubs`_
+* `StubsJson`_
 * `Text`_
 * `Top10`_
 * `Topology Order`_
@@ -1662,6 +1663,38 @@ The resulting report is in one file, called `stubs.php`.
 Stubs is a PHP report format.
 
 Stubs doesn't depend on themes.
+
+StubsJson
+_________
+
+StubsJson produces a complete description of definitions from the code.
+
+The StubsJson report includes : 
+
++ Global variables
++ Functions
++ Constants
++ Classes
+  + constants
+  + properties
+  + methods
++ Interfaces
+  + constants
+  + methods
++ Traits
+  + properties
+  + methods
+    
+
+
+
+::
+
+    
+
+StubsJson is a JSON report format.
+
+StubsJson doesn't depend on themes.
 
 Text
 ____

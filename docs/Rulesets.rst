@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 03 Jun 2020 17:17:59 +0000
-.. comment: Generation hash : c7413281d678097e66b5a3928b7f07044980cb78
+.. comment: Generation date : Wed, 24 Jun 2020 07:21:35 +0000
+.. comment: Generation hash : 10f8b68d685a4d7529830c792adbf0a3ab2d70c1
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 389 analysis
+Total : 390 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -454,6 +454,7 @@ Total : 389 analysis
 * :ref:`Useless Unset <useless-unset>`
 * :ref:`Uses Default Values <uses-default-values>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
+* :ref:`Using Deprecated Method <using-deprecated-method>`
 * :ref:`Var Keyword <var-keyword>`
 * :ref:`Variable Is Not A Condition <variable-is-not-a-condition>`
 * :ref:`Weak Typing <weak-typing>`
@@ -1337,7 +1338,7 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 85 analysis
+Total : 89 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1383,6 +1384,7 @@ Total : 85 analysis
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Parent First <parent-first>`
+* :ref:`Possible Alias Confusion <possible-alias-confusion>`
 * :ref:`Possible Increment <possible-increment>`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
@@ -1400,11 +1402,14 @@ Total : 85 analysis
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
 * :ref:`Slice Arrays First <slice-arrays-first>`
+* :ref:`Static Global Variables Confusion <static-global-variables-confusion>`
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`Substr To Trim <substr-to-trim>`
 * :ref:`Substring First <substring-first>`
+* :ref:`Too Long A Block <too-long-a-block>`
 * :ref:`Too Many Children <too-many-children>`
 * :ref:`Too Many Parameters <too-many-parameters>`
+* :ref:`Too Much Indented <too-much-indented>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unused Interfaces <unused-interfaces>`

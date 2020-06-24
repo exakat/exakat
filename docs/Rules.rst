@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 03 Jun 2020 17:17:59 +0000
-.. comment: Generation hash : c7413281d678097e66b5a3928b7f07044980cb78
+.. comment: Generation date : Wed, 24 Jun 2020 07:21:35 +0000
+.. comment: Generation hash : 10f8b68d685a4d7529830c792adbf0a3ab2d70c1
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -494,6 +494,14 @@ This is not the case anymore in PHP 7.0+.
 
 
 See also `Why does PHP 5.2+ disallow abstract static class methods? <https://stackoverflow.com/questions/999066/why-does-php-5-2-disallow-abstract-static-class-methods>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove abstract keyword from the method
+* Remove static keyword from the method
+* Remove the method
 
 +-------------+------------------------+
 | Short name  | Classes/AbstractStatic |
@@ -2163,6 +2171,13 @@ It is recommended to avoid instantiating this class, nor use it is any way.
 
 If you need a ``stdClass`` object, it is faster to build it as an array, then cast it, than instantiate ``stdClass``. This is a micro-optimisation.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Create a custom class to handle the properties
+
 +-------------+-----------------+
 | Short name  | Php/UseStdclass |
 +-------------+-----------------+
@@ -2213,7 +2228,14 @@ And using count after the push is also faster than collecting `array_push() <htt
    ?>
 
 
-This is a micro-optimisation.
+This is a micro-optimisation. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the [] operator
 
 +-------------+-----------------------------+
 | Short name  | Performances/AvoidArrayPush |
@@ -3375,6 +3397,12 @@ Inheriting abstract methods was made available in PHP 7.2. In previous versions,
 
 
 See also `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid inheriting abstract methods for compatibility beyond 7.2 (and older)
 
 +-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/CantInheritAbstractMethod                                                                                                                                |
@@ -4569,6 +4597,13 @@ This behavior changed in PHP 7.3, and `compact() <https://www.php.net/compact>`_
 For performances reasons, this analysis only works inside methods and functions.
 
 See also `compact <http://www.php.net/compact>`_ and `PHP RFC: Make compact function reports undefined passed variables <https://wiki.php.net/rfc/compact>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the name of variable in the compact() argument list
+* Remove the name of variable in the compact() argument list
 
 +-------------+-----------------------------------------------+
 | Short name  | Php/CompactInexistant                         |
@@ -6807,14 +6842,6 @@ It is highly recommended to unset blind variables when they are set up as refere
    foreach($array as $a) {}
    //$array === array(3,4,5,5);
    
-   // subtle variation of the dangling reference problem.
-   // Here, $c is reused across all items in $a (via $b)
-   foreach($a as &$b) {
-       foreach($b as &$c) {
-           $c += 1;
-       }
-   }
-   
    ?>
 
 
@@ -7176,6 +7203,12 @@ Detecting the current class should be done with \:\:class operator.
 
 See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the \:\:class operator to detect the current class name.
+
 +-------------+-----------------------------------------------+
 | Short name  | Php/DetectCurrentClass                        |
 +-------------+-----------------------------------------------+
@@ -7210,6 +7243,12 @@ From the RFC : ``Doing calls like $obj->`__clone( <http://www.php.net/manual/en/
 
 
 See also `Directly calling `__clone <http://www.php.net/manual/en/language.oop5.magic.php>`_ is allowed <https://wiki.php.net/rfc/abstract_syntax_tree#directly_calling_clone_is_allowed>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the clone operator to call the __clone magic method
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/DirectCallToClone                                                                                      |
@@ -8140,6 +8179,12 @@ This is also true if else has a return, and then not. When doing so, don't forge
    
    ?>
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the else clause and move its code to the main part of the method
+
 +-------------+------------------------------------+
 | Short name  | Structures/DropElseAfterReturn     |
 +-------------+------------------------------------+
@@ -8733,6 +8778,14 @@ Empty interfaces are a code smell. Interfaces should contains at least a method 
 
 See also `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_ and `Blog : Are empty interfaces code smell? <https://hackernoon.com/are-interfaces-code-smell-bd19abc266d3>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the interface
+* Add some methods or constants to the interface
+
 +-------------+---------------------------+
 | Short name  | Interfaces/EmptyInterface |
 +-------------+---------------------------+
@@ -8764,6 +8817,14 @@ Empty `list() <https://www.php.net/list>`_ are not allowed anymore in PHP 7. The
    list(,$x) = array(1,2,3);
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove empty list() calls
 
 +-------------+-------------------------------------------+
 | Short name  | Php/EmptyList                             |
@@ -8821,6 +8882,15 @@ Using bracket-style syntax :
    }
    
    ?>
+
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the namespace
 
 +-------------+----------------------------------------------+
 | Short name  | Namespaces/EmptyNamespace                    |
@@ -11707,7 +11777,7 @@ See also `implode() <https://www.php.net/implode>`_.
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Always use the array as the second argument
 
 +-------------+-----------------------------+
 | Short name  | Structures/ImplodeArgsOrder |
@@ -13221,6 +13291,15 @@ While this is syntactically correct, it is unusual that defined resources are us
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the property definition to the child classes
+* Move some of the child methd, using the property, to the parent class
+
 +-------------+-------------------------------+
 | Short name  | Classes/LocallyUnusedProperty |
 +-------------+-------------------------------+
@@ -14600,9 +14679,9 @@ Mismatch Type And Default
 
 The argument typehint and its default value don't match. 
 
-The code may lint and load, and even work when the argument are provided. Though, PHP won't eventually execute it. 
+The code may lint and load, and even work when the arguments are provided. Though, PHP won't eventually execute it. 
 
-Most of the mismatch problems are caught by PHP at linting time. You'll get the following error message : 'Argument 1 passed to foo() must be of the type integer, string given'.
+Most of the mismatch problems are caught by PHP at linting time. It displays the following error message : 'Argument 1 passed to foo() must be of the type integer, string given'.
 
 The default value may be a constant (normal or class constant) : as such, PHP might find its value only at execution time, from another include. As such, PHP doesn't report anything about the situation at compile time.
 
@@ -14612,7 +14691,7 @@ The default value may also be a constant scalar expression : since PHP 7, some o
 
    <?php
    
-   // bad definition
+   // bad definition : the string is actually an integer
    const STRING = 3;
    
    function foo(string $s = STRING) {
@@ -14633,7 +14712,7 @@ The default value may also be a constant scalar expression : since PHP 7, some o
    ?>
 
 
-PHP report typehint and default mismatch at compilation time, unless there is a static expression that can't be resolved within the compiled file : then it is checked only at runtime, leading to a Fatal error.
+PHP reports typehint and default mismatch at compilation time, unless there is a static expression that can't be resolved within the compiled file : then it is checked only at runtime, leading to a Fatal error.
 
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
@@ -15463,6 +15542,12 @@ It is possible to declare several times the same class in the code. PHP will not
 
 It is recommended to avoid declaring several times the same class in the code. The best practice is to separate them with namespaces, they are for here for that purpose. In case those two classes are to be used interchangeably, the best is to use an abstract class or an interface.
 
+Suggestions
+^^^^^^^^^^^
+
+* Store classes with different names in different namespaces
+* Change the name of the classes and give them a common interface to allow from common behavior
+
 +-------------+------------------------------+
 | Short name  | Classes/MultipleDeclarations |
 +-------------+------------------------------+
@@ -15500,6 +15585,13 @@ It is often unexpected to find class ``foo`` in the ``bar.php`` file. This is al
 One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include. 
 
 See also `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Split the file into smaller files, one for each class
 
 +-------------+------------------------------------------------+
 | Short name  | Classes/MultipleClassesInFile                  |
@@ -15670,7 +15762,7 @@ Multiple Identical Trait Or Interface
 #####################################
 
 
-There is no need to use the same trait, or implements the same interface  more than once.
+There is no need to use the same trait, or implements the same interface more than once.
 
 Up to PHP 7.1 (at least), this doesn't raise any warning. Traits are only imported once, and interfaces may be implemented as many times as wanted.
 
@@ -15687,6 +15779,13 @@ Up to PHP 7.1 (at least), this doesn't raise any warning. Traits are only import
    }
    
    ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the duplicate trait or interfaces
 
 +-------------+----------------------------------+
 | Short name  | Classes/MultipleTraitOrInterface |
@@ -18788,6 +18887,12 @@ Negative index were introduced in PHP 7.1. This syntax is not compatible with PH
 
 See also `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the -1 index in a string, instead of a call to substr()
+
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoSubstrMinusOne                                                                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------+
@@ -19151,7 +19256,7 @@ In particular, if the injection happens with a separate method, there is a time 
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Remove the nullable option and the tests on ``null``.
 
 +-------------+------------------------------------+
 | Short name  | Classes/NonNullableSetters         |
@@ -21538,6 +21643,13 @@ Using parenthesis around parameters used to silent some internal check. This is 
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the parenthesis when they are only encapsulating an argument
+
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/ParenthesisAsParameter                                                                                 |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -21986,6 +22098,59 @@ Suggestions
 +-------------+-------------------------+
 | Examples    | Structures/PhpinfoUsage |
 +-------------+-------------------------+
+
+
+
+.. _possible-alias-confusion:
+
+Possible Alias Confusion
+########################
+
+
+An alias is used for a class that doesn't belong to the current namespace, while there is such a class. This also applies to traits and interfaces.
+
+When no alias is used, PHP will search for a class in the local space. Since classes, traits and interfaces are usually stored one per file, it is a valid syntax to create an alias, even if this alias name is the name of a class in the same namespace. 
+
+Yet, with an alias refering to a remote class, while a local one is available, it is possible to generate confusion.
+
+.. code-block:: php
+
+   <?php
+   
+   // This should be in a separate file, but has been merged here, for display purposes.
+   namespace A {
+       //an alias from a namespace called C
+       use C\A as C_A;
+   
+       //an alias from a namespace called C, which will superseed the local A\B class (see below)
+       use C\D as B;
+   }
+   
+   namespace A {
+       // There is a class B in the A namespace
+       class B {}
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using existing classes names for alias
+* Use a coding convention to distinguish alias from names
+
++-------------+---------------------------+
+| Short name  | Namespaces/AliasConfusion |
++-------------+---------------------------+
+| Rulesets    | :ref:`Suggestions`        |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Namespaces/AliasConfusion |
++-------------+---------------------------+
 
 
 
@@ -22532,6 +22697,14 @@ It is better to apply the `preg_replace() <https://www.php.net/preg_replace>`_ t
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid applying the checks on the whole data, rather on the diff only.
+
 +-------------+-------------------------------+
 | Short name  | Performances/RegexOnCollector |
 +-------------+-------------------------------+
@@ -22642,7 +22815,14 @@ The following properties are never used outside their class of definition  Given
    ?>
 
 
-Note that dynamic properties (such as $x->$y) are not taken into account.
+Note that dynamic properties (such as $x->$y) are not taken into account. 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the unused property
+* Use the private property
+* Change the visibility to allow access the property from other part of the code
 
 +-------------+------------------------+
 | Short name  | Classes/CouldBePrivate |
@@ -23008,7 +23188,7 @@ Redeclared PHP Functions
 
 Function that bear the same name as a PHP function, and that are declared. 
 
-This is possible when managing some backward compatibility, like emulating an old function, or preparing for newer PHP version, like emulating new upcoming function.
+This is useful when managing backward compatibility, like emulating an old function, or preparing for newer PHP versions, like emulating new upcoming function.
 
 .. code-block:: php
 
@@ -23023,6 +23203,13 @@ This is possible when managing some backward compatibility, like emulating an ol
    print_r( split(' ', '2 3'));
    
    ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Check if it is still worth emulating that function
 
 +-------------+---------------------------------+
 | Short name  | Functions/RedeclaredPhpFunction |
@@ -25582,6 +25769,13 @@ Avoid writing a whole slow loop, and use the native `array_column() <https://www
 
 See also `[blog] `array_column() <https://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use array_column(), instead of a foreach()
+
 +-------------+-----------------------------------------+
 | Short name  | Php/ShouldUseArrayColumn                |
 +-------------+-----------------------------------------+
@@ -26273,6 +26467,54 @@ Suggestions
 
 
 
+.. _static-global-variables-confusion:
+
+Static Global Variables Confusion
+#################################
+
+
+PHP can't have variable that are both static and variable. While the syntax is legit, the variables will be alternatively global or static.
+
+It is recommended to avoid using the same name for a global variable and a static variable. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       $a = 1; // $a is a local variable
+       
+       global $a; // $a is now a global variable
+       
+       static $a; // $a is not w static variable 
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using static variables
+* Avoid using global variables
+* Avoid using the same name for static and global variables
+
++-------------+---------------------------------+
+| Short name  | Structures/SGVariablesConfusion |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Suggestions`              |
++-------------+---------------------------------+
+| Php Version | 7.4-                            |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Structures/SGVariablesConfusion |
++-------------+---------------------------------+
+
+
+
 .. _static-loop:
 
 Static Loop
@@ -26807,8 +27049,18 @@ The full list is the following :
 * `strtok() <https://www.php.net/strtok>`_
 * `curl_exec() <https://www.php.net/curl_exec>`_
 
+In PHP 8.0, str_contains() will do the expected job of `strpos() <https://www.php.net/strpos>`_, with less confusion. 
 
 See also `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use identity comparisons, for 0 values : === instead of ==, etc.
+* Compare with other exact values than 0 : strpos() == 2
+* Use str_contains()
 
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/StrposCompare                                                                            |
@@ -27474,6 +27726,12 @@ Thus, it is recommended to avoid throwing exceptions within the ``__destruct`` m
 
 See also `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove any exception thrown from a destructor
+
 +-------------+-------------------------+
 | Short name  | Classes/ThrowInDestruct |
 +-------------+-------------------------+
@@ -27621,6 +27879,61 @@ Suggestions
 +-------------+--------------------------------+
 | Examples    | Structures/TimestampDifference |
 +-------------+--------------------------------+
+
+
+
+.. _too-long-a-block:
+
+Too Long A Block
+################
+
+
+The loop is operating on a block that is too long. 
+
+This analysis is applied to loops (for, foreach, while, do..while) and if/then/else/elseif structures.
+
+Then length of a block is managed with the ``longBlock``parameter. By default, it is 200 lines, from beginning to the end. Comments are taken into account.
+
+.. code-block:: php
+
+   <?php
+   
+   $i = 0;
+   do {
+       // 200 lines of PHP code
+       
+       ++$i;
+   } while($i < 100);
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the code of the block to an method or a function
+* Move part of the code of the block to methods or functions
+* Extract repeated patterns and use them
+
++-----------+---------+---------+-------------+
+| Name      | Default | Type    | Description |
++-----------+---------+---------+-------------+
+| longBlock | 200     | integer | Description |
++-----------+---------+---------+-------------+
+
+
+
++-------------+----------------------+
+| Short name  | Structures/LongBlock |
++-------------+----------------------+
+| Rulesets    | :ref:`Suggestions`   |
++-------------+----------------------+
+| Severity    | Minor                |
++-------------+----------------------+
+| Time To Fix | Structures/LongBlock |
++-------------+----------------------+
 
 
 
@@ -28094,6 +28407,94 @@ See also `How many parameters is too many ? <https://www.exakat.io/how-many-para
 +------------+-----------------------------+
 | Examples   | Functions/TooManyParameters |
 +------------+-----------------------------+
+
+
+
+.. _too-much-indented:
+
+Too Much Indented
+#################
+
+
+Reports methods that are using more than one level of indentation on average. 
+
+Indentations levels are counted for each for, foreach, if...then, while, do..while, try..catch..finally structure met. Compulsory expressions, such as conditions, are not counted in the total. Levels of indentation start at 0 (no indentation needed)
+
+This analysis targets methods which are build around large conditions : the actual useful code is nested inside the branches of the if/then/else (for example). 
+
+The default threshold ``indentationAverage`` of 1 is a good start for spotting large methods with big conditional code, and will leave smaller methods, even when they only contain one if/then. Larger methods shall be refactored in smaller size. 
+
+The parameter ``minimumSize`` set aside methods which are too small for refactoring.
+
+.. code-block:: php
+
+   <?php
+   
+   // average 0
+   function foo0() {
+       $a = rand(1,2);
+       $a *= 3;
+       
+       return $a;
+   }
+   
+   // average 0.66 = (0 + 1 + 1) / 3
+   function foo0_66() {
+       // if () is at level 0
+       if ($a == 2) { // condition is not counted
+           $a = 1;    // level 1
+       } else {
+           $a = 2;    // level 1
+       }
+   }
+   
+   // average 1 = (0 + 2 + 1 + 1) / 4
+   function foo1() {
+       // if () is at level 0
+       if ($a == 2) {
+           // if () is at level 1
+           if ($a == 2) {
+               $a = 1; // level 2
+           }
+           $a = 1; // level 1
+       } else {
+           $a = 2; // level 1
+       }
+   }
+   
+   ?>
+
+
+This analysis is distinct from Structures/MaxLevelOfIdentation, which only reports the highest level of indentation. This one reports how one method is build around one big 
+
+See also :ref:`max-level-of-nesting`. 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Refactor the method to reduce the highest level of indentation
+* Refactor the method move some of the code to external methods.
+
++--------------------+---------+------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Name               | Default | Type | Description                                                                                                                                          |
++--------------------+---------+------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| indentationAverage | 1       | real | Minimal average of indentation in a method to report. Default is 1.0, which means that the method is on average at one level of indentation or more. |
++--------------------+---------+------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| minimumSize        | 3       | real | Description                                                                                                                                          |
++--------------------+---------+------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
++-------------+---------------------------+
+| Short name  | Functions/TooMuchIndented |
++-------------+---------------------------+
+| Rulesets    | :ref:`Suggestions`        |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Functions/TooMuchIndented |
++-------------+---------------------------+
 
 
 
@@ -30598,6 +30999,18 @@ Private methods are reserved for the defining class. Thus, they must be used wit
    
    ?>
 
+
+This analysis skips classes that makes self dynamic calls, such as ``$this->$method()``.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the private method, as it is unused
+* Add a call to this private method
+* Change method visibility to make it available to other classes
+
 +-------------+------------------------------+
 | Short name  | Classes/UnusedPrivateMethod  |
 +-------------+------------------------------+
@@ -30715,6 +31128,12 @@ Methods reported by this analysis are not used by children, yet they are protect
 No usage of those methods were found. 
 
 This analysis is impacted by dynamic method calls.
+
+Suggestions
+^^^^^^^^^^^
+
+* Make use of the protected method in the code
+* Remove the method
 
 +-------------+--------------------------------+
 | Short name  | Classes/UnusedProtectedMethods |
@@ -30994,6 +31413,14 @@ It is faster to use === null instead of `is_null() <https://www.php.net/is_null>
    
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use === comparison
 
 +-------------+---------------------------------------+
 | Short name  | Php/IsnullVsEqualNull                 |
@@ -32177,6 +32604,14 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
    use \A\B\C\D as F;
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the initial \ in use expressions.
 
 +-------------+----------------------------------------------------------------+
 | Short name  | Namespaces/UseWithFullyQualifiedNS                             |
@@ -33881,6 +34316,58 @@ See also `Closure\:\:bind <http://php.net/manual/en/closure.bind.php>`_ and `The
 
 
 
+.. _using-deprecated-method:
+
+Using Deprecated Method
+#######################
+
+
+A call to a deprecated method has been spotted. A method is deprecated when it bears a ``@deprecated`` parameter in its typehint definition.
+
+Deprecated methods which are not called are not reported.
+
+.. code-block:: php
+
+   <?php
+   
+   // not deprecated method
+   not_deprecated();
+   
+   // deprecated method
+   deprecated();
+   
+   /**
+    * @deprecated since version 2.0.0
+    */
+   function deprecated() {}
+   
+   function not_deprecated() {}
+   
+   ?>
+
+
+See also `@deprecated <https://docs.phpdoc.org/latest/references/phpdoc/tags/deprecated.html>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the deprecated call with a stable call
+
++-------------+---------------------------+
+| Short name  | Functions/UsingDeprecated |
++-------------+---------------------------+
+| Rulesets    | :ref:`Analyze`            |
++-------------+---------------------------+
+| Php Version | 7.4-                      |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Functions/UsingDeprecated |
++-------------+---------------------------+
+
+
+
 .. _usort-sorting-in-php-7.0:
 
 Usort Sorting In PHP 7.0
@@ -34579,12 +35066,13 @@ When a function have both compulsory and optional parameters, the compulsory one
    ?>
 
 
-PHP will solve this problem at runtime, assign values in the same other, but will miss some of the default values and emits warnings. 
+PHP solves this problem at runtime, assign values in the same other, but will miss some of the default values and emits warnings. 
 
 It is better to put all the optional parameters at the end of the method's signature.
 
-Optional parameter wrongly placed are now a Notice in PHP 8.0. The only previous case that is now allowed is when the ``null`` value is used as default for typed arguments.
+Optional parameter wrongly placed are now a Notice in PHP 8.0. The only previous case that is allowed in PHP 8.0 and also in this analysis, is when the ``null`` value is used as default for typed arguments.
 
+See also `Function arguments <https://www.php.net/manual/en/functions.arguments.php>`_.
 
 
 Suggestions
@@ -35415,6 +35903,12 @@ Using named constants with error_reporting is strongly encouraged to ensure comp
 
 
 See also `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_ and `error_reporting <http://php.net/manual/en/function.error-reporting.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use the constant combinaison when configuring error_reporting or any PHP native function
 
 +-------------+--------------------------------------+
 | Short name  | Structures/ErrorReportingWithInteger |

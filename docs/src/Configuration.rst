@@ -245,6 +245,10 @@ Here are the currently available options in Exakat's project configuration file 
 |                       | the project's folder. Values provided with a starting / are used as a path prefix. Values |
 |                       | without / are used as a substring, anywhere in the path.                                  |
 +-----------------------+-------------------------------------------------------------------------------------------+
+| ignore_dirs[]         | This is the list of files and dir to ignore in the project's directory. It is chrooted in |
+|                       | the project's folder. Values provided with a starting / are used as a path prefix. Values |
+|                       | without / are used as a substring, anywhere in the path.                                  |
++-----------------------+-------------------------------------------------------------------------------------------+
 | file_extensions       | This is the list of file extensions that is considered as PHP scripts. All others are     |
 |                       | ignored. All files bearing those extensions are subject to check, though they are         |
 |                       | scanned first for PHP tags before being analyzed. The extensions are comma separated,     |
@@ -321,6 +325,8 @@ Exakat in-code example
       - /vendor
       - /docs
       - /media
+    ignore_rules:
+      - Structures/AddZero
     rulesets: 
       my_ruleset: 
           - Structures/AddZero
@@ -346,6 +352,8 @@ Copy-paste this YAML code into a file called `.exakat.yaml`, located at the root
     - Ambassador
     include_dirs: 
       - /
+    ignore_rules:
+      - 
     ignore_dirs: 
       - /tests
       - /vendor
@@ -370,6 +378,11 @@ Here are the currently available options in Exakat's project configuration file 
 | ignore_dirs[]         | This is the list of files and dir to ignore in the project's directory. It is chrooted in |
 |                       | the project's folder. Values provided with a starting / are used as a path prefix. Values |
 |                       | without / are used as a substring, anywhere in the path.                                  |
++-----------------------+-------------------------------------------------------------------------------------------+
+| ignore_rules[]        | The rules mentioned in this list are ignored when running the audit. Rules are ignored    |
+|                       | after loading the rulesets configuration : as such, it is possible to ignore rules inside |
+|                       | a ruleset, without ignoring the whole ruleset.                                            |
+|                       | The rules in this list are Exakat's short name : ignore_rules[] = "Structures/AddZero"    |
 +-----------------------+-------------------------------------------------------------------------------------------+
 | file_extensions       | This is the list of file extensions that is considered as PHP scripts. All others are     |
 |                       | ignored. All files bearing those extensions are subject to check, though they are         |

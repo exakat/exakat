@@ -68,6 +68,7 @@ Exakat groups analysis by rulesets. This way, analyzing 'Security' runs all poss
 * Suggestions
 * Top10
 * Typechecks
+* Typehints
 * Unassigned
 * Under Work
 * php-cs-fixable
@@ -102,6 +103,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Filedependencieshtml
   * Classdependencies
   * Stubs
+  * StubsJson
   * Radwellcode
   * Grade
   * Weekly
@@ -439,6 +441,22 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.1.2
+
+  * Collect Class Constant Counts (Dump/CollectClassConstantCounts)
+  * Collect Local Variable Counts (Dump/CollectLocalVariableCounts ; Dump)
+  * Collect Method Counts (Dump/CollectMethodCounts ; Dump)
+  * Collect Property Counts (Dump/CollectPropertyCounts ; Dump)
+  * Could Be Boolean (Typehints/CouldBeBoolean ; Typehints)
+  * Could Be String (Typehints/CouldBeString ; Typehints)
+  * Could Be Void (Typehints/CouldBeVoid ; Typehints)
+  * Possible Alias Confusion (Namespaces/AliasConfusion ; Suggestions)
+  * Safe Phpvariables (Php/SafePhpvars ; Internal)
+  * Static Global Variables Confusion (Structures/SGVariablesConfusion ; Suggestions)
+  * Too Long A Block (Structures/LongBlock ; Suggestions)
+  * Too Much Indented (Functions/TooMuchIndented ; Suggestions)
+  * Using Deprecated Method (Functions/UsingDeprecated ; Analyze)
+
 * 2.1.1
 
   * Check Crypto Key Length (Security/CryptoKeyLength ; Security)
@@ -446,7 +464,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Keep Files Access Restricted (Security/KeepFilesRestricted ; Security)
   * OpenSSL Ciphers Used (Type/OpensslCipher ; Inventory)
   * Prefix And Suffixes With Typehint (Functions/PrefixToType ; Semantics)
-  * Structures/DoubleReference (Structures/DoubleReference ; )
   * Throw Was An Expression (Php/ThrowWasAnExpression ; CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
   * Undefined Constant Name (Variables/UndefinedConstantName ; Unassigned)
   * Unused Trait In Class (Traits/UnusedClassTrait ; ClassReview)
@@ -548,7 +565,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Collect Parameter Counts (Dump/CollectParameterCounts ; Dump)
   * Create Magic Method (Complete/CreateMagicMethod ; )
   * Custom/NotInThisList (Custom/NotInThisList ; Unassigned)
-  * Dump/CollectLocalVariableCounts (Dump/CollectLocalVariableCounts ; Dump)
   * Dump/DereferencingLevels (Dump/DereferencingLevels ; Dump)
   * Duplicate Literal (Type/DuplicateLiteral ; Semantics)
   * Internet Domains (Type/UdpDomains ; Inventory)
@@ -2175,9 +2191,10 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-88 PHP error message detailled : 
+90 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
+* :ref:` Default value for parameters with a int type can only be int or NULL  <mismatch-type-and-default>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -2249,6 +2266,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Trait 'a' not found  <trait-not-found>`
 * :ref:`Trait method M has not been applied, because there are collisions with other trait methods on C <method-collision-traits>`
 * :ref:`Trait method f has not been applied, because there are collisions with other trait methods on x <useless-alias>`
+* :ref:`Trying to access array offset on value of type null <null-or-boolean-arrays>`
 * :ref:`Trying to access array offset on value of type null <scalar-are-not-arrays>`
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
 * :ref:`Undefined class constant <avoid-self-in-interface>`
@@ -2376,6 +2394,7 @@ List of external links mentionned in this documentation.
 * `.phar` from the exakat.io website : `www.exakat.io <http://www.exakat.io/versions/>`_
 * `10 GitHub Security Best Practices <https://snyk.io/blog/ten-git-hub-security-best-practices/>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
+* `@deprecated <https://docs.phpdoc.org/latest/references/phpdoc/tags/deprecated.html>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
 * `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_
@@ -2581,6 +2600,7 @@ List of external links mentionned in this documentation.
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Function arguments <http://php.net/manual/en/functions.arguments.php>`_
+* `Function arguments <https://www.php.net/manual/en/functions.arguments.php>`_
 * `Functions <http://php.net/manual/en/language.functions.php>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
@@ -2673,8 +2693,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2720,8 +2740,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2746,8 +2766,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2809,6 +2829,7 @@ List of external links mentionned in this documentation.
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
+* `Predefined Variables <https://www.php.net/manual/en/reserved.variables.php>`_
 * `preg_filter <https://php.net/preg_filter>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
 * `Prepared Statements <https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php>`_
@@ -2942,8 +2963,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
@@ -3167,6 +3188,7 @@ _______
 |   analyzer[] = "Functions/UselessReferenceArgument";
 |   analyzer[] = "Functions/UselessReturn";
 |   analyzer[] = "Functions/UsesDefaultArguments";
+|   analyzer[] = "Functions/UsingDeprecated";
 |   analyzer[] = "Functions/WithoutReturn";
 |   analyzer[] = "Functions/WrongNumberOfArguments";
 |   analyzer[] = "Functions/WrongOptionalParameter";
@@ -4346,10 +4368,12 @@ ___________
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/TooManyParameters";
+|   analyzer[] = "Functions/TooMuchIndented";
 |   analyzer[] = "Functions/UselessArgument";
 |   analyzer[] = "Functions/UselessDefault";
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
 |   analyzer[] = "Interfaces/UnusedInterfaces";
+|   analyzer[] = "Namespaces/AliasConfusion";
 |   analyzer[] = "Namespaces/CouldUseAlias";
 |   analyzer[] = "Performances/ArrayKeyExistsSpeedup";
 |   analyzer[] = "Performances/IssetWholeArray";
@@ -4384,6 +4408,7 @@ ___________
 |   analyzer[] = "Structures/FunctionPreSubscripting";
 |   analyzer[] = "Structures/JsonWithOption";
 |   analyzer[] = "Structures/ListOmissions";
+|   analyzer[] = "Structures/LongBlock";
 |   analyzer[] = "Structures/MismatchedTernary";
 |   analyzer[] = "Structures/MultipleUnset";
 |   analyzer[] = "Structures/NamedRegex";
@@ -4395,6 +4420,7 @@ ___________
 |   analyzer[] = "Structures/PossibleIncrement";
 |   analyzer[] = "Structures/RepeatedPrint";
 |   analyzer[] = "Structures/ReuseVariable";
+|   analyzer[] = "Structures/SGVariablesConfusion";
 |   analyzer[] = "Structures/SetAside";
 |   analyzer[] = "Structures/ShouldUseForeach";
 |   analyzer[] = "Structures/ShouldUseMath";
