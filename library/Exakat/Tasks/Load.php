@@ -5073,7 +5073,6 @@ class Load extends Tasks {
 
     private function makePhpdoc(Atom $node): void {
         foreach($this->phpDocs as $phpdoc) {
-            print "PHPDOC to $node->atom\n";
             $this->addLink($node, $phpdoc, 'PHPDOC');
         }
 
