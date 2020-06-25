@@ -429,29 +429,31 @@ GREMLIN
         $query = $this->newQuery('cit classes');
         $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<GREMLIN
- sideEffect{ extendList = ''; }.where(__.out("EXTENDS").optional(__.out('DEFINITION').where(__.in('USE'))).sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
-.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").optional(__.out('DEFINITION').where(__.in('USE'))).sideEffect{ implementList.push( it.get().value("fullcode"));}.fold() )
-.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").optional(__.out('DEFINITION').where(__.in('USE'))).sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+ sideEffect{ extendList = ""; }.where(__.out("EXTENDS").optional(__.out("DEFINITION").where(__.in("USE"))).sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").optional(__.out("DEFINITION").where(__.in("USE"))).sideEffect{ implementList.push( it.get().value("fullcode"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").optional(__.out("DEFINITION").where(__.in("USE"))).sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ usesOptions = []; }.where(__.out("USE").hasLabel("Usetrait").out("BLOCK").out("EXPRESSION").sideEffect{ usesOptions.push( it.get().value("fullcode"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
-.sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
-.sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
+.sideEffect{ file = "";}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ phpdoc = ""; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
 .map{ 
-        ['id' : '',
-         'fullnspath':it.get().value("fullnspath"),
-         'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
-         'namespace': 1,
-         'type':'class',
-         'abstract':it.get().properties("abstract").any(),
-         'final':it.get().properties("final").any(),
-         'phpdoc':phpdoc,
-         'begin':lines.min(),
-         'end':lines.max(),
-         'file':file,
-         'line':it.get().value("line"),
+        ["id" : "",
+         "fullnspath":it.get().value("fullnspath"),
+         "name": it.get().vertices(OUT, "NAME").next().value("fullcode"),
+         "namespace": 1,
+         "type":"class",
+         "abstract":it.get().properties("abstract").any(),
+         "final":it.get().properties("final").any(),
+         "phpdoc":phpdoc,
+         "begin":lines.min(),
+         "end":lines.max(),
+         "file":file,
+         "line":it.get().value("line"),
 
-         'extends':extendList,
-         'implements':implementList,
-         'uses':useList
+         "extends":extendList,
+         "implements":implementList,
+         "uses":useList.unique(),
+         "usesOptions":usesOptions.join(";")
          ];
 }
 GREMLIN
@@ -474,13 +476,15 @@ GREMLIN
                 $namespaceId = $namespacesId[$namespace];
             } else {
                 $namespaceId = 1;
-
             }
 
             $cit_implements[$row['line'] . $row['fullnspath']] = $row['implements'];
             unset($row['implements']);
-            $cit_use[$row['line'] . $row['fullnspath']] = $row['uses'];
+            $cit_use[$row['line'] . $row['fullnspath']] = array('uses'    => $row['uses'],
+                                                                'options' => $row['usesOptions'],
+                                                                );
             unset($row['uses']);
+            unset($row['usesOptions']);
             $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
             unset($row['fullnspath']);
             $row['namespace'] = $namespaceId;
@@ -535,7 +539,6 @@ GREMLIN
             $row['namespace'] = $namespaceId;
 
             $cit[] = $row;
-            print_r($row);
 
             ++$total;
         }
@@ -547,26 +550,28 @@ GREMLIN
         $query->atomIs('Trait', Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<GREMLIN
  sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ usesOptions = []; }.where(__.out("USE").hasLabel("Usetrait").out("BLOCK").out("EXPRESSION").sideEffect{ usesOptions.push( it.get().value("fullcode"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
-.sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
-.sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
+.sideEffect{ file = "";}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ phpdoc = ""; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
 .map{ 
-        ['id' : '',
-         'fullnspath':it.get().value("fullnspath"),
-         'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
-         'namespace': 1,
-         'type':'trait',
-         'abstract':0,
-         'final':0,
-         'phpdoc':phpdoc,
-         'begin':lines.min(),
-         'end':lines.max(),
-         'file':file,
-         'line':it.get().value("line"),
+        ["id" : "",
+         "fullnspath":it.get().value("fullnspath"),
+         "name": it.get().vertices(OUT, "NAME").next().value("fullcode"),
+         "namespace": 1,
+         "type":"trait",
+         "abstract":0,
+         "final":0,
+         "phpdoc":phpdoc,
+         "begin":lines.min(),
+         "end":lines.max(),
+         "file":file,
+         "line":it.get().value("line"),
          
-         'extends':'',
-         'implements':[],
-         'uses':useList
+         "extends":"",
+         "implements":[],
+         "uses":useList.unique(),
+         "usesOptions":usesOptions.join(";")
          ];
 }
 
@@ -588,8 +593,11 @@ GREMLIN
             $row['implements'] = array(); // always empty
 
             unset($row['implements']);
-            $cit_use[$row['line'] . $row['fullnspath']] = $row['uses'];
+            $cit_use[$row['line'] . $row['fullnspath']] = array('uses'    => $row['uses'],
+                                                                'options' => $row['usesOptions'],
+                                                                );
             unset($row['uses']);
+            unset($row['usesOptions']);
             $citId[$row['line'] . $row['fullnspath']] = ++$citCount;
             unset($row['fullnspath']);
             $row['namespace'] = $namespaceId;
@@ -615,38 +623,41 @@ GREMLIN
             $this->storeToDumpArray('cit', $cit);
 
             $toDump = array();
-            print_r($cit_implements);
             foreach($cit_implements as $id => $impl) {
                 foreach($impl as $implements) {
                     $citIds = preg_grep('/^\d+\\\\' . addslashes(mb_strtolower($implements)) . '$/', array_keys($citId));
 
                     if (empty($citIds)) {
-                        $toDump[] = array('', $citId[$id], $implements, 'implements');
+                        $toDump[] = array('', $citId[$id], $implements, 'implements', '');
                     } else {
                         // Here, we are missing the one that are not found
                         foreach($citIds as $c) {
-                            $toDump[] = array('', $citId[$id], $citId[$c], 'implements');
+                            $toDump[] = array('', $citId[$id], $citId[$c], 'implements', '');
                         }
                     }
                 }
             }
-            print_r($toDump);
             $total = $this->storeToDumpArray('cit_implements', $toDump);
             display("$total implements \n");
 
             $toDump = array();
             foreach($cit_use as $id => $use1) {
-                foreach($use1 as $uses) {
+                $options = $use1['options'];
+
+                foreach($use1['uses'] as $uses) {
                     $citIds = preg_grep('/^\d+\\\\' . addslashes(mb_strtolower($uses)) . '$/', array_keys($citId));
 
                     if (empty($citIds)) {
-                        $toDump[] = array('', $citId[$id], $uses, 'use');
+                        $toDump[] = array('', $citId[$id], $uses, 'use', $options);
                     } else {
                         // Here, we are missing the one that are not found
                         foreach($citIds as $c) {
-                            $toDump[] = array('', $citId[$id], $citId[$c], 'use');
+                            $toDump[] = array('', $citId[$id], $uses, 'use', $options);
                         }
                     }
+                    
+                    // Options are stored only one for all. PHP doesn't care.
+                    $options = '';
                 }
             }
             $total = $this->storeToDumpArray('cit_implements', $toDump);
@@ -1454,70 +1465,34 @@ GREMLIN
         $query = $this->newQuery('Trait use');
         $query->atomIs('Usetrait', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('USE')
-              ->_as('classe')
-              ->raw(<<<GREMLIN
-repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->_as('use')
+              ->goToFile()
               ->_as('file')
               ->_as('id')
               ->_as('type')
-              ->raw(<<<GREMLIN
-select("classe").in("DEFINITION")
-.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->back('use')
+              ->inIs('DEFINITION')
+              ->goToFile()
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
                              'include' => 'fullcode',
-                             'type'    => 'use'
+                             'type'    => 'use',
                              ));
         $count = $this->storeToDump('filesDependencies', $query);
         display($count . ' traits ');
-
-        // traits
-        $query = $this->newQuery('Return Typehint');
-        $query->atomIs(array('Class', 'Trait'), Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('USE')
-              ->_as('classe')
-              ->raw(<<<GREMLIN
-repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
-              ->_as('file')
-              ->_as('id')
-              ->_as('type')
-              ->raw(<<<GREMLIN
-select("classe").in("DEFINITION")
-.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
-              ->_as('include')
-              ->select(array('id'      => '',
-                             'file'    => 'fullcode',
-                             'include' => 'fullcode',
-                             'type'    => 'use'
-                             ));
-        $count = $this->storeToDump('filesDependencies', $query);
-        display($count . ' return types');
 
         // Functioncall()
         $query = $this->newQuery('Functioncall');
         $query->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
               ->_as('functioncall')
-              ->raw(<<<GREMLIN
-repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->goToFile()
               ->_as('file')
               ->_as('id')
               ->_as('type')
-              ->raw(<<<GREMLIN
-select("functioncall").in("DEFINITION")
-.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->back('functioncall')
+              ->inIs('DEFINITION')
+              ->goToFile()
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1532,18 +1507,13 @@ GREMLIN
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->hasNoIn(array('NAME', 'CLASS', 'MEMBER', 'AS', 'CONSTANT', 'TYPEHINT', 'EXTENDS', 'USE', 'IMPLEMENTS', 'INDEX'))
               ->_as('constant')
-              ->raw(<<<GREMLIN
-repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->goToFile()
               ->_as('file')
               ->_as('id')
               ->_as('type')
-              ->raw(<<<GREMLIN
-select("constant").in("DEFINITION")
-.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->back('constant')
+              ->inIs('DEFINITION')
+              ->goToFile()
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1557,19 +1527,14 @@ GREMLIN
         $query = $this->newQuery('New');
         $query->atomIs(array('New', 'Clone'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs(array('NEW', 'CLONE'))
-              ->_as('constant')
-              ->raw(<<<GREMLIN
-repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->_as('new')
+              ->goToFile()
               ->_as('file')
               ->_as('id')
               ->_as('type')
-              ->raw(<<<GREMLIN
-select("constant").in("DEFINITION")
-.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->back('new')
+              ->inIs('DEFINITION')
+              ->goToFile()
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
@@ -1583,19 +1548,14 @@ GREMLIN
         $query = $this->newQuery('static calls');
         $query->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'), Analyzer::WITHOUT_CONSTANTS)
               ->outIs('CLASS')
-              ->_as('constant')
-              ->raw(<<<GREMLIN
-repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->_as('call')
+              ->goToFile()
               ->_as('file')
               ->_as('id')
               ->_as('type')
-              ->raw(<<<GREMLIN
-select("constant").in("DEFINITION")
-.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File"))
-GREMLIN
-)
+              ->back('call')
+              ->inIs('DEFINITION')
+              ->goToFile()
               ->_as('include')
               ->select(array('id'      => '',
                              'file'    => 'fullcode',
