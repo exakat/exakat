@@ -56,11 +56,28 @@ class Files extends Tasks {
 
         $ignoredFiles = array();
         $files = array();
-        $tokens = 0;
 
         display("Searching for files \n");
         self::findFiles($this->config->code_dir, $files, $ignoredFiles, $this->config);
         display('Found ' . count($files) . " files.\n");
+
+        $filesRows = array();
+        $hashes = array();
+        $duplicates = 0;
+        foreach($files as $id => $file) {
+            $fnv132 = hash_file('fnv132', $this->config->code_dir . $file);
+            if (isset($hashes[$fnv132])) {
+                $ignoredFiles[$file] = "Duplicate ({$hashes[$fnv132]})";
+                ++$duplicates;
+                unset($files[$id]);
+                continue;
+            } else {
+                $hashes[$fnv132] = $file;
+            }
+            $modifications = $fileModifications[trim($file, '/')] ?? 0;
+            $filesRows[] = compact('file', 'fnv132', 'modifications');
+        }
+        display("Removed $duplicates duplicates files\n");
 
         if (empty($files)) {
             $this->datastore->addRow('hash', array('files'           => 0,
@@ -82,69 +99,13 @@ class Files extends Tasks {
                                }, $files);
         file_put_contents($this->tmpFileName, implode("\n", $tmpFiles));
 
-        $versions = Config::PHP_VERSIONS;
-        $SQLresults = 0;
-
-        $missing = array();
-        foreach($files as $file) {
-            if (!file_exists($this->config->code_dir . $file)) {
-                $missing[] = $file;
-            }
-        }
-
-        if (!empty($missing)) {
-            throw new MissingFile($missing);
-        }
-
-        $analyzingVersion = $this->config->phpversion[0] . $this->config->phpversion[2];
-        $this->datastore->cleanTable("compilation$analyzingVersion");
-        if ($this->is_subtask === self::IS_SUBTASK) {
-            $id = array_search($analyzingVersion, $versions);
-            unset($versions[$id]);
-        }
-
-        foreach($versions as $version) {
-            $phpVersion = "php$version";
-
-            if (empty($this->config->{$phpVersion})) {
-                // This version is not defined
-                continue;
-            }
-
-            display("Check compilation for $version");
-            $stats["notCompilable$version"] = -1;
-
-            $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
-            $php->compileFiles($this->config->code_dir, $this->tmpFileName, $this->config->dir_root);
-            ++$SQLresults;
-        }
-
-        copy("{$this->config->dir_root}/server/lint_short_tags.php", "{$this->config->project_dir}/.exakat/lint_short_tags.php");
-        $shell = "nohup php {$this->config->project_dir}/.exakat/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} 2>&1 >/dev/null & echo $!";
-        shell_exec($shell);
-        ++$SQLresults;
-
         $vcsClass = Vcs::getVcs($this->config);
         $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
         $fileModifications = $vcs->getFileModificationLoad();
 
-        $filesRows = array();
-        $hashes = array();
-        $duplicates = 0;
-        foreach($files as $id => $file) {
-            $fnv132 = hash_file('fnv132', $this->config->code_dir . $file);
-            if (isset($hashes[$fnv132])) {
-                $ignoredFiles[$file] = "Duplicate ({$hashes[$fnv132]})";
-                ++$duplicates;
-                unset($files[$id]);
-                continue;
-            } else {
-                $hashes[$fnv132] = $file;
-            }
-            $modifications = $fileModifications[trim($file, '/')] ?? 0;
-            $filesRows[] = compact('file', 'fnv132', 'modifications');
-        }
-        display("Removed $duplicates duplicates files\n");
+        $SQLresults = $this->checkCompilations();
+
+        $SQLresults += $this->checkShortTags();
 
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
@@ -159,7 +120,7 @@ class Files extends Tasks {
         $this->datastore->addRow('files', $filesRows);
         $this->datastore->addRow('hash', array('files'           => count($files),
                                                'filesIgnored'    => count($ignoredFiles),
-                                               'tokens'          => $tokens,
+                                               'tokens'          => 0,
                                                'file_extensions' => json_encode($this->config->file_extensions),
                                                'ignore_dirs'     => json_encode($this->config->ignore_dirs),
                                                'include_dirs'    => json_encode($this->config->include_dirs),
@@ -239,23 +200,6 @@ class Files extends Tasks {
         }
 
         $this->datastore->addRow('hash', $composerInfo);
-    }
-
-    private function countTokens(string $path, array &$files, array &$ignoredFiles) {
-        $tokens = 0;
-
-        $php = exakat('php');
-
-        foreach($files as $id => $file) {
-            if (($t = $php->countTokenFromFile($path . $file)) < 2) {
-                unset($files[$id]);
-                $ignoredFiles[$file] = 'Not a PHP File';
-            } else {
-                $tokens += $t;
-            }
-        }
-
-        return $tokens;
     }
 
     private function checkLicence(string $dir): bool {
@@ -376,6 +320,44 @@ class Files extends Tasks {
         if (file_exists($this->config->tmp_dir . '/lint_short_tags.php')) {
             unlink($this->config->tmp_dir . '/lint_short_tags.php');
         }
+    }
+    
+    private function checkCompilations() : int {
+        $versions = Config::PHP_VERSIONS;
+        $SQLresults = 0;
+
+        $analyzingVersion = $this->config->phpversion[0] . $this->config->phpversion[2];
+        $this->datastore->cleanTable("compilation$analyzingVersion");
+        if ($this->is_subtask === self::IS_SUBTASK) {
+            $id = array_search($analyzingVersion, $versions);
+            unset($versions[$id]);
+        }
+
+        foreach($versions as $version) {
+            $phpVersion = "php$version";
+
+            if (empty($this->config->{$phpVersion})) {
+                // This version is not defined
+                continue;
+            }
+
+            display("Check compilation for $version");
+            $stats["notCompilable$version"] = -1;
+
+            $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
+            $php->compileFiles($this->config->code_dir, $this->tmpFileName, $this->config->dir_root);
+            ++$SQLresults;
+        }
+        
+        return $SQLresults;
+    }
+    
+    private function checkShortTags() : int {
+        copy("{$this->config->dir_root}/server/lint_short_tags.php", "{$this->config->project_dir}/.exakat/lint_short_tags.php");
+        $shell = "nohup php {$this->config->project_dir}/.exakat/lint_short_tags.php {$this->config->php} {$this->config->project_dir} {$this->tmpFileName} 2>&1 >/dev/null & echo $!";
+        shell_exec($shell);
+        
+        return 1;
     }
 }
 
