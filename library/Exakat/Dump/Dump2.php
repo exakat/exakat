@@ -5,6 +5,8 @@ namespace Exakat\Dump;
 use Exakat\Reports\Helpers\Results;
 
 class Dump2 extends Dump1 {
+    private const VERSION = 2;
+
     protected function initDump(): void {
         $query = <<<'SQL'
 CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -137,7 +139,8 @@ SQL;
 CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                implementing INTEGER,
                                implements STRING,
-                               type    STRING
+                               type    STRING,
+                               options STRING
                             )
 SQL;
         $this->sqlite->query($query);
@@ -289,6 +292,7 @@ SQL;
         $toDump = array(array('', 'dump_time',   $time),
                         array('', 'dump_id',     $id),
                         array('', 'dump_serial', $serial),
+                        array('', 'dump_version', self::VERSION)
                         );
 
         $this->storeInTable('hash', $toDump);
