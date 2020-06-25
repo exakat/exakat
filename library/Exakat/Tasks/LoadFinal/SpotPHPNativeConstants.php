@@ -36,6 +36,22 @@ class SpotPHPNativeConstants extends LoadFinal {
         $constantsPHP = array_values($constants);
         $constantsPHP = makeFullNsPath($constantsPHP, \FNP_CONSTANT);
 
+        // Constants like A\E_ALL are ignored here
+
+        // Constants like \E_ALL
+        $query = $this->newQuery('SpotPHPNativeConstants nsname');
+        $query->atomIs('Nsname', Analyzer::WITHOUT_CONSTANTS)
+              ->is('absolute', true)
+              ->has('fullnspath')
+              ->hasNoIn('DEFINITION')
+              ->fullnspathIs($constantsPHP, Analyzer::CASE_SENSITIVE)
+              ->property('isPhp', true)
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        display($result->toInt() . ' SpotPHPNativeConstants like \E_ALL');
+
+        // constants like E_ALL 
         $query = $this->newQuery('SpotPHPNativeConstants');
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')
