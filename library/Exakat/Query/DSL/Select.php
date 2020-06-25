@@ -41,6 +41,10 @@ class Select extends DSL {
                 // Use a local property
                 $select[] = $k;
                 $by[]     = "by(\"$v\")";
+            } elseif (substr(trim($v), 0, 2) === '__') {
+                // __.out('BLOCK').count()
+                $select[] = $k;
+                $by[]     = "by($v)";
             } else {
                 // Turn value into a constant
                 $select[] = $k;
