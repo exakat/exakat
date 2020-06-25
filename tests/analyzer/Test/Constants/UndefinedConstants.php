@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UndefinedConstants extends Analyzer {
-    /* 17 methods */
+    /* 18 methods */
 
     public function testConstants_UndefinedConstants01()  { $this->generic_test('Constants_UndefinedConstants.01'); }
     public function testConstants_UndefinedConstants02()  { $this->generic_test('Constants_UndefinedConstants.02'); }
@@ -26,5 +26,6 @@ class UndefinedConstants extends Analyzer {
     public function testConstants_UndefinedConstants15()  { $this->generic_test('Constants/UndefinedConstants.15'); }
     public function testConstants_UndefinedConstants16()  { $this->generic_test('Constants/UndefinedConstants.16'); }
     public function testConstants_UndefinedConstants17()  { $this->generic_test('Constants/UndefinedConstants.17'); }
+    public function testConstants_UndefinedConstants18()  { $this->generic_test('Constants/UndefinedConstants.18'); }
 }
 ?>
