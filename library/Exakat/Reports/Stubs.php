@@ -43,8 +43,6 @@ class Stubs extends Reports {
 
         $return =  "<?php\n" . implode(PHP_EOL, $result) . "\n?>\n";
 
-        print $return;
-
         return $return;
     }
 

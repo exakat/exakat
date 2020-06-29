@@ -70,18 +70,24 @@ class StubsJson extends Reports {
         $cits = array();
         $cits2ns = array();
         $cits2type = array();
+        $citsFqn = array();
         $res = $this->dump->fetchTable('cit');
 //        print_r($res->toArray());die();
         foreach($res->toArray() as $cit) {
+            $cits[$cit['id']]         = $cit['name'];
+            $citsFqn[$cit['id']]      = strtolower($namespaces[$cit['namespaceId']].$cit['name']);
+        }
+        
+        foreach($res->toArray() as $cit) {
+            $extendsId = ((int) $cit['extends'] > 0) ? $citFqn[$cit['extends']] ?? '\Unkown' : $cit['extends'];
             $details = array('abstract'   => $cit['abstract'] === 1,
                              'final'      => $cit['final'] === 1,
-                             'extends'    => $cit['extends'],
+                             'extends'    => $extendsId,
                              'implements' => array(),
                              'use'        => array(),
                              );
             $data['versions'][$namespaces[$cit['namespaceId']]][$cit['type']][$cit['name']] = $details;
 
-            $cits[$cit['id']]      = $cit['name'];
             $cits2ns[$cit['id']]   = $cit['namespaceId'];
             $cits2type[$cit['id']] = $cit['type'];
         }
@@ -90,8 +96,9 @@ class StubsJson extends Reports {
         // extensions
         $res = $this->dump->fetchTable('cit_implements');
         foreach($res->toArray() as $cit) {
-            print_r($cit);
-            $data['versions'][$namespaces[$cits2ns[$cit['implementing']]]][$cits2type[$cit['implementing']]][$cits[$cit['implementing']]][$cit['type']][] = $cit['implements'];
+            $implementsId = ((int) $cit['implements'] > 0) ? $citFqn[$cit['implements']] ?? '\Unkown' : $cit['implements'];
+
+            $data['versions'][$namespaces[$cits2ns[$cit['implementing']]]][$cits2type[$cit['implementing']]][$cits[$cit['implementing']]][$cit['type']][] = $implementsId;
         }
 //        print_r($cits);die();
 
