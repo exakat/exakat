@@ -1,6 +1,7 @@
 <?php
 
-if (!defined('A')) define('A', 1);
-if (!defined('B')) define('C', 1);
+if (!defined('A1')) define('A', 1);
+if (!defined(D)) define('A', 1);
+if (!defined('B2')) define('C', 1);
 
 ?>

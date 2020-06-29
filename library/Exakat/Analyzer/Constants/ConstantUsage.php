@@ -26,16 +26,21 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class ConstantUsage extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/PropagateConstants',
+                    );
+    }
+    
     public function analyze() {
         // Nsname that is not used somewhere else
         $this->atomIs('Nsname')
-             ->hasNoIn(array('NEW', 'USE', 'NAME', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT',
+             ->hasNoIn(array('NEW', 'USE', 'NAME', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT', 'RETURNTYPE',
                              'FUNCTION', 'GROUPUSE'));
         $this->prepareQuery();
 
         // Identifier that is not used somewhere else
         $this->atomIs('Identifier')
-             ->hasNoIn(array('NEW', 'USE', 'NAME', 'CONSTANT', 'MEMBER', 'TYPEHINT', 'INSTEADOF', 'METHOD',
+             ->hasNoIn(array('NEW', 'USE', 'NAME', 'CONSTANT', 'MEMBER', 'TYPEHINT', 'INSTEADOF', 'METHOD', 'TYPEHINT', 'RETURNTYPE',
                              'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST', 'GROUPUSE'));
         $this->prepareQuery();
 
@@ -46,7 +51,7 @@ class ConstantUsage extends Analyzer {
         // defined('constant') : then the string is a constant
         $this->atomFunctionIs(array('\defined', '\constant'))
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String');
+             ->atomIs('String', self::WITH_CONSTANTS);
         $this->prepareQuery();
 
         // Const outside a class
