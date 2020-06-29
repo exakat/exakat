@@ -79,12 +79,14 @@ class StubsJson extends Reports {
         }
         
         foreach($res->toArray() as $cit) {
-            $extendsId = ((int) $cit['extends'] > 0) ? $citFqn[$cit['extends']] ?? '\Unkown' : $cit['extends'];
+            $extendsId = ((int) $cit['extends'] > 0) ? $citsFqn[$cit['extends']] ?? '\Unkown' : $cit['extends'];
+
             $details = array('abstract'   => $cit['abstract'] === 1,
                              'final'      => $cit['final'] === 1,
                              'extends'    => $extendsId,
                              'implements' => array(),
                              'use'        => array(),
+                             'useoptions' => array(),
                              );
             $data['versions'][$namespaces[$cit['namespaceId']]][$cit['type']][$cit['name']] = $details;
 
@@ -96,9 +98,12 @@ class StubsJson extends Reports {
         // extensions
         $res = $this->dump->fetchTable('cit_implements');
         foreach($res->toArray() as $cit) {
-            $implementsId = ((int) $cit['implements'] > 0) ? $citFqn[$cit['implements']] ?? '\Unkown' : $cit['implements'];
+            $implementsId = ((int) $cit['implements'] > 0) ? $citsFqn[$cit['implements']] ?? '\Unkown' : $cit['implements'];
 
             $data['versions'][$namespaces[$cits2ns[$cit['implementing']]]][$cits2type[$cit['implementing']]][$cits[$cit['implementing']]][$cit['type']][] = $implementsId;
+            if ($cit['type'] === 'use') {
+                $data['versions'][$namespaces[$cits2ns[$cit['implementing']]]][$cits2type[$cit['implementing']]][$cits[$cit['implementing']]]['useoptions'] = explode(';', $cit['options']);
+            }
         }
 //        print_r($cits);die();
 
@@ -132,9 +137,9 @@ class StubsJson extends Reports {
 //        print_r($res->toArray());die();
         foreach($res->toArray() as $method) {
             $details = array('visibility'   => $method['visibility'],
-                             'static'       => $method['static'] === 1,
-                             'abstract'     => $method['abstract'] === 1,
-                             'reference'    => $method['reference'] === 1,
+                             'static'       => $method['static']     === 1,
+                             'abstract'     => $method['abstract']   === 1,
+                             'reference'    => $method['reference']  === 1,
                              'returntypes'  => explode('|', $method['returntype']),
                              );
 

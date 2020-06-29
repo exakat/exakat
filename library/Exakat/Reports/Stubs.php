@@ -94,7 +94,17 @@ class Stubs extends Reports {
         $abstract   = empty($class->abstract)   ? '' : 'abstract ';
         $implements = empty($class->implements) ? '' : ' implements '.implode(', ', $class->implements);
         $extends    = empty($class->extends)    ? '' : ' extends '.$class->extends;
-        $use        = empty($class->use)        ? '' : PHP_EOL.self::INDENTATION.'use '.implode(', ', $class->use).';'.PHP_EOL;
+        $use        = empty($class->use)        ? '' : PHP_EOL.self::INDENTATION.'use '.implode(', ', $class->use);
+        if (empty($trait->use)) {
+            $use = '';
+        } else {
+            $use        = PHP_EOL.self::INDENTATION.'use '.implode(', ', $trait->use);
+            if (empty($trait->useoptions)) {
+                $use .= ';'.PHP_EOL;
+            } else {
+                $use .= "{".join('; ', $trait->useoptions)."}".PHP_EOL;
+            }
+        }
         $result = array(self::INDENTATION . "{$abstract}{$final}class $name{$extends}{$implements} {".$use);
 
         if (isset($class->constants)) {
@@ -123,7 +133,17 @@ class Stubs extends Reports {
     }
 
     private function trait(string $name, object $trait): string {
-        $use        = empty($class->use)        ? '' : PHP_EOL.self::INDENTATION.'use '.implode(', ', $class->use).';'.PHP_EOL;
+        if (empty($trait->use)) {
+            $use = '';
+        } else {
+            $use        = PHP_EOL.self::INDENTATION.'use '.implode(', ', $trait->use);
+            if (empty($trait->useoptions)) {
+                $use .= ';'.PHP_EOL;
+            } else {
+                $use .= "{".join('; ', $trait->useoptions)."}".PHP_EOL;
+            }
+        }
+
         $result = array(self::INDENTATION . "trait $name {".$use);
 
         if (isset($trait->properties)) {
