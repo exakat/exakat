@@ -92,7 +92,7 @@ class Stubs extends Reports {
     }
 
     private function class(string $name, object $class): string {
-        $final      = empty($class->final)      ? '' : 'static ';
+        $final      = empty($class->final)      ? '' : 'final ';
         $abstract   = empty($class->abstract)   ? '' : 'abstract ';
         $implements = empty($class->implements) ? '' : ' implements '.implode(', ', $class->implements);
         $extends    = empty($class->extends)    ? '' : ' extends '.$class->extends;
@@ -103,12 +103,14 @@ class Stubs extends Reports {
             foreach($class->constants as $constantName => $constant) {
                 $result[] = self::INDENTATION . self::INDENTATION . $this->constant($constantName, $constant);
             }
+            $result[] = '';
         }
 
         if (isset($class->properties)) {
             foreach($class->properties as $propertyName => $property) {
                 $result[] = self::INDENTATION . self::INDENTATION . $this->property($propertyName, $property);
             }
+            $result[] = '';
         }
 
         if (isset($class->methods)) {
@@ -155,7 +157,7 @@ class Stubs extends Reports {
 
         if (isset($interface->methods)) {
             foreach($interface->methods as $functionName => $function) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function);
+                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function, 'interface');
             }
         }
 
@@ -173,19 +175,27 @@ class Stubs extends Reports {
     }
 
     private function property(string $name, object $values): string {
-        $static   = empty($values->static) ? '' : 'static ';
-        $typehint = implode('|', $values->typehint);
-        $phpdoc   = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL;
-        return $phpdoc . self::INDENTATION . $static . "$values->visibility $name;";
+        $static     = empty($values->static) ? '' : 'static ';
+        $typehint   = implode('|', $values->typehint);
+        $phpdoc     = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL;
+        $visibility = ($values->visibility ?: 'public') . ' ';
+
+        return $phpdoc . self::INDENTATION . $static . $visibility. $name. ';';
     }
 
-    private function function(string $name, object $values): string {
-        $reference  = empty($values->reference) ? '' : '&';
-        $visibility = empty($values->visibility) ? '' : $values->visibility . ' ';
-        $static     = empty($values->static) ? '' : 'static ';
-        $final      = empty($values->final) ? '' : 'static ';
-        $abstract   = empty($values->abstract) ? '' : 'abstract ';
-        $block      = empty($values->abstract) ? '{}' : ' ;';
+    private function function(string $name, object $values, $type = 'class'): string {
+        $reference  = empty($values->reference) ?  ''   : '&';
+        if ($type === 'interface') {
+            $visibility = '';
+            $abstract   = '';
+            $block      = ' ;';
+        } else {
+            $abstract   = empty($values->abstract)   ?   ''   : 'abstract ';
+            $visibility = empty($values->visibility) ?   ''   : $values->visibility . ' ';
+            $block      = empty($values->abstract)   ?   '{}' : ' ;';
+        }
+        $static     = empty($values->static) ?     ''   : 'static ';
+        $final      = empty($values->final) ?      ''   : 'final ';
         $typehint   = $values->returntypes[0] === '' ? '' : ': ' . implode('|', $values->returntypes) . ' ';
         $phpdoc     = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL . self::INDENTATION;
 
@@ -201,7 +211,7 @@ class Stubs extends Reports {
         }
         $arguments = implode(', ', $arguments);
 
-        return $phpdoc . "{$final}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
+        return $phpdoc . "{$final}{$abstract}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
     }
 }
 
