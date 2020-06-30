@@ -30,10 +30,11 @@ class NoRealComparison extends Analyzer {
         // 1.2 == 3.4
         // 1.2 == 3.4 + 0
         $this->atomIs('Comparison')
-             ->codeIs(array('==', '!=', '===', '!=='))
+             ->codeIs(array('==', '!=', '===', '!=='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomInsideNoDefinition('Float')
+             ->atomInsideNoDefinition(array('Float', 'Identifier', 'Nsname', 'Staticconstant'))
              ->hasNoIn(array('ARGUMENT', 'INDEX'))
+             ->atomIs('Float', self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
     }
