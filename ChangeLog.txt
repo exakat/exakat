@@ -1,4 +1,4 @@
-Version 2.1.3 (Marshal of the Heavenly Canopy, coming up)
+Version 2.1.4 (Marshal of the Heavenly Canopy, coming up)
 + Architecture
     + 
 + Report
@@ -8,15 +8,46 @@ Version 2.1.3 (Marshal of the Heavenly Canopy, coming up)
 + Tokenizer
     + 
 
-Version 2.1.2 (Mountain Deity, coming up)
+Version 2.1.2 (Mountain Deity, 2020-06-25)
 + Architecture
-    + 
+    + Removed files task from initproject.
+    + Added ignore_rule directive, to ignore specific rules while running a specific report
+    + More documentation (in particular, modifications section)
+    + Exakat avoids to return twice the same results (file and line)
+    + Sped up some analysis, and added a time limit per analysis
+    + Removed double linking for static variables
 + Report
-    + 
+    + New reports ; Stubs and StubsJson, which produce the stubs of the audited code (PHP and JSON format) (WIP)
+    + New report ; Typehint suggestion (WIP)
+    + Ambassador ; offers the configuration for all the rules that spotted issues in the current audit, for reuse in other codes
+    + Collect the number of property per class
 + Analysis
+    + New analysis : Report methods that are too much indented on average
+    + New analysis : Report possible confusion between a class and an alias
+    + New analysis : Report variables that are static and global at the same time
+    + New analysis : Report statement with long blocks
+    + New analysis : Report phpdoc's deprecated methods and function calls
+    + Upgraded analysis : Dereferencing levels now include () and = 
+    + Upgraded analysis : Unused Methods now skips classes that calls themselves dynamically 
+    + Upgraded analysis : No Need Get_class() was refactored
+    + Upgraded analysis : Avoid Optional Properties was refactored
+    + Upgraded analysis : Variable inconsistent Usage was extended with more reach
+    + Upgraded analysis : Indirect Injections was upgraded with better reach with variables
+    + Upgraded analysis : Direct Injections was upgraded with include
     + Upgraded analysis : PHP 8.0 new scalar typehint, stringable interface
+    + Upgraded analysis : Mismatch Type and default now avoids undefined constants
+    + Upgraded analysis : Wrong Optional Parameter is upgraded for PHP 8.0
+    + Upgraded analysis : Indentation level was refactored
+    + Checked unit tests : 3480 / 3510 test pass (99% pass)
 + Tokenizer
-    + 
+    + Upgraded detection of PHP native constants, when they are in absolute notation
+    + Dump task stores use expressions' options, plus minor fixes
+    + Added support for Attributes (PHP 8.0)
+    + Added support for Union types (PHP 8.0)
+    + AtomIs step (WITH_VARIABLE) was extended with local variables
+    + DEFAULT doesn't point anymore on auto-updated values
+    + Extended support for phpdoc in the code
+    + Added support for promoted properties (PHP 8.0)
 
 Version 2.1.1 (Earth Deity, 2020-06-01)
 + Architecture
