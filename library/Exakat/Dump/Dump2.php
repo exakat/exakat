@@ -368,6 +368,15 @@ SQL;
         return $this->query($query);
     }
 
+    public function fetchHashAnalyzer(string $analyzer): Results {
+        $query = <<<SQL
+SELECT key, value FROM hashAnalyzer
+WHERE analyzer = "$analyzer"
+SQL;
+
+        return $this->query($query);
+    }
+
     public function getCit($type = 'class'): Results {
         assert(in_array($type, array('class', 'trait', 'interface')));
 

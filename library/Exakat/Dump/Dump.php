@@ -80,7 +80,7 @@ abstract class Dump {
     }
 
     protected function collectDatastore(): void {
-        $tables = array('analyzed',
+        $tables = array(//'analyzed',
                         'compilation52',
                         'compilation53',
                         'compilation54',
