@@ -811,6 +811,7 @@ sideEffect{
          "init": init,
          "typehint":typehint.join('|'),
          "typehint_fnp": typehint_fnp.join('|'),
+         "phpdoc": phpodoc,
          ];
 }
 

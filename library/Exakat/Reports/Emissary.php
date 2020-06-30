@@ -512,8 +512,6 @@ HTML;
         if ($res->isEmpty()) {
             $this->emptyResult($section);
 
-            print "Empty $name ($hash)\n";
-
             return;
         }
 
