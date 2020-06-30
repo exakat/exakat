@@ -43,8 +43,9 @@ class StubsJson extends Reports {
         // constants
         $res = $this->dump->fetchTable('constants');
         foreach($res->toArray() as $constant) {
-            $details = array('type' => $constant['type'],
-                             'value'   => $constant['value'],
+            $details = array('type'     => $constant['type'],
+                             'value'    => $constant['value'],
+                             'phpdoc'   => $constant['phpdoc'] ?? '',
                              );
             $data['versions'][$namespaces[$constant['namespaceId']]]['constants'][$constant['constant']] = $details;
         }
@@ -59,7 +60,8 @@ class StubsJson extends Reports {
 
             $details = array('returntypes' => explode('|', $function['returntype']),
                              'reference'   => $function['reference'] === 1,
-                                );
+                             'phpdoc'      => $function['phpdoc'],
+                             );
             $data['versions'][$namespaces[$function['namespaceId']]]['functions'][$function['function']] = $details;
 
             $methods[$function['id']] = $function['function'];
@@ -141,6 +143,7 @@ class StubsJson extends Reports {
                              'abstract'     => $method['abstract']   === 1,
                              'reference'    => $method['reference']  === 1,
                              'returntypes'  => explode('|', $method['returntype']),
+                             'phpdoc'       => $method['phpdoc'],
                              );
 
             $data['versions'][$namespaces[$cits2ns[$method['citId']]]][$cits2type[$method['citId']]][$cits[$method['citId']]]['methods'][$method['method']] = $details;
@@ -155,6 +158,7 @@ class StubsJson extends Reports {
                              'reference'    => $argument['reference'] === 1,
                              'typehint'     => explode('|', $argument['typehint']),
                              'value'        => $argument['init'],
+                             'phpdoc'       => $argument['phpdoc'] ?? '',
                              );
             if ($argument['citId'] == 0) {
                 $data['versions'][$namespaces[$function2ns[$argument['methodId']]]]['functions'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;

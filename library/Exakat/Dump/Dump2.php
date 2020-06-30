@@ -174,7 +174,8 @@ CREATE TABLE arguments (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         init STRING,
                         line INTEGER,
                         typehint STRING,
-                        typehint_fnp STRING
+                        typehint_fnp STRING,
+                        phpdoc STRING
                      )
 SQL;
         $this->sqlite->query($query);

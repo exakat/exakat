@@ -51,14 +51,14 @@ class Stubs extends Reports {
 
         if (isset($namespace->constants)) {
             foreach($namespace->constants as $constantName => $constant) {
-                $result[] = self::INDENTATION . $this->constant($constantName, $constant);
+                $result[] = $this->constant($constantName, $constant);
             }
             $result[] = '';
         }
 
         if (isset($namespace->functions)) {
             foreach($namespace->functions as $functionName => $function) {
-                $result[] = self::INDENTATION . $this->function($functionName, $function);
+                $result[] = $this->function($functionName, $function, 'function');
             }
             $result[] = '';
         }
@@ -109,21 +109,21 @@ class Stubs extends Reports {
 
         if (isset($class->constants)) {
             foreach($class->constants as $constantName => $constant) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->constant($constantName, $constant);
+                $result[] = $this->constant($constantName, $constant, 'class');
             }
             $result[] = '';
         }
 
         if (isset($class->properties)) {
             foreach($class->properties as $propertyName => $property) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->property($propertyName, $property);
+                $result[] = $this->property($propertyName, $property);
             }
             $result[] = '';
         }
 
         if (isset($class->methods)) {
             foreach($class->methods as $functionName => $function) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function);
+                $result[] = $this->function($functionName, $function);
             }
         }
 
@@ -148,13 +148,13 @@ class Stubs extends Reports {
 
         if (isset($trait->properties)) {
             foreach($trait->properties as $propertyName => $property) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->property($propertyName, $property);
+                $result[] = $this->property($propertyName, $property);
             }
         }
 
         if (isset($trait->methods)) {
             foreach($trait->methods as $functionName => $function) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function);
+                $result[] = $this->function($functionName, $function);
             }
         }
 
@@ -169,13 +169,13 @@ class Stubs extends Reports {
 
         if (isset($interface->constants)) {
             foreach($interface->constants as $constantName => $constant) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->constant($constantName, $constant);
+                $result[] = $this->constant($constantName, $constant);
             }
         }
 
         if (isset($interface->methods)) {
             foreach($interface->methods as $functionName => $function) {
-                $result[] = self::INDENTATION . self::INDENTATION . $this->function($functionName, $function, 'interface');
+                $result[] = $this->function($functionName, $function, 'interface');
             }
         }
 
@@ -184,21 +184,22 @@ class Stubs extends Reports {
         return join(PHP_EOL, $result);
     }
 
-    private function constant(string $name, object $values): string {
+    private function constant(string $name, object $values, $type = 'global'): string {
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc); 
         if (isset($values->type) && $values->type == 'define') {
-            return "define('$name', $values->value);";
+            return $phpdoc.self::INDENTATION.($type === 'global' ? '' : self::INDENTATION)."define('$name', $values->value);";
         } else {
-            return "$values->visibility const $name = $values->value;";
+            return $phpdoc.self::INDENTATION.($type === 'global' ? '' : self::INDENTATION)."{$values->visibility}const $name = $values->value;";
         }
     }
 
     private function property(string $name, object $values): string {
         $static     = empty($values->static) ? '' : 'static ';
         $typehint   = implode('|', $values->typehint);
-        $phpdoc     = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL;
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc); 
         $visibility = ($values->visibility ?: 'public') . ' ';
 
-        return $phpdoc . self::INDENTATION . $static . $visibility. $name. ';';
+        return $phpdoc . self::INDENTATION . self::INDENTATION . $static . $visibility. $name. ';';
     }
 
     private function function(string $name, object $values, $type = 'class'): string {
@@ -215,7 +216,7 @@ class Stubs extends Reports {
         $static     = empty($values->static) ?     ''   : 'static ';
         $final      = empty($values->final) ?      ''   : 'final ';
         $typehint   = $values->returntypes[0] === '' ? '' : ': ' . implode('|', $values->returntypes) . ' ';
-        $phpdoc     = empty($values->phpdoc) ? '' : self::INDENTATION . $values->phpdoc . PHP_EOL . self::INDENTATION;
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc); 
 
         $arguments = array();
         if (isset($values->arguments)) {
@@ -223,13 +224,23 @@ class Stubs extends Reports {
                 $referenceArgs  = empty($values->referenceArgs) ? '' : ' &';
                 $typehintArgs   = empty($argDetails->returntypes) ? '' : implode('|', $argDetails->returntypes) . ' ';
                 $default        = $argDetails->value === '' ? '' : ' = ' . $argDetails->value;
+                $phpdoc         = $this->normalizePhpdoc($values->phpdoc); 
 
-                $arguments[] = $typehintArgs . $referenceArgs . $argDetails->name . $default;
+                $arguments[] = $phpdoc.$typehintArgs . $referenceArgs . $argDetails->name . $default;
             }
         }
         $arguments = implode(', ', $arguments);
 
-        return $phpdoc . "{$final}{$abstract}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
+        return $phpdoc . self::INDENTATION. ($type === 'function' ? '' : self::INDENTATION)."{$final}{$abstract}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
+    }
+    
+    private function normalizePhpdoc(string $phpdoc) : string {
+        if (empty($phpdoc)) {
+            return '';
+        }
+        
+        $phpdoc = preg_replace("/\n\s+\*/m", "\n *", $phpdoc);
+        return $phpdoc . PHP_EOL;
     }
 }
 
