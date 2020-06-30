@@ -811,7 +811,7 @@ sideEffect{
          "init": init,
          "typehint":typehint.join('|'),
          "typehint_fnp": typehint_fnp.join('|'),
-         "phpdoc": phpodoc,
+         "phpdoc": phpdoc,
          ];
 }
 
@@ -837,6 +837,7 @@ GREMLIN
                               $row['phpdoc'],
             );
         }
+
         $total = $this->storeToDumpArray('arguments', $toDump);
         display("$total arguments\n");
 
@@ -1233,10 +1234,12 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
     init = '';
     typehint = [];
     typehint_fnp = [];
+    phpdoc = '';
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
 .where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
 .where( __.out('DEFAULT').not(hasLabel('Void')).not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+.where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 .map{ 
     x = ["name": name,
          "fullnspath":fullnspath,
@@ -1250,6 +1253,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
          "init": init,
          "typehint":typehint.join('|'),
          "typehint_fnp":typehint_fnp.join('|'),
+         "phpdoc":phpdoc,
          ];
 }
 
@@ -1276,6 +1280,7 @@ GREMLIN
                                (int) $row['line'],
                                $row['typehint'],
                                $row['typehint_fnp'],
+                               $row['phpdoc'],
             );
         }
         $total = $this->storeToDumpArray('arguments', $toDump);
