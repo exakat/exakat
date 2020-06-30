@@ -73,7 +73,7 @@ class Atom {
     public $isRead       = 0;
     public $isModified   = 0;
 
-    public function __construct($id, $atom, $line) {
+    public function __construct(int $id, string $atom, int $line) {
         $this->id   = $id;
         $this->atom = $atom;
         $this->line = $line;
@@ -87,7 +87,7 @@ class Atom {
         die("Fatal error : trying to get '$name' property on " . self::class);
     }
 
-    public function toArray() {
+    public function toArray() : array {
         if (strlen($this->code) > self::STRING_MAX_SIZE) {
             $this->code = substr($this->code, 0, self::STRING_MAX_SIZE) . '...[ total ' . strlen($this->code) . ' chars]';
         }
@@ -134,7 +134,7 @@ class Atom {
         return (array) $this;
     }
 
-    public function toGraphsonLine(&$id) {
+    public function toGraphsonLine(int &$id) {
         $booleanValues = array('alternative',
                                'absolute',
                                'abstract',
@@ -147,13 +147,13 @@ class Atom {
                                'final',
                                'flexible',
                                'heredoc',
-                               'noscream',
+//                               'noscream',
                                'trailing',
                                'isRead',
                                'isModified',
-                               'reference',
+//                               'reference',
                                'static',
-                               'variadic',
+//                               'variadic',
                                'isNull',
                                );
         $integerValues = array('args_max',
@@ -172,15 +172,14 @@ class Atom {
                              'isRead',
                              'isModified',
                              'reference',
-                             'variadic',
+//                             'variadic',
                              );
 
         $properties = array();
-        foreach($this as $l => $value) {
-            if ($l === 'id') { continue; }
-            if ($l === 'atom') { continue; }
+        $list = array_diff_key((array) $this, array('id', 'atom', 'noscream', 'reference', 'variadic'));
+        foreach($list as $l => $value) {
             if ($value === null) { continue; }
-
+            
             if (in_array($l, $falseValues) &&
                 !$value) {
                 continue;
@@ -217,7 +216,18 @@ class Atom {
         return (object) $object;
     }
 
-    private function protectString($code) {
+    public function boolProperties() : array {
+        $return = array();
+        foreach(['noscream', 'reference'] as $property) {
+            if ($this->$property == true) {
+                $return[] = $property;
+            }
+        }
+
+        return $return;
+    }
+
+    private function protectString(string $code) : string {
         return addcslashes($code , '\\"');
     }
 

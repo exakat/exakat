@@ -29,7 +29,8 @@ use stdClass;
 
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
-    private const LOAD_CHUNK      = 20000;
+    private const LOAD_CHUNK      = 10000;
+    private $load_chunk = 20000;
     private const LOAD_CHUNK_LINK = 20000;
 
     private $tokenCounts   = array('Project' => 1);
@@ -42,6 +43,7 @@ class SplitGraphson extends Loader {
     private $graphdb        = null;
     private $path           = '';
     private $pathLink       = '';
+    private $pathProperties = '';
     private $pathDef        = '';
     private $total          = 0;
 
@@ -59,6 +61,7 @@ class SplitGraphson extends Loader {
         $this->sqlite3        = $sqlite3;
         $this->path           = "{$this->config->tmp_dir}/graphdb.graphson";
         $this->pathLink       = "{$this->config->tmp_dir}/graphdb.link.graphson";
+        $this->pathProperties = "{$this->config->tmp_dir}/graphdb.properties.graphson";
         $this->pathDef        = "{$this->config->tmp_dir}/graphdb.def";
 
         $this->dictCode  = new Collector();
@@ -68,7 +71,7 @@ class SplitGraphson extends Loader {
 
         $this->cleanCsv();
 
-        $jsonText = json_encode($id0->toGraphsonLine($id0)) . PHP_EOL;
+        $jsonText = json_encode($id0->toGraphsonLine($this->id)) . PHP_EOL;
         assert(!json_last_error(), 'Error encoding ' . $id0->atom . ' : ' . json_last_error_msg());
 
         file_put_contents($this->path, $jsonText, \FILE_APPEND);
@@ -86,6 +89,9 @@ class SplitGraphson extends Loader {
         }
 
         display("Init finalize\n");
+        
+        $this->saveProperties();
+        
         $begin = microtime(true);
         $query = 'g.V().hasLabel("Project").id();';
         $res = $this->graphdb->query($query);
@@ -106,9 +112,10 @@ class SplitGraphson extends Loader {
             ++$total;
             ++$chunk;
         }
-        if ($chunk > self::LOAD_CHUNK_LINK) {
+        if ($chunk > $this->load_chunk) {
             $f = $this->saveLinks($f);
             $chunk = 0;
+            $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
         }
 
         $res = $this->sqlite3->query('SELECT origin, destination FROM globals');
@@ -119,9 +126,10 @@ class SplitGraphson extends Loader {
             ++$chunk;
         }
         unset($res);
-        if ($chunk > self::LOAD_CHUNK_LINK) {
+        if ($chunk > $this->load_chunk) {
             $f = $this->saveLinks($f);
             $chunk = 0;
+            $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
         }
 
         $definitionSQL = <<<'SQL'
@@ -150,9 +158,10 @@ SQL;
             $row[1] = implode('-', $r);
             fputcsv($f, $row);
 
-            if ($chunk > self::LOAD_CHUNK_LINK) {
+            if ($chunk > $this->load_chunk) {
                 $f = $this->saveLinks($f);
                 $chunk = 0;
+                $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
             }
         }
 
@@ -173,6 +182,35 @@ SQL;
         display('Cleaning CSV');
 
         return true;
+    }
+
+    private function saveProperties() {
+        if (file_exists($this->pathProperties)) {
+            $count = count(file($this->pathProperties));
+            
+            if ($count === 0) {
+                $this->log("properties\t$count\t0");
+
+                return;
+            }
+
+            $begin = hrtime(true);
+            $query = <<<GREMLIN
+new File('$this->pathProperties').eachLine {
+    (property, targets) = it.split('-');
+    vertices = targets.split(',');
+
+    g.V(vertices).property(property, true).iterate();
+}
+
+GREMLIN;
+            $this->graphdb->query($query);
+            $end = hrtime(true);
+
+            unlink($this->pathProperties);
+
+            $this->log("properties\t$count\t" . ($end - $begin));
+        }
     }
 
     private function saveLinks($f) {
@@ -212,6 +250,10 @@ GREMLIN;
             unlink($this->pathLink);
         }
 
+        if (file_exists($this->pathProperties)) {
+            unlink($this->pathProperties);
+        }
+
         if (file_exists($this->pathDef)) {
             unlink($this->pathDef);
         }
@@ -226,12 +268,19 @@ GREMLIN;
     public function saveFiles(string $exakatDir, array $atoms, array $links): void {
         $fileName = 'unknown';
 
-        $json = array();
+        $json     = array();
+        $properties = array('noscream' => array(),
+                            'reference' => array(),
+                            'variadic' => array(),
+                            );
         foreach($atoms as $atom) {
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
             }
             $json[$atom->id] = $atom->toGraphsonLine($this->id);
+            foreach($atom->boolProperties() as $property) {
+                $properties[$property][] = $atom->id;
+            }
 
             if ($atom->atom === 'Functioncall' &&
                 !empty($atom->fullnspath)) {
@@ -261,8 +310,7 @@ GREMLIN;
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);
 
-            $v = mb_strtolower((string) $V);
-            $j->properties['lccode'][0]->value = $this->dictCode->get($v);
+            $j->properties['lccode'][0]->value = $this->dictCode->get($j->properties['lccode'][0]->value);
 
             if (isset($j->properties['propertyname']) ) {
                 $j->properties['propertyname'][0]->value = $this->dictCode->get($j->properties['propertyname'][0]->value);
@@ -288,9 +336,15 @@ GREMLIN;
 
         file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
         file_put_contents($this->pathLink, implode(PHP_EOL, $links) . PHP_EOL, \FILE_APPEND);
+        foreach($properties as $property => $targets) {
+            if (!empty($targets)) {
+                file_put_contents($this->pathProperties, $property.'-'.implode(',', $targets) . PHP_EOL, \FILE_APPEND);
+            }
+        }
 
-        if ($this->total > self::LOAD_CHUNK) {
+        if ($this->total > $this->load_chunk) {
             $this->saveNodes();
+            $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
         }
 
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
@@ -301,9 +355,10 @@ GREMLIN;
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
         $end = hrtime(true);
-        $this->log("path\t" . ($end - $begin));
+        $this->log("path\t{$this->total}\t" . ($end - $begin));
 
         if (file_exists($this->pathLink)) {
+            $count = count(file($this->pathLink));
             $begin = hrtime(true);
             $query = <<<GREMLIN
 new File('$this->pathLink').eachLine {
@@ -318,7 +373,7 @@ GREMLIN;
 
             unlink($this->pathLink);
 
-            $this->log("links\t" . ($end - $begin));
+            $this->log("links\t$count\t" . ($end - $begin));
         }
 
         $this->total = 0;
