@@ -216,7 +216,7 @@ class Initproject extends Tasks {
         }
 
         try {
-            $vcs->clone($repositoryURL);
+            $vcs->clone((string) $repositoryURL);
         } catch (VcsError $e) {
             rename($tmpPath, $finalPath);
 
