@@ -56,7 +56,7 @@ class Rulesets implements RulesetsInterface {
         $dev      = $this->dev    ->getRulesetsAnalyzers($theme);
         $ignore   = $this->ignore ->getRulesetsAnalyzers($theme);
 
-        return array_diff(array_merge($main, $extra, $ext, $dev), $ignore);
+        return array_udiff(array_merge($main, $extra, $ext, $dev), $ignore, 'strcasecmp');
     }
 
     public function getRulesetForAnalyzer(string $analyzer = ''): array {
