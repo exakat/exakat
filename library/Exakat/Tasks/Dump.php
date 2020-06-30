@@ -430,7 +430,7 @@ GREMLIN
         $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<GREMLIN
  sideEffect{ extendList = ""; }.where(__.out("EXTENDS").optional(__.out("DEFINITION").where(__.in("USE"))).sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
-.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").optional(__.out("DEFINITION").where(__.in("USE"))).sideEffect{ implementList.push( it.get().value("fullcode"));}.fold() )
+.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").optional(__.out("DEFINITION").where(__.in("USE"))).sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").optional(__.out("DEFINITION").where(__.in("USE"))).sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ usesOptions = []; }.where(__.out("USE").hasLabel("Usetrait").out("BLOCK").out("EXPRESSION").sideEffect{ usesOptions.push( it.get().value("fullcode"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
@@ -791,10 +791,12 @@ sideEffect{
     init = '';
     typehint = [];
     typehint_fnp = [];
+    phpdoc = '';
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
 .where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
 .where( __.out('DEFAULT').not(hasLabel('Void')).not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
+.where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
 .map{ 
     x = ["name": name,
          "rank":it.get().value("rank"),
@@ -831,6 +833,7 @@ GREMLIN
                               (int) $row['line'],
                               $row['typehint'],
                               $row['typehint_fnp'],
+                              $row['phpdoc'],
             );
         }
         $total = $this->storeToDumpArray('arguments', $toDump);
