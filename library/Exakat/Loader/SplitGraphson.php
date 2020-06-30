@@ -269,9 +269,26 @@ GREMLIN;
         $fileName = 'unknown';
 
         $json     = array();
-        $properties = array('noscream' => array(),
-                            'reference' => array(),
-                            'variadic' => array(),
+        $properties = array('noscream'     => array(),
+                            'reference'    => array(),
+                            'variadic'     => array(),
+                            'heredoc'      => array(),
+                            'flexible'     => array(),
+                            'constant'     => array(),
+                            'enclosing'    => array(),
+                            'final'        => array(),
+                            'boolean'      => array(),
+                            'bracket'      => array(),
+                            'close_tag'    => array(),
+                            'trailing'     => array(),
+                            'alternative'  => array(),
+                            'absolute'     => array(),
+                            'abstract'     => array(),
+                            'aliased'      => array(),
+                            'isRead'       => array(),
+                            'isModified'   => array(),
+                            'static'       => array(),
+                            'isNull'       => array(),
                             );
         foreach($atoms as $atom) {
             if ($atom->atom === 'File') {

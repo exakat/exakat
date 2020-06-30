@@ -135,26 +135,7 @@ class Atom {
     }
 
     public function toGraphsonLine(int &$id) {
-        $booleanValues = array('alternative',
-                               'absolute',
-                               'abstract',
-                               'aliased',
-                               'boolean',
-                               'bracket',
-                               'close_tag',
-                               'constant',
-                               'enclosing',
-                               'final',
-                               'flexible',
-                               'heredoc',
-//                               'noscream',
-                               'trailing',
-                               'isRead',
-                               'isModified',
-//                               'reference',
-                               'static',
-//                               'variadic',
-                               'isNull',
+        $booleanValues = array(
                                );
         $integerValues = array('args_max',
                                'args_min',
@@ -176,7 +157,30 @@ class Atom {
                              );
 
         $properties = array();
-        $list = array_diff_key((array) $this, array('id', 'atom', 'noscream', 'reference', 'variadic'));
+        $list = array_diff_key((array) $this, array(
+                               'id', 
+                               'atom', 
+                               'noscream', 
+                               'reference', 
+                               'variadic', 
+                               'heredoc', 
+                               'flexible',
+                               'constant',
+                               'enclosing',
+                               'final',
+                               'boolean',
+                               'bracket',
+                               'close_tag',
+                               'trailing',
+                               'alternative',
+                               'absolute',
+                               'abstract',
+                               'aliased',
+                               'isRead',
+                               'isModified',
+                               'static',
+                               'isNull',
+                               ));
         foreach($list as $l => $value) {
             if ($value === null) { continue; }
             
@@ -218,7 +222,28 @@ class Atom {
 
     public function boolProperties() : array {
         $return = array();
-        foreach(['noscream', 'reference'] as $property) {
+        foreach([
+                 'noscream', 
+                 'reference', 
+                 'variadic', 
+                 'heredoc', 
+                 'flexible',
+                 'constant',
+                 'enclosing',
+                 'final',
+                 'boolean',
+                 'bracket',
+                 'close_tag',
+                 'trailing',
+                 'alternative',
+                 'absolute',
+                 'abstract',
+                 'aliased',
+                 'isRead',
+                 'isModified',
+                 'static',
+                 'isNull',
+                               ] as $property) {
             if ($this->$property == true) {
                 $return[] = $property;
             }
