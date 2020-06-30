@@ -2256,6 +2256,7 @@ class Load extends Tasks {
 
         do {
             do {
+                $this->checkPhpdoc();
                 // PHP 8.0's trailing comma in signature
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
                     $fullcode[] = ' ';
@@ -2296,6 +2297,7 @@ class Load extends Tasks {
                 $variable = $this->addAtom('Parametername');
                 $typehints = $this->processTypehint($index);
                 $this->makeAttributes($index);
+                $this->makePhpdoc($index);
                 ++$this->id;
 
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
