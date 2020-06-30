@@ -64,7 +64,7 @@ class Git extends Vcs {
         $repositoryNormalizedURL = unparse_url($repositoryDetails);
 
         $codePath = dirname($this->destinationFull);
-        $shell = "cd $codePath;GIT_TERMINAL_PROMPT=0 {$this->executable} clone -q $repositoryNormalizedURL";
+        $shell = "cd $codePath;GIT_TERMINAL_PROMPT=0 {$this->executable} clone -q ";
 
         if (!empty($this->branch)) {
             display("Check out with branch '$this->branch'");
@@ -73,10 +73,10 @@ class Git extends Vcs {
             display("Check out with tag '$this->tag'");
             $shell .= " -b $this->tag ";
         } else {
-            display('Check out simple');
+            display('Check out with default branch');
         }
 
-        $shell .= ' code 2>&1 ';
+        $shell .= $repositoryNormalizedURL . ' code 2>&1 ';
         $shellResult = shell_exec($shell) ?? '';
 
         if (($offset = strpos($shellResult, 'fatal: ')) !== false) {
