@@ -76,6 +76,12 @@ abstract class Config {
         }
         $ini[] = '';
 
+        $ini[] = ';Ignored rules';
+        foreach($this->ignore_rules as $ignore_rule) {
+            $ini[] = "ignore_rules[] = \"$ignore_rule\"";
+        }
+        $ini[] = '';
+
         $ini[] = ';Description of the project';
         $ini[] = "project_name        = \"{$this->project_name}\";";
         $ini[] = "project_url         = \"{$this->project_url}\";";
@@ -108,6 +114,7 @@ abstract class Config {
         $yaml = array('phpversion'          => $this->options['phpversion'],
                       'ignore_dirs'         => $this->ignore_dirs,
                       'include_dirs'        => $this->include_dirs,
+                      'ignore_rules'        => $this->ignore_rules,
                       'file_extensions'     => $this->file_extensions,
                       'stub'                => $this->stubs,
                       'project_name'        => $this->project_name,

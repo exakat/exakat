@@ -30,6 +30,7 @@ class DatastoreConfig extends Config {
     private $datastore             = null;
     protected $ignore_dirs         = array();
     protected $include_dirs        = array();
+    protected $ignore_rules        = array();
     protected $project_name        = '';
     protected $project_url         = '';
     protected $project_vcs         = '';
