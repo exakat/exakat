@@ -32,7 +32,7 @@ class Favorites extends Reports {
 
         $return = array();
         foreach($analyzers as $analyzer) {
-            $r = $this->datastore->getHashAnalyzer($analyzer);
+            $r = $this->dump->fetchHashAnalyzer($analyzer)->toArray();
 
             if (empty($r)) {
                 continue;

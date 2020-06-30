@@ -66,12 +66,12 @@ class Simplehtml extends Reports {
         $date = date('r');
         $text = "<tr><th>Date:</th><td>$date</td></tr>\n";
 
-        $audit_name = $this->datastore->getHash('audit_name');
+        $audit_name = $this->dump->fetchHash('audit_name')->toString();
         if (!empty($audit_name)) {
             $text .= "<tr><th>Audit name :</th><td>$audit_name</td></tr>\n";
         }
 
-        $audit_name = $this->datastore->getHash('audit_name');
+        $audit_name = $this->dump->fetchHash('audit_name')->toString();
         if (!empty($audit_name)) {
             $text .= '<tr><th>Exakat version :</th><td>' . \Exakat\Exakat::VERSION . ' (' . \Exakat\Exakat::BUILD . ") </td></tr>\n";
         }

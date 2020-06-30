@@ -374,7 +374,7 @@ class Emissary extends Reports {
         $highchart = new Highchart();
 
         foreach(array_keys((array) $favoritesList) as $analyzer) {
-            $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
+            $analyzerList = $this->dump->fetchHashAnalyzer($analyzer)->toHash('key', 'value');
 
             $table = array();
             $values = array();
@@ -685,14 +685,14 @@ HTML;
 
     public function getHashData(): string {
         $info = array(
-            'Number of PHP files'                   => $this->datastore->getHash('files'),
-            'Number of lines of code'               => $this->datastore->getHash('loc'),
-            'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
-            'PHP used'                              => $this->datastore->getHash('php_version'),
+            'Number of PHP files'                   => $this->dump->fetchHash('files')->toString(),
+            'Number of lines of code'               => $this->dump->fetchHash('loc')->toString(),
+            'Number of lines of code with comments' => $this->dump->fetchHash('locTotal')->toString(),
+            'PHP used'                              => $this->dump->fetchHash('php_version')->toString(),
         );
 
         // fichier
-        $totalFile = $this->datastore->getHash('files');
+        $totalFile = $this->dump->fetchHash('files')->toString();
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFile - $totalFileAnalysed;
         if ((int) $totalFile === 0) {
@@ -1289,14 +1289,14 @@ JAVASCRIPTCODE;
 
     protected function generateProcFiles(Section $section): void {
         $files = array();
-        $fileList = $this->datastore->getCol('files', 'file');
+        $fileList = $this->dump->fetchTable('files')->getColumn('file');
         foreach($fileList as $file) {
             $files []= "<tr><td>$file</td></tr>";
         }
         $files = implode(PHP_EOL, $files);
 
         $nonFiles = array();
-        $ignoredFiles = $this->datastore->getRow('ignoredFiles');
+        $ignoredFiles = $this->dump->fetchTable('ignoredFiles')->toArray();
         foreach($ignoredFiles as $row) {
             if (empty($row['file'])) { continue; }
 
@@ -1331,7 +1331,7 @@ JAVASCRIPTCODE;
         $externallibraries = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
 
         $libraries = array();
-        $externallibrariesList = $this->datastore->getRow('externallibraries');
+        $externallibrariesList = $this->dump->fetchTable('externallibraries')->toArray();
 
         foreach($externallibrariesList as $row) {
             $name = strtolower($row['library']);
@@ -1667,12 +1667,12 @@ HTML;
         }
         $info = array_merge($info, $this->getVCSInfo());
 
-        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
-        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
+        $info[] = array('Number of PHP files', $this->dump->fetchHash('files')->toString());
+        $info[] = array('Number of lines of code', $this->dump->fetchHash('loc')->toString());
+        $info[] = array('Number of lines of code with comments', $this->dump->fetchHash('locTotal')->toString());
 
-        $info[] = array('Analysis execution date', date('r', (int) $this->datastore->getHash('audit_end')));
-        $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
+        $info[] = array('Analysis execution date', date('r', (int) $this->dump->fetchHash('audit_end')->toString()));
+        $info[] = array('Analysis runtime', duration($this->dump->fetchHash('audit_end')->toString() - $this->dump->fetchHash('audit_start')->toString()));
         $info[] = array('Report production date', date('r', time()));
 
         $php = exakat('php');
@@ -1717,7 +1717,7 @@ HTML;
     private function generateExternalServices(Section $section): void {
         $externalServices = array();
 
-        $res = $this->datastore->getRow('configFiles');
+        $res = $this->dump->fetchTable('configFiles')->toArray();
         foreach($res as $row) {
             if (empty($row['homepage'])) {
                 $link = '';
@@ -3223,7 +3223,7 @@ HTML;
         $pathToSource = dirname($this->tmpName) . '/code';
         mkdir($path, 0755);
 
-        $filesList = $this->datastore->getRow('files');
+        $filesList = $this->dump->fetchTable('files')->toArray();
         $files = '';
         $dirs = array('/' => 1);
         foreach($filesList as $row) {
@@ -3480,13 +3480,13 @@ HTML;
 
     protected function makeAuditDate(string &$finalHTML): void {
         $audit_date = 'Audit date : ' . date('d-m-Y h:i:s', time());
-        $audit_name = $this->datastore->getHash('audit_name');
+        $audit_name = $this->dump->fetchHash('audit_name')->toString();
         if (!empty($audit_name)) {
             $audit_date .= " - &quot;$audit_name&quot;";
         }
 
-        $exakat_version = $this->datastore->getHash('exakat_version');
-        $exakat_build = $this->datastore->getHash('exakat_build');
+        $exakat_version = $this->dump->fetchHash('exakat_version')->toString();
+        $exakat_build = $this->dump->fetchHash('exakat_build')->toString();
         $audit_date .= " - Exakat $exakat_version ($exakat_build)";
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
@@ -3499,49 +3499,49 @@ HTML;
         $vcsName = array_pop($vcsName);
         switch($vcsName) {
             case 'Git':
-                $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Git URL', $this->dump->fetchHash('vcs_url')->toString());
 
-                $res = $this->datastore->gethash('vcs_branch');
+                $res = $this->dump->fetchHash('vcs_branch')->toString();
                 if (!empty($res)) {
                     $info[] = array('Git branch', trim($res));
                 }
 
-                $res = $this->datastore->gethash('vcs_revision');
+                $res = $this->dump->fetchHash('vcs_revision')->toString();
                 if (!empty($res)) {
                     $info[] = array('Git commit', trim($res));
                 }
                 break 1;
 
             case 'Svn':
-                $info[] = array('SVN URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('SVN URL', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             case 'Bazaar':
-                $info[] = array('Bazaar URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Bazaar URL', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             case 'Composer':
-                $info[] = array('Package', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Package', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             case 'Mercurial':
-                $info[] = array('Hg URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Hg URL', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             case 'Copy':
-                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Original path', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             case 'Symlink':
-                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Original path', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             case 'Tarbz':
-                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Source URL', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             case 'Targz':
-                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                $info[] = array('Source URL', $this->dump->fetchHash('vcs_url')->toString());
                 break 1;
 
             default :
