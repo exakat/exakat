@@ -162,8 +162,11 @@ class StubsJson extends Reports {
                              );
             if ($argument['citId'] == 0) {
                 $data['versions'][$namespaces[$function2ns[$argument['methodId']]]]['functions'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;
-            } else {
+            } elseif (isset($data['versions'][$namespaces[$cits2ns[$argument['citId']]]][$cits2type[$argument['citId']]][$cits[$argument['citId']]]['methods'][$methods[$argument['methodId']]])) {
                 $data['versions'][$namespaces[$cits2ns[$argument['citId']]]][$cits2type[$argument['citId']]][$cits[$argument['citId']]]['methods'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;
+            } else {
+                display("Undefined method : $argument[citId] (Ignoring. Possible double definition)\n");
+//                assert(isset($data['versions'][$namespaces[$cits2ns[$argument['citId']]]][$cits2type[$argument['citId']]][$cits[$argument['citId']]]['methods'][$methods[$argument['methodId']]]), "Method non definie\n");
             }
         }
 

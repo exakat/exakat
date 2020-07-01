@@ -185,11 +185,12 @@ class Stubs extends Reports {
     }
 
     private function constant(string $name, object $values, $type = 'global'): string {
-        $phpdoc     = $this->normalizePhpdoc($values->phpdoc); 
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc);
+        $visibility = ($values->visibility ?? '') . ' ';
         if (isset($values->type) && $values->type == 'define') {
             return $phpdoc.self::INDENTATION.($type === 'global' ? '' : self::INDENTATION)."define('$name', $values->value);";
         } else {
-            return $phpdoc.self::INDENTATION.($type === 'global' ? '' : self::INDENTATION)."{$values->visibility}const $name = $values->value;";
+            return self::INDENTATION.($type === 'global' ? '' : self::INDENTATION)."{$visibility}const $name = $values->value;";
         }
     }
 
