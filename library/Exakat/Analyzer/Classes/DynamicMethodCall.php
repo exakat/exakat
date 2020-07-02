@@ -28,18 +28,21 @@ use Exakat\Analyzer\Analyzer;
 class DynamicMethodCall extends Analyzer {
     public function analyze() {
         // $object->$name()
-        $this->atomIs('Methodcall')
+        // $class::$name()
+        $this->atomIs(array('Methodcall', 'Staticmethodcall'))
              ->outIs('METHOD')
              ->outIs('NAME')
              ->tokenIs(array('T_VARIABLE', 'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->back('first');
         $this->prepareQuery();
 
-        // $class::$name()
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->tokenIs(array('T_VARIABLE', 'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
+        // call_user_func(array($a, $b))
+        $this->atomFunctionIs(array('\call_user_func', '\call_user_func_array'))
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('Arrayliteral', self::WITH_VARIABLES)
+             ->is('count', 2)
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs(self::CONTAINERS)
              ->back('first');
         $this->prepareQuery();
     }
