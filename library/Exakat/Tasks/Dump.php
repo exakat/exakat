@@ -694,7 +694,8 @@ GREMLIN
                    .sideEffect{ lines.add(it.get().value("line")); }
                    .fold()
           )
-          .where( __.out('RETURNTYPE').not(hasLabel('Void')).sideEffect{ returntype.add(it.get().value("fullcode"));  returntype_fnp.add(it.get().value("fullnspath"));}.fold())
+          .where( __.out('RETURNTYPE').not(hasLabel('Void')).sideEffect{ returntype.add(it.get().value("fullcode"));  
+                                                                         returntype_fnp.add(it.get().value("fullnspath"));}.fold())
           .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
           .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
           .map{ 
@@ -712,7 +713,7 @@ GREMLIN
          "final":it.get().properties("final").any(),
          "static":it.get().properties("static").any(),
          "reference":it.get().properties("reference").any(),
-         "returntype": returntype.join("|"),
+         "returntype": returntype.join("|").replaceAll('\\\\?\\\\|', '?'),
          "returntype_fnp": returntype_fnp.join("|"),
 
          "public":    it.get().value("visibility") == "public",
@@ -752,6 +753,8 @@ GREMLIN
                 continue; // skip double
             }
             $methodIds[$methodId] = ++$methodCount;
+
+            assert(isset($citId[$row['classline'] . $row['class']]));
 
             $toDump[] = array($methodCount,
                              $row['name'],
@@ -809,7 +812,7 @@ sideEffect{
          "classline": classline,
 
          "init": init,
-         "typehint":typehint.join('|'),
+         "typehint":typehint.join('|').replaceAll('\\?\\|', '?'),
          "typehint_fnp": typehint_fnp.join('|'),
          "phpdoc": phpdoc,
          ];
@@ -823,10 +826,11 @@ GREMLIN
         $total = 0;
         $toDump = array();
         foreach($result->toArray() as $row) {
+            assert(isset($methodIds[$row['classe'] . '::' . mb_strtolower($row['methode'])]));
             $toDump[] = array('',
                               $row['name'],
                               (int) $citId[$row['classline'] . $row['classe']],
-                              $methodIds[$row['classe'] . '::' . $row['methode']],
+                              $methodIds[$row['classe'] . '::' . mb_strtolower($row['methode'])],
                               (int) $row['rank'],
                               (int) $row['reference'],
                               (int) $row['variadic'],
@@ -877,7 +881,7 @@ g.V().hasLabel("Propertydefinition").as("property")
     "value": init,
     "phpdoc":phpdoc,
     "classline":classline,
-    "typehint":typehint.join('|'),
+    "typehint":typehint.join('|').replaceAll('\\?\\|', '?'),
     "typehint_fnp": typehint_fnp.join('|')
     ];
 }
@@ -927,7 +931,7 @@ GREMLIN;
         display("$total properties\n");
 
         // Class Constant
-        $query = $this->newQuery('cit methods');
+        $query = $this->newQuery('cit constants');
         $query->atomIs(array('Class', 'Classanonymous', 'Interface'), Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('line', 'ligne')
               ->savePropertyAs('line', 'classline')
@@ -1104,8 +1108,8 @@ GREMLIN
                               $namespacesId[$row['namespace'] . '\\'] ?? 1,
                               $this->files[$row['file']],
                               $row['value'],
-                              $row['type'],
                               $row['phpdoc'],
+                              $row['type'],
                             );
         }
 
@@ -1159,7 +1163,7 @@ map{ ["name":name,
       "namespace":namespace, 
       "fullnspath":fullnspath, 
       "reference":reference,
-      "returntype":returntype.join('|'),
+      "returntype":returntype.join('|').replaceAll('\\?\\|', '?'),
       "returntype_fnp":returntype_fnp.join('|'),
       "begin": lines.min(), 
       "end":lines.max(),
@@ -1251,7 +1255,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
          "function":fonction,
 
          "init": init,
-         "typehint":typehint.join('|'),
+         "typehint":typehint.join('|').replaceAll('\\?\\|', '?'),
          "typehint_fnp":typehint_fnp.join('|'),
          "phpdoc":phpdoc,
          ];
