@@ -34,15 +34,14 @@ class Path extends AnalyzerResults {
     }
 
     public function analyze() {
-        $protocols = array('http',
-                           'https',
-                           'php',
-                           'data',
-                           'ssh2',
-                           'expects',
-                           'sqlite',
-                           );
-        $protocolList = implode('|', $protocols);
+        $protocols = $this->loadJson('protocols.json');
+        $protocolList = array();
+        foreach($protocols as $protocol => $details) {
+            if ($details->path === true) {
+                $protocolList[] = $protocol;
+            }
+        }
+        $protocolList = implode('|', $protocolList);
 
         // /path/to/file.php
         $this->atomIs('String', self::WITH_CONSTANTS)
@@ -51,18 +50,7 @@ class Path extends AnalyzerResults {
              ->toResults();
         $this->prepareQuery();
 
-        $pathArgs = array(0 => array('\fopen',
-                                      '\file_get_contents',
-                                      '\file_put_contents',
-                                      '\getimagesize',
-                                    ),
-                           1 => array('\imagegif',
-                                      '\imagepng',
-                                      '\imagebmp',
-                                      '\imagejpeg',
-                                      '\imagewbmp',
-                                    ),
-                                 );
+        $pathArgs = (array) $this->loadJson('php_filenames_arg.json');
 
         // fopen('/path/to/file.php')
         foreach($pathArgs as $position => $functions) {

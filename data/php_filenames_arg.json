@@ -1,0 +1,25 @@
+{
+"0": ["\\fopen",
+"\\file_get_contents",
+"\\file_put_contents",
+"\\getimagesize",
+"\\gzopen",
+"\\bzopen",
+"\\zip_open",
+"\\raropen",
+"\\xattr_get",
+"\\xattr_list",
+"\\xattr_remove",
+"\\xattr_set",
+"\\xattr_supported",
+"\\readfile"
+],
+"1": ["\\imagegif",
+"\\imagepng",
+"\\imagebmp",
+"\\imagejpeg",
+"\\imagewbmp",
+"\\finfo_file"
+]
+
+}

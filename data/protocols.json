@@ -1,0 +1,14 @@
+{
+"file":  {"path":true },
+"http":  {"path":true },
+"ftp":   {"path":true },
+"php":   {"path":false },
+"zlib":  {"path":true },
+"data":  {"path":false },
+"glob":  {"path":false },
+"phar":  {"path":true },
+"ssh2":  {"path":false },
+"rar":   {"path":true },
+"ogg":   {"path":true },
+"expect":{"path":false }
+}
