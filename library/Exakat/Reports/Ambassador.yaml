@@ -328,6 +328,11 @@ inventories:
             title: Error Messages
             file: error_messages
             method: generateErrorMessages
+        inventories_designations:
+            title: Class Designations
+            source: empty
+            file: inventories_designations
+            method: generateClassDesignations
         inventories_exceptions:
             title: Exception Inventory
             source: empty
@@ -480,6 +485,11 @@ inventories:
             source: inventories
             file: inventories_opensslciphers
             method: generateInventoriesOpenSSLCiphers
+        inventories_protocols:
+            title: PHP protocols
+            source: inventories
+            file: inventories_protocols
+            method: generateInventoriesProtocols
 Fixes:
     title: Fixes
     icon: wrench

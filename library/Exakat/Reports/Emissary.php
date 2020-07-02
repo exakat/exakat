@@ -543,6 +543,43 @@ HTML;
         $this->putBasedPage($section->file, $finalHTML);
     }
 
+    protected function generateClassDesignations(Section $section): void {
+        $finalHTML = $this->getBasedPage($section->source);
+        
+        $html = array('<table>');
+
+        $res = $this->dump->fetchTable('cit_implements')->toArray();
+        $implements = array();
+        foreach($res as $row) {
+            array_collect_by($implements, $row['implementing'], $row);
+        }
+
+        // il faut constuire les différentes possibilitées avant de construire le tableau,
+        // afin de suivre les extends, et tous les rassembler. 
+
+        $res = $this->dump->fetchTable('cit');
+        foreach($res->toArray() as $row) {
+            $td = array();
+            $td[] = "<td>".$row['namespaceId']."</td>";
+            $td[] = "<td>".$row['type'].' '.$row['name']."</td>";
+            
+            $list = array($row['name']);
+            if (isset($implements[$row['id']])) {
+                $list = array_merge($list, array_column($implements[$row['id']], 'implements'));
+            }
+            $td[] = "<td><ul><li>".implode('</li><li>', $list)."</li></ul></td>";
+            
+            $html[] = "<tr>".join('', $td)."</tr>";
+        }
+        
+        $html[] = '</table>';
+
+        $finalHTML = $this->injectBloc($finalHTML, 'DESCRIPTION', '');
+        $finalHTML = $this->injectBloc($finalHTML, 'CONTENT', implode(PHP_EOL, $html));
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $this->putBasedPage($section->file, $finalHTML);
+    }
+
     protected function generateLocalVariableCounts(Section $section): void {
         $this->generateCounts($section, 'Local Variable Counts', ' var.', 'Local variables');
     }
@@ -3658,6 +3695,26 @@ HTML;
         $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
         $this->putBasedPage($section->file, $html);
     }
+
+    protected function generateInventoriesProtocols(Section $section): void {
+        // List of indentation used
+        $res = $this->dump->fetchHashResults('Protocols');
+
+        $values = $res->toHash('key', 'value');
+        asort($values);
+
+        $theTable = array();
+        foreach($values as $encoding => $count) {
+            $codeHtml = PHPSyntax($encoding);
+            $theTable []= "<tr><td>{$codeHtml}</td><td>$count</td><td>&nbsp</td></tr>";
+        }
+
+        $html = $this->getBasedPage($section->source);
+        $html = $this->injectBloc($html, 'TITLE', $section->title);
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'List of all PHP protocols used in the code.');
+        $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
+        $this->putBasedPage($section->file, $html);
+    }    
 
     protected function generateFixesRector(Section $section): void {
         $rector = new Rector();
