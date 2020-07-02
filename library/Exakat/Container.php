@@ -87,7 +87,7 @@ class Container {
                                        $this->config->ext,
                                        $this->config->dev,
                                        $this->config->rulesets,
-                                       $this->config->ignore_rules,
+                                       $this->config->ignore_rules
                                        );
     }
 
