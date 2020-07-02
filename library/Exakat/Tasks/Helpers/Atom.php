@@ -191,6 +191,7 @@ class Atom {
 
             if ($l === 'lccode') {
                 $this->lccode = mb_strtolower((string) $this->code);
+                $value = $this->lccode;
             }
 
             if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode' )) &&
@@ -207,6 +208,7 @@ class Atom {
             } elseif (in_array($l, $integerValues)) {
                 $value = (integer) $value;
             }
+
             $properties[$l] = array( new Property($id++, $value) );
         }
 
@@ -222,7 +224,7 @@ class Atom {
 
     public function boolProperties() : array {
         $return = array();
-        foreach([
+        foreach(array(
                  'noscream', 
                  'reference', 
                  'variadic', 
@@ -243,7 +245,7 @@ class Atom {
                  'isModified',
                  'static',
                  'isNull',
-                               ] as $property) {
+                               ) as $property) {
             if ($this->$property == true) {
                 $return[] = $property;
             }
