@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 /*
- * Copyright 2012-2019 Damien Seguy ‚Äì Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -546,28 +546,128 @@ HTML;
     protected function generateClassDesignations(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
         
-        $html = array('<table>');
+        $html = array('<table class="table table-striped">',
+                      '<tr><td>Namespace</td><td>Class / interface</td><td>Count</td><td>Fitting typehints</td><td>Count</td><td>As typehint</td></tr>',
+                       );
 
-        $res = $this->dump->fetchTable('cit_implements')->toArray();
-        $implements = array();
-        foreach($res as $row) {
-            array_collect_by($implements, $row['implementing'], $row);
-        }
+        $namespaces = $this->dump->fetchTable('namespaces')->toHash('id', 'namespace');
 
-        // il faut constuire les diff√©rentes possibilit√©es avant de construire le tableau,
+        // il faut constuire les différentes possibilitées avant de construire le tableau,
         // afin de suivre les extends, et tous les rassembler. 
 
         $res = $this->dump->fetchTable('cit');
+        $parents = array();
+        $children = array();
+        $names = array();
+        foreach($res->toArray() as $row) {
+            if (empty($row['extends'])) {
+                $parents[$row['id']] = array();
+            } else {
+                array_collect_by($parents, $row['id'],(intval($row['extends']) > 0 ? $row['extends'] : 'class '.$row['extends']));
+                array_collect_by($children, (intval($row['extends']) > 0 ? $row['extends'] : 'class '.$row['extends']), $row['id']);
+            }
+            $names[$row['id']] = $row['type']. ' '.$namespaces[$row['namespaceId']].$row['name'];
+        }
+
+        $res_implements = $this->dump->fetchTable('cit_implements')->toArray();
+        $implements = array();
+        foreach($res_implements as $row) {
+            array_collect_by($implements, $row['implementing'], $row);
+            array_collect_by($parents, $row['implementing'], (intval($row['implements']) > 0 ? $row['implements'] : 'interface '.$row['implements']));
+            array_collect_by($children, (intval($row['implements']) > 0 ? $row['implements'] : 'interface '.$row['implements']), $row['implementing']);
+        }
+
+        /// Collect classes and interfaces that accept a class as typehint : class C extends B {} => C => [C, B]
+        do {
+            $toPropagate = 0;
+            $parents2 = array();
+            foreach($parents as $key => $aieux) {
+                $cleaned = array();
+                foreach($aieux as $id => $aieul) {
+                    if (isset($parents[$aieul])) {
+                        $cleaned[] = $parents[$aieul];
+                        $cleaned[] = array($aieul);
+                        ++$toPropagate;
+                    } else {
+                        $cleaned[] = array($aieul);
+                    }
+                }
+                
+                $parents2[$key] = array_values(array_unique(array_merge(...$cleaned)));
+            } 
+            
+            $toPropagate = count($parents2, 1) - count($parents, 1);
+            $parents = $parents2;
+        } while($toPropagate > 0);
+
+        /// Collect classes that can fit a class used as typehint : class C extends B {} => B => [C, B]
+        // children classes may fit when the parent is used as typehint. Interface don't count as result
+        do {
+            $toPropagate = 0;
+            $children2 = array();
+            foreach($children as $key => $child) {
+                $cleaned = array();
+                foreach($child as $id => $kid) {
+                    if (isset($children[$kid])) {
+                        $cleaned[] = $children[$kid];
+                        $cleaned[] = array($kid);
+                        ++$toPropagate;
+                    } else {
+                        $cleaned[] = array($kid);
+                    }
+                }
+                $children2[$key] = array_values(array_unique(array_merge(...$cleaned)));
+            } 
+            
+            $toPropagate = count($children2, 1) - count($children, 1);
+            $children = $children2;
+        } while($toPropagate > 0);
+
         foreach($res->toArray() as $row) {
             $td = array();
-            $td[] = "<td>".$row['namespaceId']."</td>";
-            $td[] = "<td>".$row['type'].' '.$row['name']."</td>";
+            $td[] = "<td style=\"vertical-align: top\">".$namespaces[$row['namespaceId']]."</td>";
+            $td[] = "<td style=\"vertical-align: top\">".$row['type'].' '.$row['name']."</td>";
             
-            $list = array($row['name']);
-            if (isset($implements[$row['id']])) {
-                $list = array_merge($list, array_column($implements[$row['id']], 'implements'));
+            // fitting typehint
+            $list = array();
+            if ($row['type'] == 'class') {
+                $list[] = $names[$row['id']] ?? $row['id'];
             }
-            $td[] = "<td><ul><li>".implode('</li><li>', $list)."</li></ul></td>";
+            if (isset($parents[$row['id']])) {
+                foreach($parents[$row['id']] as $higher) {
+                    $list[] = $names[$higher] ?? $higher;
+                }
+            }
+            sort($list);
+            if (empty($list)) {
+                $td[] = "<td>0</td>";
+                $td[] = "<td>&nbsp;</td>";
+            } else {
+                $td[] = "<td style=\"vertical-align: top\">".count($list)."</td>";
+                $td[] = "<td><ul><li>".implode('</li><li>', $list)."</li></ul></td>";
+            }
+
+            // when used as typehint
+            $list = array();
+            if ($row['type'] == 'class') {
+                $list[] = $names[$row['id']] ?? $row['id'];
+            }
+            if (isset($children[$row['id']])) {
+                foreach($children[$row['id']] as $higher) {
+                    $n = $names[$higher] ?? $higher;
+                    if ($n[0] === 'c') {
+                        $list[] = $n;
+                    }
+                }
+            }
+            sort($list);
+            if (empty($list)) {
+                $td[] = "<td>0</td>";
+                $td[] = "<td>&nbsp;</td>";
+            } else {
+                $td[] = "<td style=\"vertical-align: top\">".count($list)."</td>";
+                $td[] = "<td><ul><li>".implode('</li><li>', $list)."</li></ul></td>";
+            }
             
             $html[] = "<tr>".join('', $td)."</tr>";
         }
@@ -814,7 +914,7 @@ HTML;
             $data[] = array('label' => $key, 'value' => array_sum($counts));
         }
 
-        // ordonn√© DESC par valeur
+        // ordonné DESC par valeur
         uasort($data, function (array $a, array $b): int {
             return $b['value'] <=> $a['value'];
         });
