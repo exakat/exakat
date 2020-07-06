@@ -123,7 +123,47 @@ class TypehintingStats extends AnalyzerArrayHashResults {
 
         $objecttypes = ($objecttypes1[0] ?? array()) + ($objecttypes1[0] ?? array());
 
-        $return = compact('totalArguments', 'totalFunctions', 'withTypehint','withReturnTypehint', 'scalartype', 'returnNullable', 'argNullable');
+        //typehinted class
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->inIs('DEFINITION')
+             ->atomIs('Class')
+             ->isNot('abstract', true)
+             ->count();
+        $classtypes1 = $this->rawQuery()->toInt();
+
+        //typehinted class
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->inIs('DEFINITION')
+             ->atomIs('Class')
+             ->isNot('abstract', true)
+             ->count();
+        $classtypes2 = $this->rawQuery()->toInt();
+        $classTypehint = $classtypes1 + $classtypes2;
+
+        //typehinted interface
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->inIs('DEFINITION')
+             ->interfaceLike()
+             ->count();
+        $interfacetypes1 = $this->rawQuery()->toInt();
+
+        //typehinted class
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->inIs('DEFINITION')
+             ->interfaceLike()
+             ->count();
+        $interfacetypes2 = $this->rawQuery()->toInt();
+        $interfaceTypehint = $interfacetypes1 + $interfacetypes2;
+
+        $return = compact('totalArguments', 'totalFunctions', 'withTypehint','withReturnTypehint', 'scalartype', 'returnNullable', 'argNullable', 'classTypehint', 'interfaceTypehint');
         $return = $return + $scalartypes + $objecttypes;
 
         $atoms = array('all'            => self::FUNCTIONS_ALL,
