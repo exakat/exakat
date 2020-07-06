@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestSuite;
 use Exakat\Autoload\AutoloadExt;
 use Exakat\Autoload\AutoloadDev;
+use Exakat\Graph\Graph;
 
 if (file_exists(__DIR__.'/../config.php')) {
     include __DIR__.'/../config.php';
@@ -45,7 +46,7 @@ spl_autoload_register(array($autoload, 'autoload_test'));
 spl_autoload_register(array($autoload, 'autoload_phpunit'));
 
 abstract class Analyzer extends TestCase {
-    public function generic_test($file) {
+    public function generic_test(string $file) {
         global $EXAKAT_PATH;
 
         $test_path = dirname(__DIR__);
@@ -123,11 +124,13 @@ abstract class Analyzer extends TestCase {
         }
 
         $shell_res = shell_exec($shell);
-        
+
         if (isset($fetch_query)) {
-            $gremlin = exakat('graphdb');
-            
+            $gremlin = Graph::getConnexion();
+            $gremlin->init();
+
             $res = $gremlin->query($fetch_query)->toArray();
+//            $res = array();
         } else {
             $res = json_decode($shell_res, true);
             if ($res === null) {
@@ -138,7 +141,7 @@ abstract class Analyzer extends TestCase {
         $this->file = $file;
         $this->number = $number;
         $this->analyzer = $analyzer;
-        
+
         if ($analyzerobject instanceof AnalyzerHashAnalyzer) {
             $this->checkTestOnHashAnalyzer($res, $expected, $expected_not, $analyzerobject);
         } elseif (isset($res[0]) && !is_array($res[0])) {
