@@ -35,20 +35,17 @@ class UnitializedProperties extends Analyzer {
     public function analyze() {
         // Normal Properties (with or without constructor)
         $this->atomIs('Propertydefinition')
-             // No default value
-             ->not(
-                $this->side()
-                     ->outIs('DEFAULT')
-                     ->hasNoIn('RIGHT')
-             )
-
              ->not(
                 $this->side()
                      ->outIs('DEFAULT')
                      ->goToFunction()
                      ->atomIs('Magicmethod')
                      ->analyzerIs('Classes/Constructor')
-             );
+             )
+             // No explicit default value
+             ->outIs('DEFAULT')
+             ->atomIs('Void')
+             ->back('first');
         $this->prepareQuery();
     }
 }
