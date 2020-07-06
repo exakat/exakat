@@ -57,6 +57,20 @@ class ExtendedTypehints extends Complete {
              ->addETo('DEFINITION', 'result');
         $this->prepareQuery();
 
+        // properties
+        $this->atomIs('Ppp')
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
+             ->as('result')
+             ->inIs('DEFINITION')
+             ->atomIs(array('Interface', 'Class'))
+             ->goToAllChildren(Analyzer::EXCLUDE_SELF)
+             ->raw('not(where(__.out("DEFINITION").where(eq("result"))))')
+             ->addETo('DEFINITION', 'result');
+        $this->prepareQuery();
+
+        // variables? 
+
         // special case for static (PHP 8.0)
     }
 }

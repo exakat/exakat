@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class ExtendedTypehints extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testComplete_ExtendedTypehints01()  { $this->generic_test('Complete/ExtendedTypehints.01'); }
     public function testComplete_ExtendedTypehints02()  { $this->generic_test('Complete/ExtendedTypehints.02'); }
@@ -17,5 +17,6 @@ class ExtendedTypehints extends Analyzer {
     public function testComplete_ExtendedTypehints06()  { $this->generic_test('Complete/ExtendedTypehints.06'); }
     public function testComplete_ExtendedTypehints07()  { $this->generic_test('Complete/ExtendedTypehints.07'); }
     public function testComplete_ExtendedTypehints08()  { $this->generic_test('Complete/ExtendedTypehints.08'); }
+    public function testComplete_ExtendedTypehints09()  { $this->generic_test('Complete/ExtendedTypehints.09'); }
 }
 ?>
