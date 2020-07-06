@@ -544,7 +544,7 @@ class Load extends Tasks {
         $files = $this->datastore->getCol('files', 'file');
 
         if (empty($files)) {
-            throw new NoFileToProcess($project, "No file to load.\n");
+            throw new NoFileToProcess((string) $project, "No file to load.\n");
         }
 
         $stubs = $this->config->stubs;
@@ -2724,12 +2724,12 @@ class Load extends Tasks {
         } else {
             // back one step
             --$this->id;
-            while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
-                                                                    $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
-                                                                    ),
-                    \STRICT_COMPARISON)) {
+            do {
                 $name = $this->processNext();
-            }
+            }  while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+                                                                       $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
+                                                                      ),
+                      \STRICT_COMPARISON));
             $this->popExpression();
         }
         $this->addLink($namecall, $name, 'NAME');
@@ -3115,8 +3115,6 @@ class Load extends Tasks {
         $static = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
-        $void = $this->addAtomVoid();
-        $this->addLink($next, $void, 'TYPEHINT');
 
         $next->static   = 1;
         $next->fullcode = "$static $next->fullcode";

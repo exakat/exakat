@@ -1,0 +1,115 @@
+test
+Label : GLOBAL
+  5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+Label : PROJECT
+  1
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : NEW
+              9
+              Label : IMPLEMENTS
+                10
+              Label : PPP
+                12
+                Label : PPP
+                  13
+                  Label : DEFAULT
+                    15
+                Label : TYPEHINT
+                  15
+              Label : PPP
+                12
+                Label : PPP
+                  17
+                  Label : DEFAULT
+                    19
+                Label : TYPEHINT
+                  15
+              Label : PPP
+                20
+                Label : PPP
+                  21
+                  Label : DEFAULT
+                    15
+                Label : TYPEHINT
+                  15
+              Label : PPP
+                20
+                Label : PPP
+                  23
+                  Label : DEFAULT
+                    19
+                Label : TYPEHINT
+                  15
+              Label : PPP
+                20
+                Label : PPP
+                  25
+                  Label : DEFAULT
+                    19
+                Label : TYPEHINT
+                  15
+              Label : PPP
+                12
+                Label : PPP
+                  27
+                  Label : DEFAULT
+                    15
+                Label : TYPEHINT
+                  15
+              Label : PPP
+                12
+                Label : TYPEHINT
+                  29
+                Label : PPP
+                  30
+                  Label : DEFAULT
+                    15
+              Label : PPP
+                12
+                Label : TYPEHINT
+                  32
+                Label : PPP
+                  34
+                  Label : DEFAULT
+                    15
+              Label : METHOD
+                14
+                Label : ARGUMENT
+                  15
+                Label : BLOCK
+                  36
+                  Label : EXPRESSION
+                    37
+                    Label : STATIC
+                      38
+                      Label : DEFAULT
+                        19
+                    Label : TYPEHINT
+                      15
+                Label : DEFINITION
+                  38
+                  Label : DEFAULT
+                    19
+                Label : NAME
+                  14
+                Label : RETURNTYPE
+                  15
