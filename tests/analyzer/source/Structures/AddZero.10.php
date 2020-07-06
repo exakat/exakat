@@ -13,7 +13,7 @@ $a = $a + i::C;
 $a = $a - i::C;
 
 interface i {
-    const C = 0.0;
+    const C = 0;
 }
 
 ?>

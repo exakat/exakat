@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class AddZero extends Analyzer {
     public function dependsOn(): array {
@@ -36,18 +37,19 @@ class AddZero extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
+             ->followParAs(FollowParAs::FOLLOW_PARAS_ONLY)
+             ->atomIsNot(array('Ternary', 'Coalesce'))
+             ->atomIs(array('Integer', 'Null', 'Boolean'), self::WITH_CONSTANTS)
              ->is('intval', 0)
-             ->is('boolean', false)
-             ->atomIsNot('Arrayliteral')
              ->back('first');
         $this->prepareQuery();
 
         // 0 + ($c = 2)
         $this->atomIs('Addition')
              ->outIs(array('LEFT', 'RIGHT'))
+             ->followParAs(FollowParAs::FOLLOW_PARAS_ONLY)
+             ->atomIs(array('Integer', 'Null', 'Boolean'), self::WITH_CONSTANTS)
              ->is('intval', 0)
-             ->is('boolean', false)
-             ->atomIsNot('Arrayliteral')
              ->back('first');
         $this->prepareQuery();
 
@@ -55,9 +57,9 @@ class AddZero extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
+             ->followParAs(FollowParAs::FOLLOW_PARAS_ONLY)
+             ->atomIs(array('Integer', 'Null', 'Boolean'), self::WITH_CONSTANTS)
              ->is('intval', 0)
-             ->is('boolean', false)
-             ->atomIsNot(array('Arrayliteral'))
              ->back('first')
              ->outIs('LEFT')
              ->atomIs('Variable')

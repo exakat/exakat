@@ -203,6 +203,8 @@ new File('$this->pathProperties').eachLine {
     g.V(vertices).property(property, true).iterate();
 }
 
+g.V().has('intval', 0).property('boolean', false).iterate();
+
 GREMLIN;
             $this->graphdb->query($query);
             $end = hrtime(true);

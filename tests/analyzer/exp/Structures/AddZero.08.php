@@ -2,7 +2,6 @@
 
 $expected     = array('$a += null',
                       '$a += false',
-                      '$a += 0.0',
                      );
 
 $expected_not = array('$a = 1',
@@ -11,6 +10,7 @@ $expected_not = array('$a = 1',
                       '$a += 0.0',
                       '$a += 1.1',
                       '$a += [1, 2, 3]',
+                      '$a += 0.0',
                      );
 
 ?>

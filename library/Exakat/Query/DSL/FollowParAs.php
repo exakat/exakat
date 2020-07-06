@@ -26,27 +26,48 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class FollowParAs extends DSL {
-    const FOLLOW_ALL  = 0;
-    const FOLLOW_NONE = 1;
+    const FOLLOW_ALL        = 0;
+    const FOLLOW_NONE       = 1;
+    const FOLLOW_PARAS_ONLY = 2;
 
     public function run(): Command {
 
         assert(func_num_args() === 1, 'Wrong number of arguments for ' . self::class);
         list($out) = func_get_args();
 
-        if ($out === self::FOLLOW_ALL) {
-            $out = 'out(' . self::$linksDown . ').';
-        } elseif ($out === self::FOLLOW_NONE) { // To be used in-place
-            $out = 'identity().';
-        } else {
-            $this->assertLink($out);
-            $out = $this->normalizeLinks($out);
+        switch($out) {
+            case self::FOLLOW_ALL: 
+                $out    = 'out(' . self::$linksDown . ').';
+                $labels = '';
+                $follow = '';
+                break 1;
 
-            if (empty($out)) {
-                return new Command(Query::STOP_QUERY);
-            }
+            case self::FOLLOW_NONE: 
+                $out    = 'identity().';
+                $labels = '';
+                $follow = '';
+                break 1;
 
-            $out = 'out(' . makeList($out) . ').';
+            case self::FOLLOW_PARAS_ONLY: 
+                $out    = 'identity().';
+                $labels = '';
+                $follow = '';
+                break 1;
+                
+            default: 
+                $this->assertLink($out);
+                $out = $this->normalizeLinks($out);
+
+                if (empty($out)) {
+                    return new Command(Query::STOP_QUERY);
+                }
+
+                $out = 'out(' . makeList($out) . ').';
+                $labels = ', "Ternary", "Coalesce"';
+                $follow = ', 
+                __.hasLabel("Ternary").where(__.out("THEN").not(hasLabel("Void"))).out("THEN", "ELSE"), 
+                __.hasLabel("Ternary").where(__.out("THEN").    hasLabel("Void" )).out("CONDITION", "ELSE"), 
+                __.hasLabel("Coalesce").out("RIGHT", "LEFT")';
         }
 
          $TIME_LIMIT = self::$TIME_LIMIT;
@@ -54,13 +75,10 @@ class FollowParAs extends DSL {
  {$out}emit().repeat( 
     __.timeLimit(10000)
       .coalesce(__.hasLabel("Parenthesis").out("CODE"), 
-                __.hasLabel("Assignation").out("RIGHT"), 
-                __.hasLabel("Ternary").where(__.out("THEN").not(hasLabel("Void"))).out("THEN", "ELSE"), 
-                __.hasLabel("Ternary").where(__.out("THEN").    hasLabel("Void" )).out("CONDITION", "ELSE"), 
-                __.hasLabel("Coalesce").out("RIGHT", "LEFT")
+                __.hasLabel("Assignation").out("RIGHT")$follow
       )
-).until(__.not(hasLabel("Parenthesis", "Assignation", "Ternary", "Coalesce")))
-.not(hasLabel("Parenthesis", "Assignation", "Ternary", "Coalesce"))
+).until(__.not(hasLabel("Parenthesis", "Assignation", $labels)))
+.not(hasLabel("Parenthesis", "Assignation" $labels))
 GREMLIN
 );
     }
