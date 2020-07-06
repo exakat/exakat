@@ -33,6 +33,7 @@ abstract class GraphElements {
                                  'Assignation',
                                  'Attribute',
                                  'Bitshift',
+                                 'Bitoperation',
                                  'Block',
                                  'Boolean',
                                  'Break',

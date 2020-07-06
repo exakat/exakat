@@ -350,8 +350,8 @@ class Load extends Tasks {
             $this->phptokens::T_LOGICAL_AND              => 'processLogical',
             $this->phptokens::T_LOGICAL_XOR              => 'processLogical',
             $this->phptokens::T_LOGICAL_OR               => 'processLogical',
-            $this->phptokens::T_XOR                      => 'processLogical',
-            $this->phptokens::T_OR                       => 'processLogical',
+            $this->phptokens::T_XOR                      => 'processBitoperation',
+            $this->phptokens::T_OR                       => 'processBitoperation',
             $this->phptokens::T_AND                      => 'processAnd',
 
             $this->phptokens::T_BOOLEAN_AND              => 'processLogical',
@@ -5690,7 +5690,7 @@ class Load extends Tasks {
 
     private function processAnd(): Atom {
         if ($this->hasExpression()) {
-            return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
+            return $this->processOperator('Bitoperation', $this->precedence->get($this->tokens[$this->id][0]));
         }
 
         // Simply skipping the &
@@ -5707,6 +5707,10 @@ class Load extends Tasks {
 
     private function processLogical(): Atom {
         return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
+    }
+
+    private function processBitoperation(): Atom {
+        return $this->processOperator('Bitoperation', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processMultiplication(): Atom {
