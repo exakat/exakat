@@ -60,9 +60,6 @@ class LoadFinal {
 
         $this->init();
 
-        $this->addReturnedVoid();
-        $this->log('addReturnedVoid');
-
         $this->removeInterfaceToClassExtends();
         $this->log('removeInterfaceToClassExtends');
 
@@ -138,35 +135,6 @@ GREMLIN;
 
         fwrite($log, $step . "\t" . ($end - $begin) . "\t" . ($end - $start) . "\n");
         $begin = $end;
-    }
-
-    private function addReturnedVoid() {
-        display('add Returned void');
-
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Function", "Method", "Magicmethod", "Closure", "Arrowfunction")
-     .as('first')
-     .not(
-        __.where(
-            __.out("RETURNED")
-        )
-     )
-     .addV('Void')
-        .property('code', 'Void')
-        .property('fullcode', '')
-        .property('token', 'T_VOID')
-        .property('noDelimiter', '')
-        .property('delimiter', '')
-        .property('fullnspath', '0')
-        .property('line', -1)
-    .addE('RETURNED')
-    .from('first')
-    .count()
-GREMLIN;
-        $result = $this->gremlin->query($query);
-
-        display($result->toInt() . ' added returned to Void');
-        $this->log->log(__METHOD__);
     }
 
     private function removeInterfaceToClassExtends() {
