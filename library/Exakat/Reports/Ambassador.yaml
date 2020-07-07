@@ -273,6 +273,12 @@ audit:
             file: class_options_suggestions
             method: generateClassOptionSuggestions
             icon: circle-o            
+        typehints_class:
+            title: Typehint usage
+            source: phpfunctions_list
+            file: typehints_class
+            method: generateClassTypehints
+            icon: circle-o            
         complex_expressions:
             title: Complex Expressions
             source: complex_expressions

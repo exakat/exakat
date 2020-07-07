@@ -759,6 +759,60 @@ HTML;
         $this->generateGraphList($section->file, $section->title, 'PHP Native Functions', $data, $html);
     }
 
+    protected function generateClassTypehints(Section $section): void {
+        // List of php functions used
+        $res = $this->dump->fetchHashResults('Typehinting stats');
+        $res->order(function (array $a, array $b): int { return $b['value'] <=> $a['value']; });
+
+        $html = array();
+        $data = array();
+        $omit = array(  'totalArguments',
+                        'allTotal',
+                        'totalFunctions',
+                        'methodTotal',
+                        'withTypehint',
+                        'allWithTypehint',
+                        'methodWithTypehint',
+                        'functionTotal',
+                        'scalartype',
+                        'functionWithTypehint2',
+                        '\array',
+                        '\void',
+                        '\iterable',
+                        '\string',
+                        '\int',
+                        '\bool',
+                        '\callable',
+                        'closureTotal',
+                        'argNullable',
+                        'allWithReturnTypehint',
+                        'interfaceTypehint',
+                        'classTypehint',
+                        'functionWithReturnTypehint',
+                        'returnNullable',
+                        'methodWithReturnTypehint',
+                        'withReturnTypehint',
+                        'closureWithTypehint',
+                        'closureWithReturnTypehint',
+                        'arrowfunctionTotal',
+                        'arrowfunctionWithTypehint',
+                        'arrowfunctionWithReturnTypehint',
+        );
+        
+        foreach ($res->toArray() as $value) {
+            if (in_array($value['key'], $omit)) { continue; }
+            $data[$value['key']] = $value['value'];
+
+            $html []= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                  </div>';
+        }
+        $html = implode(PHP_EOL, $html);
+
+        $this->generateGraphList($section->file, $section->title, 'Class typehint usage', $data, $html);
+    }
+
     protected function generatePHPConstantsBreakdown(Section $section): void {
         // List of php constant used
         $res = $this->dump->fetchTable('phpStructures');
