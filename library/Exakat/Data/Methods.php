@@ -267,7 +267,7 @@ SQL;
 SELECT return, lower(GROUP_CONCAT('\' || name)) AS functions 
     FROM args_type 
     WHERE class='PHP'         AND 
-          return LIKE '%int%' AND
+          return LIKE '%$type%' AND
           return IS NOT NULL $where
     GROUP BY return
 SQL;
