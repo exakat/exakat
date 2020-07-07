@@ -53,7 +53,7 @@ class Zip extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = shell_exec("{$this->executable} -v  2>&1");
+        $res = shell_exec("{$this->executable} -v  2>&1") ?? '';
         if (stripos($res, 'not found') !== false) {
             $stats['installed'] = 'No';
         } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
