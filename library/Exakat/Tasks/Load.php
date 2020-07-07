@@ -4308,7 +4308,7 @@ class Load extends Tasks {
         $namespace = $this->addAtom('Namespace', $current);
         $this->makePhpdoc($namespace);
         $this->addLink($namespace, $name, 'NAME');
-        $this->setNamespace($name);
+        $this->setNamespace($name->fullcode);
 
         // Here, we make sure namespace is encompassing the next elements.
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
@@ -6361,14 +6361,12 @@ class Load extends Tasks {
         }
     }
 
-    private function setNamespace($namespace = self::NO_NAMESPACE): void {
+    private function setNamespace(string $namespace = self::NO_NAMESPACE): void {
         if ($namespace === self::NO_NAMESPACE) {
             $this->namespace = '\\';
             $this->uses = new Fullnspaths();
-        } elseif ($namespace->atom === 'Void') {
-            $this->namespace = '\\';
         } else {
-            $this->namespace = mb_strtolower($namespace->fullcode) . '\\';
+            $this->namespace = mb_strtolower($namespace) . '\\';
             if ($this->namespace[0] !== '\\') {
                 $this->namespace = '\\' . $this->namespace;
             }
