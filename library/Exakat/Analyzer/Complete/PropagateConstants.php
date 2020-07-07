@@ -391,7 +391,7 @@ GREMLIN
     private function processLogical() {
             display('propagating Constant value in Logical');
             // fix path for constants with Const
-            $this->atomIs('Logical')
+            $this->atomIs(array('Logical', 'Bitoperation'))
                  ->hasNo('propagated')
                  ->initVariable('x', '[ ]')
                  ->not(
