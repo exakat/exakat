@@ -188,6 +188,7 @@ CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            static INTEGER,
                            phpdoc STRING,
                            value STRING,
+                           line INTEGER,
                            typehint STRING,
                            typehint_fnp STRING
                            )
@@ -413,6 +414,27 @@ SQL
         return new Results($res);
     }
 
+    public function fetchTableProperties(): Results {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT properties.*, 
+       properties.property AS signature,
+       cit.type AS type,
+       lower(namespaces.namespace) || lower(cit.name) || '::' || lower(properties.property) AS fullnspath,
+       cit.name AS class,
+       cit.file AS file
+
+    FROM properties
+    JOIN cit
+        ON properties.citId = cit.id
+    JOIN namespaces 
+        ON cit.namespaceId = namespaces.id
+    GROUP BY properties.id
+SQL
+        );
+
+        return new Results($res);
+    }
+
     public function fetchTableMethods(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT methods.*, 
@@ -422,7 +444,7 @@ SELECT methods.*,
                      (CASE arguments.init WHEN ' ' THEN '' ELSE ' = ' || arguments.init END),
                     ', ' ) AS signature,
        cit.type AS type,
-       namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+       lower(namespaces.namespace) || lower(cit.name) || '::' || lower(methods.method) AS fullnspath,
        cit.name AS class,
        cit.file AS file,
        methods.begin AS line
@@ -813,7 +835,7 @@ SQL;
     }
 
     public function getMethodsBySize(): Results {
-        $query = <<<'SQL'
+        $query = <<<SQL
 SELECT namespaces.namespace || CASE namespaces.namespace WHEN '\' THEN '' ELSE '\' END || name || '::' || method AS name, 
        method AS shortName, 
        files.file, 

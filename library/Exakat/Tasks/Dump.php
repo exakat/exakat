@@ -858,6 +858,7 @@ g.V().hasLabel("Propertydefinition").as("property")
     x_var = it.get().value("token") == "T_VAR";
     phpdoc = '';
     init = '';
+    line = it.get().value("line");
     typehint = [];
     typehint_fnp = [];
 }
@@ -878,6 +879,7 @@ g.V().hasLabel("Propertydefinition").as("property")
     "protected":x_protected,
     "private":x_private,
     "var":x_var,
+    "line":line,
     "name": name,
     "value": init,
     "phpdoc":phpdoc,
@@ -924,6 +926,7 @@ GREMLIN;
                               (int) $row['static'],
                               $row['phpdoc'],
                               $row['value'],
+                              $row['line'],
                               $row['typehint'],
                               $row['typehint_fnp'],
             );
