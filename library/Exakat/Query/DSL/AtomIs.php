@@ -95,7 +95,7 @@ union( __.identity(),
             
                       __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED')
                       )
-            ).times($MAX_LOOPING).emit()
+            ).times(2).emit()
 )
 .hasLabel(within(***))
 GREMLIN;

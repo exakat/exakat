@@ -34,6 +34,10 @@ class FullnspathIs extends DSL {
             $caseSensitive = Analyzer::CASE_INSENSITIVE;
         }
 
+        if (empty($code)) {
+            return new Command(Query::NO_QUERY);
+        }
+
         $has = $this->dslfactory->factory('has');
         $return = $has->run('fullnspath');
 
