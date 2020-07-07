@@ -29,7 +29,7 @@ class ThrowWasAnExpression extends Analyzer {
 
     public function analyze() {
         // $a ?? throw new Exception()
-        $this->atomIs(array('Coalesce', 'Assignation', 'Ternary', 'Logical', 'Throw'))
+        $this->atomIs(array('Coalesce', 'Assignation', 'Ternary', 'Logical', 'Bitoperation', 'Throw'))
              ->outIs(array('LEFT', 'RIGHT', 'CONDITION', 'THEN', 'ELSE', 'THROW'))
              ->atomIs('Throw')
              ->back('first');

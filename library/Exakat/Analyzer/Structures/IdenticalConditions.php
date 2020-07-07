@@ -28,18 +28,18 @@ class IdenticalConditions extends Analyzer {
 
         // $a || $a
         // ($a) && ($a)
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              ->hasNoIn(array('LEFT', 'RIGHT'))
              ->outIs('RIGHT')
              ->outIsIE('CODE')
-             ->atomIsNot('Logical')
+             ->atomIsNot(array('Logical', 'Bitoperation'))
              ->savePropertyAs('fullcode', 'left')
              ->inIsIE('CODE')
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->outIsIE('CODE')
-             ->atomIsNot('Logical')
+             ->atomIsNot(array('Logical', 'Bitoperation'))
              ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
@@ -47,7 +47,7 @@ class IdenticalConditions extends Analyzer {
         // $a || $a || $a
         // ($a) && ($a)
         // two levels
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
@@ -56,14 +56,14 @@ class IdenticalConditions extends Analyzer {
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
              ->samePropertyAs('fullcode', 'right', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
@@ -72,7 +72,7 @@ class IdenticalConditions extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
              ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
@@ -80,12 +80,12 @@ class IdenticalConditions extends Analyzer {
         $this->prepareQuery();
 
         // case for $a || $b || $b
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              // Ignore LEFT
              ->outIs('RIGHT')
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
 
              ->outIs('RIGHT')
              ->outIsIE('CODE')
@@ -103,7 +103,7 @@ class IdenticalConditions extends Analyzer {
         // ($a) && ($a)
         // three levels
         // straight structure
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
@@ -112,17 +112,17 @@ class IdenticalConditions extends Analyzer {
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // reverse structure
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
@@ -131,10 +131,10 @@ class IdenticalConditions extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
@@ -143,7 +143,7 @@ class IdenticalConditions extends Analyzer {
         // $a || $a || $a
         // ($a) && ($a)
         // four levels
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
@@ -152,13 +152,13 @@ class IdenticalConditions extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
@@ -167,7 +167,7 @@ class IdenticalConditions extends Analyzer {
         // $a || $a || $a
         // ($a) && ($a)
         // four levels
-        $this->atomIs('Logical')
+        $this->atomIs(array('Logical', 'Bitoperation'))
              ->analyzerIsNot('self')
              ->outIs('LEFT')
              ->outIsIE('CODE')
@@ -176,16 +176,16 @@ class IdenticalConditions extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->atomIs('Logical')
+             ->atomIs(array('Logical', 'Bitoperation'))
              ->outIs(array('RIGHT', 'LEFT'))
              ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
