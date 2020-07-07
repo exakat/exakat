@@ -174,8 +174,8 @@ SQL;
         return $return;
     }
 
-    public function getFunctionsByArgType($typehint = 'int', $strict = self::STRICT) {
-        $return = array_fill(0, 5, array());
+    public function getFunctionsByArgType(string $typehint = 'int', $strict = self::STRICT) : array {
+        $return = array_fill(0, 10, array());
 
         if ($strict === self::LOOSE) {
             $search = " LIKE '%$typehint%'";
@@ -192,7 +192,11 @@ SELECT name AS function, 1 AS position FROM args_type WHERE Class = 'PHP' AND ar
 SELECT name AS function, 2 AS position FROM args_type WHERE Class = 'PHP' AND arg2 $search UNION
 SELECT name AS function, 3 AS position FROM args_type WHERE Class = 'PHP' AND arg3 $search UNION
 SELECT name AS function, 4 AS position FROM args_type WHERE Class = 'PHP' AND arg4 $search UNION
-SELECT name AS function, 5 AS position FROM args_type WHERE Class = 'PHP' AND arg5 $search 
+SELECT name AS function, 5 AS position FROM args_type WHERE Class = 'PHP' AND arg5 $search UNION
+SELECT name AS function, 6 AS position FROM args_type WHERE Class = 'PHP' AND arg6 $search UNION
+SELECT name AS function, 7 AS position FROM args_type WHERE Class = 'PHP' AND arg7 $search UNION
+SELECT name AS function, 8 AS position FROM args_type WHERE Class = 'PHP' AND arg8 $search UNION
+SELECT name AS function, 9 AS position FROM args_type WHERE Class = 'PHP' AND arg9 $search 
 SQL;
         $res = $this->sqlite->query($query);
 
@@ -218,7 +222,7 @@ SQL;
         return $return;
     }
 
-    public function getFunctionsByReturn(bool $singleTypeOnly = false) {
+    public function getFunctionsByReturn(bool $singleTypeOnly = self::LOOSE) : array {
         $return = array();
 
         if ($singleTypeOnly === true) {
@@ -246,6 +250,34 @@ SQL;
         foreach($return as $type => &$list) {
             $list = array_merge(...$list);
         }
+
+        return $return;
+    }
+    
+    public function getFunctionsByReturnType(string $type = 'int', bool $singleTypeOnly = self::STRICT) : array {
+        $return = array();
+
+        if ($singleTypeOnly === self::STRICT) {
+            $where = ' AND return NOT LIKE "%,%"';
+        } else {
+            $where = '';
+        }
+
+        $query = <<<SQL
+SELECT return, lower(GROUP_CONCAT('\' || name)) AS functions 
+    FROM args_type 
+    WHERE class='PHP'         AND 
+          return LIKE '%int%' AND
+          return IS NOT NULL $where
+    GROUP BY return
+SQL;
+        $res = $this->sqlite->query($query);
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[] = explode(',', $row['functions']);
+        }
+
+        $return = array_merge(...$return);
 
         return $return;
     }
