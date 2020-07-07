@@ -28,7 +28,7 @@ class Collector {
     private $last       = array();
     private $count = 0;
 
-    public function get($v) {
+    public function get(string $v) : int {
         if (isset($this->dictionary[$v])) {
             return $this->dictionary[$v];
         }
@@ -40,11 +40,11 @@ class Collector {
         return $this->count;
     }
 
-    public function getDictionary() {
+    public function getDictionary() : array {
         return $this->dictionary;
     }
 
-    public function getRecent() {
+    public function getRecent() : array {
         $last = $this->last;
         $this->last = array();
 
