@@ -24,6 +24,7 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\Query;
 
 class FullnspathIs extends DSL {
     public function run() {
