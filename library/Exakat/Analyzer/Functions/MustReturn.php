@@ -53,8 +53,27 @@ class MustReturn extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        $this->atomIs('Magicmethod')
+             ->isNot('abstract', true)
+             ->hasClassTrait()
+             ->outIs('NAME')
+             ->codeIs(array('__call',
+                            '__callStatic',
+                            '__get',
+                            '__isset',
+                            '__sleep',
+                            '__toString',
+                            '__set_state',
+                            '__debugInfo',
+                            ), self::TRANSLATE, self::CASE_INSENSITIVE)
+             ->back('first')
+             ->analyzerIsNot('Functions/CantUse')
+             ->hasNoOut('RETURNED');
+        $this->prepareQuery();
+
         // function foo() : type { /* no return */ } (except with void)
         $this->atomIs(array('Function', 'Closure', 'Method', 'Arrowfunction'))
+             ->isNot('abstract', true)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
              ->fullnspathIsNot('\\void')
@@ -62,6 +81,15 @@ class MustReturn extends Analyzer {
              ->outIs('RETURNED')
              ->atomIs('Void')
              ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Function', 'Closure', 'Method', 'Arrowfunction'))
+             ->isNot('abstract', true)
+             ->outIs('RETURNTYPE')
+             ->atomIsNot('Void')
+             ->fullnspathIsNot('\\void')
+             ->back('first')
+             ->hasNoOut('RETURNED');
         $this->prepareQuery();
     }
 }
