@@ -58,7 +58,7 @@ class InternalParameterType extends Analyzer {
                      ->outWithRank('ARGUMENT', $position)
 
                      // only include literals (and closures and literal array)
-                     ->atomIs(array('Integer', 'String', 'Arrayliteral', 'Float', 'Boolean', 'Null', 'Integer', 'Closure'))
+                     ->atomIs(array('Integer', 'String', 'Arrayliteral', 'Float', 'Boolean', 'Null', 'Integer', 'Closure'), self::WITH_CONSTANTS)
 
                     // Constant (Identifier), logical, concatenation, addition ?
                     // Those will have to be replaced after more research

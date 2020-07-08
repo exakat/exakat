@@ -34,22 +34,6 @@ class MismatchTypeAndDefault extends Analyzer {
     }
 
     public function analyze() {
-        $values = array('Null',
-                        'String',
-                        'Arrayliteral',
-                        'Integer',
-                        'Float',
-                        'Boolean',
-                        'Addition',
-                        'Multiplication',
-                        'Power',
-                        'Heredoc',
-                        'Concatenation',
-                        'Staticclass',
-                        'Comparison',
-                        'Bitshift',
-                     );
-
         // function foo(string $s = 3)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
@@ -58,7 +42,7 @@ class MismatchTypeAndDefault extends Analyzer {
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
              ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
-             ->atomIs($values, self::WITH_CONSTANTS)
+             ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
              // In case we stay here, even after following the constants
              ->atomIsNot(self::STATIC_NAMES)
              ->savePropertyAs('label', 'type')
@@ -66,40 +50,7 @@ class MismatchTypeAndDefault extends Analyzer {
              ->isNotNullable()
              ->outIs('TYPEHINT')
              ->atomIsNot('Void')
-             ->raw(<<<'GREMLIN'
-filter{
-    switch(it.get().value("fullnspath")) {
-        case '\\string' : 
-            !(type in ["String", "Heredoc", "Concatenation", "Staticclass", "Null"]);
-            break;
-
-        case '\\int' : 
-            !(type in ["Integer", "Addition", "Multiplication", "Power", "Null"]);
-            break;
-
-        case '\\float' : 
-            !(type in ["Float", "Integer", "Addition", "Multiplication", "Power", "Null"]);
-            break;
-
-        case '\\bool' : 
-            !(type in ["Boolean", "Comparison", "Logical", "Bitshift", "Not", "Null"]);
-            break;
-
-        case '\\array' : 
-            !(type in ["Arrayliteral", "Addition", "Null"]);
-            break;
-        
-        // callable
-        // object
-        // iterable
-        // self, static
-        default : 
-            !(type in ["Null"]);
-            break;
-    }
-}
-GREMLIN
-)
+             ->notCompatibleWithType('type')
              ->back('first');
         $this->prepareQuery();
 
@@ -111,7 +62,7 @@ GREMLIN
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
              ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
-             ->atomIs($values, self::WITH_CONSTANTS)
+             ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
              // In case we stay here, even after following the constants
              ->atomIsNot(self::STATIC_NAMES)
              ->savePropertyAs('label', 'type')
@@ -119,40 +70,7 @@ GREMLIN
              ->isNullable()
              ->outIs('TYPEHINT')
              ->atomIsNot('Null')
-             ->raw(<<<'GREMLIN'
-filter{
-    switch(it.get().value("fullnspath")) {
-        case '\\string' : 
-            !(type in ["String", "Heredoc", "Concatenation", "Null", "Staticclass", "Integer", "Float"]);
-            break;
-
-        case '\\int' : 
-            !(type in ["Integer", "Addition", "Multiplication", "Power", "Null"]);
-            break;
-
-        case '\\float' : 
-            !(type in ["Float", "Integer", "Addition", "Multiplication", "Power", "Null"]);
-            break;
-
-        case '\\bool' : 
-            !(type in ["Boolean", "Null", "Comparison", "Logical", "Not"]);
-            break;
-
-        case '\\array' : 
-            !(type in ["Arrayliteral", "Addition", "Null"]);
-            break;
-        
-        // callable
-        // object
-        // iterable
-        // self, static
-        default : 
-            !(type in ["Null"]);
-            break;
-    }
-}
-GREMLIN
-)
+             ->notCompatibleWithType('type')
              ->back('first');
         $this->prepareQuery();
     }
