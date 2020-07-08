@@ -34,7 +34,7 @@ class WrongReturnedType extends Analyzer {
 
     public function analyze() {
 //Generator, Iterator, Traversable, or iterable
-// missing support for return typehint from functions (custom and natives)
+    // missing support for return typehint from functions (custom and natives)
 
         // function foo() : A { return new A;}
         $this->atomIs(self::FUNCTIONS_ALL)

@@ -42,37 +42,41 @@ __.sideEffect{ typehints = []; }
     for(typehint in typehints) {
         switch(typehint) {
             case "\\\\string":
-                results = results && !(type in ["Magicconstant", "Heredoc", "String", "Concatenation", "Classconstant", "Shell"]);
+                results = results && !($types in ["Magicconstant", "Heredoc", "String", "Concatenation", "Classconstant", "Shell"]);
                 break;
                 
             case "\\\\int":
-                results = results && !(type in ["Integer", "Addition", "Multiplication", "Bitshift", "Logical", "Bitoperation", "Power", "Postplusplus", "Preplusplus", "Not"]);
+                results = results && !($types in ["Integer", "Addition", "Multiplication", "Bitshift", "Logical", "Bitoperation", "Power", "Postplusplus", "Preplusplus", "Not"]);
                 break;
     
             case "\\\\numeric":
-                results = results && !(type in ["Integer", "Addition", "Multiplication", "Bitshift", "Logical", "Bitoperation", "Power", "Float", "Postplusplus", "Preplusplus"]);
+                results = results && !($types in ["Integer", "Addition", "Multiplication", "Bitshift", "Logical", "Bitoperation", "Power", "Float", "Postplusplus", "Preplusplus"]);
                 break;
     
             case "\\\\float":
-                results = results && !(type in ["Float", "Addition", "Multiplication", "Bitshift", "Power"]);
+                results = results && !($types in ["Float", "Addition", "Multiplication", "Bitshift", "Power"]);
                 break;
     
             case "\\\\bool":
-                results = results && !(type in ["Boolean", "Logical", "Not", "Comparison"]);
+                results = results && !($types in ["Boolean", "Logical", "Not", "Comparison"]);
                 break;
     
             case "\\\\array":
-                results = results && !(type in ["Arrayliteral", "Addition"]);
+                results = results && !($types in ["Arrayliteral", "Addition"]);
                 break;
     
             case "\\\\mixed":
                 results = false; // anything is mixed, so this is always false
                 break;
+
+            case "\\\\null":
+                results = results && !($types in ["Null"]);
+                break;
     
             case "\\\\void":
             case "\\\\resource":
             default: 
-                true;
+                false;
         }
     }
     

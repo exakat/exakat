@@ -26,6 +26,11 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\FollowParAs;
 
 class WrongArgumentType extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/PropagateCalls',
+                    );
+    }
+
     public function analyze() {
         // function foo(string $a) 
         // foo(3)
@@ -40,7 +45,13 @@ class WrongArgumentType extends Analyzer {
              ->back('first')
 
              ->inIs('DEFINITION')
-             ->OutToParameter('ranked')
+             ->outToParameter('ranked')
+             
+             ->not(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->atomIs('Void')
+             )
              ->notCompatibleWithType('type')
 
              ->back('first');

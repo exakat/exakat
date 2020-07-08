@@ -30,8 +30,10 @@ class OutToParameter extends DSL {
         assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
         list($rank) = func_get_args();
 
+//out("ARGUMENT").sideEffect{ it.get().value("rank") == $rank || (it.get().value("rank") < $rank && ("variadic" in it.get().keys()) && it.get().value("variadic") == true);}
+
         $query = <<<GREMLIN
-out("ARGUMENT").sideEffect{ it.get().value("rank") == $rank || (it.get().value("rank") <= $rank && it.get().value("variadic") == true);}
+out("ARGUMENT").filter{ it.get().value("rank") == $rank || (it.get().value("rank") < $rank && ("variadic" in it.get().keys()) && it.get().value("variadic") == true);}
         
 GREMLIN;
 
