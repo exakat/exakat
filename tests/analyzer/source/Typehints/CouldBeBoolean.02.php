@@ -19,7 +19,7 @@ function byAtoms2() {
 }
 
 function byAtoms3() {
-    return rand(1, 2) = rand(3, 5);
+    return rand(1, 2) == rand(3, 5);
 }
 
 function notByAtoms4() {

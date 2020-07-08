@@ -164,6 +164,7 @@ abstract class Analyzer {
     public const CONSTANTS_ALL    = array('Identifier', 'Nsname');
 
     public const EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
+    public const TYPE_ATOMS       = array('Integer', 'String', 'Arrayliteral', 'Float', 'Boolean', 'Null', 'Closure', 'Concatenation', 'Magicconstant', 'Heredoc', 'Power' , "Classconstant", "Comparison", "Not");
     public const BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
 
     const INCLUDE_SELF = false;

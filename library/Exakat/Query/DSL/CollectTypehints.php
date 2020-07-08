@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -20,32 +20,24 @@
  *
 */
 
-namespace Exakat\Analyzer\Functions;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Query\DSL\FollowParAs;
+namespace Exakat\Query\DSL;
 
-class WrongArgumentType extends Analyzer {
-    public function analyze() {
-        // function foo(string $a) 
-        // foo(3)
-        $this->atomIs(self::FUNCTIONS_CALLS)
-             ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'ranked')
 
-             ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
+class CollectTypehints extends DSL {
+    public function run(): Command {
+        list($variable) = func_get_args();
 
-             ->savePropertyAs('label', 'type')
-             ->back('first')
+        $this->assertVariable($variable, self::VARIABLE_WRITE);
 
-             ->inIs('DEFINITION')
-             ->OutToParameter('ranked')
-             ->notCompatibleWithType('type')
-
-             ->back('first');
-        $this->prepareQuery();
+        $command = new Command('where( 
+__.sideEffect{ ' . $variable . ' = []; }
+  .out("TYPEHINT")
+  .sideEffect{ ' . $variable . '.add(it.get().value("fullnspath")) ; }
+  .fold() 
+)
+');
+        return $command;
     }
 }
-
 ?>

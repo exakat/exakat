@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -20,32 +20,22 @@
  *
 */
 
-namespace Exakat\Analyzer\Functions;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Query\DSL\FollowParAs;
+namespace Exakat\Query\DSL;
 
-class WrongArgumentType extends Analyzer {
-    public function analyze() {
-        // function foo(string $a) 
-        // foo(3)
-        $this->atomIs(self::FUNCTIONS_CALLS)
-             ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'ranked')
+use Exakat\Query\Query;
 
-             ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
+class OutToParameter extends DSL {
+    public function run(): Command {
+        assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
+        list($rank) = func_get_args();
 
-             ->savePropertyAs('label', 'type')
-             ->back('first')
+        $query = <<<GREMLIN
+out("ARGUMENT").sideEffect{ it.get().value("rank") == $rank || (it.get().value("rank") <= $rank && it.get().value("variadic") == true);}
+        
+GREMLIN;
 
-             ->inIs('DEFINITION')
-             ->OutToParameter('ranked')
-             ->notCompatibleWithType('type')
-
-             ->back('first');
-        $this->prepareQuery();
+        return new Command($query, array());
     }
 }
-
 ?>
