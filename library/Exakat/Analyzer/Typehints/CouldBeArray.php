@@ -64,15 +64,7 @@ class CouldBeArray extends CouldBeType {
         $this->checkRelayedArgumentToPHP('array');
 
         // is_string
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->as('result')
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->inIs('ARGUMENT')
-             ->functioncallIs('\\is_array')
-             ->back('result');
-        $this->prepareQuery();
+        $this->checkArgumentValidation(array('\\is_array'), array('Arrayliteral'));
     }
 }
 

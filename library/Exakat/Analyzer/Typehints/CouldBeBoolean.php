@@ -23,27 +23,55 @@
 namespace Exakat\Analyzer\Typehints;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Methods;
 
-class CouldBeBoolean extends Analyzer {
+class CouldBeBoolean extends CouldBeType {
+    public function dependsOn() : array {
+        return array('Complete/PropagateConstants',
+                     'Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
+        $booleanAtoms = array('Comparison', 'Logical', 'Boolean');
+        
+        // property : based on default value (created or not)
+        $this->checkPropertyDefault($booleanAtoms);
+
+        $this->checkPropertyRelayedDefault($booleanAtoms);
+
+        // property relayed typehint
+        $this->checkPropertyRelayedTypehint(array('Scalartypehint'), array('\\bool'));
+
+        // property relayed typehint
+        $this->checkPropertyWithCalls(array('Scalartypehint'), array('\\bool'));
+        $this->checkPropertyWithPHPCalls('bool');
+
         // return type
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('RETURNED')
-             ->atomIs(array('Comparison', 'Logical'))
-             ->back('first');
-        $this->prepareQuery();
+        $this->checkReturnedAtoms($booleanAtoms);
+
+        $this->checkReturnedCalls(array('Scalartypehint'), array('\\bool'));
+
+        $this->checkReturnedPHPTypes('bool');
+
+        $this->checkReturnedDefault($booleanAtoms);
+
+        $this->checkReturnedTypehint(array('Scalartypehint'), array('\\bool'));
 
         // argument type
-        // is_boolean
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->as('result')
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->inIs('ARGUMENT')
-             ->functioncallIs('\\is_bool')
-             ->back('result');
-        $this->prepareQuery();
+        $this->checkArgumentUsage(array('Variablearray'));
+
+        // function ($a = array())
+        $this->checkArgumentDefaultValues($booleanAtoms);
+
+        // function ($a) { bar($a);} function bar(array $b) {}
+        $this->checkRelayedArgument(array('Scalartypehint'), array('\\bool'));
+
+        // function ($a) { array_diff($a);}
+        $this->checkRelayedArgumentToPHP('bool');
+        
+        // argument validation
+        $this->checkArgumentValidation(array('\\is_bool'), $booleanAtoms);
     }
 }
 

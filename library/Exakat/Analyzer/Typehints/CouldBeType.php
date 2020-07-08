@@ -260,6 +260,36 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
+    protected function checkArgumentValidation(array $filters = array(), array $atoms = array()) : void {
+        // is_array($arg)
+        if (!empty($filters)) {
+            $this->atomIs(self::FUNCTIONS_ALL)
+                 ->outIs('ARGUMENT')
+                 ->as('result')
+                 ->outIs('NAME')
+                 ->outIs('DEFINITION')
+                 ->inIs('ARGUMENT')
+                 ->functioncallIs($filters)
+                 ->back('result');
+            $this->prepareQuery();
+        }
+
+        // comparison
+        if (!empty($atoms)) {
+            $this->atomIs(self::FUNCTIONS_ALL)
+                 ->outIs('ARGUMENT')
+                 ->as('result')
+                 ->outIs('NAME')
+                 ->outIs('DEFINITION')
+                 ->inIs(array('LEFT', 'RIGHT'))
+                 ->atomIs('Comparison')
+                 ->inIs(array('LEFT', 'RIGHT'))
+                 ->atomIs($atoms, self::WITH_VARIABLES)
+                 ->back('result');
+            $this->prepareQuery();
+        }
+    }
+
 }
 
 ?>
