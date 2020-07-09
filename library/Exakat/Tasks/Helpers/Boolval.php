@@ -86,7 +86,22 @@ class Boolval extends Plugin {
                 break;
 
             case 'Integer' :
-                $atom->boolean = (int) (bool) (int) $atom->code;
+                // similar to the case of Intval, but tailored for boolean
+                if (strtolower(substr($atom->code, 0, 2)) === '0b') {
+                    $actual = bindec(substr($atom->code, 2));
+                } elseif (strtolower(substr($atom->code, 0, 2)) === '0x') {
+                    $actual = hexdec(substr($atom->code, 2));
+                } elseif (strtolower($atom->code[0]) === '0') {
+                    // PHP 7 will just stop.
+                    // PHP 5 will work until it fails
+                    $actual = octdec(substr($atom->code, 1));
+                } elseif ($atom->code[0] === '+' || $atom->code[0] === '-') {
+                    $actual = (int) pow(-1, substr_count($atom->code, '-')) * (int) strtr($atom->code, '+-', '  ');
+                } else {
+                    $actual = (int) $atom->code;
+                }
+
+                $atom->boolean = (int) (bool) $actual;
                 break;
 
             case 'Boolean' :
