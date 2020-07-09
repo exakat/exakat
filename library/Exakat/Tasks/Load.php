@@ -3020,6 +3020,7 @@ class Load extends Tasks {
     }
 
     private function processStatic(): Atom {
+        $this->checkPhpdoc();
         $current = $this->id;
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF    ) {
