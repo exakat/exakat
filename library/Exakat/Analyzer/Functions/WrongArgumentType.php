@@ -28,6 +28,7 @@ use Exakat\Query\DSL\FollowParAs;
 class WrongArgumentType extends Analyzer {
     public function dependsOn() : array {
         return array('Complete/PropagateCalls',
+                     'Complete/FollowClosureDefinition',
                     );
     }
 
