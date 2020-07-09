@@ -23,8 +23,9 @@
 namespace Exakat\Tasks\Helpers;
 
 use Exakat\Tasks\Load;
+use stdClass;
 
-class Atom {
+class Atom implements AtomInterface {
     const STRING_MAX_SIZE = 500;
 
     public $id           = 0;
@@ -134,7 +135,7 @@ class Atom {
         return (array) $this;
     }
 
-    public function toGraphsonLine(int &$id) {
+    public function toGraphsonLine(int &$id) : stdClass {
         $integerValues = array('args_max',
                                'args_min',
                                'count',
