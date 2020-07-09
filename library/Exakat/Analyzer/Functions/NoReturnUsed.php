@@ -25,14 +25,25 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NoReturnUsed extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/SetClassRemoteDefinitionWithTypehint',
+                     'Complete/SetClassRemoteDefinitionWithGlobal',
+                     'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
+                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
+                    );
+    }
+
     public function analyze() {
         // Functions
-        $this->atomIs('Function')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Return')
-             ->outIs('RETURN')
-             ->atomIsNot('Void')
-             ->back('first')
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->filter(
+                 $this->side()
+                      ->outIs('RETURNED')
+                      ->atomIsNot('Void')
+             )
              ->hasOut('DEFINITION')
              ->not(
                 $this->side()
@@ -42,42 +53,6 @@ class NoReturnUsed extends Analyzer {
                              ->hasNoIn('EXPRESSION')
                      )
              );
-        $this->prepareQuery();
-
-        // Methods
-        $this->atomIs(array('Method', 'Magicmethod'))
-             ->is('static', true)
-             ->savePropertyAs('lccode', 'methode')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Return')
-             ->outIs('RETURN')
-             ->atomIsNot('Void')
-             ->back('first')
-             ->goToClass()
-             ->filter(
-                $this->side()
-                     ->outIs('DEFINITION')
-                     ->inIs('CLASS')
-                     ->atomIs('Staticmethodcall')
-                     ->outIs('METHOD')
-                     ->tokenIs('T_STRING')
-                     ->samePropertyAs('code', 'methode', self::CASE_INSENSITIVE)
-             )
-             ->not(
-                $this->side()
-                     ->filter(
-                        $this->side()
-                             ->outIs('DEFINITION')
-                             ->inIs('CLASS')
-                             ->atomIs('Staticmethodcall')
-                             ->outIs('METHOD')
-                             ->tokenIs('T_STRING')
-                             ->samePropertyAs('code', 'methode', self::CASE_INSENSITIVE)
-                             ->inIs('METHOD')
-                             ->hasNoIn('EXPRESSION')
-                     )
-             )
-             ->back('first');
         $this->prepareQuery();
     }
 }
