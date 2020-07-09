@@ -23,6 +23,11 @@
 namespace Exakat\Analyzer\Complete;
 
 class FollowClosureDefinition extends Complete {
+    public function dependsOn() : array {
+        return array('Complete/CreateDefaultValues',
+                    );
+    }
+
     public function analyze() {
         // immediate usage : in parenthesis
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
@@ -47,14 +52,29 @@ class FollowClosureDefinition extends Complete {
              ->addEFrom('DEFINITION', 'first');
         $this->prepareQuery();
 
-        // relayed usage
-        $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
+        // relayed usage foo(function(){}); function foo($a) { $a();}
+        $this->atomIs(array('Closure', 'Arrowfunction'), self::WITH_VARIABLES)
              ->hasIn('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->inIs('ARGUMENT')
              ->inIs('DEFINITION')  // Find all variable usage
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'ranked', self::CASE_SENSITIVE)
+             ->outToParameter('ranked')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Functioncall', self::WITHOUT_CONSTANTS)
+             ->hasNoIn('DEFINITION')
+             ->addEFrom('DEFINITION', 'first');
+        $this->prepareQuery();
+
+        // relayed usage $d = function(){}; foo($d); function foo($a) { $a();}
+        $this->atomIs(array('Closure', 'Arrowfunction'), self::WITH_VARIABLES)
+             ->inIs('DEFAULT')
+             ->outIs('DEFINITION')
+             ->savePropertyAs('rank', 'ranked')
+             ->inIs('ARGUMENT')
+             ->inIs('DEFINITION')  // Find all variable usage
+             ->outToParameter('ranked')
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('NAME')
