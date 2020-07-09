@@ -912,9 +912,9 @@ class Load extends Tasks {
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
 
-//        print "  $method in".PHP_EOL;
+        print "  $method in".PHP_EOL;
         $atom = $this->$method();
-//        print "  $method out ".PHP_EOL;
+        print "  $method out ".PHP_EOL;
 
         return $atom;
     }
@@ -2917,6 +2917,7 @@ class Load extends Tasks {
                                                                   $this->phptokens::T_CLOSE_CURLY,
                                                                   $this->phptokens::T_COLON,
                                                                   $this->phptokens::T_OPEN_TAG,
+                                                                  $this->phptokens::T_DOC_COMMENT,
                                                                   ),
                     \STRICT_COMPARISON) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {

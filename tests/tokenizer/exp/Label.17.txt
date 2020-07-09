@@ -1,0 +1,63 @@
+test
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+Label : GLOBAL
+  9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+Label : PROJECT
+  1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          8
+          Label : GOTOLABEL
+            7
+        Label : EXPRESSION
+          11
+          Label : LEFT
+            9
+          Label : RIGHT
+            19
+            Label : METHOD
+              14
+              Label : ARGUMENT
+                18
+                Label : CLASS
+                  15
+                Label : CONSTANT
+                  16
+              Label : NAME
+                14
+            Label : OBJECT
+              12
+        Label : EXPRESSION
+          23
+          Label : CONDITION
+            20
+            Label : ARGUMENT
+              21
+            Label : NAME
+              20
+          Label : ELSE
+            25
+          Label : THEN
+            24
