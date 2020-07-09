@@ -210,6 +210,7 @@ abstract class CouldBeType extends Analyzer {
              ->outIs('DEFAULT')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
+             ->inIs('NAME')
              ->outIs('DEFAULT')
              ->atomIs($atoms, self::WITH_CONSTANTS)
              ->back('first');
@@ -265,6 +266,7 @@ abstract class CouldBeType extends Analyzer {
         if (!empty($filters)) {
             $this->atomIs(self::FUNCTIONS_ALL)
                  ->outIs('ARGUMENT')
+                 ->analyzerIsNot('self')
                  ->as('result')
                  ->outIs('NAME')
                  ->outIs('DEFINITION')
@@ -278,6 +280,7 @@ abstract class CouldBeType extends Analyzer {
         if (!empty($atoms)) {
             $this->atomIs(self::FUNCTIONS_ALL)
                  ->outIs('ARGUMENT')
+                 ->analyzerIsNot('self')
                  ->as('result')
                  ->outIs('NAME')
                  ->outIs('DEFINITION')
@@ -289,7 +292,36 @@ abstract class CouldBeType extends Analyzer {
             $this->prepareQuery();
         }
     }
+    
+    protected function checkCastArgument(string $token = '', array $functions = array()) : void {
+        // (string) $arg
+        if (!empty($token)) {
+            $this->atomIs(self::FUNCTIONS_ALL)
+                 ->outIs('ARGUMENT')
+                 ->analyzerIsNot('self')
+                 ->as('result')
+                 ->outIs('NAME')
+                 ->outIs('DEFINITION')
+                 ->inIs('CAST')
+                 ->atomIs('Cast')
+                 ->tokenIs($token)
+                 ->back('result');
+            $this->prepareQuery();
+        }
 
+        // conversion
+        if (!empty($functions)) {
+            $this->atomIs(self::FUNCTIONS_ALL)
+                 ->outIs('ARGUMENT')
+                 ->analyzerIsNot('self')
+                 ->as('result')
+                 ->outIs('NAME')
+                 ->outIs('DEFINITION')
+                 ->inIs('ARGUMENT')
+                 ->back('result');
+            $this->prepareQuery();
+        }
+    }
 }
 
 ?>

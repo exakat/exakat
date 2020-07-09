@@ -23,38 +23,87 @@
 namespace Exakat\Analyzer\Typehints;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Methods;
 
-class CouldBeString extends Analyzer {
+class CouldBeString extends CouldBeType {
+
     public function analyze() {
-        // return type
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('RETURNED')
-             ->atomIs('Concatenation')
+        $stringAtoms = array('Concatenation', 'String', 'Heredoc');
+
+        $this->checkPropertyDefault($stringAtoms);
+
+        // property relayed default
+        $this->checkPropertyRelayedDefault($stringAtoms);
+
+        // property relayed typehint
+        $this->checkPropertyRelayedTypehint(array('Scalartypehint'), array('\\string'));
+
+        // property relayed typehint
+        $this->checkPropertyWithCalls(array('Scalartypehint'), array('\\string'));
+        $this->checkPropertyWithPHPCalls('string');
+
+        // $a[$b->property] : could be a string or an integer
+        $this->atomIs('Propertydefinition')
+             ->analyzerIsNot('self')
+             ->outIs('DEFAULT')
+             ->atomIs('Variable')
+             ->inIs('DEFINITION')
+             ->outIs('DEFINITION')
+             ->inIs('INDEX')
+             ->atomIs('Array')
              ->back('first');
         $this->prepareQuery();
 
+        // return type
+        $this->checkReturnedAtoms($stringAtoms);
+
+        $this->checkReturnedCalls(array('Scalartypehint'), array('\\string'));
+
+        $this->checkReturnedPHPTypes('string');
+
+        $this->checkReturnedDefault($stringAtoms);
+
+        $this->checkReturnedTypehint(array('Scalartypehint'), array('\\string'));
+
         // argument type
+        // function ($a = array())
+        $this->checkArgumentDefaultValues($stringAtoms);
+
+        // function ($a) { bar($a);} function bar(array $b) {}
+        $this->checkRelayedArgument(array('Scalartypehint'), array('\\string'));
+
+        // function ($a) { array_diff($a);}
+        $this->checkRelayedArgumentToPHP('string');
+
+        // is_string
+        $this->checkArgumentValidation(array('\\is_string'), $stringAtoms);
+        
+        // (string) or strval
+        $this->checkCastArgument('T_STRING_CAST', array('\\strval'));
+
+        // argument because used in a specific operation
         // $arg . ''
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('result')
+             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->hasIn('CONCAT')
              ->back('result');
         $this->prepareQuery();
 
-        // is_string
+        // $a[$arg] : could be a string or an integer
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('result')
+             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->outIs('DEFINITION')
-             ->inIs('ARGUMENT')
-             ->functioncallIs('\\is_string')
+             ->inIs('INDEX')
+             ->atomIs('Array')
              ->back('result');
         $this->prepareQuery();
-
     }
 }
 

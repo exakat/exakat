@@ -54,7 +54,15 @@ class CreateDefaultValues extends Complete {
                      ->raw('is(eq("first"))')
              )
              ->followParAs('RIGHT')
-             ->atomIsNot(array('Variable')) // 'Variableobject', 'Variablearray' are never on the right side of an assignation (not directly)
+
+             // 'Variableobject', 'Variablearray' are never on the right side of an assignation (not directly)
+             ->not(
+                $this->side()
+                     ->atomIs('Variable')
+                     ->inIs('DEFINITION')
+                     ->inIsIE('NAME')
+                     ->raw('is(eq("first"))')
+             )
              ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery();
     }

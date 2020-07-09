@@ -33,7 +33,7 @@ class CouldBeBoolean extends CouldBeType {
     }
 
     public function analyze() {
-        $booleanAtoms = array('Comparison', 'Logical', 'Boolean');
+        $booleanAtoms = array('Comparison', 'Logical', 'Boolean', 'Not');
         
         // property : based on default value (created or not)
         $this->checkPropertyDefault($booleanAtoms);
@@ -72,6 +72,23 @@ class CouldBeBoolean extends CouldBeType {
         
         // argument validation
         $this->checkArgumentValidation(array('\\is_bool'), $booleanAtoms);
+
+        // argument because used in a specific operation
+        // $arg && ''
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->as('result')
+             ->analyzerIsNot('self')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->hasIn(array('LEFT', 'RIGHT'))
+             ->atomIs(array('Comparison', 'Logical', 'Not'))
+             ->back('result');
+        $this->prepareQuery();
+        
+        // May also cover if( $arg).,
+        // May also cover coalesce, ternary.
+        // short assignations
     }
 }
 
