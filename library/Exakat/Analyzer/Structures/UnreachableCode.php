@@ -30,12 +30,19 @@ class UnreachableCode extends Analyzer {
         return array('Complete/PropagateConstants',
                      'Functions/KillsApp',
                      'Structures/AlwaysFalse',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
+                     'Complete/SetClassRemoteDefinitionWithGlobal',
+                     'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
+                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
                     );
     }
 
     public function analyze() {
         // code after a halt_compiler is expected to be unreachable.
-        $finalTokens = array('Gotolabel', 'Class', 'Function', 'Interface', 'Trait');
+        $finalTokens = array('Gotolabel', 'Class', 'Const', 'Function', 'Interface', 'Trait');
 
         // anything directly after those
         $this->atomIs(array('Return', 'Throw', 'Break', 'Continue', 'Goto', 'Exit'))
@@ -63,10 +70,8 @@ class UnreachableCode extends Analyzer {
              ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->functionDefinition()
+        $this->atomIs(self::CALLS)
+             ->inIs('DEFINITION')
              ->analyzerIs('Functions/KillsApp')
              ->back('first')
              ->nextSibling()

@@ -37,7 +37,7 @@ class LoopCalling extends Analyzer {
              ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->has('fullnspath')
@@ -55,13 +55,13 @@ class LoopCalling extends Analyzer {
              ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->has('fullnspath')
@@ -79,19 +79,19 @@ class LoopCalling extends Analyzer {
              ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->has('fullnspath')
              ->notSamePropertyAs('fullnspath', 'name')
 
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
              ->has('fullnspath')

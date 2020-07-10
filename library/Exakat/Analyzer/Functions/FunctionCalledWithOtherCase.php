@@ -31,7 +31,7 @@ class FunctionCalledWithOtherCase extends Analyzer {
         // foo();
         $this->atomIs('Functioncall')
              ->savePropertyAs('code', 'name')
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->notSamePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
