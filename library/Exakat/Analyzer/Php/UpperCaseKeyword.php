@@ -27,10 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class UpperCaseKeyword extends Analyzer {
     public function analyze() {
+        // CLASS X {}
         $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Usenamese', 'Usetrait', 'Function', 'Method',
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
                             'Clone', 'Dowhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
-                            'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Static', ))
+                            'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Static', 'Match',
+                            ))
              ->codeIsNot(array('&&', '||', '^', '&', '|'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->isNotLowercase('code');
         $this->prepareQuery();

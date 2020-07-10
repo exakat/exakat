@@ -34,6 +34,7 @@ class CommonAlternatives extends Analyzer {
                       'Dowhile',
                       'While',
                       'Switch',
+                      'Match',
                       'Closure',
                       'Arrowfunction',
                       'Continue',
@@ -96,7 +97,7 @@ class CommonAlternatives extends Analyzer {
 
         // switch()
         // two levels only
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->outIs('CASES')
              ->as('cases')
              ->savePropertyAs('count', 'c')

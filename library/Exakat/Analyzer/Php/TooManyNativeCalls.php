@@ -50,6 +50,7 @@ class TooManyNativeCalls extends Analyzer {
                                'Function',
                                'Ifthen',
                                'Include',
+                               'Match',
                                'Method',
                                'Namespace',
                                'Php',

@@ -164,6 +164,7 @@ class Php72 extends Php {
     const T_FN                            = 1000;
     const T_BAD_CHARACTER                 = 1000;
     const T_CHARACTER                     = 1000;
+    const T_MATCH                         = 1000;
 }
 
 ?>

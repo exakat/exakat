@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OneLevelOfIndentation extends Analyzer {
     public function analyze() {
-        $atoms = array('Ifthen', 'Foreach', 'For', 'While', 'Dowhile', 'Switch');
+        $atoms = array('Ifthen', 'Foreach', 'For', 'While', 'Dowhile', 'Switch', 'Match');
         $blocks = array('THEN', 'ELSE', 'BLOCK', 'CASES');
 
         // function foo() { if ($a === 1) { if ($b === 2) {}}}

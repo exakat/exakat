@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseCaseValue extends Analyzer {
     public function analyze() {
         // switch ($x) { case 'd' : echo $x; }
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->outIs('CONDITION')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'variable')

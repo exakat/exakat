@@ -164,5 +164,6 @@ class Php55 extends Php {
     const T_POW_EQUAL                     = 1000;
     const T_POW                           = 1000;
     const T_ELLIPSIS                      = 1000;
+    const T_MATCH                         = 1000;
 }
 ?>

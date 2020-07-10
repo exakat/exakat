@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MultipleDefinedCase extends Analyzer {
     public function analyze() {
         // Check that fullcode is the same or not for integers
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->filter(
                 $this->side()
                      ->outIs('CASES')
@@ -41,7 +41,7 @@ class MultipleDefinedCase extends Analyzer {
         $this->prepareQuery();
 
         // Special case for strings (avoiding ' and ")
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->analyzerIsNot('self')
              ->filter(
                 $this->side()
@@ -56,7 +56,7 @@ class MultipleDefinedCase extends Analyzer {
         $this->prepareQuery();
 
         // Check that fullcode is the same or not for constants, based on fullnspath
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->analyzerIsNot('self')
              ->filter(
                 $this->side()
@@ -70,7 +70,7 @@ class MultipleDefinedCase extends Analyzer {
         $this->prepareQuery();
 
         // Check that fullcode which are expressions  $a == 1
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->analyzerIsNot('self')
              ->filter(
                 $this->side()

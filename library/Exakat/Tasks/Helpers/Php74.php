@@ -162,5 +162,7 @@ class Php74 extends Php {
     const T_ELLIPSIS                      = 394;
     const T_BAD_CHARACTER                 = 395;
     const T_DOUBLE_COLON                  = 390;
+
+    const T_MATCH                         = 1000;
 }
 ?>

@@ -29,7 +29,7 @@ class BreakOutsideLoop extends Analyzer {
     protected $phpVersion = '7.0-';
 
     public function analyze() {
-        $breakable = array('Dowhile', 'For', 'Foreach', 'While', 'Switch');
+        $breakable = array('Dowhile', 'For', 'Foreach', 'While', 'Switch', 'Match');
 
         // break (null)
         $this->atomIs('Break')

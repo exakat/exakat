@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingCases extends Analyzer {
     public function analyze() {
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->initVariable('x', '[]')
              ->raw('sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));})')
              ->raw('filter{x != [];}.map{x.sort();}');
@@ -63,7 +63,7 @@ class MissingCases extends Analyzer {
 
         $commons = array_array_unique($commons);
 
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x != [];}.map{x.sort();}')
              ->raw('filter{ y = ***; if (y.getClass() == "java.util.ArrayList") { x in y.values();} else { x in y; } }', $commons)
              ->back('first');

@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessSwitch extends Analyzer {
     public function analyze() {
-        $this->atomIs('Switch')
+        // switch ($a) { default: 1; }
+        $this->atomIs(self::SWITCH_ALL)
              ->outIs('CASES')
              ->isLess('count', 2)
              ->back('first');

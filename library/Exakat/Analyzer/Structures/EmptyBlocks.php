@@ -28,7 +28,7 @@ class EmptyBlocks extends Analyzer {
     public function analyze() {
         // Block with only one empty expression
         // Block with only empty expressions
-        $this->atomIs(array('For', 'While', 'Foreach', 'Dowhile', 'Declare', 'Namespace', 'Declare', 'Switch'))
+        $this->atomIs(array('For', 'While', 'Foreach', 'Dowhile', 'Declare', 'Namespace', 'Declare', 'Switch', 'Match'))
              ->not(
                 $this->side()
                      ->outIs('DECLARE')

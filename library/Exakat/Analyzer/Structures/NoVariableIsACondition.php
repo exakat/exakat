@@ -30,7 +30,7 @@ class NoVariableIsACondition extends Analyzer {
         $this->atomIs(self::VARIABLES_ALL)
              ->inIsIE('CODE')
              ->inIs('CONDITION')
-             ->atomIsNot('Switch');
+             ->atomIsNot(self::SWITCH_ALL);
         $this->prepareQuery();
 
         $this->atomIs(self::VARIABLES_ALL)

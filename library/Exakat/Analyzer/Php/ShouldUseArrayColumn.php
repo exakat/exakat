@@ -37,7 +37,7 @@ class ShouldUseArrayColumn extends Analyzer {
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomInsideNoDefinition('Assignation')
-             ->hasNoInstruction(array('Ifthen', 'Switch')) // Make this a filter
+             ->hasNoInstruction(array('Ifthen', 'Switch', 'Match')) // Make this a filter
              ->outIs('LEFT')
              ->atomIs('Arrayappend')
              // The left part is not reusing the blin variable : this would be too complex for array_column

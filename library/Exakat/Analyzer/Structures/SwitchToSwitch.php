@@ -25,14 +25,19 @@ use Exakat\Analyzer\Analyzer;
 
 class SwitchToSwitch extends Analyzer {
     public function analyze() {
-        // 3 ifthen chained with elseif
+        // 3 ifthen chained with elseif and comparisons
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomIs('Comparison')
              ->inIs('CONDITION')
              ->tokenIs('T_IF')
              ->outIs('ELSE')
-             ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("EXPRESSION"), __.filter{ true; } )')
+             ->optional(
+                $this->side()
+                     ->atomIs('Sequence')
+                     ->is('count', 1)
+                     ->outIs('EXPRESSION')
+             )
 
              ->atomIs('Ifthen')
              ->outIs('CONDITION')
@@ -40,7 +45,12 @@ class SwitchToSwitch extends Analyzer {
              ->inIs('CONDITION')
              ->outIs('ELSE')
              ->outIsIE('EXPRESSION')
-             ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("EXPRESSION"), __.filter{ true; } )')
+             ->optional(
+                $this->side()
+                     ->atomIs('Sequence')
+                     ->is('count', 1)
+                     ->outIs('EXPRESSION')
+             )
 
              ->atomIs('Ifthen')
              ->outIs('CONDITION')

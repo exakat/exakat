@@ -28,10 +28,14 @@ use Exakat\Analyzer\Analyzer;
 class SwitchWithoutDefault extends Analyzer {
     public function analyze() {
         // switch($x) { case 4 : break; }
-        $this->atomIs('Switch')
-             ->outIs('CASES')
-             ->noAtomInside('Default')
-             ->back('first');
+        // match($x) { 4 => 1, };
+        $this->atomIs(self::SWITCH_ALL)
+             ->not(
+                $this->side()
+                     ->outIs('CASES')
+                     ->outIs('EXPRESSION')
+                     ->atomIs('Default')
+             );
         $this->prepareQuery();
     }
 }

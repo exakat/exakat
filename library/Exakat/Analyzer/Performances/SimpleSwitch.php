@@ -29,7 +29,7 @@ class SimpleSwitch extends Analyzer {
 
     public function analyze() {
         // switch($a) { case 1 + 1 : break; }
-        $this->atomIs('Switch')
+        $this->atomIs(self::SWITCH_ALL)
              ->outIs('CASES')
              ->outIs('EXPRESSION')
              ->atomIs('Case')

@@ -34,11 +34,6 @@ class CreateDefaultValues extends Complete {
                             'Propertydefinition',
                             'Parametername',
                             ), self::WITHOUT_CONSTANTS)
-             ->not(
-                $this->side()
-                     ->outIs('DEFAULT')
-                     ->hasIn('RIGHT')
-             )
              ->outIs('DEFINITION')
              ->inIs('LEFT')
              ->atomIs('Assignation', self::WITHOUT_CONSTANTS)
@@ -63,6 +58,64 @@ class CreateDefaultValues extends Complete {
                      ->inIsIE('NAME')
                      ->raw('is(eq("first"))')
              )
+             ->addEFrom('DEFAULT', 'first');
+        $this->prepareQuery();
+        
+        // With comparisons
+        $this->atomIs(array('Variabledefinition',
+                            'Staticdefinition',
+                            'Globaldefinition',
+                            'Staticdefinition',
+                            'Virtualproperty',
+                            'Propertydefinition',
+                            'Parametername',
+                            ), self::WITHOUT_CONSTANTS)
+             ->outIs('DEFINITION')
+             ->inIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Comparison', self::WITHOUT_CONSTANTS)
+             ->codeIs(array('==', '!=', '===', '!==', ), self::TRANSLATE, self::CASE_SENSITIVE) 
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs(array('Integer', 'String'), self::WITH_CONSTANTS)
+             ->addEFrom('DEFAULT', 'first');
+        $this->prepareQuery();
+
+        // With switch/match
+        $this->atomIs(array('Variabledefinition',
+                            'Staticdefinition',
+                            'Globaldefinition',
+                            'Staticdefinition',
+                            'Virtualproperty',
+                            'Propertydefinition',
+                            'Parametername',
+                            ), self::WITHOUT_CONSTANTS)
+             ->outIs('DEFINITION')
+             ->inIs('CONDITION')
+             ->atomIs(self::SWITCH_ALL)
+             ->outIs('CASES')
+             ->outIs('EXPRESSION')
+             ->atomIs('Case')
+             ->outIs('CASE')
+             ->atomIs(array('Integer', 'String'), self::WITH_CONSTANTS)
+             ->addEFrom('DEFAULT', 'first');
+        $this->prepareQuery();
+
+        // With foreach
+        $this->atomIs(array('Variabledefinition',
+                            'Staticdefinition',
+                            'Globaldefinition',
+                            'Staticdefinition',
+                            'Virtualproperty',
+                            'Propertydefinition',
+                            'Parametername',
+                            ), self::WITHOUT_CONSTANTS)
+             ->outIs('DEFINITION')
+             ->inIs('VALUE')
+             ->atomIs('Foreach')
+             ->outIs('SOURCE')
+             ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
+             ->outIs('ARGUMENT')
+             ->outIsIE('VALUE')
+             ->atomIs(array('Integer', 'String'), self::WITH_CONSTANTS)
              ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery();
     }
