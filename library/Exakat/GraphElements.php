@@ -85,6 +85,7 @@ abstract class GraphElements {
                                  'List',
                                  'Logical',
                                  'Magicconstant',
+                                 'Match',
                                  'Member',
                                  'Magicmethod',
                                  'Method',

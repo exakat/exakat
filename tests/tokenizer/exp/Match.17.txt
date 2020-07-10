@@ -1,0 +1,915 @@
+test
+Label : GLOBAL
+  24
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+Label : PROJECT
+  1
+  Label : DEFINITION
+    24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+    Label : DEFINITION
+      24
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : BLOCK
+            6
+            Label : EXPRESSION
+              8
+              Label : CASES
+                10
+                Label : EXPRESSION
+                  11
+                  Label : CASE
+                    12
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    16
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    17
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    18
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    19
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+              Label : CONDITION
+                9
+            Label : EXPRESSION
+              7
+              Label : ARGUMENT
+                8
+                Label : CASES
+                  10
+                  Label : EXPRESSION
+                    11
+                    Label : CASE
+                      12
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      16
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      17
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      18
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      19
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                Label : CONDITION
+                  9
+              Label : NAME
+                7
+          Label : CATCH
+            21
+            Label : BLOCK
+              6
+              Label : EXPRESSION
+                7
+                Label : ARGUMENT
+                  26
+                  Label : CAST
+                    24
+                Label : NAME
+                  7
+            Label : CLASS
+              22
+            Label : VARIABLE
+              24
+        Label : EXPRESSION
+          8
+          Label : CASES
+            10
+            Label : EXPRESSION
+              11
+              Label : CASE
+                12
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                16
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                17
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                18
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                19
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+          Label : CONDITION
+            17
+        Label : EXPRESSION
+          8
+          Label : CASES
+            10
+            Label : EXPRESSION
+              11
+              Label : CASE
+                12
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                16
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                17
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                18
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                19
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  29
+          Label : CONDITION
+            9
+        Label : EXPRESSION
+          8
+          Label : CASES
+            10
+            Label : EXPRESSION
+              11
+              Label : CASE
+                12
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                16
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                17
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                18
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                19
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  29
+          Label : CONDITION
+            27
+        Label : EXPRESSION
+          8
+          Label : CASES
+            10
+            Label : EXPRESSION
+              11
+              Label : CASE
+                12
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                16
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                17
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                18
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                19
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  29
+          Label : CONDITION
+            28
+        Label : EXPRESSION
+          8
+          Label : CASES
+            10
+            Label : EXPRESSION
+              11
+              Label : CASE
+                12
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                16
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                17
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                18
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CASE
+                19
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  20
+            Label : EXPRESSION
+              15
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  29
+          Label : CONDITION
+            17
+        Label : EXPRESSION
+          5
+          Label : BLOCK
+            6
+            Label : EXPRESSION
+              8
+              Label : CASES
+                10
+                Label : EXPRESSION
+                  11
+                  Label : CASE
+                    12
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    16
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    17
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    18
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    19
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+              Label : CONDITION
+                27
+            Label : EXPRESSION
+              7
+              Label : ARGUMENT
+                8
+                Label : CASES
+                  10
+                  Label : EXPRESSION
+                    11
+                    Label : CASE
+                      12
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      16
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      17
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      18
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      19
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                Label : CONDITION
+                  27
+              Label : NAME
+                7
+          Label : CATCH
+            21
+            Label : BLOCK
+              6
+              Label : EXPRESSION
+                7
+                Label : ARGUMENT
+                  26
+                  Label : CAST
+                    24
+                Label : NAME
+                  7
+            Label : CLASS
+              22
+            Label : VARIABLE
+              24
+        Label : EXPRESSION
+          5
+          Label : BLOCK
+            6
+            Label : EXPRESSION
+              8
+              Label : CASES
+                10
+                Label : EXPRESSION
+                  11
+                  Label : CASE
+                    12
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    16
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    17
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    18
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+                Label : EXPRESSION
+                  15
+                  Label : CASE
+                    19
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      20
+              Label : CONDITION
+                28
+            Label : EXPRESSION
+              7
+              Label : ARGUMENT
+                8
+                Label : CASES
+                  10
+                  Label : EXPRESSION
+                    11
+                    Label : CASE
+                      12
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      16
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      17
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      18
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                  Label : EXPRESSION
+                    15
+                    Label : CASE
+                      19
+                    Label : CODE
+                      3
+                      Label : EXPRESSION
+                        20
+                Label : CONDITION
+                  28
+              Label : NAME
+                7
+          Label : CATCH
+            21
+            Label : BLOCK
+              6
+              Label : EXPRESSION
+                7
+                Label : ARGUMENT
+                  26
+                  Label : CAST
+                    24
+                Label : NAME
+                  7
+            Label : CLASS
+              22
+            Label : VARIABLE
+              24
+        Label : EXPRESSION
+          7
+          Label : ARGUMENT
+            8
+            Label : CASES
+              10
+              Label : EXPRESSION
+                11
+                Label : CASE
+                  12
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  16
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  17
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  18
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  19
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+            Label : CONDITION
+              17
+          Label : NAME
+            7
+        Label : EXPRESSION
+          7
+          Label : ARGUMENT
+            8
+            Label : CASES
+              10
+              Label : EXPRESSION
+                11
+                Label : CASE
+                  12
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  16
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  17
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  18
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  19
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    29
+            Label : CONDITION
+              9
+          Label : NAME
+            7
+        Label : EXPRESSION
+          7
+          Label : ARGUMENT
+            8
+            Label : CASES
+              10
+              Label : EXPRESSION
+                11
+                Label : CASE
+                  12
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  16
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  17
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  18
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  19
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    29
+            Label : CONDITION
+              27
+          Label : NAME
+            7
+        Label : EXPRESSION
+          7
+          Label : ARGUMENT
+            8
+            Label : CASES
+              10
+              Label : EXPRESSION
+                11
+                Label : CASE
+                  12
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  16
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  17
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  18
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  19
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    29
+            Label : CONDITION
+              28
+          Label : NAME
+            7
+        Label : EXPRESSION
+          7
+          Label : ARGUMENT
+            8
+            Label : CASES
+              10
+              Label : EXPRESSION
+                11
+                Label : CASE
+                  12
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  16
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  17
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  18
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CASE
+                  19
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    20
+              Label : EXPRESSION
+                15
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    29
+            Label : CONDITION
+              17
+          Label : NAME
+            7

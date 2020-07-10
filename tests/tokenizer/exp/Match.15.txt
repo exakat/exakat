@@ -1,0 +1,269 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            6
+            Label : NOT
+              7
+              Label : ARGUMENT
+                8
+              Label : NAME
+                7
+          Label : THEN
+            10
+            Label : EXPRESSION
+              11
+              Label : DEFINITION
+                8
+              Label : DEFINITION
+                12
+              Label : DEFINITION
+                12
+              Label : METHOD
+                14
+                Label : ARGUMENT
+                  16
+                  Label : DEFAULT
+                    17
+                  Label : NAME
+                    16
+                    Label : DEFINITION
+                      16
+                  Label : TYPEHINT
+                    17
+                Label : BLOCK
+                  10
+                  Label : EXPRESSION
+                    19
+                    Label : LEFT
+                      16
+                    Label : RIGHT
+                      20
+                Label : DEFINITION
+                  35
+                  Label : CLASS
+                    12
+                  Label : METHOD
+                    14
+                    Label : ARGUMENT
+                      31
+                      Label : CASES
+                        33
+                        Label : EXPRESSION
+                          34
+                          Label : CASE
+                            32
+                          Label : CODE
+                            3
+                            Label : EXPRESSION
+                              37
+                      Label : CONDITION
+                        32
+                    Label : NAME
+                      14
+                Label : NAME
+                  14
+                Label : RETURNTYPE
+                  17
+              Label : METHOD
+                21
+                Label : ARGUMENT
+                  16
+                  Label : DEFAULT
+                    17
+                  Label : NAME
+                    16
+                    Label : DEFINITION
+                      16
+                  Label : TYPEHINT
+                    17
+                Label : BLOCK
+                  10
+                  Label : EXPRESSION
+                    23
+                    Label : ARGUMENT
+                      24
+                      Label : CONCAT
+                        25
+                      Label : CONCAT
+                        16
+                      Label : CONCAT
+                        27
+                Label : DEFINITION
+                  35
+                  Label : CLASS
+                    12
+                  Label : METHOD
+                    21
+                    Label : ARGUMENT
+                      31
+                      Label : CASES
+                        33
+                        Label : EXPRESSION
+                          34
+                          Label : CASE
+                            32
+                          Label : CODE
+                            3
+                            Label : EXPRESSION
+                              29
+                      Label : CONDITION
+                        32
+                    Label : NAME
+                      21
+                Label : NAME
+                  21
+                Label : RETURNTYPE
+                  17
+              Label : NAME
+                12
+        Label : EXPRESSION
+          28
+          Label : ARGUMENT
+            17
+          Label : BLOCK
+            10
+            Label : EXPRESSION
+              19
+              Label : LEFT
+                29
+              Label : RIGHT
+                30
+            Label : EXPRESSION
+              31
+              Label : CASES
+                33
+                Label : EXPRESSION
+                  34
+                  Label : CASE
+                    32
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      29
+              Label : CONDITION
+                32
+            Label : EXPRESSION
+              31
+              Label : CASES
+                33
+                Label : EXPRESSION
+                  34
+                  Label : CASE
+                    32
+                  Label : CODE
+                    3
+                    Label : EXPRESSION
+                      37
+              Label : CONDITION
+                32
+            Label : EXPRESSION
+              35
+              Label : CLASS
+                12
+              Label : METHOD
+                21
+                Label : ARGUMENT
+                  31
+                  Label : CASES
+                    33
+                    Label : EXPRESSION
+                      34
+                      Label : CASE
+                        32
+                      Label : CODE
+                        3
+                        Label : EXPRESSION
+                          29
+                  Label : CONDITION
+                    32
+                Label : NAME
+                  21
+            Label : EXPRESSION
+              23
+              Label : ARGUMENT
+                24
+                Label : CONCAT
+                  36
+                Label : CONCAT
+                  29
+                Label : CONCAT
+                  27
+            Label : EXPRESSION
+              19
+              Label : LEFT
+                37
+              Label : RIGHT
+                38
+            Label : EXPRESSION
+              35
+              Label : CLASS
+                12
+              Label : METHOD
+                14
+                Label : ARGUMENT
+                  31
+                  Label : CASES
+                    33
+                    Label : EXPRESSION
+                      34
+                      Label : CASE
+                        32
+                      Label : CODE
+                        3
+                        Label : EXPRESSION
+                          37
+                  Label : CONDITION
+                    32
+                Label : NAME
+                  14
+            Label : EXPRESSION
+              23
+              Label : ARGUMENT
+                24
+                Label : CONCAT
+                  39
+                Label : CONCAT
+                  37
+                Label : CONCAT
+                  27
+          Label : DEFINITION
+            28
+            Label : ARGUMENT
+              17
+            Label : NAME
+              28
+          Label : DEFINITION
+            29
+            Label : DEFINITION
+              29
+            Label : DEFINITION
+              29
+            Label : DEFINITION
+              29
+          Label : DEFINITION
+            37
+            Label : DEFINITION
+              37
+            Label : DEFINITION
+              37
+            Label : DEFINITION
+              37
+          Label : NAME
+            28
+          Label : RETURNTYPE
+            17
+        Label : EXPRESSION
+          28
+          Label : ARGUMENT
+            17
+          Label : NAME
+            28

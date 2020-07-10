@@ -1,0 +1,171 @@
+test
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+Label : PROJECT
+  1
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+            Label : ARGUMENT
+              7
+              Label : DEFAULT
+                8
+              Label : NAME
+                7
+              Label : TYPEHINT
+                8
+            Label : ARGUMENT
+              10
+              Label : DEFAULT
+                8
+              Label : NAME
+                10
+                Label : DEFINITION
+                  10
+              Label : TYPEHINT
+                8
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                12
+                Label : THROW
+                  13
+                  Label : NEW
+                    14
+                    Label : ARGUMENT
+                      16
+                      Label : CONCAT
+                        17
+                      Label : CONCAT
+                        10
+                    Label : NAME
+                      14
+            Label : RETURNTYPE
+              8
+          Label : NAME
+            5
+        Label : EXPRESSION
+          20
+          Label : CASES
+            24
+            Label : EXPRESSION
+              25
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  26
+            Label : EXPRESSION
+              28
+              Label : CASE
+                29
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  34
+            Label : EXPRESSION
+              28
+              Label : CASE
+                30
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  34
+            Label : EXPRESSION
+              28
+              Label : CASE
+                31
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  34
+            Label : EXPRESSION
+              28
+              Label : CASE
+                32
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  34
+            Label : EXPRESSION
+              28
+              Label : CASE
+                33
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  34
+          Label : CONDITION
+            21
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            20
+            Label : CASES
+              24
+              Label : EXPRESSION
+                25
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    26
+              Label : EXPRESSION
+                28
+                Label : CASE
+                  29
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    34
+              Label : EXPRESSION
+                28
+                Label : CASE
+                  30
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    34
+              Label : EXPRESSION
+                28
+                Label : CASE
+                  31
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    34
+              Label : EXPRESSION
+                28
+                Label : CASE
+                  32
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    34
+              Label : EXPRESSION
+                28
+                Label : CASE
+                  33
+                Label : CODE
+                  3
+                  Label : EXPRESSION
+                    34
+            Label : CONDITION
+              21
+        Label : EXPRESSION
+          19
+          Label : ARGUMENT
+            36

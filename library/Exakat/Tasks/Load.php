@@ -375,6 +375,7 @@ class Load extends Tasks {
             $this->phptokens::T_TRY                      => 'processTry',
             $this->phptokens::T_CONST                    => 'processConst',
             $this->phptokens::T_SWITCH                   => 'processSwitch',
+            $this->phptokens::T_MATCH                    => 'processMatch',
             $this->phptokens::T_DEFAULT                  => 'processDefault',
             $this->phptokens::T_CASE                     => 'processCase',
             $this->phptokens::T_DECLARE                  => 'processDeclare',
@@ -3770,6 +3771,78 @@ class Load extends Tasks {
         return $default;
     }
 
+    // This process Case and Default inside a Match (also, trailing voids)
+    private function processMatchCase(): AtomInterface {
+        $current = $this->id;
+        
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
+            return $this->addAtomVoid();
+        }
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DEFAULT) {
+            $case = $this->addAtom('Default', $current);
+            $item = null;
+            ++$this->id; // Skip default
+        } else {
+            $case = $this->addAtom('Case', $current);
+
+            $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
+            do {
+                $item = $this->processNext();
+            } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_DOUBLE_ARROW,
+                                                                      $this->phptokens::T_COMMA,
+                                                                    ),
+                                \STRICT_COMPARISON));
+            $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
+
+            $this->popExpression();
+            $this->addLink($case, $item, 'CASE');
+        }
+        $this->cases->add(array($case, $item));
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
+            ++$this->id;
+            if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_DOUBLE_ARROW) {
+                return $case;
+            }
+        }
+        ++$this->id; // Skip => or ,
+
+        $this->startSequence();
+        do {
+            $expression = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
+                                                                  $this->phptokens::T_COMMA,
+                                                                ),
+                \STRICT_COMPARISON));
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
+            ++$this->id;
+        }
+        $this->addToSequence($expression);
+        $code = $this->sequence;
+        $this->endSequence();
+
+        foreach($this->cases->getAll() as $aCase) {
+            $this->addLink($aCase[0], $code, 'CODE');
+
+            if ($aCase[0]->atom === 'Default') {
+                $this->runPlugins($aCase[0], array( 'CODE' => $code));
+            } else {
+                $this->runPlugins($aCase[0], array('CASE' => $aCase[1],
+                                                   'CODE' => $code));
+            }
+        }
+
+        $children = array('CODE' => $code);
+        if ($case->atom === 'Case') {
+            $children['CASE'] = $item;
+        }
+        $this->runPlugins($case, $children);
+
+        return $case;
+    }
+
     private function processCase(): AtomInterface {
         $current = $this->id;
         $case = $this->addAtom('Case', $current);
@@ -3883,6 +3956,80 @@ class Load extends Tasks {
                 $case->rank = ++$rank;
                 $extraCases[] = $case;
             }
+        }
+        ++$this->id;
+        $cases->count = $rank + 1;
+
+        if ($isColon === self::ALTERNATIVE_SYNTAX) {
+            $fullcode = $this->tokens[$current][1] . ' (' . $name->fullcode . ') :' . self::FULLCODE_SEQUENCE . ' ' . $this->tokens[$this->id][1];
+        } else {
+            $fullcode = $this->tokens[$current][1] . ' (' . $name->fullcode . ')' . self::FULLCODE_BLOCK;
+        }
+
+        $switch->fullcode    = $fullcode;
+        $switch->alternative = $isColon;
+
+        $this->runPlugins($cases, $extraCases);
+
+        $this->runPlugins($switch, array('CONDITION' => $name,
+                                         'CASES'     => $cases, ));
+
+        $this->pushExpression($switch);
+        $this->finishWithAlternative($isColon);
+
+        $this->cases->pop();
+
+        return $switch;
+    }
+
+    private function processMatch(): AtomInterface {
+        $current = $this->id;
+        $switch = $this->addAtom('Match', $current);
+        ++$this->id; // Skip (
+        $this->cases->push();
+
+        do {
+            $name = $this->processNext();
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_PARENTHESIS);
+        $this->popExpression();
+        $this->addLink($switch, $name, 'CONDITION');
+
+        $cases = $this->addAtom('Sequence', $current);
+        $cases->code     = self::FULLCODE_SEQUENCE;
+        $cases->fullcode = self::FULLCODE_SEQUENCE;
+        $cases->bracket  = self::BRACKET;
+
+        $this->addLink($switch, $cases, 'CASES');
+        $extraCases = array();
+        ++$this->id;
+
+        $isColon = $this->whichSyntax($current, $this->id + 1);
+
+        $rank = -1;
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+            // case of an empty Match
+            $void = $this->addAtomVoid();
+            $this->addLink($cases, $void, 'EXPRESSION');
+            $void->rank = $rank;
+            $extraCases[] = $void;
+
+            ++$this->id;
+        } else {
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
+                ++$this->id;
+                $finals = array($this->phptokens::T_CLOSE_CURLY);
+            } else {
+                ++$this->id; // skip :
+                $finals = array($this->phptokens::T_ENDSWITCH);
+            }
+            do {
+                $case = $this->processMatchCase();
+
+                $this->popExpression();
+                $this->addLink($cases, $case, 'EXPRESSION');
+                $case->rank = ++$rank;
+                $extraCases[] = $case;
+            } while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
         }
         ++$this->id;
         $cases->count = $rank + 1;
