@@ -223,6 +223,7 @@ abstract class CouldBeType extends Analyzer {
              ->outIs('DEFAULT')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
+             ->inIsIE('NAME')
              ->outIs('TYPEHINT')
              ->atomIs($atoms)
              ->fullnspathIs($fullnspath)
