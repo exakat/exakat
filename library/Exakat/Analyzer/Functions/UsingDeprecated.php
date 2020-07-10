@@ -25,10 +25,6 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UsingDeprecated extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
     public function dependsOn(): array {
         return array('Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/SetClassRemoteDefinitionWithGlobal',

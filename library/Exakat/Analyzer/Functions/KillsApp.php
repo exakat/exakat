@@ -26,9 +26,20 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class KillsApp extends Analyzer {
+    public function dependsOn(): array {
+        return array('Complete/SetClassRemoteDefinitionWithTypehint',
+                     'Complete/SetClassRemoteDefinitionWithGlobal',
+                     'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
+                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
+                    );
+    }
+    
     public function analyze() {
         // first round : only die and exit
-        $this->atomIs('Function')
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
              ->outIs('EXPRESSION')
@@ -37,25 +48,22 @@ class KillsApp extends Analyzer {
         $this->prepareQuery();
 
         // second round
-        $this->atomIs('Function')
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
              ->outIs('EXPRESSION')
              ->atomIs('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->functionDefinition()
+             ->inIs('DEFINITION')
              ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();
 
         // third round
-        $this->atomIs('Function')
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
              ->outIs('EXPRESSION')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->functionDefinition()
-             ->inIs('NAME')
+             ->atomIs('Functioncall')
              ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();
