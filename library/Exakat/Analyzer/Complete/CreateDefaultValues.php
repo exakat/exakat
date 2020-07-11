@@ -22,6 +22,8 @@
 
 namespace Exakat\Analyzer\Complete;
 
+use Exakat\Query\DSL\FollowParAs;
+
 class CreateDefaultValues extends Complete {
     public function analyze() {
 
@@ -48,7 +50,8 @@ class CreateDefaultValues extends Complete {
                      ->inIsIE('NAME')
                      ->raw('is(eq("first"))')
              )
-             ->followParAs('RIGHT')
+             ->outIs('RIGHT')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
 
              // 'Variableobject', 'Variablearray' are never on the right side of an assignation (not directly)
              ->not(
@@ -60,7 +63,7 @@ class CreateDefaultValues extends Complete {
              )
              ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery();
-        
+
         // With comparisons
         $this->atomIs(array('Variabledefinition',
                             'Staticdefinition',
@@ -96,10 +99,15 @@ class CreateDefaultValues extends Complete {
              ->atomIs('Case')
              ->outIs('CASE')
              ->atomIs(array('Integer', 'String'), self::WITH_CONSTANTS)
+             ->not(
+                $this->side()
+                     ->inIs('DEFAULT')
+                     ->raw('is(neq("first"))')
+             )
              ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery();
 
-        // With foreach
+        // With foreach($a as $v)
         $this->atomIs(array('Variabledefinition',
                             'Staticdefinition',
                             'Globaldefinition',
@@ -114,8 +122,38 @@ class CreateDefaultValues extends Complete {
              ->outIs('SOURCE')
              ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
              ->outIs('ARGUMENT')
-             ->outIsIE('VALUE')
+             ->outIs('VALUE')
              ->atomIs(array('Integer', 'String'), self::WITH_CONSTANTS)
+             ->not(
+                $this->side()
+                     ->inIs('DEFAULT')
+                     ->raw('is(neq("first"))')
+             )
+             ->addEFrom('DEFAULT', 'first');
+        $this->prepareQuery();
+
+        // With foreach($a as $k => $v)
+        $this->atomIs(array('Variabledefinition',
+                            'Staticdefinition',
+                            'Globaldefinition',
+                            'Staticdefinition',
+                            'Virtualproperty',
+                            'Propertydefinition',
+                            'Parametername',
+                            ), self::WITHOUT_CONSTANTS)
+             ->outIs('DEFINITION')
+             ->inIs('INDEX')
+             ->atomIs('Foreach')
+             ->outIs('SOURCE')
+             ->atomIs('Arrayliteral', self::WITH_CONSTANTS)
+             ->outIs('ARGUMENT')
+             ->outIsIE('INDEX')
+             ->atomIs(array('Integer', 'String'), self::WITH_CONSTANTS)
+             ->not(
+                $this->side()
+                     ->inIs('DEFAULT')
+                     ->raw('is(neq("first"))')
+             )
              ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery();
     }
