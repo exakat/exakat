@@ -139,6 +139,7 @@ abstract class CouldBeType extends Analyzer {
              ->outIs('RETURNED')
              ->atomIs('Variable', self::WITH_CONSTANTS)
              ->inIs('DEFINITION')
+             ->inIsIE('NAME')
              ->atomIs('Parameter')
              ->outIs('TYPEHINT')
              ->atomIs($atoms)
