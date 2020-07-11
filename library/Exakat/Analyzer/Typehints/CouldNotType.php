@@ -36,11 +36,11 @@ class CouldNotType extends Analyzer {
                      'Typehints/CouldBeBoolean',
                      'Typehints/CouldBeVoid',
                      'Typehints/CouldBeCallable',
+                     'Typehints/CouldBeInteger',
 
 //                     'Typehints/CouldBeIterable',
 //                     'Typehints/CouldBeStringable',
 //                     'Typehints/CouldBeFloat',
-//                     'Typehints/CouldBeInteger',
 //                     'Typehints/CouldBeNull',
 //                     'Typehints/CouldBeFromPhpdoc',
                     );

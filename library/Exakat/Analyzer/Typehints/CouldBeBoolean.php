@@ -81,7 +81,7 @@ class CouldBeBoolean extends CouldBeType {
              ->analyzerIsNot('self')
              ->outIs('NAME')
              ->outIs('DEFINITION')
-             ->hasIn(array('LEFT', 'RIGHT'))
+             ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs(array('Comparison', 'Logical', 'Not'))
              ->back('result');
         $this->prepareQuery();
