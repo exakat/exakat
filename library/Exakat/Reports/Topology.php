@@ -33,27 +33,35 @@ class Topology extends Reports {
 
         switch($program) {
             case 'dump/typehintorder' :
-                $res = $this->dump->fetchTable('typehintOrder', array('origin'      => 'argument',
-                                                                      'destination' => 'returned',
+                $res = $this->dump->fetchTable('typehintOrder', array('origin'        => 'argument',
+                                                                      'originId'      => 'argument',
+                                                                      'destination'   => 'returned',
+                                                                      'destinationId' => 'returned',
                                                                       ));
                 break;
 
             case 'dump/callorder' :
-                $res = $this->dump->fetchTable('callOrder', array('origin'      => 'calling',
-                                                                  'destination' => 'called',
+                $res = $this->dump->fetchTable('callOrder', array('origin'        => 'calledName',
+                                                                  'originId'      => 'called',
+                                                                  'destination'   => 'callingName',
+                                                                  'destinationId' => 'calling',
                                                                   ));
                 break;
 
             default :
             case 'dump/neworder' :
-                $res = $this->dump->fetchTable('newOrder', array('origin'      => 'calling',
-                                                                 'destination' => 'called',
+                $res = $this->dump->fetchTable('newOrder', array('origin'        => 'calling',
+                                                                 'originId'      => 'calling',
+                                                                 'destination'   => 'calling',
+                                                                 'destinationId' => 'calling',
                                                                  ));
                 break;
         }
 
         $names = array();
-        foreach($res->toArray() as $id => list('origin' => $origin, 'destination' => $destination)) {
+        foreach($res->toArray() as $id => list('origin'      => $origin,      'originId'      => $originId, 
+                                               'destination' => $destination, 'destinationId' => $destinationId, 
+                                               )) {
             if (strpos($origin, '@') !== false ||
                 strpos($destination, '@') !== false
                 ) {
@@ -62,11 +70,11 @@ class Topology extends Reports {
             }
 
             if (!isset($names[$origin] )) {
-                $names[] = $origin;
+                $names[$originId] = $origin;
             }
 
             if (!isset($names[$destination] )) {
-                $names[] = $destination;
+                $names[$destinationId] = $destination;
             }
         }
 
@@ -79,10 +87,11 @@ class Topology extends Reports {
         $dot->setOptions('node', 'colorscheme', 'paired12');
 
         $names2 = array();
-        $atoms = array_map(function ($id, $name) use ($dot, &$names2) {
+        $color = 0;
+        $atoms = array_map(function ($id, $name) use ($dot, &$names2, &$color) {
             $d = explode('\\', $name);
             $name2 = array_pop($d);
-            $color = 1 + $id % 11;
+            $color = 1 + ($color++) % 11;
             $names2[$name] = $dot->addNode($name2, array('fillcolor' => $color));
         },
                             array_values($names),
