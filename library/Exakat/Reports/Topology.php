@@ -29,15 +29,23 @@ class Topology extends Reports {
     const FILE_FILENAME  = 'exakat.topology';
 
     public function _generate(array $analyzerList): string {
-        switch($this->config->program) {
-            case 'Dump/Typehintorder' :
+        $program = strtolower($this->config->program);
+
+        switch($program) {
+            case 'dump/typehintorder' :
                 $res = $this->dump->fetchTable('typehintOrder', array('origin'      => 'argument',
                                                                       'destination' => 'returned',
                                                                       ));
                 break;
 
+            case 'dump/callorder' :
+                $res = $this->dump->fetchTable('callOrder', array('origin'      => 'calling',
+                                                                  'destination' => 'called',
+                                                                  ));
+                break;
+
             default :
-            case 'Dump/NewOrder' :
+            case 'dump/neworder' :
                 $res = $this->dump->fetchTable('newOrder', array('origin'      => 'calling',
                                                                  'destination' => 'called',
                                                                  ));
@@ -84,7 +92,7 @@ class Topology extends Reports {
         $names = $names2;
 
         $links = array();
-        foreach($nodes as list('origin' => $origin, 'destination' => $destination)) {
+        foreach($res->toArray() as list('origin' => $origin, 'destination' => $destination)) {
             $dot->addLink($names[$destination], $names[$origin]);
         }
 

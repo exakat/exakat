@@ -6,6 +6,7 @@ use Exakat\Phpexec;
 use Exakat\Dump\Dump;
 use Exakat\Analyzer\Rulesets;
 use Exakat\Analyzer\Dump\AnalyzerHashAnalyzer;
+use Exakat\Analyzer\Dump\AnalyzerTable;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestSuite;
 use Exakat\Autoload\AutoloadExt;
@@ -157,7 +158,7 @@ abstract class Analyzer extends TestCase {
             $this->checkTestOnFullarray($res, $expected, $expected_not);
         } elseif (isset($res[0]['including'])) {
             $this->checkTestOnFullarray($res, $expected, $expected_not);
-        } elseif (isset($res[0]['host'])) {
+        } elseif ($analyzerobject instanceof AnalyzerTable) {
             $this->checkTestOnFullarray($res, $expected, $expected_not);
         } else {
             print "How shall we test this?\n";
@@ -201,10 +202,10 @@ abstract class Analyzer extends TestCase {
     }
     
     private function checkTestOnFullarray(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
-        $list = array_map(function(array $x) : array { unset($x['id']); return $x;}, $list);
+        $list  = array_map(function(array $x) : array { unset($x['id']); return $x;}, $list);
         $list2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $list);
 
-        $expected2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected);
+        $expected2     = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected);
         $expected_not2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected_not);
 
         $display = array();
