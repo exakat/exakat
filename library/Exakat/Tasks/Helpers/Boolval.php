@@ -124,9 +124,9 @@ class Boolval extends Plugin {
 
             case 'Addition' :
                 if ($atom->code === '+') {
-                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean + (int) $extras['RIGHT']->boolean);
+                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->code + (int) $extras['RIGHT']->code);
                 } elseif ($atom->code === '-') {
-                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean - (int) $extras['RIGHT']->boolean);
+                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->code - (int) $extras['RIGHT']->code);
                 }
                 break;
 
