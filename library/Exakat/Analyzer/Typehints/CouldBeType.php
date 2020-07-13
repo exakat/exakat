@@ -127,6 +127,7 @@ abstract class CouldBeType extends Analyzer {
     protected function checkReturnedAtoms(array $atoms = array()) : void { 
         // return array(1,2,3)
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->outIs('RETURNED')
              ->atomIs($atoms, self::WITH_CONSTANTS)
              ->back('first');
@@ -136,6 +137,7 @@ abstract class CouldBeType extends Analyzer {
     protected function checkReturnedTypehint(array $atoms = array(), array $fullnspath = array()) : void { 
         // function foo (array $a) { return $a;}
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->outIs('RETURNED')
              ->atomIs('Variable', self::WITH_CONSTANTS)
              ->inIs('DEFINITION')
@@ -151,6 +153,7 @@ abstract class CouldBeType extends Analyzer {
     protected function checkReturnedDefault(array $atoms = array()) : void { 
         // return array(1,2,3)
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->outIs('RETURNED')
              ->atomIs('Variable', self::WITH_CONSTANTS)
              ->inIs('DEFINITION')
@@ -165,6 +168,7 @@ abstract class CouldBeType extends Analyzer {
     protected function checkReturnedCalls(array $atoms = array(), array $fullnspath = array()) : void { 
         // return array(1,2,3)
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->outIs('RETURNED')
              ->atomIs(self::CALLS, self::WITH_VARIABLES)
              ->inIs('DEFINITION')
