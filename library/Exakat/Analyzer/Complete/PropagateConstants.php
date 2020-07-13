@@ -458,7 +458,7 @@ GREMLIN
                      ->outIs('CODE')
                      ->hasNo('intval')
              )
-             ->raw('where( __.out("CODE").sideEffect{ x = it.get() }.count() )')
+             ->raw('where( __.out("CODE").sideEffect{ x = it.get() }.fold() )')
              ->raw(<<<'GREMLIN'
 sideEffect{ 
     it.get().property("intval", x.value("intval")); 
