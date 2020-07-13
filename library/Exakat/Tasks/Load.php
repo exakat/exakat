@@ -4812,8 +4812,10 @@ class Load extends Tasks {
             $this->contexts->nestContext(Context::CONTEXT_NOSEQUENCE);
             do {
                 $origin = $this->processOneNsname();
+                $this->checkPhpdoc();
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON) {
                     ++$this->id; // skip ::
+                    $this->checkPhpdoc();
                     $method =  $this->processNextAsIdentifier();
 
                     $class = $origin;
@@ -4828,8 +4830,9 @@ class Load extends Tasks {
                 }
                 $this->pushExpression($origin);
 
+                $this->checkPhpdoc();
                 ++$this->id;
-                // instead of ?
+
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AS) {
                     $this->processAsTrait();
                 } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_INSTEADOF) {
@@ -4840,6 +4843,7 @@ class Load extends Tasks {
 
                 $this->processSemicolon(); // ;
                 ++$this->id;
+                $this->checkPhpdoc();
             } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY);
             $this->contexts->exitContext(Context::CONTEXT_NOSEQUENCE);
             ++$this->id;
