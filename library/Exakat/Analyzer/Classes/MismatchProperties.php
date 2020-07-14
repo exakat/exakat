@@ -43,7 +43,7 @@ class MismatchProperties extends Analyzer {
              ->inIs('PPP')
              ->isNot('visibility', 'private')
              ->collectTypehints('types2')
-             ->raw('filter{ types2.findAll{ it != "\\\\null"}.sort(false) != types.findAll{ it != "\\\\null"}.sort(false); }')
+             ->raw('filter{ types2.sort(false) != types.sort(false); }')
              ->back('first');
         $this->prepareQuery();
     }
