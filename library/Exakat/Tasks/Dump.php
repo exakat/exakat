@@ -714,7 +714,7 @@ GREMLIN
          "final":it.get().properties("final").any(),
          "static":it.get().properties("static").any(),
          "reference":it.get().properties("reference").any(),
-         "returntype": returntype.join("|").replaceAll('\\\\?\\\\|', '?'),
+         "returntype":returntype.join('|').replaceAll('\\\\?\\\\|', '?').replaceAll('^(.*)\\\\|$', '?$1'),
          "returntype_fnp": returntype_fnp.join("|"),
 
          "public":    it.get().value("visibility") == "public",
@@ -813,7 +813,7 @@ sideEffect{
          "classline": classline,
 
          "init": init,
-         "typehint":typehint.join('|').replaceAll('\\?\\|', '?'),
+         "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
          "typehint_fnp": typehint_fnp.join('|'),
          "phpdoc": phpdoc,
          ];
@@ -884,7 +884,7 @@ g.V().hasLabel("Propertydefinition").as("property")
     "value": init,
     "phpdoc":phpdoc,
     "classline":classline,
-    "typehint":typehint.join('|').replaceAll('\\?\\|', '?'),
+    "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
     "typehint_fnp": typehint_fnp.join('|')
     ];
 }
@@ -1167,7 +1167,7 @@ map{ ["name":name,
       "namespace":namespace, 
       "fullnspath":fullnspath, 
       "reference":reference,
-      "returntype":returntype.join('|').replaceAll('\\?\\|', '?'),
+      "returntype":returntype.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
       "returntype_fnp":returntype_fnp.join('|'),
       "begin": lines.min(), 
       "end":lines.max(),
@@ -1259,7 +1259,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
          "function":fonction,
 
          "init": init,
-         "typehint":typehint.join('|').replaceAll('\\?\\|', '?'),
+         "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
          "typehint_fnp":typehint_fnp.join('|'),
          "phpdoc":phpdoc,
          ];
