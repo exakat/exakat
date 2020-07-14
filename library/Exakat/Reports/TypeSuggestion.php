@@ -176,7 +176,27 @@ HTML;
         if (empty($array)) {
             return '&nbsp;';
         }
-        return '<ul><li>' . implode("</li>\n<li>", $array) . '</li></ul>';
+        
+        $translation = array('CouldBeString'    => 'string',
+                              'CouldBeBoolean'  => 'bool',
+                              'CouldBeNull'     => 'null',
+                              'CouldBeFloat'    => 'float',
+                              'CouldBeInt'      => 'int',
+                              'CouldBeArray'    => 'array',
+                              'CouldBeCallable' => 'callable',
+                              'CouldBeIterable' => 'iterable',
+                              'CouldBeVoid'     => 'void',
+                              'CouldBeInt'      => 'int',
+                              'CouldBeCIT'      => 'Class, Interface',
+                              
+                              );
+        
+        foreach($array as &$item) {
+            $item = $translation[$item] ?? $item;
+        }
+        unset($item);
+        
+        return '<dl><dd>' . implode("</dd>\n<dd>", $array) . '</dd></dl>';
     }
     
     private function getClassId(string $description) : int {
