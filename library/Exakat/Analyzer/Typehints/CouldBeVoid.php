@@ -28,6 +28,7 @@ class CouldBeVoid extends Analyzer {
     public function analyze() {
         // function foo() {} (no return)
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->isNot('abstract', true)
              ->not(
                 $this->side()
                      ->outIs('RETURNED')
