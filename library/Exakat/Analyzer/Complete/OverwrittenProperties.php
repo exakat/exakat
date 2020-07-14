@@ -36,10 +36,25 @@ class OverwrittenProperties extends Complete {
               ->outIs('PPP')
               ->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
               ->samePropertyAs('propertyname', 'name',  self::CASE_SENSITIVE)
-              ->raw('where(neq("first"))')
+              ->distinctFrom('first')
               ->as('origin')
               ->dedup(array('first', 'origin'))
               ->addEFrom('OVERWRITE', 'first');
+        $this->prepareQuery();
+
+        // synch properties/virtual properties visibility
+        $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
+              ->inIs('PPP')
+              ->is('visibility', 'protected')
+              ->back('first')
+              ->inIs('OVERWRITE')
+              ->atomIs('Virtualproperty')
+              ->inIs('PPP')
+              ->raw(<<<GREMLIN
+ property("visibility", "protected")
+.sideEffect{ it.get().property("fullcode", it.get().property("fullcode").value().toString().replace("public ", "protected "));}
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

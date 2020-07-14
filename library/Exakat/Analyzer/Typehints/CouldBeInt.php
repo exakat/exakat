@@ -29,6 +29,7 @@ class CouldBeInt extends CouldBeType {
     public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                      'Complete/CreateDefaultValues',
+                     'Complete/OverwrittenProperties',
                     );
     }
 

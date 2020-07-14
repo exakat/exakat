@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -25,6 +25,10 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Query\DSL\FollowParAs;
 
 class CreateDefaultValues extends Complete {
+    public function dependsOn() : array { 
+        return array( 'Complete/OverwrittenProperties',
+                    );
+    }
     public function analyze() {
 
         // Link initial values for containers
@@ -154,6 +158,20 @@ class CreateDefaultValues extends Complete {
                      ->inIs('DEFAULT')
                      ->raw('is(neq("first"))')
              )
+             ->addEFrom('DEFAULT', 'first');
+        $this->prepareQuery();
+
+        // propagate virtualproperties to original definition
+        // This one must be the final of this analysis
+        $this->atomIs(array('Propertydefinition'), self::WITHOUT_CONSTANTS)
+             ->inIs('OVERWRITE')
+             ->outIs('DEFAULT')
+             ->not(
+                $this->side()
+                     ->inIs('DEFAULT')
+                     ->raw('is(neq("first"))')
+             )
+             ->atomIsNot('Void')
              ->addEFrom('DEFAULT', 'first');
         $this->prepareQuery();
     }

@@ -2825,7 +2825,7 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
 Below, is a list of classes that may be updated with final or abstract. <br />
 
 The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
@@ -2906,6 +2906,7 @@ HTML
         $res->filter(function (array $x): bool { return $x['type'] === 'class'; });
 
         $ranking = array(''          => 0,
+                         'none'      => 0,
                          'public'    => 1,
                          'protected' => 2,
                          'private'   => 3);
@@ -3087,6 +3088,7 @@ HTML
 
         $theClass = '';
         $ranking = array(''          => 1,
+                         'none'      => 1,
                          'public'    => 2,
                          'protected' => 3,
                          'private'   => 4,
