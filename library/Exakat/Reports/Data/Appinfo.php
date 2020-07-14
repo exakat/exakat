@@ -49,6 +49,7 @@ class Appinfo extends Data {
 
                             'Goto'                          => 'Php/Gotonames',
                             'Labels'                        => 'Php/Labelnames',
+                            'Match'                         => 'Php/UseMatch',
 
                             'Coalesce'                      => 'Php/Coalesce',
                             'Coalesce Equal'                => 'Php/CoalesceEqual',

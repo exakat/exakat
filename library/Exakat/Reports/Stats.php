@@ -49,6 +49,7 @@ class Stats extends Reports {
                         'Ifthen'              => 'Ifthen',
                         'Else'                => 'Structures/ElseUsage',
                         'Switch'              => 'Switch',
+                        'Match'               => 'Match',
                         'Case'                => 'Case',
                         'Default'             => 'Default',
                         'Fallthrough'         => 'Structures/Fallthrough',

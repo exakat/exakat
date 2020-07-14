@@ -1622,6 +1622,7 @@ JAVASCRIPTCODE;
         $versions = array_reverse($versions);
 
         $analyzers = array(
+                            'Php/UseMatch'                          => '8.0+',
                             'Php/SignatureTrailingComma'            => '8.0+',
                             'Php/Php80OnlyTypeHints'                => '8.0+',
                             'Php/Php80UnionTypehint'                => '8.0+',

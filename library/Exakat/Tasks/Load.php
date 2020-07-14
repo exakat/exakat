@@ -3867,7 +3867,7 @@ class Load extends Tasks {
             ++$this->id; // Skip :
         }
 
-        $case->fullcode = $this->tokens[$current][1] . ' ' . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
+        $case->fullcode = $this->tokens[$current][1] . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
                                                             $this->phptokens::T_CASE,
