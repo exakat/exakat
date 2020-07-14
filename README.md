@@ -17,15 +17,15 @@ The quick installation guide is the following (command line, MacOS. See docs for
 ```bash
 mkdir exakat
 cd exakat
-curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-curl -o apache-tinkerpop-gremlin-server-3.3.6-bin.zip http://dist.exakat.io/apache-tinkerpop-gremlin-server-3.3.6-bin.zip
-unzip apache-tinkerpop-gremlin-server-3.3.6-bin.zip
-mv apache-tinkerpop-gremlin-server-3.3.6 tinkergraph
-rm -rf apache-tinkerpop-gremlin-server-3.3.6-bin.zip
+curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
+curl -o apache-tinkerpop-gremlin-server-3.4.7-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.7-bin.zip
+unzip apache-tinkerpop-gremlin-server-3.4.7-bin.zip
+mv apache-tinkerpop-gremlin-server-3.4.7 tinkergraph
+rm -rf apache-tinkerpop-gremlin-server-3.4.7-bin.zip
 
 # Optional : install neo4j engine.
 cd tinkergraph
-./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.3.6
+./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.4.7
 cd ..
 
 php exakat.phar doctor
