@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array('$this->withoutDefault',
+$expected     = array('$withoutDefault',
                      );
 
-$expected_not = array('$this->resetInAnotherMethod',
+$expected_not = array('$resetInAnotherMethod',
                       '$withDefaultAndIntact',
-                      '$this->assignedWithVariable',
-                      '$this->withDefaultButRedefined',
-                      '$this->undefinedProperty',
-                      '$this->arrayWithDefault[2]',
+                      '$assignedWithVariable',
+                      '$withDefaultButRedefined',
+                      '$undefinedProperty',
+                      '$arrayWithDefault',
                      );
 
 ?>

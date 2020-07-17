@@ -34,26 +34,20 @@ class MakeDefault extends Analyzer {
     public function analyze() {
         // class x { private $y; }
         $this->atomIs(self::CLASSES_ALL)
-             ->outIs('MAGICMETHOD')
-             ->atomIs('Magicmethod')
-             ->outIs('NAME')
-             ->codeIs('__construct')
-             ->inIs('NAME')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Assignation')
-             ->as('assignation')
-             ->codeIs('=')
-             ->outIs('RIGHT')
-             ->is('constant', true)
-             ->inIs('DEFAULT')
+             ->outIs('PPP')
+             ->outIs('PPP')
              ->atomIs('Propertydefinition')
-             ->not(
+             ->filter(
                 $this->side()
                      ->outIs('DEFAULT')
-                     ->hasNoIn('RIGHT')
+                     ->hasIn('RIGHT')
+                     ->is('constant', true)
              )
-             ->back('assignation')
-             ->outIs('LEFT');
+             ->filter(
+                $this->side()
+                     ->outIs('DEFAULT')
+                     ->atomIs('Void')
+             );
         $this->prepareQuery();
     }
 }

@@ -1,13 +1,14 @@
 <?php
 
-$expected     = array('$this->c',
-                      '$this->e2',
-                      '$this->f',
+$expected     = array('$c',
+                      '$e2',
+                      '$e',
+                      '$f',
                      );
 
-$expected_not = array('$this->b',
-                      '$this->d',
-                      '$THIS->f',
+$expected_not = array('$b',
+                      '$d',
+                      '$f',
                      );
 
 ?>
