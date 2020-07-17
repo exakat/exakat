@@ -8,6 +8,7 @@ $expected     = array('function byRelay( ) { /**/ } ',
                       'function byAtoms( ) { /**/ } ',
                       'function byAtoms2( ) { /**/ } ',
                       'function byAtoms3( ) { /**/ } ',
+                      'function byTypedArg(string $a1) { /**/ } ',
                      );
 
 $expected_not = array('function bar( ) : string { /**/ } ',
