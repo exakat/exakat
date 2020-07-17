@@ -224,7 +224,8 @@ class Load extends Tasks {
     private $stats = array('loc'       => 0,
                            'totalLoc'  => 0,
                            'files'     => 0,
-                           'tokens'    => 0);
+                           'tokens'    => 0,
+                          );
 
     public function __construct(bool $subtask = self::IS_NOT_SUBTASK) {
         parent::__construct($subtask);
@@ -4458,7 +4459,7 @@ class Load extends Tasks {
         $namespace = $this->addAtom('Namespace', $current);
         $this->makePhpdoc($namespace);
         $this->addLink($namespace, $name, 'NAME');
-        $this->setNamespace($name->fullcode);
+        $this->setNamespace($name->fullcode === " " ? self::NO_NAMESPACE : $name->fullcode);
 
         // Here, we make sure namespace is encompassing the next elements.
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
@@ -4632,7 +4633,7 @@ class Load extends Tasks {
 
                 $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
 
-                if (($use2 = $this->uses->get('class', $prefix)) instanceof Atom) {
+                if (($use2 = $this->uses->get('class', $prefix)) instanceof AtomInterface) {
                     $this->addLink($as, $use2, 'DEFINITION');
                 }
                 $this->addLink($use, $as, 'USE');
@@ -4731,7 +4732,7 @@ class Load extends Tasks {
                 $namespace->fullnspath = $fullnspath;
                 $namespace->origin     = $fullnspath;
 
-                if (($use2 = $this->uses->get('class', $prefix)) instanceof Atom) {
+                if (($use2 = $this->uses->get('class', $prefix)) instanceof AtomInterface) {
                     $this->addLink($namespace, $use2, 'DEFINITION');
                 }
 
@@ -5606,7 +5607,7 @@ class Load extends Tasks {
             $this->runPlugins($left);
             $this->runPlugins($static, array('CLASS' => $left));
             // This should actually be the value of any USE statement
-            if (($use = $this->uses->get('class', mb_strtolower($left->fullcode))) instanceof Atom) {
+            if (($use = $this->uses->get('class', mb_strtolower($left->fullcode))) instanceof AtomInterface) {
                 $noDelimiter = $use->fullcode;
                 if (($length = strpos($noDelimiter, ' ')) !== false) {
                     $noDelimiter = substr($noDelimiter, 0, $length);
@@ -6353,7 +6354,7 @@ class Load extends Tasks {
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             if ($type === 'const') {
-                if (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof Atom) {
+                if (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof AtomInterface) {
                     $apply->fullnspath = mb_strtolower($name->fullnspath);
                     $apply->aliased = self::NOT_ALIASED;
                     return;
@@ -6426,25 +6427,25 @@ class Load extends Tasks {
             }
 
             // This is an identifier, self or parent
-            if ($type === 'class' && ($use = $this->uses->get('class',mb_strtolower($fnp) )) instanceof Atom) {
+            if ($type === 'class' && ($use = $this->uses->get('class',mb_strtolower($fnp) )) instanceof AtomInterface) {
                 $this->addLink($name, $use, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath;
                 $apply->aliased = self::ALIASED;
                 return;
 
-            } elseif ($type === 'class' && ($use = $this->uses->get('class', $prefix)) instanceof Atom) {
+            } elseif ($type === 'class' && ($use = $this->uses->get('class', $prefix)) instanceof AtomInterface) {
                 $this->addLink($name, $use, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath . str_replace($prefix, '', $fnp);
                     $apply->aliased = self::ALIASED;
                     return;
 
             } elseif ($type === 'const') {
-                if (($use = $this->uses->get('const', $name->code)) instanceof Atom) {
+                if (($use = $this->uses->get('const', $name->code)) instanceof AtomInterface) {
                     $this->addLink($use, $name, 'DEFINITION');
                     $apply->fullnspath = $use->fullnspath;
                     $apply->aliased = self::ALIASED;
                     return;
-                } elseif (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof Atom) {
+                } elseif (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof AtomInterface) {
                     $apply->fullnspath = mb_strtolower($name->fullnspath);
                     $apply->aliased = self::NOT_ALIASED;
                     return;
@@ -6454,7 +6455,7 @@ class Load extends Tasks {
                     return;
                 }
 
-            } elseif ($type === 'function' && ($use = $this->uses->get('function', $prefix)) instanceof Atom) {
+            } elseif ($type === 'function' && ($use = $this->uses->get('function', $prefix)) instanceof AtomInterface) {
                 $this->addLink($use, $name, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath;
                 $apply->aliased = self::ALIASED;
@@ -6472,7 +6473,7 @@ class Load extends Tasks {
                     $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
                     $apply->aliased = self::NOT_ALIASED;
                     return;
-                } elseif ($this->currentClassTrait[count($this->currentClassTrait) - 1] instanceof Atom) {
+                } elseif ($this->currentClassTrait[count($this->currentClassTrait) - 1] instanceof AtomInterface) {
                     $apply->fullnspath = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
                     $apply->aliased = self::NOT_ALIASED;
                     return;
@@ -6495,7 +6496,7 @@ class Load extends Tasks {
             // Finally, the case for a nsname
             $prefix = mb_strtolower( substr($name->code, 0, strpos($name->code . '\\', '\\')) );
 
-            if (($use = $this->uses->get($type, $prefix)) instanceof Atom) {
+            if (($use = $this->uses->get($type, $prefix)) instanceof AtomInterface) {
                 $this->addLink( $name, $use, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath . mb_strtolower( substr($name->fullcode, strlen($prefix)) ) ;
                     $apply->aliased = self::NOT_ALIASED;
