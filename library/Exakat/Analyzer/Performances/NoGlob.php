@@ -43,12 +43,12 @@ class NoGlob extends Analyzer {
         // glob() with second argument (without GLOB_NOSORT)
         $this->atomFunctionIs('\\glob')
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs('Logical')
+             ->atomIs('Bitoperation')
              ->not(
                 $this->side()
                      ->outIs(array('LEFT', 'RIGHT'))
-                     ->atomis(array('Identifier', 'Nsname'))
-                     ->fullnspathIs('\\GLOB_NOSORT')
+                     ->atomIs(array('Identifier', 'Nsname'))
+                     ->fullnspathIs('\\GLOB_NOSORT', self::CASE_INSENSITIVE)
              )
              ->back('first');
         $this->prepareQuery();
