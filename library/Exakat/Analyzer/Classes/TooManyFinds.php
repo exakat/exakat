@@ -25,19 +25,46 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class TooManyFinds extends Analyzer {
+    protected $minimumFinds = 5;
+    protected $findSuffix   = '';
+    protected $findPrefix   = 'find';
+    
     public function analyze() {
         // class x { function findY() {}}
-        $this->atomIs(self::CIT)
-             ->filter(
-                $this->side()
-                     ->outIs('METHOD')
-                     ->atomIs('Method')
-                     ->outIs('NAME')
-                     ->regexIs('fullcode', '^find.+?')
-                     ->count()
-                     ->raw('is(gt(5))')
-             );
-        $this->prepareQuery();
+        // suffix version
+        if (!empty($this->findSuffix)) {
+            $suffixes = str2array($this->findSuffix);
+            $this->atomIs(self::CIT)
+                 ->analyzerIsNot('self')
+                 ->filter(
+                    $this->side()
+                         ->outIs('METHOD')
+                         ->atomIs('Method')
+                         ->outIs('NAME')
+                         ->regexIs('fullcode', '(?i)('.implode('|', $suffixes).')\\$')
+                         ->count()
+                         ->raw('is(gte('.$this->minimumFinds.'))')
+                 );
+            $this->prepareQuery();
+        }
+
+        // class x { function findY() {}}
+        // prefix version
+        if (!empty($this->findPrefix)) {
+            $prefixes = str2array($this->findPrefix);
+            $this->atomIs(self::CIT)
+                 ->analyzerIsNot('self')
+                 ->filter(
+                    $this->side()
+                         ->outIs('METHOD')
+                         ->atomIs('Method')
+                         ->outIs('NAME')
+                         ->regexIs('fullcode', '^(?i)('.implode('|', $prefixes).').+?')
+                         ->count()
+                         ->raw('is(gte('.$this->minimumFinds.'))')
+                 );
+            $this->prepareQuery();
+        }
     }
 }
 
