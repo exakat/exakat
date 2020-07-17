@@ -40,7 +40,7 @@ class ErrorMessages extends Analyzer {
         $this->atomIs('Exit')
              ->outWithRank('ARGUMENT', 0)
              ->outIsIE('CODE') // parenthesis for exit
-             ->atomIs($messages);
+             ->atomIs($messages, self::WITH_VARIABLES);
         $this->prepareQuery();
 
         //  new \Exception('Message');
@@ -50,13 +50,13 @@ class ErrorMessages extends Analyzer {
              ->atomIs('Newcall')
              ->analyzerIs('Exceptions/IsPhpException')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs($messages);
+             ->atomIs($messages, self::WITH_VARIABLES);
         $this->prepareQuery();
 
         //  new $exception('Message');
         $this->atomIs('Throw')
              ->outIs('THROW')
-             ->atomIs('New')
+             ->atomIs('New', self::WITH_VARIABLES)
              ->outIs('NEW')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
@@ -65,15 +65,14 @@ class ErrorMessages extends Analyzer {
         //  new myException('Message');
         $this->atomIs('New')
              ->hasNoIn('THROW')
+             ->atomIs('New', self::WITH_VARIABLES)
              ->outIs('NEW')
              ->as('new')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->isNot('fullnspath', null)
-             ->classDefinition()
+             ->inIs('DEFINITION')
              ->analyzerIs('Exceptions/DefinedExceptions')
              ->back('new')
              ->outIs('ARGUMENT')
-             ->atomIs($messages);
+             ->atomIs($messages, self::WITH_VARIABLES);
         $this->prepareQuery();
     }
 }
