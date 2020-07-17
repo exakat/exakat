@@ -1,13 +1,10 @@
 <?php
 
-$expected     = array(array('key' => 12.2,
-                            'value' => 18),
-                      array('key' => 1.1,
-                            'value' => 15),
+$expected     = array(12.2 => 18,
+                      1.1  => 15,
                      );
 
-$expected_not = array('11',
-                      '1',
+$expected_not = array(11 => 1,
                      );
 
 ?>
