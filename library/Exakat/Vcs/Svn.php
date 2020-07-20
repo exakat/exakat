@@ -120,6 +120,16 @@ class Svn extends Vcs {
         display("No support for line diff in SVN.\n");
         return array();
     }
+
+    public function getLastCommitDate() : int {
+        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} log -l1 2>&1"));
+
+        if (preg_match('/ \d{4}.+\d{4} /m', $res, $r)) {
+            return strtotime($r[0]);
+        } else {
+            return 0;
+        }
+    }
 }
 
 ?>
