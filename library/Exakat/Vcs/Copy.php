@@ -34,7 +34,7 @@ class Copy extends Vcs {
         copyDir($source, $this->destinationFull);
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('vcs'       => 'copy',
                         'revision'  => 'N/A',
                         'updatable' => false,

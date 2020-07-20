@@ -107,7 +107,7 @@ class Svn extends Vcs {
         return $stats;
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('vcs'       => 'svn',
                         'revision'  => $this->getRevision(),
                         'updatable' => false

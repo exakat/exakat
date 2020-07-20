@@ -85,7 +85,7 @@ class Bazaar extends Vcs {
         return $stats;
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('vcs'       => 'bzr',
                         'branch'    => $this->getBranch(),
                         'revision'  => $this->getRevision(),

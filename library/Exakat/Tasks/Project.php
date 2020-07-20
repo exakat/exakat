@@ -92,11 +92,11 @@ class Project extends Tasks {
                                'project' => $this->config->project));
 
         $audit_start = time();
-        $this->datastore->addRow('hash', array('audit_start'     => $audit_start,
-                                               'exakat_version'  => Exakat::VERSION,
-                                               'exakat_build'    => Exakat::BUILD,
-                                               'php_version'     => $this->config->phpversion,
-                                               'audit_name'      => $this->generateName(),
+        $this->datastore->addRow('hash', array('audit_start'      => $audit_start,
+                                               'exakat_version'   => Exakat::VERSION,
+                                               'exakat_build'     => Exakat::BUILD,
+                                               'php_version'      => $this->config->phpversion,
+                                               'audit_name'       => $this->generateName()
                                          ));
 
         $info = array();
@@ -114,6 +114,7 @@ class Project extends Tasks {
                 $info['vcs_revision']      = $vcs->getRevision();
                 $this->getLineDiff($info['vcs_revision'], $vcs);
             }
+            $info['code_last_commit']      = $vcs->getLastCommitDate();
         }
 
         $info['stubs_config'] = json_encode($this->config->stubs);

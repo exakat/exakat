@@ -35,7 +35,7 @@ class Symlink extends Vcs {
         symlink($source, $this->destinationFull);
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('vcs'       => 'symlink',
                         'updatable' => false
                        );

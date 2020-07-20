@@ -112,7 +112,7 @@ abstract class Vcs {
         }
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('updatable' => false,
                        );
 
@@ -130,6 +130,11 @@ abstract class Vcs {
     public function getFileModificationLoad(): array {
         return array();
     }
+
+    public function getLastCommitDate() : int {
+         return 0;
+    }
+
 }
 
 ?>

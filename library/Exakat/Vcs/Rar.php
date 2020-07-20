@@ -70,7 +70,7 @@ class Rar extends Vcs {
         return $stats;
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('vcs'       => 'rar',
                         'updatable' => false
                        );

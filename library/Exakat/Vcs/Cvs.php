@@ -90,7 +90,7 @@ class Cvs extends Vcs {
         return $stats;
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('vcs'       => 'cvs',
                         'revision'  => $this->getRevision(),
                         'updatable' => false

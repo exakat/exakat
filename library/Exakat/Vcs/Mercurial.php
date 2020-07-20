@@ -76,7 +76,7 @@ class Mercurial extends Vcs {
         return trim(substr($res, 8), " *\n");
     }
 
-    public function getStatus() {
+    public function getStatus() : array {
         $status = array('vcs'       => 'hg',
                         'branch'    => $this->getBranch(),
                         'revision'  => $this->getRevision(),
