@@ -69,7 +69,7 @@ class Install extends Tasks {
             print "Neo4j for Tinkergraph installed\n";
         }
 
-        print shell_exec('php exakat.phar doctor');
+        print shell_exec(PHP_BINARY.' '.$this->config->executable.' doctor');
     }
 }
 
