@@ -403,11 +403,11 @@ abstract class GraphElements {
                                        'Yieldfrom'                 => array('YIELD'),
                                 );
 
-    public static function linksAsList() {
+    public static function linksAsList() : string {
         return makeList(self::$LINKS);
     }
 
-    public static function linksDownAsList() {
+    public static function linksDownAsList() : string {
         return makeList(self::$LINKS_DOWN);
     }
 }

@@ -44,11 +44,11 @@ class Analyze extends Tasks {
     private $php = null;
     private $analyzed = array();
 
-    public function setConfig($config) {
+    public function setConfig($config) : void {
         $this->config = $config;
     }
 
-    public function run() {
+    public function run() : void {
         if (!$this->config->project->validate()) {
             throw new InvalidProjectName($this->config->project->getError());
         }
@@ -165,13 +165,14 @@ class Analyze extends Tasks {
         }
     }
 
-    private function analyze(Analyzer $analyzer, string $analyzer_class) {
+    private function analyze(Analyzer $analyzer, string $analyzer_class) : int {
         $begin = microtime(true);
 
         $lock = new Lock($this->config->tmp_dir, $analyzer_class);
         if (!$lock->check()) {
             display("Concurency lock activated for $analyzer_class\n");
-            return false;
+
+            return 0;
         }
 
         if (isset($this->analyzed[$analyzer_class]) && $this->config->noRefresh === true) {
@@ -255,7 +256,7 @@ class Analyze extends Tasks {
         return $total_results;
     }
 
-    private function checkAnalyzed() {
+    private function checkAnalyzed() : void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "count").select("analyzer", "count").by("analyzer").by("count");
 GREMLIN;

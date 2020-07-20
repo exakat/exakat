@@ -96,7 +96,7 @@ class Mercurial extends Vcs {
 
         //date:        Wed Jun 23 11:19:15 2010 -0700
         if (preg_match('/date:\s+(\S.+\d{4})/m', $res, $r)) {
-            return strtotime($r[0]);
+            return strtotime($r[1]);
         } else {
             return 0;
         }

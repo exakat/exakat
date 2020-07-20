@@ -60,7 +60,7 @@ class Clean extends Tasks {
                                   'faceted2.zip',
                                  );
 
-    public function run() {
+    public function run() : void {
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }

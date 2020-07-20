@@ -42,7 +42,7 @@ class FindExternalLibraries extends Tasks {
     private $classicTests      = array();
     private $classic           = array();
 
-    public function __construct($subTask = self::IS_NOT_SUBTASK) {
+    public function __construct(bool $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($subTask);
 
         $json = json_decode(file_get_contents("{$this->config->dir_root}/data/externallibraries.json"));
@@ -62,7 +62,7 @@ class FindExternalLibraries extends Tasks {
         }
     }
 
-    public function run() {
+    public function run() : void {
         $project = $this->config->project;
         if ($project === 'default') {
             throw new ProjectNeeded();
@@ -170,12 +170,12 @@ class FindExternalLibraries extends Tasks {
         }
     }
 
-    private function process($filename) {
+    private function process(string $filename) : void {
         $return = array();
 
         $tokens = $this->php->getTokenFromFile($filename);
         if (count($tokens) === 1) {
-            return $return;
+            return array();
         }
         $this->log->log("$filename : " . count($tokens));
 
@@ -186,7 +186,7 @@ class FindExternalLibraries extends Tasks {
 
             // If we find a namespace, it is not the global space, and we may skip the rest.
             if ($token[0] === $this->phpTokens['T_NAMESPACE']) {
-                return;
+                return array();
             }
 
             if ($token[0] === $this->phpTokens['T_CLASS']) {
