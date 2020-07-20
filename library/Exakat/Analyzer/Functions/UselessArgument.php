@@ -38,11 +38,21 @@ class UselessArgument extends Analyzer {
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->back('first')
-             // More than 2 calling
+
+             // More than 2 calls
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
                      ->raw('count().is(gt(2))')
+             )
+
+             // No variable incoming
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->outIsIE('METHOD')
+                     ->outWithRank('ARGUMENT', 'ranked')
+                     ->atomIsNot(array('Integer', 'Float', 'String', 'Boolean', 'Null', 'Identifier', 'Nsname'), self::WITHOUT_CONSTANTS)
              )
 
              ->filter(
