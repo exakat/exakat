@@ -115,6 +115,9 @@ class CouldBeInt extends CouldBeType {
         // argument validation
         $this->checkArgumentValidation(array('\\is_int'), $intAtoms);
 
+        // (int) or intval
+        $this->checkCastArgument('T_INT_CAST', array('\\intval'));
+
         // argument because used in a specific operation
         // $arg && ''
         $this->atomIs(self::FUNCTIONS_ALL)

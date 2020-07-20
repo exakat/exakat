@@ -29,6 +29,8 @@ abstract class CouldBeType extends Analyzer {
     public function dependsOn() : array {
         return array('Complete/PropagateConstants',
                      'Complete/CreateDefaultValues',
+                     'Complete/OverwrittenMethods',
+                     'Complete/OverwrittenProperties',
                     );
     }
 
@@ -130,6 +132,7 @@ abstract class CouldBeType extends Analyzer {
              ->analyzerIsNot('self')
              ->outIs('RETURNED')
              ->atomIs($atoms, self::WITH_CONSTANTS)
+             ->hasIn('RETURN')
              ->back('first');
         $this->prepareQuery();
     }
@@ -303,6 +306,10 @@ abstract class CouldBeType extends Analyzer {
         // (string) $arg
         if (!empty($token)) {
             $this->atomIs(self::FUNCTIONS_ALL)
+                 ->optional(
+                    $this->side()
+                         ->outIs('OVERWRITE')
+                 )
                  ->outIs('ARGUMENT')
                  ->analyzerIsNot('self')
                  ->as('result')

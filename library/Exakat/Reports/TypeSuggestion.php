@@ -63,7 +63,9 @@ class TypeSuggestion extends Reports {
         }
 
         $html = array();
+        $complete = array();
 
+        // Properties Type hints
         $res = $this->dump->fetchTableProperties();
         foreach($res->toArray() as $row) {
             if (!empty($row['typehint'])) {
@@ -84,8 +86,13 @@ class TypeSuggestion extends Reports {
 <td style="background-color: $colorProperty">$row[typehint]</td>
 <td style="background-color: $colorProperty">$list</td>
 HTML;
+            if (!isset($complete[$classId]['Properties'])) {
+                $complete[$classId]['Properties'] = true;
+            }
+            $complete[$classId]['Properties'] = $complete[$classId]['Properties'] && !empty($row['typehint']);
         }
 
+        // Arguments Type hints
         $res = $this->dump->fetchTableMethodsByArgument();
         foreach($res->toArray() as $row) {
             if (!empty($row['typehint'])) {
@@ -106,11 +113,16 @@ HTML;
 <td style="background-color: $colorParameter; border-right-style: none; border-left-style: none;vertical-align: top;">$row[typehint]</td>
 <td style="background-color: $colorParameter; border-left-style: none; vertical-align: top;">$list</td>
 HTML;
+            if (!isset($complete[$classId][$row['method']])) {
+                $complete[$classId][$row['method']] = true;
+            }
+            $complete[$classId][$row['method']] = $complete[$classId][$row['method']] && !empty($row['typehint']);
         }
 
+        // Return Type hints
         $res = $this->dump->fetchTableMethods();
         foreach($res->toArray() as $row) {
-            if (in_array(mb_strtolower($row['method']), array('__construct', '__destruct'))) {
+            if (in_array(mb_strtolower($row['method']), array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic', '__isset', '__clone'))) {
                 continue;
             }
             if (!empty($row['returntype'])) {
@@ -131,8 +143,14 @@ HTML;
 <td style="background-color: $colorReturn; vertical-align: top;">$row[returntype]</td>
 <td  style="background-color: $colorReturn; vertical-align: top;">$list</td>
 HTML;
+            if (!isset($complete[$classId][$row['method']])) {
+                $complete[$classId][$row['method']] = true;
+            }
+            $complete[$classId][$row['method']] = $complete[$classId][$row['method']] && !empty($row['returntype']);
+
         }
-        
+
+//        print_r($complete);die();
         foreach($html as $className => &$methods) {
             $classCount = 0;
             foreach($methods as $methodName => &$returnAndArgs) {
@@ -141,14 +159,21 @@ HTML;
 
                 $first = array_shift($returnAndArgs);
                 $returnAndArgs = implode(PHP_EOL, 
-                                         array_merge(array('<td rowspan="'.(count($returnAndArgs) + 1).'" style="background-color: '.$colorMethod.'; border: black 1px solid; vertical-align: top">'.( $methodName === 'Properties' ?  $methodName : ' function '.$methodName.'()').'</td>'.$first), 
+                                         array_merge(array('<td rowspan="'.(count($returnAndArgs) + 1).'" style="background-color: '.$colorMethod.'; border: black 1px solid; vertical-align: top">'
+                                                           .( $methodName === 'Properties' ?  $methodName : ' function '.$methodName.'()')
+                                                           .( $complete[$className][$methodName] ? ' &#x2705; ' : '')
+                                                            .'</td>'.$first), 
                                              array_map(function($x) { return '<tr>'.$x.'</tr>';}, $returnAndArgs))
                                         );
             }
 
             $first = array_shift($methods);
+            $status = array_reduce($complete[$className], function (bool $carry = true, bool $item) : bool { return $carry && $item; }, true);
             $methods = '<tr >'.implode(PHP_EOL, 
-                               array_merge(array('<td style="background-color: '.$colorClass.'; vertical-align: top; border: border:black 1px solid;" rowspan="'.$classCount.'">'.$this->classes[$className].'</td>'.$first), 
+                               array_merge(array('<td style="background-color: '.$colorClass.'; vertical-align: top; border: border:black 1px solid;" rowspan="'.$classCount.'">'
+                                                .$this->classes[$className]
+                                                .( $status ? ' &#x2705; ' : '') // Possibly, that should be moved above, just after the name of the class
+                                                .'</td>'.$first), 
                                           array_map(function($x) { return '<tr>'.$x.'</tr>';}, $methods))
                                ).'</tr>';
 
