@@ -2368,11 +2368,7 @@ class Load extends Tasks {
                         strpos($typehints, '?') === false &&
                         preg_match('/\bnull\b/i', $typehints) === 0
                         ) {
-                        $null = $this->addAtom('Null', $this->id);
-                        $null->fullnspath = '\\null';
-                        $null->aliased    = self::NOT_ALIASED;
-
-                        $this->addLink($index, $null, 'TYPEHINT');
+                        $this->addLink($index, $default, 'TYPEHINT');
                     }
                 }
 
@@ -2819,7 +2815,7 @@ class Load extends Tasks {
         return $namecall;
     }
 
-    private function processFunctioncall(bool $getFullnspath = self::WITH_FULLNSPATH) {
+    private function processFunctioncall(bool $getFullnspath = self::WITH_FULLNSPATH) : AtomInterface {
         $name = $this->popExpression();
         ++$this->id; // Skipping the name, set on (
 
