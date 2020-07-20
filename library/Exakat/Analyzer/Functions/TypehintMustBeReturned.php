@@ -26,13 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class TypehintMustBeReturned extends Analyzer {
     public function analyze() {
-        // function foo() : A { }
         // function foo() :A { return; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
-             ->fullnspathIsNot('\\void')
              ->back('first')
+             ->isNot('abstract', true)
              ->not(
                 $this->side()
                      ->outIs('BLOCK')
@@ -40,6 +39,22 @@ class TypehintMustBeReturned extends Analyzer {
              )
              ->outIs('RETURNED')
              ->atomIs('Void')
+             ->hasNoIn('RETURN')
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo() : A { }
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIsNot('Void')
+             ->back('first')
+             ->isNot('abstract', true)
+             ->not(
+                $this->side()
+                     ->outIs('BLOCK')
+                     ->atomIs('Void')
+             )
+             ->hasNoOut('RETURNED')
              ->back('first');
         $this->prepareQuery();
     }
