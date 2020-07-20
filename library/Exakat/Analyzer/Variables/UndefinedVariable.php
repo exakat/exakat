@@ -28,21 +28,15 @@ class UndefinedVariable extends Analyzer {
     public function analyze() {
         // function foo() { echo $b;}
         $this->atomIs('Variabledefinition')
-             ->not(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->atomIs(self::FUNCTIONS_ALL)
-                     ->outIs('BLOCK')
-                     ->atomInsideNoDefinition(array('Eval', 'Include'))
-             )
+             // not from eval or include
              // Not from extract
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
                      ->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('BLOCK')
-                     ->atomInsideNoDefinition('Functioncall')
-                     ->functioncallIs('\\extract')
+                     ->atomInsideNoDefinition(array('Eval', 'Include', 'Functioncall'))
+                     ->fullnspathIs(array('\\eval', '\\include', '\\include_once', '\\require', '\\require_once', '\\extract', ))
              )
 
              // Not from foreach
@@ -69,21 +63,17 @@ class UndefinedVariable extends Analyzer {
 
         // function foo() { $b->c = 2;}
         $this->atomIs('Variabledefinition')
+             // not from eval or include
+             // Not from extract
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
                      ->atomIs(self::FUNCTIONS_ALL)
                      ->outIs('BLOCK')
-                     ->atomInsideNoDefinition(array('Eval', 'Include'))
+                     ->atomInsideNoDefinition(array('Eval', 'Include', 'Functioncall'))
+                     ->fullnspathIs(array('\\eval', '\\include', '\\include_once', '\\require', '\\require_once', '\\extract', ))
              )
-             ->not(
-                $this->side()
-                     ->inIs('DEFINITION')
-                     ->atomIs(self::FUNCTIONS_ALL)
-                     ->outIs('BLOCK')
-                     ->atomInsideNoDefinition('Functioncall')
-                     ->functioncallIs('\\extract')
-             )
+
              ->filter(
                  $this->side()
                       ->outIs('DEFINITION')
