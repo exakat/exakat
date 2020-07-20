@@ -26,14 +26,35 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class NotCompatibleWithType extends DSL {
+    public const DISALLOW_NULL = false;
+    public const ALLOW_NULL = true;
+
     public function run(): Command {
-        assert(func_num_args() === 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
-        list($types) = func_get_args();
+        switch(func_num_args()) {
+            case 2 : 
+                list($types, $withNull) = func_get_args();
+                $withNull = in_array($withNull, array(self::ALLOW_NULL, self::DISALLOW_NULL), STRICT_COMPARISON) ? $withNull : self::DISALLOW_NULL;
+                break;
+
+            case 1: 
+                list($types) = func_get_args();
+                $withNull = self::DISALLOW_NULL;
+
+            default:
+                assert(func_num_args() <= 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
+        }
+        
+        if ($withNull === self::ALLOW_NULL) {
+            $withNullGremlin = '.not(hasLabel("Null"))';
+        } else {
+            $withNullGremlin = '';
+        }
 
         $query = <<<GREMLIN
 where( 
 __.sideEffect{ typehints = []; }
   .out("TYPEHINT")
+  $withNullGremlin
   .sideEffect{ typehints.add(it.get().value("fullnspath")) ; }
   .fold() 
 )

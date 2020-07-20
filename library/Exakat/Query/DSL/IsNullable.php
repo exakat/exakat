@@ -24,10 +24,29 @@
 namespace Exakat\Query\DSL;
 
 class IsNullable extends DSL {
+    const EXPLICIT = true;
+    const IMPLICIT = false;
+
     public function run(): Command {
-        return new Command('or(__.where( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null") ),
-                               __.where( __.out("DEFAULT").hasLabel("Null").not(__.in("LEFT"))) 
-                                )');
+        switch(func_num_args()) {
+            case 1: 
+                list($nullable) = func_get_args();
+                $nullable = in_array($nullable, array(self::EXPLICIT, self::IMPLICIT), \STRICT_COMPARISON) ? $nullable : self::IMPLICT;
+                break;
+
+            case 0: 
+                $nullable = self::IMPLICIT;
+                break;
+
+            default:
+                assert(func_num_args() == 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
+        }
+        
+        if ($nullable === self::IMPLICIT) {
+            return new Command('where( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null") )');
+        } else {
+            return new Command('where( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null").not( __.in("DEFAULT").not( __.in("LEFT"))) )');
+        }
     }
 }
 ?>

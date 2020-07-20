@@ -25,11 +25,25 @@ namespace Exakat\Query\DSL;
 
 class IsNotNullable extends DSL {
     public function run(): Command {
-        return new Command(<<<'GREMLIN'
- not( __.where( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null")))
-.not( __.where( __.out("DEFAULT").hasLabel("Null").not(__.in("LEFT")) ))
-GREMLIN
-);
+        switch(func_num_args()) {
+            case 1: 
+                list($nullable) = func_get_args();
+                $nullable = in_array($nullable, array(IsNullable::EXPLICIT, IsNullable::IMPLICIT), \STRICT_COMPARISON) ? $nullable : IsNullable::IMPLICT;
+                break;
+
+            case 0: 
+                $nullable = IsNullable::IMPLICIT;
+                break;
+
+            default:
+                assert(func_num_args() == 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
+        }
+
+        if ($nullable === IsNullable::IMPLICIT) {
+            return new Command('not( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null") )');
+        } else {
+            return new Command('not( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null").not( __.in("DEFAULT") ) )');
+        }
     }
 }
 ?>

@@ -24,16 +24,19 @@ namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\FollowParAs;
+use Exakat\Query\DSL\NotCompatibleWithType;
+use Exakat\Query\DSL\IsNullable;
 
 class MismatchTypeAndDefault extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/PropagateCalls',
                      'Complete/MakeClassConstantDefinition',
+                     'Complete/CreateDefaultValues',
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // function foo(string $s = 3)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
@@ -41,16 +44,19 @@ class MismatchTypeAndDefault extends Analyzer {
              ->outIs('DEFAULT')
              ->atomIsNot('Void')
              ->hasNoIn('RIGHT')
-             ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
+//             ->followParAs(FollowParAs::FOLLOW_NONE) // basic handling of ternary
              ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
              // In case we stay here, even after following the constants
              ->atomIsNot(self::STATIC_NAMES)
+             ->atomIsNot(array('Void', 'Null'))
              ->savePropertyAs('label', 'type')
              ->back('arg')
-             ->isNotNullable()
+             ->isNotNullable(IsNullable::EXPLICIT)
+             ->notCompatibleWithType('type', NotCompatibleWithType::ALLOW_NULL)
+
              ->outIs('TYPEHINT')
-             ->atomIsNot('Void')
-             ->notCompatibleWithType('type')
+             ->atomIsNot(array('Void', 'Null'))
+
              ->back('first');
         $this->prepareQuery();
 
@@ -65,12 +71,12 @@ class MismatchTypeAndDefault extends Analyzer {
              ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
              // In case we stay here, even after following the constants
              ->atomIsNot(self::STATIC_NAMES)
+             ->atomIsNot(array('Void', 'Null'))
              ->savePropertyAs('label', 'type')
              ->back('arg')
-             ->isNullable()
-             ->outIs('TYPEHINT')
-             ->atomIsNot('Null')
-             ->notCompatibleWithType('type')
+             ->isNullable(IsNullable::EXPLICIT)
+             ->notCompatibleWithType('type', NotCompatibleWithType::ALLOW_NULL)
+
              ->back('first');
         $this->prepareQuery();
     }

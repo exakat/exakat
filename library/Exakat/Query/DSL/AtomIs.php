@@ -87,7 +87,9 @@ union( __.identity(),
                       __.hasLabel(within(["Variable"])).in("DEFINITION").in("NAME").hasLabel("Parameter", "Ppp").as("p1").timeLimit($TIME_LIMIT).in("ARGUMENT").out("DEFINITION").optional(__.out("METHOD", "NEW")).out("ARGUMENT").as("p2").where("p1", eq("p2")).by("rank"),
             
                       // literal value, passed as an argument
-                      __.hasLabel(within(["Ternary"])).out("THEN", "ELSE").not(hasLabel('Void')),
+                      __.hasLabel(within(["Ternary"])).not(__.out("THEN").hasLabel("Void")).out("THEN", "ELSE"),
+
+                      __.hasLabel(within(["Ternary"])).where(__.out("THEN").hasLabel("Void")).out("CONDITION", "ELSE"),
             
                       __.hasLabel(within(["Coalesce"])).out("LEFT", "RIGHT"),
             
@@ -95,7 +97,7 @@ union( __.identity(),
             
                       __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED')
                       )
-            ).times(2).emit()
+            ).times($MAX_LOOPING).emit()
 )
 .hasLabel(within(***))
 GREMLIN;
