@@ -41,6 +41,10 @@ abstract class Tasks {
     public static $semaphorePort  = null;
 
     protected $rulesets = null;
+    
+    private $snitch = null;
+    private $pid = 0;
+    private $path = '';
 
     const  NONE    = 1;
     const  ANYTIME = 2;
@@ -120,7 +124,7 @@ abstract class Tasks {
         }
     }
 
-    protected function checkTokenLimit() {
+    protected function checkTokenLimit() : void {
         $nb_tokens = $this->datastore->getHash('tokens');
 
         if ($nb_tokens > $this->config->token_limit) {
@@ -131,35 +135,28 @@ abstract class Tasks {
 
     abstract public function run();
 
-    protected function cleanLogForProject($project) {
+    protected function cleanLogForProject() : void {
         $logs = glob("{$this->config->log_dir}/*");
         foreach($logs as $log) {
             unlink($log);
         }
     }
 
-    protected function addSnitch($values = array()) {
-        static $snitch, $pid, $path;
-
-        if ($snitch === null) {
-            $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
-            $pid = getmypid();
-            $path = "{$this->config->tmp_dir}/$snitch.json";
+    protected function addSnitch(array $values = array()) : void {
+        if ($this->snitch === null) {
+            $this->snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
+            $this->pid = getmypid();
+            $this->path = "{$this->config->tmp_dir}/{$this->snitch}.json";
         }
 
-        $values['pid'] = $pid;
-        file_put_contents($path, json_encode($values));
+        $values['pid'] = $this->pid;
+        file_put_contents($this->path, json_encode($values));
     }
 
-    protected function removeSnitch() {
-        static $snitch, $path;
-
-        if ($snitch === null) {
-            $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
-            $path = "{$this->config->tmp_dir}/$snitch.json";
+    protected function removeSnitch() : void {
+        if ($this->path !== null) {
+            unlink($this->path);
         }
-
-        unlink($path);
     }
 }
 

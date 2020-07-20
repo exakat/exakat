@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class NoChildWithRank extends DSL {
-    public function run() {
+    public function run() : Command {
         if (func_num_args() === 2) {
             list($links, $rank) = func_get_args();
         } else {

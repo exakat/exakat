@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class RegexIs extends DSL {
-    public function run() {
+    public function run() : Command {
         assert(func_num_args() === 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
         list($property, $regex) = func_get_args();
 

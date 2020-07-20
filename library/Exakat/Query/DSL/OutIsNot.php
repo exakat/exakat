@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class OutIsNot extends DSL {
-    public function run() {
+    public function run() : Command {
         assert(func_num_args() <= 1, 'Too many arguments for ' . __METHOD__);
         list($link) = func_get_args();
 

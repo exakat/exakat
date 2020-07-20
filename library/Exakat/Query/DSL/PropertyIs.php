@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyIs extends DSL {
-    public function run() {
+    public function run() : Command {
         list($property, $code, $caseSensitive) = func_get_args();
 
         assert($this->assertProperty($property));

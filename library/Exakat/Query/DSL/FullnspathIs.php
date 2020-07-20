@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Query\Query;
 
 class FullnspathIs extends DSL {
-    public function run() {
+    public function run() : Command {
         if (func_num_args() === 2) {
             list($code, $caseSensitive) = func_get_args();
         } else {

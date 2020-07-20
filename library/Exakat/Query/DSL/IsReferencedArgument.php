@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsReferencedArgument extends DSL {
-    public function run() {
+    public function run() : Command {
         switch (func_num_args()) {
             case 1:
                 list($variable) = func_get_args();

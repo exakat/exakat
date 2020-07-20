@@ -29,7 +29,7 @@ class IsVisible extends DSL {
     const VISIBLE_BELOW = 2;
     const ALL_VISIBLE   = array(self::VISIBLE_ABOVE, self::VISIBLE_BELOW);
 
-    public function run() {
+    public function run() : Command {
         switch (func_num_args()) {
             case 2:
                 list($variable, $by) = func_get_args();

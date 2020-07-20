@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class GetStringLength extends DSL {
-    public function run() {
+    public function run() : Command {
         // Calculate The length of a string in a property, and report it in the named string
         switch (func_num_args()) {
             case 2:

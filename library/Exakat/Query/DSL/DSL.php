@@ -157,7 +157,7 @@ abstract class DSL {
         }
     }
 
-    abstract public function run();
+    abstract public function run() : Command;
 
     protected function normalizeAtoms($atoms): array {
         $atoms = makeArray($atoms);

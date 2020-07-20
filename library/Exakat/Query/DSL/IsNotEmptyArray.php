@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsNotEmptyArray extends DSL {
-    public function run() {
+    public function run() : Command {
         return new Command('not( where( __.hasLabel("Arrayliteral").has("count", 0)))');
     }
 }

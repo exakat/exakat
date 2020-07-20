@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsNotExtendingComposer extends DSL {
-    public function run() {
+    public function run() : Command {
         $MAX_LOOPING = self::$MAX_LOOPING;
 
         $gremlin = <<<GREMLIN

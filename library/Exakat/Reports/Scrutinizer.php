@@ -32,7 +32,7 @@ class Scrutinizer extends Reports {
     const FILE_EXTENSION = 'xml';
     const FILE_FILENAME  = 'scrutinizer';
 
-    public function generateFileReport($report) {
+    public function generateFileReport(array $report = array()) {
         $out = new XMLWriter();
         $out->openMemory();
         $out->setIndent(true);

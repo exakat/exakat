@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class HasInterfaceDefinition extends DSL {
-    public function run() {
+    public function run() : Command {
         return new Command('where(__.in("DEFINITION").hasLabel("Interface") )');
     }
 }

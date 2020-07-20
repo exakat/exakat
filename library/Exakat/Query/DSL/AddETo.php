@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class AddETo extends DSL {
-    public function run() {
+    public function run() : Command {
         list($edgeName, $from) = func_get_args();
 
         assert($this->assertLabel($from, self::LABEL_GO));

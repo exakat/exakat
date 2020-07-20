@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsMore extends DSL {
-    public function run() {
+    public function run() : Command {
         switch(func_num_args()) {
             case 2:
                 list($value1, $value2) = func_get_args();

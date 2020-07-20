@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsNotEmptyBody extends DSL {
-    public function run() {
+    public function run() : Command {
         $gremlin = <<<'GREMLIN'
 not(
     where( 

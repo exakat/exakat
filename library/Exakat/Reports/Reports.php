@@ -123,7 +123,7 @@ abstract class Reports {
         }
     }
 
-    protected function count($step = 1): void {
+    protected function count(int $step = 1): void {
         $this->count += $step;
     }
 

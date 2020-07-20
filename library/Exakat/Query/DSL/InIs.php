@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class InIs extends DSL {
-    public function run() {
+    public function run() : Command {
         if (func_num_args() === 1) {
             list($link) = func_get_args();
         } else {

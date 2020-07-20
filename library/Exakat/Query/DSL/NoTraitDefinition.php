@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class NoTraitDefinition extends DSL {
-    public function run() {
+    public function run() : Command {
         return new Command('not( where(__.in("DEFINITION").hasLabel("Trait") ) )');
     }
 }

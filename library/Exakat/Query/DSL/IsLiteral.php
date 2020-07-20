@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsLiteral extends DSL {
-    public function run() {
+    public function run() : Command {
         // Closures are literal if not using a variable from the context
         return new Command(<<<'GREMLIN'
 hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Float", "String", "Heredoc", "Closure", "Arrayliteral").has("constant", true)

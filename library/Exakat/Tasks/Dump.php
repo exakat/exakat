@@ -714,12 +714,10 @@ GREMLIN
          "final":it.get().properties("final").any(),
          "static":it.get().properties("static").any(),
          "reference":it.get().properties("reference").any(),
-         "returntype":returntype.join('|').replaceAll('\\\\?\\\\|', '?').replaceAll('^(.*)\\\\|$', '?$1'),
+         "returntype":returntype.join('|').replaceAll('\\\\?\\\\|', '?').replaceAll('^(.*)\\\\|$', '?$1').replaceAll('^\\\\|', '?'),
          "returntype_fnp": returntype_fnp.join("|"),
 
-         "public":    it.get().value("visibility") == "public",
-         "protected": it.get().value("visibility") == "protected",
-         "private":   it.get().value("visibility") == "private",
+         "visibility":it.get().value("visibility"),
          "class":     classe,
          "phpdoc":    phpdoc,
          "begin":     lines.min(),
@@ -736,16 +734,6 @@ GREMLIN
         $toDump = array();
         $unique = array();
         foreach($methods as $row) {
-            if ($row['public']) {
-                $visibility = 'public';
-            } elseif ($row['protected']) {
-                $visibility = 'protected';
-            } elseif ($row['private']) {
-                $visibility = 'private';
-            } else {
-                $visibility = '';
-            }
-
             if (!isset($citId[$row['classline'] . $row['class']])) {
                 continue;
             }
@@ -764,7 +752,7 @@ GREMLIN
                              (int) $row['final'],
                              (int) $row['abstract'],
                              (int) $row['reference'],
-                             $visibility,
+                             $row['visibility'],
                              $row['returntype'],
                              $row['returntype_fnp'],
                              $row['phpdoc'],
@@ -813,7 +801,7 @@ sideEffect{
          "classline": classline,
 
          "init": init,
-         "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
+         "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1').replaceAll('^\\|', '?'),
          "typehint_fnp": typehint_fnp.join('|'),
          "phpdoc": phpdoc,
          ];
@@ -847,14 +835,14 @@ GREMLIN
         display("$total arguments\n");
 
         // Properties
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Propertydefinition").as("property")
-     .in("PPP")
-.sideEffect{ 
+        $query = $this->newQuery('Properties');
+        $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+              ->_as('property')
+              ->inIs('PPP')
+              ->raw(<<<GREMLIN
+ sideEffect{ 
     x_static = it.get().properties("static").any();
-    x_public = it.get().value("visibility") == "public";
-    x_protected = it.get().value("visibility") == "protected";
-    x_private = it.get().value("visibility") == "private";
+    visibility = it.get().value("visibility");
     x_var = it.get().value("token") == "T_VAR";
     phpdoc = '';
     init = '';
@@ -875,40 +863,28 @@ g.V().hasLabel("Propertydefinition").as("property")
 
    ["class":classe,
     "static":x_static,
-    "public":x_public,
-    "protected":x_protected,
-    "private":x_private,
+    "visibility":visibility,
     "var":x_var,
     "line":line,
     "name": name,
     "value": init,
     "phpdoc":phpdoc,
     "classline":classline,
-    "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
+    "typehint":typehint.join('|').replaceAll('\\\\?\\\\|', '?').replaceAll('^(.*)\\\\|$', '?$1').replaceAll('^\\\\|', '?'),
     "typehint_fnp": typehint_fnp.join('|')
     ];
 }
 
-GREMLIN;
-        $result = $this->gremlin->query($query);
+GREMLIN
+);
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         $total = 0;
         $toDump = array();
         $propertyIds = array();
         $propertyCount = 0;
         foreach($result->toArray() as $row) {
-            if ($row['public']) {
-                $visibility = 'public';
-            } elseif ($row['protected']) {
-                $visibility = 'protected';
-            } elseif ($row['private']) {
-                $visibility = 'private';
-            } elseif ($row['var']) {
-                $visibility = '';
-            } else {
-                continue;
-            }
-
             // If we haven't found any definition for this class, just ignore it.
             if (!isset($citId[$row['classline'] . $row['class']])) {
                 continue;
@@ -922,7 +898,7 @@ GREMLIN;
             $toDump[] = array('',
                               $row['name'],
                               (int) $citId[$row['classline'] . $row['class']],
-                              $visibility,
+                              $row['visibility'],
                               (int) $row['static'],
                               $row['phpdoc'],
                               $row['value'],
@@ -1167,7 +1143,7 @@ map{ ["name":name,
       "namespace":namespace, 
       "fullnspath":fullnspath, 
       "reference":reference,
-      "returntype":returntype.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
+      "returntype":returntype.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1').replaceAll('^\\|', '?'),
       "returntype_fnp":returntype_fnp.join('|'),
       "begin": lines.min(), 
       "end":lines.max(),
@@ -1259,7 +1235,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
          "function":fonction,
 
          "init": init,
-         "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1'),
+         "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1').replaceAll('^\\|', '?'),
          "typehint_fnp":typehint_fnp.join('|'),
          "phpdoc":phpdoc,
          ];

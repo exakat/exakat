@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class GetNameInFNP extends DSL {
-    public function run() {
+    public function run() : Command {
         list($variable) = func_get_args();
 
         return new Command(<<<GREMLIN

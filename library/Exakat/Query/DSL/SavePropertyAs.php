@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class SavePropertyAs extends DSL {
-    public function run() {
+    public function run() : Command {
         assert(func_num_args() <= 2, __METHOD__ . ' should get 2 arguments max, ' . func_num_args() . ' provided.');
 
         if (func_num_args() === 1) {

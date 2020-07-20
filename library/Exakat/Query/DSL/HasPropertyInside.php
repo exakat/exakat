@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class HasPropertyInside extends DSL {
-    public function run() {
+    public function run() : Command {
         list($property, $values) = func_get_args();
 
         assert($this->assertProperty($property));

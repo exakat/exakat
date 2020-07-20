@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class NoUseDefinition extends DSL {
-    public function run() {
+    public function run() : Command {
         return new Command('not( where(__.out("DEFINITION").in("USE").hasLabel("Use")) )');
     }
 }

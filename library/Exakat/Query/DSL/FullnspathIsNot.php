@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class FullnspathIsNot extends DSL {
-    public function run() {
+    public function run() : Command {
         if (func_num_args() === 1) {
             list($code) = func_get_args();
             $caseSensitive = Analyzer::CASE_SENSITIVE;

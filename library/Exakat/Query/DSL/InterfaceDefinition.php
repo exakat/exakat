@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class InterfaceDefinition extends DSL {
-    public function run() {
+    public function run() : Command {
         return new Command('in("DEFINITION")');
     }
 }

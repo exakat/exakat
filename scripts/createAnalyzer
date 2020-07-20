@@ -96,7 +96,7 @@ class $name extends Analyzer {
     }
     */
     
-    public function analyze() {
+    public function analyze() : void {
         \$this->atomIs('Identifier')
              ->back('first');
         \$this->printQuery();

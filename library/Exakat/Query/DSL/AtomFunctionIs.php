@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class AtomFunctionIs extends DSL {
-    public function run() {
+    public function run() : Command {
         list($fullnspath) = func_get_args();
 
         $functioncallIs = $this->dslfactory->factory('functioncallIs');

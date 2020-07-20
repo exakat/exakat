@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class AtomIs extends DSL {
-    public function run() {
+    public function run() : Command {
         if (func_num_args() === 2) {
             list($atoms, $flags) = func_get_args();
         } else {

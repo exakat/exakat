@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class Ignore extends DSL {
-    public function run() {
+    public function run() : Command {
         return new Command(Query::NO_QUERY);
     }
 }

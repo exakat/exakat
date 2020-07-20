@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class AnalyzerIsNot extends DSL {
-    public function run() {
+    public function run() : Command {
         list($analyzer) = func_get_args();
 
         $analyzer = makeArray($analyzer);

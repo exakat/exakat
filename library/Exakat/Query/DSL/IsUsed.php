@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsUsed extends DSL {
-    public function run() {
+    public function run() : Command {
         if (func_num_args() === 1) {
             list($times) = func_get_args();
         } else {

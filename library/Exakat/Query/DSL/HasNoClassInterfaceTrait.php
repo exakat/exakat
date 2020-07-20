@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class HasNoClassInterfaceTrait extends DSL {
-    public function run() {
+    public function run() : Command {
         $return = $this->dslfactory->factory('hasNoInstruction');
 
         return $return->run(Analyzer::CIT);

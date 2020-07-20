@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class CodeIsPositiveInteger extends DSL {
-    public function run() {
+    public function run() : Command {
         return new Command('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}');
     }
 }

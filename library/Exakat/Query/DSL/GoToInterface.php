@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class GoToInterface extends DSL {
-    public function run() {
+    public function run() : Command {
         $return = $this->dslfactory->factory('goToInstruction');
 
         return $return->run('Interface');

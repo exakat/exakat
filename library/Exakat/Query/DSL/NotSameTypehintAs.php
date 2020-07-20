@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class NotSameTypehintAs extends DSL {
-    public function run() {
+    public function run() : Command {
         assert(func_num_args() === 1, 'One argument ncessary for ' . __METHOD__);
         list($variable) = func_get_args();
 

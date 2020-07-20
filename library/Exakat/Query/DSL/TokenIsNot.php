@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class TokenIsNot extends DSL {
-    public function run() {
+    public function run() : Command {
         list($token) = func_get_args();
 
         assert($this->assertTokens($token));

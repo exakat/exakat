@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class GetVariable extends DSL {
-    public function run() {
+    public function run() : Command {
         // getVariable($variable => $name of the variable)
         if (func_num_args() === 1) {
             list($variable) = func_get_args();
