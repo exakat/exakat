@@ -205,17 +205,20 @@ TEXT
             $version = PHP_MAJOR_VERSION . PHP_MINOR_VERSION;
 
             if (file_exists("{$this->config->projects_root}/tinkergraph")) {
+                // This is the default expected folder 
                 $folder = 'tinkergraph';
                 // tinkergraph or gsneo4j
                 if (file_exists("{$this->config->projects_root}/tinkergraph/ext/neo4j-gremlin/")) {
-                    $graphdb = 'gsneo4j';
+                    $graphdb = 'gsneo4jv3';
                 } else {
-                    $graphdb = 'tinkergraph';
+                    $graphdb = 'tinkergraphv3';
                 }
             } else {
                 $folder = '';
                 $graphdb = 'nogremlin';
             }
+            
+            var_dump($graphdb);
 
             $ini = str_replace(array('{VERSION}', '{VERSION_PATH}',   '{GRAPHDB}', ";$graphdb", '{GRAPHDB}_path', ),
                                array( $version,    $this->config->php, $graphdb,    $graphdb,    $folder),
