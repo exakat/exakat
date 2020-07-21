@@ -126,6 +126,7 @@ abstract class DSL {
 
     protected static $linksDown     = '';
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
+    protected static $MAX_SEARCHING = Analyzer::MAX_SEARCHING;
     protected static $TIME_LIMIT    = Analyzer::TIME_LIMIT;
 
     public function __construct(DSLfactory $dslfactory,
