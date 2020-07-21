@@ -46,7 +46,7 @@ class NoWeakSSLCrypto extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // curl_septop() with the following constants
+        // curl_septopt() with the following constants
         $this->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs(array('\CURL_SSLVERSION_TLSv1',
                                   '\CURL_SSLVERSION_SSLv2',
@@ -57,8 +57,8 @@ class NoWeakSSLCrypto extends Analyzer {
         $this->prepareQuery();
 
         // This is for fsockopen and co.
-        $this->atomIs('String', self::WITH_CONSTANTS)
-             ->regexIs('noDelimiter', '^(sslv2|sslv3)'); // tls is for v1.0 to v1.3
+        $this->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITHOUT_CONSTANTS)
+             ->regexIs('noDelimiter', '^ssl(v2|v3|)://'); // tls is for v1.0 to v1.3
         $this->prepareQuery();
     }
 }
