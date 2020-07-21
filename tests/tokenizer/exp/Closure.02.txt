@@ -23,7 +23,5 @@ Label : PROJECT
                   10
                   Label : ARGUMENT
                     11
-              Label : RETURNED
-                Void
               Label : RETURNTYPE
                 7

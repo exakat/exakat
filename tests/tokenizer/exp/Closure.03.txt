@@ -1,0 +1,29 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              7
+            Label : NAME
+              6
+            Label : TYPEHINT
+              7
+          Label : BLOCK
+            12
+            Label : EXPRESSION
+              7
+          Label : RETURNTYPE
+            11
+          Label : USE
+            9
+          Label : USE
+            10

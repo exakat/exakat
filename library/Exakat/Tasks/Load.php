@@ -1458,6 +1458,13 @@ class Load extends Tasks {
             $uses = array();
             do {
                 ++$this->id; // Skip ( or ,
+
+                if ($this->tokens[$this->id][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
+                    $useFullcode[] = '';
+
+                    continue;
+                }
+
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
                     ++$this->id;
                     $arg = $this->processSingle('Parameter');
