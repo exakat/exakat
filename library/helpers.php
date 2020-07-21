@@ -160,17 +160,17 @@ function duration(int $seconds) : string {
 }
 
 function unparse_url(array $parsed_url) : string {
-    $scheme   = empty($parsed_url['scheme'])     ? '' : $parsed_url['scheme'].'://';
-    $host     = $parsed_url['host']   ?: '';
-    $port     = isset($parsed_url['port'])     ? ":$parsed_url[port]"          : '';
+    $scheme   = empty($parsed_url['scheme'])   ?  '' : $parsed_url['scheme'].'://';
+    $host     = $parsed_url['host']            ?? '';
+    $port     = isset($parsed_url['port'])     ?  ":$parsed_url[port]"          : '';
 
-    $user     = empty($parsed_url['user'])     ? '' : $parsed_url['user'];
-    $pass     = empty($parsed_url['pass'])     ? '' : ":$parsed_url[pass]";
-    $userpass = ($user || $pass)               ? "$user$pass@"                 : '';
+    $user     = empty($parsed_url['user'])     ?  '' : $parsed_url['user'];
+    $pass     = empty($parsed_url['pass'])     ?  '' : ":$parsed_url[pass]";
+    $userpass = ($user || $pass)               ?  "$user$pass@"                 : '';
 
-    $path     = $parsed_url['path']   ?: '';
-    $query    = isset($parsed_url['query'])    ? "?$parsed_url[query]"         : '';
-    $fragment = isset($parsed_url['fragment']) ? "#$parsed_url[fragment]"      : '';
+    $path     = $parsed_url['path']            ?? '';
+    $query    = isset($parsed_url['query'])    ?  "?$parsed_url[query]"         : '';
+    $fragment = isset($parsed_url['fragment']) ?  "#$parsed_url[fragment]"      : '';
 
     return "$scheme$userpass$host$port$path$query$fragment";
 }

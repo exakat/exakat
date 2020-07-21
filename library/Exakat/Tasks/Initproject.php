@@ -34,7 +34,7 @@ use Exakat\Vcs\None;
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
@@ -64,7 +64,7 @@ class Initproject extends Tasks {
         display('Done');
     }
 
-    private function init_project($project, $repositoryURL) {
+    private function init_project(Project $project, string $repositoryURL) : void {
         $finalPath = "{$this->config->projects_root}/projects/$project";
 
         if (file_exists($finalPath)) {
