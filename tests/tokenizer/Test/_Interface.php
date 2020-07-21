@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Interface extends Tokenizer {
-    /* 17 methods */
+    /* 18 methods */
 
     public function test_Interface01()  { $this->generic_test('_Interface.01'); }
     public function test_Interface02()  { $this->generic_test('_Interface.02'); }
@@ -26,5 +26,6 @@ class _Interface extends Tokenizer {
     public function test_Interface15()  { $this->generic_test('_Interface.15'); }
     public function test_Interface16()  { $this->generic_test('_Interface.16'); }
     public function test_Interface17()  { $this->generic_test('_Interface.17'); }
+    public function test_Interface18()  { $this->generic_test('_Interface.18'); }
 }
 ?>

@@ -1611,6 +1611,7 @@ class Load extends Tasks {
             $extendsKeyword = $this->tokens[$this->id + 1][1];
             do {
                 ++$this->id; // Skip extends or ,
+                $this->checkPhpdoc();
                 $extends = $this->processOneNsname(self::WITH_FULLNSPATH);
                 $extends->rank = $rank;
 
@@ -1756,6 +1757,7 @@ class Load extends Tasks {
             $extendsKeyword = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip extends
 
+            $this->checkPhpdoc();
             $extends = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
 
             $this->addLink($class, $extends, 'EXTENDS');
@@ -1773,6 +1775,7 @@ class Load extends Tasks {
             $fullcodeImplements = array();
             do {
                 ++$this->id; // Skip implements
+                $this->checkPhpdoc();
                 $implements = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
                 $this->addLink($class, $implements, 'IMPLEMENTS');
                 $fullcodeImplements[] = $implements->fullcode;
@@ -3864,7 +3867,7 @@ class Load extends Tasks {
             ++$this->id; // Skip :
         }
 
-        $case->fullcode = $this->tokens[$current][1] . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
+        $case->fullcode = $this->tokens[$current][1] . ' '. $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
                                                             $this->phptokens::T_CASE,
