@@ -37,7 +37,7 @@ class AtomIs extends DSL {
 
         assert($this->assertAtom($atoms));
         $TIME_LIMIT = self::$TIME_LIMIT;
-        $MAX_LOOPING = self::$MAX_LOOPING;
+        $MAX_SEARCHING = self::$MAX_SEARCHING;
 
         $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
@@ -64,7 +64,7 @@ union( __.identity(),
                 // (\$a)
                   __.hasLabel(within(["Parenthesis"])).out("CODE")
                 )
-            ).times($MAX_LOOPING).emit()
+            ).times($MAX_SEARCHING).emit()
     )
 .hasLabel(within(***))
 GREMLIN;
@@ -97,7 +97,7 @@ union( __.identity(),
             
                       __.hasLabel(within(["Functioncall", "Methodcall", "Staticmethodcall"])).in('DEFINITION').out('RETURNED')
                       )
-            ).times($MAX_LOOPING).emit()
+            ).times($MAX_SEARCHING).emit()
 )
 .hasLabel(within(***))
 GREMLIN;

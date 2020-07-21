@@ -174,8 +174,9 @@ abstract class Analyzer {
     const CONTEXT_IN_CLOSURE = 1;
     const CONTEXT_OUTSIDE_CLOSURE = 2;
 
-    const MAX_LOOPING = 15;
-    const TIME_LIMIT  = 10000;  // 10s, used with timelimit() from gremlin.
+    const MAX_LOOPING = 15;    // hard limit for do...while when navigating the tree
+    const MAX_SEARCHING = 8;   // hard limit for searching the tree (failing the rest is not bad)
+    const TIME_LIMIT  = 1000;  // 1s, used with timelimit() from gremlin.
 
     private static $rulesId         = null;
 

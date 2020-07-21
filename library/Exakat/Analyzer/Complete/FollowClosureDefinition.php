@@ -29,7 +29,7 @@ class FollowClosureDefinition extends Complete {
     }
 
     public function analyze() {
-        // immediate usage : in parenthesis
+        // immediate usage : in parenthesis (function () {})()
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
              ->inIsIE('RIGHT') // Skip all $closure =
              ->inIs('CODE')
