@@ -1,10 +1,34 @@
 test
 Label : GLOBAL
   33
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
 Label : GLOBAL
   29
+  Label : DEFINITION
+    29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
 Label : GLOBAL
   17
+  Label : DEFINITION
+    17
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
 Label : PROJECT
   1
   Label : DEFINITION
@@ -97,10 +121,20 @@ Label : PROJECT
               17
             Label : DEFINITION
               17
+          Label : DEFINITION
+            5
+            Label : ARGUMENT
+              26
+            Label : NAME
+              5
+          Label : DEFINITION
+            5
+            Label : ARGUMENT
+              22
+            Label : NAME
+              5
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             7
         Label : EXPRESSION
@@ -197,8 +231,6 @@ Label : PROJECT
               17
           Label : NAME
             23
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             7
         Label : EXPRESSION

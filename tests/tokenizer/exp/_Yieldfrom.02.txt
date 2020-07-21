@@ -1,6 +1,18 @@
 test
 Label : GLOBAL
   9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
 Label : PROJECT
   1
   Label : DEFINITION
@@ -45,14 +57,12 @@ Label : PROJECT
                       13
                   Label : ARGUMENT
                     16
-                    Label : DEFAULT
+                    Label : DEFAULT, TYPEHINT
                       19
                     Label : NAME
                       16
                     Label : TYPEHINT
                       17
-                    Label : TYPEHINT
-                      19
                   Label : BLOCK
                     22
                     Label : EXPRESSION
@@ -61,6 +71,12 @@ Label : PROJECT
                         31
                         Label : CONST
                           31
+                          Label : DEFINITION
+                            36
+                            Label : CLASS
+                              35
+                            Label : CONSTANT
+                              17
                           Label : NAME
                             17
                           Label : VALUE
@@ -83,6 +99,12 @@ Label : PROJECT
                             37
                           Label : VALUE
                             39
+                      Label : DEFINITION
+                        35
+                      Label : DEFINITION
+                        24
+                      Label : DEFINITION
+                        24
                       Label : EXTENDS
                         25
                       Label : IMPLEMENTS
@@ -95,10 +117,18 @@ Label : PROJECT
                           14
                         Label : BLOCK
                           14
+                        Label : DEFINITION
+                          36
+                          Label : CLASS
+                            24
+                          Label : METHOD
+                            45
+                            Label : ARGUMENT
+                              14
+                            Label : NAME
+                              45
                         Label : NAME
                           45
-                        Label : RETURNED
-                          Void
                         Label : TYPEHINT
                           14
                       Label : METHOD
@@ -567,11 +597,7 @@ Label : PROJECT
                             74
                         Label : NAME
                           46
-                        Label : RETURNED
-                          Void
                         Label : RETURNTYPE
-                          14
-                        Label : TYPEHINT
                           14
                       Label : NAME
                         24
@@ -585,10 +611,14 @@ Label : PROJECT
                             42
                         Label : PPP
                           16
+                          Label : DEFAULT
+                            14
                       Label : PPP
                         43
                         Label : PPP
                           20
+                          Label : DEFAULT
+                            14
                         Label : TYPEHINT
                           14
                       Label : PPP
@@ -599,10 +629,6 @@ Label : PROJECT
                             19
                         Label : TYPEHINT
                           14
-                        Label : TYPEHINT
-                          14
-                  Label : RETURNED
-                    Void
                   Label : RETURNTYPE
                     14
                   Label : USE
@@ -635,18 +661,22 @@ Label : PROJECT
                       13
                   Label : ARGUMENT
                     16
-                    Label : DEFAULT
+                    Label : DEFAULT, TYPEHINT
                       19
                     Label : NAME
                       16
                     Label : TYPEHINT
                       17
-                    Label : TYPEHINT
-                      19
                   Label : BLOCK
                     22
                     Label : EXPRESSION
                       23
+                      Label : DEFINITION
+                        24
+                      Label : DEFINITION
+                        35
+                      Label : DEFINITION
+                        24
                       Label : METHOD
                         75
                         Label : ARGUMENT
@@ -711,6 +741,10 @@ Label : PROJECT
                                               80
                                       Label : EXPRESSION
                                         83
+                                        Label : DEFINITION
+                                          93
+                                          Label : GOTO
+                                            81
                                         Label : GOTOLABEL
                                           81
                                       Label : EXPRESSION
@@ -833,8 +867,6 @@ Label : PROJECT
                           14
                       Label : NAME
                         24
-                  Label : RETURNED
-                    Void
                   Label : RETURNTYPE
                     14
                   Label : USE
@@ -867,14 +899,12 @@ Label : PROJECT
                       13
                   Label : ARGUMENT
                     16
-                    Label : DEFAULT
+                    Label : DEFAULT, TYPEHINT
                       19
                     Label : NAME
                       16
                     Label : TYPEHINT
                       17
-                    Label : TYPEHINT
-                      19
                   Label : BLOCK
                     22
                     Label : EXPRESSION
@@ -931,8 +961,6 @@ Label : PROJECT
                         95
                         Label : USE
                           105
-                  Label : RETURNED
-                    Void
                   Label : RETURNTYPE
                     14
                   Label : USE
@@ -1033,8 +1061,6 @@ Label : PROJECT
                       113
                     Label : DEFINITION
                       113
-                  Label : RETURNED
-                    Void
                   Label : RETURNTYPE
                     14
           Label : NAME
@@ -1295,8 +1321,6 @@ Label : PROJECT
                     16
                     Label : DEFINITION
                       16
-                  Label : RETURNED
-                    Void
                   Label : RETURNTYPE
                     14
           Label : NAME

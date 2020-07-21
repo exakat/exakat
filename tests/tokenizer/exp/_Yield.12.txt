@@ -1,8 +1,20 @@
 test
 Label : GLOBAL
   19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
 Label : GLOBAL
   18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+    Label : DEFINITION
+      18
 Label : PROJECT
   1
   Label : DEFINITION
@@ -74,6 +86,12 @@ Label : PROJECT
               Label : VALUE
                 19
           Label : DEFINITION
+            5
+            Label : ARGUMENT
+              6
+            Label : NAME
+              5
+          Label : DEFINITION
             9
             Label : DEFINITION
               9
@@ -91,16 +109,8 @@ Label : PROJECT
               19
             Label : DEFINITION
               19
-          Label : DEFINITION
-            5
-            Label : ARGUMENT
-              6
-            Label : NAME
-              5
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6
         Label : EXPRESSION

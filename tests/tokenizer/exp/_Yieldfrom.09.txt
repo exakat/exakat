@@ -1,0 +1,111 @@
+test
+Label : GLOBAL
+  23
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+    Label : DEFINITION
+      23
+Label : GLOBAL
+  21
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+Label : PROJECT
+  1
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+    Label : DEFINITION
+      23
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              9
+              Label : YIELD
+                11
+                Label : INDEX
+                  10
+                Label : VALUE
+                  9
+                  Label : YIELD
+                    11
+                    Label : INDEX
+                      12
+                    Label : VALUE
+                      9
+                      Label : YIELD
+                        11
+                        Label : INDEX
+                          13
+                        Label : VALUE
+                          9
+                          Label : YIELD
+                            11
+                            Label : INDEX
+                              14
+                            Label : VALUE
+                              15
+                              Label : YIELD
+                                16
+                                Label : ARGUMENT
+                                  17
+                                Label : ARGUMENT
+                                  18
+                                Label : ARGUMENT
+                                  19
+          Label : DEFINITION
+            5
+            Label : ARGUMENT
+              6
+            Label : NAME
+              5
+          Label : NAME
+            5
+          Label : RETURNTYPE
+            6
+        Label : EXPRESSION
+          20
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              25
+              Label : ARGUMENT
+                26
+                Label : ARGUMENT
+                  21
+                Label : ARGUMENT
+                  23
+              Label : NAME
+                25
+          Label : INDEX
+            21
+          Label : SOURCE
+            5
+            Label : ARGUMENT
+              6
+            Label : NAME
+              5
+          Label : VALUE
+            23

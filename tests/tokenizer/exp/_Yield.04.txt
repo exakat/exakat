@@ -103,7 +103,5 @@ Label : PROJECT
               23
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6

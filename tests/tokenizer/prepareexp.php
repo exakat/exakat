@@ -77,9 +77,14 @@ function run($test, $number) {
     
     $shell = "{$config->$versionPHP} -l ./source/$test.$number.php";
     $res = shell_exec($shell) ?? '';
+
+    if (empty($res)) {
+        print "This script yield no lint results.\n";
+        return;
+    }
     
-    if (strpos('No syntax errors detected in', $res) !== false) {
-        print "This script doesn't compile with ".PHP_VERSION." .\n";
+    if (strpos($res, 'No syntax errors detected in') === false) {
+        print "This script doesn't compile with ".PHP_VERSION.".\n".explode(PHP_EOL, trim($res))[0]."\n";
         return;
     }
     

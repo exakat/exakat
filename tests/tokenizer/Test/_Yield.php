@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Yield extends Tokenizer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function test_Yield01()  { $this->generic_test('_Yield.01'); }
     public function test_Yield02()  { $this->generic_test('_Yield.02'); }
@@ -21,5 +21,6 @@ class _Yield extends Tokenizer {
     public function test_Yield10()  { $this->generic_test('_Yield.10'); }
     public function test_Yield11()  { $this->generic_test('_Yield.11'); }
     public function test_Yield12()  { $this->generic_test('_Yield.12'); }
+    public function test_Yield13()  { $this->generic_test('_Yield.13'); }
 }
 ?>

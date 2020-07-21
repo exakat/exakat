@@ -1,6 +1,12 @@
 test
 Label : GLOBAL
   18
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+    Label : DEFINITION
+      18
 Label : PROJECT
   1
   Label : DEFINITION
@@ -57,8 +63,6 @@ Label : PROJECT
               5
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             9
         Label : EXPRESSION

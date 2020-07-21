@@ -1,6 +1,12 @@
 test
 Label : GLOBAL
   19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
@@ -82,6 +88,12 @@ Label : PROJECT
                 Label : ARGUMENT
                   6
           Label : DEFINITION
+            5
+            Label : ARGUMENT
+              6
+            Label : NAME
+              5
+          Label : DEFINITION
             15
             Label : DEFINITION
               15
@@ -89,16 +101,8 @@ Label : PROJECT
               15
             Label : DEFINITION
               15
-          Label : DEFINITION
-            5
-            Label : ARGUMENT
-              6
-            Label : NAME
-              5
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6
         Label : EXPRESSION
