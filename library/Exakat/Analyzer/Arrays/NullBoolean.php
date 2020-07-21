@@ -31,8 +31,10 @@ class NullBoolean extends Analyzer {
     }
 
     public function analyze() {
+        $atoms = array('Null', 'Boolean', 'Integer', 'Float');
+        
         // true[1], null[0]
-        $this->atomIs(array('Null', 'Boolean', 'Nsname', 'Identifier'), self::WITH_CONSTANTS)
+        $this->atomIs($atoms, self::WITH_CONSTANTS)
              ->inIs('VARIABLE');
         $this->prepareQuery();
 
@@ -40,16 +42,16 @@ class NullBoolean extends Analyzer {
         $this->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
              ->inIs('DEFINITION')
              ->outIs('VALUE')
-             ->atomIs(array('Null', 'Boolean'))
+             ->atomIs($atoms)
              ->back('first')
              ->inIs('VARIABLE')
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $a = true; echo $a[1];
-        $this->atomIs(array('Variabledefinition', 'Staticdefinition', 'Globaldefinition'))
+        $this->atomIs(array('Variabledefinition', 'Staticdefinition', 'Globaldefinition', 'Propertydefinition'))
              ->outIs('DEFAULT')
-             ->atomIs(array('Null', 'Boolean'))
+             ->atomIs($atoms)
              ->back('first')
              ->outIs('DEFINITION')
              ->inIs('VARIABLE')
