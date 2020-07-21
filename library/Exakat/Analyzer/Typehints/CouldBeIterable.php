@@ -26,12 +26,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldBeIterable extends CouldBeType {
-    public function dependsOn() : array {
-        return array('Complete/PropagateConstants',
-                     'Complete/CreateDefaultValues',
-                    );
-    }
-
     public function analyze() {
         $iterableAtoms = array('Arrayliteral');
         

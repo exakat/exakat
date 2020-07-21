@@ -26,12 +26,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldBeFloat extends CouldBeType {
-    public function dependsOn() : array {
-        return array('Complete/PropagateConstants',
-                     'Complete/CreateDefaultValues',
-                    );
-    }
-
     public function analyze() {
         $floatAtoms = array('Float', 'Addition', 'Multiplication', 'Not', 'Power');
         

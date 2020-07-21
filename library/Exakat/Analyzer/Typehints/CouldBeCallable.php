@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeCallable extends CouldBeType {
-    public function dependsOn() : array {
-        return array('Complete/PropagateConstants',
-                     'Complete/CreateDefaultValues',
-                    );
-    }
-
     public function analyze() {
         $callableAtoms = array('Closure', 'Arrowfunction');
 
