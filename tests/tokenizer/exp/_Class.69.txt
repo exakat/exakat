@@ -57,8 +57,6 @@ Label : PROJECT
                       11
                   Label : NAME
                     10
-                  Label : RETURNED
-                    Void
                   Label : RETURNTYPE
                     11
         Label : EXPRESSION
@@ -69,9 +67,7 @@ Label : PROJECT
               5
               Label : ARGUMENT
                 17
-              Label : IMPLEMENTS
-                19
-              Label : MAGICMETHOD
+              Label : DEFINITION, MAGICMETHOD
                 21
                 Label : ARGUMENT
                   17
@@ -87,10 +83,10 @@ Label : PROJECT
                     11
                 Label : NAME
                   21
-                Label : RETURNED
-                  Void
                 Label : RETURNTYPE
                   11
+              Label : IMPLEMENTS
+                19
         Label : EXPRESSION
           7
           Label : DEFINITION
@@ -117,8 +113,6 @@ Label : PROJECT
                 11
             Label : NAME
               21
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               11
           Label : NAME
@@ -151,9 +145,7 @@ Label : PROJECT
       5
       Label : ARGUMENT
         17
-      Label : IMPLEMENTS
-        19
-      Label : MAGICMETHOD
+      Label : DEFINITION, MAGICMETHOD
         21
         Label : ARGUMENT
           17
@@ -169,10 +161,10 @@ Label : PROJECT
             11
         Label : NAME
           21
-        Label : RETURNED
-          Void
         Label : RETURNTYPE
           11
+      Label : IMPLEMENTS
+        19
   Label : RETURNED
     17
   Label : RETURNED

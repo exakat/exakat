@@ -22,8 +22,8 @@ Label : PROJECT
           Label : NAME
             5
             Label : NAME
-              8
+              6
               Label : INDEX
-                9
+                8
               Label : VARIABLE
                 6

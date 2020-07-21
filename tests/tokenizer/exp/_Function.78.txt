@@ -27,8 +27,6 @@ Label : PROJECT
               6
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             8
         Label : EXPRESSION
@@ -41,7 +39,5 @@ Label : PROJECT
               6
             Label : BLOCK
               14
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8

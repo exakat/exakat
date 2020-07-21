@@ -20,9 +20,9 @@ Label : PROJECT
               Label : NAME
                 13
               Label : METHOD
-                17
+                15
                 Label : ARGUMENT
-                  15
+                  17
                 Label : BLOCK
                   19
                   Label : EXPRESSION
@@ -38,15 +38,21 @@ Label : PROJECT
                   Label : DEFINITION
                     21
                 Label : NAME
-                  17
+                  15
                 Label : RETURNED
                   21
+                Label : RETURNED
+                  24
+                  Label : MEMBER
+                    22
+                  Label : OBJECT
+                    21
                 Label : RETURNTYPE
-                  15
+                  17
               Label : METHOD
                 25
                 Label : ARGUMENT
-                  15
+                  17
                 Label : BLOCK
                   19
                   Label : EXPRESSION
@@ -54,7 +60,7 @@ Label : PROJECT
                     Label : METHOD
                       28
                       Label : ARGUMENT
-                        15
+                        17
                       Label : NAME
                         28
                     Label : OBJECT
@@ -79,7 +85,13 @@ Label : PROJECT
                   25
                 Label : RETURNED
                   30
+                Label : RETURNED
+                  24
+                  Label : MEMBER
+                    31
+                  Label : OBJECT
+                    30
                 Label : RETURNTYPE
-                  15
+                  17
           Label : NAME
             5

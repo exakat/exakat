@@ -23,8 +23,6 @@ Label : PROJECT
                 10
             Label : NAME
               14
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               10
           Label : MAGICMETHOD
@@ -37,8 +35,6 @@ Label : PROJECT
                 10
             Label : NAME
               16
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               10
           Label : NAME
@@ -47,5 +43,7 @@ Label : PROJECT
             9
             Label : PPP
               12
+              Label : DEFAULT
+                10
             Label : TYPEHINT
               10

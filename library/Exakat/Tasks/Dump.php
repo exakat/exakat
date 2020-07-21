@@ -625,7 +625,7 @@ GREMLIN
             $toDump = array();
             foreach($cit_implements as $id => $impl) {
                 foreach($impl as $implements) {
-                    $citIds = preg_grep('/^\d+' . addslashes(mb_strtolower($implements)) . '$/', array_keys($citId));
+                    $citIds = preg_grep('/^\d+' . preg_quote(mb_strtolower($implements)) . '$/', array_keys($citId));
 
                     if (empty($citIds)) {
                         $toDump[] = array('', $citId[$id], $implements, 'implements', '');

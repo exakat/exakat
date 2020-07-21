@@ -25,8 +25,6 @@ Label : PROJECT
                   14
             Label : NAME
               8
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               10
           Label : NAME

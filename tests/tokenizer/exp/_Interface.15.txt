@@ -23,9 +23,7 @@ Label : PROJECT
               13
             Label : NAME
               8
-            Label : RETURNED
-              Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               13
           Label : NAME
             6
@@ -47,8 +45,6 @@ Label : PROJECT
                 13
             Label : NAME
               8
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               13
           Label : NAME
@@ -71,8 +67,6 @@ Label : PROJECT
                 13
             Label : NAME
               8
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               13
           Label : NAME

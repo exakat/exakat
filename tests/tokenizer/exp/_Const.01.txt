@@ -47,11 +47,7 @@ Label : PROJECT
                 8
             Label : NAME
               23
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
-              8
-            Label : TYPEHINT
               8
           Label : NAME
             6
@@ -67,5 +63,7 @@ Label : PROJECT
             27
             Label : PPP
               28
+              Label : DEFAULT
+                8
             Label : TYPEHINT
               8

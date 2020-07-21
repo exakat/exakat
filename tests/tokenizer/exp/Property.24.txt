@@ -14,21 +14,21 @@ Label : PROJECT
           Label : DEFINITION
             6
             Label : ARGUMENT
-              7
+              8
             Label : NAME
               6
           Label : DEFINITION
             17
             Label : ARGUMENT
-              7
+              8
             Label : NAME
               17
           Label : DEFINITION
             17
           Label : METHOD
-            9
+            7
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               10
               Label : EXPRESSION
@@ -36,11 +36,11 @@ Label : PROJECT
                 Label : RETURN
                   12
             Label : NAME
-              9
+              7
             Label : RETURNED
               12
             Label : RETURNTYPE
-              7
+              8
           Label : NAME
             6
         Label : EXPRESSION
@@ -48,11 +48,11 @@ Label : PROJECT
           Label : LEFT
             15
             Label : METHOD
-              9
+              7
               Label : ARGUMENT
-                7
+                8
               Label : NAME
-                9
+                7
             Label : OBJECT
               13
               Label : CODE
@@ -66,11 +66,11 @@ Label : PROJECT
           Label : LEFT
             15
             Label : METHOD
-              9
+              7
               Label : ARGUMENT
-                7
+                8
               Label : NAME
-                9
+                7
             Label : OBJECT
               13
               Label : CODE
@@ -78,7 +78,7 @@ Label : PROJECT
                 Label : NEW
                   6
                   Label : ARGUMENT
-                    7
+                    8
                   Label : NAME
                     6
           Label : RIGHT
@@ -88,11 +88,11 @@ Label : PROJECT
           Label : LEFT
             15
             Label : METHOD
-              9
+              7
               Label : ARGUMENT
-                7
+                8
               Label : NAME
-                9
+                7
             Label : OBJECT
               13
               Label : CODE
@@ -100,7 +100,7 @@ Label : PROJECT
                 Label : NEW
                   17
                   Label : ARGUMENT
-                    7
+                    8
                   Label : NAME
                     17
           Label : RIGHT
@@ -110,11 +110,11 @@ Label : PROJECT
           Label : LEFT
             15
             Label : METHOD
-              9
+              7
               Label : ARGUMENT
-                7
+                8
               Label : NAME
-                9
+                7
             Label : OBJECT
               13
               Label : CODE

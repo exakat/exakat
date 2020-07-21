@@ -59,7 +59,7 @@ Label : PROJECT
                 36
               Label : USE
                 38
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
                   38
                 Label : FUNCTION
                   14
@@ -92,11 +92,11 @@ Label : PROJECT
               Label : GROUPUSE
                 46
               Label : USE
-                56
-              Label : USE
                 57
               Label : USE
                 58
+              Label : USE
+                56
             Label : EXPRESSION
               9
               Label : CONST
@@ -123,7 +123,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   40
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     40
           Label : NAME
             5
@@ -143,8 +143,6 @@ Label : PROJECT
                     66
               Label : NAME
                 40
-              Label : RETURNED
-                Void
               Label : RETURNTYPE
                 5
             Label : EXPRESSION
@@ -165,8 +163,6 @@ Label : PROJECT
                   38
               Label : NAME
                 38
-              Label : RETURNED
-                Void
               Label : RETURNTYPE
                 5
             Label : EXPRESSION
@@ -177,7 +173,7 @@ Label : PROJECT
                   5
                 Label : NAME
                   40
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     40
               Label : MAGICMETHOD
                 70
@@ -191,8 +187,6 @@ Label : PROJECT
                       71
                 Label : NAME
                   70
-                Label : RETURNED
-                  Void
                 Label : RETURNTYPE
                   5
               Label : NAME

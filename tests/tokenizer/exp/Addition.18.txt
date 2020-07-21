@@ -1,8 +1,16 @@
 test
 Label : GLOBAL
   11
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
 Label : GLOBAL
   5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
 Label : GLOBAL
   15
   Label : DEFINITION
