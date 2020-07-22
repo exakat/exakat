@@ -28,7 +28,7 @@ use Exakat\Data\Methods;
 class CouldBeIterable extends CouldBeType {
     public function analyze() {
         $iterableAtoms = array('Arrayliteral');
-        
+
         // property relayed typehint
         $this->checkPropertyRelayedTypehint(array('Scalartypehint'), array('\\iterable'));
 
@@ -55,12 +55,13 @@ class CouldBeIterable extends CouldBeType {
 
         // return type
         $this->checkReturnedAtoms($iterableAtoms);
+        $this->checkReturnedDefault($iterableAtoms);
 
         $this->checkReturnedCalls(array('Scalartypehint'), array('\\iterable'));
 
         $this->checkReturnedTypehint(array('Scalartypehint'), array('\\iterable', '\\array'));
 
-        // function ($a) { bar($a);} function bar(array $b) {}
+        // function ($a) { bar($a);} function bar(iterable $b) {}
         $this->checkRelayedArgument(array('Scalartypehint'), array('\\iterable'));
 
         // argument validation

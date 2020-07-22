@@ -151,8 +151,8 @@ abstract class CouldBeType extends Analyzer {
                      ->inIs('OVERWRITE')
              )
              ->outIs('RETURNED')
-             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->hasIn('RETURN')
+             ->atomIs($atoms, self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
     }
@@ -191,7 +191,7 @@ abstract class CouldBeType extends Analyzer {
              ->atomIs('Variable', self::WITH_CONSTANTS)
              ->inIs('DEFINITION')
              ->inIs('NAME')
-             ->atomIs('Parameterdefinition')
+             ->atomIs('Parameter')
              ->outIs('DEFAULT')
              ->atomIs($atoms)
              ->back('first');
