@@ -54,6 +54,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         // constants like E_ALL 
         $query = $this->newQuery('SpotPHPNativeConstants');
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
+              ->tokenIs('T_STRING') // This will skip strings in define()
               ->has('fullnspath')
               ->values('fullnspath')
               ->unique();
@@ -97,7 +98,7 @@ class SpotPHPNativeConstants extends LoadFinal {
               ->fullnspathIs($search, Analyzer::CASE_SENSITIVE)
               ->raw(<<<'GREMLIN'
 sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\").last();  
-                it.get().property("fullnspath", "\\"  + fnp);
+                it.get().property("fullnspath", "\\" + fnp);
                 it.get().property("isPhp", true);}
 GREMLIN)
               ->returnCount();

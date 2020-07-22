@@ -29,13 +29,13 @@ class ConstantDefinition extends Analyzer {
     protected $constants = array();
 
     public function analyze() {
-        $fullnspath = makeFullNsPath($this->constants, true);
+        $fullnspath = makeFullNsPath($this->constants, \FNP_CONSTANT);
 
         $this->atomIs('Const')
              ->hasNoClassInterface()
              ->outIs('CONST')
              ->outIs('NAME')
-             ->fullnspathIs($fullnspath)
+             ->fullnspathIs($fullnspath, self::CASE_SENSITIVE)
              ->inIs('NAME');
         $this->prepareQuery();
 
@@ -43,7 +43,7 @@ class ConstantDefinition extends Analyzer {
              ->outIs('NAME')
              ->atomIs('Identifier')
              ->hasNoOut('CONCAT')
-             ->fullnspathIs($fullnspath);
+             ->fullnspathIs($fullnspath, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }
