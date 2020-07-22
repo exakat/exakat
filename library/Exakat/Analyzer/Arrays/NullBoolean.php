@@ -34,7 +34,7 @@ class NullBoolean extends Analyzer {
         $atoms = array('Null', 'Boolean', 'Integer', 'Float');
         
         // true[1], null[0]
-        $this->atomIs($atoms, self::WITH_CONSTANTS)
+        $this->atomIs($atoms, self::WITHOUT_CONSTANTS)
              ->inIs('VARIABLE');
         $this->prepareQuery();
 

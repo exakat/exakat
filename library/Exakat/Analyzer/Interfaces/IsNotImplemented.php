@@ -28,7 +28,7 @@ class IsNotImplemented extends Analyzer {
     public function analyze() {
         // interface i { function i() {}}
         // class c implements i {       }
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
              ->isNot('abstract', true)
              ->collectMethods('classMethods')
              ->goToAllImplements(self::INCLUDE_SELF)
