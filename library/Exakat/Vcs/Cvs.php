@@ -99,7 +99,7 @@ class Cvs extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) {
+    public function getDiffLines($r1, $r2):array {
         display("No support for line diff in CVS.\n");
         return array();
     }

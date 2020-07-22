@@ -165,7 +165,7 @@ class Git extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) {
+    public function getDiffLines($r1, $r2) : array {
         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff -U0 -r $r1 -r $r2");
 
         $file    = '';

@@ -86,7 +86,7 @@ class Mercurial extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) {
+    public function getDiffLines($r1, $r2) : array {
         display("No support for line diff in Hg.\n");
         return array();
     }

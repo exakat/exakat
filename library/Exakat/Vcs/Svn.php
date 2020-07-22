@@ -116,16 +116,18 @@ class Svn extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) {
+    public function getDiffLines($r1, $r2) : array {
         display("No support for line diff in SVN.\n");
         return array();
     }
 
     public function getLastCommitDate() : int {
-        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} log -l1 2>&1"));
+        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info 2>&1"));
 
-        if (preg_match('/ \d{4}.+\d{4} /m', $res, $r)) {
-            return strtotime($r[0]);
+        //Last Changed Date: 2020-07-22 09:17:27 +0200 (Wed, 22 Jul 2020)
+        if (preg_match('/Last Changed Date: (\d{4}.+\d{4}) /m', $res, $r)) {
+            print strtotime($r[1]);
+            return strtotime($r[1]);
         } else {
             return 0;
         }

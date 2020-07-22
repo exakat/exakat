@@ -47,7 +47,7 @@ abstract class Vcs {
 
     abstract public function clone(string $source): void;
 
-    public function getDiffLines($r1, $r2) {
+    public function getDiffLines($r1, $r2): array  {
         return array();
     }
 
