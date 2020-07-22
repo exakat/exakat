@@ -59,7 +59,7 @@ class Initproject extends Tasks {
         }
 
         display("Initializing {$this->config->project}" . (!empty($repositoryURL) ? " with $repositoryURL" : '') );
-        $this->init_project($this->config->project, $repositoryURL);
+        $this->init_project($this->config->project, $repositoryURL ?: '');
 
         display('Done');
     }
