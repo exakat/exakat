@@ -6,7 +6,7 @@ Exakat features
 Features list
 -------------
 
-* 390 analyzers
+* 395 analyzers
 * Compatible with PHP 5.2 to 8.0-dev
 * Migration guide from 5.2 to 7.4 and 8.0-dev
 * Modernize your code
@@ -18,15 +18,15 @@ Features list
 * Code visualizations
 
 
-390 analyzers
+395 analyzers
 -----------------------------
 
-There are currently 390 different analyzers that check the PHP code to report code smells. Analyzers are inspired by PHP manual, migration documents, community good practices, computer science or simple logic. 
+There are currently 395 different analyzers that check the PHP code to report code smells. Analyzers are inspired by PHP manual, migration documents, community good practices, computer science or simple logic. 
 
 Some of them track rare occurrences, and some are frequent. Some track careless mistakes and some are highly complex situations. In any case, exakat has your back, and will warn you. 
 
 .. image:: images/dashboard.748.png
-    :alt: 390 analysis with faceted search
+    :alt: 395 analysis with faceted search
 
 
 Compatible with PHP 5.2 to 8.0-dev

@@ -440,6 +440,14 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + tooManyDereferencing : 7
 
     + Maximum number of dereferencing.
+:ref:`Too Many Finds <too-many-finds>`
+  + minimumFinds : 5
+
+    + Minimal number of prefixed methods to report.
+:ref:`Too Many Finds <too-many-finds>`
+  + findPrefix : find
+
+    + list of prefix to use when detecting the 'find'. Comma-separated list, case insensitive. 
 :ref:`Too Many Injections <too-many-injections>`
   + injectionsCount : 5
 

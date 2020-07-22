@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 24 Jun 2020 07:21:35 +0000
-.. comment: Generation hash : 10f8b68d685a4d7529830c792adbf0a3ab2d70c1
+.. comment: Generation date : Wed, 22 Jul 2020 14:57:17 +0000
+.. comment: Generation hash : 1dd7a5821ad28cab48d27d40c38f7334e55c7640
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 390 analysis
+Total : 395 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -163,6 +163,7 @@ Total : 390 analysis
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
 * :ref:`Crc32() Might Be Negative <crc32()-might-be-negative>`
+* :ref:`Cyclic References <cyclic-references>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
@@ -178,6 +179,7 @@ Total : 390 analysis
 * :ref:`Dont Mix ++ <dont-mix-++>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instructions <double-instructions>`
+* :ref:`Double Object Assignation <double-object-assignation>`
 * :ref:`Drop Else After Return <drop-else-after-return>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Else If Versus Elseif <else-if-versus-elseif>`
@@ -248,6 +250,7 @@ Total : 390 analysis
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Methods Without Return <methods-without-return>`
+* :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
@@ -395,6 +398,7 @@ Total : 390 analysis
 * :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
+* :ref:`Undefined Constant Name <undefined-constant-name>`
 * :ref:`Undefined Constants <undefined-constants>`
 * :ref:`Undefined Functions <undefined-functions>`
 * :ref:`Undefined Insteadof <undefined-insteadof>`
@@ -461,6 +465,7 @@ Total : 390 analysis
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
 * :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
+* :ref:`Wrong Argument Type <wrong-argument-type>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
@@ -491,7 +496,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 43 analysis
+Total : 46 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -506,8 +511,10 @@ Total : 43 analysis
 * :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use self <could-use-self>`
+* :ref:`Cyclic References <cyclic-references>`
 * :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
 * :ref:`Disconnected Classes <disconnected-classes>`
+* :ref:`Double Object Assignation <double-object-assignation>`
 * :ref:`Exceeding Typehint <exceeding-typehint>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
@@ -518,6 +525,7 @@ Total : 43 analysis
 * :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Could Be Static <method-could-be-static>`
+* :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
 * :ref:`Missing Abstract Method <missing-abstract-method>`
 * :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
@@ -1158,7 +1166,7 @@ LintButWontExec
 
 This ruleset focuses on PHP code that lint (php -l), but that will not run. As such, this ruleset tries to go further than PHP, by connecting files, just like during execution.
 
-Total : 26 analysis
+Total : 28 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -1169,8 +1177,10 @@ Total : 26 analysis
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
+* :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
+* :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Must Return Methods <must-return-methods>`
 * :ref:`No Magic With Array <no-magic-with-array>`
@@ -1475,11 +1485,12 @@ Typechecks
 
 This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint, are reported. 
 
-Total : 20 analysis
+Total : 22 analysis
 
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Bad Typehint Relay <bad-typehint-relay>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Could Be Integer <could-be-integer>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Type With Array <could-type-with-array>`
 * :ref:`Could Type With Boolean <could-type-with-boolean>`
@@ -1496,6 +1507,7 @@ Total : 20 analysis
 * :ref:`No Class As Typehint <no-class-as-typehint>`
 * :ref:`Not A Scalar Type <not-a-scalar-type>`
 * :ref:`Useless Interfaces <useless-interfaces>`
+* :ref:`Wrong Argument Type <wrong-argument-type>`
 * :ref:`Wrong Type With Call <wrong-type-with-call>`
 
 .. _php-cs-fixable:

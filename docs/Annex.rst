@@ -312,10 +312,9 @@ Supported Frameworks
 
 Frameworks, components and libraries are supported via Exakat extensions.
 
-List of extensions : there are 11 extensions
+List of extensions : there are 10 extensions
 
 * :ref:`Cakephp <extension-cakephp>`
-* :ref:`Codeigniter <extension-codeigniter>`
 * :ref:`Drupal <extension-drupal>`
 * :ref:`Laravel <extension-laravel>`
 * :ref:`Pmb <extension-pmb>`
@@ -441,15 +440,39 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.1.4
+
+  * Call Order (Dump/CallOrder ; Unassigned)
+  * Could Be Integer (Typehints/CouldBeFloat ; Typehints)
+  * Could Be Integer (Typehints/CouldBeInt ; Typechecks, Typehints)
+  * Could Be Iterable (Typehints/CouldBeIterable ; Typehints)
+  * Extended Typehints (Complete/ExtendedTypehints ; Complete)
+  * Mismatch Properties Typehints (Classes/MismatchProperties)
+  * Php/UseMatch (Php/UseMatch ; Unassigned)
+
+* 2.1.3
+
+  * Cyclic References (Classes/CyclicReferences)
+  * Protocol lists (Type/Protocols ; Appinfo)
+  * Wrong Argument Type (Functions/WrongArgumentType ; Analyze, Typechecks)
+
 * 2.1.2
 
   * Collect Class Constant Counts (Dump/CollectClassConstantCounts)
   * Collect Local Variable Counts (Dump/CollectLocalVariableCounts ; Dump)
   * Collect Method Counts (Dump/CollectMethodCounts ; Dump)
   * Collect Property Counts (Dump/CollectPropertyCounts ; Dump)
+  * Could Be Array Typehint (Typehints/CouldBeArray ; Typehints)
   * Could Be Boolean (Typehints/CouldBeBoolean ; Typehints)
+  * Could Be CIT (Typehints/CouldBeCIT ; Typehints)
+  * Could Be Callable (Typehints/CouldBeCallable ; Typehints)
+  * Could Be Null (Typehints/CouldBeNull ; Typehints)
+  * Could Be Parent (Typehints/CouldBeParent ; Typehints)
+  * Could Be Self (Typehints/CouldBeSelf ; Typehints)
   * Could Be String (Typehints/CouldBeString ; Typehints)
   * Could Be Void (Typehints/CouldBeVoid ; Typehints)
+  * Could Not Type (Typehints/CouldNotType ; Typehints)
+  * Double Object Assignation (Structures/DoubleObjectAssignation ; Analyze, ClassReview)
   * Possible Alias Confusion (Namespaces/AliasConfusion ; Suggestions)
   * Safe Phpvariables (Php/SafePhpvars ; Internal)
   * Static Global Variables Confusion (Structures/SGVariablesConfusion ; Suggestions)
@@ -465,7 +488,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * OpenSSL Ciphers Used (Type/OpensslCipher ; Inventory)
   * Prefix And Suffixes With Typehint (Functions/PrefixToType ; Semantics)
   * Throw Was An Expression (Php/ThrowWasAnExpression ; CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
-  * Undefined Constant Name (Variables/UndefinedConstantName ; Unassigned)
+  * Undefined Constant Name (Variables/UndefinedConstantName ; Analyze)
   * Unused Trait In Class (Traits/UnusedClassTrait ; ClassReview)
 
 * 2.1.0
@@ -521,7 +544,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Dump/NewOrder (Dump/NewOrder ; Dump)
   * Insufficient Property Typehint (Classes/InsufficientPropertyTypehint)
   * Nullable Without Check (Functions/NullableWithoutCheck ; ClassReview)
-  * Typehint Order (Dump/TypehintOrder ; Unassigned)
+  * Typehint Order (Dump/TypehintOrder ; )
   * Wrong Typehinted Name (Functions/WrongTypehintedName ; Coding Conventions, Semantics)
 
 * 1.9.9
@@ -564,7 +587,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Collect Parameter Counts (Dump/CollectParameterCounts ; Dump)
   * Create Magic Method (Complete/CreateMagicMethod ; )
-  * Custom/NotInThisList (Custom/NotInThisList ; Unassigned)
+  * Custom/NotInThisList (Custom/NotInThisList ; Under Work)
   * Dump/DereferencingLevels (Dump/DereferencingLevels ; Dump)
   * Duplicate Literal (Type/DuplicateLiteral ; Semantics)
   * Internet Domains (Type/UdpDomains ; Inventory)
@@ -577,7 +600,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Collect Literals (Dump/CollectLiterals ; Dump)
   * Environnement Variable Usage (Dump/EnvironnementVariables ; Dump)
-  * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, ClassReview)
+  * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, LintButWontExec, ClassReview)
   * Magic Properties (Classes/MagicProperties)
   * No Garantee For Property Constant (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
   * No Literal For Reference (Functions/NoLiteralForReference ; Analyze)
@@ -2191,7 +2214,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-90 PHP error message detailled : 
+93 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` Default value for parameters with a int type can only be int or NULL  <mismatch-type-and-default>`
@@ -2266,6 +2289,9 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Trait 'a' not found  <trait-not-found>`
 * :ref:`Trait method M has not been applied, because there are collisions with other trait methods on C <method-collision-traits>`
 * :ref:`Trait method f has not been applied, because there are collisions with other trait methods on x <useless-alias>`
+* :ref:`Trying to access array offset on value of type boolean <null-or-boolean-arrays>`
+* :ref:`Trying to access array offset on value of type float <null-or-boolean-arrays>`
+* :ref:`Trying to access array offset on value of type int <null-or-boolean-arrays>`
 * :ref:`Trying to access array offset on value of type null <null-or-boolean-arrays>`
 * :ref:`Trying to access array offset on value of type null <scalar-are-not-arrays>`
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
@@ -2401,6 +2427,7 @@ List of external links mentionned in this documentation.
 * `__autoload <http://php.net/autoload>`_
 * `__get performance questions with PHP <https://stackoverflow.com/questions/3330852/get-set-call-performance-questions-with-php>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
+* `About circular references in PHP <https://johann.pardanaud.com/blog/about-circular-references-in-php>`_
 * `Add array_key_exists to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
@@ -2411,8 +2438,8 @@ List of external links mentionned in this documentation.
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -2657,6 +2684,7 @@ List of external links mentionned in this documentation.
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
+* `Interfaces <https://www.php.net/manual/fr/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
 * `Isset <http://www.php.net/isset>`_
@@ -2693,8 +2721,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2740,8 +2768,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2884,7 +2912,6 @@ List of external links mentionned in this documentation.
 * `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
 * `SOAP <http://php.net/manual/en/book.soap.php>`_
 * `Sockets <http://php.net/manual/en/book.sockets.php>`_
-* `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
 * `Sphinx Client <http://php.net/manual/en/book.sphinx.php>`_
 * `Spread Operator in Array Expression  <https://wiki.php.net/rfc/spread_operator_for_array>`_
 * `Spread Operator in Array Expression <https://wiki.php.net/rfc/spread_operator_for_array>`_
@@ -2907,6 +2934,7 @@ List of external links mentionned in this documentation.
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_
 * `Superglobals <http://php.net/manual/en/language.variables.superglobals.php>`_
 * `Supported PHP Extensions <http://exakat.readthedocs.io/en/latest/Annex.html#supported-php-extensions>`_
+* `Supported Protocols and Wrappers <https://www.php.net/manual/en/wrappers.php>`_
 * `SVM <http://www.php.net/svm>`_
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://www.swoole.com/>`_
@@ -2936,11 +2964,12 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations  <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -3067,6 +3096,7 @@ _______
 |   analyzer[] = "Classes/CouldBeAbstractClass";
 |   analyzer[] = "Classes/CouldBeFinal";
 |   analyzer[] = "Classes/CouldBeStatic";
+|   analyzer[] = "Classes/CyclicReferences";
 |   analyzer[] = "Classes/DependantAbstractClass";
 |   analyzer[] = "Classes/DirectCallToMagicMethod";
 |   analyzer[] = "Classes/DontSendThisInConstructor";
@@ -3082,6 +3112,7 @@ _______
 |   analyzer[] = "Classes/MakeDefault";
 |   analyzer[] = "Classes/MakeGlobalAProperty";
 |   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
+|   analyzer[] = "Classes/MismatchProperties";
 |   analyzer[] = "Classes/MissingAbstractMethod";
 |   analyzer[] = "Classes/MultipleDeclarations";
 |   analyzer[] = "Classes/MultipleTraitOrInterface";
@@ -3190,6 +3221,7 @@ _______
 |   analyzer[] = "Functions/UsesDefaultArguments";
 |   analyzer[] = "Functions/UsingDeprecated";
 |   analyzer[] = "Functions/WithoutReturn";
+|   analyzer[] = "Functions/WrongArgumentType";
 |   analyzer[] = "Functions/WrongNumberOfArguments";
 |   analyzer[] = "Functions/WrongOptionalParameter";
 |   analyzer[] = "Functions/WrongReturnedType";
@@ -3288,6 +3320,7 @@ _______
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";
 |   analyzer[] = "Structures/DoubleAssignation";
 |   analyzer[] = "Structures/DoubleInstruction";
+|   analyzer[] = "Structures/DoubleObjectAssignation";
 |   analyzer[] = "Structures/DropElseAfterReturn";
 |   analyzer[] = "Structures/EchoWithConcat";
 |   analyzer[] = "Structures/ElseIfElseif";
@@ -3428,6 +3461,7 @@ _______
 |   analyzer[] = "Variables/LostReferences";
 |   analyzer[] = "Variables/OverwrittenLiterals";
 |   analyzer[] = "Variables/StrangeName";
+|   analyzer[] = "Variables/UndefinedConstantName";
 |   analyzer[] = "Variables/UndefinedVariable";
 |   analyzer[] = "Variables/VariableNonascii";
 |   analyzer[] = "Variables/VariableUsedOnce";
@@ -3457,6 +3491,7 @@ ___________
 |   analyzer[] = "Classes/CouldBeProtectedMethod";
 |   analyzer[] = "Classes/CouldBeProtectedProperty";
 |   analyzer[] = "Classes/CouldBeStatic";
+|   analyzer[] = "Classes/CyclicReferences";
 |   analyzer[] = "Classes/DependantAbstractClass";
 |   analyzer[] = "Classes/DisconnectedClasses";
 |   analyzer[] = "Classes/Finalclass";
@@ -3464,6 +3499,7 @@ ___________
 |   analyzer[] = "Classes/FossilizedMethod";
 |   analyzer[] = "Classes/HiddenNullable";
 |   analyzer[] = "Classes/InsufficientPropertyTypehint";
+|   analyzer[] = "Classes/MismatchProperties";
 |   analyzer[] = "Classes/MissingAbstractMethod";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoParent";
@@ -3487,6 +3523,7 @@ ___________
 |   analyzer[] = "Interfaces/UselessInterfaces";
 |   analyzer[] = "Performances/MemoizeMagicCall";
 |   analyzer[] = "Structures/CouldBeStatic";
+|   analyzer[] = "Structures/DoubleObjectAssignation";
 |   analyzer[] = "Traits/SelfUsingTrait";
 |   analyzer[] = "Traits/UnusedClassTrait";| 
 
@@ -4158,6 +4195,7 @@ _______________
 |   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/IncompatibleSignature";
 |   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
+|   analyzer[] = "Classes/MismatchProperties";
 |   analyzer[] = "Classes/MutualExtension";
 |   analyzer[] = "Classes/NoMagicWithArray";
 |   analyzer[] = "Classes/NoPSSOutsideClass";
@@ -4172,6 +4210,7 @@ _______________
 |   analyzer[] = "Functions/TypehintMustBeReturned";
 |   analyzer[] = "Interfaces/CantImplementTraversable";
 |   analyzer[] = "Interfaces/ConcreteVisibility";
+|   analyzer[] = "Interfaces/IsNotImplemented";
 |   analyzer[] = "Interfaces/RepeatedInterface";
 |   analyzer[] = "Traits/MethodCollisionTraits";
 |   analyzer[] = "Traits/TraitNotFound";
@@ -4507,9 +4546,11 @@ __________
 |   analyzer[] = "Functions/MissingTypehint";
 |   analyzer[] = "Functions/NoClassAsTypehint";
 |   analyzer[] = "Functions/ShouldBeTypehinted";
+|   analyzer[] = "Functions/WrongArgumentType";
 |   analyzer[] = "Functions/WrongTypeWithCall";
 |   analyzer[] = "Interfaces/UselessInterfaces";
-|   analyzer[] = "Php/NotScalarType";| 
+|   analyzer[] = "Php/NotScalarType";
+|   analyzer[] = "Typehints/CouldBeInt";| 
 
 
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 24 Jun 2020 07:21:35 +0000
-.. comment: Generation hash : 10f8b68d685a4d7529830c792adbf0a3ab2d70c1
+.. comment: Generation date : Wed, 22 Jul 2020 14:57:17 +0000
+.. comment: Generation hash : 1dd7a5821ad28cab48d27d40c38f7334e55c7640
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2384,7 +2384,7 @@ This analysis skips `scandir() <https://www.php.net/scandir>`_ and `glob() <http
 
 `glob() <https://www.php.net/glob>`_ accepts wildchar, such as ``*``, that may not easily replaced with `scandir() <https://www.php.net/scandir>`_ or `opendir() <https://www.php.net/opendir>`_.
 
-See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
+See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_ and `glob:// <https://www.php.net/manual/en/wrappers.glob.php>`_.
 
 
 
@@ -2393,6 +2393,7 @@ Suggestions
 
 * Use FilesystemIterator, DirectoryIterator classes.
 * Use ``RegexIterator`` to filter any unwanted results from ``FilesystemIterator``.
+* Use ``glob`` protocol for files : $it = new DirectoryIterator('glob://path/to/examples/*.php');
 
 +-------------+---------------------+
 | Short name  | Performances/NoGlob |
@@ -5550,6 +5551,38 @@ Suggestions
 
 
 
+.. _could-be-integer:
+
+Could Be Integer
+################
+
+
+Mark arguments, properties and return types that can be set to ``int``.
+
+.. code-block:: php
+
+   <?php
+   
+   // Accept an int as input 
+   function foo($b) {
+       // Returns an int
+       return $b + 8;
+   }
+   
+   ?>
+
++-------------+----------------------+
+| Short name  | Typehints/CouldBeInt |
++-------------+----------------------+
+| Rulesets    | :ref:`Typechecks`    |
++-------------+----------------------+
+| Severity    | Major                |
++-------------+----------------------+
+| Time To Fix | Typehints/CouldBeInt |
++-------------+----------------------+
+
+
+
 .. _could-be-private-class-constant:
 
 Could Be Private Class Constant
@@ -6805,6 +6838,63 @@ See also `crc32() <https://www.php.net/crc32>`_.
 +-------------+--------------------------+
 | Time To Fix | Php/Crc32MightBeNegative |
 +-------------+--------------------------+
+
+
+
+.. _cyclic-references:
+
+Cyclic References
+#################
+
+
+Avoid cyclic references. 
+
+Cyclic references happen when an object points to another object, which reciprocate. This is particularly possible with classes, when the child class has to keep a reference to the parent class. 
+
+.. code-block:: php
+
+   <?php
+   
+   class a {
+       private $p = null;
+       
+       function foo() {
+           $this->p = new b();
+           // the current class is stored in the child class
+           $this->p->m($this);
+       }
+   }
+   
+   class b {
+       private $pb = null;
+       
+       function n($a) {
+           // the current class keeps a link to its parent
+           $this->pb = $a;
+       }
+   }
+   ?>
+
+
+Cyclic references, or circular references, are memory intensive : only the garbage collector can understand when they may be flushed from memory, which is a costly operation. On the other hand, in an acyclic reference code, the reference counter will know immediately know that an object is free or not. 
+
+See also `About circular references in PHP <https://johann.pardanaud.com/blog/about-circular-references-in-php>`_ and `A Journey to find a memory leak <https://jolicode.com/blog/a-journey-to-find-a-memory-leak/>`_.
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a different object when calling the child objects. 
+* Refactor your code to avoid the cyclic reference.
+
++-------------+------------------------------------+
+| Short name  | Classes/CyclicReferences           |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Classes/CyclicReferences           |
++-------------+------------------------------------+
 
 
 
@@ -8079,6 +8169,47 @@ Suggestions
 +-------------+------------------------------+
 | Time To Fix | Structures/DoubleInstruction |
 +-------------+------------------------------+
+
+
+
+.. _double-object-assignation:
+
+Double Object Assignation
+#########################
+
+
+Make sure that assigning the same object to two variables is the intended purpose.
+
+.. code-block:: php
+
+   <?php
+   
+   // $x and $y are the same object, as they both hold a reference to the same object.
+   // This means that changing $x, will also change $y.
+   $x = $y = new Z();
+   
+   // $a and $b are distinct values, by default
+   $a = $b = 1;
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+------------------------------------+
+| Short name  | Structures/DoubleObjectAssignation |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Structures/DoubleObjectAssignation |
++-------------+------------------------------------+
 
 
 
@@ -12537,9 +12668,33 @@ Interfaces Is Not Implemented
 #############################
 
 
-Classes that implements interfaces must implements each of the interface's methods. 
+Classes that implements interfaces, must implements each of the interface's methods. 
+
+.. code-block:: php
+
+   <?php
+   
+   class x implements i {
+       // This method implements the foo method from the i interface
+       function foo() {}
+   
+       // The method bar is missing, yet is requested by interface i
+       function foo() {}
+   }
+   
+   interface i {
+       function foo();
+       function bar(); 
+   }
+   
+   ?>
 
 
+This problem tends to occurs in code that split interfaces and classes by file. This means that PHP's linting will skip the definitions and not find the problem. At execution time, the definitions will be checked, and a Fatal error will occur.
+
+This situation usually detects code that was forgotten during a refactorisation of the interface or the class and its sibblings.
+
+See also `Interfaces <https://www.php.net/manual/fr/language.oop5.interfaces.php>`_.
 
 
 Suggestions
@@ -12550,15 +12705,15 @@ Suggestions
 * Make the class abstract
 * Make the missing methods abstract
 
-+-------------+------------------------------------+
-| Short name  | Interfaces/IsNotImplemented        |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Interfaces/IsNotImplemented        |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------------+
+| Short name  | Interfaces/IsNotImplemented                                |
++-------------+------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`LintButWontExec` |
++-------------+------------------------------------------------------------+
+| Severity    | Minor                                                      |
++-------------+------------------------------------------------------------+
+| Time To Fix | Interfaces/IsNotImplemented                                |
++-------------+------------------------------------------------------------+
 
 
 
@@ -14668,6 +14823,54 @@ Suggestions
 +-------------+--------------------------+
 | Time To Fix | Security/MinusOneOnError |
 +-------------+--------------------------+
+
+
+
+.. _mismatch-properties-typehints:
+
+Mismatch Properties Typehints
+#############################
+
+
+Properties must match within the same family.
+
+When a property is declared both in a parent class, and a child class, they must have the same type. The same type includes a possible null value.
+
+This doesn't apply to private properties, which are only visible locally.
+
+<?php
+
+// property $p is declared as an object of type a
+class x { 
+    protected A $p; 
+}
+
+// property $p is declared again, this time without a type
+class a extends x { 
+    protected $p; 
+}
+
+This code will lint, but not execute. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove some of the property declarations, and only keep it in the highest ranking parent
+* Match the typehints of the property declarations
+* Make the properties private
+* Remove the child class (or the parent class)
+
++-------------+------------------------------------------------------------+
+| Short name  | Classes/MismatchProperties                                 |
++-------------+------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`ClassReview` |
++-------------+------------------------------------------------------------+
+| Severity    | Minor                                                      |
++-------------+------------------------------------------------------------+
+| Time To Fix | Classes/MismatchProperties                                 |
++-------------+------------------------------------------------------------+
 
 
 
@@ -18415,6 +18618,10 @@ Suggestions
 
 * Cast the values to integer before comparing
 * Compute the difference, and keep it below a threshold
+* Use the gmp or the bc extension to handle high precision numbers
+* Change the 'precision' directive of PHP : ini_set('precision', 30) to make number larger
+* Multiply by a power of ten, before casting to integer for the comparison
+* Use floor(), ceil() or round() to compare the numbers, with a specific precision
 
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Type/NoRealComparison                                                                               |
@@ -18913,19 +19120,32 @@ No Weak SSL Crypto
 ##################
 
 
-When enabling PHP's stream SSL, it is important to use safe protocol. 
+When enabling PHP's stream SSL, it is important to use a safe protocol. 
 
-All the SSL protocol, and TLS (its successor) v 1.0 are not unsafe. The best is to use the most recent TLS, the 1.2. 
+All the SSL protocols (1.0, 2.0, 3.0), and TLS (1.0 are unsafe. The best is to use the most recent TLS, version 1.2. 
 
 stream_socket_enable_crypto() and `curl_setopt() <https://www.php.net/curl_setopt>`_ are checked.
 
-See also `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>`_ and `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_.
+.. code-block:: php
+
+   <?php
+   
+   // This socket will use SSL v2, which 
+   $socket = 'sslv2://www.example.com';
+   $fp = fsockopen($socket, 80, $errno, $errstr, 30);
+   
+   ?>
+
+
+Using the TLS transport protocol of PHP will choose the version by itself. 
+
+See also `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>`_, `The 2018 Guide to Building Secure PHP Software <https://paragonie.com/blog/2017/12/2018-guide-building-secure-php-software>`_ and `Internet Domain: TCP, UDP, SSL, and TLS <https://www.php.net/manual/en/transports.inet.php>`_.
 
 
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Use TLS transport, with version 1.2
 
 +-------------+--------------------------+
 | Short name  | Security/NoWeakSSLCrypto |
@@ -19657,7 +19877,9 @@ Null Or Boolean Arrays
 ######################
 
 
-Null and booleans are valid PHP array base. Yet, they only produce ``null`` values, and no warning.
+Null and booleans are valid PHP array base. Yet, they only produces ``null`` values. They also did not emits any warning until PHP 7.4.
+
+This analysis has been upgraded to cover int and float types too.
 
 .. code-block:: php
 
@@ -27396,7 +27618,8 @@ See also `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch
 Suggestions
 ^^^^^^^^^^^
 
-* Use a simple switch statement, rather than a long string of if/else
+* Use a switch statement, rather than a long string of if/else
+* Use a match() statement, rather than a long string of if/else (PHP 8.0 +)
 
 +-------------+---------------------------+
 | Short name  | Structures/SwitchToSwitch |
@@ -28133,6 +28356,18 @@ Too many methods called 'find*' in this class. It is may be time to consider the
 
 
 See also `On Taming Repository Classes in Doctrine <https://beberlei.de/2013/03/04/doctrine_repositories.html>`_ , `On Taming Repository Classes in Doctrine… Among other things. <http://blog.kevingomez.fr/2015/02/07/on-taming-repository-classes-in-doctrine-among-other-things/>`_, `specifications <https://slides.pixelart.at/2017-02-04/fosdem/specifications/#/>`_.
+
++--------------+---------+---------+-------------------------------------------------------------------------------------------+
+| Name         | Default | Type    | Description                                                                               |
++--------------+---------+---------+-------------------------------------------------------------------------------------------+
+| minimumFinds | 5       | integer | Minimal number of prefixed methods to report.                                             |
++--------------+---------+---------+-------------------------------------------------------------------------------------------+
+| findPrefix   | find    | string  | list of prefix to use when detecting the 'find'. Comma-separated list, case insensitive.  |
++--------------+---------+---------+-------------------------------------------------------------------------------------------+
+| findSuffix   |         | string  | Description                                                                               |
++--------------+---------+---------+-------------------------------------------------------------------------------------------+
+
+
 
 +-------------+----------------------+
 | Short name  | Classes/TooManyFinds |
@@ -29121,6 +29356,57 @@ or if some external libraries, such as PEAR, are not provided during the analysi
 
 
 
+.. _undefined-constant-name:
+
+Undefined Constant Name
+#######################
+
+
+When using the `` syntax for variable, the name used must be a defined constant. It is not a simple string, like 'x', it is an actual constant name.
+
+Interestingly, it is possible to use a qualified name within ``, full or partial. PHP will lint such code, and will collect the value of the constant immediately. Since there is no fallback mechanism for fully qualified names, this ends with a Fatal error.
+
+.. code-block:: php
+
+   <?php
+   
+   const x = a;
+   $a = Hello;
+   
+   // Display 'Hello'  -> $a -> Hello
+   echo ;
+   
+   // Yield a PHP Warning 
+   // Use of undefined constant y - assumed 'y' (this will throw an Error in a future version of PHP)
+   echo ;
+   
+   // Yield a PHP Fatal error as PHP first checks that the constant exists 
+   //Undefined constant 'y'
+   echo ;
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Define the constant
+* Turn the dynamic syntax into a normal variable syntax
+* Use a fully qualified name (at least one \ ) to turn this syntax into a Fatal error when the constant is not found. This doesn't fix the problem, but may make it more obvious while diagnosticing.
+
++-------------+---------------------------------+
+| Short name  | Variables/UndefinedConstantName |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Variables/UndefinedConstantName |
++-------------+---------------------------------+
+
+
+
 .. _undefined-constants:
 
 Undefined Constants
@@ -30084,6 +30370,7 @@ Unreachable Code
 
 
 Code may be unreachable, because other instructions prevent its reaching. 
+
 For example, it be located after throw, return, `exit() <https://www.php.net/`exit <http://www.www.php.net/exit>`_>`_, `die() <https://www.php.net/`die <http://www.php.net/die>`_>`_, goto, `break <http://www.php.net/manual/en/control-structures.break.php>`_ or `continue <http://www.php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
 
 .. code-block:: php
@@ -30122,11 +30409,16 @@ For example, it be located after throw, return, `exit() <https://www.php.net/`ex
    B: 
    echo $a;
    
-   
    ?>
 
 
 This is dead code, that may be removed.
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the unreachable code
+* Remove the blocking expression, and let the code execute
 
 +-------------+--------------------------------------------------+
 | Short name  | Structures/UnreachableCode                       |
@@ -34359,8 +34651,6 @@ Suggestions
 +-------------+---------------------------+
 | Rulesets    | :ref:`Analyze`            |
 +-------------+---------------------------+
-| Php Version | 7.4-                      |
-+-------------+---------------------------+
 | Severity    | Minor                     |
 +-------------+---------------------------+
 | Time To Fix | Functions/UsingDeprecated |
@@ -34841,6 +35131,50 @@ Suggestions
 +-------------+------------------------------------+
 | Examples    | Classes/UndeclaredStaticProperty   |
 +-------------+------------------------------------+
+
+
+
+.. _wrong-argument-type:
+
+Wrong Argument Type
+###################
+
+
+Checks that the type of the argument is consistent with the type of the called method.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(int $a) { }
+   
+   //valid call, with an integer
+   foo(1);
+   
+   //invalid call, with a string
+   foo('asd');
+   
+   ?>
+
+
+This analysis is valid with PHP 8.0.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always use a valid type when calling methods.
+
++-------------+-----------------------------------+
+| Short name  | Functions/WrongArgumentType       |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks` |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Functions/WrongArgumentType       |
++-------------+-----------------------------------+
 
 
 
