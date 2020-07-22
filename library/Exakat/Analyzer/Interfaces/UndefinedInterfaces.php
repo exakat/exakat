@@ -56,7 +56,6 @@ class UndefinedInterfaces extends Analyzer {
         // interface used in a instanceof nor a Typehint but not defined
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->isNot('aliased', true)
              ->atomIsNot(array('Self', 'Parent'))
              ->has('fullnspath')
              ->noClassDefinition()

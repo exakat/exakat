@@ -58,7 +58,6 @@ class Atom implements AtomInterface {
     public $bracket      = Load::NOT_BRACKET;
     public $flexible     = Load::NOT_FLEXIBLE;
     public $close_tag    = Load::NO_CLOSING_TAG;
-    public $aliased      = Load::NOT_ALIASED;
     public $propertyname = '';
     public $constant     = Load::NOT_CONSTANT_EXPRESSION;
     public $root         = false;  // false is on purpose.
@@ -121,7 +120,6 @@ class Atom implements AtomInterface {
         $this->bracket       = $this->bracket ? 1 : null;
         $this->flexible      = $this->flexible ? 1 : null;
         $this->close_tag     = $this->close_tag ? 1 : null;
-        $this->aliased       = $this->aliased ? 1 : null;
 
         if ($this->intval > 2147483647) {
             $this->intval = 2147483647;
@@ -164,7 +162,6 @@ class Atom implements AtomInterface {
                                'alternative' => 0,
                                'absolute'    => 0,
                                'abstract'    => 0,
-                               'aliased'     => 0,
                                'isRead'      => 0,
                                'isModified'  => 0,
                                'static'      => 0,
@@ -227,7 +224,6 @@ class Atom implements AtomInterface {
                  'alternative',
                  'absolute',
                  'abstract',
-                 'aliased',
                  'isRead',
                  'isModified',
                  'static',

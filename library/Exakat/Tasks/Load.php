@@ -1340,7 +1340,6 @@ class Load extends Tasks {
                         $returnTypeFullcode .
                         ' => ' . $block->fullcode;
         $fn->fullnspath = $this->makeAnonymous('arrowfunction');
-        $fn->aliased    = self::NOT_ALIASED;
 
         $this->currentVariables = $previousContextVariables;
 
@@ -1424,7 +1423,6 @@ class Load extends Tasks {
             $this->addLink($function, $name, 'NAME');
         } elseif ($function->atom === 'Closure') {
             $function->fullnspath = $this->makeAnonymous('function');
-            $function->aliased    = self::NOT_ALIASED;
 
             // closure may be static
             if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
@@ -1432,7 +1430,6 @@ class Load extends Tasks {
             }
         } elseif (in_array($function->atom, array('Method', 'Magicmethod'), \STRICT_COMPARISON)) {
             $function->fullnspath = end($this->currentClassTrait)->fullnspath . '::' . mb_strtolower($name->code);
-            $function->aliased    = self::NOT_ALIASED;
 
             if (empty($function->visibility)) {
                 $function->visibility = 'none';
@@ -1743,7 +1740,6 @@ class Load extends Tasks {
             }
 
             $class->fullnspath = $this->makeAnonymous();
-            $class->aliased    = self::NOT_ALIASED;
             $this->calls->addDefinition('class', $class->fullnspath, $class);
         }
         $this->makePhpdoc($class);
@@ -2687,7 +2683,6 @@ class Load extends Tasks {
         $current = $this->id;
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
-        $namecall->aliased    = self::NOT_ALIASED;
         $this->makePhpdoc($namecall);
 
         // Empty call
@@ -2867,7 +2862,6 @@ class Load extends Tasks {
             $this->calls->addCall('class', $functioncall->fullnspath, $functioncall);
         } elseif ($atom === 'Classalias') {
             $functioncall->fullnspath = '\\classalias';
-            $functioncall->aliased    = self::NOT_ALIASED;
 
             $this->processDefineAsClassalias($argumentsList);
         } elseif (in_array($atom, array('Methodcallname', 'List'), \STRICT_COMPARISON)) {
@@ -2885,7 +2879,6 @@ class Load extends Tasks {
             }
 
             $functioncall->fullnspath = '\\' . mb_strtolower($name->code);
-            $functioncall->aliased    = self::NOT_ALIASED;
 
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) { // A functioncall
             $this->getFullnspath($name, 'function', $functioncall);
@@ -2952,11 +2945,9 @@ class Load extends Tasks {
 
             $string->noDelimiter = mb_strtolower($string->code) === 'true' ? 1 : '';
             $string->fullnspath = '\\boolean';
-            $string->aliased    = self::NOT_ALIASED;
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null', $this->id);
             $string->fullnspath = '\\null';
-            $string->aliased    = self::NOT_ALIASED;
         } else {
             $string = $this->addAtom('Identifier', $this->id);
         }
@@ -5632,7 +5623,6 @@ class Load extends Tasks {
                 $this->calls->addCall('class', $left->fullnspath, $left);
             }
             $static->fullnspath = "{$left->fullnspath}::{$right->fullcode}";
-            $static->aliased = self::NOT_ALIASED;
             $this->runPlugins($static, array('CLASS'    => $left,
                                              'CONSTANT' => $right));
         } elseif ($right->isA(array('Variable',
@@ -6031,7 +6021,6 @@ class Load extends Tasks {
         $functioncall->fullcode   = $this->tokens[$current][1] . '(' . $argumentsFullcode . ')';
         $functioncall->token      = $this->getToken($this->tokens[$current][0]);
         $functioncall->fullnspath = '\\' . mb_strtolower($this->tokens[$current][1]);
-        $functioncall->aliased    = self::NOT_ALIASED;
 
         $this->runPlugins($functioncall, $argumentsList);
 
@@ -6058,7 +6047,6 @@ class Load extends Tasks {
         $functioncall->fullcode   = $this->tokens[$current][1] . ' ' . $argumentsFullcode;
         $functioncall->token      = $this->getToken($this->tokens[$current][0]);
         $functioncall->fullnspath = '\\' . mb_strtolower($this->tokens[$current][1]);
-        $functioncall->aliased    = self::NOT_ALIASED;
 
         $this->pushExpression($functioncall);
 
@@ -6362,63 +6350,51 @@ class Load extends Tasks {
             if ($type === 'const') {
                 if (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof AtomInterface) {
                     $apply->fullnspath = mb_strtolower($name->fullnspath);
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
                 } else {
                     $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (array $r): string {
                         return mb_strtolower($r[1]) . '\\' . $r[2];
                     }, $name->fullcode);
                     $apply->fullnspath = $fullnspath;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
                 }
             } else {
                 $apply->fullnspath = mb_strtolower($name->fullcode);
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             }
         } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', 'This'))) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'), \STRICT_COMPARISON)) {
             // For language structures, it is always in global space, like eval or list
             $apply->fullnspath = '\\' . mb_strtolower($name->code);
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
         } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
             $apply->fullnspath = substr($this->namespace, 0, -1) . mb_strtolower(substr($name->fullcode, 9));
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
         } elseif ($name->isA(array('Static', 'Self', 'This'))) {
             if (empty($this->currentClassTrait) || empty($this->currentClassTrait[count($this->currentClassTrait) - 1])) {
                 $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             } else {
                 $apply->fullnspath = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             }
         } elseif ($name->atom === 'Newcall' && mb_strtolower($name->code) === 'static') {
             if (empty($this->currentClassTrait)) {
                 $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             } else {
                 $apply->fullnspath = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             }
         } elseif ($name->atom === 'Parent') {
             $apply->fullnspath = '\\parent';
-            $apply->aliased = self::NOT_ALIASED;
             return;
         } elseif ($name->isA(array('Boolean', 'Null'))) {
             $apply->fullnspath = '\\' . mb_strtolower($name->fullcode);
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
         } elseif ($name->isA(array('Identifier', 'Name', 'Newcall'))) {
             if ($name->isA(array('Newcall', 'Name'))) {
@@ -6436,40 +6412,33 @@ class Load extends Tasks {
             if ($type === 'class' && ($use = $this->uses->get('class',mb_strtolower($fnp) )) instanceof AtomInterface) {
                 $this->addLink($name, $use, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath;
-                $apply->aliased = self::ALIASED;
                 return;
 
             } elseif ($type === 'class' && ($use = $this->uses->get('class', $prefix)) instanceof AtomInterface) {
                 $this->addLink($name, $use, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath . str_replace($prefix, '', $fnp);
-                    $apply->aliased = self::ALIASED;
                     return;
 
             } elseif ($type === 'const') {
                 if (($use = $this->uses->get('const', $name->code)) instanceof AtomInterface) {
                     $this->addLink($use, $name, 'DEFINITION');
                     $apply->fullnspath = $use->fullnspath;
-                    $apply->aliased = self::ALIASED;
                     return;
                 } elseif (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof AtomInterface) {
                     $apply->fullnspath = mb_strtolower($name->fullnspath);
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
                 } else {
                     $apply->fullnspath = $this->namespace . $name->fullcode;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
                 }
 
             } elseif ($type === 'function' && ($use = $this->uses->get('function', $prefix)) instanceof AtomInterface) {
                 $this->addLink($use, $name, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath;
-                $apply->aliased = self::ALIASED;
                 return;
 
             } else {
                 $apply->fullnspath = $this->namespace . mb_strtolower($name->fullcode);
-                $apply->aliased = self::NOT_ALIASED;
                 return;
             }
 
@@ -6477,16 +6446,13 @@ class Load extends Tasks {
             if (in_array(mb_strtolower($name->noDelimiter), array('self', 'static'), \STRICT_COMPARISON)) {
                 if (empty($this->currentClassTrait)) {
                     $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
                 } elseif ($this->currentClassTrait[count($this->currentClassTrait) - 1] instanceof AtomInterface) {
                     $apply->fullnspath = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
                 } else {
                     // inside a closure
                     $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
                 }
             }
@@ -6496,7 +6462,6 @@ class Load extends Tasks {
 
             // define doesn't care about use...
             $apply->fullnspath = $prefix;
-            $apply->aliased = self::NOT_ALIASED;
             return;
         } else {
             // Finally, the case for a nsname
@@ -6505,18 +6470,15 @@ class Load extends Tasks {
             if (($use = $this->uses->get($type, $prefix)) instanceof AtomInterface) {
                 $this->addLink( $name, $use, 'DEFINITION');
                 $apply->fullnspath = $use->fullnspath . mb_strtolower( substr($name->fullcode, strlen($prefix)) ) ;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             } elseif ($type === 'const') {
                 $parts = explode('\\', $name->fullcode);
                 $last = array_pop($parts);
                 $fullnspath = $this->namespace . mb_strtolower(implode('\\', $parts)) . '\\' . $last;
                 $apply->fullnspath = $fullnspath;
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             } else {
                 $apply->fullnspath = $this->namespace . mb_strtolower($name->fullcode);
-                    $apply->aliased = self::NOT_ALIASED;
                     return;
             }
         }
