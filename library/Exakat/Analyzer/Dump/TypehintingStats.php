@@ -163,7 +163,45 @@ class TypehintingStats extends AnalyzerArrayHashResults {
         $interfacetypes2 = $this->rawQuery()->toInt();
         $interfaceTypehint = $interfacetypes1 + $interfacetypes2;
 
-        $return = compact('totalArguments', 'totalFunctions', 'withTypehint','withReturnTypehint', 'scalartype', 'returnNullable', 'argNullable', 'classTypehint', 'interfaceTypehint');
+        //typehinted properties
+        $this->atomIs('Ppp')
+             ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
+             ->back('first')
+             ->outIs('PPP')
+             ->count();
+        $typedProperties = $this->rawQuery()->toInt();
+
+        //total properties
+        $this->atomIs('Propertydefinition')
+             ->count();
+        $totalProperties = $this->rawQuery()->toInt();
+
+        //multiple properties
+        $this->atomIs(array('Method', 'Closure', 'Magicmethod', 'Arrowfunction', 'Function'))
+             ->filter(
+                $this->side()
+                     ->outIs('RETURNTYPE')
+                     ->fullnspathIsNot(array('\\void', '\\null'))
+                     ->count()
+                     ->raw('is(gte(2))')
+             )
+             ->count();
+        $multipleTypehints = $this->rawQuery()->toInt();
+
+        $return = compact('totalArguments', 
+                          'totalFunctions', 
+                          'withTypehint',
+                          'withReturnTypehint', 
+                          'scalartype', 
+                          'returnNullable', 
+                          'argNullable', 
+                          'classTypehint', 
+                          'interfaceTypehint',
+                          'typedProperties',
+                          'totalProperties',
+                          'multipleTypehints',
+                          );
         $return = $return + $scalartypes + $objecttypes;
 
         $atoms = array('all'            => self::FUNCTIONS_ALL,
