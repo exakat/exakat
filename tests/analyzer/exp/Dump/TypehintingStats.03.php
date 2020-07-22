@@ -1,24 +1,23 @@
 <?php
 
-$expected     = array(                      
-                      array('key'    => 'totalArguments',
-                            'value' => '5',
+$expected     = array(array('key'    => 'totalArguments',
+                            'value' => '15',
                            ),
 
                       array('key'    => 'totalFunctions',
-                            'value' => '1',
+                            'value' => '5',
                            ),
 
                       array('key'    => 'withTypehint',
-                            'value' => '4',
+                            'value' => '0',
                            ),
 
                       array('key'    => 'withReturnTypehint',
-                            'value' => '0',
+                            'value' => '4',
                            ),
 
                       array('key'    => 'scalartype',
-                            'value' => '0',
+                            'value' => '8',
                            ),
 
                       array('key'    => 'returnNullable',
@@ -30,47 +29,59 @@ $expected     = array(
                            ),
 
                       array('key'    => 'classTypehint',
-                            'value' => '1',
+                            'value' => '0',
                            ),
 
                       array('key'    => 'interfaceTypehint',
+                            'value' => '0',
+                           ),
+
+                      array('key'    => 'typedProperties',
+                            'value' => '3',
+                           ),
+
+                      array('key'    => 'totalProperties',
+                            'value' => '5',
+                           ),
+
+                      array('key'    => 'multipleTypehints',
                             'value' => '2',
                            ),
 
-                      array('key'    => '\i2',
+                      array('key'    => '\int',
+                            'value' => '4',
+                           ),
+
+                      array('key'    => '\float',
+                            'value' => '2',
+                           ),
+
+                      array('key'    => '\null',
                             'value' => '1',
                            ),
 
-                      array('key'    => '\x',
-                            'value' => '1',
-                           ),
-
-                      array('key'    => '\i1',
-                            'value' => '1',
-                           ),
-
-                      array('key'    => '\sdtclass',
+                      array('key'    => '\string',
                             'value' => '1',
                            ),
 
                       array('key'    => 'allTotal',
-                            'value' => '1',
+                            'value' => '5',
                            ),
 
                       array('key'    => 'allWithTypehint',
-                            'value' => '1',
-                           ),
-
-                      array('key'    => 'allWithReturnTypehint',
                             'value' => '0',
                            ),
 
+                      array('key'    => 'allWithReturnTypehint',
+                            'value' => '4',
+                           ),
+
                       array('key'    => 'functionTotal',
-                            'value' => '1',
+                            'value' => '0',
                            ),
 
                       array('key'    => 'functionWithTypehint',
-                            'value' => '1',
+                            'value' => '0',
                            ),
 
                       array('key'    => 'functionWithReturnTypehint',
@@ -90,7 +101,7 @@ $expected     = array(
                            ),
 
                       array('key'    => 'closureTotal',
-                            'value' => '0',
+                            'value' => '5',
                            ),
 
                       array('key'    => 'closureWithTypehint',
@@ -98,7 +109,7 @@ $expected     = array(
                            ),
 
                       array('key'    => 'closureWithReturnTypehint',
-                            'value' => '0',
+                            'value' => '4',
                            ),
 
                       array('key'    => 'arrowfunctionTotal',
@@ -112,22 +123,12 @@ $expected     = array(
                       array('key'    => 'arrowfunctionWithReturnTypehint',
                             'value' => '0',
                            ),
-
-                      array('key'    => 'typedProperties',
-                            'value' => '0',
-                           ),
-
-                      array('key'    => 'totalProperties',
-                            'value' => '0',
-                           ),
-
-                      array('key'    => 'multipleTypehints',
-                            'value' => '0',
-                           ),
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array(
+                      array('key'    => 'arrowfunctionWithReturnTypehint',
+                            'value' => '0',
+                           ),
                      );
 
 ?>

@@ -10,7 +10,7 @@ $expected     = array(
                            ),
 
                       array('key'    => 'withTypehint',
-                            'value' =>'11',
+                            'value' => '9',
                            ),
 
                       array('key'    => 'withReturnTypehint',
@@ -26,7 +26,7 @@ $expected     = array(
                            ),
 
                       array('key'    => 'argNullable',
-                            'value' =>'4',
+                            'value' =>'2',
                            ),
 
                       array('key'    => '\float',
@@ -128,10 +128,32 @@ $expected     = array(
                       array('key'    => 'arrowfunctionWithReturnTypehint',
                             'value' =>'0',
                            ),
+
+                      array('key'    => 'classTypehint',
+                            'value' => '0',
+                           ),
+
+                      array('key'    => 'interfaceTypehint',
+                            'value' => '0',
+                           ),
+
+                      array('key'    => 'typedProperties',
+                            'value' => '0',
+                           ),
+
+                      array('key'    => 'totalProperties',
+                            'value' => '0',
+                           ),
+
+                      array('key'    => 'multipleTypehints',
+                            'value' => '0',
+                           ),
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array(
+                      array('key'    => 'arrowfunctionWithReturnTypehint',
+                            'value' =>'0',
+                           ),
                      );
 
 ?>
