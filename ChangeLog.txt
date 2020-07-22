@@ -1,4 +1,4 @@
-Version 2.1.4 (Marshal of the Heavenly Canopy, coming up)
+Version 2.1.4 (Marshal of Heavenly Blessing, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,28 @@ Version 2.1.4 (Marshal of the Heavenly Canopy, coming up)
     + Upgraded analysis : PHP 8.0 new scalar typehint, stringable interface
 + Tokenizer
     + 
+
+Version 2.1.3 (Marshal of the Heavenly Canopy, 2020-07-02)
++ Architecture
+    + Removed all usage of datastore in Reports, and only rely on dump.
+    + ignore_rules is now case insensitive
+    + Moved some of the loading to a separate gremlin call to reduce the size of node load.
+    + Fixed the branch option with Git calls.
+    + Storing trait's use expresion's options.
++ Report
+    + Ambassador ; New inventory : PHP protocol used (php, phar, glob://...)
+    + Stubs and StubsJson, have been tested extensively
++ Analysis
+    + New analysis : report double assignations of the same object ($a = $b = new C)
+    + New analysis : report cyclic references
+    + Upgraded analysis : Used Constants edge situations
+    + Upgraded analysis : No real comparison : extended analysis to constants
+    + Upgraded analysis : extended detection of dynamic method calls to call_user_func*
+    + Upgraded analysis : paths are detected with new functions
+    + Checked unit tests : 3490 / 3520 test pass (99% pass)
++ Tokenizer
+    + More phpdoc support (from code to report)
+    + Added isPHP to absolute FQN notations
 
 Version 2.1.2 (Mountain Deity, 2020-06-25)
 + Architecture
