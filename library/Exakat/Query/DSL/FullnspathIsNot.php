@@ -37,12 +37,12 @@ class FullnspathIsNot extends DSL {
         $has = $this->dslfactory->factory('has');
         $return = $has->run('fullnspath');
 
-        $propertyIs = $this->dslfactory->factory('propertyIsNot');
+        $propertyIsNot = $this->dslfactory->factory('propertyIsNot');
         if (!in_array($code, $this->availableVariables, STRICT_COMPARISON)) {
             $code = makeArray($code);
         }
 
-        $return->add($propertyIs->run('fullnspath', $code, Analyzer::CASE_SENSITIVE));
+        $return->add($propertyIsNot->run('fullnspath', $code, $caseSensitive));
         return $return;
     }
 }

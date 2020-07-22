@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class Htmlentitiescall extends Analyzer {
     public function analyze() {
@@ -60,10 +61,11 @@ class Htmlentitiescall extends Analyzer {
         $this->atomFunctionIs($html_functions)
              ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('Logical', 'Parenthesis'))
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIs('Bitoperation')
              ->outIsIE(array('LEFT', 'RIGHT', 'CODE'))
              ->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIsNot($constants)
+             ->fullnspathIsNot($constants, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
