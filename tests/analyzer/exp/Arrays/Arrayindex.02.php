@@ -1,7 +1,6 @@
 <?php
 
 $expected     = array('\'b\'',
-                      'D',
                       '\'deref\'',
                       '1',
                       '2',
@@ -13,6 +12,7 @@ $expected     = array('\'b\'',
                      );
 
 $expected_not = array('\'notIndex\'',
+                      'D',  // D is not defined
                      );
 
 ?>

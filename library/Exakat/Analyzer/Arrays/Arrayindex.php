@@ -33,27 +33,18 @@ class Arrayindex extends AnalyzerResults {
         $this->atomIs('Array')
              ->outIs('INDEX')
              ->is('constant', true)
-             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
+             ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
              ->toResults();
         $this->prepareQuery();
 
         // list( 'a' => 2) = ['b' => 2];
-        $this->atomIs('List')
-             ->outIs('ARGUMENT')
-             ->atomIs('Keyvalue')
-             ->outIs('INDEX')
-             ->is('constant', true)
-             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
-             ->toResults();
-        $this->prepareQuery();
-
         // array( 'a' => 2) = ['b' => 2];
-        $this->atomIs('Arrayliteral')
+        $this->atomIs(array('List', 'Arrayliteral'))
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->is('constant', true)
-             ->atomIs(array('Null', 'String', 'Heredoc', 'Float', 'Integer', 'Addition', 'Concatenation', 'Power', 'Multiplication', 'Sign', 'Identifier', 'Nsname'), self::WITH_CONSTANTS)
+             ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
              ->toResults();
         $this->prepareQuery();
     }
