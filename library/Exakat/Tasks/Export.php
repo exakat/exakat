@@ -25,7 +25,7 @@ namespace Exakat\Tasks;
 class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         $gremlinVersion = $this->gremlin->serverInfo()->toString()[0];
 
         if (version_compare($gremlinVersion, '3.4.0') <= 0) {
@@ -94,29 +94,29 @@ class Export extends Tasks {
         }
     }
 
-    private function display_text($V, $E, $root, $level = 0) {
-        $r = '';
+    private function display_text(array $V, array $E, int $root, $level = 0) {
+        $r = array();
 
         if (isset($V[$root])) {
-            $r .= str_repeat('  ', $level) . $V[$root]['code'] . "\n";
+            $r []= str_repeat('  ', $level) . $V[$root]['code'];
         }
 
         if (isset($E[$root])) {
             asort($E[$root]);
-            uksort($E[$root], function ($a, $b) use ($V) {
+            uksort($E[$root], function (int $a, int $b) use ($V) {
                 if (!isset($V[$a]['rank'])) { return 0; }
                 if (!isset($V[$b]['rank'])) { return 0; }
                 return $V[$a]['rank'] > $V[$b]['rank']; });
 
             foreach($E[$root] as $id => $label) {
-                $r .= str_repeat('  ', $level) . 'Label : ' . $label . "\n" . $this->display_text($V, $E, $id, $level + 1);
+                $r []= str_repeat('  ', $level) . 'Label : ' . $label . "\n" . $this->display_text($V, $E, $id, $level + 1);
             }
         }
 
-        return $r;
+        return implode(PHP_EOL, $r);
     }
 
-    private function display_dot($V, $E, $root) {
+    private function display_dot(array $V, array $E, int $root) : string {
         $r = '';
 
         foreach($V as $id => $v) {
@@ -190,7 +190,7 @@ class Export extends Tasks {
         return $r;
     }
 
-    private function display_table($V, $E, $root) {
+    private function display_table(array $V, array $E, int $root) : string {
         $r = '<table>';
 
         foreach($V as $v) {
