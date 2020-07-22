@@ -809,13 +809,13 @@ SPHINX;
                        array('Rulesets',      $rulesets),
                       );
 
-        if (isset($ini['phpversion'])) {
-            $info[] = array('Php Version', $this->readPhpversion($ini['phpversion']));
-        } else {
+        if (empty($ini['phpversion'])) {
             $php = file_get_contents("./library/Exakat/Analyzer/$analyzer.php");
             if (preg_match('/protected .phpVersion = \'(.*?)\';/s', $php, $r)) {
                 $info[] = array('Php Version', $r[1]);
             }
+        } else {
+            $info[] = array('Php Version', $this->readPhpversion($ini['phpversion']));
         }
 
         if (!empty($ini['severity'])) {
@@ -1043,7 +1043,7 @@ GLOSSARY;
         $this->parameter_list = $parameterList;
     }
     
-    private function readPHPversion($phpversion) {
+    private function readPHPversion(string $phpversion) : string {
         if ($phpversion[-1] === '-') {
             return 'With PHP '.substr($phpversion, 0, -1).' and older';
         } elseif ($phpversion[-1] === '+') {
