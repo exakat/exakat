@@ -43,7 +43,7 @@ class DisconnectedClasses extends Analyzer {
                      ->atomIs(array('Methodcall', 'Staticmethodcall'))
                      ->inIs('DEFINITION')
                      ->goToClass()
-                     ->fullnspathIsNot('fullnspath', 'fnp')
+                     ->fullnspathIsNot('fnp')
              )
 
              // No usage of property in the parent
@@ -55,7 +55,7 @@ class DisconnectedClasses extends Analyzer {
                      ->atomIs(array('Member', 'Staticproperty'))
                      ->inIs('DEFINITION')
                      ->goToClass()
-                     ->fullnspathIsNot('fullnspath', 'fnp')
+                     ->fullnspathIsNot('fnp')
              )
 
              // No usage of method from the parent

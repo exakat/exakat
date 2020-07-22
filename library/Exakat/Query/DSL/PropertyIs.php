@@ -38,9 +38,11 @@ class PropertyIs extends DSL {
 
         if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
             $caseSensitive = '';
-        } else {
+        } elseif ($caseSensitive === Analyzer::CASE_INSENSITIVE) {
             $code = $this->tolowercase($code);
             $caseSensitive = '.toString().toLowerCase()';
+        } else {
+            assert(false, 'No such case sensitivity : "' . $caseSensitive.'"');
         }
 
         // code is a variable. We don't know if it is an array

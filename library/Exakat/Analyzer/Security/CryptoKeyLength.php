@@ -32,7 +32,7 @@ class CryptoKeyLength extends Analyzer {
                          '\\OPENSSL_KEYTYPE_EC'  => 512,
                         );
 
-        // to be used with openssl_pkey_new and openssl_csr_new
+        // to be used with openssl_p    key_new and openssl_csr_new
     /*
       const CERT_CONFIG = [
         "private_key_bits" => 4096,
@@ -43,7 +43,7 @@ class CryptoKeyLength extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->noDelimiterIs('private_key_type', self::WITH_CONSTANTS)
+             ->noDelimiterIs('private_key_type', self::CASE_SENSITIVE)
              ->inIs('INDEX')
 
              ->outIs('VALUE')
@@ -54,7 +54,7 @@ class CryptoKeyLength extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->noDelimiterIs('private_key_bits', self::WITH_CONSTANTS)
+             ->noDelimiterIs('private_key_bits', self::CASE_SENSITIVE)
              ->inIs('INDEX')
 
              ->outIs('VALUE')

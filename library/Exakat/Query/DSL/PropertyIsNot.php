@@ -42,7 +42,7 @@ class PropertyIsNot extends DSL {
             $code = $this->tolowercase($code);
             $caseSensitive = '.toString().toLowerCase()';
         } else {
-            assert(false, 'No such case sensitivity');
+            assert(false, 'No such case sensitivity : "' . $caseSensitive.'"');
         }
 
         if (is_array($code) && !empty(array_intersect($code, $this->availableVariables))) {
