@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 22 Jul 2020 14:57:17 +0000
-.. comment: Generation hash : 1dd7a5821ad28cab48d27d40c38f7334e55c7640
+.. comment: Generation date : Thu, 23 Jul 2020 08:57:58 +0000
+.. comment: Generation hash : 9d8706989ad6ea966e13f469791bd8f8d17162d9
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -10665,24 +10665,32 @@ Global Inside Loop
 ##################
 
 
-The global keyword must be out of loops. It is evaluated each loop, slowing the whole process.
+The global keyword must be used out of loops. Otherwise, it is evaluated each loop, slowing the whole process.
 
 .. code-block:: php
 
    <?php
    
-   // Good idea, global is used once
+   // Here, global is used once
    global $total;
    foreach($a as $b) {
        $total += $b;
    }
    
-   // Bad idea, this is slow.
+   // Global is called each time : this is slow.
    foreach($a as $b) {
        global $total;
        $total += $b;
    }
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the global keyword outside the loop
 
 +------------+------------------------------+
 | Short name | Structures/GlobalOutsideLoop |
@@ -13334,6 +13342,15 @@ In PHP 5.6, results are :::
        [1] => 2
        [2] => 1
    )
+   
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Refactor code to avoid using append in a list() call
 
 +-------------+---------------------------+
 | Short name  | Php/ListWithAppends       |
@@ -13390,17 +13407,33 @@ Support for references in list calls is not backward compatible with older versi
 
    <?php
    
-   $a = [1,2,3];
+   $array = [1,2,3];
    
-   [$c, $d, $e] = $a;
+   [$c, &$d, $e] = $a;
    
-   $d++;
-   echo $a[2]; // Displays 4
-   
+   $d++; 
+   $c++;
+   print_r($array);
+   /*
+   displays
+   Array
+   (
+       [0] => 1  // Not a reference to $c, unchanged
+       [1] => 3  // Reference from $d
+       [2] => 3
+   )
+   */
    ?>
 
 
 See also `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_assignment>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using references in list for backward compatibility
 
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/ListWithReference                                                                                                                                                                       |
@@ -18082,7 +18115,15 @@ No List With String
    ?>
 
 
-See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_ : `list() <https://www.php.net/list>`_ can no longer unpack string variables.
+See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_ : `list() <https://www.php.net/list>`_ can no longer unpack string variables .
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use str_split() to break a string into bytes
+* Use substr() or $string[$offset] syntax to access specific bytes in the string
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoListWithString                                                                                       |
@@ -18868,6 +18909,12 @@ Note that PHP prevents the usage of goto, `break <http://www.php.net/manual/en/c
 
 
 See also `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_.
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Move the return right after the try/catch/finally call
 
 +-------------+------------------------------+
 | Short name  | Structures/NoReturnInFinally |
@@ -22738,6 +22785,13 @@ If the array has to be completed rather than created, it is also faster to use +
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Preprocess the code so PHP doesn't do it. Keep the detailed version into comments.
+
 +-------------+-------------------------+
 | Short name  | Arrays/ShouldPreprocess |
 +-------------+-------------------------+
@@ -23333,6 +23387,13 @@ Random Without Try
 
 
 Since PHP 7.4, `openssl_random_pseudo_bytes() <https://www.php.net/openssl_random_pseudo_bytes>`_ has adopted the same behavior. It is included in this analysis : check your PHP version for actual application.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a try/catch structure around calls to random_int() and random_bytes().
 
 +-------------+------------------------------+
 | Short name  | Structures/RandomWithoutTry  |
@@ -29262,6 +29323,15 @@ They may be externally defined, such as in core PHP, extensions or libraries. Ma
    
    ?>
 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the catch clause, as it is dead code
+* Make sure the exception is thrown by the underlying code
+
 +------------+-------------------------------+
 | Short name | Exceptions/CaughtButNotThrown |
 +------------+-------------------------------+
@@ -30943,6 +31013,12 @@ Those constants are defined in the code but never used. Defining unused constant
 
 
 It is recommended to comment them out, and only define them when it is necessary.
+
+Suggestions
+^^^^^^^^^^^
+
+* Make use of the constant
+* Remove the constant
 
 +-------------+------------------------------+
 | Short name  | Constants/UnusedConstants    |
@@ -33112,6 +33188,12 @@ Note that all objects will be turned into arrays, recursively. If you're expecti
 Note that ``JSON_OBJECT_AS_ARRAY`` is the only constant : there is no defined constant to explicitly ask for an object as returned value. 
 
 See also `json_decode <http://php.net/json_decode>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the correct second argument of json_decode() : JSON_OBJECT_AS_ARRAY
 
 +-------------+---------------------------+
 | Short name  | Structures/JsonWithOption |
