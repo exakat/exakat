@@ -27,6 +27,8 @@ namespace Exakat\Reports;
 class Inventories extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'inventories';
+    
+    private const NO_DATA_TO_REPORT = 'This file is left intentionally empty. There was nothing to report.';
 
     public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name == self::STDOUT) {
@@ -68,6 +70,8 @@ class Inventories extends Reports {
         $this->saveInventory('Type/Path',                     "$folder/$name/path.csv");
         $this->saveInventory('Type/Shellcommands',            "$folder/$name/shellcmd.csv");
 
+        $this->saveHashResults('ParameterNames',              "$folder/$name/parameterNames.csv", array("Parameter", "Occurrences"));
+
         $this->saveAtom('Integer',      "$path/integers.csv");
         $this->saveAtom('ArrayLiteral', "$path/arrays.csv");
         $this->saveAtom('Heredoc',      "$path/heredoc.csv");
@@ -94,7 +98,7 @@ class Inventories extends Reports {
     private function saveAtom(string $atom, string $file): void {
         $res = $this->dump->fetchTable('literal' . $atom);
         if ($res->isEmpty() === true) {
-            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
+            file_put_contents($file, self::NO_DATA_TO_REPORT);
             return;
         }
         $fp = fopen($file, 'w+');
@@ -109,7 +113,7 @@ class Inventories extends Reports {
     private function saveTable(string $table, string $file, array $columns): void {
         $res = $this->dump->fetchTable($table);
         if ($res->isEmpty() === true) {
-            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
+            file_put_contents($file, self::NO_DATA_TO_REPORT);
             return ;
         }
 
@@ -122,6 +126,23 @@ class Inventories extends Reports {
                 $r[$c] = $row[$c];
             }
             fputcsv($fp, $r);
+        }
+        $this->count($res->getCount());
+        fclose($fp);
+    }
+
+    private function saveHashResults(string $name, string $file, array $columns = array()): void {
+        $res = $this->dump->fetchHashResults($name);
+        if ($res->isEmpty() === true) {
+            file_put_contents($file, self::NO_DATA_TO_REPORT);
+            return ;
+        }
+
+        $fp = fopen($file, 'w+');
+        fputcsv($fp, $columns);
+
+        foreach($res->toArray() as $row) {
+            fputcsv($fp, $row);
         }
         $this->count($res->getCount());
         fclose($fp);
