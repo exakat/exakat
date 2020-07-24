@@ -163,6 +163,10 @@ class Php74 extends Php {
     const T_BAD_CHARACTER                 = 395;
     const T_DOUBLE_COLON                  = 390;
 
+    const T_NAME_FULLY_QUALIFIED          = 1000;
+    const T_NAME_RELATIVE                 = 1000;
+    const T_NAME_QUALIFIED                = 1000;
+    const T_NULLSAFE_OBJECT_OPERATOR      = 1000;
     const T_MATCH                         = 1000;
 }
 ?>
