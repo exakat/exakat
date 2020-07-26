@@ -63,15 +63,11 @@ Label : PROJECT
                   20
                   Label : DEFINITION
                     20
-                Label : RETURNED
-                  Void
                 Label : RETURNTYPE
                   6
               Label : NAME
                 9
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6

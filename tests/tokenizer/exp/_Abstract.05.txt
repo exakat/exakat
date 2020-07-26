@@ -17,9 +17,7 @@ Label : PROJECT
               8
             Label : NAME
               7
-            Label : RETURNED
-              Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
           Label : METHOD
             10
@@ -31,8 +29,6 @@ Label : PROJECT
                 8
             Label : NAME
               10
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
           Label : METHOD
@@ -43,9 +39,7 @@ Label : PROJECT
               8
             Label : NAME
               12
-            Label : RETURNED
-              Void
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8
           Label : METHOD
             13
@@ -57,11 +51,7 @@ Label : PROJECT
                 8
             Label : NAME
               13
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
-              8
-            Label : TYPEHINT
               8
           Label : NAME
             6

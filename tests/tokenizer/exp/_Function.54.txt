@@ -21,9 +21,7 @@ Label : PROJECT
             10
             Label : EXPRESSION
               7
-          Label : RETURNED
-            Void
-          Label : TYPEHINT
+          Label : RETURNTYPE
             7
           Label : USE
             9
@@ -41,9 +39,7 @@ Label : PROJECT
             10
             Label : EXPRESSION
               7
-          Label : RETURNED
-            Void
-          Label : TYPEHINT
+          Label : RETURNTYPE
             7
           Label : USE
             11
@@ -61,9 +57,7 @@ Label : PROJECT
             10
             Label : EXPRESSION
               7
-          Label : RETURNED
-            Void
-          Label : TYPEHINT
+          Label : RETURNTYPE
             7
           Label : USE
             12
@@ -83,9 +77,7 @@ Label : PROJECT
             10
             Label : EXPRESSION
               7
-          Label : RETURNED
-            Void
-          Label : TYPEHINT
+          Label : RETURNTYPE
             7
           Label : USE
             14

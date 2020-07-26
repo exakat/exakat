@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Match extends Tokenizer {
-    /* 21 methods */
+    /* 22 methods */
 
     public function testMatch01()  { $this->generic_test('Match.01'); }
     public function testMatch02()  { $this->generic_test('Match.02'); }
@@ -30,5 +30,6 @@ class Match extends Tokenizer {
     public function testMatch19()  { $this->generic_test('Match.19'); }
     public function testMatch20()  { $this->generic_test('Match.20'); }
     public function testMatch21()  { $this->generic_test('Match.21'); }
+    public function testMatch22()  { $this->generic_test('Match.22'); }
 }
 ?>

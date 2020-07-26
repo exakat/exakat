@@ -23,8 +23,6 @@ Label : PROJECT
                 10
             Label : NAME
               9
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               10
           Label : METHOD
@@ -37,8 +35,6 @@ Label : PROJECT
                 10
             Label : NAME
               13
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               10
           Label : NAME

@@ -17,8 +17,6 @@ Label : PROJECT
               8
             Label : NAME
               7
-            Label : RETURNED
-              Void
             Label : TYPEHINT
               8
           Label : NAME

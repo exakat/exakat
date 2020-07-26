@@ -386,6 +386,9 @@ class Load extends Tasks {
             $this->phptokens::T_GOTO                     => 'processGoto',
 
             $this->phptokens::T_STRING                   => 'processString',
+            $this->phptokens::T_NAME_QUALIFIED           => 'processString',
+            $this->phptokens::T_NAME_RELATIVE            => 'processString',
+            $this->phptokens::T_NAME_FULLY_QUALIFIED     => 'processString',
             $this->phptokens::T_STRING_VARNAME           => 'processString', // ${x} x is here
             $this->phptokens::T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
             $this->phptokens::T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
@@ -506,7 +509,6 @@ class Load extends Tasks {
 
                 ++$this->stats['files'];
                 if ($this->processFile($filename, '')) {
-//                    var_dump($this->processFile('/Users/famille/Desktop/analyzeG3/stub.php', ''));
                     $this->loader->finalize($this->relicat);
                 } else {
                     print "Error while loading the file.\n";
@@ -1982,72 +1984,107 @@ class Load extends Tasks {
     }
 
     private function makeNsname(): AtomInterface {
-        $token = 'T_NS_SEPARATOR';
-
-        if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR                   &&
-            $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                         &&
-            in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'), \STRICT_COMPARISON) &&
-            $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR
-            ) {
-            $atom = 'Boolean';
-
-        } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
-                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
-                  mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'            &&
-                  $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
-
-            $atom = 'Null';
-        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
-            $atom = 'Parent';
-        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
-            $atom = 'Self';
-        } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
-                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
-                  mb_strtolower($this->tokens[$this->id + 1][1]) === 'self'            &&
-                  $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
-
-            $atom = 'Self';
-        } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
-            $atom = 'Newcall';
-        } else {
-            $atom = 'Nsname';
-            $token = 'T_STRING';
-        }
-
-        $fullcode = array();
-
-        if ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
-            $fullcode[] = $this->tokens[$this->id][1];
-            ++$this->id;
-
+        if ($this->tokens[$this->id][0] === $this->phptokens::T_NAME_QUALIFIED) {
+            $fullcode = array($this->tokens[$this->id][1]);
+            $token = 'T_NAME_QUALIFIED';
             $absolute = self::NOT_ABSOLUTE;
-        } elseif ($this->tokens[$this->id - 1][0] === $this->phptokens::T_NAMESPACE) {
-            $fullcode[] = $this->tokens[$this->id - 1][1];
 
+            if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+                $atom = 'Newcall';
+            } else { 
+                $atom = 'Nsname';
+            }
+        } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NAME_FULLY_QUALIFIED) {
+            $fullcode = array($this->tokens[$this->id][1]);
+            $token = 'T_NAME_FULLY_QUALIFIED';
             $absolute = self::ABSOLUTE;
-        } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NS_SEPARATOR) {
-            $fullcode[] = '';
 
-            $absolute = self::ABSOLUTE;
-        } else {
-            $fullcode[] = $this->tokens[$this->id][1];
-            ++$this->id;
-
+            if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+                $atom = 'Newcall';
+            } else { 
+                $atom = 'Nsname';
+            }
+        } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NAME_RELATIVE) {
+            $fullcode = array($this->tokens[$this->id][1]);
+            $token = 'T_NAME_RELATIVE';
             $absolute = self::NOT_ABSOLUTE;
-        }
 
-        while ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR    &&
-               $this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_CURLY
-               ) {
-            ++$this->id; // skip \
-            $fullcode[] = $this->tokens[$this->id][1];
-
-            // Go to next
-            ++$this->id; // skip \
+            if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+                $atom = 'Newcall';
+            } else { 
+                $atom = 'Nsname';
+            }
+        } else {
             $token = 'T_NS_SEPARATOR';
+    
+            if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR                   &&
+                $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                         &&
+                in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'), \STRICT_COMPARISON) &&
+                $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR
+                ) {
+                $atom = 'Boolean';
+    
+            } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
+                      $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
+                      mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'            &&
+                      $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
+    
+                $atom = 'Null';
+            } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
+                $atom = 'Parent';
+            } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
+                $atom = 'Self';
+            } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
+                      $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
+                      mb_strtolower($this->tokens[$this->id + 1][1]) === 'self'            &&
+                      $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
+    
+                $atom = 'Self';
+            } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
+                $atom = 'Newcall';
+            } else {
+                $atom = 'Nsname';
+                $token = 'T_STRING';
+            }
+    
+            $fullcode = array();
+    
+            if ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
+                $fullcode[] = $this->tokens[$this->id][1];
+                ++$this->id;
+    
+                $absolute = self::NOT_ABSOLUTE;
+            } elseif ($this->tokens[$this->id - 1][0] === $this->phptokens::T_NAMESPACE) {
+                $fullcode[] = $this->tokens[$this->id - 1][1];
+    
+                $absolute = self::NOT_ABSOLUTE;
+            } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NS_SEPARATOR) {
+                $fullcode[] = '';
+    
+                $absolute = self::ABSOLUTE;
+            } else {
+                $fullcode[] = $this->tokens[$this->id][1];
+                ++$this->id;
+    
+                $absolute = self::NOT_ABSOLUTE;
+            }
+    
+            while ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR    &&
+                   $this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_CURLY
+                   ) {
+                ++$this->id; // skip \
+                $fullcode[] = $this->tokens[$this->id][1];
+    
+                // Go to next
+                ++$this->id; // skip \
+                $token = 'T_NS_SEPARATOR';
+            }
+    
+            // Back up a bit
+            --$this->id;
         }
 
-        if ($atom === 'Newcall') {
+        if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
             if ($this->tokens[$this->id][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
                 $atom = 'Newcallname';
             } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_DOUBLE_COLON) {
@@ -2055,9 +2092,6 @@ class Load extends Tasks {
                 $atom = 'Identifier';
             }
         }
-
-        // Back up a bit
-        --$this->id;
 
         $nsname = $this->addAtom($atom);
         $nsname->code     = implode('\\', $fullcode);
@@ -2913,7 +2947,14 @@ class Load extends Tasks {
 
     private function processString(): AtomInterface {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
-            return $this->processNsname();
+            $nsname = $this->processNsname();
+            return $this->processFCOA($nsname);
+        } elseif (in_array($this->tokens[$this->id][0], array($this->phptokens::T_NAME_QUALIFIED,
+                                                              $this->phptokens::T_NAME_RELATIVE,
+                                                              $this->phptokens::T_NAME_FULLY_QUALIFIED,
+                                                              ), \STRICT_COMPARISON )) {
+            $nsname = $this->processNsname();
+            return $this->processFCOA($nsname);
         } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
                                                                   $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_CLOSE_CURLY,
@@ -4441,7 +4482,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR) {
             $nsname = $this->processOneNsname();
 
-            $this->getFullnspath($nsname, 'class', $nsname);
+//            $this->getFullnspath($nsname, 'class', $nsname);
             $this->pushExpression($nsname);
 
             return $this->processFCOA($nsname);
@@ -4896,21 +4937,24 @@ class Load extends Tasks {
     }
 
     private function processFCOA(AtomInterface $nsname): AtomInterface {
-        // For functions and constants
+        // for functions
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
         }
 
+        // for array appends
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET &&
             $this->tokens[$this->id + 2][0] === $this->phptokens::T_CLOSE_BRACKET) {
             return $this->processAppend();
         }
 
+        // for arrays
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET ||
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             return $this->processBracket();
         }
 
+        // for simple identifiers
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
@@ -6360,24 +6404,34 @@ class Load extends Tasks {
                 }
             } else {
                 $apply->fullnspath = mb_strtolower($name->fullcode);
-                    return;
+                return;
             }
         } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', 'This'))) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
-                    return;
-        } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'), \STRICT_COMPARISON)) {
+            return;
+        } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY',), \STRICT_COMPARISON)) {
             // For language structures, it is always in global space, like eval or list
             $apply->fullnspath = '\\' . mb_strtolower($name->code);
-                    return;
+            return;
         } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
-            // namespace\A\B
-            $apply->fullnspath = substr($this->namespace, 0, -1) . mb_strtolower(substr($name->fullcode, 9));
-                    return;
+
+            $details = explode('\\', $name->fullcode);
+            if ($type === 'const') {
+                array_shift($details); // namespace
+                $const = array_pop($details);
+                $fullnspath = mb_strtolower(implode('\\', $details)).'\\'.$const;
+            } else {
+                array_shift($details); // namespace
+                $fullnspath = mb_strtolower(implode('\\', $details));
+            }
+
+            $apply->fullnspath = substr($this->namespace, 0, -1) . $fullnspath;
+            return;
         } elseif ($name->isA(array('Static', 'Self', 'This'))) {
             if (empty($this->currentClassTrait) || empty($this->currentClassTrait[count($this->currentClassTrait) - 1])) {
                 $apply->fullnspath = self::FULLNSPATH_UNDEFINED;
-                    return;
+                return;
             } else {
                 $apply->fullnspath = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
                     return;
