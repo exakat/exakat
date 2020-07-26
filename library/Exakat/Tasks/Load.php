@@ -314,7 +314,7 @@ class Load extends Tasks {
             $this->phptokens::T_UNSET                    => 'processIsset',
             $this->phptokens::T_ISSET                    => 'processIsset',
             $this->phptokens::T_EMPTY                    => 'processIsset',
-            $this->phptokens::T_LIST                     => 'processArray', // Can't move to processEcho, because of omissions
+            $this->phptokens::T_LIST                     => 'processString', // Can't move to processEcho, because of omissions
             $this->phptokens::T_EVAL                     => 'processIsset',
             $this->phptokens::T_ECHO                     => 'processEcho',
             $this->phptokens::T_EXIT                     => 'processExit',
@@ -4324,10 +4324,6 @@ class Load extends Tasks {
         return $array;
     }
 
-    private function processArray(): AtomInterface {
-        return $this->processString();
-    }
-
     private function processTernary(): AtomInterface {
         $current = $this->id;
         $condition = $this->popExpression();
@@ -6423,7 +6419,7 @@ class Load extends Tasks {
                 $fullnspath = mb_strtolower(implode('\\', $details)).'\\'.$const;
             } else {
                 array_shift($details); // namespace
-                $fullnspath = mb_strtolower(implode('\\', $details));
+                $fullnspath = '\\' . mb_strtolower(implode('\\', $details));
             }
 
             $apply->fullnspath = substr($this->namespace, 0, -1) . $fullnspath;
