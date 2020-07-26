@@ -222,7 +222,7 @@ class Dump extends Tasks {
         $saved = 0;
         $docs = exakat('docs');
         $severities = array();
-        $readCounts = array();
+        $readCounts = array(array());
 
         $skipAnalysis = array();
         $analyzers = array_filter($analyzers, function (string $s): bool { return substr($s, 0, 9) !== 'Complete/' && substr($s, 0, 5) !== 'Dump/'; });
