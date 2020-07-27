@@ -34,10 +34,15 @@ class Meters extends Reports {
         $values = array('loc',
                         'locTotal',
                         'files',
+                        'filesIgnored',
                         'tokens',
+                        'audit_length',
+                        'php_version',
+                        'exakat_version',
+                        'exakat_build',
                         );
         foreach($values as $value) {
-            $results[$value] = $this->dump->fetchHash($value)->toInt();
+            $results[$value] = $this->dump->fetchHash($value)->toInt() ?? -1;
         }
 
         return json_encode($results);
