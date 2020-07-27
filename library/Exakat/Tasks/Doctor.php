@@ -217,8 +217,6 @@ TEXT
                 $folder = '';
                 $graphdb = 'nogremlin';
             }
-            
-            var_dump($graphdb);
 
             $ini = str_replace(array('{VERSION}', '{VERSION_PATH}',   '{GRAPHDB}', ";$graphdb", '{GRAPHDB}_path', ),
                                array( $version,    $this->config->php, $graphdb,    $graphdb,    $folder),
@@ -296,9 +294,8 @@ TEXT
         }
 
         $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
-        $gremlinVersion = basename(array_pop($gremlinJar));
+        $gremlinVersion = empty($gremlinJar) ? '' : substr(basename(array_pop($gremlinJar)), 13, -4);
 
-        $gremlinVersion = substr($gremlinVersion, 13, -4);
         if (version_compare('3.4.0', $gremlinVersion) < 0) {
             $version = '.3.4';
         } elseif (version_compare('3.3.0', $gremlinVersion) < 0) {

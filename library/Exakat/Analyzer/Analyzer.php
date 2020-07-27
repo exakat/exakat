@@ -726,6 +726,7 @@ GREMLIN
             $ini = (object) parse_ini_file("{$this->config->extension_dev}/data/$file", \INI_PROCESS_SECTIONS);
         } else {
             assert(false, "No INI for '$file'.");
+            $ini = array();
         }
 
         if (!isset(self::$iniCache[$fullpath])) {
@@ -751,6 +752,7 @@ GREMLIN
                 $json = json_decode($jsonString, \JSON_OBJECT);
             } else {
                 assert(false, "No JSON for '$file'.");
+                $json = (object) array();
             }
 
             self::$jsonCache[$fullpath] = $json;
