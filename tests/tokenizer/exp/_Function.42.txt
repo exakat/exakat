@@ -53,8 +53,6 @@ Label : PROJECT
             15
             Label : DEFINITION
               15
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             7
           Label : USE

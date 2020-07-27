@@ -19,5 +19,5 @@ Label : PROJECT
                 12
                 Label : CONCAT
                   14
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8

@@ -21,7 +21,7 @@ Label : PROJECT
                 10
             Label : ARGUMENT
               14
-              Label : DEFAULT
+              Label : DEFAULT, TYPEHINT
                 17
               Label : NAME
                 14
@@ -43,8 +43,6 @@ Label : PROJECT
                     19
             Label : NAME
               8
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               12
           Label : METHOD
@@ -61,7 +59,7 @@ Label : PROJECT
                 10
             Label : ARGUMENT
               14
-              Label : DEFAULT
+              Label : DEFAULT, TYPEHINT
                 17
               Label : NAME
                 14
@@ -79,8 +77,6 @@ Label : PROJECT
                     26
             Label : NAME
               24
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               12
           Label : METHOD
@@ -111,12 +107,20 @@ Label : PROJECT
                 14
             Label : NAME
               28
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               12
           Label : METHOD
             29
+            Label : BLOCK
+              18
+              Label : EXPRESSION
+                23
+                Label : ARGUMENT
+                  25
+                  Label : CONCAT
+                    9
+                  Label : CONCAT
+                    26
             Label : ARGUMENT
               9
               Label : DEFAULT
@@ -129,26 +133,14 @@ Label : PROJECT
                 10
             Label : ARGUMENT
               14
-              Label : DEFAULT
+              Label : DEFAULT, TYPEHINT
                 17
               Label : NAME
                 14
               Label : TYPEHINT
                 15
-            Label : BLOCK
-              18
-              Label : EXPRESSION
-                23
-                Label : ARGUMENT
-                  25
-                  Label : CONCAT
-                    9
-                  Label : CONCAT
-                    26
             Label : NAME
               29
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               12
           Label : NAME

@@ -53,9 +53,7 @@ Label : PROJECT
                     13
             Label : NAME
               7
-            Label : RETURNED
-              Void
-            Label : TYPEHINT
+            Label : RETURNTYPE
               9
           Label : NAME
             6
@@ -63,6 +61,8 @@ Label : PROJECT
             22
             Label : PPP
               23
+              Label : DEFAULT
+                9
               Label : DEFINITION
                 14
                 Label : CLASS

@@ -61,8 +61,6 @@ Label : PROJECT
               24
           Label : NAME
             15
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             13
         Label : EXPRESSION

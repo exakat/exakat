@@ -7,18 +7,24 @@ Label : GLOBAL
       10
 Label : GLOBAL
   8
-Label : PROJECT
-  1
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
   Label : DEFINITION
     8
     Label : DEFINITION
       8
     Label : DEFINITION
       8
+Label : PROJECT
+  1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
   Label : FILE
     3
     Label : EXPRESSION

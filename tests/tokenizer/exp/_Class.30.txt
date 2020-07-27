@@ -17,5 +17,5 @@ Label : PROJECT
               10
               Label : DEFAULT
                 12
-            Label : RETURNTYPE
+            Label : TYPEHINT
               8

@@ -65,7 +65,5 @@ Label : PROJECT
               16
               Label : DEFINITION
                 16
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               10

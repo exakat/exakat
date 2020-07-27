@@ -293,6 +293,7 @@ class Load extends Tasks {
 
             $this->phptokens::T_DOUBLE_COLON             => 'processDoubleColon',
             $this->phptokens::T_OBJECT_OPERATOR          => 'processObjectOperator',
+            $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR => 'processObjectOperator',
             $this->phptokens::T_NEW                      => 'processNew',
 
             $this->phptokens::T_DOT                      => 'processDot',
@@ -1080,8 +1081,8 @@ class Load extends Tasks {
                             $index->fullcode  = "-{$index->fullcode}";
                         } else {
                             $index            = $this->processSingle('Integer');
-                            $index->code     *= -1;
-                            $index->fullcode *= -1;
+                            $index->code      = (string) (-1 * $index->code);
+                            $index->fullcode  = (string) (-1 * $index->fullcode);
                         }
                     } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
                         $index = $this->processSingle('String');
@@ -2148,6 +2149,9 @@ class Load extends Tasks {
                                   $this->phptokens::T_ARRAY,
                                   $this->phptokens::T_CALLABLE,
                                   $this->phptokens::T_QUESTION,
+                                  $this->phptokens::T_NAME_QUALIFIED,
+                                  $this->phptokens::T_NAME_RELATIVE,
+                                  $this->phptokens::T_NAME_FULLY_QUALIFIED,
         );
 
         // return type allows for static. Not valid for arguments.
@@ -3092,6 +3096,9 @@ class Load extends Tasks {
                                                              $this->phptokens::T_NAMESPACE,
                                                              $this->phptokens::T_ARRAY,
                                                              $this->phptokens::T_CALLABLE,
+                                                             $this->phptokens::T_NAME_QUALIFIED,
+                                                             $this->phptokens::T_NAME_RELATIVE,
+                                                             $this->phptokens::T_NAME_FULLY_QUALIFIED,
                                                              ),
                             \STRICT_COMPARISON)) {
             $current = $this->id;
@@ -5824,7 +5831,7 @@ class Load extends Tasks {
         $this->addLink($static, $left, 'OBJECT');
         $this->addLink($static, $right, $links);
 
-        $static->fullcode  = $left->fullcode . '->' . $right->fullcode;
+        $static->fullcode  = $left->fullcode . $this->tokens[$current][1] . $right->fullcode;
 
         if ($left->atom === 'This' ){
             if ($static->atom === 'Methodcall') {

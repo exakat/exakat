@@ -68,26 +68,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-    Label : DEFINITION
-      14
-  Label : DEFINITION
     6
     Label : DEFINITION
       6
@@ -111,6 +91,26 @@ Label : PROJECT
       6
     Label : DEFINITION
       6
+  Label : DEFINITION
+    14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
   Label : DEFINITION
     19
     Label : DEFINITION

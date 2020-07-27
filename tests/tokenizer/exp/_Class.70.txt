@@ -20,13 +20,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
-  Label : DEFINITION
     8
     Label : DEFINITION
       8
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
   Label : DEFINITION
     12
     Label : DEFINITION
@@ -51,7 +51,7 @@ Label : PROJECT
                 12
               Label : DEFINITION
                 18
-              Label : MAGICMETHOD
+              Label : DEFINITION, MAGICMETHOD
                 14
                 Label : ARGUMENT
                   8
@@ -61,7 +61,7 @@ Label : PROJECT
                     8
                     Label : DEFINITION
                       8
-                  Label : RETURNTYPE
+                  Label : TYPEHINT
                     15
                 Label : BLOCK
                   17
@@ -77,14 +77,14 @@ Label : PROJECT
                       8
                 Label : NAME
                   14
-                Label : RETURNED
-                  Void
                 Label : RETURNTYPE
                   15
               Label : PPP
                 9
                 Label : PPP
                   21
+                  Label : DEFAULT
+                    15
                   Label : DEFINITION
                     19
                     Label : MEMBER

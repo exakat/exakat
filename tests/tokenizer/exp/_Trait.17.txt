@@ -1,8 +1,12 @@
 test
 Label : GLOBAL
-  22
+  23
   Label : DEFINITION, DEFINITION
-    22
+    23
+    Label : DEFAULT
+      8
+    Label : DEFAULT
+      8
 Label : PROJECT
   1
   Label : FILE
@@ -14,49 +18,71 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
-            14
+            15
             Label : ARGUMENT
-              15
+              16
               Label : DEFAULT
-                16
+                17
               Label : NAME
-                15
+                16
               Label : TYPEHINT
                 8
             Label : ARGUMENT
-              17
+              18
               Label : DEFAULT
-                18
+                19
               Label : NAME
-                17
+                18
+                Label : DEFAULT
+                  8
+                Label : DEFAULT
+                  8
               Label : TYPEHINT
                 8
             Label : BLOCK
-              19
+              20
               Label : EXPRESSION
-                21
-                Label : ATTRIBUTE
-                  20
+                22
+                Label : PHPDOC
+                  21
                 Label : GLOBAL
-                  22
+                  23
+                  Label : DEFAULT
+                    8
+                  Label : DEFAULT
+                    8
                 Label : GLOBAL
-                  17
+                  18
+                  Label : DEFAULT
+                    8
+                  Label : DEFAULT
+                    8
               Label : EXPRESSION
-                21
-                Label : ATTRIBUTE
-                  24
+                22
+                Label : PHPDOC
+                  25
                 Label : STATIC
-                  22
+                  23
+                  Label : DEFAULT
+                    8
+                  Label : DEFAULT
+                    8
                 Label : STATIC
-                  17
+                  18
+                  Label : DEFAULT
+                    8
+                  Label : DEFAULT
+                    8
                 Label : TYPEHINT
                   8
             Label : DEFINITION
-              22
+              23
+              Label : DEFAULT
+                8
+              Label : DEFAULT
+                8
             Label : NAME
-              14
-            Label : RETURNED
-              Void
+              15
             Label : RETURNTYPE
               8
           Label : NAME
@@ -65,13 +91,17 @@ Label : PROJECT
             7
             Label : PPP
               10
+              Label : DEFAULT
+                8
             Label : TYPEHINT
               8
           Label : PPP
             7
-            Label : ATTRIBUTE
-              3
-            Label : PPP
+            Label : PHPDOC
               12
+            Label : PPP
+              13
+              Label : DEFAULT
+                8
             Label : TYPEHINT
               8

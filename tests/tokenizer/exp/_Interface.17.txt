@@ -12,32 +12,30 @@ Label : PROJECT
           Label : EXTENDS
             7
           Label : MAGICMETHOD
-            8
+            9
             Label : ARGUMENT
-              9
+              10
               Label : DEFAULT
-                12
-              Label : NAME
-                9
-              Label : TYPEHINT
-                10
-            Label : ARGUMENT
-              13
-              Label : DEFAULT
-                14
-              Label : NAME
                 13
-              Label : TYPEHINT
+              Label : NAME
                 10
-            Label : ATTRIBUTE
-              7
+              Label : PHPDOC
+                8
+              Label : TYPEHINT
+                11
+            Label : ARGUMENT
+              14
+              Label : DEFAULT
+                15
+              Label : NAME
+                14
+              Label : TYPEHINT
+                11
             Label : BLOCK
-              10
+              11
             Label : NAME
-              8
-            Label : RETURNED
-              Void
+              9
             Label : TYPEHINT
-              10
+              11
           Label : NAME
             6

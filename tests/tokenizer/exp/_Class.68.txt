@@ -27,7 +27,7 @@ Label : PROJECT
                 8
               Label : DEFINITION
                 14
-              Label : MAGICMETHOD
+              Label : DEFINITION, MAGICMETHOD
                 10
                 Label : ARGUMENT
                   8
@@ -37,7 +37,7 @@ Label : PROJECT
                     8
                     Label : DEFINITION
                       8
-                  Label : RETURNTYPE
+                  Label : TYPEHINT
                     11
                 Label : BLOCK
                   13
@@ -53,14 +53,14 @@ Label : PROJECT
                       8
                 Label : NAME
                   10
-                Label : RETURNED
-                  Void
                 Label : RETURNTYPE
                   11
               Label : PPP
                 9
                 Label : PPP
                   17
+                  Label : DEFAULT
+                    11
                   Label : DEFINITION
                     15
                     Label : MEMBER

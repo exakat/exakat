@@ -6,15 +6,15 @@ Label : GLOBAL
     Label : DEFAULT
       8
 Label : GLOBAL
-  12
-  Label : DEFINITION
-    12
-    Label : DEFAULT
-      8
-Label : GLOBAL
   6
   Label : DEFINITION
     6
+    Label : DEFAULT
+      8
+Label : GLOBAL
+  12
+  Label : DEFINITION
+    12
     Label : DEFAULT
       8
 Label : PROJECT

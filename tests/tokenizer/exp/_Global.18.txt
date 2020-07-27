@@ -67,7 +67,5 @@ Label : PROJECT
               12
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             7

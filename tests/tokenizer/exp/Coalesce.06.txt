@@ -1,10 +1,26 @@
 test
 Label : GLOBAL
   9
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
 Label : GLOBAL
   5
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
 Label : GLOBAL
   12
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
 Label : GLOBAL
   15
   Label : DEFINITION
@@ -16,17 +32,17 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
     5
     Label : DEFINITION
       5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
   Label : DEFINITION
     12
     Label : DEFINITION

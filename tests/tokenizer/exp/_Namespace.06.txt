@@ -33,8 +33,6 @@ Label : PROJECT
                   17
               Label : NAME
                 16
-              Label : RETURNED
-                Void
               Label : RETURNTYPE
                 17
           Label : NAME
@@ -65,8 +63,6 @@ Label : PROJECT
                   17
               Label : NAME
                 16
-              Label : RETURNED
-                Void
               Label : RETURNTYPE
                 17
           Label : NAME

@@ -10,54 +10,48 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
-            9
+            7
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               10
               Label : EXPRESSION
-                7
+                8
             Label : NAME
-              9
-            Label : RETURNED
-              Void
-            Label : RETURNTYPE
               7
+            Label : RETURNTYPE
+              8
           Label : NAME
             6
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
-            9
+            7
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               10
               Label : EXPRESSION
-                7
+                8
             Label : NAME
-              9
-            Label : RETURNED
-              Void
-            Label : RETURNTYPE
               7
+            Label : RETURNTYPE
+              8
           Label : NAME
             11
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
-            9
+            7
             Label : ARGUMENT
-              7
+              8
             Label : BLOCK
               10
               Label : EXPRESSION
-                7
+                8
             Label : NAME
-              9
-            Label : RETURNED
-              Void
-            Label : RETURNTYPE
               7
+            Label : RETURNTYPE
+              8
           Label : NAME
             12

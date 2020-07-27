@@ -40,12 +40,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
     5
     Label : DEFINITION
       5
@@ -55,6 +49,12 @@ Label : PROJECT
       5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
   Label : DEFINITION
     20
     Label : DEFINITION
@@ -142,7 +142,7 @@ Label : PROJECT
                 Label : INDEX
                   24
                 Label : VARIABLE
-                  28
+                  20
                   Label : INDEX
                     5
                   Label : VARIABLE
@@ -164,7 +164,7 @@ Label : PROJECT
                   Label : INDEX
                     24
                   Label : VARIABLE
-                    28
+                    20
                     Label : INDEX
                       5
                     Label : VARIABLE
@@ -182,7 +182,7 @@ Label : PROJECT
                 Label : INDEX
                   32
                 Label : VARIABLE
-                  28
+                  20
                   Label : INDEX
                     5
                   Label : VARIABLE

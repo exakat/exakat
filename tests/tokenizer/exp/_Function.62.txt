@@ -65,9 +65,7 @@ Label : PROJECT
               11
               Label : DEFINITION
                 11
-            Label : RETURNED
-              Void
-            Label : TYPEHINT
+            Label : RETURNTYPE
               7
           Label : RIGHT
             24
@@ -119,9 +117,7 @@ Label : PROJECT
               11
               Label : DEFINITION
                 11
-            Label : RETURNED
-              Void
-            Label : TYPEHINT
+            Label : RETURNTYPE
               7
           Label : RIGHT
             24

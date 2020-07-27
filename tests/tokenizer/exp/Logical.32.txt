@@ -1,17 +1,5 @@
 test
 Label : GLOBAL
-  13
-  Label : DEFINITION
-    13
-    Label : DEFINITION
-      13
-Label : GLOBAL
-  7
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      7
-Label : GLOBAL
   20
   Label : DEFINITION
     20
@@ -23,6 +11,18 @@ Label : GLOBAL
     24
     Label : DEFINITION
       24
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
 Label : PROJECT
   1
   Label : DEFINITION

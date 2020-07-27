@@ -55,8 +55,6 @@ Label : PROJECT
               6
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             8
         Label : EXPRESSION
@@ -69,8 +67,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE
@@ -85,8 +81,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE
@@ -101,8 +95,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE
@@ -117,8 +109,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE
@@ -135,8 +125,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE
@@ -155,8 +143,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE
@@ -177,8 +163,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE
@@ -201,8 +185,6 @@ Label : PROJECT
               6
             Label : BLOCK
               15
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
             Label : RETURNTYPE

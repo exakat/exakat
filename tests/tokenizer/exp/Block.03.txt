@@ -36,11 +36,11 @@ Label : GLOBAL
     Label : DEFINITION
       23
 Label : GLOBAL
-  27
+  26
   Label : DEFINITION
-    27
+    26
     Label : DEFINITION
-      27
+      26
 Label : PROJECT
   1
   Label : DEFINITION
@@ -68,9 +68,9 @@ Label : PROJECT
     Label : DEFINITION
       23
   Label : DEFINITION
-    27
+    26
     Label : DEFINITION
-      27
+      26
   Label : FILE
     3
     Label : EXPRESSION
@@ -116,10 +116,10 @@ Label : PROJECT
             Label : EXPRESSION
               12
               Label : LEFT
-                25
+                23
                 Label : INDEX
-                  26
+                  25
                 Label : VARIABLE
                   23
               Label : RIGHT
-                27
+                26

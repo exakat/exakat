@@ -10,8 +10,6 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : BLOCK
-            10
-            Label : EXPRESSION
-              8
+            8
           Label : NAME
             5

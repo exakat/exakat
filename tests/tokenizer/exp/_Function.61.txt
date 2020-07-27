@@ -29,8 +29,6 @@ Label : PROJECT
                   16
                 Label : NAME
                   12
-                Label : RETURNED
-                  Void
                 Label : TYPEHINT
                   16
               Label : METHOD
@@ -55,8 +53,6 @@ Label : PROJECT
                   16
                 Label : NAME
                   18
-                Label : RETURNED
-                  Void
                 Label : TYPEHINT
                   16
           Label : NAME

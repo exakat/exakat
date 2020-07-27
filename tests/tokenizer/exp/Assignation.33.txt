@@ -72,8 +72,8 @@ Label : PROJECT
                 Label : OBJECT
                   14
               Label : RIGHT
-                23
+                22
                 Label : INDEX
-                  24
+                  23
                 Label : VARIABLE
                   22

@@ -151,8 +151,6 @@ Label : PROJECT
               8
           Label : NAME
             14
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             8
         Label : EXPRESSION
@@ -227,7 +225,5 @@ Label : PROJECT
               34
           Label : NAME
             24
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             8

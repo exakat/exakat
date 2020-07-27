@@ -51,16 +51,12 @@ Label : PROJECT
                 11
             Label : TYPEHINT
               11
-            Label : TYPEHINT
-              11
           Label : PPP
             15
             Label : PPP
               22
               Label : DEFAULT
                 10
-            Label : TYPEHINT
-              11
             Label : TYPEHINT
               11
           Label : PPP

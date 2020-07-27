@@ -27,8 +27,6 @@ Label : PROJECT
               7
             Label : RETURNTYPE
               9
-            Label : TYPEHINT
-              9
           Label : METHOD
             13
             Label : ARGUMENT
@@ -44,6 +42,4 @@ Label : PROJECT
             Label : RETURNED
               13
             Label : RETURNTYPE
-              9
-            Label : TYPEHINT
               9

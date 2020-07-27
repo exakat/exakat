@@ -26,7 +26,7 @@ Label : PROJECT
           Label : METHOD
             14
             Label : ARGUMENT
-              8
+              9
             Label : BLOCK
               15
               Label : EXPRESSION
@@ -139,14 +139,12 @@ Label : PROJECT
                 20
             Label : NAME
               14
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
-              8
+              9
           Label : NAME
             6
           Label : PPP
-            10
+            8
             Label : PPP
               11
               Label : DEFAULT
@@ -158,4 +156,4 @@ Label : PROJECT
                 Label : OBJECT
                   19
             Label : TYPEHINT
-              8
+              9

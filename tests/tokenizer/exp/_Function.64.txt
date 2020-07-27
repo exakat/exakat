@@ -59,8 +59,6 @@ Label : PROJECT
               12
               Label : DEFINITION
                 12
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               8
           Label : ARGUMENT

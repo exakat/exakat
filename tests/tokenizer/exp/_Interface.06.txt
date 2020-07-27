@@ -25,8 +25,6 @@ Label : PROJECT
               15
             Label : NAME
               10
-            Label : RETURNED
-              Void
             Label : TYPEHINT
               15
           Label : NAME
@@ -34,9 +32,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : EXTENDS
-            8
-          Label : EXTENDS
             17
+          Label : EXTENDS
+            8
           Label : METHOD
             10
             Label : ARGUMENT
@@ -51,8 +49,6 @@ Label : PROJECT
               15
             Label : NAME
               10
-            Label : RETURNED
-              Void
             Label : TYPEHINT
               15
           Label : NAME
@@ -79,8 +75,6 @@ Label : PROJECT
               15
             Label : NAME
               10
-            Label : RETURNED
-              Void
             Label : TYPEHINT
               15
           Label : NAME

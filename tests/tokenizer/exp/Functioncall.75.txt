@@ -23,8 +23,6 @@ Label : PROJECT
                 9
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6
         Label : EXPRESSION
@@ -59,8 +57,6 @@ Label : PROJECT
               14
           Label : NAME
             12
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6
         Label : EXPRESSION
@@ -95,8 +91,6 @@ Label : PROJECT
               18
           Label : NAME
             17
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6
         Label : EXPRESSION
@@ -131,7 +125,5 @@ Label : PROJECT
               18
           Label : NAME
             20
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             6

@@ -20,13 +20,19 @@ Label : PROJECT
           Label : ARGUMENT
             9
             Label : DEFAULT
-              12
+              7
             Label : NAME
               9
             Label : TYPEHINT
-              10
-            Label : TYPEHINT
+              7
+          Label : ARGUMENT
+            11
+            Label : DEFAULT, TYPEHINT
               12
+            Label : NAME
+              11
+            Label : TYPEHINT
+              7
           Label : ARGUMENT
             13
             Label : DEFAULT
@@ -34,7 +40,15 @@ Label : PROJECT
             Label : NAME
               13
             Label : TYPEHINT
-              14
+              7
+          Label : ARGUMENT
+            15
+            Label : DEFAULT
+              7
+            Label : NAME
+              15
+            Label : TYPEHINT
+              7
           Label : BLOCK
             16
             Label : EXPRESSION
@@ -47,8 +61,6 @@ Label : PROJECT
               17
           Label : NAME
             5
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             7
         Label : EXPRESSION
@@ -62,15 +74,13 @@ Label : PROJECT
             Label : TYPEHINT
               7
           Label : ARGUMENT
-            9
-            Label : DEFAULT
+            11
+            Label : DEFAULT, TYPEHINT
               12
             Label : NAME
-              9
+              11
             Label : TYPEHINT
               20
-            Label : TYPEHINT
-              12
           Label : ARGUMENT
             13
             Label : DEFAULT
@@ -78,7 +88,15 @@ Label : PROJECT
             Label : NAME
               13
             Label : TYPEHINT
-              14
+              7
+          Label : ARGUMENT
+            15
+            Label : DEFAULT
+              7
+            Label : NAME
+              15
+            Label : TYPEHINT
+              7
           Label : BLOCK
             16
             Label : EXPRESSION
@@ -91,7 +109,5 @@ Label : PROJECT
               17
           Label : NAME
             19
-          Label : RETURNED
-            Void
           Label : RETURNTYPE
             7

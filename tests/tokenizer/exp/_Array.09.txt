@@ -14,13 +14,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
     5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -32,14 +32,14 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            10
+            8
             Label : INDEX
-              11
+              10
               Label : CODE
-                13
+                12
                 Label : LEFT
-                  12
+                  11
                 Label : RIGHT
-                  14
+                  13
             Label : VARIABLE
               8

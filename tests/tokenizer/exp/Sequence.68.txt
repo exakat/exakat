@@ -26,13 +26,13 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    32
-    Label : DEFINITION
-      32
-  Label : DEFINITION
     9
     Label : DEFINITION
       9
+  Label : DEFINITION
+    32
+    Label : DEFINITION
+      32
   Label : DEFINITION
     14
     Label : DEFINITION

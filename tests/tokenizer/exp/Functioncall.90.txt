@@ -114,7 +114,7 @@ Label : PROJECT
                   Label : OBJECT
                     15
             Label : EXPRESSION
-              20
+              18
               Label : INDEX
                 11
                 Label : CODE

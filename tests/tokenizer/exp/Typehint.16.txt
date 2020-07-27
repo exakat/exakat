@@ -12,29 +12,51 @@ Label : PROJECT
           Label : ARGUMENT
             6
             Label : DEFAULT
-              9
+              8
             Label : NAME
               6
             Label : TYPEHINT
-              7
+              8
+          Label : ARGUMENT
+            10
+            Label : DEFAULT
+              8
+            Label : NAME
+              10
+            Label : TYPEHINT
+              8
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              8
+            Label : NAME
+              6
+            Label : TYPEHINT
+              8
           Label : ARGUMENT
             11
             Label : DEFAULT
-              9
+              8
             Label : NAME
               11
             Label : TYPEHINT
-              7
+              8
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              8
+            Label : NAME
+              6
+            Label : TYPEHINT
+              8
           Label : ARGUMENT
             12
-            Label : DEFAULT
+            Label : DEFAULT, TYPEHINT
               13
             Label : NAME
               12
             Label : TYPEHINT
-              7
-            Label : TYPEHINT
-              13
+              8
           Label : BLOCK
             14
             Label : EXPRESSION
@@ -46,4 +68,4 @@ Label : PROJECT
           Label : RETURNED
             16
           Label : RETURNTYPE
-            9
+            8

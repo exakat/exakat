@@ -63,8 +63,6 @@ Label : PROJECT
                     22
                 Label : RETURNTYPE
                   20
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 24
                 Label : ARGUMENT
@@ -115,8 +113,6 @@ Label : PROJECT
                     27
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 29
                 Label : ARGUMENT
@@ -181,8 +177,6 @@ Label : PROJECT
                     22
                 Label : RETURNTYPE
                   20
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 39
                 Label : ARGUMENT
@@ -221,8 +215,6 @@ Label : PROJECT
                     27
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 43
                 Label : ARGUMENT
@@ -287,8 +279,6 @@ Label : PROJECT
                     45
                 Label : RETURNTYPE
                   20
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 49
                 Label : ARGUMENT
@@ -327,8 +317,6 @@ Label : PROJECT
                     27
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 53
                 Label : ARGUMENT
@@ -363,8 +351,6 @@ Label : PROJECT
                     55
                 Label : RETURNTYPE
                   20
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 57
                 Label : ARGUMENT
@@ -403,8 +389,6 @@ Label : PROJECT
                     27
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 61
                 Label : ARGUMENT
@@ -509,8 +493,6 @@ Label : PROJECT
                   66
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 74
                 Label : ARGUMENT
@@ -545,8 +527,6 @@ Label : PROJECT
                     76
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 78
                 Label : ARGUMENT
@@ -563,12 +543,8 @@ Label : PROJECT
                     17
                 Label : NAME
                   78
-                Label : RETURNED
-                  Void
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 80
                 Label : ARGUMENT
@@ -585,12 +561,8 @@ Label : PROJECT
                     17
                 Label : NAME
                   80
-                Label : RETURNED
-                  Void
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : METHOD
                 81
                 Label : ARGUMENT
@@ -625,8 +597,6 @@ Label : PROJECT
                     59
                 Label : RETURNTYPE
                   15
-                Label : TYPEHINT
-                  17
               Label : NAME
                 10
           Label : NAME

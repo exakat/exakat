@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
-  10
+  9
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
 Label : GLOBAL
   7
   Label : DEFINITION
@@ -44,15 +44,15 @@ Label : PROJECT
     Label : DEFINITION
       7
   Label : DEFINITION
-    10
+    9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
     Label : DEFINITION
-      10
+      9
   Label : DEFINITION
     20
     Label : DEFINITION
@@ -76,13 +76,13 @@ Label : PROJECT
               Label : OBJECT
                 6
                 Label : NAME
-                  9
+                  11
                   Label : INDEX
                     12
                   Label : VARIABLE
-                    9
+                    7
                     Label : INDEX
-                      10
+                      9
                     Label : VARIABLE
                       7
             Label : RIGHT
@@ -94,13 +94,13 @@ Label : PROJECT
               Label : LEFT
                 20
               Label : RIGHT
-                9
+                11
                 Label : INDEX
                   22
                 Label : VARIABLE
-                  9
+                  7
                   Label : INDEX
-                    10
+                    9
                   Label : VARIABLE
                     7
         Label : EXPRESSION
@@ -114,13 +114,13 @@ Label : PROJECT
               Label : OBJECT
                 6
                 Label : NAME
-                  9
+                  11
                   Label : INDEX
                     12
                   Label : VARIABLE
-                    9
+                    7
                     Label : INDEX
-                      10
+                      9
                     Label : VARIABLE
                       7
             Label : RIGHT
@@ -132,12 +132,12 @@ Label : PROJECT
               Label : LEFT
                 20
               Label : RIGHT
-                9
+                11
                 Label : INDEX
                   22
                 Label : VARIABLE
-                  9
+                  7
                   Label : INDEX
-                    10
+                    9
                   Label : VARIABLE
                     7

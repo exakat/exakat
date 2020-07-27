@@ -34,13 +34,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NEW
-            8
+            9
             Label : INDEX
               14
               Label : ARGUMENT
-                8
+                6
                 Label : INDEX
-                  9
+                  8
                 Label : VARIABLE
                   6
               Label : ARGUMENT
@@ -52,11 +52,11 @@ Label : PROJECT
               Label : NAME
                 14
             Label : VARIABLE
-              8
+              9
               Label : INDEX
                 10
                 Label : LEFT
-                  9
+                  8
                 Label : RIGHT
                   12
                   Label : LEFT
@@ -64,8 +64,8 @@ Label : PROJECT
                   Label : RIGHT
                     13
               Label : VARIABLE
-                8
+                6
                 Label : INDEX
-                  9
+                  8
                 Label : VARIABLE
                   6

@@ -1,17 +1,5 @@
 test
 Label : GLOBAL
-  13
-  Label : DEFINITION
-    13
-    Label : DEFINITION
-      13
-Label : GLOBAL
-  7
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      7
-Label : GLOBAL
   20
   Label : DEFINITION
     20
@@ -23,6 +11,18 @@ Label : GLOBAL
     24
     Label : DEFINITION
       24
+Label : GLOBAL
+  7
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      7
+Label : GLOBAL
+  13
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
 Label : PROJECT
   1
   Label : DEFINITION
@@ -54,23 +54,23 @@ Label : PROJECT
             Label : LEFT
               6
               Label : NOT
-                9
+                10
                 Label : INDEX
                   11
                 Label : VARIABLE
-                  9
+                  7
                   Label : INDEX
-                    10
+                    9
                   Label : VARIABLE
                     7
             Label : RIGHT
               12
               Label : LEFT
-                9
+                10
                 Label : INDEX
                   16
                 Label : VARIABLE
-                  9
+                  13
                   Label : INDEX
                     15
                   Label : VARIABLE
@@ -82,7 +82,7 @@ Label : PROJECT
                   Label : LEFT
                     17
                   Label : RIGHT
-                    9
+                    20
                     Label : INDEX
                       22
                     Label : VARIABLE
@@ -90,11 +90,11 @@ Label : PROJECT
                 Label : RIGHT
                   19
                   Label : LEFT
-                    9
+                    10
                     Label : INDEX
                       27
                     Label : VARIABLE
-                      9
+                      24
                       Label : INDEX
                         26
                       Label : VARIABLE

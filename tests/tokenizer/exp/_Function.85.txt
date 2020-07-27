@@ -67,8 +67,6 @@ Label : PROJECT
             12
           Label : RIGHT
             14
-            Label : BLOCK
-              9
             Label : ARGUMENT
               9
               Label : DEFAULT
@@ -86,9 +84,9 @@ Label : PROJECT
               Label : NAME
                 17
               Label : TYPEHINT
-                18
-            Label : RETURNED
-              Void
+                15
+            Label : BLOCK
+              9
             Label : RETURNTYPE
               15
         Label : EXPRESSION
@@ -112,14 +110,10 @@ Label : PROJECT
               Label : NAME
                 17
               Label : TYPEHINT
-                18
+                15
             Label : BLOCK
               9
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
-              15
-            Label : TYPEHINT
               15
         Label : EXPRESSION
           7
@@ -127,12 +121,10 @@ Label : PROJECT
             12
           Label : RIGHT
             14
-            Label : BLOCK
-              5
             Label : ARGUMENT
               5
               Label : DEFAULT
-                19
+                18
               Label : NAME
                 5
                 Label : DEFINITION
@@ -146,8 +138,8 @@ Label : PROJECT
               Label : NAME
                 17
               Label : TYPEHINT
-                18
-            Label : RETURNED
-              Void
+                15
+            Label : BLOCK
+              5
             Label : RETURNTYPE
               15

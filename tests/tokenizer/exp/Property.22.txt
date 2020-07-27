@@ -16,15 +16,15 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    11
-    Label : DEFINITION
-      11
-  Label : DEFINITION
     5
     Label : DEFINITION
       5
     Label : DEFINITION
       5
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -32,17 +32,17 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          14
+          13
           Label : LEFT
-            13
+            10
             Label : APPEND
-              9
+              10
               Label : INDEX
                 11
               Label : VARIABLE
-                9
+                7
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
                   8
                   Label : MEMBER

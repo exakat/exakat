@@ -1,0 +1,173 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : NAME
+            6
+          Label : PPP
+            7
+            Label : PPP
+              8
+              Label : DEFAULT
+                10
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : PPP
+              13
+              Label : DEFAULT
+                10
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : PPP
+              15
+              Label : DEFAULT
+                10
+            Label : TYPEHINT
+              10
+          Label : PPP
+            7
+            Label : PPP
+              17
+              Label : DEFAULT
+                10
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : PPP
+              19
+              Label : DEFAULT
+                21
+            Label : TYPEHINT
+              10
+          Label : PPP
+            7
+            Label : PPP
+              22
+              Label : DEFAULT
+                24
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : PPP
+              25
+              Label : DEFAULT
+                27
+            Label : TYPEHINT
+              10
+          Label : PPP
+            7
+            Label : PPP
+              28
+              Label : DEFAULT
+                30
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : TYPEHINT
+              10
+            Label : PPP
+              31
+              Label : DEFAULT
+                10
+            Label : PPP
+              33
+              Label : DEFAULT
+                10
+          Label : PPP
+            7
+            Label : PPP
+              35
+              Label : DEFAULT
+                10
+            Label : PPP
+              37
+              Label : DEFAULT
+                10
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : TYPEHINT
+              10
+            Label : PPP
+              39
+              Label : DEFAULT
+                10
+            Label : PPP
+              41
+              Label : DEFAULT
+                10
+          Label : PPP
+            7
+            Label : PPP
+              43
+              Label : DEFAULT
+                10
+            Label : PPP
+              45
+              Label : DEFAULT
+                10
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : TYPEHINT
+              10
+            Label : PPP
+              47
+              Label : DEFAULT
+                21
+            Label : PPP
+              49
+              Label : DEFAULT
+                24
+          Label : PPP
+            7
+            Label : PPP
+              51
+              Label : DEFAULT
+                24
+            Label : PPP
+              53
+              Label : DEFAULT
+                27
+            Label : TYPEHINT
+              10
+          Label : PPP
+            12
+            Label : TYPEHINT
+              10
+            Label : PPP
+              55
+              Label : DEFAULT
+                27
+            Label : PPP
+              57
+              Label : DEFAULT
+                27
+          Label : PPP
+            7
+            Label : PPP
+              59
+              Label : DEFAULT
+                30
+            Label : PPP
+              61
+              Label : DEFAULT
+                63
+            Label : TYPEHINT
+              10
