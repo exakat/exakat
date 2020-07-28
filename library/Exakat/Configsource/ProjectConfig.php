@@ -78,7 +78,7 @@ class ProjectConfig extends Config {
         $this->projects_root = "$projects_root/projects/";
     }
 
-    public function setProject(Project $project) {
+    public function setProject(Project $project) : void {
         $this->project = $project;
     }
 
@@ -207,7 +207,7 @@ class ProjectConfig extends Config {
             if (is_dir($path)) {
                 chdir($path);
                 $allFiles = rglob('.');
-                $allFiles = array_map(function ($path) use ($stub) { return $stub.ltrim($path, '.'); }, $allFiles);
+                $allFiles = array_map(function (string $path) use ($stub) : string { return $stub.ltrim($path, '.'); }, $allFiles);
                 chdir($d);
             
                 $stubs[$stub] = $allFiles;
@@ -218,12 +218,12 @@ class ProjectConfig extends Config {
         return "$project/config.ini";
     }
 
-    // requiered for Init Project
-    public function setConfig($name, $value) {
+    // required for Init Project
+    public function setConfig(string $name, $value) : void {
         $this->config[$name] = $value;
     }
 
-    public function getConfig($dir_root = '') {
+    public function getConfig(string $dir_root = '') : string {
         // $vendor
         if ($this->config['include_dirs'] === array('/')) {
             $include_dirs = 'include_dirs[] = "";';
@@ -241,7 +241,7 @@ class ProjectConfig extends Config {
         $default = array();
         foreach($iniFiles as $file) {
             $ini = parse_ini_file($file, \INI_PROCESS_SECTIONS);
-            if (isset($ini['parameter1'])) {
+            if (isset($ini['parameter1']['default'])) {
                 $default[basename(dirname($file)) . '/' . basename($file, '.ini')][$ini['parameter1']['name']] = $ini['parameter1']['default'];
             }
         }
