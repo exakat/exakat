@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  14
+  13
   Label : DEFINITION
-    14
+    13
     Label : DEFINITION
-      14
+      13
 Label : GLOBAL
   7
   Label : DEFINITION
@@ -12,25 +12,25 @@ Label : GLOBAL
     Label : DEFINITION
       7
 Label : GLOBAL
-  21
+  20
   Label : DEFINITION
-    21
+    20
     Label : DEFINITION
-      21
+      20
 Label : PROJECT
   1
-  Label : DEFINITION
-    14
-    Label : DEFINITION
-      14
   Label : DEFINITION
     7
     Label : DEFINITION
       7
   Label : DEFINITION
-    21
+    13
     Label : DEFINITION
-      21
+      13
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -40,44 +40,44 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            11
+            10
             Label : LEFT
               6
               Label : ARGUMENT
-                9
+                7
                 Label : INDEX
-                  10
+                  9
                 Label : VARIABLE
                   7
             Label : RIGHT
-              12
+              11
               Label : NOT
-                13
+                12
                 Label : ARGUMENT
-                  9
+                  13
                   Label : INDEX
-                    16
+                    15
                   Label : VARIABLE
-                    14
+                    13
                 Label : ARGUMENT
-                  17
+                  16
+                  Label : ARGUMENT
+                    17
                   Label : ARGUMENT
                     18
                   Label : ARGUMENT
                     19
-                  Label : ARGUMENT
-                    20
                 Label : NAME
-                  13
+                  12
           Label : THEN
             3
             Label : EXPRESSION
-              24
+              23
               Label : LEFT
-                9
+                20
                 Label : INDEX
-                  23
+                  22
                 Label : VARIABLE
-                  21
+                  20
               Label : RIGHT
-                25
+                24

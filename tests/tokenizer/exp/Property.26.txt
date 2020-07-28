@@ -7,8 +7,6 @@ Label : GLOBAL
       8
     Label : DEFINITION
       8
-    Label : DEFINITION
-      8
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -17,16 +15,6 @@ Label : GLOBAL
       5
     Label : DEFINITION
       5
-    Label : DEFINITION
-      5
-Label : GLOBAL
-  10
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
 Label : GLOBAL
   12
   Label : DEFINITION
@@ -41,22 +29,12 @@ Label : PROJECT
       5
     Label : DEFINITION
       5
-    Label : DEFINITION
-      5
   Label : DEFINITION
     8
     Label : DEFINITION
       8
     Label : DEFINITION
       8
-    Label : DEFINITION
-      8
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
-    Label : DEFINITION
-      10
   Label : DEFINITION
     12
     Label : DEFINITION
@@ -72,28 +50,20 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            8
-        Label : EXPRESSION
-          7
-          Label : LEFT
-            5
-          Label : RIGHT
-            7
-            Label : LEFT
-              8
-            Label : RIGHT
+            11
+            Label : MEMBER
               10
+            Label : OBJECT
+              8
         Label : EXPRESSION
           7
           Label : LEFT
             5
           Label : RIGHT
-            7
-            Label : LEFT
-              8
-            Label : RIGHT
-              7
-              Label : LEFT
-                10
-              Label : RIGHT
+            11
+            Label : MEMBER
+              13
+              Label : CODE
                 12
+            Label : OBJECT
+              8

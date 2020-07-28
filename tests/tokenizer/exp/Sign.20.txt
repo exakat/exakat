@@ -18,23 +18,23 @@ Label : GLOBAL
     Label : DEFINITION
       11
 Label : GLOBAL
-  14
+  13
   Label : DEFINITION
-    14
+    13
     Label : DEFINITION
-      14
+      13
 Label : GLOBAL
-  20
+  19
   Label : DEFINITION
-    20
+    19
     Label : DEFINITION
-      20
+      19
 Label : GLOBAL
-  24
+  23
   Label : DEFINITION
-    24
+    23
     Label : DEFINITION
-      24
+      23
 Label : PROJECT
   1
   Label : DEFINITION
@@ -50,17 +50,17 @@ Label : PROJECT
     Label : DEFINITION
       11
   Label : DEFINITION
-    14
+    13
     Label : DEFINITION
-      14
+      13
   Label : DEFINITION
-    20
+    19
     Label : DEFINITION
-      20
+      19
   Label : DEFINITION
-    24
+    23
     Label : DEFINITION
-      24
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -76,28 +76,28 @@ Label : PROJECT
             Label : CONCAT
               8
             Label : CONCAT
-              13
+              11
               Label : INDEX
-                16
+                15
                 Label : LEFT
-                  14
+                  13
                 Label : RIGHT
-                  17
+                  16
               Label : VARIABLE
                 11
             Label : CONCAT
-              18
+              17
+              Label : CONCAT
+                18
               Label : CONCAT
                 19
               Label : CONCAT
-                20
+                21
+            Label : CONCAT
+              17
               Label : CONCAT
                 22
-            Label : CONCAT
-              18
               Label : CONCAT
                 23
               Label : CONCAT
-                24
-              Label : CONCAT
-                26
+                25

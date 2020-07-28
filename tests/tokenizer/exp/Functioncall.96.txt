@@ -65,16 +65,12 @@ Label : PROJECT
                     21
                     Label : DEFINITION
                       21
-                  Label : RETURNED
-                    Void
                   Label : RETURNTYPE
                     7
                 Label : NAME
                   10
             Label : NAME
               6
-            Label : RETURNED
-              Void
             Label : RETURNTYPE
               7
           Label : NAME

@@ -1,10 +1,10 @@
 test
 Label : GLOBAL
-  11
+  10
   Label : DEFINITION
-    11
+    10
     Label : DEFINITION
-      11
+      10
 Label : GLOBAL
   5
   Label : DEFINITION
@@ -12,11 +12,11 @@ Label : GLOBAL
     Label : DEFINITION
       5
 Label : GLOBAL
-  15
+  14
   Label : DEFINITION
-    15
+    14
     Label : DEFINITION
-      15
+      14
 Label : PROJECT
   1
   Label : DEFINITION
@@ -24,13 +24,13 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    11
+    10
     Label : DEFINITION
-      11
+      10
   Label : DEFINITION
-    15
+    14
     Label : DEFINITION
-      15
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,34 +38,34 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          9
+          8
           Label : LEFT
-            7
+            5
             Label : INDEX
-              8
+              7
             Label : VARIABLE
               5
           Label : RIGHT
-            10
+            9
             Label : ARGUMENT
-              18
+              17
               Label : LEFT
-                14
+                13
                 Label : LEFT
-                  7
+                  10
                   Label : INDEX
-                    13
+                    12
                   Label : VARIABLE
-                    11
+                    10
                 Label : RIGHT
-                  7
+                  14
                   Label : INDEX
-                    17
+                    16
                   Label : VARIABLE
-                    15
+                    14
               Label : RIGHT
-                19
+                18
             Label : ARGUMENT
-              20
+              19
             Label : NAME
-              10
+              9

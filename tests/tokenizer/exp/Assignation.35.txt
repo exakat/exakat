@@ -1,13 +1,5 @@
 test
 Label : GLOBAL
-  19
-  Label : DEFINITION
-    19
-    Label : DEFINITION
-      19
-    Label : DEFINITION
-      19
-Label : GLOBAL
   8
   Label : DEFINITION
     8
@@ -15,6 +7,14 @@ Label : GLOBAL
       8
     Label : DEFINITION
       8
+Label : GLOBAL
+  19
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
 Label : PROJECT
   1
   Label : DEFINITION
@@ -42,17 +42,17 @@ Label : PROJECT
             Label : NOT
               7
               Label : ARGUMENT
-                10
+                12
                 Label : INDEX
                   15
                 Label : VARIABLE
-                  10
+                  12
                   Label : INDEX
                     13
                   Label : VARIABLE
-                    10
+                    8
                     Label : INDEX
-                      11
+                      10
                     Label : VARIABLE
                       8
           Label : THEN
@@ -62,7 +62,7 @@ Label : PROJECT
               Label : LEFT
                 18
                 Label : ARGUMENT
-                  10
+                  21
                   Label : INDEX
                     24
                   Label : VARIABLE
@@ -72,7 +72,7 @@ Label : PROJECT
                     Label : OBJECT
                       19
                 Label : ARGUMENT
-                  10
+                  21
                   Label : INDEX
                     26
                   Label : VARIABLE
@@ -88,17 +88,17 @@ Label : PROJECT
                 Label : ARGUMENT
                   31
                 Label : ARGUMENT
-                  10
+                  12
                   Label : INDEX
                     15
                   Label : VARIABLE
-                    10
+                    12
                     Label : INDEX
                       13
                     Label : VARIABLE
-                      10
+                      8
                       Label : INDEX
-                        11
+                        10
                       Label : VARIABLE
                         8
                 Label : NAME

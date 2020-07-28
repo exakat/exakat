@@ -1,46 +1,46 @@
 test
 Label : GLOBAL
-  18
+  17
   Label : DEFINITION
-    18
+    17
     Label : DEFINITION
-      18
+      17
 Label : GLOBAL
-  15
+  14
   Label : DEFINITION
-    15
+    14
     Label : DEFINITION
-      15
+      14
 Label : GLOBAL
-  26
+  25
   Label : DEFINITION
-    26
+    25
     Label : DEFINITION
-      26
+      25
 Label : GLOBAL
-  30
+  29
   Label : DEFINITION
-    30
+    29
     Label : DEFINITION
-      30
+      29
 Label : PROJECT
   1
   Label : DEFINITION
-    15
+    14
     Label : DEFINITION
-      15
+      14
   Label : DEFINITION
-    18
+    17
     Label : DEFINITION
-      18
+      17
   Label : DEFINITION
-    26
+    25
     Label : DEFINITION
-      26
+      25
   Label : DEFINITION
-    30
+    29
     Label : DEFINITION
-      30
+      29
   Label : FILE
     3
     Label : EXPRESSION
@@ -52,9 +52,9 @@ Label : PROJECT
           Label : CONDITION
             6
             Label : ARGUMENT
-              11
+              8
               Label : INDEX
-                12
+                11
               Label : VARIABLE
                 10
                 Label : MEMBER
@@ -62,44 +62,44 @@ Label : PROJECT
                 Label : OBJECT
                   7
           Label : ELSE
-            14
+            13
             Label : EXPRESSION
-              14
+              13
               Label : EXPRESSION
-                19
+                18
                 Label : LEFT
-                  18
+                  17
                 Label : RIGHT
-                  20
+                  19
                   Label : ARGUMENT
-                    23
+                    22
                     Label : INDEX
-                      21
+                      20
                     Label : VALUE
-                      24
+                      23
             Label : EXPRESSION
-              14
+              13
               Label : EXPRESSION
-                19
+                18
                 Label : LEFT
-                  26
+                  25
                 Label : RIGHT
                   10
                   Label : METHOD
-                    28
+                    27
                     Label : ARGUMENT
                       10
                       Label : MEMBER
-                        32
+                        31
                       Label : OBJECT
-                        30
+                        29
                     Label : NAME
-                      28
+                      27
                   Label : OBJECT
                     7
           Label : THEN
-            14
+            13
             Label : EXPRESSION
-              17
+              16
               Label : POSTPLUSPLUS
-                15
+                14

@@ -24,12 +24,12 @@ Label : PROJECT
             Label : LEFT
               6
             Label : RIGHT
-              10
+              8
               Label : INDEX
-                11
+                10
                 Label : ARGUMENT
-                  12
-                Label : NAME
                   11
+                Label : NAME
+                  10
               Label : VARIABLE
                 8

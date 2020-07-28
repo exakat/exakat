@@ -20,9 +20,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            6
             Label : INDEX
-              9
+              8
             Label : VARIABLE
               6
           Label : NAME

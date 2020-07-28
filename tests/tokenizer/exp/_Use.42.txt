@@ -10,13 +10,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : USE
+            6
+          Label : USE
             12
             Label : AS
               21
             Label : NAME
               19
-          Label : USE
-            6
           Label : USE
             8
           Label : USE

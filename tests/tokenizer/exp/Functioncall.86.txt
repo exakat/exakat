@@ -3,12 +3,16 @@ Label : GLOBAL
   26
   Label : DEFINITION
     26
+    Label : DEFAULT
+      8
     Label : DEFINITION
       26
 Label : GLOBAL
   24
   Label : DEFINITION
     24
+    Label : DEFAULT
+      8
     Label : DEFINITION
       24
 Label : PROJECT
@@ -24,15 +28,21 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            9
+            7
             Label : PPP
               10
+              Label : DEFAULT
+                8
             Label : PPP
               11
+              Label : DEFAULT
+                8
             Label : PPP
               13
+              Label : DEFAULT
+                8
             Label : TYPEHINT
-              7
+              8
         Label : EXPRESSION
           15
           Label : ARGUMENT
@@ -44,7 +54,7 @@ Label : PROJECT
               Label : ARGUMENT
                 20
                 Label : DEFAULT
-                  7
+                  8
                 Label : NAME
                   20
                   Label : DEFINITION
@@ -52,71 +62,79 @@ Label : PROJECT
                   Label : DEFINITION
                     20
                 Label : TYPEHINT
-                  7
+                  8
               Label : ARGUMENT
                 21
                 Label : DEFAULT
-                  7
+                  8
                 Label : NAME
                   21
                 Label : TYPEHINT
-                  7
+                  8
               Label : BLOCK
                 22
                 Label : EXPRESSION
                   23
                   Label : GLOBAL
                     24
+                    Label : DEFAULT
+                      8
                     Label : DEFINITION
                       24
                   Label : GLOBAL
                     26
+                    Label : DEFAULT
+                      8
                     Label : DEFINITION
                       26
                 Label : EXPRESSION
                   28
                   Label : RETURN
-                    29
+                    24
                     Label : INDEX
-                      32
+                      31
                       Label : CONCAT
-                        30
+                        29
                       Label : CONCAT
-                        33
+                        32
                         Label : CODE
-                          37
+                          36
                           Label : CONDITION
-                            34
+                            33
                             Label : ARGUMENT
-                              29
+                              20
                               Label : INDEX
-                                35
+                                34
                               Label : VARIABLE
                                 20
                           Label : ELSE
-                            29
+                            41
                             Label : INDEX
-                              29
+                              20
                               Label : INDEX
-                                35
+                                34
                               Label : VARIABLE
                                 20
                             Label : VARIABLE
-                              29
+                              26
                               Label : INDEX
-                                40
+                                39
                               Label : VARIABLE
                                 26
                           Label : THEN
-                            38
+                            37
                     Label : VARIABLE
                       24
               Label : DEFINITION
                 24
+                Label : DEFAULT
+                  8
                 Label : DEFINITION
                   24
               Label : DEFINITION
                 26
+                Label : DEFAULT
+                  8
                 Label : DEFINITION
                   26
               Label : RETURNED
@@ -128,42 +146,42 @@ Label : PROJECT
               Label : RETURNED
                 20
               Label : RETURNED
-                29
+                24
                 Label : INDEX
-                  32
+                  31
                   Label : CONCAT
-                    30
+                    29
                   Label : CONCAT
-                    33
+                    32
                     Label : CODE
-                      37
+                      36
                       Label : CONDITION
-                        34
+                        33
                         Label : ARGUMENT
-                          29
+                          20
                           Label : INDEX
-                            35
+                            34
                           Label : VARIABLE
                             20
                       Label : ELSE
-                        29
+                        41
                         Label : INDEX
-                          29
+                          20
                           Label : INDEX
-                            35
+                            34
                           Label : VARIABLE
                             20
                         Label : VARIABLE
-                          29
+                          26
                           Label : INDEX
-                            40
+                            39
                           Label : VARIABLE
                             26
                       Label : THEN
-                        38
+                        37
                 Label : VARIABLE
                   24
               Label : RETURNTYPE
-                7
+                8
           Label : ARGUMENT
             42
