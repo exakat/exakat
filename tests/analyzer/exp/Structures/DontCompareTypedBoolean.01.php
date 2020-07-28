@@ -1,12 +1,11 @@
 <?php
 
 $expected     = array('fooBoolean( ) === true',
-                      'fooInt( ) === 1',
+                      'fooBoolean( ) == true',
                      );
 
 $expected_not = array('fooBoolean( ) === 1',
-                      'fooInt( ) === true',
-                      'fooBoolean( ) == true',
+                      'fooInt( ) == true',
                       'fooInt( ) == 1',
                      );
 

@@ -1,7 +1,5 @@
 <?php
 
-// define(NAME, 3);
-
 if (fooBoolean() === true) {}
 if (fooBoolean() == true) {}
 
