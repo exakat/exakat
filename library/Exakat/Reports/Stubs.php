@@ -49,39 +49,44 @@ class Stubs extends Reports {
     private function namespace(string $name, object $namespace): string {
         $result = array('namespace ' . trim($name, '\\') . ' {');
 
-        if (isset($namespace->constants)) {
+        if (!empty($namespace->constants)) {
             foreach($namespace->constants as $constantName => $constant) {
                 $result[] = $this->constant($constantName, $constant);
             }
             $result[] = '';
         }
 
-        if (isset($namespace->functions)) {
+        if (!empty($namespace->functions)) {
             foreach($namespace->functions as $functionName => $function) {
                 $result[] = $this->function($functionName, $function, 'function');
             }
             $result[] = '';
         }
 
-        if (isset($namespace->class)) {
+        if (!empty($namespace->class)) {
             foreach($namespace->class as $className => $class) {
                 $result[] = $this->class($className, $class);
             }
             $result[] = '';
         }
 
-        if (isset($namespace->interface)) {
+        if (!empty($namespace->interface)) {
             foreach($namespace->interface as $interfaceName => $interface) {
                 $result[] = $this->interface($interfaceName, $interface);
             }
             $result[] = '';
         }
 
-        if (isset($namespace->trait)) {
+        if (!empty($namespace->trait)) {
             foreach($namespace->trait as $traitName => $trait) {
                 $result[] = $this->trait($traitName, $trait);
             }
             $result[] = '';
+        }
+        
+        $last = array_pop($result);
+        if (!empty($last)) {
+            $result[] = $last;
         }
 
         $result[] = "}\n";
@@ -94,8 +99,7 @@ class Stubs extends Reports {
         $abstract   = empty($class->abstract)   ? '' : 'abstract ';
         $implements = empty($class->implements) ? '' : ' implements '.implode(', ', $class->implements);
         $extends    = empty($class->extends)    ? '' : ' extends '.$class->extends;
-        $use        = empty($class->use)        ? '' : PHP_EOL.self::INDENTATION.'use '.implode(', ', $class->use);
-        if (empty($trait->use)) {
+        if (empty($class->use)) {
             $use = '';
         } else {
             $use        = PHP_EOL.self::INDENTATION.'use '.implode(', ', $trait->use);
@@ -185,8 +189,8 @@ class Stubs extends Reports {
     }
 
     private function constant(string $name, object $values, $type = 'global'): string {
-        $phpdoc     = $this->normalizePhpdoc($values->phpdoc);
-        $visibility = ($values->visibility ?? '') . ' ';
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc, $type === 'global' ? 1 : 2);
+        $visibility = empty($values->visibility) ?  '' :  $values->visibility . ' ';
         if (isset($values->type) && $values->type == 'define') {
             return $phpdoc.self::INDENTATION.($type === 'global' ? '' : self::INDENTATION)."define('$name', $values->value);";
         } else {
@@ -197,10 +201,10 @@ class Stubs extends Reports {
     private function property(string $name, object $values): string {
         $static     = empty($values->static) ? '' : 'static ';
         $typehint   = implode('|', $values->typehint);
-        $phpdoc     = $this->normalizePhpdoc($values->phpdoc); 
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc, 2); 
         $visibility = ($values->visibility ?: 'public') . ' ';
 
-        return $phpdoc . self::INDENTATION . self::INDENTATION . $static . $visibility. $name. ';';
+        return $phpdoc . self::INDENTATION . self::INDENTATION . $static . $visibility. $typehint. $name. ';';
     }
 
     private function function(string $name, object $values, $type = 'class'): string {
@@ -208,16 +212,16 @@ class Stubs extends Reports {
         if ($type === 'interface') {
             $visibility = '';
             $abstract   = '';
-            $block      = ' ;';
+            $block      = ';';
         } else {
             $abstract   = empty($values->abstract)   ?   ''   : 'abstract ';
             $visibility = empty($values->visibility) ?   ''   : $values->visibility . ' ';
-            $block      = empty($values->abstract)   ?   '{}' : ' ;';
+            $block      = empty($values->abstract)   ?   '{}' : ';';
         }
         $static     = empty($values->static) ?     ''   : 'static ';
         $final      = empty($values->final) ?      ''   : 'final ';
         $typehint   = $values->returntypes[0] === '' ? '' : ': ' . implode('|', $values->returntypes) . ' ';
-        $phpdoc     = $this->normalizePhpdoc($values->phpdoc); 
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc, $type === 'function' ? 1 : 2); 
 
         $arguments = array();
         if (isset($values->arguments)) {
@@ -235,13 +239,12 @@ class Stubs extends Reports {
         return $phpdoc . self::INDENTATION. ($type === 'function' ? '' : self::INDENTATION)."{$final}{$abstract}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
     }
     
-    private function normalizePhpdoc(string $phpdoc) : string {
+    private function normalizePhpdoc(string $phpdoc, int $level = 0) : string {
         if (empty($phpdoc)) {
             return '';
         }
         
-        $phpdoc = preg_replace("/\n\s+\*/m", "\n *", $phpdoc);
-        return $phpdoc . PHP_EOL;
+        return str_repeat(self::INDENTATION, $level). preg_replace("/\n\s+\*/m", "\n".str_repeat(self::INDENTATION, $level)." *", $phpdoc). PHP_EOL;
     }
 }
 
