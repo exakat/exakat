@@ -206,12 +206,19 @@ abstract class Analyzer {
         if (strpos($this->analyzer, '\\Common\\') === false) {
             $parameters = $docs->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
-                assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
+                assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '".($parameter['default'] ?? '')."';\n");
 
                 if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
                     $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
-                } else {
+                    
+                    if (!isset($parameter['default'])) {
+                        continue;
+                    }
+                } elseif (isset($parameter['default'])) {
                     $this->{$parameter['name']} = $parameter['default'];
+                } else {
+                    // Else, we reuse the default values in the code
+                    continue;
                 }
 
                 switch($parameter['type']) {
