@@ -77,7 +77,7 @@ class SpotPHPNativeFunctions extends LoadFinal {
                   ->raw('sideEffect{
          fullnspath = "\\\\" + name;
          it.get().property("fullnspath", fullnspath);
-         it.get().property("is_php", true); 
+         it.get().property("isPhp", true); 
      }')
                   ->returnCount();
             $query->prepareRawQuery();
