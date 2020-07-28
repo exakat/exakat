@@ -33,7 +33,7 @@ Label : PROJECT
                 10
           Label : ELSE
             3
-            Label : EXPRESSION, EXPRESSION
+            Label : EXPRESSION
               11
               Label : ARGUMENT
                 10

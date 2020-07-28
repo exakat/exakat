@@ -31,7 +31,7 @@ Label : PROJECT
                 8
           Label : ELSE
             3
-            Label : EXPRESSION, EXPRESSION
+            Label : EXPRESSION
               10
               Label : ARGUMENT
                 8
