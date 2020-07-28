@@ -734,6 +734,8 @@ GREMLIN
         $toDump = array();
         $unique = array();
         foreach($methods as $row) {
+            $row['visibility'] = $row['visibility'] === 'none' ? '' : $row['visibility'];
+
             if (!isset($citId[$row['classline'] . $row['class']])) {
                 continue;
             }
@@ -885,6 +887,8 @@ GREMLIN
         $propertyIds = array();
         $propertyCount = 0;
         foreach($result->toArray() as $row) {
+            $row['visibility'] = $row['visibility'] === 'none' ? '' : $row['visibility'];
+
             // If we haven't found any definition for this class, just ignore it.
             if (!isset($citId[$row['classline'] . $row['class']])) {
                 continue;
