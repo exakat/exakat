@@ -152,6 +152,7 @@ class Doctor extends Tasks {
         $stats['tinkergraph']   = Graph::getConnexion('Tinkergraph')->getInfo();
         $stats['tinkergraphv3'] = Graph::getConnexion('TinkergraphV3')->getInfo();
         $stats['gsneo4j']       = Graph::getConnexion('GSNeo4j')->getInfo();
+        $stats['gsneo4jv3']     = Graph::getConnexion('GSNeo4jV3')->getInfo();
         $stats['nogremlin']     = Graph::getConnexion('NoGremlin')->getInfo();
 
         if ($this->config->project !== null) {
@@ -261,10 +262,6 @@ TEXT
             unset($initConfig);
         }
 
-        $stats['folders']['projects/test']    = file_exists("{$this->config->projects_root}/projects/test/") ? 'Yes' : 'No';
-        $stats['folders']['projects/default'] = file_exists("{$this->config->projects_root}/projects/default/") ? 'Yes' : 'No';
-        $stats['folders']['projects/onepage'] = file_exists("{$this->config->projects_root}/projects/onepage/") ? 'Yes' : 'No';
-
         return $stats;
     }
 
@@ -325,8 +322,6 @@ TEXT
             $version = "$shortVersion[0].$shortVersion[1]";
             if (isset($config[$configVersion])) {
                 $stats[$configVersion] = $this->checkPHP($config[$configVersion], $version);
-            } else {
-                $stats[$configVersion] = array('configured' => 'No');
             }
         }
 
