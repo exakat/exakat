@@ -34,6 +34,10 @@ class Section {
     public $ruleset = 'None';
 
     public function __construct(array $section) {
+        assert(isset($section['title']),  "Missing 'title' for section");
+        assert(isset($section['file']),   "Missing 'file' for section");
+        assert(isset($section['method']), "Missing 'method' for section");
+
         $this->title   = $section['title']   ?? $this->title;
         $this->menu    = $section['menu']    ?? $this->title;  // Yes, menu === title if not specified
         $this->file    = $section['file']    ?? $this->file;

@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class MemoizeMagicCall extends Analyzer {
+    protected $minMagicCallsToGet = 2;
+    
     public function dependsOn(): array {
         return array('Complete/CreateMagicProperty',
                     );
@@ -61,7 +63,7 @@ GREMLIN
                 )
              )
              ->atomInsideNoDefinition('Member')
-             ->raw('filter {members[it.get().value("fullcode")] > 1;}')
+             ->raw('filter {members[it.get().value("fullcode")] >= '.$this->minMagicCallsToGet.';}')
              ->back('first');
         $this->prepareQuery();
     }

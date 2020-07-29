@@ -126,22 +126,22 @@ class Project extends Tasks {
 
         foreach($this->reports as $format) {
             try {
-                $report = new ReportConfig($format, $this->config);
+                $reportConfig = new ReportConfig($format, $this->config);
             } catch (NoSuchReport $e) {
                 // Simple ignore
                 display($e->getMessage());
                 continue;
             }
-            $this->reportConfigs[$report->getName()] = $report;
+            $this->reportConfigs[$reportConfig->getName()] = $reportConfig;
 
-            $rulesets = $report->getRulesets();
+            $rulesets = $reportConfig->getRulesets();
             if (empty($rulesets)) {
-                $rulesets = $report->getRulesets();
+                $rulesets = $reportConfig->getRulesets();
             }
             $rulesetsToRun[] = $rulesets;
-            $namesToRun[] = $report->getName();
+            $namesToRun[] = $reportConfig->getName();
 
-            unset($report);
+            unset($reportConfig);
             gc_collect_cycles();
         }
 

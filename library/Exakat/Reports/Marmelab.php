@@ -53,7 +53,7 @@ class Marmelab extends Reports {
                            'description' => $description['description'],
                            'severity'    => $description['severity'],
                            'fixtime'     => $description['timetofix'],
-                           'clearphp'    => $description['clearphp'],
+                           'clearphp'    => $description['clearphp'] ?? '',
                            );
 
                 $analyzers[$row['analyzer']] = (object) $a;

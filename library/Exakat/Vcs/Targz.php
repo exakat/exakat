@@ -60,7 +60,7 @@ class Targz extends Vcs {
         unlink($archiveFile);
     }
 
-    public function getInstallationInfo() : void {
+    public function getInstallationInfo() : array {
         $stats = array();
 
         $res = trim(shell_exec('tar --version 2>&1') ?? '');

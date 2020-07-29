@@ -34,7 +34,7 @@ class IsNotImplemented extends Analyzer {
              ->goToAllImplements(self::INCLUDE_SELF)
              ->atomIs('Interface')
              ->collectMethods('interfaceMethods')
-             ->raw('filter{interfaceMethods.intersect(classMethods) != interfaceMethods}')
+             ->raw('filter{interfaceMethods.size() > classMethods.size() || !classMethods.containsAll(interfaceMethods);}')
              ->back('first');
         $this->prepareQuery();
     }
