@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseSetCookie extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // with header
         // header('Set-cookie: x = 2')
         $this->atomFunctionIs('\\header')

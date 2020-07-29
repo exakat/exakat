@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectLocalVariableCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'Local Variable Counts';
 
-    public function analyze() {
+    public function analyze() : void {
         // foo() {$t ; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->raw('groupCount("m").by(__.out("DEFINITION").hasLabel("Variabledefinition", "Staticdefinition").count()).cap("m")');

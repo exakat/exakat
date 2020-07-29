@@ -27,7 +27,7 @@ use Exakat\Data\Methods;
 
 class CouldBeString extends CouldBeType {
 
-    public function analyze() {
+    public function analyze() : void {
         $stringAtoms = array('Concatenation', 'String', 'Heredoc');
 
         $this->checkPropertyDefault($stringAtoms);

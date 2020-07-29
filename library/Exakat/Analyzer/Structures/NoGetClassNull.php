@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoGetClassNull extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // get_class(NULL)
         $this->atomFunctionIs('\\get_class')
              ->outIs('ARGUMENT')

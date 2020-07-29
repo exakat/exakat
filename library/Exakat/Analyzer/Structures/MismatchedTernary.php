@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MismatchedTernary extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
          $excludedAtoms = array('Array',
                                 'Functioncall',
                                 'Member',

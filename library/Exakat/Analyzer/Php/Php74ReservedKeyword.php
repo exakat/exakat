@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Php74ReservedKeyword extends Analyzer {
 //    protected $phpVersion = '7.4-';
 
-    public function analyze() {
+    public function analyze() : void {
         $keyword = 'fn';
 
         $this->atomIs('Identifier')

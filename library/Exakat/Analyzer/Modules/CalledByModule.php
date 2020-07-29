@@ -28,7 +28,7 @@ use Exakat\Data\Dictionary;
 class CalledByModule extends Analyzer {
     protected $data = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $calledBy = $this->config->dev->loadJson('called_by.json');
 
         // Merging ALL values of all versions.

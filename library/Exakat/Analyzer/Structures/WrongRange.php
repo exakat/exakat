@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class WrongRange extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if ($a > 1 || $a < 1000)
         $this->atomIs('Logical')
              ->codeIs(array('||', 'or'))

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedVariable extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { echo $b;}
         $this->atomIs('Variabledefinition')
              // not from eval or include

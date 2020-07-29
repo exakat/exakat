@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class RegexDelimiter extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $pregFunctions = array('\\preg_match_all',
                                '\\preg_match',
                                '\\preg_replace',

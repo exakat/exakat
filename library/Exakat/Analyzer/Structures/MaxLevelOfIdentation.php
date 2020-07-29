@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class MaxLevelOfIdentation extends Analyzer {
     protected $maxLevel = 4;
 
-    public function analyze() {
+    public function analyze() : void {
         // if (a) { if (b) { }}
         // only reporting the method, not each line.
         $this->atomIs(self::FUNCTIONS_ALL)

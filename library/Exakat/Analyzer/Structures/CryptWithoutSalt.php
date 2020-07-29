@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\FunctionDefaultValue;
 class CryptWithoutSalt extends FunctionDefaultValue {
     protected $phpVersion = '5.6-';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->code = 'crypt';
         $this->rank = 1;
 

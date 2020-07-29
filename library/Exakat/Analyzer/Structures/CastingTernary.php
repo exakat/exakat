@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CastingTernary extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a = (string) $b ? 3 : 4;
         // $a = (string) $b ?: 4;
         // $a = (string) $b ?? 4;

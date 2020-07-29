@@ -32,7 +32,7 @@ class IsExtTrait extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
         //$this->loadIni('php_traits.ini', 'traits')

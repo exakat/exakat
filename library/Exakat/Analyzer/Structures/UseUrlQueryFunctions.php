@@ -30,7 +30,7 @@ class UseUrlQueryFunctions extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // explode('&', $string);
         $this->atomFunctionIs(array('\\explode', '\\implode', '\\join', '\\split', ))
              ->outWithRank('ARGUMENT', 0)

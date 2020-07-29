@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class NoConcatInLoop extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         //'foreach($a as $b) { $d .= $b; } ',
         $this->atomIs(array('Foreach', 'For'))
              ->outIs('BLOCK')

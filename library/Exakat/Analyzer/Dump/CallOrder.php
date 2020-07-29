@@ -49,7 +49,7 @@ SQL;
                     );
     }
     
-    public function analyze() {
+    public function analyze() : void {
         $this ->atomIs(self::CALLS, self::WITHOUT_CONSTANTS)
               ->goToInstruction(array('Function', 'Method', 'Magicmethod'))
               ->as('calling')

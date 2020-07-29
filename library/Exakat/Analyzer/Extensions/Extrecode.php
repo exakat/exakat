@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extrecode extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'recode.ini';
 
         parent::analyze();

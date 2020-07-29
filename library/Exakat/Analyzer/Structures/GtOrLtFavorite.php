@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class GtOrLtFavorite extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $codeInt = $this->dictCode->translate(array('>', '>='));
         if (empty($codeInt)) {
             return;

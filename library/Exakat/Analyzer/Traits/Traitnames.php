@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Traitnames extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // trait t {}
         $this->atomIs('Trait')
              ->outIs('NAME');

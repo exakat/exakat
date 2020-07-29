@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ExponentUsage extends Analyzer {
     protected $phpVersion = '5.6+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Power');
         $this->prepareQuery();
 

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class HiddenUse extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // only for uses with rank of 1 or later
         $this->atomIs(array('Usenamespace', 'Usetrait'))
              ->savePropertyAs('rank', 'ranked')

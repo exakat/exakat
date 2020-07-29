@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extibase extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'ibase.ini';
 
         parent::analyze();

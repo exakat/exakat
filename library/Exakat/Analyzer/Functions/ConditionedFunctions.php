@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class ConditionedFunctions extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if (!is_callable('f')) { function f() {}}
         $this->atomIs('Function')
              ->hasIfthen();

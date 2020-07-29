@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MissingParenthesis extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // -$a + $b
         $this->atomIs('Addition')
              ->codeIs('+')

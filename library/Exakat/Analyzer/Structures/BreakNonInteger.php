@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class BreakNonInteger extends Analyzer {
     protected $phpVersion = '5.4-';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Break')
              ->outIs('LEVEL')
              ->atomIsnot(array('Integer', 'Void'))

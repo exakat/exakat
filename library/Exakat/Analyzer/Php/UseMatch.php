@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseMatch extends Analyzer {
     protected $phpVersion = '8.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         // match($a) {};
         $this->atomIs('Match');
         $this->prepareQuery();

@@ -29,7 +29,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Protocols extends AnalyzerResults {
     protected $analyzerName = 'Protocols';
 
-    public function analyze() {
+    public function analyze() : void {
         $protocols = (array) $this->loadJson('protocols.json');
         $protocolList = implode('|', array_keys($protocols));
 

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CoalesceAndConcat extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // 'a' . $b ?? 'c'
         $this->atomIs('Coalesce')
              ->outIs(array('LEFT', 'RIGHT'))

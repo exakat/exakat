@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class Autoappend extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a[] = $a;
         $this->atomIs('Arrayappend')
              ->outIs('APPEND')

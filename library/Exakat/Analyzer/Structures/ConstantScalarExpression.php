@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConstantScalarExpression extends Analyzer {
     protected $phpVersion = '5.6+';
 
-    public function analyze() {
+    public function analyze() : void {
         $authorizedAtoms = array('Integer', 'String', 'Float', 'Boolean', 'Void', 'Staticconstant', 'Null', 'Identifier');
 
         // in constants

@@ -32,7 +32,7 @@ class MakeMagicConcrete extends Analyzer {
 
     protected $magicMemberUsage = 1;
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { __get($x) {}}
         // $a->bbb; $a->bbb; $a->bbb;
         $this->atomIs('Magicmethod')

@@ -32,7 +32,7 @@ class MbstringUnknownEncoding extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');
 
         $positions = array('\\mb_preferred_mime_name'  => array(0),

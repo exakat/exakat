@@ -31,7 +31,7 @@ class CouldUseCompact extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // $a = array('a' => $a, 'b' => $b);
         $this->atomIs('Arrayliteral')
             // Only keep Keyvalue and void

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ShouldUseCoalesce extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         //isset($a) ? $a : 'b';
         $this->atomIs('Ternary')
              ->outIs('CONDITION')

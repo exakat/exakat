@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class FetchOneRowFormat extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $res->fetchRow() : Default is slow
         $this->atomIs('Methodcall')
              ->outIs('METHOD')

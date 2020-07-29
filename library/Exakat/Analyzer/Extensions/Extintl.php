@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extintl extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'intl.ini';
 
         parent::analyze();

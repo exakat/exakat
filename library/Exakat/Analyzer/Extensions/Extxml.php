@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extxml extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'xml.ini';
 
         parent::analyze();

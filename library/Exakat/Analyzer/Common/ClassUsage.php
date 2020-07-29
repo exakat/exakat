@@ -32,7 +32,7 @@ class ClassUsage extends Analyzer {
         $this->classes = $classes;
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $classes =  makeFullNsPath($this->classes);
 
         // New X();

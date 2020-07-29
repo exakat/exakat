@@ -30,7 +30,7 @@ class CourrierAntiPattern extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->analyzerIs('Patterns/DependencyInjection')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'arg')

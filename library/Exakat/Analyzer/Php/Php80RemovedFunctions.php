@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\FunctionUsage;
 class Php80RemovedFunctions extends FunctionUsage {
     protected $phpVersion = '8.0-';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array('image2wbmp',
                                  'png2wbmp',
                                  'jpeg2wbmp',

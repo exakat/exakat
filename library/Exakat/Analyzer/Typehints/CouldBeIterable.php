@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldBeIterable extends CouldBeType {
-    public function analyze() {
+    public function analyze() : void {
         $iterableAtoms = array('Arrayliteral');
 
         // property relayed typehint

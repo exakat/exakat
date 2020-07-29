@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class EmptyBlocks extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Block with only one empty expression
         // Block with only empty expressions
         $this->atomIs(array('For', 'While', 'Foreach', 'Dowhile', 'Declare', 'Namespace', 'Declare', 'Switch', 'Match'))

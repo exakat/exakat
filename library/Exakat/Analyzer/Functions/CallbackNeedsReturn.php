@@ -31,7 +31,7 @@ class CallbackNeedsReturn extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $ini = $this->loadIni('php_with_callback.ini');
 
         // Excluding some functions that don't REQUIRE return

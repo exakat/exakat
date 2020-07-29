@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\InterfaceUsage as CommonInterfaceUsage;
 
 class InterfaceUsage extends CommonInterfaceUsage {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->interfaces = array();
 
         parent::analyze();

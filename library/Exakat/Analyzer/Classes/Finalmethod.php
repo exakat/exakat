@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Finalmethod extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { final function foo() {}}
         $this->atomIs('Class')
              ->outIs(array('METHOD', 'MAGICMETHOD'))

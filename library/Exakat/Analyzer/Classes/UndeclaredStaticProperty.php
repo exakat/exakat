@@ -30,7 +30,7 @@ class UndeclaredStaticProperty extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class a { public $a = 1;}
         // a::$a
         $this->atomIs('Staticproperty')

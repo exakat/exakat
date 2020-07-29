@@ -41,7 +41,7 @@ class PrefixToType extends Analyzer {
                                     'uuid'         => '\\Uuid',
                                     );
 
-    public function analyze() {
+    public function analyze() : void {
 
         // Prefixes : isPath() : is => bool
         foreach($this->prefixedType as $prefix => $type) {

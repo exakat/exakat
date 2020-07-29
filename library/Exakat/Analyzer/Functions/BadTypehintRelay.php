@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class BadTypehintRelay extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // todo : handle union typehint :
         // todo : handle class hierarchy
         // todo : handle relay via local variables

@@ -31,7 +31,7 @@ class UseThis extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Valid for both statics and normal
         // parent::
         $this->atomIs('Parent')

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ScalarTypehintUsage extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
         $scalars = array_values(array_diff($scalars, array('\array', '\callable', )));
 

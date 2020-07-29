@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleAliasDefinitionPerFile extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // use A as B;
         // use A as C;
         $this->atomIs('Usenamespace')

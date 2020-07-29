@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class PathinfoReturns extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // doesn't work on parse_str, which returns void.
         //list(,, $extension, $filename) = array_values(pathinfo($filename));
         $this->atomFunctionIs(array('\\pathinfo', '\\parse_url'))

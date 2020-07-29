@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Coalesce extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Ternary')
              ->outIs('THEN')
              ->atomIs('Void')

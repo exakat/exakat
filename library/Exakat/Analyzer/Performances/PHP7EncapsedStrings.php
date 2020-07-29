@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class PHP7EncapsedStrings extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $ignoreAtom = array('Functioncall',    // calls
                             'Methodcall',
                             'Staticproperty',

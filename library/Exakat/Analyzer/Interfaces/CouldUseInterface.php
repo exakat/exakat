@@ -29,7 +29,7 @@ class CouldUseInterface extends Analyzer {
     // class x { function i() {}}
     // class x could use interface i but it was forgotten
 
-    public function analyze() {
+    public function analyze() : void {
         // Custom interfaces
         $this->atomIs('Interface')
              ->as('name')

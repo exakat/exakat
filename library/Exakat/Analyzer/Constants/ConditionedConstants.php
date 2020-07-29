@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class ConditionedConstants extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if () { define(); }
         $this->atomIs('Defineconstant')
              ->hasIfthen()

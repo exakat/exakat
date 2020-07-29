@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedUse extends Analyzer {
     // use A\B as C; new C();
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->hasIn('DEFINITION');

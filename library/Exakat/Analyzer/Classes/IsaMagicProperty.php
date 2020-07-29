@@ -30,7 +30,7 @@ class IsaMagicProperty extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // echo $this->a;
         $this->atomIs('Member')
              ->is('isRead', true)

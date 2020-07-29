@@ -30,7 +30,7 @@ class UncaughtExceptions extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->values('fullnspath')

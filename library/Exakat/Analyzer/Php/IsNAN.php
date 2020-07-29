@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class IsNAN extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // is_nan();
         $this->atomFunctionIs('\\is_nan');
         $this->prepareQuery();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class HashAlgos53 extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $algos = array_merge($this->loadIni('hash_algos.ini', 'new54'),
                              $this->loadIni('hash_algos.ini', 'new56'));
 

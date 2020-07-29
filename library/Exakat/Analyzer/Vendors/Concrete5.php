@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Vendors;
 use Exakat\Analyzer\Common\UsesFramework;
 
 class Concrete5 extends UsesFramework {
-    public function analyze() {
+    public function analyze() : void {
         $detections = $this->loadIni('vendors/concrete5.ini');
 
         $this->classes    = $detections->classes;

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticMethods extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('METHOD')
              ->atomIs('Method')

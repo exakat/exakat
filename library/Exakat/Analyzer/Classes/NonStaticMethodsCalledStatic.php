@@ -32,7 +32,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // check outside the class : the first found class has not method
         // Here, we find methods that are in the grand parents, and not static.
 

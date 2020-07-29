@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class StrposTooMuch extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // strpos($a, $b) === 0
         $this->atomFunctionIs(array('\\strpos', '\\stripos', '\\strrpos', '\\strripos'))
              ->inIs(array('LEFT', 'RIGHT'))

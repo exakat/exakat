@@ -32,7 +32,7 @@ class Php extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $interfaces = $this->loadIni('php_interfaces.ini', 'interfaces');
         $interfaces = makeFullNsPath($interfaces);
 

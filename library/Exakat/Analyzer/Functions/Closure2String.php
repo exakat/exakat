@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class Closure2String extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function ($x) { return strtoupper($x);} => 'foo', 'X::foo'
         // function ($x) use ($a) { return $a->b($x);} = array($var, 'method')
         $this->atomIs(array('Closure', 'Arrowfunction'))

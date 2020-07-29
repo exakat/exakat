@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extzmq extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'zmq.ini';
 
         parent::analyze();

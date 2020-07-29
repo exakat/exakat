@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ForeachWithList extends Analyzer {
     protected $phpVersion = '5.5+';
 
-    public function analyze() {
+    public function analyze() : void {
         // foreach($a as ['a' => $b]) {}
         $this->atomIs('Foreach')
              ->outIs('VALUE')

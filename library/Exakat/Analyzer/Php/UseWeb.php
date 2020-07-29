@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseWeb extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // GPC + R
         $this->atomIs(self::VARIABLES_ALL)
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'), true);

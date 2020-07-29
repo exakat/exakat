@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class CsvInLoops extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $fp = fopen('/to/path/', 'r+');
         // foreach($array as $r) { fputcsv($fp, $r); }
 

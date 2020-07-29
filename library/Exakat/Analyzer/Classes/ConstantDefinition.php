@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ConstantDefinition extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // Const in a function or an interface (but not a trait )
         $this->atomIs('Const')
              ->hasClassInterface()

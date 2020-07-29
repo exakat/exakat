@@ -32,7 +32,7 @@ class RaisedAccessLevel extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // raised to private
         $this->atomIs('Ppp')
              ->is('visibility', 'private')

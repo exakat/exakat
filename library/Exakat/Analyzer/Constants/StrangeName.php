@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class StrangeName extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $names = $this->loadIni('php_strange_names.ini', 'constants');
 
         $this->atomIs(array('Identifier', 'Name'))

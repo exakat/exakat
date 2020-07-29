@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class IsNotImplemented extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // interface i { function i() {}}
         // class c implements i {       }
         $this->atomIs(self::CLASSES_ALL)

@@ -30,7 +30,7 @@ class StripTagsSkipsClosedTag extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // strip_tags($a, '<br />'); (br will not be ignored)
         $this->atomFunctionIs('\\strip_tags')
              ->outWithRank('ARGUMENT', 1)

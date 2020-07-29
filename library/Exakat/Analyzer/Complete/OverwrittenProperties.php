@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class OverwrittenProperties extends Complete {
-    public function analyze() {
+    public function analyze() : void {
         // class x { protected $p = 1;}
         // class xx extends x { protected $p = 1;}
         $this->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)

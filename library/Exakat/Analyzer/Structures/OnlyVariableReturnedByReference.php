@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class OnlyVariableReturnedByReference extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function &returnRef() { return $a;}
         $this->atomIs('Function')
              ->is('reference', true)

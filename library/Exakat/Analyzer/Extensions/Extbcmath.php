@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extbcmath extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'bcmath.ini';
 
         parent::analyze();

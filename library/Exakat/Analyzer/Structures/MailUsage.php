@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MailUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $mailerFunctions = $this->loadIni('mailer.ini', 'functions');
         $this->atomFunctionIs($mailerFunctions)
              ->back('first');

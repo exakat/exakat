@@ -30,7 +30,7 @@ class AddDefaultValue extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // function foo($x) { ...; $x = 0; ...}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

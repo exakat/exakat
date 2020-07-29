@@ -32,7 +32,7 @@ class IsExtClass extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
         $c = array($this->loadIni('php_classes.ini', 'classes'));

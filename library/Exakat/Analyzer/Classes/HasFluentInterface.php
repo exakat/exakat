@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class HasFluentInterface extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $this->a()->b()->c();
         $this->atomIs('Class')
              ->outIs('METHOD')

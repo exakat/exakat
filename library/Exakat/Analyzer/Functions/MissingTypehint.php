@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MissingTypehint extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo($a) : void;
         // missing argument's typehint
         $this->atomIs(self::FUNCTIONS_ALL)

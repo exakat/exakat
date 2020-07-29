@@ -30,7 +30,7 @@ class NoSpreadForHash extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // ...['a' => 3]
         $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)
              ->is('variadic', true)

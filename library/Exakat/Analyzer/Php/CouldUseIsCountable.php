@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CouldUseIsCountable extends Analyzer {
     protected $phpVersion = '7.3+';
 
-    public function analyze() {
+    public function analyze() : void {
         // is_array($x) or $x instanceof \Countable
         $this->atomIs('Logical')
              ->tokenIs(array('T_LOGICAL_OR', 'T_LOGICAL_XOR'))

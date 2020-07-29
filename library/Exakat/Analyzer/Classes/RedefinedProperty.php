@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class RedefinedProperty extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x           { protected $p = 1; }
         // class y extends x { protected $p = 1; }
         $this->atomIs('Ppp')

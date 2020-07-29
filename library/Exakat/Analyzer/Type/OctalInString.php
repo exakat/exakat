@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class OctalInString extends Analyzer {
     protected $phpVersion = '7.1-';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '\\\\\\\\' . '(\\\\d{4,}|[4-9]\\\\d{2,2}|3[89]\\\\d|37[89])')

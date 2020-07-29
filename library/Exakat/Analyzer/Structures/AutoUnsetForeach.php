@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class AutoUnsetForeach extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach($a as $a) {}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')

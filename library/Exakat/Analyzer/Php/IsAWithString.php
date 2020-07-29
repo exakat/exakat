@@ -31,7 +31,7 @@ class IsAWithString extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // is_a('a', 'b');
         $this->atomFunctionIs(array('\\is_a',
                                     '\\is_subclass_of',

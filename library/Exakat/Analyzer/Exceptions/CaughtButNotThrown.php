@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CaughtButNotThrown extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // There is a catch() but its class is not defined
         $phpExceptions = $this->loadIni('php_exception.ini', 'classes');
 

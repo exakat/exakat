@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extpassword extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'password.ini';
 
         parent::analyze();

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Functionnames extends Analyzer {
     // Function definitions, not in a CIT
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Function')
              ->hasNoClassInterfaceTrait()
              ->outIs('NAME');

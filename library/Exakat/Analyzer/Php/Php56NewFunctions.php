@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php56NewFunctions extends FunctionDefinition {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array(
 'gmp_root',
 'gmp_rootrem',

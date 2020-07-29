@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IsGlobal extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoClassInterfaceTrait()

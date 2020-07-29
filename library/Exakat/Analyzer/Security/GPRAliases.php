@@ -29,7 +29,7 @@ class GPRAliases extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Web variables
         $webVariables = $this->loadIni('php_web_variables.ini', 'variables');
 

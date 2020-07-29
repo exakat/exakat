@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ObjectReferences extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
 
         // f(stdclass &$x)

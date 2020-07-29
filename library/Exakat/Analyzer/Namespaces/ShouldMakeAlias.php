@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldMakeAlias extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // No namespace ?
         $this->atomIs(array('Nsname', 'Newcall'))
              ->tokenIs('T_NS_SEPARATOR')

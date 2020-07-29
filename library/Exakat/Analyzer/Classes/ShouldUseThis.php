@@ -33,7 +33,7 @@ class ShouldUseThis extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Non-Static Methods must use $this
         $this->atomIs('Method')
              ->isNot('static', true)

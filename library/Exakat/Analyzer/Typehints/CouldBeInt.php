@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldBeInt extends CouldBeType {
-    public function analyze() {
+    public function analyze() : void {
         $intAtoms = array('Integer', 'Addition', 'Multiplication', 'Not', 'Power');
         
         // property : based on default value (created or not)

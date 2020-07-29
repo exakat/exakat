@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class RelayFunction extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo($a, $b, $c) { return foo2($a, $b, $c);}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->filter(

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldReturnVoid extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() {} // empty function
         $this->atomIs(array('Function', 'Arrowfunction', 'Closure', 'Method'))
              ->analyzerIsNot('self')

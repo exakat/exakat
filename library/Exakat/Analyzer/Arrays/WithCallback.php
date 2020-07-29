@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class WithCallback extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $clean = array_filter($array);
         $list = array('\\array_map',
                       '\\array_walk',

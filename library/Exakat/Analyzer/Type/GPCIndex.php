@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class GPCIndex extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $array['index']
         $this->atomIs('Array')
              ->outIs('VARIABLE')

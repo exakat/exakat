@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SameConditions extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if ($a) {} elseif ($a1) {} else {}
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

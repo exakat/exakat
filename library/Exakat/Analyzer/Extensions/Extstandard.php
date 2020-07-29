@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extstandard extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'standard.ini';
 
         parent::analyze();

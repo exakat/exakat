@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CantInstantiateClass extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // new X();
         // class x { private function __construct() {}}
         $this->atomIs('New')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Composer;
 use Exakat\Analyzer\Analyzer;
 
 class UseComposer extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->rowCount       = (int) $this->datastore->getHash('composer.json');
         $this->processedCount = 1;
         $this->queryCount     = 0;

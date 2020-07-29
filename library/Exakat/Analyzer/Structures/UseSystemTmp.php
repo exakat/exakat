@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseSystemTmp extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = array('\\glob',
                            '\\fopen',
                            '\\file',

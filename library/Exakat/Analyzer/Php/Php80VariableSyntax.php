@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Php80VariableSyntax extends Analyzer {
     protected $phpVersion = '8.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         // __FUNCTION__[0]
         $this->atomIs('Magicconstant')
              ->inIs('VARIABLE')

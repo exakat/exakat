@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class Sqlite3RequiresSingleQuotes extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $query = 'select * from table where col = "'.$sqlite->escapeString($x).'"';
         $this->atomIs('Concatenation')
              ->outIs('CONCAT')

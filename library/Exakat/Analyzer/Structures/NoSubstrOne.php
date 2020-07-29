@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoSubstrOne extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Don't use substr($x, $y, 1) but $x[$y];
         $this->atomFunctionIs('\\substr')
              ->outWithRank('ARGUMENT', 2)

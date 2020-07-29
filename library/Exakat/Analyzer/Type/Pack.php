@@ -34,7 +34,7 @@ class Pack extends AnalyzerResults {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $packFunctions = array('\\pack',
                                '\\unpack',
                                );

@@ -33,7 +33,7 @@ class DefinedStaticMP extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')
              ->hasIn('DEFINITION');

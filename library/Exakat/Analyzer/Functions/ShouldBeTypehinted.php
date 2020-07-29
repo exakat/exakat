@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldBeTypehinted extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // spotting objects with property
         $this->atomIs('Parameter')
              ->analyzerIsNot('self')

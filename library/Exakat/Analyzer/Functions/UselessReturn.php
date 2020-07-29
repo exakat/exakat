@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessReturn extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // return in special functions
         $this->atomIs('Magicmethod')
              ->hasClassTrait() // avoid interfaces

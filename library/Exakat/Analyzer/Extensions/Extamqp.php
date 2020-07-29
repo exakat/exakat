@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extamqp extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'amqp.ini';
 
         parent::analyze();

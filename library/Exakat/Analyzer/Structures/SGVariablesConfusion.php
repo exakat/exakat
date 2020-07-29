@@ -37,7 +37,7 @@ class SGVariablesConfusion extends Analyzer {
     }
     */
 
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { $a = 1; global $a; static $a; }
         $this->atomIs('Variabledefinition')
              ->filter(

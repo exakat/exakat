@@ -32,7 +32,7 @@ class InterfaceUsage extends Analyzer {
         $this->interfaces = $interfaces;
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $interfaces =  makeFullNsPath($this->interfaces);
 
         $this->atomIs('Class')

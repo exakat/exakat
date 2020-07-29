@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class DontEchoError extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // echo mysql_error();
         $errorMessageFunctions = $this->loadIni('errorMessageFunctions.ini', 'functions');
         $errorMessageFunctions = makeFullNsPath($errorMessageFunctions);

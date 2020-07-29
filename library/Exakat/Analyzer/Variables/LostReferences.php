@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class LostReferences extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foo(&$f) { $f =& $b;}
         $this->atomIs('Parametername')
              ->outIs('DEFINITION')

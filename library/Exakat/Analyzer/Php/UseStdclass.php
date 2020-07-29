@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\ClassUsage;
 
 class UseStdclass extends ClassUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->classes = array('\\stdclass');
 
         parent::analyze();

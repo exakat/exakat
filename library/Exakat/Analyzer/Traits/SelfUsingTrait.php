@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SelfUsingTrait extends Analyzer {
     // trait t { use t; }
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToAllTraits(self::INCLUDE_SELF)

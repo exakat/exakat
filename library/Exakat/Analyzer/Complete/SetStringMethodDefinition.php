@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetStringMethodDefinition extends Complete {
-    public function analyze() {
+    public function analyze() : void {
         // $a = 'B::C' with class B { function C() {}}
         $this->atomIs('String', self::WITHOUT_CONSTANTS)
               ->hasIn('DEFINITION')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Portability;
 use Exakat\Analyzer\Analyzer;
 
 class FopenMode extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomFunctionIs('\\fopen')
              ->outWithRank('ARGUMENT', 1)
              ->regexIsNot('fullcode', 'b')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NestedIfthen extends Analyzer {
     protected $nestedIfthen = 3;
 
-    public function analyze() {
+    public function analyze() : void {
         $this->nestedIfthen = abs((int) $this->nestedIfthen);
         $this->nestedIfthen = $this->nestedIfthen === 0 ? 1 : $this->nestedIfthen;
 

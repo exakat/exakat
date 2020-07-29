@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UsePathinfo extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // getting the file extension with explode
         /*
         $temp = explode('.', $config);

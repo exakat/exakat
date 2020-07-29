@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedInheritedVariable extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function ($a) use ($b) { return $a; }
         $this->atomIs('Closure')
              ->outIs('USE')

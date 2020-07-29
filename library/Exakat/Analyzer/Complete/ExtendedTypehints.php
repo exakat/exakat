@@ -29,7 +29,7 @@ class ExtendedTypehints extends Complete {
         return array('Complete/SetParentDefinition',
                     );
     }
-    public function analyze() {
+    public function analyze() : void {
        // returntype, contravariant (Interface => Class)
        // returntype, contravariant (Interface => Class => subclass)
        // returntype, contravariant (Interface => Subinterface => Class => subclass)

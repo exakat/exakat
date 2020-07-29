@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Typehints;
 class CouldBeArray extends CouldBeType {
     // dependsOn is in CouldBeType class
     
-    public function analyze() {
+    public function analyze() : void {
         // property with default
         $this->checkPropertyDefault(array('Arrayliteral'));
 

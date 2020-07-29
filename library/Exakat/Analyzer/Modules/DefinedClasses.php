@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\ClassUsage;
 class DefinedClasses extends ClassUsage {
     protected $classes = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $classes = $this->config->ext->loadIni('classes.ini', 'classes');
 
         if (empty($classes)) {

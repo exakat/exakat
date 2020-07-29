@@ -30,7 +30,7 @@ class UsesFramework extends Analyzer {
     protected $traits     = array();
     protected $namespaces = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $analyzerId = null;
 
         if (!empty($this->classes[0])) {

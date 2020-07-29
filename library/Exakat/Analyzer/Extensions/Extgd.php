@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgd extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'gd.ini';
 
         parent::analyze();

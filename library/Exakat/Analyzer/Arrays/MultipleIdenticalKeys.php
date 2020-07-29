@@ -31,7 +31,7 @@ class MultipleIdenticalKeys extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // array('a' => 1, 'b' = 2)
         $this->atomIs('Arrayliteral')
              ->isMore('count', 1)

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Services extends Analyzer {
     private $report = null;
 
-    public function analyze() {
+    public function analyze() : void {
         // Just a place holder
         return true;
     }

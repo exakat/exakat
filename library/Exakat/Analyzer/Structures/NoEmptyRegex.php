@@ -32,7 +32,7 @@ class NoEmptyRegex extends Analyzer {
                                          '\\preg_relace_callback_array',
                                          );
 
-    public function analyze() {
+    public function analyze() : void {
         // preg_match(''.$b, $d, $d); Empty delimiter
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)

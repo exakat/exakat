@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Composer;
 
 class IsComposerClass extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $data = new Composer($this->config);
 
         $classes = $data->getComposerClasses();

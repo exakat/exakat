@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoHardcodedHash extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $algos = $this->loadJson('hash_length.json');
         $stopwords = $this->loadIni('NotHash.ini', 'ignore');
 

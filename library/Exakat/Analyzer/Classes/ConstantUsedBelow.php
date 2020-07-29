@@ -30,7 +30,7 @@ class ConstantUsedBelow extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         //////////////////////////////////////////////////////////////////
         // constant + CLASS::constant (no check on class itself)
         //////////////////////////////////////////////////////////////////

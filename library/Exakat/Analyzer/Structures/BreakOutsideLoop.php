@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class BreakOutsideLoop extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() {
+    public function analyze() : void {
         $breakable = array('Dowhile', 'For', 'Foreach', 'While', 'Switch', 'Match');
 
         // break (null)

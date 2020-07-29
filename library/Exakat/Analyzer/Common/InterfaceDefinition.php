@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class InterfaceDefinition extends Analyzer {
     protected $interfaces = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $interfaces =  makeFullNsPath($this->interfaces);
 
         $this->atomIs('Interface')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DirectlyUseFile extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // md5(file_get_contents('path));
         $functions = array(0 => array('\\md5',
                                       '\\highlight_string',

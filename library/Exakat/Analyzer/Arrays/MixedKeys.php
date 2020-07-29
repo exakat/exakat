@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MixedKeys extends Analyzer {
     protected $phpVersion = '5.6+';
 
-    public function analyze() {
+    public function analyze() : void {
         // build with array()
         $this->atomIs('Ppp')
              ->outIs('PPP')

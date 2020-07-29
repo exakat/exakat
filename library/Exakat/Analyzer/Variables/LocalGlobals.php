@@ -30,7 +30,7 @@ class LocalGlobals extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->analyzerIs('Variables/Globals')
              ->values('code');
         $globals = $this->rawQuery()->toArray();

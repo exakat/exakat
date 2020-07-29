@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectMbstringEncodings extends AnalyzerArrayHashResults {
     protected $analyzerName = 'Mbstring Encodings';
 
-    public function analyze() {
+    public function analyze() : void {
         // mb_stotolower('PHP', 'utf-8');
         $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');
 

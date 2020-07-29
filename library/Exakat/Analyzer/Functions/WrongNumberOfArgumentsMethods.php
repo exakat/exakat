@@ -34,7 +34,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $methods = $this->methods->getMethodsArgsInterval();
 
         // Needs to finish the list of methods and their arguments.

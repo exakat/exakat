@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class TypehintMustBeReturned extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() :A { return; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')

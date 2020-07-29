@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ReturnWithParenthesis extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // return (1 + 2);
         $this->atomIs('Parenthesis')
              ->inIs('RETURN');

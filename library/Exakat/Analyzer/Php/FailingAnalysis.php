@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class FailingAnalysis extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         throw new \Exception('Failing analysis');
     }
 }

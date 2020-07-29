@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class OneDotOrObjectOperatorPerLine extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Two expressions in a row
         $this->atomIs(array('Member', 'Methodcall'))
              ->hasNoIn('OBJECT')

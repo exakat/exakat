@@ -31,7 +31,7 @@ class MultiplyByOne extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $atoms = array('String', 'Integer', 'Boolean', 'Float', 'Identifier', 'Nsname', 'Assignation', 'Parenthesis', 'Multiplication');
 
         // $x *= 1;

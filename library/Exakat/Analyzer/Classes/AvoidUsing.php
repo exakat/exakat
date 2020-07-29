@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidUsing extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $classes = $this->config->Classes_AvoidUsing;
 
         if (empty($classes)) {

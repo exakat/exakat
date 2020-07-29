@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DontChangeBlindKey extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach($a as $b) { $b +=3 ; }
         $this->atomIs('Foreach')
              ->outIs(array('INDEX', 'VALUE'))

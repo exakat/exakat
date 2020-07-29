@@ -31,7 +31,7 @@ class HardcodedPasswords extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Position is 0 based
         $passwordsFunctions = $this->loadJson('php_logins.json');
 

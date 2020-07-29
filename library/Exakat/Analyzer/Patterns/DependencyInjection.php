@@ -30,7 +30,7 @@ class DependencyInjection extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
 
         // Assigned to a property at constructor

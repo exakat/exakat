@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class BetterRand extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // rand => mt_rand => random_int
         $this->atomFunctionIs(array('\rand',
                                     '\mt_rand',

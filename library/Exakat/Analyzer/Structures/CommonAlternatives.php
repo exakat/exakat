@@ -26,7 +26,7 @@ use Exakat\Query\DSL\FollowParAs;
 
 class CommonAlternatives extends Analyzer {
         // some expressions are common between two then / else block
-        public function analyze() {
+        public function analyze() : void {
 
         $omit = array('For',
                       'Foreach',

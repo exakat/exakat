@@ -40,7 +40,7 @@ class Extension extends Analyzer {
     }
 
 
-    public function analyze() {
+    public function analyze() : void {
         if (substr($this->source, -4) === '.ini') {
             $ini = (object) $this->loadIni($this->source);
         } elseif (substr($this->source, -5) === '.json') {

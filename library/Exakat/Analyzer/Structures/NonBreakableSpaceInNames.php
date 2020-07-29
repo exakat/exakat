@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NonBreakableSpaceInNames extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class This has non breakable spaces {}
         $this->atomIs(array('Identifier', 'Nsname', 'Name'))
              ->regexIs('fullcode', ' '); // <- This is a non-breakable space in there

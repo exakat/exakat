@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeProtectedMethod extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Case of property->property (that's another public access)
         $this->atomIs('Methodcall')
              ->not(

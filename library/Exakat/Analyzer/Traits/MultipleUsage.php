@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // trait a { use b, c;}
         // trait b { use c;}
         $this->atomIs('Usetrait')

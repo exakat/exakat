@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class SessionVariables extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         //$_SESSION['x'];
         $this->atomIs('Phpvariable')
              ->codeIs('$_SESSION')

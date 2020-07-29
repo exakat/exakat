@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CloneWithNonObject extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // clone x
         $this->atomIs('Clone')
              ->outIs('CLONE')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Labelnames extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Gotolabel')
              ->outIs('GOTOLABEL');
         $this->prepareQuery();

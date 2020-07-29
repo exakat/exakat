@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyUsedInternally extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // property + $this->property
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')

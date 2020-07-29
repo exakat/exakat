@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicPropertyCall extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Member')
              ->outIs('MEMBER')
              ->tokenIsNot('T_STRING')

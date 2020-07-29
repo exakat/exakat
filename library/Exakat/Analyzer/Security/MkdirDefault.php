@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class MkdirDefault extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // mkdir($dir) : 0777, as 2nd arg, is by defailt.
         $this->atomFunctionIs('\\mkdir')
              ->noChildWithRank('ARGUMENT', 1);

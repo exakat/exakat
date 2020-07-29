@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extsqlite3 extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'sqlite3.ini';
 
         parent::analyze();

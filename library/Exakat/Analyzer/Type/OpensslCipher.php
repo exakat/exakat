@@ -34,7 +34,7 @@ class OpensslCipher extends AnalyzerResults {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $opensslFunctions = array(1 => array('\\openssl_encrypt',
                                              '\\openssl_decrypt',
                                             ),

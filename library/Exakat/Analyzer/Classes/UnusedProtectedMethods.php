@@ -30,7 +30,7 @@ class UnusedProtectedMethods extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { protected function foo() {} }
         // class y extends x {}
         $this->atomIs(self::FUNCTIONS_METHOD)

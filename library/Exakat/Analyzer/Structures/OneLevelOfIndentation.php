@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class OneLevelOfIndentation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $atoms = array('Ifthen', 'Foreach', 'For', 'While', 'Dowhile', 'Switch', 'Match');
         $blocks = array('THEN', 'ELSE', 'BLOCK', 'CASES');
 

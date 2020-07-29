@@ -25,7 +25,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CloseNaming extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
              ->tokenIs('T_VARIABLE')
              ->values('fullcode')

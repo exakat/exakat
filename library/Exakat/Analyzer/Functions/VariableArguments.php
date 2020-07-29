@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class VariableArguments extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Using function_get_args
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class BadConstantnames extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // with define
         $this->atomIs('Defineconstant')
              ->outIs('NAME')

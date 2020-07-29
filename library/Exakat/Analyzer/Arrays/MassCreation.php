@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class MassCreation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $x[1] = 2; $x['b'] = 2; $x['dc'] = 42; (3 at least)
         $this->atomIs('Array')
              ->outIs('VARIABLE')

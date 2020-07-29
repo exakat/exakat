@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class RandomlySortedLiterals extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $uniqueArrays = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)

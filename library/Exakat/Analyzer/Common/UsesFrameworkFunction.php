@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UsesFrameworkFunction extends Analyzer {
     protected $functions    = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $analyzerId = null;
 
         if (!empty($this->functions[0])) {

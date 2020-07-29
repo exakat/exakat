@@ -28,7 +28,7 @@ class FollowClosureDefinition extends Complete {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // immediate usage : in parenthesis (function () {})()
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
              ->inIsIE('RIGHT') // Skip all $closure =

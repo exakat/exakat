@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Argon2Usage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Identifier', 'Nsname'))
              ->hasNoIn('NAME')
              ->fullnspathis(array('\\password_argon2i',

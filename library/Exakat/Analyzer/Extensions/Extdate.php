@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extdate extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'date.ini';
 
         parent::analyze();

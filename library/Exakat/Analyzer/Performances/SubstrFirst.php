@@ -33,7 +33,7 @@ class SubstrFirst extends Analyzer {
                                     '\\preg_replace', '\\preg_relace_callback', '\\preg_replace_calback_array',
                                     );
 
-    public function analyze() {
+    public function analyze() : void {
         // substr(strtolower('a'), 1, 100);
         $this->atomFunctionIs($this->substrFunctions)
              ->outWithRank('ARGUMENT', 0)

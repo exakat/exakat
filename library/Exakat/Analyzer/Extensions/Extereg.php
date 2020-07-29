@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Common\Extension;
 
 class Extereg extends Extension {
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'ereg.ini';
 
         parent::analyze();

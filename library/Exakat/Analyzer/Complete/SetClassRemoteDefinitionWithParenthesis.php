@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetClassRemoteDefinitionWithParenthesis extends Complete {
-    public function analyze() {
+    public function analyze() : void {
         // (new x)->foo()
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->as('method')

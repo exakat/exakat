@@ -31,7 +31,7 @@ class ScalarAreNotArrays extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // TODO : support for null ?
 
         // WIth typehint

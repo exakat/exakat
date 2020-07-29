@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class LogicalMistakes extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Note : support for parenthesis is added.
 
         //if ( $a != 1 || $a != 2)

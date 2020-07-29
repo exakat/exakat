@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoReferenceOnLeft extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs(array('Addition', 'Multiplication', 'Bitshift', 'Power', 'Concatenation', 'Instanceof', 'Logical', 'Comparison'))

@@ -42,7 +42,7 @@ class PossibleInterfaces extends Analyzer {
     // remove already interfaced (tough luck)
     // include traits?? Nope, for the first take
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Class')
              ->collectMethods('methods')
              ->raw('filter{ methods.size() > 1; }')

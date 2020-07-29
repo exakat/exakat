@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class PropertyUsage extends Analyzer {
     protected $properties = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $staticHash = array();
         $propertyHash = array();
         foreach($this->properties as $class => $properties) {

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Composer;
 use Exakat\Analyzer\Analyzer;
 
 class Autoload extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->rowCount       = (int) $this->hasResults();
         $this->processedCount = 1;
         $this->queryCount     = 0;

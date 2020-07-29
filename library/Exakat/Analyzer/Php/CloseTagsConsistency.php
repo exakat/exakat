@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class CloseTagsConsistency extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $mapping = <<<'GREMLIN'
 if (it.get().properties('close_tag').size() > 0) {
     x2 = 'closeTag';

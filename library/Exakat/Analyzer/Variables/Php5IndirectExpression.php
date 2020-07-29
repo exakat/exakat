@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Php5IndirectExpression extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() {
+    public function analyze() : void {
 //$$foo['bar']['baz']	${$foo['bar']['baz']}	($$foo)['bar']['baz']
         $this->atomIs('Variable')
              ->tokenIs('T_DOLLAR')

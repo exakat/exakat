@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicCreation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // define($x, $y)
         $this->atomIs('Defineconstant')
              ->outIs(array('VALUE', 'NAME'))

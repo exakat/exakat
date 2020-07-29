@@ -32,7 +32,7 @@ class MethodIsOverwritten extends Analyzer {
 
     // class x { function a() {} }
     // class x2 extends x { function a() {} }
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Method', 'Magicmethod'))
              ->hasOut('OVERWRITE')
              ->back('first');

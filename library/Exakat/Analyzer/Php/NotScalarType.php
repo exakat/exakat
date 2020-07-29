@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class NotScalarType extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $fakeTypehints = array('integer',
                                'boolean',
                                'real',

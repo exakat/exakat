@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicCode extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
 
         // $$v
         $this->atomIs('Variable')

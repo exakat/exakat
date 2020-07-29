@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extreflection extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'reflection.ini';
 
         parent::analyze();

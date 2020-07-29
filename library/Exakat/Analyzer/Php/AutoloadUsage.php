@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class AutoloadUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = array('\\spl_autoload_call',
                            '\\spl_autoload_functions',
                            '\\spl_autoload_extensions',

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extzendmonitor extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'zendmonitor.ini';
 
         parent::analyze();

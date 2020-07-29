@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmsgpack extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'msgpack.ini';
 
         parent::analyze();

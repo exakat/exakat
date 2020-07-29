@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UsedDirective extends Analyzer {
     protected $directives = array();
 
-    public function analyze() {
+    public function analyze() : void {
         // Processing ini_get_all ?
         // ini_set($var ? )
 

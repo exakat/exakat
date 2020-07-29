@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class RegexOnCollector extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         //foreach ($a as $b) {
         //    $c .= $b;
         //    foo($b);

@@ -32,7 +32,7 @@ class WrongReturnedType extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
 //Generator, Iterator, Traversable, or iterable
     // missing support for return typehint from functions (custom and natives)
 

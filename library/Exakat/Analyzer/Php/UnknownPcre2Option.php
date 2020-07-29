@@ -28,7 +28,7 @@ use Exakat\Analyzer\Structures\pregOptionE;
 use Exakat\Analyzer\Structures\UnknownPregOption;
 
 class UnknownPcre2Option extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Options list : S and X
         $options = '[a-zA-Z\\\\s]*[S][a-zA-Z\\\\s]*';
 

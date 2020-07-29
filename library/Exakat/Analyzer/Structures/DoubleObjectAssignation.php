@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DoubleObjectAssignation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a = $b = new C;
         $this->atomIs('Assignation')
              ->outIs('RIGHT')

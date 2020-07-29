@@ -35,7 +35,7 @@ class UsedMethods extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('DEFINITION')
              ->atomIs(array('Methodcall', 'Staticmethodcall', 'String', 'Arrayliteral'))

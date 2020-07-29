@@ -32,7 +32,7 @@ class UdpDomains extends AnalyzerResults {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $domains = $this->loadIni('php_internet_domains.ini', 'domains');
 
         $this->atomIs('String', self::WITH_CONSTANTS)

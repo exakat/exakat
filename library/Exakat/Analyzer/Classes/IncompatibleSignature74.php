@@ -33,7 +33,7 @@ class IncompatibleSignature74 extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // non-matching reference
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->analyzerIsNot('self')

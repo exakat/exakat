@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extzookeeper extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'zookeeper.ini';
 
         parent::analyze();

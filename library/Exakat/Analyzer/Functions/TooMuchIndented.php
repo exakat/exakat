@@ -28,7 +28,7 @@ class TooMuchIndented extends Analyzer {
     protected $indentationAverage = 1;
     protected $minimumSize        = 3;
 
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { if ($a) { try {++$a;} catch (E $e) { ++$a;}} else { ++$b;++$b2;}}
         // average indentation : 1
         $this->atomIs(self::FUNCTIONS_ALL)

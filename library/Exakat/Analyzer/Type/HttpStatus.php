@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class HttpStatus extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $ini = $this->load('HttpStatus', 'code');
 
         // $http = "418";

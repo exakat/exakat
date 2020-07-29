@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class NoClassInGlobal extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Class', 'Trait', 'Interface', 'Function'))
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$');
         $this->prepareQuery();

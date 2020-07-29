@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UnserializeSecondArg extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomFunctionIs('\\unserialize')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');

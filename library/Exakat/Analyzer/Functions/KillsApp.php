@@ -37,7 +37,7 @@ class KillsApp extends Analyzer {
                     );
     }
     
-    public function analyze() {
+    public function analyze() : void {
         // first round : only die and exit
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')

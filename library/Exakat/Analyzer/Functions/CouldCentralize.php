@@ -28,7 +28,7 @@ class CouldCentralize extends Analyzer {
     protected $centralizeThreshold = 8;
 
     // Looking for calls to function with identical literals
-    public function analyze() {
+    public function analyze() : void {
         $excluded = array('\\\\defined',
                           '\\\\extension_loaded',
                          );

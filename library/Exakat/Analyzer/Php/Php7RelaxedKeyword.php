@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Php7RelaxedKeyword extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $keywords = $this->loadIni('php7_relaxed_keyword.ini', 'keywords');
 
         //////////////////////////////////////////////////////////////////////

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class CreatedOutsideItsNamespace extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // define('\a\b\c', 3);
         $this->atomIs('Defineconstant')
              ->outIs('NAME')

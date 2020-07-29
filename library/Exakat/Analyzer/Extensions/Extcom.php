@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extcom extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'com.ini';
 
         parent::analyze();

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extuuid extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'uuid.ini';
 
         parent::analyze();

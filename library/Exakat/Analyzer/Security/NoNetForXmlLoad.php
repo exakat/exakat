@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class NoNetForXmlLoad extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $methods = array('loadXML', 'loadHTML', 'loadHTMLFile', 'load');
 
         // $dom->loadXml($uri); // No options, so default options

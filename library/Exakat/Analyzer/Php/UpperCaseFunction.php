@@ -31,7 +31,7 @@ class UpperCaseFunction extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // STRTOLOWER()
         $this->atomIs('Functioncall')
              ->analyzerIs('Functions/IsExtFunction')

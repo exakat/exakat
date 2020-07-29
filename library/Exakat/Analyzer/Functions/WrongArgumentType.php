@@ -32,7 +32,7 @@ class WrongArgumentType extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // function foo(string $a) 
         // foo(3)
         $this->atomIs(self::FUNCTIONS_CALLS)

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extrar extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'rar.ini';
 
         parent::analyze();

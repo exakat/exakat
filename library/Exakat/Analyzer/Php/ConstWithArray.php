@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConstWithArray extends Analyzer {
     protected $phpVersion = '5.5+';
 
-    public function analyze() {
+    public function analyze() : void {
         // method used in a static methodcall \a\b::b()
         $this->atomIs('Const')
              ->outIs('CONST')

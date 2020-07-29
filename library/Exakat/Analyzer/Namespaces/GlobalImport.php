@@ -31,7 +31,7 @@ class GlobalImport extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // use phalcon\classe;
         $this->atomIs('Usenamespace')
              ->outIs('USE')

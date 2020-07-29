@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extdio extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'dio.ini';
 
         parent::analyze();

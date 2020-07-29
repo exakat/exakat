@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class NoRealComparison extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // 1.2 == 3.4
         // 1.2 == 3.4 + 0
         $this->atomIs('Comparison')

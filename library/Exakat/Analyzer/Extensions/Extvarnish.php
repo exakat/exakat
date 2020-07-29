@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extvarnish extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'varnish.ini';
 
         parent::analyze();

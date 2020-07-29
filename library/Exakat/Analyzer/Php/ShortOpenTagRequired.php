@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ShortOpenTagRequired extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // This is not actually done here....
         return true;
     }

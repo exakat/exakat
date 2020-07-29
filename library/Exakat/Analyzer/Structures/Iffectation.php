@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class Iffectation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if ( 2 == ($a = 1)) {} (deeper inside)
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

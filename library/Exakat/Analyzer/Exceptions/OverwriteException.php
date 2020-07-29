@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class OverwriteException extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // try { } catch (E $e) { $e = 3;}
         $this->atomIs('Catch')
              ->outIs('VARIABLE')

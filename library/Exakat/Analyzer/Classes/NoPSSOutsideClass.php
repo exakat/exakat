@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NoPSSOutsideClass extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // self::$property, outside trait or class
         $this->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'))
              ->hasNoClassTrait()

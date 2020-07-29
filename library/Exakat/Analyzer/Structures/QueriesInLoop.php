@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class QueriesInLoop extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // for() { mysql_query(); }
         $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')

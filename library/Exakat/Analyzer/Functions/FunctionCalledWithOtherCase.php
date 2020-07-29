@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class FunctionCalledWithOtherCase extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function FOO() {}
         // foo();
         $this->atomIs('Functioncall')

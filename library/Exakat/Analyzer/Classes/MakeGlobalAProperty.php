@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MakeGlobalAProperty extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x { function y() {global $a;}}
         $this->atomIs('Class')
              ->outIs('METHOD')

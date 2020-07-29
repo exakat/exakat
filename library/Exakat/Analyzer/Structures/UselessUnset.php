@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessUnset extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // unset on arguments, reference or value
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DirectCallToMagicMethod extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
 
         $this->atomIs('Methodcallname')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class SuperGlobalContagion extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $_get = $_GET;
         $this->atomIs('Assignation')
              ->outIs('RIGHT')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUseOperator extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // array_push($array, $value)
         $this->atomFunctionIs(array('\\array_push',
                                     '\\function_get_arg',

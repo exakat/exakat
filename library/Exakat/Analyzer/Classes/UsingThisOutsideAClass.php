@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class UsingThisOutsideAClass extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() {
+    public function analyze() : void {
         // $this outside a class or a trait
         $this->atomIs(self::VARIABLES_ALL)
              ->atomIs('This')

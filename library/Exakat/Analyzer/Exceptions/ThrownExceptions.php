@@ -32,7 +32,7 @@ class ThrownExceptions extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x extends \Exception
         // throw new X
         $this->atomIs('Throw')

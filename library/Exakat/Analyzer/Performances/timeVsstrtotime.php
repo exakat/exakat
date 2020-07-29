@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class timeVsstrtotime extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomFunctionIs('\\strtotime')
              ->outWithRank('ARGUMENT',0)
              ->noDelimiterIs('now')

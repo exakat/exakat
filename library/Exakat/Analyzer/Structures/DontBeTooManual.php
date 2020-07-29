@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DontBeTooManual extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // preg_match('/a/', $x, $matches);
         $values = $this->loadJson('php_manual_values.json');
 

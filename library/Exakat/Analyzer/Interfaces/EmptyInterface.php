@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptyInterface extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Interface')
              ->hasNoOut(array('CONST', 'METHOD') );
         $this->prepareQuery();

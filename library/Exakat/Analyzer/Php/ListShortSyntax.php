@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ListShortSyntax extends Analyzer {
     protected $phpVersion = '7.1+';
 
-    public function analyze() {
+    public function analyze() : void {
         // [$a, $b] = [1, 2], insteead of list($a, $b);
         $this->atomIs('List')
              ->tokenIs('T_OPEN_BRACKET');

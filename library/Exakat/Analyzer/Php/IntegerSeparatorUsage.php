@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class IntegerSeparatorUsage extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         // $i = 1_2;
         // $f = 12_3.4
         $this->atomIs(array('Integer', 'Float'))

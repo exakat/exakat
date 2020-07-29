@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extxcache extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'xcache.ini';
 
         parent::analyze();

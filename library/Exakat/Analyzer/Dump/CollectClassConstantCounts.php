@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectClassConstantCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'CIT class constant counts';
 
-    public function analyze() {
+    public function analyze() : void {
         // foo() {const A=1, B=2; }
         $this->atomIs(array('Class', 'Classanonymous', 'Interface'))
              ->raw('groupCount("m").by(__.out("CONST").out("CONST").count()).cap("m")');

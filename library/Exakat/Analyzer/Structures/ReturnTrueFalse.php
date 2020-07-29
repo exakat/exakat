@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ReturnTrueFalse extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
 
         // If ($a == 2) { return true; } else { return false; }
         // If ($a == 2) { return false; } else { return true; }

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldBeFloat extends CouldBeType {
-    public function analyze() {
+    public function analyze() : void {
         $floatAtoms = array('Float', 'Addition', 'Multiplication', 'Not', 'Power');
         
         // property : based on default value (created or not)

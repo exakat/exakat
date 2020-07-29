@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SolveTraitMethods extends Complete {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Usetrait', self::WITHOUT_CONSTANTS)
               ->outIs('BLOCK')
               ->outIs('EXPRESSION')

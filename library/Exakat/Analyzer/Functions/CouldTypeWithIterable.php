@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldTypeWithIterable extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Used in a foreach
         $this->atomIs('Parameter')
              ->outIs('TYPEHINT')

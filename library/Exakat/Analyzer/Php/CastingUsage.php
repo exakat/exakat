@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CastingUsage extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Cast');
         $this->prepareQuery();
     }

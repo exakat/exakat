@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ImplementedMethodsArePublic extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // interface i { function foo() {} }
         // class x implements i { private function foo() {} }
         $this->atomIs('Method')

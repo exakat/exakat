@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class WeakType extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if ($a !== null){    $a->method(); }
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

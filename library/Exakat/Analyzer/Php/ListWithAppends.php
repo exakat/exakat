@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ListWithAppends extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // list($a[]. $a[], $a[]) = array();
         $this->atomIs('List')
              ->hasIn('LEFT')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmemcached extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'memcached.ini';
 
         parent::analyze();

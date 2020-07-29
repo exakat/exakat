@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CyclicReferences extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Detects short cycles of reference : $a->p->method($a) ($a -> p -> $a)
         // TODO : Detects longer cycles of reference : $a->p->method($a) ($a -> p -> $a)
         // TODO : Exclude cases where the value is not stored in the final object (no reference)

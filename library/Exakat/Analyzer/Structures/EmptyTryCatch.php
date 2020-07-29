@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptyTryCatch extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Try')
              ->outIs('CATCH')
              ->outIs('BLOCK')

@@ -28,7 +28,7 @@ class SetClassMethodRemoteDefinition extends Complete {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { function foo() {}} x::foo();
         $this->atomIs(array('Staticmethodcall', 'Methodcall'), self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnsetInForeach extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach($a as $v) { unset($v); }
         // Only valid : Objects (unset on properties) or arrays (if the blind variable is reference)
         $this->atomIs('Foreach')

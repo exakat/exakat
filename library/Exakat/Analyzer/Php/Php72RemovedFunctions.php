@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\PhpFunctionUsage;
 
 class Php72RemovedFunctions extends PhpFunctionUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array('png2wbmp',
                                  'jpeg2wbmp',
                                  'create_function',

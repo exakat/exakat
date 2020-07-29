@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class CompareHash extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // md5() == something
         $this->atomIs('Comparison')
              ->codeIs(array('==', '!='))

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class StaticclassUsage extends Analyzer {
     protected $phpVersion = '5.5+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Staticclass');
         $this->prepareQuery();
     }

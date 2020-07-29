@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class DateFormats extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // date('r');
         $this->atomFunctionIs(array('\date', '\strftime', '\gmstrftime'))
              ->outWithRank('ARGUMENT', 0)

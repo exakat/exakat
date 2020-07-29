@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class PackagesNames extends Analyzer {
     private $report = null;
 
-    public function analyze() {
+    public function analyze() : void {
         return true;
     }
 

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoParenthesisForLanguageConstruct extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // inclusions
         // throw
         // return

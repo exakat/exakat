@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MissingAbstractMethod extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // abstract class x { abstract function foo() {}}
         // class y extends x { NO function foo() {}}
         $this->atomIs(self::CLASSES_ALL)

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class funcGetArgModified extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo($a = 3) { $args = func_get_args(); $a++; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

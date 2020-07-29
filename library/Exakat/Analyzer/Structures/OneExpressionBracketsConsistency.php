@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OneExpressionBracketsConsistency extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $mapping = <<<'GREMLIN'
 if (it.get().properties('bracket').size() > 0) {
     x2 = 'with'; 

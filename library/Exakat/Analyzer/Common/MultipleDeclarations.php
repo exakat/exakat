@@ -29,7 +29,7 @@ use Exakat\Graph\Helpers\GraphResults;
 class MultipleDeclarations extends Analyzer {
     protected $atom = 'Class';
 
-    public function analyze() {
+    public function analyze() : void {
         // case-insensitive constants
 
         $this->atomIs($this->atom)

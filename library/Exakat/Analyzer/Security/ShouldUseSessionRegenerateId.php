@@ -30,7 +30,7 @@ class ShouldUseSessionRegenerateId extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // are there analysis?
         $this->analyzerIs('Extensions/Extsession')
              ->count();

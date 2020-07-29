@@ -29,7 +29,7 @@ class TooManyFinds extends Analyzer {
     protected $findSuffix   = '';
     protected $findPrefix   = 'find';
     
-    public function analyze() {
+    public function analyze() : void {
         // class x { function findY() {}}
         // suffix version
         if (!empty($this->findSuffix)) {

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AbstractOrImplements extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // an abstract parent method is not in the current children
         $this->atomIs('Class')
              ->isNot('abstract', true)

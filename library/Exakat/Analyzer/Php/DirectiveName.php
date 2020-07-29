@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class DirectiveName extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // ini_set('my.own.directive');
         $directives = $this->loadIni('directives.ini', 'directives');
 

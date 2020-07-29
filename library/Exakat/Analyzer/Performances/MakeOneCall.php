@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class MakeOneCall extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // the second argument must match between calls
         $functionsArg2 = array('\\str_replace',
                                '\\str_ireplace',

@@ -37,7 +37,7 @@ class DefinedParentMP extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // parent::methodcall()
         $this->atomIs('Parent')
              ->inIs('CLASS')

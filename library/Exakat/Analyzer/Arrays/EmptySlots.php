@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptySlots extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // array(1,2,3, ) or [ 4,5, ];
         $this->atomIs('Arrayliteral')
              ->regexIs('fullcode', ',  [\\\\)|\\\\]]\$');

@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UsesEnv extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Using putenv or getenv
         $this->atomFunctionIs(array('\\getenv', '\\putenv'))
              ->back('first');

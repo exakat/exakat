@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldBeBoolean extends CouldBeType {
-    public function analyze() {
+    public function analyze() : void {
         $booleanAtoms = array('Comparison', 'Logical', 'Boolean', 'Not');
         
         // property : based on default value (created or not)

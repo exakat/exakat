@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class FileUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomFunctionIs(array('\\fopen',
                                     '\\file_get_contents',
                                     '\\file_put_contents',

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class FinalByOcramius extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(self::CLASSES_ALL)
              ->hasNoOut('EXTENDS')
              ->isNot('final', true)

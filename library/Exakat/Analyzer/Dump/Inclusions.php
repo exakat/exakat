@@ -35,7 +35,7 @@ CREATE TABLE inclusions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
 
-    public function analyze() {
+    public function analyze() : void {
         $this ->atomIs('Include', self::WITHOUT_CONSTANTS)
               ->outIs('ARGUMENT')
               ->has('noDelimiter')

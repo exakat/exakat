@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extcyrus extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'cyrus.ini';
 
         parent::analyze();

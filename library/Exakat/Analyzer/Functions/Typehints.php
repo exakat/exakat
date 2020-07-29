@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class Typehints extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // List all typehints in the code
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

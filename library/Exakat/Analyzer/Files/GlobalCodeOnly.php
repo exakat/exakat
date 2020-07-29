@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class GlobalCodeOnly extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $definitionsFunctionsList = '"\\\\' . implode('", "\\\\', DefinitionsOnly::$definitionsFunctions) . '"';
         $definitionsList = '"' . implode('", "', DefinitionsOnly::$definitions) . '"';
 

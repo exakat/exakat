@@ -32,7 +32,7 @@ class LocallyUnusedProperty extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { public $p = 1; function foo() { $this->pp = 2; }}
         $this->atomIs('Ppp')
              ->hasClassTrait()

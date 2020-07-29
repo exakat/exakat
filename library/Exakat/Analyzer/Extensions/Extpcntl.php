@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extpcntl extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'pcntl.ini';
 
         parent::analyze();

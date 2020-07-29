@@ -32,7 +32,7 @@ class UnsupportedOperandTypes extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // const A = 1; $b = A + array();
         $this->atomIs('Addition')
              ->analyzerIsNot('self')

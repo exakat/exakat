@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Dump;
 class ParameterArgumentsLinks extends AnalyzerArrayHashResults {
     protected $analyzerName = 'Parameter Arguments';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->analyzerValues = array();
 
         // Total parameter usage

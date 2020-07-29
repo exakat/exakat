@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extiis extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'iis.ini';
 
         parent::analyze();

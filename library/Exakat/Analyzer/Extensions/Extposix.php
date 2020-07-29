@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extposix extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'posix.ini';
 
         parent::analyze();

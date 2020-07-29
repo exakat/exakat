@@ -30,7 +30,7 @@ class PropertyUsedInOneMethodOnly extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')
              ->outIs('PPP')

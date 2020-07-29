@@ -35,7 +35,7 @@ class UnknownPregOption extends Analyzer {
                                      '\preg_split',
                                      );
 
-    public function analyze() {
+    public function analyze() : void {
         // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
         $options = 'eimsuxADJSUX';
 

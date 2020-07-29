@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicConstantCall extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         //constant("ThingIDs::$thing");
         // probably too weak. Needs to be completed with a check on variables built before
         $this->atomFunctionIs('\\constant')

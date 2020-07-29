@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldBeSingleQuote extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a = "abc";
         $this->atomIs('String')
              ->is('delimiter', '"')

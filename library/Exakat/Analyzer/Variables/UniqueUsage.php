@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UniqueUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { $a = 1; echo $a;}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')

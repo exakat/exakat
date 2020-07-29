@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TooManyDereferencing extends Analyzer {
     public $tooManyDereferencing = 7;
 
-    public function analyze() {
+    public function analyze() : void {
         //$a->b->c()::d()->e::F (only -> and ::)
         $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant', 'Array', 'Append'))
              ->hasNoIn(array('CLASS', 'VARIABLE', 'APPEND', 'OBJECT'))

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ErrorReportingWithInteger extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $allowedIntegers = array('-1', '0');
 
         $this->atomFunctionIs('\\error_reporting')

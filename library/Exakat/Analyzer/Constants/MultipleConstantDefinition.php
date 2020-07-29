@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleConstantDefinition extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // case-insensitive constants with Define
         // Search for definitions and count them
         //define()

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ThisIsNotForStatic extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // Check into Class
         $this->atomIs('This')
              ->goToFunction()

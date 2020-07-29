@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessBrackets extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a++; {$b++; }
         $this->atomIs('Sequence')
              ->is('bracket', true)

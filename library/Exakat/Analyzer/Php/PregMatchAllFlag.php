@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class PregMatchAllFlag extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Using default configuration
         $this->atomFunctionIs('\preg_match_all')
              ->noChildWithRank('ARGUMENT', 3)

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class HashAlgos54 extends Analyzer {
     protected $phpVersion = '5.4-';
 
-    public function analyze() {
+    public function analyze() : void {
         $algos = array_merge($this->loadIni('hash_algos.ini', 'removed54'),
                              $this->loadIni('hash_algos.ini', 'new56'));
 

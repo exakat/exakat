@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptyTrait extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // Trait with nothing in it
         $this->atomIs('Trait')
              ->hasNoOut(array('METHOD', 'PPP'));

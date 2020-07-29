@@ -31,7 +31,7 @@ class ParenthesisAsParameter extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // foo( (1 + 2), 3, (new x))
         // Only valid if the argument is a reference
         $this->atomIs('Functioncall')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessGlobal extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Global are unused if used only once
         $this->atomIs('Globaldefinition')
              ->values('code');

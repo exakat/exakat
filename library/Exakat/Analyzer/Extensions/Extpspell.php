@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extpspell extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'pspell.ini';
 
         parent::analyze();

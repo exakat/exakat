@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class CalltimePassByReference extends Analyzer {
     protected $phpVersion = '5.4-';
 
-    public function analyze() {
+    public function analyze() : void {
         // foo(&$d);
         $this->atomIs('Functioncall')
              ->atomIsNot('Arrayliteral')

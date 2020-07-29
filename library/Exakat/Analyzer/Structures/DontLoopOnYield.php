@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DontLoopOnYield extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach($g as $h) { yield $h; }
         $this->atomIs('Foreach')
              ->outIs('SOURCE')

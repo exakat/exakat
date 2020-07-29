@@ -30,7 +30,7 @@ class Binary extends AnalyzerResults {
 
     protected $phpVersion = '5.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Integer')
              ->regexIs('fullcode', '^0[bB][01]+\$')
              ->toResults();

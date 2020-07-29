@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class OldStyleConstructor extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // No mentionned namespaces
         $this->atomIs(array('Class', 'Classanonymous'))
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$')

@@ -31,7 +31,7 @@ class NonConstantArray extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Array, outside a string
         $this->atomIs('Array')
              ->hasNoParent('String', 'CONCAT')

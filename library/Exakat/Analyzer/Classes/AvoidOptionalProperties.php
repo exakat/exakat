@@ -38,7 +38,7 @@ class AvoidOptionalProperties extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // if ($this->p)  {}
         $this->atomIs('Member')
              ->hasIn('CONDITION')

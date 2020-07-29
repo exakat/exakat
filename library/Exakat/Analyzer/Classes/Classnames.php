@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Classnames extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Class')
              ->outIs('NAME')
              ->atomIsNot('Void');

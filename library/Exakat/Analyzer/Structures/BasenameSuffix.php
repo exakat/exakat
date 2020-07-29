@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class BasenameSuffix extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $substringFunctions = array('\substr', '\mb_substring', '\iconv_substr');
 
         // substr(basename($path), -4);

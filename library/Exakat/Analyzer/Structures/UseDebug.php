@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseDebug extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $debug = $this->loadIni('debug.ini');
 
         // Using functioncalls

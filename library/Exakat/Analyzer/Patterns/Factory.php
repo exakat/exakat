@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Patterns;
 use Exakat\Analyzer\Analyzer;
 
 class Factory extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { return new A(); }
         $this->atomIs('Return')
              ->outIs('RETURN')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class PHP73LastEmptyArgument extends Analyzer {
     protected $phpVersion = '7.3+';
 
-    public function analyze() {
+    public function analyze() : void {
         // $object->method($a, )
         // $functioncall($a, )
         $this->atomIs(array('Functioncall', 'Methodcallname'))

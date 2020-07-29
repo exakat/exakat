@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CantExtendFinal extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // final class x {}
         // class y extends x {}
         $this->atomIs('Class')

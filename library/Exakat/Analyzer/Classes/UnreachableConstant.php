@@ -30,7 +30,7 @@ class UnreachableConstant extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { private const A = 1;} echo x::A;
 
         // Outside a class

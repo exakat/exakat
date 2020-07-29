@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NestedLoops extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach() { foreach() {}}
         $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')

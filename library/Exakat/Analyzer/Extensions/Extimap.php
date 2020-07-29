@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extimap extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'imap.ini';
 
         parent::analyze();

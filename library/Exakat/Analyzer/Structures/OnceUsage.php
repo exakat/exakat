@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class OnceUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // include_once 'file.php';
         $this->atomIs('Include')
              ->tokenIs(array('T_REQUIRE_ONCE', 'T_INCLUDE_ONCE'))

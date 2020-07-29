@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeSelf extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // This analysis works on typehints already available
         
         // Properties

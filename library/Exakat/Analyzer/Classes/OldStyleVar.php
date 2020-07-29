@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class OldStyleVar extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x { var $y = 1;}
         $this->atomIs('Ppp')
              ->tokenIs('T_VAR');

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ConstantComparisonConsistance extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $literalsList = makeList(self::LITERALS);
         $mapping = <<<GREMLIN
 if (it.get().vertices(OUT, "LEFT").next().label() in [$literalsList]) { 

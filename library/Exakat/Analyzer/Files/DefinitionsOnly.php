@@ -52,7 +52,7 @@ class DefinitionsOnly extends Analyzer {
         return array('Structures/NoDirectAccess');
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $definitionsFunctionsList = makeList(self::$definitionsFunctions);
         $definitionsList = makeList(self::$definitions);
 

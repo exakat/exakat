@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extxhprof extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'xhprof.ini';
 
         parent::analyze();

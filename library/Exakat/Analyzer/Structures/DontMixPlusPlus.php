@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DontMixPlusPlus extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a[$i++] = --$o + $b--;
         $this->atomIs(array('Postplusplus', 'Preplusplus'))
              ->inIs()

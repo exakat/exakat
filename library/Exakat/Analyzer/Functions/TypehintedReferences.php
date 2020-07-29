@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class TypehintedReferences extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo(object &$x)
         // function foo(X &$x)
         $this->atomIs(self::FUNCTIONS_ALL)

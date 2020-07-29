@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class Fallthrough extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // switch($x) { case 1 : /* no break but something done */; case 2 }
         $this->atomIs('Switch')
              ->outIs('CASES')

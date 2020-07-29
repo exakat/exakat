@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class GlobalInGlobal extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // any variable outside anything else (except namespaces)
         $this->atomIs(array('Variable', 'Globaldefinition'))
              ->hasNoFunction(self::FUNCTIONS_ALL)

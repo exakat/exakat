@@ -34,7 +34,7 @@ class AccessPrivate extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $hasPrivateMethodDefinition = 'where( __.out("METHOD").hasLabel("Method")
                                                 .out("NAME").filter{it.get().value("code") == name}.in("NAME")
                                                 .has("visibility", "private") )';

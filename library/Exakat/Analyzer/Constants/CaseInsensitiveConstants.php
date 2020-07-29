@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class CaseInsensitiveConstants extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // define('a', 1, true);
         $this->atomIs('Defineconstant')
              ->outIs('CASE')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmssql extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'mssql.ini';
 
         parent::analyze();

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ContinueIsForLoop extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $switchAndLoop = array('Switch', 'Foreach', 'For', 'While', 'Dowhile');
 
         // foreach() { switch () { case 1 : continue; } }

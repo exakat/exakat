@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldChainException extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Throw again, but not the caught variable
         $this->atomIs('Catch')
              ->outIs('VARIABLE')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class EchoPrintConsistance extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $mapping = <<<'GREMLIN'
 x2 = it.get().value("token");
 GREMLIN;

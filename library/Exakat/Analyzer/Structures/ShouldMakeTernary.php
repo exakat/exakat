@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldMakeTernary extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if ($a) $b = 2; else $b = 3;
         $this->atomIs('Ifthen')
              ->outIs('THEN')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class StringHoldAVariable extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $printfs = array('\\printf',
                          '\\vsprintf',
                          '\\sprintf',

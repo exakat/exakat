@@ -32,7 +32,7 @@ class MissingSubpattern extends Analyzer {
                                     '\\preg_relace_callback_array',
                                     );
 
-    public function analyze() {
+    public function analyze() : void {
 
         //preg_match('/(a)b?/', 'adc', $r)
         $this->atomFunctionIs($this->pregFunctions)

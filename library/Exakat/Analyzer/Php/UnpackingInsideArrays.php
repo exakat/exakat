@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UnpackingInsideArrays extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         // $a = [1, ...$b, $c];
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')

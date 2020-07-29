@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WrongOptionalParameter extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo($a, $b = 2, $c) {}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

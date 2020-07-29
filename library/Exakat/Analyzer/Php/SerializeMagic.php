@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class SerializeMagic extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x { function __unserialize() {}}
         $this->atomIs('Magicmethod')
              ->outIs('NAME')

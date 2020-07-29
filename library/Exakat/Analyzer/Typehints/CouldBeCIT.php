@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeCIT extends CouldBeType {
-    public function analyze() {
+    public function analyze() : void {
         $citOperations = array('New', 'Clone');
         $citAtoms      = array('Identifier', 'Nsname', 'Static', 'Self', 'Parent');
 

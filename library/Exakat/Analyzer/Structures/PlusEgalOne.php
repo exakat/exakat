@@ -31,7 +31,7 @@ class PlusEgalOne extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // $a += 1; $b -= -1;
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='), self::TRANSLATE, self::CASE_SENSITIVE)

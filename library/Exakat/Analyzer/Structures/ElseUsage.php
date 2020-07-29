@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ElseUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Ifthen')
              ->hasNoIn('ELSE')
              ->outIs('ELSE')

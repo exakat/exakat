@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ArrayKeyExistsSpeedup extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         // isset($a) || array_search_keys()
         $this->atomIs('Logical')
              ->codeIs('||')

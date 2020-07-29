@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Continents extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $ini = $this->loadIni('Continents_en.ini', 'continents_en');
 
         $this->atomIs('String')

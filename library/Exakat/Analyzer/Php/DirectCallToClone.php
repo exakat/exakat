@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class DirectCallToClone extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         // $a->__clone() was forbidden before PHP 7.0
         $this->atomIs(array('Methodcall', 'Staticmethodcall'))
              ->outIs('METHOD')

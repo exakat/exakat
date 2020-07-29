@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class OverwrittenLiterals extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { $a = 1; $a = 2;}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')

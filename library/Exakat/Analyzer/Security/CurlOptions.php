@@ -27,7 +27,7 @@ class CurlOptions extends Analyzer {
     public function dependsOn(): array {
         return array('Constants/ConstantUsage');
     }
-    public function analyze() {
+    public function analyze() : void {
         $options = array('\\curlopt_ssl_verifypeer', '\\curlopt_ssl_verifyhost');
 
         // Via curl_setopt

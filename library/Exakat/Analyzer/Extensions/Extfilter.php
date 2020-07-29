@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extfilter extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'filter.ini';
 
         parent::analyze();

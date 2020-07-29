@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DuplicateCalls extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // This is counting ALL occurences as itself.
         $atoms = array('Methodcall', 'Functioncall');
 

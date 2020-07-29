@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CurlVersionNow extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // only CURLVERSION_NOW is allowed
         $this->atomFunctionIs('\\curl_version')
              ->outWithRank('ARGUMENT', 0)

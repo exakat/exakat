@@ -33,7 +33,7 @@ class WrongTypeWithCall extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // foo(1); function foo(string $s) {}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

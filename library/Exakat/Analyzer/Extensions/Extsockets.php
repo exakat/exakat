@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extsockets extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'sockets.ini';
 
         parent::analyze();

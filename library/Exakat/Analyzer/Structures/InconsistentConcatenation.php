@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class InconsistentConcatenation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // "a$b".$c.PHP_EOL;
         $this->atomIs('Concatenation')
             // constant, methodcall and functioncall are ignored as not interpolable.

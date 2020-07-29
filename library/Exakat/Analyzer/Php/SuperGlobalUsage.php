@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class SuperGlobalUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // PHP super global Usage
         $this->atomIs(self::VARIABLES_ALL)
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST'), self::TRANSLATE, self::CASE_SENSITIVE);

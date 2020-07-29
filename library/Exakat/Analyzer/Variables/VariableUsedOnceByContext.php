@@ -31,7 +31,7 @@ class VariableUsedOnceByContext extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // global variables
         $this->atomIs('File')
              ->outIs('DEFINITION')

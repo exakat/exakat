@@ -29,7 +29,7 @@ class CreateDefaultValues extends Complete {
         return array( 'Complete/OverwrittenProperties',
                     );
     }
-    public function analyze() {
+    public function analyze() : void {
 
         // Link initial values for containers
         $this->atomIs(array('Variabledefinition',

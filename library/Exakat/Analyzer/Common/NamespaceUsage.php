@@ -32,7 +32,7 @@ class NamespaceUsage extends Analyzer {
         $this->namespaces = $namespaces;
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $regex = '^(' . addslashes(addslashes(implode('|', $this->namespaces))) . ')';
 
         $this->atomIs(array('Nsname', 'Identifier'))

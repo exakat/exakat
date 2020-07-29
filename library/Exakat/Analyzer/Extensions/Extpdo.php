@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extpdo extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'pdo.ini';
 
         parent::analyze();

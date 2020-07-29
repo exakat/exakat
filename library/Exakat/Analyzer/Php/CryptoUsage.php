@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class CryptoUsage extends FunctionUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array('md5',
                                  'md5_file',
                                  'sha1',

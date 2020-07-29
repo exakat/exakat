@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleCatch extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Catch')
              ->isMore('count', 1);
         $this->prepareQuery();

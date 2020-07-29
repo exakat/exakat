@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class OneObjectOperatorPerLine extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // inline operators $a->$b->$c;
         $this->atomIs('Member')
              ->savePropertyAs('line', 'row')

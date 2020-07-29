@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class WeirdIndex extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
 
         // $a[' a']
         $this->atomIs('Array')

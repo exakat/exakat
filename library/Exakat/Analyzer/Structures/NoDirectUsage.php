@@ -31,7 +31,7 @@ class NoDirectUsage extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $functions = $this->loadIni('NoDirectUsage.ini', 'functions');
         $functionsFullNsPath = makeFullNsPath($functions);
 

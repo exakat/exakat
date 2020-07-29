@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extspl extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'spl.ini';
 
         parent::analyze();

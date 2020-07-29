@@ -30,7 +30,7 @@ class InvalidRegex extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $functionList = makeFullnspath(UnknownPregOption::$functions);
 
         $this->atomFunctionIs($functionList)

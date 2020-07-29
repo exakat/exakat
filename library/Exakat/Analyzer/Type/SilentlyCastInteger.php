@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class SilentlyCastInteger extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Binary or hexadecimal, cast to Float
         $this->atomIs('Float')
              ->regexIs('fullcode', '^0[xXbB]');

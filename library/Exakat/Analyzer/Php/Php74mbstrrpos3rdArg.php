@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Php74mbstrrpos3rdArg extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // mb_strrpos('a','b',0, 'UTF-8)
         $this->atomFunctionIs('\\mb_strrpos')
              ->hasChildWithRank('ARGUMENT', 3);

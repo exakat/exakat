@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class AssigneAndCompare extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if ($a = strpos($b, $c) > 0)
         $this->atomIs('Assignation')
              ->hasNoIn('EXPRESSION')

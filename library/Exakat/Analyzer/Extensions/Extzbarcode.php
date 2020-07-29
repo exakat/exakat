@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extzbarcode extends Extension {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'zbarcode.ini';
 
         parent::analyze();

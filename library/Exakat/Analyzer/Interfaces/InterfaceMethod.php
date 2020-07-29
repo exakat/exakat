@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class InterfaceMethod extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Interface')
              ->outIs('METHOD')
              ->atomIs('Method');

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class GroupUseTrailingComma extends Analyzer {
     protected $phpVersion = '7.2+';
 
-    public function analyze() {
+    public function analyze() : void {
         // use a\b\{c,d,}
         $this->atomIs('Usenamespace')
              ->hasOut('GROUPUSE')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class LongBlock extends Analyzer {
     protected $longBlock = 200;
 
-    public function analyze() {
+    public function analyze() : void {
         // do { <may lines> } while();
         $this->atomIs(array('While', 'Dowhile', 'For', 'Foreach', 'Ifthen'))
              ->outIs(array('BLOCK', 'THEN', 'ELSE'))

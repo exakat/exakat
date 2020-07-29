@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Php74ArrayKeyExists extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         // array_key_exists() : No initial \, no use definition
         $this->atomFunctionIs('\\array_key_exists')
              ->tokenIsNot('T_NS_SEPARATOR')  // Not a \array_keys_exists

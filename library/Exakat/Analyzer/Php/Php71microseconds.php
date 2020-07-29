@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Php71microseconds extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $now == date_create())
         $this->atomIs('Comparison')
              ->codeIs(array('==', '===', '!==', '=='))

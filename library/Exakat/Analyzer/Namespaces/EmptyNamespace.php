@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class EmptyNamespace extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Namespace with only use is empty
         $this->atomIs('Namespace')
              ->outIs('BLOCK')

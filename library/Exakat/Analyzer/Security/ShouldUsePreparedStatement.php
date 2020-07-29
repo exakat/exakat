@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUsePreparedStatement extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = array( '\\pg_query',
                             '\\sqlsrv_query',
                             '\\cubrid_query',

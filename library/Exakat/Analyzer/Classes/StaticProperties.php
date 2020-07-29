@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticProperties extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { static $y = 3;}
         $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('PPP')

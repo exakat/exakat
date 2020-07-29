@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extyis extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'yis.ini';
 
         parent::analyze();

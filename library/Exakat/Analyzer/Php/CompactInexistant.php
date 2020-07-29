@@ -30,7 +30,7 @@ class CompactInexistant extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // compact('a', 'b') with $b or $a that doesn't exists
         $this->atomFunctionIs('\\compact')
              ->outIs('ARGUMENT')

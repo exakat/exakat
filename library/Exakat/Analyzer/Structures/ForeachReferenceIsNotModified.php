@@ -31,7 +31,7 @@ class ForeachReferenceIsNotModified extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // case of a variable
         // foreach($a as &$b) { $c += $b; } // $b is not modified
         $this->atomIs('Foreach')

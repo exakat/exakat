@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class StrtrArguments extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // strtr($a, $b, '') is always useless
         $this->atomFunctionIs('\\strtr')
              ->outWithRank('ARGUMENT', 2)

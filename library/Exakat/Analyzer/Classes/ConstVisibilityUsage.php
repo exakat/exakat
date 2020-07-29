@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ConstVisibilityUsage extends Analyzer {
     protected $phpVersion = '7.1+';
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { public const A = 1; }
         $this->atomIs(array('Class', 'Interface'))
              ->outIs('CONST')

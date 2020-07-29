@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ClassDefinition extends Analyzer {
     protected $classes = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $classes =  makeFullNsPath($this->classes);
 
         $this->atomIs('Class')

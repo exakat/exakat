@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class HashUsesObjects extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $x = hash_init('sha256'); is_resource($x)
         $this->atomFunctionIs('\\hash_init')
              ->inIs('RIGHT')

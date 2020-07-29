@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NullableWithoutCheck extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo(?D $c) { echo $c->d;} // No check, but nullable??
         $this->atomIs('Parameter')
              ->isNullable()

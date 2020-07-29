@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IsNotFamily extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Staticmethodcall
         // Inside the class
         $this->atomIs('Staticmethodcall')

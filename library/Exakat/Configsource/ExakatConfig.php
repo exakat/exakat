@@ -35,6 +35,8 @@ class ExakatConfig extends Config {
                                'gsneo4jv3'     => 'GSNeo4jV3',
                                'janusgraph'    => 'Janusgraph',
                                'nogremlin'     => 'NoGremlin',
+                               'orientdb'      => 'Orientdb',
+                               'bitsy'         => 'Bitsy',
                                );
 
     private $loaders = array( 'tinkergraph'   => 'SplitGraphson',
@@ -42,6 +44,8 @@ class ExakatConfig extends Config {
                               'gsneo4j'       => 'SplitGraphson',
                               'gsneo4jv3'     => 'SplitGraphson',
                               'janusgraph'    => 'SplitGraphson',
+                              'orientdb'      => 'SplitGraphson',
+                              'bitsy'         => 'SplitGraphson',
                               'nogremlin'     => 'None',
                               );
 
@@ -52,9 +56,9 @@ class ExakatConfig extends Config {
     public function loadConfig($args) {
         // Default values
         $inis =  array(
-                    array('graphdb'            => 'gsneo4j',
-                          'gremlin'            => $this->gremlins['gsneo4j'],
-                          'loader'             => $this->loaders['gsneo4j'],
+                    array('graphdb'            => 'gsneo4jv3',
+                          'gremlin'            => $this->gremlins['gsneo4jv3'],
+                          'loader'             => $this->loaders['gsneo4jv3'],
                           'other_php_versions' => array(),
                           'transit_key'        => '',
                        )
@@ -95,6 +99,7 @@ class ExakatConfig extends Config {
         // Validation
         if (!isset($this->config['graphdb']) ||
             !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
+            display("Warning : No such graph as ".$this->config['graphdb']." : using 'nogremlin', without graphdb.\n");
             $this->config['graphdb'] = 'nogremlin';
         }
 

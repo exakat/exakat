@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class CantUseReturnValueInWriteContext extends Analyzer {
     protected $phpVersion = '5.5+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Empty')
              ->outIs('ARGUMENT')
              ->is('rank', 0)

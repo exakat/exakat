@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extffi extends Extension {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'ffi.ini';
 
         parent::analyze();

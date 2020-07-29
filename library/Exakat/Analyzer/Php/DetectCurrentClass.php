@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class DetectCurrentClass extends Analyzer {
     protected $phpVersion = '8.0-';
 
-    public function analyze() {
+    public function analyze() : void {
         // avoid __CLASS__
         $this->atomIs('Magicconstant')
              ->codeIs('__CLASS__');

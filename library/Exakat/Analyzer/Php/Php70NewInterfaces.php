@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\InterfaceDefinition;
 
 class Php70NewInterfaces extends InterfaceDefinition {
-    public function analyze() {
+    public function analyze() : void {
         $this->interfaces = array(
 'Throwable',
 'SessionUpdateTimestampHandlerInterface',

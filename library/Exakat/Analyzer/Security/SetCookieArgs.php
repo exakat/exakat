@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class SetCookieArgs extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // setcookie('cookie', $value);
         $this->atomFunctionIs(array('\\setcookie', '\\setrawcookie'))
              ->hasChildWithRank('ARGUMENT', 1) // so the cookie is not destroyed

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidReal extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $s = (real) $s;
         $this->atomIs('Cast')
              ->codeIs('(real)');

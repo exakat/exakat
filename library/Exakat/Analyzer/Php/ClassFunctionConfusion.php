@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ClassFunctionConfusion extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class foo{}; function foo();
         // possible confusion
         $this->atomIs('Function')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extpcov extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'pcov.ini';
 
         parent::analyze();

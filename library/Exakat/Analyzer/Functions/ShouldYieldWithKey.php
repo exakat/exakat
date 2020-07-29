@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldYieldWithKey extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         //iterator_to_array( bad1( ) );
         // function bad1() { yield from generator(); yield from generator(); }
         $this->atomFunctionIs('\\iterator_to_array')

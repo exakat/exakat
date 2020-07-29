@@ -28,7 +28,7 @@ class CreateForeachDefault extends Complete {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // $a = [1 => 2]; foreach($a as $v) {}
         $this->atomIs('Foreach')
              ->outIs('VALUE')

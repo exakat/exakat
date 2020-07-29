@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicSelfCalls extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x { function foo() { $this->$f;}}
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('DEFINITION')

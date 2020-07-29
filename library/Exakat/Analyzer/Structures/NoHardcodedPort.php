@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoHardcodedPort extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = $this->loadIni('php_argument_port.ini');
 
         $positions = array(0, 1, 2, 3, 4, 5);

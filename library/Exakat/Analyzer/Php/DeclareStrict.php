@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DeclareStrict extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $mapping = <<<'GREMLIN'
 if (it.get().label() == "Sequence") {
     x2 = "relaxed types";

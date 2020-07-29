@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UsesDefaultArguments extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = $this->methods->getFunctionsArgsInterval();
 
         $positions = array();

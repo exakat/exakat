@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class TrailingComma extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foo(1,2,3,);
         $this->atomIs(self::CALLS)
              ->regexIs('fullcode', ',  \\\)\$');

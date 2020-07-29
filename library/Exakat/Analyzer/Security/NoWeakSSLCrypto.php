@@ -30,7 +30,7 @@ class NoWeakSSLCrypto extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomFunctionIs(array('\\stream_socket_enable_crypto'))
              ->outWithRank('ARGUMENT', 2)
              ->atomIs(array('Identifier', 'Nsname'))

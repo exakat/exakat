@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Vendors;
 use Exakat\Analyzer\Common\UsesFramework;
 
 class Laravel extends UsesFramework {
-    public function analyze() {
+    public function analyze() : void {
         $detections = $this->loadIni('vendors/laravel.ini');
 
         $this->classes    = $detections->classes;

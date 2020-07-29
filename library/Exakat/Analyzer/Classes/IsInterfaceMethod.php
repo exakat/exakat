@@ -31,7 +31,7 @@ class IsInterfaceMethod extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // interface extended in the local class
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->analyzerIsNot('self')

@@ -36,7 +36,7 @@ class UsingDeprecated extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // /** @deprecated */ function foo() {}; foo();
         $this->atomIs(self::CALLS)
              ->inIs('DEFINITION')

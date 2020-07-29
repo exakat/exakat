@@ -31,7 +31,7 @@ class ArrayKeyExistsWithObjects extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // WIth typehint
         $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('self')

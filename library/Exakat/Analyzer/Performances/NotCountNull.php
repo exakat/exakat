@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class NotCountNull extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = array('\\count',
                            '\\sizeof',
                            '\\strlen',

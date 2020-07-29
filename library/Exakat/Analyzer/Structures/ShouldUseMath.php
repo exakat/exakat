@@ -31,7 +31,7 @@ class ShouldUseMath extends Analyzer {
     }
     */
 
-    public function analyze() {
+    public function analyze() : void {
         // $a += $a;
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '*=', '/=', '%=', '-='))

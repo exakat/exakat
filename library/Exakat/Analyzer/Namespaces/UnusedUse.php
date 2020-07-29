@@ -31,7 +31,7 @@ class UnusedUse extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // use a as b;
         // new c; (No use of b)
         $this->atomIs('Usenamespace')

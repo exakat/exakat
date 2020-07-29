@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class SemanticTyping extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $typed_names = array(
             '$array',
             '$list',

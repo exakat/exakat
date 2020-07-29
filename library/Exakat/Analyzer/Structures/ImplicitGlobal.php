@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ImplicitGlobal extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // no Global $x;
         // function foo() { global $x; }
         $this->atomIs('Global')

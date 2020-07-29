@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Complete;
 
 
 class PropagateConstants extends Complete {
-    public function analyze() {
+    public function analyze() : void {
         $this->readConstantValue();
 
         $this->pushConstantValues();

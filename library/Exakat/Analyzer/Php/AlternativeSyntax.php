@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class AlternativeSyntax extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Ifthen')
              ->is('alternative', true);
         $this->prepareQuery();

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class ParameterHiding extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foo($a) { $b = $a; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

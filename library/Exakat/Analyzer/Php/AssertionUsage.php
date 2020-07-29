@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class AssertionUsage extends FunctionUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array('\assert',
                                  '\assert_option',
                                  );

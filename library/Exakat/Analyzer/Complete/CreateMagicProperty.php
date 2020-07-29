@@ -29,7 +29,7 @@ class CreateMagicProperty extends Complete {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
 
         // Missing : typehinted properties, return typehint, clone
 

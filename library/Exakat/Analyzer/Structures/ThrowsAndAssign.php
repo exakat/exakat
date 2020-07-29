@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ThrowsAndAssign extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // throw $e = new Exception();
         $this->atomIs('Throw')
              ->outIs('THROW')

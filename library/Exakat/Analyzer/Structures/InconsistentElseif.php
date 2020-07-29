@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class InconsistentElseif extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if ($a == 1) {} elseif ($b == 2) {}
         $this->atomIs('Ifthen')
              ->isNot('token', 'T_ELSEIF')

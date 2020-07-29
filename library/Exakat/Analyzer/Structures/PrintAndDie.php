@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PrintAndDie extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // print 'ok'; die();
         $this->atomIs(array('Echo', 'Print'))
              ->nextSibling()

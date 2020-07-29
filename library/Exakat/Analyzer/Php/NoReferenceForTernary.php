@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class NoReferenceForTernary extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function &foo() { return $a ?? $b; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->is('reference', true)

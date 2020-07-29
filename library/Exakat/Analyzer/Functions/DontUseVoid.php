@@ -30,7 +30,7 @@ class DontUseVoid extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // function foo(): void {}; $a = foo();
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')

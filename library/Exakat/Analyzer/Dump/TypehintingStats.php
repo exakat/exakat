@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class TypehintingStats extends AnalyzerArrayHashResults {
      protected $analyzerName   = 'Typehinting stats';
 
-    public function analyze() {
+    public function analyze() : void {
         //total parameters
         $this->atomIs('Parameter')
              ->count();

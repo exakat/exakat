@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class IdenticalOnBothSides extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a && $a
         // $b == $b
         $this->atomIs(array('Comparison', 'Logical'))

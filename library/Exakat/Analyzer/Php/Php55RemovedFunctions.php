@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class Php55RemovedFunctions extends FunctionUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array('php_logo_guid',
                                  'php_egg_logo_guid',
                                  'php_real_logo_guid',

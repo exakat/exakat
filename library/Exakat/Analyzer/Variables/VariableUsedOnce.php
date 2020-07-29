@@ -31,7 +31,7 @@ class VariableUsedOnce extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         //Variables mentionned once in the whole application. Just once.
         $this->atomIs('Variabledefinition')
              ->outIs('DEFINITION')

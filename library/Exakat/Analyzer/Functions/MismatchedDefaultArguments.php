@@ -30,7 +30,7 @@ class MismatchedDefaultArguments extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Based on calls to a function
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

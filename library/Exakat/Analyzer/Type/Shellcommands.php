@@ -30,7 +30,7 @@ class Shellcommands extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // ` ls -1`
         $this->atomIs('Shell');
         $this->prepareQuery();

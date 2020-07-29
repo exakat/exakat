@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class AliasConfusion extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // namespace A { class B {}}
         // namespace A { use C as B; }  // B is also a class local to the current namespace
         $this->atomIs(self::CIT)

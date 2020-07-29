@@ -30,7 +30,7 @@ class HasFluentInterface extends Analyzer {
         return array('Functions/HasNotFluentInterface');
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Method')
              ->analyzerIsNot('Functions/HasNotFluentInterface');
         $this->prepareQuery();

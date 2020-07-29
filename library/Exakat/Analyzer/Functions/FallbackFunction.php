@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class FallbackFunction extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // namespace { function foo() {} }
         // namespace A { foo(); } // fallback
         $this->atomIs('Functioncall')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ComparedComparison extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         //if ($a === strpos($string, $needle) > 2) {}
         $this->atomIs('Comparison')
              ->outIs(array('LEFT', 'RIGHT'))

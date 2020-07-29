@@ -32,7 +32,7 @@ class TooManyInjections extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Method', 'Magicmethod'))
              ->filter(
                 $this->side()

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CastToBoolean extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a == 1 ? 1 : 0
         $this->atomIs('Ternary')
              ->outIs('THEN')

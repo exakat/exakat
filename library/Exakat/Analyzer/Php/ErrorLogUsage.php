@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class ErrorLogUsage extends FunctionUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array('error_log' );
         parent::analyze();
     }

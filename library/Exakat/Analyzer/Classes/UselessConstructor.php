@@ -30,7 +30,7 @@ class UselessConstructor extends Analyzer {
         return array('Classes/Constructor');
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $checkConstructor = <<<'GREMLIN'
 not( __.where( __.out("METHOD", "MAGICMETHOD").hasLabel("Method", "Magicmethod")
        .where( __.in("ANALYZED").has("analyzer", "Classes/Constructor")) )

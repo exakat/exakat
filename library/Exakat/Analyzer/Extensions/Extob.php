@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extob extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'ob.ini';
 
         parent::analyze();

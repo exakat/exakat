@@ -27,7 +27,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Arrayindex extends AnalyzerResults {
     protected $analyzerName = 'Arrayindex';
 
-    public function analyze() {
+    public function analyze() : void {
 
         // $a[1]
         $this->atomIs('Array')

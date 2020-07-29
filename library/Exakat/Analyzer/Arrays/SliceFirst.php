@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class SliceFirst extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $sliceFunctions = array('\array_slice', '\array_splice', '\array_chunk');
         $manipulatingFunctions = array('\\array_change_key_case', '\\array_flip', '\\array_keys', '\\array_values',
                                        '\\array_filter', '\\array_walk', '\\array_map', '\\array_search',

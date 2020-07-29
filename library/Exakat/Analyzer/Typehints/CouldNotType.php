@@ -46,7 +46,7 @@ class CouldNotType extends Analyzer {
                     );
     }
     
-    public function analyze() {
+    public function analyze() : void {
         // property definition
         $this->atomIs('Propertydefinition')
              ->analyzerIsNot($this->dependsOn())

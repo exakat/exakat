@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUseConstants extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = $this->loadIni('constant_usage.ini');
 
         // todo : support 0 as a valid value

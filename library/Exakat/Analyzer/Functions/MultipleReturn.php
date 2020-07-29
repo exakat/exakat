@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleReturn extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { if ($a ) { return 1; } else { return 2; }}
         $this->atomIs(array('Function', 'Closure', 'Method', 'Magimethod'))
              ->hasNoInterface()

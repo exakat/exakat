@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ConditionalStructures extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // classes, interfaces, Traits
         $this->atomIs(array('Class', 'Interface', 'Trait'))
              ->hasIfthen()

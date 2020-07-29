@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoChangeIncomingVariables extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $incomingVariables = array('$_GET', '$_POST', '$_REQUEST', '$_FILES',
                                    '$_ENV', '$_SERVER',
                                    '$PHP_SELF', '$HTTP_RAW_POST_DATA');

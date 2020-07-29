@@ -31,7 +31,7 @@ class ConstantStrangeNames extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // define('BD$', 1);
         $this->atomIs('Identifier')
              ->hasNoOut('CONCAT')

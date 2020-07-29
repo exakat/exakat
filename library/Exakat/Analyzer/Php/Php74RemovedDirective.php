@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\UsedDirective;
 class Php74RemovedDirective extends UsedDirective {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->directives = array('allow_url_include',
                                  );
 

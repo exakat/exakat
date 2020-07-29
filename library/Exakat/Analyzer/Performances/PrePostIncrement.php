@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class PrePostIncrement extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Postplusplus')
              ->hasNoIn(array('RIGHT', 'ARGUMENT'))
              ->back('first');

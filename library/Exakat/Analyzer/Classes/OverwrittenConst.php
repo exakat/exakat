@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class OverwrittenConst extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Const')
              ->outIs('CONST')
              ->as('results')

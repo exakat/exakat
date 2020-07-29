@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extoci8 extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'oci8.ini';
 
         parent::analyze();

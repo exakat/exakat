@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SequenceInFor extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('For')
              ->outIs(array('INIT', 'INCREMENT', 'FINAL'))
              ->isNot('count', 1)

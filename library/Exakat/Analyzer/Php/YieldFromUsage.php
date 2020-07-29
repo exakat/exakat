@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class YieldFromUsage extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Yieldfrom');
         $this->prepareQuery();
     }

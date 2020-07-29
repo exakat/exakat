@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUseArrayColumn extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach($a as $b) { $c[] = $b->e; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')

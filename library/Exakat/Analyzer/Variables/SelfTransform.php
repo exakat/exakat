@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class SelfTransform extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $x = strtolower($x);
         $this->atomIs('Assignation')
              ->outIs('LEFT')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Vendors;
 use Exakat\Analyzer\Common\UsesFramework;
 
 class Yii extends UsesFramework {
-    public function analyze() {
+    public function analyze() : void {
         $detections = $this->loadIni('vendors/yii.ini');
 
         $this->classes    = $detections->classes;

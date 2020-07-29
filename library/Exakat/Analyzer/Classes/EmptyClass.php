@@ -31,7 +31,7 @@ class EmptyClass extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { /* nothing */ }
         $this->atomIs('Class')
              ->hasNoOut(array('EXTENDS', 'USE'))

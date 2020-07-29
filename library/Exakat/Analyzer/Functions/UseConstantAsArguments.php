@@ -31,7 +31,7 @@ class UseConstantAsArguments extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $functions = $this->loadJson('php_constant_arguments.json');
 
         //alternative : one of the constants or nothing

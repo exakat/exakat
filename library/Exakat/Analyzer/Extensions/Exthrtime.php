@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Common\Extension;
 
 class Exthrtime extends Extension {
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'hrtime.ini';
 
         parent::analyze();

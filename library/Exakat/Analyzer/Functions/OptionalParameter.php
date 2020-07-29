@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OptionalParameter extends Analyzer {
     // class x { function foo(A $a = null) {} }
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Method')
              ->hasClass()
              ->outIs('ARGUMENT')

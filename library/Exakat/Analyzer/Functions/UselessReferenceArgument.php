@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessReferenceArgument extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         //function foo(&$a) { echo $a; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

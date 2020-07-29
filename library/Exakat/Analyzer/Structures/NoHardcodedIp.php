@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoHardcodedIp extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $specials = $this->loadIni('special_ip.ini');
         // IPv4
         $this->atomIs('String')

@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetParentDefinition extends Complete {
-    public function analyze() {
+    public function analyze() : void {
         //parent:: -> class -> extends
         $this->atomIs('Parent', self::WITHOUT_CONSTANTS)
              ->hasNoIn('DEFINITION')

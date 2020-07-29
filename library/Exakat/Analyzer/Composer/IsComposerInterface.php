@@ -33,7 +33,7 @@ class IsComposerInterface extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $data = new Composer($this->config);
 
         $interfaces = $data->getComposerInterfaces();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicNew extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // new $y->d();
         $this->atomIs('New')
              ->outIs('NEW')

@@ -30,7 +30,7 @@ class MagicProperties extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { function __get($name) {}; function foo() { echo $this->a;}}
         $this->atomIs('Member')
              ->inIs('DEFINITION')

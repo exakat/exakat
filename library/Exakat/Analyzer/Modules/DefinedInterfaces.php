@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\InterfaceUsage;
 class DefinedInterfaces extends InterfaceUsage {
     protected $interfaces = array();
 
-    public function analyze() {
+    public function analyze() : void {
         $interfaces = $this->config->ext->loadIni('interfaces.ini', 'interfaces');
 
         if (empty($interfaces)) {

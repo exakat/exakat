@@ -31,7 +31,7 @@ class CouldTypeWithInt extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
 
         // function foo($a) { $a + 1; }
         $this->atomIs('Parameter')

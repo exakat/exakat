@@ -28,7 +28,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Heredoc extends AnalyzerResults {
     protected $analyzerName = 'Heredoc';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Heredoc')
              ->is('heredoc', true)
              ->toResults();

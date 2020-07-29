@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class StaticLoop extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach with only one value
         $this->atomIs('Foreach')
              ->collectVariable()

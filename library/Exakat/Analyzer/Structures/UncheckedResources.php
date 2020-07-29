@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UncheckedResources extends Analyzer {
     // fread(fopen('path/to/file', 'r'));
-    public function analyze() {
+    public function analyze() : void {
         $resourceUsage = $this->loadJson('resource_usage.json');
 
         $positions = array(0);

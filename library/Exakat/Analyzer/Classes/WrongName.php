@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class WrongName extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x { function __constructor() {}; function __something__(); }
         $this->atomIs('Method')
              ->outIs('NAME')

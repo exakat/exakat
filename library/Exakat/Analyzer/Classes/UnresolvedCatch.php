@@ -31,7 +31,7 @@ class UnresolvedCatch extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $exceptions = $this->loadIni('php_exception.ini', 'classes');
         $exceptions[] = '\throwable';
         $exceptions = makeFullNsPath($exceptions);

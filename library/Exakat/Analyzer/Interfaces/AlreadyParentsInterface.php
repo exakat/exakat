@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class AlreadyParentsInterface extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Find classes which are implementing several times the same interface
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('IMPLEMENTS')

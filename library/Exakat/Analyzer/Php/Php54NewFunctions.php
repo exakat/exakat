@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php54NewFunctions extends FunctionDefinition {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array(
 'hex2bin',
 'http_response_code',

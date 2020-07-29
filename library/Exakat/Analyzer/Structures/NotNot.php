@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NotNot extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // !!
         $this->atomIs('Not')
              ->hasNoIn('NOT')

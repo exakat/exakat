@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class MistakenConcatenation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $array = array('a', 'b', 'c'. 'd');
         $this->atomIs('Arrayliteral')
              ->hasChildren('String', 'ARGUMENT')

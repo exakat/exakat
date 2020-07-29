@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extwddx extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'wddx.ini';
 
         parent::analyze();

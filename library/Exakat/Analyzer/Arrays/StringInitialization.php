@@ -30,7 +30,7 @@ class StringInitialization extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // $a = ''; $a[1] = 3;
         // const C = ''; $a = C; $a[1] = 3;
         $this->atomIs(array('Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parameter', 'Propertydefinition', 'Virtualproperty', 'Variabledefinition'))

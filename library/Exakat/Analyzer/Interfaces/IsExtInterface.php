@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class IsExtInterface extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
         $interfaces = array($this->loadIni('php_interfaces.ini', 'interfaces'));

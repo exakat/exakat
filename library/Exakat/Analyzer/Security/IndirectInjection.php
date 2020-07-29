@@ -36,7 +36,7 @@ class IndirectInjection extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Relayed via variable to sensitive function
         // function f() {  $a = $_GET['a'];exec($a);}
         $this->atomIs(self::FUNCTIONS_USAGE)

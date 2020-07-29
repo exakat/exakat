@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UpperCaseKeyword extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // CLASS X {}
         $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Usenamese', 'Usetrait', 'Function', 'Method',
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',

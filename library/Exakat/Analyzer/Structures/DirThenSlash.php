@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DirThenSlash extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $a = __DIR__.'asb' : __DIR__ must be followed by /
         $this->atomIs('Concatenation')
              ->outIs('CONCAT')

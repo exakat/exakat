@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Exticonv extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'iconv.ini';
 
         parent::analyze();

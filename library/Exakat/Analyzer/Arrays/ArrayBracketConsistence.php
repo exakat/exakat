@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ArrayBracketConsistence extends Analyzer {
     protected $array_ratio = 10;
 
-    public function analyze() {
+    public function analyze() : void {
         $this->array_ratio = readIniPercentage((string) $this->array_ratio);
 
         $mapping = <<<'GREMLIN'

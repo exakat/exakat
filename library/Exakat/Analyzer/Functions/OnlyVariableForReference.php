@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class OnlyVariableForReference extends Analyzer {
     // function foo(&$a) {}
     // foo(3);
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')

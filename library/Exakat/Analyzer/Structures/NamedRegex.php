@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NamedRegex extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // preg_match_all('/(?<name>a)/', $x, $r); echo $r['name'][0]
         $this->atomFunctionIs(array('\\preg_match', '\\preg_match_all'))
              ->outWithRank('ARGUMENT', 2)

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class SessionLazyWrite extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class mysessionhandler extends sessionhandlerinterface {}
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('IMPLEMENTS')

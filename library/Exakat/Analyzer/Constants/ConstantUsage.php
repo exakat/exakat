@@ -31,7 +31,7 @@ class ConstantUsage extends Analyzer {
                     );
     }
     
-    public function analyze() {
+    public function analyze() : void {
         // Nsname that is not used somewhere else
         $this->atomIs('Nsname')
              ->hasNoIn(array('NEW', 'USE', 'NAME', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT', 'RETURNTYPE',

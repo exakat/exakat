@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class TooManyChildren extends Analyzer {
     protected $childrenClassCount = 15;
 
-    public function analyze() {
+    public function analyze() : void {
         // class a with extends
         // default value : childrenCount = 15
         $this->atomIs('Class')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class LetterCharsLogicalFavorite extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $operators = $this->dictCode->translate(array('&&', '||', '^'));
         $operatorsList = makeList($operators, '');
 

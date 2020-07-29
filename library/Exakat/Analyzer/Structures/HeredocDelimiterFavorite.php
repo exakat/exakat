@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class HeredocDelimiterFavorite extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs(array('Heredoc', 'Nowdoc'))
              ->raw('map{ it.get().value("delimiter").trim(); }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');

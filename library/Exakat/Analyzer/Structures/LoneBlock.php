@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class LoneBlock extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // if (1) {{ $b++; }}
         $this->atomIs('Sequence')
              ->is('bracket', true)

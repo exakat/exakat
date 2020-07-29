@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class ArrayNSUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // $x = [1,2,3];
         $this->atomIs('Arrayliteral')
              ->tokenIs('T_OPEN_BRACKET');

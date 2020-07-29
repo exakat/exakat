@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleIdenticalClosure extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         return;
         $this->atomIs('Closure')
              ->outIs('BLOCK')

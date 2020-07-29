@@ -30,7 +30,7 @@ class NullBoolean extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $atoms = array('Null', 'Boolean', 'Integer', 'Float');
         
         // true[1], null[0]

@@ -39,7 +39,7 @@ class MiddleVersion extends Analyzer {
         return $depends;
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // bugfixes based on functions
         $functions = array();
         foreach($this->bugfixes as $bugfix) {

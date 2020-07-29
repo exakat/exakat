@@ -32,7 +32,7 @@ class UndefinedConstants extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // A::Undefined
         $this->atomIs('Staticconstant')
              ->analyzerIsNot(array('Classes/DefinedConstants',

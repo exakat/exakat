@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\ClassDefinition;
 
 class Php71NewClasses extends ClassDefinition {
-    public function analyze() {
+    public function analyze() : void {
         $this->classes = array('Void',
                                'ReflectionClassConstant',
                                );

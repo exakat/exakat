@@ -34,7 +34,7 @@ class UnusedClassTrait extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // trait t {}
         // class x { use T; /* No use of T */ }
         $this->atomIs('Class')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Php72Deprecation extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Definition of \\__autoload
         $this->atomIs('Function')
              ->fullnspathIs('\\__autoload')

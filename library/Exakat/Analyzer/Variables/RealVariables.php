@@ -30,7 +30,7 @@ class RealVariables extends AnalyzerResults {
 
     protected $analyzerTable   = 'results';
 
-    public function analyze() {
+    public function analyze() : void {
         // $a = 1;
         $this->atomIs(array('Variabledefinition', 'Parameter', 'Globaldefinition', 'Static'))
              ->outIs(array('DEFINITION', 'NAME', 'GLOBAL', 'STATIC'))

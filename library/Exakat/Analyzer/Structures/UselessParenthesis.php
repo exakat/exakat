@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessParenthesis extends Analyzer {
     // if ( ($condition) )
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomIs('Parenthesis');

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class MimeType extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $mimeTypes = $this->loadIni('mime_types.ini', 'mime');
 
         // $x = ' asfa "text/fdf+xml"';

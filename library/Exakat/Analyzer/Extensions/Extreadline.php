@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extreadline extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'readline.ini';
 
         parent::analyze();

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class CouldTypeWithArray extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo($a) { $a[1] = 2; $a[] = 2}
         $this->atomIs('Parameter')
              ->analyzerIsNot('self')

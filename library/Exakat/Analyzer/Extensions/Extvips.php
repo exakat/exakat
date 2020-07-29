@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extvips extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'vips.ini';
 
         parent::analyze();

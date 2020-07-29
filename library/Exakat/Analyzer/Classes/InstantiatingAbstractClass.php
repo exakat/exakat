@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class InstantiatingAbstractClass extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // abstract class x {}
         // new x();
         $this->atomIs('New')

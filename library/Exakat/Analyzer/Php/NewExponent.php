@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NewExponent extends Analyzer {
     protected $phpVersion = '5.6+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomFunctionIs('\\pow');
         $this->prepareQuery();
     }

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TooManyDimensions extends Analyzer {
     protected $maxDimensions = 2;
 
-    public function analyze() {
+    public function analyze() : void {
         // $a[1][2][3][4]
         // $a[1][ ][3][4]
         $this->atomIs(array('Variablearray', 'Phpvariable', 'Member', 'Staticproperty'))

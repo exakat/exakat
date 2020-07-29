@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class ConcreteVisibility extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Method')
              ->is('visibility', array('private', 'protected'))
              ->outIs('NAME')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extlibevent extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'libevent.ini';
 
         parent::analyze();

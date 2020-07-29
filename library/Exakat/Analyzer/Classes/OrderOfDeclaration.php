@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class OrderOfDeclaration extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Use, const, properties and methods
         $this->atomIs('Class')
              ->outIs(array('USE', 'METHOD', 'CONST', 'PPP'))

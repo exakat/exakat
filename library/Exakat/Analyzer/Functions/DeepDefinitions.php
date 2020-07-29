@@ -30,7 +30,7 @@ class DeepDefinitions extends Analyzer {
         return array('Functions/Closures');
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Function')
              ->analyzerIsNot('Functions/Closures')
              ->goToFunction()

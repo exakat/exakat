@@ -31,7 +31,7 @@ class UnusedArguments extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Arguments, not reference, function
         $this->atomIs('Parameter')
              ->isNot('reference', true)

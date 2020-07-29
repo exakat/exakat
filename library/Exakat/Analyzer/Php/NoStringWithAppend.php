@@ -28,7 +28,7 @@ class NoStringWithAppend extends Analyzer {
     protected $phpVersion = '7.0+';
 
     // $x = ''; $x[] = 2;
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Assignation')

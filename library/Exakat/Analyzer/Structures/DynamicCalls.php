@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicCalls extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // dynamic constants
         $this->atomFunctionIs('\\constant');
         $this->prepareQuery();

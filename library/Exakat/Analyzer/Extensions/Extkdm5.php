@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extkdm5 extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'kdm5.ini';
 
         parent::analyze();

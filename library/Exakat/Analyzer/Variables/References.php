@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class References extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Variable')
              ->is('reference', true);
         $this->prepareQuery();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class Noscream extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $authorized = array( '\fopen',
                              '\token_get_all',
                              '\stream_socket_server',

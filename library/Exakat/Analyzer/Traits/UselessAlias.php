@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UselessAlias extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x { use t { f as f; }}
         $this->atomIs('Usetrait')
              ->outIs('BLOCK')

@@ -31,7 +31,7 @@ class CouldBeStatic extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Globaldefinition')
              ->raw('groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet()');
         $result = $this->rawQuery();

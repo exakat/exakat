@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariablePhp extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $variables = $this->loadIni('php_variables.ini', 'variables');
 
         $this->atomIs('Phpvariable')

@@ -32,7 +32,7 @@ class UselessInstruction extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Structures that should be put somewhere, and never left alone
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')

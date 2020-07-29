@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidMbDectectEncoding extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // mb_encodding_detect
         $this->atomFunctionIs('\\mb_detect_encoding');
         $this->prepareQuery();

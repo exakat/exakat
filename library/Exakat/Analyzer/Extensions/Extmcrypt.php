@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmcrypt extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'mcrypt.ini';
 
         parent::analyze();

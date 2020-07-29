@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extrunkit extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'runkit.ini';
 
         parent::analyze();

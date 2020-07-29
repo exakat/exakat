@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgmp extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'gmp.ini';
 
         parent::analyze();

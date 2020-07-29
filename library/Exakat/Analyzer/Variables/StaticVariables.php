@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class StaticVariables extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { static $x= 1;}
         $this->atomIs('Staticdefinition');
         $this->prepareQuery();

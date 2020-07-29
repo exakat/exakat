@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class NoGaranteeForPropertyConstant extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // interface i {}
         // function foo(i $i) { echo $i->p, $i::C}
         $this->atomIs('Interface')

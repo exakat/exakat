@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class MethodCollisionTraits extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Class')
              ->raw(<<<'GREMLIN'
  where(

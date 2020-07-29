@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class NoGlob extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // glob() with no second argument (without GLOB_NOSORT)
         $this->atomFunctionIs('\\glob')
              ->noChildWithRank('ARGUMENT', 1)

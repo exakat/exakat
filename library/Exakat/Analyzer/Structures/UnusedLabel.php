@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedLabel extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // inside functions
         $this->atomIs('Gotolabel')
              ->hasNoOut('DEFINITION');

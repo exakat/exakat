@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SuspiciousComparison extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $functions = $this->methods->getFunctionsLastArgsNotBoolean();
 
         // intval($c === 3);

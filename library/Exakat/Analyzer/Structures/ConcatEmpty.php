@@ -30,7 +30,7 @@ class ConcatEmpty extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // '' . $a
         $this->atomIs('Concatenation')
              ->outWithRank('CONCAT', 'first')

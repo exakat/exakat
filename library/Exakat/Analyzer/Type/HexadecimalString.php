@@ -27,7 +27,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class HexadecimalString extends AnalyzerResults {
-    public function analyze() {
+    public function analyze() : void {
         $regex = '^\\\\s*0[xX][0-9a-fA-F]+';
 
         // Strings

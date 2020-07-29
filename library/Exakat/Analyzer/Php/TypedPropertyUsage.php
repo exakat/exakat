@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TypedPropertyUsage extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { private y $a; }
         $this->atomIs('Propertydefinition')
              ->inIs('PPP')

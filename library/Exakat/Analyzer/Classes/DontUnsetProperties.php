@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class DontUnsetProperties extends Analyzer {
     // unset($a->b);
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')
              ->atomIs(array('Member', 'Staticproperty'))

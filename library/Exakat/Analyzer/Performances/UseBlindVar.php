@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class UseBlindVar extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // foreach($a as $k => $b) { $c = $a[$k] + 2;}
         $this->atomIs('Foreach')
 

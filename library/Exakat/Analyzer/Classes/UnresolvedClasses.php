@@ -34,7 +34,7 @@ class UnresolvedClasses extends Analyzer {
                      );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $classes = $this->loadIni('php_classes.ini', 'classes');
         $classes = makeFullNsPath($classes);
 

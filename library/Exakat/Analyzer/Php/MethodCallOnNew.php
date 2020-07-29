@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MethodCallOnNew extends Analyzer {
     protected $phpVersion = '5.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Parenthesis')
              ->outIs('CODE')
              ->atomIs('New')

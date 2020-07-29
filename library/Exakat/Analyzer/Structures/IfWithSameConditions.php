@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class IfWithSameConditions extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->savePropertyAs('fullcode', 'condition')

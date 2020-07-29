@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UseFunctionsConstants extends Analyzer {
     protected $phpVersion = '5.6+';
 
-    public function analyze() {
+    public function analyze() : void {
         // use function foo
         // use const FOO
         $this->atomIs('Usenamespace')

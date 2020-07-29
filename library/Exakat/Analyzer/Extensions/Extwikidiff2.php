@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extwikidiff2 extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'wikidiff2.ini';
 
         parent::analyze();

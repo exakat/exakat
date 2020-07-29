@@ -34,7 +34,7 @@ class WrongTypedPropertyInit extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { a $a; function foo() { $this->a = new b()}}
         $this->atomIs('Propertydefinition')
              ->inIs('PPP')

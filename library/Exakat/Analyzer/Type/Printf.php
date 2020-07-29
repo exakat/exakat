@@ -27,7 +27,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Printf extends AnalyzerResults {
     protected $analyzerName = 'Printf';
 
-    public function analyze() {
+    public function analyze() : void {
         $functions = array('\\printf',
                            '\\sscanf',
                            '\\fscanf',

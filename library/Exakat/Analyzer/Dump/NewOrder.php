@@ -36,7 +36,7 @@ CREATE TABLE newOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
 
-    public function analyze() {
+    public function analyze() : void {
         $this ->atomIs('New', self::WITHOUT_CONSTANTS)
               ->outIs('NEW')
               ->inIs('DEFINITION')

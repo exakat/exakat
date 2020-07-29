@@ -36,7 +36,7 @@ class NoReturnUsed extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Functions
         $this->atomIs(self::FUNCTIONS_ALL)
              ->filter(

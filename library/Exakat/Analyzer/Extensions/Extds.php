@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extds extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'ds.ini';
 
         parent::analyze();

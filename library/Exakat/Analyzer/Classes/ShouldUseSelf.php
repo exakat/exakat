@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldUseSelf extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // full nsname\classname instead of self
         $this->atomIs('Staticconstant')
              ->hasClass()

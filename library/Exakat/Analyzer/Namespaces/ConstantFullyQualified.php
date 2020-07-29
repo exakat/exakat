@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class ConstantFullyQualified extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // define('\\full\\namespace\\path', 'value');
         $this->atomIs('Defineconstant')
              ->outIs('NAME')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Closures extends Analyzer {
     // function ($x) {}
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Closure');
         $this->prepareQuery();
     }

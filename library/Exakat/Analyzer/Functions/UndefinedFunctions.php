@@ -32,7 +32,7 @@ class UndefinedFunctions extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // foo(); (no function foo())
         $this->atomIs('Functioncall')
              ->outIs('NAME')

@@ -31,7 +31,7 @@ class ShortTags extends Analyzer {
     protected $phpConfiguration = array('short_open_tag' => true,
                                         'asp_tags'       => true);
 
-    public function analyze() {
+    public function analyze() : void {
         // <? code
         $this->atomIs('Phpcode')
              ->codeIs(array('<?', '<script language="php">', '<%=', '<%'), self::TRANSLATE, self::CASE_SENSITIVE);

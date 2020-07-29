@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class AmbiguousKeys extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Arrayliteral')
              ->raw(<<<'GREMLIN'
 where(

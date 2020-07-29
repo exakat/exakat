@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ReflectionExportIsDeprecated extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $reflection = array('\reflection',
                             '\reflectionclass',
                             '\reflectionclassconstant',

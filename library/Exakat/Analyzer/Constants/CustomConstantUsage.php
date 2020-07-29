@@ -31,7 +31,7 @@ class CustomConstantUsage extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
         $constants = array();

@@ -30,7 +30,7 @@ class PropertyUsedBelow extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         //////////////////////////////////////////////////////////////////
         // property + $this->property
         //////////////////////////////////////////////////////////////////

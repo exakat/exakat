@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Phparrayindex extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         $variables = $this->loadIni('php_variables.ini', 'variables');
 
         $this->atomIs('Array')

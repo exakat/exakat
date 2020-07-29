@@ -30,7 +30,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { function m() ;}
         // class xx extends x { function m($a) ;}
         // argument name may be arbitrary; argment default too.

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessInterfaces extends Analyzer {
 
-    public function analyze() {
+    public function analyze() : void {
         // interface not used in a instanceof nor a Typehint
         $this->atomIs('Interface')
              ->not(

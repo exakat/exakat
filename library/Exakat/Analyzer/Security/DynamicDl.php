@@ -30,7 +30,7 @@ class DynamicDl extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // dl($variable);
         $this->atomFunctionIs('\dl')
              ->outWithRank('ARGUMENT', 0)

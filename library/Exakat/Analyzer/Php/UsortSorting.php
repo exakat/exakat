@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UsortSorting extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomFunctionIs(array('\\usort', '\\uksort', '\\uasort'));
         $this->prepareQuery();
     }

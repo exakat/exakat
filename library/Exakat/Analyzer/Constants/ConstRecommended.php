@@ -31,7 +31,7 @@ class ConstRecommended extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // define('const', literal);
         // define('const', other constant);
         // define('const', expression);

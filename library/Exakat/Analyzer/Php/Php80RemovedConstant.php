@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\ConstantUsage;
 
 class Php80RemovedConstant extends ConstantUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->constants = array('\INTL_IDNA_VARIANT_2003');
 
         parent::analyze();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class SlowFunctions extends FunctionUsage {
-    public function analyze() {
+    public function analyze() : void {
         $this->functions = array(
 'array_diff',
 'array_intersect',

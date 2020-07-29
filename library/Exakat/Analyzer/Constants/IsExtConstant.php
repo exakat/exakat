@@ -32,7 +32,7 @@ class IsExtConstant extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
         $constants = array($this->loadIni('php_constants.ini', 'constants'));

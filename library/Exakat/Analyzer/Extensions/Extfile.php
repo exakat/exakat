@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extfile extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'file.ini';
 
         parent::analyze();

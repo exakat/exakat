@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeCallable extends CouldBeType {
-    public function analyze() {
+    public function analyze() : void {
         $callableAtoms = array('Closure', 'Arrowfunction');
 
         // property, as assigned with closure or arrowfunction

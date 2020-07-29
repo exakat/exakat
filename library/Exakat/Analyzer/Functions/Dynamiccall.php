@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class Dynamiccall extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->outIs('NAME')

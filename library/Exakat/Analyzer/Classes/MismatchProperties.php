@@ -31,7 +31,7 @@ class MismatchProperties extends Analyzer {
                     );
     }
     
-    public function analyze() {
+    public function analyze() : void {
         // class x { protected A $p; }
         // class a extends x { protected $p; }
         $this->atomIs('Propertydefinition')

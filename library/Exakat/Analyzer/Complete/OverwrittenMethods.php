@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class OverwrittenMethods extends Complete {
-    public function analyze() {
+    public function analyze() : void {
         // class x { protected function foo()  {}}
         // class xx extends x { protected function foo()  {}}
         $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)

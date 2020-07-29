@@ -30,7 +30,7 @@ class IdenticalMethods extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         return;
         // class a           { public function foo() { /some code/ } }
         // class b extends a { public function foo() { /some code/ } }

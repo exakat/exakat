@@ -32,7 +32,7 @@ class TooManyNativeCalls extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Sequence')
              ->outIs('EXPRESSION')
              ->atomIsNot(array('Assignation',

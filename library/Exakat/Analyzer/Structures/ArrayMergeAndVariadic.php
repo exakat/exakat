@@ -32,7 +32,7 @@ class ArrayMergeAndVariadic extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // array_merge(...$x); (without check on $x empty => error!)
         $this->atomFunctionIs(array('\\array_merge',
                                     '\\array_merge_recursive'))

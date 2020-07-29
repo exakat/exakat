@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyVariableConfusion extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // public $x = 3; static or not
         $this->atomIs('Propertydefinition')
              ->savePropertyAs('code', 'name')

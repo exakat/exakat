@@ -28,7 +28,7 @@ class SetArrayClassDefinition extends Complete {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // array(\x, foo)
         $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)
               ->is('count', 2)

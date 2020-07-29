@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class VariableMayBeNonGlobal extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // function foo() { $s = 1; static $s; }
         // function foo() { $g = 1; global $g; }
         $this->atomIs(array('Static', 'Global'))

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Vendors;
 use Exakat\Analyzer\Common\UsesFramework;
 
 class Symfony extends UsesFramework {
-    public function analyze() {
+    public function analyze() : void {
         $detections = $this->loadIni('vendors/symfony.ini');
 
         $this->classes    = $detections->classes;

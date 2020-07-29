@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class WrongCase extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Namespace')
              ->outIs('NAME')
              ->values('fullcode');

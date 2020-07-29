@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseDateTimeImmutable extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // new DateTime
         $this->atomIs('New')
              ->outIs('NEW')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CoalesceEqual extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         // $x ??= 'a';
         $this->atomIs('Assignation')
              ->tokenIs('T_COALESCE_EQUAL');

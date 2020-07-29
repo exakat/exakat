@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class CacheVariableOutsideLoop extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $MAX_LOOPING = self::MAX_LOOPING;
 
         // foreach($a as $b) { $c = }

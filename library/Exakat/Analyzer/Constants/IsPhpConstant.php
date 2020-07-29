@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class IsPhpConstant extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // Namespaced constant (\PATHINFO_BASENAME)
         $this->atomIs(self::STATIC_NAMES)
              ->is('isPhp', true);

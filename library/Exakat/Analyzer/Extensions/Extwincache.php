@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extwincache extends Extension {
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'wincache.ini';
 
         parent::analyze();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ConstantClass extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x { const yx = 2;}
         $this->atomIs('Class')
              ->isNot('abstract', true)

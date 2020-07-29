@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class GlobalUsage extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // global
         $this->atomIs('Globaldefinition');
         $this->prepareQuery();

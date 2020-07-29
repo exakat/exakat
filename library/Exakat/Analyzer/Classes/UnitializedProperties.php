@@ -32,7 +32,7 @@ class UnitializedProperties extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // Normal Properties (with or without constructor)
         $this->atomIs('Propertydefinition')
              ->not(

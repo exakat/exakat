@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeParent extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // This analysis works on typehints already available
         
         // Properties

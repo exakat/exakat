@@ -31,7 +31,7 @@ class RedefinedMethods extends Analyzer {
                     );
     }
 
-    public function analyze() {
+    public function analyze() : void {
         // class x { function y() {}}
         // class y extends x { function y() {}}
         $this->atomIs('Class')

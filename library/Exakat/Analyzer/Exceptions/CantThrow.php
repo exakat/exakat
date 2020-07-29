@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CantThrow extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // class x extends throwable {}
         $this->atomIs(array('Class', 'Interface'))
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))

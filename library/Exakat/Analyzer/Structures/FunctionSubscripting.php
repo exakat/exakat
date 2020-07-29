@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class FunctionSubscripting extends Analyzer {
     protected $phpVersion = '5.4+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs(self::FUNCTIONS_CALLS)

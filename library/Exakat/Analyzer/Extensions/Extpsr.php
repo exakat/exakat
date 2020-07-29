@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extpsr extends Extension {
     protected $phpVersion = '7.0+';
 
-    public function analyze() {
+    public function analyze() : void {
         $this->source = 'psr.ini';
 
         parent::analyze();

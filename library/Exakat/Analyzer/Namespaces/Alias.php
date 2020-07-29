@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class Alias extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // use A\B\C as D
         $this->atomIs('Usenamespace')
              ->outIs('USE')

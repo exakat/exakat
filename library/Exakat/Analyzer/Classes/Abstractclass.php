@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class Abstractclass extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         // abstract class x {}
         $this->atomIs('Class')
              ->is('abstract', true);

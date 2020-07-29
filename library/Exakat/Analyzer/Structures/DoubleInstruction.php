@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DoubleInstruction extends Analyzer {
-    public function analyze() {
+    public function analyze() : void {
         $this->atomIs('Sequence')
              ->raw(<<<'GREMLIN'
 where(
