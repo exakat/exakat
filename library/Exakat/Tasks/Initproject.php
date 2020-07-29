@@ -59,12 +59,12 @@ class Initproject extends Tasks {
         }
 
         display("Initializing {$this->config->project}" . (!empty($repositoryURL) ? " with $repositoryURL" : '') );
-        $this->init_project($this->config->project, $repositoryURL ?: '');
+        $this->initProject($this->config->project, $repositoryURL ?: '');
 
         display('Done');
     }
 
-    private function init_project(Project $project, string $repositoryURL) : void {
+    private function initProject(Project $project, string $repositoryURL) : void {
         $finalPath = "{$this->config->projects_root}/projects/$project";
 
         if (file_exists($finalPath)) {

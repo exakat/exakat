@@ -34,7 +34,7 @@ class Update extends Tasks {
 
     protected $logname = self::LOG_NONE;
 
-    public function run() {
+    public function run() : void {
         $project = $this->config->project;
 
         if (!$project->validate()) {
@@ -44,11 +44,11 @@ class Update extends Tasks {
         if ($this->config->project->isDefault()) {
             $this->runDefault();
         } else {
-            $this->runProject($this->config->project);
+            $this->runProject();
         }
     }
 
-    private function runDefault() {
+    private function runDefault() : void {
         if (!file_exists("{$this->config->projects_root}/projects")) {
             display("This installation has no projects directory. Aborting all update. Provide .exakat.ini to enable update in this folder.\n");
             return;
@@ -74,7 +74,7 @@ class Update extends Tasks {
         }
     }
 
-    private function runProject($project) {
+    private function runProject() : void {
         if (!file_exists($this->config->project_dir)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -90,7 +90,7 @@ class Update extends Tasks {
         $this->update($this->config);
     }
 
-    private function update(Config $updateConfig) {
+    private function update(Config $updateConfig) : void {
         $vcs = Vcs::getVcs($updateConfig);
         $vcs = new $vcs($updateConfig->project, $updateConfig->code_dir);
 

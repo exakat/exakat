@@ -45,7 +45,7 @@ class Doctor extends Tasks {
         // Ignoring everything else
     }
 
-    public function run() {
+    public function run() : void {
         $stats = array_merge($this->checkPreRequisite(),
                              $this->checkAutoInstall());
 
@@ -80,7 +80,7 @@ class Doctor extends Tasks {
         print $doctor;
     }
 
-    private function checkPreRequisite() {
+    private function checkPreRequisite() : array {
         $stats = array();
 
         // Compulsory
@@ -169,7 +169,7 @@ class Doctor extends Tasks {
         return $stats;
     }
 
-    private function checkAutoInstall() {
+    private function checkAutoInstall() : array {
         $stats = array();
 
         // config
@@ -265,7 +265,7 @@ TEXT
         return $stats;
     }
 
-    private function checkInstall($graphdb) {
+    private function checkInstall(string $graphdb) : void {
         if ($graphdb === 'gsneo4j') {
             if (file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties")) {
                 $properties = file_get_contents("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties");
@@ -281,7 +281,7 @@ TEXT
         }
     }
 
-    private function checkGremlinServer($path) {
+    private function checkGremlinServer(string $path) : void {
         if (!file_exists($path)) {
             return;
         }
@@ -314,7 +314,7 @@ TEXT
         }
     }
 
-    private function checkPHPs($config) {
+    private function checkPHPs(array $config) : array {
         $stats = array();
 
         foreach(Config::PHP_VERSIONS as $shortVersion) {
@@ -328,7 +328,7 @@ TEXT
         return $stats;
     }
 
-    private function checkOptional() {
+    private function checkOptional() : array {
         $stats = array();
 
         $optionals = array('Git'       => 'git',
@@ -357,7 +357,7 @@ TEXT
         return $stats;
     }
 
-    private function checkPHP($pathToBinary, $displayedVersion) {
+    private function checkPHP(string $pathToBinary, string $displayedVersion) : array {
         $stats = array();
 
         $stats['configured'] = 'Yes (' . $pathToBinary . ')';
@@ -374,7 +374,7 @@ TEXT
         return $stats;
     }
 
-    private function array2list(array $array) {
+    private function array2list(array $array) : string {
         return implode(",\n                           ", $array);
     }
 }

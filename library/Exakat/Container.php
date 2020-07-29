@@ -71,7 +71,7 @@ class Container {
         $this->dictionary = new Dictionary();
     }
 
-    private function methods() {
+    private function methods() : void {
         $this->methods    = new Methods($this->config);
     }
 

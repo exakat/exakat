@@ -31,7 +31,7 @@ class Git extends Vcs {
     private $executable = 'git';
 
     protected function selfCheck(): void {
-        $res = shell_exec("{$this->executable} --version 2>&1");
+        $res = shell_exec("{$this->executable} --version 2>&1") ?? '';
         if (strpos($res, 'git') === false) {
             throw new HelperException('git');
         }
@@ -100,9 +100,9 @@ class Git extends Vcs {
         $branch = substr(trim($res), 2);
 
         if (strpos($branch, ' detached at ') === false) {
-            $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
+            $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch") ?? '';
         } else {
-            $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} checkout --quiet; {$this->executable} pull; {$this->executable} branch | grep '* '");
+            $resInitial = shell_exec("cd {$this->destinationFull}/; {$this->executable} checkout --quiet; {$this->executable} pull; {$this->executable} branch | grep '* '") ?? '';
             $branch = '';
         }
 
@@ -127,7 +127,7 @@ class Git extends Vcs {
         if (!file_exists("{$this->destinationFull}/")) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} branch | grep \* 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} branch | grep \* 2>&1") ?? '';
         return trim($res, " *\n");
     }
 
@@ -135,7 +135,7 @@ class Git extends Vcs {
         if (!file_exists($this->destinationFull)) {
             return '';
         }
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} rev-parse HEAD 2>&1");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} rev-parse HEAD 2>&1") ?? '';
         return trim($res);
     }
 
@@ -166,7 +166,7 @@ class Git extends Vcs {
     }
 
     public function getDiffLines($r1, $r2) : array {
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff -U0 -r $r1 -r $r2");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff -U0 -r $r1 -r $r2") ?? '';
 
         $file    = '';
         $changes = array();
@@ -193,7 +193,7 @@ class Git extends Vcs {
     }
 
     public function getFileModificationLoad(): array {
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} log --name-only --pretty=format:");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} log --name-only --pretty=format:") ?? '';
 
         $files = array();
         $rows = explode(PHP_EOL, $res);
@@ -213,7 +213,7 @@ class Git extends Vcs {
 
     public function getDiffFile(string $next): string {
         // Added and removed ?
-         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=a --name-only $next -- . ");
+         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=a --name-only $next -- . ") ?? '';
 
         if ($res === null) {
             return array();
@@ -229,10 +229,10 @@ class Git extends Vcs {
         //--diff-filter=[(A|C|D|M|R|T|U|X|B)…​[*]]
         // Some situations are not supported yet.
         // We keep Added, Modified. Deleted are ignored, as non-treatable.
-        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=d --name-only $next -- . ");
+        $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=d --name-only $next -- . ") ?? '';
 
         // No chane, may be, but we still need to update the code
-        shell_exec("cd {$this->destinationFull}; {$this->executable} checkout $next");
+        shell_exec("cd {$this->destinationFull}; {$this->executable} checkout $next") ?? '';
 
         if ($res === null) {
             return array();

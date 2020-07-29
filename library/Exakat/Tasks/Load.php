@@ -6357,7 +6357,7 @@ class Load extends Tasks {
     }
 
     private function saveFiles(): void {
-        $this->loader->saveFiles($this->config->tmp_dir, $this->atoms, $this->links); // , $this->id0
+        $this->loader->saveFiles($this->config->tmp_dir, $this->atoms, $this->links); 
         $this->reset();
     }
 

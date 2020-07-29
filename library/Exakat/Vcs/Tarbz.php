@@ -51,7 +51,7 @@ class Tarbz extends Vcs {
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz') . '.tar.bz2';
         file_put_contents($archiveFile, $binary);
 
-        $res = shell_exec("{$this->executableTar} -tjf $archiveFile 2>&1 >/dev/null");
+        $res = shell_exec("{$this->executableTar} -tjf $archiveFile 2>&1 >/dev/null") ?? '';
         if (!empty($res)) {
             list($l, ) = explode("\n", $res);
             print "Error while loading tar.bz archive : \"$l\". Aborting\n";
@@ -66,7 +66,7 @@ class Tarbz extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec("{$this->executableTar} --version 2>&1"));
+        $res = trim(shell_exec("{$this->executableTar} --version 2>&1") ?? '');
         if (preg_match('/^(\w+) ([0-9\.]+) /', $res, $r)) {//
             $stats['tar'] = 'Yes';
             $stats['tar version'] = $r[0];
@@ -75,7 +75,7 @@ class Tarbz extends Vcs {
             $stats['tar optional'] = 'Yes';
         }
 
-        $res = trim(shell_exec("{$this->executableBzip2} --help 2>&1"));
+        $res = trim(shell_exec("{$this->executableBzip2} --help 2>&1") ?? '');
         if (preg_match('/Version ([0-9\.]+),/', $res, $r)) {//
             $stats['bzip2'] = 'Yes';
             $stats['bzip2 version'] = $r[1];
