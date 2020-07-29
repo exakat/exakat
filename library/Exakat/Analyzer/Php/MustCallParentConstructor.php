@@ -40,7 +40,7 @@ class MustCallParentConstructor extends Analyzer {
             return;
         }
 
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('EXTENDS')
              ->fullnspathIs($fullnspath)
              ->back('first')

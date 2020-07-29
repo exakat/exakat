@@ -40,7 +40,7 @@ class UndefinedInterfaces extends Analyzer {
         $omitted = $this->dependsOn();
 
         // interface used in a class
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->hasNoIn('DEFINITION')
              ->analyzerIsNot($omitted);

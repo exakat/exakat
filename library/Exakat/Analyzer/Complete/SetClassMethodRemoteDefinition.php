@@ -88,7 +88,7 @@ class SetClassMethodRemoteDefinition extends Complete {
               ->filter(
                     $this->side()
                          ->goToClass()
-                         ->atomIs(array('Class', 'Classanonymous'), self::WITHOUT_CONSTANTS)
+                         ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
                          ->goToAllParents(self::INCLUDE_SELF)
                          ->samePropertyAs('fullnspath', 'fnp', self::CASE_SENSITIVE)
               )

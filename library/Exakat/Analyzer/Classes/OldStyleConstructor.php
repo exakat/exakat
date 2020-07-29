@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class OldStyleConstructor extends Analyzer {
     public function analyze() : void {
         // No mentionned namespaces
-        $this->atomIs(array('Class', 'Classanonymous'))
+        $this->atomIs(self::CLASSES_ALL)
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
