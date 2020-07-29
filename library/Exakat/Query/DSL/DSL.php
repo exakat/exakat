@@ -128,6 +128,7 @@ abstract class DSL {
     protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
     protected static $MAX_SEARCHING = Analyzer::MAX_SEARCHING;
     protected static $TIME_LIMIT    = Analyzer::TIME_LIMIT;
+    protected static $ATOMS         = array();
 
     public function __construct(DSLfactory $dslfactory,
                                 array $availableAtoms = array(),
@@ -155,6 +156,10 @@ abstract class DSL {
 
         if (empty(self::$linksDown)) {
             self::$linksDown = GraphElements::linksAsList();
+        }
+
+        if (empty(self::$ATOMS)) {
+            self::$ATOMS = array_merge(GraphElements::$ATOMS,GraphElements::$ATOMS_EXAKAT);
         }
     }
 
@@ -256,9 +261,11 @@ abstract class DSL {
     protected function assertAtom($atom): bool {
         if (is_string($atom)) {
             assert($atom === ucfirst(strtolower($atom)), "Wrong format for Atom name : $atom");
+            assert(in_array($atom, self::$ATOMS), "No such atom as '$atom'");
         } elseif (is_array($atom)) {
             foreach($atom as $a) {
                 assert($a === ucfirst(strtolower($a)), "Wrong format for Atom name : $a");
+                assert(in_array($a, self::$ATOMS), "No such atom as '$a'");
             }
         } else {
             assert(false, 'Unsupported type for atom : ' . gettype($atom));

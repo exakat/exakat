@@ -29,6 +29,12 @@ class WrongReturnedType extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                      'Functions/IsGenerator',
+                     'Complete/SetClassRemoteDefinitionWithGlobal',
+                     'Complete/SetClassRemoteDefinitionWithInjection',
+                     'Complete/SetClassRemoteDefinitionWithLocalNew',
+                     'Complete/SetClassRemoteDefinitionWithParenthesis',
+                     'Complete/SetClassRemoteDefinitionWithReturnTypehint',
+                     'Complete/SetClassRemoteDefinitionWithTypehint',
                     );
     }
 
@@ -144,12 +150,33 @@ class WrongReturnedType extends Analyzer {
              ->hasIn('RETURN')
              ->as('results')
              ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIsNot(array('Variable', 'Staticproperty', 'Member', 'Functioncall', 'Methodacall', 'Staticmethodcall'))
+             ->atomIsNot(array('Variable', 'Staticproperty', 'Member', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
              ->optional(
                 $this->side()
                      ->atomIs(array('Identifier', 'Nsname'), self::WITH_CONSTANTS)
              )
              ->checkTypeWithAtom('fqn')
+             ->back('results')
+             ->inIs('RETURN');
+        $this->prepareQuery();
+
+        //Relayed return types
+        // Don't process void : it is checked at lint time
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('Functions/IsGenerator')
+             ->outIs('RETURNTYPE')
+             ->atomIs('Scalartypehint')
+             ->savePropertyAs('fullnspath', 'fqn')
+             ->back('first')
+             ->outIs('RETURNED')
+             ->hasIn('RETURN')
+             ->as('results')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->inIs('DEFINITION')
+             ->outIs('RETURNTYPE')
+             ->savePropertyAs('fullnspath', 'fqn2')
+             ->raw('filter{ fqn != fqn2; }')
              ->back('results')
              ->inIs('RETURN');
         $this->prepareQuery();
