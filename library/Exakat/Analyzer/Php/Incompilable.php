@@ -35,7 +35,7 @@ class Incompilable extends Analyzer {
         $this->rawQueryCount  = 0;
     }
 
-    public function toArray() {
+    public function toArray() : array {
         $report = array();
 
         foreach($this->config->other_php_versions as $version) {

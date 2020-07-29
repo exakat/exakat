@@ -28,12 +28,12 @@ abstract class Config {
     const LOADED     = true;
     const NOT_LOADED = false;
 
-    protected $config = array();
+    protected $config  = array();
     protected $options = array();
 
     abstract public function loadConfig($args) ;
 
-    public function toArray() {
+    public function toArray() : array {
         return $this->config;
     }
 
