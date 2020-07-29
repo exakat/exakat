@@ -166,5 +166,6 @@ class Php54 extends Php {
     const T_NAME_QUALIFIED                = 1000;
     const T_NULLSAFE_OBJECT_OPERATOR      = 1000;
     const T_MATCH                         = 1000;
+    const T_ATTRIBUTE                     = 1000;
 }
 ?>
