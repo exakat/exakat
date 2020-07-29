@@ -2266,7 +2266,7 @@ GREMLIN;
 
               ->inIs('CONST')
               ->inIs('CONST')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
 
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
@@ -2305,7 +2305,7 @@ GREMLIN
               ->inIs('CONST')
               ->savePropertyAs('visibility', 'visibility1')
               ->inIs('CONST')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
 
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
@@ -2340,7 +2340,7 @@ GREMLIN
               ->inIs('NAME')
               ->raw('sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }')
               ->inIs('METHOD')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
 
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
@@ -2398,7 +2398,7 @@ GREMLIN
               ->inIs('DEFAULT')
               ->inIs('PPP')
               ->inIs('PPP')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2')
@@ -2431,7 +2431,7 @@ GREMLIN
               ->inIs('PPP')
               ->savePropertyAs('visibility', 'visibility1')
               ->inIs('PPP')
-              ->atomIs(array('Class', 'Classanonymous'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class1')
               ->goToAllParents(Analyzer::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2')

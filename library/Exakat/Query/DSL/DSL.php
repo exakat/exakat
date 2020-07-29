@@ -129,6 +129,7 @@ abstract class DSL {
     protected static $MAX_SEARCHING = Analyzer::MAX_SEARCHING;
     protected static $TIME_LIMIT    = Analyzer::TIME_LIMIT;
     protected static $ATOMS         = array();
+    protected static $LINKS         = array();
 
     public function __construct(DSLfactory $dslfactory,
                                 array $availableAtoms = array(),
@@ -160,6 +161,10 @@ abstract class DSL {
 
         if (empty(self::$ATOMS)) {
             self::$ATOMS = array_merge(GraphElements::$ATOMS,GraphElements::$ATOMS_EXAKAT);
+        }
+
+        if (empty(self::$LINKS)) {
+            self::$LINKS = array_merge(GraphElements::$LINKS,GraphElements::$LINKS_EXAKAT);
         }
     }
 
@@ -233,9 +238,11 @@ abstract class DSL {
             if(preg_match('/[^A-Z]/', $link)) {
                 throw new DSLException("Not a link : $link", self::LEVELS_TO_ANALYSE);
             }
+            assert(in_array($link, self::$LINKS), "No such link as '$link'");
         } elseif (is_array($link)) {
             foreach($link as $l) {
                 $this->assertLink($l);
+                assert(in_array($l, self::$LINKS), "No such link as '$l'");
             }
         } else {
             assert(false, 'Unsupported type for link : ' . gettype($link));

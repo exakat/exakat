@@ -61,7 +61,7 @@ class ImplodeArgsOrder extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
-             ->outIs('RETURNYTPE')
+             ->outIs('RETURNTYPE')
              ->fullnspathIs('\\array')
              ->back('first');
         $this->prepareQuery();
@@ -92,7 +92,7 @@ class ImplodeArgsOrder extends Analyzer {
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(self::FUNCTIONS_CALLS)
              ->inIs('DEFINITION')
-             ->outIs('RETURNYTPE')
+             ->outIs('RETURNTYPE')
              ->fullnspathIs('\\string')
              ->back('first');
         $this->prepareQuery();
