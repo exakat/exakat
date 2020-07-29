@@ -33,8 +33,8 @@ class Stats extends Reports {
                         'Classes'        => 'Class',
                         'Interfaces'     => 'Interface',
                         'Trait'          => 'Trait',
-                        'Functions'      => 'Functions/RealFunctions',
-                        'Variables'      => 'Variables/RealVariables',
+                        'Functions'      => 'Function',
+                        'Variables'      => 'Variabledefinition',
                         'Constants'      => 'Constants/Constantnames',
                  ),
                 'Classes' => array(
@@ -76,6 +76,7 @@ class Stats extends Reports {
 
                         '?  :'                => 'Ternary',
                         '?: '                 => 'Php/Coalesce',
+                        '?? '                 => 'Php/Coalesce',
 
                         'Variables constants' => 'Constants/VariableConstant',
                         'Variables variables' => 'Variables/VariableVariables',
