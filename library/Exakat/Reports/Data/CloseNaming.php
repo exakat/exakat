@@ -100,18 +100,24 @@ class CloseNaming extends Data {
         return $results;
     }
 
-    private function groupSwap($a, $b) {
+    private function groupSwap(string $a, string $b) : bool {
+        if (strpos($b, $a[1]) === false) { 
+            return false; 
+        }
         $n = strlen($a) - 3;
-        if (strpos($b, $a[1]) === false) { return false; }
+
         for($i = 2; $i < $n; ++$i) {
             $d = substr($a, $i + 1);
             $e = substr($a, 1, $i);
             if ($d === $e) { continue; }
+
             $c = '$' . $d . $e;
             if ($c === $b) {
                 return true;
             }
         }
+        
+        return false;
     }
 }
 

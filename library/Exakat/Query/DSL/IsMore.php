@@ -49,10 +49,10 @@ class IsMore extends DSL {
         }
     }
 
-    private function makeGremlin($value) {
+    private function makeGremlin($value) : string {
         // It is an integer
         if (is_int($value)) {
-            return $value;
+            return (string) $value;
         }
 
         // It is a gremlin variable
