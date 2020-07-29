@@ -29,7 +29,7 @@ class TooManyDereferencing extends Analyzer {
 
     public function analyze() : void {
         //$a->b->c()::d()->e::F (only -> and ::)
-        $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant', 'Array', 'Append'))
+        $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant', 'Array', 'Arrayappend'))
              ->hasNoIn(array('CLASS', 'VARIABLE', 'APPEND', 'OBJECT'))
              ->processDereferencing( $this->tooManyDereferencing )
              ->inIsIE(array('CLASS', 'VARIABLE', 'APPEND', 'OBJECT'));

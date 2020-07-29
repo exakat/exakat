@@ -42,7 +42,7 @@ class StrangeName extends Analyzer {
         // Using strange type of data
         $this->atomIs(self::VARIABLES_SCALAR)
              ->outIs('NAME')
-             ->atomIs(array('Integer', 'Boolean', 'Float', 'Null', 'Arrayliteral', 'Comparison', 'Bitshift', 'Typecast'))
+             ->atomIs(array('Integer', 'Boolean', 'Float', 'Null', 'Arrayliteral', 'Comparison', 'Bitshift', 'Cast'))
              ->tokenIsNot('T_STRING_CAST')
              ->back('first');
         $this->prepareQuery();

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UpperCaseKeyword extends Analyzer {
     public function analyze() : void {
         // CLASS X {}
-        $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Usenamese', 'Usetrait', 'Function', 'Method',
+        $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Usenamespace', 'Usetrait', 'Function', 'Method',
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
                             'Clone', 'Dowhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
                             'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Static', 'Match',

@@ -108,7 +108,7 @@ class CouldBeFloat extends CouldBeType {
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->atomIs(array('Additition', 'Power', 'Multiplication'))
+             ->atomIs(array('Addition', 'Power', 'Multiplication'))
              ->back('result');
         $this->prepareQuery();
         

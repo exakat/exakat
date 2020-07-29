@@ -40,7 +40,7 @@ GREMLIN;
              ->outIs('FILE')
              ->outIs('EXPRESSION')
              ->atomIs('Php')
-             ->noAtomInside('Haltcompiler')
+             ->noAtomInside('Halt')
              ->raw('map{ ' . $mapping . ' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray();
@@ -75,7 +75,7 @@ GREMLIN;
              ->atomIs('Php')
              ->raw('sideEffect{ ' . $mapping . ' }')
              ->raw('filter{ x2 in ***}', $types)
-             ->noAtomInside('Haltcompiler')
+             ->noAtomInside('Halt')
              ->back('first');
         $this->prepareQuery();
     }

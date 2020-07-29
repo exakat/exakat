@@ -33,12 +33,12 @@ class ImplementIsForInterface extends Analyzer {
     }
 
     public function analyze() : void {
-        $this->atomIs(array('Class', 'Trait'))
+        $this->atomIs(self::CLASSES_TRAITS)
              ->values('fullnspath')
              ->unique();
         $classesTraits = $this->rawQuery()->toArray();
 
-        $this->atomIs('Interfaces')
+        $this->atomIs('Interface')
              ->values('fullnspath')
              ->unique();
         $interfaces = $this->rawQuery()->toArray();

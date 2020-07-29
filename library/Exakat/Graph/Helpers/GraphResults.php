@@ -122,11 +122,11 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         }
     }
 
-    public function toString() {
+    public function toString() : string {
         return (string) $this->data[0];
     }
 
-    public function toInt() {
+    public function toInt() : int {
         if ($this->data === null) {
             return 0;
         }
@@ -134,11 +134,19 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return (int) $this->data[0];
     }
 
-    public function isType($type) {
+    public function toUuid() : string {
+        if ($this->data === null) {
+            return '';
+        }
+
+        return (string) $this->data[0];
+    }
+
+    public function isType($type) : bool {
         return $this->type === $type;
     }
 
-    public function offsetExists($offset) {
+    public function offsetExists($offset) : bool {
         return isset($this->data[$offset]);
     }
 
@@ -146,41 +154,39 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return $this->data[$offset];
     }
 
-    public function offsetSet($offset, $value) {
+    public function offsetSet($offset, $value) : void {
         // Nothing. No update on that result
 
     }
 
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset) : void {
         // Nothing. No update on that result
 
     }
 
-    public function rewind() {
+    public function rewind() : void {
         if ($this->type === self::ARRAY) {
-            return reset($this->data);
+            reset($this->data);
         }
-
-        return true;
     }
 
     public function current() {
         return current($this->data);
     }
 
-    public function key() {
+    public function key() : scalar {
         if ($this->type === self::ARRAY) {
             return key($this->data);
         }
 
-        return null;
+        return '';
     }
 
-    public function next() {
-        return next($this->data);
+    public function next() : void {
+        next($this->data);
     }
 
-    public function valid() {
+    public function valid() : bool {
         if ($this->type === self::ARRAY) {
             return key($this->data) !== null;
         }
@@ -188,7 +194,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return false;
     }
 
-    public function count() {
+    public function count() : int {
         if ($this->type === self::ARRAY) {
             return count($this->data);
         }

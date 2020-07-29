@@ -63,7 +63,7 @@ __.sideEffect{ typehints = []; }
     for(typehint in typehints) {
         switch(typehint) {
             case "\\\\string":
-                results = results && !($types in ["Magicconstant", "Heredoc", "String", "Concatenation", "Classconstant", "Shell"]);
+                results = results && !($types in ["Magicconstant", "Heredoc", "String", "Concatenation", "Staticclass", "Shell"]);
                 break;
                 
             case "\\\\int":
