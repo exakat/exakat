@@ -29,7 +29,7 @@ use Exakat\Exceptions\ProjectNeeded;
 class Remove extends Tasks {
     const CONCURENCE = self::NONE;
 
-    public function run() {
+    public function run() : void {
         $project = $this->config->project;
 
         if (!$project->validate()) {

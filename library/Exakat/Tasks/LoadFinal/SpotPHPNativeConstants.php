@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SpotPHPNativeConstants extends LoadFinal {
     private $PHPconstants = array();
 
-    public function run() {
+    public function run() : void {
         if (empty($this->PHPconstants)) {
             return;
         }

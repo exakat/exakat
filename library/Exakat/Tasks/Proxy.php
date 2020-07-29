@@ -28,7 +28,7 @@ class Proxy extends Tasks {
     const CONCURENCE = self::ANYTIME;
     const PORT =  7448;
 
-    public function run() {
+    public function run() : void {
         if ($this->config->stop    === true ||
             $this->config->restart === true
             ) {

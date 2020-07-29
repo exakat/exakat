@@ -27,7 +27,7 @@ use Exakat\Reports\Reports;
 class Catalog extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         $data = array();
 
         // List of analysis

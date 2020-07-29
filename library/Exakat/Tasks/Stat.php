@@ -27,7 +27,7 @@ use Exakat\Stats;
 class Stat extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         $stats = new Stats();
         if ($this->config->filename) {
             $stats->setFileFilter($this->config->filename);

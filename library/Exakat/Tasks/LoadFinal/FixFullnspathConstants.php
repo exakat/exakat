@@ -25,7 +25,7 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 
 class FixFullnspathConstants extends LoadFinal {
-    public function run() {
+    public function run() : void {
         $query = $this->newQuery('fixFullnspathConstants');
         $query->atomIs(array('Identifier', 'Nsname'), Analyzer::WITHOUT_CONSTANTS)
               ->has('fullnspath')

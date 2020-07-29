@@ -25,7 +25,7 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 
 class IsInIgnoredDir extends LoadFinal {
-    public function run() {
+    public function run() : void {
         $ignoredfunctions = $this->datastore->getCol('ignoredfunctions', 'fullnspath');
 
         $countF = 0;

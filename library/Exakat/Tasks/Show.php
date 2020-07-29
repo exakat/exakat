@@ -28,7 +28,7 @@ use Exakat\Exceptions\ProjectNeeded;
 class Show extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         $project = $this->config->project;
 
         if (!$project->validate()) {

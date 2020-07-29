@@ -27,7 +27,7 @@ class CleanDb extends Tasks {
 
     protected $logname = self::LOG_NONE;
 
-    public function run() {
+    public function run() : void {
          if (self::$semaphore === null) {
             $this->manageServer();
         } else {

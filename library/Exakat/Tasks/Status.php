@@ -30,7 +30,7 @@ use Exakat\Exakat;
 class Status extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         $project = $this->config->project;
 
         if ($project->isDefault()) {

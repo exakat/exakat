@@ -25,7 +25,7 @@ namespace Exakat\Tasks;
 class Server extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         if ($this->config->stop    === true ||
             $this->config->restart === true
             ) {

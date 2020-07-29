@@ -39,7 +39,7 @@ class Anonymize extends Tasks {
     private $stringsNames = array();
     private $strings = 'A';
 
-    public function run() {
+    public function run() : void {
 
         if (($file = $this->config->file) === 'stdout') {
             $dir = $this->config->dirname;

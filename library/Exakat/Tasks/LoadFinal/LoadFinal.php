@@ -54,7 +54,7 @@ class LoadFinal {
                          );
     }
 
-    public function run() {
+    public function run() : void {
         $this->log('Start');
         display('Start load final');
 

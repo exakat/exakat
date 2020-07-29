@@ -29,7 +29,7 @@ use Exakat\Exceptions\ProjectNeeded;
 class Fetch extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         $project = $this->config->project;
         if ($project === 'default') {
             throw new ProjectNeeded();

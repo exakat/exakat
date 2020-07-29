@@ -25,7 +25,7 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Targz extends Vcs {
-    protected function selfCheck() {
+    protected function selfCheck() : void {
         $res = shell_exec('tar --version 2>&1') ?? '';
         if (!preg_match('#\d+\.\d+(\.\d+)?#s', $res)) {
             throw new HelperException('Tar');
@@ -60,7 +60,7 @@ class Targz extends Vcs {
         unlink($archiveFile);
     }
 
-    public function getInstallationInfo() {
+    public function getInstallationInfo() : void {
         $stats = array();
 
         $res = trim(shell_exec('tar --version 2>&1') ?? '');

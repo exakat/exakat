@@ -43,7 +43,7 @@ class Jobqueue extends Tasks {
         parent::__destruct();
     }
 
-    public function run() {
+    public function run() : void {
         if (!file_exists("{$this->config->projects_root}/projects/log/")) {
             mkdir("{$this->config->projects_root}/projects/log/", 0700);
         }

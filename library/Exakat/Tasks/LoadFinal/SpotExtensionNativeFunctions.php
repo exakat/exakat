@@ -25,7 +25,7 @@ namespace Exakat\Tasks\LoadFinal;
 use Exakat\Analyzer\Analyzer;
 
 class SpotExtensionNativeFunctions extends LoadFinal {
-    public function run() {
+    public function run() : void {
         $query = $this->newQuery('SpotExtensionNativeFunctions fallingback');
         $query->atomIs('Functioncall', Analyzer::WITHOUT_CONSTANTS)
               ->isNot('absolute', true)

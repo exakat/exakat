@@ -29,7 +29,7 @@ class Queue extends Tasks {
 
     private $pipefile = Jobqueue::PATH;
 
-    public function run() {
+    public function run() : void {
         if (!file_exists($this->pipefile)) {
             throw new NoJobqueueStarted();
         }

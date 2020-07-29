@@ -25,7 +25,7 @@ namespace Exakat\Tasks;
 class EmptyTask extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
 
     }
 }

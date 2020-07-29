@@ -35,7 +35,7 @@ use Exakat\Dump\Dump;
 class Report extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() {
+    public function run() : void {
         if ($this->config->project->isDefault()) {
             throw new ProjectNeeded();
         }
