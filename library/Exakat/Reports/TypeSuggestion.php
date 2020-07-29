@@ -57,8 +57,11 @@ class TypeSuggestion extends Reports {
                 $suggestions[$row['file']][$row['line']][$r[1]][] = $type;
             } elseif (preg_match('/(\$\\S+)/', $row['fullcode'], $r)) {
                 $suggestions[$row['file']][$row['line']][$r[1]][] = $type;
+            } elseif (preg_match('/function \\( \\) /', $row['fullcode'], $r)) {
+                // This is a closure, no display for them
+                continue;
             } else {
-                print 'Error : ' . $row['fullcode'] . "\n";
+                display('Cannot find typehints for ' . $row['fullcode'] . "\n");
             }
         }
 
