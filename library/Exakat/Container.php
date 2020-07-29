@@ -30,7 +30,6 @@ use Exakat\Analyzer\Rulesets;
 
 class Container {
     private $verbose    = 0;
-    private $phar       = 0;
 
     private $config     = null;
     private $graphdb    = null;
@@ -45,7 +44,6 @@ class Container {
         $this->config = new Config($argv);
 
         $this->verbose = $this->config->verbose;
-        $this->phar    = $this->config->isPhar;
     }
 
     public function __get(string $what) {
