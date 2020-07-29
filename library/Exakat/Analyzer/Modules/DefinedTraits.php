@@ -35,7 +35,7 @@ class DefinedTraits extends TraitUsage {
         }
 
         $this->traits = $traits;
-        return parent::analyze();
+        parent::analyze();
     }
 }
 

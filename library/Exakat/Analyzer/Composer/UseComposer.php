@@ -31,11 +31,9 @@ class UseComposer extends Analyzer {
         $this->processedCount = 1;
         $this->queryCount     = 0;
         $this->rawQueryCount  = 0;
-
-        return true;
     }
 
-    public function toArray() {
+    public function toArray() : array {
         $report = array('composer.json' => $this->datastore->getHash('composer.json'));
 
         return $report;

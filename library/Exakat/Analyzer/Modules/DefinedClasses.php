@@ -35,7 +35,7 @@ class DefinedClasses extends ClassUsage {
         }
 
         $this->classes = $classes;
-        return parent::analyze();
+        parent::analyze();
     }
 }
 

@@ -34,7 +34,7 @@ class DefinedProperty extends PropertyUsage {
             return;
         }
 
-        return parent::analyze();
+        parent::analyze();
     }
 }
 

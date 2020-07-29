@@ -31,11 +31,9 @@ class Autoload extends Analyzer {
         $this->processedCount = 1;
         $this->queryCount     = 0;
         $this->rawQueryCount  = 0;
-
-        return true;
     }
 
-    public function toArray() {
+    public function toArray() : array {
         $report = array('composer' => $this->datastore->getHash('autoload'));
 
         return $report;

@@ -33,9 +33,6 @@ class Incompilable extends Analyzer {
         $this->processedCount = 1;
         $this->queryCount     = 0;
         $this->rawQueryCount  = 0;
-
-        // This is not actually done here....
-        return true;
     }
 
     public function toArray() {

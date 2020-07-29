@@ -30,10 +30,9 @@ class Services extends Analyzer {
 
     public function analyze() : void {
         // Just a place holder
-        return true;
     }
 
-    public function toArray() {
+    public function toArray() : array {
         if ($this->report === null) {
             $this->hasResults();
         }

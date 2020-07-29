@@ -34,7 +34,7 @@ class DefinedClassConstants extends ClassConstantUsage {
             return;
         }
 
-        return parent::analyze();
+        parent::analyze();
     }
 }
 

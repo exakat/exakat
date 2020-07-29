@@ -35,7 +35,7 @@ class DefinedInterfaces extends InterfaceUsage {
         }
 
         $this->interfaces = $interfaces;
-        return parent::analyze();
+        parent::analyze();
     }
 }
 
