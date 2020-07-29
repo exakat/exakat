@@ -1,0 +1,73 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          26
+          Label : ARGUMENT
+            27
+          Label : ATTRIBUTE
+            5
+          Label : ATTRIBUTE
+            7
+            Label : ARGUMENT
+              9
+            Label : NAME
+              7
+          Label : ATTRIBUTE
+            10
+            Label : ARGUMENT
+              12
+              Label : ARGUMENT
+                13
+              Label : ARGUMENT
+                14
+            Label : NAME
+              10
+          Label : ATTRIBUTE
+            15
+            Label : ARGUMENT
+              21
+              Label : LEFT
+                17
+                Label : LEFT
+                  14
+                Label : RIGHT
+                  18
+                  Label : CODE
+                    20
+                    Label : LEFT
+                      19
+                    Label : RIGHT
+                      19
+              Label : RIGHT
+                22
+            Label : ARGUMENT
+              17
+              Label : LEFT
+                18
+                Label : CODE
+                  20
+                  Label : LEFT
+                    24
+                  Label : RIGHT
+                    25
+              Label : RIGHT
+                14
+            Label : NAME
+              15
+          Label : BLOCK
+            30
+            Label : EXPRESSION
+              27
+          Label : DEFINITION
+            9
+          Label : NAME
+            26
+          Label : RETURNTYPE
+            29

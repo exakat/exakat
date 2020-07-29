@@ -442,6 +442,7 @@ class Load extends Tasks {
             $this->phptokens::T_GLOBAL                   => 'processGlobalVariable',
 
             $this->phptokens::T_DOC_COMMENT              => 'processPhpdoc',
+            $this->phptokens::T_ATTRIBUTE                => 'processAttribute',
         );
 
         $this->cases = new NestedCollector();
@@ -1653,11 +1654,7 @@ class Load extends Tasks {
 
         $this->checkPhpdoc();
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
-                // It is an attribute
-                $this->processNext();
-                continue;
-            }
+            $this->checkAttribute();
             $cpm = $this->processNext();
 
             $this->popExpression();
@@ -2267,12 +2264,14 @@ class Load extends Tasks {
     private function processParameters(string $atom): AtomInterface {
         $current = $this->id;
         $arguments = $this->addAtom($atom, $current);
+        $this->makeAttributes($arguments);
 
         $this->currentFunction[] = $arguments;
         $this->currentMethod[]   = $arguments;
 
         $argumentsList  = array();
 
+        $this->checkAttribute();
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
             $void = $this->addAtomVoid();
             $void->rank = 0;
@@ -2304,6 +2303,8 @@ class Load extends Tasks {
         do {
             do {
                 $this->checkPhpdoc();
+                $this->checkAttribute();
+
                 // PHP 8.0's trailing comma in signature
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_PARENTHESIS) {
                     $fullcode[] = ' ';
@@ -2311,12 +2312,7 @@ class Load extends Tasks {
                     break 1;
                 }
 
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
-                    // attributes
-                    $this->processNext();
-
-                    continue;
-                }
+                $this->checkAttribute();
 
                 ++$argsMax;
                 if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PUBLIC,
@@ -4196,6 +4192,13 @@ class Load extends Tasks {
         }
     }
 
+    private function checkAttribute(): void {
+        while($this->tokens[$this->id + 1][0] === $this->phptokens::T_ATTRIBUTE){
+            ++$this->id;
+            $this->processAttribute();
+        }
+    }
+
     private function processParenthesis(): AtomInterface {
         $current = $this->id;
         $parenthese = $this->addAtom('Parenthesis', $current);
@@ -5452,10 +5455,7 @@ class Load extends Tasks {
     private function processNew(): AtomInterface {
         $current = $this->id;
 
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SL) {
-            ++$this->id;
-            $this->processBitshift();
-        }
+        $this->checkAttribute();
 
         $this->contexts->toggleContext(Context::CONTEXT_NEW);
         $noSequence = $this->contexts->isContext(Context::CONTEXT_NOSEQUENCE);
@@ -6032,26 +6032,31 @@ class Load extends Tasks {
         return $phpDoc;
     }
 
-    private function processBitshift(): AtomInterface {
-        if ($this->hasExpression() ){
-            // Classic bitshift expression
-            return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
-        } else {
-            // PHP 8.0 attributes
-            do {
-                $attribute = $this->processNext();
-            } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SR), \STRICT_COMPARISON));
-
-            // skip >>
-            ++$this->id;
-            $this->popExpression();
-
-            $attribute->fullcode = '<< ' . $attribute->fullcode . ' >>';
-
-            $this->attributes[] = $attribute;
-        }
+    private function processAttribute(): AtomInterface {
+//        ++$this->id;
+        // PHP 8.0 attributes
+        /*
+        do {
+            $attribute = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_FUNCTION), \STRICT_COMPARISON));
+        print_r($this->tokens[$this->id]);
+        $attribute = $this->processNextAsIdentifier();
+        */
+        $attribute = $this->processNext();
+        $this->popExpression();
+        print_r($attribute);
+        print_r($this->tokens[$this->id]);
+    
+        $attribute->fullcode = '@@ ' . $attribute->fullcode;
+    
+        $this->attributes[] = $attribute;
 
         return $attribute;
+    }
+
+    private function processBitshift(): AtomInterface {
+        // Classic bitshift expression
+        return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processIsset(): AtomInterface {

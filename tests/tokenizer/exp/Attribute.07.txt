@@ -1,0 +1,393 @@
+test
+Label : GLOBAL
+  25
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+Label : PROJECT
+  1
+  Label : DEFINITION
+    25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+    Label : DEFINITION
+      25
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONST
+            8
+            Label : CONST
+              8
+              Label : NAME
+                9
+              Label : VALUE
+                11
+          Label : DEFINITION
+            6
+          Label : NAME
+            6
+        Label : EXPRESSION
+          5
+          Label : CONST
+            8
+            Label : CONST
+              8
+              Label : DEFINITION
+                22
+                Label : CLASS
+                  21
+                Label : CONSTANT
+                  9
+              Label : DEFINITION
+                22
+                Label : CLASS
+                  21
+                Label : CONSTANT
+                  9
+              Label : NAME
+                9
+              Label : VALUE
+                14
+          Label : DEFINITION
+            21
+          Label : DEFINITION
+            21
+          Label : DEFINITION
+            21
+          Label : DEFINITION
+            21
+          Label : DEFINITION
+            12
+          Label : DEFINITION
+            12
+          Label : METHOD
+            10
+            Label : ARGUMENT
+              15
+            Label : BLOCK
+              17
+              Label : EXPRESSION
+                18
+                Label : RETURN
+                  23
+                  Label : ARGUMENT
+                    24
+                    Label : ATTRIBUTE
+                      19
+                      Label : ARGUMENT
+                        22
+                        Label : CLASS
+                          21
+                      Label : ARGUMENT
+                        22
+                        Label : CLASS
+                          21
+                        Label : CONSTANT
+                          9
+                      Label : NAME
+                        19
+                    Label : DEFAULT
+                      15
+                    Label : NAME
+                      24
+                    Label : TYPEHINT
+                      15
+                  Label : ATTRIBUTE
+                    19
+                    Label : ARGUMENT
+                      22
+                      Label : CLASS
+                        21
+                    Label : ARGUMENT
+                      22
+                      Label : CLASS
+                        21
+                      Label : CONSTANT
+                        9
+                    Label : NAME
+                      19
+                  Label : BLOCK
+                    17
+                    Label : EXPRESSION
+                      15
+                  Label : RETURNTYPE
+                    15
+            Label : DEFINITION
+              22
+              Label : CLASS
+                12
+              Label : METHOD
+                10
+                Label : ARGUMENT
+                  15
+                Label : NAME
+                  10
+            Label : DEFINITION
+              22
+              Label : CLASS
+                12
+              Label : METHOD
+                10
+                Label : ARGUMENT
+                  15
+                Label : NAME
+                  10
+            Label : NAME
+              10
+            Label : RETURNED
+              23
+              Label : ARGUMENT
+                24
+                Label : ATTRIBUTE
+                  19
+                  Label : ARGUMENT
+                    22
+                    Label : CLASS
+                      21
+                  Label : ARGUMENT
+                    22
+                    Label : CLASS
+                      21
+                    Label : CONSTANT
+                      9
+                  Label : NAME
+                    19
+                Label : DEFAULT
+                  15
+                Label : NAME
+                  24
+                Label : TYPEHINT
+                  15
+              Label : ATTRIBUTE
+                19
+                Label : ARGUMENT
+                  22
+                  Label : CLASS
+                    21
+                Label : ARGUMENT
+                  22
+                  Label : CLASS
+                    21
+                  Label : CONSTANT
+                    9
+                Label : NAME
+                  19
+              Label : BLOCK
+                17
+                Label : EXPRESSION
+                  15
+              Label : RETURNTYPE
+                15
+            Label : RETURNTYPE
+              15
+          Label : NAME
+            12
+        Label : EXPRESSION
+          27
+          Label : LEFT
+            25
+          Label : RIGHT
+            28
+            Label : NEW
+              29
+              Label : ARGUMENT
+                22
+                Label : CLASS
+                  12
+                Label : METHOD
+                  10
+                  Label : ARGUMENT
+                    15
+                  Label : NAME
+                    10
+              Label : NAME
+                29
+        Label : EXPRESSION
+          31
+          Label : ARGUMENT
+            34
+            Label : METHOD
+              37
+              Label : ARGUMENT
+                15
+              Label : NAME
+                37
+            Label : OBJECT
+              35
+              Label : INDEX
+                36
+              Label : VARIABLE
+                34
+                Label : METHOD
+                  32
+                  Label : ARGUMENT
+                    15
+                  Label : NAME
+                    32
+                Label : OBJECT
+                  25
+          Label : NAME
+            31
+        Label : EXPRESSION
+          31
+          Label : ARGUMENT
+            34
+            Label : METHOD
+              37
+              Label : ARGUMENT
+                15
+              Label : NAME
+                37
+            Label : OBJECT
+              35
+              Label : INDEX
+                36
+              Label : VARIABLE
+                34
+                Label : METHOD
+                  32
+                  Label : ARGUMENT
+                    15
+                  Label : NAME
+                    32
+                Label : OBJECT
+                  35
+                  Label : INDEX
+                    36
+                  Label : VARIABLE
+                    34
+                    Label : METHOD
+                      39
+                      Label : ARGUMENT
+                        15
+                      Label : NAME
+                        39
+                    Label : OBJECT
+                      25
+          Label : NAME
+            31
+        Label : EXPRESSION
+          41
+          Label : ARGUMENT
+            42
+        Label : EXPRESSION
+          27
+          Label : LEFT
+            25
+          Label : RIGHT
+            28
+            Label : NEW
+              29
+              Label : ARGUMENT
+                34
+                Label : METHOD
+                  43
+                  Label : ARGUMENT
+                    45
+                  Label : ARGUMENT
+                    22
+                    Label : CLASS
+                      6
+                  Label : NAME
+                    43
+                Label : OBJECT
+                  22
+                  Label : CLASS
+                    12
+                  Label : METHOD
+                    10
+                    Label : ARGUMENT
+                      15
+                    Label : NAME
+                      10
+              Label : NAME
+                29
+        Label : EXPRESSION
+          31
+          Label : ARGUMENT
+            34
+            Label : METHOD
+              37
+              Label : ARGUMENT
+                15
+              Label : NAME
+                37
+            Label : OBJECT
+              35
+              Label : INDEX
+                36
+              Label : VARIABLE
+                34
+                Label : METHOD
+                  32
+                  Label : ARGUMENT
+                    15
+                  Label : NAME
+                    32
+                Label : OBJECT
+                  25
+          Label : NAME
+            31
+        Label : EXPRESSION
+          31
+          Label : ARGUMENT
+            34
+            Label : METHOD
+              37
+              Label : ARGUMENT
+                15
+              Label : NAME
+                37
+            Label : OBJECT
+              35
+              Label : INDEX
+                36
+              Label : VARIABLE
+                34
+                Label : METHOD
+                  32
+                  Label : ARGUMENT
+                    15
+                  Label : NAME
+                    32
+                Label : OBJECT
+                  35
+                  Label : INDEX
+                    36
+                  Label : VARIABLE
+                    34
+                    Label : METHOD
+                      39
+                      Label : ARGUMENT
+                        15
+                      Label : NAME
+                        39
+                    Label : OBJECT
+                      25
+          Label : NAME
+            31
