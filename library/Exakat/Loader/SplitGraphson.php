@@ -34,7 +34,6 @@ class SplitGraphson extends Loader {
     private const LOAD_CHUNK_LINK = 20000;
 
     private $tokenCounts   = array('Project' => 1);
-    private $functioncalls = array();
 
     private $config = null;
 
@@ -49,7 +48,6 @@ class SplitGraphson extends Loader {
 
     private $dictCode = null;
 
-    private $datastore = null;
     private $sqlite3   = null;
 
     private $log = null;
@@ -65,7 +63,6 @@ class SplitGraphson extends Loader {
         $this->pathDef        = "{$this->config->tmp_dir}/graphdb.def";
 
         $this->dictCode  = new Collector();
-        $this->datastore = exakat('datastore');
 
         $this->log = fopen($this->config->log_dir . '/loader.timing.csv', 'w+');
 
@@ -300,15 +297,6 @@ GREMLIN;
             foreach($atom->boolProperties() as $property) {
                 $properties[$property][] = $atom->id;
             }
-
-            if ($atom->atom === 'Functioncall' &&
-                !empty($atom->fullnspath)) {
-                if (isset($this->functioncalls[$atom->fullnspath])) {
-                    ++$this->functioncalls[$atom->fullnspath];
-                } else {
-                    $this->functioncalls[$atom->fullnspath] = 1;
-                }
-            }
         }
 
         foreach($links as &$link) {
@@ -366,7 +354,8 @@ GREMLIN;
             $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
         }
 
-        $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
+        $datastore = exakat('datastore');
+        $datastore->addRow('dictionary', $this->dictCode->getRecent());
     }
 
     private function saveNodes(): void {
