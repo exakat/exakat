@@ -29,6 +29,7 @@ class MissingAbstractMethod extends Analyzer {
         // abstract class x { abstract function foo() {}}
         // class y extends x { NO function foo() {}}
         $this->atomIs(self::CLASSES_ALL)
+             ->isNot('abstract', true)
              ->goToAllParents(self::EXCLUDE_SELF)
              ->atomIs(self::CLASSES_ALL)
              ->is('abstract', true)
