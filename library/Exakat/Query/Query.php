@@ -134,7 +134,7 @@ class Query {
 
     public function prepareSide(): Command {
         if ($this->stopped === self::QUERY_STOPPED) {
-            return new Command(Query::NO_QUERY);
+            return new Command(self::NO_QUERY);
         }
 
         $commands = array_column($this->commands, 'gremlin');
@@ -144,7 +144,7 @@ class Query {
 
         if (in_array(self::STOP_QUERY, $commands) !== false) {
             $this->commands = array_pop($this->sides);
-            return new Command(Query::STOP_QUERY);
+            return new Command(self::STOP_QUERY);
         }
 
         $query = '__.' . implode(".\n", $commands);

@@ -99,7 +99,7 @@ class Radwellcode extends Reports {
             }
         }
 
-        if ($name === Reports::STDOUT) {
+        if ($name === self::STDOUT) {
             echo $text;
             return '';
         } else {

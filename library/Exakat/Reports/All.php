@@ -33,11 +33,11 @@ class All extends Reports {
                       'Onepagejson',
                       'Topology',
                       );
-        $reports = array_diff(Reports::$FORMATS, $omit);
+        $reports = array_diff(self::$FORMATS, $omit);
 
         foreach($reports as $reportName) {
             display("Reporting with $reportName\n----------------------------------------\n");
-            $reportClass = Reports::getReportClass($reportName);
+            $reportClass = self::getReportClass($reportName);
 
             $report = new $reportClass($this->config);
             $report->generate($folder, $report::FILE_FILENAME ===  self::STDOUT ? self::FILE_FILENAME : $report::FILE_FILENAME);
@@ -48,7 +48,7 @@ class All extends Reports {
 
     public function dependsOnAnalysis(): array {
         $themesToRun = array(array());
-        foreach(Reports::$FORMATS as $format) {
+        foreach(self::$FORMATS as $format) {
             $reportClass = "\Exakat\Reports\\$format";
             if (!class_exists($reportClass)) {
                 continue;

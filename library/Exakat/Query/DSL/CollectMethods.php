@@ -30,14 +30,16 @@ class CollectMethods extends DSL {
 
         $this->assertVariable($variable, self::VARIABLE_WRITE);
 
-        $command = new Command('where( 
-__.sideEffect{ ' . $variable . ' = []; }
-  .out("METHOD", "MAGICMETHOD")
-  .out("NAME")
-  .sideEffect{ ' . $variable . '.add(it.get().value("lccode")) ; }
-  .fold() 
-)
-');
+        $command = new Command(<<<GREMLIN
+ sideEffect{ {$variable} = []; }
+.where( 
+    __.out("METHOD", "MAGICMETHOD")
+      .out("NAME")
+      .sideEffect{ {$variable}.add(it.get().value("lccode")) ; }
+      .fold() 
+    )
+GREMLIN
+);
         return $command;
     }
 }

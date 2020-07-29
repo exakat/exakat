@@ -39,7 +39,7 @@ class ExtendedTypehints extends Complete {
              ->as('result')
              ->inIs('DEFINITION')
              ->atomIs(array('Interface', 'Class'))
-             ->goToAllChildren(Analyzer::EXCLUDE_SELF)
+             ->goToAllChildren(self::EXCLUDE_SELF)
              ->raw('not(where(__.out("DEFINITION").where(eq("result"))))')
              ->addETo('DEFINITION', 'result');
         $this->prepareQuery();
@@ -52,7 +52,7 @@ class ExtendedTypehints extends Complete {
              ->as('result')
              ->inIs('DEFINITION')
              ->atomIs(array('Interface', 'Class'))
-             ->goToAllChildren(Analyzer::EXCLUDE_SELF)
+             ->goToAllChildren(self::EXCLUDE_SELF)
              ->raw('not(where(__.out("DEFINITION").where(eq("result"))))')
              ->addETo('DEFINITION', 'result');
         $this->prepareQuery();

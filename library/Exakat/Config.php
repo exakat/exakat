@@ -120,10 +120,10 @@ class Config extends Configsource {
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
-            if (($file = $this->dotExakatConfig->loadConfig(null)) === Configsource::NOT_LOADED) {
+            if (($file = $this->dotExakatConfig->loadConfig(null)) === self::NOT_LOADED) {
                 $this->dotExakatYamlConfig = new DotExakatYamlConfig();
                 $file = $this->dotExakatYamlConfig->loadConfig(null);
-                if ($file !== Configsource::NOT_LOADED) {
+                if ($file !== self::NOT_LOADED) {
                     $this->configFiles[] = $file;
                 }
             } else {
