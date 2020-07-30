@@ -178,7 +178,7 @@ abstract class Analyzer {
     const MAX_SEARCHING = 8;     // hard limit for searching the tree (failing the rest is not bad)
     const TIME_LIMIT    = 1000;  // 1s, used with timelimit() from gremlin.
 
-    private static $rulesId         = null;
+    private static $rulesId         = array();
 
     protected $rulesets  = null;
 
@@ -263,7 +263,7 @@ abstract class Analyzer {
         $this->initNewQuery();
     }
 
-    public function init(int $analyzerId = null): int {
+    public function init(int $analyzerId = null) {
         // always reload list of analysis from the database
         $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "id").select("analyzer", "id").by("analyzer").by(id);
@@ -317,7 +317,7 @@ GREMLIN;
             $this->analyzerId = $analyzerId;
         }
 
-        assert($this->analyzerId != 0, self::class . ' was inited with Id 0. Can\'t save with that!');
+        assert(!empty($this->analyzerId), self::class . ' was inited with Id '.var_export($this->analyzerId, true).'. Can\'t save with that!');
 
         return $this->analyzerId;
     }

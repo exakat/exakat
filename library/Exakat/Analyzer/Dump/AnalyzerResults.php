@@ -68,6 +68,8 @@ abstract class AnalyzerResults extends AnalyzerDump {
             $this->prepareForDump($this->dumpQueries);
         }
 
+        $this->gremlin->query("g.V({$this->analyzerId}).property(\"count\", ".($this->rowCount).")", array());
+
         $this->dumpQueries = array();
 
         return 0;

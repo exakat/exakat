@@ -176,8 +176,8 @@ class Analyze extends Tasks {
         }
 
         if (isset($this->analyzed[$analyzer_class]) && $this->config->noRefresh === true) {
-                display( "$analyzer_class is already processed (1)\n");
-                return $this->analyzed[$analyzer_class];
+            display( "$analyzer_class is already processed (1)\n");
+            return $this->analyzed[$analyzer_class];
         }
 
         $analyzer->init();
@@ -249,6 +249,9 @@ class Analyze extends Tasks {
             $this->log->log("$analyzer_class\t" . ($end - $begin) . "\t$total_results\t$processed\t$queries\t$rawQueries");
             // storing the number of row found in Hash table (datastore)
             $this->datastore->addRow('analyzed', array($analyzer_class => $total_results ) );
+
+            // This also counts the analysis that don't leave data in the database.
+            $this->analyzed[$analyzer_class] = $total_results;
         }
 
         $this->checkAnalyzed();
@@ -263,7 +266,7 @@ GREMLIN;
         $res = $this->gremlin->query($query);
 
         foreach($res as list('analyzer' => $analyzer, 'count' => $count)) {
-            if ($count != -1 && !isset($this->analyzed[$analyzer])) {
+            if ($count != -1) {
                 $this->analyzed[$analyzer] = $count;
             }
         }
