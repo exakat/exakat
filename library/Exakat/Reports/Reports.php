@@ -62,8 +62,6 @@ abstract class Reports {
     public function __construct() {
         $this->config    = exakat('config');
         $this->docs      = exakat('docs');
-//        $this->datastore = exakat('datastore');
-//        $this->datastore->reuse();
 
         if (file_exists($this->config->dump)) {
             $this->dump      = Dump::factory($this->config->dump);
