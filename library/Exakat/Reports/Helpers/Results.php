@@ -151,6 +151,10 @@ class Results {
             $this->load();
         }
 
+        if (empty($this->values)) {
+            return '';
+        }
+
         if ($col === '') {
             $first = array_keys($this->values[0])[0];
             return $this->values[0][$first];
