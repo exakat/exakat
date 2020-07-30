@@ -30,7 +30,18 @@ class StubsJson extends Reports {
     const INDENTATION = '    ';
 
     public function _generate(array $analyzerList): string {
-        $data = array('versions' => array());
+        $this->phpFunctions = parse_ini_file("{$this->config->dir_root}/data/php_functions.ini")['functions'];
+
+        $data = array('headers'  => array('generation'       => date('c'),
+                                          'php'              => $this->dump->fetchHash('php_version')->toString(),
+                                          'exakat_version'   => $this->dump->fetchHash('exakat_version')->toString(),
+                                          'exakat_build'     => $this->dump->fetchHash('exakat_build')->toString(),
+                                          'vcs_url'          => $this->dump->fetchHash('vcs_url')->toString()             ?: '',
+                                          'vcs_branch'       => $this->dump->fetchHash('vcs_branch')->toString()          ?: '',
+                                          'vcs_revision'     => $this->dump->fetchHash('vcs_revision')->toString()        ?: '',
+                                          'code_last_commit' => $this->dump->fetchHash('vcs_url')->toInt() != 0 ? date('c', $this->dump->fetchHash('vcs_url')->toInt()) : '',
+                                          ),
+                      'versions' => array());
 
         // namespaces
         $res = $this->dump->fetchTable('namespaces');
@@ -50,7 +61,6 @@ class StubsJson extends Reports {
             $data['versions'][$namespaces[$constant['namespaceId']]]['constants'][$constant['constant']] = $details;
         }
 
-
         $methods = array();
         $function2ns = array();
         // functions
@@ -61,6 +71,7 @@ class StubsJson extends Reports {
             $details = array('returntypes' => explode('|', $function['returntype']),
                              'reference'   => $function['reference'] === 1,
                              'phpdoc'      => $function['phpdoc'],
+                             'php'         => $function['namespaceId'] === 1 ? in_array(mb_strtolower($function['function']), $this->phpFunctions, \STRICT_COMPARISON) : false,
                              );
             $data['versions'][$namespaces[$function['namespaceId']]]['functions'][$function['function']] = $details;
 
