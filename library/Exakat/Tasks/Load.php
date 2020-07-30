@@ -366,8 +366,8 @@ class Load extends Tasks {
 
             $this->phptokens::T_INLINE_HTML              => 'processInlinehtml',
 
-            $this->phptokens::T_INC                      => 'processPlusplus',
-            $this->phptokens::T_DEC                      => 'processPlusplus',
+            $this->phptokens::T_INC                      => 'processPrePlusplus',
+            $this->phptokens::T_DEC                      => 'processPrePlusplus',
 
             $this->phptokens::T_WHILE                    => 'processWhile',
             $this->phptokens::T_DO                       => 'processDo',
@@ -3032,33 +3032,32 @@ class Load extends Tasks {
         return $string;
     }
 
-    private function processPlusplus(): AtomInterface {
-        if ($this->hasExpression()) {
-            $previous = $this->popExpression();
-            // postplusplus
-            $plusplus = $this->addAtom('Postplusplus', $this->id);
+    private function processPostPlusplus(AtomInterface $previous): AtomInterface {
+        ++$this->id;
+        $this->popExpression();
+        $plusplus = $this->addAtom('Postplusplus', $this->id);
+    
+        $this->addLink($plusplus, $previous, 'POSTPLUSPLUS');
+    
+        $plusplus->fullcode = $previous->fullcode . $this->tokens[$this->id][1];
+    
+        $this->pushExpression($plusplus);
+        $this->runPlugins($plusplus, array('POSTPLUSPLUS' => $previous));
+    
+        $this->checkExpression();
 
-            $this->addLink($plusplus, $previous, 'POSTPLUSPLUS');
+        return $plusplus;
+    }
 
-            $plusplus->fullcode = $previous->fullcode . $this->tokens[$this->id][1];
-
-            $this->pushExpression($plusplus);
-            $this->runPlugins($plusplus, array('POSTPLUSPLUS' => $previous));
-
-            $this->checkExpression();
-
-            return $plusplus;
-        } else {
-            // preplusplus
-            $operator = $this->addAtom('Preplusplus', $this->id);
-            $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'PREPLUSPLUS');
-            $operator = $this->popExpression();
-            $this->pushExpression($operator);
-
-            $this->checkExpression();
-
-            return $operator;
-        }
+    private function processPrePlusplus(): AtomInterface {
+        $operator = $this->addAtom('Preplusplus', $this->id);
+        $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'PREPLUSPLUS');
+        $operator = $this->popExpression();
+        $this->pushExpression($operator);
+    
+        $this->checkExpression();
+    
+        return $operator;
     }
 
     private function processStatic(): AtomInterface {
@@ -4948,6 +4947,14 @@ class Load extends Tasks {
             return $this->processFunctioncall();
         }
 
+        // for $a++
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_INC,
+                                                            $this->phptokens::T_DEC,
+                                                            ),
+                                \STRICT_COMPARISON)) {
+            return $this->processPostPlusplus($nsname);
+        }
+
         // for array appends
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET &&
             $this->tokens[$this->id + 2][0] === $this->phptokens::T_CLOSE_BRACKET) {
@@ -5872,10 +5879,10 @@ class Load extends Tasks {
         // Simply skipping the ...
         $finals = $this->precedence->get($this->phptokens::T_ELLIPSIS);
         while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON)) {
-            $this->processNext();
+            $operand = $this->processNext();
         }
 
-        $operand = $this->popExpression();
+        $this->popExpression();
         $operand->fullcode  = '...' . $operand->fullcode;
         $operand->variadic  = self::VARIADIC;
 
