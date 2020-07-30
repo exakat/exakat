@@ -602,7 +602,7 @@ class Load extends Tasks {
 
         $nbTokens = 0;
         if ($this->config->verbose && !$this->config->quiet) {
-           $progressBar = new Progressbar(0, count($files) + 1, $this->config->screen_cols);
+           $progressBar = new Progressbar(0, count($files), $this->config->screen_cols);
         }
 
         foreach($files as $file) {
