@@ -788,7 +788,7 @@ sideEffect{
     phpdoc = '';
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
-.where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
+.where( __.out('TYPEHINT').not(hasLabel('Void')).not(__.in('DEFAULT')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
 .where( __.out('DEFAULT').not(hasLabel('Void')).not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
 .map{ 
@@ -852,7 +852,7 @@ GREMLIN
     typehint = [];
     typehint_fnp = [];
 }
-     .where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
+     .where( __.out('TYPEHINT').not(hasLabel('Void')).not(__.in('DEFAULT')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
      .where( __.out('DEFAULT').not(hasLabel('Void')).not(where( __.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
      .where( __.out('PHPDOC').sideEffect{ phpdoc = it.get().value("fullcode")}.fold())
      .in("PPP").hasLabel("Class", "Interface", "Trait")
@@ -1201,6 +1201,7 @@ GREMLIN
         $total = $this->storeToDumpArray('functions', $toDump);
         display("$total functions\n");
 
+        // Functions parameters
         $query = $this->newQuery('Function parameters');
         $query->atomIs('Parameter', Analyzer::WITHOUT_CONSTANTS)
               ->inIs('ARGUMENT')
@@ -1225,7 +1226,7 @@ where( __.sideEffect{ fonction = it.get().label().toString().toLowerCase();
     phpdoc = '';
 }
 .where( __.out('NAME').sideEffect{ name = it.get().value("fullcode")}.fold())
-.where( __.out('TYPEHINT').not(hasLabel('Void')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
+.where( __.out('TYPEHINT').not(hasLabel('Void')).not(__.in('DEFAULT')).sideEffect{ typehint.add(it.get().value("fullcode")); typehint_fnp.add(it.get().value("fullnspath"));}.fold())
 .where( __.out('DEFAULT').not(hasLabel('Void')).not(where(__.in("RIGHT"))).sideEffect{ init = it.get().value("fullcode")}.fold())
 .where( __.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold())
 .map{ 
@@ -1256,6 +1257,8 @@ GREMLIN
             if (!isset($methodIds[$row['fullnspath']])) {
                 continue;
             }
+            
+            print_r($row);
 
             $toDump[] = array( '',
                                $row['name'],
