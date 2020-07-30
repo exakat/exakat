@@ -61,7 +61,7 @@ class Boolval extends Plugin {
             case 'Self'          :
             case 'Parent'        :
             case 'Closure'       :
-            case 'Sequence'      :
+//            case 'Sequence'      :
             case 'Magicconstant' :
                 $atom->boolean = true;
                 break;
