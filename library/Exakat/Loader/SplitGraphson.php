@@ -92,7 +92,7 @@ class SplitGraphson extends Loader {
         $begin = microtime(true);
         $query = 'g.V().hasLabel("Project").id();';
         $res = $this->graphdb->query($query);
-        $project_id = $res->toInt();
+        $project_id = $res->toUuid();
 
         $query = 'g.V().hasLabel("File").not(where( __.in("PROJECT"))).addE("PROJECT").from(__.V(' . $project_id . '));';
         $this->graphdb->query($query);
@@ -295,7 +295,7 @@ GREMLIN;
             }
             $json[$atom->id] = $atom->toGraphsonLine($this->id);
             foreach($atom->boolProperties() as $property) {
-                $properties[$property][] = $atom->id;
+                $properties[$property][] = $this->graphdb->fixId($atom->id);
             }
         }
 
@@ -317,7 +317,9 @@ GREMLIN;
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);
 
-            $j->properties['lccode'][0]->value = $this->dictCode->get($j->properties['lccode'][0]->value);
+            if (isset($j->properties['lccode'][0]->value)) {
+                $j->properties['lccode'][0]->value = $this->dictCode->get($j->properties['lccode'][0]->value);
+            }
 
             if (isset($j->properties['propertyname']) ) {
                 $j->properties['propertyname'][0]->value = $this->dictCode->get($j->properties['propertyname'][0]->value);

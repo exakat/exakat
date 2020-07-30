@@ -144,29 +144,45 @@ class Atom implements AtomInterface {
                              );
 
         $properties = array();
-        $list = array_diff_key((array) $this, array(
-                               'id'          => 0, 
-                               'atom'        => 0, 
-                               'noscream'    => 0, 
-                               'reference'   => 0, 
-                               'variadic'    => 0, 
-                               'heredoc'     => 0, 
-                               'flexible'    => 0,
-                               'constant'    => 0,
-                               'enclosing'   => 0,
-                               'final'       => 0,
-                               'boolean'     => 0,
-                               'bracket'     => 0,
-                               'close_tag'   => 0,
-                               'trailing'    => 0,
-                               'alternative' => 0,
-                               'absolute'    => 0,
-                               'abstract'    => 0,
-                               'isRead'      => 0,
-                               'isModified'  => 0,
-                               'static'      => 0,
-                               'isNull'      => 0,
-                               ));
+        
+        // The array list the properties that will be kept (except for default)
+        $atomsValues = array('Sequence2' => array('code'        => 0,
+                                                 'line'        => 0,
+                                                 'count'       => 0,
+                                                 'fullcode'    => 0,
+                                                 ),
+
+                             // This one is used to skip the values configure
+                             'to_skip'  => array('id'          => 0, 
+                                                 'atom'        => 0, 
+                                                 'noscream'    => 0, 
+                                                 'reference'   => 0, 
+                                                 'variadic'    => 0, 
+                                                 'heredoc'     => 0, 
+                                                 'flexible'    => 0,
+                                                 'constant'    => 0,
+                                                 'enclosing'   => 0,
+                                                 'final'       => 0,
+                                                 'boolean'     => 0,
+                                                 'bracket'     => 0,
+                                                 'close_tag'   => 0,
+                                                 'trailing'    => 0,
+                                                 'alternative' => 0,
+                                                 'absolute'    => 0,
+                                                 'abstract'    => 0,
+                                                 'isRead'      => 0,
+                                                 'isModified'  => 0,
+                                                 'static'      => 0,
+                                                 'isNull'      => 0,
+                               )
+                            );
+
+        if (isset($atomsValues[$this->atom])) {
+            $list = array_intersect_key((array) $this, $atomsValues[$this->atom]);
+        } else {
+            $list = array_diff_key((array) $this, $atomsValues['to_skip']);
+        }
+
         foreach($list as $l => $value) {
             if ($value === null) { continue; }
             
@@ -180,7 +196,7 @@ class Atom implements AtomInterface {
                 $value = $this->lccode;
             }
 
-            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode' )) &&
+            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode')) &&
                 $value === '') {
                 continue;
             }
