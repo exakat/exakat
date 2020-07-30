@@ -57,7 +57,7 @@ class HeredocDelimiterFavorite extends Analyzer {
             return;
         }
 
-        $this->atomIs(array('Heredoc', 'Nowdoc'))
+        $this->atomIs(array('Heredoc'))
              ->raw('filter{ it.get().value("delimiter").trim() in *** }', $types);
         $this->prepareQuery();
     }
