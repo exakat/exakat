@@ -1861,14 +1861,14 @@ HTML;
         $info[] = array('Number of lines of code', $this->dump->fetchHash('loc')->toString());
         $info[] = array('Number of lines of code with comments', $this->dump->fetchHash('locTotal')->toString());
 
-        $info[] = array('Analysis execution date', date('r', (int) $this->dump->fetchHash('audit_end')->toString()));
+        $info[] = array('Analysis execution date', date('r', $this->dump->fetchHash('audit_end')->toInt()));
         $info[] = array('Analysis runtime', duration($this->dump->fetchHash('audit_end')->toString() - $this->dump->fetchHash('audit_start')->toString()));
         $info[] = array('Report production date', date('r', time()));
 
         $php = exakat('php');
         $info[] = array('PHP used', $this->config->phpversion . ' (' . $php->getConfiguration('phpversion') . ')');
 
-        $info[] = array('Exakat version', Exakat::VERSION . ' ( Build ' . Exakat::BUILD . ') ');
+        $info[] = array('Exakat version', $this->dump->fetchHash('exakat_version')->toString() . ' ( Build ' . $this->dump->fetchHash('exakat_build')->toString() . ') ');
         $list = $this->config->ext->getPharList();
         $html = array();
         foreach(array_keys($list) as $name) {
