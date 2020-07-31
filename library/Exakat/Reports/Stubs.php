@@ -145,9 +145,17 @@ HEADERS;
             }
         }
 
-        $result[] = self::INDENTATION . "}\n";
-
-        return join(PHP_EOL, $result);
+        if (count($result) === 1) {
+            $result[0] .= "}\n";
+        } else {
+            $result[] = self::INDENTATION . "}\n";
+        }
+        
+        if ($class->php === true) {
+            return self::INDENTATION."if (!class_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
+        } else {
+            return join(PHP_EOL, $result);
+        }
     }
 
     private function trait(string $name, object $trait): string {
@@ -176,9 +184,17 @@ HEADERS;
             }
         }
 
-        $result[] = self::INDENTATION . "}\n";
-
-        return join(PHP_EOL, $result);
+        if (count($result) === 1) {
+            $result[0] .= "}\n";
+        } else {
+            $result[] = self::INDENTATION . "}\n";
+        }
+        
+        if ($trait->php === true) {
+            return self::INDENTATION."if (!trait_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
+        } else {
+            return join(PHP_EOL, $result);
+        }
     }
 
     private function interface(string $name, object $interface): string {
@@ -197,9 +213,17 @@ HEADERS;
             }
         }
 
-        $result[] = self::INDENTATION . "}\n";
-
-        return join(PHP_EOL, $result);
+        if (count($result) === 1) {
+            $result[0] .= "}\n";
+        } else {
+            $result[] = self::INDENTATION . "}\n";
+        }
+        
+        if ($interface->php === true) {
+            return self::INDENTATION."if (!interface_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
+        } else {
+            return join(PHP_EOL, $result);
+        }
     }
 
     private function constant(string $name, object $values, $type = 'global'): string {

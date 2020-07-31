@@ -28,9 +28,18 @@ class StubsJson extends Reports {
     const FILE_FILENAME  = 'stubs';
 
     const INDENTATION = '    ';
+    
+    private $phpFunctions = array();
+    private $phpCIT       = array();
 
     public function _generate(array $analyzerList): string {
         $this->phpFunctions = parse_ini_file("{$this->config->dir_root}/data/php_functions.ini")['functions'];
+        $this->phpFunctions = array_map('strtolower', $this->phpFunctions);
+        $this->phpCIT       = array_merge( parse_ini_file("{$this->config->dir_root}/data/php_classes.ini")['classes'],
+                                           parse_ini_file("{$this->config->dir_root}/data/php_interfaces.ini")['interfaces'],
+                                           parse_ini_file("{$this->config->dir_root}/data/php_traits.ini")['traits'],
+                                         );
+        $this->phpCIT = array_map('strtolower', $this->phpCIT);
 
         $data = array('headers'  => array('generation'       => date('c'),
                                           'php'              => $this->dump->fetchHash('php_version')->toString(),
@@ -100,6 +109,7 @@ class StubsJson extends Reports {
                              'implements' => array(),
                              'use'        => array(),
                              'useoptions' => array(),
+                             'php'        => $function['namespaceId'] === 1 ? in_array(mb_strtolower($cit['name']), $this->phpCIT, \STRICT_COMPARISON) : false,
                              );
             $data['versions'][$namespaces[$cit['namespaceId']]][$cit['type']][$cit['name']] = $details;
 
