@@ -150,6 +150,7 @@ class Atom implements AtomInterface {
                                                  'line'        => 0,
                                                  'count'       => 0,
                                                  'fullcode'    => 0,
+                                                 'rank'        => 0,
                                                  ),
 
                              // This one is used to skip the values configure

@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Dump;
 
 use Exakat\Dump\Dump;
+use Sqlite3;
 
 abstract class AnalyzerHashResults extends AnalyzerDump {
     protected $storageType = self::QUERY_ARRAYS;
@@ -45,6 +46,8 @@ abstract class AnalyzerHashResults extends AnalyzerDump {
         $chunk = 0;
         foreach($result->toArray() as $row) {
             list($name, $count) = array_values($row);
+            $name  = Sqlite3::escapeString($name);
+            $count = Sqlite3::escapeString($count);
             $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
         }
 
