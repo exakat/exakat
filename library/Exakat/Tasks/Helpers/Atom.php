@@ -36,6 +36,7 @@ class Atom implements AtomInterface {
     public $line         = Load::NO_LINE;
     public $token        = '';
     public $rank         = ''; // Not 0
+    public $rankName     = ''; 
     public $alternative  = Load::NOT_ALTERNATIVE;
     public $reference    = Load::NOT_REFERENCE;
     public $heredoc      = false;

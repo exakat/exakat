@@ -2476,11 +2476,20 @@ class Load extends Tasks {
             $argsMax    = 0;
             $argsMin    = 0;
             $rank       = -1;
+            $rankName  = '';
             $argumentsList  = array();
 
             while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON)) {
                 $initialId = $this->id;
                 ++$argsMax;
+                
+                // named parameters PHP 8.0
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING && 
+                    $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON ) {
+                    ++$this->id; 
+                    $rankName = $this->tokens[$this->id][1];
+                    ++$this->id; // skip :
+                }
 
                 while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
                                                                         $this->phptokens::T_CLOSE_PARENTHESIS,
@@ -2494,6 +2503,11 @@ class Load extends Tasks {
                     $index = $this->processNext();
                 }
                 $this->popExpression();
+                if (!empty($rankName)) {
+                    $index->rankName = '$'.$rankName;
+                    $rank_name = '';
+                    $index->fullcode = $rankName.' : '.$index->fullcode;
+                }
 
                 while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
                     if ($index === 0) {
