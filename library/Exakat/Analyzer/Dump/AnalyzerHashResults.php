@@ -46,8 +46,8 @@ abstract class AnalyzerHashResults extends AnalyzerDump {
         $chunk = 0;
         foreach($result->toArray() as $row) {
             list($name, $count) = array_values($row);
-            $name  = Sqlite3::escapeString($name);
-            $count = Sqlite3::escapeString($count);
+            $name  = Sqlite3::escapeString((string) $name);
+            $count = Sqlite3::escapeString((string) $count);
             $valuesSQL[] = "('{$this->analyzerName}', '$name', '$count') \n";
         }
 

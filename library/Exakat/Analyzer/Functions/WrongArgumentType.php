@@ -37,17 +37,14 @@ class WrongArgumentType extends Analyzer {
         // foo(3)
         $this->atomIs(self::FUNCTIONS_CALLS)
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'ranked')
-
+             ->as('arg')
              ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIs(self::TYPE_ATOMS, self::WITH_CONSTANTS)
-
+             ->atomIs(array('Boolean', 'Arrayliteral', 'String', 'Concatenation', 'Integer', 'Float', 'Addition', 'Multiplication', 'Power', 'Bitshift', 'Bitoperation', 'Logical', 'Comparison'), self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'type')
-             ->back('first')
+             ->back('arg')
 
-             ->inIs('DEFINITION')
-             ->outToParameter('ranked')
-             
+             ->goToParameterDefinition()
+
              ->not(
                 $this->side()
                      ->outIs('TYPEHINT')
