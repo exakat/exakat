@@ -10,6 +10,7 @@ interface xx {
     function usedIMethod();
 }
 
+$a = new x;
 $a->usedCMethod();
 $a->usedIMethod();
 

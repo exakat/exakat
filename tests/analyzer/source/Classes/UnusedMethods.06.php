@@ -11,6 +11,7 @@ class xx extends x {
     function unusedCMethod() {}
 }
 
+$a = new x;
 $a->usedCMethod();
 $a->usedTMethod();
 $a->usedIMethod();
