@@ -85,7 +85,7 @@ class StubsJson extends Reports {
         $cits2type = array();
         $citsFqn = array();
         $res = $this->dump->fetchTable('cit');
-//        print_r($res->toArray());die();
+
         foreach($res->toArray() as $cit) {
             $cits[$cit['id']]         = $cit['name'];
             $citsFqn[$cit['id']]      = strtolower($namespaces[$cit['namespaceId']].$cit['name']);
@@ -106,7 +106,6 @@ class StubsJson extends Reports {
             $cits2ns[$cit['id']]   = $cit['namespaceId'];
             $cits2type[$cit['id']] = $cit['type'];
         }
-//        print_r($cits2ns);
 
         // extensions
         $res = $this->dump->fetchTable('cit_implements');
@@ -118,11 +117,9 @@ class StubsJson extends Reports {
                 $data['versions'][$namespaces[$cits2ns[$cit['implementing']]]][$cits2type[$cit['implementing']]][$cits[$cit['implementing']]]['useoptions'] = explode(';', $cit['options']);
             }
         }
-//        print_r($cits);die();
 
         // class constants
         $res = $this->dump->fetchTable('classconstants');
-//        print_r($res->toArray());die();
         foreach($res->toArray() as $classconstant) {
             $details = array('value'        => $classconstant['value'],
                              'visibility'   => $classconstant['visibility'],
@@ -134,7 +131,6 @@ class StubsJson extends Reports {
 
         // properties
         $res = $this->dump->fetchTable('properties');
-//        print_r($res->toArray());die();
         foreach($res->toArray() as $property) {
             $details = array('value'        => $property['value'],
                              'visibility'   => $property['visibility'],
@@ -147,7 +143,6 @@ class StubsJson extends Reports {
         }
 
         $res = $this->dump->fetchTable('methods');
-//        print_r($res->toArray());die();
         foreach($res->toArray() as $method) {
             $details = array('visibility'   => $method['visibility'],
                              'static'       => $method['static']     === 1,
@@ -163,7 +158,6 @@ class StubsJson extends Reports {
         }
 
         $res = $this->dump->fetchTable('arguments');
-//        print_r($res->toArray());die();
         foreach($res->toArray() as $argument) {
             $details = array('name'         => $argument['name'],
                              'reference'    => $argument['reference'] === 1,

@@ -146,7 +146,7 @@ class Atom implements AtomInterface {
         $properties = array();
         
         // The array list the properties that will be kept (except for default)
-        $atomsValues = array('Sequence2' => array('code'        => 0,
+        $atomsValues = array('Sequence' => array('code'        => 0,
                                                  'line'        => 0,
                                                  'count'       => 0,
                                                  'fullcode'    => 0,

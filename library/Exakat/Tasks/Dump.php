@@ -1257,8 +1257,6 @@ GREMLIN
             if (!isset($methodIds[$row['fullnspath']])) {
                 continue;
             }
-            
-            print_r($row);
 
             $toDump[] = array( '',
                                $row['name'],

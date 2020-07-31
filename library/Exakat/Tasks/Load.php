@@ -6040,19 +6040,8 @@ class Load extends Tasks {
     }
 
     private function processAttribute(): AtomInterface {
-//        ++$this->id;
-        // PHP 8.0 attributes
-        /*
-        do {
-            $attribute = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_FUNCTION), \STRICT_COMPARISON));
-        print_r($this->tokens[$this->id]);
-        $attribute = $this->processNextAsIdentifier();
-        */
         $attribute = $this->processNext();
         $this->popExpression();
-        print_r($attribute);
-        print_r($this->tokens[$this->id]);
     
         $attribute->fullcode = '@@ ' . $attribute->fullcode;
     

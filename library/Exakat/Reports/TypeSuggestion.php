@@ -153,7 +153,6 @@ HTML;
 
         }
 
-//        print_r($complete);die();
         foreach($html as $className => &$methods) {
             $classCount = 0;
             foreach($methods as $methodName => &$returnAndArgs) {
