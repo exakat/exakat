@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Dump;
 
 use Exakat\Analyzer\Analyzer;
 
-class FossilizedMethods extends AnalyzerHashHashResults {
+class FossilizedMethods extends AnalyzerHashResults {
     protected $analyzerName = 'FossilizedMethods';
 
     public function dependsOn() : array {
@@ -33,10 +33,13 @@ class FossilizedMethods extends AnalyzerHashHashResults {
     }
 
     public function analyze() : void {
+        $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->hasNoOut('OVERWRITE')
+             ->hasIn('OVERWRITE')
              ->raw(<<<GREMLIN
-repeat(__.in("OVERWRITE").groupCount("m").by("fullnspath")).cap("m")
+project("fm").by( __.emit().repeat(__.in("OVERWRITE") ).times($MAX_LOOPING).count())
+.select('first', 'fm').by('fullcode').by()
 GREMLIN
 );
         $this->prepareQuery();

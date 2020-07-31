@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array(array('key' => 'function foo1( ) { /**/ } ',
+$expected     = array(array('key' => 'function foo1($a) { /**/ } ',
                             'value'=> 2,
                             ),
                       array('key' => 'function foo2a( ) { /**/ } ',
@@ -15,10 +15,10 @@ $expected     = array(array('key' => 'function foo1( ) { /**/ } ',
                       array('key' => 'function foo3b( ) { /**/ } ',
                             'value'=> 4,
                             ),
-                      array('key' => 'function foo3c( ) { /**/ } ',
+                      array('key' => 'function foo3c( ) : int { /**/ } ',
                             'value'=> 4,
                             ),
-                      array('key' => 'function foo3d( ) { /**/ } ',
+                      array('key' => 'function foo3d($a = 2) { /**/ } ',
                             'value'=> 3,
                             ),
                      );
