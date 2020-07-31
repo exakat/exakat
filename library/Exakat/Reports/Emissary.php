@@ -684,6 +684,10 @@ HTML;
         $this->generateCounts($section, 'Local Variable Counts', ' var.', 'Local variables');
     }
 
+    protected function generateFossilizedMethods(Section $section): void {
+        $this->generateCounts($section, 'FossilizedMethods', ' methods.', 'Methods');
+    }
+
     protected function generateParameterCounts(Section $section): void {
         $this->generateCounts($section, 'ParameterCounts', ' param.', 'Parameters');
     }

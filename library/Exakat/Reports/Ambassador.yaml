@@ -205,6 +205,11 @@ audit:
             file: parameter_counts
             method: generateParameterCounts
             icon: circle-o
+        fossilized_methods:
+            title: Fossilized Methods
+            file: fossilized_methods
+            method: generateFossilizedMethods
+            icon: circle-o
         local_variable_counts:
             title: Local Variable Counts
             file: local_variable_counts
