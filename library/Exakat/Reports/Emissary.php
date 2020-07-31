@@ -684,10 +684,6 @@ HTML;
         $this->generateCounts($section, 'Local Variable Counts', ' var.', 'Local variables');
     }
 
-    protected function generateFossilizedMethods(Section $section): void {
-        $this->generateCounts($section, 'FossilizedMethods', ' methods.', 'Methods');
-    }
-
     protected function generateParameterCounts(Section $section): void {
         $this->generateCounts($section, 'ParameterCounts', ' param.', 'Parameters');
     }
@@ -3191,6 +3187,45 @@ HTML
         $finalHTML = $this->injectBloc($finalHTML, 'DESCRIPTION',  'No result were found for this analysis.');
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $finalHTML = $this->injectBloc($finalHTML, 'CONTENT', '');
+        $this->putBasedPage($section->file, $finalHTML);
+    }
+
+    protected function generateFossilizedMethods(Section $section): void {
+        $finalHTML = $this->getBasedPage($section->source);
+
+        // List of extensions used
+        $res = $this->dump->fetchHashResults('FossilizedMethods');
+        if ($res->isEmpty()) {
+            $this->emptyResult($section);
+
+            return ;
+        }
+
+        $html = array();
+        $data = array();
+        foreach ($res->order(function(array $a, array $b) : int { return $b['value'] <=> $a['value']; })->toArray() as $value) {
+            $data[$value['key'] . ' level' . ($value['key'] == 1 ? '' : 's')] = $value['value'];
+
+            $html []= '<div class="clearfix">
+                      <div class="block-cell-name">' . $value['key'] . '</div>
+                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                  </div>';
+        }
+        $html = implode(PHP_EOL, $html);
+
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
+
+        $highchart = new Highchart();
+        $highchart->addSeries('filename',
+                              array_keys($data),
+                              array('name' => 'Fossilized Methods', 'data' => array_values($data)),
+                              );
+        $blocjs = (string) $highchart;
+
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $finalHTML = $this->injectBloc($finalHTML, 'TYPE', 'Methods');
+
         $this->putBasedPage($section->file, $finalHTML);
     }
 

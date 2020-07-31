@@ -207,28 +207,45 @@ class Results {
         $this->values = array_slice($this->values, $begin, $end);
     }
 
-    public function filter(Closure $f) {
+    public function filter(Closure $f) : self {
         if ($this->values === null) {
             $this->load();
         }
 
         $this->values = array_filter($this->values, $f);
+
+        return $this;
     }
 
-    public function order(Closure $f) {
+    public function orderBy(string $k) : self {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        $f = function(array $a, array $b) use ($k) : int { return $a[$k] <=> $b[$k]; };
+        usort($this->values, $f);
+        
+        return $this;
+    }
+
+    public function order(Closure $f) : self {
         if ($this->values === null) {
             $this->load();
         }
 
         usort($this->values, $f);
+
+        return $this;
     }
 
-    public function map(Closure $f) {
+    public function map(Closure $f) : self {
         if ($this->values === null) {
             $this->load();
         }
 
         $this->values = array_map($f, $this->values);
+
+        return $this;
     }
 }
 
