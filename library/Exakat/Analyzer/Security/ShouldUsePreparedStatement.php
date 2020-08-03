@@ -26,6 +26,8 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUsePreparedStatement extends Analyzer {
+    protected $queryMethod = 'query_methods.json';
+    
     public function analyze() : void {
         $functions = array( '\\pg_query',
                             '\\sqlsrv_query',
@@ -50,7 +52,7 @@ class ShouldUsePreparedStatement extends Analyzer {
         // dynamic type in the code : mysql_query($res, "select ".$a." from table");
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('Concatenation', 'String', 'Heredoc'))
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->outWithRank('CONCAT', 0)
              ->regexIsNot('noDelimiter', '(?i)^\\\\s*(FLUSH|ALTER|CREATE|SHOW|DROP|GRANT)')
              ->back('first');
@@ -59,9 +61,9 @@ class ShouldUsePreparedStatement extends Analyzer {
         // method call $someObject->query("select $b") (probably too wide...)
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->codeIs('query')
+             ->codeIs($this->queryMethod, self::TRANSLATE, self::CASE_INSENSITIVE)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('Concatenation', 'String', 'Heredoc'))
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->outWithRank('CONCAT', 0)
              ->regexIsNot('noDelimiter', '(?i)^\\\\s*(FLUSH|ALTER|CREATE|SHOW|DROP|GRANT)')
              ->back('first');
