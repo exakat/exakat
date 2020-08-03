@@ -94,26 +94,7 @@ class NoLiteralForReference extends Analyzer {
              ->inIs('DEFINITION')
              ->isNot('reference', true)
              ->outIs('RETURNTYPE')
-             ->atomIs('Scalartypehint')
-             ->back('first');
-        $this->prepareQuery();
-
-        // function &foo($r) { return foo_without_ref(); }
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->is('reference', true)
-             ->outIs('BLOCK')
-             ->atomInside('Return')
-             ->outIs('RETURN')
-             ->outIsIE('CODE') // Skip parenthesis
-             ->atomIs(self::CALLS)
-             ->inIs('DEFINITION')
-             ->isNot('reference', true)
-             ->outIs('RETURNTYPE')
-             ->atomIs('Void')
-             ->inIs('RETURNTYPE')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Return')
-             ->atomIsNot(self::CONTAINERS)
+             ->atomIs(array('Scalartypehint', 'Void'))
              ->back('first');
         $this->prepareQuery();
 

@@ -16,4 +16,7 @@ function &fooo1() { return bar1();}
 function &fooo2() { return bar2();}
 function &fooo3() { return bar3();}
 
+function &bar4() { $a = 1; return $a;}
+function &fooo4() { return bar4();}
+
 ?>

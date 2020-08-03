@@ -9,6 +9,7 @@ $expected     = array('function &fooo1( ) { /**/ } ',
                      );
 
 $expected_not = array('function &fooo2( ) { /**/ } ',
+                      'function &fooo4( ) { /**/ } ',
                      );
 
 ?>
