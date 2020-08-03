@@ -105,8 +105,8 @@ class Analyze extends Tasks {
 
         $analyzers = array();
         $dependencies = array();
-        foreach($analyzersClass as $analyzer_class) {
-            $this->fetchAnalyzers($analyzer_class, $analyzers, $dependencies);
+        foreach($analyzersClass as $analyzerClass) {
+            $this->fetchAnalyzers($analyzerClass, $analyzers, $dependencies);
         }
 
         $analyzerList = sort_dependencies($dependencies);
@@ -118,13 +118,13 @@ class Analyze extends Tasks {
             $this->progressBar = new Progressbar(0, count($analyzerList) + 1, $this->config->screen_cols);
         }
 
-        foreach($analyzerList as $analyzer_class) {
+        foreach($analyzerList as $analyzerClass) {
             if ($this->config->verbose && !$this->config->quiet) {
                 echo $this->progressBar->advance();
             }
 
-            assert($analyzers[$analyzer_class] !== null, "Unknown analyzer $analyzer_class from dependsOn()\n");
-            $this->analyze($analyzers[$analyzer_class], $analyzer_class);
+            assert($analyzers[$analyzerClass] !== null, "Unknown analyzer $analyzerClass from dependsOn()\n");
+            $this->analyze($analyzers[$analyzerClass], $analyzerClass);
         }
 
         if ($this->config->verbose && !$this->config->quiet) {
@@ -134,29 +134,29 @@ class Analyze extends Tasks {
         display("Done\n");
     }
 
-    private function fetchAnalyzers(string $analyzer_class, array &$analyzers, array &$dependencies): void {
-        if (isset($analyzers[$analyzer_class])) {
+    private function fetchAnalyzers(string $analyzerClass, array &$analyzers, array &$dependencies): void {
+        if (isset($analyzers[$analyzerClass])) {
             return;
         }
 
-        $analyzers[$analyzer_class] = $this->rulesets->getInstance($analyzer_class);
+        $analyzers[$analyzerClass] = $this->rulesets->getInstance($analyzerClass);
 
-        if ($analyzers[$analyzer_class] === null) {
-            display("No such analyzer as $analyzer_class\n");
+        if ($analyzers[$analyzerClass] === null) {
+            display("No such analyzer as $analyzerClass\n");
             return;
         }
 
-        if (isset($this->analyzed[$analyzer_class]) &&
+        if (isset($this->analyzed[$analyzerClass]) &&
             $this->config->noRefresh === true) {
-            display("$analyzer_class is already processed\n");
+            display("$analyzerClass is already processed\n");
             return ;
         }
 
         if ($this->config->noDependencies === true) {
-            $dependencies[$analyzer_class] = array();
+            $dependencies[$analyzerClass] = array();
         } else {
-            $dependencies[$analyzer_class] = $analyzers[$analyzer_class]->dependsOn();
-            $diff = array_diff($dependencies[$analyzer_class], array_keys($analyzers));
+            $dependencies[$analyzerClass] = $analyzers[$analyzerClass]->dependsOn();
+            $diff = array_diff($dependencies[$analyzerClass], array_keys($analyzers));
             foreach($diff as $d) {
                 if (!isset($analyzers[$d])) {
                     $this->fetchAnalyzers($d, $analyzers, $dependencies);
@@ -165,28 +165,28 @@ class Analyze extends Tasks {
         }
     }
 
-    private function analyze(Analyzer $analyzer, string $analyzer_class) : int {
+    private function analyze(Analyzer $analyzer, string $analyzerClass) : int {
         $begin = microtime(true);
 
-        $lock = new Lock($this->config->tmp_dir, $analyzer_class);
+        $lock = new Lock($this->config->tmp_dir, $analyzerClass);
         if (!$lock->check()) {
-            display("Concurency lock activated for $analyzer_class\n");
+            display("Concurency lock activated for $analyzerClass\n");
 
             return 0;
         }
 
-        if (isset($this->analyzed[$analyzer_class]) && $this->config->noRefresh === true) {
-            display( "$analyzer_class is already processed (1)\n");
-            return $this->analyzed[$analyzer_class];
+        if (isset($this->analyzed[$analyzerClass]) && $this->config->noRefresh === true) {
+            display( "$analyzerClass is already processed (1)\n");
+            return $this->analyzed[$analyzerClass];
         }
 
         $analyzer->init();
 
-        if (!(!isset($this->analyzed[$analyzer_class]) ||
+        if (!(!isset($this->analyzed[$analyzerClass]) ||
               $this->config->noRefresh !== true)         ) {
-            display("$analyzer_class is already processed (2)\n");
+            display("$analyzerClass is already processed (2)\n");
 
-            return $this->analyzed[$analyzer_class];
+            return $this->analyzed[$analyzerClass];
         }
 
         $total_results = 0;
@@ -203,36 +203,36 @@ class Analyze extends Tasks {
 
             display( "$analyzerQuoted is not compatible with PHP configuration of this version. Ignoring\n");
         } else {
-            display( "$analyzer_class running\n");
+            display( "$analyzerClass running\n");
             try {
                 $analyzer->run();
             } catch(DSLException $e) {
                 $end = microtime(true);
-                display( "$analyzer_class : DSL building exception\n");
+                display( "$analyzerClass : DSL building exception\n");
                 display($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
-                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
-                $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
+                $this->log->log("$analyzerClass\t" . ($end - $begin) . "\terror : " . $e->getMessage());
+                $this->datastore->addRow('analyzed', array($analyzerClass => 0 ) );
                 $this->checkAnalyzed();
 
             } catch(QueryException $e) {
                 $end = microtime(true);
-                display("$analyzer_class : Query running exception\n");
+                display("$analyzerClass : Query running exception\n");
                 display($e->getMessage());
-                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\terror : " . $e->getMessage());
+                $this->log->log("$analyzerClass\t" . ($end - $begin) . "\terror : " . $e->getMessage());
                 $counts = $this->gremlin->query('g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer->getInBaseName() . '").property("count", __.out("ANALYZED").count()).values("count")')->toInt();
-                $this->datastore->addRow('analyzed', array($analyzer_class => $counts ) );
+                $this->datastore->addRow('analyzed', array($analyzerClass => $counts ) );
                 $this->checkAnalyzed();
 
             } catch(Exception $e) {
                 $end = microtime(true);
-                display( "$analyzer_class : generic exception \n");
-                $this->log->log("$analyzer_class\t" . ($end - $begin) . "\texception : " . get_class($e) . "\terror : " . $e->getMessage());
+                display( "$analyzerClass : generic exception \n");
+                $this->log->log("$analyzerClass\t" . ($end - $begin) . "\texception : " . get_class($e) . "\terror : " . $e->getMessage());
                 if (strpos($e->getMessage(), 'The server exceeded one of the timeout settings ') !== false) {
                     $counts = $this->gremlin->query('g.V().hasLabel("Analysis").has("analyzer", "' . $analyzer->getInBaseName() . '").property("count", __.out("ANALYZED").count()).values("count")')->toInt();
-                    $this->datastore->addRow('analyzed', array($analyzer_class => $counts ) );
+                    $this->datastore->addRow('analyzed', array($analyzerClass => $counts ) );
                 } else {
                     display($e->getMessage());
-                    $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
+                    $this->datastore->addRow('analyzed', array($analyzerClass => 0 ) );
                 }
                 $this->checkAnalyzed();
 
@@ -244,14 +244,14 @@ class Analyze extends Tasks {
             $queries       = $analyzer->getQueryCount();
             $rawQueries    = $analyzer->getRawQueryCount();
 
-            display( "$analyzer_class run ($total_results / $processed)\n");
+            display( "$analyzerClass run ($total_results / $processed)\n");
             $end = microtime(true);
-            $this->log->log("$analyzer_class\t" . ($end - $begin) . "\t$total_results\t$processed\t$queries\t$rawQueries");
+            $this->log->log("$analyzerClass\t" . ($end - $begin) . "\t$total_results\t$processed\t$queries\t$rawQueries");
             // storing the number of row found in Hash table (datastore)
-            $this->datastore->addRow('analyzed', array($analyzer_class => $total_results ) );
+            $this->datastore->addRow('analyzed', array($analyzerClass => $total_results ) );
 
             // This also counts the analysis that don't leave data in the database.
-            $this->analyzed[$analyzer_class] = $total_results;
+            $this->analyzed[$analyzerClass] = $total_results;
         }
 
         $this->checkAnalyzed();
