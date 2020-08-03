@@ -26,6 +26,8 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class HardcodedPasswords extends Analyzer {
+    protected $passwordsKeys = '';
+
     public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                     );
@@ -47,18 +49,31 @@ class HardcodedPasswords extends Analyzer {
             $this->prepareQuery();
         }
 
-        $passwordsKeys = $this->loadJson('password_keys.json','passwords');
-        // ['password' => 1];
+        // ['password' => "1"];
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->as('value')
              ->outIs('INDEX')
              ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
-             ->has('noDelimiter')
-             ->noDelimiterIs($passwordsKeys, self::CASE_SENSITIVE)
+             ->noDelimiterIs($this->passwordsKeys, self::CASE_SENSITIVE)
              ->back('value')
              ->outIs('VALUE')
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
+             ->regexIsNot('noDelimiter', 'required')
+             ->back('first');
+        $this->prepareQuery();
+
+        // $a['password'] = "1";
+        $this->atomIs('Array')
+             ->outIs('INDEX')
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
+             ->noDelimiterIs($this->passwordsKeys, self::CASE_SENSITIVE)
+             ->back('first')
+             ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('RIGHT')
              ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->regexIsNot('noDelimiter', 'required')
              ->back('first');
@@ -68,13 +83,12 @@ class HardcodedPasswords extends Analyzer {
         $this->atomIs('Member')
              ->hasIn('LEFT')
              ->outIs('MEMBER')
-             ->codeIs($passwordsKeys)
+             ->codeIs($this->passwordsKeys)
              ->back('first')
-             ->outIs('OBJECT')
-             ->atomIs(array('This', 'Variableobject'))
-             ->back('first')
+
              ->inIs('LEFT')
              ->atomIs('Assignation')
+             ->codeIs('=')
              ->outIs('RIGHT')
              ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->regexIsNot('noDelimiter', 'required')

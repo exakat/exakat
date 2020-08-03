@@ -226,6 +226,17 @@ abstract class Analyzer {
                         $this->{$parameter['name']} = (int) $this->{$parameter['name']};
                         break;
 
+                    case 'data':
+                        if (is_string($this->{$parameter['name']})) {
+                            $dataFile = $this->{$parameter['name']};
+                            if (substr($dataFile, -4) === 'json') {
+                                $this->{$parameter['name']} = $this->loadJson($dataFile);
+                            } elseif (substr($dataFile, -3) === 'ini') {
+                                $this->{$parameter['name']} = $this->loadIni($dataFile);
+                            }
+                        }  
+                        break;
+
                     case 'ini_hash':
                         $this->{$parameter['name']} = parse_ini_string($this->{$parameter['name']})[$parameter['name']] ?? array();
                         break;
@@ -747,7 +758,7 @@ GREMLIN
         return self::$iniCache[$fullpath];
     }
 
-    protected function loadJson($file, $property = null) {
+    protected function loadJson(string $file, string $property = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
 
         if (!isset(self::$jsonCache[$fullpath])) {
