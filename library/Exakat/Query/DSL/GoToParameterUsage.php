@@ -23,27 +23,19 @@
 
 namespace Exakat\Query\DSL;
 
-class GoToParameterDefinition extends DSL {
+class GoToParameterUsage extends DSL {
     public function run(): Command {
         return new Command(<<<GREMLIN
-has("rank")
-.choose(
-    has("rankName"), 
 
-        __.sideEffect{ranked = it.get().value("rankName");}
-        .repeat( __.in() ).until(hasLabel("Functioncall", "Newcall", "Methodcall", "Staticmethodcall"))
-        .in("DEFINITION")
-        .out("ARGUMENT")
-        .where(__.out("NAME").filter{ it.get().value("fullcode") == ranked; }),
-
-        // default behavior, rank + variadic
-        __.sideEffect{ranked = it.get().value("rank");}
-                     .repeat( __.in() ).until(hasLabel("Functioncall", "Newcall", "Methodcall", "Staticmethodcall"))
-                     .in("DEFINITION")
-                     .out("ARGUMENT")
-                     .filter{ (it.get().value("rank") == ranked) || ("variadic" in it.get().keys() && it.get().value("rank") <= ranked); }
-)
-
+sideEffect{
+    ranked = it.get().value("rank");
+    variadic = "variadic" in it.get().keys();
+}
+.where( __.out("NAME").sideEffect{rankedName = it.get().value("rankName");}.fold())
+.in('ARGUMENT')
+.out('DEFINITION')
+.out('ARGUMENT')
+filter{("rankName" in it.get().keys() && it.get().values("rank") it.get().values("rankName") == rankedName) || it.get().values("rank") == ranked || (variadic == true && it.get().values("rank") >= ranked);}
 
 GREMLIN
 );

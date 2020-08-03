@@ -91,6 +91,7 @@ abstract class CouldBeType extends Analyzer {
                      ->inIs('OVERWRITE')
              )
              ->outIs('ARGUMENT')
+             ->isNot('variadic', true)
              ->filter(
                  $this->side()
                       ->outIs('TYPEHINT')
@@ -100,15 +101,49 @@ abstract class CouldBeType extends Analyzer {
              ->analyzerIsNot('self')
              ->outIs('NAME')
              ->outIs('DEFINITION')
-             ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
-             ->inIs('DEFINITION')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->goToParameterDefinition()
+             ->isNot('variadic', true)
              ->outIs('TYPEHINT')
              ->atomIs($atoms)
              ->fullnspathIs($fullnspath)
              ->back('result');
         $this->prepareQuery();
+
+        // foo(...$b) { bar($b[x])} ; function bar(array $c) {}
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->optional(
+                $this->side()
+                     ->is('abstract', true)
+                     ->inIs('OVERWRITE')
+             )
+             ->outIs('ARGUMENT')
+             ->filter(
+                 $this->side()
+                      ->outIs('TYPEHINT')
+                      ->atomIs('Void')
+              )
+             ->as('result')
+             ->analyzerIsNot('self')
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('VARIABLE')
+             ->atomIs('Array')
+             // Being in a functioncall is implied here
+             ->goToParameterDefinition()
+             ->isNot('variadic', true)
+             ->outIs('TYPEHINT')
+             ->atomIs($atoms)
+             ->fullnspathIs($fullnspath)
+             ->back('result');
+        $this->prepareQuery();
+
+        // foo(...$b) { bar($b)} ; function bar(...$c) {} 
+        // In this case, $b must be an array. No choice possible.
+
+        // Missing : when variadic is applied at call time
+        // foo(...$b) { bar(...$b)} ; function bar(...$c) {} 
+
+        // foo(...$b) { bar($b)} ; function bar(string ...$c) {} 
     }
 
     protected function checkRelayedArgumentToPHP(string $type = '') : void { 
@@ -386,6 +421,7 @@ abstract class CouldBeType extends Analyzer {
                  ->outIs('NAME')
                  ->outIs('DEFINITION')
                  ->inIs('ARGUMENT')
+                 ->fullnspathIs($functions)
                  ->back('result');
             $this->prepareQuery();
         }
