@@ -403,7 +403,6 @@ class Appinfo extends Data {
                             'Joomla'               => 'Vendors/Joomla',
                             'Laravel'              => 'Vendors/Laravel',
                             'Phalcon'              => 'Vendors/Phalcon',
-                            'Slim PHP'             => 'Slim/UseSlim',
                             'Symfony'              => 'Vendors/Symfony',
                             'Wordpress'            => 'ZendF/ZendClasses',
                             'Yii'                  => 'Vendors/Yii',
