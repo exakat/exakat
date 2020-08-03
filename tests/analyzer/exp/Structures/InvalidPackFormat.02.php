@@ -17,6 +17,7 @@ $expected_not = array('unpack(\'cnint\', $b)',
                       'unpack(\'cchars/n\', $b)',
                       'unpack(\'c2chars/nint\', $b)',
                       'unpack(\'v\', $b)',
+                      'unpack(\'\', $b)',
                      );
 
 ?>

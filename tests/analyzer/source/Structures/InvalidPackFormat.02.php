@@ -1,5 +1,6 @@
 <?php
 
+unpack('',$b);
 unpack('v',$b);
 unpack('n v c*',$b);
 unpack('nvc',$b);

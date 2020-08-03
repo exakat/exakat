@@ -12,7 +12,7 @@ $x->foo(1,2);
 $x->foo(1,2);
 
 class y {
-    function goo($a, $b = 1, $c = 2) {}
+    function goo($a, $b = 1, $c = 4) {}
 }
 
 (new y)->goo(1,2);
