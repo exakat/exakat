@@ -814,7 +814,7 @@ class Load extends Tasks {
 
                     case $this->phptokens::T_COMMENT :
                         $line += substr_count($t[1], "\n");
-                        $comments += substr_count($t[1], "\n") + 1;
+                        $comments += substr_count($t[1], "\n");
                         break;
 
                     case $this->phptokens::T_DOC_COMMENT:
