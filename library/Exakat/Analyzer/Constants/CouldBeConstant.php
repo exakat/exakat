@@ -34,7 +34,7 @@ class CouldBeConstant extends Analyzer {
         $this->atomIs('Const')
              ->outIs('CONST')
              ->outIs('VALUE')
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'))
+             ->atomIs(self::STRINGS_LITERALS)
              ->values('noDelimiter')
              ->unique();
         $stringsConst = $this->rawQuery()->toArray();
@@ -53,7 +53,7 @@ class CouldBeConstant extends Analyzer {
             return;
         }
 
-        $this->atomIs(array('String', 'Concatenation', 'Heredoc'))
+        $this->atomIs(self::STRINGS_LITERALS)
              ->hasNoParent('Constant', array('VALUE'))
              ->hasNoParent('Defineconstant', array('VALUE'))
              ->hasNoIn('CONCAT')

@@ -34,7 +34,7 @@ class StripTagsSkipsClosedTag extends Analyzer {
         // strip_tags($a, '<br />'); (br will not be ignored)
         $this->atomFunctionIs('\\strip_tags')
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->regexIs('noDelimiter', '/>')
              ->back('first');
         $this->prepareQuery();

@@ -44,8 +44,7 @@ class Path extends AnalyzerResults {
         $protocolList = implode('|', $protocolList);
 
         // /path/to/file.php (extension is necessary)
-        $this->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITHOUT_CONSTANTS)
-             ->has('noDelimiter')
+        $this->atomIs(self::STRINGS_LITERALS, self::WITHOUT_CONSTANTS)
              ->regexIs('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)(\\\\.\\\\w{1,6}|/)\\$')
              ->toResults();
         $this->prepareQuery();
@@ -56,8 +55,7 @@ class Path extends AnalyzerResults {
         foreach($pathArgs as $position => $functions) {
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
-                 ->has('noDelimiter')
+                 ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
                  ->regexIsNot('noDelimiter', '^((?!(' . $protocolList . ')://)[^ :\\\\+&]*/)([^ :\\\\+&/]*)\\\\.\\\\w{1,6}\\$')
                  ->toResults();
             $this->prepareQuery();

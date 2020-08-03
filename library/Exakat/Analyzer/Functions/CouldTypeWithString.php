@@ -76,7 +76,7 @@ class CouldTypeWithString extends Analyzer {
                      ->outIs('DEFINITION')
                      ->atomIs(self::CALLS)
                      ->outWithRank('ARGUMENT', 'ranked')
-                     ->atomIs(array('String', 'Concatenation', 'Heredoc'))
+                     ->atomIs(self::STRINGS_LITERALS)
              )
              // not called as non-bool
              ->not(
@@ -85,7 +85,7 @@ class CouldTypeWithString extends Analyzer {
                      ->outIs('DEFINITION')
                      ->atomIs(self::CALLS)
                      ->outWithRank('ARGUMENT', 'ranked')
-                     ->atomIsNot(array('String', 'Concatenation', 'Heredoc'))
+                     ->atomIsNot(self::STRINGS_LITERALS)
                      ->tokenIsNot('T_BOOL_STRING')
              )
              ->back('first');

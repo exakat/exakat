@@ -37,7 +37,7 @@ class NoSpreadForHash extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->is('intval', 0)
              ->back('first');
         $this->prepareQuery();
@@ -51,7 +51,7 @@ class NoSpreadForHash extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->is('intval', 0)
              ->back('first');
         $this->prepareQuery();

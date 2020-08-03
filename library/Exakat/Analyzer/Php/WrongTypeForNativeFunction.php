@@ -29,7 +29,7 @@ class WrongTypeForNativeFunction extends Analyzer {
     public function analyze() : void {
         $types = array('float'  => array('Integer', 'Float'),
                        'int'    => array('Integer'),
-                       'string' => array('String', 'Heredoc', 'Concatenation'),
+                       'string' => self::STRINGS_LITERALS,
                        'array'  => array('Arrayliteral'),
                        'bool'   => array('Boolean', 'Bitoperation', 'Logical', 'Comparison'),
                       );

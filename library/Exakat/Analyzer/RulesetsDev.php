@@ -75,7 +75,7 @@ class RulesetsDev {
         return array_merge(...$return);
     }
 
-    public function getAnalyzerInExtension($name) {
+    public function getAnalyzerInExtension(string $name) : array{
         if (!isset($this->all['All'])) {
             return array();
         }
@@ -106,7 +106,7 @@ class RulesetsDev {
         return $return;
     }
 
-    public function getSuggestionClass($name) {
+    public function getSuggestionClass(string $name) : array {
         return array_filter($this->listAllAnalyzer(), function ($c) use ($name) {
             $l = levenshtein($c, $name);
 
@@ -162,11 +162,11 @@ class RulesetsDev {
         }
     }
 
-    public function getSeverities() {
+    public function getSeverities() : array {
         return array_fill_keys($this->all['All'], Analyzer::S_NONE);
     }
 
-    public function getTimesToFix() {
+    public function getTimesToFix() : array {
         return array_fill_keys($this->all['All'], Analyzer::T_NONE);
     }
 }

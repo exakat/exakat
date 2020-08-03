@@ -38,7 +38,7 @@ class Shellcommands extends Analyzer {
         // shell_exec('ls -1')
         $this->atomFunctionIs(array('\\exec', '\\shell_exec', '\\system', '\\proc_open'))
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('Concatenation', 'Heredoc', 'String'), self::WITH_CONSTANTS);
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS);
         $this->prepareQuery();
     }
 }

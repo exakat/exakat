@@ -49,7 +49,7 @@ class MultipleDefinedCase extends Analyzer {
                      ->outIs('EXPRESSION')
                      ->atomIs('Case')
                      ->outIs('CASE')
-                     ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
+                     ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
                      ->has('noDelimiter')
                      ->raw('groupCount().by("noDelimiter").map{ it.get().findAll{ it.value > 1}.size()}.is(gte(1))')
              );

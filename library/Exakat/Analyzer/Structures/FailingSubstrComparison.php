@@ -38,7 +38,7 @@ class FailingSubstrComparison extends Analyzer {
              ->savePropertyAs('intval', 'length')
              ->back('first')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->has('noDelimiter')
              ->getStringLength('noDelimiter', 's')
              // Substring is actually as long as length

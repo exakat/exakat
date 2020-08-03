@@ -57,7 +57,7 @@ class NoWeakSSLCrypto extends Analyzer {
         $this->prepareQuery();
 
         // This is for fsockopen and co.
-        $this->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITHOUT_CONSTANTS)
+        $this->atomIs(self::STRINGS_LITERALS, self::WITHOUT_CONSTANTS)
              ->regexIs('noDelimiter', '^ssl(v2|v3|)://'); // tls is for v1.0 to v1.3
         $this->prepareQuery();
     }

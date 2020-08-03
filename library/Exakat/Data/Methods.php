@@ -23,6 +23,8 @@
 
 namespace Exakat\Data;
 
+use Exakat\Config;
+
 class Methods {
     private $sqlite = null;
     private $phar_tmp = null;
@@ -30,7 +32,7 @@ class Methods {
     const STRICT = true;
     const LOOSE  = false;
 
-    public function __construct($config) {
+    public function __construct(Config $config) {
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods') . '.sqlite';
             copy($config->dir_root . '/data/methods.sqlite', $this->phar_tmp);
@@ -47,7 +49,7 @@ class Methods {
         }
     }
 
-    public function getMethodsArgsInterval() {
+    public function getMethodsArgsInterval() : array {
         $query = 'SELECT class, name, args_min, args_max FROM methods WHERE class != "PHP"';
         $res = $this->sqlite->query($query);
         $return = array();
@@ -59,7 +61,7 @@ class Methods {
         return $return;
     }
 
-    public function getFunctionsArgsInterval() {
+    public function getFunctionsArgsInterval() : array {
         $query = 'SELECT class, name, args_min, args_max FROM methods WHERE Class = "PHP"';
         $res = $this->sqlite->query($query);
         $return = array();
@@ -71,7 +73,7 @@ class Methods {
         return $return;
     }
 
-    public function getFunctionsLastArgsNotBoolean() {
+    public function getFunctionsLastArgsNotBoolean() : array {
         $query = <<<'SQL'
 SELECT '\' || lower(methods.name) AS fullnspath, args_max - 1 AS position FROM methods 
 JOIN args_type ON args_type.name = methods.name
@@ -91,7 +93,7 @@ SQL;
         return $return;
     }
 
-    public function getFunctionsReferenceArgs() {
+    public function getFunctionsReferenceArgs() : array {
         $query = <<<'SQL'
 SELECT name AS function, 0 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg0 = 'reference' UNION
 SELECT name AS function, 1 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg1 = 'reference' UNION
@@ -110,7 +112,7 @@ SQL;
         return $return;
     }
 
-    public function getFunctionsValueArgs() {
+    public function getFunctionsValueArgs() : array {
         $query = <<<'SQL'
 SELECT name AS function, 0 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg0 = 'value' UNION
 SELECT name AS function, 1 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg1 = 'value' UNION
@@ -129,7 +131,7 @@ SQL;
         return $return;
     }
 
-    public function getDeterministFunctions() {
+    public function getDeterministFunctions() : array {
         $query = 'SELECT name FROM methods WHERE determinist = 1';
         $res = $this->sqlite->query($query);
         $return = array();
@@ -141,7 +143,7 @@ SQL;
         return $return;
     }
 
-    public function getNonDeterministFunctions() {
+    public function getNonDeterministFunctions() : array {
         $query = 'SELECT name FROM methods WHERE determinist = 0';
         $res = $this->sqlite->query($query);
         $return = array();
@@ -153,7 +155,7 @@ SQL;
         return $return;
     }
 
-    public function getInternalParameterType() {
+    public function getInternalParameterType() : array {
         $return = array();
 
         $args = array('arg0', 'arg1');
@@ -207,7 +209,7 @@ SQL;
         return $return;
     }
 
-    public function getBugFixes() {
+    public function getBugFixes() : array {
         $return = array();
 
         $query = <<<'SQL'

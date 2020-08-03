@@ -34,7 +34,7 @@ class HashAlgos54 extends Analyzer {
 
         $this->atomFunctionIs(HashAlgos71::$functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation', 'Heredoc'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->noDelimiterIs($algos, self::CASE_INSENSITIVE);
         $this->prepareQuery();
     }

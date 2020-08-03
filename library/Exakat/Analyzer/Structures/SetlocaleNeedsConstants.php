@@ -38,7 +38,7 @@ class SetlocaleNeedsConstants extends Analyzer {
         // something else than a constant
         $this->atomFunctionIs('\\setlocale')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'))
+             ->atomIs(self::STRINGS_LITERALS)
              ->back('first');
         $this->prepareQuery();
 

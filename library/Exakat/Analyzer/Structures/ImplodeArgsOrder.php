@@ -70,7 +70,7 @@ class ImplodeArgsOrder extends Analyzer {
         $this->atomFunctionIs($functions)
              ->analyzerIsNot('self')
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
 
@@ -82,7 +82,7 @@ class ImplodeArgsOrder extends Analyzer {
              ->inIs('DEFINITION')
              ->inIsIE('NAME')
              ->outIs('DEFAULT')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
 

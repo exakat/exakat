@@ -29,7 +29,7 @@ class InvalidPackFormat extends Analyzer {
         // pack('nvcT', $s)
         $this->atomFunctionIs('\\unpack')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              // Those steps weed out some non-formats
              ->raw('has("noDelimiter", neq(""))')
              // This regex include names in the format string, for unpacking
@@ -39,7 +39,7 @@ class InvalidPackFormat extends Analyzer {
 
         $this->atomFunctionIs('\\pack')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              // Those steps weed out some non-formats
              ->raw('has("noDelimiter", neq(""))')
              // This regex include names in the format string, for packing

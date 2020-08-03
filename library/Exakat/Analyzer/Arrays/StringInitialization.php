@@ -35,7 +35,7 @@ class StringInitialization extends Analyzer {
         // const C = ''; $a = C; $a[1] = 3;
         $this->atomIs(array('Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parameter', 'Propertydefinition', 'Virtualproperty', 'Variabledefinition'))
              ->outIs('DEFAULT')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->back('first')
              ->outIsIE('NAME')
              ->outIs('DEFINITION')
@@ -46,7 +46,7 @@ class StringInitialization extends Analyzer {
         $this->atomIs('Parameter')
              ->outIs('NAME')
              ->outIs('DEFAULT')
-             ->atomIs(array('String', 'Heredoc', 'Concatenation'), self::WITH_CONSTANTS)
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
              ->back('first')
              ->outIsIE('NAME')
              ->outIs('DEFINITION')

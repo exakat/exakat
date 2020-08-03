@@ -53,21 +53,22 @@ class Command {
         $this->arguments = $arguments;
     }
 
-    public function setSack($default = self::SACK_NONE) {
+    public function setSack(string $default = self::SACK_NONE) : void {
         assert(in_array($default, array(self::SACK_NONE,
                                         self::SACK_ARRAY,
                                         self::SACK_HASH,
                                         self::SACK_INTEGER,
                                         ), \STRICT_COMPARISON),
               'Sack must be one of the allowed constant : "' . $default . '" provided');
+
         $this->sack = $default;
     }
 
-    public function getSack() {
+    public function getSack() : string {
         return $this->sack;
     }
 
-    public function add(Command $other) {
+    public function add(self $other) : self {
         $this->gremlin   .= ".{$other->gremlin}";
         $this->arguments += $other->arguments;
 
