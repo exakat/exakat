@@ -123,10 +123,8 @@ class ScalarAreNotArrays extends Analyzer {
              ->outIs('DEFINITION')
              ->outIs('ARGUMENT')
              ->atomIs(array('Boolean', 'Integer', 'Float', 'Null'))
-             ->savePropertyAs('rank', 'ranked')
-             ->back('first')
+             ->goToParameterDefinition()
 
-             ->outWithRank('ARGUMENT', 'ranked')
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->atomIs('Variablearray')

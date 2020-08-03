@@ -28,21 +28,20 @@ class GoToParameterUsage extends DSL {
         return new Command(<<<GREMLIN
 
 sideEffect{
-    ranked = it.get().value("rank");
+    ranked   = it.get().value("rank");
     variadic = "variadic" in it.get().keys();
 }
-.where( __.out("NAME").sideEffect{rankedName = it.get().value("rankName");}.fold())
+.sideEffect( __.out("NAME").sideEffect{rankedName = it.get().value("fullcode");})
 .in('ARGUMENT')
 .out('DEFINITION')
+.optional( __.out("METHOD"))
 .out('ARGUMENT')
-filter{("rankName" in it.get().keys() && it.get().values("rank") it.get().values("rankName") == rankedName) || it.get().values("rank") == ranked || (variadic == true && it.get().values("rank") >= ranked);}
+.filter{it.get().value("rank") == ranked || ("rankName" in it.get().keys() && it.get().value("rankName") == rankedName) || (variadic == true && it.get().value("rank") >= ranked);}
 
 GREMLIN
 );
+
     }
 }
 
-/*
-
-*/
 ?>

@@ -35,6 +35,8 @@ class NeverUsedParameter extends Analyzer {
     public function analyze() : void {
         // foo($a, $b = 2, $c = 3) {}; foo(1,2);
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->hasOut('DEFINITION')  // Make sure this is actually a used function
+
              ->outIs('ARGUMENT')
              ->filter(
                  $this->side()
@@ -43,16 +45,11 @@ class NeverUsedParameter extends Analyzer {
                       ->hasNoIn('RIGHT')
              )
 
-             ->savePropertyAs('rank', 'ranked')
-             ->back('first')
-
-             ->hasOut('DEFINITION')  // Make sure this is actually a used function
              ->not(
                 $this->side()
-                     ->outIs('DEFINITION')
-                     ->outWithRank('ARGUMENT', 'ranked')
-                     ->atomIsNot('Void')
-             );
+                     ->goToParameterUsage()
+             )
+             ->back('first');
         $this->prepareQuery();
     }
 }
