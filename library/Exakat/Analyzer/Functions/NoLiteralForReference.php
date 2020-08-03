@@ -53,10 +53,7 @@ class NoLiteralForReference extends Analyzer {
              ->outIs('ARGUMENT')
              ->is('constant', true)
              ->atomIsNot(array('Void', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
-             ->savePropertyAs('rank', 'ranked')
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->goToParameterDefinition()
              ->is('reference', true)
              ->back('first');
         $this->prepareQuery();
@@ -65,14 +62,14 @@ class NoLiteralForReference extends Analyzer {
         // function foo(&$r) {}
         $this->atomIs(self::CALLS)
              ->outIs('ARGUMENT')
-             ->savePropertyAs('rank', 'ranked')
+             ->as('argument')
+
              ->atomIs(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
              ->inIs('DEFINITION')
              ->isNot('reference', true)
 
-             ->back('first')
-             ->inIs('DEFINITION')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->back('argument')
+             ->goToParameterDefinition()
              ->is('reference', true)
              ->back('first');
         $this->prepareQuery();
@@ -80,9 +77,8 @@ class NoLiteralForReference extends Analyzer {
         // function &foo($r) { return 2; }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->is('reference', true)
-             ->outIs('BLOCK')
-             ->atomInside('Return')
-             ->outIs('RETURN')
+             ->outIs('RETURNED')
+             ->hasIn('RETURN')
              ->outIsIE('CODE') // Skip parenthesis
              ->atomIs($atoms)
              ->back('first');
@@ -91,9 +87,8 @@ class NoLiteralForReference extends Analyzer {
         // function &foo($r) { return foo_without_ref(); }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->is('reference', true)
-             ->outIs('BLOCK')
-             ->atomInside('Return')
-             ->outIs('RETURN')
+             ->outIs('RETURNED')
+             ->hasIn('RETURN')
              ->outIsIE('CODE') // Skip parenthesis
              ->atomIs(self::CALLS)
              ->inIs('DEFINITION')
@@ -155,11 +150,13 @@ class NoLiteralForReference extends Analyzer {
              ->outIs('RETURNTYPE')
              ->atomIs('Void')
              ->inIs('RETURNTYPE')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Return')
-             ->atomIsNot(self::CONTAINERS)
+             ->outIs('RETURNED')
+             ->hasIn('RETURN')
+             ->outIsIE('CODE') // Skip parenthesis
              ->back('first');
         $this->prepareQuery();
+
+        // Does PHP return references too ? Shall we cover native PHP functions?
     }
 }
 
