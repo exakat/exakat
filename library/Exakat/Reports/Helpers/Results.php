@@ -108,6 +108,23 @@ class Results {
         return $return;
     }
 
+    public function toGroupedCount(string $col = 'name'): array {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        $return = array();
+        foreach($this->values as $row) {
+            if (!isset($return[$row[$col]]) ) {
+                $return[$row[$col]] = 1;
+                continue;
+            }
+
+            ++$return[$row[$col]];
+        }
+
+        return $return;
+    }
 
     public function toArray(): array {
         if ($this->values === null) {

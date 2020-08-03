@@ -205,6 +205,11 @@ audit:
             file: parameter_counts
             method: generateParameterCounts
             icon: circle-o
+        parameters_names:
+            title: Parameter Names
+            file: parameters_names
+            method: generateParameterNames
+            icon: circle-o
         fossilized_methods:
             title: Fossilized Methods
             file: fossilized_methods

@@ -1,0 +1,34 @@
+
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+		<h1>
+		  {{TITLE}}
+		</h1>
+		</section>
+
+		<!-- Main content -->
+		<section id="used_settings" class="content">
+			<div class="box">
+				<div class="box-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<p class="textLead">This is the list of parameter names, used in the code.
+							<br />
+							The parameter column is the name of the parameter. The Count columns shows the number of methods where this parameter is used. The column Variable mentions that this parameter is also used as a local variable, in methods where it is not an argument.</p>
+							<table class="table table-striped">
+								<tr></tr>
+								<tr>
+								    <th>Parameter</th>
+								    <th>Count</th>
+								    <th>Local Variable</th>
+								    <th>Typehints</th>
+								    <th>Default</th>
+								</tr>
+								{{ANALYZERS}}
+								</tr>
+							</table>
+		    		    </div>
+					</div>
+				</div>
+			</div>
+		</section>

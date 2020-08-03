@@ -49,6 +49,8 @@ class Emissary extends Reports {
     protected $generations_files = array();
 
     protected $usedFiles         = array();
+    
+    private $baseHTML = '';
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -108,27 +110,27 @@ class Emissary extends Reports {
         return implode(PHP_EOL, $menu);
     }
 
-    protected function makeMenuHtml(array $section): string {
-        if (isset($section['file'])) {
-            $icon = $section['icon'] ?? 'sticky-note-o';
-            $menuTitle = $section['menu'] ?? $section['title'];
+    protected function makeMenuHtml(array $sections): string {
+        if (isset($sections['file'])) {
+            $icon = $sections['icon'] ?? 'sticky-note-o';
+            $menuTitle = $sections['menu'] ?? $sections['title'];
 
-            $menu = "<li><a href=\"$section[file].html\"><i class=\"fa fa-$icon\"></i> <span>$menuTitle</span></a></li>";
-            if (isset($section['method'])) {
-                $this->generations[] = new Section($section);
+            $menu = "<li><a href=\"$sections[file].html\"><i class=\"fa fa-$icon\"></i> <span>$menuTitle</span></a></li>";
+            if (isset($sections['method'])) {
+                $this->generations[] = new Section($sections);
             } else {
-                $this->generations_files[] = $section['file'];
+                $this->generations_files[] = $sections['file'];
             }
-        } elseif (isset($section['subsections'])) {
-            $icon      = $section['icon'] ?? 'sticky-note-o';
-            $menuTitle = $section['menu'] ?? $section['title'];
+        } elseif (isset($sections['subsections'])) {
+            $icon      = $sections['icon'] ?? 'sticky-note-o';
+            $menuTitle = $sections['menu'] ?? $sections['title'];
 
             $menu = array('<li class="treeview">',
                           "<a href=\"#\"><i class=\"fa fa-$icon\"></i> <span>$menuTitle</span><i class=\"fa fa-angle-left pull-right\"></i></a>",
                           '<ul class="treeview-menu">',
                           );
 
-            foreach($section['subsections'] as $subsection) {
+            foreach($sections['subsections'] as $subsection) {
                 $menu[] = $this->makeMenuHtml($subsection);
             }
 
@@ -141,53 +143,53 @@ class Emissary extends Reports {
         return $menu;
     }
 
-    protected function getBasedPage(string $file): string {
-        static $baseHTML;
-
-        if (empty($baseHTML)) {
-            $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
-
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
-            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', (string) Exakat::BUILD);
-            $project_name = $this->config->project_name;
-            if (empty($project_name)) {
-                $project_name = 'E';
-            }
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name[0]));
-
-            $menu = $this->makeMenu();
-            $inventories = array();
-            foreach($this->inventories as $fileName => $title) {
-                if (strpos($fileName, '/') === false) {
-                    $inventory_name = $fileName;
-                } else {
-                    $total = $this->dump->fetchAnalysersCounts(array($fileName))->toInt();
-                    if ($total < 1) {
-                        continue;
-                    }
-                    $inventory_name = strtolower(basename($fileName));
-                }
-                $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
-            }
-
-            $rulesets = $this->dump->fetchTable('themas');
-            $rulesets->filter(function (array $x): bool { return substr($x['thema'], 0, 13) === 'Compatibility';});
-            $compatibilities = array_map(function (string $x): string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";},
-                                         $rulesets->getColumn('thema'));
-
-            $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
-            $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
-            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
+    private function initBasePage() : void {
+        $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
+    
+        $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
+        $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', (string) Exakat::BUILD);
+        $project_name = $this->config->project_name;
+        if (empty($project_name)) {
+            $project_name = 'E';
         }
+        $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $project_name);
+        $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
+        $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name[0]));
+    
+        $menu = $this->makeMenu();
+        $inventories = array();
+        foreach($this->inventories as $fileName => $title) {
+            if (strpos($fileName, '/') === false) {
+                $inventory_name = $fileName;
+            } else {
+                $total = $this->dump->fetchAnalysersCounts(array($fileName))->toInt();
+                if ($total < 1) {
+                    continue;
+                }
+                $inventory_name = strtolower(basename($fileName));
+            }
+            $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
+        }
+    
+        $rulesets = $this->dump->fetchTable('themas');
+        $rulesets->filter(function (array $x): bool { return substr($x['thema'], 0, 13) === 'Compatibility';});
+        $compatibilities = array_map(function (string $x): string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";},
+                                     $rulesets->getColumn('thema'));
+    
+        $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
+        $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
+        $this->baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
+    }
 
-
+    protected function getBasedPage(string $file = ''): string {
         if (!file_exists("{$this->config->dir_root}/media/devfaceted/data/$file.html")) {
+            display("Missing template file '$file' for ".static::class);
+
             return '';
         }
+
         $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/$file.html");
-        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
+        $combinePageHTML = $this->injectBloc($this->baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
     }
@@ -226,7 +228,7 @@ class Emissary extends Reports {
         $this->projectPath = $folder;
 
         $this->initFolder();
-        $this->getBasedPage('');
+        $this->initBasePage();
 
         foreach($this->generations as $generation) {
             $method = $generation->method;
@@ -3190,6 +3192,60 @@ HTML
         $this->putBasedPage($section->file, $finalHTML);
     }
 
+    protected function generateParameterNames(Section $section): void {
+        $finalHTML = $this->getBasedPage($section->source);
+
+        $variables = $this->dump->fetchTable('variables')->getColumn('variable');
+        $variables = array_flip($variables);
+
+        $res = $this->dump->fetchTable('arguments');
+        $parameters = $res->toGroupedCount('name');
+        uasort($parameters, function($a, $b) : int { return $b <=> $a;});
+
+        $typehints = array();
+        foreach($res->toArray() as $row) {
+            if (empty($row['typehint'])) { continue; }
+            if (!isset($typehints[$row['name']])) {
+                $typehints[$row['name']] = array($row['typehint']);
+
+                continue;
+            }
+            
+            $typehints[$row['name']][] = $row['typehint'];
+        }
+        $typehints = array_map('array_unique', $typehints);
+
+        $defaults  = array();
+        foreach($res->toArray() as $row) {
+            if (empty($row['init'])) { continue; }
+            if (!isset($defaults[$row['name']])) {
+                $defaults[$row['name']] = array($row['init']);
+
+                continue;
+            }
+            
+            $defaults[$row['name']][] = $row['init'];
+        }
+        $defaults = array_map('array_unique', $defaults);
+
+        $html = array();
+        foreach ($parameters as $variable => $count) {
+            $html []= '<tr>
+                      <td>' . $variable . '</td>
+                      <td>' . $count . '</td>
+                      <td>'.(isset($variables[$variable]) ? 'X' : '').'</td>
+                      <td>'.(isset($typehints[$variable]) ? $this->toHtmlList($typehints[$variable]) : '').'</td>
+                      <td>'.(isset($defaults[$variable]) ? $this->toHtmlList($defaults[$variable]) : '').'</td>
+                  </tr>';
+        }
+        $html = implode(PHP_EOL, $html);
+
+        $finalHTML = $this->injectBloc($finalHTML, 'ANALYZERS', $html);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
+        $finalHTML = $this->injectBloc($finalHTML, 'CONTENT', '');
+        $this->putBasedPage($section->file, $finalHTML);
+    }
+
     protected function generateFossilizedMethods(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
 
@@ -3314,7 +3370,7 @@ HTML
         $total = 0;
         foreach ($res->toArray() as $value) {
             if (in_array($value['key'], array('totalArguments',
-                                               'totalFunctions', ))) {
+                                              'totalFunctions', ))) {
                 $total += (int) $value['value'];
                 continue;
             }
