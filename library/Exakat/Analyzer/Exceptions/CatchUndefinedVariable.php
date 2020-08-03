@@ -25,10 +25,6 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CatchUndefinedVariable extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
     public function dependsOn() : array {
         return array('Complete/CreateDefaultValues',
                     );
@@ -37,15 +33,19 @@ class CatchUndefinedVariable extends Analyzer {
     
     public function analyze() : void {
         // try {Throw $e; $a = 1; } catch (Exception $e ) { echo $a;}
-        $this->atomIs('Variabledefinition')
-             ->outIs('DEFAULT')
-             ->hasInstruction('Try')
-             ->back('first')
-             
+        $this->atomIs('Try')
+             ->atomInsideNoDefinition('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             ->atomIs('Variable')
+             ->inIs('DEFINITION')
+             ->as('result')
+
              ->outIs('DEFINITION')
+             ->is('isRead', true)
              ->hasInstruction('Catch')
 
-             ->back('first');
+             ->back('result');
         $this->prepareQuery();
     }
 }
