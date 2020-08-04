@@ -28,7 +28,7 @@ class Log {
     private $begin = 0;
     private $first = null;
 
-    public function __construct($name = null, $dir = '.') {
+    public function __construct(string $name = '', string $dir = '.') {
         $this->name = $name;
 
         if (!file_exists("$dir/log/")) { return ; }
@@ -62,8 +62,8 @@ class Log {
         unset($this->log);
     }
 
-    public function log($message) {
-        if ($this->log === null) { return true; }
+    public function log(string $message) : void {
+        if ($this->log === null) { return; }
 
         if ($this->first !== null) {
             fwrite($this->log, "{$this->first}\n");

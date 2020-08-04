@@ -79,7 +79,7 @@ class Weekly extends Ambassador {
         for ($i = 0; $i < 5; ++$i) {
             $date = (new \Datetime('now'))->sub(new \DateInterval('P' . ($i * 7) . 'D'))->format('Y-W');
 
-            $json = file_get_contents("https://exakat.io/weekly/week-$date.json");
+            $json = file_get_contents("https://exakat.io/weekly/week-$date.json") ?: '';
             $this->weeks[$date] = json_decode($json);
 
             if (json_last_error() != '') {
@@ -95,20 +95,21 @@ class Weekly extends Ambassador {
 
     // special case for 'Future read'
         $date = date('Y-W', strtotime(date('Y') . 'W' . substr('0' . ((int) date('W') + 1), -2)));
-        $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
+        $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json") ?: '';
         $this->weeks[$date] = json_decode($json);
 
         if (json_last_error() != '') {
             print "Error : could not read week details for $date\n";
         }
 
-        $res = $this->dump->fetchAnalysersCounts($this->weeks[$date]->analysis);
+        $res = $this->dump->fetchAnalysersCounts($this->weeks[$date]->analysis ?? array());
         foreach($res->toArray() as $row) {
             $this->resultsCounts[$row['analyzer']] = $row['count'];
         }
     }
 
-    private function generateWeekly(Section $section, int $year, int $week): void {        $analyzerList = $this->weeks["$year-" . substr("0$week", -2)]->analysis;
+    private function generateWeekly(Section $section, int $year, int $week): void {
+        $analyzerList = $this->weeks["$year-" . substr("0$week", -2)]->analysis ?? array();
         $this->generateIssuesEngine($section,
                                     $this->getIssuesFaceted($analyzerList));
     }
@@ -140,43 +141,43 @@ class Weekly extends Ambassador {
     }
 
     protected function generateWeek0(Section $section): void {
-        $this->generateWeekly($section, date('Y'), (int) date('W'));
+        $this->generateWeekly($section, (int) date('Y'), (int) date('W'));
     }
 
     protected function generateWeek1(Section $section): void {
         if ((int) date('W') - 1 > 0) {
-            $this->generateWeekly($section, date('Y'), (int) date('W') - 1);
+            $this->generateWeekly($section, (int) date('Y'), (int) date('W') - 1);
         } else {
-            $this->generateWeekly($section, date('Y') - 1, 53 - (int) date('W'));
+            $this->generateWeekly($section, (int) date('Y') - 1, 53 - (int) date('W'));
         }
     }
 
     protected function generateWeek2(Section $section): void {
         if ((int) date('W') - 1 > 0) {
-            $this->generateWeekly($section, date('Y'), (int) date('W') - 2);
+            $this->generateWeekly($section, (int) date('Y'), (int) date('W') - 2);
         } else {
-            $this->generateWeekly($section, date('Y') - 1, 52 - (int) date('W'));
+            $this->generateWeekly($section, (int) date('Y') - 1, 52 - (int) date('W'));
         }
     }
 
     protected function generateWeek3(Section $section): void {
         if ((int) date('W') - 1 > 0) {
-            $this->generateWeekly($section, date('Y'), (int) date('W') - 3);
+            $this->generateWeekly($section, (int) date('Y'), (int) date('W') - 3);
         } else {
-            $this->generateWeekly($section, date('Y') - 1, 51 - (int) date('W'));
+            $this->generateWeekly($section, (int) date('Y') - 1, 51 - (int) date('W'));
         }
     }
 
     protected function generateWeek4(Section $section): void {
         if ((int) date('W') - 1 > 0) {
-            $this->generateWeekly($section, date('Y'), (int) date('W') - 4);
+            $this->generateWeekly($section, (int) date('Y'), (int) date('W') - 4);
         } else {
-            $this->generateWeekly($section, date('Y') - 1, 50 - (int) date('W'));
+            $this->generateWeekly($section, (int) date('Y') - 1, 50 - (int) date('W'));
         }
     }
 
     protected function generateWeekNext(Section $section): void {
-        $this->generateWeekly($section, date('Y'), (int) date('W') + 1);
+        $this->generateWeekly($section, (int) date('Y'), (int) date('W') + 1);
     }
 
     protected function generateDashboard(Section $section): void {
@@ -223,9 +224,9 @@ HTML;
 
         // top 10
         $week = array_keys($this->weeks)[0];
-        $fileHTML     = $this->getTopFile($this->weeks[$this->current]->analysis, "weekly-$week");
+        $fileHTML     = $this->getTopFile($this->weeks[$this->current]->analysis ?? array(), "weekly-$week");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis, "weekly-$week");
+        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis ?? array(), "weekly-$week");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $globalData = array(self::G_CRITICAL  => (object) array('label' => 'Critical', 'value' => 0),
@@ -496,7 +497,7 @@ JAVASCRIPT;
     }
 
     protected function getAnalyzersCount(int $limit): array {
-        $res = $this->dump->getAnalyzersCount($this->weeks[$this->current]->analysis);
+        $res = $this->dump->getAnalyzersCount($this->weeks[$this->current]->analysis ?? array());
 
         return array_slice($res->toArray(), 0, $limit);
     }

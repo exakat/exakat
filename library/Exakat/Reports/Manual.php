@@ -169,7 +169,7 @@ class Manual extends Reports {
        return $md;
     }
 
-    private function flatten($array) {
+    private function flatten(array $array) :array {
         return implode("\n+ ", $array);
     }
 
@@ -190,7 +190,7 @@ class Manual extends Reports {
                 $constants .= '+ `' . $row['class'] . '`' . PHP_EOL;
                 $previousClass = $row['class'];
             }
-            $constants .= '  + `' . $row['constant'] . '` = ' . $this->escapeMd($row['value']) . PHP_EOL;
+            $constants .= '  + `' . $row['constant'] . '` = ' . $this->escapeMd((string) $row['value']) . PHP_EOL;
             ++$total;
         }
 
@@ -213,7 +213,7 @@ class Manual extends Reports {
 
         $res = $this->dump->fetchAnalysers(array('Structures/DynamicCalls'));
         foreach($res->toArray() as $row) {
-            $expressions .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
+            $expressions .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd( (string) $row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
             ++$total;
         }
 
@@ -236,7 +236,7 @@ class Manual extends Reports {
 
         $res = $this->dump->fetchAnalysers(array('Structures/ErrorMessages'));
         foreach($res->toArray() as $row) {
-            $errors .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
+            $errors .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd( (string) $row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
             ++$total;
         }
 
@@ -287,7 +287,7 @@ class Manual extends Reports {
 
         $res = $this->dump->fetchAnalysers(array($analyzer));
         foreach($res->toArray() as $row) {
-            $url .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd($row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
+            $url .= '+ `' . $row['fullcode'] . '` in ' . $this->escapeMd((string) $row['file']) . ' : ' . $this->escapeMd((string) $row['line']) . PHP_EOL;
             ++$total;
         }
 
