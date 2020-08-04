@@ -249,6 +249,14 @@ class Appinfo extends Data {
                             'mail'             => 'Structures/MailUsage',
                      ),
 
+                    'Languages' => array(
+                            'Json'             => 'Extensions/ExtJson',
+//                            'pack'             => 'Structures/FileUsage',
+//                            'SQL'             => 'Extensions/Extldap',
+                            'Regex'             => 'Extensions/ExtPcre',
+                            'Ereg'             => 'Extensions/ExtEreg',
+                     ),
+
                     'Extensions' => array(
                             'ext/amqp'       => 'Extensions/Extamqp',
                             'ext/apache'     => 'Extensions/Extapache',
