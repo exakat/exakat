@@ -1309,13 +1309,19 @@ GREMLIN
     private function collectPhpStructures2(string $label, string $analyzer, string $type): int {
         $query = <<<GREMLIN
 g.V().hasLabel("$label").where( __.in("ANALYZED").has("analyzer", "$analyzer"))
-.coalesce( __.out("NAME"), __.filter{true;})
-.groupCount("m").by("fullcode").cap("m").next().sort{ it.value.toInteger() };
+//.optional( __.out("NAME"))
+.groupCount("m").by("fullnspath").cap("m").next().sort{ it.value.toInteger() };
 GREMLIN;
         $res = $this->gremlin->query($query);
         $res->deHash(array($type));
+        
+        $store = array();
+        foreach($res->toArray() as $row) {
+            $row[] = $type;
+            $store[] = $row;
+        }
 
-        $total = $this->dump->storeInTable('atomsCounts', $res);
+        $total = $this->dump->storeInTable('phpStructures', $store);
         display("$total PHP {$type}s\n");
 
         return $total;
