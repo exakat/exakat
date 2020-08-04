@@ -30,28 +30,17 @@ class ParameterArgumentsLinks extends AnalyzerArrayHashResults {
 
         // Total parameter usage
         $this->atomIs('Parameter')
-             ->savePropertyAs('rank', 'ranked')
-             ->back('first')
-
-             ->inIs('ARGUMENT')
-             ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->goToParameterUsage()
              ->count();
         $total = $this->rawQuery()->toInt();
         $this->analyzerValues[] = array('total', $total);
 
         // identical parameter usage
         $this->atomIs('Parameter')
-             ->savePropertyAs('rank', 'ranked')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')
-
-             ->inIs('ARGUMENT')
-             ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->goToParameterUsage()
              ->atomIs('Variable')
              ->samePropertyAs('code', 'name')
              ->count();
@@ -60,15 +49,11 @@ class ParameterArgumentsLinks extends AnalyzerArrayHashResults {
 
         // different variable parameter usage
         $this->atomIs('Parameter')
-             ->savePropertyAs('rank', 'ranked')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')
+             ->goToParameterUsage()
 
-             ->inIs('ARGUMENT')
-             ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
-             ->outWithRank('ARGUMENT', 'ranked')
              ->atomIs('Variable')
              ->notSamePropertyAs('code', 'name')
              ->count();
@@ -77,14 +62,7 @@ class ParameterArgumentsLinks extends AnalyzerArrayHashResults {
 
         // expression parameter usage
         $this->atomIs('Parameter')
-             ->savePropertyAs('rank', 'ranked')
-             ->outIs('NAME')
-             ->back('first')
-
-             ->inIs('ARGUMENT')
-             ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->goToParameterUsage()
              ->atomIsNot(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->count();
         $build = $this->rawQuery()->toInt();
@@ -92,14 +70,7 @@ class ParameterArgumentsLinks extends AnalyzerArrayHashResults {
 
         // constant parameter usage
         $this->atomIs('Parameter')
-             ->savePropertyAs('rank', 'ranked')
-             ->outIs('NAME')
-             ->back('first')
-
-             ->inIs('ARGUMENT')
-             ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->goToParameterUsage()
              ->is('constant', true)
              ->count();
         $constant = $this->rawQuery()->toInt();

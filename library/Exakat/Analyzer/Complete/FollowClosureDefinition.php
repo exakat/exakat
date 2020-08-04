@@ -55,10 +55,7 @@ class FollowClosureDefinition extends Complete {
         // relayed usage foo(function(){}); function foo($a) { $a();}
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITH_VARIABLES)
              ->hasIn('ARGUMENT')
-             ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
-             ->inIs('DEFINITION')  // Find all variable usage
-             ->outToParameter('ranked')
+             ->goToParameterDefinition()
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('NAME')
@@ -71,10 +68,7 @@ class FollowClosureDefinition extends Complete {
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITH_VARIABLES)
              ->inIs('DEFAULT')
              ->outIs('DEFINITION')
-             ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
-             ->inIs('DEFINITION')  // Find all variable usage
-             ->outToParameter('ranked')
+             ->goToParameterDefinition()
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('NAME')

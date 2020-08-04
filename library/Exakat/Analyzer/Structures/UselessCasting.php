@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Methods;
 
 class UselessCasting extends Analyzer {
     public function dependsOn(): array {
@@ -39,7 +40,7 @@ class UselessCasting extends Analyzer {
                        'T_DOUBLE_CAST'  => 'float'
                   );
 
-        $returnTypes = $this->methods->getFunctionsByReturn(true);
+        $returnTypes = $this->methods->getFunctionsByReturn(Methods::STRICT);
 
         foreach($casts as $token => $type) {
             if (is_array($type)) {

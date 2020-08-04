@@ -49,6 +49,30 @@ class Methods {
         }
     }
 
+    public function getPhpFunctions() : array {
+        $query = 'SELECT name FROM methods WHERE class = "PHP"';
+        $res = $this->sqlite->query($query);
+        $return = array();
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[] = $row;
+        }
+
+        return $return;
+    }
+
+    public function getPhpClasses() : array {
+        $query = 'SELECT DISTINCT class FROM methods WHERE class != "PHP"';
+        $res = $this->sqlite->query($query);
+        $return = array();
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[] = $row;
+        }
+
+        return $return;
+    }
+
     public function getMethodsArgsInterval() : array {
         $query = 'SELECT class, name, args_min, args_max FROM methods WHERE class != "PHP"';
         $res = $this->sqlite->query($query);

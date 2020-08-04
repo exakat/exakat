@@ -48,11 +48,7 @@ class MakeFunctioncallWithReference extends Complete {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
-             ->savePropertyAs('rank', 'ranked')
-             ->back('first')
-             ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
-             ->outWithRank('ARGUMENT', 'ranked')
+             ->goToParameterDefinition()
              ->setProperty('isModified', true);
         $this->prepareQuery();
     }
