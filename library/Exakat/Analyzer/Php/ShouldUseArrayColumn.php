@@ -54,6 +54,36 @@ class ShouldUseArrayColumn extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // foreach($a as $b) { $c[$b->f] = $b->e; }
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+
+             ->outIs('BLOCK')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->atomInsideNoDefinition('Assignation')
+             ->hasNoInstruction(array('Ifthen', 'Switch', 'Match')) // Make this a filter
+             ->outIs('LEFT')
+             ->atomIs('Array')
+             // The left part is not reusing the blin variable : this would be too complex for array_column
+             ->not(
+                $this->side()
+                     ->atomIs(array('Array', 'Member'))
+                     ->outIs(array('VARIABLE', 'OBJECT'))
+                     ->atomInsideNoDefinition(array('Variable', 'Variablearray'))
+                     ->samePropertyAs('code', 'name')
+             )
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->atomIs(array('Array', 'Member'))
+             ->outIs(array('VARIABLE', 'OBJECT'))
+             ->samePropertyAs('code', 'name')
+             ->back('first');
+        $this->prepareQuery();
+
         // for($i = 0; $i < count($n); ++$i) { $c[] = $n[$i]['c']; }
         $this->atomIs('For')
              ->outIs('INCREMENT')
