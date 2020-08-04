@@ -452,6 +452,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + injectionsCount : 5
 
     + Threshold for too many injected parameters for one class.
+:ref:`Large Try Block <large-try-block>`
+  + tryBlockMaxSize : 5
+
+    + Maximal number of expressions in the try block.
 :ref:`Missing Include <missing-include>`
   + constant_or_variable_name : 100
 
@@ -460,6 +464,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + centralizeThreshold : 8
 
     + Minimal number of calls of the function with one common argument.
+:ref:`Hardcoded Passwords <hardcoded-passwords>`
+  + passwordsKeys : password_keys.json
+
+    + List of array index and property names that shall be checked for potential secret key storages.
 :ref:`Prefix And Suffixes With Typehint <prefix-and-suffixes-with-typehint>`
   + prefixedType : prefixedType['is'] = 'bool';
 prefixedType['has'] = 'bool';
@@ -493,6 +501,14 @@ prefixedType['uuid'] = '\Uuid';
   + minimumSize : 3
 
     + Minimal number of expressions in a method to apply this analysis.
+:ref:`Abstract Away <abstract-away>`
+  + abstractableCalls : 
+
+    + Minimal number of parameters to report.
+:ref:`Memoize MagicCall <memoize-magiccall>`
+  + minMagicCallsToGet : 2
+
+    + Minimal number of calls of a magic property to make it worth locally caching.
 :ref:`PHP Keywords As Names <php-keywords-as-names>`
   + reservedNames : 
 
@@ -509,6 +525,10 @@ prefixedType['uuid'] = '\Uuid';
   + filePrivileges : 0777
 
     + List of forbidden file modes (comma separated).
+:ref:`Should Use Prepared Statement <should-use-prepared-statement>`
+  + queryMethod : query_methods.json
+
+    + Methods that call a query.
 :ref:`Long Arguments <long-arguments>`
   + codeTooLong : 100
 

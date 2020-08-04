@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Wed, 22 Jul 2020 14:57:17 +0000
-.. comment: Generation hash : 1dd7a5821ad28cab48d27d40c38f7334e55c7640
+.. comment: Generation date : Tue, 04 Aug 2020 14:07:38 +0000
+.. comment: Generation hash : 0eecf176c68cff46d62cdbde6d82a58f0ebc3afa
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 395 analysis
+Total : 399 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -111,6 +111,7 @@ Total : 395 analysis
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Ambiguous Static <ambiguous-static>`
 * :ref:`Ambiguous Visibilities <ambiguous-visibilities>`
+* :ref:`Array_merge Needs Array Of Arrays <array\_merge-needs-array-of-arrays>`
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Assign And Compare <assign-and-compare>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
@@ -135,6 +136,7 @@ Total : 395 analysis
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Casting Ternary <casting-ternary>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
+* :ref:`Catch Undefined Variable <catch-undefined-variable>`
 * :ref:`Check All Types <check-all-types>`
 * :ref:`Check JSON <check-json>`
 * :ref:`Check On __Call Usage <check-on-\_\_call-usage>`
@@ -228,6 +230,7 @@ Total : 395 analysis
 * :ref:`Infinite Recursion <infinite-recursion>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
+* :ref:`Interfaces Don't Ensure Properties <interfaces-don't-ensure-properties>`
 * :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`Invalid Pack Format <invalid-pack-format>`
@@ -286,7 +289,6 @@ Total : 395 analysis
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Empty Regex <no-empty-regex>`
-* :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
@@ -294,6 +296,7 @@ Total : 395 analysis
 * :ref:`No Literal For Reference <no-literal-for-reference>`
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Need For Else <no-need-for-else>`
+* :ref:`No Need For Triple Equal <no-need-for-triple-equal>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
@@ -471,6 +474,7 @@ Total : 395 analysis
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
 * :ref:`Wrong Range Check <wrong-range-check>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
+* :ref:`Wrong Type For Native PHP Function <wrong-type-for-native-php-function>`
 * :ref:`Wrong Type With Call <wrong-type-with-call>`
 * :ref:`Wrong Typed Property Init <wrong-typed-property-init>`
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
@@ -521,13 +525,13 @@ Total : 46 analysis
 * :ref:`Fossilized Method <fossilized-method>`
 * :ref:`Hidden Nullable <hidden-nullable>`
 * :ref:`Insufficient Property Typehint <insufficient-property-typehint>`
+* :ref:`Interfaces Don't Ensure Properties <interfaces-don't-ensure-properties>`
 * :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
 * :ref:`Memoize MagicCall <memoize-magiccall>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
 * :ref:`Missing Abstract Method <missing-abstract-method>`
-* :ref:`No Garantee For Property Constant <no-garantee-for-property-constant>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Non Nullable Getters <non-nullable-getters>`
 * :ref:`Nullable Without Check <nullable-without-check>`
@@ -1079,7 +1083,7 @@ CompatibilityPHP74
 
 This ruleset centralizes all analysis for the migration from PHP 7.3 to 7.4.
 
-Total : 28 analysis
+Total : 29 analysis
 
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Detect Current Class <detect-current-class>`
@@ -1098,6 +1102,7 @@ Total : 28 analysis
 * :ref:`Php 7.4 New Class <php-7.4-new-class>`
 * :ref:`Php 8.0 Only TypeHints <php-8.0-only-typehints>`
 * :ref:`Php 8.0 Variable Syntax Tweaks <php-8.0-variable-syntax-tweaks>`
+* :ref:`Php/UseMatch <php/usematch>`
 * :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
 * :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
 * :ref:`Signature Trailing Comma <signature-trailing-comma>`
@@ -1348,9 +1353,10 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 89 analysis
+Total : 91 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
+* :ref:`Abstract Away <abstract-away>`
 * :ref:`Add Default Value <add-default-value>`
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Avoid Real <avoid-real>`
@@ -1360,7 +1366,6 @@ Total : 89 analysis
 * :ref:`Complex Dynamic Names <complex-dynamic-names>`
 * :ref:`Could Be Constant <could-be-constant>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
-* :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Alias <could-use-alias>`
@@ -1373,6 +1378,7 @@ Total : 89 analysis
 * :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Directly Use File <directly-use-file>`
 * :ref:`Don't Loop On Yield <don't-loop-on-yield>`
+* :ref:`Dont Compare Typed Boolean <dont-compare-typed-boolean>`
 * :ref:`Drop Else After Return <drop-else-after-return>`
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -1381,6 +1387,7 @@ Total : 89 analysis
 * :ref:`Implode One Arg <implode-one-arg>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
 * :ref:`Isset() On The Whole Array <isset()-on-the-whole-array>`
+* :ref:`Large Try Block <large-try-block>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Multiple Unset() <multiple-unset()>`
@@ -1485,19 +1492,20 @@ Typechecks
 
 This ruleset focuses on typehinting. Missing typehint, or inconsistent typehint, are reported. 
 
-Total : 22 analysis
+Total : 23 analysis
 
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Bad Typehint Relay <bad-typehint-relay>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
+* :ref:`Could Be Callable <could-be-callable>`
 * :ref:`Could Be Integer <could-be-integer>`
-* :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
-* :ref:`Could Type With Array <could-type-with-array>`
-* :ref:`Could Type With Boolean <could-type-with-boolean>`
-* :ref:`Could Type With Int <could-type-with-int>`
-* :ref:`Could Type With Iterable <could-type-with-iterable>`
-* :ref:`Could Type With String <could-type-with-string>`
-* :ref:`Could Typehint <could-typehint>`
+* :ref:`Could Be Integer <could-be-integer>`
+* :ref:`Could Be Iterable <could-be-iterable>`
+* :ref:`Could Be Null <could-be-null>`
+* :ref:`Could Be Parent <could-be-parent>`
+* :ref:`Could Be Self <could-be-self>`
+* :ref:`Could Be String <could-be-string>`
+* :ref:`Could Be Void <could-be-void>`
 * :ref:`Fossilized Method <fossilized-method>`
 * :ref:`Insufficient Typehint <insufficient-typehint>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`

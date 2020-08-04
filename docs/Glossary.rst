@@ -78,6 +78,7 @@ Glossary
 
     + `array()`
 
+      + :ref:`Array_merge Needs Array Of Arrays <array\_merge-needs-array-of-arrays>`
       + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
       + :ref:`Could Be Class Constant <could-be-class-constant>`
       + :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
@@ -141,11 +142,11 @@ Glossary
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Callback Needs Return <callback-needs-return>`
-      + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_merge()`
 
+      + :ref:`Array_merge Needs Array Of Arrays <array\_merge-needs-array-of-arrays>`
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
       + :ref:`Unpacking Inside Arrays <unpacking-inside-arrays>`
       + :ref:`Use Array Functions <use-array-functions>`
@@ -321,7 +322,6 @@ Glossary
       + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
       + :ref:`Could Be Static Closure <could-be-static-closure>`
-      + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Unbinding Closures <unbinding-closures>`
@@ -417,6 +417,10 @@ Glossary
     + `Die()`
 
       + :ref:`Print And Die <print-and-die>`
+
+    + `date()`
+
+      + :ref:`Abstract Away <abstract-away>`
 
     + `date_create()`
 
@@ -881,7 +885,6 @@ Glossary
 
     + `instanceof`
 
-      + :ref:`Could Typehint <could-typehint>`
       + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Undefined ::class <undefined-\:\:class>`
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
@@ -1174,6 +1177,7 @@ Glossary
       + :ref:`Break With Non Integer <break-with-non-integer>`
       + :ref:`Casting Ternary <casting-ternary>`
       + :ref:`Check All Types <check-all-types>`
+      + :ref:`Could Be Null <could-be-null>`
       + :ref:`Don't Unset Properties <don't-unset-properties>`
       + :ref:`Hidden Nullable <hidden-nullable>`
       + :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
@@ -1387,6 +1391,7 @@ Glossary
 
     + `random_int()`
 
+      + :ref:`Abstract Away <abstract-away>`
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
       + :ref:`Random Without Try <random-without-try>`
       + :ref:`Use random_int() <use-random\_int()>`

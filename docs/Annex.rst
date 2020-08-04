@@ -440,15 +440,28 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.1.5
+
+  * Abstract Away (Patterns/AbstractAway ; Suggestions)
+  * Catch Undefined Variable (Exceptions/CatchUndefinedVariable ; Analyze)
+  * Collect Parameter Names (Dump/CollectParameterNames ; Dump)
+  * Dont Compare Typed Boolean (Structures/DontCompareTypedBoolean ; Suggestions)
+  * Dump/FossilizedMethods (Dump/FossilizedMethods ; Dump)
+  * Large Try Block (Exceptions/LargeTryBlock ; Suggestions)
+  * Swapped Arguments (Classes/SwappedArguments)
+  * Wrong Type For Native PHP Function (Php/WrongTypeForNativeFunction ; Analyze)
+
 * 2.1.4
 
-  * Call Order (Dump/CallOrder ; Unassigned)
-  * Could Be Integer (Typehints/CouldBeFloat ; Typehints)
+  * Array_merge Needs Array Of Arrays (Structures/ArrayMergeArrayArray ; Analyze)
+  * Call Order (Dump/CallOrder ; Dump)
+  * Could Be Integer (Typehints/CouldBeFloat ; Typechecks, Typehints)
   * Could Be Integer (Typehints/CouldBeInt ; Typechecks, Typehints)
-  * Could Be Iterable (Typehints/CouldBeIterable ; Typehints)
+  * Could Be Iterable (Typehints/CouldBeIterable ; Typechecks, Typehints)
   * Extended Typehints (Complete/ExtendedTypehints ; Complete)
   * Mismatch Properties Typehints (Classes/MismatchProperties)
-  * Php/UseMatch (Php/UseMatch ; Unassigned)
+  * No Need For Triple Equal (Structures/NoNeedForTriple ; Analyze)
+  * Php/UseMatch (Php/UseMatch ; CompatibilityPHP74)
 
 * 2.1.3
 
@@ -465,12 +478,12 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Be Array Typehint (Typehints/CouldBeArray ; Typehints)
   * Could Be Boolean (Typehints/CouldBeBoolean ; Typehints)
   * Could Be CIT (Typehints/CouldBeCIT ; Typehints)
-  * Could Be Callable (Typehints/CouldBeCallable ; Typehints)
-  * Could Be Null (Typehints/CouldBeNull ; Typehints)
-  * Could Be Parent (Typehints/CouldBeParent ; Typehints)
-  * Could Be Self (Typehints/CouldBeSelf ; Typehints)
-  * Could Be String (Typehints/CouldBeString ; Typehints)
-  * Could Be Void (Typehints/CouldBeVoid ; Typehints)
+  * Could Be Callable (Typehints/CouldBeCallable ; Typechecks, Typehints)
+  * Could Be Null (Typehints/CouldBeNull ; Typechecks, Typehints)
+  * Could Be Parent (Typehints/CouldBeParent ; Typechecks, Typehints)
+  * Could Be Self (Typehints/CouldBeSelf ; Typechecks, Typehints)
+  * Could Be String (Typehints/CouldBeString ; Typechecks, Typehints)
+  * Could Be Void (Typehints/CouldBeVoid ; Typechecks, Typehints)
   * Could Not Type (Typehints/CouldNotType ; Typehints)
   * Double Object Assignation (Structures/DoubleObjectAssignation ; Analyze, ClassReview)
   * Possible Alias Confusion (Namespaces/AliasConfusion ; Suggestions)
@@ -552,11 +565,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Collect Mbstring Encodings (Dump/CollectMbstringEncodings ; Dump)
   * Complete/CreateForeachDefault (Complete/CreateForeachDefault ; Complete)
   * Concrete usage (Vendors/Concrete5 ; Appinfo)
-  * Could Type With Array (Functions/CouldTypeWithArray ; Typechecks)
-  * Could Type With Boolean (Functions/CouldTypeWithBool ; Typechecks)
-  * Could Type With Int (Functions/CouldTypeWithInt ; Typechecks)
-  * Could Type With Iterable (Functions/CouldTypeWithIterable ; Typechecks)
-  * Could Type With String (Functions/CouldTypeWithString ; Typechecks)
+  * Could Type With Array (Functions/CouldTypeWithArray ; Under Work)
+  * Could Type With Boolean (Functions/CouldTypeWithBool ; Under Work)
+  * Could Type With Int (Functions/CouldTypeWithInt ; Under Work)
+  * Could Type With Iterable (Functions/CouldTypeWithIterable ; Under Work)
+  * Could Type With String (Functions/CouldTypeWithString ; Under Work)
   * Filter To add_slashes() (Php/FilterToAddSlashes ; CompatibilityPHP74)
   * Immutable Signature (Classes/ImmutableSignature ; Appinfo)
   * Is_A() With String (Php/IsAWithString ; Analyze, Simple, Rector)
@@ -600,9 +613,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Collect Literals (Dump/CollectLiterals ; Dump)
   * Environnement Variable Usage (Dump/EnvironnementVariables ; Dump)
+  * Interfaces Don't Ensure Properties (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
   * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, LintButWontExec, ClassReview)
   * Magic Properties (Classes/MagicProperties)
-  * No Garantee For Property Constant (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
   * No Literal For Reference (Functions/NoLiteralForReference ; Analyze)
   * Use array_slice() (Performances/UseArraySlice ; Analyze)
 
@@ -1323,7 +1336,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.11.5
 
-  * Could Typehint (Functions/CouldTypehint ; Typechecks)
+  * Could Typehint (Functions/CouldTypehint ; Under Work)
   * Implemented Methods Are Public (Classes/ImplementedMethodsArePublic)
   * Mixed Concat And Interpolation (Structures/MixedConcatInterpolation ; Analyze, Coding Conventions)
   * No Reference On Left Side (Structures/NoReferenceOnLeft ; Analyze)
@@ -1389,7 +1402,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.10.5
 
-  * Could Be Typehinted Callable (Functions/CouldBeCallable ; Suggestions, Typechecks)
+  * Could Be Typehinted Callable (Functions/CouldBeCallable ; Under Work)
   * Encoded Simple Letters (Security/EncodedLetters ; Security)
   * Regex Delimiter (Structures/RegexDelimiter ; Preferences)
   * Strange Name For Constants (Constants/StrangeName ; Analyze)
@@ -2418,14 +2431,12 @@ List of external links mentionned in this documentation.
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
 * `.exakat.ini` or `.exakat.yaml` file. See `Add Exakat To Your CI Pipeline <https://www.exakat.io/add-exakat-to-your-ci-pipeline/>`_
 * `.phar` from the exakat.io website : `www.exakat.io <http://www.exakat.io/versions/>`_
-* `10 GitHub Security Best Practices <https://snyk.io/blog/ten-git-hub-security-best-practices/>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `@deprecated <https://docs.phpdoc.org/latest/references/phpdoc/tags/deprecated.html>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
 * `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_
 * `__autoload <http://php.net/autoload>`_
-* `__get performance questions with PHP <https://stackoverflow.com/questions/3330852/get-set-call-performance-questions-with-php>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `About circular references in PHP <https://johann.pardanaud.com/blog/about-circular-references-in-php>`_
 * `Add array_key_exists to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_
@@ -2445,6 +2456,7 @@ List of external links mentionned in this documentation.
 * `array_filter <https://php.net/array_filter>`_
 * `array_key_exists() with objects <https://wiki.php.net/rfc/deprecations_php_7_4#array_key_exists_with_objects>`_
 * `array_map <http://php.net/array_map>`_
+* `array_merge <https://www.php.net/array_merge>`_
 * `array_search <http://php.net/array_search>`_
 * `array_slice <http://www.php.net/array_slice>`_
 * `array_unique <http://php.net/array_unique>`_
@@ -2721,8 +2733,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2794,8 +2806,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
+* `Password Hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2860,7 +2872,6 @@ List of external links mentionned in this documentation.
 * `Predefined Variables <https://www.php.net/manual/en/reserved.variables.php>`_
 * `preg_filter <https://php.net/preg_filter>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
-* `Prepared Statements <https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php>`_
 * `printf <http://php.net/printf>`_
 * `Process Control <http://php.net/manual/en/book.pcntl.php>`_
 * `proctitle <http://php.net/manual/en/book.proctitle.php>`_
@@ -2968,8 +2979,8 @@ List of external links mentionned in this documentation.
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -3176,6 +3187,7 @@ _______
 |   analyzer[] = "Constants/StrangeName";
 |   analyzer[] = "Constants/UndefinedConstants";
 |   analyzer[] = "Exceptions/CantThrow";
+|   analyzer[] = "Exceptions/CatchUndefinedVariable";
 |   analyzer[] = "Exceptions/ForgottenThrown";
 |   analyzer[] = "Exceptions/OverwriteException";
 |   analyzer[] = "Exceptions/ThrowFunctioncall";
@@ -3284,6 +3296,7 @@ _______
 |   analyzer[] = "Php/UsePathinfo";
 |   analyzer[] = "Php/UseSetCookie";
 |   analyzer[] = "Php/UseStdclass";
+|   analyzer[] = "Php/WrongTypeForNativeFunction";
 |   analyzer[] = "Php/oldAutoloadUsage";
 |   analyzer[] = "Security/DontEchoError";
 |   analyzer[] = "Security/ShouldUsePreparedStatement";
@@ -3292,6 +3305,7 @@ _______
 |   analyzer[] = "Structures/AlternativeConsistenceByFile";
 |   analyzer[] = "Structures/AlwaysFalse";
 |   analyzer[] = "Structures/ArrayMergeAndVariadic";
+|   analyzer[] = "Structures/ArrayMergeArrayArray";
 |   analyzer[] = "Structures/AssigneAndCompare";
 |   analyzer[] = "Structures/AutoUnsetForeach";
 |   analyzer[] = "Structures/BailOutEarly";
@@ -3384,6 +3398,7 @@ _______
 |   analyzer[] = "Structures/NoHardcodedPort";
 |   analyzer[] = "Structures/NoIssetWithEmpty";
 |   analyzer[] = "Structures/NoNeedForElse";
+|   analyzer[] = "Structures/NoNeedForTriple";
 |   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
 |   analyzer[] = "Structures/NoReferenceOnLeft";
 |   analyzer[] = "Structures/NoSubstrOne";
@@ -4118,6 +4133,7 @@ __________________
 |   analyzer[] = "Php/ScalarAreNotArrays";
 |   analyzer[] = "Php/SignatureTrailingComma";
 |   analyzer[] = "Php/ThrowWasAnExpression";
+|   analyzer[] = "Php/UseMatch";
 |   analyzer[] = "Structures/CurlVersionNow";
 |   analyzer[] = "Structures/DontReadAndWriteInOneExpression";
 |   analyzer[] = "Structures/OpensslRandomPseudoByteSecondArg";| 
@@ -4397,10 +4413,10 @@ ___________
 |   analyzer[] = "Classes/UnitializedProperties";
 |   analyzer[] = "Constants/CouldBeConstant";
 |   analyzer[] = "Exceptions/CouldUseTry";
+|   analyzer[] = "Exceptions/LargeTryBlock";
 |   analyzer[] = "Exceptions/OverwriteException";
 |   analyzer[] = "Functions/AddDefaultValue";
 |   analyzer[] = "Functions/Closure2String";
-|   analyzer[] = "Functions/CouldBeCallable";
 |   analyzer[] = "Functions/CouldBeStaticClosure";
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/CouldReturnVoid";
@@ -4414,6 +4430,7 @@ ___________
 |   analyzer[] = "Interfaces/UnusedInterfaces";
 |   analyzer[] = "Namespaces/AliasConfusion";
 |   analyzer[] = "Namespaces/CouldUseAlias";
+|   analyzer[] = "Patterns/AbstractAway";
 |   analyzer[] = "Performances/ArrayKeyExistsSpeedup";
 |   analyzer[] = "Performances/IssetWholeArray";
 |   analyzer[] = "Performances/SubstrFirst";
@@ -4440,6 +4457,7 @@ ___________
 |   analyzer[] = "Structures/CouldUseCompact";
 |   analyzer[] = "Structures/CouldUseDir";
 |   analyzer[] = "Structures/DirectlyUseFile";
+|   analyzer[] = "Structures/DontCompareTypedBoolean";
 |   analyzer[] = "Structures/DontLoopOnYield";
 |   analyzer[] = "Structures/DropElseAfterReturn";
 |   analyzer[] = "Structures/EchoWithConcat";
@@ -4532,13 +4550,6 @@ __________
 |   analyzer[] = "Classes/ChildRemoveTypehint";
 |   analyzer[] = "Classes/FossilizedMethod";
 |   analyzer[] = "Functions/BadTypehintRelay";
-|   analyzer[] = "Functions/CouldBeCallable";
-|   analyzer[] = "Functions/CouldTypeWithArray";
-|   analyzer[] = "Functions/CouldTypeWithBool";
-|   analyzer[] = "Functions/CouldTypeWithInt";
-|   analyzer[] = "Functions/CouldTypeWithIterable";
-|   analyzer[] = "Functions/CouldTypeWithString";
-|   analyzer[] = "Functions/CouldTypehint";
 |   analyzer[] = "Functions/InsufficientTypehint";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MismatchedDefaultArguments";
@@ -4550,7 +4561,15 @@ __________
 |   analyzer[] = "Functions/WrongTypeWithCall";
 |   analyzer[] = "Interfaces/UselessInterfaces";
 |   analyzer[] = "Php/NotScalarType";
-|   analyzer[] = "Typehints/CouldBeInt";| 
+|   analyzer[] = "Typehints/CouldBeCallable";
+|   analyzer[] = "Typehints/CouldBeFloat";
+|   analyzer[] = "Typehints/CouldBeInt";
+|   analyzer[] = "Typehints/CouldBeIterable";
+|   analyzer[] = "Typehints/CouldBeNull";
+|   analyzer[] = "Typehints/CouldBeParent";
+|   analyzer[] = "Typehints/CouldBeSelf";
+|   analyzer[] = "Typehints/CouldBeString";
+|   analyzer[] = "Typehints/CouldBeVoid";| 
 
 
 

@@ -10734,62 +10734,6 @@ The closure function($m) makes no usage of the current object : using static pre
         return array('methods' => new PwgNamedArray( array_keys($methods),'method' ) );
       }
 
-Could Be Typehinted Callable
-============================
-
-.. _magento-functions-couldbecallable:
-
-Magento
-^^^^^^^
-
-:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
-
-$objMethod argument is used to call a function, a method or a localmethod. The typehint would save the middle condition, and make a better job than 'is_array' to check if $objMethod is callable. Yet, the final 'else' means that $objMethod is also the name of a method, and PHP won't validate this, unless there is a function with the same name. Here, callable is not an option. 
-
-.. code-block:: php
-
-    public function each($objMethod, $args = [])
-        {
-            if ($objMethod instanceof \Closure) {
-                foreach ($this->getItems() as $item) {
-                    $objMethod($item, ...$args);
-                }
-            } elseif (is_array($objMethod)) {
-                foreach ($this->getItems() as $item) {
-                    call_user_func($objMethod, $item, ...$args);
-                }
-            } else {
-                foreach ($this->getItems() as $item) {
-                    $item->$objMethod(...$args);
-                }
-            }
-        }
-
-
---------
-
-
-.. _prestashop-functions-couldbecallable:
-
-PrestaShop
-^^^^^^^^^^
-
-:ref:`could-be-typehinted-callable`, in controllers/admin/AdminImportController.php:1147. 
-
-$funcname is tested with is_callable() before being used as a method. Typehint callable would reduce the size of the code. 
-
-.. code-block:: php
-
-    public static function arrayWalk(&$array, $funcname, &$user_data = false)
-    	{
-    		if (!is_callable($funcname)) return false;
-    
-    		foreach ($array as $k => $row)
-    			if (!call_user_func_array($funcname, array($row, $k, $user_data)))
-    				return false;
-    		return true;
-    	}
-
 Add Default Value
 =================
 

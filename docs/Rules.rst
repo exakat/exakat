@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 23 Jul 2020 08:57:58 +0000
-.. comment: Generation hash : 9d8706989ad6ea966e13f469791bd8f8d17162d9
+.. comment: Generation date : Tue, 04 Aug 2020 14:07:38 +0000
+.. comment: Generation hash : 0eecf176c68cff46d62cdbde6d82a58f0ebc3afa
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -415,6 +415,72 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Examples    | Structures/Noscream                                                                   |
 +-------------+---------------------------------------------------------------------------------------+
+
+
+
+.. _abstract-away:
+
+Abstract Away
+#############
+
+
+Avoid using PHP native functions that produce data direcly in the code. For example, `date() <https://www.php.net/date>`_ or `random_int() <https://www.php.net/random_int>`_. They should be abstracted away in a method, that will be replaced later for testing purposes, or even debugging.
+
+To abstract such calls, place them in a method, and add an interface to this method. Then, create and use those objects.
+
+.. code-block:: php
+
+   <?php
+   
+   // abstracted away date 
+   $today = new MyDate();
+   echo 'Date : '.$today->date('r');
+   
+   // hard coded date of today : it changes all the time.
+   echo 'Date : '.date('r');
+   
+   interface MyCalendar{
+       function date($format) : string ;
+   }
+   
+   class MyDate implements MyCalendar {
+       function date($format) : string { return date('r'); }
+   }
+   
+   // Valid implementation, reserved for testing purpose
+   // This prevents from waiting 4 years for a test.
+   class MyDateForTest implements MyCalendar {
+       function date($format) : string { return date('r', strtotime('2016-02-29 12:00:00')); }
+   }
+   
+   ?>
+
+
+See also `Being in control of time in PHP <https://blog.frankdejonge.nl/being-in-control-of-time-in-php/>`_ and `How to test non-deterministic code <https://www.orbitale.io/2019/12/24/how-to-test-non-deterministic-code.html>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Abstract away the calls to native PHP functions, and upgrade the unit tests
+
++-------------------+---------+----------+-------------+
+| Name              | Default | Type     | Description |
++-------------------+---------+----------+-------------+
+| abstractableCalls |         | ini_hash | Description |
++-------------------+---------+----------+-------------+
+
+
+
++-------------+-----------------------+
+| Short name  | Patterns/AbstractAway |
++-------------+-----------------------+
+| Rulesets    | :ref:`Suggestions`    |
++-------------+-----------------------+
+| Severity    | Minor                 |
++-------------+-----------------------+
+| Time To Fix | Patterns/AbstractAway |
++-------------+-----------------------+
 
 
 
@@ -1381,6 +1447,56 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Examples    | Functions/ShouldBeTypehinted                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------+
+
+
+
+.. _array\_merge-needs-array-of-arrays:
+
+Array_merge Needs Array Of Arrays
+#################################
+
+
+When collecting data to feed `array_merge() <https://www.php.net/array_merge>`_, use an array of array as default value. ```array(`array()) <https://www.php.net/array>`_``` is the neutral value for `array_merge() <https://www.php.net/array_merge>`_;
+
+This analysis also reports when the used types are not an array : `array_merge() <https://www.php.net/array_merge>`_ does not accept scalar values, but only arrays.
+
+.. code-block:: php
+
+   <?php
+   
+   // safe default value
+   $a = array(array());
+   
+   // when $list is empty, it is 
+   foreach($list as $l) {
+       $a[] = $l;
+   }
+   $b = array_merge($a);
+   
+   ?>
+
+
+Since PHP 7.4, it is possible to call `array_merge() <https://www.php.net/array_merge>`_ without an argument : this means the default value may an empty array. This array shall not contain scalar values.
+
+See also `array_merge <https://www.php.net/array_merge>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use ```array(array())``` or ```[[]]``` as default value for array_merge()
+* Remove any non-array value from the values in the default array
+
++-------------+---------------------------------+
+| Short name  | Structures/ArrayMergeArrayArray |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Structures/ArrayMergeArrayArray |
++-------------+---------------------------------+
 
 
 
@@ -3703,6 +3819,50 @@ Suggestions
 
 
 
+.. _catch-undefined-variable:
+
+Catch Undefined Variable
+########################
+
+
+Always initialize variable before the try block, when they are used in a catch block. If the exception is raised before the variable is defined, the catch block may have to handle an undefined variable, leading to more chaos.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = 1;
+   try {
+       mayThrowAnException();
+       $b = 2;
+   } catch (\Exception $e) {
+       // $a is already defined, as it was done before the try block
+       // $b may not be defined, as it was initialized after the exception-throwing expression
+       echo $a + $b;
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Always define the variable used in the catch clause, before the try block.
+
++-------------+-----------------------------------+
+| Short name  | Exceptions/CatchUndefinedVariable |
++-------------+-----------------------------------+
+| Rulesets    | :ref:`Analyze`                    |
++-------------+-----------------------------------+
+| Severity    | Minor                             |
++-------------+-----------------------------------+
+| Time To Fix | Exceptions/CatchUndefinedVariable |
++-------------+-----------------------------------+
+
+
+
 .. _check-all-types:
 
 Check All Types
@@ -5394,6 +5554,38 @@ Suggestions
 
 
 
+.. _could-be-callable:
+
+Could Be Callable
+#################
+
+
+Mark arguments and return types that can be set to ``callable``.
+
+.. code-block:: php
+
+   <?php
+   
+   // Accept a callable as input 
+   function foo($b) {
+       // Returns value as return
+       return $b();
+   }
+   
+   ?>
+
++-------------+---------------------------+
+| Short name  | Typehints/CouldBeCallable |
++-------------+---------------------------+
+| Rulesets    | :ref:`Typechecks`         |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Typehints/CouldBeCallable |
++-------------+---------------------------+
+
+
+
 .. _could-be-class-constant:
 
 Could Be Class Constant
@@ -5557,7 +5749,7 @@ Could Be Integer
 ################
 
 
-Mark arguments, properties and return types that can be set to ``int``.
+Mark arguments, properties and return types that can be set to ``float``.
 
 .. code-block:: php
 
@@ -5565,21 +5757,127 @@ Mark arguments, properties and return types that can be set to ``int``.
    
    // Accept an int as input 
    function foo($b) {
-       // Returns an int
-       return $b + 8;
+       // Returns a float (cubic root of $b);
+       return pow($b, 1 / 3);
    }
    
    ?>
 
-+-------------+----------------------+
-| Short name  | Typehints/CouldBeInt |
-+-------------+----------------------+
-| Rulesets    | :ref:`Typechecks`    |
-+-------------+----------------------+
-| Severity    | Major                |
-+-------------+----------------------+
-| Time To Fix | Typehints/CouldBeInt |
-+-------------+----------------------+
++-------------+------------------------+
+| Short name  | Typehints/CouldBeFloat |
++-------------+------------------------+
+| Rulesets    | :ref:`Typechecks`      |
++-------------+------------------------+
+| Severity    | Major                  |
++-------------+------------------------+
+| Time To Fix | Typehints/CouldBeFloat |
++-------------+------------------------+
+
+
+
+.. _could-be-iterable:
+
+Could Be Iterable
+#################
+
+
+Mark arguments, properties and return types that can be set to ``iterable``.
+
+.. code-block:: php
+
+   <?php
+   
+   // Accept an array or a traversable Object as input 
+   function foo($b) {
+       foreach($b as $c) {
+       
+       }
+   
+       // Returns an array
+       return [$b];
+   }
+   
+   ?>
+
++-------------+---------------------------+
+| Short name  | Typehints/CouldBeIterable |
++-------------+---------------------------+
+| Rulesets    | :ref:`Typechecks`         |
++-------------+---------------------------+
+| Severity    | Major                     |
++-------------+---------------------------+
+| Time To Fix | Typehints/CouldBeIterable |
++-------------+---------------------------+
+
+
+
+.. _could-be-null:
+
+Could Be Null
+#############
+
+
+Mark arguments and return types that can be null.
+
+.. code-block:: php
+
+   <?php
+   
+   // Accept null as input, when used as third argument of file_get_contents
+   function foo($b) {
+       $s = file_get_contents(URL, false, $b);
+   
+       // Returns a string
+       return shell_exec($s);
+   }
+   
+   ?>
+
++-------------+-----------------------+
+| Short name  | Typehints/CouldBeNull |
++-------------+-----------------------+
+| Rulesets    | :ref:`Typechecks`     |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Typehints/CouldBeNull |
++-------------+-----------------------+
+
+
+
+.. _could-be-parent:
+
+Could Be Parent
+###############
+
+
+Mark arguments, return types and properties that can be set to ``parent``.
+
+This analysis works when typehints have already been configured.
+
+.. code-block:: php
+
+   <?php
+   
+   class x extends w {
+       // Accept a w object as input 
+       function foo(w $b) : w {
+           // Returns a w object
+           return $b;
+       }   
+   }
+   
+   ?>
+
++-------------+-------------------------+
+| Short name  | Typehints/CouldBeParent |
++-------------+-------------------------+
+| Rulesets    | :ref:`Typechecks`       |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Typehints/CouldBeParent |
++-------------+-------------------------+
 
 
 
@@ -5786,6 +6084,42 @@ This property may even be made private.
 
 
 
+.. _could-be-self:
+
+Could Be Self
+#############
+
+
+Mark arguments, return types and properties that can be set to ``self``.
+
+This analysis works when typehints have already been configured.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       // Accept a x object as input 
+       function foo(x $b) : x {
+           // Returns a x object
+           return $b;
+       }   
+   }
+   
+   ?>
+
++-------------+-----------------------+
+| Short name  | Typehints/CouldBeSelf |
++-------------+-----------------------+
+| Rulesets    | :ref:`Typechecks`     |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Typehints/CouldBeSelf |
++-------------+-----------------------+
+
+
+
 .. _could-be-static:
 
 Could Be Static
@@ -5880,58 +6214,69 @@ Suggestions
 
 
 
-.. _could-be-typehinted-callable:
+.. _could-be-string:
 
-Could Be Typehinted Callable
-############################
+Could Be String
+###############
 
 
-Those arguments may use the callable Typehint. 
-
-'callable' is a PHP keyword that represents callback functions. Those may be used in dynamic function call, like $function(); or as callback functions, like with `array_map() <https://www.php.net/array_map>`_;
-
-callable may be a string representing a function name or a static call (including \:\:), an array with two elements, (a class or object, and a method), or a closure.
-
-When arguments are used to call a function, but are not marked with 'callable', they are reported by this analysis.
+Mark arguemnts and return types that can be set to string.
 
 .. code-block:: php
 
    <?php
    
-   function foo(callable $callable) {
-       // very simple callback
-       return $callable();
+   // Accept a string as input 
+   function foo($a) {
+       // Returns a string
+       return $a . 'string';
    }
    
-   function foo2($array, $callable) {
-       // very simple callback
-       return array_map($array, $callable);
+   ?>
+
++-------------+-------------------------+
+| Short name  | Typehints/CouldBeString |
++-------------+-------------------------+
+| Rulesets    | :ref:`Typechecks`       |
++-------------+-------------------------+
+| Severity    | Major                   |
++-------------+-------------------------+
+| Time To Fix | Typehints/CouldBeString |
++-------------+-------------------------+
+
+
+
+.. _could-be-void:
+
+Could Be Void
+#############
+
+
+Mark return types that can be set to void.
+
+.. code-block:: php
+
+   <?php
+   
+   // No return, this should be void.
+   function foo() {
+       ++$a; // Not useful
    }
    
    ?>
 
 
-See also `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_.
+All abstract methods (in classes or in interfaces) are omitted here.
 
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Add the typehint callable
-* Use the function is_callable() inside the method if 'callable' is too strong.
-
-+-------------+---------------------------------------+
-| Short name  | Functions/CouldBeCallable             |
-+-------------+---------------------------------------+
-| Rulesets    | :ref:`Suggestions`, :ref:`Typechecks` |
-+-------------+---------------------------------------+
-| Severity    | Minor                                 |
-+-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
-+-------------+---------------------------------------+
-| Examples    | Functions/CouldBeCallable             |
-+-------------+---------------------------------------+
++-------------+-----------------------+
+| Short name  | Typehints/CouldBeVoid |
++-------------+-----------------------+
+| Rulesets    | :ref:`Typechecks`     |
++-------------+-----------------------+
+| Severity    | Major                 |
++-------------+-----------------------+
+| Time To Fix | Typehints/CouldBeVoid |
++-------------+-----------------------+
 
 
 
@@ -6052,262 +6397,6 @@ Suggestions
 +-------------+---------------------------+
 | Examples    | Functions/CouldReturnVoid |
 +-------------+---------------------------+
-
-
-
-.. _could-type-with-array:
-
-Could Type With Array
-#####################
-
-
-That argument may be typed with ``array``. 
-
-.. code-block:: php
-
-   <?php
-   
-   // $a is used with a function which requires an int. 
-   function foo($a) {
-       return array_keys($a);
-   }
-   
-   ?>
-
-
-See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Add the ``array`` typehint to the function.
-
-+-------------+------------------------------+
-| Short name  | Functions/CouldTypeWithArray |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Typechecks`            |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Functions/CouldTypeWithArray |
-+-------------+------------------------------+
-
-
-
-.. _could-type-with-boolean:
-
-Could Type With Boolean
-#######################
-
-
-That argument may be typed with ``bool``. 
-
-.. code-block:: php
-
-   <?php
-   
-   // $a is used with a function which requires a boolean. 
-   function foo($code, $a) {
-       return var_dump($code, $a);
-   }
-   
-   ?>
-
-
-See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Add the ``bool`` typehint to the function.
-
-+-------------+-----------------------------+
-| Short name  | Functions/CouldTypeWithBool |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Typechecks`           |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Functions/CouldTypeWithBool |
-+-------------+-----------------------------+
-
-
-
-.. _could-type-with-int:
-
-Could Type With Int
-###################
-
-
-That argument may be typed with ``int``. 
-
-.. code-block:: php
-
-   <?php
-   
-   // $a is used with a function which requires an int. 
-   function foo($a) {
-       return chr($a);
-   }
-   
-   ?>
-
-
-See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Add the ``int`` typehint to the function.
-
-+-------------+----------------------------+
-| Short name  | Functions/CouldTypeWithInt |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Typechecks`          |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Functions/CouldTypeWithInt |
-+-------------+----------------------------+
-
-
-
-.. _could-type-with-iterable:
-
-Could Type With Iterable
-########################
-
-
-Suggest using ``iterable`` typehint for arguments.
-
-``iterable`` represents both ``array`` and objects that implements ``Iterator`` interface. Both types are coerced, and usable here. 
-
-.. code-block:: php
-
-   <?php
-   
-   // $s may be both an array or an iterator
-   function foo($s) : int {
-       $t = 0;
-       foreach($s as $v) {
-           $t += (int) $v;
-       }
-       
-       return $t;
-   }
-   
-   ?>
-
-
-See also `Iterables <https://www.php.net/manual/en/language.types.iterable.php>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-*
-
-+-------------+---------------------------------+
-| Short name  | Functions/CouldTypeWithIterable |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Typechecks`               |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Functions/CouldTypeWithIterable |
-+-------------+---------------------------------+
-
-
-
-.. _could-type-with-string:
-
-Could Type With String
-######################
-
-
-That argument may be typed with ``string``. 
-
-.. code-block:: php
-
-   <?php
-   
-   // $a is used with a function which requires a string. 
-   function foo($a) {
-       return strtolower($a);
-   }
-   
-   ?>
-
-
-See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Add the ``string`` typehint to the function.
-
-+-------------+-------------------------------+
-| Short name  | Functions/CouldTypeWithString |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Typechecks`             |
-+-------------+-------------------------------+
-| Severity    | Minor                         |
-+-------------+-------------------------------+
-| Time To Fix | Functions/CouldTypeWithString |
-+-------------+-------------------------------+
-
-
-
-.. _could-typehint:
-
-Could Typehint
-##############
-
-
-Arguments that are tested with `instanceof <http://php.net/manual/en/language.operators.type.php>`_ gain from making it a Typehint.
-
-.. code-block:: php
-
-   <?php
-   
-   function foo($a, $b) {
-       // $a is tested for B with instanceof. 
-       if (!$a instanceof B) {
-           return;
-       }
-       
-       // More code
-   }
-   
-   function foo(B $a, $b) {
-       // May omit the initial test
-       
-       // More code
-   }
-   
-   ?>
-
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Add the typehint, remove the test on the type
-
-+-------------+-------------------------+
-| Short name  | Functions/CouldTypehint |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Typechecks`       |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Functions/CouldTypehint |
-+-------------+-------------------------+
 
 
 
@@ -8049,6 +8138,54 @@ Suggestions
 +-------------+-----------------------+
 | Time To Fix | Functions/DontUseVoid |
 +-------------+-----------------------+
+
+
+
+.. _dont-compare-typed-boolean:
+
+Dont Compare Typed Boolean
+##########################
+
+
+There is no need to compare explicitly a functioncal call to a boolean, when the definition has a boolean returntypehint.
+
+The analysis checks for equality and identity comparisons. It doesn't check for the not operator usage.
+
+.. code-block:: php
+
+   <?php
+   
+   // Sufficient check
+   if (foo()) {
+       doSomething();
+   }
+   
+   // Superfluous check
+   if (foo() === true) {
+       doSomething();
+   }
+   
+   function foo() : bool {}
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Simplify the code and make it short
+
++-------------+------------------------------------+
+| Short name  | Structures/DontCompareTypedBoolean |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Suggestions`                 |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Structures/DontCompareTypedBoolean |
++-------------+------------------------------------+
 
 
 
@@ -10861,6 +10998,14 @@ Suggestions
 
 * Remove all passwords from the code. Also, check for history if you are using a VCS.
 
++---------------+--------------------+------+-------------+
+| Name          | Default            | Type | Description |
++---------------+--------------------+------+-------------+
+| passwordsKeys | password_keys.json | data | Description |
++---------------+--------------------+------+-------------+
+
+
+
 +-------------+---------------------------------+
 | Short name  | Functions/HardcodedPasswords    |
 +-------------+---------------------------------+
@@ -12670,6 +12815,63 @@ Suggestions
 
 
 
+.. _interfaces-don't-ensure-properties:
+
+Interfaces Don't Ensure Properties
+##################################
+
+
+When using an interface as a typehint, properties are not enforced, nor available.
+
+An interface is a template for a class, which specify the minimum amount of methods and constants. Properties are never defined in an interface, and should not be relied upon.
+
+.. code-block:: php
+
+   <?php
+   
+   interface i {
+       function m () ;
+   }
+   
+   class x implements i {
+       public $p = 1;
+       
+       function m() {
+           return $this->p;
+       }
+   }
+   
+   function foo(i $i, x $x) {
+       // this is invalid, as $p is not defined in i, so it may be not available
+       echo $i->p;
+       
+       // this is valid, as $p is defined in $x
+       echo $x->p;
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use classes for typehint when properties are accessed
+* Only use methods and constants which are available in the interface
+
++-------------+------------------------------------------+
+| Short name  | Interfaces/NoGaranteeForPropertyConstant |
++-------------+------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`       |
++-------------+------------------------------------------+
+| Severity    | Minor                                    |
++-------------+------------------------------------------+
+| Time To Fix | Interfaces/NoGaranteeForPropertyConstant |
++-------------+------------------------------------------+
+
+
+
 .. _interfaces-is-not-implemented:
 
 Interfaces Is Not Implemented
@@ -12698,7 +12900,7 @@ Classes that implements interfaces, must implements each of the interface's meth
    ?>
 
 
-This problem tends to occurs in code that split interfaces and classes by file. This means that PHP's linting will skip the definitions and not find the problem. At execution time, the definitions will be checked, and a Fatal error will occur.
+This problem tends to occur in code that splits interfaces and classes by file. This means that PHP's linting will skip the definitions and not find the problem. At execution time, the definitions will be checked, and a Fatal error will occur.
 
 This situation usually detects code that was forgotten during a refactorisation of the interface or the class and its sibblings.
 
@@ -13266,6 +13468,72 @@ Suggestions
 
 
 
+.. _large-try-block:
+
+Large Try Block
+###############
+
+
+Try block should enclosing only the expression that may emit an exception. 
+
+When writing large blocks of code in a try, it becomes difficult to understand wherethe expression is coming from. Large blocks may also lead to catch multiples exceptions, with a long list of catch clause. 
+
+In particular, the catch clause will resume the execution without knowing where the try was interrupted : there are no indication of achievement, even partial. In fact, catching an exception signals a very dirty situation.
+
+.. code-block:: php
+
+   <?php
+   
+   // try is one expression only
+   try {
+       $database->query($query);
+   } catch (DatabaseException $e) {
+       // process exception
+   }
+   
+   // Too many expressions around the one that may actually emit the exception
+   try {
+       $SQL = build_query($arguments);
+       $database = new Database($dsn);
+       $database->setOption($options);
+       $statement = $database->prepareQuery($SQL);
+       $result = $statement->query($query);
+   } catch (DatabaseException $e) {
+       // process exception
+   }
+   
+   ?>
+
+
+This analysis reports try-blocks that are 5 lines or more. This threshold may be configured with the directive tryBlockMaxSize. Catch clause, and finally are not considered here.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Reduce the amount of code in the block, by moving it before and after
+
++-----------------+---------+---------+-------------+
+| Name            | Default | Type    | Description |
++-----------------+---------+---------+-------------+
+| tryBlockMaxSize | 5       | integer | Description |
++-----------------+---------+---------+-------------+
+
+
+
++-------------+--------------------------+
+| Short name  | Exceptions/LargeTryBlock |
++-------------+--------------------------+
+| Rulesets    | :ref:`Suggestions`       |
++-------------+--------------------------+
+| Severity    | Minor                    |
++-------------+--------------------------+
+| Time To Fix | Exceptions/LargeTryBlock |
++-------------+--------------------------+
+
+
+
 .. _list-short-syntax:
 
 List Short Syntax
@@ -13586,6 +13854,12 @@ Warning : the two sets of operators have different precedence levels. Using and 
 Using and or && are also the target of other analysis.
 
 See also `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_ and `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Pick a favorite, and enforce it
 
 +------------+--------------------------------+
 | Short name | Php/LetterCharsLogicalFavorite |
@@ -14443,6 +14717,14 @@ Suggestions
 
 * Cache the value in a local variable, and reuse that variable
 * Make the property concrete in the class, so as to avoid __get() altogether
+
++--------------------+---------+---------+-------------+
+| Name               | Default | Type    | Description |
++--------------------+---------+---------+-------------+
+| minMagicCallsToGet | 2       | integer | Description |
++--------------------+---------+---------+-------------+
+
+
 
 +-------------+------------------------------------+
 | Short name  | Performances/MemoizeMagicCall      |
@@ -17830,63 +18112,6 @@ Suggestions
 
 
 
-.. _no-garantee-for-property-constant:
-
-No Garantee For Property Constant
-#################################
-
-
-When using an interface as a typehint, properties are not necessarily available.
-
-An interface is a template for a class, which specify the minimum amount of methods and constants. Properties are never defined in an interface, an should not be relied upon.
-
-.. code-block:: php
-
-   <?php
-   
-   interface i {
-       function m () ;
-   }
-   
-   class x implements i {
-       public $p = 1;
-       
-       function m() {
-           return $this->p;
-       }
-   }
-   
-   function foo(i $i, x $x) {
-       // this is invalid, as $p is not defined in i, so it may be not available
-       echo $i->p;
-       
-       // this is valid, as $p is defined in $x
-       echo $x->p;
-   }
-   
-   ?>
-
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Use classes for typehint when properties are accessed
-* Only use methods and constants which are available in the interface
-
-+-------------+------------------------------------------+
-| Short name  | Interfaces/NoGaranteeForPropertyConstant |
-+-------------+------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`       |
-+-------------+------------------------------------------+
-| Severity    | Minor                                    |
-+-------------+------------------------------------------+
-| Time To Fix | Interfaces/NoGaranteeForPropertyConstant |
-+-------------+------------------------------------------+
-
-
-
 .. _no-hardcoded-hash:
 
 No Hardcoded Hash
@@ -18377,6 +18602,50 @@ Suggestions
 +-------------+--------------------------+
 | Examples    | Structures/NoNeedForElse |
 +-------------+--------------------------+
+
+
+
+.. _no-need-for-triple-equal:
+
+No Need For Triple Equal
+########################
+
+
+There is no need for the identity comparison when the methods returns the proper type.
+
+.. code-block:: php
+
+   <?php
+   
+   // foo() returns a string. 
+   if ('a' === foo()) {
+       // doSomething()
+   }
+   
+   
+   function foo() : string { 
+       return 'a';
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+----------------------------+
+| Short name  | Structures/NoNeedForTriple |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Structures/NoNeedForTriple |
++-------------+----------------------------+
 
 
 
@@ -19105,6 +19374,14 @@ PHP 7 doesn't allow the usage of [] with strings. [] is an array-only operator.
 
 This was possible in PHP 5, but is now forbidden in PHP 7.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the concatenation operator ``.`` to append strings.
+* Use the concatenation short assignement ``.=`` to append strings.
+
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Php/NoStringWithAppend                                                                                     |
 +-------------+------------------------------------------------------------------------------------------------------------+
@@ -19493,7 +19770,7 @@ In particular, if the injection happens with a separate method, there is a time 
        
        // Db might be null
        function getDb() {
-           return $this-db;
+           return $this->db;
        }
    }
    
@@ -19507,12 +19784,12 @@ In particular, if the injection happens with a separate method, there is a time 
        // This might be called on time, or not
        // This typehint cannot be nullable, nor use null as default 
        function setDb(DB $db) {
-           return $this-db;
+           return $this->db;
        }
    
        // Db might be null
        function getDb() {
-           return $this-db;
+           return $this->db;
        }
    }
    ?>
@@ -22281,6 +22558,31 @@ See also `PHP RFC: Variable Syntax Tweaks <https://wiki.php.net/rfc/variable_syn
 
 
 
+.. _php/usematch:
+
+Php/UseMatch
+############
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+---------------------------+
+| Short name  | Php/UseMatch              |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP74` |
++-------------+---------------------------+
+| Php Version | 8.0+                      |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Php/UseMatch              |
++-------------+---------------------------+
+
+
+
 .. _php7-relaxed-keyword:
 
 Php7 Relaxed Keyword
@@ -24054,6 +24356,12 @@ For example, string, float, false, true, null, resource,`... <http://www.php.net
 
 
 See also `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using PHP reserved keywords
 
 +-------------+---------------------------+
 | Short name  | Php/ReservedKeywords7     |
@@ -25956,6 +26264,14 @@ Suggestions
 * Use an ORM
 * Use an Active Record library
 * Change the query to hard code it and make it not injectable
+
++-------------+--------------------+------+-------------+
+| Name        | Default            | Type | Description |
++-------------+--------------------+------+-------------+
+| queryMethod | query_methods.json | data | Description |
++-------------+--------------------+------+-------------+
+
+
 
 +-------------+-------------------------------------+
 | Short name  | Security/ShouldUsePreparedStatement |
@@ -28315,6 +28631,12 @@ The analysis doesn't work recursively : only direct generations are counted. Onl
 
 See also `Why is subclassing too much bad (and hence why should we use prototypes to do away with it)? <https://softwareengineering.stackexchange.com/questions/137687/why-is-subclassing-too-much-bad-and-hence-why-should-we-use-prototypes-to-do-aw>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Split the original class into more specialised classes
+
 +--------------------+---------+---------+-------------+
 | Name               | Default | Type    | Description |
 +--------------------+---------+---------+-------------+
@@ -28687,6 +29009,15 @@ A method that needs more than 8 parameters is trying to do too much : it should 
 
 
 See also `How many parameters is too many ? <https://www.exakat.io/how-many-parameters-is-too-many/>`_ and `Too Many Parameters <http://wiki.c2.com/?TooManyParameters>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Reduce the number of parameters to a lower level
+* Break the function into smaller functions
+* Turn the function into a class
 
 +-----------------+---------+---------+-------------+
 | Name            | Default | Type    | Description |
@@ -35648,6 +35979,51 @@ Suggestions
 +-------------+------------------------------------+
 | Time To Fix | Functions/WrongReturnedType        |
 +-------------+------------------------------------+
+
+
+
+.. _wrong-type-for-native-php-function:
+
+Wrong Type For Native PHP Function
+##################################
+
+
+This analysis reports calls to a PHP native function with a wrongly typed value.
+
+.. code-block:: php
+
+   <?php
+   
+   // valid calls
+   echo exp(1);
+   echo exp(2.5);
+   
+   // invalid calls
+   echo exp(1);
+   echo exp(array(2.5));
+   
+   // valid call, but invalid math
+   // -1 is not a valid value for log(), but -1 is a valid type (int) : it is not reported by this analysis.
+   echo log(-1);
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Set the code to the valid type, when calling a PHP native function
+
++-------------+--------------------------------+
+| Short name  | Php/WrongTypeForNativeFunction |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Php/WrongTypeForNativeFunction |
++-------------+--------------------------------+
 
 
 

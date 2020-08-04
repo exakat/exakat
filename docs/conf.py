@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Exakat'
-copyright = u'2015-2019, Damien Seguy'
+copyright = u'2015-2020, Damien Seguy'
 author = u'Damien Seguy'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -56,7 +56,7 @@ author = u'Damien Seguy'
 # built documents.
 #
 # The short X.Y version.
-version = u'2.1.4'
+version = u'2.1.5'
 # The full version, including alpha/beta/rc tags.
 release = u'1'
 

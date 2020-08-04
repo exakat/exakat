@@ -42,6 +42,7 @@ There are several reports that may be extracted from Exakat :
 * `Top10`_
 * `Topology Order`_
 * `TypeChecks`_
+* `TypeSuggestion`_
 * `Uml`_
 * `Xml`_
 * `Yaml`_
@@ -1780,6 +1781,33 @@ It checks the presence of typehint, suggests possible type hinting, and check th
 TypeChecks is a HTML report format.
 
 TypeChecks depends on the following theme : TypeChecks.
+
+TypeSuggestion
+______________
+
+The TypeSuggestion report provides suggestions to add typehints to methods and properties.
+
+The TypeSuggestion offers suggestions to add typehints to methods and properties. 
+
+It provides its suggestion based on the way the code is implemented : by usage or by calling.
+
+Type usage is the way a typed container is use later. For example, an argument that is used later with the array syntax ``$x['a']`` or as an object ``$x->b``will receive a suggestion for using array or object.
+
+Type calling is the way the typed container is assigned. For example, a property may receive integer or boolean during assignations : they will receive such suggestions. 
+
+Not all types can be guessed : for example, a property may simply hold a value, for later use, such as in a cache system. In such situation, no type is suggested.
+
+``mixed`` is not used as suggestion : rather a list of possible types is offered, and it may be upgraded to ``mixed``. 
+
+This report is ready for PHP 8.0 : the suggestions may be combined together, and multiples suggestions are possible. 
+
+
+.. image:: images/report.typesuggestion.png
+    :alt: Example of a TypeSuggestion report (0)
+
+TypeSuggestion is a HTML report format.
+
+TypeSuggestion depends on the following theme : TypeChecks.
 
 Uml
 ___
