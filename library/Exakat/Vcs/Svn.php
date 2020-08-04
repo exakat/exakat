@@ -33,7 +33,7 @@ class Svn extends Vcs {
     }
 
     protected function selfCheck() {
-        $res = shell_exec("{$this->executable} --version 2>&1");
+        $res = shell_exec("{$this->executable} --version 2>&1") ?? '';
         if (strpos($res, 'svn') === false) {
             throw new HelperException('SVN');
         }
@@ -95,7 +95,7 @@ class Svn extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec("{$this->executable} --version 2>&1"));
+        $res = trim(shell_exec("{$this->executable} --version 2>&1") ?? '');
         if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
             $stats['installed'] = 'Yes';
             $stats['version'] = $r[1];
@@ -122,7 +122,7 @@ class Svn extends Vcs {
     }
 
     public function getLastCommitDate() : int {
-        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info 2>&1"));
+        $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info 2>&1") ?? '');
 
         //Last Changed Date: 2020-07-22 09:17:27 +0200 (Wed, 22 Jul 2020)
         if (preg_match('/Last Changed Date: (\d{4}.+\d{4}) /m', $res, $r)) {

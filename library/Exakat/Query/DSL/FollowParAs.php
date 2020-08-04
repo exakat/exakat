@@ -70,15 +70,16 @@ class FollowParAs extends DSL {
                 __.hasLabel("Coalesce").out("RIGHT", "LEFT")';
         }
 
-         $TIME_LIMIT = self::$TIME_LIMIT;
+        $TIME_LIMIT = self::$TIME_LIMIT;
         return new Command(<<<GREMLIN
  {$out}emit().repeat( 
-    __.timeLimit(10000)
+    __.timeLimit($TIME_LIMIT)
       .coalesce(__.hasLabel("Parenthesis").out("CODE"), 
                 __.hasLabel("Assignation").out("RIGHT")$follow
       )
 ).until(__.not(hasLabel("Parenthesis", "Assignation", $labels)))
-.not(hasLabel("Parenthesis", "Assignation" $labels))
+.not(hasLabel("Parenthesis" $labels))
+.not(hasLabel("Assignation").has("token", "T_EQUAL"))
 GREMLIN
 );
     }

@@ -29,7 +29,6 @@ class PackagesNames extends Analyzer {
     private $report = null;
 
     public function analyze() : void {
-        return true;
     }
 
     public function toArray() : array {

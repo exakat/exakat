@@ -32,7 +32,7 @@ class SevenZ extends Vcs {
     }
 
     protected function selfCheck() {
-        $res = shell_exec("{$this->executable}  2>&1");
+        $res = shell_exec("{$this->executable}  2>&1") ?? '';
         if (strpos($res, '7-Zip') === false) {
             throw new HelperException('7z');
         }
@@ -57,7 +57,7 @@ class SevenZ extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = shell_exec("{$this->executable}  2>&1");
+        $res = shell_exec("{$this->executable}  2>&1") ?? '';
         if (stripos($res, 'not found') !== false) {
             $stats['installed'] = 'No';
         } elseif (preg_match('/p7zip Version ([0-9\.]+)/is', $res, $r)) {

@@ -107,7 +107,7 @@ class GSNeo4jV3 extends Graph {
         $this->status = self::UNCHECKED;
     }
 
-    private function checkConfiguration() {
+    private function checkConfiguration() : void {
         ini_set('default_socket_timeout', '1600');
         $this->db->open();
     }
@@ -151,7 +151,7 @@ class GSNeo4jV3 extends Graph {
         return is_resource($res);
     }
 
-    public function serverInfo() {
+    public function serverInfo() : array {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
@@ -161,7 +161,7 @@ class GSNeo4jV3 extends Graph {
         return $res;
     }
 
-    public function clean() {
+    public function clean() : void {
         $this->stop();
         $this->start();
     }
@@ -193,11 +193,11 @@ class GSNeo4jV3 extends Graph {
         $pid = false;
         do {
             $connexion = $this->checkConnection();
-            if (empty($connexion)) {
+            if (!$connexion) {
                 ++$round;
                 usleep(100000 * $round);
             }
-        } while ( empty($connexion) && $round < 20);
+        } while ( !$connexion && $round < 20);
         $e = microtime(true);
 
         display("Restarted in $round rounds\n");
@@ -222,26 +222,6 @@ class GSNeo4jV3 extends Graph {
             putenv('PID_DIR=db');
             shell_exec("GREMLIN_YAML=conf/gsneo4jv3.3.4.yaml; PID_DIR=db; cd {$this->config->gsneo4jv3_folder}; ./bin/gremlin-server.sh stop; rm -rf db/gremlin.pid");
         }
-    }
-
-    private function simplifyArray($result) {
-        $return = array();
-
-        if (!isset($result[0]['properties'])) {
-            return $result;
-        }
-
-        foreach ($result as $r) {
-            $row = array('id'    => $r['id'],
-                         'label' => $r['label']);
-            foreach ($r['properties'] as $property => $value) {
-                $row[$property] = $value[0]['value'];
-            }
-
-            $return[] = $row;
-        }
-
-        return $return;
     }
 
     public function fixId($id) {

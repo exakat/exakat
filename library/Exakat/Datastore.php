@@ -184,7 +184,7 @@ class Datastore {
             }
 
             $list = makeList($d);
-            $query = "DELETE FROM $table WHERE $col IN (makeList($d))";
+            $query = "DELETE FROM $table WHERE $col IN (".makeList($d).")";
             $this->sqliteWrite->querySingle($query);
         }
 

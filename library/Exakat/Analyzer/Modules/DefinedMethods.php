@@ -34,7 +34,7 @@ class DefinedMethods extends MethodUsage {
             return;
         }
 
-        return parent::analyze();
+        parent::analyze();
     }
 }
 
