@@ -50,22 +50,22 @@ For each version, MD5 and SHA256 signatures are available. The downloaded MD5 mu
 
 ::
 
-    curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
+    curl -o exakat.phar 'https://www.exakat.io/versions/index.php?file=latest'
     
-    curl -o exakat.phar.md5 https://www.exakat.io/versions/index.php?file=latest.md5
+    curl -o exakat.phar.md5 'https://www.exakat.io/versions/index.php?file=latest.md5'
     //19485adb7d43b43f7c01b7153ae82881  exakat-2.0.0.phar
     md5sum exakat.phar.md5
     // Example : 
     //19485adb7d43b43f7c01b7153ae82881  exakat.phar
     
-    curl -o exakat.phar.sha256 https://www.exakat.io/versions/index.php?file=latest.sha256
+    curl -o exakat.phar.sha256 'https://www.exakat.io/versions/index.php?file=latest.sha256'
     //d838c9ec9291e15873137693da2a0038a67c2f15c2282b89f09f27f23d24d27f  exakat-2.0.0.phar
     sha256sum exakat.phar.md5
     // Example : 
     //d838c9ec9291e15873137693da2a0038a67c2f15c2282b89f09f27f23d24d27f  exakat.phar
 
     // Check with GPG signature
-    curl -o exakat.sig https://www.exakat.io/versions/index.php?file=latest.sig
+    curl -o exakat.sig 'https://www.exakat.io/versions/index.php?file=latest.sig'
     // Optional step : Download the Key
     gpg --recv-keys 5EDF7EA4
     // Check with GPG signature
@@ -93,7 +93,7 @@ You can use the `install` command this way :
 
     mkdir exakat
     cd exakat
-    curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
+    curl -o exakat.phar 'https://www.exakat.io/versions/index.php?file=latest'
     php exakat.phar install 
 
 
@@ -112,8 +112,8 @@ This is the installation script for Exakat and tinkergraph 3.4.7.
 
     mkdir exakat
     cd exakat
-    curl -o exakat.phar https://www.exakat.io/versions/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.4.7-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.7-bin.zip
+    curl -o exakat.phar 'https://www.exakat.io/versions/index.php?file=latest'
+    curl -o apache-tinkerpop-gremlin-server-3.4.7-bin.zip 'https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.7-bin.zip'
     unzip apache-tinkerpop-gremlin-server-3.4.7-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.4.7 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.4.7-bin.zip 
@@ -184,7 +184,7 @@ PHP 7.3 (7.0 or more recent), wget and unzip are expected.
     mkdir exakat
     cd exakat
     wget -O exakat.phar https://www.exakat.io/versions/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.4.7-bin.zip https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.7-bin.zip
+    wget -O apache-tinkerpop-gremlin-server-3.4.7-bin.zip 'https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-3.4.7-bin.zip'
     unzip apache-tinkerpop-gremlin-server-3.4.7-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.4.7 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.4.7-bin.zip 
@@ -207,7 +207,7 @@ When running exakat in composer mode,
 
 ::
 
-    php vendor/bin/exakat init -p sculpin -R https://github.com/sculpin/sculpin.git
+    php vendor/bin/exakat init -p sculpin -R 'https://github.com/sculpin/sculpin.git'
     php vendor/bin/exakat project -p sculpin
     
 The final audit is now in the projects/sculpin/report directory.
