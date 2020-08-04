@@ -65,7 +65,7 @@ class GSNeo4j extends Graph {
             $stats['gremlin version'] = $gremlinVersion;
 
             $neo4jJar = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/lib/neo4j-*.jar");
-            $neo4jJar = array_filter($neo4jJar, function ($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
+            $neo4jJar = array_filter($neo4jJar, function (string $x) : bool { return (bool) preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
             $neo4jVersion = basename(array_pop($neo4jJar));
 
             //neo4j-2.3.3.jar
@@ -108,7 +108,7 @@ class GSNeo4j extends Graph {
         $this->status = self::UNCHECKED;
     }
 
-    private function checkConfiguration() {
+    private function checkConfiguration() : void {
         ini_set('default_socket_timeout', '1600');
         $this->db->open();
     }
@@ -168,7 +168,7 @@ class GSNeo4j extends Graph {
         return is_resource($res);
     }
 
-    public function serverInfo() {
+    public function serverInfo() : array {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
@@ -178,7 +178,7 @@ class GSNeo4j extends Graph {
         return $res;
     }
 
-    public function clean() {
+    public function clean() : void {
         $this->stop();
         $this->start();
     }

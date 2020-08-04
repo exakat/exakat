@@ -158,7 +158,7 @@ class TinkergraphV3 extends Graph {
         if (in_array($this->gremlinVersion, array('3.4'), STRICT_COMPARISON)) {
             putenv("GREMLIN_YAML=conf/tinkergraphv3.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            exec("GREMLIN_YAML=conf/tinkergraphv3.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->tinkergraphv3_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+            exec("GREMLIN_YAML=conf/tinkergraphv3.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->tinkergraphv3_folder}; rm -rf db/neo4j; /bin/sh  ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         } else {
             throw new GremlinException("Wrong version for tinkergraph : $this->gremlinVersion");
         }

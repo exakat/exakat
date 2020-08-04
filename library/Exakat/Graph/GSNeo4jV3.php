@@ -182,7 +182,7 @@ class GSNeo4jV3 extends Graph {
             display("start gremlin server {$this->gremlinVersion}.x");
             putenv("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            exec("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4jv3_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+            exec("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4jv3_folder}; rm -rf db/neo4j; /bin/sh ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         }
         display('started gremlin server');
         $this->init();
