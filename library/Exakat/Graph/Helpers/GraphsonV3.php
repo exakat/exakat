@@ -32,13 +32,14 @@ class GraphsonV3 implements SerializerInterface
      * @var array The native supported types that the serializer can convert to graphson
      */
     protected static $supportedFromTypes = array(
-        'string',
-        'boolean',
-        'double',
-        'integer',
-        'array',
-        'object',
-        'NULL',
+        'string'           => 'convertString',
+        'boolean'          => 'convertBoolean',
+        'double'           => 'convertDouble',
+        'integer'          => 'convertInteger',
+        'array'            => 'convertArray',
+        'object'           => 'convertObject',
+        'NULL'             => 'convertNull',
+//        'bitsy:VertexBean' => 'convertString',
     );
 
     /**
@@ -65,6 +66,8 @@ class GraphsonV3 implements SerializerInterface
         'g:Property',
         'g:T',
         'gx:BigDecimal',
+        'bitsy:VertexBean',
+        'bitsy:UUID',
     );
 
     /**
@@ -133,15 +136,18 @@ class GraphsonV3 implements SerializerInterface
     {
         $converted = array();
         $type = gettype($item);
-        if(in_array($type, self::$supportedFromTypes))
+
+        if(isset(self::$supportedFromTypes[$type]))
         {
             //use the type name to run the proper method
-            $method = 'convert' . ucfirst($type);
+            $method = self::$supportedFromTypes[$type];
             $converted = $this->$method($item);
         }
         else
         {
-            throw new InternalException("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
+            print ("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')'.PHP_EOL);
+            $converted = '';
+//            throw new InternalException("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
         }
 
         return $converted;
@@ -159,6 +165,10 @@ class GraphsonV3 implements SerializerInterface
         return $string;
     }
 
+    public function convertbitsy_VertexBean($string)
+    {
+        return $string;
+    }
     /**
      * Convert an integer into it's graphson 3.0 form
      *
@@ -322,13 +332,16 @@ class GraphsonV3 implements SerializerInterface
         if(is_array($item) && isset($item['@type']) && in_array($item['@type'], self::$supportedGSTypes))
         {
             //type exists in array and is found in our supported types
-            $method = 'deconvert' . ucfirst(str_replace(array('g:', 'gx:', ':'), '', $item['@type']));
+            $method = 'deconvert' . ucfirst(str_replace(array('g:', 'gx:', 'bitsy:',  ':'), '', $item['@type']));
             $deconverted = $this->$method($item['@value']);
         }
         elseif(is_array($item) && isset($item['@type']) && !in_array($item['@type'], self::$supportedGSTypes))
         {
             //type exists in array but is not currently supported
-            throw new InternalException("Item type '{$item['@type']}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
+            print ("Item type '{$item['@type']}' is not currently supported by the serializer (" . __CLASS__ . ')'.PHP_EOL);
+            $deconverted = array();
+//            throw new InternalException("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
+//            throw new InternalException("Item type '{$item['@type']}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
         }
         elseif(is_array($item) && !isset($item['@type']))
         {
@@ -357,6 +370,14 @@ class GraphsonV3 implements SerializerInterface
     public function deconvertBigDecimal($int)
     {
         return $int;
+    }
+
+    /**
+     * Deconvert a bitsy:vertexBean. Basically, a string, but may be a UUID
+     */
+    public function deconvertVertexBean($string)
+    {
+        return $string;
     }
 
     /**

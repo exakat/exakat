@@ -136,7 +136,7 @@ class Tinkergraph extends Graph {
         return $this->query($query, $params, $load);
     }
 
-    public function checkConnection() {
+    public function checkConnection() : bool {
         $res = @stream_socket_client('tcp://' . $this->config->tinkergraph_host . ':' . $this->config->tinkergraph_port,
                                      $errno,
                                      $errorMessage,
@@ -147,7 +147,7 @@ class Tinkergraph extends Graph {
         return is_resource($res);
     }
 
-    public function serverInfo() {
+    public function serverInfo() : array {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
@@ -157,7 +157,7 @@ class Tinkergraph extends Graph {
         return $res;
     }
 
-    public function clean() {
+    public function clean() : void {
         // This is memory only Database
         $this->stop();
         $this->start();
@@ -191,7 +191,7 @@ class Tinkergraph extends Graph {
             $res = $this->checkConnection();
             ++$round;
             usleep(100000 * $round);
-        } while (empty($res) && $round < 20);
+        } while (!$res && $round < 20);
         $e = microtime(true);
 
         display("Restarted in $round rounds\n");
@@ -224,7 +224,7 @@ class Tinkergraph extends Graph {
         }
     }
 
-    private function simplifyArray($result) {
+    private function simplifyArray(array $result) : array {
         $return = array();
 
         if (!isset($result[0]['properties'])) {
@@ -244,7 +244,7 @@ class Tinkergraph extends Graph {
         return $return;
     }
 
-    public function getDefinitionSQL() {
+    public function getDefinitionSQL() : string {
         // Optimize loading by sorting the results
         return <<<'SQL'
 SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id ELSE definitions.id END AS definition, GROUP_CONCAT(DISTINCT calls.id) AS call, count(calls.id) AS id
@@ -260,7 +260,7 @@ GROUP BY definition
 SQL;
     }
 
-    public function getGlobalsSql() {
+    public function getGlobalsSql() : string {
         return 'SELECT origin, destination FROM globals';
     }
 }

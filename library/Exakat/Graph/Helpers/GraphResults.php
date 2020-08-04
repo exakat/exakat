@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 /*
- * Copyright 2012-2019 Damien Seguy â€“ Exakat SAS <contact(at)exakat.io>
+ * Copyright 2012-2019 Damien Seguy Ð Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -39,7 +39,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 //        var_dump($data);
 //        print "\nExtracted from JSON------\n";
 
-// A garder. Aucun rÃ©sultat.
+// A garder. Aucun rŽsultat.
         if ($data === null) {
             $this->type = self::EMPTY;
             $this->data = $data;
@@ -47,7 +47,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
             return;
         }
 
-// A garder. liste de rÃ©sultats
+// A garder. liste de rŽsultats
         if (is_array($data)) {
             if (!isset($data[0]) || ($data[0] === null)) {
                 $this->type = self::EMPTY;
@@ -140,6 +140,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         }
 
         return (string) $this->data[0];
+//        return (string) '"'.$this->data[0].'"';
     }
 
     public function isType($type) : bool {
@@ -174,7 +175,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return current($this->data);
     }
 
-    public function key() : scalar {
+    public function key() {
         if ($this->type === self::ARRAY) {
             return key($this->data);
         }
