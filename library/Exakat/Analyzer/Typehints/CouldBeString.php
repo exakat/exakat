@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Typehints;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
+use Exakat\Query\DSL\FollowParAs;
 
 class CouldBeString extends CouldBeType {
 
@@ -64,6 +65,17 @@ class CouldBeString extends CouldBeType {
         $this->checkReturnedDefault($stringAtoms);
 
         $this->checkReturnedTypehint(array('Scalartypehint'), array('\\string'));
+
+        // return type : return $a->b .= "s";
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
+             ->outIs('RETURNED')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->analyzerIsNot('self')
+             ->atomIs('Assignation')
+             ->codeIs(array('.='))
+             ->back('first');
+        $this->prepareQuery();
 
         // argument type
         // function ($a = array())

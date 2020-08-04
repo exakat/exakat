@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Typehints;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
+use Exakat\Query\DSL\FollowParAs;
 
 abstract class CouldBeType extends Analyzer {
     final public function dependsOn() : array {
@@ -187,6 +188,7 @@ abstract class CouldBeType extends Analyzer {
              )
              ->outIs('RETURNED')
              ->hasIn('RETURN')
+             ->followParAs(FollowParAs::FOLLOW_PARAS_ONLY)
              ->atomIs($atoms, self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();

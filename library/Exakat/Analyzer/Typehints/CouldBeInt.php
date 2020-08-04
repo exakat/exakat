@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Typehints;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
+use Exakat\Query\DSL\FollowParAs;
 
 class CouldBeInt extends CouldBeType {
     public function analyze() : void {
@@ -70,6 +71,17 @@ class CouldBeInt extends CouldBeType {
         $this->checkReturnedDefault($intAtoms);
 
         $this->checkReturnedTypehint(array('Scalartypehint'), array('\\int'));
+
+        // return type : return $a->b += 3;
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
+             ->outIs('RETURNED')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->analyzerIsNot('self')
+             ->atomIs('Assignation')
+             ->codeIs(array('+=', '-=', '*=', '**=', '/=', '%=', '<<=', '>>=', '&=', '|=', '^='))
+             ->back('first');
+        $this->prepareQuery();
 
         // argument type : $x[$arg]
         $this->atomIs(self::FUNCTIONS_ALL)

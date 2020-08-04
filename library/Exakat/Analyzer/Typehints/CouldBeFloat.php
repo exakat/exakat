@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Typehints;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
+use Exakat\Query\DSL\FollowParAs;
 
 class CouldBeFloat extends CouldBeType {
     public function analyze() : void {
@@ -61,6 +62,17 @@ class CouldBeFloat extends CouldBeType {
         $this->checkReturnedDefault($floatAtoms);
 
         $this->checkReturnedtypehint(array('Scalartypehint'), array('\\float'));
+
+        // return type : return $a->b += 3.3;
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
+             ->outIs('RETURNED')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->analyzerIsNot('self')
+             ->atomIs('Assignation')
+             ->codeIs(array('+=', '-=', '*=', '**=', '/=', '%=', '<<=', '>>=', '&=', '|=', '^='))
+             ->back('first');
+        $this->prepareQuery();
 
         // argument type : $x[$arg]
         $this->atomIs(self::FUNCTIONS_ALL)
