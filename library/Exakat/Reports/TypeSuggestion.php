@@ -65,17 +65,31 @@ class TypeSuggestion extends Reports {
             }
         }
 
+        $stats = array('propertiesTotal' => 0,
+                       'propertiesTyped' => 0,
+                       'propertiesSugg'  => 0,
+                       'parametersTotal' => 0,
+                       'parametersTyped' => 0,
+                       'parametersSugg'  => 0,
+                       'returnTotal'     => 0,
+                       'returnTyped'     => 0,
+                       'returnSugg'      => 0,
+                        );
+        
         $html = array();
         $complete = array();
 
         // Properties Type hints
         $res = $this->dump->fetchTableProperties();
         foreach($res->toArray() as $row) {
+            ++$stats['propertiesTotal'];
             if (!empty($row['typehint'])) {
                 $list = self::NO_SUGGESTION;
+                ++$stats['propertiesTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['property']])) {
                 $s = array_filter($suggestions[$row['file']][$row['line']][$row['property']], function($x) : bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
+                ++$stats['propertiesSugg'];
             } else {
                 $list = self::NO_SUGGESTION;
             }
@@ -98,11 +112,14 @@ HTML;
         // Arguments Type hints
         $res = $this->dump->fetchTableMethodsByArgument();
         foreach($res->toArray() as $row) {
+            ++$stats['parametersTotal'];
             if (!empty($row['typehint'])) {
                 $list = self::NO_SUGGESTION;
+                ++$stats['parametersTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['argument']])) {
                 $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function($x) : bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
+                ++$stats['parametersSugg'];
             } else {
                 $list = self::NO_SUGGESTION;
             }
@@ -128,11 +145,14 @@ HTML;
             if (in_array(mb_strtolower($row['method']), array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic', '__isset', '__clone'))) {
                 continue;
             }
+            ++$stats['returnTotal'];
             if (!empty($row['returntype'])) {
                 $list = self::NO_SUGGESTION;
+                ++$stats['returnTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['method']])) {
                 $s = array_filter($suggestions[$row['file']][$row['line']][$row['method']], function($x) : bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
+                ++$stats['returnSugg'];
             } else {
                 $list = self::NO_SUGGESTION;
             }
@@ -150,7 +170,6 @@ HTML;
                 $complete[$classId][$row['method']] = true;
             }
             $complete[$classId][$row['method']] = $complete[$classId][$row['method']] && !empty($row['returntype']);
-
         }
 
         foreach($html as $className => &$methods) {
@@ -180,23 +199,45 @@ HTML;
                                ).'</tr>';
 
         }
+        $html[] = '</table>';
 
-        $html = '<table style="border:black 1px solid; border-collaspe: collapse">' . 
+        $statsHtml = array('<table style="border:black 1px solid; border-collaspe: collapse">' . 
+                '<tr>
+                    <th>Categories</th>
+                    <th>Total</th>
+                    <th>Typed</th>
+                    <th>%</th>
+                    <th>Suggestions</th>
+                </tr>',
+                );
+        foreach(['properties', 'parameters', 'return'] as $category) {
+            $perc = number_format($stats["{$category}Typed"] * 100 / $stats["{$category}Total"]);
+
+            $statsHtml[] = "<tr>
+                    <td>$category</td>
+                    <td>{$stats["{$category}Total"]}</td>
+                    <td>{$stats["{$category}Typed"]}</td>
+                    <td>$perc %</td>
+                    <td>{$stats["{$category}Sugg"]}</td>
+                </tr>";
+        }
+        $statsHtml[] = '</table>';
+        $statsHtml[] = '<p />';
+
+        $html = implode(PHP_EOL, $statsHtml).'<table style="border:black 1px solid; border-collaspe: collapse">' . 
                 '<tr>
                     <th>Class</th>
                     <th>Method</th>
                     <th>Parameter, Returntype, Property</th>
                     <th>In code</th>
                     <th>Suggestions</th>
-                </tr>' . 
-        
-                implode(PHP_EOL, $html) . '</table>';
+                </tr>' . implode(PHP_EOL, $html);
 
         $this->tmpName = "{$this->config->project_dir}/$name.html";
 
         file_put_contents("{$this->tmpName}", $html);
 
-        return 'oui';
+        return 'Ok';
     }
 
     protected function toHtmlList(array $array): string {
