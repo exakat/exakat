@@ -1,4 +1,4 @@
-Version 2.1.5 (Day Patrol Deity, coming up)
+Version 2.1.6 (Night Patrol Deity, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,38 @@ Version 2.1.5 (Day Patrol Deity, coming up)
     + Upgraded analysis : PHP 8.0 new scalar typehint, stringable interface
 + Tokenizer
     + 
+
+Version 2.1.5 (Day Patrol Deity, coming up)
++ Architecture
+    + Fixed comment size estimation by 1 for T_COMMENT
+    + Added more typehints to code
++ Report
+    + Typehint suggestions : added ticks to fully typed methods
+    + Emissary : Extract more information from dump.sqlite, instead of datastore.sqlite
+    + Ambassador : Added a list of parameters, defined in the application
+    + Ambassador : Added a list of fossilised methods
+    + Stubs : Added check around PHP native functions and CIT
+    + StubsJson : Added property for PHP native structures
++ Analysis
+    + New analysis : Report insufficient initialisation for array_merge() collector variable
+    + New analysis : Report useless triple equals 
+    + New analysis : Don't compare typed boolean return values
+    + New analysis : Report wrong type used with PHP functions
+    + New analysis : Suggest abstracting away some PHP native functions
+    + New analysis : Report try block that are too large
+    + New analysis : Report variables potentially undefined in catch clause
+    + New analysis : Report swapped arguments in methods overwriting
+    + Upgraded analysis : InvalidPackFormat speed up
+    + Upgraded analysis : Added parameter to Security/ShouldUsePreparedStatement to choose the preparing method
+    + Upgraded analysis : Added parameter to Security/HardcodedPasswords to choose the name of properties/index
+    + Upgraded analysis : PHP 8.0 new scalar typehint, stringable interface
++ Tokenizer
+    + Added support for named parameters (PHP 8.0)
+    + Trimmed some properties from atoms
+    + Removed non-existent atom mentions
+    + Added support for Attributes (WIP)
+    + Added support for ?-> 
+    + Added support for new T_*_NAME tokens
 
 Version 2.1.4 (Marshal of Heavenly Blessing, 2020-07-23)
 + Architecture
