@@ -46,7 +46,7 @@ class LoadFinal {
                              "{$this->config->projects_root}/projects/{$this->config->project}");
     }
 
-    protected function newQuery($title): Query {
+    protected function newQuery(string $title): Query {
         return new Query(0,
                          $this->config->project,
                          $title,
@@ -112,12 +112,12 @@ GREMLIN;
         $this->logTime('Final');
     }
 
-    private function log($step) {
+    private function log(string $step) : void {
         $this->logTime($step);
         $this->log->log($step);
     }
 
-    private function logTime($step) {
+    private function logTime(string $step) : void {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
@@ -137,7 +137,7 @@ GREMLIN;
         $begin = $end;
     }
 
-    private function removeInterfaceToClassExtends() {
+    private function removeInterfaceToClassExtends() : void {
         display('fixing Definitions for traits and interfaces');
 
         $query = <<<'GREMLIN'
@@ -198,7 +198,7 @@ GREMLIN;
     }
 
     // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded
-    private function fixFullnspathFunctions() {
+    private function fixFullnspathFunctions() : void {
         display('fixing Fullnspath for Functions');
 
         $query = <<<'GREMLIN'
@@ -222,7 +222,7 @@ GREMLIN;
         $this->log->log(__METHOD__);
     }
 
-    private function runQuery($query, $title, $args = array(), $method = __METHOD__) {
+    private function runQuery(string $query, string $title, array $args = array(), string $method = __METHOD__) : void {
         display($title);
 
         $this->logTime($title);
@@ -238,7 +238,7 @@ GREMLIN;
         $this->log->log($method);
     }
 
-    private function spotFallbackConstants() {
+    private function spotFallbackConstants() : void {
         $this->logTime('spotFallbackConstants');
         display("spotFallbackConstants\n");
 
@@ -345,7 +345,7 @@ GREMLIN;
         $this->log->log(__METHOD__);
     }
 
-    private function init() {
+    private function init() : void {
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions
 
