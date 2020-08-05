@@ -245,7 +245,7 @@ class Git extends Vcs {
     }
 
     public function getLastCommitDate() : int {
-         return strtotime(trim(shell_exec("cd {$this->destinationFull}; {$this->executable} log -1 --format=%cd") ?? ''));
+         return (int) strtotime(trim(shell_exec("cd {$this->destinationFull}; {$this->executable} log -1 --format=%cd") ?? ''));
     }
 }
 
