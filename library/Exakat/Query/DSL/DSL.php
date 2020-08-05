@@ -185,17 +185,16 @@ abstract class DSL {
         return array_values(array_intersect($fullnspaths, $this->availableFunctioncalls));
     }
 
-    protected function SorA($value) {
+    protected function SorA($value) : string {
         if (is_array($value)) {
             return makeList($value);
         } elseif (is_string($value)) {
             return '"' . $value . '"';
-        } else {
-            assert(false, '$v is not a string or an array');
         }
+        assert(false, '$v is not a string or an array');
     }
 
-    protected function assertLabel($name, $read = self::LABEL_GO): bool {
+    protected function assertLabel($name, bool $read = self::LABEL_GO): bool {
         if (is_array($name)) {
             foreach($name as $n) {
                 $this->assertLabel($n, $read);
