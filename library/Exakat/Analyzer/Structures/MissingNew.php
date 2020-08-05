@@ -45,15 +45,16 @@ class MissingNew extends Analyzer {
         // $a = file();
         $this->atomIs('Functioncall')
              ->analyzerIsNot('Functions/IsExtFunction')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->hasNoFunctionDefinition()
              ->fullnspathIs($classes, self::CASE_INSENSITIVE);
         $this->prepareQuery();
 
         // $a = C;
-        $this->atomIs(array('Identifier', 'Nsname'))
+        $this->atomIs(self::STATIC_NAMES)
              ->analyzerIsNot('Constants/IsExtConstant')
              ->hasNoConstantDefinition()
+             ->hasNoIn(array('CLASS', 'IMPLEMENTS', 'EXTENDS', 'TYPEHINT', 'RETURNTYPE'))
              ->fullnspathIs($classes, self::CASE_INSENSITIVE);
         $this->prepareQuery();
     }
