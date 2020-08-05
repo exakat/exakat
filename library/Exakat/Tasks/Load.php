@@ -1541,8 +1541,10 @@ class Load extends Tasks {
             $this->processSemicolon();
         } elseif ($function->atom === 'Method' && !empty(preg_grep('/^static$/i', $fullcode))) {
             $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
+            $this->currentMethods[mb_strtolower($function->code)] = $function;
         } elseif ($function->atom === 'Method') {
             $this->calls->addDefinition('method', $function->fullnspath, $function);
+            $this->currentMethods[mb_strtolower($function->code)] = $function;
             // double call for internal reference
             $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
         } elseif ($function->atom === 'Magicmethod') {
@@ -1550,6 +1552,7 @@ class Load extends Tasks {
                 end($this->currentClassTrait)->atom === 'Classanonymous') {
                     $this->addLink(end($this->currentClassTrait), $function, 'DEFINITION');
             }
+            $this->currentMethods[mb_strtolower($function->code)] = $function;
         }
 
         return $function;
@@ -1657,6 +1660,8 @@ class Load extends Tasks {
 
         $this->currentProperties      = array();
         $this->currentPropertiesCalls = array();
+        $this->currentMethods         = array();
+        $this->currentMethodsCalls    = array();
 
         $this->checkPhpdoc();
         while($this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_CURLY) {
@@ -1692,9 +1697,9 @@ class Load extends Tasks {
             $this->checkPhpdoc();
         }
 
-        $diff = array_diff(array_keys($this->currentPropertiesCalls), array_keys($this->currentProperties));
         $currentClass = $this->currentClassTrait[count($this->currentClassTrait) - 1];
 
+        $diff = array_diff(array_keys($this->currentPropertiesCalls), array_keys($this->currentProperties));
         foreach($diff as $missing) {
             $ppp = $this->addAtom('Ppp');
             $ppp->fullcode     = 'public $' . $missing;
@@ -1717,8 +1722,27 @@ class Load extends Tasks {
             $this->currentProperties[$missing] = $virtual;
         }
 
+        $diff = array_diff(array_keys($this->currentMethodsCalls), array_keys($this->currentMethods));
+        foreach($diff as $missing) {
+            $virtual = $this->addAtom('Virtualmethod');
+            $virtual->fullcode     = 'function ' . $missing . ' ( ) { /**/ } ';
+            $virtual->visibility   = 'none';
+            $virtual->code         = mb_strtolower($missing);
+            $virtual->line         = -1;
+            $this->addLink($currentClass, $virtual, 'METHOD');
+            // TODO : may be MAGICMETHOD ? 
+
+            foreach($this->currentMethodsCalls[$missing] as $member) {
+                $this->addLink($virtual, $member, 'DEFINITION');
+            }
+
+            $this->currentMethods[$missing] = $virtual;
+        }
+
         $this->currentProperties      = array();
         $this->currentPropertiesCalls = array();
+        $this->currentMethods         = array();
+        $this->currentMethodsCalls    = array();
 
         ++$this->id;
     }
@@ -5738,16 +5762,24 @@ class Load extends Tasks {
         }
 
         $this->addLink($static, $left, 'CLASS');
-        if ($static->atom  === 'Staticproperty'                                      &&
+        if ($static->atom  === 'Staticproperty'                                       &&
             in_array($left->token, array('T_STRING', 'T_STATIC'), \STRICT_COMPARISON) &&
-            !empty($this->currentClassTrait)                                         &&
-            !empty($this->currentClassTrait[count($this->currentClassTrait) - 1])    &&
+            !empty($this->currentClassTrait)                                          &&
+            !empty($this->currentClassTrait[count($this->currentClassTrait) - 1])     &&
             $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath) {
 
             $name = ltrim($right->code, '$');
             if (!empty($name)) {
                 array_collect_by($this->currentPropertiesCalls, $name, $static);
             }
+        }
+
+        if ($static->atom  === 'Staticmethodcall'                                     &&
+            in_array($left->token, array('T_STRING', 'T_STATIC'), \STRICT_COMPARISON) &&
+            !empty($this->currentClassTrait)                                          &&
+            !empty($this->currentClassTrait[count($this->currentClassTrait) - 1])     &&
+            $left->fullnspath === $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath) {
+                array_collect_by($this->currentMethodsCalls, mb_strtolower($right->code), $static);
         }
 
         $static->fullcode = $fullcode;
@@ -5866,6 +5898,7 @@ class Load extends Tasks {
         if ($left->atom === 'This' ){
             if ($static->atom === 'Methodcall') {
                 $this->calls->addCall('method', $left->fullnspath . '::' . mb_strtolower($right->code), $static);
+                array_collect_by($this->currentMethodsCalls, mb_strtolower($right->code), $static);
             } elseif ($static->atom  === 'Member'   &&
                       $right->token  === 'T_STRING') {
 

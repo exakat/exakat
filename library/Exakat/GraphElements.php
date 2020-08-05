@@ -146,6 +146,7 @@ abstract class GraphElements {
                                  'Variableobject',
                                  'Virtualglobal',
                                  'Virtualproperty',
+                                 'Virtualmethod',
                                  'Void',
                                  'While',
                                  'Yield',

@@ -26,6 +26,7 @@ class MakeClassMethodDefinition extends Complete {
     public function dependsOn(): array {
         return array('Complete/SetParentDefinition',
                      'Complete/CreateDefaultValues',
+                     'Complete/OverwrittenMethods',
                     );
     }
 
@@ -72,19 +73,18 @@ class MakeClassMethodDefinition extends Complete {
         // This works only for $this
         // First case for the local class
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
-              ->hasNoIn('DEFINITION')
-              ->outIs('OBJECT')
-              ->atomIs('This', self::WITHOUT_CONSTANTS)
-              ->inIs('OBJECT')
-              ->outIs('METHOD')
-              ->savePropertyAs('lccode', 'name')
-              ->back('first')
-              ->goToClass(self::CLASSES_TRAITS)
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-              ->inIs('NAME')
-              ->addETo('DEFINITION', 'first');
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs(array('Method', 'Magicmethod'))
+             )
+             ->outIs('OBJECT')
+             ->atomIs('This', self::WITHOUT_CONSTANTS)
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->outIs('OVERWRITE')
+             ->atomIs(self::FUNCTIONS_METHOD)
+             ->addETo('DEFINITION', 'first');
         $this->prepareQuery();
 
         // Second case for the local traits

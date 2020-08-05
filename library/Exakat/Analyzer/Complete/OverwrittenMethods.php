@@ -24,19 +24,85 @@ namespace Exakat\Analyzer\Complete;
 
 class OverwrittenMethods extends Complete {
     public function analyze() : void {
-        // class x { protected function foo()  {}}
-        // class xx extends x { protected function foo()  {}}
-        $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
+
+        // This is more specific than the next
+        // class x {use t { t::a as b}}
+        $this->atomIs('Virtualmethod', self::WITHOUT_CONSTANTS)
              ->hasNoOut('OVERWRITE')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
+             ->savePropertyAs('lccode', 'vname')
              ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
+             ->as('class')
+
+             ->outIs('USE')
+             ->outIs('BLOCK')
+             ->outIs('EXPRESSION')
+             ->atomIs('As')
+             ->outIs('AS')
+             ->samePropertyAs('code', 'vname',  self::CASE_INSENSITIVE)
+             ->inIs('AS')
+             ->outIs('NAME')
+             ->outIs('METHOD')
+             ->savePropertyAs('lccode', 'name')
+             ->inIs('METHOD')
+             ->outIs('CLASS')
+             ->inIs('DEFINITION')
+             ->atomIs('Trait')
+
              ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS) // No virtualmethod here
+             ->as('origin')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
-             ->inIs('NAME')
+             ->back('origin')
+             ->dedup(array('first', 'origin'))
+             ->addEFrom('OVERWRITE', 'first');
+        $this->prepareQuery();
+
+        // class x {use t { a as b}}
+        $this->atomIs('Virtualmethod', self::WITHOUT_CONSTANTS)
+             ->hasNoOut('OVERWRITE')
+             ->savePropertyAs('lccode', 'vname')
+             ->goToClass()
+             ->as('class')
+
+             ->outIs('USE')
+             ->outIs('BLOCK')
+             ->outIs('EXPRESSION')
+             ->atomIs('As')
+             ->outIs('AS')
+             ->samePropertyAs('code', 'vname',  self::CASE_INSENSITIVE)
+             ->inIs('AS')
+             ->outIs('NAME')
+             ->savePropertyAs('lccode', 'name')
+             ->back('class')
+
+             ->goToAllParentsTraits(self::EXCLUDE_SELF)
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS) // No virtualmethod here
              ->as('origin')
+             ->outIs('NAME')
+             ->hasNoOut('METHOD')
+             ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
+             ->back('origin')
+             ->dedup(array('first', 'origin'))
+             ->addEFrom('OVERWRITE', 'first');
+        $this->prepareQuery();
+
+        // This must be second, so it will skip more specific configuration above
+        // class x { protected function foo()  {}}
+        // class xx extends x { protected function foo()  {}}
+        $this->atomIs(array('Method', 'Magicmethod', 'Virtualmethod'), self::WITHOUT_CONSTANTS)
+             ->hasNoOut('OVERWRITE')
+             ->outIsIE('NAME')
+             ->savePropertyAs('lccode', 'name')
+             ->goToClass()
+             ->goToAllParentsTraits(self::EXCLUDE_SELF)
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS) // No virtualmethod here
+             ->as('origin')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
+             ->back('origin')
              ->dedup(array('first', 'origin'))
              ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
