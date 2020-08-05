@@ -29,6 +29,8 @@ class AbstractAway extends Analyzer {
                                          '\\date',
                                          '\\rand',
                                          '\\mt_rand',
+                                         '\\openssl_random_pseudo_bytes',
+                                         
                                          '\\random_int',
                                          '\\random_byte',
                                          '\\getdate',
@@ -36,14 +38,44 @@ class AbstractAway extends Analyzer {
                                          '\\gmdate',
                                          '\\localtime',
                                          '\\microtime',
+                                         '\\hrtime',
                                          );
-    
+
+    protected $abstractableClasses = array('\\Datetime',
+                                          );
+
     public function analyze() : void {
         $abstractableCalls = makeFullnspath($this->abstractableCalls);
+        $abstractableClasses = makeFullnspath($this->abstractableClasses);
 
         // $a = date();
         $this->atomFunctionIs($abstractableCalls)
                      // Must belong to a method
+             ->hasInstruction(array('Method'))
+             ->not(
+                $this->side()
+                     ->inIs('RIGHT')
+                     ->atomIs('Assignation')
+
+                    // must be returned by the method
+                     ->outIs('LEFT')
+                     ->atomIs('Variable')
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->hasIn('RETURNED')
+             )
+
+             // Not returned immediately
+             ->hasNoIn('RETURN')
+             ->back('first');
+        $this->prepareQuery();
+
+        // $a = new Datetime();
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->fullnspathIs($abstractableClasses)
+             ->inIs('NEW')
+             // Must belong to a method
              ->hasInstruction(array('Method'))
              ->not(
                 $this->side()
@@ -70,6 +102,14 @@ class AbstractAway extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $a = new Datetime();
+        $this->atomIs('New')
+             // Must belong to a method
+             ->hasNoInstruction(array('Method'))
+             ->outIs('NEW')
+             ->fullnspathIs($abstractableClasses)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
