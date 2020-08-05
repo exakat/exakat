@@ -46,7 +46,7 @@ class UncaughtExceptions extends Analyzer {
                  ->outIs('THROW')
                  ->atomIs('New')
                  ->outIs('NEW')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->tokenIs(self::STATICCALL_TOKEN)
                  ->has('fullnspath')
                  ->not(
                     // Check if any parent is catchable

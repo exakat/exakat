@@ -48,25 +48,9 @@ class ClassUsage extends Analyzer {
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
-        $this->atomIs('Catch')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($classes);
-        $this->prepareQuery();
-
+        // Typehint (return and argument), catch, instanceof, classes
         $this->atomIs(self::CONSTANTS_ALL)
-             ->hasIn(array('TYPEHINT', 'RETURNTYPE'))
-             ->fullnspathIs($classes);
-        $this->prepareQuery();
-
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->atomIs(self::CONSTANTS_ALL)
-             ->fullnspathIs($classes);
-        $this->prepareQuery();
-
-        $this->atomIs('Class')
-             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+             ->hasIn(array('TYPEHINT', 'RETURNTYPE', 'EXTENDS', 'IMPLEMENTS', 'CLASS'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 

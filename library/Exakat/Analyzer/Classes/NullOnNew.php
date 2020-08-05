@@ -36,13 +36,13 @@ class NullOnNew extends Analyzer {
                        'MessageFormatter',
                        'NumberFormatter',
                        'ResourceBundle',
-                       'IntlRuleBasedBreakIterator');
+                       'IntlRuleBasedBreakIterator',
+                       );
         $names = makeFullNsPath($names);
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->fullnspathIs($names)
              ->back('first');
         $this->prepareQuery();

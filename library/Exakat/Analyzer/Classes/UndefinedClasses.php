@@ -51,7 +51,7 @@ class UndefinedClasses extends Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->analyzerIsNot($omitted)
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot(self::RELATIVE_CLASS)
              ->noClassDefinition()
              ->isNotIgnored()
@@ -62,7 +62,7 @@ class UndefinedClasses extends Analyzer {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->analyzerIsNot($omitted)
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot(self::RELATIVE_CLASS)
              ->noClassDefinition()
              ->noInterfaceDefinition()
@@ -95,7 +95,7 @@ class UndefinedClasses extends Analyzer {
         $this->atomIs(array('Staticproperty', 'Staticclass'))
              ->outIs('CLASS')
              ->analyzerIsNot($omitted)
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot(self::RELATIVE_CLASS)
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
@@ -109,7 +109,7 @@ class UndefinedClasses extends Analyzer {
              ->analyzerIsNot($omitted)
              ->outIs('CLASS')
              ->analyzerIsNot('Classes/IsExtClass')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot(self::RELATIVE_CLASS)
              ->noClassDefinition()
              ->noInterfaceDefinition()
@@ -121,7 +121,7 @@ class UndefinedClasses extends Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->analyzerIsNot($omittedAll)
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot(self::RELATIVE_CLASS)
              ->noClassDefinition()
              ->noInterfaceDefinition()
@@ -157,7 +157,7 @@ class UndefinedClasses extends Analyzer {
         $this->prepareQuery();
 
         // in a typehint f(parent $c)
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIs('Parent')
@@ -168,7 +168,7 @@ class UndefinedClasses extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIs('Parent')

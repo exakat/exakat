@@ -55,7 +55,7 @@ class TraitUsage extends Analyzer {
         $this->atomIs('Usetrait')
              ->outIs('USE')
              ->outIsIE('NAME')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->fullnspathIs($traits);
         $this->prepareQuery();
     }

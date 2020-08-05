@@ -44,7 +44,7 @@ class UnresolvedInstanceof extends Analyzer {
         // traits are omitted here
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot(array('Array', 'Boolean', 'Null', 'Self', 'Static', 'Parent'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
@@ -59,8 +59,7 @@ class UnresolvedInstanceof extends Analyzer {
         // special case for parents
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->atomIs('Parent')
+             ->atomIs(array('Parent', 'Self', 'Static'))
              ->goToClass()
              ->hasNoOut('EXTENDS')
              ->back('first');

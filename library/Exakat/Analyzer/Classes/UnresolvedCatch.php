@@ -39,7 +39,7 @@ class UnresolvedCatch extends Analyzer {
         $this->atomIs('Catch')
              ->analyzerIsNot('self')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->fullnspathIsNot($exceptions)
              ->noClassDefinition()
              ->back('first');
@@ -48,7 +48,7 @@ class UnresolvedCatch extends Analyzer {
         $this->atomIs('Catch')
              ->analyzerIsNot('self')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->fullnspathIsNot($exceptions)
              ->classDefinition()
              ->analyzerIsNot('Exceptions/DefinedExceptions')

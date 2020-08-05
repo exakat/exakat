@@ -32,7 +32,7 @@ class ThrowFunctioncall extends Analyzer {
         // throw className(), defined class, no function
         $this->atomIs('Throw')
              ->outIs('THROW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIs('Functioncall')
              ->hasNoFunctionDefinition()
              ->back('first');
@@ -41,7 +41,7 @@ class ThrowFunctioncall extends Analyzer {
         // throw RuntimeException()
         $this->atomIs('Throw')
              ->outIs('THROW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->atomIsNot(array('Array', 'Functioncall'))
              ->fullnspathIs($phpClassesFnp)
              ->back('first');
