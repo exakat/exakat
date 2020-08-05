@@ -139,7 +139,7 @@ abstract class Analyzer {
     public const LOOPS_ALL        = array('For' , 'Foreach', 'While', 'Dowhile');
     public const SWITCH_ALL       = array('Switch' , 'Match');
 
-    public const FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
+    public const FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_RELATIVE', 'T_NAME_QUALIFIED');
     public const FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod', 'Arrowfunction');
 
     public const FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
@@ -151,7 +151,7 @@ abstract class Analyzer {
     public const CLASSES_TRAITS   = array('Class', 'Classanonymous', 'Trait');
     public const RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     public const STATIC_NAMES     = array('Nsname', 'Identifier');
-    public const STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
+    public const STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_RELATIVE', 'T_NAME_QUALIFIED');
     public const CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
     public const CLASS_METHODS    = array('METHOD', 'MAGICMETHOD');
 

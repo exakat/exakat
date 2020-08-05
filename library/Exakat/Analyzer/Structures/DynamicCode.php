@@ -36,24 +36,12 @@ class DynamicCode extends Analyzer {
         $this->prepareQuery();
 
         // $o->$p
-        $this->atomIs('Member')
-             ->outIs('MEMBER')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->back('first');
-        $this->prepareQuery();
-
         // $o->$p();
-        $this->atomIs('Methodcall')
-             ->outIs('METHOD')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->back('first');
-        $this->prepareQuery();
-
         //$classname::methodcall();
-        $this->atomIs('Staticmethodcall')
-             ->outIs(array('CLASS', 'METHOD'))
+        $this->atomIs(array('Member', 'Methodcall', 'Staticmethodcall'))
+             ->outIs(array('MEMBER', 'METHOD', 'CLASS'))
              ->tokenIsNot(self::STATICCALL_TOKEN)
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Self', 'Parent', 'Static'))
              ->back('first');
         $this->prepareQuery();
 

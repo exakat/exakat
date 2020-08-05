@@ -26,8 +26,10 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidUsing extends Analyzer {
+    protected $forbiddenClasses = array('AvoidThisClass');
+    
     public function analyze() : void {
-        $classes = $this->config->Classes_AvoidUsing;
+        $classes = $this->forbiddenClasses;
 
         if (empty($classes)) {
             return ;
@@ -35,20 +37,20 @@ class AvoidUsing extends Analyzer {
         $classesPath = makeFullNsPath($classes);
 
         // class may be used in a class
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
              ->fullnspathIs($classesPath);
         $this->prepareQuery();
 
         // class may be used in a new
         $this->atomIs('New')
              ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::STATICCALL_TOKEN)
              ->fullnspathIs($classesPath)
              ->back('first');
         $this->prepareQuery();
 
-        // class may be used in a Staticmethodcall
-        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Instanceof'))
+        // class may be used in a Staticmethodcall, instanceof, catch
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Instanceof', 'Catch'))
              ->outIs('CLASS')
              ->fullnspathIs($classesPath)
              ->back('first');
@@ -62,8 +64,15 @@ class AvoidUsing extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // class may be used in a return typehint
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->fullnspathIs($classesPath)
+             ->back('first');
+        $this->prepareQuery();
+
         // class may be used in an extension
-        $this->atomIs('Class')
+        $this->atomIs(self::CLASSES_ALL)
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
              ->fullnspathIs($classesPath)
              ->back('first');
@@ -78,8 +87,8 @@ class AvoidUsing extends Analyzer {
 
         // class_alias is covered by string test just below
         // mentions in strings
-        $this->atomIs('String')
-             ->regexIs('noDelimiter', addslashes(implode('|', $classes)));
+        $this->atomIs(self::STRINGS_LITERALS)
+             ->regexIs('noDelimiter', '(?i)^'.addslashes(implode('|', $classes)).'\\$');
         $this->prepareQuery();
     }
 }

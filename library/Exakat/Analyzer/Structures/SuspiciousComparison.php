@@ -26,13 +26,10 @@ use Exakat\Analyzer\Analyzer;
 
 class SuspiciousComparison extends Analyzer {
     public function analyze() : void {
-        $functions = $this->methods->getFunctionsLastArgsNotBoolean();
-
         // intval($c === 3);
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($functions)
+        // todo : limit this to conditions : ternary, if/then, while/do, 
+        $this->atomIs(self::CALLS)
+             ->outIsIE('METHOD')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Comparison')
              ->back('first');

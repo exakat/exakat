@@ -1,8 +1,6 @@
 <?php
 
 $expected     = array('\'AvoidThisClass\'',
-                      '\'\\NS\\AvoidThisClass\'',
-                      '\'NS\\AvoidThisClass\'',
                       '$a instanceof AvoidThisClass',
                       'AvoidThisClass::constante',
                       'AvoidThisClass::$yes',
@@ -11,6 +9,8 @@ $expected     = array('\'AvoidThisClass\'',
                      );
 
 $expected_not = array('AvoidThisClass(2, 3, 4)',
+                      '\'\\NS\\AvoidThisClass\'',
+                      '\'NS\\AvoidThisClass\'',
                       'AvoidThisClass::methodCall( )',
                       'use NS\\AvoidThisClass as b',
                       '$a instanceof AvoidThisClass',
