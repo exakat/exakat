@@ -30,6 +30,7 @@ class TypehintMustBeReturned extends Analyzer {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
+             ->fullnspathIsNot('\\void') // Void cannot be with other typehints
              ->back('first')
              ->isNot('abstract', true)
              ->not(
@@ -47,6 +48,7 @@ class TypehintMustBeReturned extends Analyzer {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')
+             ->fullnspathIsNot('\\void')
              ->back('first')
              ->isNot('abstract', true)
              ->not(
