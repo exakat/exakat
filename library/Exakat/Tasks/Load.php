@@ -123,6 +123,8 @@ class Load extends Tasks {
     private $currentClassTrait       = array();
     private $currentProperties       = array();
     private $currentPropertiesCalls  = array();
+    private $currentMethods          = array();
+    private $currentMethodsCalls     = array();
     private $cases                   = null; // NestedCollector
 
     private $tokens = array();
@@ -1028,7 +1030,9 @@ class Load extends Tasks {
                     $atom = 'This';
                 } elseif (in_array($this->tokens[$this->id + 1][1], $this->PHP_SUPERGLOBALS, \STRICT_COMPARISON)) {
                             $atom = 'Phpvariable';
-                } elseif ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OBJECT_OPERATOR) {
+                } elseif (in_array($this->tokens[$this->id + 2][0], array($this->phptokens::T_OBJECT_OPERATOR, 
+                                                                          $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR, 
+                                                                         ), \STRICT_COMPARISON)) {
                     $atom = 'Variableobject';
                 } elseif ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_BRACKET) {
                     $atom = 'Variablearray';
@@ -1043,7 +1047,9 @@ class Load extends Tasks {
                     $this->calls->addCall('class', $class->fullnspath, $variable);
                 }
 
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OBJECT_OPERATOR) {
+                if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
+                                                                    $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR, 
+                                                                    ), \STRICT_COMPARISON)) {
                     $property = $this->addAtom('Member', $this->id);
 
                     ++$this->id;
@@ -4925,7 +4931,9 @@ class Load extends Tasks {
         } elseif (in_array($this->tokens[$this->id][1], $this->PHP_SUPERGLOBALS,
                 \STRICT_COMPARISON)) {
             $atom = 'Phpvariable';
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OBJECT_OPERATOR) {
+        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
+                                                                  $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR, 
+                                                                 ), \STRICT_COMPARISON)) {
             $atom = 'Variableobject';
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET) {
             $atom = 'Variablearray';
@@ -5408,8 +5416,9 @@ class Load extends Tasks {
             if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             } elseif (!in_array($this->tokens[$current - 1][0], array($this->phptokens::T_OBJECT_OPERATOR,
-                                                                       $this->phptokens::T_DOUBLE_COLON,
-                                                                       ),
+                                                                      $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR,
+                                                                      $this->phptokens::T_DOUBLE_COLON,
+                                                                      ),
                         \STRICT_COMPARISON)) {
                 $variable = $this->processFCOA($variable);
             }
