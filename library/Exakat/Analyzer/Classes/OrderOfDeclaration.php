@@ -34,6 +34,7 @@ class OrderOfDeclaration extends Analyzer {
                      ->outIs('PPP')
                      ->atomIs('Virtualproperty')
              )
+             ->atomIsNot('Virtualmethod')
              ->savePropertyAs('rank', 'ranked')
              ->raw('sideEffect{ 
                 if (it.get().label() == "Usetrait") {
@@ -53,6 +54,7 @@ class OrderOfDeclaration extends Analyzer {
                      ->outIs('PPP')
                      ->atomIs('Virtualproperty')
              )
+             ->atomIsNot('Virtualmethod')
              ->raw('filter{ it.get().value("rank") == ranked + 1; }')
              ->raw('filter{ !(it.get().label() in ok); }')
              ->back('first');

@@ -51,6 +51,7 @@ SQL;
     
     public function analyze() : void {
         $this ->atomIs(self::CALLS, self::WITHOUT_CONSTANTS)
+              ->has('fullnspath')
               ->goToInstruction(array('Function', 'Method', 'Magicmethod'))
               ->as('calling')
               ->as('callingName')
