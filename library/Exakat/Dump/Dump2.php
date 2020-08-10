@@ -58,19 +58,6 @@ SQL;
         $this->sqlite->query($query);
 
         $query = <<<'SQL'
-CREATE TABLE classChanges (  
-    id           INTEGER PRIMARY KEY AUTOINCREMENT,
-    changeType   STRING,
-    name         STRING,
-    parentClass  STRING,
-    parentValue  STRING,
-    childClass   STRING,
-    childValue   STRING
-                    )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
 CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                                  including STRING,
                                  included STRING,
@@ -130,7 +117,8 @@ CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                     end INTEGER,
                     file INTEGER,
                     line INTEGER,
-                    extends STRING DEFAULT ""
+                    extends STRING DEFAULT "",
+                    attributes STRING DEFAULT ""
                   )
 SQL;
         $this->sqlite->query($query);
