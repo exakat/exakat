@@ -139,12 +139,14 @@ abstract class Analyzer extends TestCase {
             }
         }
 
-        $this->file = $file;
-        $this->number = $number;
+        $this->file     = $file;
+        $this->number   = $number;
         $this->analyzer = $analyzer;
 
         if ($analyzerobject instanceof AnalyzerHashAnalyzer) {
             $this->checkTestOnHashAnalyzer($res, $expected, $expected_not, $analyzerobject);
+        } elseif ($analyzerobject instanceof AnalyzerTable) {
+            $this->checkTestOnFullarray($res, $expected, $expected_not);
         } elseif (isset($res[0]) && !is_array($res[0])) {
             $this->checkTestOnFullcode($res, $expected, $expected_not);
         } elseif (isset($res[0]['fullcode'])) {
@@ -166,7 +168,7 @@ abstract class Analyzer extends TestCase {
         }
     }
 
-    private function checkTestOnHashAnalyzer(array $list = array(), array $expected = array(), array $expected_not = array(), AnalyzerHashAnalyzer $analyzerobject) : void {
+    private function checkTestOnHashAnalyzer(array $list = array(), array $expected = array(), array $expectedNot = array(), AnalyzerHashAnalyzer $analyzerobject) : void {
         global $EXAKAT_PATH;
         
         $dump = Dump::factory("$EXAKAT_PATH/projects/test/dump.sqlite", Dump::READ);
@@ -186,13 +188,13 @@ abstract class Analyzer extends TestCase {
         $this->assertEmpty($missed, count($missed)." expected values were not found :\n '".join("',\n '", $missed)."'\n");
 
         $missed = array();
-        foreach($expected_not as $key => $value) {
+        foreach($expectedNot as $key => $value) {
             if (isset($res[$key]) && $res[$key] == $value) {
                 unset($res[$key]);
                 $missed[] = "$key => $value";
             }
         }
-        $this->assertEmpty($missed, count($missed)." not expected values were found :\n '".join("',\n '", $missed)."'\n");
+        $this->assertEmpty($missed, count($missed)." not expected values were still found :\n '".join("',\n '", $missed)."'\n");
 
         $missed = array();
         foreach($res as $key => $value) {
@@ -201,12 +203,12 @@ abstract class Analyzer extends TestCase {
         $this->assertEmpty($missed, count($res)." too many values were found :\n ".join(",\n ", $missed).",\n");
     }
     
-    private function checkTestOnFullarray(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
-        $list  = array_map(function(array $x) : array { unset($x['id']); return $x;}, $list);
+    private function checkTestOnFullarray(array $list = array(), array $expected = array(), array $expectedNot = array()) : void {
+        $list  = array_map(function(array $x) : array  { unset($x['id']); return $x;}, $list);
         $list2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $list);
 
         $expected2     = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected);
-        $expected_not2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected_not);
+        $expectedNot2  = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expectedNot);
 
         $display = array();
         $missed = array_diff($expected2, $list2);
@@ -218,7 +220,7 @@ abstract class Analyzer extends TestCase {
         $this->assertEmpty($missed, count($missed)." expected values were not found :\n '".join("',\n '", $missed)."'\n\nin the ".count($display)." received values of \n".print_r($display, true));
 
         $list2 = array_diff($list2, $expected2);
-        $not = array_intersect($expected_not2, $list2);
+        $not   = array_intersect($expectedNot2, $list2);
 
         if(!empty($not)) {
             foreach($not as $key => $value) {
@@ -227,7 +229,7 @@ abstract class Analyzer extends TestCase {
         }
         $this->assertEmpty($not, count($not)." values that are not expected, were found :\n '".join("',\n '", $missed)."'\n\nin the ".count($display)." received values of \n".print_r($display, true));
         
-        $extra = array_diff($list2, $expected_not2);
+        $extra = array_diff($list2, $expectedNot2);
         if(!empty($extra)) {
             foreach($extra as $key => $value) {
                 $display[] = $list[$key];
@@ -237,7 +239,7 @@ abstract class Analyzer extends TestCase {
         
     }
     
-    private function checkTestOnFullcode(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
+    private function checkTestOnFullcode(array $list = array(), array $expected = array(), array $expectedNot = array()) : void {
         if (isset($expected) && is_array($expected)) {
             $missing = array();
             foreach($expected as $e) {
@@ -258,9 +260,9 @@ phpunit --filter=$this->number Test/$this->analyzer.php
             // also add a phpunit --filter to rerun it easily
         }
         
-        if (isset($expected_not) && is_array($expected)) {
+        if (isset($expectedNot) && is_array($expected)) {
             $extra = array();
-            foreach($expected_not as $e) {
+            foreach($expectedNot as $e) {
                 if ($id = array_search($e, $list)) {
                     $extra[] = $e;
                     unset($list[$id]);
@@ -274,9 +276,9 @@ phpunit --filter=$this->number Test/$this->analyzer.php
         $this->assertEquals(count($list), 0, count($list)." values were found and are unprocessed : ".join(', ', $list)."");
     }
 
-    private function checkTestOnHash(array $list = array(), array $expected = array(), array $expected_not = array()) : void {
+    private function checkTestOnHash(array $list = array(), array $expected = array(), array $expectedNot = array()) : void {
         $expected     = array_column($expected, 'value', 'key');
-        $expected_not = array_column($expected_not, 'value', 'key');
+        $expectedNot  = array_column($expectedNot, 'value', 'key');
         $list         = array_column($list, 'value', 'key');
 
         if (isset($expected) && is_array($expected)) {
@@ -299,9 +301,9 @@ phpunit --filter=$this->number Test/$this->analyzer.php
             // also add a phpunit --filter to rerun it easily
         }
 
-        if (isset($expected_not) && is_array($expected)) {
+        if (isset($expectedNot) && is_array($expected)) {
             $extra = array();
-            foreach($expected_not as $k => $v) {
+            foreach($expectedNot as $k => $v) {
                 if (isset($list[$k]) && $list[$k] == $v) {
                     $extra[] = $k;
                     unset($list[$k]);
