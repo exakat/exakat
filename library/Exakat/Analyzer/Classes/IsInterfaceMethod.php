@@ -44,27 +44,33 @@ class IsInterfaceMethod extends Analyzer {
         // PHP or extension defined interface
         $interfaces = $this->loadJson('php_interfaces_methods.json', 'interface');
 
+        $hash = array();
         foreach($interfaces as $interface => $methods) {
             if (empty($methods)) {
                 // may be the case for Traversable : interface without methods
                 continue;
             }
-            $methodNames = array_column($methods, 'name');
-
-            // interface locally implemented
-            $this->atomIs(self::FUNCTIONS_METHOD)
-                 ->analyzerIsNot('self')
-                 ->outIs('NAME')
-                 ->codeIs($methodNames, self::TRANSLATE, self::CASE_INSENSITIVE)
-                 ->inIs('NAME')
-                 ->inIs('METHOD')
-                 ->atomIs('Class')
-                 ->goToAllImplements(self::INCLUDE_SELF)
-                 ->outIs('IMPLEMENTS')
-                 ->fullnspathIs($interface)
-                 ->back('first');
-            $this->prepareQuery();
+            
+            foreach($methods as $method) {
+                array_collect_by($hash, $method->name, $interface);
+            }
         }
+
+        // interface locally implemented
+        $this->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self')
+             ->outIs('NAME')
+             ->codeIs(array_keys($hash), self::TRANSLATE, self::CASE_INSENSITIVE)
+             ->savePropertyAs('fullcode', 'name')
+             ->raw('sideEffect{ name = name.toLowerCase(); }')
+             ->inIs('NAME')
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs('Class')
+             ->goToAllImplements(self::INCLUDE_SELF)
+             ->outIs('IMPLEMENTS')
+             ->isHash('fullnspath', $hash, 'name')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
