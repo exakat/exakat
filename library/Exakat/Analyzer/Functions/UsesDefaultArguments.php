@@ -26,6 +26,8 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UsesDefaultArguments extends Analyzer {
+    // $c = count($x); 
+    //PHP native function : count($array, $options)
     public function analyze() : void {
         $functions = $this->methods->getFunctionsArgsInterval();
 
@@ -34,15 +36,13 @@ class UsesDefaultArguments extends Analyzer {
             if ($function['args_min'] === $function['args_max']) { continue; }
             if ($function['args_max'] === \MAX_ARGS) { continue; }
             // Only test if the last is missing. This is sufficient
-            $positions[$function['args_max'] - 1][] = "\\$function[name]";
+            $positions["\\$function[name]"] = $function['args_max'];
         }
 
-        foreach($positions as $position => $f) {
-            $this->atomFunctionIs($f)
-                 ->noChildWithRank('ARGUMENT', $position)
-                 ->back('first');
-            $this->prepareQuery();
-        }
+        $this->atomFunctionIs(array_keys($positions))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->isLessHash('count', $positions, 'fnp');
+        $this->prepareQuery();
     }
 }
 
