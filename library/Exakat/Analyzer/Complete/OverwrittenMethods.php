@@ -96,7 +96,9 @@ class OverwrittenMethods extends Complete {
              ->outIsIE('NAME')
              ->savePropertyAs('lccode', 'name')
              ->goToClass()
-             ->goToAllParentsTraits(self::EXCLUDE_SELF)
+             ->as('theClass')
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->raw('where(neq("theClass"))')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS) // No virtualmethod here
              ->as('origin')
