@@ -113,6 +113,7 @@ HEADERS;
         $abstract   = empty($class->abstract)   ? '' : 'abstract ';
         $implements = empty($class->implements) ? '' : ' implements '.implode(', ', $class->implements);
         $extends    = empty($class->extends)    ? '' : ' extends '.$class->extends;
+        $phpdoc     = $this->normalizePhpdoc($class->phpdoc, 1);
         if (empty($class->use)) {
             $use = '';
         } else {
@@ -152,13 +153,14 @@ HEADERS;
         }
         
         if ($class->php === true) {
-            return self::INDENTATION."if (!class_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
+            return $phpdoc.self::INDENTATION."if (!class_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
         } else {
-            return join(PHP_EOL, $result);
+            return $phpdoc.join(PHP_EOL, $result);
         }
     }
 
     private function trait(string $name, object $trait): string {
+        $phpdoc     = $this->normalizePhpdoc($trait->phpdoc, 1);
         if (empty($trait->use)) {
             $use = '';
         } else {
@@ -191,13 +193,14 @@ HEADERS;
         }
         
         if ($trait->php === true) {
-            return self::INDENTATION."if (!trait_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
+            return $phpdoc.self::INDENTATION."if (!trait_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
         } else {
-            return join(PHP_EOL, $result);
+            return $phpdoc.join(PHP_EOL, $result);
         }
     }
 
     private function interface(string $name, object $interface): string {
+        $phpdoc     = $this->normalizePhpdoc($interface->phpdoc, 1);
         $extends    = empty($interface->extends) ? '' : ' extends '.$interface->extends;
         $result = array(self::INDENTATION . "interface $name{$extends} {");
 
@@ -220,9 +223,9 @@ HEADERS;
         }
         
         if ($interface->php === true) {
-            return self::INDENTATION."if (!interface_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
+            return $phpdoc.self::INDENTATION."if (!interface_exists('\\$name')) {\n".self::INDENTATION.str_replace("\n", "\n".self::INDENTATION, join(PHP_EOL, $result)).'}';
         } else {
-            return join(PHP_EOL, $result);
+            return $phpdoc.join(PHP_EOL, $result);
         }
     }
 

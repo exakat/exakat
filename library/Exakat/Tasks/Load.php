@@ -1578,6 +1578,7 @@ class Load extends Tasks {
         $trait = $this->addAtom('Trait', $current);
         $this->currentClassTrait[] = $trait;
         $this->makePhpdoc($trait);
+        $this->makeAttributes($trait);
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);
@@ -1607,6 +1608,7 @@ class Load extends Tasks {
         $interface = $this->addAtom('Interface', $current);
         $this->currentClassTrait[] = $interface;
         $this->makePhpdoc($interface);
+        $this->makeAttributes($interface);
 
         $this->contexts->nestContext(Context::CONTEXT_CLASS);
         $this->contexts->toggleContext(Context::CONTEXT_CLASS);

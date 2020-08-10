@@ -63,9 +63,10 @@ class StubsJson extends Reports {
         // constants
         $res = $this->dump->fetchTable('constants');
         foreach($res->toArray() as $constant) {
-            $details = array('type'     => $constant['type'],
-                             'value'    => $constant['value'],
-                             'phpdoc'   => $constant['phpdoc'] ?? '',
+            $details = array('type'       => $constant['type'],
+                             'value'      => $constant['value'],
+                             'phpdoc'     => $constant['phpdoc'] ?? '',
+                             'attributes' => $this->normalizeAttributes($constant['attributes'] ?? ''),
                              );
             $data['versions'][$namespaces[$constant['namespaceId']]]['constants'][$constant['constant']] = $details;
         }
@@ -79,7 +80,8 @@ class StubsJson extends Reports {
 
             $details = array('returntypes' => explode('|', $function['returntype']),
                              'reference'   => $function['reference'] === 1,
-                             'phpdoc'      => $function['phpdoc'],
+                             'phpdoc'      => $function['phpdoc'] ?? '',
+                             'attributes'  => $this->normalizeAttributes($function['attributes'] ?? ''),
                              'php'         => $function['namespaceId'] === 1 ? in_array(mb_strtolower($function['function']), $this->phpFunctions, \STRICT_COMPARISON) : false,
                              );
             $data['versions'][$namespaces[$function['namespaceId']]]['functions'][$function['function']] = $details;
@@ -109,7 +111,9 @@ class StubsJson extends Reports {
                              'implements' => array(),
                              'use'        => array(),
                              'useoptions' => array(),
-                             'php'        => $function['namespaceId'] === 1 ? in_array(mb_strtolower($cit['name']), $this->phpCIT, \STRICT_COMPARISON) : false,
+                             'phpdoc'     => $cit['phpdoc'] ?? '',
+                             'attributes' => $this->normalizeAttributes($cit['attributes'] ?? ''),
+                             'php'        => $cit['namespaceId'] === 1 ? in_array(mb_strtolower($cit['name']), $this->phpCIT, \STRICT_COMPARISON) : false,
                              );
             $data['versions'][$namespaces[$cit['namespaceId']]][$cit['type']][$cit['name']] = $details;
 
@@ -134,6 +138,7 @@ class StubsJson extends Reports {
             $details = array('value'        => $classconstant['value'],
                              'visibility'   => $classconstant['visibility'],
                              'phpdoc'       => $classconstant['phpdoc'] ?? '',
+                             'attributes'   => $this->normalizeAttributes($classconstant['attributes'] ?? ''),
                              );
 
             $data['versions'][$namespaces[$cits2ns[$classconstant['citId']]]][$cits2type[$classconstant['citId']]][$cits[$classconstant['citId']]]['constants'][$classconstant['constant']] = $details;
@@ -147,6 +152,7 @@ class StubsJson extends Reports {
                              'static'       => $property['static'] === 1,
                              'typehint'     => explode('|', $property['typehint']),
                              'phpdoc'       => $property['phpdoc'] ?? '',
+                             'attributes'   => $this->normalizeAttributes($property['attributes'] ?? ''),
                              );
 
             $data['versions'][$namespaces[$cits2ns[$property['citId']]]][$cits2type[$property['citId']]][$cits[$property['citId']]]['properties'][$property['property']] = $details;
@@ -160,6 +166,7 @@ class StubsJson extends Reports {
                              'reference'    => $method['reference']  === 1,
                              'returntypes'  => explode('|', $method['returntype']),
                              'phpdoc'       => $method['phpdoc'],
+                             'attributes'   => $this->normalizeAttributes($method['attributes'] ?? ''),
                              );
 
             $data['versions'][$namespaces[$cits2ns[$method['citId']]]][$cits2type[$method['citId']]][$cits[$method['citId']]]['methods'][$method['method']] = $details;
@@ -174,6 +181,7 @@ class StubsJson extends Reports {
                              'typehint'     => explode('|', $argument['typehint']),
                              'value'        => $argument['init'],
                              'phpdoc'       => $argument['phpdoc'] ?? '',
+                             'attributes'   => $this->normalizeAttributes($argument['attributes'] ?? ''),
                              );
             if ($argument['citId'] == 0) {
                 $data['versions'][$namespaces[$function2ns[$argument['methodId']]]]['functions'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;
@@ -181,11 +189,14 @@ class StubsJson extends Reports {
                 $data['versions'][$namespaces[$cits2ns[$argument['citId']]]][$cits2type[$argument['citId']]][$cits[$argument['citId']]]['methods'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;
             } else {
                 display("Undefined method : $argument[citId] (Ignoring. Possible double definition)\n");
-//                assert(isset($data['versions'][$namespaces[$cits2ns[$argument['citId']]]][$cits2type[$argument['citId']]][$cits[$argument['citId']]]['methods'][$methods[$argument['methodId']]]), "Method non definie\n");
             }
         }
 
         return json_encode($data, JSON_PRETTY_PRINT);
+    }
+    
+    private function normalizeAttributes(string $attributes) : array {
+        return array_filter(explode(';', $attributes ?? ''));
     }
 }
 

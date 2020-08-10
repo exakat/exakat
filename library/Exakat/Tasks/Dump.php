@@ -436,6 +436,7 @@ GREMLIN
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = "";}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .sideEffect{ phpdoc = ""; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
+.sideEffect{ attributes = []; }.where(__.out("ATTRIBUTE").sideEffect{ attributes.add(it.get().value("fullcode")); }.fold() )
 .map{ 
         ["id" : "",
          "fullnspath":it.get().value("fullnspath"),
@@ -453,7 +454,8 @@ GREMLIN
          "extends":extendList,
          "implements":implementList,
          "uses":useList.unique(),
-         "usesOptions":usesOptions.join(";")
+         "usesOptions":usesOptions.join(";"),
+         "atrributes":attributes.join(";")
          ];
 }
 GREMLIN
@@ -501,6 +503,7 @@ GREMLIN
 .sideEffect{ lines = [];}.where( __.out("METHOD", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = [];}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .sideEffect{ phpdoc = ''; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
+.sideEffect{ attributes = []; }.where(__.out("ATTRIBUTE").sideEffect{ attributes.add(it.get().value("fullcode")); }.fold() )
 .map{ 
         ['id' : '',
          'fullnspath':it.get().value("fullnspath"),
@@ -516,6 +519,7 @@ GREMLIN
          'line':it.get().value("line"),
 
          'extends':extendList,
+         "atrributes":attributes.join(";")
          ];
 }
 
@@ -554,6 +558,7 @@ GREMLIN
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = "";}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .sideEffect{ phpdoc = ""; }.where(__.out("PHPDOC").sideEffect{ phpdoc = it.get().value("fullcode"); }.fold() )
+.sideEffect{ attributes = []; }.where(__.out("ATTRIBUTE").sideEffect{ attributes.add(it.get().value("fullcode")); }.fold() )
 .map{ 
         ["id" : "",
          "fullnspath":it.get().value("fullnspath"),
@@ -571,7 +576,8 @@ GREMLIN
          "extends":"",
          "implements":[],
          "uses":useList.unique(),
-         "usesOptions":usesOptions.join(";")
+         "usesOptions":usesOptions.join(";"),
+         "atrributes":attributes.join(";")
          ];
 }
 
@@ -2188,14 +2194,7 @@ GREMLIN;
 
     public function collect(): void {
         $begin = microtime(\TIME_AS_NUMBER);
-        $this->collectClassChanges();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Class Changes: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
         $this->collectFiles();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Files: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
 
         $this->collectFilesDependencies();
         $end = microtime(\TIME_AS_NUMBER);
