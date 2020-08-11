@@ -23,9 +23,9 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Dump\AnalyzerResults;
+use Exakat\Analyzer\Analyzer;
 
-class Pack extends AnalyzerResults {
+class Pack extends Analyzer {
     protected $analyzerName = 'Pack';
 
     public function dependsOn(): array {
@@ -42,8 +42,7 @@ class Pack extends AnalyzerResults {
         // pack("nvc*", 0x1234, 0x5678, 65, 66);
         $this->atomFunctionIs($packFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs(array('String', 'Concatenation'), self::WITH_CONSTANTS)
-             ->toResults();
+             ->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS);
         $this->prepareQuery();
     }
 }
