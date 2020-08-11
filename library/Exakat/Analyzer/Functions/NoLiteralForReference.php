@@ -49,13 +49,14 @@ class NoLiteralForReference extends Analyzer {
 
         // foo(1)
         // function foo(&$r) {}
-        $this->atomIs(self::CALLS)
+        $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
+             ->as('result')
+             ->is('reference', true)
+             ->goToParameterUsage()
              ->is('constant', true)
              ->atomIsNot(array('Void', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
-             ->goToParameterDefinition()
-             ->is('reference', true)
-             ->back('first');
+             ->inIs('ARGUMENT');
         $this->prepareQuery();
 
         // foo(bar_without_reference)
