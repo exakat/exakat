@@ -29,7 +29,7 @@ class SafeHttpHeaders extends Analyzer {
         //Some docs : https://www.keycdn.com/blog/http-security-headers
 
         //header('X-Xss-Protection: 0');
-        $this->atomIs('String')
+        $this->atomIs(self::STRINGS_LITERALS)
              ->has('noDelimiter')
              ->noDelimiterIs(array('x-xss-protection: 0', 'access-control-allow-origin: *'), self::CASE_INSENSITIVE)
              ->back('first');

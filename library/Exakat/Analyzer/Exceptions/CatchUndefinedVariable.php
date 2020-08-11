@@ -30,11 +30,10 @@ class CatchUndefinedVariable extends Analyzer {
                     );
     }
 
-    
     public function analyze() : void {
         // try {Throw $e; $a = 1; } catch (Exception $e ) { echo $a;}
-        $this->atomIs('Try')
-             ->atomInsideNoDefinition('Assignation')
+        $this->atomIs('Assignation')
+             ->hasInstruction('Try')
              ->codeIs('=')
              ->outIs('LEFT')
              ->atomIs('Variable')
