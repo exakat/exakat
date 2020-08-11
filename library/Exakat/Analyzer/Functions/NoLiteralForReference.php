@@ -51,7 +51,6 @@ class NoLiteralForReference extends Analyzer {
         // function foo(&$r) {}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->as('result')
              ->is('reference', true)
              ->goToParameterUsage()
              ->is('constant', true)
