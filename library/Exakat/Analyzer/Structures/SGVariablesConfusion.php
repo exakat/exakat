@@ -25,18 +25,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SGVariablesConfusion extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
-    /* List dependencies 
-    public function dependsOn() : array {
-        return array('Category/Analyzer',
-                     '',
-                    );
-    }
-    */
-
     public function analyze() : void {
         // function foo() { $a = 1; global $a; static $a; }
         $this->atomIs('Variabledefinition')

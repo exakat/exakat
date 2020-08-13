@@ -25,17 +25,6 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class PossibleInterfaces extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
-    /* List dependencies 
-    public function dependsOn() {
-        return array('Category/Analyzer',
-                     '',
-                    );
-    }
-    */
     // remove abstract, final,
     // remove protected, private ??
     // remove extended ... ??
