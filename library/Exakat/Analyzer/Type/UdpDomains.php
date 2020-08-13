@@ -35,7 +35,9 @@ class UdpDomains extends AnalyzerResults {
     public function analyze() : void {
         $domains = $this->loadIni('php_internet_domains.ini', 'domains');
 
-        $this->atomIs('String', self::WITH_CONSTANTS)
+        // $s = 'tcp://' 
+        $this->atomIs(self::STRINGS_LITERALS, self::WITH_CONSTANTS)
+             ->raw('has("noDelimiter", containing("://"))')
              ->regexIs('noDelimiter', '^(' . implode('|', $domains) . ')://')
              ->back('first')
              ->toResults();
