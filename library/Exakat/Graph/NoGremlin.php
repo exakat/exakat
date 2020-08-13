@@ -42,18 +42,18 @@ class NoGremlin extends Graph {
     public function stop(): void {
     }
 
-    public function serverInfo() : array {
+    public function serverInfo(): array {
         return array('Server' => 'None');
     }
 
-    public function checkConnection() : bool {
+    public function checkConnection(): bool {
         return true;
     }
 
-    public function clean() : void {
+    public function clean(): void {
     }
 
-    public function getDefinitionSQL() : string {
+    public function getDefinitionSQL(): string {
         return 'PRAGMA no_sql;';
     }
 

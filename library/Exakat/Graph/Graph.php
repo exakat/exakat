@@ -58,11 +58,11 @@ abstract class Graph {
         $this->start();
     }
 
-    abstract public function serverInfo() : array;
+    abstract public function serverInfo(): array;
 
-    abstract public function checkConnection() : bool;
+    abstract public function checkConnection(): bool;
 
-    abstract public function clean() : void;
+    abstract public function clean(): void;
 
     // Produces an id for storing a new value.
     // null means that the graph will handle it.

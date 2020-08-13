@@ -136,7 +136,7 @@ class Tinkergraph extends Graph {
         return $this->query($query, $params, $load);
     }
 
-    public function checkConnection() : bool {
+    public function checkConnection(): bool {
         $res = @stream_socket_client('tcp://' . $this->config->tinkergraph_host . ':' . $this->config->tinkergraph_port,
                                      $errno,
                                      $errorMessage,
@@ -147,17 +147,17 @@ class Tinkergraph extends Graph {
         return is_resource($res);
     }
 
-    public function serverInfo() : array {
+    public function serverInfo(): array {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
 
         $res = $this->query('Gremlin.version();');
 
-        return $res;
+        return $res->toArray();
     }
 
-    public function clean() : void {
+    public function clean(): void {
         // This is memory only Database
         $this->stop();
         $this->start();
@@ -176,9 +176,9 @@ class Tinkergraph extends Graph {
         if (in_array($this->gremlinVersion, array('3.3', '3.4'), STRICT_COMPARISON)) {
             putenv("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            exec("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+            exec("GREMLIN_YAML=conf/tinkergraph.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j;/bin/bash ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         } elseif ($this->gremlinVersion === '3.2') {
-            exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.{$this->gremlinVersion}.pid ");
+            exec("cd {$this->config->tinkergraph_folder}; rm -rf db/neo4j;/bin/bash ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.{$this->gremlinVersion}.pid ");
         } else {
             throw new GremlinException("Wrong version for tinkergraph : $this->gremlinVersion");
         }
@@ -224,7 +224,7 @@ class Tinkergraph extends Graph {
         }
     }
 
-    private function simplifyArray(array $result) : array {
+    private function simplifyArray(array $result): array {
         $return = array();
 
         if (!isset($result[0]['properties'])) {
@@ -244,7 +244,7 @@ class Tinkergraph extends Graph {
         return $return;
     }
 
-    public function getDefinitionSQL() : string {
+    public function getDefinitionSQL(): string {
         // Optimize loading by sorting the results
         return <<<'SQL'
 SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id ELSE definitions.id END AS definition, GROUP_CONCAT(DISTINCT calls.id) AS call, count(calls.id) AS id
@@ -260,7 +260,7 @@ GROUP BY definition
 SQL;
     }
 
-    public function getGlobalsSql() : string {
+    public function getGlobalsSql(): string {
         return 'SELECT origin, destination FROM globals';
     }
 }

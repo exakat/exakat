@@ -71,8 +71,8 @@ class GSNeo4jV3 extends Graph {
             $neo4jVersion = substr($neo4jVersion, 6, -4);
             $stats['neo4j version'] = $neo4jVersion;
 
-            if (file_exists("{$this->config->gsneo4jv3_folder}/db/gsneo4j.pid")) {
-                $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->gsneo4jv3_folder}/db/gsneo4j.pid")) . ')';
+            if (file_exists("{$this->config->gsneo4jv3_folder}/db/gsneo4jv3.pid")) {
+                $stats['running'] = 'Yes (PID : ' . trim(file_get_contents("{$this->config->gsneo4jv3_folder}/db/gsneo4jv3.pid")) . ')';
             }
         }
 
@@ -104,10 +104,12 @@ class GSNeo4jV3 extends Graph {
                                           'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
+
+        $this->db->message->registerSerializer('\Exakat\Graph\Helpers\GraphsonV3', true);
         $this->status = self::UNCHECKED;
     }
 
-    private function checkConfiguration() : void {
+    private function checkConfiguration(): void {
         ini_set('default_socket_timeout', '1600');
         $this->db->open();
     }
@@ -151,17 +153,17 @@ class GSNeo4jV3 extends Graph {
         return is_resource($res);
     }
 
-    public function serverInfo() : array {
+    public function serverInfo(): array {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
 
         $res = $this->query('Gremlin.version();');
 
-        return $res;
+        return $res->toArray();
     }
 
-    public function clean() : void {
+    public function clean(): void {
         $this->stop();
         $this->start();
     }
@@ -171,18 +173,18 @@ class GSNeo4jV3 extends Graph {
             throw new GremlinException('No graphdb found.');
         }
 
-        if (!file_exists("{$this->config->gsneo4jv3_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml")) {
-            copy( "{$this->config->dir_root}/server/gsneo4j/gsneo4j.{$this->gremlinVersion}.yaml",
-                  "{$this->config->gsneo4jv3_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml");
-            copy( "{$this->config->dir_root}/server/gsneo4j/exakat.properties",
+        if (!file_exists("{$this->config->gsneo4jv3_folder}/conf/gsneo4jv3.{$this->gremlinVersion}.yaml")) {
+            copy( "{$this->config->dir_root}/server/gsneo4jv3/gsneo4jv3.{$this->gremlinVersion}.yaml",
+                  "{$this->config->gsneo4jv3_folder}/conf/gsneo4jv3.{$this->gremlinVersion}.yaml");
+            copy( "{$this->config->dir_root}/server/gsneo4jv3/exakat.properties",
                   "{$this->config->gsneo4jv3_folder}/conf/exakat.properties");
         }
 
         if (in_array($this->gremlinVersion, array('3.4'))) {
             display("start gremlin server {$this->gremlinVersion}.x");
-            putenv("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml");
+            putenv("GREMLIN_YAML=conf/gsneo4jv3.{$this->gremlinVersion}.yaml");
             putenv('PID_DIR=db');
-            exec("GREMLIN_YAML=conf/gsneo4j.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4jv3_folder}; rm -rf db/neo4j; /bin/sh ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+            exec("GREMLIN_YAML=conf/gsneo4jv3.{$this->gremlinVersion}.yaml; PID_DIR=db; cd {$this->config->gsneo4jv3_folder}; rm -rf db/neo4j; /bin/bash ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         }
         display('started gremlin server');
         $this->init();
@@ -204,8 +206,8 @@ class GSNeo4jV3 extends Graph {
 
         if (file_exists("{$this->config->gsneo4jv3_folder}/db/gremlin.pid")) {
             $pid = trim(file_get_contents("{$this->config->gsneo4jv3_folder}/db/gremlin.pid"));
-        } elseif ( file_exists("{$this->config->gsneo4jv3_folder}/db/gsneo4j.pid")) {
-            $pid = trim(file_get_contents("{$this->config->gsneo4jv3_folder}/db/gsneo4j.pid"));
+        } elseif ( file_exists("{$this->config->gsneo4jv3_folder}/db/gsneo4jv3.pid")) {
+            $pid = trim(file_get_contents("{$this->config->gsneo4jv3_folder}/db/gsneo4jv3.pid"));
         } else {
             $pid = false;
         }
