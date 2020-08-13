@@ -54,7 +54,9 @@ class Appinfo extends Data {
                             'Coalesce'                      => 'Php/Coalesce',
                             'Coalesce Equal'                => 'Php/CoalesceEqual',
                             'Trailing Comma'                => 'Php/TrailingComma',
+                            'Trailing Comma In Use'         => 'Php/TrailingUseComma',
                             'PHP 8.0 Variable Syntax'       => 'Php/Php80VariableSyntax',
+                            'Attributes'                    => 'Php/UseAttributes',
 
                             'File upload'                   => 'Structures/FileUploadUsage',
                             'Environment Variables'         => 'Php/UsesEnv',
@@ -185,6 +187,7 @@ class Appinfo extends Data {
                             'Covariance'                 => 'Php/UseCovariance',
                             'Contravariance'             => 'Php/UseContravariance',
 
+                            'Null Safe Operator ?->'     => 'Php/NullSafeOperator',
                             'PHP 4 constructor'          => 'Classes/OldStyleConstructor',
                             'Multiple class in one file' => 'Classes/MultipleClassesInFile',
                     ),
