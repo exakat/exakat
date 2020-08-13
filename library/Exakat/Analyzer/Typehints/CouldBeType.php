@@ -138,6 +138,28 @@ abstract class CouldBeType extends Analyzer {
              ->back('result');
         $this->prepareQuery();
 
+        // returntype that is an incoming argument
+        // function foo ($a) : array { return $a;}
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIsNot('Void')
+             ->fullnspathIs($fullnspath)
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             
+             ->outIs('RETURNED')
+             ->hasIn('RETURN')
+             ->atomIs('Variable')
+             ->inIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Parameter')
+             ->not(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->atomIsNot('Void')
+             );
+        $this->prepareQuery();
+
         // foo(...$b) { bar($b)} ; function bar(...$c) {} 
         // In this case, $b must be an array. No choice possible.
 
@@ -203,11 +225,37 @@ abstract class CouldBeType extends Analyzer {
                      ->inIs('OVERWRITE')
              )
              ->analyzerIsNot('self')
+             ->outIs('RETURNTYPE')
+             ->atomIs('Void')
+             ->back('first')
+
              ->outIs('RETURNED')
              ->atomIs('Variable', self::WITH_CONSTANTS)
              ->inIs('DEFINITION')
              ->inIsIE('NAME')
              ->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs($atoms)
+             ->fullnspathIs($fullnspath)
+             ->back('first');
+        $this->prepareQuery();
+
+        // class x { private array $p; function foo () { return $this->p;} }
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->optional(
+                $this->side()
+                     ->is('abstract', true)
+                     ->inIs('OVERWRITE')
+             )
+             ->analyzerIsNot('self')
+             ->outIs('RETURNTYPE')
+             ->atomIs('Void')
+             ->back('first')
+
+             ->outIs('RETURNED')
+             ->atomIs('Member', self::WITH_CONSTANTS)
+             ->inIs('DEFINITION')
+             ->inIs('PPP')
              ->outIs('TYPEHINT')
              ->atomIs($atoms)
              ->fullnspathIs($fullnspath)
