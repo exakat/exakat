@@ -2947,6 +2947,7 @@ class Load extends Tasks {
         } elseif (in_array($atom, array('Methodcallname', 'List'), \STRICT_COMPARISON)) {
             // literally, nothing
         } elseif (in_array(mb_strtolower($name->code), array('defined', 'constant'), \STRICT_COMPARISON)) {
+
             if ($argumentsList[0]->constant === true &&
                 !empty($argumentsList[0]->noDelimiter   )) {
 
@@ -2955,7 +2956,7 @@ class Load extends Tasks {
                     $fullnspath = "\\$fullnspath";
                 }
                 $argumentsList[0]->fullnspath = $fullnspath;
-                $this->calls->addCall('const', $fullnspath, $argumentsList[0]);
+                $this->calls->addCall(strpos($fullnspath, '::') === false ? 'const' : 'staticconstant', $fullnspath, $argumentsList[0]);
             }
 
             $functioncall->fullnspath = '\\' . mb_strtolower($name->code);
@@ -3065,7 +3066,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // Nothing to do
         } else {
-            $this->getFullnspath($string, 'const', $string);
+//            $this->getFullnspath($string, 'const', $string);
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
@@ -4674,8 +4675,6 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CONST) {
             ++$this->id;
 
-            $const = $this->processSingle('Identifier');
-            $this->addLink($use, $const, 'CONST');
             $useType = 'const';
         }
 
@@ -4683,8 +4682,6 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_FUNCTION) {
             ++$this->id;
 
-            $const = $this->processSingle('Identifier');
-            $this->addLink($use, $const, 'FUNCTION');
             $useType = 'function';
         }
 
@@ -4708,7 +4705,9 @@ class Load extends Tasks {
                 $fullnspath = "\\$fullnspath";
             }
 
-            $this->calls->addCall('class', $fullnspath, $namespace);
+            if ($useType === 'class') {
+                $this->calls->addCall('class', $fullnspath, $namespace);
+            }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
                 // use A\B as C
@@ -4750,7 +4749,6 @@ class Load extends Tasks {
                         // use const
                         ++$this->id;
 
-                        $useTypeAtom = $this->processSingle('Identifier');
                         $useType = 'const';
                     }
 
@@ -4758,7 +4756,6 @@ class Load extends Tasks {
                         // use function
                         ++$this->id;
 
-                        $useTypeAtom = $this->processSingle('Identifier');
                         $useType = 'function';
                     }
 
@@ -4766,10 +4763,6 @@ class Load extends Tasks {
                         $use->trailing = self::TRAILING;
                     } else {
                         $nsname = $this->processOneNsname();
-
-                        if ($useTypeAtom !== 0) {
-                            $this->addLink($nsname, $useTypeAtom, strtoupper($useType));
-                        }
 
                         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
                             // A\B as C
@@ -4808,6 +4801,9 @@ class Load extends Tasks {
 
                             $nsname->alias = $alias;
                         }
+
+                        $nsname->use = $useType;
+                        $nsname->fullcode = ($useType !== 'class' ? $useType . ' ' : '') . $nsname->fullcode;
                     }
                 } while ( $this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
 
@@ -4816,6 +4812,7 @@ class Load extends Tasks {
                 ++$this->id; // Skip }
             } else {
                 $this->addLink($use, $namespace, 'USE');
+                $namespace->use = $useType;
 
                 $fullnspath = makeFullNsPath($namespace->fullcode, $useType === 'const' ? \FNP_CONSTANT : \FNP_NOT_CONSTANT);
                 $namespace->fullnspath = $fullnspath;
@@ -4838,7 +4835,7 @@ class Load extends Tasks {
 
         } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
 
-        $use->fullcode = $this->tokens[$current][1] . (isset($const) ? ' ' . $const->code : '') . ' ' . implode(', ', $fullcode);
+        $use->fullcode = $this->tokens[$current][1] . ($useType !== 'class' ? ' ' . $useType : '') . ' ' . implode(', ', $fullcode);
 
         $this->pushExpression($use);
 
@@ -6526,18 +6523,18 @@ class Load extends Tasks {
 
             // This is an identifier, self or parent
             if ($type === 'class' && ($use = $this->uses->get('class',mb_strtolower($fnp) )) instanceof AtomInterface) {
-                $this->addLink($name, $use, 'DEFINITION');
+                $this->addLink($name, $use, 'USED');
                 $apply->fullnspath = $use->fullnspath;
                 return;
 
             } elseif ($type === 'class' && ($use = $this->uses->get('class', $prefix)) instanceof AtomInterface) {
-                $this->addLink($name, $use, 'DEFINITION');
+                $this->addLink($name, $use, 'USED');
                 $apply->fullnspath = $use->fullnspath . str_replace($prefix, '', $fnp);
                     return;
 
             } elseif ($type === 'const') {
                 if (($use = $this->uses->get('const', $name->code)) instanceof AtomInterface) {
-                    $this->addLink($use, $name, 'DEFINITION');
+                    $this->addLink($use, $name, 'USED');
                     $apply->fullnspath = $use->fullnspath;
                     return;
                 } elseif (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof AtomInterface) {
@@ -6549,7 +6546,7 @@ class Load extends Tasks {
                 }
 
             } elseif ($type === 'function' && ($use = $this->uses->get('function', $prefix)) instanceof AtomInterface) {
-                $this->addLink($use, $name, 'DEFINITION');
+                $this->addLink($use, $name, 'USED');
                 $apply->fullnspath = $use->fullnspath;
                 return;
 
@@ -6584,7 +6581,7 @@ class Load extends Tasks {
             $prefix = mb_strtolower( substr($name->code, 0, strpos($name->code . '\\', '\\')) );
 
             if (($use = $this->uses->get($type, $prefix)) instanceof AtomInterface) {
-                $this->addLink( $name, $use, 'DEFINITION');
+                $this->addLink( $name, $use, 'USED');
                 $apply->fullnspath = $use->fullnspath . mb_strtolower( substr($name->fullcode, strlen($prefix)) ) ;
                     return;
             } elseif ($type === 'const') {

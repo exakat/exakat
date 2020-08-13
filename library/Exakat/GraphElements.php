@@ -215,6 +215,7 @@ abstract class GraphElements {
                                  'THROW',
                                  'TYPEHINT',
                                  'USE',
+                                 'USED',
                                  'VALUE',
                                  'VAR',
                                  'VARIABLE',

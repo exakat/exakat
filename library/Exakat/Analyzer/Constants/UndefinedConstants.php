@@ -30,6 +30,7 @@ class UndefinedConstants extends Analyzer {
         return array('Constants/ConstantUsage',
                      'Constants/IsExtConstant',
                      'Constants/CustomConstantUsage',
+                     'Complete/SetStringMethodDefinition'
                     );
     }
 
@@ -41,7 +42,14 @@ class UndefinedConstants extends Analyzer {
              ->analyzerIsNot(array('Constants/CustomConstantUsage',
                                    'Constants/IsExtConstant',
                                    ))
-             ->isNotIgnored();
+             // skipping "$a::$b"
+             ->not(
+                $this->side()
+                     ->outIs('CONCAT')
+                     ->atomIs('Variable')
+             )
+             ->isNotIgnored()
+             ->hasNoIn('DEFINITION');
         $this->prepareQuery();
     }
 }

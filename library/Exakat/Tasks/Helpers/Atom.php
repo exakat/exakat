@@ -73,6 +73,7 @@ class Atom implements AtomInterface {
     public $trailing     = 0;
     public $isRead       = 0;
     public $isModified   = 0;
+    public $use          = '';
 
     public function __construct(int $id, string $atom, int $line) {
         $this->id   = $id;
