@@ -26,7 +26,17 @@ namespace Exakat\Query\DSL;
 
 class CollectArguments extends DSL {
     public function run(): Command {
-        list($variable) = func_get_args();
+        switch(func_num_args()) {
+            case 2:
+                list($variable, $property) = func_get_args();
+                $this->assertProperty($property, self::VARIABLE_WRITE);
+                break;
+                
+            case 1:
+                list($variable) = func_get_args();
+                $property = 'code';
+                break;
+        }
 
         $this->assertVariable($variable, self::VARIABLE_WRITE);
 
@@ -35,8 +45,8 @@ where(
 __.sideEffect{ $variable = []; }
   .out("ARGUMENT")
   .order().by("rank")
-  .coalesce(__.out("NAME"), filter{ true; })
-  .sideEffect{ $variable.add(it.get().value("code")) ; }
+  .optional(__.out("NAME"))
+  .sideEffect{ $variable.add(it.get().value("$property")) ; }
   .fold() 
 )
 GREMLIN
