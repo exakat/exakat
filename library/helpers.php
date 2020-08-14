@@ -424,13 +424,19 @@ function makeFullNsPath($functions, bool $constant = \FNP_NOT_CONSTANT) {
             return $r;
         };
     } else {
-        // case for function
+        // case for constant
         $cb = function ($r) {
             $r2 = str_replace('\\\\', '\\', $r);
 
-            $d = explode('\\', $r2);
+            if (strpos($r2, '::') !== false) {
+                $d = explode('::', $r2);
+                $glue = '::';
+            } else {
+                $d = explode('\\', $r2);
+                $glue = '\\';
+            }
             $last = array_pop($d);
-            $r = mb_strtolower(implode('\\', $d)) . "\\$last";
+            $r = mb_strtolower(implode('\\', $d)) . $glue.$last;
             if (isset($r[0]) && $r[0] != '\\') {
                 $r = "\\$r";
             }
@@ -441,12 +447,10 @@ function makeFullNsPath($functions, bool $constant = \FNP_NOT_CONSTANT) {
     if (is_string($functions) || is_int($functions)) {
         return $cb($functions);
     } elseif (is_array($functions)) {
-        $r = array_map($cb, $functions);
-    } else {
-        throw new WrongParameterType(gettype($functions), __METHOD__);
+        return array_map($cb, $functions);
     }
-    
-    return $r;
+
+    throw new WrongParameterType(gettype($functions), __METHOD__);
 }
 
 function trimOnce(string $string, string $trim = '\'"') : string {
