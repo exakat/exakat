@@ -31,7 +31,7 @@ class UsedPrivateMethod extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // method used in a static methodcall \a\b::b()
         // method used in a static methodcall static::b() or self
         $this->atomIs('Staticmethodcall')

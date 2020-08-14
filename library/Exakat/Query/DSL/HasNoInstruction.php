@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class HasNoInstruction extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         if (func_num_args() === 1) {
             list($atoms) = func_get_args();
         } else {

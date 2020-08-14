@@ -28,7 +28,7 @@ class StubsJson extends Reports {
     const FILE_FILENAME  = 'stubs';
 
     const INDENTATION = '    ';
-    
+
     private $phpFunctions = array();
     private $phpCIT       = array();
 
@@ -45,9 +45,9 @@ class StubsJson extends Reports {
                                           'php'              => $this->dump->fetchHash('php_version')->toString(),
                                           'exakat_version'   => $this->dump->fetchHash('exakat_version')->toString(),
                                           'exakat_build'     => $this->dump->fetchHash('exakat_build')->toString(),
-                                          'vcs_url'          => $this->dump->fetchHash('vcs_url')->toString()             ?: '',
-                                          'vcs_branch'       => $this->dump->fetchHash('vcs_branch')->toString()          ?: '',
-                                          'vcs_revision'     => $this->dump->fetchHash('vcs_revision')->toString()        ?: '',
+                                          'vcs_url'          => $this->dump->fetchHash('vcs_url')->toString() ?: '',
+                                          'vcs_branch'       => $this->dump->fetchHash('vcs_branch')->toString() ?: '',
+                                          'vcs_revision'     => $this->dump->fetchHash('vcs_revision')->toString() ?: '',
                                           'code_last_commit' => $this->dump->fetchHash('vcs_url')->toInt() != 0 ? date('c', $this->dump->fetchHash('vcs_url')->toInt()) : '',
                                           ),
                       'versions' => array());
@@ -99,9 +99,9 @@ class StubsJson extends Reports {
 
         foreach($res->toArray() as $cit) {
             $cits[$cit['id']]         = $cit['name'];
-            $citsFqn[$cit['id']]      = strtolower($namespaces[$cit['namespaceId']].$cit['name']);
+            $citsFqn[$cit['id']]      = strtolower($namespaces[$cit['namespaceId']] . $cit['name']);
         }
-        
+
         foreach($res->toArray() as $cit) {
             $extendsId = ((int) $cit['extends'] > 0) ? $citsFqn[$cit['extends']] ?? '\Unkown' : $cit['extends'];
 
@@ -195,8 +195,8 @@ class StubsJson extends Reports {
         // JSON compact
         return json_encode($data);
     }
-    
-    private function normalizeAttributes(string $attributes) : array {
+
+    private function normalizeAttributes(string $attributes): array {
         return array_filter(explode(';', $attributes ?? ''));
     }
 }

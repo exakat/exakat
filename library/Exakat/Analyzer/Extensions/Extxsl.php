@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extxsl extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'xsl.ini';
 
         parent::analyze();

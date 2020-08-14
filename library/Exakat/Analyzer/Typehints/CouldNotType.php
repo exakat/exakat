@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class CouldNotType extends Analyzer {
     protected $phpVersion = '7.4-';
     */
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Typehints/CouldBeCIT',
                      'Typehints/CouldBeString',
                      'Typehints/CouldBeArray',
@@ -45,8 +45,8 @@ class CouldNotType extends Analyzer {
 //                     'Typehints/CouldBeFromPhpdoc',
                     );
     }
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         // property definition
         $this->atomIs('Propertydefinition')
              ->analyzerIsNot($this->dependsOn())

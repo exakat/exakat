@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extphar extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'phar.ini';
 
         parent::analyze();

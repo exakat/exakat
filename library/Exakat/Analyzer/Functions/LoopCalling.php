@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class LoopCalling extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // possitlbe extension to methods but probably very costly
         // loop of 2
         $this->atomIs('Function')

@@ -26,14 +26,14 @@ namespace Exakat\Analyzer\Composer;
 use Exakat\Analyzer\Analyzer;
 
 class UseComposerLock extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->rowCount       = (int) $this->datastore->getHash('composer.lock');
         $this->processedCount = 1;
         $this->queryCount     = 0;
         $this->rawQueryCount  = 0;
     }
 
-    public function toArray() : array {
+    public function toArray(): array {
         $report = array('composer.lock' => $this->datastore->getHash('composer.lock'));
 
         return $report;

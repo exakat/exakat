@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class UseWithFullyQualifiedNS extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Normal group
         $this->atomIs('Usenamespace')
              ->outIs('USE')

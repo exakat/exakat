@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extproctitle extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'proctitle.ini';
 
         parent::analyze();

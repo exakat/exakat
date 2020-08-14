@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgettext extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'gettext.ini';
 
         parent::analyze();

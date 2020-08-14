@@ -29,7 +29,7 @@ class ReservedNames extends Analyzer {
     protected $reservedNames = '';
     protected $allowedNames = '';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $phpNames = $this->loadIni('php_keywords.ini', 'keyword');
 
         $reservedNames = array_merge(str2array($this->reservedNames),

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php71NewFunctions extends FunctionDefinition {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array(
 'curl_share_strerror',
 'curl_multi_errno',

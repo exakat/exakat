@@ -31,7 +31,7 @@ class MakeDefault extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private $y; }
         $this->atomIs(self::CLASSES_ALL)
              ->outIs('PPP')

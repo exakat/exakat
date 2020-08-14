@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,10 +22,9 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
 
 class CouldBeCIT extends CouldBeType {
-    public function analyze() : void {
+    public function analyze(): void {
         $citOperations = array('New', 'Clone');
         $citAtoms      = array('Identifier', 'Nsname', 'Static', 'Self', 'Parent');
 
@@ -70,7 +69,7 @@ class CouldBeCIT extends CouldBeType {
         // function ($a) { array_diff($a);}
 //        $this->checkRelayedArgumentToPHP('Nsname');
 //        $this->checkRelayedArgumentToPHP('Identifier');
-        
+
         // argument validation
         $this->checkArgumentValidation(array('\\is_object'), array());
 

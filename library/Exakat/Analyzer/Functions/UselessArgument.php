@@ -31,7 +31,7 @@ class UselessArgument extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo($a)
         // foo(2); foo(2); foo(2); // always provide the same arg
         $this->atomIs(self::FUNCTIONS_ALL)

@@ -25,7 +25,7 @@ namespace Exakat\Tasks;
 class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() : void {
+    public function run(): void {
         $gremlinVersion = $this->gremlin->serverInfo()[0];
 
         if (version_compare($gremlinVersion, '3.4.0') >= 0) {
@@ -115,7 +115,7 @@ class Export extends Tasks {
         return implode(PHP_EOL, $r);
     }
 
-    private function display_dot(array $V, array $E, int $root) : string {
+    private function display_dot(array $V, array $E, int $root): string {
         $r = '';
 
         foreach($V as $id => $v) {
@@ -189,7 +189,7 @@ class Export extends Tasks {
         return $r;
     }
 
-    private function display_table(array $V, array $E, int $root) : string {
+    private function display_table(array $V, array $E, int $root): string {
         $r = '<table>';
 
         foreach($V as $v) {

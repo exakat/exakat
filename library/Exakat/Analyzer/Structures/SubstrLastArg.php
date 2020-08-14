@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SubstrLastArg extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //substr($fileFrom, strlen($unzip_dir), strlen($fileFrom)
         $this->atomFunctionIs('\\substr')
              ->outWithRank('ARGUMENT', 0)

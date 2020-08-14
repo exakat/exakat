@@ -31,7 +31,7 @@ class Unthrown extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Throw')
              ->outIs('THROW')
              ->outIs('NEW')

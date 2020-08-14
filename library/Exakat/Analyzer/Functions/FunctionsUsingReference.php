@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class FunctionsUsingReference extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Spot references in function definitions
         $this->atomIs('Function')
              ->outIs('ARGUMENT')

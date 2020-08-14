@@ -32,7 +32,7 @@ class UnusedPrivateMethod extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class X { private function foo() { } }
         $this->atomIs(self::CLASSES_ALL)
              ->analyzerIsNot('Classes/DynamicSelfCalls')

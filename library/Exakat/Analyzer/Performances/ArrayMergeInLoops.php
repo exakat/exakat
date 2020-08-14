@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class ArrayMergeInLoops extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = array('\\array_merge',
                            '\\array_merge_recursive',
 //                           '\\file_put_contents',

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class CookiesVariables extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $cookie = $this->dictCode->translate(array('$_COOKIE'));
 
         if (!empty($cookie)) {

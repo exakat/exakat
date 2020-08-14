@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Complete;
 
 
 class OverwrittenConstants extends Complete {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { protected const X = 1;}
         // class xx extends x {  protected const X = 1;}
         $this->atomIs('Constant', self::WITHOUT_CONSTANTS)

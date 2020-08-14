@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class MoveUploadedFile extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // copy($var['tmp_name'], $dest)
         $this->atomFunctionIs(array('\\copy', '\\rename'))
              ->outWithRank('ARGUMENT', 0)

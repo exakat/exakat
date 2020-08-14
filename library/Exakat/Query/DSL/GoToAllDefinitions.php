@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class GoToAllDefinitions extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('emit( ).repeat( __.in("OVERWRITE").not(__.in("PPP").has("visibility", "private")) ).times(' . self::$MAX_LOOPING . ')');
     }
 }

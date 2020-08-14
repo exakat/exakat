@@ -107,7 +107,7 @@ class Svn extends Vcs {
         return $stats;
     }
 
-    public function getStatus() : array {
+    public function getStatus(): array {
         $status = array('vcs'       => 'svn',
                         'revision'  => $this->getRevision(),
                         'updatable' => false
@@ -116,12 +116,12 @@ class Svn extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) : array {
+    public function getDiffLines($r1, $r2): array {
         display("No support for line diff in SVN.\n");
         return array();
     }
 
-    public function getLastCommitDate() : int {
+    public function getLastCommitDate(): int {
         $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} info 2>&1") ?? '');
 
         //Last Changed Date: 2020-07-22 09:17:27 +0200 (Wed, 22 Jul 2020)

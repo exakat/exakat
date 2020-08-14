@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 class GoToParameterUsage extends DSL {
     public function run(): Command {
-        return new Command(<<<GREMLIN
+        return new Command(<<<'GREMLIN'
 
 sideEffect{
     ranked   = it.get().value("rank");

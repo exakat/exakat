@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class DieExitConsistance extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $mapping = <<<'GREMLIN'
 x2 = it.get().value("fullnspath");
 GREMLIN;

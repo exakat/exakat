@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ForeachObject extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach ($array as $o -> $b) {}
         $this->atomIs('Foreach')
              ->hasNoOut('INDEX') // if index is here, it is all good

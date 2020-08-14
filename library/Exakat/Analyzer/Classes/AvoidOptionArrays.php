@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidOptionArrays extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // argument use as array, used to dispatch values
         // typehint array is not important
         $this->atomIs('Magicmethod')

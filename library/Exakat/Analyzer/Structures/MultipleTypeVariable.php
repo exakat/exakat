@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleTypeVariable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = count('', $a);
         $this->atomFunctionIs('\\count')
              ->outWithRank('ARGUMENT', 0)

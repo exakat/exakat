@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class KeepFilesRestricted extends Analyzer {
     protected $filePrivileges = array(0777);
 
-    public function analyze() : void {
+    public function analyze(): void {
         if (is_string($this->filePrivileges)) {
             $this->filePrivileges = str2array($this->filePrivileges);
             // todo : interpret values from ini : 0777 will be 777, not 0777;

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class TryFinally extends Analyzer {
     protected $phpVersion = '5.5+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Try')
              ->hasOut('FINALLY');
         $this->prepareQuery();

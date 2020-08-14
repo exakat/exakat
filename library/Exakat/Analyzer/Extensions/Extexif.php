@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extexif extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'exif.ini';
 
         parent::analyze();

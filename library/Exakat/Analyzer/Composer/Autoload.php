@@ -26,14 +26,14 @@ namespace Exakat\Analyzer\Composer;
 use Exakat\Analyzer\Analyzer;
 
 class Autoload extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->rowCount       = (int) $this->hasResults();
         $this->processedCount = 1;
         $this->queryCount     = 0;
         $this->rawQueryCount  = 0;
     }
 
-    public function toArray() : array {
+    public function toArray(): array {
         $report = array('composer' => $this->datastore->getHash('autoload'));
 
         return $report;

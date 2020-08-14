@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\ConstantDefinition;
 
 class Php72NewConstants extends ConstantDefinition {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->constants = array('PHP_OS_FAMILY',
                                  'PHP_FLOAT_DIG',
                                  'PHP_FLOAT_EPSILON',

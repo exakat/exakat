@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class PssWithoutClass extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // unresolved new pss()
         $this->atomIs('New')
              ->outIs('NEW')

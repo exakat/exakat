@@ -29,7 +29,7 @@ class PHP7Dirname extends Analyzer {
     protected $phpVersion = '7.0+';
 
     // dirname(dirname($path))
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\\dirname')
              ->not(
                 $this->side()

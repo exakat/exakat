@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Haltcompiler extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Halt');
         $this->prepareQuery();
     }

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleAliasDefinitions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // alias with varied values
         $aliases = $this->query(<<<'GREMLIN'
 g.V().hasLabel("Usenamespace").out("USE")

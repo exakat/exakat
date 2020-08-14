@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class IsUpperFamily extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Staticmethodcall
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')

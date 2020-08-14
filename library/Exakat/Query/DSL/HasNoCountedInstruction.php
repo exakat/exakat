@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class HasNoCountedInstruction extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         switch (func_num_args()) {
             case 2:
                 list($atom, $count) = func_get_args();

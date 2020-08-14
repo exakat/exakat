@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,14 +22,13 @@
 
 namespace Exakat\Analyzer\Type;
 
-use Exakat\Analyzer\Analyzer;
 
 use Exakat\Analyzer\Dump\AnalyzerResults;
 
 class Protocols extends AnalyzerResults {
     protected $analyzerName = 'Protocols';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $protocols = (array) $this->loadJson('protocols.json');
         $protocolList = implode('|', array_keys($protocols));
 

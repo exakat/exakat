@@ -36,25 +36,25 @@ class FollowParAs extends DSL {
         list($out) = func_get_args();
 
         switch($out) {
-            case self::FOLLOW_ALL: 
+            case self::FOLLOW_ALL:
                 $out    = 'out(' . self::$linksDown . ').';
                 $labels = '';
                 $follow = '';
                 break 1;
 
-            case self::FOLLOW_NONE: 
+            case self::FOLLOW_NONE:
                 $out    = 'identity().';
                 $labels = '';
                 $follow = '';
                 break 1;
 
-            case self::FOLLOW_PARAS_ONLY: 
+            case self::FOLLOW_PARAS_ONLY:
                 $out    = 'identity().';
                 $labels = '';
                 $follow = '';
                 break 1;
-                
-            default: 
+
+            default:
                 $this->assertLink($out);
                 $out = $this->normalizeLinks($out);
 

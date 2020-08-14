@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SGVariablesConfusion extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { $a = 1; global $a; static $a; }
         $this->atomIs('Variabledefinition')
              ->filter(

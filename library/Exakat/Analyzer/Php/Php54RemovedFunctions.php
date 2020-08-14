@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class Php54RemovedFunctions extends FunctionUsage {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array('mcrypt_generic_end',
                                  'mysql_list_dbs');
         parent::analyze();

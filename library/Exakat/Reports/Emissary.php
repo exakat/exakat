@@ -49,7 +49,7 @@ class Emissary extends Reports {
     protected $generations_files = array();
 
     protected $usedFiles         = array();
-    
+
     private $baseHTML = '';
 
     const TOPLIMIT = 10;
@@ -143,9 +143,9 @@ class Emissary extends Reports {
         return $menu;
     }
 
-    private function initBasePage() : void {
+    private function initBasePage(): void {
         $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/data/base.html");
-    
+
         $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
         $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', (string) Exakat::BUILD);
         $project_name = $this->config->project_name;
@@ -155,7 +155,7 @@ class Emissary extends Reports {
         $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $project_name);
         $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
         $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name[0]));
-    
+
         $menu = $this->makeMenu();
         $inventories = array();
         foreach($this->inventories as $fileName => $title) {
@@ -170,12 +170,12 @@ class Emissary extends Reports {
             }
             $inventories []= "              <li><a href=\"inventories_$inventory_name.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
         }
-    
+
         $rulesets = $this->dump->fetchTable('themas');
         $rulesets->filter(function (array $x): bool { return substr($x['thema'], 0, 13) === 'Compatibility';});
         $compatibilities = array_map(function (string $x): string { $v = substr($x, -2); return "              <li><a href=\"compatibility_php$v.html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$v]}</a></li>\n";},
                                      $rulesets->getColumn('thema'));
-    
+
         $menu = $this->injectBloc($menu, 'INVENTORIES', implode(PHP_EOL, $inventories));
         $menu = $this->injectBloc($menu, 'COMPATIBILITIES', implode(PHP_EOL, $compatibilities));
         $this->baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
@@ -183,7 +183,7 @@ class Emissary extends Reports {
 
     protected function getBasedPage(string $file = ''): string {
         if (!file_exists("{$this->config->dir_root}/media/devfaceted/data/$file.html")) {
-            display("Missing template file '$file' for ".static::class);
+            display("Missing template file '$file' for " . static::class);
 
             return '';
         }
@@ -547,7 +547,7 @@ HTML;
 
     protected function generateClassDesignations(Section $section): void {
         $finalHTML = $this->getBasedPage($section->source);
-        
+
         $html = array('<table class="table table-striped">',
                       '<tr><td>Namespace</td><td>Class / interface</td><td>Count</td><td>Fitting typehints</td><td>Count</td><td>As typehint</td></tr>',
                        );
@@ -555,7 +555,7 @@ HTML;
         $namespaces = $this->dump->fetchTable('namespaces')->toHash('id', 'namespace');
 
         // il faut constuire les diffŽrentes possibilitŽes avant de construire le tableau,
-        // afin de suivre les extends, et tous les rassembler. 
+        // afin de suivre les extends, et tous les rassembler.
 
         $res = $this->dump->fetchTable('cit');
         $parents = array();
@@ -565,18 +565,18 @@ HTML;
             if (empty($row['extends'])) {
                 $parents[$row['id']] = array();
             } else {
-                array_collect_by($parents, $row['id'],(intval($row['extends']) > 0 ? $row['extends'] : 'class '.$row['extends']));
-                array_collect_by($children, (intval($row['extends']) > 0 ? $row['extends'] : 'class '.$row['extends']), $row['id']);
+                array_collect_by($parents, $row['id'],(intval($row['extends']) > 0 ? $row['extends'] : 'class ' . $row['extends']));
+                array_collect_by($children, (intval($row['extends']) > 0 ? $row['extends'] : 'class ' . $row['extends']), $row['id']);
             }
-            $names[$row['id']] = $row['type']. ' '.$namespaces[$row['namespaceId']].$row['name'];
+            $names[$row['id']] = $row['type'] . ' ' . $namespaces[$row['namespaceId']] . $row['name'];
         }
 
         $res_implements = $this->dump->fetchTable('cit_implements')->toArray();
         $implements = array();
         foreach($res_implements as $row) {
             array_collect_by($implements, $row['implementing'], $row);
-            array_collect_by($parents, $row['implementing'], (intval($row['implements']) > 0 ? $row['implements'] : 'interface '.$row['implements']));
-            array_collect_by($children, (intval($row['implements']) > 0 ? $row['implements'] : 'interface '.$row['implements']), $row['implementing']);
+            array_collect_by($parents, $row['implementing'], (intval($row['implements']) > 0 ? $row['implements'] : 'interface ' . $row['implements']));
+            array_collect_by($children, (intval($row['implements']) > 0 ? $row['implements'] : 'interface ' . $row['implements']), $row['implementing']);
         }
 
         /// Collect classes and interfaces that accept a class as typehint : class C extends B {} => C => [C, B]
@@ -594,10 +594,10 @@ HTML;
                         $cleaned[] = array($aieul);
                     }
                 }
-                
+
                 $parents2[$key] = array_values(array_unique(array_merge(...$cleaned)));
-            } 
-            
+            }
+
             $toPropagate = count($parents2, 1) - count($parents, 1);
             $parents = $parents2;
         } while($toPropagate > 0);
@@ -619,17 +619,17 @@ HTML;
                     }
                 }
                 $children2[$key] = array_values(array_unique(array_merge(...$cleaned)));
-            } 
-            
+            }
+
             $toPropagate = count($children2, 1) - count($children, 1);
             $children = $children2;
         } while($toPropagate > 0);
 
         foreach($res->toArray() as $row) {
             $td = array();
-            $td[] = "<td style=\"vertical-align: top\">".$namespaces[$row['namespaceId']]."</td>";
-            $td[] = "<td style=\"vertical-align: top\">".$row['type'].' '.$row['name']."</td>";
-            
+            $td[] = '<td style="vertical-align: top">' . $namespaces[$row['namespaceId']] . '</td>';
+            $td[] = '<td style="vertical-align: top">' . $row['type'] . ' ' . $row['name'] . '</td>';
+
             // fitting typehint
             $list = array();
             if ($row['type'] == 'class') {
@@ -642,11 +642,11 @@ HTML;
             }
             sort($list);
             if (empty($list)) {
-                $td[] = "<td>0</td>";
-                $td[] = "<td>&nbsp;</td>";
+                $td[] = '<td>0</td>';
+                $td[] = '<td>&nbsp;</td>';
             } else {
-                $td[] = "<td style=\"vertical-align: top\">".count($list)."</td>";
-                $td[] = "<td><ul><li>".implode('</li><li>', $list)."</li></ul></td>";
+                $td[] = '<td style="vertical-align: top">' . count($list) . '</td>';
+                $td[] = '<td><ul><li>' . implode('</li><li>', $list) . '</li></ul></td>';
             }
 
             // when used as typehint
@@ -664,16 +664,16 @@ HTML;
             }
             sort($list);
             if (empty($list)) {
-                $td[] = "<td>0</td>";
-                $td[] = "<td>&nbsp;</td>";
+                $td[] = '<td>0</td>';
+                $td[] = '<td>&nbsp;</td>';
             } else {
-                $td[] = "<td style=\"vertical-align: top\">".count($list)."</td>";
-                $td[] = "<td><ul><li>".implode('</li><li>', $list)."</li></ul></td>";
+                $td[] = '<td style="vertical-align: top">' . count($list) . '</td>';
+                $td[] = '<td><ul><li>' . implode('</li><li>', $list) . '</li></ul></td>';
             }
-            
-            $html[] = "<tr>".join('', $td)."</tr>";
+
+            $html[] = '<tr>' . join('', $td) . '</tr>';
         }
-        
+
         $html[] = '</table>';
 
         $finalHTML = $this->injectBloc($finalHTML, 'DESCRIPTION', '');
@@ -800,7 +800,7 @@ HTML;
                         'arrowfunctionWithTypehint',
                         'arrowfunctionWithReturnTypehint',
         );
-        
+
         foreach ($res->toArray() as $value) {
             if (in_array($value['key'], $omit)) { continue; }
             $data[$value['key']] = $value['value'];
@@ -2827,7 +2827,7 @@ HTML;
 
         $html = $this->getBasedPage($section->source);
         $html = $this->injectBloc($html, 'TITLE', $section->title);
-        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<'HTML'
 Below, is a list of classes that may be updated with final or abstract. <br />
 
 The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
@@ -3200,7 +3200,7 @@ HTML
 
         $res = $this->dump->fetchTable('arguments');
         $parameters = $res->toGroupedCount('name');
-        uasort($parameters, function($a, $b) : int { return $b <=> $a;});
+        uasort($parameters, function ($a, $b): int { return $b <=> $a;});
 
         $typehints = array();
         foreach($res->toArray() as $row) {
@@ -3210,7 +3210,7 @@ HTML
 
                 continue;
             }
-            
+
             $typehints[$row['name']][] = $row['typehint'];
         }
         $typehints = array_map('array_unique', $typehints);
@@ -3223,7 +3223,7 @@ HTML
 
                 continue;
             }
-            
+
             $defaults[$row['name']][] = $row['init'];
         }
         $defaults = array_map('array_unique', $defaults);
@@ -3233,9 +3233,9 @@ HTML
             $html []= '<tr>
                       <td>' . $variable . '</td>
                       <td>' . $count . '</td>
-                      <td>'.(isset($variables[$variable]) ? 'X' : '').'</td>
-                      <td>'.(isset($typehints[$variable]) ? $this->toHtmlList($typehints[$variable]) : '').'</td>
-                      <td>'.(isset($defaults[$variable]) ? $this->toHtmlList($defaults[$variable]) : '').'</td>
+                      <td>' . (isset($variables[$variable]) ? 'X' : '') . '</td>
+                      <td>' . (isset($typehints[$variable]) ? $this->toHtmlList($typehints[$variable]) : '') . '</td>
+                      <td>' . (isset($defaults[$variable]) ? $this->toHtmlList($defaults[$variable]) : '') . '</td>
                   </tr>';
         }
         $html = implode(PHP_EOL, $html);
@@ -3259,7 +3259,7 @@ HTML
 
         $html = array();
         $data = array();
-        foreach ($res->order(function(array $a, array $b) : int { return $b['value'] <=> $a['value']; })->toArray() as $value) {
+        foreach ($res->order(function (array $a, array $b): int { return $b['value'] <=> $a['value']; })->toArray() as $value) {
             $data[$value['key'] . ' level' . ($value['key'] == 1 ? '' : 's')] = $value['value'];
 
             $html []= '<div class="clearfix">
@@ -3966,7 +3966,7 @@ HTML;
         $html = $this->injectBloc($html, 'DESCRIPTION', 'List of all PHP protocols used in the code.');
         $html = $this->injectBloc($html, 'TABLE', implode(PHP_EOL, $theTable));
         $this->putBasedPage($section->file, $html);
-    }    
+    }
 
     protected function generateFixesRector(Section $section): void {
         $rector = new Rector();

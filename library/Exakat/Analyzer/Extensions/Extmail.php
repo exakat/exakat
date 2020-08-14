@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmail extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'mail.ini';
 
         parent::analyze();

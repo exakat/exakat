@@ -85,7 +85,7 @@ class Bazaar extends Vcs {
         return $stats;
     }
 
-    public function getStatus() : array {
+    public function getStatus(): array {
         $status = array('vcs'       => 'bzr',
                         'branch'    => $this->getBranch(),
                         'revision'  => $this->getRevision(),
@@ -95,7 +95,7 @@ class Bazaar extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) : array {
+    public function getDiffLines($r1, $r2): array {
         display("No support yet for line diff in Bazaar.\n");
         return array();
     }

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class LogicalToInArray extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a == 'a' || $a == 'b'
         // ($a == 'a') || ($a == 'b')
         // $a == 'a' || $b == 'b' || $a == 'c'

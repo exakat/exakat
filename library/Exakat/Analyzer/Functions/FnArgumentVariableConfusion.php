@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class FnArgumentVariableConfusion extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { $x = 1; return fn ($x) => return 1; }
         $this->atomIs('Arrowfunction')
              ->outIs('ARGUMENT')

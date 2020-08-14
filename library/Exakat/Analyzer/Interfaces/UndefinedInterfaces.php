@@ -36,7 +36,7 @@ class UndefinedInterfaces extends Analyzer {
                      );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $omitted = $this->dependsOn();
 
         // interface used in a class

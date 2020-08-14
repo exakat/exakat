@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class BailOutEarly extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $bailout = array('Return', 'Continue', 'Break', 'Throw', 'Goto');
 
         // if ($a) { return; } else { not return; }

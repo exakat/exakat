@@ -26,9 +26,9 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UsesDefaultArguments extends Analyzer {
-    // $c = count($x); 
+    // $c = count($x);
     //PHP native function : count($array, $options)
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = $this->methods->getFunctionsArgsInterval();
 
         $positions = array();

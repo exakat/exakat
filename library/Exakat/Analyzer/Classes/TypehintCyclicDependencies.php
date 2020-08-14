@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class TypehintCyclicDependencies extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // 1rst level dependency
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'init')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Common\Extension;
 
 class Extstats extends Extension {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'stats.ini';
 
         parent::analyze();

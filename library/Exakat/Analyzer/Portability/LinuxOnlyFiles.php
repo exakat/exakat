@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Portability;
 use Exakat\Analyzer\Analyzer;
 
 class LinuxOnlyFiles extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = array('\\glob', '\\fopen', '\\file', '\\file_get_contents', '\\file_put_contents', '\\unlink',
                            '\\opendir', '\\rmdir', '\\mkdir',
                            );

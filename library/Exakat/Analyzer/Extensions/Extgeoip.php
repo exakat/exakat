@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgeoip extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'geoip.ini';
 
         parent::analyze();

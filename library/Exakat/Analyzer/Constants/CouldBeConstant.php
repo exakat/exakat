@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeConstant extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // We do that for strings.
         // Not for : Boolean, integers (may be non-trivial ones? ), Floats
         // May be for arrays (sorting issues)

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Incompilable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $r = $this->datastore->getRow('compilation' . $this->config->phpversion[0] . $this->config->phpversion[2]);
 
         $this->rowCount       = count($r);
@@ -35,7 +35,7 @@ class Incompilable extends Analyzer {
         $this->rawQueryCount  = 0;
     }
 
-    public function toArray() : array {
+    public function toArray(): array {
         $report = array();
 
         foreach($this->config->other_php_versions as $version) {

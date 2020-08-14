@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class AlternativeConsistenceByFile extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While', 'Declare');
         // Do...While has no alternative syntax.
 

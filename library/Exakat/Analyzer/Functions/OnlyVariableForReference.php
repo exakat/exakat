@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class OnlyVariableForReference extends Analyzer {
     // function foo(&$a) {}
     // foo(3);
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->has('reference')

@@ -34,7 +34,7 @@ class UndefinedStaticMP extends Analyzer {
                      );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')

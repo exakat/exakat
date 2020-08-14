@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmongo extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'mongo.ini';
 
         parent::analyze();

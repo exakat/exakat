@@ -54,7 +54,7 @@ class Mercurial extends Vcs {
     public function getInstallationInfo() {
         $stats = array();
 
-        $res = trim(shell_exec($this->executable.' --version 2>&1') ?? '');
+        $res = trim(shell_exec($this->executable . ' --version 2>&1') ?? '');
         if (preg_match('/Mercurial Distributed SCM \(version ([0-9\.]+)\)/', $res, $r)) {//
             $stats['installed'] = 'Yes';
             $stats['version'] = $r[1];
@@ -76,7 +76,7 @@ class Mercurial extends Vcs {
         return trim(substr($res, 8), " *\n");
     }
 
-    public function getStatus() : array {
+    public function getStatus(): array {
         $status = array('vcs'       => 'hg',
                         'branch'    => $this->getBranch(),
                         'revision'  => $this->getRevision(),
@@ -86,12 +86,12 @@ class Mercurial extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) : array {
+    public function getDiffLines($r1, $r2): array {
         display("No support for line diff in Hg.\n");
         return array();
     }
 
-    public function getLastCommitDate() : int {
+    public function getLastCommitDate(): int {
         $res = trim(shell_exec("cd {$this->destinationFull}; {$this->executable} log -l 1 2>&1") ?? '');
 
         //date:        Wed Jun 23 11:19:15 2010 -0700

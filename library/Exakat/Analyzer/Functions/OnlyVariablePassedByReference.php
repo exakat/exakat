@@ -31,7 +31,7 @@ class OnlyVariablePassedByReference extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // custom calls
         $this->atomIs(self::CALLS)
              ->hasIn('DEFINITION')  // No definition, no check

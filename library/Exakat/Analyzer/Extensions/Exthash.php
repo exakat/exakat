@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Exthash extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'hash.ini';
 
         parent::analyze();

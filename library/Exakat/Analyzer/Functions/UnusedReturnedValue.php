@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedReturnedValue extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { return 1; }
         // foo();
         $this->atomIs('Function')

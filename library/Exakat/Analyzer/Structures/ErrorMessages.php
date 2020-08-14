@@ -32,7 +32,7 @@ class ErrorMessages extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $messages = array('String', 'Concatenation', 'Integer', 'Functioncall', 'Heredoc', 'Magicconstant');
 
         // die('true')

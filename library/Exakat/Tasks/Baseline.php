@@ -35,7 +35,7 @@ class Baseline extends Tasks {
     public const ACTIONS = array('list', 'remove', 'save');
 
     //install, list, local, uninstall, upgrade
-    public function run() : void {
+    public function run(): void {
         if (!$this->config->project->validate()) {
             throw new InvalidProjectName($this->config->project->getError());
         }

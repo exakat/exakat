@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MethodcallUsage extends Analyzer {
     protected $calledMethods = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Currently ignoring the object :(
         $calledMethods = array_map('strtolower', $this->calledMethods);
 

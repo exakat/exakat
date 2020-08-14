@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PrintWithoutParenthesis extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // print(1);
         $this->atomIs('Print')
              ->outIs('ARGUMENT')

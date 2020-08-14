@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Php72ObjectKeyword extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class object {}
         $this->atomIs(self::CIT)
              ->outIs('NAME')

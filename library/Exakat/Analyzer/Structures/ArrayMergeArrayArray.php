@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,13 +25,13 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ArrayMergeArrayArray extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                      'Complete/PropagateConstants',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = array(); array_merge($a);
         $this->atomFunctionIs('\\array_merge')
              ->outIs('ARGUMENT')

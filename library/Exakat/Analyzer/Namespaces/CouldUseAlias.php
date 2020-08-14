@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseAlias extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // use a\b as C; and  a\b::D();
         $this->atomIs('Newcall')
              ->hasNoIn('NAME')

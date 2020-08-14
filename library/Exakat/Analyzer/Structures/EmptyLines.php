@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class EmptyLines extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // one void in the sequence
         $this->atomIs('Void')
              ->hasIn('EXPRESSION')

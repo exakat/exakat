@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class LocallyUsedProperty extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // normal property
         // static property in an variable static::$c
         $this->atomIs('Trait')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extcmark extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'cmark.ini';
 
         parent::analyze();

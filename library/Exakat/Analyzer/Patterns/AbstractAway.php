@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class AbstractAway extends Analyzer {
                                          '\\rand',
                                          '\\mt_rand',
                                          '\\openssl_random_pseudo_bytes',
-                                         
+
                                          '\\random_int',
                                          '\\random_byte',
                                          '\\getdate',
@@ -44,7 +44,7 @@ class AbstractAway extends Analyzer {
     protected $abstractableClasses = array('\\Datetime',
                                           );
 
-    public function analyze() : void {
+    public function analyze(): void {
         $abstractableCalls = makeFullnspath($this->abstractableCalls);
         $abstractableClasses = makeFullnspath($this->abstractableClasses);
 

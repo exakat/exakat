@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class OpensslRandomPseudoByteSecondArg extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // openssl_random_pseudo_bytes(1, $d);
         $this->atomFunctionIs('\\openssl_random_pseudo_bytes')
              ->hasChildWithRank('ARGUMENT', 1);

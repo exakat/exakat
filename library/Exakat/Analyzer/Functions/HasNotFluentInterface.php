@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class HasNotFluentInterface extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // return $a;
         $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('BLOCK')

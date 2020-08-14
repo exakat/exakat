@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class SensitiveArgument extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $unsafe = $this->loadIni('security_vulnerable_functions.ini');
 
         foreach($unsafe as $position => $functions) {

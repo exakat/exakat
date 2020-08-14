@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseCli extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // GPC + R
         $this->atomIs(self::VARIABLES_ALL)
              ->codeIs(array('$argv', '$argc'), self::TRANSLATE);

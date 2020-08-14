@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Php80UnionTypehint extends Analyzer {
     protected $phpVersion = '8.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->filter(
                 $this->side()

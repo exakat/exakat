@@ -32,7 +32,7 @@ class Recursive extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { foo(); }
         $this->atomIs('Function')
              ->savePropertyAs('fullnspath', 'fqn')

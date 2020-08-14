@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseCountRecursive extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { $d = $d + count($b); }
         $this->atomIs('Foreach')
              ->outIs('VALUE')

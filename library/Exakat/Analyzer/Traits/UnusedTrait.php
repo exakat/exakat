@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedTrait extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // trait t {}
         // class x { use t2; }
         $this->atomIs('Trait')

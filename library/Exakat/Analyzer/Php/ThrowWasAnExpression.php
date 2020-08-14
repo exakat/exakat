@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ThrowWasAnExpression extends Analyzer {
     protected $phpVersion = '8.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $a ?? throw new Exception()
         $this->atomIs(array('Coalesce', 'Assignation', 'Ternary', 'Logical', 'Bitoperation', 'Throw'))
              ->outIs(array('LEFT', 'RIGHT', 'CONDITION', 'THEN', 'ELSE', 'THROW'))

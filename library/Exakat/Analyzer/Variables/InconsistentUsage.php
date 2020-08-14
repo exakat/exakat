@@ -30,7 +30,7 @@ class InconsistentUsage extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Variabledefinition')
              ->raw(<<<'GREMLIN'
 where(

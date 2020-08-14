@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Vendors;
 use Exakat\Analyzer\Common\UsesFramework;
 
 class Fuel extends UsesFramework {
-    public function analyze() : void {
+    public function analyze(): void {
         $detections = $this->loadIni('vendors/fuel.ini');
 
         $this->classes    = $detections->classes;

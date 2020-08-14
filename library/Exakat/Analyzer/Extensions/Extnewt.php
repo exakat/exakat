@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extnewt extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'newt.ini';
 
         parent::analyze();

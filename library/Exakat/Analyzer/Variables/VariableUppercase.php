@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableUppercase extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $UPPER_CASE
         $this->atomIs(self::VARIABLES_USER)
              ->regexIs('fullcode', '^\\\\\$[a-zA-Z0-9_]{2,}\\$')

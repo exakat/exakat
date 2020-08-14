@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgearman extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'gearman.ini';
 
         parent::analyze();

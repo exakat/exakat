@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class Overwriting extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $dir = substr($dir, 0, -1)
         $this->atomIs('Assignation')
              ->codeIs('=')

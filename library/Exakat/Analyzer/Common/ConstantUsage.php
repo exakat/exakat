@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConstantUsage extends Analyzer {
     protected $constants = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $constants =  makeFullNsPath($this->constants, \FNP_CONSTANT);
 
         $this->atomIs(array('Identifier', 'Nsname'))

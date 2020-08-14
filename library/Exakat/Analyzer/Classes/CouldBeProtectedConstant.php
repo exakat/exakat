@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeProtectedConstant extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Searching for properties that are never used outside the definition class or its children
 
         // global static constants : the one with no definition class : they are all ignored.

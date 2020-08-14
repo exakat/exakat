@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class SafeHttpHeaders extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //Some docs : https://www.keycdn.com/blog/http-security-headers
 
         //header('X-Xss-Protection: 0');

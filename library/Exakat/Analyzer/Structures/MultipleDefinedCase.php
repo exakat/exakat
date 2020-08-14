@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleDefinedCase extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Check that fullcode is the same or not for integers
         $this->atomIs(self::SWITCH_ALL)
              ->filter(

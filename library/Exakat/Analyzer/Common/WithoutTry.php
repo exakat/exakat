@@ -29,7 +29,7 @@ class WithoutTry extends Analyzer {
     protected $functions = array();
     protected $atoms = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         if (!empty($this->functions)) {
             $this->atomFunctionIs($this->functions)
                  ->hasNoTryCatch()

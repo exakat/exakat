@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NormalMethods extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('METHOD')
              ->isNot('static', true)

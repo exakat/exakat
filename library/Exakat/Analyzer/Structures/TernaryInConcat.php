@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class TernaryInConcat extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // 'a'. 'b'.$c > 1 ? 'd' : 'e'; Ternary has priority
         $this->atomIs(array('Ternary', 'Coalesce'))
              ->outIs(array('CONDITION', 'LEFT'))

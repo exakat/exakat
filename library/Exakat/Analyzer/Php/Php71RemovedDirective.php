@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\UsedDirective;
 class Php71RemovedDirective extends UsedDirective {
     protected $phpVersion = '7.1+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->directives = array('session.hash_function',
                                   'session.hash_bits_per_charactor',
                                   'session.entropy_file',

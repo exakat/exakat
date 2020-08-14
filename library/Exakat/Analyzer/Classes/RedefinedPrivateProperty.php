@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class RedefinedPrivateProperty extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private $y; }
         // class z extends x { private $y; }
         $this->atomIs('Propertydefinition')

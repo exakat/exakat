@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsThis extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command(<<<'GREMLIN'
 or( __.hasLabel("This"),
 

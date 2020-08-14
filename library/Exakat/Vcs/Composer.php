@@ -102,7 +102,7 @@ class Composer extends Vcs {
         return $stats;
     }
 
-    public function getStatus() : array {
+    public function getStatus(): array {
         $composerLockPath = "{$this->destinationFull}/composer.lock";
         if (!file_exists($composerLockPath)) {
             $status = array( 'vcs'       => 'composer',

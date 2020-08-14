@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UselessFinal extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // final class x { final function foo() {}}
         $this->atomIs('Class')
              ->is('final', true)

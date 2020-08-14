@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extsem extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'sem.ini';
 
         parent::analyze();

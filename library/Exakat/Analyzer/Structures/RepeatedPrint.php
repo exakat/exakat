@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class RepeatedPrint extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // first one in sequence
         $this->atomIs(array('Print', 'Echo'))
              ->is('rank', 0)

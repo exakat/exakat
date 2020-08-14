@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extjson extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'json.ini';
 
         parent::analyze();

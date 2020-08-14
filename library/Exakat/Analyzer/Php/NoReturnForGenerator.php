@@ -32,7 +32,7 @@ class NoReturnForGenerator extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->analyzerIs('Functions/IsGenerator')
              ->hasAtomInside('Return');
         $this->prepareQuery();

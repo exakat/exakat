@@ -30,7 +30,7 @@ class CheckOnCallUsage extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function __call($a, $b) { $this->$a(...$b); }
         $this->atomIs('Magicmethod')
              ->outIs('NAME')

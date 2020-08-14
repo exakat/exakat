@@ -30,7 +30,7 @@ class SafePhpvars extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $safe = array('DOCUMENT_ROOT',
                       'REQUEST_TIME',
                       'REQUEST_TIME_FLOAT',

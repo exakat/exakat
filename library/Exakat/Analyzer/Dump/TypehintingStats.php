@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class TypehintingStats extends AnalyzerArrayHashResults {
      protected $analyzerName   = 'Typehinting stats';
 
-    public function analyze() : void {
+    public function analyze(): void {
         //total parameters
         $this->atomIs('Parameter')
              ->count();
@@ -189,14 +189,14 @@ class TypehintingStats extends AnalyzerArrayHashResults {
              ->count();
         $multipleTypehints = $this->rawQuery()->toInt();
 
-        $return = compact('totalArguments', 
-                          'totalFunctions', 
+        $return = compact('totalArguments',
+                          'totalFunctions',
                           'withTypehint',
-                          'withReturnTypehint', 
-                          'scalartype', 
-                          'returnNullable', 
-                          'argNullable', 
-                          'classTypehint', 
+                          'withReturnTypehint',
+                          'scalartype',
+                          'returnNullable',
+                          'argNullable',
+                          'classTypehint',
                           'interfaceTypehint',
                           'typedProperties',
                           'totalProperties',

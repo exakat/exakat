@@ -28,7 +28,7 @@ use Exakat\Exakat;
 class Upgrade extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() : void {
+    public function run(): void {
         // Avoid downloading when it is not a phar
         if ($this->config->is_phar === Config::IS_NOT_PHAR) {
             print 'This can only update a .phar version of exakat. Aborting.' . PHP_EOL;

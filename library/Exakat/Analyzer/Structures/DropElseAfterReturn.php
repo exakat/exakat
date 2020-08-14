@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DropElseAfterReturn extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //if ($a) { return $a; } else { doSomething(); }
         $this->atomIs('Ifthen')
              ->tokenIsNot('T_ELSEIF')

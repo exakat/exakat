@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleTraitOrInterface extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // interfaces
         $this->atomIs('Class')
              ->raw(<<<'GREMLIN'

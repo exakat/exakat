@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldUsePreparedStatement extends Analyzer {
     protected $queryMethod = 'query_methods.json';
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         $functions = array( '\\pg_query',
                             '\\sqlsrv_query',
                             '\\cubrid_query',

@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetClassPropertyDefinitionWithTypehint extends Complete {
-    public function analyze() : void {
+    public function analyze(): void {
         // $object->property->method()
         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->as('property')

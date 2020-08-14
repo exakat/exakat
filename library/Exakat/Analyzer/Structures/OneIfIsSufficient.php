@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class OneIfIsSufficient extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Ifthen')
              ->outIs('THEN')
              ->is('count', 1)

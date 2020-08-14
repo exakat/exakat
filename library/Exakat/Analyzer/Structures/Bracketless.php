@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Bracketless extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Ifthen')
              ->isNot('alternative', true)
              ->outIs(array('ELSE', 'THEN'))

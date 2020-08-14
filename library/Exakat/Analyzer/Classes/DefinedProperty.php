@@ -31,7 +31,7 @@ class DefinedProperty extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // locally defined
         // defined in local class (private included)
         $this->atomIs('Member')

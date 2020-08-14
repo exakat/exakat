@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\UsedDirective;
 class Php74NewDirective extends UsedDirective {
     protected $phpVersion = '7.4-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->directives = array('zend.exception_ignore_args',
                                   'opcache.preload_user',
                                  );

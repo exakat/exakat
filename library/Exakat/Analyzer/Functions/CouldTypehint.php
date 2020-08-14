@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldTypehint extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // An argument is processed with a instanceof
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

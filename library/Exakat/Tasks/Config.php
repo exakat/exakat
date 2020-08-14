@@ -30,7 +30,7 @@ use Exakat\Config as Configuration;
 class Config extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() : void {
+    public function run(): void {
         $project = $this->config->project;
 
         // May be in-code!!

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedGlobal extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // global in a function or in the global space
         $this->atomIs(array('Globaldefinition', 'Staticdefinition'))
              ->hasNoOut('DEFINITION');

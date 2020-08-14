@@ -29,7 +29,7 @@ class PropagateCalls extends Complete {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // No need to run twice
         $this->processLocalDefinition();
         $this->propagateGlobals();

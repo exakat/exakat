@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoAssignationInFunction extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { $a = array(1, ... 2000);}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')

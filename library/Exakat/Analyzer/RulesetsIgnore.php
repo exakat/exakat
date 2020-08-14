@@ -28,7 +28,7 @@ class RulesetsIgnore implements RulesetsInterface {
     private $ignoreList      = array();
 
     public function __construct(array $list) {
-        // No check on existence : if don't exist, it is already ignored. 
+        // No check on existence : if don't exist, it is already ignored.
         $this->ignoreList      = $list;
     }
 

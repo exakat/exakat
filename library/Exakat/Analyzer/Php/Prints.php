@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Prints extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $prints = $this->loadIni('php_prints.ini');
 
         $this->atomFunctionIs(makeFullNsPath($prints->functions));

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Common\FunctionUsage;
 
 class PhpinfoUsage extends FunctionUsage {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array('phpinfo');
 
         parent::analyze();

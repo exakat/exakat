@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class StaticMethodsCalledFromObject extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(array('Method', 'Magicmethod'))
              ->hasClassTrait()
              ->is('static', true)

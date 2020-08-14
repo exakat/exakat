@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extcurl extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'curl.ini';
 
         parent::analyze();

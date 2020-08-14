@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class GroupFilter extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         assert(func_num_args() === 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
         list($characteristic, $percentage) = func_get_args();
 

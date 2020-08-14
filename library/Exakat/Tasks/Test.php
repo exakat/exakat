@@ -30,7 +30,7 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 class Test extends Tasks {
     const CONCURENCE = self::NONE;
 
-    public function run() : void {
+    public function run(): void {
         // Check for requested file
         if (!empty($this->config->filename) && !file_exists($this->config->filename)) {
             throw new NoSuchFile($this->config->filename);

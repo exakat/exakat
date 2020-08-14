@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ClassConstantUsage extends Analyzer {
     protected $classConstants = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->fullnspathIs(array_keys($this->classConstants))

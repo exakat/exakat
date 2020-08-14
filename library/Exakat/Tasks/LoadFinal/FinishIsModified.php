@@ -33,7 +33,7 @@ class FinishIsModified extends LoadFinal {
         $this->methods = exakat('methods');
     }
 
-    public function run() : void {
+    public function run(): void {
         $variables = array('Variable',
                            'Variableobject',
                            'Variablearray',

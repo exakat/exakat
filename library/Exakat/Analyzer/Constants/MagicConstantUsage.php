@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class MagicConstantUsage extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // __DIR__, __dir__
         $this->atomIs('Magicconstant');
         $this->prepareQuery();

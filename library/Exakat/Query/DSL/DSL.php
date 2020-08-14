@@ -168,7 +168,7 @@ abstract class DSL {
         }
     }
 
-    abstract public function run() : Command;
+    abstract public function run(): Command;
 
     protected function normalizeAtoms($atoms): array {
         $atoms = makeArray($atoms);
@@ -185,7 +185,7 @@ abstract class DSL {
         return array_values(array_intersect($fullnspaths, $this->availableFunctioncalls));
     }
 
-    protected function SorA($value) : string {
+    protected function SorA($value): string {
         if (is_array($value)) {
             return makeList($value);
         } elseif (is_string($value)) {

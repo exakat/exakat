@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extsvm extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'svm.ini';
 
         parent::analyze();

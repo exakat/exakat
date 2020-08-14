@@ -30,7 +30,7 @@ class CouldUseArrayFillKeys extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { $c[$b] = 3; }
         $this->atomIs('Foreach')
              ->outIs(array('INDEX', 'VALUE'))

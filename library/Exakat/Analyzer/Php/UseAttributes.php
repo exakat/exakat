@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseAttributes extends Analyzer {
     protected $phpVersion = '8.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // PHP 8.0 : @@ foo(1) class x {}
         $this->atomIs(array('Function', 'Method', 'Magicmethod', 'Constant', 'Class', 'Trait', 'Interface'))
              ->hasOut('ATTRIBUTE');

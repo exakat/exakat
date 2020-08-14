@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessCheck extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // No check on empty() and isset(), as they also check the variable existence
         //    if (count($anArray) > 0){    foreach ($anArray as $el){
         $this->atomIs('Ifthen')

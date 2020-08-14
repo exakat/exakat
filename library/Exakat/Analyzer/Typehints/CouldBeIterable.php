@@ -22,11 +22,9 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class CouldBeIterable extends CouldBeType {
-    public function analyze() : void {
+    public function analyze(): void {
         $iterableAtoms = array('Arrayliteral');
 
         // property relayed typehint
@@ -103,7 +101,7 @@ class CouldBeIterable extends CouldBeType {
              ->atomIs(array('Yieldfrom'))
              ->back('result');
         $this->prepareQuery();
-        
+
         // May also cover if( $arg).,
         // May also cover coalesce, ternary.
         // short assignations

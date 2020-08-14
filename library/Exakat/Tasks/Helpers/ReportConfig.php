@@ -67,30 +67,30 @@ class ReportConfig {
         $this->config = $exakat_config;
     }
 
-    public function getName() : string {
+    public function getName(): string {
         return $this->name;
     }
 
-    public function getFormatClass() : string {
+    public function getFormatClass(): string {
         return '\Exakat\Reports\\' . ucfirst(strtolower($this->format));
     }
 
-    public function getFormat() : string {
+    public function getFormat(): string {
         return $this->format;
     }
 
-    public function getFile() : string {
+    public function getFile(): string {
         return $this->destination;
     }
 
-    public function getConfig() : Config {
+    public function getConfig(): Config {
         return $this->config->duplicate(array('file'             => $this->destination,
                                               'format'           => array($this->format),
                                               'project_rulesets' => $this->rulesets,
                                               ));
     }
 
-    public function getRulesets() : array {
+    public function getRulesets(): array {
         $class = $this->getFormatClass();
         $report = new $class($this->config);
 

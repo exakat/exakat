@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extctype extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'ctype.ini';
 
         parent::analyze();

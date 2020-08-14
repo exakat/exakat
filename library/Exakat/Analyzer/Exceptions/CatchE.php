@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CatchE extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Catch')
              ->outIs('VARIABLE')
              ->values('fullcode')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseArrowFunctions extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // fn => return 3;
         $this->atomIs('Arrowfunction');
         $this->prepareQuery();

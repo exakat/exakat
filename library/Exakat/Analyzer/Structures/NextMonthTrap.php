@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NextMonthTrap extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\strtotime')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

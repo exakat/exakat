@@ -31,7 +31,7 @@ class UnusedConstant extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Const')
              ->hasIn('CONST')
              ->outIs('CONST')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ImpliedIf extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // defined() or die
         $this->atomIs('Logical')
              ->codeIs(array('or', '||', 'and', '&&'))

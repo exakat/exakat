@@ -38,7 +38,7 @@ CREATE TABLE callOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/SetClassRemoteDefinitionWithGlobal',
                      'Complete/SetClassRemoteDefinitionWithInjection',
@@ -48,8 +48,8 @@ SQL;
                      'Complete/SetClassRemoteDefinitionWithTypehint',
                     );
     }
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         $this ->atomIs(self::CALLS, self::WITHOUT_CONSTANTS)
               ->has('fullnspath')
               ->goToInstruction(array('Function', 'Method', 'Magicmethod'))

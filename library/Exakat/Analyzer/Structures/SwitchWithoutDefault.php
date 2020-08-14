@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SwitchWithoutDefault extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // switch($x) { case 4 : break; }
         // match($x) { 4 => 1, };
         $this->atomIs(self::SWITCH_ALL)

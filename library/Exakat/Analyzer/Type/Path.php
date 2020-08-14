@@ -33,7 +33,7 @@ class Path extends AnalyzerResults {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $protocols = $this->loadJson('protocols.json');
         $protocolList = array();
         foreach($protocols as $protocol => $details) {

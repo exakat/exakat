@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\UsedDirective;
 
 class Php70RemovedDirective extends UsedDirective {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->directives = array('always_populate_raw_post_data',
                                   'asp_tags',
                                   'xsl.security_prefs');

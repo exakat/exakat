@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UninitedProperty extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private $p; function __construct() { no $this->p = 1;}}
         $this->atomIs('Propertydefinition')
              ->analyzerIsNot('self')

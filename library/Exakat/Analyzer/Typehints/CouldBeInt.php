@@ -22,14 +22,12 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Query\DSL\FollowParAs;
 
 class CouldBeInt extends CouldBeType {
-    public function analyze() : void {
+    public function analyze(): void {
         $intAtoms = array('Integer', 'Addition', 'Multiplication', 'Not', 'Power');
-        
+
         // property : based on default value (created or not)
         $this->checkPropertyDefault($intAtoms);
 
@@ -116,7 +114,7 @@ class CouldBeInt extends CouldBeType {
 
         // function ($a) { pow($a, 2);}
         $this->checkRelayedArgumentToPHP('int');
-        
+
         // argument validation
         $this->checkArgumentValidation(array('\\is_int'), $intAtoms);
 
@@ -135,7 +133,7 @@ class CouldBeInt extends CouldBeType {
              ->atomIs(array('Addition', 'Power', 'Multiplication'))
              ->back('result');
         $this->prepareQuery();
-        
+
         // May also cover if( $arg).,
         // May also cover coalesce, ternary.
         // short assignations

@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class Trim extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         switch (func_get_args()) {
             case 2:
                 list($variable, $chars) = func_get_args();

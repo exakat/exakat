@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\ClassUsage;
 
 class PearUsage extends ClassUsage {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->classes = $this->loadIni('pear.ini', 'classes');
 
         parent::analyze();

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class AliasesUsage extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // sizeof();
         $ini = $this->load('aliases', 'alias');
         $ini = makeFullNsPath(array_keys($ini));

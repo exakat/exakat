@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class ComplexDynamicNames extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a->{strtolower($a)};
         $this->atomIs('Member')
              ->outIs('MEMBER')

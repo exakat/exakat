@@ -23,24 +23,23 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
 
 class CompatibleWithType extends DSL {
     public function run(): Command {
         switch(func_num_args()) {
-            case 2 : 
+            case 2 :
                 list($types, $withNull) = func_get_args();
                 $withNull = in_array($withNull, array(NotCompatibleWithType::ALLOW_NULL, NotCompatibleWithType::DISALLOW_NULL), STRICT_COMPARISON) ? $withNull : NotCompatibleWithType::DISALLOW_NULL;
                 break;
 
-            case 1: 
+            case 1:
                 list($types) = func_get_args();
                 $withNull = NotCompatibleWithType::DISALLOW_NULL;
 
             default:
                 assert(func_num_args() <= 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');
         }
-        
+
         if ($withNull === NotCompatibleWithType::ALLOW_NULL) {
             $withNullGremlin = '.not(hasLabel("Null"))';
         } else {

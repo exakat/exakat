@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class FullcodeIsNot extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         assert(func_num_args() <= 2, 'Too many arguments for ' . __METHOD__);
 
         switch (func_num_args()) {

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedInterfaces extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // interface i {} WITHOUT class x implements j {}
         $this->atomIs('Interface')
              ->hasNoOut('DEFINITION');

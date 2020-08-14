@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class SimilarIntegers extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $x = 10; $y = 0xa; $z = -+-10;
         $this->atomIs(array('Integer', 'Addition', 'Power', 'Multiplication', 'Sign', 'Bitshift'))
              ->has('intval')

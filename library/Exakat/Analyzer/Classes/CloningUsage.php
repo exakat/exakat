@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CloningUsage extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Clone');
         $this->prepareQuery();
     }

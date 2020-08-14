@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedConstantName extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // ${x} (no const x = 'a')
         $this->atomIs('Variable')
              ->outIs('NAME')

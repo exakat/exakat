@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Exttrader extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'trader.ini';
 
         parent::analyze();

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ElseIfElseif extends Analyzer {
     // if () {} else  if {}
     // but not if () {} elseif {}
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Ifthen')
              ->outIs('ELSE')
              ->is('count', 1)

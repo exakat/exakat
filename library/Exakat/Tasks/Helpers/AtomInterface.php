@@ -25,11 +25,11 @@ namespace Exakat\Tasks\Helpers;
 use stdClass;
 
 interface AtomInterface {
-    public function toArray() : array; 
+    public function toArray(): array;
 
-    public function toGraphsonLine(int &$id) : stdClass;
+    public function toGraphsonLine(int &$id): stdClass;
 
-    public function boolProperties() : array;
+    public function boolProperties(): array;
 
     public function isA(array $atoms): bool;
 }

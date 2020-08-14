@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CanCountNonCountable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // count('abc');
         $this->atomFunctionIs('\\count')
              ->outWithRank('ARGUMENT', 0)

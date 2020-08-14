@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extcrypto extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'crypto.ini';
 
         parent::analyze();

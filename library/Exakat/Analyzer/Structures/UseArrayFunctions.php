@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseArrayFunctions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { $c[] = $b};
         $this->atomIs(array('For', 'Foreach'))
              ->outIs('BLOCK')

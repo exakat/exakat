@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ClosureThisSupport extends Analyzer {
     protected $phpVersion = '5.4-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function () { $this->a; }
         $this->atomIs('Closure')
              ->outIs('BLOCK')

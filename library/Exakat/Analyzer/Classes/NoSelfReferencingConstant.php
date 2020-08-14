@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NoSelfReferencingConstant extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // const c = self::b
         // const c = self::b + 1
         // const c = a::b

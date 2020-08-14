@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php74NewFunctions extends FunctionDefinition {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array('mb_str_split',
                                  'password_algos',
                                  'get_mangled_object_vars',

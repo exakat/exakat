@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class IncludeUsage extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Include 'file.php';
         $this->atomIs('Include');
         $this->prepareQuery();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class EnvironnementVariables extends AnalyzerHashHashResults {
     protected $analyzerName = 'Environment Variables via Function';
 
-    public function analyze() : void {
+    public function analyze(): void {
         //$_ENV['name']
         $this->atomIs('Phpvariable')
               ->codeIs('$_ENV', self::TRANSLATE, self::CASE_SENSITIVE)

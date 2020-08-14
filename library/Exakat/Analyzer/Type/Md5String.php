@@ -28,7 +28,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Md5String extends AnalyzerResults {
     protected $analyzerName = 'Md5 strings';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // 'eccbc87e4b5ce2fe28308fd9f2a7baf3'
         $this->atomIs('String')
              ->regexIs('fullcode', '^[\\\\\'\"]?0[0-9A-Fa-f]{31}[\\\\\'\"]?\\$')

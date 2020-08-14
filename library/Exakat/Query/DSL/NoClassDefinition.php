@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class NoClassDefinition extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         if (func_num_args() === 1) {
             list($type) = func_get_args();
         } else {

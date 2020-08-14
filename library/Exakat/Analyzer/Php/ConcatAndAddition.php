@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ConcatAndAddition extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // "sum ". $a + $b
         $this->atomIs('Concatenation')
              ->outIs('CONCAT')

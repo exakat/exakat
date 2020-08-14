@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableNonascii extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $人 or
         $this->atomIs(self::VARIABLES_USER)
              ->tokenIsNot(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extasync extends Extension {
 //    protected $phpVersion = '7.3+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'async.ini';
 
         parent::analyze();

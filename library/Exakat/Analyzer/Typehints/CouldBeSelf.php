@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,9 +25,9 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeSelf extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // This analysis works on typehints already available
-        
+
         // Properties
         $this->atomIs('Ppp')
              ->outIs('TYPEHINT')

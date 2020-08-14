@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extphalcon extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'phalcon.ini';
 
         parent::analyze();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Common\Extension;
 
 class Extwasm extends Extension {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'wasm.ini';
 
         parent::analyze();

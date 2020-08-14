@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MissingCases extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::SWITCH_ALL)
              ->initVariable('x', '[]')
              ->raw('sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));})')

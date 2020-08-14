@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MergeIfThen extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // if () { if () { }}
         $this->atomIs('Ifthen')
              ->outIs('THEN')

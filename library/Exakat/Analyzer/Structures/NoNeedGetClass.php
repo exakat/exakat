@@ -30,7 +30,7 @@ class NoNeedGetClass extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // get_class($a->b)::$c   => $a->b::$c
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')

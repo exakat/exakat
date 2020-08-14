@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeAbstractClass extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class a {}
         // class b extends a {}
         // No new a()

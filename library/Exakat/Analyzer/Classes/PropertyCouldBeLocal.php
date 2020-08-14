@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyCouldBeLocal extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // normal property
         $this->atomIs('Propertydefinition')
              ->savePropertyAs('propertyname', 'member')

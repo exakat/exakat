@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class TraitMethod extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Trait')
              ->outIs('METHOD')
              ->atomIs('Method');

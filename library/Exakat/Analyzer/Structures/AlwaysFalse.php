@@ -30,7 +30,7 @@ class AlwaysFalse extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $conf = array('\\array'   => array('Boolean', 'String', 'Integer', 'Float'),
                       '\\int'     => array('Boolean', 'String', 'Arrayliteral', 'Float'),
                       '\\float'   => array('Boolean', 'String', 'Arrayliteral', 'Integer'),

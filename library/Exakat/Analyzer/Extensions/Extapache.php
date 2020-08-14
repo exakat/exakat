@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extapache extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'apache.ini';
 
         parent::analyze();

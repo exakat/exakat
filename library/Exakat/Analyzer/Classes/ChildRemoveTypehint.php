@@ -32,7 +32,7 @@ class ChildRemoveTypehint extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class a { function foo(B $B){}}
         // class aa extends a { function foo($B){}}
         $this->atomIs('Method')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class RepeatedInterface extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class a implements i, i, i
         $this->atomIs(self::CLASSES_ALL)
              ->countBy('IMPLEMENTS', 'fullnspath', 'interfaces')

@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class IdenticalConditions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
 
         // $a || $a
         // ($a) && ($a)

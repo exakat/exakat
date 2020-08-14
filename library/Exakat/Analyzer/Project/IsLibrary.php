@@ -29,7 +29,7 @@ class IsLibrary extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Only contains definitions
         $this->atomIs('Project')
              ->outIs('PROJECT')

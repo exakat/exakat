@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MultipleSameArguments extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->raw(<<<'GREMLIN'
 filter{ 

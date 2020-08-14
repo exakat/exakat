@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class FlexibleHeredoc extends Analyzer {
     protected $phpVersion = '7.3+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Flexible PHP 7.3 heredoc or nowdoc
         $this->atomIs('Heredoc')
              ->is('flexible', true);

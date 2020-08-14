@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class GeneratorCannotReturn extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // no return in generators before PHP 7.0
         $this->atomIs(self::FUNCTIONS_ALL)
              ->hasAtomInside(array('Yield', 'Yieldfrom'))

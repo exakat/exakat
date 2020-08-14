@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -24,8 +24,8 @@ namespace Exakat\Analyzer\Typehints;
 
 class CouldBeArray extends CouldBeType {
     // dependsOn is in CouldBeType class
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         // property with default
         $this->checkPropertyDefault(array('Arrayliteral'));
 

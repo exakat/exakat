@@ -29,7 +29,7 @@ class UndefinedTrait extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { use t; } // no trait t {}
         $this->atomIs('Usetrait')
              ->outIs('USE')

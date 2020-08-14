@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,10 +22,9 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
 
 class CouldBeCallable extends CouldBeType {
-    public function analyze() : void {
+    public function analyze(): void {
         $callableAtoms = array('Closure', 'Arrowfunction');
 
         // property, as assigned with closure or arrowfunction
@@ -87,7 +86,7 @@ class CouldBeCallable extends CouldBeType {
 
         // function ($a) { array_diff($a);}
         $this->checkRelayedArgumentToPHP('callable');
-        
+
         // argument validation
         $this->checkArgumentValidation(array('\\is_callable'), $callableAtoms);
 

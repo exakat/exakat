@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidSetErrorHandlerContextArg extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // set_error_handler(function($a, $b, $c, $d) {});
         $this->atomFunctionIs('\\set_error_handler')
              ->outWithRank('ARGUMENT', 0)

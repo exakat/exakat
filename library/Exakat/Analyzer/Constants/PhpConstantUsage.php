@@ -31,7 +31,7 @@ class PhpConstantUsage extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // echo PHP_OS
         // print \PHP_SELF
         $this->analyzerIs('Constants/ConstantUsage')

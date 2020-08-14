@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class HttpHeader extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $HttpHeadersList = $this->loadIni('http_headers.ini', 'headers');
 
         $this->atomIs('String')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NoMoreCurlyArrays extends Analyzer {
     protected $phpVersion = '8.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $a{3}
         $this->atomIs('Array')
              ->codeIs('{')

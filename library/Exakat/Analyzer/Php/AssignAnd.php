@@ -30,7 +30,7 @@ class AssignAnd extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = $b and $c ; is actually ($a = $b) and $c; (lost and $c)
         $this->atomIs('Logical')
              ->codeIs(array('and', 'or', 'xor'))

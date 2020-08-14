@@ -32,7 +32,7 @@ class WrongCase extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() {}
         // FOO();
         $this->atomIs('Functioncall')

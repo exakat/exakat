@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NullOnNew extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $names = array('finfo',
                        'PDO',
                        'Collator',

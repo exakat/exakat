@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsGlobalCode extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $linksDown = self::$linksDown;
 
         $gremlin = <<<GREMLIN

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUseFunction extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // namespace ; function foo() {}
         // namespace X; foo();
         $this->atomIs('Functioncall')

@@ -30,7 +30,7 @@ class NonNullableSetters extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private $p = 1;
         //           function foo() : C { return $this->p; }}
         $this->atomIs('Method')

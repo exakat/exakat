@@ -26,13 +26,13 @@ use Exakat\Analyzer\Analyzer;
 
 class MemoizeMagicCall extends Analyzer {
     protected $minMagicCallsToGet = 2;
-    
+
     public function dependsOn(): array {
         return array('Complete/CreateMagicProperty',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { $a = $this->a; $b = $this->a; } // $this->a is routed to __get();
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')
@@ -63,7 +63,7 @@ GREMLIN
                 )
              )
              ->atomInsideNoDefinition('Member')
-             ->raw('filter {members[it.get().value("fullcode")] >= '.$this->minMagicCallsToGet.';}')
+             ->raw('filter {members[it.get().value("fullcode")] >= ' . $this->minMagicCallsToGet . ';}')
              ->back('first');
         $this->prepareQuery();
     }

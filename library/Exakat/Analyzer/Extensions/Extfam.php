@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extfam extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'fam.ini';
 
         parent::analyze();

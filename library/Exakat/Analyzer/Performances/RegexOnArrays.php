@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class RegexOnArrays extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { preg_match()}
         $this->atomIs('Foreach')
              ->outIs('VALUE')

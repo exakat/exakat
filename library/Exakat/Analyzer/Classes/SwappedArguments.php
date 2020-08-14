@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,12 +25,12 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class SwappedArguments extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function foo($a, $b) {}}
         // class y extends x { function foo($b, $a) {}}
         $this->atomIs(array('Method', 'Magicmethod'))

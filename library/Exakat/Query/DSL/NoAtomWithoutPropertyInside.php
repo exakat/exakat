@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class NoAtomWithoutPropertyInside extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atoms, $property, $values) = func_get_args();
 
         assert($this->assertAtom($atoms));

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class PHP71scalartypehints extends Analyzer {
     protected $phpVersion = '7.1+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $scalartypehints = array('\iterable',
                                  );
 

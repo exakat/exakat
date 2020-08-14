@@ -28,11 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class Services extends Analyzer {
     private $report = null;
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Just a place holder
     }
 
-    public function toArray() : array {
+    public function toArray(): array {
         if ($this->report === null) {
             $this->hasResults();
         }

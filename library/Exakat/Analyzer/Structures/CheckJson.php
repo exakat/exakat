@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CheckJson extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // json_decode() (no checks)
         $this->atomFunctionIs(array('\\json_encode', '\\json_decode'))
              ->hasNoTryCatch()

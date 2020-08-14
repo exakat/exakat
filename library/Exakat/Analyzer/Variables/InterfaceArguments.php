@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class InterfaceArguments extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // interface i { function a($b) ; }
         // class c implements i { function a($b) ; }
         $this->atomIs('Interface')

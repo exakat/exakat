@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\ClassDefinition;
 
 class Php70NewClasses extends ClassDefinition {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->classes = array(
 'Error',
 'ParseError',

@@ -23,10 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
 
 class InterfaceLike extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('coalesce( __.hasLabel("Class").has("abstract", true),
                                       __.hasLabel("Interface")
                                          )');

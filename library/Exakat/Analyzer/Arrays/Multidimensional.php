@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Multidimensional extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $x[1][2], $x[1][2][3], $x[1][2][3][4]
         $this->atomIs('Array')
              ->outIs('VARIABLE')

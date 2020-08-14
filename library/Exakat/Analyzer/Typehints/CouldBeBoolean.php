@@ -22,13 +22,11 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class CouldBeBoolean extends CouldBeType {
-    public function analyze() : void {
+    public function analyze(): void {
         $booleanAtoms = array('Comparison', 'Logical', 'Boolean', 'Not');
-        
+
         // property : based on default value (created or not)
         $this->checkPropertyDefault($booleanAtoms);
 
@@ -63,7 +61,7 @@ class CouldBeBoolean extends CouldBeType {
 
         // function ($a) { array_diff($a);}
         $this->checkRelayedArgumentToPHP('bool');
-        
+
         // argument validation
         $this->checkArgumentValidation(array('\\is_bool'), $booleanAtoms);
 
@@ -79,7 +77,7 @@ class CouldBeBoolean extends CouldBeType {
              ->atomIs(array('Comparison', 'Logical', 'Not'))
              ->back('result');
         $this->prepareQuery();
-        
+
         // May also cover if( $arg).,
         // May also cover coalesce, ternary.
         // short assignations

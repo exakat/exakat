@@ -30,7 +30,7 @@ class UndefinedInsteadof extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { use t { t::undefined insteadof A; }}
         $this->atomIs('Staticmethod')
              ->hasNoIn('DEFINITION');

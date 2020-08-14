@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class GoToKeyDirectly extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //foreach($a as $k => $v) {    if ($k === 'abc') { } else { }}
         $this->atomIs('Foreach')
              ->outIs('VALUE')

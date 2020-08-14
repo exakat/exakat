@@ -35,7 +35,7 @@ class UnusedMethods extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Magicmethods are supposed to be used automatically
         // Could be checked for __clone, __get, __set...
 

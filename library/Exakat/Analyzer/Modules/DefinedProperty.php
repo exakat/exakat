@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\PropertyUsage;
 class DefinedProperty extends PropertyUsage {
     protected $properties = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->properties = $this->config->ext->loadJson('properties.json');
 
         if (empty($this->properties)) {

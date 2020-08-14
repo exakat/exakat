@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseNullableType extends Analyzer {
     protected $phpVersion = '7.1+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Return type function foo(): ?String
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs(array('RETURNTYPE', 'ARGUMENT'))

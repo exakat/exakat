@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CatchShadowsVariable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Catch inside a function
         $this->atomIs('Catch')
              ->hasFunction()

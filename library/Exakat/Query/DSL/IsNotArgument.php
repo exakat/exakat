@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsNotArgument extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('not( where( __.in("DEFINITION").where( __.in("NAME"))) )');
     }
 }

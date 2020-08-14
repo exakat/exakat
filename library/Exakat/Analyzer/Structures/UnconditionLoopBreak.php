@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UnconditionLoopBreak extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { $c++; continue; }
         $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')

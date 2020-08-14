@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class OneLetterFunctions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function s() {}
         $this->atomIs(self::FUNCTIONS_NAMED)
              ->outIs('NAME')

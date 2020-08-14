@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SwitchToSwitch extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // 3 ifthen chained with elseif and comparisons
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

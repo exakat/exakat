@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Sapi extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $sapi = $this->loadIni('php_sapi.ini', 'sapi');
 
         $this->atomIs('String')

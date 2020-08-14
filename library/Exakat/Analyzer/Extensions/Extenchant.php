@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extenchant extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'enchant.ini';
 
         parent::analyze();

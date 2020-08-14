@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UsesFrameworkConstant extends Analyzer {
     protected $constants   = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $analyzerId = null;
 
         if (!empty($this->constants[0])) {

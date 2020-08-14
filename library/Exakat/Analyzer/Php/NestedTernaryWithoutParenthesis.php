@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NestedTernaryWithoutParenthesis extends Analyzer {
     protected $phpVersion = '7.4-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         //$a ? $b : $c ? $d : $e
         $this->atomIs('Ternary')
              ->outIs(array('THEN', 'ELSE'))

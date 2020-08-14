@@ -155,7 +155,7 @@ class Git extends Vcs {
         return $stats;
     }
 
-    public function getStatus() : array {
+    public function getStatus(): array {
         $status = array('vcs'       => 'git',
                         'branch'    => $this->getBranch(),
                         'revision'  => $this->getRevision(),
@@ -165,7 +165,7 @@ class Git extends Vcs {
         return $status;
     }
 
-    public function getDiffLines($r1, $r2) : array {
+    public function getDiffLines($r1, $r2): array {
         $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff -U0 -r $r1 -r $r2") ?? '';
 
         $file    = '';
@@ -244,7 +244,7 @@ class Git extends Vcs {
         return $return;
     }
 
-    public function getLastCommitDate() : int {
+    public function getLastCommitDate(): int {
          return (int) strtotime(trim(shell_exec("cd {$this->destinationFull}; {$this->executable} log -1 --format=%cd") ?? ''));
     }
 }

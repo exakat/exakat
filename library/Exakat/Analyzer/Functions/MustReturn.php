@@ -31,7 +31,7 @@ class MustReturn extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class foo { function __callStatic($name, $foo) { $name; } }
         $this->atomIs('Magicmethod')
              ->isNot('abstract', true)

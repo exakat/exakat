@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class IsCliScript extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // files that starts with #!/binary
         $this->atomIs('File')
              ->outIs('FILE')

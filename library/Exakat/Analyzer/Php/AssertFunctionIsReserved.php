@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class AssertFunctionIsReserved extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function assert()
         $this->atomIs('Function')
              ->outIs('NAME')

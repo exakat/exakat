@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IsExtFunction extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
         $f = array((array) $this->loadIni('php_functions.ini', 'functions'));

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class AnchorRegex extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $pregFunctions = array('\\preg_match_all', '\\preg_match');
 
         $this->atomFunctionIs($pregFunctions)

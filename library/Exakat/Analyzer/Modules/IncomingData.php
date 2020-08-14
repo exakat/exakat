@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class IncomingData extends Analyzer {
     protected $incoming = null;
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->incoming = $this->loadJson('incoming_data.json');
 
         if (empty($this->incoming)) {

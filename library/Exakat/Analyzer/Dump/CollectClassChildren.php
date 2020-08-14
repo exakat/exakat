@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectClassChildren extends AnalyzerHashHashResults {
     protected $analyzerName = 'Class Children';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class a {} class b extends a;
         $this->atomIs('Class')
              ->raw('groupCount("m").by( __.out("DEFINITION").in("EXTENDS").hasLabel("Class").count() ).cap("m")');

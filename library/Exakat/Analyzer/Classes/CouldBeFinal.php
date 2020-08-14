@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeFinal extends Analyzer {
     // class x {}
     // no child extends x
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::CLASSES_ALL)
              ->isNot('final', true)
              ->isNot('abstract', true) // though, this is another problem

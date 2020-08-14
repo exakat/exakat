@@ -31,7 +31,7 @@ class DependantAbstractClass extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Case for $this->method()
         // Case for class::methodcall()
         $this->atomIs(self::CLASSES_ALL)

@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class IsNotInheritedMethod extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $gremlin = <<<'GREMLIN'
 not( 
     where( __.out("OVERWRITE")

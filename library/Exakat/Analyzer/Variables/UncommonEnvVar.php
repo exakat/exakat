@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UncommonEnvVar extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $classicEnv = $this->loadIni('environment_vars.ini', 'index');
 
         // $_ENV['USER'];

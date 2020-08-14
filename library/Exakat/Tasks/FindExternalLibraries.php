@@ -62,7 +62,7 @@ class FindExternalLibraries extends Tasks {
         }
     }
 
-    public function run() : void {
+    public function run(): void {
         $project = $this->config->project;
         if ($project === 'default') {
             throw new ProjectNeeded();
@@ -170,7 +170,7 @@ class FindExternalLibraries extends Tasks {
         }
     }
 
-    private function process(string $filename) : void {
+    private function process(string $filename): void {
         $return = array();
 
         $tokens = $this->php->getTokenFromFile($filename);

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class WrongCase extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // New
         $this->atomIs('New')
              ->outIs('NEW')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UseInstanceof extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // is_object()
         $this->atomFunctionIs('\\is_object');
         $this->prepareQuery();

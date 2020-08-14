@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Crc32MightBeNegative extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\\crc32')
              ->hasIn('CONCAT');
         $this->prepareQuery();

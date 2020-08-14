@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Psr;
 use Exakat\Analyzer\Common\InterfaceUsage;
 
 class Psr16Usage extends InterfaceUsage {
-    public function analyze() : void {
+    public function analyze(): void {
         $info = $this->loadJson('psr/psr-16.json');
 
         // Using the defined interfaces

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class HiddenNullable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo(int $i = null)
         $this->atomIs('Parameter')
              ->regexIsNot('fullcode', '\\\\?')

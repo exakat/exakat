@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidArrayPush extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\\array_push');
         $this->prepareQuery();
     }

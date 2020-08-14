@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class toStringPss extends Analyzer {
     protected $phpVersion = '5.4-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         $methods = array_values(array_diff($methods, array('__construct', '__destruct')));
         foreach($methods as &$method) {

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldPreprocess extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = array(); $a[1] = 2;
         $this->atomIs('Assignation')
              ->codeIs('=')

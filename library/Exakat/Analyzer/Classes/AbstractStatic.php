@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class AbstractStatic extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { static abstract function foo() ; }
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->is('abstract', true)

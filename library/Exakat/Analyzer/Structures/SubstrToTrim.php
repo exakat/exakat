@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SubstrToTrim extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //$b = substr($a, 1); //ltrim
         $this->atomFunctionIs('\substr')
              ->outWithRank('ARGUMENT', 1)

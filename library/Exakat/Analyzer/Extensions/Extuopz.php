@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extuopz extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'uopz.ini';
 
         parent::analyze();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoDirectAccess extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //defined('AJXP_EXEC') or die('Access not allowed'); : Constant used!
         $this->atomIs('Logical')
              ->tokenIs(array('T_BOOLEAN_AND', 'T_BOOLEAN_OR', 'T_LOGICAL_AND', 'T_LOGICAL_OR'))

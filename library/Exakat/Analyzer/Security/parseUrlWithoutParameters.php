@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class parseUrlWithoutParameters extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // parse_str($v);
         $this->atomFunctionIs(array('\parse_str', '\mb_parse_str'))
              ->noChildWithRank('ARGUMENT', 1);

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Common\Extension;
 
 class Extstring extends Extension {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'string.ini';
 
         parent::analyze();

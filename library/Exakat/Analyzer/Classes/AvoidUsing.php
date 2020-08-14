@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class AvoidUsing extends Analyzer {
     protected $forbiddenClasses = array('AvoidThisClass');
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         $classes = $this->forbiddenClasses;
 
         if (empty($classes)) {
@@ -88,7 +88,7 @@ class AvoidUsing extends Analyzer {
         // class_alias is covered by string test just below
         // mentions in strings
         $this->atomIs(self::STRINGS_LITERALS)
-             ->regexIs('noDelimiter', '(?i)^'.addslashes(implode('|', $classes)).'\\$');
+             ->regexIs('noDelimiter', '(?i)^' . addslashes(implode('|', $classes)) . '\\$');
         $this->prepareQuery();
     }
 }

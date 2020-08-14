@@ -28,7 +28,7 @@ class MakeClassConstantDefinition extends Complete {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // X::Constante -> class X { const Constante}
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
              ->hasNoIn('DEFINITION')

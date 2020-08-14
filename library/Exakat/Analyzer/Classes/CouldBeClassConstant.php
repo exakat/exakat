@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeClassConstant extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private }
         $this->atomIs('Ppp')
              ->hasClass()

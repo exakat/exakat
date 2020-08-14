@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extparsekit extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'parsekit.ini';
 
         parent::analyze();

@@ -169,7 +169,7 @@ class Manual extends Reports {
        return $md;
     }
 
-    private function flatten(array $array) :array {
+    private function flatten(array $array): array {
         return implode("\n+ ", $array);
     }
 

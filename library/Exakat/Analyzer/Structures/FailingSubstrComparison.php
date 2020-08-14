@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class FailingSubstrComparison extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // substr($a, 0, 3) === 'abcdef';
         $this->atomIs('Comparison')
              ->codeIs(array('==', '==='), self::TRANSLATE, self::CASE_SENSITIVE)

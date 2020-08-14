@@ -32,7 +32,7 @@ class ExitUsage extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // while (list($a, $b) = each($c)) {}
         $this->atomIs('Exit')
              ->goToInstruction('Ifthen')

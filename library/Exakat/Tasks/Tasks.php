@@ -41,7 +41,7 @@ abstract class Tasks {
     public static $semaphorePort  = null;
 
     protected $rulesets = null;
-    
+
     private $snitch = null;
     private $pid = 0;
     private $path = '';
@@ -124,7 +124,7 @@ abstract class Tasks {
         }
     }
 
-    protected function checkTokenLimit() : void {
+    protected function checkTokenLimit(): void {
         $nb_tokens = $this->datastore->getHash('tokens');
 
         if ($nb_tokens > $this->config->token_limit) {
@@ -135,14 +135,14 @@ abstract class Tasks {
 
     abstract public function run();
 
-    protected function cleanLogForProject() : void {
+    protected function cleanLogForProject(): void {
         $logs = glob("{$this->config->log_dir}/*");
         foreach($logs as $log) {
             unlink($log);
         }
     }
 
-    protected function addSnitch(array $values = array()) : void {
+    protected function addSnitch(array $values = array()): void {
         if ($this->snitch === null) {
             $this->snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $this->pid = getmypid();
@@ -153,7 +153,7 @@ abstract class Tasks {
         file_put_contents($this->path, json_encode($values));
     }
 
-    protected function removeSnitch() : void {
+    protected function removeSnitch(): void {
         if ($this->path !== null) {
             unlink($this->path);
         }

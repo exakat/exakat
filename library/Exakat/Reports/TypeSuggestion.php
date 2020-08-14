@@ -26,7 +26,7 @@ namespace Exakat\Reports;
 class TypeSuggestion extends Reports {
     const FILE_EXTENSION = 'html';
     const FILE_FILENAME  = 'typehint.suggestion';
-    
+
     const NO_SUGGESTION = '&nbsp;';
 
     protected $finalName     = null;
@@ -75,7 +75,7 @@ class TypeSuggestion extends Reports {
                        'returnTyped'     => 0,
                        'returnSugg'      => 0,
                         );
-        
+
         $html = array();
         $complete = array();
 
@@ -87,13 +87,13 @@ class TypeSuggestion extends Reports {
                 $list = self::NO_SUGGESTION;
                 ++$stats['propertiesTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['property']])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$row['property']], function($x) : bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$row['property']], function ($x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['propertiesSugg'];
             } else {
                 $list = self::NO_SUGGESTION;
             }
-            
+
             $fullnspath = explode('::', $row['fullnspath'])[0];
             $className = $this->makeClassName($row['type'], $row['class'], $fullnspath);
             $classId = $this->getClassId($className);
@@ -117,7 +117,7 @@ HTML;
                 $list = self::NO_SUGGESTION;
                 ++$stats['parametersTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['argument']])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function($x) : bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function ($x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['parametersSugg'];
             } else {
@@ -150,7 +150,7 @@ HTML;
                 $list = self::NO_SUGGESTION;
                 ++$stats['returnTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['method']])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$row['method']], function($x) : bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$row['method']], function ($x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['returnSugg'];
             } else {
@@ -179,29 +179,29 @@ HTML;
                 $classCount += count($returnAndArgs);
 
                 $first = array_shift($returnAndArgs);
-                $returnAndArgs = implode(PHP_EOL, 
-                                         array_merge(array('<td rowspan="'.(count($returnAndArgs) + 1).'" style="background-color: '.$colorMethod.'; border: black 1px solid; vertical-align: top">'
-                                                           .( $methodName === 'Properties' ?  $methodName : ' function '.$methodName.'()')
-                                                           .( $complete[$className][$methodName] ? ' &#x2705; ' : '')
-                                                            .'</td>'.$first), 
-                                             array_map(function($x) { return '<tr>'.$x.'</tr>';}, $returnAndArgs))
+                $returnAndArgs = implode(PHP_EOL,
+                                         array_merge(array('<td rowspan="' . (count($returnAndArgs) + 1) . '" style="background-color: ' . $colorMethod . '; border: black 1px solid; vertical-align: top">'
+                                                           . ( $methodName === 'Properties' ? $methodName : ' function ' . $methodName . '()')
+                                                           . ( $complete[$className][$methodName] ? ' &#x2705; ' : '')
+                                                            . '</td>' . $first),
+                                             array_map(function ($x) { return '<tr>' . $x . '</tr>';}, $returnAndArgs))
                                         );
             }
 
             $first = array_shift($methods);
-            $status = array_reduce($complete[$className], function (bool $carry = true, bool $item) : bool { return $carry && $item; }, true);
-            $methods = '<tr >'.implode(PHP_EOL, 
-                               array_merge(array('<td style="background-color: '.$colorClass.'; vertical-align: top; border: border:black 1px solid;" rowspan="'.$classCount.'">'
-                                                .$this->classes[$className]
-                                                .( $status ? ' &#x2705; ' : '') // Possibly, that should be moved above, just after the name of the class
-                                                .'</td>'.$first), 
-                                          array_map(function($x) { return '<tr>'.$x.'</tr>';}, $methods))
-                               ).'</tr>';
+            $status = array_reduce($complete[$className], function (bool $carry = true, bool $item): bool { return $carry && $item; }, true);
+            $methods = '<tr >' . implode(PHP_EOL,
+                               array_merge(array('<td style="background-color: ' . $colorClass . '; vertical-align: top; border: border:black 1px solid;" rowspan="' . $classCount . '">'
+                                                . $this->classes[$className]
+                                                . ( $status ? ' &#x2705; ' : '') // Possibly, that should be moved above, just after the name of the class
+                                                . '</td>' . $first),
+                                          array_map(function ($x) { return '<tr>' . $x . '</tr>';}, $methods))
+                               ) . '</tr>';
 
         }
         $html[] = '</table>';
 
-        $statsHtml = array('<table style="border:black 1px solid; border-collaspe: collapse">' . 
+        $statsHtml = array('<table style="border:black 1px solid; border-collaspe: collapse">' .
                 '<tr>
                     <th>Categories</th>
                     <th>Total</th>
@@ -210,7 +210,7 @@ HTML;
                     <th>Suggestions</th>
                 </tr>',
                 );
-        foreach(['properties', 'parameters', 'return'] as $category) {
+        foreach(array('properties', 'parameters', 'return') as $category) {
             $perc = number_format($stats["{$category}Typed"] * 100 / $stats["{$category}Total"]);
 
             $statsHtml[] = "<tr>
@@ -224,7 +224,7 @@ HTML;
         $statsHtml[] = '</table>';
         $statsHtml[] = '<p />';
 
-        $html = implode(PHP_EOL, $statsHtml).'<table style="border:black 1px solid; border-collaspe: collapse">' . 
+        $html = implode(PHP_EOL, $statsHtml) . '<table style="border:black 1px solid; border-collaspe: collapse">' .
                 '<tr>
                     <th>Class</th>
                     <th>Method</th>
@@ -244,7 +244,7 @@ HTML;
         if (empty($array)) {
             return '&nbsp;';
         }
-        
+
         $translation = array('CouldBeString'    => 'string',
                               'CouldBeBoolean'  => 'bool',
                               'CouldBeNull'     => 'null',
@@ -256,18 +256,18 @@ HTML;
                               'CouldBeVoid'     => 'void',
                               'CouldBeInt'      => 'int',
                               'CouldBeCIT'      => 'Class, Interface',
-                              
+
                               );
-        
+
         foreach($array as &$item) {
             $item = $translation[$item] ?? $item;
         }
         unset($item);
-        
+
         return '<dl><dd>' . implode("</dd>\n<dd>", $array) . '</dd></dl>';
     }
-    
-    private function getClassId(string $description) : int {
+
+    private function getClassId(string $description): int {
         if (($c = array_search($description, $this->classes)) === false) {
             $c = count($this->classes);
             $this->classes[$c] = $description;
@@ -275,9 +275,9 @@ HTML;
 
         return $c;
     }
-    
-    private function makeClassName(string $type, string $name, string $fullnspath) : string {
-        return $type.' '.$name.'<br /><div style="color: gray">'.$fullnspath.'</div>';
+
+    private function makeClassName(string $type, string $name, string $fullnspath): string {
+        return $type . ' ' . $name . '<br /><div style="color: gray">' . $fullnspath . '</div>';
     }
 }
 

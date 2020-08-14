@@ -28,8 +28,8 @@ class TooManyFinds extends Analyzer {
     protected $minimumFinds = 5;
     protected $findSuffix   = '';
     protected $findPrefix   = 'find';
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         // class x { function findY() {}}
         // suffix version
         if (!empty($this->findSuffix)) {
@@ -41,9 +41,9 @@ class TooManyFinds extends Analyzer {
                          ->outIs('METHOD')
                          ->atomIs('Method')
                          ->outIs('NAME')
-                         ->regexIs('fullcode', '(?i)('.implode('|', $suffixes).')\\$')
+                         ->regexIs('fullcode', '(?i)(' . implode('|', $suffixes) . ')\\$')
                          ->count()
-                         ->raw('is(gte('.$this->minimumFinds.'))')
+                         ->raw('is(gte(' . $this->minimumFinds . '))')
                  );
             $this->prepareQuery();
         }
@@ -59,9 +59,9 @@ class TooManyFinds extends Analyzer {
                          ->outIs('METHOD')
                          ->atomIs('Method')
                          ->outIs('NAME')
-                         ->regexIs('fullcode', '^(?i)('.implode('|', $prefixes).').+?')
+                         ->regexIs('fullcode', '^(?i)(' . implode('|', $prefixes) . ').+?')
                          ->count()
-                         ->raw('is(gte('.$this->minimumFinds.'))')
+                         ->raw('is(gte(' . $this->minimumFinds . '))')
                  );
             $this->prepareQuery();
         }

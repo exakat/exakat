@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extsnmp extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'snmp.ini';
 
         parent::analyze();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class Blind extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $blinds = array('Variable', 'Staticproperty', 'Member', 'Array');
 
 // foreach($source as $blind)

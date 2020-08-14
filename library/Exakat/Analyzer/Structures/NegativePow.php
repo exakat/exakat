@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NegativePow extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // -3 * 2 == -(3 ** 2) == 9 (not -9)
         $this->atomIs('Sign')
              ->codeIs('-')

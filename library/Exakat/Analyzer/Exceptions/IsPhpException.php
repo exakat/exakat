@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class IsPhpException extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $exceptions = $this->loadIni('php_exception.ini', 'classes');
         $exceptions = makeFullNsPath($exceptions);
 

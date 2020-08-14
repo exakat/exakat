@@ -86,9 +86,9 @@ class SplitGraphson extends Loader {
         }
 
         display("Init finalize\n");
-        
+
         $this->saveProperties();
-        
+
         $begin = microtime(true);
         $query = 'g.V().hasLabel("Project").id();';
         $res = $this->graphdb->query($query);
@@ -184,7 +184,7 @@ SQL;
     private function saveProperties() {
         if (file_exists($this->pathProperties)) {
             $count = count(file($this->pathProperties));
-            
+
             if ($count === 0) {
                 $this->log("properties\t$count\t0");
 
@@ -347,7 +347,7 @@ GREMLIN;
         file_put_contents($this->pathLink, implode(PHP_EOL, $links) . PHP_EOL, \FILE_APPEND);
         foreach($properties as $property => $targets) {
             if (!empty($targets)) {
-                file_put_contents($this->pathProperties, $property.'-'.implode(',', $targets) . PHP_EOL, \FILE_APPEND);
+                file_put_contents($this->pathProperties, $property . '-' . implode(',', $targets) . PHP_EOL, \FILE_APPEND);
             }
         }
 

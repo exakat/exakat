@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgnupg extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'gnupg.ini';
 
         parent::analyze();

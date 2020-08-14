@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class Octal extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Integer')
              ->regexIs('fullcode', '^[-+]*0[0-9]+\\$');
         $this->prepareQuery();

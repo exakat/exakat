@@ -26,12 +26,12 @@ namespace Exakat\Query\DSL;
 class IsNotNullable extends DSL {
     public function run(): Command {
         switch(func_num_args()) {
-            case 1: 
+            case 1:
                 list($nullable) = func_get_args();
                 $nullable = in_array($nullable, array(IsNullable::EXPLICIT, IsNullable::IMPLICIT), \STRICT_COMPARISON) ? $nullable : IsNullable::IMPLICT;
                 break;
 
-            case 0: 
+            case 0:
                 $nullable = IsNullable::IMPLICIT;
                 break;
 

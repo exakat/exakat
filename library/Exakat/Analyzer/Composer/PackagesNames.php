@@ -28,10 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class PackagesNames extends Analyzer {
     private $report = null;
 
-    public function analyze() : void {
+    public function analyze(): void {
     }
 
-    public function toArray() : array {
+    public function toArray(): array {
         if ($this->report === null) {
             return $this->hasResult();
         }

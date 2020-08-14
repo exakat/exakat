@@ -33,7 +33,7 @@ class Email extends AnalyzerResults {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $x = 'a@b.com';
         $this->atomIs(self::STRINGS_LITERALS)
              ->hasNoIn('CONCAT')

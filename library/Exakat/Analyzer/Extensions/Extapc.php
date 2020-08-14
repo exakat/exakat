@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extapc extends Extension {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'apc.ini';
 
         parent::analyze();

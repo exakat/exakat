@@ -36,7 +36,7 @@ class Atom implements AtomInterface {
     public $line         = Load::NO_LINE;
     public $token        = '';
     public $rank         = ''; // Not 0
-    public $rankName     = ''; 
+    public $rankName     = '';
     public $alternative  = Load::NOT_ALTERNATIVE;
     public $reference    = Load::NOT_REFERENCE;
     public $heredoc      = false;
@@ -89,7 +89,7 @@ class Atom implements AtomInterface {
         die("Fatal error : trying to get '$name' property on " . self::class);
     }
 
-    public function toArray() : array {
+    public function toArray(): array {
         if (strlen($this->code) > self::STRING_MAX_SIZE) {
             $this->code = substr($this->code, 0, self::STRING_MAX_SIZE) . '...[ total ' . strlen($this->code) . ' chars]';
         }
@@ -135,7 +135,7 @@ class Atom implements AtomInterface {
         return (array) $this;
     }
 
-    public function toGraphsonLine(int &$id) : stdClass {
+    public function toGraphsonLine(int &$id): stdClass {
         $integerValues = array('args_max',
                                'args_min',
                                'count',
@@ -146,7 +146,7 @@ class Atom implements AtomInterface {
                              );
 
         $properties = array();
-        
+
         // The array list the properties that will be kept (except for default)
         $atomsValues = array('Sequence' => array('code'        => 0,
                                                  'line'        => 0,
@@ -156,12 +156,12 @@ class Atom implements AtomInterface {
                                                  ),
 
                              // This one is used to skip the values configure
-                             'to_skip'  => array('id'          => 0, 
-                                                 'atom'        => 0, 
-                                                 'noscream'    => 0, 
-                                                 'reference'   => 0, 
-                                                 'variadic'    => 0, 
-                                                 'heredoc'     => 0, 
+                             'to_skip'  => array('id'          => 0,
+                                                 'atom'        => 0,
+                                                 'noscream'    => 0,
+                                                 'reference'   => 0,
+                                                 'variadic'    => 0,
+                                                 'heredoc'     => 0,
                                                  'flexible'    => 0,
                                                  'constant'    => 0,
                                                  'enclosing'   => 0,
@@ -188,7 +188,7 @@ class Atom implements AtomInterface {
 
         foreach($list as $l => $value) {
             if ($value === null) { continue; }
-            
+
             if (in_array($l, $falseValues) &&
                 !$value) {
                 continue;
@@ -225,13 +225,13 @@ class Atom implements AtomInterface {
         return (object) $object;
     }
 
-    public function boolProperties() : array {
+    public function boolProperties(): array {
         $return = array();
         foreach(array(
-                 'noscream', 
-                 'reference', 
-                 'variadic', 
-                 'heredoc', 
+                 'noscream',
+                 'reference',
+                 'variadic',
+                 'heredoc',
                  'flexible',
                  'constant',
                  'enclosing',
@@ -256,7 +256,7 @@ class Atom implements AtomInterface {
         return $return;
     }
 
-    private function protectString(string $code) : string {
+    private function protectString(string $code): string {
         return addcslashes($code , '\\"');
     }
 

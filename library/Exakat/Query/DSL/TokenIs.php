@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class TokenIs extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($token) = func_get_args();
 
         assert($this->assertTokens($token));

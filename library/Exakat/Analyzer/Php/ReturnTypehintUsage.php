@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ReturnTypehintUsage extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->atomIsNot('Void')

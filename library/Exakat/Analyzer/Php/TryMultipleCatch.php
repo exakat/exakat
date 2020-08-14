@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class TryMultipleCatch extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // try {} catch (E1 $e) {}catch (E2 $e) {}
         $this->atomIs('Try')
              ->filter(

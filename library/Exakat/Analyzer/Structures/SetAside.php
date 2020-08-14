@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SetAside extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $b = $a; $a = 3; $a = $b;
         // local variable
         $this->atomIs(self::FUNCTIONS_ALL)

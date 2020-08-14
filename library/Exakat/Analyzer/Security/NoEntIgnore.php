@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class NoEntIgnore extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Just don't use this one
         $this->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs('\\ENT_IGNORE', self::CASE_SENSITIVE)

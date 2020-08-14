@@ -32,7 +32,7 @@ class ImplementIsForInterface extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::CLASSES_TRAITS)
              ->values('fullnspath')
              ->unique();

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedClass extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
 
         $this->atomIs(self::CLASSES_ALL)
              ->analyzerIsNot('self')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,17 +22,16 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
 
 class FossilizedMethods extends AnalyzerHashResults {
     protected $analyzerName = 'FossilizedMethods';
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->hasNoOut('OVERWRITE')

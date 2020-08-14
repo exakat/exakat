@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseArrayUnique extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //foreach ($a as $b) {
         //    if (!in_array($b, $c)) {
         //        $c[] = $b;

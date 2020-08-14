@@ -25,11 +25,11 @@ namespace Exakat\Analyzer\Complete;
 use Exakat\Query\DSL\FollowParAs;
 
 class CreateDefaultValues extends Complete {
-    public function dependsOn() : array { 
+    public function dependsOn(): array {
         return array( 'Complete/OverwrittenProperties',
                     );
     }
-    public function analyze() : void {
+    public function analyze(): void {
 
         // Link initial values for containers
         $this->atomIs(array('Variabledefinition',
@@ -80,7 +80,7 @@ class CreateDefaultValues extends Complete {
              ->outIs('DEFINITION')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison', self::WITHOUT_CONSTANTS)
-             ->codeIs(array('==', '!=', '===', '!==', ), self::TRANSLATE, self::CASE_SENSITIVE) 
+             ->codeIs(array('==', '!=', '===', '!==', ), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(array('Integer', 'String'), self::WITH_CONSTANTS)
              ->addEFrom('DEFAULT', 'first');

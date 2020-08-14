@@ -191,7 +191,7 @@ abstract class Dump {
         $total  = 0;
         foreach($results as $change) {
             $first = array_shift($change);
-            $values[] = '('. (empty($first) ? 'null' : $first) . ',' . makeList(array_map(array($this->sqlite, 'escapeString'), $change), "'" ). ')';
+            $values[] = '(' . (empty($first) ? 'null' : $first) . ',' . makeList(array_map(array($this->sqlite, 'escapeString'), $change), "'" ) . ')';
             // str_replace is an ugly hack for id, which should be null.
             ++$total;
         }

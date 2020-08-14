@@ -31,7 +31,7 @@ class IncomingValues extends Analyzer {
         return $incomingValues;
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // empty on purpose, all is done in dependsOn()
 
     }

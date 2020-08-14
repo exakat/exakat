@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class MinusOneOnError extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = $this->loadIni('functions_minus_one.ini', 'functions');
 
         // if (openssl_verify()) {}

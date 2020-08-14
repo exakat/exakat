@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extopencensus extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'opencensus.ini';
 
         parent::analyze();

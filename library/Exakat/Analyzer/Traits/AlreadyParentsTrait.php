@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class AlreadyParentsTrait extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class a { use t; }; class b extends a { use t;}
         // trait a { use t; }; class b extends a { use t;}
         $this->atomIs(self::CIT) // Interface is too many, but won't get use expression

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ShellUsage extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // backtick shell calls
         $this->atomIs('Shell');
         $this->prepareQuery();

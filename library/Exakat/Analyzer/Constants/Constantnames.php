@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class Constantnames extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // with define
         $this->atomIs('Defineconstant')
              ->outIs('NAME')

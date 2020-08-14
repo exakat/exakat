@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class AssignedInOneBranch extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // if() {$b = 1; } else { }
         $this->atomIs('Ifthen')
              ->isNot('token', 'T_ELSEIF')

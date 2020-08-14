@@ -31,7 +31,7 @@ class IsInterfaceMethod extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // interface extended in the local class
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->analyzerIsNot('self')
@@ -50,7 +50,7 @@ class IsInterfaceMethod extends Analyzer {
                 // may be the case for Traversable : interface without methods
                 continue;
             }
-            
+
             foreach($methods as $method) {
                 array_collect_by($hash, $method->name, $interface);
             }

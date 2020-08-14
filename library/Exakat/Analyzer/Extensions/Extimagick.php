@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extimagick extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'imagick.ini';
 
         parent::analyze();

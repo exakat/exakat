@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ForeachSourceValue extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $a)
         // foreach($a as $b => $a)
         $this->atomIs('Foreach')

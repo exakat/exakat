@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TooManyLocalVariables extends Analyzer {
     protected $tooManyLocalVariableThreshold = 15;
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::FUNCTIONS_ALL)
              // Collect all arguments
              ->raw(<<<GREMLIN

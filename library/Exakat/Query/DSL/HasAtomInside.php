@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class HasAtomInside extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atoms) = func_get_args();
 
         assert($this->assertAtom($atoms));

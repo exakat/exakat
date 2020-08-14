@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ReservedKeywords7 extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $keywords = $this->loadIni('php_reserved_types.ini', 'type');
 
         $this->atomIs(self::CIT)

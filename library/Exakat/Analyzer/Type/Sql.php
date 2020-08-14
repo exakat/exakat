@@ -27,7 +27,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Sql extends AnalyzerResults {
     protected $analyzerName = 'Type/Sql';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $sqlKeywords = $this->loadIni('sqlKeywords.ini', 'keywords');
         $regex = '^(?i)(<<<\\\\w+)?(<<<\'\\\\w+\')?[\\"\']?\\\\s*(' . implode('|', $sqlKeywords) . ') ';
 

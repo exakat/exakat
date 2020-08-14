@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class NoSleep extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // simple call to usleep
         $this->atomFunctionIs(array('\\sleep', '\\usleep'));
         $this->prepareQuery();

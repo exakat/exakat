@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmbstring extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'mbstring.ini';
 
         parent::analyze();

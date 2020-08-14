@@ -31,7 +31,7 @@ class NoLiteralForReference extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $atoms = array('Integer',
                        'Null',
                        'Void',

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\UsedDirective;
 
 class DirectivesUsage extends UsedDirective {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->directives = (array) $this->loadIni('php_directives.ini', 'directives');
 
         parent::analyze();

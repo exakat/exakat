@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -41,19 +41,19 @@ CREATE TABLE classChanges (
                     )
 SQL;
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/OverwrittenProperties',
                      'Complete/OverwrittenMethods',
                     );
     }
 
 
-    public function analyze() : void {
+    public function analyze(): void {
 
         $total = 0;
 
         // Comparing Class constant : values, visibility
-        
+
         // Class constants with different values
          $this->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('NAME')
@@ -234,7 +234,7 @@ GREMLIN
               ->inIs('PPP')
               ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class1')
-              
+
               ->back('first')
               ->outIs('OVERWRITE')
 

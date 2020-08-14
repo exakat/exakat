@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UnsetOrCast extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $mapping = <<<'GREMLIN'
 if (it.get().label() == "Cast") {
     x2 = "(unset)";

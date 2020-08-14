@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extcsprng extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'csprng.ini';
 
         parent::analyze();

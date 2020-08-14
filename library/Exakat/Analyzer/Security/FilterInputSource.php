@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class FilterInputSource extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // filter_input()
         $this->atomFunctionIs(array('\filter_input', '\filter_input_array'))
              ->back('first');

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SignatureTrailingComma extends Analyzer {
     protected $phpVersion = '8.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo($a, $b,) {}
         $this->atomIs(self::FUNCTIONS_ALL)
                 // warning : arrow functions are not like the others

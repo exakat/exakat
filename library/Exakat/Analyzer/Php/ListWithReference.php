@@ -28,7 +28,7 @@ class ListWithReference extends Analyzer {
     protected $phpVersion = '7.3+';
 
     // list($a, &$b) = $c;
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('List')
              ->outIs('ARGUMENT')
              ->is('reference', true)

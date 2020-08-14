@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseDir extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\\dirname')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Magicconstant')

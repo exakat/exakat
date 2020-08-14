@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Password55 extends Analyzer {
     protected $phpVersion = '5.5+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\\crypt');
         $this->prepareQuery();
     }

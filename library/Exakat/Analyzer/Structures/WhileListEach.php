@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class WhileListEach extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // while (list($a, $b) = each($c)) {}
         $this->atomIs('While')
              ->outIs('CONDITION')

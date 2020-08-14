@@ -53,7 +53,7 @@ class Command {
         $this->arguments = $arguments;
     }
 
-    public function setSack(string $default = self::SACK_NONE) : void {
+    public function setSack(string $default = self::SACK_NONE): void {
         assert(in_array($default, array(self::SACK_NONE,
                                         self::SACK_ARRAY,
                                         self::SACK_HASH,
@@ -64,11 +64,11 @@ class Command {
         $this->sack = $default;
     }
 
-    public function getSack() : string {
+    public function getSack(): string {
         return $this->sack;
     }
 
-    public function add(self $other) : self {
+    public function add(self $other): self {
         $this->gremlin   .= ".{$other->gremlin}";
         $this->arguments += $other->arguments;
 

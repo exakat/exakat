@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectMethodCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'CIT method counts';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x {function foo() {} }
         $this->atomIs(self::CIT)
              ->raw('groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m")');

@@ -70,7 +70,7 @@ class SevenZ extends Vcs {
         return $stats;
     }
 
-    public function getStatus() : array {
+    public function getStatus(): array {
         $status = array('vcs'       => '7z',
                         'updatable' => false
                        );

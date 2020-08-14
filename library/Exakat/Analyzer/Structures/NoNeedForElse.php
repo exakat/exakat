@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoNeedForElse extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $breaks = array('Return', 'Break', 'Continue', 'Break');
         // if () { return; } else  { no-return; }
         $this->atomIs('Ifthen')

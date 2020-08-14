@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extxmlwriter extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'xmlwriter.json';
 
         parent::analyze();

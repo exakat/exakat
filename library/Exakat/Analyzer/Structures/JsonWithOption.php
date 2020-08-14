@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class JsonWithOption extends Analyzer {
     // (array) json_decode()
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\json_decode')
              ->inIs('CAST')
              ->tokenIs(array('T_OBJECT_CAST', 'T_ARRAY_CAST'));

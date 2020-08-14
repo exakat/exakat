@@ -32,7 +32,7 @@ class InsufficientTypehint extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo(i $a) { $i->a(); } // but interface i has no function a()
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

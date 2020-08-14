@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectForeachFavorite extends AnalyzerArrayHashResults {
     protected $analyzerName = 'Foreach Names';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Foreach, values only
         $this->atomIs('Foreach')
              ->outIs('VALUE')

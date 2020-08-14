@@ -39,7 +39,7 @@ class Anonymize extends Tasks {
     private $stringsNames = array();
     private $strings = 'A';
 
-    public function run() : void {
+    public function run(): void {
 
         if (($file = $this->config->file) === 'stdout') {
             $dir = $this->config->dirname;
@@ -114,7 +114,7 @@ class Anonymize extends Tasks {
         display( 'Processing file ' . $file . ' into ' . $file . ".anon\n");
     }
 
-    private function processFile(string $file, string $anonFile = null) : bool {
+    private function processFile(string $file, string $anonFile = null): bool {
         $php = file_get_contents($file);
         $tokens = token_get_all($php);
         if (count($tokens) < 3) {
@@ -398,7 +398,7 @@ class Anonymize extends Tasks {
         return true;
     }
 
-    private function checkCompilation($file) : bool {
+    private function checkCompilation($file): bool {
         $res = shell_exec($this->config->php . ' -l ' . $file . ' 2>&1') ?? '';
         //@todo : differentiate fatal error and non-fatal ones.
         return substr($res, 0, 28) == 'No syntax errors detected in';

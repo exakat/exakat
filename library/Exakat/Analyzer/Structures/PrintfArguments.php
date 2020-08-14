@@ -30,7 +30,7 @@ class PrintfArguments extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         //The %2$s contains %1$04d monkeys
         //The %02s contains %-'.3d monkeys
 

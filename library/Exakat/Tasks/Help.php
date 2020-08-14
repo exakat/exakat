@@ -25,7 +25,7 @@ namespace Exakat\Tasks;
 class Help extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() : void {
+    public function run(): void {
         print <<<HELP
 [Usage] :   php {$this->config->executable} version (default)
             php {$this->config->executable} doctor

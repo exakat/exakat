@@ -37,7 +37,7 @@ class UndefinedClasses extends Analyzer {
                      );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $omitted = array('Classes/IsExtClass',
                          'Composer/IsComposerNsname',
                          'Modules/DefinedClasses',

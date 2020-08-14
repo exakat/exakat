@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class ShortOpenTagRequired extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // This is not actually done here....
     }
 
-    public function getArray() : array {
+    public function getArray(): array {
         $r = $this->datastore->getRow('shortopentag');
 
         $report = array();

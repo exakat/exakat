@@ -29,7 +29,7 @@ class Type extends Analyzer {
 
     protected $type = null;
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs($this->type);
         $this->prepareQuery();
     }

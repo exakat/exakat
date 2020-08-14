@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\FunctionUsage;
 class DefinedFunctions extends FunctionUsage {
     protected $functions = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = $this->config->dev->loadIni('functions.ini', 'functions');
 
         if (empty($functions)) {

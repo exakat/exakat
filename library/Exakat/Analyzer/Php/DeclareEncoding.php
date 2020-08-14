@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class DeclareEncoding extends Analyzer {
     // Declare( encoding = 'UTF-8')
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('File')
              ->outIs('FILE')
              ->outIs('EXPRESSION')

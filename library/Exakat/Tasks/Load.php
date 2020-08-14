@@ -1030,8 +1030,8 @@ class Load extends Tasks {
                     $atom = 'This';
                 } elseif (in_array($this->tokens[$this->id + 1][1], $this->PHP_SUPERGLOBALS, \STRICT_COMPARISON)) {
                             $atom = 'Phpvariable';
-                } elseif (in_array($this->tokens[$this->id + 2][0], array($this->phptokens::T_OBJECT_OPERATOR, 
-                                                                          $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR, 
+                } elseif (in_array($this->tokens[$this->id + 2][0], array($this->phptokens::T_OBJECT_OPERATOR,
+                                                                          $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR,
                                                                          ), \STRICT_COMPARISON)) {
                     $atom = 'Variableobject';
                 } elseif ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_BRACKET) {
@@ -1047,8 +1047,8 @@ class Load extends Tasks {
                     $this->calls->addCall('class', $class->fullnspath, $variable);
                 }
 
-                if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
-                                                                    $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR, 
+                if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OBJECT_OPERATOR,
+                                                                    $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR,
                                                                     ), \STRICT_COMPARISON)) {
                     $property = $this->addAtom('Member', $this->id);
 
@@ -1732,7 +1732,7 @@ class Load extends Tasks {
             $virtual->code         = mb_strtolower($missing);
             $virtual->line         = -1;
             $this->addLink($currentClass, $virtual, 'METHOD');
-            // TODO : may be MAGICMETHOD ? 
+            // TODO : may be MAGICMETHOD ?
 
             foreach($this->currentMethodsCalls[$missing] as $member) {
                 $this->addLink($virtual, $member, 'DEFINITION');
@@ -2021,7 +2021,7 @@ class Load extends Tasks {
 
             if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
                 $atom = 'Newcall';
-            } else { 
+            } else {
                 $atom = 'Nsname';
             }
         } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NAME_FULLY_QUALIFIED) {
@@ -2035,7 +2035,7 @@ class Load extends Tasks {
                 $atom = 'Boolean';
             } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('\\null'), \STRICT_COMPARISON)) {
                 $atom = 'Null';
-            } else { 
+            } else {
                 $atom = 'Nsname';
             }
         } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NAME_RELATIVE) {
@@ -2045,24 +2045,24 @@ class Load extends Tasks {
 
             if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
                 $atom = 'Newcall';
-            } else { 
+            } else {
                 $atom = 'Nsname';
             }
         } else {
             $token = 'T_NS_SEPARATOR';
-    
+
             if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR                   &&
                 $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                         &&
                 in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'), \STRICT_COMPARISON) &&
                 $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR
                 ) {
                 $atom = 'Boolean';
-    
+
             } elseif ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR &&
                       $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
                       mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'            &&
                       $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
-    
+
                 $atom = 'Null';
             } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
                 $atom = 'Parent';
@@ -2072,7 +2072,7 @@ class Load extends Tasks {
                       $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING       &&
                       mb_strtolower($this->tokens[$this->id + 1][1]) === 'self'            &&
                       $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR ) {
-    
+
                 $atom = 'Self';
             } elseif ($this->contexts->isContext(Context::CONTEXT_NEW)) {
                 $atom = 'Newcall';
@@ -2080,40 +2080,40 @@ class Load extends Tasks {
                 $atom = 'Nsname';
                 $token = 'T_STRING';
             }
-    
+
             $fullcode = array();
-    
+
             if ($this->tokens[$this->id][0] === $this->phptokens::T_STRING) {
                 $fullcode[] = $this->tokens[$this->id][1];
                 ++$this->id;
-    
+
                 $absolute = self::NOT_ABSOLUTE;
             } elseif ($this->tokens[$this->id - 1][0] === $this->phptokens::T_NAMESPACE) {
                 $fullcode[] = $this->tokens[$this->id - 1][1];
-    
+
                 $absolute = self::NOT_ABSOLUTE;
             } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NS_SEPARATOR) {
                 $fullcode[] = '';
-    
+
                 $absolute = self::ABSOLUTE;
             } else {
                 $fullcode[] = $this->tokens[$this->id][1];
                 ++$this->id;
-    
+
                 $absolute = self::NOT_ABSOLUTE;
             }
-    
+
             while ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR    &&
                    $this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_CURLY
                    ) {
                 ++$this->id; // skip \
                 $fullcode[] = $this->tokens[$this->id][1];
-    
+
                 // Go to next
                 ++$this->id; // skip \
                 $token = 'T_NS_SEPARATOR';
             }
-    
+
             // Back up a bit
             --$this->id;
         }
@@ -2518,11 +2518,11 @@ class Load extends Tasks {
             while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON)) {
                 $initialId = $this->id;
                 ++$argsMax;
-                
+
                 // named parameters PHP 8.0
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING && 
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING &&
                     $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON ) {
-                    ++$this->id; 
+                    ++$this->id;
                     $rankName = $this->tokens[$this->id][1];
                     ++$this->id; // skip :
                 }
@@ -2540,9 +2540,9 @@ class Load extends Tasks {
                 }
                 $this->popExpression();
                 if (!empty($rankName)) {
-                    $index->rankName = '$'.$rankName;
+                    $index->rankName = '$' . $rankName;
                     $rank_name = '';
-                    $index->fullcode = $rankName.' : '.$index->fullcode;
+                    $index->fullcode = $rankName . ' : ' . $index->fullcode;
                 }
 
                 while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
@@ -2904,7 +2904,7 @@ class Load extends Tasks {
         return $namecall;
     }
 
-    private function processFunctioncall(bool $getFullnspath = self::WITH_FULLNSPATH) : AtomInterface {
+    private function processFunctioncall(bool $getFullnspath = self::WITH_FULLNSPATH): AtomInterface {
         $name = $this->popExpression();
         ++$this->id; // Skipping the name, set on (
 
@@ -3087,14 +3087,14 @@ class Load extends Tasks {
         ++$this->id;
         $this->popExpression();
         $plusplus = $this->addAtom('Postplusplus', $this->id);
-    
+
         $this->addLink($plusplus, $previous, 'POSTPLUSPLUS');
-    
+
         $plusplus->fullcode = $previous->fullcode . $this->tokens[$this->id][1];
-    
+
         $this->pushExpression($plusplus);
         $this->runPlugins($plusplus, array('POSTPLUSPLUS' => $previous));
-    
+
         $this->checkExpression();
 
         return $plusplus;
@@ -3105,9 +3105,9 @@ class Load extends Tasks {
         $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'PREPLUSPLUS');
         $operator = $this->popExpression();
         $this->pushExpression($operator);
-    
+
         $this->checkExpression();
-    
+
         return $operator;
     }
 
@@ -3866,7 +3866,7 @@ class Load extends Tasks {
     // This process Case and Default inside a Match (also, trailing voids)
     private function processMatchCase(): AtomInterface {
         $current = $this->id;
-        
+
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
             return $this->addAtomVoid();
         }
@@ -3959,7 +3959,7 @@ class Load extends Tasks {
             ++$this->id; // Skip :
         }
 
-        $case->fullcode = $this->tokens[$current][1] . ' '. $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
+        $case->fullcode = $this->tokens[$current][1] . ' ' . $item->fullcode . ' : ' . self::FULLCODE_SEQUENCE . ' ';
 
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY,
                                                             $this->phptokens::T_CASE,
@@ -4553,7 +4553,7 @@ class Load extends Tasks {
         $namespace = $this->addAtom('Namespace', $current);
         $this->makePhpdoc($namespace);
         $this->addLink($namespace, $name, 'NAME');
-        $this->setNamespace($name->fullcode === " " ? self::NO_NAMESPACE : $name->fullcode);
+        $this->setNamespace($name->fullcode === ' ' ? self::NO_NAMESPACE : $name->fullcode);
 
         // Here, we make sure namespace is encompassing the next elements.
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
@@ -4958,8 +4958,8 @@ class Load extends Tasks {
         } elseif (in_array($this->tokens[$this->id][1], $this->PHP_SUPERGLOBALS,
                 \STRICT_COMPARISON)) {
             $atom = 'Phpvariable';
-        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
-                                                                  $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR, 
+        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OBJECT_OPERATOR,
+                                                                  $this->phptokens::T_NULLSAFE_OBJECT_OPERATOR,
                                                                  ), \STRICT_COMPARISON)) {
             $atom = 'Variableobject';
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET) {
@@ -6101,9 +6101,9 @@ class Load extends Tasks {
     private function processAttribute(): AtomInterface {
         $attribute = $this->processNext();
         $this->popExpression();
-    
+
         $attribute->fullcode = '@@ ' . $attribute->fullcode;
-    
+
         $this->attributes[] = $attribute;
 
         return $attribute;
@@ -6417,7 +6417,7 @@ class Load extends Tasks {
     }
 
     private function saveFiles(): void {
-        $this->loader->saveFiles($this->config->tmp_dir, $this->atoms, $this->links); 
+        $this->loader->saveFiles($this->config->tmp_dir, $this->atoms, $this->links);
         $this->reset();
     }
 
@@ -6473,7 +6473,7 @@ class Load extends Tasks {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
             return;
-        } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY',), \STRICT_COMPARISON)) {
+        } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', ), \STRICT_COMPARISON)) {
             // For language structures, it is always in global space, like eval or list
             $apply->fullnspath = '\\' . mb_strtolower($name->code);
             return;
@@ -6483,7 +6483,7 @@ class Load extends Tasks {
             if ($type === 'const') {
                 array_shift($details); // namespace
                 $const = array_pop($details);
-                $fullnspath = mb_strtolower(implode('\\', $details)).'\\'.$const;
+                $fullnspath = mb_strtolower(implode('\\', $details)) . '\\' . $const;
             } else {
                 array_shift($details); // namespace
                 $fullnspath = '\\' . mb_strtolower(implode('\\', $details));

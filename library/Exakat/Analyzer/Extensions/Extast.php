@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extast extends Extension {
     protected $phpVersion = '7.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'ast.ini';
 
         parent::analyze();

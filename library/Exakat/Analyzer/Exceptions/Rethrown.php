@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class Rethrown extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // try {} catch (Exception $e) { throw $e; }
         $this->atomIs('Try')
              ->outIs('CATCH')

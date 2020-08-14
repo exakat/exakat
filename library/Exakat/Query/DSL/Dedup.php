@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class Dedup extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         if (func_num_args() === 1) {
             list($by) = func_get_args();
         } else {

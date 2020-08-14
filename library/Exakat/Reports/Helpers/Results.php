@@ -224,7 +224,7 @@ class Results {
         $this->values = array_slice($this->values, $begin, $end);
     }
 
-    public function filter(Closure $f) : self {
+    public function filter(Closure $f): self {
         if ($this->values === null) {
             $this->load();
         }
@@ -234,28 +234,28 @@ class Results {
         return $this;
     }
 
-    public function orderBy(string $k) : self {
+    public function orderBy(string $k): self {
         if ($this->values === null) {
             $this->load();
         }
 
-        $f = function(array $a, array $b) use ($k) : int { return $a[$k] <=> $b[$k]; };
-        usort($this->values, $f);
-        
-        return $this;
-    }
-
-    public function order(Closure $f) : self {
-        if ($this->values === null) {
-            $this->load();
-        }
-
+        $f = function (array $a, array $b) use ($k): int { return $a[$k] <=> $b[$k]; };
         usort($this->values, $f);
 
         return $this;
     }
 
-    public function map(Closure $f) : self {
+    public function order(Closure $f): self {
+        if ($this->values === null) {
+            $this->load();
+        }
+
+        usort($this->values, $f);
+
+        return $this;
+    }
+
+    public function map(Closure $f): self {
         if ($this->values === null) {
             $this->load();
         }

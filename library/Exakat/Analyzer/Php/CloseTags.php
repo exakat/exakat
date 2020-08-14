@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class CloseTags extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Php')
              ->is('close_tag', true);
         $this->prepareQuery();

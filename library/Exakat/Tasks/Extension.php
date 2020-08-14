@@ -36,7 +36,7 @@ class Extension extends Tasks {
                                  );
 
     //install, list, local, uninstall, upgrade
-    public function run() : void {
+    public function run(): void {
         if (in_array($this->config->subcommand, self::ACTIONS)) {
             $this->{$this->config->subcommand}();
         } else {

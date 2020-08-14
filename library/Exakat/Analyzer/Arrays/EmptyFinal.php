@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class EmptyFinal extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $mapping = <<<'GREMLIN'
 if( it.get().value('fullcode').toString().reverse().take(4).reverse() == ',  )' ||
     it.get().value('fullcode').toString().reverse().take(4).reverse() == ',  ]') {

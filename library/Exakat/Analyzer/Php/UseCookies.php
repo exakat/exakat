@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseCookies extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // with setcookie
         $this->atomFunctionIs(array('\\setcookie', '\\setrawcookie'));
         $this->prepareQuery();

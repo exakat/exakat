@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class Raw extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $args = func_get_args();
         $query = array_shift($args);
 

@@ -25,9 +25,9 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SuspiciousComparison extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // intval($c === 3);
-        // todo : limit this to conditions : ternary, if/then, while/do, 
+        // todo : limit this to conditions : ternary, if/then, while/do,
         $this->atomIs(self::CALLS)
              ->outIsIE('METHOD')
              ->outWithRank('ARGUMENT', 'last')

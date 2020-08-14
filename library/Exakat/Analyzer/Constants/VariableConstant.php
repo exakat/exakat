@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class VariableConstant extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // constant('a')
         $this->atomFunctionIs('\\constant')
              ->outWithRank('ARGUMENT', 0);

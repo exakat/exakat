@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class OneVariableStrings extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('String')
              ->is('count', 1)
              ->outIs('CONCAT')

@@ -32,7 +32,7 @@ class UnusedFunctions extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() {} // no foo();
         $this->atomIs('Function')
              ->fullnspathIsNot('\\__autoload')

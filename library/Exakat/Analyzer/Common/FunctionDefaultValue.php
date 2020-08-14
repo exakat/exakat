@@ -29,7 +29,7 @@ class FunctionDefaultValue extends Analyzer {
     protected $rank = -1; // -1 will prevent rank to be found
     protected $code = 0;  // 0 will prevent code to be found
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Functioncall')
              ->codeIs($this->code)
              ->hasNoIn('METHOD')

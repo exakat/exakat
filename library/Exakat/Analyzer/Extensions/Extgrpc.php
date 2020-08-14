@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Common\Extension;
 
 class Extgrpc extends Extension {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'grpc.ini';
 
         parent::analyze();

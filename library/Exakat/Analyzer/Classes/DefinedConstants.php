@@ -34,7 +34,7 @@ class DefinedConstants extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // constants defined at the class level
         // constants defined at the parents level
         // This includes interfaces

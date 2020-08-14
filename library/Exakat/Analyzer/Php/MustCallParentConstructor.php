@@ -30,7 +30,7 @@ class MustCallParentConstructor extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $fullnspath = array('\spltempfileobject',
                             '\splfileobject',
                             );

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgmagick extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'gmagick.ini';
 
         parent::analyze();

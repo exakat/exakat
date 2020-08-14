@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoIssetWithEmpty extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Logical')
              ->tokenIs('T_BOOLEAN_AND')
              ->outIs('LEFT')

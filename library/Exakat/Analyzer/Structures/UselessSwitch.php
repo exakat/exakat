@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessSwitch extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // switch ($a) { default: 1; }
         $this->atomIs(self::SWITCH_ALL)
              ->outIs('CASES')

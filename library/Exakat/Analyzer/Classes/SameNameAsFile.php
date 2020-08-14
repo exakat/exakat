@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class SameNameAsFile extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(array('Interface', 'Class', 'Trait'))
              ->outIs('NAME')
              ->savePropertyAs('fullcode', 'classname')

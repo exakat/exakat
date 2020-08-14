@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class GlobalOutsideLoop extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { global $x; ...}
         // foreach($a as $b) { static $x; ...}
         $this->atomIs(self::LOOPS_ALL)

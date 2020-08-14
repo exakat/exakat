@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MalformedOctal extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // malformed Octals
         $this->atomIs('Integer')
              ->regexIs('fullcode', '^[+-]?0[0-9]+\$')

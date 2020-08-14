@@ -165,7 +165,7 @@ abstract class Analyzer {
     public const CONSTANTS_ALL    = array('Identifier', 'Nsname');
 
     public const EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Not', 'Parenthesis', 'Functioncall' );
-    public const TYPE_ATOMS       = array('Integer', 'String', 'Arrayliteral', 'Float', 'Boolean', 'Null', 'Closure', 'Concatenation', 'Magicconstant', 'Heredoc', 'Power' , "Staticclass", "Comparison", "Not", 'Addition', 'Multiplication', 'Bitshift', 'Bitoperation', 'Logical');
+    public const TYPE_ATOMS       = array('Integer', 'String', 'Arrayliteral', 'Float', 'Boolean', 'Null', 'Closure', 'Concatenation', 'Magicconstant', 'Heredoc', 'Power' , 'Staticclass', 'Comparison', 'Not', 'Addition', 'Multiplication', 'Bitshift', 'Bitoperation', 'Logical');
     public const BREAKS           = array('Goto', 'Return', 'Break', 'Continue');
 
     const INCLUDE_SELF = false;
@@ -206,11 +206,11 @@ abstract class Analyzer {
         if (strpos($this->analyzer, '\\Common\\') === false) {
             $parameters = $docs->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
-                assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '".($parameter['default'] ?? '')."';\n");
+                assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '" . ($parameter['default'] ?? '') . "';\n");
 
                 if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
                     $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
-                    
+
                     if (!isset($parameter['default'])) {
                         continue;
                     }
@@ -234,7 +234,7 @@ abstract class Analyzer {
                             } elseif (substr($dataFile, -3) === 'ini') {
                                 $this->{$parameter['name']} = $this->loadIni($dataFile);
                             }
-                        }  
+                        }
                         break;
 
                     case 'ini_hash':
@@ -328,7 +328,7 @@ GREMLIN;
             $this->analyzerId = $analyzerId;
         }
 
-        assert(!empty($this->analyzerId), self::class . ' was inited with Id '.var_export($this->analyzerId, true).'. Can\'t save with that!');
+        assert(!empty($this->analyzerId), self::class . ' was inited with Id ' . var_export($this->analyzerId, true) . '. Can\'t save with that!');
 
         return $this->analyzerId;
     }

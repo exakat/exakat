@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class ThrowFunctioncall extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $phpClasses    = $this->loadIni('php_classes.ini', 'classes');
         $phpClassesFnp = makeFullNsPath($phpClasses);
 

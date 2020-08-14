@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Exteaccelerator extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'eaccelerator.ini';
 
         parent::analyze();

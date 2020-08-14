@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class DeclareTicks extends Analyzer {
     // Declare( ticks = 3)
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('File')
              ->outIs('FILE')
              ->outIs('EXPRESSION')

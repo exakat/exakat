@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class CantImplementTraversable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x implements traversable
         $this->atomIs(self::STATIC_NAMES)
              ->fullnspathIs('\traversable')

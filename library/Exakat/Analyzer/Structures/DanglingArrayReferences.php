@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DanglingArrayReferences extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //foreach($a as &$b) {}
         // No following unset()
         $this->atomIs('Foreach')

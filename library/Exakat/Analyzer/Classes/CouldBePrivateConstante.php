@@ -31,7 +31,7 @@ class CouldBePrivateConstante extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Searching for constants that are never used outside the definition class
 
         // global static constants : the one with no definition class : they are all ignored.

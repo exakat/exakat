@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,12 +25,12 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class CatchUndefinedVariable extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // try {Throw $e; $a = 1; } catch (Exception $e ) { echo $a;}
         $this->atomIs('Assignation')
              ->hasInstruction('Try')

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldPreprocess extends Analyzer {
     // chr(03);
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\\chr')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(self::LITERALS, self::WITH_CONSTANTS)

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class IncomingValues extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $_POST or $_POST['3']
         $this->atomIs('Phpvariable')
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_FILES', '$_COOKIE'))

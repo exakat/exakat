@@ -32,7 +32,7 @@ class CouldBePrivateMethod extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Searching for methods that are never used outside the definition class
 
         // Non-static methods

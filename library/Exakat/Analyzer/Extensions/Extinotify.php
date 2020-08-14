@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extinotify extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'inotify.ini';
 
         parent::analyze();

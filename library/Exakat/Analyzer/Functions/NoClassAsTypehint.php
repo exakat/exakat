@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NoClassAsTypehint extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Classes reused as typehint, when they are not abstract
         $this->atomIs('Class') // No need for anonymous classes
              ->isNot('abstract', true)

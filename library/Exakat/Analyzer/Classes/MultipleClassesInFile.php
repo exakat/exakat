@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleClassesInFile extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // fichier.php : <?php class a {} class b {}
         $this->atomIs('File')
              ->outIs('FILE')

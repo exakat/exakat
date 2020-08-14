@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Arrays;
 use Exakat\Analyzer\Analyzer;
 
 class GettingLastElement extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // current(array_slice($a, -1));
         $this->atomFunctionIs('\\current')
              ->outWithRank('ARGUMENT', 0)

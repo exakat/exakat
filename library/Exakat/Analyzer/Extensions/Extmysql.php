@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extmysql extends Extension {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'mysql.ini';
 
         parent::analyze();

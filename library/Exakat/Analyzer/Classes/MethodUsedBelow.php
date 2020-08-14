@@ -32,7 +32,7 @@ class MethodUsedBelow extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         //////////////////////////////////////////////////////////////////
         // method + $this->method
         //////////////////////////////////////////////////////////////////

@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class MakeVariableName extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($variable) = func_get_args();
 
         return new Command("sideEffect{ $variable = \"\\$\" + $variable; }");

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SpotPHPNativeConstants extends LoadFinal {
     private $PHPconstants = array();
 
-    public function run() : void {
+    public function run(): void {
         if (empty($this->PHPconstants)) {
             return;
         }
@@ -51,7 +51,7 @@ class SpotPHPNativeConstants extends LoadFinal {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         display($result->toInt() . ' SpotPHPNativeConstants like \E_ALL');
 
-        // constants like E_ALL 
+        // constants like E_ALL
         $query = $this->newQuery('SpotPHPNativeConstants');
         $query->atomIs('Identifier', Analyzer::WITHOUT_CONSTANTS)
               ->tokenIs('T_STRING') // This will skip strings in define()

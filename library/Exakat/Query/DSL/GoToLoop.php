@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Analyzer\Analyzer;
 
 class GoToLoop extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $return = $this->dslfactory->factory('goToInstruction');
 
         return $return->run(Analyzer::LOOPS_ALL);

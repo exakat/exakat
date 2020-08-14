@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extsqlsrv extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'sqlsrv.ini';
 
         parent::analyze();

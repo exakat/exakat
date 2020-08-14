@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class OneLineTwoInstructions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Two expressions in a row
         // except for break, continue, void and inlineHtml
         $this->atomIs('Sequence')

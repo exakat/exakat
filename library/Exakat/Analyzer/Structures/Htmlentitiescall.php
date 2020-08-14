@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Query\DSL\FollowParAs;
 
 class Htmlentitiescall extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $html_functions = array('\\htmlentities',
                                 '\\htmlspecialchars',
                                );

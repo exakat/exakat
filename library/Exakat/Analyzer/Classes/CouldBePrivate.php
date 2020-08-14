@@ -31,7 +31,7 @@ class CouldBePrivate extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Searching for properties that are never used outside the definition class or its children
 
         // Non-static properties

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class IsnullVsEqualNull extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs('\\is_null');
         $this->prepareQuery();
     }

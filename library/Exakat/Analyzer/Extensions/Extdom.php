@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extdom extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'dom.ini';
 
         parent::analyze();

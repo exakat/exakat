@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extncurses extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'ncurses.ini';
 
         parent::analyze();

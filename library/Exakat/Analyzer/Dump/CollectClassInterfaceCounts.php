@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectClassInterfaceCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'ClassInterfaces';
 
-    public function analyze() : void {
+    public function analyze(): void {
         //class x implements i,j,k {}
         $this->atomIs(self::CLASSES_ALL)
              ->raw('groupCount("m").by( __.out("IMPLEMENTS").count() ).cap("m")');

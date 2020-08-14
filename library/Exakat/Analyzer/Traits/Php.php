@@ -30,7 +30,7 @@ class Php extends Analyzer {
         return array('Traits/TraitUsage',
                     );
     }
-    public function analyze() : void {
+    public function analyze(): void {
         $ini = $this->loadIni('php_traits.ini', 'traits');
 
         if (!empty($ini)) {

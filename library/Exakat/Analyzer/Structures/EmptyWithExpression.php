@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class EmptyWithExpression extends Analyzer {
     protected $phpVersion = '5.5+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = 2; empty($a) ; in a row
         // only works for variables
         $this->atomIs(array('Functioncall',

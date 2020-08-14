@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class toStringThrowsException extends Analyzer {
     protected $phpVersion = '7.4-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function __tostring() { throw new Exception(); }}
         $this->atomIs('Magicmethod')
              ->outIs('NAME')

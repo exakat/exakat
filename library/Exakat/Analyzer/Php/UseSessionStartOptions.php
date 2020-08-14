@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseSessionStartOptions extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // ini_set() then session_start
         $this->atomFunctionIs('\\ini_set')
              ->outWithRank('ARGUMENT', 0)

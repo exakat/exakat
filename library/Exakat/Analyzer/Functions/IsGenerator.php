@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class IsGenerator extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { yield 3; }
         $this->atomIs(array('Yield', 'Yieldfrom'))
              ->goToFunction();

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class IdnUts46 extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //echo idn_to_ascii('täst.de');
         $this->atomFunctionIs(array('\\idn_to_ascii',
                                     '\\idn_to_utf8',

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class UselessCatch extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // try {} catch (Exception $e) { return 1; }
         $this->atomIs('Try')
              ->outIs('CATCH')

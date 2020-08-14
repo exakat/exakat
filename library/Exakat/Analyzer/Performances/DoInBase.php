@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class DoInBase extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // TODO : Also extends to ++/-- and .
 
         // TODO : add more databases (methods and functions)

@@ -44,11 +44,11 @@ class Analyze extends Tasks {
     private $php = null;
     private $analyzed = array();
 
-    public function setConfig($config) : void {
+    public function setConfig($config): void {
         $this->config = $config;
     }
 
-    public function run() : void {
+    public function run(): void {
         if (!$this->config->project->validate()) {
             throw new InvalidProjectName($this->config->project->getError());
         }
@@ -165,7 +165,7 @@ class Analyze extends Tasks {
         }
     }
 
-    private function analyze(Analyzer $analyzer, string $analyzerClass) : int {
+    private function analyze(Analyzer $analyzer, string $analyzerClass): int {
         $begin = microtime(true);
 
         $lock = new Lock($this->config->tmp_dir, $analyzerClass);
@@ -259,7 +259,7 @@ class Analyze extends Tasks {
         return $total_results;
     }
 
-    private function checkAnalyzed() : void {
+    private function checkAnalyzed(): void {
         $query = <<<'GREMLIN'
 g.V().hasLabel("Analysis").as("analyzer", "count").select("analyzer", "count").by("analyzer").by("count");
 GREMLIN;

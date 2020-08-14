@@ -32,7 +32,7 @@ class MbstringThirdArg extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $encodings = $this->loadIni('mbstring_encodings.ini', 'encodings');
 
         $functions = array('\\mb_strrichr',

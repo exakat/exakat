@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extming extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'ming.ini';
 
         parent::analyze();

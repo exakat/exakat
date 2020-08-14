@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidSelfInInterface extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // interface i { const I = self::A + 3; }
         $this->atomIs('Interface')
              ->atomInside(array('Self', 'Parent')) // Parent will not have a DEFINITION

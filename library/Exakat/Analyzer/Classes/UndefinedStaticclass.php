@@ -33,7 +33,7 @@ class UndefinedStaticclass extends Analyzer {
                      );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         //echo  undefinedClass::class
         $this->atomIs('Staticclass')
              ->outIs('CLASS')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoReturnInFinally extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // try {} catch () {} finally { return 1; }
         $this->atomIs('Finally')
              ->hasAtomInside(array('Return', 'Throw'));

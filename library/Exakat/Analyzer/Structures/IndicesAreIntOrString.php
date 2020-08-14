@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class IndicesAreIntOrString extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $x[1.2], $x[true], $x[null];
         $this->atomIs('Array')
              ->outIs('INDEX')

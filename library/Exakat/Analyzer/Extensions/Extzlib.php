@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extzlib extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'zlib.ini';
 
         parent::analyze();

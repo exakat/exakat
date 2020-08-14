@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\TraitUsage;
 class DefinedTraits extends TraitUsage {
     protected $traits = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $traits = $this->config->ext->loadIni('traits.ini', 'traits');
 
         if (empty($traits)) {

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ConstantConditions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('While')
              ->outIs('CONDITION')
              ->is('constant', true)

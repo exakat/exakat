@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUseExplodeArgs extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $c = explode('a', $string); array_pop($c)
         $this->atomFunctionis('\\explode')
              ->NoChildWithRank('ARGUMENT', 2)

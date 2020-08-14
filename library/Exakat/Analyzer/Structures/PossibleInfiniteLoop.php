@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PossibleInfiniteLoop extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $readFunctions = array('\fgets',
                                '\fgetc',
                                '\fgetss',

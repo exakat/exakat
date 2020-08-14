@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Abstractmethods extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // abstract class x { abstract function y (); }
         $this->atomIs('Class')
              ->outIs(array('METHOD', 'MAGICMETHOD'))

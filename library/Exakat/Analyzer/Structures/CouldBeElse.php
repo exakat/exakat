@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeElse extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // if ($a) {}; if (!$a) {}
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

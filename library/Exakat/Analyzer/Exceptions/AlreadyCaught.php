@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class AlreadyCaught extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Check that the class of on catch is not a parent of of the next catch
         // class A, class B extends A
         // catch(A $a) {} catch (B $b) <= then Catch A is wrong

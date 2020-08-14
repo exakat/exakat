@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DifferencePreference extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $different = $this->dictCode->translate(array('!='));
 
         if (empty($different)) {

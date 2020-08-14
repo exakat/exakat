@@ -28,7 +28,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Ports extends AnalyzerResults {
     protected $analyzerName = 'Ports';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // 443
         $ports = $this->load('ports', 'port');
 

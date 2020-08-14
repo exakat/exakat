@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WrongTypehintedName extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $scalars   = array('array',  'int',              'string'  , 'bool',            );
         $variables = array('$array', '$int', '$integer', '$string' , '$bool', '$boolean', '$void', '$null');
 

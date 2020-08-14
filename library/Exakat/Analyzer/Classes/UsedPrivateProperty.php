@@ -31,7 +31,7 @@ class UsedPrivateProperty extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // property used in a staticproperty \a\b::$b
         // a property must be read to be used.
         $this->atomIs(self::CLASSES_TRAITS)

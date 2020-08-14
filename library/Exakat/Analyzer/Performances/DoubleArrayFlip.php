@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class DoubleArrayFlip extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //$a = array_flip($b);
         //unset($a['c']);
         //$c = array_flip($a);

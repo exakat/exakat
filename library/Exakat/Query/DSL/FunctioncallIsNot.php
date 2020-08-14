@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class FunctioncallIsNot extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($fullnspath) = func_get_args();
 
         assert(func_num_args() === 1, 'Too many arguments for ' . __METHOD__);

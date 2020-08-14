@@ -31,7 +31,7 @@ class UselessAbstract extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // abstract class that are never instanciated
         $this->atomIs('Class')
              ->is('abstract', true)

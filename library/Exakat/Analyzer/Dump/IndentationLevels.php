@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class IndentationLevels extends AnalyzerHashAnalyzer {
     protected $analyzerName = 'Indentation Levels';
 
-    public function analyze() : void {
+    public function analyze(): void {
         //function foo() { if (1) { /* level 2 */}}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->processLevels();

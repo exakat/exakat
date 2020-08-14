@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class UseArraySlice extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // while($cdg) { array_pop($c); }
         $this->atomIs(self::LOOPS_ALL)
              ->outIs('BLOCK')

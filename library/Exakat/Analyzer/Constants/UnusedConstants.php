@@ -31,7 +31,7 @@ class UnusedConstants extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // define('A', 1); No A;
         $this->atomIs('Defineconstant')
              ->hasNoOut('DEFINITION')

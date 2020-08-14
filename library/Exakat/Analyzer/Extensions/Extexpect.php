@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extexpect extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'expect.ini';
 
         parent::analyze();

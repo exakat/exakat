@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class ResourcesUsage extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // use of Common\Extension, but only really care for functions
         $this->source = 'resource_creation.ini';
 

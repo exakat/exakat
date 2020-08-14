@@ -32,7 +32,7 @@ class ImmutableSignature extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function foo($a, $b) {}}
         // class y extends x { function foo($a, $b) {}} //.... 8 times
         $this->atomIs(array('Method', 'Magicmethod'))

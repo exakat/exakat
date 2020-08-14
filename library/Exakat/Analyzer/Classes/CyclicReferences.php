@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CyclicReferences extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Detects short cycles of reference : $a->p->method($a) ($a -> p -> $a)
         // TODO : Detects longer cycles of reference : $a->p->method($a) ($a -> p -> $a)
         // TODO : Exclude cases where the value is not stored in the final object (no reference)

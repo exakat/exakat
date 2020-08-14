@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeStaticClosure extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function ($x) { return rand();}
         $this->atomIs('Closure')
              ->outIs('BLOCK')

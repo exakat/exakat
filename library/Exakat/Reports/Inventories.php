@@ -27,7 +27,7 @@ namespace Exakat\Reports;
 class Inventories extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'inventories';
-    
+
     private const NO_DATA_TO_REPORT = 'This file is left intentionally empty. There was nothing to report.';
 
     public function generate(string $folder, string $name = self::FILE_FILENAME): string {
@@ -70,7 +70,7 @@ class Inventories extends Reports {
         $this->saveInventory('Type/Path',                     "$folder/$name/path.csv");
         $this->saveInventory('Type/Shellcommands',            "$folder/$name/shellcmd.csv");
 
-        $this->saveHashResults('ParameterNames',              "$folder/$name/parameterNames.csv", array("Parameter", "Occurrences"));
+        $this->saveHashResults('ParameterNames',              "$folder/$name/parameterNames.csv", array('Parameter', 'Occurrences'));
 
         $this->saveAtom('Integer',      "$path/integers.csv");
         $this->saveAtom('ArrayLiteral', "$path/arrays.csv");

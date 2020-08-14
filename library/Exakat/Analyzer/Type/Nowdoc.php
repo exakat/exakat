@@ -28,7 +28,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class Nowdoc extends AnalyzerResults {
     protected $analyzerName = 'Nowdoc';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Heredoc')
              ->isNot('heredoc', true)
              ->toResults();

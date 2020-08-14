@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Php80OnlyTypeHints extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() : null | stringable
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')

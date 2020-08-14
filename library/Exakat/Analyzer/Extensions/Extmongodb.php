@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\Extension;
 class Extmongodb extends Extension {
     protected $phpVersion = '7.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'mongodb.ini';
 
         parent::analyze();

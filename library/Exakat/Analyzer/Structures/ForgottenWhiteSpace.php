@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ForgottenWhiteSpace extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // spot the first element
         $this->atomIs('File')
              ->outIs('FILE')

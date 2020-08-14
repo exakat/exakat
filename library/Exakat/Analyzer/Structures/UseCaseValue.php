@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseCaseValue extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // switch ($x) { case 'd' : echo $x; }
         $this->atomIs(self::SWITCH_ALL)
              ->outIs('CONDITION')

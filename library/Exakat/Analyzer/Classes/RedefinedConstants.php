@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class RedefinedConstants extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Class')
              ->outIs('CONST')
              ->atomIs('Const')

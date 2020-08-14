@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extfpm extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'fpm.ini';
 
         parent::analyze();

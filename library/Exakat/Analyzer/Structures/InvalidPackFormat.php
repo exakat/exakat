@@ -25,13 +25,13 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class InvalidPackFormat extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Type/Pack',
                     );
     }
-    
-    
-    public function analyze() : void {
+
+
+    public function analyze(): void {
         // pack('nvcT', $s)
         $this->atomFunctionIs('\\unpack')
              ->outWithRank('ARGUMENT', 0)

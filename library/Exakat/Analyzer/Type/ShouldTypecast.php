@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldTypecast extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $typeCasting = array('\\floatval',
                              '\\strval',
                              '\\boolval',

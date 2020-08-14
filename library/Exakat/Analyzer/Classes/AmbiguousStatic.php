@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AmbiguousStatic extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Methods with the same name, but with static or not.
         $this->atomIs('Method')
              ->is('static', true)

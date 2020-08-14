@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class EmptyList extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // list( , )
         $this->atomIs('List')
              ->raw('where( __.out("ARGUMENT").not(hasLabel("Void")).count().is(eq(0)) )');

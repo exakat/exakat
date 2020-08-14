@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleUnset extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // unset($a); unset($b);
         $this->atomIs('Unset')
              ->nextSibling('EXPRESSION')

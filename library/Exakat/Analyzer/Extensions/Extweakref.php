@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extweakref extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'weakref.ini';
 
         parent::analyze();

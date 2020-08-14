@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SpreadOperatorForArray extends Analyzer {
     protected $phpVersion = '7.4+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // [...$b]
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')

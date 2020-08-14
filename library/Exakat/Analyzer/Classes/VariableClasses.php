@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class VariableClasses extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->atomIs(array('Variable', 'Array'))

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeProtectedProperty extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
 
         // Case of $object->property (that's another public access)
         $this->atomIs('Member')

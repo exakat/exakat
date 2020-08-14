@@ -28,7 +28,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class UnicodeBlock extends AnalyzerResults {
     protected $analyzerName = 'UnicodeBlock';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(array('String', 'Heredoc'))
              ->toResults();
         $this->prepareQuery();

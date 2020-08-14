@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Php74Deprecation extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // usage of CURLPIPE_HTTP1
         $this->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs('\\CURLPIPE_HTTP1', self::CASE_SENSITIVE);

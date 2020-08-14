@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extparle extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'parle.ini';
 
         parent::analyze();

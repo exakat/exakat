@@ -34,7 +34,7 @@ class PhpFunctionUsage extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $functions =  makeFullNsPath($this->functions);
 
         $this->atomFunctionIs($functions)

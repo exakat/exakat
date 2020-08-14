@@ -31,7 +31,7 @@ class WrittenOnlyVariable extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo($a) { $a = 1; $a += 2;}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs(array('ARGUMENT', 'DEFINITION'))

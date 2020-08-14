@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ComparisonFavorite extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $codeInt = array_values($this->dictCode->translate(array('!==', '===')));
         if (empty($codeInt)) {
             return;

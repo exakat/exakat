@@ -29,7 +29,7 @@ use Exakat\Data\Dictionary;
 class MethodUsage extends Analyzer {
     protected $methodList = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $staticHash = array();
         $methodHash = array();
         foreach($this->methodList as $class => $methods) {

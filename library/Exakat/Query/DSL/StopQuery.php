@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class StopQuery extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command(Query::STOP_QUERY);
     }
 }

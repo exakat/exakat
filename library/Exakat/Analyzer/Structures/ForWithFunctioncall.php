@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ForWithFunctioncall extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //for(; $b < 10; $a++)
         $this->atomIs('For')
              ->analyzerIsNot('self')

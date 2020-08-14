@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DemeterLaw extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // law of demeter
         // Still missing foreach and fluent interfaces, static methodcall and static properties
         $this->atomIs('Methodcall')

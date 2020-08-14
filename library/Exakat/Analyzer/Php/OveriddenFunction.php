@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class OveriddenFunction extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
         $exts[] = 'php_functions';
 

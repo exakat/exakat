@@ -30,7 +30,7 @@ class CouldUseTry extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = $b << $c; (No try... )
         $this->atomIs('Bitshift')
              ->outIs('RIGHT')

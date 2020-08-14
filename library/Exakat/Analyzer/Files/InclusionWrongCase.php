@@ -30,7 +30,7 @@ class InclusionWrongCase extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('File')
              ->values('fullcode');
         $files = $this->rawQuery()

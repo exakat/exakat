@@ -30,7 +30,7 @@ class MakeClassMethodDefinition extends Complete {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
 
         // Warning : no support for overwritten methods : ALL methods are linked
 

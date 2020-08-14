@@ -32,7 +32,7 @@ class UsedProtectedMethod extends Analyzer {
                      );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // method used in a static methodcall \a\b::b()
         // method used in a normal methodcall with $this $this->b()
         $this->atomIs(self::CLASSES_ALL)

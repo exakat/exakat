@@ -31,7 +31,7 @@ class InfiniteRecursion extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // foo($a, $b) { foo($a, $b); }
         $this->atomIs('Function')
              ->analyzerIs('Functions/Recursive')

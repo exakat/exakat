@@ -32,7 +32,7 @@ class RegisterGlobals extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // With a foreach
         $this->atomIs('Foreach')
              ->outIs('SOURCE')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ThrowUsage extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Throw');
         $this->prepareQuery();
     }

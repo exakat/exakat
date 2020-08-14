@@ -22,14 +22,12 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Query\DSL\FollowParAs;
 
 class CouldBeFloat extends CouldBeType {
-    public function analyze() : void {
+    public function analyze(): void {
         $floatAtoms = array('Float', 'Addition', 'Multiplication', 'Not', 'Power');
-        
+
         // property : based on default value (created or not)
         $this->checkPropertyDefault($floatAtoms);
 
@@ -107,7 +105,7 @@ class CouldBeFloat extends CouldBeType {
 
         // function ($a) { pow($a, 2);}
         $this->checkRelayedArgumentToPHP('float');
-        
+
         // argument validation
         $this->checkArgumentValidation(array('\\is_float'), $floatAtoms);
 
@@ -123,7 +121,7 @@ class CouldBeFloat extends CouldBeType {
              ->atomIs(array('Addition', 'Power', 'Multiplication'))
              ->back('result');
         $this->prepareQuery();
-        
+
         // May also cover if( $arg).,
         // May also cover coalesce, ternary.
         // short assignations

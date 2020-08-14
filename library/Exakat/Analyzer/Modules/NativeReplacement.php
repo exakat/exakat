@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NativeReplacement extends Analyzer {
     protected $replacements = null;
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->replacements = $this->loadJson('native_replacement.json');
 
         if (empty($this->replacements)) {

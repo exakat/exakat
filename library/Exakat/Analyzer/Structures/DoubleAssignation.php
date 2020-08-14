@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DoubleAssignation extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = 1; $a = 2;
         $this->atomIs('Sequence')
              ->raw(<<<'GREMLIN'

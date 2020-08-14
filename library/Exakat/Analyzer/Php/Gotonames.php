@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Gotonames extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Goto')
              ->outIs('GOTO');
         $this->prepareQuery();

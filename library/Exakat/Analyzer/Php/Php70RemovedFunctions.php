@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\PhpFunctionUsage;
 
 class Php70RemovedFunctions extends PhpFunctionUsage {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array('ereg',
                                  'ereg_replace',
                                  'eregi',

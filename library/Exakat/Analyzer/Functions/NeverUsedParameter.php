@@ -32,7 +32,7 @@ class NeverUsedParameter extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // foo($a, $b = 2, $c = 3) {}; foo(1,2);
         $this->atomIs(self::FUNCTIONS_ALL)
              ->hasOut('DEFINITION')  // Make sure this is actually a used function

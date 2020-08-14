@@ -22,13 +22,11 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class CouldBeNull extends CouldBeType {
-    public function analyze() : void {
+    public function analyze(): void {
         $nullAtoms = array('Null');
-        
+
         // property : based on default value (created or not)
         $this->checkPropertyDefault($nullAtoms);
 
@@ -80,7 +78,7 @@ class CouldBeNull extends CouldBeType {
 
         // function ($a) { pow($a, 2);}
         $this->checkRelayedArgumentToPHP('null');
-        
+
         // argument validation
         $this->checkArgumentValidation(array('\\is_null'), $nullAtoms);
 
@@ -110,7 +108,7 @@ class CouldBeNull extends CouldBeType {
              ->atomIs('Null')
              ->back('result');
         $this->prepareQuery();
-        
+
         // May also cover if( $arg).,
         // May also cover coalesce, ternary.
         // short assignations

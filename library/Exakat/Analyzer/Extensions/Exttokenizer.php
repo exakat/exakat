@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Exttokenizer extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'tokenizer.ini';
 
         parent::analyze();

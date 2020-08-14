@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class IssetWholeArray extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // isset($a) || isset($a[1])
         $this->atomIs('Isset')
              ->outIs('ARGUMENT')

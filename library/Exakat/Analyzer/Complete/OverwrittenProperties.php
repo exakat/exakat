@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class OverwrittenProperties extends Complete {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { protected $p = 1;}
         // class xx extends x { protected $p = 1;}
         $this->atomIs(array('Propertydefinition', 'Virtualproperty'), self::WITHOUT_CONSTANTS)
@@ -50,7 +50,7 @@ class OverwrittenProperties extends Complete {
               ->inIs('OVERWRITE')
               ->atomIs('Virtualproperty')
               ->inIs('PPP')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
  property("visibility", "protected")
 .sideEffect{ it.get().property("fullcode", it.get().property("fullcode").value().toString().replace("public ", "protected "));}
 GREMLIN

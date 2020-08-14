@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DereferencingAS extends Analyzer {
     protected $phpVersion = '5.3-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $x = array(1,2,3)
         // $x[3];
         $this->atomIs('Assignation')

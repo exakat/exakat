@@ -31,7 +31,7 @@ class CouldTypeWithBool extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
 
         // function foo($a) { $a && 1; }
         $this->atomIs('Parameter')

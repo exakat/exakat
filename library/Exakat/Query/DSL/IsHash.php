@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class IsHash extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         switch (func_num_args()) {
             case 3 :
                 list($property, $hash, $index) = func_get_args();

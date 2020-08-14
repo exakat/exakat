@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class InconsistantCase extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $lower = $this->dictCode->translate(array('true', 'false', 'null'));
         $upper = $this->dictCode->translate(array('TRUE', 'FALSE', 'NULL'));
 

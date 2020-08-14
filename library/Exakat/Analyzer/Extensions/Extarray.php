@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extarray extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'array.ini';
 
         parent::analyze();

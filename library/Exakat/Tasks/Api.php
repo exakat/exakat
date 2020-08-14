@@ -27,7 +27,7 @@ class Api extends Tasks {
 
     const PORT = 8447;
 
-    public function run() : void {
+    public function run(): void {
         if ($this->config->stop    === true ||
             $this->config->restart === true
             ) {

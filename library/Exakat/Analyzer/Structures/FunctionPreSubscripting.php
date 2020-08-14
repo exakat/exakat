@@ -33,7 +33,7 @@ class FunctionPreSubscripting extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $x = f();
         // $x['e']
         // instead of f()['e']

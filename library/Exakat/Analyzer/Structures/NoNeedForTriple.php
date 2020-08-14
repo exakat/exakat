@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,11 +25,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoNeedForTriple extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() : bool {}
         // if (foo() === true)
-        // todo : case for other types, 
-        // todo : which dependencies? 
+        // todo : case for other types,
+        // todo : which dependencies?
         $this->atomIs('Comparison')
              ->codeIs(array('===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extdb2 extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'db2.ini';
 
         parent::analyze();

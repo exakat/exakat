@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class TestClass extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $testClasses =  $this->loadIni('php_unittest.ini', 'classes');
         $testClasses =  makeFullNsPath($testClasses);
 

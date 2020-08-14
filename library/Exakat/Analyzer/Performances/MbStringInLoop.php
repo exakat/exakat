@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class MbStringInLoop extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //foreach( as $i) { mb_substr(1, $i, 3);}
         $this->atomFunctionIs('\mb_substr')
              //in a foreach

@@ -30,7 +30,7 @@ class SetExceptionHandlerPHP7 extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // With function name in a string
         $this->atomFunctionIs('\set_exception_handler')
              ->outWithRank('ARGUMENT', 0)

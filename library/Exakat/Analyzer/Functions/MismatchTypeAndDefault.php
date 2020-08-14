@@ -36,7 +36,7 @@ class MismatchTypeAndDefault extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo(string $s = 3)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

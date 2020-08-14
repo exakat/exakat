@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseInstanceof extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // get_class($x) == 'Function'
         $this->atomIs('Comparison')
              ->analyzerIsNot('self')

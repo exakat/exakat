@@ -33,7 +33,7 @@ class UnusedClass extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class A {}
         // new A;
         $this->atomIs('Class')

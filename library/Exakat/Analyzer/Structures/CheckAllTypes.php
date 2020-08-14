@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CheckAllTypes extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Ifthen')
              ->hasOut('ELSE')
              ->outIs('CONDITION')

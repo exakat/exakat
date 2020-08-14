@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\WithoutTry;
 class RandomWithoutTry extends WithoutTry {
     protected $phpVersion = '7.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array('\\random_bytes',
                                  '\\random_int',
                                  '\\openssl_random_pseudo_bytes',

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ThrowInDestruct extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function __destruct() { throw new Exception(); }}
         $this->atomIs('Class')
              ->outIs('MAGICMETHOD')

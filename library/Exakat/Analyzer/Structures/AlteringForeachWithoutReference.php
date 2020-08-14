@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class AlteringForeachWithoutReference extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $k => $v) { $a[$k] += 1;}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')

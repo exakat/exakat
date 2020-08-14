@@ -31,7 +31,7 @@ class ScalarOrObjectProperty extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // todo : extend to array  : warning : string-array syntax
         // Property defined as literal, used as object
         $this->atomIs(self::CLASSES_ALL)

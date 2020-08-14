@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class IsZero extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = $c - $c;
         // $a = $c + $d - $c;
         // $a = $c + $d -$e - $c;

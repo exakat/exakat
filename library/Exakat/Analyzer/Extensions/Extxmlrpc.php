@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extxmlrpc extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'xmlrpc.ini';
 
         parent::analyze();

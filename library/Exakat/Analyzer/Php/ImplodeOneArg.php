@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ImplodeOneArg extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // implode($array);
         $this->atomFunctionIs('\\implode')
              ->is('count', 1);

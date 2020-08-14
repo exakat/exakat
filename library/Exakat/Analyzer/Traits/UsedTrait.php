@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UsedTrait extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
 
         $this->atomIs('Trait')
              ->hasOut('DEFINITION')

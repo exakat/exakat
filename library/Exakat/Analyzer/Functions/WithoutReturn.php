@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class WithoutReturn extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() { echo 1; } (no void return typehint)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->isNot('abstract', true)

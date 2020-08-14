@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extigbinary extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'igbinary.ini';
 
         parent::analyze();

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldHaveDestructor extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private $p = null; function foo() { $this->p->p = 2;}}
         $this->atomIs('Class')
              ->not(

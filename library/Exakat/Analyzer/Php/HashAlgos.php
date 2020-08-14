@@ -34,7 +34,7 @@ class HashAlgos extends Analyzer {
                                      '\\hash_pbkdf2',
                                      );
 
-    public function analyze() : void {
+    public function analyze(): void {
         $algos = $this->loadIni('hash_algos.ini', 'algos');
 
         $this->atomFunctionIs(self::$functions)

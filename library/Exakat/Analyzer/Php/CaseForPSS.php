@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class CaseForPSS extends Analyzer {
     protected $phpVersion = '5.5-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // STATIC::$property
         $this->atomIs(self::RELATIVE_CLASS)
              ->codeIsNot(array('parent', 'self', 'static'), self::TRANSLATE, self::CASE_SENSITIVE);

@@ -29,7 +29,7 @@ class MakeFunctioncallWithReference extends Complete {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Case of PHP native functions
         $methods = $this->methods->getFunctionsReferenceArgs();
         $functions = array();

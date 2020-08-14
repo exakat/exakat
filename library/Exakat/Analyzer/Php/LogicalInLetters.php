@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class LogicalInLetters extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a and $b
         $this->atomIs('Logical')
              ->codeIs(array('and', 'or', 'xor'))

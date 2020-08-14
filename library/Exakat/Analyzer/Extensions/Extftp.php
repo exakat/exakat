@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extftp extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'ftp.ini';
 
         parent::analyze();

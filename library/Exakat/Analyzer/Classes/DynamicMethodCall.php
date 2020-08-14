@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicMethodCall extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $object->$name()
         // $class::$name()
         $this->atomIs(array('Methodcall', 'Staticmethodcall'))

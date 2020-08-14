@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ArrayMergeWithEllipsis extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = array('\\array_merge',
                            '\\array_merge_recursive',
                            '\\array_diff',

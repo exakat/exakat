@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Php\HashAlgos;
 
 class AvoidThoseCrypto extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // in hashing functions
         $this->atomFunctionIs(HashAlgos::$functions)
              ->outWithRank('ARGUMENT', 0)

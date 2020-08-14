@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extmysqli extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'mysqli.ini';
 
         parent::analyze();

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class TestThenCast extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // if ($a != 0) { return 4 / (int) $a; }
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseStrrepeat extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // for() { $a .= A; }
         $this->atomIs('Assignation')
              ->tokenIs('T_CONCAT_EQUAL')

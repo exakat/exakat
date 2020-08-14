@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ListWithKeys extends Analyzer {
     protected $phpVersion = '7.1+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // list( 3 => $a);
         $this->atomIs('List')
              ->outIs('ARGUMENT')

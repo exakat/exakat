@@ -53,7 +53,7 @@ class Regex extends AnalyzerResults {
                                    '\\mb_eregi',
                                    );
 
-    public function analyze() : void {
+    public function analyze(): void {
 
         // preg_match('/a/', ...)
         $this->atomFunctionIs($this->pregFunctions)

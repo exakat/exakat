@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DontSendThisInConstructor extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function __construct() { foo($this); }
         $this->atomIs('Magicmethod')
              ->outIs('NAME')

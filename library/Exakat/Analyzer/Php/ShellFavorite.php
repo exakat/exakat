@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ShellFavorite extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $mapping = <<<'GREMLIN'
 if (it.get().label() == 'Shell') {
     x2 = 'backtick';

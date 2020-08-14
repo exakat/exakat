@@ -41,7 +41,7 @@ class IntegerConversion extends Analyzer {
         return $this->dependsOn;
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $incomingValues = $this->dependsOn();
 
         // $a = $_GET['a']; if ($a == 3) {}

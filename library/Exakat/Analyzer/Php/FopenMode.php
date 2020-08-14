@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class FopenMode extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // fopen('path/to/file', 'bbc')
         $this->atomFunctionIs('\\fopen')
              ->outWithRank('ARGUMENT', 1)

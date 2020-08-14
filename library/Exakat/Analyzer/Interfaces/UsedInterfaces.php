@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class UsedInterfaces extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // interface i {}
         // class x implements i {}
         $this->atomIs('Interface')

@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyIsNot extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($property, $code, $caseSensitive) = func_get_args();
 
         assert($this->assertProperty($property));
@@ -42,7 +42,7 @@ class PropertyIsNot extends DSL {
             $code = $this->tolowercase($code);
             $caseSensitive = '.toString().toLowerCase()';
         } else {
-            assert(false, 'No such case sensitivity : "' . $caseSensitive.'"');
+            assert(false, 'No such case sensitivity : "' . $caseSensitive . '"');
         }
 
         if (is_array($code) && !empty(array_intersect($code, $this->availableVariables))) {

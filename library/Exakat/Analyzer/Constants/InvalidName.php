@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class InvalidName extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Invalid characters
         $this->atomIs('Defineconstant')
              ->outIs('NAME')

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class IdenticalConsecutive extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = $c + 1;
         // $b = $c + 1;
         $this->atomIs('Assignation')

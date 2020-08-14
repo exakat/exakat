@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MutualExtension extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // A -> B
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fnp')

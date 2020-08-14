@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SimpleSwitch extends Analyzer {
     protected $phpVersion = '7.2+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // switch($a) { case 1 + 1 : break; }
         $this->atomIs(self::SWITCH_ALL)
              ->outIs('CASES')

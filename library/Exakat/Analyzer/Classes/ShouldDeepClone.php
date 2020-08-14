@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldDeepClone extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Based on typehinting of functions.
         // Other options ?
         $this->atomIs('Clone')

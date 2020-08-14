@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php73NewFunctions extends FunctionDefinition {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array('net_get_interfaces',
                                  'gmp_binomial',
                                  'gmp_lcm',

@@ -23,12 +23,12 @@
 namespace Exakat\Analyzer\Complete;
 
 class FollowClosureDefinition extends Complete {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // immediate usage : in parenthesis (function () {})()
         $this->atomIs(array('Closure', 'Arrowfunction'), self::WITHOUT_CONSTANTS)
              ->inIsIE('RIGHT') // Skip all $closure =

@@ -29,7 +29,7 @@ use Exakat\Analyzer\Analyzer;
 class DeclareStrictType extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Declare( strict_type = 1)
         $this->atomIs('File')
              ->outIs('FILE')

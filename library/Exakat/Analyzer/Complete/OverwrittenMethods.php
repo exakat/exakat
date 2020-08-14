@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class OverwrittenMethods extends Complete {
-    public function analyze() : void {
+    public function analyze(): void {
 
         // This is more specific than the next
         // class x {use t { t::a as b}}

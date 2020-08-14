@@ -29,7 +29,7 @@ class CantInheritAbstractMethod extends Analyzer {
 
     // abstract class A           { abstract function bar(stdClass $x);  }
     // abstract class B extends A { abstract function bar($x): stdClass; }
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Class')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->is('abstract', true)

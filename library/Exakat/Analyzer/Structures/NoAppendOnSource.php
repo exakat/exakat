@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoAppendOnSource extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { $a[] = 1;}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')

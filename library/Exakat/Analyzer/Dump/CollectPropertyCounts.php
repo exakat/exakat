@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectPropertyCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'CIT property counts';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // foo() {$t ; }
         $this->atomIs(self::CIT)
              ->raw('groupCount("m").by(__.out("PPP").out("PPP").count()).cap("m")');

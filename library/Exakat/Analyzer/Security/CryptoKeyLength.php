@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class CryptoKeyLength extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $lengths = array('\\OPENSSL_KEYTYPE_RSA' => 3072,
                          '\\OPENSSL_KEYTYPE_DSA' => 2048,
                          '\\OPENSSL_KEYTYPE_DH'  => 2048,

@@ -36,8 +36,8 @@ class KillsApp extends Analyzer {
                      'Complete/SetClassRemoteDefinitionWithTypehint',
                     );
     }
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         // first round : only die and exit
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')

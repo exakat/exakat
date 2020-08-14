@@ -32,7 +32,7 @@ class UseCovariance extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function foo() : x {}}
         // class y extends x { function foo() : y {}}
         $this->atomIs(self::FUNCTIONS_METHOD)

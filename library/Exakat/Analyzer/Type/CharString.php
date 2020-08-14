@@ -28,7 +28,7 @@ use Exakat\Analyzer\Dump\AnalyzerResults;
 class CharString extends AnalyzerResults {
     protected $analyzerName = 'CharString';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(array('String', 'Heredoc'))
              ->tokenIsNot('T_QUOTE')
              ->toResults();

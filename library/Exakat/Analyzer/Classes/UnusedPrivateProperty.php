@@ -31,7 +31,7 @@ class UnusedPrivateProperty extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private $p; function foo() { $this->p2; }}
         $this->atomIs('Ppp')
              ->is('visibility', 'private')

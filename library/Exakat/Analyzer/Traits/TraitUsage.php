@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\TraitUsage as CommonTraitUsage;
 
 class TraitUsage extends CommonTraitUsage {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { use trait; }
         $this->atomIs(self::CLASSES_TRAITS)
              ->outIs('USE')

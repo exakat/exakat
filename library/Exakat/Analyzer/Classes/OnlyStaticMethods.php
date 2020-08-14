@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class OnlyStaticMethods extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { static function foo() {} }
         $this->atomIs('Class')
              // Avoid empty classes

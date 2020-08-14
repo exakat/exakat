@@ -31,7 +31,7 @@ class InsufficientPropertyTypehint extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { private Y $p; function foo() { $this->p->p2 = 1;} }
 
         // class x { function __construct(Y $p) { $this->p = $p; } function foo() { $this->p->p2 = 1;} }

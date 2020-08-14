@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class LargeTryBlock extends Analyzer {
     protected $tryBlockMaxSize = 5;
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         // try with more than 5 lines
         $this->atomIs('Try')
              ->outIs('BLOCK')

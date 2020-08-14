@@ -31,7 +31,7 @@ class ImplodeArgsOrder extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = array('\\join', '\\implode');
 
         // detect an array in first arg

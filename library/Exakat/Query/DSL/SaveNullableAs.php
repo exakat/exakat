@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class SaveNullableAs extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         assert(func_num_args() <= 1, __METHOD__ . ' should get 1 arguments max, ' . func_num_args() . ' provided.');
 
         list($variable) = func_get_args();

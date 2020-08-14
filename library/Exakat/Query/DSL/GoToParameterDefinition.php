@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 class GoToParameterDefinition extends DSL {
     public function run(): Command {
-        return new Command(<<<GREMLIN
+        return new Command(<<<'GREMLIN'
 has("rank")
 .choose(
     has("rankName"), 

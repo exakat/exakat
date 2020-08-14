@@ -33,7 +33,7 @@ class Url extends AnalyzerResults {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // 'http://www.exakat.io/'
         $this->atomIs(self::STRINGS_ALL, self::WITHOUT_CONSTANTS)
              ->hasNoIn('CONCAT')

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Dictionary;
 
 class Constructor extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $construct = $this->dictCode->translate(array('__construct'), Dictionary::CASE_INSENSITIVE);
 
         if (empty($construct)) {

@@ -22,13 +22,11 @@
 
 namespace Exakat\Analyzer\Typehints;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Query\DSL\FollowParAs;
 
 class CouldBeString extends CouldBeType {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $stringAtoms = self::STRINGS_LITERALS;
 
         $this->checkPropertyDefault($stringAtoms);
@@ -89,7 +87,7 @@ class CouldBeString extends CouldBeType {
 
         // is_string
         $this->checkArgumentValidation(array('\\is_string'), $stringAtoms);
-        
+
         // (string) or strval
         $this->checkCastArgument('T_STRING_CAST', array('\\strval'));
 

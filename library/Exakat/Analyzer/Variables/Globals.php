@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class Globals extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Global in a function
         $this->atomIs('Globaldefinition')
              ->savePropertyAs('code', 'name')

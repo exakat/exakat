@@ -36,7 +36,7 @@ CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this ->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
               ->as('returned')

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CollectLiterals extends AnalyzerTable {
     protected $analyzerName = 'Local Variable Counts';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $types = array('Integer', 'Float', 'String', 'Heredoc', 'Arrayliteral');
 
         foreach($types as $type) {

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UsePositiveCondition extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // if ($a != $b) {}
         $this->atomIs('Ifthen')
              ->hasOut('THEN')

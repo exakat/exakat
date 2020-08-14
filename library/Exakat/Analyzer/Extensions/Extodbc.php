@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extodbc extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'odbc.ini';
 
         parent::analyze();

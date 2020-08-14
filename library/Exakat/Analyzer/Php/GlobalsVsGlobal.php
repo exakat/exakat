@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class GlobalsVsGlobal extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $globals = $this->dictCode->translate(array('$GLOBALS'));
 
         if (empty($globals)) {

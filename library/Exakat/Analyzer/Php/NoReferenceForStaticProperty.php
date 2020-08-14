@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NoReferenceForStaticProperty extends Analyzer {
     protected $phpVersion = '7.3-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // self::$p = &$a;
         $this->atomIs('Staticproperty')
              ->inIs('LEFT')

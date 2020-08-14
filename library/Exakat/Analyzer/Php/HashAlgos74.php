@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class HashAlgos74 extends Analyzer {
     protected $phpVersion = '7.4-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $algos = $this->loadIni('hash_algos.ini', 'new74');
 
         $this->atomFunctionIs(HashAlgos71::$functions)

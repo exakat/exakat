@@ -31,7 +31,7 @@ class EvalUsage extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // eval($a . ' -s la');
         // OK for constants
         $this->atomFunctionIs('\\create_function')

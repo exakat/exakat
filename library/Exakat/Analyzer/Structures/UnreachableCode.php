@@ -40,7 +40,7 @@ class UnreachableCode extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // code after a halt_compiler is expected to be unreachable.
         $finalTokens = array('Gotolabel', 'Class', 'Const', 'Function', 'Interface', 'Trait');
 

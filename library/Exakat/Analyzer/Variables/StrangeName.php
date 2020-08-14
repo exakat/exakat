@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class StrangeName extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $names = $this->loadIni('php_strange_names.ini', 'variables');
 
         // typos, like $_PSOT

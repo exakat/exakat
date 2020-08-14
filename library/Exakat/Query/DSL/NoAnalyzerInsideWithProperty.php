@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class NoAnalyzerInsideWithProperty extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atoms, $analyzer, $property, $value) = func_get_args();
 
         $this->assertProperty($property);

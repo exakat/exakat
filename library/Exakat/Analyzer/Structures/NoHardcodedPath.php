@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoHardcodedPath extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = array('\\fopen',
                            '\\file',
                            '\\file_get_contents',

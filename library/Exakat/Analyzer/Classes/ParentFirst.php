@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ParentFirst extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // parent::__construct is not the first
         $this->atomIs('Magicmethod')
              ->outIs('NAME')

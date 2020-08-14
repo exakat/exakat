@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MixedConcatInterpolation extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a."b$c";
         $this->atomIs('Concatenation')
             // constant, methodcall and functioncall are ignored as not interpolable.

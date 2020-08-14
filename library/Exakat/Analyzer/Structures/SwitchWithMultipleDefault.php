@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class SwitchWithMultipleDefault extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Switch')
              ->raw('where( __.out("CASES").out("EXPRESSION").hasLabel("Default").count().is(gt(1)) )')
              ->back('first');

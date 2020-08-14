@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnsetOnArguments extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // unset($argument);
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')

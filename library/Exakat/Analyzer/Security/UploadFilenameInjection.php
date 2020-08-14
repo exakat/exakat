@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class UploadFilenameInjection extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //$extension = strtolower( substr( strrchr($_FILES['upload']['name'], ".") ,1) );
         //if(@move_uploaded_file($_FILES['upload']['tmp_name'], $_FILES['upload']['name']))
         $this->atomFunctionIs('\move_uploaded_file')

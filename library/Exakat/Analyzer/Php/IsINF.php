@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class IsINF extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // is_infinite()
         $this->atomFunctionIs('\\is_infinite');
         $this->prepareQuery();

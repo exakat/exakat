@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class CantDisableClass extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $disableClasses = $this->loadIni('disable_functions.ini', 'disable_classes');
         $disableClasses = makeFullNsPath($disableClasses);
 

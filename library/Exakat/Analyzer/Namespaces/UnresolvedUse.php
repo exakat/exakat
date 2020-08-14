@@ -34,7 +34,7 @@ class UnresolvedUse extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::CIT)
              ->values('fullnspath')
              ->unique();

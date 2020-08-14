@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extfdf extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'fdf.ini';
 
         parent::analyze();

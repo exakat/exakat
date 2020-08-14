@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extgender extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'gender.ini';
 
         parent::analyze();

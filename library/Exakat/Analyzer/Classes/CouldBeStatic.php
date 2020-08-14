@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeStatic extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function foo() { return self::$a + 1; }}
         $this->atomIs('Method') // No Magic method
              ->isNot('static', true)

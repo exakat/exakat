@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class HasNoNamedInstruction extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atom, $name) = func_get_args();
 
         assert($this->assertAtom($atom));

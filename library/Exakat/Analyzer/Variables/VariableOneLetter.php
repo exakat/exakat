@@ -31,7 +31,7 @@ class VariableOneLetter extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Normal variables
         $this->atomIs(self::VARIABLES_USER)
              ->tokenIs('T_VARIABLE')

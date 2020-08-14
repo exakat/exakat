@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Data\Methods;
 use Exakat\Query\DSL\FollowParAs;
 
 abstract class CouldBeType extends Analyzer {
-    final public function dependsOn() : array {
+    final public function dependsOn(): array {
         return array('Complete/PropagateConstants',
                      'Complete/CreateDefaultValues',
                      'Complete/OverwrittenMethods',
@@ -38,7 +38,7 @@ abstract class CouldBeType extends Analyzer {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Argument types
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    protected function checkArgumentDefaultValues(array $atoms = array()) : void { 
+    protected function checkArgumentDefaultValues(array $atoms = array()): void {
         // foo($b = array())
         $this->atomIs(self::FUNCTIONS_ALL)
              ->optional(
@@ -59,8 +59,8 @@ abstract class CouldBeType extends Analyzer {
              ->back('result');
         $this->prepareQuery();
     }
-    
-    protected function checkArgumentUsage(array $atoms = array()) : void { 
+
+    protected function checkArgumentUsage(array $atoms = array()): void {
         // foo($b) { $b[] = 1;}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->optional(
@@ -83,7 +83,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkRelayedArgument(array $atoms = array(), array $fullnspath = array()) : void { 
+    protected function checkRelayedArgument(array $atoms = array(), array $fullnspath = array()): void {
         // foo($b) { bar($b)} ; function bar(array $c) {}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->optional(
@@ -146,7 +146,7 @@ abstract class CouldBeType extends Analyzer {
              ->fullnspathIs($fullnspath)
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
-             
+
              ->outIs('RETURNED')
              ->hasIn('RETURN')
              ->atomIs('Variable')
@@ -160,19 +160,19 @@ abstract class CouldBeType extends Analyzer {
              );
         $this->prepareQuery();
 
-        // foo(...$b) { bar($b)} ; function bar(...$c) {} 
+        // foo(...$b) { bar($b)} ; function bar(...$c) {}
         // In this case, $b must be an array. No choice possible.
 
         // Missing : when variadic is applied at call time
-        // foo(...$b) { bar(...$b)} ; function bar(...$c) {} 
+        // foo(...$b) { bar(...$b)} ; function bar(...$c) {}
 
-        // foo(...$b) { bar($b)} ; function bar(string ...$c) {} 
+        // foo(...$b) { bar($b)} ; function bar(string ...$c) {}
     }
 
-    protected function checkRelayedArgumentToPHP(string $type = '') : void { 
+    protected function checkRelayedArgumentToPHP(string $type = ''): void {
         // foo($b) { bar($b)} ; function bar(array $c) {}
         $ini = $this->methods->getFunctionsByArgType($type, Methods::LOOSE);
-        
+
         if (empty($ini)) {
             return;
         }
@@ -195,11 +195,11 @@ abstract class CouldBeType extends Analyzer {
             $this->prepareQuery();
         }
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //  Return types
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    protected function checkReturnedAtoms(array $atoms = array()) : void { 
+    protected function checkReturnedAtoms(array $atoms = array()): void {
         // return array(1,2,3)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->analyzerIsNot('self')
@@ -216,7 +216,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkReturnedTypehint(array $atoms = array(), array $fullnspath = array()) : void { 
+    protected function checkReturnedTypehint(array $atoms = array(), array $fullnspath = array()): void {
         // function foo (array $a) { return $a;}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->optional(
@@ -263,7 +263,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkReturnedDefault(array $atoms = array()) : void { 
+    protected function checkReturnedDefault(array $atoms = array()): void {
         // return array(1,2,3)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->optional(
@@ -283,7 +283,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkReturnedCalls(array $atoms = array(), array $fullnspath = array()) : void { 
+    protected function checkReturnedCalls(array $atoms = array(), array $fullnspath = array()): void {
         // return array(1,2,3)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->optional(
@@ -302,7 +302,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkReturnedPHPTypes(string $type = '') : void { 
+    protected function checkReturnedPHPTypes(string $type = ''): void {
         // foo($b) { bar($b)} ; function bar(array $c) {}
         $ini = $this->methods->getFunctionsByReturnType($type, Methods::LOOSE);
 
@@ -323,7 +323,7 @@ abstract class CouldBeType extends Analyzer {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // class x { protected $p = array(); }
     // class x { private $p; function foo() {$this->p = array();  } }
-    protected function checkPropertyDefault(array $atoms = array()) : void { 
+    protected function checkPropertyDefault(array $atoms = array()): void {
         $this->atomIs('Propertydefinition')
              ->analyzerIsNot('self')
              ->outIs('DEFAULT')
@@ -332,7 +332,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkPropertyRelayedDefault(array $atoms = array()) : void { 
+    protected function checkPropertyRelayedDefault(array $atoms = array()): void {
         $this->atomIs('Propertydefinition')
              ->analyzerIsNot('self')
              ->outIs('DEFAULT')
@@ -345,7 +345,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkPropertyRelayedTypehint(array $atoms = array(), array $fullnspath = array()) : void { 
+    protected function checkPropertyRelayedTypehint(array $atoms = array(), array $fullnspath = array()): void {
         $this->atomIs('Propertydefinition')
              ->analyzerIsNot('self')
              ->outIs('DEFAULT')
@@ -359,7 +359,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkPropertyWithCalls(array $atoms = array(), array $fullnspath = array()) : void { 
+    protected function checkPropertyWithCalls(array $atoms = array(), array $fullnspath = array()): void {
         // class x { private $p; function foo() { $this->p = bar(); }} function bar() : array {}
         $this->atomIs('Propertydefinition')
              ->analyzerIsNot('self')
@@ -373,7 +373,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkPropertyWithPHPCalls(string $type = '') : void { 
+    protected function checkPropertyWithPHPCalls(string $type = ''): void {
         // foo($b) { bar($b)} ; function bar(array $c) {}
         $ini = $this->methods->getFunctionsByReturnType($type, Methods::LOOSE);
 
@@ -390,7 +390,7 @@ abstract class CouldBeType extends Analyzer {
         $this->prepareQuery();
     }
 
-    protected function checkArgumentValidation(array $filters = array(), array $atoms = array()) : void {
+    protected function checkArgumentValidation(array $filters = array(), array $atoms = array()): void {
         // is_array($arg)
         if (!empty($filters)) {
             $this->atomIs(self::FUNCTIONS_ALL)
@@ -431,8 +431,8 @@ abstract class CouldBeType extends Analyzer {
             $this->prepareQuery();
         }
     }
-    
-    protected function checkCastArgument(string $token = '', array $functions = array()) : void {
+
+    protected function checkCastArgument(string $token = '', array $functions = array()): void {
         // (string) $arg
         if (!empty($token)) {
             $this->atomIs(self::FUNCTIONS_ALL)

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class YodaComparison extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $literals = array('String', 'Integer', 'Float', 'Boolean', 'Null', 'Identifier', 'Nsname');
 
         $this->atomIs('Comparison')

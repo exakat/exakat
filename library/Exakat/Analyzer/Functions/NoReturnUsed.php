@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NoReturnUsed extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/SetClassRemoteDefinitionWithTypehint',
                      'Complete/SetClassRemoteDefinitionWithGlobal',
                      'Complete/SetClassRemoteDefinitionWithInjection',
@@ -36,7 +36,7 @@ class NoReturnUsed extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Functions
         $this->atomIs(self::FUNCTIONS_ALL)
              ->filter(

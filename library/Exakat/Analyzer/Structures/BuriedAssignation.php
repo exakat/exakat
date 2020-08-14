@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class BuriedAssignation extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // ($x = new b)->c
         $this->atomIs('Assignation')
              ->hasNoParent('Declare', array('ARGUMENT'))

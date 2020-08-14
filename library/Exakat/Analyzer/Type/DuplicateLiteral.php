@@ -30,7 +30,7 @@ class DuplicateLiteral extends AnalyzerHashAnalyzer {
 
     protected $analyzerName = 'Type/DuplicateLiteral';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // No need for boolean and null
         $this->atomIs(array('String', 'Heredoc'))
              ->hasNoIn('INDEX') // Skipping arrays $x["cbd"]

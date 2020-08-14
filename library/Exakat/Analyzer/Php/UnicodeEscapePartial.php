@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UnicodeEscapePartial extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Normal string
         $this->atomIs('String')
              ->outIsIE('CONCAT')

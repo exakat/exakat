@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\FunctionDefaultValue;
 class McryptcreateivWithoutOption extends FunctionDefaultValue {
     protected $phpVersion = '5.6-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->code = 'mcrypt_create_iv';
         $this->rank = 1;
 

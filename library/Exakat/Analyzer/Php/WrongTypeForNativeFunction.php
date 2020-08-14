@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class WrongTypeForNativeFunction extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $types = array('float'  => array('Integer', 'Float'),
                        'int'    => array('Integer'),
                        'string' => self::STRINGS_LITERALS,
@@ -40,11 +40,11 @@ class WrongTypeForNativeFunction extends Analyzer {
 
         foreach($types as $type => $atoms) {
             $ini = $this->methods->getFunctionsByArgType($type, Methods::STRICT);
-    
+
             if (empty($ini)) {
                 return;
             }
-    
+
             foreach($ini as $rank => $functions) {
                 // foo($arg) { array_map($arg, '') ; }
                 // raw expressions
@@ -63,7 +63,7 @@ class WrongTypeForNativeFunction extends Analyzer {
                      ->atomIs(self::CALLS, self::WITH_VARIABLES)
                      ->inIs('DEFINITION')
                      ->outIs('RETURNTYPE')
-                     ->fullnspathIsNot('\\'.$type)
+                     ->fullnspathIsNot('\\' . $type)
                      ->back('first');
                 $this->prepareQuery();
 

@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class OutWithoutLastRank extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         return new Command('sideEffect{dernier = it.get().value("count") - 1;}.out("EXPRESSION").filter{ it.get().value("rank") < dernier}');
     }
 }

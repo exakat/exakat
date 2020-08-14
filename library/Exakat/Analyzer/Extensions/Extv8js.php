@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Common\Extension;
 
 class Extv8js extends Extension {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'v8js.ini';
 
         parent::analyze();

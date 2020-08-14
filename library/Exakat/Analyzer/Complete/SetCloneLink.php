@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetCloneLink extends Complete {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function __clone() {}}
         // clone (new x)
         $this->atomIs('Clone', self::WITHOUT_CONSTANTS)

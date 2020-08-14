@@ -30,7 +30,7 @@ class OrDie extends Analyzer {
         return array('Structures/NoDirectAccess');
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Logical')
              ->analyzerIsNot('Structures/NoDirectAccess')
              ->codeIs(array('or', '||'))

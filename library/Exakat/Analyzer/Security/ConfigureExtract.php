@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class ConfigureExtract extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // extract($a)
         $this->atomFunctionIs('\extract')
              ->noChildWithRank('ARGUMENT', 1);

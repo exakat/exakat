@@ -32,7 +32,7 @@ class FossilizedMethod extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x
         $this->atomIs(self::FUNCTIONS_METHOD)
              ->hasNoOut('OVERWRITE')

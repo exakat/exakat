@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class FileUploadUsage extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::VARIABLES_ALL)
              ->codeIs('$_FILES', true);
         $this->prepareQuery();

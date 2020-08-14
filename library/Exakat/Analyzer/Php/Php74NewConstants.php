@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\ConstantDefinition;
 
 class Php74NewConstants extends ConstantDefinition {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->constants = array('MB_ONIGURUMA_VERSION',
                                  'SO_LABEL',
                                  'SO_PEERLABEL',

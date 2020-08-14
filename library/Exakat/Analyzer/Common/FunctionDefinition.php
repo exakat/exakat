@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class FunctionDefinition extends Analyzer {
     protected $functions = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $fullnspath = makeFullNsPath($this->functions);
 
         $this->atomIs('Function')

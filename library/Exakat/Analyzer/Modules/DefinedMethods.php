@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\MethodUsage;
 class DefinedMethods extends MethodUsage {
     protected $methodList = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->methodList = $this->config->ext->loadJson('methods.json');
 
         if (empty($this->methodList)) {

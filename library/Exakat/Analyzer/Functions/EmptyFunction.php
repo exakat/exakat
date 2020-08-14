@@ -33,7 +33,7 @@ class EmptyFunction extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // standalone function : empty is empty. Same for closure.
         $this->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')

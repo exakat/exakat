@@ -33,7 +33,7 @@ class UndefinedProperty extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // only for calls internal to the class. External calls still needs some work
         $this->atomIs('Member')
              ->outIs('MEMBER')

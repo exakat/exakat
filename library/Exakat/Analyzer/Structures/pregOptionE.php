@@ -70,7 +70,7 @@ sideEffect{
 
 GREMLIN;
 
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = '\\preg_replace';
 
         // preg_match with a string

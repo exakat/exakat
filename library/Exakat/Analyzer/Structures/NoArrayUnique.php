@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NoArrayUnique extends Analyzer {
     protected $phpVersion = '7.2-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // array_unique();
         $this->atomFunctionIs('\\array_unique');
         $this->prepareQuery();

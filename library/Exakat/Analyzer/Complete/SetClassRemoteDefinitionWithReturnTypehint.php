@@ -28,7 +28,7 @@ class SetClassRemoteDefinitionWithReturnTypehint extends Complete {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class a { function b() }; function foo() : a {}; $a = foo(); $a->b()
         // class a { function b() }; function foo() : a {}; foo()->b()
         $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)

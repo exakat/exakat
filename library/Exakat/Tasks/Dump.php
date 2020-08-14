@@ -662,7 +662,7 @@ GREMLIN
                             $toDump[] = array('', $citId[$id], $uses, 'use', $options);
                         }
                     }
-                    
+
                     // Options are stored only one for all. PHP doesn't care.
                     $options = '';
                 }
@@ -847,7 +847,7 @@ GREMLIN
         $query->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
               ->_as('property')
               ->inIs('PPP')
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
  sideEffect{ 
     x_static = it.get().properties("static").any();
     visibility = it.get().value("visibility");
@@ -878,7 +878,7 @@ GREMLIN
     "value": init,
     "phpdoc":phpdoc,
     "classline":classline,
-    "typehint":typehint.join('|').replaceAll('\\\\?\\\\|', '?').replaceAll('^(.*)\\\\|$', '?$1').replaceAll('^\\\\|', '?'),
+    "typehint":typehint.join('|').replaceAll('\\?\\|', '?').replaceAll('^(.*)\\|$', '?$1').replaceAll('^\\|', '?'),
     "typehint_fnp": typehint_fnp.join('|')
     ];
 }
@@ -1320,7 +1320,7 @@ g.V().hasLabel("$label").where( __.in("ANALYZED").has("analyzer", "$analyzer"))
 GREMLIN;
         $res = $this->gremlin->query($query);
         $res->deHash(array($type));
-        
+
         $store = array();
         foreach($res->toArray() as $row) {
             $row[] = $type;

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UsedFunctions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function used
         $this->atomIs('Function')
              ->hasOut('DEFINITION');

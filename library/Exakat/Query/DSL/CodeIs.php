@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Dictionary;
 
 class CodeIs extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         switch(func_num_args()) {
             case 1 :
                 $code = func_get_arg(0);

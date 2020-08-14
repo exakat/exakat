@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeCallable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $ini = $this->loadIni('php_with_callback.ini');
 
         foreach($ini as $position => $functions) {

@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class CyclomaticComplexity extends AnalyzerHashResults {
     protected $analyzerName = 'CyclomaticComplexity';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('NAME')

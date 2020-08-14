@@ -47,7 +47,7 @@ abstract class Vcs {
 
     abstract public function clone(string $source): void;
 
-    public function getDiffLines($r1, $r2): array  {
+    public function getDiffLines($r1, $r2): array {
         return array();
     }
 
@@ -112,7 +112,7 @@ abstract class Vcs {
         }
     }
 
-    public function getStatus() : array {
+    public function getStatus(): array {
         $status = array('updatable' => false,
                        );
 
@@ -131,7 +131,7 @@ abstract class Vcs {
         return array();
     }
 
-    public function getLastCommitDate() : int {
+    public function getLastCommitDate(): int {
          return 0;
     }
 

@@ -45,7 +45,7 @@ class Doctor extends Tasks {
         // Ignoring everything else
     }
 
-    public function run() : void {
+    public function run(): void {
         $stats = array_merge($this->checkPreRequisite(),
                              $this->checkAutoInstall());
 
@@ -80,7 +80,7 @@ class Doctor extends Tasks {
         print $doctor;
     }
 
-    private function checkPreRequisite() : array {
+    private function checkPreRequisite(): array {
         $stats = array();
 
         // Compulsory
@@ -169,7 +169,7 @@ class Doctor extends Tasks {
         return $stats;
     }
 
-    private function checkAutoInstall() : array {
+    private function checkAutoInstall(): array {
         $stats = array();
 
         // config
@@ -206,7 +206,7 @@ TEXT
             $version = PHP_MAJOR_VERSION . PHP_MINOR_VERSION;
 
             if (file_exists("{$this->config->projects_root}/tinkergraph")) {
-                // This is the default expected folder 
+                // This is the default expected folder
                 $folder = 'tinkergraph';
                 // tinkergraph or gsneo4j
                 if (file_exists("{$this->config->projects_root}/tinkergraph/ext/neo4j-gremlin/")) {
@@ -265,7 +265,7 @@ TEXT
         return $stats;
     }
 
-    private function checkInstall(string $graphdb) : void {
+    private function checkInstall(string $graphdb): void {
         if ($graphdb === 'gsneo4j') {
             if (file_exists("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties")) {
                 $properties = file_get_contents("{$this->config->projects_root}/{$this->config->gsneo4j_folder}/conf/neo4j-empty.properties");
@@ -281,7 +281,7 @@ TEXT
         }
     }
 
-    private function checkGremlinServer(string $path) : void {
+    private function checkGremlinServer(string $path): void {
         if (!file_exists($path)) {
             return;
         }
@@ -314,7 +314,7 @@ TEXT
         }
     }
 
-    private function checkPHPs(array $config) : array {
+    private function checkPHPs(array $config): array {
         $stats = array();
 
         foreach(Config::PHP_VERSIONS as $shortVersion) {
@@ -328,7 +328,7 @@ TEXT
         return $stats;
     }
 
-    private function checkOptional() : array {
+    private function checkOptional(): array {
         $stats = array();
 
         $optionals = array('Git'       => 'git',
@@ -357,7 +357,7 @@ TEXT
         return $stats;
     }
 
-    private function checkPHP(string $pathToBinary, string $displayedVersion) : array {
+    private function checkPHP(string $pathToBinary, string $displayedVersion): array {
         $stats = array();
 
         $stats['configured'] = 'Yes (' . $pathToBinary . ')';
@@ -374,7 +374,7 @@ TEXT
         return $stats;
     }
 
-    private function array2list(array $array) : string {
+    private function array2list(array $array): string {
         return implode(",\n                           ", $array);
     }
 }

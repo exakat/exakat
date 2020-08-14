@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class NoCastToInt extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $x = (int) 1 + 3;
         $this->atomIs('Cast')
              ->tokenIs('T_INT_CAST')

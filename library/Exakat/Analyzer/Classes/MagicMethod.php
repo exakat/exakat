@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MagicMethod extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function __clone() {}}
         $this->atomIs('Magicmethod')
              ->outIs('NAME')

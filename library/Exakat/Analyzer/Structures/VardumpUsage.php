@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class VardumpUsage extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $debugFunctions       = array('var_dump', 'print_r', 'var_export');
         $returnDebugFunctions = array('\\print_r', '\\var_export');
 

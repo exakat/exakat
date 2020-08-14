@@ -33,7 +33,7 @@ use Exakat\Exceptions\NeedsAnalyzerThema;
 class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run() : void {
+    public function run(): void {
         if ($this->config->project->isDefault()) {
             throw new ProjectNeeded();
         }

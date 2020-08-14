@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseShortAssignation extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Commutative operation : Addition
         $this->atomIs('Assignation')
              ->codeIs('=')

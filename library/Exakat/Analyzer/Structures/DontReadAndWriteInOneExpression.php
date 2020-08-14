@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class DontReadAndWriteInOneExpression extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         //$a + ($a = 2);
         $this->atomIs('Assignation')
              ->outIs('LEFT')

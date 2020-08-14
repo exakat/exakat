@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Interfacenames extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Interface')
              ->outIs('NAME');
         $this->prepareQuery();

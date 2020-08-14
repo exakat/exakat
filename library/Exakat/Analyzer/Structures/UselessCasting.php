@@ -31,7 +31,7 @@ class UselessCasting extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // Function returning a type, then casted to that type
         $casts = array('T_STRING_CAST'  => 'string',
                        'T_BOOL_CAST'    => 'bool',

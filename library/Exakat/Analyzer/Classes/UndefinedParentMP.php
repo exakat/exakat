@@ -32,7 +32,7 @@ class UndefinedParentMP extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // parent::method()
         $this->atomIs('Parent')
              ->inIs('CLASS')

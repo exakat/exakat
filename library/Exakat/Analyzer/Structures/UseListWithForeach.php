@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UseListWithForeach extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { list($d) = $b; }
         $this->atomIs('Foreach')
              ->analyzerIsNot('self')

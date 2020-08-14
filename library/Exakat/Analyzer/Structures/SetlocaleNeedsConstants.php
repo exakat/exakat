@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SetlocaleNeedsConstants extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $allowedConstants = array('\\LC_ALL',
                                   '\\LC_COLLATE',
                                   '\\LC_CTYPE',

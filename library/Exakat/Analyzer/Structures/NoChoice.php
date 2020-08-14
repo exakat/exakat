@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoChoice extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a == 2 ? doThis() : doThis();
         $this->atomIs('Ternary')
              ->outIs('THEN')

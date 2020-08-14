@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Common\FunctionDefinition;
 
 class Php72NewFunctions extends FunctionDefinition {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->functions = array( 'mb_ord',
                                   'mb_chr',
                                   'mb_scrub',

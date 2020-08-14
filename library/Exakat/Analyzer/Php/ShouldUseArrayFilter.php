@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldUseArrayFilter extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // foreach($a as $b) { if ($a) {$c[] = $b->e;} }
         $this->atomIs('Foreach')
              ->outIs('VALUE')

@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class NoAnalyzerInside extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         list($atoms, $analyzer) = func_get_args();
 
         $this->assertAnalyzer($analyzer);

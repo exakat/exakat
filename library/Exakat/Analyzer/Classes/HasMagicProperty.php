@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class HasMagicProperty extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
 
         // Nsname that is not used somewhere else

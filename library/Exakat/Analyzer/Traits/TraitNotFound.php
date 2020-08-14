@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class TraitNotFound extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x  { use a, b { c::d insteadof e}}
         $this->atomIs(self::CIT)
              ->collectTraits('traits')

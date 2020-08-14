@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseObjectApi extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // mysqli_connect();
         $functions = $this->load('function_to_oop', 'function');
         $functions = makeFullNsPath(array_keys($functions));

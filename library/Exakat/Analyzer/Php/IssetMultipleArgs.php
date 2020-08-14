@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class IssetMultipleArgs extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // isset($a) && isset($b)
         $this->atomIs('Logical')
              ->codeIs(array('and', '&&'))

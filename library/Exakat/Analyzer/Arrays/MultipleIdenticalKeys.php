@@ -31,7 +31,7 @@ class MultipleIdenticalKeys extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // array('a' => 1, 'b' = 2)
         $this->atomIs('Arrayliteral')
              ->isMore('count', 1)
@@ -47,9 +47,9 @@ class MultipleIdenticalKeys extends Analyzer {
                      ->outIs('ARGUMENT')
                      ->atomIs('Keyvalue')
                      ->outIs('INDEX')
-                     ->atomIs(array("String", "Heredoc", "Concatenation", "Integer", "Float", "Boolean", "Null", "Staticclass"), self::WITH_CONSTANTS)
+                     ->atomIs(array('String', 'Heredoc', 'Concatenation', 'Integer', 'Float', 'Boolean', 'Null', 'Staticclass'), self::WITH_CONSTANTS)
                      ->raw('or(has("intval"), has("noDelimiter"))')
-                     ->raw(<<<GREMLIN
+                     ->raw(<<<'GREMLIN'
 sideEffect{ 
     if (it.get().label() in ["String", "Heredoc", "Concatenation", "Staticclass"] ) { 
         k = it.get().value("noDelimiter"); 

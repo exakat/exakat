@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class StringWithStrangeSpace extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = ' bac'; // space is actually a vertical tab
         $weirdSpaces = $this->load('weirdSpaces', 'space');
 

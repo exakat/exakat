@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ThisIsForClasses extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // General case
         $this->atomIs('This')
              ->hasNoInstruction(self::FUNCTIONS_ALL)

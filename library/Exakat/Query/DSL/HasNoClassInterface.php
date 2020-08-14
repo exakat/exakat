@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 
 class HasNoClassInterface extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         $return = $this->dslfactory->factory('hasNoInstruction');
 
         return $return->run(array('Class', 'Classanonymous', 'Interface'));

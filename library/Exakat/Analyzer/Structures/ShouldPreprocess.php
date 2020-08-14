@@ -31,7 +31,7 @@ class ShouldPreprocess extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $dynamicAtoms = array('Variable',
                               'Array',
                               'Member',

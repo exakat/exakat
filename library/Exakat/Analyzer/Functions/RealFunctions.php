@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class RealFunctions extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function x() {}
         $this->atomIs('Function');
         $this->prepareQuery();

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Finalclass extends Analyzer {
 
-    public function analyze() : void {
+    public function analyze(): void {
         // final class x {}
         $this->atomIs('Class')
              ->is('final', true);

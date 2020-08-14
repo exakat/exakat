@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NoListWithString extends Analyzer {
     protected $phpVersion = '7.0-';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // list($a, $b) = 'string';
         $this->atomIs('List')
              ->inIs('LEFT')

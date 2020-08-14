@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,7 +29,7 @@ class ExtendedTypehints extends Complete {
         return array('Complete/SetParentDefinition',
                     );
     }
-    public function analyze() : void {
+    public function analyze(): void {
        // returntype, contravariant (Interface => Class)
        // returntype, contravariant (Interface => Class => subclass)
        // returntype, contravariant (Interface => Subinterface => Class => subclass)
@@ -69,7 +69,7 @@ class ExtendedTypehints extends Complete {
              ->addETo('DEFINITION', 'result');
         $this->prepareQuery();
 
-        // variables? 
+        // variables?
 
         // special case for static (PHP 8.0)
     }

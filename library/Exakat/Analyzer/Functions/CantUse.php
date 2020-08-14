@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CantUse extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // Function foo() { throw new exception(); }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('BLOCK')

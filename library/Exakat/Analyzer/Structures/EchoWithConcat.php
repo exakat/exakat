@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class EchoWithConcat extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
 
         //echo 'should'.'also'.$be.' with comma';
         $this->atomIs(array('Echo', 'Print'))

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Vendors;
 use Exakat\Analyzer\Common\UsesFramework;
 
 class Codeigniter extends UsesFramework {
-    public function analyze() : void {
+    public function analyze(): void {
         $detections = $this->loadIni('vendors/codeigniter.ini');
 
         $this->classes    = $detections->classes;

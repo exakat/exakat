@@ -23,7 +23,7 @@
 namespace Exakat\Analyzer\Complete;
 
 class SetClassRemoteDefinitionWithTypehint extends Complete {
-    public function analyze() : void {
+    public function analyze(): void {
 
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->as('method')

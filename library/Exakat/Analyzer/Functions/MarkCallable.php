@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MarkCallable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $atoms = 'String';
 
         $ini = $this->loadIni('php_with_callback.ini');

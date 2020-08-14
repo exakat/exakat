@@ -39,7 +39,7 @@ CREATE TABLE constantOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this ->atomIs('Constant', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->as('built')

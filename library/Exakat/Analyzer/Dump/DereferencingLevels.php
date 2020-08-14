@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Dump;
 class DereferencingLevels extends AnalyzerHashAnalyzer {
     protected $analyzerName = 'Dereferencing Levels';
 
-    public function analyze() : void {
+    public function analyze(): void {
         //$a->b->c()::d()->e::F (only -> and ::)
         $this->atomIs(array('Member', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Staticconstant'))
              ->not(

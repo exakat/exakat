@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NonPpp extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // class x { function foo() {} }
         // trait x { static $foo; }
         $this->atomIs(self::CIT)

@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeVoid extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() {} (no return)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->isNot('abstract', true)

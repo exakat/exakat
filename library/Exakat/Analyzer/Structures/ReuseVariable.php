@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ReuseVariable extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $expressions = array('Functioncall',
                              'Methodcall',
                              'Staticmethodcall',

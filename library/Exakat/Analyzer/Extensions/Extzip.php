@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\Extension;
 
 class Extzip extends Extension {
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->source = 'zip.ini';
 
         parent::analyze();

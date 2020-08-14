@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ForeachNeedReferencedSource extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Member'))

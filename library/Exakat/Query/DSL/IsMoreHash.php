@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class IsMoreHash extends DSL {
-    public function run() : Command {
+    public function run(): Command {
         assert(func_num_args() === 3, 'Wrong number of argument for ' . __METHOD__ . '. 3 are expected, ' . func_num_args() . ' provided');
         list($property, $hash, $index) = func_get_args();
 

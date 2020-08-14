@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ComplexExpression extends Analyzer {
     protected $complexExpressionThreshold = 30;
 
-    public function analyze() : void {
+    public function analyze(): void {
         // if (Condition);
         $this->atomIs(array('Ifthen', 'Dowhile', 'While'))
              ->outIs('CONDITION')

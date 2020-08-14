@@ -27,7 +27,7 @@ use Exakat\Analyzer\Common\ClassConstantUsage;
 class DefinedClassConstants extends ClassConstantUsage {
     protected $classConstants = array();
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->classConstants = $this->config->ext->loadJson('classConstants.json');
 
         if (empty($this->classConstants)) {

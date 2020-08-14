@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class NoBooleanAsDefault extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo($a = true) {}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

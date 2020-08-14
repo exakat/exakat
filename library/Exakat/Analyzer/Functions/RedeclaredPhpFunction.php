@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class RedeclaredPhpFunction extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // function split() {}
         $extensions = $this->loadIni('php_distribution_53.ini', 'ext');
 

@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class SimplePreg extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // almost data/pcre.ini but not preg_last_error
         $functions = array('\preg_match', '\preg_match_all', '\preg_replace', '\preg_replace_callback',
                            '\preg_filter', '\preg_split', '\preg_quote', '\preg_grep');

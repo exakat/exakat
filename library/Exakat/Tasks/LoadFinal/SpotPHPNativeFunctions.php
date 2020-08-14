@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SpotPHPNativeFunctions extends LoadFinal {
     private $PHPfunctions = array();
 
-    public function run() : void {
+    public function run(): void {
         $count = 0;
 
         $query = $this->newQuery('SpotPHPNativeFunctions fallingback');

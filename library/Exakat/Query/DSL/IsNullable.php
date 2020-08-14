@@ -29,19 +29,19 @@ class IsNullable extends DSL {
 
     public function run(): Command {
         switch(func_num_args()) {
-            case 1: 
+            case 1:
                 list($nullable) = func_get_args();
                 $nullable = in_array($nullable, array(self::EXPLICIT, self::IMPLICIT), \STRICT_COMPARISON) ? $nullable : self::IMPLICT;
                 break;
 
-            case 0: 
+            case 0:
                 $nullable = self::IMPLICIT;
                 break;
 
             default:
                 assert(func_num_args() == 1, 'Wrong number of argument for ' . __METHOD__ . '. 1 is expected, ' . func_num_args() . ' provided');
         }
-        
+
         if ($nullable === self::IMPLICIT) {
             return new Command('where( __.out("RETURNTYPE", "TYPEHINT").hasLabel("Null") )');
         } else {

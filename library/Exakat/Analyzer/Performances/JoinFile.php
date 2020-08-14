@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class JoinFile extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomFunctionIs(array('\\join', '\\implode'))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
