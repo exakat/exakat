@@ -2031,6 +2031,10 @@ class Load extends Tasks {
 
             if ($this->contexts->isContext(Context::CONTEXT_NEW)) {
                 $atom = 'Newcall';
+            } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('\\true', '\\false'), \STRICT_COMPARISON)) {
+                $atom = 'Boolean';
+            } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('\\null'), \STRICT_COMPARISON)) {
+                $atom = 'Null';
             } else { 
                 $atom = 'Nsname';
             }
