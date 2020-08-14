@@ -41,36 +41,41 @@ class MultipleIdenticalKeys extends Analyzer {
                      ->outIs('ARGUMENT')
                      ->atomIsNot('Keyvalue')
              )
-             ->raw(<<<'GREMLIN'
-where( 
-    __.sideEffect{ counts = [:]; }
-      .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
-      .hasLabel("String", "Integer", "Float", "Boolean", "Null", "Staticconstant", "Staticclass", "Identifier", "Nsname")
-      .not(where(__.out("CONCAT")) )
-      .or(__.has("intval"), __.hasLabel("String", "Staticclass").has("noDelimiter"))
-      .sideEffect{ 
-            if (it.get().label() in ["String", "Staticclass"] ) { 
+             ->filter(
+                $this->side()
+                     ->initVariable('counts', '[:]')
+                     ->outIs('ARGUMENT')
+                     ->atomIs('Keyvalue')
+                     ->outIs('INDEX')
+                     ->atomIs(array("String", "Heredoc", "Concatenation", "Integer", "Float", "Boolean", "Null", "Staticclass"), self::WITH_CONSTANTS)
+                     ->raw('or(has("intval"), has("noDelimiter"))')
+                     ->raw(<<<GREMLIN
+sideEffect{ 
+    if (it.get().label() in ["String", "Heredoc", "Concatenation", "Staticclass"] ) { 
+        k = it.get().value("noDelimiter"); 
+        if (k.isInteger()) {
+            k = k.toInteger();
+            
+            if (k.toString().length() != it.get().value("noDelimiter").length()) {
                 k = it.get().value("noDelimiter"); 
-                if (k.isInteger()) {
-                    k = k.toInteger();
-                    
-                    if (k.toString().length() != it.get().value("noDelimiter").length()) {
-                        k = it.get().value("noDelimiter"); 
-                    }
-                }
-            } 
-            else { k = it.get().value("intval"); } 
-
-            if (counts[k] == null) { 
-                counts[k] = 1; 
-            } else { 
-                counts[k]++; 
             }
         }
-        .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
-)
+    } 
+    else { 
+        k = it.get().value("intval"); 
+    } 
+
+    if (counts[k] == null) { 
+        counts[k] = 1; 
+    } else { 
+        counts[k]++; 
+    }
+}
+
+.filter{ counts.findAll{it.value > 1}.size() > 0; }
 GREMLIN
 )
+             )
              ->back('first');
         $this->prepareQuery();
     }
