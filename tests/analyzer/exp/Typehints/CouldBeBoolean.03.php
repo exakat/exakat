@@ -6,6 +6,7 @@ $expected     = array('$withDefault = true',
                       '$withReturnedType',
                       '$withPHPReturnedType',
                       '$a = true',
+                      '$withRelayedType',
                      );
 
 $expected_not = array('$nothingToSay',
