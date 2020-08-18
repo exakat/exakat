@@ -248,6 +248,7 @@ g.V().hasLabel("Defineconstant")
      .out("NAME")
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
      .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\$").getCount() == 0 }
+     .has('fullnspath')
      .values('fullnspath').unique();
 GREMLIN;
         $defineConstants = $this->gremlin->query($query)
@@ -278,6 +279,7 @@ GREMLIN;
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
+     .has('fullnspath')
      .sideEffect{name = it.get().value("fullnspath"); }
      .filter{ name in arg1 }
      .addE("DEFINITION")
@@ -299,6 +301,7 @@ GREMLIN;
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode"); name in arg1 }
+     .has('fullnspath')
      .sideEffect{
         fullnspath = "\\\\" + it.get().value("code");
         it.get().property("fullnspath", fullnspath); 
