@@ -99,7 +99,7 @@ class ExakatConfig extends Config {
         // Validation
         if (!isset($this->config['graphdb']) ||
             !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
-            display("Warning : No such graph as ".$this->config['graphdb']." : using 'nogremlin', without graphdb.\n");
+            display("Warning : No such graph as ".($this->config['graphdb'] ?? '')." : using 'nogremlin', without graphdb.\n");
             $this->config['graphdb'] = 'nogremlin';
         }
 
