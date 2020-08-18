@@ -272,11 +272,13 @@ class IsRead extends Plugin {
             case 'Arrayliteral' :
             case 'Functioncall' :
             case 'Newcall' :
-//            case 'Echo' :
-//            case 'Exit' :
-//            case 'Eval' :
+
+            case 'Exit' :
+            case 'Eval' :
+            case 'Print' :
+            case 'Echo' :
+
 //            case 'Empty' :
-//            case 'Print' :
 //            case 'Sequence' :
                 foreach($extras as $extra) {
                     if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {

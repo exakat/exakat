@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedMethods extends Analyzer {
     public function dependsOn(): array {
-        return array('Complete/SetClassMethodRemoteDefinition',
+        return array('Complete/OverwrittenMethods',
+                     'Complete/SetClassMethodRemoteDefinition',
                      'Complete/SetClassRemoteDefinitionWithLocalNew',
                      'Complete/SetClassRemoteDefinitionWithReturnTypehint',
                      'Complete/SetStringMethodDefinition',

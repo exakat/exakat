@@ -80,11 +80,7 @@ class ZendF3 {
 
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (isset($return[$row['release']])) {
-                $return[$row['release']][] = $row['class'];
-            } else {
-                $return[$row['release']] = array($row['class']);
-            }
+            array_collect_by($return, $row['release'], $row['class']);
         }
 
         return $return;
@@ -107,11 +103,7 @@ class ZendF3 {
         $return = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (isset($return[$row['release']])) {
-                $return[$row['release']][] = $row['interface'];
-            } else {
-                $return[$row['release']] = array($row['interface']);
-            }
+            array_collect_by($return, $row['release'], $row['interface']);
         }
 
         return $return;
@@ -134,11 +126,7 @@ class ZendF3 {
         $return = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (isset($return[$row['release']])) {
-                $return[$row['release']][] = $row['trait'];
-            } else {
-                $return[$row['release']] = array($row['trait']);
-            }
+            array_collect_by($return, $row['release'], $row['trait']);
         }
 
         return $return;

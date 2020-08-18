@@ -29,6 +29,7 @@ class UsedProtectedMethod extends Analyzer {
     public function dependsOn(): array {
         return  array('Complete/SetParentDefinition',
                       'Complete/SetClassMethodRemoteDefinition',
+                      'Complete/OverwrittenMethods',
                      );
     }
 
