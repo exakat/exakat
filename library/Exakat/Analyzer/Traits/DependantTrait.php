@@ -42,7 +42,11 @@ class DependantTrait extends Analyzer {
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
              ->inIs(array('OBJECT', 'CLASS'))
              ->atomIs(array('Methodcall', 'Staticmethodcall'))
-             ->hasNoIn('DEFINITION')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIsNot('Virtualmethod')
+             )
              ->back('first');
         $this->prepareQuery();
 

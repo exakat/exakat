@@ -6519,6 +6519,7 @@ class Load extends Tasks {
             } else {
                $fnp = $name->code;
             }
+
             if (($offset = strpos($fnp, '\\')) === false) {
                 $prefix = $fnp;
             } else {
@@ -6533,7 +6534,7 @@ class Load extends Tasks {
 
             } elseif ($type === 'class' && ($use = $this->uses->get('class', $prefix)) instanceof AtomInterface) {
                 $this->addLink($name, $use, 'USED');
-                $apply->fullnspath = $use->fullnspath . str_replace($prefix, '', $fnp);
+                $apply->fullnspath = $use->fullnspath . '\\' . preg_replace('/^'.$prefix.'\\\\/', '', $fnp);
                     return;
 
             } elseif ($type === 'const') {

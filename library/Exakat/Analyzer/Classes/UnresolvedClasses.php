@@ -42,6 +42,7 @@ class UnresolvedClasses extends Analyzer {
         $interfaces = makeFullNsPath($interfaces);
 
         $traits = $this->loadIni('php_traits.ini', 'traits');
+        $traits = array_filter($traits);
         $traits = makeFullNsPath($traits);
 
         $cit = array_values(array_merge($classes, $interfaces, $traits));
