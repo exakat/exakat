@@ -29,8 +29,7 @@ class CouldUseAlias extends Analyzer {
         // use a\b as C; and  a\b::D();
         $this->atomIs('Newcall')
              ->hasNoIn('NAME')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->codeIsNot('[')
+             ->tokenIs(array('T_NS_SEPARATOR', 'T_NAME_RELATIVE', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_QUALIFIED'))
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToNamespace()
@@ -38,6 +37,7 @@ class CouldUseAlias extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
              ->outIs('USE')
+             ->is('use', 'class')
              ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
@@ -45,8 +45,7 @@ class CouldUseAlias extends Analyzer {
         // use a\b as C; and  a\b\c\d::D();
         $this->atomIs('Newcall')
              ->hasNoIn('NAME')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->codeIsNot('[')
+             ->tokenIs(array('T_NS_SEPARATOR', 'T_NAME_RELATIVE', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_QUALIFIED'))
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->savePropertyAs('fullcode', 'written')
@@ -60,6 +59,7 @@ class CouldUseAlias extends Analyzer {
                      ->raw('filter{ (written.tokenize("\\\\")[0].toLowerCase() == it.get().value("alias"))}')
               )
              ->outIs('USE')
+             ->is('use', 'class')
              ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "..").getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
@@ -67,7 +67,7 @@ class CouldUseAlias extends Analyzer {
         // use a\b as C; and  a\b::D();
         $this->atomIs('Nsname')
              ->hasIn(array('CLASS', 'EXTENDS', 'IMPLEMENTS'))
-             ->tokenIs('T_NS_SEPARATOR')
+             ->tokenIs(array('T_NS_SEPARATOR', 'T_NAME_RELATIVE', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_QUALIFIED'))
              ->codeIsNot('[')
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
@@ -76,36 +76,37 @@ class CouldUseAlias extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
              ->outIs('USE')
+             ->is('use', 'class')
              ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
 
         // use function a\b as C; and  a\b();
         $this->atomIs('Functioncall')
-             ->tokenIs('T_NS_SEPARATOR')
+             ->tokenIs(array('T_NS_SEPARATOR', 'T_NAME_RELATIVE', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_QUALIFIED'))
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToNamespace()
              ->outIs(array('BLOCK', 'CODE'))
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
-             ->hasOut('FUNCTION')
              ->outIs('USE')
+             ->is('use', 'function')
              ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
 
         // use const a\b as C; and  a\b;
         $this->atomIs('Nsname')
-             ->tokenIs('T_NS_SEPARATOR')
+             ->tokenIs(array('T_NS_SEPARATOR', 'T_NAME_RELATIVE', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_QUALIFIED'))
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToNamespace()
              ->outIs(array('BLOCK', 'CODE'))
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
-             ->hasOut('CONST')
              ->outIs('USE')
+             ->is('use', 'const')
              ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") + "\\$").getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
