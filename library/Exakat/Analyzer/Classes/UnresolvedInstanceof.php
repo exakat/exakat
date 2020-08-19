@@ -59,7 +59,7 @@ class UnresolvedInstanceof extends Analyzer {
         // special case for parents
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->atomIs(array('Parent', 'Self', 'Static'))
+             ->atomIs(array('Parent'))
              ->goToClass()
              ->hasNoOut('EXTENDS')
              ->back('first');

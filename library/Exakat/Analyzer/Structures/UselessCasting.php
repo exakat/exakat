@@ -96,7 +96,7 @@ class UselessCasting extends Analyzer {
         $this->atomIs('Cast')
              ->tokenIs('T_INT_CAST')
              ->followParAs('CAST')
-             ->atomIs('Integer')
+             ->atomIs('Integer', self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
     }

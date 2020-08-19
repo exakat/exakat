@@ -5,8 +5,8 @@ $c = (array) array_filter($a, $b);
 $d = (bool)  array_key_exists($a, $b);
 $d = (boolean)  phpinfo();
 
-$e = (double) date_sun_info();
-$g = (real) imagefttext();
+$e = (double) imagerotate();
+//$g = (real) imagefttext();
 $g = (float) acosh();
 $f = (int) memory_get_peak_usage();
 $g = (integer) curl_errno();

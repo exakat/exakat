@@ -40,7 +40,7 @@ class IdenticalMethods extends Analyzer {
              ->hasNoInterface()
              ->savePropertyAs('ctype1', 'clonetype')
              ->inIs('OVERWRITE')
-             ->atomIs('Method')
+             ->atomIs(self::FUNCTIONS_METHODS)
              ->samePropertyAs('ctype1', 'clonetype')
              ->back('first');
         $this->prepareQuery();

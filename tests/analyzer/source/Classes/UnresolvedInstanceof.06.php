@@ -1,5 +1,7 @@
 <?php
 
+// PHP 7.4-
+
 class XnoParent {
     function f() {
         $a1 instanceof self;

@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class DisconnectedClasses extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/SetClassMethodRemoteDefinition',
+                     'Complete/OverwrittenMethods',
                     );
     }
 
@@ -42,6 +43,7 @@ class DisconnectedClasses extends Analyzer {
                      ->inIs(array('OBJECT', 'CLASS'))
                      ->atomIs(array('Methodcall', 'Staticmethodcall'))
                      ->inIs('DEFINITION')
+                     ->atomIsNot('Virtualmethod')
                      ->goToClass()
                      ->fullnspathIsNot('fnp')
              )
@@ -58,7 +60,7 @@ class DisconnectedClasses extends Analyzer {
                      ->fullnspathIsNot('fnp')
              )
 
-             // No usage of method from the parent
+             // No method usage of method in the parent
              ->not(
                 $this->side()
                      ->collectMethods('methods')
