@@ -4731,6 +4731,7 @@ class Load extends Tasks {
                 $this->addLink($use, $as, 'USE');
 
                 $namespace = $as;
+                $namespace->use = $useType;
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR) {
                 //use A\B\ {}
                 $this->addLink($use, $namespace, 'GROUPUSE');
@@ -4745,7 +4746,13 @@ class Load extends Tasks {
                 $useTypeGeneric = $useType;
                 $useTypeAtom = 0;
                 do {
-                    ++$this->id; // Skip {
+                    ++$this->id; // Skip { or ,
+
+                    // trailing comma
+                    if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
+                        $use->trailing = self::TRAILING;
+                        continue;
+                    }
 
                     $useType = $useTypeGeneric;
                     $useTypeAtom = 0;
@@ -4763,52 +4770,49 @@ class Load extends Tasks {
                         $useType = 'function';
                     }
 
-                    if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
-                        $use->trailing = self::TRAILING;
-                    } else {
-                        $nsname = $this->processOneNsname();
+                    $nsname = $this->processOneNsname();
 
-                        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
-                            // A\B as C
-                            ++$this->id;
-                            $this->pushExpression($nsname);
-                            $alias = $this->processAlias($useType);
+                    if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
+                        // A\B as C
+                        ++$this->id;
+                        $this->pushExpression($nsname);
+                        $alias = $this->processAlias($useType);
 
-                            if ($useType === 'const') {
-                                $nsname->fullnspath = $prefix . $nsname->fullcode;
-                                $nsname->origin     = $prefix . $nsname->fullcode;
+                        if ($useType === 'const') {
+                            $nsname->fullnspath = $prefix . $nsname->fullcode;
+                            $nsname->origin     = $prefix . $nsname->fullcode;
 
-                                $alias->fullnspath  = $nsname->fullnspath;
-                                $alias->origin      = $nsname->origin;
-                            } else {
-                                $nsname->fullnspath = $prefix . mb_strtolower($nsname->fullcode);
-                                $nsname->origin     = $prefix . mb_strtolower($nsname->fullcode);
-
-                                $alias->fullnspath  = $nsname->fullnspath;
-                                $alias->origin      = $nsname->origin;
-                            }
-
-                            $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
-                            $alias->alias = $aliasName;
-                            $this->addLink($use, $alias, 'USE');
+                            $alias->fullnspath  = $nsname->fullnspath;
+                            $alias->origin      = $nsname->origin;
                         } else {
-                            $this->addLink($use, $nsname, 'USE');
-                            if ($useType === 'const') {
-                                $nsname->fullnspath = $prefix . $nsname->fullcode;
-                                $nsname->origin     = $prefix . $nsname->fullcode;
-                            } else {
-                                $nsname->fullnspath = $prefix . mb_strtolower($nsname->fullcode);
-                                $nsname->origin     = $prefix . mb_strtolower($nsname->fullcode);
-                            }
+                            $nsname->fullnspath = $prefix . mb_strtolower($nsname->fullcode);
+                            $nsname->origin     = $prefix . mb_strtolower($nsname->fullcode);
 
-                            $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
-
-                            $nsname->alias = $alias;
+                            $alias->fullnspath  = $nsname->fullnspath;
+                            $alias->origin      = $nsname->origin;
                         }
 
-                        $nsname->use = $useType;
-                        $nsname->fullcode = ($useType !== 'class' ? $useType . ' ' : '') . $nsname->fullcode;
+                        $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
+                        $alias->alias = $aliasName;
+                        $this->addLink($use, $alias, 'USE');
+                    } else {
+                        $this->addLink($use, $nsname, 'USE');
+                        if ($useType === 'const') {
+                            $nsname->fullnspath = $prefix . $nsname->fullcode;
+                            $nsname->origin     = $prefix . $nsname->fullcode;
+                        } else {
+                            $nsname->fullnspath = $prefix . mb_strtolower($nsname->fullcode);
+                            $nsname->origin     = $prefix . mb_strtolower($nsname->fullcode);
+                        }
+
+                        $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
+
+                        $nsname->alias = $alias;
                     }
+
+                    $nsname->use = $useType;
+                    $nsname->fullcode = ($useType !== 'class' ? $useType . ' ' : '') . $nsname->fullcode;
+
                 } while ( $this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
 
                 $fullcode[] = $namespace->fullcode . self::FULLCODE_BLOCK;
