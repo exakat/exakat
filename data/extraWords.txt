@@ -275,3 +275,10 @@ templating
 github.com
 Yaml
 PNG
+arrowfunction
+arrowfunctions
+CLI
+cyclomatic
+subquery
+subqueries
+subqueried
