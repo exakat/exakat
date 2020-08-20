@@ -159,10 +159,10 @@ class Php73 extends Php {
     const T_NS_SEPARATOR                  = 390;
     const T_ELLIPSIS                      = 391;
     const T_DOUBLE_COLON                  = 387;
+    const T_BAD_CHARACTER                 = 395;
 
     const T_COALESCE_EQUAL                = 1000;
     const T_FN                            = 1000;
-    const T_BAD_CHARACTER                 = 1000;
     const T_CHARACTER                     = 1000;
     const T_NAME_FULLY_QUALIFIED          = 1000;
     const T_NAME_RELATIVE                 = 1000;

@@ -819,6 +819,10 @@ class Load extends Tasks {
                         $comments += substr_count($t[1], "\n");
                         break;
 
+                    case $this->phptokens::T_BAD_CHARACTER :
+                        // Ignore all
+                        break;
+
                     case $this->phptokens::T_DOC_COMMENT:
                         $this->tokens[] = $t;
                         $comments += substr_count($t[1], "\n") + 1;
@@ -4225,9 +4229,6 @@ class Load extends Tasks {
         $this->runPlugins($ifthen, $extras);
 
         if ($this->tokens[$current][0] === $this->phptokens::T_IF) {
-            if ($this->tokens[$this->id][0] === $this->phptokens::T_ENDIF) {
-                --$this->id; // otherwise, ifthen : endif doesn't end on endif.
-            }
             $this->pushExpression($ifthen);
             $this->finishWithAlternative($isColon);
         }

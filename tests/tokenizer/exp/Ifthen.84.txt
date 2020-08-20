@@ -122,18 +122,6 @@ Label : GLOBAL
 Label : PROJECT
   1
   Label : DEFINITION
-    88
-    Label : DEFINITION
-      88
-  Label : DEFINITION
-    92
-    Label : DEFINITION
-      92
-  Label : DEFINITION
-    86
-    Label : DEFINITION
-      86
-  Label : DEFINITION
     11
     Label : DEFINITION
       11
@@ -201,6 +189,18 @@ Label : PROJECT
     84
     Label : DEFINITION
       84
+  Label : DEFINITION
+    86
+    Label : DEFINITION
+      86
+  Label : DEFINITION
+    88
+    Label : DEFINITION
+      88
+  Label : DEFINITION
+    92
+    Label : DEFINITION
+      92
   Label : FILE
     3
     Label : EXPRESSION
