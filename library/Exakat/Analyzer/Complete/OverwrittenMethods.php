@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Complete;
 class OverwrittenMethods extends Complete {
     public function analyze(): void {
 
-        // This is more specific than the next
+        // This query is more specific than the next
         // class x {use t { t::a as b}}
         $this->atomIs('Virtualmethod', self::WITHOUT_CONSTANTS)
              ->hasNoOut('OVERWRITE')
@@ -74,6 +74,29 @@ class OverwrittenMethods extends Complete {
              ->inIs('AS')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
+             ->back('class')
+
+             ->goToAllParentsTraits(self::EXCLUDE_SELF)
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS) // No virtualmethod here
+             ->as('origin')
+             ->outIs('NAME')
+             ->hasNoOut('METHOD')
+             ->samePropertyAs('code', 'name',  self::CASE_INSENSITIVE)
+             ->back('origin')
+             ->dedup(array('first', 'origin'))
+             ->addEFrom('OVERWRITE', 'first');
+        $this->prepareQuery();
+
+        // class x {use t}
+        $this->atomIs('Virtualmethod', self::WITHOUT_CONSTANTS)
+             ->hasNoOut('OVERWRITE')
+             ->savePropertyAs('lccode', 'name')
+             ->goToClass()
+             ->as('class')
+
+             ->outIs('USE')
+             ->hasNoOut('BLOCK')
              ->back('class')
 
              ->goToAllParentsTraits(self::EXCLUDE_SELF)
