@@ -5706,7 +5706,7 @@ All steps
 _________
 
 
-Here is the list of the 238 available steps : 
+Here is the list of the 245 available steps : 
 
 * AddEFrom : adds a link between the current atom from the atom called  (see _As())
 
@@ -5868,6 +5868,10 @@ Here is the list of the 238 available steps :
 
 * GoToNamespace : Docs for GoToNamespace
 
+* GoToParameterDefinition : Move the cursor from the current argument usage, to its definition, if it is defined in the current code. This analysis is compatible with PHP 8.0 named parameters and variadic arguments.
+
+* GoToParameterUsage : Move the cursor from the current Parameter to all its usage. This analysis is compatible with PHP 8.0 named parameters and variadic arguments.
+
 * GoToParent : Docs for GoToParent
 
 * GoToTrait : Docs for GoToTrait
@@ -5994,6 +5998,8 @@ Here is the list of the 238 available steps :
 
 * InterfaceDefinition : Docs for InterfaceDefinition
 
+* InterfaceLike : Is this an abstract method, from an abstract class or an interface.
+
 * Is : checks that the property  has the value 
 
 * IsArgument : checks if the current atom is an argument of a function or method call
@@ -6104,6 +6110,8 @@ Here is the list of the 238 available steps :
 
 * Not : A filter that checks that the provided sub-query doesn't return anything. If the provided sub-query returns one result, at least, then the current query stops.
 
+* NotCompatibleWithType : Check that the provided typehint (in argument) is not compatible with the typehint or return typehint of the current parameter or method.
+
 * NotExtending : Docs for NotExtending
 
 * NotImplementing : Docs for NotImplementing
@@ -6131,6 +6139,12 @@ Here is the list of the 238 available steps :
 * PreviousSibling : Docs for PreviousSibling
 
 * PreviousSiblings : Docs for PreviousSiblings
+
+* ProcessDereferencing : Count the number of dereferencing (->, (x) or [x]) in one expression. This is a dedicated analysis.
+
+* ProcessIndentingAverage : Count the number of indentation in one expression, based on structures : if/then, switch, for, foreach, type. This is a dedicated analysis.
+
+* ProcessLevels : Count the number of levels in one expression. This is a dedicated analysis.
 
 * Property : Docs for Property
 

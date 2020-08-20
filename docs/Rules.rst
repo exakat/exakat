@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 04 Aug 2020 14:07:38 +0000
-.. comment: Generation hash : 0eecf176c68cff46d62cdbde6d82a58f0ebc3afa
+.. comment: Generation date : Thu, 20 Aug 2020 08:38:01 +0000
+.. comment: Generation hash : a2275be4452f2c4b9bfe42126a959dad39cdde86
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -456,6 +456,8 @@ To abstract such calls, place them in a method, and add an interface to this met
    ?>
 
 
+This analysis targets two API for abstraction : time and random values. Time and date related functions may be replaced by `Carbon <https://carbon.nesbot.com/docs/>`_, `Clock <https://github.com/lcobucci/clock>`_, `Chronos <https://github.com/cakephp/chronos>`_. Random values may be replaced with `RandomLib <https://github.com/ircmaxell/RandomLib/`_ or a custome interface.
+
 See also `Being in control of time in PHP <https://blog.frankdejonge.nl/being-in-control-of-time-in-php/>`_ and `How to test non-deterministic code <https://www.orbitale.io/2019/12/24/how-to-test-non-deterministic-code.html>`_.
 
 
@@ -464,11 +466,13 @@ Suggestions
 
 * Abstract away the calls to native PHP functions, and upgrade the unit tests
 
-+-------------------+---------+----------+-------------+
-| Name              | Default | Type     | Description |
-+-------------------+---------+----------+-------------+
-| abstractableCalls |         | ini_hash | Description |
-+-------------------+---------+----------+-------------+
++---------------------+---------+----------+------------------------------------------------------------------+
+| Name                | Default | Type     | Description                                                      |
++---------------------+---------+----------+------------------------------------------------------------------+
+| abstractableCalls   |         | ini_hash | Functions that shouldn't be called directly, unless in a method. |
++---------------------+---------+----------+------------------------------------------------------------------+
+| abstractableClasses |         | ini_hash | Description                                                      |
++---------------------+---------+----------+------------------------------------------------------------------+
 
 
 
@@ -2500,7 +2504,7 @@ This analysis skips `scandir() <https://www.php.net/scandir>`_ and `glob() <http
 
 `glob() <https://www.php.net/glob>`_ accepts wildchar, such as ``*``, that may not easily replaced with `scandir() <https://www.php.net/scandir>`_ or `opendir() <https://www.php.net/opendir>`_.
 
-See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_ and `glob:// <https://www.php.net/manual/en/wrappers.glob.php>`_.
+See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_, `How to list files recursively in a directory with PHP iterators <https://dev.to/bdelespierre/how-to-list-files-recursively-in-a-directory-with-php-iterators-5c0m>`_ and `glob:// <https://www.php.net/manual/en/wrappers.glob.php>`_.
 
 
 
@@ -7091,7 +7095,7 @@ See also `Autoloading Classes <http://php.net/manual/en/language.oop5.autoload.p
 Suggestions
 ^^^^^^^^^^^
 
-* Move function definitions to th global space : outside structures, and method.
+* Move function definitions to the global space : outside structures, and method.
 
 +-------------+---------------------------+
 | Short name  | Functions/DeepDefinitions |
@@ -7395,6 +7399,55 @@ Suggestions
 +-------------+-----------------------------------------------+
 | Php Version | Php/DetectCurrentClass                        |
 +-------------+-----------------------------------------------+
+
+
+
+.. _different-argument-counts:
+
+Different Argument Counts
+#########################
+
+
+Two methods with the same name shall have the same number of compulsory argument. PHP accepts different number of arguments between two methods, if the extra arguments have default values. Basically, they shall be called interchangeably with the same number of arguments.
+
+The number of compulsory arguments is often mistaken for the same number of arguments. When this is the case, it leads to confusion between the two signatures. It will also create more difficulties when refactoring the signature.
+
+While this code is legit, it is recommended to check if the two signatures could be synchronized, and reduce future surprises.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       function foo($a ) {}
+   }
+   
+   class y extends x {
+       // This method is compatible with the above, its signature is different
+       function foo($a, $b = 1) {}
+   }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Extract the extra arguments into other methods
+* Remove the extra arguments
+* Add the extra arguments to all the signatures
+
++-------------+------------------------------------+
+| Short name  | Classes/DifferentArgumentCounts    |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Classes/DifferentArgumentCounts    |
++-------------+------------------------------------+
 
 
 
@@ -13476,7 +13529,7 @@ Large Try Block
 
 Try block should enclosing only the expression that may emit an exception. 
 
-When writing large blocks of code in a try, it becomes difficult to understand wherethe expression is coming from. Large blocks may also lead to catch multiples exceptions, with a long list of catch clause. 
+When writing large blocks of code in a try, it becomes difficult to understand where the expression is coming from. Large blocks may also lead to catch multiples exceptions, with a long list of catch clause. 
 
 In particular, the catch clause will resume the execution without knowing where the try was interrupted : there are no indication of achievement, even partial. In fact, catching an exception signals a very dirty situation.
 
@@ -13505,7 +13558,7 @@ In particular, the catch clause will resume the execution without knowing where 
    ?>
 
 
-This analysis reports try-blocks that are 5 lines or more. This threshold may be configured with the directive tryBlockMaxSize. Catch clause, and finally are not considered here.
+This analysis reports try blocks that are 5 lines or more. This threshold may be configured with the directive ``tryBlockMaxSize``. Catch clause, and finally are not considered here.
 
 
 
@@ -18372,7 +18425,7 @@ No Literal For Reference
 
 Method arguments and return values may be by reference. Then, they need to be a valid variable.
 
-Objects are always passed by reference, so there is no need to explicitely declare it.
+Objects are always passed by reference, so there is no need to explicitly declare it.
 
 Expressions, including ternary operator, produce value, and can't be used by reference directly. This is also the case for expression that include one or more reference. 
 
@@ -27105,8 +27158,6 @@ Suggestions
 +-------------+---------------------------------+
 | Rulesets    | :ref:`Suggestions`              |
 +-------------+---------------------------------+
-| Php Version | 7.4-                            |
-+-------------+---------------------------------+
 | Severity    | Minor                           |
 +-------------+---------------------------------+
 | Time To Fix | Structures/SGVariablesConfusion |
@@ -27876,6 +27927,58 @@ Suggestions
 +-------------+---------------------------------+
 | Examples    | Structures/SuspiciousComparison |
 +-------------+---------------------------------+
+
+
+
+.. _swapped-arguments:
+
+Swapped Arguments
+#################
+
+
+Overwritten methods must be compatible, but argument names is not part of that compatibility.
+
+Methods with the same name, in two classes of the same hierachy, must be compatible for typehint, default value, reference. The name of the argument is not taken into account when checking such compatibility, at least until PHP 7.4.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       function foo($a, $b) {}
+       
+       function bar($a, $b) {}
+   }
+   
+   class y extends x {
+       // foo is compatible (identical) with the above class
+       function foo($a, $b) {}
+       
+       // bar is compatible with the above class, yet, the argument might not receive what they expect.
+       function bar($b, $a) {}
+   }
+   
+   ?>
+
+
+This analysis reports argument lists that differs in ordering. This analysis doesn't report argument lists that also differs in argument names. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make sure the names of the argument are in the same order in all classes and interfaces
+
++-------------+--------------------------+
+| Short name  | Classes/SwappedArguments |
++-------------+--------------------------+
+| Rulesets    | :ref:`Analyze`           |
++-------------+--------------------------+
+| Severity    | Critical                 |
++-------------+--------------------------+
+| Time To Fix | Classes/SwappedArguments |
++-------------+--------------------------+
 
 
 
@@ -29268,22 +29371,27 @@ Typehint Must Be Returned
 #########################
 
 
-When using a typehint for a method, it is compulsory to use a at least one return in the method's body.
+When using a typehint for a method, it is compulsory to use a at least one return in the method's body. This is true for nullable typehint too : ``return`` alone won't be sufficient.
 
 .. code-block:: php
 
    <?php
    
-   // Empty function : 
+   // The function returns a value (here, correct object)
    function foo() : Bar { return new Bar(); }
    
-   // Empty function : 
+   // The function should at least, return a value
    function foo() : Bar { }
+   
+   // The function should at least, return a value : Null or an object. Void, here, is not acceptable.
+   function foo() : ?Bar { return; }
    
    ?>
 
 
 PHP lint this, but won't execute it.
+
+This analysis doesn't check if the returned value is compatible with the returned typehint. Only its presence is checked.
 
 See also `Return Type Declaration <http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration>`_ and `Type hint in PHP function parameters and return values <https://mlocati.github.io/articles/php-type-hinting.html>`_.
 
@@ -30524,6 +30632,52 @@ Suggestions
 +-------------+----------------------------------+
 | Examples    | Classes/UnitializedProperties    |
 +-------------+----------------------------------+
+
+
+
+.. _unknown-parameter-name:
+
+Unknown Parameter Name
+######################
+
+
+The name of the parameter doesn't belong to the method signature. 
+
+.. code-block:: php
+
+   <?php
+   
+   // All good
+   foo(a:1, b:2, c:3);
+   
+   // A is not a parameter name, it should be a
+   foo(A:1, b:2, c:3);
+   
+   function foo($a, $b, $c) {}
+   ?>
+
+
+See also `Named Arguments <https://wiki.php.net/rfc/named_params>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Fix the name of the parameter and use a valid one
+* Remove the parameter name, and revert to positional notation
+
++-------------+--------------------------------+
+| Short name  | Functions/UnknownParameterName |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Analyze`                 |
++-------------+--------------------------------+
+| Php Version | 8.0+                           |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Functions/UnknownParameterName |
++-------------+--------------------------------+
 
 
 
@@ -31952,8 +32106,6 @@ Suggestions
 | Short name  | Traits/UnusedClassTrait |
 +-------------+-------------------------+
 | Rulesets    | :ref:`ClassReview`      |
-+-------------+-------------------------+
-| Php Version | 7.4-                    |
 +-------------+-------------------------+
 | Severity    | Minor                   |
 +-------------+-------------------------+

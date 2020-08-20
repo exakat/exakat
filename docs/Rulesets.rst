@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 04 Aug 2020 14:07:38 +0000
-.. comment: Generation hash : 0eecf176c68cff46d62cdbde6d82a58f0ebc3afa
+.. comment: Generation date : Thu, 20 Aug 2020 08:38:01 +0000
+.. comment: Generation hash : a2275be4452f2c4b9bfe42126a959dad39cdde86
 
 
 .. _analyze:
@@ -91,7 +91,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 399 analysis
+Total : 402 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -171,6 +171,7 @@ Total : 399 analysis
 * :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
 * :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Functions <deprecated-functions>`
+* :ref:`Different Argument Counts <different-argument-counts>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Don't Echo Error <don't-echo-error>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
@@ -379,6 +380,7 @@ Total : 399 analysis
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 * :ref:`Strtr Arguments <strtr-arguments>`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
+* :ref:`Swapped Arguments <swapped-arguments>`
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch Without Default <switch-without-default>`
 * :ref:`Ternary In Concat <ternary-in-concat>`
@@ -412,6 +414,7 @@ Total : 399 analysis
 * :ref:`Undefined Variable <undefined-variable>`
 * :ref:`Undefined \:\:class <undefined-\:\:class>`
 * :ref:`Undefined static\:\: Or self\:\: <undefined-static\:\:-or-self\:\:>`
+* :ref:`Unknown Parameter Name <unknown-parameter-name>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
 * :ref:`Unkown Regex Options <unkown-regex-options>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
@@ -500,7 +503,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 46 analysis
+Total : 47 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -517,6 +520,7 @@ Total : 46 analysis
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Cyclic References <cyclic-references>`
 * :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
+* :ref:`Different Argument Counts <different-argument-counts>`
 * :ref:`Disconnected Classes <disconnected-classes>`
 * :ref:`Double Object Assignation <double-object-assignation>`
 * :ref:`Exceeding Typehint <exceeding-typehint>`

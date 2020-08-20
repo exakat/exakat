@@ -440,12 +440,23 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.1.6
+
+  * Different Argument Counts (Classes/DifferentArgumentCounts)
+  * GLOB_BRACE Usage (Portability/GlobBraceUsage ; Portability)
+  * Iconv With Translit (Portability/IconvTranslit ; Portability)
+  * Unknown Parameter Name (Functions/UnknownParameterName ; Analyze)
+  * Use Closure Trailing Comma (Php/UseTrailingUseComma ; Appinfo)
+  * Use NullSafe Operator (Php/UseNullSafeOperator ; Appinfo)
+  * Use PHP Attributes (Php/UseAttributes ; Appinfo)
+
 * 2.1.5
 
   * Abstract Away (Patterns/AbstractAway ; Suggestions)
   * Catch Undefined Variable (Exceptions/CatchUndefinedVariable ; Analyze)
   * Collect Parameter Names (Dump/CollectParameterNames ; Dump)
   * Dont Compare Typed Boolean (Structures/DontCompareTypedBoolean ; Suggestions)
+  * Dump/CollectClassChanges (Dump/CollectClassChanges ; Dump)
   * Dump/FossilizedMethods (Dump/FossilizedMethods ; Dump)
   * Large Try Block (Exceptions/LargeTryBlock ; Suggestions)
   * Swapped Arguments (Classes/SwappedArguments)
@@ -612,7 +623,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.9.5
 
   * Collect Literals (Dump/CollectLiterals ; Dump)
-  * Environnement Variable Usage (Dump/EnvironnementVariables ; Dump)
+  * Environment Variable Usage (Dump/EnvironnementVariables ; Dump)
   * Interfaces Don't Ensure Properties (Interfaces/NoGaranteeForPropertyConstant ; Analyze, ClassReview)
   * Interfaces Is Not Implemented (Interfaces/IsNotImplemented ; Analyze, LintButWontExec, ClassReview)
   * Magic Properties (Classes/MagicProperties)
@@ -2227,12 +2238,13 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-93 PHP error message detailled : 
+97 PHP error message detailled : 
 
 * :ref:` Cannot use parent when current class scope has no parent <class-without-parent>`
 * :ref:` Default value for parameters with a int type can only be int or NULL  <mismatch-type-and-default>`
 * :ref:` array_merge() expects at least 1 parameter, 0 given <array\_merge()-and-variadic>`
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
+* :ref:`A function with return type must return a value (did you mean "return null;" instead of "return;"?) <typehint-must-be-returned>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
 * :ref:`Access level to c\:\:iPrivate() must be public (as in class i)  <concrete-visibility>`
 * :ref:`Access level to x\:\:foo() must be public (as in class i) <implemented-methods-are-public>`
@@ -2242,6 +2254,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`An alias (%s) was defined for method %s(), but this method does not exist <undefined-insteadof>`
 * :ref:`Argument 1 passed to foo() must be of the type integer, string given <mismatch-type-and-default>`
 * :ref:`Array and string offset access syntax with curly braces is deprecated <no-more-curly-arrays>`
+* :ref:`Call to a member function m() on null <use-nullsafe-operator>`
 * :ref:`Call to undefined function <throw-functioncall>`
 * :ref:`Call to undefined method theParent\:\:bar() <undefined-parent>`
 * :ref:`Can't inherit abstract function A\:\:bar() <cant-inherit-abstract-method>`
@@ -2312,6 +2325,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Undefined constant 'y' <undefined-constant-name>`
 * :ref:`Undefined function <undefined-functions>`
 * :ref:`Undefined variable:  <undefined-variable>`
+* :ref:`Unknown named parameter $d in <unknown-parameter-name>`
 * :ref:`Unparenthesized a ? b : c ? d : e is deprecated. Use either (a ? b : c) ? d : e or a ? b : (c ? d : e) <nested-ternary-without-parenthesis>`
 * :ref:`Unsupported operand types <unsupported-operand-types>`
 * :ref:`Use of undefined constant y - assumed 'y' (this will throw an Error in a future version of PHP) <undefined-constant-name>`
@@ -2319,6 +2333,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`__autoload() is deprecated, use spl_autoload_register() instead <old-style-\_\_autoload()>`
 * :ref:`__clone method called on non-object <clone-with-non-object>`
 * :ref:`define(): Declaration of case-insensitive constants is deprecated <case-insensitive-constants>`
+* :ref:`iconv(): Wrong charset, conversion from UTF-8' to ASCII//TRANSLIT' is not allowed <iconv-with-translit>`
 * :ref:`pack(): Type t: unknown format code <invalid-pack-format>`
 * :ref:`syntax error, unexpected '-', expecting '=' <invalid-constant-name>`
 * :ref:`unpack(): Type t: unknown format code <invalid-pack-format>`
@@ -2425,6 +2440,7 @@ External links
 
 List of external links mentionned in this documentation.
 
+* ` <https://wiki.php.net/rfc/nullsafe_operator>`_
 * `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$GLOBALS <http://php.net/manual/en/reserved.variables.globals.php>`_
@@ -2441,6 +2457,7 @@ List of external links mentionned in this documentation.
 * `About circular references in PHP <https://johann.pardanaud.com/blog/about-circular-references-in-php>`_
 * `Add array_key_exists to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
+* `Alpine Linux <https://alpinelinux.org/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
@@ -2673,6 +2690,7 @@ List of external links mentionned in this documentation.
 * `https://www.exakat.io/versionss/index.php?file=latest <https://www.exakat.io/versions/index.php?file=latest>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `Iconv <http://php.net/iconv>`_
+* `iconv <https://www.php.net/manual/fr/function.iconv.php>`_
 * `ICU <http://site.icu-project.org/>`_
 * `Ideal regex delimiters in PHP <http://codelegance.com/ideal-regex-delimiters-in-php/>`_
 * `idn_to_ascii <http://php.net/manual/en/function.idn-to-ascii.php>`_
@@ -2757,6 +2775,7 @@ List of external links mentionned in this documentation.
 * `msgpack for PHP <https://github.com/msgpack/msgpack-php>`_
 * `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
+* `Named Arguments <https://wiki.php.net/rfc/named_params>`_
 * `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
 * `Negative architecture, and assumptions about code <https://matthiasnoback.nl/2018/08/negative-architecture-and-assumptions-about-code/>`_
 * `Nested Ternaries are Great <https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340>`_
@@ -2780,8 +2799,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2806,8 +2825,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2850,6 +2869,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_
 * `PHP RFC: Numeric Literal Separator <https://wiki.php.net/rfc/numeric_literal_separator>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
+* `PHP RFC: Shorter Attribute Syntax <https://wiki.php.net/rfc/shorter_attribute_syntax>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
 * `PHP RFC: Union Types 2.0 <https://wiki.php.net/rfc/union_types_v2>`_
@@ -2965,6 +2985,7 @@ List of external links mentionned in this documentation.
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `trader <https://pecl.php.net/package/trader>`_
+* `Trailing Comma In Closure Use List <https://wiki.php.net/rfc/trailing_comma_in_closure_use_list>`_
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
 * `Traits <https://www.php.net/manual/en/language.oop5.traits.php>`_
@@ -2976,8 +2997,8 @@ List of external links mentionned in this documentation.
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations  <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
@@ -3003,8 +3024,9 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <https://www.php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
@@ -3109,6 +3131,7 @@ _______
 |   analyzer[] = "Classes/CouldBeStatic";
 |   analyzer[] = "Classes/CyclicReferences";
 |   analyzer[] = "Classes/DependantAbstractClass";
+|   analyzer[] = "Classes/DifferentArgumentCounts";
 |   analyzer[] = "Classes/DirectCallToMagicMethod";
 |   analyzer[] = "Classes/DontSendThisInConstructor";
 |   analyzer[] = "Classes/DontUnsetProperties";
@@ -3150,6 +3173,7 @@ _______
 |   analyzer[] = "Classes/ShouldUseThis";
 |   analyzer[] = "Classes/StaticContainsThis";
 |   analyzer[] = "Classes/StaticMethodsCalledFromObject";
+|   analyzer[] = "Classes/SwappedArguments";
 |   analyzer[] = "Classes/ThisIsForClasses";
 |   analyzer[] = "Classes/ThisIsNotAnArray";
 |   analyzer[] = "Classes/ThisIsNotForStatic";
@@ -3224,6 +3248,7 @@ _______
 |   analyzer[] = "Functions/TypehintMustBeReturned";
 |   analyzer[] = "Functions/TypehintedReferences";
 |   analyzer[] = "Functions/UndefinedFunctions";
+|   analyzer[] = "Functions/UnknownParameterName";
 |   analyzer[] = "Functions/UnusedArguments";
 |   analyzer[] = "Functions/UnusedInheritedVariable";
 |   analyzer[] = "Functions/UnusedReturnedValue";
@@ -3508,6 +3533,7 @@ ___________
 |   analyzer[] = "Classes/CouldBeStatic";
 |   analyzer[] = "Classes/CyclicReferences";
 |   analyzer[] = "Classes/DependantAbstractClass";
+|   analyzer[] = "Classes/DifferentArgumentCounts";
 |   analyzer[] = "Classes/DisconnectedClasses";
 |   analyzer[] = "Classes/Finalclass";
 |   analyzer[] = "Classes/Finalmethod";

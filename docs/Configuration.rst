@@ -424,6 +424,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + maxDimensions : 3
 
     + Number of valid dimensions in an array.
+:ref:`Custom Class Usage <custom-class-usage>`
+  + forbiddenClasses : 
+
+    + List of classes to be avoided
 :ref:`Fossilized Method <fossilized-method>`
   + fossilizationThreshold : 6
 
@@ -504,7 +508,11 @@ prefixedType['uuid'] = '\Uuid';
 :ref:`Abstract Away <abstract-away>`
   + abstractableCalls : 
 
-    + Minimal number of parameters to report.
+    + Functions that shouldn't be called directly, unless in a method.
+:ref:`Abstract Away <abstract-away>`
+  + abstractableClasses : 
+
+    + Classes that shouldn't be instantiated directly, unless in a method.
 :ref:`Memoize MagicCall <memoize-magiccall>`
   + minMagicCallsToGet : 2
 
