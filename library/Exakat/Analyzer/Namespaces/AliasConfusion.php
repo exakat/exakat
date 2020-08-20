@@ -33,7 +33,6 @@ class AliasConfusion extends Analyzer {
         $fnp = $this->rawQuery()->toArray();
 
         $this->atomIs('Usenamespace')
-             ->hasNoOut(array('FUNCTION', 'CONST'))
              ->goToNamespace()
              ->raw(<<<'GREMLIN'
 sideEffect{
@@ -48,6 +47,7 @@ GREMLIN
              ->back('first')
 
              ->outIs('USE')
+             ->is('use', 'class')
              ->raw('filter{ x = ***; nspath + "\\\\" + it.get().value("alias") in x && !(it.get().value("fullnspath") in x);}', $fnp);
         $this->prepareQuery();
     }

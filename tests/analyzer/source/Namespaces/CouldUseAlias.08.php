@@ -9,6 +9,7 @@ a\FOO();
 \A\foo();
 
 echo A\C;
+echo A\c;
 echo \A\C;
 echo C;
 

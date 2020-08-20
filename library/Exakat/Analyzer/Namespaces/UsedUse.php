@@ -30,7 +30,7 @@ class UsedUse extends Analyzer {
     public function analyze(): void {
         $this->atomIs('Usenamespace')
              ->outIs('USE')
-             ->hasIn('DEFINITION');
+             ->hasIn('USED');
         $this->prepareQuery();
     }
 }

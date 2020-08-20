@@ -9,6 +9,7 @@ $expected     = array('A\\C',
 
 $expected_not = array('B\\A\\foo( )',
                       '\\A\\C(2)',
+                      'A\\c',
                      );
 
 ?>

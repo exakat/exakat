@@ -25,22 +25,21 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedClassTrait extends Analyzer {
-    /* PHP version restrictions
-    protected $phpVersion = '7.4-';
-    */
-
     public function dependsOn(): array {
         return array('Complete/MakeClassMethodDefinition',
+                     'Complete/OverwrittenMethods',
+                        
                     );
     }
 
     public function analyze(): void {
-        // trait t {}
-        // class x { use T; /* No use of T */ }
-        $this->atomIs('Class')
+        // trait t { function t1() {}}
+        // class x { use T; /* No call to $this->t1() */ }
+        $this->atomIs(self::CLASSES_ALL)
              ->as('c')
              ->outIs('USE')
              ->outIs('USE')
+             // No use of methods
              ->not(
                 $this->side()
                      ->inIs('DEFINITION')
@@ -49,10 +48,10 @@ class UnusedClassTrait extends Analyzer {
 
                      ->outIs('DEFINITION')
                      ->atomIs(array('Methodcall'))
-                     ->goToClass('Class')
-                     ->atomIs('Class')
+                     ->goToClass(self::CLASSES_ALL)
                      ->raw('where( eq("c") )')
                 )
+             // No use of properties ?
                 ->back('first');
         $this->prepareQuery();
     }

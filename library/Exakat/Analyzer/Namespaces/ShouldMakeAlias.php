@@ -28,7 +28,7 @@ class ShouldMakeAlias extends Analyzer {
     public function analyze(): void {
         // No namespace ?
         $this->atomIs(array('Nsname', 'Newcall'))
-             ->tokenIs('T_NS_SEPARATOR')
+             ->tokenIs(array('T_NS_SEPARATOR', 'T_NAME_RELATIVE', 'T_NAME_FULLY_QUALIFIED', 'T_NAME_QUALIFIED'))
              ->hasNoIn(array('USE', 'NAME'))
              ->hasNoParent('Usenamespace', array('NAME', 'USE'))  // use expression
              ->hasNoParent('Namespace', 'NAME')  // use expression
