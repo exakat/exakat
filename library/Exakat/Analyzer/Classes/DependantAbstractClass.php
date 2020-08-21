@@ -28,6 +28,7 @@ class DependantAbstractClass extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/MakeClassConstantDefinition',
                      'Complete/SetClassMethodRemoteDefinition',
+                     'Complete/OverwrittenMethods'
                     );
     }
 
@@ -41,7 +42,11 @@ class DependantAbstractClass extends Analyzer {
              ->atomIs(array('This', 'Self', 'Static', 'Nsname', 'Identifier'))
              ->inIs(array('OBJECT', 'CLASS'))
              ->atomIs(array('Methodcall', 'Staticmethodcall'))
-             ->hasNoIn('DEFINITION')
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs(array('Method', 'Magicmethod'))
+             )
              ->back('first');
         $this->prepareQuery();
 
