@@ -48,7 +48,7 @@ class MakeFunctioncallWithReference extends Complete {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
-             ->goToParameterDefinition()
+             ->goToParameterUsage()
              ->setProperty('isModified', true);
         $this->prepareQuery();
     }

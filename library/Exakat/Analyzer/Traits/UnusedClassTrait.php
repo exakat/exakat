@@ -28,7 +28,7 @@ class UnusedClassTrait extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/MakeClassMethodDefinition',
                      'Complete/OverwrittenMethods',
-                        
+
                     );
     }
 

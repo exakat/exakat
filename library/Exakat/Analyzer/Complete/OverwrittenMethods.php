@@ -148,7 +148,7 @@ class OverwrittenMethods extends Complete {
              ->dedup(array('first', 'origin'))
              ->addEFrom('OVERWRITE', 'first');
         $this->prepareQuery();
-        
+
         // relay virtualmethods definitions to the methodcalls
         $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
              ->inIs('OVERWRITE')

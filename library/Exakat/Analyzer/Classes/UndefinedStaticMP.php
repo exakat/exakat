@@ -45,7 +45,11 @@ class UndefinedStaticMP extends Analyzer {
              ->back('first')
 
              ->analyzerIsNot('Composer/IsComposerNsname')
-             ->hasNoIn('DEFINITION');
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->atomIs(array('Method', 'Magicmethod'))
+             );
         $this->prepareQuery();
 
         // static::$property
