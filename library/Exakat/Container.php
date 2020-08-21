@@ -40,7 +40,7 @@ class Container {
     private $rulesets   = null;
     private $php        = null;
 
-    public function init(array $argv = array()) : void {
+    public function init(array $argv = array()): void {
         $this->config = new Config($argv);
 
         $this->verbose = $this->config->verbose;
@@ -56,31 +56,31 @@ class Container {
         return $this->$what;
     }
 
-    private function graphdb() : void {
+    private function graphdb(): void {
         $this->graphdb    = Graph::getConnexion();
         $this->graphdb->init();
     }
 
-    private function datastore() : void {
+    private function datastore(): void {
         $this->datastore  = new Datastore();
     }
 
-    private function dictionary() : void {
+    private function dictionary(): void {
         $this->dictionary = new Dictionary();
     }
 
-    private function methods() : void {
+    private function methods(): void {
         $this->methods    = new Methods($this->config);
     }
 
-    private function docs() : void {
+    private function docs(): void {
         $this->docs = new Docs($this->config->dir_root,
                                $this->config->ext,
                                $this->config->dev
                                );
     }
 
-    private function rulesets() : void {
+    private function rulesets(): void {
         $this->rulesets = new Rulesets("{$this->config->dir_root}/data/analyzers.sqlite",
                                        $this->config->ext,
                                        $this->config->dev,
@@ -89,7 +89,7 @@ class Container {
                                        );
     }
 
-    private function php() : void {
+    private function php(): void {
         $phpVersion = 'php' . str_replace('.', '', $this->config->phpversion);
         $this->php = new Phpexec($this->config->phpversion, $this->config->{$phpVersion});
     }

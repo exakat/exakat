@@ -28,7 +28,6 @@ use Exakat\Project;
 use Exakat\Config as Configuration;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
-use Exakat\Configsource\RulesetConfig;
 
 class DotExakatYamlConfig extends Config {
     const YAML_FILE = '.exakat.yml';
@@ -55,11 +54,11 @@ class DotExakatYamlConfig extends Config {
         try {
             $tmp_config = Yaml::parseFile($this->dotExakatYaml);
         } catch (ParseException $exception) {
-            print 'Error while parsing ' . basename($this->dotExakatYaml).'. Configuration ignored.'.PHP_EOL;
+            print 'Error while parsing ' . basename($this->dotExakatYaml) . '. Configuration ignored.' . PHP_EOL;
 
             return self::NOT_LOADED;
         }
-        
+
         if (!is_array($tmp_config)) {
             // Can't use display while in config phase
             display("Failed to parse YAML file. Please, check its syntax.\n");
@@ -121,9 +120,9 @@ class DotExakatYamlConfig extends Config {
                            'project_description' => '',
                            'project_branch'      => '',
                            'project_tag'         => '',
-                           
+
                            'stubs'               => array(),
-                           
+
                            'ignore_rules'        => array(),
                         );
 
@@ -182,9 +181,9 @@ class DotExakatYamlConfig extends Config {
             $this->config['project'] = new Project('in-code-audit');
         }
         if (isset($this->config['rulesets'])) {
-            // clean the read 
+            // clean the read
             $this->rulesets = RulesetConfig::cleanRulesets($this->config['rulesets']);
-            
+
             unset($this->config['rulesets']);
         }
 
@@ -205,7 +204,7 @@ class DotExakatYamlConfig extends Config {
         $this->config['stubs'] = makeArray($this->config['stubs']);
         foreach($this->config['stubs'] as $stub) {
             $d = getcwd();
-            $path = realpath($code_dir.$stub);
+            $path = realpath($code_dir . $stub);
             if ($path === false) {
                 continue;
             }
@@ -225,9 +224,9 @@ class DotExakatYamlConfig extends Config {
             if (is_dir($path)) {
                 chdir($path);
                 $allFiles = rglob('.');
-                $allFiles = array_map(function ($path) use ($stub) { return $stub.ltrim($path, '.'); }, $allFiles);
+                $allFiles = array_map(function ($path) use ($stub) { return $stub . ltrim($path, '.'); }, $allFiles);
                 chdir($d);
-            
+
                 $stubs[$stub] = $allFiles;
             }
         }

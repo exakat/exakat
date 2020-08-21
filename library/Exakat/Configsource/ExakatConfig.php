@@ -99,7 +99,7 @@ class ExakatConfig extends Config {
         // Validation
         if (!isset($this->config['graphdb']) ||
             !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
-            display("Warning : No such graph as ".($this->config['graphdb'] ?? '')." : using 'nogremlin', without graphdb.\n");
+            display('Warning : No such graph as ' . ($this->config['graphdb'] ?? '') . " : using 'nogremlin', without graphdb.\n");
             $this->config['graphdb'] = 'nogremlin';
         }
 
@@ -162,26 +162,26 @@ class ExakatConfig extends Config {
 
                 if (!file_exists($path)) {
                     $stubs[$stub] = array();
-    
+
                     continue;
                 }
-    
+
                 if (is_file($path)) {
                     $stubs[$stub] = array($stub);
-    
+
                     continue;
                 }
-    
+
                 if (is_dir($path)) {
                     chdir($path);
                     $allFiles = rglob('.');
-                    $allFiles = array_map(function ($path) use ($stub) { return $stub.ltrim($path, '.'); }, $allFiles);
+                    $allFiles = array_map(function ($path) use ($stub) { return $stub . ltrim($path, '.'); }, $allFiles);
                     chdir($d);
-                
+
                     $stubs[$stub] = $allFiles;
                 }
             }
-            $this->config['stubs'] = array_unique(array_merge(...array_values($stubs))); 
+            $this->config['stubs'] = array_unique(array_merge(...array_values($stubs)));
         }
 
         return str_replace(getcwd(), '.', $configFile);

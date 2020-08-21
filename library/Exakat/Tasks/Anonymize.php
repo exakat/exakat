@@ -381,7 +381,7 @@ class Anonymize extends Tasks {
                         break;
 
                     default:
-                        echo token_name($t[0]), " is unknown token\n", print_r($t, true);
+                        echo token_name($t[0]), " is unknown token (Token : $t[0] '$t[1]', line $t[2])\n";
                 }
 
                 $php .= $t[1];

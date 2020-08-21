@@ -32,11 +32,11 @@ class Stats {
         $this->gremlin = exakat('graphdb');
     }
 
-    public function toArray() :array {
+    public function toArray(): array {
         return $this->stats;
     }
 
-    public function setFileFilter(string $file) : bool {
+    public function setFileFilter(string $file): bool {
         $this->file_filter = ".has('file', '$file')";
 
         return true;
@@ -50,7 +50,7 @@ class Stats {
         }
     }
 
-    public function collect() : void {
+    public function collect(): void {
         $this->stats['tokens_count']        = $this->gremlin->queryOne('g.V().has(id, neq(0))' . $this->file_filter . '.count()');//'.has("atom",not(within("Index")))
         $this->stats['relations_count']     = $this->gremlin->queryOne('g.E().has(id, neq(0))' . $this->file_filter . '.count()');
         $this->stats['atoms_count']         = $this->gremlin->queryOne('g.V().label().unique()' . $this->file_filter . '.size()');

@@ -23,7 +23,6 @@
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Rulesets;
-use Exakat\Datastore;
 use Exakat\Exakat;
 use Exakat\Exceptions\MissingGremlin;
 use Exakat\Exceptions\InvalidProjectName;

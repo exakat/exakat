@@ -76,12 +76,12 @@ class RulesetConfig extends Config {
 
         return 'config/rulesets.ini';
     }
-    
+
     public static function cleanRulesets(array $rulesets) {
         // hash=>array
         $rulesets = array_map('array_values', $rulesets);
-        
-        $rulesets = array_map(function (array $rules) : array {
+
+        $rulesets = array_map(function (array $rules): array {
             return preg_grep('#^[^/]+/[^/]+$#', $rules);
         }, $rulesets);
 

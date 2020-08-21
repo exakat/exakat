@@ -91,7 +91,7 @@ class Config extends Configsource {
             error_reporting(E_ALL);
             ini_set('display_errors', '1');
         }
-        
+
         $this->loadConfig(array());
     }
 
@@ -160,7 +160,7 @@ class Config extends Configsource {
             assert_options(ASSERT_BAIL, 1);
 
             error_reporting(E_ALL);
-            ini_set('display_errors', "1");
+            ini_set('display_errors', '1');
         }
 
         //program has precedence over rulesets

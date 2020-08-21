@@ -62,7 +62,7 @@ class Log {
         unset($this->log);
     }
 
-    public function log(string $message) : void {
+    public function log(string $message): void {
         if ($this->log === null) { return; }
 
         if ($this->first !== null) {

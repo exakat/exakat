@@ -33,7 +33,7 @@ abstract class Config {
 
     abstract public function loadConfig($args) ;
 
-    public function toArray() : array {
+    public function toArray(): array {
         return $this->config;
     }
 
@@ -72,7 +72,7 @@ abstract class Config {
             foreach($this->stubs as $stub) {
                 $ini[] = "stub[] = \"$stub\"";
             }
-        
+
         }
         $ini[] = '';
 

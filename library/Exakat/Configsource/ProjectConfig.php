@@ -78,7 +78,7 @@ class ProjectConfig extends Config {
         $this->projects_root = "$projects_root/projects/";
     }
 
-    public function setProject(Project $project) : void {
+    public function setProject(Project $project): void {
         $this->project = $project;
     }
 
@@ -186,7 +186,7 @@ class ProjectConfig extends Config {
         $this->config['stubs'] = makeArray($this->config['stubs']);
         foreach($this->config['stubs'] as $stub) {
             $d = getcwd();
-            $path = realpath($code_dir.$stub);
+            $path = realpath($code_dir . $stub);
 
             if ($path === false) {
                 continue;
@@ -207,9 +207,9 @@ class ProjectConfig extends Config {
             if (is_dir($path)) {
                 chdir($path);
                 $allFiles = rglob('.');
-                $allFiles = array_map(function (string $path) use ($stub) : string { return $stub.ltrim($path, '.'); }, $allFiles);
+                $allFiles = array_map(function (string $path) use ($stub): string { return $stub . ltrim($path, '.'); }, $allFiles);
                 chdir($d);
-            
+
                 $stubs[$stub] = $allFiles;
             }
         }
@@ -219,11 +219,11 @@ class ProjectConfig extends Config {
     }
 
     // required for Init Project
-    public function setConfig(string $name, $value) : void {
+    public function setConfig(string $name, $value): void {
         $this->config[$name] = $value;
     }
 
-    public function getConfig(string $dir_root = '') : string {
+    public function getConfig(string $dir_root = ''): string {
         // $vendor
         if ($this->config['include_dirs'] === array('/')) {
             $include_dirs = 'include_dirs[] = "";';
@@ -328,9 +328,9 @@ INI;
 
         return $configIni;
     }
-    
-    private static function makeIniArray(string $name, array $array) : string {
-        return $name.'[] = "' . implode("\";\n{$name}[] = \"", $array) . "\";\n";
+
+    private static function makeIniArray(string $name, array $array): string {
+        return $name . '[] = "' . implode("\";\n{$name}[] = \"", $array) . "\";\n";
     }
 }
 

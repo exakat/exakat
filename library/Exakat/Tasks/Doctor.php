@@ -26,7 +26,6 @@ use Exakat\Exakat;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Graph\Graph;
-use Exakat\Tasks\Helpers\Php;
 use Exakat\Exceptions\NoPhpBinary;
 use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\NoSuchReport;

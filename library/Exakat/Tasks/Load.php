@@ -37,7 +37,6 @@ use Exakat\Exceptions\UnknownCase;
 use Exakat\Tasks\LoadFinal\LoadFinal;
 use Exakat\Tasks\Helpers\Fullnspaths;
 use Exakat\Tasks\Helpers\AtomInterface;
-use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\AtomGroup;
 use Exakat\Tasks\Helpers\Calls;
 use Exakat\Tasks\Helpers\Context;
@@ -6539,7 +6538,7 @@ class Load extends Tasks {
 
             } elseif ($type === 'class' && ($use = $this->uses->get('class', $prefix)) instanceof AtomInterface) {
                 $this->addLink($name, $use, 'USED');
-                $apply->fullnspath = $use->fullnspath . '\\' . preg_replace('/^'.$prefix.'\\\\/', '', $fnp);
+                $apply->fullnspath = $use->fullnspath . '\\' . preg_replace('/^' . $prefix . '\\\\/', '', $fnp);
                     return;
 
             } elseif ($type === 'const') {

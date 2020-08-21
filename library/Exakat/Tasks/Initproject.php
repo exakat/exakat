@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
 use Exakat\Configsource\ProjectConfig;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNeeded;

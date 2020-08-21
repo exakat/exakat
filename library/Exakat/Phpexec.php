@@ -134,12 +134,12 @@ class Phpexec {
             }
         }
     }
-    
-    public function getVersion() : string {
+
+    public function getVersion(): string {
         return $this->version;
     }
 
-    public function getTokens() : array {
+    public function getTokens(): array {
         // prepare the list of tokens
         if ($this->isCurrentVersion === true) {
             $x = get_defined_constants(true);
@@ -172,11 +172,11 @@ class Phpexec {
         return self::$tokens;
     }
 
-    public function getTokenName($token) : string {
+    public function getTokenName($token): string {
         return self::$tokens[$token];
     }
 
-    public function getTokenFromFile(string $file) : array {
+    public function getTokenFromFile(string $file): array {
         if ($this->isCurrentVersion === true) {
             $tokens = @token_get_all(file_get_contents($file));
         } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
@@ -212,11 +212,11 @@ class Phpexec {
         return $tokens;
     }
 
-    private function escapeFile(string $file) : string {
+    private function escapeFile(string $file): string {
         return "'" . str_replace(array("'", '"', '$'), array("\\'", '\\"', '\\$'), $file) . "'";
     }
 
-    public function countTokenFromFile(string $file) : string {
+    public function countTokenFromFile(string $file): string {
         // Can't use PHP_SELF, because short_ini_tag can't be changed.
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $filename = $this->escapeFile($file);
@@ -229,11 +229,11 @@ class Phpexec {
         return $res;
     }
 
-    public function getExec() : string {
+    public function getExec(): string {
         return $this->phpexec;
     }
 
-    public function isValid() : bool {
+    public function isValid(): bool {
         if (empty($this->phpexec)) {
             return false;
         }
@@ -259,11 +259,11 @@ class Phpexec {
         return strpos($res, 'The PHP Group') !== false;
     }
 
-    public function getActualVersion() : string {
+    public function getActualVersion(): string {
         return  $this->actualVersion;
     }
 
-    public function compile(string $file) : bool {
+    public function compile(string $file): bool {
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $filename = basename($file);
             $dirname  = realpath(dirname($file));
@@ -276,8 +276,8 @@ class Phpexec {
        }
 
         foreach(explode("\n", $res) as $r) {
-            if (empty($r)) { 
-                continue; 
+            if (empty($r)) {
+                continue;
             }
 
             if ($this->isError($r)) {
@@ -287,13 +287,13 @@ class Phpexec {
         return true;
     }
 
-    public function getError() : array {
+    public function getError(): array {
         $r = $this->error;
         $this->error = array();
         return $r;
     }
 
-    private function isError(string $resFile) : bool {
+    private function isError(string $resFile): bool {
         if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
             return false;
             // do nothing. All is fine.
@@ -353,7 +353,7 @@ class Phpexec {
         return false;
     }
 
-    public function getWhiteCode() : array {
+    public function getWhiteCode(): array {
         return array(
             array_search('T_WHITESPACE',  self::$tokens) => 1,
             array_search('T_DOC_COMMENT', self::$tokens) => 1,
@@ -371,7 +371,7 @@ class Phpexec {
         }
     }
 
-    private function readConfig() : void {
+    private function readConfig(): void {
         if ($this->isCurrentVersion === true){
             // this code is also in the ELSE, but we avoid eval here.
             $this->config = array(
@@ -426,8 +426,8 @@ PHP;
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $shell = "docker run -it -v \"{$project_code}\":/exakat -w /exakat/code --entrypoint /bin/bash --rm " . $this->phpexec . " -c 'cat /exakat/.exakat/" . basename($tmpFileName) . ' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "php -l {} 2>&1 || true "\'';
         } else {
-            copy("{$script_prefix}/server/lint.php", dirname($tmpFileName).'/lint.php');
-            $shell = "nohup php ".dirname($tmpFileName)."/lint.php $this->phpexec {$this->actualVersion[0]}{$this->actualVersion[2]} $project_code $tmpFileName 2>&1 >/dev/null & echo $!";
+            copy("{$script_prefix}/server/lint.php", dirname($tmpFileName) . '/lint.php');
+            $shell = 'nohup php ' . dirname($tmpFileName) . "/lint.php $this->phpexec {$this->actualVersion[0]}{$this->actualVersion[2]} $project_code $tmpFileName 2>&1 >/dev/null & echo $!";
         }
 
         $pid = shell_exec($shell);

@@ -22,9 +22,7 @@
 
 namespace Exakat\Configsource;
 
-use Exakat\Phpexec;
 use Exakat\Project;
-use Exakat\Vcs\Vcs;
 
 class DatastoreConfig extends Config {
     private $datastore             = null;
@@ -53,7 +51,7 @@ class DatastoreConfig extends Config {
 
     public function __construct() {
         $this->datastore = exakat('datastore');
-        
+
         $this->loadConfig('');
     }
 
@@ -63,8 +61,8 @@ class DatastoreConfig extends Config {
 
     public function loadConfig($project) {
         $this->options['phpversion'] = $this->datastore->getHash('php_version');
-        $this->ignore_dirs           = json_decode($this->datastore->getHash('ignore_dirs')     ?? "[]");
-        $this->include_dirs          = json_decode($this->datastore->getHash('include_dirs')    ?? "[]");
+        $this->ignore_dirs           = json_decode($this->datastore->getHash('ignore_dirs')     ?? '[]');
+        $this->include_dirs          = json_decode($this->datastore->getHash('include_dirs')    ?? '[]');
         $this->file_extensions       = json_decode($this->datastore->getHash('file_extensions') ?? '[]');
         $this->stubs                 = json_decode($this->datastore->getHash('stubs_config')    ?? '[]');
 
@@ -75,7 +73,7 @@ class DatastoreConfig extends Config {
         $this->project_branch      = $this->datastore->getHash('vcs_branch');
         $this->project_tag         = $this->datastore->getHash('vcs_tag');
 
-        return "datastore";
+        return 'datastore';
     }
 }
 

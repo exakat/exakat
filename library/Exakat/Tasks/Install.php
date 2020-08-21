@@ -50,47 +50,47 @@ class Install extends Tasks {
             die();
         }
 
-        if (file_exists($this->config->dir_root.'/tinkergraph') && is_dir($this->config->dir_root.'/tinkergraph')) {
+        if (file_exists($this->config->dir_root . '/tinkergraph') && is_dir($this->config->dir_root . '/tinkergraph')) {
             print "Tinkergraph is already installed. Omitting\n";
         } else {
             $tinkerpop = file_get_contents('https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip');
-            
+
             if (hash('sha256', $tinkerpop) != substr(file_get_contents('https://www.exakat.io/versions/apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip.sha256') ?? '', 0, 64)) {
-                die('SHA256 checksum doesn\'t match the downloaded version of tinkerpop. Aborting install'.PHP_EOL);
+                die('SHA256 checksum doesn\'t match the downloaded version of tinkerpop. Aborting install' . PHP_EOL);
             } else {
                 print "Gremlin server checksum OK\n";
             }
-            file_put_contents($this->config->dir_root.'/apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip', $tinkerpop);
+            file_put_contents($this->config->dir_root . '/apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip', $tinkerpop);
 
             // Install tinkergraph
-            shell_exec('cd '.$this->config->dir_root.'; unzip apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip; mv apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . ' tinkergraph; rm -rf apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip');
+            shell_exec('cd ' . $this->config->dir_root . '; unzip apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip; mv apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . ' tinkergraph; rm -rf apache-tinkerpop-gremlin-server-' . self::TINKERGRAPH_VERSION . '-bin.zip');
             print "Tinkergraph installed\n";
         }
 
-        if (file_exists($this->config->dir_root.'/tinkergraph/ext/neo4j-gremlin')) {
+        if (file_exists($this->config->dir_root . '/tinkergraph/ext/neo4j-gremlin')) {
             print "Neo4j for gremlin is already installed. Omitting\n";
         } else {
             // Install neo4j
-            shell_exec('cd '.$this->config->dir_root.'/tinkergraph; ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin ' . self::TINKERGRAPH_VERSION);
+            shell_exec('cd ' . $this->config->dir_root . '/tinkergraph; ./bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin ' . self::TINKERGRAPH_VERSION);
             print "Neo4j for Tinkergraph installed\n";
         }
 
         shell_exec(PHP_BINARY . ' ' . $this->config->executable . ' doctor');
 
-        $ini = file_get_contents($this->config->dir_root.'/config/exakat.ini');
+        $ini = file_get_contents($this->config->dir_root . '/config/exakat.ini');
         if (preg_match('/graphdb\s*=\s*\'nogremlin\';/', $ini)) {
             // check for nogremlin configuration
-            if (file_exists($this->config->dir_root.'/tinkergraph/ext/neo4j-gremlin')) {
+            if (file_exists($this->config->dir_root . '/tinkergraph/ext/neo4j-gremlin')) {
                 $ini = preg_replace('/graphdb\s*=\s*\'nogremlin\';/', 'graphdb\s*=\s*\'gsneo4jv3\';', $ini);
                 $ini = str_replace(';gsneo4jv3_', 'gsneo4jv3_', $ini);
-                
-                file_put_contents($this->config->dir_root.'/config/exakat.ini');
+
+                file_put_contents($this->config->dir_root . '/config/exakat.ini');
             }
         } else {
             $ini = preg_replace('/graphdb\s*=\s*\'nogremlin\';/', 'graphdb\s*=\s*\'tinkergraphv3\';', $ini);
             $ini = str_replace(';tinkergraphv3_', 'tinkergraphv3_', $ini);
-            
-            file_put_contents($this->config->dir_root.'/config/exakat.ini', $ini);
+
+            file_put_contents($this->config->dir_root . '/config/exakat.ini', $ini);
         }
 
         print shell_exec(PHP_BINARY . ' ' . $this->config->executable . ' doctor');

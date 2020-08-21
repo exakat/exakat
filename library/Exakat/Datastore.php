@@ -43,7 +43,7 @@ class Datastore {
         if (file_exists($this->config->datastore)) {
             unlink($this->config->datastore);
         }
-        
+
         if ($this->config->project->isDefault()) {
             die("Could not create datastore for a project without name. Aborting\n");
         }
@@ -184,7 +184,7 @@ class Datastore {
             }
 
             $list = makeList($d);
-            $query = "DELETE FROM $table WHERE $col IN (".makeList($d).")";
+            $query = "DELETE FROM $table WHERE $col IN (" . makeList($d) . ')';
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -535,12 +535,12 @@ SQLITE;
         $this->sqliteWrite->query('INSERT INTO ignoredFiles VALUES (NULL, \'' . $this->sqliteWrite->escapeString($file) . '\', "' . $reason . '")');
     }
 
-    public function storeQueries(array $queries) : int {
+    public function storeQueries(array $queries): int {
         $this->sqliteWrite->lastErrorCode();
         foreach($queries as $query) {
             $res = $this->sqliteWrite->query($query);
             if ($this->sqliteWrite->lastErrorCode()) {
-                print  $query.PHP_EOL.PHP_EOL;
+                print  $query . PHP_EOL . PHP_EOL;
             }
         }
 
