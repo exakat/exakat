@@ -17,13 +17,13 @@ trait t {
     protected $protectedM5;
 
     function nonPPPM6() {
-        $this->privateM;
-        $this->privateStaticM3;
+        echo $this->privateM;
+        echo $this->privateStaticM3;
 
-        $object->$privateStaticM32; // actually, another object
+        echo $object->$privateStaticM32; // actually, another object
 
-        self::$privateStaticM5;
-        static::$privateStaticM6;
+        echo self::$privateStaticM5;
+        echo static::$privateStaticM6;
 
     }
 }

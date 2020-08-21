@@ -4,8 +4,8 @@ class uselessProperty {
     private $au;
     
     function foo($c) {
-        $this->au;
-        $c->au;
+        echo $this->au;
+        echo $c->au;
     }
 }
 
@@ -17,10 +17,10 @@ class magicReadProperty {
     }
 
     function foo($c) {
-        $this->ar;
-        $this->br;
-        $c->ar;
-        $c->br;
+        echo $this->ar;
+        echo $this->br;
+        echo $c->ar;
+        echo $c->br;
     }
 }
 

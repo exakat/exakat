@@ -19,15 +19,15 @@ class y {
     protected $protectedM5;
 
     function nonPPPM6() {
-        $this->privateM;
-        $this->privateStaticM3;
+        print $this->privateM;
+        print $this->privateStaticM3;
 
-        $object->$privateStaticM32; // actually, another object
+        print $object->$privateStaticM32; // actually, another object
 
-        y::$privateStaticM4;
-        self::$privateStaticM5;
-        static::$privateStaticM6;
-        \y::$privateStaticM7;
+        print y::$privateStaticM4;
+        print self::$privateStaticM5;
+        print static::$privateStaticM6;
+        print \y::$privateStaticM7;
 
     }
 }

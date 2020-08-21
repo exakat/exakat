@@ -19,15 +19,15 @@ class y {
     protected $protectedM5;
 
     function __construct() {
-        $this->privateM;
-        $this->privateStaticM3;
+        echo $this->privateM;
+        echo $this->privateStaticM3;
 
-        $object->$privateStaticM32; // actually, another object
+        echo $object->$privateStaticM32; // actually, another object
 
-        y::$privateStaticM4;
-        self::$privateStaticM5;
-        static::$privateStaticM6;
-        \y::$privateStaticM7;
+        echo y::$privateStaticM4;
+        echo self::$privateStaticM5;
+        echo static::$privateStaticM6;
+        echo \y::$privateStaticM7;
 
     }
 }
