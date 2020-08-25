@@ -77,7 +77,7 @@ class Report extends Tasks {
         }
     }
 
-    private function format(Reports $report, $reportConfig) {
+    private function format(Reports $report, ReportConfig $reportConfig) {
         $begin = microtime(true);
 
         if ($reportConfig->getFile() === Reports::STDOUT) {

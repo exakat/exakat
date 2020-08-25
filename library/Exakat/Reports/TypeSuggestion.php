@@ -189,7 +189,7 @@ HTML;
             }
 
             $first = array_shift($methods);
-            $status = array_reduce($complete[$className], function (bool $carry = true, bool $item): bool { return $carry && $item; }, true);
+            $status = array_reduce($complete[$className], function (bool $carry = true, bool $item = false): bool { return $carry && $item; }, true);
             $methods = '<tr >' . implode(PHP_EOL,
                                array_merge(array('<td style="background-color: ' . $colorClass . '; vertical-align: top; border: border:black 1px solid;" rowspan="' . $classCount . '">'
                                                 . $this->classes[$className]

@@ -295,7 +295,10 @@ DOT
     . implode(PHP_EOL, $linksDot) . PHP_EOL . '}' . PHP_EOL;
 
       file_put_contents("$folder/" . self::FILE_FILENAME . '.' . self::FILE_EXTENSION, $dot);
+
+      return '';
     }
+    
 }
 
 ?>

@@ -132,11 +132,11 @@ abstract class DSL {
     protected static $LINKS         = array();
 
     public function __construct(DSLfactory $dslfactory,
-                                array $availableAtoms = array(),
-                                array $availableLinks,
-                                array $availableFunctioncalls,
-                                array &$availableVariables,
-                                array &$availableLabels,
+                                array $availableAtoms         = array(),
+                                array $availableLinks         = array(),
+                                array $availableFunctioncalls = array(),
+                                array &$availableVariables    = array(),
+                                array &$availableLabels       = array(),
                                 $ignoredcit,
                                 $ignoredfunctions,
                                 $ignoredconstants,

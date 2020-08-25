@@ -113,7 +113,7 @@ class Load extends Tasks {
 
     private $logTimeFile   = null;
 
-    private $sequences = array();
+    private $sequences     = null;
 
     private $currentMethod           = array();
     private $currentFunction         = array();

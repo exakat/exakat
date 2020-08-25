@@ -329,7 +329,6 @@ GREMLIN
         $analyzer = $this->rulesets->getInstance($class, $this->gremlin, $this->config);
         $res = $analyzer->getDump();
 
-        $saved = 0;
         $docs = exakat('docs');
         $severity = $docs->getDocs($class)['severity'];
 
@@ -351,7 +350,7 @@ GREMLIN
         }
 
         if (empty($toDump)) {
-            $saved = $this->dump->addEmptyResults(array($class));
+            $this->dump->addEmptyResults(array($class));
             return;
         }
 
