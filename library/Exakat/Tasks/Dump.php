@@ -1855,14 +1855,9 @@ GREMLIN
         // instanceof ?
     }
 
-    private function collectHashCounts($query, string $name): void {
-        if ($query instanceof Query) {
-            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-            $index = $result->toArray()[0];
-        } else {
-            $index = $this->gremlin->query($query);
-            $index = $index->toArray()[0];
-        }
+    private function collectHashCounts(Query $query, string $name): void {
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $index = $result->toArray()[0] ?? array();
 
         $toDump = array();
         foreach($index as $number => $count) {
@@ -2046,9 +2041,12 @@ GREMLIN
     }
 
     private function collectClassTraitsCounts(): void {
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Class").groupCount("m").by( __.out("USE").out("USE").count() ).cap("m"); 
-GREMLIN;
+        $query = $this->newQuery('collectClassTraitsCounts');
+        $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
+              ->raw(<<<GREMLIN
+groupCount("m").by( __.out("USE").out("USE").count() ).cap("m")
+GREMLIN
+);
         $this->collectHashCounts($query, 'ClassTraits');
     }
 

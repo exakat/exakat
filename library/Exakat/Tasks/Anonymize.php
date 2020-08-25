@@ -398,7 +398,7 @@ class Anonymize extends Tasks {
         return true;
     }
 
-    private function checkCompilation($file): bool {
+    private function checkCompilation(string $file): bool {
         $res = shell_exec($this->config->php . ' -l ' . $file . ' 2>&1') ?? '';
         //@todo : differentiate fatal error and non-fatal ones.
         return substr($res, 0, 28) == 'No syntax errors detected in';

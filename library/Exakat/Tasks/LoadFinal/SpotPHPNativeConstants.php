@@ -32,7 +32,7 @@ class SpotPHPNativeConstants extends LoadFinal {
             return;
         }
         $constants = array_merge(...$this->PHPconstants);
-        $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
+        $constants = array_filter($constants, function (string $x) : bool { return strpos($x, '\\') === false;});
         $constantsPHP = array_values($constants);
         $constantsPHP = makeFullNsPath($constantsPHP, \FNP_CONSTANT);
 
@@ -131,7 +131,7 @@ GREMLIN)
         display($result->toInt() . ' SpotPHPNativeConstants in Use');
     }
 
-    public function setPHPconstants(array $PHPconstants = array()) {
+    public function setPHPconstants(array $PHPconstants = array()) : void {
         $this->PHPconstants = $PHPconstants;
     }
 }

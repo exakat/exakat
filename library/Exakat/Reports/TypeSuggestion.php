@@ -190,10 +190,28 @@ HTML;
 
             $first = array_shift($methods);
             $status = array_reduce($complete[$className], function (bool $carry = true, bool $item = false): bool { return $carry && $item; }, true);
+            if (isset($complete[$className]['Properties'])) {
+                $statusMethods = array_reduce(array_slice($complete[$className], 1), function (bool $carry = true, bool $item = false): bool { return $carry && $item; }, true);
+                $statusProperties = ($complete[$className]['Properties'] ?? true) === true;
+            } else {
+                $statusMethods = array_reduce($complete[$className], function (bool $carry = true, bool $item = false): bool { return $carry && $item; }, true);
+                $statusProperties = true;
+            }
+
+            if ($status === true) { // all typehinted
+                $statusHtml = ' &#x2705; ';
+            } elseif ($statusMethods === true && $statusProperties === false) {
+                $statusHtml = 'P : -; M : &#x2705; ';
+            } elseif ($statusMethods === false && $statusProperties === true) {
+                $statusHtml = 'P : &#x2705;; M : - ';
+            } else {
+                $statusHtml = '';
+            }
+
             $methods = '<tr >' . implode(PHP_EOL,
                                array_merge(array('<td style="background-color: ' . $colorClass . '; vertical-align: top; border: border:black 1px solid;" rowspan="' . $classCount . '">'
                                                 . $this->classes[$className]
-                                                . ( $status ? ' &#x2705; ' : '') // Possibly, that should be moved above, just after the name of the class
+                                                . $statusHtml
                                                 . '</td>' . $first),
                                           array_map(function ($x) { return '<tr>' . $x . '</tr>';}, $methods))
                                ) . '</tr>';
@@ -246,18 +264,17 @@ HTML;
         }
 
         $translation = array('CouldBeString'    => 'string',
-                              'CouldBeBoolean'  => 'bool',
-                              'CouldBeNull'     => 'null',
-                              'CouldBeFloat'    => 'float',
-                              'CouldBeInt'      => 'int',
-                              'CouldBeArray'    => 'array',
-                              'CouldBeCallable' => 'callable',
-                              'CouldBeIterable' => 'iterable',
-                              'CouldBeVoid'     => 'void',
-                              'CouldBeInt'      => 'int',
-                              'CouldBeCIT'      => 'Class, Interface',
-
-                              );
+                             'CouldBeBoolean'  => 'bool',
+                             'CouldBeNull'     => 'null',
+                             'CouldBeFloat'    => 'float',
+                             'CouldBeInt'      => 'int',
+                             'CouldBeArray'    => 'array',
+                             'CouldBeCallable' => 'callable',
+                             'CouldBeIterable' => 'iterable',
+                             'CouldBeVoid'     => 'void',
+                             'CouldBeInt'      => 'int',
+                             'CouldBeCIT'      => 'Class, Interface',
+                            );
 
         foreach($array as &$item) {
             $item = $translation[$item] ?? $item;

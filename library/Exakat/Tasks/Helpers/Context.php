@@ -37,26 +37,26 @@ class Context {
                               self::CONTEXT_NOSEQUENCE   => array(0),
                          );
 
-    public function getCount(string $context = self::CONTEXT_NOSEQUENCE) {
+    public function getCount(string $context = self::CONTEXT_NOSEQUENCE) : bool {
         return $this->contexts[$context] !== array(0 => 0);
     }
 
-    public function nestContext($context = self::CONTEXT_NOSEQUENCE) {
+    public function nestContext(string $context = self::CONTEXT_NOSEQUENCE) : void {
         $this->contexts[$context][] = 0;
     }
 
-    public function exitContext($context = self::CONTEXT_NOSEQUENCE) {
+    public function exitContext(string $context = self::CONTEXT_NOSEQUENCE) : void {
         array_pop($this->contexts[$context]);
     }
 
-    public function toggleContext($context) {
+    public function toggleContext(string $context) : string {
         $toggled = 1 - $this->contexts[$context][count($this->contexts[$context]) - 1];
         $this->contexts[$context][count($this->contexts[$context]) - 1] = $toggled;
         return $toggled;
     }
 
-    public function isContext($context) {
-        return (boolean) $this->contexts[$context][count($this->contexts[$context]) - 1];
+    public function isContext(string $context) : bool {
+        return (bool) $this->contexts[$context][count($this->contexts[$context]) - 1];
     }
 }
 

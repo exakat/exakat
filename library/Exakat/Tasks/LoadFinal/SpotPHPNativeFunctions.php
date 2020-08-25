@@ -88,7 +88,7 @@ class SpotPHPNativeFunctions extends LoadFinal {
         display("Set $count functioncall fallingback");
     }
 
-    public function setPHPfunctions(array $phpfunctions) {
+    public function setPHPfunctions(array $phpfunctions) : void {
         $this->PHPfunctions = $phpfunctions;
     }
 }

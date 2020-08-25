@@ -36,6 +36,7 @@ use Exakat\Exceptions\DSLException;
 use ProgressBar\Manager as ProgressBar;
 use Exception;
 use Exakat\Log;
+use Exakat\Config;
 
 class Analyze extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -44,7 +45,7 @@ class Analyze extends Tasks {
     private $php = null;
     private $analyzed = array();
 
-    public function setConfig($config): void {
+    public function setConfig(Config $config): void {
         $this->config = $config;
     }
 

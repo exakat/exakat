@@ -66,12 +66,12 @@ class Top10 extends Ambassador {
                      );
     }
 
-    protected function generateIssues() {
+    protected function generateIssues() : void {
         $this->generateIssuesEngine('issues',
                                     $this->getIssuesFaceted('Top10') );
     }
 
-    protected function generateTop10(Section $section) {
+    protected function generateTop10(Section $section) : void {
         $top10 = array('Dangling reference'      => array('Structures/DanglingArrayReference'),
                        'For with count'          => array('Structures/ForWithFunctioncall', ),
                        'Next month trap'         => array('Structures/NextMonthTrap', ),
@@ -127,7 +127,6 @@ HTML;
         $html = $this->injectBloc($html, 'TITLE', 'Top 10 classic errors ');
         $html = $this->injectBloc($html, 'DESCRIPTION', $description);
         $this->putBasedPage($section->file, $html);
-
     }
 }
 
