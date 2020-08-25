@@ -3,6 +3,7 @@
 namespace Exakat\Dump;
 
 use Sqlite3;
+use Exakat\Reports\Helpers\Results;
 
 abstract class Dump {
     const READ  = 1;
@@ -217,6 +218,10 @@ abstract class Dump {
         }
 
         return count($queries);
+    }
+
+    public function fetchHashResults(string $key): Results {    
+        return new Results();
     }
 }
 
