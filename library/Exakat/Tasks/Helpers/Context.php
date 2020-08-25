@@ -49,7 +49,7 @@ class Context {
         array_pop($this->contexts[$context]);
     }
 
-    public function toggleContext(string $context) : string {
+    public function toggleContext(string $context) : int {
         $toggled = 1 - $this->contexts[$context][count($this->contexts[$context]) - 1];
         $this->contexts[$context][count($this->contexts[$context]) - 1] = $toggled;
         return $toggled;
