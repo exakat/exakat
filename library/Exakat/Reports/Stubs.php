@@ -99,8 +99,8 @@ HEADERS;
         }
 
         $last = array_pop($result);
-        if (!empty($last)) {
-            $result[] = $last;
+        if (empty($result)) {
+            return '';
         }
 
         $result[] = "}\n";
