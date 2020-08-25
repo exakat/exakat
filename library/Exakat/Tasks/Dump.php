@@ -2047,6 +2047,7 @@ GREMLIN
 groupCount("m").by( __.out("USE").out("USE").count() ).cap("m")
 GREMLIN
 );
+        $query->prepareRawQuery();
         $this->collectHashCounts($query, 'ClassTraits');
     }
 
