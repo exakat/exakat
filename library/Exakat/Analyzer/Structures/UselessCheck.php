@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class UselessCheck extends Analyzer {
     public function analyze(): void {
@@ -31,12 +32,23 @@ class UselessCheck extends Analyzer {
         $this->atomIs('Ifthen')
              ->hasNoOut('ELSE')
              ->outIs('CONDITION')
-             ->atomInsideNoDefinition('Functioncall')
-             // count($a) > 0, sizeof($a) != 0, !empty($a)
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->outIsIE(array('LEFT', 'RIGHT'))
+             // count($a) > 0, sizeof($a) != 0
              ->functioncallIs(array('\\count', '\\sizeof'))
              ->outWithRank('ARGUMENT', 0)
              ->savePropertyAs('fullcode', 'var')
+             ->not(
+                $this->side()
+                     ->inIs('ARGUMENT')
+                     ->inIs(array('LEFT', 'RIGHT'))
+                     ->atomIs('Comparison')
+                     ->outIs(array('LEFT', 'RIGHT'))
+                     ->atomIs('Integer')
+                     ->is('fullcode', 0)
+             )
              ->back('first')
+
              ->outIs('THEN')
              ->is('count', 1)
              ->outWithRank('EXPRESSION', 0)
