@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('function foo4( ) { /**/ } ',
-                      'function foo2( ) { /**/ } ',
+$expected     = array('function foo2( ) { /**/ } ',
                       'function foo3( ) { /**/ } ',
+                      'function foo4( ) { /**/ } ',
                      );
 
 $expected_not = array('function foo1( ) { /**/ } ',
