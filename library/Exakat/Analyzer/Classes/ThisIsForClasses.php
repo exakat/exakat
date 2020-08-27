@@ -65,8 +65,8 @@ class ThisIsForClasses extends Analyzer {
         // Any cast of $this is bad, unset or else.
         $this->atomIs('This')
              ->hasClassTrait()
-             ->inIs(array('VARIABLE', 'STATIC', 'GLOBAL', 'CAST'))
-             ->atomIs(array('Catch', 'Static', 'Global', 'Cast'))
+             ->inIs(array('VARIABLE', 'STATIC', 'GLOBAL'))
+             ->atomIs(array('Catch', 'Static', 'Global'))
              ->back('first');
         $this->prepareQuery();
 
