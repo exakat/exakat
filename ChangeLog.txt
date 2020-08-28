@@ -1,14 +1,40 @@
-Version 2.1.6 (Night Patrol Deity, coming up)
+Version 2.1.7 (zi, coming up)
 + Architecture
     + 
 + Report
     + 
 + Analysis
-    + Upgraded analysis : PHP 8.0 new scalar typehint, stringable interface
+    + 
 + Tokenizer
     + 
 
-Version 2.1.5 (Day Patrol Deity, coming up)
+Version 2.1.6 (Night Patrol Deity, coming up)
++ Architecture
+    + More typehints coverage
+    + Various speed-up
+    + Lighter logging with gremlin
+    + Fixed installation path
++ Report
+    + Upgraded Typesuggestion report
+    + Upgraded Stubs and Stubsjson
++ Analysis
+    + New analysis : report PHP 8.0 unknown parameters
+    + New analysis : overwritten methods with different argument counts
+    + New analysis : Warn of iconv and TRANSLIT for portability
+    + New analysis : Warn of glob and  {} for portability
+    + Upgraded analysis : 'Useless check' covers new situations.
+    + Upgraded analysis : 'Abstract away' now covers new calls.
+    + Upgraded analysis : 'Must return Typehint' skips Void.
+    + Upgraded analysis : 'Missing new' with less false positives
+    + Checked unit tests : 3559 / 3630 test pass (98% pass)
++ Tokenizer
+    + Support for Virtualmethod and imports from traits
+    + Refactored Usenamespace atom
+    + Fixed calculations of fullnspath for static::class
+    + Fixed detection of null/true/false in new()
+    + Added support for T_BAD_CHARACTER
+
+Version 2.1.5 (Day Patrol Deity, 2020-08-04)
 + Architecture
     + Fixed comment size estimation by 1 for T_COMMENT
     + Added more typehints to code
