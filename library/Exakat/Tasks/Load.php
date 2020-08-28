@@ -3314,7 +3314,7 @@ class Load extends Tasks {
             }
 
             if ($reference === self::REFERENCE) {
-                $element->fullcode  = '&' . $index->fullcode;
+                $element->fullcode  = '&' . $element->fullcode;
                 $element->reference = self::REFERENCE;
             }
 

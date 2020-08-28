@@ -121,7 +121,7 @@ HEADERS;
             if (empty($trait->useoptions)) {
                 $use .= ';' . PHP_EOL;
             } else {
-                $use .= '{' . join('; ', $trait->useoptions) . '}' . PHP_EOL;
+                $use .= '{' . join('; ', $class->useoptions) . '}' . PHP_EOL;
             }
         }
         $result = array(self::INDENTATION . "{$abstract}{$final}class $name{$extends}{$implements} {" . $use);

@@ -251,6 +251,7 @@ class DotExakatYamlConfig extends Config {
 
         $custom_configs = array();
 
+        $default = array();
         $iniFiles = glob("$dir_root/human/en/*/*.ini");
         foreach($iniFiles as $file) {
             $ini = parse_ini_file($file, \INI_PROCESS_SECTIONS);

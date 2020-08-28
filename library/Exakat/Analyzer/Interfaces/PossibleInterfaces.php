@@ -46,6 +46,7 @@ class PossibleInterfaces extends Analyzer {
 
         $list = $interfaces;
         $all = array();
+        $stats = array();
         foreach($interfaces as $id => $one) {
             $stats[$id] = 0;
             $current = array_pop($one);

@@ -53,6 +53,7 @@ class StubsJson extends Reports {
                       'versions' => array());
 
         // namespaces
+        $namespaces = array();
         $res = $this->dump->fetchTable('namespaces');
         foreach($res->toArray() as $namespace) {
             $data['versions'][$namespace['namespace']] = array();

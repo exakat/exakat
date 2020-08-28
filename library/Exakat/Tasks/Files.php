@@ -343,7 +343,6 @@ class Files extends Tasks {
             }
 
             display("Check compilation for $version");
-            $stats["notCompilable$version"] = -1;
 
             $php = new Phpexec($phpVersion, $this->config->{$phpVersion});
             $php->compileFiles($this->config->code_dir, $this->tmpFileName, $this->config->dir_root);

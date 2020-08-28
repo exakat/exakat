@@ -34,6 +34,7 @@ class WrongTypeForNativeFunction extends Analyzer {
                        'bool'   => array('Boolean', 'Bitoperation', 'Logical', 'Comparison'),
                       );
 
+        $returntypes = array();
         foreach($types as $type => $atoms) {
             $returntypes[$type] = $this->methods->getFunctionsByReturnType($type, Methods::STRICT);
         }

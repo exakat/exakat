@@ -45,7 +45,7 @@ class Install extends Tasks {
         }
 
         if (!empty($error)) {
-            $errors[] = 'Fix the above ' . count($error) . " and try again\n";
+            $error[] = 'Fix the above ' . count($error) . " and try again\n";
             print implode(PHP_EOL, $error) . PHP_EOL;
             die();
         }
