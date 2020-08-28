@@ -191,7 +191,7 @@ SQL;
                 return;
             }
 
-            $begin = hrtime(true);
+            $begin = microtime(true);
             $query = <<<GREMLIN
 new File('$this->pathProperties').eachLine {
     (property, targets) = it.split('-');
@@ -204,7 +204,7 @@ g.V().has('intval', 0).not(has("boolean", true)).property('boolean', false).iter
 
 GREMLIN;
             $this->graphdb->query($query);
-            $end = hrtime(true);
+            $end = microtime(true);
 
             unlink($this->pathProperties);
 
@@ -220,7 +220,7 @@ GREMLIN;
         fclose($f);
 
         if ($length > 0) {
-            $begin = hrtime(true);
+            $begin = microtime(true);
             $query = <<<GREMLIN
 new File('$this->pathDef').eachLine {
     (fromVertex, target) = it.split(',')
@@ -232,7 +232,7 @@ new File('$this->pathDef').eachLine {
 
 GREMLIN;
             $this->graphdb->query($query);
-            $end = hrtime(true);
+            $end = microtime(true);
 
             $this->log("links finalize\t" . ($end - $begin));
         }
@@ -361,15 +361,15 @@ GREMLIN;
     }
 
     private function saveNodes(): void {
-        $begin = hrtime(true);
+        $begin = microtime(true);
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
-        $end = hrtime(true);
+        $end = microtime(true);
         $this->log("path\t{$this->total}\t" . ($end - $begin));
 
         if (file_exists($this->pathLink)) {
             $count = count(file($this->pathLink));
-            $begin = hrtime(true);
+            $begin = microtime(true);
             $query = <<<GREMLIN
 new File('$this->pathLink').eachLine {
     (theLabel, fromVertex, toVertex) = it.split('-');
@@ -379,7 +379,7 @@ new File('$this->pathLink').eachLine {
 
 GREMLIN;
             $this->graphdb->query($query);
-            $end = hrtime(true);
+            $end = microtime(true);
 
             unlink($this->pathLink);
 

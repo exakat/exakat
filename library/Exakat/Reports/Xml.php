@@ -69,7 +69,6 @@ class Xml extends Reports {
 
         if ($report['errors'] === 0 && $report['warnings'] === 0) {
             // Nothing to print.
-            return false;
         }
 
         $out->startElement('file');

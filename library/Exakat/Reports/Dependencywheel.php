@@ -140,7 +140,7 @@ class Dependencywheel extends Reports {
 
     private function initFolder() : void {
         if ($this->finalName === 'stdout') {
-            return "Can't produce Dependencywheel format to stdout";
+            return;
         }
 
         // Clean temporary destination

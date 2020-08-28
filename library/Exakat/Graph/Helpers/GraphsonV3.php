@@ -145,9 +145,8 @@ class GraphsonV3 implements SerializerInterface
         }
         else
         {
-            print ("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')' . PHP_EOL);
+            print "Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')' . PHP_EOL;
             $converted = '';
-//            throw new InternalException("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
         }
 
         return $converted;
@@ -338,10 +337,8 @@ class GraphsonV3 implements SerializerInterface
         elseif(is_array($item) && isset($item['@type']) && !in_array($item['@type'], self::$supportedGSTypes))
         {
             //type exists in array but is not currently supported
-            print ("Item type '{$item['@type']}' is not currently supported by the serializer (" . __CLASS__ . ')' . PHP_EOL);
+            print "Item type '{$item['@type']}' is not currently supported by the serializer (" . __CLASS__ . ')' . PHP_EOL;
             $deconverted = array();
-//            throw new InternalException("Item type '{$type}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
-//            throw new InternalException("Item type '{$item['@type']}' is not currently supported by the serializer (" . __CLASS__ . ')', 500);
         }
         elseif(is_array($item) && !isset($item['@type']))
         {

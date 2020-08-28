@@ -486,7 +486,7 @@ HTML;
                               array('name' => 'Critical', 'data' => $fileOverview['scriptDataCritical']),
                               array('name' => 'Major',    'data' => $fileOverview['scriptDataMajor']),
                               array('name' => 'Minor',    'data' => $fileOverview['scriptDataMinor']),
-                              array('name' => 'None',     'data' => $fileOverview['scriptDataNone']),
+                              array('name' => 'None',     'data' => $fileOverview['scriptDataNone'])
                               );
 
         $analyzerOverview = $this->getAnalyzerOverview();
@@ -495,7 +495,7 @@ HTML;
                               array('name' => 'Critical', 'data' => $analyzerOverview['scriptDataAnalyzerCritical']),
                               array('name' => 'Major',    'data' => $analyzerOverview['scriptDataAnalyzerMajor']),
                               array('name' => 'Minor',    'data' => $analyzerOverview['scriptDataAnalyzerMinor']),
-                              array('name' => 'None',     'data' => $analyzerOverview['scriptDataAnalyzerNone']),
+                              array('name' => 'None',     'data' => $analyzerOverview['scriptDataAnalyzerNone'])
                               );
 
         $blocjs = (string) $highchart;
@@ -535,7 +535,7 @@ HTML;
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => $name, 'data' => array_values($data)),
+                              array('name' => $name, 'data' => array_values($data))
                               );
         $blocjs = (string) $highchart;
 
@@ -864,7 +864,7 @@ HTML;
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => $data_name, 'data' => array_values($data)),
+                              array('name' => $data_name, 'data' => array_values($data))
                               );
         $blocjs = (string) $highchart;
 
@@ -3274,7 +3274,7 @@ HTML
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => 'Fossilized Methods', 'data' => array_values($data)),
+                              array('name' => 'Fossilized Methods', 'data' => array_values($data))
                               );
         $blocjs = (string) $highchart;
 
@@ -3313,7 +3313,7 @@ HTML
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => 'Depth', 'data' => array_values($data)),
+                              array('name' => 'Depth', 'data' => array_values($data))
                               );
         $blocjs = (string) $highchart;
 
@@ -3349,7 +3349,7 @@ HTML
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => 'Class size (lines)', 'data' => array_values($data)),
+                              array('name' => 'Class size (lines)', 'data' => array_values($data))
                               );
         $blocjs = (string) $highchart;
 
@@ -3419,7 +3419,7 @@ HTML;
         $highchart->addSeries('filename',
                               array_keys($data),
                               array('name' => 'Typehint stats',
-                                    'data' => array_values($data)),
+                                    'data' => array_values($data))
                               );
         $blocjs = (string) $highchart;
 
@@ -3456,7 +3456,7 @@ HTML;
         $highchart = new Highchart();
         $highchart->addSeries('filename',
                               array_keys($data),
-                              array('name' => 'Method size', 'data' => array_values($data)),
+                              array('name' => 'Method size', 'data' => array_values($data))
                               );
         $blocjs = (string) $highchart;
 

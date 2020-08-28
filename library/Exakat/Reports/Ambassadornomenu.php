@@ -27,7 +27,7 @@ use Exakat\Exakat;
 class Ambassadornomenu extends Ambassador {
     const CONFIG_YAML    = 'Ambassadornomenu';
 
-    protected function getBasedPage($file): string {
+    protected function getBasedPage(string $file = ''): string {
         static $baseHTML;
 
         if (empty($baseHTML)) {
