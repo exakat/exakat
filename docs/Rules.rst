@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 20 Aug 2020 08:38:01 +0000
-.. comment: Generation hash : a2275be4452f2c4b9bfe42126a959dad39cdde86
+.. comment: Generation date : Thu, 27 Aug 2020 21:21:19 +0000
+.. comment: Generation hash : 9cbeb9ab81eded55f663e355ebabc39608e367d7
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -64,11 +64,11 @@ $this Belongs To Classes Or Traits
 ##################################
 
 
-`$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ variable represents only the current object. 
+`$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ variable represents the current object, inside a class or trait scope. 
 
-It is a pseudo-variable, and should be used within class's or trait's methods (except for static) and not outside.
+It is a pseudo-variable, and should be used within class's or trait's methods and not outside. It should also not be used in static methods.
 
-PHP 7.1 is stricter and check for `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ at several positions. Some are found by static analysis, some are dynamic analysis.
+PHP 7.1 is stricter and check for `$this <http://www.php.net/manual/en/language.oop5.basic.php>`_ at several situations. Some are found by static analysis, some are dynamic analysis.
 
 .. code-block:: php
 
@@ -10472,7 +10472,7 @@ A method is fossilized when it is overwritten so often that changing a default v
 
 This happens when a class is extended. When a method is overwritten once, it may be easy to update the signature in two places. The more methods are overwriting a parent method, the more difficult it is to update it.
 
-This analysis counts the number of times a method is overwriten, and report any method that is ovrewriten more than 6 times. This threshold may be configured.
+This analysis counts the number of times a method is overwritten, and report any method that is ovrewritten more than 6 times. This threshold may be configured.
 
 .. code-block:: php
 
@@ -10833,7 +10833,7 @@ Suggestions
 
 * Use PHP native function : array_key_last(), when using PHP 7.4 and later
 * Use PHP native function : array_pop()
-* Organise the code to put the last element in the first position (array_unshift instead of append operator [])
+* Organise the code to put the last element in the first position (array_unshift() instead of append operator [])
 
 +-------------+---------------------------+
 | Short name  | Arrays/GettingLastElement |
@@ -13807,7 +13807,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Move the property definition to the child classes
-* Move some of the child methd, using the property, to the parent class
+* Move some of the child method, using the property, to the parent class
 
 +-------------+-------------------------------+
 | Short name  | Classes/LocallyUnusedProperty |
@@ -27938,7 +27938,7 @@ Swapped Arguments
 
 Overwritten methods must be compatible, but argument names is not part of that compatibility.
 
-Methods with the same name, in two classes of the same hierachy, must be compatible for typehint, default value, reference. The name of the argument is not taken into account when checking such compatibility, at least until PHP 7.4.
+Methods with the same name, in two classes of the same hierarchy, must be compatible for typehint, default value, reference. The name of the argument is not taken into account when checking such compatibility, at least until PHP 7.4.
 
 .. code-block:: php
 
@@ -30482,13 +30482,13 @@ See also `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/uni
 
 
 
-.. _uninited-property:
+.. _uninitilized-property:
 
-Uninited Property
-#################
+Uninitilized Property
+#####################
 
 
-Uninited properties are not fully bootstrapped at the end of the constructor. 
+Uninitilized properties are not fully bootstrapped at the end of the constructor. 
 
 Properties may be inited at definition time, along with their visibility and type. Some types are not inited at definition time, as any object, so they should be inited during constructor. At the end of the former, all properties shall have a legit value, and be ready for usage.
 
@@ -34397,7 +34397,7 @@ Useless Check
 #############
 
 
-Situation where the condition is useless. `Foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ will apply a test on the source, and skip all the loops if no element was found.
+There is no need to check the size of an array content before using foreach. `Foreach() <http://www.php.net/manual/en/control-structures.foreach.php>`_ applies a test on the source, and skips the loop if no element is found.
 
 .. code-block:: php
 
@@ -34419,6 +34419,8 @@ Situation where the condition is useless. `Foreach() <http://www.php.net/manual/
    
    ?>
 
+
+This analysis checks for conditions with `sizeof() <https://www.php.net/sizeof>`_ and `count() <https://www.php.net/count>`_. Conditions with `isset() <http://www.www.php.net/isset>`_ and `empty() <https://www.php.net/empty>`_ are omitted : they also check for the variable existence, and thus, offer extra coverage.
 
 See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
@@ -36225,13 +36227,13 @@ Suggestions
 
 
 
-.. _wrong-typed-property-init:
+.. _wrong-typed-property-default:
 
-Wrong Typed Property Init
-#########################
+Wrong Typed Property Default
+############################
 
 
-Property is typed with an incompatible init type.
+Property is typed with an incompatible default value type.
 
 Init type might be a new instance, the return of a method call or an interface compatible object.
 

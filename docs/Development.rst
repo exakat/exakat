@@ -5728,7 +5728,7 @@ Here is the list of the 245 available steps :
 
 * AtomInsideMoreThan : Docs for AtomInsideMoreThan
 
-* AtomInsideNoAnonymous : searches for all atom  inside the current one, by searching every outgoing links, but skips anonymous code like Closure and Classanonymous
+* AtomInsideNoAnonymous : searches for all atom  inside the current one, by searching every outgoing links, but skips anonymous code like ``Closure`` and ``Classanonymous``
 
 * AtomInsideNoBlock : searches for all atom  inside the current one, by searching every outgoing links, but skips blocks
 

@@ -366,6 +366,7 @@ Glossary
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
       + :ref:`Use is_countable <use-is\_countable>`
+      + :ref:`Useless Check <useless-check>`
       + :ref:`Uses Default Values <uses-default-values>`
 
     + `crc32()`
@@ -486,6 +487,7 @@ Glossary
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No isset() With empty() <no-isset()-with-empty()>`
+      + :ref:`Useless Check <useless-check>`
       + :ref:`Variable Is Not A Condition <variable-is-not-a-condition>`
 
     + `ereg()`
@@ -957,6 +959,7 @@ Glossary
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Use Instanceof <use-instanceof>`
+      + :ref:`Useless Check <useless-check>`
       + :ref:`Variable Is Not A Condition <variable-is-not-a-condition>`
       + :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
       + :ref:`isset() With Constant <isset()-with-constant>`
@@ -1520,6 +1523,10 @@ Glossary
     + `simplexml_load_string()`
 
       + :ref:`Directly Use File <directly-use-file>`
+
+    + `sizeof()`
+
+      + :ref:`Useless Check <useless-check>`
 
     + `sleep()`
 

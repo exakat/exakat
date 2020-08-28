@@ -96,7 +96,6 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Phpcompilation
   * Favorites
   * Manual
-  * Stubs
   * Inventories
   * Clustergrammer
   * Filedependencies
@@ -526,9 +525,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Dont Collect Void (Functions/DontUseVoid ; Analyze)
   * Php 8.0 Only TypeHints (Php/Php80OnlyTypeHints ; Appinfo, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
-  * Uninited Property (Classes/UninitedProperty)
+  * Uninitilized Property (Classes/UninitedProperty)
   * Union Typehint (Php/Php80UnionTypehint ; Appinfo, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, CompatibilityPHP74)
-  * Wrong Typed Property Init (Classes/WrongTypedPropertyInit ; Analyze, LintButWontExec, ClassReview)
+  * Wrong Typed Property Default (Classes/WrongTypedPropertyInit ; Analyze, LintButWontExec, ClassReview)
 
 * 2.0.8
 

@@ -80,8 +80,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 20 Aug 2020 08:38:01 +0000
-.. comment: Generation hash : a2275be4452f2c4b9bfe42126a959dad39cdde86
+.. comment: Generation date : Thu, 27 Aug 2020 21:21:19 +0000
+.. comment: Generation hash : 9cbeb9ab81eded55f663e355ebabc39608e367d7
 
 
 .. _analyze:
@@ -479,7 +479,7 @@ Total : 402 analysis
 * :ref:`Wrong Returned Type <wrong-returned-type>`
 * :ref:`Wrong Type For Native PHP Function <wrong-type-for-native-php-function>`
 * :ref:`Wrong Type With Call <wrong-type-with-call>`
-* :ref:`Wrong Typed Property Init <wrong-typed-property-init>`
+* :ref:`Wrong Typed Property Default <wrong-typed-property-default>`
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
@@ -544,14 +544,14 @@ Total : 47 analysis
 * :ref:`Raised Access Level <raised-access-level>`
 * :ref:`Redefined Property <redefined-property>`
 * :ref:`Self Using Trait <self-using-trait>`
-* :ref:`Uninited Property <uninited-property>`
+* :ref:`Uninitilized Property <uninitilized-property>`
 * :ref:`Unreachable Class Constant <unreachable-class-constant>`
 * :ref:`Unused Class Constant <unused-class-constant>`
 * :ref:`Unused Trait In Class <unused-trait-in-class>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
-* :ref:`Wrong Typed Property Init <wrong-typed-property-init>`
+* :ref:`Wrong Typed Property Default <wrong-typed-property-default>`
 
 .. _coding-conventions:
 
@@ -1203,7 +1203,7 @@ Total : 28 analysis
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Useless Alias <useless-alias>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
-* :ref:`Wrong Typed Property Init <wrong-typed-property-init>`
+* :ref:`Wrong Typed Property Default <wrong-typed-property-default>`
 * :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 
 .. _performances:
