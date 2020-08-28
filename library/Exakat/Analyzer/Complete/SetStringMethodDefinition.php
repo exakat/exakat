@@ -39,7 +39,8 @@ filter{
     }
     name != true;
 }
-GREMLIN)
+GREMLIN
+)
               ->inIs('DEFINITION')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)

@@ -685,7 +685,7 @@ GREMLIN
                                   new Project('test'),
                                   $this->analyzerQuoted,
                                   $this->config->executable,
-                                  $this->dependsOn(),
+                                  $this->dependsOn()
                                   );
 /*
         if ($this->queryDoc !== null) {

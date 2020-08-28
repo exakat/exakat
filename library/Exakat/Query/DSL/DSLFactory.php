@@ -114,7 +114,7 @@ class DSLFactory {
                               $this->ignoredfunctions,
                               $this->ignoredconstants,
                               $this->dependsOn,
-                              $this->analyzerQuoted,
+                              $this->analyzerQuoted
                               );
     }
 }

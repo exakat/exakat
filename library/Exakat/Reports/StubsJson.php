@@ -37,7 +37,7 @@ class StubsJson extends Reports {
         $this->phpFunctions = array_map('strtolower', $this->phpFunctions);
         $this->phpCIT       = array_merge( parse_ini_file("{$this->config->dir_root}/data/php_classes.ini")['classes'],
                                            parse_ini_file("{$this->config->dir_root}/data/php_interfaces.ini")['interfaces'],
-                                           parse_ini_file("{$this->config->dir_root}/data/php_traits.ini")['traits'],
+                                           parse_ini_file("{$this->config->dir_root}/data/php_traits.ini")['traits']
                                          );
         $this->phpCIT = array_map('strtolower', $this->phpCIT);
 

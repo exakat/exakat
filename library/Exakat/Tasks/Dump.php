@@ -247,7 +247,7 @@ class Dump extends Tasks {
                   ->outIs('ANALYZED')
                   ->atomIsNot('Noresult')
                   ->initVariable(array('ligne',                  'fullcode_',                  'file', 'theFunction', 'theClass', 'theNamespace'),
-                                 array('it.get().value("line")', 'it.get().value("fullcode")', '"None"', '""', '""', '""'),
+                                 array('it.get().value("line")', 'it.get().value("fullcode")', '"None"', '""', '""', '""')
                                 )
             ->raw(<<<GREMLIN
 where( __.until( hasLabel("Project") ).repeat( 

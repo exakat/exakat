@@ -200,7 +200,7 @@ class TypehintingStats extends AnalyzerArrayHashResults {
                           'interfaceTypehint',
                           'typedProperties',
                           'totalProperties',
-                          'multipleTypehints',
+                          'multipleTypehints'
                           );
         $return = $return + $scalartypes + $objecttypes;
 

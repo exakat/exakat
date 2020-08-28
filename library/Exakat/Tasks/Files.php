@@ -134,7 +134,7 @@ class Files extends Tasks {
         display('Check config files');
         // Avoid , GLOB_BRACE
         $files = array_merge(glob("{$this->config->code_dir}/.*"),
-                             glob("{$this->config->code_dir}/*"),) ;
+                             glob("{$this->config->code_dir}/*")) ;
         $files = array_map('basename', $files);
 
         $services = json_decode(file_get_contents("{$this->config->dir_root}/data/serviceConfig.json"));

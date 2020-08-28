@@ -175,7 +175,7 @@ class FindExternalLibraries extends Tasks {
 
         $tokens = $this->php->getTokenFromFile($filename);
         if (count($tokens) === 1) {
-            return array();
+            return ;
         }
         $this->log->log("$filename : " . count($tokens));
 
@@ -186,7 +186,7 @@ class FindExternalLibraries extends Tasks {
 
             // If we find a namespace, it is not the global space, and we may skip the rest.
             if ($token[0] === $this->phpTokens['T_NAMESPACE']) {
-                return array();
+                return ;
             }
 
             if ($token[0] === $this->phpTokens['T_CLASS']) {
@@ -241,8 +241,6 @@ class FindExternalLibraries extends Tasks {
                 }
             }
         }
-
-        return $return;
     }
 }
 

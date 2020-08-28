@@ -584,7 +584,7 @@ HTML;
             $toPropagate = 0;
             $parents2 = array();
             foreach($parents as $key => $aieux) {
-                $cleaned = array();
+                $cleaned = array(array());
                 foreach($aieux as $id => $aieul) {
                     if (isset($parents[$aieul])) {
                         $cleaned[] = $parents[$aieul];

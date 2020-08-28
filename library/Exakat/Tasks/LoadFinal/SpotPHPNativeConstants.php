@@ -100,7 +100,8 @@ class SpotPHPNativeConstants extends LoadFinal {
 sideEffect{ fnp = it.get().value("fullnspath").tokenize("\\").last();  
                 it.get().property("fullnspath", "\\" + fnp);
                 it.get().property("isPhp", true);}
-GREMLIN)
+GREMLIN
+)
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
@@ -117,14 +118,16 @@ sideEffect{
     it.get().property("fullnspath", "\\"  + fnp);
     it.get().property("isPhp", true);
 }
-GREMLIN)
+GREMLIN
+)
               // propagate to all usage of this constant
               ->outIs('DEFINITION')
               ->raw(<<<'GREMLIN'
 sideEffect{     
     it.get().property("fullnspath", "\\"  + fnp);
     it.get().property("isPhp", true);}
-GREMLIN)
+GREMLIN
+)
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());

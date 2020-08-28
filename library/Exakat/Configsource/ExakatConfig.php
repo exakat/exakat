@@ -150,7 +150,7 @@ class ExakatConfig extends Config {
         if (!isset($this->config['stubs'])) {
             $this->config['stubs'] = array();
         } else {
-            $stubs = array();
+            $stubs = array(array());
             $this->config['stubs'] = makeArray($this->config['stubs']);
             foreach($this->config['stubs'] as $stub) {
                 $d = getcwd();

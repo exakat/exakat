@@ -32,7 +32,7 @@ class NoParent extends Analyzer {
         $this->atomIs('Parent')
              ->goToFunction()
              ->inIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomIs(array('Class', 'Classaononymous')) // No traits...
+             ->atomIs(array('Class', 'Classanonymous')) // No traits...
              ->hasNoOut('EXTENDS')
              ->back('first')
              ->inIs();
