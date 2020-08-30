@@ -38,7 +38,7 @@ switch($withoutFallthrough) {
     case 2 : 
         die() ;
     default: 
-        die() 1;
+        die(1) ;
     case 4 : 
         die() ;
 }

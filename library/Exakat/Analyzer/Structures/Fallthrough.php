@@ -35,9 +35,16 @@ class Fallthrough extends Analyzer {
              ->hasOut('EXPRESSION')
              ->noAtomInside(array('Break', 'Continue', 'Return', 'Throw', 'Goto', 'Exit', ))
              ->back('first')
-             ->outIs('CASES')
-             ->outWithRank('EXPRESSION', 'last')
-             ->notSamePropertyAs('fullcode', 'theCase')
+             
+             // This is not the last case of default
+             ->not(
+                $this->side()
+                     ->outIs('CASES')
+                     ->outWithRank('EXPRESSION', 'last')
+                     ->outIs('CODE')
+                     ->inIs('CODE')
+                     ->samePropertyAs('fullcode', 'theCase')
+             )
              ->back('first');
         $this->prepareQuery();
     }
