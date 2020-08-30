@@ -101,8 +101,7 @@ class AlwaysFalse extends Analyzer {
              ->outIs('NAME')
              ->outIs('DEFINITION')
              ->inIs('ARGUMENT')
-             ->functioncallIs($functions)
-             ;
+             ->functioncallIs($functions);
         $this->prepareQuery();
 
         $functionsWithNull = array_merge($functions, array('is_null'));
@@ -116,6 +115,47 @@ class AlwaysFalse extends Analyzer {
              ->outIs('DEFINITION')
              ->inIs('ARGUMENT')
              ->functioncallIs($functionsWithNull);
+        $this->prepareQuery();
+
+        // function foo(A $a) { if ($a instanceof B)}
+        $this->atomIs('Parameter')
+             ->outIs('TYPEHINT')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+
+             ->outIs('NAME')
+             ->outIs('DEFINITION')
+             ->inIs('VARIABLE')
+             ->atomIs('Instanceof')
+             ->as('result')
+             ->outIs('CLASS')
+             ->notSamePropertyAs('fullnspath', 'fnp')
+             ->back('result');
+        $this->prepareQuery();
+
+        // function foo() : A; $a = foo(); if ($a instanceof B)}
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+
+             ->outIs('DEFINITION')
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             
+             ->inIs('DEFINITION')
+             ->outIs('DEFINITION')
+             ->inIs('VARIABLE')
+
+             ->atomIs('Instanceof')
+             ->as('result')
+             ->outIs('CLASS')
+             ->notSamePropertyAs('fullnspath', 'fnp')
+             ->back('result');
         $this->prepareQuery();
     }
 }
