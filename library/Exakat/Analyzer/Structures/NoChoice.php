@@ -25,6 +25,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NoChoice extends Analyzer {
     public function analyze(): void {
+        $skipExpression = array('Closure', 'Arrowfunction', 'Switch', 'For', 'Foreach', 'While', 'Dowhile', 'Yield', 'Yieldfrom');
+        
         // $a == 2 ? doThis() : doThis();
         $this->atomIs('Ternary')
              ->outIs('THEN')
@@ -58,10 +60,23 @@ class NoChoice extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('THEN')
              ->atomIs('Sequence')
+
+             // exclude large structures, as fullcode is not sufficient 
+             ->not(
+                $this->side()
+                     ->outIs('EXPRESSION')
+                     ->atomIs($skipExpression)
+             )
              ->raw('sideEffect{ sthen = []; it.get().vertices(OUT, "EXPRESSION").sort{it.value("rank")}.each{ sthen.add(it.value("fullcode"));} }')
              ->inIs('THEN')
              ->outIs('ELSE')
              ->atomIs('Sequence')
+             // exclude large structures, as fullcode is not sufficient 
+             ->not(
+                $this->side()
+                     ->outIs('EXPRESSION')
+                     ->atomIs($skipExpression)
+             )
              ->raw('sideEffect{ selse = []; it.get().vertices(OUT, "EXPRESSION").sort{it.value("rank")}.each{ selse.add(it.value("fullcode"));} }')
              ->raw('filter{ sthen.join(";") == selse.join(";") }')
              ->back('first');
