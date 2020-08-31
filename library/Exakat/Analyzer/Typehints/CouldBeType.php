@@ -219,12 +219,12 @@ abstract class CouldBeType extends Analyzer {
     protected function checkReturnedTypehint(array $atoms = array(), array $fullnspath = array()): void {
         // function foo (array $a) { return $a;}
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->optional(
                 $this->side()
                      ->is('abstract', true)
                      ->inIs('OVERWRITE')
              )
-             ->analyzerIsNot('self')
              ->outIs('RETURNTYPE')
              ->atomIs('Void')
              ->back('first')
