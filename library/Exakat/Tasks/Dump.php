@@ -1174,9 +1174,9 @@ GREMLIN
             $unique[$row['name'] . $row['line']] = 1;
 
             if (strpos($row['fullnspath'], '@') !== false) {
+                $methodIds[$row['fullnspath']] = ++$methodCount;
                 // case of closure or arrow function
                 $ns = '';
-                ++$methodCount;
             } else {
                 $methodIds[$row['fullnspath']] = ++$methodCount;
                 $n = $row['namespace'];
