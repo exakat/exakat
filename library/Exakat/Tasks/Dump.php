@@ -1120,7 +1120,8 @@ GREMLIN
     phpdoc = '';
 }
 .where( 
-    __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out({$this->linksDown})).times($MAX_LOOPING)
+    __.out("BLOCK").sideEffect{ lines.add(it.get().value("line")); }
+      .out("EXPRESSION").emit().repeat( __.out({$this->linksDown})).times($MAX_LOOPING)
       .sideEffect{ lines.add(it.get().value("line")); }
       .fold()
  )
