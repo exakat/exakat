@@ -785,7 +785,7 @@ SPHINX;
                 if (isset($this->parameter_list[$ini['name']])) {
                     $this->parameter_list[$ini['name']][$ini['parameter'.$i]['name']] = $ini['parameter'.$i]['default'];
                 } else {
-                    $this->parameter_list[$ini['name']] = array($ini['parameter'.$i]['name'] => $ini['parameter'.$i]['default']);
+                    $this->parameter_list[$ini['name']] = array($ini['parameter'.$i]['name'] => $ini['parameter'.$i]['default'] ?? '') ;
                 }
 
                 $parameters[] = [$ini['parameter'.$i]['name'],

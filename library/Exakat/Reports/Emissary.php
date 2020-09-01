@@ -3105,7 +3105,7 @@ HTML
                 $aClass = array();
             }
 
-            list($row['property'], ) = explode(' = ', $row['property']);
+            list($row['property']) = explode(' = ', $row['property'], 1);
 
             $visibilities = array(PHPSyntax($row['value']), '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';

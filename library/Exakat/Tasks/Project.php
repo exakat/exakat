@@ -304,18 +304,10 @@ class Project extends Tasks {
             $audit_end = time();
             $query = 'g.V().count()';
             $res = $this->gremlin->query($query);
-            if ($res instanceof \stdClass) {
-                $nodes = $res->results[0];
-            } else {
-                $nodes = $res[0];
-            }
+            $nodes = $res[0];
             $query = 'g.E().count()';
             $res = $this->gremlin->query($query);
-            if ($res instanceof \stdClass) {
-                $links = $res->results[0];
-            } else {
-                $links = $res[0];
-            }
+            $links = $res[0];
 
             $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                    'audit_length' => $audit_end - $audit_start,

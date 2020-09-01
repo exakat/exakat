@@ -197,13 +197,13 @@ class Results {
         return (int) ($this->values[0][$col] ?? 0);
     }
 
-    public function toHash(string $key, string $value = null): array {
+    public function toHash(string $key, string $value = ''): array {
         if ($this->values === null) {
             $this->load();
         }
 
         $return = array();
-        if ($value === null) {
+        if ($value === '') {
             foreach ($this->values as $row) {
                 $return[$row[$key]] = $row;
             }

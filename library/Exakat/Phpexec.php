@@ -218,12 +218,11 @@ class Phpexec {
 
     public function countTokenFromFile(string $file): string {
         // Can't use PHP_SELF, because short_ini_tag can't be changed.
+        $filename = $this->escapeFile($file);
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
-            $filename = $this->escapeFile($file);
-            $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ');
+            $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ') ?? '';
         } else {
-            $filename = $this->escapeFile($file);
-            $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ');
+            $res = shell_exec($this->phpexec . ' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(' . $filename . '))); ?>" 2>&1    ') ?? '';
         }
 
         return $res;

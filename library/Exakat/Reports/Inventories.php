@@ -41,7 +41,7 @@ class Inventories extends Reports {
         if (file_exists($path)) {
             rmdirRecursive($path);
         }
-        mkdir($path, 0777);
+        mkdir($path, 0755);
 
         $this->saveInventory('Constants/Constantnames',      "$folder/$name/constants.csv");
         $this->saveInventory('Functions/Functionnames',      "$folder/$name/functions.csv");

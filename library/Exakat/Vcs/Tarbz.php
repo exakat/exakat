@@ -53,7 +53,7 @@ class Tarbz extends Vcs {
 
         $res = shell_exec("{$this->executableTar} -tjf $archiveFile 2>&1 >/dev/null") ?? '';
         if (!empty($res)) {
-            list($l, ) = explode("\n", $res);
+            list($l) = explode("\n", $res, 1);
             print "Error while loading tar.bz archive : \"$l\". Aborting\n";
             return;
         }

@@ -793,7 +793,7 @@ JOIN categories
         if (empty($errors)) {
             print 'No error found in '. $total. " files tested.\n";
         } else {
-            print count($errors). ' errors found'. "\n". print_r($errors, true);
+            print count($errors). ' errors found'. "\n\n". implode(PHP_EOL, $errors);
         }
     }
 
@@ -804,20 +804,14 @@ JOIN categories
             ->files()
             ->name('*.php');
             
-//        $errors56 = array();
         $errors70 = array();
         $errors71 = array();
         $errors72 = array();
         $errors73 = array();
         $errors74 = array();
+        $errors80 = array();
         $total = count($files);
         foreach($files as $file) {
-//            $res = shell_exec('php56 -l '.$file);
-//            
-//            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-//                $errors56[(string) $file] = $res;
-//            }
-
             $res = shell_exec('php -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
@@ -845,16 +839,22 @@ JOIN categories
             $res = shell_exec('php74 -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                $errors73[(string) $file] = $res;
+                $errors74[(string) $file] = $res;
+            }
+
+            $res = shell_exec('php80 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors80[(string) $file] = $res;
             }
         }
         
-        $this->reportCompilation($errors56, '5.6', $total);
         $this->reportCompilation($errors70, '7.0', $total);
         $this->reportCompilation($errors71, '7.1', $total);
         $this->reportCompilation($errors72, '7.2', $total);
         $this->reportCompilation($errors73, '7.3', $total);
-        $this->reportCompilation($errors73, '7.4', $total);
+        $this->reportCompilation($errors74, '7.4', $total);
+        $this->reportCompilation($errors80, '8.0', $total);
     }
     
     private function reportCompilation($errors, $version, $total) {

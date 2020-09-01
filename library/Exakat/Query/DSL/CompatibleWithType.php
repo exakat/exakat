@@ -35,6 +35,7 @@ class CompatibleWithType extends DSL {
             case 1:
                 list($types) = func_get_args();
                 $withNull = NotCompatibleWithType::DISALLOW_NULL;
+                break;
 
             default:
                 assert(func_num_args() <= 2, 'Wrong number of argument for ' . __METHOD__ . '. 2 are expected, ' . func_num_args() . ' provided');

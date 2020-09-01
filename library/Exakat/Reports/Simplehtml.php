@@ -113,7 +113,7 @@ HTML;
         return $text;
     }
 
-    private function makeList($folder) {
+    private function makeList() : string {
         if (!empty($this->config->project_rulesets)) {
             $list = $this->rulesets->getRulesetsAnalyzers(makeArray($this->config->project_rulesets));
         } elseif (!empty($this->config->program)) {
@@ -184,7 +184,7 @@ HTML;
         return $text;
     }
 
-    private function initFolder() {
+    private function initFolder() : void {
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);
@@ -194,7 +194,7 @@ HTML;
         copyDir($this->config->dir_root . '/media/clang', $this->tmpName );
     }
 
-    private function cleanFolder() {
+    private function cleanFolder() : void {
         if (file_exists($this->finalName)) {
             rename($this->finalName, $this->tmpName . '2');
         }
@@ -206,7 +206,7 @@ HTML;
         }
     }
 
-    private function makeId($id) {
+    private function makeId(string $id) : string {
         return strtolower(str_replace(array(' ', '(', ')', '/', ), '_', $id));
     }
 }

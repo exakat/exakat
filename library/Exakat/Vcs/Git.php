@@ -109,7 +109,7 @@ class Git extends Vcs {
         trim(shell_exec("cd {$this->destinationFull}/;GIT_TERMINAL_PROMPT=0  {$this->executable} checkout $branch --quiet; {$this->executable} pull --quiet") ?? '');
         $resFinal = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
         if (strpos($resFinal, ' ') !== false) {
-            list($resFinal, ) = explode(' ', $resFinal);
+            list($resFinal) = explode(' ', $resFinal, 1);
         }
 
         return $resFinal;
