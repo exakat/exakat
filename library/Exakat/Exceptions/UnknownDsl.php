@@ -24,7 +24,7 @@
 namespace Exakat\Exceptions;
 
 class UnknownDsl extends \RuntimeException {
-    public function __construct($name) {
+    public function __construct(string $name) {
         parent::__construct( "Unknown DSL command '$name'\n");
     }
 }

@@ -220,7 +220,7 @@ abstract class Dump {
         return count($queries);
     }
 
-    public function fetchHashResults(string $key): Results {    
+    public function fetchHashResults(string $key): Results {
         return new Results();
     }
 }

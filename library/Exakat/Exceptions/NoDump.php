@@ -23,8 +23,10 @@
 
 namespace Exakat\Exceptions;
 
+use Exception;
+
 class NoDump extends \Exception {
-    public function __construct($project = '', $code = 0, \Exception $previous = null) {
+    public function __construct(string $project = '', int $code = 0, Exception $previous = null) {
 
         parent::__construct("No results database was found for project '$project'.\nRun php exakat.phar project -p $project first\n", $code, $previous);
     }

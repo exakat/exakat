@@ -23,8 +23,10 @@
 
 namespace Exakat\Exceptions;
 
+use Exception;
+
 class InaptPHPBinary extends \Exception {
-    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+    public function __construct(string $message = '', int $code = 0, Exception $previous = null) {
 
         parent::__construct("The PHP version cannot be used to run Exakat : $message\n", $code, $previous);
     }

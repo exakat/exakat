@@ -55,7 +55,7 @@ SQL;
         // Comparing Class constant : values, visibility
 
         // Class constants with different values
-         $this->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs('Constant', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'name')
               ->inIs('NAME')
@@ -65,21 +65,21 @@ SQL;
 
               ->inIs('CONST')
               ->inIs('CONST')
-              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
 
               ->savePropertyAs('fullcode', 'class1')
-              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->goToAllParents(self::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2') // another class
 
               ->outIs('CONST')
               ->outIs('CONST')
 
               ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('fullcode', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
 
               ->outIs('VALUE')
-              ->notSamePropertyAs('fullcode', 'default1', Analyzer::CASE_SENSITIVE) // test
+              ->notSamePropertyAs('fullcode', 'default1', self::CASE_SENSITIVE) // test
               ->savePropertyAs('fullcode', 'default2') // collect
 
               ->raw(<<<'GREMLIN'
@@ -95,7 +95,7 @@ GREMLIN
         $this->prepareQuery();
 
         // Class constants with different visibility
-         $this->atomIs('Constant', Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs('Constant', self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'name')
               ->inIs('NAME')
@@ -103,19 +103,19 @@ GREMLIN
               ->inIs('CONST')
               ->savePropertyAs('visibility', 'visibility1')
               ->inIs('CONST')
-              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
 
               ->savePropertyAs('fullcode', 'class1')
-              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->goToAllParents(self::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2') // another class
 
               ->outIs('CONST')
-              ->notSamePropertyAs('visibility', 'visibility1', Analyzer::CASE_SENSITIVE) // test
+              ->notSamePropertyAs('visibility', 'visibility1', self::CASE_SENSITIVE) // test
               ->savePropertyAs('visibility', 'visibility2') // collect
               ->outIs('CONST')
 
               ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('fullcode', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
 
               ->raw(<<<'GREMLIN'
@@ -134,26 +134,26 @@ GREMLIN
 
          // Methods with different signatures : argument's type, default, name
          // Upgrade this with separate queries for each element.
-         $this->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
               ->outIs('NAME')
               ->savePropertyAs('fullcode', 'name')
               ->inIs('NAME')
               ->raw('sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }')
 
               ->inIs('METHOD')
-              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class1')
 
               ->back('first')
               ->outIs('OVERWRITE')
 
               ->outIs('NAME')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('fullcode', 'name', self::CASE_SENSITIVE)
               ->inIs('NAME')
               ->raw('sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }.filter{ signature2 != signature1; }')
 
               ->inIs('METHOD')
-              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class2') // another class
 
               ->raw(<<<'GREMLIN'
@@ -169,7 +169,7 @@ GREMLIN
         $this->prepareQuery();
 
          // Methods with different visibility
-         $this->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'fnp')
               ->savePropertyAs('visibility', 'visibility1')
               ->inIs(array('METHOD', 'MAGICMETHOD'))
@@ -193,7 +193,7 @@ GREMLIN
         $this->prepareQuery();
 
          // Methods with different visibility
-         $this->atomIs(array('Method', 'Magicmethod'), Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs(array('Method', 'Magicmethod'), self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs('RETURNTYPE')
               ->savePropertyAs('fullnspath', 'fnp1')
@@ -224,7 +224,7 @@ GREMLIN
         // default value, visibility, typehint
 
          // Property with different default value
-         $this->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'name')
               ->outIs('DEFAULT')
               ->hasNoIn('RIGHT') // find an explicit default
@@ -232,14 +232,14 @@ GREMLIN
               ->inIs('DEFAULT')
               ->inIs('PPP')
               ->inIs('PPP')
-              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class1')
 
               ->back('first')
               ->outIs('OVERWRITE')
 
               ->outIs('DEFAULT')
-              ->notSamePropertyAs('fullcode', 'default1', Analyzer::CASE_SENSITIVE)
+              ->notSamePropertyAs('fullcode', 'default1', self::CASE_SENSITIVE)
               ->savePropertyAs('fullcode', 'default2')
               ->inIs('DEFAULT')
 
@@ -260,21 +260,21 @@ GREMLIN
         $this->prepareQuery();
 
          // Property with different visibility
-         $this->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'name')
               ->inIs('PPP')
               ->savePropertyAs('visibility', 'visibility1')
               ->inIs('PPP')
-              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class1')
-              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->goToAllParents(self::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2')
 
               ->outIs('PPP')
-              ->notSamePropertyAs('visibility', 'visibility1', Analyzer::CASE_SENSITIVE)
+              ->notSamePropertyAs('visibility', 'visibility1', self::CASE_SENSITIVE)
               ->savePropertyAs('visibility', 'visibility2')
               ->outIs('PPP')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('fullcode', 'name', self::CASE_SENSITIVE)
 
               ->raw(<<<'GREMLIN'
 map{ ["type": "Member Visibility",
@@ -289,16 +289,16 @@ GREMLIN
         $this->prepareQuery();
 
          // Property with different typehint
-         $this->atomIs('Propertydefinition', Analyzer::WITHOUT_CONSTANTS)
+         $this->atomIs('Propertydefinition', self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'name')
               ->inIs('PPP')
               ->outIs('TYPEHINT')
               ->savePropertyAs('fullnspath', 'fnp1')
               ->inIs('TYPEHINT')
               ->inIs('PPP')
-              ->atomIs(Analyzer::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
+              ->atomIs(self::CLASSES_ALL, self::WITHOUT_CONSTANTS)
               ->savePropertyAs('fullcode', 'class1')
-              ->goToAllParents(Analyzer::EXCLUDE_SELF)
+              ->goToAllParents(self::EXCLUDE_SELF)
               ->savePropertyAs('fullcode', 'class2')
 
               ->outIs('PPP')
@@ -307,7 +307,7 @@ GREMLIN
               ->inIs('TYPEHINT')
               ->raw('filter{fnp1  != fnp2;}')
               ->outIs('PPP')
-              ->samePropertyAs('fullcode', 'name', Analyzer::CASE_SENSITIVE)
+              ->samePropertyAs('fullcode', 'name', self::CASE_SENSITIVE)
 
               ->raw(<<<'GREMLIN'
 map{ ["type": "Member Typehint",

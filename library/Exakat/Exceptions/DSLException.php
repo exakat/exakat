@@ -24,7 +24,7 @@
 namespace Exakat\Exceptions;
 
 class DSLException extends \Exception {
-    public function __construct($message, $level = 1) {
+    public function __construct(string $message, int $level = 1) {
         parent::__construct($message);
 
         // Setting error in the previous file
