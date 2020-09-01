@@ -620,6 +620,8 @@ class Load extends Tasks {
                     echo $progressBar->advance();
                 }
             }
+            // Reduce memory as Atoms are not kept between files.
+            gc_collect_cycles();
         }
         $this->loader->finalize($this->relicat);
 
