@@ -874,7 +874,6 @@ class Load extends Tasks {
             $this->endSequence();
 
             $this->addLink($id1, $sequence, 'FILE');
-            $sequence->root = true;
         } catch (LoadError $e) {
             if ($compileCheck === self::COMPILE_CHECK) {
                 $this->log->log('Can\'t process file \'' . $this->filename . '\' during load (\'' . $this->tokens[$this->id][0] . '\', line \'' . $this->tokens[$this->id][2] . '\'). Ignoring' . PHP_EOL . $e->getMessage() . PHP_EOL);
@@ -4705,7 +4704,7 @@ class Load extends Tasks {
                 $fullnspath = mb_strtolower($namespace->fullcode);
             }
             if ($fullnspath[0] !== '\\') {
-                list($prefix, ) = explode('\\', $fullnspath);
+                list($prefix) = explode('\\', $fullnspath, 1);
                 $fullnspath = "\\$fullnspath";
             }
 
@@ -6462,18 +6461,19 @@ class Load extends Tasks {
                 if (($use = $this->uses->get('class', mb_strtolower($name->fullnspath))) instanceof AtomInterface) {
                     $apply->fullnspath = mb_strtolower($name->fullnspath);
                     return;
-                } else {
-                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (array $r): string {
-                        return mb_strtolower($r[1]) . '\\' . $r[2];
-                    }, $name->fullcode);
-                    $apply->fullnspath = $fullnspath;
-                    return;
                 }
-            } else {
-                $apply->fullnspath = mb_strtolower($name->fullcode);
+                $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function (array $r): string {
+                    return mb_strtolower($r[1]) . '\\' . $r[2];
+                }, $name->fullcode);
+                $apply->fullnspath = $fullnspath;
                 return;
             }
-        } elseif (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', 'This'))) {
+            $apply->fullnspath = mb_strtolower($name->fullcode);
+
+            return;
+        } 
+
+        if (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', 'This'))) {
             // No fullnamespace for non literal namespaces
             $apply->fullnspath = '';
             return;

@@ -61,7 +61,7 @@ class Atom implements AtomInterface {
     public $close_tag    = Load::NO_CLOSING_TAG;
     public $propertyname = '';
     public $constant     = Load::NOT_CONSTANT_EXPRESSION;
-    public $root         = false;  // false is on purpose.
+//    public $root         = false;  // false is on purpose.
     public $globalvar    = false;
     public $binaryString = Load::NOT_BINARY;
     public $isNull       = false;
