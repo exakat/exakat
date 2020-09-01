@@ -30,6 +30,11 @@ class Log {
 
     public function __construct(string $name = '', string $dir = '.') {
         $this->name = $name;
+        
+        // If name is really long, keep 240 chars, and create a crc32 at the end
+        if (strlen($this->name) > 250) {
+            $this->name = substr($this->name, 0, 240).'-'.crc32($this->name);
+        }
 
         if (!file_exists("$dir/log/")) { return ; }
         if (!is_dir("$dir/log/")) { return ; }
