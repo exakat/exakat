@@ -31,7 +31,8 @@ class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
     private const LOAD_CHUNK      = 10000;
     private $load_chunk = 20000;
-    private const LOAD_CHUNK_LINK = 20000;
+    private const LOAD_CHUNK_LINK = 2000;
+    private const LOAD_CHUNK_PROPERTY = 10000;
 
     private $tokenCounts   = array('Project' => 1);
 
@@ -87,6 +88,7 @@ class SplitGraphson extends Loader {
 
         display("Init finalize\n");
 
+        $this->saveNodeLinks();
         $this->saveProperties();
 
         $begin = microtime(true);
@@ -182,14 +184,21 @@ SQL;
     }
 
     private function saveProperties() {
-        if (file_exists($this->pathProperties)) {
-            $count = count(file($this->pathProperties));
+        if (!file_exists($this->pathProperties)) {
+            return;
+        }
 
-            if ($count === 0) {
-                $this->log("properties\t$count\t0");
+        $count = count($file = file($this->pathProperties));
+        if ($count === 0) {
+            $this->log("properties\t$count\t0");
 
-                return;
-            }
+            return;
+        }
+
+        // break down property files into small chunks for processing inside 300s. 
+        $chunks = array_chunk($file, 100);
+        foreach($chunks as $chunk) {
+            file_put_contents($this->pathProperties, implode('', $chunk));
 
             $begin = microtime(true);
             $query = <<<GREMLIN
@@ -206,10 +215,9 @@ GREMLIN;
             $this->graphdb->query($query);
             $end = microtime(true);
 
-            unlink($this->pathProperties);
-
             $this->log("properties\t$count\t" . ($end - $begin));
         }
+        unlink($this->pathProperties);
     }
 
     private function saveLinks($f) {
@@ -347,7 +355,10 @@ GREMLIN;
         file_put_contents($this->pathLink, implode(PHP_EOL, $links) . PHP_EOL, \FILE_APPEND);
         foreach($properties as $property => $targets) {
             if (!empty($targets)) {
-                file_put_contents($this->pathProperties, $property . '-' . implode(',', $targets) . PHP_EOL, \FILE_APPEND);
+                $chunks = array_chunk($targets, self::LOAD_CHUNK_PROPERTY);
+                foreach($chunks as $chunk) {
+                    file_put_contents($this->pathProperties, $property . '-' . implode(',', $chunk) . PHP_EOL, \FILE_APPEND);
+                }
             }
         }
 
@@ -367,8 +378,23 @@ GREMLIN;
         $end = microtime(true);
         $this->log("path\t{$this->total}\t" . ($end - $begin));
 
-        if (file_exists($this->pathLink)) {
-            $count = count(file($this->pathLink));
+        $this->total = 0;
+    }
+
+    private function saveNodeLinks(): void {
+        if (!file_exists($this->pathLink)) {
+            return;
+        }
+
+        $count = count($file = file($this->pathLink));
+        if ($count === 0) {
+            return ;
+        }
+
+        $chunks = array_chunk($file, self::LOAD_CHUNK_LINK);
+        foreach($chunks as $chunk) {
+            file_put_contents($this->pathLink, implode('', $chunk));
+            
             $begin = microtime(true);
             $query = <<<GREMLIN
 new File('$this->pathLink').eachLine {
@@ -378,15 +404,13 @@ new File('$this->pathLink').eachLine {
 }
 
 GREMLIN;
-            $this->graphdb->query($query);
-            $end = microtime(true);
+           $this->graphdb->query($query);
+           $end = microtime(true);
 
-            unlink($this->pathLink);
-
-            $this->log("links\t$count\t" . ($end - $begin));
+           $this->log("links\t$count\t" . ($end - $begin));
         }
 
-        $this->total = 0;
+        unlink($this->pathLink);
     }
 
     private function json_encode(Stdclass $object): string {
