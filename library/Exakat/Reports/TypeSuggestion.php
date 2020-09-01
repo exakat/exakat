@@ -50,16 +50,22 @@ class TypeSuggestion extends Reports {
         $results->load();
 
         $suggestions = array();
+        $anonymousName = 0;
         foreach($results->toArray() as $row) {
 
             list(, $type) = explode('/', $row['analyzer']);
             if (preg_match('/function (\S+)\\(/', $row['fullcode'], $r)) {
+                // function, method, with name : for return type
                 $suggestions[$row['file']][$row['line']][$r[1]][] = $type;
-            } elseif (preg_match('/(\$\\S+)/', $row['fullcode'], $r)) {
+            } elseif (preg_match('/^(\$\\S+)/', $row['fullcode'], $r)) {
+                // $parameter alone. it is for an parameter
                 $suggestions[$row['file']][$row['line']][$r[1]][] = $type;
-            } elseif (preg_match('/function \\( \\) /', $row['fullcode'], $r)) {
-                // This is a closure, no display for them
-                continue;
+            } elseif (preg_match('/function \\(.*?\\) /', $row['fullcode'], $r)) {
+                // closure : for return type
+                $suggestions[$row['file']][$row['line']][$row['file'].':'.$row['line']][] = $type;
+            } elseif (preg_match('/fn \(.*?\) => /', $row['fullcode'], $r)) {
+                // arrow function : for return type
+                $suggestions[$row['file']][$row['line']][$row['file'].':'.$row['line']][] = $type;
             } else {
                 display('Cannot find typehints for ' . $row['fullcode'] . "\n");
             }
@@ -76,8 +82,14 @@ class TypeSuggestion extends Reports {
                        'returnSugg'      => 0,
                         );
 
-        $html = array();
-        $complete = array();
+        $html = array('Functions'      => array(),
+                      'Closures'       => array(),
+                      'Arrowfunctions' => array(),
+                     );
+        $complete = array('Functions'      => array(),
+                          'Closures'       => array(),
+                          'Arrowfunctions' => array(),
+                     );
 
         // Properties Type hints
         $res = $this->dump->fetchTableProperties();
@@ -109,6 +121,36 @@ HTML;
             $complete[$classId]['Properties'] = $complete[$classId]['Properties'] && !empty($row['typehint']);
         }
 
+        // Arguments Type hints for functions
+        $res = $this->dump->fetchTableFunctionsByArgument();
+        foreach($res->toArray() as $row) {
+            $id = isset($suggestions[$row['file']][$row['line']][$row['function']]) ? $row['function'] : $row['file'] . ':' . $row['line'];
+            ++$stats['parametersTotal'];
+            if (!empty($row['typehint'])) {
+                $list = self::NO_SUGGESTION;
+                ++$stats['parametersTyped'];
+            } elseif (isset($suggestions[$row['file']][$row['line']][$row['argument']])) {
+                $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function ($x): bool { return $x !== 'CouldNotType'; });
+                $list = $this->toHtmlList($s);
+                ++$stats['parametersSugg'];
+            } else {
+                $list = self::NO_SUGGESTION;
+            }
+
+            $fullnspath = $row['fullnspath'];
+            $type = ucfirst($row['type']).'s';
+
+            $html[$type][$id][(int) $row['rank']] = <<<HTML
+<td style="background-color: $colorParameter; vertical-align: top;">$row[argument]</td>
+<td style="background-color: $colorParameter; border-right-style: none; border-left-style: none;vertical-align: top;">$row[typehint]</td>
+<td style="background-color: $colorParameter; border-left-style: none; vertical-align: top;">$list</td>
+HTML;
+            if (!isset($complete[$type][$id])) {
+                $complete[$type][$id] = true;
+            }
+            $complete[$type][$id] = $complete[$type][$id] && !empty($row['typehint']);
+        }
+
         // Arguments Type hints
         $res = $this->dump->fetchTableMethodsByArgument();
         foreach($res->toArray() as $row) {
@@ -137,6 +179,40 @@ HTML;
                 $complete[$classId][$row['method']] = true;
             }
             $complete[$classId][$row['method']] = $complete[$classId][$row['method']] && !empty($row['typehint']);
+        }
+
+        // Return Typehints for functions
+        $res = $this->dump->fetchTableFunctionsByReturntype();
+        foreach($res->toArray() as $row) {
+            ++$stats['returnTotal'];
+            $id = isset($suggestions[$row['file']][$row['line']][$row['function']]) ? $row['function'] : $row['file'] .':' . $row['line'];
+            if (!empty($row['returntype'])) {
+                $list = self::NO_SUGGESTION;
+                ++$stats['returnTyped'];
+            } elseif (isset($suggestions[$row['file']][$row['line']][$id])) {
+                $s = array_filter($suggestions[$row['file']][$row['line']][$id], function ($x): bool { return $x !== 'CouldNotType'; });
+                $list = $this->toHtmlList($s);
+                ++$stats['returnSugg'];
+            } elseif (isset($suggestions[$row['file']][$row['line']][$id])) {
+                $s = array_filter($suggestions[$row['file']][$row['line']][$id], function ($x): bool { return $x !== 'CouldNotType'; });
+                $list = $this->toHtmlList($s);
+                ++$stats['returnSugg'];
+            } else {
+                $list = self::NO_SUGGESTION;
+            }
+
+            $fullnspath = $row['fullnspath'];
+            $type = ucfirst($row['type']).'s';
+
+            $html[$type][$id][-1] = <<<HTML
+<td style="background-color: $colorReturn; vertical-align: top;">: return</td>
+<td style="background-color: $colorReturn; vertical-align: top;">$row[returntype]</td>
+<td  style="background-color: $colorReturn; vertical-align: top;">$list</td>
+HTML;
+            if (!isset($complete[$type][$id])) {
+                $complete[$type][$id] = true;
+            }
+            $complete[$type][$id] = $complete[$type][$id] && !empty($row['returntype']);
         }
 
         // Return Type hints
@@ -172,6 +248,16 @@ HTML;
             $complete[$classId][$row['method']] = $complete[$classId][$row['method']] && !empty($row['returntype']);
         }
 
+        if (empty($html['Functions'])) {
+            unset($html['Functions']);
+        }
+        if (empty($html['Closures'])) {
+            unset($html['Closures']);
+        }
+        if (empty($html['Arrowfunctions'])) {
+            unset($html['Arrowfunctions']);
+        }
+
         foreach($html as $className => &$methods) {
             $classCount = 0;
             foreach($methods as $methodName => &$returnAndArgs) {
@@ -179,9 +265,29 @@ HTML;
                 $classCount += count($returnAndArgs);
 
                 $first = array_shift($returnAndArgs);
+                switch($className) {
+                    case 'Closures' :
+                        $methodFullcode = ' function ( )<br /><div style="color: gray">' . $methodName . '</div>';
+                        break;
+
+                    case 'Arrowfunctions' :
+                        $methodFullcode = ' fn ( ) =><br /><div style="color: gray">' . $methodName . '</div>';
+                        break;
+
+                    default:
+                        switch($className) {
+                            case 'Properties' :
+                            $methodFullcode = $methodName;
+                            break;
+
+                        default:
+                            $methodFullcode = ' function ' . $methodName . '()';
+                        }
+                }
+
                 $returnAndArgs = implode(PHP_EOL,
                                          array_merge(array('<td rowspan="' . (count($returnAndArgs) + 1) . '" style="background-color: ' . $colorMethod . '; border: black 1px solid; vertical-align: top">'
-                                                           . ( $methodName === 'Properties' ? $methodName : ' function ' . $methodName . '()')
+                                                           . $methodFullcode 
                                                            . ( $complete[$className][$methodName] ? ' &#x2705; ' : '')
                                                             . '</td>' . $first),
                                              array_map(function ($x) { return '<tr>' . $x . '</tr>';}, $returnAndArgs))
@@ -210,7 +316,7 @@ HTML;
 
             $methods = '<tr >' . implode(PHP_EOL,
                                array_merge(array('<td style="background-color: ' . $colorClass . '; vertical-align: top; border: border:black 1px solid;" rowspan="' . $classCount . '">'
-                                                . $this->classes[$className]
+                                                . ($this->classes[$className] ?? $className.'<br />')
                                                 . $statusHtml
                                                 . '</td>' . $first),
                                           array_map(function ($x) { return '<tr>' . $x . '</tr>';}, $methods))
@@ -229,7 +335,7 @@ HTML;
                 </tr>',
                 );
         foreach(array('properties', 'parameters', 'return') as $category) {
-            $perc = number_format($stats["{$category}Typed"] * 100 / $stats["{$category}Total"]);
+            $perc = $stats["{$category}Total"] ? number_format($stats["{$category}Typed"] * 100 / $stats["{$category}Total"]) : '-';
 
             $statsHtml[] = "<tr>
                     <td>$category</td>

@@ -451,6 +451,51 @@ SQL
         return new Results($res);
     }
 
+    public function fetchTableFunctionsByArgument(): Results {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT lower(namespaces.namespace) || lower(functions.function) AS fullnspath,
+       functions.function,
+       arguments.name AS argument,
+       init,
+       typehint,
+       typehint_fnp,
+       rank,
+       arguments.line,
+       files.file AS file,
+       functions.begin AS line,
+       type as type
+FROM functions
+JOIN arguments 
+    ON functions.id = arguments.methodId
+LEFT JOIN namespaces 
+    ON functions.namespaceId = namespaces.id
+JOIN files
+    ON functions.file = files.id
+SQL
+        );
+
+        return new Results($res);
+    }
+
+    public function fetchTableFunctionsByReturnType(): Results {
+        $res = $this->sqlite->query(<<<'SQL'
+SELECT namespaces.namespace || lower(functions.function) AS fullnspath,
+       returntype, 
+       type,
+       functions.function,
+       files.file AS file,
+       functions.begin AS line
+FROM functions
+LEFT JOIN namespaces 
+    ON functions.namespaceId = namespaces.id
+JOIN files
+    ON functions.file = files.id
+SQL
+        );
+
+        return new Results($res);
+    }
+
     public function fetchTableMethodsByArgument(): Results {
         $res = $this->sqlite->query(<<<'SQL'
 SELECT cit.type || ' ' || cit.name AS theClass, 
