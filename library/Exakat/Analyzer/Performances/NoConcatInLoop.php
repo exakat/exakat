@@ -34,10 +34,12 @@ class NoConcatInLoop extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        //'foreach($a as $b) { $c = "C$c{$b}"; } ',
         $this->atomIs(array('Foreach', 'For'))
+             ->as('loop')
              ->analyzerIsNot('self')
              ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Concatenation')
+             ->atomInsideNoDefinition(array('Concatenation', 'String', 'Heredoc'))
              ->outIs('CONCAT')
              ->savePropertyAs('fullcode', 'variable')
              ->inIs('CONCAT')
@@ -46,7 +48,17 @@ class NoConcatInLoop extends Analyzer {
              ->codeIs('=')
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'variable')
-             ->back('first');
+             // Avoiding referenced blind var
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->outIs('DEFINITION')
+                     ->is('reference', true)
+             )
+
+             // Avoiding nested loops
+             ->goToInstruction(array('Foreach', 'For'))
+             ->raw('where(eq("first"))');
         $this->prepareQuery();
     }
 }
