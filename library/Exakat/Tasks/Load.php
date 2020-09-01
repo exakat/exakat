@@ -1345,6 +1345,8 @@ class Load extends Tasks {
         $this->contexts->exitContext(Context::CONTEXT_FUNCTION);
 
         $this->addLink($fn, $block, 'BLOCK');
+        $this->addLink($fn, $block, 'RETURNED');
+        $this->addLink($fn, $block, 'RETURN');
         $this->makeAttributes($fn);
 
         $fn->token    = $this->getToken($this->tokens[$current][0]);
