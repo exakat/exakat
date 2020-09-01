@@ -341,12 +341,21 @@ GREMLIN;
             assert(!json_last_error(), $fileName . ' : error encoding normal ' . $j->label . ' : ' . json_last_error_msg() . "\n" . print_r($j, true));
             $append[] = $X;
 
+
+
             if (isset($this->tokenCounts[$j->label])) {
                 ++$this->tokenCounts[$j->label];
             } else {
                 $this->tokenCounts[$j->label] = 1;
             }
             ++$this->total;
+
+            if ($this->total > $this->load_chunk) {
+                file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
+                $this->saveNodes();
+                $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
+                $append = array();
+            }
 
             ++$total;
         }
