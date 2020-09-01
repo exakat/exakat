@@ -99,9 +99,9 @@ class TypeSuggestion extends Reports {
             $classId = $this->getClassId($className);
 
             $html[$classId]['Properties'][] = <<<HTML
-<td style="background-color: $colorProperty">$row[property]</td>
-<td style="background-color: $colorProperty">$row[typehint]</td>
-<td style="background-color: $colorProperty">$list</td>
+<td style="background-color: $colorProperty; vertical-align: top;">$row[property]</td>
+<td style="background-color: $colorProperty; vertical-align: top;">$row[typehint]</td>
+<td style="background-color: $colorProperty; vertical-align: top;">$list</td>
 HTML;
             if (!isset($complete[$classId]['Properties'])) {
                 $complete[$classId]['Properties'] = true;
@@ -263,7 +263,7 @@ HTML;
             return '&nbsp;';
         }
 
-        $translation = array('CouldBeString'    => 'string',
+        $translation = array('CouldBeString'   => 'string',
                              'CouldBeBoolean'  => 'bool',
                              'CouldBeNull'     => 'null',
                              'CouldBeFloat'    => 'float',
@@ -281,7 +281,7 @@ HTML;
         }
         unset($item);
 
-        return '<dl><dd>' . implode("</dd>\n<dd>", $array) . '</dd></dl>';
+        return implode("<br />\n", $array);
     }
 
     private function getClassId(string $description): int {
