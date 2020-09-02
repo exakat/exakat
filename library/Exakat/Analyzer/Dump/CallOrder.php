@@ -29,7 +29,7 @@ class CallOrder extends AnalyzerTable {
 
     // Store inclusionss of files within each other
     protected $analyzerSQLTable = <<<'SQL'
-CREATE TABLE callOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE callOrder ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                          calling STRING,
                          callingName STRING,
                          called STRING,

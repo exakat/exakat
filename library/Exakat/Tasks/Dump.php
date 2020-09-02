@@ -389,6 +389,7 @@ GREMLIN
     }
 
     private function collectVariables(): void {
+        return;
         $query = $this->newQuery('collectVariables');
         $query->atomIs(array('Variable', 'Variablearray', 'Variableobject'), Analyzer::WITHOUT_CONSTANTS)
               ->tokenIs('T_VARIABLE')
@@ -2216,11 +2217,13 @@ GREMLIN;
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
+        /*
         $this->collectVariables();
 
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Variables: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
+        */
 
         $this->collectReadability();
         $end = microtime(\TIME_AS_NUMBER);
