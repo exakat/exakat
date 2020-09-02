@@ -168,7 +168,8 @@ class DefaultConfig extends Config {
         $this->config['parallel_processing'] = function_exists('pcntl_fork');
     }
 
-    public function loadConfig($args) {
+    public function loadConfig(Project $project) : ?string {
+        return 'default';
     }
 }
 

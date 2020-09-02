@@ -49,32 +49,13 @@ class ProjectConfig extends Config {
                                                              'ctp',
                                                              'module',
                                                              ),
-                              'include_dirs'        => array('/',
-                                                            ),
-                              'ignore_dirs'         => array('/assets',
-                                                             '/cache',
-                                                             '/css',
-                                                             '/data',
-                                                             '/doc',
-                                                             '/docker',
-                                                             '/docs',
-                                                             '/example',
-                                                             '/examples',
-                                                             '/images',
-                                                             '/js',
-                                                             '/lang',
-                                                             '/spec',
-                                                             '/sql',
-                                                             '/test',
-                                                             '/tests',
-                                                             '/tmp',
-                                                             '/version',
-                                                             '/var',
-                                                            ),
-                                'stubs'              => array(),
+                              'include_dirs'        => array(),
+                              'ignore_dirs'         => array(),
+                              'ignore_rules'        => array(),
+                              'stubs'               => array(),
                               );
 
-    public function __construct($projects_root) {
+    public function __construct(string $projects_root) {
         $this->projects_root = "$projects_root/projects/";
     }
 
@@ -82,18 +63,24 @@ class ProjectConfig extends Config {
         $this->project = $project;
     }
 
-    public function loadConfig($project) {
+    public function loadConfig(Project $project) : ?string {
         $this->project = $project;
 
         $pathToIni = "{$this->projects_root}{$project}/config.ini";
         if (!file_exists($pathToIni)) {
+            $this->config = array_filter($this->config);
+            display("No config.ini for project named '$project'\n");
+
             return self::NOT_LOADED;
         }
 
         $ini = parse_ini_file($pathToIni, \INI_PROCESS_SECTIONS);
         if (!is_array($ini)) {
             $error = error_get_last();
-            print "Couldn't parse $pathToIni : $error[message]\nIgnoring file\n";
+            display("Couldn't parse $pathToIni : $error[message]\nIgnoring file\n");
+
+            $this->config = array_filter($this->config);
+
             return self::NOT_LOADED;
         }
 
@@ -214,6 +201,9 @@ class ProjectConfig extends Config {
             }
         }
         $this->config['stubs'] = array_unique(array_merge(...array_values($stubs)));
+
+        // remove unset values
+        $this->config = array_filter($this->config);
 
         return "$project/config.ini";
     }

@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
+use Exakat\Project;
 use Exakat\Config as MainConfig;
 use Exakat\Exceptions\NoPhpBinary;
 
@@ -53,7 +54,7 @@ class ExakatConfig extends Config {
         $this->projects_root = $projects_root;
     }
 
-    public function loadConfig($args) {
+    public function loadConfig(Project $project) : ?string {
         // Default values
         $inis =  array(
                     array('graphdb'            => 'gsneo4jv3',

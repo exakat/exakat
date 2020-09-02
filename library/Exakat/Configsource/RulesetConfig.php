@@ -22,6 +22,8 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Project as Project;
+
 class RulesetConfig extends Config {
     private $remoteIniFile = false;
 
@@ -43,7 +45,7 @@ class RulesetConfig extends Config {
         $this->remoteIniFile = false;
     }
 
-    public function loadConfig($project) {
+    public function loadConfig(Project $project) : ?string {
         if (empty($this->remoteIniFile)) {
             return self::NOT_LOADED;
         }

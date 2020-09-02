@@ -139,13 +139,19 @@ class CommandLine extends Config {
 
     public function __construct() {
         $this->config['command'] = '<no-command>';
+        $this->config['project'] = new Project();  // Default to no object
+    }
+    
+    public function setArgs(array $args = array()) : void {
+        $this->args = $args;
     }
 
-    public function loadConfig($args = array()) {
-        if (empty($args)) {
-            return false;
+    public function loadConfig(Project $project) : ?string {
+        if (empty($this->args)) {
+            return self::NOT_LOADED;
         }
 
+        $args = $this->args;
         // TODO : move this to VCS
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
@@ -179,7 +185,7 @@ class CommandLine extends Config {
                 // Normal case is here
                 switch ($config) {
                     case 'project' :
-                        if (!isset($this->config['project'])) {
+                        if ($this->config['project']->isDefault()) {
                             $this->config['project'] = new Project($args[$id + 1]);
                         }
                         // Multiple -p are ignored : keep the first
@@ -306,7 +312,7 @@ class CommandLine extends Config {
             $this->config['norefresh'] = true;
         }
 
-        return true;
+        return 'commandline';
     }
 }
 

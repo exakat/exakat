@@ -22,14 +22,16 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Project as Project;
+
 class RemoteConfig extends Config {
     private $remoteJsonFile = 'config/remotes.json';
 
-    public function __construct($projects_root) {
+    public function __construct(string $projects_root) {
         $this->remoteJsonFile = $projects_root . '/config/remotes.json';
     }
 
-    public function loadConfig($project) {
+    public function loadConfig(project $project) : ?string {
         if (!file_exists($this->remoteJsonFile)) {
             return self::NOT_LOADED;
         }

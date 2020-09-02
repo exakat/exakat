@@ -22,16 +22,16 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Project as Project;
 use Symfony\Component\Yaml\Yaml as Symfony_Yaml;
 
 abstract class Config {
-    const LOADED     = true;
-    const NOT_LOADED = false;
+    const NOT_LOADED = null;
 
     protected $config  = array();
     protected $options = array();
 
-    abstract public function loadConfig($args) ;
+    abstract public function loadConfig(Project $project) : ?string ;
 
     public function toArray(): array {
         return $this->config;

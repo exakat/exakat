@@ -92,25 +92,26 @@ class Config extends Configsource {
             ini_set('display_errors', '1');
         }
 
-        $this->loadConfig(array());
+        $this->loadConfig(new Project());
     }
 
-    public function loadConfig($args) {
+    public function loadConfig(Project $project) : ?string {
         unset($this->argv[0]);
 
         $this->defaultConfig = new DefaultConfig();
 
         $this->exakatConfig = new ExakatConfig($this->projects_root);
-        if ($file = $this->exakatConfig->loadConfig(null)) {
+        if ($file = $this->exakatConfig->loadConfig($project)) {
             $this->configFiles[] = $file;
         }
 
         // then read the config from the commandline (if any)
         $this->commandLineConfig = new CommandLine();
-        $this->commandLineConfig->loadConfig($this->argv);
+        $this->commandLineConfig->setArgs($this->argv);
+        $this->commandLineConfig->loadConfig($project);
 
         $this->envConfig = new EnvConfig();
-        if ($file = $this->envConfig->loadConfig(null)) {
+        if ($file = $this->envConfig->loadConfig($project)) {
             $this->configFiles[] = $file;
         }
 
@@ -120,9 +121,9 @@ class Config extends Configsource {
             $this->projectConfig   = new EmptyConfig();
 
             $this->dotExakatConfig = new DotExakatConfig();
-            if (($file = $this->dotExakatConfig->loadConfig(null)) === self::NOT_LOADED) {
+            if (($file = $this->dotExakatConfig->loadConfig($project)) === self::NOT_LOADED) {
                 $this->dotExakatYamlConfig = new DotExakatYamlConfig();
-                $file = $this->dotExakatYamlConfig->loadConfig(null);
+                $file = $this->dotExakatYamlConfig->loadConfig($project);
                 if ($file !== self::NOT_LOADED) {
                     $this->configFiles[] = $file;
                 }
@@ -203,6 +204,8 @@ class Config extends Configsource {
         $this->ext->registerAutoload();
 
         $this->finishConfigs();
+        
+        return 'main_config';
     }
 
     private function finishConfigs(): void {

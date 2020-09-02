@@ -22,9 +22,11 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Project as Project;
+
 class EmptyConfig extends Config {
 
-    public function loadConfig($args) {
+    public function loadConfig(Project $project) : ?string {
 
     }
 }

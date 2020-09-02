@@ -22,13 +22,25 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Project as Project;
+
 class EnvConfig extends Config {
-    public function loadConfig($args) {
-        // Which ENV variable are worth using ?
+    protected $config  = array();
 
-        return self::NOT_LOADED;
+    public function loadConfig(Project $project) : ?string {
+        if (!empty($e = getenv('EXAKAT_IGNORE_RULES'))) {
+            $this->config['ignore_rules'] = str2array($e);
+        }
 
-        // return 'ENVIRONNMENT';
+        if (!empty($e = getenv('EXAKAT_IGNORE_DIRS'))) {
+            $this->config['ignore_dirs'] = str2array($e);
+        }
+
+        if (!empty($e = getenv('EXAKAT_INCLUDE_DIRS'))) {
+            $this->config['include_dirs'] = str2array($e);
+        }
+
+        return 'environnment';
     }
 }
 

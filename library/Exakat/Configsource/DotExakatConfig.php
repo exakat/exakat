@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
+use Exakat\Project;
 use Exakat\Config as Configuration;
 
 class DotExakatConfig extends Config {
@@ -33,7 +34,7 @@ class DotExakatConfig extends Config {
         // also support json?
     }
 
-    public function loadConfig($project) {
+    public function loadConfig(Project $project) : ?string {
         if (!file_exists($this->dotExakat)) {
             $this->config['inside_code'] = Configuration::WITH_PROJECTS;
             return self::NOT_LOADED;

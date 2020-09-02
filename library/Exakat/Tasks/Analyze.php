@@ -83,6 +83,17 @@ class Analyze extends Tasks {
                     throw new NoSuchAnalyzer($analyzer, $this->rulesets);
                 }
             }
+
+            $diff = array_uintersect($this->config->ignore_rules, $analyzersClass, 'strcasecmp');
+            if (!empty($diff)) {
+                display("Ignoring ".count($diff)." rule".(count($diff) > 1 ? 's' : '')." by configuration : ".implode(', ', $diff));
+                $analyzersClass = array_udiff($analyzersClass, $this->config->ignore_rules, 'strcasecmp');
+            }
+
+            if (empty($analyzersClass)) {
+                throw new NeedsAnalyzerThema();
+            }
+
         } elseif (!empty($this->config->project_rulesets)) {
             $ruleset = $this->config->project_rulesets;
 

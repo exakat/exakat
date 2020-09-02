@@ -45,7 +45,7 @@ class DotExakatYamlConfig extends Config {
         }
     }
 
-    public function loadConfig($project) {
+    public function loadConfig(Project $project) : ?string {
         if (!file_exists($this->dotExakatYaml)) {
             $this->config['inside_code'] = Configuration::WITH_PROJECTS;
             return self::NOT_LOADED;
@@ -239,7 +239,7 @@ class DotExakatYamlConfig extends Config {
         return $this->rulesets;
     }
 
-    public function getConfig($dir_root = '') {
+    public function getConfig(string $dir_root = '') : string {
         // $vendor
         if ($this->config['include_dirs'] === array('/')) {
             $include_dirs = 'include_dirs[] = "";';

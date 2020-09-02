@@ -51,15 +51,13 @@ class DatastoreConfig extends Config {
 
     public function __construct() {
         $this->datastore = exakat('datastore');
-
-        $this->loadConfig('');
     }
 
-    public function setProject(Project $project) {
+    public function setProject(Project $project) : void {
         $this->project = $project;
     }
 
-    public function loadConfig($project) {
+    public function loadConfig(Project $project) : ?string {
         $this->options['phpversion'] = $this->datastore->getHash('php_version');
         $this->ignore_dirs           = json_decode($this->datastore->getHash('ignore_dirs')     ?? '[]');
         $this->include_dirs          = json_decode($this->datastore->getHash('include_dirs')    ?? '[]');

@@ -162,6 +162,7 @@ class Doctor extends Tasks {
             $stats['project']['rulesets']         = makeList($this->config->project_rulesets  ?? array(), '');
             $stats['project']['included dirs']    = makeList($this->config->include_dirs      ?? array(), '');
             $stats['project']['ignored dirs']     = makeList($this->config->ignore_dirs       ?? array(), '');
+            $stats['project']['ignored rules']    = makeList($this->config->ignore_rules      ?? array(), '');
             $stats['project']['file extensions']  = makeList($this->config->file_extensions   ?? array(), '');
         }
 
