@@ -69,8 +69,7 @@ union( __.identity(),
 .hasLabel(within(***))
 GREMLIN;
             return new Command($gremlin, array($diff));
-        } elseif ($flags === Analyzer::WITH_CONSTANTS &&
-                 array_intersect($diff, array('String', 'Concatenation', 'Ternary', 'Arrayliteral', 'Integer', 'Null', 'Boolean', 'Magicmethod', 'Float'))) {
+        } elseif ($flags === Analyzer::WITH_CONSTANTS) {
             // arrays, members, static members are not supported
             $gremlin = <<<GREMLIN
 union( __.identity(), 
