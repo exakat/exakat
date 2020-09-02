@@ -32,6 +32,7 @@ class MissingReturntype extends Analyzer {
                      'Typehints/CouldBeInt',
                      'Typehints/CouldBeBoolean',
                      'Typehints/CouldBeArray',
+                     'Typehints/CouldBeCIT',
                     );
     }
 
@@ -39,7 +40,8 @@ class MissingReturntype extends Analyzer {
         // function foo() : string { return shell_exec('ls -hla'); }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
-             ->atomIsNot('Void')
+             ->atomIsNot('Void')          // absence of returntype
+             ->fullnspathIsNot('\\void')  // void as return type
              ->back('first')
 
              ->collectTypehints('returntypes')
@@ -50,7 +52,8 @@ or(
     __.filter{!('\\null'    in returntypes); }.in("ANALYZED").has("analyzer", 'Typehints/CouldBeNull'),
     __.filter{!('\\float'   in returntypes); }.in("ANALYZED").has("analyzer", 'Typehints/CouldBeFloat'),
     __.filter{!('\\bool'    in returntypes); }.in("ANALYZED").has("analyzer", 'Typehints/CouldBeBoolean'),
-    __.filter{!('\\array'   in returntypes); }.in("ANALYZED").has("analyzer", 'Typehints/CouldBeArray')
+    __.filter{!('\\array'   in returntypes); }.in("ANALYZED").has("analyzer", 'Typehints/CouldBeArray'),
+    __.not(where(__.out('RETURNTYPE').hasLabel("Identifier", "Nsname", "Self", "Static", "Parent"))).in("ANALYZED").has("analyzer", 'Typehints/CouldBeCIT')
 )
 GREMLIN
 )
