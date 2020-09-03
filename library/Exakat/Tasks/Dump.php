@@ -388,40 +388,6 @@ GREMLIN
         $this->dump->collectTables($tables);
     }
 
-    private function collectVariables(): void {
-        return;
-        $query = $this->newQuery('collectVariables');
-        $query->atomIs(array('Variable', 'Variablearray', 'Variableobject'), Analyzer::WITHOUT_CONSTANTS)
-              ->tokenIs('T_VARIABLE')
-              ->initVariable(array('name',                       'type'),
-                             array('it.get().value("fullcode")', 'it.get().label()'))
-              ->getVariable(array('name', 'type'));
-        $query->prepareRawQuery();
-        $variables = $this->gremlin->query($query->getQuery(), $query->getArguments())->toArray();
-
-        $toDump = array();
-
-        $types = array('Variable'       => 'var',
-                       'Variablearray'  => 'array',
-                       'Variableobject' => 'object',
-                      );
-        $unique = array();
-        foreach($variables as $row) {
-            if (isset($unique[$row['name'] . $row['type']])) {
-                continue;
-            }
-            $name = str_replace(array('&', '...', '@'), '', $row['name']);
-            $unique[$name . $row['type']] = 1;
-            $type = $types[$row['type']];
-            $toDump[] = array('',
-                              mb_strtolower($name),
-                              $type,
-                             );
-        }
-        $total = $this->storeToDumpArray('variables', $toDump);
-        display("$total variables\n");
-    }
-
     private function collectStructures(): void {
         $namespacesId = $this->collectStructures_namespaces();
 
@@ -2072,36 +2038,6 @@ GREMLIN
         $this->collectHashCounts($query, 'NativeCallPerExpression');
     }
 
-    private function collectGlobalVariables(): int {
-        $query = $this->newQuery('Global Variables');
-        $query->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
-              ->codeIsNot('$GLOBALS', Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
-              ->outIs('DEFINITION')
-              ->savePropertyAs('label', 'type')
-              ->outIsIE('DEFINITION')
-              ->_as('variable')
-              ->goToInstruction('File')
-              ->savePropertyAs('fullcode', 'path')
-              ->back('variable')
-              ->raw(<<<'GREMLIN'
-map{['id': '',
-     'file':path,
-     'line' : it.get().value('line'),
-     'variable' : it.get().value('fullcode'),
-     'isRead' : 'isRead' in it.get().keys() ? 1 : 0,
-     'isModified' : 'isModified' in it.get().keys() ? 1 : 0,
-     'type' : type == 'Variabledefinition' ? 'implicit' : type == 'Globaldefinition' ? 'global' : '$GLOBALS'
-     ];
-
-}
-GREMLIN
-);
-        $this->dump->cleanTable('globalVariables');
-        $total = $this->storeToDump('globalVariables', $query);
-
-        return $total;
-    }
-
     private function collectReadability(): void {
         $loops = 20;
         $query = <<<GREMLIN
@@ -2217,13 +2153,6 @@ GREMLIN;
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
-        /*
-        $this->collectVariables();
-
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Variables: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
-        */
 
         $this->collectReadability();
         $end = microtime(\TIME_AS_NUMBER);
@@ -2243,11 +2172,6 @@ GREMLIN;
         $this->collectDefinitionsStats();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Definitions stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-
-        $begin = microtime(\TIME_AS_NUMBER);
-        $this->collectGlobalVariables();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Global Variables : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
         // Dev only
         if ($this->config->is_phar === Config::IS_NOT_PHAR) {
