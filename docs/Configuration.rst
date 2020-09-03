@@ -428,6 +428,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + forbiddenClasses : 
 
     + List of classes to be avoided
+:ref:`Could Be Parent Method <could-be-parent-method>`
+  + minChildren : 4
+
+    + Minimal number of children using this method.
 :ref:`Fossilized Method <fossilized-method>`
   + fossilizationThreshold : 6
 

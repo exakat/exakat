@@ -28,6 +28,8 @@ Here is the list of the current rulesets supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Analyze`                                 | Check for common best practices.                                                                     |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CI-checks`                               | Quick check for common best practices.                                                               |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Dead code <dead-code>`                   | Check the unused code or unreachable code.                                                           |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Suggestions`                             | List of possible modernisation of the PHP code.                                                      |
@@ -80,8 +82,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 27 Aug 2020 21:21:19 +0000
-.. comment: Generation hash : 9cbeb9ab81eded55f663e355ebabc39608e367d7
+.. comment: Generation date : Thu, 03 Sep 2020 16:18:32 +0000
+.. comment: Generation hash : 9dd0ca4de3b65c8e9ac5c21f758fcdf2e47266fe
 
 
 .. _analyze:
@@ -91,7 +93,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 402 analysis
+Total : 404 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -174,6 +176,7 @@ Total : 402 analysis
 * :ref:`Different Argument Counts <different-argument-counts>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Don't Echo Error <don't-echo-error>`
+* :ref:`Don't Pollute Global Space <don't-pollute-global-space>`
 * :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`Don't Send $this In Constructor <don't-send-$this-in-constructor>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
@@ -264,6 +267,7 @@ Total : 402 analysis
 * :ref:`Missing Include <missing-include>`
 * :ref:`Missing New ? <missing-new-?>`
 * :ref:`Missing Parenthesis <missing-parenthesis>`
+* :ref:`Missing Returntype In Method <missing-returntype-in-method>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
@@ -496,6 +500,193 @@ Total : 402 analysis
 * :ref:`strpos() Too Much <strpos()-too-much>`
 * :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
+.. _ci-checks:
+
+CI-checks
++++++++++
+
+
+
+Total : 177 analysis
+
+* :ref:`@ Operator <@-operator>`
+* :ref:`Adding Zero <adding-zero>`
+* :ref:`Aliases Usage <aliases-usage>`
+* :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+* :ref:`Always Positive Comparison <always-positive-comparison>`
+* :ref:`Assign And Compare <assign-and-compare>`
+* :ref:`Assign With And <assign-with-and>`
+* :ref:`Avoid Parenthesis <avoid-parenthesis>`
+* :ref:`Avoid Substr() One <avoid-substr()-one>`
+* :ref:`Avoid get_class() <avoid-get\_class()>`
+* :ref:`Callback Needs Return <callback-needs-return>`
+* :ref:`Cant Implement Traversable <cant-implement-traversable>`
+* :ref:`Casting Ternary <casting-ternary>`
+* :ref:`Check JSON <check-json>`
+* :ref:`Check On __Call Usage <check-on-\_\_call-usage>`
+* :ref:`Class Without Parent <class-without-parent>`
+* :ref:`Coalesce And Concat <coalesce-and-concat>`
+* :ref:`Concat And Addition <concat-and-addition>`
+* :ref:`Constant Class <constant-class>`
+* :ref:`Constants With Strange Names <constants-with-strange-names>`
+* :ref:`Could Use Short Assignation <could-use-short-assignation>`
+* :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
+* :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
+* :ref:`Dangling Array References <dangling-array-references>`
+* :ref:`Deprecated Functions <deprecated-functions>`
+* :ref:`Don't Echo Error <don't-echo-error>`
+* :ref:`Don't Unset Properties <don't-unset-properties>`
+* :ref:`Drop Else After Return <drop-else-after-return>`
+* :ref:`Else If Versus Elseif <else-if-versus-elseif>`
+* :ref:`Empty Blocks <empty-blocks>`
+* :ref:`Empty Namespace <empty-namespace>`
+* :ref:`Exit() Usage <exit()-usage>`
+* :ref:`Failed Substr Comparison <failed-substr-comparison>`
+* :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
+* :ref:`Forgotten Visibility <forgotten-visibility>`
+* :ref:`Forgotten Whitespace <forgotten-whitespace>`
+* :ref:`Hidden Use Expression <hidden-use-expression>`
+* :ref:`Htmlentities Calls <htmlentities-calls>`
+* :ref:`Identical Conditions <identical-conditions>`
+* :ref:`Identical On Both Sides <identical-on-both-sides>`
+* :ref:`If With Same Conditions <if-with-same-conditions>`
+* :ref:`Implied If <implied-if>`
+* :ref:`Implode() Arguments Order <implode()-arguments-order>`
+* :ref:`Indices Are Int Or String <indices-are-int-or-string>`
+* :ref:`Interfaces Is Not Implemented <interfaces-is-not-implemented>`
+* :ref:`Invalid Pack Format <invalid-pack-format>`
+* :ref:`Invalid Regex <invalid-regex>`
+* :ref:`Is Actually Zero <is-actually-zero>`
+* :ref:`Is_A() With String <is\_a()-with-string>`
+* :ref:`Logical Mistakes <logical-mistakes>`
+* :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
+* :ref:`Lone Blocks <lone-blocks>`
+* :ref:`Mbstring Third Arg <mbstring-third-arg>`
+* :ref:`Mbstring Unknown Encoding <mbstring-unknown-encoding>`
+* :ref:`Merge If Then <merge-if-then>`
+* :ref:`Missing Parenthesis <missing-parenthesis>`
+* :ref:`Missing Returntype In Method <missing-returntype-in-method>`
+* :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
+* :ref:`Multiple Alias Definitions Per File <multiple-alias-definitions-per-file>`
+* :ref:`Multiple Class Declarations <multiple-class-declarations>`
+* :ref:`Multiple Constant Definition <multiple-constant-definition>`
+* :ref:`Multiple Identical Trait Or Interface <multiple-identical-trait-or-interface>`
+* :ref:`Multiple Index Definition <multiple-index-definition>`
+* :ref:`Multiples Identical Case <multiples-identical-case>`
+* :ref:`Multiply By One <multiply-by-one>`
+* :ref:`Must Return Methods <must-return-methods>`
+* :ref:`Negative Power <negative-power>`
+* :ref:`Nested Ternary <nested-ternary>`
+* :ref:`Next Month Trap <next-month-trap>`
+* :ref:`No Choice <no-choice>`
+* :ref:`No Class In Global <no-class-in-global>`
+* :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+* :ref:`No Empty Regex <no-empty-regex>`
+* :ref:`No Literal For Reference <no-literal-for-reference>`
+* :ref:`No Magic With Array <no-magic-with-array>`
+* :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
+* :ref:`No Real Comparison <no-real-comparison>`
+* :ref:`No Reference For Ternary <no-reference-for-ternary>`
+* :ref:`No Reference On Left Side <no-reference-on-left-side>`
+* :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`No isset() With empty() <no-isset()-with-empty()>`
+* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+* :ref:`Not Equal Is Not !== <not-equal-is-not-!==>`
+* :ref:`Not Not <not-not>`
+* :ref:`Objects Don't Need References <objects-don't-need-references>`
+* :ref:`One Variable String <one-variable-string>`
+* :ref:`Or Die <or-die>`
+* :ref:`Overwritten Exceptions <overwritten-exceptions>`
+* :ref:`Possible Missing Subpattern <possible-missing-subpattern>`
+* :ref:`Pre-increment <pre-increment>`
+* :ref:`Print And Die <print-and-die>`
+* :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
+* :ref:`Redeclared PHP Functions <redeclared-php-functions>`
+* :ref:`Redefined Class Constants <redefined-class-constants>`
+* :ref:`Redefined Default <redefined-default>`
+* :ref:`Repeated Regex <repeated-regex>`
+* :ref:`Repeated print() <repeated-print()>`
+* :ref:`Results May Be Missing <results-may-be-missing>`
+* :ref:`Return True False <return-true-false>`
+* :ref:`Same Conditions In Condition <same-conditions-in-condition>`
+* :ref:`Same Variables Foreach <same-variables-foreach>`
+* :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
+* :ref:`Should Chain Exception <should-chain-exception>`
+* :ref:`Should Make Alias <should-make-alias>`
+* :ref:`Should Make Ternary <should-make-ternary>`
+* :ref:`Should Typecast <should-typecast>`
+* :ref:`Should Use Coalesce <should-use-coalesce>`
+* :ref:`Should Use Explode Args <should-use-explode-args>`
+* :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
+* :ref:`Should Yield With Key <should-yield-with-key>`
+* :ref:`Silently Cast Integer <silently-cast-integer>`
+* :ref:`Static Methods Called From Object <static-methods-called-from-object>`
+* :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+* :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
+* :ref:`Strings With Strange Space <strings-with-strange-space>`
+* :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+* :ref:`Strtr Arguments <strtr-arguments>`
+* :ref:`Switch Without Default <switch-without-default>`
+* :ref:`Ternary In Concat <ternary-in-concat>`
+* :ref:`Throw Functioncall <throw-functioncall>`
+* :ref:`Throw In Destruct <throw-in-destruct>`
+* :ref:`Throws An Assignement <throws-an-assignement>`
+* :ref:`Timestamp Difference <timestamp-difference>`
+* :ref:`Typehint Must Be Returned <typehint-must-be-returned>`
+* :ref:`Typehinted References <typehinted-references>`
+* :ref:`Unchecked Resources <unchecked-resources>`
+* :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
+* :ref:`Undefined Class Constants <undefined-class-constants>`
+* :ref:`Undefined Constants <undefined-constants>`
+* :ref:`Undefined Functions <undefined-functions>`
+* :ref:`Undefined Insteadof <undefined-insteadof>`
+* :ref:`Undefined Interfaces <undefined-interfaces>`
+* :ref:`Undefined Properties <undefined-properties>`
+* :ref:`Undefined Trait <undefined-trait>`
+* :ref:`Undefined Variable <undefined-variable>`
+* :ref:`Undefined \:\:class <undefined-\:\:class>`
+* :ref:`Unknown Parameter Name <unknown-parameter-name>`
+* :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
+* :ref:`Use === null <use-===-null>`
+* :ref:`Use Class Operator <use-class-operator>`
+* :ref:`Use Constant <use-constant>`
+* :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+* :ref:`Use Instanceof <use-instanceof>`
+* :ref:`Use PHP Object API <use-php-object-api>`
+* :ref:`Use Pathinfo <use-pathinfo>`
+* :ref:`Use System Tmp <use-system-tmp>`
+* :ref:`Use array_slice() <use-array\_slice()>`
+* :ref:`Use const <use-const>`
+* :ref:`Use random_int() <use-random\_int()>`
+* :ref:`Useless Alias <useless-alias>`
+* :ref:`Useless Brackets <useless-brackets>`
+* :ref:`Useless Casting <useless-casting>`
+* :ref:`Useless Catch <useless-catch>`
+* :ref:`Useless Check <useless-check>`
+* :ref:`Useless Final <useless-final>`
+* :ref:`Useless Instructions <useless-instructions>`
+* :ref:`Useless Parenthesis <useless-parenthesis>`
+* :ref:`Useless Unset <useless-unset>`
+* :ref:`Uses Default Values <uses-default-values>`
+* :ref:`While(List() = Each()) <while(list()-=-each())>`
+* :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
+* :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
+* :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
+* :ref:`Wrong Parameter Type <wrong-parameter-type>`
+* :ref:`Wrong Returned Type <wrong-returned-type>`
+* :ref:`Wrong Type For Native PHP Function <wrong-type-for-native-php-function>`
+* :ref:`Wrong Type With Call <wrong-type-with-call>`
+* :ref:`Wrong Typed Property Default <wrong-typed-property-default>`
+* :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
+* :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
+* :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
+* :ref:`eval() Without Try <eval()-without-try>`
+* :ref:`list() May Omit Variables <list()-may-omit-variables>`
+* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`strip_tags Skips Closed Tag <strip\_tags-skips-closed-tag>`
+* :ref:`strpos() Too Much <strpos()-too-much>`
+* :ref:`var_dump()... Usage <var\_dump()...-usage>`
+
 .. _classreview:
 
 ClassReview
@@ -503,7 +694,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 47 analysis
+Total : 48 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -512,6 +703,7 @@ Total : 47 analysis
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Could Be Abstract Class <could-be-abstract-class>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
+* :ref:`Could Be Parent Method <could-be-parent-method>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
 * :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
 * :ref:`Could Be Protected Method <could-be-protected-method>`

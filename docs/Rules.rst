@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 27 Aug 2020 21:21:19 +0000
-.. comment: Generation hash : 9cbeb9ab81eded55f663e355ebabc39608e367d7
+.. comment: Generation date : Thu, 03 Sep 2020 16:18:32 +0000
+.. comment: Generation hash : 9dd0ca4de3b65c8e9ac5c21f758fcdf2e47266fe
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -405,7 +405,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/Noscream                                                                   |
 +-------------+---------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`                                                   |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CI-checks`                                 |
 +-------------+---------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
@@ -745,7 +745,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/AddZero                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -796,7 +796,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------+
 | Short name  | Functions/AliasesUsage                                                              |
 +-------------+-------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                      |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                    |
 +-------------+-------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                               |
 +-------------+-------------------------------------------------------------------------------------+
@@ -1012,7 +1012,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/AlteringForeachWithoutReference                                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                                             |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -1158,17 +1158,17 @@ Suggestions
 * Compare count() to non-zero values
 * Use empty()
 
-+-------------+--------------------------+
-| Short name  | Structures/NeverNegative |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Instant (5 mins)         |
-+-------------+--------------------------+
-| Examples    | Structures/NeverNegative |
-+-------------+--------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/NeverNegative         |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/NeverNegative         |
++-------------+----------------------------------+
 
 
 
@@ -1601,15 +1601,15 @@ Suggestions
 * Separate assignation and comparison
 * Drop assignation or comparison
 
-+-------------+------------------------------+
-| Short name  | Structures/AssigneAndCompare |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Structures/AssigneAndCompare |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/AssigneAndCompare     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/AssigneAndCompare     |
++-------------+----------------------------------+
 
 
 
@@ -1709,17 +1709,17 @@ Suggestions
 * Always use symbol && rather than letter and
 * To be safe, add parenthesis to enforce priorities
 
-+-------------+-----------------+
-| Short name  | Php/AssignAnd   |
-+-------------+-----------------+
-| Rulesets    | :ref:`Analyze`  |
-+-------------+-----------------+
-| Severity    | Critical        |
-+-------------+-----------------+
-| Time To Fix | Quick (30 mins) |
-+-------------+-----------------+
-| Examples    | Php/AssignAnd   |
-+-------------+-----------------+
++-------------+----------------------------------+
+| Short name  | Php/AssignAnd                    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Critical                         |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Php/AssignAnd                    |
++-------------+----------------------------------+
 
 
 
@@ -2037,7 +2037,7 @@ Even if most of the time, usage of parenthesis is legit, it is recommended to av
 +-------------+------------------------------------+
 | Short name  | Structures/PrintWithoutParenthesis |
 +-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`   |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -2189,17 +2189,17 @@ Suggestions
 * Replace substr() with the array notations for strings.
 * Replace substr() with a call to mb_substr().
 
-+-------------+--------------------------------------------------------------------------------------------------+
-| Short name  | Structures/NoSubstrOne                                                                           |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions`, :ref:`Top10` |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                            |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                                                                 |
-+-------------+--------------------------------------------------------------------------------------------------+
-| Examples    | Structures/NoSubstrOne                                                                           |
-+-------------+--------------------------------------------------------------------------------------------------+
++-------------+--------------------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/NoSubstrOne                                                                                             |
++-------------+--------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+--------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                              |
++-------------+--------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                                                                   |
++-------------+--------------------------------------------------------------------------------------------------------------------+
+| Examples    | Structures/NoSubstrOne                                                                                             |
++-------------+--------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -2457,15 +2457,15 @@ Avoid get_class()
 
 See also `get_class <http://php.net/get_class>`_ and `Instanceof <http://php.net/manual/en/language.operators.type.php>`_.
 
-+-------------+--------------------------------+
-| Short name  | Structures/UseInstanceof       |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Analyze` |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Structures/UseInstanceof       |
-+-------------+--------------------------------+
++-------------+--------------------------------------------------------------------+
+| Short name  | Structures/UseInstanceof                                           |
++-------------+--------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Analyze`, :ref:`CI-checks`, :ref:`CI-checks` |
++-------------+--------------------------------------------------------------------+
+| Severity    | Minor                                                              |
++-------------+--------------------------------------------------------------------+
+| Time To Fix | Structures/UseInstanceof                                           |
++-------------+--------------------------------------------------------------------+
 
 
 
@@ -3250,17 +3250,17 @@ Suggestions
 * Add an explicit return to the callback
 * Use `null` to unset elements in an array without destroying the index
 
-+-------------+-------------------------------+
-| Short name  | Functions/CallbackNeedsReturn |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Instant (5 mins)              |
-+-------------+-------------------------------+
-| Examples    | Functions/CallbackNeedsReturn |
-+-------------+-------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/CallbackNeedsReturn    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Functions/CallbackNeedsReturn    |
++-------------+----------------------------------+
 
 
 
@@ -3486,15 +3486,15 @@ Suggestions
 
 * Implement Iterator or IteratorAggregate
 
-+-------------+----------------------------------------+
-| Short name  | Interfaces/CantImplementTraversable    |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Minor                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Interfaces/CantImplementTraversable    |
-+-------------+----------------------------------------+
++-------------+----------------------------------------------------------+
+| Short name  | Interfaces/CantImplementTraversable                      |
++-------------+----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------+
+| Severity    | Minor                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Interfaces/CantImplementTraversable                      |
++-------------+----------------------------------------------------------+
 
 
 
@@ -3756,15 +3756,15 @@ Suggestions
 * Skip the casting
 * Cast in another expression
 
-+-------------+---------------------------+
-| Short name  | Structures/CastingTernary |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Major                     |
-+-------------+---------------------------+
-| Time To Fix | Structures/CastingTernary |
-+-------------+---------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/CastingTernary        |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/CastingTernary        |
++-------------+----------------------------------+
 
 
 
@@ -4030,17 +4030,17 @@ Suggestions
 * Add a call to json_last_error()
 * Configure operations to throw an exception upon error (``JSON_THROW_ON_ERROR``), and catch it.
 
-+-------------+----------------------+
-| Short name  | Structures/CheckJson |
-+-------------+----------------------+
-| Rulesets    | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Major                |
-+-------------+----------------------+
-| Time To Fix | Quick (30 mins)      |
-+-------------+----------------------+
-| Examples    | Structures/CheckJson |
-+-------------+----------------------+
++-------------+----------------------------------+
+| Short name  | Structures/CheckJson             |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/CheckJson             |
++-------------+----------------------------------+
 
 
 
@@ -4087,15 +4087,15 @@ Suggestions
 * Add a call to method_exists() before using any method name
 * Relay the call to another object that doesn't handle __call() or __callStatic()
 
-+-------------+--------------------------+
-| Short name  | Classes/CheckOnCallUsage |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Classes/CheckOnCallUsage |
-+-------------+--------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/CheckOnCallUsage         |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Classes/CheckOnCallUsage         |
++-------------+----------------------------------+
 
 
 
@@ -4324,17 +4324,17 @@ Suggestions
 * Change the parent mention with a fully qualified name
 * Remove the call to the parent altogether
 
-+-------------+------------------------------------+
-| Short name  | Classes/NoParent                   |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Php Version | 7.4-                               |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Classes/NoParent                   |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Classes/NoParent                                     |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Php Version | 7.4-                                                 |
++-------------+------------------------------------------------------+
+| Severity    | Minor                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Classes/NoParent                                     |
++-------------+------------------------------------------------------+
 
 
 
@@ -4634,15 +4634,15 @@ Suggestions
 * Add parenthesis around ?? operator to avoid misbehavior
 * Do not use dot and ?? together in the same expression
 
-+-------------+------------------------------+
-| Short name  | Structures/CoalesceAndConcat |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Structures/CoalesceAndConcat |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/CoalesceAndConcat     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/CoalesceAndConcat     |
++-------------+----------------------------------+
 
 
 
@@ -4978,15 +4978,15 @@ Suggestions
 * Add parenthesis around the addition to ensure its expected priority
 * Move the addition outside the concatenation
 
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP80`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Top10` |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                                                                                                                                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                      |
-+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                                        |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP74`, :ref:`CompatibilityPHP80`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                                                                                                                                                                                                        |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Php/ConcatAndAddition                                                                                                                                                                                                                                                                                                        |
++-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5271,15 +5271,15 @@ Suggestions
 * Make the class an interface
 * Make the class an abstract class, to avoid its instantiation
 
-+-------------+-----------------------+
-| Short name  | Classes/ConstantClass |
-+-------------+-----------------------+
-| Rulesets    | :ref:`Analyze`        |
-+-------------+-----------------------+
-| Severity    | Minor                 |
-+-------------+-----------------------+
-| Time To Fix | Classes/ConstantClass |
-+-------------+-----------------------+
++-------------+----------------------------------+
+| Short name  | Classes/ConstantClass            |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Classes/ConstantClass            |
++-------------+----------------------------------+
 
 
 
@@ -5442,15 +5442,15 @@ List of constants being defined with names that are incompatible with PHP standa
 
 See also `PHP Constants <http://php.net/manual/en/language.constants.php>`_.
 
-+-------------+--------------------------------+
-| Short name  | Constants/ConstantStrangeNames |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Constants/ConstantStrangeNames |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Constants/ConstantStrangeNames   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Constants/ConstantStrangeNames   |
++-------------+----------------------------------+
 
 
 
@@ -5882,6 +5882,68 @@ This analysis works when typehints have already been configured.
 +-------------+-------------------------+
 | Time To Fix | Typehints/CouldBeParent |
 +-------------+-------------------------+
+
+
+
+.. _could-be-parent-method:
+
+Could Be Parent Method
+######################
+
+
+A method is defined in several children, but not in a the parent class. It may be worth checking if this method doesn't belong the parent class, as an abstraction.
+
+.. code-block:: php
+
+   <?php
+   
+   // The parent class
+   class x { }
+   
+   // The children class
+   class y1 extends x {
+       // foo is common to y1 and y2, so it shall be also a method in x
+       function foo() {}
+       // fooY1 is specific to y1
+       function fooY1() {}
+   }
+   
+   class y2 extends x {
+       function foo() {}
+       // fooY2 is specific to y1
+       function fooY2() {}
+   }
+   
+   ?>
+
+
+Only the name of the method is used is for gathering purposes. If the code has grown organically, the signature (default values, typehint, argument names) may have followed different path, and will require a refactorisation.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Create an abstract method in the parent
+* Create an concrete method in the parent, and move default behavior there by removing it in children classes
+
++-------------+---------+---------+-------------+
+| Name        | Default | Type    | Description |
++-------------+---------+---------+-------------+
+| minChildren | 4       | integer | Description |
++-------------+---------+---------+-------------+
+
+
+
++-------------+-----------------------------+
+| Short name  | Classes/CouldBeParentMethod |
++-------------+-----------------------------+
+| Rulesets    | :ref:`ClassReview`          |
++-------------+-----------------------------+
+| Severity    | Minor                       |
++-------------+-----------------------------+
+| Time To Fix | Classes/CouldBeParentMethod |
++-------------+-----------------------------+
 
 
 
@@ -6587,7 +6649,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/CouldUseShortAssignation                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`                                                                         |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CI-checks`                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -6676,17 +6738,17 @@ Suggestions
 
 * Use __DIR__ instead of ``dirname(__FILE__);``
 
-+-------------+-----------------------------------------------------------+
-| Short name  | Structures/CouldUseDir                                    |
-+-------------+-----------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`php-cs-fixable` |
-+-------------+-----------------------------------------------------------+
-| Severity    | Major                                                     |
-+-------------+-----------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                           |
-+-------------+-----------------------------------------------------------+
-| Examples    | Structures/CouldUseDir                                    |
-+-------------+-----------------------------------------------------------+
++-------------+-----------------------------------------------------------------------------+
+| Short name  | Structures/CouldUseDir                                                      |
++-------------+-----------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`php-cs-fixable`, :ref:`CI-checks` |
++-------------+-----------------------------------------------------------------------------+
+| Severity    | Major                                                                       |
++-------------+-----------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                             |
++-------------+-----------------------------------------------------------------------------+
+| Examples    | Structures/CouldUseDir                                                      |
++-------------+-----------------------------------------------------------------------------+
 
 
 
@@ -6880,17 +6942,17 @@ Suggestions
 
 * Use strrepeat() whenever possible
 
-+-------------+------------------------------+
-| Short name  | Structures/CouldUseStrrepeat |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Slow (1 hour)                |
-+-------------+------------------------------+
-| Examples    | Structures/CouldUseStrrepeat |
-+-------------+------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Structures/CouldUseStrrepeat                   |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                  |
++-------------+------------------------------------------------+
+| Examples    | Structures/CouldUseStrrepeat                   |
++-------------+------------------------------------------------+
 
 
 
@@ -7042,7 +7104,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/DanglingArrayReferences                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks`                                                            |
 +-------------+-----------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------+
@@ -7301,7 +7363,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Php/Deprecated                                                                            |
 +-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                          |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -7832,17 +7894,17 @@ Suggestions
 
 * Remove any echo, print, printf() call built with error messages from an exception, or external source.
 
-+-------------+---------------------------------+
-| Short name  | Security/DontEchoError          |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security` |
-+-------------+---------------------------------+
-| Severity    | Critical                        |
-+-------------+---------------------------------+
-| Time To Fix | Instant (5 mins)                |
-+-------------+---------------------------------+
-| Examples    | Security/DontEchoError          |
-+-------------+---------------------------------+
++-------------+---------------------------------------------------+
+| Short name  | Security/DontEchoError                            |
++-------------+---------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CI-checks` |
++-------------+---------------------------------------------------+
+| Severity    | Critical                                          |
++-------------+---------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                  |
++-------------+---------------------------------------------------+
+| Examples    | Security/DontEchoError                            |
++-------------+---------------------------------------------------+
 
 
 
@@ -7900,6 +7962,40 @@ Suggestions
 | Time To Fix | Quick (30 mins)            |
 +-------------+----------------------------+
 | Examples    | Structures/DontLoopOnYield |
++-------------+----------------------------+
+
+
+
+.. _don't-pollute-global-space:
+
+Don't Pollute Global Space
+##########################
+
+
+Avoid creating definitions in the global name space.
+
+The global namespace is the default namespace, where all functions, classes, constants, traits and interfaces live. The `global namespace <https://www.php.net/manual/en/language.namespaces.global.php>`_ is also known as the root namespace.
+
+In particular, PHP native classes usually live in that namespace. By creating functions in that namespace, the code may encounter naming conflict, when the PHP group decides to use a name that the code also uses. This already happened in PHP version 5.1.1, where a ``Date`` native class was introduced, and had to be `disabled in the following minor version <https://www.php.net/ChangeLog-5.php#5.1.1>`_. 
+
+Nowadays, conflicts appear between components, which claim the same name. 
+
+See also `Using namespaces: fallback to global function/constant <https://www.php.net/manual/en/language.namespaces.fallback.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Create a namespace for your code, and store your definition there.
+
++-------------+----------------------------+
+| Short name  | Php/DontPolluteGlobalSpace |
++-------------+----------------------------+
+| Rulesets    | :ref:`Analyze`             |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Php/DontPolluteGlobalSpace |
 +-------------+----------------------------+
 
 
@@ -8079,17 +8175,17 @@ Suggestions
 * Never unset properties : set it to null or its default value instead
 * Make the property an array, and set/unset its index
 
-+-------------+-----------------------------------------------------+
-| Short name  | Classes/DontUnsetProperties                         |
-+-------------+-----------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`php-cs-fixable` |
-+-------------+-----------------------------------------------------+
-| Severity    | Major                                               |
-+-------------+-----------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                       |
-+-------------+-----------------------------------------------------+
-| Examples    | Classes/DontUnsetProperties                         |
-+-------------+-----------------------------------------------------+
++-------------+-----------------------------------------------------------------------+
+| Short name  | Classes/DontUnsetProperties                                           |
++-------------+-----------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`php-cs-fixable`, :ref:`CI-checks` |
++-------------+-----------------------------------------------------------------------+
+| Severity    | Major                                                                 |
++-------------+-----------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                         |
++-------------+-----------------------------------------------------------------------+
+| Examples    | Classes/DontUnsetProperties                                           |
++-------------+-----------------------------------------------------------------------+
 
 
 
@@ -8248,9 +8344,9 @@ Dont Mix ++
 ###########
 
 
-++ operators have two distinct behaviors, and should be used in isolation.
+++ operators, pre and post, have two distinct behaviors, and should be used separately.
 
-When mixed with a larger expression, it is difficult to read, and may lead to unwanted behaviors.
+When mixed in a larger expression, they are difficult to read, and may lead to unwanted behaviors.
 
 .. code-block:: php
 
@@ -8260,7 +8356,11 @@ When mixed with a larger expression, it is difficult to read, and may lead to un
        $i++;
        $a[$i] = $i;
    
-       // $i is modified twice 
+       // The index is also incremented, as it is used AFTP the incrementation
+       // With $i = 2; $a is array(3 => 3)
+       $a[$i] = ++$i;
+   
+       // $i is actually modified twice 
        $i = --$i + 1; 
    ?>
 
@@ -8506,15 +8606,15 @@ Suggestions
 
 * Remove the else clause and move its code to the main part of the method
 
-+-------------+------------------------------------+
-| Short name  | Structures/DropElseAfterReturn     |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Structures/DropElseAfterReturn     |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Structures/DropElseAfterReturn                       |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Severity    | Minor                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Structures/DropElseAfterReturn                       |
++-------------+------------------------------------------------------+
 
 
 
@@ -8597,7 +8697,8 @@ Integer, reals and strings are considered here. Boolean, Null and Arrays are omi
 Suggestions
 ^^^^^^^^^^^
 
-*
+* Create a constant and use it in place of the literal
+* Create a class constant and use it in place of the literal
 
 +--------------+---------+---------+-------------+
 | Name         | Default | Type    | Description |
@@ -8847,17 +8948,17 @@ Suggestions
 * Turn the else expression into a block, and have more than the second if in this block
 * Turn the if / else if / else into a switch structure
 
-+-------------+------------------------------------------------------+
-| Short name  | Structures/ElseIfElseif                              |
-+-------------+------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`, :ref:`Rector` |
-+-------------+------------------------------------------------------+
-| Severity    | Minor                                                |
-+-------------+------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                      |
-+-------------+------------------------------------------------------+
-| Examples    | Structures/ElseIfElseif                              |
-+-------------+------------------------------------------------------+
++-------------+------------------------------------------------------------------------+
+| Short name  | Structures/ElseIfElseif                                                |
++-------------+------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`, :ref:`Rector`, :ref:`CI-checks` |
++-------------+------------------------------------------------------------------------+
+| Severity    | Minor                                                                  |
++-------------+------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                        |
++-------------+------------------------------------------------------------------------+
+| Examples    | Structures/ElseIfElseif                                                |
++-------------+------------------------------------------------------------------------+
 
 
 
@@ -8905,17 +9006,17 @@ Suggestions
 * Fill the block with a comment that explain the situation
 * Remove the block and its commanding operator
 
-+-------------+------------------------+
-| Short name  | Structures/EmptyBlocks |
-+-------------+------------------------+
-| Rulesets    | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Instant (5 mins)       |
-+-------------+------------------------+
-| Examples    | Structures/EmptyBlocks |
-+-------------+------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/EmptyBlocks           |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/EmptyBlocks           |
++-------------+----------------------------------+
 
 
 
@@ -9213,17 +9314,17 @@ Suggestions
 
 * Remove the namespace
 
-+-------------+----------------------------------------------+
-| Short name  | Namespaces/EmptyNamespace                    |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Minor                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Instant (5 mins)                             |
-+-------------+----------------------------------------------+
-| ClearPHP    | Namespaces/EmptyNamespace                    |
-+-------------+----------------------------------------------+
++-------------+----------------------------------------------------------------+
+| Short name  | Namespaces/EmptyNamespace                                      |
++-------------+----------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------------+
+| Severity    | Minor                                                          |
++-------------+----------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                               |
++-------------+----------------------------------------------------------------+
+| ClearPHP    | Namespaces/EmptyNamespace                                      |
++-------------+----------------------------------------------------------------+
 
 
 
@@ -9640,7 +9741,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------+
 | Short name  | Structures/ExitUsage                                                          |
 +-------------+-------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                              |
 +-------------+-------------------------------------------------------------------------------+
 | Severity    | Major                                                                         |
 +-------------+-------------------------------------------------------------------------------+
@@ -9725,17 +9826,17 @@ Suggestions
 * Fix the length of the string
 * Put the string in a constant, and use strlen() or mb_strlen()
 
-+-------------+------------------------------------+
-| Short name  | Structures/FailingSubstrComparison |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`       |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Instant (5 mins)                   |
-+-------------+------------------------------------+
-| Examples    | Structures/FailingSubstrComparison |
-+-------------+------------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Structures/FailingSubstrComparison             |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------+
+| Severity    | Major                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Instant (5 mins)                               |
++-------------+------------------------------------------------+
+| Examples    | Structures/FailingSubstrComparison             |
++-------------+------------------------------------------------+
 
 
 
@@ -10195,7 +10296,7 @@ Suggestions
 +-------------+------------------------------------------+
 | Short name  | Structures/ForeachReferenceIsNotModified |
 +-------------+------------------------------------------+
-| Rulesets    | :ref:`Analyze`                           |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`         |
 +-------------+------------------------------------------+
 | Severity    | Minor                                    |
 +-------------+------------------------------------------+
@@ -10406,7 +10507,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/NonPpp                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -10450,15 +10551,15 @@ Suggestions
 * Remove all whitespaces before and after a script. This doesn't apply to template, which may need to use those spaces.
 * Remove the final tag, to prevent any whitespace to be forgotten at the end of the file. This doesn't apply to the opening PHP tag, which is always necessary.
 
-+-------------+--------------------------------+
-| Short name  | Structures/ForgottenWhiteSpace |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Structures/ForgottenWhiteSpace |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ForgottenWhiteSpace   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/ForgottenWhiteSpace   |
++-------------+----------------------------------+
 
 
 
@@ -11519,17 +11620,17 @@ Suggestions
 
 * Group all uses together, at the beginning of the namespace or class
 
-+-------------+----------------------+
-| Short name  | Namespaces/HiddenUse |
-+-------------+----------------------+
-| Rulesets    | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
-+-------------+----------------------+
-| Examples    | Namespaces/HiddenUse |
-+-------------+----------------------+
++-------------+----------------------------------+
+| Short name  | Namespaces/HiddenUse             |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Namespaces/HiddenUse             |
++-------------+----------------------------------+
 
 
 
@@ -11569,15 +11670,15 @@ Suggestions
 
 * Always use the third argument with htmlentities()
 
-+-------------+-----------------------------+
-| Short name  | Structures/Htmlentitiescall |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Major                       |
-+-------------+-----------------------------+
-| Time To Fix | Structures/Htmlentitiescall |
-+-------------+-----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/Htmlentitiescall      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/Htmlentitiescall      |
++-------------+----------------------------------+
 
 
 
@@ -11614,17 +11715,17 @@ Suggestions
 * Add extra expressions between the two structures
 * Nest the structures, to show that different attempts are made
 
-+-------------+--------------------------------+
-| Short name  | Structures/IdenticalConditions |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Critical                       |
-+-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
-+-------------+--------------------------------+
-| Examples    | Structures/IdenticalConditions |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/IdenticalConditions   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Critical                         |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/IdenticalConditions   |
++-------------+----------------------------------+
 
 
 
@@ -11715,17 +11816,17 @@ Suggestions
 * Remove one of the alternative, and remove the logical link
 * Modify one of the alternative, and make it different from the other
 
-+-------------+---------------------------------+
-| Short name  | Structures/IdenticalOnBothSides |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-| Examples    | Structures/IdenticalOnBothSides |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/IdenticalOnBothSides  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/IdenticalOnBothSides  |
++-------------+----------------------------------+
 
 
 
@@ -11786,17 +11887,17 @@ Suggestions
 * Change one of the condition, so they are different
 * Make it obvious that the first condition is a try, preparing the normal conditions.
 
-+-------------+---------------------------------+
-| Short name  | Structures/IfWithSameConditions |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-| Examples    | Structures/IfWithSameConditions |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/IfWithSameConditions  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/IfWithSameConditions  |
++-------------+----------------------------------+
 
 
 
@@ -12020,17 +12121,17 @@ However, such structures are confusing. It is easy to misread them as conditions
 
 It is recommended to use a real 'if then' structures, to make the condition readable.
 
-+-------------+----------------------+
-| Short name  | Structures/ImpliedIf |
-+-------------+----------------------+
-| Rulesets    | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Major                |
-+-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
-+-------------+----------------------+
-| ClearPHP    | Structures/ImpliedIf |
-+-------------+----------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ImpliedIf             |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| ClearPHP    | Structures/ImpliedIf             |
++-------------+----------------------------------+
 
 
 
@@ -12116,15 +12217,15 @@ Suggestions
 
 * Always use the array as the second argument
 
-+-------------+-----------------------------+
-| Short name  | Structures/ImplodeArgsOrder |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Structures/ImplodeArgsOrder |
-+-------------+-----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ImplodeArgsOrder      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/ImplodeArgsOrder      |
++-------------+----------------------------------+
 
 
 
@@ -12492,7 +12593,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Structures/IndicesAreIntOrString |
 +-------------+----------------------------------+
-| Rulesets    | :ref:`Analyze`                   |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
 +-------------+----------------------------------+
 | Severity    | Major                            |
 +-------------+----------------------------------+
@@ -12968,15 +13069,15 @@ Suggestions
 * Make the class abstract
 * Make the missing methods abstract
 
-+-------------+------------------------------------------------------------+
-| Short name  | Interfaces/IsNotImplemented                                |
-+-------------+------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`LintButWontExec` |
-+-------------+------------------------------------------------------------+
-| Severity    | Minor                                                      |
-+-------------+------------------------------------------------------------+
-| Time To Fix | Interfaces/IsNotImplemented                                |
-+-------------+------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------+
+| Short name  | Interfaces/IsNotImplemented                                                  |
++-------------+------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+------------------------------------------------------------------------------+
+| Severity    | Minor                                                                        |
++-------------+------------------------------------------------------------------------------+
+| Time To Fix | Interfaces/IsNotImplemented                                                  |
++-------------+------------------------------------------------------------------------------+
 
 
 
@@ -13155,15 +13256,15 @@ Suggestions
 
 * Fix the packing format with correct values
 
-+-------------+------------------------------+
-| Short name  | Structures/InvalidPackFormat |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Structures/InvalidPackFormat |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/InvalidPackFormat     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/InvalidPackFormat     |
++-------------+----------------------------------+
 
 
 
@@ -13201,17 +13302,17 @@ Suggestions
 
 * Fix the regex before running it
 
-+-------------+-------------------------+
-| Short name  | Structures/InvalidRegex |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
-| Examples    | Structures/InvalidRegex |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/InvalidRegex          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/InvalidRegex          |
++-------------+----------------------------------+
 
 
 
@@ -13253,17 +13354,17 @@ Suggestions
 * Fix one of the variable : this expression needs another variable here
 * When adding differences, calculate the difference in a temporary variable first.
 
-+-------------+-------------------+
-| Short name  | Structures/IsZero |
-+-------------+-------------------+
-| Rulesets    | :ref:`Analyze`    |
-+-------------+-------------------+
-| Severity    | Minor             |
-+-------------+-------------------+
-| Time To Fix | Instant (5 mins)  |
-+-------------+-------------------+
-| Examples    | Structures/IsZero |
-+-------------+-------------------+
++-------------+----------------------------------+
+| Short name  | Structures/IsZero                |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/IsZero                |
++-------------+----------------------------------+
 
 
 
@@ -13296,15 +13397,15 @@ Suggestions
 * Add the third argument, and set it to true
 * Use an object as a first argument
 
-+-------------+-------------------------------+
-| Short name  | Php/IsAWithString             |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Rector` |
-+-------------+-------------------------------+
-| Severity    | Minor                         |
-+-------------+-------------------------------+
-| Time To Fix | Php/IsAWithString             |
-+-------------+-------------------------------+
++-------------+-------------------------------------------------+
+| Short name  | Php/IsAWithString                               |
++-------------+-------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Rector`, :ref:`CI-checks` |
++-------------+-------------------------------------------------+
+| Severity    | Minor                                           |
++-------------+-------------------------------------------------+
+| Time To Fix | Php/IsAWithString                               |
++-------------+-------------------------------------------------+
 
 
 
@@ -13859,17 +13960,17 @@ Suggestions
 
 * Change the expressions for them to have a real meaning
 
-+-------------+----------------------------+
-| Short name  | Structures/LogicalMistakes |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Critical                   |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
-| Examples    | Structures/LogicalMistakes |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/LogicalMistakes       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Critical                         |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/LogicalMistakes       |
++-------------+----------------------------------+
 
 
 
@@ -13962,7 +14063,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Php/LogicalInLetters                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`, :ref:`php-cs-fixable`                           |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`, :ref:`php-cs-fixable`, :ref:`CI-checks`         |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -14066,17 +14167,17 @@ Suggestions
 
 * Remove the useless curly brackets
 
-+-------------+----------------------+
-| Short name  | Structures/LoneBlock |
-+-------------+----------------------+
-| Rulesets    | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
-+-------------+----------------------+
-| Examples    | Structures/LoneBlock |
-+-------------+----------------------+
++-------------+----------------------------------+
+| Short name  | Structures/LoneBlock             |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/LoneBlock             |
++-------------+----------------------------------+
 
 
 
@@ -14658,15 +14759,15 @@ Suggestions
 * Add a third argument
 * Use the default encoding (aka, omit both third AND fourth argument)
 
-+-------------+-----------------------------+
-| Short name  | Structures/MbstringThirdArg |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Structures/MbstringThirdArg |
-+-------------+-----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/MbstringThirdArg      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/MbstringThirdArg      |
++-------------+----------------------------------+
 
 
 
@@ -14706,7 +14807,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Structures/MbstringUnknownEncoding |
 +-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`   |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -14826,15 +14927,15 @@ Suggestions
 
 * Merge the two structures into one
 
-+-------------+------------------------+
-| Short name  | Structures/MergeIfThen |
-+-------------+------------------------+
-| Rulesets    | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Structures/MergeIfThen |
-+-------------+------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/MergeIfThen           |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/MergeIfThen           |
++-------------+----------------------------------+
 
 
 
@@ -15706,15 +15807,65 @@ Add parenthesis to those expression to prevent bugs.
 
 See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
 
-+-------------+-------------------------------+
-| Short name  | Structures/MissingParenthesis |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Structures/MissingParenthesis |
-+-------------+-------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/MissingParenthesis    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/MissingParenthesis    |
++-------------+----------------------------------+
+
+
+
+.. _missing-returntype-in-method:
+
+Missing Returntype In Method
+############################
+
+
+The specified typehints are not sufficient. The code of the method may return other types, which are not specified.
+
+.. code-block:: php
+
+   <?php
+   
+   function fooSN() : ?string  {
+       return shell_exec('ls -hla');
+   }
+   
+   // shell_exec() may return null or string. Here, only string in specified for fooS, and that may lead to a Fatal error
+   function fooS() : string  {
+       return shell_exec('ls -hla');
+   }
+   
+   function bar() : int {
+       return rand(0, 10) ? 1 : b;
+   }
+   
+   ?>
+
+
+The analysis reports a method when it finds other return types than the one expected. In the case of multiple typehints, as for the last example, the PHP code may require an upgrade to PHP 8.0.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Update the typehint to accept more types
+* Update the code of the method to fit the expected returntype
+
++-------------+----------------------------------+
+| Short name  | Typehints/MissingReturntype      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Typehints/MissingReturntype      |
++-------------+----------------------------------+
 
 
 
@@ -16034,7 +16185,7 @@ Suggestions
 +-------------+-------------------------------------+
 | Short name  | Namespaces/MultipleAliasDefinitions |
 +-------------+-------------------------------------+
-| Rulesets    | :ref:`Analyze`                      |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`    |
 +-------------+-------------------------------------+
 | Severity    | Minor                               |
 +-------------+-------------------------------------+
@@ -16073,7 +16224,7 @@ See also Namespaces/MultipleAliasDefinition.
 +-------------+-------------------------------------------+
 | Short name  | Namespaces/MultipleAliasDefinitionPerFile |
 +-------------+-------------------------------------------+
-| Rulesets    | :ref:`Analyze`                            |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`          |
 +-------------+-------------------------------------------+
 | Severity    | Minor                                     |
 +-------------+-------------------------------------------+
@@ -16119,15 +16270,15 @@ Suggestions
 * Store classes with different names in different namespaces
 * Change the name of the classes and give them a common interface to allow from common behavior
 
-+-------------+------------------------------+
-| Short name  | Classes/MultipleDeclarations |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Classes/MultipleDeclarations |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/MultipleDeclarations     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Classes/MultipleDeclarations     |
++-------------+----------------------------------+
 
 
 
@@ -16212,7 +16363,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Constants/MultipleConstantDefinition |
 +-------------+--------------------------------------+
-| Rulesets    | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`     |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -16361,7 +16512,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Classes/MultipleTraitOrInterface |
 +-------------+----------------------------------+
-| Rulesets    | :ref:`Analyze`                   |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -16407,17 +16558,17 @@ Suggestions
 * Review your code and check that arrays only have keys defined once.
 * Review carefully your code and check indirect values, like constants, static constants.
 
-+-------------+------------------------------+
-| Short name  | Arrays/MultipleIdenticalKeys |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
-+-------------+------------------------------+
-| Examples    | Arrays/MultipleIdenticalKeys |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Arrays/MultipleIdenticalKeys     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Arrays/MultipleIdenticalKeys     |
++-------------+----------------------------------+
 
 
 
@@ -16613,7 +16764,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/MultipleDefinedCase                                                                    |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -16665,7 +16816,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/MultiplyByOne                                                                      |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -16771,15 +16922,15 @@ Suggestions
 * Add a return expression, with a valid data type
 * Remove the return typehint
 
-+-------------+----------------------------------------+
-| Short name  | Functions/MustReturn                   |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Functions/MustReturn                   |
-+-------------+----------------------------------------+
++-------------+----------------------------------------------------------+
+| Short name  | Functions/MustReturn                                     |
++-------------+----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------+
+| Severity    | Major                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Functions/MustReturn                                     |
++-------------+----------------------------------------------------------+
 
 
 
@@ -16863,15 +17014,15 @@ Suggestions
 * Avoid negative number, as operands of **
 * Use parenthesis with negative numbers and **
 
-+-------------+------------------------+
-| Short name  | Structures/NegativePow |
-+-------------+------------------------+
-| Rulesets    | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Major                  |
-+-------------+------------------------+
-| Time To Fix | Structures/NegativePow |
-+-------------+------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/NegativePow           |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/NegativePow           |
++-------------+----------------------------------+
 
 
 
@@ -17008,7 +17159,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NestedTernary                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                  |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -17603,17 +17754,17 @@ Suggestions
 * Use datetime() and other classes, not PHP native functions
 * Use a external library, like carbon, to handle dates
 
-+-------------+------------------------------+
-| Short name  | Structures/NextMonthTrap     |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
-+-------------+------------------------------+
-| Examples    | Structures/NextMonthTrap     |
-+-------------+------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Structures/NextMonthTrap                       |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------+
+| Severity    | Major                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Instant (5 mins)                               |
++-------------+------------------------------------------------+
+| Examples    | Structures/NextMonthTrap                       |
++-------------+------------------------------------------------+
 
 
 
@@ -17770,17 +17921,17 @@ Suggestions
 * Replace one of the alternative with a distinct call
 * Remove the whole conditional : it may end up being useless
 
-+-------------+------------------------------+
-| Short name  | Structures/NoChoice          |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
-+-------------+------------------------------+
-| Examples    | Structures/NoChoice          |
-+-------------+------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Structures/NoChoice                            |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------+
+| Severity    | Major                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Instant (5 mins)                               |
++-------------+------------------------------------------------+
+| Examples    | Structures/NoChoice                            |
++-------------+------------------------------------------------+
 
 
 
@@ -17881,17 +18032,17 @@ Suggestions
 
 * Use a specific namespace for your classes
 
-+-------------+---------------------+
-| Short name  | Php/NoClassInGlobal |
-+-------------+---------------------+
-| Rulesets    | :ref:`Analyze`      |
-+-------------+---------------------+
-| Severity    | Minor               |
-+-------------+---------------------+
-| Time To Fix | Slow (1 hour)       |
-+-------------+---------------------+
-| Examples    | Php/NoClassInGlobal |
-+-------------+---------------------+
++-------------+----------------------------------+
+| Short name  | Php/NoClassInGlobal              |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| Examples    | Php/NoClassInGlobal              |
++-------------+----------------------------------+
 
 
 
@@ -18014,15 +18165,15 @@ Accessing those methods in a static way is also discouraged.
 
 See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_ and `Magical PHP: `__call <http://www.php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/blog/magical-php-call>`_.
 
-+-------------+---------------------------------+
-| Short name  | Classes/DirectCallToMagicMethod |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Classes/DirectCallToMagicMethod |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/DirectCallToMagicMethod  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Classes/DirectCallToMagicMethod  |
++-------------+----------------------------------+
 
 
 
@@ -18151,17 +18302,17 @@ Suggestions
 
 * Fix the regex by adding regex delimiters
 
-+-------------+-------------------------+
-| Short name  | Structures/NoEmptyRegex |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Critical                |
-+-------------+-------------------------+
-| Time To Fix | Quick (30 mins)         |
-+-------------+-------------------------+
-| Examples    | Structures/NoEmptyRegex |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/NoEmptyRegex          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Critical                         |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/NoEmptyRegex          |
++-------------+----------------------------------+
 
 
 
@@ -18463,15 +18614,15 @@ Suggestions
 * Make the argument an object, by using a typehint (non-scalar)
 * Put the value into a variable prior to call (or return) the method
 
-+-------------+---------------------------------+
-| Short name  | Functions/NoLiteralForReference |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Functions/NoLiteralForReference |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/NoLiteralForReference  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Functions/NoLiteralForReference  |
++-------------+----------------------------------+
 
 
 
@@ -18531,15 +18682,15 @@ Suggestions
 * Use a distinct method to append a new value to that property
 * Assign the whole array, and not just one of its elements
 
-+-------------+----------------------------------------+
-| Short name  | Classes/NoMagicWithArray               |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Classes/NoMagicWithArray               |
-+-------------+----------------------------------------+
++-------------+----------------------------------------------------------+
+| Short name  | Classes/NoMagicWithArray                                 |
++-------------+----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------+
+| Severity    | Major                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Classes/NoMagicWithArray                                 |
++-------------+----------------------------------------------------------+
 
 
 
@@ -18844,7 +18995,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/NoParenthesisForLanguageConstruct                                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`CI-checks`                                                                                      |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------+
@@ -18989,7 +19140,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Type/NoRealComparison                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks`                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -19090,17 +19241,17 @@ Suggestions
 * Drop the reference in the argument definition
 * Drop the reference in the function return definition
 
-+-------------+---------------------------+
-| Short name  | Php/NoReferenceForTernary |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Major                     |
-+-------------+---------------------------+
-| Time To Fix | Slow (1 hour)             |
-+-------------+---------------------------+
-| Examples    | Php/NoReferenceForTernary |
-+-------------+---------------------------+
++-------------+----------------------------------+
+| Short name  | Php/NoReferenceForTernary        |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| Examples    | Php/NoReferenceForTernary        |
++-------------+----------------------------------+
 
 
 
@@ -19131,15 +19282,15 @@ Do not use references as the right element in an assignation.
 This is the case for most situations : addition, multiplication, bitshift, logical, power, concatenation.
 Note that PHP won't compile the code if the operator is a short operator (+=, .=, etc.), nor if the & is on the right side of the operator.
 
-+-------------+------------------------------+
-| Short name  | Structures/NoReferenceOnLeft |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Critical                     |
-+-------------+------------------------------+
-| Time To Fix | Structures/NoReferenceOnLeft |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/NoReferenceOnLeft     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Critical                         |
++-------------+----------------------------------+
+| Time To Fix | Structures/NoReferenceOnLeft     |
++-------------+----------------------------------+
 
 
 
@@ -19594,7 +19745,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Performances/ArrayMergeInLoops                                                                              |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Top10`                                                           |
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Top10`, :ref:`CI-checks`                                         |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -19684,17 +19835,17 @@ Suggestions
 * Only use empty(), just drop the empty()
 * Use a null value, so the variable is always set
 
-+-------------+-----------------------------+
-| Short name  | Structures/NoIssetWithEmpty |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Instant (5 mins)            |
-+-------------+-----------------------------+
-| Examples    | Structures/NoIssetWithEmpty |
-+-------------+-----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/NoIssetWithEmpty      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/NoIssetWithEmpty      |
++-------------+----------------------------------+
 
 
 
@@ -19930,17 +20081,17 @@ Suggestions
 * Call the method the correct way
 * Define the method as static
 
-+-------------+----------------------------------------------------------------------------------------------------------------------------+
-| Short name  | Classes/NonStaticMethodsCalledStatic                                                                                       |
-+-------------+----------------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+-------------+----------------------------------------------------------------------------------------------------------------------------+
-| Severity    | Minor                                                                                                                      |
-+-------------+----------------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                            |
-+-------------+----------------------------------------------------------------------------------------------------------------------------+
-| Examples    | Classes/NonStaticMethodsCalledStatic                                                                                       |
-+-------------+----------------------------------------------------------------------------------------------------------------------------+
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Classes/NonStaticMethodsCalledStatic                                                                                                         |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                                                        |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                              |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| Examples    | Classes/NonStaticMethodsCalledStatic                                                                                                         |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20141,15 +20292,15 @@ Suggestions
 * Use the != or !==
 * Use parenthesis
 
-+-------------+---------------------+
-| Short name  | Structures/NotEqual |
-+-------------+---------------------+
-| Rulesets    | :ref:`Analyze`      |
-+-------------+---------------------+
-| Severity    | Minor               |
-+-------------+---------------------+
-| Time To Fix | Structures/NotEqual |
-+-------------+---------------------+
++-------------+----------------------------------+
+| Short name  | Structures/NotEqual              |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/NotEqual              |
++-------------+----------------------------------+
 
 
 
@@ -20188,7 +20339,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Structures/NotNot                                                                             |
 +-------------+-----------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                         |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -20435,7 +20586,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/ObjectReferences                                                                                     |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks`                                                                  |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                                           |
 +-------------+-----------------------------------------------------------------------------------------------------------------+
@@ -20719,17 +20870,17 @@ Suggestions
 * Include in the string any concatenation that comes unconditionaly after or before
 * Convert the variable to a string with the (type) operator
 
-+-------------+-------------------------+
-| Short name  | Type/OneVariableStrings |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Instant (5 mins)        |
-+-------------+-------------------------+
-| Examples    | Type/OneVariableStrings |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Type/OneVariableStrings          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Type/OneVariableStrings          |
++-------------+----------------------------------+
 
 
 
@@ -20904,7 +21055,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/OrDie                                                                          |
 +-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                            |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                          |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                     |
 +-------------+-------------------------------------------------------------------------------------------+
@@ -20985,15 +21136,15 @@ In catch blocks, it is good practice not to overwrite the incoming exception, as
    
    ?>
 
-+-------------+------------------------------------+
-| Short name  | Exceptions/OverwriteException      |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Exceptions/OverwriteException      |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Exceptions/OverwriteException                        |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Severity    | Minor                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Exceptions/OverwriteException                        |
++-------------+------------------------------------------------------+
 
 
 
@@ -22923,17 +23074,17 @@ Suggestions
 * Add a test on the last index of the resulting array, to ensure it is available when needed
 * Use the PREG_UNMATCHED_AS_NULL option (PHP 7.4+)
 
-+-------------+------------------------------+
-| Short name  | Php/MissingSubpattern        |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Quick (30 mins)              |
-+-------------+------------------------------+
-| Examples    | Php/MissingSubpattern        |
-+-------------+------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Php/MissingSubpattern                          |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------+
+| Severity    | Minor                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                |
++-------------+------------------------------------------------+
+| Examples    | Php/MissingSubpattern                          |
++-------------+------------------------------------------------+
 
 
 
@@ -22971,17 +23122,17 @@ Suggestions
 
 * Use the pre increment when the new value is not reused.
 
-+-------------+-------------------------------------+
-| Short name  | Performances/PrePostIncrement       |
-+-------------+-------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances` |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Quick (30 mins)                     |
-+-------------+-------------------------------------+
-| Examples    | Performances/PrePostIncrement       |
-+-------------+-------------------------------------+
++-------------+-------------------------------------------------------+
+| Short name  | Performances/PrePostIncrement                         |
++-------------+-------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CI-checks` |
++-------------+-------------------------------------------------------+
+| Severity    | Minor                                                 |
++-------------+-------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                       |
++-------------+-------------------------------------------------------+
+| Examples    | Performances/PrePostIncrement                         |
++-------------+-------------------------------------------------------+
 
 
 
@@ -23235,15 +23386,15 @@ When stopping a script with `die() <https://www.php.net/`die <http://www.php.net
    
    ?>
 
-+-------------+------------------------+
-| Short name  | Structures/PrintAndDie |
-+-------------+------------------------+
-| Rulesets    | :ref:`Analyze`         |
-+-------------+------------------------+
-| Severity    | Minor                  |
-+-------------+------------------------+
-| Time To Fix | Structures/PrintAndDie |
-+-------------+------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/PrintAndDie           |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/PrintAndDie           |
++-------------+----------------------------------+
 
 
 
@@ -23282,17 +23433,17 @@ Omitted arguments produce an error.
 
 See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>`_.
 
-+-------------+----------------------------+
-| Short name  | Structures/PrintfArguments |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
-| Examples    | Structures/PrintfArguments |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/PrintfArguments       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/PrintfArguments       |
++-------------+----------------------------------+
 
 
 
@@ -23849,15 +24000,15 @@ Suggestions
 
 * Check if it is still worth emulating that function
 
-+-------------+---------------------------------+
-| Short name  | Functions/RedeclaredPhpFunction |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Functions/RedeclaredPhpFunction |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/RedeclaredPhpFunction  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Functions/RedeclaredPhpFunction  |
++-------------+----------------------------------+
 
 
 
@@ -23893,15 +24044,15 @@ Class constants may be redefined, though it is prone to errors when using them, 
 
 It is recommended to use distinct names.
 
-+-------------+----------------------------+
-| Short name  | Classes/RedefinedConstants |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Classes/RedefinedConstants |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/RedefinedConstants       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Classes/RedefinedConstants       |
++-------------+----------------------------------+
 
 
 
@@ -23935,17 +24086,17 @@ Suggestions
 * Move the default assignation to the property definition
 * Drop the reassignation in the constructor
 
-+-------------+--------------------------+
-| Short name  | Classes/RedefinedDefault |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Major                    |
-+-------------+--------------------------+
-| Time To Fix | Slow (1 hour)            |
-+-------------+--------------------------+
-| Examples    | Classes/RedefinedDefault |
-+-------------+--------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/RedefinedDefault         |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| Examples    | Classes/RedefinedDefault         |
++-------------+----------------------------------+
 
 
 
@@ -24325,17 +24476,17 @@ Suggestions
 * Create a central library of regex
 * Use the regex inventory to spot other regex that are close, and should be identical.
 
-+-------------+--------------------------+
-| Short name  | Structures/RepeatedRegex |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
-| Examples    | Structures/RepeatedRegex |
-+-------------+--------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/RepeatedRegex         |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/RepeatedRegex         |
++-------------+----------------------------------+
 
 
 
@@ -24375,7 +24526,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------+
 | Short name  | Structures/RepeatedPrint                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`                                                  |
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Top10`, :ref:`CI-checks`                                |
 +-------------+---------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------+
@@ -24446,15 +24597,15 @@ Results May Be Missing
        // $s may end up null if preg_match fails.
    ?>
 
-+-------------+-------------------------------+
-| Short name  | Structures/ResultMayBeMissing |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Structures/ResultMayBeMissing |
-+-------------+-------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ResultMayBeMissing    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/ResultMayBeMissing    |
++-------------+----------------------------------+
 
 
 
@@ -24565,17 +24716,17 @@ Suggestions
 * Return directly the comparison, without using the if/then structure
 * Cast the value to (boolean) and use it instead of the ternary
 
-+-------------+----------------------------+
-| Short name  | Structures/ReturnTrueFalse |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Major                      |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
-| Examples    | Structures/ReturnTrueFalse |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ReturnTrueFalse       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/ReturnTrueFalse       |
++-------------+----------------------------------+
 
 
 
@@ -24810,17 +24961,17 @@ Suggestions
 * Merge the two conditions into one
 * Make the two conditions different
 
-+-------------+---------------------------+
-| Short name  | Structures/SameConditions |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Critical                  |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
-| Examples    | Structures/SameConditions |
-+-------------+---------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/SameConditions        |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Critical                         |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/SameConditions        |
++-------------+----------------------------------+
 
 
 
@@ -24858,15 +25009,15 @@ The source will also be destroyed immediately after the blind variable has been 
    
    ?>
 
-+-------------+-----------------------------+
-| Short name  | Structures/AutoUnsetForeach |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Structures/AutoUnsetForeach |
-+-------------+-----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/AutoUnsetForeach      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/AutoUnsetForeach      |
++-------------+----------------------------------+
 
 
 
@@ -24900,15 +25051,15 @@ Suggestions
 
 * Update type hints to avoid scalar values
 
-+-------------+-------------------------------------------+
-| Short name  | Php/ScalarAreNotArrays                    |
-+-------------+-------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP74` |
-+-------------+-------------------------------------------+
-| Severity    | Minor                                     |
-+-------------+-------------------------------------------+
-| Time To Fix | Php/ScalarAreNotArrays                    |
-+-------------+-------------------------------------------+
++-------------+-------------------------------------------------------------+
+| Short name  | Php/ScalarAreNotArrays                                      |
++-------------+-------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP74`, :ref:`CI-checks` |
++-------------+-------------------------------------------------------------+
+| Severity    | Minor                                                       |
++-------------+-------------------------------------------------------------+
+| Time To Fix | Php/ScalarAreNotArrays                                      |
++-------------+-------------------------------------------------------------+
 
 
 
@@ -25495,17 +25646,17 @@ Suggestions
 
 * Add the incoming exception to the newly thrown exception
 
-+-------------+---------------------------------+
-| Short name  | Structures/ShouldChainException |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Instant (5 mins)                |
-+-------------+---------------------------------+
-| Examples    | Structures/ShouldChainException |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ShouldChainException  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/ShouldChainException  |
++-------------+----------------------------------+
 
 
 
@@ -25683,15 +25834,15 @@ Finally, short names makes the rest of the code readable.
    
    ?>
 
-+-------------+----------------------------+
-| Short name  | Namespaces/ShouldMakeAlias |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Namespaces/ShouldMakeAlias |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Namespaces/ShouldMakeAlias       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Namespaces/ShouldMakeAlias       |
++-------------+----------------------------------+
 
 
 
@@ -25731,15 +25882,15 @@ This way, they are less verbose, compatible with assignation and easier to read.
    
    ?>
 
-+-------------+------------------------------+
-| Short name  | Structures/ShouldMakeTernary |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Minor                        |
-+-------------+------------------------------+
-| Time To Fix | Structures/ShouldMakeTernary |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ShouldMakeTernary     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/ShouldMakeTernary     |
++-------------+----------------------------------+
 
 
 
@@ -25828,17 +25979,17 @@ Suggestions
 
 * Use a typecast, instead of a functioncall.
 
-+-------------+---------------------+
-| Short name  | Type/ShouldTypecast |
-+-------------+---------------------+
-| Rulesets    | :ref:`Analyze`      |
-+-------------+---------------------+
-| Severity    | Minor               |
-+-------------+---------------------+
-| Time To Fix | Quick (30 mins)     |
-+-------------+---------------------+
-| Examples    | Type/ShouldTypecast |
-+-------------+---------------------+
++-------------+----------------------------------+
+| Short name  | Type/ShouldTypecast              |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Type/ShouldTypecast              |
++-------------+----------------------------------+
 
 
 
@@ -25875,19 +26026,19 @@ Suggestions
 
 * Replace the long syntax with the short one
 
-+-------------+------------------------------------+
-| Short name  | Php/ShouldUseCoalesce              |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Php Version | With PHP 7.0 and more recent       |
-+-------------+------------------------------------+
-| Severity    | Major                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
-| Examples    | Php/ShouldUseCoalesce              |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Php/ShouldUseCoalesce                                |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Php Version | With PHP 7.0 and more recent                         |
++-------------+------------------------------------------------------+
+| Severity    | Major                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                      |
++-------------+------------------------------------------------------+
+| Examples    | Php/ShouldUseCoalesce                                |
++-------------+------------------------------------------------------+
 
 
 
@@ -25972,15 +26123,15 @@ Suggestions
 
 *
 
-+-------------+---------------------------------+
-| Short name  | Structures/ShouldUseExplodeArgs |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Minor                           |
-+-------------+---------------------------------+
-| Time To Fix | Structures/ShouldUseExplodeArgs |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ShouldUseExplodeArgs  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/ShouldUseExplodeArgs  |
++-------------+----------------------------------+
 
 
 
@@ -26326,17 +26477,17 @@ Suggestions
 
 
 
-+-------------+-------------------------------------+
-| Short name  | Security/ShouldUsePreparedStatement |
-+-------------+-------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`     |
-+-------------+-------------------------------------+
-| Severity    | Major                               |
-+-------------+-------------------------------------+
-| Time To Fix | Slow (1 hour)                       |
-+-------------+-------------------------------------+
-| Examples    | Security/ShouldUsePreparedStatement |
-+-------------+-------------------------------------+
++-------------+---------------------------------------------------+
+| Short name  | Security/ShouldUsePreparedStatement               |
++-------------+---------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CI-checks` |
++-------------+---------------------------------------------------+
+| Severity    | Major                                             |
++-------------+---------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                     |
++-------------+---------------------------------------------------+
+| Examples    | Security/ShouldUsePreparedStatement               |
++-------------+---------------------------------------------------+
 
 
 
@@ -26630,15 +26781,15 @@ Suggestions
 * Always yield with distinct keys
 * Avoid iterator_to_array() and use foreach()
 
-+-------------+------------------------------+
-| Short name  | Functions/ShouldYieldWithKey |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10` |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Functions/ShouldYieldWithKey |
-+-------------+------------------------------+
++-------------+------------------------------------------------+
+| Short name  | Functions/ShouldYieldWithKey                   |
++-------------+------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------+
+| Severity    | Major                                          |
++-------------+------------------------------------------------+
+| Time To Fix | Functions/ShouldYieldWithKey                   |
++-------------+------------------------------------------------+
 
 
 
@@ -26743,17 +26894,17 @@ Suggestions
 
 * Make sure hexadecimal numbers have the right number of digits : generally, it is 15, but it may depends on your PHP version.
 
-+-------------+--------------------------+
-| Short name  | Type/SilentlyCastInteger |
-+-------------+--------------------------+
-| Rulesets    | :ref:`Analyze`           |
-+-------------+--------------------------+
-| Severity    | Minor                    |
-+-------------+--------------------------+
-| Time To Fix | Quick (30 mins)          |
-+-------------+--------------------------+
-| Examples    | Type/SilentlyCastInteger |
-+-------------+--------------------------+
++-------------+----------------------------------+
+| Short name  | Type/SilentlyCastInteger         |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Type/SilentlyCastInteger         |
++-------------+----------------------------------+
 
 
 
@@ -27252,7 +27403,7 @@ To maintain code readability, it is recommended to call static method in a stati
 +-------------+---------------------------------------+
 | Short name  | Classes/StaticMethodsCalledFromObject |
 +-------------+---------------------------------------+
-| Rulesets    | :ref:`Analyze`                        |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`      |
 +-------------+---------------------------------------+
 | Severity    | Minor                                 |
 +-------------+---------------------------------------+
@@ -27303,7 +27454,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Classes/StaticContainsThis                                                                  |
 +-------------+---------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                            |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -27468,17 +27619,17 @@ Suggestions
 
 * Use strict comparison whenever possible
 
-+-------------+------------------------------------+
-| Short name  | Structures/BooleanStrictComparison |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
-| Examples    | Structures/BooleanStrictComparison |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Structures/BooleanStrictComparison                   |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Severity    | Minor                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                      |
++-------------+------------------------------------------------------+
+| Examples    | Structures/BooleanStrictComparison                   |
++-------------+------------------------------------------------------+
 
 
 
@@ -27618,17 +27769,17 @@ Suggestions
 * Replace the odd spaces with a normal space
 * If unsecable spaces are important for presentation, add them at the templating level.
 
-+-------------+-----------------------------+
-| Short name  | Type/StringWithStrangeSpace |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Quick (30 mins)             |
-+-------------+-----------------------------+
-| Examples    | Type/StringWithStrangeSpace |
-+-------------+-----------------------------+
++-------------+----------------------------------+
+| Short name  | Type/StringWithStrangeSpace      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Type/StringWithStrangeSpace      |
++-------------+----------------------------------+
 
 
 
@@ -27715,7 +27866,7 @@ Suggestions
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Short name  | Structures/StrposCompare                                                                            |
 +-------------+-----------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Top10`                                                                        |
+| Rulesets    | :ref:`Analyze`, :ref:`Top10`, :ref:`CI-checks`                                                      |
 +-------------+-----------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                               |
 +-------------+-----------------------------------------------------------------------------------------------------+
@@ -27766,17 +27917,17 @@ Suggestions
 * Replace strtr() with str_replace(), which works with strings and array, not chars
 * Replace strtr() with preg_match(), which works with patterns and not chars
 
-+-------------+--------------------+
-| Short name  | Php/StrtrArguments |
-+-------------+--------------------+
-| Rulesets    | :ref:`Analyze`     |
-+-------------+--------------------+
-| Severity    | Major              |
-+-------------+--------------------+
-| Time To Fix | Instant (5 mins)   |
-+-------------+--------------------+
-| Examples    | Php/StrtrArguments |
-+-------------+--------------------+
++-------------+----------------------------------+
+| Short name  | Php/StrtrArguments               |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Php/StrtrArguments               |
++-------------+----------------------------------+
 
 
 
@@ -28228,7 +28379,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/SwitchWithoutDefault                                                                                   |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                    |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                             |
 +-------------+-------------------------------------------------------------------------------------------------------------------+
@@ -28276,17 +28427,17 @@ Suggestions
 * Use parenthesis 
 * Avoid ternaries and coalesce operators inside a string
 
-+-------------+----------------------------+
-| Short name  | Structures/TernaryInConcat |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Critical                   |
-+-------------+----------------------------+
-| Time To Fix | Quick (30 mins)            |
-+-------------+----------------------------+
-| Examples    | Structures/TernaryInConcat |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/TernaryInConcat       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Critical                         |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/TernaryInConcat       |
++-------------+----------------------------------+
 
 
 
@@ -28376,17 +28527,17 @@ Suggestions
 * Add the new operator to the call
 * Make sure the function is really a functioncall, not a class name
 
-+-------------+------------------------------+
-| Short name  | Exceptions/ThrowFunctioncall |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Instant (5 mins)             |
-+-------------+------------------------------+
-| Examples    | Exceptions/ThrowFunctioncall |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Exceptions/ThrowFunctioncall     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Exceptions/ThrowFunctioncall     |
++-------------+----------------------------------+
 
 
 
@@ -28435,15 +28586,15 @@ Suggestions
 
 * Remove any exception thrown from a destructor
 
-+-------------+-------------------------+
-| Short name  | Classes/ThrowInDestruct |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Classes/ThrowInDestruct |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/ThrowInDestruct          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Classes/ThrowInDestruct          |
++-------------+----------------------------------+
 
 
 
@@ -28521,15 +28672,15 @@ Suggestions
 
 * Drop the assignation
 
-+-------------+----------------------------+
-| Short name  | Structures/ThrowsAndAssign |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Structures/ThrowsAndAssign |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/ThrowsAndAssign       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/ThrowsAndAssign       |
++-------------+----------------------------------+
 
 
 
@@ -28571,17 +28722,17 @@ Suggestions
 * For small time intervals, use hrtime() functions
 * For larger time intervals, use add() method with ``DateTime``
 
-+-------------+--------------------------------+
-| Short name  | Structures/TimestampDifference |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Major                          |
-+-------------+--------------------------------+
-| Time To Fix | Slow (1 hour)                  |
-+-------------+--------------------------------+
-| Examples    | Structures/TimestampDifference |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/TimestampDifference   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| Examples    | Structures/TimestampDifference   |
++-------------+----------------------------------+
 
 
 
@@ -29401,15 +29552,15 @@ Suggestions
 
 * Add a return with a valid value
 
-+-------------+----------------------------------------+
-| Short name  | Functions/TypehintMustBeReturned       |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Functions/TypehintMustBeReturned       |
-+-------------+----------------------------------------+
++-------------+----------------------------------------------------------+
+| Short name  | Functions/TypehintMustBeReturned                         |
++-------------+----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------+
+| Severity    | Major                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Functions/TypehintMustBeReturned                         |
++-------------+----------------------------------------------------------+
 
 
 
@@ -29457,15 +29608,15 @@ Suggestions
 
 * Remove reference for typehinted arguments, unless the typehint is a scalar typehint.
 
-+-------------+--------------------------------+
-| Short name  | Functions/TypehintedReferences |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Functions/TypehintedReferences |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/TypehintedReferences   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Functions/TypehintedReferences   |
++-------------+----------------------------------+
 
 
 
@@ -29617,17 +29768,17 @@ Always check that resources are correctly created before using them.
 
 See also `resources <http://php.net/manual/en/language.types.resource.php>`_.
 
-+-------------+-------------------------------+
-| Short name  | Structures/UncheckedResources |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Major                         |
-+-------------+-------------------------------+
-| Time To Fix | Slow (1 hour)                 |
-+-------------+-------------------------------+
-| ClearPHP    | Structures/UncheckedResources |
-+-------------+-------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UncheckedResources    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| ClearPHP    | Structures/UncheckedResources    |
++-------------+----------------------------------+
 
 
 
@@ -29677,17 +29828,17 @@ Suggestions
 
 * Remove the loop and call the content of the loop once.
 
-+-------------+---------------------------------+
-| Short name  | Structures/UnconditionLoopBreak |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`                  |
-+-------------+---------------------------------+
-| Severity    | Major                           |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-| Examples    | Structures/UnconditionLoopBreak |
-+-------------+---------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UnconditionLoopBreak  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Structures/UnconditionLoopBreak  |
++-------------+----------------------------------+
 
 
 
@@ -29718,15 +29869,15 @@ Undefined \:\:class
 
 See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_.
 
-+-------------+------------------------------+
-| Short name  | Classes/UndefinedStaticclass |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Classes/UndefinedStaticclass |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Classes/UndefinedStaticclass     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Classes/UndefinedStaticclass     |
++-------------+----------------------------------+
 
 
 
@@ -29953,15 +30104,15 @@ Suggestions
 * Fix the namespace of the constant (FQN or use)
 * Remove the usage of the constant
 
-+-------------+-----------------------------------------------------------+
-| Short name  | Constants/UndefinedConstants                              |
-+-------------+-----------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Analyze`, :ref:`CompatibilityPHP72` |
-+-------------+-----------------------------------------------------------+
-| Severity    | Minor                                                     |
-+-------------+-----------------------------------------------------------+
-| Time To Fix | Constants/UndefinedConstants                              |
-+-------------+-----------------------------------------------------------+
++-------------+-----------------------------------------------------------------------------------------------+
+| Short name  | Constants/UndefinedConstants                                                                  |
++-------------+-----------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Analyze`, :ref:`CompatibilityPHP72`, :ref:`CI-checks`, :ref:`CI-checks` |
++-------------+-----------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                         |
++-------------+-----------------------------------------------------------------------------------------------+
+| Time To Fix | Constants/UndefinedConstants                                                                  |
++-------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -30001,15 +30152,15 @@ Suggestions
 * Define the function for the code to call it
 * Include the correct library in the code source
 
-+-------------+------------------------------+
-| Short name  | Functions/UndefinedFunctions |
-+-------------+------------------------------+
-| Rulesets    | :ref:`Analyze`               |
-+-------------+------------------------------+
-| Severity    | Major                        |
-+-------------+------------------------------+
-| Time To Fix | Functions/UndefinedFunctions |
-+-------------+------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/UndefinedFunctions     |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Functions/UndefinedFunctions     |
++-------------+----------------------------------+
 
 
 
@@ -30057,15 +30208,15 @@ Suggestions
 * Remove the insteadof expression
 * Fix the original method and replace it with an existing method
 
-+-------------+----------------------------------------+
-| Short name  | Traits/UndefinedInsteadof              |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Traits/UndefinedInsteadof              |
-+-------------+----------------------------------------+
++-------------+----------------------------------------------------------+
+| Short name  | Traits/UndefinedInsteadof                                |
++-------------+----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------+
+| Severity    | Major                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Traits/UndefinedInsteadof                                |
++-------------+----------------------------------------------------------+
 
 
 
@@ -30106,17 +30257,17 @@ Suggestions
 * Implement the missing interfaces
 * Remove the code governed by the missing interface : the whole method if it is an typehint, the whole if/then if it is a condition.
 
-+-------------+--------------------------------+
-| Short name  | Interfaces/UndefinedInterfaces |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Major                          |
-+-------------+--------------------------------+
-| Time To Fix | Quick (30 mins)                |
-+-------------+--------------------------------+
-| Examples    | Interfaces/UndefinedInterfaces |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Interfaces/UndefinedInterfaces   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Interfaces/UndefinedInterfaces   |
++-------------+----------------------------------+
 
 
 
@@ -30235,7 +30386,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/UndefinedProperty                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                                |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                         |
 +-------------+---------------------------------------------------------------------------------------------------------------+
@@ -30288,15 +30439,15 @@ Suggestions
 * Define the missing trait
 * Remove usage of the missing trait
 
-+-------------+----------------------------------------+
-| Short name  | Traits/UndefinedTrait                  |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Critical                               |
-+-------------+----------------------------------------+
-| Time To Fix | Traits/UndefinedTrait                  |
-+-------------+----------------------------------------+
++-------------+----------------------------------------------------------+
+| Short name  | Traits/UndefinedTrait                                    |
++-------------+----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------+
+| Severity    | Critical                                                 |
++-------------+----------------------------------------------------------+
+| Time To Fix | Traits/UndefinedTrait                                    |
++-------------+----------------------------------------------------------+
 
 
 
@@ -30338,15 +30489,15 @@ Suggestions
 * Fix the variable name
 * Define the variable by assigning a value to it, before using it
 
-+-------------+-----------------------------+
-| Short name  | Variables/UndefinedVariable |
-+-------------+-----------------------------+
-| Rulesets    | :ref:`Analyze`              |
-+-------------+-----------------------------+
-| Severity    | Minor                       |
-+-------------+-----------------------------+
-| Time To Fix | Variables/UndefinedVariable |
-+-------------+-----------------------------+
++-------------+----------------------------------+
+| Short name  | Variables/UndefinedVariable      |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Variables/UndefinedVariable      |
++-------------+----------------------------------+
 
 
 
@@ -30667,17 +30818,17 @@ Suggestions
 * Fix the name of the parameter and use a valid one
 * Remove the parameter name, and revert to positional notation
 
-+-------------+--------------------------------+
-| Short name  | Functions/UnknownParameterName |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Php Version | 8.0+                           |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Functions/UnknownParameterName |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/UnknownParameterName   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Php Version | 8.0+                             |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Functions/UnknownParameterName   |
++-------------+----------------------------------+
 
 
 
@@ -31638,17 +31789,17 @@ Suggestions
 * Remove the unused inherited variable
 * Make us of the unused inherited variable
 
-+-------------+----------------------------------------------+
-| Short name  | Functions/UnusedInheritedVariable            |
-+-------------+----------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+-------------+----------------------------------------------+
-| Severity    | Major                                        |
-+-------------+----------------------------------------------+
-| Time To Fix | Quick (30 mins)                              |
-+-------------+----------------------------------------------+
-| Examples    | Functions/UnusedInheritedVariable            |
-+-------------+----------------------------------------------+
++-------------+----------------------------------------------------------------+
+| Short name  | Functions/UnusedInheritedVariable                              |
++-------------+----------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------------+
+| Severity    | Major                                                          |
++-------------+----------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                |
++-------------+----------------------------------------------------------------+
+| Examples    | Functions/UnusedInheritedVariable                              |
++-------------+----------------------------------------------------------------+
 
 
 
@@ -32273,17 +32424,17 @@ Suggestions
 
 * Use === comparison
 
-+-------------+---------------------------------------+
-| Short name  | Php/IsnullVsEqualNull                 |
-+-------------+---------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable` |
-+-------------+---------------------------------------+
-| Severity    | Minor                                 |
-+-------------+---------------------------------------+
-| Time To Fix | Quick (30 mins)                       |
-+-------------+---------------------------------------+
-| ClearPHP    | Php/IsnullVsEqualNull                 |
-+-------------+---------------------------------------+
++-------------+---------------------------------------------------------+
+| Short name  | Php/IsnullVsEqualNull                                   |
++-------------+---------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`, :ref:`CI-checks` |
++-------------+---------------------------------------------------------+
+| Severity    | Minor                                                   |
++-------------+---------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                         |
++-------------+---------------------------------------------------------+
+| ClearPHP    | Php/IsnullVsEqualNull                                   |
++-------------+---------------------------------------------------------+
 
 
 
@@ -32475,15 +32626,15 @@ Suggestions
 
 * Replace strings by the \:\:class operator whenever possible
 
-+-------------+-------------------------------------+
-| Short name  | Classes/UseClassOperator            |
-+-------------+-------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances` |
-+-------------+-------------------------------------+
-| Severity    | Minor                               |
-+-------------+-------------------------------------+
-| Time To Fix | Classes/UseClassOperator            |
-+-------------+-------------------------------------+
++-------------+-------------------------------------------------------+
+| Short name  | Classes/UseClassOperator                              |
++-------------+-------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`CI-checks` |
++-------------+-------------------------------------------------------+
+| Severity    | Minor                                                 |
++-------------+-------------------------------------------------------+
+| Time To Fix | Classes/UseClassOperator                              |
++-------------+-------------------------------------------------------+
 
 
 
@@ -32565,15 +32716,15 @@ Suggestions
 
 * Use the constant version, not the function.
 
-+-------------+---------------------------------------+
-| Short name  | Structures/UseConstant                |
-+-------------+---------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable` |
-+-------------+---------------------------------------+
-| Severity    | Minor                                 |
-+-------------+---------------------------------------+
-| Time To Fix | Structures/UseConstant                |
-+-------------+---------------------------------------+
++-------------+---------------------------------------------------------+
+| Short name  | Structures/UseConstant                                  |
++-------------+---------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`php-cs-fixable`, :ref:`CI-checks` |
++-------------+---------------------------------------------------------+
+| Severity    | Minor                                                   |
++-------------+---------------------------------------------------------+
+| Time To Fix | Structures/UseConstant                                  |
++-------------+---------------------------------------------------------+
 
 
 
@@ -32677,7 +32828,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Functions/UseConstantAsArguments |
 +-------------+----------------------------------+
-| Rulesets    | :ref:`Analyze`                   |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
 +-------------+----------------------------------+
 | Severity    | Major                            |
 +-------------+----------------------------------+
@@ -33117,7 +33268,7 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------------------+
 | Short name  | Php/UseObjectApi                                                                            |
 +-------------+---------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                            |
 +-------------+---------------------------------------------------------------------------------------------+
 | Severity    | Minor                                                                                       |
 +-------------+---------------------------------------------------------------------------------------------+
@@ -33205,17 +33356,17 @@ Suggestions
 
 * Use pathinfo() and its second argument
 
-+-------------+-----------------+
-| Short name  | Php/UsePathinfo |
-+-------------+-----------------+
-| Rulesets    | :ref:`Analyze`  |
-+-------------+-----------------+
-| Severity    | Minor           |
-+-------------+-----------------+
-| Time To Fix | Quick (30 mins) |
-+-------------+-----------------+
-| Examples    | Php/UsePathinfo |
-+-------------+-----------------+
++-------------+----------------------------------+
+| Short name  | Php/UsePathinfo                  |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Php/UsePathinfo                  |
++-------------+----------------------------------+
 
 
 
@@ -33317,15 +33468,15 @@ Suggestions
 
 * Do not hardcode the temporary file, use the system's
 
-+-------------+-------------------------+
-| Short name  | Structures/UseSystemTmp |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Structures/UseSystemTmp |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UseSystemTmp          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Structures/UseSystemTmp          |
++-------------+----------------------------------+
 
 
 
@@ -33518,15 +33669,15 @@ Suggestions
 
 *
 
-+-------------+----------------------------+
-| Short name  | Performances/UseArraySlice |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Performances/UseArraySlice |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Performances/UseArraySlice       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Performances/UseArraySlice       |
++-------------+----------------------------------+
 
 
 
@@ -33574,17 +33725,17 @@ Suggestions
 
 * Use const instead of define()
 
-+-------------+------------------------------------------------------------------------------+
-| Short name  | Constants/ConstRecommended                                                   |
-+-------------+------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10` |
-+-------------+------------------------------------------------------------------------------+
-| Severity    | Minor                                                                        |
-+-------------+------------------------------------------------------------------------------+
-| Time To Fix | Slow (1 hour)                                                                |
-+-------------+------------------------------------------------------------------------------+
-| Examples    | Constants/ConstRecommended                                                   |
-+-------------+------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------------------------+
+| Short name  | Constants/ConstRecommended                                                                     |
++-------------+------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>`, :ref:`Top10`, :ref:`CI-checks` |
++-------------+------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                          |
++-------------+------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                  |
++-------------+------------------------------------------------------------------------------------------------+
+| Examples    | Constants/ConstRecommended                                                                     |
++-------------+------------------------------------------------------------------------------------------------+
 
 
 
@@ -33851,17 +34002,17 @@ Suggestions
 
 * Use random_bytes() and randon_int(). At least, use them as a base for random data, and then add extra prefix and suffix, and a hash call on top.
 
-+-------------+------------------------------------------------------------+
-| Short name  | Php/BetterRand                                             |
-+-------------+------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71` |
-+-------------+------------------------------------------------------------+
-| Severity    | Major                                                      |
-+-------------+------------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                           |
-+-------------+------------------------------------------------------------+
-| Examples    | Php/BetterRand                                             |
-+-------------+------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------+
+| Short name  | Php/BetterRand                                                               |
++-------------+------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CI-checks` |
++-------------+------------------------------------------------------------------------------+
+| Severity    | Major                                                                        |
++-------------+------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                             |
++-------------+------------------------------------------------------------------------------+
+| Examples    | Php/BetterRand                                                               |
++-------------+------------------------------------------------------------------------------+
 
 
 
@@ -34176,15 +34327,15 @@ Suggestions
 * Fix the alias or the origin method name
 * Switch to insteadof, and avoid as keyword
 
-+-------------+----------------------------------------+
-| Short name  | Traits/UselessAlias                    |
-+-------------+----------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
-+-------------+----------------------------------------+
-| Severity    | Major                                  |
-+-------------+----------------------------------------+
-| Time To Fix | Traits/UselessAlias                    |
-+-------------+----------------------------------------+
++-------------+----------------------------------------------------------+
+| Short name  | Traits/UselessAlias                                      |
++-------------+----------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`CI-checks` |
++-------------+----------------------------------------------------------+
+| Severity    | Major                                                    |
++-------------+----------------------------------------------------------+
+| Time To Fix | Traits/UselessAlias                                      |
++-------------+----------------------------------------------------------+
 
 
 
@@ -34276,17 +34427,17 @@ Suggestions
 * Restore the flow-control operation that was there and removed
 * Move the block into a method or function, and call it
 
-+-------------+----------------------------+
-| Short name  | Structures/UselessBrackets |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
-| Examples    | Structures/UselessBrackets |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UselessBrackets       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/UselessBrackets       |
++-------------+----------------------------------+
 
 
 
@@ -34322,17 +34473,17 @@ Suggestions
 
 * Remove the type cast
 
-+-------------+---------------------------+
-| Short name  | Structures/UselessCasting |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Instant (5 mins)          |
-+-------------+---------------------------+
-| Examples    | Structures/UselessCasting |
-+-------------+---------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UselessCasting        |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/UselessCasting        |
++-------------+----------------------------------+
 
 
 
@@ -34377,17 +34528,17 @@ Suggestions
 * Add a log call to the catch block
 * Handle correctly the exception
 
-+-------------+-------------------------+
-| Short name  | Exceptions/UselessCatch |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Slow (1 hour)           |
-+-------------+-------------------------+
-| Examples    | Exceptions/UselessCatch |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Exceptions/UselessCatch          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Slow (1 hour)                    |
++-------------+----------------------------------+
+| Examples    | Exceptions/UselessCatch          |
++-------------+----------------------------------+
 
 
 
@@ -34432,17 +34583,17 @@ Suggestions
 * Drop the condition and the check
 * Turn the condition into isset(), empty() and is_array()
 
-+-------------+-------------------------+
-| Short name  | Structures/UselessCheck |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Minor                   |
-+-------------+-------------------------+
-| Time To Fix | Instant (5 mins)        |
-+-------------+-------------------------+
-| Examples    | Structures/UselessCheck |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UselessCheck          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/UselessCheck          |
++-------------+----------------------------------+
 
 
 
@@ -34566,17 +34717,17 @@ There is no need to declare them individually final.
 
 See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_, and `When to declare final <https://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
-+-------------+----------------------+
-| Short name  | Classes/UselessFinal |
-+-------------+----------------------+
-| Rulesets    | :ref:`Analyze`       |
-+-------------+----------------------+
-| Severity    | Minor                |
-+-------------+----------------------+
-| Time To Fix | Instant (5 mins)     |
-+-------------+----------------------+
-| ClearPHP    | Classes/UselessFinal |
-+-------------+----------------------+
++-------------+----------------------------------+
+| Short name  | Classes/UselessFinal             |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| ClearPHP    | Classes/UselessFinal             |
++-------------+----------------------------------+
 
 
 
@@ -34796,17 +34947,17 @@ Suggestions
 
 * Remove useless parenthesis, unless they are important for readability.
 
-+-------------+-------------------------------+
-| Short name  | Structures/UselessParenthesis |
-+-------------+-------------------------------+
-| Rulesets    | :ref:`Analyze`                |
-+-------------+-------------------------------+
-| Severity    | Minor                         |
-+-------------+-------------------------------+
-| Time To Fix | Instant (5 mins)              |
-+-------------+-------------------------------+
-| Examples    | Structures/UselessParenthesis |
-+-------------+-------------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/UselessParenthesis    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/UselessParenthesis    |
++-------------+----------------------------------+
 
 
 
@@ -35070,7 +35221,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------+
 | Short name  | Structures/UselessUnset                                                                         |
 +-------------+-------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                  |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                |
 +-------------+-------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                           |
 +-------------+-------------------------------------------------------------------------------------------------+
@@ -35117,15 +35268,15 @@ Suggestions
 
 * Mention all arguments, as much as possible
 
-+-------------+--------------------------------+
-| Short name  | Functions/UsesDefaultArguments |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Functions/UsesDefaultArguments |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Functions/UsesDefaultArguments   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Functions/UsesDefaultArguments   |
++-------------+----------------------------------+
 
 
 
@@ -35580,17 +35731,17 @@ Suggestions
 * Change this loop with foreach
 * Change this loop with an array_* function with a callback
 
-+-------------+---------------------------------------------------------+
-| Short name  | Structures/WhileListEach                                |
-+-------------+---------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
-+-------------+---------------------------------------------------------+
-| Severity    | Minor                                                   |
-+-------------+---------------------------------------------------------+
-| Time To Fix | Instant (5 mins)                                        |
-+-------------+---------------------------------------------------------+
-| Examples    | Structures/WhileListEach                                |
-+-------------+---------------------------------------------------------+
++-------------+---------------------------------------------------------------------------+
+| Short name  | Structures/WhileListEach                                                  |
++-------------+---------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions`, :ref:`CI-checks` |
++-------------+---------------------------------------------------------------------------+
+| Severity    | Minor                                                                     |
++-------------+---------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                          |
++-------------+---------------------------------------------------------------------------+
+| Examples    | Structures/WhileListEach                                                  |
++-------------+---------------------------------------------------------------------------+
 
 
 
@@ -35687,17 +35838,17 @@ Suggestions
 * Match the property call with the definition
 * Make the property static
 
-+-------------+------------------------------------+
-| Short name  | Classes/UndeclaredStaticProperty   |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Critical                           |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
-| Examples    | Classes/UndeclaredStaticProperty   |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Classes/UndeclaredStaticProperty                     |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Severity    | Critical                                             |
++-------------+------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                      |
++-------------+------------------------------------------------------+
+| Examples    | Classes/UndeclaredStaticProperty                     |
++-------------+------------------------------------------------------+
 
 
 
@@ -35924,7 +36075,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Short name  | Functions/WrongNumberOfArguments                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`                                                                                              |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`                                                                            |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Severity    | Major                                                                                                       |
 +-------------+-------------------------------------------------------------------------------------------------------------+
@@ -35986,7 +36137,7 @@ Suggestions
 +-------------+----------------------------------+
 | Short name  | Functions/WrongOptionalParameter |
 +-------------+----------------------------------+
-| Rulesets    | :ref:`Analyze`                   |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
 +-------------+----------------------------------+
 | Severity    | Minor                            |
 +-------------+----------------------------------+
@@ -36022,17 +36173,17 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
    
    ?>
 
-+-------------+---------------------------+
-| Short name  | Php/InternalParameterType |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Analyze`            |
-+-------------+---------------------------+
-| Severity    | Major                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
-| Examples    | Php/InternalParameterType |
-+-------------+---------------------------+
++-------------+----------------------------------+
+| Short name  | Php/InternalParameterType        |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Php/InternalParameterType        |
++-------------+----------------------------------+
 
 
 
@@ -36124,15 +36275,15 @@ Suggestions
 * Remove the return expression altogether
 * Add a typecast to the returning expression
 
-+-------------+------------------------------------+
-| Short name  | Functions/WrongReturnedType        |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Functions/WrongReturnedType        |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Functions/WrongReturnedType                          |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Severity    | Minor                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Functions/WrongReturnedType                          |
++-------------+------------------------------------------------------+
 
 
 
@@ -36169,15 +36320,15 @@ Suggestions
 
 * Set the code to the valid type, when calling a PHP native function
 
-+-------------+--------------------------------+
-| Short name  | Php/WrongTypeForNativeFunction |
-+-------------+--------------------------------+
-| Rulesets    | :ref:`Analyze`                 |
-+-------------+--------------------------------+
-| Severity    | Minor                          |
-+-------------+--------------------------------+
-| Time To Fix | Php/WrongTypeForNativeFunction |
-+-------------+--------------------------------+
++-------------+----------------------------------+
+| Short name  | Php/WrongTypeForNativeFunction   |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Php/WrongTypeForNativeFunction   |
++-------------+----------------------------------+
 
 
 
@@ -36215,15 +36366,15 @@ Suggestions
 
 * Use the right type with all literals
 
-+-------------+-----------------------------------+
-| Short name  | Functions/WrongTypeWithCall       |
-+-------------+-----------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Typechecks` |
-+-------------+-----------------------------------+
-| Severity    | Minor                             |
-+-------------+-----------------------------------+
-| Time To Fix | Functions/WrongTypeWithCall       |
-+-------------+-----------------------------------+
++-------------+-----------------------------------------------------+
+| Short name  | Functions/WrongTypeWithCall                         |
++-------------+-----------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Typechecks`, :ref:`CI-checks` |
++-------------+-----------------------------------------------------+
+| Severity    | Minor                                               |
++-------------+-----------------------------------------------------+
+| Time To Fix | Functions/WrongTypeWithCall                         |
++-------------+-----------------------------------------------------+
 
 
 
@@ -36269,17 +36420,17 @@ Suggestions
 * Fix the initialization call
 * Use an interface for typehint
 
-+-------------+------------------------------------------------------------+
-| Short name  | Classes/WrongTypedPropertyInit                             |
-+-------------+------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`ClassReview` |
-+-------------+------------------------------------------------------------+
-| Php Version | 7.4+                                                       |
-+-------------+------------------------------------------------------------+
-| Severity    | Minor                                                      |
-+-------------+------------------------------------------------------------+
-| Time To Fix | Classes/WrongTypedPropertyInit                             |
-+-------------+------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------+
+| Short name  | Classes/WrongTypedPropertyInit                                               |
++-------------+------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec`, :ref:`ClassReview`, :ref:`CI-checks` |
++-------------+------------------------------------------------------------------------------+
+| Php Version | 7.4+                                                                         |
++-------------+------------------------------------------------------------------------------+
+| Severity    | Minor                                                                        |
++-------------+------------------------------------------------------------------------------+
+| Time To Fix | Classes/WrongTypedPropertyInit                                               |
++-------------+------------------------------------------------------------------------------+
 
 
 
@@ -36364,17 +36515,17 @@ Suggestions
 
 * Check the docs, choose the right opening mode.
 
-+-------------+-----------------+
-| Short name  | Php/FopenMode   |
-+-------------+-----------------+
-| Rulesets    | :ref:`Analyze`  |
-+-------------+-----------------+
-| Severity    | Major           |
-+-------------+-----------------+
-| Time To Fix | Quick (30 mins) |
-+-------------+-----------------+
-| Examples    | Php/FopenMode   |
-+-------------+-----------------+
++-------------+----------------------------------+
+| Short name  | Php/FopenMode                    |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Quick (30 mins)                  |
++-------------+----------------------------------+
+| Examples    | Php/FopenMode                    |
++-------------+----------------------------------+
 
 
 
@@ -36458,17 +36609,17 @@ Suggestions
 * Add a '/' at the beginning of the path after __DIR__.
 * Add a call to realpath() or file_exists(), before accessing the file.
 
-+-------------+-------------------------+
-| Short name  | Structures/DirThenSlash |
-+-------------+-------------------------+
-| Rulesets    | :ref:`Analyze`          |
-+-------------+-------------------------+
-| Severity    | Major                   |
-+-------------+-------------------------+
-| Time To Fix | Instant (5 mins)        |
-+-------------+-------------------------+
-| Examples    | Structures/DirThenSlash |
-+-------------+-------------------------+
++-------------+----------------------------------+
+| Short name  | Structures/DirThenSlash          |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Major                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Structures/DirThenSlash          |
++-------------+----------------------------------+
 
 
 
@@ -36859,7 +37010,7 @@ Suggestions
 +-------------+--------------------------------------+
 | Short name  | Structures/ErrorReportingWithInteger |
 +-------------+--------------------------------------+
-| Rulesets    | :ref:`Analyze`                       |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`     |
 +-------------+--------------------------------------+
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
@@ -36906,19 +37057,19 @@ Suggestions
 
 * Always add a try/catch block around eval() call
 
-+-------------+---------------------------------+
-| Short name  | Structures/EvalWithoutTry       |
-+-------------+---------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security` |
-+-------------+---------------------------------+
-| Php Version | With PHP 7.0 and more recent    |
-+-------------+---------------------------------+
-| Severity    | Critical                        |
-+-------------+---------------------------------+
-| Time To Fix | Quick (30 mins)                 |
-+-------------+---------------------------------+
-| Examples    | Structures/EvalWithoutTry       |
-+-------------+---------------------------------+
++-------------+---------------------------------------------------+
+| Short name  | Structures/EvalWithoutTry                         |
++-------------+---------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CI-checks` |
++-------------+---------------------------------------------------+
+| Php Version | With PHP 7.0 and more recent                      |
++-------------+---------------------------------------------------+
+| Severity    | Critical                                          |
++-------------+---------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                   |
++-------------+---------------------------------------------------+
+| Examples    | Structures/EvalWithoutTry                         |
++-------------+---------------------------------------------------+
 
 
 
@@ -37582,17 +37733,17 @@ Suggestions
 * Remove the unused variables from the list call
 * When the ignored values are at the beginning or the end of the array, array_slice() may be used to shorten the array.
 
-+-------------+------------------------------------+
-| Short name  | Structures/ListOmissions           |
-+-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Suggestions` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
-| Examples    | Structures/ListOmissions           |
-+-------------+------------------------------------+
++-------------+------------------------------------------------------+
+| Short name  | Structures/ListOmissions                             |
++-------------+------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Suggestions`, :ref:`CI-checks` |
++-------------+------------------------------------------------------+
+| Severity    | Minor                                                |
++-------------+------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                      |
++-------------+------------------------------------------------------+
+| Examples    | Structures/ListOmissions                             |
++-------------+------------------------------------------------------+
 
 
 
@@ -37906,17 +38057,17 @@ Suggestions
 
 * Replace call to preg_replace() and /e with preg_replace_callback() or preg_replace_callback_array()
 
-+-------------+------------------------------------------------------------------------------------------------------------------+
-| Short name  | Structures/pregOptionE                                                                                           |
-+-------------+------------------------------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
-+-------------+------------------------------------------------------------------------------------------------------------------+
-| Severity    | Major                                                                                                            |
-+-------------+------------------------------------------------------------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                                                                  |
-+-------------+------------------------------------------------------------------------------------------------------------------+
-| Examples    | Structures/pregOptionE                                                                                           |
-+-------------+------------------------------------------------------------------------------------------------------------------+
++-------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/pregOptionE                                                                                                             |
++-------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CI-checks` |
++-------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                                              |
++-------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                                                    |
++-------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Examples    | Structures/pregOptionE                                                                                                             |
++-------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -38047,7 +38198,7 @@ Suggestions
 +-------------+------------------------------------+
 | Short name  | Structures/StripTagsSkipsClosedTag |
 +-------------+------------------------------------+
-| Rulesets    | :ref:`Analyze`                     |
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks`   |
 +-------------+------------------------------------+
 | Severity    | Minor                              |
 +-------------+------------------------------------+
@@ -38106,17 +38257,17 @@ Suggestions
 * use substr() and compare the extracted string
 * For single chars, try using the position in the string
 
-+-------------+----------------------------+
-| Short name  | Performances/StrposTooMuch |
-+-------------+----------------------------+
-| Rulesets    | :ref:`Analyze`             |
-+-------------+----------------------------+
-| Severity    | Minor                      |
-+-------------+----------------------------+
-| Time To Fix | Instant (5 mins)           |
-+-------------+----------------------------+
-| Examples    | Performances/StrposTooMuch |
-+-------------+----------------------------+
++-------------+----------------------------------+
+| Short name  | Performances/StrposTooMuch       |
++-------------+----------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CI-checks` |
++-------------+----------------------------------+
+| Severity    | Minor                            |
++-------------+----------------------------------+
+| Time To Fix | Instant (5 mins)                 |
++-------------+----------------------------------+
+| Examples    | Performances/StrposTooMuch       |
++-------------+----------------------------------+
 
 
 
@@ -38200,7 +38351,7 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------+
 | Short name  | Structures/VardumpUsage                                                                   |
 +-------------+-------------------------------------------------------------------------------------------+
-| Rulesets    | :ref:`Analyze`, :ref:`Security`                                                           |
+| Rulesets    | :ref:`Analyze`, :ref:`Security`, :ref:`CI-checks`                                         |
 +-------------+-------------------------------------------------------------------------------------------+
 | Severity    | Critical                                                                                  |
 +-------------+-------------------------------------------------------------------------------------------+

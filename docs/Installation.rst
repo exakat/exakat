@@ -13,8 +13,7 @@ Summary
 * `Quick installation with Debian/Ubuntu`_
 * `Installation guide with Composer`_
 * `Installation guide with Docker`_
-* `Installation guide with Vagrant and Ansible`_
-* `Optional installations`_
+* `Installation guide as Github Action`_
 
 Requirements
 ------------
@@ -26,7 +25,7 @@ Basic requirements :
 * exakat.phar, the main code.
 * Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.4.x is the recommended version, while version 3.3.x are still supported. Gremlin version 3.2.* are unsupported. 
 * Java 8.x. Java 9.x/10.x will be supported later. Java 7.x was used, but is not actively supported.
-* PHP 7.4 to run. PHP 7.4 is recommended, PHP 7.2 or later are possible. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
+* PHP 7.4 to run. PHP 7.4 is recommended, PHP 7.2 or later are possible. This version requires the PHP extensions curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 
 Optional requirements : 
 
@@ -35,7 +34,7 @@ Optional requirements :
 * Archives, such as zip, tgz, tbz2 may also be opened with optional helpers.
 
 OS requirements : 
-Exakat has beed tested on OSX, Debian and Ubuntu (up to 14.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
+Exakat has beed tested on OSX, Debian and Ubuntu (up to 18.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
 
 For installation, curl or wget, and zip are needed.
 
@@ -345,35 +344,51 @@ Exakat is able to use only the central database, Gremlin, as a docker image. Thi
 This image is under construction, and will be soon available. 
 
 
-Installation guide with Vagrant and Ansible
--------------------------------------------
+Installation guide as Github Action
+-----------------------------------
 
-Installation list
-*****************
+Github Action
+*************
 
-The exakat-vagrant repository contains an automated install for exakat. It installs everything in the working directory, or the system.
-Vagrant install works with Debian 8 and Ubuntu 15.10 images. Other images may be usable, but not tested.
+`Github Action <https://docs.github.com/en/actions>`_ is a way to "Automate, customize, and execute your software development workflows right in your repository". Exakat may be run on Github platform.
+ 
+ 
+Github Action for Exakat
+************************
 
-Pre-requisites
-**************
+To add Exakat to your repository on Github, create a file `.github/workflows/test.yml`, at the root of your repository (`.github/workflows` might already exists).
 
-You need the following tools : 
-
-* `git <https://git-scm.com/>`_
-* `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
-* `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
-
-Most may easily be installed with the local package manager, or with a direct download from the editor's website. 
-
-Install with Vagrant and Ansible
-********************************
+In the file, use the following YAML code. It will create an automatic action, on push and pull_request actions, that runs Exakat and display the issues found in the workflow panel. It is also possible to run manually this action. 
 
 :: 
 
-    git clone https://github.com/exakat/exakat-vagrant
-    cd exakat-vagrant
-    // Review the Vagrant file to check the size of the virtualbox
-    vagrant up --provision
-    vagrant ssh 
+    on: [push, pull_request]
+    name: Test
+    jobs:
+      exakat:
+        name: Exakat
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Exakat
+          uses: docker://exakat/exakat-ga
 
-You are now ready to run a project.
+Note : it is recommended to edit this file directly on github.com, as it cannot be pushed from a remote repository. 
+
+Then, you can use the `Action` button, next to 'Pull requests'. 
+
+
+Exakat Docker image for Github Action
+*************************************
+
+A Docker image is released with Exakat's version automatically, to be used with Github Action. It is available at `https://hub.docker.com/r/exakat/exakat-ga <https://hub.docker.com/r/exakat/exakat-ga>`_.
+
+You can run it in any given directory like this:
+
+
+:: 
+
+    cd /path/to/code
+    docker pull exakat/exakat-ga
+    docker run --rm -it -v ${PWD}:/app exakat/exakat-ga:latest
+
