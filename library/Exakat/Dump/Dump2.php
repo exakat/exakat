@@ -223,26 +223,6 @@ CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
         $this->sqlite->query($query);
 
-        $query = <<<'SQL'
-CREATE TABLE readability ( id      INTEGER PRIMARY KEY AUTOINCREMENT,
-                           name    STRING,
-                           type    STRING,
-                           tokens  INTEGER,
-                           expressions INTEGER,
-                           file        STRING
-                         )
-SQL;
-        $this->sqlite->query($query);
-
-
-        $query = <<<'SQL'
-CREATE TABLE variables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                          variable STRING,
-                          type STRING
-                       )
-SQL;
-        $this->sqlite->query($query);
-
         $this->collectDatastore();
         $this->initTablesList();
 

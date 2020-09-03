@@ -2038,7 +2038,7 @@ GREMLIN
         $this->collectHashCounts($query, 'NativeCallPerExpression');
     }
 
-    private function collectReadability(): void {
+  /*  private function collectReadability(): void {
         $loops = 20;
         $query = <<<GREMLIN
 g.V().sideEffect{ functions = 0; name=""; expression=0;}
@@ -2077,7 +2077,7 @@ GREMLIN;
         }
         $total = $this->storeToDumpArray('readability', $toDump);
         display("$total readability index");
-    }
+    } */
 
     public function checkRulesets($ruleset, array $analyzers): void {
         $sqliteFile = $this->config->dump;
@@ -2153,12 +2153,12 @@ GREMLIN;
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
-
+/*
         $this->collectReadability();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Readability: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
-
+*/
         $this->collectNativeCallsPerExpressions();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
