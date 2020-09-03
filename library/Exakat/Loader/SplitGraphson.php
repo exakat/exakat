@@ -30,8 +30,8 @@ use stdClass;
 class SplitGraphson extends Loader {
     private const CSV_SEPARATOR = ',';
     private const LOAD_CHUNK      = 10000;
-    private $load_chunk = 20000;
-    private const LOAD_CHUNK_LINK = 2000;
+    private $load_chunk = self::LOAD_CHUNK;
+    private const LOAD_CHUNK_LINK = 200000;
     private const LOAD_CHUNK_PROPERTY = 10000;
 
     private $tokenCounts   = array('Project' => 1);
@@ -114,7 +114,6 @@ class SplitGraphson extends Loader {
         if ($chunk > $this->load_chunk) {
             $f = $this->saveLinks($f);
             $chunk = 0;
-            $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
         }
 
         $res = $this->sqlite3->query('SELECT origin, destination FROM globals');
@@ -128,7 +127,6 @@ class SplitGraphson extends Loader {
         if ($chunk > $this->load_chunk) {
             $f = $this->saveLinks($f);
             $chunk = 0;
-            $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
         }
 
         $definitionSQL = <<<'SQL'
@@ -160,7 +158,6 @@ SQL;
             if ($chunk > $this->load_chunk) {
                 $f = $this->saveLinks($f);
                 $chunk = 0;
-                $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
             }
         }
 
@@ -196,8 +193,9 @@ SQL;
         }
 
         // break down property files into small chunks for processing inside 300s. 
-        $chunks = array_chunk($file, 100);
-        foreach($chunks as $chunk) {
+        $chunks = array_chunk($file, self::LOAD_CHUNK_PROPERTY);
+        foreach($chunks as $id => $chunk) {
+            assert(!empty($chunk), "Chunk is empty on ".__LINE__);
             file_put_contents($this->pathProperties, implode('', $chunk));
 
             $begin = microtime(true);
@@ -215,7 +213,7 @@ GREMLIN;
             $this->graphdb->query($query);
             $end = microtime(true);
 
-            $this->log("properties\t$count\t" . ($end - $begin));
+            $this->log("properties\t$id\t".strlen(implode('', $chunk))."\t" . ($end - $begin));
         }
         unlink($this->pathProperties);
     }
@@ -353,14 +351,15 @@ GREMLIN;
             if ($this->total > $this->load_chunk) {
                 file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
                 $this->saveNodes();
-                $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
                 $append = array();
             }
 
             ++$total;
         }
 
-        file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
+        if (!empty($append)) {
+            file_put_contents($this->path, implode(PHP_EOL, $append) . PHP_EOL, \FILE_APPEND);
+        }
         file_put_contents($this->pathLink, implode(PHP_EOL, $links) . PHP_EOL, \FILE_APPEND);
         foreach($properties as $property => $targets) {
             if (!empty($targets)) {
@@ -373,7 +372,6 @@ GREMLIN;
 
         if ($this->total > $this->load_chunk) {
             $this->saveNodes();
-            $this->load_chunk = self::LOAD_CHUNK / 100 * rand(1, 100);
         }
 
         $datastore = exakat('datastore');
@@ -381,11 +379,16 @@ GREMLIN;
     }
 
     private function saveNodes(): void {
+        $size = filesize($this->path);
+        if ($size === 0) {
+            return;
+        }
+        
         $begin = microtime(true);
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
         $end = microtime(true);
-        $this->log("path\t{$this->total}\t" . ($end - $begin));
+        $this->log("path\t{$this->total}\t$size\t". ($end - $begin));
 
         $this->total = 0;
     }
@@ -401,7 +404,8 @@ GREMLIN;
         }
 
         $chunks = array_chunk($file, self::LOAD_CHUNK_LINK);
-        foreach($chunks as $chunk) {
+        foreach($chunks as $id => $chunk) {
+            assert(!empty($chunk), "Chunk is empty on ".__LINE__);
             file_put_contents($this->pathLink, implode('', $chunk));
             
             $begin = microtime(true);
@@ -416,7 +420,7 @@ GREMLIN;
            $this->graphdb->query($query);
            $end = microtime(true);
 
-           $this->log("links\t$count\t" . ($end - $begin));
+           $this->log("links\t$id\t".strlen(implode('', $chunk))."\t" . ($end - $begin));
         }
 
         unlink($this->pathLink);
