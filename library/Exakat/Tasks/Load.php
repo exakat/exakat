@@ -6107,9 +6107,10 @@ class Load extends Tasks {
 
     private function processAttribute(): AtomInterface {
         $attribute = $this->processNext();
+        ++$this->id; // skip ]
         $this->popExpression();
 
-        $attribute->fullcode = '@@ ' . $attribute->fullcode;
+        $attribute->fullcode = '#[ ' . $attribute->fullcode . ' ]';
 
         $this->attributes[] = $attribute;
 
