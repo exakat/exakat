@@ -243,18 +243,6 @@ CREATE TABLE variables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
         $this->sqlite->query($query);
 
-        $query = <<<'SQL'
-CREATE TABLE globalVariables ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                               variable STRING,
-                               file STRING,
-                               line INTEGER,
-                               isRead INTEGER,
-                               isModified INTEGER,
-                               type STRING
-                             )
-SQL;
-        $this->sqlite->query($query);
-
         $this->collectDatastore();
         $this->initTablesList();
 
