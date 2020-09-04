@@ -37,7 +37,7 @@ class UseThis extends Analyzer {
         $this->atomIs('Parent')
              ->inIs('CLASS')
              ->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticclass'))
-             ->goToInstruction('Method');
+             ->goToFunction();
         $this->prepareQuery();
 
         // self or parent are local.
@@ -48,12 +48,11 @@ class UseThis extends Analyzer {
         $this->prepareQuery();
 
         // Case for normal methods
-        $this->atomIs('Method')
-             ->analyzerIsNot('self')
+        $this->atomIs('This')
+             ->goToFunction()
+             ->atomIs('Method')
              ->isNot('static', true)
-             ->outIs('BLOCK')
-             ->atomInsideNoAnonymous('This')
-             ->back('first');
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // Case for statics methods
@@ -70,7 +69,20 @@ class UseThis extends Analyzer {
              ->samePropertyAs('fullnspath', 'classe')
              ->back('first');
         $this->prepareQuery();
-
+        
+        // class x { function y() { get_class(); } } or get_used_class()
+        $this->atomFunctionIs(array('\\get_class', 
+                                    '\\get_called_class',
+                                    '\\get_object_vars',
+                                    '\\get_parent_class',
+                                    '\\get_class_vars',
+                                    '\\get_class_methods',
+                                    ))
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('Void') // If it is $this, it is caught above
+             ->goToFunction()
+             ->atomIs('Method');
+        $this->prepareQuery();
     // static constant are excluded.
     }
 }

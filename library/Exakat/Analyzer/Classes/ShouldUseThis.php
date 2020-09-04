@@ -29,7 +29,6 @@ class ShouldUseThis extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                      'Classes/UseThis',
-                     'Classes/MethodIsOverwritten',
                     );
     }
 
@@ -46,9 +45,8 @@ class ShouldUseThis extends Analyzer {
                      ->atomIs('Void')
              )
              ->hasClassTrait()
-             ->analyzerIsNot(array('Classes/MethodIsOverwritten',
-                                   'Classes/UseThis',
-                                   ));
+             ->hasNoOut('OVERWRITE')
+             ->analyzerIsNot('Classes/UseThis');
         $this->prepareQuery();
 
         // Static Methods must use a static call to property or variable (not constant though)
@@ -63,9 +61,8 @@ class ShouldUseThis extends Analyzer {
                      ->atomIs('Void')
              )
              ->hasClassTrait()
-             ->analyzerIsNot(array('Classes/MethodIsOverwritten',
-                                   'Classes/UseThis',
-                                   ));
+             ->hasNoOut('OVERWRITE')
+             ->analyzerIsNot('Classes/UseThis');
         $this->prepareQuery();
     }
 }
