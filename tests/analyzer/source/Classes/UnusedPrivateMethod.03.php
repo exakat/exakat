@@ -1,5 +1,5 @@
 <?php
-class y {
+class y extends x {
     private function privateM () {}
     private function privateM2 () {}
     

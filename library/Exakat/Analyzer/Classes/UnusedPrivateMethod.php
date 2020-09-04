@@ -41,6 +41,23 @@ class UnusedPrivateMethod extends Analyzer {
              ->is('visibility', 'private')
              ->analyzerIsNot('Classes/UsedPrivateMethod');
         $this->prepareQuery();
+
+        // class X { protected function foo() { } }
+        // No extend, no extension
+        $this->atomIs(self::CLASSES_ALL)
+             ->hasNoOut('EXTENDS')
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('EXTENDS')
+                     ->atomis('Class')
+             )
+             ->analyzerIsNot('Classes/DynamicSelfCalls')
+             ->outIs('METHOD')
+             ->atomIs('Method')
+             ->is('visibility', 'protected')
+             ->analyzerIsNot('Classes/UsedPrivateMethod');
+        $this->prepareQuery();
     }
 }
 

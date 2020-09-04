@@ -43,7 +43,31 @@ class UsedPrivateMethod extends Analyzer {
              ->as('results')
              ->is('visibility','private')
              ->inIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomIs('Class')
+             ->atomIs(self::CLASSES_ALL)
+             ->samePropertyAs('fullnspath', 'classname')
+             ->back('results');
+        $this->prepareQuery();
+
+        // method used in a static methodcall \a\b::b()
+        // method used in a static methodcall static::b() or self
+        // Case for protected method, in a single class (no extends, no extension)
+        $this->atomIs('Staticmethodcall')
+             ->outIs('CLASS')
+             ->has('fullnspath')
+             ->savePropertyAs('fullnspath', 'classname')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->as('results')
+             ->is('visibility','protected')
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(self::CLASSES_ALL)
+             ->hasNoOut('EXTENDS')
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('EXTENDS')
+                     ->atomIs(self::CLASSES_ALL)
+             )
              ->samePropertyAs('fullnspath', 'classname')
              ->back('results');
         $this->prepareQuery();
@@ -60,6 +84,24 @@ class UsedPrivateMethod extends Analyzer {
 
         // method used in a normal methodcall with $this $this->b()
         $this->atomIs(array('Method', 'Magicmethod'))
+             ->is('visibility', 'protected')
+             ->outIs('DEFINITION')
+             ->atomIs('Methodcall')
+             ->outIs('OBJECT')
+             ->atomIs('This')
+             ->inIs('DEFINITION')
+             ->hasNoOut('EXTENDS')
+             ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->inIs('EXTENDS')
+                     ->atomIs(self::CLASSES_ALL)
+             )
+             ->back('first');
+        $this->prepareQuery();
+
+        // method used in a normal methodcall with $this $this->b()
+        $this->atomIs('Magicmethod')
              ->is('visibility','private')
              ->outIs('NAME')
              ->codeIs('__construct')
