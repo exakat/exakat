@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class MissingReturntype extends Analyzer {
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Typehints/CouldBeNull',
                      'Typehints/CouldBeString',
                      'Typehints/CouldBeFloat',
@@ -36,7 +36,7 @@ class MissingReturntype extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // function foo() : string { return shell_exec('ls -hla'); }
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')

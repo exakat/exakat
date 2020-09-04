@@ -146,7 +146,7 @@ class AlwaysFalse extends Analyzer {
              ->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             
+
              ->inIs('DEFINITION')
              ->outIs('DEFINITION')
              ->inIs('VARIABLE')

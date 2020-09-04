@@ -41,7 +41,7 @@ class CleanDb extends Tasks {
 
     }
 
-    private function manageServer() : void {
+    private function manageServer(): void {
         if ($this->config->stop === true) {
             display('Stop gremlin server');
             $this->gremlin->stop();

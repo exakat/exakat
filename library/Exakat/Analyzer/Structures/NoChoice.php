@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class NoChoice extends Analyzer {
     public function analyze(): void {
         $skipExpression = array('Closure', 'Arrowfunction', 'Switch', 'For', 'Foreach', 'While', 'Dowhile', 'Yield', 'Yieldfrom');
-        
+
         // $a == 2 ? doThis() : doThis();
         $this->atomIs('Ternary')
              ->outIs('THEN')
@@ -61,7 +61,7 @@ class NoChoice extends Analyzer {
              ->outIs('THEN')
              ->atomIs('Sequence')
 
-             // exclude large structures, as fullcode is not sufficient 
+             // exclude large structures, as fullcode is not sufficient
              ->not(
                 $this->side()
                      ->outIs('EXPRESSION')
@@ -71,7 +71,7 @@ class NoChoice extends Analyzer {
              ->inIs('THEN')
              ->outIs('ELSE')
              ->atomIs('Sequence')
-             // exclude large structures, as fullcode is not sufficient 
+             // exclude large structures, as fullcode is not sufficient
              ->not(
                 $this->side()
                      ->outIs('EXPRESSION')

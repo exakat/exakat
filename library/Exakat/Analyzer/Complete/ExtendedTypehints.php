@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Complete;
 
-use Exakat\Analyzer\Analyzer;
 
 class ExtendedTypehints extends Complete {
     public function dependsOn(): array {

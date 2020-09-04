@@ -42,7 +42,12 @@ class Perfile extends Reports {
 
             $maxLine = max($maxLine, $row['line']);
             $maxTitle = max($maxTitle, strlen($titleCache[$row['analyzer']]), strlen($row['file']));
-            $perfile[$row['file']][] = sprintf(' % 4s  %s ', $row['line'], $titleCache[$row['analyzer']]);
+            if (strlen($titleCache[$row['analyzer']]) > 40) {
+                $title = substr($titleCache[$row['analyzer']], 0, 37) . '...';
+            } else {
+                $title = $titleCache[$row['analyzer']];
+            }
+            $perfile[$row['file']][] = sprintf(' % 4s %-40s %-40s', $row['line'], $title, $row['analyzer']);
         }
 
         $text = '';

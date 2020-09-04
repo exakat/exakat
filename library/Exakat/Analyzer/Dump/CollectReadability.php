@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,15 +42,19 @@ SQL;
 
     public function analyze(): void {
         $loops = 20;
-        $this->atomIs(array("Function", "Closure", "Method", "Magicmethod", "File"), Analyzer::WITHOUT_CONSTANTS)
+        $this->atomIs(array('Function', 'Closure', 'Method', 'Magicmethod', 'File'), Analyzer::WITHOUT_CONSTANTS)
              ->initVariable('functions', '0')
              ->initVariable('name', '""')
              ->initVariable('expression', '0')
+             ->not(
+                $this->side()
+                     ->outIs('BLOCK')
+                     ->atomIs('Void')
+             )
              ->raw(<<<GREMLIN
-     not(where( __.out("BLOCK").hasLabel("Void")))
-    .sideEffect{ ++functions; }
+     sideEffect{ ++functions; }
     .where(__.coalesce( __.out("NAME").sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
-                        __.filter{true; }.sideEffect{ name="global"; file = it.get().value("fullcode");} )
+                        __.identity().sideEffect{ name="global"; file = it.get().value("fullcode");} )
     .sideEffect{ total = 0; expression = 0; type=it.get().label();}
     .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
     .repeat( __.out($this->linksDown).not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
@@ -62,13 +66,15 @@ SQL;
     )
     .map{
         if (expression > 0) {
-            ["name":name, "type":type, "total":total, "expression":expression, "index": 102 - expression - total / expression, "file":file];
+            ["name":name, "type":type, "total":total, "expression":expression,  "file":file];
         } else {
-            ["name":name, "type":type, "total":total, "expression":0, "index": 100, "file":file];
+            ["name":name, "type":type, "total":total, "expression":0, "file":file];
         }
     }
 GREMLIN
 );
+
+        // Readability index : "index": 102 - expression - total / expression,
         $this->prepareQuery();
     }
 }

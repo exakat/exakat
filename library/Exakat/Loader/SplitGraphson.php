@@ -192,10 +192,10 @@ SQL;
             return;
         }
 
-        // break down property files into small chunks for processing inside 300s. 
+        // break down property files into small chunks for processing inside 300s.
         $chunks = array_chunk($file, self::LOAD_CHUNK_PROPERTY);
         foreach($chunks as $id => $chunk) {
-            assert(!empty($chunk), "Chunk is empty on ".__LINE__);
+            assert(!empty($chunk), 'Chunk is empty on ' . __LINE__);
             file_put_contents($this->pathProperties, implode('', $chunk));
 
             $begin = microtime(true);
@@ -213,7 +213,7 @@ GREMLIN;
             $this->graphdb->query($query);
             $end = microtime(true);
 
-            $this->log("properties\t$id\t".strlen(implode('', $chunk))."\t" . ($end - $begin));
+            $this->log("properties\t$id\t" . strlen(implode('', $chunk)) . "\t" . ($end - $begin));
         }
         unlink($this->pathProperties);
     }
@@ -383,12 +383,12 @@ GREMLIN;
         if ($size === 0) {
             return;
         }
-        
+
         $begin = microtime(true);
         $this->graphdb->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         unlink($this->path);
         $end = microtime(true);
-        $this->log("path\t{$this->total}\t$size\t". ($end - $begin));
+        $this->log("path\t{$this->total}\t$size\t" . ($end - $begin));
 
         $this->total = 0;
     }
@@ -405,9 +405,9 @@ GREMLIN;
 
         $chunks = array_chunk($file, self::LOAD_CHUNK_LINK);
         foreach($chunks as $id => $chunk) {
-            assert(!empty($chunk), "Chunk is empty on ".__LINE__);
+            assert(!empty($chunk), 'Chunk is empty on ' . __LINE__);
             file_put_contents($this->pathLink, implode('', $chunk));
-            
+
             $begin = microtime(true);
             $query = <<<GREMLIN
 new File('$this->pathLink').eachLine {
@@ -420,7 +420,7 @@ GREMLIN;
            $this->graphdb->query($query);
            $end = microtime(true);
 
-           $this->log("links\t$id\t".strlen(implode('', $chunk))."\t" . ($end - $begin));
+           $this->log("links\t$id\t" . strlen(implode('', $chunk)) . "\t" . ($end - $begin));
         }
 
         unlink($this->pathLink);

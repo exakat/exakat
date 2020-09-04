@@ -66,12 +66,12 @@ class Top10 extends Ambassador {
                      );
     }
 
-    protected function generateIssues() : void {
+    protected function generateIssues(): void {
         $this->generateIssuesEngine('issues',
                                     $this->getIssuesFaceted('Top10') );
     }
 
-    protected function generateTop10(Section $section) : void {
+    protected function generateTop10(Section $section): void {
         $top10 = array('Dangling reference'      => array('Structures/DanglingArrayReference'),
                        'For with count'          => array('Structures/ForWithFunctioncall', ),
                        'Next month trap'         => array('Structures/NextMonthTrap', ),

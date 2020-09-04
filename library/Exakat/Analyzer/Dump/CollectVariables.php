@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,9 +42,9 @@ SQL;
              ->tokenIs('T_VARIABLE')
              ->savePropertyAs('fullcode', 'variable')
              ->savePropertyAs('label', 'type')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 sideEffect{
-    variable = variable.replaceAll("&", "").replaceAll("\\\\.\\\\.\\\\.", "").replaceAll("@", "");
+    variable = variable.replaceAll("&", "").replaceAll("\\.\\.\\.", "").replaceAll("@", "");
     types = ['Variable' : 'var','Variablearray' : 'array', 'Variableobject' : 'object'];
     type = types[type];
 }

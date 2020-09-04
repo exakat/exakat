@@ -103,7 +103,7 @@ CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                         )
 SQL;
         $this->sqlite->query($query);
-        $this->sqlite->query("INSERT INTO namespaces VALUES (1, '\\')");
+        $this->sqlite->query("INSERT OR IGNORE INTO namespaces VALUES (1, '\\')");
 
         $query = <<<'SQL'
 CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,

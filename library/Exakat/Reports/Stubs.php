@@ -124,7 +124,7 @@ HEADERS;
                 $use .= '{' . join('; ', $class->useoptions) . '}' . PHP_EOL;
             }
         }
-        $result = array(self::INDENTATION . $abstract.$final."class ".$name.$extends.$implements." {" . $use);
+        $result = array(self::INDENTATION . $abstract . $final . 'class ' . $name . $extends . $implements . ' {' . $use);
 
         if (isset($class->constants)) {
             foreach($class->constants as $constantName => $constant) {
@@ -153,7 +153,7 @@ HEADERS;
         }
 
         if ($class->php === true) {
-            return $phpdoc . self::INDENTATION . "if (!class_exists('\\".$name."')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
+            return $phpdoc . self::INDENTATION . "if (!class_exists('\\" . $name . "')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
         } else {
             return $phpdoc . join(PHP_EOL, $result);
         }
@@ -172,7 +172,7 @@ HEADERS;
             }
         }
 
-        $result = array(self::INDENTATION . "trait ".$name." {" . $use);
+        $result = array(self::INDENTATION . 'trait ' . $name . ' {' . $use);
 
         if (isset($trait->properties)) {
             foreach($trait->properties as $propertyName => $property) {
@@ -233,9 +233,9 @@ HEADERS;
         $phpdoc     = $this->normalizePhpdoc($values->phpdoc, $type === 'global' ? 1 : 2);
         $visibility = empty($values->visibility) ? '' : $values->visibility . ' ';
         if (isset($values->type) && $values->type == 'define') {
-            return $phpdoc . self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . "define('".$name."', ".$values->value.");";
+            return $phpdoc . self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . "define('" . $name . "', " . $values->value . ');';
         } else {
-            return self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . $visibility."const ".$name." = ".$values->value.";";
+            return self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . $visibility . 'const ' . $name . ' = ' . $values->value . ';';
         }
     }
 
@@ -282,7 +282,7 @@ HEADERS;
         $return = $phpdoc . self::INDENTATION . ($type === 'function' ? '' : self::INDENTATION) . "{$final}{$abstract}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
 
         if ($type === 'function' && $values->php === true) {
-            $return = self::INDENTATION . "if (!function_exists('".$name."')) {\n" . self::INDENTATION . $return . "\n" . self::INDENTATION . "}\n";
+            $return = self::INDENTATION . "if (!function_exists('" . $name . "')) {\n" . self::INDENTATION . $return . "\n" . self::INDENTATION . "}\n";
         }
 
         return $return;

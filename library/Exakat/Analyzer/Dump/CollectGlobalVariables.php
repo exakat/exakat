@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class CollectGlobalVariables extends AnalyzerTable {
     protected $analyzerTable = 'globalVariables';
 
     // Store inclusionss of files within each other
-    protected $analyzerSQLTable = array(<<<'SQL'
+    protected $analyzerSQLTable = <<<'SQL'
 CREATE TABLE globalVariables ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                                variable STRING,
                                file STRING,
@@ -39,9 +39,7 @@ CREATE TABLE globalVariables ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                                isModified INTEGER,
                                type STRING
                              )
-SQL,
-"INSERT INTO namespaces VALUES (1, '\\')"
-);
+SQL;
 
     public function analyze(): void {
         $this->atomIs('Virtualglobal', Analyzer::WITHOUT_CONSTANTS)
@@ -57,12 +55,12 @@ SQL,
              ->savePropertyAs('fullcode', 'variable')
              ->savePropertyAs('isRead', 'isRead')
              ->savePropertyAs('isModified', 'isModified')
-             ->raw(<<<GREMLIN
-sideEffect{ type = type == "Variabledefinition" ? "implicit" : type == "Globaldefinition" ? "global" : "\\\$GLOBALS"; }
+             ->raw(<<<'GREMLIN'
+sideEffect{ type = type == "Variabledefinition" ? "implicit" : type == "Globaldefinition" ? "global" : "\$GLOBALS"; }
 GREMLIN
 )
-        ->getVariable(array('file', 'ligne', 'variable', 'isRead', 'isModified', 'type'));
-        $res = $this->prepareQuery();
+             ->getVariable(array('file', 'ligne', 'variable', 'isRead', 'isModified', 'type'));
+        $this->prepareQuery();
     }
 }
 

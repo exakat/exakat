@@ -22,7 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Analyzer;
 
 class CollectClassChanges extends AnalyzerTable {
     protected $analyzerName = 'classChanges';

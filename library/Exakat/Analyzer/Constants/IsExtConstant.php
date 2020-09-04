@@ -57,7 +57,7 @@ class IsExtConstant extends Analyzer {
 
         // based on fullnspath
         $this->analyzerIs('Constants/ConstantUsage')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs('Identifier')
              ->hasNoParent('Constant', 'DEFINITION')
              ->is('isPhp', true)
              ->raw('filter{ fnp = it.get().value("fullnspath"); d = fnp.tokenize("\\\\").last(); ***.contains("\\\\" + d);}', $constantsFullNs);

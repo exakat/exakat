@@ -6468,7 +6468,7 @@ class Load extends Tasks {
             $apply->fullnspath = mb_strtolower($name->fullcode);
 
             return;
-        } 
+        }
 
         if (!$name->isA(array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall', 'Newcallname', 'This'))) {
             // No fullnamespace for non literal namespaces

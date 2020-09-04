@@ -2011,7 +2011,7 @@ GREMLIN
     private function collectClassTraitsCounts(): void {
         $query = $this->newQuery('collectClassTraitsCounts');
         $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->raw(<<<GREMLIN
+              ->raw(<<<'GREMLIN'
 groupCount("m").by( __.out("USE").out("USE").count() ).cap("m")
 GREMLIN
 );

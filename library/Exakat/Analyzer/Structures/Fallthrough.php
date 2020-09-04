@@ -35,7 +35,7 @@ class Fallthrough extends Analyzer {
              ->hasOut('EXPRESSION')
              ->noAtomInside(array('Break', 'Continue', 'Return', 'Throw', 'Goto', 'Exit', ))
              ->back('first')
-             
+
              // This is not the last case of default
              ->not(
                 $this->side()

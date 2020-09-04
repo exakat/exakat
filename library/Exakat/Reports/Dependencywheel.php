@@ -50,7 +50,7 @@ class Dependencywheel extends Reports {
         return '';
     }
 
-    private function makeWheel() : void {
+    private function makeWheel(): void {
         $packagenames = array('Main');
 
         $res = $this->dump->fetchTable('cit');
@@ -138,7 +138,7 @@ class Dependencywheel extends Reports {
         $this->packagenames = json_encode($packagenames);
     }
 
-    private function initFolder() : void {
+    private function initFolder(): void {
         if ($this->finalName === 'stdout') {
             return;
         }
@@ -152,7 +152,7 @@ class Dependencywheel extends Reports {
         copyDir($this->config->dir_root . '/media/dependencywheel', $this->tmpName );
     }
 
-    private function cleanFolder() : void {
+    private function cleanFolder(): void {
         $html = file_get_contents($this->tmpName . '/index.html');
 
         $html = str_replace(array('<MATRIX>',    '<PROJECT>',            '<PACKAGENAMES>'),

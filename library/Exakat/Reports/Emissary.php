@@ -1183,7 +1183,7 @@ HTML;
 
         $severities = $this->getSeveritiesNumberBy('file');
         unset($severities['None']);
-        uasort($severities, function (array $a, array $b) : int { return array_sum($b) <=> array_sum($a); });
+        uasort($severities, function (array $a, array $b): int { return array_sum($b) <=> array_sum($a); });
         $severities = array_slice($severities, 0, 10);
 
         foreach ($severities as $file => $value) {

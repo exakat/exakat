@@ -62,7 +62,7 @@ class Xml extends Reports {
     const FILE_EXTENSION = 'xml';
     const FILE_FILENAME  = 'exakat';
 
-    public function generateFileReport(array $report) : void {
+    public function generateFileReport(array $report): void {
         $out = new XMLWriter();
         $out->openMemory();
         $out->setIndent(true);

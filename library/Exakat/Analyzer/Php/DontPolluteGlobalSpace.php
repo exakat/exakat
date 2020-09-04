@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,20 +25,20 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class DontPolluteGlobalSpace extends Analyzer {
-    public function analyze() : void {
-        // CIT 
+    public function analyze(): void {
+        // CIT
         $this->atomIs(array('Function', 'Const', 'Class', 'Interface', 'Trait'))
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$');
         $this->prepareQuery();
 
-        // const 
+        // const
         $this->atomIs('Constant')
              ->outIs('NAME')
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
              ->back('first');
         $this->prepareQuery();
 
-        // define 
+        // define
         $this->atomIs('Defineconstant')
              ->outIs('NAME')
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$')
