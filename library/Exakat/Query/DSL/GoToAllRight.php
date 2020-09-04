@@ -23,46 +23,28 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
 
-class GoToAllChildren extends DSL {
+class GoToAllRight extends DSL {
     public function run(): Command {
         switch(func_num_args()) {
             case 1:
-                list($self) = func_get_args();
+                list($atom) = func_get_args();
                 break;
                 
             default:
-                $self = Analyzer::INCLUDE_SELF;
+                $atom = 'Logical';
         }
 
         $MAX_LOOPING = self::$MAX_LOOPING;
 
-        if ($self === Analyzer::EXCLUDE_SELF) {
-            $command = new Command(<<<GREMLIN
- as("gotoallchildren")
-.repeat( __.out("DEFINITION")
-           .in("EXTENDS", "IMPLEMENTS")
-           .simplePath().from("gotoallchildren")
-          )
-          .emit( )
-          .times($MAX_LOOPING)
-GREMLIN
-);
-            return $command;
-        } else {
-            $command = new Command(<<<GREMLIN
- as("gotoallchildren")
-.emit( )
-.repeat( __.out("DEFINITION")
-           .in("EXTENDS", "IMPLEMENTS")
-           .simplePath().from("gotoallchildren")
-          )
-          .times($MAX_LOOPING)
-GREMLIN
-);
-            return $command;
-        }
+        $gremlin = <<<GREMLIN
+union(
+    __.out('LEFT'),
+    __.emit().repeat( __.hasLabel("$atom").out("RIGHT")).times($MAX_LOOPING).out('LEFT', 'RIGHT')
+).not(hasLabel("$atom"))
+GREMLIN;
+
+        return new Command($gremlin);
     }
 }
 ?>
