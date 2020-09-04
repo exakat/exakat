@@ -2150,19 +2150,12 @@ class Load extends Tasks {
         // Review this : most nsname will end up as constants!
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
-            $this->tokens[$this->id - 2][0] === $this->phptokens::T_INSTANCEOF) {
+            $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
+            $this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE       ) {
 
             $this->getFullnspath($nsname, 'class', $nsname);
 
             $this->calls->addCall('class', $nsname->fullnspath, $nsname);
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE ||
-            (isset($this->tokens[$current - 2]) && $this->tokens[$current - 2][0] === $this->phptokens::T_INSTANCEOF)
-            ) {
-
-            $this->getFullnspath($nsname, 'class', $nsname);
-
-            $this->calls->addCall('class', $nsname->fullnspath, $nsname);
-
         } elseif ($this->contexts->isContext(Context::CONTEXT_NEW) &&
                   $this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
             $this->getFullnspath($nsname, 'class', $nsname);
@@ -2173,7 +2166,6 @@ class Load extends Tasks {
 
         } else {
             $this->calls->addCall('const', $nsname->fullnspath, $nsname);
-
         }
 
         $this->pushExpression($nsname);
