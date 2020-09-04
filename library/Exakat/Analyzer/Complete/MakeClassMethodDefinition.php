@@ -203,6 +203,43 @@ class MakeClassMethodDefinition extends Complete {
         $this->prepareQuery();
 
         // Create link between Class method and definition
+        // class x { function foo() { $this->b(); }}
+        // class y extends x { function b() {  }} // class y has no class FOO
+        $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
+              ->outIs('OBJECT')
+              ->atomIs('This', self::WITHOUT_CONSTANTS)
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->goToFunction()
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'methodname')
+
+              ->goToInstruction(self::CLASSES_TRAITS)
+              ->goToAllChildren(self::EXCLUDE_SELF)
+              ->as('theClass')
+              
+              ->not(
+                $this->side()
+                     ->outIs(array('METHOD', 'MAGICMETHOD'))
+                     ->outIs('NAME')
+                     ->samePropertyAs('lccode', 'methodname', self::CASE_INSENSITIVE)
+              )
+
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->not(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->raw('where(eq("first"))')
+              )
+              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery();
+
+        // Create link between Class method and definition
         // This works only for $this
         $this->atomIs('Staticmethodcall', self::WITHOUT_CONSTANTS)
               ->hasNoIn('DEFINITION')
