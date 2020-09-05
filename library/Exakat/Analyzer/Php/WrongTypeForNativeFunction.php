@@ -64,6 +64,7 @@ class WrongTypeForNativeFunction extends Analyzer {
                      ->atomIs(self::CALLS, self::WITH_VARIABLES)
                      ->inIs('DEFINITION')
                      ->outIs('RETURNTYPE')
+                     ->atomIsNot('Void')
                      ->fullnspathIsNot('\\' . $type)
                      ->back('first');
                 $this->prepareQuery();
