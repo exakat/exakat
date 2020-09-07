@@ -267,7 +267,7 @@ HEADERS;
 
         $arguments = array();
         if (isset($values->arguments)) {
-            foreach($values->arguments as $argName => $argDetails) {
+            foreach($values->arguments as $argDetails) {
                 $referenceArgs  = empty($values->referenceArgs) ? '' : ' &';
                 $typehintArgs   = $this->formatTypehints($argDetails->typehint);
                 $typehintArgs   = $typehintArgs === '' ? '' : $typehintArgs . ' ';

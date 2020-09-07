@@ -29,8 +29,6 @@ class Exakatvendors extends Reports {
     const FILE_FILENAME  = 'vendors.exakat';
 
     public function _generate(array $analyzerList): string {
-        $stubCode = array();
-
         $code = new PhpCodeTree($this->dump);
         $code->load();
 

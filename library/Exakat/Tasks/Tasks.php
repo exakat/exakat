@@ -37,8 +37,8 @@ abstract class Tasks {
 
     protected $is_subtask   = self::IS_NOT_SUBTASK;
 
-    public static $semaphore      = null;
-    public static $semaphorePort  = null;
+    protected static $semaphore      = null;
+    protected static $semaphorePort  = null;
 
     protected $rulesets = null;
 

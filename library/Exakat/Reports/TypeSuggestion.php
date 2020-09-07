@@ -50,7 +50,6 @@ class TypeSuggestion extends Reports {
         $results->load();
 
         $suggestions = array();
-        $anonymousName = 0;
         foreach($results->toArray() as $row) {
 
             list(, $type) = explode('/', $row['analyzer']);

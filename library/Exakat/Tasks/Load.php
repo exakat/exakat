@@ -816,8 +816,9 @@ class Load extends Tasks {
                         break;
 
                     case $this->phptokens::T_COMMENT :
-                        $line += substr_count($t[1], "\n");
-                        $comments += substr_count($t[1], "\n");
+                        $c = substr_count($t[1], "\n");
+                        $line += $c;
+                        $comments += $c;
                         break;
 
                     case $this->phptokens::T_BAD_CHARACTER :
@@ -5376,7 +5377,7 @@ class Load extends Tasks {
 
     private function processYieldfrom(): AtomInterface {
         $operator = $this->addAtom('Yieldfrom', $this->id);
-        $yieldfrom = $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+        $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
 
         $this->checkExpression();
 
