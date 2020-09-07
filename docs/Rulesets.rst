@@ -82,8 +82,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 03 Sep 2020 16:18:32 +0000
-.. comment: Generation hash : 9dd0ca4de3b65c8e9ac5c21f758fcdf2e47266fe
+.. comment: Generation date : Mon, 07 Sep 2020 15:11:13 +0000
+.. comment: Generation hash : f84a22df6e30f33f95a981ed655307d562af9e57
 
 
 .. _analyze:

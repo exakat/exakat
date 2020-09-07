@@ -5706,7 +5706,7 @@ All steps
 _________
 
 
-Here is the list of the 245 available steps : 
+Here is the list of the 249 available steps : 
 
 * AddEFrom : adds a link between the current atom from the atom called  (see _As())
 
@@ -5766,11 +5766,15 @@ Here is the list of the 245 available steps :
 
 * CollectTraits : Collect all the used traits from the current class or anonymous class, into the 'variable'. This will be a list of traits.
 
+* CollectTypehints : Collect all the typehints of the method, property or arguments, and store them in the provided variable name. On a Method (or equivalent), this step collect the return types; On a property or an argument, it collects the types of the property or the argument. Elsewhere, it returns an empty array.
+
 * CollectVariables : Docs for CollectVariables
 
 * Command : Docs for Command
 
 * Count : Docs for Count
+
+* CountArrayDimension : Counts the number of dimensions in that array.
 
 * CountBy : Docs for CountBy
 
@@ -5831,6 +5835,8 @@ Here is the list of the 245 available steps :
 * GoToAllParents : Docs for GoToAllParents
 
 * GoToAllParentsTraits : Docs for GoToAllParentsTraits
+
+* GoToAllRight : Follow all the operands in a serie of chained Atoms with LEFT and RIGHT branches. This is convenient for long additions, or logical combinaisons.
 
 * GoToAllTraits : Docs for GoToAllTraits
 
@@ -6069,6 +6075,8 @@ Here is the list of the 245 available steps :
 * IsUppercase : Docs for IsUppercase
 
 * IsUsed : Docs for IsUsed
+
+* IsVisible : Check if the provided visibility is compatible with the one of the atom below. 
 
 * MakeVariableName : Docs for MakeVariableName
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 03 Sep 2020 16:18:32 +0000
-.. comment: Generation hash : 9dd0ca4de3b65c8e9ac5c21f758fcdf2e47266fe
+.. comment: Generation date : Mon, 07 Sep 2020 15:11:13 +0000
+.. comment: Generation hash : f84a22df6e30f33f95a981ed655307d562af9e57
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -2209,7 +2209,7 @@ Avoid Those Hash Functions
 ##########################
 
 
-The following cryptographic algorithms are considered insecure, and should be replaced with new and more performent algorithms. 
+The following cryptography algorithms are considered insecure, and should be replaced with new and more performant algorithms. 
 
 ``MD2``, ``MD4``, ``MD5``, ``SHA0``, ``SHA1``, ``CRC``, ``DES``, ``3DES``, ``RC2``, ``RC4``. 
 
@@ -3939,7 +3939,7 @@ Check Crypto Key Length
 #######################
 
 
-Each cryptographic algorithm requires a reasonable length. Make sure an up-to-date length is used. 
+Each cryptography algorithm requires a reasonable length. Make sure an up-to-date length is used. 
 
 This rule use the following recommendations : 
 
@@ -6286,7 +6286,7 @@ Could Be String
 ###############
 
 
-Mark arguemnts and return types that can be set to string.
+Mark arguments and return types that can be set to string.
 
 .. code-block:: php
 
@@ -6675,8 +6675,8 @@ Some commands may raise exceptions. It is recommended to use the try/catch block
 * `intdiv() <https://www.php.net/intdiv>`_ : ``DivisionByZeroError``
 * << : ``ArithmeticError``
 * >> : ``ArithmeticError``
-* Phar\:\:mungserver : ``PharException``
-* Phar\:\:webphar : ``PharException``
+* ``Phar\:\:mungserver`` : ``PharException``
+* ``Phar\:\:webphar`` : ``PharException``
 
 See also `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_, `PharException <http://php.net/manual/en/class.pharexception.php>`_.
 
@@ -8296,7 +8296,7 @@ Dont Compare Typed Boolean
 ##########################
 
 
-There is no need to compare explicitly a functioncal call to a boolean, when the definition has a boolean returntypehint.
+There is no need to compare explicitly a function call to a boolean, when the definition has a boolean return typehint.
 
 The analysis checks for equality and identity comparisons. It doesn't check for the not operator usage.
 
@@ -8670,7 +8670,7 @@ Duplicate Literal
 #################
 
 
-Report literals that are repeated across the code. The minimum replication is 5, and is configurable with maxDuplicate.
+Report literals that are repeated across the code. The minimum replication is 5, and is configurable with ``maxDuplicate``.
 
 Repeated literals should be considered a prime candidate for constants.
 
@@ -15128,8 +15128,6 @@ PHP generates the infamous Fatal error at execution : ``Declaration of FooParent
    ?>
 
 
-Currently, the analysis doesn't check for ellipsis nor references.
-
 
 
 Suggestions
@@ -18231,7 +18229,7 @@ Certain characters have special significance in HTML, and should be represented 
 
 ENT_IGNORE is a configuration option for `htmlspecialchars() <https://www.php.net/htmlspecialchars>`_, that ignore any needed character replacement. This mean the raw input will now be processed by PHP, or a target browser.
 
-It is recommended to use the other configuration options : ENT_COMPAT, ENT_QUOTES, ENT_NOQUOTES, ENT_SUBSTITUTE, ENT_DISALLOWED, ENT_HTML401, ENT_XML1, ENT_XHTML or ENT_HTML5.
+It is recommended to use the other configuration options : ``ENT_COMPAT``, ``ENT_QUOTES``, ``ENT_NOQUOTES``, ``ENT_SUBSTITUTE``, ``ENT_DISALLOWED``, ``ENT_HTML401``, ``ENT_XML1``, ``ENT_XHTML`` or ``ENT_HTML5``.
 
 .. code-block:: php
 
@@ -24925,6 +24923,8 @@ At least two consecutive if/then structures use identical conditions. The latter
 
 This analysis returns false positive when there are attempt to fix a situation, or to call an alternative solution. 
 
+Conditions that are shared between if structures, but inside a logical OR expression are also detected.
+
 .. code-block:: php
 
    <?php
@@ -24941,6 +24941,11 @@ This analysis returns false positive when there are attempt to fix a situation, 
    else if ($c == 1) { doSomething(); }
    else if ($a == 1) { doSomething(); }
    else {}
+   
+   // Also works on if then else if chains
+   // Here, $a is common and sufficient in both conditions
+   if ($a || $b) { doSomething(); } 
+   elseif ($a || $c) { doSomethingElse(); } 
    
    // This sort of situation generate false postive. 
    $config = load_config_from_commandline();
@@ -30053,7 +30058,7 @@ Suggestions
 
 * Define the constant
 * Turn the dynamic syntax into a normal variable syntax
-* Use a fully qualified name (at least one \ ) to turn this syntax into a Fatal error when the constant is not found. This doesn't fix the problem, but may make it more obvious while diagnosticing.
+* Use a fully qualified name (at least one \ ) to turn this syntax into a Fatal error when the constant is not found. This doesn't fix the problem, but may make it more obvious during the diagnostic.
 
 +-------------+---------------------------------+
 | Short name  | Variables/UndefinedConstantName |
@@ -31981,6 +31986,9 @@ Unused Private Methods
 Private methods that are not used are dead code. 
 
 Private methods are reserved for the defining class. Thus, they must be used with the current class, with ``$this`` or ``self\:\:``.
+
+Protected methods, in a standalone class, are also included.
+
 
 .. code-block:: php
 
@@ -34787,14 +34795,14 @@ Useless Instructions
 
 Those instructions are useless, or contains useless parts. 
 
-For example, an addition whose result is not stored in a variable, or immediately reused, does nothing : it is actually performed, and the result is lost. Just plain lost. 
+For example, an addition whose result is not stored in a variable, or immediately used, does nothing : it is actually performed, and the result is lost. Just plain lost. In fact, PHP might detect it, and optimize it away. 
 
 Here the useless instructions that are spotted : 
 
 <?php
 
 // Concatenating with an empty string is useless.
-$string = 'This part '.$is.' usefull but '.$not.'';
+$string = 'This part '.$is.' useful but '.$not.'';
 
 // This is a typo, that PHP turns into a constant, then a string, then nothing.
 `continue <http://www.php.net/manual/en/control-structures.continue.php>`_;
@@ -35574,7 +35582,7 @@ Variables With One Letter Names
 ###############################
 
 
-Variables with one letter name are the shortest name for variables. They also bear very little meaning : what does containt ``$w`` ? 
+Variables with one letter name are the shortest name for variables. They also bear very little meaning : what does contain the variable ``$w`` ? 
 
 Some one-letter variables have meaning : ``$x`` and ``$y`` for coordinates, ``$i``, ``$j``, ``$k`` for blind variables. Others tend to be an easy way to give a name to a variable, without thinking too hard a good name.
 
@@ -36940,7 +36948,7 @@ curl_version() Has No Argument
 ##############################
 
 
-`curl_version() <https://www.php.net/curl_version>`_ used to accept CURLVERSION_NOW as argument. Since PHP 7.4, it is a function without arguments.
+`curl_version() <https://www.php.net/curl_version>`_ used to accept ``CURLVERSION_NOW`` as argument. Since PHP 7.4, it is a function without arguments.
 
 .. code-block:: php
 
@@ -37005,7 +37013,7 @@ See also `directive error_reporting <http://php.net/manual/en/errorfunc.configur
 Suggestions
 ^^^^^^^^^^^
 
-* Always use the constant combinaison when configuring error_reporting or any PHP native function
+* Always use the constant combination when configuring error_reporting or any PHP native function
 
 +-------------+--------------------------------------+
 | Short name  | Structures/ErrorReportingWithInteger |
