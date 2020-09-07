@@ -36,38 +36,47 @@ class MethodSignatureMustBeCompatible extends Analyzer {
         // argument name may be arbitrary; argment default too.
         // typehint and number of arguments must always be the same
         $this->atomIs('Method') // No need for magicmethods
+             ->isNot('visibility', 'private')
              ->analyzerIsNot('self')
              ->savePropertyAs('count', 'signature')
              ->outIs('OVERWRITE')
              ->notSamePropertyAs('count', 'signature', self::CASE_SENSITIVE)
+             ->isNot('visibility', 'private')
              ->back('first');
         $this->prepareQuery();
 
         // Check if typehint is different between
+        // Typehint hierarchy is not checked yet
         $this->atomIs('Method') // No need for magicmethods
+             ->isNot('visibility', 'private')
              ->analyzerIsNot('self')
              ->savePropertyAs('count', 'signature')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
-             ->outIs('TYPEHINT')
-             ->savePropertyAs('fullnspath', 'typehint')
+             ->collectTypehints('typehints')
              ->back('first')
+
              ->outIs('OVERWRITE')
+             ->isNot('visibility', 'private')
              ->samePropertyAs('count', 'signature', self::CASE_SENSITIVE)
              ->outWithRank('ARGUMENT', 'ranked')
-             ->outIs('TYPEHINT')
-             ->notSamePropertyAs('fullnspath', 'typehint')
+             ->collectTypehints('typehints2')
+
+             ->raw('filter{ typehints2.sort() != typehints.sort();}')
              ->back('first');
         $this->prepareQuery();
 
+
         // Check if reference is the same between the versions
         $this->atomIs('Method') // No need for magicmethods
+             ->isNot('visibility', 'private')
              ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->savePropertyAs('reference', 'referenced')
              ->back('first')
              ->outIs('OVERWRITE')
+             ->isNot('visibility', 'private')
              ->outWithRank('ARGUMENT', 'ranked')
              ->notSamePropertyAs('reference', 'referenced')
              ->back('first');
@@ -75,12 +84,14 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // Check if variadic is the same between the versions
         $this->atomIs('Method') // No need for magicmethods
+             ->isNot('visibility', 'private')
              ->analyzerIsNot('self')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
              ->savePropertyAs('variadic', 'variadiced')
              ->back('first')
              ->outIs('OVERWRITE')
+             ->isNot('visibility', 'private')
              ->outWithRank('ARGUMENT', 'ranked')
              ->notSamePropertyAs('variadic', 'variadiced')
              ->back('first');
@@ -88,18 +99,16 @@ class MethodSignatureMustBeCompatible extends Analyzer {
 
         // Check if return typehint is different between
         $this->atomIs('Method') // No need for magicmethods
+             ->isNot('visibility', 'private')
              ->analyzerIsNot('self')
-             ->outIs('RETURNTYPE')
-             ->savePropertyAs('fullnspath', 'typehint')
-             ->back('first')
+             ->collectTypehints('typehints')
+
              ->outIs('OVERWRITE')
-             ->outIs('RETURNTYPE')
-             ->notSamePropertyAs('fullnspath', 'typehint')
+             ->isNot('visibility', 'private')
+             ->collectTypehints('typehints2')
+             ->raw('filter{ typehints2.sort() != typehints.sort();}')
              ->back('first');
         $this->prepareQuery();
-
-        // also checks for reference
-        // also checks for ellipsis
     }
 }
 

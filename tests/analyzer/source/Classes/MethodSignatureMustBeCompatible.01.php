@@ -1,15 +1,5 @@
 <?php
 
-class x {
-    function xa() {}
-    function xad($d) {}
-    function xae($de) {}
-}
-
-class xx extends x {
-    function xb() {}
-}
-
 class xxx extends xx {
     function xa($a) {}
     function xb($b) {}
@@ -17,5 +7,17 @@ class xxx extends xx {
     function xad($d) {}
     function xae($ee) {}
 }
+
+class xx extends x {
+    function xb() {}
+}
+
+
+class x {
+    function xa() {}
+    function xad($d) {}
+    function xae($de) {}
+}
+
 
 ?>
