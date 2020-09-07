@@ -23,39 +23,32 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class MismatchedTernary extends Analyzer {
     public function analyze(): void {
-         $excludedAtoms = array('Array',
-                                'Functioncall',
-                                'Member',
-                                'Methodcall',
-                                'Staticmethodcall',
-                                'Staticproperty',
-                                'Ternary',
-                                'Void',
-                                'Variable',
-                              );
+        $values = array_merge(self::LITERALS, array('Arrayliteral', 'Concatenation'));
 
+        // $a ? 1 : null
         $this->atomIs('Ternary')
              ->codeIs('?')
              ->outIs('THEN')
-             ->outIsIE('CODE')
-             ->atomIsNot($excludedAtoms)
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIs($values, self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'then')
-             ->back('first')
-             ->outIs('ELSE')
-             ->outIsIE('CODE')
-             ->atomIsNot($excludedAtoms)
              ->raw('sideEffect{ if (then == "Concatenation") { then = "String"; } else 
-                                if (then == "Addition")      { then = "Integer"; } else 
-                                if (then == "Cast")          { then = "Integer"; } 
+                                if (then == "Heredoc")       { then = "String"; } 
                                  }')
+             ->back('first')
+
+             ->outIs('ELSE')
+             ->followParAs(FollowParAs::FOLLOW_NONE)
+             ->atomIs($values, self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'notthen')
              ->raw('sideEffect{ if (notthen == "Concatenation") { notthen = "String"; } else 
-                                if (notthen == "Addition")      { notthen = "Integer"; } else 
-                                if (notthen == "Cast")          { notthen = "Integer"; } 
+                                if (notthen == "Heredoc")       { notthen = "String"; } 
                                  }')
+
              ->raw('filter{ then != notthen; } ')
              ->back('first');
         $this->prepareQuery();
