@@ -56,7 +56,7 @@ class TypeSuggestion extends Reports {
             if (preg_match('/function (\S+)\\(/', $row['fullcode'], $r)) {
                 // function, method, with name : for return type
                 $suggestions[$row['file']][$row['line']][$r[1]][] = $type;
-            } elseif (preg_match('/^(\$\\S+)/', $row['fullcode'], $r)) {
+            } elseif (preg_match('/(\$\\S+)/', $row['fullcode'], $r)) {
                 // $parameter alone. it is for an parameter
                 $suggestions[$row['file']][$row['line']][$r[1]][] = $type;
             } elseif (preg_match('/function \\(.*?\\) /', $row['fullcode'], $r)) {
@@ -67,6 +67,7 @@ class TypeSuggestion extends Reports {
                 $suggestions[$row['file']][$row['line']][$row['file'] . ':' . $row['line']][] = $type;
             } else {
                 display('Cannot find typehints for ' . $row['fullcode'] . "\n");
+                print_r($row);
             }
         }
 
@@ -129,7 +130,7 @@ HTML;
                 $list = self::NO_SUGGESTION;
                 ++$stats['parametersTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['argument']])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function ($x): bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function (string $x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['parametersSugg'];
             } else {
@@ -158,7 +159,7 @@ HTML;
                 $list = self::NO_SUGGESTION;
                 ++$stats['parametersTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['argument']])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function ($x): bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$row['argument']], function (string $x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['parametersSugg'];
             } else {
@@ -189,11 +190,11 @@ HTML;
                 $list = self::NO_SUGGESTION;
                 ++$stats['returnTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$id])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$id], function ($x): bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$id], function (string $x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['returnSugg'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$id])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$id], function ($x): bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$id], function (string $x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['returnSugg'];
             } else {
@@ -216,6 +217,7 @@ HTML;
 
         // Return Type hints
         $res = $this->dump->fetchTableMethods();
+        print_r($res->toArray());
         foreach($res->toArray() as $row) {
             if (in_array(mb_strtolower($row['method']), array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic', '__isset', '__clone'))) {
                 continue;
@@ -225,7 +227,7 @@ HTML;
                 $list = self::NO_SUGGESTION;
                 ++$stats['returnTyped'];
             } elseif (isset($suggestions[$row['file']][$row['line']][$row['method']])) {
-                $s = array_filter($suggestions[$row['file']][$row['line']][$row['method']], function ($x): bool { return $x !== 'CouldNotType'; });
+                $s = array_filter($suggestions[$row['file']][$row['line']][$row['method']], function (string $x): bool { return $x !== 'CouldNotType'; });
                 $list = $this->toHtmlList($s);
                 ++$stats['returnSugg'];
             } else {

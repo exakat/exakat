@@ -38,7 +38,7 @@ class Filedependencieshtml extends Reports {
         copyDir("{$this->config->dir_root}/media/dependencies", $this->tmpName);
 
         $res = $this->dump->fetchTable('filesDependencies');
-        $res = array_filter($res->toArray(), function (array $x) { return $x['including'] !== $x['included']; });
+        $res = array_filter($res->toArray(), function (array $x) : bool { return $x['including'] !== $x['included']; });
 
         $json = (object) array('edges' => array(),
                                'nodes' => array());
