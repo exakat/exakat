@@ -1300,40 +1300,6 @@ GREMLIN;
         return $total;
     }
 
-    private function collectDefinitionsStats(): void {
-        $toDump = array();
-        $types = array('Staticconstant'   => 'staticconstants',
-                       'Staticmethodcall' => 'staticmethodcalls',
-                       'Staticproperty'   => 'staticproperty',
-
-                       'Methodcall'       => 'methodcalls',
-                       'Member'           => 'members',
-                        );
-
-        foreach($types as $label => $name) {
-            $query = <<<GREMLIN
-g.V().hasLabel("$label").count();
-GREMLIN;
-            $res = $this->gremlin->query($query);
-            $toDump[] = array('',
-                              $name,
-                              $res->toInt(),
-                              );
-
-            $query = <<<GREMLIN
-g.V().hasLabel("$label").where(__.in("DEFINITION").not(hasLabel("Virtualproperty"))).count();
-GREMLIN;
-            $res = $this->gremlin->query($query);
-            $toDump[] = array('',
-                              "$name defined",
-                              $res->toInt(),
-                              );
-        }
-
-        $count = $this->storeToDumpArray('hash', $toDump);
-        display("$count Definitions Stats");
-    }
-
     private function collectFilesDependencies(): void {
         // Direct inclusion
         $query = $this->newQuery('Inclusions');
@@ -2038,47 +2004,6 @@ GREMLIN
         $this->collectHashCounts($query, 'NativeCallPerExpression');
     }
 
-  /*  private function collectReadability(): void {
-        $loops = 20;
-        $query = <<<GREMLIN
-g.V().sideEffect{ functions = 0; name=""; expression=0;}
-    .hasLabel("Function", "Closure", "Method", "Magicmethod", "File")
-    .not(where( __.out("BLOCK").hasLabel("Void")))
-    .sideEffect{ ++functions; }
-    .where(__.coalesce( __.out("NAME").sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
-                        __.filter{true; }.sideEffect{ name="global"; file = it.get().value("fullcode");} )
-    .sideEffect{ total = 0; expression = 0; type=it.get().label();}
-    .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
-    .repeat( __.out($this->linksDown).not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
-    .sideEffect{ ++total; }
-    .not(hasLabel("Void"))
-    .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
-    .where( __.repeat( __.inE().hasLabel($this->linksDown).outV() ).until(hasLabel("File")).sideEffect{ file = it.get().value("fullcode"); })
-    .fold()
-    )
-    .map{ if (expression > 0) {
-        ["name":name, "type":type, "total":total, "expression":expression, "index": 102 - expression - total / expression, "file":file];
-    } else {
-        ["name":name, "type":type, "total":total, "expression":0, "index": 100, "file":file];
-    }
-}    
-GREMLIN;
-        $index = $this->gremlin->query($query);
-
-        $toDump = array();
-        foreach($index as $row) {
-            $toDump[] = array('',
-                              $row['name'],
-                              $row['type'],
-                              $row['total'],
-                              $row['expression'],
-                              $row['file'],
-                             );
-        }
-        $total = $this->storeToDumpArray('readability', $toDump);
-        display("$total readability index");
-    } */
-
     public function checkRulesets($ruleset, array $analyzers): void {
         $sqliteFile = $this->config->dump;
 
@@ -2153,12 +2078,7 @@ GREMLIN;
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
         $begin = $end;
-/*
-        $this->collectReadability();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Readability: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
-*/
+
         $this->collectNativeCallsPerExpressions();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
@@ -2167,11 +2087,6 @@ GREMLIN;
         $this->collectClassTraitsCounts();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Trait counts per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-
-        $begin = $end;
-        $this->collectDefinitionsStats();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Definitions stats : ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
         // Dev only
         if ($this->config->is_phar === Config::IS_NOT_PHAR) {
