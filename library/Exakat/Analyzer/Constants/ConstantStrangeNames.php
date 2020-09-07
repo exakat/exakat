@@ -35,6 +35,11 @@ class ConstantStrangeNames extends Analyzer {
         // define('BD$', 1);
         $this->atomIs('Identifier')
              ->hasNoOut('CONCAT')
+             ->not(
+                $this->side()
+                     ->inIs('NAME')
+                     ->atomIs('Const')
+             )
              ->analyzerIs('Constants/Constantnames')
              ->regexIsNot('noDelimiter', '^(\\\\\\\\?)[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*\\$')
              // simple constant name
