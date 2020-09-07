@@ -1974,36 +1974,6 @@ GREMLIN
         $this->storeToDumpArray('hash', $toDump);
     }
 
-    private function collectClassTraitsCounts(): void {
-        $query = $this->newQuery('collectClassTraitsCounts');
-        $query->atomIs('Class', Analyzer::WITHOUT_CONSTANTS)
-              ->raw(<<<'GREMLIN'
-groupCount("m").by( __.out("USE").out("USE").count() ).cap("m")
-GREMLIN
-);
-        $query->prepareRawQuery();
-        $this->collectHashCounts($query, 'ClassTraits');
-    }
-
-    private function collectNativeCallsPerExpressions(): void {
-        $MAX_LOOPING = Analyzer::MAX_LOOPING;
-
-        $query = $this->newQuery('collectNativeCallsPerExpressions');
-        $query->atomIs('Sequence', Analyzer::WITHOUT_CONSTANTS)
-              ->outIs('EXPRESSION')
-              ->atomIsNot(array('Assignation', 'Case', 'Catch', 'Class', 'Classanonymous', 'Closure', 'Concatenation', 'Default', 'Dowhile', 'Finally', 'For', 'Foreach', 'Function', 'Ifthen', 'Include', 'Method', 'Namespace', 'Php', 'Return', 'Switch', 'Trait', 'Try', 'While'), Analyzer::WITHOUT_CONSTANTS)
-              ->_as('results')
-              ->raw(<<<GREMLIN
-groupCount("m").by( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel("Functioncall")
-      .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
-      .count()
-).cap("m")
-GREMLIN
-);
-        $query->prepareRawQuery();
-        $this->collectHashCounts($query, 'NativeCallPerExpression');
-    }
-
     public function checkRulesets($ruleset, array $analyzers): void {
         $sqliteFile = $this->config->dump;
 
@@ -2077,16 +2047,6 @@ GREMLIN
         $this->collectStructures();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
-
-        $this->collectNativeCallsPerExpressions();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Native Calls Per Expression: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-
-        $begin = $end;
-        $this->collectClassTraitsCounts();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Trait counts per Class: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
 
         // Dev only
         if ($this->config->is_phar === Config::IS_NOT_PHAR) {
