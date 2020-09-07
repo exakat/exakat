@@ -220,8 +220,8 @@ class ProjectConfig extends Config {
         } else {
             $include_dirs = 'include_dirs[] = "' . implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs']) . "\";\n";
         }
-        $ignore_dirs   = $this->makeIniArray('ignore_dirs', $this->config['ignore_dirs']);
-        $ignore_rules  = $this->makeIniArray('ignore_rules', $this->config['ignore_rules'] ?? array());
+        $ignore_dirs   = self::makeIniArray('ignore_dirs', $this->config['ignore_dirs']);
+        $ignore_rules  = self::makeIniArray('ignore_rules', $this->config['ignore_rules'] ?? array());
 
         $file_extensions  = implode(',', $this->config['file_extensions']);
 

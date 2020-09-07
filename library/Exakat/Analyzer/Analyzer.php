@@ -391,7 +391,7 @@ GREMLIN
     }
 
     public function getRulesets(): array {
-        $analyzer = $this->getName($this->analyzerQuoted);
+        $analyzer = self::getName($this->analyzerQuoted);
         return $this->rulesets->getRulesetForAnalyzer($analyzer);
     }
 
