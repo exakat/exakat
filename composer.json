@@ -18,12 +18,22 @@
 	"bin": [
 		"exakat"
 	],
+    "scripts":
+    {
+        "post-install-cmd": [
+            "php exakat doctor",
+            "php exakat install"
+        ]
+    },
     "require": {
-        "php": "~7.0",
-        "ext-tokenizer": "*",
-        "ext-sqlite3": "*",
+        "php": "~7.3",
         "ext-curl": "*",
+        "ext-hash": "*",
+        "ext-json": "*",
         "ext-mbstring": "*",
+        "ext-sqlite3": "*",
+        "ext-tokenizer": "*",
+        "ext-xmlwriter": "*",
         "guiguiboy/php-cli-progress-bar":"0.0.4",
         "brightzone/gremlin-php": "3.1.1",
         "symfony/yaml": "^4.2"
@@ -31,6 +41,7 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "consolidation/robo": "1.3.0",
-        "friendsofphp/php-cs-fixer": "*"
+        "friendsofphp/php-cs-fixer": "*",
+        "php-parallel-lint/php-parallel-lint": "^1.2"
     }
 }
