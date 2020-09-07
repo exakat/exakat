@@ -599,6 +599,24 @@ Label : PROJECT
                           46
                         Label : RETURNTYPE
                           14
+                      Label : METHOD
+                        70
+                        Label : DEFINITION
+                          36
+                          Label : CLASS
+                            24
+                          Label : METHOD
+                            70
+                            Label : ARGUMENT
+                              14
+                            Label : NAME
+                              70
+                              Label : NAME
+                                71
+                                Label : CONCAT
+                                  9
+                                Label : CONCAT
+                                  72
                       Label : NAME
                         24
                       Label : PPP
@@ -672,9 +690,9 @@ Label : PROJECT
                     Label : EXPRESSION
                       23
                       Label : DEFINITION
-                        24
-                      Label : DEFINITION
                         35
+                      Label : DEFINITION
+                        24
                       Label : DEFINITION
                         24
                       Label : METHOD

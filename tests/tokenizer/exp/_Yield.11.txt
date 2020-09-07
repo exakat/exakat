@@ -76,12 +76,6 @@ Label : PROJECT
                       Label : NAME
                         20
           Label : DEFINITION
-            5
-            Label : ARGUMENT
-              6
-            Label : NAME
-              5
-          Label : DEFINITION
             9
             Label : DEFINITION
               9
@@ -89,6 +83,12 @@ Label : PROJECT
               9
             Label : DEFINITION
               9
+          Label : DEFINITION
+            5
+            Label : ARGUMENT
+              6
+            Label : NAME
+              5
           Label : NAME
             5
           Label : RETURNTYPE
