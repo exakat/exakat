@@ -1,20 +1,20 @@
 <?php
 
-@@Attribute
-@@Attribute2
-@@Test(3 + 4)
+#[ Attribute]
+#[ Attribute2]
+#[ Test(3 + 4)]
 class x implements i, i {
 
-    @@PropertyAttribute
+    #[PropertyAttribute]
     public int $foo;
 
-    @@ConstAttribute
+    #[ConstAttribute]
     public const BAR = 1;
 
-    @@MethodAttribute
+    #[MethodAttribute]
     public function foo() {}
 }
 
-$object = new @@AnonymousAttribute class () { /* … */ };
+$object = new #[AnonymousAttribute] class () { /* … */ };
 
 ?>

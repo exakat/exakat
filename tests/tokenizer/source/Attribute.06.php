@@ -3,7 +3,7 @@
 namespace My\Attributes {
     use Attribute;
 
-    @@Attribute
+    #[Attribute]
     class SingleArgument {
         public $argumentValue;
 
@@ -16,7 +16,7 @@ namespace My\Attributes {
 namespace {
     use My\Attributes\SingleArgument;
 
-    @@SingleArgument("Hello World")
+    #[SingleArgument("Hello World")]
     class Foo {
     }
 

@@ -1,9 +1,9 @@
 <?php
 
-@@TraitAttribute
+#[TraitAttribute]
 trait t {}
 
-@@InterfaceAttribute
+#[InterfaceAttribute]
 interface i {}
 
 ?>

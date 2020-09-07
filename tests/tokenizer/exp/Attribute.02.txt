@@ -1,16 +1,16 @@
 test
 Label : GLOBAL
-  30
+  27
   Label : DEFINITION
-    30
+    27
     Label : DEFINITION
-      30
+      27
 Label : PROJECT
   1
   Label : DEFINITION
-    30
+    27
     Label : DEFINITION
-      30
+      27
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,110 +18,110 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          26
+          23
           Label : ARGUMENT
-            27
+            24
           Label : ATTRIBUTE
             5
             Label : ARGUMENT
-              8
-              Label : LEFT
+              9
+              Label : CLASS
                 7
-              Label : RIGHT
-                7
+            Label : ARGUMENT
+              10
             Label : NAME
               5
           Label : ATTRIBUTE
-            9
+            5
             Label : ARGUMENT
-              13
-              Label : CLASS
-                11
-            Label : ARGUMENT
-              14
-            Label : NAME
               9
-          Label : ATTRIBUTE
-            16
-            Label : ARGUMENT
-              13
               Label : CLASS
-                18
-              Label : CONSTANT
-                20
+                7
+            Label : ARGUMENT
+              10
             Label : NAME
-              16
+              5
           Label : ATTRIBUTE
-            22
+            12
+            Label : ARGUMENT
+              9
+              Label : CLASS
+                14
+              Label : CONSTANT
+                16
+            Label : NAME
+              12
+          Label : ATTRIBUTE
+            18
+            Label : ARGUMENT
+              20
+            Label : ARGUMENT
+              21
+            Label : ARGUMENT
+              22
+              Label : LEFT
+                20
+              Label : RIGHT
+                21
+            Label : NAME
+              18
+          Label : BLOCK
+            26
+            Label : EXPRESSION
+              24
+          Label : NAME
+            23
+          Label : RETURNTYPE
+            24
+        Label : EXPRESSION
+          29
+          Label : LEFT
+            27
+          Label : RIGHT
+            32
             Label : ARGUMENT
               24
-            Label : ARGUMENT
-              7
-            Label : ARGUMENT
-              25
-              Label : LEFT
-                24
-              Label : RIGHT
-                7
-            Label : NAME
-              22
-          Label : BLOCK
-            29
-            Label : EXPRESSION
-              27
-          Label : NAME
-            26
-          Label : RETURNTYPE
-            27
-        Label : EXPRESSION
-          32
-          Label : LEFT
-            30
-          Label : RIGHT
-            35
-            Label : ARGUMENT
-              27
             Label : ATTRIBUTE
-              33
-            Label : BLOCK
-              7
+              30
+            Label : BLOCK, RETURNED, RETURN
+              21
             Label : RETURNTYPE
-              27
+              24
         Label : EXPRESSION
-          36
+          33
           Label : ARGUMENT
-            39
-            Label : ATTRIBUTE
-              37
-            Label : DEFAULT
-              27
-            Label : NAME
-              39
-            Label : TYPEHINT
-              27
-          Label : BLOCK
-            29
-            Label : EXPRESSION
-              27
-          Label : NAME
             36
+            Label : ATTRIBUTE
+              34
+            Label : DEFAULT
+              24
+            Label : NAME
+              36
+            Label : TYPEHINT
+              24
+          Label : BLOCK
+            26
+            Label : EXPRESSION
+              24
+          Label : NAME
+            33
           Label : RETURNTYPE
-            27
+            24
         Label : EXPRESSION
-          45
+          42
           Label : ARGUMENT
-            27
+            24
+          Label : ATTRIBUTE
+            37
           Label : ATTRIBUTE
             40
-          Label : ATTRIBUTE
-            43
           Label : BLOCK
-            29
+            26
             Label : EXPRESSION
-              27
+              24
           Label : NAME
-            45
-          Label : PHPDOC
             42
+          Label : PHPDOC
+            39
           Label : RETURNTYPE
-            28
+            25

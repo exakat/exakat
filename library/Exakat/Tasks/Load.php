@@ -6099,13 +6099,18 @@ class Load extends Tasks {
     }
 
     private function processAttribute(): AtomInterface {
-        $attribute = $this->processNext();
-        ++$this->id; // skip ]
-        $this->popExpression();
+        do {
+            $attribute = $this->processNext();
+            print_r($attribute);
 
-        $attribute->fullcode = '#[ ' . $attribute->fullcode . ' ]';
+            $this->popExpression();
+            $attribute->fullcode = '#[ ' . $attribute->fullcode . ' ]';
 
-        $this->attributes[] = $attribute;
+            $this->attributes[] = $attribute;
+            ++$this->id; // skip ]
+            print_r($this->tokens[$this->id]);
+        } while($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
+            print_r($this->tokens[$this->id]);
 
         return $attribute;
     }
