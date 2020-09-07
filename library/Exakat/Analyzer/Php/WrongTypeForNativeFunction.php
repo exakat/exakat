@@ -48,16 +48,29 @@ class WrongTypeForNativeFunction extends Analyzer {
 
             foreach($ini as $rank => $functions) {
                 // foo($arg) { array_map($arg, '') ; }
+                $this->atomFunctionIs($functions)
+                     ->analyzerIsNot('self')
+                     ->outWithRank('ARGUMENT', (int) $rank)
+                     ->atomIs('Variable')
+                     ->inIs('DEFINITION')
+                     ->inIs('NAME')
+                     ->collectTypehints('typehints')
+                     ->raw('filter{!("\\\\'.$type.'" in typehints);}')
+                     ->back('first');
+                $this->prepareQuery();
+
+                // array_map(STRING, '')
                 // raw expressions
                 $this->atomFunctionIs($functions)
                      ->analyzerIsNot('self')
                      ->outWithRank('ARGUMENT', (int) $rank)
-                     ->atomIsNot(self::CALLS)
+                     ->atomIsNot(array_merge(self::CALLS, self::CONTAINERS))
                      ->atomIsNot($atoms, self::WITH_CONSTANTS)
                      ->back('first');
                 $this->prepareQuery();
 
                 // custom functions
+                // function foo() : int {}; substr(foo(), 1)
                 $this->atomFunctionIs($functions)
                      ->analyzerIsNot('self')
                      ->outWithRank('ARGUMENT', (int) $rank)
@@ -70,6 +83,7 @@ class WrongTypeForNativeFunction extends Analyzer {
                 $this->prepareQuery();
 
                 // native functions
+                // substr(rand(), 1)
                 $this->atomFunctionIs($functions)
                      ->analyzerIsNot('self')
                      ->outWithRank('ARGUMENT', (int) $rank)
