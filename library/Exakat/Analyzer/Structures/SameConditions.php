@@ -39,7 +39,7 @@ class SameConditions extends Analyzer {
              ->followParAs(FollowParAs::FOLLOW_NONE)
              ->savePropertyAs('fullcode', 'condition')
              ->as('results')
-             
+
              ->back('first')
              ->outIs(array('THEN', 'ELSE'))
              ->atomInsideNoDefinition('Ifthen')

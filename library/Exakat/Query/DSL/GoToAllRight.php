@@ -30,7 +30,7 @@ class GoToAllRight extends DSL {
             case 1:
                 list($atom) = func_get_args();
                 break;
-                
+
             default:
                 $atom = 'Logical';
         }

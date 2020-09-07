@@ -55,7 +55,7 @@ class WrongTypeForNativeFunction extends Analyzer {
                      ->inIs('DEFINITION')
                      ->inIs('NAME')
                      ->collectTypehints('typehints')
-                     ->raw('filter{!("\\\\'.$type.'" in typehints);}')
+                     ->raw('filter{!("\\\\' . $type . '" in typehints);}')
                      ->back('first');
                 $this->prepareQuery();
 

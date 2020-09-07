@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,13 +26,13 @@ use Exakat\Analyzer\Analyzer;
 
 class CollectNativeCallsPerExpressions extends AnalyzerHashHashResults {
     protected $analyzerName = 'NativeCallPerExpression';
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Functions/IsExtFunction',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
 
         $this->atomIs('Sequence', Analyzer::WITHOUT_CONSTANTS)

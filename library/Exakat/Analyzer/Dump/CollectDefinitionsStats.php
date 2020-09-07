@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -22,12 +22,11 @@
 
 namespace Exakat\Analyzer\Dump;
 
-use Exakat\Analyzer\Dump\AnalyzerHashResults;
 
 class CollectDefinitionsStats extends AnalyzerArrayHashResults {
     protected $analyzerName = 'definitionStats';
 
-    public function analyze() : void {
+    public function analyze(): void {
 
         $toDump = array();
         $types = array('Staticconstant'   => 'staticconstants',
@@ -39,14 +38,14 @@ class CollectDefinitionsStats extends AnalyzerArrayHashResults {
                         );
 
         $this->atomIs(array_keys($types))
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 groupCount("x").by(label).cap("x")
 GREMLIN
 );
         $resAll = $this->rawQuery()->toArray()[0];
 
         $this->atomIs(array_keys($types))
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
     __.in("DEFINITION").not(hasLabel("Virtualproperty"))
 ).groupCount("m").by(label).cap("m")
@@ -60,7 +59,7 @@ GREMLIN
                                             $resAll[$label] ?? 0,
                                             );
 
-            $this->analyzerValues[] = array($name. ' defined',
+            $this->analyzerValues[] = array($name . ' defined',
                                             $resDefined[$label] ?? 0,
                                             );
         }

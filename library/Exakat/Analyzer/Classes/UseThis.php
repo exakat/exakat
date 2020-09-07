@@ -69,9 +69,9 @@ class UseThis extends Analyzer {
              ->samePropertyAs('fullnspath', 'classe')
              ->back('first');
         $this->prepareQuery();
-        
+
         // class x { function y() { get_class(); } } or get_used_class()
-        $this->atomFunctionIs(array('\\get_class', 
+        $this->atomFunctionIs(array('\\get_class',
                                     '\\get_called_class',
                                     '\\get_object_vars',
                                     '\\get_parent_class',

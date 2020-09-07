@@ -197,7 +197,7 @@ SQL;
 
         // break down property files into small chunks for processing inside 300s.
         $fp = fopen($this->pathProperties, 'r');
-        $fp2 = fopen($this->pathProperties.'.tmp', 'w+');
+        $fp2 = fopen($this->pathProperties . '.tmp', 'w+');
         $j = 0;
         for($i = 0; $i < $this->totalProperties; ++$i) {
             ++$j;
@@ -205,7 +205,7 @@ SQL;
             if ($j >= self::LOAD_CHUNK_PROPERTY) {
                 $this->savePropertiesGremlin(intdiv($i, self::LOAD_CHUNK_PROPERTY));
                 fclose($fp2);
-                $fp2 = fopen($this->pathProperties.'.tmp', 'w+');
+                $fp2 = fopen($this->pathProperties . '.tmp', 'w+');
                 $j = 0;
             }
         }
@@ -214,10 +214,10 @@ SQL;
         $this->savePropertiesGremlin(intdiv($i, self::LOAD_CHUNK_PROPERTY));
 
         unlink($this->pathProperties);
-        unlink($this->pathProperties.'.tmp');
+        unlink($this->pathProperties . '.tmp');
     }
-    
-    private function savePropertiesGremlin(int $id) : void {
+
+    private function savePropertiesGremlin(int $id): void {
         $begin = microtime(true);
         $query = <<<GREMLIN
 new File('{$this->pathProperties}.tmp').eachLine {
@@ -422,7 +422,7 @@ GREMLIN;
 
         // break down property files into small chunks for processing inside 300s.
         $fp = fopen($this->pathLink, 'r');
-        $fp2 = fopen($this->pathLink.'.tmp', 'w+');
+        $fp2 = fopen($this->pathLink . '.tmp', 'w+');
         $j = 0;
         for($i = 0; $i < $this->totalLink; ++$i) {
             ++$j;
@@ -430,7 +430,7 @@ GREMLIN;
             if ($j >= self::LOAD_CHUNK_LINK) {
                 $this->saveLinkGremlin(intdiv($i, self::LOAD_CHUNK_LINK));
                 fclose($fp2);
-                $fp2 = fopen($this->pathLink.'.tmp', 'w+');
+                $fp2 = fopen($this->pathLink . '.tmp', 'w+');
                 $j = 0;
             }
         }
@@ -439,10 +439,10 @@ GREMLIN;
         $this->saveLinkGremlin(intdiv($i, self::LOAD_CHUNK_LINK));
 
         unlink($this->pathLink);
-        unlink($this->pathLink.'.tmp');
+        unlink($this->pathLink . '.tmp');
     }
-    
-    private function saveLinkGremlin(int $id) : void {
+
+    private function saveLinkGremlin(int $id): void {
             $begin = microtime(true);
             $query = <<<GREMLIN
 new File('{$this->pathLink}.tmp').eachLine {

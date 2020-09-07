@@ -31,7 +31,7 @@ class GoToAllChildren extends DSL {
             case 1:
                 list($self) = func_get_args();
                 break;
-                
+
             default:
                 $self = Analyzer::INCLUDE_SELF;
         }

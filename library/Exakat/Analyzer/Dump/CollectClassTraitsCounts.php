@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CollectClassTraitsCounts extends AnalyzerHashHashResults {
     protected $analyzerName = 'ClassTraits';
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs(self::CLASSES_ALL, Analyzer::WITHOUT_CONSTANTS)
               ->raw(<<<'GREMLIN'
 groupCount("m").by( __.out("USE").out("USE").count() ).cap("m")

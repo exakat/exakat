@@ -219,7 +219,7 @@ class MakeClassMethodDefinition extends Complete {
               ->goToInstruction(self::CLASSES_TRAITS)
               ->goToAllChildren(self::EXCLUDE_SELF)
               ->as('theClass')
-              
+
               ->not(
                 $this->side()
                      ->outIs(array('METHOD', 'MAGICMETHOD'))
