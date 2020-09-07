@@ -1,4 +1,4 @@
-Version 2.1.7 (zi, coming up)
+Version 2.1.8 (Chou, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,40 @@ Version 2.1.7 (zi, coming up)
 + Tokenizer
     + 
 
-Version 2.1.6 (Night Patrol Deity, coming up)
+Version 2.1.7 (zi, 2020-09-07)
++ Architecture
+    + Refactored loading class, to keep query load at optimal size for Gremlin
+    + GC during load to free memory
+    + More typehints
+    + Move several collections to Dump/ ruleset
++ Report
+    + Upgraded Typesuggestion report with report on closures and arrow functions
+    + Added Arrowfunctions in inventories
+    + Added collection of arguments and details for closures and arrowfunctions
++ Analysis
+    + New analysis : Could Be In Parent : suggest methods that should be defined in a parent
+    + New analysis : Don't pollute namespace
+    + New analysis : report insufficient return typehints
+    + Upgraded analysis : 'Method signature must be compatible' now PHP 8.0 compatible
+    + Upgraded analysis : 'Wrong type with native function' fixes false positives
+    + Upgraded analysis : 'Same condition' added coverage for || conditions
+    + Upgraded analysis : 'Missing returntype' extended to class typehints
+    + Upgraded analysis : 'Should Use This' also covers special functions like get_class_called()
+    + Upgraded analysis : 'No concat in loop' skips nested loops
+    + Upgraded analysis : 'Always false' covers typehint usage 
+    + Upgraded analysis : 'NoChoice' doesn't report large expressions
+    + Upgraded analysis : 'Dont mix PlusPlus' skip () and =
+    + Upgraded analysis : 'Fallthrough' don't report final cases without break
+    + Checked unit tests : 3663 / 3630 test pass (99% pass)
++ Tokenizer
+    + Removed 'root' property
+    + Upgraded to new Attributes #[] in detection and normalisation
+    + Fixed constant detection within instanceof
+    + Created RETURN and RETURNED for Arrowfunctions (there is no return otherwise)
+    + Parent method also calls children methods when those are not defined there
+    + Support for multiple attributes in one syntax
+
+Version 2.1.6 (Night Patrol Deity, 2020-08-28)
 + Architecture
     + More typehints coverage
     + Various speed-up
