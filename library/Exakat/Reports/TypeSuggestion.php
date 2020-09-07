@@ -67,7 +67,6 @@ class TypeSuggestion extends Reports {
                 $suggestions[$row['file']][$row['line']][$row['file'] . ':' . $row['line']][] = $type;
             } else {
                 display('Cannot find typehints for ' . $row['fullcode'] . "\n");
-                print_r($row);
             }
         }
 
@@ -217,7 +216,6 @@ HTML;
 
         // Return Type hints
         $res = $this->dump->fetchTableMethods();
-        print_r($res->toArray());
         foreach($res->toArray() as $row) {
             if (in_array(mb_strtolower($row['method']), array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic', '__isset', '__clone'))) {
                 continue;
