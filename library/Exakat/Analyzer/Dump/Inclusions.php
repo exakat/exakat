@@ -45,7 +45,7 @@ SQL;
               ->select(array('included'  => 'noDelimiter',
                              'including' => 'fullcode'));
 
-        $res = $this->prepareQuery();
+        $this->prepareQuery();
     }
 }
 

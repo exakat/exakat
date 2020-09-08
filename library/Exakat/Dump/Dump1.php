@@ -316,7 +316,7 @@ SQL;
                     $list[] = "$col as $k";
                 }
             }
-            $cols = implode(', ', $cols);
+            $cols = implode(', ', $list);
         }
 
         if (!in_array($table, $this->tablesList)) {

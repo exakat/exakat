@@ -34,8 +34,6 @@ class DirectInjection extends Analyzer {
     }
 
     public function analyze(): void {
-        $vars = $this->loadIni('php_incoming.ini')->incoming;
-
         // Relayed call to another function
         // foo($_GET)
         $this->atomIs('Phpvariable')

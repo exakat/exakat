@@ -54,7 +54,7 @@ class Phpcsfixer extends Reports {
         $analysis = array_filter($analysis->toHash('analyzer', 'count'), function ($x) { return $x >= 1;});
 
         $rules = array();
-        foreach($analysis as $analyzer => $count) {
+        foreach(array_keys($analysis) as $analyzer) {
             $name = "'" . $this->matches[$analyzer] . "'";
             $rules[] = sprintf('            %- 30s => true,', $name);
         }

@@ -273,7 +273,7 @@ SQL;
             }
         }
 
-        foreach($return as $type => &$list) {
+        foreach($return as &$list) {
             $list = array_merge(...$list);
         }
 

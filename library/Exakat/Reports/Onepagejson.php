@@ -32,7 +32,6 @@ class Onepagejson extends Reports {
 
         $results = array();
         $titleCache = array();
-        $severityCache = array();
 
         $results = array();
 

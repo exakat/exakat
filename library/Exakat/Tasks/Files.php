@@ -100,7 +100,6 @@ class Files extends Tasks {
 
         $vcsClass = Vcs::getVcs($this->config);
         $vcs = new $vcsClass($this->config->project, $this->config->code_dir);
-        $fileModifications = $vcs->getFileModificationLoad();
 
         $SQLresults = $this->checkCompilations();
 

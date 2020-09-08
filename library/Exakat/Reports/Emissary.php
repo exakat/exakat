@@ -2258,9 +2258,6 @@ HTML;
     private function generateInventories(Section $section, array $analyzer, string $description): void {
        $results = $this->dump->fetchAnalysers($analyzer);
 
-       $counts = array_count_values(array_column($results->toArray(), 'htmlcode'));
-       $counts = array_map(function (string $x): string { return (int) $x === 1 ? '&nbsp;' : $x;}, $counts);
-
        $groups = array();
        foreach($results->toArray() as $row) {
            $groups[$row['htmlcode']][] = $row['file'];

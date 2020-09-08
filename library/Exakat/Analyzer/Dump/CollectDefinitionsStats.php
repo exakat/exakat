@@ -28,7 +28,6 @@ class CollectDefinitionsStats extends AnalyzerArrayHashResults {
 
     public function analyze(): void {
 
-        $toDump = array();
         $types = array('Staticconstant'   => 'staticconstants',
                        'Staticmethodcall' => 'staticmethodcalls',
                        'Staticproperty'   => 'staticproperty',

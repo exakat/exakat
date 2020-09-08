@@ -66,7 +66,7 @@ class AutoloadExt implements Autoloader {
     }
 
     private function checkExtensions() {
-        foreach($this->pharList as $name => $phar) {
+        foreach(array_keys($this->pharList) as $name) {
             $className = "\Exakat\Extensions\\$name";
 
             if (class_exists($className)) {

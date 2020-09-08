@@ -120,7 +120,6 @@ class Project extends Tasks {
         $this->datastore->addRow('hash', $info);
 
         $rulesetsToRun = array($this->config->project_rulesets);
-        $reportToRun   = array();
         $namesToRun    = array();
 
         foreach($this->reports as $format) {

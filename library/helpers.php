@@ -485,7 +485,7 @@ function rst2htmlLink(string $text) : string {
 }
 
 function rst2literal(string $text) : string {
-    $return = preg_replace_callback("#<\?literal(.*?)\n\?>#is", function ($x) {
+    $return = preg_replace_callback("#<\?literal(.*?)\n\?>#is", function (array $x) : string {
         $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php ' . PHP_EOL . str_replace('<br />', '', $x[1]) . '?&gt;</pre>';
         return $return;
     }, $text);
@@ -604,7 +604,7 @@ function raiseDimensions($array, $split='/') : array {
     return $return;
 }
 
-function sort_dependencies($array, $level = 0) : array {
+function sort_dependencies(array $array, int $level = 0) : array {
     $return = array();
     $next = array();
     

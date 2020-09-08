@@ -121,7 +121,7 @@ class TypehintingStats extends AnalyzerArrayHashResults {
              ->raw('cap("m")');
         $objecttypes2 = $this->rawQuery()->toArray();
 
-        $objecttypes = ($objecttypes1[0] ?? array()) + ($objecttypes1[0] ?? array());
+        $objecttypes = ($objecttypes1[0] ?? array()) + ($objecttypes2[0] ?? array());
 
         //typehinted class
         $this->atomIs('Parameter')

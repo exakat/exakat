@@ -102,7 +102,7 @@ map{
 
 GREMLIN
 );
-        $res = $this->prepareQuery();
+        $this->prepareQuery();
     }
 }
 
