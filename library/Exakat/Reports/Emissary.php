@@ -4095,10 +4095,8 @@ HTML;
         }
 
         $return = array();
-        $theClass = '';
         $res = $this->dump->fetchTableMethodsByReturntype();
         foreach($res->toArray() as $row) {
-            $theClass = $row['fullnspath'];
             $visibilities = array($row['returntype'], '&nbsp;');
 
             $method = '<tr><td>&nbsp;</td><td>' . PHPSyntax($row['method']) . '</td><td>&nbsp;</td><td class="exakat_short_text">' .

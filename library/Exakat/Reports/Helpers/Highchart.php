@@ -133,7 +133,7 @@ JAVASCRIPT;
         return $return;
     }
 
-    private function chart($name, $xAxis, $series): string {
+    private function chart(string $name, array $xAxis, array $series): string {
         $return = array();
         $xAxis  = json_encode($xAxis);
         $series  = json_encode($series);

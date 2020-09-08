@@ -100,7 +100,7 @@ class PhpCodeTree {
             return;
         }
 
-        foreach($this->$what as $id => &$items) {
+        foreach($this->$what as &$items) {
             $items['map'] = array_map($closure, $items);
         }
     }
@@ -110,7 +110,7 @@ class PhpCodeTree {
             return;
         }
 
-        foreach($this->$what as $id => &$items) {
+        foreach($this->$what as &$items) {
             $items['reduced'] = array_reduce($items['map'], $closure, '');
         }
     }

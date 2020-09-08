@@ -118,7 +118,6 @@ class Phpexec {
         $this->readConfig();
 
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
-            $folder = $pathToBinary;
             $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":/exakat  -w /exakat ' . $this->phpexec . ' php -v 2>&1') ?? '';
 
             if (substr($res, 0, 4) !== 'PHP ') {
@@ -429,7 +428,7 @@ PHP;
             $shell = 'nohup php ' . dirname($tmpFileName) . "/lint.php $this->phpexec {$this->actualVersion[0]}{$this->actualVersion[2]} $project_code $tmpFileName 2>&1 >/dev/null & echo $!";
         }
 
-        $pid = shell_exec($shell);
+        shell_exec($shell);
     }
 }
 

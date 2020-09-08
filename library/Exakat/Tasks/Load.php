@@ -2145,7 +2145,6 @@ class Load extends Tasks {
     }
 
     private function processNsname(): AtomInterface {
-        $current = $this->id;
         $nsname = $this->makeNsname();
 
         // Review this : most nsname will end up as constants!
@@ -2693,7 +2692,6 @@ class Load extends Tasks {
     }
 
     private function processAbstract(): AtomInterface {
-        $current = $this->id;
         $abstract = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
@@ -2706,7 +2704,6 @@ class Load extends Tasks {
     }
 
     private function processFinal(): AtomInterface {
-        $current = $this->id;
         $final = $this->tokens[$this->id][1];
 
         $next = $this->processNext();
@@ -2763,7 +2760,6 @@ class Load extends Tasks {
     }
 
     private function processDefineConstant(AtomInterface $namecall): AtomInterface {
-        $current = $this->id;
         $namecall->atom = 'Defineconstant';
         $namecall->fullnspath = '\\define';
         $this->makePhpdoc($namecall);
@@ -5369,7 +5365,7 @@ class Load extends Tasks {
             $id = array_search($this->phptokens::T_DOUBLE_ARROW, $finals);
             unset($finals[$id]);
             $operator = $this->addAtom('Yield', $this->id);
-            $operand = $this->processSingleOperator($operator, $finals, 'YIELD', ' ');
+            $this->processSingleOperator($operator, $finals, 'YIELD', ' ');
 
             return $operator;
         }

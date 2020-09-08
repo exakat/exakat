@@ -30,7 +30,6 @@ class Circlevis extends Reports {
     public function _generate(array $analyzerList): string {
         $analysisResults = $this->dump->fetchTable('namespaces');
         $analysisResults->load();
-        $code_dir = $this->config->code_dir;
 
         $results = array('name' => '\\',
                          'children' => array(),
