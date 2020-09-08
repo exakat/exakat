@@ -16,12 +16,12 @@ $expected     = array(array('key'    => '$b1',
                             'value' => '1',
                            ),
 
-                      array('key'    => '$k',
-                            'value' => '1',
+                      array('key'    => '$y',
+                            'value' => '6',
                            ),
 
                       array('key'    => 'None',
-                            'value' => '6',
+                            'value' => '1',
                            ),
                      );
 

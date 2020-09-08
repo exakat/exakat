@@ -28,29 +28,25 @@ class CollectForeachFavorite extends AnalyzerArrayHashResults {
     public function analyze(): void {
         // Foreach, values only
         $this->atomIs('Foreach')
+             ->hasNoOut('INDEX')
              ->outIs('VALUE')
-             ->atomIsNot('Keyvalue')
              ->values('fullcode');
         $valuesOnly = $this->rawQuery();
 
         // Foreach, index only
         $this->atomIs('Foreach')
+             ->hasOut('INDEX')
              ->outIs('VALUE')
-             ->atomIs('Keyvalue')
-             ->outIs('INDEX')
              ->values('fullcode');
         $values = $this->rawQuery();
 
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
+             ->outIs('INDEX')
              ->values('fullcode');
         $keys = $this->rawQuery();
 
-        $statsKeys = array_count_values($keys->toArray());
-        $statsKeys['None'] = count($valuesOnly);
-
-        $statsValues = array_count_values(array_merge($values->toArray(), $valuesOnly->toArray()));
+        $statsValues = array_count_values(array_merge($values->toArray(), $valuesOnly->toArray(), $keys->toArray()));
+        $statsValues['None'] = count($valuesOnly);
 
         $valuesSQL = array();
         foreach($statsValues as $name => $count) {
