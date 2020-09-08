@@ -77,7 +77,7 @@ class StubsJson extends Reports {
         // functions
         $res = $this->dump->fetchTable('functions');
         foreach($res->toArray() as $function) {
-            if ($function['type'] === 'closure') { continue; }
+            if (in_array($function['type'], array('closure', 'arrowfunction'), \STRICT_COMPARISON)) { continue; }
 
             $details = array('returntypes' => explode('|', $function['returntype']),
                              'reference'   => $function['reference'] === 1,
@@ -185,7 +185,9 @@ class StubsJson extends Reports {
                              'attributes'   => $this->normalizeAttributes($argument['attributes'] ?? ''),
                              );
             if ($argument['citId'] == 0) {
-                $data['versions'][$namespaces[$function2ns[$argument['methodId']]]]['functions'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;
+                if (isset($function2ns[$argument['methodId']])) {
+                    $data['versions'][$namespaces[$function2ns[$argument['methodId']]]]['functions'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;
+                }
             } elseif (isset($data['versions'][$namespaces[$cits2ns[$argument['citId']]]][$cits2type[$argument['citId']]][$cits[$argument['citId']]]['methods'][$methods[$argument['methodId']]])) {
                 $data['versions'][$namespaces[$cits2ns[$argument['citId']]]][$cits2type[$argument['citId']]][$cits[$argument['citId']]]['methods'][$methods[$argument['methodId']]]['arguments'][$argument['rank']] = $details;
             } else {
