@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Highchart;
 
 class Weekly extends Ambassador {
     const FILE_FILENAME  = 'weekly';
@@ -40,6 +41,7 @@ class Weekly extends Ambassador {
     protected $projectPath     = null;
     protected $finalName       = null;
     private $globalGrade  = 0;
+    private $rulesToShow = array();
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -130,6 +132,7 @@ class Weekly extends Ambassador {
         }
 
         $this->globalGrade = 0;
+        $this->detailsGrade = array();
 
         $grade = 0;
         foreach($this->resultsCounts as $name => $value) {
@@ -187,9 +190,6 @@ class Weekly extends Ambassador {
 
         $baseHTML = $this->getBasedPage($section->source);
 
-        $tags = array();
-        $code = array();
-
         // Bloc top left
         $grade = <<<HTML
               <div class="box">
@@ -212,7 +212,7 @@ HTML;
                 <div class="box-header with-border">
                   <h3 class="box-title">This Week</h3>
                 </div>
-$table
+$table[html]
                 <!-- /.box-body -->
               </div>
 
@@ -224,9 +224,9 @@ HTML;
 
         // top 10
         $week = array_keys($this->weeks)[0];
-        $fileHTML     = $this->getTopFile($this->weeks[$this->current]->analysis ?? array(), "weekly-$week");
+        $fileHTML     = $this->getTopFile($this->weeks[$this->current]->analysis ?? array(), "week0");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis ?? array(), "weekly-$week");
+        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis ?? array(), "week0");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $globalData = array(self::G_CRITICAL  => (object) array('label' => 'Critical', 'value' => 0),
@@ -240,257 +240,40 @@ HTML;
             }
         }
         unset($globalData[self::G_NONE]);
+        $donut = array();
         foreach($globalData as $data) {
-            $data->value = intval($data->value * 100) / 100;
+            $donut[] = array('label' => $data->label,
+                             'value' => intval($data->value * 100) / 100,
+                             );
         }
 
-        $globalData = json_encode(array_values($globalData));
+        $severity = $this->getSeverityBreakdown();
 
-        $blocjs = <<<JAVASCRIPT
-  <script>
-    $(document).ready(function() {
-      Morris.Donut({
-        element: 'donut-chart_grade',
-        resize: true,
-        colors: ["#0010E5", "#00DBC5", "#1BD200", "#C8A800", "#BF0023"],
-        data: $globalData
-      });
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
+        $highchart = new Highchart();
 
-         // General
-         background2: '#F0F0EA'
-      };
+        $highchart->addDonut('donut-chart_grade',  $donut);
 
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATACRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATANONE]
-          }]
-      });
-
-      $('#container').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAANALYZERLIST]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATAANALYZERCRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAANALYZERMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAANALYZERMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATAANALYZERNONE]
-          }]
-      });
-    });
-  </script>
-JAVASCRIPT;
-
-        // Filename Overview
+        $this->rulesToShow = $this->weeks[array_keys($this->weeks)[0]]->analysis;
         $fileOverview = $this->getFileOverview();
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = $fileOverview['scriptDataFiles'];
-        $tags[] = 'SCRIPTDATAMAJOR';
-        $code[] = $fileOverview['scriptDataMajor'];
-        $tags[] = 'SCRIPTDATACRITICAL';
-        $code[] = $fileOverview['scriptDataCritical'];
-        $tags[] = 'SCRIPTDATANONE';
-        $code[] = $fileOverview['scriptDataNone'];
-        $tags[] = 'SCRIPTDATAMINOR';
-        $code[] = $fileOverview['scriptDataMinor'];
+        $highchart->addSeries('filename',
+                              $fileOverview['scriptDataFiles'],
+                              array('name' => 'Critical', 'data' => $fileOverview['scriptDataCritical']),
+                              array('name' => 'Major',    'data' => $fileOverview['scriptDataMajor']),
+                              array('name' => 'Minor',    'data' => $fileOverview['scriptDataMinor']),
+                              array('name' => 'None',     'data' => $fileOverview['scriptDataNone'])
+                              );
 
-        // Analyzer Overview
         $analyzerOverview = $this->getAnalyzerOverview();
-        $tags[] = 'SCRIPTDATAANALYZERLIST';
-        $code[] = $analyzerOverview['scriptDataAnalyzer'];
-        $tags[] = 'SCRIPTDATAANALYZERMAJOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMajor'];
-        $tags[] = 'SCRIPTDATAANALYZERCRITICAL';
-        $code[] = $analyzerOverview['scriptDataAnalyzerCritical'];
-        $tags[] = 'SCRIPTDATAANALYZERNONE';
-        $code[] = $analyzerOverview['scriptDataAnalyzerNone'];
-        $tags[] = 'SCRIPTDATAANALYZERMINOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMinor'];
+        $highchart->addSeries('container',
+                              $analyzerOverview['scriptDataAnalyzer'],
+                              array('name' => 'Critical', 'data' => $analyzerOverview['scriptDataAnalyzerCritical']),
+                              array('name' => 'Major',    'data' => $analyzerOverview['scriptDataAnalyzerMajor']),
+                              array('name' => 'Minor',    'data' => $analyzerOverview['scriptDataAnalyzerMinor']),
+                              array('name' => 'None',     'data' => $analyzerOverview['scriptDataAnalyzerNone'])
+                              );
 
-        $blocjs = str_replace($tags, $code, $blocjs);
+        $blocjs = (string) $highchart;
+
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $section->title);
         $this->putBasedPage($section->file, $finalHTML);
@@ -508,14 +291,17 @@ JAVASCRIPT;
               <div class="block-cell-issue text-center">&nbsp;</div>
           </div>', 5);
 
+        $dataScript = array();
         foreach (array_keys($this->weeks) as $id => $week) {
             $total = 0;
             foreach($this->weeks[$week]->analysis as $analyzer) {
                 $total += $this->resultsCounts[$analyzer] ?? 0;
+                $dataScript[] = $this->resultsCounts[$analyzer];
             }
+
             $html .= <<<HTML
     <div class="clearfix">
-      <a href="weekly-$week.html">
+      <a href="week$id.html">
         <div class="block-cell-name">{$this->titles[$id]}</div>
       </a>
       <div class="block-cell-issue text-center">$total</div>
@@ -528,7 +314,19 @@ HTML;
               <div class="block-cell-issue text-center">&nbsp;</div>
           </div>', 5);
 
-        return $html;
+        return array('html'   => $html,
+                     'script' => $dataScript);
+    }
+
+    protected function getSeveritiesNumberBy(string $type = 'file'): array {
+        $res = $this->dump->getSeveritiesNumberBy($this->rulesToShow, $type);
+
+        $return = array();
+        foreach($res->toArray() as $value) {
+            $return[$value[$type]][$value['severity']] = $value['count'];
+        }
+
+        return $return;
     }
 }
 
