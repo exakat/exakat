@@ -52,6 +52,7 @@ class ShouldPreprocess extends Analyzer {
                             'Power',
                             'Bitshift',
                             'Logical',
+                            'Bitoperation',
                             'Not',
                             'Comparison',
                             ))
@@ -61,7 +62,7 @@ class ShouldPreprocess extends Analyzer {
              ->noAtomWithoutPropertyInside('Functioncall', 'fullnspath', $functionList)
 
             // Filter php constants
-             ->noAnalyzerInside(array('Identifier', 'Nsname'), 'Constants/IsPhpConstant')
+             ->noAnalyzerInside(array('Identifier', 'Nsname', 'Staticconstant'), 'Constants/IsPhpConstant')
 
             // PHP Constants are not authorized
              ->noAtomInside($dynamicAtoms);
@@ -81,6 +82,12 @@ class ShouldPreprocess extends Analyzer {
         // Function only applied to constants
         $this->atomFunctionIs($functionListNoArray)
              ->is('constant', true)
+             // Skip constants
+             ->not(
+                $this->side()
+                     ->outIs('ARGUMENT')
+                     ->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
+             )
              ->back('first');
         $this->prepareQuery();
 

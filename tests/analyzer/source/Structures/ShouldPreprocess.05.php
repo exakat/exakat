@@ -12,6 +12,7 @@ $a = explode(',', self::A);
 // Check for variables
 class B { const A = 'a,b,c,d'; }
 $a = explode(',', B::A);
+$a = explode(',', 'A');
 
 // Check for variables
 class B { 
