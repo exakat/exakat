@@ -27,20 +27,26 @@ use Exakat\Analyzer\Analyzer;
 
 class CompareHash extends Analyzer {
     public function analyze(): void {
+        $hashFunctions = array('\hash', 
+                               '\md5', 
+                               '\sha1', 
+                               '\md5_file', 
+                               '\sha1_file', 
+                               '\crc32', 
+                               '\crypt',
+                               '\hash_hmac',
+                               '\hash_final',
+                               '\hash_hmac_file',
+                               '\hash_hkdf',
+                               '\hash_pbkdf2',
+                               );
+
         // md5() == something
         $this->atomIs('Comparison')
              ->codeIs(array('==', '!='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Functioncall')
-             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32', 'crypt'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // if (hash())
-        $this->atomIs('Ifthen')
-             ->outIs('CONDITION')
-             ->atomIs('Functioncall')
-             ->codeIs(array('hash', 'md5', 'sha1', 'md5_file', 'sha1_file', 'crc32', 'crypt'))
+             ->fullnspathIs($hashFunctions)
              ->back('first');
         $this->prepareQuery();
     }
