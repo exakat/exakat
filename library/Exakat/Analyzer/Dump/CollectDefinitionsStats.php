@@ -41,7 +41,8 @@ class CollectDefinitionsStats extends AnalyzerArrayHashResults {
 groupCount("x").by(label).cap("x")
 GREMLIN
 );
-        $resAll = $this->rawQuery()->toArray()[0];
+        // Possibly empty when none of the above are used.
+        $resAll = $this->rawQuery()->toArray()[0] ?? array();
 
         $this->atomIs(array_keys($types))
              ->raw(<<<'GREMLIN'
@@ -51,7 +52,8 @@ where(
 
 GREMLIN
 );
-        $resDefined = $this->rawQuery()->toArray()[0];
+        // Possibly empty when none of the above are used.
+        $resDefined = $this->rawQuery()->toArray()[0] ?? array();
 
         foreach($types as $label => $name) {
             $this->analyzerValues[] = array($name,
