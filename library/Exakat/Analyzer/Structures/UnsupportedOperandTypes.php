@@ -81,7 +81,7 @@ class UnsupportedOperandTypes extends Analyzer {
              ->atomIs(array('String', 'Integer', 'Float', 'Boolean'))
              ->back('first')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(array('Member', 'Staticmember'))
+             ->atomIs(array('Member', 'Staticproperty'))
              ->inIs('DEFINITION')
              ->inIs('PPP')
              ->outIs('TYPEHINT')
