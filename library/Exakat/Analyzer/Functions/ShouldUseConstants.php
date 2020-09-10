@@ -30,7 +30,9 @@ class ShouldUseConstants extends Analyzer {
         $functions = $this->loadIni('constant_usage.ini');
 
         // todo : support 0 as a valid value
-        $authorizedAtoms = array('Logical', 'Addition',
+        $authorizedAtoms = array('Logical', 
+                                 'Bitoperation',
+                                 'Addition',
                                  'Identifier',
                                  'Nsname',
                                  'Variable',
@@ -68,7 +70,7 @@ class ShouldUseConstants extends Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->outIsIE(array('THEN', 'ELSE', 'CODE'))
-                 ->atomIs(array('Logical', 'Addition'))
+                 ->atomIs(array('Bitoperation', 'Addition'))
                  ->tokenIsNot(array('T_OR', 'T_PLUS'))
                  ->back('first');
             $this->prepareQuery();
@@ -78,7 +80,7 @@ class ShouldUseConstants extends Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->outIsIE(array('THEN', 'ELSE', 'CODE'))
-                 ->atomIs(array('Logical', 'Addition'))
+                 ->atomIs(array('Bitoperation', 'Addition'))
                  ->tokenIs(array('T_OR', 'T_PLUS'))
                  // Skip Ternaries and parenthesis
                  ->filter(
