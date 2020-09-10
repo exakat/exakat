@@ -30,15 +30,13 @@ class Php74ArrayKeyExists extends Analyzer {
     public function analyze(): void {
         // array_key_exists() : No initial \, no use definition
         $this->atomFunctionIs('\\array_key_exists')
-             ->tokenIsNot('T_NS_SEPARATOR')  // Not a \array_keys_exists
+             ->tokenIsNot(array('T_NS_SEPARATOR', 'T_NAME_FULLY_QUALIFIED'))  // Not a \array_keys_exists
              ->not(
                 $this->side()
                      ->outIs('NAME')
-                     ->inIs('DEFINITION')
+                     ->inIs('USED')
                      ->atomIs(array('Nsname', 'Identifier', 'As'))
-                     ->inIs('USE')
-                     ->atomIs('Usenamespace')
-                     ->hasOut('FUNCTION')
+                     ->is('use', 'function')
              )
              ->goToInstruction('Namespace')
              ->outIs('NAME')
