@@ -34,7 +34,7 @@ class Sequences {
     private $ranksPile           = array();
     private $elementsPile        = array();
 
-    public function start($sequence) {
+    public function start(Atom $sequence) {
         ++$this->level;
 
         $this->sequences[$this->level]    = $sequence;
@@ -45,14 +45,14 @@ class Sequences {
         $this->elements                = array();
     }
 
-    public function add(Atom $element) {
+    public function add(Atom $element) : void {
         ++$this->rank;
         $element->rank                        = $this->rank;
         $this->elements[]                     = $element;
         $this->sequences[$this->level]->count = $element->rank + 1;
     }
 
-    public function getElements() {
+    public function getElements() : array {
         return $this->elements;
     }
 
@@ -65,7 +65,7 @@ class Sequences {
 
         --$this->level;
 
-        return $this->sequences[$this->level] ?? null;
+        return $this->sequences[$this->level];
     }
 }
 

@@ -212,7 +212,7 @@ class Atom implements AtomInterface {
                 $value = (integer) $value;
             }
 
-            $properties[$l] = array( new Property($id++, $value) );
+            $properties[$l] = array( new Property($id++, (string) $value) );
         }
 
         $object = array('id'         => $this->id,
