@@ -32,9 +32,6 @@ abstract class Graph {
                                  'gsneo4jV3',
                                  'tinkergraph',
                                  'tinkergraphv3',
-                                 'janusgraph',
-                                 'orientdb',
-                                 'bitsy',
                                  );
 
     public function __construct() {
