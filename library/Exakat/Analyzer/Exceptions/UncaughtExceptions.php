@@ -27,6 +27,7 @@ class UncaughtExceptions extends Analyzer {
     public function dependsOn(): array {
         return array('Exceptions/CaughtExceptions',
                      'Exceptions/DefinedExceptions',
+                     'Complete/PropagateCalls',
                     );
     }
 
@@ -44,7 +45,7 @@ class UncaughtExceptions extends Analyzer {
         } else {
             $this->atomIs('Throw')
                  ->outIs('THROW')
-                 ->atomIs('New')
+                 ->atomIs('New', self::WITH_VARIABLES)
                  ->outIs('NEW')
                  ->tokenIs(self::STATICCALL_TOKEN)
                  ->has('fullnspath')
