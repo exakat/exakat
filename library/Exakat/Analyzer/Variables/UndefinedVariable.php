@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedVariable extends Analyzer {
+    public function dependsOn() : array {
+        return array('Functions/DynamicCode',
+                    );
+    }
+
     public function analyze(): void {
         // function foo() { echo $b;}
         $this->atomIs('Variabledefinition')
@@ -34,9 +39,7 @@ class UndefinedVariable extends Analyzer {
                 $this->side()
                      ->inIs('DEFINITION')
                      ->atomIs(self::FUNCTIONS_ALL)
-                     ->outIs('BLOCK')
-                     ->atomInsideNoDefinition(array('Eval', 'Include', 'Functioncall'))
-                     ->fullnspathIs(array('\\eval', '\\include', '\\include_once', '\\require', '\\require_once', '\\extract', ))
+                     ->analyzerIs('Functions/DynamicCode')
              )
 
              // Not from foreach
@@ -69,9 +72,7 @@ class UndefinedVariable extends Analyzer {
                 $this->side()
                      ->inIs('DEFINITION')
                      ->atomIs(self::FUNCTIONS_ALL)
-                     ->outIs('BLOCK')
-                     ->atomInsideNoDefinition(array('Eval', 'Include', 'Functioncall'))
-                     ->fullnspathIs(array('\\eval', '\\include', '\\include_once', '\\require', '\\require_once', '\\extract', ))
+                     ->analyzerIs('Functions/DynamicCode')
              )
 
              ->filter(
