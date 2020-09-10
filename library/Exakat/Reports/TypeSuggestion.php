@@ -274,13 +274,13 @@ HTML;
                         break;
 
                     default:
-                        switch($className) {
+                        switch($methodName) {
                             case 'Properties' :
-                            $methodFullcode = $methodName;
-                            break;
+                                $methodFullcode = $methodName;
+                                break;
 
-                        default:
-                            $methodFullcode = ' function ' . $methodName . '()';
+                            default:
+                                $methodFullcode = ' function ' . $methodName . '()';
                         }
                 }
 
@@ -308,7 +308,11 @@ HTML;
             } elseif ($statusMethods === true && $statusProperties === false) {
                 $statusHtml = 'P : -; M : &#x2705; ';
             } elseif ($statusMethods === false && $statusProperties === true) {
-                $statusHtml = 'P : &#x2705;; M : - ';
+                if (in_array($className, array('Functions', 'Closures', 'Arrowfunctions'), \STRICT_COMPARISON)) {
+                    $statusHtml = 'M : - ';
+                } else {
+                    $statusHtml = 'P : &#x2705;; M : - ';
+                }
             } else {
                 $statusHtml = '';
             }
