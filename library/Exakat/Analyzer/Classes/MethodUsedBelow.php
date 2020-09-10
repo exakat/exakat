@@ -26,9 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MethodUsedBelow extends Analyzer {
     public function dependsOn(): array {
-        return array('Complete/CreateDefaultValues',
-                     'Complete/SetClassMethodRemoteDefinition',
-                     'Complete/PropagateCalls',
+        return array('Complete/OverwrittenMethods',
                     );
     }
 
