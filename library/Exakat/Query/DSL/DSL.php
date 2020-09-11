@@ -137,11 +137,12 @@ abstract class DSL {
                                 array $availableFunctioncalls = array(),
                                 array &$availableVariables    = array(),
                                 array &$availableLabels       = array(),
-                                $ignoredcit,
-                                $ignoredfunctions,
-                                $ignoredconstants,
-                                $dependsOn,
-                                $analyzerQuoted) {
+                                array $ignoredcit             = array(),
+                                array $ignoredfunctions       = array(),
+                                array $ignoredconstants       = array(),
+                                array $dependsOn              = array(),
+                                string $analyzerQuoted        = ''
+                                ) {
         $this->dslfactory             = $dslfactory;
         $this->dictCode               = exakat('dictionary');
         $this->availableAtoms         = $availableAtoms;
