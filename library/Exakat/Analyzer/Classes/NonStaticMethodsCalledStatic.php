@@ -36,15 +36,68 @@ class NonStaticMethodsCalledStatic extends Analyzer {
         // check outside the class : the first found class has not method
         // Here, we find methods that are in the grand parents, and not static.
 
-        // Go to all parents class
+        // the method is outside a class
         $this->atomIs('Staticmethodcall')
+             ->hasNoClassTrait()
+
+             ->inIs('DEFINITION')
+             ->isNot('static', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // the method is defined in a child class
+        $this->atomIs('Staticmethodcall')
+             ->goToClass()
+             ->savePropertyAs('fullnspath', 'fnqOrigin')
+             ->back('first')
+
              ->outIs('CLASS')
              ->atomIsNot(array('Parent', 'Self', 'Static'))
+
+             // The child must be below the parent, then it is an external class
+             ->filter(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->goToAllParents(self::EXCLUDE_SELF)
+                     ->samePropertyAs('fullnspath', 'fnqOrigin')
+             )
              ->back('first')
 
              ->inIs('DEFINITION')
              ->isNot('static', true)
              ->back('first');
+        $this->prepareQuery();
+
+        // the method is defined in a parent class or self
+        $this->atomIs('Staticmethodcall')
+             ->goToClass()
+             ->savePropertyAs('fullnspath', 'fnqOrigin')
+             ->back('first')
+
+             ->outIs('CLASS')
+             ->atomIsNot(array('Parent', 'Self', 'Static'))
+
+             // The child must be below the parent, then it is an external class
+             ->not(
+                $this->side()
+                     ->inIs('DEFINITION')
+                     ->goToAllParents(self::INCLUDE_SELF)
+                     ->samePropertyAs('fullnspath', 'fnqOrigin')
+             )
+             ->back('first')
+
+             ->inIs('DEFINITION')
+             ->isNot('static', true)
+             
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->back('first')
+             ->not(
+                $this->side()
+                     ->goToClass()
+                     ->goToAllParents(self::EXCLUDE_SELF)
+                     ->samePropertyAs('fullnspath', 'fnp')
+             );
         $this->prepareQuery();
 
         // ['a', 'm']() ; class a { function m() {}}

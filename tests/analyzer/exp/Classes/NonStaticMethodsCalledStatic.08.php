@@ -1,9 +1,6 @@
 <?php
 
 $expected     = array('P::nonStaticAClass( )',
-                      'A1::nonStaticButSelfClass( )',
-                      'b::nonStaticButSelfClass( )',
-                      '\\a1::nonStaticButSelfClass( )',
                      );
 
 $expected_not = array('P::staticAClass( )',
@@ -13,6 +10,9 @@ $expected_not = array('P::staticAClass( )',
                       'self::nonStaticButSelfClaSs( )',
                       'self::nonStaticButSelfClasS( )',
                       'static::nonStaticButSelfClasS( )',
+                      'A1::nonStaticButSelfClass( )',
+                      'b::nonStaticButSelfClass( )',
+                      '\\a1::nonStaticButSelfClass( )',
                      );
 
 ?>

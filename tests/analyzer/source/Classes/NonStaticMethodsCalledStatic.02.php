@@ -6,6 +6,9 @@ class y {
 
 }
 
+        y::b(1);
+
+
 class x extends y {
     
     public function __construct($a) {

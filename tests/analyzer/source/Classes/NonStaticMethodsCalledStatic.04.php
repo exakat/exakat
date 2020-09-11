@@ -30,6 +30,7 @@ class c extends b {
         d::statica();
         e::normale();    // e is not in the current class tree,
         c::normale();
+        c::normala();
     }
 }
 
