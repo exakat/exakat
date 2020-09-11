@@ -207,14 +207,14 @@ abstract class Analyzer extends TestCase {
         $list  = array_map(function(array $x) : array  { unset($x['id']); return $x;}, $list);
         $list2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $list);
 
-        $expected2     = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected);
-        $expectedNot2  = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expectedNot);
+        $expected2     = array_map(function(string $x) : string { return crc32(json_encode($x));}, $expected);
+        $expectedNot2  = array_map(function(string $x) : string { return crc32(json_encode($x));}, $expectedNot);
 
         $display = array();
         $missed = array_diff($expected2, $list2);
         if(!empty($missed)) {
             foreach($missed as $key => $value) {
-                $display[] = $list[$key];
+                $display[] = $expected2[$key];
             }
         }
         $this->assertEmpty($missed, count($missed)." expected values were not found :\n '".join("',\n '", $missed)."'\n\nin the ".count($display)." received values of \n".print_r($display, true));
