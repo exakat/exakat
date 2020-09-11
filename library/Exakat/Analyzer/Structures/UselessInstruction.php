@@ -271,6 +271,13 @@ class UselessInstruction extends Analyzer {
              ->samePropertyAs('fullcode', 'var')
              ->back('first');
         $this->prepareQuery();
+
+        // $a ?? null
+        $this->atomIs('Coalesce')
+             ->outIs('RIGHT')
+             ->atomIs('Null', self::WITH_CONSTANTS)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
