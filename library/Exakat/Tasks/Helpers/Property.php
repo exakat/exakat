@@ -26,8 +26,9 @@ class Property {
     public $id    = 0;
     public $value = 'No value set';
 
-    public function __construct(int $id, string $value) {
+    public function __construct(int $id, $value) {
         $this->id    = $id;
+        // $value might be an integer or a string
         $this->value = $value;
     }
 }
