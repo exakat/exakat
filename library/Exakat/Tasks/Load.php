@@ -874,7 +874,6 @@ class Load extends Tasks {
             } while ($this->id < $n);
 
             $sequence = $this->sequence;
-            $this->endSequence();
 
             $this->addLink($id1, $sequence, 'FILE');
         } catch (LoadError $e) {
@@ -5126,7 +5125,7 @@ class Load extends Tasks {
             $literal->encoding = mb_detect_encoding($literal->noDelimiter);
             if ($literal->encoding === 'UTF-8') {
                 $blocks = unicode_blocks($literal->noDelimiter);
-                $literal->block = array_keys($blocks)[0];
+                $literal->block = array_keys($blocks)[0] ?? '';
             }
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_BRACKET) {
                 $literal = $this->processBracket();

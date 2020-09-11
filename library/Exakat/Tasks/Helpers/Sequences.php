@@ -56,7 +56,7 @@ class Sequences {
         return $this->elements;
     }
 
-    public function end() {
+    public function end() : Atom {
         assert($this->level > 0, "Trying to pop a non-existing sequence ($this->level)\n");
 
         array_pop($this->sequences);
