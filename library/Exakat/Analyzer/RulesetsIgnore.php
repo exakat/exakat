@@ -40,7 +40,7 @@ class RulesetsIgnore implements RulesetsInterface {
         return array();
     }
 
-    public function getRulesetsForAnalyzer(array $list = array()): array {
+    public function getRulesetsForAnalyzer(array $analyzer = array()): array {
         return array();
     }
 

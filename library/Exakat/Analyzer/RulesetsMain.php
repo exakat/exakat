@@ -96,11 +96,11 @@ SQL;
         return $return;
     }
 
-    public function getRulesetsForAnalyzer(array $list = array()): array {
-        if (empty($list)) {
+    public function getRulesetsForAnalyzer(array $analyzer = array()): array {
+        if (empty($analyzer)) {
             $where = '';
-        } elseif (is_array($list)) {
-            $where = ' WHERE c.name IN (' . makeList($list) . ') ';
+        } elseif (is_array($analyzer)) {
+            $where = ' WHERE c.name IN (' . makeList($analyzer) . ') ';
         }
 
         $query = <<<SQL

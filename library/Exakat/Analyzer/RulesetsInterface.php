@@ -28,7 +28,7 @@ interface RulesetsInterface {
 
     public function getRulesetForAnalyzer(string $analyzer = ''): array;
 
-    public function getRulesetsForAnalyzer(array $list = array()): array;
+    public function getRulesetsForAnalyzer(array $analyzer = array()): array;
 
     public function getSeverities(): array;
 
