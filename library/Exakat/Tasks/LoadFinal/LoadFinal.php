@@ -90,11 +90,6 @@ GREMLIN;
         $task->run();
         $this->log('FixFullnspathConstants');
 
-        $task = new SpotPHPNativeConstants();
-        $task->setPHPconstants($this->PHPconstants);
-        $task->run();
-        $this->log('spotPHPNativeConstants');
-
         $task = new FinishIsModified();
         $task->run();
         $this->log('FinishIsModified');
@@ -199,7 +194,8 @@ GREMLIN;
         // namesapce x { function substr() ; substr(); }
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Functioncall")
+g.V().hasLabel("Functioncall", "Identifier", "Nsname")
+     .not(__.in('NAME'))
      .not(has('absolute', true))
      .has('token', 'T_STRING')
      .has("fullnspath")
@@ -207,7 +203,10 @@ g.V().hasLabel("Functioncall")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath");}
      .in("DEFINITION")
-     .hasLabel("Function")
+     .hasLabel("Function", "Constant")
+     .optional(
+        __.hasLabel('Constant').out('NAME')
+     )
      .sideEffect{ actual = it.get().value("fullnspath");}
      .filter{ actual != cc; }
      .select("identifier")
@@ -219,7 +218,7 @@ g.V().hasLabel("Functioncall")
 GREMLIN;
         $result = $this->gremlin->query($query);
 
-        display($result->toInt() . ' fixed Fullnspath for Functions');
+        display($result->toInt() . ' fixed Fullnspath for Functions and Constants');
         $this->log->log(__METHOD__);
     }
 

@@ -28,6 +28,8 @@ class IsPhp extends Plugin {
     public $name = 'isPhp';
     public $type = 'boolean';
     private $phpFunctions = array();
+    private $phpConstants = array();
+    private $phpClasses = array();
 
     public function __construct() {
         parent::__construct();
@@ -35,6 +37,12 @@ class IsPhp extends Plugin {
         $config = exakat('config');
         $this->phpFunctions = parse_ini_file($config->dir_root.'/data/php_functions.ini')['functions'] ?? array();
         $this->phpFunctions = makeFullnspath($this->phpFunctions);
+
+        $this->phpConstants = parse_ini_file($config->dir_root.'/data/php_constants.ini')['constants'] ?? array();
+        $this->phpConstants = makeFullnspath($this->phpConstants, \FNP_CONSTANT);
+
+        $this->phpClasses = parse_ini_file($config->dir_root.'/data/php_classes.ini')['classes'] ?? array();
+        $this->phpClasses = makeFullnspath($this->phpClasses);
     }
 
     public function run(Atom $atom, array $extras): void {
@@ -42,6 +50,28 @@ class IsPhp extends Plugin {
             case 'Functioncall' :
                 $path = substr($atom->fullnspath, strrpos($atom->fullnspath, '\\'));
                 if (in_array($path, $this->phpFunctions, \STRICT_COMPARISON)) {
+                    $atom->isPhp = true;
+                    $atom->fullnspath = $path;
+                }
+                break;
+
+            case 'Constant' :
+                $atom->isPhp = false;
+                $extras['NAME']->isPhp = false;
+                break;
+
+            case 'Newcall' :
+                $path = substr($atom->fullnspath, strrpos($atom->fullnspath, '\\'));
+                if (in_array($path, $this->phpClasses, \STRICT_COMPARISON)) {
+                    $atom->isPhp = true;
+                    $atom->fullnspath = $path;
+                }
+                break;
+
+            case 'Identifier' :
+            case 'Nsname' :
+                $path = substr($atom->fullnspath, strrpos($atom->fullnspath, '\\'));
+                if (in_array($path, $this->phpConstants, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                     $atom->fullnspath = $path;
                 }

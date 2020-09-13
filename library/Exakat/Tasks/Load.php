@@ -3001,6 +3001,7 @@ class Load extends Tasks {
                                                               $this->phptokens::T_NAME_FULLY_QUALIFIED,
                                                               ), \STRICT_COMPARISON )) {
             $nsname = $this->processNsname();
+            $this->runPlugins($nsname);
             return $this->processFCOA($nsname);
         } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
                                                                   $this->phptokens::T_OPEN_CURLY,
@@ -3042,7 +3043,6 @@ class Load extends Tasks {
 
         $string->fullcode   = $this->tokens[$this->id][1];
         $string->absolute   = self::NOT_ABSOLUTE;
-        $this->runPlugins($string);
 
         $this->pushExpression($string);
 
@@ -3066,7 +3066,6 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // Nothing to do
         } else {
-//            $this->getFullnspath($string, 'const', $string);
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
@@ -3075,6 +3074,8 @@ class Load extends Tasks {
         } else {
             $string = $this->processFCOA($string);
         }
+
+        $this->runPlugins($string);
 
         return $string;
     }
@@ -6098,16 +6099,13 @@ class Load extends Tasks {
     private function processAttribute(): AtomInterface {
         do {
             $attribute = $this->processNext();
-            print_r($attribute);
 
             $this->popExpression();
             $attribute->fullcode = '#[ ' . $attribute->fullcode . ' ]';
 
             $this->attributes[] = $attribute;
             ++$this->id; // skip ]
-            print_r($this->tokens[$this->id]);
         } while($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
-            print_r($this->tokens[$this->id]);
 
         return $attribute;
     }

@@ -255,7 +255,6 @@ class Atom implements AtomInterface {
                 $return[] = $property;
             }
         }
-        print_r($return);
 
         return $return;
     }
