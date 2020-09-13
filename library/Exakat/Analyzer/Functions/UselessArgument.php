@@ -39,29 +39,25 @@ class UselessArgument extends Analyzer {
              ->savePropertyAs('rank', 'ranked')
              ->back('first')
 
-             // More than 2 calls
+             // More than 2 calls to the method 
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')
                      ->raw('count().is(gt(2))')
              )
 
-             // No variable incoming
-             ->not(
-                $this->side()
-                     ->outIs('DEFINITION')
-                     ->outIsIE('METHOD')
-                     ->outWithRank('ARGUMENT', 'ranked')
-                     ->atomIsNot(array('Integer', 'Float', 'String', 'Boolean', 'Null', 'Identifier', 'Nsname'), self::WITHOUT_CONSTANTS)
-             )
-
+            // When a non-literal value is found, it is registered in the final stats ($x => 1, 2 => 1) and make the filter fail automatically.
+            // constants are used by value with the optional step.
              ->filter(
                 $this->side()
                      ->initVariable('x', '[:]')
                      ->outIs('DEFINITION')
                      ->outIsIE('METHOD')
                      ->outWithRank('ARGUMENT', 'ranked')
-                     ->atomIs(array('Integer', 'Float', 'String', 'Boolean', 'Null'), self::WITH_CONSTANTS)
+                     ->optional(
+                        $this->side()
+                             ->atomIs(array('Integer', 'Float', 'String', 'Boolean', 'Null', 'Arrayliteral'), self::WITH_CONSTANTS)
+                     )
                      ->raw('sideEffect{x[it.get().value("code")] = 1;}.fold().filter{ x.size() == 1;}')
              )
              ->back('first');
