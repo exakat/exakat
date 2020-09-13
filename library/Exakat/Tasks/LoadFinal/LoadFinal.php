@@ -66,11 +66,6 @@ class LoadFinal {
         $this->fixFullnspathFunctions();
         $this->log('fixFullnspathFunctions');
 
-        $task = new SpotPHPNativeFunctions();
-        $task->setPHPfunctions($this->PHPfunctions);
-        $task->run();
-        $this->log('SpotPHPNativeFunctions');
-
         $task = new SpotExtensionNativeFunctions();
         $task->run();
         $this->log('Spot Extensions Native Functions');
@@ -200,12 +195,15 @@ GREMLIN;
     // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded
     private function fixFullnspathFunctions(): void {
         display('fixing Fullnspath for Functions');
+        // Fix fullnspath with definition local to namespace when there is a definition 
+        // namesapce x { function substr() ; substr(); }
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall")
      .not(has('absolute', true))
      .has('token', 'T_STRING')
      .has("fullnspath")
+     .has("isPhp", true)
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath");}
      .in("DEFINITION")
@@ -213,7 +211,10 @@ g.V().hasLabel("Functioncall")
      .sideEffect{ actual = it.get().value("fullnspath");}
      .filter{ actual != cc; }
      .select("identifier")
-     .sideEffect{ it.get().property("fullnspath", actual); }
+     .sideEffect{ 
+        it.get().property("fullnspath", actual);
+        it.get().property('isPhp',      false); 
+    }
      .count();
 GREMLIN;
         $result = $this->gremlin->query($query);

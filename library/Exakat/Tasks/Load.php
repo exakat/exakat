@@ -46,6 +46,7 @@ use Exakat\Tasks\Helpers\Boolval;
 use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
+use Exakat\Tasks\Helpers\IsPhp;
 use Exakat\Tasks\Helpers\IsRead;
 use Exakat\Tasks\Helpers\IsModified;
 use Exakat\Tasks\Helpers\Php;
@@ -266,6 +267,7 @@ class Load extends Tasks {
         $this->plugins[] = new Constant();
         $this->plugins[] = new IsRead();
         $this->plugins[] = new IsModified();
+        $this->plugins[] = new IsPhp();
 
         $this->sequences = new Sequences();
 

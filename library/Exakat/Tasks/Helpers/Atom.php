@@ -74,6 +74,7 @@ class Atom implements AtomInterface {
     public $isRead       = 0;
     public $isModified   = 0;
     public $use          = '';
+    public $isPhp        = 0;
 
     public function __construct(int $id, string $atom, int $line) {
         $this->id   = $id;
@@ -177,6 +178,7 @@ class Atom implements AtomInterface {
                                                  'isModified'  => 0,
                                                  'static'      => 0,
                                                  'isNull'      => 0,
+                                                 'isPhp'       => 0,
                                )
                             );
 
@@ -247,11 +249,13 @@ class Atom implements AtomInterface {
                  'isModified',
                  'static',
                  'isNull',
+                 'isPhp',
                                ) as $property) {
-            if ($this->$property == true) {
+            if ($this->$property === true) {
                 $return[] = $property;
             }
         }
+        print_r($return);
 
         return $return;
     }
