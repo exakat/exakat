@@ -59,12 +59,12 @@ class Nullval extends Plugin {
             case 'Sequence' :
             case 'Magicconstant' :
             case 'Identifier' :
-                $atom->isNull = 0;
+                $atom->isNull = false;
                 break;
 
             case 'Null' :
             case 'Void' :
-                $atom->isNull = 1;
+                $atom->isNull = true;
                 break;
 
             case 'Parenthesis' :

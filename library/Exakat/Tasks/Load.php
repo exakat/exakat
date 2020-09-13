@@ -3069,13 +3069,14 @@ class Load extends Tasks {
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
+        $this->runPlugins($string);
+
         if ( !$this->contexts->isContext(Context::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $string = $this->processFCOA($string);
         }
 
-        $this->runPlugins($string);
 
         return $string;
     }
@@ -3152,7 +3153,7 @@ class Load extends Tasks {
 
             $this->processSGVariable($ppp);
 
-            $ppp->static = 1;
+            $ppp->static = true;
             $ppp->visibility = 'none';
             $ppp->fullcode   = "$option {$returnTypes}$ppp->fullcode";
             $this->makePhpdoc($ppp);
@@ -3178,7 +3179,7 @@ class Load extends Tasks {
                 }
                 $this->popExpression();
 
-                $ppp->static = 1;
+                $ppp->static = true;
                 $ppp->fullcode = "$option $ppp->fullcode";
 
                 return $ppp;
@@ -3209,7 +3210,7 @@ class Load extends Tasks {
 
         $next = $this->processNext();
 
-        $next->static   = 1;
+        $next->static   = true;
         $next->fullcode = "$static $next->fullcode";
         $this->makePhpdoc($next);
         return $next;

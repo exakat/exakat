@@ -25,7 +25,7 @@ declare( strict_types = 1);
 namespace Exakat\Tasks\Helpers;
 
 class Boolval extends Plugin {
-    const NO_VALUE = null;
+    const NO_VALUE = false;
 
     public $name = 'boolean';
     public $type = 'boolean';
@@ -34,7 +34,7 @@ class Boolval extends Plugin {
         // Special case for Arraylist, so it won't be blocked by the filter behind.
         switch ($atom->atom) {
             case 'Arrayliteral' :
-                $atom->boolean = (int) (bool) $atom->count;
+                $atom->boolean = (bool) $atom->count;
                 return;
 
             case 'Assignation' :
@@ -68,21 +68,21 @@ class Boolval extends Plugin {
 
             case 'Identifier' :
                 // $atom->code is a string
-                $atom->boolean = (int) (bool) (string) $atom->code;
+                $atom->boolean = (bool) (string) $atom->code;
                 break;
 
             case 'Constant' :
-                $atom->boolean    = (int) $extras['VALUE']->boolean;
+                $atom->boolean    = $extras['VALUE']->boolean;
                 break;
 
             case 'Nsname' :
                 // when it is a string, there is no fallback
-                $atom->boolean = 0;
+                $atom->boolean = false;
                 break;
 
             case 'Float' :
                 // $atom->code is a string
-                $atom->boolean = (int) (bool) (float) $atom->code;
+                $atom->boolean = (bool) (float) $atom->code;
                 break;
 
             case 'Integer' :
@@ -96,21 +96,21 @@ class Boolval extends Plugin {
                     // PHP 5 will work until it fails
                     $actual = octdec(substr($atom->code, 1));
                 } elseif ($atom->code[0] === '+' || $atom->code[0] === '-') {
-                    $actual = (int) pow(-1, substr_count($atom->code, '-')) * (int) strtr($atom->code, '+-', '  ');
+                    $actual = pow(-1, substr_count($atom->code, '-')) * (int) strtr($atom->code, '+-', '  ');
                 } else {
-                    $actual = (int) $atom->code;
+                    $actual = $atom->code;
                 }
 
-                $atom->boolean = (int) (bool) $actual;
+                $atom->boolean = (bool) $actual;
                 break;
 
             case 'Boolean' :
-                $atom->boolean = (int) (mb_strtolower(trim($atom->code, '\\')) === 'true');
+                $atom->boolean = (mb_strtolower(trim($atom->code, '\\')) === 'true');
                 break;
 
             case 'String' :
             case 'Heredoc' :
-                $atom->boolean = (int) (trimOnce($atom->code) !== '');
+                $atom->boolean = (trimOnce($atom->code) !== '');
                 break;
 
             case 'Null' :
@@ -124,36 +124,36 @@ class Boolval extends Plugin {
 
             case 'Addition' :
                 if ($atom->code === '+') {
-                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->code + (int) $extras['RIGHT']->code);
+                    $atom->boolean = (bool) ((int) $extras['LEFT']->code + (int) $extras['RIGHT']->code);
                 } elseif ($atom->code === '-') {
-                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->code - (int) $extras['RIGHT']->code);
+                    $atom->boolean = (bool) ((int) $extras['LEFT']->code - (int) $extras['RIGHT']->code);
                 }
                 break;
 
             case 'Multiplication' :
                 if ($atom->code === '*') {
-                    $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean * (int) $extras['RIGHT']->boolean);
+                    $atom->boolean = (bool) ((int) $extras['LEFT']->boolean * (int) $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '/') {
                     if ((int) $extras['RIGHT']->boolean === 0) {
                         $atom->boolean = false;
                     } else {
-                        $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean / (int) $extras['RIGHT']->boolean);
+                        $atom->boolean = (bool) ((int) $extras['LEFT']->boolean / (int) $extras['RIGHT']->boolean);
                     }
                 } elseif ($atom->code === '%') {
                     if ((int) $extras['RIGHT']->boolean === 0) {
                         $atom->boolean = false;
                     } else {
-                        $atom->boolean = (int) (bool) ((int) $extras['LEFT']->boolean % (int) $extras['RIGHT']->boolean);
+                        $atom->boolean = (bool) ((int) $extras['LEFT']->boolean % (int) $extras['RIGHT']->boolean);
                     }
                 }
                 break;
 
             case 'Power' :
-                $atom->boolean = (int) (bool) (((bool) $extras['LEFT']->boolean) ** (bool) $extras['RIGHT']->boolean);
+                $atom->boolean = (bool) (((bool) $extras['LEFT']->boolean) ** (bool) $extras['RIGHT']->boolean);
                 break;
 
             case 'Keyvalue' :
-                $atom->boolean = (int) (bool) $extras['INDEX']->boolean && $extras['VALUE']->boolean;
+                $atom->boolean = (bool) $extras['INDEX']->boolean && $extras['VALUE']->boolean;
                 break;
 
             case 'Not' :
@@ -169,19 +169,19 @@ class Boolval extends Plugin {
                     if (is_string($extras['LEFT']->boolean) && is_string($extras['RIGHT']->boolean)) {
                         $atom->boolean = $extras['LEFT']->boolean | $extras['RIGHT']->boolean;
                     } else {
-                        $atom->boolean = (int) $extras['LEFT']->boolean | (int) $extras['RIGHT']->boolean;
+                        $atom->boolean = $extras['LEFT']->boolean | (int) $extras['RIGHT']->boolean;
                     }
                 } elseif ($atom->code === '&') {
                     if (is_string($extras['LEFT']->boolean) && is_string($extras['RIGHT']->boolean)) {
                         $atom->boolean = $extras['LEFT']->boolean & $extras['RIGHT']->boolean;
                     } else {
-                        $atom->boolean = (int) $extras['LEFT']->boolean & (int) $extras['RIGHT']->boolean;
+                        $atom->boolean = $extras['LEFT']->boolean & (int) $extras['RIGHT']->boolean;
                     }
                 } elseif ($atom->code === '^') {
                     if (is_string($extras['LEFT']->boolean) && is_string($extras['RIGHT']->boolean)) {
                         $atom->boolean = $extras['LEFT']->boolean ^ $extras['RIGHT']->boolean;
                     } else {
-                        $atom->boolean = (int) $extras['LEFT']->boolean ^ (int) $extras['RIGHT']->boolean;
+                        $atom->boolean = $extras['LEFT']->boolean ^ (int) $extras['RIGHT']->boolean;
                     }
                 } elseif ($atom->code === '&&' || mb_strtolower($atom->code) === 'and') {
                     $atom->boolean = $extras['LEFT']->boolean && $extras['RIGHT']->boolean;
@@ -209,29 +209,29 @@ class Boolval extends Plugin {
 
             case 'Bitshift' :
                 if ($atom->code === '>>') {
-                    $atom->boolean = (int) $extras['LEFT']->boolean >> (int) $extras['RIGHT']->boolean;
+                    $atom->boolean = $extras['LEFT']->boolean >> (int) $extras['RIGHT']->boolean;
                 } elseif ($atom->code === '<<') {
-                    $atom->boolean = (int) $extras['LEFT']->boolean << (int) $extras['RIGHT']->boolean;
+                    $atom->boolean = $extras['LEFT']->boolean << (int) $extras['RIGHT']->boolean;
                 }
                 break;
 
             case 'Comparison' :
                 if ($atom->code === '==') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean == $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean == $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '===') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean === $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean === $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '!=' || $atom->code === '<>') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean != $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean != $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '!==') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean !== $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean !== $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '>') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean > $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean > $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '<') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean < $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean < $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '>=') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean >= $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean >= $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '<=') {
-                    $atom->boolean = (int) ($extras['LEFT']->boolean <= $extras['RIGHT']->boolean);
+                    $atom->boolean = ($extras['LEFT']->boolean <= $extras['RIGHT']->boolean);
                 }
                 break;
 
