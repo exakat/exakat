@@ -43,10 +43,27 @@ class WrongTypeForNativeFunction extends Analyzer {
             $ini = $this->methods->getFunctionsByArgType($type, Methods::STRICT);
 
             if (empty($ini)) {
-                return;
+                continue;
             }
 
             foreach($ini as $rank => $functions) {
+                // class x { string $id; function foo() { array_map($this->id, '') ; }
+                $this->atomFunctionIs($functions)
+                     ->analyzerIsNot('self')
+                     ->outWithRank('ARGUMENT', (int) $rank)
+                     ->atomIs(array('Member', 'Staticproperty'))
+                     ->inIs('DEFINITION')
+                     ->inIs('PPP')
+                     ->collectTypehints('typehints')
+                     ->not(
+                        $this->side()
+                             ->outIs('TYPEHINT')
+                             ->atomIs('Void')
+                     )
+                     ->raw('filter{!("\\\\' . $type . '" in typehints);}')
+                     ->back('first');
+                $this->prepareQuery();
+
                 // foo($arg) { array_map($arg, '') ; }
                 $this->atomFunctionIs($functions)
                      ->analyzerIsNot('self')
@@ -55,6 +72,11 @@ class WrongTypeForNativeFunction extends Analyzer {
                      ->inIs('DEFINITION')
                      ->inIs('NAME')
                      ->collectTypehints('typehints')
+                     ->not(
+                        $this->side()
+                             ->outIs('TYPEHINT')
+                             ->atomIs('Void')
+                     )
                      ->raw('filter{!("\\\\' . $type . '" in typehints);}')
                      ->back('first');
                 $this->prepareQuery();
