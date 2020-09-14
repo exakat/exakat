@@ -40,11 +40,11 @@ class Atom implements AtomInterface {
     public $alternative  = Load::NOT_ALTERNATIVE;
     public $reference    = Load::NOT_REFERENCE;
     public $heredoc      = false;
-    public $delimiter    = '';
+    public $delimiter    = null;
     public $noDelimiter  = null;
     public $variadic     = Load::NOT_VARIADIC;
     public $count        = null;
-    public $fullnspath   = '';
+    public $fullnspath   = null;
     public $absolute     = Load::NOT_ABSOLUTE;
     public $alias        = '';
     public $origin       = '';
@@ -61,13 +61,12 @@ class Atom implements AtomInterface {
     public $close_tag    = Load::NO_CLOSING_TAG;
     public $propertyname = '';
     public $constant     = Load::NOT_CONSTANT_EXPRESSION;
-//    public $root         = false;  // false is on purpose.
     public $globalvar    = false;
     public $binaryString = Load::NOT_BINARY;
     public $isNull       = false;
     public $visibility   = '';
     public $final        = '';
-    public $abstract     = '';
+    public $abstract     = false;
     public $static       = '';
     public $noscream     = 0;
     public $trailing     = 0;
@@ -251,7 +250,10 @@ class Atom implements AtomInterface {
                  'isNull',
                  'isPhp',
                                ) as $property) {
-            if ($this->$property === true) {
+            if ($this->$property == true && $this->$property !== true) {
+                print $property.PHP_EOL;
+            }
+            if ($this->$property == true) {
                 $return[] = $property;
             }
         }

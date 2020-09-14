@@ -113,6 +113,9 @@ class Constant extends Plugin {
                 break;
 
             case 'Defineconstant' :
+                if (empty($extras)) {
+                    break;
+                }
                 $atom->constant = $extras['NAME']->constant && ($extras['VALUE']->constant ?? false);
                 break;
 

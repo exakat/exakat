@@ -46,9 +46,15 @@ class IsPhp extends Plugin {
     }
 
     public function run(Atom $atom, array $extras): void {
+        $id = strrpos($atom->fullnspath, '\\');
+        if ($id === false) {
+            return;
+        }
+        $path = substr($atom->fullnspath, $id);
+//                assert(is_int(strrpos($atom->fullnspath, '\\')), 'No \\ in '.$atom->fullnspath.'. '.print_r($atom, true));
+
         switch ($atom->atom) {
             case 'Functioncall' :
-                $path = substr($atom->fullnspath, strrpos($atom->fullnspath, '\\'));
                 if (in_array($path, $this->phpFunctions, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                     $atom->fullnspath = $path;
@@ -61,7 +67,6 @@ class IsPhp extends Plugin {
                 break;
 
             case 'Newcall' :
-                $path = substr($atom->fullnspath, strrpos($atom->fullnspath, '\\'));
                 if (in_array($path, $this->phpClasses, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                     $atom->fullnspath = $path;
@@ -70,7 +75,6 @@ class IsPhp extends Plugin {
 
             case 'Identifier' :
             case 'Nsname' :
-                $path = substr($atom->fullnspath, strrpos($atom->fullnspath, '\\'));
                 if (in_array($path, $this->phpConstants, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                     $atom->fullnspath = $path;

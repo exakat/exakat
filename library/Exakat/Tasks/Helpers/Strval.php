@@ -222,16 +222,9 @@ class Strval extends Plugin {
                 break;
 
             case 'Functioncall' :
-                if (in_array($atom->fullnspath, array('\basename', '\dirname'))) {
-                    $function = $atom->fullnspath;
-                    assert(isset($extras[0]), 'Missing extra[0]');
-                    $atom->noDelimiter = $function($extras[0]->noDelimiter);
-                } // else, ignore it
-                break;
-
             case 'Self' :
             case 'Parent' :
-                $atom->noDelimiter = strtolower($atom->atom);
+                $atom->noDelimiter = null;
                 break;
 
             case 'Magicconstant' :
