@@ -150,14 +150,14 @@ class Load extends Tasks {
 
     const NO_LINE           = -1;
 
-    const VARIADIC          = 1;
-    const NOT_VARIADIC      = '';
+    const VARIADIC          = true;
+    const NOT_VARIADIC      = false;
 
-    const FLEXIBLE          = 1;
+    const FLEXIBLE          = true;
     const NOT_FLEXIBLE      = false;
 
-    const REFERENCE         = 1;
-    const NOT_REFERENCE     = '';
+    const REFERENCE         = true;
+    const NOT_REFERENCE     = false;
 
     const BRACKET          = true;
     const NOT_BRACKET      = false;
@@ -1152,7 +1152,7 @@ class Load extends Tasks {
             // Get the closing quote for flexibility
             $closeQuote = $this->tokens[$this->id + 1][1];
             if (trim($closeQuote) !== $closeQuote) {
-                $string->flexible = 1;
+                $string->flexible = self::FLEXIBLE;
             }
         }
 
@@ -1697,7 +1697,7 @@ class Load extends Tasks {
             $cpm->rank = ++$rank;
 
             if ($class->atom === 'Interface' && in_array($cpm->atom, array('Method', 'Magicethod'))) {
-                $cpm->abstract = 1;
+                $cpm->abstract = true;
             }
 
             $this->addLink($class, $cpm, $link);
@@ -2697,7 +2697,7 @@ class Load extends Tasks {
 
         $next = $this->processNext();
 
-        $next->abstract = 1;
+        $next->abstract = true;
         $next->fullcode = "$abstract $next->fullcode";
         $this->makePhpdoc($next);
 
@@ -2709,7 +2709,7 @@ class Load extends Tasks {
 
         $next = $this->processNext();
 
-        $next->final    = 1;
+        $next->final    = true;
         $next->fullcode = "$final $next->fullcode";
         $this->makePhpdoc($next);
 
@@ -5195,7 +5195,7 @@ class Load extends Tasks {
         }
 
         $constant->intval  = (int) $constant->noDelimiter;
-        $constant->boolean = (int) (bool) $constant->intval;
+        $constant->boolean = (bool) $constant->intval;
         $this->runPlugins($constant);
 
         $constant = $this->processFCOA($constant);
@@ -5502,7 +5502,7 @@ class Load extends Tasks {
 
     private function processNoscream(): AtomInterface {
         $atom = $this->processNext();
-        $atom->noscream = 1;
+        $atom->noscream = true;
         $atom->fullcode = "@$atom->fullcode";
 
         return $atom;
@@ -6257,9 +6257,6 @@ class Load extends Tasks {
         $void->code        = 'Void';
         $void->fullcode    = self::FULLCODE_VOID;
         $void->token       = $this->phptokens::T_VOID;
-        $void->noDelimiter = '';
-        $void->delimiter   = '';
-        $void->fullnspath  = '0';
 
         $this->runPlugins($void);
 
