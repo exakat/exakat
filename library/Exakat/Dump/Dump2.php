@@ -207,6 +207,15 @@ SQL;
         $this->sqlite->query($query);
 
         $query = <<<'SQL'
+CREATE TABLE attributes ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          type STRING,
+                          type_id INTEGER,
+                          attribute STRING
+)
+SQL;
+        $this->sqlite->query($query);
+
+        $query = <<<'SQL'
 CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                           function STRING,
                           type STRING,
