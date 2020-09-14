@@ -51,7 +51,7 @@ class Results extends Tasks {
         }
 
         if (!file_exists($this->config->dump)) {
-            throw new NoDump($this->config->project);
+            throw new NoDump((string) $this->config->project);
         }
 
         if (!empty($this->config->program)) {
