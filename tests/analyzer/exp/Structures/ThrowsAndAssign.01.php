@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('$a = new Exception( )',
-                      '$b = 3',
+$expected     = array('throw $a = new Exception( )',
+                      'throw $b = 3',
                      );
 
-$expected_not = array('new Exception( )',
+$expected_not = array('throw new Exception( )',
                      );
 
 ?>

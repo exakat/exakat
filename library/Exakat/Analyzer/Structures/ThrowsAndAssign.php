@@ -30,7 +30,12 @@ class ThrowsAndAssign extends Analyzer {
         // throw $e = new Exception();
         $this->atomIs('Throw')
              ->outIs('THROW')
-             ->atomIs('Assignation');
+             ->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->inIs('DEFINITION')
+             ->atomIs('Variabledefinition') // if property, then it may be reused
+             ->raw('where(__.out("DEFINITION").count().is(eq(1)))')
+             ->back('first');
         $this->prepareQuery();
     }
 }
