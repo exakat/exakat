@@ -278,7 +278,6 @@ class IsRead extends Plugin {
             case 'Print' :
             case 'Echo' :
 
-//            case 'Empty' :
 //            case 'Sequence' :
                 foreach($extras as $extra) {
                     if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {
@@ -311,6 +310,7 @@ class IsRead extends Plugin {
                 break;
 
 //            case 'Isset' : isset() doesn't read the variable. Just checks its existence
+//            case 'Empty' :isset() doesn't read the variable. Just checks its existence
             default :
 //            print $atom->atom.PHP_EOL;
         }

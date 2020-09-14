@@ -44,7 +44,7 @@ class Atom implements AtomInterface {
     public $noDelimiter  = null;
     public $variadic     = Load::NOT_VARIADIC;
     public $count        = null;
-    public $fullnspath   = null;
+    public $fullnspath   = '';
     public $absolute     = Load::NOT_ABSOLUTE;
     public $alias        = '';
     public $origin       = '';
