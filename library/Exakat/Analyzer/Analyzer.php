@@ -108,6 +108,12 @@ abstract class Analyzer {
     const T_SLOW    = 'Slow';    //60';
     const T_LONG    = 'Long';    //360';
 
+    const P_VERY_HIGH = 'very-high';
+    const P_HIGH      = 'high';
+    const P_MEDIUM    = 'medium';
+    const P_LOW       = 'Low';
+    const P_NONE      = 'Unknown';
+
     const PHP_VERSION_ANY = 'Any';
 
     const COMPATIBLE                 =  0;
@@ -159,7 +165,7 @@ abstract class Analyzer {
     public const CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     public const FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
-    public const STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String', 'Identifier', 'Nsname');
+    public const STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String', 'Identifier', 'Nsname', 'Staticclass');
     public const STRINGS_LITERALS  = array('Concatenation', 'Heredoc', 'String');
 
     public const CONSTANTS_ALL    = array('Identifier', 'Nsname');
