@@ -47,6 +47,13 @@ class Docs {
                             'S_NONE'      => '',
                              );
 
+    const PRECISIONS = array('P_VERY_HIGH' => 'Very high',
+                             'P_HIGH'      => 'High',
+                             'P_MEDIUM'    => 'Medium',
+                             'P_LOW'       => 'Low',
+                             'P_NONE'      => 'Unknown',
+                            );
+
     private $analyzers = null;
     
     private $ini_list      = array();
@@ -338,7 +345,7 @@ SQL
             for($i = 1; $i < 3; ++$i) {
                 if (isset($ini["parameter$i"]) && $row['categories'] != 'Appinfo') {
                     $this->parametered_analysis .= $this->rst_link($ini['name'], $this->rst_anchor($ini['name'])).PHP_EOL.
-'  + '.$ini["parameter$i"]['name'].' : '.$ini["parameter$i"]['default'].PHP_EOL.PHP_EOL.
+'  + '.$ini["parameter$i"]['name'].' : '.($ini["parameter$i"]['default'] ?? '').PHP_EOL.PHP_EOL.
 '    + '.$ini["parameter$i"]['description'].PHP_EOL;
                 }
             }
@@ -786,13 +793,13 @@ SPHINX;
         for($i = 0; $i < 10; ++$i) {
             if (isset($ini['parameter'.$i])) {
                 if (isset($this->parameter_list[$ini['name']])) {
-                    $this->parameter_list[$ini['name']][$ini['parameter'.$i]['name']] = $ini['parameter'.$i]['default'];
+                    $this->parameter_list[$ini['name']][$ini['parameter'.$i]['name']] = $ini['parameter'.$i]['default'] ?? '';
                 } else {
                     $this->parameter_list[$ini['name']] = array($ini['parameter'.$i]['name'] => $ini['parameter'.$i]['default'] ?? '') ;
                 }
 
                 $parameters[] = [$ini['parameter'.$i]['name'],
-                                 $ini['parameter'.$i]['default'],
+                                 $ini['parameter'.$i]['default'] ?? '',
                                  $ini['parameter'.$i]['type'],
                                  $ini['parameter'.$i]['description'],
                                  ];
@@ -822,16 +829,30 @@ SPHINX;
         }
 
         if (!empty($ini['severity'])) {
+            if (!isset(self::SEVERITIES[$ini['severity']])) {
+                print "No such severity as '{$ini['severity']}'\n";
+            }
             $info[] = array('Severity',    self::SEVERITIES[$ini['severity']]);
         }
 
         if (!empty($ini['timetofix'])) {
+            if (!isset(self::TIMETOFIX[$ini['timetofix']])) {
+                print "No such timetofix as '{$ini['timetofix']}'\n";
+            }
             $info[] = array('Time To Fix', self::TIMETOFIX[$ini['timetofix']]);
+        }
+
+        if (!empty($ini['precision'])) {
+            if (!isset(self::PRECISIONS[$ini['precision']])) {
+                print "No such precision as '{$ini['precision']}'\n";
+            }
+            $info[] = array('Precision', self::PRECISIONS[$ini['precision']]);
         }
 
         if (!empty($clearPHP)) {
             $info[] = array('ClearPHP', $clearPHP);
         }
+
         if (!empty($examples)) {
             $info[] = array('Examples', implode(', ', $examples));
         }
@@ -956,7 +977,7 @@ SQL;
             unset($a);
         
             sort($liste);
-            $ini = @parse_ini_file("./human/en/Rulesets/$row[name].ini");
+            $ini = parse_ini_file("./human/en/Rulesets/$row[name].ini");
 
             $this->text .= $this->rst_level($row['name'],4)."\n".$ini['description']."\n\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
         }
