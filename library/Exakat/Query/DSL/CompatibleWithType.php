@@ -51,6 +51,7 @@ class CompatibleWithType extends DSL {
 where( 
 __.sideEffect{ typehints = []; }
   .out("TYPEHINT", "RETURNTYPE")
+  .has("fullnspath")
   $withNullGremlin
   .sideEffect{ typehints.add(it.get().value("fullnspath")) ; }
   .fold() 

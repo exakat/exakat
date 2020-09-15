@@ -31,13 +31,16 @@ class CollectTypehints extends DSL {
         $this->assertVariable($variable, self::VARIABLE_WRITE);
 
         // "TYPEHINT", "RETURNTYPE" : makes it compatible for functions and properties
-        $command = new Command('where( 
-__.sideEffect{ ' . $variable . ' = []; }
-  .out("TYPEHINT", "RETURNTYPE")
-  .sideEffect{ ' . $variable . '.add(it.get().value("fullnspath")) ; }
-  .fold() 
-)
-');
+        $command = new Command(<<<GREMLIN
+ where( 
+    __.sideEffect{ {$variable} = []; }
+      .out("TYPEHINT", "RETURNTYPE")
+      .has("fullnspath")
+      .sideEffect{ {$variable}.add(it.get().value("fullnspath")) ; }
+      .fold() 
+    )
+GREMLIN
+);
         return $command;
     }
 }
