@@ -114,6 +114,8 @@ HEADERS;
         $implements = empty($class->implements) ? '' : ' implements ' . implode(', ', $class->implements);
         $extends    = empty($class->extends) ? '' : ' extends ' . $class->extends;
         $phpdoc     = $this->normalizePhpdoc($class->phpdoc, 1);
+        $attributes = $this->normalizeAttributes($class->attributes, 1);
+        
         if (empty($class->use)) {
             $use = '';
         } else {
@@ -153,14 +155,16 @@ HEADERS;
         }
 
         if ($class->php === true) {
-            return $phpdoc . self::INDENTATION . "if (!class_exists('\\" . $name . "')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
+            return $attributes . $phpdoc . self::INDENTATION . "if (!class_exists('\\" . $name . "')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
         } else {
-            return $phpdoc . join(PHP_EOL, $result);
+            return $attributes . $phpdoc . join(PHP_EOL, $result);
         }
     }
 
     private function trait(string $name, object $trait): string {
         $phpdoc     = $this->normalizePhpdoc($trait->phpdoc, 1);
+        $attributes = $this->normalizeAttributes($trait->attributes, 1);
+
         if (empty($trait->use)) {
             $use = '';
         } else {
@@ -193,20 +197,22 @@ HEADERS;
         }
 
         if ($trait->php === true) {
-            return $phpdoc . self::INDENTATION . "if (!trait_exists('\\$name')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
+            return $attributes . $phpdoc . self::INDENTATION . "if (!trait_exists('\\$name')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
         } else {
-            return $phpdoc . join(PHP_EOL, $result);
+            return $attributes . $phpdoc . join(PHP_EOL, $result);
         }
     }
 
     private function interface(string $name, object $interface): string {
         $phpdoc     = $this->normalizePhpdoc($interface->phpdoc, 1);
+        $attributes = $this->normalizeAttributes($interface->attributes, 1);
+
         $extends    = empty($interface->extends) ? '' : ' extends ' . $interface->extends;
         $result = array(self::INDENTATION . "interface $name{$extends} {");
 
         if (isset($interface->constants)) {
             foreach($interface->constants as $constantName => $constant) {
-                $result[] = $this->constant($constantName, $constant);
+                $result[] = $this->constant($constantName, $constant, 'interface');
             }
         }
 
@@ -223,19 +229,21 @@ HEADERS;
         }
 
         if ($interface->php === true) {
-            return $phpdoc . self::INDENTATION . "if (!interface_exists('\\$name')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
+            return $attributes . $phpdoc . self::INDENTATION . "if (!interface_exists('\\$name')) {\n" . self::INDENTATION . str_replace("\n", "\n" . self::INDENTATION, join(PHP_EOL, $result)) . '}';
         } else {
-            return $phpdoc . join(PHP_EOL, $result);
+            return $attributes . $phpdoc . join(PHP_EOL, $result);
         }
     }
 
     private function constant(string $name, object $values, $type = 'global'): string {
         $phpdoc     = $this->normalizePhpdoc($values->phpdoc, $type === 'global' ? 1 : 2);
+        $attributes = $this->normalizeAttributes($values->attributes ?? array(), $type === 'global' ? 1 : 2);
+
         $visibility = empty($values->visibility) ? '' : $values->visibility . ' ';
         if (isset($values->type) && $values->type == 'define') {
-            return $phpdoc . self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . "define('" . $name . "', " . $values->value . ');';
+            return $$phpdoc . self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . "define('" . $name . "', " . $values->value . ');';
         } else {
-            return self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . $visibility . 'const ' . $name . ' = ' . $values->value . ';';
+            return $attributes . $phpdoc . self::INDENTATION . ($type === 'global' ? '' : self::INDENTATION) . $visibility . 'const ' . $name . ' = ' . $values->value . ';';
         }
     }
 
@@ -243,9 +251,10 @@ HEADERS;
         $static     = empty($values->static) ? '' : 'static ';
         $typehint   = implode('|', $values->typehint);
         $phpdoc     = $this->normalizePhpdoc($values->phpdoc, 2);
+        $attributes = $this->normalizeAttributes($values->attributes, 2);
         $visibility = ($values->visibility ?: 'public') . ' ';
 
-        return $phpdoc . self::INDENTATION . self::INDENTATION . $static . $visibility . $typehint . $name . ';';
+        return $attributes . $phpdoc . self::INDENTATION . self::INDENTATION . $static . $visibility . $typehint . $name . ';';
     }
 
     private function function(string $name, object $values, string $type = 'class'): string {
@@ -259,11 +268,6 @@ HEADERS;
             $visibility = empty($values->visibility) ? '' : $values->visibility . ' ';
             $block      = empty($values->abstract) ? '{}' : ';';
         }
-        $static     = empty($values->static) ? '' : 'static ';
-        $final      = empty($values->final) ? '' : 'final ';
-        $typehint   = $this->formatTypehints($values->returntypes);
-        $typehint   = $typehint === '' ? '' : ': ' . $typehint . ' ';
-        $phpdoc     = $this->normalizePhpdoc($values->phpdoc, $type === 'function' ? 1 : 2);
 
         $arguments = array();
         if (isset($values->arguments)) {
@@ -272,14 +276,22 @@ HEADERS;
                 $typehintArgs   = $this->formatTypehints($argDetails->typehint);
                 $typehintArgs   = $typehintArgs === '' ? '' : $typehintArgs . ' ';
                 $default        = $argDetails->value === '' ? '' : ' = ' . $argDetails->value;
-                $phpdoc         = $this->normalizePhpdoc($values->phpdoc);
+                $phpdoc         = $this->normalizePhpdoc($argDetails->phpdoc);
+                $attributes     = implode(' ', $argDetails->attributes);
 
-                $arguments[] = $phpdoc . $typehintArgs . $referenceArgs . $argDetails->name . $default;
+                $arguments[] = $attributes . $phpdoc . $typehintArgs . $referenceArgs . $argDetails->name . $default;
             }
         }
         $arguments = implode(', ', $arguments);
 
-        $return = $phpdoc . self::INDENTATION . ($type === 'function' ? '' : self::INDENTATION) . "{$final}{$abstract}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
+        $static     = empty($values->static) ? '' : 'static ';
+        $final      = empty($values->final) ? '' : 'final ';
+        $typehint   = $this->formatTypehints($values->returntypes);
+        $typehint   = $typehint === '' ? '' : ': ' . $typehint . ' ';
+        $phpdoc     = $this->normalizePhpdoc($values->phpdoc, $type === 'function' ? 1 : 2);
+        $attributes = $this->normalizeAttributes($values->attributes, $type === 'function' ? 1 : 2);
+
+        $return = $attributes . $phpdoc . self::INDENTATION . ($type === 'function' ? '' : self::INDENTATION) . "{$final}{$abstract}{$visibility}{$static}function {$reference}$name($arguments) $typehint{$block}";
 
         if ($type === 'function' && $values->php === true) {
             $return = self::INDENTATION . "if (!function_exists('" . $name . "')) {\n" . self::INDENTATION . $return . "\n" . self::INDENTATION . "}\n";
@@ -308,6 +320,14 @@ HEADERS;
         }
 
         return str_repeat(self::INDENTATION, $level) . preg_replace("/\n\s+\*/m", "\n" . str_repeat(self::INDENTATION, $level) . ' *', $phpdoc) . PHP_EOL;
+    }
+
+    private function normalizeAttributes(array $attributes, int $level = 0): string {
+        if (empty($attributes)) {
+            return '';
+        }
+
+        return str_repeat(self::INDENTATION, $level) . implode( PHP_EOL.str_repeat(self::INDENTATION, $level), $attributes) . PHP_EOL;
     }
 }
 
