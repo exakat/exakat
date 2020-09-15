@@ -29,6 +29,8 @@ class WrongNumberOfArguments extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/PropagateCalls',
                      'Complete/MakeClassMethodDefinition',
+                     'Complete/SetStringMethodDefinition',
+                     'Complete/SetArrayClassDefinition',
                      'Functions/VariableArguments',
                     );
     }

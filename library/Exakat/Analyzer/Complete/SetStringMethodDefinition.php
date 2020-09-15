@@ -49,6 +49,19 @@ GREMLIN
               ->inIs('NAME')
               ->addEto('DEFINITION', 'first');
         $this->prepareQuery();
+
+        // Link to the actual method 
+        $this->atomIs('String', self::WITHOUT_CONSTANTS)
+             ->inIs('DEFINITION')
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->as('method')
+             ->back('first')
+             
+             ->inIs('NAME')
+             ->atomIs('Functioncall')
+             ->addEfrom('DEFINITION', 'method');
+        $this->prepareQuery();
+
     }
 }
 

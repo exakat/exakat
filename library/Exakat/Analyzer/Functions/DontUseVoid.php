@@ -27,6 +27,9 @@ use Exakat\Analyzer\Analyzer;
 class DontUseVoid extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/PropagateCalls',
+                     'Complete/SetArrayClassDefinition',
+                     'Complete/SetStringMethodDefinition',
+                     'Complete/MakeClassMethodDefinition',
                     );
     }
 
@@ -38,7 +41,7 @@ class DontUseVoid extends Analyzer {
              ->fullnspathIs('\\void')
              ->back('first')
              ->outIs('DEFINITION')
-             ->atomIsNot(array('Variabledefinition', 'Staticdefinition', 'Globaldefinition'))
+             ->atomIsNot(array('Variabledefinition', 'Staticdefinition', 'Globaldefinition', 'Arrayliteral', 'String'))
              ->hasNoIn('EXPRESSION');
         $this->prepareQuery();
     }
