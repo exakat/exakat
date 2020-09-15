@@ -34,9 +34,11 @@ class BadTypehintRelay extends Analyzer {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
              ->savePropertyAs('fullnspath', 'typehint')
              ->inIs('TYPEHINT')
              ->outIs('NAME')
+
              ->outIs('DEFINITION')
              ->has('rank')
              ->savePropertyAs('rank', 'theRank')
@@ -49,6 +51,7 @@ class BadTypehintRelay extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('TYPEHINT')
+                     ->atomIsNot('Void')
                      ->samePropertyAs('fullnspath', 'typehint')
              )
              ->back('result');
@@ -66,6 +69,7 @@ class BadTypehintRelay extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('RETURNTYPE')
+                     ->atomIsNot('Void')
                      ->samePropertyAs('fullnspath', 'typehint')
              )
              ->back('first');
