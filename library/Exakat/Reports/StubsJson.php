@@ -205,7 +205,7 @@ class StubsJson extends Reports {
         }
 
         // JSON compact
-        return json_encode($data, JSON_PRETTY_PRINT);
+        return json_encode($data);
     }
 
     private function normalizeAttributes(string $attributes): array {
