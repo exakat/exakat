@@ -35,7 +35,7 @@ class TypeSuggestion extends Reports {
 
     public function generate(string $folder, string $name = self::FILE_FILENAME): string {
         if ($name === self::STDOUT) {
-            print "Can't produce SimpleHtml format to stdout\n";
+            print "Can't produce TypeSuggestion format to stdout\n";
             return '';
         }
 
