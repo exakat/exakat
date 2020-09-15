@@ -31,7 +31,7 @@ class SameTypehintAs extends DSL {
 
         $this->assertVariable($variable);
 
-        return new Command('where( __.out("RETURNTYPE", "TYPEHINT").filter{it.get().value("fullnspath") == ' . $variable . '} )');
+        return new Command('where( __.out("RETURNTYPE", "TYPEHINT").has("fullnspath").filter{it.get().value("fullnspath") == ' . $variable . '} )');
     }
 }
 ?>
