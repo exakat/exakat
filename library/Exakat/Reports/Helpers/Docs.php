@@ -73,13 +73,19 @@ class Docs {
         }
 
         if (empty($ini['timetofix'])) {
-            $ini['timetofix'] = Analyzer::S_NONE;
+            $ini['timetofix'] = Analyzer::T_NONE;
         } else {
             $ini['timetofix'] = constant(Analyzer::class . '::' . $ini['timetofix']);
         }
 
         if (empty($ini['phpversion'])) {
             $ini['phpversion'] = Analyzer::PHP_VERSION_ANY;
+        }
+
+        if (empty($ini['precision'])) {
+            $ini['precision'] = Analyzer::P_NONE;
+        } else {
+            $ini['precision'] = constant(Analyzer::class . '::' . $ini['precision']);
         }
 
         self::$docs[$analyzer] = $ini;
