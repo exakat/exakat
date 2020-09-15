@@ -85,6 +85,7 @@ class Docs {
     private $exakat_date            = '';
 
     private $rulesets = array('Analyze',
+                              'CI-checks',
                               'CompatibilityPHP80',
                               'CompatibilityPHP74',
                               'CompatibilityPHP73',
@@ -458,7 +459,9 @@ SQL
             foreach($row as &$r) {
                 $r = explode(PHP_EOL, $r);
             }
+            unset($r);
         }
+        unset($row);
 
         // padding the missing lines
         foreach($array as &$row) {
@@ -471,8 +474,8 @@ SQL
                 foreach($row as &$r) {
                     $r = array_pad($r, $count, '');
                 }
+                unset($r);
             }
-            unset($r);
         }
         unset($row);
 
@@ -832,9 +835,8 @@ SPHINX;
         if (!empty($examples)) {
             $info[] = array('Examples', implode(', ', $examples));
         }
-        
         $table = $this->makeTable($info);
-                 
+
         $desc .= PHP_EOL.PHP_EOL.$table.PHP_EOL.PHP_EOL;
         
         return array($desc, $ini['name']);
