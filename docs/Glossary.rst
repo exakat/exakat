@@ -1178,6 +1178,7 @@ Glossary
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
+      + :ref:`Cast Unset Usage <cast-unset-usage>`
       + :ref:`Casting Ternary <casting-ternary>`
       + :ref:`Check All Types <check-all-types>`
       + :ref:`Could Be Null <could-be-null>`

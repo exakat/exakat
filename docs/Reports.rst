@@ -34,6 +34,7 @@ There are several reports that may be extracted from Exakat :
 * `RadwellCode`_
 * `Rector`_
 * `Sarb`_
+* `Sarif`_
 * `SimpleTable`_
 * `Stats`_
 * `Stubs`_
@@ -1568,6 +1569,26 @@ Sarb is a Json report format.
 
 Sarb accepts any arbitrary list of results.
 
+Sarif
+_____
+
+The SARIF report publishes the results in SARIF format.
+
+`SARIF <https://docs.oasis-open.org/sarif/sarif/v2.0/sarif-v2.0.html>`_  a standard format for the output of static analysis tools. The format is referred to as the “Static Analysis Results Interchange Format” and is abbreviated as SARIF. 
+
+SARIF is a flexible JSON format, that describes in details the rules, the issues and their context.
+
+More details are available at `sarifweb <https://sarifweb.azurewebsites.net/>`_ and `SARIF support for code scanning <https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/sarif-support-for-code-scanning>`_ at Github.
+
+
+
+.. image:: images/report.sarif.png
+    :alt: Example of a Sarif report (0)
+
+Sarif is a Json report format.
+
+Sarif accepts any arbitrary list of results.
+
 SimpleTable
 ___________
 
@@ -1685,13 +1706,11 @@ The StubsJson report includes :
 + Traits
   + properties
   + methods
-    
 
 
 
-::
-
-    
+.. image:: images/report.stubs.json.png
+    :alt: Example of a StubsJson report (0)
 
 StubsJson is a JSON report format.
 

@@ -428,6 +428,10 @@ Analyzers may be configured in the `project/*/config.ini`; they may also be conf
   + forbiddenClasses : 
 
     + List of classes to be avoided
+:ref:`Cancel Common Method <cancel-common-method>`
+  + cancelThreshold : 75
+
+    + Minimal number of cancelled methods to suggest the cancellation of the parent.
 :ref:`Could Be Parent Method <could-be-parent-method>`
   + minChildren : 4
 

@@ -9918,26 +9918,6 @@ This code actually loads the file, join it, then split it again. file() would be
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
-Could Return Void
-=================
-
-.. _wordpress-functions-couldreturnvoid:
-
-WordPress
-^^^^^^^^^
-
-:ref:`could-return-void`, in wp-admin/includes/misc.php:74. 
-
-In fact, RunQuery returns a boolean, which should be also returned here. No Void needed if the last called method is not returning void too.
-
-.. code-block:: php
-
-    function RemoveVolunteerOpportunity($iPersonID, $iVolID)
-    {
-        $sSQL = 'DELETE FROM person2volunteeropp_p2vo WHERE p2vo_per_ID = '.$iPersonID.' AND p2vo_vol_ID = '.$iVolID;
-        RunQuery($sSQL);
-    }
-
 Isset Multiple Arguments
 ========================
 

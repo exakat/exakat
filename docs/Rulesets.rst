@@ -82,8 +82,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Mon, 07 Sep 2020 15:11:13 +0000
-.. comment: Generation hash : f84a22df6e30f33f95a981ed655307d562af9e57
+.. comment: Generation date : Tue, 15 Sep 2020 10:33:59 +0000
+.. comment: Generation hash : 959ce4ee6622c92eb4e1520380bc2b6817ba251e
 
 
 .. _analyze:
@@ -93,7 +93,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 404 analysis
+Total : 405 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -257,6 +257,7 @@ Total : 404 analysis
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Methods Without Return <methods-without-return>`
+* :ref:`Mismatch Parameter Name <mismatch-parameter-name>`
 * :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
@@ -356,7 +357,7 @@ Total : 404 analysis
 * :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions In Condition <same-conditions-in-condition>`
-* :ref:`Same Variables Foreach <same-variables-foreach>`
+* :ref:`Same Variable Foreach <same-variable-foreach>`
 * :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
 * :ref:`Scalar Or Object Property <scalar-or-object-property>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
@@ -505,7 +506,7 @@ Total : 404 analysis
 CI-checks
 +++++++++
 
-
+This ruleset is a collection of important rules to run in a CI pipeline.
 
 Total : 177 analysis
 
@@ -609,7 +610,7 @@ Total : 177 analysis
 * :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions In Condition <same-conditions-in-condition>`
-* :ref:`Same Variables Foreach <same-variables-foreach>`
+* :ref:`Same Variable Foreach <same-variable-foreach>`
 * :ref:`Scalar Are Not Arrays <scalar-are-not-arrays>`
 * :ref:`Should Chain Exception <should-chain-exception>`
 * :ref:`Should Make Alias <should-make-alias>`
@@ -1318,9 +1319,12 @@ CompatibilityPHP80
 
 This ruleset centralizes all analysis for the migration from PHP 7.4 to 8.0.
 
-Total : 3 analysis
+Total : 6 analysis
 
+* :ref:`Cast Unset Usage <cast-unset-usage>`
 * :ref:`Concat And Addition <concat-and-addition>`
+* :ref:`Mismatch Parameter Name <mismatch-parameter-name>`
+* :ref:`Old Style Constructor <old-style-constructor>`
 * :ref:`PHP 8.0 Removed Constants <php-8.0-removed-constants>`
 * :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
 
@@ -1549,7 +1553,7 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 91 analysis
+Total : 90 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Abstract Away <abstract-away>`
@@ -1563,7 +1567,6 @@ Total : 91 analysis
 * :ref:`Could Be Constant <could-be-constant>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
 * :ref:`Could Make A Function <could-make-a-function>`
-* :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Compact <could-use-compact>`
 * :ref:`Could Use Try <could-use-try>`

@@ -440,6 +440,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the ruleset, used with the -T option. Rulesets are separated by commas, as the same analysis may be used in several rulesets.
 
 
+* 2.1.8
+
+  * $php_errormsg Usage (Php/PhpErrorMsgUsage ; Unassigned)
+  * Cancel Common Method (Classes/CancelCommonMethod)
+  * Cast Unset Usage (Php/CastUnsetUsage ; CompatibilityPHP80)
+  * Function With Dynamic Code (Functions/DynamicCode ; Internal)
+  * Mismatch Parameter Name (Functions/MismatchParameterName ; Analyze, CompatibilityPHP80)
+
 * 2.1.7
 
   * Collect Class Traits Counts (Dump/CollectClassTraitsCounts ; Dump)
@@ -1182,7 +1190,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Environment Variables (Variables/UncommonEnvVar ; Appinfo)
   * Invalid Regex (Structures/InvalidRegex ; Analyze, CI-checks)
   * Parent First (Classes/ParentFirst)
-  * Same Variables Foreach (Structures/AutoUnsetForeach ; Analyze, CI-checks)
+  * Same Variable Foreach (Structures/AutoUnsetForeach ; Analyze, CI-checks)
 
 * 1.0.4
 
@@ -1519,8 +1527,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.9.1
 
   * Avoid Using stdClass (Php/UseStdclass ; Analyze, OneFile, Simple, Level 4)
-  * Avoid array_push() (Performances/AvoidArrayPush ; Performances, PHP recommendations)
-  * Could Return Void (Functions/CouldReturnVoid)
+  * Avoid array_push() (Performances/AvoidArrayPush)
   * Invalid Octal In String (Type/OctalInString ; Inventory, CompatibilityPHP71)
 
 * 0.9.0
@@ -1863,7 +1870,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Non-constant Index In Array (Arrays/NonConstantArray ; Analyze, Simple)
   * Non-lowercase Keywords (Php/UpperCaseKeyword ; Coding Conventions, RadwellCodes)
   * Normal Methods (Classes/NormalMethods ; Appcontent)
-  * Normal Property (Classes/NormalProperty ; Under Work)
   * Not Definitions Only (Files/NotDefinitionsOnly ; Appinfo)
   * Not Not (Structures/NotNot ; Analyze, OneFile, Simple, CI-checks)
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
@@ -1873,7 +1879,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Null On New (Classes/NullOnNew ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, OneFile, Simple)
   * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Simple, Level 2, Top10, CI-checks)
   * Octal Glossary (Type/Octal ; Appinfo)
-  * Old Style Constructor (Classes/OldStyleConstructor ; Analyze, Appinfo, OneFile, ClearPHP, Simple)
+  * Old Style Constructor (Classes/OldStyleConstructor ; Analyze, Appinfo, OneFile, ClearPHP, Simple, CompatibilityPHP80)
   * Old Style __autoload() (Php/oldAutoloadUsage ; Analyze, OneFile, ClearPHP, Simple)
   * One Letter Functions (Functions/OneLetterFunctions ; Coding Conventions, Semantics)
   * One Object Operator Per Line (Classes/OneObjectOperatorPerLine ; Calisthenics)
@@ -2766,8 +2772,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2814,8 +2820,8 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
@@ -2840,8 +2846,8 @@ List of external links mentionned in this documentation.
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Password Hashing <http://php.net/manual/en/book.password.php>`_
+* `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
 * `PCRE <http://php.net/pcre>`_
@@ -2942,6 +2948,7 @@ List of external links mentionned in this documentation.
 * `runkit <http://php.net/manual/en/book.runkit.php>`_
 * `Salted Password Hashing - Doing it Right <https://crackstation.net/hashing-security.htm>`_
 * `SARB <https://github.com/DaveLiddament/sarb>`_
+* `SARIF <https://docs.oasis-open.org/sarif/sarif/v2.0/sarif-v2.0.html>`_
 * `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
@@ -3013,11 +3020,11 @@ List of external links mentionned in this documentation.
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations  <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
@@ -3028,6 +3035,7 @@ List of external links mentionned in this documentation.
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `unserialize() <https://www.php.net/unserialize>`_
 * `unset <http://php.net/unset>`_
+* `Unset casting <https://www.php.net/manual/en/language.types.null.php#language.types.null.casting>`_
 * `UPGRADING 7.3 <https://github.com/php/php-src/blob/PHP-7.3/UPGRADING#L83-L95>`_
 * `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
@@ -3246,6 +3254,7 @@ _______
 |   analyzer[] = "Functions/FnArgumentVariableConfusion";
 |   analyzer[] = "Functions/HardcodedPasswords";
 |   analyzer[] = "Functions/InsufficientTypehint";
+|   analyzer[] = "Functions/MismatchParameterName";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MismatchedDefaultArguments";
 |   analyzer[] = "Functions/MismatchedTypehint";
@@ -3534,7 +3543,7 @@ _______
 .. _ruleset_ini_ci-checks:
 
 CI-checks
-
+This ruleset is a collection of important rules to run in a CI pipeline.
 _________
 
 | [CI-checks]
@@ -4385,6 +4394,9 @@ This ruleset centralizes all analysis for the migration from PHP 7.4 to 8.0.
 __________________
 
 | [CompatibilityPHP80]
+|   analyzer[] = "Classes/OldStyleConstructor";
+|   analyzer[] = "Functions/MismatchParameterName";
+|   analyzer[] = "Php/CastUnsetUsage";
 |   analyzer[] = "Php/ConcatAndAddition";
 |   analyzer[] = "Php/Php80RemovedConstant";
 |   analyzer[] = "Php/Php80RemovedFunctions";| 
@@ -4654,7 +4666,6 @@ ___________
 |   analyzer[] = "Functions/Closure2String";
 |   analyzer[] = "Functions/CouldBeStaticClosure";
 |   analyzer[] = "Functions/CouldCentralize";
-|   analyzer[] = "Functions/CouldReturnVoid";
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/TooManyParameters";
