@@ -43,15 +43,10 @@ class EmptyFunction extends Analyzer {
 
         // method : then, it should not overwrite a parent's method
         $this->atomIs(self::FUNCTIONS_METHOD)
-             ->hasClassTrait()
              ->isNot('abstract', true)
              ->IsNotInheritedMethod()
              ->outIs('BLOCK')
              ->isNotEmptyBody()
-             ->goToClass()
-
-             // Ignore classes that are extension from a composer class
-             ->IsNotExtendingComposer()
 
              // Ignore methods that are overwriting a parent class, unless it is abstract or private
              ->back('first');
