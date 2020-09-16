@@ -19,7 +19,6 @@
  * The latest code can be found at <http://exakat.io/>.
  *
 */
-declare( strict_types = 1);
 
 namespace Exakat\Tasks\Helpers;
 

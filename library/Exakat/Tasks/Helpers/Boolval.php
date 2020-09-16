@@ -20,8 +20,6 @@
  *
 */
 
-declare( strict_types = 1);
-
 namespace Exakat\Tasks\Helpers;
 
 class Boolval extends Plugin {
