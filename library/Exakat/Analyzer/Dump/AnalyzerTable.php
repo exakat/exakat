@@ -29,6 +29,38 @@ abstract class AnalyzerTable extends AnalyzerDump {
 
     protected $dumpQueries = array();
 
+    public function prepareDirectQuery(string $query): void {
+        ++$this->queryId;
+
+        $result = $this->gremlin->query($query);
+
+        if (count($result) === 0) {
+            return ;
+        }
+
+        ++$this->queryCount;
+
+        $c = $result->toArray();
+        if (!is_array($c) || !isset($c[0])) {
+            return ;
+        }
+
+        $this->processedCount += count($c);
+        $this->rowCount       += count($c);
+
+        $valuesSQL = array();
+        foreach($c as $row) {
+            print_r($row);
+            $valuesSQL[] = "(NULL, '" . implode("', '", array_map(array('\\Sqlite3', 'escapeString'), $row)) . "') \n";
+        }
+
+        $chunks = array_chunk($valuesSQL, SQLITE_CHUNK_SIZE);
+        foreach($chunks as $chunk) {
+            $query = 'INSERT INTO ' . $this->analyzerTable . ' VALUES ' . implode(', ', $chunk);
+            $this->dumpQueries[] = $query;
+        }
+    }
+
     public function prepareQuery(): void {
         ++$this->queryId;
 
