@@ -22,8 +22,6 @@
 
 namespace Exakat\Analyzer\Dump;
 
-//use Exakat\Analyzer\Analyzer;
-
 class CollectFilesDependencies extends AnalyzerTable {
     protected $analyzerName = 'filesDependencies';
 
@@ -46,10 +44,8 @@ SQL;
              ->_as('include')
              ->goToInstruction('File')
              ->_as('file')
-             ->_as('id')
              ->_as('type')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'include'
                             ));
@@ -68,13 +64,12 @@ SQL;
              ->goToInstruction('File')
              ->savePropertyAs('fullcode', 'called')
 
-             ->raw('map{ ["id": "", "file":calling, "include":called, "type":type]; }');
+             ->raw('map{ ["file":calling, "include":called, "type":type]; }');
         $this->prepareQuery();
 
         // Finding extends for interfaces
         $this->atomIs('Interface', self::WITHOUT_CONSTANTS)
              ->_as('classe')
-             ->_as('id')
              ->_as('type')
              ->raw(<<<'GREMLIN'
 repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File"))
@@ -87,8 +82,7 @@ select("classe").out("EXTENDS")
 GREMLIN
 )
              ->_as('include')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'extends'
                             ));
@@ -104,12 +98,10 @@ GREMLIN
              ->_as('include')
 
              ->back('first')
-             ->_as('id')
              ->_as('type')
              ->goToInstruction('File')
              ->_as('file')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'use'
                             ));
@@ -124,12 +116,10 @@ GREMLIN
              ->_as('include')
 
              ->back('first')
-             ->_as('id')
              ->_as('type')
              ->goToInstruction('File')
              ->_as('file')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'use'
                             ));
@@ -141,14 +131,12 @@ GREMLIN
              ->_as('use')
              ->goToFile()
              ->_as('file')
-             ->_as('id')
              ->_as('type')
              ->back('use')
              ->inIs('DEFINITION')
              ->goToFile()
              ->_as('include')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'use',
                             ));
@@ -159,14 +147,12 @@ GREMLIN
              ->_as('functioncall')
              ->goToFile()
              ->_as('file')
-             ->_as('id')
              ->_as('type')
              ->back('functioncall')
              ->inIs('DEFINITION')
              ->goToFile()
              ->_as('include')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'use'
                             ));
@@ -178,14 +164,12 @@ GREMLIN
              ->_as('constant')
              ->goToFile()
              ->_as('file')
-             ->_as('id')
              ->_as('type')
              ->back('constant')
              ->inIs('DEFINITION')
              ->goToFile()
              ->_as('include')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'use'
                             ));
@@ -197,14 +181,12 @@ GREMLIN
              ->_as('new')
              ->goToFile()
              ->_as('file')
-             ->_as('id')
              ->_as('type')
              ->back('new')
              ->inIs('DEFINITION')
              ->goToFile()
              ->_as('include')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'use'
                             ));
@@ -216,14 +198,12 @@ GREMLIN
              ->_as('call')
              ->goToFile()
              ->_as('file')
-             ->_as('id')
              ->_as('type')
              ->back('call')
              ->inIs('DEFINITION')
              ->goToFile()
              ->_as('include')
-             ->select(array('id'      => '',
-                            'file'    => 'fullcode',
+             ->select(array('file'    => 'fullcode',
                             'include' => 'fullcode',
                             'type'    => 'use'
                             ));

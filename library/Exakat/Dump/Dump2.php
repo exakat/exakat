@@ -58,27 +58,6 @@ SQL;
         $this->sqlite->query($query);
 
         $query = <<<'SQL'
-CREATE TABLE classesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                   including STRING,
-                                   including_name STRING,
-                                   including_type STRING,
-                                   included STRING,
-                                   included_name STRING,
-                                   included_type STRING,
-                                   type STRING
-                                  )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
-CREATE TABLE atomsCounts (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            atom STRING,
-                            count INTEGER
-                         )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
 CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                               name STRING,
                               type STRING,

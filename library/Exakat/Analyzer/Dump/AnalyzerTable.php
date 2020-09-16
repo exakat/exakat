@@ -50,7 +50,6 @@ abstract class AnalyzerTable extends AnalyzerDump {
 
         $valuesSQL = array();
         foreach($c as $row) {
-            print_r($row);
             $valuesSQL[] = "(NULL, '" . implode("', '", array_map(array('\\Sqlite3', 'escapeString'), $row)) . "') \n";
         }
 
