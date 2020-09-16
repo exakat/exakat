@@ -58,7 +58,7 @@ class IsLess extends DSL {
         // It is a gremlin variable
         if ($this->isVariable($value)) {
             assert($this->assertVariable($value));
-            return $value.'.toLong()';
+            return $value . '.toLong()';
         }
 
         // It is a gremlin property

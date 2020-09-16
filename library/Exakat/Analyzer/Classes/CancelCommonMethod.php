@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -26,13 +26,13 @@ use Exakat\Analyzer\Analyzer;
 
 class CancelCommonMethod extends Analyzer {
     protected $cancelThreshold = 75;
-    
-    public function dependsOn() : array {
+
+    public function dependsOn(): array {
         return array('Complete/OverwrittenMethods',
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->atomIs('Class')
              ->isNot('visibility', 'private')
              ->outIs('METHOD') // No need for magicmethods
@@ -55,7 +55,7 @@ class CancelCommonMethod extends Analyzer {
                      ->outIs('EXPRESSION')
                      ->raw('sideEffect{ if (it.get().label() == "Void") { empty = empty + 1;}}.fold()')
              )
-             ->raw('filter{ empty * 100 / total  >= '.$this->cancelThreshold.';}')
+             ->raw('filter{ empty * 100 / total  >= ' . $this->cancelThreshold . ';}')
              ->back('result');
         $this->prepareQuery();
     }

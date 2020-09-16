@@ -30,7 +30,7 @@ class ShouldUseConstants extends Analyzer {
         $functions = $this->loadIni('constant_usage.ini');
 
         // todo : support 0 as a valid value
-        $authorizedAtoms = array('Logical', 
+        $authorizedAtoms = array('Logical',
                                  'Bitoperation',
                                  'Addition',
                                  'Identifier',

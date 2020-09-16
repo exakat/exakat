@@ -50,7 +50,7 @@ class Sarif extends Reports {
 
 
             $sarif->addRule($row['analyzer'], $titleCache[$row['analyzer']], $descriptionCache[$row['analyzer']], $severityCache[$row['analyzer']], $precisionCache[$row['analyzer']]);
-            $sarif->addResult((string)$row['fullcode'], $row['analyzer'], $row['file'], (int) $row['line']);
+            $sarif->addResult((string) $row['fullcode'], $row['analyzer'], $row['file'], (int) $row['line']);
             continue;
             print_r($row);die();
             if (!isset($results[$row['file']])) {

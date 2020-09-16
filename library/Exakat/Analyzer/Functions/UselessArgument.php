@@ -35,13 +35,13 @@ class UselessArgument extends Analyzer {
         // function foo($a)
         // foo(2); foo(2); foo(2); // always provide the same arg
         $this->atomIs(self::FUNCTIONS_ALL)
-              // Only process the last one, 
+              // Only process the last one,
              ->isNot('count', 0)
              ->outWithRank('ARGUMENT', 'last')
              ->savePropertyAs('rank', 'ranked')
              ->back('first')
 
-             // More than 2 calls to the method 
+             // More than 2 calls to the method
              ->filter(
                 $this->side()
                      ->outIs('DEFINITION')

@@ -38,7 +38,7 @@ class IsExtFunction extends Analyzer {
         $this->atomIs(array('Isset', 'Isset', 'Empty', 'Unset', 'Exit', 'Empty', 'Echo', 'Print'));
         $this->prepareQuery();
 
-        return;
+
     }
 }
 

@@ -460,7 +460,7 @@ class Appinfo extends Data {
 
             if ($section == 'Extensions') {
                 $list = $this->values[$section];
-                uksort($this->values[$section], function (string $ka, string $kb) use ($list) : int {
+                uksort($this->values[$section], function (string $ka, string $kb) use ($list): int {
                     if ($list[$ka] !== $list[$kb]) {
                         return $list[$ka] === Ambassador::YES ? -1 : 1;
                     }

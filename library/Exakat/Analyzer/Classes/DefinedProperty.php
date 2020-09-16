@@ -40,7 +40,7 @@ class DefinedProperty extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // defined in parent class 
+        // defined in parent class
         $this->atomIs('Member')
              ->analyzerIsNot('self')
              ->inIs('DEFINITION')

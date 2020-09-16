@@ -22,7 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Highchart;
 
 class Weekly extends Ambassador {
@@ -223,9 +222,9 @@ HTML;
 
         // top 10
         $week = array_keys($this->weeks)[0];
-        $fileHTML     = $this->getTopFile($this->weeks[$this->current]->analysis ?? array(), "week0");
+        $fileHTML     = $this->getTopFile($this->weeks[$this->current]->analysis ?? array(), 'week0');
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis ?? array(), "week0");
+        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis ?? array(), 'week0');
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $globalData = array(self::G_CRITICAL  => (object) array('label' => 'Critical', 'value' => 0),

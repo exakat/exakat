@@ -58,7 +58,7 @@ GREMLIN;
             return;
         }
 
-        $types = array_filter($types, function (int $x) use ($total) : bool { return $x > 0 && $x / $total < 0.1; });
+        $types = array_filter($types, function (int $x) use ($total): bool { return $x > 0 && $x / $total < 0.1; });
         if (empty($types)) {
             return;
         }

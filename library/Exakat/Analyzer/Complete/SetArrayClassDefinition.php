@@ -95,15 +95,15 @@ class SetArrayClassDefinition extends Complete {
              ->inIs('NAME')
              ->addEto('DEFINITION', 'first');
         $this->prepareQuery();
-        
-        // Link to the actual method 
+
+        // Link to the actual method
         $this->atomIs('Arrayliteral', self::WITHOUT_CONSTANTS)
              ->is('count', 2)
              ->inIs('DEFINITION')
              ->atomIs(array('Method', 'Magicmethod'))
              ->as('method')
              ->back('first')
-             
+
              ->inIs('NAME')
              ->atomIs('Functioncall')
              ->addEfrom('DEFINITION', 'method');

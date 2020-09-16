@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleDeclareStrict extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         // declare(strict_types = 1);
         // declare(strict_types = 1);
         $this->atomIs('Declare')

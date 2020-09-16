@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class CompareHash extends Analyzer {
     public function analyze(): void {
-        $hashFunctions = array('\hash', 
-                               '\md5', 
-                               '\sha1', 
-                               '\md5_file', 
-                               '\sha1_file', 
-                               '\crc32', 
+        $hashFunctions = array('\hash',
+                               '\md5',
+                               '\sha1',
+                               '\md5_file',
+                               '\sha1_file',
+                               '\crc32',
                                '\crypt',
                                '\hash_hmac',
                                '\hash_final',

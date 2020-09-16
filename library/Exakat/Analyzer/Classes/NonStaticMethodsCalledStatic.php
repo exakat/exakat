@@ -88,7 +88,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
 
              ->inIs('DEFINITION')
              ->isNot('static', true)
-             
+
              ->inIs(array('METHOD', 'MAGICMETHOD'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')

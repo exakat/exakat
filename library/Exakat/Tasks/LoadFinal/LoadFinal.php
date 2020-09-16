@@ -190,7 +190,7 @@ GREMLIN;
     // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded
     private function fixFullnspathFunctions(): void {
         display('fixing Fullnspath for Functions');
-        // Fix fullnspath with definition local to namespace when there is a definition 
+        // Fix fullnspath with definition local to namespace when there is a definition
         // namesapce x { function substr() ; substr(); }
 
         $query = <<<'GREMLIN'

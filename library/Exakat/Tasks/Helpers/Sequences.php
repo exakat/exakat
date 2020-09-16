@@ -45,18 +45,18 @@ class Sequences {
         $this->elements                = array();
     }
 
-    public function add(Atom $element) : void {
+    public function add(Atom $element): void {
         ++$this->rank;
         $element->rank                        = $this->rank;
         $this->elements[]                     = $element;
         $this->sequences[$this->level]->count = $element->rank + 1;
     }
 
-    public function getElements() : array {
+    public function getElements(): array {
         return $this->elements;
     }
 
-    public function end() : Atom {
+    public function end(): Atom {
         assert($this->level > 0, "Trying to pop a non-existing sequence ($this->level)\n");
 
         array_pop($this->sequences);

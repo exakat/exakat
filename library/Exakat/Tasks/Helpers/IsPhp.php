@@ -33,13 +33,13 @@ class IsPhp extends Plugin {
         parent::__construct();
 
         $config = exakat('config');
-        $this->phpFunctions = parse_ini_file($config->dir_root.'/data/php_functions.ini')['functions'] ?? array();
+        $this->phpFunctions = parse_ini_file($config->dir_root . '/data/php_functions.ini')['functions'] ?? array();
         $this->phpFunctions = makeFullnspath($this->phpFunctions);
 
-        $this->phpConstants = parse_ini_file($config->dir_root.'/data/php_constants.ini')['constants'] ?? array();
+        $this->phpConstants = parse_ini_file($config->dir_root . '/data/php_constants.ini')['constants'] ?? array();
         $this->phpConstants = makeFullnspath($this->phpConstants, \FNP_CONSTANT);
 
-        $this->phpClasses = parse_ini_file($config->dir_root.'/data/php_classes.ini')['classes'] ?? array();
+        $this->phpClasses = parse_ini_file($config->dir_root . '/data/php_classes.ini')['classes'] ?? array();
         $this->phpClasses = makeFullnspath($this->phpClasses);
     }
 
@@ -89,9 +89,9 @@ class IsPhp extends Plugin {
 
             case 'Isset' :
             case 'Isset' :
-            case 'Empty' : 
+            case 'Empty' :
             case 'Unset' :
-            case 'Exit'  : 
+            case 'Exit'  :
             case 'Empty' :
             case 'Echo'  :
             case 'Print' :

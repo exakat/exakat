@@ -42,10 +42,10 @@ class IsExt extends Plugin {
         $functions = array(array());
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
-            if (!file_exists($config->dir_root.'/data/'.$inifile.'.ini')) {
+            if (!file_exists($config->dir_root . '/data/' . $inifile . '.ini')) {
                 continue;
             }
-            $ini = parse_ini_file($config->dir_root.'/data/'.$inifile.'.ini');
+            $ini = parse_ini_file($config->dir_root . '/data/' . $inifile . '.ini');
 
             if (!empty($ini['constants'][0])) {
                 $constants[] = makeFullnspath($ini['constants'], \FNP_CONSTANT);
@@ -66,7 +66,7 @@ class IsExt extends Plugin {
                 $functions[] = makeFullnspath($ini['functions'], \FNP_NOT_CONSTANT);
             }
         }
-        
+
         $this->extConstants = array_merge(...$constants);
         $this->extFunctions = array_merge(...$functions);
         $this->extClasses   = array_merge(...$classes);
@@ -117,9 +117,9 @@ class IsExt extends Plugin {
 
             case 'Isset' :
             case 'Isset' :
-            case 'Empty' : 
+            case 'Empty' :
             case 'Unset' :
-            case 'Exit'  : 
+            case 'Exit'  :
             case 'Empty' :
             case 'Echo'  :
             case 'Print' :

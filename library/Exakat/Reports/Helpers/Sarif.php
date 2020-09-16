@@ -28,20 +28,20 @@ class Sarif {
     private $results    = array();
     private $rules      = array();
     private $rulesIndex = array();
-    
+
     public function __construct() {
-        $this->sarif = (object) array("version" => "2.1.0",
-                                      '$schema' => "http://json.schemastore.org/sarif-2.1.0-rtm.4",
+        $this->sarif = (object) array('version' => '2.1.0',
+                                      '$schema' => 'http://json.schemastore.org/sarif-2.1.0-rtm.4',
                                       'runs'    => array((object) array('tool' => array('driver' => array('name'            => 'Exakat',
                                                                                                           'informationUri'  => 'https://www.exakat.io/',
                                                                                                           'version'         => '2.1.7',
                                                                                                           'semanticVersion' => '2.1.7',
                                                                                                           'rules'           => array(),
-                                                                                                            
+
                                         )
-                                                        
+
                                                         )),
-                                      
+
                                       ));
     }
 
@@ -64,16 +64,16 @@ class Sarif {
                 $level = 'warning';
                 break;
 
-            default: 
+            default:
             case 'Note':
             case 'None':
                 $level = 'note';
                 break;
-        
+
         }
 
         $this->rulesIndex[$ruleId] = count($this->rulesIndex);
-        $this->rules[$this->rulesIndex[$ruleId]] = array("id"                   => $ruleId,
+        $this->rules[$this->rulesIndex[$ruleId]] = array('id'                   => $ruleId,
 //                                                           'name'             => $name,
                                                          'defaultConfiguration' => array('level' => $level,
                                                                                          // note, warning, error
@@ -96,12 +96,12 @@ class Sarif {
             return;
         }
 
-        $this->results[] = array("ruleId"    => $ruleId,
-                                 "ruleIndex" => $this->rulesIndex[$ruleId],
-                                 //"rule"      => $ruleId,  // same as ruleId? 
+        $this->results[] = array('ruleId'    => $ruleId,
+                                 'ruleIndex' => $this->rulesIndex[$ruleId],
+                                 //"rule"      => $ruleId,  // same as ruleId?
 
                                  'level'     => $this->rules[$this->rulesIndex[$ruleId]],
-                                 "message"   => array('text' => $fullcode,
+                                 'message'   => array('text' => $fullcode,
                                                      ),
                                  'locations' => array(array(//'id' => '',
                                                       // 'message' => array('text' => '', )
@@ -115,8 +115,8 @@ class Sarif {
                                                       ),
                                     )
                                  ),
-                                 "partialFingerprints" => array(
-            "primaryLocationLineHash" => sha1($fileName.":".$line.":".$fullcode),
+                                 'partialFingerprints' => array(
+            'primaryLocationLineHash' => sha1($fileName . ':' . $line . ':' . $fullcode),
         ),
 //                                 'codeFlows' => array('threadFlows' => array('locations' => array())),
                                  'relatedLocations' => array(),

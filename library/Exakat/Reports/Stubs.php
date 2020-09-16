@@ -115,7 +115,7 @@ HEADERS;
         $extends    = empty($class->extends) ? '' : ' extends ' . $class->extends;
         $phpdoc     = $this->normalizePhpdoc($class->phpdoc, 1);
         $attributes = $this->normalizeAttributes($class->attributes, 1);
-        
+
         if (empty($class->use)) {
             $use = '';
         } else {
@@ -327,7 +327,7 @@ HEADERS;
             return '';
         }
 
-        return str_repeat(self::INDENTATION, $level) . implode( PHP_EOL.str_repeat(self::INDENTATION, $level), $attributes) . PHP_EOL;
+        return str_repeat(self::INDENTATION, $level) . implode( PHP_EOL . str_repeat(self::INDENTATION, $level), $attributes) . PHP_EOL;
     }
 }
 
