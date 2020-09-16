@@ -41,6 +41,10 @@ class IsPhp extends Plugin {
 
         $this->phpClasses = parse_ini_file($config->dir_root . '/data/php_classes.ini')['classes'] ?? array();
         $this->phpClasses = makeFullnspath($this->phpClasses);
+        
+        $this->phpClassConstants  = array(); //array('\ziparchive' => array('CREATE'),);
+        $this->phpClassMethods    = array(); //array('\test' => array('method'),);
+        $this->phpClassProperties = array(); //array('\test' => array('$property'),);
     }
 
     public function run(Atom $atom, array $extras): void {
@@ -48,6 +52,29 @@ class IsPhp extends Plugin {
         $path = substr($atom->fullnspath ?? self::NOT_PROVIDED, $id);
 
         switch ($atom->atom) {
+            case 'Staticmethodcall' :
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? '');
+                $method = mb_strtolower(substr($extras['METHOD']->fullcode, 0, strpos($extras['METHOD']->fullcode, '(')));
+
+                if (in_array($method, $this->phpClassMethods[$path], \STRICT_COMPARISON)) {
+                    $atom->isPhp = true;
+                }
+                break;
+
+            case 'Staticproperty' :
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? '');
+                if (in_array($extras['MEMBER']->code, $this->phpClassProperties[$path], \STRICT_COMPARISON)) {
+                    $atom->isPhp = true;
+                }
+                break;
+
+            case 'Staticconstant' :
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? '');
+                if (in_array($extras['CONSTANT']->code, $this->phpClassConstants[$path], \STRICT_COMPARISON)) {
+                    $atom->isPhp = true;
+                }
+                break;
+
             case 'Functioncall' :
                 if (in_array(makeFullnspath($path), $this->phpFunctions, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
