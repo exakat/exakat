@@ -105,7 +105,7 @@ class IsExt extends Plugin {
             case 'Identifier' :
             case 'Nsname' :
                 if (in_array($path, $this->extConstants, \STRICT_COMPARISON) &&
-                    strpos($atom->fullnspath, '\\', 1) === false) {
+                    strpos($atom->fullcode, '\\', 1) === false) {
                     $atom->isExt = true;
                     break;
                 }
