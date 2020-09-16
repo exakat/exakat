@@ -115,8 +115,12 @@ class Intval extends Plugin {
                     } else {
                         $atom->intval = intdiv($extras['LEFT']->intval, $extras['RIGHT']->intval);
                     }
-                } elseif ($atom->code === '%' && $extras['RIGHT']->intval !== 0) {
-                    $atom->intval = ($extras['LEFT']->intval % $extras['RIGHT']->intval);
+                } elseif ($atom->code === '%') {
+                    if ($extras['RIGHT']->intval === 0) {
+                        $atom->intval = 0;
+                    } else {
+                        $atom->intval = ($extras['LEFT']->intval % $extras['RIGHT']->intval);
+                    }
                 }
                 break;
 
@@ -124,7 +128,7 @@ class Intval extends Plugin {
                 $atom->intval = ((int) $extras['LEFT']->intval) ** (int) $extras['RIGHT']->intval;
                 if (is_nan($atom->intval) || is_infinite($atom->intval)) {
                     $atom->intval = 0;
-                }
+                } 
                 break;
 
             case 'Arrayliteral' :
