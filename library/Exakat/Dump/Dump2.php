@@ -58,15 +58,6 @@ SQL;
         $this->sqlite->query($query);
 
         $query = <<<'SQL'
-CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                 including STRING,
-                                 included STRING,
-                                 type STRING
-                                )
-SQL;
-        $this->sqlite->query($query);
-
-        $query = <<<'SQL'
 CREATE TABLE classesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                                    including STRING,
                                    including_name STRING,
