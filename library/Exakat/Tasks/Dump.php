@@ -1619,10 +1619,6 @@ GREMLIN
         $begin = microtime(\TIME_AS_NUMBER);
         $this->collectFiles();
 
-        $this->collectPhpStructures();
-        $end = microtime(\TIME_AS_NUMBER);
-        $this->log->log( 'Collected Php Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
-        $begin = $end;
         $this->collectStructures();
         $end = microtime(\TIME_AS_NUMBER);
         $this->log->log( 'Collected Structures: ' . number_format(1000 * ($end - $begin), 2) . "ms\n");
