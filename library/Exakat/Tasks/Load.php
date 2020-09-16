@@ -47,6 +47,7 @@ use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
 use Exakat\Tasks\Helpers\IsPhp;
+use Exakat\Tasks\Helpers\IsExt;
 use Exakat\Tasks\Helpers\IsRead;
 use Exakat\Tasks\Helpers\IsModified;
 use Exakat\Tasks\Helpers\Php;
@@ -268,6 +269,7 @@ class Load extends Tasks {
         $this->plugins[] = new IsRead();
         $this->plugins[] = new IsModified();
         $this->plugins[] = new IsPhp();
+        $this->plugins[] = new IsExt();
 
         $this->sequences = new Sequences();
 
@@ -461,12 +463,12 @@ class Load extends Tasks {
     }
 
     public function runPlugins(AtomInterface $atom, array $linked = array()): void {
-        try {
-            foreach($this->plugins as $plugin) {
+        foreach($this->plugins as $plugin) {
+            try {
                 $plugin->run($atom, $linked);
+            } catch (\Throwable $t) {
+                $this->log->log('Runplugin error : ' . $t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine());
             }
-        } catch (\Throwable $t) {
-            $this->log->log('Runplugin error : ' . $t->getMessage() . ' ' . $t->getFile() . ' ' . $t->getLine());
         }
     }
 
@@ -1805,6 +1807,7 @@ class Load extends Tasks {
 
             $this->addLink($class, $extends, 'EXTENDS');
             $this->getFullnspath($extends, 'class', $extends);
+            $this->runPlugins($extends);
 
             $this->calls->addCall('class', $extends->fullnspath, $extends);
         } else {
@@ -1820,11 +1823,13 @@ class Load extends Tasks {
                 ++$this->id; // Skip implements
                 $this->checkPhpdoc();
                 $implements = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+
                 $this->addLink($class, $implements, 'IMPLEMENTS');
                 $fullcodeImplements[] = $implements->fullcode;
 
                 $this->getFullnspath($implements, 'class', $implements);
                 $this->calls->addCall('class', $implements->fullnspath, $implements);
+                $this->runPlugins($implements);
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         } else {
             $implements = '';
@@ -2246,6 +2251,7 @@ class Load extends Tasks {
                 $nsname = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
                 $this->getFullnspath($nsname, 'class', $nsname);
                 $this->calls->addCall('class', $nsname->fullnspath, $nsname);
+                $this->runPlugins($nsname);
             }
 
             $return[] = $nsname;
@@ -2995,6 +3001,7 @@ class Load extends Tasks {
     private function processString(): AtomInterface {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
             $nsname = $this->processNsname();
+            $this->runPlugins($nsname);
             return $this->processFCOA($nsname);
         } elseif (in_array($this->tokens[$this->id][0], array($this->phptokens::T_NAME_QUALIFIED,
                                                               $this->phptokens::T_NAME_RELATIVE,
@@ -3027,6 +3034,7 @@ class Load extends Tasks {
             } else {
                 $string = $this->addAtom('Newcall', $this->id);
             }
+            $this->runPlugins($string);
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name', $this->id);
          } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'), \STRICT_COMPARISON)) {
@@ -5030,11 +5038,12 @@ class Load extends Tasks {
             return $nsname;
         }
 
-        if ($nsname->isA(array('Nsname', 'Identifier'))) {
+        if ($nsname->isA(array('Nsname', 'Identifier', 'Newcall'))) {
             $type = $this->contexts->isContext(Context::CONTEXT_NEW) ? 'class' : 'const';
             $this->getFullnspath($nsname, $type, $nsname);
 
             if ($type === 'const') {
+                $this->runPlugins($nsname);
                 $this->calls->addCall('const', $nsname->fullnspath, $nsname);
             }
         }
@@ -5521,7 +5530,8 @@ class Load extends Tasks {
 
         $operator = $this->addAtom('New', $current);
         $operator->fullcode = $this->tokens[$current][1];
-        $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$current][0]), 'NEW', ' ');
+        $newcall = $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$current][0]), 'NEW', ' ');
+        $this->runPlugins($newcall);
 
         $this->contexts->toggleContext(Context::CONTEXT_NEW);
         if ($noSequence === false) {

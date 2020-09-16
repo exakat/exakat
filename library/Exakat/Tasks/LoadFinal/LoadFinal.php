@@ -199,7 +199,10 @@ g.V().hasLabel("Functioncall", "Identifier", "Nsname")
      .not(has('absolute', true))
      .has('token', 'T_STRING')
      .has("fullnspath")
-     .has("isPhp", true)
+     .or(
+         __.has("isPhp", true),
+         __.has("isExt", true),
+      )
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath");}
      .in("DEFINITION")
@@ -213,6 +216,7 @@ g.V().hasLabel("Functioncall", "Identifier", "Nsname")
      .sideEffect{ 
         it.get().property("fullnspath", actual);
         it.get().property('isPhp',      false); 
+        it.get().property('isExt',      false); 
     }
      .count();
 GREMLIN;

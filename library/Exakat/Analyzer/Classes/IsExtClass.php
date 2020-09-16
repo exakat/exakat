@@ -33,6 +33,13 @@ class IsExtClass extends Analyzer {
     }
 
     public function analyze(): void {
+        // function foo() : \Generator {}
+        $this->analyzerIs('Classes/ClassUsage')
+             ->hasNoIn('DEFINITION')
+             ->is('isExt', true);
+        $this->prepareQuery();
+        return;
+
         $exts = $this->rulesets->listAllAnalyzer('Extensions');
 
         $c = array($this->loadIni('php_classes.ini', 'classes'));

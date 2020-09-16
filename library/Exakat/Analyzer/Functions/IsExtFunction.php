@@ -28,26 +28,17 @@ use Exakat\Analyzer\Analyzer;
 class IsExtFunction extends Analyzer {
 
     public function analyze(): void {
-        $exts = $this->rulesets->listAllAnalyzer('Extensions');
-
-        $f = array((array) $this->loadIni('php_functions.ini', 'functions'));
-        foreach($exts as $ext) {
-            $ini = $this->load( str_replace('Extensions\\Ext', '', $ext), 'functions');
-
-            if (!empty($ini[0])) {
-                $f[] =  $ini;
-            }
-        }
-        $functions = array_merge(...$f);
-
-        $functions = array_keys(array_count_values($functions));
-        $functions = makeFullNsPath($functions);
-
-        $this->atomFunctionIs($functions);
+        // substr('abc', 0, 1)
+        $this->atomIs('Functioncall')
+             ->hasNoIn('DEFINITION')
+             ->is('isExt', true);
         $this->prepareQuery();
 
+        // isset($a)
         $this->atomIs(array('Isset', 'Isset', 'Empty', 'Unset', 'Exit', 'Empty', 'Echo', 'Print'));
         $this->prepareQuery();
+
+        return;
     }
 }
 

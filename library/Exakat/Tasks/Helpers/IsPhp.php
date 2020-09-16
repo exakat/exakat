@@ -29,7 +29,7 @@ class IsPhp extends Plugin {
     public $type = 'boolean';
     private $phpFunctions = array();
     private $phpConstants = array();
-    private $phpClasses = array();
+    private $phpClasses   = array();
 
     public function __construct() {
         parent::__construct();
@@ -46,16 +46,12 @@ class IsPhp extends Plugin {
     }
 
     public function run(Atom $atom, array $extras): void {
-        $id = strrpos($atom->fullnspath, '\\');
-        if ($id === false) {
-            return;
-        }
-        $path = substr($atom->fullnspath, $id);
-//                assert(is_int(strrpos($atom->fullnspath, '\\')), 'No \\ in '.$atom->fullnspath.'. '.print_r($atom, true));
+        $id = strrpos($atom->fullnspath ?? '', '\\') ?: 0;
+        $path = substr($atom->fullnspath ?? '', $id);
 
         switch ($atom->atom) {
             case 'Functioncall' :
-                if (in_array($path, $this->phpFunctions, \STRICT_COMPARISON)) {
+                if (in_array(makeFullnspath($path), $this->phpFunctions, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                     $atom->fullnspath = $path;
                 }
@@ -66,10 +62,17 @@ class IsPhp extends Plugin {
                 $extras['NAME']->isPhp = false;
                 break;
 
+            case 'Instanceof' :
+                // Warning : atom->fullnspath for classes (no fallback)
+                if (in_array(makeFullnspath($extras['CLASS']->fullnspath ?? ''), $this->phpClasses, \STRICT_COMPARISON)) {
+                    $extras['CLASS']->isPhp = true;
+                }
+                break;
+
             case 'Newcall' :
-                if (in_array($path, $this->phpClasses, \STRICT_COMPARISON)) {
+                // Warning : atom->fullnspath for classes (no fallback)
+                if (in_array(makeFullnspath($atom->fullnspath), $this->phpClasses, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
-                    $atom->fullnspath = $path;
                 }
                 break;
 
@@ -77,13 +80,30 @@ class IsPhp extends Plugin {
             case 'Nsname' :
                 if (in_array($path, $this->phpConstants, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
-                    $atom->fullnspath = $path;
                 }
+
+                if (in_array(makeFullnspath($path), $this->phpClasses, \STRICT_COMPARISON)) {
+                    $atom->isPhp = true;
+                    break;
+                }
+
+                break;
+
+            case 'Isset' :
+            case 'Isset' :
+            case 'Empty' : 
+            case 'Unset' :
+            case 'Exit'  : 
+            case 'Empty' :
+            case 'Echo'  :
+            case 'Print' :
+                $atom->isPhp = true;
                 break;
 
             default :
                 // Nothing
         }
+
     }
 }
 

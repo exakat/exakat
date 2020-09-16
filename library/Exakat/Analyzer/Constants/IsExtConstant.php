@@ -26,50 +26,18 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class IsExtConstant extends Analyzer {
-
     public function dependsOn(): array {
         return array('Constants/ConstantUsage',
                     );
     }
 
     public function analyze(): void {
-        $exts = $this->rulesets->listAllAnalyzer('Extensions');
-
-        $constants = array($this->loadIni('php_constants.ini', 'constants'));
-        foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext);
-            $ini = $this->load($inifile, 'constants');
-
-            if (!empty($ini[0])) {
-                $constants[] = $ini;
-            }
-        }
-
-        $constants = array_merge(...$constants);
-        if (empty($constants)) {
-            // This won't happen, unless the above reading has failed
-            return;
-        }
-
-        $constants = array_unique($constants);
-        $constants = array_values($constants);
-        $constantsFullNs = makeFullNsPath($constants, \FNP_CONSTANT);
-
-        // based on fullnspath
-        $this->analyzerIs('Constants/ConstantUsage')
-             ->atomIs('Identifier')
-             ->hasNoParent('Constant', 'DEFINITION')
-             ->is('isPhp', true)
-             ->raw('filter{ fnp = it.get().value("fullnspath"); d = fnp.tokenize("\\\\").last(); ***.contains("\\\\" + d);}', $constantsFullNs);
+        // echo E_ALL
+        $this->atomIs(array('Nsname', 'Identifier'))
+             ->analyzerIs('Constants/ConstantUsage')
+             ->hasNoIn('DEFINITION')
+             ->is('isExt', true);
         $this->prepareQuery();
-
-        $this->analyzerIs('Constants/ConstantUsage')
-             ->atomIs('Nsname')
-             ->hasNoParent('Constant', 'DEFINITION')
-             ->is('isPhp', true)
-             ->fullnspathIs($constantsFullNs);
-        $this->prepareQuery();
-
     }
 }
 
