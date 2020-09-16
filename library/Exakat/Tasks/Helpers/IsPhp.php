@@ -20,8 +20,6 @@
  *
 */
 
-declare( strict_types = 1);
-
 namespace Exakat\Tasks\Helpers;
 
 class IsPhp extends Plugin {
@@ -46,8 +44,8 @@ class IsPhp extends Plugin {
     }
 
     public function run(Atom $atom, array $extras): void {
-        $id = strrpos($atom->fullnspath ?? '', '\\') ?: 0;
-        $path = substr($atom->fullnspath ?? '', $id);
+        $id = strrpos($atom->fullnspath ?? self::NOT_PROVIDED, '\\') ?: 0;
+        $path = substr($atom->fullnspath ?? self::NOT_PROVIDED, $id);
 
         switch ($atom->atom) {
             case 'Functioncall' :
@@ -64,7 +62,7 @@ class IsPhp extends Plugin {
 
             case 'Instanceof' :
                 // Warning : atom->fullnspath for classes (no fallback)
-                if (in_array(makeFullnspath($extras['CLASS']->fullnspath ?? ''), $this->phpClasses, \STRICT_COMPARISON)) {
+                if (in_array(makeFullnspath($extras['CLASS']->fullnspath ?? self::NOT_PROVIDED), $this->phpClasses, \STRICT_COMPARISON)) {
                     $extras['CLASS']->isPhp = true;
                 }
                 break;

@@ -190,7 +190,7 @@ SQL;
         }
 
         if ($this->totalProperties === 0) {
-            $this->log("properties\t$count\t0");
+            $this->log("properties\t0");
 
             return;
         }

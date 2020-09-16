@@ -217,10 +217,10 @@ class IsRead extends Plugin {
                 break;
 
             case 'Array':
-                if (in_array($extras['VARIABLE']->atom ?? '', $this->variables, STRICT_COMPARISON)) {
+                if (in_array($extras['VARIABLE']->atom ?? self::NOT_PROVIDED, $this->variables, STRICT_COMPARISON)) {
                     $extras['VARIABLE']->isRead = true;
                 }
-                if (in_array($extras['INDEX']->atom ?? '', $this->variables, STRICT_COMPARISON)) {
+                if (in_array($extras['INDEX']->atom ?? self::NOT_PROVIDED, $this->variables, STRICT_COMPARISON)) {
                     $extras['INDEX']->isRead = true;
                 }
                 break;
@@ -243,19 +243,19 @@ class IsRead extends Plugin {
 
             case 'Member':
                 // Might be called without the extras
-                if (in_array($extras['OBJECT']->atom ?? '', $this->variables, STRICT_COMPARISON)) {
+                if (in_array($extras['OBJECT']->atom ?? self::NOT_PROVIDED, $this->variables, STRICT_COMPARISON)) {
                     $extras['OBJECT']->isRead = true;
                 }
-                if (in_array($extras['MEMBER']->atom ?? '', $this->variables, STRICT_COMPARISON)) {
+                if (in_array($extras['MEMBER']->atom ?? self::NOT_PROVIDED, $this->variables, STRICT_COMPARISON)) {
                     $extras['MEMBER']->isRead = true;
                 }
                 break;
 
             case 'Methodcall':
-                if (in_array($extras['OBJECT']->atom ?? '', $this->variables, STRICT_COMPARISON)) {
+                if (in_array($extras['OBJECT']->atom ?? self::NOT_PROVIDED, $this->variables, STRICT_COMPARISON)) {
                     $extras['OBJECT']->isRead = true;
                 }
-                if (in_array($extras['METHOD']->atom ?? '', $this->variables, STRICT_COMPARISON)) {
+                if (in_array($extras['METHOD']->atom ?? self::NOT_PROVIDED, $this->variables, STRICT_COMPARISON)) {
                     $extras['METHOD']->isRead = true;
                 }
                 break;
@@ -264,7 +264,7 @@ class IsRead extends Plugin {
             case 'Staticmethodcall':
             case 'Staticclass':
             case 'Staticconstant':
-                if (in_array($extras['CLASS']->atom, $this->variables, STRICT_COMPARISON)) {
+                if (in_array($extras['CLASS']->atom ?? self::NOT_PROVIDED, $this->variables, STRICT_COMPARISON)) {
                     $extras['CLASS']->isRead = true;
                 }
                 break;

@@ -27,7 +27,7 @@ use Exakat\Project as Project;
 class EmptyConfig extends Config {
 
     public function loadConfig(Project $project) : ?string {
-
+        return null;
     }
 }
 

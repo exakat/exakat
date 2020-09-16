@@ -60,7 +60,7 @@ map{
 }
 GREMLIN
 );
-            $res = $this->prepareQuery();
+            $this->prepareQuery();
             $this->execQuery();
         }
 /*

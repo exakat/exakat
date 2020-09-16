@@ -24,7 +24,7 @@ namespace Exakat\Graph;
 
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\GremlinException;
-use Exakat\Exceptions\UnkownGremlinVersion;
+use Exakat\Exceptions\UnknownGremlinVersion;
 use Brightzone\GremlinDriver\Connection;
 
 class GSNeo4jV3 extends Graph {
@@ -91,7 +91,7 @@ class GSNeo4jV3 extends Graph {
         // 3.4 only
         $this->gremlinVersion = substr($gremlinVersion, 13, -6);
         if(!in_array($this->gremlinVersion, array('3.4'), STRICT_COMPARISON)) {
-            throw new UnkownGremlinVersion($this->gremlinVersion);
+            throw new UnknownGremlinVersion($this->gremlinVersion);
         }
 
         $this->db = new Connection(array( 'host'     => $this->config->gsneo4jv3_host,
