@@ -132,7 +132,6 @@ class Weekly extends Ambassador {
         }
 
         $this->globalGrade = 0;
-        $this->detailsGrade = array();
 
         $grade = 0;
         foreach($this->resultsCounts as $name => $value) {

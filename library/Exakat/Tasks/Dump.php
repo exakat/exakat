@@ -431,11 +431,12 @@ GREMLIN
 
         $total = 0;
 
-        $cit = array();
-        $citId = array();
+        $cit            = array();
+        $toAttributes   = array();
+        $citId          = array();
         $cit_implements = array();
-        $cit_use = array();
-        $citCount = $this->dump->getTableCount('cit');
+        $cit_use        = array();
+        $citCount       = $this->dump->getTableCount('cit');
 
         foreach($classes as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']) . '\\';

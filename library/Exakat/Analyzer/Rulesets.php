@@ -30,6 +30,7 @@ class Rulesets implements RulesetsInterface {
     private $ext    = null;
     private $extra  = null;
     private $dev    = null;
+    private $ignore = null;
 
     private static $instanciated = array();
 

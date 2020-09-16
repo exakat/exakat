@@ -9,7 +9,7 @@ $expected     = array('static::definedinStatic( )',
                      );
 
 $expected_not = array('static::$definedinStatic',
-                      'static::undefined()',
+                      'static::undefined( )',
                      );
 
 ?>

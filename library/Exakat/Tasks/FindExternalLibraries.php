@@ -116,13 +116,7 @@ class FindExternalLibraries extends Tasks {
                 display( "Ignore $file ($ignore)\n");
                 continue;
             }
-            $s = $this->process($file);
-
-            if (!empty($s)) {
-                $r[] = $s;
-                $ignore = array_pop($s);
-                $ignoreLength = strlen($ignore);
-            }
+            $this->process($file);
         }
 
         if (empty($r)) {
