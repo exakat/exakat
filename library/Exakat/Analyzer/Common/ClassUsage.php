@@ -49,9 +49,10 @@ class ClassUsage extends Analyzer {
         $this->prepareQuery();
 
         // Typehint (return and argument), catch, instanceof, classes
-        $this->atomIs(self::CONSTANTS_ALL)
+        $this->atomIs(array('Identifier',  'Nsname'))
              ->hasIn(array('TYPEHINT', 'RETURNTYPE', 'EXTENDS', 'IMPLEMENTS', 'CLASS'))
-             ->fullnspathIs($classes);
+             ->fullnspathIs($classes)
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         $this->atomIs('Classalias')
