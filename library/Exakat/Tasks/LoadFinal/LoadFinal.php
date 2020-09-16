@@ -197,7 +197,6 @@ GREMLIN;
 g.V().hasLabel("Functioncall", "Identifier", "Nsname")
      .not(__.in('NAME'))
      .not(has('absolute', true))
-     .has('token', 'T_STRING')
      .has("fullnspath")
      .or(
          __.has("isPhp", true),

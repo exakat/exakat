@@ -5029,14 +5029,14 @@ class Load extends Tasks {
             return $nsname;
         }
 
-        if ($nsname->atom === 'Newcall' &&
-            !isset($nsname->count)) {
+        if ($nsname->atom === 'Newcall') {
             // New call, but no () : it still requires an argument count
-            $nsname->count = 0;
+            $nsname->count ??= 0;
+
             return $nsname;
         }
 
-        if ($nsname->isA(array('Nsname', 'Identifier', 'Newcall'))) {
+        if ($nsname->isA(array('Nsname', 'Identifier'))) {
             $type = $this->contexts->isContext(Context::CONTEXT_NEW) ? 'class' : 'const';
             $this->getFullnspath($nsname, $type, $nsname);
 

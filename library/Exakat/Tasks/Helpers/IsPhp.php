@@ -76,7 +76,8 @@ class IsPhp extends Plugin {
 
             case 'Identifier' :
             case 'Nsname' :
-                if (in_array($path, $this->phpConstants, \STRICT_COMPARISON)) {
+                if (in_array($path, $this->phpConstants, \STRICT_COMPARISON) &&
+                    strpos($atom->fullnspath, '\\', 1) === false) { // No extra \\, besides the first one
                     $atom->isPhp = true;
                 }
 
