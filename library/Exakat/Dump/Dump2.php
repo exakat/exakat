@@ -57,15 +57,6 @@ CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
         $this->sqlite->query($query);
 
-        $query = <<<'SQL'
-CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              name STRING,
-                              type STRING,
-                              count INTEGER
-)
-SQL;
-        $this->sqlite->query($query);
-
         // Name spaces
         $query = <<<'SQL'
 CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,

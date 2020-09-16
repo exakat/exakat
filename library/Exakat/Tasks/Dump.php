@@ -1381,35 +1381,6 @@ GREMLIN
         $this->files = $this->dump->fetchTable('files')->toHash('file', 'id');
     }
 
-    private function collectPhpStructures(): void {
-        $this->collectPhpStructures2('Functioncall', 'Functions/IsExtFunction', 'function');
-        $this->collectPhpStructures2('Identifier", "Nsname', 'Constants/IsExtConstant', 'constant');
-        $this->collectPhpStructures2('Identifier", "Nsname', 'Interfaces/IsExtInterface', 'interface');
-        $this->collectPhpStructures2('Identifier", "Nsname', 'Traits/IsExtTrait', 'trait');
-        $this->collectPhpStructures2('Newcall", "Identifier", "Nsname', 'Classes/IsExtClass', 'class');
-    }
-
-    private function collectPhpStructures2(string $label, string $analyzer, string $type): int {
-        $query = <<<GREMLIN
-g.V().hasLabel("$label").where( __.in("ANALYZED").has("analyzer", "$analyzer"))
-//.optional( __.out("NAME"))
-.groupCount("m").by("fullnspath").cap("m").next().sort{ it.value.toInteger() };
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $res->deHash(array($type));
-
-        $store = array();
-        foreach($res->toArray() as $row) {
-            $row[] = $type;
-            $store[] = $row;
-        }
-
-        $total = $this->dump->storeInTable('phpStructures', $store);
-        display("$total PHP {$type}s\n");
-
-        return $total;
-    }
-
     private function collectHashCounts(Query $query, string $name): void {
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         $index = $result->toArray()[0] ?? array();
