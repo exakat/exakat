@@ -43,7 +43,7 @@ class Dot {
         if (!isset($this->links[$o])) {
             $this->links[$o] = array();
         }
-        $this->links[$o][] = $d;
+        $this->links[$o][$d] = $d;
     }
 
     public function setOptions($what, $name, $value) {
