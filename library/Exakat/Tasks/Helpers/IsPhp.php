@@ -53,24 +53,24 @@ class IsPhp extends Plugin {
 
         switch ($atom->atom) {
             case 'Staticmethodcall' :
-                $path = makeFullnspath($extras['CLASS']->fullnspath ?? '');
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? self::NOT_PROVIDED);
                 $method = mb_strtolower(substr($extras['METHOD']->fullcode, 0, strpos($extras['METHOD']->fullcode, '(')));
 
-                if (in_array($method, $this->phpClassMethods[$path], \STRICT_COMPARISON)) {
+                if (in_array($method, $this->phpClassMethods[$path] ?? array(), \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                 }
                 break;
 
             case 'Staticproperty' :
-                $path = makeFullnspath($extras['CLASS']->fullnspath ?? '');
-                if (in_array($extras['MEMBER']->code, $this->phpClassProperties[$path], \STRICT_COMPARISON)) {
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? self::NOT_PROVIDED);
+                if (in_array($extras['MEMBER']->code ?? self::NOT_PROVIDED, $this->phpClassProperties[$path] ?? array(), \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                 }
                 break;
 
             case 'Staticconstant' :
-                $path = makeFullnspath($extras['CLASS']->fullnspath ?? '');
-                if (in_array($extras['CONSTANT']->code, $this->phpClassConstants[$path], \STRICT_COMPARISON)) {
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? self::NOT_PROVIDED);
+                if (in_array($extras['CONSTANT']->code ?? self::NOT_PROVIDED, $this->phpClassConstants[$path] ?? array(), \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
                 }
                 break;
