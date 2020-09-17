@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$results[$row[\'a\']][\'b\'][$row[\'c\']][0]',
+$expected     = array('$results[$row[\'a\']][\'b\'][$row[\'c6\']][0]',
                      );
 
 $expected_not = array('$a::$s[$row[\'a\']][][$row[\'c5\']]',
