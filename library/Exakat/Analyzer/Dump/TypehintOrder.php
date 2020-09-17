@@ -37,30 +37,75 @@ CREATE TABLE typehintOrder (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
     public function analyze(): void {
+        $excludedTypes = array('Void', 'Null', 'Scalartypehint');
+        
+        // function foo(A $a) : B {} ( A > B)
         $this ->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
+              ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
               ->as('returned')
-              ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)
               ->back('first')
               ->outIs('ARGUMENT')
               ->outIs('TYPEHINT')
-              ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)
+              ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
               ->as('argument')
               ->select(array('first'    => 'fullnspath',
                              'argument' => 'fullnspath',
                              'returned' => 'fullnspath'));
         $this->prepareQuery();
 
+        // class x { function foo(A $a) : B {} ( X > B) }
         $this ->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
+              ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
               ->as('returned')
-              ->atomIsNot(array('Void', 'Scalartypehint'), self::WITHOUT_CONSTANTS)
               ->back('first')
-              ->outIs('ARGUMENT')
-              ->atomIs('Void')
+              ->inIs('METHOD')
+              ->atomis('Class')
               ->as('argument')
               ->select(array('first'    => 'fullnspath',
-                             'argument' => '\\\\void',
+                             'argument' => 'fullnspath',
+                             'returned' => 'fullnspath'));
+        $this->prepareQuery();
+
+        // class x { function __construct(C $c) {} function foo(A $a) : B {} ( X > B) }
+        $this ->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
+              ->outIs('RETURNTYPE')
+              ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
+              ->as('returned')
+              ->back('first')
+              ->inIs('METHOD')
+              ->atomis('Class')
+              ->outIs('MAGICMETHOD')
+              ->outIs('NAME')
+              ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->outIs('ARGUMENT')
+              ->outIs('TYPEHINT')
+              ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
+              ->as('argument')
+              ->select(array('first'    => 'fullnspath',
+                             'argument' => 'fullnspath',
+                             'returned' => 'fullnspath'));
+        $this->prepareQuery();
+
+        // class x { function __construct(C $c)  ( C > X) }
+        $this ->atomIs('Magicmethod', self::WITHOUT_CONSTANTS)
+              ->outIs('NAME')
+              ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->outIs('ARGUMENT')
+              ->outIs('TYPEHINT')
+              ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
+              ->as('argument')
+              
+              ->back('first')
+              ->inIs('MAGICMETHOD')
+              ->atomIs('Class')
+              ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
+              ->as('returned')
+              ->select(array('first'    => 'fullnspath',
+                             'argument' => 'fullnspath',
                              'returned' => 'fullnspath'));
         $this->prepareQuery();
     }
