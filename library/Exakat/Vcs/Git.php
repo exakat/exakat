@@ -106,8 +106,9 @@ class Git extends Vcs {
             $branch = '';
         }
 
-        trim(shell_exec("cd {$this->destinationFull}/;GIT_TERMINAL_PROMPT=0  {$this->executable} checkout $branch --quiet; {$this->executable} pull --quiet") ?? '');
-        $resFinal = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch");
+        shell_exec("cd {$this->destinationFull}/;GIT_TERMINAL_PROMPT=0  {$this->executable} checkout $branch --quiet; {$this->executable} pull --quiet");
+
+        $resFinal = shell_exec("cd {$this->destinationFull}/; {$this->executable} show-ref --heads $branch") ?? '';
         if (strpos($resFinal, ' ') !== false) {
             list($resFinal) = explode(' ', $resFinal, 1);
         }
@@ -215,7 +216,7 @@ class Git extends Vcs {
         // Added and removed ?
          $res = shell_exec("cd {$this->destinationFull}; {$this->executable} diff --diff-filter=a --name-only $next -- . ") ?? '';
 
-        if ($res === null) {
+        if (empty($res)) {
             return array();
         }
 
@@ -234,7 +235,7 @@ class Git extends Vcs {
         // No chane, may be, but we still need to update the code
         shell_exec("cd {$this->destinationFull}; {$this->executable} checkout $next") ?? '';
 
-        if ($res === null) {
+        if (empty($res)) {
             return array();
         }
 
