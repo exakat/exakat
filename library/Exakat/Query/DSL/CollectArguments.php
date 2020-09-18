@@ -29,7 +29,7 @@ class CollectArguments extends DSL {
         switch(func_num_args()) {
             case 2:
                 list($variable, $property) = func_get_args();
-                $this->assertProperty($property, self::VARIABLE_WRITE);
+                $this->assertProperty($property);
                 break;
 
             case 1:

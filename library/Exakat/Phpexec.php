@@ -92,7 +92,7 @@ class Phpexec {
                 throw new NoPhpBinary('PHP binary for version ' . $this->requestedVersion . ' (' . PHP_BINARY . ') doesn\'t have the right middle version : "' . $this->actualVersion . '". Please, check config/exakat.ini');
             }
         } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $pathToBinary)) {
-            $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":/exakat  -w /exakat ' . $pathToBinary . ' php -v 2>&1');
+            $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":/exakat  -w /exakat ' . $pathToBinary . ' php -v 2>&1') ?? '';
             if (preg_match('/PHP (\d\.\d+\.\d+)/', $res, $r)) {
                 $this->actualVersion = $r[1];
             } else {
@@ -239,7 +239,7 @@ class Phpexec {
         if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $shell = "docker run -it --rm {$this->phpexec} php -v 2>&1";
 
-            $res = shell_exec($shell);
+            $res = shell_exec($shell) ?? '';
         } else {
             $res = shell_exec("{$this->phpexec} -v 2>&1");
         }
@@ -399,7 +399,7 @@ class Phpexec {
 );
 echo '\\\$config = '.var_export(\\\$results, true).';';
 PHP;
-            $readPHPConfig = shell_exec("{$this->phpexec} -r \"$php\" 2>&1");
+            $readPHPConfig = shell_exec("{$this->phpexec} -r \"$php\" 2>&1") ?? '';
             if (strpos($readPHPConfig, 'Error') === false ) {
                 try {
                     // @ hides potential errors.
