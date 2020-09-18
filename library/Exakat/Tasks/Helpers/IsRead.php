@@ -277,7 +277,7 @@ class IsRead extends Plugin {
             case 'Print' :
             case 'Echo' :
 
-//            case 'Sequence' :
+            case 'Sequence' :
                 foreach($extras as $extra) {
                     if (in_array($extra->atom, $this->variables, STRICT_COMPARISON)) {
                         $extra->isRead = true;
