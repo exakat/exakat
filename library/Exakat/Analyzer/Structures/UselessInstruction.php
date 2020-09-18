@@ -278,6 +278,17 @@ class UselessInstruction extends Analyzer {
              ->atomIs('Null', self::WITH_CONSTANTS)
              ->back('first');
         $this->prepareQuery();
+
+        // $a ?: false
+        $this->atomIs('Ternary')
+             ->outIs('THEN')
+             ->atomIs('Void')
+             ->back('first')
+             ->outIs('ELSE')
+             ->atomIs('Boolean', self::WITH_CONSTANTS)
+             ->fullnspathIs('\\false')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
