@@ -3039,7 +3039,7 @@ class Load extends Tasks {
             $string = $this->addAtom('Boolean', $this->id);
 
             $string->noDelimiter = mb_strtolower($string->code) === 'true' ? 1 : '';
-            $string->fullnspath = '\\boolean';
+            $string->fullnspath = '\\' . mb_strtolower($string->code);
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null', $this->id);
             $string->fullnspath = '\\null';
