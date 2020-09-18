@@ -79,7 +79,7 @@ class CloseNaming extends Data {
         $sizes[] = array();// Extra one for the next loop
         foreach($sizes as $size => $vars) {
             foreach($vars as $variable) {
-                $r = array_filter( $sizes[$size + 1], function (string $x) use ($variable) { return levenshtein($x, $variable) === 1; });
+                $r = array_filter( $sizes[$size + 1], function (string $x) use ($variable) : bool { return levenshtein($x, $variable) === 1; });
                 if (!empty($r)) {
                     $results[$variable]['one'] = $r;
                 }
@@ -90,7 +90,7 @@ class CloseNaming extends Data {
         foreach($sizes as $size => $vars) {
             if ($size < 5) { continue; }
             foreach($vars as $variable) {
-                $r = array_filter( $vars, function (string $x) use ($variable) { return $this->groupSwap($x, $variable); });
+                $r = array_filter( $vars, function (string $x) use ($variable) : bool { return $this->groupSwap($x, $variable); });
                 if (!empty($r)) {
                     $results[$variable]['swap'] = $r;
                 }
