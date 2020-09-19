@@ -5031,7 +5031,7 @@ class Load extends Tasks {
 
         if ($nsname->atom === 'Newcall') {
             // New call, but no () : it still requires an argument count
-            $nsname->count ??= 0;
+            $nsname->count = $nsname->count ?? 0 ;
 
             return $nsname;
         }
