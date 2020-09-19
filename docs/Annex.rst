@@ -133,179 +133,179 @@ PHP extensions are used to check for structures usage (classes, interfaces, etc.
 PHP extensions are described with the list of structures they define : functions, classes, constants, traits, variables, interfaces, namespaces, and directives. 
 
 * `ext/amqp <https://github.com/alanxz/rabbitmq-c>`_
-* `ext/apache <http://php.net/manual/en/book.apache.php>`_
-* `ext/apc <http://php.net/apc>`_
+* `ext/apache <https://www.php.net/manual/en/book.apache.php>`_
+* `ext/apc <https://www.php.net/apc>`_
 * `ext/apcu <http://www.php.net/manual/en/book.apcu.php>`_
-* `ext/array <http://php.net/manual/en/book.array.php>`_
+* `ext/array <https://www.php.net/manual/en/book.array.php>`_
 * `ext/php-ast <https://pecl.php.net/package/ast>`_
 * `ext/async <https://github.com/concurrent-php/ext-async>`_
 * `ext/bcmath <http://www.php.net/bcmath>`_
-* `ext/bzip2 <http://php.net/bzip2>`_
+* `ext/bzip2 <https://www.php.net/bzip2>`_
 * `ext/cairo <https://cairographics.org/>`_
 * `ext/calendar <http://www.php.net/manual/en/ref.calendar.php>`_
 * `ext/cmark <https://github.com/commonmark/cmark>`_
-* `ext/com <http://php.net/manual/en/book.com.php>`_
+* `ext/com <https://www.php.net/manual/en/book.com.php>`_
 * `ext/crypto <https://pecl.php.net/package/crypto>`_
-* `ext/csprng <http://php.net/manual/en/book.csprng.php>`_
-* `ext/ctype <http://php.net/manual/en/ref.ctype.php>`_
-* `ext/curl <http://php.net/manual/en/book.curl.php>`_
-* `ext/cyrus <http://php.net/manual/en/book.cyrus.php>`_
-* `ext/date <http://php.net/manual/en/book.datetime.php>`_
-* `ext/db2 <http://php.net/manual/en/book.ibm-db2.php>`_
-* `ext/dba <http://php.net/manual/en/book.dba.php>`_
+* `ext/csprng <https://www.php.net/manual/en/book.csprng.php>`_
+* `ext/ctype <https://www.php.net/manual/en/ref.ctype.php>`_
+* `ext/curl <https://www.php.net/manual/en/book.curl.php>`_
+* `ext/cyrus <https://www.php.net/manual/en/book.cyrus.php>`_
+* `ext/date <https://www.php.net/manual/en/book.datetime.php>`_
+* `ext/db2 <https://www.php.net/manual/en/book.ibm-db2.php>`_
+* `ext/dba <https://www.php.net/manual/en/book.dba.php>`_
 * `ext/decimal <http://php-decimal.io>`_
-* `ext/dio <http://php.net/manual/en/refs.fileprocess.file.php>`_
-* `ext/dom <http://php.net/manual/en/book.dom.php>`_
+* `ext/dio <https://www.php.net/manual/en/refs.fileprocess.file.php>`_
+* `ext/dom <https://www.php.net/manual/en/book.dom.php>`_
 * `ext/ds <http://docs.php.net/manual/en/book.ds.php>`_
 * `ext/eaccelerator <http://eaccelerator.net/>`_
 * `ext/eio <http://software.schmorp.de/pkg/libeio.html>`_
-* `ext/enchant <http://php.net/manual/en/book.enchant.php>`_
-* `ext/ereg <http://php.net/manual/en/function.ereg.php>`_
-* `ext/ev <http://php.net/manual/en/book.ev.php>`_
-* `ext/event <http://php.net/event>`_
-* `ext/exif <http://php.net/manual/en/book.exif.php>`_
-* `ext/expect <http://php.net/manual/en/book.expect.php>`_
+* `ext/enchant <https://www.php.net/manual/en/book.enchant.php>`_
+* `ext/ereg <https://www.php.net/manual/en/function.ereg.php>`_
+* `ext/ev <https://www.php.net/manual/en/book.ev.php>`_
+* `ext/event <https://www.php.net/event>`_
+* `ext/exif <https://www.php.net/manual/en/book.exif.php>`_
+* `ext/expect <https://www.php.net/manual/en/book.expect.php>`_
 * `ext/fam <http://oss.sgi.com/projects/fam/>`_
-* `ext/fann <http://php.net/manual/en/book.fann.php>`_
+* `ext/fann <https://www.php.net/manual/en/book.fann.php>`_
 * `ext/fdf <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_
 * `ext/ffi <https://www.php.net/manual/en/book.ffi.php>`_
 * `ext/ffmpeg <http://ffmpeg-php.sourceforge.net/>`_
 * `ext/file <http://www.php.net/manual/en/book.filesystem.php>`_
-* `ext/fileinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `ext/filter <http://php.net/manual/en/book.filter.php>`_
-* `ext/fpm <http://php.net/fpm>`_
+* `ext/fileinfo <https://www.php.net/manual/en/book.fileinfo.php>`_
+* `ext/filter <https://www.php.net/manual/en/book.filter.php>`_
+* `ext/fpm <https://www.php.net/fpm>`_
 * `ext/ftp <http://www.faqs.org/rfcs/rfc959>`_
-* `ext/gd <http://php.net/manual/en/book.image.php>`_
-* `ext/gearman <http://php.net/manual/en/book.gearman.php>`_
-* `ext/gender <http://php.net/manual/en/book.gender.php>`_
-* `ext/geoip <http://php.net/manual/en/book.geoip.php>`_
+* `ext/gd <https://www.php.net/manual/en/book.image.php>`_
+* `ext/gearman <https://www.php.net/manual/en/book.gearman.php>`_
+* `ext/gender <https://www.php.net/manual/en/book.gender.php>`_
+* `ext/geoip <https://www.php.net/manual/en/book.geoip.php>`_
 * `ext/gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `ext/gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
-* `ext/gmp <http://php.net/manual/en/book.gmp.php>`_
+* `ext/gmp <https://www.php.net/manual/en/book.gmp.php>`_
 * `ext/gnupgp <http://www.php.net/manual/en/book.gnupg.php>`_
 * `ext/grpc <http://www.grpc.io/>`_
 * `ext/hash <http://www.php.net/manual/en/book.hash.php>`_
-* `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
+* `ext/hrtime <https://www.php.net/manual/en/intro.hrtime.php>`_
 * `ext/pecl_http <https://github.com/m6w6/ext-http>`_
-* `ext/ibase <http://php.net/manual/en/book.ibase.php>`_
-* `ext/iconv <http://php.net/iconv>`_
+* `ext/ibase <https://www.php.net/manual/en/book.ibase.php>`_
+* `ext/iconv <https://www.php.net/iconv>`_
 * `ext/igbinary <https://github.com/igbinary/igbinary/>`_
 * `ext/iis <http://www.php.net/manual/en/book.iisfunc.php>`_
-* `ext/imagick <http://php.net/manual/en/book.imagick.php>`_
+* `ext/imagick <https://www.php.net/manual/en/book.imagick.php>`_
 * `ext/imap <http://www.php.net/imap>`_
-* `ext/info <http://php.net/manual/en/book.info.php>`_
-* `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
+* `ext/info <https://www.php.net/manual/en/book.info.php>`_
+* `ext/inotify <https://www.php.net/manual/en/book.inotify.php>`_
 * `ext/intl <http://site.icu-project.org/>`_
 * `ext/json <http://www.faqs.org/rfcs/rfc7159>`_
 * `ext/judy <http://judy.sourceforge.net/>`_
-* `ext/kdm5 <http://php.net/manual/en/book.kadm5.php>`_
-* `ext/lapack <http://php.net/manual/en/book.lapack.php>`_
-* `ext/ldap <http://php.net/manual/en/book.ldap.php>`_
+* `ext/kdm5 <https://www.php.net/manual/en/book.kadm5.php>`_
+* `ext/lapack <https://www.php.net/manual/en/book.lapack.php>`_
+* `ext/ldap <https://www.php.net/manual/en/book.ldap.php>`_
 * `ext/leveldb <https://github.com/reeze/php-leveldb>`_
 * `ext/libevent <http://www.libevent.org/>`_
 * `ext/libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `ext/libxml <http://www.php.net/manual/en/book.libxml.php>`_
-* `ext/lua <http://php.net/manual/en/book.lua.php>`_
-* `ext/lzf <http://php.net/lzf>`_
+* `ext/lua <https://www.php.net/manual/en/book.lua.php>`_
+* `ext/lzf <https://www.php.net/lzf>`_
 * `ext/mail <http://www.php.net/manual/en/book.mail.php>`_
 * `ext/mailparse <http://www.faqs.org/rfcs/rfc822.html>`_
-* `ext/math <http://php.net/manual/en/book.math.php>`_
+* `ext/math <https://www.php.net/manual/en/book.math.php>`_
 * `ext/mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `ext/mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
 * `ext/memcache <http://www.php.net/manual/en/book.memcache.php>`_
-* `ext/memcached <http://php.net/manual/en/book.memcached.php>`_
+* `ext/memcached <https://www.php.net/manual/en/book.memcached.php>`_
 * `ext/mhash <http://mhash.sourceforge.net/>`_
 * `ext/ming <http://www.libming.org/>`_
-* `ext/mongo <http://php.net/mongo>`_
+* `ext/mongo <https://www.php.net/mongo>`_
 * `ext/mongodb <https://github.com/mongodb/mongo-c-driver>`_
 * `ext/msgpack <https://github.com/msgpack/msgpack-php>`_
 * `ext/mssql <http://www.php.net/manual/en/book.mssql.php>`_
 * `ext/mysql <http://www.php.net/manual/en/book.mysql.php>`_
-* `ext/mysqli <http://php.net/manual/en/book.mysqli.php>`_
-* `ext/ncurses <http://php.net/manual/en/book.ncurses.php>`_
+* `ext/mysqli <https://www.php.net/manual/en/book.mysqli.php>`_
+* `ext/ncurses <https://www.php.net/manual/en/book.ncurses.php>`_
 * `ext/newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
-* `ext/nsapi <http://php.net/manual/en/install.unix.sun.php>`_
-* `ext/ob <http://php.net/manual/en/book.outcontrol.php>`_
-* `ext/oci8 <http://php.net/manual/en/book.oci8.php>`_
+* `ext/nsapi <https://www.php.net/manual/en/install.unix.sun.php>`_
+* `ext/ob <https://www.php.net/manual/en/book.outcontrol.php>`_
+* `ext/oci8 <https://www.php.net/manual/en/book.oci8.php>`_
 * `ext/odbc <http://www.php.net/manual/en/book.uodbc.php>`_
 * `ext/opcache <http://www.php.net/manual/en/book.opcache.php>`_
 * `ext/opencensus <https://github.com/census-instrumentation/opencensus-php>`_
-* `ext/openssl <http://php.net/manual/en/book.openssl.php>`_
-* `ext/parle <http://php.net/manual/en/book.parle.php>`_
+* `ext/openssl <https://www.php.net/manual/en/book.openssl.php>`_
+* `ext/parle <https://www.php.net/manual/en/book.parle.php>`_
 * `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
-* `ext/password <http://php.net/manual/en/book.password.php>`_
-* `ext/pcntl <http://php.net/manual/en/book.pcntl.php>`_
+* `ext/password <https://www.php.net/manual/en/book.password.php>`_
+* `ext/pcntl <https://www.php.net/manual/en/book.pcntl.php>`_
 * `ext/pcov <https://github.com/krakjoe/pcov>`_
-* `ext/pcre <http://php.net/manual/en/book.pcre.php>`_
-* `ext/pdo <http://php.net/manual/en/book.pdo.php>`_
-* `ext/pgsql <http://php.net/manual/en/book.pgsql.php>`_
+* `ext/pcre <https://www.php.net/manual/en/book.pcre.php>`_
+* `ext/pdo <https://www.php.net/manual/en/book.pdo.php>`_
+* `ext/pgsql <https://www.php.net/manual/en/book.pgsql.php>`_
 * `ext/phalcon <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `ext/phar <http://www.php.net/manual/en/book.phar.php>`_
 * `ext/posix <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
-* `ext/proctitle <http://php.net/manual/en/book.proctitle.php>`_
-* `ext/pspell <http://php.net/manual/en/book.pspell.php>`_
+* `ext/proctitle <https://www.php.net/manual/en/book.proctitle.php>`_
+* `ext/pspell <https://www.php.net/manual/en/book.pspell.php>`_
 * `ext/psr <https://www.php-fig.org/psr/psr-3>`_
-* `ext/rar <http://php.net/manual/en/book.rar.php>`_
+* `ext/rar <https://www.php.net/manual/en/book.rar.php>`_
 * `ext/rdkafka <https://github.com/arnaud-lb/php-rdkafka>`_
-* `ext/readline <http://php.net/manual/en/book.readline.php>`_
+* `ext/readline <https://www.php.net/manual/en/book.readline.php>`_
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
 * `ext/redis <https://github.com/phpredis/phpredis/>`_
-* `ext/reflection <http://php.net/manual/en/book.reflection.php>`_
-* `ext/runkit <http://php.net/manual/en/book.runkit.php>`_
+* `ext/reflection <https://www.php.net/manual/en/book.reflection.php>`_
+* `ext/runkit <https://www.php.net/manual/en/book.runkit.php>`_
 * `ext/sdl <https://github.com/Ponup/phpsdl>`_
 * `ext/seaslog <https://github.com/SeasX/SeasLog>`_
-* `ext/sem <http://php.net/manual/en/book.sem.php>`_
-* `ext/session <http://php.net/manual/en/book.session.php>`_
-* `ext/shmop <http://php.net/manual/en/book.sem.php>`_
-* `ext/simplexml <http://php.net/manual/en/book.simplexml.php>`_
+* `ext/sem <https://www.php.net/manual/en/book.sem.php>`_
+* `ext/session <https://www.php.net/manual/en/book.session.php>`_
+* `ext/shmop <https://www.php.net/manual/en/book.sem.php>`_
+* `ext/simplexml <https://www.php.net/manual/en/book.simplexml.php>`_
 * `ext/snmp <http://www.net-snmp.org/>`_
-* `ext/soap <http://php.net/manual/en/book.soap.php>`_
-* `ext/sockets <http://php.net/manual/en/book.sockets.php>`_
-* `ext/sphinx <http://php.net/manual/en/book.sphinx.php>`_
+* `ext/soap <https://www.php.net/manual/en/book.soap.php>`_
+* `ext/sockets <https://www.php.net/manual/en/book.sockets.php>`_
+* `ext/sphinx <https://www.php.net/manual/en/book.sphinx.php>`_
 * `ext/spl <http://www.php.net/manual/en/book.spl.php>`_
-* `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
-* `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
-* `ext/sqlsrv <http://php.net/sqlsrv>`_
-* `ext/ssh2 <http://php.net/manual/en/book.ssh2.php>`_
-* `ext/standard <http://php.net/manual/en/ref.info.php>`_
+* `ext/sqlite <https://www.php.net/manual/en/book.sqlite.php>`_
+* `ext/sqlite3 <https://www.php.net/manual/en/book.sqlite3.php>`_
+* `ext/sqlsrv <https://www.php.net/sqlsrv>`_
+* `ext/ssh2 <https://www.php.net/manual/en/book.ssh2.php>`_
+* `ext/standard <https://www.php.net/manual/en/ref.info.php>`_
 * `ext/stats <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
-* `String <http://php.net/manual/en/ref.strings.php>`_
+* `String <https://www.php.net/manual/en/ref.strings.php>`_
 * `ext/suhosin <https://suhosin.org/>`_
 * `ext/svm <http://www.php.net/svm>`_
 * `ext/swoole <https://www.swoole.com/>`_
-* `ext/tidy <http://php.net/manual/en/book.tidy.php>`_
+* `ext/tidy <https://www.php.net/manual/en/book.tidy.php>`_
 * `ext/tokenizer <http://www.php.net/tokenizer>`_
-* `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
+* `ext/tokyotyrant <https://www.php.net/manual/en/book.tokyo-tyrant.php>`_
 * `ext/trader <https://pecl.php.net/package/trader>`_
 * `ext/uopz <https://pecl.php.net/package/uopz>`_
 * `ext/uuid <https://linux.die.net/man/3/libuuid>`_
 * `ext/v8js <https://bugs.chromium.org/p/v8/issues/list>`_
-* `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
+* `ext/varnish <https://www.php.net/manual/en/book.varnish.php>`_
 * `ext/vips <https://github.com/jcupitt/php-vips-ext>`_
 * `ext/wasm <https://github.com/Hywan/php-ext-wasm>`_
-* `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
-* `ext/weakref <http://php.net/manual/en/book.weakref.php>`_
+* `ext/wddx <https://www.php.net/manual/en/intro.wddx.php>`_
+* `ext/weakref <https://www.php.net/manual/en/book.weakref.php>`_
 * `ext/wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `ext/wincache <http://www.php.net/wincache>`_
-* `ext/xattr <http://php.net/manual/en/book.xattr.php>`_
+* `ext/xattr <https://www.php.net/manual/en/book.xattr.php>`_
 * `ext/xcache <https://xcache.lighttpd.net/>`_
 * `ext/xdebug <https://xdebug.org/>`_
-* `ext/xdiff <http://php.net/manual/en/book.xdiff.php>`_
+* `ext/xdiff <https://www.php.net/manual/en/book.xdiff.php>`_
 * `ext/xhprof <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
 * `ext/xml <http://www.php.net/manual/en/book.xml.php>`_
 * `ext/xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_
 * `ext/xmlrpc <http://www.php.net/manual/en/book.xmlrpc.php>`_
-* `ext/xmlwriter <http://php.net/manual/en/book.xmlwriter.php>`_
-* `ext/xsl <http://php.net/manual/en/intro.xsl.php>`_
+* `ext/xmlwriter <https://www.php.net/manual/en/book.xmlwriter.php>`_
+* `ext/xsl <https://www.php.net/manual/en/intro.xsl.php>`_
 * `ext/xxtea <https://pecl.php.net/package/xxtea>`_
 * `ext/yaml <http://www.yaml.org/>`_
 * `ext/yis <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `ext/zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `ext/zend_monitor <http://files.zend.com/help/Zend-Server/content/zendserverapi/zend_monitor-php_api.htm>`_
-* `ext/zip <http://php.net/manual/en/book.zip.php>`_
-* `ext/zlib <http://php.net/manual/en/book.zlib.php>`_
+* `ext/zip <https://www.php.net/manual/en/book.zip.php>`_
+* `ext/zlib <https://www.php.net/manual/en/book.zlib.php>`_
 * `ext/0mq <http://zeromq.org/>`_
-* `ext/zookeeper <http://php.net/zookeeper>`_
+* `ext/zookeeper <https://www.php.net/zookeeper>`_
 
 Supported Frameworks
 --------------------
@@ -445,8 +445,13 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * $php_errormsg Usage (Php/PhpErrorMsgUsage ; Unassigned)
   * Cancel Common Method (Classes/CancelCommonMethod)
   * Cast Unset Usage (Php/CastUnsetUsage ; CompatibilityPHP80)
+  * Collect Atom Counts (Dump/CollectAtomCounts ; Dump)
+  * Collect Classes Dependencies (Dump/CollectClassesDependencies ; Dump)
+  * Collect Files Dependencies (Dump/CollectFilesDependencies ; Dump)
+  * Collect Php Structures (Dump/CollectPhpStructures ; Dump)
   * Function With Dynamic Code (Functions/DynamicCode ; Internal)
   * Mismatch Parameter Name (Functions/MismatchParameterName ; Analyze, CompatibilityPHP80)
+  * Multiple Declaration Of Strict_types (Php/MultipleDeclareStrict ; Analyze)
 
 * 2.1.7
 
@@ -2075,6 +2080,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Useless Constructor (Classes/UselessConstructor ; Analyze, Simple, Level 3)
   * Useless Final (Classes/UselessFinal ; Analyze, OneFile, ClearPHP, Simple, CI-checks)
   * Useless Global (Structures/UselessGlobal ; Analyze, OneFile, Simple, Level 2)
+  * Useless Instructions (Structures/UselessInstruction ; Analyze, OneFile, ClearPHP, Simple, Level 1, CI-checks)
   * Useless Interfaces (Interfaces/UselessInterfaces ; Analyze, ClearPHP, Simple, ClassReview, Typechecks)
   * Useless Parenthesis (Structures/UselessParenthesis ; Analyze, Simple, CI-checks)
   * Useless Return (Functions/UselessReturn ; Analyze, OneFile, Simple, Level 4)
@@ -2460,11 +2466,10 @@ External links
 
 List of external links mentionned in this documentation.
 
-* ` <https://wiki.php.net/rfc/nullsafe_operator>`_
 * `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_
-* `$_ENV <http://php.net/reserved.variables.environment.php>`_
-* `$GLOBALS <http://php.net/manual/en/reserved.variables.globals.php>`_
-* `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
+* `$_ENV <https://www.php.net/reserved.variables.environment.php>`_
+* `$GLOBALS <https://www.php.net/manual/en/reserved.variables.globals.php>`_
+* `$HTTP_RAW_POST_DATA variable <https://www.php.net/manual/en/reserved.variables.httprawpostdata.php>`_
 * `.exakat.ini` or `.exakat.yaml` file. See `Add Exakat To Your CI Pipeline <https://www.exakat.io/add-exakat-to-your-ci-pipeline/>`_
 * `.phar` from the exakat.io website : `www.exakat.io <http://www.exakat.io/versions/>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
@@ -2472,44 +2477,44 @@ List of external links mentionned in this documentation.
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
 * `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_
-* `__autoload <http://php.net/autoload>`_
+* `__autoload <https://www.php.net/autoload>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `About circular references in PHP <https://johann.pardanaud.com/blog/about-circular-references-in-php>`_
 * `Add array_key_exists to the list of specialy compiled functions <https://bugs.php.net/bug.php?id=76148>`_
 * `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alpine Linux <https://alpinelinux.org/>`_
-* `Alternative PHP Cache <http://php.net/apc>`_
-* `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
-* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
+* `Alternative PHP Cache <https://www.php.net/apc>`_
+* `Alternative syntax <https://www.php.net/manual/en/control-structures.alternative-syntax.php>`_
+* `Anonymous functions <https://www.php.net/manual/en/functions.anonymous.php>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
-* `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
+* `Arithmetic Operators <https://www.php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
-* `Array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <https://www.php.net/manual/en/language.types.array.php>`_
+* `array <https://www.php.net/manual/en/language.types.array.php>`_
 * `Array Functions <https://www.php.net/manual/en/ref.array.php>`_
-* `array_fill_keys <http://php.net/array_fill_keys>`_
+* `array_fill_keys <https://www.php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_key_exists() with objects <https://wiki.php.net/rfc/deprecations_php_7_4#array_key_exists_with_objects>`_
-* `array_map <http://php.net/array_map>`_
+* `array_map <https://www.php.net/array_map>`_
 * `array_merge <https://www.php.net/array_merge>`_
-* `array_search <http://php.net/array_search>`_
+* `array_search <https://www.php.net/array_search>`_
 * `array_slice <http://www.php.net/array_slice>`_
-* `array_unique <http://php.net/array_unique>`_
-* `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_
-* `Arrays <http://php.net/manual/en/book.array.php>`_
-* `Arrays syntax <http://php.net/manual/en/language.types.array.php>`_
+* `array_unique <https://www.php.net/array_unique>`_
+* `ArrayAccess <https://www.php.net/manual/en/class.arrayaccess.php>`_
+* `Arrays <https://www.php.net/manual/en/book.array.php>`_
+* `Arrays syntax <https://www.php.net/manual/en/language.types.array.php>`_
 * `Arrow functions <https://www.php.net/manual/en/functions.arrow.php>`_
-* `assert <http://php.net/assert>`_
-* `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
-* `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
-* `Autoloading Classes <http://php.net/manual/en/language.oop5.autoload.php>`_
+* `assert <https://www.php.net/assert>`_
+* `Assignation Operators <https://www.php.net/manual/en/language.operators.assignment.php>`_
+* `Autoloading Classe <https://www.php.net/manual/en/language.oop5.autoload.php>`_
+* `Autoloading Classes <https://www.php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid Else, Return Early <http://blog.timoxley.com/post/47041269194/avoid-else-return-early>`_
 * `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_
 * `Avoid option arrays in constructors <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-option-arrays-in-constructors>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
-* `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
-* `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
+* `Backward incompatible changes <https://www.php.net/manual/en/migration71.incompatible.php>`_
+* `Backward incompatible changes PHP 7.0 <https://www.php.net/manual/en/migration70.incompatible.php>`_
 * `basename <http://www.php.net/basename>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
@@ -2519,187 +2524,187 @@ List of external links mentionned in this documentation.
 * `Brandon Savage <https://twitter.com/BrandonSavage>`_
 * `browscap <http://browscap.org/>`_
 * `Bug #50887 preg_match , last optional sub-patterns ignored when empty <https://bugs.php.net/bug.php?id=50887>`_
-* `Bzip2 Functions <http://php.net/bzip2>`_
+* `Bzip2 Functions <https://www.php.net/bzip2>`_
 * `Cairo Graphics Library <https://cairographics.org/>`_
 * `Calendar Functions <http://www.php.net/manual/en/ref.calendar.php>`_
-* `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
+* `Callback / callable <https://www.php.net/manual/en/language.types.callable.php>`_
 * `Can you spot the vulnerability? (openssl_verify) <https://twitter.com/ripstech/status/1124325237967994880>`_
 * `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_
 * `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
 * `Change the precedence of the concatenation operator <https://wiki.php.net/rfc/concatenation_precedence>`_
-* `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
-* `Class Abstraction <http://php.net/abstract>`_
-* `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_
-* `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
-* `class_alias <http://php.net/class_alias>`_
-* `Classes abstraction <http://php.net/abstract>`_
+* `Changes to variable handling <https://www.php.net/manual/en/migration70.incompatible.php>`_
+* `Class Abstraction <https://www.php.net/abstract>`_
+* `Class Constant <https://www.php.net/manual/en/language.oop5.constants.php>`_
+* `Class Constants <https://www.php.net/manual/en/language.oop5.constants.php>`_
+* `class_alias <https://www.php.net/class_alias>`_
+* `Classes abstraction <https://www.php.net/abstract>`_
 * `Classes Abstraction <https://www.php.net/manual/en/language.oop5.abstract.php>`_
-* `Closure class <http://php.net/closure>`_
-* `Closure::bind <http://php.net/manual/en/closure.bind.php>`_
+* `Closure class <https://www.php.net/closure>`_
+* `Closure::bind <https://www.php.net/manual/en/closure.bind.php>`_
 * `Cmark <https://github.com/commonmark/cmark>`_
 * `Codeigniter <https://codeigniter.com/>`_
-* `COM and .Net (Windows) <http://php.net/manual/en/book.com.php>`_
+* `COM and .Net (Windows) <https://www.php.net/manual/en/book.com.php>`_
 * `compact <http://www.php.net/compact>`_
-* `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
+* `Comparison Operators <https://www.php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
 * `Concrete 5 <https://www.concrete5.org/>`_
-* `Conflict resolution <http://php.net/manual/en/language.oop5.traits.php#language.oop5.traits.conflict>`_
-* `Constant definition <http://php.net/const>`_
+* `Conflict resolution <https://www.php.net/manual/en/language.oop5.traits.php#language.oop5.traits.conflict>`_
+* `Constant definition <https://www.php.net/const>`_
 * `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_
-* `constant() <http://php.net/constant>`_
-* `Constants <http://php.net/manual/en/language.constants.php>`_
-* `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_
-* `Cookies <http://php.net/manual/en/features.cookies.php>`_
-* `count <http://php.net/count>`_
+* `constant() <https://www.php.net/constant>`_
+* `Constants <https://www.php.net/manual/en/language.constants.php>`_
+* `Constructors and Destructors <https://www.php.net/manual/en/language.oop5.decon.php>`_
+* `Cookies <https://www.php.net/manual/en/features.cookies.php>`_
+* `count <https://www.php.net/count>`_
 * `Courier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `Covariant Returns and Contravariant Parameters <https://wiki.php.net/rfc/covariant-returns-and-contravariant-parameters>`_
 * `crc32() <https://www.php.net/crc32>`_
 * `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 * `crypt <http://www.php.net/crypt>`_
-* `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
-* `CSPRNG <http://php.net/manual/en/book.csprng.php>`_
-* `Ctype funtions <http://php.net/manual/en/ref.ctype.php>`_
+* `Cryptography Extensions <https://www.php.net/manual/en/refs.crypto.php>`_
+* `CSPRNG <https://www.php.net/manual/en/book.csprng.php>`_
+* `Ctype funtions <https://www.php.net/manual/en/ref.ctype.php>`_
 * `curl <http://www.php.net/curl>`_
-* `Curl for PHP <http://php.net/manual/en/book.curl.php>`_
+* `Curl for PHP <https://www.php.net/manual/en/book.curl.php>`_
 * `curl_version <https://www.php.net/manual/en/function.curl-version.php>`_
 * `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_
 * `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/definitions/625.html>`_
-* `Cyrus <http://php.net/manual/en/book.cyrus.php>`_
+* `Cyrus <https://www.php.net/manual/en/book.cyrus.php>`_
 * `d3.js <https://github.com/mbostock/d3>`_
-* `Data filtering <http://php.net/manual/en/book.filter.php>`_
+* `Data filtering <https://www.php.net/manual/en/book.filter.php>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
-* `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.dba.php>`_
-* `Date and Time <http://php.net/manual/en/book.datetime.php>`_
+* `Database (dbm-style) Abstraction Layer <https://www.php.net/manual/en/book.dba.php>`_
+* `Date and Time <https://www.php.net/manual/en/book.datetime.php>`_
 * `DCDFLIB <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
 * `Dead Code: Unused Method <https://vulncat.fortify.com/en/detail?id=desc.structural.java.dead_code_unused_method>`_
-* `declare <http://php.net/manual/en/control-structures.declare.php>`_
-* `define <http://php.net/manual/en/function.define.php>`_
+* `Declare <https://www.php.net/manual/en/control-structures.declare.php>`_
+* `declare <https://www.php.net/manual/en/control-structures.declare.php>`_
+* `define <https://www.php.net/manual/en/function.define.php>`_
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
 * `Deprecate and remove continue targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_
 * `Deprecate and remove INTL_IDNA_VARIANT_2003 <https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003>`_
 * `Deprecate curly brace syntax <https://derickrethans.nl/phpinternalsnews-19.html>`_
-* `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
-* `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
-* `Deprecated features in PHP 7.2.x <http://php.net/manual/en/migration72.deprecated.php>`_
+* `Deprecated features in PHP 5.4.x <https://www.php.net/manual/en/migration54.deprecated.php>`_
+* `Deprecated features in PHP 5.5.x <https://www.php.net/manual/en/migration55.deprecated.php>`_
+* `Deprecated features in PHP 7.2.x <https://www.php.net/manual/en/migration72.deprecated.php>`_
 * `Deprecation allow_url_include <https://wiki.php.net/rfc/deprecations_php_7_4#allow_url_include>`_
 * `Deprecations for PHP 7.2 <https://wiki.php.net/rfc/deprecations_php_7_2>`_
 * `Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_
-* `Destructor <http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_
-* `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
-* `Dir predefined constants <http://php.net/manual/en/dir.constants.php>`_
-* `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_
+* `Destructor <https://www.php.net/manual/en/language.oop5.decon.php#language.oop5.decon.destructor>`_
+* `DIO <https://www.php.net/manual/en/refs.fileprocess.file.php>`_
+* `Dir predefined constants <https://www.php.net/manual/en/dir.constants.php>`_
+* `directive error_reporting <https://www.php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_
 * `Directly calling __clone is allowed <https://wiki.php.net/rfc/abstract_syntax_tree#directly_calling_clone_is_allowed>`_
-* `dirname <http://php.net/dirname>`_
+* `dirname <https://www.php.net/dirname>`_
 * `dist.exakat.io <http://dist.exakat.io/>`_
 * `dl <http://www.php.net/dl>`_
 * `Do your objects talk to strangers? <https://www.brandonsavage.net/do-your-objects-talk-to-strangers/>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
-* `Document Object Model <http://php.net/manual/en/book.dom.php>`_
+* `Document Object Model <https://www.php.net/manual/en/book.dom.php>`_
 * `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_
 * `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
-* `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_
+* `Double quoted <https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
 * `Dynamically Access PHP Object Properties with $this <https://drupalize.me/blog/201508/dynamically-access-php-object-properties>`_
 * `E_WARNING for invalid container read array-access <https://wiki.php.net/rfc/notice-for-non-valid-array-container>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
-* `elseif/else if <http://php.net/manual/en/control-structures.elseif.php>`_
+* `elseif/else if <https://www.php.net/manual/en/control-structures.elseif.php>`_
 * `empty <http://www.php.net/empty>`_
 * `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
 * `empty() <https://www.php.net/empty>`_
-* `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
-* `Ereg <http://php.net/manual/en/function.ereg.php>`_
-* `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_
+* `Enchant spelling library <https://www.php.net/manual/en/book.enchant.php>`_
+* `Ereg <https://www.php.net/manual/en/function.ereg.php>`_
+* `Error Control Operators <https://www.php.net/manual/en/language.operators.errorcontrol.php>`_
 * `Error reporting <https://php.earth/docs/security/intro#error-reporting>`_
-* `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_
-* `Ev <http://php.net/manual/en/book.ev.php>`_
+* `Escape sequences <https://www.php.net/manual/en/regexp.reference.escape.php>`_
+* `Ev <https://www.php.net/manual/en/book.ev.php>`_
 * `eval <http://www.php.net/eval>`_
-* `Event <http://php.net/event>`_
+* `Event <https://www.php.net/event>`_
 * `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat/exakat <https://hub.docker.com/r/exakat/exakat/>`_
-* `Exception::__construct <http://php.net/manual/en/exception.construct.php>`_
-* `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
-* `Exchangeable image information <http://php.net/manual/en/book.exif.php>`_
-* `Execution Operators <http://php.net/manual/en/language.operators.execution.php>`_
+* `Exception::__construct <https://www.php.net/manual/en/exception.construct.php>`_
+* `Exceptions <https://www.php.net/manual/en/language.exceptions.php>`_
+* `Exchangeable image information <https://www.php.net/manual/en/book.exif.php>`_
+* `Execution Operators <https://www.php.net/manual/en/language.operators.execution.php>`_
 * `EXP30-C. Do not depend on the order of evaluation for side effects <https://wiki.sei.cmu.edu/confluence/display/c/EXP30-C.+Do+not+depend+on+the+order+of+evaluation+for+side+effects>`_
-* `expect <http://php.net/manual/en/book.expect.php>`_
+* `expect <https://www.php.net/manual/en/book.expect.php>`_
 * `explode <https://www.php.net/manual/en/function.explode.php>`_
 * `ext-async <https://github.com/concurrent-php/ext-async>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/ast <https://pecl.php.net/package/ast>`_
-* `ext/gender manual <http://php.net/manual/en/book.gender.php>`_
+* `ext/gender manual <https://www.php.net/manual/en/book.gender.php>`_
 * `ext/hash extension <http://www.php.net/manual/en/book.hash.php>`_
-* `ext/hrtime manual <http://php.net/manual/en/intro.hrtime.php>`_
-* `ext/inotify manual <http://php.net/manual/en/book.inotify.php>`_
+* `ext/hrtime manual <https://www.php.net/manual/en/intro.hrtime.php>`_
+* `ext/inotify manual <https://www.php.net/manual/en/book.inotify.php>`_
 * `ext/leveldb on Github <https://github.com/reeze/php-leveldb>`_
-* `ext/lua manual <http://php.net/manual/en/book.lua.php>`_
+* `ext/lua manual <https://www.php.net/manual/en/book.lua.php>`_
 * `ext/mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
-* `ext/memcached manual <http://php.net/manual/en/book.memcached.php>`_
-* `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
-* `ext/readline <http://php.net/manual/en/book.readline.php>`_
+* `ext/memcached manual <https://www.php.net/manual/en/book.memcached.php>`_
+* `ext/OpenSSL <https://www.php.net/manual/en/book.openssl.php>`_
+* `ext/readline <https://www.php.net/manual/en/book.readline.php>`_
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
 * `ext/SeasLog on Github <https://github.com/SeasX/SeasLog>`_
-* `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
-* `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
+* `ext/sqlite <https://www.php.net/manual/en/book.sqlite.php>`_
+* `ext/sqlite3 <https://www.php.net/manual/en/book.sqlite3.php>`_
 * `ext/uopz <https://pecl.php.net/package/uopz>`_
-* `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
-* `ext/zookeeper <http://php.net/zookeeper>`_
-* `Extension Apache <http://php.net/manual/en/book.apache.php>`_
-* `extension FANN <http://php.net/manual/en/book.fann.php>`_
+* `ext/varnish <https://www.php.net/manual/en/book.varnish.php>`_
+* `ext/zookeeper <https://www.php.net/zookeeper>`_
+* `Extension Apache <https://www.php.net/manual/en/book.apache.php>`_
+* `extension FANN <https://www.php.net/manual/en/book.fann.php>`_
 * `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
-* `extract <http://php.net/extract>`_
+* `extract <https://www.php.net/extract>`_
 * `Ez <https://ez.no/>`_
 * `Factory (object-oriented programming) <https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)>`_
 * `FAM <http://oss.sgi.com/projects/fam/>`_
-* `FastCGI Process Manager <http://php.net/fpm>`_
+* `FastCGI Process Manager <https://www.php.net/fpm>`_
 * `FDF <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
-* `file_get_contents <http://php.net/file_get_contents>`_
+* `file_get_contents <https://www.php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
-* `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
-* `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
+* `Filinfo <https://www.php.net/manual/en/book.fileinfo.php>`_
+* `Final Keyword <https://www.php.net/manual/en/language.oop5.final.php>`_
+* `Firebase / Interbase <https://www.php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `FlagArgument <https://www.martinfowler.com/bliki/FlagArgument.html>`_
-* `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
-* `Floats <http://php.net/manual/en/language.types.float.php>`_
+* `Floating point numbers <https://www.php.net/manual/en/language.types.float.php#language.types.float>`_
+* `Floats <https://www.php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <https://www.php.net/manual/en/control-structures.foreach.php>`_
 * `Foreign Function Interface <https://www.php.net/manual/en/book.ffi.php>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
-* `Function arguments <http://php.net/manual/en/functions.arguments.php>`_
 * `Function arguments <https://www.php.net/manual/en/functions.arguments.php>`_
-* `Functions <http://php.net/manual/en/language.functions.php>`_
-* `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
+* `Functions <https://www.php.net/manual/en/language.functions.php>`_
+* `Gearman on PHP <https://www.php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
-* `Generator delegation via yield from <http://php.net/manual/en/language.generators.syntax.php#control-structures.yield.from>`_
-* `Generator Syntax <http://php.net/manual/en/language.generators.syntax.php>`_
-* `Generators overview <http://php.net/manual/en/language.generators.overview.php>`_
-* `GeoIP <http://php.net/manual/en/book.geoip.php>`_
-* `get_class <http://php.net/get_class>`_
+* `Generator delegation via yield from <https://www.php.net/manual/en/language.generators.syntax.php#control-structures.yield.from>`_
+* `Generator Syntax <https://www.php.net/manual/en/language.generators.syntax.php>`_
+* `Generators overview <https://www.php.net/manual/en/language.generators.overview.php>`_
+* `GeoIP <https://www.php.net/manual/en/book.geoip.php>`_
+* `get_class <https://www.php.net/get_class>`_
 * `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `Github Action <https://docs.github.com/en/actions>`_
 * `Github.com/exakat/exakat <https://github.com/exakat/exakat>`_
 * `global namespace <https://www.php.net/manual/en/language.namespaces.global.php>`_
-* `GMP <http://php.net/manual/en/book.gmp.php>`_
+* `GMP <https://www.php.net/manual/en/book.gmp.php>`_
 * `Gnupg Function for PHP <http://www.php.net/manual/en/book.gnupg.php>`_
-* `Goto <http://php.net/manual/en/control-structures.goto.php>`_
+* `Goto <https://www.php.net/manual/en/control-structures.goto.php>`_
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
 * `GRPC <http://www.grpc.io/>`_
-* `Handling file uploads <http://php.net/manual/en/features.file-upload.php>`_
+* `Handling file uploads <https://www.php.net/manual/en/features.file-upload.php>`_
 * `Hardening Your HTTP Security Headers <https://www.keycdn.com/blog/http-security-headers>`_
 * `hash <http://www.php.net/hash>`_
 * `HASH Message Digest Framework <http://www.php.net/manual/en/book.hash.php>`_
-* `hash_algos <http://php.net/hash_algos>`_
-* `hash_file <http://php.net/manual/en/function.hash-file.php>`_
-* `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
+* `hash_algos <https://www.php.net/hash_algos>`_
+* `hash_file <https://www.php.net/manual/en/function.hash-file.php>`_
+* `Heredoc <https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
 * `hg <https://www.mercurial-scm.org/>`_
 * `Holger Woltersdorf <https://twitter.com/hollodotme>`_
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
@@ -2709,174 +2714,173 @@ List of external links mentionned in this documentation.
 * `https://hub.docker.com/r/exakat/exakat-ga <https://hub.docker.com/r/exakat/exakat-ga>`_
 * `https://www.exakat.io/ <https://www.exakat.io/>`_
 * `https://www.exakat.io/versionss/index.php?file=latest <https://www.exakat.io/versions/index.php?file=latest>`_
-* `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
-* `Iconv <http://php.net/iconv>`_
-* `iconv <https://www.php.net/manual/fr/function.iconv.php>`_
+* `IBM Db2 <https://www.php.net/manual/en/book.ibm-db2.php>`_
+* `Iconv <https://www.php.net/iconv>`_
+* `iconv() <https://www.php.net/manual/en/function.iconv.php>`_
 * `ICU <http://site.icu-project.org/>`_
 * `Ideal regex delimiters in PHP <http://codelegance.com/ideal-regex-delimiters-in-php/>`_
-* `idn_to_ascii <http://php.net/manual/en/function.idn-to-ascii.php>`_
+* `idn_to_ascii <https://www.php.net/manual/en/function.idn-to-ascii.php>`_
 * `IERS <https://www.iers.org/IERS/EN/Home/home_node.html>`_
 * `igbinary <https://github.com/igbinary/igbinary/>`_
 * `IIS Administration <http://www.php.net/manual/en/book.iisfunc.php>`_
-* `Image Processing and GD <http://php.net/manual/en/book.image.php>`_
-* `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
+* `Image Processing and GD <https://www.php.net/manual/en/book.image.php>`_
+* `Imagick for PHP <https://www.php.net/manual/en/book.imagick.php>`_
 * `IMAP <http://www.php.net/imap>`_
 * `Implement ZEND_ARRAY_KEY_EXISTS opcode to speed up array_key_exists() <https://github.com/php/php-src/pull/3360>`_
-* `implode <http://php.net/implode>`_
+* `implode <https://www.php.net/implode>`_
 * `In a PHP5 class, when does a private constructor get called? <https://stackoverflow.com/questions/26079/in-a-php5-class-when-does-a-private-constructor-get-called>`_
 * `in_array() <https://www.php.net/in_array>`_
-* `include <http://php.net/manual/en/function.include.php>`_
-* `include_once <http://php.net/manual/en/function.include-once.php>`_
-* `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
-* `Info Predefined Constants <http://php.net/manual/en/info.constants.php>`_
+* `include <https://www.php.net/manual/en/function.include.php>`_
+* `include_once <https://www.php.net/manual/en/function.include-once.php>`_
+* `Incrementing/Decrementing Operators <https://www.php.net/manual/en/language.operators.increment.php>`_
+* `Info Predefined Constants <https://www.php.net/manual/en/info.constants.php>`_
 * `Insecure Transportation Security Protocol Supported (TLS 1.0) <https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/insecure-transportation-security-protocol-supported-tls-10/>`_
-* `Instanceof <http://php.net/manual/en/language.operators.type.php>`_
-* `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_
-* `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
-* `Integers <http://php.net/manual/en/language.types.integer.php>`_
-* `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php#language.oop5.interfaces>`_
-* `Interfaces <https://www.php.net/manual/fr/language.oop5.interfaces.php>`_
+* `Instanceof <https://www.php.net/manual/en/language.operators.type.php>`_
+* `Integer overflow <https://www.php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_
+* `Integer Syntax <https://www.php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
+* `Integers <https://www.php.net/manual/en/language.types.integer.php>`_
+* `Interfaces <https://www.php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
 * `Isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
-* `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
+* `iterable pseudo-type <https://www.php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
 * `Iterables <https://www.php.net/manual/en/language.types.iterable.php>`_
 * `Joomla <http://www.joomla.org/>`_
-* `json_decode <http://php.net/json_decode>`_
+* `json_decode <https://www.php.net/json_decode>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
 * `Kafka client for PHP <https://github.com/arnaud-lb/php-rdkafka>`_
-* `Kerberos V <http://php.net/manual/en/book.kadm5.php>`_
-* `Lapack <http://php.net/manual/en/book.lapack.php>`_
+* `Kerberos V <https://www.php.net/manual/en/book.kadm5.php>`_
+* `Lapack <https://www.php.net/manual/en/book.lapack.php>`_
 * `Laravel <http://www.lavarel.com/>`_
-* `Late Static Bindings <http://php.net/manual/en/language.oop5.late-static-bindings.php>`_
+* `Late Static Bindings <https://www.php.net/manual/en/language.oop5.late-static-bindings.php>`_
 * `libeio <http://software.schmorp.de/pkg/libeio.html>`_
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
 * `libuuid <https://linux.die.net/man/3/libuuid>`_
 * `libxml <http://www.php.net/manual/en/book.libxml.php>`_
-* `Lightweight Directory Access Protocol <http://php.net/manual/en/book.ldap.php>`_
-* `list <http://php.net/manual/en/function.list.php>`_
-* `List of function aliases <http://php.net/manual/en/aliases.php>`_
+* `Lightweight Directory Access Protocol <https://www.php.net/manual/en/book.ldap.php>`_
+* `list <https://www.php.net/manual/en/function.list.php>`_
+* `List of function aliases <https://www.php.net/manual/en/aliases.php>`_
 * `List of HTTP header fields <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
 * `List of HTTP status codes <https://en.wikipedia.org/wiki/List_of_HTTP_status_codes>`_
-* `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_
-* `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_
+* `List of Keywords <https://www.php.net/manual/en/reserved.keywords.php>`_
+* `List of other reserved words <https://www.php.net/manual/en/reserved.other-reserved-words.php>`_
 * `List of TCP and UDP port numbers <https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers>`_
 * `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_assignment>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
-* `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_
-* `Loosening Reserved Word Restrictions <http://php.net/manual/en/migration70.other-changes.php#migration70.other-changes.loosening-reserved-words>`_
-* `lzf <http://php.net/lzf>`_
-* `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
+* `Logical Operators <https://www.php.net/manual/en/language.operators.logical.php>`_
+* `Loosening Reserved Word Restrictions <https://www.php.net/manual/en/migration70.other-changes.php#migration70.other-changes.loosening-reserved-words>`_
+* `lzf <https://www.php.net/lzf>`_
+* `Magic Constants <https://www.php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
-* `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
-* `mail <http://php.net/mail>`_
+* `Magic Method <https://www.php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <https://www.php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <https://www.php.net/manual/en/language.oop5.magic.php>`_
+* `mail <https://www.php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
-* `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
-* `Mathematical Functions <http://php.net/manual/en/book.math.php>`_
+* `Math predefined constants <https://www.php.net/manual/en/math.constants.php>`_
+* `Mathematical Functions <https://www.php.net/manual/en/book.math.php>`_
 * `mb_encoding_detect <https://php.net/mb-encoding-detect>`_
-* `mb_str_split <http://php.net/mb_str_split>`_
+* `mb_str_split <https://www.php.net/mb_str_split>`_
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
-* `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_
-* `MD5 <http://php.net/md5>`_
+* `mcrypt_create_iv() <https://www.php.net/manual/en/function.mcrypt-create-iv.php>`_
+* `MD5 <https://www.php.net/md5>`_
 * `Media Type <https://en.wikipedia.org/wiki/Media_type>`_
 * `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
-* `Method overloading <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_
+* `Method overloading <https://www.php.net/manual/en/language.oop5.overloading.php#object.call>`_
 * `mhash <http://mhash.sourceforge.net/>`_
 * `Microsoft SQL Server <http://www.php.net/manual/en/book.mssql.php>`_
-* `Microsoft SQL Server Driver <http://php.net/sqlsrv>`_
+* `Microsoft SQL Server Driver <https://www.php.net/sqlsrv>`_
 * `Ming (flash) <http://www.libming.org/>`_
-* `MongoDB driver <http://php.net/mongo>`_
-* `move_uploaded_file <http://php.net/move_uploaded_file>`_
+* `MongoDB driver <https://www.php.net/mongo>`_
+* `move_uploaded_file <https://www.php.net/move_uploaded_file>`_
 * `msgpack for PHP <https://github.com/msgpack/msgpack-php>`_
-* `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
-* `mysqli <http://php.net/manual/en/book.mysqli.php>`_
+* `MySQL Improved Extension <https://www.php.net/manual/en/book.mysqli.php>`_
+* `mysqli <https://www.php.net/manual/en/book.mysqli.php>`_
 * `Named Arguments <https://wiki.php.net/rfc/named_params>`_
-* `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
+* `Ncurses Terminal Screen Control <https://www.php.net/manual/en/book.ncurses.php>`_
 * `Negative architecture, and assumptions about code <https://matthiasnoback.nl/2018/08/negative-architecture-and-assumptions-about-code/>`_
 * `Nested Ternaries are Great <https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340>`_
 * `Net SNMP <http://www.net-snmp.org/>`_
-* `net_get_interfaces <http://php.net/net_get_interfaces>`_
-* `New Classes and Interfaces <http://php.net/manual/en/migration70.classes.php>`_
+* `net_get_interfaces <https://www.php.net/net_get_interfaces>`_
+* `New Classes and Interfaces <https://www.php.net/manual/en/migration70.classes.php>`_
 * `New custom object serialization mechanism <https://wiki.php.net/rfc/custom_object_serialization>`_
-* `New features <http://php.net/manual/en/migration56.new-features.php>`_
-* `New global constants in 7.2 <http://php.net/manual/en/migration72.constants.php>`_
-* `New global constants in 7.4 <http://php.net/manual/en/migration74.constants.php>`_
-* `New object type <http://php.net/manual/en/migration72.new-features.php#migration72.new-features.iterable-pseudo-type>`_
+* `New features <https://www.php.net/manual/en/migration56.new-features.php>`_
+* `New global constants in 7.2 <https://www.php.net/manual/en/migration72.constants.php>`_
+* `New global constants in 7.4 <https://www.php.net/manual/en/migration74.constants.php>`_
+* `New object type <https://www.php.net/manual/en/migration72.new-features.php#migration72.new-features.iterable-pseudo-type>`_
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
-* `Nowdoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.nowdoc>`_
+* `Nowdoc <https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.nowdoc>`_
 * `Null and True <https://twitter.com/Chemaclass/status/1144588647464951808>`_
 * `Null Coalescing Assignment Operator <https://wiki.php.net/rfc/null_coalesce_equal_operator>`_
-* `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_
+* `Null Coalescing Operator <https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
 * `Nullable types <https://wiki.php.net/rfc/nullable_types>`_
 * `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
-* `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
+* `Object cloning <https://www.php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
-* `Object interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
-* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
-* `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_
+* `Object interfaces <https://www.php.net/manual/en/language.oop5.interfaces.php>`_
+* `Object Interfaces <https://www.php.net/manual/en/language.oop5.interfaces.php>`_
+* `Objects and references <https://www.php.net/manual/en/language.oop5.references.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `online <https://www.exakat.io/top-10-php-classic-traps/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `OpennSSL [PHP manual] <https://www.php.net/manual/en/book.openssl.php>`_
 * `openssl_random_pseudo_byte <https://www.php.net/openssl_random_pseudo_bytes>`_
-* `Operator Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
-* `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operator Precedence <https://www.php.net/manual/en/language.operators.precedence.php>`_
+* `Operators Precedence <https://www.php.net/manual/en/language.operators.precedence.php>`_
 * `Optimization: How I made my PHP code run 100 times faster <https://mike42.me/blog/2018-06-how-i-made-my-php-code-run-100-times-faster>`_
 * `Optimize array_unique() <https://github.com/php/php-src/commit/6c2c7a023da4223e41fea0225c51a417fc8eb10d>`_
 * `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_
-* `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
+* `Oracle OCI8 <https://www.php.net/manual/en/book.oci8.php>`_
 * `original idea <https://twitter.com/b_viguier/status/940173951908700161>`_
 * `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_
-* `Output Buffering Control <http://php.net/manual/en/book.outcontrol.php>`_
-* `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_
-* `pack <http://php.net/pack>`_
+* `Output Buffering Control <https://www.php.net/manual/en/book.outcontrol.php>`_
+* `Overload <https://www.php.net/manual/en/language.oop5.overloading.php#object.get>`_
+* `pack <https://www.php.net/pack>`_
 * `Packagist <https://packagist.org/>`_
-* `parent <http://php.net/manual/en/keyword.parent.php>`_
+* `parent <https://www.php.net/manual/en/keyword.parent.php>`_
 * `Parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
-* `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
-* `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
-* `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
-* `Password Hashing <http://php.net/manual/en/book.password.php>`_
-* `Password hashing <http://php.net/manual/en/book.password.php>`_
-* `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
+* `Parsing and Lexing <https://www.php.net/manual/en/book.parle.php>`_
+* `Passing arguments by reference <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
+* `Passing by reference <https://www.php.net/manual/en/language.references.pass.php>`_
+* `Password hashing <https://www.php.net/manual/en/book.password.php>`_
+* `Password Hashing <https://www.php.net/manual/en/book.password.php>`_
+* `Pattern Modifiers <https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `PCOV <https://github.com/krakjoe/pcov>`_
-* `PCRE <http://php.net/pcre>`_
+* `PCRE <https://www.php.net/pcre>`_
 * `PEAR <http://pear.php.net/>`_
 * `pecl crypto <https://pecl.php.net/package/crypto>`_
 * `PECL ext/xxtea <https://pecl.php.net/package/xxtea>`_
-* `pg_last_error <http://php.net/manual/en/function.pg-last-error.php>`_
+* `pg_last_error <https://www.php.net/manual/en/function.pg-last-error.php>`_
 * `Phalcon <https://phalconphp.com/>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP - Fatal error: Unsupported operand types [duplicate] <https://stackoverflow.com/questions/2108875/php-fatal-error-unsupported-operand-types>`_
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
-* `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
-* `PHP 7.0 Removed Functions <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
+* `PHP 7.0 Backward incompatible changes <https://www.php.net/manual/en/migration70.incompatible.php>`_
+* `PHP 7.0 Removed Functions <https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.1 no longer converts string to arrays the first time a value is assigned with square bracket notation <https://www.drupal.org/project/adaptivetheme/issues/2832900>`_
 * `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
-* `PHP 7.3 Removed Functions <http://php.net/manual/en/migration73.incompatible.php#migration70.incompatible.removed-functions>`_
+* `PHP 7.3 Removed Functions <https://www.php.net/manual/en/migration73.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee05678b5d717cd926a35ffdc1335929/UPGRADING#L66-L81>`_
-* `PHP 7.4 Removed Functions <http://php.net/manual/en/migration74.incompatible.php#migration70.incompatible.removed-functions>`_
+* `PHP 7.4 Removed Functions <https://www.php.net/manual/en/migration74.incompatible.php#migration70.incompatible.removed-functions>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
 * `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
 * `PHP Clone and Shallow vs Deep Copying <http://jacob-walker.com/blog/php-clone-and-shallow-vs-deep-copying.html>`_
-* `PHP Constants <http://php.net/manual/en/language.constants.php>`_
-* `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
+* `PHP Constants <https://www.php.net/manual/en/language.constants.php>`_
+* `PHP Data Object <https://www.php.net/manual/en/book.pdo.php>`_
 * `PHP Decimal <http://php-decimal.io>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
-* `PHP Options And Information <http://php.net/manual/en/book.info.php>`_
-* `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
+* `PHP Options And Information <https://www.php.net/manual/en/book.info.php>`_
+* `PHP Options/Info Functions <https://www.php.net/manual/en/ref.info.php>`_
 * `PHP return(value); vs return value; <https://stackoverflow.com/questions/2921843/php-returnvalue-vs-return-value>`_
 * `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
@@ -2888,6 +2892,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
 * `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_
 * `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_
+* `PHP RFC: Nullsafe operator <https://wiki.php.net/rfc/nullsafe_operator>`_
 * `PHP RFC: Numeric Literal Separator <https://wiki.php.net/rfc/numeric_literal_separator>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Shorter Attribute Syntax <https://wiki.php.net/rfc/shorter_attribute_syntax>`_
@@ -2895,7 +2900,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
 * `PHP RFC: Union Types 2.0 <https://wiki.php.net/rfc/union_types_v2>`_
 * `PHP RFC: Variable Syntax Tweaks <https://wiki.php.net/rfc/variable_syntax_tweaks>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <https://www.php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP why pi() and M_PI <https://stackoverflow.com/questions/42021176/php-why-pi-and-m-pi>`_
 * `PHP-cs-fixer <https://github.com/FriendsOfPHP/PHP-CS-Fixer>`_
 * `php-ext-wasm <https://github.com/Hywan/php-ext-wasm>`_
@@ -2906,19 +2911,18 @@ List of external links mentionned in this documentation.
 * `PHPUnit <https://www.phpunit.de/>`_
 * `plantuml <http://plantuml.com/>`_
 * `PMB <https://www.sigb.net/>`_
-* `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
-* `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
-* `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
-* `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
+* `PostgreSQL <https://www.php.net/manual/en/book.pgsql.php>`_
+* `Predefined Constants <https://www.php.net/manual/en/reserved.constants.php>`_
+* `Predefined Exceptions <https://www.php.net/manual/en/reserved.exceptions.php>`_
 * `Predefined Variables <https://www.php.net/manual/en/reserved.variables.php>`_
 * `preg_filter <https://php.net/preg_filter>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
-* `printf <http://php.net/printf>`_
-* `Process Control <http://php.net/manual/en/book.pcntl.php>`_
-* `proctitle <http://php.net/manual/en/book.proctitle.php>`_
-* `Properties <http://php.net/manual/en/language.oop5.properties.php>`_
-* `Property overloading <http://php.net/manual/en/language.oop5.overloading.php#language.oop5.overloading.members>`_
-* `Pspell <http://php.net/manual/en/book.pspell.php>`_
+* `printf <https://www.php.net/printf>`_
+* `Process Control <https://www.php.net/manual/en/book.pcntl.php>`_
+* `proctitle <https://www.php.net/manual/en/book.proctitle.php>`_
+* `Properties <https://www.php.net/manual/en/language.oop5.properties.php>`_
+* `Property overloading <https://www.php.net/manual/en/language.oop5.overloading.php#language.oop5.overloading.members>`_
+* `Pspell <https://www.php.net/manual/en/book.pspell.php>`_
 * `PSR-11 : Dependency injection container <https://github.com/container-interop/fig-standards/blob/master/proposed/container.md>`_
 * `PSR-13 : Link definition interface <http://www.php-fig.org/psr/psr-13/>`_
 * `PSR-16 : Common Interface for Caching Libraries <http://www.php-fig.org/psr/psr-16/>`_
@@ -2927,17 +2931,17 @@ List of external links mentionned in this documentation.
 * `PSR-6 : Caching <http://www.php-fig.org/psr/psr-6/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `RabbitMQ AMQP client library <https://github.com/alanxz/rabbitmq-c>`_
-* `Rar archiving <http://php.net/manual/en/book.rar.php>`_
-* `Rector <https://github.com/rectorphp/rector>`_
-* `References <http://php.net/references>`_
-* `Reflection <http://php.net/manual/en/book.reflection.php>`_
+* `Rar archiving <https://www.php.net/manual/en/book.rar.php>`_
+* `RectorPHP <https://getrector.org/>`_
+* `References <https://www.php.net/references>`_
+* `Reflection <https://www.php.net/manual/en/book.reflection.php>`_
 * `Reflection export() methods <https://wiki.php.net/rfc/deprecations_php_7_4#reflection_export_methods>`_
-* `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
-* `resources <http://php.net/manual/en/language.types.resource.php>`_
+* `Regular Expressions (Perl-Compatible) <https://www.php.net/manual/en/book.pcre.php>`_
+* `resources <https://www.php.net/manual/en/language.types.resource.php>`_
 * `return <https://www.php.net/manual/en/function.return.php>`_
 * `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
-* `Return Type Declaration <http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration>`_
-* `Returning values <http://php.net/manual/en/functions.returning-values.php>`_
+* `Return Type Declaration <https://www.php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration>`_
+* `Returning values <https://www.php.net/manual/en/functions.returning-values.php>`_
 * `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
 * `RFC 7230 <https://tools.ietf.org/html/rfc7230>`_
 * `RFC 822 (MIME) <http://www.faqs.org/rfcs/rfc822.html>`_
@@ -2945,88 +2949,87 @@ List of external links mentionned in this documentation.
 * `RFC : Arrow functions <https://wiki.php.net/rfc/arrow_functions>`_
 * `RFC Preload <https://wiki.php.net/rfc/preload>`_
 * `RFC: Return Type Declarations <https://wiki.php.net/rfc/return_types>`_
-* `runkit <http://php.net/manual/en/book.runkit.php>`_
+* `runkit <https://www.php.net/manual/en/book.runkit.php>`_
 * `Salted Password Hashing - Doing it Right <https://crackstation.net/hashing-security.htm>`_
 * `SARB <https://github.com/DaveLiddament/sarb>`_
-* `SARIF <https://docs.oasis-open.org/sarif/sarif/v2.0/sarif-v2.0.html>`_
-* `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
-* `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
+* `Scalar type declarations <https://www.php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
+* `Scope Resolution Operator (::) <https://www.php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
-* `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
-* `Session <http://php.net/manual/en/book.session.php>`_
-* `session_regenerateid() <http://php.net/session_regenerate_id>`_
-* `Sessions <http://php.net/manual/en/book.session.php>`_
+* `Semaphore, Shared Memory and IPC <https://www.php.net/manual/en/book.sem.php>`_
+* `Session <https://www.php.net/manual/en/book.session.php>`_
+* `session_regenerateid() <https://www.php.net/session_regenerate_id>`_
+* `Sessions <https://www.php.net/manual/en/book.session.php>`_
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `set_error_handler <http://www.php.net/set_error_handler>`_
 * `setcookie <http://www.php.net/setcookie>`_
-* `setlocale <http://php.net/setlocale>`_
+* `setlocale <https://www.php.net/setlocale>`_
 * `shell_exec <http://www.php.net/shell_exec>`_
-* `SimpleXML <http://php.net/manual/en/book.simplexml.php>`_
+* `SimpleXML <https://www.php.net/manual/en/book.simplexml.php>`_
 * `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
-* `SOAP <http://php.net/manual/en/book.soap.php>`_
-* `Sockets <http://php.net/manual/en/book.sockets.php>`_
-* `Sphinx Client <http://php.net/manual/en/book.sphinx.php>`_
+* `SOAP <https://www.php.net/manual/en/book.soap.php>`_
+* `Sockets <https://www.php.net/manual/en/book.sockets.php>`_
+* `Sphinx Client <https://www.php.net/manual/en/book.sphinx.php>`_
 * `Spread Operator in Array Expression  <https://wiki.php.net/rfc/spread_operator_for_array>`_
 * `Spread Operator in Array Expression <https://wiki.php.net/rfc/spread_operator_for_array>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
-* `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
-* `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
+* `SQLite3::escapeString <https://www.php.net/manual/en/sqlite3.escapestring.php>`_
+* `SSH2 functions <https://www.php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
-* `str_contains <http://php.net/str_contains>`_
-* `Strict typing <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
-* `String functions <http://php.net/manual/en/ref.strings.php>`_
-* `Strings <http://php.net/manual/en/language.types.string.php>`_
+* `Static Analysis Results Interchange Format (SARIF) <https://docs.oasis-open.org/sarif/sarif/v2.0/sarif-v2.0.html>`_
+* `Static Keyword <https://www.php.net/manual/en/language.oop5.static.php>`_
+* `str_contains <https://www.php.net/str_contains>`_
+* `Strict typing <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict>`_
+* `String functions <https://www.php.net/manual/en/ref.strings.php>`_
+* `Strings <https://www.php.net/manual/en/language.types.string.php>`_
 * `strip_tags <https://www.php.net/manual/en/function.strip-tags.php>`_
 * `strpos not working correctly <https://bugs.php.net/bug.php?id=52198>`_
 * `strtr <http://www.php.net/strtr>`_
 * `Structuring PHP Exceptions <https://www.alainschlesser.com/structuring-php-exceptions/>`_
-* `Subpatterns <http://php.net/manual/en/regexp.reference.subpatterns.php>`_
+* `Subpatterns <https://www.php.net/manual/en/regexp.reference.subpatterns.php>`_
 * `substr <http://www.php.net/substr>`_
 * `Suhosin.org <https://suhosin.org/>`_
-* `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_
-* `Superglobals <http://php.net/manual/en/language.variables.superglobals.php>`_
+* `Sun, iPlanet and Netscape servers on Sun Solaris <https://www.php.net/manual/en/install.unix.sun.php>`_
+* `Superglobals <https://www.php.net/manual/en/language.variables.superglobals.php>`_
 * `Supported PHP Extensions <http://exakat.readthedocs.io/en/latest/Annex.html#supported-php-extensions>`_
 * `Supported Protocols and Wrappers <https://www.php.net/manual/en/wrappers.php>`_
 * `SVM <http://www.php.net/svm>`_
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://www.swoole.com/>`_
 * `Symfony <http://www.symfony.com/>`_
-* `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_
-* `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
+* `Syntax <https://www.php.net/manual/en/language.constants.syntax.php>`_
+* `Ternary Operator <https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
 * `tetraweb/php <https://hub.docker.com/r/tetraweb/php/>`_
 * `The Basics <https://www.php.net/manual/en/language.oop5.basic.php>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
-* `The Closure Class <http://php.net/manual/en/class.closure.php>`_
+* `The Closure Class <https://www.php.net/manual/en/class.closure.php>`_
 * `The Definitive 2019 Guide to Cryptographic Key Sizes and Algorithm Recommendations <https://paragonie.com/blog/2019/03/definitive-2019-guide-cryptographic-key-sizes-and-algorithm-recommendations>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The list function & practical uses of array destructuring in PHP <https://sebastiandedeyne.com/the-list-function-and-practical-uses-of-array-destructuring-in-php>`_
 * `The main PPA for PHP (7.4, 7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `Throw Expression <https://wiki.php.net/rfc/throw_expression>`_
-* `Throwable <http://php.net/manual/en/class.throwable.php>`_
-* `Tidy <http://php.net/manual/en/book.tidy.php>`_
+* `Throwable <https://www.php.net/manual/en/class.throwable.php>`_
+* `Tidy <https://www.php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
-* `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
+* `tokyo_tyrant <https://www.php.net/manual/en/book.tokyo-tyrant.php>`_
 * `trader <https://pecl.php.net/package/trader>`_
 * `Trailing Comma In Closure Use List <https://wiki.php.net/rfc/trailing_comma_in_closure_use_list>`_
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
-* `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
 * `Traits <https://www.php.net/manual/en/language.oop5.traits.php>`_
 * `Traversable <https://www.php.net/manual/en/class.traversable.php>`_
-* `trigger_error <http://php.net/trigger_error>`_
+* `trigger_error <https://www.php.net/trigger_error>`_
 * `trim <https://www.php.net/manual/en/function.trim.php>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
-* `Type array <http://php.net/manual/en/language.types.array.php>`_
+* `Type array <https://www.php.net/manual/en/language.types.array.php>`_
 * `Type Casting <https://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting>`_
 * `Type Declaration <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type declarations  <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type Declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type Declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
+* `Type declarations <https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <https://www.php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <https://www.php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling Authentication Bypass Vulnerability in CMS Made Simple <https://www.netsparker.com/blog/web-security/type-juggling-authentication-bypass-cms-made-simple/>`_
-* `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
+* `Type Operators <https://www.php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Typed Properties 2.0 <https://wiki.php.net/rfc/typed_properties_v2>`_
 * `Typo3 <https://typo3.org/>`_
 * `Unbinding $this from non-static closures <https://wiki.php.net/rfc/deprecations_php_7_4#unbinding_this_from_non-static_closures>`_
@@ -3034,31 +3037,30 @@ List of external links mentionned in this documentation.
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `unserialize() <https://www.php.net/unserialize>`_
-* `unset <http://php.net/unset>`_
+* `unset <https://www.php.net/unset>`_
 * `Unset casting <https://www.php.net/manual/en/language.types.null.php#language.types.null.casting>`_
 * `UPGRADING 7.3 <https://github.com/php/php-src/blob/PHP-7.3/UPGRADING#L83-L95>`_
 * `Use of Hardcoded IPv4 Addresses <https://docs.microsoft.com/en-us/windows/desktop/winsock/use-of-hardcoded-ipv4-addresses-2>`_
-* `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
-* `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
+* `Using namespaces: Aliasing/Importing <https://www.php.net/manual/en/language.namespaces.importing.php>`_
+* `Using namespaces: fallback to global function/constant <https://www.php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * `Using single characters for variable names in loops/exceptions <https://softwareengineering.stackexchange.com/questions/71710/using-single-characters-for-variable-names-in-loops-exceptions?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa/>`_
-* `Using static variables <http://php.net/manual/en/language.variables.scope.php#language.variables.scope.static>`_
+* `Using static variables <https://www.php.net/manual/en/language.variables.scope.php#language.variables.scope.static>`_
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
-* `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
-* `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable basics <https://www.php.net/manual/en/language.variables.basics.php>`_
+* `Variable functions <https://www.php.net/manual/en/functions.variable-functions.php>`_
+* `Variable Scope <https://www.php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <https://www.php.net/manual/en/language.variables.scope.php>`_
-* `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
+* `Variable variables <https://www.php.net/manual/en/language.variables.variable.php>`_
 * `Variable-length argument lists <https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_
-* `Variables <http://php.net/manual/en/language.variables.basics.php>`_
-* `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
+* `Variables <https://www.php.net/manual/en/language.variables.basics.php>`_
+* `Visibility <https://www.php.net/manual/en/language.oop5.visibility.php>`_
 * `Vladimir Reznichenko <https://twitter.com/kalessil>`_
-* `Void functions <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.void-functions>`_
-* `Warn when counting non-countable types <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.warn-on-non-countable-types>`_
-* `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
-* `Weak references <http://php.net/manual/en/book.weakref.php>`_
+* `Void functions <https://www.php.net/manual/en/migration71.new-features.php#migration71.new-features.void-functions>`_
+* `Warn when counting non-countable types <https://www.php.net/manual/en/migration72.incompatible.php#migration72.incompatible.warn-on-non-countable-types>`_
+* `Wddx on PHP <https://www.php.net/manual/en/intro.wddx.php>`_
+* `Weak references <https://www.php.net/manual/en/book.weakref.php>`_
 * `What are the best practices for catching and re-throwing exceptions? <https://stackoverflow.com/questions/5551668/what-are-the-best-practices-for-catching-and-re-throwing-exceptions>`_
 * `What's all this 'immutable date' stuff, anyway? <https://medium.com/@codebyjeff/whats-all-this-immutable-date-stuff-anyway-72d4130af8ce>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
@@ -3068,24 +3070,24 @@ List of external links mentionned in this documentation.
 * `wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <https://www.wordpress.org/>`_
-* `xattr <http://php.net/manual/en/book.xattr.php>`_
+* `xattr <https://www.php.net/manual/en/book.xattr.php>`_
 * `xcache <https://xcache.lighttpd.net/>`_
 * `Xdebug <https://xdebug.org/>`_
-* `xdiff <http://php.net/manual/en/book.xdiff.php>`_
+* `xdiff <https://www.php.net/manual/en/book.xdiff.php>`_
 * `XHprof Documentation <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
 * `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injection>`_
 * `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
 * `XML-RPC <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_
-* `XMLWriter <http://php.net/manual/en/book.xmlwriter.php>`_
-* `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
+* `XMLWriter <https://www.php.net/manual/en/book.xmlwriter.php>`_
+* `XSL extension <https://www.php.net/manual/en/intro.xsl.php>`_
 * `YAML Ain't Markup Language <http://www.yaml.org/>`_
 * `Yii <http://www.yiiframework.com/>`_
 * `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_
 * `Zend Monitor - PHP API <http://files.zend.com/help/Zend-Server/content/zendserverapi/zend_monitor-php_api.htm>`_
 * `ZeroMQ <http://zeromq.org/>`_
-* `Zip <http://php.net/manual/en/book.zip.php>`_
-* `Zlib <http://php.net/manual/en/book.zlib.php>`_
+* `Zip <https://www.php.net/manual/en/book.zip.php>`_
+* `Zlib <https://www.php.net/manual/en/book.zlib.php>`_
 
 
 Ruleset configurations
@@ -3332,6 +3334,7 @@ _______
 |   analyzer[] = "Php/IsnullVsEqualNull";
 |   analyzer[] = "Php/LogicalInLetters";
 |   analyzer[] = "Php/MissingSubpattern";
+|   analyzer[] = "Php/MultipleDeclareStrict";
 |   analyzer[] = "Php/MustCallParentConstructor";
 |   analyzer[] = "Php/NoClassInGlobal";
 |   analyzer[] = "Php/NoReferenceForTernary";
@@ -3738,6 +3741,7 @@ ___________
 
 | [ClassReview]
 |   analyzer[] = "Classes/AvoidOptionArrays";
+|   analyzer[] = "Classes/CancelCommonMethod";
 |   analyzer[] = "Classes/CouldBeAbstractClass";
 |   analyzer[] = "Classes/CouldBeClassConstant";
 |   analyzer[] = "Classes/CouldBeFinal";
@@ -4547,7 +4551,7 @@ ____________
 .. _ruleset_ini_rector:
 
 Rector
-`Rector <https://github.com/rectorphp/rector>`_ is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
+`RectorPHP <https://getrector.org/>`_ is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
 ______
 
 | [Rector]
@@ -4652,6 +4656,7 @@ ___________
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
 |   analyzer[] = "Arrays/ShouldPreprocess";
 |   analyzer[] = "Arrays/SliceFirst";
+|   analyzer[] = "Classes/CancelCommonMethod";
 |   analyzer[] = "Classes/ParentFirst";
 |   analyzer[] = "Classes/ShouldDeepClone";
 |   analyzer[] = "Classes/ShouldHaveDestructor";

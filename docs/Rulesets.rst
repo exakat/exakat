@@ -82,8 +82,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Tue, 15 Sep 2020 10:33:59 +0000
-.. comment: Generation hash : 959ce4ee6622c92eb4e1520380bc2b6817ba251e
+.. comment: Generation date : Thu, 17 Sep 2020 06:00:10 +0000
+.. comment: Generation hash : 82ae56ee1009eb701d21c60e0d6686f955d32962
 
 
 .. _analyze:
@@ -93,7 +93,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 405 analysis
+Total : 406 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -275,6 +275,7 @@ Total : 405 analysis
 * :ref:`Multiple Alias Definitions Per File <multiple-alias-definitions-per-file>`
 * :ref:`Multiple Class Declarations <multiple-class-declarations>`
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
+* :ref:`Multiple Declaration Of Strict_types <multiple-declaration-of-strict\_types>`
 * :ref:`Multiple Identical Trait Or Interface <multiple-identical-trait-or-interface>`
 * :ref:`Multiple Index Definition <multiple-index-definition>`
 * :ref:`Multiple Type Variable <multiple-type-variable>`
@@ -695,10 +696,11 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 48 analysis
+Total : 49 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
+* :ref:`Cancel Common Method <cancel-common-method>`
 * :ref:`Class Could Be Final <class-could-be-final>`
 * :ref:`Class Without Parent <class-without-parent>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
@@ -1462,7 +1464,7 @@ Total : 45 analysis
 Rector
 ++++++
 
-`Rector <https://github.com/rectorphp/rector>`_ is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
+`RectorPHP <https://getrector.org/>`_ is a reconstructor tool. It applies modifications in the PHP code automatically. Exakat finds results which may be automatically updated with rector. 
 
 Total : 3 analysis
 
@@ -1553,7 +1555,7 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 90 analysis
+Total : 91 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Abstract Away <abstract-away>`
@@ -1561,6 +1563,7 @@ Total : 90 analysis
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Avoid Real <avoid-real>`
 * :ref:`Avoid Substr() One <avoid-substr()-one>`
+* :ref:`Cancel Common Method <cancel-common-method>`
 * :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Complex Dynamic Names <complex-dynamic-names>`

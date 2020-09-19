@@ -1505,7 +1505,7 @@ Not all exakat rules are covered by Rector, and vice-versa. [CompactToVariablesR
 
 Rector and Exakat both use different approaches to code review. It is recommended to review the changes before commiting them.
 
-Check [Rector](https://getrector.org/) website, its [rector github](https://github.com/rectorphp/rector) repository, and [Tomas Votruba](https://twitter.com/VotrubaT) account.
+Check [RectorPHP](https://getrector.org/) website, its [rector github](https://github.com/rectorphp/rector) repository, and [Tomas Votruba](https://twitter.com/VotrubaT) account.
 
 
 
@@ -1574,7 +1574,7 @@ _____
 
 The SARIF report publishes the results in SARIF format.
 
-`SARIF <https://docs.oasis-open.org/sarif/sarif/v2.0/sarif-v2.0.html>`_  a standard format for the output of static analysis tools. The format is referred to as the “Static Analysis Results Interchange Format” and is abbreviated as SARIF. 
+`Static Analysis Results Interchange Format (SARIF) <https://docs.oasis-open.org/sarif/sarif/v2.0/sarif-v2.0.html>`_  a standard format for the output of static analysis tools. The format is referred to as the “Static Analysis Results Interchange Format” and is abbreviated as SARIF. 
 
 SARIF is a flexible JSON format, that describes in details the rules, the issues and their context.
 

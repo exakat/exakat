@@ -56,14 +56,12 @@ Glossary
       + :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
       + :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
       + :ref:`Should Use Operator <should-use-operator>`
-      + :ref:`Useless Instructions <useless-instructions>`
 
 
 + `@`
     + `@`
 
       + :ref:`@ Operator <@-operator>`
-      + :ref:`Useless Instructions <useless-instructions>`
 
 
 + `A`
@@ -170,10 +168,6 @@ Glossary
       + :ref:`Avoid array_push() <avoid-array\_push()>`
       + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Use Array Functions <use-array-functions>`
-
-    + `array_replace()`
-
-      + :ref:`Useless Instructions <useless-instructions>`
 
     + `array_search()`
 
@@ -353,7 +347,6 @@ Glossary
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`Useless Instructions <useless-instructions>`
 
     + `convert_cyr_string()`
 
@@ -1213,9 +1206,47 @@ Glossary
 
 
 + `P`
+    + `PARENT`
+
+      + :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
+
+    + `Parent`
+
+      + :ref:`Avoid Self In Interface <avoid-self-in-interface>`
+      + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+
     + `pack()`
 
       + :ref:`Invalid Pack Format <invalid-pack-format>`
+
+    + `parent`
+
+      + :ref:`Abstract Or Implements <abstract-or-implements>`
+      + :ref:`Abstract Static Methods <abstract-static-methods>`
+      + :ref:`Already Parents Trait <already-parents-trait>`
+      + :ref:`Cancel Common Method <cancel-common-method>`
+      + :ref:`Could Be Abstract Class <could-be-abstract-class>`
+      + :ref:`Could Be Parent Method <could-be-parent-method>`
+      + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
+      + :ref:`Cyclic References <cyclic-references>`
+      + :ref:`Fossilized Method <fossilized-method>`
+      + :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
+      + :ref:`Incompatible Signature Methods With Covariance <incompatible-signature-methods-with-covariance>`
+      + :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
+      + :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
+      + :ref:`Never Used Properties <never-used-properties>`
+      + :ref:`PHP7 Dirname <php7-dirname>`
+      + :ref:`Parent First <parent-first>`
+      + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+      + :ref:`Redefined Property <redefined-property>`
+      + :ref:`Repeated Interface <repeated-interface>`
+      + :ref:`Should Use Local Class <should-use-local-class>`
+      + :ref:`Undefined Parent <undefined-parent>`
+      + :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+      + :ref:`Unused Arguments <unused-arguments>`
+      + :ref:`Unused Interfaces <unused-interfaces>`
+      + :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
+      + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 
     + `parse_ini_file()`
 
@@ -1450,6 +1481,25 @@ Glossary
 
 
 + `S`
+    + `Self`
+
+      + :ref:`Avoid Self In Interface <avoid-self-in-interface>`
+
+    + `Static`
+
+      + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
+      + :ref:`Abstract Static Methods <abstract-static-methods>`
+      + :ref:`No Reference For Static Property <no-reference-for-static-property>`
+      + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+      + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+      + :ref:`Should Be Single Quote <should-be-single-quote>`
+      + :ref:`Should Use Local Class <should-use-local-class>`
+      + :ref:`Static Loop <static-loop>`
+      + :ref:`Static Methods Called From Object <static-methods-called-from-object>`
+      + :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+      + :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+      + :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
+
     + `Strtr()`
 
       + :ref:`Strtr Arguments <strtr-arguments>`
@@ -1466,6 +1516,19 @@ Glossary
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `self`
+
+      + :ref:`Abstract Static Methods <abstract-static-methods>`
+      + :ref:`No Self Referencing Constant <no-self-referencing-constant>`
+      + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+      + :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+      + :ref:`Unused Methods <unused-methods>`
+      + :ref:`Unused Private Methods <unused-private-methods>`
+      + :ref:`Upload Filename Injection <upload-filename-injection>`
+      + :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
+      + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
+      + :ref:`strip_tags Skips Closed Tag <strip\_tags-skips-closed-tag>`
 
     + `session_start()`
 
@@ -1556,6 +1619,57 @@ Glossary
     + `srand()`
 
       + :ref:`Use random_int() <use-random\_int()>`
+
+    + `static`
+
+      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
+      + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
+      + :ref:`Abstract Static Methods <abstract-static-methods>`
+      + :ref:`Ambiguous Static <ambiguous-static>`
+      + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
+      + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
+      + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
+      + :ref:`Could Be Static <could-be-static>`
+      + :ref:`Could Be Static Closure <could-be-static-closure>`
+      + :ref:`Dependant Abstract Classes <dependant-abstract-classes>`
+      + :ref:`Dependant Trait <dependant-trait>`
+      + :ref:`Don't Unset Properties <don't-unset-properties>`
+      + :ref:`Forgotten Visibility <forgotten-visibility>`
+      + :ref:`Magic Visibility <magic-visibility>`
+      + :ref:`Method Could Be Static <method-could-be-static>`
+      + :ref:`Mismatch Type And Default <mismatch-type-and-default>`
+      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+      + :ref:`No Need For get_class() <no-need-for-get\_class()>`
+      + :ref:`No Net For Xml Load <no-net-for-xml-load>`
+      + :ref:`No Reference For Static Property <no-reference-for-static-property>`
+      + :ref:`No Return Used <no-return-used>`
+      + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+      + :ref:`Only Variable For Reference <only-variable-for-reference>`
+      + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
+      + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
+      + :ref:`Order Of Declaration <order-of-declaration>`
+      + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+      + :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
+      + :ref:`Should Use Local Class <should-use-local-class>`
+      + :ref:`Static Global Variables Confusion <static-global-variables-confusion>`
+      + :ref:`Static Loop <static-loop>`
+      + :ref:`Static Methods Called From Object <static-methods-called-from-object>`
+      + :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+      + :ref:`Too Many Dereferencing <too-many-dereferencing>`
+      + :ref:`Too Many Local Variables <too-many-local-variables>`
+      + :ref:`Unbinding Closures <unbinding-closures>`
+      + :ref:`Undefined Variable <undefined-variable>`
+      + :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+      + :ref:`Unused Private Properties <unused-private-properties>`
+      + :ref:`Use Class Operator <use-class-operator>`
+      + :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
+      + :ref:`Use PHP7 Encapsed Strings <use-php7-encapsed-strings>`
+      + :ref:`Used Once Variables <used-once-variables>`
+      + :ref:`Useless Abstract Class <useless-abstract-class>`
+      + :ref:`Useless Unset <useless-unset>`
+      + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
+      + :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
+      + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 
     + `str_ireplace()`
 
