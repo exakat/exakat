@@ -25,8 +25,8 @@ namespace Exakat;
 use Exakat\Configsource\Commandline;
 
 class Exakat {
-    const VERSION = '2.1.7';
-    const BUILD = 1136;
+    const VERSION = '2.1.8';
+    const BUILD = 1141;
 
     private $config  = null;
 
@@ -272,7 +272,7 @@ class Exakat {
 
             default :
                 $command_value = $this->config->command_value;
-                $suggestions = array_filter(array_keys(Commandline::$commands), function ($x) use ($command_value) { similar_text((string) $command_value, $x, $percentage); return $percentage > 60; });
+                $suggestions = array_filter(array_keys(CommandLine::$commands), function ($x) use ($command_value) { similar_text((string) $command_value, $x, $percentage); return $percentage > 60; });
 
                 print (!empty($command_value) ? "Unknown command '{$this->config->command_value}'. See https://exakat.readthedocs.io/en/latest/Commands.html" . PHP_EOL : '') .
                       (!empty($suggestions) ? 'Did you mean : ' . implode(', ', $suggestions) . ' ? ' : '') . PHP_EOL;

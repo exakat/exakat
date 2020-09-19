@@ -1,4 +1,4 @@
-Version 2.1.8 (Chou, coming up)
+Version 2.1.9 (Yin, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,40 @@ Version 2.1.8 (Chou, coming up)
     + 
 + Tokenizer
     + 
+
+Version 2.1.8 (Chou, 2020-09-18)
++ Architecture
+    + added '--' options, and kept the '-' options, for migration purposes. (--format and -format are both available)
+    + Added support for PHP 8 attributes in dump.sqlite
+    + Added 'precision' to rule docs. 
+    + Moved all but one data collection from Dump -collect to Dump/ analysis. 
++ Report
+    + New report : SARIF
+    + Typehint suggestion report : Tick classes when they are fully covered
+    + Weekly report : fix donuts display.
+    + Stubsjson : Added support for PHP attributes
+    + Stubs : Added support for PHP attributes
++ Analysis
+    + New ruleset : CI-Checks
+    + New analysis : 'Multiple declare(strict_types = 1)'
+    + New analysis : 'No more (unset) in PHP 8'
+    + New analysis : Cancel methods in parent : when methods should not have been abstracted in parent class.
+    + New analysis : '$php_errormsg is removed in PHP 8'
+    + New analysis : 'Mismatch Parameter Name' checks parameter names between inherited methods for consistency
+    + Upgraded analysis : 'Useless Arguments' is accelerated
+    + Upgraded analysis : 'Don't use Void' weeded out false positives
+    + Upgraded analysis : 'Wrong type for native calls' weeded out false positives
+    + Upgraded analysis : 'Non static methods called statically' was refactored for PHP 8.0 support
+    + Upgraded analysis : 'PHP Keywords' includes 'match'
+    + Upgraded analysis : 'Useless instruction' reports '$a ?? null' as useless.
+    + Upgraded analysis : 'Uncaught exceptions' is extended to local variables
+    + Upgraded analysis : 'Foreach favorites' also covers the keys
+    + Upgraded analysis : 'Should Preprocess' skips expressions with constants
+    + Upgraded analysis : 'Compare Hashes' has more functions covered
+    + Removed analysis : 'Normal Properties' : no need anymore.
++ Tokenizer
+    + Moved isPhp attribute to Task/Load plugin
+    + Created isExt attribute to Task/Load plugin
 
 Version 2.1.7 (zi, 2020-09-07)
 + Architecture
