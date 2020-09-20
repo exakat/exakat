@@ -31,7 +31,8 @@ class MismatchParameterName extends Analyzer {
     }
 
     public function analyze(): void {
-        // function foo(string $s = 3)
+        // class x {function           foo(string $name  = 3) }
+        // class y extends x {function foo(string $other = 3) }
         $this->atomIs('Method')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'ranked')
