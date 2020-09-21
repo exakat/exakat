@@ -66,8 +66,8 @@ class Top10 extends Ambassador {
                      );
     }
 
-    protected function generateIssues(): void {
-        $this->generateIssuesEngine('issues',
+    protected function generateIssues(Section $section): void {
+        $this->generateIssuesEngine($section,
                                     $this->getIssuesFaceted('Top10') );
     }
 

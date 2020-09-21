@@ -1300,9 +1300,9 @@ HTML;
         $this->generateIssuesEngine($section, $diff);
     }
 
-    private function generateIssues(): void {
+    private function generateIssues(Section $section): void {
         $issues = $this->getIssuesFaceted($this->rulesets->getRulesetsAnalyzers($this->themesToShow));
-        $this->generateIssuesEngine('issues', $issues);
+        $this->generateIssuesEngine($section, $issues);
     }
 
     protected function generateIssuesEngine(Section $section, array $issues = array()): void {
