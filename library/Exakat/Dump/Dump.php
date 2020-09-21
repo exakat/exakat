@@ -158,7 +158,7 @@ abstract class Dump {
         return $this->sqlite->querySingle('SELECT count(*) FROM ' . $table);
     }
 
-    public function collectTables($tables): void {
+    public function collectTables(array $tables): void {
         $config = exakat('config');
         $this->sqlite->query("ATTACH '{$config->datastore}' AS datastore");
 

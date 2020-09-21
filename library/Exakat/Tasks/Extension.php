@@ -44,7 +44,7 @@ class Extension extends Tasks {
         }
     }
 
-    private function install() {
+    private function install() : void {
         if (file_exists("{$this->config->ext_root}/{$this->config->extension}.phar")) {
             print "This extension already exists in the ext folder. Remove it manually, or with 'uninstall' command.\n";
             return;
@@ -75,7 +75,7 @@ class Extension extends Tasks {
         print "{$this->config->extension} installed with success!\n";
     }
 
-    private function update() {
+    private function update() : void {
         if (!file_exists("{$this->config->ext_root}/{$this->config->extension}.phar")) {
             print "No such extension to update.\n" . "{$this->config->ext_root}/{$this->config->extension}.phar";
             return;
@@ -115,7 +115,7 @@ class Extension extends Tasks {
         print "{$this->config->extension} upgraded to " . $this->extensionList[$this->config->extension]->version . " with success!\n";
     }
 
-    private function uninstall() {
+    private function uninstall() : void {
         if (!file_exists("{$this->config->ext_root}/{$this->config->extension}.phar")) {
             print "No such extension to remove.\n";
             return;
@@ -126,7 +126,7 @@ class Extension extends Tasks {
         print "Done\n";
     }
 
-    private function list() {
+    private function list() : void {
         $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
         if (empty($json)) {
             print "Couldn't reach the remote server.\n";
@@ -150,7 +150,7 @@ class Extension extends Tasks {
         print PHP_EOL . 'Total : ' . count($list) . ' extensions' . PHP_EOL;
     }
 
-    private function local() {
+    private function local() : void {
         $list = $this->config->ext->getPharList();
         sort($list);
 
@@ -172,7 +172,7 @@ class Extension extends Tasks {
         print PHP_EOL . 'Total : ' . count($list) . ' extensions' . PHP_EOL;
     }
 
-    private function fetchExtensionList() {
+    private function fetchExtensionList() : void {
         $json = @file_get_contents('https://www.exakat.io/extensions/index.json');
         if (empty($json)) {
             print "Couldn't reach the remote server.\n";

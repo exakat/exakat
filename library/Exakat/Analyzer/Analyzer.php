@@ -195,7 +195,7 @@ abstract class Analyzer {
     protected $linksDown = '';
 
     public function __construct() {
-        assert(func_num_args() === 0, 'Too many arguments for ' . __CLASS__);
+        assert(func_num_args() === 0, 'Too many arguments for ' . static::class);
         $this->analyzer       = get_class($this);
         $this->analyzerQuoted = self::getName($this->analyzer);
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
