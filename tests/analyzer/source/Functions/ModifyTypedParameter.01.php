@@ -4,7 +4,7 @@ function foo(X $x) {
     $x = y();
 }
 
-function foo2(X $x) { 
+function foo2(X2 $x) { 
     $y = $x();
 }
 

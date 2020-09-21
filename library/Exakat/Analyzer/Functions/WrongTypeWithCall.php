@@ -41,10 +41,11 @@ class WrongTypeWithCall extends Analyzer {
              ->isNot('variadic', true)
              ->outIs('TYPEHINT')
              ->savePropertyAs('fullnspath', 'type')
-             ->atomIsNot('Void')
+             ->atomIs('Scalartypehint')
              ->back('first')
 
              ->outIs('DEFINITION')
+             ->outIsIE('METHOD')
              ->as('results')
              ->outWithRank('ARGUMENT', 'ranked')
              ->atomIs(array('Integer',
@@ -56,6 +57,55 @@ class WrongTypeWithCall extends Analyzer {
                             'Float',
                             ), self::WITH_CONSTANTS)
              ->checkTypeWithAtom('type')
+             ->back('results');
+        $this->prepareQuery();
+
+        // foo(new d); function foo(string $s) {}
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->savePropertyAs('rank', 'ranked')
+             ->isNot('variadic', true)
+             ->not(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->atomIsNot(array('Scalartypehint', 'Null'))
+             )
+             ->back('first')
+
+             ->outIs('DEFINITION')
+             ->outIsIE('METHOD')
+             ->as('results')
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->atomIs(array('New',
+                            'Clone',
+                            ), self::WITH_VARIABLES)
+             ->back('results');
+        $this->prepareQuery();
+
+        // foo(1); function foo(x $s) {}
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->savePropertyAs('rank', 'ranked')
+             ->isNot('variadic', true)
+             ->not(
+                $this->side()
+                     ->outIs('TYPEHINT')
+                     ->atomIsNot(array('Identifier', 'Nsname', 'Null'))
+             )
+             ->back('first')
+
+             ->outIs('DEFINITION')
+             ->outIsIE('METHOD')
+             ->as('results')
+             ->outWithRank('ARGUMENT', 'ranked')
+             ->atomIs(array('Integer',
+                            'String',
+                            'Arrayliteral',
+                            'Concatenation',
+                            'Addition',
+                            'Power',
+                            'Float',
+                            ), self::WITH_CONSTANTS)
              ->back('results');
         $this->prepareQuery();
     }
