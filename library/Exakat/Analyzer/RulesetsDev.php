@@ -34,7 +34,7 @@ class RulesetsDev {
         $this->rulesets = array_keys($this->all);
     }
 
-    public function getSuggestionRuleset(array $ruleset): array {
+    public function getSuggestionRuleset(array $rulesets = array()): array {
         return array_filter($this->rulesets, function ($c) use ($ruleset) {
             foreach($ruleset as $r) {
                 $l = levenshtein($c, $r);

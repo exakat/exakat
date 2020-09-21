@@ -40,7 +40,7 @@ interface RulesetsInterface {
 
     public function listAllRulesets(array $ruleset = array()): array;
 
-    public function getSuggestionRuleset(array $ruleset = array()): array;
+    public function getSuggestionRuleset(array $rulesets = array()): array;
 
     public function getSuggestionClass(string $name): array;
 

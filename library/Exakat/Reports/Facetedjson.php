@@ -26,7 +26,7 @@ class Facetedjson extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'faceted';
 
-    public function generate(string $dirName, string $fileName = null): string {
+    public function generate(string $folder, string $name = null): string {
         $res = $this->dump->fetchAnalysers($this->themesToShow);
 
         $items = array();
@@ -43,12 +43,12 @@ class Facetedjson extends Reports {
             $this->count();
         }
 
-        if ($fileName === null) {
+        if ($name === null) {
             $json = json_encode($items, JSON_PARTIAL_OUTPUT_ON_ERROR);
             // @todo Log if $json == false
             return $json;
         } else {
-            file_put_contents($dirName . '/' . $fileName . '.' . self::FILE_EXTENSION, json_encode($items));
+            file_put_contents($folder . '/' . $name . '.' . self::FILE_EXTENSION, json_encode($items));
             return '';
         }
     }

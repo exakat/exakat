@@ -50,12 +50,12 @@ class Rulesets implements RulesetsInterface {
         $this->ignore = null;
     }
 
-    public function getRulesetsAnalyzers(array $theme = array()): array {
-        $main     = $this->main   ->getRulesetsAnalyzers($theme);
-        $extra    = $this->extra  ->getRulesetsAnalyzers($theme);
-        $ext      = $this->ext    ->getRulesetsAnalyzers($theme);
-        $dev      = $this->dev    ->getRulesetsAnalyzers($theme);
-        $ignore   = $this->ignore ->getRulesetsAnalyzers($theme);
+    public function getRulesetsAnalyzers(array $rulesets = array()): array {
+        $main     = $this->main   ->getRulesetsAnalyzers($rulesets);
+        $extra    = $this->extra  ->getRulesetsAnalyzers($rulesets);
+        $ext      = $this->ext    ->getRulesetsAnalyzers($rulesets);
+        $dev      = $this->dev    ->getRulesetsAnalyzers($rulesets);
+        $ignore   = $this->ignore ->getRulesetsAnalyzers($rulesets);
 
         return array_udiff(array_merge($main, $extra, $ext, $dev), $ignore, 'strcasecmp');
     }
