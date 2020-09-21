@@ -2190,19 +2190,14 @@ class Load extends Tasks {
         );
 
         // return type allows for static. Not valid for arguments.
+        if ($holder->atom === 'Parameter') {
+            $link = 'TYPEHINT';
+        } else {
+            $link = 'RETURNTYPE';
+        }
+
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
             ++$this->id;
-
-            $nonTypehintToken[] = $this->phptokens::T_STATIC;
-            $link = 'RETURNTYPE';
-        } else {
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OPEN_CURLY,
-                                                                $this->phptokens::T_DOUBLE_ARROW,
-                                                        ), \STRICT_COMPARISON)) {
-                $link = 'RETURNTYPE';
-            } else {
-                $link = 'TYPEHINT';
-            }
         }
 
         if (!in_array($this->tokens[$this->id + 1][0], $nonTypehintToken, \STRICT_COMPARISON)) {
