@@ -32,7 +32,7 @@ class RulesetsIgnore implements RulesetsInterface {
         $this->ignoreList      = $list;
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = array()): array {
+    public function getRulesetsAnalyzers(array $rulesets = array()): array {
         return $this->ignoreList;
     }
 

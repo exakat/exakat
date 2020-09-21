@@ -24,7 +24,7 @@
 namespace Exakat\Analyzer;
 
 interface RulesetsInterface {
-    public function getRulesetsAnalyzers(array $ruleset = array()): array;
+    public function getRulesetsAnalyzers(array $rulesets = array()): array;
 
     public function getRulesetForAnalyzer(string $analyzer = ''): array;
 

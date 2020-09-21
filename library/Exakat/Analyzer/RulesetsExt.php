@@ -43,14 +43,14 @@ class RulesetsExt implements RulesetsInterface {
         }
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = array()): array {
+    public function getRulesetsAnalyzers(array $rulesets = array()): array {
         if (empty($this->rulesets)) {
             return array();
         }
 
         $return = array(array());
         foreach($this->rulesets as $t) {
-            $return[] = $t->getRulesetsAnalyzers($ruleset);
+            $return[] = $t->getRulesetsAnalyzers($rulesets);
         }
 
         return array_merge(...$return);

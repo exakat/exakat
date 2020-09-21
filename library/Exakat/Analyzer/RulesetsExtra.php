@@ -31,9 +31,9 @@ class RulesetsExtra implements RulesetsInterface {
         $this->extra_rulesets = $extra_rulesets;
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = array()): array {
+    public function getRulesetsAnalyzers(array $rulesets = array()): array {
         // Main installation
-        if (empty($ruleset)) {
+        if (empty($rulesets)) {
             if (empty($this->extra_rulesets)) {
                 return array();
             }
@@ -42,7 +42,7 @@ class RulesetsExtra implements RulesetsInterface {
         }
 
         $return = array();
-        foreach($ruleset as $t) {
+        foreach($rulesets as $t) {
             $return[] = $this->extra_rulesets[$t] ?? array();
         }
 

@@ -45,14 +45,14 @@ class RulesetsMain implements RulesetsInterface {
         }
     }
 
-    public function getRulesetsAnalyzers(array $ruleset = array()): array {
+    public function getRulesetsAnalyzers(array $rulesets = array()): array {
         // Main installation
-        if (empty($ruleset)) {
+        if (empty($rulesets)) {
             // Default is ALL of ruleset
             $where = 'WHERE a.folder != "Common" ';
         } else {
-            $ruleset = array_map(function (string $x): string { return trim($x, '"'); }, $ruleset);
-            $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($ruleset) . ')';
+            $rulesets = array_map(function (string $x): string { return trim($x, '"'); }, $rulesets);
+            $where = 'WHERE a.folder != "Common" AND c.name in (' . makeList($rulesets) . ')';
         }
 
         $query = <<<SQL

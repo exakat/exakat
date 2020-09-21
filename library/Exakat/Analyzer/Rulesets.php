@@ -140,7 +140,7 @@ class Rulesets implements RulesetsInterface {
         return '';
     }
 
-    public function getSuggestionRuleset(array $ruleset = array()): array {
+    public function getSuggestionRuleset(array $rulesets = array()): array {
         $main  = $this->main ->getSuggestionRuleset($ruleset);
         $extra = $this->extra->getSuggestionRuleset($ruleset);
         $ext   = $this->ext  ->getSuggestionRuleset($ruleset);

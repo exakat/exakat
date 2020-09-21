@@ -35,8 +35,8 @@ class RulesetsDev {
     }
 
     public function getSuggestionRuleset(array $rulesets = array()): array {
-        return array_filter($this->rulesets, function ($c) use ($ruleset) {
-            foreach($ruleset as $r) {
+        return array_filter($this->rulesets, function (array $c) use ($ruleset) : bool {
+            foreach($rulesets as $r) {
                 $l = levenshtein($c, $r);
                 if ($l < 8) {
                     return true;
