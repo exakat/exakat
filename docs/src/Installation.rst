@@ -14,6 +14,7 @@ Summary
 * `Installation guide with Composer`_
 * `Installation guide with Docker`_
 * `Installation guide as Github Action`_
+* `Installation guide for optional tools`_
 
 Requirements
 ------------
@@ -23,18 +24,18 @@ Exakat relies on several parts. Some are necessary and some are optional.
 Basic requirements : 
 
 * exakat.phar, the main code.
-* Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.4.x is the recommended version, while version 3.3.x are still supported. Gremlin version 3.2.* are unsupported. 
+* `Gremlin server <http://tinkerpop.apache.org/>`_ : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.4.x is the recommended version, while version 3.3.x are still supported. Gremlin version 3.2.* are unsupported. 
 * Java 8.x. Java 9.x/10.x will be supported later. Java 7.x was used, but is not actively supported.
-* PHP 7.4 to run. PHP 7.4 is recommended, PHP 7.2 or later are possible. This version requires the PHP extensions curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
+* `PHP <https://www.php.net/>`_ 7.4 to run. PHP 7.4 is recommended, PHP 7.2 or later are possible. This version requires the PHP extensions curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 
 Optional requirements : 
 
 * PHP 5.2 to 8.0-dev for analysis purposes. Those versions only require the ext/tokenizer extension. 
 * VCS (Version Control Software), such as Git, SVN, bazaar, Mercurial. They all are optional, though git is recommended. 
-* Archives, such as zip, tgz, tbz2 may also be opened with optional helpers.
+* Archives, such as zip, tgz, tbz2 may also be opened with optional helpers (See `Installation guide for optional tools`_).
 
 OS requirements : 
-Exakat has beed tested on OSX, Debian and Ubuntu (up to 18.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
+Exakat has beed tested on OSX, Debian and Ubuntu (up to 20.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
 
 For installation, curl or wget, and zip are needed.
 
@@ -202,14 +203,27 @@ Installation guide with Composer
 Composer installation first run
 *******************************
 
-When running exakat in composer mode, 
+To install Exakat with composer, you can use the following commands: 
+
+::
+
+    mkdir exakat
+    cd exakat
+    composer require exakat/exakat
+    php vendor/bin/exakat install -v
+
+The final command checks for the presence of Java and unZip utility. Then, it installs a local copy of a `Gremlin server <http://tinkerpop.apache.org/>`_. This is needed to run Exakat. 
+
+To run your first audit, use the following commands: 
 
 ::
 
     php vendor/bin/exakat init -p sculpin -R 'https://github.com/sculpin/sculpin.git'
     php vendor/bin/exakat project -p sculpin
     
-The final audit is now in the projects/sculpin/report directory.
+
+
+The final audit is now in the `projects/sculpin/report` directory.
 
 Using multiple PHP versions
 ---------------------------
@@ -222,19 +236,6 @@ Exakat recommends PHP 7.4.4 (or newer version) to run Exakat. We also recommend 
 
 To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (7.4, 7.3, 7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
 You may also check the dotdeb repository, at `dotdeb instruction <https://www.dotdeb.org/instructions/>`_ or compile PHP yourself. 
-
-Optional installations
-----------------------
-
-By default, exakat works with Git repository for downloading code. You may also use 
-
-* `composer <https://getcomposer.org/>`_
-* `svn <https://subversion.apache.org/>`_
-* `hg <https://www.mercurial-scm.org/>`_
-* `bazaar <http://bazaar.canonical.com/en/>`_
-* zip
-
-The binaries above are used with the `init` and `update` commands, to get the source code. They are optional.
 
 Installation guide with Docker
 ------------------------------
@@ -392,3 +393,22 @@ You can run it in any given directory like this:
     docker pull exakat/exakat-ga
     docker run --rm -it -v ${PWD}:/app exakat/exakat-ga:latest
 
+
+Installation guide for optional tools
+*************************************
+
+Exakat is able to use a variety of tools to access PHP code to audit. Some external tools are necessary. You can check which tools are recognized locally with the `exakat doctor -v` command. 
+
++ `Bazaar <https://bazaar.canonical.com/en/>`_ : the `bzr` command must be available.
++ `composer <https://getcomposer.org/>`_ : the `composer` command must be available.
++ `CVS <https://www.nongnu.org/cvs/>`_ : the `cvs` command must be available
++ `Git <https://git-scm.com/>`_ : the `git` command must be available.
++ `mercurial <https://www.mercurial-scm.org/>`_ : the `hg` must be available
++ `Svn <https://subversion.apache.org/>`_ : the `svn` command must be available.
++ tgz : the `tar` and `gunzip` commands must be available
++ tbz : the `tar` and `bunzip2` commands must be available.
++ `rar <https://en.wikipedia.org/wiki/RAR_(file_format)>`_ : the `rar` commands must be available.
++ `zip <https://en.wikipedia.org/wiki/Zip_(file_format)>`_ : the `unzip` command must be available.
++ `7z <https://www.7-zip.org/7z.html>`_ : the `7z` command must be available
+
+The binaries above are used with the `init` and `update` commands, to get the source code. They are optional.
