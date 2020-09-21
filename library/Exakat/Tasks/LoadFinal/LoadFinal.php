@@ -195,27 +195,23 @@ GREMLIN;
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Functioncall", "Identifier", "Nsname")
-     .not(__.in('NAME'))
-     .not(has('absolute', true))
+     .not(__.in("NAME").not(hasLabel("Functioncall")))
+     .not(has("absolute", true))
      .has("fullnspath")
-     .or(
-         __.has("isPhp", true),
-         __.has("isExt", true),
-      )
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath");}
      .in("DEFINITION")
      .hasLabel("Function", "Constant")
      .optional(
-        __.hasLabel('Constant').out('NAME')
+        __.hasLabel("Constant").out("NAME")
      )
      .sideEffect{ actual = it.get().value("fullnspath");}
      .filter{ actual != cc; }
      .select("identifier")
      .sideEffect{ 
         it.get().property("fullnspath", actual);
-        it.get().property('isPhp',      false); 
-        it.get().property('isExt',      false); 
+        it.get().property("isPhp",      false); 
+        it.get().property("isExt",      false); 
     }
      .count();
 GREMLIN;
