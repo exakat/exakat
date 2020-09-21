@@ -25,15 +25,42 @@ namespace Exakat\Analyzer\Typehints;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeVoid extends Analyzer {
+    public function dependsOn() : array {
+        return array('Complete/OverwrittenMethods',
+                    );
+    }
+
     public function analyze(): void {
         // function foo() {} (no return)
         $this->atomIs(self::FUNCTIONS_ALL)
              ->isNot('abstract', true)
+             ->filter(
+                $this->side()
+                     ->outIs('RETURNTYPE')
+                     ->atomIs('Void')
+             )
              ->not(
                 $this->side()
                      ->outIs('RETURNED')
                      ->atomIsNot('Void')
              );
+        $this->prepareQuery();
+
+        // abstract function foo() ;
+        // concrete function foo() : void {}
+        $this->atomIs(self::FUNCTIONS_ALL)
+             ->is('abstract', true)
+             ->filter(
+                $this->side()
+                     ->outIs('RETURNTYPE')
+                     ->atomIs('Void')
+             )
+             ->inIs('OVERWRITE')
+             // abstract or not, all are OK.
+             ->outIs('RETURNTYPE')
+             ->atomIs('Scalartypehint')
+             ->fullnspathIs('\\void')
+             ->back('first');
         $this->prepareQuery();
     }
 }
