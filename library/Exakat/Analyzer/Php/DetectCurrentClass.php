@@ -33,7 +33,7 @@ class DetectCurrentClass extends Analyzer {
              ->codeIs('__CLASS__');
         $this->prepareQuery();
 
-        // avoid get_called_class()
+        // avoid get_called_class() with static::class
         $this->atomFunctionIs('\\get_called_class');
         $this->prepareQuery();
     }

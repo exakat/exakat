@@ -40,6 +40,7 @@ class Rector extends Reports {
                              'Functions/NeverUsedParameter'        => 'Rector\DeadCode\Rector\ClassMethod\RemoveUnusedParameterRector',
                              'Structures/NoChoice'                 => 'Rector\DeadCode\Rector\If_\SimplifyIfElseWithSameContentRector',
                              'Functions/Closure2String'            => 'Rector\CodingStyle\Rector\FuncCall\SimpleArrayCallableToStringRector',
+                             'Php/DectectCurrentClass'             => 'Rector\Php74\Rector\Class_\ClassConstantToSelfClassRector',
 
                             );
 
