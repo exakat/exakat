@@ -38,6 +38,7 @@ class WrongTypeForNativeFunction extends Analyzer {
         foreach($types as $type => $atoms) {
             $returntypes[$type] = $this->methods->getFunctionsByReturnType($type, Methods::STRICT);
         }
+        $returntypes['null'] = $this->methods->getFunctionsByReturnType('null', Methods::LOOSE);
 
         foreach($types as $type => $atoms) {
             $ini = $this->methods->getFunctionsByArgType($type, Methods::STRICT);
@@ -86,8 +87,38 @@ class WrongTypeForNativeFunction extends Analyzer {
                 $this->atomFunctionIs($functions)
                      ->analyzerIsNot('self')
                      ->outWithRank('ARGUMENT', (int) $rank)
-                     ->atomIsNot(array_merge(self::CALLS, self::CONTAINERS))
                      ->atomIsNot($atoms, self::WITH_CONSTANTS)
+                     ->atomIsNot(array_merge(self::CALLS, self::CONTAINERS))
+                     ->atomIsNot(array('Identifier', 'Nsname')) // Exclude undefined constants
+                     ->back('first');
+                $this->prepareQuery();
+
+                // native functions
+                // substr(rand(), 1)
+                $this->atomFunctionIs($functions)
+                     ->analyzerIsNot('self')
+                     ->outWithRank('ARGUMENT', (int) $rank)
+                     ->atomIs('Functioncall', self::WITH_VARIABLES)
+                     ->is('isPhp', true)
+                     ->fullnspathIsNot($returntypes[$type])
+
+                     // Special case for false, inside a ?:
+                     ->not(
+                        $this->side()
+                             ->fullnspathIs($returntypes['bool'])
+                             ->inIs('CONDITION')
+                             ->atomIs('Ternary')
+                             ->outIs('THEN')
+                             ->atomIs('Void')
+                     )
+
+                     // Special case for null, inside a ??
+                     ->not(
+                        $this->side()
+                             ->fullnspathIs($returntypes['null'])
+                             ->inIs('LEFT')
+                             ->atomIs('Coalesce')
+                     )
                      ->back('first');
                 $this->prepareQuery();
 
@@ -101,17 +132,6 @@ class WrongTypeForNativeFunction extends Analyzer {
                      ->outIs('RETURNTYPE')
                      ->atomIsNot('Void')
                      ->fullnspathIsNot('\\' . $type)
-                     ->back('first');
-                $this->prepareQuery();
-
-                // native functions
-                // substr(rand(), 1)
-                $this->atomFunctionIs($functions)
-                     ->analyzerIsNot('self')
-                     ->outWithRank('ARGUMENT', (int) $rank)
-                     ->atomIs('Functioncall', self::WITH_VARIABLES)
-                     ->is('isPhp', true)
-                     ->fullnspathIsNot($returntypes[$type])
                      ->back('first');
                 $this->prepareQuery();
             }

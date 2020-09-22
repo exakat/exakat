@@ -165,8 +165,8 @@ abstract class Analyzer {
     public const CALLS            = array('Functioncall', 'Methodcall', 'Staticmethodcall' );
     public const FUNCTIONS_USAGE  = array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Eval', 'Echo', 'Print', 'Unset' );
 
-    public const STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String', 'Identifier', 'Nsname', 'Staticclass');
-    public const STRINGS_LITERALS  = array('Concatenation', 'Heredoc', 'String');
+    public const STRINGS_ALL      = array('Concatenation', 'Heredoc', 'String', 'Identifier', 'Nsname', 'Staticclass', 'Magicconstant');
+    public const STRINGS_LITERALS  = array('Concatenation', 'Heredoc', 'String', 'Magicconstant');
 
     public const CONSTANTS_ALL    = array('Identifier', 'Nsname');
 
