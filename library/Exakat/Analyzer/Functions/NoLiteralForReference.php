@@ -98,45 +98,6 @@ class NoLiteralForReference extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // fn &foo($r) { return 2; }
-        $this->atomIs('Arrowfunction')
-             ->is('reference', true)
-             ->outIs('BLOCK')
-             ->outIsIE('CODE') // Skip parenthesis
-             ->atomIs($atoms)
-             ->back('first');
-        $this->prepareQuery();
-
-        // fn &foo($r) { return foo_without_ref(); }
-        $this->atomIs('Arrowfunction')
-             ->is('reference', true)
-             ->outIs('BLOCK')
-             ->outIsIE('CODE') // Skip parenthesis
-             ->atomIs(self::CALLS)
-             ->inIs('DEFINITION')
-             ->isNot('reference', true)
-             ->outIs('RETURNTYPE')
-             ->atomIs('Scalartypehint')
-             ->back('first');
-        $this->prepareQuery();
-
-        // function &foo($r) { return foo_without_ref(); }
-        $this->atomIs('Arrowfunction')
-             ->is('reference', true)
-             ->outIs('BLOCK')
-             ->outIsIE('CODE') // Skip parenthesis
-             ->atomIs(self::CALLS)
-             ->inIs('DEFINITION')
-             ->isNot('reference', true)
-             ->outIs('RETURNTYPE')
-             ->atomIs('Void')
-             ->inIs('RETURNTYPE')
-             ->outIs('RETURNED')
-             ->hasIn('RETURN')
-             ->outIsIE('CODE') // Skip parenthesis
-             ->back('first');
-        $this->prepareQuery();
-
         // Does PHP return references too ? Shall we cover native PHP functions?
     }
 }
