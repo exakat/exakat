@@ -413,7 +413,7 @@ const FNP_NOT_CONSTANT = false;
 function makeFullNsPath($functions, bool $constant = \FNP_NOT_CONSTANT) {
     // case for classes and functions
     if ($constant === \FNP_NOT_CONSTANT) {
-        $cb = function ($x) {
+        $cb = function (string $x) : string {
             $r = mb_strtolower($x);
             if (strpos($r, '\\\\') !== false) {
                 $r = stripslashes($r);
@@ -425,7 +425,7 @@ function makeFullNsPath($functions, bool $constant = \FNP_NOT_CONSTANT) {
         };
     } else {
         // case for constant
-        $cb = function ($r) {
+        $cb = function (string $r) : string {
             $r2 = str_replace('\\\\', '\\', $r);
 
             if (strpos($r2, '::') !== false) {
