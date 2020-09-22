@@ -51,38 +51,6 @@ class Sarif extends Reports {
 
             $sarif->addRule($row['analyzer'], $titleCache[$row['analyzer']], $descriptionCache[$row['analyzer']], $severityCache[$row['analyzer']], $precisionCache[$row['analyzer']]);
             $sarif->addResult((string) $row['fullcode'], $row['analyzer'], $row['file'], (int) $row['line']);
-            continue;
-            print_r($row);die();
-            if (!isset($results[$row['file']])) {
-                $file = array('errors'   => 0,
-                              'warnings' => 0,
-                              'fixable'  => 0,
-                              'filename' => $row['file'],
-                              'messages' => array());
-                $results[$row['file']] = $file;
-            }
-
-            if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
-
-                $titleCache[$row['analyzer']]    = $this->docs->getDocs($row['analyzer'], 'name');
-                $severityCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'severity');
-            }
-
-            $message = array('type'     => 'warning',
-                             'source'   => $row['analyzer'],
-                             'severity' => $severityCache[$row['analyzer']],
-                             'fixable'  => 'fixable',
-                             'message'  => $titleCache[$row['analyzer']],
-                             'fullcode' => $row['fullcode']);
-
-            if (!isset($results[ $row['file'] ]['messages'][ $row['line'] ])) {
-                $results[ $row['file'] ]['messages'][ $row['line'] ] = array(0 => array());
-            }
-            $results[ $row['file'] ]['messages'][ $row['line'] ][0][] = $message;
-
-            ++$results[ $row['file'] ]['warnings'];
-            $this->count();
         }
 
         return (string) $sarif;

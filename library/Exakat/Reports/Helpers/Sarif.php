@@ -100,7 +100,7 @@ class Sarif {
                                  'ruleIndex' => $this->rulesIndex[$ruleId],
                                  //"rule"      => $ruleId,  // same as ruleId?
 
-                                 'level'     => $this->rules[$this->rulesIndex[$ruleId]],
+                                 'level'     => $this->rules[$this->rulesIndex[$ruleId]]['defaultConfiguration']['level'],
                                  'message'   => array('text' => $fullcode,
                                                      ),
                                  'locations' => array(array(//'id' => '',
