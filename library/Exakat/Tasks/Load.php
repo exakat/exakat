@@ -2183,6 +2183,7 @@ class Load extends Tasks {
                                   $this->phptokens::T_NAMESPACE,
                                   $this->phptokens::T_ARRAY,
                                   $this->phptokens::T_CALLABLE,
+                                  $this->phptokens::T_STATIC    ,
                                   $this->phptokens::T_QUESTION,
                                   $this->phptokens::T_NAME_QUALIFIED,
                                   $this->phptokens::T_NAME_RELATIVE,
@@ -2190,7 +2191,7 @@ class Load extends Tasks {
         );
 
         // return type allows for static. Not valid for arguments.
-        if ($holder->atom === 'Parameter') {
+        if (in_array($holder->atom, array('Ppp', 'Parameter'), \STRICT_COMPARISON)) {
             $link = 'TYPEHINT';
         } else {
             $link = 'RETURNTYPE';
@@ -5524,7 +5525,6 @@ class Load extends Tasks {
         $operator = $this->addAtom('New', $current);
         $operator->fullcode = $this->tokens[$current][1];
         $newcall = $this->processSingleOperator($operator, $this->precedence->get($this->tokens[$current][0]), 'NEW', ' ');
-        $this->runPlugins($newcall);
 
         $this->contexts->toggleContext(Context::CONTEXT_NEW);
         if ($noSequence === false) {
