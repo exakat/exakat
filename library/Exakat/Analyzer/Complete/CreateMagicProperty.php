@@ -117,6 +117,7 @@ class CreateMagicProperty extends Complete {
         $this->prepareQuery();
 
         // isset($this->a)
+        // links to __isset
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
              ->not(
                 $this->side()
@@ -151,6 +152,7 @@ class CreateMagicProperty extends Complete {
         $this->prepareQuery();
 
         // unset($this->a)
+        // links to __unset
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
              ->not(
                 $this->side()
@@ -185,6 +187,7 @@ class CreateMagicProperty extends Complete {
         $this->prepareQuery();
 
         // unset() $this->a
+        // links to __unset
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
              ->not(
                 $this->side()
@@ -217,6 +220,25 @@ class CreateMagicProperty extends Complete {
              ->codeIs('__unset', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->addETo('DEFINITION', 'first');
+        $this->prepareQuery();
+
+        // links to __invoke
+        $this->atomIs('Magicmethod', self::WITHOUT_CONSTANTS)
+             ->outIs('NAME')
+             ->codeIs('__invoke', self::TRANSLATE, self::CASE_INSENSITIVE)
+             ->back('first')
+             
+             ->inIs('MAGICMETHOD')
+             ->outIs('DEFINITION')
+             ->inIs('NEW')
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->inIs('DEFINITION')
+             ->outIs('DEFINITION')
+             ->inIs('NAME')
+             ->atomIs('Functioncall')
+             ->addEFrom('DEFINITION', 'first');
         $this->prepareQuery();
     }
 }

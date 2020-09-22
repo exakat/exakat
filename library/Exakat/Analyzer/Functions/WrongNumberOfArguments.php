@@ -29,6 +29,7 @@ class WrongNumberOfArguments extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/PropagateCalls',
                      'Complete/MakeClassMethodDefinition',
+                     'Complete/CreateMagicProperty',
                      'Complete/SetStringMethodDefinition',
                      'Complete/SetArrayClassDefinition',
                      'Functions/VariableArguments',
@@ -104,6 +105,7 @@ class WrongNumberOfArguments extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // new self($args)
         $this->atomIs(array('Self', 'Parent'))
              ->hasIn('NEW')
              ->outIsIE('METHOD') // for methods calls, static or not.
@@ -131,6 +133,7 @@ class WrongNumberOfArguments extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // new self($args)
         $this->atomIs(array('Self', 'Parent'))
              ->hasIn('NEW')
              ->outIsIE('METHOD') // for methods calls, static or not.
