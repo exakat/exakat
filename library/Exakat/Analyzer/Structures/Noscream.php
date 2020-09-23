@@ -26,12 +26,9 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class Noscream extends Analyzer {
-    public function analyze(): void {
-        $authorized = array( '\fopen',
-                             '\token_get_all',
-                             '\stream_socket_server',
-        );
+    protected $authorizedFunctions = 'noscream_functions.json';
 
+    public function analyze(): void {
         $list = array('Addition',
                       'Array',
                       'Arrayappend',
@@ -111,7 +108,8 @@ class Noscream extends Analyzer {
         $this->prepareQuery();
 
         // @fopen($s, 'r')
-        $this->atomFunctionIs($authorized)
+        $this->atomIs('Functioncall')
+             ->fullnspathIsNot(makefullnspath($this->authorizedFunctions))
              ->is('noscream', true);
         $this->prepareQuery();
     }
