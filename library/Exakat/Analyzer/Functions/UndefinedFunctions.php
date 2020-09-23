@@ -35,12 +35,12 @@ class UndefinedFunctions extends Analyzer {
     public function analyze(): void {
         // foo(); (no function foo())
         $this->atomIs('Functioncall')
-             ->outIs('NAME')
-             ->atomIs(array('Name', 'Nsname'))
-             ->inIs('NAME')
+             ->has('fullnspath')
              ->analyzerIsNot(array('Functions/IsExtFunction',
-                                   'Modules/DefinedFunctions', )
+                                   'Modules/DefinedFunctions', 
+                                   )
               )
+             ->isNot('isPhp', true)
              ->hasNoFunctionDefinition()
              ->isNotIgnored();
         $this->prepareQuery();
