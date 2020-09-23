@@ -114,6 +114,8 @@ class StubsJson extends Reports {
         foreach($res->toArray() as $cit) {
             $extendsId = ((int) $cit['extends'] > 0) ? $citsFqn[$cit['extends']] ?? '\Unkown' : $cit['extends'];
 
+            $section = $cit['type'] === 'class' ? 'classes' : $cit['type'].'s';
+
             $details = array('abstract'   => $cit['abstract'] === 1,
                              'final'      => $cit['final'] === 1,
                              'extends'    => $extendsId,
@@ -125,10 +127,10 @@ class StubsJson extends Reports {
                              'php'        => $cit['namespaceId'] === 1 ? in_array(mb_strtolower($cit['name']), $this->phpCIT, \STRICT_COMPARISON) : false,
                              'attributes' => $attributes[$cit['type']][$cit['id']] ?? array(),
                              );
-            $data['versions'][$namespaces[$cit['namespaceId']]][$cit['type']][$cit['name']] = $details;
+            $data['versions'][$namespaces[$cit['namespaceId']]][$section][$cit['name']] = $details;
 
             $cits2ns[$cit['id']]   = $cit['namespaceId'];
-            $cits2type[$cit['id']] = $cit['type'];
+            $cits2type[$cit['id']] = $section;
         }
 
         // extensions
