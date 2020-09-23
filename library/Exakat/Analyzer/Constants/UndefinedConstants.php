@@ -46,7 +46,7 @@ class UndefinedConstants extends Analyzer {
              ->not(
                 $this->side()
                      ->outIs('CONCAT')
-                     ->atomIs('Variable')
+                     ->atomIs(array('Variable', 'Member'))
              )
              ->isNot('isPhp', true)
              ->isNotIgnored()

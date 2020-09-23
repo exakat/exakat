@@ -30,6 +30,7 @@ class PssWithoutClass extends Analyzer {
         // unresolved new pss()
         $this->atomIs('New')
              ->outIs('NEW')
+             // Atom will always be Newcall
              ->codeIs(array('self', 'static', 'parent'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->hasNoClassInterfaceTrait()
              ->back('first');

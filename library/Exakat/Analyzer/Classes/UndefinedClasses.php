@@ -183,7 +183,7 @@ class UndefinedClasses extends Analyzer {
              ->outIs('PPP')
              ->outIs('TYPEHINT')
              ->analyzerIsNot($omittedAll)
-             ->atomIsNot(array('Parent', 'Static', 'Self'))
+             ->atomIsNot(self::RELATIVE_CLASS)
              ->codeIsNot($types)
              ->noClassDefinition()
              ->noInterfaceDefinition()
