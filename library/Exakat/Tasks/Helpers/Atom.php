@@ -75,6 +75,7 @@ class Atom implements AtomInterface {
     public $use          = '';
     public $isPhp        = 0;
     public $isExt        = 0;
+    public $isStub       = 0;
 
     public function __construct(int $id, string $atom, int $line) {
         $this->id   = $id;
@@ -180,6 +181,7 @@ class Atom implements AtomInterface {
                                                  'isNull'      => 0,
                                                  'isPhp'       => 0,
                                                  'isExt'       => 0,
+                                                 'isStub'      => 0,
                                )
                             );
 
@@ -252,6 +254,7 @@ class Atom implements AtomInterface {
                  'isNull',
                  'isPhp',
                  'isExt',
+                 'isStub',
                                ) as $property) {
             if ($this->$property == true && $this->$property !== true) {
                 print $property . PHP_EOL;
