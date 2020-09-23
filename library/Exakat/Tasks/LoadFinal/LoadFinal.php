@@ -197,16 +197,21 @@ GREMLIN;
 g.V().hasLabel("Functioncall", "Identifier", "Nsname")
      .not(__.in("NAME").not(hasLabel("Functioncall")))
      .not(has("absolute", true))
+     .not(has("token", 'T_NAME_QUALIFIED'))
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath");}
-     .in("DEFINITION")
-     .hasLabel("Function", "Constant")
-     .optional(
-        __.hasLabel("Constant").out("NAME")
-     )
-     .sideEffect{ actual = it.get().value("fullnspath");}
-     .filter{ actual != cc; }
+     .or(
+         __.where(__.in("DEFINITION")
+                    .hasLabel("Function", "Constant")
+                    .optional(
+                        __.hasLabel("Constant").out("NAME")
+                    )
+                    .filter{ actual = it.get().value("fullnspath"); cc != actual;}
+                 ),
+         __.has("isPhp", true).not(__.where(__.in('DEFINITION'))).sideEffect{ actual = '\\' + it.get().value("fullnspath").tokenize('\\\\').last();},
+         __.has("isExt", true).not(__.where(__.in('DEFINITION'))).sideEffect{ actual = '\\' + it.get().value("fullnspath").tokenize('\\\\').last();},
+      )
      .select("identifier")
      .sideEffect{ 
         it.get().property("fullnspath", actual);
