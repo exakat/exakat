@@ -76,7 +76,10 @@ class Doctor extends Tasks {
             }
             $doctor .= PHP_EOL;
         }
-        print $doctor;
+        
+        if ($this->config->quiet !== true) {
+            print $doctor;
+        }
     }
 
     private function checkPreRequisite(): array {
@@ -109,6 +112,13 @@ class Doctor extends Tasks {
         if ($list = $this->config->ext->getPharList()) {
             $stats['exakat']['extensions']  = $this->array2list($list);
         }
+        
+        $stubs = exakat('stubs');
+        $file = array();
+        foreach($stubs as $stub) {
+            $files[] = $stub->getFile();
+        }
+        $stats['exakat']['stubs'] = makeList($files, '');
 
         // check for running PHP
         $stats['PHP']['binary']                 = phpversion();

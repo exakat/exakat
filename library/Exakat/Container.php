@@ -27,6 +27,7 @@ use Exakat\Graph\Graph;
 use Exakat\Reports\Helpers\Docs;
 use Exakat\Data\Methods;
 use Exakat\Analyzer\Rulesets;
+use Exakat\Tasks\Helpers\StubJson;
 
 class Container {
     private $verbose    = 0;
@@ -39,6 +40,7 @@ class Container {
     private $methods    = null;
     private $rulesets   = null;
     private $php        = null;
+    private $stubs      = null;
 
     public function init(array $argv = array()): void {
         $this->config = new Config($argv);
@@ -71,6 +73,14 @@ class Container {
 
     private function methods(): void {
         $this->methods    = new Methods($this->config);
+    }
+
+    private function stubs(): void {
+        $files = glob($this->config->dir_root.'/stubs/*.json');
+
+        foreach($files as $file) {
+            $this->stubs []= new StubJson($file);
+        }
     }
 
     private function docs(): void {
