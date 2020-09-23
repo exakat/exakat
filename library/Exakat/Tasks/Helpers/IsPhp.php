@@ -78,7 +78,6 @@ class IsPhp extends Plugin {
             case 'Functioncall' :
                 if (in_array(makeFullnspath($path), $this->phpFunctions, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
-                    $atom->fullnspath = $path;
                 }
                 break;
 
