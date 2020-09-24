@@ -26,11 +26,14 @@ class IsStub extends Plugin {
     public $name = 'isStub';
     public $type = 'boolean';
 
-    private $stubFunctions    = array();
-    private $stubConstants    = array();
-    private $stubClasses      = array();
-    private $stubInterfaces   = array();
-    private $stubTraits       = array();
+    private $stubFunctions        = array();
+    private $stubConstants        = array();
+    private $stubClasses          = array();
+    private $stubInterfaces       = array();
+    private $stubTraits           = array();
+    private $stubClassConstants   = array();
+    private $stubClassMethods     = array();
+    private $stubClassProperties  = array();
 
     public function __construct() {
         parent::__construct();
@@ -78,6 +81,25 @@ class IsStub extends Plugin {
                 }
                 break;
 
+            case 'Class' :
+            case 'Classanonymous' :
+                if (in_array($extras['EXTENDS']->fullnspath ?? self::NOT_PROVIDED, $this->stubClasses, \STRICT_COMPARISON)) {
+                    $extras['EXTENDS']->isStub = true;
+                }
+
+                foreach($extras['IMPLEMENTS'] ?? array() as $implements) {
+                    if (in_array($implements->fullnspath ?? self::NOT_PROVIDED, $this->stubInterfaces, \STRICT_COMPARISON)) {
+                        $implements->isStub = true;
+                    }
+                }
+                break;
+
+            case 'Interface' :
+                if (in_array($extras['EXTENDS']->fullnspath ?? self::NOT_PROVIDED, $this->stubInterfaces, \STRICT_COMPARISON)) {
+                    $extras['EXTENDS']->isStub = true;
+                }
+                break;
+
             case 'Constant' :
                 $atom->isStub = false;
                 $extras['NAME']->isStub = false;
@@ -97,14 +119,24 @@ class IsStub extends Plugin {
                 }
                 break;
 
+            case 'Usetrait' :
+                foreach($extras as $extra) {
+                    if (in_array($extra->fullnspath, $this->stubTraits, \STRICT_COMPARISON)) {
+                        $extra->isStub = true;
+                    }
+                }
+                // Warning : atom->fullnspath for classes (no fallback)
+                break;
+
             case 'Identifier' :
             case 'Nsname' :
                 if (in_array($atom->fullnspath, $this->stubConstants, \STRICT_COMPARISON)) { // No extra \\, besides the first one
                     $atom->isStub = true;
                     break;
                 }
-
                 break;
+
+            case 'Trait': // explicit
             default :
                 // Nothing
         }

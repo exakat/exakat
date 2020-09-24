@@ -1797,6 +1797,7 @@ class Load extends Tasks {
         $previousContextVariables = $this->currentVariables;
         $this->currentVariables = array();
 
+        $extras = array();
         // Process extends
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EXTENDS) {
             $extendsKeyword = $this->tokens[$this->id + 1][1];
@@ -1807,7 +1808,7 @@ class Load extends Tasks {
 
             $this->addLink($class, $extends, 'EXTENDS');
             $this->getFullnspath($extends, 'class', $extends);
-            $this->runPlugins($extends);
+            $extras['EXTENDS'] = $extends;
 
             $this->calls->addCall('class', $extends->fullnspath, $extends);
         } else {
@@ -1817,6 +1818,8 @@ class Load extends Tasks {
 
         // Process implements
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_IMPLEMENTS) {
+            $extras['IMPLEMENTS'] = array();
+
             $implementsKeyword = $this->tokens[$this->id + 1][1];
             $fullcodeImplements = array();
             do {
@@ -1826,10 +1829,11 @@ class Load extends Tasks {
 
                 $this->addLink($class, $implements, 'IMPLEMENTS');
                 $fullcodeImplements[] = $implements->fullcode;
+                $extras['IMPLEMENTS'][] = $implements;
 
                 $this->getFullnspath($implements, 'class', $implements);
                 $this->calls->addCall('class', $implements->fullnspath, $implements);
-                $this->runPlugins($implements);
+
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         } else {
             $implements = '';
@@ -1839,13 +1843,15 @@ class Load extends Tasks {
         // Process block
         $this->makeCitBody($class);
 
+        $this->runPlugins($class, $extras);
+
         $class->fullcode   = $this->tokens[$current][1] . ($class->atom === 'Classanonymous' ? '' : ' ' . $name->fullcode)
                              . (isset($argumentsFullcode) ? ' (' . $argumentsFullcode . ')' : '')
                              . (empty($extends) ? '' : ' ' . $extendsKeyword . ' ' . $extends->fullcode)
                              . (empty($implements) ? '' : ' ' . $implementsKeyword . ' ' . implode(', ', $fullcodeImplements))
                              . static::FULLCODE_BLOCK;
 
-        $this->pushExpression($class);
+        $this->pushExpression($class, $extras);
 
         // Case of anonymous classes
         if ($this->tokens[$current - 1][0] !== $this->phptokens::T_NEW) {
@@ -4858,6 +4864,7 @@ class Load extends Tasks {
         $fullcode = array();
 
         --$this->id;
+        $extras = array();
         do {
             ++$this->id;
             $namespace = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
@@ -4869,8 +4876,10 @@ class Load extends Tasks {
             $this->calls->addCall('class', $namespace->fullnspath, $namespace);
 
             $this->addLink($use, $namespace, 'USE');
+            $extras[] = $namespace;
         } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         $fullcode = implode(', ', $fullcode);
+        $this->runPlugins($use, $extras);
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             //use A\B{} // Group

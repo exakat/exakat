@@ -25,9 +25,13 @@ namespace Exakat\Tasks\Helpers;
 class IsExt extends Plugin {
     public $name = 'isExt';
     public $type = 'boolean';
-    private $extFunctions = array();
-    private $extConstants = array();
-    private $extClasses   = array();
+    private $extFunctions        = array();
+    private $extConstants        = array();
+    private $extClasses          = array();
+    private $extInterfaces       = array();
+    private $extClassConstants   = array();
+    private $extClassMethods     = array();
+    private $extClassProperties  = array();
 
     public function __construct() {
         parent::__construct();
@@ -83,6 +87,25 @@ class IsExt extends Plugin {
                 }
                 break;
 
+            case 'Class' :
+            case 'Classanonymous' :
+                if (in_array($extras['EXTENDS']->fullnspath ?? self::NOT_PROVIDED, $this->extClasses, \STRICT_COMPARISON)) {
+                    $extras['EXTENDS']->isExt = true;
+                }
+
+                foreach($extras['IMPLEMENTS'] ?? array() as $implements) {
+                    if (in_array($implements->fullnspath ?? self::NOT_PROVIDED, $this->extInterfaces, \STRICT_COMPARISON)) {
+                        $implements->isExt = true;
+                    }
+                }
+                break;
+
+            case 'Interface' :
+                if (in_array($extras['EXTENDS']->fullnspath ?? self::NOT_PROVIDED, $this->extInterfaces, \STRICT_COMPARISON)) {
+                    $extras['EXTENDS']->isExt = true;
+                }
+                break;
+
             case 'Constant' :
                 $atom->isExt = false;
                 $extras['NAME']->isExt = false;
@@ -121,6 +144,7 @@ class IsExt extends Plugin {
                 $atom->isExt = false;
                 break;
 
+            case 'Trait':
             default :
                 // Nothing
         }

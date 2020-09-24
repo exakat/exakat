@@ -51,7 +51,7 @@ class StubJson {
         $return = array();
 
         foreach((array) $this->json->versions as $namespace => $space) {
-            foreach($space->class ?? array() as $name => $classe) {
+            foreach($space->classes ?? array() as $name => $classe) {
                 $return[] = mb_strtolower($namespace.$name);
             }
         }

@@ -25,9 +25,13 @@ namespace Exakat\Tasks\Helpers;
 class IsPhp extends Plugin {
     public $name = 'isPhp';
     public $type = 'boolean';
-    private $phpFunctions = array();
-    private $phpConstants = array();
-    private $phpClasses   = array();
+    private $phpFunctions        = array();
+    private $phpConstants        = array();
+    private $phpClasses          = array();
+    private $phpInterfaces       = array();
+    private $phpClassConstants   = array();
+    private $phpClassMethods     = array();
+    private $phpClassProperties  = array();
 
     public function __construct() {
         parent::__construct();
@@ -41,7 +45,9 @@ class IsPhp extends Plugin {
 
         $this->phpClasses = parse_ini_file($config->dir_root . '/data/php_classes.ini')['classes'] ?? array();
         $this->phpClasses = makeFullnspath($this->phpClasses);
-        
+
+        $this->phpInterfaces      = array();
+        $this->phpTraits          = array();
         $this->phpClassConstants  = array(); //array('\ziparchive' => array('CREATE'),);
         $this->phpClassMethods    = array(); //array('\test' => array('method'),);
         $this->phpClassProperties = array(); //array('\test' => array('$property'),);
@@ -78,6 +84,25 @@ class IsPhp extends Plugin {
             case 'Functioncall' :
                 if (in_array(makeFullnspath($path), $this->phpFunctions, \STRICT_COMPARISON)) {
                     $atom->isPhp = true;
+                }
+                break;
+
+            case 'Class' :
+            case 'Classanonymous' :
+                if (in_array($extras['EXTENDS']->fullnspath ?? self::NOT_PROVIDED, $this->phpClasses, \STRICT_COMPARISON)) {
+                    $extras['EXTENDS']->isPhp = true;
+                }
+
+                foreach($extras['IMPLEMENTS'] ?? array() as $implements) {
+                    if (in_array($implements->fullnspath ?? self::NOT_PROVIDED, $this->phpInterfaces, \STRICT_COMPARISON)) {
+                        $implements->isPhp = true;
+                    }
+                }
+                break;
+
+            case 'Interface' :
+                if (in_array($extras['EXTENDS']->fullnspath ?? self::NOT_PROVIDED, $this->phpInterfaces, \STRICT_COMPARISON)) {
+                    $extras['EXTENDS']->isPhp = true;
                 }
                 break;
 
@@ -120,6 +145,7 @@ class IsPhp extends Plugin {
                 $atom->isPhp = true;
                 break;
 
+            case 'Trait':
             default :
                 // Nothing
         }

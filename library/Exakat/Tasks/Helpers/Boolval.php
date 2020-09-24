@@ -39,6 +39,12 @@ class Boolval extends Plugin {
                 $atom->boolean = (bool) $extras['RIGHT']->boolean;
                 return;
 
+            case 'Trait' :
+            case 'Class' :
+            case 'Classanonymous' :
+            case 'Interface' :
+                return;
+
         }
 
         foreach($extras as $extra) {
