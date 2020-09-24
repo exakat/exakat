@@ -215,8 +215,6 @@ g.V().hasLabel("Functioncall", "Identifier", "Nsname")
      .select("identifier")
      .sideEffect{ 
         it.get().property("fullnspath", actual);
-        it.get().property("isPhp",      false); 
-        it.get().property("isExt",      false); 
     }
      .count();
 GREMLIN;
