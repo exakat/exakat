@@ -78,6 +78,7 @@ class Container {
     private function stubs(): void {
         $files = glob($this->config->dir_root.'/stubs/*.json');
 
+        $this->stubs = array();
         foreach($files as $file) {
             $this->stubs []= new StubJson($file);
         }
