@@ -7,7 +7,7 @@ use Test\Analyzer;
 include_once dirname(__DIR__, 2).'/Test/Analyzer.php';
 
 class UndefinedParentMP extends Analyzer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function testClasses_UndefinedParentMP01()  { $this->generic_test('Classes_UndefinedParentMP.01'); }
     public function testClasses_UndefinedParentMP02()  { $this->generic_test('Classes_UndefinedParentMP.02'); }
@@ -21,5 +21,6 @@ class UndefinedParentMP extends Analyzer {
     public function testClasses_UndefinedParentMP10()  { $this->generic_test('Classes_UndefinedParentMP.10'); }
     public function testClasses_UndefinedParentMP11()  { $this->generic_test('Classes/UndefinedParentMP.11'); }
     public function testClasses_UndefinedParentMP12()  { $this->generic_test('Classes/UndefinedParentMP.12'); }
+    public function testClasses_UndefinedParentMP13()  { $this->generic_test('Classes/UndefinedParentMP.13'); }
 }
 ?>

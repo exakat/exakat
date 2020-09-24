@@ -32,7 +32,6 @@ class DefinedParentMP extends Analyzer {
                      'Complete/OverwrittenProperties',
                      'Complete/OverwrittenConstants',
                      'Complete/OverwrittenMethods',
-                     'Composer/IsComposerNsname',
                      'Classes/IsExtClass',
                     );
     }
@@ -84,19 +83,17 @@ class DefinedParentMP extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        // handle composer/extensions case
+        // handle PHP/extensions case
         $this->atomIs('Parent')
              ->inIs('CLASS') // Check it has ::
+             ->as('results')
              ->analyzerIsNot('self')
              ->atomIsNot('Staticclass')
              ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
-             ->analyzerIs(array('Composer/IsComposerNsname',
-                                'Classes/IsExtClass',
-                               ))
-             ->back('first')
-             ->inIs('CLASS');
+             ->raw('or( __.has("isPhp", true), __.has("isStub", true), __.has("isExt", true))')
+             ->back('results');
         $this->prepareQuery();
     }
 }

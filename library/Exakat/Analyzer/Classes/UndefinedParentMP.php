@@ -37,7 +37,19 @@ class UndefinedParentMP extends Analyzer {
         $this->atomIs('Parent')
              ->inIs('CLASS')
              ->atomIsNot('Staticclass')
-             ->analyzerIsNot('Classes/DefinedParentMP');
+             ->analyzerIsNot('Classes/DefinedParentMP')
+             ->as('results')
+
+             ->goToClass()
+             ->outIs('EXTENDS')
+             ->isNot('isStub', true)
+             ->not(
+                $this->side()
+                     ->outIs('USED')
+                     ->inIs('USE')
+                     ->atomIs('Usenamespace')
+             )
+             ->back('results');
         $this->prepareQuery();
     }
 }
