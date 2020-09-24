@@ -36,6 +36,7 @@ abstract class Reports {
                                           'Facetedjson', 'Json', 'Onepagejson', 'Marmelab', 'Simpletable', 'Exakatyaml',
                                           'Codeflower', 'Dependencywheel', 'Phpcity', 'Sarb',
                                           'Exakatvendors', 'Topology',
+                                          'Migration73', 'Migration74', 'Migration80',
                                           'Meters',
                                           //'DailyTodo',
                                           );
