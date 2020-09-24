@@ -33,12 +33,11 @@ class IsInterfaceMethod extends Analyzer {
 
     public function analyze(): void {
         // interface extended in the local class
-        $this->atomIs(self::FUNCTIONS_METHOD)
-             ->analyzerIsNot('self')
-             ->outIs('OVERWRITE')
-             ->inIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomIs('Interface')
-             ->back('first');
+        $this->atomIs('Interface')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->inIs('OVERWRITE')
+             ->atomIs(self::FUNCTIONS_METHOD)
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // PHP or extension defined interface
