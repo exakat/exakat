@@ -45,8 +45,8 @@ class WrongTypeWithCall extends Analyzer {
              ->back('first')
 
              ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
              ->as('results')
+             ->outIsIE('METHOD')
              ->outWithRank('ARGUMENT', 'ranked')
              ->atomIs(array('Integer',
                             'String',
@@ -73,8 +73,8 @@ class WrongTypeWithCall extends Analyzer {
              ->back('first')
 
              ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
              ->as('results')
+             ->outIsIE('METHOD')
              ->outWithRank('ARGUMENT', 'ranked')
              ->atomIs(array('New',
                             'Clone',
@@ -95,8 +95,8 @@ class WrongTypeWithCall extends Analyzer {
              ->back('first')
 
              ->outIs('DEFINITION')
-             ->outIsIE('METHOD')
              ->as('results')
+             ->outIsIE('METHOD')
              ->outWithRank('ARGUMENT', 'ranked')
              ->atomIs(array('Integer',
                             'String',

@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('foo2(\'e\')',
+$expected     = array('$this->foo2(\'e\')',
                      );
 
-$expected_not = array('foo(\'d\')',
-                      'foo2(new D)',
-                      'foo2(new X)',
+$expected_not = array('$this->foo(\'d\')',
+                      '$this->foo2(new D)',
+                      '$this->foo2(new X)',
                      );
 
 ?>
