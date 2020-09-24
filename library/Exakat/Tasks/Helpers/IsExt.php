@@ -107,12 +107,6 @@ class IsExt extends Plugin {
                 if (in_array($path, $this->extConstants, \STRICT_COMPARISON) &&
                     strpos($atom->fullcode, '\\', 1) === false) {
                     $atom->isExt = true;
-                    break;
-                }
-
-                if (in_array(makeFullnspath($path) , $this->extClasses, \STRICT_COMPARISON)) {
-                    $atom->isExt = true;
-                    break;
                 }
                 break;
 

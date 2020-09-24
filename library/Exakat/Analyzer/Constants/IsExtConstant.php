@@ -33,7 +33,7 @@ class IsExtConstant extends Analyzer {
 
     public function analyze(): void {
         // echo E_ALL
-        $this->atomIs(array('Nsname', 'Identifier'))
+        $this->atomIs(self::STATIC_NAMES)
              ->analyzerIs('Constants/ConstantUsage')
              ->hasNoIn('DEFINITION')
              ->is('isExt', true);

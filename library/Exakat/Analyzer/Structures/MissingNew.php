@@ -32,7 +32,7 @@ class MissingNew extends Analyzer {
     }
 
     public function analyze(): void {
-        $this->atomIs(self::CLASSES_ALL)
+        $this->atomIs(self::CIT)
              ->values('fullnspath')
              ->unique();
         $customClasses = $this->rawQuery();
@@ -54,7 +54,8 @@ class MissingNew extends Analyzer {
         $this->atomIs(self::STATIC_NAMES)
              ->analyzerIsNot('Constants/IsExtConstant')
              ->hasNoConstantDefinition()
-             ->hasNoIn(array('CLASS', 'IMPLEMENTS', 'EXTENDS', 'TYPEHINT', 'RETURNTYPE'))
+             ->hasNoIn(array('CLASS', 'IMPLEMENTS', 'EXTENDS', 'TYPEHINT', 'RETURNTYPE', 'NAME')) // NAME is to skip const x = 1
+             ->isNot('isStub', true)
              ->fullnspathIs($classes, self::CASE_INSENSITIVE);
         $this->prepareQuery();
     }

@@ -107,11 +107,6 @@ class IsPhp extends Plugin {
                     $atom->isPhp = true;
                 }
 
-                if (in_array(makeFullnspath($path), $this->phpClasses, \STRICT_COMPARISON)) {
-                    $atom->isPhp = true;
-                    break;
-                }
-
                 break;
 
             case 'Isset' :

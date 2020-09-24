@@ -104,16 +104,6 @@ class IsStub extends Plugin {
                     break;
                 }
 
-                if (in_array($atom->fullnspath, $this->stubClasses, \STRICT_COMPARISON)) {
-                    $atom->isStub = true;
-                    break;
-                }
-
-                if (in_array($atom->fullnspath, $this->stubInterfaces, \STRICT_COMPARISON)) {
-                    $atom->isStub = true;
-                    break;
-                }
-
                 break;
             default :
                 // Nothing
