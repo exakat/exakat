@@ -35,7 +35,9 @@ class UndefinedTrait extends Analyzer {
              ->outIs('USE')
              ->noTraitDefinition()
              ->analyzerIsNot('Modules/DefinedTraits')
-             ->isNotIgnored();
+             ->isNotIgnored()
+             ->hasNoOut('USED')
+             ->isNot('isStub', true);
         $this->prepareQuery();
     }
 }

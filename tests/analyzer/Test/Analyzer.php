@@ -51,6 +51,7 @@ abstract class Analyzer extends TestCase {
         global $EXAKAT_PATH;
 
         $test_path = dirname(__DIR__);
+        copy(__DIR__.'/../config/unitTest.json', __DIR__.'/../../../stubs/unitTest.json');
 
         if (preg_match('/^\w+_/', $file)) {
             $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
@@ -166,6 +167,8 @@ abstract class Analyzer extends TestCase {
             print "How shall we test this?\n";
             print_r($res);
         }
+        
+        unlink(__DIR__.'/../../../stubs/unitTest.json');
     }
 
     private function checkTestOnHashAnalyzer(array $list = array(), array $expected = array(), array $expectedNot = array(), AnalyzerHashAnalyzer $analyzerobject) : void {
