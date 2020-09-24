@@ -25,6 +25,7 @@ namespace Exakat\Analyzer\Complete;
 class SetClassRemoteDefinitionWithTypehint extends Complete {
     public function analyze(): void {
 
+        // function bar(A $a) { $a->foo()}; class A { function foo() {}}
         $this->atomIs('Methodcall', self::WITHOUT_CONSTANTS)
               ->as('method')
               ->hasNoIn('DEFINITION')
@@ -33,6 +34,7 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
               ->outIs('OBJECT')
+              ->atomIs('Variableobject')
               ->inIs('DEFINITION')
               ->inIs('NAME')
               ->atomIs('Parameter', self::WITHOUT_CONSTANTS)
@@ -54,6 +56,31 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
               ->addETo('DEFINITION', 'method');
         $this->prepareQuery();
 
+        // class B { public A $p; function bar() { $this->a->foo()}; class A { function foo() {}}
+        $this->atomIs(array('Methodcall', 'Staticmethodcall'), self::WITHOUT_CONSTANTS)
+              ->as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname', self::WITHOUT_CONSTANTS)
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs(array('OBJECT', 'CLASS'))
+              ->atomIs(array('Member', 'Staticproperty'))
+              ->inIs('DEFINITION')
+              ->inIs('PPP')
+              ->outIs('TYPEHINT')
+              ->atomIs(array('Identifier', 'Nsname'))
+              ->inIs('DEFINITION')
+              // No check on Atom == Class, as it may not exists
+              ->goToAllParents(self::INCLUDE_SELF)
+              ->outIs('METHOD')
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method');
+        $this->prepareQuery();
+
+        // function bar(A $a) { $a->p}; class A { public $p;}
         $this->atomIs('Member', self::WITHOUT_CONSTANTS)
               ->as('member')
               ->hasNoIn('DEFINITION')
@@ -83,6 +110,29 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
               ->addETo('DEFINITION', 'member');
         $this->prepareQuery();
 
+        // class B { public A $p; function bar() { $this->a->p2()}; class A { public $p2;}
+        $this->atomIs(array('Member', 'Staticproperty'), self::WITHOUT_CONSTANTS)
+              ->as('member')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->savePropertyAs('code', 'name')
+              ->inIs('MEMBER')
+              ->outIs(array('OBJECT', 'CLASS'))
+              ->atomIs(array('Member', 'Staticproperty'))
+              ->inIs('DEFINITION')
+              ->inIs('PPP')
+              ->outIs('TYPEHINT')
+              ->atomIs(array('Identifier', 'Nsname'))
+              ->inIs('DEFINITION')
+              // No check on Atom == Class, as it may not exists
+              ->goToAllParents(self::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->raw('filter{ it.get().value("propertyname") == name || it.get().value("code") == name;}')
+              ->addETo('DEFINITION', 'member');
+        $this->prepareQuery();
+
+        // function bar(A $a) { $a::C}; class A { const C = 1;}
         $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
               ->as('constante')
               ->hasNoIn('DEFINITION')
@@ -110,6 +160,31 @@ class SetClassRemoteDefinitionWithTypehint extends Complete {
               ->outIs('CONST')
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'constante');
+        $this->prepareQuery();
+
+        // class B { public A $p; function bar() { $this->a::C}; class A { const C = 1;}
+        $this->atomIs('Staticconstant', self::WITHOUT_CONSTANTS)
+              ->as('constante')
+              ->hasNoIn('DEFINITION')
+              ->outIs('CONSTANT')
+              ->atomIs('Name', self::WITHOUT_CONSTANTS)
+              ->savePropertyAs('code', 'name')
+              ->inIs('CONSTANT')
+              ->outIs('CLASS')
+              ->atomIs(array('Member', 'Staticproperty'))
+              ->inIs('DEFINITION')
+              ->inIs('PPP')
+              ->outIs('TYPEHINT')
+              ->atomIs(array('Identifier', 'Nsname'))
+              ->inIs('DEFINITION')
+              // No check on Atom == Class, as it may not exists
+              ->goToAllParents(self::INCLUDE_SELF)
+              ->outIs('CONST')
+              ->outIs('CONST')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+              ->inIs('NAME')
               ->addETo('DEFINITION', 'constante');
         $this->prepareQuery();
 

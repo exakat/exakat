@@ -1,0 +1,253 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : NAME
+                8
+              Label : VALUE
+                10
+          Label : DEFINITION
+            6
+          Label : METHOD
+            20
+            Label : ARGUMENT
+              12
+            Label : BLOCK
+              22
+              Label : EXPRESSION
+                23
+                Label : RETURN
+                  24
+                  Label : ARGUMENT
+                    12
+            Label : NAME
+              20
+            Label : RETURNED
+              24
+              Label : ARGUMENT
+                12
+            Label : RETURNTYPE
+              21
+          Label : METHOD
+            25
+            Label : ARGUMENT
+              12
+            Label : BLOCK
+              22
+              Label : EXPRESSION
+                23
+                Label : RETURN
+                  24
+                  Label : ARGUMENT
+                    12
+            Label : NAME
+              25
+            Label : RETURNED
+              24
+              Label : ARGUMENT
+                12
+            Label : RETURNTYPE
+              21
+          Label : NAME
+            6
+          Label : PPP
+            11
+            Label : PPP
+              14
+              Label : DEFAULT
+                16
+            Label : TYPEHINT
+              12
+          Label : PPP
+            17
+            Label : PPP
+              18
+              Label : DEFAULT
+                16
+            Label : TYPEHINT
+              12
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            32
+          Label : DEFINITION
+            32
+          Label : DEFINITION
+            32
+          Label : DEFINITION
+            32
+          Label : DEFINITION
+            32
+          Label : METHOD
+            29
+            Label : ARGUMENT
+              12
+            Label : BLOCK
+              22
+              Label : EXPRESSION
+                31
+                Label : LEFT
+                  30
+                Label : RIGHT
+                  33
+                  Label : METHOD
+                    20
+                    Label : ARGUMENT
+                      12
+                    Label : NAME
+                      20
+                  Label : OBJECT
+                    33
+                    Label : MEMBER
+                      6
+                    Label : OBJECT
+                      32
+              Label : EXPRESSION
+                31
+                Label : LEFT
+                  34
+                Label : RIGHT
+                  30
+                  Label : INDEX
+                    16
+                  Label : VARIABLE
+                    30
+              Label : EXPRESSION
+                31
+                Label : LEFT
+                  35
+                Label : RIGHT
+                  36
+                  Label : CLASS
+                    33
+                    Label : MEMBER
+                      6
+                    Label : OBJECT
+                      32
+                  Label : METHOD
+                    25
+                    Label : ARGUMENT
+                      12
+                    Label : NAME
+                      25
+              Label : EXPRESSION
+                31
+                Label : LEFT
+                  34
+                Label : RIGHT
+                  35
+                  Label : INDEX
+                    16
+                  Label : VARIABLE
+                    35
+              Label : EXPRESSION
+                31
+                Label : LEFT
+                  33
+                  Label : MEMBER
+                    15
+                  Label : OBJECT
+                    33
+                    Label : MEMBER
+                      6
+                    Label : OBJECT
+                      32
+                Label : RIGHT
+                  16
+              Label : EXPRESSION
+                31
+                Label : LEFT
+                  36
+                  Label : CLASS
+                    33
+                    Label : MEMBER
+                      6
+                    Label : OBJECT
+                      32
+                  Label : MEMBER
+                    18
+                Label : RIGHT
+                  16
+              Label : EXPRESSION
+                36
+                Label : CLASS
+                  33
+                  Label : MEMBER
+                    6
+                  Label : OBJECT
+                    32
+                Label : CONSTANT
+                  8
+            Label : DEFINITION
+              30
+              Label : DEFINITION
+                30
+              Label : DEFINITION
+                30
+            Label : DEFINITION
+              34
+              Label : DEFINITION
+                34
+              Label : DEFINITION
+                34
+            Label : DEFINITION
+              35
+              Label : DEFINITION
+                35
+              Label : DEFINITION
+                35
+            Label : NAME
+              29
+            Label : RETURNTYPE
+              12
+          Label : NAME
+            26
+          Label : PPP
+            27
+            Label : TYPEHINT
+              6
+            Label : PPP
+              28
+              Label : DEFAULT
+                12
+              Label : DEFINITION
+                33
+                Label : MEMBER
+                  6
+                Label : OBJECT
+                  32
+              Label : DEFINITION
+                33
+                Label : MEMBER
+                  6
+                Label : OBJECT
+                  32
+              Label : DEFINITION
+                33
+                Label : MEMBER
+                  6
+                Label : OBJECT
+                  32
+              Label : DEFINITION
+                33
+                Label : MEMBER
+                  6
+                Label : OBJECT
+                  32
+              Label : DEFINITION
+                33
+                Label : MEMBER
+                  6
+                Label : OBJECT
+                  32
