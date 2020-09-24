@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Query\DSL\FollowParAs;
 
 class UselessInstruction extends Analyzer {
     public function dependsOn(): array {
@@ -274,19 +275,11 @@ class UselessInstruction extends Analyzer {
 
         // $a ?? null
         $this->atomIs('Coalesce')
+             ->analyzerIsNot('self')
              ->outIs('RIGHT')
+             ->outIsIE('CODE')
+             ->atomIsNot(array('Coalesce', 'Ternary')) // ternary should be check on both sides of the branch
              ->atomIs('Null', self::WITH_CONSTANTS)
-             ->back('first');
-        $this->prepareQuery();
-
-        // $a ?: false
-        $this->atomIs('Ternary')
-             ->outIs('THEN')
-             ->atomIs('Void')
-             ->back('first')
-             ->outIs('ELSE')
-             ->atomIs('Boolean', self::WITH_CONSTANTS)
-             ->fullnspathIs('\\false')
              ->back('first');
         $this->prepareQuery();
     }
