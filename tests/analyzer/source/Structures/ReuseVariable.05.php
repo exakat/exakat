@@ -2,22 +2,22 @@
 
 function foo($b) {
     $a = empty($b);
-    $e = empty($b);
 
     $a = isset($b);
-    $e = isset($b);
+    if ( isset($b) && (empty($b))) {
+        echo $b ?? 'c';
+    }
 
     $a = $b++;
-    $e = $b++;
+    echo $b++;
 
     $a = -$b;
-    $e = -$b;
+    echo -$b;
     
     $a = $b ?? 'c';
-    $e = $b ?? 'c';
 
     $a = new A();
-    $e = new A();
+    (new A())->foo();
 }
 
 ?>

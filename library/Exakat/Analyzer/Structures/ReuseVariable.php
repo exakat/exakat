@@ -36,6 +36,7 @@ class ReuseVariable extends Analyzer {
                              'Bitshift',
                              'Power',
                              'Logical',
+                             'Bitoperation',
                              'Not',
                              'Cast',
                              'Arrayliteral',
@@ -54,17 +55,32 @@ class ReuseVariable extends Analyzer {
              ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
              ->atomIs($expressions)
-             ->analyzerIsNot('self')
-             ->savePropertyAs('fullcode', 'expression')
-             ->savePropertyAs('id', 'unique')
-             ->savePropertyAs('line', 'row')
-             ->isNotEmptyArray()
-             ->goToFunction()
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition($expressions)
-             ->fullcodeVariableIs('expression')
-             ->notSamePropertyAs('id', 'unique')
-             ->isMore('line', 'row');
+             ->values('fullcode')
+             ->unique();
+        $assigned = $this->rawQuery()->toArray();
+
+        if (empty($assigned)) {
+            return;
+        }
+
+        $this->atomIs($expressions)
+             ->fullcodeIs($assigned, self::CASE_SENSITIVE)
+             ->raw('groupCount("m").by("fullcode").cap("m").next().findAll{ a,b -> b > 1; }.keySet()');
+        $reused = $this->rawQuery()->toArray();
+
+        if (empty($reused)) {
+            return;
+        }
+
+        $this->atomIs($expressions)
+             // Assignations are skipped. Probably missing some cases here.
+             ->not(
+                $this->side()
+                     ->inIs('RIGHT')
+                     ->atomIs('Assignation')
+                     ->codeIs('=', self::TRANSLATE, self::CASE_SENSITIVE)
+             )
+             ->fullcodeIs($reused, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }
