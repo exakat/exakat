@@ -32,17 +32,24 @@ class UsedOnceProperty extends Analyzer {
 
     public function analyze(): void {
         // class x { private $p = 1; function foo() {$this->p = 1;} }
-        $this->atomIs(self::CLASSES_ALL)
-             ->outIs('PPP')
+        $this->atomIs('Ppp')
              ->isNot('visibility', 'public')
              ->outIs('PPP')
              ->atomIsNot('Virtualproperty')
              ->as('results')
+             // Check the local results ()
              ->filter(
                 $this->side()
                      ->goToAllDefinitions()
                      ->outIs('DEFINITION')
                      ->raw('count().is(eq(1))')
+             )
+             // Check the parent classes (should be 0 too)
+             ->filter(
+                $this->side()
+                     ->outIs('OVERWRITE')
+                     ->outIs('DEFINITION')
+                     ->raw('count().is(eq(0))')
              );
         $this->prepareQuery();
     }
