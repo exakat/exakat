@@ -28,7 +28,17 @@ class Intval extends Plugin {
     public $name = 'intval';
     public $type = 'integer';
 
+    private $skipAtoms = array('Trait'         => 1,
+                              'Class'          => 1,
+                              'Classanonymous' => 1,
+                              'Interface'      => 1,
+                             );
+
     public function run(Atom $atom, array $extras): void {
+        if (isset($this->skipAtoms[$atom->atom])) {
+            return;
+        }
+
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
             if ($atom->code === '=') {

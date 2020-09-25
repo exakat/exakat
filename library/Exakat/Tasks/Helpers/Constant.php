@@ -30,10 +30,10 @@ class Constant extends Plugin {
 
     private $deterministFunctions = array();
     
-    private $skipAtoms = array('Trait' => 1,
-                              'Class' => 1,
+    private $skipAtoms = array('Trait'         => 1,
+                              'Class'          => 1,
                               'Classanonymous' => 1,
-                              'Interface' => 1,
+                              'Interface'      => 1,
                              );
 
     public function __construct() {
@@ -44,7 +44,7 @@ class Constant extends Plugin {
     }
 
     public function run(Atom $atom, array $extras = array()): void {
-        if (isset($this->skipAtoms)) {
+        if (isset($this->skipAtoms[$atom->atom])) {
             return;
         }
 

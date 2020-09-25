@@ -25,10 +25,20 @@ namespace Exakat\Tasks\Helpers;
 class Strval extends Plugin {
     const NO_VALUE = null;
 
+    private $skipAtoms = array('Trait'         => 1,
+                              'Class'          => 1,
+                              'Classanonymous' => 1,
+                              'Interface'      => 1,
+                             );
+
     public $name = 'noDelimiter';
     public $type = 'string';
 
     public function run(Atom $atom, array $extras): void {
+        if (isset($this->skipAtoms[$atom->atom])) {
+            return;
+        }
+
         // Ignoring $extras['LEFT'] === null
         if ($atom->atom === 'Assignation') {
             if ($atom->code === '=') {
