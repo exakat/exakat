@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class VariableUsedOnceByContext extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/CreateCompactVariables',
+                     'Functions/VariableArguments',
                     );
     }
 
@@ -42,6 +43,7 @@ class VariableUsedOnceByContext extends Analyzer {
 
         // argument by function
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('Functions/VariableArguments')
              ->isNot('abstract', true)
              ->outIs(array('ARGUMENT', 'USE'))
              ->outIs('NAME')
@@ -56,8 +58,9 @@ class VariableUsedOnceByContext extends Analyzer {
              ->outIs('DEFINITION');
         $this->prepareQuery();
 
-        // Static, glboal variables may be reused during a new call
+        // Static, global variables may be reused during a new call
         $this->atomIs(self::FUNCTIONS_ALL)
+             ->analyzerIsNot('Functions/VariableArguments')
              ->outIs('DEFINITION')
              ->atomIs(array('Globaldefinition', 'Staticdefinition'))
              ->isUsed(0)
