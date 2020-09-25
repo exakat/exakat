@@ -27,15 +27,16 @@ use Exakat\Analyzer\Analyzer;
 class SelfTransform extends Analyzer {
     public function analyze(): void {
         // $x = strtolower($x);
+        // $x = A.$x.$b;
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs(self::VARIABLES_ALL)
+             ->atomIs(self::CONTAINERS)
              ->savePropertyAs('fullcode', 'left')
              ->as('results')
              ->back('first')
 
              ->outIs('RIGHT')
-             ->atomInside(self::VARIABLES_ALL)
+             ->atomInside(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'left')
              ->back('results');
         $this->prepareQuery();
