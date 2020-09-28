@@ -120,13 +120,13 @@ class Intval extends Plugin {
                 if ($atom->code === '*') {
                     $atom->intval = (int) ($extras['LEFT']->intval * $extras['RIGHT']->intval);
                 } elseif ($atom->code === '/') {
-                    if ($extras['RIGHT']->intval === 0) {
+                    if ((int) $extras['RIGHT']->intval === 0) {
                         $atom->intval = 0;
                     } else {
-                        $atom->intval = intdiv($extras['LEFT']->intval, $extras['RIGHT']->intval);
+                        $atom->intval = intdiv((int) $extras['LEFT']->intval / (int) $extras['RIGHT']->intval);
                     }
                 } elseif ($atom->code === '%') {
-                    if ($extras['RIGHT']->intval === 0) {
+                    if ((int) $extras['RIGHT']->intval === 0) {
                         $atom->intval = 0;
                     } else {
                         $atom->intval = ($extras['LEFT']->intval % $extras['RIGHT']->intval);
