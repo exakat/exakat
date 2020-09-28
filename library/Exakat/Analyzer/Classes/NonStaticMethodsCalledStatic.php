@@ -52,7 +52,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->back('first')
 
              ->outIs('CLASS')
-             ->atomIsNot(array('Parent', 'Self', 'Static'))
+             ->atomIsNot(self::RELATIVE_CLASS)
 
              // The child must be below the parent, then it is an external class
              ->filter(
@@ -75,7 +75,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->back('first')
 
              ->outIs('CLASS')
-             ->atomIsNot(array('Parent', 'Self', 'Static'))
+             ->atomIsNot(self::RELATIVE_CLASS)
 
              // The child must be below the parent, then it is an external class
              ->not(

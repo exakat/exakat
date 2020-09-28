@@ -81,7 +81,7 @@ class RulesetsExt implements RulesetsInterface {
     public function getSeverities(): array {
         $return = array(array());
 
-        foreach($this->all as $name => $list) {
+        foreach($this->all as $list) {
             $severities = array();
 
             foreach($list as $analyse) {
@@ -103,7 +103,7 @@ class RulesetsExt implements RulesetsInterface {
     public function getTimesToFix(): array {
         $return = array(array());
 
-        foreach($this->all as $name => $list) {
+        foreach($this->all as $list) {
             $timesToFix = array();
 
             foreach($list as $analyse) {

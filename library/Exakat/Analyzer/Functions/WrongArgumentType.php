@@ -39,7 +39,21 @@ class WrongArgumentType extends Analyzer {
              ->outIs('ARGUMENT')
              ->as('arg')
              ->followParAs(FollowParAs::FOLLOW_NONE)
-             ->atomIs(array('Boolean', 'Arrayliteral', 'String', 'Concatenation', 'Integer', 'Float', 'Addition', 'Multiplication', 'Power', 'Bitshift', 'Bitoperation', 'Logical', 'Comparison'), self::WITH_CONSTANTS)
+             ->atomIs(array('Boolean', 
+                            'Arrayliteral', 
+                            'String', 
+                            'Concatenation', 
+                            'Integer', 
+                            'Float', 
+                            'Addition', 
+                            'Multiplication', 
+                            'Power', 
+                            'Bitshift', 
+                            'Bitoperation', 
+                            'Logical', 
+                            'Comparison',
+                            'Magicconstant',
+                            ), self::WITH_CONSTANTS)
              ->savePropertyAs('label', 'type')
              ->back('arg')
 

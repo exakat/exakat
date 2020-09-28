@@ -36,7 +36,7 @@ class NegativeStart extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('INDEX')
              ->atomIs('Integer', self::WITH_CONSTANTS)
-             ->isLess('fullcode', -1)
+             ->isLess('intval', -1)
              ->back('first')
 
              ->inIs('DEFAULT')

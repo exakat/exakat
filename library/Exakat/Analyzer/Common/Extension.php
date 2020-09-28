@@ -41,6 +41,10 @@ class Extension extends Analyzer {
 
 
     public function analyze(): void {
+        if (empty($this->source)) {
+            return;
+        }
+
         if (substr($this->source, -4) === '.ini') {
             $ini = (object) $this->loadIni($this->source);
         } elseif (substr($this->source, -5) === '.json') {
@@ -203,10 +207,7 @@ class Extension extends Analyzer {
         }
 
         if (!empty($ini->properties)) {
-            $properties = (array) $ini->properties;
-            foreach($properties as &$list) {
-                $list = array_map(function (string $x): string { return "\$$x";}, $list);
-            }
+            $properties = array_map(function (string $x): string { return "\$$x";}, (array) $ini->properties);
 
             $this->atomIs('Staticproperty')
                  ->outIs('CLASS')
