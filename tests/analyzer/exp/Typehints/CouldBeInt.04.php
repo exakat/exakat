@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('function fooint( ) ;', 
-                      'function fooint( ) { /**/ } ', 
-                      'function fooint( ) { /**/ } ', 
+$expected     = array('function fooint( ) ;',
+                      'function fooint( ) { /**/ } ',
+                      'function fooint( ) { /**/ } ',
                       'function fooint( ) { /**/ } ',
                      );
 

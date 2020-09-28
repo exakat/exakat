@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('B::A', 
+$expected     = array('B::A',
                       'A::A',
                       'E::A',
                       'A::G',

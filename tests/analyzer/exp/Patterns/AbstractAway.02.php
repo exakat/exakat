@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('date(\'r\')', 
+$expected     = array('date(\'r\')',
                       'date(\'c\')',
                       'rand(1, 2)',
                      );

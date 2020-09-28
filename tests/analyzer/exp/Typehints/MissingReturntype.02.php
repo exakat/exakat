@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('function barI( ) : int { /**/ } ', 
+$expected     = array('function barI( ) : int { /**/ } ',
                       'function barS( ) : string { /**/ } ',
                      );
 
-$expected_not = array('function bar( ) { /**/ } ', 
+$expected_not = array('function bar( ) { /**/ } ',
                       'function barSI( ) : string { /**/ } ',
                      );
 

@@ -6,7 +6,7 @@ $expected     = array('strtolower($b)',
                      );
 
 $expected_not = array('strtolower($a)',
-                      'strtolower($b) + strtolower($d)', // those are assigned
+                      'strtolower($b) + strtolower($d)',
                       'strtolower($b) + strtolower($c)',
                      );
 

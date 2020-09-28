@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a->p->method($a)', 
+$expected     = array('$a->p->method($a)',
                       '$this->p->method($this)',
                      );
 

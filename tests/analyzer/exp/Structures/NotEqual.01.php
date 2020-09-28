@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('!$a == \'3\'', 
+$expected     = array('!$a == \'3\'',
                       '!$a == 4',
                      );
 

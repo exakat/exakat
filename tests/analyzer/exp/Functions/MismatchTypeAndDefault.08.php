@@ -8,7 +8,7 @@ $expected     = array('function trim4(string $f = C ? D : null) { /**/ } ',
 
 $expected_not = array('function trim1(string $a) { /**/ } ',
                       'function trim3(string $f = null) { /**/ } ',
-                      'function trim2(int $b = E::D) { /**/ } ',  
+                      'function trim2(int $b = E::D) { /**/ } ',
                      );
 
 ?>

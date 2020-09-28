@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('echo $b', 
-                      'echo $C', 
-                      'echo $c', 
-                      'echo $d', 
-                      'echo foo( )', 
+$expected     = array('echo $b',
+                      'echo $C',
+                      'echo $c',
+                      'echo $d',
+                      'echo foo( )',
                       'echo $s',
                      );
 

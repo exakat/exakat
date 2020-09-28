@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('c : 3', 
-                      'b : 2', 
-                      'A : 1', 
-                      'd : 1', 
+$expected     = array('c : 3',
+                      'b : 2',
+                      'A : 1',
+                      'd : 1',
                       'A : 1',
                      );
 

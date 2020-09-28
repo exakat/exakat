@@ -6,8 +6,8 @@ $expected     = array('function byRelay( ) { /**/ } ',
                       'function byAtoms( ) { /**/ } ',
                       'function byAtoms2( ) { /**/ } ',
                       'function byAtoms3( ) { /**/ } ',
-                      'function byTypedArg(float $a1) { /**/ } ', 
-                      'function byDefault($a2 = 3.3) { /**/ } ', 
+                      'function byTypedArg(float $a1) { /**/ } ',
+                      'function byDefault($a2 = 3.3) { /**/ } ',
                       '$a2 = 3.3',
                      );
 

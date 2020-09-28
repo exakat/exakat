@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('a2::foo( )', 
+$expected     = array('a2::foo( )',
                       'c::foo( )',
                      );
 

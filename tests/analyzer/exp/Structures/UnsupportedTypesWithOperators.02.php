@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('--$b', 
-                      '$c | 3', 
-                      '$d ** 2', 
+$expected     = array('--$b',
+                      '$c | 3',
+                      '$d ** 2',
                       '$a++',
                       'fooArray( ) + fooVoid( )',
                      );

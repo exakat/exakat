@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('\'a\' . $c++', 
-                      '++$i % $element->columns', 
+$expected     = array('\'a\' . $c++',
+                      '++$i % $element->columns',
                       '$i++ * 20',
                      );
 

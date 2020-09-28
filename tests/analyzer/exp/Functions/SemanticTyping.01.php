@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$obj', 
-                      '$array', 
+$expected     = array('$obj',
+                      '$array',
                       '$str',
                      );
 

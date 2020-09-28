@@ -2,7 +2,6 @@
 
 $expected     = array('(double) (imagerotate( ))',
                       '(float) (acosh( ))',
-//                      '(real) (imagefttext( ))',
                       '(array) ((array_filter($a, $b)))',
                       '(int) (memory_get_peak_usage( ))',
                       '(integer) (curl_errno( ))',

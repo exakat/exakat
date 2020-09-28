@@ -3,9 +3,9 @@
 $expected     = array('(bool) joo( )',
                      );
 
-$expected_not = array('(string) goo( )', 
+$expected_not = array('(string) goo( )',
                       '(array) goo( )',
-                      '(int) foo( )', 
+                      '(int) foo( )',
                      );
 
 ?>

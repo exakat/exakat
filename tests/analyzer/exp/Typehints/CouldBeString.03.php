@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a = "d"', 
+$expected     = array('$a = "d"',
                       '$withDefault = "t"',
                       '$withCalculatedDefault',
                       '$withRelayedDefault',

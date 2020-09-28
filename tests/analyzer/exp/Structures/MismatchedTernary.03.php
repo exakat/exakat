@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$b ? 2 : x::I', 
+$expected     = array('$b ? 2 : x::I',
                       '$b ? 4 : ($x = x::I)',
                      );
 

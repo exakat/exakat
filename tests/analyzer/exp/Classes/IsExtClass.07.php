@@ -1,8 +1,8 @@
 <?php
 
 $expected     = array('\\Stdclass',
-                      '\StdCLASS',
-                      '\Curlfile',
+                      '\\StdCLASS',
+                      '\\Curlfile',
                      );
 
 $expected_not = array('\\ArrayAccess',

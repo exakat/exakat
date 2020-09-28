@@ -11,7 +11,7 @@ $expected     = array('$a',
                       '$GLOBALS[\'G\']',
                       '$GLOBALS[\'J\']',
                       '$GLOBALS[\'H\']',
-                      '$GLOBALS[\'H\'][\'I\']', 
+                      '$GLOBALS[\'H\'][\'I\']',
                       '$GLOBALS[\'J\'][\'I\']',
                      );
 

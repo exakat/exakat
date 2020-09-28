@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('include \'a.php\'', 
+$expected     = array('include \'a.php\'',
                       'include \'b.php\'',
                      );
 

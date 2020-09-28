@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('(unset) (int) (bool) $a', 
+$expected     = array('(unset) (int) (bool) $a',
                       '(unset) $a',
                      );
 

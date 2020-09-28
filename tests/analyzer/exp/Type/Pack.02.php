@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('"nnnvc*"', 
-                      '"cchars/nint"', 
-                      '"ncv*"', 
-                      '"cnv*"', 
+$expected     = array('"nnnvc*"',
+                      '"cchars/nint"',
+                      '"ncv*"',
+                      '"cnv*"',
                       '"ccc*"',
-                      '\'A\'', 
+                      '\'A\'',
                       '\'B\'',
                      );
 

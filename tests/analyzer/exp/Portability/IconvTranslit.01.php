@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('iconv(\'utf-8\', \'utf-8//TRANSLit\', $string)', 
+$expected     = array('iconv(\'utf-8\', \'utf-8//TRANSLit\', $string)',
                       'iconv(\'utf-8\', \'ascii//translit\', $string)',
                      );
 

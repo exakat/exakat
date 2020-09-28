@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('function barx2($g) { /**/ } ',
-                      'function barx3($g) { /**/ } ', 
+                      'function barx3($g) { /**/ } ',
                       'function barx4($g) { /**/ } ',
                      );
 

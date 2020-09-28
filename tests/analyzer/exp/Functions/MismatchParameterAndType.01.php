@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('float $iNt', 
-                      'string $int', 
+$expected     = array('float $iNt',
+                      'string $int',
                       'int $string',
                       'float $text = 1.2',
                      );

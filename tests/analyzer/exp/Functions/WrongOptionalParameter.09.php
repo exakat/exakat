@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('function ($a = [ ], $b) { /**/ } ', 
-                      'function ($a = null, $b) { /**/ } ', 
+$expected     = array('function ($a = [ ], $b) { /**/ } ',
+                      'function ($a = null, $b) { /**/ } ',
                      );
 
 $expected_not = array('function (?Foo $a) { /**/ } ',

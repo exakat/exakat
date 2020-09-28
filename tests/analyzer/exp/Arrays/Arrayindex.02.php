@@ -12,7 +12,7 @@ $expected     = array('\'b\'',
                      );
 
 $expected_not = array('\'notIndex\'',
-                      'D',  // D is not defined
+                      'D',
                      );
 
 ?>

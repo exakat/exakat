@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('trait t { /**/ } ', 
-                      'function foo( ) { /**/ } ', 
+$expected     = array('trait t { /**/ } ',
+                      'function foo( ) { /**/ } ',
                       'class c { /**/ } ',
                      );
 
-$expected_not = array('interface i { /**/ } ', 
+$expected_not = array('interface i { /**/ } ',
                       '@@$variable',
                      );
 

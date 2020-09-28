@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('rand(1, 2)', 
+$expected     = array('rand(1, 2)',
                       'rand(1, 3)',
                      );
 

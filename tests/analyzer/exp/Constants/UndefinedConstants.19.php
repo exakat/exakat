@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('\B', 
-                      'namespace\C', 
+$expected     = array('\\B',
+                      'namespace\\C',
                       'A',
                      );
 
-$expected_not = array('\A\B',
+$expected_not = array('\\A\\B',
                       'C',
-                      'namespace\B', 
+                      'namespace\\B',
                      );
 
 ?>

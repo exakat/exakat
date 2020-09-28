@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('class a { /**/ } ', 
-                      'class b { /**/ } ', 
-                      'class c { /**/ } ', 
+$expected     = array('class a { /**/ } ',
+                      'class b { /**/ } ',
+                      'class c { /**/ } ',
                       'class d { /**/ } ',
                      );
 

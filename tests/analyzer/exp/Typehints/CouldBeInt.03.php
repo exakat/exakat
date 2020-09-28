@@ -6,10 +6,10 @@ $expected     = array('$withDefault = 4',
                       '$withReturnedType',
                       '$withRelayedType',
                       '$withPHPReturnedType',
-                      '$withShortAssignation', 
-                      '$withShortAssignation2', 
+                      '$withShortAssignation',
+                      '$withShortAssignation2',
                       '$a = 5',
-                      );
+                     );
 
 $expected_not = array('$nothingToSay',
                       '$a',

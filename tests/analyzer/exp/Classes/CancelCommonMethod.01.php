@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('function foo2( ) { /**/ } ', 
+$expected     = array('function foo2( ) { /**/ } ',
                       'function foo3( ) { /**/ } ',
                      );
 

@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('function FooRequireOnce( ) { /**/ } ', 
-                      'function FooExtract( ) { /**/ } ', 
-                      'function FooIncludeOnce( ) { /**/ } ', 
-                      'function FooRequire( ) { /**/ } ', 
-                      'function FooExtractInclude( ) { /**/ } ', 
-                      'function FooEval( ) { /**/ } ', 
+$expected     = array('function FooRequireOnce( ) { /**/ } ',
+                      'function FooExtract( ) { /**/ } ',
+                      'function FooIncludeOnce( ) { /**/ } ',
+                      'function FooRequire( ) { /**/ } ',
+                      'function FooExtractInclude( ) { /**/ } ',
+                      'function FooEval( ) { /**/ } ',
                       'function FooInclude( ) { /**/ } ',
                      );
 

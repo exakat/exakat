@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('\LengthException("D")',
+$expected     = array('\\LengthException("D")',
                       'Exception("A")',
                      );
 

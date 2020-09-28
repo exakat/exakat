@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('t3', 
+$expected     = array('t3',
                       'bar',
                      );
 

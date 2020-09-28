@@ -14,8 +14,8 @@ $expected_not = array('class Cb { /**/ } ',
                       'interface ib { /**/ } ',
                       'trait tb { /**/ } ',
                       'Ab = 1',
-                      'define(\'B\AA\', 1)',
-                      'define(\'B\AAb\', 1)',
+                      'define(\'B\\AA\', 1)',
+                      'define(\'B\\AAb\', 1)',
                      );
 
 ?>

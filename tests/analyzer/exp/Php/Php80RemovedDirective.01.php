@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('\ini_get(\'track_errors\')', 
+$expected     = array('\\ini_get(\'track_errors\')',
                       'ini_set(\'track_errors\', 1)',
                      );
 

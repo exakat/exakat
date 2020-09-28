@@ -6,7 +6,7 @@ $expected     = array('undefined',
 
 $expected_not = array('t',
                       'useTrait',
-                      'Stubs\stubTraits',
+                      'Stubs\\stubTraits',
                      );
 
 ?>

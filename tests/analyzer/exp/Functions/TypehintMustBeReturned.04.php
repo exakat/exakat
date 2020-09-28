@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( 'function foo( ) : float { /**/ } ',
+$expected     = array('function foo( ) : float { /**/ } ',
                      );
 
 $expected_not = array('function foo2( ) { /**/ } ',

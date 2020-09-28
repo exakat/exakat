@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('function bar1(string $a3) { /**/ } ', 
-                      'function (string $a6) { /**/ } ', 
-                      'function foo_method( ) { /**/ } ', 
-                      'function foo_method($b) { /**/ } ', 
-                      'function __construct($c) { /**/ } ', 
+$expected     = array('function bar1(string $a3) { /**/ } ',
+                      'function (string $a6) { /**/ } ',
+                      'function foo_method( ) { /**/ } ',
+                      'function foo_method($b) { /**/ } ',
+                      'function __construct($c) { /**/ } ',
                       'function foo($a) : void { /**/ } ',
                      );
 

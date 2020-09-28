@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('throw rand(0, 1) ? new D( ) : new E( )', 
+$expected     = array('throw rand(0, 1) ? new D( ) : new E( )',
                       'throw new F( )',
                       'throw $a',
                      );

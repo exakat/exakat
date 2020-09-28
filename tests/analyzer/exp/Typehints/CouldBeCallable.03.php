@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$withCalculatedDefault', 
+$expected     = array('$withCalculatedDefault',
                       '$withReturnedType',
                       '$withRelayedType',
                      );

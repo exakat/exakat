@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('private static y $y1', 
-                      'static private y $y2', 
+$expected     = array('private static y $y1',
+                      'static private y $y2',
                       'var y $y5',
                      );
 

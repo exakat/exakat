@@ -2,7 +2,7 @@
 
 $expected     = array('implode(AR, $theTable)',
                       'implode(\', \', $returnS)',
-                      'implode(\', \', $return)', 
+                      'implode(\', \', $return)',
                       'implode(\', \', $returnStatic)',
                      );
 

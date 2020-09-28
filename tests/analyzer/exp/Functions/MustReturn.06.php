@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array( 'function foo2(int $a) : C|D { /**/ } ', 
-                       'function foo4( ) : C|D|null { /**/ } ', 
-                       'function foo(int $a) : R { /**/ } ',
+$expected     = array('function foo2(int $a) : C|D { /**/ } ',
+                      'function foo4( ) : C|D|null { /**/ } ',
+                      'function foo(int $a) : R { /**/ } ',
                      );
 
 $expected_not = array('function foo3(int $a) : void { /**/ } ',

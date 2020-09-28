@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('shell_exec($f0)', 
+$expected     = array('shell_exec($f0)',
                       'shell_exec($f12)',
-                      'shell_exec($f22)', 
+                      'shell_exec($f22)',
                       'shell_exec($f33)',
                      );
 

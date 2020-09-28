@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$object2 = true', 
+$expected     = array('$object2 = true',
                       '$object = array( )',
                       '$literalC',
                      );

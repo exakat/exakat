@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('function ($a) { /**/ } ', 
-                      '$a', 
-                      '$b', 
+$expected     = array('function ($a) { /**/ } ',
+                      '$a',
+                      '$b',
                       '$c',
                      );
 

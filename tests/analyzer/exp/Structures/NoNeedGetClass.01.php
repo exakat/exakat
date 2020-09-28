@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('get_class($a1->b)', 
-                      '\get_class($a2->b)', 
-                      '\get_class($a3->b)', 
+$expected     = array('get_class($a1->b)',
+                      '\\get_class($a2->b)',
+                      '\\get_class($a3->b)',
                       'get_CLass($a4->b)',
                      );
 

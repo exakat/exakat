@@ -10,7 +10,7 @@ $expected     = array('$b = 3.1',
 $expected_not = array('$d',
                       'int $g',
                       'function bari($g);',
-                      'function barx($g);'
+                      'function barx($g);',
                      );
 
 ?>
