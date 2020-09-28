@@ -29,6 +29,7 @@ class VariableUsedOnceByContext extends Analyzer {
     public function dependsOn(): array {
         return array('Complete/CreateCompactVariables',
                      'Functions/VariableArguments',
+                     'Variables/SelfTransform',
                     );
     }
 
@@ -54,7 +55,13 @@ class VariableUsedOnceByContext extends Analyzer {
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs(array('Variabledefinition'))
-             ->isUsed(1)
+             ->filter(
+                $this->side()
+                     ->outIs('DEFINITION')
+                     ->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Parameter', 'String'))
+                     ->analyzerIsNot('Variables/SelfTransform')
+                     ->raw('count().is(eq(1))')
+             )
              ->outIs('DEFINITION');
         $this->prepareQuery();
 
