@@ -28,6 +28,19 @@ class SelfTransform extends Analyzer {
     public function analyze(): void {
         // $x = strtolower($x);
         // $x = A.$x.$b;
+        // First step : marks variables in the right part
+        $this->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->atomIs(self::CONTAINERS)
+             ->savePropertyAs('fullcode', 'left')
+             ->back('first')
+
+             ->outIs('RIGHT')
+             ->atomInsideNoDefinition(self::CONTAINERS)
+             ->samePropertyAs('fullcode', 'left');
+        $this->prepareQuery();
+
+        // Second step : marks variables in the left part
         $this->atomIs('Assignation')
              ->outIs('LEFT')
              ->atomIs(self::CONTAINERS)
@@ -36,10 +49,18 @@ class SelfTransform extends Analyzer {
              ->back('first')
 
              ->outIs('RIGHT')
-             ->atomInside(self::CONTAINERS)
+             ->atomInsideNoDefinition(self::CONTAINERS)
              ->samePropertyAs('fullcode', 'left')
              ->back('results');
         $this->prepareQuery();
+
+        // short assignement case
+        $this->atomIs('Assignation')
+             ->codeIs(array('.=', '+=', '-=', '%=', '&&=', '&=', '*=', '**=', '/='))
+             ->outIs('LEFT')
+             ->atomIs(self::CONTAINERS);
+        $this->prepareQuery();
+
     }
 }
 
