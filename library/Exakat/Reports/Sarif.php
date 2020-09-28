@@ -31,17 +31,13 @@ class Sarif extends Reports {
     public function _generate(array $analyzerList): string {
         $analysisResults = $this->dump->fetchAnalysers($analyzerList);
 
-        $results                    = array();
         $titleCache                 = array();
-        $titledescriptionCacheCache = array();
         $severityCache              = array();
         $precisionCache             = array();
         $sarif = new SarifJson();
 
         foreach($analysisResults->toArray() as $row) {
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
-
                 $titleCache[$row['analyzer']]       = $this->docs->getDocs($row['analyzer'], 'name');
                 $descriptionCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'description');
                 $severityCache[$row['analyzer']]    = $this->docs->getDocs($row['analyzer'], 'severity');
