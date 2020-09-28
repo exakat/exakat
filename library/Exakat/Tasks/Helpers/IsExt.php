@@ -44,6 +44,7 @@ class IsExt extends Plugin {
         $constants = array(array());
         $classes   = array(array());
         $functions = array(array());
+
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext);
             if (!file_exists($config->dir_root . '/data/' . $inifile . '.ini')) {
@@ -69,7 +70,30 @@ class IsExt extends Plugin {
             if (!empty($ini['functions'][0])) {
                 $functions[] = makeFullnspath($ini['functions'], \FNP_NOT_CONSTANT);
             }
+
+            if (!empty($ini['staticMethods'][0])) {
+                foreach($ini['staticMethods'] as $fullMethod) {
+                    list($class, $method) = explode('::', $fullMethod, 2);
+                    array_collect_by($this->extClassMethods, makeFullnspath($class),  mb_strtolower($method));
+                }
+            }
+
+            if (!empty($ini['staticProperties'][0])) {
+                foreach($ini['staticProperties'] as $fullProperty) {
+                    list($class, $property) = explode('::', $fullProperty, 2);
+                    array_collect_by($this->extClassProperties, makeFullnspath($class), $property);
+                }
+            }
+
+            if (!empty($ini['staticConstants'][0])) {
+                foreach($ini['staticConstants'] as $fullConstant) {
+                    list($class, $constant) = explode('::', $fullConstant, 2);
+                    array_collect_by($this->extClassConstants, makeFullnspath($class), $constant);
+                }
+            }
         }
+        
+        // Not doint $o->p and $o->m() ATM : needs $o's type.
 
         $this->extConstants = array_merge(...$constants);
         $this->extFunctions = array_merge(...$functions);
@@ -81,6 +105,28 @@ class IsExt extends Plugin {
         $path = substr($atom->fullnspath ?? self::NOT_PROVIDED, $id);
 
         switch ($atom->atom) {
+            case 'Staticmethodcall' :
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? self::NOT_PROVIDED);
+                $method = mb_strtolower(substr($extras['METHOD']->fullcode ?? self::NOT_PROVIDED, 0, strpos($extras['METHOD']->fullcode ?? self::NOT_PROVIDED, '(')));
+                if (in_array($method, $this->extClassMethods[$path] ?? array(), \STRICT_COMPARISON)) {
+                    $atom->isExt = true;
+                }
+                break;
+
+            case 'Staticproperty' :
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? self::NOT_PROVIDED);
+                if (in_array($extras['MEMBER']->code ?? self::NOT_PROVIDED, $this->extClassProperties[$path] ?? array(), \STRICT_COMPARISON)) {
+                    $atom->isExt = true;
+                }
+                break;
+
+            case 'Staticconstant' :
+                $path = makeFullnspath($extras['CLASS']->fullnspath ?? self::NOT_PROVIDED);
+                if (in_array($extras['CONSTANT']->code ?? self::NOT_PROVIDED, $this->extClassConstants[$path] ?? array(), \STRICT_COMPARISON)) {
+                    $atom->isExt = true;
+                }
+                break;
+
             case 'Functioncall' :
                 if (in_array(makeFullnspath($path), $this->extFunctions, \STRICT_COMPARISON)) {
                     $atom->isExt = true;
