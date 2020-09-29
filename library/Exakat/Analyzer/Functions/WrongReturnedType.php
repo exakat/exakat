@@ -86,8 +86,12 @@ class WrongReturnedType extends Analyzer {
              ->as('results')
              ->atomIs('Variable')
              ->inIs('DEFINITION')
+             ->inIsIE('NAME')
+             ->outIs('TYPEHINT')
+             ->atomIs('Void')
+             ->inIs('TYPEHINT')
              ->outIs('DEFAULT')
-             ->atomIs(array('Integer', 'String', 'Heredoc', 'Float', 'Null', 'Boolean', 'Arrayliteral'))
+             ->atomIs(array('Integer', 'String', 'Heredoc', 'Float', 'Null', 'Boolean', 'Arrayliteral', 'Void'))
              ->back('results')
              ->inIs('RETURN');
         $this->prepareQuery();
@@ -117,7 +121,8 @@ class WrongReturnedType extends Analyzer {
              )
              */
              ->back('results')
-             ->inIs('RETURN');
+             ->inIs('RETURN')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // function foo(B $b) : A { return $b;}
@@ -135,7 +140,8 @@ class WrongReturnedType extends Analyzer {
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'fqn')
              ->back('results')
-             ->inIs('RETURN');
+             ->inIs('RETURN')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // PHP scalar types
@@ -157,7 +163,8 @@ class WrongReturnedType extends Analyzer {
              )
              ->checkTypeWithAtom('fqn')
              ->back('results')
-             ->inIs('RETURN');
+             ->inIs('RETURN')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         //Relayed return types
