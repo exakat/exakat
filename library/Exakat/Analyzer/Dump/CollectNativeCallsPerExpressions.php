@@ -37,10 +37,10 @@ class CollectNativeCallsPerExpressions extends AnalyzerHashHashResults {
 
         $this->atomIs('Sequence', Analyzer::WITHOUT_CONSTANTS)
               ->outIs('EXPRESSION')
-              ->atomIsNot(array('Assignation', 'Case', 'Catch', 'Class', 'Classanonymous', 'Closure', 'Concatenation', 'Default', 'Dowhile', 'Finally', 'For', 'Foreach', 'Function', 'Ifthen', 'Include', 'Method', 'Namespace', 'Php', 'Return', 'Switch', 'Trait', 'Try', 'While'), Analyzer::WITHOUT_CONSTANTS)
+              ->atomIsNot(array('Case', 'Catch', 'Class', 'Classanonymous', 'Closure', 'Default', 'Dowhile', 'Finally', 'For', 'Foreach', 'Function', 'Ifthen', 'Include', 'Namespace', 'Php', 'Return', 'Switch', 'Trait', 'Try', 'While'), Analyzer::WITHOUT_CONSTANTS)
               ->_as('results')
               ->raw(<<<GREMLIN
-groupCount("m").by( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel("Functioncall")
+groupCount("m").by( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Arrowfunction", "Classanonymous")) ).times($MAX_LOOPING).hasLabel("Functioncall")
       .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
       .count()
 ).cap("m")
