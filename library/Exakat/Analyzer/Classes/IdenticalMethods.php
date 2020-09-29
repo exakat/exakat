@@ -31,17 +31,29 @@ class IdenticalMethods extends Analyzer {
     }
 
     public function analyze(): void {
-        return;
         // class a           { public function foo() { /some code/ } }
         // class b extends a { public function foo() { /some code/ } }
-        $this->atomIs(self::FUNCTIONS_METHODS)
+        $this->atomIs(self::FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->isNot('abstract', true)
              ->hasNoInterface()
-             ->savePropertyAs('ctype1', 'clonetype')
+             ->savePropertyAs('fullcode', 'signature') 
+             ->raw(<<<GREMLIN
+where(
+    __.sideEffect{ original = []; }.out('BLOCK').out('EXPRESSION').order().by("rank").sideEffect{ original.add(it.get().value('fullcode'));}.fold() 
+)
+GREMLIN
+)
              ->inIs('OVERWRITE')
-             ->atomIs(self::FUNCTIONS_METHODS)
-             ->samePropertyAs('ctype1', 'clonetype')
+             ->atomIs(self::FUNCTIONS_METHOD)
+             ->samePropertyAs('fullcode', 'signature')
+             ->raw(<<<GREMLIN
+where(
+    __.sideEffect{ copy = []; }.out('BLOCK').out('EXPRESSION').order().by("rank").sideEffect{ copy.add(it.get().value('fullcode'));}.fold() 
+)
+.filter{ original.join(',') == copy.join(',');}
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
     }
