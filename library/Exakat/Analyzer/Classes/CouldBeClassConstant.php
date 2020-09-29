@@ -38,7 +38,7 @@ class CouldBeClassConstant extends Analyzer {
 
              ->outIs('DEFAULT')
              ->hasNoParent('Assignation', array('ARGUMENT')) // exclude dynamic default
-             ->atomIsNot(array('Null', 'Staticconstant'))
+             ->atomIsNot(array('Null', 'Staticconstant', 'Void'))
              ->inIs('DEFAULT')
 
              ->hasOut('DEFINITION')
