@@ -34,7 +34,8 @@ class MismatchedTypehint extends Analyzer {
     }
 
     public function analyze(): void {
-        // Based on calls to a function
+        // Based on calls to a function, method or static method
+        // function foo(A $a) { bar($a);} function bar(B $a) {...}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->as('results')
@@ -46,52 +47,9 @@ class MismatchedTypehint extends Analyzer {
              ->has('rank')
              ->savePropertyAs('rank', 'ranked')
              ->inIs('ARGUMENT')
-             ->atomIs('Functioncall')
+             ->inIsIE('METHOD')
+             ->atomIs(self::CALLS)
              ->inIs('DEFINITION')
-             ->checkDefinition()
-             ->back('results');
-        $this->prepareQuery();
-
-        // Based on Methodcalls : still missing the class of the object
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->as('results')
-             ->outIs('TYPEHINT')
-             ->savePropertyAs('fullnspath', 'typehint')
-             ->inIs('TYPEHINT')
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->has('rank')
-             ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
-             ->inIs('METHOD')
-             ->atomIs('Methodcall')
-             ->inIs('DEFINITION')
-             ->checkDefinition()
-             ->back('results');
-        $this->prepareQuery();
-
-        // Based on staticmethodcall
-        $this->atomIs(self::FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->as('results')
-             ->outIs('TYPEHINT')
-             ->savePropertyAs('fullnspath', 'typehint')
-             ->inIs('TYPEHINT')
-             ->outIs('NAME')
-             ->outIs('DEFINITION')
-             ->has('rank')
-             ->savePropertyAs('rank', 'ranked')
-             ->inIs('ARGUMENT')
-             ->savePropertyAs('code', 'method')
-             ->inIs('METHOD')
-             ->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->inIs('DEFINITION')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'method')
-             ->inIs('NAME')
              ->checkDefinition()
              ->back('results');
         $this->prepareQuery();
@@ -101,6 +59,7 @@ class MismatchedTypehint extends Analyzer {
         $this->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'ranked')
              ->outIs('TYPEHINT')
+             ->atomIsNot('Void')
              ->notSamePropertyAs('fullnspath', 'typehint')
              ->not(
                 $this->side()

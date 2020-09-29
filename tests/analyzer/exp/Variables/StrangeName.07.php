@@ -6,6 +6,7 @@ $expected     = array('${42}',
                       '${true}',
                       '${43}',
                       '${1.3}',
+                      '${(bool) \'C\'}',
                      );
 
 $expected_not = array('$value',
