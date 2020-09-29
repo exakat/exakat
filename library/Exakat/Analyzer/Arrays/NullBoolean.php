@@ -58,8 +58,6 @@ class NullBoolean extends Analyzer {
              ->atomIs('Array')
              ->analyzerIsNot('self');
         $this->prepareQuery();
-
-
     }
 }
 
