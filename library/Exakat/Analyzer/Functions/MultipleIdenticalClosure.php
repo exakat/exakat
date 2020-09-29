@@ -26,26 +26,35 @@ use Exakat\Analyzer\Analyzer;
 
 class MultipleIdenticalClosure extends Analyzer {
     public function analyze(): void {
-        return;
-        $this->atomIs('Closure')
-             ->outIs('BLOCK')
-             ->values('ctype1');
+        $this->atomIs(array('Closure', 'Arrowfunction', 'Function'))
+             ->raw(<<<GREMLIN
+where(
+    __.sideEffect{ original = []; }.out('BLOCK').out('EXPRESSION').order().by("rank").sideEffect{ original.add(it.get().value('fullcode'));}.fold() 
+).map{ original.join(',').replaceAll("\\\\\\\$.", "ABC");}
+GREMLIN
+);
         $blocks = $this->rawQuery()->toArray();
         $all = array_count_values($blocks);
         $multiples = array_filter($all, function ($x) { return $x > 1;});
 
         // Closures with identical blocks
-        $this->atomIs('Closure')
-             ->outIs('BLOCK')
-             ->is('ctype1', array_keys($multiples))
-             ->back('first');
+        $this->atomIs(array('Closure', 'Arrowfunction'))
+             ->raw(<<<GREMLIN
+where(
+    __.sideEffect{ original = []; }.out('BLOCK').out('EXPRESSION').order().by("rank").sideEffect{ original.add(it.get().value('fullcode'));}.fold() 
+).filter{ original.join(',').replaceAll("\\\\\\\$.", "ABC") in *** ;}
+GREMLIN
+, $multiples);
         $this->prepareQuery();
 
         // Closures with identical blocks to a function or method
         $this->atomIs(array('Function', 'Method', 'Magicmethod'))
-             ->outIs('BLOCK')
-             ->is('ctype1', array_keys($all))
-             ->back('first');
+->raw(<<<GREMLIN
+where(
+    __.sideEffect{ original = []; }.out('BLOCK').out('EXPRESSION').order().by("rank").sideEffect{ original.add(it.get().value('fullcode'));}.fold() 
+).filter{ original.join(',').replaceAll("\\\\\\\$.", "ABC") in *** ;}
+GREMLIN
+, $multiples);
         $this->prepareQuery();
     }
 }
