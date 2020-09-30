@@ -190,6 +190,10 @@ class Docs {
                  '__NAMESPACE__'              => 'https://www.php.net/manual/en/language.constants.predefined.php',
                  '__TRAIT__'                  => 'https://www.php.net/manual/en/language.constants.predefined.php',
                  '__FUNCTION__'               => 'https://www.php.net/manual/en/language.constants.predefined.php',
+
+                 'track_errors'               => 'https://www.php.net/manual/en/errorfunc.configuration.php#ini.track-errors',
+                 'max_execution_time'         => 'https://www.php.net/manual/en/errorfunc.configuration.php#ini.max-execution-time',
+
     );
 
     function __construct() {
