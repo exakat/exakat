@@ -936,6 +936,16 @@ class Load extends Tasks {
         return $atom;
     }
 
+    private function processExpression(array $finals): AtomInterface {
+        do {
+           $expression = $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
+
+        $this->popExpression();
+        
+        return $expression;
+    }
+
     private function processColon(): AtomInterface {
         --$this->id;
         $tag = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
@@ -1327,19 +1337,14 @@ class Load extends Tasks {
             $this->currentClassTrait[] = '';
         }
 
-        do {
-           $block = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
-                                                                  $this->phptokens::T_CLOSE_PARENTHESIS,
-                                                                  $this->phptokens::T_CLOSE_CURLY,
-                                                                  $this->phptokens::T_SEMICOLON,
-                                                                  $this->phptokens::T_CLOSE_BRACKET,
-                                                                  $this->phptokens::T_CLOSE_TAG,
-                                                                  $this->phptokens::T_COLON,
-                                                                  ),
-               \STRICT_COMPARISON));
-
-        $this->popExpression();
+        $block = $this->processExpression(array($this->phptokens::T_COMMA,
+                                                $this->phptokens::T_CLOSE_PARENTHESIS,
+                                                $this->phptokens::T_CLOSE_CURLY,
+                                                $this->phptokens::T_SEMICOLON,
+                                                $this->phptokens::T_CLOSE_BRACKET,
+                                                $this->phptokens::T_CLOSE_TAG,
+                                                $this->phptokens::T_COLON,
+                                                ));
 
        // arrowfunction may be static
        if ($this->tokens[$current - 1][0] === $this->phptokens::T_STATIC) {
@@ -2422,19 +2427,14 @@ class Load extends Tasks {
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                     ++$this->id; // Skip =
-                    do {
-                        $default = $this->processNext();
-                    } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
-                                                                              $this->phptokens::T_CLOSE_PARENTHESIS,
-                                                                              $this->phptokens::T_CLOSE_CURLY,
-                                                                              $this->phptokens::T_SEMICOLON,
-                                                                              $this->phptokens::T_CLOSE_BRACKET,
-                                                                              $this->phptokens::T_CLOSE_TAG,
-                                                                              $this->phptokens::T_COLON,
-                                                                              ),
-                            \STRICT_COMPARISON));
-
-                    $this->popExpression();
+                    $default = $this->processExpression(array($this->phptokens::T_COMMA,
+                                                              $this->phptokens::T_CLOSE_PARENTHESIS,
+                                                              $this->phptokens::T_CLOSE_CURLY,
+                                                              $this->phptokens::T_SEMICOLON,
+                                                              $this->phptokens::T_CLOSE_BRACKET,
+                                                              $this->phptokens::T_CLOSE_TAG,
+                                                              $this->phptokens::T_COLON,
+                                                              ));
                 } else {
                     if ($index->variadic === self::ELLIPSIS) {
                         $argsMax = \MAX_ARGS;
@@ -2447,6 +2447,7 @@ class Load extends Tasks {
                 if ($default->atom !== 'Void') {
                     $index->fullcode .= ' = ' . $default->fullcode;
 
+                    // When Null is default, then typehint is also nullable
                     if ($default->atom === 'Null' &&
                         strpos($typehints, '?') === false &&
                         preg_match('/\bnull\b/i', $typehints) === 0
@@ -2658,14 +2659,10 @@ class Load extends Tasks {
             $name = $this->processNextAsIdentifier();
 
             ++$this->id; // Skip =
-            do {
-                $value = $this->processNext();
-            } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
-                                                                      $this->phptokens::T_COMMA,
-                                                                      $this->phptokens::T_DOC_COMMENT,
-                                                                    ),
-                    \STRICT_COMPARISON));
-            $this->popExpression();
+            $value = $this->processExpression(array($this->phptokens::T_SEMICOLON,
+                                                    $this->phptokens::T_COMMA,
+                                                    $this->phptokens::T_DOC_COMMENT,
+                                                    ));
 
             $def = $this->addAtom('Constant', $constId);
             $this->addLink($def, $name, 'NAME');
@@ -2816,13 +2813,9 @@ class Load extends Tasks {
         } else {
             // back one step
             --$this->id;
-            do {
-                $name = $this->processNext();
-            }  while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
+            $name = $this->processExpression(array($this->phptokens::T_COMMA,
                                                                        $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
-                                                                      ),
-                      \STRICT_COMPARISON));
-            $this->popExpression();
+                                                                      ));
         }
         $this->addLink($namecall, $name, 'NAME');
 
@@ -2839,13 +2832,9 @@ class Load extends Tasks {
 
         // Second argument constant value
         ++$this->id; // Skip ,
-        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
-                                                                $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
-                                                                ),
-                \STRICT_COMPARISON)) {
-            $value = $this->processNext();
-        }
-        $this->popExpression();
+        $value = $this->processExpression(array($this->phptokens::T_COMMA,
+                                                $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
+                                               ));
         $this->addLink($namecall, $value, 'VALUE');
 
         // Most common point of exit
@@ -2866,13 +2855,9 @@ class Load extends Tasks {
 
         // Third argument : case sensitive
         ++$this->id; // Skip ,
-        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA,
-                                                                $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
-                                                                ),
-                \STRICT_COMPARISON)) {
-            $case = $this->processNext();
-        }
-        $this->popExpression();
+        $case = $this->processExpression(array($this->phptokens::T_COMMA,
+                                               $this->phptokens::T_CLOSE_PARENTHESIS // In case of missing arguments...
+                                              ));
         $this->addLink($namecall, $case, 'CASE');
 
         $this->processDefineAsConstants($namecall, $name, (bool) $case->boolean);
@@ -3295,18 +3280,12 @@ class Load extends Tasks {
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                     ++$this->id;
-                    do {
-                        $default = $this->processNext();
-                    } while (!in_array($this->tokens[$this->id + 1][0],
-                                       array($this->phptokens::T_SEMICOLON,
-                                             $this->phptokens::T_CLOSE_TAG,
-                                             $this->phptokens::T_COMMA,
-                                             $this->phptokens::T_CLOSE_PARENTHESIS,
-                                             $this->phptokens::T_DOC_COMMENT,
-                                             ),
-                                        \STRICT_COMPARISON));
-
-                    $this->popExpression();
+                    $default = $this->processExpression(array($this->phptokens::T_SEMICOLON,
+                                                              $this->phptokens::T_CLOSE_TAG,
+                                                              $this->phptokens::T_COMMA,
+                                                              $this->phptokens::T_CLOSE_PARENTHESIS,
+                                                              $this->phptokens::T_DOC_COMMENT,
+                                                              ));
                 } else {
                     $default = $this->addAtomVoid();
                 }
@@ -3392,20 +3371,16 @@ class Load extends Tasks {
             $resetContext = true;
             $this->contexts->toggleContext(Context::CONTEXT_NEW);
         }
-        do {
-            $index = $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_BRACKET,
-                                                                  $this->phptokens::T_CLOSE_CURLY,
-                                                                  ),
-                 \STRICT_COMPARISON));
+        $index = $this->processExpression(array($this->phptokens::T_CLOSE_BRACKET,
+                                                $this->phptokens::T_CLOSE_CURLY,
+                                                ));
+
         if ($resetContext === true) {
             $this->contexts->toggleContext(Context::CONTEXT_NEW);
         }
 
         // Skip closing bracket
         ++$this->id;
-
-        $this->popExpression();
         $this->addLink($bracket, $index, 'INDEX');
 
         if ($variable->code === '$GLOBALS' && !empty($index->noDelimiter)) {
