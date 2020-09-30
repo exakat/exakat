@@ -27,16 +27,14 @@ use Exakat\Autoload\Autoloader;
 
 class Rulesets implements RulesetsInterface {
     private $main   = null;
-    private $ext    = null;
     private $extra  = null;
     private $dev    = null;
     private $ignore = null;
 
     private static $instanciated = array();
 
-    public function __construct($path, Autoloader $ext, Autoloader $dev, array $extra_rulesets = array(), array $ignore_rulesets = array()) {
+    public function __construct($path, Autoloader $dev, array $extra_rulesets = array(), array $ignore_rulesets = array()) {
         $this->main   = new RulesetsMain($path);
-        $this->ext    = new RulesetsExt($ext);
         $this->extra  = new RulesetsExtra($extra_rulesets);
         $this->dev    = new RulesetsDev($dev);
         $this->ignore = new RulesetsIgnore($ignore_rulesets);
@@ -44,7 +42,6 @@ class Rulesets implements RulesetsInterface {
 
     public function __destruct() {
         $this->main   = null;
-        $this->ext    = null;
         $this->extra  = null;
         $this->dev    = null;
         $this->ignore = null;
@@ -53,47 +50,42 @@ class Rulesets implements RulesetsInterface {
     public function getRulesetsAnalyzers(array $rulesets = array()): array {
         $main     = $this->main   ->getRulesetsAnalyzers($rulesets);
         $extra    = $this->extra  ->getRulesetsAnalyzers($rulesets);
-        $ext      = $this->ext    ->getRulesetsAnalyzers($rulesets);
         $dev      = $this->dev    ->getRulesetsAnalyzers($rulesets);
         $ignore   = $this->ignore ->getRulesetsAnalyzers($rulesets);
 
-        return array_udiff(array_merge($main, $extra, $ext, $dev), $ignore, 'strcasecmp');
+        return array_udiff(array_merge($main, $extra, $dev), $ignore, 'strcasecmp');
     }
 
     public function getRulesetForAnalyzer(string $analyzer = ''): array {
         $main = $this->main  ->getRulesetForAnalyzer($analyzer);
         $extra = $this->extra->getRulesetForAnalyzer($analyzer);
-        $ext   = $this->ext  ->getRulesetForAnalyzer($analyzer);
         $dev   = $this->dev  ->getRulesetForAnalyzer($analyzer);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function getRulesetsForAnalyzer(array $analyzer = array()): array {
         $main  = $this->main ->getRulesetsForAnalyzer($analyzer);
         $extra = $this->extra->getRulesetsForAnalyzer($analyzer);
-        $ext   = $this->ext  ->getRulesetsForAnalyzer($analyzer);
         $dev   = $this->dev  ->getRulesetsForAnalyzer($analyzer);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function getSeverities(): array {
         $main  = $this->main ->getSeverities();
         $extra = $this->extra->getSeverities();
-        $ext   = $this->ext  ->getSeverities();
         $dev   = $this->dev  ->getSeverities();
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function getTimesToFix(): array {
         $main  = $this->main ->getTimesToFix();
         $extra = $this->extra->getTimesToFix();
-        $ext   = $this->ext  ->getTimesToFix();
         $dev   = $this->dev  ->getTimesToFix();
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function getFrequences(): array {
@@ -105,19 +97,17 @@ class Rulesets implements RulesetsInterface {
     public function listAllAnalyzer(string $folder = ''): array {
         $main  = $this->main ->listAllAnalyzer($folder);
         $extra = $this->extra->listAllAnalyzer($folder);
-        $ext   = $this->ext  ->listAllAnalyzer($folder);
         $dev   = $this->dev  ->listAllAnalyzer($folder);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function listAllRulesets(array $ruleset = array()): array {
         $main  = $this->main ->listAllRulesets($ruleset);
         $extra = $this->extra->listAllRulesets($ruleset);
-        $ext   = $this->ext  ->listAllRulesets($ruleset);
         $dev   = $this->dev  ->listAllRulesets($ruleset);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function getClass(string $name): string {
@@ -126,10 +116,6 @@ class Rulesets implements RulesetsInterface {
         }
 
         if ($class = $this->extra->getClass($name)) {
-            return $class;
-        }
-
-        if ($class = $this->ext->getClass($name)) {
             return $class;
         }
 
@@ -143,28 +129,25 @@ class Rulesets implements RulesetsInterface {
     public function getSuggestionRuleset(array $rulesets = array()): array {
         $main  = $this->main ->getSuggestionRuleset($ruleset);
         $extra = $this->extra->getSuggestionRuleset($ruleset);
-        $ext   = $this->ext  ->getSuggestionRuleset($ruleset);
         $dev   = $this->dev  ->getSuggestionRuleset($ruleset);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function getSuggestionClass(string $name): array {
         $main  = $this->main ->getSuggestionClass($name);
         $extra = $this->extra->getSuggestionClass($name);
-        $ext   = $this->ext  ->getSuggestionClass($name);
         $dev   = $this->dev  ->getSuggestionClass($name);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public function getAnalyzerInExtension(string $name): array {
         $main  = $this->main ->getAnalyzerInExtension($name);
         $extra = $this->extra->getAnalyzerInExtension($name);
-        $ext   = $this->ext  ->getAnalyzerInExtension($name);
         $dev   = $this->dev  ->getAnalyzerInExtension($name);
 
-        return array_merge($main, $extra, $ext, $dev);
+        return array_merge($main, $extra, $dev);
     }
 
     public static function resetCache(): void {
