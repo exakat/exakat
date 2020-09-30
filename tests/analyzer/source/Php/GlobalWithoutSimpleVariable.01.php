@@ -6,6 +6,6 @@ function x() {
     global ${y[2]};
     global $$f;
     global $$foo->bar;
-    global ${$foo->bar};
+    global ${$foo->bar2};
 }
 ?>

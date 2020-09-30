@@ -3,7 +3,7 @@
 $expected     = array('global $$x',
                       'global $$f',
                       'global ${y[2]}',
-                      'global ${$foo->bar}',
+                      'global ${$foo->bar2}',
                       'global $$foo->bar',
                      );
 
