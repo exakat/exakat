@@ -561,31 +561,12 @@ class Load extends Tasks {
 
         $stubs = $this->config->stubs;
 
-        if ($this->config->parallel_processing === true) {
-            display('Parallel processing');
-            $pid = pcntl_fork();
-            if ($pid === 0 ) {
-                $this->runCollector($stubs);
-                display('Child finished working');
-                exit(0);
-            } else {
-                $this->gremlin = Graph::getConnexion();
+        display('Sequential processing');
+        $this->runCollector($stubs);
 
-                $nbTokens = $this->runProjectCore($files);
-                $b = microtime(true);
-                display('Waiting for child');
-                pcntl_wait($pid);
-                $e = microtime(true);
-                display('Finished waiting for child : ' . (($e - $b) * 1000) . ' ms');
-            }
-        } else {
-            display('Sequential processing');
-            $this->runCollector($stubs);
+        $this->gremlin = Graph::getConnexion();
 
-            $this->gremlin = Graph::getConnexion();
-
-            $nbTokens = $this->runProjectCore($files);
-        }
+        $nbTokens = $this->runProjectCore($files);
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);

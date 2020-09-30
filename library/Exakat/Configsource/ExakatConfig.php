@@ -142,10 +142,6 @@ class ExakatConfig extends Config {
             }
         }
 
-        if (isset($this->config['parallel_processing'])) {
-            $this->config['parallel_processing'] = ((bool) $this->config['parallel_processing']) && function_exists('pcntl_fork');
-        }
-
         // Calculate the stubs recursivement if it is a folder
         // all path are absolute, may be placed anywhere
         if (!isset($this->config['stubs'])) {

@@ -159,15 +159,11 @@ class DefaultConfig extends Config {
 
                                 'inside_code'          => Configuration::WITH_PROJECTS,
 
-                                'parallel_processing'  => false,
-
                                 'php_extensions'       => 'all',
                               );
 
     public function __construct() {
         $this->config['project'] = new Project();
-
-        $this->config['parallel_processing'] = function_exists('pcntl_fork');
     }
 
     public function loadConfig(Project $project) : ?string {

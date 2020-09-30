@@ -132,12 +132,10 @@ class Doctor extends Tasks {
         $stats['PHP']['ext/mbstring']           = extension_loaded('mbstring') ? 'Yes' : 'No (Compulsory, add --enable-mbstring to configure)';
         $stats['PHP']['ext/json']               = extension_loaded('json') ? 'Yes' : 'No';
         $stats['PHP']['ext/xmlwriter']          = extension_loaded('xmlwriter') ? 'Yes' : 'No (Optional, used by XML reports)';
-        $stats['PHP']['ext/pcntl']              = extension_loaded('pcntl') ? 'Yes' : 'No (Optional)';
 
         if (extension_loaded('xdebug') === true) {
             $stats['PHP']['xdebug.max_nesting_level']            = (ini_get('xdebug.max_nesting_level') ) . ' (Must be -1 or more than 1000)';
         }
-        $stats['PHP']['parallel_processing']    = $this->config->parallel_processing ? 'Yes' : 'No (Optional)';
         $stats['PHP']['pcre.jit']               = (ini_get('pcre.jit') ? 'On' : 'Off') . ' (Must be off on PHP 7.3 and OSX)';
 
         // java
