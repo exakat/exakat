@@ -114,7 +114,7 @@ class Doctor extends Tasks {
         }
 
         $stubs = exakat('stubs');
-        $file = array();
+        $files = array();
         foreach($stubs as $stub) {
             $files[] = $stub->getFile();
         }
