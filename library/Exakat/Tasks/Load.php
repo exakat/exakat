@@ -923,7 +923,7 @@ class Load extends Tasks {
         } while (!in_array($this->tokens[$this->id + 1][0], $finals, \STRICT_COMPARISON));
 
         $this->popExpression();
-        
+
         return $expression;
     }
 
@@ -4994,7 +4994,7 @@ class Load extends Tasks {
                     $this->calls->addCall('const', $nsname->fullnspath, $nsname);
                 }
             }
-            
+
             return $this->processBracket();
         }
 

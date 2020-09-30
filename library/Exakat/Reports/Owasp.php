@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Config;
 
 class Owasp extends Ambassador {
     const FILE_FILENAME  = 'owasp';

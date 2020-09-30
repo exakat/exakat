@@ -37,8 +37,8 @@ class IdenticalMethods extends Analyzer {
              ->isNot('visibility', 'private')
              ->isNot('abstract', true)
              ->hasNoInterface()
-             ->savePropertyAs('fullcode', 'signature') 
-             ->raw(<<<GREMLIN
+             ->savePropertyAs('fullcode', 'signature')
+             ->raw(<<<'GREMLIN'
 where(
     __.sideEffect{ original = []; }.out('BLOCK').out('EXPRESSION').order().by("rank").sideEffect{ original.add(it.get().value('fullcode'));}.fold() 
 )
@@ -47,7 +47,7 @@ GREMLIN
              ->inIs('OVERWRITE')
              ->atomIs(self::FUNCTIONS_METHOD)
              ->samePropertyAs('fullcode', 'signature')
-             ->raw(<<<GREMLIN
+             ->raw(<<<'GREMLIN'
 where(
     __.sideEffect{ copy = []; }.out('BLOCK').out('EXPRESSION').order().by("rank").sideEffect{ copy.add(it.get().value('fullcode'));}.fold() 
 )

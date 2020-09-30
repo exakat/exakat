@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MismatchParameterAndType extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $names = array('int'     => array('\\int'),
                        'integer' => array('\\int'),
                        'bigint'  => array('\\int'),
@@ -52,7 +52,7 @@ class MismatchParameterAndType extends Analyzer {
         $this->atomIs('Parameter')
              ->outIs('NAME')
              // Get name, remove $, lowercase
-             ->raw('sideEffect{ name = it.get().value("fullcode").replace("\$", "").toLowerCase();}') 
+             ->raw('sideEffect{ name = it.get().value("fullcode").replace("\$", "").toLowerCase();}')
              ->raw('filter{ name in ***; }', array_keys($names))
              ->back('first')
              ->outIs('TYPEHINT')

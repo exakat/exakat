@@ -133,7 +133,7 @@ abstract class Tasks {
         }
     }
 
-    abstract public function run() : void;
+    abstract public function run(): void;
 
     protected function cleanLogForProject(): void {
         $logs = glob("{$this->config->log_dir}/*");

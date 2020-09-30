@@ -114,7 +114,7 @@ class StubsJson extends Reports {
         foreach($res->toArray() as $cit) {
             $extendsId = ((int) $cit['extends'] > 0) ? $citsFqn[$cit['extends']] ?? '\Unkown' : $cit['extends'];
 
-            $section = $cit['type'] === 'class' ? 'classes' : $cit['type'].'s';
+            $section = $cit['type'] === 'class' ? 'classes' : $cit['type'] . 's';
 
             $details = array('abstract'   => $cit['abstract'] === 1,
                              'final'      => $cit['final'] === 1,

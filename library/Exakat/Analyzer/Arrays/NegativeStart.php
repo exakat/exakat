@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,7 +30,7 @@ class NegativeStart extends Analyzer {
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         // $a = [-2 => 2]; $a[] = 2;
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')

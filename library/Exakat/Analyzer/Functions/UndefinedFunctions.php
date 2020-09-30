@@ -37,7 +37,7 @@ class UndefinedFunctions extends Analyzer {
         $this->atomIs('Functioncall')
              ->has('fullnspath')
              ->analyzerIsNot(array('Functions/IsExtFunction',
-                                   'Modules/DefinedFunctions', 
+                                   'Modules/DefinedFunctions',
                                    )
               )
              ->isNot('isPhp', true)

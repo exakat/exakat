@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -29,12 +29,12 @@ class PhpExtStubPropertyMethod extends Analyzer {
     protected $phpVersion = '7.4-';
     */
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Complete/CreateDefaultValues',
                     );
     }
-    
-    public function analyze() : void {
+
+    public function analyze(): void {
         $rulesets = exakat('rulesets');
         $exts = $rulesets->listAllAnalyzer('Extensions');
 
@@ -69,7 +69,7 @@ class PhpExtStubPropertyMethod extends Analyzer {
              ->fullcodeIs(array_keys($properties))
              ->savePropertyAs('fullcode', 'property')
              ->back('first')
-             
+
              ->outIs('OBJECT')
              ->atomIs('Variableobject')
              ->inIs('DEFINITION')
@@ -88,7 +88,7 @@ class PhpExtStubPropertyMethod extends Analyzer {
              ->fullcodeIs(array_keys($properties))
              ->savePropertyAs('fullcode', 'property')
              ->back('first')
-             
+
              ->outIs('OBJECT')
              ->atomIs('Variableobject')
              ->filter(
@@ -112,7 +112,7 @@ class PhpExtStubPropertyMethod extends Analyzer {
              ->savePropertyAs('fullcode', 'method')
              ->raw('sideEffect{ method = method.toLowerCase(); }')
              ->back('first')
-             
+
              ->outIs('OBJECT')
              ->atomIs('Variableobject')
              ->inIs('DEFINITION')
@@ -133,7 +133,7 @@ class PhpExtStubPropertyMethod extends Analyzer {
              ->savePropertyAs('fullcode', 'method')
              ->raw('sideEffect{ method = method.toLowerCase(); }')
              ->back('first')
-             
+
              ->outIs('OBJECT')
              ->atomIs('Variableobject')
              ->filter(

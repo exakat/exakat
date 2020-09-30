@@ -138,7 +138,7 @@ class Intval extends Plugin {
                 $atom->intval = ((int) $extras['LEFT']->intval) ** (int) $extras['RIGHT']->intval;
                 if (is_nan($atom->intval) || is_infinite($atom->intval)) {
                     $atom->intval = 0;
-                } 
+                }
                 break;
 
             case 'Arrayliteral' :

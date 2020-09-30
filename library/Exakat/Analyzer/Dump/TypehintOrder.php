@@ -38,7 +38,7 @@ SQL;
 
     public function analyze(): void {
         $excludedTypes = array('Void', 'Null', 'Scalartypehint');
-        
+
         // function foo(A $a) : B {} ( A > B)
         $this ->atomIs(self::FUNCTIONS_ALL, self::WITHOUT_CONSTANTS)
               ->outIs('RETURNTYPE')
@@ -98,7 +98,7 @@ SQL;
               ->outIs('TYPEHINT')
               ->atomIsNot($excludedTypes, self::WITHOUT_CONSTANTS)
               ->as('argument')
-              
+
               ->back('first')
               ->inIs('MAGICMETHOD')
               ->atomIs('Class')

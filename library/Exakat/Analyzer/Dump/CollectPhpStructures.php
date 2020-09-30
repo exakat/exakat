@@ -35,7 +35,7 @@ CREATE TABLE phpStructures (id INTEGER PRIMARY KEY AUTOINCREMENT,
 )
 SQL;
 
-    public function dependsOn() : array {
+    public function dependsOn(): array {
         return array('Functions/IsExtFunction',
                      'Constants/IsExtConstant',
                      'Interfaces/IsExtInterface',
@@ -44,7 +44,7 @@ SQL;
                     );
     }
 
-    public function analyze() : void {
+    public function analyze(): void {
         $this->collectPhpStructures2('Functioncall',                           'Functions/IsExtFunction',   'function');
         $this->collectPhpStructures2(array('Identifier', 'Nsname'),            'Constants/IsExtConstant',   'constant');
         $this->collectPhpStructures2(array('Identifier', 'Nsname'),            'Interfaces/IsExtInterface', 'interface');
@@ -55,7 +55,7 @@ SQL;
     private function collectPhpStructures2($label, string $analyzer, string $type): void {
         $this->atomIs($label)
              ->analyzerIs($analyzer)
-             ->raw('groupCount("m").by("fullnspath").cap("m").map{ x = []; for(key in it.get().keySet()) { x.add(["type":"'.$type.'", "name":key, "count":it.get().getAt(key)]);}; x }[0]');
+             ->raw('groupCount("m").by("fullnspath").cap("m").map{ x = []; for(key in it.get().keySet()) { x.add(["type":"' . $type . '", "name":key, "count":it.get().getAt(key)]);}; x }[0]');
         $this->prepareQuery();
     }
 }

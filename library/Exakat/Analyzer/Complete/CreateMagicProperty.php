@@ -227,7 +227,7 @@ class CreateMagicProperty extends Complete {
              ->outIs('NAME')
              ->codeIs('__invoke', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first')
-             
+
              ->inIs('MAGICMETHOD')
              ->outIs('DEFINITION')
              ->inIs('NEW')

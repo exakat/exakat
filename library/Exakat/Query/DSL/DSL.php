@@ -312,7 +312,7 @@ abstract class DSL {
         } elseif (is_array($property)) {
             $properties = $property;
             foreach($properties as $property) {
-                assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified', 'isPhp', 'isExt', 'isStub',)), "Wrong format for property name : '$property'");
+                assert( ($property === mb_strtolower($property)) || in_array($property, array('noDelimiter', 'isRead', 'isModified', 'isPhp', 'isExt', 'isStub', )), "Wrong format for property name : '$property'");
                 assert($this->isProperty($property), "No such property in Atom : '$property'");
             }
         } else {

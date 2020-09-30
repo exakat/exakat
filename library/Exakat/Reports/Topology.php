@@ -88,7 +88,7 @@ class Topology extends Reports {
 
         $names2 = array();
         $color = 0;
-        $atoms = array_map(function ($id, string $name) use ($dot, &$names2, &$color) : void {
+        $atoms = array_map(function ($id, string $name) use ($dot, &$names2, &$color): void {
             $d = explode('\\', $name);
             $name2 = array_pop($d);
             $color = 1 + ($color++) % 11;

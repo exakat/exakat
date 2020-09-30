@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 class NullableWithConstant extends Analyzer {
 //    protected $phpVersion = '8.0-';
 
-    public function analyze() : void {
-        // const A = null; function foo(int $b = null ) {} 
+    public function analyze(): void {
+        // const A = null; function foo(int $b = null ) {}
         $this->atomIs(self::FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->not(

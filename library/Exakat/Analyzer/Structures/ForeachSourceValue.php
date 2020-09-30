@@ -30,7 +30,7 @@ class ForeachSourceValue extends Analyzer {
         // foreach($a as $b => $a)
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->outIsIE(array('VARIABLE', 'OBJECT','CLASS'))
+             ->outIsIE(array('VARIABLE', 'OBJECT', 'CLASS'))
              ->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
              ->savePropertyAs('code', 'name')
              ->back('first')

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -42,7 +42,7 @@ CREATE TABLE classesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
 
-    public function analyze() : void {
+    public function analyze(): void {
 
         // Finding extends and implements
         $this->atomIs(array('Class', 'Interface'), self::WITHOUT_CONSTANTS)

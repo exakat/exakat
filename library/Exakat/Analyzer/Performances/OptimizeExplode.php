@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,9 +25,9 @@ namespace Exakat\Analyzer\Performances;
 use Exakat\Analyzer\Analyzer;
 
 class OptimizeExplode extends Analyzer {
-    public function analyze() : void {
+    public function analyze(): void {
         $functions = array('\explode', '\split', 'mb_split', '\preg_split');
-        
+
         //list($a, $b) = explode('a', $b);
         $this->atomIs('List')
              ->inIs('LEFT')

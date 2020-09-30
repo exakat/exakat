@@ -34,7 +34,7 @@ class Sequences {
     private $ranksPile           = array();
     private $elementsPile        = array();
 
-    public function start(Atom $sequence) : void {
+    public function start(Atom $sequence): void {
         ++$this->level;
 
         $this->sequences[$this->level]    = $sequence;

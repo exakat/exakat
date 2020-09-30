@@ -50,7 +50,7 @@ class Diplomat extends Ambassador {
     }
 
     public function dependsOnAnalysis(): array {
-        return array('CompatibilityPHP74','CompatibilityPHP80',
+        return array('CompatibilityPHP74', 'CompatibilityPHP80',
                      'Appinfo',
                      'Analyze',
                      );

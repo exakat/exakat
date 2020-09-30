@@ -34,12 +34,12 @@ class StubsIni extends Reports {
 
     public function _generate(array $analyzerList): string {
         $ini = array();
-        
+
         // constants
         $res = $this->dump->fetchTable('constants');
-        $ini[] = "# Constants";
+        $ini[] = '# Constants';
         if (empty($res->toArray())) {
-            $ini[] = "constants[] = ;";
+            $ini[] = 'constants[] = ;';
         } else {
             foreach($res->toArray() as $constant) {
                 $ini[] = "constants[] = '{$constant['constant']}';";
@@ -49,7 +49,7 @@ class StubsIni extends Reports {
 
         // functions
         $res = $this->dump->fetchTable('functions');
-        $ini[] = "# Functions";
+        $ini[] = '# Functions';
         foreach($res->toArray() as $function) {
             $ini[] = "functions[] = '{$function['function']}';";
         }
@@ -63,13 +63,13 @@ class StubsIni extends Reports {
                       'traits'     => array(),
                      );
         foreach($res->toArray() as $cit) {
-            $type = $cit['type'] === 'class' ? 'classes' : $cit['type'].'s';
+            $type = $cit['type'] === 'class' ? 'classes' : $cit['type'] . 's';
             $cits[$type][] = $cit['name'];
-            
-            $classes[$cit['id']] = '\\'.$cit['name'];
+
+            $classes[$cit['id']] = '\\' . $cit['name'];
         }
         foreach($cits as $type => $names) {
-            $ini[] = "# ".ucfirst($type);
+            $ini[] = '# ' . ucfirst($type);
             if (empty($names)) {
                 $ini[] = "{$type}[] = ;";
             } else {
@@ -79,11 +79,11 @@ class StubsIni extends Reports {
             }
             $ini[] = '';
         }
-        
+
         // static methods
         $res = $this->dump->fetchTable('methods');
-        $sm[] = "# Static Methods";
-        $m[] = "# Methods";
+        $sm[] = '# Static Methods';
+        $m[] = '# Methods';
         foreach($res->toArray() as $method) {
             if ($method['static'] == 1) {
                 $sm[] = "staticMethods[] = '{$classes[$method['citId']]}::{$method['method']}';";
@@ -92,19 +92,19 @@ class StubsIni extends Reports {
             }
         }
         if (count($sm) === 1) {
-            $sp[] = "staticMethods[] = ;";
+            $sp[] = 'staticMethods[] = ;';
         }
         if (count($m) === 1) {
-            $p[] = "methods[] = ;";
+            $p[] = 'methods[] = ;';
         }
-        $sm[] = "";
-        $m[] = "";
+        $sm[] = '';
+        $m[] = '';
         $ini = array_merge($ini, $m, $sm);
-        
+
         // static properties
         $res = $this->dump->fetchTable('properties');
-        $sp[] = "# Static Properties";
-        $p[] = "# Properties";
+        $sp[] = '# Static Properties';
+        $p[] = '# Properties';
         foreach($res->toArray() as $property) {
             if ($property['static'] == 1) {
                 $sp[] = "staticProperties[] = '{$classes[$property['citId']]}::{$property['property']}';";
@@ -113,20 +113,20 @@ class StubsIni extends Reports {
             }
         }
         if (count($sp) === 1) {
-            $sp[] = "staticProperties[] = ;";
+            $sp[] = 'staticProperties[] = ;';
         }
         if (count($p) === 1) {
-            $p[] = "properties[] = ;";
+            $p[] = 'properties[] = ;';
         }
-        $sp[] = "";
-        $p[] = "";
+        $sp[] = '';
+        $p[] = '';
         $ini = array_merge($ini, $p, $sp);
 
         // static properties
         $res = $this->dump->fetchTable('classconstants');
-        $ini[] = "# Static Constants";
+        $ini[] = '# Static Constants';
         if (empty($res->toArray())) {
-            $ini[] = "staticConstants[] = ;";
+            $ini[] = 'staticConstants[] = ;';
         } else {
             foreach($res->toArray() as $constant) {
                 $ini[] = "staticConstants[] = '{$classes[$constant['citId']]}::{$constant['constant']}';";

@@ -22,8 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Analyzer\Analyzer;
-
 class Grade extends Ambassador {
     const FILE_FILENAME  = 'grade';
     const FILE_EXTENSION = '';

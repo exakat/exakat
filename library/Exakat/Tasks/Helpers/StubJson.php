@@ -31,7 +31,7 @@ class StubJson {
         $this->file = basename($path);
     }
 
-    public function getFile() : string {
+    public function getFile(): string {
         return $this->file;
     }
 
@@ -40,7 +40,7 @@ class StubJson {
 
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->functions ?? array() as $name => $function) {
-                $return[] = mb_strtolower($namespace.$name);
+                $return[] = mb_strtolower($namespace . $name);
             }
         }
 
@@ -52,7 +52,7 @@ class StubJson {
 
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->classes ?? array() as $name => $classe) {
-                $return[] = mb_strtolower($namespace.$name);
+                $return[] = mb_strtolower($namespace . $name);
             }
         }
 
@@ -65,7 +65,7 @@ class StubJson {
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->constants ?? array() as $name => $constant) {
                 // constant name is untouched (case insensitive)
-                $return[] = mb_strtolower($namespace).$name;
+                $return[] = mb_strtolower($namespace) . $name;
             }
         }
 
@@ -77,7 +77,7 @@ class StubJson {
 
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->interfaces ?? array() as $name => $interface) {
-                $return[] = mb_strtolower($namespace.$name);
+                $return[] = mb_strtolower($namespace . $name);
             }
         }
 
@@ -89,7 +89,7 @@ class StubJson {
 
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->traits ?? array() as $name => $trait) {
-                $return[] = mb_strtolower($namespace.$name);
+                $return[] = mb_strtolower($namespace . $name);
             }
         }
 
@@ -101,7 +101,7 @@ class StubJson {
 
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->classes ?? array() as $name => $classe) {
-                $return[mb_strtolower($namespace.$name)] = array_map('mb_strtolower', array_keys( (array) ($classe->methods ?? array()) ));
+                $return[mb_strtolower($namespace . $name)] = array_map('mb_strtolower', array_keys( (array) ($classe->methods ?? array()) ));
             }
         }
 
@@ -114,7 +114,7 @@ class StubJson {
 
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->classes ?? array() as $name => $classe) {
-                $return[mb_strtolower($namespace.$name)] = array_keys((array) $classe->properties ?? array());
+                $return[mb_strtolower($namespace . $name)] = array_keys((array) $classe->properties ?? array());
             }
         }
 
@@ -126,7 +126,7 @@ class StubJson {
 
         foreach((array) $this->json->versions as $namespace => $space) {
             foreach($space->classes ?? array() as $name => $classe) {
-                $return[mb_strtolower($namespace.$name)] = array_keys((array) ($classe->constants ?? array()));
+                $return[mb_strtolower($namespace . $name)] = array_keys((array) ($classe->constants ?? array()));
             }
         }
 

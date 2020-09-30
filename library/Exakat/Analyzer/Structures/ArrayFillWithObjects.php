@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -25,8 +25,8 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ArrayFillWithObjects extends Analyzer {
-    public function analyze() : void {
-        $fillingFunctions = array('\\array_fill', 
+    public function analyze(): void {
+        $fillingFunctions = array('\\array_fill',
                                   '\\array_pad');
 
         // array_fill(new X)

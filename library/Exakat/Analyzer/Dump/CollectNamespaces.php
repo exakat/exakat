@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -30,20 +30,24 @@ class CollectNamespaces extends AnalyzerTable {
     protected $analyzerTable = 'namespaces';
 
     // Store inclusionss of files within each other
-    protected $analyzerSQLTable = <<<'SQL'
+    protected $analyzerSQLTable = array(/*<<<'SQL'
 CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                            namespace STRING
                         )
-SQL;
+SQL,
+"INSERT INTO namespaces VALUES (1, '\\')"*/
+);
     //INSERT INTO namespaces VALUES (1, '\\')
 
     public function analyze(): void {
+        /*
         $this->atomIs('Namespace', Analyzer::WITHOUT_CONSTANTS)
              ->outIs('NAME')
              ->initVariable('name', 'it.get().value("fullcode") == " " ? "\\\\" : "\\\\" + it.get().value("fullcode") + "\\\\"')
              ->getVariable('name')
              ->unique();
         $this->prepareQuery();
+        */
     }
 }
 

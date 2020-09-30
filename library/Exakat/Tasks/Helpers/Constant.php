@@ -29,7 +29,7 @@ class Constant extends Plugin {
     public $type = 'boolean';
 
     private $deterministFunctions = array();
-    
+
     private $skipAtoms = array('Trait'         => 1,
                               'Class'          => 1,
                               'Classanonymous' => 1,

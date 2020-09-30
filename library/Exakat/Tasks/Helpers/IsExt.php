@@ -91,7 +91,7 @@ class IsExt extends Plugin {
                 }
             }
         }
-        
+
         // Not doint $o->p and $o->m() ATM : needs $o's type.
 
         $this->extConstants = array_merge(...$constants);

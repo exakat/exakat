@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeStringable extends Analyzer {
     protected $phpVersion = '8.0+';
 
-    public function analyze() : void {
+    public function analyze(): void {
         // class x /* missing stringable */ { function __toString() {} }
         $this->atomIs(self::CLASSES_ALL)
              ->not(

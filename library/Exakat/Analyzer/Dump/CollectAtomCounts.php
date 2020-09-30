@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * Copyright 2012-2019 Damien Seguy – Exakat SAS <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -37,9 +37,9 @@ CREATE TABLE atomsCounts (id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
 
 
-    public function analyze() : void {
+    public function analyze(): void {
 
-        $query = <<<GREMLIN
+        $query = <<<'GREMLIN'
 g.V().groupCount("b").by(label).cap("b").select("b").map{ x = []; for(key in it.get().keySet()) { x.add(["atom":key, "count":it.get().getAt(key)]);}; x }[0];
 GREMLIN;
         $this->prepareDirectQuery($query);

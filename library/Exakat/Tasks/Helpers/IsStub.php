@@ -38,16 +38,16 @@ class IsStub extends Plugin {
     public function __construct() {
         parent::__construct();
 
-        // collecter les données depuis stubs/*.json 
-        // collecter les données via stubs/*.php ? 
-        
+        // collecter les données depuis stubs/*.json
+        // collecter les données via stubs/*.php ?
+
         foreach(exakat('stubs') as $stub) {
             $this->stubFunctions        = $stub->getFunctions();
             $this->stubConstants        = $stub->getConstants();
             $this->stubClasses          = $stub->getClasses();
             $this->stubInterfaces       = $stub->getInterfaces();
             $this->stubTraits           = $stub->getTraits();
-            
+
             $this->stubClassMethods     = $stub->getClassMethods();
             $this->stubClassProperties  = $stub->getClassProperties();
             $this->stubClassConstants   = $stub->getClassConstants();

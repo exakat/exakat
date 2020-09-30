@@ -29,21 +29,21 @@ class Dot {
     private $nodes   = array();
     private $options = array();
 
-    public function addNode(string $label, array $options = array()) : int {
+    public function addNode(string $label, array $options = array()): int {
         $node = array_merge(compact('label'), $options);
         $this->nodes[] = $node;
 
         return count($this->nodes) - 1;
     }
 
-    public function addLink(int $o, int $d) : void {
+    public function addLink(int $o, int $d): void {
         if (!isset($this->links[$o])) {
             $this->links[$o] = array();
         }
         $this->links[$o][$d] = $d;
     }
 
-    public function setOptions(string $what, string $name, string $value) : void {
+    public function setOptions(string $what, string $name, string $value): void {
         $this->options[$what][$name] = $value;
     }
 
