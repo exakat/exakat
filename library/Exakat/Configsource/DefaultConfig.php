@@ -159,7 +159,7 @@ class DefaultConfig extends Config {
 
                                 'inside_code'          => Configuration::WITH_PROJECTS,
 
-                                'php_extensions'       => 'all',
+                                'php_extensions'       => array('all'),
                               );
 
     public function __construct() {
