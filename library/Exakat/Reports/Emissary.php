@@ -2053,6 +2053,10 @@ HTML;
         $this->putBasedPage($section->file, $html);
     }
 
+    protected function generateCompatibility80(Section $section): void {
+        $this->generateCompatibility($section, '80');
+    }
+
     protected function generateCompatibility74(Section $section): void {
         $this->generateCompatibility($section, '74');
     }

@@ -23,13 +23,13 @@
 namespace Exakat\Reports;
 
 
-class Migration74 extends Ambassador {
-    const FILE_FILENAME  = 'migration74';
+class Migration80 extends Ambassador {
+    const FILE_FILENAME  = 'migration80';
     const FILE_EXTENSION = '';
-    const CONFIG_YAML    = 'Migration74';
+    const CONFIG_YAML    = 'Migration80';
 
     public function dependsOnAnalysis(): array {
-        return array('CompatibilityPHP74',
+        return array('CompatibilityPHP80',
                      );
     }
 }

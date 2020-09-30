@@ -26,75 +26,18 @@ compatibility:
             file: compatibility_version
             method: generateCompatibilityEstimate
             icon: certificate
+        compatibility_php80:
+            source: compatibility
+            title: Compatibility PHP 8.0
+            file: compatibility_php80
+            method: generateCompatibility80
+            icon: certificate
         compatibility_php74:
             source: compatibility
             title: Compatibility PHP 7.4
             file: compatibility_php74
             method: generateCompatibility74
             icon: certificate
-        compatibility_php73:
-            source: compatibility
-            title: Compatibility PHP 7.3
-            file: compatibility_php73
-            method: generateCompatibility73
-            icon: certificate
-        compatibility_php72:
-            source: compatibility
-            title: Compatibility PHP 7.2
-            file: compatibility_php72
-            method: generateCompatibility72
-            icon: certificate
-        compatibility_php71:
-            source: compatibility
-            title: Compatibility PHP 7.1
-            file: compatibility_php71
-            method: generateCompatibility71
-            icon: certificate
-        compatibility_php70:
-            source: compatibility
-            title: Compatibility PHP 7.0
-            file: compatibility_php70
-            method: generateCompatibility70
-            icon: certificate
-        compatibility_php56:
-            source: compatibility
-            title: Compatibility PHP 5.6
-            file: compatibility_php56
-            method: generateCompatibility56
-            icon: certificate
-        compatibility_php55:
-            source: compatibility
-            title: Compatibility PHP 5.5
-            file: compatibility_php55
-            method: generateCompatibility55
-            icon: certificate
-        compatibility_php54:
-            source: compatibility
-            title: Compatibility PHP 5.4
-            file: compatibility_php54
-            method: generateCompatibility54
-            icon: certificate
-        compatibility_php53:
-            source: compatibility
-            title: Compatibility PHP 5.3
-            file: compatibility_php53
-            method: generateCompatibility53
-            icon: certificate
-favorites:
-    title: Favorites
-    icon: certificate
-    subsections: 
-        compilations:
-            title: Favorite Overview
-            file: favorites_dashboard
-            method: generateFavorites
-            icon: certificate
-        favorite_issues:
-            title: Favorite issues
-            source: empty
-            file: favorites_issues
-            method: generateIssuesEngine
-            ruleset: Preferences
 audit:
     title: Audit logs
     icon: sliders
