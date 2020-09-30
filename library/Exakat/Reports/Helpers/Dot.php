@@ -36,7 +36,7 @@ class Dot {
         return count($this->nodes) - 1;
     }
 
-    public function addLink(string $o, string $d) : void {
+    public function addLink(int $o, int $d) : void {
         if (!isset($this->links[$o])) {
             $this->links[$o] = array();
         }
