@@ -3272,7 +3272,11 @@ class Load extends Tasks {
                 }
             } else {
                 // global $a[2] = 2 ?
-                $element = $this->processNext();
+               $element = $this->processExpression(array($this->phptokens::T_SEMICOLON,
+                                                         $this->phptokens::T_CLOSE_TAG,
+                                                         $this->phptokens::T_COMMA,
+                                                         $this->phptokens::T_DOC_COMMENT,
+                                                         ));
                 $this->makePhpdoc($element);
                 $this->popExpression();
                 $default = $this->addAtomVoid();

@@ -169,5 +169,7 @@ class Php80 extends Php {
     const T_ELLIPSIS                      = 400;
     const T_BAD_CHARACTER                 = 401;
     const T_DOUBLE_COLON                  = 398;
+
+    const T_CHARACTER                     = 1000;
 }
 ?>

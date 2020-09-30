@@ -29,6 +29,7 @@ class GlobalWithoutSimpleVariable extends Analyzer {
     protected $phpVersion = '7.0-';
 
     public function analyze(): void {
+        // global $$x, ${$y}
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->tokenIs(array('T_DOLLAR', 'T_OBJECT_OPERATOR'))

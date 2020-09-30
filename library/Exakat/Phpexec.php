@@ -66,7 +66,7 @@ class Phpexec {
     private $error            = array();
     private $version          = '';
 
-    private const CLI_OR_DOCKER_REGEX = '#[a-z0-9]+/[a-z0-9]+:[a-z0-9]+#i';
+    private const CLI_OR_DOCKER_REGEX = '#[a-z0-9]+:[a-z0-9]+#i';
 
     const VERSIONS         = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', );
     const VERSIONS_COMPACT = array('52',  '53',  '54',  '55',  '56',  '70',  '71',  '72',  '73',  '74',  '80', );
@@ -178,7 +178,10 @@ class Phpexec {
     public function getTokenFromFile(string $file): array {
         if ($this->isCurrentVersion === true) {
             $tokens = @token_get_all(file_get_contents($file));
-        } elseif (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
+            return $tokens;
+        } 
+        
+        if (preg_match(self::CLI_OR_DOCKER_REGEX, $this->phpexec)) {
             $filename = basename($file);
             $path     = realpath(dirname($file));
 
@@ -194,6 +197,8 @@ class Phpexec {
             if (empty($tokens)) {
                 return array();
             }
+            
+            return $tokens;
         }
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
