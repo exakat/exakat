@@ -44,8 +44,6 @@ class Json extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->rulesets->getInstance($row['analyzer'], null, $this->config);
-
                 $titleCache[$row['analyzer']]    = $this->docs->getDocs($row['analyzer'], 'name');
                 $severityCache[$row['analyzer']] = $this->docs->getDocs($row['analyzer'], 'severity');
             }
