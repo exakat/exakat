@@ -762,7 +762,7 @@ HTML;
     }
 
     protected function generateClassTypehints(Section $section): void {
-        // List of php functions used
+        // List of typehints used
         $res = $this->dump->fetchHashResults('Typehinting stats');
         $res->order(function (array $a, array $b): int { return $b['value'] <=> $a['value']; });
 
@@ -778,13 +778,6 @@ HTML;
                         'functionTotal',
                         'scalartype',
                         'functionWithTypehint2',
-                        '\array',
-                        '\void',
-                        '\iterable',
-                        '\string',
-                        '\int',
-                        '\bool',
-                        '\callable',
                         'closureTotal',
                         'argNullable',
                         'allWithReturnTypehint',
@@ -799,6 +792,10 @@ HTML;
                         'arrowfunctionTotal',
                         'arrowfunctionWithTypehint',
                         'arrowfunctionWithReturnTypehint',
+                        'totalProperties',
+                        'typedProperties',
+                        'multipleTypehints',
+                        'functionWithTypehint',
         );
 
         foreach ($res->toArray() as $value) {
