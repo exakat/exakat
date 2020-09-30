@@ -160,6 +160,8 @@ class DefaultConfig extends Config {
                                 'inside_code'          => Configuration::WITH_PROJECTS,
 
                                 'parallel_processing'  => false,
+
+                                'php_extensions'       => 'all',
                               );
 
     public function __construct() {

@@ -50,7 +50,7 @@ class ExakatConfig extends Config {
                               'nogremlin'     => 'None',
                               );
 
-    public function __construct($projects_root) {
+    public function __construct(string $projects_root) {
         $this->projects_root = $projects_root;
     }
 

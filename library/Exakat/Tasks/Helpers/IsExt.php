@@ -45,8 +45,7 @@ class IsExt extends Plugin {
         $classes   = array(array());
         $functions = array(array());
 
-        foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext);
+        foreach($config->php_extensions ?? array() as $inifile) {
             if (!file_exists($config->dir_root . '/data/' . $inifile . '.ini')) {
                 continue;
             }

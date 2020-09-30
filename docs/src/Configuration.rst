@@ -189,6 +189,10 @@ Here are the currently available options in Exakat's configuration file : config
 |                      | Comment it out if you don't want this version tested. It is not recommended to use this   |
 |                      | version for the analyze                                                                   |
 +----------------------+-------------------------------------------------------------------------------------------+
+| php_extensions       | List of PHP extensions to use when spotting functions, methods, constants, classes, etc.  |
+|                      | Default to 'all', which are all in the source code                                        |
+|                      | Can be set to 'none' to skip the detection                                                |
++----------------------+-------------------------------------------------------------------------------------------+
 
 Note : php** configuration may be either a valid PHP binary path, or a valid Docker image. The path on the system may be `/usr/bin/php`, `/usr/sbin/php80`, or `/usr/local/Cellar/php71/7.1.30/bin/php`. The Docker configuration must have the form `abc/def:tag`. The image's name may be any value, as long as Exakat manage to run it, and get the valid PHP signature, with `php -v`. When using Docker, the docker server must be running. 
 

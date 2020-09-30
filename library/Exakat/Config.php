@@ -203,6 +203,17 @@ class Config extends Configsource {
         $this->ext = new AutoloadExt($this->ext_root);
         $this->ext->registerAutoload();
 
+        $exts = glob($this->dir_root.'/library/Exakat/Analyzer/Extensions/Ext*');
+        $exts = array_map(function (string $path) : string { return strtolower(substr(basename($path, '.php'), 3));}, $exts);
+
+        if (in_array('all', $this->options['php_extensions'])) {
+            $this->options['php_extensions'] = $exts;
+        } elseif (in_array('none', $this->options['php_extensions'])) {
+            $this->options['php_extensions'] = array();
+        } else {
+            $this->options['php_extensions'] = array_filter($this->options['php_extensions'], function (string $name) use ($exts) : bool { return in_array($name, $exts);});
+        }
+
         $this->finishConfigs();
         
         return 'main_config';
