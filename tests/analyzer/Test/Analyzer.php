@@ -71,7 +71,6 @@ abstract class Analyzer extends TestCase {
 
         $rulesets = new Rulesets("$EXAKAT_PATH/data/analyzers.sqlite", 
                                new AutoloadExt(''),
-                               new AutoloadDev('')
                             );
 
         $analyzerobject = $rulesets->getInstance($test_config);

@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array(16,
-                      16,
+$expected     = array('a' => 16,
+                      'b' => 16,
                      );
 
-$expected_not = array(18,
+$expected_not = array('c' => 18,
                      );
 
 ?>
