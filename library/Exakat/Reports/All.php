@@ -35,7 +35,7 @@ class All extends Reports {
                       );
         $reports = array_diff(self::$FORMATS, $omit);
 
-        foreach($reports as $id => $reportName) {
+        foreach($reports as $reportName) {
             display("Reporting with $reportName\n----------------------------------------\n");
             $reportClass = self::getReportClass($reportName);
 

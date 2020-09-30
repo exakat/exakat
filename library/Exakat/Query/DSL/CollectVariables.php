@@ -37,7 +37,7 @@ class CollectVariables extends DSL {
                 break;
 
             default:
-                $variables = 'variables';
+                $variable = 'variables';
                 $type = 'fullcode';
         }
 
