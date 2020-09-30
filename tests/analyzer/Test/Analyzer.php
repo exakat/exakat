@@ -210,8 +210,8 @@ abstract class Analyzer extends TestCase {
         $list  = array_map(function(array $x) : array  { unset($x['id']); return $x;}, $list);
         $list2 = array_map(function(array $x) : string { return crc32(json_encode($x));}, $list);
 
-        $expected2     = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expected);
-        $expectedNot2  = array_map(function(array $x) : string { return crc32(json_encode($x));}, $expectedNot);
+        $expected2     = array_map(function($x) : string { return crc32(json_encode($x));}, $expected);
+        $expectedNot2  = array_map(function($x) : string { return crc32(json_encode($x));}, $expectedNot);
 
         $display = array();
         $missed = array_diff($expected2, $list2);
