@@ -123,7 +123,7 @@ class Intval extends Plugin {
                     if ((int) $extras['RIGHT']->intval === 0) {
                         $atom->intval = 0;
                     } else {
-                        $atom->intval = intdiv((int) $extras['LEFT']->intval / (int) $extras['RIGHT']->intval);
+                        $atom->intval = intdiv((int) $extras['LEFT']->intval , (int) $extras['RIGHT']->intval);
                     }
                 } elseif ($atom->code === '%') {
                     if ((int) $extras['RIGHT']->intval === 0) {
