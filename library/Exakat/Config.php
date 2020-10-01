@@ -22,7 +22,7 @@
 
 namespace Exakat;
 
-use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, RulesetConfig, Config as Configsource };
+use Exakat\Configsource\{CommandLine, DefaultConfig, DotExakatConfig, DotExakatYamlConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RulesetConfig, Config as Configsource };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Autoload\AutoloadDev;
 use Exakat\Autoload\AutoloadExt;
@@ -56,7 +56,6 @@ class Config extends Configsource {
     private $screen_cols           = 100;
 
     private $configFiles = array();
-    private $remotes     = array();
     private $rulesets    = array();
 
     public function __construct(array $argv) {
@@ -169,12 +168,6 @@ class Config extends Configsource {
             $this->options['project_rulesets'] = array();
         }
 
-        $remote = new RemoteConfig($this->projects_root);
-        if ($file = $remote->loadConfig($this->commandLineConfig->get('project'))) {
-            $this->configFiles[] = $file;
-            $this->remotes = $remote->toArray();
-        }
-
         $rulesets = new RulesetConfig($this->dir_root);
         if ($file = $rulesets->loadConfig($this->commandLineConfig->get('project'))) {
             $this->configFiles[] = $file;
@@ -249,8 +242,6 @@ class Config extends Configsource {
     public function __get($name) {
         if ($name === 'configFiles') {
             $return = $this->configFiles;
-        } elseif ($name === 'remotes') {
-            $return = $this->remotes;
         } elseif ($name === 'rulesets') {
             $return = $this->rulesets;
         } elseif ($name === 'themas') {
