@@ -161,7 +161,6 @@ class Rulesets implements RulesetsInterface {
             }
             return self::$instanciated[$analyzer];
         } else {
-            display("No such class as '$name'");
             return null;
         }
     }
