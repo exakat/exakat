@@ -82,8 +82,8 @@ Rulesets details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rulesets details
-.. comment: Generation date : Thu, 17 Sep 2020 06:00:10 +0000
-.. comment: Generation hash : 82ae56ee1009eb701d21c60e0d6686f955d32962
+.. comment: Generation date : Wed, 30 Sep 2020 16:04:51 +0000
+.. comment: Generation hash : ae11500fe10dccd9eab6e8bdb07e3ea5a42f251f
 
 
 .. _analyze:
@@ -93,7 +93,7 @@ Analyze
 
 This ruleset centralizes a large number of classic trap and pitfalls when writing PHP.
 
-Total : 406 analysis
+Total : 412 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -113,12 +113,14 @@ Total : 406 analysis
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Ambiguous Static <ambiguous-static>`
 * :ref:`Ambiguous Visibilities <ambiguous-visibilities>`
+* :ref:`Array_Fill() With Objects <array\_fill()-with-objects>`
 * :ref:`Array_merge Needs Array Of Arrays <array\_merge-needs-array-of-arrays>`
 * :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Assign And Compare <assign-and-compare>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
+* :ref:`Assumptions <assumptions>`
 * :ref:`Avoid Optional Properties <avoid-optional-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid Substr() One <avoid-substr()-one>`
@@ -161,6 +163,7 @@ Total : 406 analysis
 * :ref:`Could Be Abstract Class <could-be-abstract-class>`
 * :ref:`Could Be Else <could-be-else>`
 * :ref:`Could Be Static <could-be-static>`
+* :ref:`Could Be Stringable <could-be-stringable>`
 * :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
@@ -257,6 +260,7 @@ Total : 406 analysis
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Methods Without Return <methods-without-return>`
+* :ref:`Mismatch Parameter And Type <mismatch-parameter-and-type>`
 * :ref:`Mismatch Parameter Name <mismatch-parameter-name>`
 * :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
@@ -271,6 +275,7 @@ Total : 406 analysis
 * :ref:`Missing Returntype In Method <missing-returntype-in-method>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
+* :ref:`Modified Typed Parameter <modified-typed-parameter>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
 * :ref:`Multiple Alias Definitions Per File <multiple-alias-definitions-per-file>`
 * :ref:`Multiple Class Declarations <multiple-class-declarations>`
@@ -428,6 +433,7 @@ Total : 406 analysis
 * :ref:`Unresolved Instanceof <unresolved-instanceof>`
 * :ref:`Unresolved Use <unresolved-use>`
 * :ref:`Unset In Foreach <unset-in-foreach>`
+* :ref:`Unsupported Types With Operators <unsupported-types-with-operators>`
 * :ref:`Unthrown Exception <unthrown-exception>`
 * :ref:`Unused Arguments <unused-arguments>`
 * :ref:`Unused Class Constant <unused-class-constant>`
@@ -696,7 +702,7 @@ ClassReview
 
 This ruleset focuses on classes construction issues, and their related structures : traits, interfaces, methods, properties, constants.
 
-Total : 49 analysis
+Total : 51 analysis
 
 * :ref:`Avoid Self In Interface <avoid-self-in-interface>`
 * :ref:`Avoid option arrays in constructors <avoid-option-arrays-in-constructors>`
@@ -731,6 +737,7 @@ Total : 49 analysis
 * :ref:`Method Could Be Static <method-could-be-static>`
 * :ref:`Mismatch Properties Typehints <mismatch-properties-typehints>`
 * :ref:`Missing Abstract Method <missing-abstract-method>`
+* :ref:`Modified Typed Parameter <modified-typed-parameter>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`Non Nullable Getters <non-nullable-getters>`
 * :ref:`Nullable Without Check <nullable-without-check>`
@@ -744,6 +751,7 @@ Total : 49 analysis
 * :ref:`Unused Class Constant <unused-class-constant>`
 * :ref:`Unused Trait In Class <unused-trait-in-class>`
 * :ref:`Useless Interfaces <useless-interfaces>`
+* :ref:`Useless Typehint <useless-typehint>`
 * :ref:`Wrong Access Style to Property <wrong-access-style-to-property>`
 * :ref:`Wrong Returned Type <wrong-returned-type>`
 * :ref:`Wrong Typed Property Default <wrong-typed-property-default>`
@@ -1321,14 +1329,19 @@ CompatibilityPHP80
 
 This ruleset centralizes all analysis for the migration from PHP 7.4 to 8.0.
 
-Total : 6 analysis
+Total : 11 analysis
 
+* :ref:`$php_errormsg Usage <$php\_errormsg-usage>`
 * :ref:`Cast Unset Usage <cast-unset-usage>`
 * :ref:`Concat And Addition <concat-and-addition>`
 * :ref:`Mismatch Parameter Name <mismatch-parameter-name>`
+* :ref:`Negative Start Index In Array <negative-start-index-in-array>`
+* :ref:`Nullable With Constant <nullable-with-constant>`
 * :ref:`Old Style Constructor <old-style-constructor>`
 * :ref:`PHP 8.0 Removed Constants <php-8.0-removed-constants>`
+* :ref:`PHP 8.0 Removed Directives <php-8.0-removed-directives>`
 * :ref:`PHP 8.0 Removed Functions <php-8.0-removed-functions>`
+* :ref:`Unsupported Types With Operators <unsupported-types-with-operators>`
 
 .. _dead-code:
 
@@ -1373,7 +1386,7 @@ LintButWontExec
 
 This ruleset focuses on PHP code that lint (php -l), but that will not run. As such, this ruleset tries to go further than PHP, by connecting files, just like during execution.
 
-Total : 28 analysis
+Total : 29 analysis
 
 * :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Can't Throw Throwable <can't-throw-throwable>`
@@ -1381,6 +1394,7 @@ Total : 28 analysis
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Clone With Non-Object <clone-with-non-object>`
 * :ref:`Concrete Visibility <concrete-visibility>`
+* :ref:`Could Be Stringable <could-be-stringable>`
 * :ref:`Final Class Usage <final-class-usage>`
 * :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
@@ -1411,7 +1425,7 @@ Performances
 
 This ruleset focuses on performances issues : anything that slows the code's execution.
 
-Total : 45 analysis
+Total : 46 analysis
 
 * :ref:`@ Operator <@-operator>`
 * :ref:`Always Use Function With array_key_exists() <always-use-function-with-array\_key\_exists()>`
@@ -1440,6 +1454,7 @@ Total : 45 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`No mb_substr In Loop <no-mb\_substr-in-loop>`
+* :ref:`Optimize Explode() <optimize-explode()>`
 * :ref:`Pre-increment <pre-increment>`
 * :ref:`Processing Collector <processing-collector>`
 * :ref:`Regex On Arrays <regex-on-arrays>`
@@ -1533,11 +1548,12 @@ Semantics
 
 This ruleset focuses on human interpretation of the code. It reviews special values of literals, and named structures.
 
-Total : 12 analysis
+Total : 13 analysis
 
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Duplicate Literal <duplicate-literal>`
 * :ref:`Fn Argument Variable Confusion <fn-argument-variable-confusion>`
+* :ref:`Mismatch Parameter And Type <mismatch-parameter-and-type>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`Parameter Hiding <parameter-hiding>`
 * :ref:`Prefix And Suffixes With Typehint <prefix-and-suffixes-with-typehint>`
@@ -1555,7 +1571,7 @@ Suggestions
 
 This ruleset focuses on possibly better syntax than the one currently used. Those may be code modernization, alternatives, more efficient solutions, or simply left over from older versions. 
 
-Total : 91 analysis
+Total : 92 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Abstract Away <abstract-away>`
@@ -1572,6 +1588,7 @@ Total : 91 analysis
 * :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Compact <could-use-compact>`
+* :ref:`Could Use Promoted Properties <could-use-promoted-properties>`
 * :ref:`Could Use Try <could-use-try>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
@@ -1642,8 +1659,8 @@ Total : 91 analysis
 * :ref:`Use is_countable <use-is\_countable>`
 * :ref:`Use json_decode() Options <use-json\_decode()-options>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
-* :ref:`Useless Argument <useless-argument>`
 * :ref:`Useless Default Argument <useless-default-argument>`
+* :ref:`Useless Typehint <useless-typehint>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`array_key_exists() Speedup <array\_key\_exists()-speedup>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
@@ -1700,7 +1717,7 @@ Total : 23 analysis
 * :ref:`Bad Typehint Relay <bad-typehint-relay>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Could Be Callable <could-be-callable>`
-* :ref:`Could Be Integer <could-be-integer>`
+* :ref:`Could Be Float <could-be-float>`
 * :ref:`Could Be Integer <could-be-integer>`
 * :ref:`Could Be Iterable <could-be-iterable>`
 * :ref:`Could Be Null <could-be-null>`

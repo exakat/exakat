@@ -23,6 +23,8 @@ There are several reports that may be extracted from Exakat :
 * `Json`_
 * `Marmelab`_
 * `Meters`_
+* `Migration74`_
+* `Migration80`_
 * `None`_
 * `Owasp`_
 * `Perfile`_
@@ -1151,6 +1153,74 @@ Meters is a JSON report format.
 
 Meters depends on the following theme : None.
 
+Migration74
+___________
+
+The Migration74 is the report dedicated to migrating PHP code to version 7.4.
+
+The Migration74 report runs the backward incompatibilities tests for PHP 7.4, from a PHP 7.3 compatible code.
+
+
+::
+
+    Name,File,Line
+    0,/features/bootstrap/FeatureContext.php,61
+    10000,/features/bootstrap/FeatureContext.php,61
+    777,/features/bootstrap/FeatureContext.php,63
+    20,/features/bootstrap/FeatureContext.php,73
+    0,/features/bootstrap/FeatureContext.php,334
+    0,/features/bootstrap/FeatureContext.php,339
+    0,/features/bootstrap/FeatureContext.php,344
+    0,/features/bootstrap/FeatureContext.php,362
+    0,/features/bootstrap/FeatureContext.php,366
+    0,/features/bootstrap/FeatureContext.php,368
+    0,/features/bootstrap/FeatureContext.php,372
+    777,/features/bootstrap/FeatureContext.php,423
+    777,/features/bootstrap/FeatureContext.php,431
+    0,/src/Behat/Behat/Context/ContextClass/SimpleClassGenerator.php,68
+    1,/src/Behat/Behat/Context/ContextClass/SimpleClassGenerator.php,69
+    0,/src/Behat/Behat/Context/Environment/InitializedContextEnvironment.php,84
+    0,/src/Behat/Behat/Context/Environment/InitializedContextEnvironment.php,150
+    
+
+Migration74 is a HTML report format.
+
+Migration74 depends on the following 2 themes : CompatibilityPHP73, Suggestions.
+
+Migration80
+___________
+
+The Migration80 is the report dedicated to migrating PHP code to version 8.0.
+
+The Migration 80 report runs the backward incompatibilities tests for PHP 8.0, from a PHP 7.4 compatible code.
+
+
+::
+
+    Name,File,Line
+    0,/features/bootstrap/FeatureContext.php,61
+    10000,/features/bootstrap/FeatureContext.php,61
+    777,/features/bootstrap/FeatureContext.php,63
+    20,/features/bootstrap/FeatureContext.php,73
+    0,/features/bootstrap/FeatureContext.php,334
+    0,/features/bootstrap/FeatureContext.php,339
+    0,/features/bootstrap/FeatureContext.php,344
+    0,/features/bootstrap/FeatureContext.php,362
+    0,/features/bootstrap/FeatureContext.php,366
+    0,/features/bootstrap/FeatureContext.php,368
+    0,/features/bootstrap/FeatureContext.php,372
+    777,/features/bootstrap/FeatureContext.php,423
+    777,/features/bootstrap/FeatureContext.php,431
+    0,/src/Behat/Behat/Context/ContextClass/SimpleClassGenerator.php,68
+    1,/src/Behat/Behat/Context/ContextClass/SimpleClassGenerator.php,69
+    0,/src/Behat/Behat/Context/Environment/InitializedContextEnvironment.php,84
+    0,/src/Behat/Behat/Context/Environment/InitializedContextEnvironment.php,150
+    
+
+Migration80 is a HTML report format.
+
+Migration80 depends on the following 2 themes : CompatibilityPHP80, Suggestions.
+
 None
 ____
 
@@ -1497,7 +1567,7 @@ Suggest configuration for Rector refactoring tool.
 
 The Rector report is a helper report for [Tomas Votruba](https://twitter.com/VotrubaT)'s [Rector](https://getrector.org/) tool.
 
-Some issues spotted by Exakat may be fixed automagically by Rector. Rector offers more than 370 (and counting) rules, that may save countless hours of work. 
+Some issues spotted by Exakat may be fixed automagically by Rector. Rector offers more than 550 (and counting) rules, that may save countless hours of work. 
 
 For example, [CombinedAssignRector](https://github.com/rectorphp/rector/blob/master/docs/AllRectorsOverview.md#combinedassignrector), simplifies ``$value = $value + 5`` into ``+$value += 5;``. On Exakat, the rule [Structures/CouldUseShortAssignation]((https://exakat.readthedocs.io/en/latest/Rules.html#could-use-short-assignation) spot those too.
 
@@ -1509,17 +1579,8 @@ Check [RectorPHP](https://getrector.org/) website, its [rector github](https://g
 
 
 
-::
-
-        /Phrozn/Vendor/Extra/scss.inc.php:594 Slow PHP built-in functions
-        /Phrozn/Vendor/Extra/scss.inc.php:2554 Too many nested if statements
-        /Phrozn/Vendor/Extra/scss.inc.php:1208 Long if-else blocks
-        /Phrozn/Vendor/Extra/scss.inc.php:1208 Too many nested if statements
-        /Phrozn/Vendor/Extra/scss.inc.php:3935 Wrong function / class name casing
-        /Phrozn/Vendor/Extra/scss.inc.php:3452 Too many nested if statements
-        /Phrozn/Site/View/OutputPath/Entry/Parametrized.php:58 Slow PHP built-in functions
-        /Phrozn/Runner/CommandLine/Callback/Init.php:82 Extra brackets and braces and quotes
-    
+.. image:: images/report.rector.png
+    :alt: Example of a Rector report (0)
 
 Rector is a Text report format.
 
@@ -1777,6 +1838,9 @@ There are currently two topology available:
 
 .. image:: images/report.topology.png
     :alt: Example of a Topology Order report (0)
+
+.. image:: images/report.topology.typehints.png
+    :alt: Example of a Topology Order report (1)
 
 Topology Order is a DOT report format.
 

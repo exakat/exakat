@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 17 Sep 2020 06:00:10 +0000
-.. comment: Generation hash : 82ae56ee1009eb701d21c60e0d6686f955d32962
+.. comment: Generation date : Wed, 30 Sep 2020 16:04:51 +0000
+.. comment: Generation hash : ae11500fe10dccd9eab6e8bdb07e3ea5a42f251f
 
 
 .. _$http\_raw\_post\_data-usage:
@@ -54,6 +54,49 @@ Suggestions
 | Severity    | Major                     |
 +-------------+---------------------------+
 | Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+
+
+
+.. _$php\_errormsg-usage:
+
+$php_errormsg Usage
+###################
+
+
+$php_errormsg is removed since PHP 8.0. $php_errormsg tracks the last error message, with the directive `track_errors`. All was removed in PHP 8.0, and shall be replaced with `error_get_last() <https://www.php.net/error_get_last>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       global $php_errormsg;
+       
+       echo 'Last error: '.$php_errormsg;
+       
+       echo 'Also, last error: '.error_get_last();
+   }
+   
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use error_get_last() instead.
+
++-------------+---------------------------+
+| Short name  | Php/PhpErrorMsgUsage      |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP80` |
++-------------+---------------------------+
+| Php Version | 8.0-                      |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
 
 
@@ -269,8 +312,6 @@ Use it instead of the slower function `pow() <https://www.php.net/pow>`_. This o
    ?>
 
 
-If the code needs to be backward compatible to 5.5 or less, don't use the new operator.
-
 Be aware the the '-' operator has lower priority than the `** <https://www.php.net/manual/en/language.operators.arithmetic.php>`_ operator : this leads to the following confusing result.
 
 .. code-block:: php
@@ -305,6 +346,8 @@ Suggestions
 | Severity    | Minor                                                        |
 +-------------+--------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                              |
++-------------+--------------------------------------------------------------+
+| Precision   | Very high                                                    |
 +-------------+--------------------------------------------------------------+
 | Examples    | :ref:`traq-php-newexponent`, :ref:`teampass-php-newexponent` |
 +-------------+--------------------------------------------------------------+
@@ -404,6 +447,14 @@ Suggestions
 
 * Remove the @ operator by default
 
++---------------------+-------------------------+------+----------------------------------------------+
+| Name                | Default                 | Type | Description                                  |
++---------------------+-------------------------+------+----------------------------------------------+
+| authorizedFunctions | noscream_functions.json | data | Functions that are authorized to sports a @. |
++---------------------+-------------------------+------+----------------------------------------------+
+
+
+
 +-------------+---------------------------------------------------------------------------------------+
 | Short name  | Structures/Noscream                                                                   |
 +-------------+---------------------------------------------------------------------------------------+
@@ -412,6 +463,8 @@ Suggestions
 | Severity    | Minor                                                                                 |
 +-------------+---------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                       |
++-------------+---------------------------------------------------------------------------------------+
+| Precision   | Very high                                                                             |
 +-------------+---------------------------------------------------------------------------------------+
 | ClearPHP    | `no-noscream <https://github.com/dseguy/clearPHP/tree/master/rules/no-noscream.md>`__ |
 +-------------+---------------------------------------------------------------------------------------+
@@ -1468,6 +1521,52 @@ Suggestions
 
 
 
+.. _array\_fill()-with-objects:
+
+Array_Fill() With Objects
+#########################
+
+
+`array_fill() <https://www.php.net/array_fill>`_ fills an array with identical objects, not copies nor clones. This means that all the filled objects are a reference to the same object. Changing one of them will change any of them.
+
+Make sure this is the intended effect in the code. 
+
+.. code-block:: php
+
+   <?php
+   
+   $x = new StdClass();
+   $array = array_fill(0, 10, $x);
+   
+   $array[3]->y = Set in object #3;
+   
+   // displays Set in object #3;
+   echo $array[5]->y;
+   
+   ?>
+
+
+This applies to `array_pad() <https://www.php.net/array_pad>`_ too. It doesn't apply to `array_fill_keys() <https://www.php.net/array_fill_keys>`_, as objects will be cast to a string before usage in this case. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a loop to fill in the array with cloned() objects.
+
++-------------+---------------------------------+
+| Short name  | Structures/ArrayFillWithObjects |
++-------------+---------------------------------+
+| Rulesets    | :ref:`Analyze`                  |
++-------------+---------------------------------+
+| Severity    | Minor                           |
++-------------+---------------------------------+
+| Time To Fix | Quick (30 mins)                 |
++-------------+---------------------------------+
+
+
+
 .. _array\_merge-needs-array-of-arrays:
 
 Array_merge Needs Array Of Arrays
@@ -1780,6 +1879,58 @@ Incremental changes to a variables are not reported here.
 +-------------+-------------------------------+
 | Time To Fix | Quick (30 mins)               |
 +-------------+-------------------------------+
+
+
+
+.. _assumptions:
+
+Assumptions
+###########
+
+
+Assumptions in the code, that leads to possible bugs. 
+
+Some conditions may be very weak, and lead to errors. For example, the code below checks that the variable `$a` is not null, then uses it as an array. There is no relationship between 'not null' and 'being an array', so this is an assumption. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Assumption : if $a is not null, then it is an array. This is not always the case. 
+   function foo($a) {
+       if ($a !== null) {
+           echo $a['name'];
+       }
+   }
+   
+   // Assumption : if $a is not null, then it is an array. Here, the typehint will ensure that it is the case. 
+   // Although, a more readable test is is_array()
+   function foo(?array $a) {
+       if ($a !== null) {
+           echo $a['name'];
+       }
+   }
+   
+   ?>
+
+
+See also `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+-----------------+
+| Short name  | Php/Assumptions |
++-------------+-----------------+
+| Rulesets    | :ref:`Analyze`  |
++-------------+-----------------+
+| Severity    | Minor           |
++-------------+-----------------+
+| Time To Fix | Quick (30 mins) |
++-------------+-----------------+
 
 
 
@@ -5705,6 +5856,13 @@ Mark arguments and return types that can be set to ``callable``.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add `callable` typehint to the code.
+
 +-------------+---------------------------+
 | Short name  | Typehints/CouldBeCallable |
 +-------------+---------------------------+
@@ -5713,6 +5871,8 @@ Mark arguments and return types that can be set to ``callable``.
 | Severity    | Major                     |
 +-------------+---------------------------+
 | Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Precision   | High                      |
 +-------------+---------------------------+
 
 
@@ -5874,10 +6034,10 @@ Suggestions
 
 
 
-.. _could-be-integer:
+.. _could-be-float:
 
-Could Be Integer
-################
+Could Be Float
+##############
 
 
 Mark arguments, properties and return types that can be set to ``float``.
@@ -5894,6 +6054,13 @@ Mark arguments, properties and return types that can be set to ``float``.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add `float` typehint to the code.
+
 +-------------+------------------------+
 | Short name  | Typehints/CouldBeFloat |
 +-------------+------------------------+
@@ -5903,6 +6070,49 @@ Mark arguments, properties and return types that can be set to ``float``.
 +-------------+------------------------+
 | Time To Fix | Quick (30 mins)        |
 +-------------+------------------------+
+| Precision   | High                   |
++-------------+------------------------+
+
+
+
+.. _could-be-integer:
+
+Could Be Integer
+################
+
+
+Mark arguments, properties and return types that can be set to ``int``.
+
+.. code-block:: php
+
+   <?php
+   
+   // Accept an int as input 
+   function foo($b) {
+       // Returns an int
+       return $b + 8;
+   }
+   
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add `int` typehint to the code.
+
++-------------+----------------------+
+| Short name  | Typehints/CouldBeInt |
++-------------+----------------------+
+| Rulesets    | :ref:`Typechecks`    |
++-------------+----------------------+
+| Severity    | Major                |
++-------------+----------------------+
+| Time To Fix | Quick (30 mins)      |
++-------------+----------------------+
+| Precision   | High                 |
++-------------+----------------------+
 
 
 
@@ -5930,6 +6140,13 @@ Mark arguments, properties and return types that can be set to ``iterable``.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add `iterable` typehint to the code (PHP 8.0+).
+
 +-------------+---------------------------+
 | Short name  | Typehints/CouldBeIterable |
 +-------------+---------------------------+
@@ -5938,6 +6155,8 @@ Mark arguments, properties and return types that can be set to ``iterable``.
 | Severity    | Major                     |
 +-------------+---------------------------+
 | Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Precision   | High                      |
 +-------------+---------------------------+
 
 
@@ -5964,6 +6183,14 @@ Mark arguments and return types that can be null.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add `null` typehint to the code (PHP 8.0+).
+* Add `?` typehint to the code.
+
 +-------------+-----------------------+
 | Short name  | Typehints/CouldBeNull |
 +-------------+-----------------------+
@@ -5972,6 +6199,8 @@ Mark arguments and return types that can be null.
 | Severity    | Major                 |
 +-------------+-----------------------+
 | Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Precision   | High                  |
 +-------------+-----------------------+
 
 
@@ -6000,6 +6229,14 @@ This analysis works when typehints have already been configured.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add `parent` typehint to the code.
+* Add the literal class/type typehint to the code.
+
 +-------------+-------------------------+
 | Short name  | Typehints/CouldBeParent |
 +-------------+-------------------------+
@@ -6008,6 +6245,8 @@ This analysis works when typehints have already been configured.
 | Severity    | Major                   |
 +-------------+-------------------------+
 | Time To Fix | Quick (30 mins)         |
++-------------+-------------------------+
+| Precision   | High                    |
 +-------------+-------------------------+
 
 
@@ -6301,6 +6540,14 @@ This analysis works when typehints have already been configured.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add `self` typehint to the code.
+* Add the literal class/type typehint to the code.
+
 +-------------+-----------------------+
 | Short name  | Typehints/CouldBeSelf |
 +-------------+-----------------------+
@@ -6309,6 +6556,8 @@ This analysis works when typehints have already been configured.
 | Severity    | Major                 |
 +-------------+-----------------------+
 | Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Precision   | High                  |
 +-------------+-----------------------+
 
 
@@ -6427,6 +6676,13 @@ Mark arguments and return types that can be set to string.
    
    ?>
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Choose the string typehint, and add it to the code.
+
 +-------------+-------------------------+
 | Short name  | Typehints/CouldBeString |
 +-------------+-------------------------+
@@ -6436,6 +6692,56 @@ Mark arguments and return types that can be set to string.
 +-------------+-------------------------+
 | Time To Fix | Quick (30 mins)         |
 +-------------+-------------------------+
+| Precision   | High                    |
++-------------+-------------------------+
+
+
+
+.. _could-be-stringable:
+
+Could Be Stringable
+###################
+
+
+Stringable is an interface that mark classes as string-castable. It is introduced in PHP 8.0.
+
+Classes that defined a `__toString() <https://www.php.net/manual/en/language.oop5.magic.php>`_ magic method may be turned into a string when the typehint, argument, return or property, requires it. This is not the case when strict_types is activated. Yet, until PHP 8.0, there was nothing to identify a class as such.
+
+.. code-block:: php
+
+   <?php 
+   
+   // This class may implement Stringable
+   class x {
+       function __tostring() {
+           return 'asd';
+       }
+   }
+   
+   echo (new x);
+   
+   ?>
+
+
+See also `PHP RFC: Add Stringable interface <https://wiki.php.net/rfc/stringable>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
++-------------+----------------------------------------+
+| Short name  | Classes/CouldBeStringable              |
++-------------+----------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`LintButWontExec` |
++-------------+----------------------------------------+
+| Php Version | 8.0+                                   |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
 
 
 
@@ -6461,6 +6767,12 @@ Mark return types that can be set to void.
 
 All abstract methods (in classes or in interfaces) are omitted here.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the void typehint to the code.
+
 +-------------+-----------------------+
 | Short name  | Typehints/CouldBeVoid |
 +-------------+-----------------------+
@@ -6469,6 +6781,8 @@ All abstract methods (in classes or in interfaces) are omitted here.
 | Severity    | Major                 |
 +-------------+-----------------------+
 | Time To Fix | Quick (30 mins)       |
++-------------+-----------------------+
+| Precision   | High                  |
 +-------------+-----------------------+
 
 
@@ -6657,6 +6971,54 @@ Suggestions
 
 
 
+.. _could-use-promoted-properties:
+
+Could Use Promoted Properties
+#############################
+
+
+Promoted properties reduce PHP code at `__construct() <https://www.php.net/manual/en/language.oop5.decon.php>`_ time. This feature is available in PHP 8.0.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       function __construct($a, $b) {
+           // $a argument may be promoted to property $c
+           $this->c = $a;
+           
+           // $b argument cannot be upgraded to property, as it is updated. 
+           // Move the addition to the new call, or keep the syntax below
+           $this->d = $b + 2;
+       }
+   }
+   
+   ?>
+
+
+See also `PHP 8: Constructor property promotion <https://stitcher.io/blog/constructor-promotion-in-php-8>`_ and `PHP RFC: Constructor Property Promotion <https://wiki.php.net/rfc/constructor_promotion>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Update the constructor syntax, and remove the property specification.
+
++-------------+--------------------------------+
+| Short name  | Php/CouldUsePromotedProperties |
++-------------+--------------------------------+
+| Rulesets    | :ref:`Suggestions`             |
++-------------+--------------------------------+
+| Php Version | 8.0+                           |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
+
+
+
 .. _could-use-short-assignation:
 
 Could Use Short Assignation
@@ -6772,6 +7134,8 @@ Suggestions
 | Severity    | Minor                                |
 +-------------+--------------------------------------+
 | Time To Fix | Quick (30 mins)                      |
++-------------+--------------------------------------+
+| Precision   | High                                 |
 +-------------+--------------------------------------+
 | Examples    | :ref:`mautic-exceptions-couldusetry` |
 +-------------+--------------------------------------+
@@ -7027,6 +7391,8 @@ Suggestions
 | Severity    | Minor                                          |
 +-------------+------------------------------------------------+
 | Time To Fix | Slow (1 hour)                                  |
++-------------+------------------------------------------------+
+| Precision   | Very high                                      |
 +-------------+------------------------------------------------+
 | Examples    | :ref:`zencart-structures-couldusestrrepeat`    |
 +-------------+------------------------------------------------+
@@ -7494,7 +7860,7 @@ Detect Current Class
 ####################
 
 
-Detecting the current class should be done with \:\:class operator.
+Detecting the current class should be done with `self\:\:class` or `static\:\:class` operator.
 
 `__CLASS__ <https://www.php.net/manual/en/language.constants.predefined.php>`_ may be replaced by ``self\:\:class``. 
 `get_called_class() <https://www.php.net/get_called_class>`_ may be replaced by ``static\:\:class``. 
@@ -7529,7 +7895,8 @@ See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecatio
 Suggestions
 ^^^^^^^^^^^
 
-* Use the \:\:class operator to detect the current class name.
+* Use the self\:\:class operator to detect the current class name, instead of __CLASS__ and get_class().
+* Use the static\:\:class operator to detect the current called class name, instead of get_called_class().
 
 +-------------+-----------------------------------------------+
 | Short name  | Php/DetectCurrentClass                        |
@@ -7537,6 +7904,8 @@ Suggestions
 | Rulesets    | :ref:`Suggestions`, :ref:`CompatibilityPHP74` |
 +-------------+-----------------------------------------------+
 | Php Version | With PHP 8.0 and older                        |
++-------------+-----------------------------------------------+
+| Precision   | Very high                                     |
 +-------------+-----------------------------------------------+
 
 
@@ -14212,7 +14581,8 @@ See also `in_array() <https://www.php.net/in_array>`_.
 Suggestions
 ^^^^^^^^^^^
 
-* Replace the list of comparisons with a in_array() call
+* Replace the list of comparisons with a in_array() call on an array filled with the various values
+* Replace the list of comparisons with a isset() call on a hash whose keys are the various values
 
 +-------------+----------------------------------------------+
 | Short name  | Performances/LogicalToInArray                |
@@ -14222,6 +14592,8 @@ Suggestions
 | Severity    | Minor                                        |
 +-------------+----------------------------------------------+
 | Time To Fix | Quick (30 mins)                              |
++-------------+----------------------------------------------+
+| Precision   | Very high                                    |
 +-------------+----------------------------------------------+
 | Examples    | :ref:`zencart-performances-logicaltoinarray` |
 +-------------+----------------------------------------------+
@@ -15387,6 +15759,48 @@ Suggestions
 
 
 
+.. _mismatch-parameter-and-type:
+
+Mismatch Parameter And Type
+###########################
+
+
+When the name of the parameter contradicts the type of the parameter.
+
+This is mostly semantics, so it will affect the coder and the auditor of the code. PHP is immune to those errors. 
+
+.. code-block:: php
+
+   <?php
+   
+   // There is a discrepancy between the typehint and the name of the variable
+   function foo(int $string) { }
+   
+   // The parameter name is practising coding convention typehints
+   function bar(int $int) { }
+   
+   ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Synch the name of the parameter and the typehint.
+
++-------------+------------------------------------+
+| Short name  | Functions/MismatchParameterAndType |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`Semantics`   |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
+
+
+
 .. _mismatch-parameter-name:
 
 Mismatch Parameter Name
@@ -15695,6 +16109,8 @@ Suggestions
 | Severity    | Major                                         |
 +-------------+-----------------------------------------------+
 | Time To Fix | Quick (30 mins)                               |
++-------------+-----------------------------------------------+
+| Precision   | High                                          |
 +-------------+-----------------------------------------------+
 | Examples    | :ref:`wordpress-functions-mismatchedtypehint` |
 +-------------+-----------------------------------------------+
@@ -16008,6 +16424,8 @@ Suggestions
 +-------------+----------------------------------+
 | Time To Fix | Quick (30 mins)                  |
 +-------------+----------------------------------+
+| Precision   | Very high                        |
++-------------+----------------------------------+
 
 
 
@@ -16287,6 +16705,65 @@ Suggestions
 +-------------+------------------------------+
 | Time To Fix | Quick (30 mins)              |
 +-------------+------------------------------+
+
+
+
+.. _modified-typed-parameter:
+
+Modified Typed Parameter
+########################
+
+
+Reports modified parameters, which have a non-scalar typehint. Such variables should not be changed within the body of the method. Unlike typed properties, which always hold the expected type, typed parameters are only garanteed type at the beginning of the method block. 
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+   
+       function foo(Y $y) {
+           // $y is type Y
+   
+           // A cast version of $y is stored into $yAsString. $y is untouched.
+           $yAsString = (string) $y;
+   
+           // $y is of type 'int', now.
+           $y = 1;
+   
+           // Some more code
+   
+           // display the string version.
+           echo $yAsString; 
+           // so, Y $y is now raising an error
+           echo $y->name; 
+       }
+   }
+   
+   ?>
+
+
+This problem doesn't apply to scalar types : by default, PHP pass scalar parameters by value, not by reference. Class types are always passed by reference.
+
+This problem is similar to `Classes/DontUnsetProperties`_ : the `static <https://www.php.net/manual/en/language.oop5.static.php>`_ specification of the property may be unset, leading to confusing 'undefined property', while the class hold the property definition.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use different variable names when convertir a parameter to a different type.
+* Only use methods and properties calls on a typed parameter.
+
++-------------+------------------------------------+
+| Short name  | Functions/ModifyTypedParameter     |
++-------------+------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Minor                              |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 
@@ -17209,6 +17686,68 @@ Suggestions
 
 
 
+.. _negative-start-index-in-array:
+
+Negative Start Index In Array
+#############################
+
+
+Negative starting index in arrays changed in PHP 8.0. Until then, they were ignored, and automatic index started always at 0. Since PHP 8.0, the next index is calculated.
+
+The behavior will `break <https://www.php.net/manual/en/control-structures.break.php>`_ code that relies on automatic index in arrays, when a negative index is used for a starter.
+
+.. code-block:: php
+
+   <?php
+   
+   $x = [-5 => 2];
+   $x[] = 3;
+   
+   print_r($x);
+   
+   /*
+   PHP 7.4 and older 
+   Array
+   (
+       [-5] => 2
+       [0] => 3
+   )
+   */
+   
+   /*
+   PHP 8.0 and more recent
+   Array
+   (
+       [-5] => 2
+       [-4] => 3
+   )
+   */
+   
+   ?>
+
+
+See also `PHP RFC: Arrays starting with a negative index <https://wiki.php.net/rfc/negative_array_index>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Explicitely create the index, instead of using the automatic indexing
+* Add an explicit index of 0 in the initial array, to set the automatic process in the right track
+* Avoid using specified index in array, conjointly with automatic indexing.
+
++-------------+---------------------------+
+| Short name  | Arrays/NegativeStart      |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP80` |
++-------------+---------------------------+
+| Severity    | Minor                     |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
 .. _nested-ifthen:
 
 Nested Ifthen
@@ -17745,9 +18284,9 @@ New Functions In PHP 7.1
 
 The following functions are now native functions in PHP 7.1. It is advised to change them before moving to this new version.
 
-* curl_share_strerror()
-* curl_multi_errno()
-* curl_share_errno()
+* `curl_share_strerror() <https://www.php.net/curl_share_strerror>`_
+* `curl_multi_errno() <https://www.php.net/curl_multi_errno>`_
+* `curl_share_errno() <https://www.php.net/curl_share_errno>`_
 * `mb_ord() <https://www.php.net/mb_ord>`_
 * `mb_chr() <https://www.php.net/mb_chr>`_
 * `mb_scrub() <https://www.php.net/mb_scrub>`_
@@ -18900,13 +19439,13 @@ Only use square brackets to access array elements. The usage of curly brackets f
    ?>
 
 
-See also `Deprecate curly brace syntax <https://derickrethans.nl/phpinternalsnews-19.html>`_.
+See also `Deprecate curly brace syntax <https://derickrethans.nl/phpinternalsnews-19.html>`_ and `Deprecate curly brace syntax for accessing array elements and string offsets <https://wiki.php.net/rfc/deprecate_curly_braces_array_access>`_.
 
 
 Suggestions
 ^^^^^^^^^^^
 
-* Always use square brackets
+* Always use square brackets to access particular index in an array
 
 +-------------+---------------------------+
 | Short name  | Php/NoMoreCurlyArrays     |
@@ -18918,6 +19457,8 @@ Suggestions
 | Severity    | Minor                     |
 +-------------+---------------------------+
 | Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+| Precision   | Very high                 |
 +-------------+---------------------------+
 
 
@@ -20627,6 +21168,52 @@ Suggestions
 
 
 
+.. _nullable-with-constant:
+
+Nullable With Constant
+######################
+
+
+Arguments are automatically nullable with a literal null. They used to also be nullable with a constant null, before PHP 8.0.
+
+.. code-block:: php
+
+   <?php
+   
+   // Extracted from https://github.com/php/php-src/blob/master/UPGRADING
+   
+   // Replace
+   function test(int $arg = CONST_RESOLVING_TO_NULL) {}
+   // With
+   function test(?int $arg = CONST_RESOLVING_TO_NULL) {}
+   // Or
+   function test(int $arg = null) {}
+           
+   ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the valid syntax
+
++-------------+--------------------------------+
+| Short name  | Functions/NullableWithConstant |
++-------------+--------------------------------+
+| Rulesets    | :ref:`CompatibilityPHP80`      |
++-------------+--------------------------------+
+| Php Version | 8.0-                           |
++-------------+--------------------------------+
+| Severity    | Minor                          |
++-------------+--------------------------------+
+| Time To Fix | Quick (30 mins)                |
++-------------+--------------------------------+
+| Precision   | High                           |
++-------------+--------------------------------+
+
+
+
 .. _nullable-without-check:
 
 Nullable Without Check
@@ -21112,6 +21699,8 @@ Suggestions
 +-------------+----------------------------------------+
 | Time To Fix | Quick (30 mins)                        |
 +-------------+----------------------------------------+
+| Precision   | Medium                                 |
++-------------+----------------------------------------+
 
 
 
@@ -21202,6 +21791,64 @@ Anything else, like literals or `static <https://www.php.net/manual/en/language.
 +-------------+--------------------------------------------+
 | Time To Fix | Quick (30 mins)                            |
 +-------------+--------------------------------------------+
+
+
+
+.. _optimize-explode():
+
+Optimize Explode()
+##################
+
+
+Limit `explode() <https://www.php.net/explode>`_ results at call time. `explode() <https://www.php.net/explode>`_ returns a string, after breaking it into smaller strings, with a delimiter. 
+
+By default, `explode() <https://www.php.net/explode>`_ breaks the whole string into smaller strings, and returns the array. When not all the elements of the returned array are necessary, using the third argument of `explode() <https://www.php.net/explode>`_ speeds up the process, by removing unnecessary work.
+
+.. code-block:: php
+
+   <?php
+   
+   $string = '1,2,3,4,5,';
+   
+   // explode() returns 2 elements, which are then assigned to the list() call.
+   list($a, $b) = explode(',', $string, 2);
+   
+   // explode() returns 6 elements, only two of which are then assigned to the list() call. The rest are discarded.
+   list($a, $b) = explode(',', $string, 2);
+   
+   // it is not possible to skip the first elements, but it is possible to skip the last ones. 
+   echo explode(',', $string, 2)[1];
+   
+   // This protects PHP, in case $string ends up with a lot of commas
+   $string = foo(); // usually '1,2' but not known
+   list($a, $b) = explode(',', $string, 2);
+   ?>
+
+
+Limiting `explode() <https://www.php.net/explode>`_ has no effect when the operation is already exact : it simply prevents `explode() <https://www.php.net/explode>`_ to cut more than needed if the argument is unexpectedly large. 
+
+This optimisation applies to `preg_split() <https://www.php.net/preg_split>`_ and `mb_split() <https://www.php.net/mb_split>`_ too.
+
+This is a micro optimisation, unless the exploded string is large.
+
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Add a limit to explode() call
+
++-------------+------------------------------+
+| Short name  | Performances/OptimizeExplode |
++-------------+------------------------------+
+| Rulesets    | :ref:`Performances`          |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
+| Precision   | Very high                    |
++-------------+------------------------------+
 
 
 
@@ -22082,6 +22729,13 @@ This analysis skips redefined PHP functions : when a replacement for a removed P
 
 See also `PHP 7.4 Removed Functions <https://www.php.net/manual/en/migration74.incompatible.php#migration70.incompatible.removed-functions>`_ and `PHP 7.4 Deprecations : Introduction <https://wiki.php.net/rfc/deprecations_php_7_4#introduction>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+*
+
 +-------------+---------------------------+
 | Short name  | Php/Php74RemovedFunctions |
 +-------------+---------------------------+
@@ -22092,6 +22746,8 @@ See also `PHP 7.4 Removed Functions <https://www.php.net/manual/en/migration74.i
 | Severity    | Critical                  |
 +-------------+---------------------------+
 | Time To Fix | Slow (1 hour)             |
++-------------+---------------------------+
+| Precision   | Very high                 |
 +-------------+---------------------------+
 
 
@@ -22210,6 +22866,37 @@ Suggestions
 | Rulesets    | :ref:`CompatibilityPHP80` |
 +-------------+---------------------------+
 | Severity    | Critical                  |
++-------------+---------------------------+
+| Time To Fix | Quick (30 mins)           |
++-------------+---------------------------+
+
+
+
+.. _php-8.0-removed-directives:
+
+PHP 8.0 Removed Directives
+##########################
+
+
+List of directives that are removed in PHP 8.0.
+
+In PHP 8.0, `track_errors` was removed. 
+
+You can detect valid directives with `ini_get() <https://www.php.net/ini_get>`_. This native function will return false, when the directive doesn't exist, while actual directive values will be returned as a string. 
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove usage of `track_errors`.
+
++-------------+---------------------------+
+| Short name  | Php/Php80RemovedDirective |
++-------------+---------------------------+
+| Rulesets    | :ref:`CompatibilityPHP80` |
++-------------+---------------------------+
+| Severity    | Minor                     |
 +-------------+---------------------------+
 | Time To Fix | Quick (30 mins)           |
 +-------------+---------------------------+
@@ -25002,7 +25689,7 @@ It is recommended to use the cached value. This saves some computation, in parti
 Suggestions
 ^^^^^^^^^^^
 
-* Reuse the variable
+* Reuse the already created variable
 
 +-------------+--------------------------+
 | Short name  | Structures/ReuseVariable |
@@ -25012,6 +25699,8 @@ Suggestions
 | Severity    | Minor                    |
 +-------------+--------------------------+
 | Time To Fix | Slow (1 hour)            |
++-------------+--------------------------+
+| Precision   | Medium                   |
 +-------------+--------------------------+
 
 
@@ -25248,6 +25937,7 @@ Suggestions
 ^^^^^^^^^^^
 
 * Update type hints to avoid scalar values
+* Remove the array syntax in the code using the results
 
 +-------------+-------------------------------------------------------------+
 | Short name  | Php/ScalarAreNotArrays                                      |
@@ -25257,6 +25947,8 @@ Suggestions
 | Severity    | Minor                                                       |
 +-------------+-------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                             |
++-------------+-------------------------------------------------------------+
+| Precision   | High                                                        |
 +-------------+-------------------------------------------------------------+
 
 
@@ -29822,6 +30514,8 @@ Suggestions
 +-------------+----------------------------------+
 | Time To Fix | Instant (5 mins)                 |
 +-------------+----------------------------------+
+| Precision   | High                             |
++-------------+----------------------------------+
 
 
 
@@ -30368,6 +31062,8 @@ Suggestions
 +-------------+----------------------------------+
 | Time To Fix | Quick (30 mins)                  |
 +-------------+----------------------------------+
+| Precision   | High                             |
++-------------+----------------------------------+
 
 
 
@@ -30612,7 +31308,7 @@ Undefined Trait
 ###############
 
 
-Those traits are undefined. 
+Those are undefined, traits . 
 
 When the using class or trait is instantiated, PHP emits a a fatal error.
 
@@ -30638,6 +31334,8 @@ When the using class or trait is instantiated, PHP emits a a fatal error.
    ?>
 
 
+Trait which are referenced in a `use` expression are omitted: they are considered part of code that is probably outside the current code, either omitted or in external component. 
+
 
 
 Suggestions
@@ -30654,6 +31352,8 @@ Suggestions
 | Severity    | Critical                                                 |
 +-------------+----------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                          |
++-------------+----------------------------------------------------------+
+| Precision   | High                                                     |
 +-------------+----------------------------------------------------------+
 
 
@@ -31667,6 +32367,61 @@ Suggestions
 +-------------+----------------------------------------------+
 | Time To Fix | Quick (30 mins)                              |
 +-------------+----------------------------------------------+
+
+
+
+.. _unsupported-types-with-operators:
+
+Unsupported Types With Operators
+################################
+
+
+Arrays, resources and objects are generally not accepted with unary and binary operators. 
+
+The operators are `+`, `-`, `*`, `/`, `**`, `%`, `<<`, `>>`, `&`, `|`, `^`, `~`, `++` and `--`.
+
+.. code-block:: php
+
+   <?php
+   
+   var_dump([] % [42]);
+   // int(0) in PHP 7.x
+   // TypeError in PHP 8.0 + 
+   
+   // Also impossible usage : index are string or int
+   $a = [];
+   $b = $c[$a]; 
+   
+   ?>
+
+
+In PHP 8.0, the rules have been made stricter and more consistent. 
+
+The only valid operator is `+`, combined with arrays in both operands. Other situation will throw `TypeError`.
+
+See also `Stricter type checks for arithmetic/bitwise operators <https://wiki.php.net/rfc/arithmetic_operator_type_checks>`_ and `TypeError <https://www.php.net/manual/en/class.typeerror.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Do not use those values with those operators
+* Use a condition to skip this awkward situation
+* Add an extra step to turn this value into a valid type
+
++-------------+-------------------------------------------+
+| Short name  | Structures/UnsupportedTypesWithOperators  |
++-------------+-------------------------------------------+
+| Rulesets    | :ref:`Analyze`, :ref:`CompatibilityPHP80` |
++-------------+-------------------------------------------+
+| Php Version | 7.4-                                      |
++-------------+-------------------------------------------+
+| Severity    | Minor                                     |
++-------------+-------------------------------------------+
+| Time To Fix | Quick (30 mins)                           |
++-------------+-------------------------------------------+
+| Precision   | Medium                                    |
++-------------+-------------------------------------------+
 
 
 
@@ -34331,6 +35086,8 @@ Suggestions
 +-------------+--------------------------+
 | Time To Fix | Slow (1 hour)            |
 +-------------+--------------------------+
+| Precision   | High                     |
++-------------+--------------------------+
 
 
 
@@ -34431,6 +35188,8 @@ Suggestions
 | Severity    | Minor                                               |
 +-------------+-----------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                     |
++-------------+-----------------------------------------------------+
+| Precision   | High                                                |
 +-------------+-----------------------------------------------------+
 | Examples    | :ref:`shopware-variables-variableusedoncebycontext` |
 +-------------+-----------------------------------------------------+
@@ -34546,58 +35305,6 @@ Suggestions
 +-------------+----------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                         |
 +-------------+----------------------------------------------------------+
-
-
-
-.. _useless-argument:
-
-Useless Argument
-################
-
-
-The argument is always used with the same value. This value could be hard coded in the method, and save one argument slot.
-
-There is no indication that this argument will be used with other values. It may be a development artifact, that survived without cleaning.
-
-.. code-block:: php
-
-   <?php
-   
-   // All foo2 arguments are used with different values
-   function foo2($a, $b) {}
-   foo2(1, 2);
-   foo2(2, 2);
-   foo2(3, 3);
-   
-   // The second argument of foo is always used with 2
-   function foo($a, $b) {}
-   foo(1, 2);
-   foo(2, 2);
-   foo(3, 2);
-   
-   ?>
-
-
-Methods with less than 3 calls are not considered here, to avoid reporting methods used once.
-
-
-
-Suggestions
-^^^^^^^^^^^
-
-* Remove the argument and hard code its value inside the method
-* Add the value as default in the method signature, and drop it from the calls
-* Add calls to the method, with more varied arguments
-
-+-------------+---------------------------+
-| Short name  | Functions/UselessArgument |
-+-------------+---------------------------+
-| Rulesets    | :ref:`Suggestions`        |
-+-------------+---------------------------+
-| Severity    | Minor                     |
-+-------------+---------------------------+
-| Time To Fix | Quick (30 mins)           |
-+-------------+---------------------------+
 
 
 
@@ -35065,6 +35772,8 @@ Suggestions
 +-------------+-------------------------------------------------------------------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                                                                             |
 +-------------+-------------------------------------------------------------------------------------------------------------+
+| Precision   | High                                                                                                        |
++-------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__ |
 +-------------+-------------------------------------------------------------------------------------------------------------+
 
@@ -35288,6 +35997,8 @@ Suggestions
 +-------------+---------------------------------------------------------------------------------+
 | Time To Fix | Instant (5 mins)                                                                |
 +-------------+---------------------------------------------------------------------------------+
+| Precision   | Very high                                                                       |
++-------------+---------------------------------------------------------------------------------+
 | Examples    | :ref:`thinkphp-functions-uselessreturn`, :ref:`vanilla-functions-uselessreturn` |
 +-------------+---------------------------------------------------------------------------------+
 
@@ -35396,6 +36107,73 @@ Suggestions
 +-------------+------------------------------+
 | Time To Fix | Quick (30 mins)              |
 +-------------+------------------------------+
+
+
+
+.. _useless-typehint:
+
+Useless Typehint
+################
+
+
+`__get <https://www.php.net/manual/en/language.oop5.magic.php>`_ and `__set <https://www.php.net/manual/en/language.oop5.magic.php>`_ magic methods won't use any typehint. The name of the magic property is always cast to string.
+
+`__call() <https://www.php.net/manual/en/language.oop5.magic.php>`_ 
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       // typehint is set and ignored
+       function __set(float $name, string $value) {
+           $this->$name = $value;
+       }
+   
+       // typehint is set and ignored
+       function __get(integer $name) {
+           $this->$name = $value;
+       }
+   
+       // typehint is checked by PHP 8.0 linting
+       // typehint is enforced by PHP 7.x
+       function __call(integer $name) {
+           $this->$name = $value;
+       }
+   }
+   
+   $o = new x;
+   $b = array();
+   // Property will be called 'Array'
+   $o->{$b} = 2;
+   
+   // type of $m is check at calling time. It must be string.
+   $o->{$m}();
+   
+   ?>
+
+
+See also `__set <https://www.php.net/manual/en/language.oop5.overloading.php#object.set>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use `string` for the `$name` parameter
+* Use no typehint for the `$name` parameter
+
++-------------+----------------------------------------+
+| Short name  | Classes/UselessTypehint                |
++-------------+----------------------------------------+
+| Rulesets    | :ref:`Suggestions`, :ref:`ClassReview` |
++-------------+----------------------------------------+
+| Severity    | Minor                                  |
++-------------+----------------------------------------+
+| Time To Fix | Quick (30 mins)                        |
++-------------+----------------------------------------+
+| Precision   | Very high                              |
++-------------+----------------------------------------+
 
 
 
@@ -35825,10 +36603,19 @@ Some one-letter variables have meaning : ``$x`` and ``$y`` for coordinates, ``$i
 
 See also `Using single characters for variable names in loops/exceptions <https://softwareengineering.stackexchange.com/questions/71710/using-single-characters-for-variable-names-in-loops-exceptions?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa/>`_ and `Single Letter Variable Names Still Considered Harmful <https://odetocode.com/blogs/scott/archive/2008/11/17/single-letter-variable-names-still-considered-harmful.aspx>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make the variable more meaningful, with full words
+
 +------------+-----------------------------+
 | Short name | Variables/VariableOneLetter |
 +------------+-----------------------------+
 | Rulesets   | :ref:`Semantics`            |
++------------+-----------------------------+
+| Precision  | Very high                   |
 +------------+-----------------------------+
 
 
@@ -36606,6 +37393,8 @@ Suggestions
 | Severity    | Minor                                               |
 +-------------+-----------------------------------------------------+
 | Time To Fix | Quick (30 mins)                                     |
++-------------+-----------------------------------------------------+
+| Precision   | Very high                                           |
 +-------------+-----------------------------------------------------+
 
 

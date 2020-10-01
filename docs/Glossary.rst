@@ -105,8 +105,13 @@ Glossary
 
       + :ref:`Slow Functions <slow-functions>`
 
+    + `array_fill()`
+
+      + :ref:`Array_Fill() With Objects <array\_fill()-with-objects>`
+
     + `array_fill_keys()`
 
+      + :ref:`Array_Fill() With Objects <array\_fill()-with-objects>`
       + :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 
     + `array_filter()`
@@ -158,6 +163,10 @@ Glossary
     + `array_multisort()`
 
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
+
+    + `array_pad()`
+
+      + :ref:`Array_Fill() With Objects <array\_fill()-with-objects>`
 
     + `array_product()`
 
@@ -253,6 +262,7 @@ Glossary
       + :ref:`Continue Is For Loop <continue-is-for-loop>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Long Arguments <long-arguments>`
+      + :ref:`Negative Start Index In Array <negative-start-index-in-array>`
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Switch Fallthrough <switch-fallthrough>`
@@ -380,9 +390,21 @@ Glossary
 
       + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
+    + `curl_multi_errno()`
+
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+
     + `curl_setopt()`
 
       + :ref:`No Weak SSL Crypto <no-weak-ssl-crypto>`
+
+    + `curl_share_errno()`
+
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+
+    + `curl_share_strerror()`
+
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
     + `curl_version()`
 
@@ -503,6 +525,10 @@ Glossary
 
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 
+    + `error_get_last()`
+
+      + :ref:`$php_errormsg Usage <$php\_errormsg-usage>`
+
     + `error_reporting()`
 
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
@@ -524,6 +550,7 @@ Glossary
     + `explode()`
 
       + :ref:`Implode One Arg <implode-one-arg>`
+      + :ref:`Optimize Explode() <optimize-explode()>`
       + :ref:`Should Use Explode Args <should-use-explode-args>`
 
     + `extract()`
@@ -878,6 +905,10 @@ Glossary
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 
+    + `ini_get()`
+
+      + :ref:`PHP 8.0 Removed Directives <php-8.0-removed-directives>`
+
     + `instanceof`
 
       + :ref:`Should Use Operator <should-use-operator>`
@@ -1040,6 +1071,10 @@ Glossary
       + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
       + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
 
+    + `mb_split()`
+
+      + :ref:`Optimize Explode() <optimize-explode()>`
+
     + `mb_stripos()`
 
       + :ref:`Mbstring Third Arg <mbstring-third-arg>`
@@ -1169,6 +1204,7 @@ Glossary
     + `null`
 
       + :ref:`Always Positive Comparison <always-positive-comparison>`
+      + :ref:`Assumptions <assumptions>`
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
       + :ref:`Cast Unset Usage <cast-unset-usage>`
@@ -1181,6 +1217,7 @@ Glossary
       + :ref:`No Reference For Ternary <no-reference-for-ternary>`
       + :ref:`No get_class() With Null <no-get\_class()-with-null>`
       + :ref:`Null On New <null-on-new>`
+      + :ref:`Nullable With Constant <nullable-with-constant>`
       + :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
@@ -1397,6 +1434,7 @@ Glossary
     + `preg_split()`
 
       + :ref:`No mb_substr In Loop <no-mb\_substr-in-loop>`
+      + :ref:`Optimize Explode() <optimize-explode()>`
       + :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 
     + `prev()`
@@ -1638,6 +1676,7 @@ Glossary
       + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`Method Could Be Static <method-could-be-static>`
       + :ref:`Mismatch Type And Default <mismatch-type-and-default>`
+      + :ref:`Modified Typed Parameter <modified-typed-parameter>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
       + :ref:`No Need For get_class() <no-need-for-get\_class()>`
       + :ref:`No Net For Xml Load <no-net-for-xml-load>`
@@ -1926,6 +1965,7 @@ Glossary
       + :ref:`Check On __Call Usage <check-on-\_\_call-usage>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+      + :ref:`Useless Typehint <useless-typehint>`
 
     + `__callStatic`
 
@@ -1940,6 +1980,7 @@ Glossary
     + `__construct`
 
       + :ref:`Cant Instantiate Class <cant-instantiate-class>`
+      + :ref:`Could Use Promoted Properties <could-use-promoted-properties>`
       + :ref:`Don't Send $this In Constructor <don't-send-$this-in-constructor>`
       + :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
       + :ref:`Old Style Constructor <old-style-constructor>`
@@ -1954,6 +1995,7 @@ Glossary
 
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+      + :ref:`Useless Typehint <useless-typehint>`
 
     + `__invoke`
 
@@ -1962,6 +2004,10 @@ Glossary
     + `__isset`
 
       + :ref:`Must Return Methods <must-return-methods>`
+
+    + `__set`
+
+      + :ref:`Useless Typehint <useless-typehint>`
 
     + `__set_state`
 
@@ -1973,6 +2019,7 @@ Glossary
 
     + `__toString`
 
+      + :ref:`Could Be Stringable <could-be-stringable>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
       + :ref:`Reflection Export() Is Deprecated <reflection-export()-is-deprecated>`
