@@ -2013,8 +2013,10 @@ HTML;
         $total = $this->dump->fetchHash('files')->toInt();
 
         foreach(array_unique(array_merge(array($this->config->phpversion[0] . $this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
-            $res = $this->dump->fetchHash("notCompilable$suffix");
-            if ($res === 'N/C') {
+            $suffix = (string) $suffix;
+            $res = $this->dump->fetchHash("compilation$suffix");
+            if ($res->getCount() === -1) {
+                $version = $suffix[0] . '.' . $suffix[1];
                 $compilations []= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>";
                 continue; // Table was not created
             }

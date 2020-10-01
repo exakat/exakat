@@ -24,7 +24,7 @@ namespace Exakat\Reports;
 
 use Exakat\Config;
 
-class Diplomat extends Ambassador {
+class Diplomat extends Emissary {
     const FILE_FILENAME  = 'diplomat';
     const FILE_EXTENSION = '';
     const CONFIG_YAML    = 'Diplomat';
@@ -42,11 +42,11 @@ class Diplomat extends Ambassador {
     public function __construct() {
         parent::__construct();
 
-        foreach(Config::PHP_VERSIONS as $shortVersion) {
+        foreach(['74', '80'] as $shortVersion) {
             $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
         }
 
-        $this->themesToShow = array('Top10');
+        $this->themesToShow = array('Analyze');
     }
 
     public function dependsOnAnalysis(): array {
