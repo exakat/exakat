@@ -26,7 +26,7 @@ use Exakat\Configsource\Commandline;
 
 class Exakat {
     const VERSION = '2.1.9';
-    const BUILD = 1153;
+    const BUILD = 1155;
 
     private $config  = null;
 
@@ -35,70 +35,6 @@ class Exakat {
     }
 
     public function execute(): void {
-        if ($this->config->remote === 'none') {
-            $this->local();
-        } else {
-            $this->remote();
-        }
-    }
-
-    private function remote(): void {
-        $json = $this->config->commandLineJson();
-
-        $remote = new Remote($this->config->remotes[$this->config->remote], $this->config->transit_key);
-
-        switch ($this->config->command) {
-            case 'init' :
-                // replicate init, because we'll need later
-                $task = new Tasks\Initproject();
-                $task->run();
-
-                // Local load before remote, in case both are identical.
-                $res = $remote->send($json);
-                break;
-
-            case 'fetch' :
-                $res = $remote->send($json);
-
-                if (strlen($res) < 1024) {
-                    // This is an error
-                    $json = json_decode($res);
-                    if (empty($json)) {
-                        print "Couldn't read an answer from remote.\n";
-                        return;
-                    }
-
-                    if (empty($json->error)) {
-                        print "Couldn't read an error from remote.\n";
-                        return;
-                    }
-
-                    print "Error: $json->error\n";
-                    return;
-                }
-
-                file_put_contents("{$this->config->projects_root}/projects/{$this->config->project}/dump.zip", $res);
-                if (file_exists("{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite")) {
-                    unlink("{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite");
-                }
-                shell_exec("cd {$this->config->projects_root}/projects/{$this->config->project}; unzip dump.zip && rm dump.zip");
-                display("Fetched\n");
-
-                break;
-
-            case 'status' :
-                $res = $remote->send($json);
-                print $res;
-                break;
-
-            default :
-                $res = $remote->send($json);
-                print $res;
-                break;
-        }
-    }
-
-    private function local(): void {
         switch ($this->config->command) {
             case 'doctor' :
                 $doctor = new Tasks\Doctor();
@@ -282,7 +218,7 @@ class Exakat {
 |________|[__]`\_]\'-;__/[__|  \_]\'-;__/\__/  
                                                
 
-Exakat : @ 2014-2020 Damien Seguy. 
+Exakat : @ 2014-2020 Damien Seguy - Exakat SAS <contact(at)exakat.io>. 
 Version : ", $version, ' - Build ', $build, ' - ', $date, "\n";
 
                 break;

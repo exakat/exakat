@@ -1,4 +1,4 @@
-Version 2.1.9 (Yin, coming up)
+Version 2.2.0 (Mao, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,36 @@ Version 2.1.9 (Yin, coming up)
     + 
 + Tokenizer
     + 
+
+Version 2.1.9 (Yin, 2020-10-01)
++ Architecture
+    + Removed old and unused commands
+    + Modernized usage of docker as phpexec
+    + New directive php_extensions to managed list of ext
++ Report
+    + Ambassador : removed 3 gremlins from typehint stats, added scalar types
+    + New Migration80 report, dedicated to PHP 8.0 migrations
+    + New Stubs.ini report, dedicated to exakat extensions production
++ Analysis
+    + New analysis : report arguments which are not nullable because of constants.
+    + New analysis : could use stringable interface
+    + New analysis : suggest explode()'s third argument when applicable
+    + New analysis : suggest PHP 8.0 promoted properties
+    + New analysis : report arrays with negative index, and auto-indexing 
+    + New analysis : report unsupported types with operators
+    + New analysis : report usage of track_errors directive (PHP 8.0)
+    + New analysis : report useless types on __get/__set
+    + New analysis : count the number of use expressions in a file
+    + New analysis : Avoid modifying typed arguments
+    + New analysis : Report Assumptions in the code
+    + New analysis : array_fill() usage with objects
+    + New analysis : mismatch between parameter name and type
+    + Updated analysis : magic methods definitions also find usage for __invoke()
+    + Updated analysis : noscream operator usage may have exceptions
+    + Updated analysis : identical methods and identical closures
+    + Updated data : list of exceptions and their emitters
++ Tokenizer
+    + Upgraded detection of extensions' structures, beyond functions
 
 Version 2.1.8 (Chou, 2020-09-18)
 + Architecture
