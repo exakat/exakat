@@ -550,7 +550,7 @@ All reports are detailed in the ref:`Reports <reports>` section.
 +-------------+-----------------------------------------------------------------------------+
 | Report      | Description                                                                 |
 +-------------+-----------------------------------------------------------------------------+
-| Amabassador | HTML format, with all available reports in one compact format.              |
+| Ambassador | HTML format, with all available reports in one compact format.              |
 +-------------+-----------------------------------------------------------------------------+
 | Devoops     | HTML format, deprecated.                                                    |
 +-------------+-----------------------------------------------------------------------------+
