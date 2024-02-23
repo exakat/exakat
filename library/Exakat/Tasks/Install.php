@@ -32,7 +32,7 @@ class Install extends Tasks {
 
         $res = shell_exec('java -version 2>&1');
         if (strpos($res, 'java version') === false) {
-            $error = 'Please install Java 1.8';
+            $error[] = 'Please install Java 1.8';
         } else {
             print "Java 1.8 : OK\n";
         }
